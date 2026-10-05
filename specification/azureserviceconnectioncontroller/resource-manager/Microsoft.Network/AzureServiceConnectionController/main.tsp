@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.Network Resource Provider management API. */
 @armProviderNamespace
-@service(#{ title: "Azure Private Outbound Service" })
+@service(#{ title: "Azure Service Connection Controller" })
 @versioned(Microsoft.Network.Versions)
 namespace Microsoft.Network;
 

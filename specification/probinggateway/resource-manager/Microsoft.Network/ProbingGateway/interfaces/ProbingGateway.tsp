@@ -128,7 +128,6 @@ interface ProbingGateways {
         provider: "Microsoft.Network",
         properties: #{
           properties: #{
-            subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
             ipConfigurations: #[
               #{
                 privateIpV4Address: "10.0.0.5",
@@ -249,17 +248,22 @@ interface ProbingGateways {
           eventType: "Linked",
           topologyMapId: "00000000-0000-0000-0000-000000000001",
           siteId: "site-west-us",
-          eventTimestamp: utcDateTime.fromISO("2026-02-10T00:00:00Z"),
         },
       },
-      returnType: #{ statusCode: 204 },
+      returnType: #{
+        eventType: "Linked",
+        topologyMapId: "00000000-0000-0000-0000-000000000001",
+        siteId: "site-west-us",
+        message: "Successfully linked.",
+      },
     },
     #{ title: "ProbingGateways_CreateTopologyReference" }
   )
-  @doc("Notifies the Probing Gateway of a topology reference link or unlink event.")
+  @doc("Notifies the Probing Gateway of a topology reference link or unlink event. Called by Private Traffic Manager only.")
   @action("topologyReferences")
-  createTopologyReference is ArmResourceActionNoContentSync<
+  createTopologyReference is ArmResourceActionSync<
     ProbingGateway,
-    ProbingGatewayTopologyReferenceRequest
+    ProbingGatewayTopologyReferenceRequest,
+    ProbingGatewayTopologyReferenceResult
   >;
 }

@@ -17,7 +17,7 @@ namespace Microsoft.Network;
   AzureServiceConnectionController.properties,
   "The properties of the Azure Service Connection Controller."
 );
-@doc("Class representing an Azure Service Connection Controller.")
+@doc("An Azure Service Connection Controller owned by its Probing Gateway. Direct customer PUT and DELETE requests are denied; deleting its gateway deletes the controller and its managed resources. Only tags can be updated directly.")
 model AzureServiceConnectionController
   is TrackedResource<AzureServiceConnectionControllerProperties> {
   ...ResourceNameParameter<
@@ -27,6 +27,12 @@ model AzureServiceConnectionController
   >;
   ...ManagedByProperty;
 }
+
+@@visibility(
+  AzureServiceConnectionController.managedBy,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
 
 @@doc(
   AzureServiceConnectionControllers.createOrUpdate::parameters.resource,
@@ -39,26 +45,32 @@ interface AzureServiceConnectionControllers {
       parameters: #{
         subscriptionId: "00000000-0000-0000-0000-000000000000",
         resourceGroupName: "rg1",
-        azureServiceConnectionControllerName: "po1",
+        azureServiceConnectionControllerName: "pg1",
         apiVersion: "2026-02-09-preview",
         provider: "Microsoft.Network",
       },
       returnType: #{
         statusCode: 200,
         body: #{
-          name: "po1",
-          id: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/po1",
+          name: "pg1",
+          id: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/pg1",
           location: "eastus",
+          managedBy: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/probingGateways/pg1",
           properties: #{
             subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
-            ipConfigurations: #[#{ privateIpV4Address: "10.0.0.10" }],
-            providerConnections: #[
+            ipConfigurations: #[
               #{
-                name: "conn1",
-                subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
-                privateEndpointResourceGroupName: "pe-rg1",
+                privateIpV4Address: "10.0.0.10",
+                ipAllocationMethod: "Static",
               }
             ],
+            providerConnections: #[
+                #{
+                  name: "provider-connection",
+                  subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
+                  privateEndpointResourceGroupName: "pe-rg1",
+                }
+              ],
             provisioningState: "Succeeded",
           },
         },
@@ -74,18 +86,28 @@ interface AzureServiceConnectionControllers {
       parameters: #{
         subscriptionId: "00000000-0000-0000-0000-000000000000",
         resourceGroupName: "rg1",
-        azureServiceConnectionControllerName: "po1",
+        azureServiceConnectionControllerName: "pg1",
         apiVersion: "2026-02-09-preview",
         provider: "Microsoft.Network",
         resource: #{
-          name: "po1",
+          name: "pg1",
           location: "eastus",
+          managedBy: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/probingGateways/pg1",
           properties: #{
             subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
-            ipConfigurations: #[#{ privateIpV4Address: "10.0.0.10" }],
+            ipConfigurations: #[
+              #{
+                privateIpV4Address: "10.0.0.10",
+                ipAllocationMethod: "Static",
+              }
+            ],
             providerConnections: #[
               #{
-                name: "conn1",
+                name: "provider-connection",
+                ipConfiguration: #{
+                  privateIpV4Address: "10.0.0.11",
+                  ipAllocationMethod: "Static",
+                },
                 subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
                 privateEndpointResourceGroupName: "pe-rg1",
               }
@@ -96,15 +118,21 @@ interface AzureServiceConnectionControllers {
       returnType: #{
         statusCode: 200,
         body: #{
-          name: "po1",
-          id: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/po1",
+          name: "pg1",
+          id: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/pg1",
           location: "eastus",
+          managedBy: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/probingGateways/pg1",
           properties: #{
             subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
-            ipConfigurations: #[#{ privateIpV4Address: "10.0.0.10" }],
+            ipConfigurations: #[
+              #{
+                privateIpV4Address: "10.0.0.10",
+                ipAllocationMethod: "Static",
+              }
+            ],
             providerConnections: #[
               #{
-                name: "conn1",
+                name: "provider-connection",
                 subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
                 privateEndpointResourceGroupName: "pe-rg1",
               }
@@ -116,7 +144,7 @@ interface AzureServiceConnectionControllers {
     },
     #{ title: "AzureServiceConnectionControllers_CreateOrUpdate" }
   )
-  @doc("Create or update an Azure Service Connection Controller.")
+  @doc("Creates or updates an Azure Service Connection Controller.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AzureServiceConnectionController>;
 
   @opExample(
@@ -124,7 +152,7 @@ interface AzureServiceConnectionControllers {
       parameters: #{
         subscriptionId: "00000000-0000-0000-0000-000000000000",
         resourceGroupName: "rg1",
-        azureServiceConnectionControllerName: "po1",
+        azureServiceConnectionControllerName: "pg1",
         apiVersion: "2026-02-09-preview",
         provider: "Microsoft.Network",
       },
@@ -132,58 +160,11 @@ interface AzureServiceConnectionControllers {
     },
     #{ title: "AzureServiceConnectionControllers_Delete" }
   )
-  @doc("Deletes an Azure Service Connection Controller.")
+  @doc("Deletes an Azure Service Connection Controller. Only its owning Probing Gateway may call this operation.")
   delete is ArmResourceDeleteWithoutOkAsync<AzureServiceConnectionController>;
 
-  @opExample(
-    #{
-      parameters: #{
-        subscriptionId: "00000000-0000-0000-0000-000000000000",
-        resourceGroupName: "rg1",
-        azureServiceConnectionControllerName: "po1",
-        apiVersion: "2026-02-09-preview",
-        provider: "Microsoft.Network",
-        properties: #{
-          properties: #{
-            providerConnections: #[
-              #{
-                name: "conn1",
-                ipConfiguration: #{ privateIpV4Address: "10.0.0.11" },
-              }
-            ],
-          },
-        },
-      },
-      returnType: #{
-        statusCode: 200,
-        body: #{
-          name: "po1",
-          id: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/po1",
-          location: "eastus",
-          properties: #{
-            subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
-            providerConnections: #[
-              #{
-                name: "conn1",
-                ipConfiguration: #{ privateIpV4Address: "10.0.0.11" },
-                privateEndpointResourceGroupName: "pe-rg1",
-              }
-            ],
-            provisioningState: "Succeeded",
-          },
-        },
-      },
-    },
-    #{ title: "AzureServiceConnectionControllers_Patch" }
-  )
-  @doc("Updates an Azure Service Connection Controller.")
-  patch is ArmCustomPatchAsync<
-    AzureServiceConnectionController,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      AzureServiceConnectionController,
-      AzureServiceConnectionControllerProperties
-    >
-  >;
+  @doc("Updates the tags of an Azure Service Connection Controller.")
+  update is ArmTagsPatchSync<AzureServiceConnectionController>;
 
   @opExample(
     #{
@@ -198,8 +179,8 @@ interface AzureServiceConnectionControllers {
         body: #{
           value: #[
             #{
-              name: "po1",
-              id: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/po1",
+              name: "pg1",
+              id: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/pg1",
               location: "eastus",
               properties: #{
                 subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
@@ -226,8 +207,8 @@ interface AzureServiceConnectionControllers {
         body: #{
           value: #[
             #{
-              name: "po1",
-              id: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/po1",
+              name: "pg1",
+              id: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/pg1",
               location: "eastus",
               properties: #{
                 subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",

@@ -1,8 +1,8 @@
-# AzureServiceConnectionController
+# Azure Service Connection Controller
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for the Microsoft.Network AzureServiceConnectionController ARM API.
+This is the AutoRest configuration file for the Microsoft.Network Azure Service Connection Controller ARM API.
 
 ## Configuration
 
@@ -35,5 +35,5 @@ input-file:
   - examples/2026-02-09-preview/AzureServiceConnectionControllers_Get.json
   - examples/2026-02-09-preview/AzureServiceConnectionControllers_ListByResourceGroup.json
   - examples/2026-02-09-preview/AzureServiceConnectionControllers_ListBySubscription.json
-  - examples/2026-02-09-preview/AzureServiceConnectionControllers_Patch.json
+  - examples/2026-02-09-preview/AzureServiceConnectionControllers_Update.json
 ```

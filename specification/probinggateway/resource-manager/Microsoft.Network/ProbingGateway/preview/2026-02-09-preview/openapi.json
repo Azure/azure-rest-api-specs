@@ -424,7 +424,7 @@
         "tags": [
           "ProbingGateways"
         ],
-        "description": "Notifies the Probing Gateway of a topology reference link or unlink event.",
+        "description": "Notifies the Probing Gateway of a topology reference link or unlink event. Called by Private Traffic Manager only.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -454,8 +454,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Action completed successfully."
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProbingGatewayTopologyReferenceResult"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -484,7 +487,7 @@
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
-            "type": "Microsoft.Network/AzureServiceConnectionControllers"
+            "type": "Microsoft.Network/azureServiceConnectionControllers"
           }
         ]
       }
@@ -584,7 +587,11 @@
       "properties": {
         "subnetId": {
           "$ref": "#/definitions/SubnetId",
-          "description": "The reference to the subnet where the Probing Gateway is deployed."
+          "description": "The reference to the subnet where the Probing Gateway is deployed.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "ipConfigurations": {
           "type": "array",
@@ -596,7 +603,7 @@
         },
         "azureServiceConnectionControllerId": {
           "$ref": "#/definitions/AzureServiceConnectionControllerId",
-          "description": "The reference to the AzureServiceConnectionController resource.",
+          "description": "The ID of the Azure Service Connection Controller created and managed by this Probing Gateway. Customers cannot directly create or delete the controller; its lifecycle follows this gateway.",
           "readOnly": true
         },
         "provisioningState": {
@@ -619,22 +626,42 @@
         },
         "topologyMapId": {
           "type": "string",
-          "description": "The internal resource ID of the Topology Map."
+          "description": "The GUID that identifies the topology map in Private Traffic Manager."
         },
         "siteId": {
           "type": "string",
-          "description": "The internal resource ID of the site."
-        },
-        "eventTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the event occurred."
+          "description": "The name of the site within the topology map."
         }
       },
       "required": [
         "eventType",
-        "topologyMapId",
-        "siteId"
+        "topologyMapId"
+      ]
+    },
+    "ProbingGatewayTopologyReferenceResult": {
+      "type": "object",
+      "description": "The result of processing a Probing Gateway topology reference event.",
+      "properties": {
+        "eventType": {
+          "$ref": "#/definitions/ProbingGatewayEventType",
+          "description": "The event type that was processed."
+        },
+        "topologyMapId": {
+          "type": "string",
+          "description": "The GUID that identifies the topology map the event applied to."
+        },
+        "siteId": {
+          "type": "string",
+          "description": "The name of the site within the topology map, if provided."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the outcome of the operation."
+        }
+      },
+      "required": [
+        "eventType",
+        "message"
       ]
     },
     "ProbingGatewayUpdate": {
@@ -658,10 +685,6 @@
       "type": "object",
       "description": "The updatable properties of the ProbingGateway.",
       "properties": {
-        "subnetId": {
-          "$ref": "#/definitions/SubnetId",
-          "description": "The reference to the subnet where the Probing Gateway is deployed."
-        },
         "ipConfigurations": {
           "type": "array",
           "description": "The IP configuration parameters for the Probing Gateway.",

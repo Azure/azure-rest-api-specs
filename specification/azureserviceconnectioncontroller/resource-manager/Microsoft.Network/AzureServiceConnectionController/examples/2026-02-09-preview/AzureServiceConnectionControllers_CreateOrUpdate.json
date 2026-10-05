@@ -4,7 +4,7 @@
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
-    "azureServiceConnectionControllerName": "po1",
+    "azureServiceConnectionControllerName": "pg1",
     "api-version": "2026-02-09-preview",
     "resource": {
       "location": "eastus",
@@ -12,66 +12,76 @@
         "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
         "ipConfigurations": [
           {
-            "privateIpV4Address": "10.0.0.10"
+            "privateIpV4Address": "10.0.0.10",
+            "ipAllocationMethod": "Static"
           }
         ],
         "providerConnections": [
           {
-            "name": "conn1",
+            "name": "provider-connection",
+            "ipConfiguration": {
+              "privateIpV4Address": "10.0.0.11",
+              "ipAllocationMethod": "Static"
+            },
             "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
             "privateEndpointResourceGroupName": "pe-rg1"
           }
         ]
-      }
+      },
+      "managedBy": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/probingGateways/pg1"
     }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "po1",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/po1",
+        "name": "pg1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/pg1",
         "type": "Microsoft.Network/azureServiceConnectionControllers",
         "location": "eastus",
         "properties": {
           "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
           "ipConfigurations": [
             {
-              "privateIpV4Address": "10.0.0.10"
+              "privateIpV4Address": "10.0.0.10",
+              "ipAllocationMethod": "Static"
             }
           ],
           "providerConnections": [
             {
-              "name": "conn1",
+              "name": "provider-connection",
               "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
               "privateEndpointResourceGroupName": "pe-rg1"
             }
           ],
           "provisioningState": "Succeeded"
-        }
+        },
+        "managedBy": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/probingGateways/pg1"
       }
     },
     "201": {
       "body": {
-        "name": "po1",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/po1",
+        "name": "pg1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/pg1",
         "type": "Microsoft.Network/azureServiceConnectionControllers",
         "location": "eastus",
         "properties": {
           "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
           "ipConfigurations": [
             {
-              "privateIpV4Address": "10.0.0.10"
+              "privateIpV4Address": "10.0.0.10",
+              "ipAllocationMethod": "Static"
             }
           ],
           "providerConnections": [
             {
-              "name": "conn1",
+              "name": "provider-connection",
               "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
               "privateEndpointResourceGroupName": "pe-rg1"
             }
           ],
           "provisioningState": "Succeeded"
-        }
+        },
+        "managedBy": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/probingGateways/pg1"
       }
     }
   }

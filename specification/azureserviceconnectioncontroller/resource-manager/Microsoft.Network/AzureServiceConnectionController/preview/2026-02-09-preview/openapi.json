@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Private Outbound Service",
+    "title": "Azure Service Connection Controller",
     "version": "2026-02-09-preview",
     "description": "Microsoft.Network Resource Provider management API.",
     "x-typespec-generated": [
@@ -215,7 +215,7 @@
         "tags": [
           "AzureServiceConnectionControllers"
         ],
-        "description": "Create or update an Azure Service Connection Controller.",
+        "description": "Creates or updates an Azure Service Connection Controller.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -286,11 +286,11 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "AzureServiceConnectionControllers_Patch",
+        "operationId": "AzureServiceConnectionControllers_Update",
         "tags": [
           "AzureServiceConnectionControllers"
         ],
-        "description": "Updates an Azure Service Connection Controller.",
+        "description": "Updates the tags of an Azure Service Connection Controller.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -315,7 +315,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AzureServiceConnectionControllerUpdate"
+              "$ref": "#/definitions/AzureServiceConnectionControllerTagsUpdate"
             }
           }
         ],
@@ -326,20 +326,6 @@
               "$ref": "#/definitions/AzureServiceConnectionController"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -348,21 +334,17 @@
           }
         },
         "x-ms-examples": {
-          "AzureServiceConnectionControllers_Patch": {
-            "$ref": "./examples/AzureServiceConnectionControllers_Patch.json"
+          "AzureServiceConnectionControllers_Update": {
+            "$ref": "./examples/AzureServiceConnectionControllers_Update.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "AzureServiceConnectionControllers_Delete",
         "tags": [
           "AzureServiceConnectionControllers"
         ],
-        "description": "Deletes an Azure Service Connection Controller.",
+        "description": "Deletes an Azure Service Connection Controller. Only its owning Probing Gateway may call this operation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -426,7 +408,7 @@
     },
     "AzureServiceConnectionController": {
       "type": "object",
-      "description": "Class representing an Azure Service Connection Controller.",
+      "description": "An Azure Service Connection Controller owned by its Probing Gateway. Direct customer PUT and DELETE requests are denied; deleting its gateway deletes the controller and its managed resources. Only tags can be updated directly.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AzureServiceConnectionControllerProperties",
@@ -434,7 +416,11 @@
         },
         "managedBy": {
           "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -537,56 +523,16 @@
       },
       "readOnly": true
     },
-    "AzureServiceConnectionControllerUpdate": {
+    "AzureServiceConnectionControllerTagsUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the AzureServiceConnectionController.",
+      "description": "The type used for updating tags in AzureServiceConnectionController resources.",
       "properties": {
-        "managedBy": {
-          "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
-        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/AzureServiceConnectionControllerUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "AzureServiceConnectionControllerUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the AzureServiceConnectionController.",
-      "properties": {
-        "subnetId": {
-          "$ref": "#/definitions/SubnetId",
-          "description": "The reference to the subnet where the Azure Service Connection Controller is deployed."
-        },
-        "ipConfigurations": {
-          "type": "array",
-          "description": "The IP configuration parameters for the Azure Service Connection Controller.",
-          "items": {
-            "$ref": "#/definitions/IpConfiguration"
-          },
-          "x-ms-identifiers": []
-        },
-        "providerConnections": {
-          "type": "array",
-          "description": "Properties of the related Azure components providing the underlying infrastructure.",
-          "items": {
-            "$ref": "#/definitions/ProviderConnectionProperties"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "udr": {
-          "$ref": "#/definitions/UDR",
-          "description": "The reference to the effective UDR (User Defined Route) applied to the Azure Service Connection Controller."
         }
       }
     },
