@@ -63,12 +63,6 @@ model FeatureFlagProperties {
   enabled: boolean;
 
   /**
-   * The name of the feature flag.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
    * The label the feature flag belongs to.
    */
   @visibility(Lifecycle.Read)
