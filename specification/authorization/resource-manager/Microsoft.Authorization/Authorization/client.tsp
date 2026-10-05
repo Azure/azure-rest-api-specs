@@ -84,11 +84,6 @@ union RoleManagementScopeType {
   "csharp"
 );
 @@clientName(
-  Microsoft.PrivilegedAccess.ParentResource.parentResource,
-  "parent",
-  "csharp"
-);
-@@clientName(
   Microsoft.Authorization.UsersOrServicePrincipalSetUserType,
   "UserType",
   "python"

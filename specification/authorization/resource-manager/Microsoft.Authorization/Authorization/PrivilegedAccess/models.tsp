@@ -2,11 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -233,9 +235,10 @@ model ParentResource {
    * Scope identifier for the parent scope. For Azure Resource Manager-addressable
    * scopes this is the full Azure Resource Manager resource path (e.g.,
    * `/subscriptions/{subId}/resourceGroups/my-rg`). Typed as `string` (not
-   * `armResourceIdentifier`) because higher scope tiers — management groups,
-   * tenants, and future non–Azure Resource Manager hierarchies — do not have
-   * Azure Resource Manager resource identifiers. Format is determined by the
+   * `armResourceIdentifier`) because the extensible scope hierarchy may include
+   * both Azure Resource Manager identifiers (including management-group paths
+   * such as `/providers/Microsoft.Management/managementGroups/{id}`) and
+   * tenant or future non-resource identifiers. Format is determined by the
    * sibling `type` value.
    */
   scope: string;
@@ -269,7 +272,7 @@ model ParentResource {
    * The next ancestor in the chain. Present on every entry except the
    * outermost (root) scope, which omits the field.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Renamed to `parent` for C# in client.tsp (@@clientName) to avoid the enclosing-model name collision; spec name stays `parentResource` for all other languages."
+  @clientName("parent", "csharp")
   parentResource?: ParentResource;
 }
 

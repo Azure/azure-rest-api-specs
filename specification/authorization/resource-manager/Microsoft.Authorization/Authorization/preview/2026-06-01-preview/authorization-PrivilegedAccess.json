@@ -569,7 +569,7 @@
         },
         "scope": {
           "type": "string",
-          "description": "Scope identifier for the parent scope. For Azure Resource Manager-addressable\nscopes this is the full Azure Resource Manager resource path (e.g.,\n`/subscriptions/{subId}/resourceGroups/my-rg`). Typed as `string` (not\n`armResourceIdentifier`) because higher scope tiers — management groups,\ntenants, and future non–Azure Resource Manager hierarchies — do not have\nAzure Resource Manager resource identifiers. Format is determined by the\nsibling `type` value."
+          "description": "Scope identifier for the parent scope. For Azure Resource Manager-addressable\nscopes this is the full Azure Resource Manager resource path (e.g.,\n`/subscriptions/{subId}/resourceGroups/my-rg`). Typed as `string` (not\n`armResourceIdentifier`) because the extensible scope hierarchy may include\nboth Azure Resource Manager identifiers (including management-group paths\nsuch as `/providers/Microsoft.Management/managementGroups/{id}`) and\ntenant or future non-resource identifiers. Format is determined by the\nsibling `type` value."
         },
         "displayName": {
           "type": "string",
