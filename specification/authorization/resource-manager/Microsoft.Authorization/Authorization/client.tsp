@@ -84,6 +84,10 @@ union RoleManagementScopeType {
   "csharp"
 );
 @@clientName(
+  Microsoft.PrivilegedAccess.MemberType,
+  "PrivilegedResourceMemberType"
+);
+@@clientName(
   Microsoft.Authorization.UsersOrServicePrincipalSetUserType,
   "UserType",
   "python"
