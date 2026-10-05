@@ -1,13 +1,57 @@
 import type { ILogger } from "@azure-tools/specs-shared/logger";
-import { isAbsolute, relative, win32 } from "node:path";
 import { stripVTControlCharacters } from "node:util";
 import pc from "picocolors";
+import { filePath, renderDiagnosticContent } from "./diagnostic-content.ts";
 import { DiagnosticError, type Diagnostic } from "./rule-result.ts";
 
 export function supportsColor(env = process.env, isTTY = process.stderr.isTTY): boolean {
   if (env.NO_COLOR !== undefined || env.FORCE_COLOR === "0") return false;
   if (env.FORCE_COLOR !== undefined) return true;
   return (Boolean(isTTY) && env.TERM !== "dumb") || env.GITHUB_ACTIONS === "true";
+}
+
+export type RuleStatus = "PASS" | "FAIL" | "WARN" | "SKIP" | "SUPPRESSED";
+export type RuleCounts = Record<RuleStatus, number>;
+
+export function formatRuleStatus(
+  name: string,
+  status: RuleStatus,
+  color = supportsColor(process.env, process.stdout.isTTY),
+): string {
+  const c = pc.createColors(color);
+  const label =
+    status === "FAIL"
+      ? c.red("\u00d7")
+      : status === "WARN"
+        ? c.yellow("!")
+        : status === "PASS"
+          ? c.green("\u2714")
+          : c.dim("-");
+  const detail =
+    status === "SKIP"
+      ? " (skipped)"
+      : status === "SUPPRESSED"
+        ? " (suppressed)"
+        : status === "WARN"
+          ? " (warnings)"
+          : "";
+  return `${label} ${name}${detail}`;
+}
+
+export function formatRuleSummary(
+  counts: RuleCounts,
+  notRun: number,
+  color = supportsColor(process.env, process.stdout.isTTY),
+): string {
+  const c = pc.createColors(color);
+  const parts: string[] = [];
+  if (counts.PASS) parts.push(c.green(`${counts.PASS} passed`));
+  if (counts.FAIL) parts.push(c.bold(c.red(`${counts.FAIL} failed`)));
+  if (counts.WARN) parts.push(c.yellow(`${counts.WARN} with warnings`));
+  if (counts.SKIP) parts.push(c.gray(`${counts.SKIP} skipped`));
+  if (counts.SUPPRESSED) parts.push(c.gray(`${counts.SUPPRESSED} suppressed`));
+  if (notRun) parts.push(c.gray(`${notRun} not run`));
+  return parts.join(c.dim(" | ")) || c.gray("0 run");
 }
 
 export function formatDiagnostic(
@@ -18,14 +62,7 @@ export function formatDiagnostic(
   const level = diagnostic.severity === "error" ? c.red("error") : c.yellow("warning");
   let location = "";
   if (diagnostic.path) {
-    const file = diagnostic.path;
-    const displayPath =
-      /^[A-Za-z]:[\\/]/.test(file) && /^[A-Za-z]:[\\/]/.test(cwd)
-        ? win32.relative(cwd, file)
-        : isAbsolute(file)
-          ? relative(cwd, file)
-          : file;
-    location = c.cyan(displayPath.replaceAll("\\", "/") || ".");
+    location = renderDiagnosticContent(filePath(diagnostic.path), { color, cwd });
     if (diagnostic.location) {
       location += `:${c.yellow(String(diagnostic.location.line))}:${c.yellow(String(diagnostic.location.column))}`;
     }
@@ -33,6 +70,10 @@ export function formatDiagnostic(
   const lines = [
     `${location ? `${location} - ` : ""}${level} ${c.dim(`tsv/${diagnostic.code}`)}: ${diagnostic.message.trimEnd()}`,
   ];
+  if (diagnostic.details !== undefined) {
+    const details = renderDiagnosticContent(diagnostic.details, { color, cwd });
+    if (details) lines.push(details);
+  }
   if (diagnostic.path && diagnostic.location?.text !== undefined) {
     const { line, column, text } = diagnostic.location;
     const source = text.split(/\r?\n/)[line - 1];

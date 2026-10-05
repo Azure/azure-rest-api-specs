@@ -2,14 +2,14 @@ import type { Context, Core, GitHub, GitHubScriptArgs } from "../../src/github.t
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
-vi.mock("fs/promises", () => ({
+vi.mock("node:fs/promises", () => ({
   readFile: vi.fn(),
 }));
 vi.mock("js-yaml", () => ({
   default: { load: vi.fn() },
 }));
 
-import { readFile } from "fs/promises";
+import { readFile } from "node:fs/promises";
 import yaml from "js-yaml";
 import checkLabel from "../../src/protected-labels/check-label.ts";
 

@@ -59,6 +59,18 @@ plane out of enforcement (anyone may apply the label). An **omitted** plane stay
 fail-closed and resolves to `global-approvers` only; only the explicit `unprotected`
 keyword opens a plane.
 
+When several labels share one approver pool (for example the per-language SDK
+breaking-change approval labels), define the roster once with a YAML anchor and reuse it
+with aliases so there is a single list to keep in sync:
+
+```yaml
+BreakingChange-Go-Sdk-Approved: &sdk-breaking-change-approvers
+  - user1
+  - user2
+BreakingChange-Go-Sdk-Suppression-Approved: *sdk-breaking-change-approvers
+BreakingChange-Python-Sdk-Approved: *sdk-breaking-change-approvers
+```
+
 ## Security Model
 
 - **Approver allowlist** - only users listed in the YAML can apply protected labels

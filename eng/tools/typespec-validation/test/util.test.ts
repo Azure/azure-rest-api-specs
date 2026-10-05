@@ -1,8 +1,9 @@
 import { mockFolder } from "./mocks.ts";
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
 
 import { strict as assert } from "node:assert";
-import path from "path";
-import process from "process";
+import path from "node:path";
+import process from "node:process";
 import { simpleGit } from "simple-git";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { gitDiffTopSpecFolder, normalizePath, readFileAtCommit } from "../src/utils.ts";
@@ -18,6 +19,7 @@ describe("util", function () {
       revparse: revparseMock,
       show: showMock,
       status: vi.fn().mockResolvedValue({
+        files: [],
         modified: [],
         not_added: [],
         isClean: () => true,
@@ -51,7 +53,7 @@ describe("util", function () {
   });
   describe("gitDiff", function () {
     it("should succeed if git diff produces no output", async function () {
-      const result = await gitDiffTopSpecFolder(mockFolder);
+      const result = await gitDiffTopSpecFolder(mockFolder, defaultLogger);
       assert(result.success);
     });
   });
