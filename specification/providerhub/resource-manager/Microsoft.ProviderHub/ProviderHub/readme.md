@@ -40,14 +40,6 @@ These settings apply only when `--tag=package-2026-09-01-preview` is specified o
 input-file:
   - preview/2026-09-01-preview/providerhub.json
 directive:
-  - suppress: AvoidAdditionalProperties
-    from: providerhub.json
-    where:
-      - $.definitions.ResourceTypeRegistrationProperties.properties.resourceConcurrencyControlOptions
-      - $.definitions.ResourceTypeRegistrationProperties.properties.metadata
-      - $.definitions.RolloutStatusBase.properties.failedOrSkippedRegions
-      - $.definitions.CustomRolloutStatus.properties.failedOrSkippedRegions
-    reason: This version requires metadata to be defined as an additional property or has already been there which will break customers if we change now.
   - suppress: PutResponseCodes
     from: providerhub.json
     where:
