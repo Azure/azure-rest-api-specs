@@ -1,0 +1,50 @@
+name: ARM Semantic Review - Set Status
+
+on:
+  workflow_run:
+    workflows: ["ARM API Review: Automated Workflow"]
+    types: [completed]
+
+permissions:
+  # actions.listWorkflowRunArtifacts
+  actions: read
+  # actions/checkout
+  contents: read
+  # pulls.get, pulls.listFiles
+  pull-requests: read
+  # repos.listCommitStatusesForRef, repos.createCommitStatus
+  statuses: write
+
+jobs:
+  arm-semantic-review-status:
+    name: ARM Semantic Review - Set Status
+    runs-on: ubuntu-slim
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github
+
+      - id: finalize
+        name: Finalize ARM Semantic Review
+        uses: actions/github-script@v9.0.0
+        with:
+          script: |
+            const { finalizeArmSemanticReview } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts');
+            return await finalizeArmSemanticReview({ github, context, core });
+
+      - if: fromJson(steps.finalize.outputs.result).headSha
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "head-sha"
+          value: "${{ fromJson(steps.finalize.outputs.result).headSha }}"
+
+      - if: fromJson(steps.finalize.outputs.result).issueNumber > 0
+        name: Upload artifact with issue number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "issue-number"
+          value: "${{ fromJson(steps.finalize.outputs.result).issueNumber }}"

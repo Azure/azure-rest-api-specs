@@ -285,11 +285,20 @@ export async function finalizeArmSemanticReview({
   github,
   context,
   core,
-}: GitHubScriptArgs): Promise<void> {
+}: GitHubScriptArgs): Promise<{
+  headSha: string;
+  issueNumber: number;
+  statusPublished: boolean;
+}> {
+  const emptyResult = {
+    headSha: "",
+    issueNumber: 0,
+    statusPublished: false,
+  };
   const payload = context.payload as WebhookEvent<"workflow-run", "completed">;
   const workflowRun = payload.workflow_run;
   if (workflowRun.name !== ARM_API_REVIEW_WORKFLOW_NAME) {
-    return;
+    return emptyResult;
   }
 
   const repositoryOwner = workflowRun.repository.owner?.login;
@@ -309,11 +318,11 @@ export async function finalizeArmSemanticReview({
       artifactNames.some((name) => name.startsWith("issue-number=")));
   if (!reviewerExecuted) {
     core.info("The ARM API Reviewer did not execute; semantic status is unchanged");
-    return;
+    return emptyResult;
   }
 
   const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
-  await finalizeSemanticReviewWorkflow({
+  const statusPublished = await finalizeSemanticReviewWorkflow({
     owner,
     repo,
     issueNumber: issue_number,
@@ -327,5 +336,10 @@ export async function finalizeArmSemanticReview({
     github,
     core,
   });
+  return {
+    headSha: isFullGitSha(head_sha) ? head_sha : "",
+    issueNumber: Number.isSafeInteger(issue_number) && issue_number > 0 ? issue_number : 0,
+    statusPublished,
+  };
 }
 /* v8 ignore stop */

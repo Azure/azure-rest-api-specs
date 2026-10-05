@@ -20,7 +20,7 @@ on:
     # Re-evaluate as each mandatory status producer completes.
     workflows:
       [
-        "ARM API Review: Automated Workflow",
+        "ARM Semantic Review - Set Status",
         "Swagger Avocado - Set Status",
         "Swagger LintDiff - Set Status",
       ]
@@ -36,8 +36,8 @@ permissions:
   issues: read
   # issues.listLabelsOnIssue
   pull-requests: read
-  # repos.listCommitStatusesForRef, repos.createCommitStatus
-  statuses: write
+  # repos.listCommitStatusesForRef
+  statuses: read
 
 jobs:
   arm-universal-auto-signoff:
@@ -75,17 +75,6 @@ jobs:
           # or the repo default branch (other triggers).
           sparse-checkout: |
             .github
-
-      - if: |
-          github.event_name == 'workflow_run' &&
-          github.event.workflow_run.name == 'ARM API Review: Automated Workflow'
-        name: Finalize ARM Semantic Review
-        uses: actions/github-script@v9.0.0
-        with:
-          script: |
-            const { finalizeArmSemanticReview } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts');
-            await finalizeArmSemanticReview({ github, context, core });
 
       - id: get-label-action
         name: ARM Universal Auto SignOff
