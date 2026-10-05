@@ -2431,6 +2431,15 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.KnowledgeSourceFileCapacity,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceFileCapacity,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
   Search.ListKnowledgeSourceFilesResult,
   "Azure.Search.Documents.Indexes"
 );
@@ -2679,6 +2688,15 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.ListIndexesResult, "Azure.Search.Documents.Indexes");
 @@clientNamespace(
   Search.ListIndexesResult,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.ListIndexesSelectedResult,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.ListIndexesSelectedResult,
   "com.azure.search.documents.indexes",
   "java"
 );
