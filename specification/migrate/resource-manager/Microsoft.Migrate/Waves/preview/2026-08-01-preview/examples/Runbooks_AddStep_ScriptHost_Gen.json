@@ -1,5 +1,5 @@
 {
-  "title": "Runbooks_AddStep_Script",
+  "title": "Runbooks_AddStep_ScriptHost",
   "operationId": "Runbooks_AddStep",
   "parameters": {
     "api-version": "2026-08-01-preview",
@@ -10,26 +10,11 @@
     "body": {
       "stepRef": "common.script",
       "workstreamId": "workstream1",
-      "displayName": "Run pre-migration checks",
-      "description": "Executes the pre-migration validation script on each target server.",
-      "scriptName": "pre-migration-checks",
-      "executionLocation": "SourceVM",
-      "executionScope": "PerEntity",
-      "entities": [
-        "entity1"
-      ],
-      "dependsOn": [
-        {
-          "waitFor": "MappedEntities",
-          "stepId": "replicate-step",
-          "entityPairs": [
-            {
-              "dependentEntity": "/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/resourceGroups/rgwaves/providers/Microsoft.Migrate/migrateProjects/project1/migrationEntities/entity1",
-              "waitsFor": "/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/resourceGroups/rgwaves/providers/Microsoft.Migrate/migrateProjects/project1/migrationEntities/entity2"
-            }
-          ]
-        }
-      ]
+      "displayName": "Run orchestration script on host",
+      "description": "Executes a one-time orchestration script for the runbook on the host.",
+      "scriptName": "orchestrate-wave",
+      "executionLocation": "Host",
+      "executionScope": "Once"
     }
   },
   "responses": {

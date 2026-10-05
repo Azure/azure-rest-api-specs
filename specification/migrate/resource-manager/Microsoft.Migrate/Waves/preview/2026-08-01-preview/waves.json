@@ -1438,6 +1438,9 @@
           },
           "Runbooks_AddStep_Script": {
             "$ref": "./examples/Runbooks_AddStep_Script_Gen.json"
+          },
+          "Runbooks_AddStep_ScriptHost": {
+            "$ref": "./examples/Runbooks_AddStep_ScriptHost_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4998,7 +5001,7 @@
       "enum": [
         "Host",
         "AzureVM",
-        "RemoteVM"
+        "SourceVM"
       ],
       "x-ms-enum": {
         "name": "ScriptExecutionLocation",
@@ -5015,9 +5018,9 @@
             "description": "Runs on the Azure VM."
           },
           {
-            "name": "RemoteVM",
-            "value": "RemoteVM",
-            "description": "Runs on a remote VM."
+            "name": "SourceVM",
+            "value": "SourceVM",
+            "description": "Runs on the source VM."
           }
         ]
       }
