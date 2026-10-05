@@ -1,4 +1,4 @@
-import { resolve } from "path";
+import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { ConsoleLogger } from "../src/logger.ts";
 import { Readme, TagMatchRegex } from "../src/readme.ts";

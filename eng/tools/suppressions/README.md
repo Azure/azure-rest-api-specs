@@ -52,6 +52,18 @@ Example `suppressions.yaml`:
   paths: [Automation.Management]
 ```
 
+Once a service contains TypeSpec-generated Swagger, `TypeSpecRequirement` suppressions cannot
+permit new handwritten API versions. An API version is new if its directory does not exist on
+`main`. Changes within existing API versions, including newly added Swagger files, retain their
+previous behavior and applicable suppressions.
+
+Migration is detected across `preview` and `stable` under the directory immediately containing
+those folders, independently of other services and API planes. The check looks for generated
+Swagger in the current checkout.
+
+Services without generated Swagger retain the existing requirement: new handwritten API versions
+require a version-specific suppression. Suppressions for other tools are unaffected.
+
 ### Command line
 
 Build the package (see [contributing](#folder-structure--contributing)), then query suppressions
