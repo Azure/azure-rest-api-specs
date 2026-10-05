@@ -27,9 +27,9 @@ namespace Microsoft.Network;
 
 /** The available API versions. */
 enum Versions {
-  /** 2026-02-09-preview version */
+  /** 2026-10-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  v2026_02_09_preview: "2026-02-09-preview",
+  v2026_10_01_preview: "2026-10-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
