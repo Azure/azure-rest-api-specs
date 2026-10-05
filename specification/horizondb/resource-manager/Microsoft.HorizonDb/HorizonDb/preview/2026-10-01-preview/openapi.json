@@ -9362,11 +9362,23 @@
             "update",
             "create"
           ]
+        },
+        "vCores": {
+          "$ref": "#/definitions/PoolVCores",
+          "description": "The number of vCores. Allowed values are 1 through 192.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "discriminator": "type",
       "required": [
-        "type"
+        "type",
+        "computeProcessor",
+        "computeGeneration",
+        "vCores"
       ]
     },
     "PoolComputeModelForPatchUpdate": {
@@ -9397,7 +9409,7 @@
           ]
         },
         "vCores": {
-          "$ref": "#/definitions/ProvisionedPoolVCores",
+          "$ref": "#/definitions/PoolVCores",
           "description": "The number of provisioned vCores. Allowed values are 1 through 192. This property applies only to a Provisioned compute model. Omission preserves the current value.",
           "x-ms-mutability": [
             "update"
@@ -9629,7 +9641,7 @@
         },
         "computeModel": {
           "$ref": "#/definitions/PoolComputeModel",
-          "description": "The compute model for the HorizonDB pool.",
+          "description": "The required compute model for the HorizonDB pool.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -9679,6 +9691,7 @@
         }
       },
       "required": [
+        "computeModel",
         "nodeCount",
         "highAvailability",
         "parameterGroup"
@@ -9802,6 +9815,13 @@
           }
         ]
       }
+    },
+    "PoolVCores": {
+      "type": "integer",
+      "format": "int32",
+      "description": "A provisioned HorizonDB pool compute capacity in vCores, from 1 through 192.",
+      "minimum": 1,
+      "maximum": 192
     },
     "PostgreSqlCapabilityVersion": {
       "type": "string",
@@ -9999,37 +10019,6 @@
         }
       ],
       "x-ms-discriminator-value": "Provisioned"
-    },
-    "ProvisionedHorizonDbPoolComputeModel": {
-      "type": "object",
-      "description": "A provisioned compute model for a HorizonDB pool.",
-      "properties": {
-        "vCores": {
-          "$ref": "#/definitions/ProvisionedPoolVCores",
-          "description": "The number of provisioned vCores. Allowed values are 1 through 192.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "vCores"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PoolComputeModel"
-        }
-      ],
-      "x-ms-discriminator-value": "Provisioned"
-    },
-    "ProvisionedPoolVCores": {
-      "type": "integer",
-      "format": "int32",
-      "description": "A provisioned HorizonDB pool compute capacity in vCores, from 1 through 192.",
-      "minimum": 1,
-      "maximum": 192
     },
     "ProvisioningState": {
       "type": "string",

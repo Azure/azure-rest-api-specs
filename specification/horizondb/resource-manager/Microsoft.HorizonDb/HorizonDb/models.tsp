@@ -81,7 +81,7 @@ scalar PoolName extends string;
 @doc("A provisioned HorizonDB pool compute capacity in vCores, from 1 through 192.")
 @minValue(1)
 @maxValue(192)
-scalar ProvisionedPoolVCores extends int32;
+scalar PoolVCores extends int32;
 
 @added(Versions.v2026_10_01_preview)
 @doc("A HorizonDB pool node count, from 1 through 16.")
@@ -626,9 +626,9 @@ model PoolProperties {
   createMode?: CreateModePool;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The compute model for the HorizonDB pool.")
+  @doc("The required compute model for the HorizonDB pool.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  computeModel?: PoolComputeModel;
+  computeModel: PoolComputeModel;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The required number of nodes to allocate and assign to the pool. Allowed values are 1 through 16. To deallocate runtime compute without changing the configured node count, stop the pool.")
@@ -782,23 +782,16 @@ model PoolComputeModel {
 
   @doc("The processor type for the compute model.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  computeProcessor?: ComputeProcessorType;
+  computeProcessor: ComputeProcessorType;
 
   @doc("The compute generation for the compute model.")
   @minValue(1)
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  computeGeneration?: int32;
-}
+  computeGeneration: int32;
 
-@added(Versions.v2026_10_01_preview)
-@doc("A provisioned compute model for a HorizonDB pool.")
-model ProvisionedHorizonDbPoolComputeModel extends PoolComputeModel {
-  @doc("The type of compute model.")
-  type: "Provisioned";
-
-  @doc("The number of provisioned vCores. Allowed values are 1 through 192.")
+  @doc("The number of vCores. Allowed values are 1 through 192.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  vCores: ProvisionedPoolVCores;
+  vCores: PoolVCores;
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -819,7 +812,7 @@ model PoolComputeModelForPatchUpdate {
 
   @doc("The number of provisioned vCores. Allowed values are 1 through 192. This property applies only to a Provisioned compute model. Omission preserves the current value.")
   @visibility(Lifecycle.Update)
-  vCores?: ProvisionedPoolVCores;
+  vCores?: PoolVCores;
 }
 
 @doc("Network properties.")
