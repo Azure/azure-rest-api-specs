@@ -154,6 +154,17 @@ model AiGatewayToolServerOauth2Authentication {
   loginLink?: string;
 }
 
+/** An HTTP header injected when calling a tool server endpoint. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayToolServerHeader {
+  /** HTTP header name. */
+  name: string;
+
+  /** Secret values for the HTTP header. */
+  @secret
+  values: string[];
+}
+
 /** Credentials for a tool server endpoint. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayToolServerCredentials {
@@ -161,9 +172,9 @@ model AiGatewayToolServerCredentials {
   type: AiGatewayToolServerAuthenticationType;
 
   /** Static headers injected when calling the endpoint. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The implemented header credential contract supports arbitrary HTTP header names."
+  @identifiers(#["name"])
   @secret
-  headers?: Record<string[]>;
+  headers?: AiGatewayToolServerHeader[];
 
   /** OAuth 2.0 configuration. */
   oauth2?: AiGatewayToolServerOauth2Authentication;
@@ -237,9 +248,9 @@ model AiGatewayToolServerCredentialsUpdate {
   type?: AiGatewayToolServerAuthenticationType;
 
   /** Static headers injected when calling the endpoint. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The implemented header credential contract supports arbitrary HTTP header names."
+  @identifiers(#["name"])
   @secret
-  headers?: Record<string[]>;
+  headers?: AiGatewayToolServerHeader[];
 
   /** OAuth 2.0 configuration. */
   oauth2?: AiGatewayToolServerOauth2Authentication;
