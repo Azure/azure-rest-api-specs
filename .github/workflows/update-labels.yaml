@@ -26,6 +26,9 @@ permissions:
 jobs:
   update-labels:
     name: Update Labels
+    if: >-
+      github.event.workflow_run.conclusion != 'skipped' &&
+      github.event.workflow_run.conclusion != 'cancelled'
 
     runs-on: ubuntu-slim
 

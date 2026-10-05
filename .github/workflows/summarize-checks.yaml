@@ -39,7 +39,9 @@ permissions:
 
 jobs:
   run-summarize-checks:
-    if: ${{ github.event_name == 'pull_request_target' || github.event.workflow_run.conclusion != 'skipped' }}
+    if: >-
+      (github.event_name == 'pull_request_target' && github.event.pull_request.state == 'open') ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped')
     name: "Summarize Checks"
     runs-on: ubuntu-slim
 
