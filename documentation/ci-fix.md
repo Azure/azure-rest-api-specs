@@ -75,6 +75,13 @@ your PR, including any deletions or renames. If a tooling change is needed, open
 issue for the repository maintainers instead of requesting approval to include it
 in your specification PR.
 
+Repository-maintainer exemptions apply only to PRs that do not change
+`specification/`, including deletions or either side of a rename. A maintainer's
+mixed specification/protected-file PR still fails this check. The exemption is
+based on the PR author, not approvals, labels, or who reruns the check; all other
+merge requirements still apply. See the [maintainer guidance](../eng/README.md#protected-files)
+for the maintainer roster.
+
 Files under `eng/common/` and `.github/skills/azsdk-common-*` are synchronized from
 [Azure/azure-sdk-tools](https://github.com/Azure/azure-sdk-tools). Make changes in
 that repository rather than editing the synchronized copies here.

@@ -1,9 +1,41 @@
 import { minimatch } from "minimatch";
+import { simpleGit } from "simple-git";
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
+import { inlineCode } from "../../shared/src/markdown.ts";
 import { CoreLogger } from "./core-logger.ts";
 import type { GitHubScriptArgs, WebhookEvent } from "./github.ts";
 
 const ALLOWED_AUTHORS = new Set(["azure-sdk", "azure-sdk-automation[bot]"]);
+// Mirror Azure/azure-rest-api-specs-maintainers; update when team membership changes.
+// cspell:disable
+const MAINTAINER_AUTHORS = new Set(
+  [
+    "AkhilaIlla",
+    "AlitzelMendez",
+    "Bubbles4096",
+    "catalinaperalta",
+    "chrisradek",
+    "gary-x-li",
+    "iscai-msft",
+    "lmazuel",
+    "markcowl",
+    "MaryGao",
+    "MSEvanhi",
+    "nikhgup",
+    "pshao25",
+    "qiaozha",
+    "raosuhas",
+    "ravimeda",
+    "samvaity",
+    "tejaswiMinnu",
+    "timotheeguerin",
+    "tjprescott",
+    "vidapour",
+    "vikeshi26",
+    "xirzec",
+  ].map((author) => author.toLowerCase()),
+);
+// cspell:enable
 const PROTECTED_PATHS = [
   ".gitignore",
   "cspell.json",
@@ -23,6 +55,12 @@ const SYNCED_PATHS = [
   "eng/common/**",
 ];
 
+interface ProtectedFilesResult {
+  conclusion: "success" | "failure";
+  title: string;
+  summary: string;
+}
+
 function matchesAny(file: string, patterns: string[]): boolean {
   // Match hidden files and preserve PowerShell's case-insensitive behavior.
   return patterns.some((pattern) =>
@@ -30,11 +68,11 @@ function matchesAny(file: string, patterns: string[]): boolean {
   );
 }
 
-export async function checkProtectedFiles({
-  context,
-  core,
-}: Pick<GitHubScriptArgs, "context" | "core">): Promise<void> {
-  if (context.eventName !== "pull_request") {
+export async function checkProtectedFiles(
+  { context, core }: Pick<GitHubScriptArgs, "context" | "core">,
+  diff?: { baseCommitish: string; headCommitish: string },
+): Promise<ProtectedFilesResult> {
+  if (context.eventName !== "pull_request_target") {
     throw new Error(`Unsupported event for Protected Files: '${context.eventName}'`);
   }
   const payload = context.payload as WebhookEvent<"pull-request">;
@@ -45,14 +83,34 @@ export async function checkProtectedFiles({
 
   if (ALLOWED_AUTHORS.has(author.toLowerCase())) {
     core.info(`Account '${author}' is allowed to update protected files`);
-    return;
+    return {
+      conclusion: "success",
+      title: "Trusted automation author",
+      summary: `Account ${inlineCode(author)} is allowed to update protected files.`,
+    };
   }
 
   const changedFiles = await getChangedFiles({
+    ...diff,
     // Include both sides of renames so moving a protected file still fails.
     gitOptions: ["--no-renames"],
     logger: new CoreLogger(core),
   });
+  if (
+    MAINTAINER_AUTHORS.has(author.toLowerCase()) &&
+    !changedFiles.some((file) => matchesAny(file, ["specification", "specification/**"]))
+  ) {
+    core.info(
+      `Maintainer '${author}' is allowed to update protected files in a maintenance-only PR`,
+    );
+    return {
+      conclusion: "success",
+      title: "Maintainer maintenance-only PR",
+      summary:
+        `Maintainer ${inlineCode(author)} is allowed to update protected files because ` +
+        "this PR does not change `specification/`. All other merge requirements still apply.",
+    };
+  }
   const protectedFiles = changedFiles.filter(
     (file) =>
       matchesAny(file, SYNCED_PATHS) ||
@@ -61,16 +119,151 @@ export async function checkProtectedFiles({
 
   if (protectedFiles.length === 0) {
     core.info("No changes to protected files.");
-    return;
+    return {
+      conclusion: "success",
+      title: "No changes to protected files",
+      summary: "This PR does not change protected files.",
+    };
   }
 
+  const messages: string[] = [];
+  let summaryBytes = 0;
   for (const file of protectedFiles) {
     const message = matchesAny(file, SYNCED_PATHS)
       ? `File '${file}' is synced from Azure/azure-sdk-tools. Remove this change from your PR and make the change in Azure/azure-sdk-tools instead.`
       : `File '${file}' is repository-managed and outside the scope of a specification contribution. Remove this change from your PR. If a tooling change is needed, open an issue for the repository maintainers.`;
     core.error(message, { file });
+    const summary = `- ${inlineCode(file)}: ${
+      matchesAny(file, SYNCED_PATHS)
+        ? "Synced from Azure/azure-sdk-tools; make the change in that repository."
+        : "Repository-managed file; remove this change from your specification PR."
+    }`;
+    // Checks API summary fields are limited to 65,535 bytes.
+    const bytes = Buffer.byteLength(summary);
+    if (summaryBytes + bytes <= 55_000) {
+      messages.push(summary);
+      summaryBytes += bytes + 1;
+    }
+  }
+  if (messages.length < protectedFiles.length) {
+    messages.push(
+      `\n${protectedFiles.length - messages.length} additional protected paths are listed in the workflow annotations.`,
+    );
   }
   core.setFailed(
     "Remove changes to protected files from your specification PR. See https://aka.ms/ci-fix#protected-files.",
   );
+  return {
+    conclusion: "failure",
+    title: "Remove changes to protected files",
+    summary:
+      `${messages.join("\n")}\n\n` +
+      "See the [Protected Files guide](https://aka.ms/ci-fix#protected-files). " +
+      "Maintainer exemptions apply only to PRs without changes to `specification/`.",
+  };
+}
+
+/** Reads the PR merge as git data without checking out or executing its files. */
+export async function readProtectedFilesDiff({
+  pullNumber,
+  headSha,
+  baseSha,
+  token,
+  cwd,
+}: {
+  pullNumber: number;
+  headSha: string;
+  baseSha: string;
+  token: string;
+  cwd?: string;
+}): Promise<{ baseCommitish: string; headCommitish: string }> {
+  if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
+    throw new Error("Protected Files requires a valid PR number");
+  }
+  if (![headSha, baseSha].every((sha) => /^[a-f0-9]{40}$/.test(sha)) || !token) {
+    throw new Error("Protected Files requires pinned PR commits and a git authentication token");
+  }
+  const git = simpleGit({
+    baseDir: cwd,
+    config: [
+      `http.extraheader=AUTHORIZATION: basic ${Buffer.from(`x-access-token:${token}`).toString("base64")}`,
+    ],
+  });
+  await git.fetch([
+    "--no-tags",
+    "--filter=blob:none",
+    "--depth=2",
+    "origin",
+    `refs/pull/${pullNumber}/merge`,
+  ]);
+  const mergeSha = (await git.revparse(["FETCH_HEAD"])).trim();
+  const parents = (await git.raw(["show", "--no-patch", "--format=%P", mergeSha]))
+    .trim()
+    .split(" ");
+  if (parents.length !== 2 || parents[0] !== baseSha || parents[1] !== headSha) {
+    throw new Error("PR merge does not match the evaluated base and head; rerun Protected Files");
+  }
+  return { baseCommitish: baseSha, headCommitish: mergeSha };
+}
+
+/** Publishes only after confirming that the evaluated PR head and base are still current. */
+export async function publishProtectedFiles(
+  { github, context, core }: GitHubScriptArgs,
+  inputs: { checkRunId: number; headSha: string; baseSha: string; token: string },
+): Promise<void> {
+  if (context.eventName !== "pull_request_target") {
+    throw new Error(`Unsupported event for Protected Files: '${context.eventName}'`);
+  }
+  const payload = context.payload as WebhookEvent<"pull-request">;
+  const pullNumber = payload.pull_request?.number;
+  if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
+    throw new Error("Protected Files requires a valid PR number");
+  }
+  const { data: pr } = await github.rest.pulls.get({
+    ...context.repo,
+    pull_number: pullNumber,
+  });
+  function verifyCurrent(current: typeof pr) {
+    if (
+      current.state !== "open" ||
+      current.head.sha !== inputs.headSha ||
+      current.base.sha !== inputs.baseSha
+    ) {
+      throw new Error("PR changed during evaluation; rerun Protected Files");
+    }
+  }
+  verifyCurrent(pr);
+  core.setSecret(Buffer.from(`x-access-token:${inputs.token}`).toString("base64"));
+  const diff = await readProtectedFilesDiff({
+    pullNumber,
+    headSha: inputs.headSha,
+    baseSha: inputs.baseSha,
+    token: inputs.token,
+  });
+  const result = await checkProtectedFiles(
+    {
+      core,
+      context: {
+        ...context,
+        repo: context.repo,
+        issue: context.issue,
+        payload: { pull_request: { number: pr.number, user: { login: pr.user.login } } },
+      },
+    },
+    diff,
+  );
+  const { data: latest } = await github.rest.pulls.get({
+    ...context.repo,
+    pull_number: pullNumber,
+  });
+  verifyCurrent(latest);
+  await core.summary.addRaw(`## Protected Files\n\n${result.summary}`).write();
+  await github.rest.checks.update({
+    ...context.repo,
+    check_run_id: inputs.checkRunId,
+    status: "completed",
+    conclusion: result.conclusion,
+    output: { title: result.title, summary: result.summary },
+  });
+  core.setOutput("published", "true");
 }

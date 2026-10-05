@@ -10,10 +10,18 @@ The **Protected Files** check keeps repository-managed files out of specificatio
 contributions. It is a contribution-scope check, not a request for code-owner approval.
 Contributor guidance is in the [CI Fix Guide](../documentation/ci-fix.md#protected-files).
 
-Intentional repository-maintenance PRs also fail this check. Repository maintainers
-can use their existing bypass permissions to merge those changes after reviewing
-the applicable validation results and code-owner requirements. Changes authored by
-the trusted `azure-sdk` and `azure-sdk-automation[bot]` accounts pass automatically.
+Maintenance-only PRs authored by a rostered repository maintainer pass this check
+without a merge bypass. A PR is maintenance-only when it does not change
+`specification/`, including deletions or either side of a rename. Mixed
+specification and protected-file changes still fail, including in maintainer PRs.
+All other required checks and review requirements remain in effect.
+
+The maintainer author roster in `.github/workflows/src/protected-files.ts` mirrors
+[`Azure/azure-rest-api-specs-maintainers`](https://github.com/orgs/Azure/teams/azure-rest-api-specs-maintainers).
+Update it when team membership changes; authorization uses the target branch's
+roster, not changes proposed in the PR. Applying a label or rerunning someone
+else's PR does not grant an exemption. Changes authored by the trusted `azure-sdk`
+and `azure-sdk-automation[bot]` accounts continue to pass automatically.
 
 ## Contributor readiness
 
