@@ -4511,18 +4511,24 @@
           "description": "OAuth grant type."
         },
         "authorizationParameters": {
-          "type": "object",
+          "type": "array",
           "description": "Additional authorization endpoint parameters.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "items": {
+            "$ref": "#/definitions/AiGatewayToolServerOauth2Parameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "tokenParameters": {
-          "type": "object",
+          "type": "array",
           "description": "Additional token endpoint parameters.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "items": {
+            "$ref": "#/definitions/AiGatewayToolServerOauth2Parameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "status": {
           "type": "string",
@@ -4559,6 +4565,24 @@
           }
         ]
       }
+    },
+    "AiGatewayToolServerOauth2Parameter": {
+      "type": "object",
+      "description": "An additional parameter sent to an OAuth 2.0 endpoint.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "OAuth parameter name."
+        },
+        "value": {
+          "type": "string",
+          "description": "OAuth parameter value."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
     },
     "AiGatewayToolServerOpenApiSourceType": {
       "type": "string",

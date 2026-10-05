@@ -29,6 +29,33 @@
               ]
             },
             "required": true
+          },
+          {
+            "id": "endpoint-2",
+            "namespace": "forecast",
+            "kind": "mcp",
+            "mcp": {
+              "url": "https://example.invalid/forecast/mcp",
+              "transport": "streamableHttp"
+            },
+            "credentials": {
+              "type": "oauth2",
+              "oauth2": {
+                "authorizationParameters": [
+                  {
+                    "name": "prompt",
+                    "value": "login"
+                  }
+                ],
+                "tokenParameters": [
+                  {
+                    "name": "audience",
+                    "value": "https://example.invalid/forecast"
+                  }
+                ]
+              }
+            },
+            "required": true
           }
         ],
         "name": "Updated weather tools",
