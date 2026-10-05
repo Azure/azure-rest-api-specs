@@ -6,36 +6,6 @@ import { CoreLogger } from "./core-logger.ts";
 import type { GitHubScriptArgs, WebhookEvent } from "./github.ts";
 
 const ALLOWED_AUTHORS = new Set(["azure-sdk", "azure-sdk-automation[bot]"]);
-// Mirror Azure/azure-rest-api-specs-maintainers; update when team membership changes.
-// cspell:disable
-const MAINTAINER_AUTHORS = new Set(
-  [
-    "AkhilaIlla",
-    "AlitzelMendez",
-    "Bubbles4096",
-    "catalinaperalta",
-    "chrisradek",
-    "gary-x-li",
-    "iscai-msft",
-    "lmazuel",
-    "markcowl",
-    "MaryGao",
-    "MSEvanhi",
-    "nikhgup",
-    "pshao25",
-    "qiaozha",
-    "raosuhas",
-    "ravimeda",
-    "samvaity",
-    "tejaswiMinnu",
-    "timotheeguerin",
-    "tjprescott",
-    "vidapour",
-    "vikeshi26",
-    "xirzec",
-  ].map((author) => author.toLowerCase()),
-);
-// cspell:enable
 const PROTECTED_PATHS = [
   ".gitignore",
   "cspell.json",
@@ -96,21 +66,6 @@ export async function checkProtectedFiles(
     gitOptions: ["--no-renames"],
     logger: new CoreLogger(core),
   });
-  if (
-    MAINTAINER_AUTHORS.has(author.toLowerCase()) &&
-    !changedFiles.some((file) => matchesAny(file, ["specification", "specification/**"]))
-  ) {
-    core.info(
-      `Maintainer '${author}' is allowed to update protected files in a maintenance-only PR`,
-    );
-    return {
-      conclusion: "success",
-      title: "Maintainer maintenance-only PR",
-      summary:
-        `Maintainer ${inlineCode(author)} is allowed to update protected files because ` +
-        "this PR does not change `specification/`. All other merge requirements still apply.",
-    };
-  }
   const protectedFiles = changedFiles.filter(
     (file) =>
       matchesAny(file, SYNCED_PATHS) ||
@@ -123,6 +78,28 @@ export async function checkProtectedFiles(
       conclusion: "success",
       title: "No changes to protected files",
       summary: "This PR does not change protected files.",
+    };
+  }
+
+  if (!changedFiles.some((file) => matchesAny(file, ["specification", "specification/**"]))) {
+    const message =
+      "Repository maintenance PR; normal CODEOWNERS review and other merge requirements still apply.";
+    core.info(message);
+    const syncedFiles = protectedFiles.filter((file) => matchesAny(file, SYNCED_PATHS));
+    for (const file of syncedFiles) {
+      core.warning(
+        `File '${file}' is synced from Azure/azure-sdk-tools. Make source changes in that repository rather than editing synchronized copies.`,
+        { file },
+      );
+    }
+    return {
+      conclusion: "success",
+      title: "Repository maintenance PR",
+      summary:
+        `${protectedFiles.map((file) => `- ${inlineCode(file)}`).join("\n")}\n\n${message}` +
+        (syncedFiles.length
+          ? "\n\nSynchronized files come from [Azure/azure-sdk-tools](https://github.com/Azure/azure-sdk-tools); make source changes there."
+          : ""),
     };
   }
 
@@ -148,7 +125,7 @@ export async function checkProtectedFiles(
     summary:
       `${messages.join("\n")}\n\n` +
       "See the [Protected Files guide](https://aka.ms/ci-fix#protected-files). " +
-      "Maintainer exemptions apply only to PRs without changes to `specification/`.",
+      "Keep repository maintenance separate from specification contributions.",
   };
 }
 

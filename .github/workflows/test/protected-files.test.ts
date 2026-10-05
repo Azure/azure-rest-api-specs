@@ -71,7 +71,10 @@ describe("Protected Files", () => {
     "does not exempt author %s when a trusted account triggers the run",
     async (author) => {
       const { core, run } = setup(author);
-      vi.mocked(getChangedFiles).mockResolvedValue(["package.json"]);
+      vi.mocked(getChangedFiles).mockResolvedValue([
+        "package.json",
+        "specification/widgets/main.tsp",
+      ]);
       await run();
       expect(core.error).toHaveBeenCalledWith(
         expect.stringContaining("Remove this change from your PR."),
@@ -81,7 +84,7 @@ describe("Protected Files", () => {
     },
   );
 
-  it.each(["timotheeguerin", "TimotheeGuerin", "xirzec"])(
+  it.each(["spec-author", "engineering-contributor", "external-contributor"])(
     "passes protected maintenance-only changes authored by %s",
     async (author) => {
       const { core, run } = setup(author);
@@ -95,6 +98,12 @@ describe("Protected Files", () => {
       expect(core.error).not.toHaveBeenCalled();
       expect(core.setFailed).not.toHaveBeenCalled();
       expect(getChangedFiles).toHaveBeenCalledOnce();
+      expect(result.summary).toContain("CODEOWNERS");
+      expect(result.summary).toContain("package.json");
+      expect(core.warning).toHaveBeenCalledWith(
+        expect.stringContaining("Make source changes in that repository"),
+        { file: "eng/common/script.ps1" },
+      );
     },
   );
 
@@ -103,31 +112,26 @@ describe("Protected Files", () => {
     "SPECIFICATION/widgets/main.tsp",
     "specification/.hidden/config.json",
     "specification",
-  ])("does not exempt a maintainer's mixed PR containing %s", async (file) => {
-    const { core, run } = setup("timotheeguerin");
+  ])("rejects mixed PRs containing %s even for a code-owner author", async (file) => {
+    const { core, context, run } = setup("code-owner");
+    context.payload = {
+      pull_request: {
+        number: 1,
+        user: { login: "code-owner" },
+        author_association: "OWNER",
+      },
+    };
     vi.mocked(getChangedFiles).mockResolvedValue([file, "package.json"]);
     await expect(run()).resolves.toMatchObject({ conclusion: "failure" });
     expect(core.setFailed).toHaveBeenCalledOnce();
   });
 
-  it("passes a maintainer's specification-only PR", async () => {
-    const { run } = setup("timotheeguerin");
-    vi.mocked(getChangedFiles).mockResolvedValue(["specification/widgets/main.tsp"]);
-    await expect(run()).resolves.toMatchObject({ conclusion: "success" });
-  });
-
-  it("does not exempt a non-maintainer when a maintainer reruns their PR", async () => {
+  it("does not allow a mixed PR when a code owner reruns it", async () => {
     const { core, context, run } = setup();
-    context.actor = "timotheeguerin";
-    vi.mocked(getChangedFiles).mockResolvedValue(["eng/tool.ts"]);
+    context.actor = "code-owner";
+    vi.mocked(getChangedFiles).mockResolvedValue(["eng/tool.ts", "specification/widgets/main.tsp"]);
     await run();
     expect(core.setFailed).toHaveBeenCalledOnce();
-  });
-
-  it("does not authorize roster or policy changes proposed by an ordinary author", async () => {
-    const { run } = setup("new-maintainer");
-    vi.mocked(getChangedFiles).mockResolvedValue([".github/workflows/src/protected-files.ts"]);
-    await expect(run()).resolves.toMatchObject({ conclusion: "failure" });
   });
 
   it.each([
@@ -156,9 +160,9 @@ describe("Protected Files", () => {
     ".vscode/.hidden",
     "eng/.hidden/nested/config.json",
     ".github/skills",
-  ])("fails for protected path %s", async (file) => {
+  ])("fails for protected path %s in a specification PR", async (file) => {
     const { core, run } = setup();
-    vi.mocked(getChangedFiles).mockResolvedValue([file]);
+    vi.mocked(getChangedFiles).mockResolvedValue([file, "specification/widgets/main.tsp"]);
     await run();
     expect(core.error).toHaveBeenCalledWith(expect.any(String), { file });
     expect(core.setFailed).toHaveBeenCalledOnce();
@@ -220,7 +224,7 @@ describe("Protected Files", () => {
     "eng/common/.hidden",
   ])("directs synced changes in %s to their source repository", async (file) => {
     const { core, run } = setup();
-    vi.mocked(getChangedFiles).mockResolvedValue([file]);
+    vi.mocked(getChangedFiles).mockResolvedValue([file, "specification/widgets/main.tsp"]);
     await run();
     expect(core.error).toHaveBeenCalledWith(
       `File '${file}' is synced from Azure/azure-sdk-tools. Remove this change from your PR and make the change in Azure/azure-sdk-tools instead.`,
@@ -230,7 +234,10 @@ describe("Protected Files", () => {
 
   it("does not classify similarly named directories as synced", async () => {
     const { core, run } = setup();
-    vi.mocked(getChangedFiles).mockResolvedValue(["eng/common-other/script.ps1"]);
+    vi.mocked(getChangedFiles).mockResolvedValue([
+      "eng/common-other/script.ps1",
+      "specification/widgets/main.tsp",
+    ]);
     await run();
     expect(core.error).toHaveBeenCalledWith(
       expect.stringContaining("outside the scope of a specification contribution"),
@@ -239,19 +246,19 @@ describe("Protected Files", () => {
   });
 
   it.each([
-    { from: ".github/workflows/test.yaml", to: undefined, author: "spec-author" },
+    { from: ".github/workflows/test.yaml", to: undefined, mixed: false },
     {
       from: ".github/workflows/test.yaml",
       to: "specification/widgets/test.yaml",
-      author: "timotheeguerin",
+      mixed: true,
     },
     {
       from: "specification/widgets/test.yaml",
       to: ".github/workflows/test.yaml",
-      author: "timotheeguerin",
+      mixed: true,
     },
-    { from: "specification/widgets/test.yaml", to: undefined, author: "timotheeguerin" },
-  ])("detects protected changes in a real diff: $from -> $to", async ({ from, to, author }) => {
+    { from: "specification/widgets/test.yaml", to: undefined, mixed: true },
+  ])("detects contribution scope in a real diff: $from -> $to", async ({ from, to, mixed }) => {
     const directory = await mkdtemp(join(tmpdir(), "protected-files-"));
     try {
       const git = simpleGit(directory);
@@ -280,16 +287,22 @@ describe("Protected Files", () => {
       vi.mocked(getChangedFiles).mockImplementationOnce((options) =>
         actual.getChangedFiles({ ...options, cwd: directory }),
       );
-      const { core, run } = setup(author);
-      await run();
-      expect(core.error).toHaveBeenCalledWith(expect.any(String), {
-        file: "package.json",
-      });
+      const { core, run } = setup();
+      const result = await run();
       const protectedPath = [from, to].find((file) => file?.startsWith(".github/"));
-      if (protectedPath) {
-        expect(core.error).toHaveBeenCalledWith(expect.any(String), { file: protectedPath });
+      if (mixed) {
+        expect(result.conclusion).toBe("failure");
+        expect(core.error).toHaveBeenCalledWith(expect.any(String), { file: "package.json" });
+        if (protectedPath) {
+          expect(core.error).toHaveBeenCalledWith(expect.any(String), { file: protectedPath });
+        }
+        expect(core.setFailed).toHaveBeenCalledOnce();
+      } else {
+        expect(result.conclusion).toBe("success");
+        expect(result.summary).toContain(from);
+        expect(core.error).not.toHaveBeenCalled();
+        expect(core.setFailed).not.toHaveBeenCalled();
       }
-      expect(core.setFailed).toHaveBeenCalledOnce();
     } finally {
       await rm(directory, { recursive: true, force: true });
     }
@@ -401,12 +414,12 @@ describe("Protected Files trusted diff", () => {
           actual.getChangedFiles({ ...diff, cwd: checkout, gitOptions: ["--no-renames"] }),
         ).resolves.toEqual(["package.json", "specification/widgets/spec.json"]);
 
-        const { context, core } = setup("timotheeguerin");
+        const { context, core } = setup();
         const github = createMockGithub();
         const pr = {
           number: 1,
           state: "open",
-          user: { login: "timotheeguerin" },
+          user: { login: "spec-author" },
           head: { sha: headSha },
           base: { sha: baseSha },
         };
@@ -449,7 +462,7 @@ describe("Protected Files read-only evaluation", () => {
     vi.mocked(getChangedFiles).mockResolvedValue([]);
   });
 
-  function setupEvaluation(author = "timotheeguerin") {
+  function setupEvaluation(author = "spec-author") {
     const { core, context } = setup(author);
     const github = createMockGithub();
     const denied = () => Promise.reject(new Error("Read-only token cannot write checks"));
@@ -473,7 +486,7 @@ describe("Protected Files read-only evaluation", () => {
     };
   }
 
-  it("allows a maintainer's maintenance-only PR with a read-only API client", async () => {
+  it("leaves maintenance-only PR approval to CODEOWNERS with a read-only API client", async () => {
     const { core, run } = setupEvaluation();
     mockMerge();
     vi.mocked(getChangedFiles).mockResolvedValue(["package.json"]);
@@ -514,9 +527,12 @@ describe("Protected Files read-only evaluation", () => {
 
   it("uses the current PR author instead of the webhook author or triggering actor", async () => {
     const { context, core, pr, run } = setupEvaluation("spec-author");
-    context.payload = { pull_request: { ...pr, user: { login: "timotheeguerin" } } };
+    context.payload = { pull_request: { ...pr, user: { login: "azure-sdk" } } };
     mockMerge();
-    vi.mocked(getChangedFiles).mockResolvedValue(["package.json"]);
+    vi.mocked(getChangedFiles).mockResolvedValue([
+      "package.json",
+      "specification/widgets/main.tsp",
+    ]);
     await expect(run()).resolves.toMatchObject({ conclusion: "failure" });
     expect(core.setFailed).toHaveBeenCalledOnce();
   });

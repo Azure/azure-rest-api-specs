@@ -10,19 +10,19 @@ The **Protected Files** check keeps repository-managed files out of specificatio
 contributions. It is a contribution-scope check, not a request for code-owner approval.
 Contributor guidance is in the [CI Fix Guide](../documentation/ci-fix.md#protected-files).
 
-Maintenance-only PRs authored by a rostered repository maintainer pass this check
-without a merge bypass. A PR is maintenance-only when it does not change
-`specification/`, including deletions or either side of a rename. Mixed
-specification and protected-file changes still fail, including in maintainer PRs.
-All other required checks and review requirements remain in effect.
+Maintenance-only PRs pass this check without a merge bypass. A PR is
+maintenance-only when it does not change `specification/`, including deletions or
+either side of a rename. Mixed
+specification and protected-file changes still fail, regardless of the author's
+ownership or reviews.
 
-The maintainer author roster in `.github/workflows/src/protected-files.ts` mirrors
-[`Azure/azure-rest-api-specs-maintainers`](https://github.com/orgs/Azure/teams/azure-rest-api-specs-maintainers).
-Update it when team membership changes; the read-only `pull_request` check runs
-policy from the PR's base commit, not changes proposed in the PR. Applying a label
-or rerunning someone else's PR does not grant an exemption. Changes authored by
-the trusted `azure-sdk` and `azure-sdk-automation[bot]` accounts continue to pass
-automatically.
+GitHub's existing CODEOWNERS review requirements determine who approves
+maintenance changes; Protected Files does not maintain an author roster or
+resolve team membership. Any contributor can propose a maintenance-only PR, but
+all applicable code-owner reviews and other merge requirements still apply.
+The read-only `pull_request` check runs policy from the PR's base commit, not
+changes proposed in the PR. The existing trusted `azure-sdk` and
+`azure-sdk-automation[bot]` author exemptions remain unchanged.
 
 ## Contributor readiness
 
