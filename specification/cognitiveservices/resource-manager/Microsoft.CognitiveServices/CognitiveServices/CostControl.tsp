@@ -100,7 +100,7 @@ model CostControlConnections {
   appInsightsConnectionId?:
     | Azure.Core.armResourceIdentifier<[
         {
-          type: "Microsoft.MachineLearningServices/workspaces/connections";
+          type: "Microsoft.CognitiveServices/accounts/connections";
         }
       ]>
     | null;
@@ -112,7 +112,7 @@ model CostControlConnections {
   eventGridConnectionId?:
     | Azure.Core.armResourceIdentifier<[
         {
-          type: "Microsoft.MachineLearningServices/workspaces/connections";
+          type: "Microsoft.CognitiveServices/accounts/connections";
         }
       ]>
     | null;
