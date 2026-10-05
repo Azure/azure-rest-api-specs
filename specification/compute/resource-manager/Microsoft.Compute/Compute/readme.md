@@ -382,7 +382,7 @@ suppressions:
   - code: ProvisioningStateSpecifiedForLROPatch
     reason: The existing VM gallery application response contract does not include provisioningState.
     from: ComputeRP.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}"].patch
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}"].patch.responses["200"]
   - code: GetCollectionResponseSchema
     reason: VirtualMachineRunCommands list returns a different schema than individual get by design.
     from: ComputeRP.json
