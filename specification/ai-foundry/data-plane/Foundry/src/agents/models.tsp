@@ -625,17 +625,11 @@ model HeaderIsolationKeySource {
   kind: "Header";
 }
 
-@doc("An isolation key source kind not recognized by this API version.")
-model UnknownIsolationKeySource {
-  kind: string;
-}
-
 @doc("The supported isolation key sources for Azure RBAC authorization.")
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
 union AzureRbacIsolationKeySource {
   Entra: EntraIsolationKeySource,
   Header: HeaderIsolationKeySource,
-  UnknownIsolationKeySource,
 }
 
 @doc("""
@@ -658,7 +652,6 @@ model AgentBlueprintHeaderIsolationKeySource {
 union AgentBlueprintIsolationKeySource {
   Entra: EntraIsolationKeySource,
   Header: AgentBlueprintHeaderIsolationKeySource,
-  UnknownIsolationKeySource,
 }
 
 @doc("""

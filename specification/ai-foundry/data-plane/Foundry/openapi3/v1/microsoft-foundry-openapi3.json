@@ -26552,9 +26552,6 @@
           },
           {
             "$ref": "#/components/schemas/AgentBlueprintHeaderIsolationKeySource"
-          },
-          {
-            "$ref": "#/components/schemas/UnknownIsolationKeySource"
           }
         ],
         "discriminator": {
@@ -26562,8 +26559,7 @@
           "mapping": {
             "Entra": "#/components/schemas/EntraIsolationKeySource",
             "Header": "#/components/schemas/AgentBlueprintHeaderIsolationKeySource"
-          },
-          "defaultMapping": "#/components/schemas/UnknownIsolationKeySource"
+          }
         },
         "description": "The supported isolation key sources for Agent Blueprint authorization."
       },
@@ -28770,9 +28766,6 @@
           },
           {
             "$ref": "#/components/schemas/HeaderIsolationKeySource"
-          },
-          {
-            "$ref": "#/components/schemas/UnknownIsolationKeySource"
           }
         ],
         "discriminator": {
@@ -28780,8 +28773,7 @@
           "mapping": {
             "Entra": "#/components/schemas/EntraIsolationKeySource",
             "Header": "#/components/schemas/HeaderIsolationKeySource"
-          },
-          "defaultMapping": "#/components/schemas/UnknownIsolationKeySource"
+          }
         },
         "description": "The supported isolation key sources for Azure RBAC authorization."
       },
@@ -76394,18 +76386,6 @@
             "Schedules=V1Preview"
           ]
         }
-      },
-      "UnknownIsolationKeySource": {
-        "type": "object",
-        "required": [
-          "kind"
-        ],
-        "properties": {
-          "kind": {
-            "type": "string"
-          }
-        },
-        "description": "An isolation key source kind not recognized by this API version."
       },
       "UpdateAgentFromManifestRequest": {
         "type": "object",
