@@ -21,11 +21,7 @@ namespace Microsoft.Monitor {
     /**
      * Creates or replaces the trace container for an Azure Monitor Workspace.
      */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The deployed trace container PUT contract returns 200 for both create and update."
-    createOrUpdate is ArmResourceCreateOrReplaceSync<
-      TraceContainerResource,
-      Response = ArmResourceUpdatedResponse<TraceContainerResource>
-    >;
+    createOrUpdate is ArmResourceCreateOrReplaceSync<TraceContainerResource>;
 
     /**
      * Lists trace containers for an Azure Monitor Workspace.

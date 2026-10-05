@@ -31,7 +31,7 @@ namespace Microsoft.Monitor {
   /**
    * Properties of a trace container.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The existing synchronous trace container service contract does not expose provisioningState."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This resource is provisioned synchronously via a single create-or-replace call with no long-running operation, so it does not expose a provisioningState property."
   @added(Versions.v2026_09_03_preview)
   model TraceContainer {
     /**

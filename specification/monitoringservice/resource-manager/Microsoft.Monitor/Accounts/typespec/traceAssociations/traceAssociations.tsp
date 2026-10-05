@@ -23,22 +23,12 @@ namespace Microsoft.Monitor {
     /**
      * Creates or replaces the trace association at the scope.
      */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The deployed trace association PUT contract returns 200 for both create and update."
-    createOrUpdate is Extension.CreateOrReplaceSync<
-      Scope,
-      TraceAssociationResource,
-      Response = ArmResourceUpdatedResponse<TraceAssociationResource>
-    >;
+    createOrUpdate is Extension.CreateOrReplaceSync<Scope, TraceAssociationResource>;
 
     /**
      * Deletes the trace association at the scope.
      */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The deployed trace association DELETE contract returns 204 when deletion succeeds."
-    delete is Extension.DeleteSync<
-      Scope,
-      TraceAssociationResource,
-      Response = ArmDeletedNoContentResponse
-    >;
+    delete is Extension.DeleteSync<Scope, TraceAssociationResource>;
 
     /**
      * Lists the trace associations that apply to the scope.
@@ -123,20 +113,12 @@ namespace Microsoft.Monitor {
     /**
      * Creates or replaces the trace association at the resource scope.
      */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The deployed trace association PUT contract returns 200 for both create and update."
-    createOrUpdate is TraceAssociationResourceOperations.CreateOrUpdateSync<
-      TraceAssociationResource,
-      Response = ArmResourceUpdatedResponse<TraceAssociationResource>
-    >;
+    createOrUpdate is TraceAssociationResourceOperations.CreateOrUpdateSync<TraceAssociationResource>;
 
     /**
      * Deletes the trace association at the resource scope.
      */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The deployed trace association DELETE contract returns 204 when deletion succeeds."
-    delete is TraceAssociationResourceOperations.DeleteSync<
-      TraceAssociationResource,
-      Response = ArmDeletedNoContentResponse
-    >;
+    delete is TraceAssociationResourceOperations.DeleteSync<TraceAssociationResource>;
 
     /**
      * Lists the trace associations that apply to the resource scope.
