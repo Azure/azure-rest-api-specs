@@ -40,6 +40,9 @@
   },
   "tags": [
     {
+      "name": "Operations"
+    },
+    {
       "name": "Agents"
     },
     {
@@ -50,6 +53,42 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.App/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.App/agents": {
       "get": {
         "operationId": "Agents_ListBySubscription",
@@ -725,7 +764,7 @@
         "tags": [
           "AgentsConnectors"
         ],
-        "description": "Get a Data Connector with secrets from an Agent",
+        "description": "Get a Data Connector with secrets from an Agent.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -757,7 +796,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AgentConnector"
+              "$ref": "#/definitions/AgentConnectorWithSecrets"
             }
           },
           "default": {
@@ -780,7 +819,7 @@
         "tags": [
           "AgentsConnectors"
         ],
-        "description": "List all Data Connectors with secrets from an Agent",
+        "description": "List all Data Connectors with secrets from an Agent.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -804,7 +843,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AgentConnectorCollection"
+              "$ref": "#/definitions/AgentConnectorWithSecretsCollection"
             }
           },
           "default": {
@@ -1084,7 +1123,11 @@
         "dataSource": {
           "type": "string",
           "format": "password",
-          "description": "Data source connection string or endpoint",
+          "description": "Data source connection string or endpoint supplied when creating or updating a connector.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "identity": {
@@ -1112,6 +1155,83 @@
           "description": "The type of the data connector"
         }
       }
+    },
+    "AgentConnectorPropertiesWithSecrets": {
+      "type": "object",
+      "description": "Agent Connector properties returned by secret-listing actions.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "Endpoint of the connector"
+        },
+        "identity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Identity used to access the data source"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ConnectorProvisioningState",
+          "description": "Provisioning state of the connector",
+          "readOnly": true
+        },
+        "deploymentError": {
+          "type": "string",
+          "description": "Deployment error message if provisioning failed",
+          "readOnly": true
+        },
+        "extendedProperties": {
+          "type": "object",
+          "description": "Additional properties for the data connector which can be used to store custom key-value pairs",
+          "additionalProperties": {}
+        },
+        "dataSource": {
+          "type": "string",
+          "format": "password",
+          "description": "Data source connection string or endpoint.",
+          "x-ms-secret": true
+        },
+        "dataConnectorType": {
+          "type": "string",
+          "description": "The type of the data connector."
+        }
+      }
+    },
+    "AgentConnectorWithSecrets": {
+      "type": "object",
+      "description": "Agent Connector returned by secret-listing actions.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentConnectorPropertiesWithSecrets",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AgentConnectorWithSecretsCollection": {
+      "type": "object",
+      "description": "Collection of Agent Connectors returned by secret-listing actions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AgentConnectorWithSecrets items on this page",
+          "items": {
+            "$ref": "#/definitions/AgentConnectorWithSecrets"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "AgentIdentity": {
       "type": "object",
@@ -1413,7 +1533,11 @@
         "connectionString": {
           "type": "string",
           "format": "password",
-          "description": "The connection string for the Application Insights resource",
+          "description": "The connection string supplied when creating or updating the Application Insights configuration.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         }
       }
@@ -1430,7 +1554,11 @@
         "dataSource": {
           "type": "string",
           "format": "password",
-          "description": "Data source connection string or endpoint",
+          "description": "Data source connection string or endpoint supplied when creating or updating a connector.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "identity": {
@@ -1531,7 +1659,11 @@
         "connectionKey": {
           "type": "string",
           "format": "password",
-          "description": "The key for the connection",
+          "description": "The key supplied when creating or updating the connection.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "oboUser": {
