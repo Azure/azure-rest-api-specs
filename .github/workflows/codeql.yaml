@@ -75,8 +75,9 @@ jobs:
         # your codebase is analyzed, see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/codeql-code-scanning-for-compiled-languages
     steps:
       - name: Checkout repository
-        uses: $/.github/actions/checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: ${{ matrix.sparse-checkout }}
 
       # Add any setup steps before running the `github/codeql-action/init` action.
