@@ -88,7 +88,6 @@ function createMockCoreImpl() {
     isDebug: vi.fn().mockReturnValue(true),
     setOutput: vi.fn((name, value) => console.log(`setOutput('${name}', '${value}')`)),
     setFailed: vi.fn((msg) => console.log(`setFailed('${msg}')`)),
-    setSecret: vi.fn(),
     summary,
   };
 }

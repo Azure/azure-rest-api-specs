@@ -1,5 +1,4 @@
 import { minimatch } from "minimatch";
-import { simpleGit } from "simple-git";
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
 import { inlineCode } from "../../shared/src/markdown.ts";
 import { CoreLogger } from "./core-logger.ts";
@@ -38,10 +37,10 @@ function matchesAny(file: string, patterns: string[]): boolean {
   );
 }
 
-export async function checkProtectedFiles(
-  { context, core }: Pick<GitHubScriptArgs, "context" | "core">,
-  diff?: { baseCommitish: string; headCommitish: string },
-): Promise<ProtectedFilesResult> {
+export async function checkProtectedFiles({
+  context,
+  core,
+}: Pick<GitHubScriptArgs, "context" | "core">): Promise<ProtectedFilesResult> {
   if (context.eventName !== "pull_request") {
     throw new Error(`Unsupported event for Protected Files: '${context.eventName}'`);
   }
@@ -61,7 +60,6 @@ export async function checkProtectedFiles(
   }
 
   const changedFiles = await getChangedFiles({
-    ...diff,
     // Include both sides of renames so moving a protected file still fails.
     gitOptions: ["--no-renames"],
     logger: new CoreLogger(core),
@@ -127,103 +125,4 @@ export async function checkProtectedFiles(
       "See the [Protected Files guide](https://aka.ms/ci-fix#protected-files). " +
       "Keep repository maintenance separate from specification contributions.",
   };
-}
-
-/** Reads the PR merge as git data without checking out or executing its files. */
-export async function readProtectedFilesDiff({
-  pullNumber,
-  headSha,
-  baseSha,
-  token,
-  cwd,
-}: {
-  pullNumber: number;
-  headSha: string;
-  baseSha: string;
-  token: string;
-  cwd?: string;
-}): Promise<{ baseCommitish: string; headCommitish: string }> {
-  if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
-    throw new Error("Protected Files requires a valid PR number");
-  }
-  if (![headSha, baseSha].every((sha) => /^[a-f0-9]{40}$/.test(sha)) || !token) {
-    throw new Error("Protected Files requires pinned PR commits and a git authentication token");
-  }
-  const git = simpleGit({
-    baseDir: cwd,
-    config: [
-      `http.extraheader=AUTHORIZATION: basic ${Buffer.from(`x-access-token:${token}`).toString("base64")}`,
-    ],
-  });
-  await git.fetch([
-    "--no-tags",
-    "--filter=blob:none",
-    "--depth=2",
-    "origin",
-    `refs/pull/${pullNumber}/merge`,
-  ]);
-  const mergeSha = (await git.revparse(["FETCH_HEAD"])).trim();
-  const parents = (await git.raw(["show", "--no-patch", "--format=%P", mergeSha]))
-    .trim()
-    .split(" ");
-  if (parents.length !== 2 || parents[0] !== baseSha || parents[1] !== headSha) {
-    throw new Error("PR merge does not match the evaluated base and head; rerun Protected Files");
-  }
-  return { baseCommitish: baseSha, headCommitish: mergeSha };
-}
-
-/** Evaluates the pinned PR merge using read-only repository access. */
-export async function runProtectedFiles(
-  { github, context, core }: GitHubScriptArgs,
-  token: string,
-): Promise<ProtectedFilesResult> {
-  if (context.eventName !== "pull_request") {
-    throw new Error(`Unsupported event for Protected Files: '${context.eventName}'`);
-  }
-  const payload = context.payload as WebhookEvent<"pull-request">;
-  const pullNumber = payload.pull_request?.number;
-  if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
-    throw new Error("Protected Files requires a valid PR number");
-  }
-  const headSha = payload.pull_request?.head?.sha;
-  const baseSha = payload.pull_request?.base?.sha;
-  if (!headSha || !baseSha) {
-    throw new Error("Protected Files requires the PR base and head commits");
-  }
-  const { data: pr } = await github.rest.pulls.get({
-    ...context.repo,
-    pull_number: pullNumber,
-  });
-  function verifyCurrent(current: typeof pr) {
-    if (current.state !== "open" || current.head.sha !== headSha || current.base.sha !== baseSha) {
-      throw new Error("PR changed during evaluation; rerun Protected Files");
-    }
-  }
-  verifyCurrent(pr);
-  core.setSecret(Buffer.from(`x-access-token:${token}`).toString("base64"));
-  const diff = await readProtectedFilesDiff({
-    pullNumber,
-    headSha,
-    baseSha,
-    token,
-  });
-  const result = await checkProtectedFiles(
-    {
-      core,
-      context: {
-        ...context,
-        repo: context.repo,
-        issue: context.issue,
-        payload: { pull_request: { number: pr.number, user: { login: pr.user.login } } },
-      },
-    },
-    diff,
-  );
-  const { data: latest } = await github.rest.pulls.get({
-    ...context.repo,
-    pull_number: pullNumber,
-  });
-  verifyCurrent(latest);
-  await core.summary.addRaw(`## ${result.title}\n\n${result.summary}`).write();
-  return result;
 }

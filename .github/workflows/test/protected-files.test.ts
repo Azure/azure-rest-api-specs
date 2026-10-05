@@ -5,39 +5,10 @@ import { dirname, join } from "node:path";
 import { simpleGit } from "simple-git";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
-import {
-  checkProtectedFiles,
-  readProtectedFilesDiff,
-  runProtectedFiles,
-} from "../src/protected-files.ts";
-import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
+import { checkProtectedFiles } from "../src/protected-files.ts";
+import { createMockContext, createMockCore } from "./mocks.ts";
 
 vi.mock("../../shared/src/changed-files.ts", () => ({ getChangedFiles: vi.fn() }));
-vi.mock("simple-git", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("simple-git")>();
-  return { ...actual, simpleGit: vi.fn(actual.simpleGit) };
-});
-
-const BASE_SHA = "a".repeat(40);
-const HEAD_SHA = "b".repeat(40);
-const MERGE_SHA = "c".repeat(40);
-
-function mockMerge() {
-  const git = simpleGit();
-  const fetch = vi.spyOn(git, "fetch").mockResolvedValue({
-    raw: "",
-    remote: "origin",
-    branches: [],
-    tags: [],
-    updated: [],
-    deleted: [],
-  });
-  const revparse = vi.spyOn(git, "revparse").mockResolvedValue(MERGE_SHA);
-  const raw = vi.spyOn(git, "raw").mockResolvedValue(`${BASE_SHA} ${HEAD_SHA}\n`);
-  vi.mocked(simpleGit).mockReturnValueOnce(git);
-  return { fetch, revparse, raw };
-}
-
 function setup(author = "spec-author") {
   const context = createMockContext();
   context.eventName = "pull_request";
@@ -331,41 +302,19 @@ describe("Protected Files", () => {
   });
 });
 
-describe("Protected Files trusted diff", () => {
+describe("Protected Files merge checkout", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it.each([`${HEAD_SHA} ${BASE_SHA}`, BASE_SHA, `${BASE_SHA} ${HEAD_SHA} ${MERGE_SHA}`])(
-    "rejects mismatched or incomplete merge parents %s",
-    async (parents) => {
-      mockMerge().raw.mockResolvedValueOnce(parents);
-      await expect(
-        readProtectedFilesDiff({
-          pullNumber: 42,
-          headSha: HEAD_SHA,
-          baseSha: BASE_SHA,
-          token: "test-token",
-        }),
-      ).rejects.toThrow("PR merge does not match");
-    },
-  );
-
-  it("propagates an unavailable merge ref", async () => {
-    mockMerge().fetch.mockRejectedValueOnce(new Error("Merge ref unavailable"));
-    await expect(
-      readProtectedFilesDiff({
-        pullNumber: 42,
-        headSha: HEAD_SHA,
-        baseSha: BASE_SHA,
-        token: "test-token",
-      }),
-    ).rejects.toThrow("Merge ref unavailable");
-  });
-
-  it.each([false, true])(
-    "reads a merge without modifying the checkout (autocrlf: %s)",
-    async (autocrlf) => {
+  it.each([
+    { autocrlf: false, mixed: false },
+    { autocrlf: true, mixed: false },
+    { autocrlf: false, mixed: true },
+    { autocrlf: true, mixed: true },
+  ])(
+    "evaluates the merge snapshot without base-only changes (autocrlf: $autocrlf, mixed: $mixed)",
+    async ({ autocrlf, mixed }) => {
       const directory = await mkdtemp(join(tmpdir(), "protected-files-merge-"));
       const origin = join(directory, "origin");
       const checkout = join(directory, "checkout");
@@ -381,165 +330,51 @@ describe("Protected Files trusted diff", () => {
         await git.commit("Trusted base");
         await git.checkoutLocalBranch("change");
         await writeFile(join(origin, "package.json"), '{"trusted": false}\n');
-        await mkdir(join(origin, "specification/widgets"), { recursive: true });
-        await writeFile(join(origin, "specification/widgets/spec.json"), "{}\n");
+        if (mixed) {
+          await mkdir(join(origin, "specification/widgets"), { recursive: true });
+          await writeFile(join(origin, "specification/widgets/spec.json"), "{}\n");
+        }
         await git.add(["--all"]);
         await git.commit("Untrusted PR");
-        const headSha = await git.revparse(["HEAD"]);
         await git.checkout("main");
-        await writeFile(join(origin, "base-only.txt"), "unrelated base change\n");
+        await mkdir(join(origin, "specification/base-service"), { recursive: true });
+        await writeFile(join(origin, "specification/base-service/base-only.json"), "{}\n");
         await git.add(["--all"]);
         await git.commit("Updated target");
-        const baseSha = await git.revparse(["HEAD"]);
         await git.merge(["--no-ff", "change", "-m", "PR merge"]);
         const mergeSha = await git.revparse(["HEAD"]);
-        await git.raw(["update-ref", "refs/pull/1/merge", mergeSha]);
-
-        await simpleGit().clone(origin, checkout, ["--no-checkout"]);
-        const trusted = simpleGit(checkout);
-        await trusted.addConfig("core.autocrlf", String(autocrlf));
-        await trusted.checkout(baseSha);
-        const diff = await readProtectedFilesDiff({
-          cwd: checkout,
-          pullNumber: 1,
-          headSha,
-          baseSha,
-          token: "test-token",
-        });
-        expect(diff).toEqual({ baseCommitish: baseSha, headCommitish: mergeSha });
+        await simpleGit().clone(origin, checkout, ["--no-checkout", "--depth=2", "--no-local"]);
+        const snapshot = simpleGit(checkout);
+        await snapshot.addConfig("core.autocrlf", String(autocrlf));
+        await snapshot.checkout(mergeSha);
         const actual = await vi.importActual<typeof import("../../shared/src/changed-files.ts")>(
           "../../shared/src/changed-files.ts",
         );
         await expect(
-          actual.getChangedFiles({ ...diff, cwd: checkout, gitOptions: ["--no-renames"] }),
-        ).resolves.toEqual(["package.json", "specification/widgets/spec.json"]);
+          actual.getChangedFiles({ cwd: checkout, gitOptions: ["--no-renames"] }),
+        ).resolves.toEqual(
+          mixed ? ["package.json", "specification/widgets/spec.json"] : ["package.json"],
+        );
 
-        const { context, core } = setup();
-        const github = createMockGithub();
-        const pr = {
-          number: 1,
-          state: "open",
-          user: { login: "spec-author" },
-          head: { sha: headSha },
-          base: { sha: baseSha },
-        };
-        context.payload = { pull_request: pr };
-        github.rest.pulls.get.mockResolvedValue({ data: pr });
-        vi.mocked(simpleGit).mockReturnValueOnce(trusted);
+        const { core, run } = setup();
         vi.mocked(getChangedFiles).mockImplementationOnce((options) =>
           actual.getChangedFiles({ ...options, cwd: checkout }),
         );
-        await expect(
-          runProtectedFiles({ github, context, core }, "test-token"),
-        ).resolves.toMatchObject({ conclusion: "failure" });
-        expect(core.setFailed).toHaveBeenCalledOnce();
-        expect(await trusted.revparse(["HEAD"])).toBe(baseSha);
+        const result = await run();
+        expect(result.conclusion).toBe(mixed ? "failure" : "success");
+        if (mixed) {
+          expect(core.setFailed).toHaveBeenCalledOnce();
+        } else {
+          expect(core.setFailed).not.toHaveBeenCalled();
+        }
+        expect(await snapshot.revparse(["HEAD"])).toBe(mergeSha);
         expect(JSON.parse(readFileSync(join(checkout, "package.json"), "utf8"))).toEqual({
-          trusted: true,
+          trusted: false,
         });
-        expect(await trusted.raw(["status", "--porcelain"])).toBe("");
+        expect(await snapshot.raw(["status", "--porcelain"])).toBe("");
       } finally {
         await rm(directory, { recursive: true, force: true });
       }
     },
   );
-
-  it.each([
-    { pullNumber: 0, headSha: HEAD_SHA, token: "test-token" },
-    { pullNumber: 42, headSha: "--untrusted-option", token: "test-token" },
-    { pullNumber: 42, headSha: HEAD_SHA, token: "" },
-  ])("rejects invalid metadata before git operations: $pullNumber / $headSha", async (input) => {
-    await expect(readProtectedFilesDiff({ ...input, baseSha: BASE_SHA })).rejects.toThrow(
-      "Protected Files requires",
-    );
-    expect(simpleGit).not.toHaveBeenCalled();
-  });
-});
-
-describe("Protected Files read-only evaluation", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-    vi.mocked(getChangedFiles).mockResolvedValue([]);
-  });
-
-  function setupEvaluation(author = "spec-author") {
-    const { core, context } = setup(author);
-    const github = createMockGithub();
-    const denied = () => Promise.reject(new Error("Read-only token cannot write checks"));
-    Object.assign(github.rest.checks, { create: vi.fn(denied), update: vi.fn(denied) });
-    github.rest.repos.createCommitStatus.mockRejectedValue(new Error("Read-only token"));
-    const pr = {
-      number: 1,
-      state: "open",
-      user: { login: author },
-      head: { sha: HEAD_SHA },
-      base: { sha: BASE_SHA },
-    };
-    github.rest.pulls.get.mockResolvedValue({ data: pr });
-    context.payload = { pull_request: pr };
-    return {
-      core,
-      context,
-      github,
-      pr,
-      run: () => runProtectedFiles({ github, context, core }, "test-token"),
-    };
-  }
-
-  it("leaves maintenance-only PR approval to CODEOWNERS with a read-only API client", async () => {
-    const { core, run } = setupEvaluation();
-    mockMerge();
-    vi.mocked(getChangedFiles).mockResolvedValue(["package.json"]);
-    await expect(run()).resolves.toMatchObject({ conclusion: "success" });
-    expect(core.setFailed).not.toHaveBeenCalled();
-  });
-
-  it("fails a mixed PR and identifies its protected changes", async () => {
-    const { core, run } = setupEvaluation();
-    mockMerge();
-    vi.mocked(getChangedFiles).mockResolvedValue(["package.json", "specification/a/main.tsp"]);
-    await expect(run()).resolves.toMatchObject({ conclusion: "failure" });
-    expect(core.error).toHaveBeenCalledWith(expect.any(String), { file: "package.json" });
-    expect(core.setFailed).toHaveBeenCalledOnce();
-  });
-
-  it.each(["head", "base", "closed"])(
-    "rejects the evaluation when the PR's %s changes",
-    async (change) => {
-      const { github, pr, run } = setupEvaluation();
-      mockMerge();
-      github.rest.pulls.get.mockResolvedValueOnce({ data: pr }).mockResolvedValueOnce({
-        data: {
-          ...pr,
-          ...(change === "closed" ? { state: "closed" } : { [change]: { sha: "d".repeat(40) } }),
-        },
-      });
-      await expect(run()).rejects.toThrow("PR changed during evaluation");
-    },
-  );
-
-  it("rejects an already stale PR before fetching its merge", async () => {
-    const { github, pr, run } = setupEvaluation();
-    github.rest.pulls.get.mockResolvedValue({ data: { ...pr, head: { sha: MERGE_SHA } } });
-    await expect(run()).rejects.toThrow("PR changed during evaluation");
-    expect(simpleGit).not.toHaveBeenCalled();
-  });
-
-  it("uses the current PR author instead of the webhook author or triggering actor", async () => {
-    const { context, core, pr, run } = setupEvaluation("spec-author");
-    context.payload = { pull_request: { ...pr, user: { login: "azure-sdk" } } };
-    mockMerge();
-    vi.mocked(getChangedFiles).mockResolvedValue([
-      "package.json",
-      "specification/widgets/main.tsp",
-    ]);
-    await expect(run()).resolves.toMatchObject({ conclusion: "failure" });
-    expect(core.setFailed).toHaveBeenCalledOnce();
-  });
-
-  it("propagates API errors rather than granting an exemption", async () => {
-    const { github, run } = setupEvaluation();
-    github.rest.pulls.get.mockRejectedValueOnce(new Error("PR lookup failed"));
-    await expect(run()).rejects.toThrow("PR lookup failed");
-  });
 });

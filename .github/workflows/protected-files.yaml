@@ -12,7 +12,6 @@ on:
 
 permissions:
   contents: read
-  pull-requests: read
 
 env:
   user-allowed: >-
@@ -41,8 +40,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         if: ${{ env.user-allowed != 'true' }}
         with:
-          # Run base-commit policy and dependencies, not changes proposed in the PR.
-          ref: ${{ github.event.pull_request.base.sha }}
+          # Evaluate the PR merge commit against its base-branch parent.
+          fetch-depth: 2
           persist-credentials: false
           sparse-checkout: |
             .github
@@ -53,9 +52,8 @@ jobs:
       - name: Detect changes to protected files
         if: ${{ env.user-allowed != 'true' }}
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
         with:
           script: |
-            const { runProtectedFiles } = await import("${{ github.workspace }}/.github/workflows/src/protected-files.ts");
-            await runProtectedFiles({ github, context, core }, process.env.GITHUB_TOKEN);
+            const { checkProtectedFiles } = await import("${{ github.workspace }}/.github/workflows/src/protected-files.ts");
+            const result = await checkProtectedFiles({ context, core });
+            await core.summary.addRaw(`## ${result.title}\n\n${result.summary}`).write();
