@@ -41,14 +41,10 @@ extends:
               - script: pnpm --filter @azure-tools/typespec-foundry-core test:ci
                 displayName: Test Foundry Core
               - ${{ if and(in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI'), eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs')) }}:
-                  - script: node ./eng/scripts/library-release.ts --prepare ./libs/foundry-core
+                  - script: node ./eng/scripts/library-release.ts ./libs/foundry-core
                     displayName: Prepare automatic prerelease version
               - script: pnpm --config.verifyDepsBeforeRun=false --filter @azure-tools/typespec-foundry-core pack --pack-destination "$(Build.ArtifactStagingDirectory)/packages"
                 displayName: Pack Foundry Core
-              - ${{ if and(or(parameters.Publish, in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI')), eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs')) }}:
-                  - script: node ./eng/scripts/library-release.ts --check "$(Build.ArtifactStagingDirectory)/packages"
-                    name: checkRelease
-                    displayName: Check npm for the packed version
             templateContext:
               outputs:
                 - output: pipelineArtifact
@@ -60,7 +56,7 @@ extends:
           - stage: Publish
             displayName: Publish libraries to npm
             dependsOn: Build
-            condition: and(succeeded(), eq(dependencies.Build.outputs['Build.checkRelease.ShouldPublish'], 'true'))
+            condition: succeeded()
             jobs:
               - template: /eng/common/pipelines/templates/jobs/npm-publish.yml
                 parameters:

@@ -375,15 +375,13 @@ manifest. Foundry Core's `prepack` script compiles its runtime to JavaScript, an
 No Chronus or scheduled nightly releases are configured.
 
 Internal `main` CI runs automatically publish development versions to the
-`latest` npm tag. The version is `<major>.<minor>.<patch>-dev.<commit-time>.g<short-sha>`,
-using the last commit that changed the library folder. Every folder change,
+`latest` npm tag. The version is `<major>.<minor>.<patch>-dev.<change-count>`,
+counting first-parent Git commits that changed the library folder. Every folder change,
 including documentation or tests, produces a new version. Version changes happen
 only in the build workspace, not in Git.
 
-Before publishing, the build checks the packed version through the authenticated
-Azure SDK npm mirror. Already-published versions skip the publishing stage and its
-approval, so rerunning a commit does not republish it. Registry errors fail the
-pipeline instead of being treated as an unpublished version.
+Reruns and unrelated commits keep the same version. The build does not query npm
+for publication status; repeat publishing is handled by the existing publishing job.
 
 Before the first release, an Azure SDK pipeline administrator must register this
 YAML as a pipeline in the **internal** Azure DevOps project, authorize its 1ES
@@ -403,7 +401,7 @@ For an explicit release of the version in `package.json`:
 
 Manual runs with `Publish` **false** only build the artifact. With `Publish`
 **true**, the shared publishing job uses `beta` for prerelease manifest versions
-and `latest` for stable versions. These runs also skip already-published versions.
+and `latest` for stable versions.
 Automatic development releases intentionally use `latest`, so default installs
 receive development builds; consumers requiring a fixed release should pin its
 version.
