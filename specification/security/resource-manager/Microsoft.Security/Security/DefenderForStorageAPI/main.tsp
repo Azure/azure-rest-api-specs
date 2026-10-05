@@ -24,12 +24,11 @@ using TypeSpec.Versioning;
 /**
  * API spec for Microsoft.Security (Azure Security Center) resource provider
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The GET /providers/Microsoft.Security/operations endpoint is defined in the shared Security spec; it is not duplicated per sub-namespace."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "'API' in DefenderForStorageAPI is a TypeSpec namespace name used for code organization only; the ARM provider namespace on the wire is correctly set to Microsoft.Security."
 @armProviderNamespace("Microsoft.Security")
 @service(#{ title: "Security Center" })
 @versioned(Versions)
-// FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace DefenderForStorageAPI;
 
@@ -38,13 +37,8 @@ namespace DefenderForStorageAPI;
  */
 enum Versions {
   /**
-   * The 2025-09-01-preview API version.
-   */
-  v2025_09_01_preview: "2025-09-01-preview",
-
-  /**
-   * The 2026-01-01-preview API version.
+   * The 2026-06-01-preview API version.
    */
   @previewVersion
-  v2026_01_01_preview: "2026-01-01-preview",
+  v2026_06_01_preview: "2026-06-01-preview",
 }

@@ -73,6 +73,9 @@ directive:
     where: $.definitions.Pricing
     from: pricings.json
     reason: It does have a LIST API, but it is wrapped with PricingList object.
+  - suppress: LatestVersionOfCommonTypesMustBeUsed
+    from: defenderForStorageSettings.json
+    reason: Inherited from TSP migration (Azure/azure-rest-api-specs#41888). The Security TypeSpec project currently targets common-types v5; migration to v6 will be addressed centrally for the entire Security spec.
 ```
 
 ``` yaml
@@ -282,6 +285,15 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 input-file:
   - preview/2025-10-01-preview/security-Operations.json
   - preview/2025-10-01-preview/pricings.json
+```
+
+### Tag: package-preview-2026-06-01-preview
+
+These settings apply only when `--tag=package-preview-2026-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-06-01-preview'
+input-file:
+  - preview/2026-06-01-preview/defenderForStorageSettings.json
 ```
 
 ### Tag: package-preview-2026-01-01-preview
@@ -810,7 +822,7 @@ input-file:
 - preview/2023-12-01-preview/security-Automations.json
 - preview/2026-08-01-preview/securityConnectors.json
 - stable/2025-05-04/security-Assessment.json
-- preview/2026-01-01-preview/defenderForStorageSettings.json
+- preview/2026-06-01-preview/defenderForStorageSettings.json
 - preview/2025-11-01-preview/securityConnectorsDevOps.json
 - preview/2025-10-01-preview/security-Operations.json
 - stable/2017-08-01/complianceResults.json

@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-09-01-preview",
+    "api-version": "2026-06-01-preview",
     "resourceId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount"
   },
   "responses": {
@@ -12,12 +12,14 @@
             "type": "Microsoft.Security/defenderForStorageSettings",
             "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount/providers/Microsoft.Security/defenderForStorageSettings/current",
             "properties": {
+              "provisioningState": "Succeeded",
               "isEnabled": true,
               "malwareScanning": {
                 "automatedResponse": "BlobSoftDelete",
                 "blobScanResultsOptions": "BlobIndexTags",
                 "onUpload": {
                   "capGBPerMonth": 10000,
+                  "scannedGBThisMonth": 3140.7,
                   "filters": {
                     "excludeBlobsLargerThan": 1024,
                     "excludeBlobsWithPrefix": [
