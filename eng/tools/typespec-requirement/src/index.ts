@@ -213,12 +213,11 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
       if (!generated) {
         const serviceDirectory = resolve(fullPath, "../../..");
         if (!typeSpecSwaggers.has(serviceDirectory)) {
-          typeSpecSwaggers.set(
-            serviceDirectory,
-            await findTypeSpecSwagger(serviceDirectory, logWarning),
-          );
+          typeSpecSwagger = await findTypeSpecSwagger(serviceDirectory, logWarning);
+          typeSpecSwaggers.set(serviceDirectory, typeSpecSwagger);
+        } else {
+          typeSpecSwagger = typeSpecSwaggers.get(serviceDirectory);
         }
-        typeSpecSwagger = typeSpecSwaggers.get(serviceDirectory);
       }
       if (typeSpecSwagger === undefined) {
         logInfo(`  Suppressed: ${String(suppression.reason ?? "<no reason specified>")}`);

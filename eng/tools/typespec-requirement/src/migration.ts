@@ -31,6 +31,17 @@ export function isTypeSpecGenerated(
   );
 }
 
+/**
+ * Finds evidence that a service uses TypeSpec: a Swagger JSON file with a present,
+ * non-null `/info/x-typespec-generated` marker.
+ *
+ * Checks files directly inside `preview/<version>` and `stable/<version>`, excluding
+ * nested examples and common types.
+ *
+ * @param directory The service directory containing `preview` and/or `stable`.
+ * @param logWarning Reports malformed JSON encountered while scanning.
+ * @returns The first matching file's path relative to `directory`, or `undefined` if none is found.
+ */
 export async function findTypeSpecSwagger(
   directory: string,
   logWarning: LogWarning,
