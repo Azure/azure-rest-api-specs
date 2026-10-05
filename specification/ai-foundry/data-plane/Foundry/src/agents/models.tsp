@@ -589,44 +589,61 @@ model AgentEndpointAuthorizationScheme {
 
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
-
-  @doc("""
-    The Entra application audiences for which this scheme accepts inbound tokens. When omitted, the
-    scheme behaves as if set to `["foundry"]`. GET preserves omission rather than materializing the
-    default. An explicitly empty array is invalid; an Entra scheme must accept at least one audience
-    type. Include `agent_blueprint` to enable the agent-blueprint token path alongside or instead of
-    the Foundry path.
-    """)
-  audience_types?: EntraAudienceType[];
-
-  @doc("""
-    Optional agent-blueprint-specific configuration for the Entra scheme. Only meaningful when
-    `agent_blueprint` is present in `audience_types`. When omitted or explicitly null, the service uses
-    the backing blueprint's system-determined audience, tenant, and default `access_agent` scope for
-    the agent-blueprint token path.
-    """)
-  agent_blueprint?: AgentBlueprintConfiguration;
 }
 
-@doc("The Entra application audience an inbound token targets and the authorization model the agent endpoint applies to it.")
-union EntraAudienceType {
-  string,
+@doc("Authorizes Foundry-audience callers through Azure RBAC.")
+model AzureRbacAuthorizationScheme extends AgentEndpointAuthorizationScheme {
+  type: AgentEndpointAuthorizationSchemeType.AzureRbac;
 
-  @doc("Foundry-audience (ai.azure.com) tokens, authorized through the existing Foundry/Azure RBAC path.")
-  foundry: "foundry",
-
-  @doc("Backing agent-blueprint-audience tokens, authorized through agent-blueprint token validation.")
-  agent_blueprint: "agent_blueprint",
+  @doc("The source used to derive user and chat isolation keys. When omitted, the source defaults to Entra.")
+  isolation_key_source?: IsolationKeySource;
 }
 
-@doc("Agent-blueprint-specific configuration for the Entra authorization scheme.")
-model AgentBlueprintConfiguration {
+@doc("Authorizes callers presenting a token for the backing Agent Blueprint audience.")
+model AgentBlueprintAuthorizationScheme
+  extends AgentEndpointAuthorizationScheme {
+  type: AgentEndpointAuthorizationSchemeType.AgentBlueprint;
+
+  @doc("The source used to derive user and chat isolation keys. When omitted, the source defaults to Entra.")
+  isolation_key_source?: IsolationKeySource;
+
   @doc("""
     The validation applied to inbound bearer tokens addressed to the backing blueprint audience. When
     omitted, each rule falls back to the backing blueprint's system-determined defaults (audience =
     blueprint resource URI, tenant = subscription tenant, required scope = `access_agent`).
     """)
   token_validation_rules?: TokenValidationRules;
+}
+
+@doc("The source used to derive user and chat isolation keys for an agent endpoint.")
+@discriminator("kind")
+model IsolationKeySource {
+  kind: IsolationKeySourceKind;
+}
+
+@doc("Derives isolation keys from the authenticated Entra identity.")
+model EntraIsolationKeySource extends IsolationKeySource {
+  kind: IsolationKeySourceKind.Entra;
+}
+
+@doc("Derives isolation keys from trusted request headers supplied by an allowed client application.")
+model HeaderIsolationKeySource extends IsolationKeySource {
+  kind: IsolationKeySourceKind.Header;
+
+  @doc("The trusted client applications allowed to supply isolation key headers. A null or omitted list imposes no restriction; an empty list blocks all clients.")
+  @maxItems(10)
+  allowed_clients?: string[];
+}
+
+@doc("The supported sources for deriving user and chat isolation keys.")
+union IsolationKeySourceKind {
+  string,
+
+  @doc("Derive isolation keys from the authenticated Entra identity.")
+  Entra: "Entra",
+
+  @doc("Derive isolation keys from trusted request headers.")
+  Header: "Header",
 }
 
 @doc("""
@@ -673,6 +690,8 @@ model BotServiceTenantAuthorizationScheme
 union AgentEndpointAuthorizationSchemeType {
   string,
   Entra: "Entra",
+  AzureRbac: "AzureRbac",
+  AgentBlueprint: "AgentBlueprint",
   BotService: "BotService",
   BotServiceRbac: "BotServiceRbac",
   BotServiceTenant: "BotServiceTenant",

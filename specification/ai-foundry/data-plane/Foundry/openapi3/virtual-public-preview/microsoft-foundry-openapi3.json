@@ -29301,15 +29301,33 @@
         },
         "description": "Configuration specific to the activity protocol."
       },
-      "AgentBlueprintConfiguration": {
+      "AgentBlueprintAuthorizationScheme": {
         "type": "object",
+        "required": [
+          "type"
+        ],
         "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "AgentBlueprint"
+            ]
+          },
+          "isolation_key_source": {
+            "$ref": "#/components/schemas/IsolationKeySource",
+            "description": "The source used to derive user and chat isolation keys. When omitted, the source defaults to Entra."
+          },
           "token_validation_rules": {
             "$ref": "#/components/schemas/TokenValidationRules",
             "description": "The validation applied to inbound bearer tokens addressed to the backing blueprint audience. When\nomitted, each rule falls back to the backing blueprint's system-determined defaults (audience =\nblueprint resource URI, tenant = subscription tenant, required scope = `access_agent`)."
           }
         },
-        "description": "Agent-blueprint-specific configuration for the Entra authorization scheme."
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+          }
+        ],
+        "description": "Authorizes callers presenting a token for the backing Agent Blueprint audience."
       },
       "AgentBlueprintReference": {
         "type": "object",
@@ -29783,6 +29801,8 @@
           "propertyName": "type",
           "mapping": {
             "Entra": "#/components/schemas/EntraAuthorizationScheme",
+            "AzureRbac": "#/components/schemas/AzureRbacAuthorizationScheme",
+            "AgentBlueprint": "#/components/schemas/AgentBlueprintAuthorizationScheme",
             "BotService": "#/components/schemas/BotServiceAuthorizationScheme",
             "BotServiceRbac": "#/components/schemas/BotServiceRbacAuthorizationScheme",
             "BotServiceTenant": "#/components/schemas/BotServiceTenantAuthorizationScheme"
@@ -29798,6 +29818,8 @@
             "type": "string",
             "enum": [
               "Entra",
+              "AzureRbac",
+              "AgentBlueprint",
               "BotService",
               "BotServiceRbac",
               "BotServiceTenant"
@@ -31931,6 +31953,30 @@
             "RedTeams=V1Preview"
           ]
         }
+      },
+      "AzureRbacAuthorizationScheme": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "AzureRbac"
+            ]
+          },
+          "isolation_key_source": {
+            "$ref": "#/components/schemas/IsolationKeySource",
+            "description": "The source used to derive user and chat isolation keys. When omitted, the source defaults to Entra."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+          }
+        ],
+        "description": "Authorizes Foundry-audience callers through Azure RBAC."
       },
       "AzureUserSecurityContext": {
         "type": "object",
@@ -35027,21 +35073,6 @@
         ],
         "description": "Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row."
       },
-      "EntraAudienceType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "foundry",
-              "agent_blueprint"
-            ]
-          }
-        ],
-        "description": "The Entra application audience an inbound token targets and the authorization model the agent endpoint applies to it."
-      },
       "EntraAuthorizationScheme": {
         "type": "object",
         "required": [
@@ -35053,17 +35084,6 @@
             "enum": [
               "Entra"
             ]
-          },
-          "audience_types": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EntraAudienceType"
-            },
-            "description": "The Entra application audiences for which this scheme accepts inbound tokens. When omitted, the\nscheme behaves as if set to `[\"foundry\"]`. GET preserves omission rather than materializing the\ndefault. An explicitly empty array is invalid; an Entra scheme must accept at least one audience\ntype. Include `agent_blueprint` to enable the agent-blueprint token path alongside or instead of\nthe Foundry path."
-          },
-          "agent_blueprint": {
-            "$ref": "#/components/schemas/AgentBlueprintConfiguration",
-            "description": "Optional agent-blueprint-specific configuration for the Entra scheme. Only meaningful when\n`agent_blueprint` is present in `audience_types`. When omitted or explicitly null, the service uses\nthe backing blueprint's system-determined audience, tenant, and default `access_agent` scope for\nthe agent-blueprint token path."
           }
         },
         "allOf": [
@@ -35093,6 +35113,26 @@
           }
         ],
         "description": "Entra ID credential definition"
+      },
+      "EntraIsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Entra"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IsolationKeySource"
+          }
+        ],
+        "description": "Derives isolation keys from the authenticated Entra identity."
       },
       "Eval": {
         "type": "object",
@@ -38469,6 +38509,34 @@
           ]
         }
       },
+      "HeaderIsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Header"
+            ]
+          },
+          "allowed_clients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 10,
+            "description": "The trusted client applications allowed to supply isolation key headers. A null or omitted list imposes no restriction; an empty list blocks all clients."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IsolationKeySource"
+          }
+        ],
+        "description": "Derives isolation keys from trusted request headers supplied by an allowed client application."
+      },
       "HeaderTelemetryEndpointAuth": {
         "type": "object",
         "required": [
@@ -39289,6 +39357,40 @@
             "Routines=V1Preview"
           ]
         }
+      },
+      "IsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/IsolationKeySourceKind"
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "Entra": "#/components/schemas/EntraIsolationKeySource",
+            "Header": "#/components/schemas/HeaderIsolationKeySource"
+          }
+        },
+        "description": "The source used to derive user and chat isolation keys for an agent endpoint."
+      },
+      "IsolationKeySourceKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Entra",
+              "Header"
+            ]
+          }
+        ],
+        "description": "The supported sources for deriving user and chat isolation keys."
       },
       "ItemGenerationParams": {
         "type": "object",
