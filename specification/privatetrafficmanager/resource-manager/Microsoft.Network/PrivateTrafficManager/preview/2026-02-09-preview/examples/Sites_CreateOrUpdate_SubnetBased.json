@@ -1,0 +1,79 @@
+{
+  "title": "Sites_CreateOrUpdate_SubnetBased",
+  "operationId": "Sites_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-02-09-preview",
+    "subscriptionId": "10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA",
+    "resourceGroupName": "rgprivateTrafficManager",
+    "topologyMapName": "myTopologyMap",
+    "siteName": "subnet-site",
+    "resource": {
+      "properties": {
+        "probingGatewayIds": [
+          "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/probingGateways/myProbingGateway"
+        ],
+        "subnets": [
+          {
+            "first": "10.1.0.0",
+            "scope": 16
+          },
+          {
+            "first": "10.2.0.1",
+            "last": "10.2.0.255"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "probingGatewayIds": [
+            "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/probingGateways/myProbingGateway"
+          ],
+          "subnets": [
+            {
+              "first": "10.1.0.0",
+              "scope": 16
+            },
+            {
+              "first": "10.2.0.1",
+              "last": "10.2.0.255"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/topologyMaps/myTopologyMap/sites/subnet-site",
+        "name": "subnet-site",
+        "type": "Microsoft.Network/topologyMaps/sites"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "probingGatewayIds": [
+            "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/probingGateways/myProbingGateway"
+          ],
+          "subnets": [
+            {
+              "first": "10.1.0.0",
+              "scope": 16
+            },
+            {
+              "first": "10.2.0.1",
+              "last": "10.2.0.255"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/topologyMaps/myTopologyMap/sites/subnet-site",
+        "name": "subnet-site",
+        "type": "Microsoft.Network/topologyMaps/sites"
+      }
+    }
+  }
+}
