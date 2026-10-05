@@ -79,4 +79,5 @@ the workspace manifest or its source exports. Use **pnpm pack**, not npm pack,
 so the manifest overrides and catalog versions are applied.
 
 See [Publishing TypeSpec libraries](../../eng/README.md#publishing-typespec-libraries)
-for the manual versioning and Azure Pipelines release workflow.
+for automatic development releases on `latest` and the manual Azure Pipelines
+release workflow.
