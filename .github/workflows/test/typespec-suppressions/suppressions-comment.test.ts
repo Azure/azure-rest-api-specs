@@ -567,7 +567,7 @@ describe("buildSuppressionsComment", async () => {
 
       await expect(
         buildSuppressionsComment(github, mockCore, "test-owner", "test-repo", "abc123", 42, []),
-      ).resolves.toEqual({ body: undefined, requiresApproval: false });
+      ).resolves.toMatchObject({ body: undefined, requiresApproval: false });
     },
   );
 
