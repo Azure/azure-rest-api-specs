@@ -1,6 +1,6 @@
 name: Update Labels
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   # TODO: If a pull request is manually labeled or unlabeled, get all artifacts associated with PR, and update labels
   # pull_request:
   #   types: [labeled, unlabeled]
@@ -26,18 +26,22 @@ permissions:
 jobs:
   update-labels:
     name: Update Labels
+    if: >-
+      github.event.workflow_run.conclusion != 'skipped' &&
+      github.event.workflow_run.conclusion != 'cancelled'
 
     runs-on: ubuntu-slim
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github
 
       - name: Update Labels
         id: update-labels
-        uses: actions/github-script@v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: updateLabels } =
