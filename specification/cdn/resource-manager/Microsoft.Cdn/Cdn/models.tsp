@@ -3449,6 +3449,112 @@ model RouteUpdatePropertiesParameters {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_08_01_preview)
   grpcState?: AFDRouteGrpcState;
+
+  /**
+   * The error policies applied to this route. Each entry references an error policy and supplies the error response status codes that trigger it on this route, so a single policy can be reused by routes that fail with different status codes. Omit this property to leave the route's error responses untouched.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @maxItems(38)
+  errorPolicies?: ErrorPolicyAssociation[];
+}
+
+/**
+ * Applies an error policy to a route for a specific set of error response status codes. The status codes live on the association rather than on the policy, so one policy can be reused by routes that fail with different status codes.
+ */
+@added(Versions.v2026_09_01_preview)
+model ErrorPolicyAssociation {
+  /**
+   * Resource ID.
+   */
+  id?: string;
+
+  /**
+   * The error response status codes that trigger the referenced error policy on this route. Supported values are 400-417, 421-424, 426, 428, 429, 431, 451, 500-508, 510 and 511. A status code may be claimed by at most one of the route's error policies.
+   */
+  @minItems(1)
+  @maxItems(38)
+  errorResponseCodes: int32[];
+}
+
+/**
+ * The JSON object that contains the properties of the error policy.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Error policies report deployment through AFDStateProperties, matching the other Azure Front Door resources in this specification."
+@added(Versions.v2026_09_01_preview)
+model ErrorPolicyProperties {
+  ...ErrorPolicyUpdatePropertiesParameters;
+  ...AFDStateProperties;
+}
+
+/**
+ * The JSON object that contains the properties of the error policy to create or update.
+ */
+@added(Versions.v2026_09_01_preview)
+model ErrorPolicyUpdatePropertiesParameters {
+  /**
+   * A human readable description of the error policy.
+   */
+  @maxLength(150)
+  description?: string;
+
+  /**
+   * The negative caching settings applied to the error responses that trigger this policy. Omit this object to leave those responses uncached; its presence is what enables negative caching, so there is no separate switch to turn it off.
+   */
+  negativeCachingConfiguration?: NegativeCachingConfiguration;
+}
+
+/**
+ * The error policy JSON object required for error policy update.
+ */
+@added(Versions.v2026_09_01_preview)
+model ErrorPolicyUpdateParameters {
+  /**
+   * The JSON object that contains the properties of the error policy to update.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Error policies use the flattened properties envelope shared by the other Azure Front Door resources in this specification."
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  properties?: ErrorPolicyUpdatePropertiesParameters;
+}
+
+/**
+ * Controls how Azure Front Door caches the error responses that trigger an error policy.
+ */
+@added(Versions.v2026_09_01_preview)
+model NegativeCachingConfiguration {
+  /**
+   * Determines how the cache lifetime of a matched error response is chosen.
+   */
+  cacheBehavior: NegativeCacheBehavior;
+
+  /**
+   * How long a matched error response is cached, in seconds. A numeric value is required unless cacheBehavior is HonorOrigin, which must omit it because the origin's own caching headers supply the lifetime.
+   */
+  @maxValue(604800)
+  @minValue(1)
+  cacheTtlInSeconds?: int32;
+}
+
+/**
+ * Determines how the cache lifetime of an error response matched by an error policy is chosen.
+ */
+@added(Versions.v2026_09_01_preview)
+union NegativeCacheBehavior {
+  string,
+
+  /**
+   * Cache the error response according to the caching headers returned by the origin, and do not cache it when the origin returns none.
+   */
+  HonorOrigin: "HonorOrigin",
+
+  /**
+   * Cache the error response for cacheTtlInSeconds, ignoring any caching headers returned by the origin.
+   */
+  Override: "Override",
+
+  /**
+   * Cache the error response for cacheTtlInSeconds, but only when the origin returns no caching headers of its own.
+   */
+  SetIfMissing: "SetIfMissing",
 }
 
 /**
