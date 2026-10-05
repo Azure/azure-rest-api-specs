@@ -430,14 +430,13 @@ model CostControlIfMatchHeader {
 /**
  * The entity tag returned with a cost control.
  */
-@added(Versions.v2026_09_15_preview)
-model CostControlEtagHeader {
+alias CostControlEtagHeader = {
   /**
    * The current entity tag for the cost control.
    */
   @header("ETag")
   etag: string;
-}
+};
 
 /**
  * Operations for managing cost controls owned by an account.
