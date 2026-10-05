@@ -17085,7 +17085,16 @@
           "minItems": 1,
           "maxItems": 20,
           "items": {
-            "$ref": "#/definitions/CostControlMatchValue"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.CognitiveServices/accounts/projects"
+                }
+              ]
+            }
           }
         }
       }

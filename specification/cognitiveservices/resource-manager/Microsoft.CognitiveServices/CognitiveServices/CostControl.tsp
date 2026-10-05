@@ -207,7 +207,11 @@ model CostControlMatch {
    */
   @minItems(1)
   @maxItems(20)
-  projectIds?: CostControlMatchValue[];
+  projectIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/projects";
+    }
+  ]>[];
 }
 
 /**
