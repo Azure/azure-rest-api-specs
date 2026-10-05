@@ -138,7 +138,7 @@ model CostControlRule {
   @minItems(1)
   @maxItems(1)
   @identifiers(#["type"])
-  counterKey: CostControlDimension[];
+  counterKeys: CostControlDimension[];
 
   /**
    * The unit used for the cost control amount and absolute thresholds.
