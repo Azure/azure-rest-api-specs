@@ -16,7 +16,7 @@ namespace Microsoft.ContainerService;
 // =============================================================================
 
 /**
- * The overall status of an upgrade insight readiness evaluation. This is a rollup of the
+ * The overall status of an upgrade insight readiness evaluation. This is an aggregation of the
  * per-issue `severity` values in `detectedIssues`: any `Blocking` issue ⇒ `Failed`;
  * otherwise any `Warning` issue ⇒ `Warning`; otherwise (no issues) ⇒ `Passed`. The
  * scope-level vocabulary here (Passed/Warning/Failed) intentionally differs from the
@@ -108,7 +108,7 @@ union UpgradeInsightUpgradeStrategy {
 
 /**
  * The type of upgrade an upgrade insight evaluates. Each upgrade insight resource
- * represents exactly one of these scopes; the scope is encoded in the resource name.
+ * represents exactly one of these scopes and effective targets; both are encoded in the resource name.
  */
 @added(Versions.v2026_08_02_preview)
 union UpgradeType {
@@ -500,13 +500,15 @@ model ControlPlaneAndAgentPoolsUpgradeInsightProperties
  * An upgrade insight for a managed cluster: an on-demand readiness evaluation for an
  * upgrade scope, produced by the generateUpgradeInsights action on the managed cluster
  * and addressable by a server-generated, casing-controlled name. The name identifies
- * the scope in a URL-safe form — `controlPlane`, `controlPlaneAndAgentPools`,
- * `agentPool-<agentPoolName>` (for example `agentPool-nodepool1`), or
- * `nodeImage-<agentPoolName>` (for example `nodeImage-nodepool1`). The resource itself
- * is read-only: GET returns the stored evaluation and LIST returns the stored
- * evaluations for the cluster. Evaluations are (re)generated via the managed cluster's
- * generateUpgradeInsights action, whose response body is the same UpgradeInsight
- * representation returned by GET.
+ * the scope and effective target in a URL-safe form — `controlPlane-<targetKubernetesVersion>`,
+ * `controlPlaneAndAgentPools-<targetKubernetesVersion>`,
+ * `agentPool-<agentPoolName>-<targetKubernetesVersion>`, or
+ * `nodeImage-<agentPoolName>-<targetNodeImageVersion>`. Callers should use the resource
+ * ID returned by generateUpgradeInsights or LIST rather than construct this name. The
+ * resource itself is read-only: GET returns the stored evaluation and LIST returns the
+ * stored evaluations for the cluster. Evaluations are (re)generated via the managed
+ * cluster's generateUpgradeInsights action, whose response body is the same
+ * UpgradeInsight representation returned by GET.
  */
 @added(Versions.v2026_08_02_preview)
 @parentResource(ManagedCluster)
@@ -515,7 +517,7 @@ model UpgradeInsight is ProxyResource<UpgradeInsightProperties> {
     Resource = UpgradeInsight,
     KeyName = "upgradeInsightName",
     SegmentName = "upgradeInsights",
-    NamePattern = "^(controlPlane|controlPlaneAndAgentPools|(agentPool|nodeImage)-[a-z0-9][a-z0-9-]*)$"
+    NamePattern = "^(?=.{1,128}$)(?:(?:controlPlane|controlPlaneAndAgentPools)-[A-Za-z0-9][A-Za-z0-9._-]*|(?:agentPool|nodeImage)-[a-z0-9][a-z0-9-]*-[A-Za-z0-9][A-Za-z0-9._-]*)$"
   >;
 }
 
@@ -527,9 +529,10 @@ model UpgradeInsight is ProxyResource<UpgradeInsightProperties> {
  * The base request body for the generateUpgradeInsights action. The concrete shape is
  * determined by `upgradeType`, so that each scope declares exactly the inputs it needs:
  * the schema itself enforces which of `targetKubernetesVersion`,
- * `targetNodeImageVersion`, and `agentPoolName` are required, rather than relying on
- * documented conventions plus server-side validation. The server generates (or
- * refreshes) the corresponding UpgradeInsight and returns it.
+ * `targetKubernetesVersion` and `agentPoolName` are required, rather than relying on
+ * documented conventions plus server-side validation. For NodeImage, the server
+ * resolves the effective target node image version. The server generates (or refreshes)
+ * the corresponding target-specific UpgradeInsight and returns it.
  */
 @added(Versions.v2026_08_02_preview)
 @discriminator("upgradeType")
@@ -569,9 +572,6 @@ model NodeImageGenerateUpgradeInsightsContent
 
   /** The name of the agent pool to evaluate. */
   agentPoolName: string;
-
-  /** The target node OS image version to evaluate; if omitted, the server resolves and evaluates the latest available node image. The resolved version is always echoed back in the generated insight's read-only `targetNodeImageVersion` property (see NodeImageUpgradeInsightProperties), so callers that omit this input can still read exactly which version was evaluated. */
-  targetNodeImageVersion?: string;
 }
 
 /** Request body to evaluate the combined control plane and agent pools Kubernetes version upgrade. */
@@ -591,7 +591,7 @@ interface UpgradeInsights {
   /**
    * Gets a stored upgrade insight for the managed cluster by its server-generated name.
    * This is a read-only operation: it returns the most recently generated readiness
-   * evaluation for that scope from the data store, including the detected
+   * evaluation for that scope and effective target from the data store, including the detected
    * upgrade-blocking issues and contextual upgrade information. It does not regenerate
    * the evaluation. If no non-expired evaluation exists for the name, it returns 404.
    */
@@ -599,8 +599,8 @@ interface UpgradeInsights {
 
   /**
    * Lists the stored upgrade insights for the specified managed cluster, one entry per
-   * scope that has been generated and not yet expired. This is a read-only operation and
-   * does not regenerate any evaluation.
+   * generated scope and effective target that has not yet expired. This is a read-only
+   * operation and does not regenerate any evaluation.
    */
   list is ArmResourceListByParent<UpgradeInsight>;
 
@@ -610,10 +610,13 @@ interface UpgradeInsights {
    * server runs the readiness checks — the control plane Kubernetes version upgrade, a
    * single agent pool Kubernetes version upgrade, a single agent pool node OS image
    * upgrade, or the combined control plane and agent pools upgrade — persists the result
-   * as an UpgradeInsight resource with a server-generated name, and returns that
-   * resource. The response body is identical to a subsequent GET of the resource.
+   * as a target-specific UpgradeInsight resource with a server-generated name, and
+   * returns that resource. Repeating the same scope and effective target refreshes the
+   * same resource; a different target creates a different resource. The response body
+   * is identical to a subsequent GET of the resource.
    */
-  generateUpgradeInsights is ArmResourceActionSync<
+  @action("generateUpgradeInsights")
+  generate is ArmResourceActionSync<
     ManagedCluster,
     GenerateUpgradeInsightsContent,
     UpgradeInsight
