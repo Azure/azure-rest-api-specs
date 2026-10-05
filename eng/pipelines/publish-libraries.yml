@@ -25,6 +25,7 @@ extends:
               os: linux
             steps:
               - checkout: self
+              - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
               - template: /eng/pipelines/templates/steps/npm-install.yml
               - script: pnpm --filter @azure-tools/typespec-foundry-core build
                 displayName: Compile and lint Foundry Core
