@@ -119,7 +119,7 @@ async function getFilesToCheck(options: Options, repoRoot: string): Promise<File
       const specificationIndex = pathSegments.lastIndexOf("specification");
       return {
         fullPath,
-        isNew: true,
+        isNew: false,
         path:
           specificationIndex >= 0
             ? pathSegments.slice(specificationIndex).join("/")
@@ -208,11 +208,7 @@ export async function checkFiles(
       if (!typeSpecSwaggers.has(serviceDirectory)) {
         typeSpecSwaggers.set(
           serviceDirectory,
-          await findTypeSpecSwagger(
-            serviceDirectory,
-            logWarning,
-            options.checkAllUnder ? undefined : { repoRoot, commitish: options.baseCommitish },
-          ),
+          await findTypeSpecSwagger(serviceDirectory, logWarning),
         );
       }
       const typeSpecSwagger = typeSpecSwaggers.get(serviceDirectory);

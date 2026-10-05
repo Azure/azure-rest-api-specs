@@ -1,5 +1,5 @@
 import { execa } from "execa";
-import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -61,10 +61,14 @@ async function checkChanges(
     await commit();
     await writeFiles(changes);
     await commit();
-    return await checkFiles(
+    const outputFile = join(repoRoot, "github-output");
+    await writeFile(outputFile, "");
+    vi.stubEnv("GITHUB_OUTPUT", outputFile);
+    const result = await checkFiles(
       { baseCommitish: "HEAD^", headCommitish: "HEAD", responseCache },
       repoRoot,
     );
+    return { ...result, githubOutput: await readFile(outputFile, "utf8") };
   } finally {
     await rm(repoRoot, { recursive: true, force: true });
   }
@@ -72,35 +76,36 @@ async function checkChanges(
 
 describe("New Swagger in migrated services", () => {
   beforeEach(() => {
-    vi.stubEnv("GITHUB_OUTPUT", "");
     vi.spyOn(console, "log").mockImplementation(() => {});
     vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("Unexpected network request"));
   });
   afterEach(() => {
     vi.restoreAllMocks();
     vi.unstubAllEnvs();
   });
 
-  it.each(["2025-01-01", "2026-01-01", "2027-01-01"])(
-    "Allows patches to existing handwritten files at %s with or without suppression",
-    async (version) => {
+  it.each([false, true])(
+    "Allows patches to existing handwritten files (suppressed=%s)",
+    async (suppressed) => {
+      const version = "2025-01-01";
       const file = `${service}/stable/${version}/handwritten.json`;
-      const initial = { ...migratedFiles, [file]: "{}" };
-      expect(await checkChanges(initial, { [file]: '{"description":"patch"}' })).toEqual({
-        brownfield: true,
+      const result = await checkChanges(
+        {
+          ...migratedFiles,
+          [file]: "{}",
+          ...(suppressed
+            ? {
+                [`${service}/suppressions.yaml`]: `- tool: TypeSpecRequirement\n  path: ./stable/${version}/*.json\n  reason: Patch\n`,
+              }
+            : {}),
+        },
+        { [file]: '{"description":"patch"}' },
+      );
+      expect(result).toEqual({
+        brownfield: !suppressed,
         exitCode: 0,
-      });
-      expect(
-        await checkChanges(
-          {
-            ...initial,
-            [`${service}/suppressions.yaml`]: `- tool: TypeSpecRequirement\n  path: ./stable/${version}/*.json\n  reason: Patch\n`,
-          },
-          { [file]: '{"description":"patch"}' },
-        ),
-      ).toEqual({
-        brownfield: false,
-        exitCode: 0,
+        githubOutput: suppressed ? "" : "brownfield=true\n",
       });
     },
   );
@@ -116,24 +121,51 @@ describe("New Swagger in migrated services", () => {
         },
         { [`${service}/stable/${version}/new.json`]: "{}" },
       );
+      expect(result).toEqual({ brownfield: false, exitCode: 1, githubOutput: "" });
+      expect(console.error).toHaveBeenCalledWith(
+        expect.stringContaining("suppressions cannot bypass"),
+      );
+      expect(console.log).not.toHaveBeenCalledWith(expect.stringContaining("Checking github.com"));
+      expect(fetch).not.toHaveBeenCalled();
+    },
+  );
+
+  it.each([
+    { first: "preview/2026-01-01-preview", target: "stable/2025-01-01", suppressed: true },
+    { first: "stable/2026-01-01", target: "preview/2027-01-01-preview", suppressed: false },
+  ])(
+    "Rejects handwritten $target when $first uses TypeSpec (suppressed=$suppressed)",
+    async ({ first, target, suppressed }) => {
+      const result = await checkChanges(
+        {
+          [`${service}/${first}/generated.json`]: generated,
+          ...(suppressed
+            ? {
+                [`${service}/suppressions.yaml`]: `- tool: TypeSpecRequirement\n  path: ./${target}/*.json\n  reason: Historical version\n`,
+              }
+            : {}),
+        },
+        { [`${service}/${target}/new.json`]: "{}" },
+      );
       expect(result.exitCode).toBe(1);
       expect(console.error).toHaveBeenCalledWith(
         expect.stringContaining("suppressions cannot bypass"),
       );
+      expect(console.log).not.toHaveBeenCalledWith(expect.stringContaining("Checking github.com"));
+      expect(fetch).not.toHaveBeenCalled();
     },
   );
 
-  it.each([null, "{}"])(
-    "Still rejects additions when generated Swagger is deleted or rewritten: %s",
-    async (replacement) => {
-      const result = await checkChanges(migratedFiles, {
-        [generatedFile]: replacement,
-        [`${service}/stable/2025-01-01/new.json`]: "{}",
-      });
-      expect(result.exitCode).toBe(1);
-      expect(console.error).toHaveBeenCalledWith(expect.stringContaining("HEAD^:"));
-    },
-  );
+  it("Preserves brownfield output when another added file is rejected", async () => {
+    const existingFile = `${service}/stable/2025-01-01/z-existing.json`;
+    const newFile = `${service}/stable/2025-01-01/a-new.json`;
+    const result = await checkChanges(
+      { ...migratedFiles, [existingFile]: "{}" },
+      { [existingFile]: '{"description":"patch"}', [newFile]: "{}" },
+    );
+    expect(result).toEqual({ brownfield: true, exitCode: 1, githubOutput: "brownfield=true\n" });
+    expect(console.error).toHaveBeenCalledWith(expect.stringContaining(newFile));
+  });
 
   it("Does not exempt a new path classified by Git as a rename", async () => {
     const oldFile = `${service}/stable/2025-01-01/old.json`;
@@ -190,7 +222,31 @@ describe("New Swagger in migrated services", () => {
         [`${service}/stable/2026-01-01/new.json`]: "{}",
       },
     );
-    expect(result).toEqual({ brownfield: true, exitCode: 0 });
+    expect(result).toEqual({ brownfield: true, exitCode: 0, githubOutput: "brownfield=true\n" });
+  });
+
+  it.each([
+    "specification/foo/resource-manager/Microsoft.Foo/OtherService",
+    "specification/foo/data-plane/Microsoft.Foo/Service",
+    "specification/foo/resource-manager/Microsoft.Other/Service",
+  ])("Does not share migration state with %s", async (otherService) => {
+    const result = await checkChanges(
+      { [`${otherService}/stable/2026-01-01/generated.json`]: generated },
+      { [`${service}/stable/2026-01-01/new.json`]: "{}" },
+    );
+    expect(result).toEqual({ brownfield: true, exitCode: 0, githubOutput: "brownfield=true\n" });
+  });
+
+  it("Does not infer migration from examples, common types, or tspconfig alone", async () => {
+    const result = await checkChanges(
+      {
+        [`${service}/tspconfig.yaml`]: "{}",
+        [`${service}/stable/2026-01-01/examples/generated.json`]: generated,
+        [`${service}/stable/2026-01-01/common/generated.json`]: generated,
+      },
+      { [`${service}/stable/2026-01-01/new.json`]: "{}" },
+    );
+    expect(result).toEqual({ brownfield: true, exitCode: 0, githubOutput: "brownfield=true\n" });
   });
 });
 

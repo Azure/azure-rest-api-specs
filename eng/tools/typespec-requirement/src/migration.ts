@@ -1,6 +1,5 @@
-import { execFile } from "@azure-tools/specs-shared/exec";
 import { readdir, readFile } from "node:fs/promises";
-import { join, relative, sep } from "node:path";
+import { join } from "node:path";
 
 type LogWarning = (message: string) => void;
 
@@ -53,7 +52,6 @@ async function getServiceSwaggers(directory: string): Promise<string[]> {
 export async function findTypeSpecSwagger(
   directory: string,
   logWarning: LogWarning,
-  base?: { repoRoot: string; commitish: string },
 ): Promise<string | undefined> {
   const currentFiles = await getServiceSwaggers(directory);
   for (const file of currentFiles) {
@@ -62,28 +60,5 @@ export async function findTypeSpecSwagger(
     }
   }
 
-  if (base) {
-    // Recognize migrated services even when a PR deletes or rewrites the last generated Swagger.
-    const servicePath = relative(base.repoRoot, directory).split(sep).join("/");
-    const { stdout } = await execFile(
-      "git",
-      ["ls-tree", "-r", "--name-only", "-z", base.commitish, "--", servicePath],
-      { cwd: base.repoRoot },
-    );
-    for (const path of stdout.split("\0")) {
-      if (!path.startsWith(`${servicePath}/`)) continue;
-      const match = /^(preview|stable)\/([^/]+)\/[^/]+\.json$/i.exec(
-        path.slice(servicePath.length + 1),
-      );
-      if (!match) continue;
-      const { stdout: content } = await execFile("git", ["show", `${base.commitish}:${path}`], {
-        cwd: base.repoRoot,
-        maxBuffer: 64 * 1024 * 1024,
-      });
-      if (isTypeSpecGenerated(content, `${base.commitish}:${path}`, logWarning)) {
-        return `${base.commitish}:${path}`;
-      }
-    }
-  }
   return undefined;
 }

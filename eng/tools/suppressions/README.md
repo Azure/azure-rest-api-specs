@@ -59,14 +59,12 @@ in the PR's base retain their previous behavior, including applicable suppressio
 
 Migration is detected across `preview` and `stable` under the directory immediately containing
 those folders, independently of other services and API planes. The check looks for generated
-Swagger in both the current checkout and the PR's base commit. Deleting or rewriting generated
-files in the same PR therefore does not permit new handwritten files. A rename to a new path
-counts as an addition.
+Swagger in the current checkout. A rename to a new path counts as an addition.
 
 Services without generated Swagger retain the existing requirement: new handwritten API versions
 require a version-specific suppression. Suppressions for other tools are unaffected.
-Local `--check-all-under` scans have no PR diff and audit every selected file as an addition,
-using only the current checkout to detect migration.
+Local `--check-all-under` scans have no PR diff and retain their existing API-version and
+suppression checks without applying the addition-only migration rule.
 
 ### Command line
 
