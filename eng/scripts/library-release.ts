@@ -1,3 +1,14 @@
+/**
+ * Prepares and gates library releases for the publish-libraries pipeline.
+ *
+ * --prepare <library> updates its manifest to a development version derived from
+ * the last library-folder commit, keeping the version stable across reruns.
+ * --check <artifact-directory> reads the packed manifest and queries npm through
+ * the configured, authenticated registry. It emits the ShouldPublish pipeline
+ * output so existing versions skip publishing; registry errors fail the check.
+ *
+ * Run directly with Node.js 24 or later; no compilation is required.
+ */
 import { execFileSync, spawnSync } from "node:child_process";
 import { readFile, readdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
@@ -104,9 +115,7 @@ async function main(): Promise<void> {
   } else if (values.check && !values.prepare) {
     await checkRelease(resolve(values.check));
   } else {
-    throw new Error(
-      "Usage: library-release.mts --prepare <library> | --check <artifact-directory>",
-    );
+    throw new Error("Usage: library-release.ts --prepare <library> | --check <artifact-directory>");
   }
 }
 

@@ -9,7 +9,7 @@ import {
   isPackagePublished,
   preparePrerelease,
   prereleaseVersion,
-} from "../../../eng/scripts/library-release.mts";
+} from "../library-release.ts";
 
 const commit = "a".repeat(40);
 const name = "@azure-tools/typespec-foundry-core";
