@@ -1099,7 +1099,7 @@ model MicrosoftEntraAuthenticationProperties {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. This API version supports enabling or disabling the authentication method, and resetting its password. Supported changes can be combined. Credentials are secrets and are never returned.")
+@doc("Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. This API version supports enabling or disabling the authentication method, and resetting its password. Supported changes can be combined.")
 model PasswordAuthenticationPropertiesForPatchUpdate {
   @doc("The target password-authentication state. Disabling password authentication does not remove or modify existing database users or roles. Disabled cannot be combined with administratorLoginPassword. ")
   @visibility(Lifecycle.Update)
