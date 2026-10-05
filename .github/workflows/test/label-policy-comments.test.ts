@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   buildApprovalResetComment,
   buildUnauthorizedApplyComment,
-} from "../../src/protected-labels/label-comments.ts";
+} from "../src/label-policy-comments.ts";
 
 describe("buildUnauthorizedApplyComment (#46787)", () => {
   it("names the actor, label, and allowed approvers", () => {
@@ -21,9 +21,7 @@ describe("buildUnauthorizedApplyComment (#46787)", () => {
     expect(body).toContain("[global-admin](https://github.com/global-admin)");
   });
 
-  it("matches the protected-labels wording byte-for-byte (single source of truth)", () => {
-    // This is the exact body protected-labels/check-label asserts in its tests. Keeping it
-    // identical here guarantees both enforcement paths speak with one voice (#46787).
+  it("renders the complete unauthorized-label warning", () => {
     const body = buildUnauthorizedApplyComment({
       actor: "unauthorized-user",
       labelName: "BreakingChange-Approved-Benign",
