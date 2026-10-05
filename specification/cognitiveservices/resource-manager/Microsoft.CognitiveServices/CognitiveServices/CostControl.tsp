@@ -296,16 +296,6 @@ union CostControlPeriod {
   string,
 
   /**
-   * Renews at the start of the next UTC minute.
-   */
-  Minute: "Minute",
-
-  /**
-   * Renews at the start of the next UTC hour.
-   */
-  Hour: "Hour",
-
-  /**
    * Renews daily at 00:00 UTC.
    */
   Day: "Day",
@@ -319,11 +309,6 @@ union CostControlPeriod {
    * Renews on the first day of each month at 00:00 UTC.
    */
   Month: "Month",
-
-  /**
-   * Renews January 1 at 00:00 UTC.
-   */
-  Year: "Year",
 }
 
 /**

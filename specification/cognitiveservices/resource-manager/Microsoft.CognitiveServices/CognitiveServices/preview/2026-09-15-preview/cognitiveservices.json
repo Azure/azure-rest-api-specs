@@ -17133,27 +17133,14 @@
       "type": "string",
       "description": "The calendar-aligned UTC renewal periods for recurring cost control rules.",
       "enum": [
-        "Minute",
-        "Hour",
         "Day",
         "Week",
-        "Month",
-        "Year"
+        "Month"
       ],
       "x-ms-enum": {
         "name": "CostControlPeriod",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Minute",
-            "value": "Minute",
-            "description": "Renews at the start of the next UTC minute."
-          },
-          {
-            "name": "Hour",
-            "value": "Hour",
-            "description": "Renews at the start of the next UTC hour."
-          },
           {
             "name": "Day",
             "value": "Day",
@@ -17168,11 +17155,6 @@
             "name": "Month",
             "value": "Month",
             "description": "Renews on the first day of each month at 00:00 UTC."
-          },
-          {
-            "name": "Year",
-            "value": "Year",
-            "description": "Renews January 1 at 00:00 UTC."
           }
         ]
       }
