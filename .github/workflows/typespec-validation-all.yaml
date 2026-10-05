@@ -66,13 +66,14 @@ jobs:
         if: runner.os == 'Windows'
         run: git config --global core.longpaths true
 
-      - uses: actions/checkout@v7
+      - uses: $/.github/actions/checkout
         with:
           # Convert placeholder string 'default' to '', which tells the action to checkout the default ref.
           ref: ${{ matrix.ref == 'next' && 'typespec-next' || '' }}
 
       - name: Setup Node and install deps
-        uses: ./.github/actions/setup-node-install-deps
+        # Use the checked-out branch, which can be typespec-next rather than the workflow's commit.
+        uses: ./.github/actions/setup-node-install-deps # zizmor: ignore[self-repository]
 
       - name: Validate All Specs
         run: >-

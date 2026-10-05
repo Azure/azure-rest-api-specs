@@ -26,7 +26,8 @@ export class CompileRule implements Rule {
     let success = true;
     const diagnostics: Diagnostic[] = [];
 
-    if (await fileExists(path.join(folder, "main.tsp"))) {
+    const mainTspExists = await fileExists(path.join(folder, "main.tsp"));
+    if (mainTspExists) {
       const [err, stdout, stderr] = await runNodeBin(
         "@typespec/compiler",
         // Capture the inventory even when quiet: ExtraSwagger validation depends on it.
@@ -246,7 +247,7 @@ export class CompileRule implements Rule {
     }
 
     const clientTsp = path.join(folder, "client.tsp");
-    if (await fileExists(clientTsp)) {
+    if (!mainTspExists && (await fileExists(clientTsp))) {
       const [err, stdout, stderr] = await runNodeBin(
         "@typespec/compiler",
         ["tsp", "compile", "--no-emit", "--warn-as-error", clientTsp],

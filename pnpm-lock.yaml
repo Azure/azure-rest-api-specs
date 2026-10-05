@@ -293,6 +293,9 @@ catalogs:
     '@typespec/http':
       specifier: 1.16.0
       version: 1.16.0
+    '@typespec/library-linter':
+      specifier: 0.86.0
+      version: 0.86.0
     '@typespec/openapi':
       specifier: 1.16.0
       version: 1.16.0
@@ -387,8 +390,8 @@ catalogs:
       specifier: ^7.7.1
       version: 7.8.5
     simple-git:
-      specifier: ^3.36.0
-      version: 3.36.0
+      specifier: ^4.0.2
+      version: 4.0.2
     tinybench:
       specifier: ^6.0.0
       version: 6.1.4
@@ -472,6 +475,9 @@ importers:
       '@azure-tools/typespec-client-generator-core':
         specifier: 'catalog:'
         version: 0.72.2(a67670347f12c7f75fe322b80ebd19d1)
+      '@azure-tools/typespec-foundry-core':
+        specifier: workspace:*
+        version: link:libs/foundry-core
       '@azure-tools/typespec-liftr-base':
         specifier: 'catalog:'
         version: 0.13.0
@@ -591,7 +597,7 @@ importers:
         version: 10.2.6
       simple-git:
         specifier: 'catalog:'
-        version: 3.36.0
+        version: 4.0.2
       yaml:
         specifier: 'catalog:'
         version: 2.9.0
@@ -676,7 +682,7 @@ importers:
         version: 18.0.5
       simple-git:
         specifier: 'catalog:'
-        version: 3.36.0
+        version: 4.0.2
       zod:
         specifier: 'catalog:'
         version: 4.4.3
@@ -822,7 +828,7 @@ importers:
         version: 4.0.4(openapi-types@12.1.3)
       simple-git:
         specifier: 'catalog:'
-        version: 3.36.0
+        version: 4.0.2
     devDependencies:
       '@types/js-yaml':
         specifier: 'catalog:'
@@ -847,7 +853,7 @@ importers:
         version: 0.12.4
       simple-git:
         specifier: 'catalog:'
-        version: 3.36.0
+        version: 4.0.2
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -879,7 +885,7 @@ importers:
         version: 4.4.3
       simple-git:
         specifier: 'catalog:'
-        version: 3.36.0
+        version: 4.0.2
       yaml:
         specifier: 'catalog:'
         version: 2.9.0
@@ -929,7 +935,7 @@ importers:
         version: 4.3.2
       simple-git:
         specifier: 'catalog:'
-        version: 3.36.0
+        version: 4.0.2
     devDependencies:
       '@types/commonmark':
         specifier: 'catalog:'
@@ -1014,7 +1020,7 @@ importers:
         version: 1.16.0(@types/node@24.13.1)
       simple-git:
         specifier: 'catalog:'
-        version: 3.36.0
+        version: 4.0.2
       yaml:
         specifier: 'catalog:'
         version: 2.9.0
@@ -1042,7 +1048,7 @@ importers:
         version: 1.1.1
       simple-git:
         specifier: 'catalog:'
-        version: 3.36.0
+        version: 4.0.2
       yaml:
         specifier: 'catalog:'
         version: 2.9.0
@@ -1056,6 +1062,27 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
+
+  libs/foundry-core:
+    devDependencies:
+      '@azure-tools/specs-shared':
+        specifier: workspace:*
+        version: link:../../.github/shared
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.13.1
+      '@typespec/compiler':
+        specifier: 'catalog:'
+        version: 1.16.0(@types/node@24.13.1)
+      '@typespec/library-linter':
+        specifier: 'catalog:'
+        version: 0.86.0(@typespec/compiler@1.16.0(@types/node@24.13.1))
+      typescript:
+        specifier: 'catalog:'
+        version: 7.0.2
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
 packages:
 
@@ -2144,8 +2171,14 @@ packages:
   '@simple-git/args-pathspec@1.0.3':
     resolution: {integrity: sha512-ngJMaHlsWDTfjyq9F3VIQ8b7NXbBLq5j9i5bJ6XLYtD6qlDXT7fdKY2KscWWUF8t18xx052Y/PUO1K1TRc9yKA==}
 
+  '@simple-git/args-pathspec@1.0.4':
+    resolution: {integrity: sha512-EtMX6XjRWSastG2SdkmSQByPtJ9dx/NIjnHbpQPCYt62j4RmSx5rgLTGpw0YCjF5h191gZOmBfheOT23cRSFdw==}
+
   '@simple-git/argv-parser@1.1.1':
     resolution: {integrity: sha512-Q9lBcfQ+VQCpQqGJFHe5yooOS5hGdLFFbJ5R+R5aDsnkPCahtn1hSkMcORX65J2Z5lxSkD0lQorMsncuBQxYUw==}
+
+  '@simple-git/argv-parser@2.0.1':
+    resolution: {integrity: sha512-M++IaVWrN+vYalilOHfwvT2IL3wYZtVEBQpmX6DLSOJLtxbZ+SUeIDE3IiPogzhPACLajwtxfa5rp+ZX1FczzQ==}
 
   '@sindresorhus/merge-streams@4.0.0':
     resolution: {integrity: sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==}
@@ -2507,6 +2540,12 @@ packages:
     peerDependenciesMeta:
       '@typespec/streams':
         optional: true
+
+  '@typespec/library-linter@0.86.0':
+    resolution: {integrity: sha512-EQ+0S6/O9kqikTIGYdE4cEnBswzvtmT/ZHGHxwtJkzztyJxP+c8Qp0DeHxGW/9ZBkyZmhgUEcCXOIUeVTtYTQw==}
+    engines: {node: '>=22.0.0'}
+    peerDependencies:
+      '@typespec/compiler': ^1.16.0
 
   '@typespec/openapi3@1.16.0':
     resolution: {integrity: sha512-eRyTwn4w5hWSRm15ys20O2Jp1aHDPHp6TZsctOsG3nxo+N50Qg7Epgu44ATsxaELmnCEg9G0B7N9czZKb51dSQ==}
@@ -3949,6 +3988,9 @@ packages:
 
   simple-git@3.36.0:
     resolution: {integrity: sha512-cGQjLjK8bxJw4QuYT7gxHw3/IouVESbhahSsHrX97MzCL1gu2u7oy38W6L2ZIGECEfIBG4BabsWDPjBxJENv9Q==}
+
+  simple-git@4.0.2:
+    resolution: {integrity: sha512-l0sIsv9VrPwovKELFDBOj/lhmIcbMvxBk2B+hRhsMM4/VL3gKtuZvYnBNixVo+N/0HnqQx2cBdLvxnAbygHpqA==}
 
   slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
@@ -5458,9 +5500,15 @@ snapshots:
 
   '@simple-git/args-pathspec@1.0.3': {}
 
+  '@simple-git/args-pathspec@1.0.4': {}
+
   '@simple-git/argv-parser@1.1.1':
     dependencies:
       '@simple-git/args-pathspec': 1.0.3
+
+  '@simple-git/argv-parser@2.0.1':
+    dependencies:
+      '@simple-git/args-pathspec': 1.0.4
 
   '@sindresorhus/merge-streams@4.0.0': {}
 
@@ -5918,6 +5966,10 @@ snapshots:
       '@typespec/compiler': 1.16.0(@types/node@24.13.1)
     optionalDependencies:
       '@typespec/streams': 0.86.0(@typespec/compiler@1.16.0(@types/node@24.13.1))
+
+  '@typespec/library-linter@0.86.0(@typespec/compiler@1.16.0(@types/node@24.13.1))':
+    dependencies:
+      '@typespec/compiler': 1.16.0(@types/node@24.13.1)
 
   '@typespec/openapi3@1.16.0(6105008f9166ca0923da9c955039bb2c)':
     dependencies:
@@ -7414,6 +7466,16 @@ snapshots:
       '@kwsites/promise-deferred': 1.1.1
       '@simple-git/args-pathspec': 1.0.3
       '@simple-git/argv-parser': 1.1.1
+      debug: 4.4.3
+    transitivePeerDependencies:
+      - supports-color
+
+  simple-git@4.0.2:
+    dependencies:
+      '@kwsites/file-exists': 1.1.1
+      '@kwsites/promise-deferred': 1.1.1
+      '@simple-git/args-pathspec': 1.0.4
+      '@simple-git/argv-parser': 2.0.1
       debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
