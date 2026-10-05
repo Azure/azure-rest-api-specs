@@ -107,9 +107,6 @@ union ScriptExecutionLocation {
   @doc("Runs on the host.")
   Host: "Host",
 
-  @doc("Runs on the Azure VM.")
-  AzureVM: "AzureVM",
-
   @doc("Runs on the source VM.")
   SourceVM: "SourceVM",
 
