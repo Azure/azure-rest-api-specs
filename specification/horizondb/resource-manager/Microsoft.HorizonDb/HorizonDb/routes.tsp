@@ -289,9 +289,6 @@ interface FirewallRules {
         >
   >;
 
-  @doc("Updates selected properties of a HorizonDB pool firewall rule. Omitted properties preserve their current values.")
-  update is ArmCustomPatchSync<FirewallRule, FirewallRuleForPatchUpdate>;
-
   @doc("Deletes a HorizonDB pool firewall rule.")
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<

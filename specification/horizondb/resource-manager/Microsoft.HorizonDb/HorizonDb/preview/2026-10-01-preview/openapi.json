@@ -3910,82 +3910,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "FirewallRules_Update",
-        "tags": [
-          "FirewallRules"
-        ],
-        "description": "Updates selected properties of a HorizonDB pool firewall rule. Omitted properties preserve their current values.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "description": "The name of the HorizonDB pool.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "firewallRuleName",
-            "in": "path",
-            "description": "The name of the HorizonDB pool firewall rule.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FirewallRuleForPatchUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update selected properties of a firewall rule in a HorizonDB pool": {
-            "$ref": "./examples/FirewallRules_Update.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "FirewallRules_Delete",
         "tags": [
@@ -7654,16 +7578,6 @@
         }
       ]
     },
-    "FirewallRuleForPatchUpdate": {
-      "type": "object",
-      "description": "A HorizonDB pool firewall rule update request.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FirewallRulePropertiesForPatchUpdate",
-          "description": "The properties to update. Omission preserves all current firewall rule properties."
-        }
-      }
-    },
     "FirewallRuleListResult": {
       "type": "object",
       "description": "The response of a FirewallRule list operation.",
@@ -7726,33 +7640,6 @@
         "startIpAddress",
         "endIpAddress"
       ]
-    },
-    "FirewallRulePropertiesForPatchUpdate": {
-      "type": "object",
-      "description": "Properties of a HorizonDB pool firewall rule for update operations. Omitted properties preserve their current values. The service validates the effective IP range after merging the supplied values with the existing rule.",
-      "properties": {
-        "startIpAddress": {
-          "$ref": "#/definitions/DottedDecimalIpv4Address",
-          "description": "The start IPv4 address to apply in dotted-decimal notation. The resulting effective start address must be numerically less than or equal to the effective end address.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "endIpAddress": {
-          "$ref": "#/definitions/DottedDecimalIpv4Address",
-          "description": "The end IPv4 address to apply in dotted-decimal notation. The resulting effective end address must be numerically greater than or equal to the effective start address.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "description": {
-          "$ref": "#/definitions/WritableDescription",
-          "description": "The description to apply to the HorizonDB firewall rule. The maximum length is 1024 characters.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        }
-      }
     },
     "GeoRedundancyState": {
       "type": "string",
