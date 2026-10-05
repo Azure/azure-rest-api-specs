@@ -2,7 +2,7 @@ import { appendFile, readdir, readFile } from "node:fs/promises";
 import { relative, resolve, sep } from "node:path";
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 import { getSuppressions } from "@azure-tools/suppressions";
-import { findTypeSpecSwagger, isTypeSpecGenerated } from "./migration.ts";
+import { hasTypeSpecGeneratedSwagger, isTypeSpecGenerated } from "./migration.ts";
 
 type SpecType = "data-plane" | "resource-manager";
 
@@ -183,7 +183,7 @@ function getServiceDirectory(fullPath: string, servicePath: string): string | un
 
 async function checkFiles(options: Options): Promise<{ brownfield: boolean; exitCode: number }> {
   const pathsWithErrors: string[] = [];
-  const typeSpecSwaggers = new Map<string, string | undefined>();
+  const serviceTypeSpecCache = new Map<string, boolean>();
   let brownfield = false;
   const filesToCheck = await getFilesToCheck(options);
 
@@ -197,7 +197,7 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
     const generated = isTypeSpecGenerated(await readFile(fullPath, "utf8"), file, logWarning);
     const suppressions = await getSuppressions("TypeSpecRequirement", fullPath);
     const suppression = suppressions[0];
-    let typeSpecSwagger: string | undefined;
+    let serviceHasTypeSpecGeneratedSwagger = false;
     if (suppression) {
       const singleVersionPattern = /\/(preview|stable)\/[A-Za-z0-9._-]+\//i;
       for (const path of suppression.paths) {
@@ -212,14 +212,18 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
       }
       if (!generated) {
         const serviceDirectory = resolve(fullPath, "../../..");
-        if (!typeSpecSwaggers.has(serviceDirectory)) {
-          typeSpecSwagger = await findTypeSpecSwagger(serviceDirectory, logWarning);
-          typeSpecSwaggers.set(serviceDirectory, typeSpecSwagger);
+        const cached = serviceTypeSpecCache.get(serviceDirectory);
+        if (cached === undefined) {
+          serviceHasTypeSpecGeneratedSwagger = await hasTypeSpecGeneratedSwagger(
+            serviceDirectory,
+            logWarning,
+          );
+          serviceTypeSpecCache.set(serviceDirectory, serviceHasTypeSpecGeneratedSwagger);
         } else {
-          typeSpecSwagger = typeSpecSwaggers.get(serviceDirectory);
+          serviceHasTypeSpecGeneratedSwagger = cached;
         }
       }
-      if (typeSpecSwagger === undefined) {
+      if (!serviceHasTypeSpecGeneratedSwagger) {
         logInfo(`  Suppressed: ${String(suppression.reason ?? "<no reason specified>")}`);
         continue;
       }
@@ -302,9 +306,9 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
       logInfo(
         `  Branch 'main' does not contain path '${apiVersion}', so API version is new and must use TypeSpec`,
       );
-      if (typeSpecSwagger !== undefined) {
+      if (serviceHasTypeSpecGeneratedSwagger) {
         logInfo(
-          `  TypeSpecRequirement suppressions cannot permit new handwritten API versions because this service contains TypeSpec-generated Swagger (${typeSpecSwagger}).`,
+          "  TypeSpecRequirement suppressions cannot permit new handwritten API versions because this service contains TypeSpec-generated Swagger.",
         );
       }
       pathsWithErrors.push(file);

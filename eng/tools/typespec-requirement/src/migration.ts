@@ -32,20 +32,20 @@ export function isTypeSpecGenerated(
 }
 
 /**
- * Finds evidence that a service uses TypeSpec: a Swagger JSON file with a present,
- * non-null `/info/x-typespec-generated` marker.
+ * Checks whether a service contains TypeSpec-generated Swagger, identified by a
+ * present, non-null `/info/x-typespec-generated` marker.
  *
  * Checks files directly inside `preview/<version>` and `stable/<version>`, excluding
  * nested examples and common types.
  *
  * @param directory The service directory containing `preview` and/or `stable`.
  * @param logWarning Reports malformed JSON encountered while scanning.
- * @returns The first matching file's path relative to `directory`, or `undefined` if none is found.
+ * @returns True if a checked Swagger file contains the marker, otherwise false.
  */
-export async function findTypeSpecSwagger(
+export async function hasTypeSpecGeneratedSwagger(
   directory: string,
   logWarning: LogWarning,
-): Promise<string | undefined> {
+): Promise<boolean> {
   for (const stage of await readdir(directory, { withFileTypes: true })) {
     if (!stage.isDirectory() || !/^(preview|stable)$/i.test(stage.name)) continue;
     const stageDirectory = join(directory, stage.name);
@@ -56,10 +56,10 @@ export async function findTypeSpecSwagger(
         if (!file.isFile() || !/\.json$/i.test(file.name)) continue;
         const path = `${stage.name}/${version.name}/${file.name}`;
         if (isTypeSpecGenerated(await readFile(join(directory, path), "utf8"), path, logWarning)) {
-          return path;
+          return true;
         }
       }
     }
   }
-  return undefined;
+  return false;
 }
