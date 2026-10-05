@@ -35,7 +35,7 @@ const protectedLabelsYaml = {
   },
   "package-name-go-approved": {
     "management-plane": ["approver3", "approver4"],
-    "data-plane": "unprotected",
+    "data-plane": "__unprotected__",
   },
 };
 

@@ -30,7 +30,7 @@ const protectedLabelsConfig = {
   },
   "typespec-suppressions-approved": {
     "data-plane": ["dp-approver1"],
-    "management-plane": "unprotected",
+    "management-plane": "__unprotected__",
   },
 };
 
@@ -254,7 +254,7 @@ describe("checkLabel", () => {
       );
     });
 
-    it("throws on invalid plane value (not an array or 'unprotected')", async () => {
+    it("throws on invalid plane value (not an array or '__unprotected__')", async () => {
       (yaml.load as ReturnType<typeof vi.fn>).mockReturnValue({
         "package-name-dotnet-approved": {
           "management-plane": "open",
@@ -268,7 +268,7 @@ describe("checkLabel", () => {
       });
 
       await expect(invokeCheckLabel({ github, context, core })).rejects.toThrow(
-        'array of logins or the literal "unprotected"',
+        'array of logins or the literal "__unprotected__"',
       );
     });
   });
