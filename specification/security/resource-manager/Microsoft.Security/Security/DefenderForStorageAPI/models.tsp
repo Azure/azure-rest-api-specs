@@ -315,9 +315,10 @@ model ScanSummary {
 
   /**
    * The estimated cost of the scan. Only available for a scan which has terminated.
+   * This property is deprecated and retained for backward compatibility.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the JSON response property name 'estimatedScanCostUSD' published in 2026-01-01-preview; changing its casing would break compatibility with existing clients."
-  @removed(Versions.v2026_06_01_preview)
+  #deprecated "This property is deprecated and retained for backward compatibility."
   estimatedScanCostUSD?: float64;
 }
 
