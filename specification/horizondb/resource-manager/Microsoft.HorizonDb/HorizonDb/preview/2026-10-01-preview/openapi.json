@@ -653,7 +653,7 @@
           }
         },
         "x-ms-examples": {
-          "Rotate the customer-managed keys used by a HorizonDB cluster": {
+          "Rotate the customer-managed key used by a HorizonDB cluster": {
             "$ref": "./examples/Clusters_UpdateDataEncryption.json"
           },
           "Update a HorizonDB cluster": {
@@ -3768,6 +3768,83 @@
           "final-state-schema": "#/definitions/Pool"
         },
         "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Pools_Delete",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Deletes a HorizonDB pool together with the Pool-scoped Endpoint whose associatedResourceId identifies that Pool and all FirewallRule children of that Endpoint. The Endpoint cannot outlive or be deleted independently from its Pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the HorizonDB pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HorizonDB pool": {
+            "$ref": "./examples/Pools_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/firewallRules": {
@@ -4008,82 +4085,6 @@
           "final-state-schema": "#/definitions/FirewallRule"
         },
         "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "FirewallRules_Update",
-        "tags": [
-          "FirewallRules"
-        ],
-        "description": "Updates selected properties of a HorizonDB pool firewall rule. Omitted properties preserve their current values.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "poolName",
-            "in": "path",
-            "description": "The name of the HorizonDB pool.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "firewallRuleName",
-            "in": "path",
-            "description": "The name of the HorizonDB pool firewall rule.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FirewallRuleForPatchUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update selected properties of a firewall rule in a HorizonDB pool": {
-            "$ref": "./examples/FirewallRules_Update.json"
-          }
-        }
       },
       "delete": {
         "operationId": "FirewallRules_Delete",
@@ -5746,7 +5747,7 @@
       "properties": {
         "geoRedundancy": {
           "$ref": "#/definitions/GeoRedundancyState",
-          "description": "The geo-redundancy state.",
+          "description": "The geo-redundancy state. Geo-redundant backup is not supported when dataEncryption.type is AzureKeyVault.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7077,7 +7078,7 @@
         },
         "identity": {
           "$ref": "#/definitions/HorizonDbClusterManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "The managed service identities assigned to this resource. Omitting the entire identity property from PUT or PATCH preserves all current assignments. When provided, PUT replaces the user-assigned identity set and PATCH merges it; null PATCH dictionary entries remove individual identities. Setting type to None clears all assignments."
         }
       },
       "allOf": [
@@ -7175,7 +7176,7 @@
         },
         "identity": {
           "$ref": "#/definitions/HorizonDbClusterManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "The managed service identities assigned to this resource. Omitting the entire identity property from PUT or PATCH preserves all current assignments. When provided, PUT replaces the user-assigned identity set and PATCH merges it; null PATCH dictionary entries remove individual identities. Setting type to None clears all assignments."
         },
         "properties": {
           "$ref": "#/definitions/ClusterPropertiesForPatchUpdate",
@@ -7277,7 +7278,7 @@
         },
         "dataEncryption": {
           "$ref": "#/definitions/HorizonDbClusterDataEncryption",
-          "description": "The data encryption configuration for the cluster. When omitted during cluster creation, the service uses SystemManaged encryption.",
+          "description": "The data encryption configuration for the cluster. When omitted during initial cluster creation, the service uses SystemManaged encryption. When supplied during initial cluster creation, type is required. For PUT updates of an existing cluster, type may be omitted; if provided, it must match the existing encryption type. The encryption type is selected at cluster creation; switching between SystemManaged and AzureKeyVault after creation is not supported.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -7326,7 +7327,7 @@
         },
         "dataEncryption": {
           "$ref": "#/definitions/HorizonDbClusterDataEncryptionForPatchUpdate",
-          "description": "The data encryption configuration to update for the cluster. Omitted properties preserve their current values.",
+          "description": "The data encryption configuration to update for the cluster. Omitted properties preserve their current values. Updates can modify settings within the existing encryption type, but switching between SystemManaged and AzureKeyVault after cluster creation is not supported.",
           "x-ms-mutability": [
             "update"
           ]
@@ -7753,16 +7754,6 @@
         }
       ]
     },
-    "FirewallRuleForPatchUpdate": {
-      "type": "object",
-      "description": "A HorizonDB pool firewall rule update request.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FirewallRulePropertiesForPatchUpdate",
-          "description": "The properties to update. Omission preserves all current firewall rule properties."
-        }
-      }
-    },
     "FirewallRuleListResult": {
       "type": "object",
       "description": "The response of a FirewallRule list operation.",
@@ -7826,33 +7817,6 @@
         "endIpAddress"
       ]
     },
-    "FirewallRulePropertiesForPatchUpdate": {
-      "type": "object",
-      "description": "Properties of a HorizonDB pool firewall rule for update operations. Omitted properties preserve their current values. The service validates the effective IP range after merging the supplied values with the existing rule.",
-      "properties": {
-        "startIpAddress": {
-          "$ref": "#/definitions/DottedDecimalIpv4Address",
-          "description": "The start IPv4 address to apply in dotted-decimal notation. The resulting effective start address must be numerically less than or equal to the effective end address.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "endIpAddress": {
-          "$ref": "#/definitions/DottedDecimalIpv4Address",
-          "description": "The end IPv4 address to apply in dotted-decimal notation. The resulting effective end address must be numerically greater than or equal to the effective start address.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "description": {
-          "$ref": "#/definitions/WritableDescription",
-          "description": "The description to apply to the HorizonDB firewall rule. The maximum length is 1024 characters.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        }
-      }
-    },
     "GeoRedundancyState": {
       "type": "string",
       "description": "Indicates the geo-redundancy state.",
@@ -7867,7 +7831,7 @@
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "Geo-redundancy is enabled"
+            "description": "Geo-redundancy is enabled. This value is not supported when dataEncryption.type is AzureKeyVault."
           },
           {
             "name": "Disabled",
@@ -7879,11 +7843,11 @@
     },
     "HorizonDbClusterDataEncryption": {
       "type": "object",
-      "description": "The Cluster-level data encryption configuration. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required. When geographically redundant backup is enabled, geoBackupKeyUri and geoBackupUserAssignedIdentityId are also required. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. Only versionless Azure Key Vault key URIs are supported; key version paths are rejected. For SystemManaged encryption, key and identity properties must be omitted.",
+      "description": "The Cluster-level data encryption configuration. The encryption type is selected at cluster creation; switching between SystemManaged and AzureKeyVault after creation is not supported. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required, and backup.geoRedundancy must be Disabled. Both primaryKeyUri and primaryUserAssignedIdentityId can be provided during initial cluster creation. For updates to an existing cluster through PUT or PATCH, only one of these properties can change per request, and that update must complete before submitting a separate update to change the other property. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. Only versionless Azure Key Vault key URIs are supported; key version paths are rejected. For SystemManaged encryption, key and identity properties must be omitted.",
       "properties": {
         "type": {
           "$ref": "#/definitions/HorizonDbClusterDataEncryptionType",
-          "description": "The type of data encryption used by the cluster.",
+          "description": "The type of data encryption used by the cluster. When the data encryption configuration is supplied during initial cluster creation, this property is required. For PUT updates of an existing cluster, this property may be omitted; if provided, it must match the existing encryption type. This value is selected at cluster creation and cannot later be changed from SystemManaged to AzureKeyVault or from AzureKeyVault to SystemManaged.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -7892,7 +7856,7 @@
         },
         "primaryKeyUri": {
           "$ref": "#/definitions/VersionlessKeyVaultKeyUri",
-          "description": "The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported.",
+          "description": "The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported. During initial cluster creation, this property can be provided together with primaryUserAssignedIdentityId. For updates to an existing cluster through PUT or PATCH, this property and primaryUserAssignedIdentityId cannot both change in the same request; the first update must complete before submitting a separate update for the other property.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -7902,7 +7866,7 @@
         "primaryUserAssignedIdentityId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.",
+          "description": "The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property. During initial cluster creation, this property can be provided together with primaryKeyUri. For updates to an existing cluster through PUT or PATCH, this property and primaryKeyUri cannot both change in the same request; the first update must complete before submitting a separate update for the other property.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -7920,54 +7884,23 @@
           "$ref": "#/definitions/HorizonDbClusterEncryptionKeyStatus",
           "description": "The validation status of the primary encryption key. This property is returned for AzureKeyVault encryption and is absent for SystemManaged encryption.",
           "readOnly": true
-        },
-        "geoBackupKeyUri": {
-          "$ref": "#/definitions/VersionlessKeyVaultKeyUri",
-          "description": "The versionless Azure Key Vault key URI used to encrypt geographically redundant backups. Key version paths are not supported.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "geoBackupUserAssignedIdentityId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ],
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        },
-        "geoBackupEncryptionKeyStatus": {
-          "$ref": "#/definitions/HorizonDbClusterEncryptionKeyStatus",
-          "description": "The validation status of the geographically redundant backup encryption key. This property is returned for AzureKeyVault encryption when geographically redundant backup is enabled.",
-          "readOnly": true
         }
       }
     },
     "HorizonDbClusterDataEncryptionForPatchUpdate": {
       "type": "object",
-      "description": "Properties for sparsely updating Cluster-level data encryption. Omitted properties preserve their current values.",
+      "description": "Properties for sparsely updating Cluster-level data encryption. Omitted properties preserve their current values. Updates can modify settings within the existing encryption type, such as the primary Azure Key Vault key URI, but switching between SystemManaged and AzureKeyVault after cluster creation is not supported. AzureKeyVault encryption is not supported when backup.geoRedundancy is Enabled. An update can change only one of primaryKeyUri or primaryUserAssignedIdentityId; that update must complete before submitting a separate update to change the other property.",
       "properties": {
         "type": {
           "$ref": "#/definitions/HorizonDbClusterDataEncryptionType",
-          "description": "The type of data encryption used by the cluster.",
+          "description": "The existing data encryption type used by the cluster. PATCH is a sparse update, so this property may be omitted. If provided, it must match the existing encryption type. This value cannot be changed from SystemManaged to AzureKeyVault or from AzureKeyVault to SystemManaged after cluster creation.",
           "x-ms-mutability": [
             "update"
           ]
         },
         "primaryKeyUri": {
           "$ref": "#/definitions/VersionlessKeyVaultKeyUri",
-          "description": "The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported.",
+          "description": "The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported. This property and primaryUserAssignedIdentityId cannot both change in the same update; the first update must complete before submitting a separate update for the other property.",
           "x-ms-mutability": [
             "update"
           ]
@@ -7975,29 +7908,7 @@
         "primaryUserAssignedIdentityId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.",
-          "x-ms-mutability": [
-            "update"
-          ],
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        },
-        "geoBackupKeyUri": {
-          "$ref": "#/definitions/VersionlessKeyVaultKeyUri",
-          "description": "The versionless Azure Key Vault key URI used to encrypt geographically redundant backups. Key version paths are not supported.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "geoBackupUserAssignedIdentityId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.",
+          "description": "The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property. This property and primaryKeyUri cannot both change in the same update; the first update must complete before submitting a separate update for the other property.",
           "x-ms-mutability": [
             "update"
           ],
@@ -8013,7 +7924,7 @@
     },
     "HorizonDbClusterDataEncryptionType": {
       "type": "string",
-      "description": "The type of data encryption used by a HorizonDB cluster.",
+      "description": "The type of data encryption used by a HorizonDB cluster. The type is selected at cluster creation; switching between SystemManaged and AzureKeyVault after creation is not supported.",
       "enum": [
         "SystemManaged",
         "AzureKeyVault"
@@ -8073,7 +7984,7 @@
           {
             "name": "None",
             "value": "None",
-            "description": "No managed identity is assigned."
+            "description": "No managed identity is assigned. Setting type to None clears all managed identity assignments."
           },
           {
             "name": "UserAssigned",
@@ -8085,15 +7996,15 @@
     },
     "HorizonDbClusterManagedServiceIdentity": {
       "type": "object",
-      "description": "The user-assigned managed identities assigned to a HorizonDB cluster. PUT and PATCH can assign or remove identities. Omitting the top-level identity property from PATCH preserves all current assignments. Removing an identity referenced by a change data capture identity assignment is rejected until the referencing assignment is deleted.",
+      "description": "The user-assigned managed identities assigned to a HorizonDB cluster. Omitting the entire top-level identity property from PUT or PATCH preserves all current assignments. When userAssignedIdentities is supplied, PUT replaces the complete set and PATCH merges the supplied entries with the existing set; a null PATCH entry removes that individual identity. Setting type to None clears all assignments. Removing an identity referenced by a change data capture identity assignment is rejected until the referencing assignment is deleted.",
       "properties": {
         "type": {
           "$ref": "#/definitions/HorizonDbClusterIdentityType",
-          "description": "The managed identity type assigned to the cluster."
+          "description": "The managed identity type assigned to the cluster. Setting this property to None clears all managed identity assignments."
         },
         "userAssignedIdentities": {
           "type": "object",
-          "description": "The user-assigned managed identities associated with the cluster. Each dictionary key must be the full Azure resource ID of a Microsoft.ManagedIdentity/userAssignedIdentities resource. Request values can be empty objects; response values contain the service-populated clientId and principalId. Assigning an identity does not grant it access to destination resources; required role assignments must be configured separately.",
+          "description": "The user-assigned managed identities associated with the cluster. When supplied on PUT, this dictionary replaces the complete set of assignments. When supplied on PATCH, entries are merged with the existing set and a null value removes the corresponding identity. Each dictionary key must be the full Azure resource ID of a Microsoft.ManagedIdentity/userAssignedIdentities resource. Non-null request values can be empty objects; response values contain the service-populated clientId and principalId. Assigning an identity does not grant it access to destination resources; required role assignments must be configured separately.",
           "additionalProperties": {
             "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true

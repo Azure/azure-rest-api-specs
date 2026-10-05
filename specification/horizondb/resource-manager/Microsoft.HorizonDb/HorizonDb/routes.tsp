@@ -127,7 +127,6 @@ interface Clusters {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "HorizonDB supports a single default compute pool that cannot be deleted independently of its parent cluster."
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPools")
 @armResourceOperations
 interface Pools {
@@ -154,6 +153,16 @@ interface Pools {
     PoolForPatchUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = Pool> &
       Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Deletes a HorizonDB pool together with the Pool-scoped Endpoint whose associatedResourceId identifies that Pool and all FirewallRule children of that Endpoint. The Endpoint cannot outlive or be deleted independently from its Pool.")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Pool,
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   @doc("Lists all HorizonDB pools in a cluster.")
@@ -288,9 +297,6 @@ interface FirewallRules {
           HorizonDbResourceLroHeaders<FirewallRule>
         >
   >;
-
-  @doc("Updates selected properties of a HorizonDB pool firewall rule. Omitted properties preserve their current values.")
-  update is ArmCustomPatchSync<FirewallRule, FirewallRuleForPatchUpdate>;
 
   @doc("Deletes a HorizonDB pool firewall rule.")
   @sharedRoute
