@@ -398,14 +398,14 @@ model CostControlListResult {
    * The link used to get the next page of cost controls.
    */
   @nextLink
-  nextLink?: string;
+  nextLink?: url;
 
   /**
    * The cost controls in this page.
    */
   @pageItems
   @identifiers(#["name"])
-  value?: CostControl[];
+  value: CostControl[];
 }
 
 /**
