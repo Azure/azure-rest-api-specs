@@ -1190,6 +1190,11 @@ model HorizonDbClusterDataEncryption {
   @doc("The validation status of the primary encryption key. This property is returned for AzureKeyVault encryption and is absent for SystemManaged encryption.")
   @visibility(Lifecycle.Read)
   primaryEncryptionKeyStatus?: HorizonDbClusterEncryptionKeyStatus;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The current version of the primary encryption key used by the cluster. This property is returned for AzureKeyVault encryption and is absent for SystemManaged encryption.")
+  @visibility(Lifecycle.Read)
+  primaryEncryptionKeyCurrentVersion?: string;
 }
 
 @added(Versions.v2026_10_01_preview)
