@@ -596,7 +596,7 @@ model AzureRbacAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.AzureRbac;
 
   @doc("The source used to derive user and chat isolation keys. When omitted, the source defaults to Entra.")
-  isolation_key_source?: IsolationKeySource;
+  isolation_key_source?: AzureRbacIsolationKeySource;
 }
 
 @doc("Authorizes callers presenting a token for the backing Agent Blueprint audience.")
@@ -605,7 +605,7 @@ model AgentBlueprintAuthorizationScheme
   type: AgentEndpointAuthorizationSchemeType.AgentBlueprint;
 
   @doc("The source used to derive user and chat isolation keys. When omitted, the source defaults to Entra.")
-  isolation_key_source?: IsolationKeySource;
+  isolation_key_source?: AgentBlueprintIsolationKeySource;
 
   @doc("""
     The validation applied to inbound bearer tokens addressed to the backing blueprint audience. When
@@ -615,24 +615,43 @@ model AgentBlueprintAuthorizationScheme
   token_validation_rules?: TokenValidationRules;
 }
 
-@doc("The source used to derive user and chat isolation keys for an agent endpoint.")
+@doc("The source used to derive user and chat isolation keys for Azure RBAC authorization.")
 @discriminator("kind")
-model IsolationKeySource {
+model AzureRbacIsolationKeySource {
   kind: IsolationKeySourceKind;
 }
 
-@doc("Derives isolation keys from the authenticated Entra identity.")
-model EntraIsolationKeySource extends IsolationKeySource {
+@doc("Derives Azure RBAC isolation keys from the authenticated Entra identity.")
+model AzureRbacEntraIsolationKeySource extends AzureRbacIsolationKeySource {
   kind: IsolationKeySourceKind.Entra;
 }
 
-@doc("Derives isolation keys from trusted request headers supplied by an allowed client application.")
-model HeaderIsolationKeySource extends IsolationKeySource {
+@doc("Derives Azure RBAC isolation keys from trusted request headers. Header authorization remains governed by the Azure RBAC data action.")
+model AzureRbacHeaderIsolationKeySource extends AzureRbacIsolationKeySource {
+  kind: IsolationKeySourceKind.Header;
+}
+
+@doc("The source used to derive user and chat isolation keys for Agent Blueprint authorization.")
+@discriminator("kind")
+model AgentBlueprintIsolationKeySource {
+  kind: IsolationKeySourceKind;
+}
+
+@doc("Derives Agent Blueprint isolation keys from the authenticated Entra identity.")
+model AgentBlueprintEntraIsolationKeySource
+  extends AgentBlueprintIsolationKeySource {
+  kind: IsolationKeySourceKind.Entra;
+}
+
+@doc("Derives Agent Blueprint isolation keys from trusted request headers supplied by an allowed client application.")
+model AgentBlueprintHeaderIsolationKeySource
+  extends AgentBlueprintIsolationKeySource {
   kind: IsolationKeySourceKind.Header;
 
-  @doc("The trusted client applications allowed to supply isolation key headers. A null or omitted list imposes no restriction; an empty list blocks all clients.")
+  @doc("The trusted client applications allowed to supply isolation key headers. At least one client application is required.")
+  @minItems(1)
   @maxItems(10)
-  allowed_clients?: string[];
+  allowed_clients: string[];
 }
 
 @doc("The supported sources for deriving user and chat isolation keys.")

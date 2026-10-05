@@ -38064,7 +38064,7 @@ components:
           enum:
             - AgentBlueprint
         isolation_key_source:
-          $ref: '#/components/schemas/IsolationKeySource'
+          $ref: '#/components/schemas/AgentBlueprintIsolationKeySource'
           description: The source used to derive user and chat isolation keys. When omitted, the source defaults to Entra.
         token_validation_rules:
           $ref: '#/components/schemas/TokenValidationRules'
@@ -38075,6 +38075,51 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
       description: Authorizes callers presenting a token for the backing Agent Blueprint audience.
+    AgentBlueprintEntraIsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - Entra
+      allOf:
+        - $ref: '#/components/schemas/AgentBlueprintIsolationKeySource'
+      description: Derives Agent Blueprint isolation keys from the authenticated Entra identity.
+    AgentBlueprintHeaderIsolationKeySource:
+      type: object
+      required:
+        - kind
+        - allowed_clients
+      properties:
+        kind:
+          type: string
+          enum:
+            - Header
+        allowed_clients:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          maxItems: 10
+          description: The trusted client applications allowed to supply isolation key headers. At least one client application is required.
+      allOf:
+        - $ref: '#/components/schemas/AgentBlueprintIsolationKeySource'
+      description: Derives Agent Blueprint isolation keys from trusted request headers supplied by an allowed client application.
+    AgentBlueprintIsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          $ref: '#/components/schemas/IsolationKeySourceKind'
+      discriminator:
+        propertyName: kind
+        mapping:
+          Entra: '#/components/schemas/AgentBlueprintEntraIsolationKeySource'
+          Header: '#/components/schemas/AgentBlueprintHeaderIsolationKeySource'
+      description: The source used to derive user and chat isolation keys for Agent Blueprint authorization.
     AgentBlueprintReference:
       type: object
       required:
@@ -39600,11 +39645,48 @@ components:
           enum:
             - AzureRbac
         isolation_key_source:
-          $ref: '#/components/schemas/IsolationKeySource'
+          $ref: '#/components/schemas/AzureRbacIsolationKeySource'
           description: The source used to derive user and chat isolation keys. When omitted, the source defaults to Entra.
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
       description: Authorizes Foundry-audience callers through Azure RBAC.
+    AzureRbacEntraIsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - Entra
+      allOf:
+        - $ref: '#/components/schemas/AzureRbacIsolationKeySource'
+      description: Derives Azure RBAC isolation keys from the authenticated Entra identity.
+    AzureRbacHeaderIsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - Header
+      allOf:
+        - $ref: '#/components/schemas/AzureRbacIsolationKeySource'
+      description: Derives Azure RBAC isolation keys from trusted request headers. Header authorization remains governed by the Azure RBAC data action.
+    AzureRbacIsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          $ref: '#/components/schemas/IsolationKeySourceKind'
+      discriminator:
+        propertyName: kind
+        mapping:
+          Entra: '#/components/schemas/AzureRbacEntraIsolationKeySource'
+          Header: '#/components/schemas/AzureRbacHeaderIsolationKeySource'
+      description: The source used to derive user and chat isolation keys for Azure RBAC authorization.
     AzureUserSecurityContext:
       type: object
       properties:
@@ -41660,18 +41742,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Entra ID credential definition
-    EntraIsolationKeySource:
-      type: object
-      required:
-        - kind
-      properties:
-        kind:
-          type: string
-          enum:
-            - Entra
-      allOf:
-        - $ref: '#/components/schemas/IsolationKeySource'
-      description: Derives isolation keys from the authenticated Entra identity.
     Eval:
       type: object
       required:
@@ -43706,24 +43776,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
-    HeaderIsolationKeySource:
-      type: object
-      required:
-        - kind
-      properties:
-        kind:
-          type: string
-          enum:
-            - Header
-        allowed_clients:
-          type: array
-          items:
-            type: string
-          maxItems: 10
-          description: The trusted client applications allowed to supply isolation key headers. A null or omitted list imposes no restriction; an empty list blocks all clients.
-      allOf:
-        - $ref: '#/components/schemas/IsolationKeySource'
-      description: Derives isolation keys from trusted request headers supplied by an allowed client application.
     HeaderTelemetryEndpointAuth:
       type: object
       required:
@@ -44239,19 +44291,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
-    IsolationKeySource:
-      type: object
-      required:
-        - kind
-      properties:
-        kind:
-          $ref: '#/components/schemas/IsolationKeySourceKind'
-      discriminator:
-        propertyName: kind
-        mapping:
-          Entra: '#/components/schemas/EntraIsolationKeySource'
-          Header: '#/components/schemas/HeaderIsolationKeySource'
-      description: The source used to derive user and chat isolation keys for an agent endpoint.
     IsolationKeySourceKind:
       anyOf:
         - type: string
