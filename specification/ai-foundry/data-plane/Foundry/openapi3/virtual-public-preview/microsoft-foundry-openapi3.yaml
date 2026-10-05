@@ -39935,7 +39935,7 @@ components:
           description: |-
             The validation applied to inbound bearer tokens addressed to the backing blueprint audience. When
             omitted, each rule falls back to the backing blueprint's system-determined defaults (audience =
-            blueprint resource URI, tenant = subscription tenant, required scope = `access_agent`).
+            blueprint resource URI, tenant = backing blueprint tenant, required scope = `access_agent`).
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
       description: Authorizes callers presenting a token for the backing Agent Blueprint audience.
@@ -39964,13 +39964,17 @@ components:
         allowed_clients:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Azure.Core.uuid'
           minItems: 1
           maxItems: 10
           description: The trusted client applications allowed to supply isolation key headers. At least one client application is required.
       allOf:
         - $ref: '#/components/schemas/AgentBlueprintIsolationKeySource'
-      description: Derives Agent Blueprint isolation keys from trusted request headers supplied by an allowed client application.
+      description: |-
+        Derives Agent Blueprint isolation keys from trusted request headers. The caller must use an app-only
+        token, and its application ID must appear in both this source's `allowed_clients` list and
+        `token_validation_rules.allowed_clients`. A Header configuration without both nonempty lists cannot
+        authorize a caller and is rejected during configuration validation.
     AgentBlueprintIsolationKeySource:
       type: object
       required:
@@ -77071,9 +77075,9 @@ components:
         allowed_clients:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Azure.Core.uuid'
           maxItems: 10
-          description: The accepted client applications (the `azp`/`appid` claim). Null/omitted imposes no restriction. Empty blocks all requests.
+          description: The accepted client applications, validated against the `azp` or `appid` claim. For delegated tokens, null or omitted imposes no client-application restriction. App-only tokens require a nonempty list containing the caller's application ID; otherwise authorization is denied. An empty list blocks all requests.
         allowed_principals:
           type: array
           items:
@@ -77084,6 +77088,7 @@ components:
           type: array
           items:
             type: string
+          minItems: 1
           maxItems: 10
           description: The permission names (validated against the `scp` claim for delegated tokens) that must all be present. Null/omitted defaults to `["access_agent"]`. An empty list is invalid.
       description: |-

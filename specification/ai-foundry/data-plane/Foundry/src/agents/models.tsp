@@ -610,7 +610,7 @@ model AgentBlueprintAuthorizationScheme
   @doc("""
     The validation applied to inbound bearer tokens addressed to the backing blueprint audience. When
     omitted, each rule falls back to the backing blueprint's system-determined defaults (audience =
-    blueprint resource URI, tenant = subscription tenant, required scope = `access_agent`).
+    blueprint resource URI, tenant = backing blueprint tenant, required scope = `access_agent`).
     """)
   token_validation_rules?: TokenValidationRules;
 }
@@ -643,7 +643,12 @@ model AgentBlueprintEntraIsolationKeySource
   kind: IsolationKeySourceKind.Entra;
 }
 
-@doc("Derives Agent Blueprint isolation keys from trusted request headers supplied by an allowed client application.")
+@doc("""
+  Derives Agent Blueprint isolation keys from trusted request headers. The caller must use an app-only
+  token, and its application ID must appear in both this source's `allowed_clients` list and
+  `token_validation_rules.allowed_clients`. A Header configuration without both nonempty lists cannot
+  authorize a caller and is rejected during configuration validation.
+  """)
 model AgentBlueprintHeaderIsolationKeySource
   extends AgentBlueprintIsolationKeySource {
   kind: IsolationKeySourceKind.Header;
@@ -651,7 +656,7 @@ model AgentBlueprintHeaderIsolationKeySource
   @doc("The trusted client applications allowed to supply isolation key headers. At least one client application is required.")
   @minItems(1)
   @maxItems(10)
-  allowed_clients: string[];
+  allowed_clients: Azure.Core.uuid[];
 }
 
 @doc("The supported sources for deriving user and chat isolation keys.")
@@ -679,15 +684,16 @@ model TokenValidationRules {
   @maxItems(10)
   allowed_tenants?: string[];
 
-  @doc("The accepted client applications (the `azp`/`appid` claim). Null/omitted imposes no restriction. Empty blocks all requests.")
+  @doc("The accepted client applications, validated against the `azp` or `appid` claim. For delegated tokens, null or omitted imposes no client-application restriction. App-only tokens require a nonempty list containing the caller's application ID; otherwise authorization is denied. An empty list blocks all requests.")
   @maxItems(10)
-  allowed_clients?: string[];
+  allowed_clients?: Azure.Core.uuid[];
 
   @doc("The accepted principals (the `oid` claim). Null/omitted imposes no restriction. Empty blocks all requests.")
   @maxItems(10)
   allowed_principals?: string[];
 
   @doc("The permission names (validated against the `scp` claim for delegated tokens) that must all be present. Null/omitted defaults to `[\"access_agent\"]`. An empty list is invalid.")
+  @minItems(1)
   @maxItems(10)
   required_scopes?: string[];
 }

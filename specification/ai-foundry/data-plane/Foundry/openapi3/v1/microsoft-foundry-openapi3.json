@@ -26509,7 +26509,7 @@
           },
           "token_validation_rules": {
             "$ref": "#/components/schemas/TokenValidationRules",
-            "description": "The validation applied to inbound bearer tokens addressed to the backing blueprint audience. When\nomitted, each rule falls back to the backing blueprint's system-determined defaults (audience =\nblueprint resource URI, tenant = subscription tenant, required scope = `access_agent`)."
+            "description": "The validation applied to inbound bearer tokens addressed to the backing blueprint audience. When\nomitted, each rule falls back to the backing blueprint's system-determined defaults (audience =\nblueprint resource URI, tenant = backing blueprint tenant, required scope = `access_agent`)."
           }
         },
         "allOf": [
@@ -26555,7 +26555,7 @@
           "allowed_clients": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/Azure.Core.uuid"
             },
             "minItems": 1,
             "maxItems": 10,
@@ -26567,7 +26567,7 @@
             "$ref": "#/components/schemas/AgentBlueprintIsolationKeySource"
           }
         ],
-        "description": "Derives Agent Blueprint isolation keys from trusted request headers supplied by an allowed client application."
+        "description": "Derives Agent Blueprint isolation keys from trusted request headers. The caller must use an app-only\ntoken, and its application ID must appear in both this source's `allowed_clients` list and\n`token_validation_rules.allowed_clients`. A Header configuration without both nonempty lists cannot\nauthorize a caller and is rejected during configuration validation."
       },
       "AgentBlueprintIsolationKeySource": {
         "type": "object",
@@ -75722,10 +75722,10 @@
           "allowed_clients": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/Azure.Core.uuid"
             },
             "maxItems": 10,
-            "description": "The accepted client applications (the `azp`/`appid` claim). Null/omitted imposes no restriction. Empty blocks all requests."
+            "description": "The accepted client applications, validated against the `azp` or `appid` claim. For delegated tokens, null or omitted imposes no client-application restriction. App-only tokens require a nonempty list containing the caller's application ID; otherwise authorization is denied. An empty list blocks all requests."
           },
           "allowed_principals": {
             "type": "array",
@@ -75740,6 +75740,7 @@
             "items": {
               "type": "string"
             },
+            "minItems": 1,
             "maxItems": 10,
             "description": "The permission names (validated against the `scp` claim for delegated tokens) that must all be present. Null/omitted defaults to `[\"access_agent\"]`. An empty list is invalid."
           }
