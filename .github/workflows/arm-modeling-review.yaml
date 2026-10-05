@@ -28,8 +28,9 @@ jobs:
     # For label events, only run when ARMModelingSignedOff is the label being added or removed,
     # since that label represents a manual reviewer sign-off that affects this workflow's output.
     if: |
-      (github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
-      github.event.label.name == 'ARMModelingSignedOff'
+      github.event.pull_request.state == 'open' &&
+      ((github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
+       github.event.label.name == 'ARMModelingSignedOff')
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
