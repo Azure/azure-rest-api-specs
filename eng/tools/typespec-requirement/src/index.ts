@@ -19,7 +19,7 @@ interface FileToCheck {
   path: string;
 }
 
-const defaultRepoRoot = resolve(import.meta.dirname, "../../../../");
+const repoRoot = resolve(import.meta.dirname, "../../../../");
 
 function escapeData(value: string): string {
   return value.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll("\n", "%0A");
@@ -109,7 +109,7 @@ async function findFilesNamed(directory: string, fileName: string): Promise<stri
   return files;
 }
 
-async function getFilesToCheck(options: Options, repoRoot: string): Promise<FileToCheck[]> {
+async function getFilesToCheck(options: Options): Promise<FileToCheck[]> {
   let files: FileToCheck[];
   if (options.checkAllUnder) {
     const directory = resolve(repoRoot, options.checkAllUnder);
@@ -181,14 +181,11 @@ function getServiceDirectory(fullPath: string, servicePath: string): string | un
   return normalizedPath.slice(0, serviceIndex + serviceMarker.length - 1);
 }
 
-export async function checkFiles(
-  options: Options,
-  repoRoot = defaultRepoRoot,
-): Promise<{ brownfield: boolean; exitCode: number }> {
+async function checkFiles(options: Options): Promise<{ brownfield: boolean; exitCode: number }> {
   const pathsWithErrors: string[] = [];
   const typeSpecSwaggers = new Map<string, string | undefined>();
   let brownfield = false;
-  const filesToCheck = await getFilesToCheck(options, repoRoot);
+  const filesToCheck = await getFilesToCheck(options);
 
   if (filesToCheck.length === 0) {
     logInfo("No OpenAPI files found to check");
@@ -397,6 +394,4 @@ async function main(): Promise<void> {
   }
 }
 
-if (import.meta.main) {
-  await main();
-}
+await main();

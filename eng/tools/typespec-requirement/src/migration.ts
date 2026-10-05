@@ -31,8 +31,10 @@ export function isTypeSpecGenerated(
   );
 }
 
-async function getServiceSwaggers(directory: string): Promise<string[]> {
-  const files: string[] = [];
+export async function findTypeSpecSwagger(
+  directory: string,
+  logWarning: LogWarning,
+): Promise<string | undefined> {
   for (const stage of await readdir(directory, { withFileTypes: true })) {
     if (!stage.isDirectory() || !/^(preview|stable)$/i.test(stage.name)) continue;
     const stageDirectory = join(directory, stage.name);
@@ -40,25 +42,13 @@ async function getServiceSwaggers(directory: string): Promise<string[]> {
       if (!version.isDirectory()) continue;
       const versionDirectory = join(stageDirectory, version.name);
       for (const file of await readdir(versionDirectory, { withFileTypes: true })) {
-        if (file.isFile() && /\.json$/i.test(file.name)) {
-          files.push(`${stage.name}/${version.name}/${file.name}`);
+        if (!file.isFile() || !/\.json$/i.test(file.name)) continue;
+        const path = `${stage.name}/${version.name}/${file.name}`;
+        if (isTypeSpecGenerated(await readFile(join(directory, path), "utf8"), path, logWarning)) {
+          return path;
         }
       }
     }
   }
-  return files;
-}
-
-export async function findTypeSpecSwagger(
-  directory: string,
-  logWarning: LogWarning,
-): Promise<string | undefined> {
-  const currentFiles = await getServiceSwaggers(directory);
-  for (const file of currentFiles) {
-    if (isTypeSpecGenerated(await readFile(join(directory, file), "utf8"), file, logWarning)) {
-      return file;
-    }
-  }
-
   return undefined;
 }
