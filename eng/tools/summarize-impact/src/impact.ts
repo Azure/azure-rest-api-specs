@@ -2,7 +2,7 @@
 
 import { existsSync, globSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { isDeepStrictEqual } from "node:util";
-import { dirname, join, resolve } from "path";
+import { dirname, join, resolve } from "node:path";
 
 import * as commonmark from "commonmark";
 import yaml from "js-yaml";
