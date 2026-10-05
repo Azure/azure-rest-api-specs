@@ -40707,7 +40707,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 10,
-            "description": "Optional configured rating weight. For new scoring definitions, omit every weight for equal contribution or supply a weight for every dimension. Partially weighted definitions are rejected, including a mix of explicit unit weights and omitted weights. Boolean mode rejects weights. No schema default is emitted."
+            "description": "Optional configured weight for either scoring mode. Omit every weight for equal contribution or supply a weight for every dimension. Partially weighted definitions are rejected, including a mix of explicit unit weights and omitted weights. No schema default is emitted."
           },
           "always_applicable": {
             "type": "boolean",
@@ -87638,7 +87638,7 @@
             "format": "float",
             "minimum": 0,
             "maximum": 1,
-            "description": "Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field."
+            "description": "Optional threshold on the normalized 0-1 scale for either scoring mode, interpreted as 0.5 when omitted."
           },
           "scoring": {
             "$ref": "#/components/schemas/RubricScoring",
@@ -87669,7 +87669,7 @@
           },
           "passed": {
             "type": "boolean",
-            "description": "Known Boolean verdict. Absent for N/A or insufficient evidence and for rating dimensions."
+            "description": "Boolean verdict. Required when a Boolean dimension is applicable; absent for N/A and rating dimensions."
           },
           "raw_score": {
             "type": "integer",
@@ -87683,21 +87683,21 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 10,
-            "description": "Explicitly configured rating weight. Omitted for every dimension when weights are implicit, and always absent for Boolean dimensions. If configured, all rating dimensions include a weight."
+            "description": "Explicitly configured weight. Omitted for every dimension when weights are implicit. If configured, every dimension includes a weight."
           },
           "effective_weight": {
             "type": "number",
             "format": "double",
             "minimum": 0,
             "maximum": 1,
-            "description": "Normalized rating weight among applicable rating dimensions."
+            "description": "Normalized weight among applicable dimensions."
           },
           "contribution": {
             "type": "number",
             "format": "double",
             "minimum": 0,
             "maximum": 1,
-            "description": "Contribution to the rating aggregate."
+            "description": "Contribution to the normalized aggregate. Likert uses effective_weight * (raw_score - 1) / 4; Boolean uses effective_weight * (passed ? 1 : 0)."
           },
           "reason": {
             "type": "string",
@@ -87823,8 +87823,7 @@
             "enum": [
               "pass",
               "fail",
-              "not_applicable",
-              "indeterminate"
+              "not_applicable"
             ]
           }
         ],
@@ -87872,7 +87871,7 @@
             "format": "double",
             "minimum": 0,
             "maximum": 1,
-            "description": "Quality score, equal to the top-level score when known. Rating uses a normalized 0-1 value; Boolean uses 1 for quality pass and 0 for quality fail, never a fraction of passed checks. Absent for unknown or N/A quality."
+            "description": "Quality score, equal to the top-level score when known. Likert grades are normalized to 0-1; Boolean verdicts contribute pass=1 and fail=0. N/A dimensions are excluded. Absent when no dimension applies."
           },
           "quality_passed": {
             "type": "boolean",
@@ -87883,7 +87882,7 @@
             "format": "float",
             "minimum": 0,
             "maximum": 1,
-            "description": "The configured rating threshold. Required for rating and absent for Boolean."
+            "description": "The resolved threshold used for both modes. Defaults to 0.5 when omitted from the evaluator definition."
           },
           "decision": {
             "$ref": "#/components/schemas/RubricScoringDecision",
@@ -87897,7 +87896,7 @@
             "description": "One result list for every dimension, using the rubric's scoring mode."
           }
         },
-        "description": "Explainable scoring results for a rubric. Boolean scoring requires every applicable check to pass; Likert scoring compares the weighted average with the threshold.",
+        "description": "Explainable scoring results for a rubric. Both Boolean and Likert modes compare a normalized optional weighted average with the threshold.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"

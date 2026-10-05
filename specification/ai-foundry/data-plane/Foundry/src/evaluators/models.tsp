@@ -136,7 +136,7 @@ const RubricScoringRequiredPreviews = #{
 union RubricScoringMode {
   string,
 
-  @doc("Every applicable quality check must pass. Weights and thresholds are not accepted.")
+  @doc("Score applicable checks as pass=1 and fail=0, then compare their optional weighted average with the rubric threshold.")
   boolean: "boolean",
 
   @doc("Grade applicable quality dimensions from 1 through 5, with optional relative weights.")
@@ -163,21 +163,18 @@ union RubricScoringDecision {
   @doc("The selected scoring rule fails.")
   fail: "fail",
 
-  @doc("No quality dimension applies and no known failure establishes rejection.")
+  @doc("No quality dimension applies.")
   not_applicable: "not_applicable",
-
-  @doc("No known failure establishes rejection, but evidence is insufficient.")
-  indeterminate: "indeterminate",
 }
 
-@doc("Explainable scoring results for a rubric. Boolean scoring requires every applicable check to pass; Likert scoring compares the weighted average with the threshold.")
+@doc("Explainable scoring results for a rubric. Both Boolean and Likert modes compare a normalized optional weighted average with the threshold.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
 model RubricScoringResult {
   @doc("The resolved scoring mode.")
   mode: RubricScoringMode;
 
-  @doc("Quality score, equal to the top-level score when known. Rating uses a normalized 0-1 value; Boolean uses 1 for quality pass and 0 for quality fail, never a fraction of passed checks. Absent for unknown or N/A quality.")
+  @doc("Quality score, equal to the top-level score when known. Likert grades are normalized to 0-1; Boolean verdicts contribute pass=1 and fail=0. N/A dimensions are excluded. Absent when no dimension applies.")
   @minValue(0)
   @maxValue(1)
   quality_score?: float64;
@@ -185,7 +182,7 @@ model RubricScoringResult {
   @doc("Whether the quality score meets its threshold. Absent when quality is unavailable.")
   quality_passed?: boolean;
 
-  @doc("The configured rating threshold. Required for rating and absent for Boolean.")
+  @doc("The resolved threshold used for both modes. Defaults to 0.5 when omitted from the evaluator definition.")
   @minValue(0)
   @maxValue(1)
   quality_threshold?: float32;
@@ -207,7 +204,7 @@ model RubricDimensionResult {
   @doc("Whether the dimension applies.")
   applicable: boolean;
 
-  @doc("Known Boolean verdict. Absent for N/A or insufficient evidence and for rating dimensions.")
+  @doc("Boolean verdict. Required when a Boolean dimension is applicable; absent for N/A and rating dimensions.")
   passed?: boolean;
 
   @doc("Applicable Likert grade. Absent for Boolean dimensions.")
@@ -215,17 +212,17 @@ model RubricDimensionResult {
   @maxValue(5)
   raw_score?: int32;
 
-  @doc("Explicitly configured rating weight. Omitted for every dimension when weights are implicit, and always absent for Boolean dimensions. If configured, all rating dimensions include a weight.")
+  @doc("Explicitly configured weight. Omitted for every dimension when weights are implicit. If configured, every dimension includes a weight.")
   @minValue(1)
   @maxValue(10)
   weight?: int32;
 
-  @doc("Normalized rating weight among applicable rating dimensions.")
+  @doc("Normalized weight among applicable dimensions.")
   @minValue(0)
   @maxValue(1)
   effective_weight?: float64;
 
-  @doc("Contribution to the rating aggregate.")
+  @doc("Contribution to the normalized aggregate. Likert uses effective_weight * (raw_score - 1) / 4; Boolean uses effective_weight * (passed ? 1 : 0).")
   @minValue(0)
   @maxValue(1)
   contribution?: float64;
@@ -249,7 +246,7 @@ model Dimension {
   @maxValue(10)
   legacy_weight: int32;
 
-  @doc("Optional configured rating weight. For new scoring definitions, omit every weight for equal contribution or supply a weight for every dimension. Partially weighted definitions are rejected, including a mix of explicit unit weights and omitted weights. Boolean mode rejects weights. No schema default is emitted.")
+  @doc("Optional configured weight for either scoring mode. Omit every weight for equal contribution or supply a weight for every dimension. Partially weighted definitions are rejected, including a mix of explicit unit weights and omitted weights. No schema default is emitted.")
   @added(Versions.v1)
   @minValue(1)
   @maxValue(10)
@@ -273,7 +270,7 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   @maxValue(1.0)
   legacy_pass_threshold?: float32 = 0.5;
 
-  @doc("Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field.")
+  @doc("Optional threshold on the normalized 0-1 scale for either scoring mode, interpreted as 0.5 when omitted.")
   @added(Versions.v1)
   @minValue(0.0)
   @maxValue(1.0)
