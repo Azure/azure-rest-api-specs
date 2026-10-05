@@ -692,6 +692,9 @@
           }
         },
         "x-ms-examples": {
+          "Enable or disable FIPS mode on an existing server.": {
+            "$ref": "./examples/ServersUpdateFIPS.json"
+          },
           "Promote a read replica to a standalone server with forced data synchronization. Meaning that it doesn't wait for data in the read replica to be synchronized with its source server before it initiates the promotion to a standalone server.": {
             "$ref": "./examples/ServersPromoteReplicaAsForcedStandaloneServer.json"
           },
@@ -721,6 +724,9 @@
           },
           "Update an existing server.": {
             "$ref": "./examples/ServersUpdate.json"
+          },
+          "Update the storage performance of a server using Premium SSD v2.": {
+            "$ref": "./examples/ServersUpdateWithPremiumSsdV2.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5436,6 +5442,10 @@
             "create"
           ]
         },
+        "immutableBackup": {
+          "$ref": "#/definitions/ImmutableBackup",
+          "description": "Indicates if the server is configured to create immutable backups."
+        },
         "earliestRestoreDate": {
           "type": "string",
           "format": "date-time",
@@ -5513,6 +5523,10 @@
           "$ref": "#/definitions/GeographicallyRedundantBackup",
           "description": "Indicates if the server is configured to create geographically redundant backups.",
           "readOnly": true
+        },
+        "immutableBackup": {
+          "$ref": "#/definitions/ImmutableBackup",
+          "description": "Indicates if the server is configured to create immutable backups."
         },
         "earliestRestoreDate": {
           "type": "string",
@@ -6589,6 +6603,30 @@
         ]
       }
     },
+    "FipsMode": {
+      "type": "string",
+      "description": "Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "FipsMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "FIPS mode is enabled on the server."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "FIPS mode is disabled on the server."
+          }
+        ]
+      }
+    },
     "FirewallRule": {
       "type": "object",
       "description": "Firewall rule.",
@@ -6880,6 +6918,30 @@
             "name": "SystemAssigned,UserAssigned",
             "value": "SystemAssigned,UserAssigned",
             "description": "Both system-assigned and user-assigned identities are assigned to the server."
+          }
+        ]
+      }
+    },
+    "ImmutableBackup": {
+      "type": "string",
+      "description": "Indicates if the server is configured to create immutable backups.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ImmutableBackup",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Server is configured to create immutable backups."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Server is not configured to create immutable backups."
           }
         ]
       }
@@ -7848,8 +7910,7 @@
           "maxItems": 50,
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "setupLogicalReplicationOnSourceDbIfNeeded": {
           "$ref": "#/definitions/LogicalReplicationOnSourceServer",
@@ -7886,8 +7947,7 @@
           "description": "When you want to trigger cutover for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "cancel": {
           "$ref": "#/definitions/Cancel",
@@ -7898,8 +7958,7 @@
           "description": "When you want to trigger cancel for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -7929,8 +7988,7 @@
           "maxItems": 50,
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "setupLogicalReplicationOnSourceDbIfNeeded": {
           "$ref": "#/definitions/LogicalReplicationOnSourceServer",
@@ -7962,8 +8020,7 @@
           "description": "When you want to trigger cutover for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "cancel": {
           "$ref": "#/definitions/Cancel",
@@ -7974,8 +8031,7 @@
           "description": "When you want to trigger cancel for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "migrationMode": {
           "$ref": "#/definitions/MigrationMode",
@@ -9463,6 +9519,31 @@
             "update",
             "create"
           ]
+        },
+        "fipsMode": {
+          "type": "string",
+          "description": "Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server. If not specified on create, it defaults to Disabled.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FipsMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "FIPS mode is enabled on the server."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "FIPS mode is disabled on the server."
+              }
+            ]
+          }
         }
       }
     },
@@ -9566,6 +9647,10 @@
             "read",
             "update"
           ]
+        },
+        "fipsMode": {
+          "$ref": "#/definitions/FipsMode",
+          "description": "Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server. If not specified, the current value is preserved."
         }
       }
     },
@@ -10130,6 +10215,30 @@
         "autoGrow": {
           "$ref": "#/definitions/StorageAutoGrow",
           "description": "Flag to enable or disable the automatic growth of storage size of a server when available space is nearing zero and conditions allow for automatically growing storage size."
+        },
+        "autoGrowMaxThresholdMb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum allocated storage size to which storage autogrow may grow, in MB. This value is not a disk-utilization trigger threshold and must be at least the effective current or requested storage size. Storage conversion uses 1 GB = 1,024 MB.",
+          "minimum": 1,
+          "maximum": 67108864,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "autoGrowIncrementPercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Storage autogrow increment as a percentage of the current allocated storage size. This value is not an absolute size increment or a utilization threshold.",
+          "minimum": 1,
+          "maximum": 100,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "tier": {
           "$ref": "#/definitions/AzureManagedDiskPerformanceTier",

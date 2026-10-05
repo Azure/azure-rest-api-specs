@@ -3,23 +3,11 @@
     "api-version": "2026-10-01",
     "parameters": {
       "properties": {
-        "administratorLoginPassword": "examplenewpassword",
-        "backup": {
-          "backupRetentionDays": 20,
-          "immutableBackup": "Enabled"
-        },
-        "createMode": "Update",
         "storage": {
-          "autoGrow": "Enabled",
-          "autoGrowMaxThresholdMb": 2097152,
-          "autoGrowIncrementPercent": 20,
-          "storageSizeGB": 1024,
-          "tier": "P30"
+          "type": "PremiumV2_LRS",
+          "iops": 6000,
+          "throughput": 250
         }
-      },
-      "sku": {
-        "name": "Standard_D8s_v3",
-        "tier": "GeneralPurpose"
       }
     },
     "resourceGroupName": "exampleresourcegroup",
@@ -35,5 +23,5 @@
     }
   },
   "operationId": "Servers_Update",
-  "title": "Update an existing server."
+  "title": "Update the storage performance of a server using Premium SSD v2."
 }

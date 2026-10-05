@@ -5,11 +5,14 @@
       "properties": {
         "administratorLoginPassword": "examplenewpassword",
         "backup": {
-          "backupRetentionDays": 20
+          "backupRetentionDays": 20,
+          "immutableBackup": "Enabled"
         },
         "createMode": "Update",
         "storage": {
           "autoGrow": "Enabled",
+          "autoGrowMaxThresholdMb": 2097152,
+          "autoGrowIncrementPercent": 20,
           "storageSizeGB": 1024,
           "tier": "P30"
         }
