@@ -9104,7 +9104,7 @@ model RestorePointInstanceView {
   diskRestorePoints?: DiskRestorePointInstanceView[];
 
   /**
-   * The resource status information.
+   * The aggregate status information for the restore point. The list may include separate aggregate entries for replication and, in supported API versions, Instant Access, as applicable. For more information about Instant Access, see [Use virtual machine restore points](https://learn.microsoft.com/azure/virtual-machines/virtual-machines-create-restore-points#instant-access).
    */
   @identifiers(#[])
   statuses?: InstanceViewStatus[];
