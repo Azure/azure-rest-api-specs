@@ -1,6 +1,6 @@
 import { appendFile, readdir, readFile } from "node:fs/promises";
 import { relative, resolve, sep } from "node:path";
-import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
+import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { findTypeSpecSwagger, isTypeSpecGenerated } from "./migration.ts";
 
@@ -17,7 +17,6 @@ interface Options {
 interface FileToCheck {
   fullPath: string;
   path: string;
-  isNew: boolean;
 }
 
 const defaultRepoRoot = resolve(import.meta.dirname, "../../../../");
@@ -119,7 +118,6 @@ async function getFilesToCheck(options: Options, repoRoot: string): Promise<File
       const specificationIndex = pathSegments.lastIndexOf("specification");
       return {
         fullPath,
-        isNew: false,
         path:
           specificationIndex >= 0
             ? pathSegments.slice(specificationIndex).join("/")
@@ -127,23 +125,21 @@ async function getFilesToCheck(options: Options, repoRoot: string): Promise<File
       };
     });
   } else {
-    const changes = await getChangedFilesStatuses({
-      cwd: repoRoot,
-      baseCommitish: options.baseCommitish,
-      headCommitish: options.headCommitish,
-      // A new path must not inherit an exemption through Git's similarity-based rename detection.
-      gitOptions: ["--no-renames"],
-    });
-    const additions = new Set(changes.additions);
-    files = [...changes.additions, ...changes.modifications]
-      .sort()
+    files = (
+      await getChangedFiles({
+        cwd: repoRoot,
+        baseCommitish: options.baseCommitish,
+        headCommitish: options.headCommitish,
+        gitOptions: ["--diff-filter=d"],
+      })
+    )
       .filter(
         (file) =>
           file.startsWith("specification/") &&
           file.endsWith(".json") &&
           !file.includes("ChangedFiles-Functions"),
       )
-      .map((path) => ({ path, fullPath: resolve(repoRoot, path), isNew: additions.has(path) }));
+      .map((path) => ({ path, fullPath: resolve(repoRoot, path) }));
   }
 
   const specTypePattern =
@@ -190,7 +186,6 @@ export async function checkFiles(
   repoRoot = defaultRepoRoot,
 ): Promise<{ brownfield: boolean; exitCode: number }> {
   const pathsWithErrors: string[] = [];
-  let hasMigrationErrors = false;
   const typeSpecSwaggers = new Map<string, string | undefined>();
   let brownfield = false;
   const filesToCheck = await getFilesToCheck(options, repoRoot);
@@ -199,33 +194,13 @@ export async function checkFiles(
     logInfo("No OpenAPI files found to check");
   }
 
-  for (const { fullPath, path: file, isNew } of filesToCheck) {
+  for (const { fullPath, path: file } of filesToCheck) {
     logInfo(`Checking ${file}`);
 
     const generated = isTypeSpecGenerated(await readFile(fullPath, "utf8"), file, logWarning);
-    if (isNew && !generated) {
-      const serviceDirectory = resolve(fullPath, "../../..");
-      if (!typeSpecSwaggers.has(serviceDirectory)) {
-        typeSpecSwaggers.set(
-          serviceDirectory,
-          await findTypeSpecSwagger(serviceDirectory, logWarning),
-        );
-      }
-      const typeSpecSwagger = typeSpecSwaggers.get(serviceDirectory);
-      if (typeSpecSwagger !== undefined) {
-        logErrorForFile(
-          file,
-          `New Swagger files must use TypeSpec because this service already contains TypeSpec-generated Swagger (${typeSpecSwagger}). ` +
-            "Generate this Swagger from TypeSpec; TypeSpecRequirement suppressions cannot bypass this requirement.",
-        );
-        logJobFailure();
-        hasMigrationErrors = true;
-        continue;
-      }
-    }
-
     const suppressions = await getSuppressions("TypeSpecRequirement", fullPath);
     const suppression = suppressions[0];
+    let typeSpecSwagger: string | undefined;
     if (suppression) {
       const singleVersionPattern = /\/(preview|stable)\/[A-Za-z0-9._-]+\//i;
       for (const path of suppression.paths) {
@@ -238,8 +213,20 @@ export async function checkFiles(
           return { brownfield, exitCode: 1 };
         }
       }
-      logInfo(`  Suppressed: ${String(suppression.reason ?? "<no reason specified>")}`);
-      continue;
+      if (!generated) {
+        const serviceDirectory = resolve(fullPath, "../../..");
+        if (!typeSpecSwaggers.has(serviceDirectory)) {
+          typeSpecSwaggers.set(
+            serviceDirectory,
+            await findTypeSpecSwagger(serviceDirectory, logWarning),
+          );
+        }
+        typeSpecSwagger = typeSpecSwaggers.get(serviceDirectory);
+      }
+      if (typeSpecSwagger === undefined) {
+        logInfo(`  Suppressed: ${String(suppression.reason ?? "<no reason specified>")}`);
+        continue;
+      }
     }
 
     if (generated) {
@@ -301,6 +288,10 @@ export async function checkFiles(
 
     logInfo(`    Status: ${responseStatus}`);
     if (responseStatus === 200) {
+      if (suppression) {
+        logInfo(`  Suppressed: ${String(suppression.reason ?? "<no reason specified>")}`);
+        continue;
+      }
       logInfo(
         `  Branch 'main' contains path '${apiVersion}', so API version already exists and is not required to use TypeSpec`,
       );
@@ -315,6 +306,11 @@ export async function checkFiles(
       logInfo(
         `  Branch 'main' does not contain path '${apiVersion}', so API version is new and must use TypeSpec`,
       );
+      if (typeSpecSwagger !== undefined) {
+        logInfo(
+          `  TypeSpecRequirement suppressions cannot permit new handwritten API versions because this service contains TypeSpec-generated Swagger (${typeSpecSwagger}).`,
+        );
+      }
       pathsWithErrors.push(file);
     } else {
       logError(`Unexpected response from ${logUrl}: ${responseStatus}`);
@@ -337,7 +333,7 @@ export async function checkFiles(
     return { brownfield, exitCode: 1 };
   }
 
-  return { brownfield, exitCode: hasMigrationErrors ? 1 : 0 };
+  return { brownfield, exitCode: 0 };
 }
 
 function parseArgs(args: string[]): Options {

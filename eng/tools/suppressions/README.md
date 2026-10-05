@@ -53,18 +53,16 @@ Example `suppressions.yaml`:
 ```
 
 Once a service contains TypeSpec-generated Swagger, `TypeSpecRequirement` suppressions cannot
-permit newly added handwritten Swagger files, regardless of API version. This includes adding a
-file to an older, already-existing version. Patches to files that already exist at the same path
-in the PR's base retain their previous behavior, including applicable suppressions.
+permit new handwritten API versions. An API version is new if its directory does not exist on
+`main`. Changes within existing API versions, including newly added Swagger files, retain their
+previous behavior and applicable suppressions.
 
 Migration is detected across `preview` and `stable` under the directory immediately containing
 those folders, independently of other services and API planes. The check looks for generated
-Swagger in the current checkout. A rename to a new path counts as an addition.
+Swagger in the current checkout.
 
 Services without generated Swagger retain the existing requirement: new handwritten API versions
 require a version-specific suppression. Suppressions for other tools are unaffected.
-Local `--check-all-under` scans have no PR diff and retain their existing API-version and
-suppression checks without applying the addition-only migration rule.
 
 ### Command line
 

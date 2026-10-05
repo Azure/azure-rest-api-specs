@@ -15,24 +15,17 @@ const migratedFiles = {
   "specification/foo/tspconfig.yaml": "{}",
 };
 
-async function checkChanges(
-  initial: Record<string, string>,
-  changes: Record<string, string | null>,
-) {
+async function checkChanges(initial: Record<string, string>, changes: Record<string, string>) {
   const repoRoot = await mkdtemp(join(tmpdir(), "typespec-migration-"));
   const responseCache: Record<string, number> = {};
-  async function writeFiles(files: Record<string, string | null>) {
+  async function writeFiles(files: Record<string, string>, responseStatus: number) {
     for (const [path, content] of Object.entries(files)) {
       const fullPath = join(repoRoot, path);
-      if (content === null) {
-        await rm(fullPath);
-      } else {
-        await mkdir(dirname(fullPath), { recursive: true });
-        await writeFile(fullPath, content);
-      }
+      await mkdir(dirname(fullPath), { recursive: true });
+      await writeFile(fullPath, content);
       responseCache[
         `https://github.com/Azure/azure-rest-api-specs/tree/main/${path.slice(0, path.lastIndexOf("/"))}`
-      ] = 200;
+      ] ??= responseStatus;
     }
   }
   async function commit() {
@@ -57,9 +50,9 @@ async function checkChanges(
   }
   try {
     await execa("git", ["init", "--quiet"], { cwd: repoRoot });
-    await writeFiles(initial);
+    await writeFiles(initial, 200);
     await commit();
-    await writeFiles(changes);
+    await writeFiles(changes, 404);
     await commit();
     const outputFile = join(repoRoot, "github-output");
     await writeFile(outputFile, "");
@@ -74,7 +67,7 @@ async function checkChanges(
   }
 }
 
-describe("New Swagger in migrated services", () => {
+describe("New API versions in migrated services", () => {
   beforeEach(() => {
     vi.spyOn(console, "log").mockImplementation(() => {});
     vi.spyOn(console, "error").mockImplementation(() => {});
@@ -110,94 +103,86 @@ describe("New Swagger in migrated services", () => {
     },
   );
 
-  it.each(["2025-01-01", "2026-01-01", "2027-01-01"])(
-    "Rejects a new handwritten file at %s even in an existing version with a suppression",
-    async (version) => {
+  it.each([false, true])(
+    "Allows new handwritten files in an existing API version (suppressed=%s)",
+    async (suppressed) => {
+      const version = "2025-01-01";
       const result = await checkChanges(
         {
           ...migratedFiles,
           [`${service}/stable/${version}/existing.json`]: "{}",
-          [`${service}/suppressions.yaml`]: `- tool: TypeSpecRequirement\n  path: ./stable/${version}/*.json\n  reason: Legacy exemption\n`,
+          ...(suppressed
+            ? {
+                [`${service}/suppressions.yaml`]: `- tool: TypeSpecRequirement\n  path: ./stable/${version}/*.json\n  reason: Legacy exemption\n`,
+              }
+            : {}),
         },
         { [`${service}/stable/${version}/new.json`]: "{}" },
       );
-      expect(result).toEqual({ brownfield: false, exitCode: 1, githubOutput: "" });
-      expect(console.error).toHaveBeenCalledWith(
-        expect.stringContaining("suppressions cannot bypass"),
-      );
-      expect(console.log).not.toHaveBeenCalledWith(expect.stringContaining("Checking github.com"));
-      expect(fetch).not.toHaveBeenCalled();
+      expect(result).toEqual({
+        brownfield: !suppressed,
+        exitCode: 0,
+        githubOutput: suppressed ? "" : "brownfield=true\n",
+      });
     },
   );
 
   it.each([
-    { first: "preview/2026-01-01-preview", target: "stable/2025-01-01", suppressed: true },
-    { first: "stable/2026-01-01", target: "preview/2027-01-01-preview", suppressed: false },
+    { first: "stable/2026-01-01", target: "stable/2025-01-01" },
+    { first: "preview/2026-01-01-preview", target: "stable/2027-01-01" },
+    { first: "stable/2026-01-01", target: "preview/2027-01-01-preview" },
   ])(
-    "Rejects handwritten $target when $first uses TypeSpec (suppressed=$suppressed)",
-    async ({ first, target, suppressed }) => {
+    "Rejects suppressed new API version $target when $first uses TypeSpec",
+    async ({ first, target }) => {
       const result = await checkChanges(
         {
           [`${service}/${first}/generated.json`]: generated,
-          ...(suppressed
-            ? {
-                [`${service}/suppressions.yaml`]: `- tool: TypeSpecRequirement\n  path: ./${target}/*.json\n  reason: Historical version\n`,
-              }
-            : {}),
+          [`${service}/suppressions.yaml`]: `- tool: TypeSpecRequirement\n  path: ./${target}/*.json\n  reason: Legacy exemption\n`,
         },
         { [`${service}/${target}/new.json`]: "{}" },
       );
-      expect(result.exitCode).toBe(1);
+      expect(result).toEqual({ brownfield: false, exitCode: 1, githubOutput: "" });
       expect(console.error).toHaveBeenCalledWith(
-        expect.stringContaining("suppressions cannot bypass"),
+        expect.stringContaining("API version appears to be new"),
       );
-      expect(console.log).not.toHaveBeenCalledWith(expect.stringContaining("Checking github.com"));
-      expect(fetch).not.toHaveBeenCalled();
+      expect(console.log).not.toHaveBeenCalledWith(expect.stringContaining("Suppressed:"));
     },
   );
 
-  it("Preserves brownfield output when another added file is rejected", async () => {
-    const existingFile = `${service}/stable/2025-01-01/z-existing.json`;
-    const newFile = `${service}/stable/2025-01-01/a-new.json`;
+  it("Preserves brownfield output when a new API version's suppression is rejected", async () => {
+    const existingFile = `${service}/stable/2025-01-01/existing.json`;
+    const newFile = `${service}/preview/2027-01-01-preview/new.json`;
     const result = await checkChanges(
-      { ...migratedFiles, [existingFile]: "{}" },
+      {
+        ...migratedFiles,
+        [existingFile]: "{}",
+        [`${service}/suppressions.yaml`]:
+          "- tool: TypeSpecRequirement\n  path: ./preview/2027-01-01-preview/*.json\n  reason: Legacy exemption\n",
+      },
       { [existingFile]: '{"description":"patch"}', [newFile]: "{}" },
     );
     expect(result).toEqual({ brownfield: true, exitCode: 1, githubOutput: "brownfield=true\n" });
     expect(console.error).toHaveBeenCalledWith(expect.stringContaining(newFile));
   });
 
-  it("Does not exempt a new path classified by Git as a rename", async () => {
-    const oldFile = `${service}/stable/2025-01-01/old.json`;
-    const result = await checkChanges(
-      { ...migratedFiles, [oldFile]: "{}" },
-      {
-        [oldFile]: null,
-        [`${service}/stable/2025-01-01/renamed.json`]: "{}",
-      },
-    );
-    expect(result.exitCode).toBe(1);
-    expect(console.error).toHaveBeenCalledWith(expect.stringContaining("renamed.json"));
-  });
-
-  it("Allows patches to generated Swagger", async () => {
-    const result = await checkChanges(migratedFiles, {
-      [generatedFile]: generated.replace('"info":', '"description":"patch","info":'),
-    });
-    expect(result.exitCode).toBe(0);
-  });
-
-  it("Allows newly added generated Swagger", async () => {
-    const result = await checkChanges(migratedFiles, {
-      [`${service}/stable/2025-01-01/new.json`]: generated,
-    });
-    expect(result.exitCode).toBe(0);
-  });
-
-  it("Does not check deleted Swagger files", async () => {
-    const result = await checkChanges(migratedFiles, { [generatedFile]: null });
-    expect(result.exitCode).toBe(0);
-  });
+  it.each([false, true])(
+    "Allows new API versions generated from TypeSpec (suppressed=%s)",
+    async (suppressed) => {
+      const result = await checkChanges(
+        {
+          ...migratedFiles,
+          ...(suppressed
+            ? {
+                [`${service}/suppressions.yaml`]:
+                  "- tool: TypeSpecRequirement\n  path: ./stable/2027-01-01/*.json\n  reason: Legacy exemption\n",
+              }
+            : {}),
+        },
+        { [`${service}/stable/2027-01-01/new.json`]: generated },
+      );
+      expect(result).toEqual({ brownfield: false, exitCode: 0, githubOutput: "" });
+    },
+  );
 
   it("Detects migration introduced in the same PR", async () => {
     const result = await checkChanges(
@@ -205,24 +190,29 @@ describe("New Swagger in migrated services", () => {
       {
         ...migratedFiles,
         [`${service}/stable/2025-01-01/new.json`]: "{}",
+        [`${service}/suppressions.yaml`]:
+          "- tool: TypeSpecRequirement\n  path: ./stable/2025-01-01/*.json\n  reason: Legacy exemption\n",
       },
     );
     expect(result.exitCode).toBe(1);
     expect(console.error).toHaveBeenCalledWith(
-      expect.stringContaining("suppressions cannot bypass"),
+      expect.stringContaining("API version appears to be new"),
     );
   });
 
-  it("Preserves existing-version behavior for a service without TypeSpec", async () => {
+  it("Allows suppressions for new handwritten API versions in a service without TypeSpec", async () => {
     const result = await checkChanges(
       {
-        [`${service}/stable/2026-01-01/existing.json`]: "{}",
+        [`${service}/suppressions.yaml`]:
+          "- tool: TypeSpecRequirement\n  path: ./stable/2027-01-01/*.json\n  reason: Legacy exemption\n",
       },
       {
-        [`${service}/stable/2026-01-01/new.json`]: "{}",
+        [`${service}/stable/2027-01-01/new.json`]: "{}",
       },
     );
-    expect(result).toEqual({ brownfield: true, exitCode: 0, githubOutput: "brownfield=true\n" });
+    expect(result).toEqual({ brownfield: false, exitCode: 0, githubOutput: "" });
+    expect(console.log).not.toHaveBeenCalledWith(expect.stringContaining("Checking github.com"));
+    expect(fetch).not.toHaveBeenCalled();
   });
 
   it.each([
@@ -231,10 +221,14 @@ describe("New Swagger in migrated services", () => {
     "specification/foo/resource-manager/Microsoft.Other/Service",
   ])("Does not share migration state with %s", async (otherService) => {
     const result = await checkChanges(
-      { [`${otherService}/stable/2026-01-01/generated.json`]: generated },
-      { [`${service}/stable/2026-01-01/new.json`]: "{}" },
+      {
+        [`${otherService}/stable/2026-01-01/generated.json`]: generated,
+        [`${service}/suppressions.yaml`]:
+          "- tool: TypeSpecRequirement\n  path: ./stable/2027-01-01/*.json\n  reason: Legacy exemption\n",
+      },
+      { [`${service}/stable/2027-01-01/new.json`]: "{}" },
     );
-    expect(result).toEqual({ brownfield: true, exitCode: 0, githubOutput: "brownfield=true\n" });
+    expect(result).toEqual({ brownfield: false, exitCode: 0, githubOutput: "" });
   });
 
   it("Does not infer migration from examples, common types, or tspconfig alone", async () => {
@@ -243,10 +237,12 @@ describe("New Swagger in migrated services", () => {
         [`${service}/tspconfig.yaml`]: "{}",
         [`${service}/stable/2026-01-01/examples/generated.json`]: generated,
         [`${service}/stable/2026-01-01/common/generated.json`]: generated,
+        [`${service}/suppressions.yaml`]:
+          "- tool: TypeSpecRequirement\n  path: ./stable/2027-01-01/*.json\n  reason: Legacy exemption\n",
       },
-      { [`${service}/stable/2026-01-01/new.json`]: "{}" },
+      { [`${service}/stable/2027-01-01/new.json`]: "{}" },
     );
-    expect(result).toEqual({ brownfield: true, exitCode: 0, githubOutput: "brownfield=true\n" });
+    expect(result).toEqual({ brownfield: false, exitCode: 0, githubOutput: "" });
   });
 });
 

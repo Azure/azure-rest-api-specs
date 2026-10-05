@@ -8,7 +8,6 @@ async function checkAllUnder(
   path: string,
   responseCache: Record<string, number | undefined> = {},
   captureGithubOutput = false,
-  checkPath = "",
 ) {
   const repoRoot = join(import.meta.dirname, "..", "..", "..", "..");
   const script = join(repoRoot, "eng", "tools", "typespec-requirement", "src", "index.ts");
@@ -26,7 +25,7 @@ async function checkAllUnder(
       [
         script,
         "--check-all-under",
-        resolve(import.meta.dirname, path, checkPath),
+        resolve(import.meta.dirname, path),
         "--response-cache",
         JSON.stringify(responseCache),
       ],
@@ -52,7 +51,6 @@ async function checkFixtures(
   files: Record<string, string>,
   responseCache: Record<string, number> = {},
   captureGithubOutput = false,
-  checkPath = "",
 ) {
   const directory = await mkdtemp(join(tmpdir(), "typespec-requirement-fixtures-"));
   try {
@@ -61,7 +59,7 @@ async function checkFixtures(
       await mkdir(dirname(fullPath), { recursive: true });
       await writeFile(fullPath, content);
     }
-    return await checkAllUnder(directory, responseCache, captureGithubOutput, checkPath);
+    return await checkAllUnder(directory, responseCache, captureGithubOutput);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
@@ -340,11 +338,30 @@ test.concurrent.each([false, true])(
         [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${apiVersion}`]: 200,
       },
       true,
-      `specification/${apiVersion}`,
     );
     expect(exitCode).toBe(0);
     expect(stdout).toContain(suppressed ? "Suppressed" : "not required to use TypeSpec");
-    expect(stdout).not.toContain("New Swagger files must use TypeSpec");
     expect(githubOutput).toBe(suppressed ? "" : "brownfield=true\n");
   },
 );
+
+test.concurrent("Local scans reject suppressions for new handwritten API versions after migration", async ({
+  expect,
+}) => {
+  const apiVersion = `${migratedService}/preview/2027-01-01-preview`;
+  const { stdout, exitCode } = await checkFixtures(
+    {
+      "migrated/tspconfig.yaml": "{}",
+      [`${migratedService}/stable/2026-01-01/generated.json`]: generatedSwagger,
+      [`${apiVersion}/handwritten.json`]: "{}",
+      [`${migratedService}/suppressions.yaml`]:
+        "- tool: TypeSpecRequirement\n  path: ./preview/2027-01-01-preview/*.json\n  reason: Legacy exemption\n",
+    },
+    {
+      [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${apiVersion}`]: 404,
+    },
+  );
+  expect(exitCode).toBe(1);
+  expect(stdout).toContain("suppressions cannot permit new handwritten API versions");
+  expect(stdout).not.toContain("Suppressed:");
+});
