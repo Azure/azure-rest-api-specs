@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01",
+    "containerAppName": "testcontainerapp0",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "test-private-endpoint-connection",
+            "type": "Microsoft.App/containerApps/privateEndpointConnections",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/containerApps/testcontainerapp0/privateEndpointConnections/test-private-endpoint-connection",
+            "properties": {
+              "groupIds": [
+                "containerApps"
+              ],
+              "privateEndpoint": {
+                "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.Network/privateEndpoints/test-private-endpoint"
+              },
+              "privateLinkServiceConnectionState": {
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ContainerAppPrivateEndpointConnections_List",
+  "title": "List Private Endpoint Connections by Container App"
+}
