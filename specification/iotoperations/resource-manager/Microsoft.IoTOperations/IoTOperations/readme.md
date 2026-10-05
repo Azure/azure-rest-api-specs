@@ -91,8 +91,7 @@ directive:
     where: $.definitions.AkriConnectorTemplateRuntimeStatefulSetConfiguration.properties.statefulSetConfigurationSettings
     reason: These are additional configuration settings with dynamic properties that are not known ahead of time.
 
-suppressions:
-  - code: LatestVersionOfCommonTypesMustBeUsed
+  - suppress: LatestVersionOfCommonTypesMustBeUsed
     from: iotoperations.json
     where: $..['$ref']
     reason: >-
@@ -102,35 +101,35 @@ suppressions:
       cross-version breaking changes. This suppression is limited to reference
       nodes in the generated 2026-11-01-preview specification so the API can
       remain on its established v5 compatibility baseline.
-  - code: AvoidAdditionalProperties
+  - suppress: AvoidAdditionalProperties
     from: iotoperations.json
     where: $.definitions.McpAuthorizationPolicyRule.properties.context
     reason: >-
       MCP tools can define arbitrary parameters, so authorization policy
       context values are intentionally modeled as a free-form object whose
       properties cannot be known when the API is authored.
-  - code: AvoidAdditionalProperties
+  - suppress: AvoidAdditionalProperties
     from: iotoperations.json
     where: $.definitions.AioApplicationConfigurationProperties.properties.configuration
     reason: >-
       Customers bring their own applications and define each application's
       configuration parameters and structure, so the resource provider cannot
       define a fixed schema.
-  - code: AvoidAdditionalProperties
+  - suppress: AvoidAdditionalProperties
     from: iotoperations.json
     where: $.definitions.AioConnectorApplicationConfigurationProperties.properties.configuration
     reason: >-
       Customers bring their own applications and define each application's
       configuration parameters and structure, so the resource provider cannot
       define a fixed schema.
-  - code: AvoidAdditionalProperties
+  - suppress: AvoidAdditionalProperties
     from: iotoperations.json
     where: $.definitions.AioConnectorConfigurationProperties.properties.configuration
     reason: >-
       Customers bring their own applications and define each application's
       configuration parameters and structure, so the resource provider cannot
       define a fixed schema.
-  - code: AvoidAdditionalProperties
+  - suppress: AvoidAdditionalProperties
     from: iotoperations.json
     where: $.definitions.AioApplicationImageConfigurationSettings.properties.persistentVolumeClaimTemplates.items
     reason: >-
@@ -139,20 +138,20 @@ suppressions:
       supported Kubernetes versions and may contain Kubernetes extension
       fields, so the API must preserve fields that are not known when this API
       version is authored.
-  - code: PatchSkuProperty
+  - suppress: PatchSkuProperty
     from: iotoperations.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}"].patch.parameters[4]
     reason: >-
       The resource provider does not support SKU updates in this API version.
       Exposing SKU in the PATCH body would advertise an unsupported operation.
-  - code: EnumInsteadOfBoolean
+  - suppress: EnumInsteadOfBoolean
     from: iotoperations.json
     where: $.definitions.DataflowGraphFileStore.properties.readOnly
     reason: >-
       File-store access is inherently binary: the volume is mounted either
       read-only or writable. A boolean directly represents these two states,
       and an extensible string enum would advertise unsupported values.
-  - code: XMSSecretInResponse
+  - suppress: XMSSecretInResponse
     from: iotoperations.json
     where: $.definitions.AkriConnectorsSecret.properties.secretKey
     reason: >-
