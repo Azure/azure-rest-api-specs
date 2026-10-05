@@ -5023,23 +5023,23 @@
     },
     "ScriptExecutionScope": {
       "type": "string",
-      "description": "Whether a runbook script step runs once for the runbook or once per selected entity. When omitted it is derived from the execution location (Host maps to Runbook, any other location maps to Entity).",
+      "description": "Whether a runbook script step runs once for the runbook or once per selected entity. When omitted it is derived from the execution location (Host maps to Once, any other location maps to PerEntity).",
       "enum": [
-        "Runbook",
-        "Entity"
+        "Once",
+        "PerEntity"
       ],
       "x-ms-enum": {
         "name": "ScriptExecutionScope",
         "modelAsString": true,
         "values": [
           {
-            "name": "Runbook",
-            "value": "Runbook",
+            "name": "Once",
+            "value": "Once",
             "description": "Runs once for the runbook."
           },
           {
-            "name": "Entity",
-            "value": "Entity",
+            "name": "PerEntity",
+            "value": "PerEntity",
             "description": "Runs once per selected entity."
           }
         ]

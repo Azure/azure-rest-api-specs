@@ -116,14 +116,14 @@ union ScriptExecutionLocation {
   string,
 }
 
-@doc("Whether a runbook script step runs once for the runbook or once per selected entity. When omitted it is derived from the execution location (Host maps to Runbook, any other location maps to Entity).")
+@doc("Whether a runbook script step runs once for the runbook or once per selected entity. When omitted it is derived from the execution location (Host maps to Once, any other location maps to PerEntity).")
 @added(ApiVersions.v2026_08_01_preview)
 union ScriptExecutionScope {
   @doc("Runs once for the runbook.")
-  Runbook: "Runbook",
+  Once: "Once",
 
   @doc("Runs once per selected entity.")
-  Entity: "Entity",
+  PerEntity: "PerEntity",
 
   string,
 }
