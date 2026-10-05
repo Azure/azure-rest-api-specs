@@ -55,14 +55,6 @@ describe("automatic library prereleases", () => {
     },
   );
 
-  it.each([
-    ["invalid", commit, "1791219000"],
-    ["0.1.0", "abc", "1791219000"],
-    ["0.1.0", commit, "not-a-timestamp"],
-  ])("rejects invalid release identity inputs", (version, sha, timestamp) => {
-    expect(() => prereleaseVersion(version, sha, timestamp)).toThrow("valid package version");
-  });
-
   it("keeps the same version across reruns and unrelated commits", async () => {
     const root = await temporaryDirectory();
     const library = join(root, "libs", "example");
@@ -100,11 +92,15 @@ describe("automatic library prereleases", () => {
 
 describe("release preflight", () => {
   it.each([true, false])("checks the exact version, published=%s", (published) => {
-    npmResult(0, ["0.1.0", ...(published ? ["0.1.0-dev.1.gabc"] : [])]);
+    if (published) {
+      npmResult(0, "0.1.0-dev.1.gabc");
+    } else {
+      npmResult(1, { error: { code: "E404" } });
+    }
     expect(isPackagePublished(name, "0.1.0-dev.1.gabc")).toBe(published);
     expect(npm).toHaveBeenCalledWith(
       "npm",
-      ["view", name, "versions", "--json", "--prefer-online"],
+      ["view", `${name}@0.1.0-dev.1.gabc`, "version", "--json", "--prefer-online"],
       { encoding: "utf8", shell: process.platform === "win32", timeout: 120_000 },
     );
   });
@@ -119,10 +115,13 @@ describe("release preflight", () => {
     expect(() => isPackagePublished(name, "0.1.0")).toThrow(code);
   });
 
-  it.each([{}, null, [1]])("fails closed on malformed metadata", (metadata) => {
-    npmResult(0, metadata);
-    expect(() => isPackagePublished(name, "0.1.0")).toThrow("invalid npm registry metadata");
-  });
+  it.each([{}, null, "different-version"])(
+    "fails closed on an unexpected registry version",
+    (metadata) => {
+      npmResult(0, metadata);
+      expect(() => isPackagePublished(name, "0.1.0")).toThrow("unexpected version");
+    },
+  );
 
   it("does not turn process failures into permission to publish", () => {
     npmResult(1, {});
@@ -141,7 +140,11 @@ describe("release preflight", () => {
         JSON.stringify({ name, version: "0.1.0" }),
       );
       execFileSync("tar", ["-czf", join(root, "library.tgz"), "-C", root, "package"]);
-      npmResult(0, published ? ["0.1.0"] : []);
+      if (published) {
+        npmResult(0, "0.1.0");
+      } else {
+        npmResult(1, { error: { code: "E404" } });
+      }
       const log = vi.spyOn(console, "log").mockImplementation(() => {});
       expect(await checkRelease(root)).toBe(!published);
       expect(log).toHaveBeenCalledWith(

@@ -365,8 +365,8 @@ Publishable TypeSpec libraries live under `libs/` and participate in the pnpm
 workspace. [Foundry Core](../libs/foundry-core/README.md) is the initial package.
 
 The [publish-libraries pipeline](pipelines/publish-libraries.yml) builds and
-packs Foundry Core into a `packages` pipeline artifact when `libs/` changes in a
-pull request or on `main`. It follows the
+packs Foundry Core into a `packages` pipeline artifact when `libs/` changes on
+`main`. PR validation remains in the `Eng` GitHub workflow. It follows the
 [TypeSpec publishing pipeline](https://github.com/microsoft/typespec/blob/main/eng/tsp-core/pipelines/publish.yml):
 1ES builds produce package artifacts, and a separate release job publishes them
 to npm through ESRP. `pnpm pack` resolves catalog dependencies in the published
@@ -378,7 +378,7 @@ Internal `main` CI runs automatically publish development versions to the
 `latest` npm tag. The version is `<major>.<minor>.<patch>-dev.<commit-time>.g<short-sha>`,
 using the last commit that changed the library folder. Every folder change,
 including documentation or tests, produces a new version. Version changes happen
-only in the build workspace, not in Git. PR runs never publish.
+only in the build workspace, not in Git.
 
 Before publishing, the build checks the packed version through the authenticated
 Azure SDK npm mirror. Already-published versions skip the publishing stage and its
