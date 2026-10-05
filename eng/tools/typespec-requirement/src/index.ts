@@ -2,6 +2,7 @@ import { appendFile, readdir, readFile } from "node:fs/promises";
 import { relative, resolve, sep } from "node:path";
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 import { getSuppressions } from "@azure-tools/suppressions";
+import { hasTypeSpecGeneratedSwagger, isTypeSpecGenerated } from "./migration.ts";
 
 type SpecType = "data-plane" | "resource-manager";
 
@@ -182,6 +183,7 @@ function getServiceDirectory(fullPath: string, servicePath: string): string | un
 
 async function checkFiles(options: Options): Promise<{ brownfield: boolean; exitCode: number }> {
   const pathsWithErrors: string[] = [];
+  const serviceTypeSpecCache = new Map<string, boolean>();
   let brownfield = false;
   const filesToCheck = await getFilesToCheck(options);
 
@@ -192,8 +194,10 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
   for (const { fullPath, path: file } of filesToCheck) {
     logInfo(`Checking ${file}`);
 
+    const generated = isTypeSpecGenerated(await readFile(fullPath, "utf8"), file, logWarning);
     const suppressions = await getSuppressions("TypeSpecRequirement", fullPath);
     const suppression = suppressions[0];
+    let serviceHasTypeSpecGeneratedSwagger = false;
     if (suppression) {
       const singleVersionPattern = /\/(preview|stable)\/[A-Za-z0-9._-]+\//i;
       for (const path of suppression.paths) {
@@ -206,28 +210,26 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
           return { brownfield, exitCode: 1 };
         }
       }
-      logInfo(`  Suppressed: ${String(suppression.reason ?? "<no reason specified>")}`);
-      continue;
+      if (!generated) {
+        const serviceDirectory = resolve(fullPath, "../../..");
+        const cached = serviceTypeSpecCache.get(serviceDirectory);
+        if (cached === undefined) {
+          serviceHasTypeSpecGeneratedSwagger = await hasTypeSpecGeneratedSwagger(
+            serviceDirectory,
+            logWarning,
+          );
+          serviceTypeSpecCache.set(serviceDirectory, serviceHasTypeSpecGeneratedSwagger);
+        } else {
+          serviceHasTypeSpecGeneratedSwagger = cached;
+        }
+      }
+      if (!serviceHasTypeSpecGeneratedSwagger) {
+        logInfo(`  Suppressed: ${String(suppression.reason ?? "<no reason specified>")}`);
+        continue;
+      }
     }
 
-    let jsonContent: unknown;
-    try {
-      jsonContent = JSON.parse(await readFile(fullPath, "utf8"));
-    } catch (error) {
-      logWarning("  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec");
-      logWarning(`    ${error instanceof Error ? error.message : String(error)}`);
-    }
-
-    const info =
-      jsonContent !== null && typeof jsonContent === "object"
-        ? (jsonContent as Record<string, unknown>).info
-        : undefined;
-    const generatedMarker =
-      info !== null && typeof info === "object"
-        ? (info as Record<string, unknown>)["x-typespec-generated"]
-        : undefined;
-
-    if (generatedMarker !== null && generatedMarker !== undefined) {
+    if (generated) {
       logInfo("  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')");
       const rpFolder = /^specification\/[^/]+\//.exec(file)?.[0];
       if (!rpFolder) {
@@ -286,6 +288,10 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
 
     logInfo(`    Status: ${responseStatus}`);
     if (responseStatus === 200) {
+      if (suppression) {
+        logInfo(`  Suppressed: ${String(suppression.reason ?? "<no reason specified>")}`);
+        continue;
+      }
       logInfo(
         `  Branch 'main' contains path '${apiVersion}', so API version already exists and is not required to use TypeSpec`,
       );
@@ -300,6 +306,11 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
       logInfo(
         `  Branch 'main' does not contain path '${apiVersion}', so API version is new and must use TypeSpec`,
       );
+      if (serviceHasTypeSpecGeneratedSwagger) {
+        logInfo(
+          "  TypeSpecRequirement suppressions cannot permit new handwritten API versions because this service contains TypeSpec-generated Swagger.",
+        );
+      }
       pathsWithErrors.push(file);
     } else {
       logError(`Unexpected response from ${logUrl}: ${responseStatus}`);
