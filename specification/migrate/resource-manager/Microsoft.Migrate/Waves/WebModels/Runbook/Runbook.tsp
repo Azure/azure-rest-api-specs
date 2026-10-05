@@ -118,10 +118,10 @@ model RunbookScriptStepAddRequest extends RunbookStepAddRequest {
   @doc("Location where the script runs.")
   executionLocation: ScriptExecutionLocation;
 
-  @doc("Whether the script runs once for the runbook or once per selected entity.")
-  executionScope?: ScriptExecutionScope;
+  @doc("Whether the script runs once for the runbook (Once, only valid with Host location) or once per selected entity (PerEntity, not valid with Host location). Required; it is not derived from the execution location.")
+  executionScope: ScriptExecutionScope;
 
-  @doc("Migration entity resource names the script targets. Required when the execution location is RemoteVM.")
+  @doc("Migration entity resource names the script targets. Not applicable when the execution location is Host.")
   entities?: string[];
 }
 
