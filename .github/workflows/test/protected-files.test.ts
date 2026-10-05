@@ -482,58 +482,64 @@ describe("Protected Files trusted diff", () => {
     ).rejects.toThrow("Merge ref unavailable");
   });
 
-  it("reads a real fetched merge without modifying the trusted checkout", async () => {
-    const directory = await mkdtemp(join(tmpdir(), "protected-files-merge-"));
-    const origin = join(directory, "origin");
-    const checkout = join(directory, "checkout");
-    try {
-      await mkdir(origin);
-      const git = simpleGit(origin);
-      await git.init(false, ["--initial-branch=main"]);
-      await git.addConfig("user.name", "Test");
-      await git.addConfig("user.email", "test@example.com");
-      await git.addConfig("commit.gpgsign", "false");
-      await writeFile(join(origin, "package.json"), '{"trusted": true}\n');
-      await git.add(["--all"]);
-      await git.commit("Trusted base");
-      await git.checkoutLocalBranch("change");
-      await writeFile(join(origin, "package.json"), '{"trusted": false}\n');
-      await git.add(["--all"]);
-      await git.commit("Untrusted PR");
-      const headSha = await git.revparse(["HEAD"]);
-      await git.checkout("main");
-      await writeFile(join(origin, "base-only.txt"), "unrelated base change\n");
-      await git.add(["--all"]);
-      await git.commit("Updated target");
-      const baseSha = await git.revparse(["HEAD"]);
-      await git.merge(["--no-ff", "change", "-m", "PR merge"]);
-      const mergeSha = await git.revparse(["HEAD"]);
-      await git.raw(["update-ref", "refs/pull/1/merge", mergeSha]);
+  it.each([false, true])(
+    "reads a merge without modifying the checkout (autocrlf: %s)",
+    async (autocrlf) => {
+      const directory = await mkdtemp(join(tmpdir(), "protected-files-merge-"));
+      const origin = join(directory, "origin");
+      const checkout = join(directory, "checkout");
+      try {
+        await mkdir(origin);
+        const git = simpleGit(origin);
+        await git.init(false, ["--initial-branch=main"]);
+        await git.addConfig("user.name", "Test");
+        await git.addConfig("user.email", "test@example.com");
+        await git.addConfig("commit.gpgsign", "false");
+        await writeFile(join(origin, "package.json"), '{"trusted": true}\n');
+        await git.add(["--all"]);
+        await git.commit("Trusted base");
+        await git.checkoutLocalBranch("change");
+        await writeFile(join(origin, "package.json"), '{"trusted": false}\n');
+        await git.add(["--all"]);
+        await git.commit("Untrusted PR");
+        const headSha = await git.revparse(["HEAD"]);
+        await git.checkout("main");
+        await writeFile(join(origin, "base-only.txt"), "unrelated base change\n");
+        await git.add(["--all"]);
+        await git.commit("Updated target");
+        const baseSha = await git.revparse(["HEAD"]);
+        await git.merge(["--no-ff", "change", "-m", "PR merge"]);
+        const mergeSha = await git.revparse(["HEAD"]);
+        await git.raw(["update-ref", "refs/pull/1/merge", mergeSha]);
 
-      await simpleGit().clone(origin, checkout, ["--no-checkout"]);
-      const trusted = simpleGit(checkout);
-      await trusted.checkout(baseSha);
-      const diff = await readProtectedFilesDiff({
-        cwd: checkout,
-        pullNumber: 1,
-        headSha,
-        baseSha,
-        token: "test-token",
-      });
-      expect(diff).toEqual({ baseCommitish: baseSha, headCommitish: mergeSha });
-      const actual = await vi.importActual<typeof import("../../shared/src/changed-files.ts")>(
-        "../../shared/src/changed-files.ts",
-      );
-      await expect(
-        actual.getChangedFiles({ ...diff, cwd: checkout, gitOptions: ["--no-renames"] }),
-      ).resolves.toEqual(["package.json"]);
-      expect(await trusted.revparse(["HEAD"])).toBe(baseSha);
-      expect(readFileSync(join(checkout, "package.json"), "utf8")).toBe('{"trusted": true}\n');
-      expect(await trusted.raw(["status", "--porcelain"])).toBe("");
-    } finally {
-      await rm(directory, { recursive: true, force: true });
-    }
-  });
+        await simpleGit().clone(origin, checkout, ["--no-checkout"]);
+        const trusted = simpleGit(checkout);
+        await trusted.addConfig("core.autocrlf", String(autocrlf));
+        await trusted.checkout(baseSha);
+        const diff = await readProtectedFilesDiff({
+          cwd: checkout,
+          pullNumber: 1,
+          headSha,
+          baseSha,
+          token: "test-token",
+        });
+        expect(diff).toEqual({ baseCommitish: baseSha, headCommitish: mergeSha });
+        const actual = await vi.importActual<typeof import("../../shared/src/changed-files.ts")>(
+          "../../shared/src/changed-files.ts",
+        );
+        await expect(
+          actual.getChangedFiles({ ...diff, cwd: checkout, gitOptions: ["--no-renames"] }),
+        ).resolves.toEqual(["package.json"]);
+        expect(await trusted.revparse(["HEAD"])).toBe(baseSha);
+        expect(JSON.parse(readFileSync(join(checkout, "package.json"), "utf8"))).toEqual({
+          trusted: true,
+        });
+        expect(await trusted.raw(["status", "--porcelain"])).toBe("");
+      } finally {
+        await rm(directory, { recursive: true, force: true });
+      }
+    },
+  );
 
   it.each([
     { pullNumber: 0, headSha: HEAD_SHA, token: "test-token" },
