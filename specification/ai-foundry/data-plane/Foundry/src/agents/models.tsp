@@ -625,13 +625,6 @@ model HeaderIsolationKeySource {
   kind: "Header";
 }
 
-@doc("The supported isolation key sources for Azure RBAC authorization.")
-@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
-union AzureRbacIsolationKeySource {
-  Entra: EntraIsolationKeySource,
-  Header: HeaderIsolationKeySource,
-}
-
 @doc("""
   Derives Agent Blueprint isolation keys from trusted request headers. The caller must use an app-only
   token, and its application ID must appear in both this source's `allowed_clients` list and
@@ -645,6 +638,13 @@ model AgentBlueprintHeaderIsolationKeySource {
   @minItems(1)
   @maxItems(10)
   allowed_clients: Azure.Core.uuid[];
+}
+
+@doc("The supported isolation key sources for Azure RBAC authorization.")
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
+union AzureRbacIsolationKeySource {
+  Entra: EntraIsolationKeySource,
+  Header: HeaderIsolationKeySource,
 }
 
 @doc("The supported isolation key sources for Agent Blueprint authorization.")
