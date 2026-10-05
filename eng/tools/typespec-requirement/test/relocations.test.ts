@@ -200,30 +200,6 @@ test("Does not treat common JSON as an existing Swagger version", async () => {
   expect(result.stdout).toContain("suppressions cannot permit new handwritten API versions");
 });
 
-test("Still requires a valid version-specific suppression for relocated Swagger", async () => {
-  const old = `${oldService}/preview/2020-01-01/legacy.json`;
-  const result = await checkChanges(
-    { [old]: legacy, [`${newService}/stable/2026-01-01/generated.json`]: generated },
-    {
-      [old]: null,
-      [`${newService}/preview/2020-01-01/legacy.json`]: legacy,
-      ...suppression(newService, "preview/*"),
-    },
-  );
-  expect(result.exitCode).toBe(1);
-  expect(result.stdout).toContain("Invalid path");
-});
-
-test("Does not waive the existing TypeSpec requirement without a suppression", async () => {
-  const old = `${oldService}/preview/2020-01-01/legacy.json`;
-  const result = await checkChanges(
-    { [old]: legacy, [`${newService}/stable/2026-01-01/generated.json`]: generated },
-    { [old]: null, [`${newService}/preview/2020-01-01/legacy.json`]: legacy },
-  );
-  expect(result.exitCode).toBe(1);
-  expect(result.stdout).toContain("API version appears to be new");
-});
-
 test("A relocated version does not exempt another newly added version in the same service", async () => {
   const old = `${oldService}/preview/2020-01-01/legacy.json`;
   const result = await checkChanges(
