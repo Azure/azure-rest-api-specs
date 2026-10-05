@@ -37,11 +37,11 @@ jobs:
 
       - name: Update Labels
         id: update-labels
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         with:
           script: |
             const { default: updateLabels } =
-              await import('${{ github.workspace }}/.github/workflows/src/update-labels.js');
+              await import('${{ github.workspace }}/.github/workflows/src/update-labels.ts');
             await updateLabels({ github, context, core });
 
       - if: ${{ always() && steps.update-labels.outputs.head_sha }}
