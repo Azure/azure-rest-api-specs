@@ -88,6 +88,167 @@ Keep a long-lived branch by protecting it or adding it to those exclusions.
 Candidates and their SHAs are logged, and SHA-guarded Git pushes refuse to delete
 changed tips. API and deletion failures fail the workflow.
 
+## Repository labels
+
+Repository label configuration starts at [`.github/labels.yaml`](../.github/labels.yaml).
+It extends local definition files under `.github/labels/`: `common.yaml` contains
+shared process/triage labels, `services.yaml` contains service/team labels
+(both shared and repository-specific), and `workflow.yaml` contains
+repository-specific process labels. Shared labels follow the SDK registry's
+classification: color `e99695` identifies its service/area labels. These are
+checked-in definitions, not live imports from another repository.
+Sort entries alphabetically within each file.
+Add or edit labels through a pull request, keeping names unchanged unless a
+separate migration is intended. Names, six-digit hex colors, and descriptions are
+validated before synchronization. Empty descriptions are allowed. Label
+authorization remains separate in `.github/protected-labels.yml`; defining a
+label does not grant permission to apply it.
+
+### Extending label catalogs
+
+```yaml
+unconfiguredLabels: archive
+extends:
+  - ./labels/common.yaml
+  - ./labels/services.yaml
+  - ./labels/workflow.yaml
+labels:
+  - name: example
+    color: "123456"
+    description: A repository-specific label
+```
+
+Each base file can also contain `extends` and `labels`. Paths are relative to
+the declaring file and must resolve within `.github/labels/` (or to the root
+catalog). URLs and cross-repository imports are not supported. Only the root
+defines `unconfiguredLabels`; reusable files contain definitions, not cleanup
+policy.
+
+Labels merge by case-insensitive name. An extending file can override individual
+fields while inheriting the rest. Conflicting fields from sibling bases must be
+overridden explicitly in the extending file; file order does not silently decide
+them. Duplicate names in one file, cycles, invalid paths, missing files, and
+incomplete resolved labels fail the entire load before any mutation.
+
+Canonical labels may declare `aliases` to retire older names:
+
+```yaml
+labels:
+  - name: DoNotMerge
+    color: "b60205"
+    description: Hold merge after approval
+    aliases: ["Do Not Merge", "do-not-merge"]
+```
+
+Aliases must be unique across the resolved catalog and cannot also be configured
+label names. In archive mode, the workflow first adds the canonical label to all
+issues and PRs carrying each alias, including closed items, then archives the
+alias. Assignment failures prevent archival. Keep the mapping through the grace
+period so canonical assignments are verified before final deletion. Preserve
+mode and dry runs do not migrate assignments.
+
+The shared SDK registry still contains `Do Not Merge`. Running its separate
+sync script against this repository can recreate that alias; retire or exclude
+that provisioning path before relying on the name staying absent.
+
+The CLI and workflow use the same loader. Audits record every loaded source and
+its hash. Before applying changes, the workflow resolves the complete catalog
+from one default-branch commit and compares all source hashes, so a change to an
+inherited file invalidates the plan just like a change to the root.
+
+After installing dependencies from the repository root, validate or preview:
+
+```bash
+pnpm --dir .github labels
+pnpm --dir .github labels --preview
+```
+
+Validation is offline. Preview reads upstream labels without changing anything;
+set `GITHUB_TOKEN` to authenticate if needed. It lists proposed creates, metadata
+updates (including unarchiving), archives, expired archives to delete, and
+unconfigured labels and alias migrations. It does not enumerate affected items.
+
+[Sync repository labels](../.github/workflows/sync-repo-labels.yaml) runs after
+relevant changes on `main`, when repository label definitions change, and daily.
+The schedule also catches changes made by workflows using `GITHUB_TOKEN`, which
+do not trigger further label-event workflows. Manual runs default to dry-run.
+Mutating runs use the upstream default branch and are disabled on forks. PR
+validation never changes GitHub labels.
+
+The `unconfiguredLabels: archive` policy creates/updates configured labels and
+archives labels absent from the catalog. This applies repository-wide, including
+labels created manually or by other automation. Add legitimate labels through
+a PR before consumers begin using them. Removing a catalog entry starts the
+archive lifecycle described below on the next synchronization.
+
+To pause archival and deletion, change the policy to `unconfiguredLabels: preserve`
+through a reviewed PR. That mode still synchronizes configured labels but only
+warns about unconfigured ones. Manual workflow inputs cannot override the
+checked-in policy.
+
+### Archive lifecycle
+
+In archive mode, an active label absent from the catalog is renamed in place to
+`archived: <original name>`, natively archived in GitHub, and given this description:
+
+> Archived by label sync: absent from .github/labels.yaml. Eligible for deletion after 14 days.
+
+The prefix makes the status visible on existing issues and PRs. Renaming preserves
+the label's ID and assignments, but changes name-based searches and automation;
+any automation needing the original label should define it in the catalog.
+The `archived: ` prefix is reserved and cannot be used in catalog definitions.
+
+Archiving preserves existing assignments and prevents new ones. GitHub records
+the archive date in `archived_at`; subsequent synchronization does not reset it.
+The daily workflow only considers a label for deletion when it is still absent
+from the catalog, has been archived for at least **14 full days**, and still has
+that exact warning description. Manually archived labels without the warning
+are left alone, even if they are old. Missing or invalid archive timestamps fail
+validation rather than being inferred.
+
+Adding the original name back to the catalog restores the same label's name,
+description, and color and removes its archived state, including in preserve
+mode. The synchronizer recognizes the prefix together with the exact warning;
+it does not create a duplicate. This cancels its deletion.
+Removing it again starts a new grace period on the next archive.
+
+Name collisions stop synchronization for manual resolution, including when both
+the original and managed archived name already exist. Prefixing a name longer
+than 40 characters exceeds GitHub's 50-character limit and also fails explicitly:
+rename it deliberately before removing it from the catalog. Names are never
+silently truncated. Earlier managed archives without the prefix acquire it on
+the next archive-mode run without resetting their timestamp, unless already
+eligible for deletion.
+
+After the grace period, the archived label is deleted without adding a generic
+replacement label. Its existing assignments remain intact until deletion;
+deletion then removes those assignments from GitHub. Explicit alias mappings
+preserve the corresponding canonical classification. Other labels are preserved,
+and **no comments are posted**.
+
+Each run uploads `label-audit-before-<run-id>-<attempt>` before applying changes.
+It records original label metadata, archive timestamps, and, for alias migrations
+and expired labels, affected item numbers, types, URLs, and states.
+`label-audit-outcome-<run-id>-<attempt>` records
+operations and failures. Download them from the workflow run's **Artifacts**
+section. Artifacts request 90-day retention, subject to repository policy; they
+are not permanent history. Export them before expiration if permanent retention
+is needed.
+
+Discovery, audit upload, or alias migration failures prevent deletion. Catalog changes,
+renamed labels, changed archive timestamps/warnings, or new unaudited assignments
+also stop cleanup. On partial
+failure, some items may have both the alias and canonical label. Inspect the
+outcome artifact, resolve the error, and rerun; canonical additions are idempotent.
+If a run is interrupted, `pending` operations may or may not have completed:
+compare the audit with live state before recovery.
+
+GitHub does not provide an atomic migration-and-deletion transaction. The
+workflow rechecks assignments before deletion, but concurrent manual changes can
+still race it. Restoring a deleted label does not restore its assignments; use
+the audit to guide manual recovery. This workflow detects/reconciles label
+creation afterward, rather than preventing creation in the GitHub UI.
+
 ## Code conventions
 
 Below are code convention we strive to follow in `eng` directory:

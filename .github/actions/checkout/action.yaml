@@ -24,10 +24,16 @@ inputs:
     description: Keep Git credentials after checkout only when later Git operations require authentication
     default: "false"
 
+outputs:
+  commit:
+    description: Commit SHA checked out
+    value: ${{ steps.checkout.outputs.commit }}
+
 runs:
   using: composite
   steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      id: checkout
       with:
         repository: ${{ inputs.repository }}
         ref: ${{ inputs.ref }}

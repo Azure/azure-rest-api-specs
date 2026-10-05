@@ -10,7 +10,9 @@ permissions:
 jobs:
   typespec-migration-validation:
     name: TypeSpec Migration Validation
-    if: contains(join(github.event.pull_request.labels.*.name, ','), 'typespec-conversion-w')
+    if: >-
+      github.event.pull_request.state == 'open' &&
+      contains(join(github.event.pull_request.labels.*.name, ','), 'typespec-conversion-w')
     runs-on: ubuntu-24.04
 
     steps:
