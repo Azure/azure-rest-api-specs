@@ -1190,7 +1190,6 @@ model HorizonDbClusterDataEncryption {
   @doc("The validation status of the primary encryption key. This property is returned for AzureKeyVault encryption and is absent for SystemManaged encryption.")
   @visibility(Lifecycle.Read)
   primaryEncryptionKeyStatus?: HorizonDbClusterEncryptionKeyStatus;
-
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -1214,7 +1213,6 @@ model HorizonDbClusterDataEncryptionForPatchUpdate {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
     }
   ]>;
-
 }
 
 @added(Versions.v2026_10_01_preview)
