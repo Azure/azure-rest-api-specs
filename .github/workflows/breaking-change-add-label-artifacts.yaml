@@ -18,6 +18,9 @@ permissions:
 jobs:
   breaking-change-add-label-artifacts:
     name: "Breaking Change - Add Label Artifacts"
+    if: >-
+      github.event.workflow_run.conclusion != 'skipped' &&
+      github.event.workflow_run.conclusion != 'cancelled'
 
     runs-on: ubuntu-slim
 

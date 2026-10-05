@@ -79,6 +79,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 ### TypeScript Integration
 
 - Shared ES2024/NodeNext compiler options live in the single root `tsconfig.base.json`. Each GitHub project extends it directly, defining its own file selection and overrides that preserve the existing library, JavaScript, and unused-code checking behavior.
+- Assessment skill `.mjs` scripts have their own `tsconfig.json` extending the root base so type-aware linting resolves Node.js types consistently in root, package-local, and single-file runs. Keep these scripts included in that project rather than relying on an inferred lint project.
 - TypeScript is configured with `noEmit`, `allowImportingTsExtensions`, `erasableSyntaxOnly`, and `verbatimModuleSyntax`
 - Use `.ts` relative imports and `import type` for type-only dependencies
 - Do not introduce enums, parameter properties, or namespaces; use frozen objects and value-union type aliases instead of enums
