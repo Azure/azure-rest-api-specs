@@ -29,6 +29,40 @@
               ]
             },
             "required": true
+          },
+          {
+            "id": "endpoint-2",
+            "namespace": "forecast",
+            "kind": "mcp",
+            "mcp": {
+              "url": "https://example.invalid/forecast/mcp",
+              "transport": "streamableHttp"
+            },
+            "credentials": {
+              "type": "oauth2",
+              "oauth2": {
+                "authorizationUrl": "https://example.invalid/oauth/authorize",
+                "tokenUrl": "https://example.invalid/oauth/token",
+                "clientId": "example-client",
+                "grantType": "authorizationCode",
+                "scopes": [
+                  "tools.read"
+                ],
+                "authorizationParameters": [
+                  {
+                    "name": "prompt",
+                    "value": "consent"
+                  }
+                ],
+                "tokenParameters": [
+                  {
+                    "name": "audience",
+                    "value": "https://example.invalid/forecast"
+                  }
+                ]
+              }
+            },
+            "required": true
           }
         ],
         "name": "Weather tools",

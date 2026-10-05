@@ -113,6 +113,16 @@ model AiGatewayToolServerManagedIdentityAuthentication {
   clientId?: string;
 }
 
+/** An additional parameter sent to an OAuth 2.0 endpoint. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayToolServerOauth2Parameter {
+  /** OAuth parameter name. */
+  name: string;
+
+  /** OAuth parameter value. */
+  value: string;
+}
+
 /** OAuth 2.0 authentication for a tool server endpoint. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayToolServerOauth2Authentication {
@@ -138,12 +148,12 @@ model AiGatewayToolServerOauth2Authentication {
   grantType?: AiGatewayToolServerOauth2GrantType;
 
   /** Additional authorization endpoint parameters. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The implemented OAuth contract supports arbitrary provider-specific authorization parameters."
-  authorizationParameters?: Record<string>;
+  @identifiers(#["name"])
+  authorizationParameters?: AiGatewayToolServerOauth2Parameter[];
 
   /** Additional token endpoint parameters. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The implemented OAuth contract supports arbitrary provider-specific token parameters."
-  tokenParameters?: Record<string>;
+  @identifiers(#["name"])
+  tokenParameters?: AiGatewayToolServerOauth2Parameter[];
 
   /** Current OAuth connection status. */
   @visibility(Lifecycle.Read)
