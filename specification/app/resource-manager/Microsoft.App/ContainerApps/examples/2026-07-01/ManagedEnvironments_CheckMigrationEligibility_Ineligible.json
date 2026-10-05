@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01",
+    "environmentName": "my-environment",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "body": {
+      "targetMode": "Express"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "isEligible": false,
+        "environmentName": "my-environment",
+        "currentMode": "WorkloadProfiles",
+        "targetMode": "Express",
+        "failureReasons": [
+          {
+            "code": "ManagedEnvironmentInvalidNetworkConfiguration",
+            "message": "The managed environment network configuration does not support migration to the requested target mode."
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedEnvironments_CheckMigrationEligibility",
+  "title": "Check migration eligibility for an ineligible managed environment"
+}

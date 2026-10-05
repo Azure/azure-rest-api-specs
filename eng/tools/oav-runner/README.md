@@ -8,5 +8,5 @@ information.
 
 ```
 cd <repo root>
-npm ci && npm exec --no -- oav-runner <targetdir> <"specs"/"examples">
+pnpm install && pnpm exec oav-runner <targetdir> <"specs"/"examples">
 ```

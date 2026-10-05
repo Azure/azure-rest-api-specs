@@ -1,0 +1,268 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EX-PAYLOAD Enum Severity Test",
+    "version": "2025-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "produces": ["application/json"],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ExPayload/extensibleOperations/{operationName}": {
+      "get": {
+        "operationId": "ExtensibleOperations_Get",
+        "description": "Gets an operation with an extensible enum property.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          { "$ref": "#/parameters/OperationNameParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The extensible operation.",
+            "schema": { "$ref": "#/definitions/ExtensibleOperation" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unknown extensible enum response value": {
+            "$ref": "./examples/ExtensibleEnum_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ExPayload/closedOperations/{operationName}": {
+      "get": {
+        "operationId": "ClosedOperations_Get",
+        "description": "Gets an operation with a closed enum property.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          { "$ref": "#/parameters/OperationNameParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The closed operation.",
+            "schema": { "$ref": "#/definitions/ClosedOperation" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unknown closed enum response value": {
+            "$ref": "./examples/ClosedEnum_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ExPayload/polymorphicWidgets/{widgetName}": {
+      "get": {
+        "operationId": "PolymorphicWidgets_Get",
+        "description": "Gets a polymorphic widget selected by a discriminator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          { "$ref": "#/parameters/WidgetNameParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The polymorphic widget.",
+            "schema": { "$ref": "#/definitions/WidgetBase" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unknown discriminator response value": {
+            "$ref": "./examples/Discriminator_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ExPayload/widgetKinds/{widgetKind}": {
+      "get": {
+        "operationId": "WidgetKinds_Get",
+        "description": "Gets information for one widget kind.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          { "$ref": "#/parameters/WidgetKindParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Information about the widget kind.",
+            "schema": { "$ref": "#/definitions/WidgetKindInfo" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unknown enum request path value": {
+            "$ref": "./examples/PathParameter_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "OperationNameParameter": {
+      "name": "operationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9-]+$",
+      "description": "The operation name.",
+      "x-ms-parameter-location": "method"
+    },
+    "WidgetNameParameter": {
+      "name": "widgetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9-]+$",
+      "description": "The widget name.",
+      "x-ms-parameter-location": "method"
+    },
+    "WidgetKindParameter": {
+      "name": "widgetKind",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": ["Standard", "Premium"],
+      "x-ms-enum": {
+        "name": "WidgetKind",
+        "modelAsString": true
+      },
+      "description": "The widget kind.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "ExtensibleOperation": {
+      "type": "object",
+      "description": "An operation with an extensible type.",
+      "required": ["operationType"],
+      "properties": {
+        "operationType": {
+          "$ref": "#/definitions/ExtensibleOperationType"
+        }
+      }
+    },
+    "ExtensibleOperationType": {
+      "type": "string",
+      "description": "The extensible operation type.",
+      "enum": ["IssueCreation", "Investigation"],
+      "x-ms-enum": {
+        "name": "ExtensibleOperationType",
+        "modelAsString": true
+      }
+    },
+    "ClosedOperation": {
+      "type": "object",
+      "description": "An operation with a closed type.",
+      "required": ["operationType"],
+      "properties": {
+        "operationType": {
+          "$ref": "#/definitions/ClosedOperationType"
+        }
+      }
+    },
+    "ClosedOperationType": {
+      "type": "string",
+      "description": "The closed operation type.",
+      "enum": ["IssueCreation", "Investigation"],
+      "x-ms-enum": {
+        "name": "ClosedOperationType",
+        "modelAsString": false
+      }
+    },
+    "WidgetBase": {
+      "type": "object",
+      "description": "A polymorphic widget.",
+      "discriminator": "kind",
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ExtensibleWidgetKind"
+        },
+        "name": {
+          "type": "string",
+          "description": "The widget name."
+        }
+      }
+    },
+    "ExtensibleWidgetKind": {
+      "type": "string",
+      "description": "The extensible widget discriminator.",
+      "enum": ["StandardWidget"],
+      "x-ms-enum": {
+        "name": "ExtensibleWidgetKind",
+        "modelAsString": true
+      }
+    },
+    "StandardWidget": {
+      "description": "A standard widget.",
+      "x-ms-discriminator-value": "StandardWidget",
+      "allOf": [
+        { "$ref": "#/definitions/WidgetBase" },
+        {
+          "type": "object",
+          "properties": {
+            "size": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The widget size."
+            }
+          }
+        }
+      ]
+    },
+    "WidgetKindInfo": {
+      "type": "object",
+      "description": "Information about a widget kind.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        }
+      }
+    }
+  }
+}
