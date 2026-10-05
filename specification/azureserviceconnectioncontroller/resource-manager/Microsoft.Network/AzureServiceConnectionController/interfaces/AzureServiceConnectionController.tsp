@@ -59,18 +59,15 @@ interface AzureServiceConnectionControllers {
           properties: #{
             subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
             ipConfigurations: #[
-              #{
-                privateIpV4Address: "10.0.0.10",
-                ipAllocationMethod: "Static",
-              }
+              #{ privateIpV4Address: "10.0.0.10", ipAllocationMethod: "Static" }
             ],
             providerConnections: #[
-                #{
-                  name: "provider-connection",
-                  subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
-                  privateEndpointResourceGroupName: "pe-rg1",
-                }
-              ],
+              #{
+                name: "provider-connection",
+                subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
+                privateEndpointResourceGroupName: "pe-rg1",
+              }
+            ],
             provisioningState: "Succeeded",
           },
         },
@@ -96,10 +93,7 @@ interface AzureServiceConnectionControllers {
           properties: #{
             subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
             ipConfigurations: #[
-              #{
-                privateIpV4Address: "10.0.0.10",
-                ipAllocationMethod: "Static",
-              }
+              #{ privateIpV4Address: "10.0.0.10", ipAllocationMethod: "Static" }
             ],
             providerConnections: #[
               #{
@@ -125,10 +119,7 @@ interface AzureServiceConnectionControllers {
           properties: #{
             subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
             ipConfigurations: #[
-              #{
-                privateIpV4Address: "10.0.0.10",
-                ipAllocationMethod: "Static",
-              }
+              #{ privateIpV4Address: "10.0.0.10", ipAllocationMethod: "Static" }
             ],
             providerConnections: #[
               #{
