@@ -6877,6 +6877,73 @@ model VirtualMachineProperties {
    */
   @added(Versions.v2025_11_01)
   resiliencyProfile?: ResiliencyProfile;
+
+  /**
+   * Specifies the virtual host profile settings used for Layered Virtualization (L1VH), controlling how
+   * the virtual machine hosts child (L2) virtual machines. Minimum api-version: 2026-09-01.
+   */
+  @added(Versions.v2026_09_01)
+  virtualHostProfile?: VirtualHostProfile;
+}
+
+/**
+ * The virtualization model used to create and run child (L2) virtual machines on top of a virtual host:
+ * - DirectVirtualization (L1VH): the Azure/host hypervisor exposes interfaces to the L1 VM to create
+ *   child (L2) VMs without requiring an L1 guest hypervisor, avoiding nested virtualization overhead.
+ * - NestedVirtualization: the L1 VM runs its own hypervisor to create L2 VMs (double layer).
+ * - None: explicit opt-out sentinel used to clear a previously configured virtualization type.
+ * Direct virtualization is typically an explicit opt-in at VM create after compatibility validation,
+ * while existing VM sizes are enabled for nested virtualization by default.
+ */
+@added(Versions.v2026_09_01)
+union VirtualizationType {
+  string,
+
+  /**
+   * Explicit opt-out sentinel. Functionally equivalent to having no virtualization configured. On an
+   * update, passing None clears a previously configured virtualization type. This is distinct from a
+   * null/omitted virtualizationType, which follows PATCH semantics and means "no change". This value is
+   * write-only: it is never returned in a GET response.
+   */
+  None: "None",
+
+  /**
+   * The Azure/host hypervisor exposes interfaces to the L1 VM to create child (L2) VMs directly, without
+   * requiring an L1 guest hypervisor. Also known as L1VH (Layer-1 Virtual Host).
+   */
+  DirectVirtualization: "DirectVirtualization",
+
+  /**
+   * The L1 VM runs its own hypervisor to create L2 VMs (double layer / traditional nested virtualization).
+   */
+  NestedVirtualization: "NestedVirtualization",
+}
+
+/**
+ * The profile of the virtual host on which the virtual machine is running.
+ */
+@added(Versions.v2026_09_01)
+model VirtualHostProfile {
+  /**
+   * Specifies the virtualization model used to create and run child (L2) virtual machines on this host.
+   */
+  virtualizationType?: VirtualizationType;
+
+  /**
+   * The properties from the L1 to L2 virtual host.
+   */
+  virtualHostProperties?: VirtualHostProperties;
+}
+
+/**
+ * The properties from the L1 to L2 virtual host.
+ */
+@added(Versions.v2026_09_01)
+model VirtualHostProperties {
+  /**
+   * Specifies the GPU partition assigned from the L1 virtual host to the L2 virtual machine.
+   */
+  gpuPartition?: string;
 }
 
 /**
