@@ -118,14 +118,9 @@ export async function extractInputs(
     let issue_number = NaN;
     let head_sha = "";
 
-    // This target-triggered workflow emits trusted identity artifacts and never runs PR code.
-    const protectedFilesRun =
-      payload.workflow_run.event === "pull_request_target" &&
-      payload.workflow_run.path === ".github/workflows/protected-files.yaml";
     if (
-      !protectedFilesRun &&
-      (payload.workflow_run.event === "pull_request" ||
-        payload.workflow_run.event == "pull_request_target")
+      payload.workflow_run.event === "pull_request" ||
+      payload.workflow_run.event == "pull_request_target"
     ) {
       head_sha = payload.workflow_run.head_sha;
 
@@ -215,8 +210,7 @@ export async function extractInputs(
     } else if (
       payload.workflow_run.event === "issue_comment" ||
       payload.workflow_run.event == "workflow_run" ||
-      payload.workflow_run.event == "check_run" ||
-      protectedFilesRun
+      payload.workflow_run.event == "check_run"
     ) {
       // Attempt to extract issue number from artifact.  This can be trusted, because it was uploaded from a workflow that is trusted,
       // because "issue_comment" and "workflow_run" only trigger on workflows in the default branch.
@@ -226,19 +220,7 @@ export async function extractInputs(
         per_page: PER_PAGE_MAX,
       });
 
-      // A rerun may publish a newer head; process the latest handoff last.
-      const artifactNames = (
-        protectedFilesRun
-          ? artifacts.toSorted((a, b) => {
-              if (!a.created_at || !b.created_at) {
-                throw new Error(
-                  "Protected Files identity artifacts are missing creation timestamps",
-                );
-              }
-              return a.created_at.localeCompare(b.created_at) || a.id - b.id;
-            })
-          : artifacts
-      ).map((a) => a.name);
+      const artifactNames = artifacts.map((a) => a.name);
 
       core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
@@ -285,9 +267,6 @@ export async function extractInputs(
         core.info(
           `Could not find 'issue-number' artifact, which is required to associate the triggering workflow run with a PR`,
         );
-      }
-      if (protectedFilesRun && (!head_sha || !Number.isSafeInteger(issue_number))) {
-        throw new Error("Protected Files workflow is missing its trusted PR identity artifacts");
       }
     } else {
       throw new Error(

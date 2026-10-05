@@ -189,40 +189,37 @@ describe("extractInputs", () => {
     );
   });
 
-  it.each(
-    ["pull_request", "pull_request_target"].flatMap((event) =>
-      [{ pullRequests: [{ number: 123 }] }, { pullRequests: [null, { number: 123 }, null] }].map(
-        (input) => ({ ...input, event }),
-      ),
-    ),
-  )("workflow_run:completed:$event (same repo, $pullRequests)", async ({ pullRequests, event }) => {
-    const context = {
-      eventName: "workflow_run",
-      payload: {
-        action: "completed",
-        workflow_run: {
-          event,
-          head_sha: "abc123",
-          id: 456,
-          repository: {
-            name: "TestRepoName",
-            owner: {
-              login: "TestRepoOwnerLogin",
+  it.each([{ pullRequests: [{ number: 123 }] }, { pullRequests: [null, { number: 123 }, null] }])(
+    "workflow_run:completed:pull_request (same repo, $pullRequests)",
+    async ({ pullRequests }) => {
+      const context = {
+        eventName: "workflow_run",
+        payload: {
+          action: "completed",
+          workflow_run: {
+            event: "pull_request",
+            head_sha: "abc123",
+            id: 456,
+            repository: {
+              name: "TestRepoName",
+              owner: {
+                login: "TestRepoOwnerLogin",
+              },
             },
+            pull_requests: pullRequests,
           },
-          pull_requests: pullRequests,
         },
-      },
-    };
+      };
 
-    await expect(extractInputs(createMockGithub(), context, createMockCore())).resolves.toEqual({
-      owner: "TestRepoOwnerLogin",
-      repo: "TestRepoName",
-      head_sha: "abc123",
-      issue_number: 123,
-      run_id: 456,
-    });
-  });
+      await expect(extractInputs(createMockGithub(), context, createMockCore())).resolves.toEqual({
+        owner: "TestRepoOwnerLogin",
+        repo: "TestRepoName",
+        head_sha: "abc123",
+        issue_number: 123,
+        run_id: 456,
+      });
+    },
+  );
 
   it.each(["repository", "head_repository"])(
     "rejects a workflow run with a null %s owner",
@@ -256,92 +253,15 @@ describe("extractInputs", () => {
     },
   );
 
-  it.each([
-    { fork: false, missingTimestamp: false },
-    { fork: true, missingTimestamp: false },
-    { fork: false, missingTimestamp: true },
-  ])(
-    "resolves trusted Protected Files artifacts (fork: $fork, missing timestamp: $missingTimestamp)",
-    async ({ fork, missingTimestamp }) => {
-      const github = createMockGithub();
-      const headSha = "b".repeat(40);
+  it.each([0, 1, 2, 3])(
+    "workflow_run:completed:pull_request (fork repo, %s PRs)",
+    async (numPullRequests) => {
       const context = {
         eventName: "workflow_run",
         payload: {
           action: "completed",
           workflow_run: {
-            event: "pull_request_target",
-            path: ".github/workflows/protected-files.yaml",
-            head_sha: "a".repeat(40),
-            id: 456,
-            repository: { name: "TestRepo", owner: { login: "Azure" } },
-            pull_requests: fork ? [] : [{ number: 123 }],
-          },
-        },
-      };
-      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-        data: {
-          artifacts: [
-            {
-              id: 3,
-              name: `head-sha=${headSha}`,
-              created_at: missingTimestamp ? null : "2026-10-05T14:00:00Z",
-            },
-            { id: 1, name: `head-sha=${"c".repeat(40)}`, created_at: "2026-10-05T13:00:00Z" },
-            { id: 2, name: "issue-number=123", created_at: "2026-10-05T14:00:00Z" },
-          ],
-        },
-      });
-      if (missingTimestamp) {
-        await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
-          "Protected Files identity artifacts are missing creation timestamps",
-        );
-        return;
-      }
-      await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
-        owner: "Azure",
-        repo: "TestRepo",
-        head_sha: headSha,
-        issue_number: 123,
-        run_id: 456,
-      });
-      expect(github.rest.repos.listPullRequestsAssociatedWithCommit).not.toHaveBeenCalled();
-    },
-  );
-
-  it("does not fall back to the target SHA when Protected Files identity artifacts are missing", async () => {
-    const context = {
-      eventName: "workflow_run",
-      payload: {
-        action: "completed",
-        workflow_run: {
-          event: "pull_request_target",
-          path: ".github/workflows/protected-files.yaml",
-          head_sha: "a".repeat(40),
-          id: 456,
-          repository: { name: "TestRepo", owner: { login: "Azure" } },
-          pull_requests: [{ number: 123 }],
-        },
-      },
-    };
-    await expect(extractInputs(createMockGithub(), context, createMockCore())).rejects.toThrow(
-      "Protected Files workflow is missing its trusted PR identity artifacts",
-    );
-  });
-
-  it.each(
-    ["pull_request", "pull_request_target"].flatMap((event) =>
-      [0, 1, 2, 3].map((numPullRequests) => ({ event, numPullRequests })),
-    ),
-  )(
-    "workflow_run:completed:$event (fork repo, $numPullRequests PRs)",
-    async ({ event, numPullRequests }) => {
-      const context = {
-        eventName: "workflow_run",
-        payload: {
-          action: "completed",
-          workflow_run: {
-            event,
+            event: "pull_request",
             head_repository: {
               name: "TestRepoName",
               owner: {

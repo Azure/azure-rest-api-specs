@@ -72,7 +72,7 @@ export async function checkProtectedFiles(
   { context, core }: Pick<GitHubScriptArgs, "context" | "core">,
   diff?: { baseCommitish: string; headCommitish: string },
 ): Promise<ProtectedFilesResult> {
-  if (context.eventName !== "pull_request_target") {
+  if (context.eventName !== "pull_request") {
     throw new Error(`Unsupported event for Protected Files: '${context.eventName}'`);
   }
   const payload = context.payload as WebhookEvent<"pull-request">;
@@ -127,7 +127,6 @@ export async function checkProtectedFiles(
   }
 
   const messages: string[] = [];
-  let summaryBytes = 0;
   for (const file of protectedFiles) {
     const message = matchesAny(file, SYNCED_PATHS)
       ? `File '${file}' is synced from Azure/azure-sdk-tools. Remove this change from your PR and make the change in Azure/azure-sdk-tools instead.`
@@ -138,17 +137,7 @@ export async function checkProtectedFiles(
         ? "Synced from Azure/azure-sdk-tools; make the change in that repository."
         : "Repository-managed file; remove this change from your specification PR."
     }`;
-    // Checks API summary fields are limited to 65,535 bytes.
-    const bytes = Buffer.byteLength(summary);
-    if (summaryBytes + bytes <= 55_000) {
-      messages.push(summary);
-      summaryBytes += bytes + 1;
-    }
-  }
-  if (messages.length < protectedFiles.length) {
-    messages.push(
-      `\n${protectedFiles.length - messages.length} additional protected paths are listed in the workflow annotations.`,
-    );
+    messages.push(summary);
   }
   core.setFailed(
     "Remove changes to protected files from your specification PR. See https://aka.ms/ci-fix#protected-files.",
@@ -206,12 +195,12 @@ export async function readProtectedFilesDiff({
   return { baseCommitish: baseSha, headCommitish: mergeSha };
 }
 
-/** Publishes only after confirming that the evaluated PR head and base are still current. */
-export async function publishProtectedFiles(
+/** Evaluates the pinned PR merge using read-only repository access. */
+export async function runProtectedFiles(
   { github, context, core }: GitHubScriptArgs,
-  inputs: { checkRunId: number; headSha: string; baseSha: string; token: string },
-): Promise<void> {
-  if (context.eventName !== "pull_request_target") {
+  token: string,
+): Promise<ProtectedFilesResult> {
+  if (context.eventName !== "pull_request") {
     throw new Error(`Unsupported event for Protected Files: '${context.eventName}'`);
   }
   const payload = context.payload as WebhookEvent<"pull-request">;
@@ -219,26 +208,27 @@ export async function publishProtectedFiles(
   if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
     throw new Error("Protected Files requires a valid PR number");
   }
+  const headSha = payload.pull_request?.head?.sha;
+  const baseSha = payload.pull_request?.base?.sha;
+  if (!headSha || !baseSha) {
+    throw new Error("Protected Files requires the PR base and head commits");
+  }
   const { data: pr } = await github.rest.pulls.get({
     ...context.repo,
     pull_number: pullNumber,
   });
   function verifyCurrent(current: typeof pr) {
-    if (
-      current.state !== "open" ||
-      current.head.sha !== inputs.headSha ||
-      current.base.sha !== inputs.baseSha
-    ) {
+    if (current.state !== "open" || current.head.sha !== headSha || current.base.sha !== baseSha) {
       throw new Error("PR changed during evaluation; rerun Protected Files");
     }
   }
   verifyCurrent(pr);
-  core.setSecret(Buffer.from(`x-access-token:${inputs.token}`).toString("base64"));
+  core.setSecret(Buffer.from(`x-access-token:${token}`).toString("base64"));
   const diff = await readProtectedFilesDiff({
     pullNumber,
-    headSha: inputs.headSha,
-    baseSha: inputs.baseSha,
-    token: inputs.token,
+    headSha,
+    baseSha,
+    token,
   });
   const result = await checkProtectedFiles(
     {
@@ -257,13 +247,6 @@ export async function publishProtectedFiles(
     pull_number: pullNumber,
   });
   verifyCurrent(latest);
-  await core.summary.addRaw(`## Protected Files\n\n${result.summary}`).write();
-  await github.rest.checks.update({
-    ...context.repo,
-    check_run_id: inputs.checkRunId,
-    status: "completed",
-    conclusion: result.conclusion,
-    output: { title: result.title, summary: result.summary },
-  });
-  core.setOutput("published", "true");
+  await core.summary.addRaw(`## ${result.title}\n\n${result.summary}`).write();
+  return result;
 }

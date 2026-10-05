@@ -1,7 +1,7 @@
 name: Protected Files
 
-on: # zizmor: ignore[dangerous-triggers] Fork PR checks require this; only trusted target-branch code runs.
-  pull_request_target:
+on:
+  pull_request:
     types:
       # default
       - opened
@@ -13,7 +13,13 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR checks require this; only trust
 permissions:
   contents: read
   pull-requests: read
-  checks: write
+
+env:
+  user-allowed: >-
+    ${{
+      github.event.pull_request.user.login == 'azure-sdk' ||
+      github.event.pull_request.user.login == 'azure-sdk-automation[bot]'
+    }}
 
 concurrency:
   group: protected-files-${{ github.event.pull_request.number }}
@@ -21,132 +27,35 @@ concurrency:
 
 jobs:
   protected-files:
-    name: Evaluate protected-file policy
+    name: Protected Files
 
     runs-on: ubuntu-24.04
     timeout-minutes: 10
 
     steps:
-      - name: Start required check
-        id: start
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        with:
-          script: |
-            const { data: pr } = await github.rest.pulls.get({
-              ...context.repo,
-              pull_number: context.payload.pull_request.number,
-            });
-            if (pr.state !== "open") throw new Error("Protected Files requires an open PR");
-            const { data: check } = await github.rest.checks.create({
-              ...context.repo,
-              name: "Protected Files",
-              head_sha: pr.head.sha,
-              external_id: `protected-files:${pr.number}`,
-              status: "in_progress",
-              details_url: `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
-            });
-            core.setOutput("check-run-id", check.id);
-            core.setOutput("head-sha", pr.head.sha);
-            core.setOutput("base-sha", pr.base.sha);
-            core.setOutput("issue-number", pr.number);
-            core.setOutput("user-allowed",
-              ["azure-sdk", "azure-sdk-automation[bot]"].includes(pr.user.login.toLowerCase()));
-
-      # Target-triggered workflow_run metadata may identify the target SHA, not the PR head.
-      - name: Create PR identity handoff
-        run: ': > "$RUNNER_TEMP/protected-files-identity.txt"'
-
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        with:
-          name: issue-number=${{ steps.start.outputs.issue-number }}
-          path: ${{ runner.temp }}/protected-files-identity.txt
-          if-no-files-found: error
-          overwrite: true
-
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        with:
-          name: head-sha=${{ steps.start.outputs.head-sha }}
-          path: ${{ runner.temp }}/protected-files-identity.txt
-          if-no-files-found: error
-          overwrite: true
-
       # Trusted automation still passes before checkout or dependency setup.
       - name: User allowed
-        id: automation
-        if: ${{ steps.start.outputs.user-allowed == 'true' }}
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        env:
-          CHECK_RUN_ID: ${{ steps.start.outputs.check-run-id }}
-          HEAD_SHA: ${{ steps.start.outputs.head-sha }}
-          BASE_SHA: ${{ steps.start.outputs.base-sha }}
-        with:
-          script: |
-            const { data: pr } = await github.rest.pulls.get({
-              ...context.repo,
-              pull_number: context.payload.pull_request.number,
-            });
-            if (pr.state !== "open" || pr.head.sha !== process.env.HEAD_SHA ||
-                pr.base.sha !== process.env.BASE_SHA) {
-              throw new Error("PR changed during evaluation; rerun Protected Files");
-            }
-            const summary = "Trusted automation account is allowed to update protected files.";
-            await core.summary.addRaw(summary).write();
-            await github.rest.checks.update({
-              ...context.repo,
-              check_run_id: Number(process.env.CHECK_RUN_ID),
-              status: "completed",
-              conclusion: "success",
-              output: { title: "Trusted automation author", summary },
-            });
-            core.setOutput("published", "true");
+        if: ${{ env.user-allowed == 'true' }}
+        run: echo "Trusted automation account is allowed to update protected files"
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        if: ${{ steps.start.outputs.user-allowed != 'true' }}
+        if: ${{ env.user-allowed != 'true' }}
         with:
-          # Execute only trusted target-branch policy, actions, and dependencies.
-          ref: ${{ steps.start.outputs.base-sha }}
+          # Run base-commit policy and dependencies, not changes proposed in the PR.
+          ref: ${{ github.event.pull_request.base.sha }}
           persist-credentials: false
           sparse-checkout: |
             .github
 
       - uses: ./.github/actions/install-deps-github-script
-        if: ${{ steps.start.outputs.user-allowed != 'true' }}
+        if: ${{ env.user-allowed != 'true' }}
 
       - name: Detect changes to protected files
-        id: evaluate
-        if: ${{ steps.start.outputs.user-allowed != 'true' }}
+        if: ${{ env.user-allowed != 'true' }}
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
-          CHECK_RUN_ID: ${{ steps.start.outputs.check-run-id }}
-          HEAD_SHA: ${{ steps.start.outputs.head-sha }}
-          BASE_SHA: ${{ steps.start.outputs.base-sha }}
           GITHUB_TOKEN: ${{ github.token }}
         with:
           script: |
-            const { publishProtectedFiles } = await import("${{ github.workspace }}/.github/workflows/src/protected-files.ts");
-            await publishProtectedFiles({ github, context, core }, {
-              checkRunId: Number(process.env.CHECK_RUN_ID),
-              headSha: process.env.HEAD_SHA,
-              baseSha: process.env.BASE_SHA,
-              token: process.env.GITHUB_TOKEN,
-            });
-
-      - name: Fail incomplete evaluation
-        if: >-
-          always() && steps.start.outputs.check-run-id &&
-          steps.automation.outputs.published != 'true' &&
-          steps.evaluate.outputs.published != 'true'
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        env:
-          CHECK_RUN_ID: ${{ steps.start.outputs.check-run-id }}
-        with:
-          script: |
-            const summary = "Protected Files could not complete. Inspect this workflow run and rerun the check.";
-            await github.rest.checks.update({
-              ...context.repo,
-              check_run_id: Number(process.env.CHECK_RUN_ID),
-              status: "completed",
-              conclusion: "failure",
-              output: { title: "Protected Files evaluation failed", summary },
-            });
-            core.setFailed(summary);
+            const { runProtectedFiles } = await import("${{ github.workspace }}/.github/workflows/src/protected-files.ts");
+            await runProtectedFiles({ github, context, core }, process.env.GITHUB_TOKEN);

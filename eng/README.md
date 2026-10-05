@@ -18,10 +18,11 @@ All other required checks and review requirements remain in effect.
 
 The maintainer author roster in `.github/workflows/src/protected-files.ts` mirrors
 [`Azure/azure-rest-api-specs-maintainers`](https://github.com/orgs/Azure/teams/azure-rest-api-specs-maintainers).
-Update it when team membership changes; authorization uses the target branch's
-roster, not changes proposed in the PR. Applying a label or rerunning someone
-else's PR does not grant an exemption. Changes authored by the trusted `azure-sdk`
-and `azure-sdk-automation[bot]` accounts continue to pass automatically.
+Update it when team membership changes; the read-only `pull_request` check runs
+policy from the PR's base commit, not changes proposed in the PR. Applying a label
+or rerunning someone else's PR does not grant an exemption. Changes authored by
+the trusted `azure-sdk` and `azure-sdk-automation[bot]` accounts continue to pass
+automatically.
 
 ## Contributor readiness
 
