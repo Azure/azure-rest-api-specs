@@ -4231,15 +4231,15 @@
           "description": "Authentication type."
         },
         "headers": {
-          "type": "object",
+          "type": "array",
           "format": "password",
           "description": "Static headers injected when calling the endpoint.",
-          "additionalProperties": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
+          "items": {
+            "$ref": "#/definitions/AiGatewayToolServerHeader"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "x-ms-secret": true
         },
         "oauth2": {
@@ -4264,15 +4264,15 @@
           "description": "Authentication type."
         },
         "headers": {
-          "type": "object",
+          "type": "array",
           "format": "password",
           "description": "Static headers injected when calling the endpoint.",
-          "additionalProperties": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
+          "items": {
+            "$ref": "#/definitions/AiGatewayToolServerHeader"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "x-ms-secret": true
         },
         "oauth2": {
@@ -4418,6 +4418,29 @@
           "description": "Whether endpoint failure fails the whole federation."
         }
       }
+    },
+    "AiGatewayToolServerHeader": {
+      "type": "object",
+      "description": "An HTTP header injected when calling a tool server endpoint.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "HTTP header name."
+        },
+        "values": {
+          "type": "array",
+          "format": "password",
+          "description": "Secret values for the HTTP header.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "name",
+        "values"
+      ]
     },
     "AiGatewayToolServerManagedIdentityAuthentication": {
       "type": "object",
