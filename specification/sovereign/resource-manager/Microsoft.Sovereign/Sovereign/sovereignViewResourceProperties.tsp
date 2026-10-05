@@ -225,7 +225,6 @@ model ReportStatus {
   nextAttempt?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.Preview20261031)
 @doc("The response for the sovereign view compliance summary action.")
 model SovereignViewComplianceSummaryResponse {
@@ -340,7 +339,6 @@ model SovereignViewComplianceDimensionSummary {
   othersCount: int32;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.Preview20261031)
 @doc("The request for the sovereign view compliance details action.")
 model SovereignViewComplianceDetailsRequest {
@@ -361,6 +359,7 @@ model SovereignViewComplianceDetailsRequest {
   filters?: SovereignViewComplianceDetailsFilters[];
 
   @doc("The sorting to apply when querying for compliance details.")
+  @identifiers(#["field"])
   sort?: SovereignViewComplianceDetailsSort[];
 
   @doc("The search to apply when querying for compliance details.")
@@ -471,13 +470,6 @@ union SovereignViewComplianceDetailsFilterOperators {
 @added(Versions.Preview20261031)
 @doc("The sorting for compliance details.")
 model SovereignViewComplianceDetailsSort {
-  // @key marks `field` as the array element identifier so the emitter produces
-  // x-ms-identifiers on the sort array in 2026-07-31-preview (where sort is an
-  // array). It is intentionally used without @visibility: adding @visibility
-  // would emit x-ms-mutability on this property in the prior 2026-03-15-preview
-  // version (where sort is a single object), altering an already-released version.
-  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Applying @visibility here would change the already-released 2026-03-15-preview swagger; @key alone leaves it byte-identical."
-  @key
   @doc("The field to sort on.")
   field: string;
 
@@ -510,7 +502,6 @@ model SovereignViewComplianceDetailsSearch {
   value: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.Preview20261031)
 @doc("The response for the sovereign view compliance details action.")
 model SovereignViewComplianceDetailsResponse {
@@ -602,7 +593,6 @@ model SovereignViewComplianceDetail {
   evaluatedAt?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.Preview20261031)
 @doc("The request for the sovereign view filter values action.")
 model SovereignViewFilterValuesRequest {
@@ -617,7 +607,6 @@ model SovereignViewFilterValuesRequest {
   searchTerm?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.Preview20261031)
 @doc("The response for the sovereign view filter values action.")
 model SovereignViewFilterValuesResponse {
@@ -653,7 +642,6 @@ model SovereignViewFilterValueItem {
   count: int32;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept consistent with the sibling action request/response models in this resource provider."
 @added(Versions.Preview20261031)
 @doc("The request for the sovereign view operational status action.")
 model SovereignViewOperationalStatusRequest {
@@ -664,7 +652,6 @@ model SovereignViewOperationalStatusRequest {
   evaluationParameters?: OperationalStatusEvaluationParameter[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept consistent with the sibling action request/response models in this resource provider."
 @added(Versions.Preview20261031)
 @doc("The response for the sovereign view operational status action.")
 model SovereignViewOperationalStatusResponse {
@@ -790,7 +777,6 @@ union SovereignViewScopeType {
   string,
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept consistent with the sibling action request/response models."
 @added(Versions.Preview20261031)
 @doc("The request for the compliance reasoning of one resource and dimension.")
 model SovereignViewComplianceResourceDetailsRequest {
@@ -804,7 +790,6 @@ model SovereignViewComplianceResourceDetailsRequest {
   evaluatedAt?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept consistent with the sibling action request/response models."
 @added(Versions.Preview20261031)
 @doc("The compliance reasoning for given resource and dimension, including the reasoning for its linked and replica resources.")
 model SovereignViewComplianceResourceDetailsResponse {
@@ -900,7 +885,6 @@ model SovereignViewDataEvaluationOutcome {
   additionalInfoCodeId?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept consistent with the sibling action request/response models in this resource provider."
 @added(Versions.Preview20261031)
 @doc("The request for the sovereign view remediate action.")
 model SovereignViewRemediateRequest {
@@ -911,7 +895,6 @@ model SovereignViewRemediateRequest {
   residencyRemediationRequest: SovereignViewResidencyRemediationRequest;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept consistent with the service contract's nested residency remediation request payload."
 @added(Versions.Preview20261031)
 @doc("The residency remediation request payload.")
 model SovereignViewResidencyRemediationRequest {
@@ -953,7 +936,6 @@ model SovereignViewResidencyRemediationResourceConfiguration {
   targetResourceGroupName?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept consistent with the sibling action request/response models in this resource provider."
 @added(Versions.Preview20261031)
 @doc("The response for the sovereign view remediate action.")
 model SovereignViewRemediateResponse {
@@ -964,7 +946,6 @@ model SovereignViewRemediateResponse {
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept consistent with the sibling action request/response models in this resource provider."
 @added(Versions.Preview20261031)
 @doc("The request for the sovereign view remediationResult action.")
 model SovereignViewRemediationResultRequest {
@@ -984,7 +965,6 @@ union SovereignViewRemediationStatus {
   string,
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept consistent with the sibling action request/response models in this resource provider."
 @added(Versions.Preview20261031)
 @doc("The response for the sovereign view remediationResult action.")
 model SovereignViewRemediationResultResponse {
