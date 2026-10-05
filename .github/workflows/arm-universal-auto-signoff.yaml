@@ -86,7 +86,7 @@ jobs:
       # Pilot mode owns only the test label; it never changes ARMSignedOff.
       - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Test'] != 'none'
         name: Upload artifact for ARMAutoSignedOff-Test label
-        uses: ./.github/actions/add-label-artifact # zizmor: ignore[self-repository]
+        uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMAutoSignedOff-Test"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Test'] == 'add' }}"
@@ -97,7 +97,7 @@ jobs:
           github.event_name == 'workflow_run' &&
           fromJson(steps.get-label-action.outputs.result).headSha
         name: Upload artifact with head SHA
-        uses: ./.github/actions/add-empty-artifact # zizmor: ignore[self-repository]
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "head-sha"
           value: "${{ fromJson(steps.get-label-action.outputs.result).headSha }}"
@@ -107,7 +107,7 @@ jobs:
           github.event_name == 'workflow_run' &&
           fromJson(steps.get-label-action.outputs.result).issueNumber > 0
         name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact # zizmor: ignore[self-repository]
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "issue-number"
           value: "${{ fromJson(steps.get-label-action.outputs.result).issueNumber }}"
