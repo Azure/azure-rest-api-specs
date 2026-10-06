@@ -1,11 +1,18 @@
 import { extractInputs } from "../context.ts";
-import type { Core, WebhookEvent } from "../github.ts";
-import { loadApproversConfig } from "./approvers.ts";
+import type { Context, Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
+import {
+  ALLOWED_BOT_LOGINS,
+  evaluateLabelAuthorization,
+  loadProtectedLabelsConfig,
+  type ProtectedLabelsConfig,
+} from "../protected-labels/authorization.ts";
+import { createApproversConfig } from "./approvers.ts";
+import { buildUnauthorizedApplyComment } from "../protected-labels/label-comments.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
 export type ValidateContext = {
-  github: import("@actions/github-script").AsyncFunctionArguments["github"];
-  context: import("@actions/github-script").AsyncFunctionArguments["context"];
+  github: GitHub;
+  context: Context;
   core: Core;
   approversConfig: import("./approvers.ts").ApproversConfig;
   owner: string;
@@ -15,8 +22,6 @@ export type ValidateContext = {
   prNumber: number;
   isMgmt: boolean;
 };
-
-const ALLOWED_BOT_LOGINS: string[] = ["github-actions[bot]", "azure-sdk"];
 
 /**
  * Get all authorized approvers as a flat list.
@@ -90,13 +95,15 @@ async function handleLabeled({
   prNumber,
   isMgmt,
   labels,
-}: ValidateContext & { labels: string[] }) {
+  protectedLabelsConfig,
+}: ValidateContext & { labels: string[]; protectedLabelsConfig: ProtectedLabelsConfig }) {
   let langsToApprove: string[];
 
   if (targetLabel === "package-name-approved-all") {
     // package-name-approved-all is a shortcut for management-plane only.
     // On mgmt PRs, a single label approves all pending languages at once.
-    // Auth (who can apply) is enforced by check-label.js (protected-labels workflow).
+    // Authorization is enforced synchronously below (evaluateLabelAuthorization)
+    // before any approval side effect runs.
     if (!isMgmt) {
       await github.rest.issues.removeLabel({
         owner,
@@ -123,12 +130,45 @@ async function handleLabeled({
       return;
     }
 
-    // Auth (who can apply) is enforced by check-label.js (protected-labels workflow).
-    // Both workflows run concurrently on labeled events, so there's a brief window
-    // where this processes before check-label.js removes an unauthorized label.
-    // State reconciles on the next event (label removal triggers unlabeled handler).
+    // Authorization is enforced synchronously below (evaluateLabelAuthorization)
+    // before any approval side effect, so an unauthorized label cannot green the
+    // status even briefly. check-label.js (protected-labels) still removes the label
+    // independently as defense in depth; correctness no longer depends on its timing.
     const lang = match[1];
     langsToApprove = [lang];
+  }
+
+  const authorization = evaluateLabelAuthorization({
+    config: protectedLabelsConfig,
+    labelName: targetLabel,
+    actor,
+    prLabels: labels,
+    plane: isMgmt ? "management-plane" : "data-plane",
+  });
+  if (
+    authorization.status !== "authorized" &&
+    authorization.status !== "trusted-bot" &&
+    authorization.status !== "plane-unprotected"
+  ) {
+    core.warning(`${actor} is not authorized to apply ${targetLabel}, removing`);
+    await removeLabelIfPresent(github, owner, repo, prNumber, targetLabel);
+    // Explain the removal so the approver is not left guessing (#46787). Only the
+    // "unauthorized" status carries a concrete approver list; "unprotected" means the
+    // label is absent from protected-labels.yml (fail-closed with no known approvers),
+    // so keep that path silent rather than posting an empty "Only  can apply" message.
+    if (authorization.status === "unauthorized") {
+      await github.rest.issues.createComment({
+        owner,
+        repo,
+        issue_number: prNumber,
+        body: buildUnauthorizedApplyComment({
+          actor,
+          labelName: targetLabel,
+          authorizedUsers: authorization.authorizedUsers,
+        }),
+      });
+    }
+    return;
   }
 
   core.info(`Approving languages: ${langsToApprove.join(", ")} by ${actor}`);
@@ -244,12 +284,9 @@ async function handleLabeled({
  * Validate namespace label changes by authorized approvers.
  * Handles both labeled (approval) and unlabeled (guard against unauthorized removal).
  */
-export default async function validateApproval({
-  github,
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
-  const approversConfig = await loadApproversConfig();
+export default async function validateApproval({ github, context, core }: GitHubScriptArgs) {
+  const protectedLabelsConfig = await loadProtectedLabelsConfig();
+  const approversConfig = createApproversConfig(protectedLabelsConfig);
 
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
 
@@ -261,7 +298,8 @@ export default async function validateApproval({
     throw new Error("Pull request label event is missing a label name.");
   }
   const actor = payload.sender.login;
-  const isMgmt = labels.includes("Mgmt") || labels.includes("resource-manager");
+  // Plane from resource-manager (self-healing), not the add-only "Mgmt" label (#46785).
+  const isMgmt = labels.includes("resource-manager");
 
   if (payload.action === "unlabeled") {
     return await handleUnlabeled({
@@ -283,6 +321,16 @@ export default async function validateApproval({
     return;
   }
 
+  // Plane is derived from the labels summarize-checks reconciles (resource-manager /
+  // data-plane). If neither is present, the plane is unknown: defer rather than defaulting
+  // to data-plane, otherwise a data-plane approver could consume approvals on a PR that is
+  // actually management (before resource-manager lands, only the add-only "Mgmt" may exist).
+  // Mirrors check-label's tri-state skip (#46785).
+  if (!isMgmt && !labels.includes("data-plane")) {
+    core.info("Plane not yet reconciled (no resource-manager/data-plane label), skipping");
+    return;
+  }
+
   return await handleLabeled({
     github,
     context,
@@ -295,5 +343,6 @@ export default async function validateApproval({
     prNumber: issue_number,
     isMgmt,
     labels,
+    protectedLabelsConfig,
   });
 }

@@ -1,4 +1,4 @@
-import { readFile } from "fs/promises";
+import { readFile } from "node:fs/promises";
 import yaml from "js-yaml";
 import type { Core } from "../github.ts";
 
