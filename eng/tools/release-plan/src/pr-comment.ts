@@ -117,3 +117,68 @@ export function buildReleaseplanCommentBody(params: CommentBodyParams): string {
 
   return body;
 }
+
+/**
+ * Parameters for posting an error comment on a PR.
+ */
+export interface ErrorCommentParams {
+  /** Octokit instance for GitHub API calls */
+  octokit: {
+    rest: {
+      issues?: {
+        createComment: (params: {
+          owner: string;
+          repo: string;
+          issue_number: number;
+          body: string;
+        }) => Promise<unknown>;
+      };
+    };
+  };
+  /** GitHub repository owner */
+  owner: string;
+  /** GitHub repository name */
+  repo: string;
+  /** Pull request number */
+  prNumber: number;
+  /** Error message or description */
+  error: string;
+  /** TypeSpec project path */
+  tspProjectPath?: string;
+}
+
+/**
+ * Post an error comment on a GitHub PR indicating release plan creation failed.
+ * @param params - Error comment parameters
+ * @throws Error if GitHub API call fails
+ */
+export async function postReleasePlanErrorComment(params: ErrorCommentParams): Promise<void> {
+  const { octokit, owner, repo, prNumber, error, tspProjectPath } = params;
+
+  let body = `### ❌ Release Plan Creation Failed\n\n`;
+  body += `**Error:** \`\`\`\n${error}\n\`\`\`\n`;
+
+  if (tspProjectPath) {
+    body += `\n**TypeSpec Project:** \`${tspProjectPath}\`\n`;
+  }
+
+  body += `\n**Action Required:** Create a release plan manually using [aka.ms/azsdk/releaseplan-dashboard](https://aka.ms/azsdk/releaseplan-dashboard).\n`;
+
+  try {
+    if (!octokit.rest.issues?.createComment) {
+      throw new Error("Octokit issues.createComment is not available.");
+    }
+
+    await octokit.rest.issues.createComment({
+      owner,
+      repo,
+      issue_number: prNumber,
+      body,
+    });
+  } catch (commentError) {
+    const message = commentError instanceof Error ? commentError.message : String(commentError);
+    throw new Error(`Failed to post error comment on PR #${prNumber}: ${message}`, {
+      cause: commentError,
+    });
+  }
+}

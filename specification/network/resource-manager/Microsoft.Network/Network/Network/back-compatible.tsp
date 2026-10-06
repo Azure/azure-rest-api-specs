@@ -677,6 +677,7 @@ using TypeSpec.Versioning;
 
 @@clientName(BastionHosts.createOrUpdate::parameters.resource, "parameters");
 @@clientName(BastionHosts.updateTags::parameters.properties, "parameters");
+@@clientName(BastionHosts.update::parameters.properties, "parameters");
 @@clientLocation(
   BastionHosts.putBastionShareableLink,
   Microsoft.Network,
@@ -902,6 +903,63 @@ using TypeSpec.Versioning;
 @@clientName(
   ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
   "peeringParameters"
+);
+@@clientName(
+  ExpressRouteCrossConnections.validateCircuitMigration::parameters.body,
+  "parameters"
+);
+@@clientName(
+  ExpressRouteCrossConnections.getCircuitMigrationInfo::parameters.body,
+  "parameters"
+);
+@@clientName(
+  ExpressRouteCrossConnections.prepareCircuitMigration::parameters.body,
+  "parameters"
+);
+@@clientName(
+  ExpressRouteCrossConnections.shutDownBgpForCircuitMigration::parameters.body,
+  "parameters"
+);
+@@clientName(
+  ExpressRouteCrossConnections.restoreBgpForCircuitMigration::parameters.body,
+  "parameters"
+);
+@@clientName(
+  ExpressRouteCrossConnections.migrateCircuit::parameters.body,
+  "parameters"
+);
+@@clientName(
+  ExpressRouteCrossConnections.commitCircuitMigration::parameters.body,
+  "parameters"
+);
+@@clientName(
+  ExpressRouteCrossConnections.rollbackCircuitMigration::parameters.body,
+  "parameters"
+);
+@@clientName(
+  MigrateExpressRouteCircuitValidateAndHealthCheckRequest,
+  "MigrateExpressRouteCircuitValidateAndHealthCheckContent",
+  "csharp"
+);
+@@clientName(
+  MigrateExpressRouteCircuitValidateResponse,
+  "MigrateExpressRouteCircuitValidateResult",
+  "csharp"
+);
+@@clientName(
+  MigrateExpressRouteCircuitRequest,
+  "MigrateExpressRouteCircuitContent",
+  "csharp"
+);
+@@clientName(
+  MigrateExpressRouteCircuitHealthCheckResponse,
+  "MigrateExpressRouteCircuitHealthCheckResult",
+  "csharp"
+);
+@@clientName(
+  MigrateExpressRouteCircuitHealthCheckResponse.newCrossConnectionUrl,
+  "newCrossConnectionUri",
+  "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpressRouteCrossConnection.properties);
