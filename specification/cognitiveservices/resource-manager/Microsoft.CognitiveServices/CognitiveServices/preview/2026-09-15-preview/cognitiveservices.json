@@ -16928,7 +16928,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.MachineLearningServices/workspaces/connections"
+                "type": "Microsoft.CognitiveServices/accounts/connections"
               }
             ]
           }
@@ -16941,7 +16941,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.MachineLearningServices/workspaces/connections"
+                "type": "Microsoft.CognitiveServices/accounts/connections"
               }
             ]
           }
@@ -16976,12 +16976,12 @@
       "type": "string",
       "description": "The supported cost control counter dimensions.",
       "enum": [
-        "agent",
-        "identity",
-        "session",
-        "project",
-        "account",
-        "custom"
+        "Agent",
+        "Identity",
+        "Session",
+        "Project",
+        "Account",
+        "Custom"
       ],
       "x-ms-enum": {
         "name": "CostControlDimensionType",
@@ -16989,40 +16989,36 @@
         "values": [
           {
             "name": "Agent",
-            "value": "agent",
+            "value": "Agent",
             "description": "Consumption is partitioned by the stable Foundry agent ID."
           },
           {
             "name": "Identity",
-            "value": "identity",
+            "value": "Identity",
             "description": "Consumption is partitioned by the authenticated principal object ID."
           },
           {
             "name": "Session",
-            "value": "session",
+            "value": "Session",
             "description": "Consumption is partitioned by the Foundry session ID."
           },
           {
             "name": "Project",
-            "value": "project",
+            "value": "Project",
             "description": "Consumption is partitioned by the Foundry project resource ID."
           },
           {
             "name": "Account",
-            "value": "account",
+            "value": "Account",
             "description": "Consumption is partitioned by the owning Cognitive Services account."
           },
           {
             "name": "Custom",
-            "value": "custom",
+            "value": "Custom",
             "description": "Consumption is partitioned by a custom request attribute."
           }
         ]
       }
-    },
-    "CostControlEtagHeader": {
-      "type": "object",
-      "description": "The entity tag returned with a cost control."
     },
     "CostControlListResult": {
       "type": "object",
@@ -17030,6 +17026,7 @@
       "properties": {
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link used to get the next page of cost controls."
         },
         "value": {
@@ -17042,7 +17039,10 @@
             "name"
           ]
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "CostControlMatch": {
       "type": "object",
@@ -17081,7 +17081,16 @@
           "minItems": 1,
           "maxItems": 20,
           "items": {
-            "$ref": "#/definitions/CostControlMatchValue"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.CognitiveServices/accounts/projects"
+                }
+              ]
+            }
           }
         }
       }
@@ -17129,46 +17138,28 @@
       "type": "string",
       "description": "The calendar-aligned UTC renewal periods for recurring cost control rules.",
       "enum": [
-        "minute",
-        "hour",
-        "day",
-        "week",
-        "month",
-        "year"
+        "Day",
+        "Week",
+        "Month"
       ],
       "x-ms-enum": {
         "name": "CostControlPeriod",
         "modelAsString": true,
         "values": [
           {
-            "name": "Minute",
-            "value": "minute",
-            "description": "Renews at the start of the next UTC minute."
-          },
-          {
-            "name": "Hour",
-            "value": "hour",
-            "description": "Renews at the start of the next UTC hour."
-          },
-          {
             "name": "Day",
-            "value": "day",
+            "value": "Day",
             "description": "Renews daily at 00:00 UTC."
           },
           {
             "name": "Week",
-            "value": "week",
+            "value": "Week",
             "description": "Renews Monday at 00:00 UTC."
           },
           {
             "name": "Month",
-            "value": "month",
+            "value": "Month",
             "description": "Renews on the first day of each month at 00:00 UTC."
-          },
-          {
-            "name": "Year",
-            "value": "year",
-            "description": "Renews January 1 at 00:00 UTC."
           }
         ]
       }
@@ -17214,7 +17205,7 @@
             "create"
           ]
         },
-        "counterKey": {
+        "counterKeys": {
           "type": "array",
           "description": "The built-in dimension used to partition consumption. The initial preview supports exactly one dimension.",
           "minItems": 1,
@@ -17261,7 +17252,7 @@
       },
       "required": [
         "name",
-        "counterKey",
+        "counterKeys",
         "unit",
         "amount"
       ]
@@ -17283,11 +17274,11 @@
         "action": {
           "type": "string",
           "description": "The action taken when the threshold is reached. Omitted actions default to audit and therefore require a value of zero.",
-          "default": "audit",
+          "default": "Audit",
           "enum": [
-            "audit",
-            "alert",
-            "block"
+            "Audit",
+            "Alert",
+            "Block"
           ],
           "x-ms-enum": {
             "name": "CostControlThresholdAction",
@@ -17295,17 +17286,17 @@
             "values": [
               {
                 "name": "Audit",
-                "value": "audit",
+                "value": "Audit",
                 "description": "Audits every applied usage update. Authored audit thresholds must use zero. This action is retained in the current preview for compatibility; audit-only rules may omit thresholds."
               },
               {
                 "name": "Alert",
-                "value": "alert",
+                "value": "Alert",
                 "description": "Emits a customer-facing alert without blocking requests."
               },
               {
                 "name": "Block",
-                "value": "block",
+                "value": "Block",
                 "description": "Blocks the request without emitting a customer-facing alert."
               }
             ]
@@ -17321,9 +17312,9 @@
       "type": "string",
       "description": "The supported actions when a threshold is reached.",
       "enum": [
-        "audit",
-        "alert",
-        "block"
+        "Audit",
+        "Alert",
+        "Block"
       ],
       "x-ms-enum": {
         "name": "CostControlThresholdAction",
@@ -17331,17 +17322,17 @@
         "values": [
           {
             "name": "Audit",
-            "value": "audit",
+            "value": "Audit",
             "description": "Audits every applied usage update. Authored audit thresholds must use zero. This action is retained in the current preview for compatibility; audit-only rules may omit thresholds."
           },
           {
             "name": "Alert",
-            "value": "alert",
+            "value": "Alert",
             "description": "Emits a customer-facing alert without blocking requests."
           },
           {
             "name": "Block",
-            "value": "block",
+            "value": "Block",
             "description": "Blocks the request without emitting a customer-facing alert."
           }
         ]
@@ -17351,8 +17342,8 @@
       "type": "string",
       "description": "The supported threshold value interpretations.",
       "enum": [
-        "percentage",
-        "absolute"
+        "Percentage",
+        "Absolute"
       ],
       "x-ms-enum": {
         "name": "CostControlThresholdType",
@@ -17360,12 +17351,12 @@
         "values": [
           {
             "name": "Percentage",
-            "value": "percentage",
+            "value": "Percentage",
             "description": "The value is a percentage of the configured rule amount."
           },
           {
             "name": "Absolute",
-            "value": "absolute",
+            "value": "Absolute",
             "description": "The value is expressed in the rule's unit."
           }
         ]
@@ -17375,7 +17366,7 @@
       "type": "string",
       "description": "The supported unit for cost control amounts and thresholds.",
       "enum": [
-        "usd"
+        "Usd"
       ],
       "x-ms-enum": {
         "name": "CostControlUnit",
@@ -17383,7 +17374,7 @@
         "values": [
           {
             "name": "Usd",
-            "value": "usd",
+            "value": "Usd",
             "description": "Estimated cost in United States dollars."
           }
         ]
