@@ -85,7 +85,7 @@ jobs:
         with:
           script: |
             const { default: getLabelAction } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-status.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-status.ts');
             return await getLabelAction({ github, context, core });
 
         # Add/remove specific auto sign-off labels based on analysis results.

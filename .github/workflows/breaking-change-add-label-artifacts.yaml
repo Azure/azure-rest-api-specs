@@ -42,7 +42,7 @@ jobs:
         with:
           script: |
             const { default: getLabelActions } =
-              await import('${{ github.workspace }}/.github/workflows/src/breaking-change-add-label-artifacts.js');
+              await import('${{ github.workspace }}/.github/workflows/src/breaking-change-add-label-artifacts.ts');
             return await getLabelActions({ github, context, core });
 
       # Upload artifact for 'BreakingChangeReviewRequired' label

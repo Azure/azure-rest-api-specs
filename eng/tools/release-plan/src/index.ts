@@ -20,6 +20,7 @@ import {
   getTypeSpecProjectInfoFromCommit,
   getTypeSpecProjectInfoFromPr,
   NEW_API_VERSION_LABEL,
+  SKIP_RELEASE_PLAN_AUTOMATION_LABEL,
 } from "./typespec-project.ts";
 
 /**
@@ -49,9 +50,12 @@ export async function main(): Promise<void> {
         prNumber: args.prNumber,
       });
 
-      if (labels.includes(FOLDER_MIGRATION_LABEL)) {
+      if (
+        labels.includes(FOLDER_MIGRATION_LABEL) ||
+        labels.includes(SKIP_RELEASE_PLAN_AUTOMATION_LABEL)
+      ) {
         console.log(
-          `PR #${args.prNumber} has the '${FOLDER_MIGRATION_LABEL}' label. Skipping release plan processing.`,
+          `PR #${args.prNumber} has a release plan automation skip label. Skipping release plan processing.`,
         );
         process.exit(0);
       }
@@ -100,9 +104,9 @@ export async function main(): Promise<void> {
         octokit,
       });
 
-      if (commitResult.isFolderMigration) {
+      if (commitResult.skipReleasePlanAutomation) {
         console.log(
-          `Commit ${commitSha} is associated with a '${FOLDER_MIGRATION_LABEL}' labeled PR. Skipping release plan processing.`,
+          `Commit ${commitSha} is associated with a PR that skips release plan automation.`,
         );
         process.exit(0);
       }
@@ -286,4 +290,5 @@ export {
   NEW_API_VERSION_LABEL,
   parseApiVersion,
   resolveTypeSpecMetadata,
+  SKIP_RELEASE_PLAN_AUTOMATION_LABEL,
 } from "./typespec-project.ts";

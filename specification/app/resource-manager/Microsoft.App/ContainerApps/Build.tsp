@@ -16,6 +16,7 @@ namespace Microsoft.App;
  * Information pertaining to an individual build.
  */
 @removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
 @removed(Versions.v2026_07_01)
 @parentResource(BuilderResource)
 model BuildResource is Azure.ResourceManager.ProxyResource<BuildProperties> {
@@ -28,6 +29,7 @@ model BuildResource is Azure.ResourceManager.ProxyResource<BuildProperties> {
 }
 
 @removed(Versions.v2026_01_01)
+@added(Versions.v2026_03_02_preview)
 @removed(Versions.v2026_07_01)
 @armResourceOperations
 interface Builds {

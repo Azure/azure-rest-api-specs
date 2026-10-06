@@ -1,0 +1,52 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - main
+      - typespec-next
+    paths:
+      - .github/**
+      - eng/tools/**
+      - .oxlintrc.json
+      - .gitignore
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - tsconfig.base.json
+      - tsconfig.json
+      - vitest.config.mts
+  pull_request:
+    paths:
+      - .github/**
+      - eng/tools/**
+      - .oxlintrc.json
+      - .gitignore
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - tsconfig.base.json
+      - tsconfig.json
+      - vitest.config.mts
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github
+            eng/tools
+
+      - uses: ./.github/actions/setup-node-install-deps
+        with:
+          install-command: pnpm ci
+
+      - name: Lint all packages
+        run: pnpm run lint --format=github

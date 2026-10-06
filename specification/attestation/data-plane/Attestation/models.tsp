@@ -114,12 +114,14 @@ union PolicyModification {
 }
 
 /** Request model for adding a policy certificate */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AddPolicyCertificateRequest {
   /** The certificate to add, as a string (e.g., PEM or JWK) */
   policyCertificateToAdd: string;
 }
 
 /** Request model for removing a policy certificate */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RemovePolicyCertificateRequest {
   /** The certificate to remove, as a string (e.g., PEM or JWK) */
   policyCertificateToRemove: string;
@@ -128,6 +130,7 @@ model RemovePolicyCertificateRequest {
 /**
  * The response to an attestation policy operation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PolicyResponse {
   /**
    * An RFC7519 JSON Web Token structure whose body is an PolicyResult object.
@@ -167,6 +170,7 @@ model CloudErrorBody {
 /**
  * The response to an attestation policy management API
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PolicyCertificatesResponse {
   /**
    * An RFC7519 JSON Web Token structure containing a PolicyCertificatesResults
@@ -179,6 +183,7 @@ model PolicyCertificatesResponse {
 /**
  * The response to an attestation policy management API
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PolicyCertificatesModifyResponse {
   /**
    * An RFC7519 JSON Web Token structure whose body is a
@@ -191,6 +196,7 @@ model PolicyCertificatesModifyResponse {
 /**
  * Attestation request for Intel SGX enclaves
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AttestOpenEnclaveRequest {
   /**
    * OpenEnclave report from the enclave to be attested
@@ -272,6 +278,7 @@ model InitTimeData {
 /**
  * The result of an attestation operation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AttestationResponse {
   /**
    * An RFC 7519 JSON Web Token, the body of which is an AttestationResult object.
@@ -283,6 +290,7 @@ model AttestationResponse {
 /**
  * Attestation request for Intel SGX enclaves
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AttestSgxEnclaveRequest {
   /**
    * Quote of the enclave to be attested
@@ -319,6 +327,7 @@ model AttestSgxEnclaveRequest {
 /**
  * Attestation request for Azure Guest Gen2 VMs
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AttestAzureGuestRequest {
   /**
    * Attestation client information containing all artifacts required for Guest
@@ -330,6 +339,7 @@ model AttestAzureGuestRequest {
 /**
  * The sealed result of an attestation operation
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SealedAttestationResponse {
   /**
    * A sealed RFC 7519 JSON Web Token, the body of which is an AttestationResult
@@ -341,6 +351,7 @@ model SealedAttestationResponse {
 /**
  * Attestation request for Trusted Platform Module (TPM) attestation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TpmAttestationRequest {
   /**
    * Protocol data containing artifacts for attestation.
@@ -352,6 +363,7 @@ model TpmAttestationRequest {
 /**
  * Attestation response for Trusted Platform Module (TPM) attestation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TpmAttestationResponse {
   /**
    * Protocol data containing attestation service response.
@@ -363,6 +375,7 @@ model TpmAttestationResponse {
 /**
  * Attestation request for AMD SEV SNP Virtual Machine
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AttestSevSnpVmRequest {
   /**
    * Hardware rooted report of the virtual machine being attested along with the
@@ -397,6 +410,7 @@ model AttestSevSnpVmRequest {
 /**
  * Attestation request for Intel TDX Virtual Machine
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AttestTdxVmRequest {
   /**
    * Quote of the TDX virtual machine to be attested
@@ -609,6 +623,7 @@ model JsonWebKey {
  * The response to the OpenID metadata description document API
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "backwards compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model OpenIDConfigurationResponse {
   /**
    * Types supported in the OpenID metadata API

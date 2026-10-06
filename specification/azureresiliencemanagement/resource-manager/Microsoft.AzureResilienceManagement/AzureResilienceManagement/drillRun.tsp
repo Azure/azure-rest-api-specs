@@ -1,4 +1,4 @@
-﻿import "@typespec/http";
+import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -180,7 +180,7 @@ interface DrillRuns {
     void,
     DrillReportSummary,
     ServiceGroupAndRequestHeadersParameters,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = DrillReportSummary> &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -195,7 +195,7 @@ interface DrillRuns {
     ListReportDownloadUrlRequest,
     ListReportDownloadUrlResponse,
     ServiceGroupAndRequestHeadersParameters,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ListReportDownloadUrlResponse> &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;

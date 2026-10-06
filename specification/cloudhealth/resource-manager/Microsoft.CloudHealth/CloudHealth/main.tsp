@@ -53,6 +53,15 @@ scalar string4096 extends string;
 @doc("String with max length validation of 256 characters")
 scalar string256 extends string;
 
+@minLength(1)
+@maxLength(256)
+scalar dimensionFilter256 extends string;
+
+@minLength(1)
+@maxLength(2048)
+@doc("String with max length validation of 2048 characters")
+scalar string2048 extends string;
+
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A HealthModel resource")
@@ -364,10 +373,9 @@ model ResourceMetricSignalDefinitionProperties
 
   @removed(Versions.v2026_09_01_preview)
   @renamedFrom(Versions.v2026_09_01_preview, "dimensionFilter")
+  @typeChangedFrom(Versions.v2026_01_01_preview, dimensionFilter256)
   @doc("Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.")
-  @minLength(1)
-  @maxLength(256)
-  dimensionFilterV1?: string;
+  dimensionFilterV1?: string2048;
 
   @added(Versions.v2026_09_01_preview)
   @doc("Optional: Dimension filter to apply to the dimension.")
@@ -1700,10 +1708,9 @@ model SignalConfiguration {
 
   @removed(Versions.v2026_09_01_preview)
   @renamedFrom(Versions.v2026_09_01_preview, "dimensionFilter")
+  @typeChangedFrom(Versions.v2026_01_01_preview, dimensionFilter256)
   @doc("Optional dimension filter to apply to the metric.")
-  @minLength(1)
-  @maxLength(256)
-  dimensionFilterV1?: string;
+  dimensionFilterV1?: string2048;
 
   @added(Versions.v2026_09_01_preview)
   @doc("Optional dimension filter to apply to the metric.")

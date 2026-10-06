@@ -41,7 +41,7 @@ jobs:
         with:
           script: |
             const { default: updateLabels } =
-              await import('${{ github.workspace }}/.github/workflows/src/update-labels.js');
+              await import('${{ github.workspace }}/.github/workflows/src/update-labels.ts');
             await updateLabels({ github, context, core });
 
       - if: ${{ always() && steps.update-labels.outputs.head_sha }}

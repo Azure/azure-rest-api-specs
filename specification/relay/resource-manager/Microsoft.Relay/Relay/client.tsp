@@ -66,6 +66,19 @@ using Microsoft.Relay;
 @@clientName(UnavailableReason, "RelayNameUnavailableReason", "csharp");
 @@clientName(KeyType, "RelayAccessKeyType", "csharp");
 @@clientName(HybridConnection, "RelayHybridConnection", "csharp");
+@@clientName(RelayClusterSkuUpdate, "RelayClusterSkuPatch", "csharp");
+@@clientName(RelayClusterProperties.zoneRedundant, "IsZoneRedundant", "csharp");
+@@clientName(TlsVersion, "RelayTlsVersion", "csharp");
+@@clientName(
+  TlsVersion.`1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.`1.3`,
+  Azure.ClientGenerator.Core.exact("Tls1_3"),
+  "csharp"
+);
 
 // Acronym mapping: Ip -> IP (directive + acronym-mapping from autorest.md)
 @@clientName(NWRuleSetIpRules, "RelayNetworkRuleSetIPRule", "csharp");
@@ -86,6 +99,11 @@ using Microsoft.Relay;
 
 // Back-compat: location properties were AzureLocation? in the old autorest SDK
 @@alternateType(AuthorizationRule.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  AvailableRelayClusterRegion.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@alternateType(HybridConnection.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(
   PrivateEndpointConnection.location,

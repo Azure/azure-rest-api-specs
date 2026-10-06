@@ -16,7 +16,9 @@ namespace Microsoft.App;
  * Container App Label History.
  */
 @removed(Versions.v2026_01_01)
-@renamedFrom(Versions.v2026_01_01, "LabelHistory")
+@added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_07_01)
+@renamedFrom(Versions.v2026_07_01, "LabelHistory")
 @parentResource(ContainerApp)
 model LabelHistoryPreview
   is Azure.ResourceManager.ProxyResource<LabelHistoryProperties> {
@@ -65,7 +67,8 @@ alias LabelHistoryPreviewOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @pattern("^[-\\w\\._\\(\\)]+$")
     labelName: string;
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppLabelHistory"
 >;
 
 alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -90,11 +93,14 @@ alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @pattern("^[-\\w\\._\\(\\)]+$")
     labelName: string;
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppLabelHistory"
 >;
 
 @removed(Versions.v2026_01_01)
-@renamedFrom(Versions.v2026_01_01, "ContainerAppsLabelHistory")
+@added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_07_01)
+@renamedFrom(Versions.v2026_07_01, "ContainerAppsLabelHistory")
 @armResourceOperations
 interface ContainerAppsLabelHistoryPreview {
   /**

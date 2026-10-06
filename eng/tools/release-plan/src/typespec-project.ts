@@ -22,6 +22,9 @@ export const NEW_API_VERSION_LABEL = "new-api-version";
  */
 export const FOLDER_MIGRATION_LABEL = "FolderMigrationV2";
 
+/** Label indicating that release plan automation should not process a spec PR. */
+export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "Skip-ReleasePlan-Automation";
+
 /**
  * Identifies one TypeSpec project path and selected API version from a pull request.
  * Returns null when no specification files were modified, or when zero/multiple projects found.
@@ -109,15 +112,18 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
       prNumber: associatedPrNumber,
     });
 
-    if (labels.includes(FOLDER_MIGRATION_LABEL)) {
+    if (
+      labels.includes(FOLDER_MIGRATION_LABEL) ||
+      labels.includes(SKIP_RELEASE_PLAN_AUTOMATION_LABEL)
+    ) {
       console.log(
-        `PR #${associatedPrNumber} has the '${FOLDER_MIGRATION_LABEL}' label. Skipping release plan processing.`,
+        `PR #${associatedPrNumber} has a release plan automation skip label. Skipping release plan processing.`,
       );
       return {
         projectInfo: null,
         prNumber: associatedPrNumber,
         hasNewApiVersionLabel: false,
-        isFolderMigration: true,
+        skipReleasePlanAutomation: true,
       };
     }
 

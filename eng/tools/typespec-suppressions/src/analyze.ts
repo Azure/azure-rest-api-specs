@@ -136,7 +136,7 @@ async function findRenamedPaths(
   const specPathsByHead = new Map<string, string>();
   const filePathsByBase = new Map<string, string>();
 
-  for (let index = 0; index < fields.length; ) {
+  for (let index = 0; index < fields.length;) {
     const status = fields[index++];
     if (!status) {
       break;

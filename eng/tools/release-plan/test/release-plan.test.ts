@@ -69,7 +69,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: JSON.stringify({ id: 101, apiVersion: "2026-06-01-preview" }),
@@ -88,7 +88,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
@@ -113,7 +113,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
@@ -160,7 +160,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
@@ -182,7 +182,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
@@ -206,7 +206,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
@@ -244,7 +244,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",

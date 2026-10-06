@@ -66,7 +66,7 @@ jobs:
         with:
           script: |
             const { default: dumpTriggerMetadata } =
-              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/dump-trigger-metadata.js');
+              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/dump-trigger-metadata.ts');
             return await dumpTriggerMetadata({ context, core });
 
       - id: summarize-checks
@@ -75,7 +75,7 @@ jobs:
         with:
           script: |
             const { default: summarizeChecks } =
-              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/summarize-checks.js');
+              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/summarize-checks.ts');
             return await summarizeChecks({ github, context, core });
 
       # May be used by downstream workflows
