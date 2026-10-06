@@ -83,7 +83,7 @@ model LogFile is Azure.ResourceManager.ProxyResource<LogFileProperties> {
     Resource = LogFile,
     KeyName = "logFileName",
     SegmentName = "logFiles",
-    NamePattern = "^[a-zA-Z0-9](?:[-._a-zA-Z0-9]{0,253}[a-zA-Z0-9])?$"
+    NamePattern = "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
   >;
 }
 
