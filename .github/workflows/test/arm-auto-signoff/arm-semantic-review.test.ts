@@ -16,6 +16,7 @@ import {
   type SemanticReviewResult,
 } from "../../src/arm-auto-signoff/arm-semantic-review.ts";
 import { finalizeArmSemanticReview } from "../../src/arm-auto-signoff/arm-semantic-review-status.ts";
+import validateArmSemanticReview from "../../src/arm-auto-signoff/arm-semantic-review-workflow.ts";
 import type { GitHubScriptArgs } from "../../src/github.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
 
@@ -42,9 +43,6 @@ function agentOutput(result: SemanticReviewResult = passedResult) {
     items: [
       {
         type: "record_arm_semantic_review",
-        run_attempt: String(result.runAttempt),
-        issue_number: String(result.issueNumber),
-        head_sha: result.headSha,
         blocking_count: String(result.blockingCount),
         scope: result.reviewScope,
         completeness: result.completion,
@@ -130,13 +128,28 @@ async function runFinalizer({
 
 describe("parseSemanticReviewResult", () => {
   it("parses one valid result", () => {
-    expect(parseSemanticReviewResult(agentOutput(), issueNumber, runAttempt)).toEqual(passedResult);
+    expect(parseSemanticReviewResult(agentOutput(), { headSha, issueNumber, runAttempt })).toEqual(
+      passedResult,
+    );
   });
 
-  it("rejects missing, duplicate, or mismatched results", () => {
-    expect(() => parseSemanticReviewResult({ items: [] }, issueNumber, runAttempt)).toThrow(
-      "Expected one ARM semantic review result, found 0",
+  it("uses trusted correlation instead of model-supplied identifiers", () => {
+    const output = agentOutput();
+    Object.assign(output.items[0], {
+      head_sha: "675718552ce00736684ed7a184bab",
+      issue_number: "999",
+      run_attempt: "99",
+    });
+
+    expect(parseSemanticReviewResult(output, { headSha, issueNumber, runAttempt })).toEqual(
+      passedResult,
     );
+  });
+
+  it("rejects missing, duplicate, or invalid semantic results", () => {
+    expect(() =>
+      parseSemanticReviewResult({ items: [] }, { headSha, issueNumber, runAttempt }),
+    ).toThrow("Expected one ARM semantic review result, found 0");
     expect(() =>
       parseSemanticReviewResult(
         {
@@ -145,31 +158,15 @@ describe("parseSemanticReviewResult", () => {
             ...agentOutput({ ...passedResult, blockingCount: 1 }).items,
           ],
         },
-        issueNumber,
-        runAttempt,
+        { headSha, issueNumber, runAttempt },
       ),
     ).toThrow("Expected one ARM semantic review result, found 2");
-    expect(() =>
-      parseSemanticReviewResult(
-        agentOutput({ ...passedResult, runAttempt: 2 }),
-        issueNumber,
-        runAttempt,
-      ),
-    ).toThrow("Invalid ARM semantic review run attempt");
-    expect(() =>
-      parseSemanticReviewResult(
-        agentOutput({ ...passedResult, issueNumber: 456 }),
-        issueNumber,
-        runAttempt,
-      ),
-    ).toThrow("Invalid ARM semantic review PR number");
     expect(() =>
       parseSemanticReviewResult(
         {
           items: [{ ...agentOutput().items[0], scope: "partial" }],
         },
-        issueNumber,
-        runAttempt,
+        { headSha, issueNumber, runAttempt },
       ),
     ).toThrow("Invalid ARM semantic review scope");
     expect(() =>
@@ -177,10 +174,68 @@ describe("parseSemanticReviewResult", () => {
         {
           items: [{ ...agentOutput().items[0], completeness: "unknown" }],
         },
-        issueNumber,
-        runAttempt,
+        { headSha, issueNumber, runAttempt },
       ),
     ).toThrow("Invalid ARM semantic review completion");
+  });
+
+  it("rejects invalid trusted correlation", () => {
+    expect(() =>
+      parseSemanticReviewResult(agentOutput(), {
+        headSha: "675718552ce00736684ed7a184bab",
+        issueNumber,
+        runAttempt,
+      }),
+    ).toThrow("ARM semantic review correlation is missing or invalid");
+  });
+});
+
+describe("validateArmSemanticReview", () => {
+  it("records trusted correlation when model-supplied identifiers are malformed", async () => {
+    const directory = await mkdtemp(join(tmpdir(), "arm-semantic-review-receipt-"));
+    const outputPath = join(directory, "agent_output.json");
+    const output = agentOutput();
+    Object.assign(output.items[0], {
+      head_sha: "675718552ce00736684ed7a184bab",
+      issue_number: "999",
+      run_attempt: "99",
+    });
+    const previousOutputPath = process.env.GH_AW_AGENT_OUTPUT;
+    const previousRunAttempt = process.env.GITHUB_RUN_ATTEMPT;
+    try {
+      await writeFile(outputPath, JSON.stringify(output), "utf8");
+      process.env.GH_AW_AGENT_OUTPUT = outputPath;
+      process.env.GITHUB_RUN_ATTEMPT = String(runAttempt);
+      const github = createFinalizeGithub();
+
+      const result = await validateArmSemanticReview({
+        github,
+        context: { repo: { owner, repo }, runId },
+        core: createMockCore(),
+      } as unknown as GitHubScriptArgs);
+
+      expect(result).toEqual({
+        artifactValue: `${runAttempt}.${issueNumber}.${headSha}.full.complete.0`,
+      });
+      expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledWith({
+        owner,
+        repo,
+        run_id: runId,
+        per_page: PER_PAGE_MAX,
+      });
+    } finally {
+      if (previousOutputPath === undefined) {
+        delete process.env.GH_AW_AGENT_OUTPUT;
+      } else {
+        process.env.GH_AW_AGENT_OUTPUT = previousOutputPath;
+      }
+      if (previousRunAttempt === undefined) {
+        delete process.env.GITHUB_RUN_ATTEMPT;
+      } else {
+        process.env.GITHUB_RUN_ATTEMPT = previousRunAttempt;
+      }
+      await rm(directory, { recursive: true, force: true });
+    }
   });
 });
 
@@ -395,9 +450,13 @@ describe("finalizeArmSemanticReview", () => {
       description: "Review incomplete: Expected one ARM semantic review result, found 0",
     },
     {
-      name: "wrong SHA",
-      options: { output: agentOutput({ ...passedResult, headSha: "f".repeat(40) }) },
-      description: "Review incomplete: semantic result SHA does not match reviewer correlation",
+      name: "invalid Blocking count",
+      options: {
+        output: {
+          items: [{ ...agentOutput().items[0], blocking_count: "not-a-number" }],
+        },
+      },
+      description: "Review incomplete: Invalid ARM semantic review Blocking count",
     },
   ])("publishes Review incomplete for $name", async ({ options, description }) => {
     const { github } = await runFinalizer(options);
@@ -483,7 +542,7 @@ describe("finalizeArmSemanticReview", () => {
   it("truncates an overly long error description to 140 characters", async () => {
     const longValue = "x".repeat(200);
     const { github } = await runFinalizer({
-      output: { items: [{ ...agentOutput().items[0], run_attempt: longValue }] },
+      output: { items: [{ ...agentOutput().items[0], scope: longValue }] },
     });
 
     const call = github.rest.repos.createCommitStatus.mock.calls[0]?.[0] as {

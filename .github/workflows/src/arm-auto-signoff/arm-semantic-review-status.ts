@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { isFullGitSha } from "../../../shared/src/git.ts";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
-import { ARM_API_REVIEW_WORKFLOW_PATH, parseWorkflowRunArtifactInputs } from "../context.ts";
+import { ARM_API_REVIEW_WORKFLOW_PATH, getWorkflowRunArtifactInputs } from "../context.ts";
 import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import {
   ARM_SEMANTIC_REVIEW_STATUS,
@@ -85,15 +85,13 @@ export async function finalizeArmSemanticReview({
     throw new Error("ARM API review workflow run is missing its repository owner");
   }
   const repo = workflowRun.repository.name;
-  const artifactNames = (
-    await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
-      owner,
-      repo,
-      run_id: workflowRun.id,
-      per_page: PER_PAGE_MAX,
-    })
-  ).map((artifact) => artifact.name);
-  const { headSha, issueNumber } = parseWorkflowRunArtifactInputs(artifactNames, core);
+  const { headSha, issueNumber } = await getWorkflowRunArtifactInputs({
+    github,
+    core,
+    owner,
+    repo,
+    runId: workflowRun.id,
+  });
   if (!isFullGitSha(headSha) || !Number.isSafeInteger(issueNumber) || issueNumber <= 0) {
     core.info("The reviewer run has no trusted PR/SHA correlation; status is unchanged");
     return EMPTY_RESULT;
@@ -130,10 +128,11 @@ export async function finalizeArmSemanticReview({
       throw new Error("agent output is unavailable");
     }
     const agentOutput = JSON.parse(await readFile(outputPath, "utf8")) as unknown;
-    const result = parseSemanticReviewResult(agentOutput, issueNumber, workflowRun.run_attempt);
-    if (result.headSha.toLowerCase() !== headSha.toLowerCase()) {
-      throw new Error("semantic result SHA does not match reviewer correlation");
-    }
+    const result = parseSemanticReviewResult(agentOutput, {
+      headSha,
+      issueNumber,
+      runAttempt: workflowRun.run_attempt,
+    });
 
     // Independently verify that the PR is within automated-review coverage limits.
     // The trusted file list from pulls.listFiles takes precedence over the model-reported

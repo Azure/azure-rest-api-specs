@@ -45,6 +45,11 @@ export type SemanticReviewResult = {
   completion: SemanticReviewCompletion;
 };
 
+export type SemanticReviewCorrelation = Pick<
+  SemanticReviewResult,
+  "runAttempt" | "issueNumber" | "headSha"
+>;
+
 export type CommitStatus = {
   context: string;
   state: string;
@@ -62,14 +67,22 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 }
 
 /**
- * Extracts exactly one semantic result from gh-aw's agent output and validates
- * that it belongs to the completed reviewer run.
+ * Combines exactly one semantic result from gh-aw's agent output with trusted
+ * workflow correlation.
  */
 export function parseSemanticReviewResult(
   agentOutput: unknown,
-  expectedIssueNumber: number,
-  expectedRunAttempt: number,
+  correlation: SemanticReviewCorrelation,
 ): SemanticReviewResult {
+  if (
+    !Number.isSafeInteger(correlation.runAttempt) ||
+    correlation.runAttempt <= 0 ||
+    !Number.isSafeInteger(correlation.issueNumber) ||
+    correlation.issueNumber <= 0 ||
+    !isFullGitSha(correlation.headSha)
+  ) {
+    throw new Error("ARM semantic review correlation is missing or invalid");
+  }
   if (!isRecord(agentOutput) || !Array.isArray(agentOutput.items)) {
     throw new Error("ARM API Reviewer output is missing its items array");
   }
@@ -83,28 +96,7 @@ export function parseSemanticReviewResult(
   }
 
   const result = results[0];
-  const runAttempt = Number(result.run_attempt);
-  const issueNumber = Number(result.issue_number);
   const blockingCount = Number(result.blocking_count);
-  if (
-    typeof result.run_attempt !== "string" ||
-    !/^[1-9]\d*$/.test(result.run_attempt) ||
-    !Number.isSafeInteger(runAttempt) ||
-    runAttempt !== expectedRunAttempt
-  ) {
-    throw new Error(`Invalid ARM semantic review run attempt: '${String(result.run_attempt)}'`);
-  }
-  if (
-    typeof result.issue_number !== "string" ||
-    !/^[1-9]\d*$/.test(result.issue_number) ||
-    !Number.isSafeInteger(issueNumber) ||
-    issueNumber !== expectedIssueNumber
-  ) {
-    throw new Error(`Invalid ARM semantic review PR number: '${String(result.issue_number)}'`);
-  }
-  if (typeof result.head_sha !== "string" || !isFullGitSha(result.head_sha)) {
-    throw new Error(`Invalid ARM semantic review head SHA: '${String(result.head_sha)}'`);
-  }
   if (
     typeof result.blocking_count !== "string" ||
     !/^(0|[1-9]\d*)$/.test(result.blocking_count) ||
@@ -126,9 +118,7 @@ export function parseSemanticReviewResult(
   }
 
   return {
-    runAttempt,
-    issueNumber,
-    headSha: result.head_sha,
+    ...correlation,
     blockingCount,
     reviewScope: result.scope,
     completion: result.completeness,

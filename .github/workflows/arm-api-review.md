@@ -271,19 +271,10 @@ safe-outputs:
       runs-on: ubuntu-slim
       if: needs.detection.outputs.detection_success == 'true'
       permissions:
+        actions: read
         contents: read
         pull-requests: read
-      env:
-        TARGET_PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}
       inputs:
-        issue_number:
-          description: "Target pull request number"
-          required: true
-          type: string
-        head_sha:
-          description: "Full pull request head SHA that was reviewed"
-          required: true
-          type: string
         scope:
           description: "Whether the full PR or only a scoped subset was reviewed"
           required: true
@@ -296,10 +287,6 @@ safe-outputs:
           options: ["complete", "incomplete", "degraded"]
         blocking_count:
           description: "Number of verified, currently applicable Blocking findings after reconciliation"
-          required: true
-          type: string
-        run_attempt:
-          description: "GitHub Actions attempt that produced this result"
           required: true
           type: string
       steps:
@@ -588,10 +575,10 @@ Track two values for the final semantic result:
   fetched.
 
 Before any `report_incomplete` stop after the target PR and head SHA are known,
-also call `record_arm_semantic_review` with that PR, head SHA, the current
-scope, `completeness: incomplete`, the number of verified Blocking findings
-known to remain applicable at that point, and the workflow attempt. Use `"0"`
-if the failure occurs before finding reconciliation.
+also call `record_arm_semantic_review` with the current scope,
+`completeness: incomplete`, and the number of verified Blocking findings known
+to remain applicable at that point. Use `"0"` if the failure occurs before
+finding reconciliation.
 
 ## Review Workflow
 
@@ -1269,21 +1256,20 @@ compliant.
 
 Call `record_arm_semantic_review` exactly once after queuing the summary:
 
-- `issue_number`: the authoritative target pull request number;
-- `head_sha`: the pinned full session SHA;
 - `scope`: `full` or `scoped`, as recorded during Trigger Validation;
 - `completeness`: `complete`, `incomplete`, or `degraded`;
 - `blocking_count`: the number of verified Blocking findings that remain
   applicable after reconciliation. Include an unresolved finding classified as
   `SKIP-COVERED`; do not count fixed, resolved, Critic-dropped, or
-  overflow-only candidates; and
-- `run_attempt`: the authoritative workflow attempt above.
+  overflow-only candidates.
 
 Use `blocking_count: "0"` after a clean re-review. Do not claim `full` or
-`complete` when any required evidence was unavailable. `ARM Semantic Review -
-Set Status` consumes the exact completed run's agent output, validates its
-correlation and shape, and publishes the final status only after the entire
-reviewer workflow completes.
+`complete` when any required evidence was unavailable. Trusted workflow
+artifacts attach the pull request, head SHA, and run attempt; never reproduce
+those correlation values in this model-generated result. `ARM Semantic Review -
+Set Status` consumes the exact completed run's agent output and trusted
+correlation artifacts, validates their shape, and publishes the final status
+only after the entire reviewer workflow completes.
 
 The final status is:
 

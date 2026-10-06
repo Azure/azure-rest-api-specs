@@ -578,16 +578,27 @@ describe("ARM API review posting reliability", () => {
     );
     expect(compiled).toContain("record_arm_semantic_review");
     expect(compiled).toContain("ARM Semantic Review");
-    expect(source).toContain('run_attempt:\n          description: "GitHub Actions attempt');
     expect(compiled).toContain("Upload ARM semantic review receipt");
     const semanticJob = compiled.slice(
       compiled.indexOf("\n  record_arm_semantic_review:\n"),
       compiled.indexOf("\n  safe_outputs:\n"),
     );
+    const semanticConfig = source.slice(
+      source.indexOf("    record-arm-semantic-review:\n"),
+      source.indexOf("  noop:\n"),
+    );
     expect(semanticJob).toContain("name: Validate ARM semantic review");
+    expect(semanticJob).toContain("actions: read");
+    expect(semanticJob).not.toContain("TARGET_PR_NUMBER");
     expect(semanticJob).toContain("permissions:");
+    expect(semanticConfig).not.toContain("issue_number:");
+    expect(semanticConfig).not.toContain("head_sha:");
+    expect(semanticConfig).not.toContain("run_attempt:");
     expect(collapsed).toContain(
-      "`ARM Semantic Review - Set Status` consumes the exact completed run's agent output, validates its correlation and shape, and publishes the final status only after the entire reviewer workflow completes.",
+      "Trusted workflow artifacts attach the pull request, head SHA, and run attempt",
+    );
+    expect(collapsed).toContain(
+      "`ARM Semantic Review - Set Status` consumes the exact completed run's agent output and trusted correlation artifacts",
     );
   });
 

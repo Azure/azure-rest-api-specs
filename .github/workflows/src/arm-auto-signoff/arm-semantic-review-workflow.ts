@@ -1,4 +1,5 @@
 import { readFile } from "node:fs/promises";
+import { getWorkflowRunArtifactInputs } from "../context.ts";
 import type { GitHub, GitHubScriptArgs } from "../github.ts";
 import { parseSemanticReviewResult, type SemanticReviewResult } from "./arm-semantic-review.ts";
 
@@ -38,16 +39,13 @@ function encodeSemanticReviewReceipt(result: SemanticReviewResult): string {
 export default async function validateArmSemanticReview({
   github,
   context,
+  core,
 }: GitHubScriptArgs): Promise<{
   artifactValue: string;
 }> {
   const outputPath = process.env.GH_AW_AGENT_OUTPUT;
-  const issueNumberText = process.env.TARGET_PR_NUMBER;
   if (!outputPath) {
     throw new Error("GH_AW_AGENT_OUTPUT is unavailable");
-  }
-  if (!issueNumberText || !/^[1-9]\d*$/.test(issueNumberText)) {
-    throw new Error(`Invalid target PR number: '${issueNumberText ?? ""}'`);
   }
 
   const runAttemptText = process.env.GITHUB_RUN_ATTEMPT;
@@ -55,10 +53,19 @@ export default async function validateArmSemanticReview({
     throw new Error(`Invalid workflow run attempt: '${runAttemptText ?? ""}'`);
   }
 
-  const issueNumber = Number(issueNumberText);
   const runAttempt = Number(runAttemptText);
+  const { headSha, issueNumber } = await getWorkflowRunArtifactInputs({
+    github,
+    core,
+    ...context.repo,
+    runId: context.runId,
+  });
   const agentOutput = JSON.parse(await readFile(outputPath, "utf8")) as unknown;
-  const result = parseSemanticReviewResult(agentOutput, issueNumber, runAttempt);
+  const result = parseSemanticReviewResult(agentOutput, {
+    headSha,
+    issueNumber,
+    runAttempt,
+  });
   await validateSemanticReviewResult({
     ...context.repo,
     result,

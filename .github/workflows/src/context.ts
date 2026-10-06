@@ -210,10 +210,10 @@ export async function extractInputs(
       }
 
       if (payload.workflow_run.event === "pull_request_target") {
-        const artifactInputs = await extractWorkflowRunArtifactInputs({
+        const artifactInputs = await getWorkflowRunArtifactInputs({
           github,
           core,
-          repository: payload.workflow_run.repository,
+          ...getRepositoryInfo(payload.workflow_run.repository),
           runId: payload.workflow_run.id,
         });
         if (artifactInputs.headSha) {
@@ -237,10 +237,10 @@ export async function extractInputs(
       payload.workflow_run.event == "workflow_dispatch"
     ) {
       // These artifacts can be trusted because these event types run workflows from the default branch.
-      const artifactInputs = await extractWorkflowRunArtifactInputs({
+      const artifactInputs = await getWorkflowRunArtifactInputs({
         github,
         core,
-        repository: payload.workflow_run.repository,
+        ...getRepositoryInfo(payload.workflow_run.repository),
         runId: payload.workflow_run.id,
       });
       head_sha = artifactInputs.headSha;
@@ -303,19 +303,22 @@ export async function extractInputs(
   return inputs;
 }
 
-async function extractWorkflowRunArtifactInputs({
+export async function getWorkflowRunArtifactInputs({
   github,
   core,
-  repository,
+  owner,
+  repo,
   runId,
 }: {
   github: GitHub;
   core: Core;
-  repository: Parameters<typeof getRepositoryInfo>[0];
+  owner: string;
+  repo: string;
   runId: number;
 }): Promise<{ headSha: string; issueNumber: number }> {
   const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
-    ...getRepositoryInfo(repository),
+    owner,
+    repo,
     run_id: runId,
     per_page: PER_PAGE_MAX,
   });
