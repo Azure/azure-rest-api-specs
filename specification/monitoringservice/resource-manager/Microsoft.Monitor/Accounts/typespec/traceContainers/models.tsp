@@ -42,11 +42,11 @@ namespace Microsoft.Monitor {
     traceDurationWindowInSeconds: int32;
 
     /**
-     * The number of days for which the traces are retained. Value must be between 4 and 730 days. When omitted while creating a trace container, the service applies a default of 30; when omitted while updating an existing trace container, the current value is preserved.
+     * The number of days for which the traces are retained. Value must be between 4 and 730 days.
      */
     @minValue(4)
     @maxValue(730)
-    traceRetentionInDays?: int32;
+    traceRetentionInDays: int32;
 
     /**
      * The state of trace-derived metrics. When omitted while creating a trace container, the service applies a default of Enabled; when omitted while updating an existing trace container, the current value is preserved.

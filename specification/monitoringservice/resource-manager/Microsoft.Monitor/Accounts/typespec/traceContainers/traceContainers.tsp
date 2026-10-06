@@ -9,7 +9,6 @@ namespace Microsoft.Monitor {
   /**
    * Operations for the trace container of an Azure Monitor Workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The trace container is a service-managed singleton and does not support deletion."
   @added(Versions.v2026_09_03_preview)
   @armResourceOperations
   interface TraceContainers {
@@ -22,6 +21,11 @@ namespace Microsoft.Monitor {
      * Creates or replaces the trace container for an Azure Monitor Workspace.
      */
     createOrUpdate is ArmResourceCreateOrReplaceSync<TraceContainerResource>;
+
+    /**
+     * Deletes the trace container for an Azure Monitor Workspace.
+     */
+    delete is ArmResourceDeleteSync<TraceContainerResource>;
 
     /**
      * Lists trace containers for an Azure Monitor Workspace.
