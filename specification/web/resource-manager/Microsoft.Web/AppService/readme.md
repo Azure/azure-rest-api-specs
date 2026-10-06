@@ -139,21 +139,6 @@ directive:
       only, and the only DELETE operations under config are item-level deletes within a collection such as
       appsettings/{key} and connectionstrings/{name}. A DELETE on the singleton would carry no semantic distinct from
       PUT with an empty body.
-  - suppress: AllResourcesMustHaveGetOperation
-    from: openapi.json
-    where:
-      - $.definitions.EgressConfig
-    reason: >-
-      The stored egress configuration is keyed by customer-supplied app setting and connection string names -
-      connections is keyed by connection name and settings is keyed by the app setting or connection string name -
-      so reading it discloses part of the site's app setting namespace, which customers frequently use to carry
-      credential-identifying or infrastructure-identifying text. Those identifiers are already protected by this
-      resource provider: appsettings and connectionstrings expose no GET and are readable only through their POST
-      list action. Because Microsoft.Web/sites/config/read and Microsoft.Web/sites/config/list/action are distinct
-      RBAC actions, and the built-in Reader role grants read but not the list action, exposing a GET on egress would
-      let a reader enumerate setting names that appsettings/list and connectionstrings/list deliberately withhold.
-      The stored configuration is therefore read through the POST list action and the GET on the singleton is
-      intentionally not exposed, consistent with appsettings and connectionstrings.
   - suppress: PathForResourceAction
     from: openapi.json
     where:
