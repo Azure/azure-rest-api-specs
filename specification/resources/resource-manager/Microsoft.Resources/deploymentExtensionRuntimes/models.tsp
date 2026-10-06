@@ -238,7 +238,7 @@ model RuntimeSecret {
    * The Key Vault secret URI to source the secret value from. Requires
    * `identity`. Mutually exclusive with `value`.
    */
-  keyVaultUri?: string;
+  keyVaultUri?: url;
 
   /**
    * The resource ID of a user-assigned managed identity used to read the secret

@@ -49,8 +49,10 @@ directive:
     reason: Operations API is implemented as a separate service.
   - suppress: ProvisioningStateSpecifiedForLROPut
     from: deploymentExtensionRuntimes.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentExtensionRuntimes/{runtimeName}"].put
     reason: The resource is polymorphic on `kind`. Every kind defines properties.provisioningState; the rule only inspects the base schema, which has no properties bag. Same pattern as deploymentScripts.
   - suppress: ProvisioningStateSpecifiedForLROPatch
     from: deploymentExtensionRuntimes.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentExtensionRuntimes/{runtimeName}"].patch.responses["200"]
     reason: The resource is polymorphic on `kind`. Every kind defines properties.provisioningState; the rule only inspects the base schema, which has no properties bag. Same pattern as deploymentScripts.
 ```
