@@ -83,7 +83,7 @@ model LogFile is Azure.ResourceManager.ProxyResource<LogFileProperties> {
     Resource = LogFile,
     KeyName = "logFileName",
     SegmentName = "logFiles",
-    NamePattern = "^[a-zA-Z0-9](?:[-._a-zA-Z0-9]{0,253}[a-zA-Z0-9])?$"
+    NamePattern = "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
   >;
 }
 
@@ -116,13 +116,17 @@ model LogFileProperties {
   @visibility(Lifecycle.Read)
   sizeInKilobytes: int64;
 
-  @doc("The name of the HorizonDB pool that generated the log file.")
+  @doc("The name of the HorizonDB pool that the node generating the log file belongs to.")
   @visibility(Lifecycle.Read)
-  poolName: PoolName;
+  pool: PoolName;
 
-  @doc("The name of the HorizonDB node that generated the log file.")
+  @doc("The node that generated the log file in the HorizonDB cluster.")
   @visibility(Lifecycle.Read)
-  nodeName: string;
+  node: string;
+
+  @doc("The role performed by the node that generated the log file.")
+  @visibility(Lifecycle.Read)
+  role: NodeRole;
 }
 
 @added(Versions.v2026_10_01_preview)

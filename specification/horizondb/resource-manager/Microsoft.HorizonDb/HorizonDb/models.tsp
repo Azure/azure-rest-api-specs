@@ -26,20 +26,20 @@ scalar ClusterName extends string;
 union HorizonDbClusterIdentityType {
   string,
 
-  @doc("No managed identity is assigned.")
+  @doc("No managed identity is assigned. Setting type to None clears all managed identity assignments.")
   None: "None",
 
   @doc("User-assigned managed identities are assigned.")
   UserAssigned: "UserAssigned",
 }
 
-@doc("The user-assigned managed identities assigned to a HorizonDB cluster. PUT and PATCH can assign or remove identities. Omitting the top-level identity property from PATCH preserves all current assignments. Removing an identity referenced by a change data capture identity assignment is rejected until the referencing assignment is deleted.")
+@doc("The user-assigned managed identities assigned to a HorizonDB cluster. Omitting the entire top-level identity property from PUT or PATCH preserves all current assignments. When userAssignedIdentities is supplied, PUT replaces the complete set and PATCH merges the supplied entries with the existing set; a null PATCH entry removes that individual identity. Setting type to None clears all assignments. Removing an identity referenced by a change data capture identity assignment is rejected until the referencing assignment is deleted.")
 model HorizonDbClusterManagedServiceIdentity {
-  @doc("The managed identity type assigned to the cluster.")
+  @doc("The managed identity type assigned to the cluster. Setting this property to None clears all managed identity assignments.")
   type: HorizonDbClusterIdentityType;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The standard Azure Resource Manager identity envelope represents user-assigned identities as a resource-ID-keyed dictionary."
-  @doc("The user-assigned managed identities associated with the cluster. Each dictionary key must be the full Azure resource ID of a Microsoft.ManagedIdentity/userAssignedIdentities resource. Request values can be empty objects; response values contain the service-populated clientId and principalId. Assigning an identity does not grant it access to destination resources; required role assignments must be configured separately.")
+  @doc("The user-assigned managed identities associated with the cluster. When supplied on PUT, this dictionary replaces the complete set of assignments. When supplied on PATCH, entries are merged with the existing set and a null value removes the corresponding identity. Each dictionary key must be the full Azure resource ID of a Microsoft.ManagedIdentity/userAssignedIdentities resource. Non-null request values can be empty objects; response values contain the service-populated clientId and principalId. Assigning an identity does not grant it access to destination resources; required role assignments must be configured separately.")
   userAssignedIdentities?: Record<
     | Azure.ResourceManager.CommonTypes.UserAssignedIdentity
     | null>;
@@ -48,7 +48,7 @@ model HorizonDbClusterManagedServiceIdentity {
 @doc("The user-assigned managed identity envelope for a HorizonDB cluster.")
 model HorizonDbClusterManagedServiceIdentityProperty {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The standard managed identity envelope also permits system-assigned identity values, which HorizonDB clusters do not support."
-  @doc("The managed service identities assigned to this resource.")
+  @doc("The managed service identities assigned to this resource. Omitting the entire identity property from PUT or PATCH preserves all current assignments. When provided, PUT replaces the user-assigned identity set and PATCH merges it; null PATCH dictionary entries remove individual identities. Setting type to None clears all assignments.")
   identity?: HorizonDbClusterManagedServiceIdentity;
 }
 
@@ -81,7 +81,7 @@ scalar PoolName extends string;
 @doc("A provisioned HorizonDB pool compute capacity in vCores, from 1 through 192.")
 @minValue(1)
 @maxValue(192)
-scalar ProvisionedPoolVCores extends int32;
+scalar PoolVCores extends int32;
 
 @added(Versions.v2026_10_01_preview)
 @doc("A HorizonDB pool node count, from 1 through 16.")
@@ -215,6 +215,7 @@ model MicrosoftEntraAdministrator
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The resource has the fixed literal name passwordMethod, which is more restrictive than a pattern."
 @added(Versions.v2026_10_01_preview)
 @doc("The service-created PostgreSQL username-and-password authentication method for a HorizonDB cluster. This resource configures the authentication mechanism, including its enabled state and administrator login credentials; it is not a password-only resource.")
+@singleton("passwordMethod")
 @parentResource(Cluster)
 model PasswordAuthentication
   is Azure.ResourceManager.ProxyResource<PasswordAuthenticationProperties> {
@@ -228,6 +229,7 @@ model PasswordAuthentication
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The resource has the fixed literal name microsoftEntra, which is more restrictive than a pattern."
 @added(Versions.v2026_10_01_preview)
 @doc("The service-created Microsoft Entra authentication method for a HorizonDB cluster.")
+@singleton("microsoftEntra")
 @parentResource(Cluster)
 model MicrosoftEntraAuthentication
   is Azure.ResourceManager.ProxyResource<MicrosoftEntraAuthenticationProperties> {
@@ -342,7 +344,7 @@ model ClusterProperties {
   backup?: BackupProperties;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The data encryption configuration for the cluster. When omitted during cluster creation, the service uses SystemManaged encryption.")
+  @doc("The data encryption configuration for the cluster. When omitted during initial cluster creation, the service uses SystemManaged encryption. When supplied during initial cluster creation, type is required. For PUT updates of an existing cluster, type may be omitted; if provided, it must match the existing encryption type. The encryption type is selected at cluster creation; switching between SystemManaged and AzureKeyVault after creation is not supported.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   dataEncryption?: HorizonDbClusterDataEncryption;
 
@@ -567,7 +569,7 @@ model ClusterPropertiesForPatchUpdate {
   backup?: BackupPropertiesForPatchUpdate;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The data encryption configuration to update for the cluster. Omitted properties preserve their current values.")
+  @doc("The data encryption configuration to update for the cluster. Omitted properties preserve their current values. Updates can modify settings within the existing encryption type, but switching between SystemManaged and AzureKeyVault after cluster creation is not supported.")
   @visibility(Lifecycle.Update)
   dataEncryption?: HorizonDbClusterDataEncryptionForPatchUpdate;
 }
@@ -624,9 +626,9 @@ model PoolProperties {
   createMode?: CreateModePool;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The compute model for the HorizonDB pool.")
+  @doc("The required compute model for the HorizonDB pool.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  computeModel?: PoolComputeModel;
+  computeModel: PoolComputeModel;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The required number of nodes to allocate and assign to the pool. Allowed values are 1 through 16. To deallocate runtime compute without changing the configured node count, stop the pool.")
@@ -772,7 +774,6 @@ model PoolForPatchUpdate {
 
 @added(Versions.v2026_10_01_preview)
 @doc("The compute model for a HorizonDB pool.")
-@discriminator("type")
 model PoolComputeModel {
   @doc("The type of compute model.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
@@ -780,23 +781,16 @@ model PoolComputeModel {
 
   @doc("The processor type for the compute model.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  computeProcessor?: ComputeProcessorType;
+  computeProcessor: ComputeProcessorType;
 
   @doc("The compute generation for the compute model.")
   @minValue(1)
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  computeGeneration?: int32;
-}
+  computeGeneration: int32;
 
-@added(Versions.v2026_10_01_preview)
-@doc("A provisioned compute model for a HorizonDB pool.")
-model ProvisionedHorizonDbPoolComputeModel extends PoolComputeModel {
-  @doc("The type of compute model.")
-  type: "Provisioned";
-
-  @doc("The number of provisioned vCores. Allowed values are 1 through 192.")
+  @doc("The number of vCores. Allowed values are 1 through 192.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  vCores: ProvisionedPoolVCores;
+  vCores: PoolVCores;
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -817,7 +811,7 @@ model PoolComputeModelForPatchUpdate {
 
   @doc("The number of provisioned vCores. Allowed values are 1 through 192. This property applies only to a Provisioned compute model. Omission preserves the current value.")
   @visibility(Lifecycle.Update)
-  vCores?: ProvisionedPoolVCores;
+  vCores?: PoolVCores;
 }
 
 @doc("Network properties.")
@@ -925,29 +919,6 @@ model FirewallRuleProperties {
   @typeChangedFrom(Versions.v2026_10_01_preview, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("Properties of a HorizonDB pool firewall rule for update operations. Omitted properties preserve their current values. The service validates the effective IP range after merging the supplied values with the existing rule.")
-model FirewallRulePropertiesForPatchUpdate {
-  @doc("The start IPv4 address to apply in dotted-decimal notation. The resulting effective start address must be numerically less than or equal to the effective end address.")
-  @visibility(Lifecycle.Update)
-  startIpAddress?: DottedDecimalIpv4Address;
-
-  @doc("The end IPv4 address to apply in dotted-decimal notation. The resulting effective end address must be numerically greater than or equal to the effective start address.")
-  @visibility(Lifecycle.Update)
-  endIpAddress?: DottedDecimalIpv4Address;
-
-  @doc("The description to apply to the HorizonDB firewall rule. The maximum length is 1024 characters.")
-  @visibility(Lifecycle.Update)
-  description?: WritableDescription;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("A HorizonDB pool firewall rule update request.")
-model FirewallRuleForPatchUpdate {
-  @doc("The properties to update. Omission preserves all current firewall rule properties.")
-  properties?: FirewallRulePropertiesForPatchUpdate;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -1083,11 +1054,24 @@ model AuthenticationProperties {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("Properties of the service-created PostgreSQL username-and-password authentication method. The control plane stores no administrator identity; PostgreSQL is the source of truth for the sole member of the service-owned administrator role.")
+@doc("Properties of the service-created PostgreSQL username-and-password authentication method.")
 model PasswordAuthenticationProperties {
   @doc("The state of PostgreSQL username-and-password authentication.")
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   state: AuthenticationState;
+
+  @doc("The PostgreSQL administrator login name. After it is set, renaming is not supported. Setting the login requires password authentication state to be Enabled in the same request.")
+  @minLength(1)
+  @maxLength(63)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  administratorLogin?: string;
+
+  @doc("The PostgreSQL administrator password. Setting the password requires password authentication state to be Enabled in the same request.")
+  @secret
+  @minLength(8)
+  @maxLength(128)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  administratorLoginPassword?: string;
 
   @doc("The provisioning state of the PostgreSQL username-and-password authentication method.")
   @visibility(Lifecycle.Read)
@@ -1107,20 +1091,13 @@ model MicrosoftEntraAuthenticationProperties {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. State-only requests enable or disable the authentication mechanism. Credentials are secrets and are never returned or stored by the control plane. Login-only, password-only, and combined credential updates require this authentication method to already be Enabled unless the request also sets state to Enabled.")
+@doc("Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. This API version supports enabling or disabling the authentication method, and resetting its password. Supported changes can be combined.")
 model PasswordAuthenticationPropertiesForPatchUpdate {
-  @doc("The target password-authentication state. Enabled or Disabled can be supplied without credentials to toggle the feature. Disabled cannot be combined with administratorLogin or administratorLoginPassword. Disabling password authentication does not remove or modify existing database users or roles.")
+  @doc("The target password-authentication state. Enabled can be combined with administratorLoginPassword to re-enable password authentication and reset the password for a cluster that already has an administrator. Disabling password authentication does not remove or modify existing database users or roles. Disabled cannot be combined with administratorLoginPassword.")
   @visibility(Lifecycle.Update)
   state?: AuthenticationState;
 
-  @doc("The PostgreSQL administrator role name. A login-only update requires password authentication to already be Enabled unless state is set to Enabled in this request, and requires exactly one member in the AzureSU-owned special group. The current name is an idempotent no-op; a different name renames the current member only when that target role does not already exist. When supplied together with administratorLoginPassword, this value can create the administrator if the special group has no member, reset the matching member's password, or rename a differently named member and reset its password.")
-  @secret
-  @minLength(1)
-  @maxLength(63)
-  @visibility(Lifecycle.Update)
-  administratorLogin?: string;
-
-  @doc("The PostgreSQL administrator password. A password-only update requires password authentication to already be Enabled unless state is set to Enabled in this request, and requires exactly one member in the AzureSU-owned special group. When supplied together with administratorLogin, it can create the administrator if the special group has no member, reset the matching member's password, or rename a differently named member and reset its password.")
+  @doc("The PostgreSQL administrator password. Supplying this property resets the configured administrator's password. When password authentication is currently disabled for a cluster that already has an administrator, this property can be combined with state Enabled to re-enable password authentication and reset the password.")
   @secret
   @minLength(8)
   @maxLength(128)
@@ -1151,7 +1128,7 @@ model MicrosoftEntraAuthenticationForPatchUpdate {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The type of data encryption used by a HorizonDB cluster.")
+@doc("The type of data encryption used by a HorizonDB cluster. The type is selected at cluster creation; switching between SystemManaged and AzureKeyVault after creation is not supported.")
 union HorizonDbClusterDataEncryptionType {
   string,
 
@@ -1180,20 +1157,20 @@ union HorizonDbClusterEncryptionKeyStatus {
 scalar VersionlessKeyVaultKeyUri extends url;
 
 @added(Versions.v2026_10_01_preview)
-@doc("The Cluster-level data encryption configuration. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required. When geographically redundant backup is enabled, geoBackupKeyUri and geoBackupUserAssignedIdentityId are also required. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. Only versionless Azure Key Vault key URIs are supported; key version paths are rejected. For SystemManaged encryption, key and identity properties must be omitted.")
+@doc("The Cluster-level data encryption configuration. The encryption type is selected at cluster creation; switching between SystemManaged and AzureKeyVault after creation is not supported. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required, and backup.geoRedundancy must be Disabled. Both primaryKeyUri and primaryUserAssignedIdentityId can be provided during initial cluster creation. For updates to an existing cluster through PUT or PATCH, only one of these properties can change per request, and that update must complete before submitting a separate update to change the other property. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. Only versionless Azure Key Vault key URIs are supported; key version paths are rejected. For SystemManaged encryption, key and identity properties must be omitted.")
 model HorizonDbClusterDataEncryption {
   @added(Versions.v2026_10_01_preview)
-  @doc("The type of data encryption used by the cluster.")
+  @doc("The type of data encryption used by the cluster. When the data encryption configuration is supplied during initial cluster creation, this property is required. For PUT updates of an existing cluster, this property may be omitted; if provided, it must match the existing encryption type. This value is selected at cluster creation and cannot later be changed from SystemManaged to AzureKeyVault or from AzureKeyVault to SystemManaged.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   type?: HorizonDbClusterDataEncryptionType;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported.")
+  @doc("The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported. During initial cluster creation, this property can be provided together with primaryUserAssignedIdentityId. For updates to an existing cluster through PUT or PATCH, this property and primaryUserAssignedIdentityId cannot both change in the same request; the first update must complete before submitting a separate update for the other property.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   primaryKeyUri?: VersionlessKeyVaultKeyUri;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
+  @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property. During initial cluster creation, this property can be provided together with primaryKeyUri. For updates to an existing cluster through PUT or PATCH, this property and primaryKeyUri cannot both change in the same request; the first update must complete before submitting a separate update for the other property.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   primaryUserAssignedIdentityId?: armResourceIdentifier<[
     {
@@ -1207,56 +1184,28 @@ model HorizonDbClusterDataEncryption {
   primaryEncryptionKeyStatus?: HorizonDbClusterEncryptionKeyStatus;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The versionless Azure Key Vault key URI used to encrypt geographically redundant backups. Key version paths are not supported.")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  geoBackupKeyUri?: VersionlessKeyVaultKeyUri;
-
-  @added(Versions.v2026_10_01_preview)
-  @doc("The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  geoBackupUserAssignedIdentityId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-
-  @added(Versions.v2026_10_01_preview)
-  @doc("The validation status of the geographically redundant backup encryption key. This property is returned for AzureKeyVault encryption when geographically redundant backup is enabled.")
+  @doc("The current version of the primary encryption key used by the cluster. This property is returned for AzureKeyVault encryption and is absent for SystemManaged encryption.")
   @visibility(Lifecycle.Read)
-  geoBackupEncryptionKeyStatus?: HorizonDbClusterEncryptionKeyStatus;
+  primaryEncryptionKeyCurrentVersion?: string;
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("Properties for sparsely updating Cluster-level data encryption. Omitted properties preserve their current values.")
+@doc("Properties for sparsely updating Cluster-level data encryption. Omitted properties preserve their current values. Updates can modify settings within the existing encryption type, such as the primary Azure Key Vault key URI, but switching between SystemManaged and AzureKeyVault after cluster creation is not supported. AzureKeyVault encryption is not supported when backup.geoRedundancy is Enabled. An update can change only one of primaryKeyUri or primaryUserAssignedIdentityId; that update must complete before submitting a separate update to change the other property.")
 model HorizonDbClusterDataEncryptionForPatchUpdate {
   @added(Versions.v2026_10_01_preview)
-  @doc("The type of data encryption used by the cluster.")
+  @doc("The existing data encryption type used by the cluster. PATCH is a sparse update, so this property may be omitted. If provided, it must match the existing encryption type. This value cannot be changed from SystemManaged to AzureKeyVault or from AzureKeyVault to SystemManaged after cluster creation.")
   @visibility(Lifecycle.Update)
   type?: HorizonDbClusterDataEncryptionType;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported.")
+  @doc("The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported. This property and primaryUserAssignedIdentityId cannot both change in the same update; the first update must complete before submitting a separate update for the other property.")
   @visibility(Lifecycle.Update)
   primaryKeyUri?: VersionlessKeyVaultKeyUri;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
+  @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property. This property and primaryKeyUri cannot both change in the same update; the first update must complete before submitting a separate update for the other property.")
   @visibility(Lifecycle.Update)
   primaryUserAssignedIdentityId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-
-  @added(Versions.v2026_10_01_preview)
-  @doc("The versionless Azure Key Vault key URI used to encrypt geographically redundant backups. Key version paths are not supported.")
-  @visibility(Lifecycle.Update)
-  geoBackupKeyUri?: VersionlessKeyVaultKeyUri;
-
-  @added(Versions.v2026_10_01_preview)
-  @doc("The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
-  @visibility(Lifecycle.Update)
-  geoBackupUserAssignedIdentityId?: armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
     }
@@ -1266,7 +1215,7 @@ model HorizonDbClusterDataEncryptionForPatchUpdate {
 @added(Versions.v2026_10_01_preview)
 @doc("Backup configuration properties for a HorizonDB cluster.")
 model BackupProperties {
-  @doc("The geo-redundancy state.")
+  @doc("The geo-redundancy state. Geo-redundant backup is not supported when dataEncryption.type is AzureKeyVault.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   geoRedundancy: GeoRedundancyState;
 
@@ -1296,7 +1245,7 @@ model BackupPropertiesForPatchUpdate {
 union GeoRedundancyState {
   string,
 
-  @doc("Geo-redundancy is enabled")
+  @doc("Geo-redundancy is enabled. This value is not supported when dataEncryption.type is AzureKeyVault.")
   Enabled: "Enabled",
 
   @doc("Geo-redundancy is disabled")

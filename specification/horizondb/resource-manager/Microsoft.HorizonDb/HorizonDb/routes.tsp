@@ -127,7 +127,6 @@ interface Clusters {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "HorizonDB supports a single default compute pool that cannot be deleted independently of its parent cluster."
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPools")
 @armResourceOperations
 interface Pools {
@@ -154,6 +153,16 @@ interface Pools {
     PoolForPatchUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = Pool> &
       Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Deletes a HorizonDB pool together with the Pool-scoped Endpoint whose associatedResourceId identifies that Pool and all FirewallRule children of that Endpoint. The Endpoint cannot outlive or be deleted independently from its Pool.")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Pool,
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   @doc("Lists all HorizonDB pools in a cluster.")
@@ -288,9 +297,6 @@ interface FirewallRules {
           HorizonDbResourceLroHeaders<FirewallRule>
         >
   >;
-
-  @doc("Updates selected properties of a HorizonDB pool firewall rule. Omitted properties preserve their current values.")
-  update is ArmCustomPatchSync<FirewallRule, FirewallRuleForPatchUpdate>;
 
   @doc("Deletes a HorizonDB pool firewall rule.")
   @sharedRoute
@@ -542,8 +548,6 @@ interface Authentications {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Authentication method instances are service-created with the cluster and cannot be deleted independently."
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-list-operation" "The Authentications resource operations interface defines the shared authentications collection list operation and returns both service-created authentication method instances."
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Authentication method instances are service-created with the cluster; customers update an existing instance through PATCH and cannot create additional instances."
 @added(Versions.v2026_10_01_preview)
 @doc("Operations for the service-created PostgreSQL username-and-password authentication method of a HorizonDB cluster.")
 @armResourceOperations
@@ -551,22 +555,29 @@ interface PasswordAuthentications {
   @doc("Gets the service-created PostgreSQL username-and-password authentication method.")
   @autoRoute
   @get
-  @armResourceRead(Authentication)
-  get is Azure.ResourceManager.Foundations.ArmReadOperation<
-    ResourceInstanceParameters<PasswordAuthentication>,
-    ArmResponse<Authentication>,
-    ErrorResponse
+  get is ArmResourceRead<PasswordAuthentication>;
+
+  @doc("Creates or replaces the service-created PostgreSQL username-and-password authentication method.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
+    PasswordAuthentication,
+    LroHeaders = HorizonDbResourceLroHeaders<PasswordAuthentication>,
+    Response =
+      | HorizonDbResourceUpdatedLroResponse<PasswordAuthentication>
+      | ArmResourceCreatedResponse<
+          PasswordAuthentication,
+          HorizonDbResourceLroHeaders<PasswordAuthentication>
+        >
   >;
 
-  @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. A state-only request enables or disables the authentication mechanism; disabling cannot include credentials and does not remove or modify existing database users or roles. Login-only, password-only, and combined credential updates require this method to already be Enabled unless this request also sets state to Enabled. PostgreSQL is the sole source of truth; no administrator identity or credentials are stored. Both authentication methods may be Disabled.")
+  @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. This API version supports enabling the method, disabling the method, and resetting its password. For a cluster that already has an administrator but currently has password authentication disabled, state Enabled and administratorLoginPassword can be supplied together to re-enable password authentication and reset the password. Disabling cannot include credentials and does not remove or modify existing database users or roles. Administrator rename is not supported in this API version.")
   @autoRoute
-  @armResourceUpdate(Authentication)
-  @patch(#{ implicitOptionality: false })
-  update is Azure.ResourceManager.Foundations.ArmUpdateOperation<
-    ResourceInstanceParameters<PasswordAuthentication>,
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  update is ArmCustomPatchAsync<
+    PasswordAuthentication,
     PasswordAuthenticationForPatchUpdate,
-    ArmResponse<Authentication>,
-    ErrorResponse
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = PasswordAuthentication> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
@@ -587,14 +598,18 @@ interface MicrosoftEntraAuthentications {
     ErrorResponse
   >;
 
-  @doc("Updates the service-created Microsoft Entra authentication method. State Enabled enables the feature and State Disabled disables it; no additional properties are required. Disabling the feature does not remove or modify database roles or users previously created through the MicrosoftEntraAdministrators control-plane API or directly through pgaadauth extension functions. The method may be Disabled even when password authentication is also Disabled.")
+  @doc("Updates the service-created Microsoft Entra authentication method. State Enabled enables the feature and State Disabled disables it; no additional properties are required. Disabling the feature does not remove or modify database roles or users previously created through the MicrosoftEntraAdministrators control-plane API or directly through pgaadauth extension functions.")
   @autoRoute
   @armResourceUpdate(Authentication)
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Foundations.ArmUpdateOperation<
     ResourceInstanceParameters<MicrosoftEntraAuthentication>,
     MicrosoftEntraAuthenticationForPatchUpdate,
-    ArmResponse<Authentication>,
-    ErrorResponse
+    Response =
+      | ArmResponse<Authentication>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Authentication> &
+          Azure.Core.Foundations.RetryAfterHeader>,
+    ErrorResponse = ErrorResponse
   >;
 }
