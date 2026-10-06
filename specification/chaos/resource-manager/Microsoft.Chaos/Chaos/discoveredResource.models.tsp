@@ -76,6 +76,13 @@ model DiscoveredResourceProperties {
   location?: azureLocation;
 
   /**
+   * The Azure regions of a multi-region discovered resource.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  locations?: azureLocation[];
+
+  /**
    * The availability zones of the discovered resource.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
