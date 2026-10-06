@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { load } from "js-yaml";
 import { expect, it, vi } from "vitest";
+import * as z from "zod";
 import { cleanupBranches, isStale } from "../src/branch-cleanup.ts";
 import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
 
@@ -179,4 +180,31 @@ it("defaults manual runs to dry run with separate retention inputs", async () =>
   expect(yaml).toContain("github.event_name == 'workflow_dispatch' && inputs.dry-run");
   expect(yaml).toContain('Number(context.payload.inputs["copilot-days"])');
   expect(yaml).toContain('Number(context.payload.inputs["other-days"])');
+});
+
+it("keeps write credentials available for branch deletion pushes", async () => {
+  const yaml = await readFile(join(import.meta.dirname, "../branch-cleanup.yaml"), "utf8");
+  const workflow = z
+    .object({
+      permissions: z.object({ contents: z.string() }),
+      jobs: z.object({
+        cleanup: z.object({
+          steps: z.array(
+            z.object({
+              uses: z.string().optional(),
+              with: z.record(z.string(), z.unknown()).optional(),
+            }),
+          ),
+        }),
+      }),
+    })
+    .parse(load(yaml));
+  const checkout = workflow.jobs.cleanup.steps.find((step) =>
+    step.uses?.startsWith("actions/checkout@"),
+  );
+  expect(workflow.permissions.contents).toBe("write");
+  expect(checkout?.with).toMatchObject({
+    "persist-credentials": true,
+    ref: "${{ github.event.repository.default_branch }}",
+  });
 });
