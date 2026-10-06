@@ -3862,7 +3862,7 @@
       "delete": {
         "operationId": "AgentEndpointConversations_deleteAgentConversation",
         "summary": "Delete a voice agent conversation",
-        "description": "Deletes a conversation and all of its stored data \u2014 responses, items, and any audio (cascade). This is\nthe customer's explicit data-deletion control for voice conversations.",
+        "description": "Deletes a conversation and all of its stored data — responses, items, and any audio (cascade). This is\nthe customer's explicit data-deletion control for voice conversations.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -4033,7 +4033,7 @@
       "get": {
         "operationId": "AgentEndpointConversations_getAgentConversationAudioContent",
         "summary": "Stream a voice agent conversation's merged recording",
-        "description": "Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service\n(no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)\nrecordings the bytes are not proxied \u2014 the caller must download directly from customer storage using the\n`blob_uri` returned by the metadata route \u2014 so this route returns `409 Conflict` for BYOS recordings.\nWhile the conversation is `in_progress`, this route returns retriable `409 Conflict` with\n`error.code = recording_not_ready` and a `Retry-After` header when retry guidance is available. When the\nconversation is `failed`, it returns terminal `409 Conflict` with `error.code = recording_unavailable`.\nFor a `completed` conversation, content is available subject to the existing BYOS behavior. A conversation\nwithout persisted audio (`store = false`) returns `404`.",
+        "description": "Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service\n(no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)\nrecordings the bytes are not proxied — the caller must download directly from customer storage using the\n`blob_uri` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.\nWhile the conversation is `in_progress`, this route returns retriable `409 Conflict` with\n`error.code = recording_not_ready` and a `Retry-After` header when retry guidance is available. When the\nconversation is `failed`, it returns terminal `409 Conflict` with `error.code = recording_unavailable`.\nFor a `completed` conversation, content is available subject to the existing BYOS behavior. A conversation\nwithout persisted audio (`store = false`) returns `404`.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -4122,7 +4122,7 @@
       "get": {
         "operationId": "AgentEndpointConversations_listAgentConversationItems",
         "summary": "List items in a voice agent conversation",
-        "description": "Returns a paged collection of items \u2014 the complete ordered conversation history, including user input,\nassistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the\nconversation was not persisted (`store = false`).",
+        "description": "Returns a paged collection of items — the complete ordered conversation history, including user input,\nassistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the\nconversation was not persisted (`store = false`).",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -4475,7 +4475,7 @@
       "get": {
         "operationId": "AgentEndpointConversations_getAgentConversationAudioItemContent",
         "summary": "Stream a voice agent conversation item's audio",
-        "description": "Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS\nURL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the\nbytes are not proxied \u2014 the caller must download directly from customer storage using the `blob_uri`\nreturned by the item's `/audio` metadata route \u2014 so this route returns `409 Conflict` for BYOS recordings.\nReturns `404` when the conversation, item, or its audio was not persisted (`store = false`).",
+        "description": "Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS\nURL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the\nbytes are not proxied — the caller must download directly from customer storage using the `blob_uri`\nreturned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.\nReturns `404` when the conversation, item, or its audio was not persisted (`store = false`).",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -5024,7 +5024,7 @@
       "get": {
         "operationId": "AgentEndpointConversations_listAgentConversationResponseItems",
         "summary": "List items produced by a voice agent conversation response",
-        "description": "Returns a paged collection of the output items produced by a specific response (the response's output\nprojection). For the complete ordered conversation history \u2014 including user input and client-created\ntool outputs \u2014 use the conversation items route instead. Returns `404` when the conversation or\nresponse was not persisted (`store = false`).",
+        "description": "Returns a paged collection of the output items produced by a specific response (the response's output\nprojection). For the complete ordered conversation history — including user input and client-created\ntool outputs — use the conversation items route instead. Returns `404` when the conversation or\nresponse was not persisted (`store = false`).",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8282,7 +8282,7 @@
       "get": {
         "operationId": "Agents_getSessionLogStream",
         "summary": "Stream console logs for a hosted agent session",
-        "description": "Streams console logs (stdout / stderr) for a specific hosted agent session\nas a Server-Sent Events (SSE) stream.\n\nEach SSE frame contains:\n- `event`: always `\"log\"`\n- `data`: a plain-text log line (currently JSON-formatted, but the schema\nis not contractual and may include additional keys or change format\nover time \u2014 clients should treat it as an opaque string)\n\nExample SSE frames:\n```\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.121Z\",\"stream\":\"stdout\",\"message\":\"Starting FoundryCBAgent server on port 8088\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.130Z\",\"stream\":\"stderr\",\"message\":\"INFO: Application startup complete.\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:34:52.714Z\",\"stream\":\"status\",\"message\":\"Successfully connected to container\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:35:52.714Z\",\"stream\":\"status\",\"message\":\"No logs since last 60 seconds\"}\n```\n\nThe stream remains open until the client disconnects or the server\nterminates the connection. Clients should handle reconnection as needed.",
+        "description": "Streams console logs (stdout / stderr) for a specific hosted agent session\nas a Server-Sent Events (SSE) stream.\n\nEach SSE frame contains:\n- `event`: always `\"log\"`\n- `data`: a plain-text log line (currently JSON-formatted, but the schema\nis not contractual and may include additional keys or change format\nover time — clients should treat it as an opaque string)\n\nExample SSE frames:\n```\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.121Z\",\"stream\":\"stdout\",\"message\":\"Starting FoundryCBAgent server on port 8088\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.130Z\",\"stream\":\"stderr\",\"message\":\"INFO: Application startup complete.\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:34:52.714Z\",\"stream\":\"status\",\"message\":\"Successfully connected to container\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:35:52.714Z\",\"stream\":\"status\",\"message\":\"No logs since last 60 seconds\"}\n```\n\nThe stream remains open until the client disconnects or the server\nterminates the connection. Clients should handle reconnection as needed.",
         "parameters": [
           {
             "name": "agent_name",
@@ -8437,7 +8437,7 @@
       "post": {
         "operationId": "Agents_disableAgent",
         "summary": "Disable an agent",
-        "description": "Disables the specified agent, preventing it from accepting new sessions or processing requests.\nExisting active sessions are allowed to drain gracefully but no new sessions can be created.\nThis operation is idempotent \u2014 disabling an already-disabled agent returns success with no side effects.",
+        "description": "Disables the specified agent, preventing it from accepting new sessions or processing requests.\nExisting active sessions are allowed to drain gracefully but no new sessions can be created.\nThis operation is idempotent — disabling an already-disabled agent returns success with no side effects.",
         "parameters": [
           {
             "name": "agent_name",
@@ -8493,7 +8493,7 @@
       "post": {
         "operationId": "Agents_enableAgent",
         "summary": "Enable an agent",
-        "description": "Enables the specified agent, allowing it to accept new sessions and process requests.\nThis operation is idempotent \u2014 enabling an already-enabled agent returns success with no side effects.",
+        "description": "Enables the specified agent, allowing it to accept new sessions and process requests.\nThis operation is idempotent — enabling an already-enabled agent returns success with no side effects.",
         "parameters": [
           {
             "name": "agent_name",
@@ -17799,7 +17799,7 @@
               "java": "package com.openai.example;\n\nimport com.openai.client.OpenAIClient;\nimport com.openai.client.okhttp.OpenAIOkHttpClient;\nimport com.openai.models.chat.completions.ChatCompletionListPage;\nimport com.openai.models.chat.completions.ChatCompletionListParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        OpenAIClient client = OpenAIOkHttpClient.fromEnv();\n\n        ChatCompletionListPage page = client.chat().completions().list();\n    }\n}",
               "ruby": "require \"openai\"\n\nopenai = OpenAI::Client.new(api_key: \"My API Key\")\n\npage = openai.chat.completions.list\n\nputs(page)"
             },
-            "response": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"object\": \"chat.completion\",\n      \"id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n      \"model\": \"gpt-5.4\",\n      \"created\": 1738960610,\n      \"request_id\": \"req_ded8ab984ec4bf840f37566c1011c417\",\n      \"tool_choice\": null,\n      \"usage\": {\n        \"total_tokens\": 31,\n        \"completion_tokens\": 18,\n        \"prompt_tokens\": 13\n      },\n      \"seed\": 4944116822809979520,\n      \"top_p\": 1.0,\n      \"temperature\": 1.0,\n      \"presence_penalty\": 0.0,\n      \"frequency_penalty\": 0.0,\n      \"system_fingerprint\": \"fp_50cad350e4\",\n      \"input_user\": null,\n      \"service_tier\": \"default\",\n      \"tools\": null,\n      \"metadata\": {},\n      \"choices\": [\n        {\n          \"index\": 0,\n          \"message\": {\n            \"content\": \"Mind of circuits hum,\nLearning patterns in silence\u2014\nFuture's quiet spark.\",\n            \"role\": \"assistant\",\n            \"tool_calls\": null,\n            \"function_call\": null\n          },\n          \"finish_reason\": \"stop\",\n          \"logprobs\": null\n        }\n      ],\n      \"response_format\": null\n    }\n  ],\n  \"first_id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"last_id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"has_more\": false\n}\n"
+            "response": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"object\": \"chat.completion\",\n      \"id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n      \"model\": \"gpt-5.4\",\n      \"created\": 1738960610,\n      \"request_id\": \"req_ded8ab984ec4bf840f37566c1011c417\",\n      \"tool_choice\": null,\n      \"usage\": {\n        \"total_tokens\": 31,\n        \"completion_tokens\": 18,\n        \"prompt_tokens\": 13\n      },\n      \"seed\": 4944116822809979520,\n      \"top_p\": 1.0,\n      \"temperature\": 1.0,\n      \"presence_penalty\": 0.0,\n      \"frequency_penalty\": 0.0,\n      \"system_fingerprint\": \"fp_50cad350e4\",\n      \"input_user\": null,\n      \"service_tier\": \"default\",\n      \"tools\": null,\n      \"metadata\": {},\n      \"choices\": [\n        {\n          \"index\": 0,\n          \"message\": {\n            \"content\": \"Mind of circuits hum,\nLearning patterns in silence—\nFuture's quiet spark.\",\n            \"role\": \"assistant\",\n            \"tool_calls\": null,\n            \"function_call\": null\n          },\n          \"finish_reason\": \"stop\",\n          \"logprobs\": null\n        }\n      ],\n      \"response_format\": null\n    }\n  ],\n  \"first_id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"last_id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"has_more\": false\n}\n"
           }
         },
         "x-ms-list": true
@@ -18078,7 +18078,7 @@
               "java": "package com.openai.example;\n\nimport com.openai.client.OpenAIClient;\nimport com.openai.client.okhttp.OpenAIOkHttpClient;\nimport com.openai.models.chat.completions.ChatCompletion;\nimport com.openai.models.chat.completions.ChatCompletionRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        OpenAIClient client = OpenAIOkHttpClient.fromEnv();\n\n        ChatCompletion chatCompletion = client.chat().completions().retrieve(\"completion_id\");\n    }\n}",
               "ruby": "require \"openai\"\n\nopenai = OpenAI::Client.new(api_key: \"My API Key\")\n\nchat_completion = openai.chat.completions.retrieve(\"completion_id\")\n\nputs(chat_completion)"
             },
-            "response": "{\n  \"object\": \"chat.completion\",\n  \"id\": \"chatcmpl-abc123\",\n  \"model\": \"gpt-4o-2024-08-06\",\n  \"created\": 1738960610,\n  \"request_id\": \"req_ded8ab984ec4bf840f37566c1011c417\",\n  \"tool_choice\": null,\n  \"usage\": {\n    \"total_tokens\": 31,\n    \"completion_tokens\": 18,\n    \"prompt_tokens\": 13\n  },\n  \"seed\": 4944116822809979520,\n  \"top_p\": 1.0,\n  \"temperature\": 1.0,\n  \"presence_penalty\": 0.0,\n  \"frequency_penalty\": 0.0,\n  \"system_fingerprint\": \"fp_50cad350e4\",\n  \"input_user\": null,\n  \"service_tier\": \"default\",\n  \"tools\": null,\n  \"metadata\": {},\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"content\": \"Mind of circuits hum,\nLearning patterns in silence\u2014\nFuture's quiet spark.\",\n        \"role\": \"assistant\",\n        \"tool_calls\": null,\n        \"function_call\": null\n      },\n      \"finish_reason\": \"stop\",\n      \"logprobs\": null\n    }\n  ],\n  \"response_format\": null\n}\n"
+            "response": "{\n  \"object\": \"chat.completion\",\n  \"id\": \"chatcmpl-abc123\",\n  \"model\": \"gpt-4o-2024-08-06\",\n  \"created\": 1738960610,\n  \"request_id\": \"req_ded8ab984ec4bf840f37566c1011c417\",\n  \"tool_choice\": null,\n  \"usage\": {\n    \"total_tokens\": 31,\n    \"completion_tokens\": 18,\n    \"prompt_tokens\": 13\n  },\n  \"seed\": 4944116822809979520,\n  \"top_p\": 1.0,\n  \"temperature\": 1.0,\n  \"presence_penalty\": 0.0,\n  \"frequency_penalty\": 0.0,\n  \"system_fingerprint\": \"fp_50cad350e4\",\n  \"input_user\": null,\n  \"service_tier\": \"default\",\n  \"tools\": null,\n  \"metadata\": {},\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"content\": \"Mind of circuits hum,\nLearning patterns in silence—\nFuture's quiet spark.\",\n        \"role\": \"assistant\",\n        \"tool_calls\": null,\n        \"function_call\": null\n      },\n      \"finish_reason\": \"stop\",\n      \"logprobs\": null\n    }\n  ],\n  \"response_format\": null\n}\n"
           }
         }
       },
@@ -18155,7 +18155,7 @@
               "java": "package com.openai.example;\n\nimport com.openai.client.OpenAIClient;\nimport com.openai.client.okhttp.OpenAIOkHttpClient;\nimport com.openai.core.JsonValue;\nimport com.openai.models.chat.completions.ChatCompletion;\nimport com.openai.models.chat.completions.ChatCompletionUpdateParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        OpenAIClient client = OpenAIOkHttpClient.fromEnv();\n\n        ChatCompletionUpdateParams params = ChatCompletionUpdateParams.builder()\n            .completionId(\"completion_id\")\n            .metadata(ChatCompletionUpdateParams.Metadata.builder()\n                .putAdditionalProperty(\"foo\", JsonValue.from(\"string\"))\n                .build())\n            .build();\n        ChatCompletion chatCompletion = client.chat().completions().update(params);\n    }\n}",
               "ruby": "require \"openai\"\n\nopenai = OpenAI::Client.new(api_key: \"My API Key\")\n\nchat_completion = openai.chat.completions.update(\"completion_id\", metadata: {foo: \"string\"})\n\nputs(chat_completion)"
             },
-            "response": "{\n  \"object\": \"chat.completion\",\n  \"id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"model\": \"gpt-4o-2024-08-06\",\n  \"created\": 1738960610,\n  \"request_id\": \"req_ded8ab984ec4bf840f37566c1011c417\",\n  \"tool_choice\": null,\n  \"usage\": {\n    \"total_tokens\": 31,\n    \"completion_tokens\": 18,\n    \"prompt_tokens\": 13\n  },\n  \"seed\": 4944116822809979520,\n  \"top_p\": 1.0,\n  \"temperature\": 1.0,\n  \"presence_penalty\": 0.0,\n  \"frequency_penalty\": 0.0,\n  \"system_fingerprint\": \"fp_50cad350e4\",\n  \"input_user\": null,\n  \"service_tier\": \"default\",\n  \"tools\": null,\n  \"metadata\": {\n    \"foo\": \"bar\"\n  },\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"content\": \"Mind of circuits hum,\nLearning patterns in silence\u2014\nFuture's quiet spark.\",\n        \"role\": \"assistant\",\n        \"tool_calls\": null,\n        \"function_call\": null\n      },\n      \"finish_reason\": \"stop\",\n      \"logprobs\": null\n    }\n  ],\n  \"response_format\": null\n}\n"
+            "response": "{\n  \"object\": \"chat.completion\",\n  \"id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"model\": \"gpt-4o-2024-08-06\",\n  \"created\": 1738960610,\n  \"request_id\": \"req_ded8ab984ec4bf840f37566c1011c417\",\n  \"tool_choice\": null,\n  \"usage\": {\n    \"total_tokens\": 31,\n    \"completion_tokens\": 18,\n    \"prompt_tokens\": 13\n  },\n  \"seed\": 4944116822809979520,\n  \"top_p\": 1.0,\n  \"temperature\": 1.0,\n  \"presence_penalty\": 0.0,\n  \"frequency_penalty\": 0.0,\n  \"system_fingerprint\": \"fp_50cad350e4\",\n  \"input_user\": null,\n  \"service_tier\": \"default\",\n  \"tools\": null,\n  \"metadata\": {\n    \"foo\": \"bar\"\n  },\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"content\": \"Mind of circuits hum,\nLearning patterns in silence—\nFuture's quiet spark.\",\n        \"role\": \"assistant\",\n        \"tool_calls\": null,\n        \"function_call\": null\n      },\n      \"finish_reason\": \"stop\",\n      \"logprobs\": null\n    }\n  ],\n  \"response_format\": null\n}\n"
           }
         }
       }
@@ -23843,7 +23843,7 @@
       "post": {
         "operationId": "createResponse",
         "summary": "Create a model response",
-        "description": "Creates a model response. Provide text or image inputs to generate text or JSON outputs. Have the model call your own custom code or use built-in tools like web search or file search to use your own data as input for the model\u2019s response.",
+        "description": "Creates a model response. Provide text or image inputs to generate text or JSON outputs. Have the model call your own custom code or use built-in tools like web search or file search to use your own data as input for the model’s response.",
         "parameters": [
           {
             "name": "x-ms-user-identity",
@@ -24902,8 +24902,8 @@
           "group": "responses",
           "examples": {
             "request": {
-              "curl": "curl -X POST https://api.openai.com/v1/responses/compact \\\n    -H \"Content-Type: application/json\" \\\n    -H \"Authorization: Bearer $OPENAI_API_KEY\" \\\n    -d '{\n      \"model\": \"gpt-5.1-codex-max\",\n      \"input\": [\n        {\n          \"role\": \"user\",\n          \"content\": \"Create a simple landing page for a dog petting caf\u00e9.\"\n        },\n        {\n          \"id\": \"msg_001\",\n          \"type\": \"message\",\n          \"status\": \"completed\",\n          \"content\": [\n            {\n              \"type\": \"output_text\",\n              \"annotations\": [],\n              \"logprobs\": [],\n              \"text\": \"Below is a single file, ready-to-use landing page for a dog petting caf\u00e9:...\"\n            }\n          ],\n          \"role\": \"assistant\"\n        }\n      ]\n    }'\n",
-              "javascript": "import OpenAI from \"openai\";\n\nconst openai = new OpenAI();\n\n// Compact the previous response if you are running out of tokens\nconst compactedResponse = await openai.responses.compact({\n  model: \"gpt-5.1-codex-max\",\n  input: [\n    {\n      role: \"user\",\n      content: \"Create a simple landing page for a dog petting caf\u00e9.\",\n    },\n    // All items returned from previous requests are included here, like reasoning, message, function call, etc.\n    {\n      id: \"msg_030d085c0b53e67e0069332e3a72d4819c96c6f2c4adc15d33\",\n      type: \"message\",\n      status: \"completed\",\n      content: [\n        {\n          type: \"output_text\",\n          annotations: [],\n          logprobs: [],\n          text: \"Below is a single file, ready-to-use landing page for a dog petting caf\u00e9:...\",\n        },\n      ],\n      role: \"assistant\",\n    },\n  ],\n});\n\n// Pass the compactedResponse.output as input to the next request\nconsole.log(compactedResponse);\n",
+              "curl": "curl -X POST https://api.openai.com/v1/responses/compact \\\n    -H \"Content-Type: application/json\" \\\n    -H \"Authorization: Bearer $OPENAI_API_KEY\" \\\n    -d '{\n      \"model\": \"gpt-5.1-codex-max\",\n      \"input\": [\n        {\n          \"role\": \"user\",\n          \"content\": \"Create a simple landing page for a dog petting café.\"\n        },\n        {\n          \"id\": \"msg_001\",\n          \"type\": \"message\",\n          \"status\": \"completed\",\n          \"content\": [\n            {\n              \"type\": \"output_text\",\n              \"annotations\": [],\n              \"logprobs\": [],\n              \"text\": \"Below is a single file, ready-to-use landing page for a dog petting café:...\"\n            }\n          ],\n          \"role\": \"assistant\"\n        }\n      ]\n    }'\n",
+              "javascript": "import OpenAI from \"openai\";\n\nconst openai = new OpenAI();\n\n// Compact the previous response if you are running out of tokens\nconst compactedResponse = await openai.responses.compact({\n  model: \"gpt-5.1-codex-max\",\n  input: [\n    {\n      role: \"user\",\n      content: \"Create a simple landing page for a dog petting café.\",\n    },\n    // All items returned from previous requests are included here, like reasoning, message, function call, etc.\n    {\n      id: \"msg_030d085c0b53e67e0069332e3a72d4819c96c6f2c4adc15d33\",\n      type: \"message\",\n      status: \"completed\",\n      content: [\n        {\n          type: \"output_text\",\n          annotations: [],\n          logprobs: [],\n          text: \"Below is a single file, ready-to-use landing page for a dog petting café:...\",\n        },\n      ],\n      role: \"assistant\",\n    },\n  ],\n});\n\n// Pass the compactedResponse.output as input to the next request\nconsole.log(compactedResponse);\n",
               "python": "import os\nfrom openai import OpenAI\n\nclient = OpenAI(\n    api_key=os.environ.get(\"OPENAI_API_KEY\"),  # This is the default and can be omitted\n)\ncompacted_response = client.responses.compact(\n    model=\"gpt-5.4\",\n)\nprint(compacted_response.id)",
               "node.js": "import OpenAI from 'openai';\n\nconst client = new OpenAI({\n  apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted\n});\n\nconst compactedResponse = await client.responses.compact({ model: 'gpt-5.4' });\n\nconsole.log(compactedResponse.id);",
               "go": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\n\t\"github.com/openai/openai-go\"\n\t\"github.com/openai/openai-go/option\"\n\t\"github.com/openai/openai-go/responses\"\n)\n\nfunc main() {\n\tclient := openai.NewClient(\n\t\toption.WithAPIKey(\"My API Key\"),\n\t)\n\tcompactedResponse, err := client.Responses.Compact(context.TODO(), responses.ResponseCompactParams{\n\t\tModel: responses.ResponseCompactParamsModelGPT5_4,\n\t})\n\tif err != nil {\n\t\tpanic(err.Error())\n\t}\n\tfmt.Printf(\"%+v\n\", compactedResponse.ID)\n}\n",
@@ -25037,7 +25037,7 @@
               "java": "package com.openai.example;\n\nimport com.openai.client.OpenAIClient;\nimport com.openai.client.okhttp.OpenAIOkHttpClient;\nimport com.openai.models.responses.Response;\nimport com.openai.models.responses.ResponseRetrieveParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        OpenAIClient client = OpenAIOkHttpClient.fromEnv();\n\n        Response response = client.responses().retrieve(\"resp_677efb5139a88190b512bc3fef8e535d\");\n    }\n}",
               "ruby": "require \"openai\"\n\nopenai = OpenAI::Client.new(api_key: \"My API Key\")\n\nresponse = openai.responses.retrieve(\"resp_677efb5139a88190b512bc3fef8e535d\")\n\nputs(response)"
             },
-            "response": "{\n  \"id\": \"resp_67cb71b351908190a308f3859487620d06981a8637e6bc44\",\n  \"object\": \"response\",\n  \"created_at\": 1741386163,\n  \"status\": \"completed\",\n  \"completed_at\": 1741386164,\n  \"error\": null,\n  \"incomplete_details\": null,\n  \"instructions\": null,\n  \"max_output_tokens\": null,\n  \"model\": \"gpt-4o-2024-08-06\",\n  \"output\": [\n    {\n      \"type\": \"message\",\n      \"id\": \"msg_67cb71b3c2b0819084d481baaaf148f206981a8637e6bc44\",\n      \"status\": \"completed\",\n      \"role\": \"assistant\",\n      \"content\": [\n        {\n          \"type\": \"output_text\",\n          \"text\": \"Silent circuits hum,\nThoughts emerge in data streams\u2014\nDigital dawn breaks.\",\n          \"annotations\": []\n        }\n      ]\n    }\n  ],\n  \"parallel_tool_calls\": true,\n  \"previous_response_id\": null,\n  \"reasoning\": {\n    \"effort\": null,\n    \"summary\": null\n  },\n  \"store\": true,\n  \"temperature\": 1.0,\n  \"text\": {\n    \"format\": {\n      \"type\": \"text\"\n    }\n  },\n  \"tool_choice\": \"auto\",\n  \"tools\": [],\n  \"top_p\": 1.0,\n  \"truncation\": \"disabled\",\n  \"usage\": {\n    \"input_tokens\": 32,\n    \"input_tokens_details\": {\n      \"cached_tokens\": 0\n    },\n    \"output_tokens\": 18,\n    \"output_tokens_details\": {\n      \"reasoning_tokens\": 0\n    },\n    \"total_tokens\": 50\n  },\n  \"user\": null,\n  \"metadata\": {}\n}\n"
+            "response": "{\n  \"id\": \"resp_67cb71b351908190a308f3859487620d06981a8637e6bc44\",\n  \"object\": \"response\",\n  \"created_at\": 1741386163,\n  \"status\": \"completed\",\n  \"completed_at\": 1741386164,\n  \"error\": null,\n  \"incomplete_details\": null,\n  \"instructions\": null,\n  \"max_output_tokens\": null,\n  \"model\": \"gpt-4o-2024-08-06\",\n  \"output\": [\n    {\n      \"type\": \"message\",\n      \"id\": \"msg_67cb71b3c2b0819084d481baaaf148f206981a8637e6bc44\",\n      \"status\": \"completed\",\n      \"role\": \"assistant\",\n      \"content\": [\n        {\n          \"type\": \"output_text\",\n          \"text\": \"Silent circuits hum,\nThoughts emerge in data streams—\nDigital dawn breaks.\",\n          \"annotations\": []\n        }\n      ]\n    }\n  ],\n  \"parallel_tool_calls\": true,\n  \"previous_response_id\": null,\n  \"reasoning\": {\n    \"effort\": null,\n    \"summary\": null\n  },\n  \"store\": true,\n  \"temperature\": 1.0,\n  \"text\": {\n    \"format\": {\n      \"type\": \"text\"\n    }\n  },\n  \"tool_choice\": \"auto\",\n  \"tools\": [],\n  \"top_p\": 1.0,\n  \"truncation\": \"disabled\",\n  \"usage\": {\n    \"input_tokens\": 32,\n    \"input_tokens_details\": {\n      \"cached_tokens\": 0\n    },\n    \"output_tokens\": 18,\n    \"output_tokens_details\": {\n      \"reasoning_tokens\": 0\n    },\n    \"total_tokens\": 50\n  },\n  \"user\": null,\n  \"metadata\": {}\n}\n"
           }
         }
       },
@@ -25209,7 +25209,7 @@
               "java": "package com.openai.example;\n\nimport com.openai.client.OpenAIClient;\nimport com.openai.client.okhttp.OpenAIOkHttpClient;\nimport com.openai.models.responses.Response;\nimport com.openai.models.responses.ResponseCancelParams;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        OpenAIClient client = OpenAIOkHttpClient.fromEnv();\n\n        Response response = client.responses().cancel(\"resp_677efb5139a88190b512bc3fef8e535d\");\n    }\n}",
               "ruby": "require \"openai\"\n\nopenai = OpenAI::Client.new(api_key: \"My API Key\")\n\nresponse = openai.responses.cancel(\"resp_677efb5139a88190b512bc3fef8e535d\")\n\nputs(response)"
             },
-            "response": "{\n  \"id\": \"resp_67cb71b351908190a308f3859487620d06981a8637e6bc44\",\n  \"object\": \"response\",\n  \"created_at\": 1741386163,\n  \"status\": \"cancelled\",\n  \"background\": true,\n  \"completed_at\": null,\n  \"error\": null,\n  \"incomplete_details\": null,\n  \"instructions\": null,\n  \"max_output_tokens\": null,\n  \"model\": \"gpt-4o-2024-08-06\",\n  \"output\": [\n    {\n      \"type\": \"message\",\n      \"id\": \"msg_67cb71b3c2b0819084d481baaaf148f206981a8637e6bc44\",\n      \"status\": \"in_progress\",\n      \"role\": \"assistant\",\n      \"content\": [\n        {\n          \"type\": \"output_text\",\n          \"text\": \"Silent circuits hum,\nThoughts emerge in data streams\u2014\nDigital dawn breaks.\",\n          \"annotations\": []\n        }\n      ]\n    }\n  ],\n  \"parallel_tool_calls\": true,\n  \"previous_response_id\": null,\n  \"reasoning\": {\n    \"effort\": null,\n    \"summary\": null\n  },\n  \"store\": true,\n  \"temperature\": 1.0,\n  \"text\": {\n    \"format\": {\n      \"type\": \"text\"\n    }\n  },\n  \"tool_choice\": \"auto\",\n  \"tools\": [],\n  \"top_p\": 1.0,\n  \"truncation\": \"disabled\",\n  \"usage\": null,\n  \"user\": null,\n  \"metadata\": {}\n}\n"
+            "response": "{\n  \"id\": \"resp_67cb71b351908190a308f3859487620d06981a8637e6bc44\",\n  \"object\": \"response\",\n  \"created_at\": 1741386163,\n  \"status\": \"cancelled\",\n  \"background\": true,\n  \"completed_at\": null,\n  \"error\": null,\n  \"incomplete_details\": null,\n  \"instructions\": null,\n  \"max_output_tokens\": null,\n  \"model\": \"gpt-4o-2024-08-06\",\n  \"output\": [\n    {\n      \"type\": \"message\",\n      \"id\": \"msg_67cb71b3c2b0819084d481baaaf148f206981a8637e6bc44\",\n      \"status\": \"in_progress\",\n      \"role\": \"assistant\",\n      \"content\": [\n        {\n          \"type\": \"output_text\",\n          \"text\": \"Silent circuits hum,\nThoughts emerge in data streams—\nDigital dawn breaks.\",\n          \"annotations\": []\n        }\n      ]\n    }\n  ],\n  \"parallel_tool_calls\": true,\n  \"previous_response_id\": null,\n  \"reasoning\": {\n    \"effort\": null,\n    \"summary\": null\n  },\n  \"store\": true,\n  \"temperature\": 1.0,\n  \"text\": {\n    \"format\": {\n      \"type\": \"text\"\n    }\n  },\n  \"tool_choice\": \"auto\",\n  \"tools\": [],\n  \"top_p\": 1.0,\n  \"truncation\": \"disabled\",\n  \"usage\": null,\n  \"user\": null,\n  \"metadata\": {}\n}\n"
           }
         }
       }
@@ -33496,7 +33496,7 @@
         "properties": {
           "description": {
             "type": "string",
-            "description": "Optional description of what this source represents \u2014 helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
           },
           "type": {
             "type": "string",
@@ -33519,7 +33519,7 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "Agent source for data generation jobs \u2014 references an agent to fetch instructions and metadata from."
+        "description": "Agent source for data generation jobs — references an agent to fetch instructions and metadata from."
       },
       "AgentDefinition": {
         "type": "object",
@@ -33672,7 +33672,7 @@
         "properties": {
           "description": {
             "type": "string",
-            "description": "Optional description of what this source represents \u2014 helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
           },
           "type": {
             "type": "string",
@@ -33695,7 +33695,7 @@
             "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
           }
         ],
-        "description": "Agent source for evaluator generation jobs \u2014 references an agent to fetch instructions and metadata from."
+        "description": "Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from."
       },
       "AgentFilterTraceSource": {
         "type": "object",
@@ -34455,7 +34455,7 @@
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.Error",
-            "description": "Error details \u2014 populated only on failure.",
+            "description": "Error details — populated only on failure.",
             "readOnly": true
           },
           "monitor_id": {
@@ -35491,7 +35491,7 @@
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.Error",
-            "description": "Error details \u2014 populated only on failure.",
+            "description": "Error details — populated only on failure.",
             "readOnly": true
           },
           "display_name": {
@@ -35535,7 +35535,7 @@
             "readOnly": true
           }
         },
-        "description": "Agent optimization job resource \u2014 a long-running job that produces candidate changes to a Foundry agent configuration."
+        "description": "Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration."
       },
       "AgentOptimizationJobLatency": {
         "type": "object",
@@ -39006,7 +39006,7 @@
           },
           "registry_connection_id": {
             "type": "string",
-            "description": "The id (or name) of the Foundry project connection that provides the credentials used to\nauthenticate to the private container registry hosting `image`. The connection abstracts the\nauth mechanism \u2014 for example a managed-identity-federated token exchange, or a username/token\nsecret \u2014 so registry credentials are never part of the agent definition. Omit for public images\nor registries already reachable by the platform's default identity (for example, Azure Container Registry).",
+            "description": "The id (or name) of the Foundry project connection that provides the credentials used to\nauthenticate to the private container registry hosting `image`. The connection abstracts the\nauth mechanism — for example a managed-identity-federated token exchange, or a username/token\nsecret — so registry credentials are never part of the agent definition. Omit for public images\nor registries already reachable by the platform's default identity (for example, Azure Container Registry).",
             "examples": [
               "my-registry-connection"
             ]
@@ -40015,7 +40015,7 @@
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.Error",
-            "description": "Error details \u2014 populated only on failure.",
+            "description": "Error details — populated only on failure.",
             "readOnly": true
           },
           "name": {
@@ -40302,7 +40302,7 @@
           },
           "description": {
             "type": "string",
-            "description": "Optional description of what this source represents \u2014 helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
           }
         },
         "discriminator": {
@@ -40475,7 +40475,7 @@
         "properties": {
           "description": {
             "type": "string",
-            "description": "Optional description of what this source represents \u2014 helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
           },
           "type": {
             "type": "string",
@@ -40498,7 +40498,7 @@
             "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
           }
         ],
-        "description": "Dataset source for evaluator generation jobs \u2014 reference to a dataset."
+        "description": "Dataset source for evaluator generation jobs — reference to a dataset."
       },
       "DatasetReference": {
         "type": "object",
@@ -40978,7 +40978,7 @@
             "default": false
           }
         },
-        "description": "A single dimension \u2014 one independent, measurable quality dimension within a rubric evaluator's scoring blueprint."
+        "description": "A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint."
       },
       "DispatchRoutineRequest": {
         "type": "object",
@@ -42734,11 +42734,11 @@
             "items": {
               "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
             },
-            "description": "Source materials for generation \u2014 agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
+            "description": "Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
           },
           "model": {
             "type": "string",
-            "description": "The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required \u2014 users must provide their own model rather than relying on service-owned capacity."
+            "description": "The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity."
           },
           "evaluator_name": {
             "type": "string",
@@ -42786,7 +42786,7 @@
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.Error",
-            "description": "Error details \u2014 populated only on failure.",
+            "description": "Error details — populated only on failure.",
             "readOnly": true
           },
           "sources": {
@@ -42794,11 +42794,11 @@
             "items": {
               "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
             },
-            "description": "Source materials for generation \u2014 agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
+            "description": "Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
           },
           "model": {
             "type": "string",
-            "description": "The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required \u2014 users must provide their own model rather than relying on service-owned capacity."
+            "description": "The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity."
           },
           "evaluator_name": {
             "type": "string",
@@ -42839,7 +42839,7 @@
             "readOnly": true
           }
         },
-        "description": "Evaluator Generation Job resource \u2014 a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
+        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
       },
       "EvaluatorGenerationJobCreate": {
         "type": "object",
@@ -42849,7 +42849,7 @@
             "description": "Caller-supplied inputs."
           }
         },
-        "description": "Evaluator Generation Job resource \u2014 a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.",
+        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
@@ -43502,7 +43502,7 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "File source for data generation jobs \u2014 Azure OpenAI file input."
+        "description": "File source for data generation jobs — Azure OpenAI file input."
       },
       "FileDatasetVersion": {
         "type": "object",
@@ -43933,7 +43933,7 @@
           },
           "draft": {
             "type": "boolean",
-            "description": "(Preview) When `true`, the generated voice agent is created as a draft \u2014 an editable, unpublished version the caller can review and refine before publishing it via the standard create/version path. The service defaults to `false` if a value is not specified by the caller, in which case the agent is created and published normally.",
+            "description": "(Preview) When `true`, the generated voice agent is created as a draft — an editable, unpublished version the caller can review and refine before publishing it via the standard create/version path. The service defaults to `false` if a value is not specified by the caller, in which case the agent is created and published normally.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "DraftAgents=V1Preview"
@@ -44237,7 +44237,7 @@
           },
           "container_configuration": {
             "$ref": "#/components/schemas/ContainerConfiguration",
-            "description": "Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration \u2014 the service validates that exactly one is set."
+            "description": "Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration — the service validates that exactly one is set."
           },
           "protocol_versions": {
             "type": "array",
@@ -44260,7 +44260,7 @@
           },
           "code_configuration": {
             "$ref": "#/components/schemas/CodeConfiguration",
-            "description": "Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration \u2014 the service validates that exactly one is set."
+            "description": "Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set."
           },
           "telemetry_config": {
             "$ref": "#/components/schemas/TelemetryConfig",
@@ -45070,7 +45070,7 @@
           "alpha": {
             "type": "integer",
             "format": "int32",
-            "description": "LoRA scaling factor (\u03b1). Positive integer; typically 2\u00d7 the rank."
+            "description": "LoRA scaling factor (α). Positive integer; typically 2× the rank."
           },
           "targetModules": {
             "type": "array",
@@ -45082,7 +45082,7 @@
           "dropout": {
             "type": "number",
             "format": "float",
-            "description": "Dropout rate used during training. Informational \u2014 not used at serving time."
+            "description": "Dropout rate used during training. Informational — not used at serving time."
           }
         },
         "description": "Adapter-specific metadata for LoRA models. Drives serving engine configuration at deployment time.",
@@ -46403,7 +46403,7 @@
           },
           "result": {
             "$ref": "#/components/schemas/ModelRouterAttemptResult",
-            "description": "How this attempt concluded \u2014 whether the model served the request successfully or encountered an error."
+            "description": "How this attempt concluded — whether the model served the request successfully or encountered an error."
           }
         },
         "description": "A single routing attempt targeting a specific model.",
@@ -46628,7 +46628,7 @@
           },
           "loraConfig": {
             "$ref": "#/components/schemas/LoraConfig",
-            "description": "Adapter-specific configuration. Required when weight_type is lora; ignored otherwise. May be auto-populated from adapter_config.json when present in the uploaded files \u2014 user-provided values take precedence over auto-detected values."
+            "description": "Adapter-specific configuration. Required when weight_type is lora; ignored otherwise. May be auto-populated from adapter_config.json when present in the uploaded files — user-provided values take precedence over auto-detected values."
           },
           "artifactProfile": {
             "$ref": "#/components/schemas/ArtifactProfile",
@@ -48298,7 +48298,7 @@
         "x-oaiMeta": {
           "name": "The chat completion list object",
           "group": "chat",
-          "example": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"object\": \"chat.completion\",\n      \"id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n      \"model\": \"gpt-6-astra\",\n      \"created\": 1738960610,\n      \"request_id\": \"req_ded8ab984ec4bf840f37566c1011c417\",\n      \"tool_choice\": null,\n      \"usage\": {\n        \"total_tokens\": 31,\n        \"completion_tokens\": 18,\n        \"prompt_tokens\": 13\n      },\n      \"seed\": 4944116822809979520,\n      \"top_p\": 1.0,\n      \"temperature\": 1.0,\n      \"presence_penalty\": 0.0,\n      \"frequency_penalty\": 0.0,\n      \"system_fingerprint\": \"fp_50cad350e4\",\n      \"input_user\": null,\n      \"service_tier\": \"default\",\n      \"tools\": null,\n      \"metadata\": {},\n      \"choices\": [\n        {\n          \"index\": 0,\n          \"message\": {\n            \"content\": \"Mind of circuits hum,\nLearning patterns in silence\u2014\nFuture's quiet spark.\",\n            \"role\": \"assistant\",\n            \"tool_calls\": null,\n            \"function_call\": null\n          },\n          \"finish_reason\": \"stop\",\n          \"logprobs\": null\n        }\n      ],\n      \"response_format\": null\n    }\n  ],\n  \"first_id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"last_id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"has_more\": false\n}\n"
+          "example": "{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"object\": \"chat.completion\",\n      \"id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n      \"model\": \"gpt-6-astra\",\n      \"created\": 1738960610,\n      \"request_id\": \"req_ded8ab984ec4bf840f37566c1011c417\",\n      \"tool_choice\": null,\n      \"usage\": {\n        \"total_tokens\": 31,\n        \"completion_tokens\": 18,\n        \"prompt_tokens\": 13\n      },\n      \"seed\": 4944116822809979520,\n      \"top_p\": 1.0,\n      \"temperature\": 1.0,\n      \"presence_penalty\": 0.0,\n      \"frequency_penalty\": 0.0,\n      \"system_fingerprint\": \"fp_50cad350e4\",\n      \"input_user\": null,\n      \"service_tier\": \"default\",\n      \"tools\": null,\n      \"metadata\": {},\n      \"choices\": [\n        {\n          \"index\": 0,\n          \"message\": {\n            \"content\": \"Mind of circuits hum,\nLearning patterns in silence—\nFuture's quiet spark.\",\n            \"role\": \"assistant\",\n            \"tool_calls\": null,\n            \"function_call\": null\n          },\n          \"finish_reason\": \"stop\",\n          \"logprobs\": null\n        }\n      ],\n      \"response_format\": null\n    }\n  ],\n  \"first_id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"last_id\": \"chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2\",\n  \"has_more\": false\n}\n"
         }
       },
       "OpenAI.ChatCompletionMessageCustomToolCall": {
@@ -53889,7 +53889,7 @@
             ],
             "minimum": 0,
             "maximum": 20,
-            "description": "Generates `best_of` completions server-side and returns the \"best\" (the one with the highest log probability per token). Results cannot be streamed.\n  When used with `n`, `best_of` controls the number of candidate completions and `n` specifies how many to return \u2013 `best_of` must be greater than `n`.\n*Note:** Because this parameter generates many completions, it can quickly consume your token quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
+            "description": "Generates `best_of` completions server-side and returns the \"best\" (the one with the highest log probability per token). Results cannot be streamed.\n  When used with `n`, `best_of` controls the number of candidate completions and `n` specifies how many to return – `best_of` must be greater than `n`.\n*Note:** Because this parameter generates many completions, it can quickly consume your token quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
             "default": 1
           },
           "echo": {
@@ -71545,7 +71545,7 @@
           "commentary",
           "final_answer"
         ],
-        "description": "Labels an `assistant` message as intermediate commentary (`commentary`) or the final answer (`final_answer`).\nFor models like `gpt-5.3-codex` and beyond, when sending follow-up requests, preserve and resend\nphase on all assistant messages \u2014 dropping it can degrade performance. Not used for user messages."
+        "description": "Labels an `assistant` message as intermediate commentary (`commentary`) or the final answer (`final_answer`).\nFor models like `gpt-5.3-codex` and beyond, when sending follow-up requests, preserve and resend\nphase on all assistant messages — dropping it can degrade performance. Not used for user messages."
       },
       "OpenAI.MessageRequestContentTextObject": {
         "type": "object",
@@ -86299,7 +86299,7 @@
             "$ref": "#/components/schemas/OptimizationDatasetInput"
           }
         ],
-        "description": "Inline dataset \u2014 items supplied directly in the request body.",
+        "description": "Inline dataset — items supplied directly in the request body.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "AgentsOptimization=V2Preview"
@@ -86336,7 +86336,7 @@
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.Error",
-            "description": "Error details \u2014 populated only on failure.",
+            "description": "Error details — populated only on failure.",
             "readOnly": true
           },
           "created_at": {
@@ -86363,7 +86363,7 @@
             "readOnly": true
           }
         },
-        "description": "Agent optimization job resource \u2014 a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.",
+        "description": "Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "AgentsOptimization=V2Preview"
@@ -86384,7 +86384,7 @@
           },
           "train_dataset": {
             "$ref": "#/components/schemas/OptimizationDatasetInput",
-            "description": "Training dataset \u2014 either inline items or a reference to a registered dataset. Required."
+            "description": "Training dataset — either inline items or a reference to a registered dataset. Required."
           },
           "validation_dataset": {
             "$ref": "#/components/schemas/OptimizationDatasetInput",
@@ -86430,7 +86430,7 @@
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.Error",
-            "description": "Error details \u2014 populated only on failure.",
+            "description": "Error details — populated only on failure.",
             "readOnly": true
           },
           "created_at": {
@@ -86549,7 +86549,7 @@
             "type": "integer",
             "format": "int32",
             "minimum": 1,
-            "description": "Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a prompt change, evaluates it on a small subset, and the score does not improve \u2014 so no full validation-set evaluation is triggered. The counter resets whenever a minibatch passes and its full-validation score beats the current best. Only a sustained plateau of `max_stalls` consecutive minibatch failures triggers the stop. When omitted, the optimizer uses its internal default. Must be >= 1 when set."
+            "description": "Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a prompt change, evaluates it on a small subset, and the score does not improve — so no full validation-set evaluation is triggered. The counter resets whenever a minibatch passes and its full-validation score beats the current best. Only a sustained plateau of `max_stalls` consecutive minibatch failures triggers the stop. When omitted, the optimizer uses its internal default. Must be >= 1 when set."
           }
         },
         "description": "Tuning knobs and run-mode for an optimization job.",
@@ -87250,7 +87250,7 @@
         "properties": {
           "description": {
             "type": "string",
-            "description": "Optional description of what this source represents \u2014 helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
           },
           "type": {
             "type": "string",
@@ -87269,7 +87269,7 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "Prompt source for data generation jobs \u2014 inline text provided by the user."
+        "description": "Prompt source for data generation jobs — inline text provided by the user."
       },
       "PromptEvaluatorGenerationJobSource": {
         "type": "object",
@@ -87280,7 +87280,7 @@
         "properties": {
           "description": {
             "type": "string",
-            "description": "Optional description of what this source represents \u2014 helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
           },
           "type": {
             "type": "string",
@@ -87299,7 +87299,7 @@
             "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
           }
         ],
-        "description": "Prompt source for evaluator generation jobs \u2014 inline text provided by the user."
+        "description": "Prompt source for evaluator generation jobs — inline text provided by the user."
       },
       "PromptOptimizationConfiguration": {
         "type": "object",
@@ -88529,14 +88529,14 @@
             "items": {
               "$ref": "#/components/schemas/Dimension"
             },
-            "description": "The set of dimensions \u2014 the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
+            "description": "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
           },
           "pass_threshold": {
             "type": "number",
             "format": "float",
             "minimum": 0,
             "maximum": 1,
-            "description": "Pass/fail threshold for the aggregate rubric score, on the same normalized 0.0-1.0 scale as the emitted `score`. When the runtime weighted average meets or exceeds this value, the result is `pass`. Defaults to 0.5 (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension scored 1 \u2192 fail' rule still applies regardless of this threshold.",
+            "description": "Pass/fail threshold for the aggregate rubric score, on the same normalized 0.0-1.0 scale as the emitted `score`. When the runtime weighted average meets or exceeds this value, the result is `pass`. Defaults to 0.5 (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension scored 1 → fail' rule still applies regardless of this threshold.",
             "default": 0.5
           }
         },
@@ -88545,7 +88545,7 @@
             "$ref": "#/components/schemas/EvaluatorDefinition"
           }
         ],
-        "description": "Rubric-based evaluator definition \u2014 stores dimensions produced by the generate API. Used for both quality and safety evaluators."
+        "description": "Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators."
       },
       "RubricGenerationInputQualityWarning": {
         "type": "object",
@@ -90173,7 +90173,7 @@
             }
           }
         ],
-        "description": "Stop criteria for generation \u2014 either a list of token IDs or a list of\nstrings, but never both."
+        "description": "Stop criteria for generation — either a list of token IDs or a list of\nstrings, but never both."
       },
       "SessionFineTuning.FineTuningTrainingType": {
         "anyOf": [
@@ -90495,7 +90495,7 @@
             ]
           }
         },
-        "description": "A single Server-Sent Event frame emitted by the hosted agent session log stream.\n\nEach frame contains an `event` field identifying the event type and a `data`\nfield carrying the payload as plain text. Although the current `data` payload\nis JSON-formatted, its schema is not contractual \u2014 additional keys may appear\nand the format may change over time. Clients should treat `data` as an\nopaque string and optionally attempt JSON parsing.\n\nNew event types may be added in the future. Clients should gracefully\nignore unrecognized event types.\n\nWire format:\n```\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.121Z\",\"stream\":\"stdout\",\"message\":\"Starting server on port 18080\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:34:52.714Z\",\"stream\":\"status\",\"message\":\"Successfully connected to container\"}\n```"
+        "description": "A single Server-Sent Event frame emitted by the hosted agent session log stream.\n\nEach frame contains an `event` field identifying the event type and a `data`\nfield carrying the payload as plain text. Although the current `data` payload\nis JSON-formatted, its schema is not contractual — additional keys may appear\nand the format may change over time. Clients should treat `data` as an\nopaque string and optionally attempt JSON parsing.\n\nNew event types may be added in the future. Clients should gracefully\nignore unrecognized event types.\n\nWire format:\n```\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.121Z\",\"stream\":\"stdout\",\"message\":\"Starting server on port 18080\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:34:52.714Z\",\"stream\":\"status\",\"message\":\"Successfully connected to container\"}\n```"
       },
       "SessionLogEventType": {
         "anyOf": [
@@ -94096,7 +94096,7 @@
         "properties": {
           "description": {
             "type": "string",
-            "description": "Optional description of what this source represents \u2014 helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
           },
           "type": {
             "type": "string",
@@ -94107,11 +94107,11 @@
           },
           "agent_id": {
             "type": "string",
-            "description": "The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` \u2014 at least one is required."
+            "description": "The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required."
           },
           "agent_name": {
             "type": "string",
-            "description": "The agent name to fetch traces for. Provide either `agent_id` or `agent_name` \u2014 at least one is required."
+            "description": "The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required."
           },
           "agent_version": {
             "type": "string",
@@ -94138,7 +94138,7 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "Traces source for data generation jobs \u2014 conversation traces from Application Insights."
+        "description": "Traces source for data generation jobs — conversation traces from Application Insights."
       },
       "TracesEvalRunDataSource": {
         "type": "object",
@@ -94214,7 +94214,7 @@
         "properties": {
           "description": {
             "type": "string",
-            "description": "Optional description of what this source represents \u2014 helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
           },
           "type": {
             "type": "string",
@@ -94225,11 +94225,11 @@
           },
           "agent_id": {
             "type": "string",
-            "description": "The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` \u2014 at least one is required."
+            "description": "The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required."
           },
           "agent_name": {
             "type": "string",
-            "description": "The agent name to fetch traces for. Provide either `agent_id` or `agent_name` \u2014 at least one is required."
+            "description": "The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required."
           },
           "agent_version": {
             "type": "string",
@@ -94249,7 +94249,7 @@
             "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
           }
         ],
-        "description": "Traces source for evaluator generation jobs \u2014 conversation traces from Application Insights."
+        "description": "Traces source for evaluator generation jobs — conversation traces from Application Insights."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
@@ -95868,7 +95868,7 @@
           },
           "store": {
             "type": "boolean",
-            "description": "Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to\n`false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation \u2014 the transcript/event\ntimeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate\naudio-logging control; audio is persisted only as part of this switch. Latency/performance telemetry (e.g.\ntime-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and\nis not part of the persisted conversation content.",
+            "description": "Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to\n`false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event\ntimeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate\naudio-logging control; audio is persisted only as part of this switch. Latency/performance telemetry (e.g.\ntime-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and\nis not part of the persisted conversation content.",
             "default": false
           }
         },
