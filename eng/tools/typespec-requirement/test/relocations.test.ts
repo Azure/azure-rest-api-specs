@@ -1,5 +1,5 @@
 import { execa } from "execa";
-import { cp, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from "node:fs/promises";
+import { cp, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, posix } from "node:path";
 import { expect, test } from "vitest";
@@ -66,11 +66,14 @@ async function checkChanges(
   try {
     await cp(join(packageRoot, "src"), join(tool, "src"), { recursive: true });
     await writeFile(join(tool, "package.json"), '{"type":"module"}');
-    await symlink(
-      join(packageRoot, "node_modules"),
-      join(tool, "node_modules"),
-      process.platform === "win32" ? "junction" : "dir",
-    );
+    await mkdir(join(tool, "node_modules/@azure-tools"), { recursive: true });
+    for (const dependency of ["specs-shared", "suppressions"]) {
+      await symlink(
+        await realpath(join(packageRoot, "node_modules/@azure-tools", dependency)),
+        join(tool, "node_modules/@azure-tools", dependency),
+        process.platform === "win32" ? "junction" : "dir",
+      );
+    }
     await git("init", "--quiet");
     await writeFiles(initial);
     await commit();
