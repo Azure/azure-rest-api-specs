@@ -1435,6 +1435,12 @@
         "x-ms-examples": {
           "Runbooks_AddStep_MaximumSet": {
             "$ref": "./examples/Runbooks_AddStep_MaximumSet_Gen.json"
+          },
+          "Runbooks_AddStep_Script": {
+            "$ref": "./examples/Runbooks_AddStep_Script_Gen.json"
+          },
+          "Runbooks_AddStep_ScriptHost": {
+            "$ref": "./examples/Runbooks_AddStep_ScriptHost_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4658,6 +4664,43 @@
       ],
       "x-ms-discriminator-value": "Wave"
     },
+    "RunbookScriptStepAddRequest": {
+      "type": "object",
+      "description": "Request payload for adding a custom script runbook step.",
+      "properties": {
+        "scriptName": {
+          "type": "string",
+          "description": "Identifier of the script to execute.",
+          "maxLength": 256
+        },
+        "executionLocation": {
+          "$ref": "#/definitions/ScriptExecutionLocation",
+          "description": "Location where the script runs."
+        },
+        "executionScope": {
+          "$ref": "#/definitions/ScriptExecutionScope",
+          "description": "Whether the script runs once for the runbook (Once, only valid with Host location) or once per selected entity (PerEntity, not valid with Host location). Required; it is not derived from the execution location."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Migration entity resource names the script targets. Not applicable when the execution location is Host.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "scriptName",
+        "executionLocation",
+        "executionScope"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunbookStepAddRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "common.script"
+    },
     "RunbookStepAddRequest": {
       "type": "object",
       "description": "Request payload for adding a runbook step.",
@@ -4793,7 +4836,8 @@
       "description": "Runbook step reference discriminator.",
       "enum": [
         "common.manual",
-        "common.approval"
+        "common.approval",
+        "common.script"
       ],
       "x-ms-enum": {
         "name": "RunbookStepRef",
@@ -4808,6 +4852,11 @@
             "name": "Approval",
             "value": "common.approval",
             "description": "Approval runbook step."
+          },
+          {
+            "name": "Script",
+            "value": "common.script",
+            "description": "Custom script runbook step."
           }
         ]
       }
@@ -4895,6 +4944,54 @@
         "workstreamIds",
         "displayName"
       ]
+    },
+    "ScriptExecutionLocation": {
+      "type": "string",
+      "description": "Location where a runbook script step runs.",
+      "enum": [
+        "Host",
+        "SourceVM"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptExecutionLocation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Host",
+            "value": "Host",
+            "description": "Runs on the host."
+          },
+          {
+            "name": "SourceVM",
+            "value": "SourceVM",
+            "description": "Runs on the source VM."
+          }
+        ]
+      }
+    },
+    "ScriptExecutionScope": {
+      "type": "string",
+      "description": "Whether a runbook script step runs once for the runbook or once per selected entity.",
+      "enum": [
+        "Once",
+        "PerEntity"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptExecutionScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Once",
+            "value": "Once",
+            "description": "Runs once for the runbook."
+          },
+          {
+            "name": "PerEntity",
+            "value": "PerEntity",
+            "description": "Runs once per selected entity."
+          }
+        ]
+      }
     },
     "ServerMigrationSpecificProperties": {
       "type": "object",
