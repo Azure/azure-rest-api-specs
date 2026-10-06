@@ -104,9 +104,10 @@ gh workflow run branch-cleanup.yaml --repo Azure/azure-rest-api-specs --ref main
 ```
 
 The default branch, protected branches, and sources and targets of open PRs
-(including drafts) are skipped. Long-lived names and prefixes such as `dev-`,
+(including drafts) are skipped. Long-lived names and prefixes such as `dev/`,
 `release-`, `feature/`, `published/`, and `archive/` are also excluded; the complete
 list is at the top of the [script](../.github/workflows/src/branch-cleanup.ts).
+`dev-` branches are eligible under the same age cutoff as other non-Copilot branches.
 Keep a long-lived branch by protecting it or adding it to those exclusions.
 Candidates and their SHAs are logged, and SHA-guarded Git pushes refuse to delete
 changed tips. API and deletion failures fail the workflow.
