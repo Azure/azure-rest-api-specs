@@ -13,6 +13,7 @@
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ext-rg/providers/Microsoft.Resources/deploymentExtensionRuntimes/github-ext",
             "name": "github-ext",
             "type": "Microsoft.Resources/deploymentExtensionRuntimes",
+            "kind": "ContainerApps",
             "location": "eastus",
             "tags": {
               "team": "platform"
@@ -24,22 +25,19 @@
             },
             "properties": {
               "provisioningState": "Succeeded",
-              "hosting": {
-                "runtimeKind": "ContainerApps",
-                "tenantId": "def12345-6789-0abc-def0-123456789abc",
-                "artifactUri": "myacr.azurecr.io/extensions/github:1.0",
-                "audienceAppId": "11111111-1111-1111-1111-111111111111",
-                "scaling": {
-                  "minReplicas": 1,
-                  "maxReplicas": 5,
-                  "concurrentRequestsPerReplica": 10
-                },
-                "resources": {
-                  "cpu": 0.5,
-                  "memory": "1Gi"
-                },
-                "fqdn": "github-ext-app.happyocean-abc12345.eastus.azurecontainerapps.io"
-              }
+              "tenantId": "def12345-6789-0abc-def0-123456789abc",
+              "artifactUri": "myacr.azurecr.io/extensions/github:1.0",
+              "audienceAppId": "11111111-1111-1111-1111-111111111111",
+              "scaling": {
+                "minReplicas": 1,
+                "maxReplicas": 5,
+                "concurrentRequestsPerReplica": 10
+              },
+              "resources": {
+                "cpu": 0.5,
+                "memory": "1Gi"
+              },
+              "fqdn": "github-ext-app.happyocean-abc12345.eastus.azurecontainerapps.io"
             }
           }
         ],

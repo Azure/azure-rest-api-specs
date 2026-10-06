@@ -10,11 +10,12 @@ namespace Microsoft.Resources.DeploymentExtensionRuntimes;
 /**
  * A deployment extension runtime. Represents the regional runtime
  * infrastructure that hosts an Azure Deployments server-side extension. The
- * backend architecture is selected by the discriminated `properties.hosting`
- * property.
+ * `kind` discriminator selects the backend architecture and the shape of
+ * `properties`.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Runtimes are authored mainly in Bicep, where a resource-level kind discriminator narrows the resource body and offers per-kind snippets. No non-legacy template models a polymorphic resource without overriding properties."
 model DeploymentExtensionRuntime
-  is TrackedResource<DeploymentExtensionRuntimeProperties> {
+  is Azure.ResourceManager.Legacy.DiscriminatedTrackedResource<ExtensionRuntimeKind> {
   ...ResourceNameParameter<
     Resource = DeploymentExtensionRuntime,
     KeyName = "runtimeName",
@@ -22,6 +23,44 @@ model DeploymentExtensionRuntime
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-]{0,62}$"
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
+
+@@doc(
+  DeploymentExtensionRuntime.kind,
+  "The backend architecture of the runtime. Selects the shape of `properties` and is immutable after creation."
+);
+
+/**
+ * A `ContainerApps` deployment extension runtime: a customer-managed container
+ * hosted on Azure Container Apps.
+ */
+model ContainerAppsExtensionRuntime extends DeploymentExtensionRuntime {
+  /**
+   * The runtime kind for a customer-managed Azure Container Apps runtime.
+   */
+  kind: "ContainerApps";
+
+  /**
+   * The resource-specific properties for this resource.
+   */
+  properties: ContainerAppsExtensionRuntimeProperties;
+}
+
+/**
+ * A `BuiltIn` deployment extension runtime: a platform-provided extension
+ * backed by a first-party service. It carries no customer-supplied
+ * configuration.
+ */
+model BuiltInExtensionRuntime extends DeploymentExtensionRuntime {
+  /**
+   * The runtime kind for a platform-provided runtime.
+   */
+  kind: "BuiltIn";
+
+  /**
+   * The resource-specific properties for this resource.
+   */
+  properties?: DeploymentExtensionRuntimeProperties;
 }
 
 // The runtime's managed identity is patchable: it is set at create time and can

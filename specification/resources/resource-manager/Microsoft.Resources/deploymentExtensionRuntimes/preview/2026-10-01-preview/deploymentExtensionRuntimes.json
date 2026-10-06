@@ -384,20 +384,50 @@
     }
   },
   "definitions": {
-    "BuiltInHosting": {
+    "BuiltInExtensionRuntime": {
       "type": "object",
-      "description": "Backend configuration for a `BuiltIn` runtime: a platform-provided extension\nthat carries no customer-supplied configuration.",
+      "description": "A `BuiltIn` deployment extension runtime: a platform-provided extension\nbacked by a first-party service. It carries no customer-supplied\nconfiguration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentExtensionRuntimeProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
       "allOf": [
         {
-          "$ref": "#/definitions/RuntimeHosting"
+          "$ref": "#/definitions/DeploymentExtensionRuntime"
         }
       ],
       "x-ms-discriminator-value": "BuiltIn"
     },
-    "ContainerAppsHosting": {
+    "ContainerAppsExtensionRuntime": {
       "type": "object",
-      "description": "Backend configuration for a `ContainerApps` runtime: a customer-managed\ncontainer hosted on Azure Container Apps.",
+      "description": "A `ContainerApps` deployment extension runtime: a customer-managed container\nhosted on Azure Container Apps.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ContainerAppsExtensionRuntimeProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentExtensionRuntime"
+        }
+      ],
+      "x-ms-discriminator-value": "ContainerApps"
+    },
+    "ContainerAppsExtensionRuntimeProperties": {
+      "type": "object",
+      "description": "Properties of a `ContainerApps` runtime: a customer-managed container hosted\non Azure Container Apps.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the runtime.",
+          "readOnly": true
+        },
         "artifactUri": {
           "type": "string",
           "description": "OCI artifact reference for the extension binary, for example\n`registry.azurecr.io/extensions/github:1.0`.",
@@ -470,21 +500,20 @@
       "required": [
         "artifactUri",
         "audienceAppId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RuntimeHosting"
-        }
-      ],
-      "x-ms-discriminator-value": "ContainerApps"
+      ]
     },
     "DeploymentExtensionRuntime": {
       "type": "object",
-      "description": "A deployment extension runtime. Represents the regional runtime\ninfrastructure that hosts an Azure Deployments server-side extension. The\nbackend architecture is selected by the discriminated `properties.hosting`\nproperty.",
+      "description": "A deployment extension runtime. Represents the regional runtime\ninfrastructure that hosts an Azure Deployments server-side extension. The\n`kind` discriminator selects the backend architecture and the shape of\n`properties`.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/DeploymentExtensionRuntimeProperties",
-          "description": "The resource-specific properties for this resource."
+        "kind": {
+          "$ref": "#/definitions/ExtensionRuntimeKind",
+          "description": "The backend architecture of the runtime. Selects the shape of `properties` and is immutable after creation.",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -496,6 +525,10 @@
           ]
         }
       },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
@@ -525,21 +558,14 @@
     },
     "DeploymentExtensionRuntimeProperties": {
       "type": "object",
-      "description": "Properties of a deployment extension runtime. The backend-specific\nconfiguration lives in the discriminated `hosting` sub-property; the remaining\nmembers are read-only outputs common to every runtime.",
+      "description": "Properties common to every deployment extension runtime kind. A `BuiltIn`\nruntime carries only these read-only outputs.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the runtime.",
           "readOnly": true
-        },
-        "hosting": {
-          "$ref": "#/definitions/RuntimeHosting",
-          "description": "The backend configuration for the runtime. The `runtimeKind` discriminator\nselects the backend architecture and the shape of this object."
         }
-      },
-      "required": [
-        "hosting"
-      ]
+      }
     },
     "DeploymentExtensionRuntimeUpdate": {
       "type": "object",
@@ -560,7 +586,7 @@
     },
     "ExtensionRuntimeKind": {
       "type": "string",
-      "description": "The backend architecture of a deployment extension runtime. This selects the\nshape of `properties.hosting` and is immutable after creation.",
+      "description": "The backend architecture of a deployment extension runtime. This is the\nresource `kind` discriminator; it selects the shape of `properties` and is\nimmutable after creation.",
       "enum": [
         "ContainerApps",
         "BuiltIn"
@@ -651,24 +677,6 @@
       },
       "required": [
         "name"
-      ]
-    },
-    "RuntimeHosting": {
-      "type": "object",
-      "description": "Backend configuration for a deployment extension runtime. The `runtimeKind`\ndiscriminator selects the backend architecture and the concrete shape of this\nobject.",
-      "properties": {
-        "runtimeKind": {
-          "$ref": "#/definitions/ExtensionRuntimeKind",
-          "description": "The backend architecture of the runtime. Immutable after creation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "discriminator": "runtimeKind",
-      "required": [
-        "runtimeKind"
       ]
     },
     "RuntimeNetworkProfile": {
