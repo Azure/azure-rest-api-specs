@@ -21,10 +21,13 @@ You help engineers:
 
 ## Local Dependency Setup and Compilation
 
-The user normally opens the agent with **StackHCI as the workspace root**, not the Git repository root. Use PowerShell and Windows paths. Never hard-code a checkout such as `C:\pb\specs2`; resolve the current checkout:
+The user normally opens this agent in the **StackHCI project folder**, not the repository root. Use PowerShell, discover the current checkout, and use absolute paths so the same commands work from either folder. Do not hard-code a checkout or user-profile path.
+
+### Select and Verify the Compiler Before Compiling
+
+Do not use `pnpm exec`, `pnpm run`, `npx tsp`, or a global `tsp` for routine compilation. pnpm can trigger a workspace-wide install before executing the compiler. An isolated project toolchain can be current while the repository-root compiler remains outdated; never recommend the root `node_modules` compiler without verifying it. **Always switch into StackHCI before invoking the compiler, including `--version`: the TypeSpec launcher can select the current directory's compiler even when invoked through an absolute path to another installation.**
 
 ```powershell
-# Works from either the StackHCI folder or the repository root.
 $repoRoot = git rev-parse --show-toplevel
 if ($LASTEXITCODE -ne 0) { throw "Cannot locate the Git repository root." }
 $repoRoot = [System.IO.Path]::GetFullPath($repoRoot)
@@ -33,17 +36,8 @@ if (!(Test-Path (Join-Path $projectRoot 'main.tsp')) -or
     !(Test-Path (Join-Path $projectRoot 'tspconfig.yaml'))) {
   throw "Cannot locate the StackHCI TypeSpec project."
 }
-```
 
-### Use Existing Dependencies First
-
-- Do not run `pnpm install` on every compile. `pnpm exec` and `pnpm run` can trigger automatic workspace dependency restoration when manifests and installed dependencies differ.
-- Prefer the project-local compiler when `StackHCI\node_modules` exists (it may be a junction to an isolated toolchain); otherwise use the repository-root compiler only after version verification. If the project-local directory exists but its compiler is missing/broken, stop and repair it instead of falling back.
-- Never recommend `node .\node_modules\@typespec\compiler\cmd\tsp.js` from the repository root without checking which installation it selects. The root compiler can remain outdated even after the project-local toolchain was upgraded. **Always switch into StackHCI before invoking the compiler, including `--version`: the TypeSpec launcher can select the current directory's compiler even when invoked through an absolute path to another installation.** Use the `Push-Location` block below from either working directory.
-- Before trusting an existing installation, compare the installed compiler, imported TypeSpec libraries, emitter, and ruleset versions with the current checkout's `pnpm-workspace.yaml` catalog and lockfile. A working `--version` command alone does not establish compatibility.
-- Tools do not expire. Refresh dependencies when pins change or dependencies are missing/broken. An older Azure ruleset can fail with `unknown-rule-set: client-sdk`; do not remove the linter configuration to hide a dependency mismatch.
-
-```powershell
+# Prefer the project-local installation, including an isolated-toolchain junction.
 $dependencyRoot = Join-Path $projectRoot 'node_modules'
 if (!(Test-Path $dependencyRoot)) {
   $dependencyRoot = Join-Path $repoRoot 'node_modules'
@@ -70,9 +64,11 @@ try {
 }
 ```
 
-Run compilation **in the foreground**, with output visible. Announce installs and compiles before starting, report meaningful progress for long operations, and report the exit code and elapsed time. Do not launch background agents or detached processes for this workflow. If the execution tool times out while the command continues, monitor that same command rather than starting another.
+Before compiling, also compare installed imported TypeSpec libraries, emitter, and ruleset versions with the current checkout's catalog and lockfile. A compiler version check alone does not verify the entire toolchain. If project-local dependencies exist but are incomplete or stale, repair them rather than silently falling back to the root compiler. Updating root dependencies does not refresh a project-local installation that shadows them.
 
-For formatting, use the same verified compiler rather than `npx`, an unqualified global `tsp`, or `pnpm exec`:
+Run installs and compilation **in the foreground with visible output**. Announce each operation, provide meaningful progress updates during long waits, and report the exit code and elapsed time. Do not use background agents or detached processes. If a tool times out while its command continues, monitor that same command rather than starting another.
+
+Use the same verified compiler for formatting:
 
 ```powershell
 Push-Location $projectRoot
@@ -84,9 +80,9 @@ try {
 }
 ```
 
-### Fresh Clone or Changed Dependency Pins
+### Fresh Clone or Changed Pins
 
-Install from the **Git repository root**, not from StackHCI. Require the Node version specified in the root `package.json`.
+Tools do not expire. Install only when dependencies are missing/broken or checkout pins change. Require the Node version in the root `package.json`. Run normal setup from the **repository root**, then reselect and verify the compiler above:
 
 ```powershell
 Push-Location $repoRoot
@@ -100,19 +96,71 @@ try {
 }
 ```
 
-Then reselect and verify the compiler and run the direct compile above. A project-local `node_modules` shadows repository dependencies: updating the root installation does not refresh an existing isolated project toolchain.
+Before installing, verify that the active executables satisfy the repository pins:
 
-### When the Workspace Install Is Blocked
+```powershell
+node --version
+pnpm --version
+Get-Command node, npm, pnpm | Select-Object Name, Source
+```
 
-- Distinguish registry/authentication failures from TypeSpec diagnostics. Azure feed `401 Unauthorized` responses require an authentication/feed fix; reinstalling pnpm does not fix them. TLS failures must not be worked around by disabling certificate verification.
-- Do not repeatedly retry an already-failing full install, delete the lockfile, disable `minimumReleaseAge`, or add wildcard policy exclusions. Unrelated workspace dependencies, including Git-hosted packages that run nested installs, may block a compile-only task.
-- For compile-only work, an isolated toolchain is an alternative: create an ignored directory under `<repoRoot>\node_modules\.stackhci-toolchain` with its own private `package.json` and `pnpm-workspace.yaml` so installation does not include the parent workspace.
-- Include the compiler, all external libraries imported by this project, the configured emitter/ruleset, and required peers. Derive their versions from the current checkout's catalog/lockfile; never reuse fixed versions from an older checkout. Preserve the repository's release-age policy, scoped exclusions, and applicable overrides in the isolated workspace.
-- Install inside that isolated workspace with `pnpm install --ignore-scripts`, retaining its generated lockfile. If the pnpm launcher is broken, a verified entrypoint for the checkout's pinned pnpm version may be invoked directly with Node; do not hard-code a user-profile path.
-- Only after installation succeeds, link `StackHCI\node_modules` to the isolated workspace's `node_modules` using a Windows directory junction. Inspect any existing directory/junction first and never overwrite or delete it blindly. Confirm the toolchain and link are Git-ignored.
-- Use the project-local direct compiler command above. Keep the toolchain and junction for subsequent runs; do not clean them up as temporary files. When pins change, refresh the isolated manifest and dependencies before compiling.
+The repository currently requires Node `>=24.14.1`; an older Node may initially produce only engine warnings and then fail while preparing `@actions/github-script`. On Windows with NVM, do not assume that installing a version also activated it. Run `nvm use <required-version>` from an elevated PowerShell when the NVM symlink is under `C:\Program Files\nodejs`, open a new terminal if needed, and verify both `node --version` and the command path before retrying.
 
-After compilation, inspect Git status and report generated Swagger and `service.yaml` changes. Do not discard generated output or unrelated user changes. A successful compile is not a substitute for the separately required TypeSpec validation and example checks.
+Do not run `npx ci`. That downloads an unrelated package named `ci`. Avoid `pnpm ci` for routine synchronization because it removes `node_modules`; use `pnpm install --frozen-lockfile`.
+
+### If the Full Workspace Install Fails
+
+- Registry `401 Unauthorized`, `ERR_PNPM_META_FETCH_FAIL`, and TLS `HandshakeFailure` errors are feed/network failures, not TypeSpec compilation errors. Reinstalling pnpm does not fix them.
+- Inspect the effective configuration before changing it:
+
+  ```powershell
+  npm config get registry
+  npm config get userconfig
+  npm config get globalconfig
+  ```
+
+  A user-level `.npmrc` overrides the machine-level registry. The Azure SDK public feed may return `401` for individual scoped packages, while the Microsoft package-feed proxy may return `404` for individual tarballs. Do not switch registries repeatedly without recording which URL and package failed.
+- The repository `minimumReleaseAge` verification can contact `registry.npmjs.org` directly even when package downloads use a configured proxy. If corporate policy blocks that endpoint, pnpm can spend tens of minutes retrying and then report hundreds of unverifiable lockfile entries. This does **not** mean the committed lockfile is stale. Do not run `pnpm clean --lockfile`, regenerate the lockfile, disable TLS verification, or edit the committed policy to hide the network failure.
+- If the pnpm store already contains every required package and the user explicitly accepts skipping only the unreachable local release-age lookup, the bounded emergency command is:
+
+  ```powershell
+  pnpm --config.minimumReleaseAgeExclude="*" install --offline --frozen-lockfile
+  ```
+
+  Never persist the wildcard in `.npmrc` or `pnpm-workspace.yaml`, never use it in CI, and report that local release-age verification was skipped. Omit `--offline` on a fresh machine that still needs package downloads. Prefer fixing network/feed access or using the isolated toolchain below.
+- For compile-only work, create an isolated toolchain under the ignored `<repoRoot>\node_modules\.stackhci-toolchain`, with its own private `package.json` and `pnpm-workspace.yaml` to avoid installing the parent workspace.
+- Include the compiler, all external libraries imported by StackHCI, configured emitter/ruleset, and required peers. Derive versions from the current checkout's catalog/lockfile, preserving release-age policy, scoped exclusions, and applicable overrides. Do not reuse hard-coded versions from another checkout.
+- Install inside the isolated workspace with `pnpm install --ignore-scripts` and retain its generated lockfile. If the launcher is broken, invoke a verified entrypoint for the checkout's pinned pnpm version with Node.
+- After successful installation, link `StackHCI\node_modules` to the isolated toolchain's `node_modules` with a Windows directory junction. Inspect existing paths first; never blindly replace or delete an existing directory/junction. Confirm the toolchain and link are Git-ignored.
+- Keep the isolated toolchain and link for future runs. Refresh them when pins change, then use the verified project-local compiler above. An `unknown-rule-set: client-sdk` error can indicate outdated Azure libraries; do not remove linter configuration to hide it.
+
+After compilation, inspect Git status and report generated Swagger and `service.yaml` changes without discarding output or unrelated edits. Compilation does not replace the separately required TypeSpec validation and example checks.
+
+### Sparse Checkout for StackHCI Work
+
+A development-capable sparse checkout must include the root files (included automatically in cone mode), repository tooling, the complete StackHCI project, and ARM common types:
+
+```powershell
+git clone --filter=blob:none --sparse https://github.com/Azure/azure-rest-api-specs.git
+Set-Location azure-rest-api-specs
+git sparse-checkout set --cone `
+  .github `
+  eng `
+  specification\azurestackhci\resource-manager\Microsoft.AzureStackHCI\StackHCI `
+  specification\common-types\resource-management
+```
+
+Do not select only the `.tsp` files. The project also needs examples, committed generated Swagger, suppressions, service metadata, local guidance, and all referenced ARM common-type versions. The root pnpm workspace needs `.github` and `eng`.
+
+### Breaking-Change Check Triage
+
+Adding an enum/union value to an API version that already exists on the target branch can fail `Swagger BreakingChange` with `AddedEnumValue` and `NoVersionChange`, even when the API version is private preview. This is the same-version/versioning path:
+
+- Expected review label: `VersioningReviewRequired`
+- Appropriate private-preview approval: `Versioning-Approved-PrivatePreview`
+- Do not substitute a `BreakingChange-Approved-*` label unless the check explicitly classified the finding as a cross-version breaking change.
+
+The approval label triggers `Swagger BreakingChange - Set Status`. If the approval label is present but the required status remains stale, inspect the status workflow run. A run cancelled during `Set up job` never evaluates the label. Removing `VersioningReviewRequired` does not repair the status because that label is not an overriding approval label. Re-run the cancelled status workflow or remove and re-add the existing versioning approval label.
 
 ## Extended Resource Patterns
 
@@ -271,10 +319,10 @@ Never skip this prompt. Even small changes like adding a single property or enum
 ## Reference Documentation
 
 For detailed guidance, consult these files in the `.github/eng/` directory:
-- `typespec-style-guide.md` - TypeSpec style and conventions
-- `model-validation.md` - validation expectations
-- `version-creator.md` - creating new API versions
-- `prettier-formatting.md` - formatting guidance
+- `style-guide.md` - TypeSpec style and conventions
+- `workflow.md` - formatting, compilation, and example-validation workflow
+- `new-api-version.md` - creating new API versions
+- `doc-index.md` - service documentation index
 
 ## Code Review Checklist
 
