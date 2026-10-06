@@ -1,11 +1,9 @@
 import "@typespec/rest";
 import "./models.tsp";
 import "@typespec/versioning";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
-using Azure.ClientGenerator.Core;
 
 namespace Playwright;
 
@@ -106,9 +104,9 @@ model PatchRequestBrowserSession {
 @added(Versions.v2026_10_01_preview)
 @doc("The artifact configuration and finalized artifacts for a browser session.")
 model BrowserSessionArtifacts {
-  @doc("Indicates whether artifact collection is enabled for the browser session. This setting can only disable artifact collection for an individual session; it cannot enable it when artifact collection is disabled at the workspace level.")
+  @doc("The artifact collection enablement status for the browser session. This setting can only disable artifact collection for an individual session; it cannot enable it when artifact collection is disabled at the workspace level.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  enabled: boolean = false;
+  enabled: EnablementStatus = EnablementStatus.Disabled;
 
   @doc("The status of artifact collection for the browser session.")
   @visibility(Lifecycle.Read)
@@ -118,18 +116,13 @@ model BrowserSessionArtifacts {
   @visibility(Lifecycle.Read)
   error?: BrowserSessionArtifactsError;
 
-  @doc("The URL of the blob container that stores the artifacts for the browser session.")
-  @visibility(Lifecycle.Read)
-  @clientName("containerUri", "csharp")
-  containerUrl?: url;
-
   @doc("The finalized artifacts uploaded for the browser session.")
   @visibility(Lifecycle.Read)
   artifacts?: BrowserSessionArtifact[];
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The status of artifact collection for a browser session.")
+@doc("The runtime status of artifact collection for a browser session.")
 union BrowserSessionArtifactsStatus {
   string,
 
@@ -159,9 +152,9 @@ model BrowserSessionArtifactsError {
 @added(Versions.v2026_10_01_preview)
 @doc("An artifact uploaded for a browser session.")
 model BrowserSessionArtifact {
-  @doc("The URL of the individual artifact in the blob container.")
+  @doc("The URI of the individual artifact for the browser session.")
   @visibility(Lifecycle.Read)
-  url: url;
+  uri: url;
 
   @doc("The type of the uploaded artifact.")
   @visibility(Lifecycle.Read)
