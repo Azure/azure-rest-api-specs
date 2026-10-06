@@ -4023,7 +4023,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostControlListResult"
+              "$ref": "#/definitions/CostControlListResponse"
             }
           },
           "default": {
@@ -4083,7 +4083,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/CostControlResponse"
             },
             "headers": {
               "ETag": {
@@ -4159,7 +4159,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/CostControlResponse"
             },
             "headers": {
               "ETag": {
@@ -4171,7 +4171,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/CostControlResponse"
             },
             "headers": {
               "ETag": {
@@ -4236,7 +4236,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CostControlPatch"
+              "$ref": "#/definitions/CostControlPatchRequest"
             }
           }
         ],
@@ -4244,7 +4244,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/CostControlResponse"
             },
             "headers": {
               "ETag": {
@@ -16901,7 +16901,7 @@
       "description": "A cost control owned by a Cognitive Services account.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CostControlProperties",
+          "$ref": "#/definitions/CostControlPropertiesRequest",
           "description": "The resource-specific properties for this resource."
         },
         "etag": {
@@ -17020,7 +17020,7 @@
         ]
       }
     },
-    "CostControlListResult": {
+    "CostControlListResponse": {
       "type": "object",
       "description": "A page of cost controls.",
       "properties": {
@@ -17033,7 +17033,7 @@
           "type": "array",
           "description": "The cost controls in this page.",
           "items": {
-            "$ref": "#/definitions/CostControl"
+            "$ref": "#/definitions/CostControlResponse"
           },
           "x-ms-identifiers": [
             "name"
@@ -17100,17 +17100,7 @@
       "description": "A non-empty value used to match a trusted request attribute.",
       "minLength": 1
     },
-    "CostControlPatch": {
-      "type": "object",
-      "description": "The request used to update a cost control.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CostControlPatchProperties",
-          "description": "The cost control properties to update."
-        }
-      }
-    },
-    "CostControlPatchProperties": {
+    "CostControlPatchPropertiesRequest": {
       "type": "object",
       "description": "The properties that can be changed on a cost control.",
       "properties": {
@@ -17126,11 +17116,21 @@
           "minItems": 1,
           "maxItems": 50,
           "items": {
-            "$ref": "#/definitions/CostControlRule"
+            "$ref": "#/definitions/CostControlRuleRequest"
           },
           "x-ms-identifiers": [
             "name"
           ]
+        }
+      }
+    },
+    "CostControlPatchRequest": {
+      "type": "object",
+      "description": "The request used to update a cost control.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CostControlPatchPropertiesRequest",
+          "description": "The cost control properties to update."
         }
       }
     },
@@ -17164,9 +17164,9 @@
         ]
       }
     },
-    "CostControlProperties": {
+    "CostControlPropertiesRequest": {
       "type": "object",
-      "description": "The customer-authored settings of a cost control.",
+      "description": "The customer-authored settings used to create or replace a cost control.",
       "properties": {
         "displayName": {
           "type": "string",
@@ -17179,7 +17179,7 @@
           "minItems": 1,
           "maxItems": 50,
           "items": {
-            "$ref": "#/definitions/CostControlRule"
+            "$ref": "#/definitions/CostControlRuleRequest"
           },
           "x-ms-identifiers": [
             "name"
@@ -17190,9 +17190,55 @@
         "rules"
       ]
     },
-    "CostControlRule": {
+    "CostControlPropertiesResponse": {
       "type": "object",
-      "description": "A cost limit and the population to which it applies.",
+      "description": "The customer-authored settings returned for a cost control.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "An optional human-readable name for the cost control.",
+          "maxLength": 128
+        },
+        "rules": {
+          "type": "array",
+          "description": "The rules enforced by the cost control.",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/CostControlRuleResponse"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "rules"
+      ]
+    },
+    "CostControlResponse": {
+      "type": "object",
+      "description": "A cost control returned by the service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CostControlPropertiesResponse",
+          "description": "The customer-authored settings of the cost control."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag used for optimistic concurrency.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CostControlRuleRequest": {
+      "type": "object",
+      "description": "A cost limit and the population to which it applies in a create or update request.",
       "properties": {
         "name": {
           "type": "string",
@@ -17244,6 +17290,72 @@
           "description": "The optional actions evaluated as consumption approaches the configured amount. Omitted, null, or empty thresholds define an audit-only rule. Explicit audit thresholds must use a value of zero. Only an explicit block threshold enforces a limit.",
           "maxItems": 10,
           "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/CostControlThreshold"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "counterKeys",
+        "unit",
+        "amount"
+      ]
+    },
+    "CostControlRuleResponse": {
+      "type": "object",
+      "description": "A cost limit and the population to which it applies.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The stable rule identifier, unique within the cost control without regard to case.",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "counterKeys": {
+          "type": "array",
+          "description": "The built-in dimension used to partition consumption. The initial preview supports exactly one dimension.",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/CostControlDimension"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "unit": {
+          "$ref": "#/definitions/CostControlUnit",
+          "description": "The unit used for the cost control amount and absolute thresholds."
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum consumption allowed by this rule, expressed in the selected unit."
+        },
+        "period": {
+          "$ref": "#/definitions/CostControlPeriod",
+          "description": "The calendar-aligned UTC renewal period. This property is required for recurring rules and omitted for non-recurring rules."
+        },
+        "recurring": {
+          "type": "boolean",
+          "description": "Whether the cost control renews. The default is true.",
+          "default": true
+        },
+        "match": {
+          "$ref": "#/definitions/CostControlMatch",
+          "description": "Trusted request attributes and allowed values used to select matching requests."
+        },
+        "thresholds": {
+          "type": "array",
+          "description": "The optional actions evaluated as consumption approaches the configured amount. Omitted or empty thresholds define an audit-only rule. Explicit audit thresholds must use a value of zero. Only an explicit block threshold enforces a limit.",
+          "maxItems": 10,
           "items": {
             "$ref": "#/definitions/CostControlThreshold"
           },

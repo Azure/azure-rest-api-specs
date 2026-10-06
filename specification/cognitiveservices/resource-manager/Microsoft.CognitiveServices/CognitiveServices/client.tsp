@@ -1267,3 +1267,20 @@ op regenerateKeyCustom(
 );
 @@clientName(CostControl, "CognitiveServicesAccountCostControl", "csharp");
 @@alternateType(CostControl.etag, eTag, "csharp");
+@@clientName(CostControlResponse, "CostControlResult", "csharp");
+@@clientName(CostControlPropertiesResponse, "CostControlProperties", "csharp");
+@@clientName(CostControlRuleResponse, "CostControlRule", "csharp");
+@@clientName(CostControlListResponse, "CostControlListResult", "csharp");
+@@clientName(
+  CostControlPropertiesRequest,
+  "CostControlCreateOrUpdateProperties",
+  "csharp"
+);
+@@clientName(
+  CostControlPatchPropertiesRequest,
+  "CostControlPatchProperties",
+  "csharp"
+);
+@@clientName(CostControlPatchRequest, "CostControlPatch", "csharp");
+@@clientName(CostControlRuleRequest, "CostControlRuleContent", "csharp");
+@@alternateType(CostControlResponse.etag, eTag, "csharp");

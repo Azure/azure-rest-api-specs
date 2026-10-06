@@ -19,28 +19,47 @@ namespace Microsoft.CognitiveServices;
 @added(Versions.v2026_09_15_preview)
 @parentResource(Account)
 model CostControl
-  is Azure.ResourceManager.ProxyResource<CostControlProperties> {
+  is Azure.ResourceManager.ProxyResource<CostControlPropertiesRequest> {
   ...ResourceNameParameter<
     Resource = CostControl,
     KeyName = "costControlName",
     SegmentName = "costControls",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
   >;
+  ...CostControlEtagProperty;
+}
 
+/**
+ * A cost control returned by the service.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The response model inherits the standard ARM ProxyResource envelope so the generated OpenAPI retains the common-type allOf reference."
+@added(Versions.v2026_09_15_preview)
+model CostControlResponse
+  extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  /**
+   * The customer-authored settings of the cost control.
+   */
+  properties?: CostControlPropertiesResponse;
+
+  ...CostControlEtagProperty;
+}
+
+/**
+ * The entity tag property of a cost control.
+ */
+alias CostControlEtagProperty = {
   /**
    * The entity tag used for optimistic concurrency.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc uses lowercase 'etag' field name — EntityTagProperty uses 'eTag'"
   @visibility(Lifecycle.Read)
   etag?: string;
-}
+};
 
 /**
- * The customer-authored settings of a cost control.
+ * The shared customer-authored settings of a cost control.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Cost controls are synchronously persisted proxy resources and the service contract does not expose provisioningState."
-@added(Versions.v2026_09_15_preview)
-model CostControlProperties {
+alias CostControlPropertiesBase<Rule> = {
   /**
    * An optional human-readable name for the cost control.
    */
@@ -53,14 +72,32 @@ model CostControlProperties {
   @minItems(1)
   @maxItems(50)
   @identifiers(#["name"])
-  rules: CostControlRule[];
+  rules: Rule[];
+};
+
+/**
+ * The customer-authored settings returned for a cost control.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Cost controls are synchronously persisted proxy resources and the service contract does not expose provisioningState."
+@added(Versions.v2026_09_15_preview)
+model CostControlPropertiesResponse {
+  ...CostControlPropertiesBase<CostControlRuleResponse>;
+}
+
+/**
+ * The customer-authored settings used to create or replace a cost control.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Cost controls are synchronously persisted proxy resources and the service contract does not expose provisioningState."
+@added(Versions.v2026_09_15_preview)
+model CostControlPropertiesRequest {
+  ...CostControlPropertiesBase<CostControlRuleRequest>;
 }
 
 /**
  * The properties that can be changed on a cost control.
  */
 @added(Versions.v2026_09_15_preview)
-model CostControlPatchProperties {
+model CostControlPatchPropertiesRequest {
   /**
    * An optional human-readable name for the cost control. Set this property to null to clear it.
    */
@@ -74,18 +111,18 @@ model CostControlPatchProperties {
   @minItems(1)
   @maxItems(50)
   @identifiers(#["name"])
-  rules?: CostControlRule[];
+  rules?: CostControlRuleRequest[];
 }
 
 /**
  * The request used to update a cost control.
  */
 @added(Versions.v2026_09_15_preview)
-model CostControlPatch {
+model CostControlPatchRequest {
   /**
    * The cost control properties to update.
    */
-  properties?: CostControlPatchProperties;
+  properties?: CostControlPatchPropertiesRequest;
 }
 
 /**
@@ -119,10 +156,9 @@ model CostControlConnections {
 }
 
 /**
- * A cost limit and the population to which it applies.
+ * The properties shared by cost control rules in requests and responses.
  */
-@added(Versions.v2026_09_15_preview)
-model CostControlRule {
+alias CostControlRuleProperties = {
   /**
    * The stable rule identifier, unique within the cost control without regard to case.
    */
@@ -165,6 +201,29 @@ model CostControlRule {
    * Trusted request attributes and allowed values used to select matching requests.
    */
   match?: CostControlMatch;
+};
+
+/**
+ * A cost limit and the population to which it applies.
+ */
+@added(Versions.v2026_09_15_preview)
+model CostControlRuleResponse {
+  ...CostControlRuleProperties;
+
+  /**
+   * The optional actions evaluated as consumption approaches the configured amount. Omitted or empty thresholds define an audit-only rule. Explicit audit thresholds must use a value of zero. Only an explicit block threshold enforces a limit.
+   */
+  @maxItems(10)
+  @identifiers(#[])
+  thresholds?: CostControlThreshold[];
+}
+
+/**
+ * A cost limit and the population to which it applies in a create or update request.
+ */
+@added(Versions.v2026_09_15_preview)
+model CostControlRuleRequest {
+  ...CostControlRuleProperties;
 
   /**
    * The optional actions evaluated as consumption approaches the configured amount. Omitted, null, or empty thresholds define an audit-only rule. Explicit audit thresholds must use a value of zero. Only an explicit block threshold enforces a limit.
@@ -382,7 +441,7 @@ union CostControlThresholdAction {
  * A page of cost controls.
  */
 @added(Versions.v2026_09_15_preview)
-model CostControlListResult {
+model CostControlListResponse {
   /**
    * The link used to get the next page of cost controls.
    */
@@ -394,7 +453,7 @@ model CostControlListResult {
    */
   @pageItems
   @identifiers(#["name"])
-  value: CostControl[];
+  value: CostControlResponse[];
 }
 
 /**
@@ -449,7 +508,7 @@ interface CostControls {
    */
   get is ArmResourceRead<
     CostControl,
-    Response = ArmResponse<CostControl> & CostControlEtagHeader
+    Response = ArmResponse<CostControlResponse> & CostControlEtagHeader
   >;
 
   /**
@@ -459,8 +518,10 @@ interface CostControls {
     CostControl,
     Parameters = CostControlCreateOrUpdateHeaders,
     Response =
-      | (ArmResourceUpdatedResponse<CostControl> & CostControlEtagHeader)
-      | (ArmResourceCreatedSyncResponse<CostControl> & CostControlEtagHeader)
+      | (ArmResourceUpdatedResponse<CostControlResponse> &
+          CostControlEtagHeader)
+      | (ArmResourceCreatedSyncResponse<CostControlResponse> &
+          CostControlEtagHeader)
   >;
 
   /**
@@ -468,9 +529,9 @@ interface CostControls {
    */
   update is ArmCustomPatchSync<
     CostControl,
-    CostControlPatch,
+    CostControlPatchRequest,
     Parameters = CostControlIfMatchHeader,
-    Response = ArmResponse<CostControl> & CostControlEtagHeader
+    Response = ArmResponse<CostControlResponse> & CostControlEtagHeader
   >;
 
   /**
@@ -486,6 +547,6 @@ interface CostControls {
    */
   list is ArmResourceListByParent<
     CostControl,
-    Response = CostControlListResult
+    Response = CostControlListResponse
   >;
 }
