@@ -139,19 +139,6 @@ directive:
       only, and the only DELETE operations under config are item-level deletes within a collection such as
       appsettings/{key} and connectionstrings/{name}. A DELETE on the singleton would carry no semantic distinct from
       PUT with an empty body.
-  - suppress: PathForResourceAction
-    from: openapi.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress/list"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress/list"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress:validate"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress:validate"]
-    reason: >-
-      egress is a Microsoft.Web sites/config singleton, so list and validate are POST actions on the singleton itself
-      rather than on a resource collection with a resource-name parameter. The paths intentionally end with the fixed
-      singleton name plus the action, matching the existing sites/config action paths such as appsettings/list and
-      connectionstrings/list. The list action is the gated read path for this resource, since the singleton
-      intentionally exposes no GET.
 ```
 
 ### Tag: package-2026-09
