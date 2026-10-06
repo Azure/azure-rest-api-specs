@@ -26,8 +26,10 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          # git show lazily fetches blobs outside the sparse checkout, including in the private repo.
+          persist-credentials: true
           # We compare HEAD (PR merge commit) against HEAD^ (base) via git diff,
           # so we only need enough history to include the merge commit and its parent.
           fetch-depth: 2
@@ -41,12 +43,12 @@ jobs:
 
       - id: arm-auto-signoff-code
         name: ARM Auto SignOff - Analyze Code
-        uses: actions/github-script@v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           result-encoding: json
           script: |
             const { default: armAutoSignoffCode } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-code.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-code.ts');
             return await armAutoSignoffCode({ github, context, core });
 
       # Upload artifacts with individual results

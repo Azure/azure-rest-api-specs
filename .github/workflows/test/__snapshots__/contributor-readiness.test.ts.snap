@@ -1,0 +1,48 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`contributor readiness > renders concise, red-marked user findings 1`] = `
+"## Contributor readiness: required access
+
+> [!WARNING]
+> **The access issues below can prevent PR approvals from counting or block Azure DevOps pipeline runs.**
+
+| User / area | Access issue | PR impact |
+| --- | --- | --- |
+| 🔴 **[author-example](https://github.com/author-example)** | [Azure](https://github.com/orgs/Azure/people?query=author-example) membership not public.<br>No repository write access. | PR author cannot run Azure DevOps pipelines for this PR. |
+| 🔴 **[reviewer-example](https://github.com/reviewer-example)** | No repository write access. | Reviewer approval does not count toward required reviews \\(GitHub's green approval check\\). This reviewer must set up or renew their access. |
+
+Internal contributors: [setup / renew required access](https://aka.ms/azsdk/access). Recheck: \`/azsdk check-access\`.
+
+<details><summary>Contributors with verified access (1)</summary>
+
+Public Azure membership and repository write access verified.
+
+| User | Roles |
+| --- | --- |
+| [verified-example](https://github.com/verified-example) | committer |
+
+</details>
+
+Non-blocking report; external fork contributions are allowed. GitHub review rules still apply."
+`;
+
+exports[`contributor readiness > renders incomplete findings without introducing Markdown or mentions 1`] = `
+"## Contributor readiness: required access
+
+> [!WARNING]
+> **The access issues below can prevent PR approvals from counting or block Azure DevOps pipeline runs.**
+
+| User / area | Access issue | PR impact |
+| --- | --- | --- |
+| 🟡 **&#64;org/team &#124; &lt;script&gt;** | Account \\[unavailable\\]\\(https://example.com\\) &#96;unknown&#96; | Not determined. |
+
+Internal contributors: [setup / renew required access](https://aka.ms/azsdk/access). Recheck: \`/azsdk check-access\`.
+
+Non-blocking report; external fork contributions are allowed. GitHub review rules still apply."
+`;
+
+exports[`contributor readiness > renders the clean report consistently 1`] = `
+"## Contributor readiness: required access
+
+✅ No contributor-readiness issues found."
+`;
