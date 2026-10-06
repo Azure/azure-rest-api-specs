@@ -20,6 +20,8 @@ export interface SuppressionRecord {
   anchorPath: string;
   location: SourceLocation;
   rawText: string;
+  /** Inline-only: whether a diagnostic matched during this snapshot's compilation. */
+  used?: boolean;
   ruleMetadata?: RuleMetadata;
 }
 

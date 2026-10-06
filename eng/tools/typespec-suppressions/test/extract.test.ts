@@ -45,15 +45,49 @@ describe("extractTspconfigSuppressions", () => {
 });
 
 describe("extractInlineSuppressions", () => {
-  it("reports suppressions on and inside block namespaces", () => {
-    const suppressions = extractInlineSuppressions(
+  it("tracks cross-file diagnostics while keeping imported shared files out of the report", async () => {
+    const sources = new Map([
+      [
+        "demo/main.tsp",
+        'import "../shared";\n#suppress "deprecated" "kept"\nmodel Widget { value: Old; }',
+      ],
+    ]);
+    const suppressions = await extractInlineSuppressions("demo", sources, {
+      readFile: (sourcePath) =>
+        Promise.resolve(
+          sourcePath === "shared/main.tsp"
+            ? '#deprecated "old"\n#suppress "deprecated" "shared"\nmodel Old {}'
+            : sources.get(sourcePath),
+        ),
+      stat: (sourcePath) =>
+        Promise.resolve(
+          sourcePath === "shared" || sourcePath === "shared/main.tsp"
+            ? {
+                isDirectory: () => sourcePath === "shared",
+                isFile: () => sourcePath === "shared/main.tsp",
+              }
+            : undefined,
+        ),
+    });
+    expect(suppressions).toMatchObject([
+      { sourceFile: "demo/main.tsp", ruleName: "deprecated", used: true },
+    ]);
+    expect(suppressions).toHaveLength(1);
+  });
+
+  it("reports suppressions on and inside block namespaces", async () => {
+    const suppressions = await extractInlineSuppressions(
       "demo",
-      "demo/main.tsp",
-      `#suppress "library/namespace" "namespace reason"
+      new Map([
+        [
+          "demo/main.tsp",
+          `#suppress "library/namespace" "namespace reason"
 namespace Demo.Service {
   #suppress "library/model" "model reason"
   model Widget {}
 }`,
+        ],
+      ]),
     );
     expect(suppressions.map(({ ruleName, anchorPath }) => [ruleName, anchorPath])).toEqual([
       ["library/namespace", "namespace:Demo.Service"],
@@ -61,17 +95,22 @@ namespace Demo.Service {
     ]);
   });
 
-  it("rejects parse errors instead of producing a partial inventory", () => {
-    expect(() =>
-      extractInlineSuppressions("demo", "demo/main.tsp", "#suppress 123\nmodel Widget {}"),
-    ).toThrow("Failed to parse demo/main.tsp:");
+  it("rejects parse errors instead of producing a partial inventory", async () => {
+    await expect(
+      extractInlineSuppressions(
+        "demo",
+        new Map([["demo/main.tsp", "#suppress 123\nmodel Widget {}"]]),
+      ),
+    ).rejects.toThrow("Failed to parse");
   });
 
-  it("extracts inline suppressions with semantic-ish anchors", () => {
-    const suppressions = extractInlineSuppressions(
+  it("extracts inline suppressions with semantic-ish anchors", async () => {
+    const suppressions = await extractInlineSuppressions(
       "specification/demo/resource-manager/Microsoft.Demo/Demo",
-      "specification/demo/resource-manager/Microsoft.Demo/Demo/main.tsp",
-      `namespace Demo.Service;
+      new Map([
+        [
+          "specification/demo/resource-manager/Microsoft.Demo/Demo/main.tsp",
+          `namespace Demo.Service;
 
 model Widget {
   #suppress "@azure-tools/rule-a" "property reason"
@@ -83,6 +122,8 @@ interface Widgets {
   read(): Widget;
 }
 `,
+        ],
+      ]),
     );
 
     expect(suppressions).toEqual([
@@ -95,6 +136,7 @@ interface Widgets {
         anchorPath: "namespace:Demo.Service/model:Widget/property:name",
         location: { line: 4, column: 3 },
         rawText: '#suppress "@azure-tools/rule-a" "property reason"',
+        used: false,
       },
       {
         specPath: "specification/demo/resource-manager/Microsoft.Demo/Demo",
@@ -105,6 +147,7 @@ interface Widgets {
         anchorPath: "namespace:Demo.Service/interface:Widgets/op:read",
         location: { line: 9, column: 3 },
         rawText: '#suppress "@azure-tools/rule-b" "operation reason"',
+        used: false,
       },
     ]);
   });

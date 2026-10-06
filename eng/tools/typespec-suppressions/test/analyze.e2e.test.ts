@@ -3,7 +3,10 @@ import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { analyzeTypeSpecSuppressions } from "../src/index.ts";
+import {
+  analyzeTypeSpecSuppressions,
+  analyzeTypeSpecSuppressionsFromDirectories,
+} from "../src/index.ts";
 
 async function initTempRepo(): Promise<string> {
   const repoRoot = await mkdtemp(path.join(os.tmpdir(), "typespec-suppressions-"));
@@ -93,6 +96,49 @@ describe("analyzeTypeSpecSuppressions", () => {
     await Promise.all(
       tempRepos.splice(0).map((repoRoot) => rm(repoRoot, { recursive: true, force: true })),
     );
+  });
+
+  it("reports usage for each revision without changing suppression identity or approval", async () => {
+    const repoRoot = await initTempRepo();
+    tempRepos.push(repoRoot);
+    const specPath = "specification/demo/Demo";
+    const specFolder = path.join(repoRoot, specPath);
+    await mkdir(specFolder, { recursive: true });
+    const code = "@typespec/compiler/unused-template-parameter";
+    await writeFile(
+      path.join(specFolder, "main.tsp"),
+      `#suppress "${code}" "kept for compatibility"\nmodel Widget<T> { value: string; }`,
+    );
+    await writeFile(
+      path.join(specFolder, "tspconfig.yaml"),
+      `linter:\n  enable:\n    "${code}": false\n`,
+    );
+    git(repoRoot, ["add", "."]);
+    git(repoRoot, ["commit", "-m", "rule disabled"]);
+    const baseRevision = git(repoRoot, ["rev-parse", "HEAD"]);
+    await writeFile(
+      path.join(specFolder, "tspconfig.yaml"),
+      `linter:\n  enable:\n    "${code}": true\n`,
+    );
+    git(repoRoot, ["add", "."]);
+    git(repoRoot, ["commit", "-m", "rule enabled"]);
+    const headRevision = git(repoRoot, ["rev-parse", "HEAD"]);
+    const report = await analyzeTypeSpecSuppressions({
+      cwd: repoRoot,
+      baseRevision,
+      headRevision,
+      specPaths: [specPath],
+    });
+    expect(report.specs[0].baseSuppressions[0].used).toBe(false);
+    expect(report.specs[0].headSuppressions[0].used).toBe(true);
+    expect(report.counts.unchanged).toBe(1);
+    expect(report.requiresApproval).toBe(false);
+    const directoryReport = await analyzeTypeSpecSuppressionsFromDirectories({
+      baseRoot: repoRoot,
+      headRoot: repoRoot,
+      specPaths: [specPath],
+    });
+    expect(directoryReport.specs[0].headSuppressions[0].used).toBe(true);
   });
 
   it("classifies new and changed suppressions from git revisions", async () => {
