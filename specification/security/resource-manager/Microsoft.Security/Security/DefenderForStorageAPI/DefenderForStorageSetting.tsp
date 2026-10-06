@@ -144,6 +144,7 @@ interface DefenderForStorageSettings {
   /**
    * Cancels a Defender for Storage malware scan for the specified storage account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "The legacy ExtensionOperations.ActionSync template registers actions in the list-operation collection, so the CRUD/list response rule also checks this POST action. Cancellation intentionally returns MalwareScan rather than the parent DefenderForStorageSetting."
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
