@@ -839,7 +839,7 @@
         "tags": [
           "MicrosoftEntraAuthentications"
         ],
-        "description": "Updates the service-created Microsoft Entra authentication method. State Enabled enables the feature and State Disabled disables it; no additional properties are required. Disabling the feature does not remove or modify database roles or users previously created through the MicrosoftEntraAdministrators control-plane API or directly through pgaadauth extension functions. The method may be Disabled even when password authentication is also Disabled.",
+        "description": "Updates the service-created Microsoft Entra authentication method. State Enabled enables the feature and State Disabled disables it; no additional properties are required. Disabling the feature does not remove or modify database roles or users previously created through the MicrosoftEntraAdministrators control-plane API or directly through pgaadauth extension functions.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1049,7 +1049,7 @@
         "tags": [
           "PasswordAuthentications"
         ],
-        "description": "Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. This API version supports enabling or disabling the method, initially setting the administrator login, and resetting its password; supported changes can be combined. Disabling cannot include credentials and does not remove or modify existing database users or roles. Credential updates require this method to already be Enabled unless the same request sets state to Enabled. Administrator rename is not supported in this API version. Both authentication methods may be Disabled.",
+        "description": "Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. This API version supports disabling the method and resetting its password. Disabling cannot include credentials and does not remove or modify existing database users or roles. Password updates require this method to already be Enabled. Administrator rename is not supported in this API version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -7884,6 +7884,11 @@
           "$ref": "#/definitions/HorizonDbClusterEncryptionKeyStatus",
           "description": "The validation status of the primary encryption key. This property is returned for AzureKeyVault encryption and is absent for SystemManaged encryption.",
           "readOnly": true
+        },
+        "primaryEncryptionKeyCurrentVersion": {
+          "type": "string",
+          "description": "The current version of the primary encryption key used by the cluster. This property is returned for AzureKeyVault encryption and is absent for SystemManaged encryption.",
+          "readOnly": true
         }
       }
     },
@@ -9250,7 +9255,7 @@
     },
     "PasswordAuthenticationPropertiesForPatchUpdate": {
       "type": "object",
-      "description": "Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. This API version supports enabling or disabling the authentication method, and resetting its password. Supported changes can be combined. Credentials are secrets and are never returned.",
+      "description": "Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. This API version supports enabling or disabling the authentication method, and resetting its password. Supported changes can be combined.",
       "properties": {
         "state": {
           "$ref": "#/definitions/AuthenticationState",
@@ -9357,11 +9362,23 @@
             "update",
             "create"
           ]
+        },
+        "vCores": {
+          "$ref": "#/definitions/PoolVCores",
+          "description": "The number of vCores. Allowed values are 1 through 192.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "discriminator": "type",
       "required": [
-        "type"
+        "type",
+        "computeProcessor",
+        "computeGeneration",
+        "vCores"
       ]
     },
     "PoolComputeModelForPatchUpdate": {
@@ -9392,7 +9409,7 @@
           ]
         },
         "vCores": {
-          "$ref": "#/definitions/ProvisionedPoolVCores",
+          "$ref": "#/definitions/PoolVCores",
           "description": "The number of provisioned vCores. Allowed values are 1 through 192. This property applies only to a Provisioned compute model. Omission preserves the current value.",
           "x-ms-mutability": [
             "update"
@@ -9624,7 +9641,7 @@
         },
         "computeModel": {
           "$ref": "#/definitions/PoolComputeModel",
-          "description": "The compute model for the HorizonDB pool.",
+          "description": "The required compute model for the HorizonDB pool.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -9674,6 +9691,7 @@
         }
       },
       "required": [
+        "computeModel",
         "nodeCount",
         "highAvailability",
         "parameterGroup"
@@ -9797,6 +9815,13 @@
           }
         ]
       }
+    },
+    "PoolVCores": {
+      "type": "integer",
+      "format": "int32",
+      "description": "A provisioned HorizonDB pool compute capacity in vCores, from 1 through 192.",
+      "minimum": 1,
+      "maximum": 192
     },
     "PostgreSqlCapabilityVersion": {
       "type": "string",
@@ -9994,37 +10019,6 @@
         }
       ],
       "x-ms-discriminator-value": "Provisioned"
-    },
-    "ProvisionedHorizonDbPoolComputeModel": {
-      "type": "object",
-      "description": "A provisioned compute model for a HorizonDB pool.",
-      "properties": {
-        "vCores": {
-          "$ref": "#/definitions/ProvisionedPoolVCores",
-          "description": "The number of provisioned vCores. Allowed values are 1 through 192.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "vCores"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PoolComputeModel"
-        }
-      ],
-      "x-ms-discriminator-value": "Provisioned"
-    },
-    "ProvisionedPoolVCores": {
-      "type": "integer",
-      "format": "int32",
-      "description": "A provisioned HorizonDB pool compute capacity in vCores, from 1 through 192.",
-      "minimum": 1,
-      "maximum": 192
     },
     "ProvisioningState": {
       "type": "string",

@@ -561,7 +561,7 @@ interface PasswordAuthentications {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrReplace is ArmResourceCreateOrReplaceAsync<PasswordAuthentication>;
 
-  @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. This API version supports enabling or disabling the method, initially setting the administrator login, and resetting its password; supported changes can be combined. Disabling cannot include credentials and does not remove or modify existing database users or roles. Credential updates require this method to already be Enabled unless the same request sets state to Enabled. Administrator rename is not supported in this API version. Both authentication methods may be Disabled.")
+  @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. This API version supports disabling the method and resetting its password. Disabling cannot include credentials and does not remove or modify existing database users or roles. Password updates require this method to already be Enabled. Administrator rename is not supported in this API version.")
   @autoRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
@@ -589,7 +589,7 @@ interface MicrosoftEntraAuthentications {
     ErrorResponse
   >;
 
-  @doc("Updates the service-created Microsoft Entra authentication method. State Enabled enables the feature and State Disabled disables it; no additional properties are required. Disabling the feature does not remove or modify database roles or users previously created through the MicrosoftEntraAdministrators control-plane API or directly through pgaadauth extension functions. The method may be Disabled even when password authentication is also Disabled.")
+  @doc("Updates the service-created Microsoft Entra authentication method. State Enabled enables the feature and State Disabled disables it; no additional properties are required. Disabling the feature does not remove or modify database roles or users previously created through the MicrosoftEntraAdministrators control-plane API or directly through pgaadauth extension functions.")
   @autoRoute
   @armResourceUpdate(Authentication)
   @patch(#{ implicitOptionality: false })
