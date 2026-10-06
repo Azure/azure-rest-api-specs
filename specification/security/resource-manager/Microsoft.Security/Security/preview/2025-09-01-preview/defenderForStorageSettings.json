@@ -94,7 +94,7 @@
         }
       }
     },
-    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/current": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}": {
       "get": {
         "operationId": "DefenderForStorage_Get",
         "tags": [
@@ -112,6 +112,14 @@
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "settingName",
+            "in": "path",
+            "description": "The Defender for Storage setting name. Only 'current' is supported.",
+            "required": true,
+            "type": "string",
+            "pattern": "^current$"
           }
         ],
         "responses": {
@@ -153,6 +161,14 @@
             "x-ms-skip-url-encoding": true
           },
           {
+            "name": "settingName",
+            "in": "path",
+            "description": "The Defender for Storage setting name. Only 'current' is supported.",
+            "required": true,
+            "type": "string",
+            "pattern": "^current$"
+          },
+          {
             "name": "defenderForStorageSetting",
             "in": "body",
             "description": "Defender for Storage Settings",
@@ -189,7 +205,7 @@
         }
       }
     },
-    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/current/malwareScans/{scanId}": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}": {
       "get": {
         "operationId": "DefenderForStorage_GetMalwareScan",
         "tags": [
@@ -209,6 +225,14 @@
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "settingName",
+            "in": "path",
+            "description": "The Defender for Storage setting name. Only 'current' is supported.",
+            "required": true,
+            "type": "string",
+            "pattern": "^current$"
           },
           {
             "name": "scanId",
@@ -240,7 +264,7 @@
         }
       }
     },
-    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/current/malwareScans/{scanId}/cancelMalwareScan": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/malwareScans/{scanId}/cancelMalwareScan": {
       "post": {
         "operationId": "DefenderForStorage_CancelMalwareScan",
         "tags": [
@@ -260,6 +284,14 @@
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "settingName",
+            "in": "path",
+            "description": "The Defender for Storage setting name. Only 'current' is supported.",
+            "required": true,
+            "type": "string",
+            "pattern": "^current$"
           },
           {
             "name": "scanId",
@@ -291,7 +323,7 @@
         }
       }
     },
-    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/current/startMalwareScan": {
+    "/{resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan": {
       "post": {
         "operationId": "DefenderForStorage_StartMalwareScan",
         "tags": [
@@ -311,6 +343,14 @@
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "settingName",
+            "in": "path",
+            "description": "The Defender for Storage setting name. Only 'current' is supported.",
+            "required": true,
+            "type": "string",
+            "pattern": "^current$"
           }
         ],
         "responses": {
