@@ -854,7 +854,7 @@ const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
         "<b>If you haven't discussed yet:</b><br/>" +
         "Please join the ARM API Modeling Review Office Hours - a drop-in, first-come, first-served session (no booking required):<br/>" +
         "<ul>" +
-        "<li><b>When:</b> Every Tuesday and Thursday, 9:30-10:30 AM PST</li>" +
+        "<li><b>When:</b> Every Tuesday and Thursday, 9:30–10:30 AM PST</li>" +
         `<li><b>How to join:</b> ${href("Join via Teams", "https://aka.ms/apimodelingreview")}</li>` +
         "<li><b>Required Doc:</b> Please use the RP Agent and run the <code>/model-rp-contract</code> skill. " +
         "The agent can interview you or review your design docs, then generate a resource contract, design rationale, " +
