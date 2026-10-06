@@ -90,28 +90,31 @@ export interface ReleasePlanDetails extends Record<string, unknown> {
 }
 
 export interface EnsureReleasePlanResult {
-  outcome: "existing_by_pr" | "existing_by_path" | "created" | "not_found";
+  outcome: "existing_by_id" | "existing_by_pr" | "existing_by_path" | "created" | "not_found";
   releasePlan: ReleasePlanData | null;
-  details: {
-    prUrl: string;
-    tspProjectPath: string;
-    apiVersion: string;
-    apiReleaseType: ApiReleaseType;
-    sdkReleaseType: "beta" | "stable";
-    targetReleaseMonth: string;
-  };
+  details:
+    | { releasePlanId: string }
+    | {
+        prUrl: string;
+        tspProjectPath: string;
+        apiVersion: string;
+        apiReleaseType: ApiReleaseType;
+        sdkReleaseType: "beta" | "stable";
+        targetReleaseMonth: string;
+      };
 }
 
 export interface CommitProjectInfoResult {
   projectInfo: TypeSpecProjectInfo | null;
   prNumber?: number;
   hasNewApiVersionLabel: boolean;
-  isFolderMigration?: boolean;
+  skipReleasePlanAutomation?: boolean;
 }
 
 export interface CliArguments {
   commitSha?: string;
   prNumber?: number;
+  releasePlanId?: string;
   owner: string;
   repo: string;
   workspace: string;

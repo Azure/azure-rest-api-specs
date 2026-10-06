@@ -14,7 +14,7 @@ model ResourceTags {
   tags?: Record<string>;
 }
 
-/** Base connector properties shared across Agent and AgentSpace connectors */
+/** Base connector properties */
 model Connector {
   /** Endpoint of the connector */
   endpoint?: url;
