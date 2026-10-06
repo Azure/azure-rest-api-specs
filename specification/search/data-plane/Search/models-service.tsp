@@ -871,7 +871,6 @@ union AzureOpenAIModelName {
   Gpt52: "gpt-5.2",
 
   /** Gpt54 model. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   Gpt54: "gpt-5.4",
 
@@ -884,22 +883,18 @@ union AzureOpenAIModelName {
   Gpt54Nano: "gpt-5.4-nano",
 
   /** Gpt55 model. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   Gpt55: "gpt-5.5",
 
   /** Gpt56Sol model. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   Gpt56Sol: "gpt-5.6-sol",
 
   /** Gpt56Terra model. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   Gpt56Terra: "gpt-5.6-terra",
 
   /** Gpt56Luna model. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   Gpt56Luna: "gpt-5.6-luna",
 }
