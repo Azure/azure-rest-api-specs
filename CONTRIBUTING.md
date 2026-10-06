@@ -59,6 +59,9 @@ See the [README.md](./README.md) for a description of the directory structure to
 
 ## Pull Requests
 
+Repository label definitions are maintained through pull requests. See
+[repository labels](./eng/README.md#repository-labels) for validation and synchronization guidance.
+
 If you want to contribute to the repository, follow these steps:
 
 1. Fork the repository and create a new branch for your changes.

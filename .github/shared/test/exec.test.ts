@@ -1,9 +1,9 @@
 import { mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
 import { findPackageJSON } from "node:module";
 import { tmpdir } from "node:os";
-import { dirname, join } from "path";
+import { dirname, join } from "node:path";
 import semver from "semver";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   execFile,
@@ -28,6 +28,19 @@ describe("execFile", () => {
   const file = "node";
   const args = ["-e", `console.log("test")`];
   const expected = "test\n";
+
+  it("forwards command-specific environment without mutating the parent", async () => {
+    const original = process.env.TSV_EXEC_TEST;
+    const result = await execFile(
+      process.execPath,
+      ["-e", "process.stdout.write(process.env.TSV_EXEC_TEST)"],
+      {
+        env: { ...process.env, TSV_EXEC_TEST: "child-only" },
+      },
+    );
+    expect(result.stdout).toBe("child-only");
+    expect(process.env.TSV_EXEC_TEST).toBe(original);
+  });
 
   it.each([false, true])("uses debug level for command traces (verbose=%s)", async (verbose) => {
     const log = vi.spyOn(console, "log").mockImplementation(() => {});
@@ -258,6 +271,24 @@ describe("execPnpm", () => {
   it("fails when stdout exceeds maxBuffer", async () => {
     await expect(execPnpm(["--version"], { ...options, maxBuffer: 1 })).rejects.toMatchObject({
       code: "ERR_CHILD_PROCESS_STDIO_MAXBUFFER",
+    });
+  });
+
+  it.each([
+    { stderr: "", messageEnding: "exited with code 7" },
+    { stderr: "command diagnostic", messageEnding: "exited with code 7\ncommand diagnostic" },
+  ])("preserves failure details with stderr $stderr", async ({ stderr, messageEnding }) => {
+    const args = [
+      "exec",
+      "node",
+      "-e",
+      `process.stdout.write('command output'); process.stderr.write(${JSON.stringify(stderr)}); process.exitCode = 7;`,
+    ];
+    await expect(execPnpm(args, options)).rejects.toMatchObject({
+      code: 7,
+      stdout: "command output",
+      stderr,
+      message: `pnpm ${args.join(" ")} ${messageEnding}`,
     });
   });
 

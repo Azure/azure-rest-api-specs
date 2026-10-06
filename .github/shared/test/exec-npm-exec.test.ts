@@ -6,8 +6,8 @@ const { execFile } = vi.hoisted(() => ({
     vi.fn<(file: string, args: string[], options: ExecFileOptions) => Promise<ExecResult>>(),
 }));
 
-vi.mock("util", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("util")>()),
+vi.mock("node:util", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("node:util")>()),
   promisify: () => execFile,
 }));
 
