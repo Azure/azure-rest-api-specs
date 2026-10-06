@@ -287,7 +287,7 @@ export function renderReadiness(participants: Participant[], findings: Readiness
       "Contributor readiness: required access",
       findings.length
         ? [
-            "**The access issues below can prevent PR approvals from counting or block Azure DevOps pipeline runs.** Internal contributors need Azure organization membership and repository write access; private membership cannot be verified.",
+            "> [!WARNING]\n> **The access issues below can prevent PR approvals from counting or block Azure DevOps pipeline runs.**",
             renderReadinessFindings(participants, findings),
             `Internal contributors: ${link("setup / renew required access", ONBOARDING)}. Recheck: ${inlineCode(COMMAND)}.`,
             "Non-blocking report; external fork contributions are allowed. GitHub review rules still apply.",
