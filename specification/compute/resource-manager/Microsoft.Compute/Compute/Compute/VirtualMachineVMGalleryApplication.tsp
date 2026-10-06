@@ -53,12 +53,10 @@ model VirtualMachineVMGalleryApplicationUpdate {
 model VirtualMachineVMGalleryApplicationListResult
   is Azure.Core.Page<VirtualMachineVMGalleryApplication>;
 
-@@doc(
-  VirtualMachineVMGalleryApplicationListResult.value,
+@@doc(VirtualMachineVMGalleryApplicationListResult.value,
   "The list of gallery applications installed on the virtual machine scale set VM."
 );
-@@doc(
-  VirtualMachineVMGalleryApplicationListResult.nextLink,
+@@doc(VirtualMachineVMGalleryApplicationListResult.nextLink,
   "The URI to fetch the next page of gallery applications."
 );
 
@@ -136,10 +134,7 @@ interface VirtualMachineVMGalleryApplications {
   @added(Versions.v2026_09_01)
   delete is VirtualMachineVMGalleryApplicationOps.DeleteWithoutOkAsync<
     VirtualMachineVMGalleryApplication,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -167,19 +162,15 @@ interface VirtualMachineVMGalleryApplications {
   >;
 }
 
-@@doc(
-  VirtualMachineVMGalleryApplication.name,
+@@doc(VirtualMachineVMGalleryApplication.name,
   "The name of the gallery application."
 );
-@@doc(
-  VirtualMachineVMGalleryApplication.properties,
+@@doc(VirtualMachineVMGalleryApplication.properties,
   "The gallery application properties."
 );
-@@doc(
-  VirtualMachineVMGalleryApplications.createOrUpdate::parameters.resource,
+@@doc(VirtualMachineVMGalleryApplications.createOrUpdate::parameters.resource,
   "The gallery application to create or update."
 );
-@@doc(
-  VirtualMachineVMGalleryApplications.update::parameters.properties,
+@@doc(VirtualMachineVMGalleryApplications.update::parameters.properties,
   "The gallery application update."
 );

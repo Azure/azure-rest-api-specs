@@ -35,12 +35,10 @@ model VirtualMachineScaleSetVMGalleryApplication
 model VirtualMachineScaleSetVMGalleryApplicationListResult
   is Azure.Core.Page<VirtualMachineScaleSetVMGalleryApplication>;
 
-@@doc(
-  VirtualMachineScaleSetVMGalleryApplicationListResult.value,
+@@doc(VirtualMachineScaleSetVMGalleryApplicationListResult.value,
   "The list of gallery applications installed on the virtual machine scale set VM."
 );
-@@doc(
-  VirtualMachineScaleSetVMGalleryApplicationListResult.nextLink,
+@@doc(VirtualMachineScaleSetVMGalleryApplicationListResult.nextLink,
   "The URI to fetch the next page of gallery applications."
 );
 
@@ -122,11 +120,9 @@ interface VirtualMachineScaleSetVMGalleryApplications {
   >;
 }
 
-@@doc(
-  VirtualMachineScaleSetVMGalleryApplication.name,
+@@doc(VirtualMachineScaleSetVMGalleryApplication.name,
   "The name of the gallery application."
 );
-@@doc(
-  VirtualMachineScaleSetVMGalleryApplication.properties,
+@@doc(VirtualMachineScaleSetVMGalleryApplication.properties,
   "The gallery application properties."
 );
