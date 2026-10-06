@@ -173,7 +173,8 @@ Run `pnpm run check` in each affected package. All lint, formatting, and test ch
 Cover new or changed behavior and bug regressions with focused tests of repository-owned behavior and integration contracts. Reuse adequate existing coverage for mechanical refactors and dependency/API substitutions; add tests for uncovered repository behavior or compatibility risks, not to reproduce upstream test matrices. Preserve configured coverage requirements and justify removing existing tests.
 
 - Each assertion must catch a concrete behavioral regression, not restate configuration or test a third-party tool's implementation. Formatting-only changes normally need the existing formatter check, not new tests.
-- For YAML/JSON integration tests, inspect parsed values that affect behavior. Do not assert text offsets, file length, indentation, quote style, or display names unless they are part of the contract being tested.
+- Test actual script/runtime behavior, not workflow text. Do not add tests or snapshots that assert workflow or composite-action YAML contents, whether through string matching or parsed fields, including checkout credentials, permissions, action references, triggers, inputs, or step wiring. This applies to new workflows and bug fixes too. Validate configuration changes with the existing actionlint, zizmor, and formatter checks.
+- For other YAML/JSON integration tests, inspect parsed values that affect behavior. Do not assert text offsets, file length, indentation, quote style, or display names unless they are part of the contract being tested.
 - When a test fails after an intentional change, remove obsolete expectations rather than replacing them with assertions that merely lock in the new implementation. Keep the fix scoped to the behavior at issue.
 
 - **Framework**: Vitest
