@@ -763,19 +763,25 @@ model AttestationResult {
    * The time at which the token was issued, in the number of seconds since
    * 1970-01-0T00:00:00Z UTC
    */
-  iat?: float32;
+  #suppress "@microsoft/azure-openapi-validator/IntegerTypeMustHaveFormat" "The unixtime format is present, but this legacy rule only allows int32 or int64."
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  iat?: utcDateTime;
 
   /**
    * The expiration time after which the token is no longer valid, in the number of
    * seconds since 1970-01-0T00:00:00Z UTC
    */
-  exp?: float32;
+  #suppress "@microsoft/azure-openapi-validator/IntegerTypeMustHaveFormat" "The unixtime format is present, but this legacy rule only allows int32 or int64."
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  exp?: utcDateTime;
 
   /**
    * The not before time before which the token cannot be considered valid, in the
    * number of seconds since 1970-01-0T00:00:00Z UTC
    */
-  nbf?: float32;
+  #suppress "@microsoft/azure-openapi-validator/IntegerTypeMustHaveFormat" "The unixtime format is present, but this legacy rule only allows int32 or int64."
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  nbf?: utcDateTime;
 
   /**
    * An RFC 7800 Proof of Possession Key

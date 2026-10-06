@@ -20,24 +20,21 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          # Required since "HEAD^" is passed to TypeSpec-Requirement.ps1
+          persist-credentials: false
+          # Required since "HEAD^" is passed to the TypeSpec Requirement check.
           fetch-depth: 2
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      - run: |
-          eng/scripts/TypeSpec-Requirement.ps1 `
-            -BaseCommitish HEAD^ `
-            -HeadCommitish HEAD `
-        id: tsr-ps1
-        shell: pwsh
+      - run: node eng/tools/typespec-requirement/src/index.ts --base-commitish HEAD^ --head-commitish HEAD
+        id: tsr
 
       # Always add label artifact, even if "brownfield=false", to ensure label is removed when necessary
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results
         with:
           name: "brownfield"
-          value: "${{ steps.tsr-ps1.outputs.brownfield == 'true' }}"
+          value: "${{ steps.tsr.outputs.brownfield == 'true' }}"
