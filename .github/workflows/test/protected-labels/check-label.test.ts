@@ -6,11 +6,11 @@ vi.mock("node:fs/promises", () => ({
   readFile: vi.fn(),
 }));
 vi.mock("js-yaml", () => ({
-  default: { load: vi.fn() },
+  load: vi.fn(),
 }));
 
 import { readFile } from "node:fs/promises";
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 import checkLabel from "../../src/protected-labels/check-label.ts";
 
 function invokeCheckLabel(args: Partial<GitHubScriptArgs>) {

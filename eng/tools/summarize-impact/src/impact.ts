@@ -5,7 +5,7 @@ import { isDeepStrictEqual } from "node:util";
 import { dirname, join, resolve } from "node:path";
 
 import * as commonmark from "commonmark";
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 
 import {
   type ChangeHandler,
