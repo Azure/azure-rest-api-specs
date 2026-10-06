@@ -7054,19 +7054,17 @@ model WorkbenchProperties {
   imageLink: string;
 
   /**
-   * For virtual clusters, an exact Singularity instance type or a full-node Azure VM size. If omitted or null on creation, defaults to Singularity.D4_v3. Foundry Compute ignores this override and uses the pool configuration. Changing the instance type requires the workbench to be stopped.
+   * For virtual clusters, an exact Singularity instance type or a full-node Azure VM size. If omitted on creation, defaults to Singularity.D4_v3. Foundry Compute ignores this override and uses the pool configuration. Changing the instance type requires the workbench to be stopped.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null selects the service fallback on create and resets the instance type on PATCH; omission preserves it on PATCH"
   @added(Versions.v2026_09_15_preview)
-  instanceType?: string | null;
+  instanceType?: string;
 
   /**
-   * GPU count for GPU pools or vCPU count for CPU pools. Must be 1, 2, 4, 8, or a positive multiple of 8. A full-node Azure VM size permits partition selection; omitted or null uses the full node. For an exact Singularity instance type, a supplied count must match that type; the Singularity.D4_v3 fallback accepts 4.
+   * GPU count for GPU pools or vCPU count for CPU pools. Must be 1, 2, 4, 8, or a positive multiple of 8. A full-node Azure VM size permits partition selection; omission uses the full node. For an exact Singularity instance type, a supplied count must match that type; the Singularity.D4_v3 fallback accepts 4.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null selects the full-node or instance-type default count; PATCH omission preserves the current override"
   @added(Versions.v2026_09_15_preview)
   @minValue(1)
-  gpuCount?: int32 | null;
+  gpuCount?: int32;
 
   /**
    * ISO 8601 duration before the idle workbench is automatically shut down (e.g., 'PT30M').

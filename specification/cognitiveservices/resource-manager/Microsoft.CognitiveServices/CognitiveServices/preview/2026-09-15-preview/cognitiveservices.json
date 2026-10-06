@@ -24136,15 +24136,13 @@
         },
         "instanceType": {
           "type": "string",
-          "description": "For virtual clusters, an exact Singularity instance type or a full-node Azure VM size. If omitted or null on creation, defaults to Singularity.D4_v3. Foundry Compute ignores this override and uses the pool configuration. Changing the instance type requires the workbench to be stopped.",
-          "x-nullable": true
+          "description": "For virtual clusters, an exact Singularity instance type or a full-node Azure VM size. If omitted on creation, defaults to Singularity.D4_v3. Foundry Compute ignores this override and uses the pool configuration. Changing the instance type requires the workbench to be stopped."
         },
         "gpuCount": {
           "type": "integer",
           "format": "int32",
-          "description": "GPU count for GPU pools or vCPU count for CPU pools. Must be 1, 2, 4, 8, or a positive multiple of 8. A full-node Azure VM size permits partition selection; omitted or null uses the full node. For an exact Singularity instance type, a supplied count must match that type; the Singularity.D4_v3 fallback accepts 4.",
-          "minimum": 1,
-          "x-nullable": true
+          "description": "GPU count for GPU pools or vCPU count for CPU pools. Must be 1, 2, 4, 8, or a positive multiple of 8. A full-node Azure VM size permits partition selection; omission uses the full node. For an exact Singularity instance type, a supplied count must match that type; the Singularity.D4_v3 fallback accepts 4.",
+          "minimum": 1
         },
         "idleTimeBeforeShutdown": {
           "type": "string",
