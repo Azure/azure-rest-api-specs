@@ -27,16 +27,19 @@ Internal contributors need **Azure organization membership and repository write
 access** for the PR workflow to work correctly. Microsoft organization membership
 is not required by this check. The **Contributor readiness** check reports public
 Azure membership visibility and effective repository access for the PR author,
-commit authors/committers, and all submitted reviewers. It is non-blocking and
-does not change merge rules, but the access requirements are not optional for
-the internal workflow. External fork contributions remain allowed.
+commit authors/committers, and reviewers with an `APPROVED` review. Comments,
+requests for changes, pending reviews and dismissed reviews do not add reviewer
+participants. Authors and commit participants remain included independently.
+The check is non-blocking and does not change merge rules, but the access
+requirements are not optional for the internal workflow. External fork
+contributions remain allowed.
 
 The comment starts with a highlighted warning about the risk to PR approvals and
 pipeline runs, then groups findings by affected user and separates access issues
-from their **PR impact**.
-A PR author without repository write access cannot run Azure
-DevOps pipelines for that PR. A submitted reviewer's approval without write
-access does not count toward required reviews (GitHub's green approval check).
+from their **PR impact**. A PR author without repository write access cannot run
+Azure DevOps pipelines for that PR. A reviewer without write access cannot provide
+an approval that counts toward required reviews (GitHub's green approval check).
+That reviewer must set up or renew their own access, not the PR author.
 Users with both roles see both consequences; commit-only participants do not
 receive author or reviewer consequences. Other GitHub approval rules still apply.
 
@@ -44,14 +47,19 @@ receive author or reviewer consequences. Other GitHub approval rules still apply
 or missing public membership is not evidence of missing repository write access.
 Membership-only findings and unavailable permission lookups do not establish
 pipeline or review failures; their PR impact is reported as undetermined.
-The report links to
-[setup and access renewal](https://aka.ms/azsdk/access); users without findings
-are omitted to keep the report short. The job summary shows the same report.
+The report links to [setup and access renewal](https://aka.ms/azsdk/access).
+When findings exist, a
+collapsed **Contributors with verified access** section lists human participants
+whose public Azure membership and effective repository write access were both
+confirmed, together with their roles. Unverified and unchecked users are never
+listed as passing. Each section shows at most 100 entries. Clean reports omit
+the details section and do not create a comment. The job summary shows the same
+report.
 Organization names in membership findings link to the organization's People page,
 with the affected user's login prefilled in the search.
 
 After changing access, comment `/azsdk check-access` on the PR. The PR author,
-resolved commit participants, submitted reviewers and maintainers can refresh,
+resolved commit participants, approving reviewers and maintainers can refresh,
 including affected participants without write access. One bot comment is updated
 when findings exist and resolved when they are fixed; clean PRs receive only the
 check. Permission changes alone do not trigger an automatic refresh.
@@ -63,15 +71,16 @@ and other approval rules remain GitHub's responsibility. Unmapped identities,
 inaccessible API results, and PRs exceeding the commits API's 250-commit limit are
 reported as incomplete rather than silently passing.
 
-PR opening, reopening, new commits, ready-for-review transitions and submitted
-reviews use an unprivileged notification workflow followed by a trusted
-`workflow_run` publisher. The notifier has no checkout or token permissions;
+PR opening, reopening, new commits, ready-for-review transitions, submitted
+reviews and review dismissals use an unprivileged notification workflow followed
+by a trusted `workflow_run` publisher. The notifier has no checkout or token permissions;
 the publisher runs only default-branch code and resolves PRs from GitHub metadata.
 No `pull_request_target` trigger is used.
 
-Editing or dismissing a review does not rerun the check; those reviewers remain
-included. Fork workflow approval policies can delay automatic refreshes. The
-comment command runs from the default branch and remains available without
+Editing review text does not rerun the check. Dismissing an approval refreshes
+the report so it no longer includes that reviewer solely for the dismissed review.
+Fork workflow approval policies can delay automatic refreshes. The comment
+command runs from the default branch and remains available without
 waiting for the notifier. Do not make this non-blocking check required.
 
 ## Branch cleanup

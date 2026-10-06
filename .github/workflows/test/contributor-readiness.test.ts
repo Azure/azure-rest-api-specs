@@ -102,6 +102,9 @@ describe("contributor readiness", () => {
     expect(publisher.hasIn(["on", "pull_request"])).toBe(false);
     expect(notifier.hasIn(["on", "pull_request"])).toBe(true);
     expect(notifier.hasIn(["on", "pull_request_review"])).toBe(true);
+    const reviewEvents = notifier.getIn(["on", "pull_request_review", "types"]);
+    if (!isSeq(reviewEvents)) throw new Error("Notifier must name its review event types");
+    expect(reviewEvents.toJSON()).toEqual(["submitted", "dismissed"]);
 
     const permissions = notifier.get("permissions");
     if (!isMap(permissions)) throw new Error("Notifier permissions must be explicit");
@@ -210,14 +213,20 @@ describe("contributor readiness", () => {
     expect(f.createCheck).not.toHaveBeenCalled();
   });
 
-  it("deduplicates authors/committers and includes every submitted reviewer", async () => {
+  it("deduplicates authors/committers and includes only approving reviewers", async () => {
     const f = setup();
     f.listReviews.mockResolvedValue({
       data: [
         { id: 20, state: "APPROVED", user: reviewer },
+        { id: 24, state: "APPROVED", user: reviewer },
         { id: 21, state: "COMMENTED", user: { id: 3, login: "commenter", type: "User" } },
-        { id: 22, state: "DISMISSED", user: reviewer },
+        { id: 22, state: "DISMISSED", user: { id: 5, login: "dismissed", type: "User" } },
         { id: 23, state: "PENDING", user: { id: 4, login: "draft", type: "User" } },
+        {
+          id: 25,
+          state: "CHANGES_REQUESTED",
+          user: { id: 6, login: "arm-reviewer", type: "User" },
+        },
       ],
     });
     const { data: pullRequest } = await f.github.rest.pulls.get({
@@ -232,12 +241,64 @@ describe("contributor readiness", () => {
       pullRequest,
       [],
     );
-    expect(participants.map((p) => p.login)).toEqual([
-      "author-example",
-      "commenter",
-      "reviewer-example",
-    ]);
+    expect(participants.map((p) => p.login)).toEqual(["author-example", "reviewer-example"]);
     expect([...participants[0].roles]).toEqual(["PR author", "commit author", "committer"]);
+    expect([...participants[1].roles]).toEqual(["approved reviewer"]);
+  });
+
+  it.each(["COMMENTED", "CHANGES_REQUESTED", "PENDING", "DISMISSED"])(
+    "ignores %s reviewers and their unavailable identities before checking access",
+    async (state) => {
+      const f = setup();
+      f.listReviews.mockResolvedValue({
+        data: [
+          { id: 20, state, user: reviewer },
+          { id: 21, state, user: null },
+        ],
+      });
+      f.permission.mockImplementation(({ username }: { username: string }) =>
+        Promise.resolve({ data: { permission: username === reviewer.login ? "read" : "write" } }),
+      );
+      await f.run();
+      expect(f.permission).not.toHaveBeenCalledWith(
+        expect.objectContaining({ username: reviewer.login }),
+      );
+      expect(f.membership).not.toHaveBeenCalledWith({
+        org: "Azure",
+        username: reviewer.login,
+      });
+      expect(f.createCheck).toHaveBeenCalledWith(
+        expect.objectContaining({ conclusion: "success" }),
+      );
+      expect(f.github.rest.issues.createComment).not.toHaveBeenCalled();
+    },
+  );
+
+  it("keeps author and commit participants without assigning nonapproved reviewer roles", async () => {
+    const f = setup();
+    f.listCommits.mockResolvedValue({
+      data: [{ sha: pr.head.sha, author, committer: reviewer }],
+    });
+    f.listReviews.mockResolvedValue({
+      data: [
+        { id: 20, state: "COMMENTED", user: author },
+        { id: 21, state: "CHANGES_REQUESTED", user: reviewer },
+      ],
+    });
+    const { data: pullRequest } = await f.github.rest.pulls.get({
+      owner: "Azure",
+      repo: "example",
+      pull_number: 1,
+    });
+    const participants = await collectReadinessParticipants(
+      f.github,
+      "Azure",
+      "example",
+      pullRequest,
+      [],
+    );
+    expect([...participants[0].roles]).toEqual(["PR author", "commit author"]);
+    expect([...participants[1].roles]).toEqual(["committer"]);
   });
 
   it("creates a successful advisory check without a comment on a clean PR", async () => {
@@ -252,6 +313,7 @@ describe("contributor readiness", () => {
     );
     expect(f.github.rest.issues.createComment).not.toHaveBeenCalled();
     expect(f.core.summary.write).toHaveBeenCalledOnce();
+    expect(f.core.summary.addRaw).not.toHaveBeenCalledWith(expect.stringContaining("<details>"));
   });
 
   it("requires only Azure membership, not Microsoft membership", async () => {
@@ -324,6 +386,7 @@ describe("contributor readiness", () => {
       expect(comment.body).not.toContain("Microsoft");
       expect(comment.body).toContain("https://aka.ms/azsdk/access");
       expect(comment.body).toContain(code === 403 ? "🟡" : "🔴");
+      expect(comment.body).not.toContain("<details>");
       expect(f.core.summary.addRaw).toHaveBeenCalledWith(comment.body.replace(`\n${marker}`, ""));
     },
   );
@@ -341,6 +404,7 @@ describe("contributor readiness", () => {
     expect(authorRow).not.toContain(reviewerImpact);
     expect(reviewerRow).toContain(reviewerImpact);
     expect(reviewerRow).toContain("GitHub's green approval check");
+    expect(reviewerRow).toContain("This reviewer must set up or renew their access.");
     expect(reviewerRow).not.toContain(authorImpact);
     expect(call.body).toContain(
       "> [!WARNING]\n> **The access issues below can prevent PR approvals from counting or block Azure DevOps pipeline runs.**",
@@ -358,10 +422,10 @@ describe("contributor readiness", () => {
     expect(check.output.summary).toBe(report);
   });
 
-  it("shows both impacts for a PR author who also submitted a review", async () => {
+  it("shows both impacts for a PR author with an approved review", async () => {
     const f = setup();
     f.listReviews.mockResolvedValue({
-      data: [{ id: 20, state: "COMMENTED", user: author }],
+      data: [{ id: 20, state: "APPROVED", user: author }],
     });
     f.permission.mockResolvedValue({ data: { permission: "read" } });
     await f.run();
@@ -407,7 +471,7 @@ describe("contributor readiness", () => {
     expect(comment.body.split(/\s+/).length).toBeLessThan(150);
   });
 
-  it("shows only affected users and distinguishes unavailable checks from confirmed issues", async () => {
+  it("keeps verified users collapsed and distinguishes unavailable checks from confirmed issues", async () => {
     const f = setup();
     f.permission.mockImplementation(({ username }: { username: string }) =>
       username === reviewer.login
@@ -416,10 +480,36 @@ describe("contributor readiness", () => {
     );
     await f.run();
     const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
-    expect(comment.body).toContain("| 🟡 **[reviewer-example]");
-    expect(comment.body).not.toContain("author-example");
-    expect(comment.body).not.toContain("🔴");
-    expect(comment.body).toContain("Could not verify repository access");
+    const [findings, verified] = comment.body.split("<details>");
+    expect(findings).toContain("| 🟡 **[reviewer-example]");
+    expect(findings).not.toContain("author-example");
+    expect(findings).not.toContain("🔴");
+    expect(findings).toContain("Could not verify repository access");
+    expect(verified).toContain("<summary>Contributors with verified access (1)</summary>");
+    expect(verified).toContain("Public Azure membership and repository write access verified.");
+    expect(verified).toContain("[author-example](https://github.com/author-example)");
+    expect(verified).toContain("PR author, commit author, committer");
+    expect(verified).not.toContain("reviewer-example");
+    expect(verified).not.toContain("<details open");
+  });
+
+  it("shows passing approved reviewers in details when the author lacks access", async () => {
+    const f = setup();
+    f.permission.mockImplementation(({ username }: { username: string }) =>
+      Promise.resolve({ data: { permission: username === author.login ? "read" : "write" } }),
+    );
+    await f.run();
+    const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+    const [findings, verified] = comment.body.split("<details>");
+    expect(findings).toContain(authorImpact);
+    expect(findings).not.toContain("reviewer-example");
+    expect(verified).toContain("[reviewer-example](https://github.com/reviewer-example)");
+    expect(verified).toContain("approved reviewer");
+    expect(verified).not.toContain("author-example");
+    const report = comment.body.replace(`\n${marker}`, "");
+    expect(f.core.summary.addRaw).toHaveBeenCalledWith(report);
+    const [check] = f.createCheck.mock.calls[0] as [{ output: { summary: string } }];
+    expect(check.output.summary).toBe(report);
   });
 
   it.each([
@@ -457,6 +547,7 @@ describe("contributor readiness", () => {
     expect(call.body).not.toContain(authorImpact);
     expect(call.body).not.toContain(reviewerImpact);
     expect(call.body).toContain("Not determined.");
+    expect(call.body).not.toContain("<details>");
     expect(f.core.warning).toHaveBeenCalled();
   });
 
@@ -471,10 +562,10 @@ describe("contributor readiness", () => {
   });
 
   it.each([null, {}])(
-    "reports an unavailable submitted reviewer as incomplete: %j",
+    "reports an unavailable approving reviewer as incomplete: %j",
     async (user) => {
       const f = setup();
-      f.listReviews.mockResolvedValue({ data: [{ id: 20, state: "COMMENTED", user }] });
+      f.listReviews.mockResolvedValue({ data: [{ id: 20, state: "APPROVED", user }] });
       await f.run();
       expect(f.createCheck).toHaveBeenCalledWith(
         expect.objectContaining({ conclusion: "neutral" }),
@@ -496,9 +587,16 @@ describe("contributor readiness", () => {
         },
       ],
     });
+    f.permission.mockImplementation(({ username }: { username: string }) =>
+      Promise.resolve({ data: { permission: username === author.login ? "read" : "write" } }),
+    );
     await f.run();
     expect(f.permission).toHaveBeenCalledTimes(2);
     expect(f.membership).toHaveBeenCalledTimes(2);
+    const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+    expect(comment.body).toContain("<summary>Contributors with verified access (1)</summary>");
+    expect(comment.body).not.toContain("example[bot]");
+    expect(comment.body).not.toContain("web-flow");
   });
 
   it("publishes incomplete evidence and fails the run on a transient GitHub failure", async () => {
@@ -507,6 +605,19 @@ describe("contributor readiness", () => {
     await expect(f.run()).rejects.toThrow("503");
     expect(f.createCheck).toHaveBeenCalledWith(expect.objectContaining({ conclusion: "neutral" }));
     expect(f.core.error).toHaveBeenCalledOnce();
+  });
+
+  it("does not claim unchecked contributors passed when evaluation fails partway through", async () => {
+    const f = setup();
+    f.permission.mockImplementation(({ username }: { username: string }) =>
+      username === reviewer.login
+        ? Promise.reject(createMockRequestError(503))
+        : Promise.resolve({ data: { permission: "write" } }),
+    );
+    await expect(f.run()).rejects.toThrow("503");
+    const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+    expect(comment.body).toContain("Could not complete checks");
+    expect(comment.body).not.toContain("<details>");
   });
 
   it("does not turn a public membership API failure into a missing-membership finding", async () => {
@@ -653,7 +764,7 @@ describe("contributor readiness", () => {
 
   it("combines duplicate and mixed-severity findings without losing unknown evidence", () => {
     const body = renderReadiness(
-      [{ ...reviewer, roles: new Set(["submitted reviewer"]) }],
+      [{ ...reviewer, roles: new Set(["approved reviewer"]) }],
       [
         { subject: reviewer.login, message: "Azure membership not public.", organization: "Azure" },
         { subject: reviewer.login, message: "Azure membership not public.", organization: "Azure" },
@@ -669,7 +780,7 @@ describe("contributor readiness", () => {
 
   it("deduplicates PR impacts across a user's findings", () => {
     const body = renderReadiness(
-      [{ ...author, roles: new Set(["PR author", "submitted reviewer"]) }],
+      [{ ...author, roles: new Set(["PR author", "approved reviewer"]) }],
       [
         { subject: author.login, message: "No repository write access.", impacts: [authorImpact] },
         {
@@ -711,17 +822,23 @@ describe("contributor readiness", () => {
   });
 
   it("renders the clean report consistently", () => {
-    expect(
-      renderReadiness([{ ...author, roles: new Set(["PR author", "committer"]) }], []),
-    ).toMatchSnapshot();
+    const verified = { ...author, roles: new Set(["PR author", "committer"]) };
+    expect(renderReadiness([verified], [], [verified])).toMatchSnapshot();
   });
 
   it("renders concise, red-marked user findings", () => {
+    const verified = {
+      id: 3,
+      login: "verified-example",
+      type: "User",
+      roles: new Set(["committer"]),
+    };
     expect(
       renderReadiness(
         [
           { ...author, roles: new Set(["PR author"]) },
-          { ...reviewer, roles: new Set(["submitted reviewer"]) },
+          { ...reviewer, roles: new Set(["approved reviewer"]) },
+          verified,
         ],
         [
           { subject: author.login, message: "Azure membership not public.", organization: "Azure" },
@@ -734,12 +851,34 @@ describe("contributor readiness", () => {
             subject: reviewer.login,
             message: "No repository write access.",
             impacts: [
-              "Reviewer approval does not count toward required reviews (GitHub's green approval check).",
+              "Reviewer approval does not count toward required reviews (GitHub's green approval check). This reviewer must set up or renew their access.",
             ],
           },
         ],
+        [verified],
       ),
     ).toMatchSnapshot();
+  });
+
+  it("escapes and bounds the verified-contributors section", () => {
+    const verified = Array.from({ length: 200 }, (_, index) => ({
+      id: index,
+      login: `verified-${index}`,
+      type: "User",
+      roles: new Set(["commit | author", "@org/team <script>"]),
+    }));
+    const body = renderReadiness(
+      verified,
+      [{ subject: "Commit coverage", message: "Incomplete commit coverage.", unknown: true }],
+      verified,
+    );
+    const details = body.split("<details>")[1];
+    expect(details).toContain("<summary>Contributors with verified access (200)</summary>");
+    expect(details.split("\n").filter((line) => line.startsWith("| [verified-"))).toHaveLength(100);
+    expect(details).toContain("100 more verified contributors not shown.");
+    expect(details).toContain("commit &#124; author, &#64;org/team &lt;script&gt;");
+    expect(details).not.toContain("@org/team");
+    expect(details).not.toContain("<script>");
   });
 
   it("renders incomplete findings without introducing Markdown or mentions", () => {
