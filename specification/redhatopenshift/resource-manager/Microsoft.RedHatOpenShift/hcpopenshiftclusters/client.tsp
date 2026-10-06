@@ -269,6 +269,10 @@ namespace Microsoft.RedHatOpenShift {
 
     /** The configuration for operator authentication to Azure. */
     operatorsAuthentication: OperatorsAuthenticationProfile;
+
+    /** Azure Container Registry configuration for authenticating image pulls on the cluster's worker nodes. */
+    @added(Versions.v2026_10_01)
+    containerRegistry?: ContainerRegistryProfile;
   }
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Omitting provisioningState in this create/update model because it is a server-side read-only field"
@@ -363,7 +367,14 @@ namespace Microsoft.RedHatOpenShift {
     @minValue(0)
     replicas?: int32;
 
-    /** Auto-repair */
+    /** autoRepair specifies whether health checks should be enabled for machines
+     * in the NodePool. Enabling this feature will cause the controller to
+     * automatically delete unhealthy machines. The unhealthy criteria are
+     * determined by checking the Node Ready condition and a timeout that might
+     * vary depending on the platform provider. autoRepair will not take action
+     * when more than 2 Nodes are unhealthy at the same time, giving time for
+     * the cluster to stabilize or for the user to manually intervene.
+     */
     @visibility(Lifecycle.Read, Lifecycle.Create)
     autoRepair?: boolean = true;
 
@@ -373,7 +384,7 @@ namespace Microsoft.RedHatOpenShift {
 
     /** Kubernetes labels to propagate to the NodePool Nodes
      * Note that when the labels are updated this is only applied to newly
-     * create nodes in the Nodepool, existing node labels remain unchanged.
+     * created nodes in the Nodepool, existing node labels remain unchanged.
      */
     @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
     @identifiers(#["key", "value"])
