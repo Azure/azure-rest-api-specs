@@ -1,0 +1,27 @@
+{
+  "title": "RunbookExecutions_GenerateDownloadUrl_MaximumSet",
+  "operationId": "RunbookExecutions_GenerateDownloadUrl",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "runbookName": "runbook1",
+    "runbookExecutionName": "execution1",
+    "body": {
+      "mode": "File",
+      "path": "logs/execution.log"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "mode": "File",
+        "artifactName": "execution-artifact-1",
+        "path": "logs/execution.log",
+        "downloadUrl": "https://contosostorage.blob.core.windows.net/executions/execution1/logs/execution.log?sv=2026-01-01&sig=redacted",
+        "expiresAt": "2026-08-01T14:00:00Z"
+      }
+    }
+  }
+}
