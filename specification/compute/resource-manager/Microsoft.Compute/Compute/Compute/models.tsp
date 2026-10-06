@@ -3597,7 +3597,7 @@ model VMGalleryApplication {
 
   /**
    *  This is the id of "Directly" SharedGalleries. Such references represent the "fake" proxy-only resources
-   *  created in "sharedTo" subscriptions. These are shared directly to a subscription/AAD tenant, instead of using RBAC-based sharing.
+   *  created in "sharedTo" subscriptions. These are shared directly to a subscription/Microsoft Entra ID tenant, instead of using RBAC-based sharing.
    *  The resource id looks like:
    *  /sharedGalleries/{SharedGalleryUniqueName}/applications/{applicationName}/versions/1.0.0
    */
@@ -9368,7 +9368,7 @@ model CapacityReservationGroupProperties {
   instanceView?: CapacityReservationGroupInstanceView;
 
   /**
-   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure AAD tenant or across AAD tenants if there is a trust relationship established between the tenants.  Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
+   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure Microsoft Entra ID tenant or across Microsoft Entra ID tenants if there is a trust relationship established between the tenants.  Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
   sharingProfile?: ResourceSharingProfile;
 
