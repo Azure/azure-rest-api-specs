@@ -322,8 +322,8 @@ model CrossTenantBackupInstanceResource
     NamePattern = ""
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The cross-tenant read projection re-declares the ARM `tags` envelope property so its shape stays identical to the BackupInstanceResource it projects; it introduces no new envelope semantics and the property is unchanged from the shipped backup-instance resource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "`tags` is modeled as Record<string> to match the shipped BackupInstanceResource tag contract exactly; the read-only cross-tenant projection must emit the identical open-string tag map and cannot substitute a closed model without breaking parity with the resource it mirrors."
   @doc("Proxy Resource tags.")
   tags?: Record<string>;
 }
