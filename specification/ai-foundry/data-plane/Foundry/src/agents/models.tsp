@@ -559,10 +559,10 @@ model SessionConfiguration {
   idle_timeout_seconds?: duration = duration.fromISO("PT900S");
 }
 
-@doc("Standby (warm) pool configuration for a hosted agent version. Keeps pre-provisioned sessions ready to be claimed, reducing cold-start latency for invocations.")
+@doc("Standby (warm) pool configuration for a hosted agent endpoint. Keeps pre-provisioned sessions ready to be claimed, reducing cold-start latency for invocations.")
 @removed(Versions.v1)
 model StandbyPool {
-  @doc("The number of pre-provisioned standby sessions to keep ready for this agent version. Must be between 0 and 50 (inclusive). 0 disables the standby pool.")
+  @doc("The number of pre-provisioned standby sessions to keep ready for this agent endpoint. Must be between 0 and 50 (inclusive). 0 disables the standby pool.")
   @minValue(0)
   @maxValue(50)
   @example(3)
@@ -662,10 +662,6 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("Optional session defaults (for example, the idle timeout) applied to sessions created for this agent version.")
   @example(#{ idle_timeout_seconds: duration.fromISO("PT300S") })
   session_configuration?: SessionConfiguration;
-
-  @doc("Optional standby (warm) pool configuration. When set with a positive size, the service keeps pre-provisioned sessions ready to be claimed for this agent version.")
-  @removed(Versions.v1)
-  standby_pool?: StandbyPool;
 }
 
 @doc("The container app agent definition.")
@@ -959,6 +955,10 @@ model AgentEndpointConfig {
   @doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.")
   @visibility(Lifecycle.Read)
   publish_approval_status?: PublishApprovalStatus;
+
+  @doc("Optional standby (warm) pool configuration for the agent endpoint. When set with a positive size, the service keeps pre-provisioned sessions ready to be claimed, independent of which agent version this endpoint currently serves.")
+  @removed(Versions.v1)
+  standby_pool?: StandbyPool;
 }
 
 @doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for an agent.")

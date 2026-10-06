@@ -35631,6 +35631,10 @@
             "$ref": "#/components/schemas/PublishApprovalStatus",
             "description": "The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.",
             "readOnly": true
+          },
+          "standby_pool": {
+            "$ref": "#/components/schemas/StandbyPool",
+            "description": "Optional standby (warm) pool configuration for the agent endpoint. When set with a positive size, the service keeps pre-provisioned sessions ready to be claimed, independent of which agent version this endpoint currently serves."
           }
         }
       },
@@ -35658,6 +35662,10 @@
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
             "description": "The authorization schemes supported by the agent endpoint"
+          },
+          "standby_pool": {
+            "$ref": "#/components/schemas/StandbyPool",
+            "description": "Optional standby (warm) pool configuration for the agent endpoint. When set with a positive size, the service keeps pre-provisioned sessions ready to be claimed, independent of which agent version this endpoint currently serves."
           }
         }
       },
@@ -47717,10 +47725,6 @@
                 "idle_timeout_seconds": 300
               }
             ]
-          },
-          "standby_pool": {
-            "$ref": "#/components/schemas/StandbyPool",
-            "description": "Optional standby (warm) pool configuration. When set with a positive size, the service keeps pre-provisioned sessions ready to be claimed for this agent version."
           }
         },
         "allOf": [
@@ -92782,14 +92786,14 @@
             "format": "int32",
             "minimum": 0,
             "maximum": 50,
-            "description": "The number of pre-provisioned standby sessions to keep ready for this agent version. Must be between 0 and 50 (inclusive). 0 disables the standby pool.",
+            "description": "The number of pre-provisioned standby sessions to keep ready for this agent endpoint. Must be between 0 and 50 (inclusive). 0 disables the standby pool.",
             "examples": [
               3
             ],
             "default": 0
           }
         },
-        "description": "Standby (warm) pool configuration for a hosted agent version. Keeps pre-provisioned sessions ready to be claimed, reducing cold-start latency for invocations."
+        "description": "Standby (warm) pool configuration for a hosted agent endpoint. Keeps pre-provisioned sessions ready to be claimed, reducing cold-start latency for invocations."
       },
       "SteeringPromptOptimizationContext": {
         "type": "object",
