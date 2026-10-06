@@ -40,6 +40,7 @@ interface AuthPolicies {
   /**
    * Creates or updates an authorization policy within the specified profile.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility: preserve the bodyless 202 response used by existing clients for asynchronous AuthPolicy replacement."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     AuthPolicy,
@@ -50,6 +51,8 @@ interface AuthPolicies {
           LroHeaders = ArmAsyncOperationHeader<FinalResult = AuthPolicy> &
             Azure.Core.Foundations.RetryAfterHeader
         >
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = AuthPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -69,10 +72,12 @@ interface AuthPolicies {
   /**
    * Deletes an existing authorization policy within a profile.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility: preserve the bodyless 200 response used by existing clients for synchronous AuthPolicy deletion."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     AuthPolicy,
     Response =
+      | ArmDeletedResponse
       | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
           Azure.Core.Foundations.RetryAfterHeader>
       | ArmDeletedNoContentResponse
