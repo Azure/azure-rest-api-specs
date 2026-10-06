@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import * as yaml from "js-yaml";
+import yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, normalize, relative } from "node:path";
 import { inspect } from "node:util";

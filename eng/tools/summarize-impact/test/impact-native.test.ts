@@ -1,4 +1,4 @@
-import * as yaml from "js-yaml";
+import yaml from "js-yaml";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";

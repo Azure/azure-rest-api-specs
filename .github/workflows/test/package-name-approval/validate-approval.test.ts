@@ -6,11 +6,11 @@ vi.mock("node:fs/promises", () => ({
   readFile: vi.fn(),
 }));
 vi.mock("js-yaml", () => ({
-  load: vi.fn(),
+  default: { load: vi.fn() },
 }));
 
 import { readFile } from "node:fs/promises";
-import * as yaml from "js-yaml";
+import yaml from "js-yaml";
 import validateApproval from "../../src/package-name-approval/validate-approval.ts";
 
 /** Mock protected-labels.yml content (as yaml.load would return) */

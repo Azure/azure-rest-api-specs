@@ -1,6 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { readFile } from "node:fs/promises";
-import * as yaml from "js-yaml";
+import yaml from "js-yaml";
 import { resolve } from "node:path";
 import * as z from "zod";
 
