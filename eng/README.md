@@ -23,14 +23,26 @@ without account checks or a readiness comment/check, including review events and
 manual `/azsdk check-access` requests. The PR-event notifier uses a path filter;
 the publisher verifies current changed files for every trigger.
 
-The advisory **Contributor readiness** check reports public Microsoft/Azure
-membership visibility and effective repository access for the PR author, commit
-authors/committers, and all submitted reviewers. It does not change merge rules.
-Missing public membership produces conditional internal-onboarding guidance, not
-a claim that an external contributor is unauthorized.
+Internal contributors need **Azure organization membership and repository write
+access** for the PR workflow to work correctly. Microsoft organization membership
+is not required by this check. The **Contributor readiness** check reports public
+Azure membership visibility and effective repository access for the PR author,
+commit authors/committers, and all submitted reviewers. It is non-blocking and
+does not change merge rules, but the access requirements are not optional for
+the internal workflow. External fork contributions remain allowed.
 
-The comment groups findings by affected user: 🔴 marks a confirmed issue and 🟡
-marks checks that could not be verified. It links to
+The comment groups findings by affected user and separates access issues from
+their **PR impact**. A PR author without repository write access cannot run Azure
+DevOps pipelines for that PR. A submitted reviewer's approval without write
+access does not count toward required reviews (GitHub's green approval check).
+Users with both roles see both consequences; commit-only participants do not
+receive author or reviewer consequences. Other GitHub approval rules still apply.
+
+🔴 marks a confirmed issue and 🟡 marks checks that could not be verified. Private
+or missing public membership is not evidence of missing repository write access.
+Membership-only findings and unavailable permission lookups do not establish
+pipeline or review failures; their PR impact is reported as undetermined.
+The report links to
 [setup and access renewal](https://aka.ms/azsdk/access); users without findings
 are omitted to keep the report short. The job summary shows the same report.
 Organization names in membership findings link to the organization's People page,
@@ -58,7 +70,7 @@ No `pull_request_target` trigger is used.
 Editing or dismissing a review does not rerun the check; those reviewers remain
 included. Fork workflow approval policies can delay automatic refreshes. The
 comment command runs from the default branch and remains available without
-waiting for the notifier. Do not make this advisory check required.
+waiting for the notifier. Do not make this non-blocking check required.
 
 ## Branch cleanup
 

@@ -15,7 +15,7 @@ const COMMAND = "/azsdk check-access";
 const MARKER = "<!-- contributor-readiness -->";
 const CHECK_NAME = "Contributor readiness";
 const ONBOARDING = "https://aka.ms/azsdk/access";
-const ORGANIZATIONS = ["Microsoft", "Azure"] as const;
+const ORGANIZATIONS = ["Azure"] as const;
 
 type PullRequest = Awaited<ReturnType<GitHub["rest"]["pulls"]["get"]>>["data"];
 type Account = { id: number; login: string; type: string };
@@ -23,6 +23,7 @@ type Participant = Account & { roles: Set<string> };
 export type ReadinessFinding = {
   subject: string;
   message: string;
+  impacts?: string[];
   unknown?: boolean;
   organization?: (typeof ORGANIZATIONS)[number];
 };
@@ -262,13 +263,20 @@ export async function evaluateReadinessParticipants(
       () => writeAccess(github, owner, repo, participant.login),
       "Could not verify repository access.",
     );
-    if (write === false)
+    if (write === false) {
+      const impacts: string[] = [];
+      if (participant.roles.has("PR author"))
+        impacts.push("PR author cannot run Azure DevOps pipelines for this PR.");
+      if (participant.roles.has("submitted reviewer"))
+        impacts.push(
+          "Reviewer approval does not count toward required reviews (GitHub's green approval check).",
+        );
       findings.push({
         subject: participant.login,
-        message: participant.roles.has("submitted reviewer")
-          ? "No write access; approval cannot satisfy required reviews."
-          : "No write access; fork contributions are still allowed.",
+        message: "No repository write access.",
+        impacts,
       });
+    }
   }
 }
 
@@ -276,12 +284,13 @@ export async function evaluateReadinessParticipants(
 export function renderReadiness(participants: Participant[], findings: ReadinessFinding[]): string {
   return renderMarkdownDoc(
     section(
-      "Contributor readiness (advisory)",
+      "Contributor readiness: required access",
       findings.length
         ? [
+            "**Internal contributors need Azure organization membership and repository write access for the PR workflow.** Private membership cannot be verified by this check.",
             renderReadinessFindings(participants, findings),
-            `Internal contributors: ${link("setup / renew access", ONBOARDING)}. Recheck: ${inlineCode(COMMAND)}.`,
-            "Advisory only; GitHub review rules still apply.",
+            `Internal contributors: ${link("setup / renew required access", ONBOARDING)}. Recheck: ${inlineCode(COMMAND)}.`,
+            "Non-blocking report; external fork contributions are allowed. GitHub review rules still apply.",
           ]
         : "✅ No contributor-readiness issues found.",
     ),
@@ -295,10 +304,18 @@ function renderReadinessFindings(
   findings: ReadinessFinding[],
 ): MarkdownDoc {
   const users = new Set(participants.map((participant) => participant.login));
-  const groups = new Map<string, { messages: Set<string>; unknown: boolean }>();
+  const groups = new Map<
+    string,
+    { messages: Set<string>; impacts: Set<string>; unknown: boolean }
+  >();
   for (const finding of findings) {
-    const group = groups.get(finding.subject) ?? { messages: new Set<string>(), unknown: true };
+    const group = groups.get(finding.subject) ?? {
+      messages: new Set<string>(),
+      impacts: new Set<string>(),
+      unknown: true,
+    };
     group.messages.add(renderFindingMessage(finding));
+    for (const impact of finding.impacts ?? []) group.impacts.add(escapeMarkdown(impact));
     group.unknown &&= finding.unknown === true;
     groups.set(finding.subject, group);
   }
@@ -307,13 +324,17 @@ function renderReadinessFindings(
   );
   return [
     table([
-      ["User / area", "Issue"],
+      ["User / area", "Access issue", "PR impact"],
       ...entries.slice(0, 100).map(([subject, group]) => {
         const label = escapeMarkdown(subject);
         const user = users.has(subject)
           ? link(label, `https://github.com/${encodeURIComponent(subject)}`)
           : label;
-        return [`${group.unknown ? "🟡" : "🔴"} **${user}**`, [...group.messages].join("<br>")];
+        return [
+          `${group.unknown ? "🟡" : "🔴"} **${user}**`,
+          [...group.messages].join("<br>"),
+          group.impacts.size ? [...group.impacts].join("<br>") : "Not determined.",
+        ];
       }),
     ]),
     entries.length > 100 ? `${entries.length - 100} more entries not shown.` : undefined,
