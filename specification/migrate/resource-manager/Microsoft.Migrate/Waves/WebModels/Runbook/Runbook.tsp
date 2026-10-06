@@ -168,19 +168,11 @@ model RunbookStepDependency {
 @doc("Migration entity pair for a mapped runbook step dependency.")
 @added(ApiVersions.v2026_08_01_preview)
 model RunbookStepEntityPair {
-  @doc("Migration entity identifier in the dependent step.")
-  dependentEntity: armResourceIdentifier<[
-    {
-      type: "Microsoft.Migrate/migrateProjects/migrationEntities";
-    }
-  ]>;
+  @doc("Migration entity resource name in the dependent step.")
+  dependentEntity: string;
 
-  @doc("Migration entity identifier in the target step.")
-  waitsFor: armResourceIdentifier<[
-    {
-      type: "Microsoft.Migrate/migrateProjects/migrationEntities";
-    }
-  ]>;
+  @doc("Migration entity resource name in the target step.")
+  waitsFor: string;
 }
 
 @doc("Request payload for merging runbook workstreams.")

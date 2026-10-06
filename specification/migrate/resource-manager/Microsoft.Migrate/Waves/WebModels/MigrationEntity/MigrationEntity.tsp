@@ -100,11 +100,6 @@ model MigrationEntityProperties is AzureResourceProperties {
 
   @doc("Assessed Entity ARM Id")
   assessedEntityArmId?: string;
-
-  @doc("Execution mode for the migration process.")
-  @added(ApiVersions.v2026_08_01_preview)
-  @visibility(Lifecycle.Read)
-  executionMode?: ExecutionMode;
 }
 
 @doc("Properties that can be updated on a migration entity.")

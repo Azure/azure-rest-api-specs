@@ -2,6 +2,7 @@ import { configDefaults, defineConfig, mergeConfig } from "vitest/config";
 
 export const defaultVitestConfig = defineConfig({
   test: {
+    testTimeout: 10000,
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],
@@ -22,7 +23,9 @@ export default mergeConfig(
       projects: [
         ".github/vitest.config.ts",
         ".github/shared/vitest.config.ts",
+        "eng/scripts/vitest.config.ts",
         "eng/tools/*/vitest.config.ts",
+        "libs/*/vitest.config.ts",
       ],
       coverage: {
         thresholds: {

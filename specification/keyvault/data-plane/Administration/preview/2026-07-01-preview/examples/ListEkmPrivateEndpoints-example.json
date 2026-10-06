@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "vaultBaseUrl": "https://myhsm.managedhsm.azure.net",
+    "api-version": "2026-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "my-ekm-pe",
+            "location": "eastus",
+            "provisioningState": "Succeeded",
+            "properties": {
+              "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Network/privateLinkServices/myEkmProxyPLS",
+              "privateLinkServiceConnectionName": "my-ekm-pe-connection"
+            },
+            "privateLinkServiceConnectionState": {
+              "status": "Approved",
+              "description": "Approved by the Private Link Service owner.",
+              "actionsRequired": "None"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ListEkmPrivateEndpoints",
+  "title": "List EKM proxy private endpoints"
+}
