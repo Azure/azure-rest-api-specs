@@ -7,6 +7,7 @@ import {
   type ProtectedLabelsConfig,
 } from "../protected-labels/authorization.ts";
 import { createApproversConfig } from "./approvers.ts";
+import { buildUnauthorizedApplyComment } from "../protected-labels/label-comments.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
 export type ValidateContext = {
@@ -144,9 +145,29 @@ async function handleLabeled({
     prLabels: labels,
     plane: isMgmt ? "management-plane" : "data-plane",
   });
-  if (authorization.status !== "authorized" && authorization.status !== "trusted-bot") {
+  if (
+    authorization.status !== "authorized" &&
+    authorization.status !== "trusted-bot" &&
+    authorization.status !== "plane-unprotected"
+  ) {
     core.warning(`${actor} is not authorized to apply ${targetLabel}, removing`);
     await removeLabelIfPresent(github, owner, repo, prNumber, targetLabel);
+    // Explain the removal so the approver is not left guessing (#46787). Only the
+    // "unauthorized" status carries a concrete approver list; "unprotected" means the
+    // label is absent from protected-labels.yml (fail-closed with no known approvers),
+    // so keep that path silent rather than posting an empty "Only  can apply" message.
+    if (authorization.status === "unauthorized") {
+      await github.rest.issues.createComment({
+        owner,
+        repo,
+        issue_number: prNumber,
+        body: buildUnauthorizedApplyComment({
+          actor,
+          labelName: targetLabel,
+          authorizedUsers: authorization.authorizedUsers,
+        }),
+      });
+    }
     return;
   }
 
@@ -277,7 +298,8 @@ export default async function validateApproval({ github, context, core }: GitHub
     throw new Error("Pull request label event is missing a label name.");
   }
   const actor = payload.sender.login;
-  const isMgmt = labels.includes("Mgmt") || labels.includes("resource-manager");
+  // Plane from resource-manager (self-healing), not the add-only "Mgmt" label (#46785).
+  const isMgmt = labels.includes("resource-manager");
 
   if (payload.action === "unlabeled") {
     return await handleUnlabeled({
@@ -296,6 +318,16 @@ export default async function validateApproval({ github, context, core }: GitHub
 
   if (!labels.includes("package-name-review-required")) {
     core.info("No namespace review, skipping");
+    return;
+  }
+
+  // Plane is derived from the labels summarize-checks reconciles (resource-manager /
+  // data-plane). If neither is present, the plane is unknown: defer rather than defaulting
+  // to data-plane, otherwise a data-plane approver could consume approvals on a PR that is
+  // actually management (before resource-manager lands, only the add-only "Mgmt" may exist).
+  // Mirrors check-label's tri-state skip (#46785).
+  if (!isMgmt && !labels.includes("data-plane")) {
+    core.info("Plane not yet reconciled (no resource-manager/data-plane label), skipping");
     return;
   }
 

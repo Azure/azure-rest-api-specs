@@ -94,6 +94,9 @@
       "name": "MeshMemberships"
     },
     {
+      "name": "AgentFabricMemberships"
+    },
+    {
       "name": "Skus"
     },
     {
@@ -1296,6 +1299,9 @@
           "Create Managed Private Cluster with fqdn subdomain specified": {
             "$ref": "./examples/ManagedClustersCreate_PrivateClusterFQDNSubdomain.json"
           },
+          "Create or Update Managed Cluster with Pod Snapshot Restore enabled": {
+            "$ref": "./examples/ManagedClustersCreate_EnablePodSnapshotRestore.json"
+          },
           "Create/Update AAD Managed Cluster with EnableAzureRBAC": {
             "$ref": "./examples/ManagedClustersCreate_UpdateWithEnableAzureRBAC.json"
           },
@@ -1624,6 +1630,276 @@
             "$ref": "./examples/ManagedClustersGetAccessProfile.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentFabricMemberships": {
+      "get": {
+        "operationId": "AgentFabricMemberships_ListByManagedCluster",
+        "tags": [
+          "AgentFabricMemberships"
+        ],
+        "description": "Lists the AgentFabric memberships of a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the managed cluster resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentFabricMembershipsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List AgentFabric Memberships by Managed Cluster": {
+            "$ref": "./examples/AgentFabricMemberships_ListByManagedCluster.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentFabricMemberships/{agentFabricMembershipName}": {
+      "get": {
+        "operationId": "AgentFabricMemberships_Get",
+        "tags": [
+          "AgentFabricMemberships"
+        ],
+        "description": "Gets the AgentFabric membership of a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the managed cluster resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "agentFabricMembershipName",
+            "in": "path",
+            "description": "The name of the AgentFabricMembership",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentFabricMembership"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get AgentFabric Membership": {
+            "$ref": "./examples/AgentFabricMemberships_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AgentFabricMemberships_CreateOrUpdate",
+        "tags": [
+          "AgentFabricMemberships"
+        ],
+        "description": "Creates or updates the AgentFabric membership of a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the managed cluster resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "agentFabricMembershipName",
+            "in": "path",
+            "description": "The name of the AgentFabricMembership",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentFabricMembership"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AgentFabricMembership' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AgentFabricMembership"
+            }
+          },
+          "201": {
+            "description": "Resource 'AgentFabricMembership' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AgentFabricMembership"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update AgentFabric Membership": {
+            "$ref": "./examples/AgentFabricMemberships_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AgentFabricMembership"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AgentFabricMemberships_Delete",
+        "tags": [
+          "AgentFabricMemberships"
+        ],
+        "description": "Deletes the AgentFabric membership of a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the managed cluster resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "agentFabricMembershipName",
+            "in": "path",
+            "description": "The name of the AgentFabricMembership",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete AgentFabric Membership": {
+            "$ref": "./examples/AgentFabricMemberships_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools": {
@@ -7491,6 +7767,153 @@
         }
       }
     },
+    "AgentFabricMembership": {
+      "type": "object",
+      "description": "The AgentFabric membership of a managed cluster. A cluster may belong to at most one AgentFabric, so this resource always has the name 'default'. See https://aka.ms/aks/agentfabric-membership.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentFabricMembershipProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "managedBy": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the AgentFabric that this cluster is a member of. The AgentFabric must be in the same tenant and subscription as the managed cluster. As the ARM envelope property, it also stops a complete mode deployment from deleting the membership and silently detaching the cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkSecurity/agentFabrics"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "managedBy"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AgentFabricMembershipProperties": {
+      "type": "object",
+      "description": "Properties of the AgentFabric membership of a managed cluster.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/AgentFabricMembershipProvisioningState",
+          "description": "The current provisioning state of the AgentFabric membership.",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/AgentFabricMembershipSkuName",
+          "description": "The SKU of the AgentFabric membership. Determines which AgentFabric components are deployed to the cluster."
+        }
+      },
+      "required": [
+        "sku"
+      ]
+    },
+    "AgentFabricMembershipProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state of the AgentFabric membership.",
+      "enum": [
+        "Canceled",
+        "Creating",
+        "Deleting",
+        "Failed",
+        "Succeeded",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "AgentFabricMembershipProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The provisioning of the AgentFabric membership was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The AgentFabric membership is being created."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The AgentFabric membership is being deleted."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The provisioning of the AgentFabric membership failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The AgentFabric membership was provisioned successfully."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The AgentFabric membership is being updated."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AgentFabricMembershipSkuName": {
+      "type": "string",
+      "description": "The SKU of the AgentFabric membership. The SKU determines which AgentFabric components are deployed to the cluster.",
+      "enum": [
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "AgentFabricMembershipSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The Standard SKU."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "The Premium SKU."
+          }
+        ]
+      }
+    },
+    "AgentFabricMembershipsListResult": {
+      "type": "object",
+      "description": "The result of a request to list the AgentFabric memberships of a managed cluster.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of AgentFabric memberships.",
+          "items": {
+            "$ref": "#/definitions/AgentFabricMembership"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL to get the next set of AgentFabric membership results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "AgentPool": {
       "type": "object",
       "description": "Agent Pool.",
@@ -13345,6 +13768,16 @@
       },
       "readOnly": true
     },
+    "ManagedClusterPodSnapshotProfile": {
+      "type": "object",
+      "description": "The Pod Snapshot Restore profile for the managed cluster.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the Pod Snapshot Restore core extension is enabled for the managed cluster."
+        }
+      }
+    },
     "ManagedClusterPoolUpgradeProfile": {
       "type": "object",
       "description": "The list of available upgrade versions.",
@@ -13647,6 +14080,10 @@
         "aiToolchainOperatorProfile": {
           "$ref": "#/definitions/ManagedClusterAIToolchainOperatorProfile",
           "description": "AI toolchain operator settings that apply to the whole cluster."
+        },
+        "podSnapshotProfile": {
+          "$ref": "#/definitions/ManagedClusterPodSnapshotProfile",
+          "description": "The Pod Snapshot Restore profile for the managed cluster."
         },
         "schedulerProfile": {
           "$ref": "#/definitions/SchedulerProfile",
