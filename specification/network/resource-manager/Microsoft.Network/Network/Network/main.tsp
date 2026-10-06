@@ -40,6 +40,7 @@ import "./ExpressRoutePortsLocation.tsp";
 import "./ExpressRoutePort.tsp";
 import "./ExpressRoutePortAuthorization.tsp";
 import "./ExpressRouteLag.tsp";
+import "./ExpressRouteLagAuthorization.tsp";
 import "./FirewallPolicy.tsp";
 import "./FirewallPolicyRuleCollectionGroup.tsp";
 import "./FirewallPolicyKubeSelectorGroup.tsp";
