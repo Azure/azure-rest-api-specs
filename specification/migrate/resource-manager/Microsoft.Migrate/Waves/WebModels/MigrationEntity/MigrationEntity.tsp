@@ -80,11 +80,6 @@ model MigrationEntityProperties is AzureResourceProperties {
   @visibility(Lifecycle.Read)
   executionStatus?: string;
 
-  @doc("Migration status reported by the migration tool.")
-  @added(ApiVersions.v2026_08_01_preview)
-  @visibility(Lifecycle.Read)
-  toolReportedMigrationStatus?: string;
-
   @doc("Execution Readiness of Migration Entity.")
   @visibility(Lifecycle.Read)
   executionReadiness?: string;
@@ -100,6 +95,11 @@ model MigrationEntityProperties is AzureResourceProperties {
 
   @doc("Assessed Entity ARM Id")
   assessedEntityArmId?: string;
+
+  @doc("Migration status reported by the migration tool.")
+  @added(ApiVersions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  toolReportedMigrationStatus?: string;
 }
 
 @doc("Properties that can be updated on a migration entity.")
