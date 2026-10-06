@@ -49,9 +49,9 @@ namespace Microsoft.Monitor {
     traceRetentionInDays: int32;
 
     /**
-     * The state of trace-derived metrics. When omitted while creating a trace container, the service applies a default of Enabled; when omitted while updating an existing trace container, the current value is preserved.
+     * Controls whether trace-derived metrics are emitted for this trace container.
      */
-    traceMetricsState?: TraceMetricsState;
+    traceMetricsState: TraceMetricsState;
   }
 
   /**

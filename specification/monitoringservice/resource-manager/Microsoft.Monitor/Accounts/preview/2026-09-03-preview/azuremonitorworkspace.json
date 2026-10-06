@@ -3199,12 +3199,13 @@
         },
         "traceMetricsState": {
           "$ref": "#/definitions/TraceMetricsState",
-          "description": "The state of trace-derived metrics. When omitted while creating a trace container, the service applies a default of Enabled; when omitted while updating an existing trace container, the current value is preserved."
+          "description": "Controls whether trace-derived metrics are emitted for this trace container."
         }
       },
       "required": [
         "traceDurationWindowInSeconds",
-        "traceRetentionInDays"
+        "traceRetentionInDays",
+        "traceMetricsState"
       ]
     },
     "TraceContainerResource": {
