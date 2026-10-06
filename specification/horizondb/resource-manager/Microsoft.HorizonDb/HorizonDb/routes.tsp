@@ -559,9 +559,18 @@ interface PasswordAuthentications {
 
   @doc("Creates or replaces the service-created PostgreSQL username-and-password authentication method.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrReplace is ArmResourceCreateOrReplaceAsync<PasswordAuthentication>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
+    PasswordAuthentication,
+    LroHeaders = HorizonDbResourceLroHeaders<PasswordAuthentication>,
+    Response =
+      | HorizonDbResourceUpdatedLroResponse<PasswordAuthentication>
+      | ArmResourceCreatedResponse<
+          PasswordAuthentication,
+          HorizonDbResourceLroHeaders<PasswordAuthentication>
+        >
+  >;
 
-  @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. This API version supports disabling the method and resetting its password. Disabling cannot include credentials and does not remove or modify existing database users or roles. Password updates require this method to already be Enabled. Administrator rename is not supported in this API version.")
+  @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. This API version supports enabling the method, disabling the method, and resetting its password. For a cluster that already has an administrator but currently has password authentication disabled, state Enabled and administratorLoginPassword can be supplied together to re-enable password authentication and reset the password. Disabling cannot include credentials and does not remove or modify existing database users or roles. Administrator rename is not supported in this API version.")
   @autoRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<

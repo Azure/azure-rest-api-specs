@@ -1093,11 +1093,11 @@ model MicrosoftEntraAuthenticationProperties {
 @added(Versions.v2026_10_01_preview)
 @doc("Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. This API version supports enabling or disabling the authentication method, and resetting its password. Supported changes can be combined.")
 model PasswordAuthenticationPropertiesForPatchUpdate {
-  @doc("The target password-authentication state. Disabling password authentication does not remove or modify existing database users or roles. Disabled cannot be combined with administratorLoginPassword. ")
+  @doc("The target password-authentication state. Enabled can be combined with administratorLoginPassword to re-enable password authentication and reset the password for a cluster that already has an administrator. Disabling password authentication does not remove or modify existing database users or roles. Disabled cannot be combined with administratorLoginPassword.")
   @visibility(Lifecycle.Update)
   state?: AuthenticationState;
 
-  @doc("The PostgreSQL administrator password. Supplying this property resets the configured administrator's password. Resetting the password requires password authentication to already be Enabled. This property can be supplied with administratorLogin during initial login setup.")
+  @doc("The PostgreSQL administrator password. Supplying this property resets the configured administrator's password. When password authentication is currently disabled for a cluster that already has an administrator, this property can be combined with state Enabled to re-enable password authentication and reset the password.")
   @secret
   @minLength(8)
   @maxLength(128)
