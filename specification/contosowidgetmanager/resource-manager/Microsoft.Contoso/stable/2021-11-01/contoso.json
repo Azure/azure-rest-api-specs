@@ -470,6 +470,20 @@
           "type": "string",
           "description": "City of employee"
         },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the employee.",
+          "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$",
+          "maxLength": 128
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "The connection string used to access the employee profile store.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
         "profile": {
           "type": "string",
           "format": "base64url",
