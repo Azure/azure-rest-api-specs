@@ -112,7 +112,7 @@ interface ResourceRecommendationBases {
        * <br>**Note:** `RecommendationStatus` filter is available from API Version 2026-02-01-preview and onwards.<br>
        * <br>**Note:** `Criticality` filter is available from API Version 2026-08-01-preview and onwards.<br>
        * <br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>
-       * <br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'<br>-$filter=Criticality eq 'Critical'
+       * <br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2028-01-01' and RetirementDate ge '2024-01-01'<br>-$filter=Criticality eq 'Critical'
        */
       @query("$filter")
       $filter?: string;
@@ -181,7 +181,7 @@ union RecommendationListMode {
   All: "all",
 
   /**
-   * Returns recommendations in descending order of criticality score, if present.
+   * Returns prioritized subset of recommendations ordered descending by their criticality score.
    */
   Contextual: "contextual",
 }
@@ -218,7 +218,7 @@ interface ServiceGroupRecommendations {
        * <br>**Note:** `RecommendationStatus` filter is available from API Version 2026-02-01-preview and onwards.<br>
        * <br>**Note:** `Criticality` filter is available from API Version 2026-08-01-preview and onwards.<br>
        * <br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>
-       * <br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'<br>-$filter=Criticality eq 'High'
+       * <br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2028-01-01' and RetirementDate ge '2024-01-01'<br>-$filter=Criticality eq 'High'
        */
       @query("$filter")
       $filter?: string;

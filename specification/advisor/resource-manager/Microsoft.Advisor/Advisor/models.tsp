@@ -605,9 +605,10 @@ model RecommendationProperties {
   /**
    * The estimated savings associated with the recommendation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The savings payload is an extensible service-defined JSON object whose fields can vary by recommendation type."
   @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
-  savings?: string;
+  savings?: Record<unknown>;
 
   /**
    * The state of the Recommendation

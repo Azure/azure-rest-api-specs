@@ -486,7 +486,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', 'SubCategory', 'RetirementDate', '[RecommendationStatus](#recommendationStatus)', 'Criticality'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge']<br>.\n<br>**Note:** `Control` is a legacy filter property and will be deprecated in the future. Please use `SubCategory` for filtering recommendation subcategory.<br>\n<br>**Note:** `RecommendationStatus` filter is available from API Version 2026-02-01-preview and onwards.<br>\n<br>**Note:** `Criticality` filter is available from API Version 2026-08-01-preview and onwards.<br>\n<br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>\n<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'<br>-$filter=Criticality eq 'High'",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', 'SubCategory', 'RetirementDate', '[RecommendationStatus](#recommendationStatus)', 'Criticality'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge']<br>.\n<br>**Note:** `Control` is a legacy filter property and will be deprecated in the future. Please use `SubCategory` for filtering recommendation subcategory.<br>\n<br>**Note:** `RecommendationStatus` filter is available from API Version 2026-02-01-preview and onwards.<br>\n<br>**Note:** `Criticality` filter is available from API Version 2026-08-01-preview and onwards.<br>\n<br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>\n<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2028-01-01' and RetirementDate ge '2024-01-01'<br>-$filter=Criticality eq 'High'",
             "required": false,
             "type": "string"
           },
@@ -512,7 +512,7 @@
                 {
                   "name": "Contextual",
                   "value": "contextual",
-                  "description": "Returns recommendations in descending order of criticality score, if present."
+                  "description": "Returns prioritized subset of recommendations ordered descending by their criticality score."
                 }
               ]
             }
@@ -1222,7 +1222,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', 'SubCategory', 'RetirementDate', '[RecommendationStatus](#recommendationStatus)', 'Criticality'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge']<br>.\n<br>**Note:** `Control` is a legacy filter property and will be deprecated in the future. Please use `SubCategory` for filtering recommendation subcategory.<br>\n<br>**Note:** `RecommendationStatus` filter is available from API Version 2026-02-01-preview and onwards.<br>\n<br>**Note:** `Criticality` filter is available from API Version 2026-08-01-preview and onwards.<br>\n<br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>\n<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'<br>-$filter=Criticality eq 'Critical'",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', 'SubCategory', 'RetirementDate', '[RecommendationStatus](#recommendationStatus)', 'Criticality'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge']<br>.\n<br>**Note:** `Control` is a legacy filter property and will be deprecated in the future. Please use `SubCategory` for filtering recommendation subcategory.<br>\n<br>**Note:** `RecommendationStatus` filter is available from API Version 2026-02-01-preview and onwards.<br>\n<br>**Note:** `Criticality` filter is available from API Version 2026-08-01-preview and onwards.<br>\n<br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>\n<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2028-01-01' and RetirementDate ge '2024-01-01'<br>-$filter=Criticality eq 'Critical'",
             "required": false,
             "type": "string"
           },
@@ -1248,7 +1248,7 @@
                 {
                   "name": "Contextual",
                   "value": "contextual",
-                  "description": "Returns recommendations in descending order of criticality score, if present."
+                  "description": "Returns prioritized subset of recommendations ordered descending by their criticality score."
                 }
               ]
             }
@@ -2557,8 +2557,9 @@
           "readOnly": true
         },
         "savings": {
-          "type": "string",
+          "type": "object",
           "description": "The estimated savings associated with the recommendation.",
+          "additionalProperties": {},
           "readOnly": true
         },
         "recommendationStatus": {
