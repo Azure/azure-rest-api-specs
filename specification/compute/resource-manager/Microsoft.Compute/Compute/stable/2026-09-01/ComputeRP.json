@@ -18200,7 +18200,7 @@
       "properties": {
         "zonePlacementPolicy": {
           "$ref": "#/definitions/ZonePlacementPolicyType",
-          "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation."
+          "description": "Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation."
         },
         "includeZones": {
           "type": "array",
@@ -20438,10 +20438,6 @@
         "diskControllerType": {
           "$ref": "#/definitions/DiskControllerTypes",
           "description": "Specifies the disk controller type configured for the VM. **Note:** This property will be set to the default disk controller type if not specified provided virtual machine is being created with 'hyperVGeneration' set to V2 based on the capabilities of the operating system disk and VM size from the the specified minimum api version. You need to deallocate the VM before updating its disk controller type unless you are updating the VM size in the VM configuration which implicitly deallocates and reallocates the VM. Minimum api-version: 2022-08-01."
-        },
-        "alignRegionalDisksToVMZone": {
-          "type": "boolean",
-          "description": "Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01."
         },
         "diskApiVersion": {
           "$ref": "#/definitions/DiskApiVersion",
@@ -26358,19 +26354,14 @@
     },
     "ZonePlacementPolicyType": {
       "type": "string",
-      "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.",
+      "description": "Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.",
       "enum": [
-        "Any",
         "Auto"
       ],
       "x-ms-enum": {
         "name": "ZonePlacementPolicyType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Any",
-            "value": "Any"
-          },
           {
             "name": "Auto",
             "value": "Auto",

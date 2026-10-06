@@ -1034,7 +1034,9 @@ union PatchOperationStatus {
 /**
  * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
  */
-union ZonePlacementPolicyType {
+@removed(Versions.v2026_09_01)
+@renamedFrom(Versions.v2026_09_01, "ZonePlacementPolicyType")
+union ZonePlacementPolicyTypeLegacy {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Any: "Any",
@@ -1043,6 +1045,19 @@ union ZonePlacementPolicyType {
    * Automatic zone placement in a Virtual Machine Scale Set.
    */
   @added(Versions.v2025_04_01)
+  Auto: "Auto",
+}
+
+/**
+ * Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+ */
+@added(Versions.v2026_09_01)
+union ZonePlacementPolicyType {
+  string,
+
+  /**
+   * Automatic zone placement in a Virtual Machine Scale Set.
+   */
   Auto: "Auto",
 }
 
@@ -5658,6 +5673,7 @@ model StorageProfile {
   /**
    * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
    */
+  @removed(Versions.v2026_09_01)
   alignRegionalDisksToVMZone?: boolean;
 
   /**
@@ -7142,6 +7158,14 @@ model Placement {
   /**
    * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "zonePlacementPolicy")
+  zonePlacementPolicyLegacy?: ZonePlacementPolicyTypeLegacy;
+
+  /**
+   * Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+   */
+  @added(Versions.v2026_09_01)
   zonePlacementPolicy?: ZonePlacementPolicyType;
 
   /**
