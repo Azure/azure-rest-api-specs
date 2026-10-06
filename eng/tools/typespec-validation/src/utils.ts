@@ -6,7 +6,7 @@ import {
   type Suppression,
 } from "@azure-tools/suppressions";
 import { access, readdir, readFile } from "node:fs/promises";
-import defaultPath, { basename, dirname, join, relative, type PlatformPath } from "node:path";
+import defaultPath, { basename, dirname, join, relative } from "node:path";
 import { simpleGit } from "simple-git";
 import { context } from "./index.ts";
 import { supportsColor } from "./diagnostics.ts";
@@ -68,11 +68,11 @@ export async function getSuppressions(path: string): Promise<Suppression[]> {
   return getSuppressionsImpl("TypeSpecValidation", path, context);
 }
 
-export function normalizePath(folder: string, path: PlatformPath = defaultPath) {
+export function normalizePath(folder: string, path: typeof defaultPath = defaultPath) {
   return normalizePathImpl(folder, path);
 }
 
-export function normalizePathImpl(folder: string, path: PlatformPath = defaultPath) {
+export function normalizePathImpl(folder: string, path: typeof defaultPath = defaultPath) {
   return path
     .resolve(folder)
     .split(path.sep)
