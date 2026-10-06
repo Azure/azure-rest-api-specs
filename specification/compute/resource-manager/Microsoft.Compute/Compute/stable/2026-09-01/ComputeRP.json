@@ -21251,6 +21251,30 @@
         }
       }
     },
+    "VirtualHostProfile": {
+      "type": "object",
+      "description": "The profile of the virtual host on which the virtual machine is running.",
+      "properties": {
+        "virtualizationType": {
+          "$ref": "#/definitions/VirtualizationType",
+          "description": "Specifies the virtualization model used to create and run child (L2) virtual machines on this host."
+        },
+        "virtualHostProperties": {
+          "$ref": "#/definitions/VirtualHostProperties",
+          "description": "The properties from the L1 to L2 virtual host."
+        }
+      }
+    },
+    "VirtualHostProperties": {
+      "type": "object",
+      "description": "The properties from the L1 to L2 virtual host.",
+      "properties": {
+        "gpuPartition": {
+          "type": "string",
+          "description": "Specifies the GPU partition assigned from the L1 virtual host to the L2 virtual machine."
+        }
+      }
+    },
     "VirtualMachine": {
       "type": "object",
       "description": "Describes a Virtual Machine.",
@@ -22539,6 +22563,10 @@
         "resiliencyProfile": {
           "$ref": "#/definitions/ResiliencyProfile",
           "description": "Resiliency profile for the virtual machine."
+        },
+        "virtualHostProfile": {
+          "$ref": "#/definitions/VirtualHostProfile",
+          "description": "Specifies the virtual host profile settings used for Layered Virtualization (L1VH), controlling how\nthe virtual machine hosts child (L2) virtual machines. Minimum api-version: 2026-09-01."
         }
       }
     },
@@ -26051,6 +26079,36 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ]
+    },
+    "VirtualizationType": {
+      "type": "string",
+      "description": "The virtualization model used to create and run child (L2) virtual machines on top of a virtual host:\n- DirectVirtualization (L1VH): the Azure/host hypervisor exposes interfaces to the L1 VM to create\nchild (L2) VMs without requiring an L1 guest hypervisor, avoiding nested virtualization overhead.\n- NestedVirtualization: the L1 VM runs its own hypervisor to create L2 VMs (double layer).\n- None: explicit opt-out sentinel used to clear a previously configured virtualization type.\nDirect virtualization is typically an explicit opt-in at VM create after compatibility validation,\nwhile existing VM sizes are enabled for nested virtualization by default.",
+      "enum": [
+        "None",
+        "DirectVirtualization",
+        "NestedVirtualization"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualizationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Explicit opt-out sentinel. Functionally equivalent to having no virtualization configured. On an\nupdate, passing None clears a previously configured virtualization type. This is distinct from a\nnull/omitted virtualizationType, which follows PATCH semantics and means \"no change\". This value is\nwrite-only: it is never returned in a GET response."
+          },
+          {
+            "name": "DirectVirtualization",
+            "value": "DirectVirtualization",
+            "description": "The Azure/host hypervisor exposes interfaces to the L1 VM to create child (L2) VMs directly, without\nrequiring an L1 guest hypervisor. Also known as L1VH (Layer-1 Virtual Host)."
+          },
+          {
+            "name": "NestedVirtualization",
+            "value": "NestedVirtualization",
+            "description": "The L1 VM runs its own hypervisor to create L2 VMs (double layer / traditional nested virtualization)."
+          }
+        ]
+      }
     },
     "VmDiskTypes": {
       "type": "string",
