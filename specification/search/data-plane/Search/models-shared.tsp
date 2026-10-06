@@ -59,6 +59,7 @@ alias listingPaginationQuery = {
   @added(Versions.v2026_08_01_preview)
   @minValue(1)
   @maxValue(3000)
+  @pageSize
   @query
   pageSize?: int32;
 
