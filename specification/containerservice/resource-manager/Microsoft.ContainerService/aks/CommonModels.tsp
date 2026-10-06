@@ -2072,6 +2072,12 @@ model ManagedClusterProperties {
   aiToolchainOperatorProfile?: ManagedClusterAIToolchainOperatorProfile;
 
   /**
+   * Agent Sandbox settings that apply to the whole cluster.
+   */
+  @added(Versions.v2026_08_02_preview)
+  agentSandboxProfile?: ManagedClusterAgentSandboxProfile;
+
+  /**
    * The Pod Snapshot Restore profile for the managed cluster.
    */
   @added(Versions.v2026_08_02_preview)
@@ -4223,6 +4229,18 @@ model ManagedClusterAIToolchainOperatorProfile {
   /**
    * Whether to enable AI toolchain operator to the cluster. Indicates if AI toolchain operator  enabled or not.
    */
+  enabled?: boolean;
+}
+
+/**
+ * Settings for the Agent Sandbox core extension managed by Azure Kubernetes Service (AKS).
+ */
+@added(Versions.v2026_08_02_preview)
+model ManagedClusterAgentSandboxProfile {
+  /**
+   * Whether the Agent Sandbox core extension is enabled for the cluster. On cluster creation, the default is false.
+   */
+  @added(Versions.v2026_08_02_preview)
   enabled?: boolean;
 }
 
