@@ -115,6 +115,7 @@ it.each([
 
 it.each([
   ".github/arm-leases/service/lease.yaml",
+  ".github/CODEOWNERS",
   "eng/common/scripts/common.ps1",
   "eng/scripts/ChangedFiles-Functions.ps1",
   "eng/scripts/Tests/ChangedFiles-Functions.Tests.ps1",

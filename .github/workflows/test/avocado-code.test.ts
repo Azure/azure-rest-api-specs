@@ -2,9 +2,9 @@ import type { GitHubScriptArgs } from "../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock fs/promises before imports
-vi.mock("fs/promises", () => ({ readFile: vi.fn() }));
+vi.mock("node:fs/promises", () => ({ readFile: vi.fn() }));
 
-import * as fs from "fs/promises";
+import * as fs from "node:fs/promises";
 
 const readFileMock = fs.readFile as import("vitest").Mock;
 
