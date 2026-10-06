@@ -207,6 +207,24 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
+
+@@clientName(Storage.Blob.Container.listBlobs, "listBlobsXml", "rust");
+@@access(Storage.Blob.Container.listBlobs, Access.internal, "rust");
+@@access(Storage.Blob.ListBlobsResponse, Access.public, "rust");
+
+@@clientName(
+  Storage.Blob.Container.listBlobHierarchySegment,
+  "listBlobsHierarchicalXml",
+  "rust"
+);
+@@access(
+  Storage.Blob.Container.listBlobHierarchySegment,
+  Access.internal,
+  "rust"
+);
+@@access(Storage.Blob.ListBlobsHierarchicalResponse, Access.public, "rust");
+@@access(Storage.Blob.ListBlobsIncludeItem, Access.public, "rust");
+
 @@clientName(Storage.Blob.Blob.abortCopyFromUrl, "abortCopy", "rust");
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
@@ -844,12 +862,13 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@scope(Storage.Blob.RetentionPolicy.allowPermanentDelete, "!javascript");
 
+@@scope(Storage.Blob.Container.listBlobFlatSegmentApacheArrow, "!rust");
+@@scope(Storage.Blob.Container.listBlobHierarchySegmentApacheArrow, "!rust");
 @@scope(Storage.Blob.Container.rename, "!rust");
 @@scope(Storage.Blob.Container.restore, "!rust");
 @@scope(Storage.Blob.Blob.copyFromUrl, "!rust");
 @@scope(Storage.Blob.Blob.setExpiry, "!rust");
 @@scope(Storage.Blob.BlockBlob.query, "!rust");
-@@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
 

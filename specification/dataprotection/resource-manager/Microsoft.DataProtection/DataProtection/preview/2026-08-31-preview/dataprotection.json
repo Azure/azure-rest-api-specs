@@ -5853,6 +5853,11 @@
         "recoveryPointState": {
           "$ref": "#/definitions/RecoveryPointCompletionState",
           "description": "Specifies recovery point completeness. Partial (i.e., only some of the intended items were backed up), or Completed (i.e., ALL intended items were backed up)."
+        },
+        "immutabilityProperties": {
+          "$ref": "#/definitions/RecoveryPointImmutabilityProperties",
+          "description": "Immutability properties of the recovery point.",
+          "readOnly": true
         }
       },
       "required": [
@@ -6609,6 +6614,30 @@
       "required": [
         "repeatingTimeIntervals"
       ]
+    },
+    "BackupSolutionType": {
+      "type": "string",
+      "description": "Backup solution types for PostgreSQL Flexible Server.",
+      "enum": [
+        "LogicalBackup",
+        "PhysicalBackup"
+      ],
+      "x-ms-enum": {
+        "name": "BackupSolutionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LogicalBackup",
+            "value": "LogicalBackup",
+            "description": "Logical backup type"
+          },
+          {
+            "name": "PhysicalBackup",
+            "value": "PhysicalBackup",
+            "description": "Physical backup type"
+          }
+        ]
+      }
     },
     "BackupVault": {
       "type": "object",
@@ -8486,6 +8515,21 @@
       ],
       "x-ms-discriminator-value": "ImmediateCopyOption"
     },
+    "ImmutabilityConfiguration": {
+      "type": "object",
+      "description": "Immutability configuration containing type and duration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ImmutabilityType",
+          "description": "Type of immutability. Supported values: AsPerPolicy or TimeBased."
+        },
+        "durationInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration in days for time-based immutability.\nRequired when type is TimeBased. Must be null when type is AsPerPolicy."
+        }
+      }
+    },
     "ImmutabilitySettings": {
       "type": "object",
       "description": "Immutability Settings at vault level",
@@ -8493,6 +8537,10 @@
         "state": {
           "$ref": "#/definitions/ImmutabilityState",
           "description": "Immutability state"
+        },
+        "configuration": {
+          "$ref": "#/definitions/ImmutabilityConfiguration",
+          "description": "Immutability configuration containing type and duration."
         }
       }
     },
@@ -8519,6 +8567,30 @@
           {
             "name": "Locked",
             "value": "Locked"
+          }
+        ]
+      }
+    },
+    "ImmutabilityType": {
+      "type": "string",
+      "description": "Type of immutability configuration.",
+      "enum": [
+        "AsPerPolicy",
+        "TimeBased"
+      ],
+      "x-ms-enum": {
+        "name": "ImmutabilityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AsPerPolicy",
+            "value": "AsPerPolicy",
+            "description": "Immutability is enforced as per the backup policy retention."
+          },
+          {
+            "name": "TimeBased",
+            "value": "TimeBased",
+            "description": "Time-based immutability with a configurable duration window."
           }
         ]
       }
@@ -9173,7 +9245,7 @@
         },
         "error": {
           "$ref": "#/definitions/Error",
-          "description": "Required if status == failed or status == canceled. This is the OData v4 error format, used by the RPC and will go into the v2.2 Azure REST API guidelines.\nThe full set of optional properties (e.g. inner errors / details) can be found in the \"Error Response\" section."
+          "description": "Required if status == failed or status == canceled. This is the OData v4 error format, used by the RPC and will go into the v2.2 Azure REST API guidelines.\nThe full set of optional properties (e.g. inner errors / details) can be found in the `Error Response` section."
         },
         "id": {
           "type": "string",
@@ -9181,7 +9253,7 @@
         },
         "name": {
           "type": "string",
-          "description": "It must match the last segment of the \"id\" field, and will typically be a GUID / system generated value"
+          "description": "It must match the last segment of the `id` field, and will typically be a GUID / system generated value."
         },
         "properties": {
           "$ref": "#/definitions/OperationExtendedInfo",
@@ -9323,6 +9395,22 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "PostgreSqlFlexibleServerBackupDatasourceParameters": {
+      "type": "object",
+      "description": "Parameters to be used during configuration of backup of PostgreSQL Flexible Servers",
+      "properties": {
+        "backupSolutionType": {
+          "$ref": "#/definitions/BackupSolutionType",
+          "description": "Type of backup taken, Logical/Physical"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupDatasourceParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "PostgreSqlFlexibleServerBackupDatasourceParameters"
     },
     "ProtectionStatusDetails": {
       "type": "object",
@@ -9472,6 +9560,24 @@
           "readOnly": true
         }
       }
+    },
+    "RecoveryPointImmutabilityProperties": {
+      "type": "object",
+      "description": "Immutability properties of a recovery point.",
+      "properties": {
+        "isImmutable": {
+          "type": "boolean",
+          "description": "Whether the recovery point is currently within its immutability window."
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC time when the recovery point's immutability window expires.\nNull for AsPerPolicy vaults."
+        }
+      },
+      "required": [
+        "isImmutable"
+      ]
     },
     "RehydrationPriority": {
       "type": "string",
@@ -10032,7 +10138,7 @@
       "properties": {
         "absoluteCriteria": {
           "type": "array",
-          "description": "it contains absolute values like \"AllBackup\" / \"FirstOfDay\" / \"FirstOfWeek\" / \"FirstOfMonth\"\nand should be part of AbsoluteMarker enum",
+          "description": "It contains absolute marker values such as `AllBackup`, `FirstOfDay`, `FirstOfWeek`, and `FirstOfMonth`.\nThese values should be part of the `AbsoluteMarker` enum.",
           "items": {
             "$ref": "#/definitions/AbsoluteMarker"
           }

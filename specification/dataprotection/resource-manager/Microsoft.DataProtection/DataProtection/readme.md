@@ -28,7 +28,7 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-2026-06-01
+tag: package-2026-07-01
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -90,6 +90,19 @@ suppressions:
       - $.definitions.KubernetesClusterVaultTierRestoreCriteria.properties.namespaceMappings
       - $.definitions.ResourceListSelectionCriteria.properties.resourceNameOverrides
     reason: Pre-existing DPP restore-criteria models, unchanged by cross-tenant restore. These are user-supplied source-to-target maps whose keys are caller-defined and cannot be enumerated in the contract; re-emitted only because this is a new preview version.
+```
+
+### Tag: package-2026-07-01
+
+These settings apply only when `--tag=package-2026-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-01'
+input-file:
+  - stable/2026-07-01/dataprotection.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataprotection.json
+    reason: There are objects that need a generic key-value pair in contract.
 ```
 
 ### Tag: package-2026-06-01
