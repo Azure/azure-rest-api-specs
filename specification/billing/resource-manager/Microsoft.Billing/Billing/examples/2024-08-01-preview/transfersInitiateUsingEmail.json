@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "billingAccountName": "10000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "billingProfileName": "xxxx-xxxx-xxx-xxx",
+    "invoiceSectionName": "yyyy-yyyy-yyy-yyy",
+    "transferName": "aabb456",
+    "api-version": "2024-08-01-preview",
+    "parameters": {
+      "properties": {
+        "recipientTenantId": "9a8b7c6d-5e4f-3210-9876-ba9876543210",
+        "recipientUserId": "jane.doe@fabrikam.com"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/10000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx/invoiceSections/yyyy-yyyy-yyy-yyy/transfers/aabb456",
+        "name": "aabb456",
+        "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections/transfers",
+        "properties": {
+          "expirationTime": "2024-09-13T17:32:28Z",
+          "transferStatus": "Pending",
+          "recipientTenantId": "9a8b7c6d-5e4f-3210-9876-ba9876543210",
+          "recipientUserId": "jane.doe@fabrikam.com",
+          "initiatorTenantId": "f1e2d3c4-b5a6-9087-cdef-123456789012",
+          "initiatorUserId": "john@contoso.com",
+          "detailedTransferStatus": []
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/10000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx/invoiceSections/yyyy-yyyy-yyy-yyy/transfers/aabb456",
+        "name": "aabb456",
+        "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections/transfers",
+        "properties": {
+          "expirationTime": "2024-09-13T17:32:28Z",
+          "transferStatus": "Pending",
+          "recipientTenantId": "9a8b7c6d-5e4f-3210-9876-ba9876543210",
+          "recipientUserId": "jane.doe@fabrikam.com",
+          "initiatorTenantId": "f1e2d3c4-b5a6-9087-cdef-123456789012",
+          "initiatorUserId": "john@contoso.com",
+          "detailedTransferStatus": []
+        }
+      }
+    }
+  },
+  "operationId": "Transfers_Initiate",
+  "title": "TransfersInitiateUsingEmail"
+}

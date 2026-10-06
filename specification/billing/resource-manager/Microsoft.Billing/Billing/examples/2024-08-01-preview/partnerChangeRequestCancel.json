@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "billingAccountName": "1234567",
+    "partnerChangeRequestGuid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "body": {
+      "properties": {
+        "cancellationReason": "Invalid channel partner transfer request raised."
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/1234567/partnerChangeRequests/3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "type": "Microsoft.Billing/billingAccounts/partnerChangeRequests",
+        "properties": {
+          "cancellationReason": "Invalid channel partner transfer request raised.",
+          "canceledBy": "initiator@customercontoso.com",
+          "requestStatus": "CancellationInProgress"
+        }
+      }
+    }
+  },
+  "operationId": "PartnerChangeRequest_Cancel",
+  "title": "PartnerChangeRequestsCancel"
+}

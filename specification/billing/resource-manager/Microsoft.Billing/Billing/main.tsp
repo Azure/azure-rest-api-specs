@@ -7,15 +7,14 @@
  * Version: 0.11.12
  * Date: 2026-02-01T07:26:21.551Z
  */
-import "@typespec/rest";
 import "@typespec/versioning";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
 import "./Agreement.tsp";
 import "./AssociatedTenant.tsp";
+import "./Alert.tsp";
 import "./AvailableBalance.tsp";
 import "./BillingAccount.tsp";
 import "./BillingProfile.tsp";
@@ -32,8 +31,14 @@ import "./Department.tsp";
 import "./EnrollmentAccount.tsp";
 import "./Invoice.tsp";
 import "./InvoiceSection.tsp";
+import "./InvoicingPreference.tsp";
+import "./LicenseReservation.tsp";
+import "./Migration.tsp";
 import "./PaymentMethodLink.tsp";
 import "./PaymentMethod.tsp";
+import "./PartnerChangeRequest.tsp";
+import "./PurchaseOrder.tsp";
+import "./PurchaseOrderMapping.tsp";
 import "./CustomerPolicy.tsp";
 import "./BillingProfilePolicy.tsp";
 import "./BillingAccountPolicy.tsp";
@@ -47,20 +52,16 @@ import "./RecipientTransferDetails.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+
 /**
  * Documentation for Microsoft.Billing.
  */
 @armProviderNamespace
 @service(#{ title: "BillingManagementClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Billing;
 
 /**
@@ -68,30 +69,15 @@ namespace Microsoft.Billing;
  */
 enum Versions {
   /**
-   * The 2024-04-01 API version.
+   * Represents API version 2024-04-01.
    */
   v2024_04_01: "2024-04-01",
+
+  /**
+   * Represents API version 2024-08-01-preview.
+   */
+  @Azure.Core.previewVersion
+  v2024_08_01_preview: "2024-08-01-preview",
 }
 
-// interface Operations extends Azure.ResourceManager.Operations {
-//   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-//   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
-//   list is Azure.ResourceManager.Operations.list;
-// }
-
-interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
-  @tag("ArmOperations")
-  @autoRoute
-  @doc("List of operations supported by provider.")
-  @segment("operations")
-  @get
-  @list
-  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
-    | ArmResponse<OperationListResult>
-    | Azure.ResourceManager.ErrorResponse;
-}
+interface Operations extends Azure.ResourceManager.Operations {}

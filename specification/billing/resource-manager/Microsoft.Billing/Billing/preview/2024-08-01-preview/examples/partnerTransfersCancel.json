@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "customerName": "xyz",
+    "transferName": "aabb123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/BillingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/customers/{customerId}/transfers/aabb123",
+        "name": "aabb123",
+        "type": "Microsoft.Billing/transfers",
+        "properties": {
+          "expirationTime": "2018-11-05T17:32:28Z",
+          "transferStatus": "Pending",
+          "recipientTenantId": "8c1c5d6e-2b4a-4f3e-9a7b-1d2e3f4a5b6c",
+          "recipientUserId": "user@contoso.com",
+          "initiatorTenantId": "f1e2d3c4-b5a6-9087-cdef-123456789012",
+          "initiatorUserId": "xyz@contoso.com",
+          "canceledBy": "user@contoso.com"
+        }
+      }
+    }
+  },
+  "operationId": "PartnerTransfers_Cancel",
+  "title": "PartnerTransferCancel"
+}

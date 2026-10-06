@@ -1,20 +1,19 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./BillingAccount.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 /**
  * An invoice.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "The subscription routes mean Billing Subscription, not Azure Subscription."
 @tenantResource
 @parentResource(BillingAccount)
 model Invoice is Azure.ResourceManager.ProxyResource<InvoiceProperties> {
@@ -22,14 +21,14 @@ model Invoice is Azure.ResourceManager.ProxyResource<InvoiceProperties> {
     Resource = Invoice,
     KeyName = "invoiceName",
     SegmentName = "invoices",
-    NamePattern = "^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$"
+    NamePattern = InvoicePattern
   >;
 
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
   tags?: Record<string>;
 }
 
@@ -47,7 +46,7 @@ alias InvoiceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
   },
   {},
@@ -56,10 +55,46 @@ alias InvoiceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("invoices")
     @key
-    @pattern("^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$")
+    @pattern(InvoicePattern)
     invoiceName: string;
   },
   "BillingInvoice"
+>;
+
+alias InvoiceByBillingProfileOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Billing";
+
+    /** The ID that uniquely identifies a billing account. */
+    @path
+    @segment("billingAccounts")
+    @key
+    @pattern(BillingAccountNamePattern)
+    billingAccountName: string;
+
+    /** The ID that uniquely identifies a billing profile. */
+    @path
+    @segment("billingProfiles")
+    @key
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+    billingProfileName: string;
+  },
+  {},
+  {
+    /** The ID that uniquely identifies an invoice. */
+    @path
+    @segment("invoices")
+    @key
+    @pattern(InvoicePattern)
+    invoiceName: string;
+  },
+  "BillingProfileInvoice"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -67,16 +102,12 @@ interface Invoices {
   /**
    * Gets an invoice by billing account name and ID. The operation is supported for all billing account types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   getByBillingAccount is InvoiceOps.Read<Invoice>;
 
   /**
    * Lists the invoices for a billing account for a given start date and end date. The operation is supported for all billing account types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   listByBillingAccount is InvoiceOps.List<
     Invoice,
@@ -93,41 +124,7 @@ interface Invoices {
       @query("periodEndDate")
       periodEndDate?: plainDate;
 
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
+      ...DefaultODataParameters;
     },
     Response = ArmResponse<InvoiceListResult>
   >;
@@ -135,8 +132,6 @@ interface Invoices {
   /**
    * Regenerate an invoice by billing account name and invoice name. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   amend is InvoiceOps.ActionAsync<
     Invoice,
@@ -148,8 +143,6 @@ interface Invoices {
   /**
    * Gets a URL to download an invoice document. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   @action("download")
   downloadByBillingAccount is InvoiceOps.ActionAsync<
@@ -168,8 +161,6 @@ interface Invoices {
   /**
    * Gets a URL to download the summary document for an invoice. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   @action("downloadSummary")
   downloadSummaryByBillingAccount is InvoiceOps.ActionAsync<
@@ -181,8 +172,6 @@ interface Invoices {
   /**
    * Lists the transactions for an invoice. Transactions include purchases, refunds and Azure usage charges.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Transaction")
   @list
   @get
@@ -192,49 +181,13 @@ interface Invoices {
     void,
     ArmResponse<TransactionListResult>,
     Parameters = {
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
+      ...DefaultODataParameters;
     }
   >;
 
   /**
    * Gets a URL to download the transactions document for an invoice. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Transaction")
   @action("transactionsDownload")
   transactionsDownloadByInvoice is InvoiceOps.ActionAsync<
@@ -246,8 +199,6 @@ interface Invoices {
   /**
    * Gets the transaction summary for an invoice. Transactions include purchases, refunds and Azure usage charges.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Transaction")
   @get
   @action("transactionSummary")
@@ -268,6 +219,30 @@ interface Invoices {
       @query("search")
       search?: string;
     }
+  >;
+
+  /**
+   * Initiates a pay now operation for an invoice.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @tag("Invoice")
+  @action("paynow")
+  paynow is InvoiceByBillingProfileOps.ActionAsync<
+    Invoice,
+    InvoicePaynowRequest,
+    Azure.ResourceManager.Foundations.OperationStatusResult
+  >;
+
+  /**
+   * Validate whether a user is eligible to use the Pay Now feature for the invoice.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @tag("Invoice")
+  @action("validatePaynowEligibility")
+  validatePaynowEligibility is InvoiceByBillingProfileOps.ActionSync<
+    Invoice,
+    void,
+    ArmResponse<PaynowEligibilityResult>
   >;
 }
 alias InvoiceByBillingSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -290,7 +265,7 @@ alias InvoiceByBillingSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOp
     @path
     @segment("billingSubscriptions")
     @key
-    @pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
+    @pattern(GuidPattern)
     subscriptionId: string;
   },
   {},
@@ -299,7 +274,7 @@ alias InvoiceByBillingSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOp
     @path
     @segment("invoices")
     @key
-    @pattern("^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$")
+    @pattern(InvoicePattern)
     invoiceName: string;
   },
   "SubscriptionBillingInvoice"
@@ -310,16 +285,12 @@ interface InvoiceByBillingSubscription {
   /**
    * Gets an invoice by subscription ID and invoice ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   getByBillingSubscription is InvoiceByBillingSubscriptionOps.Read<Invoice>;
 
   /**
    * Lists the invoices for a subscription. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   listByBillingSubscription is InvoiceByBillingSubscriptionOps.List<
     Invoice,
@@ -336,41 +307,7 @@ interface InvoiceByBillingSubscription {
       @query("periodEndDate")
       periodEndDate?: plainDate;
 
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
+      ...DefaultODataParameters;
     },
     Response = ArmResponse<InvoiceListResult>
   >;
@@ -378,8 +315,6 @@ interface InvoiceByBillingSubscription {
   /**
    * Gets a URL to download an invoice by billing subscription. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   @action("download")
   downloadByBillingSubscription is InvoiceByBillingSubscriptionOps.ActionAsync<
@@ -417,7 +352,7 @@ alias InvoiceByIdOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("invoices")
     @key
-    @pattern("^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$")
+    @pattern(InvoicePattern)
     invoiceName: string;
   },
   "DefaultBillingInvoice"
@@ -428,11 +363,13 @@ interface InvoiceById {
   /**
    * Gets an invoice by ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Invoice")
   get is InvoiceByIdOps.Read<Invoice>;
 }
 
 @@doc(Invoice.name, "The ID that uniquely identifies an invoice.");
 @@doc(Invoice.properties, "An invoice.");
+@@doc(
+  Invoices.paynow::parameters.body,
+  "The request details for a pay now operation."
+);
