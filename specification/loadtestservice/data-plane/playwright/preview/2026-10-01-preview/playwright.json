@@ -1346,7 +1346,7 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "#/definitions/BrowserSessionArtifactsError",
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error that occurred while collecting artifacts for the browser session.",
           "readOnly": true
         },
@@ -1398,24 +1398,6 @@
           ]
         }
       }
-    },
-    "BrowserSessionArtifactsError": {
-      "type": "object",
-      "description": "An error that occurred while collecting artifacts for a browser session.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
     },
     "BrowserSessionArtifactsStatus": {
       "type": "string",

@@ -114,7 +114,7 @@ model BrowserSessionArtifacts {
 
   @doc("The error that occurred while collecting artifacts for the browser session.")
   @visibility(Lifecycle.Read)
-  error?: BrowserSessionArtifactsError;
+  error?: Azure.Core.Foundations.Error;
 
   @doc("The finalized artifacts uploaded for the browser session.")
   @visibility(Lifecycle.Read)
@@ -137,16 +137,6 @@ union BrowserSessionArtifactsStatus {
 
   @doc("Artifact collection failed.")
   Failed: "Failed",
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("An error that occurred while collecting artifacts for a browser session.")
-model BrowserSessionArtifactsError {
-  @doc("The error code.")
-  code: string;
-
-  @doc("The error message.")
-  message: string;
 }
 
 @added(Versions.v2026_10_01_preview)
