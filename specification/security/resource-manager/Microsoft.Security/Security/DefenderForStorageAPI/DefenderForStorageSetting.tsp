@@ -68,7 +68,8 @@ alias DefenderForStorageSettingsOps = Azure.ResourceManager.Legacy.ExtensionOper
     @path
     @segment("defenderForStorageSettings")
     @key
-    settingName: "current";
+    @pattern("^current$")
+    settingName: string;
   }
 >;
 
@@ -94,7 +95,8 @@ alias DefenderForStorageMalwareScansOps = Azure.ResourceManager.Legacy.Extension
     @path
     @segment("defenderForStorageSettings")
     @key
-    settingName: "current";
+    @pattern("^current$")
+    settingName: string;
   },
   {},
   {
@@ -183,7 +185,8 @@ interface DefenderForStorageSettings {
     @path
     @segment("defenderForStorageSettings")
     @key
-    settingName: "current",
+    @pattern("^current$")
+    settingName: string,
 
     /** Optional request body to filter which blobs and files to scan. */
     @added(Versions.v2026_01_01_preview)
