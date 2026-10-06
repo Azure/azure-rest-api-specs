@@ -454,6 +454,24 @@ union ConnectivityStatus {
 }
 
 /**
+ * Status of the Azure Arc Gateway on the cluster.
+ */
+@added(Versions.v2026_10_15_preview)
+union ArcGatewayStatus {
+  string,
+
+  /**
+   * Azure Arc Gateway is enabled on the cluster.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Azure Arc Gateway is disabled on the cluster.
+   */
+  Disabled: "Disabled",
+}
+
+/**
  * Status of the Software Assurance for the cluster.
  */
 union SoftwareAssuranceStatus {
@@ -2246,6 +2264,13 @@ model ClusterProperties {
   sdnProperties?: ClusterSdnProperties;
 
   /**
+   * Azure Arc Gateway properties of the cluster.
+   */
+  @added(Versions.v2026_10_15_preview)
+  @visibility(Lifecycle.Read)
+  arcGatewayProperties?: ArcGatewayProperties;
+
+  /**
    * Local Availability Zone information for HCI cluster
    */
   @identifiers(#["localAvailabilityZoneName"])
@@ -2263,6 +2288,18 @@ model ClusterProperties {
   @added(Versions.v2026_04_30)
   @visibility(Lifecycle.Read)
   storageType?: StorageType;
+}
+
+/**
+ * Azure Arc Gateway properties of the cluster.
+ */
+@added(Versions.v2026_10_15_preview)
+model ArcGatewayProperties {
+  /**
+   * Status of the Azure Arc Gateway on the cluster.
+   */
+  @visibility(Lifecycle.Read)
+  arcGatewayStatus?: ArcGatewayStatus = ArcGatewayStatus.Disabled;
 }
 
 /**
