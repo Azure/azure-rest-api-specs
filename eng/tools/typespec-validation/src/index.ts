@@ -184,6 +184,11 @@ export async function main() {
       description:
         "Select a shard using one-based indices. Each shard requires a separate checkout.",
     },
+    "github-summary": {
+      type: "boolean",
+      group: "Options for --all",
+      description: "Append failed project paths to the GitHub job summary.",
+    },
     "dry-run": {
       type: "boolean",
       group: "Options for --all or --changed",
@@ -231,6 +236,17 @@ export async function main() {
     process.exitCode = 1;
     return;
   }
+  if (values["github-summary"] && !values.all) {
+    console.error("--github-summary requires --all");
+    process.exitCode = 1;
+    return;
+  }
+  const summaryFile = values["github-summary"] ? process.env.GITHUB_STEP_SUMMARY : undefined;
+  if (values["github-summary"] && !summaryFile) {
+    console.error("--github-summary requires the GITHUB_STEP_SUMMARY environment variable");
+    process.exitCode = 1;
+    return;
+  }
 
   if (values.changed) {
     if (parsedArgs.positionals.length > 0) {
@@ -255,7 +271,7 @@ export async function main() {
   if (values.all) {
     if (parsedArgs.positionals.length > 1) {
       console.error(
-        "Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean] [--dry-run]",
+        "Usage: tsv --all [folder] [--shard=<index>/<count>] [--github-summary] [--git-clean] [--dry-run]",
       );
       process.exitCode = 1;
       return;
@@ -265,6 +281,7 @@ export async function main() {
       shard: values.shard,
       dryRun: values["dry-run"],
       verbose: values.verbose,
+      summaryFile,
     });
     if (!success) process.exitCode = 1;
     return;

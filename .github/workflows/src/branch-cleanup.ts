@@ -1,6 +1,7 @@
 import type { GitHubScriptArgs } from "./github.ts";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
+const DEFAULT_RETENTION = { copilotDays: 90, otherDays: 2 * 365 };
 const PRESERVED_NAMES =
   /^(main|master|develop|gh-pages|typespec-next|RPSaas|RPSaaSMaster|RPSaaSCanary|ARMCoreRPDev)$/i;
 const PRESERVED_PREFIXES = /^(dev[-/]|release[-/]|feature[-/]|published\/|archive\/|hotfix\/)/i;
@@ -19,10 +20,10 @@ interface BranchPage {
   };
 }
 
-export function isStale(branch: Branch, now: number): boolean {
+export function isStale(branch: Branch, now: number, retention = DEFAULT_RETENTION): boolean {
   const date = Date.parse(branch.target.committedDate);
   if (!Number.isFinite(date)) throw new Error(`Invalid commit date for ${branch.name}`);
-  const days = branch.name.startsWith("copilot/") ? 90 : 3 * 365;
+  const days = branch.name.startsWith("copilot/") ? retention.copilotDays : retention.otherDays;
   return now - date > days * DAY_MS;
 }
 
@@ -30,8 +31,15 @@ export async function cleanupBranches(
   { github, context, core }: GitHubScriptArgs,
   dryRun: boolean,
   git: (args: string[]) => Promise<number>,
+  retention = DEFAULT_RETENTION,
   now = Date.now(),
 ): Promise<void> {
+  for (const [name, days] of Object.entries(retention)) {
+    if (!Number.isSafeInteger(days) || days <= 0) {
+      throw new Error(`${name} must be a positive whole number of days`);
+    }
+  }
+  core.info(`Retention: Copilot ${retention.copilotDays} days; others ${retention.otherDays} days`);
   const { data: repository } = await github.rest.repos.get(context.repo);
   const prs = await github.paginate(github.rest.pulls.list, {
     ...context.repo,
@@ -73,7 +81,7 @@ export async function cleanupBranches(
       ) {
         continue;
       }
-      if (isStale(branch, now)) candidates.push(branch);
+      if (isStale(branch, now, retention)) candidates.push(branch);
     }
     const { hasNextPage, endCursor } = response.repository.refs.pageInfo;
     if (!hasNextPage) break;

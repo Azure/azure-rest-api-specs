@@ -1,4 +1,5 @@
 import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
+import { d } from "@azure-tools/specs-shared/testing";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { verbatim } from "../src/diagnostic-content.ts";
 import { context, runRules } from "../src/index.ts";
@@ -191,9 +192,11 @@ describe("runRules", function () {
             severity: "error",
             code: "compile",
             message: "TypeSpec compilation failed.",
-            details: verbatim(
-              "main.tsp:1:1 - error invalid-ref: Unknown identifier.\n> 1 | invalid\n    | ^",
-            ),
+            details: verbatim(d`
+              main.tsp:1:1 - error invalid-ref: Unknown identifier.
+              > 1 | invalid
+                  | ^
+            `),
           },
         ],
       });
@@ -202,9 +205,12 @@ describe("runRules", function () {
       expect(rule.executeFn).toHaveBeenCalledWith("/test", logger);
       expect(log.mock.calls.flat()).toEqual(["", "1 failed"]);
       expect(log.mock.invocationCallOrder[0]).toBeGreaterThan(error.mock.invocationCallOrder[0]);
-      expect(error).toHaveBeenCalledExactlyOnceWith(
-        "error tsv/compile: TypeSpec compilation failed.\nmain.tsp:1:1 - error invalid-ref: Unknown identifier.\n> 1 | invalid\n    | ^",
-      );
+      expect(error).toHaveBeenCalledExactlyOnceWith(d`
+        error tsv/compile: TypeSpec compilation failed.
+        main.tsp:1:1 - error invalid-ref: Unknown identifier.
+        > 1 | invalid
+            | ^
+      `);
     },
   );
 
