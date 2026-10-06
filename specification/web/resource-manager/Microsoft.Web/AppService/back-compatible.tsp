@@ -2087,7 +2087,6 @@ using Microsoft.Web;
 
 @@clientLocation(EgressConfigs.createOrUpdateEgressConfig, WebApps, "!csharp");
 @@clientLocation(EgressConfigs.listEgressConfig, WebApps, "!csharp");
-@@clientLocation(EgressConfigs.validateEgressConfig, WebApps, "!csharp");
 @@clientLocation(
   EgressConfigSlotConfigs.createOrUpdateEgressConfigSlot,
   WebApps,
@@ -2095,11 +2094,6 @@ using Microsoft.Web;
 );
 @@clientLocation(
   EgressConfigSlotConfigs.listEgressConfigSlot,
-  WebApps,
-  "!csharp"
-);
-@@clientLocation(
-  EgressConfigSlotConfigs.validateEgressConfigSlot,
   WebApps,
   "!csharp"
 );

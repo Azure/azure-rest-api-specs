@@ -10011,7 +10011,7 @@
           "WebApps"
         ],
         "summary": "Creates or replaces the egress configuration for an app.",
-        "description": "Creates or replaces the egress configuration for an app. The supplied\nconnections replace the stored ones in full, so connections omitted from\nthe request are deleted; omitting connections entirely, or supplying an\nempty object, deletes the configuration for the app. Returns 201 when no\nconfiguration was stored for the app beforehand and 200 otherwise, with the\nstored configuration in the response body.\n\nThe request is normalized and then structurally and semantically validated\nbefore persistence. Invalid configurations are rejected by create/update.\nClients can call the validate action first to obtain preflight diagnostics\nwithout writing the configuration.",
+        "description": "Creates or replaces the egress configuration for an app. The supplied\nconnections replace the stored ones in full, so connections omitted from\nthe request are deleted; omitting connections entirely, or supplying an\nempty object, deletes the configuration for the app. Returns 201 when no\nconfiguration was stored for the app beforehand and 200 otherwise, with the\nstored configuration in the response body.\n\nThe request is normalized and then structurally and semantically validated\nbefore persistence. Invalid configurations are rejected.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -10092,57 +10092,6 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EgressConfig"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress:validate": {
-      "post": {
-        "operationId": "WebApps_ValidateEgressConfig",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Validates an egress configuration without applying it.",
-        "description": "Validates an egress configuration without applying it.\n\nThis checks the same structural and semantic constraints enforced by\ncreate/update, including referenced setting existence and managed identity\nassignment requirements, and returns diagnostics for preflight use.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EgressConfigProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ValidationResult"
             }
           },
           "default": {
@@ -22802,7 +22751,7 @@
           "WebApps"
         ],
         "summary": "Creates or replaces the egress configuration for a deployment slot.",
-        "description": "Creates or replaces the egress configuration for a deployment slot. The\nsupplied connections replace the stored ones in full, so connections\nomitted from the request are deleted; omitting connections entirely, or\nsupplying an empty object, deletes the configuration for the slot. Returns\n201 when no configuration was stored for the slot beforehand and 200\notherwise, with the stored configuration in the response body.\n\nThe request is normalized and then structurally and semantically validated\nbefore persistence. Invalid configurations are rejected by create/update.\nClients can call the validate action first to obtain preflight diagnostics\nwithout writing the configuration.",
+        "description": "Creates or replaces the egress configuration for a deployment slot. The\nsupplied connections replace the stored ones in full, so connections\nomitted from the request are deleted; omitting connections entirely, or\nsupplying an empty object, deletes the configuration for the slot. Returns\n201 when no configuration was stored for the slot beforehand and 200\notherwise, with the stored configuration in the response body.\n\nThe request is normalized and then structurally and semantically validated\nbefore persistence. Invalid configurations are rejected.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -22897,64 +22846,6 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EgressConfig"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress:validate": {
-      "post": {
-        "operationId": "WebApps_ValidateEgressConfigSlot",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Validates an egress configuration for a deployment slot.",
-        "description": "Validates an egress configuration for a deployment slot without applying\nit.\n\nThis checks the same structural and semantic constraints enforced by\ncreate/update, including referenced setting existence and managed identity\nassignment requirements, and returns diagnostics for preflight use.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EgressConfigProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ValidationResult"
             }
           },
           "default": {
@@ -57229,125 +57120,6 @@
           "description": "Validation error message."
         }
       }
-    },
-    "ValidationError": {
-      "type": "object",
-      "description": "A single validation error.",
-      "properties": {
-        "connectionName": {
-          "type": "string",
-          "description": "The connection name that failed validation (or null for top-level errors)."
-        },
-        "setting": {
-          "type": "string",
-          "description": "The setting name within the connection (if applicable)."
-        },
-        "code": {
-          "$ref": "#/definitions/ValidationErrorCode",
-          "description": "Machine-readable error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Human-readable error message."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "ValidationErrorCode": {
-      "type": "string",
-      "description": "Machine-readable error codes returned by the validate action.",
-      "enum": [
-        "InvalidConfiguration",
-        "MissingSetting",
-        "InvalidRoleCombination",
-        "InvalidCredentialInjection",
-        "MissingCredentialInjection",
-        "MissingCredentialSource",
-        "OrphanedUsername",
-        "HostConflict",
-        "TooManySettings",
-        "TooManyConnections"
-      ],
-      "x-ms-enum": {
-        "name": "ValidationErrorCode",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "InvalidConfiguration",
-            "value": "InvalidConfiguration",
-            "description": "The configuration contains invalid structure, names, values, or unsupported individual options."
-          },
-          {
-            "name": "MissingSetting",
-            "value": "MissingSetting",
-            "description": "A referenced setting does not exist in the configured source."
-          },
-          {
-            "name": "InvalidRoleCombination",
-            "value": "InvalidRoleCombination",
-            "description": "An unsupported role+protocol+auth combination."
-          },
-          {
-            "name": "InvalidCredentialInjection",
-            "value": "InvalidCredentialInjection",
-            "description": "credentialInjection is specified on a non-http connection."
-          },
-          {
-            "name": "MissingCredentialInjection",
-            "value": "MissingCredentialInjection",
-            "description": "A connection with auth=credential + protocol=http has a separate credential setting but no credentialInjection."
-          },
-          {
-            "name": "MissingCredentialSource",
-            "value": "MissingCredentialSource",
-            "description": "auth=credential but no credential-role or value-role setting provides the secret to inject."
-          },
-          {
-            "name": "OrphanedUsername",
-            "value": "OrphanedUsername",
-            "description": "A connection has a username role but no host or value setting to bind it to."
-          },
-          {
-            "name": "HostConflict",
-            "value": "HostConflict",
-            "description": "Two connections resolve to the same host:port with conflicting policies."
-          },
-          {
-            "name": "TooManySettings",
-            "value": "TooManySettings",
-            "description": "The connection exceeds the maximum number of settings (10)."
-          },
-          {
-            "name": "TooManyConnections",
-            "value": "TooManyConnections",
-            "description": "The configuration exceeds the maximum number of connections (50)."
-          }
-        ]
-      }
-    },
-    "ValidationResult": {
-      "type": "object",
-      "description": "Result of validating an egress configuration.",
-      "properties": {
-        "valid": {
-          "type": "boolean",
-          "description": "Whether the configuration is valid."
-        },
-        "errors": {
-          "type": "array",
-          "description": "Validation errors, if any. Empty when valid=true.",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "valid"
-      ]
     },
     "VirtualApplication": {
       "type": "object",

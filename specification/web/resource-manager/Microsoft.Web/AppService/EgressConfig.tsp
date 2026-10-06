@@ -223,68 +223,6 @@ union VirtualConnectionSettingRole {
   Value: "Value",
 }
 
-/** Result of validating an egress configuration. */
-@added(Versions.v2026_09_01)
-model ValidationResult {
-  /** Whether the configuration is valid. */
-  valid: boolean;
-
-  /** Validation errors, if any. Empty when valid=true. */
-  @Azure.ResourceManager.identifiers(#[])
-  errors?: ValidationError[];
-}
-
-/** A single validation error. */
-@added(Versions.v2026_09_01)
-model ValidationError {
-  /** The connection name that failed validation (or null for top-level errors). */
-  connectionName?: string;
-
-  /** The setting name within the connection (if applicable). */
-  setting?: string;
-
-  /** Machine-readable error code. */
-  code: ValidationErrorCode;
-
-  /** Human-readable error message. */
-  message: string;
-}
-
-/** Machine-readable error codes returned by the validate action. */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Validation error codes are a stable machine-readable contract and unknown codes are not returned by the 2026-09-01 service."
-@added(Versions.v2026_09_01)
-union ValidationErrorCode {
-  /** The configuration contains invalid structure, names, values, or unsupported individual options. */
-  InvalidConfiguration: "InvalidConfiguration",
-
-  /** A referenced setting does not exist in the configured source. */
-  MissingSetting: "MissingSetting",
-
-  /** An unsupported role+protocol+auth combination. */
-  InvalidRoleCombination: "InvalidRoleCombination",
-
-  /** credentialInjection is specified on a non-http connection. */
-  InvalidCredentialInjection: "InvalidCredentialInjection",
-
-  /** A connection with auth=credential + protocol=http has a separate credential setting but no credentialInjection. */
-  MissingCredentialInjection: "MissingCredentialInjection",
-
-  /** auth=credential but no credential-role or value-role setting provides the secret to inject. */
-  MissingCredentialSource: "MissingCredentialSource",
-
-  /** A connection has a username role but no host or value setting to bind it to. */
-  OrphanedUsername: "OrphanedUsername",
-
-  /** Two connections resolve to the same host:port with conflicting policies. */
-  HostConflict: "HostConflict",
-
-  /** The connection exceeds the maximum number of settings (10). */
-  TooManySettings: "TooManySettings",
-
-  /** The configuration exceeds the maximum number of connections (50). */
-  TooManyConnections: "TooManyConnections",
-}
-
 // ─────────────────────────────────────────────────────────────────────────────
 // Operations — production slot: .../sites/{name}/config/egress
 // ─────────────────────────────────────────────────────────────────────────────
@@ -328,9 +266,7 @@ interface EgressConfigs {
    * stored configuration in the response body.
    *
    * The request is normalized and then structurally and semantically validated
-   * before persistence. Invalid configurations are rejected by create/update.
-   * Clients can call the validate action first to obtain preflight diagnostics
-   * without writing the configuration.
+   * before persistence. Invalid configurations are rejected.
    */
   @summary("Creates or replaces the egress configuration for an app.")
   createOrUpdateEgressConfig is EgressConfigOps.CreateOrUpdateSync<
@@ -353,23 +289,6 @@ interface EgressConfigs {
     EgressConfig,
     void,
     ArmResponse<EgressConfig>,
-    OverrideErrorType = DefaultErrorResponse
-  >;
-
-  /**
-   * Validates an egress configuration without applying it.
-   *
-   * This checks the same structural and semantic constraints enforced by
-   * create/update, including referenced setting existence and managed identity
-   * assignment requirements, and returns diagnostics for preflight use.
-   */
-  @summary("Validates an egress configuration without applying it.")
-  @action("validate")
-  @actionSeparator(":")
-  validateEgressConfig is EgressConfigOps.ActionSync<
-    EgressConfig,
-    EgressConfigProperties,
-    ArmResponse<ValidationResult>,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
@@ -423,9 +342,7 @@ interface EgressConfigSlotConfigs {
    * otherwise, with the stored configuration in the response body.
    *
    * The request is normalized and then structurally and semantically validated
-   * before persistence. Invalid configurations are rejected by create/update.
-   * Clients can call the validate action first to obtain preflight diagnostics
-   * without writing the configuration.
+   * before persistence. Invalid configurations are rejected.
    */
   @summary("Creates or replaces the egress configuration for a deployment slot.")
   createOrUpdateEgressConfigSlot is EgressConfigSlotOps.CreateOrUpdateSync<
@@ -448,24 +365,6 @@ interface EgressConfigSlotConfigs {
     EgressConfig,
     void,
     ArmResponse<EgressConfig>,
-    OverrideErrorType = DefaultErrorResponse
-  >;
-
-  /**
-   * Validates an egress configuration for a deployment slot without applying
-   * it.
-   *
-   * This checks the same structural and semantic constraints enforced by
-   * create/update, including referenced setting existence and managed identity
-   * assignment requirements, and returns diagnostics for preflight use.
-   */
-  @summary("Validates an egress configuration for a deployment slot.")
-  @action("validate")
-  @actionSeparator(":")
-  validateEgressConfigSlot is EgressConfigSlotOps.ActionSync<
-    EgressConfig,
-    EgressConfigProperties,
-    ArmResponse<ValidationResult>,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
