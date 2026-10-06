@@ -83,6 +83,7 @@ it.each([true, false])(
       "user/old",
       "dev-old",
       "dev/old",
+      "published/old",
       "trunk",
       "main",
       "develop",
@@ -92,7 +93,6 @@ it.each([true, false])(
       "release/old",
       "feature/old",
       "feature-old",
-      "published/old",
       "archive/old",
       "hotfix/old",
       "protected",
@@ -104,7 +104,7 @@ it.each([true, false])(
     await cleanupBranches(args, dryRun, git, undefined, NOW);
     expect(args.github.graphql.mock.calls[1][1]).toMatchObject({ cursor: "next" });
     expect(args.core.info).toHaveBeenCalledWith(
-      `${dryRun ? "Dry run" : "Cleanup"}: 4 stale branches`,
+      `${dryRun ? "Dry run" : "Cleanup"}: 5 stale branches`,
     );
     if (dryRun) {
       expect(git).not.toHaveBeenCalled();
@@ -117,11 +117,13 @@ it.each([true, false])(
         `--force-with-lease=refs/heads/user/old:${SHA}`,
         `--force-with-lease=refs/heads/dev-old:${SHA}`,
         `--force-with-lease=refs/heads/dev/old:${SHA}`,
+        `--force-with-lease=refs/heads/published/old:${SHA}`,
         "https://github.com/owner/repo.git",
         ":refs/heads/copilot/old",
         ":refs/heads/user/old",
         ":refs/heads/dev-old",
         ":refs/heads/dev/old",
+        ":refs/heads/published/old",
       ]);
     }
   },
