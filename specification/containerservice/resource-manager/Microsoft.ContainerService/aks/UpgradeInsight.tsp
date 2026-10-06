@@ -529,10 +529,11 @@ model UpgradeInsight is ProxyResource<UpgradeInsightProperties> {
  * The base request body for the generateUpgradeInsights action. The concrete shape is
  * determined by `upgradeType`, so that each scope declares exactly the inputs it needs:
  * the schema itself enforces which of `targetKubernetesVersion`,
- * `targetKubernetesVersion` and `agentPoolName` are required, rather than relying on
- * documented conventions plus server-side validation. For NodeImage, the server
- * resolves the effective target node image version. The server generates (or refreshes)
- * the corresponding target-specific UpgradeInsight and returns it.
+ * `targetNodeImageVersion`, and `agentPoolName` are required or optional, rather than
+ * relying on documented conventions plus server-side validation. For NodeImage, the
+ * server resolves the latest available node image when no target is supplied. The
+ * server generates (or refreshes) the corresponding target-specific UpgradeInsight
+ * and returns it.
  */
 @added(Versions.v2026_08_02_preview)
 @discriminator("upgradeType")
@@ -572,6 +573,9 @@ model NodeImageGenerateUpgradeInsightsContent
 
   /** The name of the agent pool to evaluate. */
   agentPoolName: string;
+
+  /** The target node OS image version to evaluate. If omitted, the server evaluates the latest available node image. The generated insight always returns the effective version in `properties.targetNodeImageVersion`. */
+  targetNodeImageVersion?: string;
 }
 
 /** Request body to evaluate the combined control plane and agent pools Kubernetes version upgrade. */

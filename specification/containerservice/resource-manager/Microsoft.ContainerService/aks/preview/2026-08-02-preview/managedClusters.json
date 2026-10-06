@@ -10484,7 +10484,7 @@
     },
     "GenerateUpgradeInsightsContent": {
       "type": "object",
-      "description": "The base request body for the generateUpgradeInsights action. The concrete shape is\ndetermined by `upgradeType`, so that each scope declares exactly the inputs it needs:\nthe schema itself enforces which of `targetKubernetesVersion`,\n`targetKubernetesVersion` and `agentPoolName` are required, rather than relying on\ndocumented conventions plus server-side validation. For NodeImage, the server\nresolves the effective target node image version. The server generates (or refreshes)\nthe corresponding target-specific UpgradeInsight and returns it.",
+      "description": "The base request body for the generateUpgradeInsights action. The concrete shape is\ndetermined by `upgradeType`, so that each scope declares exactly the inputs it needs:\nthe schema itself enforces which of `targetKubernetesVersion`,\n`targetNodeImageVersion`, and `agentPoolName` are required or optional, rather than\nrelying on documented conventions plus server-side validation. For NodeImage, the\nserver resolves the latest available node image when no target is supplied. The\nserver generates (or refreshes) the corresponding target-specific UpgradeInsight\nand returns it.",
       "properties": {
         "upgradeType": {
           "$ref": "#/definitions/UpgradeType",
@@ -16224,6 +16224,10 @@
         "agentPoolName": {
           "type": "string",
           "description": "The name of the agent pool to evaluate."
+        },
+        "targetNodeImageVersion": {
+          "type": "string",
+          "description": "The target node OS image version to evaluate. If omitted, the server evaluates the latest available node image. The generated insight always returns the effective version in `properties.targetNodeImageVersion`."
         }
       },
       "required": [
