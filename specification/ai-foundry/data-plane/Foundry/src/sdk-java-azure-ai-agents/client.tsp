@@ -713,7 +713,7 @@ using Azure.AI.Projects;
 
 @@clientName(VoiceConversation.object, "objectType");
 @@clientName(OpenAI.VoiceIdsShared, "VoiceIds");
-@@clientName(VoiceResponseBase.object, "objectType");
+@@clientName(OpenAI.RealtimeResponse.object, "objectType");
 
 // Use natural Java ordering for Realtime conversation-message model names.
 @@clientName(
