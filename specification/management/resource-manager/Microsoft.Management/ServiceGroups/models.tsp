@@ -127,7 +127,7 @@ model ServiceGroupAttributes {
    */
   @added(Versions.v2026_09_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
+  memberLocationConstraint?: string;
 }
 
 /**
