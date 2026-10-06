@@ -21,9 +21,8 @@ namespace Azure.AI.Projects {
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
-
-    @removed(Versions.v1)
     web_iq_preview: "web_iq_preview",
+    github_copilot_toolset_preview: "github_copilot_toolset_preview",
   }
 
   // General availability tools:
@@ -32,6 +31,7 @@ namespace Azure.AI.Projects {
     azure_ai_search: "azure_ai_search",
     azure_function: "azure_function",
     bing_grounding: "bing_grounding",
+    browser_automation: "browser_automation",
     capture_structured_outputs: "capture_structured_outputs",
     openapi: "openapi",
 
@@ -78,6 +78,57 @@ namespace Azure.AI.Projects {
     #deprecated "This property is deprecated and will be removed in a future version."
     tool_configs?: Record<ToolConfig>;
   };
+
+  @doc("A customer-configurable GitHub Copilot built-in tool.")
+  union GitHubCopilotBuiltInTool {
+    @doc("Read and search files in the harness workspace.")
+    filesystem_read: "filesystem_read",
+
+    @doc("Create and modify files in the harness workspace.")
+    filesystem_write: "filesystem_write",
+
+    @doc("Execute operating-system commands.")
+    shell: "shell",
+
+    @doc("Fetch content and search external network resources.")
+    web: "web",
+
+    @doc("Delegate work to additional agents.")
+    subagents: "subagents",
+  }
+
+  @doc("The default enablement setting for GitHub Copilot built-in tools.")
+  model GitHubCopilotToolsetDefaultConfig {
+    @doc("Whether built-in tools are enabled by default. Defaults to true.")
+    enabled?: boolean = true;
+  }
+
+  @doc("An enablement override for a GitHub Copilot built-in tool.")
+  model GitHubCopilotToolsetConfig {
+    @doc("The built-in tool to configure.")
+    name: GitHubCopilotBuiltInTool;
+
+    @doc("Whether the built-in tool is enabled. If omitted, the toolset default applies.")
+    enabled?: boolean;
+  }
+
+  @doc("Configuration overrides for GitHub Copilot built-in tools.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview],
+    }
+  )
+  model GitHubCopilotToolsetPreview extends OpenAI.Tool {
+    @doc("The type of the toolset. Always `github_copilot_toolset_preview`.")
+    type: "github_copilot_toolset_preview";
+
+    @doc("The default configuration for built-in tools. If omitted, built-in tools are enabled by default.")
+    default_config?: GitHubCopilotToolsetDefaultConfig;
+
+    @doc("Per-tool configuration overrides. Duplicate built-in tool names are not allowed.")
+    configs?: GitHubCopilotToolsetConfig[];
+  }
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(
@@ -385,9 +436,23 @@ namespace Azure.AI.Projects {
   }
 
   /**
+   * The input definition information for a Browser Automation Tool, as used to configure an Agent.
+   */
+  model BrowserAutomationTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'browser_automation'.
+     */
+    type: "browser_automation";
+
+    /**
+     * The Browser Automation Tool parameters.
+     */
+    browser_automation: BrowserAutomationToolParameters;
+  }
+
+  /**
    * Definition of input parameters for the Browser Automation Tool.
    */
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolParameters {
     /**
      * The project connection parameters associated with the Browser Automation Tool.
@@ -398,7 +463,6 @@ namespace Azure.AI.Projects {
   /**
    * Definition of input parameters for the connection used by the Browser Automation Tool.
    */
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolConnectionParameters {
     /**
      * The ID of the project connection to your Azure Playwright resource.
@@ -899,7 +963,6 @@ namespace Azure.AI.Projects {
   /**
    * A WebIQ server-side tool.
    */
-  @removed(Versions.v1)
   @extension("x-ms-foundry-meta", PreviewTool)
   model WebIQPreviewTool extends OpenAI.Tool {
     /**
@@ -913,12 +976,12 @@ namespace Azure.AI.Projects {
     project_connection_id: string;
 
     /**
-     * The label of the WebIQ MCP server to connect to.
+     * The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id.
      */
     server_label?: string;
 
     /**
-     * Whether the agent requires approval before executing actions. Default is always.
+     * Whether the agent requires approval before executing actions. When omitted, the service defaults to "always".
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
@@ -1195,7 +1258,6 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A browser automation tool call.")
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolCall extends OpenAI.OutputItem {
     type: "browser_automation_preview_call";
 
@@ -1210,7 +1272,6 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a browser automation tool call.")
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolCallOutput extends OpenAI.OutputItem {
     type: "browser_automation_preview_call_output";
 

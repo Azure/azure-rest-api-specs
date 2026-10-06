@@ -1,0 +1,11 @@
+import "./main.tsp";
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
+using Microsoft.Compute.WorkloadManager;
+
+@@clientName(
+  Microsoft.Compute.WorkloadManager,
+  "ComputeWorkloadManagerMgmtClient",
+  "python"
+);
