@@ -683,19 +683,35 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchClient.suggestPost, Access.public, "java");
 @@clientName(SearchClient.suggestPost, "suggest", "java");
 @@access(SearchClient.index, Access.internal);
-@@access(SearchIndexerClient.listDataSources, Access.internal);
+@@access(SearchIndexerClient.listDataSources, Access.public);
+@@clientName(
+  SearchIndexerClient.listDataSources,
+  "GetDataSourceConnectionsWithSelectedProperties"
+);
 @@access(SearchIndexerClient.createOrUpdateDataSource, Access.internal);
 @@access(SearchIndexerClient.deleteDataSource, Access.internal, "python");
-@@access(SearchIndexerClient.listIndexers, Access.internal);
+@@access(SearchIndexerClient.listIndexers, Access.public);
+@@clientName(
+  SearchIndexerClient.listIndexers,
+  "GetIndexersWithSelectedProperties"
+);
 @@access(SearchIndexerClient.createOrUpdateIndexer, Access.internal);
 @@access(SearchIndexerClient.resetDocs, Access.internal, "python");
 @@access(SearchIndexerClient.deleteIndexer, Access.internal, "python");
 @@access(SearchIndexerClient.resync, Access.internal, "python");
-@@access(SearchIndexerClient.listSkillsets, Access.internal);
+@@access(SearchIndexerClient.listSkillsets, Access.public);
+@@clientName(
+  SearchIndexerClient.listSkillsets,
+  "GetSkillsetsWithSelectedProperties"
+);
 @@access(SearchIndexerClient.createOrUpdateSkillset, Access.internal);
 @@access(SearchIndexerClient.deleteSkillset, Access.internal, "python");
 @@access(SearchIndexerClient.resetSkills, Access.internal, "python");
-@@access(SearchIndexClient.listSynonymMaps, Access.internal);
+@@access(SearchIndexClient.listSynonymMaps, Access.public);
+@@clientName(
+  SearchIndexClient.listSynonymMaps,
+  "GetSynonymMapsWithSelectedProperties"
+);
 @@access(SearchIndexClient.createOrUpdateSynonymMap, Access.internal);
 @@access(SearchIndexClient.deleteSynonymMap, Access.internal, "python");
 @@access(SearchIndexClient.createOrUpdateIndex, Access.internal);
