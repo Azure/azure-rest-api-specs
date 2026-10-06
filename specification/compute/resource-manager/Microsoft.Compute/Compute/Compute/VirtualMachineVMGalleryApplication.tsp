@@ -93,7 +93,7 @@ interface VirtualMachineVMGalleryApplicationOps
 @armResourceOperations
 interface VirtualMachineVMGalleryApplications {
   /**
-    * Gets a gallery application installed on a virtual machine.
+   * Gets a gallery application installed on a virtual machine.
    */
   @added(Versions.v2026_09_01)
   get is VirtualMachineVMGalleryApplicationOps.Read<
@@ -153,7 +153,7 @@ interface VirtualMachineVMGalleryApplications {
   >;
 
   /**
-    * Gets a gallery application and its instance view from a virtual machine.
+   * Gets a gallery application and its instance view from a virtual machine.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "The controller exposes instanceView as a GET action."

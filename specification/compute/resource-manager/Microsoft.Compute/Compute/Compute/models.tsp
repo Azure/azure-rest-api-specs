@@ -3648,10 +3648,12 @@ model VMGalleryApplication {
 /**
  * Specifies the properties of a gallery application resource.
  */
-@added(Versions.v2026_09_01)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The existing VM application response does not include provisioningState."
-model VMGalleryApplicationProperties
-  is OmitProperties<VMGalleryApplication, "tags">;
+@added(Versions.v2026_09_01)
+model VMGalleryApplicationProperties is OmitProperties<
+  VMGalleryApplication,
+  "tags"
+>;
 
 /**
  * Specifies a custom action for a gallery application.
@@ -3665,7 +3667,7 @@ model VMGalleryApplicationCustomAction {
 
   /**
    * Optional. A unique identifier that distinguishes this run of the action from any other.
-   * Note that in practice this should be a guid, but we have no constraints. We really only 
+   * Note that in practice this should be a guid, but we have no constraints. We really only
    * care whether it's different than the previous value. The unique identifier of the custom action.
    */
   uniqueIdentifier?: string;
@@ -3727,7 +3729,7 @@ model VMGalleryApplicationInstanceView {
   /**
    * The list of actions performed on the application instance.
    */
-   @identifiers(#[])
+  @identifiers(#[])
   actionsPerformed: VMGalleryApplicationInstanceViewAction[];
 }
 
@@ -9973,7 +9975,7 @@ model VirtualMachineRunCommandProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Backward compatibility: keeping wire format unchanged for existing API versions"
   runAsPassword?: string;
-  
+
   /**
    * Optional. If set to true, the command will be run immediately bypassing typical pipelines to reach the VM directly..
    */
