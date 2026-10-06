@@ -100,6 +100,10 @@ interface AdapterDeployments {
    * Returns 201 for a new adapter or 200 for an existing adapter, including retries.
    * Either response may require polling while provisioning is in progress.
    * After polling completes, retrieve the final resource from the original resource URL.
+   * Omit conditional headers to allow either creation or update.
+   * To create only when absent, send If-None-Match: *.
+   * To update only a matching version, send If-Match with the ETag returned by GET.
+   * Conditional requests, including retries, return 412 if the precondition is not met.
    */
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<

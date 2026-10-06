@@ -2146,7 +2146,7 @@
         "tags": [
           "AdapterDeployments"
         ],
-        "description": "Creates an adapter deployment or re-targets it to another compatible\nmanaged compute deployment. The source model ID is immutable.\nReturns 201 for a new adapter or 200 for an existing adapter, including retries.\nEither response may require polling while provisioning is in progress.\nAfter polling completes, retrieve the final resource from the original resource URL.",
+        "description": "Creates an adapter deployment or re-targets it to another compatible\nmanaged compute deployment. The source model ID is immutable.\nReturns 201 for a new adapter or 200 for an existing adapter, including retries.\nEither response may require polling while provisioning is in progress.\nAfter polling completes, retrieve the final resource from the original resource URL.\nOmit conditional headers to allow either creation or update.\nTo create only when absent, send If-None-Match: *.\nTo update only a matching version, send If-Match with the ETag returned by GET.\nConditional requests, including retries, return 412 if the precondition is not met.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2264,9 +2264,6 @@
         "x-ms-examples": {
           "CreateOrUpdateAdapterDeployment": {
             "$ref": "./examples/CreateOrUpdateAdapterDeployment.json"
-          },
-          "UpdateAdapterDeployment": {
-            "$ref": "./examples/UpdateAdapterDeployment.json"
           }
         },
         "x-ms-long-running-operation-options": {
