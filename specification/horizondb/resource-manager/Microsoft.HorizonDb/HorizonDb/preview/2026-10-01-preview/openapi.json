@@ -8335,14 +8335,19 @@
           "minimum": 0,
           "readOnly": true
         },
-        "poolName": {
+        "pool": {
           "$ref": "#/definitions/PoolName",
-          "description": "The name of the HorizonDB pool that generated the log file.",
+          "description": "The name of the HorizonDB pool that the node generating the log file belongs to.",
           "readOnly": true
         },
-        "nodeName": {
+        "node": {
           "type": "string",
-          "description": "The name of the HorizonDB node that generated the log file.",
+          "description": "The node that generated the log file in the HorizonDB cluster.",
+          "readOnly": true
+        },
+        "role": {
+          "$ref": "#/definitions/NodeRole",
+          "description": "The role performed by the node that generated the log file.",
           "readOnly": true
         }
       },
@@ -8353,8 +8358,9 @@
         "retentionExpiresAtUtc",
         "isMutable",
         "sizeInKilobytes",
-        "poolName",
-        "nodeName"
+        "pool",
+        "node",
+        "role"
       ]
     },
     "LogFileType": {
