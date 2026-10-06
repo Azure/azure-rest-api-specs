@@ -105,6 +105,26 @@ model RunbookApprovalStepAddRequest extends RunbookStepAddRequest {
   entities?: string[];
 }
 
+@doc("Request payload for adding a custom script runbook step.")
+@added(ApiVersions.v2026_08_01_preview)
+model RunbookScriptStepAddRequest extends RunbookStepAddRequest {
+  @doc("Discriminator for a custom script runbook step.")
+  stepRef: RunbookStepRef.Script;
+
+  @doc("Identifier of the script to execute.")
+  @maxLength(256)
+  scriptName: string;
+
+  @doc("Location where the script runs.")
+  executionLocation: ScriptExecutionLocation;
+
+  @doc("Whether the script runs once for the runbook (Once, only valid with Host location) or once per selected entity (PerEntity, not valid with Host location). Required; it is not derived from the execution location.")
+  executionScope: ScriptExecutionScope;
+
+  @doc("Migration entity resource names the script targets. Not applicable when the execution location is Host.")
+  entities?: string[];
+}
+
 @doc("Request payload for updating a runbook step.")
 @added(ApiVersions.v2026_08_01_preview)
 model RunbookStepUpdateRequest {

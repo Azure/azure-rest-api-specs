@@ -100,6 +100,11 @@ namespace Microsoft.Migrate {
   "RunbookApprovalStepAddContent",
   "csharp"
 );
+@@clientName(
+  RunbookScriptStepAddRequest,
+  "RunbookScriptStepAddContent",
+  "csharp"
+);
 @@clientName(RunbookStepUpdateRequest, "RunbookStepUpdateContent", "csharp");
 @@clientName(RunbookStepDeleteRequest, "RunbookStepDeleteContent", "csharp");
 @@clientName(

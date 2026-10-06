@@ -83,6 +83,33 @@ union RunbookStepRef {
   @doc("Approval runbook step.")
   Approval: "common.approval",
 
+  @doc("Custom script runbook step.")
+  Script: "common.script",
+
+  string,
+}
+
+@doc("Location where a runbook script step runs.")
+@added(ApiVersions.v2026_08_01_preview)
+union ScriptExecutionLocation {
+  @doc("Runs on the host.")
+  Host: "Host",
+
+  @doc("Runs on the source VM.")
+  SourceVM: "SourceVM",
+
+  string,
+}
+
+@doc("Whether a runbook script step runs once for the runbook or once per selected entity.")
+@added(ApiVersions.v2026_08_01_preview)
+union ScriptExecutionScope {
+  @doc("Runs once for the runbook.")
+  Once: "Once",
+
+  @doc("Runs once per selected entity.")
+  PerEntity: "PerEntity",
+
   string,
 }
 
