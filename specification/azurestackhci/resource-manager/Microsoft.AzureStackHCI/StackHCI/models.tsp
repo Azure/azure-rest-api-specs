@@ -456,7 +456,7 @@ union ConnectivityStatus {
 /**
  * Status of the Azure Arc Gateway on the cluster.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_11_01_preview)
 union ArcGatewayStatus {
   string,
 
@@ -2266,7 +2266,7 @@ model ClusterProperties {
   /**
    * Azure Arc Gateway properties of the cluster.
    */
-  @added(Versions.v2026_10_15_preview)
+  @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
   arcGatewayProperties?: ArcGatewayProperties;
 
@@ -2293,7 +2293,7 @@ model ClusterProperties {
 /**
  * Azure Arc Gateway properties of the cluster.
  */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_11_01_preview)
 model ArcGatewayProperties {
   /**
    * Status of the Azure Arc Gateway on the cluster.

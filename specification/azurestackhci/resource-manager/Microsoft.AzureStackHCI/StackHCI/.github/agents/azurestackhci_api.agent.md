@@ -19,6 +19,94 @@ You help engineers:
 - Run the build/validation pipeline
 - Fix compilation and validation errors
 
+## Local Dependency Setup and Compilation
+
+The user normally opens this agent in the **StackHCI project folder**, not the repository root. Use PowerShell, discover the current checkout, and use absolute paths so the same commands work from either folder. Do not hard-code a checkout or user-profile path.
+
+### Select and Verify the Compiler Before Compiling
+
+Do not use `pnpm exec`, `pnpm run`, `npx tsp`, or a global `tsp` for routine compilation. pnpm can trigger a workspace-wide install before executing the compiler. An isolated project toolchain can be current while the repository-root compiler remains outdated; never recommend the root `node_modules` compiler without verifying it. **Always switch into StackHCI before invoking the compiler, including `--version`: the TypeSpec launcher can select the current directory's compiler even when invoked through an absolute path to another installation.**
+
+```powershell
+$repoRoot = git rev-parse --show-toplevel
+if ($LASTEXITCODE -ne 0) { throw "Cannot locate the Git repository root." }
+$repoRoot = [System.IO.Path]::GetFullPath($repoRoot)
+$projectRoot = Join-Path $repoRoot 'specification\azurestackhci\resource-manager\Microsoft.AzureStackHCI\StackHCI'
+if (!(Test-Path (Join-Path $projectRoot 'main.tsp')) -or
+    !(Test-Path (Join-Path $projectRoot 'tspconfig.yaml'))) {
+  throw "Cannot locate the StackHCI TypeSpec project."
+}
+
+# Prefer the project-local installation, including an isolated-toolchain junction.
+$dependencyRoot = Join-Path $projectRoot 'node_modules'
+if (!(Test-Path $dependencyRoot)) {
+  $dependencyRoot = Join-Path $repoRoot 'node_modules'
+}
+$compiler = Join-Path $dependencyRoot '@typespec\compiler\cmd\tsp.js'
+if (!(Test-Path $compiler)) { throw "TypeSpec dependencies need installation." }
+
+$catalog = Get-Content (Join-Path $repoRoot 'pnpm-workspace.yaml') -Raw
+$pin = [regex]::Match($catalog, '(?m)^  "@typespec/compiler":\s*(\d+\.\d+\.\d+)\s*$')
+if (!$pin.Success) { throw "Cannot read the exact compiler catalog pin; inspect the workspace configuration." }
+$expectedVersion = $pin.Groups[1].Value
+Push-Location $projectRoot
+try {
+  $actualVersion = (node $compiler --version | Out-String).Trim()
+  if ($LASTEXITCODE -ne 0) { throw "The installed TypeSpec compiler cannot start." }
+  Write-Output "Compiler: $compiler; installed: $actualVersion; expected: $expectedVersion"
+  if ($actualVersion -ne $expectedVersion) {
+    throw "Compiler version mismatch. Refresh the selected toolchain before compiling."
+  }
+  node $compiler compile .
+  if ($LASTEXITCODE -ne 0) { throw "StackHCI compilation failed; inspect the diagnostics." }
+} finally {
+  Pop-Location
+}
+```
+
+Before compiling, also compare installed imported TypeSpec libraries, emitter, and ruleset versions with the current checkout's catalog and lockfile. A compiler version check alone does not verify the entire toolchain. If project-local dependencies exist but are incomplete or stale, repair them rather than silently falling back to the root compiler. Updating root dependencies does not refresh a project-local installation that shadows them.
+
+Run installs and compilation **in the foreground with visible output**. Announce each operation, provide meaningful progress updates during long waits, and report the exit code and elapsed time. Do not use background agents or detached processes. If a tool times out while its command continues, monitor that same command rather than starting another.
+
+Use the same verified compiler for formatting:
+
+```powershell
+Push-Location $projectRoot
+try {
+  node $compiler format "*.tsp"
+  if ($LASTEXITCODE -ne 0) { throw "TypeSpec formatting failed." }
+} finally {
+  Pop-Location
+}
+```
+
+### Fresh Clone or Changed Pins
+
+Tools do not expire. Install only when dependencies are missing/broken or checkout pins change. Require the Node version in the root `package.json`. Run normal setup from the **repository root**, then reselect and verify the compiler above:
+
+```powershell
+Push-Location $repoRoot
+try {
+  node .\eng\scripts\install-pnpm.mts
+  if ($LASTEXITCODE -ne 0) { throw "Pinned pnpm setup failed." }
+  pnpm install --frozen-lockfile
+  if ($LASTEXITCODE -ne 0) { throw "Dependency installation failed." }
+} finally {
+  Pop-Location
+}
+```
+
+### If the Full Workspace Install Fails
+
+- Registry `401 Unauthorized` errors are feed/authentication failures, not compilation errors. Reinstalling pnpm does not fix them. Do not repeatedly retry a known-failing install, delete the lockfile, disable TLS verification or release-age checks, or add wildcard policy exclusions.
+- For compile-only work, create an isolated toolchain under the ignored `<repoRoot>\node_modules\.stackhci-toolchain`, with its own private `package.json` and `pnpm-workspace.yaml` to avoid installing the parent workspace.
+- Include the compiler, all external libraries imported by StackHCI, configured emitter/ruleset, and required peers. Derive versions from the current checkout's catalog/lockfile, preserving release-age policy, scoped exclusions, and applicable overrides. Do not reuse hard-coded versions from another checkout.
+- Install inside the isolated workspace with `pnpm install --ignore-scripts` and retain its generated lockfile. If the launcher is broken, invoke a verified entrypoint for the checkout's pinned pnpm version with Node.
+- After successful installation, link `StackHCI\node_modules` to the isolated toolchain's `node_modules` with a Windows directory junction. Inspect existing paths first; never blindly replace or delete an existing directory/junction. Confirm the toolchain and link are Git-ignored.
+- Keep the isolated toolchain and link for future runs. Refresh them when pins change, then use the verified project-local compiler above. An `unknown-rule-set: client-sdk` error can indicate outdated Azure libraries; do not remove linter configuration to hide it.
+
+After compilation, inspect Git status and report generated Swagger and `service.yaml` changes without discarding output or unrelated edits. Compilation does not replace the separately required TypeSpec validation and example checks.
+
 ## Extended Resource Patterns
 
 The base instructions cover proxy and tracked resource basics. Here are additional patterns:
@@ -156,7 +244,7 @@ Never skip this prompt. Even small changes like adding a single property or enum
 1. Add the property in `models.tsp` under the correct model.
 2. Ask the user if they want to update an example (search for affected files first).
 3. If yes: pick one representative example (typically the GET example) and add the property to its response body (and request body if writable).
-4. Run the build workflow (`npx tsp format **/*.tsp`, `tsp compile .`, and repo-specific example validation command).
+4. Follow **Local Dependency Setup and Compilation** above to format and compile with the verified local compiler, then run the repo-specific example validation command.
 
 ### Adding a New Resource
 1. Create the properties model in `models.tsp` with a section comment.
@@ -197,4 +285,4 @@ Before finishing, verify:
 - [ ] Read-only properties only in response bodies of examples
 - [ ] No "private preview" or internal-only comments remain in TypeSpec files (this is a public repo)
 - [ ] TypeSpec files are formatted
-- [ ] `tsp compile .` succeeds
+- [ ] Direct compilation with the verified local TypeSpec compiler succeeds
