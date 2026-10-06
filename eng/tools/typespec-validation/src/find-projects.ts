@@ -25,7 +25,9 @@ const coreFiles = new Set([
 function isCoreFile(file: string): boolean {
   return (
     coreFiles.has(file) ||
-    (file.startsWith(".github/") && !file.startsWith(".github/arm-leases/")) ||
+    (file.startsWith(".github/") &&
+      file !== ".github/CODEOWNERS" &&
+      !file.startsWith(".github/arm-leases/")) ||
     (file.startsWith("eng/") && !file.startsWith("eng/common/")) ||
     file.startsWith("specification/common-types/")
   );
