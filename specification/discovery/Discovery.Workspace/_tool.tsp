@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 
@@ -64,6 +66,18 @@ scalar DataUri extends string;
 @pattern("^discovery://storageassets/.*$")
 scalar StorageUri extends string;
 
+@doc("The protocol to use for mounting an storage container.")
+@added(Versions.`2026-06-01`)
+union StorageMountProtocol {
+  @doc("NFS protocol. Version of NFS used may vary based on storage type")
+  NFS: "NFS",
+
+  @doc("Blobfuse in file cache mode.")
+  BlobfuseCaching: "BlobfuseCaching",
+
+  string,
+}
+
 /** Data URI and path where it will be mounted in the tool container. */
 model InputDataMount {
   /** URI of input data to mount. */
@@ -77,6 +91,10 @@ model InputDataMount {
   /** Absolute path within the container at which to mount this input. */
   @pattern("^/.+$")
   mountPath: string;
+
+  @doc("The protocol to use for mounting this storage. Overrides any value specified on the storage container.")
+  @added(Versions.`2026-06-01`)
+  mountProtocol?: StorageMountProtocol;
 }
 
 /** Definition of a mount for collecting tool output data. */
@@ -101,6 +119,10 @@ model OutputDataMount {
   /** Absolute path within the container from which to collect output data. */
   @pattern("^/.+$")
   mountPath: string;
+
+  @doc("The protocol to use for mounting this storage. Overrides any value specified on the storage container.")
+  @added(Versions.`2026-06-01`)
+  mountProtocol?: StorageMountProtocol;
 }
 
 /** Model for providing the URI of the output collected from a specific container path. */
@@ -172,6 +194,7 @@ model OutputDataUri {
  * When the run completes, the status API will provide a URI which identifies the location to which
  * the output has been written, allowing it to be consumed by downstream tools.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Parameters to run a Tool")
 model RunRequest {
   ...WithProjectNamePath;
@@ -278,7 +301,6 @@ model InlineFile {
   @maxLength(100000) // ~100kB - relaxed for AKS backend
   encodedFile: string;
 }
-
 @doc("Explicitly set tool run requirements - overrides the tool definition.")
 model InfraOverrides {
   @doc("Override CPU requirements (e.g. 1, or 500m for 500 milli-CPUs)")
@@ -295,6 +317,18 @@ model InfraOverrides {
 
   @doc("Override the image to use for this tool run.")
   imageUri?: string;
+
+  @doc("Override the maximum CPU allowed for the tool run (e.g. 1, or 500m for 500 milli-CPUs)")
+  @added(Versions.`2026-06-01`)
+  maxCpu?: string;
+
+  @doc("Override the maximum RAM allowed for the tool run (e.g. 500Mi or 1Gi)")
+  @added(Versions.`2026-06-01`)
+  maxRam?: string;
+
+  @doc("Override the maximum GPU count allowed for the tool run")
+  @added(Versions.`2026-06-01`)
+  maxGpu?: string;
 }
 
 /** For tracking when it completed. */
@@ -318,6 +352,7 @@ model RunResult {
   @doc("The user that started the tool run.")
   createdBy?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("Details provided by the tool (rather than the platform).")
   toolReport?: {
     /** Percentage compete */
@@ -431,7 +466,11 @@ model NodepoolUsage {
   allocatableGPUs: string;
 }
 
-/** Get operations parameters. */
+/** Response model for the cancel run operation status. */
+@added(Versions.`2026-06-01`)
+model CancelRunOperationStatus is Foundations.OperationStatus<RunResult>;
+
+/** Get operations parameters (preview). */
 alias GetOperationsParameters = {
   /** Skip results (pagination control). */
   @query
@@ -478,16 +517,46 @@ interface Tools {
   @doc("Cancel an ongoing tool run.")
   @route("/tools/projects/{projectName}/operations/{operationId}:cancel")
   @post
+  @sharedRoute
+  @removed(Versions.`2026-06-01`)
   cancelRun is Foundations.Operation<
     WithProjectNamePath & WithOperationId,
     AcceptedResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Cancel an ongoing tool run.")
+  @route("/tools/projects/{projectName}/operations/{operationId}:cancel")
+  @post
+  @sharedRoute
+  @added(Versions.`2026-06-01`)
+  @pollingOperation(Tools.getRunStatus)
+  cancelRunLro is Foundations.LongRunningOperation<
+    WithProjectNamePath & WithOperationId,
+    AcceptedResponse & CancelRunOperationStatus
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving operationId for backward compatibility with existing preview SDKs"
+  @removed(Versions.`2026-06-01`)
   @doc("List tool runs.")
   @route("/tools/projects/{projectName}/operations")
-  getOperations is Foundations.Operation<
+  @get
+  @sharedRoute
+  @operationId("Tools_GetOperations")
+  getOperationsLegacy is Foundations.Operation<
     WithProjectNamePath & GetOperationsParameters,
+    Foundations.CustomPage<Operation>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.`2026-06-01`)
+  @doc("List tool runs.")
+  @route("/tools/projects/{projectName}/operations")
+  @get
+  @sharedRoute
+  getOperations is Foundations.Operation<
+    WithProjectNamePath & Azure.Core.StandardListQueryParameters,
     Foundations.CustomPage<Operation>
   >;
 

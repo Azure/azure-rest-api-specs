@@ -24,6 +24,7 @@ namespace Microsoft.Network;
 model PublicIPPrefix extends Common.Resource {
   properties?: PublicIPPrefixPropertiesFormat;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @path
   @key("publicIpPrefixName")

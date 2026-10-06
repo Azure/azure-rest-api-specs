@@ -18,6 +18,7 @@ import "./ContainerGroup.tsp";
 import "./NGroup.tsp";
 import "./ContainerGroupProfile.tsp";
 import "./SandboxGroup.tsp";
+import "./ManagedVirtualNodePool.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
@@ -54,6 +55,16 @@ enum Versions {
    * The 2026-07-01 API version.
    */
   v2026_07_01: "2026-07-01",
+
+  /**
+   * The 2026-08-01-preview API version.
+   */
+  v2026_08_01_preview: "2026-08-01-preview",
+
+  /**
+   * The 2026-09-01-preview API version.
+   */
+  v2026_09_01_preview: "2026-09-01-preview",
 }
 
 interface Operations

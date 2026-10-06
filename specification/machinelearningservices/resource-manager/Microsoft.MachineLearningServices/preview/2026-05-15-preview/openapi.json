@@ -21851,10 +21851,7 @@
           "items": {
             "$ref": "#/definitions/SystemService"
           },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "publicIpAddress"
-          ]
+          "readOnly": true
         },
         "agentCount": {
           "type": "integer",
@@ -22380,10 +22377,7 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "/error/code"
-          ]
+          "readOnly": true
         },
         "currentNodeCount": {
           "type": "integer",
@@ -25159,10 +25153,7 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "/error/code"
-          ]
+          "readOnly": true
         },
         "isAttachedCompute": {
           "type": "boolean",
@@ -25480,10 +25471,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/CustomService"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "osImageMetadata": {
           "$ref": "#/definitions/ImageMetadata",
@@ -25614,10 +25602,7 @@
           "items": {
             "$ref": "#/definitions/ComputeInstanceContainer"
           },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "readOnly": true
         },
         "dataDisks": {
           "type": "array",
@@ -25626,8 +25611,7 @@
           "items": {
             "$ref": "#/definitions/ComputeInstanceDataDisk"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "dataMounts": {
           "type": "array",
@@ -25636,8 +25620,7 @@
           "items": {
             "$ref": "#/definitions/ComputeInstanceDataMount"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "versions": {
           "$ref": "#/definitions/ComputeInstanceVersion",
@@ -27180,9 +27163,11 @@
       "properties": {
         "keys": {
           "type": "object",
+          "format": "password",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         }
       }
     },
@@ -27324,6 +27309,11 @@
           "description": "Output Asset Name.",
           "x-nullable": true
         },
+        "assetVersion": {
+          "type": "string",
+          "description": "Output Asset Version.",
+          "x-nullable": true
+        },
         "mode": {
           "type": "string",
           "description": "Output data delivery mode enums.",
@@ -27355,6 +27345,11 @@
             "read",
             "create"
           ]
+        },
+        "pathOnCompute": {
+          "type": "string",
+          "description": "Output Asset Delivery Path.",
+          "x-nullable": true
         },
         "uri": {
           "type": "string",
@@ -28248,7 +28243,9 @@
       "properties": {
         "databricksAccessToken": {
           "type": "string",
-          "description": "access token for databricks account."
+          "format": "password",
+          "description": "access token for databricks account.",
+          "x-ms-secret": true
         }
       },
       "allOf": [
@@ -28264,7 +28261,9 @@
       "properties": {
         "databricksAccessToken": {
           "type": "string",
-          "description": "Databricks access token"
+          "format": "password",
+          "description": "Databricks access token",
+          "x-ms-secret": true
         },
         "workspaceUrl": {
           "type": "string",
@@ -31075,8 +31074,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/IndexColumn"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/AssetProvisioningState",
@@ -32183,8 +32181,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageModelDistributionSettingsClassification"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "limitSettings": {
           "$ref": "#/definitions/ImageLimitSettings",
@@ -32275,8 +32272,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageModelDistributionSettingsClassification"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "limitSettings": {
           "$ref": "#/definitions/ImageLimitSettings",
@@ -34707,6 +34703,11 @@
           "description": "Output Asset Name.",
           "x-nullable": true
         },
+        "assetVersion": {
+          "type": "string",
+          "description": "Output Asset Version.",
+          "x-nullable": true
+        },
         "mode": {
           "type": "string",
           "description": "Output data delivery mode enums.",
@@ -34738,6 +34739,11 @@
             "read",
             "create"
           ]
+        },
+        "pathOnCompute": {
+          "type": "string",
+          "description": "Output Asset Delivery Path.",
+          "x-nullable": true
         },
         "uri": {
           "type": "string",
@@ -34851,6 +34857,11 @@
           "description": "Output Asset Name.",
           "x-nullable": true
         },
+        "assetVersion": {
+          "type": "string",
+          "description": "Output Asset Version.",
+          "x-nullable": true
+        },
         "mode": {
           "type": "string",
           "description": "Output data delivery mode enums.",
@@ -34882,6 +34893,11 @@
             "read",
             "create"
           ]
+        },
+        "pathOnCompute": {
+          "type": "string",
+          "description": "Output Asset Delivery Path.",
+          "x-nullable": true
         },
         "uri": {
           "type": "string",
@@ -35376,8 +35392,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ManagedResourceGroupAssignedIdentities"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -36012,7 +36027,6 @@
           "items": {
             "type": "string"
           },
-          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
@@ -36265,7 +36279,6 @@
           "items": {
             "$ref": "#/definitions/MonitoringNotificationType"
           },
-          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
@@ -37679,10 +37692,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          },
-          "x-ms-identifiers": [
-            "/error/code"
-          ]
+          }
         }
       }
     },
@@ -39014,10 +39024,7 @@
       "description": "The list of Cognitive Services RaiBlocklist Items for batch add.",
       "items": {
         "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
-      },
-      "x-ms-identifiers": [
-        "name"
-      ]
+      }
     },
     "RaiBlocklistProperties": {
       "type": "object",
@@ -39703,8 +39710,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/RegistryRegionArmDetails"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -39718,8 +39724,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/AcrDetails"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "location": {
           "type": "string",
@@ -39732,8 +39737,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/StorageAccountDetails"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -42531,8 +42535,7 @@
             },
             "type": "array",
             "x-nullable": true
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "allOf": [
@@ -43253,6 +43256,11 @@
           "description": "Output Asset Name.",
           "x-nullable": true
         },
+        "assetVersion": {
+          "type": "string",
+          "description": "Output Asset Version.",
+          "x-nullable": true
+        },
         "mode": {
           "type": "string",
           "description": "Output data delivery mode enums.",
@@ -43284,6 +43292,11 @@
             "read",
             "create"
           ]
+        },
+        "pathOnCompute": {
+          "type": "string",
+          "description": "Output Asset Delivery Path.",
+          "x-nullable": true
         },
         "uri": {
           "type": "string",
@@ -43470,6 +43483,11 @@
           "description": "Output Asset Name.",
           "x-nullable": true
         },
+        "assetVersion": {
+          "type": "string",
+          "description": "Output Asset Version.",
+          "x-nullable": true
+        },
         "mode": {
           "type": "string",
           "description": "Output data delivery mode enums.",
@@ -43501,6 +43519,11 @@
             "read",
             "create"
           ]
+        },
+        "pathOnCompute": {
+          "type": "string",
+          "description": "Output Asset Delivery Path.",
+          "x-nullable": true
         },
         "uri": {
           "type": "string",
@@ -43600,6 +43623,11 @@
           "description": "Output Asset Name.",
           "x-nullable": true
         },
+        "assetVersion": {
+          "type": "string",
+          "description": "Output Asset Version.",
+          "x-nullable": true
+        },
         "mode": {
           "type": "string",
           "description": "Output data delivery mode enums.",
@@ -43631,6 +43659,11 @@
             "read",
             "create"
           ]
+        },
+        "pathOnCompute": {
+          "type": "string",
+          "description": "Output Asset Delivery Path.",
+          "x-nullable": true
         },
         "uri": {
           "type": "string",
@@ -44045,7 +44078,9 @@
         },
         "password": {
           "type": "string",
-          "description": "Password of admin account"
+          "format": "password",
+          "description": "Password of admin account",
+          "x-ms-secret": true
         },
         "publicKeyData": {
           "type": "string",
@@ -44476,7 +44511,9 @@
           "type": "string"
         },
         "secretAccessKey": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -44485,7 +44522,9 @@
       "description": "Account key object for workspace connection credential.",
       "properties": {
         "key": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -44494,7 +44533,9 @@
       "description": "Api key object for workspace connection credential.",
       "properties": {
         "key": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -44558,7 +44599,9 @@
       "type": "object",
       "properties": {
         "pat": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -44683,7 +44726,9 @@
       "type": "object",
       "properties": {
         "sas": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },

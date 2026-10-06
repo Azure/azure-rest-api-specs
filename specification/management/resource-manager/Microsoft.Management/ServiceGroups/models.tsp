@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -85,6 +87,12 @@ model ServiceGroupProperties {
   displayName?: string;
 
   /**
+   * The attributes of the serviceGroup.
+   */
+  @added(Versions.v2026_08_01)
+  attributes?: ServiceGroupAttributes;
+
+  /**
    * The details of the parent serviceGroup.
    */
   parent?: ParentServiceGroupProperties;
@@ -105,6 +113,18 @@ model ParentServiceGroupProperties {
 }
 
 /**
+ * The attributes of the serviceGroup.
+ */
+@added(Versions.v2026_08_01)
+model ServiceGroupAttributes {
+  /** The criticality designation of the service group. Valid values range from 0 through 4. */
+  @minValue(0)
+  @maxValue(4)
+  criticality?: int32;
+}
+
+/**
  * Response holding an array of service groups and a nextLink that supports pagination
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ServiceGroupCollectionResponse is Azure.Core.Page<ServiceGroup>;

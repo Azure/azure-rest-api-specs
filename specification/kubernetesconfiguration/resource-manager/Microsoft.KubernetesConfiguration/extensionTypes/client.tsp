@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.KubernetesConfiguration;
 
 @@clientName(
   Microsoft.KubernetesConfiguration,
@@ -48,4 +49,64 @@ using Azure.ClientGenerator.Core;
   Microsoft.KubernetesConfiguration.ExtensionTypeVersionForReleaseTrainOperationGroup.clusterListVersions,
   "listClusterListVersions",
   "javascript"
+);
+
+// C# type customizations for backward compatibility
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+// C# fixes: rename interface to avoid namespace conflict (§4.9)
+@@clientName(ExtensionTypes, "ExtensionTypeInterface", "csharp");
+@@clientName(ExtensionType, "KubernetesConfigurationExtensionType", "csharp");
+@@clientName(
+  ExtensionTypeProperties,
+  "KubernetesConfigurationExtensionTypeProperties",
+  "csharp"
+);
+@@clientName(
+  ClusterScopeSettingsProperties.allowMultipleInstances,
+  "IsMultipleInstancesAllowed",
+  "csharp"
+);
+@@clientName(
+  ClusterScopeSettings,
+  "KubernetesConfigurationExtensionTypeClusterScopeSettings",
+  "csharp"
+);
+@@clientName(
+  ClusterScopeSettingsProperties,
+  "KubernetesConfigurationExtensionTypeClusterScopeSettingsProperties",
+  "csharp"
+);
+@@clientName(
+  ExtensionTypePropertiesPlanInfo,
+  "KubernetesConfigurationExtensionTypePlanInfo",
+  "csharp"
+);
+@@clientName(
+  ExtensionTypePropertiesSupportedScopes,
+  "KubernetesConfigurationExtensionTypeSupportedScopes",
+  "csharp"
+);
+@@clientName(
+  ExtensionTypeVersionForReleaseTrain,
+  "KubernetesConfigurationExtensionTypeVersionForReleaseTrain",
+  "csharp"
+);
+@@clientName(
+  ExtensionTypeVersionForReleaseTrainProperties,
+  "KubernetesConfigurationExtensionTypeVersionForReleaseTrainProperties",
+  "csharp"
+);
+@@clientName(
+  ExtensionTypeVersionForReleaseTrainPropertiesUnsupportedKubernetesVersions,
+  "KubernetesConfigurationExtensionTypeUnsupportedKubernetesVersions",
+  "csharp"
+);
+@@clientName(
+  ExtensionTypeVersionUnsupportedKubernetesMatrixItem,
+  "KubernetesConfigurationExtensionTypeVersionUnsupportedKubernetesMatrixItem",
+  "csharp"
 );

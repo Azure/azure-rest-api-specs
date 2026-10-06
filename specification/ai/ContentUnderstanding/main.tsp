@@ -46,4 +46,8 @@ enum Versions {
 
   @doc("The 2025-11-01 version of the Content Understanding service.")
   v2025_11_01: "2025-11-01",
+
+  @doc("The 2026-06-01-preview version of the Content Understanding service.")
+  @Azure.Core.previewVersion
+  v2026_06_01_preview: "2026-06-01-preview",
 }

@@ -24,6 +24,8 @@ import "./Eventhub.tsp";
 import "./ConsumerGroup.tsp";
 import "./SchemaGroup.tsp";
 import "./ApplicationGroup.tsp";
+import "./FabricShortcut.tsp";
+import "./UpgradePreferences.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
@@ -56,6 +58,11 @@ enum Versions {
    * The 2026-01-01 API version.
    */
   v2026_01_01: "2026-01-01",
+
+  /**
+   * The 2026-07-01-preview API version.
+   */
+  v2026_07_01_preview: "2026-07-01-preview",
 }
 
 interface Operations

@@ -8,6 +8,9 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     package-name: Azure.AI.Extensions.OpenAI
     api-version: "v1"
+    sdk-context-options:
+      additionalDecorators:
+        - 'TypeSpec\.OpenAPI\.@extension'
     plugins:
       - "../codegen"
   "@azure-tools/typespec-client-generator-cli":
@@ -25,6 +28,7 @@ options:
     keys: x-ms-foundry-meta
     language: csharp
     output-shape: list
+    output-format: csv
     output-file: Azure.AI.Extensions.OpenAI_experimental.csv
     emitter-output-dir: "{cwd}/../../codegen/src/" # run npx tsp compile from within `TempTypeSpecFiles` folder
     namespace: Azure.AI.Extensions.OpenAI

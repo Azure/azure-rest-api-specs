@@ -24,6 +24,7 @@ namespace Microsoft.Network;
 model IpGroup extends Common.Resource {
   properties?: IpGroupPropertiesFormat;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @path
   @key("ipGroupsName")

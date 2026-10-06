@@ -1,0 +1,47 @@
+{
+  "title": "Get Analysis Result with Partial Processing",
+  "operationId": "ContentAnalyzers_GetResult",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "operationId": "f1e2d3c4-b5a6-7890-1234-56789abcdef0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "f1e2d3c4-b5a6-7890-1234-56789abcdef0",
+        "status": "Succeeded",
+        "result": {
+          "analyzerId": "prebuilt-read",
+          "apiVersion": "2026-06-01-preview",
+          "createdAt": "2026-07-01T18:46:36.244Z",
+          "warnings": [
+            {
+              "code": "InputExceededLimit",
+              "message": "The input exceeded the maximum number of pages that can be processed; only pages 1-300 were analyzed. See https://aka.ms/cu-doc-limits.",
+              "target": "inputs/0"
+            }
+          ],
+          "infos": [
+            {
+              "code": "LLMStats",
+              "message": "completion calls: 2; embedding calls: 1; avg completion latency: 5.75s; total completion latency: 11.50s; avg embedding latency: 0.94s; total embedding latency: 0.94s"
+            }
+          ],
+          "contents": [
+            {
+              "kind": "document",
+              "mimeType": "application/pdf",
+              "markdown": "# CONTOSO\n\n...",
+              "startPageNumber": 1,
+              "endPageNumber": 300,
+              "unit": "inch"
+            }
+          ]
+        },
+        "usage": {
+          "documentPagesStandard": 300
+        }
+      }
+    }
+  }
+}

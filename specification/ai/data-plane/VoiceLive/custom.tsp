@@ -10,6 +10,7 @@ namespace VoiceLive;
 
 /** Base for session configuration shared between request and response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style. // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(RequestUsage)
 model RequestSession {
   ...SessionBase;
@@ -79,7 +80,7 @@ model RequestSession {
 
   /** Maximum number of tokens to generate in the response. Default is unlimited. */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This is how it's represented OpenAI Style."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   max_response_output_tokens?: int32 | "inf";
 
   /**
@@ -138,6 +139,7 @@ union ReasoningEffort {
 
 /** Base for session configuration in the response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(ResponseUsage)
 model ResponseSession is RequestSession {
   ...SessionBase;
@@ -666,6 +668,7 @@ union AudioInputTranscriptionModel {
 
 /** Configuration for input audio transcription. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(RequestUsage)
 model AudioInputTranscriptionOptions {
   /**
@@ -673,7 +676,7 @@ model AudioInputTranscriptionOptions {
    * 'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',
    * 'mai-transcribe-1', 'azure-speech'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   @typeChangedFrom(
     Versions.v2026_04_10,
 
@@ -723,7 +726,7 @@ union Modality {
 @discriminator("model")
 @usage(RequestUsage)
 model EouDetection {
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   @typeChangedFrom(
     Versions.v2026_06_01_preview,
 
@@ -989,7 +992,7 @@ model AzureSemanticVadMultilingual extends TurnDetection {
 @usage(RequestUsage)
 model AudioNoiseReduction {
   /** The type of noise reduction model. */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   type: "azure_deep_noise_suppression" | "near_field" | "far_field" | string;
 }
 
@@ -1055,6 +1058,7 @@ union AnimationOutputType {
 
 /** Configuration for animation outputs including blendshapes and visemes metadata. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(RequestUsage)
 model Animation {
   /** The name of the animation model to use. */
@@ -1179,6 +1183,7 @@ model IceServer {
 
 /** Configuration for the agent. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(RequestUsage)
 model AgentConfig {
   /** The type of agent to use. */

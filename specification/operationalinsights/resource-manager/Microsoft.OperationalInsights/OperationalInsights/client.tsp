@@ -136,6 +136,17 @@ using Microsoft.OperationalInsights;
   "SummaryLogsProvisioningState",
   "java,python"
 );
+@@clientName(SummaryLogsProperties.ruleType, "SummaryLogsRuleType", "csharp");
+@@clientName(
+  SummaryLogsProperties.statusCode,
+  "SummaryLogsStatusCode",
+  "csharp"
+);
+@@clientName(
+  SummaryLogsProperties.provisioningState,
+  "SummaryLogsProvisioningState",
+  "csharp"
+);
 @@clientName(
   OperationalInsightsTableProvisioningState,
   "ProvisioningStateEnum",
@@ -306,7 +317,7 @@ using Microsoft.OperationalInsights;
 );
 @@clientName(
   ProvisioningStateEnum,
-  "OperationalInsightsNetworkSecurityPerimeterProvisioningState",
+  "OperationalInsightsSummaryLogsProvisioningState",
   "csharp"
 );
 @@clientName(
@@ -314,11 +325,7 @@ using Microsoft.OperationalInsights;
   "OperationalInsightsPublicNetworkAccessType",
   "csharp"
 );
-@@clientName(
-  RuleTypeEnum,
-  "OperationalInsightsNetworkSecurityPerimeterRuleType",
-  "csharp"
-);
+@@clientName(RuleTypeEnum, "OperationalInsightsSummaryLogsRuleType", "csharp");
 @@clientName(Schema, "OperationalInsightsSchema", "csharp");
 @@clientName(
   Severity,
@@ -328,7 +335,7 @@ using Microsoft.OperationalInsights;
 @@clientName(SkuNameEnum, "OperationalInsightsSkuName", "csharp");
 @@clientName(
   StatusCodeEnum,
-  "OperationalInsightsNetworkSecurityPerimeterStatusCode",
+  "OperationalInsightsSummaryLogsStatusCode",
   "csharp"
 );
 @@clientName(TablePlanEnum, "OperationalInsightsTablePlan", "csharp");

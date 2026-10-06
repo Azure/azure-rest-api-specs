@@ -6,6 +6,9 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     package-name: Azure.AI.Projects.Agents
     api-version: "v1"
+    sdk-context-options:
+      additionalDecorators:
+        - 'TypeSpec\.OpenAPI\.@extension'
     plugins:
       - "../codegen"
   "typespec-extension-exporter":
@@ -13,24 +16,24 @@ options:
     language: csharp
     output-shape: list
     output-format: csv
-    output-file: Azure.AI.Projects_experimental.csv
+    output-file: Azure.AI.Projects.Agents_experimental.csv
     emitter-output-dir: "{cwd}/../../codegen/src/" # run npx tsp compile from within `TempTypeSpecFiles` folder
-    namespace: Azure.AI.Projects
+    namespace: Azure.AI.Projects.Agents
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - specification/ai-foundry/data-plane/Foundry/src/agents
       - specification/ai-foundry/data-plane/Foundry/src/common
       - specification/ai-foundry/data-plane/Foundry/src/memory-stores
-      - specification/ai-foundry/data-plane/Foundry/src/openai/conversations
-      - specification/ai-foundry/data-plane/Foundry/src/openai/evaluations
-      - specification/ai-foundry/data-plane/Foundry/src/openai/responses
+      - specification/ai-foundry/data-plane/Foundry/src/openai
       - specification/ai-foundry/data-plane/Foundry/src/red-teams
+      - specification/ai-foundry/data-plane/Foundry/src/sdk-common
       - specification/ai-foundry/data-plane/Foundry/src/tools
       - specification/ai-foundry/data-plane/Foundry/src/toolboxes
       - specification/ai-foundry/data-plane/Foundry/src/skills
       - specification/ai-foundry/data-plane/Foundry/src/agents-session-files
       - specification/ai-foundry/data-plane/Foundry/src/managed-blueprints
       - specification/ai-foundry/data-plane/Foundry/src/agents-optimization
+      - specification/ai-foundry/data-plane/Foundry/src/voice-agents
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
@@ -38,6 +41,7 @@ imports:
   # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
   - "@azure-tools/openai-typespec/models/evals"
   - "@azure-tools/openai-typespec/models/fine-tuning"
+  - "@azure-tools/openai-typespec/models/realtime"
   - "@azure-tools/openai-typespec/models/responses"
 linter:
   extends:

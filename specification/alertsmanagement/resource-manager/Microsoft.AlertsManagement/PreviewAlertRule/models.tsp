@@ -199,6 +199,7 @@ union AlertState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PreviewAlertRuleRequest {
   /**
    * The location of the rule resource.
@@ -419,6 +420,7 @@ model LogAlertRuleConditionFailingPeriods {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PreviewAlertRuleResponse {
   /**
    * An array of rule preview results.

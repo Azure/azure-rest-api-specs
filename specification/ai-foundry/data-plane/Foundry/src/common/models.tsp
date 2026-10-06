@@ -7,6 +7,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 /** Error response for API failures. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ApiErrorResponse {
   error: ApiError;
@@ -16,8 +17,13 @@ model ApiErrorResponse {
 @@copyProperties(
   OpenAI.Error,
   {
+    /** Additional errors that contributed to this failure. */
     details?: OpenAI.Error[],
+
+    /** Additional structured information about the failure. */
     additionalInfo?: Record<unknown>,
+
+    /** Diagnostic information supplied by the service for troubleshooting. */
     debugInfo?: Record<unknown>,
   }
 );
@@ -38,6 +44,24 @@ alias AcceptJsonHeader = {
 alias UserDelegationHeader = {
   /** Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission. */
   @header("x-ms-user-identity") user_identity?: string;
+};
+
+/**
+ * Optional request header carrying an application-owned conversation identifier for Model Router session affinity.
+ * Used when the request body does not supply a valid session ID.
+ */
+alias SessionAffinityRequestHeader = {
+  /** An opaque, application-owned conversation identifier. The value is not returned in the response and must not contain secrets or personally identifiable information. */
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        FoundryFeaturesOptInKeys.model_router_controls_v1_preview
+      ],
+    }
+  )
+  @header("x-ms-session-id")
+  session_id?: string;
 };
 
 // NOTE: Platform-internal headers (x-agent-foundry-call-id, x-foundry-foundation-token)

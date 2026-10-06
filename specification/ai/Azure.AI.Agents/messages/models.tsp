@@ -112,6 +112,7 @@ model MessageImageUrlParam {
  * A single message within an agent thread,
  * as provided during that thread's creation for its initial state.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_05_01)
 model ThreadMessageOptions {
   /**

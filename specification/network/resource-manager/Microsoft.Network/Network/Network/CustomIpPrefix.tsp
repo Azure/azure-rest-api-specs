@@ -24,6 +24,7 @@ namespace Microsoft.Network;
 model CustomIpPrefix extends Common.Resource {
   properties?: CustomIpPrefixPropertiesFormat;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @path
   @key("customIpPrefixName")

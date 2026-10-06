@@ -110,6 +110,7 @@ model NodePoolProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   scaleSetPriority?: ScaleSetPriority = ScaleSetPriority.Regular;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The size of the OS disk in GB. If not specified, the default is 120 GB.")
   @added(Versions.v2026_06_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)

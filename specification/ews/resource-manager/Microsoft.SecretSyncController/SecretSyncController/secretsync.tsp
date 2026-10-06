@@ -116,7 +116,7 @@ model SecretSyncStatus {
   @visibility(Lifecycle.Read)
   conditions?: SecretSyncCondition[];
 
-  // Not including syncHash at the moment for security concerns TODO #28507544 https://msazure.visualstudio.com/One/_workitems/edit/28507544
+  // Not including syncHash at the moment for security concerns
 }
 
 @doc("A condition represents the status of the secret create and update processes.")

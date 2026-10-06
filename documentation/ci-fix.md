@@ -13,13 +13,14 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 - [Table of Contents](#table-of-contents)
 - [Prerequisites](#prerequisites)
 - [Checks troubleshooting guides](#checks-troubleshooting-guides)
+  - [`Format`](#format)
   - [`CredScan`](#credscan)
   - [`PoliCheck`](#policheck)
   - [`SDK Validation *` checks, like `SDK Validation - Go`](#sdk-validation--checks-like-sdk-validation---go)
   - [`SDK Breaking Change Review`](#sdk-breaking-change-review)
   - [`Swagger APIView`](#swagger-apiview)
     - [If an expected APIView was not generated, follow the step below to troubleshoot.](#if-an-expected-apiview-was-not-generated-follow-the-step-below-to-troubleshoot)
-    - [Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)](#diagnosing-apiview-failure-for-sdk-language-not-swagger-or-typespec)
+    - [Diagnosing APIView failure for SDK Language (not Swagger)](#diagnosing-apiview-failure-for-sdk-language-not-swagger)
   - [`Swagger ApiDocPreview`](#swagger-apidocpreview)
   - [`Swagger Avocado`](#swagger-avocado)
   - [`Swagger BreakingChange` and `BreakingChange(Cross-Version)`](#swagger-breakingchange-and-breakingchangecross-version)
@@ -32,6 +33,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
   - [Spell Check](#spell-check)
   - [`TypeSpec Validation`](#typespec-validation)
+  - [`TypeSpec Suppressions`](#typespec-suppressions)
   - [`license/cla`](#licensecla)
 - [Suppression Process](#suppression-process)
 - [Checks not covered by this guide](#checks-not-covered-by-this-guide)
@@ -42,6 +44,19 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 Most guides here require for you to have `npm` installed, which you can get by installing [Node.js](https://nodejs.org/en/download).
 
 # Checks troubleshooting guides
+
+## `Format`
+
+This check covers repository tooling in `.github` and `eng/tools`. To reproduce
+and fix a formatting failure, run from the repository root:
+
+``` powershell
+pnpm install
+pnpm format:check
+pnpm format
+```
+
+Tooling formatting uses Oxfmt and excludes Swagger JSON.
 
 ## `CredScan`
 
@@ -100,17 +115,17 @@ If the SDK breaking changes haven't been reviewed after two additional business 
 
 ## `Swagger APIView`
 
-Various APIViews are generated as part of the Azure REST API specs PR build. Among these are TypeSpec and Swagger as well as any other language that is being generated in the run. When everything is successful you should see a comment box similar to the picture below showing the APIViews generated for TypeSpec or Swagger, plus all other languages being generated.
+Swagger and SDK language APIViews are generated as part of the Azure REST API specs PR build. When everything is successful you should see a comment box similar to the picture below showing the generated APIViews.
 
 ![alt text](image-3.png)
 
 ### If an expected APIView was not generated, follow the step below to troubleshoot.
 
 - On the CI check click on `details` > `View Azure DevOps build log for more details` to view the devOps logs.
-- Investigate the CI job for the language with error. TypeSpec and Swagger APIViews are generated as part of the `AzureRestApiSpecsPipeline` stage in the `TypeSpecAPIView` and `SwaggerAPIView` jobs respectively, while APIViews for other SDK languages are generated in their respective language jobs in the `SDK Automation` stage.
+- Investigate the CI job for the language with error. Swagger APIViews are generated in the `SwaggerAPIView` job, while APIViews for SDK languages are generated in their respective language jobs in the `SDK Automation` stage.
 - Ensure that all previous checks in the job are green before proceeding.
 
-### Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)
+### Diagnosing APIView failure for SDK Language (not Swagger)
 
 1. Check for an unexpected skip of the `Publish SDK APIView Artifact to Pipeline Artifacts` and `Generate SDK APIView` step.
 2. Look in `SDK Automation` step to verify that the API token generation completed successfully.
@@ -190,13 +205,13 @@ cd <local_repo_clone_root>
 cd specification/contosowidgetmanager
 
 # Install the dependencies to the local 'node_modules' folder.
-npm install
+pnpm install
 
 # Run 'prettier --check' to verify the problems can be reproduced locally
-npx prettier --check **/*.json
+pnpm prettier --check **/*.json
 
 # Run 'prettier --write' to fix the problems.
-npx prettier --write **/*.json
+pnpm prettier --write **/*.json
 ```
 
 Then please commit and push changes made by prettier.
@@ -255,6 +270,69 @@ For more information see [cspell configuration](https://cspell.org/configuration
 
 https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation
 
+## `TypeSpec Suppressions`
+
+> [!NOTE]
+>
+> This check is currently in **testing mode and is non-blocking** — it surfaces
+> information and inline warnings but does not currently prevent your PR from
+> merging. It is distinct from the AutoRest/`suppressions.yaml` flow described in
+> [Suppression Process](#suppression-process) below.
+
+This check detects **new or changed TypeSpec lint suppressions** introduced by
+your PR and surfaces them for review. It analyzes two kinds of suppressions in
+the TypeSpec projects impacted by your changes:
+
+- **Inline suppressions**: `#suppress` directives in `.tsp` files.
+- **Config suppressions**: `linter.disable` entries in `tspconfig.yaml`.
+
+The check runs as the following workflows (mirroring the three-run structure used
+by other validations in this repo):
+
+| Check name | Purpose |
+|------------|---------|
+| `TypeSpec Suppressions - Analyze Code` | Computes the impacted TypeSpec folders, runs the analyzer, writes the markdown summary + a JSON report artifact (`typespec-suppressions-report`), and emits inline `::warning` annotations anchored to each suppression on the PR diff. |
+| `TypeSpec Suppressions - Set Status` | Reports the check status; approval is granted by applying the `Approved-TypeSpecSuppression` label. |
+| `TypeSpec Suppressions - Test` | Runs the analyzer tool's own test suite. |
+
+### Where to see the results
+
+- A **"TypeSpec suppressions requiring review"** comment is surfaced on the
+  PR , listing the new/changed suppressions with
+  their rule, source location, and justification.
+- **Inline `::warning` annotations** appear on the PR diff at each suppression's
+  source location.
+- The full structured report is uploaded as the `typespec-suppressions-report`
+  build artifact.
+
+### What to do
+
+Suppressions should be a **last resort**. Before approving or justifying a
+suppression, prefer fixing the underlying issue:
+
+1. **Address the underlying lint issue first.** For each surfaced suppression,
+   determine whether the flagged rule can instead be resolved in the spec. If so,
+   remove the `#suppress` directive (or the `linter.disable` entry in
+   `tspconfig.yaml`) and fix the underlying problem rather than suppressing it.
+   For more information on TypeSpec linting rules, see:
+   https://aka.ms/tsp-suppress/tsp-to-lintdiff
+2. **Only if the suppression is genuinely necessary**, ensure it has a clear,
+   meaningful justification. Every suppression must include a justification
+   string explaining why the rule cannot be satisfied; suppressions with no
+   justification are flagged.
+3. **If the suppression is legitimate and requires approval**, ask the
+   appropriate reviewer to apply the `Approved-TypeSpecSuppression` label.
+
+### Reproduce locally
+
+The check is powered by the `@azure-tools/typespec-suppressions` CLI. See
+[`eng/tools/typespec-suppressions/README.md`](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/tools/typespec-suppressions/README.md)
+for usage. For example, to compare your branch against `main`:
+
+``` powershell
+npx typespec-suppressions --base origin/main <path-to-typespec-project-folder>
+```
+
 ## `license/cla`
 
 This check is owned by One Engineering System. See [1ES GitHub inside Microsoft] for help.
@@ -264,6 +342,12 @@ This check is owned by One Engineering System. See [1ES GitHub inside Microsoft]
 In case there are validation errors reported against your service that you believe do not apply,
 we have a suppression process you can follow to permanently remove these reported errors for your specs.
 Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed guidance.
+
+This process (backed by `suppressions.yaml` files and the `Approved-Suppression` label) applies to
+most validation checks. It is separate from TypeSpec *lint* suppressions (`#suppress` directives and
+`tspconfig.yaml` `linter.disable` entries), which are surfaced by the
+[`TypeSpec Suppressions`](#typespec-suppressions) check and approved via the `Approved-TypeSpecSuppression`
+label.
 
 # Checks not covered by this guide
 

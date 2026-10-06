@@ -41,7 +41,6 @@ using TenantActionGroups;
 using VmInsightsOnboarding;
 using DiagnosticsSettings;
 
-#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
   name: "CombineClient",
   service: [
@@ -925,6 +924,125 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 
+// Preserve the semantic types exposed by Azure.ResourceManager.Monitor.
+@@alternateType(
+  ActivityLogAlertsApi.ActivityLogAlertActionGroup.actionGroupId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.LocationSpec.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.EventHubDestination.eventHubResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.EventHubDirectDestination.eventHubResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.PrivateLinkScopedResource.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.StorageBlobDestination.storageAccountResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.StorageTableDestination.storageAccountResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.LogAnalyticsDestination.workspaceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.MonitoringAccountDestination.accountResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  MetricAlertApi.MetricAlertAction.actionGroupId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  MetricAlertApi.WebtestLocationAvailabilityCriteria.componentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  MetricAlertApi.WebtestLocationAvailabilityCriteria.webTestId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  AutoScaleApi.MetricTrigger.metricResourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(AutoScaleApi.ScaleCapacity.minimum, int32, "csharp");
+@@alternateType(AutoScaleApi.ScaleCapacity.maximum, int32, "csharp");
+@@alternateType(AutoScaleApi.ScaleCapacity.default, int32, "csharp");
+@@alternateType(AutoScaleApi.WebhookNotification.serviceUri, url, "csharp");
+@@alternateType(
+  ActionGroupsApi.AutomationRunbookReceiver.automationAccountId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.AutomationRunbookReceiver.serviceUri,
+  url,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.AutomationRunbookReceiver.webhookResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.AzureFunctionReceiver.functionAppResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.AzureFunctionReceiver.httpTriggerUrl,
+  url,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.EventHubReceiver.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.ItsmReceiver.region,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(ActionGroupsApi.LogicAppReceiver.callbackUrl, url, "csharp");
+@@alternateType(
+  ActionGroupsApi.LogicAppReceiver.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ActionGroupsApi.WebhookReceiver.identifierUri, url, "csharp");
+@@alternateType(ActionGroupsApi.WebhookReceiver.serviceUri, url, "csharp");
+@@alternateType(
+  ActionGroupsApi.WebhookReceiver.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+
 // These models collide by name across TenantActionGroups and ActionGroupsApi,
 // but their shapes differ, so they must remain separate models. Rename the
 // TenantActionGroups versions for the JS emitter (@clientName, per the compiler
@@ -1682,7 +1800,9 @@ model AccessRulePropertiesSubscriptionsItem {
 @@clientName(AlertSeverity.`4`, "FOUR", "python");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op PrivateLinkScopeOperationStatusGetCustomized(
   ...ApiVersionParameter,
