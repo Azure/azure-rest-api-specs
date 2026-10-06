@@ -1175,6 +1175,9 @@
           "Create Agent Pool with Windows OSSKU": {
             "$ref": "./examples/AgentPoolsCreate_WindowsOSSKU.json"
           },
+          "Create Agent Pool with fully managed GPU experience": {
+            "$ref": "./examples/AgentPoolsCreate_ManagedGPU.json"
+          },
           "Create Spot Agent Pool": {
             "$ref": "./examples/AgentPoolsCreate_Spot.json"
           },
@@ -5901,6 +5904,10 @@
         "driver": {
           "$ref": "#/definitions/GPUDriver",
           "description": "Whether to install GPU drivers. When it's not specified, default is Install."
+        },
+        "nvidia": {
+          "$ref": "#/definitions/NvidiaGPUProfile",
+          "description": "NVIDIA-specific GPU settings."
         }
       }
     },
@@ -9450,6 +9457,30 @@
         }
       }
     },
+    "ManagementMode": {
+      "type": "string",
+      "description": "The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu.",
+      "enum": [
+        "Unmanaged",
+        "Managed"
+      ],
+      "x-ms-enum": {
+        "name": "ManagementMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unmanaged",
+            "value": "Unmanaged",
+            "description": "Managed GPU experience is disabled for NVIDIA GPUs."
+          },
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "Managed GPU experience is enabled for NVIDIA GPUs."
+          }
+        ]
+      }
+    },
     "ManualScaleProfile": {
       "type": "object",
       "description": "Specifications on number of machines.",
@@ -9978,6 +10009,16 @@
             "description": "Nodes are provisioned automatically by AKS using Karpenter (See aka.ms/aks/nap for more details). Fixed size Node Pools can still be created, but autoscaling Node Pools cannot be. (See aka.ms/aks/nap for more details)."
           }
         ]
+      }
+    },
+    "NvidiaGPUProfile": {
+      "type": "object",
+      "description": "NVIDIA-specific GPU settings",
+      "properties": {
+        "managementMode": {
+          "$ref": "#/definitions/ManagementMode",
+          "description": "The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu."
+        }
       }
     },
     "OSDiskType": {
