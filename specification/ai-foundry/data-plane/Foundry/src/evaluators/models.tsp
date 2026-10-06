@@ -126,6 +126,111 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 // Dimensions + Rubric-based Evaluator Definition
 // ============================================================================
 
+const RubricScoringRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+};
+
+@doc("The quality-scoring mode selected for an entire rubric.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+union RubricScoringMode {
+  string,
+
+  @doc("Score applicable checks as pass=1 and fail=0, then compare their optional weighted average with the rubric threshold.")
+  boolean: "boolean",
+
+  @doc("Grade applicable quality dimensions from 1 through 5, with optional relative weights.")
+  likert: "likert",
+}
+
+@doc("Simple rubric scoring choices. Omission preserves existing legacy scoring.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model RubricScoring {
+  @doc("Rubric-level scoring mode. Defaults to Likert when scoring is supplied. Omitting scoring preserves existing legacy behavior.")
+  mode?: RubricScoringMode = RubricScoringMode.likert;
+}
+
+@doc("The deterministic overall rubric acceptance decision.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+union RubricScoringDecision {
+  string,
+
+  @doc("Applicable dimensions meet the selected scoring rule.")
+  pass: "pass",
+
+  @doc("The selected scoring rule fails.")
+  fail: "fail",
+
+  @doc("No quality dimension applies.")
+  not_applicable: "not_applicable",
+}
+
+@doc("Explainable scoring results for a rubric. Both Boolean and Likert modes compare a normalized optional weighted average with the threshold.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model RubricScoringResult {
+  @doc("The resolved scoring mode.")
+  mode: RubricScoringMode;
+
+  @doc("Quality score, equal to the top-level score when known. Likert grades are normalized to 0-1; Boolean verdicts contribute pass=1 and fail=0. N/A dimensions are excluded. Absent when no dimension applies.")
+  @minValue(0)
+  @maxValue(1)
+  quality_score?: float64;
+
+  @doc("Whether the quality score meets its threshold. Absent when quality is unavailable.")
+  quality_passed?: boolean;
+
+  @doc("The resolved threshold used for both modes. Defaults to 0.5 when omitted from the evaluator definition.")
+  @minValue(0)
+  @maxValue(1)
+  quality_threshold?: float32;
+
+  @doc("Overall decision from the selected scoring rule.")
+  decision: RubricScoringDecision;
+
+  @doc("One result list for every dimension, using the rubric's scoring mode.")
+  dimension_results: RubricDimensionResult[];
+}
+
+@doc("A typed result for one dimension in the unified rubric.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model RubricDimensionResult {
+  @doc("The dimension identifier.")
+  id: string;
+
+  @doc("Whether the dimension applies.")
+  applicable: boolean;
+
+  @doc("Boolean verdict. Required when a Boolean dimension is applicable; absent for N/A and rating dimensions.")
+  passed?: boolean;
+
+  @doc("Applicable Likert grade. Absent for Boolean dimensions.")
+  @minValue(1)
+  @maxValue(5)
+  raw_score?: int32;
+
+  @doc("Explicitly configured weight. Omitted for every dimension when weights are implicit. If configured, every dimension includes a weight.")
+  @minValue(1)
+  @maxValue(10)
+  weight?: int32;
+
+  @doc("Normalized weight among applicable dimensions.")
+  @minValue(0)
+  @maxValue(1)
+  effective_weight?: float64;
+
+  @doc("Contribution to the normalized aggregate. Likert uses effective_weight * (raw_score - 1) / 4; Boolean uses effective_weight * (passed ? 1 : 0).")
+  @minValue(0)
+  @maxValue(1)
+  contribution?: float64;
+
+  @doc("Brief evidence-based explanation.")
+  reason?: string;
+}
+
 @doc("A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.")
 model Dimension {
   @doc("Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.")
@@ -135,9 +240,17 @@ model Dimension {
   description: string;
 
   @doc("Relative weight of this dimension (1-10). The generation pipeline assigns exactly one dimension weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.")
+  @removed(Versions.v1)
+  @renamedFrom(Versions.v1, "weight")
   @minValue(1)
   @maxValue(10)
-  weight: int32;
+  legacy_weight: int32;
+
+  @doc("Optional configured weight for either scoring mode. Omit every weight for equal contribution or supply a weight for every dimension. Partially weighted definitions are rejected, including a mix of explicit unit weights and omitted weights. No schema default is emitted.")
+  @added(Versions.v1)
+  @minValue(1)
+  @maxValue(10)
+  weight?: int32;
 
   @doc("When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.")
   always_applicable?: boolean = false;
@@ -147,13 +260,25 @@ model Dimension {
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.rubric;
 
-  @doc("The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure.")
+  @doc("The quality checks or grading criteria. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing v1 and legacy definitions retain their behavior.")
   dimensions: Dimension[];
 
-  @doc("Pass/fail threshold for the aggregate rubric score, on the same normalized 0.0-1.0 scale as the emitted `score`. When the runtime weighted average meets or exceeds this value, the result is `pass`. Defaults to 0.5 (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension scored 1 → fail' rule still applies regardless of this threshold.")
+  @doc("Quality threshold on the same normalized 0.0-1.0 scale as the emitted score. Defaults to 0.5, equivalent to a raw weighted grade of 3.0. The score >= threshold determines pass/fail; there is no implicit score-1 veto.")
+  @removed(Versions.v1)
+  @renamedFrom(Versions.v1, "pass_threshold")
   @minValue(0.0)
   @maxValue(1.0)
-  pass_threshold?: float32 = 0.5;
+  legacy_pass_threshold?: float32 = 0.5;
+
+  @doc("Optional threshold on the normalized 0-1 scale for either scoring mode, interpreted as 0.5 when omitted.")
+  @added(Versions.v1)
+  @minValue(0.0)
+  @maxValue(1.0)
+  pass_threshold?: float32;
+
+  @doc("Simple scoring choices. Omission preserves existing legacy scoring for existing clients. No policy version is required from the caller.")
+  @added(Versions.v1)
+  scoring?: RubricScoring;
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
@@ -266,6 +391,20 @@ model EvaluatorGenerationInputs {
 
   @doc("Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.")
   evaluator_description?: string;
+
+  @doc("Scoring choices for the generated evaluator. Supplied scoring defaults to Likert. On first creation, omitted weights yield equal contribution without configured weight fields. On regeneration, prior scoring and weights are preserved unless explicitly changed in a reviewed evaluator definition. Omitting scoring preserves legacy generation on first creation and inherits saved choices on regeneration.")
+  @added(Versions.v1)
+  scoring?: RubricScoring;
+
+  @doc("Optional threshold on the normalized 0-1 scale. Omission is interpreted as 0.5 for fresh generation and inherits the saved threshold on regeneration. An explicit value overrides the prior threshold.")
+  @added(Versions.v1)
+  @minValue(0.0)
+  @maxValue(1.0)
+  pass_threshold?: float32;
+
+  @doc("Caller-approved dimensions to preserve while generating other checks. All dimensions use the selected rubric scoring mode. Omission preserves prior approved dimensions on regeneration; an explicit list replaces the fixed set.")
+  @added(Versions.v1)
+  dimensions?: Dimension[];
 }
 
 @doc("Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.")

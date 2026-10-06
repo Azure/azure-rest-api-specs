@@ -1122,7 +1122,11 @@ union EvalRunOutputItemResultStatus {
   }
 );
 
-model EvalRunOutputItemResult is OpenAI.EvalRunOutputItemResult;
+model EvalRunOutputItemResult is OpenAI.EvalRunOutputItemResult {
+  /** Dimension judgments and the rubric's scoring decision. Present for evaluators using explicit rubric scoring. */
+  @added(Versions.v1)
+  rubric_scoring?: RubricScoringResult;
+}
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(
