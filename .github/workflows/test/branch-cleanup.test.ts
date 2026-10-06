@@ -20,6 +20,8 @@ it.each([
   ["user/recent", 730, false],
   ["dev-old", 731, true],
   ["dev-recent", 730, false],
+  ["dev/old", 731, true],
+  ["dev/recent", 730, false],
 ])("uses the age cutoff for %s", (name, days, stale) => {
   expect(isStale(branch(name, days), NOW)).toBe(stale);
 });
@@ -80,12 +82,12 @@ it.each([true, false])(
       "copilot/old",
       "user/old",
       "dev-old",
+      "dev/old",
       "trunk",
       "main",
       "develop",
       "typespec-next",
       "RPSaaSMaster",
-      "dev/old",
       "release-old",
       "release/old",
       "feature/old",
@@ -102,7 +104,7 @@ it.each([true, false])(
     await cleanupBranches(args, dryRun, git, undefined, NOW);
     expect(args.github.graphql.mock.calls[1][1]).toMatchObject({ cursor: "next" });
     expect(args.core.info).toHaveBeenCalledWith(
-      `${dryRun ? "Dry run" : "Cleanup"}: 3 stale branches`,
+      `${dryRun ? "Dry run" : "Cleanup"}: 4 stale branches`,
     );
     if (dryRun) {
       expect(git).not.toHaveBeenCalled();
@@ -114,10 +116,12 @@ it.each([true, false])(
         `--force-with-lease=refs/heads/copilot/old:${SHA}`,
         `--force-with-lease=refs/heads/user/old:${SHA}`,
         `--force-with-lease=refs/heads/dev-old:${SHA}`,
+        `--force-with-lease=refs/heads/dev/old:${SHA}`,
         "https://github.com/owner/repo.git",
         ":refs/heads/copilot/old",
         ":refs/heads/user/old",
         ":refs/heads/dev-old",
+        ":refs/heads/dev/old",
       ]);
     }
   },
