@@ -262,6 +262,41 @@ describe("extractInputs", () => {
     });
   });
 
+  it("does not substitute the base SHA when ARM review correlation is missing", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [] },
+    });
+    const context = {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          name: "ARM API Review #123 (pull_request_target)",
+          path: ".github/workflows/arm-api-review.lock.yml",
+          event: "pull_request_target",
+          head_sha: "base-branch-sha",
+          id: 456,
+          repository: {
+            name: "TestRepoName",
+            owner: {
+              login: "TestRepoOwnerLogin",
+            },
+          },
+          pull_requests: [{ number: 123 }],
+        },
+      },
+    };
+
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "",
+      issue_number: 123,
+      run_id: 456,
+    });
+  });
+
   it("workflow_run:completed:workflow_dispatch uses trusted correlation artifacts", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({

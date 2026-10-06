@@ -12,7 +12,7 @@ export type PullRequest =
 export type RestEndpointMethodTypes =
   import("@octokit/plugin-rest-endpoint-methods").RestEndpointMethodTypes;
 
-export const ARM_API_REVIEW_WORKFLOW_NAME = "ARM API Review: Automated Workflow";
+export const ARM_API_REVIEW_WORKFLOW_PATH = ".github/workflows/arm-api-review.lock.yml";
 
 /**
  * Extracts inputs from context based on event name and properties.
@@ -218,7 +218,7 @@ export async function extractInputs(
         });
         if (artifactInputs.headSha) {
           head_sha = artifactInputs.headSha;
-        } else if (payload.workflow_run.name === ARM_API_REVIEW_WORKFLOW_NAME) {
+        } else if (payload.workflow_run.path === ARM_API_REVIEW_WORKFLOW_PATH) {
           head_sha = "";
         }
         if (artifactInputs.issueNumber) {

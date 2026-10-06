@@ -26,6 +26,7 @@ const headSha = "0123456789abcdef0123456789abcdef01234567";
 const runId = 456;
 const runAttempt = 1;
 const runUrl = "https://github.com/Azure/azure-rest-api-specs/actions/runs/456";
+const workflowPath = ".github/workflows/arm-api-review.lock.yml";
 
 const passedResult: SemanticReviewResult = {
   runAttempt,
@@ -71,11 +72,12 @@ function createFinalizeGithub() {
   return github;
 }
 
-function createContext(conclusion: string | null = "success") {
+function createContext(conclusion: string | null = "success", path = workflowPath) {
   return {
     payload: {
       workflow_run: {
-        name: "ARM API Review: Automated Workflow",
+        name: `ARM API Review #${issueNumber} (issue_comment)`,
+        path,
         conclusion,
         id: runId,
         run_attempt: runAttempt,
@@ -94,11 +96,13 @@ async function runFinalizer({
   output = agentOutput(),
   includeOutput = true,
   github = createFinalizeGithub(),
+  path = workflowPath,
 }: {
   conclusion?: string | null;
   output?: unknown;
   includeOutput?: boolean;
   github?: ReturnType<typeof createFinalizeGithub>;
+  path?: string;
 } = {}) {
   const directory = await mkdtemp(join(tmpdir(), "arm-semantic-review-"));
   const outputPath = join(directory, "agent_output.json");
@@ -110,7 +114,7 @@ async function runFinalizer({
     process.env.GH_AW_AGENT_OUTPUT = outputPath;
     const result = await finalizeArmSemanticReview({
       github,
-      context: createContext(conclusion),
+      context: createContext(conclusion, path),
       core: createMockCore(),
     } as unknown as GitHubScriptArgs);
     return { github, result };
@@ -330,6 +334,22 @@ describe("finalizeArmSemanticReview", () => {
       run_id: runId,
       per_page: PER_PAGE_MAX,
     });
+  });
+
+  it("rejects a completion from another workflow", async () => {
+    const github = createFinalizeGithub();
+    await expect(
+      runFinalizer({
+        github,
+        path: ".github/workflows/other-workflow.yaml",
+      }),
+    ).rejects.toThrow(
+      "Unexpected triggering workflow path: expected " +
+        "'.github/workflows/arm-api-review.lock.yml', " +
+        "received '.github/workflows/other-workflow.yaml'",
+    );
+    expect(github.rest.actions.listWorkflowRunArtifacts).not.toHaveBeenCalled();
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
   });
 
   it("publishes Changes requested for Blocking findings", async () => {

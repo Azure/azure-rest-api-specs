@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { isFullGitSha } from "../../../shared/src/git.ts";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
-import { ARM_API_REVIEW_WORKFLOW_NAME, parseWorkflowRunArtifactInputs } from "../context.ts";
+import { ARM_API_REVIEW_WORKFLOW_PATH, parseWorkflowRunArtifactInputs } from "../context.ts";
 import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import {
   ARM_SEMANTIC_REVIEW_STATUS,
@@ -73,8 +73,11 @@ export async function finalizeArmSemanticReview({
   statusPublished: boolean;
 }> {
   const workflowRun = (context.payload as WebhookEvent<"workflow-run", "completed">).workflow_run;
-  if (workflowRun.name !== ARM_API_REVIEW_WORKFLOW_NAME) {
-    return EMPTY_RESULT;
+  if (workflowRun.path !== ARM_API_REVIEW_WORKFLOW_PATH) {
+    throw new Error(
+      `Unexpected triggering workflow path: expected '${ARM_API_REVIEW_WORKFLOW_PATH}', ` +
+        `received '${workflowRun.path}'`,
+    );
   }
 
   const owner = workflowRun.repository.owner?.login;
