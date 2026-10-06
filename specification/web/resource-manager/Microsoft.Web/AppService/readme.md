@@ -122,10 +122,13 @@ directive:
       - $.definitions.EgressConfigProperties.properties.connections
       - $.definitions.VirtualConnection.properties.settings
     reason: >-
-      These are dictionaries of strongly typed values whose keys alone are customer-chosen: connections maps a
-      customer-chosen connection name to a typed VirtualConnection, and settings maps an app setting or connection
-      string name to a typed VirtualConnectionSetting. Neither is an open or untyped bag, and the keys are arbitrary
-      customer input that cannot be represented as a fixed set of model properties.
+      These two dictionaries match the Websites service contract: SiteEgressConfig.Connections maps customer-chosen
+      connection names to typed VirtualConnectionEntry values, and VirtualConnectionEntry.Settings maps app setting
+      or connection string names to typed VirtualConnectionSettingRole values. The generated additionalProperties
+      schemas reference VirtualConnection and VirtualConnectionSetting respectively; neither accepts arbitrary
+      untyped values. The former VirtualConnection.properties property bag has been removed. AvoidAdditionalProperties
+      still reports errors for these typed maps, whose customer-defined keys cannot be replaced with a fixed set of
+      model properties without changing the service contract, so this exception is limited to these two properties.
   - suppress: AllProxyResourcesShouldHaveDelete
     from: openapi.json
     where:
