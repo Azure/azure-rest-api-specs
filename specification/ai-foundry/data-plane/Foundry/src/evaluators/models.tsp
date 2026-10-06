@@ -396,6 +396,12 @@ model EvaluatorGenerationInputs {
   @added(Versions.v1)
   scoring?: RubricScoring;
 
+  @doc("Optional threshold on the normalized 0-1 scale. Omission is interpreted as 0.5 for fresh generation and inherits the saved threshold on regeneration. An explicit value overrides the prior threshold.")
+  @added(Versions.v1)
+  @minValue(0.0)
+  @maxValue(1.0)
+  pass_threshold?: float32;
+
   @doc("Caller-approved dimensions to preserve while generating other checks. All dimensions use the selected rubric scoring mode. Omission preserves prior approved dimensions on regeneration; an explicit list replaces the fixed set.")
   @added(Versions.v1)
   dimensions?: Dimension[];

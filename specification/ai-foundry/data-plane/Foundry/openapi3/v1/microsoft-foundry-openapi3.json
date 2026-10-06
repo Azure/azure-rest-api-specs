@@ -42485,6 +42485,13 @@
             "$ref": "#/components/schemas/RubricScoring",
             "description": "Scoring choices for the generated evaluator. Supplied scoring defaults to Likert. On first creation, omitted weights yield equal contribution without configured weight fields. On regeneration, prior scoring and weights are preserved unless explicitly changed in a reviewed evaluator definition. Omitting scoring preserves legacy generation on first creation and inherits saved choices on regeneration."
           },
+          "pass_threshold": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Optional threshold on the normalized 0-1 scale. Omission is interpreted as 0.5 for fresh generation and inherits the saved threshold on regeneration. An explicit value overrides the prior threshold."
+          },
           "dimensions": {
             "type": "array",
             "items": {
