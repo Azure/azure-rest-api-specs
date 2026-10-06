@@ -2826,7 +2826,7 @@
         "tags": [
           "WorkspaceDiscoveries"
         ],
-        "description": "Gets the latest discovery result. Returns 202 while discovery is processing and 200 for a terminal result, including Failed with an error and no snapshot when completion could not be accepted.",
+        "description": "Gets the latest discovery result. Returns 202 with Location pointing to this same polling resource while discovery is processing, and 200 for a terminal result, including Failed with an error and no snapshot when completion could not be accepted.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2860,6 +2860,11 @@
               "$ref": "#/definitions/WorkspaceDiscovery"
             },
             "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The absolute URL of this same discovery polling resource, including the requested API version."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",

@@ -17,9 +17,8 @@ namespace Microsoft.Chaos;
 @armResourceOperations
 interface WorkspaceDiscoveries {
   /**
-   * Gets the latest discovery result. Returns 202 while discovery is processing and 200 for a terminal result, including Failed with an error and no snapshot when completion could not be accepted.
+   * Gets the latest discovery result. Returns 202 with Location pointing to this same polling resource while discovery is processing, and 200 for a terminal result, including Failed with an error and no snapshot when completion could not be accepted.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "This GET is the Location polling endpoint returned by POST discover, not a new LRO initiation; the existing nonterminal GET does not redirect to another Location. Requires ARM API review."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The existing discovery polling GET returns its read-only nonterminal result with HTTP 202; the initiating POST still returns 202 without a body. Requires ARM API review."
   get is ArmResourceRead<
     WorkspaceDiscovery,
@@ -33,6 +32,10 @@ interface WorkspaceDiscoveries {
 @added(Microsoft.Chaos.Versions.v2026_11_01)
 model WorkspaceDiscoveryPendingResult {
   ...ArmAcceptedResponse<"Workspace discovery is still processing.">;
+
+  /** The absolute URL of this same discovery polling resource, including the requested API version. */
+  @header("Location")
+  location: url;
 
   /** The nonterminal discovery result, without invented completed coverage facts. */
   @bodyRoot

@@ -43,10 +43,6 @@ suppressions:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveries/latest"]
     reason: This is a read-only singleton discovery resource modeled with the standard TypeSpec singleton("latest") decorator. Its fixed name is latest; inventing an unconstrained discovery-name path parameter would misrepresent the implemented route. ARM API review remains required.
-  - code: LroLocationHeader
-    from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveries/latest"].get.responses["202"].headers
-    reason: This GET is already the Location polling endpoint returned by POST discover, not initiation of another LRO. The implemented nonterminal GET does not redirect to a new Location. The initiating POST still has Location. ARM API review remains required.
   - code: EnumInsteadOfBoolean
     from: openapi.json
     where: $.definitions.WorkspaceDiscoveryProperties.properties.warningsTruncated
