@@ -38,6 +38,12 @@ export async function extractInputs(
   if (context.eventName === "workflow_run") {
     const payload = context.payload as WebhookEvent<"workflow-run">;
     workflowRunEvent = payload.workflow_run?.event;
+    core.info(`  payload.workflow_run.id: ${payload.workflow_run?.id ?? "undefined"}`);
+    core.info(`  payload.workflow_run.name: ${payload.workflow_run?.name ?? "undefined"}`);
+    core.info(`  payload.workflow_run.path: ${payload.workflow_run?.path ?? "undefined"}`);
+    core.info(
+      `  payload.workflow_run.conclusion: ${payload.workflow_run?.conclusion ?? "undefined"}`,
+    );
   }
   core.info(`  payload.workflow_run.event: ${workflowRunEvent}`);
 

@@ -63,6 +63,34 @@ function run(github: ReturnType<typeof createMockGithub>) {
 }
 
 describe("getLabelActionImpl", () => {
+  it("logs a no-op when an indirect trigger has no PR correlation", async () => {
+    const loggingCore = createMockCore();
+    const github = createMockGithub();
+
+    const result = await getLabelActionImpl({
+      owner,
+      repo,
+      head_sha: "",
+      issue_number: Number.NaN,
+      github,
+      core: loggingCore,
+    });
+
+    expect(result).toEqual({
+      headSha: "",
+      issueNumber: Number.NaN,
+      labelActions: {
+        [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.None,
+        [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
+      },
+    });
+    expect(github.rest.pulls.get).not.toHaveBeenCalled();
+    expect(loggingCore.info).toHaveBeenCalledWith(
+      "Universal auto-signoff no-op: missing correlation " +
+        "(issueNumber=missing, headSha=missing)",
+    );
+  });
+
   it("adds the pilot label when all universal requirements pass", async () => {
     const github = createMockGithub({ labelNames: ["ARMReview"] });
 
@@ -191,6 +219,48 @@ describe("getLabelActionImpl", () => {
       [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.None,
       [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.Add,
     });
+  });
+
+  it("logs why an existing manual signoff label produces no new action", async () => {
+    const loggingCore = createMockCore();
+    const github = createMockGithub({
+      labelNames: ["ARMReview", ArmAutoSignoffLabel.ArmManualSignoffRequired],
+      statuses: [
+        {
+          context: "ARM Semantic Review",
+          state: CommitStatusState.ERROR,
+          description: "Review incomplete: reviewer did not complete",
+          updated_at: "2026-01-01",
+        },
+        ...deterministicStatuses,
+      ],
+    });
+
+    const result = await getLabelActionImpl({
+      owner,
+      repo,
+      head_sha: headSha,
+      issue_number: issueNumber,
+      github,
+      core: loggingCore,
+    });
+
+    expect(result.labelActions).toEqual({
+      [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.None,
+      [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
+    });
+    expect(loggingCore.info).toHaveBeenCalledWith(
+      expect.stringContaining('"isReadyForArmReview":true'),
+    );
+    expect(loggingCore.info).toHaveBeenCalledWith(
+      expect.stringContaining('"description":"Review incomplete: reviewer did not complete"'),
+    );
+    expect(loggingCore.info).toHaveBeenCalledWith(
+      "ARM semantic review requires manual signoff; ARMManualSignoffRequired is already present",
+    );
+    expect(loggingCore.info).toHaveBeenCalledWith(
+      'Universal auto-signoff label actions: {"ARMAutoSignedOff-Test":"none","ARMManualSignoffRequired":"none"}',
+    );
   });
 
   it("adds manual signoff when automated coverage was scoped", async () => {

@@ -73,6 +73,16 @@ export async function finalizeArmSemanticReview({
   statusPublished: boolean;
 }> {
   const workflowRun = (context.payload as WebhookEvent<"workflow-run", "completed">).workflow_run;
+  core.info(
+    `ARM semantic review source: ${JSON.stringify({
+      id: workflowRun.id,
+      name: workflowRun.name,
+      path: workflowRun.path,
+      event: workflowRun.event,
+      conclusion: workflowRun.conclusion,
+      runAttempt: workflowRun.run_attempt,
+    })}`,
+  );
   if (workflowRun.path !== ARM_API_REVIEW_WORKFLOW_PATH) {
     throw new Error(
       `Unexpected triggering workflow path: expected '${ARM_API_REVIEW_WORKFLOW_PATH}', ` +
@@ -93,7 +103,10 @@ export async function finalizeArmSemanticReview({
     runId: workflowRun.id,
   });
   if (!isFullGitSha(headSha) || !Number.isSafeInteger(issueNumber) || issueNumber <= 0) {
-    core.info("The reviewer run has no trusted PR/SHA correlation; status is unchanged");
+    core.info(
+      `The reviewer run has no trusted PR/SHA correlation; status is unchanged. ` +
+        `This is expected when the reviewer run was skipped before pre-activation.`,
+    );
     return EMPTY_RESULT;
   }
 

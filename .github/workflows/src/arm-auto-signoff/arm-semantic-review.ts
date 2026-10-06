@@ -53,6 +53,7 @@ export type SemanticReviewCorrelation = Pick<
 export type CommitStatus = {
   context: string;
   state: string;
+  description?: string | null;
   target_url?: string | null;
   updated_at: string;
 };

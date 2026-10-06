@@ -321,16 +321,42 @@ describe("ARM API review workflow", () => {
 
   it("wires the mandatory ARM Critic as an inline runtime subagent", async () => {
     const [source, compiled] = await readWorkflowFiles();
+    const criticRuntime = source.slice(
+      source.indexOf("## agent: `arm-api-review-critic-runtime`"),
+      source.indexOf("## end agent: `arm-api-review-critic-runtime`") +
+        "## end agent: `arm-api-review-critic-runtime`".length,
+    );
+    const criticRuntimeImports = [
+      ".github/agents/arm-api-review-critic.agent.md",
+      ".github/agents/protocols/arm-api-review-critic.protocol.md",
+      ".github/agents/protocols/arm-api-review-critic-inputs.template.md",
+    ];
 
     expect(source).toContain(
       "## agent: `arm-api-review-critic-runtime`\n---\ndescription: Independently verifies ARM API Reviewer findings before publication\n---",
     );
     expect(source).toContain("dispatch the inline\n`arm-api-review-critic-runtime` subagent");
-    expect(source).toContain("`.github/agents/arm-api-review-critic.agent.md`");
+    expect(criticRuntime).toContain("Treat the embedded sections as already loaded");
+    for (const importPath of criticRuntimeImports) {
+      expect(criticRuntime).toContain(`{{#runtime-import ${importPath}}}`);
+      await expect(readFile(join(ROOT, importPath), "utf8")).resolves.not.toHaveLength(0);
+    }
+    expect(criticRuntime).toContain("## end agent: `arm-api-review-critic-runtime`");
     expect(source).toContain("Never claim that the review was Critic-verified");
     expect(compiled).toContain("- name: Restore inline sub-agents from activation artifact");
     expect(compiled).toContain('GH_AW_SUB_AGENT_DIR: ".github/agents"');
     expect(compiled).toContain('GH_AW_SUB_AGENT_EXT: ".agent.md"');
+  });
+
+  it("creates incomplete-review tracking issues only in the canonical repository", async () => {
+    const [source, compiled] = await readWorkflowFiles();
+
+    expect(source).toContain(
+      "create-issue: ${{ github.repository == 'Azure/azure-rest-api-specs' }}",
+    );
+    expect(compiled).toContain(
+      "GH_AW_REPORT_INCOMPLETE_CREATE_ISSUE: ${{ github.repository == 'Azure/azure-rest-api-specs' }}",
+    );
   });
 
   it("reconciles duplicates and contradictions across every review entry point", async () => {

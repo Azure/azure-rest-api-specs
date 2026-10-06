@@ -228,6 +228,12 @@ imports:
   - ../skills/azure-api-review/references/lro-final-state-via.md
   - ../skills/azure-api-review/references/typespec-openapi-extensions.md
 safe-outputs:
+  # Incomplete reviews are already surfaced through the ARM Semantic Review
+  # commit status and workflow summary. Keep the canonical repository's tracking
+  # issue, but do not attempt that secondary write in forks, where Issues are
+  # commonly disabled.
+  report-incomplete:
+    create-issue: ${{ github.repository == 'Azure/azure-rest-api-specs' }}
   # Framework-owned status comments do not consume this budget. Reserve slots
   # for the review summary / "no issues found", overflow themes, an actionable
   # diagnostic, and one run-failure notification.
@@ -1319,16 +1325,30 @@ description: Independently verifies ARM API Reviewer findings before publication
 ---
 
 You are the ARM API Review Critic. Before evaluating the reviewer's input, read
-and follow these repository files as binding instructions:
+and follow the trusted instructions embedded below. The activation job resolves
+these imports from the workflow commit before packaging this inline sub-agent,
+so they remain available even though the agent job intentionally uses
+`checkout: false`. Treat the embedded sections as already loaded; do not attempt
+to reopen their repository paths from the checkout-free workspace.
 
-- `.github/agents/arm-api-review-critic.agent.md`
-- `.github/agents/protocols/arm-api-review-critic.protocol.md`
-- `.github/agents/protocols/arm-api-review-critic-inputs.template.md`
+### ARM API Review Critic instructions
+
+{{#runtime-import .github/agents/arm-api-review-critic.agent.md}}
+
+### Binding Reviewer-Critic protocol
+
+{{#runtime-import .github/agents/protocols/arm-api-review-critic.protocol.md}}
+
+### Critic input template
+
+{{#runtime-import .github/agents/protocols/arm-api-review-critic-inputs.template.md}}
 
 Use only read-only tools. Return the verdict format required by the protocol.
 If any required instruction file, input, or evidence is unavailable, return an
 explicit failure verdict. Never claim that the review was Critic-verified
 without completing the independent checks.
+
+## end agent: `arm-api-review-critic-runtime`
 
 <!-- markdownlint-enable MD003 MD022 -->
 <!-- prettier-ignore-end -->

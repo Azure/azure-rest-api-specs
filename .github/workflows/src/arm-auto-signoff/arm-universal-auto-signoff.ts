@@ -2,7 +2,7 @@ import { inspect } from "node:util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { extractInputs } from "../context.ts";
-import type { Core, GitHubScriptArgs } from "../github.ts";
+import type { Core, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import { LabelAction } from "../label.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.ts";
 import {
@@ -32,9 +32,36 @@ export default async function getLabelAction({ github, context, core }: GitHubSc
   issueNumber: number;
   labelActions: ManagedLabelActions;
 }> {
+  const workflowRun =
+    context.eventName === "workflow_run"
+      ? (context.payload as WebhookEvent<"workflow-run">).workflow_run
+      : undefined;
+  core.info(
+    `Universal auto-signoff trigger: ${JSON.stringify({
+      eventName: context.eventName,
+      action: context.payload.action,
+      workflowRun: workflowRun
+        ? {
+            id: workflowRun.id,
+            name: workflowRun.name,
+            path: workflowRun.path,
+            event: workflowRun.event,
+            conclusion: workflowRun.conclusion,
+          }
+        : undefined,
+    })}`,
+  );
   const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
+  core.info(
+    `Universal auto-signoff correlation: ${JSON.stringify({
+      owner,
+      repo,
+      issueNumber: Number.isSafeInteger(issue_number) ? issue_number : "missing",
+      headSha: head_sha || "missing",
+    })}`,
+  );
 
-  return await getLabelActionImpl({
+  const result = await getLabelActionImpl({
     owner,
     repo,
     head_sha,
@@ -42,6 +69,8 @@ export default async function getLabelAction({ github, context, core }: GitHubSc
     github,
     core,
   });
+  core.info(`Universal auto-signoff output: ${JSON.stringify(result)}`);
+  return result;
 }
 /* v8 ignore stop */
 
@@ -70,7 +99,11 @@ export async function getLabelActionImpl({
   };
 
   if (!Number.isInteger(issue_number) || issue_number <= 0 || !head_sha) {
-    core.info("Missing pull request number or head SHA");
+    core.info(
+      `Universal auto-signoff no-op: missing correlation ` +
+        `(issueNumber=${Number.isSafeInteger(issue_number) ? issue_number : "missing"}, ` +
+        `headSha=${head_sha || "missing"})`,
+    );
     return noneResult;
   }
 
@@ -81,7 +114,10 @@ export async function getLabelActionImpl({
     pull_number: issue_number,
   });
   if (pullRequest.state !== "open" || pullRequest.head.sha !== head_sha) {
-    core.info("Pull request is closed or its head SHA has changed");
+    core.info(
+      `Universal auto-signoff no-op: pull request state/head mismatch ` +
+        `(state=${pullRequest.state}, expectedHead=${head_sha}, currentHead=${pullRequest.head.sha})`,
+    );
     return noneResult;
   }
 
@@ -94,6 +130,7 @@ export async function getLabelActionImpl({
     })
   ).map((label) => label.name);
   const hasAutoSignoff = labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOffTest);
+  core.info(`Current pull request labels: ${JSON.stringify([...labelNames].sort())}`);
 
   const labelActions = await getDesiredLabelActions({
     owner,
@@ -104,6 +141,7 @@ export async function getLabelActionImpl({
     github,
     core,
   });
+  core.info(`Universal auto-signoff label actions: ${JSON.stringify(labelActions)}`);
 
   return {
     ...noneResult,
@@ -132,8 +170,16 @@ async function getDesiredLabelActions({
   core: Core;
 }): Promise<ManagedLabelActions> {
   const labelActions = createNoneLabelActions();
-  const isReadyForArmReview =
-    labelNames.includes("ARMReview") && !labelNames.includes("NotReadyForARMReview");
+  const hasArmReview = labelNames.includes("ARMReview");
+  const hasNotReadyForArmReview = labelNames.includes("NotReadyForARMReview");
+  const isReadyForArmReview = hasArmReview && !hasNotReadyForArmReview;
+  core.info(
+    `ARM review readiness: ${JSON.stringify({
+      hasArmReview,
+      hasNotReadyForArmReview,
+      isReadyForArmReview,
+    })}`,
+  );
 
   if (!isReadyForArmReview) {
     core.info("Pull request is not ready for ARM review");
@@ -151,13 +197,29 @@ async function getDesiredLabelActions({
       per_page: PER_PAGE_MAX,
     });
 
-  const semanticReviewOutcome = getSemanticReviewOutcome(getLatestSemanticReviewStatus(statuses));
-  core.info(`ARM Semantic Review: ${semanticReviewOutcome ?? "missing"}`);
+  const latestSemanticReviewStatus = getLatestSemanticReviewStatus(statuses);
+  const semanticReviewOutcome = getSemanticReviewOutcome(latestSemanticReviewStatus);
+  core.info(
+    `Latest ARM Semantic Review status: ${JSON.stringify({
+      state: latestSemanticReviewStatus?.state ?? "missing",
+      description: latestSemanticReviewStatus?.description ?? "missing",
+      targetUrl: latestSemanticReviewStatus?.target_url ?? "missing",
+      updatedAt: latestSemanticReviewStatus?.updated_at ?? "missing",
+      outcome: semanticReviewOutcome ?? "missing",
+    })}`,
+  );
 
   if (semanticReviewOutcome !== SemanticReviewOutcome.Passed) {
     if (semanticReviewOutcome === SemanticReviewOutcome.ReviewIncomplete) {
-      core.info("ARM semantic review requires manual signoff");
-      if (!labelNames.includes(ArmAutoSignoffLabel.ArmManualSignoffRequired)) {
+      const hasManualSignoffRequired = labelNames.includes(
+        ArmAutoSignoffLabel.ArmManualSignoffRequired,
+      );
+      core.info(
+        `ARM semantic review requires manual signoff; ` +
+          `${ArmAutoSignoffLabel.ArmManualSignoffRequired} ` +
+          `${hasManualSignoffRequired ? "is already present" : "will be added"}`,
+      );
+      if (!hasManualSignoffRequired) {
         labelActions[ArmAutoSignoffLabel.ArmManualSignoffRequired] = LabelAction.Add;
       }
     } else {
@@ -169,11 +231,25 @@ async function getDesiredLabelActions({
     return labelActions;
   }
 
+  const hasArmChangesRequested = labelNames.includes("ARMChangesRequested");
+  const hasManualSignoffRequired = labelNames.includes(
+    ArmAutoSignoffLabel.ArmManualSignoffRequired,
+  );
+  const hasSuppressionReviewRequired = labelNames.includes("SuppressionReviewRequired");
+  const hasApprovedSuppression = labelNames.includes("Approved-Suppression");
   const labelsAllowSignoff =
-    !labelNames.includes("ARMChangesRequested") &&
-    !labelNames.includes(ArmAutoSignoffLabel.ArmManualSignoffRequired) &&
-    (!labelNames.includes("SuppressionReviewRequired") ||
-      labelNames.includes("Approved-Suppression"));
+    !hasArmChangesRequested &&
+    !hasManualSignoffRequired &&
+    (!hasSuppressionReviewRequired || hasApprovedSuppression);
+  core.info(
+    `Auto-signoff label eligibility: ${JSON.stringify({
+      hasArmChangesRequested,
+      hasManualSignoffRequired,
+      hasSuppressionReviewRequired,
+      hasApprovedSuppression,
+      labelsAllowSignoff,
+    })}`,
+  );
   if (!labelsAllowSignoff) {
     core.info("Labels do not meet requirements for universal auto-signoff");
     labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest] = hasAutoSignoff
