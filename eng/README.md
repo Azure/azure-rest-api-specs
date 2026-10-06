@@ -31,8 +31,9 @@ commit authors/committers, and all submitted reviewers. It is non-blocking and
 does not change merge rules, but the access requirements are not optional for
 the internal workflow. External fork contributions remain allowed.
 
-The comment groups findings by affected user and separates access issues from
-their **PR impact**. A PR author without repository write access cannot run Azure
+The comment leads with the risk to PR approvals and pipeline runs, then groups
+findings by affected user and separates access issues from their **PR impact**.
+A PR author without repository write access cannot run Azure
 DevOps pipelines for that PR. A submitted reviewer's approval without write
 access does not count toward required reviews (GitHub's green approval check).
 Users with both roles see both consequences; commit-only participants do not

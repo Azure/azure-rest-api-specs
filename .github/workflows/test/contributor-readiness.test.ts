@@ -342,7 +342,12 @@ describe("contributor readiness", () => {
     expect(reviewerRow).toContain(reviewerImpact);
     expect(reviewerRow).toContain("GitHub's green approval check");
     expect(reviewerRow).not.toContain(authorImpact);
-    expect(call.body).toContain("repository write access for the PR workflow");
+    expect(call.body).toContain(
+      "**The access issues below can prevent PR approvals from counting or block Azure DevOps pipeline runs.**",
+    );
+    expect(call.body).toContain(
+      "Internal contributors need Azure organization membership and repository write access",
+    );
     expect(call.body).toContain("Non-blocking report");
     expect(call.body).toContain("external fork contributions are allowed");
     const report = call.body.replace(`\n${marker}`, "");
