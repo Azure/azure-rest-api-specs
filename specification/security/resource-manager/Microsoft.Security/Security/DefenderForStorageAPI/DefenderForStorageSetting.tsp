@@ -144,7 +144,6 @@ interface DefenderForStorageSettings {
   /**
    * Cancels a Defender for Storage malware scan for the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "This action returns the MalwareScan resource it cancels, not the parent DefenderForStorageSetting."
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
@@ -161,7 +160,6 @@ interface DefenderForStorageSettings {
    */
   // Declare the action inline so only its optional body is added in 2026-01-01-preview.
   // Keep the legacy path parameters to preserve resourceId scope naming and route assembly.
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "This action returns the MalwareScan resource it starts, not the parent DefenderForStorageSetting."
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
