@@ -2078,6 +2078,12 @@ model ManagedClusterProperties {
   agentSandboxProfile?: ManagedClusterAgentSandboxProfile;
 
   /**
+   * The Pod Snapshot Restore profile for the managed cluster.
+   */
+  @added(Versions.v2026_08_02_preview)
+  podSnapshotProfile?: ManagedClusterPodSnapshotProfile;
+
+  /**
    * Profile with scheduler-related settings, like the configuration mode for each scheduler managed by AKS. See https://aka.ms/aks/scheduler-profile.
    */
   @added(Versions.v2026_05_01)
@@ -4233,6 +4239,18 @@ model ManagedClusterAIToolchainOperatorProfile {
 model ManagedClusterAgentSandboxProfile {
   /**
    * Whether the Agent Sandbox core extension is enabled for the cluster. On cluster creation, the default is false.
+   */
+  @added(Versions.v2026_08_02_preview)
+  enabled?: boolean;
+}
+
+/**
+ * The Pod Snapshot Restore profile for the managed cluster.
+ */
+@added(Versions.v2026_08_02_preview)
+model ManagedClusterPodSnapshotProfile {
+  /**
+   * Whether the Pod Snapshot Restore core extension is enabled for the managed cluster.
    */
   @added(Versions.v2026_08_02_preview)
   enabled?: boolean;
