@@ -71,39 +71,6 @@ namespace Quantum.Workspace.Services {
     Azure.Core.Foundations.ErrorResponse
   >;
 
-  /** Operation to patch a resource. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
-    There is no support for JsonPatch in Azure.Core.
-    The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
-    See https://github.com/Azure/typespec-azure/issues/475
-    """
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
-  @updatesResource(Resource)
-  @patch(#{ implicitOptionality: true })
-  op PatchOperationOld<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<
-    Resource,
-    {
-      /** This request has a JSON Merge Patch body. */
-      @TypeSpec.Http.header("Content-Type")
-      contentType: "application/json-patch+json";
-
-      ...Foundations.ResourceBody<JsonPatchDocument>;
-      ...Azure.Core.Traits.Private.TraitProperties<
-        DefaultServiceTraits,
-        TraitLocation.Parameters,
-        TraitContext.Update
-      >;
-    },
-    ResourceOkOrNoContentResponse<Resource &
-      Azure.Core.Traits.Private.TraitProperties<
-        DefaultServiceTraits,
-        TraitLocation.Response,
-        TraitContext.Update
-      >>,
-    DefaultServiceTraits,
-    Azure.Core.Foundations.ErrorResponse
-  >;
-
   /** Operation to delete a resource. */
   alias DeleteOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceDelete<Resource>;
 

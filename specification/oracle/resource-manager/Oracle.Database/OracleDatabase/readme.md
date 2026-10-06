@@ -27,7 +27,7 @@ These are the global settings for the Oracle.Database.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-09-01
+tag: package-2026-06-01
 ```
 
 ```yaml
@@ -161,6 +161,87 @@ input-file:
   - stable/2025-09-01/openapi.json
 ```
 
+### Tag: package-2025-11-01-preview
+
+These settings apply only when `--tag=package-2025-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-01-preview'
+input-file:
+  - preview/2025-11-01-preview/openapi.json
+```
+
+### Tag: package-2025-11-15-preview
+
+These settings apply only when `--tag=package-2025-11-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-15-preview'
+input-file:
+  - preview/2025-11-15-preview/openapi.json
+```
+
+### Tag: package-2025-12-01-preview
+
+These settings apply only when `--tag=package-2025-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-12-01-preview'
+input-file:
+  - preview/2025-12-01-preview/openapi.json
+```
+
+### Tag: package-2026-01-01-preview
+
+These settings apply only when `--tag=package-2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01-preview'
+input-file:
+  - preview/2026-01-01-preview/openapi.json
+```
+
+### Tag: package-2026-02-01-preview
+
+These settings apply only when `--tag=package-2026-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-01-preview'
+input-file:
+  - preview/2026-02-01-preview/openapi.json
+```
+
+### Tag: package-2026-03-01-preview
+
+These settings apply only when `--tag=package-2026-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-01-preview'
+input-file:
+  - preview/2026-03-01-preview/openapi.json
+```
+
+### Tag: package-2026-04-01-preview
+
+These settings apply only when `--tag=package-2026-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04-01-preview'
+input-file:
+  - preview/2026-04-01-preview/openapi.json
+```
+
+### Tag: package-2026-05-01-preview
+
+These settings apply only when `--tag=package-2026-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-01-preview'
+input-file:
+  - preview/2026-05-01-preview/openapi.json
+```
+
+### Tag: package-2026-06-01
+
+These settings apply only when `--tag=package-2026-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01'
+input-file:
+  - stable/2026-06-01/openapi.json
+```
+
 ---
 
 # Code Generation
@@ -176,6 +257,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
@@ -192,6 +274,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 

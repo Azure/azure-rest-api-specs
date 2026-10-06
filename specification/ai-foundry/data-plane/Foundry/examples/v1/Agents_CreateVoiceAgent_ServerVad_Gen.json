@@ -1,0 +1,76 @@
+{
+  "title": "Agents_CreateVoiceAgent_ServerVad",
+  "operationId": "Agents_createAgent_Agents_createAgentFromCode",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "name": "server-vad-agent",
+    "description": "A voice agent that uses server-side voice activity detection.",
+    "definition": {
+      "kind": "voice",
+      "model_type": "managed",
+      "model": "gpt-realtime",
+      "audio": {
+        "input": {
+          "turn_detection": {
+            "type": "server_vad",
+            "threshold": 0.5,
+            "prefix_padding_ms": 300,
+            "silence_duration_ms": 500
+          },
+          "transcription": {
+            "model": "gpt-realtime-whisper"
+          }
+        },
+        "output": {
+          "voice": "alloy",
+          "voice_type": "azure-standard",
+          "voice_locale": "en-US"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "agent",
+        "id": "agent_server_vad",
+        "name": "server-vad-agent",
+        "state": "enabled",
+        "versions": {
+          "latest": {
+            "metadata": null,
+            "object": "agent.version",
+            "id": "agent_server_vad:1",
+            "name": "server-vad-agent",
+            "version": "1",
+            "created_at": 1785772800,
+            "definition": {
+              "kind": "voice",
+              "model_type": "managed",
+              "model": "gpt-realtime",
+              "audio": {
+                "input": {
+                  "turn_detection": {
+                    "type": "server_vad",
+                    "threshold": 0.5,
+                    "prefix_padding_ms": 300,
+                    "silence_duration_ms": 500
+                  },
+                  "transcription": {
+                    "model": "gpt-realtime-whisper"
+                  }
+                },
+                "output": {
+                  "voice": "alloy",
+                  "voice_type": "azure-standard",
+                  "voice_locale": "en-US"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

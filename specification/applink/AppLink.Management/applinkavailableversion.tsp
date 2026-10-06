@@ -66,7 +66,7 @@ model VersionInfo {
 
 @armResourceOperations
 interface AvailableVersions {
-  @doc("List AvailableVersion resources by location.")
+  @doc("List the Azure Kubernetes Application Network versions available in a location.")
   listByLocation is ArmResourceListByParent<
     Resource = AvailableVersion,
     Parameters = {
