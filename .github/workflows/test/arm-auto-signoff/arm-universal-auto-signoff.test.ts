@@ -156,15 +156,6 @@ describe("getLabelActionImpl", () => {
         updated_at: "2026-01-01",
       },
     },
-    {
-      name: "review incomplete",
-      status: {
-        context: "ARM Semantic Review",
-        state: CommitStatusState.ERROR,
-        description: "Review incomplete: workflow concluded with failure",
-        updated_at: "2026-01-01",
-      },
-    },
   ])(
     "does not sign off or require manual signoff when semantic review is $name",
     async ({ status }) => {
@@ -181,7 +172,28 @@ describe("getLabelActionImpl", () => {
     },
   );
 
-  it("adds manual signoff only when automated coverage was scoped", async () => {
+  it("adds manual signoff when semantic review is incomplete", async () => {
+    const github = createMockGithub({
+      labelNames: ["ARMReview"],
+      statuses: [
+        {
+          context: "ARM Semantic Review",
+          state: CommitStatusState.ERROR,
+          description: "Review incomplete: workflow concluded with failure",
+          updated_at: "2026-01-01",
+        },
+        ...deterministicStatuses,
+      ],
+    });
+
+    const result = await run(github);
+    expect(result.labelActions).toEqual({
+      [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.None,
+      [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.Add,
+    });
+  });
+
+  it("adds manual signoff when automated coverage was scoped", async () => {
     const github = createMockGithub({
       labelNames: ["ARMReview"],
       statuses: [

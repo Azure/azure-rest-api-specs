@@ -2,84 +2,41 @@
 
 ## Purpose
 
-This document explains how the ARM API Reviewer integrates with Universal ARM
-Auto-Signoff, why the implementation uses both workflow artifacts and commit
-statuses, which alternatives were considered, and what risks remain.
+This guide explains the pilot integration between the ARM API Reviewer and
+Universal Auto-Signoff. The legacy ARM Auto SignOff workflows remain the
+production signoff path while Universal runs in parallel.
 
-It is also a reading guide for someone who is new to GitHub Actions, workflow
-coordination, and automated signoff policy.
-
-The implementation is currently a pilot. Universal Auto-Signoff manages
-`ARMAutoSignedOff-Test`; it does not yet replace the production
-`ARMSignedOff` process.
-
-## Start with this mental model
-
-The whole design can be reduced to one sentence:
-
-> The ARM API Reviewer produces evidence for one workflow run, trusted code
-> converts that evidence into a result for one commit SHA, and Universal
-> Auto-Signoff signs off only when every required result for the current SHA
-> passes.
-
-There are two representations of the semantic result:
-
-| Representation    | Mental model                                         | Lifetime                         |
-| ----------------- | ---------------------------------------------------- | -------------------------------- |
-| Workflow artifact | "This reviewer run observed this result."            | Associated with one workflow run |
-| Commit status     | "This is the current semantic state of this commit." | Associated with one commit SHA   |
-
-The artifact is an intermediate handoff. The commit status is the durable input
-that every later auto-signoff evaluation reads.
-
-## Vocabulary
-
-### PR head SHA
-
-The immutable Git commit at the tip of the pull request.
-
-All evidence used for one auto-signoff decision must refer to the same head SHA.
-A result for an older SHA cannot authorize a newer SHA.
-
-### Workflow run
-
-One execution of a GitHub Actions workflow. A rerun has the same run ID and a
-new run attempt.
-
-### Workflow artifact
-
-Data associated with one workflow run. In this design, artifacts carry:
-
-- the PR number;
-- the reviewed head SHA; and
-- the semantic-review receipt.
-
-Artifacts are not the long-lived auto-signoff state.
-
-### Commit status
-
-A GitHub status attached to a commit SHA and named by a context, for example:
+The policy is intentionally small:
 
 ```text
-ARM Semantic Review = success
-Swagger LintDiff    = success
-Swagger Avocado     = success
+ARM Semantic Review passed for the current PR head
+AND Swagger LintDiff passed for the current PR head
+AND Swagger Avocado passed for the current PR head
+AND current labels and approvals allow signoff
+= add ARMAutoSignedOff-Test
 ```
 
-GitHub retains status history. When the same context is published more than
-once for one SHA, the newest entry is treated as current.
+Only `Passed` authorizes the pilot label. Missing, Pending, Changes requested,
+and Review incomplete all block it. Universal never changes `ARMSignedOff`.
 
-### ARM queue labels
+## Mental model
 
-The existing human-review state includes:
+```text
+ARM API Reviewer
+    produces one structured semantic item in agent_output.json
 
-- `NotReadyForARMReview`
-- `WaitForARMFeedback`
-- `ARMChangesRequested`
-- `ARMSignedOff`
+ARM Semantic Review - Set Status
+    validates the item and publishes a commit status on its SHA
 
-`ARMManualSignoffRequired` is the proposed hard stop that prevents automatic
-signoff when a human decision is required.
+Universal Auto-Signoff
+    reads statuses for the current PR head and decides
+
+Update Labels
+    applies the decision if the PR head is still current
+```
+
+The status workflow may publish a result for an older SHA. That is safe:
+Universal Auto-Signoff reads statuses only for the PR's current SHA.
 
 ## Components
 
@@ -93,49 +50,44 @@ Generated workflow:
 
 Responsibilities:
 
-- review the cumulative PR diff at an exact head SHA;
+- review the cumulative PR diff at a pinned head SHA;
 - use the Critic to verify findings;
-- reconcile findings with existing PR discussion;
-- publish comments and update ARM queue labels;
-- record a structured semantic result.
+- reconcile current findings with existing PR discussion;
+- publish comments and ARM queue-label changes;
+- emit one `record_arm_semantic_review` item.
 
-### Semantic state model
+### Semantic policy
 
 [arm-semantic-review.ts](../.github/workflows/src/arm-auto-signoff/arm-semantic-review.ts)
 
 Responsibilities:
 
-- parse and validate model output;
-- encode and parse semantic receipts;
-- map evidence to semantic outcomes;
-- evaluate trusted file-count and line-count coverage;
-- interpret the latest semantic commit status.
+- parse exactly one structured semantic item;
+- validate run attempt, PR number, SHA, Blocking count, scope, and completion;
+- map the evidence to Passed, Changes requested, or Review incomplete;
+- interpret GitHub commit-status states;
+- select the newest semantic status for a SHA.
 
-This module contains pure state and parsing logic. It does not orchestrate
-GitHub workflows.
+This file is pure policy and parsing. It makes no GitHub API calls.
 
-### Semantic workflow orchestration
+### Semantic Set Status orchestration
 
-[arm-semantic-review-workflow.ts](../.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts)
-
-Responsibilities:
-
-- validate the agent's result against the live PR;
-- finalize a completed reviewer workflow;
-- reject stale and superseded runs;
-- independently verify automated-review coverage;
-- publish the final `ARM Semantic Review` commit status.
-
-### Semantic status workflow
-
+Workflow:
 [arm-semantic-review-status.yaml](../.github/workflows/arm-semantic-review-status.yaml)
 
+Implementation:
+[arm-semantic-review-status.ts](../.github/workflows/src/arm-auto-signoff/arm-semantic-review-status.ts)
+
 Responsibilities:
 
-- trigger directly from the completed ARM API Reviewer run;
-- invoke semantic finalization with `statuses: write`;
-- upload trusted PR and SHA correlation artifacts;
-- provide the completion event that triggers Universal Auto-Signoff.
+- trigger from the exact completed reviewer run;
+- download that run's `agent_output.json`;
+- read trusted PR/SHA correlation artifacts;
+- validate the semantic item once;
+- publish `ARM Semantic Review` on the reviewed SHA;
+- upload PR/SHA correlation for Universal Auto-Signoff.
+
+Only this workflow has `statuses: write`.
 
 ### Universal Auto-Signoff
 
@@ -147,550 +99,302 @@ Decision logic:
 
 Responsibilities:
 
-- read statuses for the current head SHA;
-- evaluate semantic review, LintDiff, Avocado, labels, and approvals;
-- upload label-action artifacts.
+- resolve the current PR and current head SHA;
+- read Semantic Review, LintDiff, and Avocado statuses for that SHA;
+- evaluate current labels and approvals;
+- manage the pilot `ARMAutoSignedOff-Test` label and add the manual-review label
+  when semantic evidence is incomplete.
 
-Universal Auto-Signoff has `statuses: read`. Status publication is isolated in
-the semantic status workflow.
+Universal has only `statuses: read`.
 
 ### Label application
 
-Workflow:
-[update-labels.yaml](../.github/workflows/update-labels.yaml)
-
-Implementation:
-[update-labels.ts](../.github/workflows/src/update-labels.ts)
-
-Responsibilities:
-
-- consume trusted label artifacts;
-- recheck the live PR head when the producer supplied a head-SHA artifact;
-- apply label additions and removals.
+[update-labels.ts](../.github/workflows/src/update-labels.ts) applies label
+artifacts. When a producer supplies a head-SHA artifact, it confirms that the PR
+is still open and still has that head before mutating labels.
 
 ## End-to-end flow
 
 ```mermaid
 flowchart TD
-    A[Eligible PR trigger or /arm-review] --> B[ARM API Reviewer starts]
-    B --> C[Resolve PR and exact head SHA]
-    C --> D[Publish ARM Semantic Review = Pending]
-    D --> E[Agent reviews cumulative PR diff]
-    E --> F[Critic verifies findings]
-    F --> G[Reconcile existing comments]
-    G --> H[Queue comments and ARM label changes]
-    G --> I[Record validated semantic receipt]
+    A[Eligible reviewer trigger] --> B[Set Semantic Review Pending on reviewed SHA]
+    B --> C[Agent and Critic review PR]
+    C --> D[Publish comments and queue-label changes]
+    C --> E[Emit record_arm_semantic_review item]
+    D --> F[Reviewer workflow completes]
+    E --> F
 
-    H --> J[Reviewer workflow completes]
-    I --> J
+    F --> G[Semantic Set Status workflow]
+    G --> H[Download exact run agent_output.json]
+    H --> I[Validate attempt, PR, SHA, Blocking count, scope, and completion]
+    I --> J[Publish semantic status on reviewed SHA]
+    J --> K[Universal Auto-Signoff]
 
-    J --> K[Semantic Set Status workflow_run trigger]
-    K --> L[Read exact reviewer run artifacts]
-    L --> M[Validate PR, SHA, attempt, scope, and coverage]
-    M --> N[Publish final ARM Semantic Review status]
-
-    N --> O[Universal Auto-Signoff workflow_run trigger]
-    O --> P[Read all statuses for current head SHA]
-    Y[LintDiff, Avocado, PR, or label event] --> P
-
-    P --> Q{Semantic status is Passed?}
-    Q -- No --> R[Do not auto-sign off]
-    Q -- Manual review required --> S[Add ARMManualSignoffRequired]
-    Q -- Yes --> T{LintDiff, Avocado,\nlabels, and approvals pass?}
-    T -- No --> R
-    T -- Yes --> U[Add ARMAutoSignedOff-Test]
-
-    U --> V[Update Labels workflow]
-    S --> V
-    V --> W[Recheck live PR head]
-    W --> X[Apply labels if still current]
+    L[LintDiff, Avocado, PR, or label event] --> K
+    K --> M[Read all statuses for current PR head]
+    M --> N{All requirements pass?}
+    N -- No --> O[Remove stale pilot signoff]
+    N -- Yes --> P[Add ARMAutoSignedOff-Test artifact]
+    P --> Q[Update Labels rechecks current head]
+    Q --> R[Apply label]
 ```
 
-## Detailed workflow
+## Structured semantic item
 
-### 1. Start the reviewer
+The agent emits:
 
-The reviewer can start from:
-
-- an eligible PR open, synchronize, or ready-for-review event;
-- adding `WaitForARMFeedback`;
-- an authorized `/arm-review` comment; or
-- manual workflow dispatch.
-
-The reviewer has one concurrency group per PR with:
-
-```yaml
-cancel-in-progress: true
-```
-
-A newer eligible trigger replaces an active reviewer run for the same PR.
-Unrelated comments receive run-specific concurrency groups and do not cancel an
-active review.
-
-### 2. Correlate the PR and set Pending
-
-Before agent execution, trusted pre-activation code:
-
-1. validates the target PR number;
-2. reads the exact current head SHA;
-3. uploads `issue-number=<number>` and `head-sha=<sha>` artifacts;
-4. publishes:
-
-```text
-SHA:         <current head SHA>
-Context:     ARM Semantic Review
-State:       pending
-Description: ARM API semantic review is pending
-Target URL:  exact reviewer run and attempt
-```
-
-Publishing Pending is important when the same SHA is reviewed again. It prevents
-an older Passed status from continuing to authorize signoff while the new review
-is in progress.
-
-### 3. Perform semantic review
-
-The reviewer evaluates:
-
-```text
-base SHA -> current head SHA
-```
-
-It reviews the cumulative PR, not only the most recent commit.
-
-The reviewer:
-
-- identifies semantic API-design findings;
-- asks the Critic to verify findings;
-- reads existing workflow-owned and human-authored discussion;
-- reconciles current findings with prior comments;
-- posts only net-new or relocated findings;
-- resolves fixed workflow-owned findings.
-
-An unresolved verified Blocking finding still counts when its reconciliation
-action is `SKIP-COVERED`. "No new comment was posted" does not mean the PR is
-clean.
-
-### 4. Update the ARM queue state
-
-The reviewer applies these rules:
-
-| Review result                                                    | Queue behavior                                                  |
-| ---------------------------------------------------------------- | --------------------------------------------------------------- |
-| Scoped, incomplete, or degraded                                  | Preserve existing queue labels                                  |
-| Full and complete, with applicable verified Blocking findings    | Add `ARMChangesRequested`; remove `WaitForARMFeedback`          |
-| Full and complete, with no applicable verified Blocking findings | Remove stale `ARMChangesRequested`; retain `WaitForARMFeedback` |
-| Critic unavailable                                               | Preserve existing queue labels                                  |
-
-Partial reviews preserve the human queue even when they identify Blocking
-findings. They cannot make a complete queue-state decision.
-
-### 5. Record the semantic receipt
-
-After reconciliation and summary generation, the agent calls one structured
-safe output with:
-
-```text
-PR number
-reviewed head SHA
-scope: full | scoped
-completeness: complete | incomplete | degraded
-number of verified Blocking findings still applicable
-```
-
-Example artifact name:
-
-```text
-arm-semantic-review=1.123.abc123abc123abc123abc123abc123abc123abcd.full.complete.0
+```json
+{
+  "type": "record_arm_semantic_review",
+  "run_attempt": "1",
+  "issue_number": "123",
+  "head_sha": "abc123abc123abc123abc123abc123abc123abcd",
+  "blocking_count": "0",
+  "scope": "full",
+  "completeness": "complete"
+}
 ```
 
 Fields:
 
-```text
-1             workflow attempt
-123           PR number
-abc123...     reviewed head SHA
-full          review scope
-complete      review completeness
-0             currently applicable verified Blocking findings
-```
+| Field            | Meaning                                                          |
+| ---------------- | ---------------------------------------------------------------- |
+| `run_attempt`    | Reviewer workflow attempt that produced the item                 |
+| `issue_number`   | Reviewed PR                                                      |
+| `head_sha`       | Reviewed commit                                                  |
+| `blocking_count` | Verified Blocking findings still applicable after reconciliation |
+| `scope`          | Whether the complete PR or a size-limited subset was reviewed     |
+| `completeness`   | Whether the review completed normally, incompletely, or degraded  |
 
-A trusted safe-output job validates the receipt and uploads it. The agent does
-not directly publish a final Passed status.
+The reviewer custom safe-output job exists because gh-aw requires a job for a
+typed custom output. It has no token permissions and performs no authoritative
+validation.
 
-### 6. Wait for the whole reviewer workflow
+## Semantic status publication
 
-The generated reviewer workflow includes:
+`ARM Semantic Review - Set Status` receives the exact reviewer run ID through
+`workflow_run`.
 
-- agent execution;
-- threat detection;
-- custom semantic receipt validation;
-- comment and label safe-output processing; and
-- a final conclusion job.
+It:
 
-The dedicated Semantic Set Status workflow finalizes the result only after the
-reviewer emits `workflow_run: completed`.
+1. lists that run's artifact names once;
+2. reads trusted `head-sha` and `issue-number` artifacts;
+3. downloads that run's `agent` artifact;
+4. finds exactly one semantic item;
+5. validates the attempt, PR, SHA, Blocking count, scope, and completion;
+6. publishes a status on the semantic item's SHA.
 
-This boundary is intended to prevent Passed from becoming visible while the
-reviewer is still publishing comments or labels.
+Outcome mapping:
 
-### 7. Finalize the semantic result
+| Evidence                                                                                      | Status                       |
+| --------------------------------------------------------------------------------------------- | ---------------------------- |
+| Full, complete review with `blocking_count = 0`                                                | `success`: Passed            |
+| Full, complete review with `blocking_count > 0`                                                | `failure`: Changes requested |
+| Scoped, incomplete, or degraded review, regardless of `blocking_count`                         | `error`: Review incomplete   |
+| Workflow failure, missing output, malformed output, duplicate item, or mismatched correlation | `error`: Review incomplete   |
+| Canceled reviewer run                                                                         | Leave Pending unchanged      |
+| Missing trusted PR/SHA artifacts                                                              | Leave status unchanged       |
 
-`ARM Semantic Review - Set Status` is triggered with the exact completed ARM
-reviewer run. It calls `finalizeArmSemanticReview`.
-
-It verifies:
-
-- the reviewer run's artifacts are listed once and reused for both correlation
-  and receipt finalization;
-- the reviewer actually executed;
-- the PR number and head SHA are valid;
-- the PR is still open;
-- the reviewed SHA is still the current head;
-- a newer run or attempt did not supersede this one;
-- the receipt belongs to this PR, SHA, and run attempt;
-- the changed-file inventory is not truncated;
-- no more than 50 specification files changed;
-- no more than 5,000 specification lines changed.
-
-Trusted code independently evaluates size and truncation. It does not rely only
-on the model's `scope` value.
-
-### 8. Publish the final commit status
-
-| Semantic outcome       | GitHub state | Description pattern                |
-| ---------------------- | ------------ | ---------------------------------- |
-| Passed                 | `success`    | `Passed: ...`                      |
-| Changes requested      | `failure`    | `Changes requested: ...`           |
-| Manual review required | `error`      | `Manual review required: ...`      |
-| Review incomplete      | `error`      | `Review incomplete: ...`           |
-| Pending                | `pending`    | Review is running or must be rerun |
-
-`Manual review required` is used for deterministic coverage limits such as:
-
-- oversized PRs;
-- scoped review;
-- truncated changed-file inventory.
-
-`Review incomplete` is used for retryable or technical failures such as:
-
-- reviewer workflow failure;
-- missing receipt;
-- malformed receipt;
-- degraded full review.
-
-After finalization, the status workflow uploads the validated PR number and head
-SHA as correlation artifacts. Universal Auto-Signoff is triggered by completion
-of `ARM Semantic Review - Set Status`.
-
-### 9. Evaluate auto-signoff
-
-The normal auto-signoff decision runs on every Universal Auto-Signoff event:
-
-- semantic status completion;
-- LintDiff completion;
-- Avocado completion;
-- PR update;
-- relevant label addition or removal.
-
-It fetches all commit statuses for the current head SHA, then selects the newest
-status for each required context:
-
-- `ARM Semantic Review`
-- `Swagger LintDiff`
-- `Swagger Avocado`
-
-Effective policy:
+The status is head-bound:
 
 ```text
-if semantic outcome is Manual review required:
-    add ARMManualSignoffRequired
-    do not sign off
-
-if semantic outcome is not Passed:
-    do not sign off
-
-if ARMChangesRequested is present:
-    do not sign off
-
-if ARMManualSignoffRequired is present:
-    do not sign off
-
-if LintDiff or Avocado is not successful:
-    do not sign off
-
-if required approval is missing:
-    do not sign off
-
-otherwise:
-    add ARMAutoSignedOff-Test
+SHA:         reviewed SHA
+Context:     ARM Semantic Review
+State:       success | failure | error | pending
+Target URL:  exact reviewer run and attempt
 ```
 
-Only Passed is positive authorization. Missing, Pending, Failure, and Review
-incomplete all fail closed.
+## Stale-result protection
 
-### 10. Apply labels safely
+Set Status publishes only while the PR is open and its current head matches the
+reviewed SHA. A completion for a closed PR or stale head leaves the existing
+status unchanged.
 
-Universal Auto-Signoff uploads label artifacts instead of directly mutating
-labels.
+Universal independently reads statuses only for the current head SHA:
 
-When the producer includes a trusted head-SHA artifact, Update Labels reads the
-live PR again. It discards the label action if:
+```text
+Reviewer publishes Passed on SHA A
+PR head is now SHA B
+Universal reads statuses only for SHA B
+No Semantic Passed exists on B
+Universal does not sign off
+```
 
-- the PR is closed; or
-- the PR head moved.
+## Universal decision
 
-This prevents a decision calculated for one commit from changing labels on a
-later commit.
+Universal fetches all commit statuses for the current head SHA and selects the
+newest entry for:
+
+- `ARM Semantic Review`;
+- `Swagger LintDiff`;
+- `Swagger Avocado`.
+
+Decision:
+
+```text
+Semantic Review is missing or Pending
+    -> wait and remove stale pilot signoff
+
+Semantic Review requested changes
+    -> remove pilot signoff
+
+Semantic Review is incomplete
+    -> add ARMManualSignoffRequired
+    -> retain WaitForARMFeedback
+    -> remove pilot signoff
+
+ARMManualSignoffRequired is present
+    -> no pilot signoff
+
+LintDiff or Avocado is not successful
+    -> no pilot signoff
+
+required approval is missing
+    -> no pilot signoff
+
+otherwise
+    -> add ARMAutoSignedOff-Test
+```
+
+`ARMAutoSignedOff-Test` records the pilot decision without changing production
+signoff. `ARMManualSignoffRequired` remains an explicit human veto and is never
+removed automatically.
 
 ## Event-order examples
 
-### Reviewer completes before Avocado
+### Avocado completes first
 
 ```text
-Reviewer starts       -> Semantic = Pending
-Reviewer completes    -> Semantic Set Status publishes Passed
-Auto-Signoff evaluates -> Avocado still pending, no signoff
-Avocado completes     -> Auto-Signoff rereads all current-SHA statuses
-All pass              -> Add pilot auto-signoff label
+Semantic = Pending
+Avocado = Passed
+Universal runs
+Semantic is not Passed
+No signoff
+
+Reviewer completes
+Set Status publishes Semantic = Passed
+Universal runs again
+All statuses pass
+Signoff can proceed
 ```
 
-### Avocado completes before reviewer
+### Reviewer completes first
 
 ```text
-Reviewer starts       -> Semantic = Pending
-Avocado completes     -> Auto-Signoff sees Pending, no signoff
-Reviewer completes    -> Semantic Set Status publishes Passed
-Auto-Signoff rereads Avocado and LintDiff
-All pass              -> Add pilot auto-signoff label
+Set Status publishes Semantic = Passed
+Universal runs
+Avocado is pending
+No signoff
+
+Avocado completes
+Universal runs again
+All statuses pass
+Signoff can proceed
 ```
 
-### New commit arrives during review
+### New commit during review
 
 ```text
-Reviewer is reviewing SHA A
-PR moves to SHA B
-Finalizer sees current head != reviewed SHA
-SHA A result is ignored
-SHA B requires its own semantic review
+Reviewer publishes result on SHA A
+Current PR head is SHA B
+Universal reads B
+No semantic status for B
+No signoff
 ```
 
-### Same SHA is retriggered
+### Same-SHA rerun
 
 ```text
-Old result for SHA A = Passed
-New review starts for SHA A
-New Pending entry becomes the newest semantic status
-Auto-Signoff waits
-New final result replaces Pending as the newest entry
+Old status on A = Passed
+New review starts on A
+New Pending entry becomes newest
+Universal waits
+Set Status publishes the new final result
 ```
 
-### Oversized PR
+### Missing or malformed semantic output
 
 ```text
-Trusted code counts > 50 specification files or > 5,000 changed lines
-Semantic result = Manual review required
-Auto-Signoff does not proceed
-ARMManualSignoffRequired is added
+Set Status publishes Review incomplete on reviewed SHA
+Universal adds ARMManualSignoffRequired
+No automatic signoff
 ```
 
-## Why this design was chosen
+## Why this design
 
-### Independent workflows complete in any order
+### Commit status instead of labels
 
-The reviewer, LintDiff, and Avocado are independent workflows. A durable
-SHA-bound status lets any completion event reevaluate the same current state.
+Commit statuses are SHA-bound. PR labels are not.
 
-### Labels are not SHA-bound
+### Commit status instead of artifact-only lookup
 
-The absence of `ARMChangesRequested` does not prove that:
+Any later event can read the current SHA's status without searching reviewer-run
+history or downloading old artifacts.
 
-- the reviewer ran;
-- the reviewer finished;
-- the review covered the whole PR; or
-- the result belongs to the current commit.
+### Dedicated Set Status workflow
 
-### Workflow conclusion is not the semantic result
-
-A reviewer workflow can finish successfully while:
-
-- finding Blocking issues;
-- reviewing only part of a PR;
-- producing incomplete semantic evidence.
-
-### Model output should not directly authorize signoff
-
-The model emits evidence. Trusted code verifies correlation and deterministic
-coverage before publishing the durable status.
-
-### Finalization should occur after reviewer completion
-
-Publishing Passed inside the agent job can expose success before comment and
-label publishing completes. `workflow_run: completed` provides a later
-coordination boundary.
-
-## Alternative designs and tradeoffs
-
-| Design                                                         | Advantages                                                                                                     | Tradeoffs                                                                                       |
-| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| **Current: receipt, dedicated Set Status, then commit status** | SHA-bound, reusable by every trigger, fail-closed, least-privilege status writer, matches LintDiff and Avocado | Adds one workflow hop and another workflow to maintain                                          |
-| Finalize inside Universal Auto-Signoff                         | Fewer workflow files                                                                                           | Gives Universal `statuses: write` on every trigger and mixes publication with policy evaluation |
-| One combined workflow                                          | Strong ordering and direct outputs                                                                             | Tightly couples AI review, linters, labels, retries, and every trigger                          |
-| Label-only handshake                                           | Simple and visible                                                                                             | Labels are mutable PR state, not SHA-bound; bot-label events can be unreliable                  |
-| Artifact-only lookup                                           | No commit status needed                                                                                        | Every event must search historical runs and artifacts; expiration and supersession are complex  |
-| Publish final status inside reviewer                           | Fewer workflow steps                                                                                           | Risks exposing Passed before comments and labels finish                                         |
-| GitHub Check Run                                               | Rich UI and potentially stronger producer identity                                                             | More API and permission complexity; may require a dedicated GitHub App                          |
-| Reusable `workflow_call` pipeline                              | Typed outputs and strong ordering                                                                              | Difficult to retrofit around independent triggers and manual review commands                    |
-
-## Trust boundaries
-
-### Untrusted or partially trusted
-
-- PR content;
-- specification files;
-- PR description and comments;
-- model reasoning;
-- model-supplied semantic fields.
-
-### Trusted
-
-- workflow source from the base/default branch;
-- pre-activation PR and SHA lookup;
-- workflow artifacts uploaded by privileged/default-branch workflows;
-- semantic receipt validation;
-- trusted file-count and line-count evaluation;
-- commit-status publication;
-- final live-head check before correlated label application.
-
-## Risk assessment
-
-### Rollout blocker: `ARMManualSignoffRequired` does not exist
-
-At the time of writing, GitHub returns 404 for the repository label
-`ARMManualSignoffRequired`, and it is not defined in checked-in label
-configuration.
-
-Expected failure:
+It matches LintDiff and Avocado:
 
 ```text
-Semantic outcome = Manual review required
-Universal uploads label artifact
-Update Labels attempts to add nonexistent label
-Label application fails
+producer workflow
+    -> Set Status workflow
+    -> Universal evaluator
 ```
 
-Semantic safety is preserved because the result is not Passed, but the intended
-manual-review routing does not appear.
+It also keeps `statuses: write` out of Universal.
 
-Before rollout:
+### One authoritative validation
 
-1. Create `ARMManualSignoffRequired` in both spec repositories.
-2. Decide whether it should be listed in
-   [protected-labels.yml](../.github/protected-labels.yml).
-3. Document who may add and remove it.
+Validation occurs only in Set Status. The reviewer produces the typed item; Set
+Status validates and publishes it.
 
-### High before production: commit-status provenance is not authenticated
+## Security and reliability properties
 
-Auto-signoff trusts the newest status whose context is `ARM Semantic Review`.
-It does not verify:
+- no untrusted PR code is checked out;
+- only write-access users or the trusted bot can trigger reviewer writes;
+- Set Status consumes the exact completed reviewer run ID;
+- the semantic item is bound to the workflow attempt, PR number, and SHA;
+- malformed, missing, duplicate, mismatched, scoped, incomplete, or degraded
+  output fails closed;
+- only `success` permits signoff;
+- Universal always reads the current head SHA;
+- delayed label artifacts are rechecked against the live PR head;
+- Universal has `statuses: read`;
+- only Set Status has `statuses: write`.
 
-- the status creator;
-- the target workflow URL;
-- the workflow name;
-- that the run belongs to this repository;
-- that the run has a valid semantic receipt.
+## Accepted tradeoffs
 
-Any workflow or identity with `statuses: write` could publish a competing
-success status.
+### The model is the semantic source of truth
 
-This is lower impact while the pilot controls only `ARMAutoSignedOff-Test`, but
-it should be hardened before controlling production `ARMSignedOff`.
+The same verified findings drive:
 
-Possible mitigations:
+- comments authors act on;
+- `ARMChangesRequested`;
+- semantic Blocking count.
 
-- validate the status creator;
-- require a target URL matching a trusted Actions run;
-- resolve the run and verify its workflow name;
-- publish through a dedicated GitHub App or Check Run identity.
+Set Status validates structure and correlation; it does not independently
+re-review semantic correctness.
 
-### High or medium: semantic truth still comes from model output
+### Coupling to gh-aw agent output
 
-Trusted code validates shape, correlation, and coverage. It does not
-independently prove:
-
-- that the review was complete;
-- that `blocking_count` matches the findings;
-- that a Blocking finding was not omitted;
-- that the receipt agrees with queued label changes.
-
-The live `ARMChangesRequested` check provides defense in depth, but inconsistent
-model output plus failed label output could theoretically produce Passed.
-
-Possible mitigations:
-
-- derive Blocking count from structured finding outputs;
-- cross-check the receipt against safe-output items;
-- require a Passed receipt to agree with the queued label transition;
-- reject Passed when safe-output processing reports failed items.
-
-### Medium: manual override removal is not protected
-
-The current protected-label workflow watches only `labeled`, not `unlabeled`.
-
-An unauthorized user with label permissions could remove a manually applied
-`ARMManualSignoffRequired`. If semantic status is Passed, automation may then
-proceed.
-
-Possible mitigations:
-
-- enforce authorization on `unlabeled`;
-- record the hold in a trusted status or review record;
-- require an authorized actor to clear the hold.
-
-### Medium: stale reviewer runs can mutate PR-level queue labels
-
-Semantic statuses are SHA-bound. Reviewer safe outputs for
-`ARMChangesRequested` and `WaitForARMFeedback` are direct PR-level mutations.
-
-A narrow race remains:
+Set Status expects:
 
 ```text
-Old run verifies head SHA
-New commit arrives
-Old run applies queue label mutation
+artifact name: agent
+file: agent_output.json
+items[] with type record_arm_semantic_review
 ```
 
-The semantic gate still prevents unsafe auto-signoff, but the human queue can
-become confusing.
+A gh-aw format change can break extraction. That failure produces Review
+incomplete and cannot authorize signoff.
 
-Possible mitigation: route reviewer queue-label changes through a correlated
-artifact workflow with a final head-SHA check.
+### PR-level comment and label races
 
-### Medium, pending confirmation: partial safe-output failure
+Comments and queue labels are not transactional. A canceled run can publish
+some outputs before cancellation. Reconciliation reduces duplicate comments,
+and the current-SHA semantic gate prevents stale auto-signoff.
 
-The generated safe-output job exposes:
-
-- `items_failed`;
-- `items_succeeded`;
-- `process_safe_outputs_status`.
-
-The finalizer does not inspect those outputs.
-
-Confirm whether gh-aw can complete the workflow successfully when individual
-comment or label items fail. If it can, reject Passed whenever safe-output
-processing reports failed or canceled items.
-
-### Medium operational risk: private-repository parity
-
-The ARM reviewer source states that public and private repository copies must
-remain byte-identical.
-
-Rollout must update `Azure/azure-rest-api-specs-pr` in coordination with this
-repository.
-
-### Medium operational constraint: workflow-run chain depth
-
-The success path is:
+### Workflow chain depth
 
 ```text
 ARM API Reviewer
@@ -699,383 +403,52 @@ ARM API Reviewer
     -> Update Labels
 ```
 
-This uses the same three-level `workflow_run` chain pattern as LintDiff and
-Avocado and reaches GitHub's supported chaining limit. Do not insert another
-downstream `workflow_run` workflow after Update Labels; it may not run.
+This reaches GitHub's supported `workflow_run` chain depth. Do not add another
+downstream `workflow_run` workflow after Update Labels.
 
-### Missing correlation artifacts
+## Operational prerequisites
 
-If the reviewer run does not contain trusted PR and head-SHA artifacts, the
-status workflow leaves semantic status unchanged. It does not substitute the
-PR's current head because that could attach an older run's result to a newer
-commit.
+- ensure `ARMAutoSignedOff-Test` and `ARMManualSignoffRequired` exist;
+- mirror the ARM reviewer workflow to `azure-rest-api-specs-pr`;
+- document who may remove manual hold labels;
+- monitor incomplete/degraded rates and label transitions after rollout.
 
-### Low: timestamp ordering
+## How to understand the implementation
 
-The latest status is selected by `updated_at`.
+Read in this order:
 
-If two entries have identical timestamp resolution, ordering relies on GitHub's
-return order and stable sorting. A status ID or run-attempt comparison would be
-a stronger tiebreaker.
+1. [arm-semantic-review-status.yaml](../.github/workflows/arm-semantic-review-status.yaml)
+2. [finalizeArmSemanticReview](../.github/workflows/src/arm-auto-signoff/arm-semantic-review-status.ts)
+3. [parseSemanticReviewResult](../.github/workflows/src/arm-auto-signoff/arm-semantic-review.ts)
+4. [arm-universal-auto-signoff.ts](../.github/workflows/src/arm-auto-signoff/arm-universal-auto-signoff.ts)
+5. tests:
+   - [arm-semantic-review.test.ts](../.github/workflows/test/arm-auto-signoff/arm-semantic-review.test.ts)
+   - [arm-semantic-review-status-workflow.test.ts](../.github/workflows/test/arm-auto-signoff/arm-semantic-review-status-workflow.test.ts)
+   - [arm-universal-auto-signoff.test.ts](../.github/workflows/test/arm-auto-signoff/arm-universal-auto-signoff.test.ts)
 
-### Low: canceled-run comment duplication
-
-Cancellation is not transactional. A canceled safe-output publisher may have
-already posted some comments. The replacement run reconciles marked findings,
-which reduces but cannot eliminate duplication.
-
-This is primarily a PR-noise risk, not an auto-signoff safety risk.
-
-### Low: manual-review label persists
-
-`ARMManualSignoffRequired` is intentionally never removed automatically.
-
-If an oversized PR is later reduced and receives a clean full review, a human
-must clear the label before auto-signoff can proceed.
-
-This is safe, but should be documented for authors and reviewers.
-
-## How to learn this design from zero
-
-Do not start by reading the generated workflow or every test. Build the model in
-layers.
-
-### Layer 1: learn the policy
-
-Write this decision rule on paper:
+For each scenario, ask:
 
 ```text
-Semantic Passed
-AND LintDiff Passed
-AND Avocado Passed
-AND required labels and approvals allow signoff
-= auto-signoff
+What SHA did the reviewer inspect?
+What semantic status exists on that SHA?
+What is the PR's current SHA?
+What statuses does Universal see on the current SHA?
+Can signoff proceed?
 ```
-
-Everything else is implementation detail supporting this rule.
-
-Questions to answer:
-
-- What is a positive authorization?
-- Which states merely block?
-- Which states require human routing?
-- Which result must be tied to a commit?
-
-### Layer 2: learn the identities
-
-Track four IDs:
-
-```text
-PR number
-head SHA
-workflow run ID
-workflow attempt
-```
-
-Use this table:
-
-| Identity    | What it distinguishes                  |
-| ----------- | -------------------------------------- |
-| PR number   | The review conversation and labels     |
-| Head SHA    | The exact code/specification snapshot  |
-| Run ID      | One workflow execution                 |
-| Run attempt | A rerun of the same workflow execution |
-
-Most race conditions are an accidental mismatch among these identities.
-
-### Layer 3: learn durable versus transient state
-
-Classify each signal:
-
-| Signal           | Scope                        |
-| ---------------- | ---------------------------- |
-| Receipt artifact | One workflow run and attempt |
-| Commit status    | One commit SHA               |
-| Label            | Entire PR until changed      |
-| Comment          | Entire PR discussion         |
-
-Then ask:
-
-> Is this state being used outside the scope where it is valid?
-
-That question explains why labels alone are insufficient and why old artifacts
-must not authorize new commits.
-
-### Layer 4: trace only the happy path
-
-Read these files in order:
-
-1. [arm-api-review.md](../.github/workflows/arm-api-review.md), focusing only on:
-   - trigger and concurrency;
-   - Pending status;
-   - Step 7;
-   - Step 9.
-2. [arm-semantic-review-status.yaml](../.github/workflows/arm-semantic-review-status.yaml)
-3. [arm-semantic-review.ts](../.github/workflows/src/arm-auto-signoff/arm-semantic-review.ts)
-4. [arm-semantic-review-workflow.ts](../.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts)
-5. [arm-universal-auto-signoff.yaml](../.github/workflows/arm-universal-auto-signoff.yaml)
-6. [arm-universal-auto-signoff.ts](../.github/workflows/src/arm-auto-signoff/arm-universal-auto-signoff.ts)
-
-Ignore the generated lock file at first.
-
-While reading, follow one example:
-
-```text
-Full review, no findings, LintDiff and Avocado pass
-```
-
-Write down every state transition.
-
-### Layer 5: add one failure at a time
-
-Use this order:
-
-1. Blocking finding.
-2. Avocado finishes before reviewer.
-3. New commit during review.
-4. Same-SHA retrigger.
-5. Oversized PR.
-6. Critic unavailable.
-7. Missing receipt.
-8. Canceled run.
-9. Stale label artifact.
-
-For each scenario, answer:
-
-```text
-What is the current head SHA?
-What is the latest semantic status for that SHA?
-What labels are present?
-Can auto-signoff proceed?
-Who or what triggers reevaluation?
-```
-
-### Layer 6: read tests as executable examples
-
-After the state model is clear, read:
-
-- [arm-semantic-review.test.ts](../.github/workflows/test/arm-auto-signoff/arm-semantic-review.test.ts)
-- [arm-universal-auto-signoff.test.ts](../.github/workflows/test/arm-auto-signoff/arm-universal-auto-signoff.test.ts)
-- [context.test.ts](../.github/workflows/test/context.test.ts)
-- [update-labels.test.ts](../.github/workflows/test/update-labels.test.ts)
-
-Read test names first. They provide a scenario inventory.
-
-### Layer 7: inspect the generated workflow last
-
-Use [arm-api-review.lock.yml](../.github/workflows/arm-api-review.lock.yml) only
-to answer compiler-specific questions:
-
-- Which jobs depend on which jobs?
-- Which permissions does each generated job receive?
-- When does the safe-output publisher run?
-- Which failures are `continue-on-error`?
-
-Do not use the generated YAML as the first source for understanding policy.
-
-## How to reason about tradeoffs with no prior knowledge
-
-### Step 1: state the non-negotiable invariants
-
-For this design:
-
-```text
-Never auto-sign off without Semantic Passed for the current SHA.
-Never reuse an older SHA's Passed result.
-Never treat a partial review as a full review.
-Never let unvalidated model output directly authorize signoff.
-Human override must win over automation.
-```
-
-Tradeoffs may change implementation complexity. They must not violate these
-invariants.
-
-### Step 2: list failure modes before solutions
-
-Examples:
-
-- workflows finish in a different order;
-- a new commit arrives mid-review;
-- a run is canceled;
-- a label event does not trigger another workflow;
-- an artifact is missing;
-- a status is stale;
-- the agent reports inconsistent fields;
-- label application is delayed;
-- the PR is too large to review fully.
-
-Design from failure cases, not only from the happy path.
-
-### Step 3: choose fail-open or fail-closed
-
-For signoff and security decisions, prefer fail-closed:
-
-```text
-Missing semantic result -> no signoff
-Malformed receipt       -> no signoff
-Stale SHA               -> ignore result
-Partial review          -> manual review
-```
-
-For user experience, distinguish retryable from permanent/manual cases so
-fail-closed does not automatically mean "send everything to a human."
-
-### Step 4: identify the authority for every field
-
-Use a table:
-
-| Field               | Source         | Can it be trusted? | Verification                  |
-| ------------------- | -------------- | ------------------ | ----------------------------- |
-| PR number           | Event plus API | Mostly             | Re-fetch PR                   |
-| Head SHA            | PR API         | Yes in trusted job | Compare before publication    |
-| Scope               | Agent          | No by itself       | Recompute trusted size limits |
-| Blocking count      | Agent          | Partially          | Cross-check recommended       |
-| Workflow conclusion | GitHub         | Yes                | Read `workflow_run`           |
-| Manual hold         | Label          | Mutable            | Protect actor and removal     |
-
-If you cannot name the authority, the design has a trust gap.
-
-### Step 5: separate evidence, decision, and effect
-
-```text
-Evidence: reviewer receipt, statuses, labels, approvals
-Decision: auto-signoff policy function
-Effect: label mutation
-```
-
-Keeping these separate makes retry, auditing, and stale-result protection
-easier.
-
-### Step 6: reason about time
-
-Draw a timeline:
-
-```text
-T1 reviewer starts
-T2 Avocado finishes
-T3 new commit arrives
-T4 reviewer finishes
-T5 label updater runs
-```
-
-At every point ask:
-
-> Which SHA does this operation refer to?
-
-This catches most distributed-workflow races.
-
-### Step 7: evaluate alternatives on explicit axes
-
-Score each design from 1 to 5:
-
-| Axis             | Question                                                      |
-| ---------------- | ------------------------------------------------------------- |
-| Correctness      | Can stale or partial evidence authorize signoff?              |
-| Security         | Can untrusted input or a broad token affect the decision?     |
-| Ordering         | Does the design work regardless of workflow completion order? |
-| Observability    | Can a reviewer understand why signoff did or did not occur?   |
-| Recovery         | Can a failed run be retried safely?                           |
-| Complexity       | How many workflows, data forms, and APIs must be understood?  |
-| Maintainability  | Is policy centralized and tested?                             |
-| Operational cost | What must be provisioned and kept in sync?                    |
-
-Do not choose "simplest" without specifying which axis is being simplified.
-
-### Step 8: document accepted residual risk
-
-A design does not need zero risk. It needs explicit risk ownership.
-
-Example:
-
-```text
-Accepted for pilot:
-  occasional duplicate comment after cancellation
-
-Not accepted for production:
-  unauthenticated producer of a Passed status
-```
-
-### Step 9: use a decision worksheet
-
-For every unresolved choice, fill in:
-
-```text
-Decision:
-Options:
-Invariant affected:
-Failure mode:
-Security boundary:
-Operational impact:
-Recommended option:
-Why:
-What would make us revisit it:
-```
-
-This lets you make defensible tradeoffs without already being an expert.
-
-## Suggested exercises
-
-### Exercise 1: trace a clean PR
-
-Create a table with:
-
-```text
-Event
-Current SHA
-Semantic status
-LintDiff
-Avocado
-Labels
-Decision
-```
-
-Fill it from reviewer start through pilot signoff.
-
-### Exercise 2: break the ordering
-
-Repeat the table with Avocado finishing first. The final decision should be the
-same.
-
-### Exercise 3: change the SHA
-
-Insert a new commit before reviewer completion. Verify every older result is
-ignored.
-
-### Exercise 4: challenge each trust boundary
-
-Ask:
-
-- What if the model lies about scope?
-- What if another workflow publishes `ARM Semantic Review = success`?
-- What if a user removes the manual hold?
-- What if a label artifact arrives late?
-
-If the answer is unclear, add a check or document the residual risk.
 
 ## Review checklist
 
-Before enabling production signoff:
-
-- [ ] Create `ARMManualSignoffRequired` in both repositories.
-- [ ] Decide and enforce who may add and remove the manual hold.
-- [ ] Mirror the ARM reviewer workflow to `azure-rest-api-specs-pr`.
-- [ ] Authenticate the semantic status producer.
-- [ ] Confirm safe-output partial-failure semantics.
-- [ ] Cross-check semantic receipt against actual published findings and labels.
-- [ ] Test same-SHA reruns, new-SHA races, cancellation, and artifact loss in CI.
-- [ ] Document how authors return a PR from manual review to automation.
-- [ ] Replace the pilot label only after observing stable behavior.
-
-## Bottom line
-
-The design is intentionally fail-closed and is suitable for a pilot:
-
-- semantic evidence is tied to an exact SHA;
-- only Passed allows auto-signoff;
-- stale and superseded results are ignored;
-- partial coverage routes to manual review;
-- delayed correlated label changes recheck the live head.
-
-Before controlling production `ARMSignedOff`, address the missing manual-review
-label, producer provenance, safe-output consistency, and private-repository
-parity.
+- [ ] Clean review publishes Passed.
+- [ ] Blocking review publishes Changes requested.
+- [ ] Scoped, incomplete, and degraded reviews publish Review incomplete.
+- [ ] Missing or malformed item publishes Review incomplete.
+- [ ] Wrong attempt, PR, or SHA publishes Review incomplete.
+- [ ] Canceled review leaves Pending.
+- [ ] New SHA cannot use old SHA's Passed result.
+- [ ] Same-SHA rerun publishes Pending before reevaluation.
+- [ ] Universal remains status-read-only.
+- [ ] Delayed label application rechecks the live head.
+- [ ] Passing evidence adds `ARMAutoSignedOff-Test` without changing `ARMSignedOff`.
+- [ ] Later failures remove the pilot label.
+- [ ] Review incomplete adds the manual-review label without changing ARM queue labels.
+- [ ] Private repository copy is updated in coordination.

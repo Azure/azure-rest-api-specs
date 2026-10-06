@@ -60,7 +60,7 @@ function createResolverHarness(
         github: { rest: { pulls: { get } } },
         context,
         core: { setOutput },
-        process: { env: { TARGET_PR_NUMBER: value } },
+        process: { env: { GITHUB_RUN_ATTEMPT: "1", TARGET_PR_NUMBER: value } },
       }),
   };
 }
@@ -180,6 +180,7 @@ describe("ARM API review workflow", () => {
     expect(source).toContain(`TARGET_PR_NUMBER: ${TARGET_EXPRESSION}`);
     expect(source).toContain("const { data: pull } = await github.rest.pulls.get({");
     expect(source).toContain('core.setOutput("target_pr_number", String(pull.number))');
+    expect(source).toContain('core.setOutput("run_attempt", runAttempt)');
     expect(source).toContain(
       "target_pr_number: ${{ steps.resolve_target_pr.outputs.target_pr_number }}",
     );
@@ -222,6 +223,7 @@ describe("ARM API review workflow", () => {
       });
       expect(harness.setOutput).toHaveBeenCalledWith("target_pr_number", "44499");
       expect(harness.setOutput).toHaveBeenCalledWith("target_head_sha", fullGitSha);
+      expect(harness.setOutput).toHaveBeenCalledWith("run_attempt", "1");
     });
 
     it("accepts an issue-shaped pull request comment payload", async () => {
@@ -285,6 +287,8 @@ describe("ARM API review workflow", () => {
 
     expect(source).toContain("github.event.comment.body == '/arm-review'");
     expect(source).not.toContain("contains(github.event.comment.body, '/arm-review')");
+    expect(source).toContain("types: [opened, synchronize, reopened, labeled, ready_for_review]");
+    expect(source).toContain("github.event.action == 'reopened'");
     expect(source).toContain('bots: ["github-actions[bot]"]');
     expect(source).toContain("status-comment: true");
     expect(source).toContain(`run-name: "ARM API Review #${TARGET_EXPRESSION}`);
@@ -292,6 +296,8 @@ describe("ARM API review workflow", () => {
     expect(compiled).toContain('GH_AW_ALLOWED_BOTS: "github-actions[bot]"');
     expect(compiled).toContain("- name: Add comment with workflow run link");
     expect(compiled).toContain("- name: Update reaction comment with completion status");
+    expect(compiled).toContain("      - reopened");
+    expect(compiled).toContain("github.event.action == 'reopened'");
     expect(compiled).toContain(`run-name: "ARM API Review #${TARGET_EXPRESSION}`);
 
     const statusCommentStart = compiled.indexOf("- name: Add comment with workflow run link");
@@ -451,7 +457,6 @@ describe("ARM API review workflow", () => {
     expect(source).toContain(
       "permissions:\n    pull-requests: read\n    statuses: write\n  steps:",
     );
-    expect(source).toContain("**The review is scoped, incomplete, or degraded**");
     expect(source).toContain(
       "**The review is full and complete, and at least one verified, currently",
     );
@@ -544,6 +549,12 @@ describe("ARM API review posting reliability", () => {
 
     expect(source).toContain("These rules are **exhaustive**.");
     expect(source).toContain(
+      "The review is scoped, incomplete, or degraded** → leave `WaitForARMFeedback`, `ARMChangesRequested`, and `ARMSignedOff` unchanged",
+    );
+    expect(source).toContain(
+      "No verified, currently applicable Blocking finding remains, and the review is full and complete",
+    );
+    expect(source).toContain(
       "draft status, a `[Test]` or `[Do-Not-Merge]` title, a revert, a bot-authored PR, or the author's stated intent not to merge are **not** grounds to skip a label change",
     );
     expect(source).toContain(
@@ -559,15 +570,24 @@ describe("ARM API review posting reliability", () => {
     expect(source).toContain("name: Set ARM semantic review pending");
     expect(source).toContain('context: "ARM Semantic Review"');
     expect(source).toContain("record-arm-semantic-review:");
+    expect(source).toContain("scope:");
+    expect(source).toContain("completeness:");
     expect(source).toContain("### Step 9: Record Semantic Result");
     expect(collapsed).toContain(
       "Call `record_arm_semantic_review` exactly once after queuing the summary",
     );
     expect(compiled).toContain("record_arm_semantic_review");
     expect(compiled).toContain("ARM Semantic Review");
+    expect(source).toContain('run_attempt:\n          description: "GitHub Actions attempt');
     expect(compiled).toContain("Upload ARM semantic review receipt");
+    const semanticJob = compiled.slice(
+      compiled.indexOf("\n  record_arm_semantic_review:\n"),
+      compiled.indexOf("\n  safe_outputs:\n"),
+    );
+    expect(semanticJob).toContain("name: Validate ARM semantic review");
+    expect(semanticJob).toContain("permissions:");
     expect(collapsed).toContain(
-      "Universal Auto-Signoff publishes the final `ARM Semantic Review` status only after the entire reviewer workflow completes.",
+      "`ARM Semantic Review - Set Status` consumes the exact completed run's agent output, validates its correlation and shape, and publishes the final status only after the entire reviewer workflow completes.",
     );
   });
 
@@ -773,7 +793,7 @@ describe("ARM API review consistency and hardening", () => {
     const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
 
     // Unverified findings from a Critic-unavailable run do not satisfy the
-    // full-and-complete rule, so the explicit Critic-unavailable rule remains authoritative.
+    // verified-finding rule, so the explicit Critic-unavailable rule remains authoritative.
     expect(source).toContain(
       "**The review is full and complete, and at least one verified, currently applicable Blocking finding remains**",
     );

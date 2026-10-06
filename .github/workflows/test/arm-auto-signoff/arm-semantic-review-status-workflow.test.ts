@@ -21,10 +21,17 @@ type Workflow = {
         id?: string;
         name?: string;
         if?: string;
+        uses?: string;
+        "continue-on-error"?: boolean;
+        env?: Record<string, string>;
         with?: {
           script?: string;
           name?: string;
           value?: string;
+          path?: string;
+          "github-token"?: string;
+          repository?: string;
+          "run-id"?: string;
         };
       }>;
     }
@@ -94,6 +101,30 @@ describe("ARM Semantic Review - Set Status workflow", () => {
     );
   });
 
+  it("downloads agent output from the exact completed reviewer run", async () => {
+    const { workflow } = await readWorkflow("arm-semantic-review-status.yaml");
+    const steps = workflow.jobs?.["arm-semantic-review-status"]?.steps ?? [];
+    const download = steps.find((step) => step.name === "Download ARM API Reviewer output");
+    const finalize = steps.find((step) => step.id === "finalize");
+
+    expect(download).toEqual(
+      expect.objectContaining({
+        "continue-on-error": true,
+        uses: "actions/download-artifact@v8.0.1",
+        with: {
+          name: "agent",
+          path: "${{ runner.temp }}/arm-semantic-review",
+          "github-token": "${{ github.token }}",
+          repository: "${{ github.repository }}",
+          "run-id": "${{ github.event.workflow_run.id }}",
+        },
+      }),
+    );
+    expect(finalize?.env?.GH_AW_AGENT_OUTPUT).toBe(
+      "${{ runner.temp }}/arm-semantic-review/agent_output.json",
+    );
+  });
+
   it("makes Universal depend on semantic status completion, not reviewer completion", async () => {
     const { source, workflow } = await readWorkflow("arm-universal-auto-signoff.yaml");
     const workflows = workflow.on?.workflow_run?.workflows ?? [];
@@ -102,5 +133,16 @@ describe("ARM Semantic Review - Set Status workflow", () => {
     expect(workflows).not.toContain("ARM API Review: Automated Workflow");
     expect(source).not.toContain("Finalize ARM Semantic Review");
     expect(source).not.toContain("finalizeArmSemanticReview");
+  });
+
+  it("publishes only pilot signoff and manual-review label artifacts", async () => {
+    const { source } = await readWorkflow("arm-universal-auto-signoff.yaml");
+
+    for (const label of ["ARMAutoSignedOff-Test", "ARMManualSignoffRequired"]) {
+      expect(source).toContain(`Upload artifact for ${label} label`);
+    }
+    for (const label of ["ARMSignedOff", "ARMAutoSignedOff", "ARMChangesRequested"]) {
+      expect(source).not.toContain(`Upload artifact for ${label} label`);
+    }
   });
 });

@@ -1,101 +1,109 @@
-import { isFullGitSha } from "../../../shared/src/git.ts";
 import { CommitStatusState } from "../../../shared/src/github.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
+import { isFullGitSha } from "../../../shared/src/git.ts";
+
+const MAX_SPECIFICATION_FILES = 50;
+const MAX_SPECIFICATION_LINES = 5_000;
+
+export type ChangedFile = {
+  filename: string;
+  additions: number;
+  deletions: number;
+};
 
 export const ARM_SEMANTIC_REVIEW_STATUS = "ARM Semantic Review";
 
 export const SemanticReviewOutcome = Object.freeze({
   Passed: "passed",
   ChangesRequested: "changes-requested",
-  ManualReviewRequired: "manual-review-required",
   ReviewIncomplete: "review-incomplete",
   Pending: "pending",
 });
 export type SemanticReviewOutcome =
   (typeof SemanticReviewOutcome)[keyof typeof SemanticReviewOutcome];
 
-export type SemanticReviewScope = "full" | "scoped";
-export type SemanticReviewCompleteness = "complete" | "incomplete" | "degraded";
+export const SemanticReviewScope = Object.freeze({
+  Full: "full",
+  Scoped: "scoped",
+});
+export type SemanticReviewScope = (typeof SemanticReviewScope)[keyof typeof SemanticReviewScope];
+
+export const SemanticReviewCompletion = Object.freeze({
+  Complete: "complete",
+  Incomplete: "incomplete",
+  Degraded: "degraded",
+});
+export type SemanticReviewCompletion =
+  (typeof SemanticReviewCompletion)[keyof typeof SemanticReviewCompletion];
 
 export type SemanticReviewResult = {
+  runAttempt: number;
   issueNumber: number;
   headSha: string;
-  scope: SemanticReviewScope;
-  completeness: SemanticReviewCompleteness;
   blockingCount: number;
+  reviewScope: SemanticReviewScope;
+  completion: SemanticReviewCompletion;
 };
 
 export type CommitStatus = {
   context: string;
   state: string;
-  description?: string | null;
-  target_url: string | null;
+  target_url?: string | null;
   updated_at: string;
 };
 
 export type EvaluatedSemanticReview = {
-  outcome: Exclude<SemanticReviewOutcome, "pending">;
   state: CommitStatusState;
   description: string;
-};
-
-const RECEIPT_PATTERN =
-  /^([1-9]\d*)\.([1-9]\d*)\.([0-9a-f]{40})\.(full|scoped)\.(complete|incomplete|degraded)\.(0|[1-9]\d*)$/i;
-const MANUAL_REVIEW_REQUIRED_PREFIX = "Manual review required:";
-const REVIEW_INCOMPLETE_PREFIX = "Review incomplete:";
-const MAX_SPECIFICATION_FILES = 50;
-const MAX_SPECIFICATION_LINES = 5_000;
-
-type ChangedFile = {
-  filename: string;
-  additions: number;
-  deletions: number;
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-function isSemanticReviewOutput(value: unknown): value is Record<string, unknown> {
-  return isRecord(value) && value.type === "record_arm_semantic_review";
-}
-
+/**
+ * Extracts exactly one semantic result from gh-aw's agent output and validates
+ * that it belongs to the completed reviewer run.
+ */
 export function parseSemanticReviewResult(
   agentOutput: unknown,
   expectedIssueNumber: number,
+  expectedRunAttempt: number,
 ): SemanticReviewResult {
   if (!isRecord(agentOutput) || !Array.isArray(agentOutput.items)) {
     throw new Error("ARM API Reviewer output is missing its items array");
   }
 
-  const items: unknown[] = agentOutput.items;
-  const results = items.filter(isSemanticReviewOutput);
+  const results = (agentOutput.items as unknown[]).filter(
+    (item): item is Record<string, unknown> =>
+      isRecord(item) && item.type === "record_arm_semantic_review",
+  );
   if (results.length !== 1) {
     throw new Error(`Expected one ARM semantic review result, found ${results.length}`);
   }
 
   const result = results[0];
+  const runAttempt = Number(result.run_attempt);
   const issueNumber = Number(result.issue_number);
   const blockingCount = Number(result.blocking_count);
   if (
+    typeof result.run_attempt !== "string" ||
+    !/^[1-9]\d*$/.test(result.run_attempt) ||
+    !Number.isSafeInteger(runAttempt) ||
+    runAttempt !== expectedRunAttempt
+  ) {
+    throw new Error(`Invalid ARM semantic review run attempt: '${String(result.run_attempt)}'`);
+  }
+  if (
+    typeof result.issue_number !== "string" ||
+    !/^[1-9]\d*$/.test(result.issue_number) ||
     !Number.isSafeInteger(issueNumber) ||
-    issueNumber <= 0 ||
     issueNumber !== expectedIssueNumber
   ) {
     throw new Error(`Invalid ARM semantic review PR number: '${String(result.issue_number)}'`);
   }
   if (typeof result.head_sha !== "string" || !isFullGitSha(result.head_sha)) {
     throw new Error(`Invalid ARM semantic review head SHA: '${String(result.head_sha)}'`);
-  }
-  if (result.scope !== "full" && result.scope !== "scoped") {
-    throw new Error(`Invalid ARM semantic review scope: '${String(result.scope)}'`);
-  }
-  if (
-    result.completeness !== "complete" &&
-    result.completeness !== "incomplete" &&
-    result.completeness !== "degraded"
-  ) {
-    throw new Error(`Invalid ARM semantic review completeness: '${String(result.completeness)}'`);
   }
   if (
     typeof result.blocking_count !== "string" ||
@@ -106,104 +114,66 @@ export function parseSemanticReviewResult(
       `Invalid ARM semantic review Blocking count: '${String(result.blocking_count)}'`,
     );
   }
+  if (result.scope !== SemanticReviewScope.Full && result.scope !== SemanticReviewScope.Scoped) {
+    throw new Error(`Invalid ARM semantic review scope: '${String(result.scope)}'`);
+  }
+  if (
+    result.completeness !== SemanticReviewCompletion.Complete &&
+    result.completeness !== SemanticReviewCompletion.Incomplete &&
+    result.completeness !== SemanticReviewCompletion.Degraded
+  ) {
+    throw new Error(`Invalid ARM semantic review completion: '${String(result.completeness)}'`);
+  }
 
   return {
+    runAttempt,
     issueNumber,
     headSha: result.head_sha,
-    scope: result.scope,
-    completeness: result.completeness,
     blockingCount,
-  };
-}
-
-export function encodeSemanticReviewReceipt(
-  result: SemanticReviewResult,
-  runAttempt: number,
-): string {
-  if (!Number.isSafeInteger(runAttempt) || runAttempt <= 0) {
-    throw new Error(`Invalid workflow run attempt: '${runAttempt}'`);
-  }
-  return [
-    runAttempt,
-    result.issueNumber,
-    result.headSha,
-    result.scope,
-    result.completeness,
-    result.blockingCount,
-  ].join(".");
-}
-
-export function parseSemanticReviewReceipt(
-  artifactNames: string[],
-  runAttempt: number,
-): SemanticReviewResult | undefined {
-  const prefix = `arm-semantic-review=${runAttempt}.`;
-  const receiptNames = artifactNames.filter((name) => name.startsWith(prefix));
-  if (receiptNames.length === 0) {
-    return undefined;
-  }
-  if (receiptNames.length !== 1) {
-    throw new Error(`Expected one ARM semantic review receipt, found ${receiptNames.length}`);
-  }
-
-  const value = receiptNames[0].substring("arm-semantic-review=".length);
-  const match = RECEIPT_PATTERN.exec(value);
-  if (!match || Number(match[1]) !== runAttempt) {
-    throw new Error(`Invalid ARM semantic review receipt: '${receiptNames[0]}'`);
-  }
-
-  const issueNumber = Number(match[2]);
-  const blockingCount = Number(match[6]);
-  if (!Number.isSafeInteger(issueNumber) || !Number.isSafeInteger(blockingCount)) {
-    throw new Error(`Invalid ARM semantic review receipt: '${receiptNames[0]}'`);
-  }
-
-  return {
-    issueNumber,
-    headSha: match[3],
-    scope: match[4] as SemanticReviewScope,
-    completeness: match[5] as SemanticReviewCompleteness,
-    blockingCount,
-  };
-}
-
-export function manualReviewRequiredStatus(reason: string): EvaluatedSemanticReview {
-  return {
-    outcome: SemanticReviewOutcome.ManualReviewRequired,
-    state: CommitStatusState.ERROR,
-    description: `${MANUAL_REVIEW_REQUIRED_PREFIX} ${reason}`,
-  };
-}
-
-export function reviewIncompleteStatus(reason: string): EvaluatedSemanticReview {
-  return {
-    outcome: SemanticReviewOutcome.ReviewIncomplete,
-    state: CommitStatusState.ERROR,
-    description: `${REVIEW_INCOMPLETE_PREFIX} ${reason}`,
+    reviewScope: result.scope,
+    completion: result.completeness,
   };
 }
 
 export function evaluateSemanticReview(result: SemanticReviewResult): EvaluatedSemanticReview {
-  if (result.scope === "scoped") {
-    return manualReviewRequiredStatus("automated review was scoped");
+  // Scope and completeness are checked first: Changes requested applies only to
+  // full, complete reviews. A scoped or incomplete review requires manual signoff
+  // regardless of the blocking count.
+  if (result.reviewScope === SemanticReviewScope.Scoped) {
+    return {
+      state: CommitStatusState.ERROR,
+      description: "Review incomplete: scoped review requires manual signoff",
+    };
   }
-  if (result.completeness !== "complete") {
-    return reviewIncompleteStatus(`automated review was ${result.completeness}`);
+  if (result.completion === SemanticReviewCompletion.Incomplete) {
+    return {
+      state: CommitStatusState.ERROR,
+      description: "Review incomplete: reviewer did not complete",
+    };
+  }
+  if (result.completion === SemanticReviewCompletion.Degraded) {
+    return {
+      state: CommitStatusState.ERROR,
+      description: "Review incomplete: reviewer completed in degraded mode",
+    };
   }
   if (result.blockingCount > 0) {
     return {
-      outcome: SemanticReviewOutcome.ChangesRequested,
       state: CommitStatusState.FAILURE,
       description: `Changes requested: ${result.blockingCount} Blocking finding(s)`,
     };
   }
   return {
-    outcome: SemanticReviewOutcome.Passed,
     state: CommitStatusState.SUCCESS,
     description: "Passed: full review completed with no Blocking findings",
   };
 }
 
+/**
+ * Independently verifies that the PR is within automated-review coverage limits.
+ * A full-and-complete agent result must still be rejected if the trusted file list
+ * shows the PR was too large or the list was truncated.
+ */
 export function evaluateAutomatedReviewCoverage(
   changedFileCount: number,
   changedFiles: ChangedFile[],
@@ -239,7 +209,7 @@ export function evaluateAutomatedReviewCoverage(
 }
 
 export function getSemanticReviewOutcome(
-  status: Pick<CommitStatus, "state" | "description"> | undefined,
+  status: Pick<CommitStatus, "state"> | undefined,
 ): SemanticReviewOutcome | undefined {
   if (!status) {
     return undefined;
@@ -252,12 +222,6 @@ export function getSemanticReviewOutcome(
   }
   if (status.state === CommitStatusState.FAILURE) {
     return SemanticReviewOutcome.ChangesRequested;
-  }
-  if (
-    status.state === CommitStatusState.ERROR &&
-    status.description?.startsWith(MANUAL_REVIEW_REQUIRED_PREFIX)
-  ) {
-    return SemanticReviewOutcome.ManualReviewRequired;
   }
   if (status.state === CommitStatusState.ERROR) {
     return SemanticReviewOutcome.ReviewIncomplete;

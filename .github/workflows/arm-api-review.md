@@ -22,7 +22,7 @@ on:
   # fork PRs are reviewed only after a maintainer applies the label or runs
   # `/arm-review`.
   pull_request_target:
-    types: [opened, synchronize, labeled, ready_for_review]
+    types: [opened, synchronize, reopened, labeled, ready_for_review]
     forks: ["*"]
   issue_comment:
     types: [created]
@@ -64,8 +64,13 @@ on:
           if (!/^[0-9a-f]{40}$/i.test(pull.head.sha)) {
             throw new Error(`Invalid pull request head SHA: ${JSON.stringify(pull.head.sha)}`);
           }
+          const runAttempt = process.env.GITHUB_RUN_ATTEMPT ?? "";
+          if (!/^[1-9]\d*$/.test(runAttempt)) {
+            throw new Error(`Invalid workflow run attempt: ${JSON.stringify(runAttempt)}`);
+          }
           core.setOutput("target_pr_number", String(pull.number));
           core.setOutput("target_head_sha", pull.head.sha);
+          core.setOutput("run_attempt", runAttempt);
     - name: Prepare ARM semantic review correlation artifact
       if: steps.check_membership.outputs.is_team_member == 'true'
       shell: bash
@@ -128,6 +133,7 @@ on:
 jobs:
   pre-activation:
     outputs:
+      run_attempt: ${{ steps.resolve_target_pr.outputs.run_attempt }}
       target_head_sha: ${{ steps.resolve_target_pr.outputs.target_head_sha }}
       target_pr_number: ${{ steps.resolve_target_pr.outputs.target_pr_number }}
 # Gate at the trigger level so the expensive agent job never starts for
@@ -140,6 +146,7 @@ if: >
   (github.event_name == 'pull_request_target' &&
    (github.event.action == 'opened' ||
     github.event.action == 'synchronize' ||
+    github.event.action == 'reopened' ||
     github.event.action == 'ready_for_review') &&
    github.event.pull_request.draft == false &&
    contains(github.event.pull_request.labels.*.name, 'WaitForARMFeedback')) ||
@@ -291,6 +298,10 @@ safe-outputs:
           description: "Number of verified, currently applicable Blocking findings after reconciliation"
           required: true
           type: string
+        run_attempt:
+          description: "GitHub Actions attempt that produced this result"
+          required: true
+          type: string
       steps:
         - uses: actions/checkout@v7
           with:
@@ -339,6 +350,7 @@ reconciliation throughout.
 
 - Repository: `${{ github.repository }}`
 - Trigger event: `${{ github.event_name }}`
+- **Authoritative workflow attempt:** `${{ needs.pre_activation.outputs.run_attempt }}`
 - **Authoritative target pull request:** `#${{ needs.pre_activation.outputs.target_pr_number }}`
 - **Authoritative target head SHA:** `${{ needs.pre_activation.outputs.target_head_sha }}`
 
@@ -469,8 +481,8 @@ already guaranteed, before this agent starts, that:
   or is the explicitly allowlisted `github-actions[bot]` repository automation.
   This replaces any manual collaborator check. Do **not** re-verify
   permissions.
-- The event is eligible: an automated `opened` / `synchronize` run only reaches
-  the agent when the PR is not a draft and already carries the
+- The event is eligible: an automated `opened` / `synchronize` / `reopened` run
+  only reaches the agent when the PR is not a draft and already carries the
   `WaitForARMFeedback` label; `ready_for_review` follows the same label gate; a
   `labeled` run only fires when that exact label is added to a non-draft PR; an
   `issue_comment` run only fires for a PR comment whose body is exactly
@@ -577,9 +589,9 @@ Track two values for the final semantic result:
 
 Before any `report_incomplete` stop after the target PR and head SHA are known,
 also call `record_arm_semantic_review` with that PR, head SHA, the current
-scope, `completeness: incomplete`, and the number of verified Blocking findings
-known to remain applicable at that point. Use `"0"` if the failure occurs before
-finding reconciliation.
+scope, `completeness: incomplete`, the number of verified Blocking findings
+known to remain applicable at that point, and the workflow attempt. Use `"0"`
+if the failure occurs before finding reconciliation.
 
 ## Review Workflow
 
@@ -1260,17 +1272,18 @@ Call `record_arm_semantic_review` exactly once after queuing the summary:
 - `issue_number`: the authoritative target pull request number;
 - `head_sha`: the pinned full session SHA;
 - `scope`: `full` or `scoped`, as recorded during Trigger Validation;
-- `completeness`: `complete`, `incomplete`, or `degraded`; and
+- `completeness`: `complete`, `incomplete`, or `degraded`;
 - `blocking_count`: the number of verified Blocking findings that remain
   applicable after reconciliation. Include an unresolved finding classified as
   `SKIP-COVERED`; do not count fixed, resolved, Critic-dropped, or
-  overflow-only candidates.
+  overflow-only candidates; and
+- `run_attempt`: the authoritative workflow attempt above.
 
 Use `blocking_count: "0"` after a clean re-review. Do not claim `full` or
-`complete` when any required evidence was unavailable. The trusted publisher
-validates the PR and head SHA and records an attempt-specific receipt. Universal
-Auto-Signoff publishes the final `ARM Semantic Review` status only after the
-entire reviewer workflow completes.
+`complete` when any required evidence was unavailable. `ARM Semantic Review -
+Set Status` consumes the exact completed run's agent output, validates its
+correlation and shape, and publishes the final status only after the entire
+reviewer workflow completes.
 
 The final status is:
 

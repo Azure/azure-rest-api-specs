@@ -155,7 +155,7 @@ async function getDesiredLabelActions({
   core.info(`ARM Semantic Review: ${semanticReviewOutcome ?? "missing"}`);
 
   if (semanticReviewOutcome !== SemanticReviewOutcome.Passed) {
-    if (semanticReviewOutcome === SemanticReviewOutcome.ManualReviewRequired) {
+    if (semanticReviewOutcome === SemanticReviewOutcome.ReviewIncomplete) {
       core.info("ARM semantic review requires manual signoff");
       if (!labelNames.includes(ArmAutoSignoffLabel.ArmManualSignoffRequired)) {
         labelActions[ArmAutoSignoffLabel.ArmManualSignoffRequired] = LabelAction.Add;
