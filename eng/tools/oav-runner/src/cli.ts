@@ -11,7 +11,7 @@ import { checkExamples, checkSpecs } from "./runner.ts";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import fs from "node:fs/promises";
 import { parseArgs, type ParseArgsConfig } from "node:util";
-import { resolve } from "path";
+import { resolve } from "node:path";
 
 export async function main() {
   const config: ParseArgsConfig = {

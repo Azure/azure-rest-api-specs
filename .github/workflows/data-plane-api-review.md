@@ -1,8 +1,15 @@
 ---
 description: "Data-Plane API Review: focused semantic review of TypeSpec data-plane APIs"
+# Stable per-PR concurrency: key on the PR number so a newer push supersedes an
+# in-flight review (a `synchronize` carries no label, so the default gh-aw group
+# would fall back to a unique run_id and never cancel). A `labeled` event for any
+# other label resolves to run_id so it cannot cancel an active review.
+concurrency:
+  group: "gh-aw-${{ github.workflow }}-${{ (github.event_name == 'pull_request_target' && github.event.action == 'labeled' && github.event.label.name != 'data-plane-review-requested') && github.run_id || github.event.pull_request.number || inputs.item_number || github.run_id }}"
+  cancel-in-progress: true
 on:
   pull_request_target:
-    types: [labeled]
+    types: [opened, synchronize, labeled, ready_for_review]
     forks: ["*"]
   workflow_dispatch:
     inputs:
@@ -10,25 +17,30 @@ on:
         description: PR number to review
         required: true
         type: string
-  permissions:
-    pull-requests: write
-  steps:
-    - name: Remove trigger label
-      id: remove_label
-      if: github.event_name == 'pull_request_target' && github.event.label.name == 'data-plane-api-review-needed'
-      uses: actions/github-script@v9
-      with:
-        script: |
-          try {
-            await github.rest.issues.removeLabel({
-              ...context.repo,
-              issue_number: context.payload.pull_request.number,
-              name: 'data-plane-api-review-needed'
-            });
-          } catch (e) {
-            core.warning(`Could not remove label: ${e.message}`);
-          }
-if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'data-plane-api-review-needed'
+  # Only write-access users may trigger the workflow (forks are enabled above),
+  # so a fork PR is reviewed only after a maintainer applies the trigger label.
+  roles: [admin, maintainer, write]
+  # summarize-checks applies the trigger label as github-actions[bot], which has
+  # no repo role; this grant lets that trusted transition start the reviewer.
+  bots: ["github-actions[bot]"]
+# Auto-fire when the trigger label is present on a real-user event
+# (opened / synchronize / ready_for_review), plus direct label application.
+# The bot's `labeled` event isn't delivered (default-token; see
+# summarize-checks.yaml) and the label lands after that event, so the
+# label-presence check on a later push/open/ready is what triggers the review.
+# It re-runs while the label is present; drafts are skipped.
+if: >
+  github.event_name == 'workflow_dispatch' ||
+  (github.event_name == 'pull_request_target' &&
+   (github.event.action == 'opened' ||
+    github.event.action == 'synchronize' ||
+    github.event.action == 'ready_for_review') &&
+   github.event.pull_request.draft == false &&
+   contains(github.event.pull_request.labels.*.name, 'data-plane-review-requested')) ||
+  (github.event_name == 'pull_request_target' &&
+   github.event.action == 'labeled' &&
+   github.event.pull_request.draft == false &&
+   github.event.label.name == 'data-plane-review-requested')
 permissions:
   contents: read
   copilot-requests: write
