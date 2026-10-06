@@ -2419,6 +2419,7 @@ model WindowsConfiguration {
   /**
    * Indicates whether VMAgent Platform Updates are enabled for the Windows Virtual Machine.
    */
+  @removed(Versions.v2026_09_01)
   @visibility(Lifecycle.Read)
   enableVMAgentPlatformUpdates?: boolean;
 }
@@ -2558,6 +2559,7 @@ model LinuxConfiguration {
   /**
    * Indicates whether VMAgent Platform Updates is enabled for the Linux virtual machine. Default value is false.
    */
+  @removed(Versions.v2026_09_01)
   enableVMAgentPlatformUpdates?: boolean;
 }
 
