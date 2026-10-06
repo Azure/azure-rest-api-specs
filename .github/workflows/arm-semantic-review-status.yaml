@@ -1,0 +1,80 @@
+# Converts one completed ARM API Reviewer run into the durable, head-bound
+# `ARM Semantic Review` commit status consumed by Universal Auto-Signoff. This
+# workflow validates existing reviewer evidence; it does not run another AI review.
+name: ARM Semantic Review - Set Status
+
+on:
+  workflow_run:
+    # workflow_run supplies the exact reviewer run ID, so finalization can read
+    # that run's artifacts directly instead of searching reviewer-run history.
+    workflows: ["ARM API Review: Automated Workflow"]
+    types: [completed]
+
+# Keep status publication isolated here. Universal Auto-Signoff needs only
+# `statuses: read` when it evaluates the finalized result.
+permissions:
+  # actions.listWorkflowRunArtifacts
+  actions: read
+  # actions/checkout
+  contents: read
+  # pulls.get, pulls.listFiles
+  pull-requests: read
+  # repos.listCommitStatusesForRef, repos.createCommitStatus
+  statuses: write
+
+jobs:
+  arm-semantic-review-status:
+    name: ARM Semantic Review - Set Status
+    runs-on: ubuntu-slim
+
+    steps:
+      # workflow_run executes trusted default-branch automation. Check out only
+      # .github because finalization never needs files from the untrusted PR head.
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github
+
+      # Download the model's structured safe outputs from the exact completed
+      # reviewer run; never search for a "latest" reviewer run.
+      - name: Download ARM API Reviewer output
+        continue-on-error: true
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: "agent"
+          path: "${{ runner.temp }}/arm-semantic-review"
+          github-token: "${{ github.token }}"
+          repository: "${{ github.repository }}"
+          run-id: "${{ github.event.workflow_run.id }}"
+
+      # Read the same reviewer run's trusted correlation artifacts, validate its
+      # structured semantic item, reject stale or superseded results, independently
+      # verify coverage limits, and publish the final status for the reviewed SHA.
+      - id: finalize
+        name: Finalize ARM Semantic Review
+        uses: actions/github-script@v9.0.0
+        env:
+          GH_AW_AGENT_OUTPUT: "${{ runner.temp }}/arm-semantic-review/agent_output.json"
+        with:
+          script: |
+            const { finalizeArmSemanticReview } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-semantic-review-status.ts');
+            return await finalizeArmSemanticReview({ github, context, core });
+
+      # Universal Auto-Signoff is triggered by this workflow's completion. These
+      # artifacts let it identify the exact PR and SHA without searching prior runs.
+      - if: fromJson(steps.finalize.outputs.result).headSha
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "head-sha"
+          value: "${{ fromJson(steps.finalize.outputs.result).headSha }}"
+
+      # Keep PR correlation separate from the SHA artifact to match the existing
+      # Set Status workflow contract used by LintDiff and Avocado.
+      - if: fromJson(steps.finalize.outputs.result).issueNumber > 0
+        name: Upload artifact with issue number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "issue-number"
+          value: "${{ fromJson(steps.finalize.outputs.result).issueNumber }}"
