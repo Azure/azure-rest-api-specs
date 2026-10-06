@@ -47,4 +47,10 @@ directive:
   - suppress: OperationsAPIImplementation
     from: deploymentExtensionRuntimes.json
     reason: Operations API is implemented as a separate service.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: deploymentExtensionRuntimes.json
+    reason: The resource is polymorphic on `kind`. Every kind defines properties.provisioningState; the rule only inspects the base schema, which has no properties bag. Same pattern as deploymentScripts.
+  - suppress: ProvisioningStateSpecifiedForLROPatch
+    from: deploymentExtensionRuntimes.json
+    reason: The resource is polymorphic on `kind`. Every kind defines properties.provisioningState; the rule only inspects the base schema, which has no properties bag. Same pattern as deploymentScripts.
 ```
