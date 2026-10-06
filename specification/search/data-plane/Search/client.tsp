@@ -683,34 +683,38 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchClient.suggestPost, Access.public, "java");
 @@clientName(SearchClient.suggestPost, "suggest", "java");
 @@access(SearchClient.index, Access.internal);
-@@access(SearchIndexerClient.listDataSources, Access.public);
+@@access(SearchIndexerClient.listDataSources, Access.public, "csharp");
 @@clientName(
   SearchIndexerClient.listDataSources,
-  "GetDataSourceConnectionsWithSelectedProperties"
+  "GetDataSourceConnectionsWithSelectedProperties",
+  "csharp"
 );
 @@access(SearchIndexerClient.createOrUpdateDataSource, Access.internal);
 @@access(SearchIndexerClient.deleteDataSource, Access.internal, "python");
-@@access(SearchIndexerClient.listIndexers, Access.public);
+@@access(SearchIndexerClient.listIndexers, Access.public, "csharp");
 @@clientName(
   SearchIndexerClient.listIndexers,
-  "GetIndexersWithSelectedProperties"
+  "GetIndexersWithSelectedProperties",
+  "csharp"
 );
 @@access(SearchIndexerClient.createOrUpdateIndexer, Access.internal);
 @@access(SearchIndexerClient.resetDocs, Access.internal, "python");
 @@access(SearchIndexerClient.deleteIndexer, Access.internal, "python");
 @@access(SearchIndexerClient.resync, Access.internal, "python");
-@@access(SearchIndexerClient.listSkillsets, Access.public);
+@@access(SearchIndexerClient.listSkillsets, Access.public, "csharp");
 @@clientName(
   SearchIndexerClient.listSkillsets,
-  "GetSkillsetsWithSelectedProperties"
+  "GetSkillsetsWithSelectedProperties",
+  "csharp"
 );
 @@access(SearchIndexerClient.createOrUpdateSkillset, Access.internal);
 @@access(SearchIndexerClient.deleteSkillset, Access.internal, "python");
 @@access(SearchIndexerClient.resetSkills, Access.internal, "python");
-@@access(SearchIndexClient.listSynonymMaps, Access.public);
+@@access(SearchIndexClient.listSynonymMaps, Access.public, "csharp");
 @@clientName(
   SearchIndexClient.listSynonymMaps,
-  "GetSynonymMapsWithSelectedProperties"
+  "GetSynonymMapsWithSelectedProperties",
+  "csharp"
 );
 @@access(SearchIndexClient.createOrUpdateSynonymMap, Access.internal);
 @@access(SearchIndexClient.deleteSynonymMap, Access.internal, "python");
