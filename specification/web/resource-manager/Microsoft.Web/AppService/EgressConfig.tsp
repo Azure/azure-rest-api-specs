@@ -266,7 +266,9 @@ interface EgressConfigs {
    * stored configuration in the response body.
    *
    * The request is normalized and then structurally and semantically validated
-   * before persistence. Invalid configurations are rejected.
+   * before persistence. Invalid configurations are rejected, including requests
+   * whose referenced setting names appear to contain credentials, which return
+   * 400 Bad Request.
    */
   @summary("Creates or replaces the egress configuration for an app.")
   createOrUpdateEgressConfig is EgressConfigOps.CreateOrUpdateSync<
@@ -284,11 +286,8 @@ interface EgressConfigs {
    * Returns an empty configuration when none is stored.
    */
   @summary("Gets the stored egress configuration for an app.")
-  @action("list")
-  listEgressConfig is EgressConfigOps.ActionSync<
+  getEgressConfig is EgressConfigOps.Read<
     EgressConfig,
-    void,
-    ArmResponse<EgressConfig>,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
@@ -342,7 +341,9 @@ interface EgressConfigSlotConfigs {
    * otherwise, with the stored configuration in the response body.
    *
    * The request is normalized and then structurally and semantically validated
-   * before persistence. Invalid configurations are rejected.
+   * before persistence. Invalid configurations are rejected, including requests
+   * whose referenced setting names appear to contain credentials, which return
+   * 400 Bad Request.
    */
   @summary("Creates or replaces the egress configuration for a deployment slot.")
   createOrUpdateEgressConfigSlot is EgressConfigSlotOps.CreateOrUpdateSync<
@@ -360,11 +361,8 @@ interface EgressConfigSlotConfigs {
    * connections. Returns an empty configuration when none is stored.
    */
   @summary("Gets the stored egress configuration for a deployment slot.")
-  @action("list")
-  listEgressConfigSlot is EgressConfigSlotOps.ActionSync<
+  getEgressConfigSlot is EgressConfigSlotOps.Read<
     EgressConfig,
-    void,
-    ArmResponse<EgressConfig>,
     OverrideErrorType = DefaultErrorResponse
   >;
 }

@@ -2086,14 +2086,14 @@ using Microsoft.Web;
 @@flattenProperty(SiteAuthSettingsV2.properties);
 
 @@clientLocation(EgressConfigs.createOrUpdateEgressConfig, WebApps, "!csharp");
-@@clientLocation(EgressConfigs.listEgressConfig, WebApps, "!csharp");
+@@clientLocation(EgressConfigs.getEgressConfig, WebApps, "!csharp");
 @@clientLocation(
   EgressConfigSlotConfigs.createOrUpdateEgressConfigSlot,
   WebApps,
   "!csharp"
 );
 @@clientLocation(
-  EgressConfigSlotConfigs.listEgressConfigSlot,
+  EgressConfigSlotConfigs.getEgressConfigSlot,
   WebApps,
   "!csharp"
 );

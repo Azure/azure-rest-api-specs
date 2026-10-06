@@ -10005,13 +10005,58 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress": {
+      "get": {
+        "operationId": "WebApps_GetEgressConfig",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the stored egress configuration for an app.",
+        "description": "Gets the egress configuration stored for an app, including its connections.\nReturns an empty configuration when none is stored.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get egress configuration": {
+            "$ref": "./examples/EgressConfig_Get.json"
+          }
+        }
+      },
       "put": {
         "operationId": "WebApps_CreateOrUpdateEgressConfig",
         "tags": [
           "WebApps"
         ],
         "summary": "Creates or replaces the egress configuration for an app.",
-        "description": "Creates or replaces the egress configuration for an app. The supplied\nconnections replace the stored ones in full, so connections omitted from\nthe request are deleted; omitting connections entirely, or supplying an\nempty object, deletes the configuration for the app. Returns 201 when no\nconfiguration was stored for the app beforehand and 200 otherwise, with the\nstored configuration in the response body.\n\nThe request is normalized and then structurally and semantically validated\nbefore persistence. Invalid configurations are rejected.",
+        "description": "Creates or replaces the egress configuration for an app. The supplied\nconnections replace the stored ones in full, so connections omitted from\nthe request are deleted; omitting connections entirely, or supplying an\nempty object, deletes the configuration for the app. Returns 201 when no\nconfiguration was stored for the app beforehand and 200 otherwise, with the\nstored configuration in the response body.\n\nThe request is normalized and then structurally and semantically validated\nbefore persistence. Invalid configurations are rejected, including requests\nwhose referenced setting names appear to contain credentials, which return\n400 Bad Request.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -10048,48 +10093,6 @@
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/EgressConfig"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress/list": {
-      "post": {
-        "operationId": "WebApps_ListEgressConfig",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets the stored egress configuration for an app.",
-        "description": "Gets the egress configuration stored for an app, including its connections.\nReturns an empty configuration when none is stored.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EgressConfig"
             }
@@ -22745,13 +22748,65 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress": {
+      "get": {
+        "operationId": "WebApps_GetEgressConfigSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the stored egress configuration for a deployment slot.",
+        "description": "Gets the egress configuration stored for a deployment slot, including its\nconnections. Returns an empty configuration when none is stored.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get egress configuration for a deployment slot": {
+            "$ref": "./examples/SlotEgressConfig_Get.json"
+          }
+        }
+      },
       "put": {
         "operationId": "WebApps_CreateOrUpdateEgressConfigSlot",
         "tags": [
           "WebApps"
         ],
         "summary": "Creates or replaces the egress configuration for a deployment slot.",
-        "description": "Creates or replaces the egress configuration for a deployment slot. The\nsupplied connections replace the stored ones in full, so connections\nomitted from the request are deleted; omitting connections entirely, or\nsupplying an empty object, deletes the configuration for the slot. Returns\n201 when no configuration was stored for the slot beforehand and 200\notherwise, with the stored configuration in the response body.\n\nThe request is normalized and then structurally and semantically validated\nbefore persistence. Invalid configurations are rejected.",
+        "description": "Creates or replaces the egress configuration for a deployment slot. The\nsupplied connections replace the stored ones in full, so connections\nomitted from the request are deleted; omitting connections entirely, or\nsupplying an empty object, deletes the configuration for the slot. Returns\n201 when no configuration was stored for the slot beforehand and 200\notherwise, with the stored configuration in the response body.\n\nThe request is normalized and then structurally and semantically validated\nbefore persistence. Invalid configurations are rejected, including requests\nwhose referenced setting names appear to contain credentials, which return\n400 Bad Request.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -22795,55 +22850,6 @@
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/EgressConfig"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress/list": {
-      "post": {
-        "operationId": "WebApps_ListEgressConfigSlot",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets the stored egress configuration for a deployment slot.",
-        "description": "Gets the egress configuration stored for a deployment slot, including its\nconnections. Returns an empty configuration when none is stored.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EgressConfig"
             }
