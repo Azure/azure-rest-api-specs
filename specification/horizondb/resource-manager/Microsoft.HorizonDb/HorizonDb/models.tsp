@@ -774,7 +774,6 @@ model PoolForPatchUpdate {
 
 @added(Versions.v2026_10_01_preview)
 @doc("The compute model for a HorizonDB pool.")
-@discriminator("type")
 model PoolComputeModel {
   @doc("The type of compute model.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
