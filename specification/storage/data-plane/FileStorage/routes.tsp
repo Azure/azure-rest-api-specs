@@ -292,7 +292,7 @@ interface Share {
       @encode("rfc7231")
       @header("x-ms-share-creation-time")
       creationTime?: utcDateTime;
-      
+
       ...ChangeFeedResponseHeaders;
     }
   >;
