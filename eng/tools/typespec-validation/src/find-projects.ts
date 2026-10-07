@@ -1,7 +1,7 @@
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { stat } from "node:fs/promises";
-import { dirname, join, relative, resolve, sep } from "node:path";
+import { dirname, join, relative, resolve } from "pathe";
 import { globFiles } from "./glob.ts";
 
 export interface ChangedProjectsOptions {
@@ -39,9 +39,7 @@ export async function findProjects(root: string): Promise<string[]> {
     cwd: root,
     exclude: ["**/node_modules/**"],
   });
-  const folders = [
-    ...new Set(configs.map((config) => dirname(config).split(sep).join("/"))),
-  ].sort();
+  const folders = [...new Set(configs.map((config) => dirname(config)))].sort();
   return folders.map((folder) => resolve(root, folder));
 }
 
@@ -94,7 +92,7 @@ export async function findChangedProjects(
       continue;
     }
     for (const project of await findProjects(folder)) {
-      projects.add(relative(root, project).split(sep).join("/"));
+      projects.add(relative(root, project));
     }
   }
 
