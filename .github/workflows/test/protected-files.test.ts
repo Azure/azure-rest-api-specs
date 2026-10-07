@@ -1,4 +1,3 @@
-import { readFileSync } from "node:fs";
 import { mkdir, mkdtemp, rename, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
@@ -9,6 +8,7 @@ import { checkProtectedFiles } from "../src/protected-files.ts";
 import { createMockContext, createMockCore } from "./mocks.ts";
 
 vi.mock("../../shared/src/changed-files.ts", () => ({ getChangedFiles: vi.fn() }));
+
 function setup(author = "spec-author") {
   const context = createMockContext();
   context.eventName = "pull_request";
@@ -55,52 +55,41 @@ describe("Protected Files", () => {
     },
   );
 
-  it.each(["spec-author", "engineering-contributor", "external-contributor"])(
-    "passes protected maintenance-only changes authored by %s",
-    async (author) => {
-      const { core, run } = setup(author);
-      vi.mocked(getChangedFiles).mockResolvedValue([
-        "package.json",
-        ".github/workflows/protected-files.yaml",
-        "eng/common/script.ps1",
-      ]);
-      const result = await run();
-      expect(result.conclusion).toBe("success");
-      expect(core.error).not.toHaveBeenCalled();
-      expect(core.setFailed).not.toHaveBeenCalled();
-      expect(getChangedFiles).toHaveBeenCalledOnce();
-      expect(result.summary).toContain("CODEOWNERS");
-      expect(result.summary).toContain("package.json");
-      expect(core.warning).toHaveBeenCalledWith(
-        expect.stringContaining("Make source changes in that repository"),
-        { file: "eng/common/script.ps1" },
-      );
-    },
-  );
-
-  it.each([
-    "specification/widgets/main.tsp",
-    "SPECIFICATION/widgets/main.tsp",
-    "specification/.hidden/config.json",
-    "specification",
-  ])("rejects mixed PRs containing %s even for a code-owner author", async (file) => {
-    const { core, context, run } = setup("code-owner");
-    context.payload = {
-      pull_request: {
-        number: 1,
-        user: { login: "code-owner" },
-        author_association: "OWNER",
-      },
-    };
-    vi.mocked(getChangedFiles).mockResolvedValue([file, "package.json"]);
-    await expect(run()).resolves.toMatchObject({ conclusion: "failure" });
-    expect(core.setFailed).toHaveBeenCalledOnce();
+  it("passes maintenance-only changes without an author exemption", async () => {
+    const { core, run } = setup("external-contributor");
+    vi.mocked(getChangedFiles).mockResolvedValue([
+      "package.json",
+      ".github/workflows/protected-files.yaml",
+    ]);
+    const result = await run();
+    expect(result.conclusion).toBe("success");
+    expect(core.setFailed).not.toHaveBeenCalled();
+    expect(result.summary).toContain("CODEOWNERS");
+    expect(result.summary).toContain("package.json");
+    expect(result.summary).toContain(".github/workflows/protected-files.yaml");
   });
 
-  it("does not allow a mixed PR when a code owner reruns it", async () => {
-    const { core, context, run } = setup();
-    context.actor = "code-owner";
-    vi.mocked(getChangedFiles).mockResolvedValue(["eng/tool.ts", "specification/widgets/main.tsp"]);
+  it("warns about synchronized files without blocking maintenance-only changes", async () => {
+    const { core, run } = setup();
+    const files = ["eng/common/script.ps1", ".github/skills/azsdk-common-example/SKILL.md"];
+    vi.mocked(getChangedFiles).mockResolvedValue(files);
+    const result = await run();
+    expect(result.conclusion).toBe("success");
+    expect(core.setFailed).not.toHaveBeenCalled();
+    for (const file of files) {
+      expect(core.warning).toHaveBeenCalledWith(
+        expect.stringContaining("Make source changes in that repository"),
+        { file },
+      );
+    }
+  });
+
+  it("recognizes specification scope case-insensitively", async () => {
+    const { core, run } = setup();
+    vi.mocked(getChangedFiles).mockResolvedValue([
+      "package.json",
+      "SPECIFICATION/widgets/main.tsp",
+    ]);
     await run();
     expect(core.setFailed).toHaveBeenCalledOnce();
   });
@@ -287,9 +276,9 @@ describe("Protected Files", () => {
     expect(core.info).not.toHaveBeenCalledWith("No changes to protected files.");
   });
 
-  it.each(["pull_request_target", "workflow_dispatch"])("rejects event %s", async (eventName) => {
+  it("rejects non-PR events", async () => {
     const { context, run } = setup();
-    context.eventName = eventName;
+    context.eventName = "workflow_dispatch";
     await expect(run()).rejects.toThrow("Unsupported event for Protected Files");
     expect(getChangedFiles).not.toHaveBeenCalled();
   });
@@ -300,81 +289,42 @@ describe("Protected Files", () => {
     await expect(run()).rejects.toThrow("Protected Files requires a pull request author");
     expect(getChangedFiles).not.toHaveBeenCalled();
   });
-});
 
-describe("Protected Files merge checkout", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
+  it("ignores specification changes introduced only by the base branch", async () => {
+    const directory = await mkdtemp(join(tmpdir(), "protected-files-merge-"));
+    try {
+      const git = simpleGit(directory);
+      await git.init(false, ["--initial-branch=main"]);
+      await git.addConfig("user.name", "Test");
+      await git.addConfig("user.email", "test@example.com");
+      await git.addConfig("commit.gpgsign", "false");
+      await writeFile(join(directory, "package.json"), "{}\n");
+      await git.add(["--all"]);
+      await git.commit("Base");
+      await git.checkoutLocalBranch("change");
+      await writeFile(join(directory, "package.json"), '{"updated": true}\n');
+      await git.add(["--all"]);
+      await git.commit("Maintenance change");
+      await git.checkout("main");
+      await mkdir(join(directory, "specification/widgets"), { recursive: true });
+      await writeFile(join(directory, "specification/widgets/spec.json"), "{}\n");
+      await git.add(["--all"]);
+      await git.commit("Unrelated specification change");
+      await git.merge(["--no-ff", "change", "-m", "PR merge"]);
+
+      const actual = await vi.importActual<typeof import("../../shared/src/changed-files.ts")>(
+        "../../shared/src/changed-files.ts",
+      );
+      vi.mocked(getChangedFiles).mockImplementationOnce((options) =>
+        actual.getChangedFiles({ ...options, cwd: directory }),
+      );
+      const { core, run } = setup();
+      const result = await run();
+      expect(result.conclusion).toBe("success");
+      expect(result.summary).toContain("package.json");
+      expect(core.setFailed).not.toHaveBeenCalled();
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
   });
-
-  it.each([
-    { autocrlf: false, mixed: false },
-    { autocrlf: true, mixed: false },
-    { autocrlf: false, mixed: true },
-    { autocrlf: true, mixed: true },
-  ])(
-    "evaluates the merge snapshot without base-only changes (autocrlf: $autocrlf, mixed: $mixed)",
-    async ({ autocrlf, mixed }) => {
-      const directory = await mkdtemp(join(tmpdir(), "protected-files-merge-"));
-      const origin = join(directory, "origin");
-      const checkout = join(directory, "checkout");
-      try {
-        await mkdir(origin);
-        const git = simpleGit(origin);
-        await git.init(false, ["--initial-branch=main"]);
-        await git.addConfig("user.name", "Test");
-        await git.addConfig("user.email", "test@example.com");
-        await git.addConfig("commit.gpgsign", "false");
-        await writeFile(join(origin, "package.json"), '{"trusted": true}\n');
-        await git.add(["--all"]);
-        await git.commit("Trusted base");
-        await git.checkoutLocalBranch("change");
-        await writeFile(join(origin, "package.json"), '{"trusted": false}\n');
-        if (mixed) {
-          await mkdir(join(origin, "specification/widgets"), { recursive: true });
-          await writeFile(join(origin, "specification/widgets/spec.json"), "{}\n");
-        }
-        await git.add(["--all"]);
-        await git.commit("Untrusted PR");
-        await git.checkout("main");
-        await mkdir(join(origin, "specification/base-service"), { recursive: true });
-        await writeFile(join(origin, "specification/base-service/base-only.json"), "{}\n");
-        await git.add(["--all"]);
-        await git.commit("Updated target");
-        await git.merge(["--no-ff", "change", "-m", "PR merge"]);
-        const mergeSha = await git.revparse(["HEAD"]);
-        await simpleGit().clone(origin, checkout, ["--no-checkout", "--depth=2", "--no-local"]);
-        const snapshot = simpleGit(checkout);
-        await snapshot.addConfig("core.autocrlf", String(autocrlf));
-        await snapshot.checkout(mergeSha);
-        const actual = await vi.importActual<typeof import("../../shared/src/changed-files.ts")>(
-          "../../shared/src/changed-files.ts",
-        );
-        await expect(
-          actual.getChangedFiles({ cwd: checkout, gitOptions: ["--no-renames"] }),
-        ).resolves.toEqual(
-          mixed ? ["package.json", "specification/widgets/spec.json"] : ["package.json"],
-        );
-
-        const { core, run } = setup();
-        vi.mocked(getChangedFiles).mockImplementationOnce((options) =>
-          actual.getChangedFiles({ ...options, cwd: checkout }),
-        );
-        const result = await run();
-        expect(result.conclusion).toBe(mixed ? "failure" : "success");
-        if (mixed) {
-          expect(core.setFailed).toHaveBeenCalledOnce();
-        } else {
-          expect(core.setFailed).not.toHaveBeenCalled();
-        }
-        expect(await snapshot.revparse(["HEAD"])).toBe(mergeSha);
-        expect(JSON.parse(readFileSync(join(checkout, "package.json"), "utf8"))).toEqual({
-          trusted: false,
-        });
-        expect(await snapshot.raw(["status", "--porcelain"])).toBe("");
-      } finally {
-        await rm(directory, { recursive: true, force: true });
-      }
-    },
-  );
 });

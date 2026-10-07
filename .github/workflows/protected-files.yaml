@@ -14,25 +14,21 @@ permissions:
   contents: read
 
 env:
+  # Evaluate before checkout or dependency setup, which trusted PRs may change.
   user-allowed: >-
     ${{
       github.event.pull_request.user.login == 'azure-sdk' ||
       github.event.pull_request.user.login == 'azure-sdk-automation[bot]'
     }}
 
-concurrency:
-  group: protected-files-${{ github.event.pull_request.number }}
-  cancel-in-progress: false
-
 jobs:
   protected-files:
     name: Protected Files
 
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
 
     steps:
-      # Trusted automation still passes before checkout or dependency setup.
+      # This required job must pass rather than be skipped for trusted authors.
       - name: User allowed
         if: ${{ env.user-allowed == 'true' }}
         run: echo "Trusted automation account is allowed to update protected files"
@@ -40,9 +36,9 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         if: ${{ env.user-allowed != 'true' }}
         with:
-          # Evaluate the PR merge commit against its base-branch parent.
-          fetch-depth: 2
           persist-credentials: false
+          # Compare the PR merge commit with its base-branch parent.
+          fetch-depth: 2
           sparse-checkout: |
             .github
 
