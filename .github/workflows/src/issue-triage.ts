@@ -1,3 +1,6 @@
+import { readFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { parseDocument } from "yaml";
 import { z } from "zod";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { escapeMarkdown } from "../../shared/src/markdown.ts";
@@ -82,13 +85,22 @@ export async function applyIssueTriage(
 
   const { catalog } = await loadLabelCatalog(options.catalogPath);
   const configured = new Set(catalog.labels.map((label) => label.name));
+  const canonicalNames = new Map(
+    catalog.labels.map((label) => [label.name.toLowerCase(), label.name]),
+  );
+  const serviceDocument = parseDocument(
+    await readFile(join(dirname(options.catalogPath), "labels", "services.yaml"), "utf8"),
+  );
+  if (serviceDocument.errors.length) {
+    throw new Error("Invalid service label catalog");
+  }
+  const serviceDefinitions = z
+    .object({ labels: z.array(z.object({ name: z.string().min(1) })) })
+    .parse(serviceDocument.toJS());
   const services = new Set(
-    catalog.labels
-      .filter(
-        (label) =>
-          label.color.toLowerCase() === "e99695" && !["EngSys", "Docs"].includes(label.name),
-      )
-      .map((label) => label.name),
+    serviceDefinitions.labels
+      .map((label) => canonicalNames.get(label.name.toLowerCase()))
+      .filter((name): name is string => name !== undefined && name !== "EngSys"),
   );
   if (decision.serviceLabel && !services.has(decision.serviceLabel)) {
     throw new Error(`Invalid service label: ${decision.serviceLabel}`);

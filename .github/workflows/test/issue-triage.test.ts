@@ -5,6 +5,7 @@ import { loadLabelCatalog } from "../src/label-catalog-loader.ts";
 import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
 
 vi.mock("../src/label-catalog-loader.ts", () => ({ loadLabelCatalog: vi.fn() }));
+vi.mock("node:fs/promises", () => ({ readFile: vi.fn() }));
 
 const updatedAt = "2026-10-07T12:00:00Z";
 const catalogPath = "/trusted/.github/labels.yaml";
@@ -88,6 +89,11 @@ function setup() {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  vi.mocked(readFile).mockResolvedValue(
+    JSON.stringify({
+      labels: ["Storage", "Compute", "AppPlatform", "Docs", "EngSys"].map((name) => ({ name })),
+    }),
+  );
   vi.mocked(loadLabelCatalog).mockResolvedValue({
     catalog: {
       unconfiguredLabels: "archive",
@@ -103,6 +109,7 @@ beforeEach(() => {
         "data-plane",
         "Storage",
         "Compute",
+        "AppPlatform",
         "Docs",
         "Approved-Suppression",
       ].map((name) => ({
@@ -145,6 +152,34 @@ describe("initial issue triage", () => {
         labels: ["Service Attention", "Storage", "Mgmt", "feature-request"],
       }),
     );
+  });
+
+  it("uses the service catalog rather than assuming a label color", async () => {
+    const t = setup();
+    await t.apply(output({ routing: "service", serviceLabel: "AppPlatform", kind: null }));
+    expect(readFile).toHaveBeenCalledWith(
+      join(dirname(catalogPath), "labels", "services.yaml"),
+      "utf8",
+    );
+    expect(t.github.rest.issues.addLabels).toHaveBeenCalledWith(
+      expect.objectContaining({ labels: ["Service Attention", "AppPlatform"] }),
+    );
+  });
+
+  it("does not treat a label's color as authority for service membership", async () => {
+    const t = setup();
+    vi.mocked(readFile).mockResolvedValue(JSON.stringify({ labels: [{ name: "Compute" }] }));
+    await expect(t.apply(output({ routing: "service", serviceLabel: "Storage" }))).rejects.toThrow(
+      "Invalid service label",
+    );
+    expect(t.github.rest.issues.addLabels).not.toHaveBeenCalled();
+  });
+
+  it("fails explicitly when the service catalog cannot be read", async () => {
+    const t = setup();
+    vi.mocked(readFile).mockRejectedValue(new Error("service catalog unavailable"));
+    await expect(t.apply()).rejects.toThrow("service catalog unavailable");
+    expect(t.github.rest.issues.addLabels).not.toHaveBeenCalled();
   });
 
   it("allows a clear service issue without guessing the service or plane", async () => {
@@ -318,7 +353,6 @@ describe("initial issue triage", () => {
     { routing: "engsys", serviceLabel: "Storage" },
     { routing: "service", serviceLabel: "Approved-Suppression" },
     { routing: "service", serviceLabel: "EngSys" },
-    { routing: "service", serviceLabel: "Docs" },
     { routing: "service", serviceLabel: "invented-service" },
     { summary: "x".repeat(401) },
     { close: true },
@@ -386,3 +420,5 @@ describe("initial issue triage", () => {
     expect(t.github.rest.issues.addLabels).not.toHaveBeenCalled();
   });
 });
+import { readFile } from "node:fs/promises";
+import { dirname, join } from "node:path";

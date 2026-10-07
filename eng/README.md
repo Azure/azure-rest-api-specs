@@ -128,6 +128,9 @@ priorities, close issues, or establish that a request is still relevant.
 Repository policy continues to handle customer-reported labels separately.
 That policy may clear `needs-triage` when another label is added; the triager
 itself only adds labels.
+Label names and candidate areas come from the checked-in catalogs, not a copied
+inventory or assumed color palette. Ownership-dependent reasoning consults the
+current `CODEOWNERS` entries rather than embedding service-to-owner mappings.
 
 The workflow runs only on upstream `main`. It skips bot-authored, closed, locked,
 and non-actionable reports. Manual dispatch defaults to a dry run:

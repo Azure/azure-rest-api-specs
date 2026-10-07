@@ -26,6 +26,8 @@ permissions:
   issues: read
   pull-requests: read
   copilot-requests: write
+env:
+  TRIAGE_SOURCE_SHA: ${{ github.sha }}
 concurrency:
   group: issue-triage-${{ github.event.issue.number || inputs.issue-number || github.run_id }}
   cancel-in-progress: false
@@ -131,10 +133,27 @@ internal and external issues both need triage. Existing `customer-reported` and
 `question` labels may come from repository policy; their presence is not a reason
 to skip. Do not repeat that policy's customer-classification work.
 
-Read `.github/labels.yaml` and its local definitions under `.github/labels/`
-with `get_file_contents`. Use the canonical names and descriptions, not guessed
-names or labels copied from another repository. Shared service/area labels have
-color `e99695`. `EngSys` and `Docs` are not Azure service labels.
+Use `get_file_contents` at revision `${{ env.TRIAGE_SOURCE_SHA }}` to consult these sources:
+
+- `.github/labels.yaml` and every local definition it references through `extends`
+  are the source of truth for configured label names and descriptions.
+- `.github/labels/services.yaml` defines candidate service/area labels.
+  Its entries are not all Azure services; verify the affected component rather
+  than inferring meaning from a label name or color.
+- `eng/README.md#repository-labels` documents this repository's label conventions.
+- `.github/CODEOWNERS` is the source of truth for path ownership and its declared
+  path-to-label annotations. Read the relevant entries whenever a routing decision
+  depends on a path's ownership or label mapping. Follow this file's documented
+  format and GitHub's last-matching-entry semantics, including ownerless entries.
+  Do not assume it uses the SDK repositories' format.
+
+Do not embed or reuse copied label inventories, color classifications,
+service-to-label maps, usernames, team rosters, or ownership mappings from this
+prompt, historical issues, or another repository. Examples below illustrate the
+decision schema, not authoritative labels or owners. Never assume a directory
+name is a label or that its code owners own a service/runtime support issue.
+If the source of truth is missing, ambiguous, or cannot be read, do not invent a
+mapping: use uncertain routing or report the specific tool failure.
 Inspect a narrowly relevant source file or a comparable issue only when it helps
 resolve routing. Do not download the repository tree or exhaustively investigate
 the backlog. Never execute reproductions, install tools, or make Azure requests.
@@ -159,7 +178,8 @@ Use read-only GitHub tools for investigation; the only mutation channel is
   SDK/compiler/emitter rather than this repository, or evidence is insufficient.
   State the specific uncertainty instead of guessing.
 
-Only high-confidence routing gets `EngSys` or `Service Attention`.
+After confirming their meanings in the current catalog, only high-confidence
+routing gets `EngSys` or `Service Attention`.
 Medium/low confidence gets `needs-team-triage`; it does not get speculative
 service, API-plane, or kind labels.
 
