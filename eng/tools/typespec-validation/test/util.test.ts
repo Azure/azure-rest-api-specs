@@ -50,6 +50,31 @@ describe("util", function () {
       const upperResult = normalizePath("d:\\foo\\bar", path.win32);
       assert.notEqual(lowerResult, upperResult);
     });
+
+    it.each([
+      ["c:\\foo\\bar", "C:/foo/bar"],
+      ["C:\\foo\\bar\\..\\baz\\", "C:/foo/baz"],
+      ["d:\\", "D:/"],
+      ["\\\\server\\share\\folder\\..\\file.txt", "//server/share/file.txt"],
+      ["\\\\server\\share\\..\\file.txt", "//server/share/file.txt"],
+      ["\\\\server\\share", "//server/share/"],
+      ["\\\\?\\C:\\foo\\bar", "//?/C:/foo/bar"],
+      ["\\\\.\\pipe\\example", "//./pipe/example"],
+    ])("normalizes Windows path %s without changing its root", (input, expected) => {
+      expect(normalizePath(input, path.win32)).toBe(expected);
+    });
+
+    it.each(["c:foo", "c:", "C:folder\\..\\file.txt"])(
+      "uses native resolution for drive-relative path %s",
+      (input) => {
+        const expected = path.win32.resolve(input).replaceAll("\\", "/").replace(/^c:/, "C:");
+        expect(normalizePath(input, path.win32)).toBe(expected);
+      },
+    );
+
+    it("preserves literal backslashes in POSIX filenames", () => {
+      expect(normalizePath("/foo\\bar/file.txt", path.posix)).toBe("/foo\\bar/file.txt");
+    });
   });
   describe("gitDiff", function () {
     it("should succeed if git diff produces no output", async function () {

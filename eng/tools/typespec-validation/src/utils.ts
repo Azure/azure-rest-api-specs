@@ -7,6 +7,7 @@ import {
 } from "@azure-tools/suppressions";
 import { access, readdir, readFile } from "node:fs/promises";
 import defaultPath, { basename, dirname, join, relative } from "node:path";
+import { normalize } from "pathe";
 import { simpleGit } from "simple-git";
 import { context } from "./index.ts";
 import { supportsColor } from "./diagnostics.ts";
@@ -73,11 +74,9 @@ export function normalizePath(folder: string, path: typeof defaultPath = default
 }
 
 export function normalizePathImpl(folder: string, path: typeof defaultPath = defaultPath) {
-  return path
-    .resolve(folder)
-    .split(path.sep)
-    .join("/")
-    .replace(/^([a-z]):/, (_match, driveLetter: string) => driveLetter.toUpperCase() + ":");
+  // Native resolution preserves drive-relative paths and UNC share roots.
+  const absolutePath = path.resolve(folder);
+  return path.sep === "/" ? absolutePath : normalize(absolutePath);
 }
 
 export async function readFileAtCommit(
