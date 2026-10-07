@@ -639,6 +639,7 @@ interface Directory {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
+      ...FileNameResponseHeader;
       ...ServerEncryptedResponseHeader;
       ...NfsResponseHeaders;
     }
@@ -911,6 +912,7 @@ interface File {
       ...CopyStatusResponseHeaders;
       ...ServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
+      ...FileNameResponseHeader;
       ...LeaseResponseHeaders;
       ...NfsResponseHeaders;
       ...LinkCountResponseHeader;
@@ -1396,6 +1398,38 @@ interface File {
       ...NfsTimestampResponseHeaders;
       ...LinkCountResponseHeader;
       ...NfsResponseHeaders;
+    }
+  >;
+
+  /** Returns the hard links of a file, along with all user-defined metadata, content properties, and system properties for the file. NFS only. */
+  @added(Versions.v2027_03_07)
+  @route("?comp=hardlinks")
+  @get
+  getHardLinks is StorageOperationResponseBody<
+    {
+      ...ShareSnapshotParameter;
+      ...TimeoutParameter;
+      ...LeaseIdOptionalParameter;
+      ...AllowTrailingDotParameter;
+      ...FileRequestIntentParameter;
+    },
+    {
+      ...LastModifiedResponseHeader;
+      ...MetadataHeaders;
+
+      /** Dummy type header, must be "file". */
+      @header("x-ms-type") fileType: "File";
+
+      ...EtagResponseHeader;
+      ...FileMsContentResponseHeaders;
+      ...CopyStatusResponseHeaders;
+      ...ServerEncryptedResponseHeader;
+      ...FileSmtPropertyResponseHeaders;
+      ...FileNameResponseHeader;
+      ...LeaseResponseHeaders;
+      ...NfsResponseHeaders;
+      ...LinkCountResponseHeader;
+      @body hardLinks: HardLinkList;
     }
   >;
 }
