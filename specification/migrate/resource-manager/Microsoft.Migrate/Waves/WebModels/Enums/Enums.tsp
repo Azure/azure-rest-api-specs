@@ -65,6 +65,18 @@ union MigrationSpecificPropertiesInstanceType {
   string,
 }
 
+@doc("Execution mode for the migration process.")
+@added(ApiVersions.v2026_09_01_preview)
+union ExecutionMode {
+  @doc("Tasks are executed in a predefined sequence.")
+  TaskBased: "TaskBased",
+
+  @doc("Runbooks are executed to perform the migration process.")
+  RunbookBased: "RunbookBased",
+
+  string,
+}
+
 @doc("Runbook scope type.")
 @added(ApiVersions.v2026_08_01_preview)
 union RunbookScopeType {

@@ -1,4 +1,5 @@
 import "../../Common/ArmModels/AzureResourceProperties.tsp";
+import "../../Common/ArmModels/OperationError.tsp";
 import "../Enums/Enums.tsp";
 import "../../Common/ArmModels/MigrateProject.tsp";
 
@@ -100,6 +101,31 @@ model MigrationEntityProperties is AzureResourceProperties {
   @added(ApiVersions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   toolReportedMigrationStatus?: string;
+
+  @doc("The execution mode for the migration process.")
+  @added(ApiVersions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  executionMode?: ExecutionMode;
+
+  @doc("The current execution step name.")
+  @added(ApiVersions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  currentStepName?: string;
+
+  @doc("The current execution step number.")
+  @added(ApiVersions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  currentStepNumber?: int32;
+
+  @doc("The total number of execution steps.")
+  @added(ApiVersions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  totalStepCount?: int32;
+
+  @doc("Errors reported during execution.")
+  @added(ApiVersions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  errors?: OperationError[];
 }
 
 @doc("Properties that can be updated on a migration entity.")
@@ -113,6 +139,22 @@ model MigrationEntityPatchProperties {
 
   @doc("Migration status reported by the migration tool.")
   toolReportedMigrationStatus?: string;
+
+  @doc("The current execution step name.")
+  @added(ApiVersions.v2026_09_01_preview)
+  currentStepName?: string;
+
+  @doc("The current execution step number.")
+  @added(ApiVersions.v2026_09_01_preview)
+  currentStepNumber?: int32;
+
+  @doc("The total number of execution steps.")
+  @added(ApiVersions.v2026_09_01_preview)
+  totalStepCount?: int32;
+
+  @doc("Errors reported during execution.")
+  @added(ApiVersions.v2026_09_01_preview)
+  errors?: OperationError[];
 }
 
 @doc("Patch request for a migration entity.")

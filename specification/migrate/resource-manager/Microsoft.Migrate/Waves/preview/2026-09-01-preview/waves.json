@@ -4065,6 +4065,30 @@
         "skippedWaves"
       ]
     },
+    "ExecutionMode": {
+      "type": "string",
+      "description": "Execution mode for the migration process.",
+      "enum": [
+        "TaskBased",
+        "RunbookBased"
+      ],
+      "x-ms-enum": {
+        "name": "ExecutionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TaskBased",
+            "value": "TaskBased",
+            "description": "Tasks are executed in a predefined sequence."
+          },
+          {
+            "name": "RunbookBased",
+            "value": "RunbookBased",
+            "description": "Runbooks are executed to perform the migration process."
+          }
+        ]
+      }
+    },
     "ExportWorkloadConfigurationResponse": {
       "type": "object",
       "description": "Response payload for the exportWorkloadConfiguration action.",
@@ -4510,6 +4534,11 @@
         "migrationPath": {
           "type": "string",
           "description": "Migration path"
+        },
+        "executionMode": {
+          "$ref": "#/definitions/ExecutionMode",
+          "description": "The execution mode for the migration process.",
+          "readOnly": true
         }
       },
       "required": [
@@ -4563,6 +4592,27 @@
         "toolReportedMigrationStatus": {
           "type": "string",
           "description": "Migration status reported by the migration tool."
+        },
+        "currentStepName": {
+          "type": "string",
+          "description": "The current execution step name."
+        },
+        "currentStepNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current execution step number."
+        },
+        "totalStepCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of execution steps."
+        },
+        "errors": {
+          "type": "array",
+          "description": "Errors reported during execution.",
+          "items": {
+            "$ref": "#/definitions/OperationError"
+          }
         }
       }
     },
@@ -4681,6 +4731,36 @@
           "type": "string",
           "description": "Migration status reported by the migration tool.",
           "readOnly": true
+        },
+        "executionMode": {
+          "$ref": "#/definitions/ExecutionMode",
+          "description": "The execution mode for the migration process.",
+          "readOnly": true
+        },
+        "currentStepName": {
+          "type": "string",
+          "description": "The current execution step name.",
+          "readOnly": true
+        },
+        "currentStepNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current execution step number.",
+          "readOnly": true
+        },
+        "totalStepCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of execution steps.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "Errors reported during execution.",
+          "items": {
+            "$ref": "#/definitions/OperationError"
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -4718,6 +4798,57 @@
           }
         ]
       }
+    },
+    "OperationError": {
+      "type": "object",
+      "description": "Describes an error reported while processing a resource.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The error identifier."
+        },
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "severity": {
+          "type": "string",
+          "description": "The error severity."
+        },
+        "summaryMessage": {
+          "type": "string",
+          "description": "The error summary."
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed error message."
+        },
+        "category": {
+          "type": "string",
+          "description": "The error category."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp when the error occurred."
+        },
+        "possibleCauses": {
+          "type": "string",
+          "description": "The possible causes of the error."
+        },
+        "recommendedActions": {
+          "type": "string",
+          "description": "The recommended actions for the error."
+        }
+      },
+      "required": [
+        "id",
+        "code",
+        "severity",
+        "message",
+        "timestamp"
+      ]
     },
     "PlanSource": {
       "type": "string",
@@ -6357,6 +6488,11 @@
         "stage": {
           "type": "string",
           "description": "The current stage of the wave.",
+          "readOnly": true
+        },
+        "executionMode": {
+          "$ref": "#/definitions/ExecutionMode",
+          "description": "The execution mode for the migration process.",
           "readOnly": true
         }
       },
