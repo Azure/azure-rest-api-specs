@@ -567,9 +567,33 @@ model IotHubDefinitionDescription {
   connectionString?: string;
 
   /**
+   * The connection profile to use for device connections to the linked IoT hub. Customers can set this property to select the profile. Defaults to 'Classic' when omitted.
+   */
+  @added(Versions.v2026_11_02_preview)
+  connectionProfile?: ConnectionProfile = ConnectionProfile.Classic;
+
+  /**
    * ARM region of the IoT hub.
    */
   location: string;
+}
+
+/**
+ * The connection profile that an IoT hub uses for device connections.
+ */
+@added(Versions.v2026_11_02_preview)
+union ConnectionProfile {
+  string,
+
+  /**
+   * Classic connection profile.
+   */
+  Classic: "Classic",
+
+  /**
+   * MQTT v5 connection profile.
+   */
+  MqttV5: "MqttV5",
 }
 
 /**
