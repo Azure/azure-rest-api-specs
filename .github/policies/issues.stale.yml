@@ -73,6 +73,8 @@ configuration:
               label: needs-author-feedback
           - isOpen
         then:
+          - unassign:
+              author: true
           - addLabel:
               label: needs-team-attention
           - removeLabel:
