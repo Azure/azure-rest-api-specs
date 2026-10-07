@@ -43,7 +43,6 @@ beforeEach(async () => {
   vi.stubEnv("NO_COLOR", "1");
   vi.stubEnv("FORCE_COLOR", undefined);
   vi.stubEnv("GITHUB_STEP_SUMMARY", undefined);
-  vi.stubEnv("GITHUB_OUTPUT", undefined);
 });
 
 afterEach(async () => {
@@ -65,7 +64,6 @@ it("shows the same help for --help and -h without a project or Git repository", 
     "--dry-run",
     "--git-clean",
     "--github-summary",
-    "--github-output",
     "default: HEAD^",
     "default: HEAD)",
     "--all and --changed cannot be combined",
@@ -98,7 +96,6 @@ it.each([
   ["--git-clean"],
   ["--dry-run"],
   ["--github-summary"],
-  ["--github-output"],
   ["--shard=invalid"],
   ["--base=missing-ref"],
   ["missing-project", "{invalid-json"],
@@ -393,36 +390,6 @@ it("requires --all and the GitHub summary environment for --github-summary", asy
   });
 });
 
-it("requires --changed and the GitHub output environment for --github-output", async () => {
-  await expect(run("--github-output", "project")).rejects.toMatchObject({
-    code: 1,
-    stderr: expect.stringContaining("--github-output requires --changed") as unknown,
-  });
-  await expect(run("--changed", "--github-output")).rejects.toMatchObject({
-    code: 1,
-    stderr: expect.stringContaining(
-      "--github-output requires the GITHUB_OUTPUT environment variable",
-    ) as unknown,
-  });
-});
-
-it("writes checking-all-specs to GITHUB_OUTPUT without validating any project", async () => {
-  await addProject("specification/service/a");
-  await initGit();
-  await commit("Base");
-  await mkdir(join(root, "eng"), { recursive: true });
-  await writeFile(join(root, "eng/marker.txt"), "core file change");
-  await commit("Head");
-  const outputFile = join(root, "github-output.txt");
-  vi.stubEnv("GITHUB_OUTPUT", outputFile);
-
-  const { stdout } = await run("--changed", "--github-output", "--dry-run");
-  expect(await readFile(outputFile, "utf8")).toBe("checking-all-specs=true\n");
-  expect(stdout).toContain(
-    'Dry run: would validate specification/service/a with context {"checkingAllSpecs":true',
-  );
-});
-
 it.each(["1", "0/2", "3/2"])("exits nonzero for invalid --shard=%s", async (shard) => {
   await addProject("specification/a");
   await expect(run("--all", `--shard=${shard}`)).rejects.toMatchObject({
@@ -628,7 +595,6 @@ it.each([
   { args: ["--all", "--changed"], error: "--all and --changed cannot be combined" },
   { args: ["--changed", "--shard=1/2"], error: "--shard requires --all" },
   { args: ["--changed", "--github-summary"], error: "--github-summary requires --all" },
-  { args: ["--all", "--github-output"], error: "--github-output requires --changed" },
   {
     args: ["--all", "--base=HEAD"],
     error: "--base, --head and --ignore-core-files require --changed",

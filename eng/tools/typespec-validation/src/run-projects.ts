@@ -15,7 +15,6 @@ interface RunOptions {
   dryRun?: boolean;
   verbose?: boolean;
   summaryFile?: string;
-  githubOutputFile?: string;
 }
 
 interface RunContext {
@@ -82,9 +81,6 @@ export async function runChanged(
     ignoreCoreFiles,
     logger: new ConsoleLogger(options.verbose),
   });
-  if (options.githubOutputFile) {
-    await appendFile(options.githubOutputFile, `checking-all-specs=${checkingAllSpecs}\n`);
-  }
   if (projects.length === 0) {
     if (checkingAllSpecs) {
       console.error("TypeSpec Validation - All did not validate any specs");

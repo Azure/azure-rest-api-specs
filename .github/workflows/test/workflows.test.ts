@@ -68,18 +68,10 @@ describe("workflow files", () => {
         .flatMap((step) =>
           step.run?.includes("node eng/tools/typespec-validation/cmd/tsv.js") ? [step.run] : [],
         );
-      expect(commands.length).toBeGreaterThan(0);
+      expect(commands).toHaveLength(1);
       const debugFlag = "${{ runner.debug == '1' && '--verbose' || '' }}";
-      // Validation commands (changed/all) enable --verbose only via the debug conditional; the
-      // scope-detection command doesn't need --verbose at all since it doesn't validate anything.
-      for (const command of commands) {
-        expect(command.replace(debugFlag, "")).not.toContain("--verbose");
-      }
-      const validationCommands = commands.filter((command) => command.includes("--git-clean"));
-      expect(validationCommands.length).toBeGreaterThan(0);
-      for (const command of validationCommands) {
-        expect(command).toContain(debugFlag);
-      }
+      expect(commands[0]).toContain(debugFlag);
+      expect(commands[0].replace(debugFlag, "")).not.toContain("--verbose");
     },
   );
 

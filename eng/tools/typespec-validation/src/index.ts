@@ -177,11 +177,6 @@ export async function main() {
       group: "Options for --changed",
       description: "Disable all-project fallback for core-file changes.",
     },
-    "github-output": {
-      type: "boolean",
-      group: "Options for --changed",
-      description: "Write checking-all-specs=true|false to $GITHUB_OUTPUT.",
-    },
     shard: {
       type: "string",
       valueLabel: "<index>/<count>",
@@ -252,23 +247,11 @@ export async function main() {
     process.exitCode = 1;
     return;
   }
-  if (values["github-output"] && !values.changed) {
-    console.error("--github-output requires --changed");
-    process.exitCode = 1;
-    return;
-  }
-  const outputFile = values["github-output"] ? process.env.GITHUB_OUTPUT : undefined;
-  if (values["github-output"] && !outputFile) {
-    console.error("--github-output requires the GITHUB_OUTPUT environment variable");
-    process.exitCode = 1;
-    return;
-  }
 
   if (values.changed) {
     if (parsedArgs.positionals.length > 0) {
       console.error(
-        "Usage: tsv --changed [--base=<commit>] [--head=<commit>] [--ignore-core-files] " +
-          "[--github-output] [--git-clean] [--dry-run]",
+        "Usage: tsv --changed [--base=<commit>] [--head=<commit>] [--ignore-core-files] [--git-clean] [--dry-run]",
       );
       process.exitCode = 1;
       return;
@@ -277,7 +260,6 @@ export async function main() {
       baseCommitish: values.base,
       headCommitish: values.head,
       ignoreCoreFiles: values["ignore-core-files"],
-      githubOutputFile: outputFile,
       gitClean: values["git-clean"],
       dryRun: values["dry-run"],
       verbose: values.verbose,
