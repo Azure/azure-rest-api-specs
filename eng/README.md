@@ -113,6 +113,36 @@ Keep a long-lived branch by protecting it or adding it to those exclusions.
 Candidates and their SHAs are logged, and SHA-guarded Git pushes refuse to delete
 changed tips. API and deletion failures fail the workflow.
 
+## Initial issue triage
+
+[Issue Triage](../.github/workflows/issue-triage.md) classifies newly opened human
+issues as repository engineering (`EngSys`), service-contract/runtime issues
+(`Service Attention`), or uncertain (`needs-team-triage`). High-confidence service
+issues can also receive a service label and API-plane label; clear issue kinds
+receive `bug`, `feature-request`, `question`, or `documentation`.
+It processes internal and external reports, preserves existing labels, and leaves
+one concise comment explaining the routing, with a possible duplicate link or
+one missing-information question when useful. Re-running updates that workflow's
+existing comment rather than creating another. It does not assign owners, set
+priorities, close issues, or establish that a request is still relevant.
+Repository policy continues to handle customer-reported labels separately.
+That policy may clear `needs-triage` when another label is added; the triager
+itself only adds labels.
+
+The workflow runs only on upstream `main`. It skips bot-authored, closed, locked,
+and non-actionable reports. Manual dispatch defaults to a dry run:
+
+```bash
+gh workflow run issue-triage.lock.yml --repo Azure/azure-rest-api-specs --ref main \
+  -f issue-number=123 -f dry-run=true
+```
+
+Set `dry-run=false` to apply the labels and comment. An issue changed during
+investigation is left unchanged and the run fails with a refresh instruction;
+dispatch again to triage its current content.
+The separate Backlog Triage workflow investigates old issues for resolution or
+obsolescence; initial triage does not replace that investigation.
+
 ## Repository labels
 
 Repository label configuration starts at [`.github/labels.yaml`](../.github/labels.yaml).
