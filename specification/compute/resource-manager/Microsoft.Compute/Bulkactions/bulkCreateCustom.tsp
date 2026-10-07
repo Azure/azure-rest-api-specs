@@ -158,12 +158,16 @@ model BulkCreateCustomOverride {
   virtualMachineName?: string;
 
   @added(Versions.`2026-11-06-preview`)
-  @doc("The availability zone this VM is created in. Overrides the operation-level zones for this VM only; when omitted the VM is placed using the operation-level zones.")
+  @doc("The availability zone this VM is created in. Overrides the operation-level zones for this VM only. A null value does not override, so the VM is placed using the operation-level zones; an empty value does override and deploys this VM as a regional (non-zonal) VM.")
   zone?: string;
 
   @added(Versions.`2026-11-06-preview`)
   @doc("The extended location this VM is created in. Overrides the operation-level extendedLocation for this VM only; when omitted the VM inherits the operation-level extendedLocation.")
   extendedLocation?: ExtendedLocation;
+
+  @added(Versions.`2026-11-06-preview`)
+  @doc("The placement constraints applied to this VM. Overrides the operation-level placement for this VM only; when omitted the VM inherits the operation-level placement.")
+  placement?: Placement;
 
   ...BulkCreateCustomOverrideBase;
 }
