@@ -166,10 +166,10 @@ model AioApplicationConfigurationDiagnostics {
 /** A set of compute quantities for an application container. */
 @added(Versions.`2026-11-01-preview`)
 model AioApplicationResourceQuantities {
-  /** The CPU quantity in CPU units. See [Meaning of CPU](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu). */
+  /** The CPU quantity uses the same units as Kubernetes CPU limits. See [Meaning of CPU](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu). */
   cpu?: string;
 
-  /** The memory quantity, such as `512Mi` or `1Gi`. */
+  /** The memory quantity uses the same units as Kubernetes memory limits. See [Meaning of memory](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory). */
   memory?: string;
 }
 
