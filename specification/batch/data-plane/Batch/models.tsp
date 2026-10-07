@@ -1986,11 +1986,10 @@ union ZonePlacementPolicyType {
   Auto: "Auto",
 }
 
-
 @added(Versions.v2026_10_01)
 @doc("Specifies the set of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool.")
 model VirtualMachineSkuProfile {
-  @doc("The list of VM sizes (1 to 5) that may be allocated for the Pool. All sizes must share the same vCPU count and VM family. This must be specified when the vmSkuProfile is provided during Pool creation.")
+  @doc("The list of VM sizes (up to 5) that may be allocated for the Pool. VM sizes may span the supported A, B, D, E, and F VM families, but must have the same vCPU count and CPU architecture and compatible VM capabilities. This must be specified when the vmSkuProfile is provided during Pool creation.")
   @minItems(1)
   @maxItems(5)
   vmSizes?: VirtualMachineSkuProfileVmSize[];
@@ -3917,7 +3916,7 @@ model AutomaticOsUpgradePolicy {
 
 @doc("The configuration parameters used while performing a rolling upgrade.")
 model RollingUpgradePolicy {
-  @doc("Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. This field is able to be set to true or false only when using NodePlacementConfiguration as Zonal.")
+  @doc("Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. This field can be set to true or false only when nodePlacementConfiguration.policy is Zonal or placement.zonePlacementPolicy is Auto. Auto placement is supported starting with API version 2026-10-01.")
   enableCrossZoneUpgrade?: boolean;
 
   @doc("The maximum percent of total virtual machine instances that will be upgraded simultaneously by the rolling upgrade in one batch. As this is a maximum, unhealthy instances in previous or future batches can cause the percentage of instances in a batch to decrease to ensure higher reliability. The value of this field should be between 5 and 100, inclusive. If both maxBatchInstancePercent and maxUnhealthyInstancePercent are assigned with value, the value of maxBatchInstancePercent should not be more than maxUnhealthyInstancePercent.")
@@ -4163,7 +4162,7 @@ model InboundEndpoint {
 
   @doc("The public IP address of the Compute Node.")
   @clientName("publicIpAddress")
-  publicIPAddress: ipV4Address;
+  publicIPAddress: string;
 
   @doc("The public fully qualified domain name for the Compute Node.")
   publicFQDN: string;

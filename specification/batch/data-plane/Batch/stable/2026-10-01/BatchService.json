@@ -15317,7 +15317,7 @@
           "description": "The protocol of the endpoint."
         },
         "publicIPAddress": {
-          "$ref": "#/definitions/Azure.Core.ipV4Address",
+          "type": "string",
           "description": "The public IP address of the Compute Node.",
           "x-ms-client-name": "publicIpAddress"
         },
@@ -16009,7 +16009,7 @@
       "properties": {
         "enableCrossZoneUpgrade": {
           "type": "boolean",
-          "description": "Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. This field is able to be set to true or false only when using NodePlacementConfiguration as Zonal."
+          "description": "Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. This field can be set to true or false only when nodePlacementConfiguration.policy is Zonal or placement.zonePlacementPolicy is Auto. Auto placement is supported starting with API version 2026-10-01."
         },
         "maxBatchInstancePercent": {
           "type": "integer",
@@ -16687,7 +16687,7 @@
       "properties": {
         "vmSizes": {
           "type": "array",
-          "description": "The list of VM sizes (1 to 5) that may be allocated for the Pool. All sizes must share the same vCPU count and VM family. This must be specified when the vmSkuProfile is provided during Pool creation.",
+          "description": "The list of VM sizes (up to 5) that may be allocated for the Pool. VM sizes may span the supported A, B, D, E, and F VM families, but must have the same vCPU count and CPU architecture and compatible VM capabilities. This must be specified when the vmSkuProfile is provided during Pool creation.",
           "minItems": 1,
           "maxItems": 5,
           "items": {
