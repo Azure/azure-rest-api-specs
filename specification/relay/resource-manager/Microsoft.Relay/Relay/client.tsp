@@ -69,6 +69,16 @@ using Microsoft.Relay;
 @@clientName(RelayClusterSkuUpdate, "RelayClusterSkuPatch", "csharp");
 @@clientName(RelayClusterProperties.zoneRedundant, "IsZoneRedundant", "csharp");
 @@clientName(TlsVersion, "RelayTlsVersion", "csharp");
+@@clientName(
+  TlsVersion.`1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.`1.3`,
+  Azure.ClientGenerator.Core.exact("Tls1_3"),
+  "csharp"
+);
 
 // Acronym mapping: Ip -> IP (directive + acronym-mapping from autorest.md)
 @@clientName(NWRuleSetIpRules, "RelayNetworkRuleSetIPRule", "csharp");
@@ -104,6 +114,13 @@ using Microsoft.Relay;
 
 // Back-compat: PrivateEndpoint.id was ResourceIdentifier in the old SDK
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+
+// clusterArmId is an ARM resource id, so surface it as ResourceIdentifier
+@@alternateType(
+  RelayNamespaceProperties.clusterArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 // Back-compat: property was named ConnectionState in the old SDK
 @@clientName(

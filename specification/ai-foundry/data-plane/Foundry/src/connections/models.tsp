@@ -135,6 +135,12 @@ union ConnectionType {
 
   @doc("Remote tool")
   RemoteTool: "RemoteTool_Preview",
+
+  @doc("OpenAPI connection")
+  OpenAPI: "OpenAPI",
+
+  @doc("Remote agent-to-agent (A2A) connection")
+  RemoteA2A: "RemoteA2A",
 }
 
 @doc("The credential type used by the connection")
@@ -162,6 +168,7 @@ union CredentialType {
 
 @doc("SAS Credential definition")
 model SasCredential {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("SAS uri")
   @visibility(Lifecycle.Read)
   sasUri: string;

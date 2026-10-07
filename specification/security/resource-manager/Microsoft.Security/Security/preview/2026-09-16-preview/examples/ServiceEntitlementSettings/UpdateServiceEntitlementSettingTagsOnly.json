@@ -1,0 +1,32 @@
+{
+  "operationId": "ServiceEntitlementSettings_Update",
+  "title": "Updates only tags on a service entitlement setting while preserving isDefault",
+  "parameters": {
+    "api-version": "2026-09-16-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "myResourceGroup",
+    "serviceEntitlementSettingName": "default",
+    "properties": {
+      "tags": {
+        "environment": "test"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/serviceEntitlementSettings/default",
+        "name": "default",
+        "type": "Microsoft.Security/serviceEntitlementSettings",
+        "location": "eastus",
+        "tags": {
+          "environment": "test"
+        },
+        "properties": {
+          "isDefault": true,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
