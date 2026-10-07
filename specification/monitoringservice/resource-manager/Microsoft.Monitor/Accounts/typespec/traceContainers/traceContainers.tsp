@@ -18,9 +18,9 @@ namespace Microsoft.Monitor {
     get is ArmResourceRead<TraceContainerResource>;
 
     /**
-     * Creates or replaces the trace container for an Azure Monitor Workspace.
+     * Creates or replaces the trace container for an Azure Monitor Workspace. Modeled as a long-running operation (200 + 201); the service may complete synchronously by returning a terminal provisioningState, or track progress via Azure-AsyncOperation.
      */
-    createOrUpdate is ArmResourceCreateOrReplaceSync<TraceContainerResource>;
+    createOrUpdate is ArmResourceCreateOrReplaceAsync<TraceContainerResource>;
 
     /**
      * Deletes the trace container for an Azure Monitor Workspace.
