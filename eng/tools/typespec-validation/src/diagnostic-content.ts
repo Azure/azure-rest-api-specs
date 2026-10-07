@@ -1,4 +1,4 @@
-import { isAbsolute, relative, win32 } from "node:path";
+import { isAbsolute, normalize, relative } from "pathe";
 import { stripVTControlCharacters } from "node:util";
 import pc from "picocolors";
 
@@ -73,11 +73,5 @@ export function renderDiagnosticContent(
 }
 
 function formatPath(file: string, cwd: string): string {
-  const displayPath =
-    /^[A-Za-z]:[\\/]/.test(file) && /^[A-Za-z]:[\\/]/.test(cwd)
-      ? win32.relative(cwd, file)
-      : isAbsolute(file)
-        ? relative(cwd, file)
-        : file;
-  return displayPath.replaceAll("\\", "/") || ".";
+  return normalize(isAbsolute(file) ? relative(cwd, file) : file);
 }

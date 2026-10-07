@@ -1,6 +1,6 @@
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { readFile } from "node:fs/promises";
-import { dirname, join, resolve } from "node:path";
+import { dirname, join, resolve } from "pathe";
 import { filePath, indent, lines, text, type DiagnosticContent } from "../diagnostic-content.ts";
 import { failure, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
