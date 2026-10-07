@@ -218,14 +218,6 @@ namespace Azure.AI.Projects {
   @@clientName(CreateSkillVersionRequest.default, "isDefault");
 
   // --------------------------------------------------------------------------------
-  // AgentOptimizationJobs sub‐client
-  // --------------------------------------------------------------------------------
-  @@access(AgentOptimizationJobs.create, Access.internal);
-  @@access(AgentOptimizationJobs.get, Access.internal);
-  @@access(AgentOptimizationJobs.cancel, Access.internal);
-  @@access(AgentOptimizationJobs.delete, Access.internal);
-
-  // --------------------------------------------------------------------------------
   // Externalization of classes, defined in Azure.AI.Extensions.OpenAI and OpenAI.
   // --------------------------------------------------------------------------------
   @@alternateType(
@@ -1410,6 +1402,16 @@ namespace Azure.AI.Projects {
     OpenAI.RealtimeClientEventType,
     {
       identity: "OpenAI.Realtime.RealtimeClientCommandKind",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
+    "csharp"
+  );
+
+  @@alternateType(
+    OpenAI.ChatCompletionTool,
+    {
+      identity: "OpenAI.Chat.ChatTool",
       package: "OpenAI",
       minVersion: "2.14.0",
     },
