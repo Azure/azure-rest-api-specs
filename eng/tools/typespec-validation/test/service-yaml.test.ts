@@ -1,10 +1,12 @@
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
+import { diagnosticDetails, diagnosticText } from "./diagnostics.ts";
 import { mockFolder } from "./mocks.ts";
 
-import { resolve } from "node:path";
+import { resolve } from "pathe";
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 import { ServiceYamlRule } from "../src/rules/service-yaml.ts";
 
-import * as fsPromises from "fs/promises";
+import * as fsPromises from "node:fs/promises";
 import * as utils from "../src/utils.ts";
 
 const validServiceYaml = `versions:
@@ -44,9 +46,9 @@ describe("service-yaml", function () {
       Promise.resolve(!path.endsWith("main.tsp") && !path.endsWith("service.yaml")),
     );
 
-    const result = await new ServiceYamlRule().execute(mockFolder);
+    const result = await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(true);
-    expect(result.stdOutput).toContain("main.tsp not found");
+    expect(result.skipped).toContain("main.tsp not found");
   });
 
   it("should skip when tspconfig.yaml does not exist", async function () {
@@ -54,9 +56,9 @@ describe("service-yaml", function () {
       Promise.resolve(!path.endsWith("tspconfig.yaml") && !path.endsWith("service.yaml")),
     );
 
-    const result = await new ServiceYamlRule().execute(mockFolder);
+    const result = await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(true);
-    expect(result.stdOutput).toContain("tspconfig.yaml not found");
+    expect(result.skipped).toContain("tspconfig.yaml not found");
   });
 
   it("should skip when tspconfig.yaml does not emit typespec-autorest", async function () {
@@ -65,21 +67,21 @@ describe("service-yaml", function () {
     );
     readTspConfigSpy.mockResolvedValue(`emit:\n  - "@azure-tools/typespec-python"\n`);
 
-    const result = await new ServiceYamlRule().execute(mockFolder);
+    const result = await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(true);
-    expect(result.stdOutput).toContain("does not emit");
+    expect(result.skipped).toContain("does not emit");
   });
 
   it("should pass when service.yaml is valid and all swagger files exist", async function () {
-    const result = await new ServiceYamlRule().execute(mockFolder);
+    const result = await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(true);
-    expect(result.stdOutput).toContain("Validated 2 swagger file(s) across 2 version(s)");
+    expect(result.diagnostics).toBeUndefined();
   });
 
   it("should pass when a version has no swagger-files", async function () {
     readFileSpy.mockResolvedValue(`versions:\n  - version: 2024-06-01\n    source: typespec\n`);
 
-    const result = await new ServiceYamlRule().execute(mockFolder);
+    const result = await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(true);
   });
 
@@ -88,9 +90,9 @@ describe("service-yaml", function () {
       Promise.resolve(!path.endsWith("main.tsp") && !path.endsWith("openapi.json")),
     );
 
-    const result = await new ServiceYamlRule().execute(mockFolder);
+    const result = await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(false);
-    expect(result.errorOutput).toContain("swagger files that do not exist");
+    expect(diagnosticText(result)).toContain("swagger files that do not exist");
   });
 
   it("should fail when service.yaml is missing", async function () {
@@ -98,9 +100,9 @@ describe("service-yaml", function () {
       Promise.resolve(!path.endsWith("service.yaml")),
     );
 
-    const result = await new ServiceYamlRule().execute(mockFolder);
+    const result = await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(false);
-    expect(result.errorOutput).toContain("Missing service.yaml");
+    expect(diagnosticText(result)).toContain("Missing service.yaml");
   });
 
   it("should fail when a swagger file does not exist", async function () {
@@ -108,10 +110,12 @@ describe("service-yaml", function () {
       Promise.resolve(!path.endsWith("openapi.json")),
     );
 
-    const result = await new ServiceYamlRule().execute(mockFolder);
+    const result = await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(false);
-    expect(result.errorOutput).toContain("swagger files that do not exist");
-    expect(result.errorOutput).toContain("2024-06-01");
+    expect(diagnosticText(result)).toContain("swagger files that do not exist");
+    expect(diagnosticDetails(result.diagnostics?.[0])).toBe(
+      '  - version "2024-06-01": resource-manager/Contoso/stable/2024-06-01/openapi.json',
+    );
   });
 
   it("should report all broken swagger paths, not just the first", async function () {
@@ -119,10 +123,14 @@ describe("service-yaml", function () {
       Promise.resolve(path.endsWith("service.yaml") || path.endsWith("main.tsp")),
     );
 
-    const result = await new ServiceYamlRule().execute(mockFolder);
+    const result = await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(false);
-    expect(result.errorOutput).toContain("resource-manager/Contoso/stable/2024-06-01/openapi.json");
-    expect(result.errorOutput).toContain("../legacy/stable/2023-01-01/contoso.json");
+    expect(diagnosticDetails(result.diagnostics?.[0])).toBe(
+      '  - version "2024-06-01": resource-manager/Contoso/stable/2024-06-01/openapi.json\n' +
+        '  - version "2023-01-01": ../legacy/stable/2023-01-01/contoso.json',
+    );
+    expect(result.diagnostics?.[0].help).toContain('For "source: typespec" versions');
+    expect(result.diagnostics?.[0].help).toContain('For "source: swagger" versions');
   });
 
   it("should resolve swagger paths relative to service.yaml", async function () {
@@ -132,7 +140,7 @@ describe("service-yaml", function () {
       return Promise.resolve(true);
     });
 
-    await new ServiceYamlRule().execute(mockFolder);
+    await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(checked).toContain(
       resolve(mockFolder, "resource-manager/Contoso/stable/2024-06-01/openapi.json"),
     );
@@ -142,17 +150,17 @@ describe("service-yaml", function () {
   it("should fail when service.yaml is not valid YAML", async function () {
     readFileSpy.mockResolvedValue("versions: [\n  - broken");
 
-    const result = await new ServiceYamlRule().execute(mockFolder);
+    const result = await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(false);
-    expect(result.errorOutput).toContain("not valid YAML");
+    expect(diagnosticText(result)).toContain("not valid YAML");
   });
 
   it("should fail when service.yaml is missing the versions property", async function () {
     readFileSpy.mockResolvedValue("someOtherKey: true\n");
 
-    const result = await new ServiceYamlRule().execute(mockFolder);
+    const result = await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(false);
-    expect(result.errorOutput).toContain("does not match the expected format");
-    expect(result.errorOutput).toContain("versions");
+    expect(diagnosticText(result)).toContain("does not match the expected format");
+    expect(diagnosticText(result)).toContain("versions");
   });
 });
