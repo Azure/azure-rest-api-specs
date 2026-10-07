@@ -641,7 +641,7 @@ model PoolProperties {
   highAvailability: PoolHighAvailability;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The required default or custom parameter group associated with the pool.")
+  @doc("The required parameter group associated with the pool. When creating a new pool in this API version, the caller must supply the corresponding default parameter group; customer-created parameter groups are not accepted during creation. For an existing pool, PUT or PATCH can associate either the corresponding default parameter group or a customer-created parameter group. The create-visible shape intentionally supports both resource ID forms so a future API version can allow customer-created parameter groups during creation without a breaking schema change.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   parameterGroup: PoolParameterGroupReference;
 
@@ -678,7 +678,7 @@ model PoolPropertiesForPatchUpdate {
   highAvailability?: PoolHighAvailabilityPatch;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The default or custom parameter group to associate with the pool. Omission preserves the current association.")
+  @doc("The corresponding default or a customer-created parameter group to associate with the existing pool. Customers can switch in either direction between these group types. Omission preserves the current association.")
   @visibility(Lifecycle.Update)
   parameterGroup?: PoolParameterGroupReferenceForPatchUpdate;
 
@@ -720,9 +720,9 @@ union PoolHighAvailabilityMode {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("A reference to the default or custom parameter group associated with a HorizonDB pool.")
+@doc("A reference to the parameter group associated with a HorizonDB pool. The schema represents both default and customer-created parameter groups for create and update compatibility. In this API version, initial pool creation accepts only the corresponding default parameter group; PUT updates to an existing pool can associate either group type.")
 model PoolParameterGroupReference {
-  @doc("The Azure resource ID of the default or custom parameter group.")
+  @doc("The Azure resource ID of the associated parameter group. Initial pool creation in this API version requires the corresponding Microsoft.HorizonDb/locations/parameterGroups resource. For an existing pool, PUT can specify either the corresponding default group or a customer-created Microsoft.HorizonDb/parameterGroups resource.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   parameterGroupResourceId: armResourceIdentifier<[
     {
@@ -733,19 +733,19 @@ model PoolParameterGroupReference {
     }
   ]>;
 
-  @doc("Determines when dynamic parameter changes from the associated parameter group become effective. Static parameter changes always require a pool restart, regardless of this value.")
+  @doc("Determines when dynamic parameter changes from the associated parameter group become effective. Static parameter changes always require a customer-initiated pool Restart, regardless of this value. Stop followed by Start and scheduled maintenance do not apply pending parameter changes.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   applyMethod: ParameterApplyMethod;
 
-  @doc("The synchronization status between the pool and its parameter group.")
+  @doc("The synchronization status between the pool and its parameter group. PendingReboot changes remain pending across Stop, Start, and scheduled maintenance and become effective only after a customer-initiated Restart.")
   @visibility(Lifecycle.Read)
   syncStatus?: ParameterGroupSyncStatus;
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("A parameter group reference for updating a HorizonDB pool.")
+@doc("A parameter group reference for updating an existing HorizonDB pool. The pool can switch in either direction between its corresponding default parameter group and a customer-created parameter group.")
 model PoolParameterGroupReferenceForPatchUpdate {
-  @doc("The Azure resource ID of the default or custom parameter group to associate with the pool.")
+  @doc("The Azure resource ID of the corresponding default or customer-created parameter group to associate with the existing pool.")
   @visibility(Lifecycle.Update)
   parameterGroupResourceId?: armResourceIdentifier<[
     {
@@ -756,7 +756,7 @@ model PoolParameterGroupReferenceForPatchUpdate {
     }
   ]>;
 
-  @doc("Determines when dynamic parameter changes from the associated parameter group become effective. Static parameter changes always require a pool restart, regardless of this value.")
+  @doc("Determines when dynamic parameter changes from the associated parameter group become effective. Static parameter changes always require a customer-initiated pool Restart, regardless of this value. Stop followed by Start and scheduled maintenance do not apply pending parameter changes.")
   @visibility(Lifecycle.Update)
   applyMethod?: ParameterApplyMethod;
 }
@@ -1862,14 +1862,14 @@ model HorizonDbClusterParameterGroupConnectionProperties {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("Controls when dynamic parameter changes become effective. Static parameter changes always become effective only after a pool restart, whether initiated by the customer or performed during scheduled maintenance.")
+@doc("Controls when dynamic parameter changes become effective. Static parameter changes always become effective only after a customer-initiated pool Restart. Stop followed by Start and scheduled maintenance do not apply pending parameter changes.")
 union ParameterApplyMethod {
   string,
 
-  /** Apply dynamic parameter changes immediately. Static parameter changes remain pending until the pool restarts. */
+  /** Apply dynamic parameter changes immediately. Static parameter changes remain pending until a customer-initiated pool Restart. */
   Immediate: "Immediate",
 
-  /** Apply dynamic and static parameter changes when the pool next restarts, whether initiated by the customer or performed during scheduled maintenance. */
+  /** Keep dynamic and static parameter changes pending until a customer-initiated pool Restart. Stop followed by Start and scheduled maintenance do not apply them. */
   PendingReboot: "PendingReboot",
 }
 
@@ -1887,6 +1887,6 @@ union ParameterGroupSyncStatus {
   /** Applying parameter updates failed. */
   FailedToApply: "FailedToApply",
 
-  /** Parameter updates are pending and require a reboot to take effect. */
+  /** Parameter updates are pending and require a customer-initiated pool Restart to take effect. Stop followed by Start and scheduled maintenance preserve this status. */
   PendingReboot: "PendingReboot",
 }

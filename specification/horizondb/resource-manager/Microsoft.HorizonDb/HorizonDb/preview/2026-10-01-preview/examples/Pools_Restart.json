@@ -1,6 +1,6 @@
 {
   "operationId": "Pools_Restart",
-  "title": "Restart PostgreSQL containers in a HorizonDB pool",
+  "title": "Restart a HorizonDB pool and apply pending parameter changes",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "exampleresourcegroup",
@@ -28,7 +28,7 @@
           },
           "parameterGroup": {
             "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/parameterGroups/production-parameters",
-            "applyMethod": "Immediate",
+            "applyMethod": "PendingReboot",
             "syncStatus": "InSync"
           },
           "provisioningState": "Succeeded"
