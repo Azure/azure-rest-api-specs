@@ -42,6 +42,12 @@ input-file:
 
   - stable/2026-09-01/fileshares.json
 
+directive:
+  - where:
+    - $.definitions["Azure.Core.uuid"].format
+    suppress: GuidUsage
+    reason: The uuid definition is emitted into the OpenAPI by the TypeSpec autorest emitter as an inlined form of the standard ARM common-types Encryption type (Encryption -> CustomerManagedKeyEncryption -> KeyEncryptionKeyIdentity with federatedClientId and delegatedIdentityClientId fields). It is a platform-standard common-types field, not a service-authored GUID, and the FileShares API surface introduces no GUID parameter of its own.
+
 ```
 
 ### Tag: package-2026-06-01
