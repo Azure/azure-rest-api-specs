@@ -5584,7 +5584,7 @@
       "properties": {
         "zonePlacementPolicy": {
           "$ref": "#/definitions/ZonePlacementPolicyType",
-          "description": "Auto delegates zone selection and balancing to the Virtual Machine Scale Set."
+          "description": "Auto delegates zone selection and balancing to the virtual machine scale set."
         }
       },
       "required": [
@@ -6442,7 +6442,7 @@
       "properties": {
         "enableCrossZoneUpgrade": {
           "type": "boolean",
-          "description": "Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. If this field is not set, Azure Azure Batch will not set its default value. The value of enableCrossZoneUpgrade on the created VirtualMachineScaleSet will be decided by the default configurations on VirtualMachineScaleSet. This field is able to be set to true or false only when using NodePlacementConfiguration as Zonal."
+          "description": "Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. If this field is not set, Azure Azure Batch will not set its default value. The value of enableCrossZoneUpgrade on the created VirtualMachineScaleSet will be decided by the default configurations on VirtualMachineScaleSet. This field can be set to true or false only when nodePlacementConfiguration.policy is Zonal or placement.zonePlacementPolicy is Auto. Auto placement is supported starting with API version 2026-10-01."
         },
         "maxBatchInstancePercent": {
           "type": "integer",
@@ -7139,7 +7139,7 @@
         "placement": {
           "$ref": "#/definitions/Placement",
           "title": "The availability zone placement policy for compute nodes in the pool.",
-          "description": "The availability zone placement policy for compute nodes in the pool. Set zonePlacementPolicy to Auto to delegate availability zone selection and balancing to the Virtual Machine Scale Set.\nOn pool creation, if placement is omitted, Batch uses nodePlacementConfiguration when it is specified; otherwise, the pool uses Regional placement, which provides no availability zone distribution guarantee. This property cannot be combined with nodePlacementConfiguration.\nOn PATCH, omitting placement preserves the existing placement policy, including when virtualMachineConfiguration is supplied.\nOn PUT, the supplied virtual machine configuration replaces the existing policies; omitting placement clears the placement policy."
+          "description": "The availability zone placement policy for compute nodes in the pool. Set zonePlacementPolicy to Auto to delegate availability zone selection and balancing to the virtual machine scale set.\nOn pool creation, if placement is omitted, Batch uses nodePlacementConfiguration when it is specified; otherwise, the pool uses Regional placement, which provides no availability zone distribution guarantee. This property cannot be combined with nodePlacementConfiguration.\nOn PATCH, omitting placement preserves the existing placement policy, including when virtualMachineConfiguration is supplied.\nOn PUT, the supplied virtual machine configuration replaces the existing policies; omitting placement clears the placement policy."
         },
         "resiliencyPolicy": {
           "$ref": "#/definitions/ResiliencyPolicy",
@@ -7205,7 +7205,7 @@
       "properties": {
         "vmSizes": {
           "type": "array",
-          "description": "The list of VM sizes (1 to 5) that may be allocated for the pool. All sizes must share the same vCPU count and VM family. This must be specified when the vmSkuProfile is provided during pool creation.",
+          "description": "The list of VM sizes (up to 5) that may be allocated for the Pool. VM sizes may span the supported A, B, D, E, and F VM families, but must have the same vCPU count and CPU architecture and compatible VM capabilities. This must be specified when the vmSkuProfile is provided during Pool creation.",
           "minItems": 1,
           "maxItems": 5,
           "items": {

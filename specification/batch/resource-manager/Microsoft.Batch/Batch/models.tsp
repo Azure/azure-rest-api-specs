@@ -2383,7 +2383,7 @@ model VirtualMachineConfiguration {
   hardwareProfile?: HardwareProfile;
 
   /**
-   * The availability zone placement policy for compute nodes in the pool. Set zonePlacementPolicy to Auto to delegate availability zone selection and balancing to the Virtual Machine Scale Set.
+   * The availability zone placement policy for compute nodes in the pool. Set zonePlacementPolicy to Auto to delegate availability zone selection and balancing to the virtual machine scale set.
    * On pool creation, if placement is omitted, Batch uses nodePlacementConfiguration when it is specified; otherwise, the pool uses Regional placement, which provides no availability zone distribution guarantee. This property cannot be combined with nodePlacementConfiguration.
    * On PATCH, omitting placement preserves the existing placement policy, including when virtualMachineConfiguration is supplied.
    * On PUT, the supplied virtual machine configuration replaces the existing policies; omitting placement clears the placement policy.
@@ -2408,7 +2408,7 @@ model VirtualMachineConfiguration {
 @added(Versions.v2026_10_01)
 model Placement {
   /**
-   * Auto delegates zone selection and balancing to the Virtual Machine Scale Set.
+   * Auto delegates zone selection and balancing to the virtual machine scale set.
    */
   zonePlacementPolicy: ZonePlacementPolicyType;
 }
@@ -2472,14 +2472,13 @@ union ZonePlacementPolicyType {
   Auto: "Auto",
 }
 
-
 /**
  * Specifies the set of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool.
  */
 @added(Versions.v2026_10_01)
 model VirtualMachineSkuProfile {
   /**
-   * The list of VM sizes (1 to 5) that may be allocated for the pool. All sizes must share the same vCPU count and VM family. This must be specified when the vmSkuProfile is provided during pool creation.
+   * The list of VM sizes (up to 5) that may be allocated for the Pool. VM sizes may span the supported A, B, D, E, and F VM families, but must have the same vCPU count and CPU architecture and compatible VM capabilities. This must be specified when the vmSkuProfile is provided during Pool creation.
    */
   @minItems(1)
   @maxItems(5)
@@ -4018,7 +4017,7 @@ model AutomaticOSUpgradePolicy {
  */
 model RollingUpgradePolicy {
   /**
-   * Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. If this field is not set, Azure Azure Batch will not set its default value. The value of enableCrossZoneUpgrade on the created VirtualMachineScaleSet will be decided by the default configurations on VirtualMachineScaleSet. This field is able to be set to true or false only when using NodePlacementConfiguration as Zonal.
+   * Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. If this field is not set, Azure Azure Batch will not set its default value. The value of enableCrossZoneUpgrade on the created VirtualMachineScaleSet will be decided by the default configurations on VirtualMachineScaleSet. This field can be set to true or false only when nodePlacementConfiguration.policy is Zonal or placement.zonePlacementPolicy is Auto. Auto placement is supported starting with API version 2026-10-01.
    */
   enableCrossZoneUpgrade?: boolean;
 
