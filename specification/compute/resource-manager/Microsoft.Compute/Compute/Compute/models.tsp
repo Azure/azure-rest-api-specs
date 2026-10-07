@@ -6690,9 +6690,10 @@ model VirtualMachineProperties {
   hardwareProfile?: HardwareProfile;
 
   /**
-   * [Preview Feature] Specifies the Instance Profile to use as a template when creating the virtual machine. Properties from the Instance Profile populate the VM request, and properties explicitly provided in the request override profile values. This property can be specified only during VM creation and cannot be added or changed on an existing VM. Omitting it from a PUT or PATCH request leaves the existing reference unchanged. An unchanged instanceProfile.id can be replayed so a GET response can be sent back unchanged.
+   * [Preview Feature] Specifies the Instance Profile to use as a template when creating the virtual machine. Properties from the Instance Profile populate the VM request, and properties explicitly provided in the request override profile values. This property can be specified only during VM creation and is returned by GET and LIST operations. It cannot be added or changed on an existing VM.
    */
   @added(Versions.v2026_03_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   instanceProfile?: InstanceProfile;
 
   /**

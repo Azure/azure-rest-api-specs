@@ -11405,9 +11405,6 @@
           },
           "Update a VM by force-detaching data disk": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_ForceDetachDataDisk.json"
-          },
-          "Update a VM while replaying an unchanged Instance Profile": {
-            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_WithInstanceProfile.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -22383,7 +22380,11 @@
         },
         "instanceProfile": {
           "$ref": "#/definitions/InstanceProfile",
-          "description": "[Preview Feature] Specifies the Instance Profile to use as a template when creating the virtual machine. Properties from the Instance Profile populate the VM request, and properties explicitly provided in the request override profile values. This property can be specified only during VM creation and cannot be added or changed on an existing VM. Omitting it from a PUT or PATCH request leaves the existing reference unchanged. An unchanged instanceProfile.id can be replayed so a GET response can be sent back unchanged."
+          "description": "[Preview Feature] Specifies the Instance Profile to use as a template when creating the virtual machine. Properties from the Instance Profile populate the VM request, and properties explicitly provided in the request override profile values. This property can be specified only during VM creation and is returned by GET and LIST operations. It cannot be added or changed on an existing VM.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "scheduledEventsPolicy": {
           "$ref": "#/definitions/ScheduledEventsPolicy",
