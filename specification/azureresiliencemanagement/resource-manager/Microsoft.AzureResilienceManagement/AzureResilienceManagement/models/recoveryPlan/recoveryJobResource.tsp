@@ -38,13 +38,34 @@ model RecoveryJobResourceProperties extends JobResourceProperties {
   recoveryGroupActionSettings?: RecoveryGroupActionSettings;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("Properties specific to a cyber recovery job resource.")
-  cyberRecoveryJobResourceProperties?: CyberRecoveryJobResourceProperties;
+  @doc("Resiliency-specific properties for the recovery job resource.")
+  resiliencyJobResourceProperties?: ResiliencyRecoveryJobResourceProperties;
 }
 
 @added(Versions.v2026_11_30_preview)
-@doc("Properties specific to a cyber recovery job resource.")
-model CyberRecoveryJobResourceProperties {
+@discriminator("resiliencyType")
+@doc("Resiliency-specific properties for a recovery job resource.")
+model ResiliencyRecoveryJobResourceProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Infrastructure resiliency properties for a recovery job resource.")
+model InfraResiliencyRecoveryJobResourceProperties extends ResiliencyRecoveryJobResourceProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.InfraResiliency;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Cyber resiliency properties for a recovery job resource.")
+model CyberResiliencyRecoveryJobResourceProperties extends ResiliencyRecoveryJobResourceProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.CyberResiliency;
+
   @added(Versions.v2026_11_30_preview)
   @identifiers(#["resourceId"])
   @doc("The infrastructure resources created for this job resource.")

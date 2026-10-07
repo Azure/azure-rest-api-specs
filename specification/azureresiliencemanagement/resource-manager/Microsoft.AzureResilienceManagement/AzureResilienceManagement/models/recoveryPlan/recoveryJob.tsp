@@ -26,13 +26,34 @@ model RecoveryJobProperties extends JobProperties {
   provisioningState?: ProvisioningState;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("Properties specific to a cyber recovery job.")
-  cyberRecoveryJobProperties?: CyberRecoveryJobProperties;
+  @doc("Resiliency-specific properties for the recovery job.")
+  resiliencyJobProperties?: ResiliencyRecoveryJobProperties;
 }
 
 @added(Versions.v2026_11_30_preview)
-@doc("Properties specific to a cyber recovery job.")
-model CyberRecoveryJobProperties {
+@discriminator("resiliencyType")
+@doc("Resiliency-specific properties for a recovery job.")
+model ResiliencyRecoveryJobProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Infrastructure resiliency properties for a recovery job.")
+model InfraResiliencyRecoveryJobProperties extends ResiliencyRecoveryJobProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.InfraResiliency;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Cyber resiliency properties for a recovery job.")
+model CyberResiliencyRecoveryJobProperties extends ResiliencyRecoveryJobProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.CyberResiliency;
+
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifier of the completed create-infrastructure job used by this restore job.")
   @visibility(Lifecycle.Read)

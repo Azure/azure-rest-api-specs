@@ -88,7 +88,30 @@
                 "eastus-az1"
               ]
             }
-          ]
+          ],
+          "resiliencyResourceProperties": {
+            "resiliencyType": "CyberResiliency",
+            "resourceType": "AzureVm",
+            "vaultResourceIds": [
+              "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/backup-rg/providers/Microsoft.RecoveryServices/vaults/source-vault"
+            ],
+            "ctrVaultResourceIds": [
+              "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/backup-rg/providers/Microsoft.RecoveryServices/vaults/target-vault"
+            ],
+            "containerResourceId": "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/sampleResourceGroupName/providers/Microsoft.Compute/virtualMachines/iaasvm-1",
+            "membershipThroughServiceGroupMembers": [
+              "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544"
+            ],
+            "recoveryConfigProfileId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryConfigProfiles/default",
+            "protectedItemIds": [
+              "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/backup-rg/providers/Microsoft.RecoveryServices/vaults/source-vault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvm-1/protectedItems/VM;iaasvm-1"
+            ],
+            "protectionState": "Protected",
+            "canBeIncluded": true,
+            "supportedTargetLocations": [
+              "westus2"
+            ]
+          }
         },
         "id": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryResources/12345678-9012-3456-7890-123456789012",
         "name": "12345678-9012-3456-7890-123456789012",

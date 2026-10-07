@@ -97,13 +97,34 @@ model RecoveryResourceProperties {
   errorDetails?: CommonTypes.ErrorDetail;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("Properties specific to a cyber recovery resource.")
-  cyberRecoveryResourceProperties?: CyberRecoveryResourceProperties;
+  @doc("Resiliency-specific properties for the recovery resource.")
+  resiliencyResourceProperties?: ResiliencyRecoveryResourceProperties;
 }
 
 @added(Versions.v2026_11_30_preview)
-@doc("Properties specific to a cyber recovery resource.")
-model CyberRecoveryResourceProperties {
+@discriminator("resiliencyType")
+@doc("Resiliency-specific properties for a recovery resource.")
+model ResiliencyRecoveryResourceProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Infrastructure resiliency properties for a recovery resource.")
+model InfraResiliencyRecoveryResourceProperties extends ResiliencyRecoveryResourceProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.InfraResiliency;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Cyber resiliency properties for a recovery resource.")
+model CyberResiliencyRecoveryResourceProperties extends ResiliencyRecoveryResourceProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.CyberResiliency;
+
   @added(Versions.v2026_11_30_preview)
   @doc("The workload type of the Azure resource linked to the recovery resource.")
   @visibility(Lifecycle.Read)

@@ -6157,63 +6157,6 @@
         "scriptResourceId"
       ]
     },
-    "CyberRecoveryJobProperties": {
-      "type": "object",
-      "description": "Properties specific to a cyber recovery job.",
-      "properties": {
-        "createInfraJobId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource identifier of the completed create-infrastructure job used by this restore job.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryJobs"
-              }
-            ]
-          }
-        },
-        "recoveryPointSelectionProperties": {
-          "$ref": "#/definitions/RecoveryPointSelectionProperties",
-          "description": "The recovery point selection recorded for this job.",
-          "readOnly": true
-        }
-      }
-    },
-    "CyberRecoveryJobResourceProperties": {
-      "type": "object",
-      "description": "Properties specific to a cyber recovery job resource.",
-      "properties": {
-        "createdResources": {
-          "type": "array",
-          "description": "The infrastructure resources created for this job resource.",
-          "items": {
-            "$ref": "#/definitions/InfrastructureCreatedResource"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
-        },
-        "restoreDetails": {
-          "$ref": "#/definitions/RestoreJobResourceDetails",
-          "description": "The restore tracking details for this job resource.",
-          "readOnly": true
-        },
-        "recoveryGroupId": {
-          "type": "string",
-          "description": "The recovery group identifier associated with this job resource.",
-          "readOnly": true
-        },
-        "recoveryGroupOrderId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The order of the recovery group associated with this job resource.",
-          "readOnly": true
-        }
-      }
-    },
     "CyberRecoveryPlanResiliencyProperties": {
       "type": "object",
       "description": "Cyber resiliency properties for a recovery plan.",
@@ -6270,9 +6213,78 @@
       ],
       "x-ms-discriminator-value": "CyberResiliency"
     },
-    "CyberRecoveryResourceProperties": {
+    "CyberResiliencyRecoveryJobProperties": {
       "type": "object",
-      "description": "Properties specific to a cyber recovery resource.",
+      "description": "Cyber resiliency properties for a recovery job.",
+      "properties": {
+        "createInfraJobId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource identifier of the completed create-infrastructure job used by this restore job.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryJobs"
+              }
+            ]
+          }
+        },
+        "recoveryPointSelectionProperties": {
+          "$ref": "#/definitions/RecoveryPointSelectionProperties",
+          "description": "The recovery point selection recorded for this job.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CyberResiliency"
+    },
+    "CyberResiliencyRecoveryJobResourceProperties": {
+      "type": "object",
+      "description": "Cyber resiliency properties for a recovery job resource.",
+      "properties": {
+        "createdResources": {
+          "type": "array",
+          "description": "The infrastructure resources created for this job resource.",
+          "items": {
+            "$ref": "#/definitions/InfrastructureCreatedResource"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "restoreDetails": {
+          "$ref": "#/definitions/RestoreJobResourceDetails",
+          "description": "The restore tracking details for this job resource.",
+          "readOnly": true
+        },
+        "recoveryGroupId": {
+          "type": "string",
+          "description": "The recovery group identifier associated with this job resource.",
+          "readOnly": true
+        },
+        "recoveryGroupOrderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The order of the recovery group associated with this job resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryJobResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CyberResiliency"
+    },
+    "CyberResiliencyRecoveryResourceProperties": {
+      "type": "object",
+      "description": "Cyber resiliency properties for a recovery resource.",
       "properties": {
         "resourceType": {
           "$ref": "#/definitions/WorkloadType",
@@ -6386,7 +6398,13 @@
           },
           "readOnly": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CyberResiliency"
     },
     "DatabaseRecoveryConfig": {
       "type": "object",
@@ -8756,6 +8774,36 @@
       ],
       "x-ms-discriminator-value": "InfraResiliency"
     },
+    "InfraResiliencyRecoveryJobProperties": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery job.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
+    },
+    "InfraResiliencyRecoveryJobResourceProperties": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery job resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryJobResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
+    },
+    "InfraResiliencyRecoveryResourceProperties": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
+    },
     "InfrastructureCreatedResource": {
       "type": "object",
       "description": "An infrastructure resource created during cyber recovery.",
@@ -10699,9 +10747,9 @@
           "description": "The provisioning state of the recovery job.",
           "readOnly": true
         },
-        "cyberRecoveryJobProperties": {
-          "$ref": "#/definitions/CyberRecoveryJobProperties",
-          "description": "Properties specific to a cyber recovery job."
+        "resiliencyJobProperties": {
+          "$ref": "#/definitions/ResiliencyRecoveryJobProperties",
+          "description": "Resiliency-specific properties for the recovery job."
         }
       },
       "allOf": [
@@ -10766,9 +10814,9 @@
           "description": "The recovery action settings.",
           "readOnly": true
         },
-        "cyberRecoveryJobResourceProperties": {
-          "$ref": "#/definitions/CyberRecoveryJobResourceProperties",
-          "description": "Properties specific to a cyber recovery job resource."
+        "resiliencyJobResourceProperties": {
+          "$ref": "#/definitions/ResiliencyRecoveryJobResourceProperties",
+          "description": "Resiliency-specific properties for the recovery job resource."
         }
       },
       "allOf": [
@@ -11546,9 +11594,9 @@
           "description": "Error details associated with the resource.",
           "readOnly": true
         },
-        "cyberRecoveryResourceProperties": {
-          "$ref": "#/definitions/CyberRecoveryResourceProperties",
-          "description": "Properties specific to a cyber recovery resource."
+        "resiliencyResourceProperties": {
+          "$ref": "#/definitions/ResiliencyRecoveryResourceProperties",
+          "description": "Resiliency-specific properties for the recovery resource."
         }
       },
       "required": [
@@ -11960,6 +12008,34 @@
         }
       }
     },
+    "ResiliencyRecoveryJobProperties": {
+      "type": "object",
+      "description": "Resiliency-specific properties for a recovery job.",
+      "properties": {
+        "resiliencyType": {
+          "$ref": "#/definitions/ResiliencyType",
+          "description": "The resiliency type represented by these properties."
+        }
+      },
+      "discriminator": "resiliencyType",
+      "required": [
+        "resiliencyType"
+      ]
+    },
+    "ResiliencyRecoveryJobResourceProperties": {
+      "type": "object",
+      "description": "Resiliency-specific properties for a recovery job resource.",
+      "properties": {
+        "resiliencyType": {
+          "$ref": "#/definitions/ResiliencyType",
+          "description": "The resiliency type represented by these properties."
+        }
+      },
+      "discriminator": "resiliencyType",
+      "required": [
+        "resiliencyType"
+      ]
+    },
     "ResiliencyRecoveryPlanProperties": {
       "type": "object",
       "description": "Resiliency-specific properties for a recovery plan.",
@@ -11977,6 +12053,20 @@
     "ResiliencyRecoveryPlanPropertiesUpdate": {
       "type": "object",
       "description": "Resiliency-specific properties for a recovery plan.",
+      "properties": {
+        "resiliencyType": {
+          "$ref": "#/definitions/ResiliencyType",
+          "description": "The resiliency type represented by these properties."
+        }
+      },
+      "discriminator": "resiliencyType",
+      "required": [
+        "resiliencyType"
+      ]
+    },
+    "ResiliencyRecoveryResourceProperties": {
+      "type": "object",
+      "description": "Resiliency-specific properties for a recovery resource.",
       "properties": {
         "resiliencyType": {
           "$ref": "#/definitions/ResiliencyType",
