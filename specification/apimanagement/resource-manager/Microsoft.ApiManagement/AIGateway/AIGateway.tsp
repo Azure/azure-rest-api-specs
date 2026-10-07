@@ -75,10 +75,17 @@ model AiGatewayResource is Azure.ResourceManager.TrackedResource<
   ...Azure.ResourceManager.EntityTagProperty;
 }
 
+/** SKU fields to update on an AI Gateway. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewaySkuUpdate
+  is OptionalProperties<Azure.ResourceManager.CommonTypes.Sku>;
+
 /** Parameters for updating an AI Gateway. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayUpdateParameters {
   ...Azure.ResourceManager.Foundations.TagsUpdateModel<AiGatewayResource>;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-  ...Azure.ResourceManager.ResourceSkuProperty;
+
+  /** The SKU (Stock Keeping Unit) assigned to this resource. */
+  sku?: AiGatewaySkuUpdate;
 }
