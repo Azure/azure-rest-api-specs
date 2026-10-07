@@ -13,10 +13,10 @@ using Azure.ResourceManager;
 namespace Microsoft.Compute;
 
 // =====================================================================
-// ScheduledActions (SA) — the recurring `scheduledActions` resource
-// family, folded into the BulkActions project.
+// Recurring Bulk Actions (RBA) — exposed through the `scheduledActions` resource
+// family, folded into the BulkActions project. API identifiers remain unchanged.
 //
-// NAMING NOTE: SA collision-renames take the `ScheduledActions*` prefix to avoid
+// NAMING NOTE: RBA collision-renames take the `ScheduledActions*` prefix to avoid
 // colliding with BulkActions' bare shared types (e.g. `ProvisioningState`,
 // `DeadlineType`, `ExecutionParameters`, `RetryPolicy`) that coexist in this shared
 // `Microsoft.Compute` namespace. (These were named `RecurringScheduledActions*`
@@ -27,7 +27,7 @@ namespace Microsoft.Compute;
 // ------------------ Shared enums ------------------
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The type of compute resource targeted by the scheduled action.")
+@doc("The type of compute resource targeted by the recurring bulk action.")
 union ResourceType {
   @doc("Azure virtual machines.")
   VirtualMachine: "VirtualMachine",
@@ -39,7 +39,7 @@ union ResourceType {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The operation performed by the scheduled action.")
+@doc("The operation performed by the recurring bulk action.")
 union ScheduledActionType {
   @doc("Starts the targeted resources.")
   Start: "Start",
@@ -54,27 +54,27 @@ union ScheduledActionType {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("A day of the week on which the scheduled action can run.")
+@doc("A day of the week on which the recurring bulk action can run.")
 union WeekDay {
-  @doc("The scheduled action can run on Monday.")
+  @doc("The recurring bulk action can run on Monday.")
   Monday: "Monday",
 
-  @doc("The scheduled action can run on Tuesday.")
+  @doc("The recurring bulk action can run on Tuesday.")
   Tuesday: "Tuesday",
 
-  @doc("The scheduled action can run on Wednesday.")
+  @doc("The recurring bulk action can run on Wednesday.")
   Wednesday: "Wednesday",
 
-  @doc("The scheduled action can run on Thursday.")
+  @doc("The recurring bulk action can run on Thursday.")
   Thursday: "Thursday",
 
-  @doc("The scheduled action can run on Friday.")
+  @doc("The recurring bulk action can run on Friday.")
   Friday: "Friday",
 
-  @doc("The scheduled action can run on Saturday.")
+  @doc("The recurring bulk action can run on Saturday.")
   Saturday: "Saturday",
 
-  @doc("The scheduled action can run on Sunday.")
+  @doc("The recurring bulk action can run on Sunday.")
   Sunday: "Sunday",
 
   @doc("Every day of the week.")
@@ -84,42 +84,42 @@ union WeekDay {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("A month in which the scheduled action can run.")
+@doc("A month in which the recurring bulk action can run.")
 union Month {
-  @doc("The scheduled action can run in January.")
+  @doc("The recurring bulk action can run in January.")
   January: "January",
 
-  @doc("The scheduled action can run in February.")
+  @doc("The recurring bulk action can run in February.")
   February: "February",
 
-  @doc("The scheduled action can run in March.")
+  @doc("The recurring bulk action can run in March.")
   March: "March",
 
-  @doc("The scheduled action can run in April.")
+  @doc("The recurring bulk action can run in April.")
   April: "April",
 
-  @doc("The scheduled action can run in May.")
+  @doc("The recurring bulk action can run in May.")
   May: "May",
 
-  @doc("The scheduled action can run in June.")
+  @doc("The recurring bulk action can run in June.")
   June: "June",
 
-  @doc("The scheduled action can run in July.")
+  @doc("The recurring bulk action can run in July.")
   July: "July",
 
-  @doc("The scheduled action can run in August.")
+  @doc("The recurring bulk action can run in August.")
   August: "August",
 
-  @doc("The scheduled action can run in September.")
+  @doc("The recurring bulk action can run in September.")
   September: "September",
 
-  @doc("The scheduled action can run in October.")
+  @doc("The recurring bulk action can run in October.")
   October: "October",
 
-  @doc("The scheduled action can run in November.")
+  @doc("The recurring bulk action can run in November.")
   November: "November",
 
-  @doc("The scheduled action can run in December.")
+  @doc("The recurring bulk action can run in December.")
   December: "December",
 
   @doc("Every month.")
@@ -135,7 +135,7 @@ union Month {
 scalar DayOfTheMonth extends int32;
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The current state of a scheduled action occurrence.")
+@doc("The current state of a recurring bulk action occurrence.")
 union OccurrenceState {
   @doc("The occurrence has been created.")
   Created: "Created",
@@ -163,7 +163,7 @@ union OccurrenceState {
 
 // The provisioning state of a resource within an occurrence.
 @added(Versions.`2026-08-06-preview`)
-@doc("The provisioning state of a scheduled-action resource within an occurrence.")
+@doc("The provisioning state of a recurring bulk action resource within an occurrence.")
 union OccurrenceResourceProvisioningState {
   ResourceProvisioningState,
 
@@ -186,7 +186,7 @@ union OccurrenceResourceProvisioningState {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The delivery method for scheduled action notifications.")
+@doc("The delivery method for recurring bulk action notifications.")
 union NotificationType {
   @doc("Sends notifications by email.")
   Email: "Email",
@@ -195,7 +195,7 @@ union NotificationType {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The language used for scheduled action notifications.")
+@doc("The language used for recurring bulk action notifications.")
 union Language {
   @doc("English (United States).")
   EnUs: "en-us",
@@ -223,16 +223,16 @@ union ResourceOperationStatus {
   Versions.`2026-08-06-preview`,
   "RecurringScheduledActionsProvisioningState"
 )
-@doc("The provisioning state of the scheduled action.")
+@doc("The provisioning state of the recurring bulk action.")
 @lroStatus
 union ScheduledActionsProvisioningState {
   ResourceProvisioningState,
 
-  @doc("The scheduled action is being deleted.")
+  @doc("The recurring bulk action is being deleted.")
   Deleting: "Deleting",
 
   @added(Versions.`2026-09-06-preview`)
-  @doc("The scheduled action is being updated.")
+  @doc("The recurring bulk action is being updated.")
   Updating: "Updating",
 
   string,
@@ -240,7 +240,7 @@ union ScheduledActionsProvisioningState {
 
 @added(Versions.`2026-07-06-preview`)
 @removed(Versions.`2026-09-06-preview`)
-@doc("The preferred optimization goal for scheduled action operations.")
+@doc("The preferred optimization goal for recurring bulk action operations.")
 union OptimizationPreference {
   @doc("Prioritizes cost savings.")
   Cost: "Cost",
@@ -257,7 +257,7 @@ union OptimizationPreference {
 // ------------------ Shared models ------------------
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Settings for notifications about upcoming scheduled action operations.")
+@doc("Settings for notifications about upcoming recurring bulk action operations.")
 model NotificationProperties {
   @doc("The notification destination. For email notifications, specify a valid email address.")
   destination: string;
@@ -274,10 +274,10 @@ model NotificationProperties {
 
 @@identifiers(Azure.Core.Foundations.Error.details, #[]);
 
-// ------------------ SA-owned execution/retry types (forked, no BA coupling) ------------------
-// Forked from the BulkActions shared `models.tsp` so the ScheduledActions surface does NOT
+// ------------------ RBA-owned execution/retry types (forked, no BA coupling) ------------------
+// Forked from the BulkActions shared `models.tsp` so the Recurring Bulk Actions surface does NOT
 // couple to the BulkActions type pool: a BulkActions change to its shared types can no longer
-// alter the SA contract. Bulk-VM-specific leakage is intentionally dropped — `verifyVmAgentHealth`
+// alter the RBA contract. Bulk-VM-specific leakage is intentionally dropped — `verifyVmAgentHealth`
 // (an executeStart concept) and the `GetInstanceView` operation value. Names take the
 // `ScheduledActions*` collision-rename prefix (see file header), since these coexist in
 // the `Microsoft.Compute` namespace with the BulkActions originals.
@@ -307,7 +307,7 @@ union ScheduledActionsDeadlineType {
   Versions.`2026-08-06-preview`,
   "RecurringScheduledActionsResourceOperationType"
 )
-@doc("The operation to retry when a scheduled action fails.")
+@doc("The operation to retry when a recurring bulk action fails.")
 union ScheduledActionsResourceOperationType {
   @removed(Versions.`2026-09-06-preview`)
   @doc("The operation is not specified.")
@@ -336,7 +336,7 @@ union ScheduledActionsResourceOperationType {
   Versions.`2026-08-06-preview`,
   "RecurringScheduledActionsRetryPolicy"
 )
-@doc("Retry settings for a scheduled action operation.")
+@doc("Retry settings for a recurring bulk action operation.")
 model ScheduledActionsRetryPolicy {
   @doc("The maximum number of retry attempts.")
   retryCount?: int32;
@@ -353,7 +353,7 @@ model ScheduledActionsRetryPolicy {
   Versions.`2026-08-06-preview`,
   "RecurringScheduledActionsExecutionParameters"
 )
-@doc("Settings that control how the scheduled action operation is executed.")
+@doc("Settings that control how the recurring bulk action operation is executed.")
 model ScheduledActionsExecutionParameters {
   @removed(Versions.`2026-09-06-preview`)
   @doc("The preferred optimization goal.")
@@ -363,12 +363,12 @@ model ScheduledActionsExecutionParameters {
   retryPolicy?: ScheduledActionsRetryPolicy;
 }
 
-// ------------------ ScheduledAction resource + models ------------------
+// ------------------ Recurring bulk action resource + models ------------------
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The recurring schedule for a scheduled action.")
+@doc("The recurring schedule for a recurring bulk action.")
 model ScheduledActionsSchedule {
-  @doc("The local time of day when the scheduled action runs.")
+  @doc("The local time of day when the recurring bulk action runs.")
   scheduledTime: plainTime;
 
   @doc("The time zone used to interpret the scheduled time.")
@@ -391,12 +391,12 @@ model ScheduledActionsSchedule {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Schedule changes for a scheduled action. Omitted properties keep their current values.")
+@doc("Schedule changes for a recurring bulk action. Omitted properties keep their current values.")
 model ScheduledActionsScheduleUpdate
   is OptionalProperties<ScheduledActionsSchedule>;
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The Azure resource ID of a virtual machine attached to a scheduled action.")
+@doc("The Azure resource ID of a virtual machine attached to a recurring bulk action.")
 scalar ValidScheduledActionResourceId
   extends armResourceIdentifier<[
     {
@@ -410,7 +410,7 @@ scalar ValidScheduledActionResourceId
 @added(Versions.`2026-07-06-preview`)
 @parentResource(ScheduledAction)
 @segment("resources")
-@doc("A compute resource associated with a scheduled action.")
+@doc("A compute resource associated with a recurring bulk action.")
 model ScheduledActionResource {
   @doc("Read-only. The name of the association resource.")
   @visibility(Lifecycle.Read)
@@ -436,11 +436,11 @@ model ScheduledActionResource {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
-@doc("A paged list of compute resources associated with a scheduled action.")
+@doc("A paged list of compute resources associated with a recurring bulk action.")
 model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 
 @added(Versions.`2026-07-06-preview`)
-@doc("A compute resource to add to or update in a scheduled action.")
+@doc("A compute resource to add to or update in a recurring bulk action.")
 model ScheduledActionResourceInput {
   @doc("The Azure resource ID of the targeted virtual machine.")
   resourceId: ValidScheduledActionResourceId;
@@ -451,22 +451,22 @@ model ScheduledActionResourceInput {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Resources to attach to a scheduled action.")
+@doc("Resources to attach to a recurring bulk action.")
 model ResourceAttachRequest {
-  @doc("The list of resources to attach to the scheduled action.")
+  @doc("The list of resources to attach to the recurring bulk action.")
   @Azure.ResourceManager.identifiers(#["resourceId"])
   resources: Array<ScheduledActionResourceInput>;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Resources to remove from a scheduled action.")
+@doc("Resources to remove from a recurring bulk action.")
 model ResourceDetachRequest {
   @doc("The Azure resource IDs of the resources to remove.")
   resources: Array<ValidScheduledActionResourceId>;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Resource-specific settings to update in a scheduled action.")
+@doc("Resource-specific settings to update in a recurring bulk action.")
 model ResourcePatchRequest {
   @doc("The resources and notification settings to update.")
   @Azure.ResourceManager.identifiers(#["resourceId"])
@@ -474,14 +474,14 @@ model ResourcePatchRequest {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Request body for canceling a scheduled action occurrence.")
+@doc("Request body for canceling a recurring bulk action occurrence.")
 model CancelOccurrenceRequest {
   @doc("The resources for which operations should be canceled. An empty array cancels all operations for all resources for the occurrence.")
   resourceIds: Array<ValidScheduledActionResourceId>;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Current status for a targeted resource in a scheduled action occurrence.")
+@doc("Current status for a targeted resource in a recurring bulk action occurrence.")
 model ResourceStatus {
   @doc("The Azure resource ID of the targeted resource.")
   resourceId: ValidScheduledActionResourceId;
@@ -494,7 +494,7 @@ model ResourceStatus {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Results of a scheduled action operation for targeted resources.")
+@doc("Results of a recurring bulk action operation for targeted resources.")
 model ResourceOperationResponse {
   @doc("The number of resources included in the operation.")
   totalResources: int32;
@@ -505,7 +505,7 @@ model ResourceOperationResponse {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Configuration and status of a scheduled action.")
+@doc("Configuration and status of a recurring bulk action.")
 model ScheduledActionProperties {
   @doc("The type of compute resource targeted by the action.")
   resourceType: ResourceType;
@@ -513,31 +513,31 @@ model ScheduledActionProperties {
   @doc("The operation performed on the targeted resources.")
   actionType: ScheduledActionType;
 
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Recurring bulk actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
   @doc("The date and time, including UTC offset, when the schedule becomes active.")
   startTime: offsetDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Recurring bulk actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
   @doc("The date and time, including UTC offset, after which no new occurrences are scheduled.")
   endTime?: offsetDateTime;
 
   @doc("The recurring schedule.")
   schedule: ScheduledActionsSchedule;
 
-  @doc("Notification settings that apply to the scheduled action.")
+  @doc("Notification settings that apply to the recurring bulk action.")
   @Azure.ResourceManager.identifiers(#["destination"])
   notificationSettings: Array<NotificationProperties>;
 
   @doc("Indicates whether new occurrences are disabled.")
   disabled?: boolean;
 
-  @doc("Read-only. The provisioning state of the scheduled action.")
+  @doc("Read-only. The provisioning state of the recurring bulk action.")
   @visibility(Lifecycle.Read)
   provisioningState?: ScheduledActionsProvisioningState;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Changes to a scheduled action. Omitted schedule properties keep their current values.")
+@doc("Changes to a recurring bulk action. Omitted schedule properties keep their current values.")
 model ScheduledActionPropertiesUpdate {
   @doc("The type of compute resource targeted by the action.")
   resourceType: ResourceType;
@@ -545,31 +545,31 @@ model ScheduledActionPropertiesUpdate {
   @doc("The operation performed on the targeted resources.")
   actionType: ScheduledActionType;
 
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Recurring bulk actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
   @doc("The date and time, including UTC offset, when the schedule becomes active.")
   startTime: offsetDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Recurring bulk actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
   @doc("The date and time, including UTC offset, after which no new occurrences are scheduled.")
   endTime?: offsetDateTime;
 
   @doc("Changes to the recurring schedule.")
   schedule?: ScheduledActionsScheduleUpdate;
 
-  @doc("Notification settings that apply to the scheduled action.")
+  @doc("Notification settings that apply to the recurring bulk action.")
   @Azure.ResourceManager.identifiers(#["destination"])
   notificationSettings: Array<NotificationProperties>;
 
   @doc("Indicates whether new occurrences are disabled.")
   disabled?: boolean;
 
-  @doc("Read-only. The provisioning state of the scheduled action.")
+  @doc("Read-only. The provisioning state of the recurring bulk action.")
   @visibility(Lifecycle.Read)
   provisioningState?: ScheduledActionsProvisioningState;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("A scheduled action associated with a specific compute resource.")
+@doc("A recurring bulk action associated with a specific compute resource.")
 model ScheduledActionsExtensionProperties {
   ...ScheduledActionProperties;
 
@@ -581,7 +581,7 @@ model ScheduledActionsExtensionProperties {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
-@doc("Results of a scheduled action resource operation.")
+@doc("Results of a recurring bulk action resource operation.")
 model ScheduledActionResourceOperationResponse {
   @doc("The number of resources included in the operation.")
   totalResources: int32;
@@ -592,13 +592,13 @@ model ScheduledActionResourceOperationResponse {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("A recurring action that operates on specified compute resources.")
+@doc("A recurring bulk action that operates on specified compute resources.")
 model ScheduledAction is TrackedResource<ScheduledActionProperties> {
   ...ResourceNameParameter<ScheduledAction>;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("A scheduled action associated with a specific compute resource.")
+@doc("A recurring bulk action associated with a specific compute resource.")
 model ScheduledActionResources
   is ExtensionResource<ScheduledActionsExtensionProperties> {
   ...ResourceNameParameter<
@@ -623,7 +623,7 @@ model ResourceResultSummary {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Summary of results for a scheduled action occurrence.")
+@doc("Summary of results for a recurring bulk action occurrence.")
 model OccurrenceResultSummary {
   @doc("The number of resources targeted by the occurrence.")
   total: int32;
@@ -634,7 +634,7 @@ model OccurrenceResultSummary {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Properties of a scheduled action occurrence.")
+@doc("Properties of a recurring bulk action occurrence.")
 model OccurrenceProperties {
   @doc("Read-only. The UTC date and time when the occurrence is scheduled to run.")
   @visibility(Lifecycle.Read)
@@ -651,7 +651,7 @@ model OccurrenceProperties {
 
 @added(Versions.`2026-07-06-preview`)
 @parentResource(ScheduledAction)
-@doc("One scheduled execution of a scheduled action.")
+@doc("One scheduled execution of a recurring bulk action.")
 model Occurrence is ProxyResource<OccurrenceProperties> {
   ...ResourceNameParameter<
     Occurrence,
@@ -662,7 +662,7 @@ model Occurrence is ProxyResource<OccurrenceProperties> {
 
 @added(Versions.`2026-07-06-preview`)
 @parentResource(Occurrence)
-@doc("Scheduling and status details for a resource included in a scheduled action occurrence.")
+@doc("Scheduling and status details for a resource included in a recurring bulk action occurrence.")
 model OccurrenceResource is ScheduledActionResource {
   @doc("Read-only. The UTC date and time when the operation is scheduled for this resource.")
   @visibility(Lifecycle.Read)
@@ -682,13 +682,13 @@ model OccurrenceResource is ScheduledActionResource {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
-@doc("Paged list of resources included in a scheduled action occurrence.")
+@doc("Paged list of resources included in a recurring bulk action occurrence.")
 model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
 
 @added(Versions.`2026-07-06-preview`)
-@doc("Request body for delaying a scheduled action occurrence.")
+@doc("Request body for delaying a recurring bulk action occurrence.")
 model DelayRequest {
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Scheduled actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Recurring bulk actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
   @doc("The new date and time for the occurrence, including the UTC offset.")
   delay: offsetDateTime;
 
@@ -697,7 +697,7 @@ model DelayRequest {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("The Azure resource ID of a scheduled action.")
+@doc("The Azure resource ID of a recurring bulk action.")
 scalar ScheduledActionsId
   extends armResourceIdentifier<[
     {
@@ -728,12 +728,12 @@ model OccurrenceExtensionProperties {
   @visibility(Lifecycle.Read)
   errorDetails?: Azure.Core.Foundations.Error;
 
-  @doc("The Azure resource ID of the scheduled action that owns the occurrence.")
+  @doc("The Azure resource ID of the recurring bulk action that owns the occurrence.")
   scheduledActionId: ScheduledActionsId;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@doc("A scheduled action occurrence associated with a specific compute resource.")
+@doc("A recurring bulk action occurrence associated with a specific compute resource.")
 model OccurrenceExtensionResource
   is ExtensionResource<OccurrenceExtensionProperties> {
   ...ResourceNameParameter<
@@ -742,20 +742,20 @@ model OccurrenceExtensionResource
   >;
 }
 
-// ------------------ ScheduledAction operations ------------------
+// ------------------ Recurring bulk action operations ------------------
 
 @added(Versions.`2026-07-06-preview`)
 @armResourceOperations
 interface ScheduledActions {
-  @doc("Gets the specified scheduled action.")
+  @doc("Gets the specified recurring bulk action.")
   @errorsDoc("The request failed. The response contains error details.")
   get is ArmResourceRead<ScheduledAction>;
 
-  @doc("Creates or updates a scheduled action.")
+  @doc("Creates or updates a recurring bulk action.")
   @errorsDoc("The request failed. The response contains error details.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ScheduledAction>;
 
-  @doc("Updates the specified scheduled action.")
+  @doc("Updates the specified recurring bulk action.")
   @errorsDoc("The request failed. The response contains error details.")
   update is ArmCustomPatchAsync<
     ScheduledAction,
@@ -766,18 +766,18 @@ interface ScheduledActions {
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @doc("Deletes the specified scheduled action.")
+  @doc("Deletes the specified recurring bulk action.")
   @errorsDoc("The request failed. The response contains error details.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ScheduledAction,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @doc("Lists scheduled actions in the specified resource group.")
+  @doc("Lists recurring bulk actions in the specified resource group.")
   @errorsDoc("The request failed. The response contains error details.")
   listByResourceGroup is ArmResourceListByParent<ScheduledAction>;
 
-  @doc("Lists scheduled actions in the specified subscription.")
+  @doc("Lists recurring bulk actions in the specified subscription.")
   @errorsDoc("The request failed. The response contains error details.")
   listBySubscription is ArmListBySubscription<ScheduledAction>;
 
@@ -786,14 +786,14 @@ interface ScheduledActions {
   @armResourceList(ScheduledActionResource)
   @list
   @get
-  @doc("Lists resources associated with the specified scheduled action.")
+  @doc("Lists resources associated with the specified recurring bulk action.")
   @errorsDoc("The request failed. The response contains error details.")
   listResources(...ResourceInstanceParameters<ScheduledActionResource>):
     | ArmResponse<ResourceListResponse>
     | ErrorResponse;
 
-  /** Attach resources to the scheduled action so they are included in future occurrences. */
-  @doc("Adds resources to the specified scheduled action.")
+  /** Attach resources to the recurring bulk action so they are included in future occurrences. */
+  @doc("Adds resources to the specified recurring bulk action.")
   @returnsDoc("The resources were added successfully.")
   @errorsDoc("The request failed. The response contains error details.")
   attachResources is ArmResourceActionAsync<
@@ -804,8 +804,8 @@ interface ScheduledActions {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /** Detach resources from the scheduled action so they are excluded from future occurrences. */
-  @doc("Removes resources from the specified scheduled action.")
+  /** Detach resources from the recurring bulk action so they are excluded from future occurrences. */
+  @doc("Removes resources from the specified recurring bulk action.")
   @returnsDoc("The resources were removed successfully.")
   @errorsDoc("The request failed. The response contains error details.")
   detachResources is ArmResourceActionAsync<
@@ -816,7 +816,7 @@ interface ScheduledActions {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @doc("Updates resource-specific settings for the specified scheduled action.")
+  @doc("Updates resource-specific settings for the specified recurring bulk action.")
   @returnsDoc("The resource settings were updated successfully.")
   @errorsDoc("The request failed. The response contains error details.")
   patchResources is ArmResourceActionSync<
@@ -825,8 +825,8 @@ interface ScheduledActions {
     ResourceOperationResponse
   >;
 
-  /** Disable the scheduled action so its future occurrences do not run. */
-  @doc("Disables the specified scheduled action so future occurrences do not run.")
+  /** Disable the recurring bulk action so its future occurrences do not run. */
+  @doc("Disables the specified recurring bulk action so future occurrences do not run.")
   @errorsDoc("The request failed. The response contains error details.")
   disable is ArmResourceActionNoResponseContentAsync<
     ScheduledAction,
@@ -834,8 +834,8 @@ interface ScheduledActions {
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /** Enable a previously disabled scheduled action so its future occurrences run. */
-  @doc("Enables the specified scheduled action so new occurrences run.")
+  /** Enable a previously disabled recurring bulk action so its future occurrences run. */
+  @doc("Enables the specified recurring bulk action so new occurrences run.")
   @errorsDoc("The request failed. The response contains error details.")
   enable is ArmResourceActionNoResponseContentAsync<
     ScheduledAction,
@@ -843,8 +843,8 @@ interface ScheduledActions {
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /** Cancel the next scheduled occurrence of the scheduled action. */
-  @doc("Cancels the next occurrence of the specified scheduled action.")
+  /** Cancel the next scheduled occurrence of the recurring bulk action. */
+  @doc("Cancels the next occurrence of the specified recurring bulk action.")
   @returnsDoc("The next occurrence was canceled successfully.")
   @errorsDoc("The request failed. The response contains error details.")
   cancelNextOccurrence is ArmResourceActionAsync<
@@ -855,8 +855,8 @@ interface ScheduledActions {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /** Trigger a manual occurrence of the scheduled action immediately, outside its normal schedule. */
-  @doc("Runs the specified scheduled action immediately.")
+  /** Trigger a manual occurrence of the recurring bulk action immediately, outside its normal schedule. */
+  @doc("Runs the specified recurring bulk action immediately.")
   @returnsDoc("The manual occurrence was started successfully.")
   @errorsDoc("The request failed. The response contains error details.")
   triggerManualOccurrence is ArmResourceActionAsync<
@@ -871,7 +871,7 @@ interface ScheduledActions {
 @added(Versions.`2026-07-06-preview`)
 @armResourceOperations
 interface ScheduledActionExtension {
-  @doc("Lists scheduled actions associated with the specified VM.")
+  @doc("Lists recurring bulk actions associated with the specified VM.")
   @errorsDoc("The request failed. The response contains error details.")
   listByVms is ArmResourceListByParent<ScheduledActionResources>;
 }
@@ -879,7 +879,7 @@ interface ScheduledActionExtension {
 @added(Versions.`2026-07-06-preview`)
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface ScheduledActionOperationStatus {
-  @doc("Gets the status of the specified scheduled action operation.")
+  @doc("Gets the status of the specified recurring bulk action operation.")
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/scheduledActionsOperationStatuses/{operationId}")
   @errorsDoc("The request failed. The response contains error details.")
@@ -910,7 +910,7 @@ interface Occurrences {
   @doc("Gets the specified occurrence.")
   @errorsDoc("The request failed. The response contains error details.")
   get is ArmResourceRead<Occurrence>;
-  @doc("Lists occurrences for the specified scheduled action.")
+  @doc("Lists occurrences for the specified recurring bulk action.")
   @errorsDoc("The request failed. The response contains error details.")
   listByScheduledAction is ArmResourceListByParent<Occurrence>;
 
@@ -953,41 +953,41 @@ interface Occurrences {
 @added(Versions.`2026-07-06-preview`)
 @armResourceOperations
 interface OccurrenceExtension {
-  @doc("Lists scheduled action occurrences associated with the specified VM.")
+  @doc("Lists recurring bulk action occurrences associated with the specified VM.")
   @errorsDoc("The request failed. The response contains error details.")
   listOccurrenceByVms is ArmResourceListByParent<OccurrenceExtensionResource>;
 }
 
 @@doc(
   ResourceListResponse.value,
-  "The compute resources associated with the scheduled action."
+  "The compute resources associated with the recurring bulk action."
 );
 
 @@doc(
   ScheduledAction.name,
-  "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens."
+  "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens."
 );
 
 @@doc(Occurrence.name, "The occurrence ID in UUID format.");
 
 @@doc(
   ScheduledActions.createOrUpdate::parameters.resource,
-  "The scheduled action to create or update."
+  "The recurring bulk action to create or update."
 );
 
 @@doc(
   ScheduledActions.update::parameters.properties,
-  "The scheduled action properties to update. Omitted properties keep their current values."
+  "The recurring bulk action properties to update. Omitted properties keep their current values."
 );
 
 @@doc(
   ScheduledActions.attachResources::parameters.body,
-  "The resources to add to the scheduled action."
+  "The resources to add to the recurring bulk action."
 );
 
 @@doc(
   ScheduledActions.detachResources::parameters.body,
-  "The resources to remove from the scheduled action."
+  "The resources to remove from the recurring bulk action."
 );
 
 @@doc(
