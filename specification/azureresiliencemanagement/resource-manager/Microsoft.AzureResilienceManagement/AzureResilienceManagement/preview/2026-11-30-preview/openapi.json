@@ -6214,9 +6214,9 @@
         }
       }
     },
-    "CyberRecoveryPlanProperties": {
+    "CyberRecoveryPlanResiliencyProperties": {
       "type": "object",
-      "description": "Properties specific to a cyber recovery plan.",
+      "description": "Cyber resiliency properties for a recovery plan.",
       "properties": {
         "targetEnvironment": {
           "$ref": "#/definitions/TargetEnvironment",
@@ -6234,11 +6234,17 @@
           "$ref": "#/definitions/MappedRecoveryPlanDetails",
           "description": "Details that map this plan to source tenants. Applies only to CyberRecovery plans."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryPlanProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CyberResiliency"
     },
-    "CyberRecoveryPlanPropertiesUpdate": {
+    "CyberRecoveryPlanResiliencyPropertiesUpdate": {
       "type": "object",
-      "description": "Properties specific to a cyber recovery plan.",
+      "description": "Cyber resiliency properties for a recovery plan.",
       "properties": {
         "targetEnvironment": {
           "$ref": "#/definitions/TargetEnvironmentUpdate",
@@ -6256,7 +6262,13 @@
           "$ref": "#/definitions/MappedRecoveryPlanDetailsUpdate",
           "description": "Details that map this plan to source tenants. Applies only to CyberRecovery plans."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryPlanPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "CyberResiliency"
     },
     "CyberRecoveryResourceProperties": {
       "type": "object",
@@ -8724,6 +8736,26 @@
         "id"
       ]
     },
+    "InfraRecoveryPlanResiliencyProperties": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery plan.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryPlanProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
+    },
+    "InfraRecoveryPlanResiliencyPropertiesUpdate": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery plan.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryPlanPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
+    },
     "InfrastructureCreatedResource": {
       "type": "object",
       "description": "An infrastructure resource created during cyber recovery.",
@@ -11010,9 +11042,9 @@
           "$ref": "#/definitions/RecoveryGroupsSetting",
           "description": "Settings for the recovery orchestration groups associated with the recovery orchestration plan."
         },
-        "cyberRecoveryPlanProperties": {
-          "$ref": "#/definitions/CyberRecoveryPlanProperties",
-          "description": "Properties specific to a cyber recovery plan."
+        "resiliencyPlanProperties": {
+          "$ref": "#/definitions/ResiliencyRecoveryPlanProperties",
+          "description": "Resiliency-specific properties for the recovery plan."
         },
         "latestFailoverStatus": {
           "$ref": "#/definitions/RecoveryPlanFailoverOperationStatus",
@@ -11092,9 +11124,9 @@
           "$ref": "#/definitions/RecoveryGroupsSettingUpdate",
           "description": "Settings for the recovery orchestration groups associated with the recovery orchestration plan."
         },
-        "cyberRecoveryPlanProperties": {
-          "$ref": "#/definitions/CyberRecoveryPlanPropertiesUpdate",
-          "description": "Properties specific to a cyber recovery plan."
+        "resiliencyPlanProperties": {
+          "$ref": "#/definitions/ResiliencyRecoveryPlanPropertiesUpdate",
+          "description": "Resiliency-specific properties for the recovery plan."
         }
       }
     },
@@ -11926,6 +11958,58 @@
             "solutionDisplayName"
           ]
         }
+      }
+    },
+    "ResiliencyRecoveryPlanProperties": {
+      "type": "object",
+      "description": "Resiliency-specific properties for a recovery plan.",
+      "properties": {
+        "resiliencyType": {
+          "$ref": "#/definitions/ResiliencyType",
+          "description": "The resiliency type represented by these properties."
+        }
+      },
+      "discriminator": "resiliencyType",
+      "required": [
+        "resiliencyType"
+      ]
+    },
+    "ResiliencyRecoveryPlanPropertiesUpdate": {
+      "type": "object",
+      "description": "Resiliency-specific properties for a recovery plan.",
+      "properties": {
+        "resiliencyType": {
+          "$ref": "#/definitions/ResiliencyType",
+          "description": "The resiliency type represented by these properties."
+        }
+      },
+      "discriminator": "resiliencyType",
+      "required": [
+        "resiliencyType"
+      ]
+    },
+    "ResiliencyType": {
+      "type": "string",
+      "description": "Specifies the resiliency type for recovery plan properties.",
+      "enum": [
+        "InfraResiliency",
+        "CyberResiliency"
+      ],
+      "x-ms-enum": {
+        "name": "ResiliencyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InfraResiliency",
+            "value": "InfraResiliency",
+            "description": "Infrastructure resiliency properties."
+          },
+          {
+            "name": "CyberResiliency",
+            "value": "CyberResiliency",
+            "description": "Cyber resiliency properties."
+          }
+        ]
       }
     },
     "ResolvedTargetResource": {

@@ -30,6 +30,20 @@ union RecoveryPlanType {
   string,
 }
 
+@added(Versions.v2026_11_30_preview)
+@doc("Specifies the resiliency type for recovery plan properties.")
+union ResiliencyType {
+  @added(Versions.v2026_11_30_preview)
+  @doc("Infrastructure resiliency properties.")
+  InfraResiliency: "InfraResiliency",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Cyber resiliency properties.")
+  CyberResiliency: "CyberResiliency",
+
+  string,
+}
+
 @doc("Specifies the operation status for failover and validation.")
 union RecoveryOperationStatus {
   @doc("Operation has not started or ran.")
@@ -104,8 +118,8 @@ model RecoveryPlanProperties {
   recoveryGroupsSetting: RecoveryGroupsSetting;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("Properties specific to a cyber recovery plan.")
-  cyberRecoveryPlanProperties?: CyberRecoveryPlanProperties;
+  @doc("Resiliency-specific properties for the recovery plan.")
+  resiliencyPlanProperties?: ResiliencyRecoveryPlanProperties;
 
   @doc("The status of the most recent failover operation executed.")
   @visibility(Lifecycle.Read)
@@ -122,8 +136,29 @@ model RecoveryPlanProperties {
 }
 
 @added(Versions.v2026_11_30_preview)
-@doc("Properties specific to a cyber recovery plan.")
-model CyberRecoveryPlanProperties {
+@discriminator("resiliencyType")
+@doc("Resiliency-specific properties for a recovery plan.")
+model ResiliencyRecoveryPlanProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Infrastructure resiliency properties for a recovery plan.")
+model InfraRecoveryPlanResiliencyProperties extends ResiliencyRecoveryPlanProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.InfraResiliency;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Cyber resiliency properties for a recovery plan.")
+model CyberRecoveryPlanResiliencyProperties extends ResiliencyRecoveryPlanProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.CyberResiliency;
+
   @added(Versions.v2026_11_30_preview)
   @doc("The subscriptions and locations where recovery is targeted. Applies only to CyberRecovery plans, for which it is required.")
   targetEnvironment?: TargetEnvironment;
