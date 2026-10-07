@@ -387,6 +387,14 @@ suppressions:
     reason: The existing VM gallery application response contract does not include provisioningState.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}"].patch.responses["200"]
+  - code: PatchResponseCodes
+    reason: The VM gallery application PATCH service contract returns 200 with the updated resource and does not return 202. Adding a 202 response would misrepresent the wire behavior and change generated SDK response handling.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}"].patch
+  - code: LroPatch202
+    reason: The VM gallery application PATCH service contract returns 200 with the updated resource and does not return 202. Adding a 202 response would misrepresent the wire behavior and change generated SDK response handling.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}"].patch
   - code: GetCollectionResponseSchema
     reason: VirtualMachineRunCommands list returns a different schema than individual get by design.
     from: ComputeRP.json
