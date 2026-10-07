@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ```yaml
 openapi-type: arm
-tag: package-2025-12-01-preview
+tag: package-2026-06-01-preview
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -102,6 +102,104 @@ directive:
   - suppress: RepeatedPathInfo
     from: authorization-DenyAssignmentCalls.json
     reason: The scope property in DenyAssignmentProperties is readOnly and returned in responses only. It does not repeat the path parameter in requests.
+  - suppress: AvoidAdditionalProperties
+    from: authorization-PrivilegedAccess.json
+    where:
+      - $.definitions.ParentResource.properties.properties
+      - $.definitions.ResourceProjection.properties.tags
+    reason: |
+      `ResourceProjection.tags` and `ParentResource.properties` are
+      pass-through, open key/value bags with no service-side validation on
+      their contents. `ResourceProjection.tags` mirrors the upstream Azure
+      resource's tags verbatim — identical semantics to the standard Azure
+      Resource Manager `TrackedResource.tags` open string map. The
+      `ParentResource.properties` bag mirrors per-scope-tier metadata from the
+      upstream Azure scope; its field set is determined by the sibling `type`
+      discriminator (`resourceGroup`, `subscription`, and future scope tiers).
+      Strong typing at the schema layer would defeat the purpose — user-defined
+      tags are arbitrary, and new scope tiers (e.g., `managementGroup`,
+      `tenant`) must be addable server-side without an API contract break or
+      SDK regeneration.
+  - suppress: LocationMustHaveXmsMutability
+    from: authorization-PrivilegedAccess.json
+    where: $.definitions.ResourceProjection.properties.location
+    reason: |
+      `ResourceProjection.location` is a response-only projection field on a
+      server-side aggregation view, not the `location` of a tracked ARM
+      resource. The `x-ms-mutability: ["read", "create"]` rule targets tracked
+      resources whose location is set on create; the projection has no PUT
+      path that accepts a location.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: authorization-PrivilegedAccess.json
+    where: $.definitions.PagedResourceProjection
+    reason: |
+      `PagedResourceProjection` is the paging envelope returned by the
+      `privilegedResources` list operation, not an ARM resource. It spreads the
+      standard `Azure.Core.Page<ResourceProjection>` shape (`value` + `nextLink`)
+      and adds the optional `count` field ($count=true). The linter heuristic
+      mis-classifies this envelope definition as a resource model. The actual ARM
+      resource invariants (id/name/type/readonly) are enforced on the page's
+      items (`ResourceProjection`), not on the envelope itself.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: authorization-PrivilegedAccess.json
+    where: $.paths['/providers/Microsoft.Authorization/privilegedResources'].get.responses['200'].schema.properties
+    reason: |
+      The optional `count` property is returned only when the caller requests
+      `$count=true`. It reports the complete post-filter cardinality before
+      pagination and is an intentional part of this API contract. Existing
+      Azure Resource Manager APIs, including Microsoft.DataLakeAnalytics
+      `Accounts_List`, use the same `$count` query and response `count` pattern.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: authorization-PrivilegedAccess.json
+    where: $.definitions.PagedRelatedResourceProjection
+    reason: |
+      `PagedRelatedResourceProjection` is the swagger-emit of
+      `Azure.Core.Page<RelatedResourceProjection>` — the paging envelope returned
+      by the `privilegedResources/{privilegedResourceId}/relatedResources` list
+      operation, not an ARM resource. The envelope is unnamed in TypeSpec
+      (inlined as the operation's return type) but the autorest emitter generates
+      a named definition; the linter heuristic mis-classifies that generated name
+      as a resource model. The actual ARM resource invariants
+      (id/name/type/readonly) are enforced on the page's items
+      (`RelatedResourceProjection`), not on the envelope itself — identical
+      treatment to `PagedResourceProjection` above.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: authorization-PrivilegedAccess.json
+    where:
+      - $.paths['/providers/Microsoft.Authorization/privilegedResourceFavorites']
+      - $.paths['/providers/Microsoft.Authorization/privilegedResourceFavorites/{favoriteId}']
+      - $.paths['/providers/Microsoft.Authorization/privilegedResources']
+      - $.paths['/providers/Microsoft.Authorization/privilegedResources/{privilegedResourceId}/relatedResources']
+    reason: |
+      `privilegedResources` returns a caller-specific view aggregated across
+      subscriptions, so subscription or resource-group scoping would prevent
+      the operation from representing the caller's complete accessible set.
+      `relatedResources` follows the same tenant-scoped parent collection.
+      `privilegedResourceFavorites` stores private per-caller state; the caller
+      identity partitions records, and favorites do not belong to an Azure
+      subscription or resource group.
+
+      Chris Stackhouse approved this tenant-level API design during ARM API
+      Modeling Office Hours on May 21, 2026. These APIs do not use
+      `allowUnauthorizedActions` and do not bypass standard Azure RBAC.
+```
+
+### Tag: package-2026-06-01-preview
+
+These settings apply only when `--tag=package-2026-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01-preview'
+input-file:
+  - stable/2015-07-01/ClassicAdmin.json
+  - preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
+  - stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
+  - preview/2024-09-01-preview/openapi.json
+  - preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+  - preview/2022-08-01-preview/RoleManagementAlerts.json
+  - preview/2025-12-01-preview/AttributeNamespaces.json
+  - preview/2026-06-01-preview/authorization-PrivilegedAccess.json
 ```
 
 ### Tag: package-2025-12-01-preview
