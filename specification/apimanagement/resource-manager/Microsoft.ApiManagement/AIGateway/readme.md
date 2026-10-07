@@ -31,17 +31,3 @@ These settings apply only when `--tag=package-preview-2026-09-01-preview` is spe
 input-file:
   - preview/2026-09-01-preview/openapi.json
 ```
-
-## Suppression
-
-```yaml
-suppressions:
-  - code: ProvisioningStateMustBeReadOnly
-    from: openapi.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}"].put.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}"].put.responses["201"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}"].patch.responses["200"].schema
-    reason: The referenced AI Gateway response schemas mark provisioningState readOnly, but the validator does not preserve the sibling readOnly annotation when resolving the enum reference.
-```

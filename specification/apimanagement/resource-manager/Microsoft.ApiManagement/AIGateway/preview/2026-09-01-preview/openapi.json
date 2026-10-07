@@ -355,7 +355,7 @@
           }
         },
         "x-ms-examples": {
-          "Update AI Gateway tags": {
+          "Update AI Gateway tags and SKU": {
             "$ref": "./examples/AiGatewayUpdate.json"
           }
         },
@@ -504,7 +504,8 @@
             "description": "The resource operation was canceled."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "AiGatewayResource": {
       "type": "object",
@@ -597,6 +598,10 @@
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       }
     }
