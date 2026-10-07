@@ -224,6 +224,10 @@ union ActionTask {
   @doc("Post-action task.")
   PostActionTask: "PostActionTask",
 
+  @added(Versions.v2026_11_30_preview)
+  @doc("Infrastructure creation task.")
+  InfraActionTask: "InfraActionTask",
+
   string,
 }
 
@@ -253,6 +257,14 @@ model ExecutionConfigurations {
   @added(Versions.v2026_03_01_preview)
   @doc("User consent for performing recovery action.")
   userConsent: UserConsent;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Whether execution continues when a recovery group fails.")
+  continueOnGroupFailure?: boolean;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The maximum number of restore operations that can run in parallel per recovery group.")
+  maxParallelRestoresPerGroup?: int32;
 }
 
 @doc("Additional properties for Failover.")
@@ -330,6 +342,14 @@ union ResourceProtectionSolutionType {
   @added(Versions.v2026_10_31_preview)
   @doc("Resource is protected with Azure Cosmos DB multiregion replication using customer-managed failover, where recovery promotes a secondary region to the write region.")
   AzureCosmosDB: "AzureCosmosDB",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Resource is protected with Azure Backup.")
+  AzureBackup: "AzureBackup",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Resource is protected with Azure Backup Vault.")
+  AzureBackupVault: "AzureBackupVault",
 
   string,
 }

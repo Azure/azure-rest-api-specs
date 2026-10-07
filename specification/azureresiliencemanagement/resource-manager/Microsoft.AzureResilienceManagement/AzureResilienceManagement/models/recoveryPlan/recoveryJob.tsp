@@ -10,6 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using OpenAPI;
+using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
@@ -23,6 +24,52 @@ model RecoveryJobProperties extends JobProperties {
   @doc("The provisioning state of the recovery job.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Properties specific to a cyber recovery job.")
+  cyberRecoveryJobProperties?: CyberRecoveryJobProperties;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Properties specific to a cyber recovery job.")
+model CyberRecoveryJobProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the completed create-infrastructure job used by this restore job.")
+  @visibility(Lifecycle.Read)
+  createInfraJobId?: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The recovery point selection recorded for this job.")
+  @visibility(Lifecycle.Read)
+  recoveryPointSelectionProperties?: RecoveryPointSelectionProperties;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Recovery point selection criteria recorded for a restore job.")
+model RecoveryPointSelectionProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The selection kind, such as TimeRange, Latest, or Specific.")
+  selectedListType: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The inclusive start of the recovery point time range.")
+  startTime?: utcDateTime;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The inclusive end of the recovery point time range.")
+  endTime?: utcDateTime;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Resource inclusion or exclusion criteria recorded for a recovery job.")
+model ResourceSelectionProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The selection kind, either Inclusion or Exclusion.")
+  selectedListType: string = "Exclusion";
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifiers selected for the operation.")
+  selectedResourceIds?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"

@@ -36,6 +36,91 @@ model RecoveryJobResourceProperties extends JobResourceProperties {
   @doc("The recovery action settings.")
   @visibility(Lifecycle.Read)
   recoveryGroupActionSettings?: RecoveryGroupActionSettings;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Properties specific to a cyber recovery job resource.")
+  cyberRecoveryJobResourceProperties?: CyberRecoveryJobResourceProperties;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Properties specific to a cyber recovery job resource.")
+model CyberRecoveryJobResourceProperties {
+  @added(Versions.v2026_11_30_preview)
+  @identifiers(#["resourceId"])
+  @doc("The infrastructure resources created for this job resource.")
+  @visibility(Lifecycle.Read)
+  createdResources?: InfrastructureCreatedResource[];
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The restore tracking details for this job resource.")
+  @visibility(Lifecycle.Read)
+  restoreDetails?: RestoreJobResourceDetails;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The recovery group identifier associated with this job resource.")
+  @visibility(Lifecycle.Read)
+  recoveryGroupId?: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The order of the recovery group associated with this job resource.")
+  @visibility(Lifecycle.Read)
+  recoveryGroupOrderId?: int32;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("An infrastructure resource created during cyber recovery.")
+model InfrastructureCreatedResource {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the recovery resource.")
+  recoveryResourceId: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The profile property path that produced the resource.")
+  propertyPath: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The full Azure resource type.")
+  resourceType: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the created resource.")
+  resourceId: string;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Restore tracking details for a recovery job resource.")
+model RestoreJobResourceDetails {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the source vault.")
+  sourceVaultId: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the mapped vault.")
+  mappedVaultId: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The backup instance identifier.")
+  backupInstanceId: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The backup job identifier.")
+  backupJobId: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The recovery point identifier.")
+  recoveryPointId: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the restored target.")
+  targetArmId: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The current restore state.")
+  restoreState: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The serialized recovery configuration profile snapshot.")
+  configProfileSnapshot: string;
 }
 
 @added(Versions.v2026_03_01_preview)

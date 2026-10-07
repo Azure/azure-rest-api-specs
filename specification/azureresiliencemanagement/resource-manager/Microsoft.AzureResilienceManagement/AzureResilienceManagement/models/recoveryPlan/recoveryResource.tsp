@@ -95,6 +95,63 @@ model RecoveryResourceProperties {
   @doc("Error details associated with the resource.")
   @visibility(Lifecycle.Read)
   errorDetails?: CommonTypes.ErrorDetail;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Properties specific to a cyber recovery resource.")
+  cyberRecoveryResourceProperties?: CyberRecoveryResourceProperties;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Properties specific to a cyber recovery resource.")
+model CyberRecoveryResourceProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The workload type of the Azure resource linked to the recovery resource.")
+  @visibility(Lifecycle.Read)
+  resourceType?: WorkloadType;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifiers of the backup vaults protecting the resource.")
+  @visibility(Lifecycle.Read)
+  vaultResourceIds?: string[];
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifiers of the target-tenant mapped backup vaults.")
+  @visibility(Lifecycle.Read)
+  ctrVaultResourceIds?: string[];
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the container for a non-Azure-resource child.")
+  @visibility(Lifecycle.Read)
+  containerResourceId?: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The service group member identifiers through which this resource was discovered.")
+  @visibility(Lifecycle.Read)
+  membershipThroughServiceGroupMembers?: string[];
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the per-resource recovery configuration profile override.")
+  recoveryConfigProfileId?: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The identifiers of the protected items in the backup vaults.")
+  @visibility(Lifecycle.Read)
+  protectedItemIds?: string[];
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The current backup protection state.")
+  @visibility(Lifecycle.Read)
+  protectionState?: string;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Indicates whether the resource can be included for the configured targets.")
+  @visibility(Lifecycle.Read)
+  canBeIncluded?: boolean = false;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The target locations that support recovery of this resource.")
+  @visibility(Lifecycle.Read)
+  supportedTargetLocations?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
