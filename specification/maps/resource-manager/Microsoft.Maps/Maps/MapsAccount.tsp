@@ -98,20 +98,18 @@ interface Accounts {
   /**
    * Delete a Maps Account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The RP returns 200 when deletion completes synchronously, 202 when deletion continues asynchronously, and 204 when the resource does not exist."
   @added(Versions.v2026_12_01)
   @sharedRoute
   @Azure.Core.useFinalStateVia("location")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The RP returns 200 when deletion completes synchronously, 202 when deletion continues asynchronously, and 204 when the resource does not exist."
   delete is ArmResourceDeleteWithoutOkAsync<
     MapsAccount,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader,
     Response =
       | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<
-          ArmCombinedLroHeaders<FinalResult = void> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
       | ArmDeletedNoContentResponse
   >;
 

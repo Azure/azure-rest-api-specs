@@ -221,7 +221,7 @@ model MapsAccountUpdateParametersV1 {
   /**
    * Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The previously published API version exposes PATCH tags as a free-form string map. This legacy versioned model preserves that existing wire contract. The 2026-12-01 model uses the standard ARM tags property."
   tags?: Record<string>;
 
   /**
@@ -327,9 +327,9 @@ model MapsAccountSasToken {
   /**
    * The shared access signature access token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The previously published API version did not mark this property as secret. This legacy versioned property preserves the existing generated contract. The 2026-12-01 replacement property is marked with @secret."
   @removed(Versions.v2026_12_01)
   @renamedFrom(Versions.v2026_12_01, "accountSasToken")
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   accountSasTokenV1?: string;
 
@@ -355,9 +355,9 @@ model MapsAccountKeys {
   /**
    * The primary key for accessing the Maps REST APIs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The previously published API version did not mark this property as secret. This legacy versioned property preserves the existing generated contract. The 2026-12-01 replacement property is marked with @secret."
   @removed(Versions.v2026_12_01)
   @renamedFrom(Versions.v2026_12_01, "primaryKey")
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   primaryKeyV1?: string;
 
@@ -372,9 +372,9 @@ model MapsAccountKeys {
   /**
    * The secondary key for accessing the Maps REST APIs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The previously published API version did not mark this property as secret. This legacy versioned property preserves the existing generated contract. The 2026-12-01 replacement property is marked with @secret."
   @removed(Versions.v2026_12_01)
   @renamedFrom(Versions.v2026_12_01, "secondaryKey")
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   secondaryKeyV1?: string;
 
