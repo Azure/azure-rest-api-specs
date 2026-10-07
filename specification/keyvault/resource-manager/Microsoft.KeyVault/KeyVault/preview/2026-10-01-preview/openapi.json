@@ -52,6 +52,9 @@
       "name": "PrivateEndpointConnections"
     },
     {
+      "name": "NetworkSecurityPerimeterConfigurations"
+    },
+    {
       "name": "ManagedHsms"
     },
     {
@@ -2163,6 +2166,158 @@
         "x-ms-examples": {
           "Get a key version": {
             "$ref": "./examples/getKeyVersion.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_ListConfigurations",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Lists the network security perimeter configurations associated with a key vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the vault.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the network security perimeter configurations of a vault": {
+            "$ref": "./examples/listNetworkSecurityPerimeterConfigurations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_GetConfiguration",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets the specified network security perimeter configuration for a key vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkSecurityPerimeterConfigurationName",
+            "in": "path",
+            "description": "The name of the NetworkSecurityPerimeterConfiguration",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve the network security perimeter configuration of a vault": {
+            "$ref": "./examples/getNetworkSecurityPerimeterConfiguration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
+      "post": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_ReconcileConfiguration",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Reconciles the specified network security perimeter configuration for a key vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkSecurityPerimeterConfigurationName",
+            "in": "path",
+            "description": "The name of the NetworkSecurityPerimeterConfiguration",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reconcile the network security perimeter configuration of a vault": {
+            "$ref": "./examples/reconcileNetworkSecurityPerimeter.json"
           }
         }
       }
