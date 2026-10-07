@@ -31,7 +31,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/recoveryservices"
     emitter-output-dir: "{output-dir}/{service-dir}/armrecoveryservices"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecoveryservices/v3"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecoveryservices"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -41,6 +41,11 @@ options:
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.RecoveryServices"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.RecoveryServices"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2026-05-01"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

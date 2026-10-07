@@ -95,10 +95,9 @@ interface ProtectionContainerMappings {
   delete is ArmResourceActionAsyncBase<
     ProtectionContainerMapping,
     RemoveProtectionContainerMappingInput,
-
-      | NoContentResponse
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    | NoContentResponse
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+        Azure.Core.Foundations.RetryAfterHeader>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ProtectionContainerMapping>,
     Error = never
   >;

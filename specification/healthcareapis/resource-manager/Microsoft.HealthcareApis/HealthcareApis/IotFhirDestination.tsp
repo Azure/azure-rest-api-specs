@@ -15,8 +15,10 @@ namespace Microsoft.HealthcareApis;
  * IoT Connector FHIR destination definition.
  */
 @parentResource(IotConnector)
-model IotFhirDestination
-  is Azure.ResourceManager.ProxyResource<IotFhirDestinationProperties, false> {
+model IotFhirDestination is Azure.ResourceManager.ProxyResource<
+  IotFhirDestinationProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = IotFhirDestination,
     KeyName = "fhirDestinationName",

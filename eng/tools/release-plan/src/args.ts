@@ -14,7 +14,7 @@ export function parseCliArguments(argv: string[] = process.argv.slice(2)): CliAr
         type: "string",
         short: "c",
       },
-      "pr-number": {
+      "release-plan-id": {
         type: "string",
       },
       repo: {
@@ -26,9 +26,6 @@ export function parseCliArguments(argv: string[] = process.argv.slice(2)): CliAr
         type: "string",
         short: "w",
         default: process.cwd(),
-      },
-      "azsdk-path": {
-        type: "string",
       },
       "output-file": {
         type: "string",
@@ -55,15 +52,10 @@ export function parseCliArguments(argv: string[] = process.argv.slice(2)): CliAr
   }
 
   const commitSha = String(values["commit-sha"] ?? "").trim() || undefined;
-  const prNumberRaw = String(values["pr-number"] ?? "").trim();
-  const prNumber = prNumberRaw ? parseInt(prNumberRaw, 10) : undefined;
+  const releasePlanId = String(values["release-plan-id"] ?? "").trim() || undefined;
 
-  if (!commitSha && !prNumber) {
-    throw new Error("Either --commit-sha or --pr-number is required.");
-  }
-
-  if (prNumber && isNaN(prNumber)) {
-    throw new Error("--pr-number must be a valid number.");
+  if (!releasePlanId && !commitSha) {
+    throw new Error("One of --release-plan-id or --commit-sha is required.");
   }
 
   const repoRaw = String(values.repo ?? "").trim();
@@ -73,7 +65,6 @@ export function parseCliArguments(argv: string[] = process.argv.slice(2)): CliAr
   }
 
   const workspace = path.resolve(String(values.workspace ?? process.cwd()));
-  const azsdkPath = String(values["azsdk-path"] ?? "").trim() || undefined;
   const outputFile = String(values["output-file"] ?? "").trim() || undefined;
   const testReleaseRaw = String(values["test-release-plan"] ?? "false")
     .trim()
@@ -85,11 +76,10 @@ export function parseCliArguments(argv: string[] = process.argv.slice(2)): CliAr
 
   return {
     commitSha,
-    prNumber,
+    releasePlanId,
     owner,
     repo,
     workspace,
-    azsdkPath,
     outputFile,
     testReleasePlan,
   };
@@ -99,16 +89,16 @@ function showHelp(): void {
   console.log("Release Plan Tool");
   console.log("");
   console.log("Usage:");
-  console.log("  release-plan [--commit-sha <sha> | --pr-number <number>] [options]");
+  console.log("  release-plan [--release-plan-id <id> | --commit-sha <sha>] [options]");
   console.log("");
   console.log("Options:");
   console.log("  -c, --commit-sha      Commit SHA to resolve PR or analyze changed files");
   console.log(
-    "      --pr-number       PR number to analyze directly (alternative to --commit-sha)",
+    "      --release-plan-id Get an existing release plan directly; skips discovery and creation",
   );
   console.log("  -r, --repo            GitHub repository in owner/repo format");
   console.log("  -w, --workspace       Path to local repo root (default: cwd)");
-  console.log("      --azsdk-path      Absolute path to the azsdk executable");
+  console.log("                        Uses AZSDK environment variable for the azsdk executable");
   console.log("      --output-file     Write JSON result to this file path");
   console.log(
     "      --test-release-plan  Create release plan as test (true|false, default: false)",

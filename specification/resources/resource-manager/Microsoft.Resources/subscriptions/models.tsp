@@ -561,6 +561,7 @@ model TenantIdDescription {
   /**
    * The tenant's branding logo URL. Only available for 'Home' tenant category.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   tenantBrandingLogoUrl?: string;
 }
@@ -568,6 +569,7 @@ model TenantIdDescription {
 /**
  * Check zone peers request parameters.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CheckZonePeersRequest {
   /**
    * The Microsoft location.

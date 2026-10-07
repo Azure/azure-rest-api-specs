@@ -13,6 +13,11 @@ using Microsoft.Chaos;
 @@clientName(PrivateAccess, "ChaosPrivateAccess", "csharp");
 @@clientName(PrivateAccessPatch, "ChaosPrivateAccessPatch", "csharp");
 @@clientName(PrivateAccessProperties, "ChaosPrivateAccessProperties", "csharp");
+@@clientName(Connection, "ChaosConnection", "csharp");
+@@clientName(ConnectionProperties, "ChaosConnectionProperties", "csharp");
+@@clientName(ConnectionKind, "ChaosConnectionKind", "csharp");
+@@clientName(ConnectionStatus, "ChaosConnectionStatus", "csharp");
+@@clientName(ConnectionListResult, "ChaosConnectionListResult", "csharp");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
 @@clientName(Experiment, "ChaosExperiment", "csharp");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
@@ -80,6 +85,11 @@ using Microsoft.Chaos;
   "ChaosActionSupportedTargetType",
   "csharp"
 );
+
+// 2026-08-01-preview: `resultsV2` is the TypeSpec property name (renamed to avoid
+// collision with the legacy `results: ScenarioEvaluationResultItem[]`), but the
+// wire format is `results` via @encodedName and SDKs should expose it as `Results`.
+@@clientName(WorkspaceEvaluationProperties.resultsV2, "Results");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "update base model for SDK backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(

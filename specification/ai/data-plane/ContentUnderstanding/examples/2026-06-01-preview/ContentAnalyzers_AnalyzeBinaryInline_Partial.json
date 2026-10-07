@@ -1,0 +1,42 @@
+{
+  "title": "Analyze File Inline with Partial Processing",
+  "operationId": "ContentAnalyzers_AnalyzeBinaryInline",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "analyzerId": "prebuilt-layout",
+    "input": "RXhhbXBsZSBGaWxl",
+    "allowInputTruncation": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded",
+        "result": {
+          "analyzerId": "prebuilt-layout",
+          "apiVersion": "2026-06-01-preview",
+          "createdAt": "2026-07-01T18:46:36.244Z",
+          "warnings": [
+            {
+              "code": "InputExceededLimit",
+              "message": "The input exceeded the inline page limit; only pages 1-5 were analyzed. See https://aka.ms/cu-doc-limits.",
+              "target": "input"
+            }
+          ],
+          "contents": [
+            {
+              "kind": "document",
+              "mimeType": "application/pdf",
+              "markdown": "# CONTOSO\n\n...",
+              "startPageNumber": 1,
+              "endPageNumber": 5,
+              "unit": "inch"
+            }
+          ]
+        },
+        "usage": {
+          "documentPagesStandardInline": 5
+        }
+      }
+    }
+  }
+}

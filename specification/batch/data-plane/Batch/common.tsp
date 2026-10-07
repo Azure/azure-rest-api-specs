@@ -392,7 +392,7 @@ alias CommonParameters = {
     The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.".
     """)
   @query
-  @clientName("timeOut", "java")
+  @clientName("timeout", "java")
   @clientName("timeout", "go,csharp")
   @clientName("service_timeout", "python")
   @encode("seconds", int32)
@@ -449,6 +449,7 @@ alias ListPoolUsageMetricsOptionalParameters = {
     """)
   @query
   @clientName("end_time", "python")
+  @clientName("endTime", "java")
   endtime?: utcDateTime;
 
   @doc("""
@@ -1102,6 +1103,7 @@ alias DeleteNodeUserRequiredParameters = {
   nodeId: string;
 
   @doc("The name of the user Account to delete.")
+  @clientName("username", "java")
   @path
   userName: string;
 };
@@ -1122,6 +1124,7 @@ alias ReplaceNodeUserRequiredParameters = {
   nodeId: string;
 
   @doc("The name of the user Account to update.")
+  @clientName("username", "java")
   @path
   userName: string;
 

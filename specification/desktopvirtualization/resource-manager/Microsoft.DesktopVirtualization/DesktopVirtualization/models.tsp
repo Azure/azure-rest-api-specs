@@ -1497,6 +1497,7 @@ model AppAttachPackageProperties {
    * Lookback url to third party control plane, is null for native app attach packages
    * @Introduced in 2024-03-06-preview
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @added(Versions.vLatestPreview)
   packageLookbackUrl?: url;
 
@@ -2113,6 +2114,7 @@ model ActiveSessionHostConfigurationProperties {
   /**
    * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   customConfigurationScriptUrl?: url;
 
   /**
@@ -2935,8 +2937,9 @@ model ScalingSchedule {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @added(Versions.vLatestPreview)
-  createDelete?: CreateDeleteProperties;
+  createDelete?: CreateDeleteProperties | null;
 
   /**
    * Starting time for ramp up period.
@@ -3031,39 +3034,37 @@ model ScalingSchedule {
  * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
  * @Introduced in 2024-11-01-preview
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi"
 @added(Versions.vLatestPreview)
-@OpenAPI.extension("x-nullable", true)
 model CreateDeleteProperties {
   /**
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @minValue(0)
-  @OpenAPI.extension("x-nullable", true)
-  rampUpMaximumHostPoolSize?: int32;
+  rampUpMaximumHostPoolSize?: int32 | null;
 
   /**
    * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @minValue(0)
   @maxValue(59)
-  @OpenAPI.extension("x-nullable", true)
-  rampUpMinimumHostPoolSize?: int32;
+  rampUpMinimumHostPoolSize?: int32 | null;
 
   /**
    * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @minValue(0)
-  @OpenAPI.extension("x-nullable", true)
-  rampDownMaximumHostPoolSize?: int32;
+  rampDownMaximumHostPoolSize?: int32 | null;
 
   /**
    * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @minValue(0)
   @maxValue(59)
-  @OpenAPI.extension("x-nullable", true)
-  rampDownMinimumHostPoolSize?: int32;
+  rampDownMinimumHostPoolSize?: int32 | null;
 }
 
 /**
@@ -3222,6 +3223,7 @@ model AppAttachPackagePatchProperties {
    * Lookback url to third party control plane, is null for native app attach packages
    * @Introduced in 2024-03-06-preview
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @added(Versions.vLatestPreview)
   packageLookbackUrl?: url;
 
@@ -3657,10 +3659,6 @@ model HostPoolProvisioningControlParameter {
   cancelMessage?: string;
 }
 
-@@added(HostPoolPatch.identity, Versions.vLatestPreview);
-#suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(HostPoolPatch.identity, "x-nullable", true);
-
 /**
  * HostPool properties that can be patched.
  */
@@ -3679,9 +3677,11 @@ model HostPoolPatch extends Azure.ResourceManager.CommonTypes.Resource {
   properties?: HostPoolPatchProperties;
 
   /**
-   * Managed service identity (system assigned and/or user assigned identities)
+   * The managed service identities assigned to this resource.
    */
-  ...ManagedServiceIdentityProperty;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
+  @added(Versions.vLatestPreview)
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity | null;
 }
 
 /**
@@ -4776,8 +4776,9 @@ model ScalingPlanPooledScheduleProperties {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @added(Versions.vLatestPreview)
-  createDelete?: CreateDeleteProperties;
+  createDelete?: CreateDeleteProperties | null;
 
   /**
    * Starting time for ramp up period.
@@ -4897,8 +4898,9 @@ model ScalingPlanPooledSchedulePatchProperties {
    * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
    * @Introduced in 2024-11-01-preview
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
   @added(Versions.vLatestPreview)
-  createDelete?: CreateDeleteProperties;
+  createDelete?: CreateDeleteProperties | null;
 
   /**
    * Starting time for ramp up period.
@@ -5114,6 +5116,7 @@ model SessionHostConfigurationProperties {
   /**
    * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   customConfigurationScriptUrl?: url;
 
   /**
@@ -5200,6 +5203,7 @@ model SessionHostConfigurationPatchProperties {
   /**
    * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   customConfigurationScriptUrl?: url;
 
   /**

@@ -20,6 +20,7 @@ interface RuntimeRegistration {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
   #suppress "@azure-tools/typespec-azure-core/polling-operation-no-status-monitor" "The DPS device API uses a non-standard LRO pattern; status field is on the nested RegistrationOperationStatus body"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @removed(Versions.v2025_07_01_preview)
   @sharedRoute
   @extension("x-ms-long-running-operation", true)
@@ -44,22 +45,21 @@ interface RuntimeRegistration {
       @path
       idScope: string;
     },
+    | {
+        @statusCode _: 200;
+        @body body: RegistrationOperationStatus;
+      }
+    | {
+        @statusCode _: 202;
 
-      | {
-          @statusCode _: 200;
-          @body body: RegistrationOperationStatus;
-        }
-      | {
-          @statusCode _: 202;
+        @header("retry-after")
+        retryAfter?: int32;
 
-          @header("retry-after")
-          retryAfter?: int32;
+        @header("Location")
+        location?: string;
 
-          @header("Location")
-          location?: string;
-
-          @body body: RegistrationOperationStatus;
-        },
+        @body body: RegistrationOperationStatus;
+      },
     {},
     ProvisioningServiceErrorDetails
   >;
@@ -95,22 +95,21 @@ interface RuntimeRegistration {
       @path
       idScope: string;
     },
+    | {
+        @statusCode _: 200;
+        @body body: RegistrationOperationStatus;
+      }
+    | {
+        @statusCode _: 202;
 
-      | {
-          @statusCode _: 200;
-          @body body: RegistrationOperationStatus;
-        }
-      | {
-          @statusCode _: 202;
+        @header("retry-after")
+        retryAfter?: int32;
 
-          @header("retry-after")
-          retryAfter?: int32;
+        @header("Location")
+        location?: string;
 
-          @header("Location")
-          location?: string;
-
-          @body body: RegistrationOperationStatus;
-        },
+        @body body: RegistrationOperationStatus;
+      },
     {},
     ProvisioningServiceErrorDetails
   >;
@@ -151,6 +150,7 @@ interface RuntimeRegistration {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving x-ms-long-running-operation extension for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @removed(Versions.v2025_07_01_preview)
   @sharedRoute
   @extension("x-ms-long-running-operation", true)
@@ -176,22 +176,21 @@ interface RuntimeRegistration {
       @bodyRoot
       body: DeviceRegistration;
     },
+    | {
+        @statusCode _: 200;
+        @body body: RegistrationOperationStatus;
+      }
+    | {
+        @statusCode _: 202;
 
-      | {
-          @statusCode _: 200;
-          @body body: RegistrationOperationStatus;
-        }
-      | {
-          @statusCode _: 202;
+        @header("retry-after")
+        retryAfter?: int32;
 
-          @header("retry-after")
-          retryAfter?: int32;
+        @header("Location")
+        location?: string;
 
-          @header("Location")
-          location?: string;
-
-          @body body: RegistrationOperationStatus;
-        },
+        @body body: RegistrationOperationStatus;
+      },
     {},
     ProvisioningServiceErrorDetails
   >;
@@ -202,6 +201,7 @@ interface RuntimeRegistration {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId and x-ms-long-running-operation extension for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @added(Versions.v2025_07_01_preview)
   @sharedRoute
   @extension("x-ms-long-running-operation", true)
@@ -224,25 +224,143 @@ interface RuntimeRegistration {
       /**
        * Device registration request.
        */
+      @renamedFrom(Versions.v2026_11_01, "deviceRegistration")
       @bodyRoot
-      deviceRegistration: DeviceRegistration;
+      body: DeviceRegistration;
     },
+    | {
+        @statusCode _: 200;
+        @body body: RegistrationOperationStatus;
+      }
+    | {
+        @statusCode _: 202;
 
-      | {
-          @statusCode _: 200;
-          @body body: RegistrationOperationStatus;
-        }
-      | {
-          @statusCode _: 202;
+        @header("retry-after")
+        retryAfter?: int32;
 
-          @header("retry-after")
-          retryAfter?: int32;
+        @header("Location")
+        location?: string;
 
-          @header("Location")
-          location?: string;
+        @body body: RegistrationOperationStatus;
+      },
+    {},
+    ProvisioningServiceErrorDetails
+  >;
+}
 
-          @body body: RegistrationOperationStatus;
-        },
+/**
+ * Device-facing ADU (Azure Device Update) integration operations. Added in
+ * 2026-11-02-preview. The device selects the endpoint by its own provisioning
+ * state: the onboarding/bootstrap fetch before it is provisioned, the
+ * regular/operational fetch afterwards. DPS is a thin pass-through to ADR (which
+ * forwards to ADU) and does not branch on the update family or parse the manifest.
+ *
+ * Errors from ADU are surfaced verbatim: ADU's machine-readable `error.code`
+ * string (for example `UPDATE_ACCOUNT_NOT_LINKED`, `UNKNOWN_WORKFLOW_ID`,
+ * `UNSUPPORTED_API_VERSION`) is returned in the `x-ms-error-code` response
+ * header, and is also mirrored in the error body `info` dictionary under the key
+ * `aduErrorCode` (plus `aduErrorTarget` when ADU identifies a specific request
+ * element). The device should drive its behavior from that code, not the HTTP
+ * status, since a single status can map to several ADU codes.
+ */
+@added(Versions.v2026_11_02_preview)
+interface DeviceUpdate {
+  /**
+   * Checks for an available device update on the regular / operational path. The
+   * device selects this endpoint once it is provisioned.
+   *
+   * On failure, ADU's `error.code` string is returned verbatim in the
+   * `x-ms-error-code` header and mirrored in the error body `info` dictionary
+   * under `aduErrorCode` (plus `aduErrorTarget` when applicable). Devices should
+   * branch on that code rather than the HTTP status.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name mirrors the ADU device contract for pass-through compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using Foundations.Operation for consistency with the existing DPS device API"
+  @summary("Checks for an available device update (regular / operational path).")
+  @route("/{idScope}/registrations/{registrationId}/requestSoftwareUpdates")
+  @post
+  requestSoftwareUpdates is Azure.Core.Foundations.Operation<
+    {
+      /** The registration ID is alphanumeric, lowercase, and may contain hyphens. */
+      @path
+      registrationId: string;
+
+      /** The scope of the DPS instance. */
+      @path
+      idScope: string;
+
+      /** Update check request. */
+      @bodyRoot
+      body: UpdateCheckRequest;
+    },
+    UpdateCheckResponse,
+    {},
+    ProvisioningServiceErrorDetails
+  >;
+
+  /**
+   * Checks for an available device update on the onboarding / bootstrap path. The
+   * device selects this endpoint before it is provisioned; only the external device
+   * identifier is available (no ADR device UUID yet).
+   *
+   * On failure, ADU's `error.code` string is returned verbatim in the
+   * `x-ms-error-code` header and mirrored in the error body `info` dictionary
+   * under `aduErrorCode` (plus `aduErrorTarget` when applicable). Devices should
+   * branch on that code rather than the HTTP status.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name mirrors the ADU device contract for pass-through compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using Foundations.Operation for consistency with the existing DPS device API"
+  @summary("Checks for an available device update (onboarding / bootstrap path).")
+  @route("/{idScope}/registrations/{registrationId}/requestOnboardingUpdates")
+  @post
+  requestOnboardingUpdates is Azure.Core.Foundations.Operation<
+    {
+      /** The registration ID is alphanumeric, lowercase, and may contain hyphens. */
+      @path
+      registrationId: string;
+
+      /** The scope of the DPS instance. */
+      @path
+      idScope: string;
+
+      /** Update check request. */
+      @bodyRoot
+      body: UpdateCheckRequest;
+    },
+    UpdateCheckResponse,
+    {},
+    ProvisioningServiceErrorDetails
+  >;
+
+  /**
+   * Reports the terminal result of a device update installation. Idempotent on
+   * workflowId; ADU routes the report to the correct update family.
+   *
+   * On failure, ADU's `error.code` string is returned verbatim in the
+   * `x-ms-error-code` header and mirrored in the error body `info` dictionary
+   * under `aduErrorCode` (plus `aduErrorTarget` when applicable). Devices should
+   * branch on that code rather than the HTTP status.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name mirrors the ADU device contract for pass-through compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using Foundations.Operation for consistency with the existing DPS device API"
+  @summary("Reports the terminal result of a device update installation.")
+  @route("/{idScope}/registrations/{registrationId}/reportUpdateStatus")
+  @post
+  reportUpdateStatus is Azure.Core.Foundations.Operation<
+    {
+      /** The registration ID is alphanumeric, lowercase, and may contain hyphens. */
+      @path
+      registrationId: string;
+
+      /** The scope of the DPS instance. */
+      @path
+      idScope: string;
+
+      /** Status report request. */
+      @bodyRoot
+      body: ReportStatusRequest;
+    },
+    ReportUpdateStatusResult,
     {},
     ProvisioningServiceErrorDetails
   >;

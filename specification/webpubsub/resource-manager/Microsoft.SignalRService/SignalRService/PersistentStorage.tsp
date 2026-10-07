@@ -15,8 +15,10 @@ namespace Microsoft.SignalRService;
  * A persistent storage
  */
 @parentResource(WebPubSubResource)
-model PersistentStorage
-  is Azure.ResourceManager.ProxyResource<PersistentStorageProperties, false> {
+model PersistentStorage is Azure.ResourceManager.ProxyResource<
+  PersistentStorageProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = PersistentStorage,
     KeyName = "name",

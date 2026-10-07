@@ -25,8 +25,10 @@ model AssessedSqlDatabaseV3 is ProxyResource<AssessedSqlDatabaseV3Properties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AvsAssessedMachine doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
 @doc("Assessed SQL database properties web model.")
-model AssessedSqlDatabaseV3Properties
-  is AssessedWorkloadProperties<Linkages, SqlEntityRecommendations> {
+model AssessedSqlDatabaseV3Properties is AssessedWorkloadProperties<
+  Linkages,
+  SqlEntityRecommendations
+> {
   @doc("The sql db extended details.")
   @visibility(Lifecycle.Read)
   extendedDetails?: SqlDbExtendedDetails;
@@ -41,6 +43,7 @@ model AssessedSqlDatabaseV3Properties
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to mention MegaBytes and hence used GB, Mb would give Gigabits"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("The sql db source information")
 model SqlDbExtendedDetails {
   @doc("The linked availability group overview.")

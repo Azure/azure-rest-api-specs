@@ -21,8 +21,10 @@ model AssessedSqlInstanceV3 is ProxyResource<AssessedSqlInstanceV3Properties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AvsAssessedMachine doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
 @doc("Assessed SQL instance properties web model.")
-model AssessedSqlInstanceV3Properties
-  is AssessedWorkloadProperties<Linkages, SqlEntityRecommendations> {
+model AssessedSqlInstanceV3Properties is AssessedWorkloadProperties<
+  Linkages,
+  SqlEntityRecommendations
+> {
   @doc("The sql instance extended details.")
   @visibility(Lifecycle.Read)
   extendedDetails?: SqlInstanceExtendedDetails;

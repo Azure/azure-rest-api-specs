@@ -11,12 +11,11 @@ import type {
 } from "./types.ts";
 
 /**
- * Create a runner that invokes azsdk from a specific executable path.
- * @param azsdkPath Optional full path to the azsdk executable
+ * Create a runner that invokes azsdk using the AZSDK environment variable when present.
  * @returns Runner function that executes azsdk commands
  */
-export function createAzdskRunner(azsdkPath?: string): AzsdkRunner {
-  return (args: string[]) => runAzdskCommand(args, azsdkPath);
+export function createAzdskRunner(): AzsdkRunner {
+  return (args: string[]) => runAzdskCommand(args);
 }
 
 /**
@@ -31,7 +30,7 @@ export function ensureReleasePlan(
   allowCreate = true,
 ): EnsureReleasePlanResult {
   if (context.prUrl) {
-    const existingByPr = runGetReleasePlanByPr(context.prUrl, runner);
+    const existingByPr = runGetReleasePlanByPr(context.prUrl, context.apiReleaseType, runner);
     if (existingByPr) {
       return {
         outcome: "existing_by_pr",
@@ -43,6 +42,7 @@ export function ensureReleasePlan(
 
   const existingByPath = runGetReleasePlanByPath(
     context.tspProjectPath,
+    context.apiVersion,
     context.apiReleaseType,
     runner,
   );
@@ -80,6 +80,7 @@ function buildDetails(context: ReleasePlanCommandContext): EnsureReleasePlanResu
     prUrl: context.prUrl ?? "",
     tspProjectPath: context.tspProjectPath,
     apiVersion: context.apiVersion,
+    specCommitSha: context.specCommitSha,
     apiReleaseType: context.apiReleaseType,
     sdkReleaseType: context.sdkReleaseType,
     targetReleaseMonth: context.targetMonth,
@@ -87,25 +88,41 @@ function buildDetails(context: ReleasePlanCommandContext): EnsureReleasePlanResu
 }
 
 /**
- * Retrieves release plan by pull request URL.
+ * Retrieves release plan by pull request URL and API release type.
  * @param prUrl GitHub PR URL (e.g., https://github.com/owner/repo/pull/123)
+ * @param apiReleaseType API release type to match
  * @param runner Function to execute azsdk commands
  * @returns Release plan object if found, null if not found or error occurred
  */
-function runGetReleasePlanByPr(prUrl: string, runner: AzsdkRunner): ReleasePlanData | null {
-  const args = ["release-plan", "get", "--pull-request", prUrl, "--output", "json"];
+function runGetReleasePlanByPr(
+  prUrl: string,
+  apiReleaseType: ApiReleaseType,
+  runner: AzsdkRunner,
+): ReleasePlanData | null {
+  const args = [
+    "release-plan",
+    "get",
+    "--pull-request",
+    prUrl,
+    "--api-release-type",
+    apiReleaseType,
+    "--output",
+    "json",
+  ];
   return parseReleasePlanResult(runner(args));
 }
 
 /**
- * Retrieves release plan by TypeSpec project path and API release type.
+ * Retrieves release plan by TypeSpec project path, API version, and API release type.
  * @param tspProjectPath Path to TypeSpec project (relative to workspace)
+ * @param apiVersion API version to match
  * @param apiReleaseType API release type (Private Preview, Public Preview, or GA)
  * @param runner Function to execute azsdk commands
  * @returns Release plan object if found, null if not found or error occurred
  */
 function runGetReleasePlanByPath(
   tspProjectPath: string,
+  apiVersion: string,
   apiReleaseType: ApiReleaseType,
   runner: AzsdkRunner,
 ): ReleasePlanData | null {
@@ -114,6 +131,8 @@ function runGetReleasePlanByPath(
     "get",
     "--typespec-path",
     tspProjectPath,
+    "--api-version",
+    apiVersion,
     "--api-release-type",
     apiReleaseType,
     "--output",
@@ -170,16 +189,15 @@ function runCreateReleasePlan(
     context.tspProjectPath,
     "--api-release-type",
     context.apiReleaseType,
-    "--sdk-type",
-    context.sdkReleaseType,
     "--release-month",
     context.targetMonth,
     "--pull-request",
     context.prUrl,
-    "--force",
-    "false",
     "--test-release",
     String(context.testReleasePlan),
+    ...(context.apiReleaseType === "Private Preview"
+      ? []
+      : ["--spec-commit-sha", context.specCommitSha]),
     "--output",
     "json",
   ];
@@ -203,15 +221,14 @@ function runCreateReleasePlan(
 /**
  * Run azsdk command synchronously.
  * @param args Command arguments to pass to azsdk
- * @param azsdkPath Optional full path to the azsdk executable
  * @returns Command execution result with exit code and output
  */
-export function runAzdskCommand(args: string[], azsdkPath?: string): CommandResult {
+export function runAzdskCommand(args: string[]): CommandResult {
   const envPath = process.env.PATH || "";
   const home = process.env.HOME || process.env.USERPROFILE || "";
   const homeBin = home ? join(home, "bin") : "";
   const mergedPath = homeBin ? `${homeBin}${path.delimiter}${envPath}` : envPath;
-  const executable = azsdkPath?.trim() || "azsdk";
+  const executable = process.env.AZSDK?.trim() || "azsdk";
 
   const result = spawnSync(executable, args, {
     encoding: "utf8",
@@ -225,6 +242,52 @@ export function runAzdskCommand(args: string[], azsdkPath?: string): CommandResu
     exitCode: result.status ?? 1,
     stdout: result.stdout || "",
     stderr: result.stderr || "",
+  };
+}
+
+/**
+ * Retrieves release plan details by release plan id.
+ * @param releasePlanId Release plan id
+ * @param runner Optional runner used to execute the azsdk command
+ * @returns Parsed release plan object
+ * @throws Error if command fails or output cannot be parsed
+ */
+export function getReleasePlanById(releasePlanId: string, runner?: AzsdkRunner): ReleasePlanData {
+  const trimmedId = releasePlanId.trim();
+  if (!trimmedId) {
+    throw new Error("releasePlanId is required.");
+  }
+
+  const run: AzsdkRunner = runner ?? ((args: string[]) => runAzdskCommand(args));
+  const result = run(["release-plan", "get", "--release-plan-id", trimmedId, "--output", "json"]);
+
+  if (result.exitCode !== 0) {
+    throw new Error(`Release plan get failed. ${result.stderr || result.stdout}`);
+  }
+
+  try {
+    const parsed: unknown = JSON.parse(result.stdout);
+    if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
+      throw new Error(`Expected JSON object from azsdk output: ${result.stdout}`);
+    }
+    return parsed as ReleasePlanData;
+  } catch {
+    throw new Error(`Failed to parse JSON from azsdk output: ${result.stdout}`);
+  }
+}
+
+/**
+ * Retrieves a release plan directly by id without running discovery or creation.
+ */
+export function getReleasePlanResultById(
+  releasePlanId: string,
+  runner: AzsdkRunner,
+): EnsureReleasePlanResult {
+  const trimmedId = releasePlanId.trim();
+  return {
+    outcome: "existing_by_id",
+    releasePlan: getReleasePlanById(trimmedId, runner),
+    details: { releasePlanId: trimmedId },
   };
 }
 
@@ -269,8 +332,8 @@ export function getApiReleaseType(isPreview: boolean, repoName: string): ApiRele
 /**
  * Determine SDK release type based on preview status.
  * @param isPreview Whether the API version is a preview version
- * @returns SDK release type (preview or stable)
+ * @returns SDK release type (beta or stable)
  */
-export function getSdkReleaseType(isPreview: boolean): "preview" | "stable" {
-  return isPreview ? "preview" : "stable";
+export function getSdkReleaseType(isPreview: boolean): "beta" | "stable" {
+  return isPreview ? "beta" : "stable";
 }

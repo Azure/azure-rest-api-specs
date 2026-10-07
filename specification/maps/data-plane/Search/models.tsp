@@ -411,7 +411,9 @@ union AutocompleteResultTypeEnum {
 
   /**
    * Third administrative level within the country/region, such as a district, parish, or
-   * municipality.
+   * municipality. Retained for API compatibility. This type is not currently returned by the
+   * Autocomplete service; requests filtered exclusively to this type return an empty result
+   * set.
    */
   AdminDivision3: "AdminDivision3",
 
@@ -427,7 +429,9 @@ union AutocompleteResultTypeEnum {
   Airport: "Airport",
 
   /**
-   * A passenger terminal building within an airport.
+   * A passenger terminal building within an airport. Availability varies by geography and
+   * might change as Azure Maps search data is updated. Matching suggestions aren't
+   * guaranteed for every query.
    */
   AirportTerminal: "AirportTerminal",
 
@@ -601,6 +605,8 @@ union AutocompleteResultTypeEnum {
 
   /**
    * A building that houses a bank, credit union, or other financial services institution.
+   * Availability varies by geography and might change as Azure Maps search data is updated.
+   * Matching suggestions aren't guaranteed for every query.
    */
   FinancialStructure: "FinancialStructure",
 
@@ -641,6 +647,8 @@ union AutocompleteResultTypeEnum {
 
   /**
    * A metropolitan area or conurbation that contains and extends beyond a populated place.
+   * Retained for API compatibility. This type is not currently returned by the Autocomplete
+   * service; requests filtered exclusively to this type return an empty result set.
    */
   GreaterPopulatedPlace: "GreaterPopulatedPlace",
 
@@ -850,7 +858,8 @@ union AutocompleteResultTypeEnum {
 
   /**
    * A celestial body orbiting a star, typically used to represent the Earth as the root of
-   * the geographic hierarchy.
+   * the geographic hierarchy. Availability varies by geography and might change as Azure
+   * Maps search data is updated. Matching suggestions aren't guaranteed for every query.
    */
   Planet: "Planet",
 
@@ -870,12 +879,16 @@ union AutocompleteResultTypeEnum {
   PlayingField: "PlayingField",
 
   /**
-   * A geographic pole, such as the North or South Pole.
+   * A geographic pole, such as the North or South Pole. Availability varies by geography
+   * and might change as Azure Maps search data is updated. Matching suggestions aren't
+   * guaranteed for every query.
    */
   Pole: "Pole",
 
   /**
    * A self-governing political entity, such as an independent or dependent state or territory.
+   * Retained for API compatibility. This type is not currently returned by the Autocomplete
+   * service; requests filtered exclusively to this type return an empty result set.
    */
   PoliticalUnit: "PoliticalUnit",
 
@@ -1003,6 +1016,8 @@ union AutocompleteResultTypeEnum {
 
   /**
    * A scenic or heritage railway operated primarily for tourism rather than regular transit.
+   * Availability varies by geography and might change as Azure Maps search data is updated.
+   * Matching suggestions aren't guaranteed for every query.
    */
   TouristRailway: "TouristRailway",
 
@@ -1044,7 +1059,9 @@ union AutocompleteResultTypeEnum {
 
   /**
    * A constructed barrier forming a continuous vertical boundary, often used for defense,
-   * separation, or commemoration.
+   * separation, or commemoration. Availability varies by geography and might change as
+   * Azure Maps search data is updated. Matching suggestions aren't guaranteed for every
+   * query.
    */
   Wall: "Wall",
 
@@ -1082,6 +1099,7 @@ union AutocompleteResultTypeEnum {
  * Encoded as a [`GeoJSON FeatureCollection`](https://www.rfc-editor.org/rfc/rfc7946) whose
  * `features` array contains one `Feature` per geocoded location.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GeocodingResponse {
   /**
    * The `GeoJSON` object type of a successful `Get Geocoding` or `Get Reverse Geocoding`
@@ -1475,6 +1493,7 @@ model GeocodingBatchRequestItem {
  * many of the submitted queries succeeded plus a `batchItems` array containing one response
  * entry per query in the request, in the same order as the request `batchItems` array.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GeocodingBatchResponse {
   /**
    * Aggregate counts for the batch as a whole, the total submitted queries and how many of
@@ -1610,6 +1629,7 @@ model BoundaryProperties {
    * A URL to Azure Maps copyright and licensing information for the API and its underlying
    * data sources.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   copyrightUrl?: string;
 
   /**
@@ -1696,6 +1716,7 @@ model ReverseGeocodingBatchRequestItem {
  * array contains one `Feature` per autocomplete suggestion, ranked from most to least
  * likely.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AutocompleteResponse {
   /**
    * The `GeoJSON` object type of a successful `Get Autocomplete` response body. Always
@@ -1790,6 +1811,7 @@ model AutocompleteProperties {
  * details for failed operations. (This also follows the OData error response
  * format.).
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

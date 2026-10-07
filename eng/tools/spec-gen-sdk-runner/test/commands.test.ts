@@ -11,6 +11,7 @@ import {
 import * as log from "../src/log.ts";
 import { LogLevel } from "../src/log.ts";
 import * as pythonPypiValidation from "../src/python-pypi-validation.ts";
+import * as sdkValidationConfig from "../src/sdk-validation-config.ts";
 import * as changeFiles from "../src/spec-helpers.ts";
 import type { ExecutionReport } from "../src/types.ts";
 import * as utils from "../src/utils.ts";
@@ -264,9 +265,7 @@ describe("generateSdkForSpecPr", () => {
     });
 
     const { statusCode } = await generateSdkForSpecPr();
-    const serviceFolderPath = commandHelpers.getServiceFolderPath(
-      mockChangedSpecs[0].typespecProject,
-    );
+    const serviceFolderPath = utils.getServiceFolderPath(mockChangedSpecs[0].typespecProject);
     expect(statusCode).toBe(0);
     expect(log.logMessage).toHaveBeenCalledWith(
       `Generating SDK from ${serviceFolderPath}`,
@@ -292,6 +291,67 @@ describe("generateSdkForSpecPr", () => {
       [], // apiViewRequestData
       true, // sdkGenerationExecuted
     );
+  });
+
+  test("uses a pinned SDK branch and restores main for the next unpinned spec", async () => {
+    const mockCommandInput = {
+      localSdkRepoPath: "path/to/local/repo",
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "spec-pull-request",
+      sdkRepoName: "azure-sdk-for-js",
+      sdkLanguage: SdkName.Js,
+      specCommitSha: "spec-sha",
+      specRepoHttpsUrl: "https://github.com/Azure/azure-rest-api-specs",
+      prNumber: "123",
+    };
+    const mockChangedSpecs = [
+      {
+        specs: ["specification/service-one/Project/file.tsp"],
+        typespecProject: "specification/service-one/Project/tspconfig.yaml",
+      },
+      {
+        specs: ["specification/service-two/Project/file.tsp"],
+        typespecProject: "specification/service-two/Project/tspconfig.yaml",
+      },
+    ];
+    const mockExecutionReport = {
+      executionResult: "succeeded",
+      packages: [],
+    };
+
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue(mockChangedSpecs);
+    vi.spyOn(sdkValidationConfig, "resolveSdkRepoBranch")
+      .mockReturnValueOnce("feature/custom")
+      .mockReturnValueOnce(undefined);
+    vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
+    const checkoutSdkBranchSpy = vi.spyOn(utils, "checkoutSdkBranch").mockResolvedValue(true);
+    const checkoutMainBranchSpy = vi
+      .spyOn(utils, "checkoutMainBranch")
+      .mockResolvedValue(undefined);
+    const runSpecGenSdkCommandSpy = vi
+      .spyOn(utils, "runSpecGenSdkCommand")
+      .mockResolvedValue(undefined);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
+      mockExecutionReport as ExecutionReport,
+    );
+    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue(false);
+    vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
+    vi.spyOn(log, "logMessage").mockImplementation(() => {});
+
+    const { statusCode } = await generateSdkForSpecPr();
+
+    expect(statusCode).toBe(0);
+    expect(checkoutSdkBranchSpy).toHaveBeenCalledOnce();
+    expect(checkoutSdkBranchSpy).toHaveBeenCalledWith(
+      mockCommandInput.localSdkRepoPath,
+      "feature/custom",
+    );
+    expect(checkoutMainBranchSpy).toHaveBeenCalledOnce();
+    expect(checkoutMainBranchSpy).toHaveBeenCalledWith(mockCommandInput.localSdkRepoPath);
+    expect(runSpecGenSdkCommandSpy).toHaveBeenCalledTimes(2);
   });
 
   test("should validate Python PR package registration on PyPI", async () => {
@@ -961,6 +1021,174 @@ describe("generateSdkForBatchSpecs", () => {
 
     const calls = getNormalizedFsCalls(fs.writeFileSync as Mock);
     expect(calls).toMatchSnapshot();
+  });
+
+  test("should emit one runtime telemetry event per package for all TypeSpec specs", async () => {
+    const mockBatchType = "all-typespecs";
+    const mockSpecPath = "specification/compute/Compute.Management/tspconfig.yaml";
+    const mockInput = {
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "batch",
+      localSdkRepoPath: "/sdk/path",
+      sdkRepoName: "azure-sdk-for-js",
+      sdkLanguage: SdkName.Js,
+      specCommitSha: "",
+      specRepoHttpsUrl: "",
+    };
+    const mockExecutionReport = {
+      executionResult: "succeeded",
+      packages: [{ packageName: "@azure/arm-compute" }, { packageName: "@azure/arm-vmware" }],
+    };
+
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue([{ tspconfigPath: mockSpecPath }]);
+    vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
+    vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
+    vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify(mockExecutionReport));
+    vi.spyOn(fs, "existsSync").mockReturnValue(false);
+    vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    const logSpy = vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(log, "vsoAddAttachment").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(performance, "now").mockReturnValueOnce(1_000).mockReturnValueOnce(2_500);
+
+    await generateSdkForBatchSpecs(mockBatchType);
+
+    const telemetryCalls = logSpy.mock.calls
+      .map(([message]) => message)
+      .filter(
+        (message): message is string =>
+          typeof message === "string" && message.startsWith("##[SdkBatchGenerationSpecResult]"),
+      );
+    expect(telemetryCalls).toHaveLength(2);
+    expect(
+      telemetryCalls.map(
+        (message) => JSON.parse(message.replace("##[SdkBatchGenerationSpecResult]", "")) as unknown,
+      ),
+    ).toEqual([
+      expect.objectContaining({
+        eventType: "SdkBatchGenerationSpecResult",
+        specType: "all",
+        specPath: mockSpecPath,
+        packageName: "@azure/arm-compute",
+        executionResult: "succeeded",
+        durationSeconds: 1.5,
+      }),
+      expect.objectContaining({
+        eventType: "SdkBatchGenerationSpecResult",
+        specType: "all",
+        specPath: mockSpecPath,
+        packageName: "@azure/arm-vmware",
+        executionResult: "succeeded",
+        durationSeconds: 1.5,
+      }),
+    ]);
+    const markdownContent = String((fs.writeFileSync as Mock).mock.calls[0][1]);
+    expect(markdownContent).toContain("## TypeSpec Package Run Times");
+    expect(markdownContent).toContain(`| ${mockSpecPath} | @azure/arm-compute | succeeded | 1.5 |`);
+    expect(markdownContent).toContain(`| ${mockSpecPath} | @azure/arm-vmware | succeeded | 1.5 |`);
+  });
+
+  test("should emit telemetry and runtime Markdown for sample TypeSpec packages", async () => {
+    const mockSpecPath = "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml";
+    const mockInput = {
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "batch",
+      localSdkRepoPath: "/sdk/path",
+      sdkRepoName: "azure-sdk-for-js",
+      sdkLanguage: SdkName.Js,
+      specCommitSha: "",
+      specRepoHttpsUrl: "",
+    };
+
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue([{ tspconfigPath: mockSpecPath }]);
+    vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
+    vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
+    vi.spyOn(fs, "readFileSync").mockReturnValue(
+      JSON.stringify({
+        executionResult: "warning",
+        packages: [{ packageName: "@azure-rest/widget-manager" }],
+      }),
+    );
+    vi.spyOn(fs, "existsSync").mockReturnValue(false);
+    vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    const logSpy = vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(log, "vsoAddAttachment").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(performance, "now").mockReturnValueOnce(500).mockReturnValueOnce(2_000);
+
+    await generateSdkForBatchSpecs("sample-typespecs");
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        '##[SdkBatchGenerationSpecResult]{"eventType":"SdkBatchGenerationSpecResult"',
+      ),
+    );
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('"specType":"sample"'));
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining('##[SdkBatchGenerationSummary]{"eventType"'),
+    );
+    const markdownContent = String((fs.writeFileSync as Mock).mock.calls[0][1]);
+    expect(markdownContent).toContain(
+      `| ${mockSpecPath} | @azure-rest/widget-manager | warning | 1.5 |`,
+    );
+  });
+
+  test("should not emit runtime telemetry for a failed TypeSpec package", async () => {
+    const mockInput = {
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "batch",
+      localSdkRepoPath: "/sdk/path",
+      sdkRepoName: "azure-sdk-for-js",
+      sdkLanguage: SdkName.Js,
+      specCommitSha: "",
+      specRepoHttpsUrl: "",
+    };
+
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue([
+      { tspconfigPath: "specification/compute/Compute.Management/tspconfig.yaml" },
+    ]);
+    vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
+    vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
+    vi.spyOn(fs, "readFileSync").mockReturnValue(
+      JSON.stringify({
+        executionResult: "failed",
+        packages: [{ packageName: "@azure/arm-compute" }],
+      }),
+    );
+    vi.spyOn(fs, "existsSync").mockReturnValue(false);
+    vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    const logSpy = vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(log, "vsoAddAttachment").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+
+    await generateSdkForBatchSpecs("all-mgmtplane-typespecs");
+
+    expect(logSpy).not.toHaveBeenCalledWith(
+      expect.stringContaining("##[SdkBatchGenerationSpecResult]"),
+    );
+    const markdownContent = String((fs.writeFileSync as Mock).mock.calls[0][1]);
+    expect(markdownContent).not.toContain("## TypeSpec Package Run Times");
   });
 
   test("should handle errors during SDK generation", async () => {

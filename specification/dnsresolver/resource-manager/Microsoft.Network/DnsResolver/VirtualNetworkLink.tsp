@@ -14,8 +14,10 @@ namespace Microsoft.Network;
  * Describes a virtual network link.
  */
 @parentResource(DnsForwardingRuleset)
-model VirtualNetworkLink
-  is Azure.ResourceManager.ProxyResource<VirtualNetworkLinkProperties, false> {
+model VirtualNetworkLink is Azure.ResourceManager.ProxyResource<
+  VirtualNetworkLinkProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = VirtualNetworkLink,
     KeyName = "virtualNetworkLinkName",

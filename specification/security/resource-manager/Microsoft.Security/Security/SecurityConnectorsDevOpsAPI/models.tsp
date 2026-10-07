@@ -450,6 +450,7 @@ model TargetBranchConfiguration {
 /**
  * List of RP resources which supports pagination.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureDevOpsProjectListResponse {
   /**
    * The AzureDevOpsProject items on this page.
@@ -525,6 +526,7 @@ model AzureDevOpsProjectProperties {
 /**
  * List of RP resources which supports pagination.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureDevOpsRepositoryListResponse {
   /**
    * The AzureDevOpsRepository items on this page.
@@ -589,6 +591,7 @@ model AzureDevOpsRepositoryProperties {
   /**
    * Gets or sets Azure DevOps Repository url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   repoUrl?: string;
 
@@ -617,6 +620,7 @@ model AzureDevOpsRepositoryProperties {
 /**
  * List of RP resources which supports pagination.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DevOpsConfigurationListResponse {
   /**
    * The DevOpsConfiguration items on this page.
@@ -819,6 +823,7 @@ model GitHubOwnerProperties {
   /**
    * Gets or sets GitHub Owner url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ownerUrl?: string;
 
@@ -842,6 +847,7 @@ model GitHubOwnerProperties {
 /**
  * List of RP resources which supports pagination.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GitHubRepositoryListResponse {
   /**
    * The GitHubRepository items on this page.
@@ -924,6 +930,7 @@ model GitHubRepositoryProperties {
   /**
    * Gets or sets GitHub Repository url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   repoUrl?: string;
 
@@ -1027,6 +1034,7 @@ model GitLabGroupProperties {
 /**
  * List of RP resources which supports pagination.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GitLabProjectListResponse {
   /**
    * The GitLabProject items on this page.

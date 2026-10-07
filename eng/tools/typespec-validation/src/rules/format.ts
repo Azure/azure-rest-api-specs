@@ -1,53 +1,42 @@
+import type { ILogger } from "@azure-tools/specs-shared/logger";
+import { reportCommandOutput } from "../command-output.ts";
+import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
-import { gitDiffTopSpecFolder, runNpm } from "../utils.ts";
+import { gitDiffTopSpecFolder, runNodeBin } from "../utils.ts";
 
 export class FormatRule implements Rule {
   readonly name = "Format";
   readonly description = "Format TypeSpec";
 
-  async execute(folder: string): Promise<RuleResult> {
-    let success = true;
-    let stdOutput = "";
-    let errorOutput = "";
-
-    let [err, stdout, stderr] = await runNpm(
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
+    const output = await runNodeBin(
+      "@typespec/compiler",
       // Format parent folder to include shared files
-      ["exec", "--no", "--", "tsp", "format", "../**/*.tsp"],
+      ["tsp", "format", "../**/*.tsp", "tspconfig.yaml"],
+      logger,
       folder,
     );
-    if (err) {
-      success = false;
-      errorOutput += err.message;
-    }
-    stdOutput += stdout;
-    errorOutput += stderr;
-
-    [err, stdout, stderr] = await runNpm(
-      ["exec", "--no", "--", "prettier", "--write", "tspconfig.yaml"],
-      folder,
-    );
-    if (err) {
-      success = false;
-      errorOutput += err.message;
-    }
-    stdOutput += stdout;
-    errorOutput += stderr;
-
-    if (success) {
-      const gitDiffResult = await gitDiffTopSpecFolder(folder);
-      stdOutput += gitDiffResult.stdOutput;
-      if (!gitDiffResult.success) {
-        success = false;
-        errorOutput += gitDiffResult.errorOutput;
-        errorOutput += `\nFiles have been changed after \`tsp format\`. Run \`tsp format\` and ensure all files are included in your change.`;
-      }
-    }
-
+    const result = reportCommandOutput("format", "TypeSpec formatting", output, logger);
+    if (!result.success) return result;
+    const gitDiffResult = await gitDiffTopSpecFolder(folder, logger);
+    if (gitDiffResult.success) return result;
     return {
-      success: success,
-      stdOutput: stdOutput,
-      errorOutput: errorOutput,
+      success: false,
+      diagnostics: [
+        ...(result.diagnostics ?? []),
+        {
+          severity: "error",
+          code: "format-changed",
+          path: folder,
+          message: "Files changed by formatting:",
+          details: blocks(
+            indent(lines(gitDiffResult.files.map(filePath))),
+            verbatim(gitDiffResult.diff ?? ""),
+          ),
+          help: 'Run `pnpm exec tsp format "../**/*.tsp" tspconfig.yaml` from the project folder and include the changes.',
+        },
+      ],
     };
   }
 }

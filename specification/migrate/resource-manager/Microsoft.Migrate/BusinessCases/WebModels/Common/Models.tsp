@@ -202,6 +202,7 @@ model CostByStorageType {
 
 @doc("The distribution by operating system.")
 model DistributionByOperatingSystem {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The Os classification type.")
   @visibility(Lifecycle.Read)
   osClassificationType?: string;
@@ -243,6 +244,7 @@ model DistributionByVirtualization {
 
 @doc("Download URL for assessment report.")
 model ReportDownloadUrl {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Hyperlink to download report.")
   @visibility(Lifecycle.Read)
   businessCaseReportUrl?: string;

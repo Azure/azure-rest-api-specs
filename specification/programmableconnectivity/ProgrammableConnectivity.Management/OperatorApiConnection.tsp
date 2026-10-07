@@ -229,6 +229,7 @@ model DataRegions {
   /**
    * URL of the organization or governmental data privacy framework.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   dataPrivacyFrameworkUrl: url;
 }
 

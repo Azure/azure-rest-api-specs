@@ -433,6 +433,10 @@ union PromoteOption {
 
   /** Promote option forces the promotion without waiting for the replica to be caught up to the primary. This can result in data-loss so should only be used during disaster recovery scenarios. */
   "Forced",
+
+  /** Promote option waits for the replica to be caught up to the primary before promoting, guaranteeing no data loss during the promotion. */
+  @added(Microsoft.DocumentDB.Versions.v2026_06_15_preview)
+  "Planned",
 }
 
 /** The mode to apply to a promote operation. */
@@ -614,6 +618,7 @@ model CustomerManagedKeyEncryptionProperties {
   keyEncryptionKeyIdentity?: KeyEncryptionKeyIdentity;
 
   /** The URI of the key vault key used for encryption. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @madeOptional(Versions.v2025_08_01_preview)
   keyEncryptionKeyUrl?: string;
 }

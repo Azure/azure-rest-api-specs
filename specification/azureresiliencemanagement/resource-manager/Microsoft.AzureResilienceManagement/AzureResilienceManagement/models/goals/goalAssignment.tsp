@@ -14,29 +14,58 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
 
-@doc("The Service level resource model")
+@doc("A service-level resource associated with a goal assignment.")
 model ServiceLevelResource {
-  @doc("The arm id of the service level indicator resource")
+  @doc("The ARM resource ID of the service-level indicator resource.")
   serviceLevelIndicatorResourceId: armResourceIdentifier;
 
-  @doc("The arm id of the service level object resource")
-  serviceLevelObjectiveResourceId: armResourceIdentifier;
+  @doc("The ARM resource ID of the service-level objective resource.")
+  @madeOptional(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_09_30_preview)
+  serviceLevelObjectiveResourceId?: armResourceIdentifier;
+}
+
+@added(Versions.v2026_10_31_preview)
+@doc("Recovery objectives targeted by a goal assignment for regional resiliency.")
+model RegionalObjectives {
+  @doc("Target regional recovery point objective. eg, PT15M for 15 minutes.")
+  targetRecoveryPointObjective: IsoDuration;
+
+  @doc("Target regional recovery time objective. eg, PT1H for 1 hour.")
+  targetRecoveryTimeObjective: IsoDuration;
 }
 
 // Define the main model
-@doc("Definition of goal assignment property.")
+@doc("Properties of a goal assignment.")
 model GoalAssignmentProperties {
   @doc("Arm id of the goal template.")
-  goalTemplateId: armResourceIdentifier;
+  @madeOptional(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_09_30_preview)
+  goalTemplateId?: armResourceIdentifier;
 
   @doc("The type of goal assignment.")
-  goalAssignmentType: GoalAssignmentType;
+  @madeOptional(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_09_30_preview)
+  goalAssignmentType?: GoalAssignmentType;
+
+  @doc("Whether zonal resiliency is required for this goal assignment.")
+  @added(Versions.v2026_06_01_preview)
+  @madeRequired(Versions.v2026_09_30_preview)
+  requireZonalResiliency: boolean;
+
+  @doc("Whether regional resiliency is required for this goal assignment.")
+  @added(Versions.v2026_10_31_preview)
+  requireRegionalResiliency?: boolean;
+
+  @doc("Recovery objectives targeted for regional resiliency.")
+  @added(Versions.v2026_10_31_preview)
+  regionalObjectives?: RegionalObjectives;
 
   @doc("List of service level resources.")
   @identifiers(#[])
   serviceLevelResources?: ServiceLevelResource[];
 
-  @doc("Provisioning state")
+  @doc("The provisioning state of the goal assignment.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
@@ -46,9 +75,9 @@ model GoalAssignmentProperties {
 }
 
 @tenantResource
-@doc("Goal assignment a AzureResilienceProviderHub resource")
+@doc("A goal assignment resource in the Azure Resilience Management provider.")
 model GoalAssignment is ProxyResource<GoalAssignmentProperties> {
-  @doc("The name of the GoalAssignment")
+  @doc("The name of the goal assignment.")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("goalAssignmentName")
   @segment("goalAssignments")

@@ -110,6 +110,7 @@ model CiConfig {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   commitId?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The CI revision URL.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   revisionUrl?: string;

@@ -229,6 +229,7 @@ model EncryptionProperties {
   /**
    * Versioned Encryption Key Url - Only when user opts for CMK and hence optional
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl?: string;
 
   /**
@@ -249,6 +250,7 @@ model EncryptionUpdateProperties {
   /**
    * Versioned Encryption Key Url - Only when user opts for CMK and hence optional
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl?: string;
 
   /**
@@ -264,7 +266,6 @@ model UserDetails {
   /**
    * User Email
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Replace this with @secret if this is a field that should eb kept private."
-  @OpenAPI.extension("x-ms-secret", true)
+  @secret
   email: string;
 }

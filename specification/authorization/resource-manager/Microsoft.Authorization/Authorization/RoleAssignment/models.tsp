@@ -112,6 +112,7 @@ model ValidationResponseErrorInfo {
 /**
  * Validation response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidationResponse {
   /**
    * Whether or not validation succeeded
@@ -138,4 +139,48 @@ model RoleAssignmentFilter {
    * Returns role assignment of the specific principal.
    */
   principalId?: string;
+}
+
+// Java and Python retain the existing shared SDK PrincipalType through the
+// combined client's language-scoped alternate-type customization.
+/**
+ * The principal type of the assigned principal ID.
+ */
+union PrincipalType {
+  string,
+
+  /**
+   * User
+   */
+  User: "User",
+
+  /**
+   * Group
+   */
+  Group: "Group",
+
+  /**
+   * ServicePrincipal
+   */
+  ServicePrincipal: "ServicePrincipal",
+
+  /**
+   * ForeignGroup
+   */
+  ForeignGroup: "ForeignGroup",
+
+  /**
+   * Device
+   */
+  Device: "Device",
+
+  /**
+   * Agent identity derived from a user.
+   */
+  AgentUser: "AgentUser",
+
+  /**
+   * Agent identity derived from a service principal.
+   */
+  AgentServicePrincipal: "AgentServicePrincipal",
 }

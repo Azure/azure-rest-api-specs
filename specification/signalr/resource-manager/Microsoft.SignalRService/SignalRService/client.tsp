@@ -27,7 +27,9 @@ namespace Customization;
 
 // Override the order of path parameters
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SignalRPrivateEndpointConnectionsGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
@@ -54,7 +56,9 @@ op SignalRPrivateEndpointConnectionsGetCustomized(
 ): PrivateEndpointConnection;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SignalRPrivateEndpointConnectionsUpdateCustomized(
   ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
@@ -85,7 +89,9 @@ op SignalRPrivateEndpointConnectionsUpdateCustomized(
 ): PrivateEndpointConnection;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SignalRPrivateEndpointConnectionsDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
@@ -128,7 +134,9 @@ op SignalRPrivateEndpointConnectionsDeleteCustomized(
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SignalRSharedPrivateLinkResourcesCreateOrUpdateCustomized(
   ...Azure.ResourceManager.ProviderNamespace<SharedPrivateLinkResource>,
@@ -159,7 +167,9 @@ op SignalRSharedPrivateLinkResourcesCreateOrUpdateCustomized(
 ): SharedPrivateLinkResource;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SignalRSharedPrivateLinkResourcesGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<SharedPrivateLinkResource>,
@@ -186,7 +196,9 @@ op SignalRSharedPrivateLinkResourcesGetCustomized(
 ): SharedPrivateLinkResource;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SignalRSharedPrivateLinkResourcesDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<SharedPrivateLinkResource>,
@@ -233,6 +245,21 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@clientName(SignalRResourceList, "ResourceInfoList", "go");
 
 @@clientName(SignalRResource, "SignalR", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
+@@clientOption(
+  SignalRResource,
+  "resource-rbac-roles",
+  #{
+    SignalRAccessKeyReader: "04165923-9d83-45d5-8227-78b77b0a687e",
+    SignalRAppServer: "420fcaa2-552c-430f-98ca-3264be4806c7",
+    SignalRRestApiOwner: "fd53cd77-2268-407a-8f46-7e7863d0f521",
+    SignalRRestApiReader: "ddde6b66-c0df-4114-a159-3618637b3035",
+    SignalRServiceOwner: "7e4f1700-ea5a-4f59-8f37-079cfe29dce3",
+    SignalRContributor: "8cf5e20a-e4b2-4e9d-b3a1-5ceb692c2761",
+  },
+  "csharp"
+);
 @@clientName(CustomCertificate, "SignalRCustomCertificate", "csharp");
 @@clientName(CustomDomain, "SignalRCustomDomain", "csharp");
 @@clientName(

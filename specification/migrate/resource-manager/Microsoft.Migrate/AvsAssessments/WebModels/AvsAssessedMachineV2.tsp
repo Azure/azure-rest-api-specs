@@ -24,15 +24,14 @@ model AvsAssessedMachineV2 is ProxyResource<AvsAssessedMachinePropertiesV2> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AvsAssessedMachine doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
 @doc("AVS assessed machine properties web model.")
-model AvsAssessedMachinePropertiesV2
-  is AssessedWorkloadProperties<
-    Linkages,
-    AvsRecommendations<
-      MigrationIssues,
-      MigrationSuitability,
-      Skus<MigrationSuitability>
-    >
-  > {
+model AvsAssessedMachinePropertiesV2 is AssessedWorkloadProperties<
+  Linkages,
+  AvsRecommendations<
+    MigrationIssues,
+    MigrationSuitability,
+    Skus<MigrationSuitability>
+  >
+> {
   @doc("The assessed machine extended details.")
   @visibility(Lifecycle.Read)
   extendedDetails?: AvsAssessedMachineExtendedDetails;
@@ -183,6 +182,7 @@ model AvsAssessedNetworkAdapter {
   @visibility(Lifecycle.Read)
   macAddress?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("IP V4 addresses for the machine.")
   @visibility(Lifecycle.Read)
   ipAddresses?: string[];
@@ -213,8 +213,11 @@ model AvsAssessedNetworkAdapter {
 }
 
 @doc("AVS-specific recommendations details.")
-model AvsRecommendations<TMigrationIssues, TMigrationSuitability, TSkus>
-  is Recommendations<TMigrationIssues, TMigrationSuitability, TSkus> {
+model AvsRecommendations<
+  TMigrationIssues,
+  TMigrationSuitability,
+  TSkus
+> is Recommendations<TMigrationIssues, TMigrationSuitability, TSkus> {
   @doc("Gets or sets the machine assessment ARM ID for VM fallback.")
   fallbackMachineAssessmentArmId?: string;
 }

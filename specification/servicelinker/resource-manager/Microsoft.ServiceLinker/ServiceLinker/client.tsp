@@ -1,0 +1,403 @@
+import "./main.tsp";
+import "@azure-tools/typespec-client-generator-core";
+import "@typespec/rest";
+import "@typespec/http";
+
+using Azure.ClientGenerator.Core;
+using Microsoft.ServiceLinker;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+
+@@clientName(Linkers, "LinkersOperations", "java");
+@@clientName(
+  Microsoft.ServiceLinker,
+  "ServiceLinkerManagementClient",
+  "javascript"
+);
+@@clientName(
+  Microsoft.ServiceLinker,
+  "ServiceLinkerManagementClient",
+  "python"
+);
+
+// Go SDK Breaking Changes Resolution for TypeSpec conversion
+@@clientName(DatabaseAadAuthInfo, "DatabaseAADAuthInfo", "go");
+
+@@clientName(ActionType, "ActionTypeFlag", "!autorest");
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+op linkerResourcesGet(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(linkerResourcesGet, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  connectorName: string,
+): LinkerResource;
+
+@@override(LinkerResources.get, linkerResourcesGet);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+op linkerResourcesCreateOrUpdate(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(linkerResourcesCreateOrUpdate, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  connectorName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  parameters: LinkerResource,
+): LinkerResource;
+
+@@override(LinkerResources.createOrUpdate, linkerResourcesCreateOrUpdate);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+op linkerResourcesUpdate(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(linkerResourcesUpdate, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  connectorName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  parameters: LinkerPatch,
+): LinkerResource;
+
+@@override(LinkerResources.update, linkerResourcesUpdate);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+op linkerResourcesDelete(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(linkerResourcesDelete, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  connectorName: string,
+): ArmDeletedNoContentResponse;
+
+@@override(LinkerResources.delete, linkerResourcesDelete);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+op linkerResourcesList(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(linkerResourcesList, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+): ResourceList;
+
+@@override(LinkerResources.list, linkerResourcesList);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+op linkerResourcesValidate(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(linkerResourcesValidate, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  connectorName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  body: void,
+): ValidateOperationResult;
+
+@@override(LinkerResources.validate, linkerResourcesValidate);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+op linkerResourcesGenerateConfigurations(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(
+    linkerResourcesGenerateConfigurations,
+    "java,python,go,javascript"
+  )
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  connectorName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  parameters?: ConfigurationInfo,
+): ConfigurationResult;
+
+@@override(
+  LinkerResources.generateConfigurations,
+  linkerResourcesGenerateConfigurations
+);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+op dryrunResourcesGetDryrun(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(dryrunResourcesGetDryrun, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  dryrunName: string,
+): DryrunResource;
+
+@@override(DryrunResources.getDryrun, dryrunResourcesGetDryrun);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+op dryrunResourcesCreateDryrun(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(dryrunResourcesCreateDryrun, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  dryrunName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @body parameters: DryrunResource,
+): DryrunResource;
+
+@@override(DryrunResources.createDryrun, dryrunResourcesCreateDryrun);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+op dryrunResourcesUpdateDryrun(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(dryrunResourcesUpdateDryrun, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  dryrunName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @body parameters: DryrunPatch,
+): DryrunResource;
+
+@@override(DryrunResources.updateDryrun, dryrunResourcesUpdateDryrun);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+op dryrunResourcesDeleteDryrun(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(dryrunResourcesDeleteDryrun, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  dryrunName: string,
+): ArmDeletedResponse;
+
+@@override(DryrunResources.deleteDryrun, dryrunResourcesDeleteDryrun);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
+op dryrunResourcesListDryrun(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(dryrunResourcesListDryrun, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+): DryrunList;
+
+@@override(DryrunResources.listDryrun, dryrunResourcesListDryrun);
+
+// C# customizations preserve the shipped SDK surface and disambiguate dry-run resources.
+@@clientName(ActionType, "LinkerActionType", "csharp");
+@@clientName(AllowType, "LinkerAllowType", "csharp");
+@@clientName(AuthInfoBase, "AuthBaseInfo", "csharp");
+@@clientName(AuthMode, "LinkerAuthMode", "csharp");
+@@clientName(Microsoft.ServiceLinker.AuthType, "LinkerAuthType", "csharp");
+@@clientName(
+  AzureAppConfigProperties.connectWithKubernetesExtension,
+  "IsConnectedWithKubernetesExtension",
+  "csharp"
+);
+@@clientName(
+  AzureKeyVaultProperties.connectAsKubernetesCsiDriver,
+  "DoesConnectAsKubernetesCsiDriver",
+  "csharp"
+);
+@@clientName(AzureResource, "AzureResourceInfo", "csharp");
+@@clientName(
+  AzureResourcePropertiesBase,
+  "AzureResourceBaseProperties",
+  "csharp"
+);
+@@clientName(ClientType, "LinkerClientType", "csharp");
+@@clientName(ConfigurationInfo, "LinkerConfigurationInfo", "csharp");
+@@clientName(ConfigurationName, "LinkerConfigurationName", "csharp");
+@@clientName(ConfigurationName.required, "IsRequired", "csharp");
+@@clientName(ConfigurationNameItem, "LinkerConfigurationNameItem", "csharp");
+@@clientName(ConfigurationResult, "SourceConfigurationResult", "csharp");
+@@clientName(
+  ConfluentBootstrapServer,
+  "ConfluentBootstrapServerInfo",
+  "csharp"
+);
+@@clientName(ConfluentSchemaRegistry, "ConfluentSchemaRegistryInfo", "csharp");
+@@clientName(
+  CreateOrUpdateDryrunParameters,
+  "CreateOrUpdateDryrunContent",
+  "csharp"
+);
+@@clientName(DaprConfigurationResource, "DaprConfiguration", "csharp");
+@@clientName(DeleteOrUpdateBehavior, "LinkerDeleteOrUpdateBehavior", "csharp");
+@@clientName(DryrunParameters, "DryrunContent", "csharp");
+@@clientName(DryrunResource, "LinkerDryrun", "csharp");
+@@clientName(DryrunResources, "ConnectorDryruns", "csharp");
+@@clientName(
+  EasyAuthMicrosoftEntraIDAuthInfo,
+  "EasyAuthMicrosoftEntraIdAuthInfo",
+  "csharp"
+);
+@@clientName(FabricPlatform, "FabricPlatformTargetService", "csharp");
+@@clientName(FirewallRules, "LinkerFirewallRules", "csharp");
+@@clientName(Linker, "LinkerResources", "csharp");
+@@clientName(LinkerPatch, "LinkerResourcePatch", "csharp");
+@@clientName(LinkerResources, "LinkerConnectors", "csharp");
+@@clientName(Linkers, "LinkerDryruns", "csharp");
+@@clientName(PublicNetworkSolution, "LinkerPublicNetworkSolution", "csharp");
+@@clientName(SecretInfoBase, "SecretBaseInfo", "csharp");
+@@clientName(SecretSourceType, "LinkerSecretSourceType", "csharp");
+@@clientName(SecretStore.keyVaultId, "SecretStoreKeyVaultId", "csharp");
+@@clientName(SecretStore, "LinkerSecretStore", "csharp");
+@@clientName(SecretType, "LinkerSecretType", "csharp");
+@@clientName(SelfHostedServer, "SelfHostedServerTargetService", "csharp");
+@@clientName(TargetServiceBase, "TargetServiceBaseInfo", "csharp");
+@@clientName(
+  ValidateOperationResult,
+  "LinkerValidateOperationResult",
+  "csharp"
+);
+@@clientName(ValidateResult.reportEndTimeUtc, "ReportEndOn", "csharp");
+@@clientName(ValidateResult.reportStartTimeUtc, "ReportStartOn", "csharp");
+@@clientName(ValidationResultItem, "LinkerValidationResultItemInfo", "csharp");
+@@clientName(ValidationResultStatus, "LinkerValidationResultStatus", "csharp");
+@@clientName(ValueSecretInfo, "RawValueSecretInfo", "csharp");
+@@clientName(VNetSolution, "VnetSolution", "csharp");
+@@clientName(VNetSolution.type, "SolutionType", "csharp");
+@@clientName(VNetSolutionType, "VnetSolutionType", "csharp");
+
+@@alternateType(AzureResource.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  SecretStore.keyVaultId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ValidateOperationResult.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ValidateResult.sourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ValidateResult.targetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LinkerProperties.secretStore,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LinkerProperties.vNetSolution,
+  "csharp"
+);

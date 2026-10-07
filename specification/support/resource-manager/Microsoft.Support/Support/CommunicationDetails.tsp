@@ -16,11 +16,10 @@ namespace Microsoft.Support;
  * Object that represents a Communication resource.
  */
 @parentResource(SupportTicketDetails)
-model CommunicationDetails
-  is Azure.ResourceManager.ProxyResource<
-    CommunicationDetailsProperties,
-    false
-  > {
+model CommunicationDetails is Azure.ResourceManager.ProxyResource<
+  CommunicationDetailsProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CommunicationDetails,
     KeyName = "communicationName",

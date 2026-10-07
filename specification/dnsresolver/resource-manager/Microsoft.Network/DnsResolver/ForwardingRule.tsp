@@ -15,8 +15,10 @@ namespace Microsoft.Network;
  * Describes a forwarding rule within a DNS forwarding ruleset.
  */
 @parentResource(DnsForwardingRuleset)
-model ForwardingRule
-  is Azure.ResourceManager.ProxyResource<ForwardingRuleProperties, false> {
+model ForwardingRule is Azure.ResourceManager.ProxyResource<
+  ForwardingRuleProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ForwardingRule,
     KeyName = "forwardingRuleName",

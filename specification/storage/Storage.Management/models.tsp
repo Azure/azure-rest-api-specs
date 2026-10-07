@@ -371,6 +371,29 @@ union PublicNetworkAccess {
 }
 
 /**
+ * The action to perform when a user delegation SAS (shared access signature) policy requirement is violated.
+ */
+@added(Versions.v2026_06_01)
+union PolicyViolationAction {
+  string,
+
+  /**
+   * No action is taken when the policy requirement is violated.
+   */
+  None: "None",
+
+  /**
+   * The policy violation is logged for audit purposes.
+   */
+  Log: "Log",
+
+  /**
+   * The request is blocked and denied when the policy requirement is violated.
+   */
+  Block: "Block",
+}
+
+/**
  * The SAS Expiration Action defines the action to be performed when sasPolicy.sasExpirationPeriod is violated. The 'Log' action can be used for audit purposes and the 'Block' action can be used to block and deny the usage of SAS tokens that do not adhere to the sas policy expiration period.
  */
 union ExpirationAction {
@@ -1592,6 +1615,29 @@ model ContainerProperties {
    * Enable NFSv3 all squash on blob container.
    */
   enableNfsV3AllSquash?: boolean;
+
+  /**
+   * Configuration that attaches this container to a Blob Access Point. If set, the container is a read-only virtual container whose read/list requests are forwarded to the connected backing data store. Cannot be changed, removed, or added after container creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2026_09_01)
+  blobAccessPointConfiguration?: BlobAccessPointConfigurationConnection;
+}
+
+/**
+ * Blob Access Point configuration associated with a blob container.
+ */
+@added(Versions.v2026_09_01)
+model BlobAccessPointConfigurationConnection {
+  /**
+   * Name of the Blob Access Point Configuration to connect to.
+   */
+  blobAccessPointConfigurationName?: string;
+
+  /**
+   * System-generated unique identifier of the Blob Access Point Configuration to connect to. If not provided on create, the service looks up and persists the current unique id.
+   */
+  blobAccessPointConfigurationUniqueId?: string;
 }
 
 /**
@@ -1853,6 +1899,7 @@ model LeaseContainerRequest {
 /**
  * Lease Container response schema.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LeaseContainerResponse {
   /**
    * Returned unique lease ID that must be included with any request to delete the container, or to renew, change, or release the lease.
@@ -2534,6 +2581,7 @@ model LeaseShareRequest {
 /**
  * Lease Share response schema.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LeaseShareResponse {
   /**
    * Returned unique lease ID that must be included with any request to delete the share, or to renew, change, or release the lease.
@@ -2918,6 +2966,36 @@ model CheckNameAvailabilityResult {
 }
 
 /**
+ * Indicates whether Turbo Tier is enabled or disabled.
+ */
+@added(Versions.v2026_09_01)
+union TurboTierStatus {
+  string,
+
+  /** Turbo Tier is enabled. */
+  Enabled: "Enabled",
+
+  /** Turbo Tier is disabled. */
+  Disabled: "Disabled",
+}
+
+/**
+ * Configures Turbo Tier for a storage account.
+ */
+@added(Versions.v2026_09_01)
+model TurboTier {
+  /** Indicates whether Turbo Tier is enabled or disabled. */
+  status?: TurboTierStatus;
+
+  /**
+   * The target fill percentage used for placement. The valid range is 10 to 100. When status is Enabled and this property is omitted, the default value is 20.
+   */
+  @minValue(10)
+  @maxValue(100)
+  targetPercent?: int32;
+}
+
+/**
  * The parameters used when creating a storage account.
  */
 model StorageAccountCreateParameters {
@@ -3084,6 +3162,12 @@ model StorageAccountPropertiesCreateParameters {
   accessTier?: AccessTier;
 
   /**
+   * Configures Turbo Tier for the storage account.
+   */
+  @added(Versions.v2026_09_01)
+  turboTier?: TurboTier;
+
+  /**
    * Provides the identity based authentication settings for Azure Files.
    */
   azureFilesIdentityBasedAuthentication?: AzureFilesIdentityBasedAuthentication;
@@ -3185,6 +3269,12 @@ model StorageAccountPropertiesCreateParameters {
    */
   @added(Versions.v2025_08_01)
   dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
+
+  /**
+   * Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  allowCrossTenantDelegationSas?: boolean;
 }
 
 /**
@@ -3200,6 +3290,18 @@ model SasPolicy {
    * The SAS Expiration Action defines the action to be performed when sasPolicy.sasExpirationPeriod is violated. The 'Log' action can be used for audit purposes and the 'Block' action can be used to block and deny the usage of SAS tokens that do not adhere to the sas policy expiration period.
    */
   expirationAction: ExpirationAction = ExpirationAction.Log;
+
+  /**
+   * Indicates whether user delegation SAS (shared access signature) tokens are required to be bound to a specific user. The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  requireUserBoundUserDelegationSas?: boolean;
+
+  /**
+   * The action to perform when a user delegation SAS (shared access signature) token is not bound to a user as required by requireUserBoundUserDelegationSas.
+   */
+  @added(Versions.v2026_06_01)
+  requireUserBoundUserDelegationSasAction?: PolicyViolationAction;
 }
 
 /**
@@ -3645,6 +3747,12 @@ model StorageDataCollaborationPolicyProperties {
   allowStorageConnectors?: boolean;
 
   /**
+   * Indicates whether Blob Access Point configurations are allowed to be created or managed on the storage account.
+   */
+  @added(Versions.v2026_09_01)
+  allowBlobAccessPoints?: boolean;
+
+  /**
    * Indicates whether data shares are allowed to be created or managed on the storage account.
    */
   allowStorageDataShares?: boolean;
@@ -3750,6 +3858,12 @@ model StorageAccountProperties {
    */
   @visibility(Lifecycle.Read)
   accessTier?: AccessTier;
+
+  /**
+   * Configures Turbo Tier for the storage account.
+   */
+  @added(Versions.v2026_09_01)
+  turboTier?: TurboTier;
 
   /**
    * Provides the identity based authentication settings for Azure Files.
@@ -3910,6 +4024,12 @@ model StorageAccountProperties {
    */
   @added(Versions.v2025_08_01)
   dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
+
+  /**
+   * Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  allowCrossTenantDelegationSas?: boolean;
 }
 
 /**
@@ -4357,6 +4477,12 @@ model StorageAccountPropertiesUpdateParameters {
   accessTier?: AccessTier;
 
   /**
+   * Configures Turbo Tier for the storage account.
+   */
+  @added(Versions.v2026_09_01)
+  turboTier?: TurboTier;
+
+  /**
    * Provides the identity based authentication settings for Azure Files.
    */
   azureFilesIdentityBasedAuthentication?: AzureFilesIdentityBasedAuthentication;
@@ -4463,6 +4589,12 @@ model StorageAccountPropertiesUpdateParameters {
    */
   @added(Versions.v2025_08_01)
   dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
+
+  /**
+   * Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  allowCrossTenantDelegationSas?: boolean;
 }
 
 /**
@@ -4504,6 +4636,7 @@ model DeletedAccountProperties {
 /**
  * An error response from the storage resource provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -5945,6 +6078,12 @@ model NspAccessRuleProperties {
    */
   @visibility(Lifecycle.Read)
   fullyQualifiedDomainNames?: string[];
+
+  /**
+   * Service Tags for inbound rules
+   */
+  @added(Versions.v2026_09_01)
+  serviceTags?: string[];
 }
 
 /**
@@ -6749,4 +6888,208 @@ model StorageDataShareAsset {
    * Consumer visible name of the original path.
    */
   displayName: string;
+}
+
+//
+// Context Cache resources (added in the 2026-06-01 API version).
+//
+
+/**
+ * The kind of context cache account, determining storage topology.
+ */
+@added(Versions.v2026_06_01)
+union ContextCacheAccountKind {
+  /** Single-region storage account */
+  Regional: "Regional",
+
+  /** Multi-region within a data zone */
+  DataZone: "DataZone",
+
+  /** All regions with global distribution */
+  Global: "Global",
+
+  string,
+}
+
+/**
+ * The AI provider associated with a container.
+ */
+@added(Versions.v2026_06_01)
+union AiProvider {
+  string,
+
+  /** OpenAI provider. */
+  OpenAI: "OpenAI",
+}
+
+/**
+ * The status of the current operation.
+ */
+@added(Versions.v2026_06_01)
+@Azure.Core.lroStatus
+union ContextCacheProvisioningState {
+  ResourceProvisioningState,
+
+  /** Initial provisioning in progress */
+  Creating: "Creating",
+
+  /** Update in progress */
+  Updating: "Updating",
+
+  /** Deletion in progress */
+  Deleting: "Deleting",
+
+  /** Change accepted for processing */
+  Accepted: "Accepted",
+
+  string,
+}
+
+/**
+ * Details of the Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheProperties {
+  /** The kind of account determining storage topology. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  accountKind: ContextCacheAccountKind;
+
+  /** Account description. */
+  @maxLength(250)
+  description?: string;
+
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ContextCacheProvisioningState;
+
+  /** Encryption settings for the account. */
+  encryption?: Azure.ResourceManager.CommonTypes.Encryption;
+}
+
+/**
+ * Updatable properties of the Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCachePropertiesUpdate {
+  /** Account description. */
+  @maxLength(250)
+  description?: string;
+
+  /** Encryption settings for the account. */
+  encryption?: Azure.ResourceManager.CommonTypes.Encryption;
+}
+
+/**
+ * The type used for update operations of the Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheUpdate {
+  /** Resource tags. */
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The managed service identity. */
+  @typeChangedFrom(
+    Versions.v2026_09_01,
+    Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity
+  )
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+
+  /** The updatable properties of the Context Cache. */
+  properties?: ContextCachePropertiesUpdate;
+}
+
+/**
+ * Details of a container within a Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheContainerProperties {
+  /** Container description. */
+  @maxLength(250)
+  description?: string;
+
+  /** The model name associated with this container (e.g., gpt-4, claude-3). */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  modelName: string;
+
+  /** The AI provider associated with this container. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  provider: AiProvider;
+
+  /** The Time to Live (TTL) in days (1–30) for this container. Blobs in the container that have not been accessed within this number of days will be automatically deleted. If not specified at creation time, it defaults to 1 day. */
+  @minValue(1)
+  @maxValue(30)
+  timeToLive?: int32;
+
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ContextCacheProvisioningState;
+}
+
+/**
+ * Updatable properties of a container within a Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheContainerPropertiesUpdate {
+  /** Container description. */
+  @maxLength(250)
+  description?: string;
+
+  /** The Time to Live (TTL) in days (1–30) for this container. Blobs in the container that have not been accessed within this number of days will be automatically deleted. */
+  @minValue(1)
+  @maxValue(30)
+  timeToLive?: int32;
+}
+
+/**
+ * The type used for update operations of the Context Cache Container.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheContainerUpdate {
+  /** The updatable properties of the Context Cache Container. */
+  properties?: ContextCacheContainerPropertiesUpdate;
+}
+
+/**
+ * The parameters used to check the availability of the context cache resource name.
+ */
+@added(Versions.v2026_09_01)
+model ContextCacheCheckNameAvailabilityParameters {
+  /** The name of the context cache resource to check for availability. */
+  @pattern("^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$")
+  name: string;
+
+  /** The type of the context cache resource to check for availability. */
+  type: "Microsoft.Storage/contextCaches";
+}
+
+/**
+ * The result of the context cache name availability check.
+ */
+@added(Versions.v2026_09_01)
+model ContextCacheCheckNameAvailabilityResult {
+  /** A boolean value that indicates whether the context cache name is available to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used. */
+  @visibility(Lifecycle.Read)
+  nameAvailable: boolean;
+
+  /** The reason why the context cache name is not available. The Reason element is only returned if NameAvailable is false */
+  @visibility(Lifecycle.Read)
+  reason?: ContextCacheCheckNameAvailabilityFailureReason;
+
+  /** The error message providing additional information about the context cache name availability check failure. */
+  @visibility(Lifecycle.Read)
+  message?: string;
+}
+
+/**
+ * The reason why the context cache name is not available. The Reason element is only returned if NameAvailable is false.
+ */
+@added(Versions.v2026_09_01)
+union ContextCacheCheckNameAvailabilityFailureReason {
+  /** The context cache name is already in use. */
+  AlreadyExists: "AlreadyExists",
+
+  /** The context cache name is invalid. */
+  ContextCacheNameInvalid: "ContextCacheNameInvalid",
+
+  string,
 }

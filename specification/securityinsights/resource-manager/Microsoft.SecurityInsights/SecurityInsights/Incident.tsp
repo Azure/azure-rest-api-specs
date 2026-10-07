@@ -8,6 +8,7 @@ import "./VirtualResource.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 /**
@@ -143,7 +144,9 @@ interface Incidents {
     Request = ManualTriggerRequestBody,
     Response = NoContentResponse & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @body body: unknown;
+      @added(Versions.v2025_10_01_preview)
+      @body
+      body: unknown;
     },
     ErrorType = CloudError,
     OptionalRequestBody = true

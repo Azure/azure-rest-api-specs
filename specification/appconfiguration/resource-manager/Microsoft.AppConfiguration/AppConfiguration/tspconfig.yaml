@@ -6,6 +6,7 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
@@ -25,6 +26,10 @@ options:
     namespace: "Azure.ResourceManager.AppConfiguration"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     enable-wire-path-attribute: true
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.AppConfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2025-08-01-preview"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-appconfiguration"
     package-details:
@@ -39,7 +44,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/appconfiguration"
     emitter-output-dir: "{output-dir}/{service-dir}/armappconfiguration"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappconfiguration/v3"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappconfiguration"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

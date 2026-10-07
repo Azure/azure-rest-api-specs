@@ -13,8 +13,10 @@ namespace Microsoft.EdgeOrder;
 /**
  * Represents order item resource.
  */
-model OrderItemResource
-  is Azure.ResourceManager.TrackedResource<OrderItemProperties, false> {
+model OrderItemResource is Azure.ResourceManager.TrackedResource<
+  OrderItemProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = OrderItemResource,
     KeyName = "orderItemName",

@@ -662,6 +662,10 @@ union IdentityType {
 union PostgresMajorVersion {
   string,
 
+  /** PostgreSQL 19. */
+  @added(Versions.v2026_07_01)
+  `19`: "19",
+
   /** PostgreSQL 18. */
   `18`: "18",
 
@@ -864,6 +868,34 @@ union GeographicallyRedundantBackup {
   Enabled: "Enabled",
 
   /** Server is not configured to create geographically redundant backups. */
+  Disabled: "Disabled",
+}
+
+/**
+ * Indicates if the server is configured to create immutable backups.
+ */
+@added(Versions.v2026_07_01)
+union ImmutableBackup {
+  string,
+
+  /** Server is configured to create immutable backups. */
+  Enabled: "Enabled",
+
+  /** Server is not configured to create immutable backups. */
+  Disabled: "Disabled",
+}
+
+/**
+ * Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server.
+ */
+@added(Versions.v2026_07_01)
+union FipsMode {
+  string,
+
+  /** FIPS mode is enabled on the server. */
+  Enabled: "Enabled",
+
+  /** FIPS mode is disabled on the server. */
   Disabled: "Disabled",
 }
 
@@ -2037,32 +2069,38 @@ model MigrationProperties {
   /**
    * Metadata of source database server.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   sourceDbServerMetadata?: DbServerMetadata;
 
   /**
    * Metadata of target database server.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   targetDbServerMetadata?: DbServerMetadata;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Identifier of the source database server resource, when 'sourceType' is 'PostgreSQLSingleServer'. For other source types this must be set to ipaddress:port@username or hostname:port@username.")
   sourceDbServerResourceId?: string;
 
   /**
    * Fully qualified domain name (FQDN) or IP address of the source server. This property is optional. When provided, the migration service will always use it to connect to the source server.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   sourceDbServerFullyQualifiedDomainName?: string;
 
   /**
    * Identifier of the target database server resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   targetDbServerResourceId?: string;
 
   /**
    * Fully qualified domain name (FQDN) or IP address of the target server. This property is optional. When provided, the migration service will always use it to connect to the target server.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   targetDbServerFullyQualifiedDomainName?: string;
 
   /**
@@ -2073,14 +2111,13 @@ model MigrationProperties {
   /**
    * Names of databases to migrate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @maxItems(50)
   dbsToMigrate?: string[];
 
   /**
    * Indicates whether to setup logical replication on source server, if needed.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   setupLogicalReplicationOnSourceDbIfNeeded?: LogicalReplicationOnSourceServer;
 
   /**
@@ -2118,8 +2155,6 @@ model MigrationProperties {
   /**
    * When you want to trigger cutover for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dbsToTriggerCutoverOn?: string[];
 
   /**
@@ -2130,8 +2165,6 @@ model MigrationProperties {
   /**
    * When you want to trigger cancel for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dbsToCancelMigrationOn?: string[];
 }
 
@@ -2170,6 +2203,7 @@ model MigrationSubstateDetails {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbDetails?: Record<DatabaseMigrationState>;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationDetails?: ValidationDetails;
@@ -2178,6 +2212,7 @@ model MigrationSubstateDetails {
 /**
  * Migration state of a database.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model DatabaseMigrationState {
   /**
    * Name of database.
@@ -2292,6 +2327,7 @@ model ValidationDetails {
   /**
    * Details of server level validations.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#["databaseName"])
   dbLevelValidationDetails?: DbLevelValidationStatus[];
 }
@@ -2335,6 +2371,7 @@ model ValidationMessage {
 /**
  * Validation status summary for a database.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model DbLevelValidationStatus {
   /**
    * Name of database.
@@ -2464,17 +2501,20 @@ model MigrationResourceForPatch {
  * Migration properties.
  */
 model MigrationPropertiesForPatch {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Identifier of the source database server resource, when 'sourceType' is 'PostgreSQLSingleServer'. For other source types this must be set to ipaddress:port@username or hostname:port@username.")
   sourceDbServerResourceId?: string;
 
   /**
    * Fully qualified domain name (FQDN) or IP address of the source server. This property is optional. When provided, the migration service will always use it to connect to the source server.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   sourceDbServerFullyQualifiedDomainName?: string;
 
   /**
    * Fully qualified domain name (FQDN) or IP address of the target server. This property is optional. When provided, the migration service will always use it to connect to the target server.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   targetDbServerFullyQualifiedDomainName?: string;
 
   /**
@@ -2485,14 +2525,13 @@ model MigrationPropertiesForPatch {
   /**
    * Names of databases to migrate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @maxItems(50)
   dbsToMigrate?: string[];
 
   /**
    * Indicates whether to setup logical replication on source server, if needed.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   setupLogicalReplicationOnSourceDbIfNeeded?: LogicalReplicationOnSourceServer;
 
   /**
@@ -2524,8 +2563,6 @@ model MigrationPropertiesForPatch {
   /**
    * When you want to trigger cutover for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dbsToTriggerCutoverOn?: string[];
 
   /**
@@ -2536,8 +2573,6 @@ model MigrationPropertiesForPatch {
   /**
    * When you want to trigger cancel for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dbsToCancelMigrationOn?: string[];
 
   /**
@@ -3060,6 +3095,10 @@ model ServerProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   cluster?: Cluster;
+
+  @doc("Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server. If not specified on create, it defaults to Disabled.")
+  @added(Versions.v2026_07_01)
+  fipsMode?: FipsMode = FipsMode.Disabled;
 }
 
 /**
@@ -3076,6 +3115,20 @@ model Storage {
    * Flag to enable or disable the automatic growth of storage size of a server when available space is nearing zero and conditions allow for automatically growing storage size.
    */
   autoGrow?: StorageAutoGrow;
+
+  @doc("Maximum allocated storage size to which storage autogrow may grow, in MB. This value is not a disk-utilization trigger threshold and must be at least the effective current or requested storage size. Storage conversion uses 1 GB = 1,024 MB.")
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @minValue(1)
+  @maxValue(67108864)
+  autoGrowMaxThresholdMb?: int32;
+
+  @doc("Storage autogrow increment as a percentage of the current allocated storage size. This value is not an absolute size increment or a utilization threshold.")
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @minValue(1)
+  @maxValue(100)
+  autoGrowIncrementPercent?: int32;
 
   /**
    * Storage tier of a server.
@@ -3186,6 +3239,12 @@ model Backup {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   geoRedundantBackup?: GeographicallyRedundantBackup = GeographicallyRedundantBackup.Disabled;
+
+  /**
+   * Indicates if the server is configured to create immutable backups.
+   */
+  @added(Versions.v2026_07_01)
+  immutableBackup?: ImmutableBackup;
 
   /**
    * Earliest restore point time (ISO8601 format) for a server.
@@ -3456,6 +3515,10 @@ model ServerPropertiesForPatch {
    */
   @visibility(Lifecycle.Read, Lifecycle.Update)
   cluster?: Cluster;
+
+  @doc("Indicates if FIPS (Federal Information Processing Standards) mode is enabled on the server. If not specified, the current value is preserved.")
+  @added(Versions.v2026_07_01)
+  fipsMode?: FipsMode;
 }
 
 /**
@@ -3472,6 +3535,12 @@ model BackupForPatch {
    */
   @visibility(Lifecycle.Read)
   geoRedundantBackup?: GeographicallyRedundantBackup;
+
+  /**
+   * Indicates if the server is configured to create immutable backups.
+   */
+  @added(Versions.v2026_07_01)
+  immutableBackup?: ImmutableBackup;
 
   /**
    * Earliest restore point time (ISO8601 format) for a server.
@@ -3856,6 +3925,7 @@ scalar PrivateDnsZoneSuffix extends string;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model CustomErrorResponse {
   @body
@@ -3915,6 +3985,7 @@ union NetworkMigrationState {
 /**
  * Status of a network migration operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateNetworkStatus {
   /**
    * Identifier of the subscription.
@@ -4201,6 +4272,102 @@ model MajorVersionUpgradePrecheckResource
     SegmentName = "majorVersionUpgradePrecheck",
     NamePattern = "^[a-zA-Z0-9-]{3,36}$"
   >;
+}
+
+@doc("The database agent configuration for a PostgreSQL flexible server.")
+@added(Versions.v2026_07_01)
+@singleton("Default")
+@parentResource(Server)
+model DbAgent is Azure.ResourceManager.ProxyResource<DbAgentProperties> {
+  ...ResourceNameParameter<
+    Resource = DbAgent,
+    KeyName = "dbAgentName",
+    SegmentName = "dbAgents",
+    NamePattern = "^Default$"
+  >;
+}
+
+@doc("Properties of the database agent configuration.")
+@added(Versions.v2026_07_01)
+model DbAgentProperties {
+  @doc("The state of the database agent.")
+  @visibility(Lifecycle.Read)
+  state: DbAgentState;
+
+  @doc("The provisioning state of the database agent resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: DbAgentProvisioningState;
+
+  @doc("The time when the database agent configuration was last modified.")
+  @visibility(Lifecycle.Read)
+  lastModifiedTime?: utcDateTime;
+}
+
+@doc("A request to enable or disable the database agent.")
+@added(Versions.v2026_07_01)
+model DbAgentForUpdate {
+  @doc("The requested database agent properties.")
+  properties: DbAgentForUpdateProperties;
+}
+
+@doc("Writable properties of the database agent configuration.")
+@added(Versions.v2026_07_01)
+model DbAgentForUpdateProperties {
+  @doc("The requested state of the database agent.")
+  state: DbAgentForUpdateState;
+}
+
+@doc("The state of the database agent.")
+@added(Versions.v2026_07_01)
+union DbAgentState {
+  string,
+
+  @doc("The database agent is being enabled.")
+  Enabling: "Enabling",
+
+  @doc("The database agent is enabled.")
+  Enabled: "Enabled",
+
+  @doc("The database agent is being disabled.")
+  Disabling: "Disabling",
+
+  @doc("The database agent is disabled.")
+  Disabled: "Disabled",
+
+  @doc("The database agent lifecycle operation failed.")
+  Failed: "Failed",
+}
+
+@doc("The provisioning state of the database agent resource.")
+@added(Versions.v2026_07_01)
+union DbAgentProvisioningState {
+  ResourceProvisioningState,
+
+  @doc("The database agent lifecycle operation is in progress.")
+  InProgress: "InProgress",
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "PUT requests accept only Enabled or Disabled; additional values must be rejected."
+@doc("The database agent states accepted in a write request.")
+@added(Versions.v2026_07_01)
+union DbAgentForUpdateState {
+  @doc("Enable the database agent.")
+  Enabled: "Enabled",
+
+  @doc("Disable the database agent.")
+  Disabled: "Disabled",
+}
+
+@doc("The response returned when a database agent write is accepted.")
+@added(Versions.v2026_07_01)
+model DbAgentAcceptedResponse {
+  ...AcceptedResponse;
+  ...ArmCombinedLroHeaders<FinalResult = DbAgent>;
+  ...Azure.Core.Foundations.RetryAfterHeader;
+
+  @doc("The database agent resource while the lifecycle operation is in progress.")
+  @bodyRoot
+  resource: DbAgent;
 }
 
 @@visibility(AdvancedThreatProtectionSettingsList.value, Lifecycle.Read);

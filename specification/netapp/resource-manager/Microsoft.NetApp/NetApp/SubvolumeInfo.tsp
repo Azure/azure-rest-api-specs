@@ -12,7 +12,10 @@ using Http;
 namespace Microsoft.NetApp;
 /**
  * Subvolume Information properties
+ * Deprecated. This resource type will be removed in a future API version.
  */
+#suppress "deprecated" "Suppress this warning until the property is removed."
+#deprecated "Deprecated. This resource type will be removed in a future API version."
 @parentResource(Volume)
 model SubvolumeInfo
   is Azure.ResourceManager.ProxyResource<SubvolumeProperties> {
@@ -27,11 +30,15 @@ model SubvolumeInfo
 /**
  * List of Subvolumes
  */
+#suppress "deprecated" "Suppress this warning until the property is removed."
+#deprecated "Deprecated. This model will be removed in a future API version."
 model SubvolumesList is Azure.Core.Page<SubvolumeInfo>;
 
 /**
  * This represents path associated with the subvolume
  */
+#suppress "deprecated" "Suppress this warning until the property is removed."
+#deprecated "Deprecated. This model will be removed in a future API version."
 model SubvolumeProperties {
   /**
    * Path to the subvolume
@@ -61,6 +68,9 @@ model SubvolumeProperties {
 /**
  * Subvolume Patch Request properties
  */
+#suppress "deprecated" "Suppress this warning until the property is removed."
+#deprecated "Deprecated. This model will be removed in a future API version."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SubvolumePatchRequest {
   /**
    * Subvolume Properties
@@ -71,6 +81,8 @@ model SubvolumePatchRequest {
 /**
  * Parameters with which a subvolume can be updated
  */
+#suppress "deprecated" "Suppress this warning until the property is removed."
+#deprecated "Deprecated. This model will be removed in a future API version."
 model SubvolumePatchParams {
   /**
    * Truncate subvolume to the provided size in bytes
@@ -87,6 +99,8 @@ model SubvolumePatchParams {
 /**
  * Result of the post subvolume and action is to get metadata of the subvolume.
  */
+#suppress "deprecated" "Suppress this warning until the property is removed."
+#deprecated "Deprecated. This model will be removed in a future API version."
 model SubvolumeModel {
   /**
    * Resource Id
@@ -115,6 +129,8 @@ model SubvolumeModel {
 /**
  * Properties which represents actual subvolume model which is stored as a file in the system.
  */
+#suppress "deprecated" "Suppress this warning until the property is removed."
+#deprecated "Deprecated. This model will be removed in a future API version."
 model SubvolumeModelProperties {
   /**
    * Path to the subvolume
@@ -171,16 +187,23 @@ model SubvolumeModelProperties {
   provisioningState?: string;
 }
 
+#deprecated "`Subvolumes` is being deprecated."
+#suppress "deprecated" "Suppress warning until the property SubvolumeInfo is removed."
 @armResourceOperations
 interface SubvolumeInfos {
   /**
    * Returns the path associated with the subvolumeName provided
    */
+  #deprecated "`Subvolumes` is being deprecated."
+  #suppress "deprecated" "Suppress warning until the property SubvolumeInfo is removed."
   get is ArmResourceRead<SubvolumeInfo>;
 
   /**
    * Creates a subvolume in the path or clones the subvolume mentioned in the parentPath
+   * Deprecated. This operation will be removed in a future API version.
    */
+  #deprecated "`Subvolumes` is being deprecated."
+  #suppress "deprecated" "Suppress warning until the property SubvolumeInfo is removed."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
@@ -198,7 +221,9 @@ interface SubvolumeInfos {
   /**
    * Patch a subvolume
    */
+  #deprecated "`Subvolumes` is being deprecated."
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "deprecated" "Suppress warning until the property SubvolumeInfo is removed."
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     SubvolumeInfo,
@@ -210,6 +235,8 @@ interface SubvolumeInfos {
   /**
    * Delete subvolume
    */
+  #deprecated "`Subvolumes` is being deprecated."
+  #suppress "deprecated" "Suppress warning until the property SubvolumeInfo is removed."
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -224,6 +251,8 @@ interface SubvolumeInfos {
   /**
    * Returns a list of the subvolumes in the volume
    */
+  #deprecated "`Subvolumes` is being deprecated."
+  #suppress "deprecated" "Suppress warning until the property SubvolumeInfo is removed."
   listByVolume is ArmResourceListByParent<
     SubvolumeInfo,
     Response = ArmResponse<SubvolumesList>
@@ -233,6 +262,7 @@ interface SubvolumeInfos {
    * Get details of the specified subvolume
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #deprecated "`Subvolumes` is being deprecated."
   getMetadata is ArmResourceActionAsync<
     SubvolumeInfo,
     void,

@@ -181,6 +181,21 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "rust"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  KeyInfo.start,
+  "serialize_with",
+  "azure_storage_common::rfc3339::seconds_only::option::serialize",
+  "rust"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  KeyInfo.expiry,
+  "serialize_with",
+  "azure_storage_common::rfc3339::seconds_only::option::serialize",
+  "rust"
+);
+
 @@clientNamespace(Storage.Blob, "Azure.Storage.Blobs", "rust,go");
 @@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs", "rust,go");
 @@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs", "rust,go");
@@ -192,8 +207,42 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
+
+@@clientName(Storage.Blob.Container.listBlobs, "listBlobsXml", "rust");
+@@access(Storage.Blob.Container.listBlobs, Access.internal, "rust");
+@@access(Storage.Blob.ListBlobsResponse, Access.public, "rust");
+
+@@clientName(
+  Storage.Blob.Container.listBlobHierarchySegment,
+  "listBlobsHierarchicalXml",
+  "rust"
+);
+@@access(
+  Storage.Blob.Container.listBlobHierarchySegment,
+  Access.internal,
+  "rust"
+);
+@@access(Storage.Blob.ListBlobsHierarchicalResponse, Access.public, "rust");
+@@access(Storage.Blob.ListBlobsIncludeItem, Access.public, "rust");
+
+@@clientName(Storage.Blob.Blob.abortCopyFromUrl, "abortCopy", "rust");
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" ""
+@@clientOption(
+  Storage.Blob.PageBlob.getPageRanges,
+  "forcePageIterator",
+  true,
+  "rust"
+);
+@@clientName(Storage.Blob.PageBlob.getPageRanges, "listPageRanges", "rust");
+@@clientName(PageList.pageRange, "pageRanges", "rust");
+@@clientName(PageList.clearRange, "clearRanges", "rust");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  Storage.Blob.PageBlob.getPageRanges,
+  "python,csharp,javascript,go"
+);
 
 @@clientName(
   BlobProperties.customerProvidedKeySha256,
@@ -223,6 +272,16 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(AccessPolicy.permission, "permissions", "javascript");
 @@clientName(
   BlobProperties.accessTierChangeTime,
+  "accessTierChangedOn",
+  "javascript"
+);
+@@clientName(
+  AccessTierChangeTimeResponseHeader.accessTierChangeTime,
+  "accessTierChangedOn",
+  "javascript"
+);
+@@clientName(
+  AccessTierChangeTimeResponseHeaderV2026_10_06.accessTierChangeTime,
   "accessTierChangedOn",
   "javascript"
 );
@@ -314,6 +373,16 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 );
 
 @@clientName(ContentMd5ResponseHeader.contentMd5, "contentMD5", "javascript");
+@@clientName(
+  ContentCrc64ResponseHeader.contentCrc64,
+  "xMsContentCrc64",
+  "javascript"
+);
+@@clientName(
+  ContentCrc64ResponseHeaderV2026_10_06.contentCrc64,
+  "xMsContentCrc64",
+  "javascript"
+);
 
 @@alternateType(BlobProperties.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.size, uint64, "rust");
@@ -321,6 +390,13 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   BlobMetadata,
   {
     identity: "crate::models::BlobMetadata",
+  },
+  "rust"
+);
+@@alternateType(
+  UserDelegationKey,
+  {
+    identity: "azure_storage_common::models::UserDelegationKey",
   },
   "rust"
 );
@@ -786,17 +862,14 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@scope(Storage.Blob.RetentionPolicy.allowPermanentDelete, "!javascript");
 
-@@scope(Storage.Blob.Service.getUserDelegationKey, "!rust");
-@@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
+@@scope(Storage.Blob.Container.listBlobFlatSegmentApacheArrow, "!rust");
+@@scope(Storage.Blob.Container.listBlobHierarchySegmentApacheArrow, "!rust");
 @@scope(Storage.Blob.Container.rename, "!rust");
 @@scope(Storage.Blob.Container.restore, "!rust");
-@@scope(Storage.Blob.Blob.abortCopyFromUrl, "!rust");
 @@scope(Storage.Blob.Blob.copyFromUrl, "!rust");
 @@scope(Storage.Blob.Blob.setExpiry, "!rust");
-@@scope(Storage.Blob.Blob.startCopyFromUrl, "!rust");
 @@scope(Storage.Blob.BlockBlob.query, "!rust");
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
-@@scope(Storage.Blob.PageBlob.getPageRanges, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
 
 @@alternateType(Storage.Blob.UserDelegationKey.signedStart, string, "python");
@@ -900,7 +973,6 @@ model BlobServicePropertiesCsharp {
   EncryptionAlgorithmTypeCustom,
   "csharp"
 );
-
 @@clientName(BlobServicePropertiesCsharp, "BlobServiceProperties", "csharp");
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "csharp");
 @@clientName(StorageErrorCode, "BlobErrorCode", "csharp");

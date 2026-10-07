@@ -9,6 +9,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.Core.Traits;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -17,6 +18,7 @@ namespace Microsoft.Chaos;
  * Location header should continue polling until a 200 response is returned.
  * The body reflects the current run state at the time of the poll.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ScenarioRunInProgressResponse {
   ...AcceptedResponse;
 
@@ -84,6 +86,16 @@ model ScenarioRunProperties {
   managedIdentityPrincipalId: string;
 
   /**
+   * The resource snapshot ID this run is pinned to. Resolved from the scenario's
+   * pinned evaluation snapshot (template scenarios) or the latest discovery
+   * snapshot (custom scenarios) at run creation, ensuring the run executes against
+   * the same set of discovered resources that produced the recommendation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceSnapshotId?: string;
+
+  /**
    * The scenario run status.
    */
   @visibility(Lifecycle.Read)
@@ -96,6 +108,16 @@ model ScenarioRunProperties {
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
   resources: ScenarioRunResource[];
+
+  /**
+   * Resources that matched the scenario's target resource types but were excluded
+   * from fault injection by the configuration's resource-targeting filters
+   * (for example zone, location, or explicit exclusions). These resources will not be impacted by the run.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  excludedResources?: ScenarioRunResource[];
 
   /**
    * System or infrastructure errors encountered during the scenario run.

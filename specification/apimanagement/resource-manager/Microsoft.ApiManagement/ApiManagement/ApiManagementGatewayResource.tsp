@@ -13,11 +13,10 @@ namespace Microsoft.ApiManagement;
 /**
  * A single API Management gateway resource in List or Get response.
  */
-model ApiManagementGatewayResource
-  is Azure.ResourceManager.TrackedResource<
-    ApiManagementGatewayProperties,
-    false
-  > {
+model ApiManagementGatewayResource is Azure.ResourceManager.TrackedResource<
+  ApiManagementGatewayProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ApiManagementGatewayResource,
     KeyName = "gatewayName",

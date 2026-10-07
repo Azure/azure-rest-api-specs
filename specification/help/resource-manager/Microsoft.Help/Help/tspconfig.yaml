@@ -40,7 +40,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/selfhelp"
     emitter-output-dir: "{output-dir}/{service-dir}/armselfhelp"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armselfhelp/v2"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armselfhelp"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -50,3 +50,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

@@ -499,6 +499,7 @@ model RecommendedAction {
   /**
    * Link to the action
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   actionUrl?: string;
 
   /**
@@ -583,6 +584,7 @@ model ServiceImpactingEventIncidentProperties {
 /**
  * Error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**

@@ -30,5 +30,8 @@ model AKSAssessment is ProxyResource<AKSAssessmentProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("AKS Assessment Properties.")
-model AKSAssessmentProperties
-  is AssessmentProperties<Scope, AKSAssessmentSettings, AssessmentDetails>;
+model AKSAssessmentProperties is AssessmentProperties<
+  Scope,
+  AKSAssessmentSettings,
+  AssessmentDetails
+>;

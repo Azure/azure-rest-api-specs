@@ -354,6 +354,7 @@ enum AssessmentDayOfWeek {
  * Operating System of the current SQL Virtual Machine.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 enum OsType {
   Windows,
   Linux,
@@ -624,6 +625,7 @@ model WsfcDomainProfile {
   /**
    * Fully qualified ARM resource id of the witness storage account.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   storageAccountUrl?: string;
 
@@ -792,6 +794,7 @@ model SqlVirtualMachineProperties {
   /**
    * Operating System of the current SQL Virtual Machine.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osType?: OsType;
 }
@@ -871,6 +874,7 @@ model AutoBackupSettings {
   /**
    * Storage account url where backup will be taken to.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   storageAccountUrl?: string;
 
   /**
@@ -945,6 +949,7 @@ model KeyVaultCredentialSettings {
   /**
    * Azure Key Vault url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   azureKeyVaultUrl?: string;
 
   /**
