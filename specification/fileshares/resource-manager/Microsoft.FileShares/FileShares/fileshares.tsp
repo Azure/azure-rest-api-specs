@@ -218,6 +218,7 @@ model FileShareProperties {
 model FileShareEncryption {
   ...CommonTypes.Encryption;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Uses the Url suffix to stay consistent with the sibling customerManagedKeyEncryption.keyEncryptionKeyUrl defined in Azure.ResourceManager.CommonTypes.Encryption (common-types v6 customermanagedkeys.json); this property is the resolved value of that same key vault key URL, so renaming only this one to Uri would make the pair inconsistent."
   @visibility(Lifecycle.Read)
   @doc("The versioned key encryption key URL currently applied to the file share by the service. When an unversioned keyEncryptionKeyUrl is supplied, this reflects the resolved latest key version currently in use.")
   currentKeyEncryptionKeyUrl?: string;
@@ -299,6 +300,11 @@ model FileSharePatchProperties {
   @visibility(Lifecycle.Update)
   @doc("Gets or sets allow or disallow public network access to azure managed file share")
   publicNetworkAccess?: PublicNetworkAccess;
+
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Update)
+  @doc("Encryption settings for the file share.")
+  encryption?: FileShareEncryption;
 }
 
 @lroStatus
