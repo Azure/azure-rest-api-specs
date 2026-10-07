@@ -227,7 +227,7 @@ model ReportStatus {
 
 @added(Versions.Preview20261031)
 @doc("The response for the sovereign view compliance summary action.")
-model SovereignViewComplianceSummaryResponse {
+model SovereignViewComplianceSummaryResult {
   @doc("State indicating whether the data is processed or still being processed.")
   reportStatus: ReportStatus;
 
@@ -341,7 +341,7 @@ model SovereignViewComplianceDimensionSummary {
 
 @added(Versions.Preview20261031)
 @doc("The request for the sovereign view compliance details action.")
-model SovereignViewComplianceDetailsRequest {
+model SovereignViewComplianceDetailsContent {
   @doc("The maximum number of resources to return. Used for pagination.")
   @minValue(1)
   top: int32;
@@ -504,7 +504,7 @@ model SovereignViewComplianceDetailsSearch {
 
 @added(Versions.Preview20261031)
 @doc("The response for the sovereign view compliance details action.")
-model SovereignViewComplianceDetailsResponse {
+model SovereignViewComplianceDetailsResult {
   @doc("State indicating whether the data is processed or still being processed.")
   reportStatus: ReportStatus;
 
@@ -595,7 +595,7 @@ model SovereignViewComplianceDetail {
 
 @added(Versions.Preview20261031)
 @doc("The request for the sovereign view filter values action.")
-model SovereignViewFilterValuesRequest {
+model SovereignViewFilterValuesContent {
   @doc("The filter field for which values are requested.")
   requestedFilter: SovereignViewFilterField;
 
@@ -609,7 +609,7 @@ model SovereignViewFilterValuesRequest {
 
 @added(Versions.Preview20261031)
 @doc("The response for the sovereign view filter values action.")
-model SovereignViewFilterValuesResponse {
+model SovereignViewFilterValuesResult {
   @doc("State indicating whether the data is processed or still being processed.")
   dataState: DataState;
 
@@ -644,7 +644,7 @@ model SovereignViewFilterValueItem {
 
 @added(Versions.Preview20261031)
 @doc("The request for the sovereign view operational status action.")
-model SovereignViewOperationalStatusRequest {
+model SovereignViewOperationalStatusContent {
   @doc("The level of detail to return in the operational status response. Defaults to Detailed.")
   mode?: OperationalStatusRequestMode;
 
@@ -654,7 +654,7 @@ model SovereignViewOperationalStatusRequest {
 
 @added(Versions.Preview20261031)
 @doc("The response for the sovereign view operational status action.")
-model SovereignViewOperationalStatusResponse {
+model SovereignViewOperationalStatusResult {
   @doc("The name of the sovereign view.")
   name: string;
 
@@ -779,7 +779,7 @@ union SovereignViewScopeType {
 
 @added(Versions.Preview20261031)
 @doc("The request for the compliance reasoning of one resource and dimension.")
-model SovereignViewComplianceResourceDetailsRequest {
+model SovereignViewComplianceResourceDetailsContent {
   @doc("The full ARM resource identifier of the resource for which compliance reasoning is requested.")
   resourceId: armResourceIdentifier;
 
@@ -792,7 +792,7 @@ model SovereignViewComplianceResourceDetailsRequest {
 
 @added(Versions.Preview20261031)
 @doc("The compliance reasoning for given resource and dimension, including the reasoning for its linked and replica resources.")
-model SovereignViewComplianceResourceDetailsResponse {
+model SovereignViewComplianceResourceDetailsResult {
   @doc("The evaluated resource ARM identifier.")
   resourceId: armResourceIdentifier;
 
@@ -887,17 +887,17 @@ model SovereignViewDataEvaluationOutcome {
 
 @added(Versions.Preview20261031)
 @doc("The request for the sovereign view remediate action.")
-model SovereignViewRemediateRequest {
+model SovereignViewRemediateContent {
   @doc("The remediation dimension being addressed. Only \"DataResidency\" is currently supported for remediation.")
   dimensionType: ComplianceDimension;
 
   @doc("The residency-specific remediation request, present when dimensionType is \"DataResidency\".")
-  residencyRemediationRequest: SovereignViewResidencyRemediationRequest;
+  residencyRemediationRequest: SovereignViewResidencyRemediationContent;
 }
 
 @added(Versions.Preview20261031)
 @doc("The residency remediation request payload.")
-model SovereignViewResidencyRemediationRequest {
+model SovereignViewResidencyRemediationContent {
   @doc("The residency remediation configuration.")
   configuration: SovereignViewResidencyRemediationConfiguration;
 
@@ -938,7 +938,7 @@ model SovereignViewResidencyRemediationResourceConfiguration {
 
 @added(Versions.Preview20261031)
 @doc("The response for the sovereign view remediate action.")
-model SovereignViewRemediateResponse {
+model SovereignViewRemediateResult {
   @doc("The identifier used to fetch the remediation result via the remediationResult action.")
   remediationId: string;
 
@@ -948,7 +948,7 @@ model SovereignViewRemediateResponse {
 
 @added(Versions.Preview20261031)
 @doc("The request for the sovereign view remediationResult action.")
-model SovereignViewRemediationResultRequest {
+model SovereignViewRemediationResultContent {
   @doc("The remediation identifier returned by the remediate action.")
   remediationId: string;
 }
@@ -967,7 +967,7 @@ union SovereignViewRemediationStatus {
 
 @added(Versions.Preview20261031)
 @doc("The response for the sovereign view remediationResult action.")
-model SovereignViewRemediationResultResponse {
+model SovereignViewRemediationResult {
   @doc("The remediation identifier this result corresponds to.")
   remediationId: string;
 

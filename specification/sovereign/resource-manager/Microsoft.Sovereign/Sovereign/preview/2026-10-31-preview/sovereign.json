@@ -535,7 +535,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SovereignViewComplianceDetailsRequest"
+              "$ref": "#/definitions/SovereignViewComplianceDetailsContent"
             }
           }
         ],
@@ -543,7 +543,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SovereignViewComplianceDetailsResponse"
+              "$ref": "#/definitions/SovereignViewComplianceDetailsResult"
             }
           },
           "default": {
@@ -591,7 +591,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SovereignViewComplianceResourceDetailsRequest"
+              "$ref": "#/definitions/SovereignViewComplianceResourceDetailsContent"
             }
           }
         ],
@@ -599,7 +599,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SovereignViewComplianceResourceDetailsResponse"
+              "$ref": "#/definitions/SovereignViewComplianceResourceDetailsResult"
             }
           },
           "default": {
@@ -649,7 +649,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SovereignViewComplianceSummaryResponse"
+              "$ref": "#/definitions/SovereignViewComplianceSummaryResult"
             }
           },
           "default": {
@@ -697,7 +697,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SovereignViewFilterValuesRequest"
+              "$ref": "#/definitions/SovereignViewFilterValuesContent"
             }
           }
         ],
@@ -705,7 +705,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SovereignViewFilterValuesResponse"
+              "$ref": "#/definitions/SovereignViewFilterValuesResult"
             }
           },
           "default": {
@@ -753,7 +753,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SovereignViewOperationalStatusRequest"
+              "$ref": "#/definitions/SovereignViewOperationalStatusContent"
             }
           }
         ],
@@ -761,7 +761,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SovereignViewOperationalStatusResponse"
+              "$ref": "#/definitions/SovereignViewOperationalStatusResult"
             }
           },
           "default": {
@@ -809,7 +809,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SovereignViewRemediateRequest"
+              "$ref": "#/definitions/SovereignViewRemediateContent"
             }
           }
         ],
@@ -817,7 +817,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SovereignViewRemediateResponse"
+              "$ref": "#/definitions/SovereignViewRemediateResult"
             }
           },
           "202": {
@@ -883,7 +883,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SovereignViewRemediationResultRequest"
+              "$ref": "#/definitions/SovereignViewRemediationResultContent"
             }
           }
         ],
@@ -891,7 +891,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SovereignViewRemediationResultResponse"
+              "$ref": "#/definitions/SovereignViewRemediationResult"
             }
           },
           "default": {
@@ -1405,6 +1405,62 @@
         "dimensionDetails"
       ]
     },
+    "SovereignViewComplianceDetailsContent": {
+      "type": "object",
+      "description": "The request for the sovereign view compliance details action.",
+      "properties": {
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of resources to return. Used for pagination.",
+          "minimum": 1
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The resources to skip when the results are returned. Used for pagination.",
+          "minimum": 0
+        },
+        "complianceDimensions": {
+          "type": "array",
+          "description": "The filters for compliance dimensions and their states to apply when querying for compliance details.",
+          "items": {
+            "$ref": "#/definitions/SovereignViewComplianceDetailsDimensionFilter"
+          },
+          "x-ms-identifiers": [
+            "dimension"
+          ]
+        },
+        "filters": {
+          "type": "array",
+          "description": "The filters to apply when querying for compliance details.",
+          "items": {
+            "$ref": "#/definitions/SovereignViewComplianceDetailsFilters"
+          },
+          "x-ms-identifiers": [
+            "field",
+            "operator"
+          ]
+        },
+        "sort": {
+          "type": "array",
+          "description": "The sorting to apply when querying for compliance details.",
+          "items": {
+            "$ref": "#/definitions/SovereignViewComplianceDetailsSort"
+          },
+          "x-ms-identifiers": [
+            "field"
+          ]
+        },
+        "search": {
+          "$ref": "#/definitions/SovereignViewComplianceDetailsSearch",
+          "description": "The search to apply when querying for compliance details."
+        }
+      },
+      "required": [
+        "top"
+      ]
+    },
     "SovereignViewComplianceDetailsDimensionFilter": {
       "type": "object",
       "description": "The filter for compliance details based on compliance dimensions and their states.",
@@ -1470,63 +1526,7 @@
         "value"
       ]
     },
-    "SovereignViewComplianceDetailsRequest": {
-      "type": "object",
-      "description": "The request for the sovereign view compliance details action.",
-      "properties": {
-        "top": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of resources to return. Used for pagination.",
-          "minimum": 1
-        },
-        "skip": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The resources to skip when the results are returned. Used for pagination.",
-          "minimum": 0
-        },
-        "complianceDimensions": {
-          "type": "array",
-          "description": "The filters for compliance dimensions and their states to apply when querying for compliance details.",
-          "items": {
-            "$ref": "#/definitions/SovereignViewComplianceDetailsDimensionFilter"
-          },
-          "x-ms-identifiers": [
-            "dimension"
-          ]
-        },
-        "filters": {
-          "type": "array",
-          "description": "The filters to apply when querying for compliance details.",
-          "items": {
-            "$ref": "#/definitions/SovereignViewComplianceDetailsFilters"
-          },
-          "x-ms-identifiers": [
-            "field",
-            "operator"
-          ]
-        },
-        "sort": {
-          "type": "array",
-          "description": "The sorting to apply when querying for compliance details.",
-          "items": {
-            "$ref": "#/definitions/SovereignViewComplianceDetailsSort"
-          },
-          "x-ms-identifiers": [
-            "field"
-          ]
-        },
-        "search": {
-          "$ref": "#/definitions/SovereignViewComplianceDetailsSearch",
-          "description": "The search to apply when querying for compliance details."
-        }
-      },
-      "required": [
-        "top"
-      ]
-    },
-    "SovereignViewComplianceDetailsResponse": {
+    "SovereignViewComplianceDetailsResult": {
       "type": "object",
       "description": "The response for the sovereign view compliance details action.",
       "properties": {
@@ -1786,7 +1786,7 @@
         "othersCount"
       ]
     },
-    "SovereignViewComplianceResourceDetailsRequest": {
+    "SovereignViewComplianceResourceDetailsContent": {
       "type": "object",
       "description": "The request for the compliance reasoning of one resource and dimension.",
       "properties": {
@@ -1810,7 +1810,7 @@
         "dimension"
       ]
     },
-    "SovereignViewComplianceResourceDetailsResponse": {
+    "SovereignViewComplianceResourceDetailsResult": {
       "type": "object",
       "description": "The compliance reasoning for given resource and dimension, including the reasoning for its linked and replica resources.",
       "properties": {
@@ -1852,7 +1852,7 @@
         "evaluations"
       ]
     },
-    "SovereignViewComplianceSummaryResponse": {
+    "SovereignViewComplianceSummaryResult": {
       "type": "object",
       "description": "The response for the sovereign view compliance summary action.",
       "properties": {
@@ -2202,7 +2202,7 @@
         "count"
       ]
     },
-    "SovereignViewFilterValuesRequest": {
+    "SovereignViewFilterValuesContent": {
       "type": "object",
       "description": "The request for the sovereign view filter values action.",
       "properties": {
@@ -2230,7 +2230,7 @@
         "requestedFilter"
       ]
     },
-    "SovereignViewFilterValuesResponse": {
+    "SovereignViewFilterValuesResult": {
       "type": "object",
       "description": "The response for the sovereign view filter values action.",
       "properties": {
@@ -2322,6 +2322,23 @@
         "id"
       ]
     },
+    "SovereignViewOperationalStatusContent": {
+      "type": "object",
+      "description": "The request for the sovereign view operational status action.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/OperationalStatusRequestMode",
+          "description": "The level of detail to return in the operational status response. Defaults to Detailed."
+        },
+        "evaluationParameters": {
+          "type": "array",
+          "description": "The evaluation parameters that control which checks are performed when determining operational status.",
+          "items": {
+            "$ref": "#/definitions/OperationalStatusEvaluationParameter"
+          }
+        }
+      }
+    },
     "SovereignViewOperationalStatusDetails": {
       "type": "object",
       "description": "An operational status detail item describing an issue impacting the operability of the sovereign view.",
@@ -2345,24 +2362,7 @@
         "reason"
       ]
     },
-    "SovereignViewOperationalStatusRequest": {
-      "type": "object",
-      "description": "The request for the sovereign view operational status action.",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/OperationalStatusRequestMode",
-          "description": "The level of detail to return in the operational status response. Defaults to Detailed."
-        },
-        "evaluationParameters": {
-          "type": "array",
-          "description": "The evaluation parameters that control which checks are performed when determining operational status.",
-          "items": {
-            "$ref": "#/definitions/OperationalStatusEvaluationParameter"
-          }
-        }
-      }
-    },
-    "SovereignViewOperationalStatusResponse": {
+    "SovereignViewOperationalStatusResult": {
       "type": "object",
       "description": "The response for the sovereign view operational status action.",
       "properties": {
@@ -2462,7 +2462,7 @@
         ]
       }
     },
-    "SovereignViewRemediateRequest": {
+    "SovereignViewRemediateContent": {
       "type": "object",
       "description": "The request for the sovereign view remediate action.",
       "properties": {
@@ -2471,7 +2471,7 @@
           "description": "The remediation dimension being addressed. Only \"DataResidency\" is currently supported for remediation."
         },
         "residencyRemediationRequest": {
-          "$ref": "#/definitions/SovereignViewResidencyRemediationRequest",
+          "$ref": "#/definitions/SovereignViewResidencyRemediationContent",
           "description": "The residency-specific remediation request, present when dimensionType is \"DataResidency\"."
         }
       },
@@ -2480,7 +2480,7 @@
         "residencyRemediationRequest"
       ]
     },
-    "SovereignViewRemediateResponse": {
+    "SovereignViewRemediateResult": {
       "type": "object",
       "description": "The response for the sovereign view remediate action.",
       "properties": {
@@ -2515,48 +2515,7 @@
         ]
       }
     },
-    "SovereignViewRemediationResultItem": {
-      "type": "object",
-      "description": "A single remediation result item.",
-      "properties": {
-        "resourceIds": {
-          "type": "array",
-          "description": "The ARM resource IDs this result item applies to.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
-        },
-        "type": {
-          "$ref": "#/definitions/SovereignViewRemediationPayloadType",
-          "description": "The type of remediation payload returned."
-        },
-        "result": {
-          "$ref": "#/definitions/SovereignViewArmTemplateBundle",
-          "description": "The remediation payload."
-        }
-      },
-      "required": [
-        "resourceIds",
-        "type",
-        "result"
-      ]
-    },
-    "SovereignViewRemediationResultRequest": {
-      "type": "object",
-      "description": "The request for the sovereign view remediationResult action.",
-      "properties": {
-        "remediationId": {
-          "type": "string",
-          "description": "The remediation identifier returned by the remediate action."
-        }
-      },
-      "required": [
-        "remediationId"
-      ]
-    },
-    "SovereignViewRemediationResultResponse": {
+    "SovereignViewRemediationResult": {
       "type": "object",
       "description": "The response for the sovereign view remediationResult action.",
       "properties": {
@@ -2603,6 +2562,47 @@
         "status"
       ]
     },
+    "SovereignViewRemediationResultContent": {
+      "type": "object",
+      "description": "The request for the sovereign view remediationResult action.",
+      "properties": {
+        "remediationId": {
+          "type": "string",
+          "description": "The remediation identifier returned by the remediate action."
+        }
+      },
+      "required": [
+        "remediationId"
+      ]
+    },
+    "SovereignViewRemediationResultItem": {
+      "type": "object",
+      "description": "A single remediation result item.",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "The ARM resource IDs this result item applies to.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/SovereignViewRemediationPayloadType",
+          "description": "The type of remediation payload returned."
+        },
+        "result": {
+          "$ref": "#/definitions/SovereignViewArmTemplateBundle",
+          "description": "The remediation payload."
+        }
+      },
+      "required": [
+        "resourceIds",
+        "type",
+        "result"
+      ]
+    },
     "SovereignViewRemediationStatus": {
       "type": "string",
       "description": "The status of a sovereign view remediation.",
@@ -2645,7 +2645,7 @@
         "targetRegion"
       ]
     },
-    "SovereignViewResidencyRemediationRequest": {
+    "SovereignViewResidencyRemediationContent": {
       "type": "object",
       "description": "The residency remediation request payload.",
       "properties": {

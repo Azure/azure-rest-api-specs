@@ -70,7 +70,7 @@ interface SovereignViewOperations {
   complianceSummary is ArmResourceActionSync<
     SovereignViewResource,
     void,
-    SovereignViewComplianceSummaryResponse
+    SovereignViewComplianceSummaryResult
   >;
 
   @action("complianceDetails")
@@ -78,8 +78,8 @@ interface SovereignViewOperations {
   @armResourceAction(SovereignViewResource)
   complianceDetails is ArmResourceActionSync<
     SovereignViewResource,
-    SovereignViewComplianceDetailsRequest,
-    SovereignViewComplianceDetailsResponse
+    SovereignViewComplianceDetailsContent,
+    SovereignViewComplianceDetailsResult
   >;
 
   @action("filterValues")
@@ -87,8 +87,8 @@ interface SovereignViewOperations {
   @armResourceAction(SovereignViewResource)
   filterValues is ArmResourceActionSync<
     SovereignViewResource,
-    SovereignViewFilterValuesRequest,
-    SovereignViewFilterValuesResponse
+    SovereignViewFilterValuesContent,
+    SovereignViewFilterValuesResult
   >;
 
   @action("operationalStatus")
@@ -96,8 +96,8 @@ interface SovereignViewOperations {
   @armResourceAction(SovereignViewResource)
   operationalStatus is ArmResourceActionSync<
     SovereignViewResource,
-    SovereignViewOperationalStatusRequest,
-    SovereignViewOperationalStatusResponse
+    SovereignViewOperationalStatusContent,
+    SovereignViewOperationalStatusResult
   >;
 
   @action("complianceResourceDetails")
@@ -105,8 +105,8 @@ interface SovereignViewOperations {
   @armResourceAction(SovereignViewResource)
   complianceResourceDetails is ArmResourceActionSync<
     SovereignViewResource,
-    SovereignViewComplianceResourceDetailsRequest,
-    SovereignViewComplianceResourceDetailsResponse
+    SovereignViewComplianceResourceDetailsContent,
+    SovereignViewComplianceResourceDetailsResult
   >;
 
   @action("Remediate")
@@ -114,8 +114,8 @@ interface SovereignViewOperations {
   @armResourceAction(SovereignViewResource)
   remediate is ArmResourceActionAsync<
     SovereignViewResource,
-    SovereignViewRemediateRequest,
-    SovereignViewRemediateResponse
+    SovereignViewRemediateContent,
+    SovereignViewRemediateResult
   >;
 
   @action("remediationResult")
@@ -123,7 +123,7 @@ interface SovereignViewOperations {
   @armResourceAction(SovereignViewResource)
   remediationResult is ArmResourceActionSync<
     SovereignViewResource,
-    SovereignViewRemediationResultRequest,
-    SovereignViewRemediationResultResponse
+    SovereignViewRemediationResultContent,
+    SovereignViewRemediationResult
   >;
 }
