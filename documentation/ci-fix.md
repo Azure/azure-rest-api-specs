@@ -16,6 +16,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Format`](#format)
   - [`CredScan`](#credscan)
   - [`PoliCheck`](#policheck)
+  - [`Protected Files`](#protected-files)
   - [`SDK Validation *` checks, like `SDK Validation - Go`](#sdk-validation--checks-like-sdk-validation---go)
   - [`SDK Breaking Change Review`](#sdk-breaking-change-review)
   - [`Swagger APIView`](#swagger-apiview)
@@ -65,6 +66,27 @@ This check is owned by One Engineering System. See [1ES CredScan] for help.
 ## `PoliCheck`
 
 This check is owned by One Engineering System. See [1ES PoliCheck] for help.
+
+## `Protected Files`
+
+This check keeps repository-managed tooling and configuration out of specification
+contributions. Remove the changes to the files listed in the check's errors from
+your PR, including any deletions or renames. If a tooling change is needed, open an
+issue for the repository maintainers instead of requesting approval to include it
+in your specification PR.
+
+This is a contribution-scope check, not an author-permission check. Maintenance-only
+PRs that do not change `specification/` pass it, but their normal CODEOWNERS review
+and other merge requirements still apply. Mixed specification/protected-file PRs
+fail regardless of ownership, approvals, labels, or who reruns the check. Deletions
+and both sides of renames count when determining specification scope.
+
+Files under `eng/common/` and `.github/skills/azsdk-common-*` are synchronized from
+[Azure/azure-sdk-tools](https://github.com/Azure/azure-sdk-tools). Make changes in
+that repository rather than editing the synchronized copies here.
+
+`.github/CODEOWNERS` and non-synchronized `.github/skills/` files are exempt from
+this check. Their normal code-owner review requirements still apply.
 
 ## `SDK Validation *` checks, like `SDK Validation - Go`
 

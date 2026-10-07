@@ -2,7 +2,7 @@ import { inspect } from "node:util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { extractInputs } from "../context.ts";
-import type { Core, GitHubScriptArgs, WebhookEvent } from "../github.ts";
+import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import { LabelAction } from "../label.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.ts";
 import {
@@ -86,10 +86,7 @@ export async function getLabelActionImpl({
   repo: string;
   head_sha: string;
   issue_number: number;
-  github: import("@octokit/core").Octokit &
-    import("@octokit/plugin-rest-endpoint-methods").Api & {
-      paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
-    };
+  github: GitHub;
   core: Core;
 }): Promise<{ headSha: string; issueNumber: number; labelActions: ManagedLabelActions }> {
   const noneResult = {
@@ -163,10 +160,7 @@ async function getDesiredLabelActions({
   head_sha: string;
   labelNames: string[];
   hasAutoSignoff: boolean;
-  github: import("@octokit/core").Octokit &
-    import("@octokit/plugin-rest-endpoint-methods").Api & {
-      paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
-    };
+  github: GitHub;
   core: Core;
 }): Promise<ManagedLabelActions> {
   const labelActions = createNoneLabelActions();

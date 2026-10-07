@@ -3,7 +3,7 @@ import { d } from "@azure-tools/specs-shared/testing";
 import { ChildProcess, spawn } from "node:child_process";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "pathe";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { findChangedProjects } from "../src/find-projects.ts";
@@ -22,7 +22,7 @@ let root: string;
 let project: string;
 
 beforeEach(async () => {
-  root = await realpath(await mkdtemp(join(tmpdir(), "tsv-changed-")));
+  root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-changed-"))));
   project = join(root, "specification/service/Project");
   await mkdir(project, { recursive: true });
   await writeFile(join(project, "tspconfig.yaml"), "");
@@ -164,10 +164,9 @@ it("dry runs list project context but do not validate or clean a dirty checkout"
   await expect(runChanged(root, { dryRun: true, gitClean: true })).resolves.toBe(true);
   expect(spawn).not.toHaveBeenCalled();
   expect(await readFile(untracked, "utf8")).toBe("keep");
-  expect(console.log).toHaveBeenCalledWith(
+  expect(console.log).toHaveBeenLastCalledWith(
     'Dry run: would validate specification/service/Project with context {"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
   );
-  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
 });
 
 it.each(["false", "true"])(

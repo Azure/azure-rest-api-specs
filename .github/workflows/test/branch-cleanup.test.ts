@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { load } from "js-yaml";
+import { parse } from "yaml";
 import { expect, it, vi } from "vitest";
 import { cleanupBranches, isStale } from "../src/branch-cleanup.ts";
 import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
@@ -18,6 +18,10 @@ it.each([
   ["copilot-not-a-prefix", 91, false],
   ["user/old", 731, true],
   ["user/recent", 730, false],
+  ["dev-old", 731, true],
+  ["dev-recent", 730, false],
+  ["dev/old", 731, true],
+  ["dev/recent", 730, false],
 ])("uses the age cutoff for %s", (name, days, stale) => {
   expect(isStale(branch(name, days), NOW)).toBe(stale);
 });
@@ -77,18 +81,18 @@ it.each([true, false])(
     const args = setup([
       "copilot/old",
       "user/old",
+      "dev-old",
+      "dev/old",
+      "published/old",
       "trunk",
       "main",
       "develop",
       "typespec-next",
       "RPSaaSMaster",
-      "dev-old",
-      "dev/old",
       "release-old",
       "release/old",
       "feature/old",
       "feature-old",
-      "published/old",
       "archive/old",
       "hotfix/old",
       "protected",
@@ -100,7 +104,7 @@ it.each([true, false])(
     await cleanupBranches(args, dryRun, git, undefined, NOW);
     expect(args.github.graphql.mock.calls[1][1]).toMatchObject({ cursor: "next" });
     expect(args.core.info).toHaveBeenCalledWith(
-      `${dryRun ? "Dry run" : "Cleanup"}: 2 stale branches`,
+      `${dryRun ? "Dry run" : "Cleanup"}: 5 stale branches`,
     );
     if (dryRun) {
       expect(git).not.toHaveBeenCalled();
@@ -111,9 +115,15 @@ it.each([true, false])(
         "--no-follow-tags",
         `--force-with-lease=refs/heads/copilot/old:${SHA}`,
         `--force-with-lease=refs/heads/user/old:${SHA}`,
+        `--force-with-lease=refs/heads/dev-old:${SHA}`,
+        `--force-with-lease=refs/heads/dev/old:${SHA}`,
+        `--force-with-lease=refs/heads/published/old:${SHA}`,
         "https://github.com/owner/repo.git",
         ":refs/heads/copilot/old",
         ":refs/heads/user/old",
+        ":refs/heads/dev-old",
+        ":refs/heads/dev/old",
+        ":refs/heads/published/old",
       ]);
     }
   },
@@ -165,7 +175,7 @@ it.each([0, -1, 1.5, NaN, Infinity, Number.MAX_SAFE_INTEGER + 1])(
 
 it("defaults manual runs to dry run with separate retention inputs", async () => {
   const yaml = await readFile(join(import.meta.dirname, "../branch-cleanup.yaml"), "utf8");
-  expect(load(yaml)).toMatchObject({
+  expect(parse(yaml)).toMatchObject({
     on: {
       workflow_dispatch: {
         inputs: {
