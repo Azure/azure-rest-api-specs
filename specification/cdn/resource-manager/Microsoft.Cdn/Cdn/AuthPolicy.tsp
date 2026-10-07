@@ -41,7 +41,7 @@ interface AuthPolicies {
    * Creates or updates an authorization policy within the specified profile.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility: preserve the bodyless 202 response used by existing clients for asynchronous AuthPolicy replacement."
-  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @Azure.Core.useFinalStateVia("original-uri")
   create is ArmResourceCreateOrReplaceAsync<
     AuthPolicy,
     Response =
@@ -58,7 +58,7 @@ interface AuthPolicies {
   /**
    * Updates an existing authorization policy within a profile.
    */
-  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @Azure.Core.useFinalStateVia("location")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AuthPolicy,
