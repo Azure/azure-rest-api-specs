@@ -16,13 +16,13 @@ permissions:
 jobs:
   # Determine whether this PR only needs its impacted specs validated (the common case), or
   # whether a core-file change means every spec must be validated. Computing this once here lets
-  # the "validate" job below fan out into a sharded matrix only when it's actually needed, instead
-  # of always paying for both a full serial scan here and a full sharded scan in a second workflow.
+  # validate-all run only when it's actually needed, instead of always paying for both a full
+  # serial scan here and a full sharded scan in a second workflow.
   scope:
     name: Determine validation scope
     runs-on: ubuntu-24.04
     outputs:
-      matrix: ${{ steps.matrix.outputs.matrix }}
+      checking-all-specs: ${{ steps.detect.outputs.checking-all-specs }}
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -40,39 +40,44 @@ jobs:
           node eng/tools/typespec-validation/cmd/tsv.js --changed --dry-run --github-output
           ${{ github.base_ref != 'main' && github.base_ref != 'RPSaaSMaster' && '--ignore-core-files' || '' }}
 
-      - name: Compute validation matrix
-        id: matrix
-        shell: bash
-        env:
-          CHECKING_ALL_SPECS: ${{ steps.detect.outputs.checking-all-specs }}
-        run: |
-          if [ "$CHECKING_ALL_SPECS" = "true" ]; then
-            # Mirrors the shard/os matrix TypeSpec Validation - All used to run on its own.
-            MATRIX=$(node -e '
-              const totalShards = 3;
-              const include = [];
-              for (const os of ["ubuntu", "windows"]) {
-                for (let shard = 1; shard <= totalShards; shard++) {
-                  include.push({ mode: "all", os, shard, "total-shards": totalShards });
-                }
-              }
-              console.log(JSON.stringify({ include }));
-            ')
-          else
-            MATRIX='{"include":[{"mode":"changed","os":"ubuntu"}]}'
-          fi
-          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
-
-  validate:
+  # The common case: validate only the impacted specs, in a single fast job.
+  validate-changed:
+    name: TypeSpec Validation (changed)
     needs: scope
-    name: >-
-      ${{ matrix.mode == 'changed' && 'TypeSpec Validation (changed)' ||
-      format('TSV ({0}, {1}/{2})', matrix.os, matrix.shard, matrix['total-shards']) }}
+    if: needs.scope.outputs.checking-all-specs != 'true'
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Validate Impacted Specs
+        run: >-
+          node eng/tools/typespec-validation/cmd/tsv.js --changed --git-clean
+          ${{ runner.debug == '1' && '--verbose' || '' }}
+          ${{ github.base_ref != 'main' && github.base_ref != 'RPSaaSMaster' && '--ignore-core-files' || '' }}
+
+  # Only runs for core-file changes. Mirrors the shard/os matrix TypeSpec Validation - All uses
+  # for its own push/schedule triggers, so a core-file PR validates every spec once, not twice.
+  validate-all:
+    name: TSV (${{ matrix.os }}, ${{ matrix.shard }}/${{ matrix['total-shards'] }})
+    needs: scope
+    if: needs.scope.outputs.checking-all-specs == 'true'
 
     strategy:
       # Validate all specs, even if one shard fails early.
       fail-fast: false
-      matrix: ${{ fromJSON(needs.scope.outputs.matrix) }}
+      matrix:
+        os: [ubuntu, windows]
+        # shards must start at 1 and increment by 1
+        shard: [1, 2, 3]
+        # total-shards must be an accurate count of the number of shards
+        total-shards: [3]
 
     runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
@@ -84,21 +89,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-          # --changed needs a base commit to diff against; --all does not need history.
-          fetch-depth: ${{ matrix.mode == 'changed' && 2 || 1 }}
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      - name: Validate Impacted Specs
-        if: matrix.mode == 'changed'
-        run: >-
-          node eng/tools/typespec-validation/cmd/tsv.js --changed --git-clean
-          ${{ runner.debug == '1' && '--verbose' || '' }}
-          ${{ github.base_ref != 'main' && github.base_ref != 'RPSaaSMaster' && '--ignore-core-files' || '' }}
-
       - name: Validate All Specs
-        if: matrix.mode == 'all'
         env:
           SHARD: ${{ matrix.shard }}
           TOTAL_SHARDS: ${{ matrix['total-shards'] }}
@@ -109,10 +104,10 @@ jobs:
           ${{ runner.debug == '1' && '--verbose' || '' }}
 
   # Stable aggregator so branch protection can require a single, unchanging check name
-  # regardless of whether "validate" ran one fast shard or the full sharded matrix.
+  # regardless of whether validate-changed or validate-all ran.
   typespec-validation:
     name: TypeSpec Validation
-    needs: [scope, validate]
+    needs: [scope, validate-changed, validate-all]
     if: always()
     runs-on: ubuntu-24.04
 
@@ -121,9 +116,24 @@ jobs:
         shell: bash
         env:
           SCOPE_RESULT: ${{ needs.scope.result }}
-          VALIDATE_RESULT: ${{ needs.validate.result }}
+          VALIDATE_CHANGED_RESULT: ${{ needs['validate-changed'].result }}
+          VALIDATE_ALL_RESULT: ${{ needs['validate-all'].result }}
         run: |
-          if [ "$SCOPE_RESULT" != "success" ] || [ "$VALIDATE_RESULT" != "success" ]; then
-            echo "TypeSpec Validation failed." >&2
+          # Exactly one of validate-changed/validate-all runs; the other is intentionally
+          # "skipped" via its if: condition, which is not a failure.
+          if [ "$SCOPE_RESULT" != "success" ]; then
+            echo "TypeSpec Validation failed: scope detection did not succeed." >&2
+            exit 1
+          fi
+          if [ "$VALIDATE_CHANGED_RESULT" != "success" ] && [ "$VALIDATE_CHANGED_RESULT" != "skipped" ]; then
+            echo "TypeSpec Validation failed: validate-changed did not succeed." >&2
+            exit 1
+          fi
+          if [ "$VALIDATE_ALL_RESULT" != "success" ] && [ "$VALIDATE_ALL_RESULT" != "skipped" ]; then
+            echo "TypeSpec Validation failed: validate-all did not succeed." >&2
+            exit 1
+          fi
+          if [ "$VALIDATE_CHANGED_RESULT" = "skipped" ] && [ "$VALIDATE_ALL_RESULT" = "skipped" ]; then
+            echo "TypeSpec Validation failed: neither validate-changed nor validate-all ran." >&2
             exit 1
           fi
