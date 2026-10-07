@@ -1290,6 +1290,12 @@
           "Create Managed Cluster with user-assigned NAT gateway as outbound type": {
             "$ref": "./examples/ManagedClustersCreate_UserAssignedNATGateway.json"
           },
+          "Create Managed Private Cluster With AKS-Managed Cloud Shell Resources": {
+            "$ref": "./examples/ManagedClustersCreate_EnableManagedCloudShell.json"
+          },
+          "Create Managed Private Cluster With Custom Cloud Shell Resources": {
+            "$ref": "./examples/ManagedClustersCreate_EnableCustomCloudShell.json"
+          },
           "Create Managed Private Cluster With Managed Bastion": {
             "$ref": "./examples/ManagedClustersCreate_EnableManagedBastion.json"
           },
@@ -9152,6 +9158,157 @@
         }
       }
     },
+    "CloudShellNetworkProfile": {
+      "type": "object",
+      "description": "Network resources used by Cloud Shell. AKS peers the subnet's virtual network with the cluster virtual network.\nFor customer-managed resources, their address spaces must not overlap. See https://aka.ms/aks/CloudShellConnect.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Dedicated IPv4 subnet used by Cloud Shell containers. For customer-managed networking, this subnet must be\ndelegated to Microsoft.ContainerInstance/containerGroups and be /24 or larger. Grant the cluster identity\nNetwork Contributor on the containing virtual network and grant the Azure Container Instance service principal\nNetwork Contributor on this subnet or its containing virtual network. Required when Cloud Shell mode is Custom.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
+        "relayNamespaceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure Relay namespace used by Cloud Shell. For customer-managed networking, this existing namespace is required\nwith subnetId. Grant the cluster identity Reader and the Azure Container Instance service principal Contributor\non the namespace. Required when Cloud Shell mode is Custom.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Relay/namespaces"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "CloudShellProfile": {
+      "type": "object",
+      "description": "Cloud Shell connectivity and storage settings for a private managed cluster.\nFor more information, see https://aka.ms/aks/CloudShellConnect.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/CloudShellProfileMode",
+          "description": "Whether Cloud Shell connectivity is disabled, uses AKS-managed network resources, or uses customer-provided\nnetwork resources. Defaults to Disabled when omitted during create. On update, omission preserves the existing\nmode. Setting this property to Disabled removes AKS-created resources and connectivity artifacts."
+        },
+        "network": {
+          "$ref": "#/definitions/CloudShellNetworkProfile",
+          "description": "Network resources used by Cloud Shell. When creating or switching to Custom networking, customers must provide\nboth subnetId and relayNamespaceId. When updating an existing Custom configuration, either resource ID can be\nchanged independently; omitted fields preserve their existing values. Customers must omit this property when mode\nis Managed or Disabled. AKS populates this property with the effective network resources when mode is Managed or\nCustom. The resulting network configuration must satisfy all Custom networking requirements."
+        },
+        "storage": {
+          "$ref": "#/definitions/CloudShellStorageProfile",
+          "description": "Storage resources used for Cloud Shell file persistence. When creating or switching to Custom storage, customers\nmust provide both storageAccountId and fileShareName. When updating an existing Custom configuration, either\nproperty can be changed independently; omitted fields preserve their existing values. Customers must omit both\nproperties when mode is Managed or Disabled. AKS populates them with the effective storage resources when mode is\nManaged or Custom. The resulting storage configuration must satisfy all Custom storage requirements."
+        }
+      }
+    },
+    "CloudShellProfileMode": {
+      "type": "string",
+      "description": "Cloud Shell connectivity mode.",
+      "enum": [
+        "Disabled",
+        "Managed",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "CloudShellProfileMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Cloud Shell connectivity is disabled."
+          },
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "Cloud Shell connectivity uses network resources managed by AKS."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Cloud Shell connectivity uses network resources provided by the customer."
+          }
+        ]
+      }
+    },
+    "CloudShellStorageProfile": {
+      "type": "object",
+      "description": "Storage used for Cloud Shell file persistence.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/CloudShellStorageProfileMode",
+          "description": "Whether persistent storage is disabled, managed by AKS, or provided by the customer. Defaults to Disabled when\nomitted during initial Cloud Shell enablement. On update, omission preserves the existing mode."
+        },
+        "storageAccountId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Storage account used for Cloud Shell files. For customer-managed storage, grant the cluster identity\nStorage File Data SMB Share Contributor on this existing storage account. Required when mode is Custom.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "fileShareName": {
+          "type": "string",
+          "description": "File share used for Cloud Shell files. Required when mode is Custom.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        }
+      }
+    },
+    "CloudShellStorageProfileMode": {
+      "type": "string",
+      "description": "How Cloud Shell storage resources are managed.",
+      "enum": [
+        "Disabled",
+        "Managed",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "CloudShellStorageProfileMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Persistent storage is disabled."
+          },
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "AKS manages the storage resources."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "The customer provides the storage resources."
+          }
+        ]
+      }
+    },
+    "ClusterAPIConnectivityProfile": {
+      "type": "object",
+      "description": "Configuration for accessing the managed cluster API through Bastion or Cloud Shell.",
+      "properties": {
+        "bastion": {
+          "$ref": "#/definitions/BastionProfile",
+          "description": "Azure Bastion connectivity settings.\nSee https://aka.ms/aks/BastionConnect for more details."
+        },
+        "cloudShell": {
+          "$ref": "#/definitions/CloudShellProfile",
+          "description": "Cloud Shell connectivity settings.\nFor more information, see https://aka.ms/aks/CloudShellConnect."
+        }
+      }
+    },
     "ClusterUpgradeSettings": {
       "type": "object",
       "description": "Settings for upgrading a cluster.",
@@ -9462,9 +9619,9 @@
           "$ref": "#/definitions/ManagedClusterLoadBalancerProfile",
           "description": "Profile of the cluster load balancer."
         },
-        "bastionProfile": {
-          "$ref": "#/definitions/BastionProfile",
-          "description": "Profile of the Bastion Host associated with the managed cluster.\nSee https://aka.ms/aks/BastionConnect for more details."
+        "clusterAPIConnectivityProfile": {
+          "$ref": "#/definitions/ClusterAPIConnectivityProfile",
+          "description": "Configuration for accessing the managed cluster API through Bastion or Cloud Shell."
         },
         "natGatewayProfile": {
           "$ref": "#/definitions/ManagedClusterNATGatewayProfile",
