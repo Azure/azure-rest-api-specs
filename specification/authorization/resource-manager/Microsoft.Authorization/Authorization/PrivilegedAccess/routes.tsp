@@ -96,10 +96,12 @@ interface PrivilegedResources {
      *     (`tags.`) is rejected.
      *   - `displayName` and `location` — `eq`, `ne`, and function-form
      *     `startswith(field,'value')` / `contains(field,'value')`.
-     *   - Favorite state: `isFavorite eq|ne true|false` — accepted and
-     *     validated, but does not filter rows in this revision.
      *   - Role assignment status:
      *     `roles/any(r: r/assignmentStatus eq 'active'|'eligible')`.
+     *
+     * Favorite-state predicates that reference `isFavorite` are not supported
+     * in this API version and return `400 InvalidFilterField` until favorite
+     * filtering is implemented.
      *
      * The `in` membership operator is limited to `type`, `scope`,
      * `subscriptionId`, and `resourceGroup`; all other fields accept only the
