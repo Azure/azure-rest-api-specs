@@ -43,7 +43,9 @@ interface ErrorPolicies {
   create is ArmResourceCreateOrReplaceAsync<
     ErrorPolicy,
     Response =
-      | ArmResourceUpdatedResponse<ErrorPolicy>
+      | (ArmResourceUpdatedResponse<ErrorPolicy> &
+          ArmAsyncOperationHeader<FinalResult = ErrorPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader)
       | ArmResourceCreatedResponse<
           ErrorPolicy,
           LroHeaders = ArmAsyncOperationHeader<FinalResult = ErrorPolicy> &
