@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { GitHub } from "../src/github.ts";
 import { applyIssueTriage } from "../src/issue-triage.ts";
@@ -44,6 +46,8 @@ function setup() {
   });
   const issue = {
     number: 123,
+    title: "Validation fails after a folder rename",
+    body: "The shared validation runner crashes on renamed specification folders.",
     state: "open",
     locked: false,
     pull_request: undefined as object | undefined,
@@ -114,7 +118,7 @@ beforeEach(() => {
         "Approved-Suppression",
       ].map((name) => ({
         name,
-        color: ["Storage", "Compute", "EngSys", "Docs"].includes(name) ? "e99695" : "ededed",
+        color: ["Storage", "Compute", "EngSys", "Docs"].includes(name) ? "e99695" : "000000",
         description: "",
       })),
     },
@@ -139,7 +143,7 @@ describe("initial issue triage", () => {
     expect(t.createComment.mock.calls[0][0].issue_number).toBe(123);
     expect(t.createComment.mock.calls[0][0].body).toContain("**Routing:** EngSys");
     expect(loadLabelCatalog).toHaveBeenCalledWith(catalogPath);
-    expect(t.get).toHaveBeenCalledTimes(1);
+    expect(t.get).toHaveBeenCalledTimes(2);
   });
 
   it("routes a service contract issue using canonical service and API-plane labels", async () => {
@@ -267,12 +271,14 @@ describe("initial issue triage", () => {
     await t.apply();
     const body = t.createComment.mock.calls[0][0].body;
     t.createComment.mockClear();
+    t.get.mockClear();
     t.github.rest.issues.listComments.mockResolvedValue({
       data: [{ id: 3, user: { login: "github-actions[bot]", type: "Bot" }, body }],
     });
     await t.apply();
     expect(t.github.rest.issues.updateComment).not.toHaveBeenCalled();
     expect(t.github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(t.get).toHaveBeenCalledTimes(1);
   });
 
   it("escapes issue-derived text and does not enable mention or HTML injection", async () => {
@@ -294,11 +300,12 @@ describe("initial issue triage", () => {
       .mockResolvedValueOnce({ data: t.issue })
       .mockResolvedValueOnce({ data: { number: 42, state: "open" } });
     await t.apply(output({ duplicateOf: 42 }));
-    expect(t.get).toHaveBeenLastCalledWith({
+    expect(t.get).toHaveBeenCalledWith({
       owner: "Azure",
       repo: "azure-rest-api-specs",
       issue_number: 42,
     });
+    expect(t.get).toHaveBeenLastCalledWith(expect.objectContaining({ issue_number: 123 }));
     expect(t.createComment.mock.calls[0][0].issue_number).toBe(123);
     expect(t.createComment.mock.calls[0][0].body).toContain(
       "https://github.com/Azure/azure-rest-api-specs/issues/42",
@@ -345,6 +352,56 @@ describe("initial issue triage", () => {
     t.issue.updated_at = "2026-10-07T12:01:00Z";
     await expect(t.apply()).rejects.toThrow("changed during triage");
     expect(t.github.rest.issues.addLabels).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    { updated_at: "2026-10-07T12:01:00Z" },
+    { state: "closed" },
+    { locked: true },
+    { pull_request: {} },
+    { labels: ["Service Attention"] },
+    { title: "The request changed within the same timestamp" },
+    { body: "The body changed within the same timestamp" },
+  ])("rechecks changes made during label lookup before writing: %o", async (changes) => {
+    const t = setup();
+    t.getLabel.mockImplementation(({ name }: { name: string }) => {
+      Object.assign(t.issue, changes);
+      return Promise.resolve({ data: { name, archived_at: null } });
+    });
+    await expect(t.apply()).rejects.toThrow("changed during triage");
+    expect(t.get).toHaveBeenCalledTimes(2);
+    expect(t.github.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(t.github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(t.github.rest.issues.updateComment).not.toHaveBeenCalled();
+  });
+
+  it("rechecks changes made during duplicate verification", async () => {
+    const t = setup();
+    t.get.mockImplementation(({ issue_number }: { issue_number: number }) => {
+      if (issue_number === 42) {
+        t.issue.locked = true;
+        return Promise.resolve({ data: { number: 42, state: "open" } });
+      }
+      return Promise.resolve({ data: t.issue });
+    });
+    await expect(t.apply(output({ duplicateOf: 42 }))).rejects.toThrow("changed during triage");
+    expect(t.get).toHaveBeenCalledTimes(3);
+    expect(t.github.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(t.github.rest.issues.createComment).not.toHaveBeenCalled();
+  });
+
+  it("rechecks changes made while paginating comments, including comment-only writes", async () => {
+    const t = setup();
+    t.issue.labels = ["EngSys", "bug"];
+    t.github.rest.issues.listComments.mockImplementation(() => {
+      t.issue.state = "closed";
+      return Promise.resolve({ data: [] });
+    });
+    await expect(t.apply()).rejects.toThrow("changed during triage");
+    expect(t.getLabel).not.toHaveBeenCalled();
+    expect(t.github.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(t.github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(t.github.rest.issues.updateComment).not.toHaveBeenCalled();
   });
 
   it.each([
@@ -420,5 +477,3 @@ describe("initial issue triage", () => {
     expect(t.github.rest.issues.addLabels).not.toHaveBeenCalled();
   });
 });
-import { readFile } from "node:fs/promises";
-import { dirname, join } from "node:path";

@@ -143,6 +143,12 @@ gh workflow run issue-triage.lock.yml --repo Azure/azure-rest-api-specs --ref ma
 Set `dry-run=false` to apply the labels and comment. An issue changed during
 investigation is left unchanged and the run fails with a refresh instruction;
 dispatch again to triage its current content.
+Eligibility, content, and labels are refreshed immediately before the first write.
+Agent and applier failures are reported in workflow logs, not by creating
+additional failure-report issues, including during dry runs.
+The pinned gh-aw runtime can still record threat-detection warnings or failures
+in its shared tracking issue; that framework logging is separate from the
+triage decision and is not disabled by dry-run mode.
 The separate Backlog Triage workflow investigates old issues for resolution or
 obsolescence; initial triage does not replace that investigation.
 

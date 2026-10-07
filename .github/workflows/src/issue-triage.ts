@@ -31,6 +31,19 @@ const outputSchema = z.object({
   items: z.array(z.object({ type: z.string(), decision: z.string().optional() })).min(1),
   errors: z.array(z.unknown()).optional(),
 });
+type Issue = Awaited<ReturnType<GitHubScriptArgs["github"]["rest"]["issues"]["get"]>>["data"];
+
+function eligible(issue: Issue): boolean {
+  return (
+    issue.state === "open" && !issue.locked && !issue.pull_request && issue.user?.type !== "Bot"
+  );
+}
+
+function labelNames(issue: Issue): Set<string> {
+  return new Set(
+    issue.labels.map((label) => (typeof label === "string" ? label : (label.name ?? ""))),
+  );
+}
 
 export async function applyIssueTriage(
   { github, context, core }: GitHubScriptArgs,
@@ -73,7 +86,7 @@ export async function applyIssueTriage(
 
   const params = { ...context.repo, issue_number: number };
   const { data: issue } = await github.rest.issues.get(params);
-  if (issue.state !== "open" || issue.locked || issue.pull_request || issue.user?.type === "Bot") {
+  if (!eligible(issue)) {
     core.notice(`Skipping ineligible issue ${number}; no changes made.`);
     return;
   }
@@ -82,6 +95,8 @@ export async function applyIssueTriage(
       `Issue ${number} changed during triage; dispatch again to review the current issue.`,
     );
   }
+  const sourceTitle = issue.title;
+  const sourceBody = issue.body;
 
   const { catalog } = await loadLabelCatalog(options.catalogPath);
   const configured = new Set(catalog.labels.map((label) => label.name));
@@ -105,9 +120,7 @@ export async function applyIssueTriage(
   if (decision.serviceLabel && !services.has(decision.serviceLabel)) {
     throw new Error(`Invalid service label: ${decision.serviceLabel}`);
   }
-  const current = new Set(
-    issue.labels.map((label) => (typeof label === "string" ? label : (label.name ?? ""))),
-  );
+  const current = labelNames(issue);
   let routing = decision.confidence === "high" ? decision.routing : "uncertain";
   const conflicting =
     (routing === "engsys" && current.has("Service Attention")) ||
@@ -196,6 +209,21 @@ export async function applyIssueTriage(
       comment.user.type === "Bot" &&
       comment.body?.startsWith(COMMENT_MARKER),
   );
+  if (!toAdd.length && existing?.body === body) return;
+  const { data: fresh } = await github.rest.issues.get(params);
+  const freshLabels = labelNames(fresh);
+  if (
+    !eligible(fresh) ||
+    fresh.updated_at !== decision.updatedAt ||
+    fresh.title !== sourceTitle ||
+    fresh.body !== sourceBody ||
+    freshLabels.size !== current.size ||
+    [...current].some((label) => !freshLabels.has(label))
+  ) {
+    throw new Error(
+      `Issue ${number} changed during triage; dispatch again to review the current issue.`,
+    );
+  }
   if (toAdd.length) await github.rest.issues.addLabels({ ...params, labels: toAdd });
   if (existing) {
     if (existing.body !== body) {

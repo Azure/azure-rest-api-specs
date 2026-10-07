@@ -69,6 +69,13 @@ post-steps:
         }
 safe-outputs:
   report-failure-as-issue: false
+  report-failed-jobs: false
+  missing-data:
+    create-issue: false
+  missing-tool:
+    create-issue: false
+  report-incomplete:
+    create-issue: false
   staged: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }}
   noop:
     report-as-issue: false
