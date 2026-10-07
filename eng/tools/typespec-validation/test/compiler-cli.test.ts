@@ -1,11 +1,12 @@
 import { execFile } from "node:child_process";
-import { mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import { normalizePath } from "../src/utils.ts";
 
 const exec = promisify(execFile);
 const cli = fileURLToPath(new URL("../cmd/tsv.js", import.meta.url));
@@ -14,6 +15,7 @@ let root: string;
 
 beforeEach(async () => {
   root = await realpath(await mkdtemp(join(tmpdir(), "tsv-command-cli-")));
+  await writeFile(join(root, ".gitattributes"), "* text=auto eol=lf\n");
   vi.stubEnv("DEBUG", "");
   vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.stubEnv("NO_COLOR", "1");
@@ -117,6 +119,87 @@ it("prints only a final summary by default and compact rule statuses with --verb
   );
 });
 
+it.each([false, true])("compiles one entrypoint with main present=%s", async (mainExists) => {
+  const folder = join(root, project);
+  await writeFile(join(folder, "client.tsp"), "");
+  if (mainExists) {
+    await writeFile(join(folder, "main.tsp"), 'import "./client.tsp";\n');
+  } else {
+    await rm(join(folder, "main.tsp"));
+  }
+  await simpleGit(root).add(project).commit("Set entrypoints");
+
+  const invocations = join(root, "compiler-invocations.jsonl");
+  await writeFile(invocations, "");
+  await compiler(`if (process.argv[2] === "compile") {
+    require("node:fs").appendFileSync(
+      ${JSON.stringify(invocations)},
+      JSON.stringify(process.argv.slice(2)) + "\\n"
+    );
+  }`);
+
+  const result = await run(project);
+
+  expect(result.code).toBe(0);
+  expect(result.stderr).toBe("");
+  const args = (await readFile(invocations, "utf8"))
+    .trim()
+    .split("\n")
+    .map((line): unknown => JSON.parse(line));
+  expect(args).toEqual([
+    mainExists
+      ? ["compile", "--list-files", "--warn-as-error", normalizePath(folder)]
+      : ["compile", "--no-emit", "--warn-as-error", join(folder, "client.tsp")],
+  ]);
+});
+
+it("rejects a missing client import before running the compiler", async () => {
+  await writeFile(join(root, project, "client.tsp"), "");
+  await simpleGit(root).add(project).commit("Add client without import");
+  await compiler('throw new Error("Compiler must not run");');
+
+  const result = await run(project);
+
+  expect(result.code).toBe(1);
+  expect(result.stderr).toContain("error tsv/client-tsp-import:");
+  expect(result.stderr).not.toContain("Compiler must not run");
+  expect(result.stdout).not.toContain("Compiler must not run");
+});
+
+it.each([
+  { command: "compile", color: false, verbose: false },
+  { command: "compile", color: true, verbose: true },
+  { command: "format", color: false, verbose: true },
+  { command: "format", color: true, verbose: false },
+])(
+  "shows changed-file diffs once for $command with color=$color verbose=$verbose",
+  async ({ command, color, verbose }) => {
+    await simpleGit(root)
+      .addConfig("color.diff.new", "green")
+      .addConfig("core.autocrlf", "true")
+      .addConfig("core.safecrlf", "warn");
+    if (color) {
+      vi.stubEnv("NO_COLOR", undefined);
+      vi.stubEnv("FORCE_COLOR", "1");
+    }
+    const generatedFile = JSON.stringify(join(root, project, "generated.json"));
+    await compiler(`if (process.argv[2] === "${command}") {
+      require("node:fs").writeFileSync(${generatedFile}, "new content\\n");
+    }`);
+
+    const result = await run(project, ...(verbose ? ["--verbose"] : []));
+    expect(result.code).toBe(1);
+    const output = stripVTControlCharacters(result.stderr);
+    const code = command === "compile" ? "generated-files-changed" : "format-changed";
+    expect(output).toContain(`error tsv/${code}:`);
+    expect(output).toContain(`\n  ${project}/generated.json\n\ndiff --git`);
+    expect(output).toContain("\n+new content\n\n  help:");
+    expect(output.match(/diff --git/g)).toHaveLength(1);
+    expect(result.stdout).not.toContain("diff --git");
+    expect(result.stderr.includes("\x1b[32m")).toBe(color);
+  },
+);
+
 it.each([
   { color: false, verbose: false },
   { color: true, verbose: false },
@@ -163,8 +246,13 @@ it("retains per-project CI annotations and native diagnostics in batch mode", as
   );
   const result = await run("--all");
   expect(result.code).toBe(1);
-  expect(result.stdout).toContain(`::group::Validating ${project}`);
+  const groupStart = result.stdout.indexOf(`::group::fail ${project}`);
+  const nativeDiagnostic = result.stdout.indexOf("native failure");
+  const groupEnd = result.stdout.indexOf("::endgroup::", groupStart);
+  expect(groupStart).toBeGreaterThanOrEqual(0);
+  expect(nativeDiagnostic).toBeGreaterThan(groupStart);
+  expect(groupEnd).toBeGreaterThan(nativeDiagnostic);
   expect(result.stdout).toContain(`::error::TypeSpec Validation failed for project ${project}`);
-  expect(result.stdout).toContain("::endgroup::");
-  expect(result.stderr.match(/native failure/g)).toHaveLength(1);
+  expect(result.stdout.match(/native failure/g)).toHaveLength(1);
+  expect(result.stderr).not.toContain("native failure");
 });

@@ -2,6 +2,7 @@ import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { describe, expect, it, vi } from "vitest";
 import { reportCommandOutput } from "../src/command-output.ts";
 import { formatDiagnostic } from "../src/diagnostics.ts";
+import { diagnosticDetails } from "./diagnostics.ts";
 
 describe("command output", () => {
   it.each([
@@ -43,8 +44,8 @@ describe("command output", () => {
       expect(result.diagnostics?.[0]).toMatchObject({
         code: "compile",
         message: "TypeSpec compilation failed (exit code 1).",
-        output: output || error.message,
       });
+      expect(diagnosticDetails(result.diagnostics?.[0])).toBe((output || error.message).trimEnd());
       expect(debug.mock.calls.flat().join("\n")).not.toContain("Command failed");
       for (const text of [stdout, stderr].filter(Boolean)) {
         expect(debug.mock.calls.flat().join("\n")).not.toContain(text);
@@ -62,7 +63,7 @@ describe("command output", () => {
       [new Error(`Command failed\n${output}`), "", output],
       logger,
     );
-    expect(result.diagnostics?.[0].output).toBe(output);
+    expect(diagnosticDetails(result.diagnostics?.[0])).toBe(output);
     expect(debug.mock.calls.flat().join("\n")).not.toContain("nativeCompiler");
   });
 
@@ -77,7 +78,7 @@ describe("command output", () => {
       new ConsoleLogger(),
     );
     expect(result.diagnostics?.[0].message).toContain(text);
-    expect(result.diagnostics?.[0].output).toBe("partial diagnostic");
+    expect(diagnosticDetails(result.diagnostics?.[0])).toBe("partial diagnostic");
   });
 
   it("preserves native diagnostic codes, source excerpts, related locations and colors", () => {
@@ -107,7 +108,7 @@ describe("command output", () => {
       new ConsoleLogger(),
     );
     expect(result.success).toBe(false);
-    expect(result.diagnostics?.[0].output).toBe(output);
+    expect(diagnosticDetails(result.diagnostics?.[0])).toBe(output);
   });
 
   it.each([
@@ -129,8 +130,8 @@ describe("command output", () => {
       expect(result.success).toBe(true);
       expect(result.diagnostics?.[0]).toMatchObject({
         severity: "warning",
-        output: (stdout || stderr).trimEnd(),
       });
+      expect(diagnosticDetails(result.diagnostics?.[0])).toBe((stdout || stderr).trimEnd());
       expect(debug).not.toHaveBeenCalled();
     },
   );

@@ -7,6 +7,7 @@ import * as fsPromises from "node:fs/promises";
 import path from "node:path";
 import * as nativeGlob from "../src/glob.ts";
 import { CompileRule } from "../src/rules/compile.ts";
+import { diagnosticDetails } from "./diagnostics.ts";
 
 import * as utils from "../src/utils.ts";
 
@@ -62,25 +63,26 @@ describe("compile", function () {
     },
   );
 
-  it("retains both main and client native failures, without running the dirty-file check", async () => {
-    runNodeBinSpy
-      .mockResolvedValueOnce([new Error("main failed"), "main.tsp:1:1 - error first: message", ""])
-      .mockResolvedValueOnce([
-        new Error("client failed"),
-        "",
-        "client.tsp:1:1 - error second: message",
-      ]);
-    const result = await new CompileRule().execute(mockFolder, defaultLogger);
-    expect(result.success).toBe(false);
-    expect(result.diagnostics?.map((diagnostic) => diagnostic.output)).toEqual([
+  it("retains main and imported client failures without compiling client again", async () => {
+    runNodeBinSpy.mockResolvedValueOnce([
+      new Error("main failed"),
       "main.tsp:1:1 - error first: message",
       "client.tsp:1:1 - error second: message",
     ]);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
+    expect(result.success).toBe(false);
+    expect(result.diagnostics?.map(diagnosticDetails)).toEqual([
+      "main.tsp:1:1 - error first: message\nclient.tsp:1:1 - error second: message",
+    ]);
     expect(gitDiffTopSpecFolderSpy).not.toHaveBeenCalled();
-    expect(runNodeBinSpy).toHaveBeenCalledTimes(2);
+    expect(runNodeBinSpy).toHaveBeenCalledExactlyOnceWith(
+      "@typespec/compiler",
+      ["tsp", "compile", "--list-files", "--warn-as-error", mockFolder],
+      defaultLogger,
+    );
   });
 
-  it("should succeed if project can compile", async function () {
+  it("compiles only main when both main and client exist", async function () {
     const compileOutput =
       // header, not a filename
       "header\n" +
@@ -111,19 +113,42 @@ describe("compile", function () {
     await expect(new CompileRule().execute(mockFolder, logger)).resolves.toMatchObject({
       success: true,
     });
-    expect(runNodeBinSpy).toHaveBeenNthCalledWith(
-      1,
+    expect(runNodeBinSpy).toHaveBeenCalledExactlyOnceWith(
       "@typespec/compiler",
       ["tsp", "compile", "--list-files", "--warn-as-error", mockFolder],
       logger,
     );
-    expect(runNodeBinSpy).toHaveBeenNthCalledWith(
-      2,
-      "@typespec/compiler",
-      ["tsp", "compile", "--no-emit", "--warn-as-error", path.join(mockFolder, "client.tsp")],
-      logger,
-    );
+    expect(gitDiffTopSpecFolderSpy).toHaveBeenCalledExactlyOnceWith(mockFolder, logger);
   });
+
+  it.each([false, true])(
+    "compiles client-only projects without emitting (failure=%s)",
+    async (failure) => {
+      const clientTsp = path.join(mockFolder, "client.tsp");
+      vi.mocked(utils.fileExists).mockImplementation((file) => Promise.resolve(file === clientTsp));
+      const nativeDiagnostic = "client.tsp:1:1 - error test-code: client failure";
+      if (failure) {
+        runNodeBinSpy.mockResolvedValueOnce([new Error("client failed"), "", nativeDiagnostic]);
+      }
+
+      const result = await new CompileRule().execute(mockFolder, defaultLogger);
+
+      expect(result.success).toBe(!failure);
+      expect(runNodeBinSpy).toHaveBeenCalledExactlyOnceWith(
+        "@typespec/compiler",
+        ["tsp", "compile", "--no-emit", "--warn-as-error", clientTsp],
+        defaultLogger,
+      );
+      expect(nativeGlob.globFiles).not.toHaveBeenCalled();
+      if (failure) {
+        expect(result.diagnostics?.map(diagnosticDetails)).toEqual([nativeDiagnostic]);
+        expect(gitDiffTopSpecFolderSpy).not.toHaveBeenCalled();
+      } else {
+        expect(result.diagnostics).toEqual([]);
+        expect(gitDiffTopSpecFolderSpy).toHaveBeenCalledExactlyOnceWith(mockFolder, defaultLogger);
+      }
+    },
+  );
 
   it.each([
     ["ANSI colors", `\u001b[32m${swaggerPath}\u001b[0m`],
@@ -179,12 +204,13 @@ describe("compile", function () {
         : Promise.resolve('{"info": {"x-cadl-generated": true}}');
     });
 
-    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
-      success: false,
-      diagnostics: expect.arrayContaining([
-        expect.objectContaining({ code: "extra-swagger" }),
-      ]) as unknown,
-    });
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
+    expect(result.success).toBe(false);
+    expect(
+      diagnosticDetails(
+        result.diagnostics?.find((diagnostic) => diagnostic.code === "extra-swagger"),
+      ),
+    ).toBe(`  ${swaggerPath.replace("2022", "2023")}`);
   });
 
   it("should succeed if extra swaggers are only older preview versions", async function () {
@@ -438,36 +464,45 @@ describe("compile", function () {
       },
     );
 
-    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
-      success: false,
-      diagnostics: expect.arrayContaining([
-        expect.objectContaining({
-          code: "compile",
-          output: "running tsp compile\ncompilation failure",
-        }),
-      ]) as unknown,
-    });
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
+    expect(result.success).toBe(false);
+    expect(
+      diagnosticDetails(result.diagnostics?.find((diagnostic) => diagnostic.code === "compile")),
+    ).toBe("running tsp compile\ncompilation failure");
     expect(gitDiffTopSpecFolderSpy).not.toHaveBeenCalled();
   });
 
-  it("should fail if git diff fails", async function () {
+  it("reports files changed by compilation with fix guidance", async function () {
     runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, swaggerPath, ""]),
     );
 
     vi.mocked(nativeGlob.globFiles).mockImplementation(() => Promise.resolve([swaggerPath]));
 
-    gitDiffTopSpecFolderSpy.mockResolvedValue({ success: false, files: [`${mockFolder}/bar`] });
-
-    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+    const files = [`${mockFolder}/foo.json`, `${mockFolder}/bar.json`];
+    const diff = "diff --git a/foo.json b/foo.json\n-old\n+new\n";
+    gitDiffTopSpecFolderSpy.mockResolvedValue({
       success: false,
-      diagnostics: expect.arrayContaining([
-        expect.objectContaining({
-          code: "generated-files-changed",
-          output: `${mockFolder}/bar`,
-        }),
-      ]) as unknown,
+      files,
+      diff,
     });
+
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
+    expect(result.success).toBe(false);
+    const diagnostic = result.diagnostics?.find(
+      (diagnostic) => diagnostic.code === "generated-files-changed",
+    );
+    expect(diagnostic).toMatchObject({
+      severity: "error",
+      code: "generated-files-changed",
+      message: "Files changed after TypeSpec compilation:",
+      path: mockFolder,
+      help: "Run `pnpm exec tsp compile .` from the project folder and include the generated files in your change.",
+    });
+    expect(diagnosticDetails(diagnostic)).toBe(
+      `  ${mockFolder}/foo.json\n  ${mockFolder}/bar.json\n\n${diff}`,
+    );
+    expect(gitDiffTopSpecFolderSpy).toHaveBeenCalledWith(mockFolder, defaultLogger);
   });
 
   it("should succeed if git diff succeeds", async function () {

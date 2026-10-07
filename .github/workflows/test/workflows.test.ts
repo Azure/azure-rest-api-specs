@@ -1,5 +1,5 @@
 import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
-import { load } from "js-yaml";
+import { parse } from "yaml";
 import { tmpdir } from "node:os";
 import { dirname, extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -30,7 +30,7 @@ describe("workflow files", () => {
         }),
       })
       .parse(
-        load(await readFile(resolve(workflowsDir, "typespec-suppressions-code.yaml"), "utf8")),
+        parse(await readFile(resolve(workflowsDir, "typespec-suppressions-code.yaml"), "utf8")),
       );
     const steps = workflow.jobs["typespec-suppressions"].steps;
     const analysis = steps.find((step) => step.name === "Run TypeSpec suppressions analysis");
@@ -40,9 +40,9 @@ describe("workflow files", () => {
       id: "typespec-suppressions-analysis",
     });
     expect(analysis?.run).toContain('echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"');
+    expect(summaryArtifact?.uses).toMatch(/^actions\/upload-artifact@[0-9a-f]{40}$/);
     expect(summaryArtifact).toMatchObject({
       if: "${{ always() && steps.typespec-suppressions-analysis.outputs.summary }}",
-      uses: "actions/upload-artifact@v7",
       with: {
         name: "job-summary",
         path: "${{ steps.typespec-suppressions-analysis.outputs.summary }}",
@@ -62,7 +62,7 @@ describe("workflow files", () => {
             }),
           ),
         })
-        .parse(load(await readFile(resolve(workflowsDir, file), "utf8")));
+        .parse(parse(await readFile(resolve(workflowsDir, file), "utf8")));
       const commands = Object.values(workflow.jobs)
         .flatMap((job) => job.steps)
         .flatMap((step) =>
@@ -99,6 +99,7 @@ describe("workflow files", () => {
         ".github/shared",
         ".github/workflows",
         "eng/tools",
+        "libs/foundry-core",
         ...[
           "lint-diff",
           "oav-runner",

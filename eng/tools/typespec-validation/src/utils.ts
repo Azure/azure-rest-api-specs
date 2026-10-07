@@ -1,11 +1,12 @@
 import { execNodeBin, isExecError } from "@azure-tools/specs-shared/exec";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
+import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import {
   getSuppressions as getSuppressionsImpl,
   type Suppression,
 } from "@azure-tools/suppressions";
 import { access, readdir, readFile } from "node:fs/promises";
-import defaultPath, { basename, dirname, join, relative, type PlatformPath } from "node:path";
+import defaultPath, { basename, dirname, join, relative } from "node:path";
 import { simpleGit } from "simple-git";
 import { context } from "./index.ts";
 import { supportsColor } from "./diagnostics.ts";
@@ -67,11 +68,11 @@ export async function getSuppressions(path: string): Promise<Suppression[]> {
   return getSuppressionsImpl("TypeSpecValidation", path, context);
 }
 
-export function normalizePath(folder: string, path: PlatformPath = defaultPath) {
+export function normalizePath(folder: string, path: typeof defaultPath = defaultPath) {
   return normalizePathImpl(folder, path);
 }
 
-export function normalizePathImpl(folder: string, path: PlatformPath = defaultPath) {
+export function normalizePathImpl(folder: string, path: typeof defaultPath = defaultPath) {
   return path
     .resolve(folder)
     .split(path.sep)
@@ -100,14 +101,26 @@ export async function gitDiffTopSpecFolder(folder: string, logger: ILogger) {
   const git = simpleGit(folder);
   const topSpecFolder = normalizePath(folder).replace(/(^.*specification\/[^/]*)(.*)/, "$1");
   logger.debug(`Checking generated files in ${topSpecFolder}`);
-  const gitStatus = await git.status(["--porcelain", topSpecFolder]);
-  if (!gitStatus.isClean() && logger.isDebug()) {
-    logger.debug(JSON.stringify(await git.status()));
-    logger.debug(await git.diff());
+  const gitStatus = await git.status(["--porcelain", "--untracked-files=all", "--", topSpecFolder]);
+
+  if (gitStatus.isClean()) return { success: true, files: [] };
+
+  if (logger.isDebug()) logger.debug(JSON.stringify(gitStatus));
+  const color = supportsColor() ? "--color=always" : "--color=never";
+  const diffs = [
+    await git.diff([color, "--cached", "--", topSpecFolder]),
+    await git.diff([color, "--", topSpecFolder]),
+  ];
+  if (gitStatus.not_added.length > 0) {
+    const rootGit = simpleGit(await getRootFolder(folder));
+    for (const file of gitStatus.not_added) {
+      diffs.push(await rootGit.diff([color, "--no-index", "--", "/dev/null", file]));
+    }
   }
 
   return {
-    success: gitStatus.isClean(),
+    success: false,
     files: gitStatus.files.map((file) => file.path),
+    diff: diffs.filter(Boolean).join("\n"),
   };
 }
