@@ -100,12 +100,9 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Validate All Specs
-        env:
-          SHARD: ${{ matrix.shard }}
-          TOTAL_SHARDS: ${{ matrix['total-shards'] }}
         run: >-
           node eng/tools/typespec-validation/cmd/tsv.js --all
-          --shard="$SHARD/$TOTAL_SHARDS" --git-clean specification
+          --shard=${{ matrix.shard }}/${{ matrix['total-shards'] }} --git-clean specification
           --github-summary
           ${{ runner.debug == '1' && '--verbose' || '' }}
 
