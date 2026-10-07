@@ -150,7 +150,7 @@ interface VirtualMachineVMGalleryApplications {
   /**
    * Gets a gallery application and its instance view from a virtual machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The service controller exposes instanceView as GET on the nested virtual machine application action route, and the OpenAPI metadata preserves the VirtualMachineVMGalleryApplications_GetInstanceView operation ID used for SDK grouping."
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "The controller exposes instanceView as a GET action."
   @added(Versions.v2026_09_01)
   @get

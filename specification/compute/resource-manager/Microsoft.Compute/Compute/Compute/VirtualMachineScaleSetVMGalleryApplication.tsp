@@ -81,7 +81,7 @@ interface VirtualMachineScaleSetVMGalleryApplications {
   /**
    * Gets a gallery application installed on a virtual machine scale set VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The legacy nested-resource template is required to compose the scale set, VM instance, and application path while preserving the VirtualMachineScaleSetVMGalleryApplications_Get operation ID used for SDK grouping."
   @added(Versions.v2026_09_01)
   get is VirtualMachineScaleSetVMGalleryApplicationOps.Read<
     VirtualMachineScaleSetVMGalleryApplication,
@@ -97,7 +97,7 @@ interface VirtualMachineScaleSetVMGalleryApplications {
   /**
    * Lists gallery applications installed on a virtual machine scale set VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The legacy nested-resource template is required to compose the scale set and VM instance collection path while preserving the VirtualMachineScaleSetVMGalleryApplications_List operation ID used for SDK grouping."
   @added(Versions.v2026_09_01)
   @list
   list is VirtualMachineScaleSetVMGalleryApplicationOps.List<
@@ -108,7 +108,7 @@ interface VirtualMachineScaleSetVMGalleryApplications {
   /**
    * Gets a gallery application and its instance view from a virtual machine scale set VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The service controller exposes instanceView as GET on the nested scale set VM application action route, and the OpenAPI metadata preserves the VirtualMachineScaleSetVMGalleryApplications_GetInstanceView operation ID used for SDK grouping."
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "The controller exposes instanceView as a GET action."
   @added(Versions.v2026_09_01)
   @get
