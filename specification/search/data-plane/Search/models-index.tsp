@@ -325,9 +325,13 @@ union VectorQueryKind {
   Text: "text",
 
   /** Vector query where an url that represents an image value that needs to be vectorized is provided. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   ImageUrl: "imageUrl",
 
   /** Vector query where a base 64 encoded binary of an image that needs to be vectorized is provided. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   ImageBinary: "imageBinary",
 }
 
@@ -1384,10 +1388,10 @@ model VectorizableTextQuery extends VectorQuery {
 }
 
 /** The query parameters to use for vector search when an url that represents an image value that needs to be vectorized is provided. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model VectorizableImageUrlQuery extends VectorQuery {
   /** The URL of an image to be vectorized to perform a vector search query. */
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_04_01)
   url?: string;
 
   /** The kind of vector query being performed. */
@@ -1395,10 +1399,10 @@ model VectorizableImageUrlQuery extends VectorQuery {
 }
 
 /** The query parameters to use for vector search when a base 64 encoded binary of an image that needs to be vectorized is provided. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model VectorizableImageBinaryQuery extends VectorQuery {
   /** The base 64 encoded binary of an image to be vectorized to perform a vector search query. */
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_04_01)
   base64Image?: string;
 
   /** The kind of vector query being performed. */
