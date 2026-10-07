@@ -14,9 +14,15 @@ permissions:
   contents: read
 
 jobs:
-  typespec-validation:
-    name: TypeSpec Validation
+  # Determine whether this PR only needs its impacted specs validated (the common case), or
+  # whether a core-file change means every spec must be validated. Computing this once here lets
+  # the "validate" job below fan out into a sharded matrix only when it's actually needed, instead
+  # of always paying for both a full serial scan here and a full sharded scan in a second workflow.
+  scope:
+    name: Determine validation scope
     runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -27,9 +33,89 @@ jobs:
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      - name: Validate Impacted Specs
+      - name: Detect core-file changes
+        id: detect
         # Only main and RPSaaSMaster validate all specs when core files change.
+        run: >-
+          node eng/tools/typespec-validation/cmd/tsv.js --changed --dry-run --github-output
+          ${{ github.base_ref != 'main' && github.base_ref != 'RPSaaSMaster' && '--ignore-core-files' || '' }}
+
+      - name: Compute validation matrix
+        id: matrix
+        shell: bash
+        run: |
+          if [ "${{ steps.detect.outputs.checking-all-specs }}" = "true" ]; then
+            # Mirrors the shard/os matrix TypeSpec Validation - All used to run on its own.
+            MATRIX=$(node -e '
+              const totalShards = 3;
+              const include = [];
+              for (const os of ["ubuntu", "windows"]) {
+                for (let shard = 1; shard <= totalShards; shard++) {
+                  include.push({ mode: "all", os, shard, "total-shards": totalShards });
+                }
+              }
+              console.log(JSON.stringify({ include }));
+            ')
+          else
+            MATRIX='{"include":[{"mode":"changed","os":"ubuntu"}]}'
+          fi
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+
+  validate:
+    needs: scope
+    name: >-
+      ${{ matrix.mode == 'changed' && 'TypeSpec Validation (changed)' ||
+      format('TSV ({0}, {1}/{2})', matrix.os, matrix.shard, matrix['total-shards']) }}
+
+    strategy:
+      # Validate all specs, even if one shard fails early.
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.scope.outputs.matrix) }}
+
+    runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
+
+    steps:
+      - name: Enable git long paths
+        if: runner.os == 'Windows'
+        run: git config --global core.longpaths true
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          # --changed needs a base commit to diff against; --all does not need history.
+          fetch-depth: ${{ matrix.mode == 'changed' && 2 || 1 }}
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Validate Impacted Specs
+        if: matrix.mode == 'changed'
         run: >-
           node eng/tools/typespec-validation/cmd/tsv.js --changed --git-clean
           ${{ runner.debug == '1' && '--verbose' || '' }}
           ${{ github.base_ref != 'main' && github.base_ref != 'RPSaaSMaster' && '--ignore-core-files' || '' }}
+
+      - name: Validate All Specs
+        if: matrix.mode == 'all'
+        run: >-
+          node eng/tools/typespec-validation/cmd/tsv.js --all
+          --shard=${{ matrix.shard }}/${{ matrix['total-shards'] }} --git-clean specification
+          --github-summary
+          ${{ runner.debug == '1' && '--verbose' || '' }}
+
+  # Stable aggregator so branch protection can require a single, unchanging check name
+  # regardless of whether "validate" ran one fast shard or the full sharded matrix.
+  typespec-validation:
+    name: TypeSpec Validation
+    needs: [scope, validate]
+    if: always()
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Check validation result
+        shell: bash
+        run: |
+          if [ "${{ needs.scope.result }}" != "success" ] || [ "${{ needs.validate.result }}" != "success" ]; then
+            echo "TypeSpec Validation failed." >&2
+            exit 1
+          fi

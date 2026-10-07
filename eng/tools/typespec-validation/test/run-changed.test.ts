@@ -203,3 +203,25 @@ it.each(["false", "true"])(
     }
   },
 );
+
+it.each([false, true])(
+  "writes checking-all-specs=%s to the GitHub output file when requested",
+  async (checkingAllSpecs) => {
+    vi.mocked(findChangedProjects).mockResolvedValue({ projects: [project], checkingAllSpecs });
+    const outputFile = join(root, "github-output.txt");
+    await expect(runChanged(root, { githubOutputFile: outputFile })).resolves.toBe(true);
+    expect(await readFile(outputFile, "utf8")).toBe(`checking-all-specs=${checkingAllSpecs}\n`);
+  },
+);
+
+it("writes checking-all-specs even when no projects were impacted", async () => {
+  vi.mocked(findChangedProjects).mockResolvedValue({ projects: [], checkingAllSpecs: false });
+  const outputFile = join(root, "github-output.txt");
+  await expect(runChanged(root, { githubOutputFile: outputFile })).resolves.toBe(true);
+  expect(await readFile(outputFile, "utf8")).toBe("checking-all-specs=false\n");
+  expect(spawn).not.toHaveBeenCalled();
+});
+
+it("does not write a GitHub output file unless requested", async () => {
+  await expect(runChanged(root)).resolves.toBe(true);
+});

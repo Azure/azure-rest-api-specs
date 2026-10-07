@@ -104,6 +104,12 @@ suppression file trigger all-project validation. ARM lease metadata and
 the fallback. The PR workflow enables the fallback only for PRs targeting `main`
 or `RPSaaSMaster`; other target branches pass `--ignore-core-files`.
 
+`--github-output` (with `--changed`) writes `checking-all-specs=true|false` to
+`$GITHUB_OUTPUT`, reporting whether the core-file fallback applies without
+requiring `--all` or validating any project. The PR workflow uses this to pick
+a fast single-shard `--changed` run or the sharded `--all` matrix for the same
+run, instead of running both.
+
 Changed-project validation passes the base/head commits to each project's rules.
 `TypeSpecValidationAll` suppressions apply only to `--all` or a core-file fallback,
 not scoped changed-project runs. An empty changed-project selection succeeds;
