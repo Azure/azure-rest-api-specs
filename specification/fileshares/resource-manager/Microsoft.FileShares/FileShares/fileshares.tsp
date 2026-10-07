@@ -47,6 +47,11 @@ model FileShare is Azure.ResourceManager.TrackedResource<FileShareProperties> {
   @path
   @segment("fileShares")
   name: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Identity is a valid envelope property"
+  @added(Versions.v2026_09_01)
+  @doc("Managed service identity for the file share.")
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @doc("Media Tier enum.")
@@ -201,6 +206,29 @@ model FileShareProperties {
   @visibility(Lifecycle.Read)
   @doc("The list of associated private endpoint connections.")
   privateEndpointConnections?: PrivateEndpointConnection[];
+
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @doc("Encryption settings for the file share.")
+  encryption?: FileShareEncryption;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Encryption settings for the file share. Composes the standard common encryption type with read-only customer-managed key rotation status owned by the file share resource provider. Automatic key rotation follows the Azure Storage account model and is derived from the key URL shape: an unversioned customerManagedKeyEncryption.keyEncryptionKeyUrl opts into automatic rotation to the latest key version, while a versioned URL pins a specific version.")
+model FileShareEncryption {
+  ...CommonTypes.Encryption;
+
+  @visibility(Lifecycle.Read)
+  @doc("The versioned key encryption key URL currently applied to the file share by the service. When an unversioned keyEncryptionKeyUrl is supplied, this reflects the resolved latest key version currently in use.")
+  currentKeyEncryptionKeyUrl?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The UTC timestamp when the service last successfully rotated the active customer-managed key version.")
+  lastKeyRotationTimestamp?: utcDateTime;
+
+  @visibility(Lifecycle.Read)
+  @doc("The last customer-actionable error encountered while automatically rotating to the latest key version.")
+  autoKeyRotationError?: ErrorDetail;
 }
 
 #deprecated "Deprecating 202 for PUT requests. Use 201 instead."

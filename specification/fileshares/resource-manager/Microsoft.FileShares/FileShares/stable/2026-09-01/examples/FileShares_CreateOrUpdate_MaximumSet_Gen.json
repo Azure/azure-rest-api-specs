@@ -24,12 +24,28 @@
             "/subscriptions/9760acf5-4638-11e7-9bdb-020073ca7778/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3"
           ]
         },
-        "publicNetworkAccess": "Enabled"
+        "publicNetworkAccess": "Enabled",
+        "encryption": {
+          "infrastructureEncryption": "enabled",
+          "customerManagedKeyEncryption": {
+            "keyEncryptionKeyIdentity": {
+              "identityType": "userAssignedIdentity",
+              "userAssignedIdentityResourceId": "/subscriptions/0590b445-524e-4caa-9870-2e2461d23434/resourceGroups/fiddler-mfs-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+            },
+            "keyEncryptionKeyUrl": "https://myvault.vault.azure.net/keys/myfilesharekey"
+          }
+        }
       },
       "tags": {
         "key9647": "xwokdvyoae"
       },
-      "location": "westus"
+      "location": "westus",
+      "identity": {
+        "type": "SystemAssigned,UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/0590b445-524e-4caa-9870-2e2461d23434/resourceGroups/fiddler-mfs-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {}
+        }
+      }
     }
   },
   "responses": {

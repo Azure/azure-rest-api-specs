@@ -1321,6 +1321,102 @@
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption": {
+      "type": "object",
+      "description": "Customer-managed key encryption properties for the resource.",
+      "properties": {
+        "keyEncryptionKeyIdentity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity",
+          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
+        },
+        "keyEncryptionKeyUrl": {
+          "type": "string",
+          "description": "key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.InfrastructureEncryption": {
+      "type": "string",
+      "description": "(Optional) Discouraged to include in resource definition. Only needed where it is possible to disable platform (AKA infrastructure) encryption. Azure SQL TDE is an example of this. Values are enabled and disabled.",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "InfrastructureEncryption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "enabled",
+            "description": "Encryption is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "disabled",
+            "description": "Encryption is disabled"
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity": {
+      "type": "object",
+      "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType",
+          "description": "The type of identity to use. Values can be systemAssignedIdentity, userAssignedIdentity, or delegatedResourceIdentity."
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity."
+        },
+        "federatedClientId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "application client identity to use for accessing key encryption key Url in a different tenant. Ex: f83c6b1b-4d34-47e4-bb34-9d83df58b540"
+        },
+        "delegatedIdentityClientId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "delegated identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity and userAssignedIdentity - internal use only."
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType": {
+      "type": "string",
+      "description": "The type of identity to use.",
+      "enum": [
+        "systemAssignedIdentity",
+        "userAssignedIdentity",
+        "delegatedResourceIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "KeyEncryptionKeyIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssignedIdentity",
+            "value": "systemAssignedIdentity",
+            "description": "System assigned identity"
+          },
+          {
+            "name": "UserAssignedIdentity",
+            "value": "userAssignedIdentity",
+            "description": "User assigned identity"
+          },
+          {
+            "name": "DelegatedResourceIdentity",
+            "value": "delegatedResourceIdentity",
+            "description": "Delegated identity"
+          }
+        ]
+      }
+    },
     "EncryptionInTransitRequired": {
       "type": "string",
       "description": "State of NFS encryption in transit.",
@@ -1352,6 +1448,10 @@
         "properties": {
           "$ref": "#/definitions/FileShareProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity for the file share."
         }
       },
       "allOf": [
@@ -1359,6 +1459,36 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "FileShareEncryption": {
+      "type": "object",
+      "description": "Encryption settings for the file share. Composes the standard common encryption type with read-only customer-managed key rotation status owned by the file share resource provider. Automatic key rotation follows the Azure Storage account model and is derived from the key URL shape: an unversioned customerManagedKeyEncryption.keyEncryptionKeyUrl opts into automatic rotation to the latest key version, while a versioned URL pins a specific version.",
+      "properties": {
+        "infrastructureEncryption": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.InfrastructureEncryption",
+          "description": "Values are enabled and disabled."
+        },
+        "customerManagedKeyEncryption": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption",
+          "description": "All Customer-managed key encryption properties for the resource."
+        },
+        "currentKeyEncryptionKeyUrl": {
+          "type": "string",
+          "description": "The versioned key encryption key URL currently applied to the file share by the service. When an unversioned keyEncryptionKeyUrl is supplied, this reflects the resolved latest key version currently in use.",
+          "readOnly": true
+        },
+        "lastKeyRotationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp when the service last successfully rotated the active customer-managed key version.",
+          "readOnly": true
+        },
+        "autoKeyRotationError": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The last customer-actionable error encountered while automatically rotating to the latest key version.",
+          "readOnly": true
+        }
+      }
     },
     "FileShareLimits": {
       "type": "object",
@@ -1673,6 +1803,15 @@
             "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
+        },
+        "encryption": {
+          "$ref": "#/definitions/FileShareEncryption",
+          "description": "Encryption settings for the file share.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
@@ -1986,6 +2125,10 @@
       "type": "object",
       "description": "The type used for update operations of the FileShare.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity for the file share."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
