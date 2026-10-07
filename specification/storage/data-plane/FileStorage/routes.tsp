@@ -183,6 +183,7 @@ interface Share {
       ...ShareProvisionedIopsOptionalHeader;
       ...ShareProvisionedBandwidthOptionalHeader;
       ...EnableSmbDirectoryLeaseHeader;
+      ...ChangeFeedRequestHeaders;
     },
     {
       @statusCode statusCode: 201;
@@ -291,6 +292,8 @@ interface Share {
       @encode("rfc7231")
       @header("x-ms-share-creation-time")
       creationTime?: utcDateTime;
+      
+      ...ChangeFeedResponseHeaders;
     }
   >;
 
@@ -487,6 +490,7 @@ interface Share {
       ...ShareProvisionedIopsOptionalHeader;
       ...ShareProvisionedBandwidthOptionalHeader;
       ...EnableSmbDirectoryLeaseHeader;
+      ...ChangeFeedRequestHeaders;
     },
     {
       ...EtagResponseHeader;
