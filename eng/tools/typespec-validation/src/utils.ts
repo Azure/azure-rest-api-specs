@@ -6,7 +6,7 @@ import {
   type Suppression,
 } from "@azure-tools/suppressions";
 import { access, readdir, readFile } from "node:fs/promises";
-import defaultPath, { basename, dirname, join, relative, type PlatformPath } from "node:path";
+import { basename, dirname, join, relative, resolve } from "pathe";
 import { simpleGit } from "simple-git";
 import { context } from "./index.ts";
 import { supportsColor } from "./diagnostics.ts";
@@ -68,18 +68,6 @@ export async function getSuppressions(path: string): Promise<Suppression[]> {
   return getSuppressionsImpl("TypeSpecValidation", path, context);
 }
 
-export function normalizePath(folder: string, path: PlatformPath = defaultPath) {
-  return normalizePathImpl(folder, path);
-}
-
-export function normalizePathImpl(folder: string, path: PlatformPath = defaultPath) {
-  return path
-    .resolve(folder)
-    .split(path.sep)
-    .join("/")
-    .replace(/^([a-z]):/, (_match, driveLetter: string) => driveLetter.toUpperCase() + ":");
-}
-
 export async function readFileAtCommit(
   folder: string,
   commitish: string,
@@ -88,7 +76,7 @@ export async function readFileAtCommit(
   const git = simpleGit(folder);
   await git.revparse(["--verify", `${commitish}^{commit}`]);
   const repositoryRoot = (await git.revparse(["--show-toplevel"])).trim();
-  const repositoryPath = relative(repositoryRoot, file).split(defaultPath.sep).join("/");
+  const repositoryPath = relative(repositoryRoot, file);
 
   try {
     return await git.show([`${commitish}:${repositoryPath}`]);
@@ -103,9 +91,9 @@ export async function readFileAtCommit(
  */
 export async function gitDiffTopSpecFolder(folder: string, logger: ILogger, globs?: string[]) {
   const git = simpleGit(folder);
-  const topSpecFolder = normalizePath(folder).replace(/(^.*specification\/[^/]*)(.*)/, "$1");
+  const topSpecFolder = resolve(folder).replace(/(^.*specification\/[^/]*)(.*)/, "$1");
   logger.debug(`Checking generated files in ${topSpecFolder}`);
-  const relativeTop = defaultPath.posix.relative(normalizePath(folder), topSpecFolder) || ".";
+  const relativeTop = relative(resolve(folder), topSpecFolder) || ".";
   const pathspecs = globs?.map((glob) => `:(glob)${relativeTop}/${glob}`) ?? [topSpecFolder];
   const gitStatus = await git.status(["--porcelain", "--untracked-files=all", "--", ...pathspecs]);
 

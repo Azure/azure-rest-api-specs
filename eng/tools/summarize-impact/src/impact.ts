@@ -5,7 +5,7 @@ import { isDeepStrictEqual } from "node:util";
 import { dirname, join, resolve } from "node:path";
 
 import * as commonmark from "commonmark";
-import yaml from "js-yaml";
+import { parse } from "yaml";
 
 import {
   type ChangeHandler,
@@ -501,7 +501,7 @@ function getSuppressions(readmePath: string) {
     for (const block of codeBlocks) {
       if (block.literal) {
         try {
-          const blockObject = yaml.load(block.literal) as
+          const blockObject = parse(block.literal) as
             | {
                 directive?: Record<string, unknown>[];
                 suppressions?: Record<string, unknown>[];
