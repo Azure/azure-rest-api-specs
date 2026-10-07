@@ -871,6 +871,12 @@ model SharePropertiesInternal {
 
   /** Whether SMB directory lease is enabled. */
   @Xml.name("EnableSmbDirectoryLease") enableSmbDirectoryLease?: boolean;
+
+  /** The creation time. */
+  @added(Versions.v2027_03_07)
+  @encode("rfc7231")
+  @Xml.name("Creation-Time")
+  creationTime?: utcDateTime;
 }
 
 /** Storage Analytics metrics for file service. */
