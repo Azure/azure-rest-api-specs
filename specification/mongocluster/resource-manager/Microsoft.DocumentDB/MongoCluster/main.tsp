@@ -14,7 +14,7 @@ import "./client.tsp";
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
-/** The Microsoft Azure management API provides create, read, update, and delete functionality for Azure Cosmos DB for MongoDB vCore resources including clusters and firewall rules. */
+/** The Microsoft Azure management API provides create, read, update, and delete functionality for Azure DocumentDB resources including clusters and firewall rules. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing resource provider namespace."
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Existing resource provider namespace."
 @armProviderNamespace
