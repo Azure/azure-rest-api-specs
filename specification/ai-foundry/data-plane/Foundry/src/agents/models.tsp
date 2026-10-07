@@ -865,27 +865,27 @@ union AgentBlueprintIsolationKeySource {
 
 @doc("""
   Validation applied to an inbound bearer token addressed to the backing blueprint audience. Each list
-  accepts at most 10 values. A null or omitted list applies the documented default for that rule; an
+  accepts at most 10 values. An omitted list applies the documented default for that rule; an
   empty list (except `required_scopes`) blocks all requests.
   """)
 model TokenValidationRules {
-  @doc("The accepted token audiences (the `aud` claim). Null/omitted defaults to the backing blueprint resource URI (conventionally `api://{agentBlueprintId}`). Empty blocks all requests.")
+  @doc("The accepted token audiences (the `aud` claim). Omitted defaults to the backing blueprint resource URI (conventionally `api://{agentBlueprintId}`). Empty blocks all requests.")
   @maxItems(10)
   allowed_audiences?: string[];
 
-  @doc("The accepted token tenants (the `tid` claim). Null/omitted defaults to the backing blueprint tenant. Empty blocks all requests.")
+  @doc("The accepted token tenants (the `tid` claim). Omitted defaults to the backing blueprint tenant. Empty blocks all requests.")
   @maxItems(10)
   allowed_tenants?: Azure.Core.uuid[];
 
-  @doc("The accepted client applications, validated against the `azp` or `appid` claim. For delegated tokens, null or omitted imposes no client-application restriction. App-only tokens require a nonempty list containing the caller's application ID; otherwise authorization is denied. An empty list blocks all requests.")
+  @doc("The accepted client applications, validated against the `azp` or `appid` claim. For delegated tokens, omission imposes no client-application restriction. App-only tokens require a nonempty list containing the caller's application ID; otherwise authorization is denied. An empty list blocks all requests.")
   @maxItems(10)
   allowed_clients?: Azure.Core.uuid[];
 
-  @doc("The accepted principals (the `oid` claim). Null/omitted imposes no restriction. Empty blocks all requests.")
+  @doc("The accepted principals (the `oid` claim). Omission imposes no restriction. Empty blocks all requests.")
   @maxItems(10)
   allowed_principals?: Azure.Core.uuid[];
 
-  @doc("The permission names (validated against the `scp` claim for delegated tokens) that must all be present. Null/omitted defaults to `[\"access_agent\"]`. An empty list is invalid.")
+  @doc("The permission names (validated against the `scp` claim for delegated tokens) that must all be present. Omitted defaults to `[\"access_agent\"]`. An empty list is invalid.")
   @minItems(1)
   @maxItems(10)
   required_scopes?: string[];
