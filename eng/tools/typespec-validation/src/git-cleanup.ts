@@ -1,7 +1,8 @@
+import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { simpleGit } from "simple-git";
 
 /** Clean a disposable checkout after validation, skipping cleanup when unchanged. */
-export async function cleanWorktree(repoRoot: string): Promise<void> {
+export async function cleanWorktree(repoRoot: string, logger: ILogger): Promise<void> {
   const git = simpleGit(repoRoot);
   const statusOptions = ["--untracked-files=normal", "--ignore-submodules=none"];
 
@@ -22,7 +23,7 @@ export async function cleanWorktree(repoRoot: string): Promise<void> {
       success = true;
       return result;
     } finally {
-      console.log(
+      logger.debug(
         `TSV cleanup ${JSON.stringify({
           command,
           durationMs: Math.round(performance.now() - start),

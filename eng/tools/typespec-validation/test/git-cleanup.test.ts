@@ -1,3 +1,4 @@
+import { ConsoleLogger, debugLogger } from "@azure-tools/specs-shared/logger";
 import { execFileSync } from "node:child_process";
 import {
   existsSync,
@@ -9,7 +10,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
+import { dirname, join } from "pathe";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { z } from "zod";
@@ -39,7 +40,7 @@ function status(): string {
 }
 
 function commands(): string[] {
-  return vi.mocked(console.log).mock.calls.map(([line]) => {
+  return vi.mocked(console.debug).mock.calls.map(([line]) => {
     const timing = z
       .object({ command: z.string(), durationMs: z.number().nonnegative(), success: z.boolean() })
       .parse(JSON.parse(String(line).slice("TSV cleanup ".length)));
@@ -58,7 +59,7 @@ beforeEach(() => {
   write("project/source.txt", "original");
   write("outside/deleted.txt", "deleted original");
   commit();
-  vi.spyOn(console, "log").mockImplementation(() => {});
+  vi.spyOn(console, "debug").mockImplementation(() => {});
 });
 
 afterEach(() => {
@@ -73,7 +74,7 @@ describe("cleanWorktree", () => {
     const clean = vi.spyOn(client, "clean");
     vi.mocked(simpleGit).mockReturnValueOnce(client);
 
-    await cleanWorktree(repo);
+    await cleanWorktree(repo, debugLogger);
 
     expect(commands()).toEqual(["status"]);
     expect(restore).not.toHaveBeenCalled();
@@ -84,7 +85,7 @@ describe("cleanWorktree", () => {
     git("config", "status.showUntrackedFiles", "no");
     write("generated.txt");
 
-    await cleanWorktree(repo);
+    await cleanWorktree(repo, debugLogger);
 
     expect(existsSync(join(repo, "generated.txt"))).toBe(false);
     expect(status()).toBe("");
@@ -98,7 +99,7 @@ describe("cleanWorktree", () => {
     write("other/generated [1]/keep.ignored", "keep");
     write("node_modules/dependency/index.js", "keep");
 
-    await cleanWorktree(repo);
+    await cleanWorktree(repo, debugLogger);
 
     expect(readFileSync(join(repo, "project/source.txt"), "utf8")).toBe("original");
     expect(readFileSync(join(repo, "outside/deleted.txt"), "utf8")).toBe("deleted original");
@@ -118,7 +119,7 @@ describe("cleanWorktree", () => {
     for (const path of paths) write(path, "modified");
     for (const path of paths) write(`generated/${path}`);
 
-    await cleanWorktree(repo);
+    await cleanWorktree(repo, debugLogger);
 
     for (const path of paths) {
       expect(readFileSync(join(repo, path), "utf8")).toBe("original");
@@ -136,7 +137,7 @@ describe("cleanWorktree", () => {
       for (const path of paths) write(path, "modified");
       for (const path of paths) write(`${path}-generated`);
 
-      await cleanWorktree(repo);
+      await cleanWorktree(repo, debugLogger);
 
       for (const path of paths) {
         expect(readFileSync(join(repo, path), "utf8")).toBe("original");
@@ -157,7 +158,9 @@ describe("cleanWorktree", () => {
     rmSync(join(repo, "added.txt"));
     write("outside/deleted.txt", "recreated after staged deletion");
 
-    await expect(cleanWorktree(repo)).rejects.toThrow("Git cleanup left a dirty checkout");
+    await expect(cleanWorktree(repo, debugLogger)).rejects.toThrow(
+      "Git cleanup left a dirty checkout",
+    );
 
     expect(git("ls-files", "--stage")).toBe(index);
     expect(status()).toBe(stagedStatus);
@@ -171,7 +174,9 @@ describe("cleanWorktree", () => {
     git("add", ".");
     const stagedStatus = status();
 
-    await expect(cleanWorktree(repo)).rejects.toThrow("Git cleanup left a dirty checkout");
+    await expect(cleanWorktree(repo, debugLogger)).rejects.toThrow(
+      "Git cleanup left a dirty checkout",
+    );
 
     expect(status()).toBe(stagedStatus);
     expect(commands()).toEqual(["status", "restore", "clean", "status"]);
@@ -181,7 +186,7 @@ describe("cleanWorktree", () => {
     write("project/renamed.txt", "original");
     rmSync(join(repo, "project/source.txt"));
 
-    await cleanWorktree(repo);
+    await cleanWorktree(repo, debugLogger);
 
     expect(readFileSync(join(repo, "project/source.txt"), "utf8")).toBe("original");
     expect(existsSync(join(repo, "project/renamed.txt"))).toBe(false);
@@ -192,7 +197,7 @@ describe("cleanWorktree", () => {
     rmSync(join(repo, "project/source.txt"));
     symlinkSync("../outside/deleted.txt", join(repo, "project/source.txt"));
 
-    await cleanWorktree(repo);
+    await cleanWorktree(repo, debugLogger);
 
     expect(readFileSync(join(repo, "project/source.txt"), "utf8")).toBe("original");
     expect(readFileSync(join(repo, "outside/deleted.txt"), "utf8")).toBe("deleted original");
@@ -203,7 +208,7 @@ describe("cleanWorktree", () => {
     rmSync(join(repo, "project/source.txt"));
     write("project/source.txt/generated.txt");
 
-    await cleanWorktree(repo);
+    await cleanWorktree(repo, debugLogger);
 
     expect(readFileSync(join(repo, "project/source.txt"), "utf8")).toBe("original");
     expect(status()).toBe("");
@@ -213,7 +218,7 @@ describe("cleanWorktree", () => {
     rmSync(join(repo, "outside"), { recursive: true });
     write("outside", "generated");
 
-    await cleanWorktree(repo);
+    await cleanWorktree(repo, debugLogger);
 
     expect(readFileSync(join(repo, "outside/deleted.txt"), "utf8")).toBe("deleted original");
     expect(status()).toBe("");
@@ -223,7 +228,7 @@ describe("cleanWorktree", () => {
     write(".gitignore", "hidden.txt\n");
     write("project/hidden.txt");
 
-    await cleanWorktree(repo);
+    await cleanWorktree(repo, debugLogger);
 
     expect(readFileSync(join(repo, ".gitignore"), "utf8")).toBe("node_modules/\n*.ignored\n");
     expect(existsSync(join(repo, "project/hidden.txt"))).toBe(false);
@@ -240,7 +245,7 @@ describe("cleanWorktree", () => {
     write("outside/deleted.txt", "modified");
     const before = status();
 
-    await expect(cleanWorktree(repo)).rejects.toThrow("unmerged");
+    await expect(cleanWorktree(repo, debugLogger)).rejects.toThrow("unmerged");
 
     expect(status()).toBe(before);
     expect(readFileSync(join(repo, "outside/deleted.txt"), "utf8")).toBe("modified");
@@ -253,7 +258,9 @@ describe("cleanWorktree", () => {
       write(`${path}/file.txt`);
       git("init", "--quiet", join(repo, path));
 
-      await expect(cleanWorktree(repo)).rejects.toThrow("Git cleanup left a dirty checkout");
+      await expect(cleanWorktree(repo, debugLogger)).rejects.toThrow(
+        "Git cleanup left a dirty checkout",
+      );
 
       expect(existsSync(join(repo, path, ".git"))).toBe(true);
       expect(existsSync(join(repo, path, "file.txt"))).toBe(true);
@@ -265,7 +272,7 @@ describe("cleanWorktree", () => {
     git("init", "--quiet", join(repo, "node_modules/nested"));
     write("generated/file.txt");
 
-    await cleanWorktree(repo);
+    await cleanWorktree(repo, debugLogger);
 
     expect(existsSync(join(repo, "node_modules/nested/.git"))).toBe(true);
     expect(status()).toBe("");
@@ -295,7 +302,9 @@ describe("cleanWorktree", () => {
     git("config", "diff.ignoreSubmodules", "all");
     write("submodule/file.txt", "modified");
 
-    await expect(cleanWorktree(repo)).rejects.toThrow("Git cleanup left a dirty checkout");
+    await expect(cleanWorktree(repo, debugLogger)).rejects.toThrow(
+      "Git cleanup left a dirty checkout",
+    );
 
     expect(readFileSync(join(repo, "submodule/file.txt"), "utf8")).toBe("modified");
     expect(commands()).toEqual(["status", "restore", "clean", "status"]);
@@ -309,7 +318,7 @@ describe("cleanWorktree", () => {
       write(`project/${i}-${"y".repeat(100)}`);
     }
 
-    await cleanWorktree(repo);
+    await cleanWorktree(repo, debugLogger);
 
     expect(status()).toBe("");
     expect(commands()).toEqual(["status", "restore", "clean", "status"]);
@@ -323,10 +332,10 @@ describe("cleanWorktree", () => {
     vi.spyOn(client, method).mockRejectedValueOnce(new Error(`${command} failed`));
     vi.mocked(simpleGit).mockReturnValueOnce(client);
 
-    await expect(cleanWorktree(repo)).rejects.toThrow(`${command} failed`);
+    await expect(cleanWorktree(repo, debugLogger)).rejects.toThrow(`${command} failed`);
 
     expect(commands().at(-1)).toBe(command);
-    expect(console.log).toHaveBeenLastCalledWith(expect.stringContaining('"success":false'));
+    expect(console.debug).toHaveBeenLastCalledWith(expect.stringContaining('"success":false'));
   });
 
   it("propagates failures while verifying cleanup", async () => {
@@ -338,9 +347,18 @@ describe("cleanWorktree", () => {
       .mockRejectedValueOnce(new Error("verification failed"));
     vi.mocked(simpleGit).mockReturnValueOnce(client);
 
-    await expect(cleanWorktree(repo)).rejects.toThrow("verification failed");
+    await expect(cleanWorktree(repo, debugLogger)).rejects.toThrow("verification failed");
 
     expect(commands()).toEqual(["status", "restore", "clean", "status"]);
-    expect(console.log).toHaveBeenLastCalledWith(expect.stringContaining('"success":false'));
+    expect(console.debug).toHaveBeenLastCalledWith(expect.stringContaining('"success":false'));
+  });
+
+  it("cleans without timing output when debug logging is disabled", async () => {
+    write("generated.txt");
+
+    await cleanWorktree(repo, new ConsoleLogger());
+
+    expect(status()).toBe("");
+    expect(console.debug).not.toHaveBeenCalled();
   });
 });
