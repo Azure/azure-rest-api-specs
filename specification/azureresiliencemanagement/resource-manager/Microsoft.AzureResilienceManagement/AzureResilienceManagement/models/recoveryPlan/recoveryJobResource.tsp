@@ -72,7 +72,11 @@ model CyberRecoveryJobResourceProperties {
 model InfrastructureCreatedResource {
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifier of the recovery resource.")
-  recoveryResourceId: string;
+  recoveryResourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources";
+    }
+  ]>;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The profile property path that produced the resource.")
@@ -84,7 +88,7 @@ model InfrastructureCreatedResource {
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifier of the created resource.")
-  resourceId: string;
+  resourceId: armResourceIdentifier;
 }
 
 @added(Versions.v2026_11_30_preview)
@@ -92,19 +96,47 @@ model InfrastructureCreatedResource {
 model RestoreJobResourceDetails {
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifier of the source vault.")
-  sourceVaultId: string;
+  sourceVaultId: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults";
+    },
+    {
+      type: "Microsoft.DataProtection/backupVaults";
+    }
+  ]>;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifier of the mapped vault.")
-  mappedVaultId: string;
+  mappedVaultId: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults";
+    },
+    {
+      type: "Microsoft.DataProtection/backupVaults";
+    }
+  ]>;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The backup instance identifier.")
-  backupInstanceId: string;
+  @doc("The Azure resource identifier of the backup instance.")
+  backupInstanceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems";
+    },
+    {
+      type: "Microsoft.DataProtection/backupVaults/backupInstances";
+    }
+  ]>;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The backup job identifier.")
-  backupJobId: string;
+  @doc("The Azure resource identifier of the backup job.")
+  backupJobId: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults/backupJobs";
+    },
+    {
+      type: "Microsoft.DataProtection/backupVaults/backupJobs";
+    }
+  ]>;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The recovery point identifier.")
@@ -112,7 +144,7 @@ model RestoreJobResourceDetails {
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifier of the restored target.")
-  targetArmId: string;
+  targetArmId: armResourceIdentifier;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The current restore state.")

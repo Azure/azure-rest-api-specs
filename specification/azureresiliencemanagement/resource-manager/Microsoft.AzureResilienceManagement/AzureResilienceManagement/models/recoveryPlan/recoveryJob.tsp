@@ -36,7 +36,11 @@ model CyberRecoveryJobProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifier of the completed create-infrastructure job used by this restore job.")
   @visibility(Lifecycle.Read)
-  createInfraJobId?: string;
+  createInfraJobId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryJobs";
+    }
+  ]>;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The recovery point selection recorded for this job.")
@@ -69,7 +73,7 @@ model ResourceSelectionProperties {
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifiers selected for the operation.")
-  selectedResourceIds?: string[];
+  selectedResourceIds?: armResourceIdentifier[];
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"

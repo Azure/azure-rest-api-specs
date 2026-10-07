@@ -6163,8 +6163,16 @@
       "properties": {
         "createInfraJobId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The Azure resource identifier of the completed create-infrastructure job used by this restore job.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryJobs"
+              }
+            ]
+          }
         },
         "recoveryPointSelectionProperties": {
           "$ref": "#/definitions/RecoveryPointSelectionProperties",
@@ -6263,7 +6271,19 @@
           "type": "array",
           "description": "The Azure resource identifiers of the backup vaults protecting the resource.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.RecoveryServices/vaults"
+                },
+                {
+                  "type": "Microsoft.DataProtection/backupVaults"
+                }
+              ]
+            }
           },
           "readOnly": true
         },
@@ -6271,12 +6291,25 @@
           "type": "array",
           "description": "The Azure resource identifiers of the target-tenant mapped backup vaults.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.RecoveryServices/vaults"
+                },
+                {
+                  "type": "Microsoft.DataProtection/backupVaults"
+                }
+              ]
+            }
           },
           "readOnly": true
         },
         "containerResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The Azure resource identifier of the container for a non-Azure-resource child.",
           "readOnly": true
         },
@@ -6284,19 +6317,41 @@
           "type": "array",
           "description": "The service group member identifiers through which this resource was discovered.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           },
           "readOnly": true
         },
         "recoveryConfigProfileId": {
           "type": "string",
-          "description": "The Azure resource identifier of the per-resource recovery configuration profile override."
+          "format": "arm-id",
+          "description": "The Azure resource identifier of the per-resource recovery configuration profile override.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryConfigProfiles"
+              }
+            ]
+          }
         },
         "protectedItemIds": {
           "type": "array",
           "description": "The identifiers of the protected items in the backup vaults.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems"
+                },
+                {
+                  "type": "Microsoft.DataProtection/backupVaults/backupInstances"
+                }
+              ]
+            }
           },
           "readOnly": true
         },
@@ -8675,7 +8730,15 @@
       "properties": {
         "recoveryResourceId": {
           "type": "string",
-          "description": "The Azure resource identifier of the recovery resource."
+          "format": "arm-id",
+          "description": "The Azure resource identifier of the recovery resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources"
+              }
+            ]
+          }
         },
         "propertyPath": {
           "type": "string",
@@ -8687,6 +8750,7 @@
         },
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The Azure resource identifier of the created resource."
         }
       },
@@ -9368,11 +9432,19 @@
         },
         "linkedSourceRecoveryPlanId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The Azure resource identifier of the linked source recovery plan. Cannot be changed after creation.",
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureResilienceManagement/recoveryPlans"
+              }
+            ]
+          }
         },
         "linkedSourceRecoveryPlanTenantId": {
           "type": "string",
@@ -10113,7 +10185,15 @@
         },
         "recoveryConfigProfileId": {
           "type": "string",
-          "description": "The Azure resource identifier of the plan-scoped recovery configuration profile."
+          "format": "arm-id",
+          "description": "The Azure resource identifier of the plan-scoped recovery configuration profile.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryConfigProfiles"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -10189,7 +10269,7 @@
           "$ref": "#/definitions/RecoveryPointPolicy",
           "description": "Default recovery point selection."
         },
-        "infraActions": {
+        "infrastructurePreparation": {
           "type": "array",
           "description": "Infrastructure actions run before restoring resources that use this recovery configuration profile.",
           "maxItems": 10,
@@ -11275,7 +11355,16 @@
           "type": "array",
           "description": "The Azure resource identifiers of resource groups matched by this rule.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Resources/resourceGroups"
+                }
+              ]
+            }
           }
         },
         "tags": {
@@ -12530,7 +12619,9 @@
           "type": "array",
           "description": "The Azure resource identifiers selected for the operation.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         }
       },
@@ -12648,7 +12739,18 @@
       "properties": {
         "protectedItemId": {
           "type": "string",
-          "description": "The Azure resource identifier of the protected item."
+          "format": "arm-id",
+          "description": "The Azure resource identifier of the protected item.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems"
+              },
+              {
+                "type": "Microsoft.DataProtection/backupVaults/backupInstances"
+              }
+            ]
+          }
         },
         "recoveryPointId": {
           "type": "string",
@@ -12714,19 +12816,63 @@
       "properties": {
         "sourceVaultId": {
           "type": "string",
-          "description": "The Azure resource identifier of the source vault."
+          "format": "arm-id",
+          "description": "The Azure resource identifier of the source vault.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults"
+              },
+              {
+                "type": "Microsoft.DataProtection/backupVaults"
+              }
+            ]
+          }
         },
         "mappedVaultId": {
           "type": "string",
-          "description": "The Azure resource identifier of the mapped vault."
+          "format": "arm-id",
+          "description": "The Azure resource identifier of the mapped vault.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults"
+              },
+              {
+                "type": "Microsoft.DataProtection/backupVaults"
+              }
+            ]
+          }
         },
         "backupInstanceId": {
           "type": "string",
-          "description": "The backup instance identifier."
+          "format": "arm-id",
+          "description": "The Azure resource identifier of the backup instance.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems"
+              },
+              {
+                "type": "Microsoft.DataProtection/backupVaults/backupInstances"
+              }
+            ]
+          }
         },
         "backupJobId": {
           "type": "string",
-          "description": "The backup job identifier."
+          "format": "arm-id",
+          "description": "The Azure resource identifier of the backup job.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.RecoveryServices/vaults/backupJobs"
+              },
+              {
+                "type": "Microsoft.DataProtection/backupVaults/backupJobs"
+              }
+            ]
+          }
         },
         "recoveryPointId": {
           "type": "string",
@@ -12734,6 +12880,7 @@
         },
         "targetArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The Azure resource identifier of the restored target."
         },
         "restoreState": {

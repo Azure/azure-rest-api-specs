@@ -112,31 +112,56 @@ model CyberRecoveryResourceProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifiers of the backup vaults protecting the resource.")
   @visibility(Lifecycle.Read)
-  vaultResourceIds?: string[];
+  vaultResourceIds?: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults";
+    },
+    {
+      type: "Microsoft.DataProtection/backupVaults";
+    }
+  ]>[];
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifiers of the target-tenant mapped backup vaults.")
   @visibility(Lifecycle.Read)
-  ctrVaultResourceIds?: string[];
+  ctrVaultResourceIds?: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults";
+    },
+    {
+      type: "Microsoft.DataProtection/backupVaults";
+    }
+  ]>[];
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifier of the container for a non-Azure-resource child.")
   @visibility(Lifecycle.Read)
-  containerResourceId?: string;
+  containerResourceId?: armResourceIdentifier;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The service group member identifiers through which this resource was discovered.")
   @visibility(Lifecycle.Read)
-  membershipThroughServiceGroupMembers?: string[];
+  membershipThroughServiceGroupMembers?: armResourceIdentifier[];
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifier of the per-resource recovery configuration profile override.")
-  recoveryConfigProfileId?: string;
+  recoveryConfigProfileId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryConfigProfiles";
+    }
+  ]>;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The identifiers of the protected items in the backup vaults.")
   @visibility(Lifecycle.Read)
-  protectedItemIds?: string[];
+  protectedItemIds?: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems";
+    },
+    {
+      type: "Microsoft.DataProtection/backupVaults/backupInstances";
+    }
+  ]>[];
 
   @added(Versions.v2026_11_30_preview)
   @doc("The current backup protection state.")

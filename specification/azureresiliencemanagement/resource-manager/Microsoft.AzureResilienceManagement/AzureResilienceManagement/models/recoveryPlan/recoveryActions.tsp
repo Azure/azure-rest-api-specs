@@ -8,6 +8,7 @@ import "../../recoveryPlans.tsp";
 import "./recoveryResource.tsp";
 
 using Azure.ResourceManager;
+using Azure.Core;
 using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
@@ -261,7 +262,14 @@ model RestoreResourceFilter {
 model RestoreDataSourceInput {
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifier of the protected item.")
-  protectedItemId: string;
+  protectedItemId: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems";
+    },
+    {
+      type: "Microsoft.DataProtection/backupVaults/backupInstances";
+    }
+  ]>;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The recovery point identifier pinned for an include filter.")

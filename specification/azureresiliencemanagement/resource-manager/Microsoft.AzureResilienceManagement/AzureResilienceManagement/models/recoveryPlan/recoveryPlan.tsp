@@ -181,7 +181,11 @@ model LinkedRecoveryPlanDetails {
   @added(Versions.v2026_11_30_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The Azure resource identifier of the linked source recovery plan. Cannot be changed after creation.")
-  linkedSourceRecoveryPlanId?: string;
+  linkedSourceRecoveryPlanId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureResilienceManagement/recoveryPlans";
+    }
+  ]>;
 
   @added(Versions.v2026_11_30_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -236,7 +240,11 @@ model RecoveryResourceInclusionRule {
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifiers of resource groups matched by this rule.")
-  resourceGroupIds?: string[];
+  resourceGroupIds?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Resources/resourceGroups";
+    }
+  ]>[];
 
   @added(Versions.v2026_11_30_preview)
   @identifiers(#["key"])

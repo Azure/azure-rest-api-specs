@@ -141,5 +141,9 @@ model RecoveryConfigProfileAssociation {
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifier of the plan-scoped recovery configuration profile.")
-  recoveryConfigProfileId: string;
+  recoveryConfigProfileId: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryConfigProfiles";
+    }
+  ]>;
 }

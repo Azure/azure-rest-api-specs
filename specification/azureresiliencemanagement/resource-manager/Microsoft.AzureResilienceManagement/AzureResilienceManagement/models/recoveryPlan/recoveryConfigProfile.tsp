@@ -612,7 +612,7 @@ model RecoveryConfigProfileProperties {
   @identifiers(#[])
   @maxItems(10)
   @doc("Infrastructure actions run before restoring resources that use this recovery configuration profile.")
-  infraActions?: RecoveryGroupBaseAction[];
+  infrastructurePreparation?: RecoveryGroupBaseAction[];
 
   @added(Versions.v2026_11_30_preview)
   @visibility(Lifecycle.Read)
