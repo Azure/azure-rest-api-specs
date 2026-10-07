@@ -43,5 +43,5 @@ interface MetadataEntities {
   >;
 }
 
-@@doc(MetadataEntity.name, "Name of metadata entity.");
+@@doc(MetadataEntity.name, "Name of the metadata entity.");
 @@doc(MetadataEntity.properties, "The metadata entity properties.");
