@@ -129,3 +129,5 @@ are retained. In a disposable checkout, `--git-clean` restores tracked files and
 removes untracked files and directories across the entire repository after each
 project. It requires an initially clean checkout; ignored files are retained.
 Do not use it while other work is in progress. `--dry-run` disables cleanup.
+
+<!-- demo: touching this file should trigger the sharded TSV (os, shard) matrix -->
