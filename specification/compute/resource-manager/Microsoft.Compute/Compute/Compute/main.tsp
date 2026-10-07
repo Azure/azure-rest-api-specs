@@ -33,6 +33,8 @@ import "./CapacityReservation.tsp";
 import "./InterconnectBlock.tsp";
 import "./VirtualMachineRunCommand.tsp";
 import "./VirtualMachineDiagnosticRunCommand.tsp";
+import "./VirtualMachineVMGalleryApplication.tsp";
+import "./VirtualMachineScaleSetVMGalleryApplication.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
 import "./client.tsp";
@@ -101,7 +103,8 @@ interface Operations {
   @segment("operations")
   @get
   @list
-  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
-    | ArmResponse<Azure.ResourceManager.Foundations.OperationListResult>
-    | Common.CloudError;
+  list(
+    ...ApiVersionParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+  ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | Common.CloudError;
 }
