@@ -43,8 +43,10 @@ jobs:
       - name: Compute validation matrix
         id: matrix
         shell: bash
+        env:
+          CHECKING_ALL_SPECS: ${{ steps.detect.outputs.checking-all-specs }}
         run: |
-          if [ "${{ steps.detect.outputs.checking-all-specs }}" = "true" ]; then
+          if [ "$CHECKING_ALL_SPECS" = "true" ]; then
             # Mirrors the shard/os matrix TypeSpec Validation - All used to run on its own.
             MATRIX=$(node -e '
               const totalShards = 3;
@@ -97,9 +99,12 @@ jobs:
 
       - name: Validate All Specs
         if: matrix.mode == 'all'
+        env:
+          SHARD: ${{ matrix.shard }}
+          TOTAL_SHARDS: ${{ matrix['total-shards'] }}
         run: >-
           node eng/tools/typespec-validation/cmd/tsv.js --all
-          --shard=${{ matrix.shard }}/${{ matrix['total-shards'] }} --git-clean specification
+          --shard="$SHARD/$TOTAL_SHARDS" --git-clean specification
           --github-summary
           ${{ runner.debug == '1' && '--verbose' || '' }}
 
@@ -114,8 +119,11 @@ jobs:
     steps:
       - name: Check validation result
         shell: bash
+        env:
+          SCOPE_RESULT: ${{ needs.scope.result }}
+          VALIDATE_RESULT: ${{ needs.validate.result }}
         run: |
-          if [ "${{ needs.scope.result }}" != "success" ] || [ "${{ needs.validate.result }}" != "success" ]; then
+          if [ "$SCOPE_RESULT" != "success" ] || [ "$VALIDATE_RESULT" != "success" ]; then
             echo "TypeSpec Validation failed." >&2
             exit 1
           fi
