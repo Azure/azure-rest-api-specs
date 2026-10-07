@@ -119,6 +119,20 @@ model InfraResiliencyRecoveryResourceProperties extends ResiliencyRecoveryResour
 }
 
 @added(Versions.v2026_11_30_preview)
+@doc("Indicates whether a recovery resource can be included for the configured targets.")
+union RecoveryResourceInclusionEligibility {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The recovery resource can be included.")
+  CanBeIncluded: "CanBeIncluded",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The recovery resource cannot be included.")
+  CannotBeIncluded: "CannotBeIncluded",
+
+  string,
+}
+
+@added(Versions.v2026_11_30_preview)
 @doc("Cyber resiliency properties for a recovery resource.")
 model CyberResiliencyRecoveryResourceProperties extends ResiliencyRecoveryResourceProperties {
   @added(Versions.v2026_11_30_preview)
@@ -192,7 +206,7 @@ model CyberResiliencyRecoveryResourceProperties extends ResiliencyRecoveryResour
   @added(Versions.v2026_11_30_preview)
   @doc("Indicates whether the resource can be included for the configured targets.")
   @visibility(Lifecycle.Read)
-  canBeIncluded?: boolean = false;
+  canBeIncluded?: RecoveryResourceInclusionEligibility = RecoveryResourceInclusionEligibility.CannotBeIncluded;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The target locations that support recovery of this resource.")

@@ -6385,9 +6385,29 @@
           "readOnly": true
         },
         "canBeIncluded": {
-          "type": "boolean",
+          "type": "string",
           "description": "Indicates whether the resource can be included for the configured targets.",
-          "default": false,
+          "default": "CannotBeIncluded",
+          "enum": [
+            "CanBeIncluded",
+            "CannotBeIncluded"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryResourceInclusionEligibility",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CanBeIncluded",
+                "value": "CanBeIncluded",
+                "description": "The recovery resource can be included."
+              },
+              {
+                "name": "CannotBeIncluded",
+                "value": "CannotBeIncluded",
+                "description": "The recovery resource cannot be included."
+              }
+            ]
+          },
           "readOnly": true
         },
         "supportedTargetLocations": {
@@ -11407,6 +11427,30 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "RecoveryResourceInclusionEligibility": {
+      "type": "string",
+      "description": "Indicates whether a recovery resource can be included for the configured targets.",
+      "enum": [
+        "CanBeIncluded",
+        "CannotBeIncluded"
+      ],
+      "x-ms-enum": {
+        "name": "RecoveryResourceInclusionEligibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CanBeIncluded",
+            "value": "CanBeIncluded",
+            "description": "The recovery resource can be included."
+          },
+          {
+            "name": "CannotBeIncluded",
+            "value": "CannotBeIncluded",
+            "description": "The recovery resource cannot be included."
+          }
+        ]
+      }
     },
     "RecoveryResourceInclusionRule": {
       "type": "object",
