@@ -23,21 +23,43 @@ without account checks or a readiness comment/check, including review events and
 manual `/azsdk check-access` requests. The PR-event notifier uses a path filter;
 the publisher verifies current changed files for every trigger.
 
-The advisory **Contributor readiness** check reports public Microsoft/Azure
-membership visibility and effective repository access for the PR author, commit
-authors/committers, and all submitted reviewers. It does not change merge rules.
-Missing public membership produces conditional internal-onboarding guidance, not
-a claim that an external contributor is unauthorized.
+Internal contributors need **Azure organization membership and repository write
+access** for the PR workflow to work correctly. Microsoft organization membership
+is not required by this check. The **Contributor readiness** check reports public
+Azure membership visibility and effective repository access for the PR author,
+commit authors/committers, and reviewers with an `APPROVED` review. Comments,
+requests for changes, pending reviews and dismissed reviews do not add reviewer
+participants. Authors and commit participants remain included independently.
+The check is non-blocking and does not change merge rules, but the access
+requirements are not optional for the internal workflow. External fork
+contributions remain allowed.
 
-The comment groups findings by affected user: 🔴 marks a confirmed issue and 🟡
-marks checks that could not be verified. It links to
-[setup and access renewal](https://aka.ms/azsdk/access); users without findings
-are omitted to keep the report short. The job summary shows the same report.
+The comment starts with a highlighted warning about the risk to PR approvals and
+pipeline runs, then groups findings by affected user and separates access issues
+from their **PR impact**. A PR author without repository write access cannot run
+Azure DevOps pipelines for that PR. A reviewer without write access cannot provide
+an approval that counts toward required reviews (GitHub's green approval check).
+That reviewer must set up or renew their own access, not the PR author.
+Users with both roles see both consequences; commit-only participants do not
+receive author or reviewer consequences. Other GitHub approval rules still apply.
+
+🔴 marks a confirmed issue and 🟡 marks checks that could not be verified. Private
+or missing public membership is not evidence of missing repository write access.
+Membership-only findings and unavailable permission lookups do not establish
+pipeline or review failures; their PR impact is reported as undetermined.
+The report links to [setup and access renewal](https://aka.ms/azsdk/access).
+When findings exist, a
+collapsed **Contributors with verified access** section lists human participants
+whose public Azure membership and effective repository write access were both
+confirmed, together with their roles. Unverified and unchecked users are never
+listed as passing. Each section shows at most 100 entries. Clean reports omit
+the details section and do not create a comment. The job summary shows the same
+report.
 Organization names in membership findings link to the organization's People page,
 with the affected user's login prefilled in the search.
 
 After changing access, comment `/azsdk check-access` on the PR. The PR author,
-resolved commit participants, submitted reviewers and maintainers can refresh,
+resolved commit participants, approving reviewers and maintainers can refresh,
 including affected participants without write access. One bot comment is updated
 when findings exist and resolved when they are fixed; clean PRs receive only the
 check. Permission changes alone do not trigger an automatic refresh.
@@ -49,16 +71,17 @@ and other approval rules remain GitHub's responsibility. Unmapped identities,
 inaccessible API results, and PRs exceeding the commits API's 250-commit limit are
 reported as incomplete rather than silently passing.
 
-PR opening, reopening, new commits, ready-for-review transitions and submitted
-reviews use an unprivileged notification workflow followed by a trusted
-`workflow_run` publisher. The notifier has no checkout or token permissions;
+PR opening, reopening, new commits, ready-for-review transitions, submitted
+reviews and review dismissals use an unprivileged notification workflow followed
+by a trusted `workflow_run` publisher. The notifier has no checkout or token permissions;
 the publisher runs only default-branch code and resolves PRs from GitHub metadata.
 No `pull_request_target` trigger is used.
 
-Editing or dismissing a review does not rerun the check; those reviewers remain
-included. Fork workflow approval policies can delay automatic refreshes. The
-comment command runs from the default branch and remains available without
-waiting for the notifier. Do not make this advisory check required.
+Editing review text does not rerun the check. Dismissing an approval refreshes
+the report so it no longer includes that reviewer solely for the dismissed review.
+Fork workflow approval policies can delay automatic refreshes. The comment
+command runs from the default branch and remains available without
+waiting for the notifier. Do not make this non-blocking check required.
 
 ## Branch cleanup
 
@@ -81,9 +104,11 @@ gh workflow run branch-cleanup.yaml --repo Azure/azure-rest-api-specs --ref main
 ```
 
 The default branch, protected branches, and sources and targets of open PRs
-(including drafts) are skipped. Long-lived names and prefixes such as `dev-`,
-`release-`, `feature/`, `published/`, and `archive/` are also excluded; the complete
-list is at the top of the [script](../.github/workflows/src/branch-cleanup.ts).
+(including drafts) are skipped. Long-lived names and prefixes such as `release-`,
+`feature/` and `archive/` are also excluded; the complete list is at the top of the
+[script](../.github/workflows/src/branch-cleanup.ts).
+`dev-`, `dev/`, and `published/` branches are eligible under the same age cutoff as
+other non-Copilot branches.
 Keep a long-lived branch by protecting it or adding it to those exclusions.
 Candidates and their SHAs are logged, and SHA-guarded Git pushes refuse to delete
 changed tips. API and deletion failures fail the workflow.
@@ -364,14 +389,24 @@ production-only module imports, workflow YAML, and compiled agentic workflow loc
 Publishable TypeSpec libraries live under `libs/` and participate in the pnpm
 workspace. [Foundry Core](../libs/foundry-core/README.md) is the initial package.
 
-The manual [publish-libraries pipeline](pipelines/publish-libraries.yml) builds and
-packs Foundry Core into a `packages` pipeline artifact. It follows the
+The [publish-libraries pipeline](pipelines/publish-libraries.yml) builds and
+packs Foundry Core into a `packages` pipeline artifact when `libs/` changes on
+`main`. PR validation remains in the `Eng` GitHub workflow. It follows the
 [TypeSpec publishing pipeline](https://github.com/microsoft/typespec/blob/main/eng/tsp-core/pipelines/publish.yml):
 1ES builds produce package artifacts, and a separate release job publishes them
 to npm through ESRP. `pnpm pack` resolves catalog dependencies in the published
 manifest. Foundry Core's `prepack` script compiles its runtime to JavaScript, and
 `publishConfig` switches the packed exports from source TypeScript to that output.
-No Chronus, automatic version bumps, or nightly releases are configured.
+No Chronus or scheduled nightly releases are configured.
+
+Internal `main` CI runs automatically publish development versions to the
+`latest` npm tag. The version is `<major>.<minor>.<patch>-dev.<change-count>`,
+counting first-parent Git commits that changed the library folder. Every folder change,
+including documentation or tests, produces a new version. Version changes happen
+only in the build workspace, not in Git.
+
+Reruns and unrelated commits keep the same version. The build does not query npm
+for publication status; repeat publishing is handled by the existing publishing job.
 
 Before the first release, an Azure SDK pipeline administrator must register this
 YAML as a pipeline in the **internal** Azure DevOps project, authorize its 1ES
@@ -380,7 +415,7 @@ templates, agent pools, and Azure SDK ESRP service connection, and configure the
 to publish `@azure-tools/typespec-foundry-core` in the `@azure-tools` npm scope.
 These are external setup steps, not resources created by the YAML.
 
-For each release:
+For an explicit release of the version in `package.json`:
 
 1. Update `libs/foundry-core/package.json` to an unpublished version, run
    `pnpm install`, and merge the changes into `main`.
@@ -389,9 +424,12 @@ For each release:
    release environment. Publishing is available only from this public repository's
    `main` branch in the internal Azure DevOps project.
 
-The shared publishing job uses the `beta` npm tag for prerelease versions and
-`latest` for stable versions. Versions are not bumped or skipped automatically;
-publishing an already released version fails.
+Manual runs with `Publish` **false** only build the artifact. With `Publish`
+**true**, the shared publishing job uses `beta` for prerelease manifest versions
+and `latest` for stable versions.
+Automatic development releases intentionally use `latest`, so default installs
+receive development builds; consumers requiring a fixed release should pin its
+version.
 
 To inspect a package locally without publishing:
 

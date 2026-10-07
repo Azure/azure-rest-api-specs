@@ -113,7 +113,7 @@ From `package.json` comments:
 - `@actions/core`, `@actions/github`: Types for the injected GitHub Actions toolkit (devDependencies)
 - `@octokit/rest`, `@octokit/types`: GitHub REST API client
 - `simple-git`: Git operations
-- `js-yaml`: YAML parsing
+- `yaml`: YAML parsing
 - `debug`: Debug logging
 - `vitest`, `@vitest/coverage-v8`: Root development dependencies for testing and coverage
 - `oxlint`, `oxlint-tsgolint`: Root development dependencies for linting
@@ -173,7 +173,8 @@ Run `pnpm run check` in each affected package. All lint, formatting, and test ch
 Cover new or changed behavior and bug regressions with focused tests of repository-owned behavior and integration contracts. Reuse adequate existing coverage for mechanical refactors and dependency/API substitutions; add tests for uncovered repository behavior or compatibility risks, not to reproduce upstream test matrices. Preserve configured coverage requirements and justify removing existing tests.
 
 - Each assertion must catch a concrete behavioral regression, not restate configuration or test a third-party tool's implementation. Formatting-only changes normally need the existing formatter check, not new tests.
-- For YAML/JSON integration tests, inspect parsed values that affect behavior. Do not assert text offsets, file length, indentation, quote style, or display names unless they are part of the contract being tested.
+- Test actual script/runtime behavior, not workflow text. Do not add tests or snapshots that assert workflow or composite-action YAML contents, whether through string matching or parsed fields, including checkout credentials, permissions, action references, triggers, inputs, or step wiring. This applies to new workflows and bug fixes too. Validate configuration changes with the existing actionlint, zizmor, and formatter checks.
+- For other YAML/JSON integration tests, inspect parsed values that affect behavior. Do not assert text offsets, file length, indentation, quote style, or display names unless they are part of the contract being tested.
 - When a test fails after an intentional change, remove obsolete expectations rather than replacing them with assertions that merely lock in the new implementation. Keep the fix scoped to the behavior at issue.
 
 - **Framework**: Vitest
@@ -237,8 +238,8 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 - **Permissions**: Define minimal `permissions` in workflow files
 - **Token usage**: Use `GITHUB_TOKEN` with least privilege
 - **Action references**: Pin external actions to a full commit SHA and retain a version comment for dependency updates.
-- **Repository references**: Use `$/...` for actions and reusable workflows at the running commit. Retain `./...` only when an action intentionally comes from a different checkout.
-- **Checkout**: Use `$/.github/actions/checkout` in handwritten workflows. It centralizes the upstream SHA pin and defaults to `persist-credentials: false`; explicitly enable credentials only for later authenticated Git operations.
+- **Repository references**: After checkout, use `./...` for local composite actions and preserve the intended checkout revision. Privileged workflows must only execute actions from a trusted base/default-branch checkout, never a PR-head checkout. The `self-repository` audit is disabled repository-wide in `.github/zizmor.yaml` because `$/...` actions download the entire specs repository; do not add inline suppressions for this rule. Keep `$/...` for reusable workflows, which do not download an action archive.
+- **Checkout**: Use direct SHA-pinned `actions/checkout` with a version comment and explicit `persist-credentials: false`; enable credentials only for later authenticated Git operations. Do not wrap the initial checkout in a self-repository action: preparing it downloads and extracts the entire specs repository before the actual checkout, adding minutes to every job (see [actions/runner#4631](https://github.com/actions/runner/issues/4631)).
 
 ### Code Quality
 
@@ -253,6 +254,23 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 
 - **Caching**: Use appropriate caching strategies (e.g., pnpm cache in setup-node)
 - **Early exits**: Return early when conditions aren't met
+
+### GitHub API Efficiency
+
+- Minimize requests across the entire workflow, including downstream workflows, not just within
+  individual helpers. Prefer trustworthy event payloads and reuse already-fetched responses when
+  their freshness is sufficient. Do not separately fetch labels or other fields already returned
+  by a required PR lookup.
+- Apply cheap eligibility checks before API calls. Use endpoint filters and `PER_PAGE_MAX` where
+  supported. Stop pagination once sufficient evidence determines the result; retain complete
+  pagination when the decision requires an exhaustive list.
+- Avoid redundant status, label, and comment writes when the desired state is already known.
+  Do not introduce an extra read merely to avoid a write without considering the total call cost.
+- Preserve head SHA and run-attempt correlation, trust boundaries, and necessary freshness checks.
+  Never substitute the live PR head for a missing reviewed SHA or cache mutable state across
+  boundaries where it must be revalidated.
+- For changes intended to reduce requests, add focused mock call-count assertions alongside
+  behavior tests, including relevant pagination and stale-result cases.
 
 ## Common Tasks
 
