@@ -14,9 +14,15 @@ permissions:
   contents: read
 
 jobs:
-  typespec-validation:
-    name: TypeSpec Validation
+  # Cheap (no pnpm install) check for whether this PR needs every spec validated, so validate-all
+  # below can run only when it's actually needed. A false negative here only costs the speedup:
+  # tsv's own authoritative core-file check in the "Validate Impacted Specs" step below still
+  # triggers its serial all-specs fallback safely. A false positive costs CI time, not correctness.
+  scope:
+    name: Determine validation scope
     runs-on: ubuntu-24.04
+    outputs:
+      checking-all-specs: ${{ steps.detect.outputs.checking-all-specs }}
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -24,12 +30,129 @@ jobs:
           persist-credentials: false
           fetch-depth: 2
 
+      - name: Detect core-file changes
+        id: detect
+        shell: bash
+        env:
+          # Only main and RPSaaSMaster validate all specs when core files change.
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          # Mirrors isCoreFile() in eng/tools/typespec-validation/src/find-projects.ts.
+          # Keep in sync; find-projects.test.ts documents the authoritative behavior.
+          CHECKING_ALL=false
+          if [ "$BASE_REF" = "main" ] || [ "$BASE_REF" = "RPSaaSMaster" ]; then
+            while IFS= read -r file; do
+              [ -z "$file" ] && continue
+              # getChangedFiles() in find-projects.ts excludes these too.
+              case "$file" in
+                *ChangedFiles-Functions*) continue ;;
+              esac
+              case "$file" in
+                .gitattributes | .oxfmtrc.json | .prettierrc.json | pnpm-lock.yaml | pnpm-workspace.yaml | package.json | tsconfig.json | specification/suppressions.yaml)
+                  CHECKING_ALL=true
+                  ;;
+                .github/arm-leases/* | .github/CODEOWNERS) ;;
+                .github/*)
+                  CHECKING_ALL=true
+                  ;;
+                eng/common/*) ;;
+                eng/*)
+                  CHECKING_ALL=true
+                  ;;
+                specification/common-types/*)
+                  CHECKING_ALL=true
+                  ;;
+              esac
+            done <<<"$(git diff --name-only HEAD^ HEAD)"
+          fi
+          echo "checking-all-specs=$CHECKING_ALL" >>"$GITHUB_OUTPUT"
+
+  # Only runs for core-file changes. Mirrors the shard/os matrix TypeSpec Validation - All uses
+  # for its own push/schedule triggers, so a core-file PR validates every spec once, sharded for
+  # speed, instead of relying on the slow serial fallback below.
+  validate-all:
+    name: TSV (${{ matrix.os }}, ${{ matrix.shard }}/${{ matrix['total-shards'] }})
+    needs: scope
+    if: needs.scope.outputs['checking-all-specs'] == 'true'
+
+    strategy:
+      # Validate all specs, even if one shard fails early.
+      fail-fast: false
+      matrix:
+        os: [ubuntu, windows]
+        # shards must start at 1 and increment by 1
+        shard: [1, 2, 3]
+        # total-shards must be an accurate count of the number of shards
+        total-shards: [3]
+
+    runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
+
+    steps:
+      - name: Enable git long paths
+        if: runner.os == 'Windows'
+        run: git config --global core.longpaths true
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      - name: Validate Impacted Specs
-        # Only main and RPSaaSMaster validate all specs when core files change.
+      - name: Validate All Specs
+        env:
+          SHARD: ${{ matrix.shard }}
+          TOTAL_SHARDS: ${{ matrix['total-shards'] }}
         run: >-
-          node eng/tools/typespec-validation/cmd/tsv.js --changed --git-clean
+          node eng/tools/typespec-validation/cmd/tsv.js --all
+          --shard="$SHARD/$TOTAL_SHARDS" --git-clean specification
+          --github-summary
           ${{ runner.debug == '1' && '--verbose' || '' }}
-          ${{ github.base_ref != 'main' && github.base_ref != 'RPSaaSMaster' && '--ignore-core-files' || '' }}
+
+  # The single required check. Always runs (never skipped), so it always produces a truthful
+  # conclusion: a skipped job reports "success" for required-status-check purposes, so this must
+  # never be the job that's conditionally skipped. For a normal PR this validates directly, with
+  # errors visible on this same job, exactly like before. For a core-file PR it waits for and
+  # reports validate-all's real result instead of duplicating that work serially.
+  typespec-validation:
+    name: TypeSpec Validation
+    needs: [scope, validate-all]
+    if: always()
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Require successful scope detection
+        if: needs.scope.result != 'success'
+        run: |
+          echo "::error::Could not determine TypeSpec Validation scope."
+          exit 1
+
+      - name: Report TypeSpec Validation - All result
+        if: needs.scope.outputs['checking-all-specs'] == 'true'
+        env:
+          VALIDATE_ALL_RESULT: ${{ needs['validate-all'].result }}
+        run: |
+          if [ "$VALIDATE_ALL_RESULT" != "success" ]; then
+            echo "::error::TypeSpec Validation - All failed; see the failing TSV (os, shard) job(s) above for details."
+            exit 1
+          fi
+          echo "Core files changed; all specs were validated by the TSV (os, shard) jobs above."
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        if: needs.scope.outputs['checking-all-specs'] != 'true'
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+
+      - name: Setup Node and install deps
+        if: needs.scope.outputs['checking-all-specs'] != 'true'
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Validate Impacted Specs
+        if: needs.scope.outputs['checking-all-specs'] != 'true'
+        shell: bash
+        env:
+          DEBUG_FLAG: ${{ runner.debug == '1' && '--verbose' || '' }}
+          # Only main and RPSaaSMaster validate all specs when core files change.
+          IGNORE_CORE_FILES_FLAG: ${{ github.base_ref != 'main' && github.base_ref != 'RPSaaSMaster' && '--ignore-core-files' || '' }}
+        run: node eng/tools/typespec-validation/cmd/tsv.js --changed --git-clean $DEBUG_FLAG $IGNORE_CORE_FILES_FLAG
