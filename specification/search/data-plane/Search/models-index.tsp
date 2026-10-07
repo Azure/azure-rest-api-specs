@@ -353,6 +353,8 @@ union VectorFilterMode {
   PreFilter: "preFilter",
 
   /** The filter will be applied after the global top-k candidate set of vector results is returned. This will result in fewer results than requested by the parameter 'k'. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   StrictPostFilter: "strictPostFilter",
 }
 
@@ -1384,6 +1386,8 @@ model VectorizableTextQuery extends VectorQuery {
 /** The query parameters to use for vector search when an url that represents an image value that needs to be vectorized is provided. */
 model VectorizableImageUrlQuery extends VectorQuery {
   /** The URL of an image to be vectorized to perform a vector search query. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   url?: string;
 
   /** The kind of vector query being performed. */
@@ -1393,6 +1397,8 @@ model VectorizableImageUrlQuery extends VectorQuery {
 /** The query parameters to use for vector search when a base 64 encoded binary of an image that needs to be vectorized is provided. */
 model VectorizableImageBinaryQuery extends VectorQuery {
   /** The base 64 encoded binary of an image to be vectorized to perform a vector search query. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   base64Image?: string;
 
   /** The kind of vector query being performed. */
