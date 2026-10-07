@@ -16,6 +16,7 @@
     "js-yaml": "catalog:",
     "marked": "catalog:",
     "markdown-table": "catalog:",
+    "minimatch": "catalog:",
     "simple-git": "catalog:",
     "yaml": "catalog:",
     "zod": "catalog:"
@@ -43,6 +44,7 @@
   },
   "scripts": {
     "build": "tsc --noEmit",
+    "labels": "node ./workflows/cmd/labels.ts",
     "check": "pnpm test:ci && pnpm lint && pnpm format:check",
     "lint": "pnpm lint:oxlint && pnpm lint:tsc",
     "lint:oxlint": "oxlint .",

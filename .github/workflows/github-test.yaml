@@ -53,14 +53,15 @@ jobs:
         run: git config --global core.longpaths true
 
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github
 
       - if: ${{ github.event_name == 'pull_request' && matrix.os == 'ubuntu' }}
         name: Require compiled agentic workflow locks
-        uses: actions/github-script@v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const files = await github.paginate(github.rest.pulls.listFiles, {
@@ -91,7 +92,7 @@ jobs:
         uses: ./.github/actions/install-deps-github-script
 
       - name: Verify all modules are importable
-        uses: actions/github-script@v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { join } = await import("path");
@@ -110,3 +111,24 @@ jobs:
         uses: docker://rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
         with:
           args: -color -verbose
+
+      - if: ${{ matrix.os == 'ubuntu' }}
+        name: Select handwritten workflows and actions
+        id: zizmor-inputs
+        shell: bash
+        run: |
+          paths=$(git ls-files -- \
+            '.github/workflows/*.yml' '.github/workflows/*.yaml' \
+            '.github/actions/**/action.yml' '.github/actions/**/action.yaml' |
+            grep -v '\.lock\.yml$' | paste -sd ' ' -)
+          test -n "$paths"
+          echo "paths=$paths" >> "$GITHUB_OUTPUT"
+
+      - if: ${{ matrix.os == 'ubuntu' }}
+        name: Run zizmor
+        uses: zizmorcore/zizmor-action@cc914d7f3750a2d13d75c7f184a1060aa0e9d482 # v0.6.4
+        with:
+          inputs: ${{ steps.zizmor-inputs.outputs.paths }}
+          collect: workflows,actions
+          advanced-security: false
+          annotations: true

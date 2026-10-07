@@ -1,3 +1,4 @@
+import { d } from "@azure-tools/specs-shared/testing";
 import { execFile } from "node:child_process";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -41,6 +42,7 @@ beforeEach(async () => {
   vi.stubEnv("DEBUG", "");
   vi.stubEnv("NO_COLOR", "1");
   vi.stubEnv("FORCE_COLOR", undefined);
+  vi.stubEnv("GITHUB_STEP_SUMMARY", undefined);
 });
 
 afterEach(async () => {
@@ -61,6 +63,7 @@ it("shows the same help for --help and -h without a project or Git repository", 
     "--ignore-core-files",
     "--dry-run",
     "--git-clean",
+    "--github-summary",
     "default: HEAD^",
     "default: HEAD)",
     "--all and --changed cannot be combined",
@@ -92,6 +95,7 @@ it.each([
   ["--all", "--changed"],
   ["--git-clean"],
   ["--dry-run"],
+  ["--github-summary"],
   ["--shard=invalid"],
   ["--base=missing-ref"],
   ["missing-project", "{invalid-json"],
@@ -271,11 +275,12 @@ it("uses an explicit root, exits nonzero on failure, and still runs later projec
   await expect(run("--all", "custom")).rejects.toMatchObject({
     code: 1,
     stdout: expect.stringContaining("Suppressed: later project") as unknown,
-    stderr: expect.stringContaining(
-      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-        " > pnpm install\n > pnpm tsv custom/a\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
-    ) as unknown,
+    stderr: expect.stringContaining(d`
+      TypeSpec Validation failed for some folder to fix run and address any errors:
+       > pnpm install
+       > pnpm tsv custom/a
+      For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+    `) as unknown,
   });
 });
 
@@ -295,13 +300,14 @@ it("emits a failure annotation inside its project group and a final reproduction
       "::error::TypeSpec Validation failed for project custom/a run the following command locally to validate.%0A" +
         " > pnpm install%0A > pnpm tsv custom/a%0A" +
         "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation\n" +
-        "::endgroup::\n::group::Validating custom/b",
+        "::endgroup::\n::group::pass custom/b",
     ) as unknown,
-    stderr: expect.stringContaining(
-      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-        " > pnpm install\n > pnpm tsv custom/a\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
-    ) as unknown,
+    stderr: expect.stringContaining(d`
+      TypeSpec Validation failed for some folder to fix run and address any errors:
+       > pnpm install
+       > pnpm tsv custom/a
+      For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+    `) as unknown,
   });
 });
 
@@ -319,12 +325,13 @@ it("wraps child output in repository-relative GitHub Actions groups", async () =
   );
 
   const { stdout } = await run("--all", join(root, "specification"));
-  expect(stdout).toContain("Checking 2 TypeSpec folders:\nspecification/a\nspecification/b");
+  expect(stdout).toContain(d`
+    Checking 2 TypeSpec folders:
+    specification/a
+    specification/b
+  `);
   const groups = [...stdout.matchAll(/::group::([^\n]+)\n([\s\S]*?)::endgroup::/g)];
-  expect(groups.map((group) => group[1])).toEqual([
-    "Validating specification/a",
-    "Validating specification/b",
-  ]);
+  expect(groups.map((group) => group[1])).toEqual(["pass specification/a", "pass specification/b"]);
   for (const group of groups) {
     expect(group[2]).not.toContain("Running TypeSpecValidation on folder:");
     expect(group[2]).toContain("Suppressed: fixture");
@@ -367,6 +374,19 @@ it("requires --all for --shard", async () => {
   await expect(run("--shard=1/2", "project")).rejects.toMatchObject({
     code: 1,
     stderr: expect.stringContaining("--shard requires --all") as unknown,
+  });
+});
+
+it("requires --all and the GitHub summary environment for --github-summary", async () => {
+  await expect(run("--github-summary", "project")).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining("--github-summary requires --all") as unknown,
+  });
+  await expect(run("--all", "--github-summary")).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining(
+      "--github-summary requires the GITHUB_STEP_SUMMARY environment variable",
+    ) as unknown,
   });
 });
 
@@ -421,7 +441,7 @@ it("rejects extra positional arguments to --all", async () => {
   await expect(run("--all", "specification", "extra")).rejects.toMatchObject({
     code: 1,
     stderr: expect.stringContaining(
-      "Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean] [--dry-run]",
+      "Usage: tsv --all [folder] [--shard=<index>/<count>] [--github-summary] [--git-clean] [--dry-run]",
     ) as unknown,
   });
 });
@@ -553,11 +573,12 @@ it("returns a failure exit code and still validates later impacted projects", as
   await expect(run("--changed")).rejects.toMatchObject({
     code: 1,
     stdout: expect.stringContaining("Suppressed: later project") as unknown,
-    stderr: expect.stringContaining(
-      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-        " > pnpm install\n > pnpm tsv specification/service/a\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
-    ) as unknown,
+    stderr: expect.stringContaining(d`
+      TypeSpec Validation failed for some folder to fix run and address any errors:
+       > pnpm install
+       > pnpm tsv specification/service/a
+      For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+    `) as unknown,
   });
 });
 
@@ -573,6 +594,7 @@ it("supports --dry-run with --all", async () => {
 it.each([
   { args: ["--all", "--changed"], error: "--all and --changed cannot be combined" },
   { args: ["--changed", "--shard=1/2"], error: "--shard requires --all" },
+  { args: ["--changed", "--github-summary"], error: "--github-summary requires --all" },
   {
     args: ["--all", "--base=HEAD"],
     error: "--base, --head and --ignore-core-files require --changed",
