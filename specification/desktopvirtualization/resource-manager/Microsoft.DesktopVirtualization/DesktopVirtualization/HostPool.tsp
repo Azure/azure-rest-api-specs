@@ -37,7 +37,7 @@ interface AppAttachPackageInfo {
   /**
    * Gets information from a package given the path to the package.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @action("importAppAttachPackageInfo")
   @list
   `import` is ArmResourceActionSync<
@@ -54,7 +54,7 @@ interface MSIXImages {
    * Expands and Lists MSIX packages in an Image, given the Image Path.
    * This action uses incorrect Msix casing intentionally to match the previous APIs.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @action("expandMsixImage")
   @list
   expand is ArmResourceActionSync<

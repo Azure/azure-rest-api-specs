@@ -28,7 +28,25 @@ These are the global settings for the HorizonDb API.
 title: HorizonDbManagementClient
 description: The Microsoft HorizonDb Management API provides Azure Resource Manager operations for managing HorizonDb clusters, pools, replicas, and firewall rules.
 openapi-type: arm
-tag: package-horizondb-2026-01-20-preview
+tag: package-horizondb-2026-05-01-preview
+```
+
+### Tag: package-horizondb-2026-05-01-preview
+
+These settings apply only when `--tag=package-horizondb-2026-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-horizondb-2026-05-01-preview'
+input-file:
+  - preview/2026-05-01-preview/openapi.json
+suppressions:
+  - code: PutRequestResponseSchemeArm
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/administrators/{objectId}"].put
+    reason: >-
+      The administrator create (PUT) accepts a dedicated add model
+      (HorizonDbAdministratorAdd) whose properties are a subset of the resource
+      read model. objectId are read-only fields returned by GET but not accepted on PUT.
+      The resource has no updatable fields beyond create, so no PATCH operation is provided.
 ```
 
 ### Tag: package-horizondb-2026-01-20-preview

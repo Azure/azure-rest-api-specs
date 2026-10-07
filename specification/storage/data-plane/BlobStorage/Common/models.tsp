@@ -1640,6 +1640,25 @@ alias LastAccessedResponseHeader = {
   lastAccessed?: utcDateTime;
 };
 
+/** The access tier change time response header */
+alias AccessTierChangeTimeResponseHeader = {
+  /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @header("x-ms-access-tier-change-time")
+  accessTierChangeTime?: utcDateTime;
+};
+
+/** The access tier change time response header */
+alias AccessTierChangeTimeResponseHeaderV2026_10_06 = {
+  /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @added(Versions.v2026_10_06)
+  @encode("rfc7231")
+  @header("x-ms-access-tier-change-time")
+  accessTierChangeTime?: utcDateTime;
+};
+
 /** The is sealed response header. */
 alias IsSealedResponseHeader = {
   /** Whether the blob is sealed. */
@@ -1828,6 +1847,14 @@ alias SkuNameResponseHeader = {
 /** The content CRC64 response header. */
 alias ContentCrc64ResponseHeader = {
   /** The CRC64 hash of the content. */
+  @header("x-ms-content-crc64")
+  contentCrc64?: bytes;
+};
+
+/** The content CRC64 response header. */
+alias ContentCrc64ResponseHeaderV2026_10_06 = {
+  /** The CRC64 hash of the content. */
+  @added(Versions.v2026_10_06)
   @header("x-ms-content-crc64")
   contentCrc64?: bytes;
 };

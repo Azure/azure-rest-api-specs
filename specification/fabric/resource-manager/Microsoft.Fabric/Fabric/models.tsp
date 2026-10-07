@@ -22,8 +22,9 @@ model FabricCapacityProperties {
   state?: ResourceState;
 
   @doc("The capacity overage properties of the Fabric capacity resource.")
-  @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-  overage?: CapacityOverageProperties;
+  @added(Microsoft.Fabric.Versions.v2026_09_01_preview)
+  @madeRequired(Microsoft.Fabric.Versions.v2026_09_01_preview)
+  overage: CapacityOverageProperties;
 
   @doc("The capacity administration")
   administration: CapacityAdministration;
@@ -47,7 +48,7 @@ union RpSkuTier {
 }
 
 @doc("The capacity overage properties of the Fabric capacity resource")
-@added(Microsoft.Fabric.Versions.v2026_08_01_preview)
+@added(Microsoft.Fabric.Versions.v2026_09_01_preview)
 model CapacityOverageProperties {
   @doc("The capacity overage state for the Fabric capacity resource.")
   state?: CapacityOverageState;
@@ -58,7 +59,7 @@ model CapacityOverageProperties {
 }
 
 @doc("The capacity overage state for the Fabric capacity resource.")
-@added(Microsoft.Fabric.Versions.v2026_08_01_preview)
+@added(Microsoft.Fabric.Versions.v2026_09_01_preview)
 union CapacityOverageState {
   @doc("Capacity overage is disabled.")
   Disabled: "Disabled",

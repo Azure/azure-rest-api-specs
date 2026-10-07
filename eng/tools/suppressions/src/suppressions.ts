@@ -1,10 +1,10 @@
-import { Stats } from "fs";
-import { access, constants, lstat, readFile } from "fs/promises";
+import { Stats } from "node:fs";
+import { access, constants, lstat, readFile } from "node:fs/promises";
 import { minimatch } from "minimatch";
-import { createRequire } from "module";
-import { dirname, join, resolve, sep } from "path";
-import { sep as posixSep } from "path/posix";
-import vm from "vm";
+import { createRequire } from "node:module";
+import { dirname, join, resolve, sep } from "node:path";
+import { sep as posixSep } from "node:path/posix";
+import vm from "node:vm";
 import { parse as yamlParse } from "yaml";
 import * as z from "zod";
 
@@ -101,6 +101,28 @@ export async function getSuppressions(
   }
 
   return suppressions;
+}
+
+/**
+ * Returns the suppressions for any of the specified tools applicable to a path.
+ *
+ * Tool names are evaluated in the order provided. Duplicate names are ignored.
+ *
+ * @param tools Names of tools. Matched against property "tool" in suppressions.yaml.
+ * @param path Path to file or directory under analysis.
+ * @param context Values made available to conditional suppressions.
+ * @returns Array of suppressions matching any tool and path (may be empty).
+ */
+export async function getSuppressionsForTools(
+  tools: readonly string[],
+  path: string,
+  context: Record<string, unknown> = {},
+): Promise<Suppression[]> {
+  return (
+    await Promise.all(
+      [...new Set(tools)].map(async (tool) => await getSuppressions(tool, path, context)),
+    )
+  ).flat();
 }
 
 /**

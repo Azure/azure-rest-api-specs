@@ -1,0 +1,93 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Paging Parameters Test",
+    "version": "2025-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "produces": ["application/json"],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PagingTest/widgets": {
+      "get": {
+        "operationId": "Widgets_List",
+        "description": "Lists widgets with RPC-defined paging parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          { "$ref": "#/parameters/TopParameter" },
+          { "$ref": "#/parameters/SkipTokenParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The widget collection.",
+            "schema": { "$ref": "#/definitions/WidgetListResult" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "TopParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "description": "The optional number of resources to return.",
+      "x-ms-parameter-location": "method"
+    },
+    "SkipTokenParameter": {
+      "name": "$skipToken",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "An opaque continuation token returned by the previous request.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "Widget": {
+      "type": "object",
+      "description": "A widget summary.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The widget name."
+        }
+      }
+    },
+    "WidgetListResult": {
+      "type": "object",
+      "description": "A page of widgets.",
+      "required": ["value"],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The widgets in this page.",
+          "items": { "$ref": "#/definitions/Widget" },
+          "x-ms-identifiers": ["name"]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL for the next page."
+        }
+      }
+    }
+  }
+}

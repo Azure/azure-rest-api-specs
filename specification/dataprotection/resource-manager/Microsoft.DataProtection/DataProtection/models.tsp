@@ -19,6 +19,17 @@ union AlertsState {
   Disabled: "Disabled",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union GranularityLevel {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  VaultLevel: "VaultLevel",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ProtectedItemLevel: "ProtectedItemLevel",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ProtectedItemWithParentTag: "ProtectedItemWithParentTag",
+}
+
 /**
  * Provisioning state of the BackupVault resource
  */
@@ -410,6 +421,8 @@ union AKSVolumeTypes {
  * Backup solution types for PostgreSQL Flexible Server.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_07_01)
 union BackupSolutionType {
   string,
 
@@ -597,6 +610,12 @@ model BackupVault {
   monitoringSettings?: MonitoringSettings;
 
   /**
+   * Cost Management Settings of the vault
+   */
+  @added(Versions.v2026_06_01)
+  costManagementSettings?: CostManagementSettings;
+
+  /**
    * Provisioning state of the BackupVault resource
    */
   @visibility(Lifecycle.Read)
@@ -679,6 +698,17 @@ model AzureMonitorAlertSettings {
 }
 
 /**
+ * Cost Management Settings of the vault
+ */
+@added(Versions.v2026_06_01)
+model CostManagementSettings {
+  /**
+   * Settings for granularity level
+   */
+  granularityLevel?: GranularityLevel;
+}
+
+/**
  * ResourceMoveDetails will be returned in response to GetResource call from ARM
  */
 model ResourceMoveDetails {
@@ -751,6 +781,60 @@ model ImmutabilitySettings {
    * Immutability state
    */
   state?: ImmutabilityState;
+
+  /**
+   * Immutability configuration containing type and duration.
+   */
+  @added(Versions.v2026_07_01)
+  configuration?: ImmutabilityConfiguration;
+}
+
+/**
+ * Type of immutability configuration.
+ */
+@added(Versions.v2026_07_01)
+union ImmutabilityType {
+  string,
+
+  /** Immutability is enforced as per the backup policy retention. */
+  AsPerPolicy: "AsPerPolicy",
+
+  /** Time-based immutability with a configurable duration window. */
+  TimeBased: "TimeBased",
+}
+
+/**
+ * Immutability configuration containing type and duration.
+ */
+@added(Versions.v2026_07_01)
+model ImmutabilityConfiguration {
+  /**
+   * Type of immutability. Supported values: AsPerPolicy or TimeBased.
+   */
+  type?: ImmutabilityType;
+
+  /**
+   * Duration in days for time-based immutability.
+   * Required when type is TimeBased. Must be null when type is AsPerPolicy.
+   */
+  durationInDays?: int32;
+}
+
+/**
+ * Immutability properties of a recovery point.
+ */
+@added(Versions.v2026_07_01)
+model RecoveryPointImmutabilityProperties {
+  /**
+   * Whether the recovery point is currently within its immutability window.
+   */
+  isImmutable: boolean;
+
+  /**
+   * UTC time when the recovery point's immutability window expires.
+   * Null for AsPerPolicy vaults.
+   */
+  expiryTime?: utcDateTime;
 }
 
 /**
@@ -1083,7 +1167,7 @@ model OperationResource {
 
   /**
    * Required if status == failed or status == canceled. This is the OData v4 error format, used by the RPC and will go into the v2.2 Azure REST API guidelines.
-   * The full set of optional properties (e.g. inner errors / details) can be found in the "Error Response" section.
+   * The full set of optional properties (e.g. inner errors / details) can be found in the `Error Response` section.
    */
   error?: Error;
 
@@ -1093,7 +1177,7 @@ model OperationResource {
   id?: string;
 
   /**
-   * It must match the last segment of the "id" field, and will typically be a GUID / system generated value
+   * It must match the last segment of the `id` field, and will typically be a GUID / system generated value.
    */
   name?: string;
 
@@ -1151,6 +1235,12 @@ model PatchBackupVaultInput {
    * Feature Settings
    */
   featureSettings?: FeatureSettings;
+
+  /**
+   * Cost Management Settings of the vault
+   */
+  @added(Versions.v2026_06_01)
+  costManagementSettings?: CostManagementSettings;
 
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed
@@ -2296,6 +2386,7 @@ model AzureBackupRehydrationRequest {
  * Type of Datasource object, used to initialize the right inherited type
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_06_01)
 union ResumeProtectionRequestObjectType {
   string,
 
@@ -2308,6 +2399,7 @@ union ResumeProtectionRequestObjectType {
  */
 @discriminator("objectType")
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_06_01)
 model ResumeProtectionRequest {
   /**
    * Type of Datasource object, used to initialize the right inherited type
@@ -2797,6 +2889,13 @@ model AzureBackupDiscreteRecoveryPoint extends AzureBackupRecoveryPoint {
    */
   recoveryPointState?: RecoveryPointCompletionState;
 
+  /**
+   * Immutability properties of the recovery point.
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  immutabilityProperties?: RecoveryPointImmutabilityProperties;
+
   objectType: "AzureBackupDiscreteRecoveryPoint";
 }
 
@@ -3247,6 +3346,8 @@ model AdlsBlobBackupDatasourceParametersForAutoProtection
  * Parameters to be used during configuration of backup of PostgreSQL Flexible Servers
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_07_01)
 model PostgreSqlFlexibleServerBackupDatasourceParameters
   extends BackupDatasourceParameters {
   /**
@@ -3255,6 +3356,22 @@ model PostgreSqlFlexibleServerBackupDatasourceParameters
   backupSolutionType?: BackupSolutionType;
 
   objectType: "PostgreSqlFlexibleServerBackupDatasourceParameters";
+}
+
+/**
+ * Generic parameters to be used during configuration of backup
+ */
+@added(Versions.v2026_06_01)
+model GenericBackupDatasourceParameters extends BackupDatasourceParameters {
+  /**
+   * List of resource selectors to be backed up during configuration of backup
+   */
+  resourceSelectors: string[];
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  objectType: "GenericBackupDatasourceParameters";
 }
 
 /**
@@ -3601,6 +3718,44 @@ model RangeBasedItemLevelRestoreCriteria extends ItemLevelRestoreCriteria {
 }
 
 /**
+ * Generic criteria to be used during restore
+ */
+@added(Versions.v2026_06_01)
+model GenericRestoreDatasourceCriteria extends ItemLevelRestoreCriteria {
+  /**
+   * List of resource identifiers that need to be restored
+   */
+  resourceSelectors: ResourceListSelectionCriteria;
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  objectType: "GenericRestoreDatasourceCriteria";
+}
+
+/**
+ * Specifies the list of resources to be restored
+ */
+@added(Versions.v2026_06_01)
+model ResourceListSelectionCriteria {
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  objectType: string;
+
+  /**
+   * List of resource identifiers to restore from
+   */
+  resourceIdentifiers: string[];
+
+  /**
+   * This is a map of source resource names to target resources names to restore into. Any source name not included in the map will be restored with a default naming format
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Backward-compatible source-to-target name override map for generic restore"
+  resourceNameOverrides?: Record<string>;
+}
+
+/**
  * Item Level kubernetes storage class target info for restore operation
  */
 model KubernetesStorageClassRestoreCriteria extends ItemLevelRestoreCriteria {
@@ -3865,8 +4020,8 @@ model RestoreTargetInfo extends RestoreTargetInfoBase {
  */
 model ScheduleBasedBackupCriteria extends BackupCriteria {
   /**
-   * it contains absolute values like "AllBackup" / "FirstOfDay" / "FirstOfWeek" / "FirstOfMonth"
-   * and should be part of AbsoluteMarker enum
+   * It contains absolute marker values such as `AllBackup`, `FirstOfDay`, `FirstOfWeek`, and `FirstOfMonth`.
+   * These values should be part of the `AbsoluteMarker` enum.
    */
   absoluteCriteria?: AbsoluteMarker[];
 

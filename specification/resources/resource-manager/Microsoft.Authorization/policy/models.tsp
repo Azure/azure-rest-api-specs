@@ -1345,6 +1345,24 @@ union AssignmentScopeValidation {
 }
 
 /**
+ * The mode indicating how the policy exemption is managed. Possible values are Admin and UserSelfServe.
+ */
+@added(Versions.v2025_12_01_preview)
+union ExemptionManagementMode {
+  string,
+
+  /**
+   * This mode means the exemption is managed by an administrator and requires permission for the policy exemption action.
+   */
+  Admin: "Admin",
+
+  /**
+   * This mode means the exemption is managed by the user it applies to, through the self-serve exemption settings on the policy assignment.
+   */
+  UserSelfServe: "UserSelfServe",
+}
+
+/**
  * The policy exemption properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -1397,6 +1415,11 @@ model PolicyExemptionProperties {
    * The option whether validate the exemption is at or under the assignment scope.
    */
   assignmentScopeValidation?: AssignmentScopeValidation;
+
+  /**
+   * The mode indicating how the policy exemption is managed.
+   */
+  exemptionManagementMode?: ExemptionManagementMode = ExemptionManagementMode.Admin;
 }
 
 /**
@@ -1427,6 +1450,11 @@ model PolicyExemptionUpdateProperties {
    * The option whether validate the exemption is at or under the assignment scope.
    */
   assignmentScopeValidation?: AssignmentScopeValidation;
+
+  /**
+   * The mode indicating how the policy exemption is managed.
+   */
+  exemptionManagementMode?: ExemptionManagementMode;
 }
 
 /**
