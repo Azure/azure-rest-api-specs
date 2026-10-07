@@ -131,6 +131,7 @@ interface VirtualMachineVMGalleryApplications {
   /**
    * Deletes a gallery application from a virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The service returns 200 when deletion completes synchronously and 202 when it continues asynchronously. Retaining the 200 response prevents generated SDKs from treating a successful immediate deletion as an unexpected status."
   @added(Versions.v2026_09_01)
   delete is VirtualMachineVMGalleryApplicationOps.DeleteWithoutOkAsync<
     VirtualMachineVMGalleryApplication,
