@@ -10,13 +10,15 @@ import {
   getSemanticReviewOutcome,
   parseSemanticReviewResult,
   SemanticReviewCompletion,
+  SemanticReviewIncompleteReason,
   SemanticReviewOutcome,
   SemanticReviewScope,
   type ChangedFile,
   type SemanticReviewResult,
 } from "../../src/arm-auto-signoff/arm-semantic-review.ts";
-import { finalizeArmSemanticReview } from "../../src/arm-auto-signoff/arm-semantic-review-status.ts";
-import validateArmSemanticReview from "../../src/arm-auto-signoff/arm-semantic-review-workflow.ts";
+import publishArmSemanticReviewStatus, {
+  finalizeUnpublishedArmSemanticReview,
+} from "../../src/arm-auto-signoff/arm-semantic-review-workflow.ts";
 import type { GitHubScriptArgs } from "../../src/github.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
 
@@ -27,7 +29,6 @@ const headSha = "0123456789abcdef0123456789abcdef01234567";
 const runId = 456;
 const runAttempt = 1;
 const runUrl = "https://github.com/Azure/azure-rest-api-specs/actions/runs/456";
-const workflowPath = ".github/workflows/arm-api-review.lock.yml";
 
 const passedResult: SemanticReviewResult = {
   runAttempt,
@@ -36,6 +37,7 @@ const passedResult: SemanticReviewResult = {
   blockingCount: 0,
   reviewScope: SemanticReviewScope.Full,
   completion: SemanticReviewCompletion.Complete,
+  incompleteReason: SemanticReviewIncompleteReason.None,
 };
 
 function agentOutput(result: SemanticReviewResult = passedResult) {
@@ -46,6 +48,7 @@ function agentOutput(result: SemanticReviewResult = passedResult) {
         blocking_count: String(result.blockingCount),
         scope: result.reviewScope,
         completeness: result.completion,
+        incomplete_reason: result.incompleteReason,
       },
     ],
   };
@@ -55,7 +58,7 @@ const defaultChangedFiles: ChangedFile[] = [
   { filename: "specification/foo/foo.json", additions: 10, deletions: 5 },
 ];
 
-function createFinalizeGithub() {
+function createPublisherGithub() {
   const github = createMockGithub();
   github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
     data: {
@@ -70,49 +73,32 @@ function createFinalizeGithub() {
   return github;
 }
 
-function createContext(conclusion: string | null = "success", path = workflowPath) {
-  return {
-    payload: {
-      workflow_run: {
-        name: `ARM API Review #${issueNumber} (issue_comment)`,
-        path,
-        conclusion,
-        id: runId,
-        run_attempt: runAttempt,
-        html_url: runUrl,
-        repository: {
-          name: repo,
-          owner: { login: owner },
-        },
-      },
-    },
-  };
-}
-
-async function runFinalizer({
-  conclusion = "success",
+async function runPublisher({
   output = agentOutput(),
   includeOutput = true,
-  github = createFinalizeGithub(),
-  path = workflowPath,
+  github = createPublisherGithub(),
 }: {
-  conclusion?: string | null;
   output?: unknown;
   includeOutput?: boolean;
-  github?: ReturnType<typeof createFinalizeGithub>;
-  path?: string;
+  github?: ReturnType<typeof createPublisherGithub>;
 } = {}) {
   const directory = await mkdtemp(join(tmpdir(), "arm-semantic-review-"));
   const outputPath = join(directory, "agent_output.json");
   const previousOutputPath = process.env.GH_AW_AGENT_OUTPUT;
+  const previousRunAttempt = process.env.GITHUB_RUN_ATTEMPT;
   try {
     if (includeOutput) {
       await writeFile(outputPath, JSON.stringify(output), "utf8");
     }
     process.env.GH_AW_AGENT_OUTPUT = outputPath;
-    const result = await finalizeArmSemanticReview({
+    process.env.GITHUB_RUN_ATTEMPT = String(runAttempt);
+    const result = await publishArmSemanticReviewStatus({
       github,
-      context: createContext(conclusion, path),
+      context: {
+        repo: { owner, repo },
+        runId,
+        serverUrl: "https://github.com",
+      },
       core: createMockCore(),
     } as unknown as GitHubScriptArgs);
     return { github, result };
@@ -121,6 +107,11 @@ async function runFinalizer({
       delete process.env.GH_AW_AGENT_OUTPUT;
     } else {
       process.env.GH_AW_AGENT_OUTPUT = previousOutputPath;
+    }
+    if (previousRunAttempt === undefined) {
+      delete process.env.GITHUB_RUN_ATTEMPT;
+    } else {
+      process.env.GITHUB_RUN_ATTEMPT = previousRunAttempt;
     }
     await rm(directory, { recursive: true, force: true });
   }
@@ -177,6 +168,43 @@ describe("parseSemanticReviewResult", () => {
         { headSha, issueNumber, runAttempt },
       ),
     ).toThrow("Invalid ARM semantic review completion");
+    expect(() =>
+      parseSemanticReviewResult(
+        {
+          items: [{ ...agentOutput().items[0], incomplete_reason: "unknown" }],
+        },
+        { headSha, issueNumber, runAttempt },
+      ),
+    ).toThrow("Invalid ARM semantic review incomplete reason");
+  });
+
+  it("rejects inconsistent completeness and reason combinations", () => {
+    expect(() =>
+      parseSemanticReviewResult(
+        {
+          items: [
+            {
+              ...agentOutput().items[0],
+              incomplete_reason: SemanticReviewIncompleteReason.CriticUnavailable,
+            },
+          ],
+        },
+        { headSha, issueNumber, runAttempt },
+      ),
+    ).toThrow("completion 'complete' is inconsistent");
+    expect(() =>
+      parseSemanticReviewResult(
+        {
+          items: [
+            {
+              ...agentOutput().items[0],
+              completeness: SemanticReviewCompletion.Incomplete,
+            },
+          ],
+        },
+        { headSha, issueNumber, runAttempt },
+      ),
+    ).toThrow("completion 'incomplete' is inconsistent");
   });
 
   it("rejects invalid trusted correlation", () => {
@@ -187,55 +215,6 @@ describe("parseSemanticReviewResult", () => {
         runAttempt,
       }),
     ).toThrow("ARM semantic review correlation is missing or invalid");
-  });
-});
-
-describe("validateArmSemanticReview", () => {
-  it("records trusted correlation when model-supplied identifiers are malformed", async () => {
-    const directory = await mkdtemp(join(tmpdir(), "arm-semantic-review-receipt-"));
-    const outputPath = join(directory, "agent_output.json");
-    const output = agentOutput();
-    Object.assign(output.items[0], {
-      head_sha: "675718552ce00736684ed7a184bab",
-      issue_number: "999",
-      run_attempt: "99",
-    });
-    const previousOutputPath = process.env.GH_AW_AGENT_OUTPUT;
-    const previousRunAttempt = process.env.GITHUB_RUN_ATTEMPT;
-    try {
-      await writeFile(outputPath, JSON.stringify(output), "utf8");
-      process.env.GH_AW_AGENT_OUTPUT = outputPath;
-      process.env.GITHUB_RUN_ATTEMPT = String(runAttempt);
-      const github = createFinalizeGithub();
-
-      const result = await validateArmSemanticReview({
-        github,
-        context: { repo: { owner, repo }, runId },
-        core: createMockCore(),
-      } as unknown as GitHubScriptArgs);
-
-      expect(result).toEqual({
-        artifactValue: `${runAttempt}.${issueNumber}.${headSha}.full.complete.0`,
-      });
-      expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledWith({
-        owner,
-        repo,
-        run_id: runId,
-        per_page: PER_PAGE_MAX,
-      });
-    } finally {
-      if (previousOutputPath === undefined) {
-        delete process.env.GH_AW_AGENT_OUTPUT;
-      } else {
-        process.env.GH_AW_AGENT_OUTPUT = previousOutputPath;
-      }
-      if (previousRunAttempt === undefined) {
-        delete process.env.GITHUB_RUN_ATTEMPT;
-      } else {
-        process.env.GITHUB_RUN_ATTEMPT = previousRunAttempt;
-      }
-      await rm(directory, { recursive: true, force: true });
-    }
   });
 });
 
@@ -254,23 +233,10 @@ describe("evaluateSemanticReview", () => {
     });
   });
 
-  it.each([
-    {
-      name: "scoped",
-      result: { ...passedResult, reviewScope: SemanticReviewScope.Scoped },
-      description: "Review incomplete: scoped review requires manual signoff",
-    },
-    {
-      name: "incomplete",
-      result: { ...passedResult, completion: SemanticReviewCompletion.Incomplete },
-      description: "Review incomplete: reviewer did not complete",
-    },
-    {
-      name: "degraded",
-      result: { ...passedResult, completion: SemanticReviewCompletion.Degraded },
-      description: "Review incomplete: reviewer completed in degraded mode",
-    },
-  ])("requires manual review when the semantic review is $name", ({ result, description }) => {
+  it("requires manual review when the semantic review is scoped", () => {
+    const result = { ...passedResult, reviewScope: SemanticReviewScope.Scoped };
+    const description = "Manual review required: scoped review requires manual signoff";
+
     expect(evaluateSemanticReview(result)).toEqual({
       state: CommitStatusState.ERROR,
       description,
@@ -278,28 +244,39 @@ describe("evaluateSemanticReview", () => {
   });
 
   it.each([
+    SemanticReviewIncompleteReason.CriticUnavailable,
+    SemanticReviewIncompleteReason.RequiredEvidenceUnavailable,
+    SemanticReviewIncompleteReason.ToolFailure,
+    SemanticReviewIncompleteReason.StaleSha,
+    SemanticReviewIncompleteReason.DiscussionDataUnavailable,
+  ])("includes incomplete reason %s in the status", (incompleteReason) => {
+    const result = {
+      ...passedResult,
+      completion: SemanticReviewCompletion.Incomplete,
+      incompleteReason,
+    };
+
+    expect(evaluateSemanticReview(result)).toEqual({
+      state: CommitStatusState.ERROR,
+      description: `Review incomplete: ${incompleteReason}`,
+    });
+  });
+
+  it.each([
     {
       name: "scoped with blockers",
       result: { ...passedResult, reviewScope: SemanticReviewScope.Scoped, blockingCount: 2 },
-      description: "Review incomplete: scoped review requires manual signoff",
+      description: "Manual review required: scoped review requires manual signoff",
     },
     {
       name: "incomplete with blockers",
       result: {
         ...passedResult,
         completion: SemanticReviewCompletion.Incomplete,
+        incompleteReason: SemanticReviewIncompleteReason.CriticUnavailable,
         blockingCount: 1,
       },
-      description: "Review incomplete: reviewer did not complete",
-    },
-    {
-      name: "degraded with blockers",
-      result: {
-        ...passedResult,
-        completion: SemanticReviewCompletion.Degraded,
-        blockingCount: 3,
-      },
-      description: "Review incomplete: reviewer completed in degraded mode",
+      description: "Review incomplete: critic-unavailable",
     },
   ])(
     "requires manual review rather than changes requested for $name",
@@ -320,6 +297,18 @@ describe("evaluateSemanticReview", () => {
     expect(getSemanticReviewOutcome({ state: "error" })).toBe(
       SemanticReviewOutcome.ReviewIncomplete,
     );
+    expect(
+      getSemanticReviewOutcome({
+        state: "error",
+        description: "Review incomplete: tool-failure",
+      }),
+    ).toBe(SemanticReviewOutcome.ReviewIncomplete);
+    expect(
+      getSemanticReviewOutcome({
+        state: "error",
+        description: "Manual review required: scoped review requires manual signoff",
+      }),
+    ).toBe(SemanticReviewOutcome.ManualReviewRequired);
   });
 });
 
@@ -368,9 +357,9 @@ describe("evaluateAutomatedReviewCoverage", () => {
   });
 });
 
-describe("finalizeArmSemanticReview", () => {
+describe("publishArmSemanticReviewStatus", () => {
   it("publishes Passed for a clean reviewer result", async () => {
-    const { github, result } = await runFinalizer();
+    const { github, result } = await runPublisher();
 
     expect(result).toEqual({ headSha, issueNumber, statusPublished: true });
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith({
@@ -391,24 +380,8 @@ describe("finalizeArmSemanticReview", () => {
     });
   });
 
-  it("rejects a completion from another workflow", async () => {
-    const github = createFinalizeGithub();
-    await expect(
-      runFinalizer({
-        github,
-        path: ".github/workflows/other-workflow.yaml",
-      }),
-    ).rejects.toThrow(
-      "Unexpected triggering workflow path: expected " +
-        "'.github/workflows/arm-api-review.lock.yml', " +
-        "received '.github/workflows/other-workflow.yaml'",
-    );
-    expect(github.rest.actions.listWorkflowRunArtifacts).not.toHaveBeenCalled();
-    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
-  });
-
   it("publishes Changes requested for Blocking findings", async () => {
-    const { github } = await runFinalizer({
+    const { github } = await runPublisher({
       output: agentOutput({ ...passedResult, blockingCount: 3 }),
     });
 
@@ -420,25 +393,20 @@ describe("finalizeArmSemanticReview", () => {
     );
   });
 
-  it("publishes Review incomplete for a scoped clean review", async () => {
-    const { github } = await runFinalizer({
+  it("publishes Manual review required for a scoped clean review", async () => {
+    const { github } = await runPublisher({
       output: agentOutput({ ...passedResult, reviewScope: SemanticReviewScope.Scoped }),
     });
 
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
       expect.objectContaining({
         state: CommitStatusState.ERROR,
-        description: "Review incomplete: scoped review requires manual signoff",
+        description: "Manual review required: scoped review requires manual signoff",
       }),
     );
   });
 
   it.each([
-    {
-      name: "failed workflow",
-      options: { conclusion: "failure" },
-      description: "Review incomplete: workflow concluded with failure",
-    },
     {
       name: "missing agent output",
       options: { includeOutput: false },
@@ -459,7 +427,7 @@ describe("finalizeArmSemanticReview", () => {
       description: "Review incomplete: Invalid ARM semantic review Blocking count",
     },
   ])("publishes Review incomplete for $name", async ({ options, description }) => {
-    const { github } = await runFinalizer(options);
+    const { github } = await runPublisher(options);
 
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -472,20 +440,13 @@ describe("finalizeArmSemanticReview", () => {
     expect(status.description).toContain(description);
   });
 
-  it("leaves Pending unchanged when the reviewer run is canceled", async () => {
-    const { github, result } = await runFinalizer({ conclusion: "cancelled" });
-
-    expect(result).toEqual({ headSha, issueNumber, statusPublished: false });
-    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
-  });
-
   it("does nothing when trusted PR/SHA correlation is missing", async () => {
-    const github = createFinalizeGithub();
+    const github = createPublisherGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [] },
     });
 
-    const execution = await runFinalizer({ github });
+    const execution = await runPublisher({ github });
     expect(execution.result).toEqual({
       headSha: "",
       issueNumber: 0,
@@ -504,10 +465,10 @@ describe("finalizeArmSemanticReview", () => {
       pullRequest: { changed_files: 1, state: "open", head: { sha: "f".repeat(40) } },
     },
   ])("does not publish a status when the pull request is $name", async ({ pullRequest }) => {
-    const github = createFinalizeGithub();
+    const github = createPublisherGithub();
     github.rest.pulls.get.mockResolvedValue({ data: pullRequest });
 
-    const execution = await runFinalizer({ github });
+    const execution = await runPublisher({ github });
 
     expect(execution.result).toEqual({
       headSha,
@@ -518,8 +479,8 @@ describe("finalizeArmSemanticReview", () => {
     expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
   });
 
-  it("publishes Review incomplete when the PR exceeds automated review size limits", async () => {
-    const github = createFinalizeGithub();
+  it("publishes Manual review required when the PR exceeds automated review size limits", async () => {
+    const github = createPublisherGithub();
     const oversizedFiles = Array.from({ length: 51 }, (_, i): ChangedFile => ({
       filename: `specification/foo/foo${i}.json`,
       additions: 1,
@@ -530,18 +491,18 @@ describe("finalizeArmSemanticReview", () => {
     });
     github.rest.pulls.listFiles.mockResolvedValue({ data: oversizedFiles });
 
-    const { github: g } = await runFinalizer({ github });
+    const { github: g } = await runPublisher({ github });
     expect(g.rest.repos.createCommitStatus).toHaveBeenCalledWith(
       expect.objectContaining({
         state: CommitStatusState.ERROR,
-        description: "Review incomplete: PR exceeds automated review size limits",
+        description: "Manual review required: PR exceeds automated review size limits",
       }),
     );
   });
 
   it("truncates an overly long error description to 140 characters", async () => {
     const longValue = "x".repeat(200);
-    const { github } = await runFinalizer({
+    const { github } = await runPublisher({
       output: { items: [{ ...agentOutput().items[0], scope: longValue }] },
     });
 
@@ -553,7 +514,7 @@ describe("finalizeArmSemanticReview", () => {
   });
 
   it("does not overwrite a newer review of the same SHA", async () => {
-    const github = createFinalizeGithub();
+    const github = createPublisherGithub();
     github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
       data: [
         {
@@ -565,7 +526,7 @@ describe("finalizeArmSemanticReview", () => {
       ],
     });
 
-    const execution = await runFinalizer({ github });
+    const execution = await runPublisher({ github });
     expect(execution.result).toEqual({
       headSha,
       issueNumber,
@@ -574,8 +535,21 @@ describe("finalizeArmSemanticReview", () => {
     expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
   });
 
+  it("checks for a newer run only after reading the PR and its files", async () => {
+    const github = createPublisherGithub();
+
+    await runPublisher({ github });
+
+    const [listStatuses] = github.rest.repos.listCommitStatusesForRef.mock.invocationCallOrder;
+    const [getPullRequest] = github.rest.pulls.get.mock.invocationCallOrder;
+    const [listFiles] = github.rest.pulls.listFiles.mock.invocationCallOrder;
+    const [createStatus] = github.rest.repos.createCommitStatus.mock.invocationCallOrder;
+    expect(listStatuses).toBeGreaterThan(getPullRequest);
+    expect(listStatuses).toBeGreaterThan(listFiles);
+    expect(listStatuses).toBeLessThan(createStatus);
+  });
   it("does not overwrite a newer attempt of the same run", async () => {
-    const github = createFinalizeGithub();
+    const github = createPublisherGithub();
     github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
       data: [
         {
@@ -587,12 +561,120 @@ describe("finalizeArmSemanticReview", () => {
       ],
     });
 
-    const execution = await runFinalizer({ github });
+    const execution = await runPublisher({ github });
     expect(execution.result).toEqual({
       headSha,
       issueNumber,
       statusPublished: false,
     });
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+  });
+});
+
+describe("finalizeUnpublishedArmSemanticReview", () => {
+  const ownedPending = {
+    context: ARM_SEMANTIC_REVIEW_STATUS,
+    state: CommitStatusState.PENDING,
+    target_url: `${runUrl}/attempts/${runAttempt}`,
+    updated_at: "2026-01-01T00:00:00Z",
+  };
+
+  async function runFinalizer(statuses: unknown[], github = createPublisherGithub()) {
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({ data: statuses });
+    const previousRunAttempt = process.env.GITHUB_RUN_ATTEMPT;
+    process.env.GITHUB_RUN_ATTEMPT = String(runAttempt);
+    try {
+      const result = await finalizeUnpublishedArmSemanticReview({
+        github,
+        context: { repo: { owner, repo }, runId, serverUrl: "https://github.com" },
+        core: createMockCore(),
+      } as unknown as GitHubScriptArgs);
+      return { github, result };
+    } finally {
+      if (previousRunAttempt === undefined) {
+        delete process.env.GITHUB_RUN_ATTEMPT;
+      } else {
+        process.env.GITHUB_RUN_ATTEMPT = previousRunAttempt;
+      }
+    }
+  }
+
+  it("resolves a Pending status owned by this run as Review incomplete", async () => {
+    const { github, result } = await runFinalizer([ownedPending]);
+
+    expect(result).toEqual({ statusPublished: true });
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith({
+      owner,
+      repo,
+      sha: headSha,
+      state: CommitStatusState.ERROR,
+      context: ARM_SEMANTIC_REVIEW_STATUS,
+      description: "Review incomplete: reviewer did not publish a result",
+      target_url: `${runUrl}/attempts/${runAttempt}`,
+    });
+  });
+
+  it("never publishes a manual-review hold for an unpublished result", async () => {
+    const { github } = await runFinalizer([ownedPending]);
+
+    const status = github.rest.repos.createCommitStatus.mock.calls[0]?.[0] as {
+      description: string;
+    };
+    expect(getSemanticReviewOutcome({ state: "error", description: status.description })).toBe(
+      SemanticReviewOutcome.ReviewIncomplete,
+    );
+  });
+
+  it.each([
+    { name: "there is no status", statuses: [] },
+    {
+      name: "the record job already published a result",
+      statuses: [
+        {
+          ...ownedPending,
+          state: CommitStatusState.SUCCESS,
+          updated_at: "2026-01-01T00:00:01Z",
+        },
+        ownedPending,
+      ],
+    },
+    {
+      name: "a newer run owns the newest status",
+      statuses: [
+        {
+          ...ownedPending,
+          target_url: "https://github.com/Azure/azure-rest-api-specs/actions/runs/789/attempts/1",
+          updated_at: "2026-01-01T00:00:01Z",
+        },
+        ownedPending,
+      ],
+    },
+    {
+      name: "a newer attempt of this run owns the newest status",
+      statuses: [
+        {
+          ...ownedPending,
+          target_url: `${runUrl}/attempts/2`,
+          updated_at: "2026-01-01T00:00:01Z",
+        },
+        ownedPending,
+      ],
+    },
+  ])("leaves the status unchanged when $name", async ({ statuses }) => {
+    const { github, result } = await runFinalizer(statuses);
+
+    expect(result).toEqual({ statusPublished: false });
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+  });
+
+  it("leaves the status unchanged when the run has no trusted head SHA", async () => {
+    const github = createPublisherGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({ data: { artifacts: [] } });
+
+    const { result } = await runFinalizer([ownedPending], github);
+
+    expect(result).toEqual({ statusPublished: false });
+    expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
     expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
   });
 });

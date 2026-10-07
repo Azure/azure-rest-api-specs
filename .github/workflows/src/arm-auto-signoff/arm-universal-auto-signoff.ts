@@ -210,7 +210,7 @@ async function getDesiredLabelActions({
   );
 
   if (semanticReviewOutcome !== SemanticReviewOutcome.Passed) {
-    if (semanticReviewOutcome === SemanticReviewOutcome.ReviewIncomplete) {
+    if (semanticReviewOutcome === SemanticReviewOutcome.ManualReviewRequired) {
       const hasManualSignoffRequired = labelNames.includes(
         ArmAutoSignoffLabel.ArmManualSignoffRequired,
       );

@@ -130,6 +130,16 @@ describe("getLabelActionImpl", () => {
   });
 
   describe("auto-signoff workflow correlation", () => {
+    it("re-evaluates after the ARM API Reviewer publishes its status", async () => {
+      const workflow = await readFile(
+        join(GITHUB_ROOT, "workflows", "arm-universal-auto-signoff.yaml"),
+        "utf8",
+      );
+
+      expect(workflow).toContain('"ARM API Review: Automated Workflow"');
+      expect(workflow).not.toContain("ARM Semantic Review - Set Status");
+    });
+
     it("always publishes live-head correlation artifacts", async () => {
       const workflow = await readFile(
         join(GITHUB_ROOT, "workflows", "arm-universal-auto-signoff.yaml"),
@@ -200,7 +210,7 @@ describe("getLabelActionImpl", () => {
     },
   );
 
-  it("adds manual signoff when semantic review is incomplete", async () => {
+  it("does not add manual signoff when semantic review is incomplete", async () => {
     const github = createMockGithub({
       labelNames: ["ARMReview"],
       statuses: [
@@ -217,7 +227,7 @@ describe("getLabelActionImpl", () => {
     const result = await run(github);
     expect(result.labelActions).toEqual({
       [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.None,
-      [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.Add,
+      [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
     });
   });
 
@@ -229,7 +239,7 @@ describe("getLabelActionImpl", () => {
         {
           context: "ARM Semantic Review",
           state: CommitStatusState.ERROR,
-          description: "Review incomplete: reviewer did not complete",
+          description: "Manual review required: PR exceeds automated review size limits",
           updated_at: "2026-01-01",
         },
         ...deterministicStatuses,
@@ -253,7 +263,9 @@ describe("getLabelActionImpl", () => {
       expect.stringContaining('"isReadyForArmReview":true'),
     );
     expect(loggingCore.info).toHaveBeenCalledWith(
-      expect.stringContaining('"description":"Review incomplete: reviewer did not complete"'),
+      expect.stringContaining(
+        '"description":"Manual review required: PR exceeds automated review size limits"',
+      ),
     );
     expect(loggingCore.info).toHaveBeenCalledWith(
       "ARM semantic review requires manual signoff; ARMManualSignoffRequired is already present",

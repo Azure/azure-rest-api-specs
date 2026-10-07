@@ -13,9 +13,17 @@ export type ChangedFile = {
 
 export const ARM_SEMANTIC_REVIEW_STATUS = "ARM Semantic Review";
 
+// Both outcomes are published as a commit status in the "error" state. The description prefix is
+// the only thing that tells them apart: a manual-review hold is deterministic (scope or size
+// limits) and adds a sticky human label, while an incomplete review is a transient failure that
+// a re-run can fix, so it never adds that label.
+export const MANUAL_REVIEW_DESCRIPTION_PREFIX = "Manual review required: ";
+export const REVIEW_INCOMPLETE_DESCRIPTION_PREFIX = "Review incomplete: ";
+
 export const SemanticReviewOutcome = Object.freeze({
   Passed: "passed",
   ChangesRequested: "changes-requested",
+  ManualReviewRequired: "manual-review-required",
   ReviewIncomplete: "review-incomplete",
   Pending: "pending",
 });
@@ -31,10 +39,20 @@ export type SemanticReviewScope = (typeof SemanticReviewScope)[keyof typeof Sema
 export const SemanticReviewCompletion = Object.freeze({
   Complete: "complete",
   Incomplete: "incomplete",
-  Degraded: "degraded",
 });
 export type SemanticReviewCompletion =
   (typeof SemanticReviewCompletion)[keyof typeof SemanticReviewCompletion];
+
+export const SemanticReviewIncompleteReason = Object.freeze({
+  None: "none",
+  CriticUnavailable: "critic-unavailable",
+  RequiredEvidenceUnavailable: "required-evidence-unavailable",
+  ToolFailure: "tool-failure",
+  StaleSha: "stale-sha",
+  DiscussionDataUnavailable: "discussion-data-unavailable",
+});
+export type SemanticReviewIncompleteReason =
+  (typeof SemanticReviewIncompleteReason)[keyof typeof SemanticReviewIncompleteReason];
 
 export type SemanticReviewResult = {
   runAttempt: number;
@@ -43,6 +61,7 @@ export type SemanticReviewResult = {
   blockingCount: number;
   reviewScope: SemanticReviewScope;
   completion: SemanticReviewCompletion;
+  incompleteReason: SemanticReviewIncompleteReason;
 };
 
 export type SemanticReviewCorrelation = Pick<
@@ -112,10 +131,32 @@ export function parseSemanticReviewResult(
   }
   if (
     result.completeness !== SemanticReviewCompletion.Complete &&
-    result.completeness !== SemanticReviewCompletion.Incomplete &&
-    result.completeness !== SemanticReviewCompletion.Degraded
+    result.completeness !== SemanticReviewCompletion.Incomplete
   ) {
     throw new Error(`Invalid ARM semantic review completion: '${String(result.completeness)}'`);
+  }
+  if (
+    result.incomplete_reason !== SemanticReviewIncompleteReason.None &&
+    result.incomplete_reason !== SemanticReviewIncompleteReason.CriticUnavailable &&
+    result.incomplete_reason !== SemanticReviewIncompleteReason.RequiredEvidenceUnavailable &&
+    result.incomplete_reason !== SemanticReviewIncompleteReason.ToolFailure &&
+    result.incomplete_reason !== SemanticReviewIncompleteReason.StaleSha &&
+    result.incomplete_reason !== SemanticReviewIncompleteReason.DiscussionDataUnavailable
+  ) {
+    throw new Error(
+      `Invalid ARM semantic review incomplete reason: '${String(result.incomplete_reason)}'`,
+    );
+  }
+  if (
+    (result.completeness === SemanticReviewCompletion.Complete &&
+      result.incomplete_reason !== SemanticReviewIncompleteReason.None) ||
+    (result.completeness === SemanticReviewCompletion.Incomplete &&
+      result.incomplete_reason === SemanticReviewIncompleteReason.None)
+  ) {
+    throw new Error(
+      `ARM semantic review completion '${result.completeness}' is inconsistent with ` +
+        `incomplete reason '${result.incomplete_reason}'`,
+    );
   }
 
   return {
@@ -123,29 +164,24 @@ export function parseSemanticReviewResult(
     blockingCount,
     reviewScope: result.scope,
     completion: result.completeness,
+    incompleteReason: result.incomplete_reason,
   };
 }
 
 export function evaluateSemanticReview(result: SemanticReviewResult): EvaluatedSemanticReview {
-  // Scope and completeness are checked first: Changes requested applies only to
-  // full, complete reviews. A scoped or incomplete review requires manual signoff
+  // Completeness and scope are checked first: Changes requested applies only to
+  // full, complete reviews. An incomplete or scoped review never authorizes signoff
   // regardless of the blocking count.
-  if (result.reviewScope === SemanticReviewScope.Scoped) {
-    return {
-      state: CommitStatusState.ERROR,
-      description: "Review incomplete: scoped review requires manual signoff",
-    };
-  }
   if (result.completion === SemanticReviewCompletion.Incomplete) {
     return {
       state: CommitStatusState.ERROR,
-      description: "Review incomplete: reviewer did not complete",
+      description: `${REVIEW_INCOMPLETE_DESCRIPTION_PREFIX}${result.incompleteReason}`,
     };
   }
-  if (result.completion === SemanticReviewCompletion.Degraded) {
+  if (result.reviewScope === SemanticReviewScope.Scoped) {
     return {
       state: CommitStatusState.ERROR,
-      description: "Review incomplete: reviewer completed in degraded mode",
+      description: `${MANUAL_REVIEW_DESCRIPTION_PREFIX}scoped review requires manual signoff`,
     };
   }
   if (result.blockingCount > 0) {
@@ -200,7 +236,7 @@ export function evaluateAutomatedReviewCoverage(
 }
 
 export function getSemanticReviewOutcome(
-  status: Pick<CommitStatus, "state"> | undefined,
+  status: Pick<CommitStatus, "state" | "description"> | undefined,
 ): SemanticReviewOutcome | undefined {
   if (!status) {
     return undefined;
@@ -215,7 +251,9 @@ export function getSemanticReviewOutcome(
     return SemanticReviewOutcome.ChangesRequested;
   }
   if (status.state === CommitStatusState.ERROR) {
-    return SemanticReviewOutcome.ReviewIncomplete;
+    return status.description?.startsWith(MANUAL_REVIEW_DESCRIPTION_PREFIX)
+      ? SemanticReviewOutcome.ManualReviewRequired
+      : SemanticReviewOutcome.ReviewIncomplete;
   }
   return undefined;
 }

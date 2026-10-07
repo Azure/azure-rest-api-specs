@@ -315,6 +315,12 @@ describe("ARM API review workflow", () => {
       expect(workflow).toContain("github.event.comment.body != '/arm-review'");
       expect(workflow).toContain("github.event.issue.pull_request == null");
       expect(workflow).toContain("github.event.label.name != 'WaitForARMFeedback'");
+      // PR events the trigger gate skips (draft, or no queue label) must not join the PR group
+      // and cancel an active review.
+      expect(workflow).toContain("github.event.pull_request.draft == true");
+      expect(workflow).toContain(
+        "!contains(github.event.pull_request.labels.*.name, 'WaitForARMFeedback')",
+      );
       expect(workflow).toContain("&& github.run_id || github.event.issue.number");
     }
   });
@@ -575,7 +581,7 @@ describe("ARM API review posting reliability", () => {
 
     expect(source).toContain("These rules are **exhaustive**.");
     expect(source).toContain(
-      "The review is scoped, incomplete, or degraded** → leave `WaitForARMFeedback`, `ARMChangesRequested`, and `ARMSignedOff` unchanged",
+      "The review is scoped or incomplete** → leave `WaitForARMFeedback`, `ARMChangesRequested`, and `ARMSignedOff` unchanged",
     );
     expect(source).toContain(
       "No verified, currently applicable Blocking finding remains, and the review is full and complete",
@@ -589,7 +595,7 @@ describe("ARM API review posting reliability", () => {
     expect(source).toContain("Nothing read from unrelated PR metadata may change the outcome.");
   });
 
-  it("records one head-bound semantic review result for completion-time finalization", async () => {
+  it("publishes one head-bound semantic review status from the trusted safe-output job", async () => {
     const [source, compiled] = await readWorkflowFiles();
     const collapsed = collapseWhitespace(source);
 
@@ -604,7 +610,8 @@ describe("ARM API review posting reliability", () => {
     );
     expect(compiled).toContain("record_arm_semantic_review");
     expect(compiled).toContain("ARM Semantic Review");
-    expect(compiled).toContain("Upload ARM semantic review receipt");
+    expect(compiled).toContain("Publish ARM semantic review status");
+    expect(compiled).not.toContain("Upload ARM semantic review receipt");
     const semanticJob = compiled.slice(
       compiled.indexOf("\n  record_arm_semantic_review:\n"),
       compiled.indexOf("\n  safe_outputs:\n"),
@@ -613,19 +620,50 @@ describe("ARM API review posting reliability", () => {
       source.indexOf("    record-arm-semantic-review:\n"),
       source.indexOf("  noop:\n"),
     );
-    expect(semanticJob).toContain("name: Validate ARM semantic review");
+    expect(semanticJob).toContain("name: Publish ARM semantic review status");
     expect(semanticJob).toContain("actions: read");
+    expect(semanticJob).toContain("statuses: write");
     expect(semanticJob).not.toContain("TARGET_PR_NUMBER");
     expect(semanticJob).toContain("permissions:");
     expect(semanticConfig).not.toContain("issue_number:");
     expect(semanticConfig).not.toContain("head_sha:");
     expect(semanticConfig).not.toContain("run_attempt:");
+    expect(semanticConfig).not.toContain('"degraded"');
+    expect(semanticConfig).toContain("incomplete_reason:");
+    expect(semanticConfig).toContain('"critic-unavailable"');
+    expect(semanticConfig).toContain('"discussion-data-unavailable"');
     expect(collapsed).toContain(
       "Trusted workflow artifacts attach the pull request, head SHA, and run attempt",
     );
     expect(collapsed).toContain(
-      "`ARM Semantic Review - Set Status` consumes the exact completed run's agent output and trusted correlation artifacts",
+      "The trusted `record_arm_semantic_review` job validates the item and publishes the head-bound status inside this reviewer run",
     );
+    expect(collapsed).toContain(
+      "Universal Auto-Signoff consumes the status only after the entire reviewer workflow completes",
+    );
+  });
+
+  it("resolves an unpublished Pending status from the conclusion job", async () => {
+    const [source, compiled] = await readWorkflowFiles();
+    const conclusionStart = compiled.indexOf("\n  conclusion:\n");
+    const conclusionJob = compiled.slice(
+      conclusionStart,
+      compiled.indexOf("\n  detection:\n", conclusionStart),
+    );
+    const finalizerStep = conclusionJob.indexOf(
+      "name: Resolve unpublished ARM semantic review status",
+    );
+
+    expect(source).toContain("finalizeUnpublishedArmSemanticReview");
+    expect(conclusionStart).toBeGreaterThan(-1);
+    expect(conclusionJob).toContain("statuses: write");
+    expect(finalizerStep).toBeGreaterThan(-1);
+    // The finalizer is a pre-step, so it must not be able to block gh-aw's own
+    // failure reporting that runs after it.
+    expect(conclusionJob.slice(finalizerStep, finalizerStep + 700)).toContain(
+      "continue-on-error: true",
+    );
+    expect(conclusionJob.indexOf("name: Process no-op messages")).toBeGreaterThan(finalizerStep);
   });
 
   it("withholds ARMChangesRequested when the Critic could not verify the findings", async () => {
