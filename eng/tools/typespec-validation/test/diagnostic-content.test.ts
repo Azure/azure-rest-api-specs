@@ -72,4 +72,10 @@ describe("diagnostic content", () => {
   ])("renders path %s relative to %s", (path, cwd, expected) => {
     expect(renderDiagnosticContent(filePath(path), { cwd })).toBe(expected);
   });
+
+  it("normalizes relative diagnostic paths without platform-specific separator handling", () => {
+    expect(
+      renderDiagnosticContent(filePath("service\\..\\shared\\file.json"), { cwd: "/repo" }),
+    ).toBe("shared/file.json");
+  });
 });

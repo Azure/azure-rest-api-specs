@@ -2,7 +2,7 @@ import { filterAsync } from "@azure-tools/specs-shared/array";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { readFile } from "node:fs/promises";
 import { stripVTControlCharacters } from "node:util";
-import path, { basename, dirname, normalize } from "node:path";
+import path, { basename, dirname, normalize } from "pathe";
 import { reportCommandOutput } from "../command-output.ts";
 import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
 import { globFiles } from "../glob.ts";
@@ -56,7 +56,7 @@ export class CompileRule implements Rule {
           const outputSwaggers = outputLines
             // Remove leading and trailing whitespace
             .map((l) => l.trim())
-            // Normalize to platform-specific path
+            // Normalize separators to forward slashes
             .map((l) => normalize(l))
             // Filter to JSON files
             .filter((p) => basename(p).toLowerCase().endsWith(".json"))
@@ -78,7 +78,7 @@ export class CompileRule implements Rule {
             // Necessary to handle multi-project specs like keyvault.
             //
             // Glob patterns use forward slashes on all platforms.
-            const pattern = path.posix.join(...outputFolder.split(path.sep), "**", outputFilename);
+            const pattern = path.join(outputFolder, "**", outputFilename);
             const allSwaggers = (await globFiles(pattern, { exclude: ["**/examples/**"] })).map(
               (p) => normalize(p),
             );
@@ -148,18 +148,13 @@ export class CompileRule implements Rule {
 
             if (extraSwaggers.length > 0) {
               // Helper function to extract version from swagger path
-              // Normalize to POSIX path for consistent pattern matching
               const extractVersion = (swaggerPath: string): string | null => {
-                const posixPath = swaggerPath.split(path.sep).join(path.posix.sep);
-                const match = posixPath.match(/\/(preview|stable)\/([^/]+)\//);
+                const match = swaggerPath.match(/\/(preview|stable)\/([^/]+)\//);
                 return match ? match[2] : null;
               };
 
               // Check if all extra swaggers are preview versions
-              const allArePreview = extraSwaggers.every((s) => {
-                const posixPath = s.split(path.sep).join(path.posix.sep);
-                return posixPath.includes("/preview/");
-              });
+              const allArePreview = extraSwaggers.every((s) => s.includes("/preview/"));
 
               let isOnlyOlderPreviews = false;
               if (allArePreview) {
