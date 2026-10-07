@@ -113,7 +113,7 @@ From `package.json` comments:
 - `@actions/core`, `@actions/github`: Types for the injected GitHub Actions toolkit (devDependencies)
 - `@octokit/rest`, `@octokit/types`: GitHub REST API client
 - `simple-git`: Git operations
-- `js-yaml`: YAML parsing
+- `yaml`: YAML parsing
 - `debug`: Debug logging
 - `vitest`, `@vitest/coverage-v8`: Root development dependencies for testing and coverage
 - `oxlint`, `oxlint-tsgolint`: Root development dependencies for linting
