@@ -9,6 +9,7 @@ on:
       - "**/package.json"
       - .github/**
       - eng/**
+      - libs/**
       - pnpm-lock.yaml
       - pnpm-workspace.yaml
       - tsconfig.json
@@ -18,15 +19,12 @@ on:
       - .gitignore
       - .oxlintrc.json
       - .oxfmtrc.json
-      - specification/common-types/**
-      - specification/contosowidgetmanager/**
-      - specification/storage/**
-      - specification/compute/**
   pull_request:
     paths:
       - "**/package.json"
       - .github/**
       - eng/**
+      - libs/**
       - pnpm-lock.yaml
       - pnpm-workspace.yaml
       - tsconfig.json
@@ -36,10 +34,6 @@ on:
       - .gitignore
       - .oxlintrc.json
       - .oxfmtrc.json
-      - specification/common-types/**
-      - specification/contosowidgetmanager/**
-      - specification/storage/**
-      - specification/compute/**
   workflow_dispatch:
 
 permissions:
@@ -55,8 +49,9 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           # Keep every manifest so new workspace locations are checked too.
           sparse-checkout-cone-mode: false
           sparse-checkout: |
@@ -80,11 +75,13 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github
             eng
+            libs
 
       - uses: ./.github/actions/setup-node-install-deps
 
@@ -108,15 +105,13 @@ jobs:
       - if: runner.os == 'Windows'
         run: git config --global core.longpaths true
 
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github
             eng
-            specification/common-types
-            specification/contosowidgetmanager
-            specification/storage
-            specification/compute
+            libs
 
       - uses: ./.github/actions/setup-node-install-deps
 
