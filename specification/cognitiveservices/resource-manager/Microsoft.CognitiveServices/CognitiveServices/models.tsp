@@ -2869,7 +2869,7 @@ model Usage {
    */
   @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read)
-  id?: string;
+  id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The type of the usage resource. E.g. "Microsoft.CognitiveServices/locations/usages"
@@ -6399,10 +6399,11 @@ model AdapterDeploymentProperties {
   /**
    * The immutable Project Models version produced by Foundry fine-tuning.
    * The identifier uses the Azure AI project model URI format.
+   * Model and version segments use ASCII letters, digits, periods, underscores, and hyphens.
    * The service validates LoRA weight type, protected status, provenance,
    * compatibility metadata, and registration state.
    */
-  @pattern("^azure(?:ai)://accounts/[^/]+/projects/[^/]+/models/[^/]+/versions/[^/]+$")
+  @pattern("^azureai://accounts/[A-Za-z0-9][A-Za-z0-9_.-]{1,63}/projects/[A-Za-z0-9][A-Za-z0-9_.-]{1,63}/models/[A-Za-z0-9_.-]+/versions/[A-Za-z0-9_.-]+(?![\\s\\S])")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceModelId: string;
 
