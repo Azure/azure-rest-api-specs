@@ -1427,6 +1427,73 @@ model KnowledgeBaseRetrievalPartialResponse {
   body: KnowledgeBaseRetrievalResponse;
 }
 
+/** Common base for events emitted by a streaming knowledge base retrieval. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseRetrievalStreamEvent {}
+
+/** Emitted after retrieval preflight validation completes. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseRetrievalStartedStreamEvent
+  extends KnowledgeBaseRetrievalStreamEvent {
+  /** The retrieval-started payload. */
+  @data
+  value: KnowledgeBaseRetrievalStartedEvent;
+}
+
+/** Emitted when an individual retrieval activity starts. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseActivityStartedStreamEvent
+  extends KnowledgeBaseRetrievalStreamEvent {
+  /** The activity-started payload. */
+  @data
+  value: KnowledgeBaseActivityStartedEvent;
+}
+
+/** Emitted when an individual retrieval activity completes. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseActivityCompletedStreamEvent
+  extends KnowledgeBaseRetrievalStreamEvent {
+  /** The completed activity record. */
+  @data
+  value: KnowledgeBaseActivityRecord;
+}
+
+/** Emitted when an answer message is complete. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseAnswerCompletedStreamEvent
+  extends KnowledgeBaseRetrievalStreamEvent {
+  /** The completed answer payload. */
+  @data
+  value: KnowledgeBaseAnswerCompletedEvent;
+}
+
+/** Emitted when the references used by the response are available. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseReferencesCompletedStreamEvent
+  extends KnowledgeBaseRetrievalStreamEvent {
+  /** The references used to produce the response. */
+  @data
+  value: KnowledgeBaseReference[];
+}
+
+/** Emitted when retrieval fails after the stream starts. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseErrorStreamEvent
+  extends KnowledgeBaseRetrievalStreamEvent {
+  /** The retrieval error payload. */
+  @data
+  value: KnowledgeBaseStreamErrorEvent;
+}
+
+/** Emitted when retrieval completes successfully or with partial results. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseResponseCompletedStreamEvent
+  extends KnowledgeBaseRetrievalStreamEvent {
+  /** The authoritative completed retrieval payload. */
+  @data
+  value: KnowledgeBaseResponseCompletedEvent;
+}
+
 /**
  * The set of server-sent events emitted while streaming a knowledge base retrieval, added in
  * version 2026-08-01-preview. Each event's `data:` payload is JSON-encoded using the type
@@ -1436,29 +1503,30 @@ model KnowledgeBaseRetrievalPartialResponse {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "@events SSE union is delivered as a server-sent event stream and cannot be represented as an OpenAPI v2 union."
 @added(Versions.v2026_08_01_preview)
 @events
-union KnowledgeBaseRetrievalStreamEvents {
+union KnowledgeBaseRetrievalStreamEvents
+  extends KnowledgeBaseRetrievalStreamEvent {
   /** The retrieval stream has started; no activity or answer content has been produced yet. */
-  `retrieval.started`: KnowledgeBaseRetrievalStartedEvent,
+  `retrieval.started`: KnowledgeBaseRetrievalStartedStreamEvent,
 
   /** An individual activity (e.g. a search index or web retrieval step) has started executing. */
-  `activity.started`: KnowledgeBaseActivityStartedEvent,
+  `activity.started`: KnowledgeBaseActivityStartedStreamEvent,
 
   /** An individual activity has finished executing, successfully or not. */
-  `activity.completed`: KnowledgeBaseActivityRecord,
+  `activity.completed`: KnowledgeBaseActivityCompletedStreamEvent,
 
   /** The answer message has finished streaming and is now complete. */
-  `answer.completed`: KnowledgeBaseAnswerCompletedEvent,
+  `answer.completed`: KnowledgeBaseAnswerCompletedStreamEvent,
 
   /** The references used to produce the response are available. */
-  `references.completed`: KnowledgeBaseReference[],
+  `references.completed`: KnowledgeBaseReferencesCompletedStreamEvent,
 
   /** The retrieval failed before the stream could complete normally. */
   @terminalEvent
-  error: KnowledgeBaseStreamErrorEvent,
+  error: KnowledgeBaseErrorStreamEvent,
 
   /** The retrieval has completed successfully; this is the final event of the stream. */
   @terminalEvent
-  `response.completed`: KnowledgeBaseResponseCompletedEvent,
+  `response.completed`: KnowledgeBaseResponseCompletedStreamEvent,
 }
 
 /** Emitted once retrieval preflight validation completes, before any activity begins. */

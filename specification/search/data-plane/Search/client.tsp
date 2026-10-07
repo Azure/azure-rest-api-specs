@@ -5730,3 +5730,44 @@ namespace KnowledgeBaseRetrievalClient {
   "GetSynonymMapsWithSelectedProperties",
   "csharp"
 );
+
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases",
+  "csharp"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalStartedStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases",
+  "csharp"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseActivityStartedStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases",
+  "csharp"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseActivityCompletedStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases",
+  "csharp"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseAnswerCompletedStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases",
+  "csharp"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseReferencesCompletedStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases",
+  "csharp"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseErrorStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases",
+  "csharp"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseResponseCompletedStreamEvent,
+  "Azure.Search.Documents.KnowledgeBases",
+  "csharp"
+);
