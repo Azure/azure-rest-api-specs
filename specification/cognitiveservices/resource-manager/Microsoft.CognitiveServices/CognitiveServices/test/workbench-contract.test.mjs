@@ -1,4 +1,4 @@
-// Run after tsp compile: node --test specification/cognitiveservices/CognitiveServices.Management/test/workbench-contract.test.mjs
+// Run after tsp compile: node --test specification/cognitiveservices/resource-manager/Microsoft.CognitiveServices/CognitiveServices/test/workbench-contract.test.mjs
 // Set WORKBENCH_BASE_REF explicitly to enable Git history and unrelated-diff checks.
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
@@ -11,12 +11,12 @@ import { compile, NodeHost } from "@typespec/compiler";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 
 const project = fileURLToPath(new URL("../", import.meta.url));
-const root = path.resolve(project, "../../..");
+const root = path.resolve(project, "../../../../..");
 const version = "2026-09-15-preview";
 const baselineRef = process.env.WORKBENCH_BASE_REF;
 const specFile = path.resolve(
   project,
-  `../resource-manager/Microsoft.CognitiveServices/preview/${version}/cognitiveservices.json`,
+  `preview/${version}/cognitiveservices.json`,
 );
 const examples = path.join(project, "examples", version);
 const spec = JSON.parse(readFileSync(specFile, "utf8"));
@@ -61,11 +61,11 @@ function envelope(schema, file = specFile) {
   return properties;
 }
 
-function assertNullableCount(property) {
+function assertCount(property, nullable) {
   assert.equal(property.type, "integer");
   assert.equal(property.format, "int32");
   assert.equal(property.minimum, 1);
-  assert.equal(property["x-nullable"], true);
+  assert.equal(property["x-nullable"], nullable ? true : undefined);
   assert.equal(
     property.enum,
     undefined,
@@ -103,8 +103,8 @@ test("create keeps required fields and exposes read/create-only image and mount 
   }
   assert.equal(Object.hasOwn(properties, "runtimeImage"), false);
   assert.equal(properties.instanceType.type, "string");
-  assert.equal(properties.instanceType["x-nullable"], true);
-  assertNullableCount(properties.gpuCount);
+  assert.equal(properties.instanceType["x-nullable"], undefined);
+  assertCount(properties.gpuCount, false);
 });
 
 test("PATCH is independently optional and contains only supported mutable fields", () => {
@@ -130,7 +130,7 @@ test("PATCH is independently optional and contains only supported mutable fields
     assert.equal(property.readOnly, undefined);
   }
   assert.equal(properties.properties.instanceType["x-nullable"], true);
-  assertNullableCount(properties.properties.gpuCount);
+  assertCount(properties.properties.gpuCount, true);
   assert.doesNotMatch(properties.properties.gpuCount.description, /stopped/i);
   assert.equal(update.properties.identity.description, identityDescription);
   assert.deepEqual(Object.keys(operations.patch.responses), ["200", "default"]);
@@ -225,7 +225,7 @@ if (baselineRef) {
     }
   });
 
-  test("all 4255 historical contracts/examples retain their original Git blob hashes", () => {
+  test("all historical contracts/examples retain their original Git blob hashes", () => {
     const files = git(
       "ls-tree",
       "-r",
@@ -236,16 +236,19 @@ if (baselineRef) {
     )
       .toString()
       .split("\0")
-      .filter(Boolean);
+      .filter(Boolean)
+      .filter((entry) => {
+        const [, file] = entry.split("\t");
+        return (
+          file.endsWith(".json") &&
+          !file.includes(version) &&
+          file.includes("/resource-manager/")
+        );
+      });
+    assert(files.length > 0, "The baseline must contain historical contracts");
     let checked = 0;
     for (const entry of files) {
       const [metadata, file] = entry.split("\t");
-      if (!file.endsWith(".json") || file.includes(version)) continue;
-      if (
-        !file.includes("/resource-manager/") &&
-        !file.includes("/CognitiveServices.Management/examples/")
-      )
-        continue;
       const content = readFileSync(path.resolve(root, file));
       const hash = createHash("sha1")
         .update(Buffer.from(`blob ${content.length}\0`))
@@ -254,7 +257,7 @@ if (baselineRef) {
       assert.equal(hash, metadata.split(" ")[2], file);
       checked++;
     }
-    assert.equal(checked, 4255);
+    assert.equal(checked, files.length);
   });
 }
 
@@ -276,7 +279,19 @@ test("Workbench examples match generation and omit runtimeImage and forbidden en
     assert.equal(example.parameters["api-version"], version);
     const bodies = [example.parameters.resource, example.parameters.properties];
     for (const response of Object.values(example.responses)) {
-      bodies.push(...(response.body?.value ?? [response.body]));
+      const resources = response.body?.value ?? [response.body];
+      bodies.push(...resources);
+      for (const resource of resources.filter(Boolean)) {
+        for (const name of ["instanceType", "gpuCount"]) {
+          if (Object.hasOwn(resource.properties ?? {}, name)) {
+            assert.notEqual(
+              resource.properties[name],
+              null,
+              `${file}: ${name}`,
+            );
+          }
+        }
+      }
       if (
         example.operationId === "Workbenches_CreateOrUpdate" &&
         response.headers
@@ -351,8 +366,14 @@ test("Workbench examples match generation and omit runtimeImage and forbidden en
     reset.responses["200"].body.properties.targetClusterId,
     virtualClusterId,
   );
-  assert.equal(reset.responses["200"].body.properties.instanceType, null);
-  assert.equal(reset.responses["200"].body.properties.gpuCount, null);
+  assert.equal(
+    Object.hasOwn(reset.responses["200"].body.properties, "instanceType"),
+    false,
+  );
+  assert.equal(
+    Object.hasOwn(reset.responses["200"].body.properties, "gpuCount"),
+    false,
+  );
   const pending = JSON.parse(
     readFileSync(path.join(examples, "PutWorkbenchPending.json")),
   );
