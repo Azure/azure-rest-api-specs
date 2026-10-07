@@ -560,7 +560,7 @@ union TlsVersion {
   `1.2`: "1.2",
 
   /**
-   * TLS version 1.3.
+   * 1.3
    */
   @added(Versions.v2026_06_15_preview)
   `1.3`: "1.3",
@@ -3599,7 +3599,7 @@ model NamespaceProperties {
   inboundIpRules?: InboundIpRule[];
 
   /**
-   * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
+   * Minimum TLS version of the publisher allowed to publish to this namespace. The TlsVersion values are shared with topics and domains; for namespaces, only TLS version 1.2 is currently supported.
    */
   minimumTlsVersionAllowed?: TlsVersion;
 
