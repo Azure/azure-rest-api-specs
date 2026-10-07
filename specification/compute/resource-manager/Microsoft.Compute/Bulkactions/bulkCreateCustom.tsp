@@ -97,6 +97,18 @@ model BulkCreateCustomEnvelope {
   @doc("Zones in which the BulkCreateCustom is available")
   zones?: Array<string>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "ExtendedLocation matches the established compute contract and is applied uniformly to every virtual machine created by the operation."
+  @added(Versions.`2026-11-06-preview`)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The extended location of the virtual machines created by the BulkCreateCustom operation.")
+  extendedLocation?: ExtendedLocation;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Placement matches the established compute contract and is applied uniformly to every virtual machine created by the operation."
+  @added(Versions.`2026-11-06-preview`)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The availability zone placement constraints applied to the virtual machines created by the BulkCreateCustom operation.")
+  placement?: Placement;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags free-form object matches the established compute contract."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags is a standard ARM resource property."
   @doc("Resource tags.")
@@ -144,6 +156,10 @@ model BulkCreateCustomOverrideBase {
 model BulkCreateCustomOverride {
   @doc("ARM VM name for this VM. Optional; when omitted the name is generated from the prefix as {prefix}_{index}.")
   virtualMachineName?: string;
+
+  @added(Versions.`2026-11-06-preview`)
+  @doc("The availability zone this VM is created in. Overrides the operation-level zones for this VM only; when omitted the VM is placed using the operation-level zones.")
+  zone?: string;
 
   ...BulkCreateCustomOverrideBase;
 }
@@ -236,11 +252,13 @@ model BulkCreateCustomProperties {
   capacityType?: CapacityType;
 
   @added(Versions.`2026-08-06-preview`)
+  @removed(Versions.`2026-11-06-preview`)
   @doc("The minimum capacity, expressed in units specified by capacityType, that Azure must be able to allocate for the request to proceed. If Azure cannot allocate at least this capacity with high confidence, the request is rejected with 409 Conflict (InsufficientCapacity) and no VMs are created. Otherwise, Azure allocates as much capacity as possible, up to the requested capacity. Must be greater than 0, less than capacity, and requires partialFulfillmentPolicy.mode to be Enabled.")
   @minValue(1)
   minCapacity?: int32;
 
   @added(Versions.`2026-08-06-preview`)
+  @removed(Versions.`2026-11-06-preview`)
   @doc("Controls how partial fulfillment is handled for a BulkCreateCustom request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures.")
   partialFulfillmentPolicy?: PartialFulfillmentPolicy;
 
@@ -250,6 +268,7 @@ model BulkCreateCustomProperties {
   @doc("The virtual machine resources resolved for the operation.")
   resources?: Array<BulkCreateCustomResource>;
 
+  @removed(Versions.`2026-11-06-preview`)
   @doc("Configuration Options for Regular or Spot instances in BulkCreateCustom.")
   priorityProfile: BulkCreateCustomPriorityProfile;
 
