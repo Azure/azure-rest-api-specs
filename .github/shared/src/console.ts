@@ -8,7 +8,7 @@ import { format } from "node:util";
  *
  * Examples: `node app.js | tee out.txt`, GitHub Actions console log reader
  */
-export async function log(...args: Parameters<typeof console.log>): Promise<void> {
+export async function log(...args: unknown[]): Promise<void> {
   const line = format(...args) + "\n";
 
   if (!process.stdout.write(line)) {
@@ -28,7 +28,7 @@ export async function log(...args: Parameters<typeof console.log>): Promise<void
 // /**
 //  * Async, backpressure-aware console.log replacement.
 //  */
-// export function log(...args: Parameters<typeof console.log>): Promise<void> {
+// export function log(...args: unknown[]): Promise<void> {
 //   const line = format(...args) + "\n";
 //
 //   const writeOnce = async () => {

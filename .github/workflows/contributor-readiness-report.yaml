@@ -1,6 +1,6 @@
 name: Contributor Readiness
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   issue_comment:
     types: [created]
   workflow_run:
@@ -24,12 +24,12 @@ jobs:
     outputs:
       pr: ${{ steps.resolve.outputs.result }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           ref: ${{ github.event.repository.default_branch }}
           sparse-checkout: .github
-          persist-credentials: false
-      - uses: actions/github-script@v9.0.0
+      - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         id: resolve
         with:
           script: |
@@ -52,12 +52,12 @@ jobs:
       checks: write
     steps:
       # Never check out or execute PR code, including when refreshing a fork review.
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           ref: ${{ github.event.repository.default_branch }}
           sparse-checkout: .github
-          persist-credentials: false
-      - uses: actions/github-script@v9.0.0
+      - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           PR_NUMBER: ${{ needs.resolve.outputs.pr }}
         with:
