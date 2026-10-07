@@ -48,7 +48,16 @@ when completion behavior is not supplied.
 > Use `createOrUpdate` as the operation name with an
 > `ArmResourceCreateOrReplaceSync` or `ArmResourceCreateOrReplaceAsync`
 > template. Use `ArmCustomPatch` for PATCH.
-> For async POST, use ARM combined headers: `LroHeaders = ArmCombinedLroHeaders<FinalResult = ExportResult>`.
+> For an async ARM operation, start with the standard template's LRO header
+> defaults. Collect the service's actual polling-header contract and whether
+> the resource provider is subject to the January 2025 greenfield header
+> requirements. Greenfield async PATCH, DELETE, and POST operations require
+> both `Location` and `Azure-AsyncOperation`; new async PUT templates already
+> include `Azure-AsyncOperation` by default. Override `LroHeaders` when the
+> contract or ARM policy requires it, include `RetryAfterHeader`, and set
+> `FinalResult` to the resource or action response type, or `void` when the
+> operation has no final response body. See the
+> [ARM LRO customization guidance](https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/).
 
 ### Case 3 — API Versioning
 
