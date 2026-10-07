@@ -859,7 +859,7 @@ union MigrationProvisioningState {
 /**
  * Which access key to regenerate.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 enum AccessKeyType {
   /**
    * Primary
@@ -954,13 +954,13 @@ model Sku {
 /**
  * Properties of Redis Enterprise clusters for create operations
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 model ClusterCreateProperties extends ClusterProperties {
   /**
    * Whether or not public network traffic can access the Redis cluster. Only 'Enabled' or 'Disabled' can be set. null is returned only for clusters created using an old API version which do not have this property and cannot be set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   publicNetworkAccess: PublicNetworkAccess | null;
 }
 
@@ -1074,19 +1074,19 @@ model MaintenanceWindowSchedule {
 /** Day of week. Required when the maintenance window type is 'Weekly'. */
 union MaintenanceDayOfWeek {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Sunday: "Sunday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Monday: "Monday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Tuesday: "Tuesday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Wednesday: "Wednesday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Thursday: "Thursday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Friday: "Friday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Saturday: "Saturday",
 }
 
@@ -1154,7 +1154,7 @@ model ClusterUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -1162,12 +1162,12 @@ model ClusterUpdate {
 /**
  * Properties of Redis Enterprise clusters for update operations
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 model ClusterUpdateProperties extends ClusterProperties {
   /**
    * Whether or not public network traffic can access the Redis cluster. Only 'Enabled' or 'Disabled' can be set. null is returned only for clusters created using an old API version which do not have this property and cannot be set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   publicNetworkAccess?: PublicNetworkAccess | null;
 }
 
@@ -1184,8 +1184,8 @@ model DatabaseList is Azure.Core.Page<Database>;
 /**
  * Properties for creating Redis Enterprise databases
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 model DatabaseCreateProperties extends DatabaseProperties {
   /**
    * This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created. Default is Disabled.
@@ -1399,7 +1399,7 @@ model DatabaseUpdate {
 /**
  * Properties for updating Redis Enterprise databases
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 model DatabaseUpdateProperties extends DatabaseProperties {
   /**
    * This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created. Default is Disabled.
@@ -1576,7 +1576,7 @@ model SkuDetails {
   /**
    * The cache size in GB.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   @visibility(Lifecycle.Read)
   sizeInGB?: float32;
 }
