@@ -2869,7 +2869,7 @@ model Usage {
    */
   @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read)
-  id?: string;
+  id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The type of the usage resource. E.g. "Microsoft.CognitiveServices/locations/usages"
