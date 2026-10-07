@@ -3408,6 +3408,10 @@
           "type": "string",
           "description": "The availability zone this VM is created in. Overrides the operation-level zones for this VM only; when omitted the VM is placed using the operation-level zones."
         },
+        "extendedLocation": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
+          "description": "The extended location this VM is created in. Overrides the operation-level extendedLocation for this VM only; when omitted the VM inherits the operation-level extendedLocation."
+        },
         "virtualMachineProfile": {
           "$ref": "#/definitions/BulkactionVMProperties",
           "description": "VM profile, the same shape as operation-level ComputeProfile.virtualMachineProfile. Overrides the operation-level VM profile."

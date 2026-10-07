@@ -161,6 +161,10 @@ model BulkCreateCustomOverride {
   @doc("The availability zone this VM is created in. Overrides the operation-level zones for this VM only; when omitted the VM is placed using the operation-level zones.")
   zone?: string;
 
+  @added(Versions.`2026-11-06-preview`)
+  @doc("The extended location this VM is created in. Overrides the operation-level extendedLocation for this VM only; when omitted the VM inherits the operation-level extendedLocation.")
+  extendedLocation?: ExtendedLocation;
+
   ...BulkCreateCustomOverrideBase;
 }
 
