@@ -48,11 +48,10 @@ model FileShare is Azure.ResourceManager.TrackedResource<FileShareProperties> {
   @segment("fileShares")
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Identity is a valid envelope property"
-  @added(Versions.v2026_09_01)
-  @doc("Managed service identity for the file share.")
-  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
+
+@@added(FileShare.identity, Versions.v2026_09_01);
 
 @doc("Media Tier enum.")
 union MediaTier {
