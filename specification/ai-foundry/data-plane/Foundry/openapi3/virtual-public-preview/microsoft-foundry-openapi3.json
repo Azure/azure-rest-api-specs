@@ -100668,40 +100668,6 @@
           "model"
         ],
         "properties": {
-          "language": {
-            "type": "string",
-            "description": "The language of the input audio. Supplying the input language in\n  [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format\n  will improve accuracy and latency."
-          },
-          "languages": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "minItems": 1,
-            "description": "Possible languages of the input audio, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format. Supported by `gpt-transcribe` and `gpt-live-transcribe`."
-          },
-          "keywords": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Words or phrases to guide transcription of the input audio. Supported by `gpt-transcribe` and `gpt-live-transcribe`."
-          },
-          "prompt": {
-            "type": "string",
-            "description": "An optional text to guide the model's style or continue a previous audio\n  segment.\n  For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting).\n  For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example \"expect words related to technology\".\n  Prompt is not supported with `gpt-realtime-whisper` in GA Realtime sessions."
-          },
-          "delay": {
-            "type": "string",
-            "enum": [
-              "minimal",
-              "low",
-              "medium",
-              "high",
-              "xhigh"
-            ],
-            "description": "Controls how long the model waits before emitting transcription text.\n  Higher values can improve transcription accuracy at the cost of latency.\n  Only supported with `gpt-realtime-whisper` in GA Realtime sessions."
-          },
           "model": {
             "$ref": "#/components/schemas/VoiceAgentInputTranscriptionModel",
             "description": "The transcription model identifier. Configure customer custom speech deployments in `custom_speech`."
@@ -100721,6 +100687,11 @@
             "description": "Optional phrase hints that bias recognition toward domain terms."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.AudioTranscription"
+          }
+        ],
         "description": "Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription\noptions with the Azure and MAI transcription models, custom speech models, and phrase hints.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -100923,6 +100894,11 @@
             "type": "string",
             "description": "A label for this MCP server, used to identify it in tool calls."
           },
+          "server_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL for the MCP server. One of `server_url`, `connector_id`, or\n  `tunnel_id` must be provided."
+          },
           "authorization": {
             "type": "string",
             "description": "An OAuth access token that can be used with a remote MCP server, either\n  with a custom MCP server URL or a service connector. Your application\n  must handle the OAuth authorization flow and provide the token here."
@@ -101013,11 +100989,6 @@
               "mcp"
             ]
           },
-          "server_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL for the MCP server."
-          },
           "response_scheduling": {
             "$ref": "#/components/schemas/VoiceAgentToolResponseScheduling",
             "description": "When the MCP invocation creates a follow-up response. Defaults to `when_idle`.",
@@ -101029,7 +101000,7 @@
             "$ref": "#/components/schemas/VoiceAgentTool"
           }
         ],
-        "description": "An MCP tool available to a voice agent.",
+        "description": "An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel identifiers are not supported.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -101069,6 +101040,26 @@
           }
         ],
         "description": "The input audio noise reduction mode.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentRealtimeResponse": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "$ref": "#/components/schemas/VoiceResponseAudio",
+            "description": "The audio configuration used by the live response, including flat voice provider, locale, and format fields under `output`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponse"
+          }
+        ],
+        "description": "A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -102122,6 +102113,48 @@
           }
         ],
         "description": "A persisted voice response representing one model inference turn within a conversation. In list results the\n`output` projection may be omitted; retrieve the\nfull response (`GET .../responses/{response_id}`) or the paged response-items route\n(`GET .../responses/{response_id}/items`) for its output items. `created_at`/`completed_at` are Foundry\ndurable ordering extensions.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceResponseAudio": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "$ref": "#/components/schemas/VoiceResponseAudioOutput",
+            "description": "The audio output configuration used for the response."
+          }
+        },
+        "description": "Audio configuration for a response. Follows the OpenAI Realtime GA `audio` object shape.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceResponseAudioOutput": {
+        "type": "object",
+        "properties": {
+          "voice": {
+            "type": "string",
+            "description": "The voice name used for the response's audio output."
+          },
+          "voice_type": {
+            "$ref": "#/components/schemas/VoiceType",
+            "description": "The extensible provider/type of the voice used for the response's audio output."
+          },
+          "voice_locale": {
+            "type": "string",
+            "description": "The BCP-47 locale of the voice used for the response's audio output."
+          },
+          "format": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
+            "description": "The audio format used for the response's audio output."
+          }
+        },
+        "description": "The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

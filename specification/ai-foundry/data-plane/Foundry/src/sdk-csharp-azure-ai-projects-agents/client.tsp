@@ -1296,6 +1296,12 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Realtime classes replacements
   // --------------------------------------------------------------------------------
+  // OpenAI 2.14.0 lacks languages, keywords, and delay; generate the complete base locally.
+  @@clientNamespace(
+    OpenAI.AudioTranscription,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
   @@alternateType(
     OpenAI.RealtimeResponse,
     {
@@ -1354,8 +1360,7 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Fix APIView namespace leak: these Foundry-only types were generating into the
   // OpenAI C# namespace instead of Azure.AI.Projects.Agents.
-  // The live-response projection still spreads OpenAI properties, so map its
-  // inline unions separately from the external response base class.
+  // Reuse published OpenAI types for the inline response unions.
   // --------------------------------------------------------------------------------
   union VoiceResponseStatus {
     "completed",
