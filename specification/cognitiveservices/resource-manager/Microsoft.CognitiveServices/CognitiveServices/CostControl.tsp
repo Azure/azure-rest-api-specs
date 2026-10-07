@@ -100,7 +100,7 @@ model CostControlConnections {
   appInsightsConnectionId?:
     | Azure.Core.armResourceIdentifier<[
         {
-          type: "Microsoft.MachineLearningServices/workspaces/connections";
+          type: "Microsoft.CognitiveServices/accounts/connections";
         }
       ]>
     | null;
@@ -112,7 +112,7 @@ model CostControlConnections {
   eventGridConnectionId?:
     | Azure.Core.armResourceIdentifier<[
         {
-          type: "Microsoft.MachineLearningServices/workspaces/connections";
+          type: "Microsoft.CognitiveServices/accounts/connections";
         }
       ]>
     | null;
@@ -138,7 +138,7 @@ model CostControlRule {
   @minItems(1)
   @maxItems(1)
   @identifiers(#["type"])
-  counterKey: CostControlDimension[];
+  counterKeys: CostControlDimension[];
 
   /**
    * The unit used for the cost control amount and absolute thresholds.
@@ -207,7 +207,11 @@ model CostControlMatch {
    */
   @minItems(1)
   @maxItems(20)
-  projectIds?: CostControlMatchValue[];
+  projectIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/projects";
+    }
+  ]>[];
 }
 
 /**
@@ -247,32 +251,32 @@ union CostControlDimensionType {
   /**
    * Consumption is partitioned by the stable Foundry agent ID.
    */
-  Agent: "agent",
+  Agent: "Agent",
 
   /**
    * Consumption is partitioned by the authenticated principal object ID.
    */
-  Identity: "identity",
+  Identity: "Identity",
 
   /**
    * Consumption is partitioned by the Foundry session ID.
    */
-  Session: "session",
+  Session: "Session",
 
   /**
    * Consumption is partitioned by the Foundry project resource ID.
    */
-  Project: "project",
+  Project: "Project",
 
   /**
    * Consumption is partitioned by the owning Cognitive Services account.
    */
-  Account: "account",
+  Account: "Account",
 
   /**
    * Consumption is partitioned by a custom request attribute.
    */
-  Custom: "custom",
+  Custom: "Custom",
 }
 
 /**
@@ -285,7 +289,7 @@ union CostControlUnit {
   /**
    * Estimated cost in United States dollars.
    */
-  Usd: "usd",
+  Usd: "Usd",
 }
 
 /**
@@ -296,34 +300,19 @@ union CostControlPeriod {
   string,
 
   /**
-   * Renews at the start of the next UTC minute.
-   */
-  Minute: "minute",
-
-  /**
-   * Renews at the start of the next UTC hour.
-   */
-  Hour: "hour",
-
-  /**
    * Renews daily at 00:00 UTC.
    */
-  Day: "day",
+  Day: "Day",
 
   /**
    * Renews Monday at 00:00 UTC.
    */
-  Week: "week",
+  Week: "Week",
 
   /**
    * Renews on the first day of each month at 00:00 UTC.
    */
-  Month: "month",
-
-  /**
-   * Renews January 1 at 00:00 UTC.
-   */
-  Year: "year",
+  Month: "Month",
 }
 
 /**
@@ -358,12 +347,12 @@ union CostControlThresholdType {
   /**
    * The value is a percentage of the configured rule amount.
    */
-  Percentage: "percentage",
+  Percentage: "Percentage",
 
   /**
    * The value is expressed in the rule's unit.
    */
-  Absolute: "absolute",
+  Absolute: "Absolute",
 }
 
 /**
@@ -376,17 +365,17 @@ union CostControlThresholdAction {
   /**
    * Audits every applied usage update. Authored audit thresholds must use zero. This action is retained in the current preview for compatibility; audit-only rules may omit thresholds.
    */
-  Audit: "audit",
+  Audit: "Audit",
 
   /**
    * Emits a customer-facing alert without blocking requests.
    */
-  Alert: "alert",
+  Alert: "Alert",
 
   /**
    * Blocks the request without emitting a customer-facing alert.
    */
-  Block: "block",
+  Block: "Block",
 }
 
 /**
@@ -398,14 +387,14 @@ model CostControlListResult {
    * The link used to get the next page of cost controls.
    */
   @nextLink
-  nextLink?: string;
+  nextLink?: url;
 
   /**
    * The cost controls in this page.
    */
   @pageItems
   @identifiers(#["name"])
-  value?: CostControl[];
+  value: CostControl[];
 }
 
 /**
@@ -441,14 +430,13 @@ model CostControlIfMatchHeader {
 /**
  * The entity tag returned with a cost control.
  */
-@added(Versions.v2026_09_15_preview)
-model CostControlEtagHeader {
+alias CostControlEtagHeader = {
   /**
    * The current entity tag for the cost control.
    */
   @header("ETag")
   etag: string;
-}
+};
 
 /**
  * Operations for managing cost controls owned by an account.
