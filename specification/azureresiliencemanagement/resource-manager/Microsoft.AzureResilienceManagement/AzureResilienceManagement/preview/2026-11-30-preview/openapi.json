@@ -6157,62 +6157,6 @@
         "scriptResourceId"
       ]
     },
-    "CyberRecoveryPlanResiliencyProperties": {
-      "type": "object",
-      "description": "Cyber resiliency properties for a recovery plan.",
-      "properties": {
-        "targetEnvironment": {
-          "$ref": "#/definitions/TargetEnvironment",
-          "description": "The subscriptions and locations where recovery is targeted. Applies only to CyberRecovery plans, for which it is required."
-        },
-        "inclusionSettings": {
-          "$ref": "#/definitions/RecoveryResourceInclusionSettings",
-          "description": "Rules that determine which discovered resources are included. Applies only to CyberRecovery plans."
-        },
-        "linkedRecoveryPlanDetails": {
-          "$ref": "#/definitions/LinkedRecoveryPlanDetails",
-          "description": "Details that link this plan to a source recovery plan. Applies only to CyberRecovery plans."
-        },
-        "mappedRecoveryPlanDetails": {
-          "$ref": "#/definitions/MappedRecoveryPlanDetails",
-          "description": "Details that map this plan to source tenants. Applies only to CyberRecovery plans."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResiliencyRecoveryPlanProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "CyberResiliency"
-    },
-    "CyberRecoveryPlanResiliencyPropertiesUpdate": {
-      "type": "object",
-      "description": "Cyber resiliency properties for a recovery plan.",
-      "properties": {
-        "targetEnvironment": {
-          "$ref": "#/definitions/TargetEnvironmentUpdate",
-          "description": "The subscriptions and locations where recovery is targeted. Applies only to CyberRecovery plans, for which it is required."
-        },
-        "inclusionSettings": {
-          "$ref": "#/definitions/RecoveryResourceInclusionSettings",
-          "description": "Rules that determine which discovered resources are included. Applies only to CyberRecovery plans."
-        },
-        "linkedRecoveryPlanDetails": {
-          "$ref": "#/definitions/LinkedRecoveryPlanDetailsUpdate",
-          "description": "Details that link this plan to a source recovery plan. Applies only to CyberRecovery plans."
-        },
-        "mappedRecoveryPlanDetails": {
-          "$ref": "#/definitions/MappedRecoveryPlanDetailsUpdate",
-          "description": "Details that map this plan to source tenants. Applies only to CyberRecovery plans."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResiliencyRecoveryPlanPropertiesUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "CyberResiliency"
-    },
     "CyberResiliencyRecoveryJobProperties": {
       "type": "object",
       "description": "Cyber resiliency properties for a recovery job.",
@@ -6278,6 +6222,62 @@
       "allOf": [
         {
           "$ref": "#/definitions/ResiliencyRecoveryJobResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CyberResiliency"
+    },
+    "CyberResiliencyRecoveryPlanProperties": {
+      "type": "object",
+      "description": "Cyber resiliency properties for a recovery plan.",
+      "properties": {
+        "targetEnvironment": {
+          "$ref": "#/definitions/TargetEnvironment",
+          "description": "The subscriptions and locations where recovery is targeted. Applies only to CyberRecovery plans, for which it is required."
+        },
+        "inclusionSettings": {
+          "$ref": "#/definitions/RecoveryResourceInclusionSettings",
+          "description": "Rules that determine which discovered resources are included. Applies only to CyberRecovery plans."
+        },
+        "linkedRecoveryPlanDetails": {
+          "$ref": "#/definitions/LinkedRecoveryPlanDetails",
+          "description": "Details that link this plan to a source recovery plan. Applies only to CyberRecovery plans."
+        },
+        "mappedRecoveryPlanDetails": {
+          "$ref": "#/definitions/MappedRecoveryPlanDetails",
+          "description": "Details that map this plan to source tenants. Applies only to CyberRecovery plans."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryPlanProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CyberResiliency"
+    },
+    "CyberResiliencyRecoveryPlanPropertiesUpdate": {
+      "type": "object",
+      "description": "Cyber resiliency properties for a recovery plan.",
+      "properties": {
+        "targetEnvironment": {
+          "$ref": "#/definitions/TargetEnvironmentUpdate",
+          "description": "The subscriptions and locations where recovery is targeted. Applies only to CyberRecovery plans, for which it is required."
+        },
+        "inclusionSettings": {
+          "$ref": "#/definitions/RecoveryResourceInclusionSettings",
+          "description": "Rules that determine which discovered resources are included. Applies only to CyberRecovery plans."
+        },
+        "linkedRecoveryPlanDetails": {
+          "$ref": "#/definitions/LinkedRecoveryPlanDetailsUpdate",
+          "description": "Details that link this plan to a source recovery plan. Applies only to CyberRecovery plans."
+        },
+        "mappedRecoveryPlanDetails": {
+          "$ref": "#/definitions/MappedRecoveryPlanDetailsUpdate",
+          "description": "Details that map this plan to source tenants. Applies only to CyberRecovery plans."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryPlanPropertiesUpdate"
         }
       ],
       "x-ms-discriminator-value": "CyberResiliency"
@@ -8774,26 +8774,6 @@
         "id"
       ]
     },
-    "InfraRecoveryPlanResiliencyProperties": {
-      "type": "object",
-      "description": "Infrastructure resiliency properties for a recovery plan.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResiliencyRecoveryPlanProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "InfraResiliency"
-    },
-    "InfraRecoveryPlanResiliencyPropertiesUpdate": {
-      "type": "object",
-      "description": "Infrastructure resiliency properties for a recovery plan.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResiliencyRecoveryPlanPropertiesUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "InfraResiliency"
-    },
     "InfraResiliencyRecoveryJobProperties": {
       "type": "object",
       "description": "Infrastructure resiliency properties for a recovery job.",
@@ -8810,6 +8790,26 @@
       "allOf": [
         {
           "$ref": "#/definitions/ResiliencyRecoveryJobResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
+    },
+    "InfraResiliencyRecoveryPlanProperties": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery plan.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryPlanProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
+    },
+    "InfraResiliencyRecoveryPlanPropertiesUpdate": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery plan.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResiliencyRecoveryPlanPropertiesUpdate"
         }
       ],
       "x-ms-discriminator-value": "InfraResiliency"

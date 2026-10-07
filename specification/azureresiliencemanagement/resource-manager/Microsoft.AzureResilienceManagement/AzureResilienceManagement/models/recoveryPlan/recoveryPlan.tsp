@@ -146,7 +146,7 @@ model ResiliencyRecoveryPlanProperties {
 
 @added(Versions.v2026_11_30_preview)
 @doc("Infrastructure resiliency properties for a recovery plan.")
-model InfraRecoveryPlanResiliencyProperties extends ResiliencyRecoveryPlanProperties {
+model InfraResiliencyRecoveryPlanProperties extends ResiliencyRecoveryPlanProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType.InfraResiliency;
@@ -154,7 +154,7 @@ model InfraRecoveryPlanResiliencyProperties extends ResiliencyRecoveryPlanProper
 
 @added(Versions.v2026_11_30_preview)
 @doc("Cyber resiliency properties for a recovery plan.")
-model CyberRecoveryPlanResiliencyProperties extends ResiliencyRecoveryPlanProperties {
+model CyberResiliencyRecoveryPlanProperties extends ResiliencyRecoveryPlanProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType.CyberResiliency;
