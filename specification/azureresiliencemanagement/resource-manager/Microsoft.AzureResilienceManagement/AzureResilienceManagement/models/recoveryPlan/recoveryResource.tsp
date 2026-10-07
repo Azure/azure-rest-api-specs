@@ -142,7 +142,7 @@ model CyberResiliencyRecoveryResourceProperties extends ResiliencyRecoveryResour
   @added(Versions.v2026_11_30_preview)
   @doc("The workload type of the Azure resource linked to the recovery resource.")
   @visibility(Lifecycle.Read)
-  resourceType?: WorkloadType;
+  workloadType?: WorkloadType;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifiers of the backup vaults protecting the resource.")
@@ -159,7 +159,7 @@ model CyberResiliencyRecoveryResourceProperties extends ResiliencyRecoveryResour
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifiers of the target-tenant mapped backup vaults.")
   @visibility(Lifecycle.Read)
-  ctrVaultResourceIds?: armResourceIdentifier<[
+  mappedVaultResourceIds?: armResourceIdentifier<[
     {
       type: "Microsoft.RecoveryServices/vaults";
     },
