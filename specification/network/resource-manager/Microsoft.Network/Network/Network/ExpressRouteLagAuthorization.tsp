@@ -17,7 +17,7 @@ namespace Microsoft.Network;
  * ExpressRouteLag Authorization resource definition.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "This decorator excludes the local @path name from the JSON payload so the proxy base supplies the optional read-only name instead of requiring it in the PUT body."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "The resource inherits the existing Network ProxyResourceWithReadOnlyID custom envelope to expose read-only id, name and type without declaring systemData that the backend does not return."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "The resource inherits the existing Network ProxyResourceWithReadOnlyID custom envelope to preserve its read-only identity schema and declares systemData locally without changing shared legacy resources."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the separate proxy identity schema when the local @path name is excluded from the payload; spreading the base would replace its payload name with the path-only property."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The feature decorator routes this resource to expressRoute.json under output-splitting: legacy-feature-files."
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
@@ -27,6 +27,10 @@ namespace Microsoft.Network;
 model ExpressRouteLagAuthorization extends ProxyResourceWithReadOnlyID {
   /** ExpressRouteLag authorization properties. */
   properties?: ExpressRouteLagAuthorizationPropertiesFormat;
+
+  /** Metadata pertaining to creation and last modification of the resource. */
+  @visibility(Lifecycle.Read)
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 
   /**
    * The authorization name, unique within the parent ExpressRoute LAG.
