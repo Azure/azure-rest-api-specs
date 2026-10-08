@@ -4,7 +4,7 @@ import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 
 import * as fsPromises from "node:fs/promises";
-import path from "node:path";
+import path from "pathe";
 import * as nativeGlob from "../src/glob.ts";
 import { CompileRule } from "../src/rules/compile.ts";
 import { diagnosticDetails } from "./diagnostics.ts";
