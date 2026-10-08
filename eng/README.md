@@ -430,9 +430,10 @@ repository's default module type. Root `tsconfig.json` checks this config and is
 also covered by the GitHub package build.
 
 [Eng](../.github/workflows/eng.yml) validates the workspace, builds once on Linux,
-and runs the Vitest workspace on Ubuntu and Windows with Node 24.
+and runs the Vitest workspace on Ubuntu and Windows with Node 24. Its dedicated
+GitHub Actions lint job runs actionlint and zizmor without installing workspace dependencies.
 New tools do not need their own workflows. `github-test.yaml` separately verifies
-production-only module imports, workflow YAML, and compiled agentic workflow locks.
+production-only module imports and compiled agentic workflow locks.
 
 ## Publishing TypeSpec libraries
 
