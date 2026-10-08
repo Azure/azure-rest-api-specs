@@ -86,11 +86,14 @@ interface ImageOperations {
 
 @added(ContentSafety.Versions.v2026_09_01_preview)
 interface UnifiedOperations {
+  @removed(ContentSafety.Versions.v2026_10_15_preview)
+  @renamedFrom(ContentSafety.Versions.v2026_10_15_preview, "unifiedModerate")
   @summary("Unified Moderate")
   @doc("A synchronous API that evaluates input, output, a proposed tool call, or a completed tool result against an applicable Agent Control Specification policy and returns the enforced content and policy verdict.")
   @route("/content:unifiedModerate")
+  @sharedRoute
   @post
-  unifiedModerate is Azure.Core.RpcOperation<
+  unifiedModerateLegacy is Azure.Core.RpcOperation<
     {
       @bodyRoot
       @doc("The unified moderation request.")
@@ -101,31 +104,28 @@ interface UnifiedOperations {
     },
     UnifiedModerateResult
   >;
-}
 
-interface BlockOps
-  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
-      NoConditionalRequests &
-      NoClientRequestId> {}
-
-@added(ContentSafety.Versions.v2026_10_15_preview)
-interface AgentOperations {
-  @summary("Evaluate Agent Context")
-  @doc("Synchronously evaluate a canonical Agent Hooks 0.1 context against authorized effective policy. All eight interception points are supported. targetResourceId selects an authorized bound resource; policyId adds a developer policy without bypassing applicable mandatory policies. These selectors and authentication are outside the context. The service returns a complete Verdict but does not execute the action, apply transforms, resolve approvals or compose other interceptors. The host validates the response and fails closed on failures. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful verdicts.")
-  @route("/agent:evaluate")
+  @added(ContentSafety.Versions.v2026_10_15_preview)
+  @summary("Unified Moderate")
+  @doc("Synchronously evaluate a canonical Agent Hooks 0.1 context against authorized effective policy. This version evolves Unified Moderate on its existing route and supports all eight interception points. The service returns a complete Verdict; the host applies transforms, enforces decisions and resolves approvals. policyId selects an authorized policy and targetResourceId selects an authorized binding target; provide at least one. Applicable mandatory policies cannot be bypassed by either selector. Body identity metadata is not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful verdicts.")
+  @route("/content:unifiedModerate")
+  @sharedRoute
   @post
-  evaluate is Azure.Core.RpcOperation<
+  unifiedModerate is Azure.Core.RpcOperation<
     {
       @query
-      @doc("Authorized resource identifier whose effective policy and bindings are resolved. This is a selector, not proof of authority; body agent/tenant/actor identifiers cannot authorize it.")
-      targetResourceId: string;
+      @doc("Authorized binding target whose effective policy is resolved. Required when policyId is absent. A policy-only request retains authenticated account scope; this selector cannot replace authorization or bypass mandatory policy.")
+      targetResourceId?: string;
 
       @query
-      @doc("Optional developer policy identifier evaluated in addition to applicable mandatory policies. Unknown or unauthorized selectors are rejected; the service does not silently allow.")
+      @doc("Optional authorized policy selector. Required when targetResourceId is absent. Policy selection does not bypass applicable mandatory policies.")
       policyId?: string;
 
       @bodyRoot
-      @doc("Canonical Agent Hooks context with native JSON point payloads.")
+      @doc("Canonical Agent Hooks context with native JSON point payloads. AACS-specific classifier role metadata, when needed by a non-Hooks caller, belongs in extensions.aacs.role.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
       body: AgentContext;
     },
     AgentVerdict,
@@ -133,6 +133,11 @@ interface AgentOperations {
     AgentEvaluationError | Azure.Core.Foundations.ErrorResponse
   >;
 }
+
+interface BlockOps
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
 
 interface TextBlocklists {
   @summary("Get Text Blocklist By blocklistName")

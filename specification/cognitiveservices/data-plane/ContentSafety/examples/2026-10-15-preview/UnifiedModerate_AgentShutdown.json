@@ -1,14 +1,14 @@
 {
-  "title": "Input",
-  "operationId": "AgentOperations_Evaluate",
+  "title": "AgentShutdown",
+  "operationId": "UnifiedOperations_UnifiedModerate",
   "parameters": {
     "api-version": "2026-10-15-preview",
     "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account/projects/example-project",
     "body": {
       "spec": "agent-hooks/0.1",
-      "interception_point": "input",
-      "timestamp": "2026-10-08T04:00:01Z",
-      "sequence": 1,
+      "interception_point": "agent_shutdown",
+      "timestamp": "2026-10-08T04:00:07Z",
+      "sequence": 7,
       "agent": {
         "id": "support-agent",
         "framework": "agent-framework"
@@ -16,24 +16,40 @@
       "session": {
         "id": "example-session"
       },
-      "input": {
-        "content": "Send the approved payment.",
-        "role": "user"
+      "summary": {
+        "reason": "completed",
+        "tool_calls": 1,
+        "errors": 0,
+        "duration_seconds": 7
       },
       "target": {
-        "content": "Send the approved payment.",
-        "role": "user"
+        "reason": "completed",
+        "tool_calls": 1,
+        "errors": 0,
+        "duration_seconds": 7
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "decision": "deny",
-        "reason": "mandatory_policy_denied",
-        "message": "This action is not permitted.",
+        "decision": "allow",
+        "reason": "within_policy",
+        "message": "The result may proceed.",
+        "warnings": [
+          {
+            "reason": "sensitive_financial_data",
+            "message": "Keep the result within the authorized workflow."
+          }
+        ],
+        "evidence": {
+          "artefact": "urn:example:policy-evaluation:42",
+          "verification_pointers": {
+            "policy": "urn:example:policy-snapshot:42"
+          }
+        },
         "result_labels": [
-          "harm:Violence"
+          "finance:internal"
         ]
       }
     },

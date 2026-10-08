@@ -43,6 +43,38 @@ union AgentInterceptionPoint {
 @doc("A native JSON object whose member values may be any JSON type, including null.")
 model AgentJsonObject is Record<unknown>;
 
+@added(Versions.v2026_10_15_preview)
+@doc("Classifier subject roles used by existing AACS/AOAI flows. This is not actor identity or an authorization claim.")
+union AacsSubjectRole {
+  string,
+  @doc("User-authored content.")
+  User: "user",
+  @doc("System-authored content.")
+  System: "system",
+  @doc("Assistant-authored content.")
+  Assistant: "assistant",
+  @doc("Tool-authored content.")
+  Tool: "tool",
+  @doc("Function-authored content.")
+  Function: "function",
+}
+
+@added(Versions.v2026_10_15_preview)
+@doc("Minimal AACS-specific request metadata for existing non-Hooks classification paths.")
+model AacsContextExtension {
+  @doc("Optional original classifier subject role for existing AACS prompt/completion/tool paths when the canonical payload cannot represent it. Canonical payload roles take precedence; contradictory claims, unsupported roles, and use at model/startup/shutdown points are rejected. Point-derived roles are defaults only. This does not authorize a caller or change the interception point.")
+  role?: AacsSubjectRole;
+}
+
+@added(Versions.v2026_10_15_preview)
+@doc("Canonical namespaced extensions, including the optional AACS classifier-role bridge.")
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Agent Hooks extension namespaces retain arbitrary native JSON; a string-only map would regress the canonical context."
+model AgentContextExtensions {
+  ...AgentJsonObject;
+  @doc("Optional AACS-specific metadata; do not copy the legacy Unified Moderate body here.")
+  aacs?: AacsContextExtension;
+}
+
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The external Agent Hooks 0.1 input role contract is closed."
 @added(Versions.v2026_10_15_preview)
 @doc("The closed Agent Hooks input-origin set.")
@@ -437,7 +469,7 @@ model AgentContext {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Agent Hooks extension namespaces retain arbitrary native JSON values."
   @doc("Namespaced extension values. Namespace keys match ^[a-z][a-z0-9_]*$. Values are native JSON; caller extensions cannot override trusted service annotations.")
-  extensions?: AgentJsonObject;
+  extensions?: AgentContextExtensions;
 }
 
 @added(Versions.v2026_10_15_preview)

@@ -1,14 +1,14 @@
 {
-  "title": "PreModelCall",
-  "operationId": "AgentOperations_Evaluate",
+  "title": "OmittedTransformValue",
+  "operationId": "UnifiedOperations_UnifiedModerate",
   "parameters": {
     "api-version": "2026-10-15-preview",
     "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account/projects/example-project",
     "body": {
       "spec": "agent-hooks/0.1",
-      "interception_point": "pre_model_call",
-      "timestamp": "2026-10-08T04:00:02Z",
-      "sequence": 2,
+      "interception_point": "pre_tool_call",
+      "timestamp": "2026-10-08T04:00:04Z",
+      "sequence": 4,
       "agent": {
         "id": "support-agent",
         "framework": "agent-framework"
@@ -16,45 +16,37 @@
       "session": {
         "id": "example-session"
       },
-      "model": {
-        "id": "example-model",
-        "vendor": "example"
+      "tool_call": {
+        "id": "call-1",
+        "name": "payments.send",
+        "args": {
+          "amount": 1000,
+          "currency": "USD",
+          "note": "invoice"
+        }
       },
-      "messages": [
-        {
-          "role": "user",
-          "content": "Send the approved payment."
+      "target": {
+        "amount": 1000,
+        "currency": "USD",
+        "note": "invoice"
+      },
+      "extensions": {
+        "gateway": {
+          "source_labels": [
+            "finance:internal"
+          ]
         }
-      ],
-      "target": [
-        {
-          "role": "user",
-          "content": "Send the approved payment."
-        }
-      ]
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "decision": "allow",
-        "reason": "within_policy",
-        "message": "The result may proceed.",
-        "warnings": [
-          {
-            "reason": "sensitive_financial_data",
-            "message": "Keep the result within the authorized workflow."
-          }
-        ],
-        "evidence": {
-          "artefact": "urn:example:policy-evaluation:42",
-          "verification_pointers": {
-            "policy": "urn:example:policy-snapshot:42"
-          }
-        },
-        "result_labels": [
-          "finance:internal"
-        ]
+        "decision": "transform",
+        "reason": "remove_payment_note",
+        "transform": {
+          "path": "$target.note"
+        }
       }
     },
     "400": {

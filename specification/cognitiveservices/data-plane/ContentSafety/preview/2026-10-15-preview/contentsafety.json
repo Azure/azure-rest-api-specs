@@ -61,11 +61,11 @@
   },
   "tags": [],
   "paths": {
-    "/agent:evaluate": {
+    "/content:unifiedModerate": {
       "post": {
-        "operationId": "AgentOperations_Evaluate",
-        "summary": "Evaluate Agent Context",
-        "description": "Synchronously evaluate a canonical Agent Hooks 0.1 context against authorized effective policy. All eight interception points are supported. targetResourceId selects an authorized bound resource; policyId adds a developer policy without bypassing applicable mandatory policies. These selectors and authentication are outside the context. The service returns a complete Verdict but does not execute the action, apply transforms, resolve approvals or compose other interceptors. The host validates the response and fails closed on failures. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful verdicts.",
+        "operationId": "UnifiedOperations_UnifiedModerate",
+        "summary": "Unified Moderate",
+        "description": "Synchronously evaluate a canonical Agent Hooks 0.1 context against authorized effective policy. This version evolves Unified Moderate on its existing route and supports all eight interception points. The service returns a complete Verdict; the host applies transforms, enforces decisions and resolves approvals. policyId selects an authorized policy and targetResourceId selects an authorized binding target; provide at least one. Applicable mandatory policies cannot be bypassed by either selector. Body identity metadata is not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful verdicts.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -73,21 +73,21 @@
           {
             "name": "targetResourceId",
             "in": "query",
-            "description": "Authorized resource identifier whose effective policy and bindings are resolved. This is a selector, not proof of authority; body agent/tenant/actor identifiers cannot authorize it.",
-            "required": true,
+            "description": "Authorized binding target whose effective policy is resolved. Required when policyId is absent. A policy-only request retains authenticated account scope; this selector cannot replace authorization or bypass mandatory policy.",
+            "required": false,
             "type": "string"
           },
           {
             "name": "policyId",
             "in": "query",
-            "description": "Optional developer policy identifier evaluated in addition to applicable mandatory policies. Unknown or unauthorized selectors are rejected; the service does not silently allow.",
+            "description": "Optional authorized policy selector. Required when targetResourceId is absent. Policy selection does not bypass applicable mandatory policies.",
             "required": false,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Canonical Agent Hooks context with native JSON point payloads.",
+            "description": "Canonical Agent Hooks context with native JSON point payloads. AACS-specific classifier role metadata, when needed by a non-Hooks caller, belongs in extensions.aacs.role.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AgentContext"
@@ -194,86 +194,46 @@
         },
         "x-ms-examples": {
           "AgentShutdown": {
-            "$ref": "./examples/AgentEvaluate_AgentShutdown.json"
+            "$ref": "./examples/UnifiedModerate_AgentShutdown.json"
           },
           "AgentStartup": {
-            "$ref": "./examples/AgentEvaluate_AgentStartup.json"
+            "$ref": "./examples/UnifiedModerate_AgentStartup.json"
           },
           "Approval": {
-            "$ref": "./examples/AgentEvaluate_Approval.json"
+            "$ref": "./examples/UnifiedModerate_Approval.json"
+          },
+          "Evaluate a non-Hooks function-authored prompt with preserved AACS classifier role": {
+            "$ref": "./examples/UnifiedModerate_AacsSubjectRole.json"
           },
           "Evaluate a selected developer policy or reject an unresolved selector": {
-            "$ref": "./examples/AgentEvaluate_UnknownPolicy.json"
+            "$ref": "./examples/UnifiedModerate_UnknownPolicy.json"
           },
           "Input": {
-            "$ref": "./examples/AgentEvaluate_Input.json"
+            "$ref": "./examples/UnifiedModerate_Input.json"
+          },
+          "Moderate a canonical Agent Hooks input context": {
+            "$ref": "./examples/UnifiedModerate.json"
           },
           "NullTransform": {
-            "$ref": "./examples/AgentEvaluate_NullTransform.json"
+            "$ref": "./examples/UnifiedModerate_NullTransform.json"
           },
           "OmittedTransformValue": {
-            "$ref": "./examples/AgentEvaluate_OmittedTransformValue.json"
+            "$ref": "./examples/UnifiedModerate_OmittedTransformValue.json"
           },
           "Output": {
-            "$ref": "./examples/AgentEvaluate_Output.json"
+            "$ref": "./examples/UnifiedModerate_Output.json"
           },
           "PostModelCall": {
-            "$ref": "./examples/AgentEvaluate_PostModelCall.json"
+            "$ref": "./examples/UnifiedModerate_PostModelCall.json"
           },
           "PostToolCall": {
-            "$ref": "./examples/AgentEvaluate_PostToolCall.json"
+            "$ref": "./examples/UnifiedModerate_PostToolCall.json"
           },
           "PreModelCall": {
-            "$ref": "./examples/AgentEvaluate_PreModelCall.json"
+            "$ref": "./examples/UnifiedModerate_PreModelCall.json"
           },
           "PreToolCall": {
-            "$ref": "./examples/AgentEvaluate_PreToolCall.json"
-          }
-        }
-      }
-    },
-    "/content:unifiedModerate": {
-      "post": {
-        "operationId": "UnifiedOperations_UnifiedModerate",
-        "summary": "Unified Moderate",
-        "description": "A synchronous API that evaluates input, output, a proposed tool call, or a completed tool result against an applicable Agent Control Specification policy and returns the enforced content and policy verdict.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The unified moderation request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UnifiedModerateOptions"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/UnifiedModerateResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Moderate content using an ACS policy": {
-            "$ref": "./examples/UnifiedModerate.json"
+            "$ref": "./examples/UnifiedModerate_PreToolCall.json"
           }
         }
       }
@@ -1003,195 +963,57 @@
     }
   },
   "definitions": {
-    "AcsApproval": {
+    "AacsContextExtension": {
       "type": "object",
-      "description": "Approval metadata returned by an ACS deny decision. Unified Moderate does not invoke an approval workflow.",
+      "description": "Minimal AACS-specific request metadata for existing non-Hooks classification paths.",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of approval required by the policy."
+        "role": {
+          "$ref": "#/definitions/AacsSubjectRole",
+          "description": "Optional original classifier subject role for existing AACS prompt/completion/tool paths when the canonical payload cannot represent it. Canonical payload roles take precedence; contradictory claims, unsupported roles, and use at model/startup/shutdown points are rejected. Point-derived roles are defaults only. This does not authorize a caller or change the interception point."
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
-    "AcsDecision": {
+    "AacsSubjectRole": {
       "type": "string",
-      "description": "The canonical decision returned by Agent Control Specification policy evaluation.",
+      "description": "Classifier subject roles used by existing AACS/AOAI flows. This is not actor identity or an authorization claim.",
       "enum": [
-        "allow",
-        "deny",
-        "transform"
+        "user",
+        "system",
+        "assistant",
+        "tool",
+        "function"
       ],
       "x-ms-enum": {
-        "name": "AcsDecision",
+        "name": "AacsSubjectRole",
         "modelAsString": true,
         "values": [
           {
-            "name": "Allow",
-            "value": "allow",
-            "description": "Allow the original content."
+            "name": "User",
+            "value": "user",
+            "description": "User-authored content."
           },
           {
-            "name": "Deny",
-            "value": "deny",
-            "description": "Deny the content."
+            "name": "System",
+            "value": "system",
+            "description": "System-authored content."
           },
           {
-            "name": "Transform",
-            "value": "transform",
-            "description": "Apply an allowed canonical transform."
+            "name": "Assistant",
+            "value": "assistant",
+            "description": "Assistant-authored content."
+          },
+          {
+            "name": "Tool",
+            "value": "tool",
+            "description": "Tool-authored content."
+          },
+          {
+            "name": "Function",
+            "value": "function",
+            "description": "Function-authored content."
           }
         ]
       }
-    },
-    "AcsEvidence": {
-      "type": "object",
-      "description": "Evidence or a verification pointer returned by policy evaluation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "An optional evidence identifier."
-        },
-        "type": {
-          "type": "string",
-          "description": "An optional evidence type."
-        },
-        "uri": {
-          "type": "string",
-          "format": "uri",
-          "description": "An optional location containing or describing the evidence."
-        },
-        "description": {
-          "type": "string",
-          "description": "An optional human-readable evidence description."
-        }
-      }
-    },
-    "AcsHarmDetail": {
-      "type": "object",
-      "description": "The detection result for one blocklist evaluated as part of a harm result.",
-      "properties": {
-        "detected": {
-          "type": "boolean",
-          "description": "Whether the blocklist was detected."
-        },
-        "id": {
-          "type": "string",
-          "description": "The identifier of the evaluated blocklist."
-        }
-      },
-      "required": [
-        "detected",
-        "id"
-      ]
-    },
-    "AcsHarmResult": {
-      "type": "object",
-      "description": "The moderation and policy-attribution result for one harm category. The category name is the key in the harmResults map and is not restricted to a predefined set.",
-      "properties": {
-        "blocked": {
-          "type": "boolean",
-          "description": "Whether this harm contributed to the overall ACS verdict blocking the content."
-        },
-        "detected": {
-          "type": "boolean",
-          "description": "Whether this harm was detected, regardless of whether it caused the overall verdict to block."
-        },
-        "severity": {
-          "type": "string",
-          "description": "An optional harm-specific severity value. The value is defined by the moderation model or policy that produced the result."
-        },
-        "details": {
-          "type": "array",
-          "description": "Optional blocklist results. Each item identifies one evaluated blocklist and whether it was detected.",
-          "items": {
-            "$ref": "#/definitions/AcsHarmDetail"
-          }
-        },
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "An optional internet location associated with detected protected material."
-        },
-        "license": {
-          "type": "string",
-          "description": "An optional license description associated with detected protected material."
-        }
-      },
-      "required": [
-        "blocked",
-        "detected"
-      ]
-    },
-    "AcsTransform": {
-      "type": "object",
-      "description": "A canonical ACS transform applied by Unified Moderate.",
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "The transformation target path. For input and output sources, the allowed path is `$target.content`. For tool sources, `$target` replaces the complete value and a path rooted at `$target` replaces an individual member."
-        },
-        "value": {
-          "type": "string",
-          "description": "A string containing the JSON-encoded replacement value applied at the target path."
-        }
-      },
-      "required": [
-        "path",
-        "value"
-      ]
-    },
-    "AcsVerdict": {
-      "type": "object",
-      "description": "The complete Agent Control Specification policy verdict.",
-      "properties": {
-        "decision": {
-          "$ref": "#/definitions/AcsDecision",
-          "description": "The canonical policy decision."
-        },
-        "reason": {
-          "type": "string",
-          "description": "An optional machine-readable reason for the decision."
-        },
-        "message": {
-          "type": "string",
-          "description": "An optional human-readable message for the decision."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Optional non-blocking warnings produced by policy evaluation.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "approval": {
-          "$ref": "#/definitions/AcsApproval",
-          "description": "Optional approval metadata for a deny decision. Unified Moderate does not invoke an approval workflow, so the content remains blocked."
-        },
-        "transform": {
-          "$ref": "#/definitions/AcsTransform",
-          "description": "Canonical transform metadata. Required when the decision is transform."
-        },
-        "evidence": {
-          "type": "array",
-          "description": "Optional policy evidence and verification pointers.",
-          "items": {
-            "$ref": "#/definitions/AcsEvidence"
-          }
-        },
-        "harmResults": {
-          "type": "object",
-          "description": "Optional moderation results keyed by harm category. Category names come from the policy harm configuration and are not restricted to a predefined set. A policy deny that is unrelated to a configured harm can omit this property.",
-          "additionalProperties": {
-            "$ref": "#/definitions/AcsHarmResult"
-          }
-        }
-      },
-      "required": [
-        "decision"
-      ]
     },
     "AddOrUpdateTextBlocklistItemsOptions": {
       "type": "object",
@@ -1425,7 +1247,7 @@
           "description": "Optional caller-reported budget counters."
         },
         "extensions": {
-          "$ref": "#/definitions/AgentJsonObject",
+          "$ref": "#/definitions/AgentContextExtensions",
           "description": "Namespaced extension values. Namespace keys match ^[a-z][a-z0-9_]*$. Values are native JSON; caller extensions cannot override trusted service annotations."
         }
       },
@@ -1439,6 +1261,17 @@
         "session",
         "target"
       ]
+    },
+    "AgentContextExtensions": {
+      "type": "object",
+      "description": "Canonical namespaced extensions, including the optional AACS classifier-role bridge.",
+      "properties": {
+        "aacs": {
+          "$ref": "#/definitions/AacsContextExtension",
+          "description": "Optional AACS-specific metadata; do not copy the legacy Unified Moderate body here."
+        }
+      },
+      "additionalProperties": {}
     },
     "AgentDecision": {
       "type": "string",
@@ -3037,181 +2870,6 @@
       "required": [
         "detected"
       ]
-    },
-    "UnifiedModerateContext": {
-      "type": "object",
-      "description": "Optional agent, session, and request context supplied to policy evaluation.",
-      "properties": {
-        "agentId": {
-          "type": "string",
-          "description": "Caller-provided identifier of the agent associated with the event."
-        },
-        "sessionId": {
-          "type": "string",
-          "description": "Caller-provided identifier of the session associated with the event."
-        },
-        "sequence": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Zero-based event sequence within the session, when available.",
-          "minimum": 0
-        },
-        "correlationId": {
-          "type": "string",
-          "description": "Caller-provided end-to-end correlation identifier."
-        },
-        "userId": {
-          "type": "string",
-          "description": "Caller-provided workload user identifier."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "Caller-provided workload tenant identifier."
-        },
-        "extensions": {
-          "type": "string",
-          "description": "A string containing a JSON-encoded object with validated host-specific context extensions."
-        }
-      }
-    },
-    "UnifiedModerateOptions": {
-      "type": "object",
-      "description": "A request to evaluate and enforce an applicable policy for one workload event. The service uses the first policy it can resolve from policyId and then from the policy binding for targetResourceId, in that order. The request fails if neither selector resolves a policy.",
-      "properties": {
-        "policyId": {
-          "type": "string",
-          "description": "The identifier of a policy available to the Content Safety resource. When provided, the service attempts to resolve this policy before using the policy bound to targetResourceId."
-        },
-        "targetResourceId": {
-          "type": "string",
-          "description": "The Azure resource identifier whose policy binding is resolved if no policy is resolved from policyId. The target resource must already have a policy binding available to the Content Safety resource."
-        },
-        "source": {
-          "$ref": "#/definitions/UnifiedModerateSource",
-          "description": "The workload event source. The source selects the policy intervention point."
-        },
-        "content": {
-          "type": "string",
-          "description": "The content to evaluate. For input and output sources, provide nonempty plain text. For pre_tool_call, provide a string containing a JSON-encoded object with the proposed tool arguments. For post_tool_call, provide a string containing the JSON-encoded tool result."
-        },
-        "toolName": {
-          "type": "string",
-          "description": "The tool name. Required and nonempty for tool-call sources and not allowed for input or output sources.",
-          "minLength": 1
-        },
-        "toolCallId": {
-          "type": "string",
-          "description": "An optional caller-provided tool-call identifier. The service generates one when omitted for a tool-call source."
-        },
-        "toolArguments": {
-          "type": "string",
-          "description": "A string containing a JSON-encoded object with the original arguments for a completed tool call. This property applies only to post_tool_call. The service uses an empty object when omitted."
-        },
-        "toolResultIsError": {
-          "type": "boolean",
-          "description": "Whether the completed tool call returned an error. This property applies only to post_tool_call."
-        },
-        "toolDurationMs": {
-          "type": "number",
-          "format": "double",
-          "description": "The non-negative duration of the completed tool call, in milliseconds. This property applies only to post_tool_call.",
-          "minimum": 0
-        },
-        "context": {
-          "$ref": "#/definitions/UnifiedModerateContext",
-          "description": "Optional agent, session, and request context supplied to policy evaluation."
-        }
-      },
-      "required": [
-        "source",
-        "content"
-      ]
-    },
-    "UnifiedModerateResult": {
-      "type": "object",
-      "description": "The enforced result of unified moderation.",
-      "properties": {
-        "verdict": {
-          "$ref": "#/definitions/UnifiedModerateVerdict",
-          "description": "The caller-facing enforcement outcome."
-        },
-        "reason": {
-          "type": "string",
-          "description": "An optional machine-readable policy reason."
-        },
-        "content": {
-          "type": "string",
-          "description": "The original or transformed content when allowed, using the same source-specific representation as the request content. Structured content is returned as a string containing the JSON-encoded value. This property is omitted when blocked."
-        },
-        "acsVerdict": {
-          "$ref": "#/definitions/AcsVerdict",
-          "description": "The complete Agent Control Specification policy verdict."
-        }
-      },
-      "required": [
-        "verdict",
-        "acsVerdict"
-      ]
-    },
-    "UnifiedModerateSource": {
-      "type": "string",
-      "description": "The workload event source evaluated by Unified Moderate.",
-      "enum": [
-        "input",
-        "output",
-        "pre_tool_call",
-        "post_tool_call"
-      ],
-      "x-ms-enum": {
-        "name": "UnifiedModerateSource",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Input",
-            "value": "input",
-            "description": "Input submitted to a model or agent. The content field must contain nonempty plain text. Tool fields do not apply."
-          },
-          {
-            "name": "Output",
-            "value": "output",
-            "description": "Output produced by a model or agent. The content field must contain nonempty plain text. Tool fields do not apply."
-          },
-          {
-            "name": "PreToolCall",
-            "value": "pre_tool_call",
-            "description": "A proposed tool invocation before it is executed. The content field must be a string containing a JSON-encoded object with the proposed tool arguments. toolName is required; toolCallId is optional; post-call fields do not apply."
-          },
-          {
-            "name": "PostToolCall",
-            "value": "post_tool_call",
-            "description": "A tool result after the invocation completes. The content field must be a string containing the JSON-encoded tool result. toolName is required; toolCallId, toolArguments, toolResultIsError, and toolDurationMs are optional."
-          }
-        ]
-      }
-    },
-    "UnifiedModerateVerdict": {
-      "type": "string",
-      "description": "The caller-facing enforcement result returned by Unified Moderate.",
-      "enum": [
-        "allowed",
-        "blocked"
-      ],
-      "x-ms-enum": {
-        "name": "UnifiedModerateVerdict",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allowed",
-            "value": "allowed",
-            "description": "The content is allowed, including content modified by an allowed policy transform."
-          },
-          {
-            "name": "Blocked",
-            "value": "blocked",
-            "description": "The content is blocked by policy."
-          }
-        ]
-      }
     },
     "UserPromptInjectionAnalysisResult": {
       "type": "object",

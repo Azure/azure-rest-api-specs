@@ -95,8 +95,9 @@ input-file:
 ### Tag: package-2026-10-15-preview
 
 These settings apply only when `--tag=package-2026-10-15-preview` is specified.
-This version adds canonical Agent Hooks evaluation. Unified Moderate remains a
-separate operation with its existing request and response representations.
+This version evolves Unified Moderate on its existing route to canonical Agent
+Hooks requests and Verdict responses. Previously released versions retain their
+existing request and response representations.
 
 ```yaml $(tag) == 'package-2026-10-15-preview'
 input-file:
