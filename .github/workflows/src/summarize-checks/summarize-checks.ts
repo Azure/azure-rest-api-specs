@@ -51,9 +51,9 @@ import {
   typeSpecSuppressionsTsg,
 } from "./tsgs.ts";
 
-import fs from "fs/promises";
-import os from "os";
-import path from "path";
+import fs from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
 
 export type CheckMetadata = {
   precedence: number;
@@ -111,6 +111,7 @@ const FYI_CHECK_NAMES = [
 const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
 const IMPACT_CHECK_NAME = "Summarize PR Impact";
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
+const MAX_IMPACT_ASSESSMENT_BYTES = 16 * 1024 * 1024;
 
 const CHECK_METADATA: CheckMetadata[] = [
   {
@@ -1080,7 +1081,7 @@ function buildViolatedLabelRulesNextStepsText(
 
 // #region artifact downloading
 /**
- * Downloads the job-summary artifact for a given workflow run.
+ * Downloads the raw summary.json artifact, falling back to legacy job-summary ZIPs.
  * @param runId - The workflow run databaseId
  * @returns The parsed job summary data
  */
@@ -1091,14 +1092,25 @@ export async function getImpactAssessment(
   repo: string,
   runId: number,
 ): Promise<import("./labelling.ts").ImpactAssessment> {
-  // List artifacts for provided workflow run
-  const jobSummaryArtifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+  let jobSummaryArtifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
     owner,
     repo,
     run_id: runId,
-    name: "job-summary",
+    name: "summary.json",
     per_page: PER_PAGE_MAX,
   });
+
+  // Remove the legacy lookup and ZIP reader after the one-month migration:
+  // https://github.com/Azure/azure-rest-api-specs/issues/46973.
+  if (jobSummaryArtifacts.length === 0) {
+    jobSummaryArtifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+      owner,
+      repo,
+      run_id: runId,
+      name: "job-summary",
+      per_page: PER_PAGE_MAX,
+    });
+  }
 
   // If multiple artifacts with same name, select latest updated
   const jobSummaryArtifact = jobSummaryArtifacts.sort(
@@ -1107,35 +1119,57 @@ export async function getImpactAssessment(
 
   if (!jobSummaryArtifact) {
     throw new Error(
-      `Unable to find job-summary artifact for run ID: ${runId}. This should never happen, as this section of code should only run with a valid runId.`,
+      `Unable to find summary.json or legacy job-summary artifact for run ID: ${runId}.`,
     );
   }
 
-  // Download the artifact as a zip archive
+  if (
+    jobSummaryArtifact.name === "summary.json" &&
+    jobSummaryArtifact.size_in_bytes > MAX_IMPACT_ASSESSMENT_BYTES
+  ) {
+    throw new Error(`summary.json in artifact ID: ${jobSummaryArtifact.id} exceeds 16 MiB.`);
+  }
+
   const download = await github.rest.actions.downloadArtifact({
     owner,
     repo,
     artifact_id: jobSummaryArtifact.id,
+    // The API uses "zip" for both archived and raw artifacts.
     archive_format: "zip",
+    // Keep the bytes intact regardless of the artifact's Content-Type.
+    request: { parseSuccessResponseBody: false },
   });
 
-  core.info(`Successfully downloaded job-summary artifact ID: ${jobSummaryArtifact.id}`);
+  if (!(download.data instanceof ReadableStream)) {
+    throw new Error(`Missing download stream for artifact ID: ${jobSummaryArtifact.id}.`);
+  }
+  const bytes = new Uint8Array(await new Response(download.data).arrayBuffer());
 
-  // Write zip buffer to temp file and extract JSON
-  const tmpZip = path.join(process.env.RUNNER_TEMP || os.tmpdir(), `job-summary-${runId}.zip`);
-  // Convert ArrayBuffer to Buffer
-  // Convert ArrayBuffer (download.data) to Node Buffer
-  const arrayBuffer = download.data as ArrayBuffer;
-  const zipBuffer = Buffer.from(new Uint8Array(arrayBuffer));
-  await fs.writeFile(tmpZip, zipBuffer);
+  core.info(
+    `Successfully downloaded ${jobSummaryArtifact.name} artifact ID: ${jobSummaryArtifact.id}`,
+  );
 
-  // Extract JSON content from zip archive
-  // Could replace with library like 'fflate' instead of 'exec unzip', but
-  // this would require 'npm i', while 'unzip' is pre-installed.
-  const { stdout: jsonContent } = await execFile("unzip", ["-p", tmpZip]);
+  if (jobSummaryArtifact.name === "summary.json") {
+    if (bytes.byteLength > MAX_IMPACT_ASSESSMENT_BYTES) {
+      throw new Error(`summary.json in artifact ID: ${jobSummaryArtifact.id} exceeds 16 MiB.`);
+    }
+    return ImpactAssessmentSchema.parse(JSON.parse(new TextDecoder().decode(bytes)));
+  }
 
-  await fs.unlink(tmpZip);
+  core.info(`Reading legacy job-summary ZIP artifact for run ID: ${runId}.`);
+  const tmpDir = await fs.mkdtemp(
+    path.join(process.env.RUNNER_TEMP || os.tmpdir(), "job-summary-"),
+  );
+  try {
+    const tmpZip = path.join(tmpDir, "summary.zip");
+    await fs.writeFile(tmpZip, bytes);
+    const { stdout } = await execFile("unzip", ["-p", tmpZip, "summary.json"], {
+      maxBuffer: MAX_IMPACT_ASSESSMENT_BYTES,
+    });
 
-  return ImpactAssessmentSchema.parse(JSON.parse(jsonContent));
+    return ImpactAssessmentSchema.parse(JSON.parse(stdout));
+  } finally {
+    await fs.rm(tmpDir, { recursive: true, force: true });
+  }
 }
 // #endregion

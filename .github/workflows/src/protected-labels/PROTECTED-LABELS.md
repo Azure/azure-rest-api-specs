@@ -30,7 +30,7 @@ some-approval-label:
   - user2
 
 # Plane-aware: different approvers depending on whether the PR
-# is management-plane (has Mgmt/resource-manager label) or data-plane
+# is management-plane (has resource-manager label) or data-plane
 package-name-dotnet-approved:
   management-plane:
     - user1
@@ -50,7 +50,7 @@ typespec-suppressions-approved:
 
 Values are GitHub handles (case-insensitive). Plane detection uses PR labels explicitly:
 
-- `Mgmt` or `resource-manager` → management-plane
+- `resource-manager` → management-plane
 - `data-plane` → data-plane
 - Neither → plane-aware labels are not enforced (no action taken)
 
@@ -58,6 +58,18 @@ A plane may be set to the literal `unprotected` instead of a list, which opts th
 plane out of enforcement (anyone may apply the label). An **omitted** plane stays
 fail-closed and resolves to `global-approvers` only; only the explicit `unprotected`
 keyword opens a plane.
+
+When several labels share one approver pool (for example the per-language SDK
+breaking-change approval labels), define the roster once with a YAML anchor and reuse it
+with aliases so there is a single list to keep in sync:
+
+```yaml
+BreakingChange-Go-Sdk-Approved: &sdk-breaking-change-approvers
+  - user1
+  - user2
+BreakingChange-Go-Sdk-Suppression-Approved: *sdk-breaking-change-approvers
+BreakingChange-Python-Sdk-Approved: *sdk-breaking-change-approvers
+```
 
 ## Security Model
 

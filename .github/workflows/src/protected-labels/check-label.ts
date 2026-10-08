@@ -9,9 +9,9 @@ import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts"
 //   Flat:  LabelName: [user1, user2]
 //   Plane: LabelName: { management-plane: [user1], data-plane: [user2] }
 
-import { details, escapeMarkdown, link } from "@azure-tools/specs-shared/markdown";
 import { extractInputs } from "../context.ts";
 import { evaluateLabelAuthorization, loadProtectedLabelsConfig } from "./authorization.ts";
+import { buildUnauthorizedApplyComment } from "./label-comments.ts";
 
 /**
  * Check if the actor is authorized to apply the label. If not, remove and warn.
@@ -61,18 +61,11 @@ async function enforceLabelAuthorization({
     }
   }
 
-  const authorizedList = authorizedUsers
-    .map((u) => link(escapeMarkdown(u), `https://github.com/${u}`))
-    .join(", ");
   await github.rest.issues.createComment({
     owner,
     repo,
     issue_number: issueNumber,
-    body:
-      `⚠️ @${actor} is not authorized to apply \`${labelName}\`. Label removed.\n\n` +
-      "Please follow the **Next Steps to Merge** comment on this PR and the " +
-      `${link("review and merge process", "https://aka.ms/azsdk/specreview/merge")}.\n\n` +
-      details("See allowed approvers", `Only ${authorizedList} can apply this label.`),
+    body: buildUnauthorizedApplyComment({ actor, labelName, authorizedUsers }),
   });
 
   return false;
@@ -115,7 +108,7 @@ export default async function checkLabel({ github, context, core }: GitHubScript
   }
   if (authorization.status === "unknown-plane") {
     core.info(
-      `"${labelName}" is plane-aware but PR has no plane label (Mgmt/resource-manager/data-plane), skipping`,
+      `"${labelName}" is plane-aware but PR has no plane label (resource-manager/data-plane), skipping`,
     );
     return;
   }

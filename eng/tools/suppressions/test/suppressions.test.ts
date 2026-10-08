@@ -314,7 +314,7 @@ test.each([
   reason: if-foo-and-bar
 - tool: TestTool
   path: "**"
-  if: require("process").version.startsWith("v")
+  if: require("node:process").version.startsWith("v")
   reason: process-version
 `;
 
