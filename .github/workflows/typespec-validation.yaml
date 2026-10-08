@@ -14,15 +14,15 @@ permissions:
   contents: read
 
 jobs:
-  # Cheap (no pnpm install) check for whether this PR needs every spec validated, so validate-all
-  # below can run only when it's actually needed. A false negative here only costs the speedup:
-  # tsv's own authoritative core-file check in the "Validate Impacted Specs" step below still
-  # triggers its serial all-specs fallback safely. A false positive costs CI time, not correctness.
+  # Determines which path the required check below should take. Reuses tsv's own authoritative
+  # --changed discovery (checkout + install cost is paid once here regardless, since checkout
+  # dominates the fixed per-job overhead anyway) instead of reimplementing core-file/project
+  # detection separately, so there's no drift risk between this decision and what tsv itself does.
   scope:
     name: Determine validation scope
     runs-on: ubuntu-24.04
     outputs:
-      checking-all-specs: ${{ steps.detect.outputs.checking-all-specs }}
+      mode: ${{ steps.classify.outputs.mode }}
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -30,42 +30,67 @@ jobs:
           persist-credentials: false
           fetch-depth: 2
 
-      - name: Detect core-file changes
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Detect validation scope
         id: detect
+        # Only main and RPSaaSMaster validate all specs when core files change.
+        run: >-
+          node eng/tools/typespec-validation/cmd/tsv.js --changed --dry-run --github-output
+          ${{ github.base_ref != 'main' && github.base_ref != 'RPSaaSMaster' && '--ignore-core-files' || '' }}
+
+      - name: Classify validation scope
+        id: classify
         shell: bash
         env:
-          # Only main and RPSaaSMaster validate all specs when core files change.
-          BASE_REF: ${{ github.base_ref }}
+          CHECKING_ALL_SPECS: ${{ steps.detect.outputs.checking-all-specs }}
+          CHANGED_PROJECT_COUNT: ${{ steps.detect.outputs.changed-project-count }}
         run: |
-          # Mirrors isCoreFile() in eng/tools/typespec-validation/src/find-projects.ts.
-          # Keep in sync; find-projects.test.ts documents the authoritative behavior.
-          CHECKING_ALL=false
-          if [ "$BASE_REF" = "main" ] || [ "$BASE_REF" = "RPSaaSMaster" ]; then
-            while IFS= read -r file; do
-              [ -z "$file" ] && continue
-              # getChangedFiles() in find-projects.ts excludes these too.
-              case "$file" in
-                *ChangedFiles-Functions*) continue ;;
-              esac
-              case "$file" in
-                .gitattributes | .oxfmtrc.json | .prettierrc.json | pnpm-lock.yaml | pnpm-workspace.yaml | package.json | tsconfig.json | specification/suppressions.yaml)
-                  CHECKING_ALL=true
-                  ;;
-                .github/arm-leases/* | .github/CODEOWNERS) ;;
-                .github/*)
-                  CHECKING_ALL=true
-                  ;;
-                eng/common/*) ;;
-                eng/*)
-                  CHECKING_ALL=true
-                  ;;
-                specification/common-types/*)
-                  CHECKING_ALL=true
-                  ;;
-              esac
-            done <<<"$(git diff --name-only HEAD^ HEAD)"
+          # Keep "3" here in sync with the shard matrices below (validate-all's total-shards and
+          # validate-changed-sharded's matrix). A PR with more than 3 impacted (but not core-file-
+          # triggering) projects is sharded the same way validate-all shards the full project list.
+          if [ "$CHECKING_ALL_SPECS" = "true" ]; then
+            MODE=all
+          elif [ "${CHANGED_PROJECT_COUNT:-0}" -gt 3 ]; then
+            MODE=changed-sharded
+          else
+            MODE=single
           fi
-          echo "checking-all-specs=$CHECKING_ALL" >>"$GITHUB_OUTPUT"
+          echo "mode=$MODE" >>"$GITHUB_OUTPUT"
+
+  # Runs when several (but not core-file-triggering) services changed. Reuses the exact same
+  # --shard mechanism validate-all uses below, applied to the changed-project list instead of
+  # every project in the repo, so a PR touching many services doesn't validate them serially
+  # in a single job.
+  validate-changed-sharded:
+    name: TypeSpec Validation (shard ${{ matrix.shard }}/3)
+    needs: scope
+    if: needs.scope.outputs['mode'] == 'changed-sharded'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # Must match the "3" threshold/total in the scope job's classify step.
+        shard: [1, 2, 3]
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Validate Impacted Specs
+        run: >-
+          node eng/tools/typespec-validation/cmd/tsv.js --changed --shard=${{ matrix.shard }}/3 --git-clean
+          --github-summary
+          ${{ runner.debug == '1' && '--verbose' || '' }}
+          ${{ github.base_ref != 'main' && github.base_ref != 'RPSaaSMaster' && '--ignore-core-files' || '' }}
 
   # Only runs for core-file changes. Mirrors the shard/os matrix TypeSpec Validation - All uses
   # for its own push/schedule triggers, so a core-file PR validates every spec once, sharded for
@@ -73,7 +98,7 @@ jobs:
   validate-all:
     name: TSV (${{ matrix.os }}, ${{ matrix.shard }}/${{ matrix['total-shards'] }})
     needs: scope
-    if: needs.scope.outputs['checking-all-specs'] == 'true'
+    if: needs.scope.outputs['mode'] == 'all'
 
     strategy:
       # Validate all specs, even if one shard fails early.
@@ -109,11 +134,12 @@ jobs:
   # The single required check. Always runs (never skipped), so it always produces a truthful
   # conclusion: a skipped job reports "success" for required-status-check purposes, so this must
   # never be the job that's conditionally skipped. For a normal PR this validates directly, with
-  # errors visible on this same job, exactly like before. For a core-file PR it waits for and
-  # reports validate-all's real result instead of duplicating that work serially.
+  # errors visible on this same job, exactly like before. For a many-services or core-file PR it
+  # waits for and reports the relevant sharded job's real result instead of duplicating that work
+  # serially.
   typespec-validation:
     name: TypeSpec Validation
-    needs: [scope, validate-all]
+    needs: [scope, validate-changed-sharded, validate-all]
     if: always()
     runs-on: ubuntu-24.04
 
@@ -124,29 +150,39 @@ jobs:
           echo "::error::Could not determine TypeSpec Validation scope."
           exit 1
 
-      - name: Report TypeSpec Validation - All result
-        if: needs.scope.outputs['checking-all-specs'] == 'true'
+      - name: Report sharded validation result
+        if: needs.scope.outputs['mode'] != 'single'
+        shell: bash
         env:
+          MODE: ${{ needs.scope.outputs['mode'] }}
+          VALIDATE_CHANGED_SHARDED_RESULT: ${{ needs['validate-changed-sharded'].result }}
           VALIDATE_ALL_RESULT: ${{ needs['validate-all'].result }}
         run: |
-          if [ "$VALIDATE_ALL_RESULT" != "success" ]; then
-            echo "::error::TypeSpec Validation - All failed; see the failing TSV (os, shard) job(s) above for details."
+          if [ "$MODE" = "all" ]; then
+            RESULT="$VALIDATE_ALL_RESULT"
+            LABEL="TSV (os, shard)"
+          else
+            RESULT="$VALIDATE_CHANGED_SHARDED_RESULT"
+            LABEL="TypeSpec Validation (shard N/3)"
+          fi
+          if [ "$RESULT" != "success" ]; then
+            echo "::error::Sharded TypeSpec Validation failed; see the failing $LABEL job(s) above for details."
             exit 1
           fi
-          echo "Core files changed; all specs were validated by the TSV (os, shard) jobs above."
+          echo "Validated via the sharded $LABEL jobs above."
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        if: needs.scope.outputs['checking-all-specs'] != 'true'
+        if: needs.scope.outputs['mode'] == 'single'
         with:
           persist-credentials: false
           fetch-depth: 2
 
       - name: Setup Node and install deps
-        if: needs.scope.outputs['checking-all-specs'] != 'true'
+        if: needs.scope.outputs['mode'] == 'single'
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Validate Impacted Specs
-        if: needs.scope.outputs['checking-all-specs'] != 'true'
+        if: needs.scope.outputs['mode'] == 'single'
         shell: bash
         env:
           DEBUG_FLAG: ${{ runner.debug == '1' && '--verbose' || '' }}

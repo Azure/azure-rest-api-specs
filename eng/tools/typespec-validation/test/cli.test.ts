@@ -43,6 +43,7 @@ beforeEach(async () => {
   vi.stubEnv("NO_COLOR", "1");
   vi.stubEnv("FORCE_COLOR", undefined);
   vi.stubEnv("GITHUB_STEP_SUMMARY", undefined);
+  vi.stubEnv("GITHUB_OUTPUT", undefined);
 });
 
 afterEach(async () => {
@@ -64,11 +65,11 @@ it("shows the same help for --help and -h without a project or Git repository", 
     "--dry-run",
     "--git-clean",
     "--github-summary",
+    "--github-output",
     "default: HEAD^",
     "default: HEAD)",
     "--all and --changed cannot be combined",
     "Options for --changed:",
-    "Options for --all:",
     "Options for --all or --changed:",
     "one-based indices",
     "entire repository",
@@ -96,6 +97,7 @@ it.each([
   ["--git-clean"],
   ["--dry-run"],
   ["--github-summary"],
+  ["--github-output"],
   ["--shard=invalid"],
   ["--base=missing-ref"],
   ["missing-project", "{invalid-json"],
@@ -370,22 +372,35 @@ it("requires a batch mode for --git-clean", async () => {
   });
 });
 
-it("requires --all for --shard", async () => {
+it("requires --all or --changed for --shard", async () => {
   await expect(run("--shard=1/2", "project")).rejects.toMatchObject({
     code: 1,
-    stderr: expect.stringContaining("--shard requires --all") as unknown,
+    stderr: expect.stringContaining("--shard requires --all or --changed") as unknown,
   });
 });
 
-it("requires --all and the GitHub summary environment for --github-summary", async () => {
+it("requires --all or --changed and the GitHub summary environment for --github-summary", async () => {
   await expect(run("--github-summary", "project")).rejects.toMatchObject({
     code: 1,
-    stderr: expect.stringContaining("--github-summary requires --all") as unknown,
+    stderr: expect.stringContaining("--github-summary requires --all or --changed") as unknown,
   });
   await expect(run("--all", "--github-summary")).rejects.toMatchObject({
     code: 1,
     stderr: expect.stringContaining(
       "--github-summary requires the GITHUB_STEP_SUMMARY environment variable",
+    ) as unknown,
+  });
+});
+
+it("requires --changed and the GitHub output environment for --github-output", async () => {
+  await expect(run("--github-output", "project")).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining("--github-output requires --changed") as unknown,
+  });
+  await expect(run("--changed", "--github-output")).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining(
+      "--github-output requires the GITHUB_OUTPUT environment variable",
     ) as unknown,
   });
 });
@@ -591,10 +606,66 @@ it("supports --dry-run with --all", async () => {
   expect(stdout).not.toContain("Running TypeSpecValidation on folder:");
 });
 
+it("shards changed projects, like --all does for the full project list", async () => {
+  await addProject("specification/service/a");
+  await addProject("specification/service/b");
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    "- tool: TypeSpecValidation\n  paths: [specification/**]\n  reason: valid context\n",
+  );
+  await initGit();
+  await commit("Base");
+  await writeFile(join(root, "specification/service/a/tspconfig.yaml"), "# changed");
+  await writeFile(join(root, "specification/service/b/tspconfig.yaml"), "# changed");
+  await commit("Head");
+
+  const { stdout } = await run("--changed", "--shard", "2/2");
+  expect(stdout).toContain("Shard 2/2: 1 of 2 TypeSpec projects");
+  expect(stdout).toContain("Checking 1 TypeSpec folders:\nspecification/service/b");
+  expect(stdout).not.toContain("specification/service/a");
+});
+
+it("writes a GitHub summary for --changed, not just --all", async () => {
+  await addProject("specification/service/a");
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    "- tool: TypeSpecValidation\n  paths: [specification/**]\n  reason: valid context\n",
+  );
+  await initGit();
+  await commit("Base");
+  await writeFile(join(root, "specification/service/a/tspconfig.yaml"), "# changed");
+  await commit("Head");
+  const summaryFile = join(root, "summary.md");
+  vi.stubEnv("GITHUB_STEP_SUMMARY", summaryFile);
+
+  await run("--changed", "--github-summary");
+  expect(await readFile(summaryFile, "utf8")).toContain(
+    "✅ **No projects failed (1 passed, 0 suppressed).**",
+  );
+});
+
+it("writes checking-all-specs and changed-project-count to GITHUB_OUTPUT", async () => {
+  await addProject("specification/service/a");
+  await addProject("specification/service/b");
+  await initGit();
+  await commit("Base");
+  await writeFile(join(root, "specification/service/a/tspconfig.yaml"), "# changed");
+  await writeFile(join(root, "specification/service/b/tspconfig.yaml"), "# changed");
+  await commit("Head");
+  const outputFile = join(root, "github-output.txt");
+  vi.stubEnv("GITHUB_OUTPUT", outputFile);
+
+  await run("--changed", "--github-output", "--dry-run");
+  expect(await readFile(outputFile, "utf8")).toBe(
+    "checking-all-specs=false\nchanged-project-count=2\n",
+  );
+});
+
 it.each([
   { args: ["--all", "--changed"], error: "--all and --changed cannot be combined" },
-  { args: ["--changed", "--shard=1/2"], error: "--shard requires --all" },
-  { args: ["--changed", "--github-summary"], error: "--github-summary requires --all" },
+  { args: ["--shard=1/2"], error: "--shard requires --all or --changed" },
+  { args: ["--github-summary"], error: "--github-summary requires --all or --changed" },
+  { args: ["--all", "--github-output"], error: "--github-output requires --changed" },
   {
     args: ["--all", "--base=HEAD"],
     error: "--base, --head and --ignore-core-files require --changed",

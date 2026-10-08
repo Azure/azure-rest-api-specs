@@ -74,16 +74,21 @@ describe("workflow files", () => {
       // template-injection audit); either way it must be the only source of "--verbose".
       const commandSteps = Object.values(workflow.jobs)
         .flatMap((job) => job.steps)
-        .filter(
-          (step) =>
-            step.run?.includes("node eng/tools/typespec-validation/cmd/tsv.js") ||
-            Object.values(step.env ?? {}).some((value) => value.includes(debugFlag)),
-        );
+        .filter((step) => step.run?.includes("node eng/tools/typespec-validation/cmd/tsv.js"));
       expect(commandSteps.length).toBeGreaterThan(0);
       for (const step of commandSteps) {
         const text = [step.run ?? "", ...Object.values(step.env ?? {})].join("\n");
-        expect(text).toContain(debugFlag);
         expect(text.replace(debugFlag, "")).not.toContain("--verbose");
+      }
+      // Detection-only steps (no --git-clean) don't validate anything, so they don't need
+      // --verbose support; every real validation command does.
+      const validationCommands = commandSteps.filter((step) =>
+        [step.run ?? "", ...Object.values(step.env ?? {})].join("\n").includes("--git-clean"),
+      );
+      expect(validationCommands.length).toBeGreaterThan(0);
+      for (const step of validationCommands) {
+        const text = [step.run ?? "", ...Object.values(step.env ?? {})].join("\n");
+        expect(text).toContain(debugFlag);
       }
     },
   );
