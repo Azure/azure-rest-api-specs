@@ -1,6 +1,6 @@
 {
   "operationId": "Pools_Stop",
-  "title": "Stop and deallocate a HorizonDB pool",
+  "title": "Stop and deallocate a HorizonDB pool without applying pending parameter changes",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "exampleresourcegroup",
@@ -28,8 +28,8 @@
           },
           "parameterGroup": {
             "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/parameterGroups/production-parameters",
-            "applyMethod": "Immediate",
-            "syncStatus": "InSync"
+            "applyMethod": "PendingReboot",
+            "syncStatus": "PendingReboot"
           },
           "provisioningState": "Succeeded"
         }
