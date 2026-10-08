@@ -44955,6 +44955,60 @@ components:
           description: The access boundaries for the activity protocol.
           readOnly: true
       description: Configuration specific to the activity protocol.
+    AgentBlueprintAuthorizationScheme:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - AgentBlueprint
+        isolation_key_source:
+          $ref: '#/components/schemas/AgentBlueprintIsolationKeySource'
+          description: The source used to derive user and chat isolation keys. When omitted, the source defaults to Entra.
+        token_validation_rules:
+          $ref: '#/components/schemas/TokenValidationRules'
+          description: |-
+            The validation applied to inbound bearer tokens addressed to the backing blueprint audience. When
+            omitted, each rule falls back to the backing blueprint's system-determined defaults (audience =
+            blueprint resource URI, tenant = backing blueprint tenant, required scope = `access_agent`).
+      allOf:
+        - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
+      description: Authorizes callers presenting a token for the backing Agent Blueprint audience.
+    AgentBlueprintHeaderIsolationKeySource:
+      type: object
+      required:
+        - kind
+        - allowed_clients
+      properties:
+        kind:
+          type: string
+          enum:
+            - Header
+        allowed_clients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Azure.Core.uuid'
+          minItems: 1
+          maxItems: 10
+          description: The trusted client applications allowed to supply isolation key headers. At least one client application is required.
+      description: |-
+        Derives Agent Blueprint isolation keys from trusted request headers. The caller must use an app-only
+        token, and its application ID must appear in both this source's `allowed_clients` list and
+        `token_validation_rules.allowed_clients`. A caller cannot be authorized through this scheme unless
+        both lists are nonempty and contain the caller's application ID.
+    AgentBlueprintIsolationKeySource:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/EntraIsolationKeySource'
+        - $ref: '#/components/schemas/AgentBlueprintHeaderIsolationKeySource'
+      discriminator:
+        propertyName: kind
+        mapping:
+          Entra: '#/components/schemas/EntraIsolationKeySource'
+          Header: '#/components/schemas/AgentBlueprintHeaderIsolationKeySource'
+      description: The supported isolation key sources for Agent Blueprint authorization.
     AgentBlueprintReference:
       type: object
       required:
@@ -45294,6 +45348,8 @@ components:
         propertyName: type
         mapping:
           Entra: '#/components/schemas/EntraAuthorizationScheme'
+          AzureRbac: '#/components/schemas/AzureRbacAuthorizationScheme'
+          AgentBlueprint: '#/components/schemas/AgentBlueprintAuthorizationScheme'
           BotService: '#/components/schemas/BotServiceAuthorizationScheme'
           BotServiceRbac: '#/components/schemas/BotServiceRbacAuthorizationScheme'
           BotServiceTenant: '#/components/schemas/BotServiceTenantAuthorizationScheme'
@@ -45303,6 +45359,8 @@ components:
         - type: string
           enum:
             - Entra
+            - AzureRbac
+            - AgentBlueprint
             - BotService
             - BotServiceRbac
             - BotServiceTenant
@@ -48774,6 +48832,32 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - RedTeams=V1Preview
+    AzureRbacAuthorizationScheme:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - AzureRbac
+        isolation_key_source:
+          $ref: '#/components/schemas/AzureRbacIsolationKeySource'
+          description: The source used to derive user and chat isolation keys. When omitted, the source defaults to Entra.
+      allOf:
+        - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
+      description: Authorizes Foundry-audience callers through Azure RBAC.
+    AzureRbacIsolationKeySource:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/EntraIsolationKeySource'
+        - $ref: '#/components/schemas/HeaderIsolationKeySource'
+      discriminator:
+        propertyName: kind
+        mapping:
+          Entra: '#/components/schemas/EntraIsolationKeySource'
+          Header: '#/components/schemas/HeaderIsolationKeySource'
+      description: The supported isolation key sources for Azure RBAC authorization. When Header is selected, authorization to supply isolation key headers remains governed by the Azure RBAC data action.
     AzureUserSecurityContext:
       type: object
       properties:
@@ -51174,6 +51258,16 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Entra ID credential definition
+    EntraIsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - Entra
+      description: Derives isolation keys from the authenticated Entra identity.
     Eval:
       type: object
       required:
@@ -54103,6 +54197,16 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V2Preview
+    HeaderIsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - Header
+      description: Derives isolation keys from trusted request headers.
     HeaderTelemetryEndpointAuth:
       type: object
       required:
@@ -89256,6 +89360,44 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V2Preview
+    TokenValidationRules:
+      type: object
+      properties:
+        allowed_audiences:
+          type: array
+          items:
+            type: string
+          maxItems: 10
+          description: The accepted token audiences (the `aud` claim). Omitted defaults to the backing blueprint resource URI (conventionally `api://{agentBlueprintId}`). Empty blocks all requests.
+        allowed_tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Azure.Core.uuid'
+          maxItems: 10
+          description: The accepted token tenants (the `tid` claim). Omitted defaults to the backing blueprint tenant. Empty blocks all requests.
+        allowed_clients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Azure.Core.uuid'
+          maxItems: 10
+          description: The accepted client applications, validated against the `azp` or `appid` claim. For delegated tokens, omission imposes no client-application restriction. App-only tokens require a nonempty list containing the caller's application ID; otherwise authorization is denied. An empty list blocks all requests.
+        allowed_principals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Azure.Core.uuid'
+          maxItems: 10
+          description: The accepted principals (the `oid` claim). Omission imposes no restriction. Empty blocks all requests.
+        required_scopes:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          maxItems: 10
+          description: The permission names (validated against the `scp` claim for delegated tokens) that must all be present. Omitted defaults to `["access_agent"]`. An empty list is invalid.
+      description: |-
+        Validation applied to an inbound bearer token addressed to the backing blueprint audience. Each list
+        accepts at most 10 values. An omitted list applies the documented default for that rule; an
+        empty list (except `required_scopes`) blocks all requests.
     ToolCallOutputContent:
       anyOf:
         - type: object

@@ -800,6 +800,97 @@ model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
 }
 
+@doc("Authorizes Foundry-audience callers through Azure RBAC.")
+model AzureRbacAuthorizationScheme extends AgentEndpointAuthorizationScheme {
+  type: AgentEndpointAuthorizationSchemeType.AzureRbac;
+
+  @doc("The source used to derive user and chat isolation keys. When omitted, the source defaults to Entra.")
+  isolation_key_source?: AzureRbacIsolationKeySource;
+}
+
+@doc("Authorizes callers presenting a token for the backing Agent Blueprint audience.")
+model AgentBlueprintAuthorizationScheme
+  extends AgentEndpointAuthorizationScheme {
+  type: AgentEndpointAuthorizationSchemeType.AgentBlueprint;
+
+  @doc("The source used to derive user and chat isolation keys. When omitted, the source defaults to Entra.")
+  isolation_key_source?: AgentBlueprintIsolationKeySource;
+
+  @doc("""
+    The validation applied to inbound bearer tokens addressed to the backing blueprint audience. When
+    omitted, each rule falls back to the backing blueprint's system-determined defaults (audience =
+    blueprint resource URI, tenant = backing blueprint tenant, required scope = `access_agent`).
+    """)
+  token_validation_rules?: TokenValidationRules;
+}
+
+@doc("Derives isolation keys from the authenticated Entra identity.")
+model EntraIsolationKeySource {
+  kind: "Entra";
+}
+
+@doc("Derives isolation keys from trusted request headers.")
+model HeaderIsolationKeySource {
+  kind: "Header";
+}
+
+@doc("""
+  Derives Agent Blueprint isolation keys from trusted request headers. The caller must use an app-only
+  token, and its application ID must appear in both this source's `allowed_clients` list and
+  `token_validation_rules.allowed_clients`. A caller cannot be authorized through this scheme unless
+  both lists are nonempty and contain the caller's application ID.
+  """)
+model AgentBlueprintHeaderIsolationKeySource {
+  ...HeaderIsolationKeySource;
+
+  @doc("The trusted client applications allowed to supply isolation key headers. At least one client application is required.")
+  @minItems(1)
+  @maxItems(10)
+  allowed_clients: Azure.Core.uuid[];
+}
+
+@doc("The supported isolation key sources for Azure RBAC authorization. When Header is selected, authorization to supply isolation key headers remains governed by the Azure RBAC data action.")
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
+union AzureRbacIsolationKeySource {
+  Entra: EntraIsolationKeySource,
+  Header: HeaderIsolationKeySource,
+}
+
+@doc("The supported isolation key sources for Agent Blueprint authorization.")
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
+union AgentBlueprintIsolationKeySource {
+  Entra: EntraIsolationKeySource,
+  Header: AgentBlueprintHeaderIsolationKeySource,
+}
+
+@doc("""
+  Validation applied to an inbound bearer token addressed to the backing blueprint audience. Each list
+  accepts at most 10 values. An omitted list applies the documented default for that rule; an
+  empty list (except `required_scopes`) blocks all requests.
+  """)
+model TokenValidationRules {
+  @doc("The accepted token audiences (the `aud` claim). Omitted defaults to the backing blueprint resource URI (conventionally `api://{agentBlueprintId}`). Empty blocks all requests.")
+  @maxItems(10)
+  allowed_audiences?: string[];
+
+  @doc("The accepted token tenants (the `tid` claim). Omitted defaults to the backing blueprint tenant. Empty blocks all requests.")
+  @maxItems(10)
+  allowed_tenants?: Azure.Core.uuid[];
+
+  @doc("The accepted client applications, validated against the `azp` or `appid` claim. For delegated tokens, omission imposes no client-application restriction. App-only tokens require a nonempty list containing the caller's application ID; otherwise authorization is denied. An empty list blocks all requests.")
+  @maxItems(10)
+  allowed_clients?: Azure.Core.uuid[];
+
+  @doc("The accepted principals (the `oid` claim). Omission imposes no restriction. Empty blocks all requests.")
+  @maxItems(10)
+  allowed_principals?: Azure.Core.uuid[];
+
+  @doc("The permission names (validated against the `scp` claim for delegated tokens) that must all be present. Omitted defaults to `[\"access_agent\"]`. An empty list is invalid.")
+  @minItems(1)
+  @maxItems(10)
+  required_scopes?: string[];
+}
+
 model BotServiceAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.BotService;
 }
@@ -817,6 +908,8 @@ model BotServiceTenantAuthorizationScheme
 union AgentEndpointAuthorizationSchemeType {
   string,
   Entra: "Entra",
+  AzureRbac: "AzureRbac",
+  AgentBlueprint: "AgentBlueprint",
   BotService: "BotService",
   BotServiceRbac: "BotServiceRbac",
   BotServiceTenant: "BotServiceTenant",
