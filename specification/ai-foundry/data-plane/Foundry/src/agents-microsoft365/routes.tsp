@@ -35,7 +35,7 @@ interface Microsoft365Publishing {
 
   /** Unpublishes a Foundry agent from Microsoft 365 / Microsoft Teams. */
   @summary("Unpublish an agent from Microsoft 365")
-  @delete
+  @post
   @route("/agents/{agent_name}/microsoft365/unpublish")
   unpublishAgentFromMicrosoft365 is FoundryDataPlaneOperation<
     {
