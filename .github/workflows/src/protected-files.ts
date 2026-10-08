@@ -1,7 +1,7 @@
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
 import { execFile } from "../../shared/src/exec.ts";
 import { inlineCode } from "../../shared/src/markdown.ts";
-import { createCodeOwnerReviewGuidance } from "./codeowner-review.ts";
+import { createCodeOwnerReviewGuidance, getProtectedFiles } from "./codeowner-review.ts";
 import { CoreLogger } from "./core-logger.ts";
 import type { GitHubScriptArgs, WebhookEvent } from "./github.ts";
 
@@ -29,6 +29,7 @@ export async function runProtectedFiles(args: Pick<GitHubScriptArgs, "context" |
     throw error;
   }
   await core.summary.addRaw(`## ${result.title}\n\n${result.summary}`).write();
+  return result;
 }
 
 export async function checkProtectedFiles({
@@ -38,6 +39,7 @@ export async function checkProtectedFiles({
   conclusion: "success";
   title: string;
   summary: string;
+  protectedFiles: string[];
 }> {
   if (context.eventName !== "pull_request") {
     throw new Error(`Unsupported event for Protected Files: '${context.eventName}'`);
@@ -52,6 +54,16 @@ export async function checkProtectedFiles({
     gitOptions: ["--no-renames"],
     logger,
   });
+  const protectedFiles = getProtectedFiles(changedFiles);
+  if (protectedFiles.length === 0) {
+    core.info("No changes to protected files.");
+    return {
+      conclusion: "success",
+      title: "No changes to protected files",
+      summary: "This PR does not change protected files.",
+      protectedFiles,
+    };
+  }
   const { stdout: codeOwners } = await execFile("git", ["show", "HEAD^:.github/CODEOWNERS"], {
     logger,
   });
@@ -65,5 +77,5 @@ export async function checkProtectedFiles({
   core.info(
     "Code-owner review guidance generated; GitHub's required reviews remain the approval gate.",
   );
-  return { conclusion: "success", title: "Code-owner review guidance", summary };
+  return { conclusion: "success", title: "Changes to protected files", summary, protectedFiles };
 }

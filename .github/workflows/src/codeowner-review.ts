@@ -1,10 +1,44 @@
 import ignore from "ignore";
+import { minimatch } from "minimatch";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { details, inlineCode, link, table } from "../../shared/src/markdown.ts";
 import type { Core, GitHub } from "./github.ts";
 
 // Leave room for the existing Next Steps to Merge content within GitHub's comment limit.
 const MAX_TABLE_LENGTH = 48_000;
+const PROTECTED_PATHS = [
+  ".gitignore",
+  "cspell.json",
+  "cspell.yaml",
+  "package.json",
+  "pnpm-lock.yaml",
+  "pnpm-workspace.yaml",
+  ".github/**",
+  ".vscode/**",
+  "eng/**",
+];
+const EXCLUDED_PATHS = [".github/CODEOWNERS", ".github/skills/*", ".github/skills/*/**"];
+const SYNCED_PATHS = [
+  ".github/skills/azsdk-common-*",
+  ".github/skills/azsdk-common-*/**",
+  "eng/common",
+  "eng/common/**",
+];
+
+function matchesAny(file: string, patterns: string[]): boolean {
+  // Preserve the protected-path policy's case-insensitive matching, not CODEOWNERS semantics.
+  return patterns.some((pattern) =>
+    minimatch(file, pattern, { dot: true, nocase: true, platform: "linux" }),
+  );
+}
+
+export function getProtectedFiles(changedFiles: string[]): string[] {
+  return changedFiles.filter(
+    (file) =>
+      matchesAny(file, SYNCED_PATHS) ||
+      (matchesAny(file, PROTECTED_PATHS) && !matchesAny(file, EXCLUDED_PATHS)),
+  );
+}
 
 interface OwnershipRule {
   pattern: string;
@@ -44,31 +78,13 @@ function parseCodeOwners(contents: string, core: Core): OwnershipRule[] {
 }
 
 function guidanceFor(file: string): string {
-  if (
-    file === "eng/common" ||
-    file.startsWith("eng/common/") ||
-    /^\.github\/skills\/azsdk-common-[^/]+(?:\/|$)/.test(file)
-  ) {
+  if (matchesAny(file, SYNCED_PATHS)) {
     return (
       "Synchronized from [Azure/azure-sdk-tools](https://github.com/Azure/azure-sdk-tools). " +
       "Make source changes there; edits to these copies can be overwritten."
     );
   }
-  if (file.startsWith("specification/")) {
-    return "Follow the normal API specification review process.";
-  }
-  if (
-    file.startsWith("eng/") ||
-    file.startsWith(".github/") ||
-    file.startsWith(".vscode/") ||
-    !file.includes("/")
-  ) {
-    return (
-      "Shared engineering tooling or repository configuration: explain why the change is needed. " +
-      "Service reviewers alone may not own these files. Prefer a separate tooling PR when unrelated to the API change."
-    );
-  }
-  return "Follow the normal review process for this area.";
+  return "Repository-managed file; changes need review from repository maintainers or the applicable tooling owners.";
 }
 
 function ownerLink(owner: string): string {
@@ -82,7 +98,6 @@ function ownerLink(owner: string): string {
 
 function areaFor(file: string): string {
   const [root, directory, tool] = file.split("/");
-  if (root === "specification" && directory) return `specification/${directory}/`;
   if (root === "eng" && directory === "tools" && tool) return `eng/tools/${tool}/`;
   return file.includes("/") ? `${root}/` : "Repository root";
 }
@@ -93,7 +108,11 @@ export function createCodeOwnerReviewGuidance(
   sourceUrl: string,
   core: Core,
 ): string {
-  if (changedFiles.length === 0) return "No changed files to route for review.";
+  const protectedFiles = getProtectedFiles(changedFiles);
+  if (protectedFiles.length === 0) return "This PR does not change protected files.";
+  const changesSpecifications = changedFiles.some((file) =>
+    matchesAny(file, ["specification", "specification/**"]),
+  );
   const rules = parseCodeOwners(contents, core).reverse();
   const groups: {
     area: string;
@@ -101,7 +120,7 @@ export function createCodeOwnerReviewGuidance(
     guidance: string;
     files: string[];
   }[] = [];
-  for (const file of new Set(changedFiles)) {
+  for (const file of new Set(protectedFiles)) {
     const area = areaFor(file);
     const rule = rules.find((candidate) => candidate.matches.ignores(file));
     const guidance = guidanceFor(file);
@@ -124,7 +143,12 @@ export function createCodeOwnerReviewGuidance(
     guidance,
   ]);
   const visibleRows = [
-    ["Area (CODEOWNERS rule)", "Listed code owners", "Changed files", "Guidance"],
+    [
+      "Protected area (CODEOWNERS rule)",
+      "Listed code owners",
+      "Protected files changed",
+      "Guidance",
+    ],
   ];
   let report = table(visibleRows);
   let omitted = 0;
@@ -139,15 +163,22 @@ export function createCodeOwnerReviewGuidance(
     report = next;
   }
   return [
-    "> [!IMPORTANT]",
-    "> Code-owned areas need approval from their applicable code owners. " +
-      "GitHub enforces required reviews; a successful Protected Files check does not mean approval has been granted.",
+    "> [!WARNING]",
+    changesSpecifications
+      ? "> These repository-managed files are outside the scope of a specification contribution. " +
+        "Remove unrelated changes from your specification PR. If a tooling change is needed, " +
+        "open an issue for the repository maintainers or propose a separate maintenance PR."
+      : "> This PR changes repository-managed tooling or configuration. " +
+        "These changes need review from repository maintainers or the applicable tooling owners.",
+    "",
+    "For intentional repository maintenance, normal CODEOWNERS review and other merge requirements still apply. " +
+      "GitHub enforces approval; a successful Protected Files check does not mean approval has been granted.",
     "",
     "Ownership below comes from the PR's base-branch " +
       link("CODEOWNERS", sourceUrl) +
       ". The last matching rule wins. Areas without an assigned owner still need normal PR review.",
     "",
-    details("Areas touched and code-owner review guidance", report),
+    details("Protected files changed and their code owners", report),
     ...(omitted
       ? [
           "",
@@ -182,6 +213,13 @@ export async function getCodeOwnerReviewGuidance(
       "Cannot generate code-owner guidance: GitHub returned an incomplete changed-file list",
     );
   }
+  const changedFiles = files.flatMap((file) =>
+    file.previous_filename ? [file.previous_filename, file.filename] : [file.filename],
+  );
+  if (getProtectedFiles(changedFiles).length === 0) {
+    core.info("No changes to protected files; leaving specification ownership to GitHub.");
+    return undefined;
+  }
   const { data } = await github.rest.repos.getContent({
     owner,
     repo,
@@ -193,9 +231,7 @@ export async function getCodeOwnerReviewGuidance(
   }
   return createCodeOwnerReviewGuidance(
     Buffer.from(data.content, "base64").toString("utf8"),
-    files.flatMap((file) =>
-      file.previous_filename ? [file.previous_filename, file.filename] : [file.filename],
-    ),
+    changedFiles,
     `https://github.com/${owner}/${repo}/blob/${pr.base.sha}/.github/CODEOWNERS`,
     core,
   );

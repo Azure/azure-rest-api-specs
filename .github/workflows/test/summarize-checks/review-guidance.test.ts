@@ -15,7 +15,7 @@ describe("Next Steps to Merge review guidance", () => {
     core.summary.addHeading = vi.fn().mockReturnValue(core.summary);
     core.summary.addCodeBlock = vi.fn().mockReturnValue(core.summary);
     vi.mocked(getCodeOwnerReviewGuidance).mockResolvedValue(
-      "> [!IMPORTANT]\n> Code-owned areas need approval.\n\nEngineering area: `eng/`.",
+      "> [!WARNING]\n> Repository-managed files need review.\n\nEngineering area: `eng/`.",
     );
     await summarizeChecksImpl(
       github,
@@ -34,7 +34,7 @@ describe("Next Steps to Merge review guidance", () => {
       "Azure",
       "azure-rest-api-specs",
       1,
-      expect.stringContaining("## Code-owner review\n\n> [!IMPORTANT]"),
+      expect.stringContaining("## Protected files\n\n> [!WARNING]"),
       "NextStepsToMerge",
     );
     expect(core.summary.addRaw).toHaveBeenCalledWith(
@@ -42,6 +42,35 @@ describe("Next Steps to Merge review guidance", () => {
     );
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
       expect.objectContaining({ state: "pending", sha: "head-sha" }),
+    );
+  });
+
+  it("does not add an ownership section for specification-only PRs", async () => {
+    const github = createMockGithub();
+    const core = createMockCore();
+    core.summary.addLink = vi.fn().mockReturnValue(core.summary);
+    core.summary.addHeading = vi.fn().mockReturnValue(core.summary);
+    core.summary.addCodeBlock = vi.fn().mockReturnValue(core.summary);
+    vi.mocked(getCodeOwnerReviewGuidance).mockResolvedValue(undefined);
+    await summarizeChecksImpl(
+      github,
+      core,
+      "Azure",
+      "azure-rest-api-specs",
+      1,
+      "head-sha",
+      "workflow_run",
+      "main",
+      "https://github.com/Azure/azure-rest-api-specs/actions/runs/1",
+    );
+    expect(commentOrUpdate).toHaveBeenLastCalledWith(
+      github,
+      core,
+      "Azure",
+      "azure-rest-api-specs",
+      1,
+      expect.not.stringContaining("## Protected files"),
+      "NextStepsToMerge",
     );
   });
 });

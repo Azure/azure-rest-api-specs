@@ -431,7 +431,7 @@ export async function summarizeChecksImpl(
     head_sha,
   );
   const commentBody = reviewGuidance
-    ? `${nextSteps}\n\n## Code-owner review\n\n${reviewGuidance}`
+    ? `${nextSteps}\n\n## Protected files\n\n${reviewGuidance}`
     : nextSteps;
 
   automatedChecksMet.target_url = target_url;

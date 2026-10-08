@@ -35,20 +35,18 @@ jobs:
         with:
           script: |
             const { runProtectedFiles } = await import("${{ github.workspace }}/.github/workflows/src/protected-files.ts");
+            const result = await runProtectedFiles({ context, core });
             // Temporary unauthorized-author preview for this draft PR; remove before merge.
-            const unauthorizedPreview = context.payload.pull_request.number === 47098;
-            if (unauthorizedPreview) {
+            if (context.payload.pull_request.number === 47098 && result.protectedFiles.length > 0) {
               await core.summary.addRaw(
-                "## Unauthorized-author preview\n\n" +
+                "\n\n## Unauthorized-author preview\n\n" +
                 "> [!WARNING]\n" +
-                "> For this preview, the PR author is treated as not authorized to change repository-managed files. " +
-                "Approval from the applicable code owners is required for the areas listed below.\n\n" +
+                "> For this preview, the PR author is treated as not authorized to change the protected files listed above. " +
+                "These repository-managed files are outside the scope of a specification contribution. " +
+                "Remove these changes from your specification PR, or discuss an intentional maintenance change with the repository maintainers.\n\n" +
                 "This is a simulated result, not a real permission lookup.\n\n"
               ).write();
-            }
-            await runProtectedFiles({ context, core });
-            if (unauthorizedPreview) {
               core.setFailed(
-                "Preview only: PR author is not authorized to change repository-managed files; code-owner approval is required."
+                "Preview only: remove changes to protected files from your specification PR. If a tooling change is needed, contact the repository maintainers."
               );
             }

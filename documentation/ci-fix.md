@@ -69,21 +69,29 @@ This check is owned by One Engineering System. See [1ES PoliCheck] for help.
 
 ## `Protected Files`
 
-This check explains code-owner review for the areas touched by your PR. The
-**Next Steps to Merge** comment and the check's job summary group changed files
-by area and the last matching rule in the PR's base-branch CODEOWNERS, including
-deletions and both sides of renames. Each area shows up to five example files; unusually
-large reports explicitly note any areas omitted to fit GitHub's comment limit.
+This check only covers repository-managed tooling and configuration: `.gitignore`,
+`cspell.json`, `cspell.yaml`, `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`,
+and files under `.github/`, `.vscode/`, and `eng/`. `.github/CODEOWNERS` and
+non-synchronized `.github/skills/` files remain excluded.
+
+Specification-only PRs pass without an ownership report. GitHub's normal
+code-owner review requirements handle specification ownership; this check does
+not evaluate it.
+
+The **Next Steps to Merge** comment and the job summary list only protected files,
+including deletions and both sides of renames. They group those files by area and
+the last matching rule in the PR's base-branch CODEOWNERS. Each area shows up to
+five example files; unusually large reports explicitly note omitted areas.
 
 A successful check means the guidance was generated, **not that the PR has been
 approved**. GitHub's required code-owner reviews and other merge requirements
 still apply. Areas without an assigned code owner still need normal PR review.
 
-Changes to shared engineering tooling, workflows, or repository configuration
-need justification and review from their applicable owners; service reviewers
-alone may not own these files. Prefer a separate tooling PR when the change is
-unrelated to your API contribution. Mixed specification/tooling PRs are no longer
-automatically rejected by this check.
+Repository-managed files are outside the scope of a specification contribution.
+Remove unrelated changes from your specification PR. If a tooling change is
+needed, open an issue for the repository maintainers or propose a separate
+maintenance PR. Intentional maintenance changes still need the applicable owners'
+approval; the check's guidance does not itself grant or enforce that approval.
 
 Files under `eng/common/` and `.github/skills/azsdk-common-*` are synchronized from
 [Azure/azure-sdk-tools](https://github.com/Azure/azure-sdk-tools). Make changes in

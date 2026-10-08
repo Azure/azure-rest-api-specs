@@ -7,8 +7,10 @@ For context on this directory, see [Design guidelines for spec repos validation 
 ## Protected files
 
 The **Protected Files** check is informational review guidance, not a second
-approval gate. It groups changed files by area and their effective base-branch
-CODEOWNERS rule and explains engineering and synchronized-file changes.
+approval gate. It retains the protected-path scope and exclusions, grouping only
+protected files by area and their effective base-branch CODEOWNERS rule.
+Specification-only PRs pass without an ownership report; their code-owner
+approval requirements are handled by GitHub.
 Contributor guidance is in the [CI Fix Guide](../documentation/ci-fix.md#protected-files).
 
 Both maintenance-only and mixed specification/tooling PRs pass once the guidance
@@ -20,8 +22,9 @@ The read-only `pull_request` check evaluates the PR merge commit against its
 base-branch parent, so policy changes are exercised on the PR that introduces
 them. CODEOWNERS reviews still gate changes to the workflow itself. Guidance is
 generated for all authors, including automation accounts. The trusted
-Summarize Checks workflow independently computes the same guidance from GitHub
-PR data and base-branch CODEOWNERS for the Next Steps to Merge comment; it does
+Summarize Checks workflow independently computes the same protected-file guidance
+from GitHub PR data and base-branch CODEOWNERS for the Next Steps to Merge comment;
+it omits that section when no protected files changed and does
 not publish artifacts or Markdown supplied by PR code. Evaluation errors fail
 rather than report a successful review.
 

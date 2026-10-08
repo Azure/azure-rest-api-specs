@@ -44,7 +44,8 @@ describe("Protected Files review guidance", () => {
       expect(result.conclusion).toBe("success");
       expect(result.summary).toContain("package.json");
       expect(result.summary).toContain("@tool-owner");
-      expect(result.summary).toContain("specification/widgets/main.tsp");
+      expect(result.summary).not.toContain("specification/widgets/main.tsp");
+      expect(result.protectedFiles).toEqual(["package.json", "eng/tools/example/src/index.ts"]);
       expect(result.summary).toContain("does not mean approval has been granted");
       expect(core.setFailed).not.toHaveBeenCalled();
       expect(core.error).not.toHaveBeenCalled();
@@ -53,7 +54,7 @@ describe("Protected Files review guidance", () => {
 
   it("reads ownership from the merge commit's base parent, not the PR's CODEOWNERS", async () => {
     const { run } = setup();
-    vi.mocked(getChangedFiles).mockResolvedValue([".github/CODEOWNERS"]);
+    vi.mocked(getChangedFiles).mockResolvedValue([".github/workflows/check.yaml"]);
     const result = await run();
     expect(execFile).toHaveBeenCalledWith(
       "git",
@@ -67,11 +68,34 @@ describe("Protected Files review guidance", () => {
   it("reports an empty diff without claiming approval", async () => {
     const { run } = setup();
     const result = await run();
-    expect(result.summary).toBe("No changed files to route for review.");
+    expect(result.summary).toBe("This PR does not change protected files.");
+    expect(result.protectedFiles).toEqual([]);
+    expect(execFile).not.toHaveBeenCalled();
+  });
+
+  it.each(
+    [
+      ["specification/widgets/main.tsp"],
+      ["specification/widgets/main.tsp", "specification/suppressions.yaml"],
+      [".github/CODEOWNERS", ".github/skills/custom/SKILL.md", "documentation/ci-fix.md"],
+    ].map((files) => ({ files })),
+  )("passes without evaluating ownership for unprotected changes $files", async ({ files }) => {
+    const { context, core } = setup();
+    vi.mocked(getChangedFiles).mockResolvedValue(files);
+    const result = await runProtectedFiles({ context, core });
+    expect(result.conclusion).toBe("success");
+    expect(result.title).toBe("No changes to protected files");
+    expect(result.protectedFiles).toEqual([]);
+    expect(execFile).not.toHaveBeenCalled();
+    expect(core.setFailed).not.toHaveBeenCalled();
+    expect(core.summary.addRaw).toHaveBeenCalledWith(
+      "## No changes to protected files\n\nThis PR does not change protected files.",
+    );
   });
 
   it.each(["diff", "CODEOWNERS"])("propagates %s errors instead of passing", async (source) => {
     const { core, run } = setup();
+    vi.mocked(getChangedFiles).mockResolvedValue(["package.json"]);
     const error = new Error(`Unable to read ${source}`);
     if (source === "diff") vi.mocked(getChangedFiles).mockRejectedValueOnce(error);
     else vi.mocked(execFile).mockRejectedValueOnce(error);
@@ -84,7 +108,7 @@ describe("Protected Files review guidance", () => {
     vi.mocked(getChangedFiles).mockResolvedValue(["eng/tools/example/index.ts"]);
     await runProtectedFiles({ context, core });
     expect(core.summary.addRaw).toHaveBeenCalledWith(
-      expect.stringContaining("## Code-owner review guidance"),
+      expect.stringContaining("## Changes to protected files"),
     );
     expect(core.summary.addRaw).toHaveBeenCalledWith(expect.stringContaining("@tool-owner"));
     expect(core.summary.write).toHaveBeenCalledOnce();
@@ -95,6 +119,7 @@ describe("Protected Files review guidance", () => {
     "publishes actionable failure guidance without treating %s errors as missing approval",
     async (source) => {
       const { context, core } = setup();
+      vi.mocked(getChangedFiles).mockResolvedValue(["package.json"]);
       const error = new Error(`Unable to read ${source}`);
       if (source === "diff") vi.mocked(getChangedFiles).mockRejectedValueOnce(error);
       else vi.mocked(execFile).mockRejectedValueOnce(error);
@@ -113,7 +138,7 @@ describe("Protected Files review guidance", () => {
       );
       expect(core.summary.write).toHaveBeenCalledOnce();
       expect(core.summary.addRaw).not.toHaveBeenCalledWith(
-        expect.stringContaining("## Code-owner review guidance\n"),
+        expect.stringContaining("## Changes to protected files\n"),
       );
     },
   );
@@ -204,8 +229,10 @@ describe("Protected Files review guidance", () => {
       const { context, core, run } = setup();
       context.payload = { pull_request: { number: 1, base: { sha: base } } };
       const result = await run();
-      expect(result.summary).toContain(from);
-      if (to) expect(result.summary).toContain(to);
+      for (const file of [from, to].filter((file) => file !== undefined)) {
+        if (file.startsWith("eng/")) expect(result.summary).toContain(file);
+        else expect(result.summary).not.toContain(file);
+      }
       expect(result.summary).toContain("@base-owner");
       expect(result.summary).not.toContain("@pr-owner");
       expect(result.summary).not.toContain("specification/unrelated/main.tsp");

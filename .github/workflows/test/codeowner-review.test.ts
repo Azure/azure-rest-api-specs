@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import {
   createCodeOwnerReviewGuidance,
   getCodeOwnerReviewGuidance,
+  getProtectedFiles,
 } from "../src/codeowner-review.ts";
 import { createMockCore, createMockGithub } from "./mocks.ts";
 
@@ -16,7 +17,53 @@ const CODEOWNERS = [
   "/.github/CODEOWNERS @ownership-admin",
 ].join("\n");
 
-describe("Code-owner review report", () => {
+describe("Protected file scope", () => {
+  it.each([
+    ".gitignore",
+    "cspell.json",
+    "cspell.yaml",
+    "package.json",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml",
+    ".github/workflows/check.yaml",
+    ".github/.hidden.yaml",
+    ".github/CODEOWNERS.backup",
+    ".github/skills",
+    ".vscode/settings.json",
+    "eng/tools/example/index.ts",
+    "eng/.hidden/config.yaml",
+    "eng/common",
+    "eng/common/script.ps1",
+    ".github/skills/azsdk-common-example",
+    ".github/skills/azsdk-common-example/SKILL.md",
+    ".github/skills/azsdk-common-example/.hidden/config.yaml",
+    "PACKAGE.JSON",
+    ".GITHUB/WORKFLOWS/check.yaml",
+    ".GITHUB/SKILLS/AZSDK-COMMON-EXAMPLE/skill.md",
+  ])("retains the original protected path %s", (file) => {
+    expect(getProtectedFiles([file])).toEqual([file]);
+  });
+
+  it.each([
+    "specification/widgets/main.tsp",
+    "specification/widgets/package.json",
+    "specification/suppressions.yaml",
+    "README.md",
+    "documentation/ci-fix.md",
+    "tsconfig.json",
+    ".github/CODEOWNERS",
+    ".github/skills/custom",
+    ".github/skills/custom/SKILL.md",
+    ".github/skills/custom/azsdk-common-example/SKILL.md",
+    ".github/skills/custom/.hidden/config.yaml",
+    ".GITHUB/codeowners",
+    ".GITHUB/SKILLS/CUSTOM/SKILL.md",
+  ])("does not expand protected scope to %s", (file) => {
+    expect(getProtectedFiles([file])).toEqual([]);
+  });
+});
+
+describe("Protected-file code-owner report", () => {
   const core = createMockCore();
   const render = (files: string[], contents = CODEOWNERS) =>
     createCodeOwnerReviewGuidance(contents, files, SOURCE_URL, core);
@@ -41,20 +88,32 @@ describe("Code-owner review report", () => {
       "[`@Azure/maintainers`](https://github.com/orgs/Azure/teams/maintainers)",
     );
     expect(summary).toContain("`eng/tools/ordinary/index.ts`<br />`eng/tools/ordinary/test.ts`");
-    expect(summary).toContain("Service reviewers alone may not own these files");
-    expect(summary).toContain("Follow the normal API specification review process");
+    expect(summary).toContain("repository maintainers or the applicable tooling owners");
+    expect(summary).toContain("outside the scope of a specification contribution");
+    expect(summary).toContain("Remove unrelated changes from your specification PR");
+    expect(summary).not.toContain("specification/widgets/main.tsp");
+    expect(summary).not.toContain("@service-owner");
     expect(summary).not.toContain("# override");
   });
 
   it("does not invent required code-owner approval for explicit unowned areas", () => {
-    const summary = render(["specification/unlisted/main.tsp"]);
-    expect(summary).toContain("[`/specification/`](" + SOURCE_URL + "#L2)");
+    const summary = render(["eng/common/unowned.yaml"], CODEOWNERS + "\n/eng/common/unowned.yaml");
+    expect(summary).toContain("[`/eng/common/unowned.yaml`](" + SOURCE_URL + "#L8)");
     expect(summary).toContain("No code owner assigned");
     expect(summary).not.toContain("@maintainers");
     expect(summary).toContain("still need normal PR review");
   });
 
-  it("separates services and tools even when they share the default ownership rule", () => {
+  it("leaves specification-only ownership to GitHub", () => {
+    expect(render(["specification/widgets/main.tsp"])).toBe(
+      "This PR does not change protected files.",
+    );
+    expect(render(["specification/unlisted/main.tsp"], "* @default")).toBe(
+      "This PR does not change protected files.",
+    );
+  });
+
+  it("separates protected tools even when they share the default ownership rule", () => {
     const summary = render(
       [
         "package.json",
@@ -66,26 +125,24 @@ describe("Code-owner review report", () => {
       ],
       "* @maintainers",
     );
-    for (const area of [
-      "Repository root",
-      ".github/",
-      "eng/tools/first/",
-      "eng/tools/second/",
-      "specification/first/",
-      "specification/second/",
-    ]) {
+    for (const area of ["Repository root", ".github/", "eng/tools/first/", "eng/tools/second/"]) {
       expect(summary).toContain(`\`${area}\`<br />[\`*\`]`);
     }
+    expect(summary).not.toContain("specification/first/");
+    expect(summary).not.toContain("specification/second/");
   });
   it("identifies files with no matching rule", () => {
-    const summary = render(["documentation/contributing.md"], "/eng/ @eng-owner");
+    const summary = render([".vscode/settings.json"], "/eng/ @eng-owner");
     expect(summary).toContain("No matching CODEOWNERS entry");
     expect(summary).toContain("No code owner assigned");
   });
 
   it("uses case-sensitive ownership and includes dotfiles", () => {
-    const summary = render([".github/CODEOWNERS", ".github/.hidden.yaml", "ENG/tool.ts"]);
-    expect(summary).toContain("@ownership-admin");
+    const summary = render(
+      [".github/config.yaml", ".github/.hidden.yaml", "ENG/tool.ts"],
+      CODEOWNERS + "\n/.github/config.yaml @github-owner",
+    );
+    expect(summary).toContain("@github-owner");
     expect(summary).toContain("`.github/.hidden.yaml`");
     expect(summary).not.toContain("@eng-owner");
   });
@@ -96,7 +153,8 @@ describe("Code-owner review report", () => {
       "eng/common/script.ps1",
       ".github/skills/azsdk-common-example/SKILL.md",
     ]);
-    expect(summary).toContain("@service-owner");
+    expect(summary).not.toContain("@service-owner");
+    expect(summary).not.toContain("specification/widgets/main.tsp");
     expect(summary).toContain("@Azure/sync-approvers");
     expect(summary.match(/Make source changes there/g)).toHaveLength(2);
     expect(summary).toContain("can be overwritten");
@@ -111,19 +169,17 @@ describe("Code-owner review report", () => {
     expect(summary).not.toContain("Synchronized from");
   });
 
-  it("routes CODEOWNERS and non-synchronized skills instead of excluding them", () => {
+  it("preserves the CODEOWNERS and non-synchronized skill exclusions", () => {
     const summary = render([".github/CODEOWNERS", ".github/skills/custom/SKILL.md"]);
-    expect(summary).toContain("@ownership-admin");
-    expect(summary).toContain("@maintainers");
-    expect(summary).toContain("`.github/skills/custom/SKILL.md`");
+    expect(summary).toBe("This PR does not change protected files.");
   });
 
   it("keeps gitignore semantics rather than expanding minimatch braces", () => {
     const summary = render(
-      ["nested/config.json", "config.ts", "config.{json,ts}"],
-      "* @default\nconfig.{json,ts} @literal-owner\n**/config.json @json-owner",
+      ["eng/nested/config.json", "eng/config.ts", "eng/config.{json,ts}"],
+      "* @default\neng/config.{json,ts} @literal-owner\n**/config.json @json-owner",
     );
-    expect(summary).toContain("`config.ts`");
+    expect(summary).toContain("`eng/config.ts`");
     expect(summary).toContain("`@literal-owner`");
     expect(summary).toContain("`@json-owner`");
   });
@@ -212,6 +268,7 @@ describe("Trusted PR summary review guidance", () => {
     expect(summary).toContain("eng/tools/special/new.ts");
     expect(summary).toContain("@Azure/sync-approvers");
     expect(summary).toContain("@special-owner");
+    expect(summary).not.toContain("specification/widgets/main.tsp");
     expect(github.rest.repos.getContent).toHaveBeenCalledExactlyOnceWith({
       owner: "Azure",
       repo: "azure-rest-api-specs",
@@ -220,6 +277,50 @@ describe("Trusted PR summary review guidance", () => {
     });
     expect(github.rest.pulls.get).toHaveBeenCalledOnce();
     expect(github.rest.pulls.listFiles).toHaveBeenCalledOnce();
+  });
+
+  it("omits guidance and CODEOWNERS reads when only specifications changed", async () => {
+    const { github, core, run } = setup();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        changed_files: 1,
+        head: { sha: "head-sha" },
+        base: { sha: "base-sha" },
+      },
+    });
+    github.rest.pulls.listFiles.mockResolvedValue({
+      data: [{ filename: "specification/widgets/main.tsp" }],
+    });
+    expect(await run()).toBeUndefined();
+    expect(github.rest.repos.getContent).not.toHaveBeenCalled();
+    expect(core.info).toHaveBeenCalledWith(
+      "No changes to protected files; leaving specification ownership to GitHub.",
+    );
+  });
+
+  it("reports a protected rename source without reporting its specification destination", async () => {
+    const { github, run } = setup();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        changed_files: 1,
+        head: { sha: "head-sha" },
+        base: { sha: "base-sha" },
+      },
+    });
+    github.rest.pulls.listFiles.mockResolvedValue({
+      data: [
+        {
+          filename: "specification/widgets/new.tsp",
+          previous_filename: "eng/tools/special/old.tsp",
+        },
+      ],
+    });
+    const summary = await run();
+    expect(summary).toContain("eng/tools/special/old.tsp");
+    expect(summary).toContain("@special-owner");
+    expect(summary).not.toContain("specification/widgets/new.tsp");
   });
 
   it.each([
