@@ -14,7 +14,9 @@ namespace Microsoft.Compute;
 
 // =====================================================================
 // Recurring Bulk Actions (RBA) — exposed through the `scheduledActions` resource
-// family, folded into the BulkActions project. API identifiers remain unchanged.
+// family, folded into the BulkActions project. Resource types, REST paths, and
+// request/response schemas are unchanged. Operation-ID prefixes change starting
+// in 2026-09-06-preview; direct TypeSpec SDK group names are preserved in client.tsp.
 //
 // NAMING NOTE: RBA collision-renames take the `ScheduledActions*` prefix to avoid
 // colliding with BulkActions' bare shared types (e.g. `ProvisioningState`,
