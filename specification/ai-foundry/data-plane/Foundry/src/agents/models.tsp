@@ -559,14 +559,23 @@ model SessionConfiguration {
   idle_timeout_seconds?: duration = duration.fromISO("PT900S");
 }
 
-@doc("Standby (warm) pool configuration for a hosted agent endpoint. Keeps pre-provisioned sessions ready to be claimed, reducing cold-start latency for invocations.")
+@doc("""
+  Standby (warm) pool configuration for a hosted agent endpoint. The service works toward
+  the same soft, eventual target for every serving agent version, including canary versions.
+  """)
 @removed(Versions.v1)
 model StandbyPool {
-  @doc("The number of pre-provisioned standby sessions to keep ready for this agent endpoint. Must be between 0 and 50 (inclusive). 0 disables the standby pool.")
+  @doc("""
+    The target number of standby sessions for each serving agent version. Must be an integer
+    between 0 and 50 (inclusive). On CREATE, an omitted or null size has an effective target
+    of 0, supplied by the server. On PATCH, an omitted or null size preserves the existing
+    target. Explicit 0 stops refill without preventing new claims of remaining eligible
+    sessions or their normal expiry. Reducing the target allows the pool to shrink naturally.
+    """)
   @minValue(0)
   @maxValue(50)
   @example(3)
-  size?: int32 = 0;
+  size?: int32 | null;
 }
 
 @doc("Code-based deployment configuration for a hosted agent.")
@@ -956,9 +965,15 @@ model AgentEndpointConfig {
   @visibility(Lifecycle.Read)
   publish_approval_status?: PublishApprovalStatus;
 
-  @doc("Optional standby (warm) pool configuration for the agent endpoint. When set with a positive size, the service keeps pre-provisioned sessions ready to be claimed, independent of which agent version this endpoint currently serves.")
+  @doc("""
+    Optional standby (warm) pool configuration for the agent endpoint. On CREATE, an omitted
+    or null pool, an empty pool, or an omitted or null size has an effective target of 0,
+    supplied by the server. On PATCH, these inputs preserve the existing target; only an
+    explicit integer size changes it. These null-as-no-change semantics apply only to the
+    standby pool configuration, not to other endpoint fields.
+    """)
   @removed(Versions.v1)
-  standby_pool?: StandbyPool;
+  standby_pool?: StandbyPool | null;
 }
 
 @doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for an agent.")

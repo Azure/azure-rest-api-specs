@@ -35633,8 +35633,15 @@
             "readOnly": true
           },
           "standby_pool": {
-            "$ref": "#/components/schemas/StandbyPool",
-            "description": "Optional standby (warm) pool configuration for the agent endpoint. When set with a positive size, the service keeps pre-provisioned sessions ready to be claimed, independent of which agent version this endpoint currently serves."
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StandbyPool"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional standby (warm) pool configuration for the agent endpoint. On CREATE, an omitted\nor null pool, an empty pool, or an omitted or null size has an effective target of 0,\nsupplied by the server. On PATCH, these inputs preserve the existing target; only an\nexplicit integer size changes it. These null-as-no-change semantics apply only to the\nstandby pool configuration, not to other endpoint fields."
           }
         }
       },
@@ -35664,8 +35671,15 @@
             "description": "The authorization schemes supported by the agent endpoint"
           },
           "standby_pool": {
-            "$ref": "#/components/schemas/StandbyPool",
-            "description": "Optional standby (warm) pool configuration for the agent endpoint. When set with a positive size, the service keeps pre-provisioned sessions ready to be claimed, independent of which agent version this endpoint currently serves."
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StandbyPool"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional standby (warm) pool configuration for the agent endpoint. On CREATE, an omitted\nor null pool, an empty pool, or an omitted or null size has an effective target of 0,\nsupplied by the server. On PATCH, these inputs preserve the existing target; only an\nexplicit integer size changes it. These null-as-no-change semantics apply only to the\nstandby pool configuration, not to other endpoint fields."
           }
         }
       },
@@ -92782,18 +92796,24 @@
         "type": "object",
         "properties": {
           "size": {
-            "type": "integer",
-            "format": "int32",
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "minimum": 0,
             "maximum": 50,
-            "description": "The number of pre-provisioned standby sessions to keep ready for this agent endpoint. Must be between 0 and 50 (inclusive). 0 disables the standby pool.",
+            "description": "The target number of standby sessions for each serving agent version. Must be an integer\nbetween 0 and 50 (inclusive). On CREATE, an omitted or null size has an effective target\nof 0, supplied by the server. On PATCH, an omitted or null size preserves the existing\ntarget. Explicit 0 stops refill without preventing new claims of remaining eligible\nsessions or their normal expiry. Reducing the target allows the pool to shrink naturally.",
             "examples": [
               3
-            ],
-            "default": 0
+            ]
           }
         },
-        "description": "Standby (warm) pool configuration for a hosted agent endpoint. Keeps pre-provisioned sessions ready to be claimed, reducing cold-start latency for invocations."
+        "description": "Standby (warm) pool configuration for a hosted agent endpoint. The service works toward\nthe same soft, eventual target for every serving agent version, including canary versions."
       },
       "SteeringPromptOptimizationContext": {
         "type": "object",
