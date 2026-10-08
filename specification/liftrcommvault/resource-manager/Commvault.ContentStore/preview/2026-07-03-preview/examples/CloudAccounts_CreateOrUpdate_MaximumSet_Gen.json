@@ -28,16 +28,53 @@
           "upn": "frlpmyk",
           "phoneNumber": "mpunfyfckyzpqxotsmclzk"
         },
-        "backupAdminOnCcaCreate": {
-          "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-          "displayName": "Tenant Admins",
-          "entityType": "Group"
-        },
-        "multiPersonAuthorizationOnCcaCreate": {
-          "id": "11111111-2222-3333-4444-555555555555",
-          "displayName": "John Smith",
-          "entityType": "User"
-        }
+        "roleAssignmentsOnCcaCreate": [
+          {
+            "roleName": "BackupAdmin",
+            "entities": [
+              {
+                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "displayName": "Tenant Admins",
+                "entityType": "Group"
+              }
+            ]
+          },
+          {
+            "roleName": "BackupUser",
+            "entities": [
+              {
+                "id": "22222222-3333-4444-5555-666666666666",
+                "displayName": "Backup Users SG",
+                "entityType": "Group"
+              },
+              {
+                "id": "33333333-4444-5555-6666-777777777777",
+                "displayName": "Jane Doe",
+                "entityType": "User"
+              }
+            ]
+          },
+          {
+            "roleName": "BackupOperator",
+            "entities": [
+              {
+                "id": "44444444-5555-6666-7777-888888888888",
+                "displayName": "Ops Team",
+                "entityType": "Group"
+              }
+            ]
+          },
+          {
+            "roleName": "MultiPersonAuthorization",
+            "entities": [
+              {
+                "id": "11111111-2222-3333-4444-555555555555",
+                "displayName": "MPA Approvers",
+                "entityType": "Group"
+              }
+            ]
+          }
+        ]
       },
       "identity": {
         "type": "None",
