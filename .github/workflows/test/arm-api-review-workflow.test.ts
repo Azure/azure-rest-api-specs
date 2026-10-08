@@ -348,17 +348,6 @@ describe("ARM API review workflow", () => {
     expect(compiled).toContain('GH_AW_SUB_AGENT_EXT: ".agent.md"');
   });
 
-  it("creates incomplete-review tracking issues only in the canonical repository", async () => {
-    const [source, compiled] = await readWorkflowFiles();
-
-    expect(source).toContain(
-      "create-issue: ${{ github.repository == 'Azure/azure-rest-api-specs' }}",
-    );
-    expect(compiled).toContain(
-      "GH_AW_REPORT_INCOMPLETE_CREATE_ISSUE: ${{ github.repository == 'Azure/azure-rest-api-specs' }}",
-    );
-  });
-
   it("reconciles duplicates and contradictions across every review entry point", async () => {
     const [
       [source, compiled],
@@ -656,6 +645,10 @@ describe("ARM API review posting reliability", () => {
     // failure reporting that runs after it.
     expect(conclusionJob.slice(finalizerStep, finalizerStep + 700)).toContain(
       "continue-on-error: true",
+    );
+    // The record job already published when it succeeded, so the finalizer's reads are skipped.
+    expect(conclusionJob.slice(finalizerStep, finalizerStep + 200)).toContain(
+      "if: needs.record_arm_semantic_review.result != 'success'",
     );
     expect(conclusionJob.indexOf("name: Process no-op messages")).toBeGreaterThan(finalizerStep);
   });

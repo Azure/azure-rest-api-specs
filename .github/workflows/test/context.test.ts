@@ -234,7 +234,7 @@ describe("extractInputs", () => {
         action: "completed",
         workflow_run: {
           event: "pull_request_target",
-          head_sha: "base-branch-sha",
+          head_sha: "payload-sha",
           id: 456,
           repository: {
             name: "TestRepoName",
@@ -262,7 +262,7 @@ describe("extractInputs", () => {
     });
   });
 
-  it("does not substitute the base SHA when ARM review correlation is missing", async () => {
+  it("workflow_run:completed:pull_request_target keeps the payload SHA when artifacts are missing", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [] },
@@ -272,10 +272,8 @@ describe("extractInputs", () => {
       payload: {
         action: "completed",
         workflow_run: {
-          name: "ARM API Review #123 (pull_request_target)",
-          path: ".github/workflows/arm-api-review.lock.yml",
           event: "pull_request_target",
-          head_sha: "base-branch-sha",
+          head_sha: "payload-sha",
           id: 456,
           repository: {
             name: "TestRepoName",
@@ -291,7 +289,7 @@ describe("extractInputs", () => {
     await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
-      head_sha: "",
+      head_sha: "payload-sha",
       issue_number: 123,
       run_id: 456,
     });
@@ -332,7 +330,7 @@ describe("extractInputs", () => {
     });
   });
 
-  it("does not substitute the current head when ARM API review artifacts are missing", async () => {
+  it("workflow_run:completed:workflow_dispatch does not fall back to the payload SHA when artifacts are missing", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [] },
@@ -342,8 +340,6 @@ describe("extractInputs", () => {
       payload: {
         action: "completed",
         workflow_run: {
-          name: "ARM API Review: Automated Workflow",
-          display_title: "ARM API Review #123 (workflow_dispatch)",
           event: "workflow_dispatch",
           head_sha: "default-branch-sha",
           id: 456,

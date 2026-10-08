@@ -142,6 +142,7 @@ jobs:
   # resolves a Pending status that this exact run still owns. That keeps a failed,
   # cancelled, or noop run from leaving the PR waiting forever. The step reads no
   # agent output; it takes the head SHA from the trusted `head-sha` artifact.
+  # It is skipped when the record job succeeded, since that job already published.
   # Pre-steps run before the built-in conclusion steps, so `continue-on-error`
   # keeps a failure here from blocking gh-aw's own failure reporting.
   conclusion:
@@ -150,11 +151,13 @@ jobs:
       statuses: write
     pre-steps:
       - uses: actions/checkout@v7
+        if: needs.record_arm_semantic_review.result != 'success'
         continue-on-error: true
         with:
           sparse-checkout: |
             .github
       - name: Resolve unpublished ARM semantic review status
+        if: needs.record_arm_semantic_review.result != 'success'
         continue-on-error: true
         uses: actions/github-script@v9.0.0
         with:
@@ -254,12 +257,6 @@ imports:
   - ../skills/azure-api-review/references/lro-final-state-via.md
   - ../skills/azure-api-review/references/typespec-openapi-extensions.md
 safe-outputs:
-  # Incomplete reviews are already surfaced through the ARM Semantic Review
-  # commit status and workflow summary. Keep the canonical repository's tracking
-  # issue, but do not attempt that secondary write in forks, where Issues are
-  # commonly disabled.
-  report-incomplete:
-    create-issue: ${{ github.repository == 'Azure/azure-rest-api-specs' }}
   # Framework-owned status comments do not consume this budget. Reserve slots
   # for the review summary / "no issues found", overflow themes, an actionable
   # diagnostic, and one run-failure notification.

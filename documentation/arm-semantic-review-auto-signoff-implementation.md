@@ -63,7 +63,7 @@ Responsibilities:
 Responsibilities:
 
 - parse exactly one structured semantic item;
-- validate run attempt, PR number, SHA, Blocking count, scope, and completion;
+- validate the Blocking count, scope, completion, and incomplete reason;
 - map the evidence to Passed, Changes requested, or Review incomplete;
 - interpret GitHub commit-status states;
 - select the newest semantic status for a SHA.
@@ -79,9 +79,9 @@ Responsibilities:
 - run as the reviewer's trusted `record_arm_semantic_review` safe-output job;
 - read that run's `agent_output.json` and trusted PR/SHA correlation artifacts;
 - validate the semantic item once;
-- independently enforce automated-review coverage limits;
+- independently enforce automated-review size limits;
 - publish `ARM Semantic Review` on the reviewed SHA;
-- avoid overwriting a newer review or rerun.
+- resolve a Pending status that was never published (from the `conclusion` job).
 
 Only the reviewer `pre_activation`, `record_arm_semantic_review`, and `conclusion` jobs have
 `statuses: write`. The agent itself still has read-only GitHub tools.
@@ -167,16 +167,24 @@ run that produced the item.
 
 It:
 
-1. lists that run's artifact names once;
-2. reads trusted `head-sha` and `issue-number` artifacts;
-3. reads the run attempt from the workflow environment;
-4. finds exactly one semantic item in the safe-output payload;
-5. validates the attempt, PR, SHA, Blocking count, scope, completion, and
-   incomplete reason;
-6. confirms that the PR is open and still points to the reviewed SHA;
-7. independently verifies review coverage against the trusted changed-file
-   list;
-8. publishes a status on the reviewed SHA.
+1. reads the trusted `head-sha` and `issue-number` artifacts from that run;
+2. finds exactly one semantic item in the safe-output payload;
+3. validates the Blocking count, scope, completion, and incomplete reason, and
+   rejects a complete review that carries an incomplete reason;
+4. independently checks the PR's size against the automated-review limits;
+5. publishes a status on the reviewed SHA.
+
+The size check mirrors the reviewer prompt's cap of 50 `specification/` files and 5,000
+`specification/` changed lines. It is two-tier:
+
+- **Fast path:** if the PR's total `changed_files`, `additions`, and `deletions` are within the
+  cap, its `specification/` subset necessarily is too, and no file list is requested.
+- **Slow path:** only when the totals exceed the cap, the changed files are listed and only the
+  `specification/` files and lines are counted. A list that is truncated (3,000 entries, or
+  fewer entries than `changed_files`) cannot prove coverage and requires manual review.
+
+A PR reporting zero files requires manual review without listing files, because GitHub reports
+zero counters when a diff is too large to compute.
 
 Outcome mapping:
 
@@ -185,7 +193,7 @@ Outcome mapping:
 | Full, complete review with `blocking_count = 0`                                                | `success`: Passed            |
 | Full, complete review with `blocking_count > 0`                                                | `failure`: Changes requested |
 | Incomplete review, regardless of `blocking_count`                                             | `error`: Review incomplete   |
-| Scoped review, or coverage limits exceeded by the trusted file list                           | `error`: Manual review required |
+| Scoped review, or a PR whose `specification/` changes exceed the automated-review limits     | `error`: Manual review required |
 | Malformed output, duplicate item, or a failure while validating or publishing                 | `error`: Review incomplete   |
 | Agent failure, omitted semantic item, noop, or canceled reviewer run                          | `error`: Review incomplete, published by the `conclusion` job |
 | Missing trusted PR/SHA artifacts                                                              | Leave status unchanged       |
@@ -195,6 +203,9 @@ prefix (`Manual review required: ` or `Review incomplete: `). Only Manual review
 property of the PR itself, so only it adds the sticky `ARMManualSignoffRequired` label.
 Review incomplete is a transient failure that a re-run can fix.
 
+A failure while validating or publishing is reported with a fixed description,
+`Review incomplete: result could not be validated`. The details go to the run log, because raw error text can include runner paths and must not appear in a public status.
+
 ### Resolving a Pending status that was never published
 
 `pre_activation` posts Pending before the agent starts, but `record_arm_semantic_review` only
@@ -203,8 +214,9 @@ runs after every other job regardless of their results. Its pre-step reads the t
 `head-sha` artifact and, only when this exact run and attempt still owns the newest
 `ARM Semantic Review` status and it is Pending, publishes
 `Review incomplete: reviewer did not publish a result`. A newer run or attempt, or a result the
-record job already published, is never overwritten. The step has `continue-on-error: true`
-because pre-steps run before gh-aw's own failure reporting.
+record job already published, is never overwritten. The step is skipped when the record job
+succeeded, since that job already published, and has `continue-on-error: true` because pre-steps
+run before gh-aw's own failure reporting.
 
 The status is head-bound:
 
@@ -217,11 +229,8 @@ Target URL:  exact reviewer run and attempt
 
 ## Stale-result protection
 
-The safe-output publisher runs only while the PR is open and its current head
-matches the reviewed SHA. A completion for a closed PR or stale head leaves the
-existing status unchanged.
-
-Universal independently reads statuses only for the current head SHA:
+The status is bound to the reviewed SHA, so a result for a commit that is no longer the PR head
+is harmless. Universal reads only the current head SHA's statuses:
 
 ```text
 Reviewer publishes Passed on SHA A
@@ -231,8 +240,9 @@ No Semantic Passed exists on B
 Universal does not sign off
 ```
 
-A newer run for the same PR cancels an in-flight one (`cancel-in-progress`), and the publisher
-checks for a newer run only immediately before it writes.
+A newer run for the same PR cancels an in-flight one (`cancel-in-progress`). Two runs on the
+same SHA review the same code, so if an older run still publishes late, the result is stale
+but valid for that SHA.
 
 ## Universal decision
 

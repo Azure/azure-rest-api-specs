@@ -113,6 +113,31 @@ describe("getLabelActionImpl", () => {
     expect(result.labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest]).toBe(LabelAction.None);
   });
 
+  it.each([
+    { name: "ARMReview is missing", labelNames: [] as string[] },
+    { name: "NotReadyForARMReview is present", labelNames: ["ARMReview", "NotReadyForARMReview"] },
+  ])("does not read statuses and removes the pilot label when $name", async ({ labelNames }) => {
+    const github = createMockGithub({
+      labelNames: [...labelNames, ArmAutoSignoffLabel.ArmAutoSignedOffTest],
+    });
+
+    const result = await run(github);
+    expect(result.labelActions).toEqual({
+      [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.Remove,
+      [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
+    });
+    expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
+  });
+
+  it("takes no action when the PR is not ready and has no pilot label", async () => {
+    const github = createMockGithub({ labelNames: [] });
+
+    const result = await run(github);
+    expect(result.labelActions).toEqual({
+      [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.None,
+      [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
+    });
+  });
   it("treats a manual signoff label as a hard stop without removing it", async () => {
     const github = createMockGithub({
       labelNames: [

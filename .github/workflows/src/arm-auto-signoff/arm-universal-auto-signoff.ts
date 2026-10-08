@@ -11,13 +11,20 @@ import {
   SemanticReviewOutcome,
 } from "./arm-semantic-review.ts";
 
+/** Deterministic commit statuses that must be `success`, in addition to the semantic review. */
 const requiredStatusNames = ["Swagger LintDiff", "Swagger Avocado"];
 
+/**
+ * The labels this workflow manages, each with the action to take. `ARMAutoSignedOff-Test` records
+ * the pilot decision. `ARMManualSignoffRequired` is added (and never removed here) when a human
+ * must review. `ARMSignedOff` is deliberately not managed: the pilot never changes it.
+ */
 export type ManagedLabelActions = {
   "ARMAutoSignedOff-Test": LabelAction;
   ARMManualSignoffRequired: LabelAction;
 };
 
+/** Returns a label-action set that changes nothing. */
 function createNoneLabelActions(): ManagedLabelActions {
   return {
     [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.None,
@@ -27,6 +34,13 @@ function createNoneLabelActions(): ManagedLabelActions {
 
 /* v8 ignore start */
 
+/**
+ * Workflow entry point. Resolves the PR and head SHA from the triggering event (see
+ * `extractInputs`), logs the correlation for diagnosis, and returns the label actions to apply.
+ *
+ * @returns The correlated head SHA and PR number, which the workflow uploads as artifacts so
+ *   `Update Labels` can re-check the live head, and the label actions to apply.
+ */
 export default async function getLabelAction({ github, context, core }: GitHubScriptArgs): Promise<{
   headSha: string;
   issueNumber: number;
@@ -74,6 +88,15 @@ export default async function getLabelAction({ github, context, core }: GitHubSc
 }
 /* v8 ignore stop */
 
+/**
+ * Decides label actions for a PR head. It first re-reads the PR and takes no action when it is
+ * closed or its head is no longer `head_sha`, so a stale event cannot change current labels.
+ * Otherwise it reads the PR's labels and the head SHA's commit statuses and defers to
+ * `getDesiredLabelActions`.
+ *
+ * @returns The correlation passed in and the label actions; no action when correlation is missing
+ *   or stale.
+ */
 export async function getLabelActionImpl({
   owner,
   repo,
@@ -146,6 +169,20 @@ export async function getLabelActionImpl({
   };
 }
 
+/**
+ * Applies the auto-signoff policy for one head SHA. In order:
+ *
+ * 1. Not ready for ARM review (`ARMReview` missing or `NotReadyForARMReview` present): no signoff.
+ * 2. `ARM Semantic Review` is not `Passed`: no signoff. Only a manual-review hold
+ *    (`Manual review required`) also adds `ARMManualSignoffRequired`; a pending, failed, or
+ *    incomplete review adds nothing, because a re-run can still pass.
+ * 3. Labels block signoff (`ARMChangesRequested`, `ARMManualSignoffRequired`, or an unapproved
+ *    `SuppressionReviewRequired`): no signoff.
+ * 4. Any required status (`Swagger LintDiff`, `Swagger Avocado`) is not `success`: no signoff.
+ * 5. Otherwise add `ARMAutoSignedOff-Test`.
+ *
+ * Whenever signoff is withheld, an existing `ARMAutoSignedOff-Test` is removed.
+ */
 async function getDesiredLabelActions({
   owner,
   repo,

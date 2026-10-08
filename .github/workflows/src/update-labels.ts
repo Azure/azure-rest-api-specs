@@ -12,6 +12,11 @@ export default async function updateLabels({ github, context, core }: GitHubScri
   await updateLabelsImpl({ owner, repo, head_sha, issue_number, run_id, github, core });
 }
 
+/**
+ * Adds or removes PR labels from the `label-<name>=true|false` artifacts of one workflow run.
+ * If the run also published a `head-sha=` artifact, changes are skipped when the PR is closed or
+ * its head has moved on, so a delayed run can't label a newer commit.
+ */
 export async function updateLabelsImpl({
   owner,
   repo,
@@ -56,6 +61,7 @@ export async function updateLabelsImpl({
   });
 
   const artifactNames: string[] = artifacts.map((a) => a.name);
+  // Producers opt in to the stale-head check below by publishing a head-sha artifact.
   const hasHeadShaArtifact = artifactNames.some((name) => name.startsWith("head-sha="));
 
   core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);

@@ -5,8 +5,9 @@ import { describe, expect, it } from "vitest";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import {
   ARM_SEMANTIC_REVIEW_STATUS,
-  evaluateAutomatedReviewCoverage,
   evaluateSemanticReview,
+  exceedsSpecificationLimits,
+  isWithinAutomatedReviewLimits,
   getSemanticReviewOutcome,
   parseSemanticReviewResult,
   SemanticReviewCompletion,
@@ -31,9 +32,6 @@ const runAttempt = 1;
 const runUrl = "https://github.com/Azure/azure-rest-api-specs/actions/runs/456";
 
 const passedResult: SemanticReviewResult = {
-  runAttempt,
-  issueNumber,
-  headSha,
   blockingCount: 0,
   reviewScope: SemanticReviewScope.Full,
   completion: SemanticReviewCompletion.Complete,
@@ -54,9 +52,7 @@ function agentOutput(result: SemanticReviewResult = passedResult) {
   };
 }
 
-const defaultChangedFiles: ChangedFile[] = [
-  { filename: "specification/foo/foo.json", additions: 10, deletions: 5 },
-];
+const smallPullRequest = { changed_files: 1, additions: 10, deletions: 5 };
 
 function createPublisherGithub() {
   const github = createMockGithub();
@@ -65,21 +61,20 @@ function createPublisherGithub() {
       artifacts: [{ name: `head-sha=${headSha}` }, { name: `issue-number=${issueNumber}` }],
     },
   });
-  // Default: small PR well within coverage limits
-  github.rest.pulls.get.mockResolvedValue({
-    data: { changed_files: 1, state: "open", head: { sha: headSha } },
-  });
-  github.rest.pulls.listFiles.mockResolvedValue({ data: defaultChangedFiles });
+  // Default: small PR well within automated review limits
+  github.rest.pulls.get.mockResolvedValue({ data: smallPullRequest });
   return github;
 }
 
 async function runPublisher({
   output = agentOutput(),
   includeOutput = true,
+  setOutputPath = true,
   github = createPublisherGithub(),
 }: {
   output?: unknown;
   includeOutput?: boolean;
+  setOutputPath?: boolean;
   github?: ReturnType<typeof createPublisherGithub>;
 } = {}) {
   const directory = await mkdtemp(join(tmpdir(), "arm-semantic-review-"));
@@ -90,8 +85,13 @@ async function runPublisher({
     if (includeOutput) {
       await writeFile(outputPath, JSON.stringify(output), "utf8");
     }
-    process.env.GH_AW_AGENT_OUTPUT = outputPath;
+    if (setOutputPath) {
+      process.env.GH_AW_AGENT_OUTPUT = outputPath;
+    } else {
+      delete process.env.GH_AW_AGENT_OUTPUT;
+    }
     process.env.GITHUB_RUN_ATTEMPT = String(runAttempt);
+    const core = createMockCore();
     const result = await publishArmSemanticReviewStatus({
       github,
       context: {
@@ -99,9 +99,9 @@ async function runPublisher({
         runId,
         serverUrl: "https://github.com",
       },
-      core: createMockCore(),
+      core,
     } as unknown as GitHubScriptArgs);
-    return { github, result };
+    return { github, result, core };
   } finally {
     if (previousOutputPath === undefined) {
       delete process.env.GH_AW_AGENT_OUTPUT;
@@ -119,12 +119,10 @@ async function runPublisher({
 
 describe("parseSemanticReviewResult", () => {
   it("parses one valid result", () => {
-    expect(parseSemanticReviewResult(agentOutput(), { headSha, issueNumber, runAttempt })).toEqual(
-      passedResult,
-    );
+    expect(parseSemanticReviewResult(agentOutput())).toEqual(passedResult);
   });
 
-  it("uses trusted correlation instead of model-supplied identifiers", () => {
+  it("ignores model-supplied identifiers", () => {
     const output = agentOutput();
     Object.assign(output.items[0], {
       head_sha: "675718552ce00736684ed7a184bab",
@@ -132,92 +130,53 @@ describe("parseSemanticReviewResult", () => {
       run_attempt: "99",
     });
 
-    expect(parseSemanticReviewResult(output, { headSha, issueNumber, runAttempt })).toEqual(
-      passedResult,
+    expect(parseSemanticReviewResult(output)).toEqual(passedResult);
+  });
+
+  it("rejects missing or duplicate semantic results", () => {
+    expect(() => parseSemanticReviewResult({ items: [] })).toThrow(
+      "Expected one ARM semantic review result, found 0",
     );
-  });
-
-  it("rejects missing, duplicate, or invalid semantic results", () => {
     expect(() =>
-      parseSemanticReviewResult({ items: [] }, { headSha, issueNumber, runAttempt }),
-    ).toThrow("Expected one ARM semantic review result, found 0");
-    expect(() =>
-      parseSemanticReviewResult(
-        {
-          items: [
-            ...agentOutput().items,
-            ...agentOutput({ ...passedResult, blockingCount: 1 }).items,
-          ],
-        },
-        { headSha, issueNumber, runAttempt },
-      ),
-    ).toThrow("Expected one ARM semantic review result, found 2");
-    expect(() =>
-      parseSemanticReviewResult(
-        {
-          items: [{ ...agentOutput().items[0], scope: "partial" }],
-        },
-        { headSha, issueNumber, runAttempt },
-      ),
-    ).toThrow("Invalid ARM semantic review scope");
-    expect(() =>
-      parseSemanticReviewResult(
-        {
-          items: [{ ...agentOutput().items[0], completeness: "unknown" }],
-        },
-        { headSha, issueNumber, runAttempt },
-      ),
-    ).toThrow("Invalid ARM semantic review completion");
-    expect(() =>
-      parseSemanticReviewResult(
-        {
-          items: [{ ...agentOutput().items[0], incomplete_reason: "unknown" }],
-        },
-        { headSha, issueNumber, runAttempt },
-      ),
-    ).toThrow("Invalid ARM semantic review incomplete reason");
-  });
-
-  it("rejects inconsistent completeness and reason combinations", () => {
-    expect(() =>
-      parseSemanticReviewResult(
-        {
-          items: [
-            {
-              ...agentOutput().items[0],
-              incomplete_reason: SemanticReviewIncompleteReason.CriticUnavailable,
-            },
-          ],
-        },
-        { headSha, issueNumber, runAttempt },
-      ),
-    ).toThrow("completion 'complete' is inconsistent");
-    expect(() =>
-      parseSemanticReviewResult(
-        {
-          items: [
-            {
-              ...agentOutput().items[0],
-              completeness: SemanticReviewCompletion.Incomplete,
-            },
-          ],
-        },
-        { headSha, issueNumber, runAttempt },
-      ),
-    ).toThrow("completion 'incomplete' is inconsistent");
-  });
-
-  it("rejects invalid trusted correlation", () => {
-    expect(() =>
-      parseSemanticReviewResult(agentOutput(), {
-        headSha: "675718552ce00736684ed7a184bab",
-        issueNumber,
-        runAttempt,
+      parseSemanticReviewResult({
+        items: [
+          ...agentOutput().items,
+          ...agentOutput({ ...passedResult, blockingCount: 1 }).items,
+        ],
       }),
-    ).toThrow("ARM semantic review correlation is missing or invalid");
+    ).toThrow("Expected one ARM semantic review result, found 2");
+    expect(() => parseSemanticReviewResult({})).toThrow("missing its items array");
+  });
+
+  it.each([
+    { field: "blocking_count", value: "-1", message: "Invalid ARM semantic review Blocking count" },
+    { field: "blocking_count", value: 0, message: "Invalid ARM semantic review Blocking count" },
+    { field: "scope", value: "partial", message: "Invalid ARM semantic review scope" },
+    { field: "completeness", value: "unknown", message: "Invalid ARM semantic review completion" },
+    {
+      field: "incomplete_reason",
+      value: "unknown",
+      message: "Invalid ARM semantic review incomplete reason",
+    },
+  ])("rejects an invalid $field", ({ field, value, message }) => {
+    expect(() =>
+      parseSemanticReviewResult({ items: [{ ...agentOutput().items[0], [field]: value }] }),
+    ).toThrow(message);
+  });
+
+  it("rejects a complete review that carries an incomplete reason", () => {
+    expect(() =>
+      parseSemanticReviewResult({
+        items: [
+          {
+            ...agentOutput().items[0],
+            incomplete_reason: SemanticReviewIncompleteReason.CriticUnavailable,
+          },
+        ],
+      }),
+    ).toThrow("completion 'complete' is inconsistent");
   });
 });
-
 describe("evaluateSemanticReview", () => {
   it("passes when a full, complete review has no Blocking findings", () => {
     expect(evaluateSemanticReview(passedResult)).toEqual({
@@ -309,54 +268,86 @@ describe("evaluateSemanticReview", () => {
         description: "Manual review required: scoped review requires manual signoff",
       }),
     ).toBe(SemanticReviewOutcome.ManualReviewRequired);
+    expect(getSemanticReviewOutcome(undefined)).toBeUndefined();
+    expect(getSemanticReviewOutcome({ state: "unexpected" })).toBeUndefined();
   });
 });
 
-describe("evaluateAutomatedReviewCoverage", () => {
-  const smallFile: ChangedFile = {
-    filename: "specification/foo/foo.json",
-    additions: 10,
-    deletions: 5,
-  };
-
-  it("passes a small PR within limits", () => {
-    expect(evaluateAutomatedReviewCoverage(1, [smallFile])).toEqual({
-      manualReviewRequired: false,
-    });
-  });
-
-  it("requires manual review when the file list is truncated", () => {
-    expect(evaluateAutomatedReviewCoverage(10, [smallFile])).toEqual({
-      manualReviewRequired: true,
-      reason: "changed-file list was truncated",
-    });
-  });
-
-  it("requires manual review when specification file count exceeds limit", () => {
-    const manyFiles = Array.from({ length: 51 }, (_, i): ChangedFile => ({
-      filename: `specification/foo/foo${i}.json`,
-      additions: 1,
-      deletions: 0,
-    }));
-    expect(evaluateAutomatedReviewCoverage(51, manyFiles)).toEqual({
-      manualReviewRequired: true,
-      reason: "PR exceeds automated review size limits",
-    });
-  });
-
-  it("requires manual review when specification line count exceeds limit", () => {
-    const bigFile: ChangedFile = {
-      filename: "specification/foo/foo.json",
-      additions: 4_000,
-      deletions: 2_000,
-    };
-    expect(evaluateAutomatedReviewCoverage(1, [bigFile])).toEqual({
-      manualReviewRequired: true,
-      reason: "PR exceeds automated review size limits",
-    });
+describe("isWithinAutomatedReviewLimits", () => {
+  it.each([
+    { name: "a small PR", pr: smallPullRequest, expected: true },
+    {
+      name: "exactly the file limit",
+      pr: { changed_files: 50, additions: 1, deletions: 0 },
+      expected: true,
+    },
+    {
+      name: "one file over the limit",
+      pr: { changed_files: 51, additions: 1, deletions: 0 },
+      expected: false,
+    },
+    {
+      name: "exactly the line limit",
+      pr: { changed_files: 1, additions: 3_000, deletions: 2_000 },
+      expected: true,
+    },
+    {
+      name: "over the line limit",
+      pr: { changed_files: 1, additions: 4_000, deletions: 2_000 },
+      expected: false,
+    },
+    // GitHub reports zero counters when the diff is too large to compute.
+    {
+      name: "zero reported files",
+      pr: { changed_files: 0, additions: 0, deletions: 0 },
+      expected: false,
+    },
+  ])("$name", ({ pr, expected }) => {
+    expect(isWithinAutomatedReviewLimits(pr)).toBe(expected);
   });
 });
 
+describe("exceedsSpecificationLimits", () => {
+  const specFile = (name: string, additions = 1, deletions = 0): ChangedFile => ({
+    filename: `specification/foo/${name}.json`,
+    additions,
+    deletions,
+  });
+  const otherFile = (name: string, additions = 1): ChangedFile => ({
+    filename: `documentation/${name}.md`,
+    additions,
+    deletions: 0,
+  });
+
+  it("ignores files and lines outside specification/", () => {
+    const files = [
+      specFile("a"),
+      ...Array.from({ length: 60 }, (_, i) => otherFile(`doc${i}`, 200)),
+    ];
+    expect(exceedsSpecificationLimits(files.length, files)).toBe(false);
+  });
+
+  it("allows exactly the specification file limit", () => {
+    const files = Array.from({ length: 50 }, (_, i) => specFile(`f${i}`));
+    expect(exceedsSpecificationLimits(files.length, files)).toBe(false);
+  });
+
+  it("flags more specification files than the limit", () => {
+    const files = Array.from({ length: 51 }, (_, i) => specFile(`f${i}`));
+    expect(exceedsSpecificationLimits(files.length, files)).toBe(true);
+  });
+
+  it("flags more specification lines than the limit", () => {
+    const files = [specFile("big", 4_000, 2_000)];
+    expect(exceedsSpecificationLimits(files.length, files)).toBe(true);
+  });
+
+  it("flags a truncated file list", () => {
+    expect(exceedsSpecificationLimits(10, [specFile("a")])).toBe(true);
+    const capped = Array.from({ length: 3_000 }, (_, i) => otherFile(`d${i}`));
+    expect(exceedsSpecificationLimits(3_000, capped)).toBe(true);
+  });
+});
 describe("publishArmSemanticReviewStatus", () => {
   it("publishes Passed for a clean reviewer result", async () => {
     const { github, result } = await runPublisher();
@@ -406,16 +397,89 @@ describe("publishArmSemanticReviewStatus", () => {
     );
   });
 
+  it("does not list files when the PR is within the aggregate limits", async () => {
+    const { github } = await runPublisher();
+
+    expect(github.rest.pulls.listFiles).not.toHaveBeenCalled();
+  });
+
+  it("publishes Passed when only non-specification files push the PR over the limits", async () => {
+    const github = createPublisherGithub();
+    const files = [
+      { filename: "specification/foo/foo.json", additions: 10, deletions: 5 },
+      ...Array.from({ length: 60 }, (_, i) => ({
+        filename: `documentation/doc${i}.md`,
+        additions: 1,
+        deletions: 0,
+      })),
+    ];
+    github.rest.pulls.get.mockResolvedValue({
+      data: { changed_files: files.length, additions: 70, deletions: 5 },
+    });
+    github.rest.pulls.listFiles.mockResolvedValue({ data: files });
+
+    const { github: g } = await runPublisher({ github });
+    expect(g.rest.pulls.listFiles).toHaveBeenCalled();
+    expect(g.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({ state: CommitStatusState.SUCCESS }),
+    );
+  });
+
+  it.each([
+    {
+      name: "too many specification files",
+      pr: { changed_files: 51, additions: 51, deletions: 0 },
+      files: Array.from({ length: 51 }, (_, i) => ({
+        filename: `specification/foo/f${i}.json`,
+        additions: 1,
+        deletions: 0,
+      })),
+    },
+    {
+      name: "a truncated file list",
+      pr: { changed_files: 51, additions: 51, deletions: 0 },
+      files: [{ filename: "specification/foo/foo.json", additions: 1, deletions: 0 }],
+    },
+  ])("publishes Manual review required for $name", async ({ pr, files }) => {
+    const github = createPublisherGithub();
+    github.rest.pulls.get.mockResolvedValue({ data: pr });
+    github.rest.pulls.listFiles.mockResolvedValue({ data: files });
+
+    const { github: g } = await runPublisher({ github });
+    expect(g.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({
+        state: CommitStatusState.ERROR,
+        description: "Manual review required: PR exceeds automated review size limits",
+      }),
+    );
+  });
+
+  it("publishes Manual review required without listing files when the PR reports zero files", async () => {
+    const github = createPublisherGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: { changed_files: 0, additions: 0, deletions: 0 },
+    });
+
+    const { github: g } = await runPublisher({ github });
+    expect(g.rest.pulls.listFiles).not.toHaveBeenCalled();
+    expect(g.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({
+        state: CommitStatusState.ERROR,
+        description: "Manual review required: PR exceeds automated review size limits",
+      }),
+    );
+  });
+
   it.each([
     {
       name: "missing agent output",
       options: { includeOutput: false },
-      description: "Review incomplete: ENOENT",
+      logged: "ENOENT",
     },
     {
       name: "missing semantic item",
       options: { output: { items: [] } },
-      description: "Review incomplete: Expected one ARM semantic review result, found 0",
+      logged: "Expected one ARM semantic review result, found 0",
     },
     {
       name: "invalid Blocking count",
@@ -424,20 +488,55 @@ describe("publishArmSemanticReviewStatus", () => {
           items: [{ ...agentOutput().items[0], blocking_count: "not-a-number" }],
         },
       },
-      description: "Review incomplete: Invalid ARM semantic review Blocking count",
+      logged: "Invalid ARM semantic review Blocking count",
     },
-  ])("publishes Review incomplete for $name", async ({ options, description }) => {
-    const { github } = await runPublisher(options);
+  ])("publishes Review incomplete for $name", async ({ options, logged }) => {
+    const { github, core } = await runPublisher(options);
 
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
       expect.objectContaining({
         state: CommitStatusState.ERROR,
+        description: "Review incomplete: result could not be validated",
       }),
     );
-    const status = github.rest.repos.createCommitStatus.mock.calls[0]?.[0] as {
-      description: string;
-    };
-    expect(status.description).toContain(description);
+    // The details go to the run log, not the public status description.
+    expect(core.warning).toHaveBeenCalledWith(expect.stringContaining(logged));
+  });
+
+  it("publishes Review incomplete when the output path is not set", async () => {
+    const { github } = await runPublisher({ setOutputPath: false });
+
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({
+        state: CommitStatusState.ERROR,
+        description: "Review incomplete: result could not be validated",
+      }),
+    );
+  });
+
+  it("logs a thrown value that is not an Error", async () => {
+    const github = createPublisherGithub();
+    github.rest.pulls.get.mockRejectedValue("plain string failure");
+
+    const { github: g, core } = await runPublisher({ github });
+    expect(g.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({ state: CommitStatusState.ERROR }),
+    );
+    expect(core.warning).toHaveBeenCalledWith("plain string failure");
+  });
+
+  it("publishes Review incomplete without exposing the error when the PR cannot be read", async () => {
+    const github = createPublisherGithub();
+    github.rest.pulls.get.mockRejectedValue(new Error("boom: /home/runner/work/_temp/secret"));
+
+    const { github: g, core } = await runPublisher({ github });
+    expect(g.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({
+        state: CommitStatusState.ERROR,
+        description: "Review incomplete: result could not be validated",
+      }),
+    );
+    expect(core.warning).toHaveBeenCalledWith(expect.stringContaining("boom"));
   });
 
   it("does nothing when trusted PR/SHA correlation is missing", async () => {
@@ -450,121 +549,6 @@ describe("publishArmSemanticReviewStatus", () => {
     expect(execution.result).toEqual({
       headSha: "",
       issueNumber: 0,
-      statusPublished: false,
-    });
-    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
-  });
-
-  it.each([
-    {
-      name: "closed",
-      pullRequest: { changed_files: 1, state: "closed", head: { sha: headSha } },
-    },
-    {
-      name: "stale",
-      pullRequest: { changed_files: 1, state: "open", head: { sha: "f".repeat(40) } },
-    },
-  ])("does not publish a status when the pull request is $name", async ({ pullRequest }) => {
-    const github = createPublisherGithub();
-    github.rest.pulls.get.mockResolvedValue({ data: pullRequest });
-
-    const execution = await runPublisher({ github });
-
-    expect(execution.result).toEqual({
-      headSha,
-      issueNumber,
-      statusPublished: false,
-    });
-    expect(github.rest.pulls.listFiles).not.toHaveBeenCalled();
-    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
-  });
-
-  it("publishes Manual review required when the PR exceeds automated review size limits", async () => {
-    const github = createPublisherGithub();
-    const oversizedFiles = Array.from({ length: 51 }, (_, i): ChangedFile => ({
-      filename: `specification/foo/foo${i}.json`,
-      additions: 1,
-      deletions: 0,
-    }));
-    github.rest.pulls.get.mockResolvedValue({
-      data: { changed_files: 51, state: "open", head: { sha: headSha } },
-    });
-    github.rest.pulls.listFiles.mockResolvedValue({ data: oversizedFiles });
-
-    const { github: g } = await runPublisher({ github });
-    expect(g.rest.repos.createCommitStatus).toHaveBeenCalledWith(
-      expect.objectContaining({
-        state: CommitStatusState.ERROR,
-        description: "Manual review required: PR exceeds automated review size limits",
-      }),
-    );
-  });
-
-  it("truncates an overly long error description to 140 characters", async () => {
-    const longValue = "x".repeat(200);
-    const { github } = await runPublisher({
-      output: { items: [{ ...agentOutput().items[0], scope: longValue }] },
-    });
-
-    const call = github.rest.repos.createCommitStatus.mock.calls[0]?.[0] as {
-      description: string;
-    };
-    expect(call.description.length).toBeLessThanOrEqual(140);
-    expect(call.description).toMatch(/^Review incomplete:/);
-  });
-
-  it("does not overwrite a newer review of the same SHA", async () => {
-    const github = createPublisherGithub();
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
-      data: [
-        {
-          context: ARM_SEMANTIC_REVIEW_STATUS,
-          state: CommitStatusState.PENDING,
-          target_url: "https://github.com/Azure/azure-rest-api-specs/actions/runs/789/attempts/1",
-          updated_at: "2026-01-02T00:00:00Z",
-        },
-      ],
-    });
-
-    const execution = await runPublisher({ github });
-    expect(execution.result).toEqual({
-      headSha,
-      issueNumber,
-      statusPublished: false,
-    });
-    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
-  });
-
-  it("checks for a newer run only after reading the PR and its files", async () => {
-    const github = createPublisherGithub();
-
-    await runPublisher({ github });
-
-    const [listStatuses] = github.rest.repos.listCommitStatusesForRef.mock.invocationCallOrder;
-    const [getPullRequest] = github.rest.pulls.get.mock.invocationCallOrder;
-    const [listFiles] = github.rest.pulls.listFiles.mock.invocationCallOrder;
-    const [createStatus] = github.rest.repos.createCommitStatus.mock.invocationCallOrder;
-    expect(listStatuses).toBeGreaterThan(getPullRequest);
-    expect(listStatuses).toBeGreaterThan(listFiles);
-    expect(listStatuses).toBeLessThan(createStatus);
-  });
-  it("does not overwrite a newer attempt of the same run", async () => {
-    const github = createPublisherGithub();
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
-      data: [
-        {
-          context: ARM_SEMANTIC_REVIEW_STATUS,
-          state: CommitStatusState.PENDING,
-          target_url: `https://github.com/Azure/azure-rest-api-specs/actions/runs/${runId}/attempts/2`,
-          updated_at: "2026-01-02T00:00:00Z",
-        },
-      ],
-    });
-
-    const execution = await runPublisher({ github });
-    expect(execution.result).toEqual({
-      headSha,
-      issueNumber,
       statusPublished: false,
     });
     expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
