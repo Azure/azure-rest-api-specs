@@ -18,7 +18,7 @@ merge commit (`HEAD`) with its target-branch parent (`HEAD^`).
 Uncommitted changes do not affect selection. Evaluation uses the current
 checkout; `--head` does not check out another revision.
 
-The check covers:
+The checks cover:
 
 - **TypeSpec Requirement:** changed OpenAPI must follow the existing TypeSpec
   usage policy, and generated OpenAPI must have TypeSpec sources in its
@@ -27,10 +27,16 @@ The check covers:
   of the comparison base. This lookup requires network access. Suppressions
   cannot permit new handwritten versions in a service that has migrated to
   TypeSpec; qualifying historical relocations retain their exemptions.
+- **MultipleNewApiVersions:** when a project adds multiple TypeSpec API versions,
+  its management-plane SDK emitters must target the oldest newly added version.
+- **StaleApiVersionPin:** when a project adds one TypeSpec API version, its
+  management-plane SDK emitters must not remain pinned to an older version.
 
-SDK API-version checks continue to run in
-[TypeSpec Validation](../typespec-validation/README.md). This tool does not compile
-TypeSpec, regenerate Swagger, format specifications, or clean the checkout.
+SDK policies compare committed `service.yaml` manifests for projects in changed
+service areas, including siblings and nested projects. They acquire compiler
+metadata only when applicable and unsuppressed. Metadata generation invokes the
+TypeSpec compiler with temporary output; the tool does not regenerate Swagger,
+format specifications, or clean the checkout.
 
 Independent policy failures are reported together. Failed prerequisites stop
 only their dependent work. No affected specs is a successful no-applicable-checks
@@ -39,24 +45,25 @@ discovery details, suppression reasons, and exception details.
 
 ## Suppressions
 
-New suppressions use `tool: SpecPrValidation` with the rule name `TypeSpecRequirement`.
+New suppressions use `tool: SpecPrValidation` with rule names
+`TypeSpecRequirement`, `MultipleNewApiVersions`, or `StaleApiVersionPin`.
 For Requirement, paths must identify one specific version under `preview` or
 `stable`; migration and relocation safeguards apply regardless of tool identity.
 
 Existing `TypeSpecRequirement` suppressions remain applicable to Requirement.
-`TypeSpecValidation` and `TypeSpecValidationAll` suppressions do not suppress
-Requirement policies.
+Existing `TypeSpecValidation` suppressions, including whole-tool suppressions,
+remain applicable only to the extracted SDK policies, never to Requirement.
+`TypeSpecValidationAll` suppressions do not suppress PR policies.
 
 ```yaml
 - tool: SpecPrValidation
-  paths: ["data-plane/Foo/stable/2026-01-01/*.json"]
-  rules: ["TypeSpecRequirement"]
-  reason: "Approved legacy-version exception"
+  paths: ["Project"]
+  rules: ["StaleApiVersionPin"]
+  reason: "Approved exception for this project"
 ```
 
 The `brownfield` result is emitted explicitly as true or false for label
-automation, including when an independent Requirement policy fails. If an
-operational failure prevents classification, the tool does not emit a false
-classification.
+automation, including when an independent SDK policy fails. If an operational
+failure prevents classification, the tool does not emit a false classification.
 
 For project correctness, continue using [TypeSpec Validation](../typespec-validation/README.md).

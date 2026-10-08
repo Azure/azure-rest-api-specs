@@ -33,7 +33,7 @@ export const typeSpecRequirementArmTsg =
 export const typeSpecRequirementDataPlaneTsg = typeSpecRequirementArmTsg;
 
 export const specPrValidationTsg =
-  `Inspect the check's diagnostics for TypeSpec usage requirements. ` +
+  `Inspect the check's diagnostics for TypeSpec usage requirements and SDK API-version policies. ` +
   `Run <code>pnpm spec-pr-validation --base=&lt;base&gt; --head=&lt;head&gt;</code> using the ` +
   `comparison commits from the failed check. ` +
   `See the <a href="https://github.com/Azure/azure-rest-api-specs/tree/main/eng/tools/spec-pr-validation">Spec PR Validation guide</a>.`;
