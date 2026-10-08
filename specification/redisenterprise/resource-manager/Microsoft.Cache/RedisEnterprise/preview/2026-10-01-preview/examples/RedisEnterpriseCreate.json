@@ -21,7 +21,7 @@
           }
         },
         "minimumTlsVersion": "1.2",
-        "publicNetworkAccess": "Disabled",
+        "publicNetworkAccess": "Enabled",
         "maintenanceConfiguration": {
           "maintenanceWindows": [
             {
@@ -49,7 +49,21 @@
               }
             }
           ]
-        }
+        },
+        "firewallRules": [
+          {
+            "name": "allowOfficeNetwork",
+            "properties": {
+              "sourceAddressPrefix": "10.0.0.0/24"
+            }
+          },
+          {
+            "name": "allowPartnerNetwork",
+            "properties": {
+              "sourceAddressPrefix": "192.168.1.0/24"
+            }
+          }
+        ]
       },
       "sku": {
         "name": "EnterpriseFlash_F300",
@@ -88,7 +102,7 @@
           "hostName": "cache1.westus.something.azure.net",
           "minimumTlsVersion": "1.2",
           "provisioningState": "Succeeded",
-          "publicNetworkAccess": "Disabled",
+          "publicNetworkAccess": "Enabled",
           "maintenanceConfiguration": {
             "maintenanceWindows": [
               {
@@ -117,6 +131,20 @@
               }
             ]
           },
+          "firewallRules": [
+            {
+              "name": "allowOfficeNetwork",
+              "properties": {
+                "sourceAddressPrefix": "10.0.0.0/24"
+              }
+            },
+            {
+              "name": "allowPartnerNetwork",
+              "properties": {
+                "sourceAddressPrefix": "192.168.1.0/24"
+              }
+            }
+          ],
           "redisVersion": "5",
           "resourceState": "Running"
         },
@@ -163,7 +191,7 @@
           "hostName": "cache1.westus.something.azure.net",
           "minimumTlsVersion": "1.2",
           "provisioningState": "Creating",
-          "publicNetworkAccess": "Disabled",
+          "publicNetworkAccess": "Enabled",
           "maintenanceConfiguration": {
             "maintenanceWindows": [
               {
@@ -192,6 +220,20 @@
               }
             ]
           },
+          "firewallRules": [
+            {
+              "name": "allowOfficeNetwork",
+              "properties": {
+                "sourceAddressPrefix": "10.0.0.0/24"
+              }
+            },
+            {
+              "name": "allowPartnerNetwork",
+              "properties": {
+                "sourceAddressPrefix": "192.168.1.0/24"
+              }
+            }
+          ],
           "redisVersion": "5",
           "resourceState": "Creating"
         },

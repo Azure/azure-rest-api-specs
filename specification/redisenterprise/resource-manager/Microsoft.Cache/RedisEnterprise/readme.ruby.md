@@ -10,7 +10,7 @@ azure-arm: true
 
 ### Ruby multi-api
 
-``` yaml $(ruby) && $(multiapi)
+```yaml $(ruby) && $(multiapi)
 batch:
   - tag: package-2021-08
   - tag: package-2021-03

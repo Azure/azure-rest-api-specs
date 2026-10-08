@@ -2854,6 +2854,16 @@
             "create"
           ]
         },
+        "firewallRules": {
+          "type": "array",
+          "description": "Firewall rules associated with the cluster.",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "hostName": {
           "type": "string",
           "description": "DNS name of the cluster endpoint",
@@ -3335,6 +3345,37 @@
       },
       "required": [
         "sasUri"
+      ]
+    },
+    "FirewallRule": {
+      "type": "object",
+      "description": "A firewall rule associated with the cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the firewall rule."
+        },
+        "properties": {
+          "$ref": "#/definitions/FirewallRuleProperties",
+          "description": "Properties of the firewall rule."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "FirewallRuleProperties": {
+      "type": "object",
+      "description": "Properties of a cluster firewall rule.",
+      "properties": {
+        "sourceAddressPrefix": {
+          "type": "string",
+          "description": "The source address prefix for the firewall rule."
+        }
+      },
+      "required": [
+        "sourceAddressPrefix"
       ]
     },
     "FlushParameters": {
