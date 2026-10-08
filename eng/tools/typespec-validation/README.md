@@ -82,9 +82,9 @@ color output is enabled. `--verbose` also includes Git status.
 TSV still captures `tsp compile --list-files` internally to detect stale generated
 Swagger files. Hiding that inventory in normal output does not disable the check.
 
-A local run without comparison commits skips API-version comparison without a
-warning; `--verbose` shows the reason. An explicitly supplied but incomplete or
-invalid comparison context still produces a warning.
+PR policies, including SDK API-version pin checks, run separately through
+[Spec PR Validation](../spec-pr-validation/README.md). TSV validates project
+correctness; it does not enforce policies based on versions added by a PR.
 
 In GitHub Actions, both TSV workflows enable `--verbose` when debug logging is
 enabled. To diagnose a run without changing the normal default, choose
@@ -109,7 +109,7 @@ suppression file trigger all-project validation. ARM lease metadata and
 the fallback. The PR workflow enables the fallback only for PRs targeting `main`
 or `RPSaaSMaster`; other target branches pass `--ignore-core-files`.
 
-Changed-project validation passes the base/head commits to each project's rules.
+Changed-project validation retains the base/head commits in the suppression context.
 `TypeSpecValidationAll` suppressions apply only to `--all` or a core-file fallback,
 not scoped changed-project runs. An empty changed-project selection succeeds;
 an empty all-project selection fails.

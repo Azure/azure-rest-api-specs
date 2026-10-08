@@ -1,9 +1,8 @@
 import { type TypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
-import { join } from "pathe";
-import { context } from "../index.ts";
-import { failure, warning, type RuleResult } from "../rule-result.ts";
-import { parseServiceYaml } from "../service-yaml.ts";
-import { readFileAtCommit } from "../utils.ts";
+import { failure, warning, type RuleResult } from "@azure-tools/specs-shared/rule-result";
+import { parseServiceYaml } from "@azure-tools/specs-shared/service-yaml";
+import { join, relative } from "pathe";
+import { readFileAtCommit, type PrContext } from "../context.ts";
 
 // Scoped to management-plane SDK emitters for now.
 const SDK_EMITTERS = new Set([
@@ -24,18 +23,12 @@ export function wikiLink(anchor: string): string {
   return `${WIKI_BASE}#${anchor}`;
 }
 
-export function reproduceLocallyHint(folder: string): string {
-  const commits = JSON.stringify({
-    baseCommitish:
-      typeof context.baseCommitish === "string" ? context.baseCommitish : "{commitShaOfMain}",
-    headCommitish:
-      typeof context.headCommitish === "string" ? context.headCommitish : "{commitShaOfPRHead}",
-  });
+export function reproduceLocallyHint(context: PrContext): string {
   const quote = (value: string) =>
     process.platform === "win32"
       ? `'${value.replaceAll("'", "''")}'`
       : `'${value.replaceAll("'", "'\"'\"'")}'`;
-  return `To reproduce locally:\n    pnpm tsv ${quote(folder)} ${quote(commits)}`;
+  return `To reproduce locally:\n    pnpm spec-pr-validation --base=${quote(context.baseCommitish)} --head=${quote(context.headCommitish)}`;
 }
 
 export function parseApiVersion(version: string) {
@@ -104,49 +97,20 @@ export type ResolvedNewApiVersions =
   | { kind: "versions"; newApiVersions: string[] };
 
 /** Diffs `service.yaml` between the configured commits to find newly added TypeSpec versions. */
-export async function resolveNewApiVersions(folder: string): Promise<ResolvedNewApiVersions> {
-  // Validating all specs has no pull request to diff, and runs on a shallow clone without HEAD^.
-  if (context.checkingAllSpecs === true) {
-    return {
-      kind: "skip",
-      result: {
-        success: true,
-        skipped: "Validating all specs; skipping comparison of newly added API versions.",
-      },
-    };
-  }
-
-  // A normal local run has no comparison context; skipping is expected, not a warning.
+export async function resolveNewApiVersions(
+  folder: string,
+  context: PrContext,
+): Promise<ResolvedNewApiVersions> {
   const { baseCommitish, headCommitish } = context;
-  if (baseCommitish === undefined && headCommitish === undefined) {
-    return {
-      kind: "skip",
-      result: {
-        success: true,
-        skipped: `No commits to compare; skipping API-version comparison. ${reproduceLocallyHint(folder)}`,
-      },
-    };
-  }
-
-  if (typeof baseCommitish !== "string" || typeof headCommitish !== "string") {
-    return {
-      kind: "skip",
-      result: warning(
-        "sdk-api-version-skipped",
-        "Comparison requires both baseCommitish and headCommitish strings; skipping API-version comparison.",
-        { path: folder, help: reproduceLocallyHint(folder) },
-      ),
-    };
-  }
-
   const serviceYamlPath = join(folder, "service.yaml");
+  const repositoryPath = relative(context.root, serviceYamlPath);
   let baseSource: string | undefined;
   let headSource: string | undefined;
 
   try {
     [baseSource, headSource] = await Promise.all([
-      readFileAtCommit(folder, baseCommitish, serviceYamlPath),
-      readFileAtCommit(folder, headCommitish, serviceYamlPath),
+      readFileAtCommit(context, baseCommitish, repositoryPath),
+      readFileAtCommit(context, headCommitish, repositoryPath),
     ]);
   } catch (error) {
     return {
