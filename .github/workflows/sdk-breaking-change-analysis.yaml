@@ -76,6 +76,27 @@ jobs:
               localSpecRepoPath: '${{ github.workspace }}/repositories/azure-rest-api-specs',
             });
 
+  propagate-status:
+    needs: resolve
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write analysis status
+        shell: bash
+        env:
+          SHOULD_RUN: ${{ needs.resolve.outputs.should-run }}
+        run: |
+          mkdir -p "${{ runner.temp }}/sdk-breaking-change-analysis"
+          printf '%s\n' "$SHOULD_RUN" > \
+            "${{ runner.temp }}/sdk-breaking-change-analysis/run"
+
+      - name: Upload analysis status
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-breaking-change-analysis-status
+          path: ${{ runner.temp }}/sdk-breaking-change-analysis/run
+          if-no-files-found: error
+          retention-days: 7
+
   analyze:
     needs: resolve
     if: needs.resolve.outputs.should-run == 'true'

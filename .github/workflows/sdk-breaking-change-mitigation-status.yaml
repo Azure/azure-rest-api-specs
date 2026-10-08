@@ -23,8 +23,8 @@ jobs:
       - name: Download SDK mitigation status
         uses: actions/download-artifact@v8
         with:
-          name: sdk-breaking-change-mitigation-status
-          path: ${{ runner.temp }}/sdk-breaking-change-mitigation-status
+          name: sdk-breaking-change-mitigate
+          path: ${{ runner.temp }}/sdk-breaking-change-mitigate
           github-token: ${{ github.token }}
           run-id: ${{ github.event.workflow_run.id }}
 
@@ -32,7 +32,7 @@ jobs:
         id: read-status
         shell: bash
         run: |
-          should_run="$(cat "${{ runner.temp }}/sdk-breaking-change-mitigation-status/should-run")"
+          should_run="$(cat "${{ runner.temp }}/sdk-breaking-change-mitigate/run")"
           if [[ "$should_run" != "true" && "$should_run" != "false" ]]; then
             echo "Invalid should-run value: $should_run" >&2
             exit 1
