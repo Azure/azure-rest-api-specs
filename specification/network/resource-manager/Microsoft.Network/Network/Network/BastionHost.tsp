@@ -43,7 +43,7 @@ model BastionHost is ResourceInstance<BastionHostPropertiesFormat> {
    * The identity assigned to the Bastion Host resource
    */
   @added(Versions.v2026_01_01)
-  identity?: Common.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 }
 
 @featureFile(Features.virtualNetwork)

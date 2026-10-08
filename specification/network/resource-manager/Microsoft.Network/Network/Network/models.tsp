@@ -7857,8 +7857,7 @@ model ApplicationGatewayPathRulePropertiesFormat {
  * Advanced routing map of an application gateway. Holds the advanced routing rules evaluated for requests handled by an AdvancedRouting request routing rule, along with the configuration applied when no rule matches.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Application Gateway child resources extend SubResource for consistency with the existing resource shape"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 @added(Versions.v2026_01_01)
 model ApplicationGatewayAdvancedRoutingMap extends SubResource {
   /**
@@ -7887,8 +7886,7 @@ model ApplicationGatewayAdvancedRoutingMap extends SubResource {
 /**
  * Properties of advanced routing map of the application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 @added(Versions.v2026_01_01)
 model ApplicationGatewayAdvancedRoutingMapPropertiesFormat {
   /**
@@ -7935,8 +7933,7 @@ model ApplicationGatewayAdvancedRoutingMapPropertiesFormat {
  * Advanced routing rule of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Application Gateway child resources extend SubResource for consistency with the existing resource shape"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 @added(Versions.v2026_01_01)
 model ApplicationGatewayAdvancedRoutingRule extends SubResource {
   /**
@@ -7965,8 +7962,7 @@ model ApplicationGatewayAdvancedRoutingRule extends SubResource {
 /**
  * Properties of advanced routing rule of the application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 @added(Versions.v2026_01_01)
 model ApplicationGatewayAdvancedRoutingRulePropertiesFormat {
   /**
@@ -8020,8 +8016,7 @@ model ApplicationGatewayAdvancedRoutingRulePropertiesFormat {
  * Advanced routing condition set of an application gateway. Referenced by advanced routing rules to determine whether a request matches.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Application Gateway child resources extend SubResource for consistency with the existing resource shape"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 @added(Versions.v2026_01_01)
 model ApplicationGatewayAdvancedRoutingConditionSet extends SubResource {
   /**
@@ -8050,8 +8045,7 @@ model ApplicationGatewayAdvancedRoutingConditionSet extends SubResource {
 /**
  * Properties of advanced routing condition set of the application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 @added(Versions.v2026_01_01)
 model ApplicationGatewayAdvancedRoutingConditionSetPropertiesFormat {
   /**
@@ -8070,8 +8064,7 @@ model ApplicationGatewayAdvancedRoutingConditionSetPropertiesFormat {
 /**
  * A condition evaluated as part of an advanced routing condition set.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 @added(Versions.v2026_01_01)
 model ApplicationGatewayAdvancedRoutingCondition {
   /**
@@ -8098,8 +8091,7 @@ model ApplicationGatewayAdvancedRoutingCondition {
 /**
  * Matches the value of a request property against a fixed string or regular expression.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 @added(Versions.v2026_01_01)
 model ApplicationGatewayAdvancedRoutingPropertyValueMatcher {
   /**
@@ -8962,9 +8954,8 @@ model ApplicationGatewayEntraJWTValidationConfigPropertiesFormat {
 /**
  * An authentication configuration binding for an Application Gateway routing rule or routing map.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other application gateway models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 model ApplicationGatewayAuthConfig {
   /**
    * The name of the auth configuration.
@@ -10600,8 +10591,7 @@ model BastionShareableLink {
 }
 
 /** The type of identity to use */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keeps consistency with older bastionHost models generated in the virtualNetwork.json swagger file"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_01_01)
 union SessionRecordingIdentityType {
   string,
@@ -10614,8 +10604,7 @@ union SessionRecordingIdentityType {
 }
 
 /** The identity to use for accessing the blob container where recordings will be stored */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keeps consistency with older bastionHost models generated in the virtualNetwork.json swagger file"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_01_01)
 model SessionRecordingIdentity {
   /** The type of identity to use */
@@ -10632,8 +10621,7 @@ model SessionRecordingIdentity {
 /**
  * Bastion Session Recording Configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keeps consistency with older bastionHost models generated in the virtualNetwork.json swagger file"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_01_01)
 model BastionSessionRecordingConfiguration {
   /** The identity to use for accessing the blob container where recordings will be stored */
@@ -10646,15 +10634,14 @@ model BastionSessionRecordingConfiguration {
 /**
  * Parameters supplied to update the Bastion Host identity or tags.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keeps consistency with older bastionHost models generated in the virtualNetwork.json swagger file"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_01_01)
 model BastionHostUpdate {
   /**
    * The identity of the BastionHost, if configured.
    */
   @added(Versions.v2026_01_01)
-  identity?: Common.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 
   ...TagsObject;
 }
@@ -12440,9 +12427,8 @@ model ExpressRouteCrossConnectionsRoutesTableSummaryListResult
 /**
  * Request model used by validate and health check circuit migration operations.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 model MigrateExpressRouteCircuitValidateAndHealthCheckRequest {
   /** The target peering location for circuit migration. */
   targetPeeringLocation: string;
@@ -12455,9 +12441,8 @@ model MigrateExpressRouteCircuitValidateAndHealthCheckRequest {
 /**
  * Response for express route circuit migration validation operation.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 model MigrateExpressRouteCircuitValidateResponse {
   /** The validation status. */
   status?: string;
@@ -12466,9 +12451,8 @@ model MigrateExpressRouteCircuitValidateResponse {
 /**
  * Request model for express route circuit migration operations.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 model MigrateExpressRouteCircuitRequest {
   /** The target peering location for circuit migration. */
   targetPeeringLocation?: string;
@@ -12484,9 +12468,8 @@ model MigrateExpressRouteCircuitRequest {
 /**
  * Response for express route circuit migration health check and migration operations.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 model MigrateExpressRouteCircuitHealthCheckResponse {
   /** The overall status of the migration operation. */
   status?: string;
@@ -12520,9 +12503,8 @@ model MigrateExpressRouteCircuitHealthCheckResponse {
 /**
  * Detailed migration health information.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 model MigrateExpressRouteCircuitHealthCheckDetails {
   /** Per-port migration details. */
   @identifiers(#["portId"])
@@ -12532,9 +12514,8 @@ model MigrateExpressRouteCircuitHealthCheckDetails {
 /**
  * A mapping between source and target ports for migration.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 model PortMapping {
   /** The source port identifier. */
   sourcePortId: string;
@@ -12546,9 +12527,8 @@ model PortMapping {
 /**
  * Information about a port migration status.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 model PortMigrationInfo {
   /** The identifier of the port being migrated. */
   portId?: string;
@@ -12576,9 +12556,8 @@ model PortMigrationInfo {
 /**
  * Statistics from the source port before migration.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 model SourcePortStats {
   /** The peering health information from the source port. */
   @identifiers(#["type"])
@@ -12588,9 +12567,8 @@ model SourcePortStats {
 /**
  * Health information for a peering connection.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 model PeeringHealth {
   /** The type of peering (for example, Private, Microsoft, Public). */
   type?: string;
@@ -12605,9 +12583,8 @@ model PeeringHealth {
 /**
  * Statistical information for a peering connection.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 model PeeringStats {
   /** The timestamp when these statistics were captured. */
   timestamp?: utcDateTime;
@@ -12620,9 +12597,8 @@ model PeeringStats {
 /**
  * Metric entry for migration peering statistics.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP ExpressRoute feature gating, consistent with existing ExpressRoute models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 model Metric {
   /** The metric name. */
   name?: string;
@@ -14587,7 +14563,7 @@ model StaticCidrProperties {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy custom resource modeling is required for backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Proxy Resource")
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model CommonProxyResource extends CommonResource {}
@@ -25891,8 +25867,7 @@ model ListConnectionPoliciesResult is Azure.Core.Page<ConnectionPolicy>;
 /**
  * Tier of a web application firewall policy.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating so this type is emitted into the applicationGateway output file, consistent with other Application Gateway enums in this project"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 @added(Versions.v2026_01_01)
 union WebApplicationFirewallPolicyTier {
   string,
@@ -28041,7 +28016,7 @@ model ConnectionAnalyzerProperties {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "ConnectionAnalyzer is exposed via the legacy NetworkWatcher action pattern; its key is supplied by the routed operation, not modeled on the resource."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Connection Analyzer follows the existing legacy custom-resource pattern used by sibling NetworkWatcher child resources in this project."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy custom resource modeling is required for backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "ConnectionAnalyzer uses the legacy custom resource decorator required by its existing NetworkWatcher action pattern."
 @added(Versions.v2025_09_01)
 @featureFile(Features.networkWatcher)
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
