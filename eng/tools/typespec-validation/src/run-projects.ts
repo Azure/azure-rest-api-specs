@@ -9,6 +9,7 @@ import pc from "picocolors";
 import { simpleGit } from "simple-git";
 import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
 import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "./find-projects.ts";
+import { cleanWorktree } from "./git-cleanup.ts";
 
 interface RunOptions {
   gitClean?: boolean;
@@ -99,6 +100,7 @@ async function runProjects(
   options: RunOptions,
 ): Promise<boolean> {
   const git = simpleGit(root);
+  const logger = new ConsoleLogger(options.verbose);
   const gitClean = options.gitClean && !options.dryRun;
   const displayRoot = resolve(
     gitClean || (await git.checkIsRepo()) ? await getRootFolder(root) : process.cwd(),
@@ -178,8 +180,7 @@ async function runProjects(
       throw error;
     } finally {
       if (gitClean) {
-        await git.raw(["restore", "--worktree", "--", "."]);
-        await git.clean("f", ["-d"]);
+        await cleanWorktree(displayRoot, logger);
       }
     }
   }
