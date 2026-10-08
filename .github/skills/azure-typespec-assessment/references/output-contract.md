@@ -30,7 +30,7 @@ intent-scoped qualified `declarationNames` and cites guidance by `catalogId`
 plus section. The materializer requires every name to resolve to exactly one
 canonical declaration ID within that owning intent.
 
-Run `materialize-assessment-results.mjs --work <work-directory>`. It verifies
+Run `materialize-assessment-results.ts --work <work-directory>`. It verifies
 canonical hashes and exact coverage/ownership; derives ranks, canonical
 linkage, guidance applicability, and accounting; drops uncited excerpts; and
 atomically writes the existing inference, evidence, and judgment formats. It

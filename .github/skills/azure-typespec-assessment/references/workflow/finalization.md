@@ -3,7 +3,7 @@
 After materialization, run:
 
 ```powershell
-node (Join-Path $Skill "scripts\finalize-assessment.mjs") --work $Work
+node (Join-Path $Skill "scripts\finalize-assessment.ts") --work $Work
 ```
 
 The finalizer re-verifies canonical artifact hashes; validates inference,
@@ -17,7 +17,7 @@ After rendering, start the report server through the host's attached background
 or long-lived process mechanism:
 
 ```powershell
-node (Join-Path $Skill "scripts\serve-assessment.mjs") `
+node (Join-Path $Skill "scripts\serve-assessment.ts") `
   --file (Join-Path $Work "assessment.html")
 ```
 

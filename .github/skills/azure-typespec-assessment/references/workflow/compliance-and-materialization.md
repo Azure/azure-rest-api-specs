@@ -20,8 +20,8 @@ compliance judgments empty.
 Do not place declaration IDs on guidance excerpts or reconstruct opaque IDs.
 Declaration linkage uses the prefilled qualified `declarationNames` in the
 intent-owned compliance judgment that cites the catalog ID and section.
-`compliance-search-request.mjs` only creates requests in `model-input.json`;
-`compliance-assessment.mjs` later consumes and validates evidence.
+`compliance-search-request.ts` only creates requests in `model-input.json`;
+`compliance-assessment.ts` later consumes and validates evidence.
 
 The same compact file contains the Semantic review, REST/downstream coverage,
 inference results when requested, and one Azure Guidelines decision per
@@ -31,7 +31,7 @@ excluded from Agent authorship.
 Run the indexed deterministic materializer:
 
 ```powershell
-node (Join-Path $Skill "scripts\materialize-assessment-results.mjs") `
+node (Join-Path $Skill "scripts\materialize-assessment-results.ts") `
   --work $Work
 ```
 

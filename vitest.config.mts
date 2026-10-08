@@ -23,6 +23,7 @@ export default mergeConfig(
       projects: [
         ".github/vitest.config.ts",
         ".github/shared/vitest.config.ts",
+        ".github/skills/azure-typespec-assessment/vitest.config.ts",
         "eng/tools/*/vitest.config.ts",
       ],
       coverage: {
