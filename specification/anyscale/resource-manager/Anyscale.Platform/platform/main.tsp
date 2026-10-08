@@ -28,3 +28,5 @@ namespace Anyscale.Platform;
 
 /** Operations interface */
 interface Operations extends Azure.ResourceManager.Operations {}
+
+// Demo comment: exercising the changed-sharded TypeSpec Validation path (no behavior change).

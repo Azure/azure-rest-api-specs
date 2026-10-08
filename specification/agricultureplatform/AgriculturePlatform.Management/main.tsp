@@ -322,3 +322,5 @@ model MarketPlaceOfferDetails {
   @doc("Publisher Id.")
   publisherId: string;
 }
+
+// Demo comment: exercising the changed-sharded TypeSpec Validation path (no behavior change).
