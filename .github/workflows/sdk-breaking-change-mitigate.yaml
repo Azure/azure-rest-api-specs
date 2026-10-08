@@ -20,7 +20,8 @@ jobs:
   check-analysis-status:
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      github.event.workflow_run.conclusion == 'success'
+      github.event.workflow_run.conclusion == 'success' ||
+      github.event.workflow_run.conclusion == 'failure'
     runs-on: ubuntu-slim
     outputs:
       should-run: ${{ steps.read-status.outputs.should-run }}

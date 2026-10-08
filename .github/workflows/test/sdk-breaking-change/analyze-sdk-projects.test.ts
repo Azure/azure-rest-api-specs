@@ -1,14 +1,19 @@
-import { mkdir, readFile, rm, utimes, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { ExecFileOptions, ExecResult } from "../../../shared/src/exec.ts";
+import type { TypeSpecMetadata } from "../../../shared/src/typespec-metadata.ts";
 
-const { execFileMock } = vi.hoisted(() => ({
+const { execFileMock, generateTypeSpecMetadataMock } = vi.hoisted(() => ({
   execFileMock:
     vi.fn<(file: string, args?: string[], options?: ExecFileOptions) => Promise<ExecResult>>(),
+  generateTypeSpecMetadataMock: vi.fn<(folder: string) => Promise<TypeSpecMetadata>>(),
 }));
 
 vi.mock("../../../shared/src/exec.ts", () => ({ execFile: execFileMock }));
+vi.mock("../../../shared/src/typespec-metadata.ts", () => ({
+  generateTypeSpecMetadata: generateTypeSpecMetadataMock,
+}));
 
 import { analyzeSdkProjects } from "../../src/sdk-breaking-change/analyze-sdk-projects.ts";
 
@@ -25,15 +30,25 @@ beforeEach(async () => {
     recursive: true,
   });
 
+  generateTypeSpecMetadataMock.mockResolvedValue({
+    emitterVersion: "1.0.0",
+    generatedAt: "2026-10-08T00:00:00Z",
+    typespec: {
+      namespace: "Widget.Service",
+      type: "management",
+    },
+    languages: {
+      Go: [
+        {
+          emitterName: "@azure-tools/typespec-go",
+          outputDir: "{output-dir}/sdk/armwidget",
+        },
+      ],
+    },
+  });
+
   execFileMock.mockImplementation(async (_file, args = []) => {
     const operation = args[1];
-    if (operation === "generate") {
-      const packagePath = join(sdkRepositoryPath, "sdk", "armwidget");
-      await mkdir(packagePath, { recursive: true });
-      const configPath = join(packagePath, "tsp-location.yaml");
-      await writeFile(configPath, "directory: specification\n");
-      await utimes(configPath, new Date(0), new Date(0));
-    }
     return { stdout: `${JSON.stringify({ operation })}\n`, stderr: "" };
   });
 });
@@ -80,6 +95,68 @@ describe("analyzeSdkProjects", () => {
       3,
       "azsdk",
       expect.arrayContaining(["detect-breaking-change"]),
+    );
+    expect(generateTypeSpecMetadataMock).toHaveBeenCalledWith(
+      join(specificationRepositoryPath, "specification", "service", "Widget.Service"),
+    );
+  });
+
+  it("rejects metadata without the requested SDK language", async () => {
+    generateTypeSpecMetadataMock.mockResolvedValue({
+      emitterVersion: "1.0.0",
+      generatedAt: "2026-10-08T00:00:00Z",
+      typespec: {
+        namespace: "Widget.Service",
+        type: "management",
+      },
+      languages: {},
+    });
+
+    const result = analyzeSdkProjects({
+      localSdkRepositoryPath: sdkRepositoryPath,
+      specificationRepositoryPath,
+      typeSpecConfigPaths: ["specification/service/Widget.Service/tspconfig.yaml"],
+      pullNumber: 42,
+      sdkLanguage: "Go",
+      analyzedSha: "a".repeat(40),
+      workflowUrl: "https://github.com/owner/repo/actions/runs/123",
+      resultDir: temporaryDirectory,
+    });
+
+    await expect(result).rejects.toThrow(
+      "Expected language metadata for specification/service/Widget.Service and language Go",
+    );
+    await expect(
+      readFile(join(temporaryDirectory, "sdk-breaking-change-results", "error.log"), "utf8"),
+    ).resolves.toContain("Expected language metadata");
+  });
+
+  it("rejects language metadata without an output directory", async () => {
+    generateTypeSpecMetadataMock.mockResolvedValue({
+      emitterVersion: "1.0.0",
+      generatedAt: "2026-10-08T00:00:00Z",
+      typespec: {
+        namespace: "Widget.Service",
+        type: "management",
+      },
+      languages: {
+        Go: [{ emitterName: "@azure-tools/typespec-go" }],
+      },
+    });
+
+    await expect(
+      analyzeSdkProjects({
+        localSdkRepositoryPath: sdkRepositoryPath,
+        specificationRepositoryPath,
+        typeSpecConfigPaths: ["specification/service/Widget.Service/tspconfig.yaml"],
+        pullNumber: 42,
+        sdkLanguage: "Go",
+        analyzedSha: "a".repeat(40),
+        workflowUrl: "https://github.com/owner/repo/actions/runs/123",
+        resultDir: temporaryDirectory,
+      }),
+    ).rejects.toThrow(
+      "Expected output directory for specification/service/Widget.Service and language Go",
     );
   });
 });

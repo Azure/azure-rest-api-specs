@@ -1,7 +1,8 @@
-import { appendFile, mkdir, readdir, realpath, rename, stat, writeFile } from "node:fs/promises";
+import { appendFile, mkdir, realpath, rename, writeFile } from "node:fs/promises";
 import { basename, dirname, isAbsolute, join, relative, sep } from "node:path";
 import { execFile } from "../../../shared/src/exec.ts";
 import { SdkLanguage } from "./resolve-analysis-inputs.ts";
+import { generateTypeSpecMetadata } from "../../../shared/src/typespec-metadata.ts";
 
 type ProjectResult = {
   typespecProjectPath: string;
@@ -20,46 +21,16 @@ export type AnalyzeSdkProjectsOptions = {
   resultDir: string;
 };
 
-async function findFiles(directory: string, name: string): Promise<string[]> {
-  const entries = await readdir(directory, { withFileTypes: true });
-  const matches = await Promise.all(
-    entries.map(async (entry): Promise<string[]> => {
-      const path = join(directory, entry.name);
-      if (entry.isDirectory()) {
-        return findFiles(path, name);
-      }
-      return entry.isFile() && entry.name === name ? [path] : [];
-    }),
-  );
-  return matches.flat();
-}
-
-type ConfigSnapshot = Map<string, { mtimeMs: number; ctimeMs: number }>;
-
-async function snapshotGeneratedConfigs(repositoryPath: string): Promise<ConfigSnapshot> {
-  const configs = await findFiles(repositoryPath, "tsp-location.yaml");
-  return new Map(
-    await Promise.all(
-      configs.map(async (path) => {
-        const { mtimeMs, ctimeMs } = await stat(path);
-        return [path, { mtimeMs, ctimeMs }] as const;
-      }),
-    ),
-  );
-}
-
-async function findGeneratedConfigs(
-  repositoryPath: string,
-  previousConfigs: ConfigSnapshot,
-): Promise<string[]> {
-  const currentConfigs = await snapshotGeneratedConfigs(repositoryPath);
-  return [...currentConfigs].flatMap(([path, current]) => {
-    const previous = previousConfigs.get(path);
-    return !previous || current.mtimeMs !== previous.mtimeMs || current.ctimeMs !== previous.ctimeMs
-      ? [path]
-      : [];
-  });
-}
+const Lang_METADATA_LANG_MAP: Record<string, string> = {
+  "dotnet": "dotnet",
+  ".net": "dotnet",
+  "java": "java",
+  "python": "python",
+  "typescript": "typescript",
+  "js": "typescript",
+  "javascript": "typescript",
+  "go": "go"
+};
 
 function isWithin(parent: string, child: string): boolean {
   const path = relative(parent, child);
@@ -100,7 +71,6 @@ export async function analyzeSdkProjects({
       const typeSpecProjectPath = relativeConfigPath.replace(/\/tspconfig\.yaml$/, "");
       const configPath = join(specificationRepositoryPath, relativeConfigPath);
       const generationResult = join(resultDir, "sdk-generation-result.json");
-      const existingConfigs = await snapshotGeneratedConfigs(localSdkRepositoryPath);
 
       /* Generate the SDK package */
       const { stdout } = await execFile("azsdk", [
@@ -114,14 +84,23 @@ export async function analyzeSdkProjects({
         "json",
       ]);
       await writeFile(generationResult, stdout);
-      const generatedConfigs = await findGeneratedConfigs(localSdkRepositoryPath, existingConfigs);
-      if (generatedConfigs.length !== 1) {
+
+      const metadata = await generateTypeSpecMetadata(dirname(configPath));
+      console.log(`Metadata for ${typeSpecProjectPath}:`, metadata);
+      const languageMetadata = metadata.languages[Lang_METADATA_LANG_MAP[sdkLanguage.toLowerCase()]];
+      if (!languageMetadata || languageMetadata.length === 0) {
         throw new Error(
-          `Expected exactly one generated tsp-location.yaml for ${typeSpecProjectPath}, found ${generatedConfigs.length}.`,
+          `Expected language metadata for ${typeSpecProjectPath} and language ${sdkLanguage}, but none was found.`,
         );
       }
+      let packagePath = languageMetadata[0].outputDir;
+      if (!packagePath) {
+        throw new Error(
+          `Expected output directory for ${typeSpecProjectPath} and language ${sdkLanguage}, but none was found.`,
+        );
+      }
+      packagePath = packagePath.replace("{output-dir}", localSdkRepositoryPath);
 
-      const packagePath = await realpath(dirname(generatedConfigs[0]));
       if (!isWithin(localSdkRepositoryPath, packagePath)) {
         throw new Error(`Invalid generated package path: ${packagePath}`);
       }

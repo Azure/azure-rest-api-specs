@@ -13,6 +13,9 @@ permissions:
 
 jobs:
   resolve:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' ||
+      github.event.workflow_run.conclusion == 'failure'
     runs-on: ubuntu-latest
     outputs:
       should-run: ${{ steps.read-status.outputs.should-run }}
