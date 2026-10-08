@@ -16502,19 +16502,6 @@
         }
       ]
     },
-    "InstanceProfile": {
-      "type": "object",
-      "description": "Specifies the Instance Profile reference for a virtual machine.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Specifies the resource ID of the gallery Instance Profile version. The ID must use the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/instanceProfiles/{instanceProfileName}/versions/{versionNumber}."
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
     "InstanceViewStatus": {
       "type": "object",
       "description": "Instance view status.",
@@ -22379,8 +22366,8 @@
           "description": "Specifies the hardware settings for the virtual machine."
         },
         "instanceProfile": {
-          "$ref": "#/definitions/InstanceProfile",
-          "description": "[Preview Feature] Specifies the Instance Profile to use as a template when creating the virtual machine. Properties from the Instance Profile populate the VM request, and properties explicitly provided in the request override profile values. This property can be specified only during VM creation and is returned by GET and LIST operations. It cannot be added or changed on an existing VM.",
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource",
+          "description": "[Preview Feature] Specifies the Instance Profile to use as a template when creating the virtual machine. The resource ID must use the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/instanceProfiles/{instanceProfileName}/versions/{versionNumber}. Properties from the Instance Profile populate the VM request, and properties explicitly provided in the request override profile values. This property can be specified only during VM creation and is returned by GET and LIST operations. It cannot be added or changed on an existing VM.",
           "x-ms-mutability": [
             "read",
             "create"
