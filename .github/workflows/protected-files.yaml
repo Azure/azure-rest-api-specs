@@ -51,4 +51,5 @@ jobs:
         with:
           script: |
             const { checkProtectedFiles } = await import("${{ github.workspace }}/.github/workflows/src/protected-files.ts");
-            await checkProtectedFiles({ context, core });
+            const result = await checkProtectedFiles({ context, core });
+            await core.summary.addRaw(`## ${result.title}\n\n${result.summary}`).write();
