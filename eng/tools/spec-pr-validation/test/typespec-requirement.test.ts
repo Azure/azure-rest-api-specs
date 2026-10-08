@@ -10,7 +10,7 @@ async function checkAllUnder(
   captureGithubOutput = false,
 ) {
   const repoRoot = join(import.meta.dirname, "..", "..", "..", "..");
-  const script = join(repoRoot, "eng", "tools", "typespec-requirement", "src", "index.ts");
+  const script = join(repoRoot, "eng", "tools", "spec-pr-validation", "src", "index.ts");
   const outputDirectory = captureGithubOutput
     ? await mkdtemp(join(tmpdir(), "typespec-requirement-"))
     : undefined;
@@ -74,7 +74,7 @@ test.concurrent("No files to check", async ({ expect }) => {
 
 test("Rejects an invalid spec type", async ({ expect }) => {
   const repoRoot = join(import.meta.dirname, "..", "..", "..", "..");
-  const script = join(repoRoot, "eng", "tools", "typespec-requirement", "src", "index.ts");
+  const script = join(repoRoot, "eng", "tools", "spec-pr-validation", "src", "index.ts");
   const { stderr, exitCode } = await execa(
     process.execPath,
     [script, "--spec-type", "data-plane)|.*"],

@@ -4,6 +4,18 @@ The `eng` directory contains source code for automated tooling running on this r
 
 For context on this directory, see [Design guidelines for spec repos validation tooling] (Microsoft-internal).
 
+## Spec PR Validation
+
+[Spec PR Validation](tools/spec-pr-validation/) checks the existing TypeSpec
+Requirement policies for committed specification changes:
+
+```bash
+node eng/tools/spec-pr-validation/src/index.ts --base-commitish HEAD^ --head-commitish HEAD
+```
+
+Repository administrators must update required-check settings from **TypeSpec
+Requirement** to **Spec PR Validation** when deploying the workflow rename.
+
 ## Protected files
 
 The **Protected Files** check keeps repository-managed files out of specification
