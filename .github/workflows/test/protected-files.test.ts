@@ -5,7 +5,7 @@ import { simpleGit } from "simple-git";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
 import { execFile } from "../../shared/src/exec.ts";
-import { checkProtectedFiles } from "../src/protected-files.ts";
+import { checkProtectedFiles, runProtectedFiles } from "../src/protected-files.ts";
 import { createMockContext, createMockCore } from "./mocks.ts";
 
 vi.mock("../../shared/src/changed-files.ts", () => ({ getChangedFiles: vi.fn() }));
@@ -77,6 +77,66 @@ describe("Protected Files review guidance", () => {
     else vi.mocked(execFile).mockRejectedValueOnce(error);
     await expect(run()).rejects.toThrow(error);
     expect(core.info).not.toHaveBeenCalled();
+  });
+
+  it("publishes successful guidance through the workflow entry point", async () => {
+    const { context, core } = setup();
+    vi.mocked(getChangedFiles).mockResolvedValue(["eng/tools/example/index.ts"]);
+    await runProtectedFiles({ context, core });
+    expect(core.summary.addRaw).toHaveBeenCalledWith(
+      expect.stringContaining("## Code-owner review guidance"),
+    );
+    expect(core.summary.addRaw).toHaveBeenCalledWith(expect.stringContaining("@tool-owner"));
+    expect(core.summary.write).toHaveBeenCalledOnce();
+    expect(core.setFailed).not.toHaveBeenCalled();
+  });
+
+  it.each(["diff", "CODEOWNERS"])(
+    "publishes actionable failure guidance without treating %s errors as missing approval",
+    async (source) => {
+      const { context, core } = setup();
+      const error = new Error(`Unable to read ${source}`);
+      if (source === "diff") vi.mocked(getChangedFiles).mockRejectedValueOnce(error);
+      else vi.mocked(execFile).mockRejectedValueOnce(error);
+      await expect(runProtectedFiles({ context, core })).rejects.toThrow(error);
+      expect(core.error).toHaveBeenCalledWith(error);
+      expect(core.setFailed).toHaveBeenCalledWith("Unable to generate code-owner review guidance");
+      expect(core.summary.addRaw).toHaveBeenCalledWith(
+        expect.stringContaining(`**Evaluation error:** \`Unable to read ${source}\``),
+      );
+      expect(core.summary.addRaw).toHaveBeenCalledWith(expect.stringContaining("> [!CAUTION]"));
+      expect(core.summary.addRaw).toHaveBeenCalledWith(
+        expect.stringContaining("not a missing code-owner approval"),
+      );
+      expect(core.summary.addRaw).toHaveBeenCalledWith(
+        expect.stringContaining("Rerun the failed job"),
+      );
+      expect(core.summary.write).toHaveBeenCalledOnce();
+      expect(core.summary.addRaw).not.toHaveBeenCalledWith(
+        expect.stringContaining("## Code-owner review guidance\n"),
+      );
+    },
+  );
+
+  it("keeps evaluation failed even when writing its error summary fails", async () => {
+    const { context, core } = setup();
+    vi.mocked(getChangedFiles).mockRejectedValueOnce(new Error("Unable to read diff"));
+    core.summary.write.mockRejectedValueOnce(new Error("Summary file unavailable"));
+    await expect(runProtectedFiles({ context, core })).rejects.toThrow("Summary file unavailable");
+    expect(core.setFailed).toHaveBeenCalledWith("Unable to generate code-owner review guidance");
+    expect(core.error).toHaveBeenCalledWith(
+      expect.objectContaining({ message: "Unable to read diff" }),
+    );
+  });
+
+  it("renders non-Error evaluation failures without losing the failure status", async () => {
+    const { context, core } = setup();
+    vi.mocked(getChangedFiles).mockRejectedValueOnce("Diff unavailable");
+    await expect(runProtectedFiles({ context, core })).rejects.toBe("Diff unavailable");
+    expect(core.setFailed).toHaveBeenCalledWith("Unable to generate code-owner review guidance");
+    expect(core.summary.addRaw).toHaveBeenCalledWith(
+      expect.stringContaining("**Evaluation error:** `Diff unavailable`"),
+    );
   });
 
   it("rejects non-PR events", async () => {

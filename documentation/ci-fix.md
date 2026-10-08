@@ -90,8 +90,10 @@ Files under `eng/common/` and `.github/skills/azsdk-common-*` are synchronized f
 that repository rather than editing the synchronized copies here.
 
 If this check fails to read changed files or CODEOWNERS, rerun it or contact the
-repository maintainers. Missing or incomplete data is an evaluation error, not
-an approval decision.
+repository maintainers. Its job summary reports **Unable to generate code-owner
+review guidance**, the evaluation error, and recovery steps. Include the error
+and workflow run link when asking for help. Missing or incomplete data is an
+evaluation error, not an approval decision.
 
 ## `SDK Validation *` checks, like `SDK Validation - Go`
 

@@ -1,8 +1,35 @@
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
 import { execFile } from "../../shared/src/exec.ts";
+import { inlineCode } from "../../shared/src/markdown.ts";
 import { createCodeOwnerReviewGuidance } from "./codeowner-review.ts";
 import { CoreLogger } from "./core-logger.ts";
 import type { GitHubScriptArgs, WebhookEvent } from "./github.ts";
+
+export async function runProtectedFiles(args: Pick<GitHubScriptArgs, "context" | "core">) {
+  const { core } = args;
+  let result;
+  try {
+    result = await checkProtectedFiles(args);
+  } catch (error) {
+    const title = "Unable to generate code-owner review guidance";
+    const message = error instanceof Error ? error.message : String(error);
+    core.error(error instanceof Error ? error : message);
+    core.setFailed(title);
+    await core.summary
+      .addRaw(
+        `## ${title}\n\n` +
+          "> [!CAUTION]\n" +
+          "> Protected Files could not evaluate this PR. This is an automation error, not a missing code-owner approval.\n\n" +
+          `**Evaluation error:** ${inlineCode(message)}\n\n` +
+          "Rerun the failed job. If it still fails, contact the repository maintainers " +
+          "and include this error and the workflow run link.\n\n" +
+          "GitHub's required code-owner reviews and other merge requirements still apply.",
+      )
+      .write();
+    throw error;
+  }
+  await core.summary.addRaw(`## ${result.title}\n\n${result.summary}`).write();
+}
 
 export async function checkProtectedFiles({
   context,
