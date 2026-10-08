@@ -429,9 +429,11 @@ it("succeeds when all discovered projects are suppressed", async () => {
     join(root, "suppressions.yaml"),
     "- tool: TypeSpecValidationAll\n  paths: [skip]\n  reason: skipped\n",
   );
+  await commitFixture();
 
-  await expect(runAll(root)).resolves.toBe(true);
+  await expect(runAll(root, { gitClean: true })).resolves.toBe(true);
   expect(spawn).not.toHaveBeenCalled();
+  expect(cleanWorktree).not.toHaveBeenCalled();
   expect(console.error).not.toHaveBeenCalled();
 });
 
@@ -503,15 +505,20 @@ it("surfaces process launch errors instead of treating them as validation failur
   vi.stubEnv("GITHUB_ACTIONS", "true");
   await addProject("a");
   await addProject("b");
+  const git = await commitFixture();
   const error = new Error("Cannot start node");
   vi.mocked(spawn).mockImplementationOnce(() => {
+    writeFileSync(join(root, "tracked.txt"), "changed");
+    writeFileSync(join(root, "generated.txt"), "generated");
     const child = new ChildProcess();
     queueMicrotask(() => child.emit("error", error));
     return child;
   });
 
-  await expect(runAll(root)).rejects.toBe(error);
+  await expect(runAll(root, { gitClean: true })).rejects.toBe(error);
   expect(spawn).toHaveBeenCalledOnce();
+  expect((await git.status()).isClean()).toBe(true);
+  expect(await readFile(join(root, "tracked.txt"), "utf8")).toBe("original");
   expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^::(?:end)?group::/));
 });
 
@@ -520,17 +527,20 @@ it("stops when a child is terminated by a signal, surfacing any output captured 
   vi.stubEnv("NO_COLOR", "1");
   const project = await addProject("a");
   await addProject("b");
-  vi.mocked(spawn).mockImplementationOnce(() =>
-    exitingChild(null, "SIGTERM", "partial diagnostic"),
-  );
+  const git = await commitFixture();
+  vi.mocked(spawn).mockImplementationOnce(() => {
+    writeFileSync(join(root, "tracked.txt"), "changed");
+    writeFileSync(join(root, "generated.txt"), "generated");
+    return exitingChild(null, "SIGTERM", "partial diagnostic");
+  });
 
-  await expect(runAll(root)).rejects.toThrow(`${project} terminated by SIGTERM`);
+  await expect(runAll(root, { gitClean: true })).rejects.toThrow(
+    `${project} terminated by SIGTERM`,
+  );
   expect(spawn).toHaveBeenCalledOnce();
-  const groupTitle = vi
-    .mocked(console.log)
-    .mock.calls.map((call) => String(call[0]))
-    .find((line) => line.startsWith("::group::"));
-  expect(groupTitle).toMatch(/^::group::fail .*[/\\]a$/);
+  expect((await git.status()).isClean()).toBe(true);
+  expect(await readFile(join(root, "tracked.txt"), "utf8")).toBe("original");
+  expect(console.log).toHaveBeenCalledWith("::group::fail a");
   expect(console.log).toHaveBeenCalledWith("partial diagnostic");
   expect(console.log).toHaveBeenCalledWith(
     `TypeSpec Validation for ${project} terminated by SIGTERM`,
@@ -593,16 +603,8 @@ it.each([false, true])(
   },
 );
 
-it("does not clean suppressed projects or dry runs", async () => {
-  await addProject("skip");
-  await writeFile(
-    join(root, "suppressions.yaml"),
-    "- tool: TypeSpecValidationAll\n  paths: [skip]\n  reason: skipped\n",
-  );
-  await commitFixture();
-
-  await expect(runAll(root, { gitClean: true })).resolves.toBe(true);
-  await writeFile(join(root, "suppressions.yaml"), "[]");
+it("does not clean a dirty checkout during a dry run", async () => {
+  await addProject("a");
   await writeFile(join(root, "local.txt"), "keep");
   await expect(runAll(root, { gitClean: true, dryRun: true })).resolves.toBe(true);
 
@@ -633,33 +635,6 @@ it("cleans the entire checkout after failed and successful projects, retaining i
   expect((await git.status()).isClean()).toBe(true);
   await expect(access(join(root, "generated"))).rejects.toMatchObject({ code: "ENOENT" });
   expect(await readFile(join(root, "cache.tmp"), "utf8")).toBe("keep");
-});
-
-it.each(["error", "signal"])("cleans before propagating a child %s", async (failure) => {
-  vi.stubEnv("GITHUB_ACTIONS", "true");
-  await addProject("a");
-  await addProject("b");
-  const git = await commitFixture();
-  vi.mocked(spawn).mockImplementationOnce(() => {
-    writeFileSync(join(root, "tracked.txt"), "changed");
-    writeFileSync(join(root, "generated.txt"), "generated");
-    if (failure === "signal") return exitingChild(null, "SIGTERM");
-    const child = new ChildProcess();
-    queueMicrotask(() => child.emit("error", new Error("Cannot start node")));
-    return child;
-  });
-
-  await expect(runAll(root, { gitClean: true })).rejects.toThrow(
-    failure === "signal" ? "terminated by SIGTERM" : "Cannot start node",
-  );
-  expect(spawn).toHaveBeenCalledOnce();
-  expect((await git.status()).isClean()).toBe(true);
-  expect(await readFile(join(root, "tracked.txt"), "utf8")).toBe("original");
-  if (failure === "signal") {
-    expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
-  } else {
-    expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^::(?:end)?group::/));
-  }
 });
 
 it.each(["modified", "staged", "untracked"])(

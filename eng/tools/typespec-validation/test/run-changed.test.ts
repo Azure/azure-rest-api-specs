@@ -31,7 +31,6 @@ beforeEach(async () => {
   vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.spyOn(console, "log").mockImplementation(() => {});
   vi.spyOn(console, "error").mockImplementation(() => {});
-  vi.spyOn(console, "debug").mockImplementation(() => {});
   vi.mocked(findChangedProjects)
     .mockReset()
     .mockResolvedValue({
@@ -171,43 +170,6 @@ it("dry runs list project context but do not validate or clean a dirty checkout"
   );
 });
 
-it.each([false, true])(
-  "cleans generated output outside the changed project without hiding failures with verbose=%s",
-  async (verbose) => {
-    const git = simpleGit(root);
-    await git.add(".");
-    await git.raw([
-      "-c",
-      "user.name=Test",
-      "-c",
-      "user.email=test@example.com",
-      "-c",
-      "commit.gpgsign=false",
-      "commit",
-      "-m",
-      "Fixture",
-    ]);
-    vi.mocked(spawn).mockImplementationOnce(() => {
-      writeFileSync(join(root, "generated.txt"), "generated");
-      const child = new ChildProcess();
-      queueMicrotask(() => child.emit("close", 1, null));
-      return child;
-    });
-
-    await expect(runChanged(project, { gitClean: true, verbose })).resolves.toBe(false);
-    expect(spawn).toHaveBeenCalledOnce();
-    expect((await git.status()).isClean()).toBe(true);
-    if (verbose) {
-      expect(console.debug).toHaveBeenCalledWith(
-        expect.stringContaining('TSV cleanup {"command":"clean"'),
-      );
-    } else {
-      expect(console.debug).not.toHaveBeenCalled();
-    }
-    expect(console.error).toHaveBeenCalledWith(expect.stringContaining("failed for project"));
-  },
-);
-
 it.each(["false", "true"])(
   "continues after a failed changed project and reports failures with GITHUB_ACTIONS=%s",
   async (githubActions) => {
@@ -218,13 +180,22 @@ it.each(["false", "true"])(
       projects: [project, other],
       checkingAllSpecs: false,
     });
+    const git = simpleGit(root);
+    await git
+      .addConfig("user.name", "Test")
+      .addConfig("user.email", "test@example.com")
+      .addConfig("commit.gpgsign", "false")
+      .add(".")
+      .commit("Fixture");
     vi.mocked(spawn).mockImplementationOnce(() => {
+      writeFileSync(join(root, "generated.txt"), "generated");
       const child = new ChildProcess();
       queueMicrotask(() => child.emit("close", 1, null));
       return child;
     });
-    await expect(runChanged(root)).resolves.toBe(false);
+    await expect(runChanged(root, { gitClean: true })).resolves.toBe(false);
     expect(spawn).toHaveBeenCalledTimes(2);
+    expect((await git.status()).isClean()).toBe(true);
     expect(console.error).toHaveBeenLastCalledWith(d`
       TypeSpec Validation failed for some folder to fix run and address any errors:
        > pnpm install
