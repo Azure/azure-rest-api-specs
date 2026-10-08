@@ -51,7 +51,7 @@ model EndpointProperties {
   @doc("The fully-qualified DNS name or IP address of the endpoint. Traffic Manager returns this value in DNS responses to direct traffic to this endpoint.")
   target: string;
 
-  @doc("Monitoring target is where Private Traffic Manager will gather health information.If MonitoringTarget is not configured EndpointTarget will be used instead. If the EndpointTarget is IPv6 then the Monitoring Target MUST be configured. Monitoring Target cannot be an IPv6 address.")
+  @doc("Monitoring target is where Private Traffic Manager will gather health information.It can differ from the endpoint target, for example when the target is an IPv6 address. If not configured, the endpoint target is used. It is required when the target is IPv6 and cannot itself be an IPv6 address.")
   monitoringTarget?: string;
 
   @doc("The status of the endpoint. If the endpoint is Enabled, it is probed for endpoint health and is included in the traffic routing method.")
@@ -75,14 +75,14 @@ model EndpointProperties {
   @doc("The health policy associated with this endpoint.")
   healthPolicyId?: HealthPolicyId;
 
-  @doc("The IP address ranges assigned to this endpoint when using the 'Subnet' traffic routing method. Each item represents either a single IP address, a CIDR range using first and scope, or an address range using first and last. Ranges must not overlap across endpoints in the profile. An endpoint with no subnet ranges is the optional fallback endpoint.")
+  @doc("The IP address ranges assigned to this endpoint when using the 'Subnet' traffic routing method. Each item represents either a single IP address, a CIDR range using first and scope, or an address range using first and last. Ranges must not overlap across endpoints in the profile. A profile can have at most one fallback endpoint; an endpoint with no subnet ranges is that fallback.")
   @identifiers(#[])
   subnets?: IpAddressRange[];
 
-  @doc("The virtual network ARM resource IDs assigned to this endpoint when using the 'VNet' traffic routing method. A virtual network must not be assigned to more than one endpoint in the profile. An endpoint with no virtual networks is the optional fallback endpoint.")
+  @doc("The virtual network ARM resource IDs assigned to this endpoint when using the 'VNet' traffic routing method. A virtual network must not be assigned to more than one endpoint in the profile. A profile can have at most one fallback endpoint; an endpoint with no virtual networks is that fallback.")
   virtualNetworkIds?: VirtualNetworkId[];
 
-  @doc("The site ARM resource IDs assigned to this endpoint when using the 'Site' traffic routing method. Sites must belong to the topology map associated with the profile and must not be assigned to more than one endpoint in the profile. An endpoint with no sites is the optional fallback endpoint.")
+  @doc("The site ARM resource IDs assigned to this endpoint when using the 'Site' traffic routing method. Sites must belong to the topology map associated with the profile and must not be assigned to more than one endpoint in the profile. A profile can have at most one fallback endpoint; an endpoint with no sites is that fallback.")
   siteIds?: SiteId[];
 
   @visibility(Lifecycle.Read)
