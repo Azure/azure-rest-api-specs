@@ -85,6 +85,10 @@ export async function readFileAtCommit(
   }
 }
 
+export function getStructureVersion(relativePath: string): 1 | 2 {
+  return relativePath.includes("data-plane") || relativePath.includes("resource-manager") ? 2 : 1;
+}
+
 /**
  * Reports changes under the top-level spec folder (`specification/<service>`), optionally limited
  * to files matching `globs` relative to that folder.
