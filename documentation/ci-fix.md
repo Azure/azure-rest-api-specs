@@ -69,24 +69,39 @@ This check is owned by One Engineering System. See [1ES PoliCheck] for help.
 
 ## `Protected Files`
 
-This check keeps repository-managed tooling and configuration out of specification
-contributions. Remove the changes to the files listed in the check's errors from
-your PR, including any deletions or renames. If a tooling change is needed, open an
-issue for the repository maintainers instead of requesting approval to include it
-in your specification PR.
+This check only covers repository-managed tooling and configuration: `.gitignore`,
+`cspell.json`, `cspell.yaml`, `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`,
+and files under `.github/`, `.vscode/`, and `eng/`. `.github/CODEOWNERS` and
+non-synchronized `.github/skills/` files remain excluded.
 
-This is a contribution-scope check, not an author-permission check. Maintenance-only
-PRs that do not change `specification/` pass it, but their normal CODEOWNERS review
-and other merge requirements still apply. Mixed specification/protected-file PRs
-fail regardless of ownership, approvals, labels, or who reruns the check. Deletions
-and both sides of renames count when determining specification scope.
+Specification-only PRs pass without an ownership report. GitHub's normal
+code-owner review requirements handle specification ownership; this check does
+not evaluate it.
+
+The **Next Steps to Merge** comment and the job summary list only protected files,
+including deletions and both sides of renames. They group those files by area and
+the last matching rule in the PR's base-branch CODEOWNERS. Each area shows up to
+five example files; unusually large reports explicitly note omitted areas.
+
+A successful check means the guidance was generated, **not that the PR has been
+approved**. GitHub's required code-owner reviews and other merge requirements
+still apply. Areas without an assigned code owner still need normal PR review.
+
+Repository-managed files are outside the scope of a specification contribution.
+Remove unrelated changes from your specification PR. If a tooling change is
+needed, open an issue for the repository maintainers or propose a separate
+maintenance PR. Intentional maintenance changes still need the applicable owners'
+approval; the check's guidance does not itself grant or enforce that approval.
 
 Files under `eng/common/` and `.github/skills/azsdk-common-*` are synchronized from
 [Azure/azure-sdk-tools](https://github.com/Azure/azure-sdk-tools). Make changes in
 that repository rather than editing the synchronized copies here.
 
-`.github/CODEOWNERS` and non-synchronized `.github/skills/` files are exempt from
-this check. Their normal code-owner review requirements still apply.
+If this check fails to read changed files or CODEOWNERS, rerun it or contact the
+repository maintainers. Its job summary reports **Unable to generate code-owner
+review guidance**, the evaluation error, and recovery steps. Include the error
+and workflow run link when asking for help. Missing or incomplete data is an
+evaluation error, not an approval decision.
 
 ## `SDK Validation *` checks, like `SDK Validation - Go`
 

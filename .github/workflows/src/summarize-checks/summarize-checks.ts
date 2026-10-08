@@ -30,6 +30,7 @@ import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { commentOrUpdate } from "../comment.ts";
+import { getCodeOwnerReviewGuidance } from "../codeowner-review.ts";
 import { extractInputs } from "../context.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 import {
@@ -411,7 +412,7 @@ export async function summarizeChecksImpl(
     }
   }
 
-  const [commentBody, automatedChecksMet] = createNextStepsComment(
+  const [nextSteps, automatedChecksMet] = createNextStepsComment(
     core,
     repo,
     labelNames,
@@ -421,6 +422,17 @@ export async function summarizeChecksImpl(
     impactAssessment !== undefined,
     target_url,
   );
+  const reviewGuidance = await getCodeOwnerReviewGuidance(
+    github,
+    core,
+    owner,
+    repo,
+    issue_number,
+    head_sha,
+  );
+  const commentBody = reviewGuidance
+    ? `${nextSteps}\n\n## Protected files\n\n${reviewGuidance}`
+    : nextSteps;
 
   automatedChecksMet.target_url = target_url;
 

@@ -13,14 +13,6 @@ on:
 permissions:
   contents: read
 
-env:
-  # Evaluate before checkout or dependency setup, which trusted PRs may change.
-  user-allowed: >-
-    ${{
-      github.event.pull_request.user.login == 'azure-sdk' ||
-      github.event.pull_request.user.login == 'azure-sdk-automation[bot]'
-    }}
-
 jobs:
   protected-files:
     name: Protected Files
@@ -28,13 +20,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      # This required job must pass rather than be skipped for trusted authors.
-      - name: User allowed
-        if: ${{ env.user-allowed == 'true' }}
-        run: echo "Trusted automation account is allowed to update protected files"
-
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        if: ${{ env.user-allowed != 'true' }}
         with:
           persist-credentials: false
           # Compare the PR merge commit with its base-branch parent.
@@ -43,13 +29,24 @@ jobs:
             .github
 
       - uses: ./.github/actions/install-deps-github-script
-        if: ${{ env.user-allowed != 'true' }}
 
-      - name: Detect changes to protected files
-        if: ${{ env.user-allowed != 'true' }}
+      - name: Explain code-owner review
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
-            const { checkProtectedFiles } = await import("${{ github.workspace }}/.github/workflows/src/protected-files.ts");
-            const result = await checkProtectedFiles({ context, core });
-            await core.summary.addRaw(`## ${result.title}\n\n${result.summary}`).write();
+            const { runProtectedFiles } = await import("${{ github.workspace }}/.github/workflows/src/protected-files.ts");
+            const result = await runProtectedFiles({ context, core });
+            // Temporary unauthorized-author preview for this draft PR; remove before merge.
+            if (context.payload.pull_request.number === 47098 && result.protectedFiles.length > 0) {
+              await core.summary.addRaw(
+                "\n\n## Unauthorized-author preview\n\n" +
+                "> [!WARNING]\n" +
+                "> For this preview, the PR author is treated as not authorized to change the protected files listed above. " +
+                "These repository-managed files are outside the scope of a specification contribution. " +
+                "Remove these changes from your specification PR, or discuss an intentional maintenance change with the repository maintainers.\n\n" +
+                "This is a simulated result, not a real permission lookup.\n\n"
+              ).write();
+              core.setFailed(
+                "Preview only: remove changes to protected files from your specification PR. If a tooling change is needed, contact the repository maintainers."
+              );
+            }

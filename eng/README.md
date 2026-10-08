@@ -6,25 +6,27 @@ For context on this directory, see [Design guidelines for spec repos validation 
 
 ## Protected files
 
-The **Protected Files** check keeps repository-managed files out of specification
-contributions. It is a contribution-scope check, not a request for code-owner approval.
+The **Protected Files** check is informational review guidance, not a second
+approval gate. It retains the protected-path scope and exclusions, grouping only
+protected files by area and their effective base-branch CODEOWNERS rule.
+Specification-only PRs pass without an ownership report; their code-owner
+approval requirements are handled by GitHub.
 Contributor guidance is in the [CI Fix Guide](../documentation/ci-fix.md#protected-files).
 
-Maintenance-only PRs pass this check without a merge bypass. A PR is
-maintenance-only when it does not change `specification/`, including deletions or
-either side of a rename. Mixed specification and protected-file changes still
-fail, regardless of the author's
-ownership or reviews.
-
-GitHub's existing CODEOWNERS review requirements determine who approves
-maintenance changes; Protected Files does not maintain an author roster or
-resolve team membership. Any contributor can propose a maintenance-only PR, but
-all applicable code-owner reviews and other merge requirements still apply.
+Both maintenance-only and mixed specification/tooling PRs pass once the guidance
+is generated. GitHub's existing CODEOWNERS review requirements determine who
+approves changes; Protected Files does not maintain an author roster, resolve
+team membership, or decide whether approvals are satisfied. A green check does
+not imply code-owner approval.
 The read-only `pull_request` check evaluates the PR merge commit against its
 base-branch parent, so policy changes are exercised on the PR that introduces
-them. CODEOWNERS reviews still gate changes to the policy itself.
-The existing trusted `azure-sdk` and
-`azure-sdk-automation[bot]` author exemptions remain unchanged.
+them. CODEOWNERS reviews still gate changes to the workflow itself. Guidance is
+generated for all authors, including automation accounts. The trusted
+Summarize Checks workflow independently computes the same protected-file guidance
+from GitHub PR data and base-branch CODEOWNERS for the Next Steps to Merge comment;
+it omits that section when no protected files changed and does
+not publish artifacts or Markdown supplied by PR code. Evaluation errors fail
+rather than report a successful review.
 
 ## Contributor readiness
 
