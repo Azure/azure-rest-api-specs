@@ -1,0 +1,29 @@
+{
+  "operationId": "PrivateEndpointConnections_ApproveOrReject",
+  "title": "Fail to approve a private endpoint connection when the cluster has no pools",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "privateEndpointConnectionName": "example-private-endpoint-connection",
+    "api-version": "2026-10-01-preview",
+    "resource": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Approve for the production database network"
+        }
+      }
+    }
+  },
+  "responses": {
+    "409": {
+      "body": {
+        "error": {
+          "code": "PrivateEndpointRequiresPool",
+          "message": "A private endpoint connection cannot be approved because the cluster has no pools."
+        }
+      }
+    }
+  }
+}

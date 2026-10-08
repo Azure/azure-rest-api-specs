@@ -1,0 +1,34 @@
+{
+  "operationId": "PrivateEndpointConnections_Get",
+  "title": "Get a private endpoint connection disconnected after the last pool was deleted",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "privateEndpointConnectionName": "example-private-endpoint-connection",
+    "api-version": "2026-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/privateEndpointConnections/example-private-endpoint-connection",
+        "name": "example-private-endpoint-connection",
+        "type": "Microsoft.HorizonDb/clusters/privateEndpointConnections",
+        "properties": {
+          "groupIds": [
+            "example-cluster"
+          ],
+          "privateEndpoint": {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/network-resource-group/providers/Microsoft.Network/privateEndpoints/example-private-endpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Rejected",
+            "description": "Disconnected because the last pool in the cluster was deleted.",
+            "actionsRequired": "Create a pool before requesting approval again."
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
