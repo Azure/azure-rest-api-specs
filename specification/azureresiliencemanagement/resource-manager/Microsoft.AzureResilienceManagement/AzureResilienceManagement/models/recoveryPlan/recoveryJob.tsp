@@ -85,6 +85,7 @@ model RecoveryPointSelectionProperties {
   endTime?: utcDateTime;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service accepts only the documented recovery point selection types."
 @added(Versions.v2026_11_30_preview)
 @doc("Specifies how recovery points are selected.")
 union RecoveryPointSelectionType {
@@ -113,6 +114,7 @@ model ResourceSelectionProperties {
   resourceIds?: armResourceIdentifier[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service accepts only the documented resource selection types."
 @added(Versions.v2026_11_30_preview)
 @doc("Specifies whether listed resources are included or excluded.")
 union ResourceSelectionType {

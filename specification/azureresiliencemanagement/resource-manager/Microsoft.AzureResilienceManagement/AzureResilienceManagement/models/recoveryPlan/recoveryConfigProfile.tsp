@@ -446,6 +446,7 @@ model DatabaseRecoveryConfig extends WorkloadConfig {
   rehydrationDefault?: RecoveryPointRehydrationInfo;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance intentionally emits shared database recovery fields through allOf; WorkloadConfig defines the workloadType discriminator."
 @added(Versions.v2026_11_30_preview)
 @doc("Recovery configuration for a SQL Server workload.")
 model SqlInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
@@ -454,6 +455,7 @@ model SqlInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
   workloadType: WorkloadType.SqlInAzureVm;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance intentionally emits shared database recovery fields through allOf; WorkloadConfig defines the workloadType discriminator."
 @added(Versions.v2026_11_30_preview)
 @doc("Recovery configuration for an SAP HANA workload.")
 model SapHanaInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
@@ -462,6 +464,7 @@ model SapHanaInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
   workloadType: WorkloadType.SapHanaInAzureVm;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance intentionally emits shared database recovery fields through allOf; WorkloadConfig defines the workloadType discriminator."
 @added(Versions.v2026_11_30_preview)
 @doc("Recovery configuration for an SAP ASE workload.")
 model SapAseInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
@@ -470,6 +473,7 @@ model SapAseInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
   workloadType: WorkloadType.SapAseInAzureVm;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance intentionally emits shared database recovery fields through allOf; WorkloadConfig defines the workloadType discriminator."
 @added(Versions.v2026_11_30_preview)
 @doc("Recovery configuration for an Oracle workload.")
 model OracleInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
