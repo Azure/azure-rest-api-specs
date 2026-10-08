@@ -4521,6 +4521,18 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
+@clientName("LoadBalancingRuleProperties", "csharp")
+model LoadBalancingRulePropertiesWithAdditionalProperties {
+  ...Common.LoadBalancingRulePropertiesFormat;
+  ...Record<unknown>;
+}
+
+@@alternateType(
+  Common.LoadBalancingRulePropertiesFormat,
+  LoadBalancingRulePropertiesWithAdditionalProperties,
+  "csharp"
+);
+
 @@clientName(
   Microsoft.Network.AzureFirewallPropertiesFormat.aiSecurityAddOn,
   "IsAISecurityAddOnEnabled",
