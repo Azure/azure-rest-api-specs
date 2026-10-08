@@ -1,10 +1,11 @@
 import { execa } from "execa";
-import { cp, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { dirname, join, posix } from "node:path";
+import { dirname, join, posix } from "pathe";
 import { expect, test } from "vitest";
+import { writeBrownfield } from "../src/cli.ts";
+import { validatePr } from "../src/index.ts";
 
-const packageRoot = join(import.meta.dirname, "..");
 const oldService = "specification/foo/resource-manager/Microsoft.Foo";
 const newService = `${oldService}/Foo`;
 const legacy = JSON.stringify(
@@ -32,7 +33,6 @@ async function checkChanges(
   changes: Record<string, string | null>,
 ) {
   const root = await mkdtemp(join(tmpdir(), "typespec-relocations-"));
-  const tool = join(root, "eng/tools/spec-pr-validation");
   async function writeFiles(files: Record<string, string | null>) {
     for (const [path, content] of Object.entries(files)) {
       const fullPath = join(root, path);
@@ -64,16 +64,6 @@ async function checkChanges(
     await git("commit", "--quiet", "-m", "Fixture");
   }
   try {
-    await cp(join(packageRoot, "src"), join(tool, "src"), { recursive: true });
-    await writeFile(join(tool, "package.json"), '{"type":"module"}');
-    await mkdir(join(tool, "node_modules/@azure-tools"), { recursive: true });
-    for (const dependency of ["specs-shared", "suppressions"]) {
-      await symlink(
-        await realpath(join(packageRoot, "node_modules/@azure-tools", dependency)),
-        join(tool, "node_modules/@azure-tools", dependency),
-        process.platform === "win32" ? "junction" : "dir",
-      );
-    }
     await git("init", "--quiet");
     await writeFiles(initial);
     await commit();
@@ -89,14 +79,30 @@ async function checkChanges(
           404,
         ]),
     );
-    const result = await execa(
-      process.execPath,
-      [join(tool, "src/index.ts"), "--response-cache", JSON.stringify(responseCache)],
-      { cwd: root, reject: false, env: { GITHUB_OUTPUT: outputFile } },
-    );
+    const messages: string[] = [];
+    const result = await validatePr({
+      cwd: root,
+      base: "HEAD^",
+      head: "HEAD",
+      logger: {
+        debug: (message) => messages.push(message),
+        info: (message) => messages.push(message),
+        error: (message) => messages.push(message),
+        warning: (message) => messages.push(message),
+        isDebug: () => true,
+      },
+      checkUpstream: (url) => {
+        const status = responseCache[url];
+        if (status === undefined) throw new Error(`Unexpected upstream request: ${url}`);
+        return Promise.resolve(status);
+      },
+    });
+    await writeBrownfield(result.brownfield, outputFile);
     return {
-      exitCode: result.exitCode,
-      stdout: result.stdout + result.stderr,
+      exitCode: result.success ? 0 : 1,
+      stdout: [...messages, ...result.diagnostics.map((diagnostic) => diagnostic.message)].join(
+        "\n",
+      ),
       githubOutput: await readFile(outputFile, "utf8"),
     };
   } finally {
@@ -129,7 +135,7 @@ test("Preserves suppressions when historical Swagger and generated Swagger move 
   );
   expect(result.exitCode).toBe(0);
   expect(result.stdout).toContain("existing API version relocated");
-  expect(result.githubOutput).toBe("");
+  expect(result.githubOutput).toBe("brownfield=false\n");
 });
 
 test("Recognizes preview-to-stable folder moves and additional files in the relocated version", async () => {

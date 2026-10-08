@@ -1,16 +1,26 @@
 import { execa } from "execa";
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { glob, mkdir, mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { dirname, join, resolve } from "node:path";
+import { dirname, join, relative, resolve } from "pathe";
 import { expect, test } from "vitest";
+import { writeBrownfield } from "../src/cli.ts";
+import { checkRequirements } from "../src/typespec-requirement.ts";
 
 async function checkAllUnder(
   path: string,
   responseCache: Record<string, number | undefined> = {},
   captureGithubOutput = false,
 ) {
-  const repoRoot = join(import.meta.dirname, "..", "..", "..", "..");
-  const script = join(repoRoot, "eng", "tools", "spec-pr-validation", "src", "index.ts");
+  const directory = resolve(import.meta.dirname, path);
+  const paths: string[] = [];
+  for await (const file of glob("**/*", { cwd: directory })) {
+    if ((await stat(resolve(directory, file))).isFile()) paths.push(resolve(directory, file));
+  }
+  const firstSpec = paths.find((path) => path.split("/").includes("specification"));
+  const root = firstSpec
+    ? firstSpec.split("/").slice(0, firstSpec.split("/").lastIndexOf("specification")).join("/")
+    : directory;
+  const messages: string[] = [];
   const outputDirectory = captureGithubOutput
     ? await mkdtemp(join(tmpdir(), "typespec-requirement-"))
     : undefined;
@@ -20,24 +30,38 @@ async function checkAllUnder(
     if (outputFile) {
       await writeFile(outputFile, "");
     }
-    const result = await execa(
-      process.execPath,
-      [
-        script,
-        "--check-all-under",
-        resolve(import.meta.dirname, path),
-        "--response-cache",
-        JSON.stringify(responseCache),
-      ],
+    const result = await checkRequirements(
       {
-        cwd: repoRoot,
-        reject: false,
-        env: outputFile ? { ...process.env, GITHUB_OUTPUT: outputFile } : process.env,
+        root,
+        baseCommitish: "base",
+        headCommitish: "head",
+        changes: {
+          additions: paths.map((path) => relative(root, path)),
+          modifications: [],
+          deletions: [],
+          renames: [],
+          total: paths.length,
+        },
+        logger: {
+          debug: (message) => messages.push(message),
+          info: (message) => messages.push(message),
+          error: (message) => messages.push(message),
+          warning: (message) => messages.push(message),
+          isDebug: () => true,
+        },
+      },
+      (url) => {
+        const status = responseCache[url];
+        if (status === undefined) throw new Error(`Unexpected upstream request: ${url}`);
+        return Promise.resolve(status);
       },
     );
+    await writeBrownfield(result.brownfield, outputFile);
     return {
-      stdout: result.stdout + result.stderr,
-      exitCode: result.exitCode,
+      stdout: [...messages, ...result.diagnostics.map((diagnostic) => diagnostic.message)].join(
+        "\n",
+      ),
+      exitCode: result.diagnostics.some((diagnostic) => diagnostic.severity === "error") ? 1 : 0,
       githubOutput: outputFile ? await readFile(outputFile, "utf8") : "",
     };
   } finally {
@@ -72,16 +96,23 @@ test.concurrent("No files to check", async ({ expect }) => {
   expect(exitCode).toBe(0);
 });
 
-test("Rejects an invalid spec type", async ({ expect }) => {
+test("Rejects removed CLI options", async ({ expect }) => {
   const repoRoot = join(import.meta.dirname, "..", "..", "..", "..");
-  const script = join(repoRoot, "eng", "tools", "spec-pr-validation", "src", "index.ts");
+  const script = join(
+    repoRoot,
+    "eng",
+    "tools",
+    "spec-pr-validation",
+    "cmd",
+    "spec-pr-validation.js",
+  );
   const { stderr, exitCode } = await execa(
     process.execPath,
     [script, "--spec-type", "data-plane)|.*"],
     { cwd: repoRoot, reject: false },
   );
 
-  expect(stderr).toContain("--spec-type must be either 'data-plane' or 'resource-manager'");
+  expect(stderr).toContain("Unknown option '--spec-type'");
   expect(exitCode).toBe(1);
 });
 
@@ -341,7 +372,7 @@ test.concurrent.each([false, true])(
     );
     expect(exitCode).toBe(0);
     expect(stdout).toContain(suppressed ? "Suppressed" : "not required to use TypeSpec");
-    expect(githubOutput).toBe(suppressed ? "" : "brownfield=true\n");
+    expect(githubOutput).toBe(suppressed ? "brownfield=false\n" : "brownfield=true\n");
   },
 );
 
@@ -376,7 +407,7 @@ test.concurrent.each([
     expect(exitCode).toBe(1);
     expect(stdout).toContain("suppressions cannot permit new handwritten API versions");
     expect(stdout).not.toContain("Suppressed:");
-    expect(githubOutput).toBe("");
+    expect(githubOutput).toBe("brownfield=false\n");
   },
 );
 

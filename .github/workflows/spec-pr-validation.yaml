@@ -29,12 +29,15 @@ jobs:
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      - run: node eng/tools/spec-pr-validation/src/index.ts --base-commitish HEAD^ --head-commitish HEAD
-        id: tsr
+      - run: >-
+          node eng/tools/spec-pr-validation/cmd/spec-pr-validation.js --base=HEAD^ --head=HEAD
+          ${{ runner.debug == '1' && '--verbose' || '' }}
+        id: validation
 
       # Always add label artifact, even if "brownfield=false", to ensure label is removed when necessary
       - uses: ./.github/actions/add-label-artifact
+        if: ${{ always() && steps.validation.outputs.brownfield != '' }}
         name: Upload artifact with results
         with:
           name: "brownfield"
-          value: "${{ steps.tsr.outputs.brownfield == 'true' }}"
+          value: "${{ steps.validation.outputs.brownfield == 'true' }}"
