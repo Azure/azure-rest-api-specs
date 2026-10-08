@@ -524,10 +524,12 @@ model FileShareRecoveryConfig extends WorkloadConfig {
 @doc("The effective, resolved recovery configuration.")
 model EffectiveConfiguration {
   @added(Versions.v2026_11_30_preview)
+  @visibility(Lifecycle.Read)
   @doc("The effective workload configuration.")
   workloadConfig: WorkloadConfig;
 
   @added(Versions.v2026_11_30_preview)
+  @visibility(Lifecycle.Read)
   @identifiers(#["role"])
   @doc("The resolved target resources.")
   resolvedTargets: ResolvedTargetResource[];
