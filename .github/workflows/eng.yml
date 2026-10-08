@@ -97,7 +97,7 @@ jobs:
           paths=$(git ls-files -- \
             '.github/workflows/*.yml' '.github/workflows/*.yaml' \
             '.github/actions/**/action.yml' '.github/actions/**/action.yaml' |
-            grep -v '\.lock\.yml$' | paste -sd ' ' -)
+            grep -vE '(\.lock\.yml|/agentics-maintenance\.yml)$' | paste -sd ' ' -)
           test -n "$paths"
           echo "paths=$paths" >> "$GITHUB_OUTPUT"
 
