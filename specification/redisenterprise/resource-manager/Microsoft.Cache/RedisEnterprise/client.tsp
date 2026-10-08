@@ -116,6 +116,11 @@ using Microsoft.Cache;
   "csharp"
 );
 @@clientName(
+  MigrationUndoRequest,
+  "RedisEnterpriseMigrationUndoContent",
+  "csharp"
+);
+@@clientName(
   MigrationValidationResponse,
   "RedisEnterpriseMigrationValidationResponseResult",
   "csharp"
