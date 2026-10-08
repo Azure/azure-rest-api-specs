@@ -214,8 +214,8 @@ using Azure.AI.Projects;
 
 // Java names operation request-body models as inputs.
 @@clientName(
-  CreateTeamsPhoneExtensionTelephonyBindingRequest,
-  "CreateTeamsPhoneExtensionTelephonyBindingInput"
+  CreateTeamsPhoneExtensibilityTelephonyBindingRequest,
+  "CreateTeamsPhoneExtensibilityTelephonyBindingInput"
 );
 @@clientName(CreateTelephonyBindingRequest, "CreateTelephonyBindingInput");
 @@clientName(CreateTelephonyCallJobRequest, "CreateTelephonyCallJobInput");
