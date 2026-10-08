@@ -34,20 +34,20 @@
             "evaluatedAt": "2026-07-07T10:00:00Z",
             "detectedIssues": [
               {
-                "issueType": "QuotaExceeded",
+                "issueType": "SubnetIPExhausted",
                 "severity": "Blocking",
-                "message": "The compute quota for the agent pool VM SKU is insufficient to accommodate surge nodes during upgrade.",
+                "message": "The subnet does not have sufficient available IP addresses for surge nodes during upgrade.",
                 "impactedResources": [
                   {
                     "kind": "Arm",
-                    "resourceType": "Microsoft.ContainerService/managedClusters/agentPools",
-                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/nodepool1"
+                    "resourceType": "Microsoft.Network/virtualNetworks/subnets",
+                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/aks-subnet"
                   }
                 ],
                 "recommendedActions": [
                   {
-                    "title": "Request a compute quota increase",
-                    "details": "Request additional vCPU quota for the agent pool VM SKU, or reduce maxSurge so fewer surge nodes are required during the upgrade.",
+                    "title": "Free up or expand subnet address space",
+                    "details": "Increase the subnet size or reduce maxSurge so enough IPs are available for surge nodes.",
                     "documentationLink": "https://learn.microsoft.com/azure/aks/upgradeinsights"
                   }
                 ]

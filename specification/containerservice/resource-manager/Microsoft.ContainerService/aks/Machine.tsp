@@ -41,7 +41,6 @@ model Machine is Azure.ResourceManager.ProxyResource<MachineProperties> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Property intentionally at envelope level for this resource. This is a published API pattern that cannot be changed without breaking existing clients."
   @added(Versions.v2026_08_02_preview)
-  @visibility(Lifecycle.Read)
   zones?: string[];
 }
 

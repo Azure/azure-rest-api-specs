@@ -3626,7 +3626,7 @@
         "tags": [
           "UpgradeInsights"
         ],
-        "description": "Generates (or refreshes) an upgrade readiness evaluation for the managed cluster.\nThe requested scope and target version(s) are supplied in the request body; the\nserver runs the readiness checks — the control plane Kubernetes version upgrade, a\nsingle agent pool Kubernetes version upgrade, a single agent pool node OS image\nupgrade, or the combined control plane and agent pools upgrade — persists the result\nas a target-specific UpgradeInsight resource with a server-generated name, and\nreturns that resource. Repeating the same scope and effective target refreshes the\nsame resource; a different target creates a different resource. The response body\nis identical to a subsequent GET of the resource.",
+        "description": "Generates (or refreshes) an upgrade readiness evaluation for the managed cluster.\nThe requested scope and target version(s) are supplied in the request body; the\nserver runs the readiness checks — the control plane Kubernetes version upgrade, a\nsingle agent pool Kubernetes version upgrade, a single agent pool node OS image\nupgrade, or the combined control plane and agent pools upgrade — persists the result\nas an UpgradeInsight resource with a server-generated name, and returns that\nresource. The response body is identical to a subsequent GET of the resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -7094,7 +7094,7 @@
         "tags": [
           "UpgradeInsights"
         ],
-        "description": "Lists the stored upgrade insights for the specified managed cluster, one entry per\ngenerated scope and effective target that has not yet expired. This is a read-only\noperation and does not regenerate any evaluation.",
+        "description": "Lists the stored upgrade insights for the specified managed cluster, one entry per\nscope that has been generated and not yet expired. This is a read-only operation and\ndoes not regenerate any evaluation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -7146,7 +7146,7 @@
         "tags": [
           "UpgradeInsights"
         ],
-        "description": "Gets a stored upgrade insight for the managed cluster by its server-generated name.\nThis is a read-only operation: it returns the most recently generated readiness\nevaluation for that scope and effective target from the data store, including the detected\nupgrade-blocking issues and contextual upgrade information. It does not regenerate\nthe evaluation. If no non-expired evaluation exists for the name, it returns 404.",
+        "description": "Gets a stored upgrade insight for the managed cluster by its server-generated name.\nThis is a read-only operation: it returns the most recently generated readiness\nevaluation for that scope from the data store, including the detected\nupgrade-blocking issues and contextual upgrade information. It does not regenerate\nthe evaluation. If no non-expired evaluation exists for the name, it returns 404.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -7173,7 +7173,7 @@
             "description": "The name of the UpgradeInsight",
             "required": true,
             "type": "string",
-            "pattern": "^(?=.{1,128}$)(?:(?:controlPlane|controlPlaneAndAgentPools)-[A-Za-z0-9][A-Za-z0-9._-]*|(?:agentPool|nodeImage)-[a-z0-9][a-z0-9-]*-[A-Za-z0-9][A-Za-z0-9._-]*)$"
+            "pattern": "^[A-Za-z0-9]$|^[A-Za-z0-9][A-Za-z0-9._-]{0,126}[A-Za-z0-9]$"
           }
         ],
         "responses": {
@@ -9918,7 +9918,7 @@
     },
     "ControlPlaneAndAgentPoolsUpgradeInsightProperties": {
       "type": "object",
-      "description": "Properties for a combined control plane and agent pools Kubernetes version upgrade\ninsight: a single evaluation of the control plane plus every agent pool for one\ntarget Kubernetes version. This scope is Kubernetes-version-only — node OS image\nupgrades are never part of a combined evaluation and must be requested separately\nwith a `nodeImage-<agentPoolName>` insight.",
+      "description": "Properties for a combined control plane and agent pools Kubernetes version upgrade\ninsight: a single evaluation of the control plane plus every agent pool for one\ntarget Kubernetes version. This scope is Kubernetes-version-only — node OS image\nupgrades are never part of a combined evaluation and must be requested separately\nwith a `nodeImage-<agentPoolName>-<nodeImageVersion>` insight.",
       "properties": {
         "targetKubernetesVersion": {
           "type": "string",
@@ -10484,7 +10484,7 @@
     },
     "GenerateUpgradeInsightsContent": {
       "type": "object",
-      "description": "The base request body for the generateUpgradeInsights action. The concrete shape is\ndetermined by `upgradeType`, so that each scope declares exactly the inputs it needs:\nthe schema itself enforces which of `targetKubernetesVersion`,\n`targetNodeImageVersion`, and `agentPoolName` are required or optional, rather than\nrelying on documented conventions plus server-side validation. For NodeImage, the\nserver resolves the latest available node image when no target is supplied. The\nserver generates (or refreshes) the corresponding target-specific UpgradeInsight\nand returns it.",
+      "description": "The base request body for the generateUpgradeInsights action. The concrete shape is\ndetermined by `upgradeType`, so that each scope declares exactly the inputs it needs:\nthe schema itself enforces which of `targetKubernetesVersion`,\n`targetNodeImageVersion`, and `agentPoolName` are required or optional, rather than\nrelying on documented conventions plus server-side validation. The server generates\n(or refreshes) the corresponding UpgradeInsight and returns it.",
       "properties": {
         "upgradeType": {
           "$ref": "#/definitions/UpgradeType",
@@ -12007,8 +12007,7 @@
           "description": "The Availability zone in which machine is located.",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         }
       },
       "allOf": [
@@ -16227,7 +16226,7 @@
         },
         "targetNodeImageVersion": {
           "type": "string",
-          "description": "The target node OS image version to evaluate. If omitted, the server evaluates the latest available node image. The generated insight always returns the effective version in `properties.targetNodeImageVersion`."
+          "description": "The target node OS image version to evaluate. If omitted, the server resolves and evaluates the latest available node image. The resolved full version is always returned in the generated insight's read-only `targetNodeImageVersion` property."
         }
       },
       "required": [
@@ -18670,7 +18669,7 @@
       "description": "Contextual information for a specific upgrade type (Kubernetes version or node OS\nimage). Because the Kubernetes version and node OS image can be managed\nindependently — for example, auto-upgrade for the node image but manual for the\nKubernetes version — this context is reported per upgrade type rather than once\nfor the whole cluster.",
       "properties": {
         "currentUpgradeStrategy": {
-          "$ref": "#/definitions/UpgradeInsightUpgradeStrategy",
+          "$ref": "#/definitions/UpgradeInsightStrategy",
           "description": "The strategy currently used to perform this type of upgrade (manual or auto-upgrade).",
           "readOnly": true
         },
@@ -18699,7 +18698,7 @@
     },
     "UpgradeInsight": {
       "type": "object",
-      "description": "An upgrade insight for a managed cluster: an on-demand readiness evaluation for an\nupgrade scope, produced by the generateUpgradeInsights action on the managed cluster\nand addressable by a server-generated, casing-controlled name. The name identifies\nthe scope and effective target in a URL-safe form — `controlPlane-<targetKubernetesVersion>`,\n`controlPlaneAndAgentPools-<targetKubernetesVersion>`,\n`agentPool-<agentPoolName>-<targetKubernetesVersion>`, or\n`nodeImage-<agentPoolName>-<targetNodeImageVersion>`. Callers should use the resource\nID returned by generateUpgradeInsights or LIST rather than construct this name. The\nresource itself is read-only: GET returns the stored evaluation and LIST returns the\nstored evaluations for the cluster. Evaluations are (re)generated via the managed\ncluster's generateUpgradeInsights action, whose response body is the same\nUpgradeInsight representation returned by GET.",
+      "description": "An upgrade insight for a managed cluster: an on-demand readiness evaluation for an\nupgrade scope, produced by the generateUpgradeInsights action on the managed cluster\nand addressable by a server-generated name. The name identifies\nthe scope and evaluated target —\n`controlPlane-<targetKubernetesVersion>` (for example `controlPlane-1.33.5`),\n`controlPlaneAndAgentPools-<targetKubernetesVersion>`,\n`agentPool-<agentPoolName>-<targetKubernetesVersion>` (for example\n`agentPool-nodepool1-1.33.5`), or\n`nodeImage-<agentPoolName>-<nodeImageVersion>` (for example\n`nodeImage-nodepool1-202607.01.0`). The node image segment contains only the numeric\nimage version, while `properties.targetNodeImageVersion` returns the full image name.\nThe resource itself\nis read-only: GET returns the stored evaluation and LIST returns the stored\nevaluations for the cluster. Evaluations are (re)generated via the managed cluster's\ngenerateUpgradeInsights action, whose response body is the same UpgradeInsight\nrepresentation returned by GET.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpgradeInsightProperties",
@@ -18867,7 +18866,7 @@
     },
     "UpgradeInsightStatus": {
       "type": "string",
-      "description": "The overall status of an upgrade insight readiness evaluation. This is an aggregation of the\nper-issue `severity` values in `detectedIssues`: any `Blocking` issue ⇒ `Failed`;\notherwise any `Warning` issue ⇒ `Warning`; otherwise (no issues) ⇒ `Passed`. The\nscope-level vocabulary here (Passed/Warning/Failed) intentionally differs from the\nissue-level `UpgradeIssueSeverity` (Blocking/Warning): a `Blocking` issue rolls up to\na `Failed` status, while `Warning` maps through unchanged.",
+      "description": "The overall status of an upgrade insight readiness evaluation. This is a rollup of the\nper-issue `severity` values in `detectedIssues`: any `Blocking` issue ⇒ `Failed`;\notherwise any `Warning` issue ⇒ `Warning`; otherwise (no issues) ⇒ `Passed`. The\nscope-level vocabulary here (Passed/Warning/Failed) intentionally differs from the\nissue-level `UpgradeIssueSeverity` (Blocking/Warning): a `Blocking` issue rolls up to\na `Failed` status, while `Warning` maps through unchanged.",
       "enum": [
         "Passed",
         "Warning",
@@ -18895,7 +18894,7 @@
         ]
       }
     },
-    "UpgradeInsightUpgradeStrategy": {
+    "UpgradeInsightStrategy": {
       "type": "string",
       "description": "The strategy currently used to perform an upgrade (manual or automatic).",
       "enum": [
@@ -18903,7 +18902,7 @@
         "Auto"
       ],
       "x-ms-enum": {
-        "name": "UpgradeInsightUpgradeStrategy",
+        "name": "UpgradeInsightStrategy",
         "modelAsString": true,
         "values": [
           {
@@ -19038,7 +19037,7 @@
     },
     "UpgradeType": {
       "type": "string",
-      "description": "The type of upgrade an upgrade insight evaluates. Each upgrade insight resource\nrepresents exactly one of these scopes and effective targets; both are encoded in the resource name.",
+      "description": "The type of upgrade an upgrade insight evaluates. Each upgrade insight resource\nrepresents exactly one of these scopes; the scope is encoded in the resource name.",
       "enum": [
         "ControlPlane",
         "AgentPool",
