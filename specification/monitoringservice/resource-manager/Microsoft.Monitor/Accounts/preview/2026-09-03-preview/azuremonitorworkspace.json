@@ -1926,7 +1926,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/metricsContainers/{metricsContainerName}/namespaces/{metricNamespace}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/metricsContainers/{metricsContainerName}/namespaces/{encodedMetricNamespace}": {
       "get": {
         "operationId": "MetricNamespaces_Get",
         "tags": [
@@ -1960,9 +1960,9 @@
             "pattern": "^default$"
           },
           {
-            "name": "metricNamespace",
+            "name": "encodedMetricNamespace",
             "in": "path",
-            "description": "The name of the MetricNamespaceResource",
+            "description": "Tilde encoding is used for the metric namespace in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `custom/namespace` is encoded as `custom~2Fnamespace`. Metric configurations provide the original namespace in `properties.namespace`.",
             "required": true,
             "type": "string",
             "maxLength": 260,
@@ -1990,7 +1990,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/metricsContainers/{metricsContainerName}/namespaces/{metricNamespace}/metrics": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/metricsContainers/{metricsContainerName}/namespaces/{encodedMetricNamespace}/metrics": {
       "get": {
         "operationId": "MetricConfigurations_ListByMetricNamespace",
         "tags": [
@@ -2024,9 +2024,9 @@
             "pattern": "^default$"
           },
           {
-            "name": "metricNamespace",
+            "name": "encodedMetricNamespace",
             "in": "path",
-            "description": "The name of the MetricNamespaceResource",
+            "description": "Tilde encoding is used for the metric namespace in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `custom/namespace` is encoded as `custom~2Fnamespace`. Metric configurations provide the original namespace in `properties.namespace`.",
             "required": true,
             "type": "string",
             "maxLength": 260,
@@ -2067,7 +2067,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/metricsContainers/{metricsContainerName}/namespaces/{metricNamespace}/metrics/{metricName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/metricsContainers/{metricsContainerName}/namespaces/{encodedMetricNamespace}/metrics/{encodedMetricName}": {
       "get": {
         "operationId": "MetricConfigurations_Get",
         "tags": [
@@ -2101,18 +2101,18 @@
             "pattern": "^default$"
           },
           {
-            "name": "metricNamespace",
+            "name": "encodedMetricNamespace",
             "in": "path",
-            "description": "The name of the MetricNamespaceResource",
+            "description": "Tilde encoding is used for the metric namespace in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `custom/namespace` is encoded as `custom~2Fnamespace`. Metric configurations provide the original namespace in `properties.namespace`.",
             "required": true,
             "type": "string",
             "maxLength": 260,
             "pattern": "^(?:[A-Za-z0-9._-]|~[0-9A-Fa-f]{2})+$"
           },
           {
-            "name": "metricName",
+            "name": "encodedMetricName",
             "in": "path",
-            "description": "The name of the MetricConfigurationResource",
+            "description": "Tilde encoding is used for the metric name in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `request/count` is encoded as `request~2Fcount`. The original metric name is provided in `properties.metricName`.",
             "required": true,
             "type": "string",
             "maxLength": 260,
@@ -2172,18 +2172,18 @@
             "pattern": "^default$"
           },
           {
-            "name": "metricNamespace",
+            "name": "encodedMetricNamespace",
             "in": "path",
-            "description": "The name of the MetricNamespaceResource",
+            "description": "Tilde encoding is used for the metric namespace in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `custom/namespace` is encoded as `custom~2Fnamespace`. Metric configurations provide the original namespace in `properties.namespace`.",
             "required": true,
             "type": "string",
             "maxLength": 260,
             "pattern": "^(?:[A-Za-z0-9._-]|~[0-9A-Fa-f]{2})+$"
           },
           {
-            "name": "metricName",
+            "name": "encodedMetricName",
             "in": "path",
-            "description": "The name of the MetricConfigurationResource",
+            "description": "Tilde encoding is used for the metric name in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `request/count` is encoded as `request~2Fcount`. The original metric name is provided in `properties.metricName`.",
             "required": true,
             "type": "string",
             "maxLength": 260,
@@ -2258,18 +2258,18 @@
             "pattern": "^default$"
           },
           {
-            "name": "metricNamespace",
+            "name": "encodedMetricNamespace",
             "in": "path",
-            "description": "The name of the MetricNamespaceResource",
+            "description": "Tilde encoding is used for the metric namespace in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `custom/namespace` is encoded as `custom~2Fnamespace`. Metric configurations provide the original namespace in `properties.namespace`.",
             "required": true,
             "type": "string",
             "maxLength": 260,
             "pattern": "^(?:[A-Za-z0-9._-]|~[0-9A-Fa-f]{2})+$"
           },
           {
-            "name": "metricName",
+            "name": "encodedMetricName",
             "in": "path",
-            "description": "The name of the MetricConfigurationResource",
+            "description": "Tilde encoding is used for the metric name in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `request/count` is encoded as `request~2Fcount`. The original metric name is provided in `properties.metricName`.",
             "required": true,
             "type": "string",
             "maxLength": 260,
@@ -3296,11 +3296,11 @@
         },
         "namespace": {
           "type": "string",
-          "description": "The metric namespace."
+          "description": "The actual metric namespace before route encoding."
         },
         "metricName": {
           "type": "string",
-          "description": "The metric name."
+          "description": "The actual ingested metric name before route encoding."
         },
         "metricType": {
           "$ref": "#/definitions/MetricConfigurationType",

@@ -32,7 +32,10 @@ namespace Microsoft.Monitor {
   alias metricResourceNamePattern = "^(?:[A-Za-z0-9._-]|~[0-9A-Fa-f]{2})+$";
 
   /**
-   * A tilde-encoded metric namespace or metric name.
+   * A tilde-encoded metric namespace or metric name used in resource paths.
+   * ASCII letters, digits, period, underscore, and hyphen remain unchanged.
+   * Each byte of any other UTF-8 character is represented as `~HH`
+   * hexadecimal; for example, `/` is `~2F` and a space is `~20`.
    */
   @added(Versions.v2026_09_03_preview)
   @pattern(metricResourceNamePattern)
@@ -89,12 +92,12 @@ namespace Microsoft.Monitor {
     provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
 
     /**
-     * The metric namespace.
+     * The actual metric namespace before route encoding.
      */
     `namespace`?: string;
 
     /**
-     * The metric name.
+     * The actual ingested metric name before route encoding.
      */
     metricName?: string;
 
@@ -151,12 +154,16 @@ namespace Microsoft.Monitor {
   model MetricNamespaceResource is ProxyResource<MetricNamespaceProperties> {
     ...ResourceNameParameter<
       Resource = MetricNamespaceResource,
-      KeyName = "metricNamespace",
+      KeyName = "encodedMetricNamespace",
       SegmentName = "namespaces",
       NamePattern = metricResourceNamePattern,
       Type = MetricResourceName
     >;
   }
+  @@doc(
+    MetricNamespaceResource.name,
+    "Tilde encoding is used for the metric namespace in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `custom/namespace` is encoded as `custom~2Fnamespace`. Metric configurations provide the original namespace in `properties.namespace`."
+  );
 
   /**
    * A metric configuration in an Azure Monitor Workspace metric namespace.
@@ -167,10 +174,14 @@ namespace Microsoft.Monitor {
     is ProxyResource<MetricConfigurationProperties> {
     ...ResourceNameParameter<
       Resource = MetricConfigurationResource,
-      KeyName = "metricName",
+      KeyName = "encodedMetricName",
       SegmentName = "metrics",
       NamePattern = metricResourceNamePattern,
       Type = MetricResourceName
     >;
   }
+  @@doc(
+    MetricConfigurationResource.name,
+    "Tilde encoding is used for the metric name in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `request/count` is encoded as `request~2Fcount`. The original metric name is provided in `properties.metricName`."
+  );
 }
