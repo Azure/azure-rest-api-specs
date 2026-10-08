@@ -47,14 +47,19 @@ model AgentJsonObject is Record<unknown>;
 @doc("Classifier subject roles used by existing AACS/AOAI flows. This is not actor identity or an authorization claim.")
 union AacsSubjectRole {
   string,
+
   @doc("User-authored content.")
   User: "user",
+
   @doc("System-authored content.")
   System: "system",
+
   @doc("Assistant-authored content.")
   Assistant: "assistant",
+
   @doc("Tool-authored content.")
   Tool: "tool",
+
   @doc("Function-authored content.")
   Function: "function",
 }
@@ -66,11 +71,12 @@ model AacsContextExtension {
   role?: AacsSubjectRole;
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Agent Hooks extension namespaces retain arbitrary native JSON; a string-only map would regress the canonical context."
 @added(Versions.v2026_10_15_preview)
 @doc("Canonical namespaced extensions, including the optional AACS classifier-role bridge.")
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Agent Hooks extension namespaces retain arbitrary native JSON; a string-only map would regress the canonical context."
 model AgentContextExtensions {
   ...AgentJsonObject;
+
   @doc("Optional AACS-specific metadata; do not copy the legacy Unified Moderate body here.")
   aacs?: AacsContextExtension;
 }
