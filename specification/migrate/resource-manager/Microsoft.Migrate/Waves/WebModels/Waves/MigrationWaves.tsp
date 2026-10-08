@@ -53,6 +53,11 @@ model WaveProperties is AzureResourceProperties {
   @doc("The current stage of the wave.")
   @visibility(Lifecycle.Read)
   stage?: string;
+
+  @doc("The execution mode for the migration process.")
+  @added(ApiVersions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  executionMode?: ExecutionMode;
 }
 
 @doc("ARG query and other details to create workloads within a wave.")
