@@ -14,6 +14,7 @@ scalar VirtualNetworkId
     }
   ]>;
 
+@TypeSpec.Versioning.added(Versions.v2026_10_01_preview)
 scalar SiteId
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -22,6 +23,7 @@ scalar SiteId
   ]>;
 
 @doc("An IP address or address range used to identify a network. Provide first alone for a single IP, first and scope for a CIDR range, or first and last for an explicit range. Last and scope are mutually exclusive.")
+@TypeSpec.Versioning.added(Versions.v2026_10_01_preview)
 model IpAddressRange {
   @doc("The first IP address in the range.")
   first?: string;
@@ -54,6 +56,7 @@ model SiteProperties {
   virtualNetworkIds?: VirtualNetworkId[];
 
   @doc("The IP address ranges that form the Site. Each item represents either a single IP address, a CIDR range using first and scope, or an address range using first and last. A Site can contain either virtual networks or subnet ranges, but not both.")
+  @TypeSpec.Versioning.added(Versions.v2026_10_01_preview)
   @identifiers(#[])
   subnets?: IpAddressRange[];
 
