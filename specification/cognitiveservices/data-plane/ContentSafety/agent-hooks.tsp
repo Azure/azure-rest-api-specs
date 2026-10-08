@@ -10,7 +10,7 @@ using Azure.ClientGenerator.Core;
 namespace ContentSafety;
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Agent Hooks 0.1 defines a closed set of interception points; unsupported points must fail validation."
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("The closed set of Agent Hooks 0.1 interception points. The service never infers the point from the agent identifier.")
 union AgentInterceptionPoint {
   @doc("Before the execution session starts.")
@@ -39,12 +39,12 @@ union AgentInterceptionPoint {
 }
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Agent Hooks JSON objects permit native nested objects, arrays, primitives and null; a string-only map changes the wire contract."
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("A native JSON object whose member values may be any JSON type, including null.")
 model AgentJsonObject is Record<unknown>;
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The external Agent Hooks 0.1 input role contract is closed."
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("The closed Agent Hooks input-origin set.")
 union AgentInputRole {
   @doc("User-provided input.")
@@ -58,7 +58,7 @@ union AgentInputRole {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The external Agent Hooks 0.1 shutdown reason contract is closed."
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("The closed Agent Hooks session-ending reasons.")
 union AgentShutdownReason {
   @doc("The session completed.")
@@ -72,7 +72,7 @@ union AgentShutdownReason {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The external Agent Hooks 0.1 actor kind contract is closed."
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("The closed Agent Hooks actor-kind set.")
 union AgentActorKind {
   @doc("A human actor.")
@@ -86,7 +86,7 @@ union AgentActorKind {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Agent Hooks 0.1 requires allow, deny or transform; an unknown decision must fail closed."
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("The three canonical Agent Hooks decisions.")
 union AgentDecision {
   @doc("Permit the original target.")
@@ -99,7 +99,7 @@ union AgentDecision {
   Transform: "transform",
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Caller-supplied agent definition metadata. This metadata does not authorize policy selection or resource access.")
 model AgentDefinition {
   @doc("Stable identifier of the agent definition, shared across its sessions.")
@@ -117,7 +117,7 @@ model AgentDefinition {
   version?: string;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Caller-supplied execution-session metadata.")
 model AgentSession {
   @doc("Stable identifier of the run or conversation.")
@@ -133,7 +133,7 @@ model AgentSession {
   turn?: int64;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("The execution-session initialization payload.")
 model AgentInitialization {
   @doc("Names of tools registered for this session.")
@@ -141,7 +141,7 @@ model AgentInitialization {
   toolsRegistered: string[];
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("An input payload. Content is native JSON, not a JSON-encoded string.")
 model AgentInput {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Agent Hooks content is arbitrary native JSON; narrowing it would change the canonical contract."
@@ -152,7 +152,7 @@ model AgentInput {
   role: AgentInputRole;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Metadata for a model request or response.")
 model AgentModel {
   @doc("Logical model identifier.")
@@ -166,7 +166,7 @@ model AgentModel {
   params?: AgentJsonObject;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("One model message.")
 model AgentMessage {
   @doc("The message role.")
@@ -177,7 +177,7 @@ model AgentMessage {
   content: unknown;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("A tool call proposed by a model.")
 model AgentModelToolCall {
   @doc("Optional model-supplied call identifier.")
@@ -191,7 +191,7 @@ model AgentModelToolCall {
   args: AgentJsonObject;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("A completed model response. tool_calls is present even when it is an empty array.")
 model AgentModelResult {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Canonical model response content includes native JSON and null, not JSON encoded inside strings."
@@ -207,7 +207,7 @@ model AgentModelResult {
   finishReason: string;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Optional model token usage.")
 model AgentModelUsage {
   @doc("Non-negative prompt token count.")
@@ -221,7 +221,7 @@ model AgentModelUsage {
   completionTokens?: int64;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("A tool invocation. For a completed call, args contains the arguments actually dispatched after any host-applied transform.")
 model AgentToolCall {
   @doc("Tool-call identifier.")
@@ -242,7 +242,7 @@ model AgentToolCall {
   contentHash?: string;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("A completed tool result.")
 model AgentToolResult {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Canonical tool results may be any JSON value including null."
@@ -259,7 +259,7 @@ model AgentToolResult {
   durationMs?: float64;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("A tool declaration available to the host.")
 model AgentToolDeclaration {
   @doc("Tool name.")
@@ -273,7 +273,7 @@ model AgentToolDeclaration {
   schema?: AgentJsonObject;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Output that the host has not yet released.")
 model AgentOutput {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Canonical output content must preserve arbitrary native JSON."
@@ -281,7 +281,7 @@ model AgentOutput {
   content: unknown;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Caller-reported execution-session summary. The evaluation service does not initiate shutdown or undo previous actions.")
 model AgentSummary {
   @doc("Why the session ended.")
@@ -302,7 +302,7 @@ model AgentSummary {
   durationSeconds?: float64;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Optional trace identifiers.")
 model AgentTrace {
   @doc("Trace identifier.")
@@ -314,7 +314,7 @@ model AgentTrace {
   spanId?: string;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Caller-reported tenant metadata, not an authorization fact.")
 model AgentTenant {
   @doc("Optional tenant identifier.")
@@ -324,7 +324,7 @@ model AgentTenant {
   name?: string;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Caller-reported actor metadata, not an authorization fact.")
 model AgentActor {
   @doc("Optional actor identifier.")
@@ -334,7 +334,7 @@ model AgentActor {
   kind?: AgentActorKind;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Optional caller-reported budget counters.")
 model AgentBudgets {
   @doc("Reported tool-call count.")
@@ -354,7 +354,7 @@ model AgentBudgets {
   costUsd?: float64;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @discriminator("interception_point")
 @doc("Canonical Agent Hooks 0.1 context. The host supplies the exact point and a target equal to its point-specific payload. Authentication, policy selection and composition are transport or host configuration, not body fields. The service validates conditional payloads and target equality.")
 model AgentContext {
@@ -440,7 +440,7 @@ model AgentContext {
   extensions?: AgentJsonObject;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Startup context. target equals agent_init; a host must reject startup transforms.")
 model AgentStartupContext extends AgentContext {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Agent Hooks requires the same snake_case discriminator in every derived context."
@@ -451,7 +451,7 @@ model AgentStartupContext extends AgentContext {
   agentInit: AgentInitialization;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Input context. target equals the complete input object, not only its content.")
 model AgentInputContext extends AgentContext {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Agent Hooks requires the same snake_case discriminator in every derived context."
@@ -461,7 +461,7 @@ model AgentInputContext extends AgentContext {
   input: AgentInput;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Pre-model context. target equals the messages array actually proposed for dispatch.")
 model AgentPreModelCallContext extends AgentContext {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Agent Hooks requires the same snake_case discriminator in every derived context."
@@ -472,7 +472,7 @@ model AgentPreModelCallContext extends AgentContext {
   messages: AgentMessage[];
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Post-model context. target equals the complete response object; the service cannot undo the model call.")
 model AgentPostModelCallContext extends AgentContext {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Agent Hooks requires the same snake_case discriminator in every derived context."
@@ -483,7 +483,7 @@ model AgentPostModelCallContext extends AgentContext {
   response: AgentModelResult;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Pre-tool context. target equals tool_call.args.")
 model AgentPreToolCallContext extends AgentContext {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Agent Hooks requires the same snake_case discriminator in every derived context."
@@ -494,7 +494,7 @@ model AgentPreToolCallContext extends AgentContext {
   toolCall: AgentToolCall;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Post-tool context. target equals tool_result.value; the service cannot undo the tool call.")
 model AgentPostToolCallContext extends AgentContext {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Agent Hooks requires the same snake_case discriminator in every derived context."
@@ -508,7 +508,7 @@ model AgentPostToolCallContext extends AgentContext {
   toolResult: AgentToolResult;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Output context. target equals the complete output object.")
 model AgentOutputContext extends AgentContext {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Agent Hooks requires the same snake_case discriminator in every derived context."
@@ -518,7 +518,7 @@ model AgentOutputContext extends AgentContext {
   output: AgentOutput;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Shutdown context. target equals summary; a host must reject shutdown transforms.")
 model AgentShutdownContext extends AgentContext {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Agent Hooks requires the same snake_case discriminator in every derived context."
@@ -528,7 +528,7 @@ model AgentShutdownContext extends AgentContext {
   summary: AgentSummary;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("A non-blocking concern. Both reason and message are preserved when present.")
 model AgentWarning {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Agent Hooks explicitly permits both absent and null warning reasons."
@@ -541,7 +541,7 @@ model AgentWarning {
   message?: string | null;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("An opaque offline-verifiable evidence pointer. The host must not automatically dereference verification pointers. Its canonical JSON representation is limited to 10,240 UTF-8 bytes.")
 model AgentEvidence {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Agent Hooks evidence permits a null artefact pointer."
@@ -553,7 +553,7 @@ model AgentEvidence {
   verificationPointers?: Record<string>;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("A replacement the host applies to its target, not a transform already applied by the service.")
 model AgentTransform {
   @doc("Path rooted at $target using dot members, bracket indices or quoted members. The deprecated $policy_target alias is accepted by Agent Hooks 0.1. The host rejects unresolvable paths and startup/shutdown transforms.")
@@ -565,7 +565,7 @@ model AgentTransform {
   value?: unknown;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @discriminator("decision")
 @doc("Canonical Agent Hooks Verdict. HTTP 200 indicates evaluation completed, not permission to proceed. The host owns composition, transform application, enforcement, approvals, timeouts and audit. The service does not return an allowed/blocked wrapper, enforced content or harmResults. Unsupported members and invalid decision/approval/transform combinations are rejected.")
 model AgentVerdict {
@@ -594,13 +594,13 @@ model AgentVerdict {
   resultLabels?: string[] | null;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Permit the original target without mutation.")
 model AgentAllowVerdict extends AgentVerdict {
   decision: "allow";
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Deny the action. Approval metadata makes a deny liftable only by the host's configured approval seam; without a resolver it remains denied. An unconditional mandatory deny cannot be lifted by another policy's approval.")
 model AgentDenyVerdict extends AgentVerdict {
   decision: "deny";
@@ -610,7 +610,7 @@ model AgentDenyVerdict extends AgentVerdict {
   approval?: AgentJsonObject;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @doc("Permit only after the host applies the specified transform. The service does not apply it.")
 model AgentTransformVerdict extends AgentVerdict {
   decision: "transform";
@@ -619,7 +619,7 @@ model AgentTransformVerdict extends AgentVerdict {
   transform: AgentTransform;
 }
 
-@added(Versions.v2026_11_01_preview)
+@added(Versions.v2026_10_15_preview)
 @error
 @doc("A validation, authorization, throttling or operational failure. This is an HTTP error, never a successful allow verdict.")
 model AgentEvaluationError {

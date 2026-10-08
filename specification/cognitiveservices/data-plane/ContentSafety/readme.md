@@ -26,7 +26,7 @@ These are the global settings for the Content Safety.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2026-11-01-preview
+tag: package-2026-10-15-preview
 ```
 
 ### Tag: package-2023-04-30-preview
@@ -92,15 +92,15 @@ input-file:
   - preview/2026-09-01-preview/contentsafety.json
 ```
 
-### Tag: package-2026-11-01-preview
+### Tag: package-2026-10-15-preview
 
-These settings apply only when `--tag=package-2026-11-01-preview` is specified.
+These settings apply only when `--tag=package-2026-10-15-preview` is specified.
 This version adds canonical Agent Hooks evaluation. Unified Moderate remains a
 separate operation with its existing request and response representations.
 
-```yaml $(tag) == 'package-2026-11-01-preview'
+```yaml $(tag) == 'package-2026-10-15-preview'
 input-file:
-  - preview/2026-11-01-preview/contentsafety.json
+  - preview/2026-10-15-preview/contentsafety.json
 ```
 
 # Suppressions

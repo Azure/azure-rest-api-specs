@@ -54,7 +54,7 @@ interface BlocklistClient {
   "!autorest"
 );
 
-@TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2026_11_01_preview)
+@TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2026_10_15_preview)
 namespace AgentEvaluationCustomizations {
   @client({
     name: "AgentEvaluationClient",

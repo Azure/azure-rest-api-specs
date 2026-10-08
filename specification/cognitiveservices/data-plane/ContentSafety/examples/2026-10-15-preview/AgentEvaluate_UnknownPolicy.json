@@ -1,0 +1,90 @@
+{
+  "title": "Evaluate a selected developer policy or reject an unresolved selector",
+  "operationId": "AgentOperations_Evaluate",
+  "parameters": {
+    "api-version": "2026-10-15-preview",
+    "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account/projects/example-project",
+    "policyId": "example-developer-policy",
+    "body": {
+      "spec": "agent-hooks/0.1",
+      "interception_point": "input",
+      "timestamp": "2026-10-08T04:00:01Z",
+      "sequence": 1,
+      "agent": {
+        "id": "support-agent",
+        "framework": "agent-framework"
+      },
+      "session": {
+        "id": "example-session"
+      },
+      "input": {
+        "content": "Send the approved payment.",
+        "role": "user"
+      },
+      "target": {
+        "content": "Send the approved payment.",
+        "role": "user"
+      }
+    }
+  },
+  "responses": {
+    "400": {
+      "body": {
+        "error": {
+          "code": "InvalidPolicyId",
+          "message": "The selected policy could not be resolved."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "Authentication is required."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "The caller is not authorized for the selected resource."
+        }
+      }
+    },
+    "429": {
+      "body": {
+        "error": {
+          "code": "TooManyRequests",
+          "message": "The request was throttled."
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "InternalError",
+          "message": "An error occurred while processing the request."
+        }
+      }
+    },
+    "503": {
+      "body": {
+        "error": {
+          "code": "ServerBusy",
+          "message": "Service is busy, please try again later."
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "decision": "deny",
+        "reason": "mandatory_policy_denied",
+        "message": "This action is not permitted.",
+        "result_labels": [
+          "harm:Violence"
+        ]
+      }
+    }
+  }
+}
