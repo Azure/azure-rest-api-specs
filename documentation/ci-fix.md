@@ -90,7 +90,11 @@ SDK Validation does not support a normal PR suppression for a Python package nam
 projects, `readme.python.md`.
 
 - If the project will ship a Python SDK, reserve or publish the declared package name on PyPI.
-- If the project will not ship a Python SDK, remove the Python emitter and package configuration from the spec.
+- **If the project will not ship a Python SDK**:
+  1. Get approval from the Azure SDK team first. By default, specs are expected to publish SDKs in all Tier 1
+     languages: Python, .NET, Java, JavaScript, and Go.
+  2. After approval, remove the Python emitter and package configuration from the project's `tspconfig.yaml`. This
+     prevents Python SDK validation from running and eliminates the unregistered package-name error.
 
 ## `SDK Breaking Change Review`
 
