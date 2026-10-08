@@ -124,6 +124,45 @@ Keep a long-lived branch by protecting it or adding it to those exclusions.
 Candidates and their SHAs are logged, and SHA-guarded Git pushes refuse to delete
 changed tips. API and deletion failures fail the workflow.
 
+## Initial issue triage
+
+[Issue Triage](../.github/workflows/issue-triage.md) classifies newly opened human
+issues as repository engineering (`EngSys`), service-contract/runtime issues
+(`Service Attention`), or uncertain (`needs-team-triage`). High-confidence service
+issues can also receive a service label and API-plane label; clear issue kinds
+receive `bug`, `feature-request`, `question`, or `documentation`.
+It processes internal and external reports, preserves existing labels, and leaves
+one concise comment explaining the routing, with a possible duplicate link or
+one missing-information question when useful. Re-running updates that workflow's
+existing comment rather than creating another. It does not assign owners, set
+priorities, close issues, or establish that a request is still relevant.
+Repository policy continues to handle customer-reported labels separately.
+That policy may clear `needs-triage` when another label is added; the triager
+itself only adds labels.
+Label names and candidate areas come from the checked-in catalogs, not a copied
+inventory or assumed color palette. Ownership-dependent reasoning consults the
+current `CODEOWNERS` entries rather than embedding service-to-owner mappings.
+
+The workflow runs only on upstream `main`. It skips bot-authored, closed, locked,
+and non-actionable reports. Manual dispatch defaults to a dry run:
+
+```bash
+gh workflow run issue-triage.lock.yml --repo Azure/azure-rest-api-specs --ref main \
+  -f issue-number=123 -f dry-run=true
+```
+
+Set `dry-run=false` to apply the labels and comment. An issue changed during
+investigation is left unchanged and the run fails with a refresh instruction;
+dispatch again to triage its current content.
+Eligibility, content, and labels are refreshed immediately before the first write.
+Agent and applier failures are reported in workflow logs, not by creating
+additional failure-report issues, including during dry runs.
+The pinned gh-aw runtime can still record threat-detection warnings or failures
+in its shared tracking issue; that framework logging is separate from the
+triage decision and is not disabled by dry-run mode.
+The separate Backlog Triage workflow investigates old issues for resolution or
+obsolescence; initial triage does not replace that investigation.
+
 ## Repository labels
 
 Repository label configuration starts at [`.github/labels.yaml`](../.github/labels.yaml).
@@ -391,9 +430,10 @@ repository's default module type. Root `tsconfig.json` checks this config and is
 also covered by the GitHub package build.
 
 [Eng](../.github/workflows/eng.yml) validates the workspace, builds once on Linux,
-and runs the Vitest workspace on Ubuntu and Windows with Node 24.
+and runs the Vitest workspace on Ubuntu and Windows with Node 24. Its dedicated
+GitHub Actions lint job runs actionlint and zizmor without installing workspace dependencies.
 New tools do not need their own workflows. `github-test.yaml` separately verifies
-production-only module imports, workflow YAML, and compiled agentic workflow locks.
+production-only module imports and compiled agentic workflow locks.
 
 ## Publishing TypeSpec libraries
 
