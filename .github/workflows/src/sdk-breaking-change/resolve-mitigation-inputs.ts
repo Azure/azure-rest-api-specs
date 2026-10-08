@@ -32,7 +32,7 @@ export async function resolveMitigationTrigger({
   }
 
   core.setOutput("should-run", "true");
-  core.setOutput("pull-number", analysis.prNumber);
+  core.setOutput("pr-number", analysis.prNumber);
   core.setOutput("sdk-language", analysis.sdkLanguage);
   core.setOutput("sdk-repository", languageConfig.repository);
   core.setOutput("head-repository", pull.head.repo.full_name);
