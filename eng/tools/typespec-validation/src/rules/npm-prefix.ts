@@ -1,9 +1,9 @@
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { packageDirectory } from "package-directory";
+import { resolve } from "pathe";
 import { simpleGit } from "simple-git";
 import { failure, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
-import { normalizePath } from "../utils.ts";
 
 export class NpmPrefixRule implements Rule {
   readonly name = "NpmPrefix";
@@ -15,7 +15,7 @@ export class NpmPrefixRule implements Rule {
     let expected_npm_prefix: string | undefined;
     try {
       // If spec folder is inside a git repo, returns repo root
-      expected_npm_prefix = normalizePath(await git.revparse("--show-toplevel"));
+      expected_npm_prefix = resolve(await git.revparse("--show-toplevel"));
     } catch (err) {
       // If spec folder is outside git repo, or if problem running git, throws error
       return failure("npm-prefix", err instanceof Error ? err.message : String(err), {
@@ -23,7 +23,7 @@ export class NpmPrefixRule implements Rule {
       });
     }
 
-    const actual_npm_prefix = normalizePath((await packageDirectory({ cwd: folder })) ?? folder);
+    const actual_npm_prefix = resolve((await packageDirectory({ cwd: folder })) ?? folder);
 
     logger.debug(
       "Expected npm prefix: " +

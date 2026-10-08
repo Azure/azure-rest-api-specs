@@ -1,9 +1,27 @@
 # Foundry Core TypeSpec library
 
 `@azure-tools/typespec-foundry-core` provides shared TypeSpec definitions in the
-`Microsoft.Foundry.Core` namespace. The skeleton includes an empty linter and
-the build, test, and publishing setup. Models, operations, lint rules, and their
-tests can be added without further engineering setup.
+`Microsoft.Foundry.Core` namespace. The library currently includes a narrow set
+of generic, reusable building blocks ported from the Azure AI Foundry data-plane
+spec:
+
+- **Scalars** (`lib/scalars.tsp`) — `FoundryTimestamp`, `FoundryDurationSeconds`,
+  `FoundryDurationMilliseconds`
+- **Pagination** (`lib/pagination.tsp`) — `AgentsPagedResult`,
+  `PagedResultWithNextLink`, `CommonPageQueryParameters`, and the individual
+  page query parameter aliases
+- **Errors** (`lib/errors.tsp`) — `AzureRangeErrorResponse`
+- **Foundations** (`lib/foundations.tsp`) — `FoundryDataPlaneApiVersionParameter`,
+  the preview header aliases, and the low-level `Foundations.Operation` /
+  `Foundations.PreviewOperation` signatures
+- **Jobs** (`lib/jobs.tsp`) — `JobStatus`, `JobLike`, job response envelopes, and
+  the `StandardOperations` job lifecycle templates (`PostJob`, `QueryJobStatus`,
+  `ListJobs`, `CancelJob`, `DeleteJob`, and their `*Preview` variants)
+
+OpenAI/agent-specific patterns, feature opt-in unions, job source models, and
+other service-specific types remain in the spec for now and are candidates for
+a later migration pass. The library also still includes an empty linter; lint
+rules, and their tests can be added without further engineering setup.
 
 ## Development
 
@@ -27,15 +45,25 @@ output. Library linting and warnings-as-errors apply only to the build script,
 not to `tspconfig.yaml`. Root `pnpm build`, `pnpm lint`, and `pnpm test:ci` include
 this library.
 
-The test commands accept the initially empty suite. New `test/**/*.test.ts` files
-are automatically included in the package tests, root test workspace, and
-publishing pipeline.
+New `test/**/*.test.ts` files are automatically included in the package tests,
+root test workspace, and publishing pipeline.
 
 Format TypeSpec sources with:
 
 ```bash
 pnpm exec tsp format "libs/foundry-core/**/*.tsp"
 ```
+
+## Samples
+
+`samples/*.tsp` are small, standalone TypeSpec files that each import the
+library (via a relative `../lib/main.tsp` import) and exercise one area —
+pagination, error handling, and the job lifecycle templates. They are not
+service specs; they exist to demonstrate usage and to catch regressions.
+`test/samples.test.ts` compiles every file under `samples/` with
+`@typespec/compiler`'s `compile()` and `NodeHost`, and asserts there are no
+error diagnostics. Add a new `samples/*.tsp` file whenever a new area of the
+library needs a worked example — it's picked up automatically.
 
 ## Usage
 
@@ -79,4 +107,5 @@ the workspace manifest or its source exports. Use **pnpm pack**, not npm pack,
 so the manifest overrides and catalog versions are applied.
 
 See [Publishing TypeSpec libraries](../../eng/README.md#publishing-typespec-libraries)
-for the manual versioning and Azure Pipelines release workflow.
+for automatic development releases on `latest` and the manual Azure Pipelines
+release workflow.

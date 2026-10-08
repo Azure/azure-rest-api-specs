@@ -28,20 +28,23 @@ jobs:
     # For label events, only run when ARMModelingSignedOff is the label being added or removed,
     # since that label represents a manual reviewer sign-off that affects this workflow's output.
     if: |
-      (github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
-      github.event.label.name == 'ARMModelingSignedOff'
+      github.event.pull_request.state == 'open' &&
+      ((github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
+       github.event.label.name == 'ARMModelingSignedOff')
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: $/.github/actions/checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 2
 
       # Public main is the single source of truth for leases, so a lease merged there is
       # honored without syncing it into each private branch.
       - name: Checkout ARM leases from public main
-        uses: $/.github/actions/checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           repository: Azure/azure-rest-api-specs
           ref: main
           path: arm-leases
@@ -49,7 +52,7 @@ jobs:
             .github/arm-leases/
 
       - name: Install dependencies for github-script actions
-        uses: $/.github/actions/install-deps-github-script
+        uses: ./.github/actions/install-deps-github-script
 
       - name: ARM Modeling Review
         id: detect
@@ -64,21 +67,21 @@ jobs:
 
       - name: Upload artifact for ARMModelingReviewRequired label
         if: always() && steps.detect.outputs.result && fromJson(steps.detect.outputs.result).labelActions['ARMModelingReviewRequired'] != 'none'
-        uses: $/.github/actions/add-label-artifact
+        uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMModelingReviewRequired"
           value: "${{ fromJson(steps.detect.outputs.result).labelActions['ARMModelingReviewRequired'] == 'add' }}"
 
       - name: Upload artifact for ARMModelingSignedOff label
         if: always() && steps.detect.outputs.result && fromJson(steps.detect.outputs.result).labelActions['ARMModelingSignedOff'] != 'none'
-        uses: $/.github/actions/add-label-artifact
+        uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMModelingSignedOff"
           value: "${{ fromJson(steps.detect.outputs.result).labelActions['ARMModelingSignedOff'] == 'add' }}"
 
       - name: Upload artifact for ARMModelingAutoSignedOff label
         if: always() && steps.detect.outputs.result && fromJson(steps.detect.outputs.result).labelActions['ARMModelingAutoSignedOff'] != 'none'
-        uses: $/.github/actions/add-label-artifact
+        uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMModelingAutoSignedOff"
           value: "${{ fromJson(steps.detect.outputs.result).labelActions['ARMModelingAutoSignedOff'] == 'add' }}"

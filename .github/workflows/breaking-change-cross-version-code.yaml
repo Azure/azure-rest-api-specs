@@ -20,15 +20,16 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: $/.github/actions/checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 0
 
       - name: Setup Node and install deps
-        uses: $/.github/actions/setup-node-install-deps
+        uses: ./.github/actions/setup-node-install-deps
 
       - name: Setup .NET 6 SDK
-        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
           dotnet-version: "6.0.x"
 
@@ -53,7 +54,7 @@ jobs:
           always() && 
           (steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName != '')
         name: Upload artifact with BreakingChangeReviewRequired status
-        uses: $/.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName }}"
           value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
@@ -63,7 +64,7 @@ jobs:
           always() && 
           (steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName != '')
         name: Upload artifact with VersioningReviewRequired status
-        uses: $/.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName }}"
           value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
@@ -71,7 +72,7 @@ jobs:
       # Used by other workflows like set-status
       - name: Set job-summary artifact
         if: ${{ always() && steps.breaking-change-cross-version-analyze-code.outputs.summary }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: job-summary
           path: ${{ steps.breaking-change-cross-version-analyze-code.outputs.summary }}

@@ -1408,6 +1408,7 @@ union ContainerType {
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_08_31_preview)
+  @removed(Versions.v2026_10_01)
   HanaScaleoutContainer: "HanaScaleoutContainer",
 }
 
@@ -1545,12 +1546,24 @@ enum ProtectableContainerType {
 /**
  * Recovery point tier type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum RecoveryPointTierType {
-  Invalid,
-  InstantRP,
-  HardenedRP,
-  ArchivedRP,
+union RecoveryPointTierType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  "Invalid",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  "InstantRP",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  "HardenedRP",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  "ArchivedRP",
+
+  /** Instant Access snapshot tier, retained for the policy's instantAccessDurationMinutes. */
+  @added(Versions.v2026_10_01)
+  "IASnapshotRP",
+
+  // Kept closed (no string catch-all) for API versions before 2026-10-01, so those versions' emitted swagger is
+  // unchanged; the service is responsible for not returning "IASnapshotRP" to clients of older API versions.
+  @added(Versions.v2026_10_01)
+  string,
 }
 
 /**
@@ -3381,6 +3394,7 @@ model UnlockDeleteResponse {
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model UpdateRecoveryPointRequest {
   /**
    * Resource properties.
@@ -3398,6 +3412,7 @@ model UpdateRecoveryPointRequest {
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model PatchRecoveryPointInput {
   /**
    * Properties of Recovery Point
@@ -3415,6 +3430,7 @@ model PatchRecoveryPointInput {
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model PatchRecoveryPointPropertiesInput {
   /**
    * Expiry time of Recovery Point in UTC.
@@ -4028,6 +4044,19 @@ model AzureIaaSClassicComputeVMProtectedItem extends ProtectedItem {
   ...AzureIaaSVMProtectedItemProperties;
 }
 
+/**
+ * Specifies how existing Basic VM protection is handled when configuring protection.
+ */
+@added(Versions.v2026_10_01)
+union ExistingBasicVMProtection {
+  string,
+
+  /**
+   * Disables existing Basic VM protection and immediately deletes its recovery points.
+   */
+  DisableWithDeleteRPsNow: "DisableWithDeleteRPsNow",
+}
+
 alias AzureIaaSVMProtectedItemProperties = {
   /**
    * Friendly name of the VM represented by this backup item.
@@ -4095,6 +4124,14 @@ alias AzureIaaSVMProtectedItemProperties = {
    * Extended Properties for Azure IaasVM Backup.
    */
   extendedProperties?: ExtendedProperties;
+
+  /**
+   * Specifies how existing Basic VM protection is handled when configuring protection.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The property name preserves the established VM acronym casing used by Recovery Services Backup contracts."
+  @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  existingBasicVMProtection?: ExistingBasicVMProtection;
 
   /**
    * Type of the policy used for protection
@@ -4435,6 +4472,22 @@ model AzureIaaSVMProtectionPolicy extends ProtectionPolicy {
    * Instant RP retention policy range in days
    */
   instantRpRetentionRangeInDays?: int32;
+
+  /**
+   * Specifies whether Instant Access snapshot is enabled for the policy. If false or omitted,
+   * instantAccessDurationMinutes is ignored and no Instant Access snapshot is retained.
+   */
+  @added(Versions.v2026_10_01)
+  instantAccessSnapshotEnabled?: boolean;
+
+  /**
+   * Duration in minutes for which the Instant Access snapshot is retained, when instantAccessSnapshotEnabled
+   * is true. Must be between 60 and 300 minutes; defaults to 300 minutes if not specified.
+   */
+  @added(Versions.v2026_10_01)
+  @minValue(60)
+  @maxValue(300)
+  instantAccessDurationMinutes?: int32 = 300;
 
   /**
    * TimeZone optional input as string. For example: TimeZone = "Pacific Standard Time".
@@ -5203,6 +5256,12 @@ model SnapshotRestoreParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   logPointInTimeForDBRecovery?: string;
+
+  /**
+   * List of disk ARM IDs the customer should detach in case of filesystem clash.
+   */
+  @added(Versions.v2026_10_01)
+  disksToDetachOnClash?: armResourceIdentifier[];
 }
 
 /**
@@ -5395,6 +5454,144 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
   @added(Versions.v2026_08_31_preview)
   @identifiers(#[])
   includedDatabases?: DatabaseInRP[];
+
+  /**
+   * Detailed info of snapshot restore point.
+   */
+  @added(Versions.v2026_10_01)
+  snapshotRecoveryPointInfo?: SnapshotRecoveryPointInfo;
+}
+
+/**
+ * Extended info class details for workload snapshot.
+ */
+@added(Versions.v2026_10_01)
+model SnapshotRecoveryPointInfo {
+  /**
+   * Resource Group of snapshot restore point.
+   */
+  snapshotResourceGroup?: string;
+
+  /**
+   * Per volume filesystem metadata captured on the VM.
+   */
+  @identifiers(#[])
+  sourceFilesystemInfo?: FilesystemInfo[];
+}
+
+/**
+ * Per volume filesystem metadata captured on the VM.
+ */
+@added(Versions.v2026_10_01)
+model FilesystemInfo {
+  /**
+   * Volume GUID path.
+   */
+  volumeGuid?: string;
+
+  /**
+   * Filesystem type (NTFS / ReFS / etc.).
+   */
+  fileSystemType?: string;
+
+  /**
+   * Volume label.
+   */
+  label?: string;
+
+  /**
+   * Drive letters / mount points pointing at this volume.
+   */
+  accessPaths?: string[];
+
+  /**
+   * True when this volume sits on a Windows Storage Spaces virtual disk.
+   */
+  isOnStorageSpace?: boolean;
+
+  /**
+   * Storage Spaces pool / virtual-disk identifiers.
+   */
+  storageSpaceInfo?: StorageSpaceInfo;
+
+  /**
+   * Physical disks that back this volume (or the storage pool).
+   */
+  @identifiers(#[])
+  diskInfoList?: DiskInfo[];
+}
+
+/**
+ * Identifiers for a Windows Storage Spaces pool and its virtual disk.
+ */
+@added(Versions.v2026_10_01)
+model StorageSpaceInfo {
+  /**
+   * Unique ID of the storage pool.
+   */
+  storagePoolUniqueId?: string;
+
+  /**
+   * Friendly name of the storage pool.
+   */
+  storagePoolFriendlyName?: string;
+
+  /**
+   * Unique ID of the virtual disk.
+   */
+  virtualDiskUniqueId?: string;
+
+  /**
+   * Friendly name of the virtual disk.
+   */
+  virtualDiskFriendlyName?: string;
+}
+
+/**
+ * Metadata for a physical disk that backs a filesystem volume or Storage Spaces pool.
+ * Unlike DiskInformation, this model describes storage topology; DiskInformation only identifies disks included in or excluded from a virtual machine recovery point.
+ */
+@added(Versions.v2026_10_01)
+model DiskInfo {
+  /**
+   * Disk number.
+   */
+  diskNumber?: int32;
+
+  /**
+   * Unique ID of the disk.
+   */
+  diskUniqueId?: string;
+
+  /**
+   * GUID of the disk.
+   */
+  diskGuid?: string;
+
+  /**
+   * Location of the disk.
+   */
+  diskLocation?: string;
+
+  /**
+   * Size of the disk in bytes.
+   */
+  sizeInBytes?: int64;
+
+  /**
+   * Friendly name of the disk.
+   */
+  friendlyName?: string;
+
+  /**
+   * LUN of the disk.
+   */
+  lun?: int32;
+
+  /**
+   * ARM ID of the managed disk.
+   */
+  managedDiskId?: string;
 }
 
 /**
@@ -5604,6 +5801,113 @@ model DiskInformation {
   lun?: int32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
+
+  /**
+   * Size of the disk in GB.
+   */
+  @added(Versions.v2026_10_01)
+  diskSizeInGb?: int32;
+
+  /**
+   * Storage type of the disk.
+   */
+  @added(Versions.v2026_10_01)
+  storageType?: string;
+}
+
+/**
+ * Base class for additional details of a recovery point. Workload-specific additional details are derived from
+ * this class.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
+@added(Versions.v2026_10_01)
+@discriminator("objectType")
+model RPExtendedInfo {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Preserving the existing BMS polymorphic contract, which uses a string objectType discriminator."
+  objectType: string;
+}
+
+/**
+ * Additional details of an IaaS VM recovery point.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IaasVM and RP are established acronyms in the BMS contract; the model name matches the service data contract."
+@added(Versions.v2026_10_01)
+model IaasVMRPExtendedInfo extends RPExtendedInfo {
+  /**
+   * OS disk of the backed up virtual machine. The lun of the OS disk is always -1, since a logical unit number is
+   * only assigned to data disks.
+   */
+  osDisk?: DiskInformation;
+
+  /**
+   * Data disks of the backed up virtual machine.
+   */
+  @identifiers(#[])
+  dataDisks?: DiskInformation[];
+
+  objectType: "IaasVMRPExtendedInfo";
+}
+
+/**
+ * Additional details of a recovery point, wrapped in a resource envelope.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Matches the existing BMS resource envelope pattern used by RestoreRequestResource, BackupRequestResource and ILRRequestResource."
+@added(Versions.v2026_10_01)
+model RPExtendedInfoResource extends Resource {
+  ...ResourceProperties;
+
+  /**
+   * RPExtendedInfoResource properties
+   */
+  properties?: RPExtendedInfo;
+}
+
+/**
+ * List of the additional details of recovery points.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Matches the existing BMS list envelope pattern used by RecoveryPointResourceList and ProtectedItemResourceList."
+@added(Versions.v2026_10_01)
+model RPExtendedInfoResourceList extends ResourceList {
+  /**
+   * List of resources.
+   */
+  @pageItems
+  value?: RPExtendedInfoResource[];
+}
+
+/**
+ * Request for fetching the additional details of a recovery point, wrapped in a resource envelope.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Matches the existing BMS resource envelope pattern used by RestoreRequestResource, BackupRequestResource and ILRRequestResource."
+@added(Versions.v2026_10_01)
+model GetRPExtendedInfoRequestResource extends Resource {
+  ...ResourceProperties;
+
+  /**
+   * GetRPExtendedInfoRequestResource properties
+   */
+  properties: GetRPExtendedInfoRequest;
+}
+
+/**
+ * Request for fetching the additional details of a recovery point.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
+@added(Versions.v2026_10_01)
+model GetRPExtendedInfoRequest {
+  /**
+   * ARM id of the recovery point whose additional details are to be fetched. Exactly one recovery point id can be
+   * specified.
+   */
+  @minItems(1)
+  @maxItems(1)
+  recoveryPointIds: string[];
 }
 
 /**
@@ -6617,6 +6921,7 @@ model IaasVMRestoreRequest extends RestoreRequest {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Bulk restore request follows the existing RestoreRequest polymorphic contract."
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model BulkRestoreRequestBase extends RestoreRequest {
   /**
    * Type of this recovery.
@@ -6636,6 +6941,7 @@ model BulkRestoreRequestBase extends RestoreRequest {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service contract uses IaaSVM acronym in the discriminator value."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Bulk restore request intentionally extends the intermediate RestoreRequest subtype shared by bulk workloads."
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -6742,6 +7048,7 @@ model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
  * Per protected item restore details for bulk restore.
  */
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model ProtectedItemRestoreDetailsBase {
   /**
    * ID of the backup copy to be recovered.
@@ -6787,6 +7094,7 @@ model ProtectedItemRestoreDetailsBase {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service contract uses RP acronym in the request name."
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model FetchRPForBulkRestoreRequest {
   /**
    * Protected item IDs for which recovery points should be fetched.
@@ -6802,6 +7110,7 @@ model FetchRPForBulkRestoreRequest {
  * Recovery point discovery result for bulk cross-tenant restore, keyed by protected item ID.
  */
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model BulkRestoreRecoveryPointsResponse {
   /**
    * Map of the source protected item's ARM ID to its discovered recovery point.
@@ -7424,6 +7733,21 @@ model ValidateRestoreOperationRequest extends ValidateOperationRequest {
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
   objectType: "ValidateRestoreOperationRequest";
+
+  ...ValidateRestoreOperationRequestProperties;
+}
+
+/**
+ * Restore validation request for Azure Workload backups.
+ * This subtype provides the distinct objectType discriminator used for Azure Workload (SQL/HANA/SAP ASE/AnyDatabase) restore validation.
+ */
+@added(Versions.v2026_10_01)
+model ValidateAzureWorkloadRestoreOperationRequest
+  extends ValidateOperationRequest {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "ValidateAzureWorkloadRestoreOperationRequest";
 
   ...ValidateRestoreOperationRequestProperties;
 }
@@ -8277,6 +8601,7 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model AzureVmWorkloadSAPHanaScaleoutProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -8657,6 +8982,12 @@ model BMSRefreshContainersQueryObject {
    * Backup management type for this container.
    */
   backupManagementType?: BackupManagementType;
+
+  /**
+   * Subscription containing the containers to discover.
+   */
+  @added(Versions.v2026_10_01)
+  containerSubscriptionId?: string;
 }
 
 /**
@@ -9308,6 +9639,7 @@ model ClientDiscoveryResponse {
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 union CrossTenantProvisioningState {
   string,
   ResourceProvisioningState,
@@ -9334,6 +9666,7 @@ union CrossTenantProvisioningState {
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model CrossTenantVaultMappingProperties {
   /**
    * ARM resource ID of the source vault.
@@ -9383,6 +9716,7 @@ model CrossTenantVaultMappingProperties {
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model RemoveCrossTenantVaultMappingRequest {
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed.
@@ -9398,6 +9732,7 @@ model RemoveCrossTenantVaultMappingRequest {
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 union VaultMappingState {
   string,
 
@@ -9418,6 +9753,7 @@ union VaultMappingState {
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model CrossTenantVaultMappingStatusResponse {
   /**
    * Mapping name (if mapped).
@@ -9439,6 +9775,7 @@ model CrossTenantVaultMappingStatusResponse {
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model VaultCredentialCertificateRequest {
   /**
    * Options for certificate generation.
@@ -9455,6 +9792,7 @@ model VaultCredentialCertificateRequest {
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model VaultCredentialCertificateCreateOptions {
   /**
    * Validity period of the generated certificate in hours.
@@ -9472,6 +9810,7 @@ model VaultCredentialCertificateCreateOptions {
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model VaultCredentialCertificateResponse
   is Azure.ResourceManager.ProxyResource<VaultCredentialCertificateProperties> {
   /**
@@ -9493,6 +9832,7 @@ model VaultCredentialCertificateResponse
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 union AuthType {
   string,
 
@@ -9509,6 +9849,7 @@ union AuthType {
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
+@removed(Versions.v2026_10_01)
 model VaultCredentialCertificateProperties {
   /**
    * Authentication type.

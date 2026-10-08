@@ -1,7 +1,7 @@
 import { isFullGitSha } from "../../shared/src/git.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { extractInputs, getOpenPullRequest } from "./context.ts";
-import type { Core, GitHubScriptArgs } from "./github.ts";
+import type { Core, GitHub, GitHubScriptArgs } from "./github.ts";
 
 export default async function updateLabels({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, head_sha, issue_number, run_id } = await extractInputs(
@@ -26,10 +26,7 @@ export async function updateLabelsImpl({
   head_sha: string;
   issue_number: number;
   run_id: number;
-  github: import("@octokit/core").Octokit &
-    import("@octokit/plugin-rest-endpoint-methods").Api & {
-      paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
-    };
+  github: GitHub;
   core: Core;
 }) {
   if (!run_id) {

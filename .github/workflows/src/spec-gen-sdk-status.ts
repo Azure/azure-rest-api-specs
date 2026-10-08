@@ -3,7 +3,7 @@ import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
 import { extractInputs, getOpenPullRequest } from "./context.ts";
 import { CoreLogger } from "./core-logger.ts";
-import type { CheckRuns, Core, GitHubScriptArgs } from "./github.ts";
+import type { CheckRuns, Core, GitHub, GitHubScriptArgs } from "./github.ts";
 import { getIssueNumber } from "./issues.ts";
 
 export default async function setSpecGenSdkStatus({
@@ -49,10 +49,7 @@ export async function setSpecGenSdkStatusImpl({
   head_sha: string;
   target_url: string;
   issue_number: number;
-  github: import("@octokit/core").Octokit &
-    import("@octokit/plugin-rest-endpoint-methods").Api & {
-      paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
-    };
+  github: GitHub;
   core: Core;
 }): Promise<void> {
   if (Number.isInteger(issue_number) && issue_number > 0) {
