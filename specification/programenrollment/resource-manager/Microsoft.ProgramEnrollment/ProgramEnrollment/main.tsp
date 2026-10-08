@@ -17,15 +17,13 @@ using Azure.ResourceManager;
 namespace Microsoft.ProgramEnrollment;
 
 enum Versions {
-  /** The 2026-03-01-preview API version. */
-  @Azure.Core.previewVersion
-  v2026_03_01_preview: "2026-03-01-preview",
+  `2026-03-01-preview`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("An education program enrollment that groups Entra domains under a single sovereign/edu program scope.")
-model EduEnrollment is TrackedResource<EduEnrollmentProperties> {
+model EduEnrollment is ExtensionResource<EduEnrollmentProperties> {
   @doc("The name of the edu enrollment")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("enrollmentName")
@@ -103,38 +101,18 @@ model EduEnrollmentProperties {
   failureReason?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 }
 
-@doc("The type used for update operations of the EduEnrollment.")
-model EduEnrollmentPatch {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM tags are represented as a string map."
-  @doc("Resource tags.")
-  tags?: Record<string>;
-}
-
+// EduEnrollment is modeled as a generic ARM extension resource. The public
+// contract uses the `{resourceUri}` extension scope
+// (`/{resourceUri}/providers/Microsoft.ProgramEnrollment/eduEnrollments/{enrollmentName}`),
+// matching the ARM-approved Microsoft.BillingTrust precedent. At runtime the
+// service constrains the scope to `Microsoft.Billing/billingAccounts/{name}`
+// only (see BillingAccountResourceUriParser); the RP-side ProviderHub callbacks
+// are routed to the generated single-segment `{resourceUri}` route by
+// ExtensionResourceRoutingMiddleware.
 @armResourceOperations(EduEnrollment)
 interface EduEnrollments {
-  /** Gets the specified edu enrollment. */
   get is ArmResourceRead<EduEnrollment>;
-
-  /** Creates or updates the specified edu enrollment. */
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EduEnrollment>;
-
-  /** Updates the specified edu enrollment. */
-  update is ArmCustomPatchSync<EduEnrollment, EduEnrollmentPatch>;
-
-  /** Deletes the specified edu enrollment. */
-  delete is ArmResourceDeleteWithoutOkAsync<
-    EduEnrollment,
-    BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<EduEnrollment>,
-    Response =
-      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = void> &
-          ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
-  >;
-
-  /** Lists the edu enrollments in a resource group. */
-  listByResourceGroup is ArmResourceListByParent<EduEnrollment>;
-
-  /** Lists the edu enrollments in a subscription. */
-  listBySubscription is ArmListBySubscription<EduEnrollment>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<EduEnrollment>;
+  delete is ArmResourceDeleteWithoutOkAsync<EduEnrollment>;
+  list is ArmResourceListByParent<EduEnrollment>;
 }
