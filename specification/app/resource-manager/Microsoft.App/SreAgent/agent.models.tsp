@@ -57,8 +57,8 @@ model AgentPatchProperties {
   vnetConfiguration?: VnetConfiguration;
 
   /**
-   * Sandbox configuration to update. Omission or null preserves the stored configuration.
-   * A supplied object merges its members with the stored configuration.
+   * Sandbox configuration to update. Omission preserves the stored configuration.
+   * JSON merge-patch null clears it, and a supplied object merges its members with the stored configuration.
    */
   @added(Versions.v2026_07_01)
   sandboxConfiguration?: SandboxConfiguration;
@@ -110,15 +110,14 @@ model AgentProperties {
 
   /**
    * Desired virtual network configuration. A subnet and AzureVNet egress mode must be configured together.
-   * When no subnet is attached, GET returns a null subnetResourceId.
    * Use PATCH for selective updates. Omitting networking settings from PUT can clear them or fail validation.
    */
   @added(Versions.v2026_07_01)
   vnetConfiguration?: VnetConfiguration;
 
   /**
-   * Desired sandbox configuration. GET returns null when no configuration is stored.
-   * PUT represents the complete desired configuration and does not preserve an existing value when this property is omitted.
+   * Desired sandbox configuration. PUT represents the complete desired configuration and does not preserve an existing
+   * value when this property is omitted.
    * Use PATCH to preserve the stored configuration while updating other properties.
    */
   @added(Versions.v2026_07_01)
@@ -129,7 +128,7 @@ model AgentProperties {
 @added(Versions.v2026_07_01)
 model VnetConfiguration {
   /**
-   * Azure resource ID of the subnet used with AzureVNet egress mode. GET returns null when detached.
+   * Azure resource ID of the subnet used with AzureVNet egress mode.
    * In PATCH, omission preserves the subnet and JSON merge-patch null clears it.
    * Setting or replacing a subnet requires the resulting egress mode to be AzureVNet.
    * When clearing the subnet, also update sandbox egress in the same PATCH request so the resulting mode is not AzureVNet.
@@ -156,6 +155,7 @@ model SandboxConfiguration {
    * A supplied array replaces the entire list; JSON merge-patch null clears it. An empty array selects no packages.
    * Each supplied package must include its name and package manager.
    */
+  @identifiers(#["name", "packageManager"])
   @maxItems(200)
   packages?: SandboxPackageSpec[];
 }
@@ -230,7 +230,7 @@ scalar SandboxNoProxyEntry extends string;
 @added(Versions.v2026_07_01)
 model SandboxHttpProxyConfiguration {
   /**
-   * Optional proxy endpoint for HTTP destinations. When set, it must be the same proxy origin as httpsUrl;
+   * Optional proxy endpoint used for HTTP destinations. When set, it must be the same proxy origin as httpsUrl;
    * different HTTP and HTTPS proxies are not supported.
    * The value must be an absolute http:// origin with a host. Credentials, paths other than '/', query strings,
    * fragments, and ports 0, 80, and 443 are not supported.
@@ -240,7 +240,7 @@ model SandboxHttpProxyConfiguration {
   httpUrl?: url;
 
   /**
-   * Proxy endpoint for HTTPS destinations. Required whenever a proxy configuration is stored.
+   * Proxy endpoint used for HTTPS destinations and CONNECT tunneling. Required whenever a proxy configuration is stored.
    * The proxy URL itself must use http:// for CONNECT tunneling and must be an origin with a host.
    * Credentials, paths other than '/', query strings, fragments, and ports 0, 80, and 443 are not supported.
    * In PATCH, omission preserves the endpoint.
@@ -266,7 +266,7 @@ model SandboxPackageSpec {
   @pattern("^@?[A-Za-z0-9][A-Za-z0-9._-]*(/[A-Za-z0-9][A-Za-z0-9._-]*)?$")
   name: string;
 
-  /** Optional package version or version constraint. Omit it or send null to leave the version unspecified. */
+  /** Optional package version or version constraint. Omit it to leave the version unspecified. */
   @minLength(1)
   @maxLength(64)
   @pattern("^[A-Za-z0-9._+\\-~^<>=,*\\[\\]()]+$")

@@ -1261,7 +1261,7 @@
         },
         "sandboxConfiguration": {
           "$ref": "#/definitions/SandboxConfiguration",
-          "description": "Sandbox configuration to update. Omission or null preserves the stored configuration.\nA supplied object merges its members with the stored configuration."
+          "description": "Sandbox configuration to update. Omission preserves the stored configuration.\nJSON merge-patch null clears it, and a supplied object merges its members with the stored configuration."
         }
       }
     },
@@ -1351,11 +1351,11 @@
         },
         "vnetConfiguration": {
           "$ref": "#/definitions/VnetConfiguration",
-          "description": "Desired virtual network configuration. A subnet and AzureVNet egress mode must be configured together.\nWhen no subnet is attached, GET returns a null subnetResourceId.\nUse PATCH for selective updates. Omitting networking settings from PUT can clear them or fail validation."
+          "description": "Desired virtual network configuration. A subnet and AzureVNet egress mode must be configured together.\nUse PATCH for selective updates. Omitting networking settings from PUT can clear them or fail validation."
         },
         "sandboxConfiguration": {
           "$ref": "#/definitions/SandboxConfiguration",
-          "description": "Desired sandbox configuration. GET returns null when no configuration is stored.\nPUT represents the complete desired configuration and does not preserve an existing value when this property is omitted.\nUse PATCH to preserve the stored configuration while updating other properties."
+          "description": "Desired sandbox configuration. PUT represents the complete desired configuration and does not preserve an existing\nvalue when this property is omitted.\nUse PATCH to preserve the stored configuration while updating other properties."
         }
       }
     },
@@ -1645,7 +1645,11 @@
           "maxItems": 200,
           "items": {
             "$ref": "#/definitions/SandboxPackageSpec"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "packageManager"
+          ]
         }
       }
     },
@@ -1726,12 +1730,12 @@
         "httpUrl": {
           "type": "string",
           "format": "uri",
-          "description": "Optional proxy endpoint for HTTP destinations. When set, it must be the same proxy origin as httpsUrl;\ndifferent HTTP and HTTPS proxies are not supported.\nThe value must be an absolute http:// origin with a host. Credentials, paths other than '/', query strings,\nfragments, and ports 0, 80, and 443 are not supported.\nIn PATCH, omission preserves the endpoint and JSON merge-patch null clears it."
+          "description": "Optional proxy endpoint used for HTTP destinations. When set, it must be the same proxy origin as httpsUrl;\ndifferent HTTP and HTTPS proxies are not supported.\nThe value must be an absolute http:// origin with a host. Credentials, paths other than '/', query strings,\nfragments, and ports 0, 80, and 443 are not supported.\nIn PATCH, omission preserves the endpoint and JSON merge-patch null clears it."
         },
         "httpsUrl": {
           "type": "string",
           "format": "uri",
-          "description": "Proxy endpoint for HTTPS destinations. Required whenever a proxy configuration is stored.\nThe proxy URL itself must use http:// for CONNECT tunneling and must be an origin with a host.\nCredentials, paths other than '/', query strings, fragments, and ports 0, 80, and 443 are not supported.\nIn PATCH, omission preserves the endpoint."
+          "description": "Proxy endpoint used for HTTPS destinations and CONNECT tunneling. Required whenever a proxy configuration is stored.\nThe proxy URL itself must use http:// for CONNECT tunneling and must be an origin with a host.\nCredentials, paths other than '/', query strings, fragments, and ports 0, 80, and 443 are not supported.\nIn PATCH, omission preserves the endpoint."
         },
         "noProxy": {
           "type": "array",
@@ -1792,7 +1796,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Optional package version or version constraint. Omit it or send null to leave the version unspecified.",
+          "description": "Optional package version or version constraint. Omit it to leave the version unspecified.",
           "minLength": 1,
           "maxLength": 64,
           "pattern": "^[A-Za-z0-9._+\\-~^<>=,*\\[\\]()]+$"
@@ -1945,7 +1949,7 @@
         "subnetResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Azure resource ID of the subnet used with AzureVNet egress mode. GET returns null when detached.\nIn PATCH, omission preserves the subnet and JSON merge-patch null clears it.\nSetting or replacing a subnet requires the resulting egress mode to be AzureVNet.\nWhen clearing the subnet, also update sandbox egress in the same PATCH request so the resulting mode is not AzureVNet.\nThe detach example explicitly selects Limited.",
+          "description": "Azure resource ID of the subnet used with AzureVNet egress mode.\nIn PATCH, omission preserves the subnet and JSON merge-patch null clears it.\nSetting or replacing a subnet requires the resulting egress mode to be AzureVNet.\nWhen clearing the subnet, also update sandbox egress in the same PATCH request so the resulting mode is not AzureVNet.\nThe detach example explicitly selects Limited.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
