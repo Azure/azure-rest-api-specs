@@ -2,7 +2,7 @@ import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { diagnosticDetails, diagnosticText } from "./diagnostics.ts";
 import { mockFolder } from "./mocks.ts";
 
-import { resolve } from "node:path";
+import { resolve } from "pathe";
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 import { ServiceYamlRule } from "../src/rules/service-yaml.ts";
 

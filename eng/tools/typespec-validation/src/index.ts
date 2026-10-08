@@ -3,6 +3,7 @@ import { ConsoleLogger, type ILogger } from "@azure-tools/specs-shared/logger";
 import { type Suppression } from "@azure-tools/suppressions";
 import debug from "debug";
 import { stat } from "node:fs/promises";
+import { resolve } from "pathe";
 import {
   exceptionDiagnostic,
   formatRuleStatus,
@@ -26,7 +27,7 @@ import { NpmPrefixRule } from "./rules/npm-prefix.ts";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.ts";
 import { ServiceYamlRule } from "./rules/service-yaml.ts";
 import { StaleApiVersionPinRule } from "./rules/stale-api-version-pin.ts";
-import { fileExists, getSuppressions, normalizePath } from "./utils.ts";
+import { fileExists, getSuppressions } from "./utils.ts";
 
 // Context argument may add new properties or override checkingAllSpecs
 export let context: Record<string, unknown> = { checkingAllSpecs: false };
@@ -288,12 +289,17 @@ export async function main() {
   }
 
   const folder = parsedArgs.positionals[0];
+  if (folder === undefined) {
+    console.error("A project folder is required. Use --help for usage.");
+    process.exitCode = 1;
+    return;
+  }
 
   if (parsedArgs.positionals[1]) {
     context = { ...context, ...(JSON.parse(parsedArgs.positionals[1]) as Record<string, unknown>) };
   }
 
-  const absolutePath = normalizePath(folder);
+  const absolutePath = resolve(folder);
 
   if (!(await fileExists(absolutePath))) {
     console.log(`Folder ${absolutePath} does not exist`);

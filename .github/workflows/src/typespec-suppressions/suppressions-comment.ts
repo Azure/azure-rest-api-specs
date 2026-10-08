@@ -71,6 +71,14 @@ export type TypeSpecSuppressionsReport = {
   checkedSuppressions?: TypeSpecCheckedSuppressions;
 };
 
+export type TypeSpecSuppressionsCommentResult = {
+  body: string | undefined;
+  requiresApproval: boolean;
+  report: TypeSpecSuppressionsReport;
+  run: WorkflowRunInfo;
+  runUrl: string;
+};
+
 export const TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME = "TypeSpec Suppressions - Analyze Code";
 export const TYPESPEC_SUPPRESSIONS_REPORT_ARTIFACT_NAME = "typespec-suppressions-report";
 export const TYPESPEC_SUPPRESSIONS_COMMENT_IDENTIFIER = "TypeSpecSuppressionsReview";
@@ -195,6 +203,45 @@ function getReportedSuppressions(
   report: TypeSpecSuppressionsReport,
 ): TypeSpecSuppressionsReport | TypeSpecCheckedSuppressions {
   return report.checkedSuppressions ?? report;
+}
+
+function getSuppressionApprovalIdentity(suppression: TypeSpecSuppressionRecord) {
+  return {
+    specPath: suppression.specPath,
+    sourceKind: suppression.sourceKind,
+    ruleName: suppression.ruleName,
+    justification: suppression.justification,
+    sourceFile: suppression.sourceFile,
+    anchorPath: suppression.anchorPath,
+  };
+}
+
+/**
+ * Returns a stable representation of the suppression content that a reviewer approves.
+ * Analysis revisions, line numbers, rule metadata, and report ordering are intentionally
+ * excluded because they can change after merging the target branch without changing the
+ * approval decision.
+ */
+export function getSuppressionApprovalFingerprint(report: TypeSpecSuppressionsReport): string {
+  const reported = getReportedSuppressions(report);
+  const approvalItems = [
+    ...(reported.newSuppressions ?? []).map((suppression) => ({
+      kind: "new",
+      suppression: getSuppressionApprovalIdentity(suppression),
+    })),
+    ...(reported.changedSuppressions ?? []).map((change) => ({
+      kind: "changed",
+      before: getSuppressionApprovalIdentity(change.before),
+      after: getSuppressionApprovalIdentity(change.after),
+    })),
+  ]
+    .map((item) => JSON.stringify(item))
+    .sort();
+
+  return JSON.stringify({
+    requiresApproval: Boolean(reported.requiresApproval),
+    approvalItems,
+  });
 }
 
 function renderRuleLabel(suppression: TypeSpecSuppressionRecord): string {
@@ -382,7 +429,7 @@ export async function buildSuppressionsComment(
   head_sha: string,
   pullNumber: number,
   labelNames: string[] = [],
-): Promise<{ body: string | undefined; requiresApproval: boolean } | undefined> {
+): Promise<TypeSpecSuppressionsCommentResult | undefined> {
   const run = await getLatestTypeSpecSuppressionsWorkflowRun(github, core, owner, repo, head_sha);
   if (!run || run.status !== "completed") {
     return undefined;
@@ -417,5 +464,71 @@ export async function buildSuppressionsComment(
 
   const requiresApproval = Boolean(getReportedSuppressions(report).requiresApproval);
 
-  return { body, requiresApproval };
+  return { body, requiresApproval, report, run, runUrl };
+}
+
+export async function shouldInvalidateSuppressionApproval(
+  github: GitHub,
+  core: Core,
+  owner: string,
+  repo: string,
+  pullNumber: number,
+  currentRun: WorkflowRunInfo,
+  currentReport: TypeSpecSuppressionsReport,
+): Promise<boolean> {
+  const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
+    owner,
+    repo,
+    event: "pull_request",
+    branch: currentRun.head_branch ?? undefined,
+    per_page: PER_PAGE_MAX,
+  });
+
+  const previousRuns = workflowRuns
+    .filter(
+      (run) =>
+        run.id !== currentRun.id &&
+        run.status === "completed" &&
+        run.head_branch === currentRun.head_branch &&
+        (!currentRun.head_repository?.id ||
+          !run.head_repository?.id ||
+          run.head_repository.id === currentRun.head_repository.id) &&
+        (run.name === TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME ||
+          run.name === `[TEST-IGNORE] ${TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME}`) &&
+        (!run.pull_requests?.length ||
+          run.pull_requests.some((pullRequest) => pullRequest.number === pullNumber)),
+    )
+    .sort(invert(byDate((run) => run.updated_at)));
+
+  for (const previousRun of previousRuns) {
+    try {
+      const reportContent = await downloadArtifactText(
+        github,
+        core,
+        owner,
+        repo,
+        previousRun.id,
+        TYPESPEC_SUPPRESSIONS_REPORT_ARTIFACT_NAME,
+      );
+      const previousReport = JSON.parse(reportContent) as TypeSpecSuppressionsReport;
+      const changed =
+        getSuppressionApprovalFingerprint(previousReport) !==
+        getSuppressionApprovalFingerprint(currentReport);
+      core.info(
+        `TypeSpec suppression approval content ${changed ? "changed" : "did not change"} between workflow runs ${previousRun.id} and ${currentRun.id}.`,
+      );
+      return changed;
+    } catch (error) {
+      core.warning(
+        `Unable to compare TypeSpec suppression report from workflow run ${previousRun.id}: ${
+          error instanceof Error ? error.message : String(error)
+        }`,
+      );
+    }
+  }
+
+  core.info(
+    `No previous TypeSpec suppression report was available for ${owner}/${repo}#${pullNumber}; invalidating approval.`,
+  );
+  return true;
 }

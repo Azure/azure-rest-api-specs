@@ -3,7 +3,7 @@ import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { spawn } from "node:child_process";
 import { appendFile, stat } from "node:fs/promises";
-import { relative, resolve, sep } from "node:path";
+import { relative, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
 import pc from "picocolors";
 import { simpleGit } from "simple-git";
@@ -73,7 +73,7 @@ export async function runChanged(
   folder: string,
   options: RunOptions & Partial<Omit<ChangedProjectsOptions, "logger">> = {},
 ): Promise<boolean> {
-  const root = await getRootFolder(folder);
+  const root = resolve(await getRootFolder(folder));
   const { baseCommitish = "HEAD^", headCommitish = "HEAD", ignoreCoreFiles } = options;
   const { projects, checkingAllSpecs } = await findChangedProjects(root, {
     baseCommitish,
@@ -100,10 +100,10 @@ async function runProjects(
 ): Promise<boolean> {
   const git = simpleGit(root);
   const gitClean = options.gitClean && !options.dryRun;
-  const displayRoot =
-    gitClean || (await git.checkIsRepo()) ? await getRootFolder(root) : process.cwd();
-  const displayPath = (project: string) =>
-    relative(displayRoot, project).split(sep).join("/") || ".";
+  const displayRoot = resolve(
+    gitClean || (await git.checkIsRepo()) ? await getRootFolder(root) : process.cwd(),
+  );
+  const displayPath = (project: string) => relative(displayRoot, project) || ".";
   if (gitClean) {
     await git.cwd(displayRoot);
     await git.revparse(["--verify", "HEAD"]);

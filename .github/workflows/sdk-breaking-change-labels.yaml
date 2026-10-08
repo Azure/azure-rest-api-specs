@@ -18,15 +18,16 @@ jobs:
     name: SDK Breaking Change Labels
     runs-on: ubuntu-slim
     steps:
-      - uses: $/.github/actions/checkout
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github
 
       # Only run the login and get token steps when the repository is azure-rest-api-specs-pr
       - if: github.event.repository.name == 'azure-rest-api-specs-pr'
         name: Azure Login with Workload Identity Federation
-        uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3
+        uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
         with:
           client-id: "205398f1-715f-40a7-8d52-856097f28281"
           tenant-id: "72f988bf-86f1-41af-91ab-2d7cd011db47"
@@ -40,7 +41,7 @@ jobs:
           echo "ADO_TOKEN=$ADO_TOKEN" >> "$GITHUB_ENV"
 
       - name: Install dependencies for github-script actions
-        uses: $/.github/actions/install-deps-github-script
+        uses: ./.github/actions/install-deps-github-script
 
       - name: Get label and action
         id: get-label-and-action
@@ -55,7 +56,7 @@ jobs:
           (fromJson(steps.get-label-and-action.outputs.result).labelAction == 'add' ||
           fromJson(steps.get-label-and-action.outputs.result).labelAction == 'remove')
         name: Upload artifact with results
-        uses: $/.github/actions/add-label-artifact
+        uses: ./.github/actions/add-label-artifact
         with:
           name: "${{ fromJson(steps.get-label-and-action.outputs.result).labelName}}"
           # Convert "add/remove" to "true/false"
@@ -63,14 +64,14 @@ jobs:
 
       - if: ${{ always() && fromJson(steps.get-label-and-action.outputs.result).headSha }}
         name: Upload artifact with head SHA
-        uses: $/.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "head-sha"
           value: "${{ fromJson(steps.get-label-and-action.outputs.result).headSha }}"
 
       - if: ${{ always() && fromJson(steps.get-label-and-action.outputs.result).issueNumber > 0 }}
         name: Upload artifact with issue number
-        uses: $/.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "issue-number"
           value: "${{ fromJson(steps.get-label-and-action.outputs.result).issueNumber }}"
