@@ -181,7 +181,9 @@ it.each([
       vi.stubEnv("NO_COLOR", undefined);
       vi.stubEnv("FORCE_COLOR", "1");
     }
-    const generatedFile = JSON.stringify(join(root, project, "generated.json"));
+    // Format only reports files the formatter owns.
+    const fileName = command === "compile" ? "generated.json" : "formatted.tsp";
+    const generatedFile = JSON.stringify(join(root, project, fileName));
     await compiler(`if (process.argv[2] === "${command}") {
       require("node:fs").writeFileSync(${generatedFile}, "new content\\n");
     }`);
@@ -191,7 +193,7 @@ it.each([
     const output = stripVTControlCharacters(result.stderr);
     const code = command === "compile" ? "generated-files-changed" : "format-changed";
     expect(output).toContain(`error tsv/${code}:`);
-    expect(output).toContain(`\n  ${project}/generated.json\n\ndiff --git`);
+    expect(output).toContain(`\n  ${project}/${fileName}\n\ndiff --git`);
     expect(output).toContain("\n+new content\n\n  help:");
     expect(output.match(/diff --git/g)).toHaveLength(1);
     expect(result.stdout).not.toContain("diff --git");

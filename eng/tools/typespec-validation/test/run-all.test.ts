@@ -128,6 +128,16 @@ it("forwards --verbose to child projects without changing their suppression cont
   ]);
 });
 
+it("forwards --allow-generated-changes to child projects through their context", async () => {
+  const project = await addProject("a");
+  await expect(runAll(root, { allowGeneratedChanges: true })).resolves.toBe(true);
+  expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
+    expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/),
+    project,
+    '{"checkingAllSpecs":true,"allowGeneratedChanges":true}',
+  ]);
+});
+
 it("logs repository-relative paths but passes absolute paths to validation", async () => {
   const project = await addProject("specification/service/Project");
   await simpleGit(root).init();

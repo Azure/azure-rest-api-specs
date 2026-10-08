@@ -552,6 +552,23 @@ describe("compile", function () {
     expect(gitDiffTopSpecFolderSpy).toHaveBeenCalledWith(mockFolder, defaultLogger);
   });
 
+  it("reports files changed by compilation as a warning when generated changes are allowed", async function () {
+    runNodeBinSpy.mockResolvedValue([null, swaggerPath, ""]);
+    vi.mocked(nativeGlob.globFiles).mockResolvedValue([swaggerPath]);
+    vi.spyOn(utils, "allowGeneratedChanges").mockReturnValue(true);
+    gitDiffTopSpecFolderSpy.mockResolvedValue({
+      success: false,
+      files: [`${mockFolder}/foo.json`],
+      diff: "-old\n+new\n",
+    });
+
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
+    expect(result.success).toBe(true);
+    expect(
+      result.diagnostics?.find((diagnostic) => diagnostic.code === "generated-files-changed"),
+    ).toMatchObject({ severity: "warning" });
+  });
+
   it("should succeed if git diff succeeds", async function () {
     runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, swaggerPath, ""]),

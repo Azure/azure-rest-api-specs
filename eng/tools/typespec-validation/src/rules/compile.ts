@@ -11,6 +11,7 @@ import { globFiles } from "../glob.ts";
 import { type Diagnostic, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import {
+  allowGeneratedChanges,
   fileExists,
   getStructureVersion,
   getSuppressions,
@@ -263,9 +264,10 @@ export class CompileRule implements Rule {
     if (success) {
       const gitDiffResult = await gitDiffTopSpecFolder(folder, logger);
       if (!gitDiffResult.success) {
-        success = false;
+        const allowed = allowGeneratedChanges();
+        if (!allowed) success = false;
         diagnostics.push({
-          severity: "error",
+          severity: allowed ? "warning" : "error",
           code: "generated-files-changed",
           path: folder,
           message: "Files changed after TypeSpec compilation:",

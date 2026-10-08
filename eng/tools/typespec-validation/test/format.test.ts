@@ -1,19 +1,21 @@
 import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { FormatRule } from "../src/rules/format.ts";
-import { gitDiffTopSpecFolder, runNodeBin } from "../src/utils.ts";
+import { allowGeneratedChanges, gitDiffTopSpecFolder, runNodeBin } from "../src/utils.ts";
 import { diagnosticDetails } from "./diagnostics.ts";
 
 const mockFolder = "specification/foo/Foo";
 vi.mock("../src/utils.ts", () => ({
   runNodeBin: vi.fn(),
   gitDiffTopSpecFolder: vi.fn(),
+  allowGeneratedChanges: vi.fn(),
 }));
 
 beforeEach(() => {
   vi.resetAllMocks();
   vi.mocked(runNodeBin).mockResolvedValue([null, "", ""]);
   vi.mocked(gitDiffTopSpecFolder).mockResolvedValue({ success: true, files: [] });
+  vi.mocked(allowGeneratedChanges).mockReturnValue(false);
 });
 
 describe("FormatRule", () => {
@@ -28,7 +30,10 @@ describe("FormatRule", () => {
       logger,
       mockFolder,
     );
-    expect(gitDiffTopSpecFolder).toHaveBeenCalledExactlyOnceWith(mockFolder, logger);
+    expect(gitDiffTopSpecFolder).toHaveBeenCalledExactlyOnceWith(mockFolder, logger, [
+      "**/*.tsp",
+      "**/tspconfig.yaml",
+    ]);
     expect(result).toEqual({ success: true });
     expect(debug).toHaveBeenCalledWith("- Formatting\n\u2714 5 unchanged");
   });
@@ -92,5 +97,19 @@ describe("FormatRule", () => {
     ]);
     expect(diagnosticDetails(result.diagnostics?.[0])).toBe("Formatter warning");
     expect(diagnosticDetails(result.diagnostics?.[1])).toBe("  main.tsp\n\n-old\n+new\n");
+  });
+
+  it("reports formatting changes as a warning when generated changes are allowed", async () => {
+    vi.mocked(allowGeneratedChanges).mockReturnValue(true);
+    vi.mocked(gitDiffTopSpecFolder).mockResolvedValue({
+      success: false,
+      files: ["main.tsp"],
+      diff: "-old\n+new\n",
+    });
+    const result = await new FormatRule().execute(mockFolder, defaultLogger);
+    expect(result).toMatchObject({
+      success: true,
+      diagnostics: [{ severity: "warning", code: "format-changed" }],
+    });
   });
 });

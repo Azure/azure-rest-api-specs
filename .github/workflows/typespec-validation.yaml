@@ -24,12 +24,30 @@ jobs:
           persist-credentials: false
           fetch-depth: 2
 
+      # typespec-next must only differ from main under specification/. Files a PR changes outside
+      # it must match main, which still allows merging main into typespec-next.
+      - name: Check typespec-next only changes specification/
+        if: github.base_ref == 'typespec-next'
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin main
+          git diff --name-only -z HEAD^1 HEAD -- . ':!specification' > "$RUNNER_TEMP/changed"
+          if [ -s "$RUNNER_TEMP/changed" ] &&
+            ! xargs -0 git diff --exit-code --stat FETCH_HEAD HEAD -- < "$RUNNER_TEMP/changed"; then
+            echo "::error::PRs into typespec-next may only change specification/. Send tooling changes to main. See documentation/typespec-next.md."
+            exit 1
+          fi
+
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
+        with:
+          # PRs into typespec-next hold spec changes that need the upcoming TypeSpec release.
+          typespec-channel: ${{ github.base_ref == 'typespec-next' && 'next' || 'stable' }}
 
       - name: Validate Impacted Specs
         # Only main and RPSaaSMaster validate all specs when core files change.
         run: >-
           node eng/tools/typespec-validation/cmd/tsv.js --changed --git-clean
+          ${{ github.base_ref == 'typespec-next' && '--allow-generated-changes' || '' }}
           ${{ runner.debug == '1' && '--verbose' || '' }}
           ${{ github.base_ref != 'main' && github.base_ref != 'RPSaaSMaster' && '--ignore-core-files' || '' }}

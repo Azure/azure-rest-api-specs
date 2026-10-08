@@ -3,7 +3,9 @@ import { reportCommandOutput } from "../command-output.ts";
 import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
-import { gitDiffTopSpecFolder, runNodeBin } from "../utils.ts";
+import { allowGeneratedChanges, gitDiffTopSpecFolder, runNodeBin } from "../utils.ts";
+
+const formattedFiles = ["**/*.tsp", "**/tspconfig.yaml"];
 
 export class FormatRule implements Rule {
   readonly name = "Format";
@@ -19,14 +21,16 @@ export class FormatRule implements Rule {
     );
     const result = reportCommandOutput("format", "TypeSpec formatting", output, logger);
     if (!result.success) return result;
-    const gitDiffResult = await gitDiffTopSpecFolder(folder, logger);
+    // Only files the formatter touches, so generated changes allowed by Compile are not reported.
+    const gitDiffResult = await gitDiffTopSpecFolder(folder, logger, formattedFiles);
     if (gitDiffResult.success) return result;
+    const allowed = allowGeneratedChanges();
     return {
-      success: false,
+      success: allowed,
       diagnostics: [
         ...(result.diagnostics ?? []),
         {
-          severity: "error",
+          severity: allowed ? "warning" : "error",
           code: "format-changed",
           path: folder,
           message: "Files changed by formatting:",
