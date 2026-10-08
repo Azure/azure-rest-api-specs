@@ -53,3 +53,14 @@ interface BlocklistClient {
   "options",
   "!autorest"
 );
+
+@TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2026_11_01_preview)
+namespace AgentEvaluationCustomizations {
+  @client({
+    name: "AgentEvaluationClient",
+    service: ContentSafety,
+  })
+  interface AgentEvaluationClient {
+    evaluate is ContentSafety.AgentOperations.evaluate;
+  }
+}

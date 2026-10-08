@@ -43,6 +43,9 @@ enum Versions {
   v2024_09_01: "2024-09-01",
 
   @doc("Public preview that adds the synchronous Unified Moderate operation.")
-  @Azure.Core.previewVersion
   v2026_09_01_preview: "2026-09-01-preview",
+
+  @doc("Public preview that adds canonical Agent Hooks context evaluation without changing Unified Moderate.")
+  @Azure.Core.previewVersion
+  v2026_11_01_preview: "2026-11-01-preview",
 }

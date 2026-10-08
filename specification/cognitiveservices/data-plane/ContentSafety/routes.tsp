@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
+import "./agent-hooks.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -106,6 +107,32 @@ interface BlockOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &
       NoClientRequestId> {}
+
+@added(ContentSafety.Versions.v2026_11_01_preview)
+interface AgentOperations {
+  @summary("Evaluate Agent Context")
+  @doc("Synchronously evaluate a canonical Agent Hooks 0.1 context against authorized effective policy. All eight interception points are supported. targetResourceId selects an authorized bound resource; policyId adds a developer policy without bypassing applicable mandatory policies. These selectors and authentication are outside the context. The service returns a complete Verdict but does not execute the action, apply transforms, resolve approvals or compose other interceptors. The host validates the response and fails closed on failures. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful verdicts.")
+  @route("/agent:evaluate")
+  @post
+  evaluate is Azure.Core.RpcOperation<
+    {
+      @query
+      @doc("Authorized resource identifier whose effective policy and bindings are resolved. This is a selector, not proof of authority; body agent/tenant/actor identifiers cannot authorize it.")
+      targetResourceId: string;
+
+      @query
+      @doc("Optional developer policy identifier evaluated in addition to applicable mandatory policies. Unknown or unauthorized selectors are rejected; the service does not silently allow.")
+      policyId?: string;
+
+      @bodyRoot
+      @doc("Canonical Agent Hooks context with native JSON point payloads.")
+      body: AgentContext;
+    },
+    AgentVerdict,
+    {},
+    AgentEvaluationError | Azure.Core.Foundations.ErrorResponse
+  >;
+}
 
 interface TextBlocklists {
   @summary("Get Text Blocklist By blocklistName")
