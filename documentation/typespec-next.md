@@ -13,15 +13,20 @@ The TypeSpec version is a property of the build, not of the branch. Any checkout
 # Upcoming release (npm "next" dist-tag)
 node eng/scripts/typespec-channel.mts next
 
-# Specific version, or a single package from a TypeSpec PR build
-node eng/scripts/typespec-channel.mts 1.17.0-dev.10
+# Specific package version, or a single package from a TypeSpec PR build
+node eng/scripts/typespec-channel.mts next --set @typespec/compiler=1.17.0-dev.10
 node eng/scripts/typespec-channel.mts next --set @typespec/compiler=<tarball-url>
 
 # Back to the committed versions
 node eng/scripts/typespec-channel.mts stable
 ```
 
-The script adds the requested versions to `overrides` in `pnpm-workspace.yaml` and installs them.
+Channels are npm dist-tags, not versions: the compiler, TypeSpec libraries, and Azure libraries
+use different version numbers. Use repeated `--set <package>=<version>` arguments to pin individual
+packages to exact versions.
+
+The script adds the requested tags or package versions to `overrides` in `pnpm-workspace.yaml`
+and installs them.
 While a channel is in use, `pnpm-workspace.yaml` and `pnpm-lock.yaml` stay modified so `pnpm exec`
 and `pnpm tsv` keep the switched packages. Do not commit them. `stable` restores both files from git,
 discarding any local edits to them. GitHub Actions restores them right after install so
@@ -34,7 +39,7 @@ CI selects the channel the same way:
 | PRs and pushes to `main` | `stable` |
 | PRs into and pushes to `typespec-next` | `next` |
 | Scheduled **TypeSpec Validation - All** | `stable` and `next` (`next` includes the `typespec-next` spec changes) |
-| Manual **TypeSpec Validation - All** | the `typespec-channel` input, e.g. a dev version |
+| Manual **TypeSpec Validation - All** | the `typespec-channel` input, e.g. `next` |
 
 With an upcoming release, TSV runs with `--allow-generated-changes`: generated Swagger and formatting
 that differ from the committed files are reported as warnings, so only real breaks fail. PRs into
@@ -62,3 +67,8 @@ from `main` under `specification/`; tooling changes always go to `main`.
    `pnpm tsv --all` without `--git-clean`.
 4. Open the PR against `main`. After it merges, reset `typespec-next` to `main`: everything it held
    is now on `main`.
+
+Each shard's patch combines its project changes against the committed checkout, including shared
+files only once. Independent edits to a shared file are merged; conflicting generated edits fail
+the run rather than producing an unusable patch. The file named by `--diff-output` is overwritten
+and must be outside the checkout.

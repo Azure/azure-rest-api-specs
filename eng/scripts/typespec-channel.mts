@@ -3,7 +3,7 @@
 // pnpm-workspace.yaml.
 //
 //   node eng/scripts/typespec-channel.mts next
-//   node eng/scripts/typespec-channel.mts 1.17.0-dev.10
+//   node eng/scripts/typespec-channel.mts next --set @typespec/compiler=1.17.0-dev.10
 //   node eng/scripts/typespec-channel.mts next --set @typespec/compiler=<tarball-url>
 //   node eng/scripts/typespec-channel.mts stable
 //
@@ -16,7 +16,8 @@
 
 import { execFileSync } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 
 /** Packages released together by microsoft/typespec and Azure/typespec-azure. */
@@ -44,9 +45,8 @@ const typespecPackages = [
 
 const usage = `Usage: node eng/scripts/typespec-channel.mts <channel> [--set <package>=<spec>]...
 
-  <channel>  "stable" restores the committed versions. Anything else is an npm dist-tag (e.g.
-             "next") or version installed for all TypeSpec packages.
-  --set      Override one package, e.g. with a tarball URL from a TypeSpec PR build.`;
+  <channel>  "stable" restores the committed versions. Otherwise use an npm dist-tag (e.g. "next").
+  --set      Override one package with an exact version or a tarball URL from a TypeSpec PR build.`;
 
 /** Replaces or adds `overrides` entries in pnpm-workspace.yaml. */
 function setOverrides(yaml: string, overrides: ReadonlyMap<string, string>): string {
@@ -67,35 +67,47 @@ function run(command: string, args: string[]): void {
   execFileSync(command, args, { stdio: "inherit", shell: process.platform === "win32" });
 }
 
-const { values, positionals } = parseArgs({
-  allowPositionals: true,
-  options: { set: { type: "string", multiple: true, default: [] } },
-});
-if (positionals.length !== 1) {
-  console.error(usage);
-  process.exit(1);
-}
+export async function main(args = process.argv.slice(2)): Promise<void> {
+  const { values, positionals } = parseArgs({
+    args,
+    allowPositionals: true,
+    options: { set: { type: "string", multiple: true, default: [] } },
+  });
+  if (positionals.length !== 1) throw new Error(usage);
 
-const channel = positionals[0];
-const overrides = new Map(
-  channel === "stable" ? [] : typespecPackages.map((pkg): [string, string] => [pkg, channel]),
-);
-for (const value of values.set) {
-  const separator = value.indexOf("=", 1);
-  if (separator === -1) throw new Error(`--set expects <package>=<spec>, got "${value}"`);
-  overrides.set(value.slice(0, separator), value.slice(separator + 1));
-}
-
-process.chdir(join(import.meta.dirname, "..", ".."));
-run("git", ["restore", "--", "pnpm-workspace.yaml", "pnpm-lock.yaml"]);
-if (overrides.size === 0) {
-  run("pnpm", ["install", "--frozen-lockfile"]);
-} else {
-  const workspace = await readFile("pnpm-workspace.yaml", "utf8");
-  await writeFile("pnpm-workspace.yaml", setOverrides(workspace, overrides));
-  run("pnpm", ["install", "--no-frozen-lockfile"]);
-  console.log(
-    "\npnpm-workspace.yaml and pnpm-lock.yaml must stay modified while this channel is in use. " +
-      "Do not commit them. Run `node eng/scripts/typespec-channel.mts stable` to switch back.",
+  const channel = positionals[0];
+  if (!/^[a-zA-Z][a-zA-Z0-9._-]*$/.test(channel) || /^v\d/.test(channel)) {
+    throw new Error(
+      `Invalid channel "${channel}". Use an npm dist-tag such as "next". ` +
+        "TypeSpec packages have different versions; select exact versions with --set <package>=<version>.",
+    );
+  }
+  const overrides = new Map(
+    channel === "stable" ? [] : typespecPackages.map((pkg): [string, string] => [pkg, channel]),
   );
+  for (const value of values.set) {
+    const separator = value.indexOf("=", 1);
+    if (separator === -1 || separator === value.length - 1) {
+      throw new Error(`--set expects <package>=<spec>, got "${value}"`);
+    }
+    overrides.set(value.slice(0, separator), value.slice(separator + 1));
+  }
+
+  process.chdir(join(import.meta.dirname, "..", ".."));
+  run("git", ["restore", "--", "pnpm-workspace.yaml", "pnpm-lock.yaml"]);
+  if (overrides.size === 0) {
+    run("pnpm", ["install", "--frozen-lockfile"]);
+  } else {
+    const workspace = await readFile("pnpm-workspace.yaml", "utf8");
+    await writeFile("pnpm-workspace.yaml", setOverrides(workspace, overrides));
+    run("pnpm", ["install", "--no-frozen-lockfile"]);
+    console.log(
+      "\npnpm-workspace.yaml and pnpm-lock.yaml must stay modified while this channel is in use. " +
+        "Do not commit them. Run `node eng/scripts/typespec-channel.mts stable` to switch back.",
+    );
+  }
+}
+
+if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
+  await main();
 }

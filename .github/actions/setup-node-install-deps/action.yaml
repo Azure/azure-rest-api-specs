@@ -18,7 +18,7 @@ inputs:
     description: 'Whether to cache the pnpm store. Disable for tiny installs (e.g. a "--prod --filter" subset of a few packages) where restoring/saving the cache costs more time than it saves.'
     default: "true"
   typespec-channel:
-    description: 'TypeSpec packages to install: "stable" for the committed versions, or an npm dist-tag/version such as "next". Any other value replaces "install-command" with eng/scripts/typespec-channel.mts and restores the checkout afterwards, so invoke tools with `node` rather than `pnpm exec`/`pnpm run`.'
+    description: 'TypeSpec packages to install: "stable" for the committed versions, or an npm dist-tag such as "next". Any other value replaces "install-command" with eng/scripts/typespec-channel.mts and restores the checkout afterwards, so invoke tools with `node` rather than `pnpm exec`/`pnpm run`.'
     default: "stable"
 
 runs:

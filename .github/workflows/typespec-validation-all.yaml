@@ -36,7 +36,7 @@ on:
   workflow_dispatch:
     inputs:
       typespec-channel:
-        description: 'TypeSpec packages: "stable", an npm dist-tag such as "next", or a version'
+        description: 'TypeSpec packages: "stable" or an npm dist-tag such as "next"'
         default: next
 
 permissions:
@@ -53,7 +53,7 @@ jobs:
       # Sort matrix elements from "most important" to "least important" for the best grouping and UI
       # Keep matrix values short, to maximize number of parameters shown in UI
       matrix:
-        # stable: committed TypeSpec versions. next (or a dispatched version): upcoming TypeSpec.
+        # stable: committed TypeSpec versions. next (or a dispatched dist-tag): upcoming TypeSpec.
         # Scheduled runs validate both. Runs for the typespec-next branch use "next".
         channel: >-
           ${{ fromJSON(

@@ -215,8 +215,8 @@ export async function main() {
       valueLabel: "<file>",
       group: "Options for --all or --changed",
       description:
-        "With --git-clean, append each project's generated changes to <file> before cleanup, " +
-        "as a patch for `git apply`. Use a path outside the checkout.",
+        "With --git-clean, save combined generated changes to <file> before cleanup, " +
+        "as a patch for `git apply`, merging repeated shared-file changes. Use a path outside the checkout.",
     },
   } satisfies Record<string, CliOption>;
   const parsedArgs = parseArgsWithHelp({ args, options, allowPositionals: true, help });

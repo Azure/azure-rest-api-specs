@@ -6,7 +6,7 @@ parameters:
     type: string
     default: $(Build.SourcesDirectory)
   # "stable" installs the committed versions. Builds for the typespec-next branch (or PRs into it)
-  # always use "next". Any other value is an npm dist-tag or version for all TypeSpec packages.
+  # always use "next". Any other value is an npm dist-tag for all TypeSpec packages.
   # The switched pnpm-workspace.yaml and pnpm-lock.yaml are left in place so later `pnpm exec`
   # steps keep the requested versions.
   - name: TypeSpecChannel
