@@ -1,3 +1,5 @@
+// cspell:ignoreRegExp /\\x1b\[[0-9;]*m/g
+
 import { d } from "@azure-tools/specs-shared/testing";
 import { stripVTControlCharacters } from "node:util";
 import { describe, expect, it } from "vitest";
