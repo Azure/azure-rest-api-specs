@@ -1,8 +1,8 @@
-import { readFile } from "fs/promises";
-import yaml from "js-yaml";
+import { readFile } from "node:fs/promises";
+import { parse } from "yaml";
 import { marked } from "marked";
-import { dirname, normalize, relative } from "path";
-import { inspect } from "util";
+import { dirname, normalize, relative } from "node:path";
+import { inspect } from "node:util";
 import * as z from "zod";
 import { mapAsync } from "./array.ts";
 import { resolvePairCached } from "./path.ts";
@@ -131,10 +131,10 @@ export class Readme {
 
       const globalConfigYamlBlocks = yamlBlocks.filter((token) => token.lang === "yaml");
 
-      const globalConfig = globalConfigYamlBlocks.reduce(
-        (obj, token) => Object.assign(obj, yaml.load(token.text, { schema: yaml.FAILSAFE_SCHEMA })),
-        {},
-      );
+      const globalConfig = globalConfigYamlBlocks.reduce((obj, token) => {
+        const config: unknown = parse(token.text, { schema: "failsafe" });
+        return Object.assign(obj, config);
+      }, {});
 
       const tags: Map<string, Tag> = new Map();
       for (const block of yamlBlocks) {
@@ -145,7 +145,7 @@ export class Readme {
           continue;
         }
 
-        const obj: unknown = yaml.load(block.text, { schema: yaml.FAILSAFE_SCHEMA });
+        const obj: unknown = parse(block.text, { schema: "failsafe" });
 
         if (!obj) {
           this.#logger?.debug(`No YAML object found for tag ${tagName} in ${this.#path}`);
