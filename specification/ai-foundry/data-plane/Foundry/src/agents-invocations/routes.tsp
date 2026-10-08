@@ -6,6 +6,14 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+/**
+ * An AsyncAPI document, as defined by the AsyncAPI Specification (https://www.asyncapi.com/).
+ * The document is a structured object whose shape is owned by the AsyncAPI specification and is
+ * therefore not modeled here. Serialization format (JSON or YAML) is selected by the request path
+ * and is conveyed by the `content-type` response header; it does not change the body type.
+ */
+alias AsyncApiDocument = Record<unknown>;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @tag("Agent Invocations")
 interface AgentInvocations {
@@ -27,6 +35,71 @@ interface AgentInvocations {
 
       /** The invocation specification request body. */
       @body spec: Record<unknown>;
+    }
+  >;
+
+  /**
+   * Retrieves the AsyncAPI (JSON) specification for an agent version's event-driven
+   * invocation contract (e.g. the `invocations_ws` WebSocket protocol). AsyncAPI is the
+   * companion to OpenAPI for streaming/bidirectional surfaces that OpenAPI cannot express.
+   *
+   * Before serving the document, the service performs baseline validation checks including
+   * document size limits, external reference restrictions, and structural validity checks.
+   * Validation failures return 400.
+   *
+   * Returns 404 if the agent version does not publish an AsyncAPI specification.
+   * Publishing is optional; when published, JSON and YAML representations may be served as
+   * separately stored artifacts.
+   */
+  @summary("Get an agent invocation AsyncAPI spec (JSON)")
+  @get
+  @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.json")
+  getAgentInvocationAsyncApiSpecJson is FoundryDataPlaneOperation<
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The version of the agent. */
+      @path agent_version: string;
+    },
+    {
+      /** The content type of the response body. */
+      @header contentType: "application/json";
+
+      /** The AsyncAPI document, serialized as JSON. */
+      @body spec: AsyncApiDocument;
+    }
+  >;
+
+  /**
+   * Retrieves the AsyncAPI (YAML) specification for an agent version's event-driven
+   * invocation contract. Companion to `getAgentInvocationAsyncApiSpecJson`; the path
+   * extension is authoritative for the returned content type (no `Accept` negotiation).
+   *
+   * Before serving the document, the service performs baseline validation checks including
+   * document size limits, external reference restrictions, and structural validity checks.
+   * Validation failures return 400.
+   *
+   * Returns 404 if the agent version does not publish an AsyncAPI specification, or if only
+   * a JSON representation is published for that version.
+   */
+  @summary("Get an agent invocation AsyncAPI spec (YAML)")
+  @get
+  @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.yaml")
+  getAgentInvocationAsyncApiSpecYaml is FoundryDataPlaneOperation<
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The version of the agent. */
+      @path agent_version: string;
+    },
+    {
+      /** The content type of the response body. */
+      @header contentType: "application/yaml";
+
+      /** The AsyncAPI document, serialized as YAML. */
+      @body spec: AsyncApiDocument;
     }
   >;
 
