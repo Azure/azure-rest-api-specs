@@ -963,6 +963,56 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/getRedundancyConversionStatus": {
+      "post": {
+        "operationId": "FileShares_GetRedundancyConversionStatus",
+        "tags": [
+          "FileShares"
+        ],
+        "description": "Gets the status and details of the current or most recent redundancy conversion for the file share.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The resource name of the file share, as seen by the administrator through Azure Resource Manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^([a-z]|[0-9])([a-z]|[0-9]|(-(?!-))){1,61}([a-z]|[0-9])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RedundancyConversionStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileShares_GetRedundancyConversionStatus_MaximumSet": {
+            "$ref": "./examples/FileShares_GetRedundancyConversionStatus_MaximumSet_Gen.json"
+          },
+          "FileShares_GetRedundancyConversionStatus_MinimumSet": {
+            "$ref": "./examples/FileShares_GetRedundancyConversionStatus_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/privateEndpointConnections": {
       "get": {
         "operationId": "PrivateEndpointConnections_ListByFileShare",
@@ -1315,6 +1365,59 @@
         "x-ms-examples": {
           "Get PrivateLinkResource": {
             "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/startRedundancyConversion": {
+      "post": {
+        "operationId": "FileShares_StartRedundancyConversion",
+        "tags": [
+          "FileShares"
+        ],
+        "description": "Starts a redundancy conversion for the file share.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The resource name of the file share, as seen by the administrator through Azure Resource Manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^([a-z]|[0-9])([a-z]|[0-9]|(-(?!-))){1,61}([a-z]|[0-9])$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartRedundancyConversionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileShares_StartRedundancyConversion_MaximumSet": {
+            "$ref": "./examples/FileShares_StartRedundancyConversion_MaximumSet_Gen.json"
           }
         }
       }
@@ -1811,6 +1914,11 @@
           },
           "readOnly": true
         },
+        "migrationState": {
+          "$ref": "#/definitions/MigrationState",
+          "description": "The current migration state of the file share.",
+          "readOnly": true
+        },
         "encryption": {
           "$ref": "#/definitions/FileShareEncryption",
           "description": "Encryption settings for the file share.",
@@ -2265,6 +2373,20 @@
         ]
       }
     },
+    "MigrationState": {
+      "type": "object",
+      "description": "Summary of the current migration state for the file share.",
+      "properties": {
+        "redundancyConversionInProgress": {
+          "type": "boolean",
+          "description": "Indicates whether a redundancy conversion is in progress for the file share.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "redundancyConversionInProgress"
+      ]
+    },
     "NfsProtocolProperties": {
       "type": "object",
       "description": "Properties specific to the NFS protocol.",
@@ -2442,6 +2564,85 @@
         ]
       }
     },
+    "RedundancyConversionStatus": {
+      "type": "string",
+      "description": "Status of the redundancy conversion.",
+      "enum": [
+        "SubmittedForConversion",
+        "InProgress",
+        "Complete",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "RedundancyConversionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SubmittedForConversion",
+            "value": "SubmittedForConversion",
+            "description": "The redundancy conversion has been submitted."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The redundancy conversion is in progress."
+          },
+          {
+            "name": "Complete",
+            "value": "Complete",
+            "description": "The redundancy conversion has completed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The redundancy conversion has failed."
+          }
+        ]
+      }
+    },
+    "RedundancyConversionStatusOutput": {
+      "type": "object",
+      "description": "The status and details of the current or most recent redundancy conversion.",
+      "properties": {
+        "targetRedundancy": {
+          "$ref": "#/definitions/Redundancy",
+          "description": "The target redundancy requested for the redundancy conversion.",
+          "readOnly": true
+        },
+        "conversionStatus": {
+          "$ref": "#/definitions/RedundancyConversionStatus",
+          "description": "The current status of the redundancy conversion.",
+          "readOnly": true
+        },
+        "conversionFailedReason": {
+          "type": "string",
+          "description": "The reason the redundancy conversion failed.",
+          "readOnly": true
+        },
+        "conversionFailedDetailedReason": {
+          "type": "string",
+          "description": "Detailed information about why the redundancy conversion failed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "targetRedundancy",
+        "conversionStatus"
+      ]
+    },
+    "RedundancyConversionStatusResponse": {
+      "type": "object",
+      "description": "Response containing the status and details of the current or most recent redundancy conversion.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RedundancyConversionStatusOutput",
+          "description": "Properties containing the redundancy conversion status output."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
     "ShareRootSquash": {
       "type": "string",
       "description": "Share root squash enum.",
@@ -2471,6 +2672,32 @@
           }
         ]
       }
+    },
+    "StartRedundancyConversionInput": {
+      "type": "object",
+      "description": "Input for starting a redundancy conversion.",
+      "properties": {
+        "targetRedundancy": {
+          "$ref": "#/definitions/Redundancy",
+          "description": "The requested target redundancy for the conversion."
+        }
+      },
+      "required": [
+        "targetRedundancy"
+      ]
+    },
+    "StartRedundancyConversionRequest": {
+      "type": "object",
+      "description": "Parameters for starting a redundancy conversion.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StartRedundancyConversionInput",
+          "description": "Properties containing the redundancy conversion input."
+        }
+      },
+      "required": [
+        "properties"
+      ]
     }
   },
   "parameters": {}

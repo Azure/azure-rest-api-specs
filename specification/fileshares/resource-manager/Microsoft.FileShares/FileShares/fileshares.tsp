@@ -3,6 +3,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "./FileShareMigrations.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
 
@@ -207,6 +208,11 @@ model FileShareProperties {
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  @doc("The current migration state of the file share.")
+  migrationState?: MigrationState;
+
+  @added(Versions.v2026_09_01)
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @doc("Encryption settings for the file share.")
   encryption?: FileShareEncryption;
@@ -374,6 +380,26 @@ interface FileShares {
   >;
 
   checkNameAvailability is checkLocalNameAvailability;
+
+  @added(Versions.v2026_09_01)
+  @doc("Starts a redundancy conversion for the file share.")
+  startRedundancyConversion is ArmResourceActionSync<
+    Resource = FileShare,
+    Request = StartRedundancyConversionRequest,
+    Response = OkResponse,
+    BaseParameters = BaseParameters<FileShare>,
+    Error = ErrorResponse
+  >;
+
+  @added(Versions.v2026_09_01)
+  @doc("Gets the status and details of the current or most recent redundancy conversion for the file share.")
+  getRedundancyConversionStatus is ArmResourceActionSync<
+    Resource = FileShare,
+    Request = void,
+    Response = RedundancyConversionStatusResponse,
+    BaseParameters = BaseParameters<FileShare>,
+    Error = ErrorResponse
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."

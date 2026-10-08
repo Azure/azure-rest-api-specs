@@ -93,6 +93,26 @@ using Microsoft.FileShares;
   "csharp"
 );
 @@clientName(PublicNetworkAccess, "FileSharePublicNetworkAccess", "csharp");
+@@clientName(
+  StartRedundancyConversionRequest,
+  "StartRedundancyConversionContent",
+  "csharp"
+);
+@@clientName(
+  StartRedundancyConversionInput,
+  "StartRedundancyConversionInputProperties",
+  "csharp"
+);
+@@clientName(
+  RedundancyConversionStatusResponse,
+  "RedundancyConversionStatusResult",
+  "csharp"
+);
+@@clientName(
+  RedundancyConversionStatusOutput,
+  "RedundancyConversionStatusOutputProperties",
+  "csharp"
+);
 @@clientName(MediaTier, "FileShareMediaTier", "csharp");
 @@clientName(MediaTier.SSD, "Ssd", "csharp");
 @@clientName(Redundancy, "FileShareRedundancyLevel", "csharp");
