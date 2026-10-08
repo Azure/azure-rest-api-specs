@@ -9,8 +9,8 @@ The ARM API Reviewer is an AI agent. Auto-signoff must not trust it directly, so
 turned into one **commit status**, `ARM Semantic Review`, on the reviewed SHA. Universal
 Auto-Signoff reads that status alongside LintDiff and Avocado.
 
-Design record and rationale:
-[arm-semantic-review-auto-signoff-implementation.md](../../../documentation/arm-semantic-review-auto-signoff-implementation.md).
+Short overview next to the code:
+[README.md](../../workflows/src/arm-auto-signoff/README.md).
 
 ## Mental model
 

@@ -19,11 +19,9 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
   workflow_run:
     # Re-evaluate as each mandatory status producer completes.
     workflows:
-      [
-        "ARM API Review: Automated Workflow",
-        "Swagger Avocado - Set Status",
-        "Swagger LintDiff - Set Status",
-      ]
+      - "ARM API Review: Automated Workflow"
+      - "Swagger Avocado - Set Status"
+      - "Swagger LintDiff - Set Status"
     types: [completed]
 
 permissions:
