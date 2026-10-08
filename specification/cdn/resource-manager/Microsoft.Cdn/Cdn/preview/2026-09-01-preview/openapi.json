@@ -2327,6 +2327,25 @@
               }
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2340,7 +2359,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/AuthPolicy"
         },
         "x-ms-long-running-operation": true
@@ -2430,7 +2449,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/AuthPolicy"
         },
         "x-ms-long-running-operation": true
@@ -2473,6 +2492,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
