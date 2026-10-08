@@ -1562,13 +1562,21 @@ using Azure.ResourceManager;
 );
 @@clientName(MatchProcessingBehavior.Continue, "CONTINUE_ENUM", "python");
 
-// Surface documented Front Door name constraints to the C# provisioning emitter only.
+// Preserve the last pre-migration Front Door name constraints for C# provisioning compatibility.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  AFDEndpoint,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 46, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  "csharp"
+);
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
 @@clientOption(
   AFDOriginGroup,
   "resource-name-constraint",
-  #{ minLength: 1, maxLength: 50, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  #{ minLength: 1, maxLength: 90, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
@@ -1576,7 +1584,7 @@ using Azure.ResourceManager;
 @@clientOption(
   AFDOrigin,
   "resource-name-constraint",
-  #{ minLength: 1, maxLength: 50, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  #{ minLength: 1, maxLength: 90, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
@@ -1584,7 +1592,7 @@ using Azure.ResourceManager;
 @@clientOption(
   Route,
   "resource-name-constraint",
-  #{ minLength: 1, maxLength: 50, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  #{ minLength: 1, maxLength: 90, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
   "csharp"
 );
 
