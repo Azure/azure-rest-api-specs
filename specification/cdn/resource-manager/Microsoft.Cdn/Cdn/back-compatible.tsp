@@ -172,8 +172,6 @@ using Microsoft.Cdn;
   ErrorPolicies.update::parameters.properties,
   "errorPolicyUpdateProperties"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Error policies use the flattened properties envelope shared by the other AzureFrontDoor resources in this specification."
-@@flattenProperty(ErrorPolicy.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RuleSet.properties);

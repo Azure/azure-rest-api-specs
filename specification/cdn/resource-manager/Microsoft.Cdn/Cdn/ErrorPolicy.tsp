@@ -39,29 +39,30 @@ interface ErrorPolicies {
   /**
    * Creates a new error policy within the specified profile.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Replacing an error policy is long running and returns 202, matching the other Azure Front Door resources in this specification."
-  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @Azure.Core.useFinalStateVia("original-uri")
   create is ArmResourceCreateOrReplaceAsync<
     ErrorPolicy,
     Response =
-      | ArmResourceUpdatedResponse<ErrorPolicy>
-      | ArmResourceCreatedResponse<ErrorPolicy>
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ErrorPolicy> &
-          ArmLroLocationHeader<FinalResult = ErrorPolicy> &
-          Azure.Core.Foundations.RetryAfterHeader>
+      | (ArmResourceUpdatedResponse<ErrorPolicy> &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader)
+      | ArmResourceCreatedResponse<
+          ErrorPolicy,
+          LroHeaders = ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
    * Updates an existing error policy within a profile.
    */
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ErrorPolicy,
     PatchModel = ErrorPolicyUpdateParameters,
     Response =
       | ArmResponse<ErrorPolicy>
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ErrorPolicy> &
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
           ArmLroLocationHeader<FinalResult = ErrorPolicy> &
           Azure.Core.Foundations.RetryAfterHeader>
   >;
@@ -69,12 +70,9 @@ interface ErrorPolicies {
   /**
    * Deletes an existing error policy within a profile.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Deleting an error policy is long running and returns 202, matching the other Azure Front Door resources in this specification."
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     ErrorPolicy,
     Response =
-      | ArmDeletedResponse
       | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
           ArmLroLocationHeader &
           Azure.Core.Foundations.RetryAfterHeader>

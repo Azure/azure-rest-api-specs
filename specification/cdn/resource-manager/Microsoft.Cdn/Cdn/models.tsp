@@ -3511,8 +3511,6 @@ model ErrorPolicyUpdateParameters {
   /**
    * The JSON object that contains the properties of the error policy to update.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Error policies use the flattened properties envelope shared by the other Azure Front Door resources in this specification."
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ErrorPolicyUpdatePropertiesParameters;
 }
 
