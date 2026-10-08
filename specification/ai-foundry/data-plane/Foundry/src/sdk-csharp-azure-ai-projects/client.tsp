@@ -239,12 +239,6 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // EvaluatorGenerationJobs sub‐client
 // --------------------------------------------------------------------------------
-// Hide the protocol methods and methods using feature headers
-@@access(EvaluatorGenerationJobs.get, Access.internal);
-@@access(EvaluatorGenerationJobs.create, Access.internal);
-@@access(EvaluatorGenerationJobs.cancel, Access.internal);
-@@access(EvaluatorGenerationJobs.delete, Access.internal);
-
 @@clientName(EvaluatorGenerationArtifacts.dataset, "Reference");
 @@clientName(EvaluatorGenerationArtifacts.kinds, "DatasetRowKinds");
 @@clientName(EvaluatorGenerationInputs.evaluator_description, "Description");
