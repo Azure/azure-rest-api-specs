@@ -89,14 +89,19 @@ jobs:
               core,
               publishedResultsPath: '${{ runner.temp }}/published-analysis-results/sdk-breaking-change-analysis.json',
             });
+
   propagate-status:
-    needs: [resolve-trigger]
+    needs: [check-analysis-status, resolve-trigger]
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Write mitigation status
         shell: bash
         env:
-          SHOULD_RUN: ${{ needs.resolve-trigger.outputs.should-run }}
+          SHOULD_RUN: >-
+            ${{ needs.resolve-trigger.result == 'success' &&
+            needs.resolve-trigger.outputs.should-run ||
+            needs.check-analysis-status.outputs.should-run }}
         run: |
           mkdir -p "${{ runner.temp }}/sdk-breaking-change-mitigate"
           printf '%s\n' "$SHOULD_RUN" > \
@@ -109,6 +114,7 @@ jobs:
           path: ${{ runner.temp }}/sdk-breaking-change-mitigate/run
           if-no-files-found: error
           retention-days: 7
+
   mitigate:
     needs: resolve-trigger
     if: needs.resolve-trigger.outputs.should-run == 'true'
