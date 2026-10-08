@@ -62,6 +62,13 @@ from `main` under `specification/`; tooling changes always go to `main`.
 1. Merge `origin/typespec-next` into a branch from `main`.
 2. Set the new versions of the TypeSpec packages in the `catalog` (and the `@typespec/asset-emitter`
    override) of `pnpm-workspace.yaml`, then run `pnpm install`.
-3. Regenerate Swagger by running `pnpm tsv --all` without `--git-clean`.
+3. Regenerate Swagger. Either apply the `typespec-next-generated-changes-*` patches from the latest
+   scheduled **TypeSpec Validation - All** run (`git apply <patch>`), or run
+   `pnpm tsv --all` without `--git-clean`.
 4. Open the PR against `main`. After it merges, reset `typespec-next` to `main`: everything it held
    is now on `main`.
+
+Each shard's patch combines its project changes against the committed checkout, including shared
+files only once. Independent edits to a shared file are merged; conflicting generated edits fail
+the run rather than producing an unusable patch. The file named by `--diff-output` is overwritten
+and must be outside the checkout.

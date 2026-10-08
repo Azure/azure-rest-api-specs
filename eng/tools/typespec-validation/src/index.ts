@@ -210,6 +210,14 @@ export async function main() {
         "Report generated-file and formatting changes as warnings instead of failing. " +
         "Use when validating an upcoming TypeSpec release.",
     },
+    "diff-output": {
+      type: "string",
+      valueLabel: "<file>",
+      group: "Options for --all or --changed",
+      description:
+        "With --git-clean, save combined generated changes to <file> before cleanup, " +
+        "as a patch for `git apply`, merging repeated shared-file changes. Use a path outside the checkout.",
+    },
   } satisfies Record<string, CliOption>;
   const parsedArgs = parseArgsWithHelp({ args, options, allowPositionals: true, help });
   if (!parsedArgs) return;
@@ -226,6 +234,11 @@ export async function main() {
   }
   if ((values["git-clean"] || values["dry-run"]) && !values.all && !values.changed) {
     console.error("--git-clean and --dry-run require --all or --changed");
+    process.exitCode = 1;
+    return;
+  }
+  if (values["diff-output"] !== undefined && !values["git-clean"]) {
+    console.error("--diff-output requires --git-clean");
     process.exitCode = 1;
     return;
   }
@@ -268,6 +281,7 @@ export async function main() {
       headCommitish: values.head,
       ignoreCoreFiles: values["ignore-core-files"],
       gitClean: values["git-clean"],
+      diffOutput: values["diff-output"],
       allowGeneratedChanges: values["allow-generated-changes"],
       dryRun: values["dry-run"],
       verbose: values.verbose,
@@ -286,6 +300,7 @@ export async function main() {
     }
     const success = await runAll(parsedArgs.positionals[0] ?? "specification", {
       gitClean: values["git-clean"],
+      diffOutput: values["diff-output"],
       allowGeneratedChanges: values["allow-generated-changes"],
       shard: values.shard,
       dryRun: values["dry-run"],

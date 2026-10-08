@@ -39,7 +39,8 @@ Use `-f typespec-channel=stable` when validating a PR into `main`.
 1. Create a branch from `origin/main` and merge `origin/typespec-next`.
 2. Set the new TypeSpec versions in the `catalog` (and the `@typespec/asset-emitter` override) of
    `pnpm-workspace.yaml`, run `pnpm install`, and commit `pnpm-workspace.yaml` and `pnpm-lock.yaml`.
-3. Run `pnpm tsv --all` without `--git-clean` and commit the regenerated files.
+3. Apply the `typespec-next-generated-changes-*` patches from the latest scheduled run, or run
+   `pnpm tsv --all` without `--git-clean`, and commit the regenerated files.
 4. Confirm no TypeSpec package resolves to a prerelease: `git grep -n -- '-dev\.' pnpm-workspace.yaml`
    must print nothing.
 5. Pass the validation gate with `stable`, then open a draft PR into `main`.
