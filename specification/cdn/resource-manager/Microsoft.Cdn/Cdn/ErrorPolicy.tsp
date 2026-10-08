@@ -39,16 +39,16 @@ interface ErrorPolicies {
   /**
    * Creates a new error policy within the specified profile.
    */
-  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @Azure.Core.useFinalStateVia("original-uri")
   create is ArmResourceCreateOrReplaceAsync<
     ErrorPolicy,
     Response =
       | (ArmResourceUpdatedResponse<ErrorPolicy> &
-          ArmAsyncOperationHeader<FinalResult = ErrorPolicy> &
+          ArmAsyncOperationHeader &
           Azure.Core.Foundations.RetryAfterHeader)
       | ArmResourceCreatedResponse<
           ErrorPolicy,
-          LroHeaders = ArmAsyncOperationHeader<FinalResult = ErrorPolicy> &
+          LroHeaders = ArmAsyncOperationHeader &
             Azure.Core.Foundations.RetryAfterHeader
         >
   >;
@@ -56,14 +56,13 @@ interface ErrorPolicies {
   /**
    * Updates an existing error policy within a profile.
    */
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ErrorPolicy,
     PatchModel = ErrorPolicyUpdateParameters,
     Response =
       | ArmResponse<ErrorPolicy>
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ErrorPolicy> &
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
           ArmLroLocationHeader<FinalResult = ErrorPolicy> &
           Azure.Core.Foundations.RetryAfterHeader>
   >;
@@ -71,7 +70,6 @@ interface ErrorPolicies {
   /**
    * Deletes an existing error policy within a profile.
    */
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     ErrorPolicy,
     Response =
