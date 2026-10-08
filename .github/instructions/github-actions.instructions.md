@@ -79,6 +79,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 ### TypeScript Integration
 
 - Shared ES2024/NodeNext compiler options live in the single root `tsconfig.base.json`. Each GitHub project extends it directly, defining its own file selection and overrides that preserve the existing library, JavaScript, and unused-code checking behavior.
+- Assessment skill `.mjs` scripts have their own `tsconfig.json` extending the root base so type-aware linting resolves Node.js types consistently in root, package-local, and single-file runs. Keep these scripts included in that project rather than relying on an inferred lint project.
 - TypeScript is configured with `noEmit`, `allowImportingTsExtensions`, `erasableSyntaxOnly`, and `verbatimModuleSyntax`
 - Use `.ts` relative imports and `import type` for type-only dependencies
 - Do not introduce enums, parameter properties, or namespaces; use frozen objects and value-union type aliases instead of enums
@@ -112,7 +113,7 @@ From `package.json` comments:
 - `@actions/core`, `@actions/github`: Types for the injected GitHub Actions toolkit (devDependencies)
 - `@octokit/rest`, `@octokit/types`: GitHub REST API client
 - `simple-git`: Git operations
-- `js-yaml`: YAML parsing
+- `yaml`: YAML parsing
 - `debug`: Debug logging
 - `vitest`, `@vitest/coverage-v8`: Root development dependencies for testing and coverage
 - `oxlint`, `oxlint-tsgolint`: Root development dependencies for linting
@@ -147,8 +148,13 @@ Vitest workspace and root `pnpm check` runs all contributor checks. Package-loca
 Vitest commands still run directly and do not forward to the root.
 
 `eng.yml` validates the workspace, runs root `pnpm build` once on Linux, and runs
-the Vitest workspace on Ubuntu and Windows. `github-test.yaml` retains production-only module import
-checks on both OSes, plus actionlint and compiled agentic workflow lock checks on Linux.
+the Vitest workspace on Ubuntu and Windows. Its dedicated GitHub Actions lint job runs actionlint
+and zizmor on Linux; zizmor audits tracked workflow and action YAML, excluding generated `.lock.yml`
+files and `agentics-maintenance.yml`. `github-test.yaml` retains production-only module import checks
+on both OSes and compiled
+agentic workflow lock checks on Linux. External actions must be SHA-pinned. Keep any necessary audit
+exceptions narrowly scoped and explain them inline; preserve credentials only when a later Git
+operation requires authentication.
 
 CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
 and `eng/tools`. Do not add lint or type-check steps to the test OS matrix.
@@ -169,7 +175,8 @@ Run `pnpm run check` in each affected package. All lint, formatting, and test ch
 Cover new or changed behavior and bug regressions with focused tests of repository-owned behavior and integration contracts. Reuse adequate existing coverage for mechanical refactors and dependency/API substitutions; add tests for uncovered repository behavior or compatibility risks, not to reproduce upstream test matrices. Preserve configured coverage requirements and justify removing existing tests.
 
 - Each assertion must catch a concrete behavioral regression, not restate configuration or test a third-party tool's implementation. Formatting-only changes normally need the existing formatter check, not new tests.
-- For YAML/JSON integration tests, inspect parsed values that affect behavior. Do not assert text offsets, file length, indentation, quote style, or display names unless they are part of the contract being tested.
+- Test actual script/runtime behavior, not workflow text. Do not add tests or snapshots that assert workflow or composite-action YAML contents, whether through string matching or parsed fields, including checkout credentials, permissions, action references, triggers, inputs, or step wiring. This applies to new workflows and bug fixes too. Validate configuration changes with the existing actionlint, zizmor, and formatter checks.
+- For other YAML/JSON integration tests, inspect parsed values that affect behavior. Do not assert text offsets, file length, indentation, quote style, or display names unless they are part of the contract being tested.
 - When a test fails after an intentional change, remove obsolete expectations rather than replacing them with assertions that merely lock in the new implementation. Keep the fix scoped to the behavior at issue.
 
 - **Framework**: Vitest
@@ -232,6 +239,9 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 - **Pull request target**: Use `pull_request_target` carefully; only support specific actions
 - **Permissions**: Define minimal `permissions` in workflow files
 - **Token usage**: Use `GITHUB_TOKEN` with least privilege
+- **Action references**: Pin external actions to a full commit SHA and retain a matching full release version comment (e.g., `# v7.0.0`) for dependency updates. Do not use floating major or minor version comments.
+- **Repository references**: After checkout, use `./...` for local composite actions and preserve the intended checkout revision. Privileged workflows must only execute actions from a trusted base/default-branch checkout, never a PR-head checkout. The `self-repository` audit is disabled repository-wide in `.github/zizmor.yaml` because `$/...` actions download the entire specs repository; do not add inline suppressions for this rule. Keep `$/...` for reusable workflows, which do not download an action archive.
+- **Checkout**: Use direct SHA-pinned `actions/checkout` with a version comment and explicit `persist-credentials: false`; enable credentials only for later authenticated Git operations. Do not wrap the initial checkout in a self-repository action: preparing it downloads and extracts the entire specs repository before the actual checkout, adding minutes to every job (see [actions/runner#4631](https://github.com/actions/runner/issues/4631)).
 
 ### Code Quality
 
@@ -246,6 +256,23 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 
 - **Caching**: Use appropriate caching strategies (e.g., pnpm cache in setup-node)
 - **Early exits**: Return early when conditions aren't met
+
+### GitHub API Efficiency
+
+- Minimize requests across the entire workflow, including downstream workflows, not just within
+  individual helpers. Prefer trustworthy event payloads and reuse already-fetched responses when
+  their freshness is sufficient. Do not separately fetch labels or other fields already returned
+  by a required PR lookup.
+- Apply cheap eligibility checks before API calls. Use endpoint filters and `PER_PAGE_MAX` where
+  supported. Stop pagination once sufficient evidence determines the result; retain complete
+  pagination when the decision requires an exhaustive list.
+- Avoid redundant status, label, and comment writes when the desired state is already known.
+  Do not introduce an extra read merely to avoid a write without considering the total call cost.
+- Preserve head SHA and run-attempt correlation, trust boundaries, and necessary freshness checks.
+  Never substitute the live PR head for a missing reviewed SHA or cache mutable state across
+  boundaries where it must be revalidated.
+- For changes intended to reduce requests, add focused mock call-count assertions alongside
+  behavior tests, including relevant pagination and stale-result cases.
 
 ## Common Tasks
 
@@ -263,7 +290,7 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 1. Create workflow YAML in `.github/workflows/my-workflow.yaml`
 2. Create workflow scripts in `.github/workflows/src/my-workflow.ts`
 3. Write tests in `.github/workflows/test/my-workflow.test.ts`
-4. Add workflow to `github-test.yaml` if it needs validation
+4. Keep workflow and action linting in the dedicated `eng.yml` job.
 5. Run the [required checks](#before-committing).
 
 ### Updating Dependencies

@@ -4,15 +4,16 @@ import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 
 import * as fsPromises from "node:fs/promises";
-import path from "node:path";
+import path from "pathe";
 import * as nativeGlob from "../src/glob.ts";
 import { CompileRule } from "../src/rules/compile.ts";
 import { diagnosticDetails } from "./diagnostics.ts";
 
 import * as utils from "../src/utils.ts";
 
-const swaggerPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
-const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
+const swaggerPath = "specification/foo/data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+const handwrittenSwaggerPath =
+  "specification/foo/data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
 
 describe("compile", function () {
   let gitDiffTopSpecFolderSpy: MockInstance;
@@ -63,25 +64,26 @@ describe("compile", function () {
     },
   );
 
-  it("retains both main and client native failures, without running the dirty-file check", async () => {
-    runNodeBinSpy
-      .mockResolvedValueOnce([new Error("main failed"), "main.tsp:1:1 - error first: message", ""])
-      .mockResolvedValueOnce([
-        new Error("client failed"),
-        "",
-        "client.tsp:1:1 - error second: message",
-      ]);
-    const result = await new CompileRule().execute(mockFolder, defaultLogger);
-    expect(result.success).toBe(false);
-    expect(result.diagnostics?.map(diagnosticDetails)).toEqual([
+  it("retains main and imported client failures without compiling client again", async () => {
+    runNodeBinSpy.mockResolvedValueOnce([
+      new Error("main failed"),
       "main.tsp:1:1 - error first: message",
       "client.tsp:1:1 - error second: message",
     ]);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
+    expect(result.success).toBe(false);
+    expect(result.diagnostics?.map(diagnosticDetails)).toEqual([
+      "main.tsp:1:1 - error first: message\nclient.tsp:1:1 - error second: message",
+    ]);
     expect(gitDiffTopSpecFolderSpy).not.toHaveBeenCalled();
-    expect(runNodeBinSpy).toHaveBeenCalledTimes(2);
+    expect(runNodeBinSpy).toHaveBeenCalledExactlyOnceWith(
+      "@typespec/compiler",
+      ["tsp", "compile", "--list-files", "--warn-as-error", mockFolder],
+      defaultLogger,
+    );
   });
 
-  it("should succeed if project can compile", async function () {
+  it("compiles only main when both main and client exist", async function () {
     const compileOutput =
       // header, not a filename
       "header\n" +
@@ -112,19 +114,42 @@ describe("compile", function () {
     await expect(new CompileRule().execute(mockFolder, logger)).resolves.toMatchObject({
       success: true,
     });
-    expect(runNodeBinSpy).toHaveBeenNthCalledWith(
-      1,
+    expect(runNodeBinSpy).toHaveBeenCalledExactlyOnceWith(
       "@typespec/compiler",
       ["tsp", "compile", "--list-files", "--warn-as-error", mockFolder],
       logger,
     );
-    expect(runNodeBinSpy).toHaveBeenNthCalledWith(
-      2,
-      "@typespec/compiler",
-      ["tsp", "compile", "--no-emit", "--warn-as-error", path.join(mockFolder, "client.tsp")],
-      logger,
-    );
+    expect(gitDiffTopSpecFolderSpy).toHaveBeenCalledExactlyOnceWith(mockFolder, logger);
   });
+
+  it.each([false, true])(
+    "compiles client-only projects without emitting (failure=%s)",
+    async (failure) => {
+      const clientTsp = path.join(mockFolder, "client.tsp");
+      vi.mocked(utils.fileExists).mockImplementation((file) => Promise.resolve(file === clientTsp));
+      const nativeDiagnostic = "client.tsp:1:1 - error test-code: client failure";
+      if (failure) {
+        runNodeBinSpy.mockResolvedValueOnce([new Error("client failed"), "", nativeDiagnostic]);
+      }
+
+      const result = await new CompileRule().execute(mockFolder, defaultLogger);
+
+      expect(result.success).toBe(!failure);
+      expect(runNodeBinSpy).toHaveBeenCalledExactlyOnceWith(
+        "@typespec/compiler",
+        ["tsp", "compile", "--no-emit", "--warn-as-error", clientTsp],
+        defaultLogger,
+      );
+      expect(nativeGlob.globFiles).not.toHaveBeenCalled();
+      if (failure) {
+        expect(result.diagnostics?.map(diagnosticDetails)).toEqual([nativeDiagnostic]);
+        expect(gitDiffTopSpecFolderSpy).not.toHaveBeenCalled();
+      } else {
+        expect(result.diagnostics).toEqual([]);
+        expect(gitDiffTopSpecFolderSpy).toHaveBeenCalledExactlyOnceWith(mockFolder, defaultLogger);
+      }
+    },
+  );
 
   it.each([
     ["ANSI colors", `\u001b[32m${swaggerPath}\u001b[0m`],
@@ -141,9 +166,12 @@ describe("compile", function () {
     const result = await new CompileRule().execute(mockFolder, defaultLogger);
 
     expect(result.success).toBe(true);
-    expect(nativeGlob.globFiles).toHaveBeenCalledWith("data-plane/Azure.Foo/**/foo.json", {
-      exclude: ["**/examples/**"],
-    });
+    expect(nativeGlob.globFiles).toHaveBeenCalledWith(
+      "specification/foo/data-plane/Azure.Foo/**/foo.json",
+      {
+        exclude: ["**/examples/**"],
+      },
+    );
     // Inventory is still used even though normal output is hidden.
     expect(result.diagnostics?.some((diagnostic) => diagnostic.code === "extra-swagger")).toBe(
       false,
@@ -156,6 +184,37 @@ describe("compile", function () {
     );
 
     await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+      success: true,
+    });
+  });
+
+  it("should fail if output swaggers are outside the allowed folder", async () => {
+    const folder = "specification/foo/data-plane/Azure.Foo";
+    runNodeBinSpy.mockResolvedValue([null, "tsp-output/contoso.json", ""]);
+
+    await expect(new CompileRule().execute(folder, defaultLogger)).rejects.toThrow(
+      /Output folder .* must be under path/,
+    );
+  });
+
+  it("should skip output-folder validation for v1 specs", async () => {
+    runNodeBinSpy.mockResolvedValue([null, "tsp-output/contoso.json", ""]);
+    vi.mocked(nativeGlob.globFiles).mockResolvedValue([]);
+
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+      success: true,
+    });
+  });
+
+  it("should allow output swaggers in a shared v2 service folder", async () => {
+    const folder =
+      "specification/authorization/resource-manager/Microsoft.Authorization/Authorization/AccessReview";
+    const output =
+      "specification/authorization/resource-manager/Microsoft.Authorization/Authorization/stable/2021-12-01-preview/authorization-AccessReviewCalls.json";
+    runNodeBinSpy.mockResolvedValue([null, output, ""]);
+    vi.mocked(nativeGlob.globFiles).mockResolvedValue([]);
+
+    await expect(new CompileRule().execute(folder, defaultLogger)).resolves.toMatchObject({
       success: true,
     });
   });
@@ -191,8 +250,10 @@ describe("compile", function () {
 
   it("should succeed if extra swaggers are only older preview versions", async function () {
     // Latest preview is 2024-03-01-preview, extra swagger is from 2022-11-01-preview
-    const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
-    const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+    const latestPreviewPath =
+      "specification/foo/data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const olderPreviewPath =
+      "specification/foo/data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
     runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, latestPreviewPath, ""]),
@@ -214,8 +275,10 @@ describe("compile", function () {
   });
 
   it("should fail if extra swaggers include latest preview version", async function () {
-    const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
-    const anotherLatestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/bar.json";
+    const latestPreviewPath =
+      "specification/foo/data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const anotherLatestPreviewPath =
+      "specification/foo/data-plane/Azure.Foo/preview/2024-03-01-preview/bar.json";
 
     runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, latestPreviewPath, ""]),
@@ -239,8 +302,9 @@ describe("compile", function () {
   });
 
   it("should fail if extra swaggers include stable versions", async function () {
-    const previewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
-    const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
+    const previewPath =
+      "specification/foo/data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const stablePath = "specification/foo/data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
     runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, previewPath, ""]),
@@ -266,8 +330,9 @@ describe("compile", function () {
   it("should succeed if an older preview is superseded by a later stable version", async function () {
     // Current TypeSpec only generates the stable 2024-03-01 version, but the older
     // preview swagger is left in place. This should be allowed.
-    const stablePath = "data-plane/Azure.Foo/stable/2024-03-01/foo.json";
-    const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+    const stablePath = "specification/foo/data-plane/Azure.Foo/stable/2024-03-01/foo.json";
+    const olderPreviewPath =
+      "specification/foo/data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
     runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, stablePath, ""]),
@@ -291,8 +356,9 @@ describe("compile", function () {
   it("should fail if a preview is newer than the latest stable version", async function () {
     // Current TypeSpec only generates the stable 2023-01-01 version, but a *newer*
     // preview swagger is left in place. This is a genuine mismatch and should fail.
-    const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
-    const newerPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const stablePath = "specification/foo/data-plane/Azure.Foo/stable/2023-01-01/foo.json";
+    const newerPreviewPath =
+      "specification/foo/data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
 
     runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, stablePath, ""]),
@@ -316,9 +382,12 @@ describe("compile", function () {
   });
 
   it("should succeed with multiple older preview versions", async function () {
-    const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
-    const olderPreview1Path = "data-plane/Azure.Foo/preview/2023-01-01-preview/foo.json";
-    const olderPreview2Path = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+    const latestPreviewPath =
+      "specification/foo/data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const olderPreview1Path =
+      "specification/foo/data-plane/Azure.Foo/preview/2023-01-01-preview/foo.json";
+    const olderPreview2Path =
+      "specification/foo/data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
     runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, latestPreviewPath, ""]),
@@ -340,9 +409,11 @@ describe("compile", function () {
   });
 
   it("should fail if extra swaggers mix preview and stable versions", async function () {
-    const previewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
-    const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
-    const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
+    const previewPath =
+      "specification/foo/data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const olderPreviewPath =
+      "specification/foo/data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+    const stablePath = "specification/foo/data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
     runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, previewPath, ""]),

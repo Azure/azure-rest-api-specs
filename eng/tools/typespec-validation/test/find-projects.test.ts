@@ -2,7 +2,7 @@ import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join } from "pathe";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { findChangedProjects } from "../src/find-projects.ts";
 
@@ -115,6 +115,7 @@ it.each([
 
 it.each([
   ".github/arm-leases/service/lease.yaml",
+  ".github/CODEOWNERS",
   "eng/common/scripts/common.ps1",
   "eng/scripts/ChangedFiles-Functions.ps1",
   "eng/scripts/Tests/ChangedFiles-Functions.Tests.ps1",

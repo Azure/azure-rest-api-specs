@@ -1,7 +1,7 @@
 import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "pathe";
 import { stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
@@ -10,7 +10,7 @@ import { gitDiffTopSpecFolder } from "../src/utils.ts";
 let root: string;
 let folder: string;
 beforeEach(async () => {
-  root = await realpath(await mkdtemp(join(tmpdir(), "tsv-generated-")));
+  root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-generated-"))));
   await writeFile(join(root, ".gitattributes"), "* text=auto eol=lf\n");
   folder = join(root, "specification/service/Project");
   await mkdir(folder, { recursive: true });
