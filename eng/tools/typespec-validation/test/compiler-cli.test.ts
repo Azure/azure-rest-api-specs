@@ -1,7 +1,7 @@
 import { execFile } from "node:child_process";
-import { mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
 import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
@@ -13,7 +13,7 @@ const project = "specification/service/data-plane/Project";
 let root: string;
 
 beforeEach(async () => {
-  root = await realpath(await mkdtemp(join(tmpdir(), "tsv-command-cli-")));
+  root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-command-cli-"))));
   await writeFile(join(root, ".gitattributes"), "* text=auto eol=lf\n");
   vi.stubEnv("DEBUG", "");
   vi.stubEnv("GITHUB_ACTIONS", "false");
@@ -116,6 +116,53 @@ it("prints only a final summary by default and compact rule statuses with --verb
   expect(verbose.stdout).toContain(
     "- StaleApiVersionPin (skipped)\n\n8 passed | 3 skipped | 1 suppressed",
   );
+});
+
+it.each([false, true])("compiles one entrypoint with main present=%s", async (mainExists) => {
+  const folder = join(root, project);
+  await writeFile(join(folder, "client.tsp"), "");
+  if (mainExists) {
+    await writeFile(join(folder, "main.tsp"), 'import "./client.tsp";\n');
+  } else {
+    await rm(join(folder, "main.tsp"));
+  }
+  await simpleGit(root).add(project).commit("Set entrypoints");
+
+  const invocations = join(root, "compiler-invocations.jsonl");
+  await writeFile(invocations, "");
+  await compiler(`if (process.argv[2] === "compile") {
+    require("node:fs").appendFileSync(
+      ${JSON.stringify(invocations)},
+      JSON.stringify(process.argv.slice(2)) + "\\n"
+    );
+  }`);
+
+  const result = await run(project);
+
+  expect(result.code).toBe(0);
+  expect(result.stderr).toBe("");
+  const args = (await readFile(invocations, "utf8"))
+    .trim()
+    .split("\n")
+    .map((line): unknown => JSON.parse(line));
+  expect(args).toEqual([
+    mainExists
+      ? ["compile", "--list-files", "--warn-as-error", resolve(folder)]
+      : ["compile", "--no-emit", "--warn-as-error", join(folder, "client.tsp")],
+  ]);
+});
+
+it("rejects a missing client import before running the compiler", async () => {
+  await writeFile(join(root, project, "client.tsp"), "");
+  await simpleGit(root).add(project).commit("Add client without import");
+  await compiler('throw new Error("Compiler must not run");');
+
+  const result = await run(project);
+
+  expect(result.code).toBe(1);
+  expect(result.stderr).toContain("error tsv/client-tsp-import:");
+  expect(result.stderr).not.toContain("Compiler must not run");
+  expect(result.stdout).not.toContain("Compiler must not run");
 });
 
 it.each([

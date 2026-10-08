@@ -21,8 +21,9 @@ jobs:
 
     steps:
       - name: Checkout 'after' state
-        uses: $/.github/actions/checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
           path: after
@@ -38,14 +39,15 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
 
       - name: Checkout 'before' state
-        uses: $/.github/actions/checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           ref: ${{ steps.merge-base.outputs.sha }}
           path: before
 
       - name: Setup Node and install deps
         # Use the PR head checkout, not the workflow's PR merge commit.
-        uses: ./after/.github/actions/setup-node-install-deps # zizmor: ignore[self-repository]
+        uses: ./after/.github/actions/setup-node-install-deps
         with:
           # The repository is checked out into "after/", so that is the workspace
           # root (and where the root package.json with "packageManager" lives).
@@ -71,9 +73,19 @@ jobs:
           REPOSITORY_NAME: ${{ github.event.repository.name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Upload impact summary JSON
+        if: ${{ always() && steps.summarize-impact.outputs.summary }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          path: ${{ steps.summarize-impact.outputs.summary }}
+          archive: false
+          if-no-files-found: ignore
+
+      # Keep older consumers working during the one-month migration.
+      # Remove with https://github.com/Azure/azure-rest-api-specs/issues/46973.
       - name: Set job-summary artifact
         if: ${{ always() && steps.summarize-impact.outputs.summary }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: job-summary
           path: ${{ steps.summarize-impact.outputs.summary }}

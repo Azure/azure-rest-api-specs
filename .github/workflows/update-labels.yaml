@@ -26,12 +26,16 @@ permissions:
 jobs:
   update-labels:
     name: Update Labels
+    if: >-
+      github.event.workflow_run.conclusion != 'skipped' &&
+      github.event.workflow_run.conclusion != 'cancelled'
 
     runs-on: ubuntu-slim
 
     steps:
-      - uses: $/.github/actions/checkout
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github
 
@@ -46,14 +50,14 @@ jobs:
 
       - if: ${{ always() && steps.update-labels.outputs.head_sha }}
         name: Upload artifact with head SHA
-        uses: $/.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: head-sha
           value: ${{ steps.update-labels.outputs.head_sha }}
 
       - if: ${{ always() && steps.update-labels.outputs.issue_number }}
         name: Upload artifact with issue number
-        uses: $/.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: issue-number
           value: ${{ steps.update-labels.outputs.issue_number }}
