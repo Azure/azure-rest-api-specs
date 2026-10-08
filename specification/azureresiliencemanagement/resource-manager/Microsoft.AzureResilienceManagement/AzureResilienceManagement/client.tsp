@@ -106,6 +106,14 @@ using Azure.ResourceManager;
   "RecommendationsHighAvailabilityInfo",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Keep the nested goal requirement model to avoid duplicate C# members."
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "The option is scoped to C#."
+@@clientOption(
+  UnifiedResilienceItemGoalRequirement,
+  "disable-safe-flatten",
+  true,
+  "csharp"
+);
 
 // These three are reference/content models and must not use the *Resource suffix.
 @@clientName(IncludeOrUpdateResource, "IncludeOrUpdateContent", "csharp");
