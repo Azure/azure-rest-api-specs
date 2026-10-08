@@ -315,12 +315,6 @@ describe("ARM API review workflow", () => {
       expect(workflow).toContain("github.event.comment.body != '/arm-review'");
       expect(workflow).toContain("github.event.issue.pull_request == null");
       expect(workflow).toContain("github.event.label.name != 'WaitForARMFeedback'");
-      // PR events the trigger gate skips (draft, or no queue label) must not join the PR group
-      // and cancel an active review.
-      expect(workflow).toContain("github.event.pull_request.draft == true");
-      expect(workflow).toContain(
-        "!contains(github.event.pull_request.labels.*.name, 'WaitForARMFeedback')",
-      );
       expect(workflow).toContain("&& github.run_id || github.event.issue.number");
     }
   });

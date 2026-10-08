@@ -232,9 +232,7 @@ Universal does not sign off
 ```
 
 A newer run for the same PR cancels an in-flight one (`cancel-in-progress`), and the publisher
-checks for a newer run only immediately before it writes. Events the trigger gate would skip,
-such as a push to a draft PR or to a PR without `WaitForARMFeedback`, get a run-scoped
-concurrency group, so they cannot cancel a valid in-flight review.
+checks for a newer run only immediately before it writes.
 
 ## Universal decision
 

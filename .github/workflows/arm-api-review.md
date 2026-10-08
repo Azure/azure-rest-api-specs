@@ -6,12 +6,11 @@ description: >
   on demand via the /arm-review comment command.
 run-name: "ARM API Review #${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }} (${{ github.event_name }})"
 timeout-minutes: 30
-# Concurrency is evaluated before the job-level `if` gate. Give every event the
-# gate below will skip a run-scoped group so it cannot cancel an active review for
-# the same PR: unrelated comments, non-queue label events, and PR events on a
-# draft PR or one without `WaitForARMFeedback`. Keep this in step with the gate.
+# Concurrency is evaluated before the job-level `if` gate. Give unrelated
+# comments and non-queue label events run-scoped groups so they cannot cancel
+# an active review for the same PR before being skipped.
 concurrency:
-  group: "gh-aw-${{ github.workflow }}-${{ ((github.event_name == 'issue_comment' && (github.event.comment.body != '/arm-review' || github.event.issue.pull_request == null)) || (github.event_name == 'pull_request_target' && (github.event.pull_request.draft == true || (github.event.action == 'labeled' && github.event.label.name != 'WaitForARMFeedback') || (github.event.action != 'labeled' && !contains(github.event.pull_request.labels.*.name, 'WaitForARMFeedback'))))) && github.run_id || github.event.issue.number || github.event.pull_request.number || github.event.inputs.pr_number || github.run_id }}"
+  group: "gh-aw-${{ github.workflow }}-${{ ((github.event_name == 'issue_comment' && (github.event.comment.body != '/arm-review' || github.event.issue.pull_request == null)) || (github.event_name == 'pull_request_target' && github.event.action == 'labeled' && github.event.label.name != 'WaitForARMFeedback')) && github.run_id || github.event.issue.number || github.event.pull_request.number || github.event.inputs.pr_number || github.run_id }}"
   cancel-in-progress: true
 on:
   # Fork PRs ARE supported (`forks: ["*"]`), matching every other PR workflow in
