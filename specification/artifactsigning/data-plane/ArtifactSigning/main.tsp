@@ -209,3 +209,5 @@ alias SigningRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTrait<{
   @header
   xCorrelationId?: string;
 }>;
+
+// Demo comment: exercising the changed-sharded TypeSpec Validation path (no behavior change).
