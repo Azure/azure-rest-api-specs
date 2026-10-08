@@ -45,3 +45,8 @@ interface MetadataEntities {
 
 @@doc(MetadataEntity.name, "Name of the metadata entity.");
 @@doc(MetadataEntity.properties, "The metadata entity properties.");
+
+// Demo: deliberately broken model to exercise the failing-check path.
+model DemoBrokenModel {
+  brokenProperty: ThisTypeDoesNotExist;
+}
