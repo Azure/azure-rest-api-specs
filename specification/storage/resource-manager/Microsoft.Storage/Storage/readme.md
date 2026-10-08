@@ -1016,7 +1016,6 @@ These settings apply only when `--tag=package-2018-03-preview-only` is specified
 input-file:
   - preview/2018-03-01-preview/storage.json
   - preview/2018-03-01-preview/blob.json
-  - preview/2018-03-01-preview/managementpolicy.json
 
 directive:
   - suppress: R3018
