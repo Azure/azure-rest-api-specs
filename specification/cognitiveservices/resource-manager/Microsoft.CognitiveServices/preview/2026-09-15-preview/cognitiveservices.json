@@ -18998,11 +18998,11 @@
     },
     "ManagedComputeDeploymentParameters": {
       "type": "object",
-      "description": "Non-secret runtime parameters for a VmManagedCompute deployment. Supported only when sku.name is VmManagedCompute; other SKUs are rejected.",
+      "description": "Non-secret runtime parameters for a managed compute deployment. When sku.name is aksCompute, only instanceType is supported. All other parameters are supported only when sku.name is VmManagedCompute; instanceType is not supported for that SKU. Other SKUs do not support deploymentParameters.",
       "properties": {
         "instanceType": {
           "type": "string",
-          "description": "Instance type that overrides the deployment template default. Immutable after creation.",
+          "description": "VM size for a managed compute deployment with sku.name aksCompute. Not supported for VmManagedCompute. Immutable after creation.",
           "minLength": 1,
           "maxLength": 8192,
           "x-ms-mutability": [
@@ -19133,7 +19133,7 @@
       "properties": {
         "deploymentParameters": {
           "$ref": "#/definitions/ManagedComputeDeploymentParameters",
-          "description": "Runtime parameters for a VmManagedCompute deployment. Omitted parameters are unchanged, and a supplied array replaces the current array. To remove a parameter override, replace the deployment with PUT."
+          "description": "Runtime parameters for a managed compute deployment. Omitted parameters are unchanged, and a supplied array replaces the current array. To remove a parameter override, replace the deployment with PUT."
         }
       }
     },
@@ -19240,7 +19240,7 @@
         },
         "deploymentParameters": {
           "$ref": "#/definitions/ManagedComputeDeploymentParameters",
-          "description": "Runtime parameters for a VmManagedCompute deployment.",
+          "description": "Runtime parameters for a managed compute deployment.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -19258,14 +19258,6 @@
         "computeId": {
           "type": "string",
           "description": "Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "priority": {
-          "type": "string",
-          "description": "Scheduling priority for VM-backed managed compute deployments. Immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"

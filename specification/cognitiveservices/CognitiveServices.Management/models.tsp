@@ -3931,18 +3931,18 @@ model PatchResourceSku {
 @added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentPatchProperties {
   /**
-   * Runtime parameters for a VmManagedCompute deployment. Omitted parameters are unchanged, and a supplied array replaces the current array. To remove a parameter override, replace the deployment with PUT.
+   * Runtime parameters for a managed compute deployment. Omitted parameters are unchanged, and a supplied array replaces the current array. To remove a parameter override, replace the deployment with PUT.
    */
   deploymentParameters?: ManagedComputeDeploymentParameters;
 }
 
 /**
- * Non-secret runtime parameters for a VmManagedCompute deployment. Supported only when sku.name is VmManagedCompute; other SKUs are rejected.
+ * Non-secret runtime parameters for a managed compute deployment. When sku.name is aksCompute, only instanceType is supported. All other parameters are supported only when sku.name is VmManagedCompute; instanceType is not supported for that SKU. Other SKUs do not support deploymentParameters.
  */
 @added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentParameters {
   /**
-   * Instance type that overrides the deployment template default. Immutable after creation.
+   * VM size for a managed compute deployment with sku.name aksCompute. Not supported for VmManagedCompute. Immutable after creation.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
@@ -6852,7 +6852,7 @@ model ManagedComputeDeploymentProperties {
   gatedModelAccess?: GatedModelAccessProperties;
 
   /**
-   * Runtime parameters for a VmManagedCompute deployment.
+   * Runtime parameters for a managed compute deployment.
    */
   @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -6880,6 +6880,12 @@ model ManagedComputeDeploymentProperties {
   /**
    * Scheduling priority for VM-backed managed compute deployments. Immutable after creation.
    */
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   priority?: string;
 
