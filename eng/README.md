@@ -6,15 +6,18 @@ For context on this directory, see [Design guidelines for spec repos validation 
 
 ## Spec PR Validation
 
-[Spec PR Validation](tools/spec-pr-validation/) checks the existing TypeSpec
-Requirement policies for committed specification changes:
+[Spec PR Validation](tools/spec-pr-validation/README.md) checks TypeSpec usage
+policies for committed PR changes. [TypeSpec Validation](tools/typespec-validation/README.md)
+continues to validate TypeSpec project correctness and SDK API-version pins.
 
-```bash
-node eng/tools/spec-pr-validation/src/index.ts --base-commitish HEAD^ --head-commitish HEAD
-```
+The supported PR command is `pnpm spec-pr-validation --base=<base> --head=<head>`.
+The former TypeSpec Requirement entry point and its `--check-all-under` audit
+mode are no longer available.
 
-Repository administrators must update required-check settings from **TypeSpec
-Requirement** to **Spec PR Validation** when deploying the workflow rename.
+Repository administrators must replace any required **TypeSpec Requirement**
+check with **Spec PR Validation** in branch protection or rulesets when deploying
+this workflow. Those settings are not managed by the repository files. Preserve
+separate externally produced Requirement statuses where they are still in use.
 
 ## Protected files
 
