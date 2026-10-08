@@ -17,6 +17,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`CredScan`](#credscan)
   - [`PoliCheck`](#policheck)
   - [`Protected Files`](#protected-files)
+  - [`Ownership approval`](#ownership-approval)
   - [`SDK Validation *` checks, like `SDK Validation - Go`](#sdk-validation--checks-like-sdk-validation---go)
   - [`SDK Breaking Change Review`](#sdk-breaking-change-review)
   - [`Swagger APIView`](#swagger-apiview)
@@ -87,6 +88,25 @@ that repository rather than editing the synchronized copies here.
 
 `.github/CODEOWNERS` and non-synchronized `.github/skills/` files are exempt from
 this check. Their normal code-owner review requirements still apply.
+
+## `Ownership approval`
+
+This check verifies that approvals cover every changed file. Request review from
+the primary owners shown in the check and in CODEOWNERS. An approval must be for
+the current PR head, come from someone with repository write access, and not be
+the PR author's own approval. Dismissed or superseded approvals do not count.
+Engineering and automation changes require repository-maintainer approval.
+
+After obtaining a new review or correcting access, comment
+`/azsdk check-ownership` to refresh. The command only reevaluates actual reviews;
+it is not itself an approval. Renames require coverage for both the old and new
+paths, and deletions require approval too. If a file has no primary owner,
+configure its ownership in CODEOWNERS.
+
+An evaluation error is not an approval failure: rerun the workflow and contact
+the repository maintainers if it persists. The check needs a configured GitHub
+App to resolve private team membership. Other merge requirements, including
+Protected Files, still apply.
 
 ## `SDK Validation *` checks, like `SDK Validation - Go`
 

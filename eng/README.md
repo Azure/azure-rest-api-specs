@@ -26,6 +26,72 @@ them. CODEOWNERS reviews still gate changes to the policy itself.
 The existing trusted `azure-sdk` and
 `azure-sdk-automation[bot]` author exemptions remain unchanged.
 
+## Ownership approval
+
+The **Ownership approval** check separates primary review routing from approval
+authority. CODEOWNERS requests service reviewers, while the check also accepts
+repository-maintainer approval across services. The configured client team may
+approve `client.tsp` under any `specification/<service>/` directory, but not other
+specification or engineering files. Service owners can still approve their own
+client entrypoints. Only repository maintainers authorize `eng/` and `.github/`.
+Reports list primary owners, not the alternative teams.
+
+Each changed path must be covered, including deletions and both sides of renames.
+The latest decisive review for each account must approve the current head;
+comments do not supersede approvals, but dismissals and requests for changes do.
+Self-approvals, bot reviews and reviews without repository write access do not
+count. Paths with no primary owner do not accept arbitrary reviewer approval:
+configure the owner or have a repository maintainer review the change.
+
+The check reads CODEOWNERS and
+[its policy](../.github/ownership-approval.yml) from the PR base SHA, never the
+PR's proposed policy. Live team membership must be active. Missing teams, lookup
+errors, incomplete file lists and changing PR/review evidence fail evaluation.
+Use `@username` and `@organization/team` owners; email-based owners are not
+supported by this evaluator. PRs sharing a head SHA and base branch need distinct
+head commits because checks are commit-scoped. Primary-owner guidance is in the
+[CI Fix Guide](../documentation/ci-fix.md#ownership-approval).
+
+### Configuration and activation
+
+Install a dedicated GitHub App on this repository with organization **Members:
+read**, repository **Contents: read**, **Pull requests: read**, and **Checks:
+write**. Set repository variable `OWNERSHIP_APPROVAL_APP_ID` and secret
+`OWNERSHIP_APPROVAL_APP_PRIVATE_KEY`. The workflow requests only those permissions
+and only this repository. Set `client-team` to `@Azure/<team-slug>` when ready;
+`null` explicitly disables the client-team exception.
+
+The event notifier has no checkout or token permissions. The privileged
+`workflow_run` publisher executes only default-branch code and resolves the PR
+from GitHub metadata, not artifacts. `/azsdk check-ownership` also runs trusted
+default-branch code and refreshes actual reviews without granting authority.
+PR changes, new reviews and review dismissals trigger evaluation. Permission or
+team-membership changes require a refresh; fork workflow-approval policies can
+delay event delivery. Missing App credentials fail the workflow rather than
+falling back to an unrestricted token.
+
+First merge and configure the check, exercise its allowed and denied cases,
+then require **Ownership approval** with this App as its expected source.
+Before accepting fallback approvals, disable native **Require review from Code
+Owners** in every applicable ruleset. The default branch currently has both the
+organization `azure-sdk-ruleset-codeowners` and repository `Require Code owner
+approval` rulesets; changing only one does not enable the alternatives.
+Keep ordinary required reviews, changes-requested blocking and all CI checks.
+Require branches to be up to date before merging so a check evaluated against an
+older base cannot authorize a merge after the base ownership policy changes.
+This showcase does not change live rulesets or retire the separate Protected
+Files contribution-scope policy; mixed specification/engineering PRs still need
+that policy addressed independently.
+
+To exercise the approval policy locally without credentials, run:
+
+```bash
+pnpm --dir .github ownership:demo
+```
+
+The demonstration uses fictional reviewers and teams, invokes the real policy
+evaluator, and does not publish checks or change repository settings.
+
 ## Contributor readiness
 
 Contributor readiness runs only for PRs that change `specification/`, including

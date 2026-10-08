@@ -1,0 +1,78 @@
+name: Ownership Approval
+
+on: # zizmor: ignore[dangerous-triggers] Reads GitHub metadata and executes only default-branch code.
+  workflow_run:
+    workflows: ["Ownership Approval - Events"]
+    types: [completed]
+  issue_comment:
+    types: [created]
+
+permissions: {}
+
+jobs:
+  resolve:
+    if: >-
+      github.event_name != 'issue_comment' ||
+      (github.event.issue.pull_request &&
+       github.event.comment.body == '/azsdk check-ownership' &&
+       github.event.sender.type != 'Bot')
+    runs-on: ubuntu-slim
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: read
+    outputs:
+      pr: ${{ steps.resolve.outputs.result }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.repository.default_branch }}
+          sparse-checkout: .github
+      - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        id: resolve
+        with:
+          script: |
+            const { resolveOwnershipPullRequest } =
+              await import('${{ github.workspace }}/.github/workflows/src/ownership-approval-events.ts');
+            return await resolveOwnershipPullRequest({ github, context, core });
+
+  authorize:
+    needs: resolve
+    if: needs.resolve.outputs.pr != 'null'
+    runs-on: ubuntu-slim
+    timeout-minutes: 10
+    concurrency:
+      group: ownership-approval-${{ needs.resolve.outputs.pr }}
+      cancel-in-progress: false
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.repository.default_branch }}
+          sparse-checkout: .github
+      - uses: ./.github/actions/install-deps-github-script
+      - name: Create ownership app token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.OWNERSHIP_APPROVAL_APP_ID }}
+          private-key: ${{ secrets.OWNERSHIP_APPROVAL_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          permission-members: read
+          permission-contents: read
+          permission-pull-requests: read
+          permission-checks: write
+      - name: Evaluate ownership
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PR_NUMBER: ${{ needs.resolve.outputs.pr }}
+        with:
+          github-token: ${{ steps.app-token.outputs.token }}
+          script: |
+            const { checkOwnershipApproval } =
+              await import('${{ github.workspace }}/.github/workflows/src/ownership-approval.ts');
+            await checkOwnershipApproval({ github, context, core }, Number(process.env.PR_NUMBER));
