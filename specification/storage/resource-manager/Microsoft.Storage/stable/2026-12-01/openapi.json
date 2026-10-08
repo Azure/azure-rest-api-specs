@@ -6743,13 +6743,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MetadataPolicyItems"
+              "$ref": "#/definitions/MetadataPolicyListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -15039,29 +15039,35 @@
           "description": "The resource-specific properties for this resource."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
-    "MetadataPolicyItems": {
+    "MetadataPolicyListResult": {
       "type": "object",
-      "description": "The response of a metadata policy list operation.",
+      "description": "The response of a MetadataPolicy list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The metadata policies associated with the storage account.",
+          "description": "The MetadataPolicy items on this page",
           "items": {
             "$ref": "#/definitions/MetadataPolicy"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of metadata policies."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "MetadataPolicyProperties": {
       "type": "object",
@@ -15077,7 +15083,10 @@
           "$ref": "#/definitions/MetadataSnapshotPolicy",
           "description": "The metadata snapshot policy for the storage account."
         }
-      }
+      },
+      "required": [
+        "snapshotPolicy"
+      ]
     },
     "MetadataSnapshotPolicy": {
       "type": "object",
@@ -15094,7 +15103,8 @@
         },
         "definition": {
           "$ref": "#/definitions/MetadataSnapshotPolicyDefinition",
-          "description": "The server-managed metadata snapshot policy definition."
+          "description": "The server-managed metadata snapshot policy definition.",
+          "readOnly": true
         }
       },
       "required": [

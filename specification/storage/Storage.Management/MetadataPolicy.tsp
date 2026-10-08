@@ -61,11 +61,12 @@ model MetadataSnapshotPolicy {
   status: MetadataSnapshotPolicyStatus;
 
   /** The server-managed metadata snapshot policy definition. */
+  @visibility(Lifecycle.Read)
   definition?: MetadataSnapshotPolicyDefinition;
 }
 
 /** The properties of a storage account metadata policy. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The metadata policy does not have a provisioning state."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Metadata policy PUT and DELETE operations complete synchronously, so the resource has no asynchronous provisioning lifecycle to report."
 @added(Versions.v2026_12_01)
 model MetadataPolicyProperties {
   /** The date and time when the metadata policy was last modified. */
@@ -73,7 +74,7 @@ model MetadataPolicyProperties {
   lastModifiedTime?: utcDateTime;
 
   /** The metadata snapshot policy for the storage account. */
-  snapshotPolicy?: MetadataSnapshotPolicy;
+  snapshotPolicy: MetadataSnapshotPolicy;
 }
 
 /** The metadata policy for a storage account. */
@@ -81,26 +82,13 @@ model MetadataPolicyProperties {
 @parentResource(StorageAccount)
 @singleton("default")
 model MetadataPolicy
-  is Azure.ResourceManager.ProxyResource<MetadataPolicyProperties> {
+  is Azure.ResourceManager.ProxyResource<MetadataPolicyProperties, false> {
   ...ResourceNameParameter<
     Resource = MetadataPolicy,
     KeyName = "metadataPolicyName",
     SegmentName = "metadataPolicies",
     NamePattern = ""
   >;
-}
-
-/** The response of a metadata policy list operation. */
-@added(Versions.v2026_12_01)
-model MetadataPolicyItems {
-  /** The metadata policies associated with the storage account. */
-  @visibility(Lifecycle.Read)
-  @pageItems
-  value?: MetadataPolicy[];
-
-  /** The link to the next page of metadata policies. */
-  @nextLink
-  nextLink?: string;
 }
 
 /** Operations for a storage account metadata policy. */
@@ -117,9 +105,5 @@ interface MetadataPolicies {
   delete is ArmResourceDeleteSync<MetadataPolicy>;
 
   /** Lists the metadata policies associated with the specified storage account. It returns a collection of one object named default. */
-  list is ArmResourceListByParent<
-    MetadataPolicy,
-    Response = ArmResponse<MetadataPolicyItems>,
-    Error = ErrorResponse
-  >;
+  list is ArmResourceListByParent<MetadataPolicy>;
 }
