@@ -142,9 +142,4 @@ suppressions:
     from: azuremonitorworkspace.json
     where:
      - $.definitions["Azure.Core.uuid"].format
-  - code: AllProxyResourcesShouldHaveDelete
-    reason: TraceContainer is a service-managed singleton that cannot be deleted independently from its Azure Monitor Workspace.
-    from: azuremonitorworkspace.json
-    where:
-     - $.definitions.TraceContainerResource
 ```
