@@ -37164,6 +37164,17 @@
             "$ref": "#/components/schemas/PublishApprovalStatus",
             "description": "The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.",
             "readOnly": true
+          },
+          "standby_pool": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StandbyPool"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional standby (warm) pool configuration for the agent endpoint. On CREATE, an omitted\nor null pool, an empty pool, or an omitted or null size has an effective target of 0,\nsupplied by the server. On PATCH, these inputs preserve the existing target; only an\nexplicit integer size changes it. These null-as-no-change semantics apply only to the\nstandby pool configuration, not to other endpoint fields."
           }
         }
       },
@@ -37191,6 +37202,17 @@
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
             "description": "The authorization schemes supported by the agent endpoint"
+          },
+          "standby_pool": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StandbyPool"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional standby (warm) pool configuration for the agent endpoint. On CREATE, an omitted\nor null pool, an empty pool, or an omitted or null size has an effective target of 0,\nsupplied by the server. On PATCH, these inputs preserve the existing target; only an\nexplicit integer size changes it. These null-as-no-change semantics apply only to the\nstandby pool configuration, not to other endpoint fields."
           }
         }
       },
@@ -40489,7 +40511,8 @@
               "failed",
               "deleting",
               "deleted",
-              "expired"
+              "expired",
+              "standby"
             ]
           }
         ],
@@ -95668,6 +95691,29 @@
           }
         },
         "description": "Sku information"
+      },
+      "StandbyPool": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int32"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0,
+            "maximum": 50,
+            "description": "The target number of standby sessions for each serving agent version. Must be an integer\nbetween 0 and 50 (inclusive). On CREATE, an omitted or null size has an effective target\nof 0, supplied by the server. On PATCH, an omitted or null size preserves the existing\ntarget. Explicit 0 stops refill without preventing new claims of remaining eligible\nsessions or their normal expiry. Reducing the target allows the pool to shrink naturally.",
+            "examples": [
+              3
+            ]
+          }
+        },
+        "description": "Standby (warm) pool configuration for a hosted agent endpoint. The service works toward\nthe same soft, eventual target for every serving agent version, including canary versions."
       },
       "SteeringPromptOptimizationContext": {
         "type": "object",

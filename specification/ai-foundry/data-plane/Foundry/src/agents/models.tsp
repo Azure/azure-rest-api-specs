@@ -558,6 +558,25 @@ model SessionConfiguration {
   idle_timeout_seconds?: duration = duration.fromISO("PT900S");
 }
 
+@doc("""
+  Standby (warm) pool configuration for a hosted agent endpoint. The service works toward
+  the same soft, eventual target for every serving agent version, including canary versions.
+  """)
+@removed(Versions.v1)
+model StandbyPool {
+  @doc("""
+    The target number of standby sessions for each serving agent version. Must be an integer
+    between 0 and 50 (inclusive). On CREATE, an omitted or null size has an effective target
+    of 0, supplied by the server. On PATCH, an omitted or null size preserves the existing
+    target. Explicit 0 stops refill without preventing new claims of remaining eligible
+    sessions or their normal expiry. Reducing the target allows the pool to shrink naturally.
+    """)
+  @minValue(0)
+  @maxValue(50)
+  @example(3)
+  size?: int32 | null;
+}
+
 @doc("Code-based deployment configuration for a hosted agent.")
 model CodeConfiguration {
   @doc("The runtime identifier for code execution (e.g., 'python_3_11', 'python_3_12', 'python_3_13').")
@@ -944,6 +963,16 @@ model AgentEndpointConfig {
   @doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.")
   @visibility(Lifecycle.Read)
   publish_approval_status?: PublishApprovalStatus;
+
+  @doc("""
+    Optional standby (warm) pool configuration for the agent endpoint. On CREATE, an omitted
+    or null pool, an empty pool, or an omitted or null size has an effective target of 0,
+    supplied by the server. On PATCH, these inputs preserve the existing target; only an
+    explicit integer size changes it. These null-as-no-change semantics apply only to the
+    standby pool configuration, not to other endpoint fields.
+    """)
+  @removed(Versions.v1)
+  standby_pool?: StandbyPool | null;
 }
 
 @doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for an agent.")
@@ -1137,6 +1166,10 @@ union AgentSessionStatus {
 
   /** Session TTL exceeded (30 days from last activity). */
   Expired: "expired",
+
+  /** Session is an unclaimed standby-pool session, kept ready to be claimed. */
+  @removed(Versions.v1)
+  Standby: "standby",
 }
 
 // ── Version Indicator ───────────────────────────────────
