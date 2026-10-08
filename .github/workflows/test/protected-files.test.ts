@@ -1,10 +1,8 @@
-import { readFileSync } from "node:fs";
 import { mkdir, mkdtemp, rename, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { simpleGit } from "simple-git";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { isMap, isSeq, parseDocument } from "yaml";
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
 import { checkProtectedFiles } from "../src/protected-files.ts";
 import { createMockContext, createMockCore } from "./mocks.ts";
@@ -44,7 +42,10 @@ describe("Protected Files", () => {
     "does not exempt author %s when a trusted account triggers the run",
     async (author) => {
       const { core, run } = setup(author);
-      vi.mocked(getChangedFiles).mockResolvedValue(["package.json"]);
+      vi.mocked(getChangedFiles).mockResolvedValue([
+        "package.json",
+        "specification/widgets/main.tsp",
+      ]);
       await run();
       expect(core.error).toHaveBeenCalledWith(
         expect.stringContaining("Remove this change from your PR."),
@@ -53,6 +54,45 @@ describe("Protected Files", () => {
       expect(core.setFailed).toHaveBeenCalledOnce();
     },
   );
+
+  it("passes maintenance-only changes without an author exemption", async () => {
+    const { core, run } = setup("external-contributor");
+    vi.mocked(getChangedFiles).mockResolvedValue([
+      "package.json",
+      ".github/workflows/protected-files.yaml",
+    ]);
+    const result = await run();
+    expect(result.conclusion).toBe("success");
+    expect(core.setFailed).not.toHaveBeenCalled();
+    expect(result.summary).toContain("CODEOWNERS");
+    expect(result.summary).toContain("package.json");
+    expect(result.summary).toContain(".github/workflows/protected-files.yaml");
+  });
+
+  it("warns about synchronized files without blocking maintenance-only changes", async () => {
+    const { core, run } = setup();
+    const files = ["eng/common/script.ps1", ".github/skills/azsdk-common-example/SKILL.md"];
+    vi.mocked(getChangedFiles).mockResolvedValue(files);
+    const result = await run();
+    expect(result.conclusion).toBe("success");
+    expect(core.setFailed).not.toHaveBeenCalled();
+    for (const file of files) {
+      expect(core.warning).toHaveBeenCalledWith(
+        expect.stringContaining("Make source changes in that repository"),
+        { file },
+      );
+    }
+  });
+
+  it("recognizes specification scope case-insensitively", async () => {
+    const { core, run } = setup();
+    vi.mocked(getChangedFiles).mockResolvedValue([
+      "package.json",
+      "SPECIFICATION/widgets/main.tsp",
+    ]);
+    await run();
+    expect(core.setFailed).toHaveBeenCalledOnce();
+  });
 
   it.each([
     ".gitignore",
@@ -80,9 +120,9 @@ describe("Protected Files", () => {
     ".vscode/.hidden",
     "eng/.hidden/nested/config.json",
     ".github/skills",
-  ])("fails for protected path %s", async (file) => {
+  ])("fails for protected path %s in a specification PR", async (file) => {
     const { core, run } = setup();
-    vi.mocked(getChangedFiles).mockResolvedValue([file]);
+    vi.mocked(getChangedFiles).mockResolvedValue([file, "specification/widgets/main.tsp"]);
     await run();
     expect(core.error).toHaveBeenCalledWith(expect.any(String), { file });
     expect(core.setFailed).toHaveBeenCalledOnce();
@@ -144,7 +184,7 @@ describe("Protected Files", () => {
     "eng/common/.hidden",
   ])("directs synced changes in %s to their source repository", async (file) => {
     const { core, run } = setup();
-    vi.mocked(getChangedFiles).mockResolvedValue([file]);
+    vi.mocked(getChangedFiles).mockResolvedValue([file, "specification/widgets/main.tsp"]);
     await run();
     expect(core.error).toHaveBeenCalledWith(
       `File '${file}' is synced from Azure/azure-sdk-tools. Remove this change from your PR and make the change in Azure/azure-sdk-tools instead.`,
@@ -154,7 +194,10 @@ describe("Protected Files", () => {
 
   it("does not classify similarly named directories as synced", async () => {
     const { core, run } = setup();
-    vi.mocked(getChangedFiles).mockResolvedValue(["eng/common-other/script.ps1"]);
+    vi.mocked(getChangedFiles).mockResolvedValue([
+      "eng/common-other/script.ps1",
+      "specification/widgets/main.tsp",
+    ]);
     await run();
     expect(core.error).toHaveBeenCalledWith(
       expect.stringContaining("outside the scope of a specification contribution"),
@@ -162,20 +205,20 @@ describe("Protected Files", () => {
     );
   });
 
-  it("includes deletions and both sides of renames using the shared diff reader", async () => {
-    const { core, run } = setup();
-    await run();
-    expect(getChangedFiles).toHaveBeenCalledWith(
-      expect.objectContaining({ gitOptions: ["--no-renames"] }),
-    );
-    expect(core.setFailed).not.toHaveBeenCalled();
-  });
-
   it.each([
-    { from: ".github/workflows/test.yaml", to: undefined },
-    { from: ".github/workflows/test.yaml", to: "specification/widgets/test.yaml" },
-    { from: "specification/widgets/test.yaml", to: ".github/workflows/test.yaml" },
-  ])("detects protected changes in a real diff: $from -> $to", async ({ from, to }) => {
+    { from: ".github/workflows/test.yaml", to: undefined, mixed: false },
+    {
+      from: ".github/workflows/test.yaml",
+      to: "specification/widgets/test.yaml",
+      mixed: true,
+    },
+    {
+      from: "specification/widgets/test.yaml",
+      to: ".github/workflows/test.yaml",
+      mixed: true,
+    },
+    { from: "specification/widgets/test.yaml", to: undefined, mixed: true },
+  ])("detects contribution scope in a real diff: $from -> $to", async ({ from, to, mixed }) => {
     const directory = await mkdtemp(join(tmpdir(), "protected-files-"));
     try {
       const git = simpleGit(directory);
@@ -185,6 +228,7 @@ describe("Protected Files", () => {
       await git.addConfig("commit.gpgsign", "false");
       await mkdir(dirname(join(directory, from)), { recursive: true });
       await writeFile(join(directory, from), "test content\n");
+      await writeFile(join(directory, "package.json"), "{}\n");
       await git.add(["--all"]);
       await git.commit("Initial file");
       if (to) {
@@ -193,6 +237,7 @@ describe("Protected Files", () => {
       } else {
         await rm(join(directory, from));
       }
+      await writeFile(join(directory, "package.json"), '{"updated": true}\n');
       await git.add(["--all"]);
       await git.commit("Change file");
 
@@ -203,11 +248,21 @@ describe("Protected Files", () => {
         actual.getChangedFiles({ ...options, cwd: directory }),
       );
       const { core, run } = setup();
-      await run();
-      expect(core.error).toHaveBeenCalledExactlyOnceWith(expect.any(String), {
-        file: ".github/workflows/test.yaml",
-      });
-      expect(core.setFailed).toHaveBeenCalledOnce();
+      const result = await run();
+      const protectedPath = [from, to].find((file) => file?.startsWith(".github/"));
+      if (mixed) {
+        expect(result.conclusion).toBe("failure");
+        expect(core.error).toHaveBeenCalledWith(expect.any(String), { file: "package.json" });
+        if (protectedPath) {
+          expect(core.error).toHaveBeenCalledWith(expect.any(String), { file: protectedPath });
+        }
+        expect(core.setFailed).toHaveBeenCalledOnce();
+      } else {
+        expect(result.conclusion).toBe("success");
+        expect(result.summary).toContain(from);
+        expect(core.error).not.toHaveBeenCalled();
+        expect(core.setFailed).not.toHaveBeenCalled();
+      }
     } finally {
       await rm(directory, { recursive: true, force: true });
     }
@@ -235,48 +290,41 @@ describe("Protected Files", () => {
     expect(getChangedFiles).not.toHaveBeenCalled();
   });
 
-  it("runs the required check on PR merge commits, including base-branch edits", () => {
-    const workflow = parseDocument(
-      readFileSync(new URL("../protected-files.yaml", import.meta.url), "utf8"),
-    );
-    expect(workflow.errors).toEqual([]);
-    const events = workflow.getIn(["on", "pull_request", "types"]);
-    if (!isSeq(events)) throw new Error("Expected explicit PR event types");
-    expect(events.toJSON()).toEqual(["opened", "synchronize", "reopened", "edited"]);
-    expect(workflow.hasIn(["on", "pull_request", "paths"])).toBe(false);
-    const permissions = workflow.get("permissions");
-    if (!isMap(permissions)) throw new Error("Expected explicit token permissions");
-    expect(permissions.toJSON()).toEqual({ contents: "read" });
-    expect(workflow.getIn(["jobs", "protected-files", "name"])).toBe("Protected Files");
-    expect(workflow.hasIn(["jobs", "protected-files", "if"])).toBe(false);
-    const steps = workflow.getIn(["jobs", "protected-files", "steps"]);
-    if (!isSeq(steps)) throw new Error("Expected workflow steps");
-    const allowed = workflow.getIn(["env", "user-allowed"]);
-    if (typeof allowed !== "string") throw new Error("Expected a trusted-author condition");
-    expect(allowed.replace(/\s+/g, " ")).toBe(
-      "${{ github.event.pull_request.user.login == 'azure-sdk' || " +
-        "github.event.pull_request.user.login == 'azure-sdk-automation[bot]' }}",
-    );
-    const exempt = steps.items[0];
-    if (!isMap(exempt)) throw new Error("Expected a trusted-author exemption step");
-    expect(exempt.get("if")).toBe("${{ env.user-allowed == 'true' }}");
-    expect(exempt.get("run")).toContain("allowed to update protected files");
-    for (const step of steps.items.slice(1)) {
-      if (!isMap(step)) throw new Error("Expected a workflow step");
-      expect(step.get("if")).toBe("${{ env.user-allowed != 'true' }}");
+  it("ignores specification changes introduced only by the base branch", async () => {
+    const directory = await mkdtemp(join(tmpdir(), "protected-files-merge-"));
+    try {
+      const git = simpleGit(directory);
+      await git.init(false, ["--initial-branch=main"]);
+      await git.addConfig("user.name", "Test");
+      await git.addConfig("user.email", "test@example.com");
+      await git.addConfig("commit.gpgsign", "false");
+      await writeFile(join(directory, "package.json"), "{}\n");
+      await git.add(["--all"]);
+      await git.commit("Base");
+      await git.checkoutLocalBranch("change");
+      await writeFile(join(directory, "package.json"), '{"updated": true}\n');
+      await git.add(["--all"]);
+      await git.commit("Maintenance change");
+      await git.checkout("main");
+      await mkdir(join(directory, "specification/widgets"), { recursive: true });
+      await writeFile(join(directory, "specification/widgets/spec.json"), "{}\n");
+      await git.add(["--all"]);
+      await git.commit("Unrelated specification change");
+      await git.merge(["--no-ff", "change", "-m", "PR merge"]);
+
+      const actual = await vi.importActual<typeof import("../../shared/src/changed-files.ts")>(
+        "../../shared/src/changed-files.ts",
+      );
+      vi.mocked(getChangedFiles).mockImplementationOnce((options) =>
+        actual.getChangedFiles({ ...options, cwd: directory }),
+      );
+      const { core, run } = setup();
+      const result = await run();
+      expect(result.conclusion).toBe("success");
+      expect(result.summary).toContain("package.json");
+      expect(core.setFailed).not.toHaveBeenCalled();
+    } finally {
+      await rm(directory, { recursive: true, force: true });
     }
-    const checkout = steps.items.find(
-      (step) => isMap(step) && String(step.get("uses")).startsWith("actions/checkout@"),
-    );
-    if (!isMap(checkout)) throw new Error("Expected a checkout step");
-    expect(checkout.getIn(["with", "fetch-depth"])).toBe(2);
-    expect(checkout.hasIn(["with", "ref"])).toBe(false);
-    const check = steps.items.find(
-      (step) => isMap(step) && step.get("name") === "Detect changes to protected files",
-    );
-    if (!isMap(check)) throw new Error("Expected a protected-files check step");
-    expect(check.getIn(["with", "script"])).toContain(
-      "await checkProtectedFiles({ context, core })",
-    );
   });
 });

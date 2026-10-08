@@ -4,6 +4,7 @@ import { mockFolder } from "./mocks.ts";
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strict as assert } from "node:assert";
+import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
 import * as nativeGlob from "../src/glob.ts";
 import { FolderStructureRule } from "../src/rules/folder-structure.ts";
@@ -12,12 +13,12 @@ import * as utils from "../src/utils.ts";
 
 describe("folder-structure", function () {
   let fileExistsSpy: MockInstance;
-  let normalizePathSpy: MockInstance;
+  let gitRootSpy: MockInstance;
   let readTspConfigSpy: MockInstance;
 
   beforeEach(() => {
     fileExistsSpy = vi.spyOn(utils, "fileExists").mockResolvedValue(true);
-    normalizePathSpy = vi.spyOn(utils, "normalizePath");
+    gitRootSpy = vi.spyOn(simpleGit(), "revparse").mockResolvedValue("");
     readTspConfigSpy = vi.spyOn(utils, "readTspConfig").mockResolvedValue(contosoTspConfig);
   });
 
@@ -79,7 +80,7 @@ describe("folder-structure", function () {
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/bar/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       const result = await new FolderStructureRule().execute(
         "/gitroot/specification/Foo/Foo",
@@ -93,7 +94,7 @@ describe("folder-structure", function () {
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/bar/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       const result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/Foo/Foo/",
@@ -106,7 +107,7 @@ describe("folder-structure", function () {
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/bar/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       const result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/Foo/Foo/Foo",
@@ -120,7 +121,7 @@ describe("folder-structure", function () {
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/bar/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       const result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/Foo.foo",
@@ -134,7 +135,7 @@ describe("folder-structure", function () {
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/bar/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       const result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/data-plane",
@@ -148,7 +149,7 @@ describe("folder-structure", function () {
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/bar/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       const result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/resource-manager",
@@ -162,7 +163,7 @@ describe("folder-structure", function () {
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/bar/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       const result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/Foo.Management.Foo.Shared",
@@ -176,7 +177,7 @@ describe("folder-structure", function () {
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/bar/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       fileExistsSpy.mockImplementation((file: string) => {
         if (file.includes("main.tsp")) {
@@ -200,7 +201,7 @@ describe("folder-structure", function () {
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/bar/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       fileExistsSpy.mockImplementation((file: string) => {
         if (file.includes("main.tsp")) {
@@ -224,7 +225,7 @@ describe("folder-structure", function () {
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/bar/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       fileExistsSpy.mockImplementation((file: string) => {
         if (file.includes("tspconfig.yaml")) {
@@ -246,7 +247,7 @@ describe("folder-structure", function () {
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/Foo.Management/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
       readTspConfigSpy.mockImplementation(() =>
         Promise.resolve(`
 options:
@@ -267,7 +268,7 @@ options:
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/Foo/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
       readTspConfigSpy.mockImplementation(() =>
         Promise.resolve(`
 options:
@@ -288,7 +289,7 @@ options:
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/Foo/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
       readTspConfigSpy.mockImplementation(() =>
         Promise.resolve(`
 options:
@@ -310,7 +311,7 @@ options:
       vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
         Promise.resolve(["/foo/Foo.Management/tspconfig.yaml"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
       readTspConfigSpy.mockImplementation(() =>
         Promise.resolve(`
 options:
@@ -342,7 +343,7 @@ options:
       vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
 
       vi.mocked(nativeGlob.globFiles).mockImplementation(() => Promise.resolve(["main.tsp"]));
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       fileExistsSpy.mockImplementation((file: string) => {
         if (file.includes("tspconfig.yaml")) {
@@ -363,7 +364,7 @@ options:
       vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
 
       vi.mocked(nativeGlob.globFiles).mockImplementation(() => Promise.resolve(["tspconfig.yaml"]));
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       let result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/data-plane",
@@ -402,7 +403,7 @@ options:
           ? Promise.resolve(["tspconfig.yaml"])
           : Promise.resolve(["main.tsp"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       const result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/data-plane/Foo",
@@ -418,7 +419,7 @@ options:
           ? Promise.resolve(["tspconfig.yaml"])
           : Promise.resolve(["main.tsp"]),
       );
-      normalizePathSpy.mockReturnValue("/gitroot");
+      gitRootSpy.mockResolvedValue("/gitroot");
 
       const result = await new FolderStructureRule().execute(
         "/gitroot/specification/foo/resource-manager/Microsoft.Foo/FooManagement",
