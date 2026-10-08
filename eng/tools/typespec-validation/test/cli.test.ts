@@ -629,7 +629,6 @@ it.each([
     error: "--base, --head and --ignore-core-files require --changed",
   },
   { args: ["--dry-run"], error: "--git-clean and --dry-run require --all or --changed" },
-  { args: ["--all", "--diff-output=out.patch"], error: "--diff-output requires --git-clean" },
   { args: ["--changed", "project"], error: "Usage: tsv --changed" },
 ])("rejects invalid invocation $args", async ({ args, error }) => {
   await expect(run(...args)).rejects.toMatchObject({

@@ -106,15 +106,5 @@ jobs:
           node eng/tools/typespec-validation/cmd/tsv.js --all
           --shard=${{ matrix.shard }}/${{ matrix.total-shards }} --git-clean specification
           --github-summary
-          ${{ matrix.channel != 'stable' && format('--allow-generated-changes --diff-output={0}/generated-changes.patch', runner.temp) || '' }}
+          ${{ matrix.channel != 'stable' && '--allow-generated-changes' || '' }}
           ${{ runner.debug == '1' && '--verbose' || '' }}
-
-      # Generated Swagger that changes with the upcoming release. Apply the merged patches in the PR
-      # that moves main to that release instead of hand-committing them on typespec-next.
-      - name: Upload generated changes
-        if: always() && matrix.channel != 'stable' && matrix.os == 'ubuntu'
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        with:
-          name: typespec-${{ matrix.channel }}-generated-changes-${{ matrix.shard }}
-          path: ${{ runner.temp }}/generated-changes.patch
-          if-no-files-found: ignore

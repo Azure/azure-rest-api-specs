@@ -2,20 +2,16 @@ import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { spawn } from "node:child_process";
-import { createHash } from "node:crypto";
-import { appendFile, mkdtemp, rm, stat, writeFile } from "node:fs/promises";
-import { tmpdir } from "node:os";
-import { isAbsolute, join, relative, resolve } from "pathe";
+import { appendFile, stat } from "node:fs/promises";
+import { relative, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
 import pc from "picocolors";
-import { simpleGit, type SimpleGit } from "simple-git";
+import { simpleGit } from "simple-git";
 import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
 import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "./find-projects.ts";
 
 interface RunOptions {
   gitClean?: boolean;
-  /** With gitClean, save combined project changes to this patch file. */
-  diffOutput?: string;
   /** Report generated-file and formatting changes as warnings instead of failing. */
   allowGeneratedChanges?: boolean;
   dryRun?: boolean;
@@ -99,33 +95,6 @@ export async function runChanged(
   return runProjects(root, projects, { checkingAllSpecs, baseCommitish, headCommitish }, options);
 }
 
-/** Merge project changes into a separate index, preserving shared-file changes only once. */
-async function saveDiff(
-  git: SimpleGit,
-  patchGit: SimpleGit,
-  directory: string,
-  savedDiffs: Set<string>,
-): Promise<string | undefined> {
-  await git.raw(["add", "--all"]);
-  try {
-    const diff = await git.diff(["--cached", "--binary", "--full-index", "--no-color", "HEAD"]);
-    // Git cannot three-way apply repeated additions or deletions.
-    const changes = diff
-      .split(/(?=^diff --git )/m)
-      .filter(Boolean)
-      .map((patch) => ({ patch, hash: createHash("sha256").update(patch).digest("hex") }))
-      .filter(({ hash }) => !savedDiffs.has(hash));
-    if (changes.length === 0) return;
-    const patch = join(directory, "project.patch");
-    await writeFile(patch, changes.map((change) => change.patch).join(""));
-    await patchGit.raw(["apply", "--cached", "--3way", patch]);
-    for (const change of changes) savedDiffs.add(change.hash);
-    return (await patchGit.raw(["write-tree"])).trim();
-  } finally {
-    await git.raw(["reset", "--quiet"]);
-  }
-}
-
 async function runProjects(
   root: string,
   projects: string[],
@@ -146,21 +115,6 @@ async function runProjects(
       throw new Error("--git-clean requires a clean checkout, including untracked files");
     }
   }
-  const diffOutput = options.diffOutput ? resolve(options.diffOutput) : undefined;
-  if (gitClean && diffOutput) {
-    const outputPath = relative(displayRoot, diffOutput);
-    if (!outputPath.startsWith("../") && !isAbsolute(outputPath)) {
-      throw new Error("--diff-output must be outside the checkout");
-    }
-  }
-  const diffDirectory =
-    gitClean && diffOutput ? await mkdtemp(join(tmpdir(), "tsv-diff-")) : undefined;
-  const patchGit = diffDirectory
-    ? simpleGit({ baseDir: displayRoot, allowEnvironment: ["GIT_INDEX_FILE"] }).env(
-        "GIT_INDEX_FILE",
-        join(diffDirectory, "index"),
-      )
-    : undefined;
 
   console.log(
     `Checking ${projects.length} TypeSpec folders:\n${projects.map(displayPath).join("\n")}`,
@@ -168,95 +122,69 @@ async function runProjects(
   const failed: string[] = [];
   const githubActions = process.env.GITHUB_ACTIONS === "true";
   const counts: RuleCounts = { PASS: 0, FAIL: 0, WARN: 0, SKIP: 0, SUPPRESSED: 0 };
-  const savedDiffs = new Set<string>();
-  let generatedTree = "HEAD";
 
-  try {
-    if (patchGit && diffOutput) {
-      await patchGit.raw(["read-tree", "HEAD"]);
-      await writeFile(diffOutput, "");
-    }
-    for (const project of projects) {
-      const name = displayPath(project);
-      if (context.checkingAllSpecs) {
-        const suppressions = await getSuppressions("TypeSpecValidationAll", project, {
-          ...context,
-        });
-        const suppression = suppressions.find((s) => !s.rules?.length && !s.subRules?.length);
-        if (suppression) {
-          counts.SUPPRESSED++;
-          printProjectGroup(githubActions, "skip", name, [
-            { stream: "stdout", text: `Suppressed: ${suppression.reason}` },
-          ]);
-          continue;
-        }
-      }
-      if (options.dryRun) {
-        console.log(`Dry run: would validate ${name} with context ${JSON.stringify(context)}`);
+  for (const project of projects) {
+    const name = displayPath(project);
+    if (context.checkingAllSpecs) {
+      const suppressions = await getSuppressions("TypeSpecValidationAll", project, {
+        ...context,
+      });
+      const suppression = suppressions.find((s) => !s.rules?.length && !s.subRules?.length);
+      if (suppression) {
+        counts.SUPPRESSED++;
+        printProjectGroup(githubActions, "skip", name, [
+          { stream: "stdout", text: `Suppressed: ${suppression.reason}` },
+        ]);
         continue;
       }
-
-      try {
-        const { success, segments } = await validateProject(project, context, options.verbose);
-        if (success) {
-          counts.PASS++;
-          printProjectGroup(githubActions, "pass", name, segments);
-        } else {
-          counts.FAIL++;
-          failed.push(name);
-          const message =
-            `TypeSpec Validation failed for project ${name} run the following command locally to validate.\n` +
-            getFailureInstructions([name]);
-          if (githubActions) {
-            const escaped = message
-              .replaceAll("%", "%25")
-              .replaceAll("\r", "%0D")
-              .replaceAll("\n", "%0A");
-            const lastSegment = segments.at(-1);
-            const needsNewline = lastSegment !== undefined && !lastSegment.text.endsWith("\n");
-            printProjectGroup(githubActions, "fail", name, [
-              ...segments,
-              { stream: "stdout", text: `${needsNewline ? "\n" : ""}::error::${escaped}` },
-            ]);
-          } else {
-            printProjectGroup(githubActions, "fail", name, segments);
-            console.error(message);
-          }
-        }
-      } catch (error) {
-        // A child terminated by a signal may have already written diagnostics; surface them
-        // under a failed group instead of silently dropping the captured output.
-        if (error instanceof ProjectTerminatedError) {
-          printProjectGroup(githubActions, "fail", name, [
-            ...error.segments,
-            { stream: "stderr", text: error.message },
-          ]);
-        }
-        throw error;
-      } finally {
-        if (gitClean) {
-          try {
-            if (patchGit && diffDirectory && diffOutput) {
-              generatedTree =
-                (await saveDiff(git, patchGit, diffDirectory, savedDiffs)) ?? generatedTree;
-            }
-          } finally {
-            await git.raw(["restore", "--worktree", "--", "."]);
-            await git.clean("f", ["-d"]);
-          }
-        }
-      }
     }
-  } finally {
+    if (options.dryRun) {
+      console.log(`Dry run: would validate ${name} with context ${JSON.stringify(context)}`);
+      continue;
+    }
+
     try {
-      if (patchGit && diffOutput) {
-        await writeFile(
-          diffOutput,
-          await git.diff(["--binary", "--no-color", "HEAD", generatedTree]),
-        );
+      const { success, segments } = await validateProject(project, context, options.verbose);
+      if (success) {
+        counts.PASS++;
+        printProjectGroup(githubActions, "pass", name, segments);
+      } else {
+        counts.FAIL++;
+        failed.push(name);
+        const message =
+          `TypeSpec Validation failed for project ${name} run the following command locally to validate.\n` +
+          getFailureInstructions([name]);
+        if (githubActions) {
+          const escaped = message
+            .replaceAll("%", "%25")
+            .replaceAll("\r", "%0D")
+            .replaceAll("\n", "%0A");
+          const lastSegment = segments.at(-1);
+          const needsNewline = lastSegment !== undefined && !lastSegment.text.endsWith("\n");
+          printProjectGroup(githubActions, "fail", name, [
+            ...segments,
+            { stream: "stdout", text: `${needsNewline ? "\n" : ""}::error::${escaped}` },
+          ]);
+        } else {
+          printProjectGroup(githubActions, "fail", name, segments);
+          console.error(message);
+        }
       }
+    } catch (error) {
+      // A child terminated by a signal may have already written diagnostics; surface them
+      // under a failed group instead of silently dropping the captured output.
+      if (error instanceof ProjectTerminatedError) {
+        printProjectGroup(githubActions, "fail", name, [
+          ...error.segments,
+          { stream: "stderr", text: error.message },
+        ]);
+      }
+      throw error;
     } finally {
-      if (diffDirectory) await rm(diffDirectory, { recursive: true, force: true });
+      if (gitClean) {
+        await git.raw(["restore", "--worktree", "--", "."]);
+        await git.clean("f", ["-d"]);
+      }
     }
   }
 

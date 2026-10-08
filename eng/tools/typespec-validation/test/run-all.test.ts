@@ -1,6 +1,6 @@
 import { d } from "@azure-tools/specs-shared/testing";
 import { ChildProcess, spawn } from "node:child_process";
-import { mkdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { access, mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative, resolve } from "pathe";
@@ -46,7 +46,6 @@ function segmentedChild(segments: { stream: "stdout" | "stderr"; text: string }[
 }
 
 let root: string;
-let patchFolder: string;
 
 async function addProject(name: string, config = "tspconfig.yaml") {
   const folder = join(root, name);
@@ -78,7 +77,6 @@ async function commitFixture() {
 
 beforeEach(async () => {
   root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-all-"))));
-  patchFolder = await mkdtemp(join(tmpdir(), "tsv-diff-test-"));
   vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.spyOn(console, "log").mockImplementation(() => {});
   vi.spyOn(console, "error").mockImplementation(() => {});
@@ -91,7 +89,6 @@ afterEach(async () => {
   vi.restoreAllMocks();
   vi.unstubAllEnvs();
   await rm(root, { recursive: true, force: true });
-  await rm(patchFolder, { recursive: true, force: true });
 });
 
 it("discovers sorted, unique project folders, including invalid config extensions", async () => {
@@ -597,123 +594,6 @@ it("cleans the entire checkout after failed and successful projects, retaining i
   expect((await git.status()).isClean()).toBe(true);
   await expect(access(join(root, "generated"))).rejects.toMatchObject({ code: "ENOENT" });
   expect(await readFile(join(root, "cache.tmp"), "utf8")).toBe("keep");
-});
-
-it("saves each project's changes as an applicable patch before cleanup", async () => {
-  await addProject("specification/a");
-  await addProject("specification/b");
-  const git = await commitFixture();
-  const patch = join(patchFolder, "changes.patch");
-  vi.mocked(spawn)
-    .mockImplementationOnce(() => {
-      writeFileSync(join(root, "tracked.txt"), "changed");
-      writeFileSync(join(root, "specification", "a", "new.json"), "{}");
-      return exitingChild(1);
-    })
-    .mockImplementationOnce(() => exitingChild());
-
-  await expect(
-    runAll(join(root, "specification"), { gitClean: true, diffOutput: patch }),
-  ).resolves.toBe(false);
-  expect((await git.status()).isClean()).toBe(true);
-
-  await git.raw(["apply", patch]);
-  expect(await readFile(join(root, "tracked.txt"), "utf8")).toBe("changed");
-  expect(await readFile(join(root, "specification", "a", "new.json"), "utf8")).toBe("{}");
-});
-
-it.each(["tracked", "new", "deleted", "binary"])(
-  "deduplicates repeated %s shared-file changes in an applicable patch",
-  async (kind) => {
-    await addProject("specification/service/a");
-    await addProject("specification/service/b");
-    const shared = join(root, "specification/service/shared file.tsp");
-    const original = kind === "binary" ? Buffer.from([0, 1, 2]) : "unformatted\n";
-    const generated = kind === "binary" ? Buffer.from([0, 3, 4]) : "formatted\n";
-    if (kind !== "new") await writeFile(shared, original);
-    const git = await commitFixture();
-    const patch = join(patchFolder, "changes.patch");
-    let project = 0;
-    vi.mocked(spawn).mockImplementation(() => {
-      if (kind === "deleted") unlinkSync(shared);
-      else writeFileSync(shared, generated);
-      writeFileSync(join(root, `output-${project++}.json`), "{}");
-      return exitingChild();
-    });
-
-    await expect(runAll(root, { gitClean: true, diffOutput: patch })).resolves.toBe(true);
-    expect((await git.status()).isClean()).toBe(true);
-    expect((await readFile(patch, "utf8")).match(/diff --git/g)).toHaveLength(3);
-    await git.raw(["apply", "--check", patch]);
-    await git.raw(["apply", patch]);
-    expect(await readFile(join(root, "output-0.json"), "utf8")).toBe("{}");
-    expect(await readFile(join(root, "output-1.json"), "utf8")).toBe("{}");
-    if (kind === "deleted") await expect(access(shared)).rejects.toMatchObject({ code: "ENOENT" });
-    else expect(await readFile(shared)).toEqual(Buffer.from(generated));
-  },
-);
-
-it("merges independent edits to the same shared file", async () => {
-  await addProject("a");
-  await addProject("b");
-  const shared = join(root, "shared.tsp");
-  const original = Array.from({ length: 15 }, (_, index) => `line ${index}`).join("\n") + "\n";
-  await writeFile(shared, original);
-  const git = await commitFixture();
-  const patch = join(patchFolder, "changes.patch");
-  vi.mocked(spawn)
-    .mockImplementationOnce(() => {
-      writeFileSync(shared, original.replace("line 0\n", "first\n"));
-      return exitingChild();
-    })
-    .mockImplementationOnce(() => {
-      writeFileSync(shared, original.replace("line 14\n", "last\n"));
-      return exitingChild();
-    });
-  await expect(runAll(root, { gitClean: true, diffOutput: patch })).resolves.toBe(true);
-  await git.raw(["apply", patch]);
-  expect(await readFile(shared, "utf8")).toBe(
-    original.replace("line 0\n", "first\n").replace("line 14\n", "last\n"),
-  );
-});
-
-it("fails on inconsistent shared-file generation while still cleaning the checkout", async () => {
-  await addProject("a");
-  await addProject("b");
-  const git = await commitFixture();
-  const patch = join(patchFolder, "changes.patch");
-  vi.mocked(spawn)
-    .mockImplementationOnce(() => {
-      writeFileSync(join(root, "tracked.txt"), "first");
-      return exitingChild();
-    })
-    .mockImplementationOnce(() => {
-      writeFileSync(join(root, "tracked.txt"), "second");
-      return exitingChild();
-    });
-  await expect(runAll(root, { gitClean: true, diffOutput: patch })).rejects.toThrow("conflicts");
-  expect((await git.status()).isClean()).toBe(true);
-  await git.raw(["apply", patch]);
-  expect(await readFile(join(root, "tracked.txt"), "utf8")).toBe("first");
-});
-
-it("overwrites stale patch output even when no projects generate changes", async () => {
-  await addProject("a");
-  const git = await commitFixture();
-  const patch = join(patchFolder, "changes.patch");
-  await writeFile(patch, "stale changes");
-  await expect(runAll(root, { gitClean: true, diffOutput: patch })).resolves.toBe(true);
-  expect(await readFile(patch, "utf8")).toBe("");
-  expect((await git.status()).isClean()).toBe(true);
-});
-
-it("rejects patch files inside the checkout before running validation", async () => {
-  await addProject("a");
-  await commitFixture();
-  await expect(
-    runAll(root, { gitClean: true, diffOutput: join(root, "changes.patch") }),
-  ).rejects.toThrow("--diff-output must be outside the checkout");
-  expect(spawn).not.toHaveBeenCalled();
 });
 
 it.each(["modified", "staged", "untracked"])(
