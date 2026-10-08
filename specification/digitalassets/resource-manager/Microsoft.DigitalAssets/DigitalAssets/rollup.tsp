@@ -9,51 +9,12 @@ namespace Microsoft.DigitalAssets;
 @pattern("^0x[a-fA-F0-9]{40}$")
 scalar EvmContractAddress extends string;
 
-@doc("Connection settings for the customer's source ledger.")
-model ZkpRollupSource {
-  @doc("Source configuration kind.")
-  kind?: string;
-
-  @doc("Boot node enode URLs used for peer discovery.")
-  @maxItems(25)
-  bootnodes?: string[];
-
-  @doc("Static peer enode URLs used for ledger connectivity.")
-  @maxItems(25)
-  staticPeers?: string[];
-
-  @doc("RPC endpoint URLs used to initialize the ledger.")
-  @maxItems(25)
-  rpcEndpoints?: string[];
-}
-
-@doc("Connection settings that may be changed in a rollup PATCH request.")
-model ZkpRollupPatchSource {
-  @doc("Source configuration kind.")
-  kind?: string;
-
-  @doc("Boot node enode URLs used for peer discovery.")
-  @maxItems(25)
-  bootnodes?: string[];
-
-  @doc("Static peer enode URLs used for ledger connectivity.")
-  @maxItems(25)
-  staticPeers?: string[];
-
-  @doc("RPC endpoint URLs used to initialize the ledger.")
-  @maxItems(25)
-  rpcEndpoints?: string[];
-}
-
 @doc("Details of the DigitalAssets ZkpRollup.")
 model ZkpRollupProperties {
   @doc("Rollup-level list of token owner account addresses used for auto-discovery.")
   @minItems(1)
   @maxItems(100)
   tokenOwnerAccounts: EvmContractAddress[];
-
-  @doc("Connection settings for the customer's source ledger.")
-  source?: ZkpRollupSource;
 
   @doc("Rollup-level Key Vault reference used to resolve Besu node private keys.")
   keyVault: KeyVaultReference;
@@ -90,35 +51,31 @@ model ZkpRollupProperties {
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("Enode id (public key) of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.")
-  bootNodeId: string;
+  bootNodeId?: string;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("Private IPv4 address of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.")
-  bootNodeIp: string;
+  bootNodeIp?: string;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("P2P (devp2p) port of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.")
   @minValue(1)
   @maxValue(65535)
-  bootNodeP2pPort: int32;
+  bootNodeP2pPort?: int32;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("JSON-RPC (HTTP) port of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.")
   @minValue(1)
   @maxValue(65535)
-  bootNodeRpcPort: int32;
+  bootNodeRpcPort?: int32;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("Service Bus endpoint (URL) for customer access. Set on create or replace; not updatable via PATCH.")
-  serviceBusEndpoint: url;
+  serviceBusEndpoint?: url;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("Queue name for customer Service Bus access. Set on create or replace; not updatable via PATCH.")
-  serviceBusQueueName: string;
-
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Optional customer-supplied Microsoft Entra object ID for the Service Bus consumer principal. Supply it on initial create; subsequent replacements preserve the original value. When provided, it must be a GUID. A role assignment is not guaranteed.")
-  serviceBusConsumerPrincipalId?: string;
+  serviceBusQueueName?: string;
 
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
@@ -135,9 +92,6 @@ model ZkpRollupPatchProperties {
   @minItems(1)
   @maxItems(100)
   tokenOwnerAccounts?: EvmContractAddress[];
-
-  @doc("Connection settings for the customer's source ledger.")
-  source?: ZkpRollupPatchSource;
 
   @doc("Rollup-level Key Vault reference used to resolve Besu node private keys.")
   keyVault?: KeyVaultPatchReference;

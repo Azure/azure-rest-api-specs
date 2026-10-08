@@ -951,40 +951,6 @@
         "value"
       ]
     },
-    "ZkpRollupPatchSource": {
-      "type": "object",
-      "description": "Connection settings that may be changed in a rollup PATCH request.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Source configuration kind."
-        },
-        "bootnodes": {
-          "type": "array",
-          "description": "Boot node enode URLs used for peer discovery.",
-          "maxItems": 25,
-          "items": {
-            "type": "string"
-          }
-        },
-        "staticPeers": {
-          "type": "array",
-          "description": "Static peer enode URLs used for ledger connectivity.",
-          "maxItems": 25,
-          "items": {
-            "type": "string"
-          }
-        },
-        "rpcEndpoints": {
-          "type": "array",
-          "description": "RPC endpoint URLs used to initialize the ledger.",
-          "maxItems": 25,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ZkpRollupProperties": {
       "type": "object",
       "description": "Details of the DigitalAssets ZkpRollup.",
@@ -997,10 +963,6 @@
           "items": {
             "$ref": "#/definitions/EvmContractAddress"
           }
-        },
-        "source": {
-          "$ref": "#/definitions/ZkpRollupSource",
-          "description": "Connection settings for the customer's source ledger."
         },
         "keyVault": {
           "$ref": "#/definitions/KeyVaultReference",
@@ -1115,14 +1077,6 @@
             "create"
           ]
         },
-        "serviceBusConsumerPrincipalId": {
-          "type": "string",
-          "description": "Optional customer-supplied Microsoft Entra object ID for the Service Bus consumer principal. Supply it on initial create; subsequent replacements preserve the original value. When provided, it must be a GUID. A role assignment is not guaranteed.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -1137,48 +1091,8 @@
       "required": [
         "tokenOwnerAccounts",
         "keyVault",
-        "keyVaultUserAssignedIdentityResourceId",
-        "bootNodeId",
-        "bootNodeIp",
-        "bootNodeP2pPort",
-        "bootNodeRpcPort",
-        "serviceBusEndpoint",
-        "serviceBusQueueName"
+        "keyVaultUserAssignedIdentityResourceId"
       ]
-    },
-    "ZkpRollupSource": {
-      "type": "object",
-      "description": "Connection settings for the customer's source ledger.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Source configuration kind."
-        },
-        "bootnodes": {
-          "type": "array",
-          "description": "Boot node enode URLs used for peer discovery.",
-          "maxItems": 25,
-          "items": {
-            "type": "string"
-          }
-        },
-        "staticPeers": {
-          "type": "array",
-          "description": "Static peer enode URLs used for ledger connectivity.",
-          "maxItems": 25,
-          "items": {
-            "type": "string"
-          }
-        },
-        "rpcEndpoints": {
-          "type": "array",
-          "description": "RPC endpoint URLs used to initialize the ledger.",
-          "maxItems": 25,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "ZkpRollupUpdate": {
       "type": "object",
@@ -1213,10 +1127,6 @@
           "items": {
             "$ref": "#/definitions/EvmContractAddress"
           }
-        },
-        "source": {
-          "$ref": "#/definitions/ZkpRollupPatchSource",
-          "description": "Connection settings for the customer's source ledger."
         },
         "keyVault": {
           "$ref": "#/definitions/KeyVaultPatchReference",
