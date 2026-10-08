@@ -1,0 +1,14 @@
+- tool: TypeSpecValidation
+  reason: >
+    Don't have namespace approval.
+    Responsibility: Spec owner would update missing configurations.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-typespec/http-client-csharp-mgmt.*
+  paths:
+    - tspconfig.yaml
+
+- tool: TypeSpecRequirement
+  path: ./preview/2023-10-01-preview/*.json
+  reason: Brownfield service not ready to migrate

@@ -1,5 +1,6 @@
-import { readFile } from "fs/promises";
-import { inspect } from "util";
+import type { GitHubScriptArgs } from "./github.ts";
+import { readFile } from "node:fs/promises";
+import { inspect } from "node:util";
 import {
   generateMarkdownTable,
   MessageLevel,
@@ -8,9 +9,7 @@ import {
 } from "./message.ts";
 import { parse } from "./ndjson.ts";
 
-export default async function generateJobSummary({
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments): Promise<void> {
+export default async function generateJobSummary({ core }: GitHubScriptArgs): Promise<void> {
   const avocadoOutputFile = process.env.AVOCADO_OUTPUT_FILE;
   core.info(`avocadoOutputFile: ${avocadoOutputFile}`);
 

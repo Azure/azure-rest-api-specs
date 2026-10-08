@@ -1,0 +1,109 @@
+{
+  "title": "Gets resource usage statistics for a sandbox.",
+  "operationId": "SandboxLifecycleOperations_GetSandboxStats",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "0D2FA3BC-BD17-4E02-A9EF-7AC1EE26E816",
+    "resourceGroupName": "rgcontainerappssandbox",
+    "sandboxGroupName": "lpuvcbxvgliuutdukpqulz",
+    "id": "lmwkkgxvnuyymujd"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tokenUsage": {
+          "totalInputTokens": 28,
+          "totalOutputTokens": 2,
+          "requestCount": 24
+        },
+        "cpu": {
+          "user": 24,
+          "nice": 9,
+          "system": 30,
+          "idle": 20,
+          "iowait": 13,
+          "irq": 16,
+          "softirq": 3,
+          "steal": 8,
+          "loadAvg1": 7,
+          "loadAvg5": 5,
+          "loadAvg15": 5
+        },
+        "memory": {
+          "totalBytes": 26,
+          "availableBytes": 24,
+          "usedBytes": 17
+        },
+        "network": {
+          "rxBytes": 16,
+          "txBytes": 4,
+          "rxPackets": 30,
+          "txPackets": 21
+        },
+        "disk": [
+          {
+            "mountPoint": "ylhcgzabhaoswjrqdfxu",
+            "filesystem": "jtiodmfegowbqwfqggao",
+            "totalBytes": 20,
+            "usedBytes": 2,
+            "availableBytes": 8,
+            "label": "vfiibdjwtclcxaxfbpfpzoucy"
+          }
+        ],
+        "uptimeSecs": 11
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "qtcwixgiojleodjfmpvxicvzhlw",
+          "message": "qofhevlvuedkqvsupcdiariqdueaaz",
+          "target": "wlhrz",
+          "details": [],
+          "innererror": {
+            "code": "ajgsjlzsqxvoovtfvfiiaktg"
+          }
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "qtcwixgiojleodjfmpvxicvzhlw",
+          "message": "qofhevlvuedkqvsupcdiariqdueaaz",
+          "target": "wlhrz",
+          "details": [],
+          "innererror": {
+            "code": "ajgsjlzsqxvoovtfvfiiaktg"
+          }
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "qtcwixgiojleodjfmpvxicvzhlw",
+          "message": "qofhevlvuedkqvsupcdiariqdueaaz",
+          "target": "wlhrz",
+          "details": [],
+          "innererror": {
+            "code": "ajgsjlzsqxvoovtfvfiiaktg"
+          }
+        }
+      }
+    },
+    "500": {
+      "body": {
+        "error": {
+          "code": "qtcwixgiojleodjfmpvxicvzhlw",
+          "message": "qofhevlvuedkqvsupcdiariqdueaaz",
+          "target": "wlhrz",
+          "details": [],
+          "innererror": {
+            "code": "ajgsjlzsqxvoovtfvfiiaktg"
+          }
+        }
+      }
+    }
+  }
+}

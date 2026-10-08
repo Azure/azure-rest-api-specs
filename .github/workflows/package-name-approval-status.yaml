@@ -1,6 +1,6 @@
 name: "Package Name Approval - Set Status"
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   workflow_run:
     workflows: ["Package Name Approval - Analyze Code"]
     types: [completed]
@@ -14,10 +14,12 @@ permissions:
 jobs:
   post-results:
     name: Post Package Name Results
+    if: github.event.workflow_run.conclusion != 'skipped'
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github/
 
@@ -25,7 +27,7 @@ jobs:
         uses: ./.github/actions/install-deps-github-script
 
       - name: Post package name review comment
-        uses: actions/github-script@v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: postResults } =
@@ -33,7 +35,7 @@ jobs:
             await postResults({ github, context, core });
 
       - name: Set package name approval status
-        uses: actions/github-script@v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: statusCheck } =

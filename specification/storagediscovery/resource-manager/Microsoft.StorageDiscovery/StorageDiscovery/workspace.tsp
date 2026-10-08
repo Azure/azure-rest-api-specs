@@ -74,6 +74,10 @@ model StorageDiscoveryWorkspacePropertiesUpdate
 @added(ApiVersion.v2026_10_01_preview)
 model StorageDiscoveryCapabilitiesUpdate {
   @doc("The Azure Blob Storage capability configuration to update.")
+  @Azure.ClientGenerator.Core.clientName(
+    "AzureBlobStorageCapabilities",
+    "csharp"
+  )
   azureBlobStorage?: AzureBlobStorageCapabilityUpdate;
 }
 
@@ -85,9 +89,9 @@ model AzureBlobStorageCapabilityUpdate {
   @doc("The capacity details configuration to update for Azure Blob Storage.")
   capacityDetails?: CapacityDetailsUpdate;
 
-  @doc("The prefix definitions to update for Azure Blob Storage.")
+  @doc("The prefix configurations to update for Azure Blob Storage.")
   @identifiers(#[])
-  prefixDefinitions?: PrefixDefinitionUpdate[];
+  prefixConfigurations?: PrefixConfigurationUpdate[];
 }
 
 /**
@@ -100,10 +104,10 @@ model CapacityDetailsUpdate {
 }
 
 /**
- * A prefix definition that can be updated.
+ * A prefix configuration that can be updated.
  */
 @added(ApiVersion.v2026_10_01_preview)
-model PrefixDefinitionUpdate is OptionalProperties<PrefixDefinition>;
+model PrefixConfigurationUpdate is OptionalProperties<PrefixConfiguration>;
 
 model StorageDiscoveryWorkspaceUpdate
   is UpdateableProperties<OptionalProperties<OmitDefaults<OmitProperties<
@@ -139,6 +143,10 @@ model StorageDiscoveryScope {
 @added(ApiVersion.v2026_10_01_preview)
 model StorageDiscoveryCapabilities {
   @doc("The Azure Blob Storage capability configuration for the storage discovery workspace.")
+  @Azure.ClientGenerator.Core.clientName(
+    "AzureBlobStorageCapabilities",
+    "csharp"
+  )
   azureBlobStorage: AzureBlobStorageCapability;
 }
 
@@ -150,9 +158,9 @@ model AzureBlobStorageCapability {
   @doc("The capacity details configuration for Azure Blob Storage.")
   capacityDetails: CapacityDetails;
 
-  @doc("The prefix definitions that scope the capacity details to specific storage accounts, containers, and prefixes.")
+  @doc("The prefix configurations that scope the capacity details to specific storage accounts, containers, and prefixes.")
   @identifiers(#[])
-  prefixDefinitions?: PrefixDefinition[];
+  prefixConfigurations?: PrefixConfiguration[];
 }
 
 /**
@@ -179,10 +187,10 @@ union CapabilityStatus {
 }
 
 /**
- * A prefix definition that scopes capacity details to a specific storage account, container, and prefix.
+ * A prefix configuration that scopes capacity details to a specific storage account, container, and prefix.
  */
 @added(ApiVersion.v2026_10_01_preview)
-model PrefixDefinition {
+model PrefixConfiguration {
   @doc("The name of the storage account.")
   @minLength(3)
   @maxLength(24)

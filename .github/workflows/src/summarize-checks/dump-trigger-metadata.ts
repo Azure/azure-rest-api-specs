@@ -1,9 +1,9 @@
-import type { WebhookEvent } from "../github.ts";
+import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
 
 export default function dumpTriggerMetadata({
   context,
   core,
-}: Pick<import("@actions/github-script").AsyncFunctionArguments, "context" | "core">) {
+}: Pick<GitHubScriptArgs, "context" | "core">) {
   core.info(`Event name: ${context.eventName}`);
   core.info(`Action: ${context.payload.action}`);
 

@@ -1,6 +1,6 @@
 name: ARM Auto SignOff - Set Status
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
   # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
   # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
@@ -36,11 +36,14 @@ jobs:
   arm-auto-signoff-status:
     name: ARM Auto SignOff - Set Status
 
-    # workflow_run - already filtered by triggers above
+    # Ignore upstream runs that did not finish their work.
     # pull_request_target:labeled - filter to only the input and output labels
     if: |
-      github.event_name == 'workflow_run' ||
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion != 'skipped' &&
+       github.event.workflow_run.conclusion != 'cancelled') ||
       (github.event_name == 'pull_request_target' &&
+       github.event.pull_request.state == 'open' &&
        (github.event.action == 'labeled' ||
         github.event.action == 'unlabeled') &&
        (github.event.label.name == 'Approved-Suppression' ||
@@ -59,8 +62,9 @@ jobs:
       # For workflows that are triggered by the pull_request_target event, the workflow runs in the
       # context of the base of the pull request.  You should make sure that you do not check out,
       # build, or run untrusted code from the head of the pull request.
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           # Only needs .github folder for automation, not the files in the PR (analyzed in a
           # separate workflow).
           #
@@ -81,7 +85,7 @@ jobs:
       # }
       - id: get-label-action
         name: ARM Auto SignOff - Set Status
-        uses: actions/github-script@v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: getLabelAction } =

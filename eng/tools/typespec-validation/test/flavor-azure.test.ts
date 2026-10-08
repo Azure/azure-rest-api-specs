@@ -1,3 +1,4 @@
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strict as assert } from "node:assert";
 import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
@@ -36,7 +37,7 @@ describe("flavor-azure", function () {
           package-dir: "foo"
       `),
       );
-      const result = await new FlavorAzureRule().execute(mockFolder);
+      const result = await new FlavorAzureRule().execute(mockFolder, defaultLogger);
       assert(!result.success);
     });
 
@@ -49,7 +50,7 @@ describe("flavor-azure", function () {
           flavor: not-azure
       `),
       );
-      const result = await new FlavorAzureRule().execute(mockFolder);
+      const result = await new FlavorAzureRule().execute(mockFolder, defaultLogger);
       assert(!result.success);
     });
 
@@ -62,7 +63,7 @@ describe("flavor-azure", function () {
           flavor: azure
       `),
       );
-      const result = await new FlavorAzureRule().execute(mockFolder);
+      const result = await new FlavorAzureRule().execute(mockFolder, defaultLogger);
       assert(result.success);
     });
   });
@@ -76,14 +77,14 @@ describe("flavor-azure", function () {
           azure-resource-provider-folder: "data-plane"
       `),
       );
-      const result = await new FlavorAzureRule().execute(mockFolder);
+      const result = await new FlavorAzureRule().execute(mockFolder, defaultLogger);
       assert(result.success);
     });
   });
 
   it("should succeed if config is empty", async function () {
     readTspConfigSpy.mockImplementation(() => Promise.resolve(""));
-    const result = await new FlavorAzureRule().execute(mockFolder);
+    const result = await new FlavorAzureRule().execute(mockFolder, defaultLogger);
     assert(result.success);
   });
 
@@ -94,7 +95,7 @@ emit:
   - "@azure-tools/typespec-autorest"
 `),
     );
-    const result = await new FlavorAzureRule().execute(mockFolder);
+    const result = await new FlavorAzureRule().execute(mockFolder, defaultLogger);
     assert(result.success);
   });
 });
