@@ -164,10 +164,9 @@ it("dry runs list project context but do not validate or clean a dirty checkout"
   await expect(runChanged(root, { dryRun: true, gitClean: true })).resolves.toBe(true);
   expect(spawn).not.toHaveBeenCalled();
   expect(await readFile(untracked, "utf8")).toBe("keep");
-  expect(console.log).toHaveBeenCalledWith(
+  expect(console.log).toHaveBeenLastCalledWith(
     'Dry run: would validate specification/service/Project with context {"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
   );
-  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
 });
 
 it.each(["false", "true"])(
