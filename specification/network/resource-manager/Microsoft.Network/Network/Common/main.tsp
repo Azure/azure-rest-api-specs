@@ -980,6 +980,13 @@ model NetworkInterfacePropertiesFormat {
   macAddress?: string;
 
   /**
+   * The index of the physical network adapter.
+   */
+  @added(Versions.v2026_05_01)
+  @minValue(0)
+  networkAdapterIndex?: int32;
+
+  /**
    * Whether this is a primary network interface on a virtual machine.
    */
   @visibility(Lifecycle.Read)
