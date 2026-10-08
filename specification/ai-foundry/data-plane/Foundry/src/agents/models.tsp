@@ -654,7 +654,7 @@ model HostedAgentDefinition extends AgentDefinition {
 
   @doc("Whether this agent version uses memory snapshots. Sessions for a snapshot-enabled version start from a snapshot of the agent's initialized process rather than starting the process from its image. Defaults to false.")
   @removed(Versions.v1)
-  enable_snapshot?: boolean = false;
+  enable_memory_snapshot?: boolean = false;
 }
 
 @doc("The container app agent definition.")
