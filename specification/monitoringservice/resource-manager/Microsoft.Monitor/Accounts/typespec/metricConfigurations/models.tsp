@@ -162,7 +162,7 @@ namespace Microsoft.Monitor {
   }
   @@doc(
     MetricNamespaceResource.name,
-    "Tilde encoding is used for the metric namespace in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `custom/namespace` is encoded as `custom~2Fnamespace`. Metric configurations provide the original namespace in `properties.namespace`."
+    "Tilde encoding is used for the metric namespace in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `/` is encoded as `~2F`. Metric configurations provide the original namespace in `properties.namespace`."
   );
 
   /**
@@ -182,6 +182,6 @@ namespace Microsoft.Monitor {
   }
   @@doc(
     MetricConfigurationResource.name,
-    "Tilde encoding is used for the metric name in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `request/count` is encoded as `request~2Fcount`. The original metric name is provided in `properties.metricName`."
+    "Tilde encoding is used for the metric name in the URL path. It is similar to percent encoding but uses `~` instead of `%`. For example, `/` is encoded as `~2F`. The original metric name is provided in `properties.metricName`."
   );
 }
