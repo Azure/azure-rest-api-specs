@@ -53,39 +53,47 @@ export async function setSpecGenSdkStatusImpl({
   core: Core;
 }): Promise<void> {
   if (Number.isInteger(issue_number) && issue_number > 0) {
-    if (!(await getOpenPullRequest(github, core, { owner, repo, issue_number }))) return;
+    const pr = await getOpenPullRequest(github, core, { owner, repo, issue_number });
+    if (!pr) return;
+    if (pr.head.sha !== head_sha) {
+      core.info("The checked commit is no longer the PR head; skipping SDK status updates.");
+      return;
+    }
   } else {
     // check_run payloads can omit PRs (notably for forks); resolve against the checked commit.
-    const prs = await github.paginate(github.rest.repos.listPullRequestsAssociatedWithCommit, {
-      owner,
-      repo,
-      commit_sha: head_sha,
-      per_page: PER_PAGE_MAX,
-    });
-    let hasOpenPr = prs.some(
-      (pr) =>
-        pr.state === "open" &&
-        pr.head.sha === head_sha &&
-        pr.base.repo.full_name.toLowerCase() === `${owner}/${repo}`.toLowerCase(),
+    let hasAssociatedPr = false;
+    const prs = await github.paginate(
+      github.rest.repos.listPullRequestsAssociatedWithCommit,
+      { owner, repo, commit_sha: head_sha, per_page: PER_PAGE_MAX },
+      (response, done) => {
+        hasAssociatedPr ||= response.data.length > 0;
+        const pr = response.data.find(
+          (pr) =>
+            pr.state === "open" &&
+            pr.head.sha === head_sha &&
+            pr.base.repo.full_name.toLowerCase() === `${owner}/${repo}`.toLowerCase(),
+        );
+        if (pr) done();
+        return pr ? [pr] : [];
+      },
     );
+    issue_number = prs[0]?.number ?? NaN;
     // The commits API can return no PRs for forks; use the same search fallback as extractInputs.
-    if (prs.length === 0) {
+    if (!hasAssociatedPr) {
       const { issueNumber } = await getIssueNumber(github, head_sha, new CoreLogger(core), {
         owner,
         repo,
       });
       const pr = await getOpenPullRequest(github, core, { owner, repo, issue_number: issueNumber });
-      hasOpenPr = pr?.head.sha === head_sha;
+      issue_number = pr?.head.sha === head_sha ? issueNumber : NaN;
     }
-    if (!hasOpenPr) {
+    if (!Number.isInteger(issue_number) || issue_number <= 0) {
       core.info("No open PR for the checked commit; skipping SDK status updates.");
       return;
     }
   }
 
   const statusName = "SDK Validation Status";
-  core.setOutput("head_sha", head_sha);
-  core.setOutput("issue_number", issue_number);
   const checks = await github.paginate(github.rest.checks.listForRef, {
     owner,
     repo,
@@ -110,6 +118,8 @@ export async function setSpecGenSdkStatusImpl({
     core.info("No SDK Validation check runs found. Skipping status update.");
     return;
   }
+  core.setOutput("head_sha", head_sha);
+  core.setOutput("issue_number", issue_number);
 
   // Check if all SDK generation checks have completed
   const allCompleted =

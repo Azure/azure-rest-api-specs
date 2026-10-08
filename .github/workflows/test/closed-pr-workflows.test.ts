@@ -22,6 +22,29 @@ const consumers: [string, (args: GitHubScriptArgs) => Promise<unknown>][] = [
   ["label updates", updateLabels],
 ];
 
+it.each(
+  consumers.filter(([name]) => ["shared status", "summary", "legacy ARM signoff"].includes(name)),
+)("%s reuses labels from its live PR lookup", async (_name, run) => {
+  const github = createMockGithub();
+  const core = createMockCore();
+  const context = createMockContext();
+  context.eventName = "pull_request_target";
+  context.payload = {
+    action: "labeled",
+    repository: { name: "repo", owner: { login: "owner" } },
+    pull_request: { number: 42, head: { sha: fullGitSha }, base: { ref: "main" } },
+  };
+  github.rest.pulls.get.mockResolvedValue({
+    data: { state: "open", labels: [{ name: "ARMReview" }] },
+  });
+  github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
+
+  await run({ github, context, core });
+
+  expect(github.rest.pulls.get).toHaveBeenCalledTimes(1);
+  expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
+});
+
 describe.each(["pull_request_target", "workflow_run"])("closed PR during %s", (eventName) => {
   it.each(consumers.filter(([, run]) => eventName === "workflow_run" || run !== updateLabels))(
     "%s stops before writing or handing off work",

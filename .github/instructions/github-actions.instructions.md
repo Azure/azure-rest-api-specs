@@ -272,6 +272,11 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 - Apply cheap eligibility checks before API calls. Use endpoint filters and `PER_PAGE_MAX` where
   supported. Stop pagination once sufficient evidence determines the result; retain complete
   pagination when the decision requires an exhaustive list.
+- Reuse artifact names already read while resolving workflow context. Do not publish PR identity
+  handoffs for label no-ops. SDK workflows use the dependency-free `pull-request.ts` preflight
+  before authentication and installation; recheck live state in the consumer after setup because
+  a PR may close while dependencies are installed. Empty fork PR payloads still use commit/artifact
+  resolution.
 - Avoid redundant status, label, and comment writes when the desired state is already known.
   Do not introduce an extra read merely to avoid a write without considering the total call cost.
 - Preserve head SHA and run-attempt correlation, trust boundaries, and necessary freshness checks.

@@ -462,6 +462,7 @@ describe("extractInputs", () => {
       head_sha: fullGitSha,
       issue_number: 123,
       run_id: 456,
+      artifactNames: ["issue-number=123", `head-sha=${fullGitSha}`],
     });
 
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
@@ -482,6 +483,7 @@ describe("extractInputs", () => {
       head_sha: "",
       issue_number: NaN,
       run_id: 456,
+      artifactNames: ["issue-number=not-a-number"],
     });
 
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
@@ -493,6 +495,7 @@ describe("extractInputs", () => {
       head_sha: "",
       issue_number: NaN,
       run_id: 456,
+      artifactNames: ["issue-number=null"],
     });
 
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
@@ -504,6 +507,7 @@ describe("extractInputs", () => {
       head_sha: "",
       issue_number: NaN,
       run_id: 456,
+      artifactNames: [],
     });
   });
 
@@ -555,6 +559,7 @@ describe("extractInputs", () => {
       head_sha: fullGitSha,
       issue_number: NaN,
       run_id: 456,
+      artifactNames: [`head-sha=${fullGitSha}`],
     });
   });
 

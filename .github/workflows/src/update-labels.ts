@@ -4,12 +4,21 @@ import { extractInputs, getOpenPullRequest } from "./context.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "./github.ts";
 
 export default async function updateLabels({ github, context, core }: GitHubScriptArgs) {
-  const { owner, repo, head_sha, issue_number, run_id } = await extractInputs(
+  const { owner, repo, head_sha, issue_number, run_id, artifactNames } = await extractInputs(
     github,
     context,
     core,
   );
-  await updateLabelsImpl({ owner, repo, head_sha, issue_number, run_id, github, core });
+  await updateLabelsImpl({
+    owner,
+    repo,
+    head_sha,
+    issue_number,
+    run_id,
+    artifactNames,
+    github,
+    core,
+  });
 }
 
 export async function updateLabelsImpl({
@@ -18,6 +27,7 @@ export async function updateLabelsImpl({
   head_sha,
   issue_number,
   run_id,
+  artifactNames,
   github,
   core,
 }: {
@@ -26,6 +36,7 @@ export async function updateLabelsImpl({
   head_sha: string;
   issue_number: number;
   run_id: number;
+  artifactNames?: string[];
   github: GitHub;
   core: Core;
 }) {
@@ -34,18 +45,27 @@ export async function updateLabelsImpl({
     throw new Error("Required input 'run_id' not found in env or context");
   }
 
+  if (
+    artifactNames &&
+    !artifactNames.some((name) => name.startsWith("label-") && name.includes("="))
+  ) {
+    core.info("No label-action artifacts; skipping label updates and PR handoff.");
+    return;
+  }
+
   if (!(await getOpenPullRequest(github, core, { owner, repo, issue_number }))) return;
 
-  // List artifacts from a single run_id
-  core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run_id})`);
-  const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
-    owner: owner,
-    repo: repo,
-    run_id: run_id,
-    per_page: PER_PAGE_MAX,
-  });
-
-  const artifactNames: string[] = artifacts.map((a) => a.name);
+  if (!artifactNames) {
+    core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run_id})`);
+    artifactNames = (
+      await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+        owner,
+        repo,
+        run_id,
+        per_page: PER_PAGE_MAX,
+      })
+    ).map((a) => a.name);
+  }
 
   core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 

@@ -20,6 +20,44 @@ function updateLabels(asyncFunctionArgs: unknown) {
 }
 
 describe("updateLabels", () => {
+  it.each([false, true])(
+    "reuses identity artifacts and only checks PR state when label actions exist (%s)",
+    async (hasLabelAction) => {
+      const core = createMockCore();
+      const github = createMockGithub();
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [
+            { name: `head-sha=${fullGitSha}` },
+            { name: "issue-number=123" },
+            ...(hasLabelAction ? [{ name: "label-foo=true" }] : []),
+          ],
+        },
+      });
+
+      await updateLabels({
+        github,
+        core,
+        context: {
+          eventName: "workflow_run",
+          payload: {
+            action: "completed",
+            workflow_run: {
+              event: "check_run",
+              id: 456,
+              repository: { name: "repo", owner: { login: "owner" } },
+            },
+          },
+        },
+      });
+
+      expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledTimes(1);
+      expect(github.rest.pulls.get).toHaveBeenCalledTimes(hasLabelAction ? 1 : 0);
+      expect(github.rest.issues.addLabels).toHaveBeenCalledTimes(hasLabelAction ? 1 : 0);
+      if (!hasLabelAction) expect(core.setOutput).not.toHaveBeenCalled();
+    },
+  );
+
   it("loads inputs from context", async () => {
     const core = createMockCore();
 

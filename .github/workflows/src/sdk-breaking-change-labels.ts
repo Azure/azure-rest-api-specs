@@ -27,12 +27,30 @@ export async function getLabelAndAction({ github, context, core }: GitHubScriptA
   if (!details_url) {
     throw new Error(`Required inputs are not valid: details_url:${details_url}`);
   }
+  let pullRequest: Awaited<ReturnType<typeof getOpenPullRequest>>;
+  if (Number.isInteger(inputs.issue_number) && inputs.issue_number > 0) {
+    pullRequest = await getOpenPullRequest(github, core, inputs);
+    if (!pullRequest || pullRequest.head.sha !== inputs.head_sha) {
+      core.info("No open PR at the checked commit; skipping SDK label artifacts.");
+      return { labelName: undefined, labelAction: LabelAction.None, headSha: "", issueNumber: NaN };
+    }
+  }
+
   const result = await getLabelAndActionImpl({
     details_url,
     core,
   });
 
-  const pullRequest = await getOpenPullRequest(github, core, {
+  if (result.labelAction === LabelAction.None) {
+    return { ...result, headSha: "", issueNumber: NaN };
+  }
+  if (
+    pullRequest &&
+    (result.issueNumber !== inputs.issue_number || result.headSha !== inputs.head_sha)
+  ) {
+    throw new Error("SDK artifact PR identity does not match the checked PR and commit.");
+  }
+  pullRequest ??= await getOpenPullRequest(github, core, {
     ...context.repo,
     issue_number: result.issueNumber,
   });
@@ -47,7 +65,7 @@ export async function getLabelAndAction({ github, context, core }: GitHubScriptA
 
     if (!SUPPORTED_TARGET_BRANCHES.has(targetBranch)) {
       core.info(`Skipping SDK breaking change label addition for unsupported target branch.`);
-      result.labelAction = LabelAction.None;
+      return { ...result, labelAction: LabelAction.None, headSha: "", issueNumber: NaN };
     }
   }
 

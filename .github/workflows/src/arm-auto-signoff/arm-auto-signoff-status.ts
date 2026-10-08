@@ -63,7 +63,8 @@ export default async function getLabelAction({ github, context, core }: GitHubSc
   labelActions: ManagedLabelActions;
 }> {
   const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
-  if (!(await getOpenPullRequest(github, core, { owner, repo, issue_number }))) {
+  const pr = await getOpenPullRequest(github, core, { owner, repo, issue_number });
+  if (!pr) {
     return { headSha: "", issueNumber: NaN, labelActions: createNoneLabelActions() };
   }
 
@@ -74,6 +75,7 @@ export default async function getLabelAction({ github, context, core }: GitHubSc
     head_sha,
     github,
     core,
+    labelNames: pr.labels.map((label) => label.name),
   });
 }
 /* v8 ignore stop */
@@ -85,6 +87,7 @@ export async function getLabelActionImpl({
   head_sha,
   github,
   core,
+  labelNames,
 }: {
   owner: string;
   repo: string;
@@ -92,6 +95,7 @@ export async function getLabelActionImpl({
   head_sha: string;
   github: GitHub;
   core: Core;
+  labelNames?: string[];
 }): Promise<{ headSha: string; issueNumber: number; labelActions: ManagedLabelActions }> {
   const baseResult: { headSha: string; issueNumber: number } = {
     headSha: head_sha,
@@ -100,16 +104,14 @@ export async function getLabelActionImpl({
 
   const noneLabelActions = createNoneLabelActions();
 
-  // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
-  // permissions: { issues: read, pull-requests: read }
-
-  const labels: IssueLabel[] = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-    owner: owner,
-    repo: repo,
-    issue_number: issue_number,
-    per_page: PER_PAGE_MAX,
-  });
-  const labelNames = labels.map((label) => label.name);
+  labelNames ??= (
+    await github.paginate(github.rest.issues.listLabelsOnIssue, {
+      owner,
+      repo,
+      issue_number,
+      per_page: PER_PAGE_MAX,
+    })
+  ).map((label) => label.name);
 
   // Check if any auto sign-off labels are currently present.
   // Used to determine whether ARMSignedOff was auto-added (vs manually added)
