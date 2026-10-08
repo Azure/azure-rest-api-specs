@@ -107,6 +107,7 @@ alias OptionalNullableMetadata = {
  * if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @added(ServiceApiVersions.v2024_05_01_preview)
 union AssistantsApiResponseFormatOption {
   string,

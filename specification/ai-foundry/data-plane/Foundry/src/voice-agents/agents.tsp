@@ -38,6 +38,7 @@ union VoiceAgentSessionIncludeOption {
   file_search_call_results: "file_search_call.results",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The maximum output-token count or the literal `inf`.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentMaxOutputTokens {
@@ -336,6 +337,7 @@ model VoiceAgentFunctionTool extends VoiceAgentTool {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Tool choice may be a mode, a forced function, or an MCP tool."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("Tool-selection behavior for a voice agent.")
 @oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -994,6 +996,7 @@ model GenerateVoiceAgentRequest {
   draft?: boolean = false;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The kind-specific inputs for generating and creating an agent.")
 @oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
