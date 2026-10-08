@@ -20,26 +20,26 @@
             "workloadType": "AzureVm",
             "resourceGroup": {
               "role": "targetResourceGroup",
-              "resourceType": "Microsoft.Resources/resourceGroups",
-              "mode": "UseExisting",
+              "armResourceType": "Microsoft.Resources/resourceGroups",
+              "provisioningMode": "Existing",
               "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg"
             },
             "virtualNetwork": {
               "role": "targetVirtualNetwork",
-              "resourceType": "Microsoft.Network/virtualNetworks",
-              "mode": "UseExisting",
+              "armResourceType": "Microsoft.Network/virtualNetworks",
+              "provisioningMode": "Existing",
               "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet"
             },
             "subnet": {
               "role": "targetSubnet",
-              "resourceType": "Microsoft.Network/virtualNetworks/subnets",
-              "mode": "UseExisting",
+              "armResourceType": "Microsoft.Network/virtualNetworks/subnets",
+              "provisioningMode": "Existing",
               "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet/subnets/default"
             },
             "storageAccount": {
               "role": "stagingStorageAccount",
-              "resourceType": "Microsoft.Storage/storageAccounts",
-              "mode": "UseExisting",
+              "armResourceType": "Microsoft.Storage/storageAccounts",
+              "provisioningMode": "Existing",
               "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Storage/storageAccounts/cyberrecoverystorage"
             }
           },
@@ -70,35 +70,34 @@
               "workloadType": "AzureVm",
               "resourceGroup": {
                 "role": "targetResourceGroup",
-                "resourceType": "Microsoft.Resources/resourceGroups",
-                "mode": "UseExisting",
+                "armResourceType": "Microsoft.Resources/resourceGroups",
+                "provisioningMode": "Existing",
                 "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg"
               },
               "virtualNetwork": {
                 "role": "targetVirtualNetwork",
-                "resourceType": "Microsoft.Network/virtualNetworks",
-                "mode": "UseExisting",
+                "armResourceType": "Microsoft.Network/virtualNetworks",
+                "provisioningMode": "Existing",
                 "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet"
               },
               "subnet": {
                 "role": "targetSubnet",
-                "resourceType": "Microsoft.Network/virtualNetworks/subnets",
-                "mode": "UseExisting",
+                "armResourceType": "Microsoft.Network/virtualNetworks/subnets",
+                "provisioningMode": "Existing",
                 "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet/subnets/default"
               },
               "storageAccount": {
                 "role": "stagingStorageAccount",
-                "resourceType": "Microsoft.Storage/storageAccounts",
-                "mode": "UseExisting",
+                "armResourceType": "Microsoft.Storage/storageAccounts",
+                "provisioningMode": "Existing",
                 "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Storage/storageAccounts/cyberrecoverystorage"
               }
             },
             "resolvedTargets": [
               {
                 "role": "targetVirtualNetwork",
-                "resourceType": "Microsoft.Network/virtualNetworks",
-                "mode": "UseExisting",
-                "provisionedBy": "Preexisting",
+                "armResourceType": "Microsoft.Network/virtualNetworks",
+                "provisioningMode": "Existing",
                 "resolvedResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet",
                 "bindingState": "Bound",
                 "conformance": {

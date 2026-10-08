@@ -39,13 +39,13 @@ model RecoveryJobResourceProperties extends JobResourceProperties {
 
   @added(Versions.v2026_11_30_preview)
   @doc("Resiliency-specific properties for the recovery job resource.")
-  resiliencyJobResourceProperties?: ResiliencyRecoveryJobResourceProperties;
+  resiliencyJobResourceProperties?: RecoveryJobResourceResiliencyProperties;
 }
 
 @added(Versions.v2026_11_30_preview)
 @discriminator("resiliencyType")
 @doc("Resiliency-specific properties for a recovery job resource.")
-model ResiliencyRecoveryJobResourceProperties {
+model RecoveryJobResourceResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType;
@@ -53,7 +53,7 @@ model ResiliencyRecoveryJobResourceProperties {
 
 @added(Versions.v2026_11_30_preview)
 @doc("Infrastructure resiliency properties for a recovery job resource.")
-model InfraResiliencyRecoveryJobResourceProperties extends ResiliencyRecoveryJobResourceProperties {
+model InfrastructureResiliencyJobResourceProperties extends RecoveryJobResourceResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType.InfraResiliency;
@@ -61,7 +61,7 @@ model InfraResiliencyRecoveryJobResourceProperties extends ResiliencyRecoveryJob
 
 @added(Versions.v2026_11_30_preview)
 @doc("Cyber resiliency properties for a recovery job resource.")
-model CyberResiliencyRecoveryJobResourceProperties extends ResiliencyRecoveryJobResourceProperties {
+model CyberResiliencyJobResourceProperties extends RecoveryJobResourceResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType.CyberResiliency;

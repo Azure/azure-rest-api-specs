@@ -98,13 +98,13 @@ model RecoveryResourceProperties {
 
   @added(Versions.v2026_11_30_preview)
   @doc("Resiliency-specific properties for the recovery resource.")
-  resiliencyResourceProperties?: ResiliencyRecoveryResourceProperties;
+  resiliencyResourceProperties?: RecoveryResourceResiliencyProperties;
 }
 
 @added(Versions.v2026_11_30_preview)
 @discriminator("resiliencyType")
 @doc("Resiliency-specific properties for a recovery resource.")
-model ResiliencyRecoveryResourceProperties {
+model RecoveryResourceResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType;
@@ -112,7 +112,7 @@ model ResiliencyRecoveryResourceProperties {
 
 @added(Versions.v2026_11_30_preview)
 @doc("Infrastructure resiliency properties for a recovery resource.")
-model InfraResiliencyRecoveryResourceProperties extends ResiliencyRecoveryResourceProperties {
+model InfrastructureResiliencyResourceProperties extends RecoveryResourceResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType.InfraResiliency;
@@ -134,7 +134,7 @@ union RecoveryResourceInclusionEligibility {
 
 @added(Versions.v2026_11_30_preview)
 @doc("Cyber resiliency properties for a recovery resource.")
-model CyberResiliencyRecoveryResourceProperties extends ResiliencyRecoveryResourceProperties {
+model CyberResiliencyResourceProperties extends RecoveryResourceResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType.CyberResiliency;

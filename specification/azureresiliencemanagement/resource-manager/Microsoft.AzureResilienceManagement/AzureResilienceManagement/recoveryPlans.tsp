@@ -405,7 +405,7 @@ interface RecoveryPlanActions {
   @route(ServiceGroupRoute)
   @post
   @doc("Creates the target infrastructure selected for a cyber recovery plan.")
-  createInfra is ArmResourceActionAsync<
+  createInfrastructure is ArmResourceActionAsync<
     RecoveryPlan,
     ResourceSelectionProperties,
     RecoveryPlanActionBaseResponse,

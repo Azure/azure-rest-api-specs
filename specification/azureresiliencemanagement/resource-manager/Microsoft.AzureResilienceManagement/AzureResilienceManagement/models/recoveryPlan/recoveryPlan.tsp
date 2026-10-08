@@ -119,7 +119,7 @@ model RecoveryPlanProperties {
 
   @added(Versions.v2026_11_30_preview)
   @doc("Resiliency-specific properties for the recovery plan.")
-  resiliencyPlanProperties?: ResiliencyRecoveryPlanProperties;
+  resiliencyPlanProperties?: RecoveryPlanResiliencyProperties;
 
   @doc("The status of the most recent failover operation executed.")
   @visibility(Lifecycle.Read)
@@ -138,7 +138,7 @@ model RecoveryPlanProperties {
 @added(Versions.v2026_11_30_preview)
 @discriminator("resiliencyType")
 @doc("Resiliency-specific properties for a recovery plan.")
-model ResiliencyRecoveryPlanProperties {
+model RecoveryPlanResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType;
@@ -146,7 +146,7 @@ model ResiliencyRecoveryPlanProperties {
 
 @added(Versions.v2026_11_30_preview)
 @doc("Infrastructure resiliency properties for a recovery plan.")
-model InfraResiliencyRecoveryPlanProperties extends ResiliencyRecoveryPlanProperties {
+model InfrastructureResiliencyPlanProperties extends RecoveryPlanResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType.InfraResiliency;
@@ -154,7 +154,7 @@ model InfraResiliencyRecoveryPlanProperties extends ResiliencyRecoveryPlanProper
 
 @added(Versions.v2026_11_30_preview)
 @doc("Cyber resiliency properties for a recovery plan.")
-model CyberResiliencyRecoveryPlanProperties extends ResiliencyRecoveryPlanProperties {
+model CyberResiliencyPlanProperties extends RecoveryPlanResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType.CyberResiliency;

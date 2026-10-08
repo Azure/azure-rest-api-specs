@@ -103,8 +103,37 @@ model RecoveryGroupProperties {
   postActions?: RecoveryGroupBaseAction[];
 
   @added(Versions.v2026_11_30_preview)
-  @identifiers(#["resourceType"])
-  @doc("Recovery configuration profiles associated by workload type. Applies only to CyberRecovery plans.")
+  @doc("Resiliency-specific properties for the recovery orchestration group.")
+  resiliencyGroupProperties?: RecoveryGroupResiliencyProperties;
+}
+
+@added(Versions.v2026_11_30_preview)
+@discriminator("resiliencyType")
+@doc("Resiliency-specific properties for a recovery orchestration group.")
+model RecoveryGroupResiliencyProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Infrastructure resiliency properties for a recovery orchestration group.")
+model InfrastructureResiliencyGroupProperties extends RecoveryGroupResiliencyProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.InfraResiliency;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Cyber resiliency properties for a recovery orchestration group.")
+model CyberResiliencyGroupProperties extends RecoveryGroupResiliencyProperties {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The resiliency type represented by these properties.")
+  resiliencyType: ResiliencyType.CyberResiliency;
+
+  @added(Versions.v2026_11_30_preview)
+  @identifiers(#["workloadType"])
+  @doc("Recovery configuration profiles associated by workload type.")
   recoveryConfigProfileAssociations?: RecoveryConfigProfileAssociation[];
 }
 
@@ -136,8 +165,8 @@ model RecoveryGroupsSetting {
 @doc("Associates a workload type with a plan-scoped recovery configuration profile.")
 model RecoveryConfigProfileAssociation {
   @added(Versions.v2026_11_30_preview)
-  @doc("The resource type configured by the profile.")
-  resourceType: WorkloadType;
+  @doc("The workload type configured by the profile.")
+  workloadType: WorkloadType;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifier of the plan-scoped recovery configuration profile.")

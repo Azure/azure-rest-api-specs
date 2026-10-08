@@ -61,11 +61,11 @@ union RecoveryType {
 union TargetProvisioningMode {
   @added(Versions.v2026_11_30_preview)
   @doc("An existing target resource is used.")
-  UseExisting: "UseExisting",
+  Existing: "Existing",
 
   @added(Versions.v2026_11_30_preview)
   @doc("A new target resource is created during recovery.")
-  Create: "Create",
+  Created: "Created",
 
   @added(Versions.v2026_11_30_preview)
   @doc("A target resource is provisioned outside the recovery orchestration service.")
@@ -227,16 +227,6 @@ union RehydrationPriority {
 }
 
 @added(Versions.v2026_11_30_preview)
-@doc("The actor that provisioned a resolved target resource.")
-union ProvisionedBy {
-  @added(Versions.v2026_11_30_preview)
-  @doc("The target resource existed before recovery.")
-  Preexisting: "Preexisting",
-
-  string,
-}
-
-@added(Versions.v2026_11_30_preview)
 @doc("The binding state of a resolved target resource.")
 union BindingState {
   @added(Versions.v2026_11_30_preview)
@@ -293,16 +283,16 @@ model TargetResourceSpec {
   role: string;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The full Azure resource type of the target.")
-  resourceType: TargetResourceType;
+  @doc("The full Azure resource type of the target. The service validates that the resource type is supported for the target role.")
+  armResourceType: TargetResourceType;
 
   @added(Versions.v2026_11_30_preview)
   @doc("How the target resource is provisioned.")
-  mode?: TargetProvisioningMode = TargetProvisioningMode.UseExisting;
+  provisioningMode?: TargetProvisioningMode = TargetProvisioningMode.Existing;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The Azure resource identifier of the existing target.")
-  resourceId: armResourceIdentifier;
+  @doc("The Azure resource identifier of the target. Required only when provisioningMode is Existing; omit for Created and ExternallyProvisioned.")
+  resourceId?: armResourceIdentifier;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The semantic roles of target resources that this target depends on.")
@@ -414,7 +404,7 @@ model VmRecoveryConfig extends WorkloadConfig {
 
 @added(Versions.v2026_11_30_preview)
 @doc("Shared recovery configuration fields for database workloads.")
-model DatabaseRecoveryConfig {
+model DatabaseRecoveryConfig extends WorkloadConfig {
   @added(Versions.v2026_11_30_preview)
   @doc("The target resource group.")
   resourceGroup: TargetResourceSpec;
@@ -458,9 +448,7 @@ model DatabaseRecoveryConfig {
 
 @added(Versions.v2026_11_30_preview)
 @doc("Recovery configuration for a SQL Server workload.")
-model SqlInAzureVmRecoveryConfig extends WorkloadConfig {
-  ...DatabaseRecoveryConfig;
-
+model SqlInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
   @added(Versions.v2026_11_30_preview)
   @doc("The workload type represented by this configuration.")
   workloadType: WorkloadType.SqlInAzureVm;
@@ -468,9 +456,7 @@ model SqlInAzureVmRecoveryConfig extends WorkloadConfig {
 
 @added(Versions.v2026_11_30_preview)
 @doc("Recovery configuration for an SAP HANA workload.")
-model SapHanaInAzureVmRecoveryConfig extends WorkloadConfig {
-  ...DatabaseRecoveryConfig;
-
+model SapHanaInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
   @added(Versions.v2026_11_30_preview)
   @doc("The workload type represented by this configuration.")
   workloadType: WorkloadType.SapHanaInAzureVm;
@@ -478,9 +464,7 @@ model SapHanaInAzureVmRecoveryConfig extends WorkloadConfig {
 
 @added(Versions.v2026_11_30_preview)
 @doc("Recovery configuration for an SAP ASE workload.")
-model SapAseInAzureVmRecoveryConfig extends WorkloadConfig {
-  ...DatabaseRecoveryConfig;
-
+model SapAseInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
   @added(Versions.v2026_11_30_preview)
   @doc("The workload type represented by this configuration.")
   workloadType: WorkloadType.SapAseInAzureVm;
@@ -488,9 +472,7 @@ model SapAseInAzureVmRecoveryConfig extends WorkloadConfig {
 
 @added(Versions.v2026_11_30_preview)
 @doc("Recovery configuration for an Oracle workload.")
-model OracleInAzureVmRecoveryConfig extends WorkloadConfig {
-  ...DatabaseRecoveryConfig;
-
+model OracleInAzureVmRecoveryConfig extends DatabaseRecoveryConfig {
   @added(Versions.v2026_11_30_preview)
   @doc("The workload type represented by this configuration.")
   workloadType: WorkloadType.OracleInAzureVm;
@@ -543,16 +525,12 @@ model ResolvedTargetResource {
   role: string;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The full Azure resource type of the target.")
-  resourceType: TargetResourceType;
+  @doc("The full Azure resource type of the target. The service validates that the resource type is supported for the target role.")
+  armResourceType: TargetResourceType;
 
   @added(Versions.v2026_11_30_preview)
   @doc("How the target is provisioned.")
-  mode: TargetProvisioningMode;
-
-  @added(Versions.v2026_11_30_preview)
-  @doc("The actor that provisioned the target.")
-  provisionedBy: ProvisionedBy;
+  provisioningMode: TargetProvisioningMode;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifier resolved for the target.")
@@ -587,8 +565,8 @@ model ConformanceResult {
 @doc("Properties of a plan-scoped recovery configuration profile.")
 model RecoveryConfigProfileProperties {
   @added(Versions.v2026_11_30_preview)
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The immutable workload type configured by this profile.")
+  @visibility(Lifecycle.Read)
+  @doc("The workload type configured by this profile. This response-only value is populated by the service from workloadConfig.workloadType.")
   workloadType: WorkloadType;
 
   @added(Versions.v2026_11_30_preview)
@@ -611,6 +589,7 @@ model RecoveryConfigProfileProperties {
   @doc("Default recovery point selection.")
   recoveryPointDefault?: RecoveryPointPolicy;
 
+  @added(Versions.v2026_11_30_preview)
   @identifiers(#[])
   @maxItems(10)
   @doc("Infrastructure actions run before restoring resources that use this recovery configuration profile.")
@@ -642,7 +621,7 @@ model RecoveryConfigProfileProperties {
 @doc("A reusable, plan-scoped clean-room recovery configuration.")
 model RecoveryConfigProfile is ProxyResource<RecoveryConfigProfileProperties> {
   @doc("The name of the recovery configuration profile.")
-  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")
+  @pattern("^[A-Za-z0-9_]([A-Za-z0-9_.-]{0,126}[A-Za-z0-9_])?$")
   @key("recoveryConfigProfileName")
   @segment("recoveryConfigProfiles")
   @path

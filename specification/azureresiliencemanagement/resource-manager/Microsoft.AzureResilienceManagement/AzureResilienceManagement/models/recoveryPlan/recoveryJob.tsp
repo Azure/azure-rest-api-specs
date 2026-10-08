@@ -27,13 +27,13 @@ model RecoveryJobProperties extends JobProperties {
 
   @added(Versions.v2026_11_30_preview)
   @doc("Resiliency-specific properties for the recovery job.")
-  resiliencyJobProperties?: ResiliencyRecoveryJobProperties;
+  resiliencyJobProperties?: RecoveryJobResiliencyProperties;
 }
 
 @added(Versions.v2026_11_30_preview)
 @discriminator("resiliencyType")
 @doc("Resiliency-specific properties for a recovery job.")
-model ResiliencyRecoveryJobProperties {
+model RecoveryJobResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType;
@@ -41,7 +41,7 @@ model ResiliencyRecoveryJobProperties {
 
 @added(Versions.v2026_11_30_preview)
 @doc("Infrastructure resiliency properties for a recovery job.")
-model InfraResiliencyRecoveryJobProperties extends ResiliencyRecoveryJobProperties {
+model InfrastructureResiliencyJobProperties extends RecoveryJobResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType.InfraResiliency;
@@ -49,15 +49,15 @@ model InfraResiliencyRecoveryJobProperties extends ResiliencyRecoveryJobProperti
 
 @added(Versions.v2026_11_30_preview)
 @doc("Cyber resiliency properties for a recovery job.")
-model CyberResiliencyRecoveryJobProperties extends ResiliencyRecoveryJobProperties {
+model CyberResiliencyJobProperties extends RecoveryJobResiliencyProperties {
   @added(Versions.v2026_11_30_preview)
   @doc("The resiliency type represented by these properties.")
   resiliencyType: ResiliencyType.CyberResiliency;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The Azure resource identifier of the completed create-infrastructure job used by this restore job.")
+  @doc("The Azure resource identifier of the completed infrastructure-creation job used by this restore job.")
   @visibility(Lifecycle.Read)
-  createInfraJobId?: armResourceIdentifier<[
+  infrastructureCreationJobId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryJobs";
     }
@@ -66,15 +66,15 @@ model CyberResiliencyRecoveryJobProperties extends ResiliencyRecoveryJobProperti
   @added(Versions.v2026_11_30_preview)
   @doc("The recovery point selection recorded for this job.")
   @visibility(Lifecycle.Read)
-  recoveryPointSelectionProperties?: RecoveryPointSelectionProperties;
+  recoveryPointSelection?: RecoveryPointSelectionProperties;
 }
 
 @added(Versions.v2026_11_30_preview)
 @doc("Recovery point selection criteria recorded for a restore job.")
 model RecoveryPointSelectionProperties {
   @added(Versions.v2026_11_30_preview)
-  @doc("The selection kind, such as TimeRange, Latest, or Specific.")
-  selectedListType: string;
+  @doc("The recovery point selection type.")
+  selectionType: RecoveryPointSelectionType;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The inclusive start of the recovery point time range.")
@@ -86,15 +86,43 @@ model RecoveryPointSelectionProperties {
 }
 
 @added(Versions.v2026_11_30_preview)
+@doc("Specifies how recovery points are selected.")
+union RecoveryPointSelectionType {
+  @added(Versions.v2026_11_30_preview)
+  @doc("Selects recovery points within a time range.")
+  TimeRange: "TimeRange",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Selects the latest recovery point.")
+  Latest: "Latest",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Selects a specific recovery point.")
+  Specific: "Specific",
+}
+
+@added(Versions.v2026_11_30_preview)
 @doc("Resource inclusion or exclusion criteria recorded for a recovery job.")
 model ResourceSelectionProperties {
   @added(Versions.v2026_11_30_preview)
-  @doc("The selection kind, either Inclusion or Exclusion.")
-  selectedListType: string = "Exclusion";
+  @doc("The resource selection type.")
+  selectionType: ResourceSelectionType = ResourceSelectionType.Exclusion;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifiers selected for the operation.")
-  selectedResourceIds?: armResourceIdentifier[];
+  resourceIds?: armResourceIdentifier[];
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Specifies whether listed resources are included or excluded.")
+union ResourceSelectionType {
+  @added(Versions.v2026_11_30_preview)
+  @doc("Includes the listed resources.")
+  Inclusion: "Inclusion",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Excludes the listed resources.")
+  Exclusion: "Exclusion",
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"

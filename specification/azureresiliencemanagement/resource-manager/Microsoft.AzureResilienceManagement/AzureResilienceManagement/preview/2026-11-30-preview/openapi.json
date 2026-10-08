@@ -2741,9 +2741,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/createInfra": {
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans/{recoveryPlanName}/createInfrastructure": {
       "post": {
-        "operationId": "RecoveryPlanActions_CreateInfra",
+        "operationId": "RecoveryPlanActions_CreateInfrastructure",
         "tags": [
           "RecoveryPlanActions"
         ],
@@ -2805,8 +2805,8 @@
           }
         },
         "x-ms-examples": {
-          "RecoveryPlanActions_CreateInfra_CyberRecovery": {
-            "$ref": "./examples/RecoveryPlanActions_CreateInfra_CyberRecovery.json"
+          "RecoveryPlanActions_CreateInfrastructure_CyberRecovery": {
+            "$ref": "./examples/RecoveryPlanActions_CreateInfrastructure_CyberRecovery.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3094,7 +3094,7 @@
             "description": "The name of the recovery configuration profile.",
             "required": true,
             "type": "string",
-            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"
+            "pattern": "^[A-Za-z0-9_]([A-Za-z0-9_.-]{0,126}[A-Za-z0-9_])?$"
           }
         ],
         "responses": {
@@ -3144,7 +3144,7 @@
             "description": "The name of the recovery configuration profile.",
             "required": true,
             "type": "string",
-            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"
+            "pattern": "^[A-Za-z0-9_]([A-Za-z0-9_.-]{0,126}[A-Za-z0-9_])?$"
           },
           {
             "name": "resource",
@@ -3224,7 +3224,7 @@
             "description": "The name of the recovery configuration profile.",
             "required": true,
             "type": "string",
-            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"
+            "pattern": "^[A-Za-z0-9_]([A-Za-z0-9_.-]{0,126}[A-Za-z0-9_])?$"
           }
         ],
         "responses": {
@@ -5443,7 +5443,7 @@
         "None",
         "PreActionTask",
         "PostActionTask",
-        "InfraActionTask"
+        "InfrastructureActionTask"
       ],
       "x-ms-enum": {
         "name": "ActionTask",
@@ -5465,8 +5465,8 @@
             "description": "Post-action task."
           },
           {
-            "name": "InfraActionTask",
-            "value": "InfraActionTask",
+            "name": "InfrastructureActionTask",
+            "value": "InfrastructureActionTask",
             "description": "Infrastructure creation task."
           }
         ]
@@ -6157,14 +6157,58 @@
         "scriptResourceId"
       ]
     },
-    "CyberResiliencyRecoveryJobProperties": {
+    "CyberResiliencyGroupProperties": {
+      "type": "object",
+      "description": "Cyber resiliency properties for a recovery orchestration group.",
+      "properties": {
+        "recoveryConfigProfileAssociations": {
+          "type": "array",
+          "description": "Recovery configuration profiles associated by workload type.",
+          "items": {
+            "$ref": "#/definitions/RecoveryConfigProfileAssociation"
+          },
+          "x-ms-identifiers": [
+            "workloadType"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryGroupResiliencyProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CyberResiliency"
+    },
+    "CyberResiliencyGroupPropertiesUpdate": {
+      "type": "object",
+      "description": "Cyber resiliency properties for a recovery orchestration group.",
+      "properties": {
+        "recoveryConfigProfileAssociations": {
+          "type": "array",
+          "description": "Recovery configuration profiles associated by workload type.",
+          "items": {
+            "$ref": "#/definitions/RecoveryConfigProfileAssociation"
+          },
+          "x-ms-identifiers": [
+            "workloadType"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryGroupResiliencyPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "CyberResiliency"
+    },
+    "CyberResiliencyJobProperties": {
       "type": "object",
       "description": "Cyber resiliency properties for a recovery job.",
       "properties": {
-        "createInfraJobId": {
+        "infrastructureCreationJobId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource identifier of the completed create-infrastructure job used by this restore job.",
+          "description": "The Azure resource identifier of the completed infrastructure-creation job used by this restore job.",
           "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
@@ -6174,7 +6218,7 @@
             ]
           }
         },
-        "recoveryPointSelectionProperties": {
+        "recoveryPointSelection": {
           "$ref": "#/definitions/RecoveryPointSelectionProperties",
           "description": "The recovery point selection recorded for this job.",
           "readOnly": true
@@ -6182,12 +6226,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ResiliencyRecoveryJobProperties"
+          "$ref": "#/definitions/RecoveryJobResiliencyProperties"
         }
       ],
       "x-ms-discriminator-value": "CyberResiliency"
     },
-    "CyberResiliencyRecoveryJobResourceProperties": {
+    "CyberResiliencyJobResourceProperties": {
       "type": "object",
       "description": "Cyber resiliency properties for a recovery job resource.",
       "properties": {
@@ -6221,12 +6265,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ResiliencyRecoveryJobResourceProperties"
+          "$ref": "#/definitions/RecoveryJobResourceResiliencyProperties"
         }
       ],
       "x-ms-discriminator-value": "CyberResiliency"
     },
-    "CyberResiliencyRecoveryPlanProperties": {
+    "CyberResiliencyPlanProperties": {
       "type": "object",
       "description": "Cyber resiliency properties for a recovery plan.",
       "properties": {
@@ -6249,12 +6293,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ResiliencyRecoveryPlanProperties"
+          "$ref": "#/definitions/RecoveryPlanResiliencyProperties"
         }
       ],
       "x-ms-discriminator-value": "CyberResiliency"
     },
-    "CyberResiliencyRecoveryPlanPropertiesUpdate": {
+    "CyberResiliencyPlanPropertiesUpdate": {
       "type": "object",
       "description": "Cyber resiliency properties for a recovery plan.",
       "properties": {
@@ -6277,12 +6321,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ResiliencyRecoveryPlanPropertiesUpdate"
+          "$ref": "#/definitions/RecoveryPlanResiliencyPropertiesUpdate"
         }
       ],
       "x-ms-discriminator-value": "CyberResiliency"
     },
-    "CyberResiliencyRecoveryResourceProperties": {
+    "CyberResiliencyResourceProperties": {
       "type": "object",
       "description": "Cyber resiliency properties for a recovery resource.",
       "properties": {
@@ -6421,7 +6465,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ResiliencyRecoveryResourceProperties"
+          "$ref": "#/definitions/RecoveryResourceResiliencyProperties"
         }
       ],
       "x-ms-discriminator-value": "CyberResiliency"
@@ -6474,6 +6518,11 @@
       "required": [
         "resourceGroup",
         "targetHostVm"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkloadConfig"
+        }
       ]
     },
     "DiskReprotectInputDetails": {
@@ -8003,14 +8052,16 @@
           "$ref": "#/definitions/UserConsent",
           "description": "User consent for performing recovery action."
         },
-        "continueOnGroupFailure": {
-          "type": "boolean",
-          "description": "Whether execution continues when a recovery group fails."
+        "groupFailurePolicy": {
+          "$ref": "#/definitions/GroupFailurePolicy",
+          "description": "The execution policy applied when a recovery group fails."
         },
         "maxParallelRestoresPerGroup": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of restore operations that can run in parallel per recovery group."
+          "description": "The maximum number of restore operations that can run in parallel per recovery group.",
+          "minimum": 1,
+          "maximum": 500
         }
       },
       "required": [
@@ -8649,6 +8700,30 @@
         "assignmentId"
       ]
     },
+    "GroupFailurePolicy": {
+      "type": "string",
+      "description": "Specifies how execution proceeds when a recovery group fails.",
+      "enum": [
+        "Continue",
+        "Stop"
+      ],
+      "x-ms-enum": {
+        "name": "GroupFailurePolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Continue",
+            "value": "Continue",
+            "description": "Continues execution after a recovery group failure."
+          },
+          {
+            "name": "Stop",
+            "value": "Stop",
+            "description": "Stops execution after a recovery group failure."
+          }
+        ]
+      }
+    },
     "HAStatus": {
       "type": "string",
       "description": "HA Status",
@@ -8776,56 +8851,6 @@
         "id"
       ]
     },
-    "InfraResiliencyRecoveryJobProperties": {
-      "type": "object",
-      "description": "Infrastructure resiliency properties for a recovery job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResiliencyRecoveryJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "InfraResiliency"
-    },
-    "InfraResiliencyRecoveryJobResourceProperties": {
-      "type": "object",
-      "description": "Infrastructure resiliency properties for a recovery job resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResiliencyRecoveryJobResourceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "InfraResiliency"
-    },
-    "InfraResiliencyRecoveryPlanProperties": {
-      "type": "object",
-      "description": "Infrastructure resiliency properties for a recovery plan.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResiliencyRecoveryPlanProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "InfraResiliency"
-    },
-    "InfraResiliencyRecoveryPlanPropertiesUpdate": {
-      "type": "object",
-      "description": "Infrastructure resiliency properties for a recovery plan.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResiliencyRecoveryPlanPropertiesUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "InfraResiliency"
-    },
-    "InfraResiliencyRecoveryResourceProperties": {
-      "type": "object",
-      "description": "Infrastructure resiliency properties for a recovery resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResiliencyRecoveryResourceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "InfraResiliency"
-    },
     "InfrastructureCreatedResource": {
       "type": "object",
       "description": "An infrastructure resource created during cyber recovery.",
@@ -8862,6 +8887,76 @@
         "resourceType",
         "resourceId"
       ]
+    },
+    "InfrastructureResiliencyGroupProperties": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery orchestration group.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryGroupResiliencyProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
+    },
+    "InfrastructureResiliencyGroupPropertiesUpdate": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery orchestration group.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryGroupResiliencyPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
+    },
+    "InfrastructureResiliencyJobProperties": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery job.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryJobResiliencyProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
+    },
+    "InfrastructureResiliencyJobResourceProperties": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery job resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryJobResourceResiliencyProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
+    },
+    "InfrastructureResiliencyPlanProperties": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery plan.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPlanResiliencyProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
+    },
+    "InfrastructureResiliencyPlanPropertiesUpdate": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery plan.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPlanResiliencyPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
+    },
+    "InfrastructureResiliencyResourceProperties": {
+      "type": "object",
+      "description": "Infrastructure resiliency properties for a recovery resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryResourceResiliencyProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "InfraResiliency"
     },
     "InitialConfig": {
       "type": "string",
@@ -9860,54 +9955,23 @@
       "type": "object",
       "description": "Recovery configuration for an Oracle workload.",
       "properties": {
-        "resourceGroup": {
-          "$ref": "#/definitions/TargetResourceSpec",
-          "description": "The target resource group."
-        },
-        "targetHostVm": {
-          "$ref": "#/definitions/TargetResourceSpec",
-          "description": "The target database host virtual machine."
-        },
-        "hostVmIdentity": {
-          "$ref": "#/definitions/RestoreIdentity",
-          "description": "The identity of the target host virtual machine."
-        },
-        "recoveryMode": {
+        "workloadType": {
           "type": "string",
-          "description": "The database recovery mode."
-        },
-        "shouldUseAlternateTargetLocation": {
-          "type": "boolean",
-          "description": "Indicates whether an alternate target location is used."
-        },
-        "recoveryStateDefault": {
-          "$ref": "#/definitions/RecoveryState",
-          "description": "The default database recovery state."
-        },
-        "overwriteOption": {
-          "$ref": "#/definitions/OverwriteOptions",
-          "description": "The behavior when a database target already exists."
-        },
-        "targetDirectoryForFileRestore": {
-          "type": "string",
-          "description": "The target directory for file restore."
-        },
-        "snapshotRestoreDefault": {
-          "$ref": "#/definitions/SnapshotRestoreDefault",
-          "description": "Default snapshot restore settings."
-        },
-        "rehydrationDefault": {
-          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
-          "description": "Default recovery point rehydration settings."
+          "description": "The workload type represented by this configuration.",
+          "enum": [
+            "OracleInAzureVm"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
       "required": [
-        "resourceGroup",
-        "targetHostVm"
+        "workloadType"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadConfig"
+          "$ref": "#/definitions/DatabaseRecoveryConfig"
         }
       ],
       "x-ms-discriminator-value": "OracleInAzureVm"
@@ -9938,24 +10002,6 @@
             "name": "Fail",
             "value": "Fail",
             "description": "Fail recovery when the target exists."
-          }
-        ]
-      }
-    },
-    "ProvisionedBy": {
-      "type": "string",
-      "description": "The actor that provisioned a resolved target resource.",
-      "enum": [
-        "Preexisting"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisionedBy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Preexisting",
-            "value": "Preexisting",
-            "description": "The target resource existed before recovery."
           }
         ]
       }
@@ -10281,9 +10327,9 @@
       "type": "object",
       "description": "Associates a workload type with a plan-scoped recovery configuration profile.",
       "properties": {
-        "resourceType": {
+        "workloadType": {
           "$ref": "#/definitions/WorkloadType",
-          "description": "The resource type configured by the profile."
+          "description": "The workload type configured by the profile."
         },
         "recoveryConfigProfileId": {
           "type": "string",
@@ -10299,7 +10345,7 @@
         }
       },
       "required": [
-        "resourceType",
+        "workloadType",
         "recoveryConfigProfileId"
       ]
     },
@@ -10330,11 +10376,8 @@
       "properties": {
         "workloadType": {
           "$ref": "#/definitions/WorkloadType",
-          "description": "The immutable workload type configured by this profile.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The workload type configured by this profile. This response-only value is populated by the service from workloadConfig.workloadType.",
+          "readOnly": true
         },
         "targetScope": {
           "$ref": "#/definitions/TargetScope",
@@ -10599,15 +10642,9 @@
           },
           "x-ms-identifiers": []
         },
-        "recoveryConfigProfileAssociations": {
-          "type": "array",
-          "description": "Recovery configuration profiles associated by workload type. Applies only to CyberRecovery plans.",
-          "items": {
-            "$ref": "#/definitions/RecoveryConfigProfileAssociation"
-          },
-          "x-ms-identifiers": [
-            "resourceType"
-          ]
+        "resiliencyGroupProperties": {
+          "$ref": "#/definitions/RecoveryGroupResiliencyProperties",
+          "description": "Resiliency-specific properties for the recovery orchestration group."
         }
       },
       "required": [
@@ -10656,17 +10693,39 @@
           },
           "x-ms-identifiers": []
         },
-        "recoveryConfigProfileAssociations": {
-          "type": "array",
-          "description": "Recovery configuration profiles associated by workload type. Applies only to CyberRecovery plans.",
-          "items": {
-            "$ref": "#/definitions/RecoveryConfigProfileAssociation"
-          },
-          "x-ms-identifiers": [
-            "resourceType"
-          ]
+        "resiliencyGroupProperties": {
+          "$ref": "#/definitions/RecoveryGroupResiliencyPropertiesUpdate",
+          "description": "Resiliency-specific properties for the recovery orchestration group."
         }
       }
+    },
+    "RecoveryGroupResiliencyProperties": {
+      "type": "object",
+      "description": "Resiliency-specific properties for a recovery orchestration group.",
+      "properties": {
+        "resiliencyType": {
+          "$ref": "#/definitions/ResiliencyType",
+          "description": "The resiliency type represented by these properties."
+        }
+      },
+      "discriminator": "resiliencyType",
+      "required": [
+        "resiliencyType"
+      ]
+    },
+    "RecoveryGroupResiliencyPropertiesUpdate": {
+      "type": "object",
+      "description": "Resiliency-specific properties for a recovery orchestration group.",
+      "properties": {
+        "resiliencyType": {
+          "$ref": "#/definitions/ResiliencyType",
+          "description": "The resiliency type represented by these properties."
+        }
+      },
+      "discriminator": "resiliencyType",
+      "required": [
+        "resiliencyType"
+      ]
     },
     "RecoveryGroupUpdate": {
       "type": "object",
@@ -10770,7 +10829,7 @@
           "readOnly": true
         },
         "resiliencyJobProperties": {
-          "$ref": "#/definitions/ResiliencyRecoveryJobProperties",
+          "$ref": "#/definitions/RecoveryJobResiliencyProperties",
           "description": "Resiliency-specific properties for the recovery job."
         }
       },
@@ -10780,6 +10839,20 @@
         }
       ],
       "x-ms-discriminator-value": "RecoveryPlan"
+    },
+    "RecoveryJobResiliencyProperties": {
+      "type": "object",
+      "description": "Resiliency-specific properties for a recovery job.",
+      "properties": {
+        "resiliencyType": {
+          "$ref": "#/definitions/ResiliencyType",
+          "description": "The resiliency type represented by these properties."
+        }
+      },
+      "discriminator": "resiliencyType",
+      "required": [
+        "resiliencyType"
+      ]
     },
     "RecoveryJobResource": {
       "type": "object",
@@ -10837,7 +10910,7 @@
           "readOnly": true
         },
         "resiliencyJobResourceProperties": {
-          "$ref": "#/definitions/ResiliencyRecoveryJobResourceProperties",
+          "$ref": "#/definitions/RecoveryJobResourceResiliencyProperties",
           "description": "Resiliency-specific properties for the recovery job resource."
         }
       },
@@ -10847,6 +10920,20 @@
         }
       ],
       "x-ms-discriminator-value": "RecoveryPlan"
+    },
+    "RecoveryJobResourceResiliencyProperties": {
+      "type": "object",
+      "description": "Resiliency-specific properties for a recovery job resource.",
+      "properties": {
+        "resiliencyType": {
+          "$ref": "#/definitions/ResiliencyType",
+          "description": "The resiliency type represented by these properties."
+        }
+      },
+      "discriminator": "resiliencyType",
+      "required": [
+        "resiliencyType"
+      ]
     },
     "RecoveryOperationNames": {
       "type": "string",
@@ -11113,7 +11200,7 @@
           "description": "Settings for the recovery orchestration groups associated with the recovery orchestration plan."
         },
         "resiliencyPlanProperties": {
-          "$ref": "#/definitions/ResiliencyRecoveryPlanProperties",
+          "$ref": "#/definitions/RecoveryPlanResiliencyProperties",
           "description": "Resiliency-specific properties for the recovery plan."
         },
         "latestFailoverStatus": {
@@ -11195,10 +11282,38 @@
           "description": "Settings for the recovery orchestration groups associated with the recovery orchestration plan."
         },
         "resiliencyPlanProperties": {
-          "$ref": "#/definitions/ResiliencyRecoveryPlanPropertiesUpdate",
+          "$ref": "#/definitions/RecoveryPlanResiliencyPropertiesUpdate",
           "description": "Resiliency-specific properties for the recovery plan."
         }
       }
+    },
+    "RecoveryPlanResiliencyProperties": {
+      "type": "object",
+      "description": "Resiliency-specific properties for a recovery plan.",
+      "properties": {
+        "resiliencyType": {
+          "$ref": "#/definitions/ResiliencyType",
+          "description": "The resiliency type represented by these properties."
+        }
+      },
+      "discriminator": "resiliencyType",
+      "required": [
+        "resiliencyType"
+      ]
+    },
+    "RecoveryPlanResiliencyPropertiesUpdate": {
+      "type": "object",
+      "description": "Resiliency-specific properties for a recovery plan.",
+      "properties": {
+        "resiliencyType": {
+          "$ref": "#/definitions/ResiliencyType",
+          "description": "The resiliency type represented by these properties."
+        }
+      },
+      "discriminator": "resiliencyType",
+      "required": [
+        "resiliencyType"
+      ]
     },
     "RecoveryPlanRestoreContent": {
       "type": "object",
@@ -11396,9 +11511,9 @@
       "type": "object",
       "description": "Recovery point selection criteria recorded for a restore job.",
       "properties": {
-        "selectedListType": {
-          "type": "string",
-          "description": "The selection kind, such as TimeRange, Latest, or Specific."
+        "selectionType": {
+          "$ref": "#/definitions/RecoveryPointSelectionType",
+          "description": "The recovery point selection type."
         },
         "startTime": {
           "type": "string",
@@ -11412,8 +11527,38 @@
         }
       },
       "required": [
-        "selectedListType"
+        "selectionType"
       ]
+    },
+    "RecoveryPointSelectionType": {
+      "type": "string",
+      "description": "Specifies how recovery points are selected.",
+      "enum": [
+        "TimeRange",
+        "Latest",
+        "Specific"
+      ],
+      "x-ms-enum": {
+        "name": "RecoveryPointSelectionType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "TimeRange",
+            "value": "TimeRange",
+            "description": "Selects recovery points within a time range."
+          },
+          {
+            "name": "Latest",
+            "value": "Latest",
+            "description": "Selects the latest recovery point."
+          },
+          {
+            "name": "Specific",
+            "value": "Specific",
+            "description": "Selects a specific recovery point."
+          }
+        ]
+      }
     },
     "RecoveryResource": {
       "type": "object",
@@ -11641,7 +11786,7 @@
           "readOnly": true
         },
         "resiliencyResourceProperties": {
-          "$ref": "#/definitions/ResiliencyRecoveryResourceProperties",
+          "$ref": "#/definitions/RecoveryResourceResiliencyProperties",
           "description": "Resiliency-specific properties for the recovery resource."
         }
       },
@@ -11665,6 +11810,20 @@
       "required": [
         "recoveryResource",
         "operationQualificationDetails"
+      ]
+    },
+    "RecoveryResourceResiliencyProperties": {
+      "type": "object",
+      "description": "Resiliency-specific properties for a recovery resource.",
+      "properties": {
+        "resiliencyType": {
+          "$ref": "#/definitions/ResiliencyType",
+          "description": "The resiliency type represented by these properties."
+        }
+      },
+      "discriminator": "resiliencyType",
+      "required": [
+        "resiliencyType"
       ]
     },
     "RecoveryState": {
@@ -12054,76 +12213,6 @@
         }
       }
     },
-    "ResiliencyRecoveryJobProperties": {
-      "type": "object",
-      "description": "Resiliency-specific properties for a recovery job.",
-      "properties": {
-        "resiliencyType": {
-          "$ref": "#/definitions/ResiliencyType",
-          "description": "The resiliency type represented by these properties."
-        }
-      },
-      "discriminator": "resiliencyType",
-      "required": [
-        "resiliencyType"
-      ]
-    },
-    "ResiliencyRecoveryJobResourceProperties": {
-      "type": "object",
-      "description": "Resiliency-specific properties for a recovery job resource.",
-      "properties": {
-        "resiliencyType": {
-          "$ref": "#/definitions/ResiliencyType",
-          "description": "The resiliency type represented by these properties."
-        }
-      },
-      "discriminator": "resiliencyType",
-      "required": [
-        "resiliencyType"
-      ]
-    },
-    "ResiliencyRecoveryPlanProperties": {
-      "type": "object",
-      "description": "Resiliency-specific properties for a recovery plan.",
-      "properties": {
-        "resiliencyType": {
-          "$ref": "#/definitions/ResiliencyType",
-          "description": "The resiliency type represented by these properties."
-        }
-      },
-      "discriminator": "resiliencyType",
-      "required": [
-        "resiliencyType"
-      ]
-    },
-    "ResiliencyRecoveryPlanPropertiesUpdate": {
-      "type": "object",
-      "description": "Resiliency-specific properties for a recovery plan.",
-      "properties": {
-        "resiliencyType": {
-          "$ref": "#/definitions/ResiliencyType",
-          "description": "The resiliency type represented by these properties."
-        }
-      },
-      "discriminator": "resiliencyType",
-      "required": [
-        "resiliencyType"
-      ]
-    },
-    "ResiliencyRecoveryResourceProperties": {
-      "type": "object",
-      "description": "Resiliency-specific properties for a recovery resource.",
-      "properties": {
-        "resiliencyType": {
-          "$ref": "#/definitions/ResiliencyType",
-          "description": "The resiliency type represented by these properties."
-        }
-      },
-      "discriminator": "resiliencyType",
-      "required": [
-        "resiliencyType"
-      ]
-    },
     "ResiliencyType": {
       "type": "string",
       "description": "Specifies the resiliency type for recovery plan properties.",
@@ -12156,17 +12245,13 @@
           "type": "string",
           "description": "The semantic role of the target."
         },
-        "resourceType": {
+        "armResourceType": {
           "$ref": "#/definitions/TargetResourceType",
-          "description": "The full Azure resource type of the target."
+          "description": "The full Azure resource type of the target. The service validates that the resource type is supported for the target role."
         },
-        "mode": {
+        "provisioningMode": {
           "$ref": "#/definitions/TargetProvisioningMode",
           "description": "How the target is provisioned."
-        },
-        "provisionedBy": {
-          "$ref": "#/definitions/ProvisionedBy",
-          "description": "The actor that provisioned the target."
         },
         "resolvedResourceId": {
           "type": "string",
@@ -12184,9 +12269,8 @@
       },
       "required": [
         "role",
-        "resourceType",
-        "mode",
-        "provisionedBy",
+        "armResourceType",
+        "provisioningMode",
         "resolvedResourceId",
         "bindingState",
         "conformance"
@@ -12654,8 +12738,8 @@
         "AzureServiceBus",
         "AzureNetAppFiles",
         "AzureCosmosDB",
-        "AzureBackup",
-        "AzureBackupVault"
+        "AzureBackupRecoveryServices",
+        "AzureBackupDataProtection"
       ],
       "x-ms-enum": {
         "name": "ResourceProtectionSolutionType",
@@ -12712,14 +12796,14 @@
             "description": "Resource is protected with Azure Cosmos DB multiregion replication using customer-managed failover, where recovery promotes a secondary region to the write region."
           },
           {
-            "name": "AzureBackup",
-            "value": "AzureBackup",
-            "description": "Resource is protected with Azure Backup."
+            "name": "AzureBackupRecoveryServices",
+            "value": "AzureBackupRecoveryServices",
+            "description": "Resource is protected by Azure Backup using a Recovery Services vault (Microsoft.RecoveryServices/vaults)."
           },
           {
-            "name": "AzureBackupVault",
-            "value": "AzureBackupVault",
-            "description": "Resource is protected with Azure Backup Vault."
+            "name": "AzureBackupDataProtection",
+            "value": "AzureBackupDataProtection",
+            "description": "Resource is protected by Azure Backup using a Data Protection backup vault (Microsoft.DataProtection/backupVaults)."
           }
         ]
       }
@@ -12830,12 +12914,32 @@
       "type": "object",
       "description": "Resource inclusion or exclusion criteria recorded for a recovery job.",
       "properties": {
-        "selectedListType": {
+        "selectionType": {
           "type": "string",
-          "description": "The selection kind, either Inclusion or Exclusion.",
-          "default": "Exclusion"
+          "description": "The resource selection type.",
+          "default": "Exclusion",
+          "enum": [
+            "Inclusion",
+            "Exclusion"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSelectionType",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Inclusion",
+                "value": "Inclusion",
+                "description": "Includes the listed resources."
+              },
+              {
+                "name": "Exclusion",
+                "value": "Exclusion",
+                "description": "Excludes the listed resources."
+              }
+            ]
+          }
         },
-        "selectedResourceIds": {
+        "resourceIds": {
           "type": "array",
           "description": "The Azure resource identifiers selected for the operation.",
           "items": {
@@ -12846,8 +12950,32 @@
         }
       },
       "required": [
-        "selectedListType"
+        "selectionType"
       ]
+    },
+    "ResourceSelectionType": {
+      "type": "string",
+      "description": "Specifies whether listed resources are included or excluded.",
+      "enum": [
+        "Inclusion",
+        "Exclusion"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceSelectionType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Inclusion",
+            "value": "Inclusion",
+            "description": "Includes the listed resources."
+          },
+          {
+            "name": "Exclusion",
+            "value": "Exclusion",
+            "description": "Excludes the listed resources."
+          }
+        ]
+      }
     },
     "ResourceServiceBusProtectionSetting": {
       "type": "object",
@@ -13162,54 +13290,23 @@
       "type": "object",
       "description": "Recovery configuration for an SAP ASE workload.",
       "properties": {
-        "resourceGroup": {
-          "$ref": "#/definitions/TargetResourceSpec",
-          "description": "The target resource group."
-        },
-        "targetHostVm": {
-          "$ref": "#/definitions/TargetResourceSpec",
-          "description": "The target database host virtual machine."
-        },
-        "hostVmIdentity": {
-          "$ref": "#/definitions/RestoreIdentity",
-          "description": "The identity of the target host virtual machine."
-        },
-        "recoveryMode": {
+        "workloadType": {
           "type": "string",
-          "description": "The database recovery mode."
-        },
-        "shouldUseAlternateTargetLocation": {
-          "type": "boolean",
-          "description": "Indicates whether an alternate target location is used."
-        },
-        "recoveryStateDefault": {
-          "$ref": "#/definitions/RecoveryState",
-          "description": "The default database recovery state."
-        },
-        "overwriteOption": {
-          "$ref": "#/definitions/OverwriteOptions",
-          "description": "The behavior when a database target already exists."
-        },
-        "targetDirectoryForFileRestore": {
-          "type": "string",
-          "description": "The target directory for file restore."
-        },
-        "snapshotRestoreDefault": {
-          "$ref": "#/definitions/SnapshotRestoreDefault",
-          "description": "Default snapshot restore settings."
-        },
-        "rehydrationDefault": {
-          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
-          "description": "Default recovery point rehydration settings."
+          "description": "The workload type represented by this configuration.",
+          "enum": [
+            "SapAseInAzureVm"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
       "required": [
-        "resourceGroup",
-        "targetHostVm"
+        "workloadType"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadConfig"
+          "$ref": "#/definitions/DatabaseRecoveryConfig"
         }
       ],
       "x-ms-discriminator-value": "SapAseInAzureVm"
@@ -13218,54 +13315,23 @@
       "type": "object",
       "description": "Recovery configuration for an SAP HANA workload.",
       "properties": {
-        "resourceGroup": {
-          "$ref": "#/definitions/TargetResourceSpec",
-          "description": "The target resource group."
-        },
-        "targetHostVm": {
-          "$ref": "#/definitions/TargetResourceSpec",
-          "description": "The target database host virtual machine."
-        },
-        "hostVmIdentity": {
-          "$ref": "#/definitions/RestoreIdentity",
-          "description": "The identity of the target host virtual machine."
-        },
-        "recoveryMode": {
+        "workloadType": {
           "type": "string",
-          "description": "The database recovery mode."
-        },
-        "shouldUseAlternateTargetLocation": {
-          "type": "boolean",
-          "description": "Indicates whether an alternate target location is used."
-        },
-        "recoveryStateDefault": {
-          "$ref": "#/definitions/RecoveryState",
-          "description": "The default database recovery state."
-        },
-        "overwriteOption": {
-          "$ref": "#/definitions/OverwriteOptions",
-          "description": "The behavior when a database target already exists."
-        },
-        "targetDirectoryForFileRestore": {
-          "type": "string",
-          "description": "The target directory for file restore."
-        },
-        "snapshotRestoreDefault": {
-          "$ref": "#/definitions/SnapshotRestoreDefault",
-          "description": "Default snapshot restore settings."
-        },
-        "rehydrationDefault": {
-          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
-          "description": "Default recovery point rehydration settings."
+          "description": "The workload type represented by this configuration.",
+          "enum": [
+            "SapHanaInAzureVm"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
       "required": [
-        "resourceGroup",
-        "targetHostVm"
+        "workloadType"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadConfig"
+          "$ref": "#/definitions/DatabaseRecoveryConfig"
         }
       ],
       "x-ms-discriminator-value": "SapHanaInAzureVm"
@@ -13602,54 +13668,23 @@
       "type": "object",
       "description": "Recovery configuration for a SQL Server workload.",
       "properties": {
-        "resourceGroup": {
-          "$ref": "#/definitions/TargetResourceSpec",
-          "description": "The target resource group."
-        },
-        "targetHostVm": {
-          "$ref": "#/definitions/TargetResourceSpec",
-          "description": "The target database host virtual machine."
-        },
-        "hostVmIdentity": {
-          "$ref": "#/definitions/RestoreIdentity",
-          "description": "The identity of the target host virtual machine."
-        },
-        "recoveryMode": {
+        "workloadType": {
           "type": "string",
-          "description": "The database recovery mode."
-        },
-        "shouldUseAlternateTargetLocation": {
-          "type": "boolean",
-          "description": "Indicates whether an alternate target location is used."
-        },
-        "recoveryStateDefault": {
-          "$ref": "#/definitions/RecoveryState",
-          "description": "The default database recovery state."
-        },
-        "overwriteOption": {
-          "$ref": "#/definitions/OverwriteOptions",
-          "description": "The behavior when a database target already exists."
-        },
-        "targetDirectoryForFileRestore": {
-          "type": "string",
-          "description": "The target directory for file restore."
-        },
-        "snapshotRestoreDefault": {
-          "$ref": "#/definitions/SnapshotRestoreDefault",
-          "description": "Default snapshot restore settings."
-        },
-        "rehydrationDefault": {
-          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
-          "description": "Default recovery point rehydration settings."
+          "description": "The workload type represented by this configuration.",
+          "enum": [
+            "SqlInAzureVm"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
       "required": [
-        "resourceGroup",
-        "targetHostVm"
+        "workloadType"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkloadConfig"
+          "$ref": "#/definitions/DatabaseRecoveryConfig"
         }
       ],
       "x-ms-discriminator-value": "SqlInAzureVm"
@@ -13766,8 +13801,8 @@
       "type": "string",
       "description": "How a target resource is provisioned.",
       "enum": [
-        "UseExisting",
-        "Create",
+        "Existing",
+        "Created",
         "ExternallyProvisioned"
       ],
       "x-ms-enum": {
@@ -13775,13 +13810,13 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "UseExisting",
-            "value": "UseExisting",
+            "name": "Existing",
+            "value": "Existing",
             "description": "An existing target resource is used."
           },
           {
-            "name": "Create",
-            "value": "Create",
+            "name": "Created",
+            "value": "Created",
             "description": "A new target resource is created during recovery."
           },
           {
@@ -13800,17 +13835,17 @@
           "type": "string",
           "description": "The semantic role of this target resource."
         },
-        "resourceType": {
+        "armResourceType": {
           "$ref": "#/definitions/TargetResourceType",
-          "description": "The full Azure resource type of the target."
+          "description": "The full Azure resource type of the target. The service validates that the resource type is supported for the target role."
         },
-        "mode": {
+        "provisioningMode": {
           "type": "string",
           "description": "How the target resource is provisioned.",
-          "default": "UseExisting",
+          "default": "Existing",
           "enum": [
-            "UseExisting",
-            "Create",
+            "Existing",
+            "Created",
             "ExternallyProvisioned"
           ],
           "x-ms-enum": {
@@ -13818,13 +13853,13 @@
             "modelAsString": true,
             "values": [
               {
-                "name": "UseExisting",
-                "value": "UseExisting",
+                "name": "Existing",
+                "value": "Existing",
                 "description": "An existing target resource is used."
               },
               {
-                "name": "Create",
-                "value": "Create",
+                "name": "Created",
+                "value": "Created",
                 "description": "A new target resource is created during recovery."
               },
               {
@@ -13838,7 +13873,7 @@
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource identifier of the existing target."
+          "description": "The Azure resource identifier of the target. Required only when provisioningMode is Existing; omit for Created and ExternallyProvisioned."
         },
         "dependsOn": {
           "type": "array",
@@ -13850,8 +13885,7 @@
       },
       "required": [
         "role",
-        "resourceType",
-        "resourceId"
+        "armResourceType"
       ]
     },
     "TargetResourceType": {

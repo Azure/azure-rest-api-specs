@@ -31,12 +31,15 @@
                   "groupUniqueId": "5d3c2b1a-8e7f-4a6b-9c0d-1e2f3a4b5c6d",
                   "orderId": 1,
                   "description": "Tier 1 applications",
-                  "recoveryConfigProfileAssociations": [
-                    {
-                      "resourceType": "AzureVm",
-                      "recoveryConfigProfileId": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan/recoveryConfigProfiles/azure-vm-default"
-                    }
-                  ]
+                  "resiliencyGroupProperties": {
+                    "resiliencyType": "CyberResiliency",
+                    "recoveryConfigProfileAssociations": [
+                      {
+                        "workloadType": "AzureVm",
+                        "recoveryConfigProfileId": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan/recoveryConfigProfiles/azure-vm-default"
+                      }
+                    ]
+                  }
                 },
                 "id": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan/recoveryGroups/5d3c2b1a-8e7f-4a6b-9c0d-1e2f3a4b5c6d",
                 "name": "5d3c2b1a-8e7f-4a6b-9c0d-1e2f3a4b5c6d",

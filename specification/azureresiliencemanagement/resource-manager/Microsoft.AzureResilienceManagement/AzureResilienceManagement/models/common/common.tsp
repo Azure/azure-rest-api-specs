@@ -226,7 +226,7 @@ union ActionTask {
 
   @added(Versions.v2026_11_30_preview)
   @doc("Infrastructure creation task.")
-  InfraActionTask: "InfraActionTask",
+  InfrastructureActionTask: "InfrastructureActionTask",
 
   string,
 }
@@ -251,6 +251,20 @@ union UserConsent {
   string,
 }
 
+@added(Versions.v2026_11_30_preview)
+@doc("Specifies how execution proceeds when a recovery group fails.")
+union GroupFailurePolicy {
+  @added(Versions.v2026_11_30_preview)
+  @doc("Continues execution after a recovery group failure.")
+  Continue: "Continue",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Stops execution after a recovery group failure.")
+  Stop: "Stop",
+
+  string,
+}
+
 @added(Versions.v2026_03_01_preview)
 @doc("Execution configurations for recovery action.")
 model ExecutionConfigurations {
@@ -259,11 +273,13 @@ model ExecutionConfigurations {
   userConsent: UserConsent;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("Whether execution continues when a recovery group fails.")
-  continueOnGroupFailure?: boolean;
+  @doc("The execution policy applied when a recovery group fails.")
+  groupFailurePolicy?: GroupFailurePolicy;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The maximum number of restore operations that can run in parallel per recovery group.")
+  @minValue(1)
+  @maxValue(500)
   maxParallelRestoresPerGroup?: int32;
 }
 
@@ -344,12 +360,12 @@ union ResourceProtectionSolutionType {
   AzureCosmosDB: "AzureCosmosDB",
 
   @added(Versions.v2026_11_30_preview)
-  @doc("Resource is protected with Azure Backup.")
-  AzureBackup: "AzureBackup",
+  @doc("Resource is protected by Azure Backup using a Recovery Services vault (Microsoft.RecoveryServices/vaults).")
+  AzureBackupRecoveryServices: "AzureBackupRecoveryServices",
 
   @added(Versions.v2026_11_30_preview)
-  @doc("Resource is protected with Azure Backup Vault.")
-  AzureBackupVault: "AzureBackupVault",
+  @doc("Resource is protected by Azure Backup using a Data Protection backup vault (Microsoft.DataProtection/backupVaults).")
+  AzureBackupDataProtection: "AzureBackupDataProtection",
 
   string,
 }
