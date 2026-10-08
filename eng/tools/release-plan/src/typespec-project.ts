@@ -22,6 +22,9 @@ export const NEW_API_VERSION_LABEL = "new-api-version";
  */
 export const FOLDER_MIGRATION_LABEL = "FolderMigrationV2";
 
+/** Label indicating that release plan automation should not process a spec PR. */
+export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "Skip-ReleasePlan-Automation";
+
 /**
  * Identifies one TypeSpec project path and selected API version from a pull request.
  * Returns null when no specification files were modified, or when zero/multiple projects found.
@@ -109,15 +112,18 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
       prNumber: associatedPrNumber,
     });
 
-    if (labels.includes(FOLDER_MIGRATION_LABEL)) {
+    if (
+      labels.includes(FOLDER_MIGRATION_LABEL) ||
+      labels.includes(SKIP_RELEASE_PLAN_AUTOMATION_LABEL)
+    ) {
       console.log(
-        `PR #${associatedPrNumber} has the '${FOLDER_MIGRATION_LABEL}' label. Skipping release plan processing.`,
+        `PR #${associatedPrNumber} has a release plan automation skip label. Skipping release plan processing.`,
       );
       return {
         projectInfo: null,
         prNumber: associatedPrNumber,
         hasNewApiVersionLabel: false,
-        isFolderMigration: true,
+        skipReleasePlanAutomation: true,
       };
     }
 
@@ -358,13 +364,12 @@ export function findTspConfigDir(relativeFilePath: string, workspace: string): s
 }
 
 /**
- * Extracts and validates apiVersion and sdkType from TypeSpec metadata.
+ * Extracts the API version from TypeSpec metadata.
  */
 export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
   apiVersion: string;
-  sdkType: "stable" | "preview";
 } {
-  const versionAndTypeMap = new Map<string, Set<string>>();
+  const apiVersions = new Set<string>();
 
   for (const [, langConfigs] of Object.entries(metadata.languages)) {
     if (!Array.isArray(langConfigs)) {
@@ -373,50 +378,30 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
 
     for (const config of langConfigs) {
       const apiVersion = config.apiVersion;
-      const sdkType = config.sdkType;
       const packageName = config.packageName;
 
-      if (!apiVersion || !sdkType || !packageName) {
+      if (!apiVersion || !packageName) {
         console.warn(
-          `Skipping language config with missing apiVersion, sdkType, or packageName: ${JSON.stringify(config)}`,
+          `Skipping language config with missing apiVersion or packageName: ${JSON.stringify(config)}`,
         );
         continue;
       }
 
       console.log(`language config: ${JSON.stringify(config)}`);
-      if (!versionAndTypeMap.has(apiVersion)) {
-        versionAndTypeMap.set(apiVersion, new Set());
-      }
-      versionAndTypeMap.get(apiVersion)!.add(sdkType);
+      apiVersions.add(apiVersion);
     }
   }
 
-  if (versionAndTypeMap.size === 0) {
+  if (apiVersions.size === 0) {
     throw new Error("No valid language configurations found in TypeSpec metadata");
   }
 
-  const apiVersion = Array.from(versionAndTypeMap.keys())[0];
-  const sdkTypes = versionAndTypeMap.get(apiVersion)!;
-
-  // Validate that all language configurations have consistent sdkType
-  if (sdkTypes.size > 1) {
-    const types = Array.from(sdkTypes).join(", ");
-    const message = `TypeSpec code generator output suggests that this project contains conflicting SDK release type based on TypeSpec configuration (found: ${types}) hence a release plan cannot be created automatically. Create a release plan using azsdk agent.`;
-    console.error(message);
-    throw new Error(message);
-  }
-
-  if (sdkTypes.size === 0) {
-    throw new Error("No sdkType information found in TypeSpec metadata");
-  }
-
-  const sdkType = Array.from(sdkTypes)[0] as "stable" | "preview";
-  return { apiVersion, sdkType };
+  return { apiVersion: Array.from(apiVersions)[0] };
 }
 
 /**
  * Gets TypeSpec project version info using TypeSpec metadata emitter.
- * Runs the metadata emitter on the given project and extracts version/sdkType info.
+ * Runs the metadata emitter and derives preview status from the API version suffix.
  * @param tspProjectAbsPath Absolute path to TypeSpec project
  * @param tspProjectRelPath Relative path to TypeSpec project (for logging)
  * @returns TypeSpecProjectInfo with apiVersion and isPreview, or throws error
@@ -427,11 +412,16 @@ export async function getTypeSpecProjectVersionFromMetadata(
 ): Promise<TypeSpecProjectInfo> {
   try {
     const metadata = await generateTypeSpecMetadata(tspProjectAbsPath);
-    const { apiVersion, sdkType } = resolveTypeSpecMetadata(metadata);
-    const isPreview = sdkType === "preview";
+    const { apiVersion } = resolveTypeSpecMetadata(metadata);
+    if (!/^\d{4}-\d{2}-\d{2}(?:-preview)?$/.test(apiVersion)) {
+      throw new Error(
+        `API version '${apiVersion}' must use YYYY-MM-DD or YYYY-MM-DD-preview format`,
+      );
+    }
+    const isPreview = apiVersion.endsWith("-preview");
 
     console.log(
-      `Found TypeSpec project at ${tspProjectRelPath} with API version ${apiVersion} (${sdkType})`,
+      `Found TypeSpec project at ${tspProjectRelPath} with API version ${apiVersion} (${isPreview ? "preview" : "stable"})`,
     );
 
     return {

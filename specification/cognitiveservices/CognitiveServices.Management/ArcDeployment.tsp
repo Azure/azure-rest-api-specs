@@ -18,6 +18,7 @@ namespace Microsoft.CognitiveServices;
  * Cognitive Services account Arc deployment, backed by customer-managed Arc-enabled Kubernetes resources.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 @parentResource(Account)
 model ArcDeployment is Azure.ResourceManager.ProxyResource<
   ArcDeploymentProperties,
@@ -50,6 +51,7 @@ alias ArcDeploymentCreateLroHeaders = ArmCombinedLroHeaders<
 >;
 
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface ArcDeployments {
   /**
@@ -107,6 +109,7 @@ interface ArcDeployments {
  * Properties of a Cognitive Services Arc deployment.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 model ArcDeploymentProperties {
   /**
    * Model reference. Required on creation and immutable after creation.
@@ -208,6 +211,7 @@ model ArcDeploymentProperties {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Arc deployment SKU is immutable after create; PATCH only supports replicas, resources, and nodeSelector."
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 model ArcDeploymentUpdate {
   /**
    * Properties that can be updated on an Arc deployment.
@@ -219,6 +223,7 @@ model ArcDeploymentUpdate {
  * Mutable properties for an Arc deployment.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 model ArcDeploymentUpdateProperties {
   /**
    * Physical replica count on the Arc cluster.
@@ -243,6 +248,7 @@ model ArcDeploymentUpdateProperties {
  * Model reference for an Arc deployment.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 model ArcDeploymentModel {
   /**
    * Deployment model format.
@@ -259,6 +265,7 @@ model ArcDeploymentModel {
  * Compute type for an Arc deployment.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 union ArcDeploymentComputeType {
   string,
 
@@ -277,6 +284,7 @@ union ArcDeploymentComputeType {
  * Inference runtime for an Arc deployment.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 union ArcDeploymentRuntime {
   string,
 
@@ -295,6 +303,7 @@ union ArcDeploymentRuntime {
  * Per-replica Kubernetes resource requests and limits for an Arc deployment.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 model ArcDeploymentKubernetesResources {
   /**
    * Kubernetes CPU and memory resource requests for each deployment replica.
@@ -311,6 +320,7 @@ model ArcDeploymentKubernetesResources {
  * Per-replica Kubernetes resource requests and limits for an Arc deployment update.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 model ArcDeploymentPatchKubernetesResources {
   /**
    * Kubernetes CPU and memory resource requests for each deployment replica.
@@ -327,6 +337,7 @@ model ArcDeploymentPatchKubernetesResources {
  * CPU and memory resource requirements for an Arc deployment replica.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 model ArcDeploymentCpuMemoryResourceRequirements {
   /**
    * Kubernetes CPU quantity string, for example 500m, 2, 4, or 8.
@@ -343,6 +354,7 @@ model ArcDeploymentCpuMemoryResourceRequirements {
  * CPU and memory resource requirements for an Arc deployment replica update.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 model ArcDeploymentPatchCpuMemoryResourceRequirements {
   /**
    * Kubernetes CPU quantity string, for example 500m, 2, 4, or 8.
@@ -360,6 +372,7 @@ model ArcDeploymentPatchCpuMemoryResourceRequirements {
  * Specify either cpu and memory together, or gpu. GPU is supported only in limits, not requests.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 model ArcDeploymentResourceRequirements {
   /**
    * Kubernetes CPU quantity string, for example 500m, 2, 4, or 8.
@@ -385,6 +398,7 @@ model ArcDeploymentResourceRequirements {
  * Provisioning status details for an Arc deployment.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 model ArcDeploymentProvisioningDetails {
   /**
    * A human-readable status message from the last provisioning operation.
@@ -401,6 +415,7 @@ model ArcDeploymentProvisioningDetails {
  * The list of Arc deployments.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 model ArcDeploymentListResult {
   /**
    * The link used to get the next page of Arc deployments.
@@ -420,6 +435,7 @@ model ArcDeploymentListResult {
  * SKU for an Arc deployment.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 union ArcDeploymentSkuName {
   string,
 
@@ -433,6 +449,7 @@ union ArcDeploymentSkuName {
  * SKU for an Arc deployment.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 model ArcDeploymentSku {
   /**
    * The name of the Arc deployment SKU. Must be Arc.
@@ -444,6 +461,7 @@ model ArcDeploymentSku {
  * Effective vLLM runtime parameters for an Arc deployment.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 model ArcDeploymentVllmParameters {
   /**
    * Number of GPUs used for tensor parallelism.
