@@ -95,7 +95,7 @@ model TelephonyCampaignInputs {
   @maxLength(256)
   connection_name: string;
 
-  /** Authorized typed caller address. The connection validates which address variants it supports for the source role independently of recipient destination support. */
+  /** Authorized typed caller address. The connection validates which address variants it supports for the source role independently of recipient destination support. Generated CallJobs preserve their existing representation: scalar source and TelephonyOutboundDestination. */
   source: TelephonyAddress;
 
   /** Inline recipients, mutually exclusive with recipient_dataset. Exactly one source is required; neither, both or an empty array returns 400. Reads omit this array; retain the original submission for row correlation. Creation body limit: 1 MiB decoded UTF-8. */
@@ -120,7 +120,7 @@ model TelephonyCampaignInputs {
    * Every input position is a separate intended call, including duplicate destinations.
    * Files contain 1-1,000,000 recipients, at most 256 MiB decoded bytes and 1 MiB per logical row.
    */
-  recipient_dataset?: DatasetReference;
+  recipient_dataset?: DatasetInputReference;
 
   /** Omit for immediate scheduling. Every mode dispatches automatically after successful preparation, subject to its schedule. */
   schedule?: TelephonyCampaignSchedule;
@@ -278,10 +278,13 @@ alias TelephonyCampaignValidationErrorQueryParameters = {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCampaignOperationKind {
   string,
+
   /** Input validation and complete CallJob generation for a PUT. */
   validation: "validation",
+
   /** Stop future dispatch and drain admitted work. */
   cancel: "cancel",
+
   /** Cascade cleanup of Campaign task resources. */
   delete: "delete",
 }
@@ -546,18 +549,24 @@ interface TelephonyCampaigns {
   @summary("Cancel a telephony campaign")
   @extension(
     "x-ms-examples",
-    #{ CancelCampaign: #{ $ref: "../../examples/campaigns/CancelCampaign.json" } }
+    #{
+      CancelCampaign: #{ $ref: "../../examples/campaigns/CancelCampaign.json" },
+    }
   )
   @post
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}:cancel")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   @pollingOperation(
     TelephonyCampaigns.getOperation,
-    { operation_id: ResponseProperty<"operationId"> }
+    {
+      operation_id: ResponseProperty<"operationId">,
+    }
   )
   @finalOperation(
     TelephonyCampaigns.get,
-    { operation_id: ResponseProperty<"operationId"> }
+    {
+      operation_id: ResponseProperty<"operationId">,
+    }
   )
   cancel is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
