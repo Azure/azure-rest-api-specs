@@ -9652,29 +9652,8 @@
           ]
         },
         "syncMode": {
-          "type": "string",
-          "description": "The synchronization mode used for the linked plan.",
-          "default": "Manual",
-          "enum": [
-            "Manual",
-            "Scheduled"
-          ],
-          "x-ms-enum": {
-            "name": "RecoveryPlanSyncMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Manual",
-                "value": "Manual",
-                "description": "Synchronization is started manually."
-              },
-              {
-                "name": "Scheduled",
-                "value": "Scheduled",
-                "description": "Synchronization runs on a service-managed schedule."
-              }
-            ]
-          }
+          "$ref": "#/definitions/RecoveryPlanSyncMode",
+          "description": "The synchronization mode used for the linked plan. When omitted during creation, the service uses Manual."
         }
       },
       "required": [
@@ -9686,29 +9665,8 @@
       "description": "Details that link a recovery plan to its source plan.",
       "properties": {
         "syncMode": {
-          "type": "string",
-          "description": "The synchronization mode used for the linked plan.",
-          "default": "Manual",
-          "enum": [
-            "Manual",
-            "Scheduled"
-          ],
-          "x-ms-enum": {
-            "name": "RecoveryPlanSyncMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Manual",
-                "value": "Manual",
-                "description": "Synchronization is started manually."
-              },
-              {
-                "name": "Scheduled",
-                "value": "Scheduled",
-                "description": "Synchronization runs on a service-managed schedule."
-              }
-            ]
-          }
+          "$ref": "#/definitions/RecoveryPlanSyncMode",
+          "description": "The synchronization mode used for the linked plan. When omitted during creation, the service uses Manual."
         }
       }
     },

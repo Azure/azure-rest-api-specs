@@ -228,8 +228,8 @@ model LinkedRecoveryPlanDetails {
   linkedSourceRecoveryPlanTenantId?: string;
 
   @added(Versions.v2026_11_30_preview)
-  @doc("The synchronization mode used for the linked plan.")
-  syncMode?: RecoveryPlanSyncMode = RecoveryPlanSyncMode.Manual;
+  @doc("The synchronization mode used for the linked plan. When omitted during creation, the service uses Manual.")
+  syncMode?: RecoveryPlanSyncMode;
 }
 
 @added(Versions.v2026_11_30_preview)
