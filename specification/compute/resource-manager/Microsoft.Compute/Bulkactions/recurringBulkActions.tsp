@@ -744,9 +744,12 @@ model OccurrenceExtensionResource
 
 // ------------------ Recurring bulk action operations ------------------
 
+// Keep Swagger tags stable for existing consumers; Learn groups use operation IDs.
 @added(Versions.`2026-07-06-preview`)
+@renamedFrom(Versions.`2026-09-06-preview`, "ScheduledActions")
 @armResourceOperations
-interface ScheduledActions {
+@tag("ScheduledActions")
+interface RecurringBulkActions {
   @doc("Gets the specified recurring bulk action.")
   @errorsDoc("The request failed. The response contains error details.")
   get is ArmResourceRead<ScheduledAction>;
@@ -869,16 +872,20 @@ interface ScheduledActions {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@renamedFrom(Versions.`2026-09-06-preview`, "ScheduledActionExtension")
 @armResourceOperations
-interface ScheduledActionExtension {
+@tag("ScheduledActionExtension")
+interface RecurringBulkActionExtension {
   @doc("Lists recurring bulk actions associated with the specified VM.")
   @errorsDoc("The request failed. The response contains error details.")
   listByVms is ArmResourceListByParent<ScheduledActionResources>;
 }
 
 @added(Versions.`2026-07-06-preview`)
+@renamedFrom(Versions.`2026-09-06-preview`, "ScheduledActionOperationStatus")
 @armResourceOperations(#{ allowStaticRoutes: true })
-interface ScheduledActionOperationStatus {
+@tag("ScheduledActionOperationStatus")
+interface RecurringBulkActionOperationStatus {
   @doc("Gets the status of the specified recurring bulk action operation.")
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/scheduledActionsOperationStatuses/{operationId}")
@@ -971,32 +978,32 @@ interface OccurrenceExtension {
 @@doc(Occurrence.name, "The occurrence ID in UUID format.");
 
 @@doc(
-  ScheduledActions.createOrUpdate::parameters.resource,
+  RecurringBulkActions.createOrUpdate::parameters.resource,
   "The recurring bulk action to create or update."
 );
 
 @@doc(
-  ScheduledActions.update::parameters.properties,
+  RecurringBulkActions.update::parameters.properties,
   "The recurring bulk action properties to update. Omitted properties keep their current values."
 );
 
 @@doc(
-  ScheduledActions.attachResources::parameters.body,
+  RecurringBulkActions.attachResources::parameters.body,
   "The resources to add to the recurring bulk action."
 );
 
 @@doc(
-  ScheduledActions.detachResources::parameters.body,
+  RecurringBulkActions.detachResources::parameters.body,
   "The resources to remove from the recurring bulk action."
 );
 
 @@doc(
-  ScheduledActions.patchResources::parameters.body,
+  RecurringBulkActions.patchResources::parameters.body,
   "The resource-specific settings to update."
 );
 
 @@doc(
-  ScheduledActions.cancelNextOccurrence::parameters.body,
+  RecurringBulkActions.cancelNextOccurrence::parameters.body,
   "The resources to cancel in the next occurrence. If no resource IDs are provided, the occurrence is canceled for all resources."
 );
 

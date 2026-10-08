@@ -8,6 +8,20 @@ namespace Microsoft.Compute;
 @@clientName(Microsoft.Compute, "ComputeBulkActionsMgmtClient", "python");
 @@clientName(NetworkApiVersion.`2020-11-01`, "ENUM_2020_11_01", "python");
 @@clientName(NetworkApiVersion.`2022-11-01`, "ENUM_2022_11_01", "python");
+
+// Preserve direct TypeSpec SDK group names while OpenAPI uses the versioned names.
+@@clientName(RecurringBulkActions, "ScheduledActions", "!autorest");
+@@clientName(
+  RecurringBulkActionExtension,
+  "ScheduledActionExtension",
+  "!autorest"
+);
+@@clientName(
+  RecurringBulkActionOperationStatus,
+  "ScheduledActionOperationStatus",
+  "!autorest"
+);
+
 @@clientName(
   VirtualMachineBulkOperations.bulkDeallocate,
   "BulkDeallocateOperation",
