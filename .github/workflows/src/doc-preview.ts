@@ -1,4 +1,4 @@
-import { inspect } from "util";
+import { inspect } from "node:util";
 
 const DOCS_NAMESPACE = "_swagger_specs";
 const SPEC_FILE_REGEX =

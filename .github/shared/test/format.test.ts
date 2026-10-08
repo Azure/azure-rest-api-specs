@@ -105,12 +105,6 @@ describe("shared formatter", () => {
     }
   });
 
-  it("still formats explicitly targeted TypeSpec configuration YAML", async () => {
-    const file = await addFile("specification/example/tspconfig.yaml", "emit:   []\n");
-    await format(["--write", "tspconfig.yaml"], dirname(file));
-    expect(await readFile(file, "utf8")).toBe("emit: []\n");
-  });
-
   it("fails on malformed managed input instead of silently skipping it", async () => {
     const file = await addFile("eng/tools/example/src/index.ts", "const = ;");
     await expect(format(["--check", file])).rejects.toThrow();

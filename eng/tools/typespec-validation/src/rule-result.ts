@@ -1,5 +1,7 @@
-export interface RuleResult {
-  readonly success: boolean;
-  readonly stdOutput?: string;
-  readonly errorOutput?: string;
-}
+export {
+  DiagnosticError,
+  failure,
+  warning,
+  type Diagnostic,
+  type RuleResult,
+} from "@azure-tools/specs-shared/rule-result";

@@ -1,12 +1,12 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { resolve } from "path";
+import { resolve } from "node:path";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 const mockReadFile: import("vitest").MockedFunction<
   (path: string, encoding: string) => Promise<string>
 > = vi.hoisted(() => vi.fn());
 
-vi.mock("fs/promises", () => ({
+vi.mock("node:fs/promises", () => ({
   readFile: mockReadFile,
 }));
 
