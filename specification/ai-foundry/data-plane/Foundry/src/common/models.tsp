@@ -64,6 +64,20 @@ alias SessionAffinityRequestHeader = {
   session_id?: string;
 };
 
+/** Optional request header carrying user-defined cost attribution context. */
+alias CostContextRequestHeader = {
+  /**
+   * User-defined cost attribution context serialized as a compact, single-line JSON object.
+   * For example: `{"cost_attribution":{"application_id":"someid","cost_center":"cc"}}`.
+   * All keys, including nested keys, are user-defined; the example keys are illustrative, not a fixed schema.
+   * Carriage return and line feed characters inside JSON strings must be JSON-escaped.
+   * The header must not contain literal CR or LF characters.
+   */
+  @example("{\"cost_attribution\":{\"application_id\":\"someid\",\"cost_center\":\"cc\"}}")
+  @header("x-ms-foundry-cost-context")
+  costContext?: string;
+};
+
 // NOTE: Platform-internal headers (x-agent-foundry-call-id, x-foundry-foundation-token)
 // are NOT part of the public API spec. They are injected by the platform and resolved
 // server-side. If needed for contracts, they should be added in the contracts entry point.

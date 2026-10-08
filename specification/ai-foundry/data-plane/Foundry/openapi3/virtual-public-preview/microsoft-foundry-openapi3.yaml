@@ -16246,6 +16246,17 @@ paths:
           x-ms-foundry-meta:
             conditional_previews:
               - ModelRouterControls=V1Preview
+        - name: x-ms-foundry-cost-context
+          in: header
+          required: false
+          description: |-
+            User-defined cost attribution context serialized as a compact, single-line JSON object.
+            For example: `{"cost_attribution":{"application_id":"someid","cost_center":"cc"}}`.
+            All keys, including nested keys, are user-defined; the example keys are illustrative, not a fixed schema.
+            Carriage return and line feed characters inside JSON strings must be JSON-escaped.
+            The header must not contain literal CR or LF characters.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -30230,6 +30241,17 @@ paths:
           x-ms-foundry-meta:
             conditional_previews:
               - ModelRouterControls=V1Preview
+        - name: x-ms-foundry-cost-context
+          in: header
+          required: false
+          description: |-
+            User-defined cost attribution context serialized as a compact, single-line JSON object.
+            For example: `{"cost_attribution":{"application_id":"someid","cost_center":"cc"}}`.
+            All keys, including nested keys, are user-defined; the example keys are illustrative, not a fixed schema.
+            Carriage return and line feed characters inside JSON strings must be JSON-escaped.
+            The header must not contain literal CR or LF characters.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
