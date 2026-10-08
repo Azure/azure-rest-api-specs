@@ -2582,27 +2582,30 @@ model ClusterAPIConnectivityProfile {
 @added(Versions.v2026_08_02_preview)
 model CloudShellProfile {
   /**
-   * Whether Cloud Shell connectivity is disabled, uses AKS-managed network resources, or uses customer-provided
+   * Whether Cloud Shell connectivity is disabled, uses AKS-managed network resources, or uses user-provided
    * network resources. Defaults to Disabled when omitted during create. On update, omission preserves the existing
-   * mode. Setting this property to Disabled removes AKS-created resources and connectivity artifacts.
+   * mode. Setting this property to Disabled removes AKS-created resources and connectivity artifacts. For Custom
+   * mode, AKS unregisters the user-provided resources but does not delete them.
    */
   mode?: CloudShellProfileMode;
 
   /**
-   * Network resources used by Cloud Shell. When creating or switching to Custom networking, customers must provide
+   * Network resources used by Cloud Shell. When configuring Custom networking, users must provide
    * both subnetId and relayNamespaceId. When updating an existing Custom configuration, either resource ID can be
-   * changed independently; omitted fields preserve their existing values. Customers must omit this property when mode
-   * is Managed or Disabled. AKS populates this property with the effective network resources when mode is Managed or
-   * Custom. The resulting network configuration must satisfy all Custom networking requirements.
+   * changed independently; omitted fields preserve their existing values. In Custom mode, AKS returns the user-provided
+   * values. In Managed mode, AKS populates the effective values. Users may omit Managed values or resubmit values
+   * returned by GET unchanged; different values are rejected. This property must be omitted when mode is Disabled.
+   * See https://aka.ms/aks/CloudShellConnect for Custom networking requirements.
    */
   network?: CloudShellNetworkProfile;
 
   /**
-   * Storage resources used for Cloud Shell file persistence. When creating or switching to Custom storage, customers
+   * Storage resources used for Cloud Shell file persistence. When configuring Custom storage, users
    * must provide both storageAccountId and fileShareName. When updating an existing Custom configuration, either
-   * property can be changed independently; omitted fields preserve their existing values. Customers must omit both
-   * properties when mode is Managed or Disabled. AKS populates them with the effective storage resources when mode is
-   * Managed or Custom. The resulting storage configuration must satisfy all Custom storage requirements.
+   * property can be changed independently; omitted fields preserve their existing values. In Custom mode, AKS returns
+   * the user-provided values. In Managed mode, AKS populates the effective values. Users may omit Managed values or
+   * resubmit values returned by GET unchanged; different values are rejected. Both properties must be omitted when
+   * mode is Disabled. See https://aka.ms/aks/CloudShellConnect for Custom storage requirements.
    */
   storage?: CloudShellStorageProfile;
 }
@@ -2625,19 +2628,19 @@ union CloudShellProfileMode {
   Managed: "Managed",
 
   /**
-   * Cloud Shell connectivity uses network resources provided by the customer.
+   * Cloud Shell connectivity uses network resources provided by the user.
    */
   Custom: "Custom",
 }
 
 /**
  * Network resources used by Cloud Shell. AKS peers the subnet's virtual network with the cluster virtual network.
- * For customer-managed resources, their address spaces must not overlap. See https://aka.ms/aks/CloudShellConnect.
+ * For Custom resources, their address spaces must not overlap. See https://aka.ms/aks/CloudShellConnect.
  */
 @added(Versions.v2026_08_02_preview)
 model CloudShellNetworkProfile {
   /**
-   * Dedicated IPv4 subnet used by Cloud Shell containers. For customer-managed networking, this subnet must be
+   * Dedicated IPv4 subnet used by Cloud Shell containers. For Custom networking, this subnet must be
    * delegated to Microsoft.ContainerInstance/containerGroups and be /24 or larger. Grant the cluster identity
    * Network Contributor on the containing virtual network and grant the Azure Container Instance service principal
    * Network Contributor on this subnet or its containing virtual network. Required when Cloud Shell mode is Custom.
@@ -2649,7 +2652,7 @@ model CloudShellNetworkProfile {
   ]>;
 
   /**
-   * Azure Relay namespace used by Cloud Shell. For customer-managed networking, this existing namespace is required
+   * Azure Relay namespace used by Cloud Shell. For Custom networking, this existing namespace is required
    * with subnetId. Grant the cluster identity Reader and the Azure Container Instance service principal Contributor
    * on the namespace. Required when Cloud Shell mode is Custom.
    */
@@ -2678,7 +2681,7 @@ union CloudShellStorageProfileMode {
   Managed: "Managed",
 
   /**
-   * The customer provides the storage resources.
+   * The user provides the storage resources.
    */
   Custom: "Custom",
 }
@@ -2689,13 +2692,13 @@ union CloudShellStorageProfileMode {
 @added(Versions.v2026_08_02_preview)
 model CloudShellStorageProfile {
   /**
-   * Whether persistent storage is disabled, managed by AKS, or provided by the customer. Defaults to Disabled when
+   * Whether persistent storage is disabled, managed by AKS, or provided by the user. Defaults to Disabled when
    * omitted during initial Cloud Shell enablement. On update, omission preserves the existing mode.
    */
   mode?: CloudShellStorageProfileMode;
 
   /**
-   * Storage account used for Cloud Shell files. For customer-managed storage, grant the cluster identity
+   * Storage account used for Cloud Shell files. For Custom storage, grant the cluster identity
    * Storage File Data SMB Share Contributor on this existing storage account. Required when mode is Custom.
    */
   storageAccountId?: Azure.Core.armResourceIdentifier<[
