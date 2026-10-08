@@ -1400,28 +1400,63 @@ model TelephonyCallJobSchedule {
   expires_at?: FoundryTimestamp;
 }
 
-@doc("An outbound caller identity: an E.164 phone number or a non-empty Teams Resource Account UUID. The connection category determines which form is accepted.")
+/** Extensible endpoint address kinds. Address type describes the endpoint independently of the provider. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@minLength(1)
-@maxLength(36)
-@pattern("^(?:\\+[1-9][0-9]{1,14}|(?!00000000-0000-0000-0000-000000000000$)[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$")
-scalar TelephonyOutboundSource extends string;
+union TelephonyAddressType {
+  string,
+
+  /** An E.164 phone number. */
+  phone_number: "phone_number",
+
+  /** A Teams resource account identified by its Entra object ID. */
+  teams_resource_account: "teams_resource_account",
+}
+
+/** Shared typed address for an outbound source or recipient destination. Connections validate supported variants separately for each role. Unknown or unsupported variants are rejected before dialing. Additional non-phone variants may be introduced as provider support becomes available. */
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyAddress {
+  /** Endpoint address type. */
+  type: TelephonyAddressType;
+
+  /** Concrete address value. Known variants apply their format constraints; unknown variants are rejected before dialing. */
+  @minLength(1)
+  value: string;
+}
+
+/** Phone-number address used by supported source and destination roles. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model PhoneNumberTelephonyAddress extends TelephonyAddress {
+  type: TelephonyAddressType.phone_number;
+
+  /** E.164 phone number. */
+  @pattern("^\\+[1-9]\\d{1,14}$")
+  value: string;
+}
+
+/** Teams resource-account address supported as a source through an ACS / Teams Phone Extension connection. Destination support is validated independently and is not implied by this address variant. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TeamsResourceAccountTelephonyAddress extends TelephonyAddress {
+  type: TelephonyAddressType.teams_resource_account;
+
+  /** Non-empty Teams resource-account Entra object ID. */
+  @pattern("^(?!00000000-0000-0000-0000-000000000000$)[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  value: Azure.Core.uuid;
+}
 
 @doc("Customer-controlled configuration shared by direct and campaign-created call jobs.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJobConfiguration {
-  @doc("The recipient E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{1,14}$")
-  phone_number: string;
+  @doc("The recipient destination address. Initial origination supports phone-number destinations; the extensible model accommodates non-phone variants when provider support is introduced.")
+  destination: TelephonyAddress;
 
   @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.")
   @minLength(1)
   @maxLength(256)
   connection_name: string;
 
-  @doc("The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.")
-  @minLength(1)
-  source: TelephonyOutboundSource;
+  @doc("The authorized caller address. Twilio initially accepts a phone_number address; ACS / Teams Phone Extension initially accepts a teams_resource_account address. The connection validates support for the source role; originating does not change inbound routing.")
+  source: TelephonyAddress;
 
   @doc("An optional customer-declared purpose for placing the call.")
   @minLength(1)
@@ -1439,13 +1474,16 @@ model TelephonyCallJobConfiguration {
 @clientName("CreateTelephonyCallJobContent", "csharp")
 @example(#{
   connection_name: "telephony-twilio",
-  source: "+14255550100",
-  phone_number: "+14255550123",
+  source: #{ type: "phone_number", value: "+14255550100" },
+  destination: #{ type: "phone_number", value: "+14255550123" },
 })
 @example(#{
   connection_name: "telephony-acs",
-  source: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-  phone_number: "+14255550123",
+  source: #{
+    type: "teams_resource_account",
+    value: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  },
+  destination: #{ type: "phone_number", value: "+14255550123" },
 })
 model CreateTelephonyCallJobRequest {
   ...TelephonyCallJobConfiguration;

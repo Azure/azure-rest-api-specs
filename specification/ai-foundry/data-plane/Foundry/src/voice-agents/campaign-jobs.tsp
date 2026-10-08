@@ -27,43 +27,17 @@ union TelephonyCampaignInputValue {
   boolean,
 }
 
-/** One recipient in an inline campaign input. Each input position is a separate intended call, including repeated phone numbers. */
+/** One recipient in an inline campaign input. Each input position is a separate intended call, including repeated destinations. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignRecipient {
-  /** Recipient E.164 phone number; the provider comes from the Campaign connection. */
-  @pattern("^\\+[1-9]\\d{1,14}$")
-  phone_number: string;
+  /** Recipient destination address. Initial provider support accepts phone_number; non-phone variants can be introduced without replacing this field. Unsupported destination types fail preparation. */
+  destination: TelephonyAddress;
 
   /** Agent-declared inputs follow required/default/schema semantics. Extra scalars are dynamic variables. At most 128 keys, each 1-256 characters; values must obey the documented byte limits. */
   structured_inputs?: Record<TelephonyCampaignInputValue>;
 
   /** Earliest dispatch time for recipient scheduling. Required only when schedule.type is recipient; forbidden for other modes. */
   scheduled_at?: FoundryTimestamp;
-}
-
-/**
- * Reference to a single-file (uri_file) Dataset in the current project.
- * During preparation, an omitted version resolves to the Dataset service's latest version once.
- * Persist that concrete version before reading content; preparation and execution retries
- * use the same version/snapshot. Reads return the resolved version once available.
- * Validation identifies CSV, JSON array or JSONL from bounded content inspection, using file metadata
- * as hints. Unsupported, ambiguous or malformed content fails preparation; a parse error is not
- * grounds to reinterpret the file as another format.
- * File fields use phone_number for the required E.164 destination. Each input position is a separate intended call.
- * The fixed scheduled_at field is reserved for per-recipient scheduling and excluded from structured inputs.
- * It is required when schedule.type is recipient and forbidden for other modes. Other flat fields become structured inputs; undeclared
- * CSV cells stay strings. Duplicate CSV headers or JSON keys fail validation.
- * Files contain 1-1,000,000 recipients and at most 256 MiB decoded bytes, with 1 MiB per logical row.
- */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignDatasetReference {
-  /** Name of an existing uri_file Dataset in this project. Folder Datasets are rejected during preparation. */
-  @minLength(1)
-  name: string;
-
-  /** Omit on creation to resolve latest once during preparation. On reads, contains the concrete version after resolution, or the requested version before resolution. Remains absent while an omitted version is unresolved. */
-  @minLength(1)
-  version?: string;
 }
 
 /** Mutually exclusive ways to determine each recipient's earliest dispatch time. */
@@ -121,16 +95,32 @@ model TelephonyCampaignInputs {
   @maxLength(256)
   connection_name: string;
 
-  /** Authorized phone number or Teams Resource Account UUID, inferred from the connection category. */
-  source: TelephonyOutboundSource;
+  /** Authorized typed caller address. The connection validates which address variants it supports for the source role independently of recipient destination support. */
+  source: TelephonyAddress;
 
   /** Inline recipients, mutually exclusive with recipient_dataset. Exactly one source is required; neither, both or an empty array returns 400. Reads omit this array; retain the original submission for row correlation. Creation body limit: 1 MiB decoded UTF-8. */
   @minItems(1)
   @maxItems(100)
   recipients?: TelephonyCampaignRecipient[];
 
-  /** Dataset source, mutually exclusive with recipients. Exactly one source is required. Omitted version is resolved once during asynchronous preparation; file format is detected during validation. */
-  recipient_dataset?: TelephonyCampaignDatasetReference;
+  /**
+   * Generic same-project Dataset reference, mutually exclusive with recipients. Exactly one source is required.
+   * Dataset name and any supplied version must be non-empty; invalid references return 400 before acceptance.
+   * Campaign preparation requires a single-file (uri_file) Dataset; folder Datasets fail validation.
+   * An omitted version resolves to latest once per validation round and is persisted before content reads.
+   * Worker retries reuse that concrete version and consistent snapshot. Reads expose the requested version
+   * before resolution and concrete version afterward; an omitted unresolved version remains absent.
+   * Validation identifies CSV, JSON array or JSONL by bounded content inspection using file metadata as hints.
+   * Unsupported, ambiguous or malformed content fails preparation; parse failure does not select another format.
+   * Fixed destination_type and destination_value fields construct each recipient's TelephonyAddress.
+   * Initially destination_type is phone_number and destination_value is E.164; unsupported types fail validation.
+   * These fields and fixed scheduled_at are reserved and excluded from dynamic variables. scheduled_at is
+   * required for recipient scheduling and forbidden in other modes. Other flat fields become structured inputs;
+   * undeclared CSV cells remain strings. Duplicate headers or JSON keys fail validation.
+   * Every input position is a separate intended call, including duplicate destinations.
+   * Files contain 1-1,000,000 recipients, at most 256 MiB decoded bytes and 1 MiB per logical row.
+   */
+  recipient_dataset?: DatasetReference;
 
   /** Omit for immediate scheduling. Every mode dispatches automatically after successful preparation, subject to its schedule. */
   schedule?: TelephonyCampaignSchedule;
