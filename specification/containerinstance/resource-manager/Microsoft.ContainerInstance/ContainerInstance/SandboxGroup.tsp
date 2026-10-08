@@ -17,7 +17,6 @@ namespace Microsoft.ContainerInstance;
 /**
  * The provisioning state of a SandboxGroup resource.
  */
-@removed(Versions.v2026_08_01_preview)
 union SandboxGroupProvisioningState {
   string,
   Azure.ResourceManager.ResourceProvisioningState,
@@ -55,7 +54,6 @@ model SubnetReference {
 /**
  * The network profile for a SandboxGroup.
  */
-@removed(Versions.v2026_08_01_preview)
 model SandboxGroupNetworkProfile {
   /**
    * The list of subnets associated with the SandboxGroup.
@@ -66,7 +64,6 @@ model SandboxGroupNetworkProfile {
 /**
  * Properties of a SandboxGroup.
  */
-@removed(Versions.v2026_08_01_preview)
 model SandboxGroupProperties {
   /**
    * The status of the last operation.
@@ -90,7 +87,6 @@ model SandboxGroupProperties {
 /**
  * A SandboxGroup tracked resource.
  */
-@removed(Versions.v2026_08_01_preview)
 model SandboxGroup
   is Azure.ResourceManager.TrackedResource<SandboxGroupProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -110,7 +106,6 @@ model SandboxGroup
 /**
  * The type used for updating a SandboxGroup resource.
  */
-@removed(Versions.v2026_08_01_preview)
 model SandboxGroupTagsUpdate {
   /**
    * Resource tags.
@@ -124,7 +119,6 @@ model SandboxGroupTagsUpdate {
 /**
  * The result of getting an access token for a SandboxGroup.
  */
-@removed(Versions.v2026_08_01_preview)
 model SandboxGroupAccessToken {
   /**
    * The endpoint URL to use with the access token.
@@ -145,7 +139,6 @@ model SandboxGroupAccessToken {
 
 @armResourceOperations
 @added(Versions.v2026_06_01_preview)
-@removed(Versions.v2026_08_01_preview)
 interface SandboxGroups {
   /**
    * List SandboxGroup resources by subscription ID
@@ -220,10 +213,12 @@ interface SandboxGroups {
 );
 
 // --------------------------------------------------------------------------
-// AiAgentsGroups: renamed from SandboxGroups starting in 2026-08-01-preview.
-// The URL segment changes from `sandboxGroups` to `AiAgentsGroups`, so the
+// AiAgentsGroups: supersedes SandboxGroups starting in 2026-08-01-preview.
+// The URL segment changes from `sandboxGroups` to `aiAgentsGroups`, so the
 // resource is modeled as a fresh set of types added in the new preview
-// version rather than a symbol-only rename.
+// version rather than a symbol-only rename. SandboxGroups shipped in the
+// stable 2026-07-01 API version, so it is kept in later API versions instead
+// of being removed, which would be a breaking change for GA'd clients.
 // --------------------------------------------------------------------------
 
 /**
