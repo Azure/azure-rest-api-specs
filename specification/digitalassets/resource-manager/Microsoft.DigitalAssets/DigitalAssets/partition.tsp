@@ -20,6 +20,10 @@ model PartitionProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  @visibility(Lifecycle.Read)
+  @doc("Operational status of the partition.")
+  operationalStatus?: OperationalStatus;
 }
 
 @armResourceOperations(Partition)

@@ -766,6 +766,31 @@
         "id"
       ]
     },
+    "OperationalStatus": {
+      "type": "object",
+      "description": "Represents the operational status of the resource.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The current state of the operational status."
+        },
+        "evaluatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last status evaluation."
+        },
+        "validUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp until which the current status is considered valid."
+        }
+      },
+      "required": [
+        "status",
+        "evaluatedAt",
+        "validUntil"
+      ]
+    },
     "Partition": {
       "type": "object",
       "description": "A deployable partition of a ZkpRollup.",
@@ -809,6 +834,11 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "operationalStatus": {
+          "$ref": "#/definitions/OperationalStatus",
+          "description": "Operational status of the partition.",
           "readOnly": true
         }
       }
@@ -1096,6 +1126,11 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "operationalStatus": {
+          "$ref": "#/definitions/OperationalStatus",
+          "description": "Operational status of the rollup.",
           "readOnly": true
         }
       },

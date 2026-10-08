@@ -123,6 +123,10 @@ model ZkpRollupProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  @visibility(Lifecycle.Read)
+  @doc("Operational status of the rollup.")
+  operationalStatus?: OperationalStatus;
 }
 
 @doc("Properties that may be updated via PATCH on a ZkpRollup.")
