@@ -29,10 +29,12 @@
               {
                 "name": "stage1",
                 "maxConcurrency": "10",
+                "maxAllowedFailures": "2",
                 "groups": [
                   {
                     "name": "group-a",
                     "maxConcurrency": "2",
+                    "maxAllowedFailures": "1",
                     "memberSelector": {
                       "byLabel": "tier=frontend"
                     },
@@ -67,6 +69,7 @@
               {
                 "name": "stage2",
                 "maxConcurrency": "50%",
+                "maxAllowedFailures": "25%",
                 "memberSelector": {
                   "byLabel": "env=production"
                 },
@@ -93,6 +96,8 @@
                   "state": "Pending"
                 },
                 "name": "stage1",
+                "failureCount": 0,
+                "maxAllowedFailures": 2,
                 "maxConcurrency": 10,
                 "groups": [
                   {
@@ -100,6 +105,8 @@
                       "state": "NotStarted"
                     },
                     "name": "group-a",
+                    "failureCount": 0,
+                    "maxAllowedFailures": 1,
                     "maxConcurrency": 2,
                     "members": [
                       {
@@ -157,6 +164,8 @@
                   "state": "NotStarted"
                 },
                 "name": "stage2",
+                "failureCount": 0,
+                "maxAllowedFailures": 1,
                 "maxConcurrency": 50,
                 "groups": [],
                 "afterStageWaitStatus": {
@@ -166,7 +175,8 @@
                   "waitDurationInSeconds": 600
                 }
               }
-            ]
+            ],
+            "failureCount": 0
           }
         },
         "eTag": "\"EtagValue\""
