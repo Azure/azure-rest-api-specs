@@ -8,6 +8,7 @@ pnpm tsv specification/<service>/<project>
 pnpm tsv --all
 pnpm tsv --all specification/<service> --shard=1/3
 pnpm tsv --changed
+pnpm tsv --changed --shard=1/3
 pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
 ```
 
@@ -114,9 +115,16 @@ Changed-project validation passes the base/head commits to each project's rules.
 not scoped changed-project runs. An empty changed-project selection succeeds;
 an empty all-project selection fails.
 
-`--shard=<index>/<count>` is available only with `--all`, uses one-based indices,
-and balances the sorted project list before suppressions. Each shard requires
-its own checkout.
+`--shard=<index>/<count>` is available with `--all` or `--changed`, uses
+one-based indices, and balances the sorted project list before suppressions.
+Each shard requires its own checkout.
+
+`--github-output` (with `--changed`) writes `checking-all-specs=true|false` and
+`changed-project-count=<n>` to `$GITHUB_OUTPUT`, without validating any project.
+The PR workflow uses this to pick, per PR: a single fast `--changed` run, a
+sharded `--changed --shard` matrix when many services changed, or the sharded
+`--all` matrix for a core-file fallback - reusing the same shard mechanism for
+all three instead of running full-repo validation unsharded.
 
 `--dry-run` lists the selected projects and context without validating or cleaning
 files. It works with `--all` and `--changed`.

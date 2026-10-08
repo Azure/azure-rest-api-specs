@@ -15,6 +15,7 @@ interface RunOptions {
   dryRun?: boolean;
   verbose?: boolean;
   summaryFile?: string;
+  githubOutputFile?: string;
 }
 
 interface RunContext {
@@ -71,23 +72,36 @@ export async function runAll(
 
 export async function runChanged(
   folder: string,
-  options: RunOptions & Partial<Omit<ChangedProjectsOptions, "logger">> = {},
+  options: RunOptions & { shard?: string } & Partial<Omit<ChangedProjectsOptions, "logger">> = {},
 ): Promise<boolean> {
   const root = resolve(await getRootFolder(folder));
   const { baseCommitish = "HEAD^", headCommitish = "HEAD", ignoreCoreFiles } = options;
-  const { projects, checkingAllSpecs } = await findChangedProjects(root, {
+  const { projects: allProjects, checkingAllSpecs } = await findChangedProjects(root, {
     baseCommitish,
     headCommitish,
     ignoreCoreFiles,
     logger: new ConsoleLogger(options.verbose),
   });
-  if (projects.length === 0) {
+  if (options.githubOutputFile) {
+    await appendFile(
+      options.githubOutputFile,
+      `checking-all-specs=${checkingAllSpecs}\nchanged-project-count=${allProjects.length}\n`,
+    );
+  }
+  if (allProjects.length === 0) {
     if (checkingAllSpecs) {
       console.error("TypeSpec Validation - All did not validate any specs");
       return false;
     }
     console.log("No impacted TypeSpec projects found");
     return true;
+  }
+  let projects = allProjects;
+  if (options.shard !== undefined) {
+    projects = selectShard(projects, options.shard);
+    console.log(
+      `Shard ${options.shard}: ${projects.length} of ${allProjects.length} TypeSpec projects`,
+    );
   }
   return runProjects(root, projects, { checkingAllSpecs, baseCommitish, headCommitish }, options);
 }

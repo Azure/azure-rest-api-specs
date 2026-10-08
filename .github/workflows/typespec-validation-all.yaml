@@ -7,28 +7,6 @@ on:
       - RPSaaSMaster
       - typespec-next
 
-  pull_request:
-    branches:
-      - main
-      - RPSaaSMaster
-      - typespec-next
-    paths:
-      - .gitattributes
-      - .oxfmtrc.json
-      - pnpm-lock.yaml
-      - pnpm-workspace.yaml
-      - package.json
-      - tsconfig.base.json
-      - eng/**
-      - "!eng/common/**"
-      - specification/suppressions.yaml
-      - specification/common-types/**
-
-      # Workflow and workflow dependencies
-      - .github/actions/setup-node-install-deps/**
-      - .github/shared/**
-      - .github/workflows/typespec-validation-all.yaml
-
   schedule:
     # Run 4x/day
     - cron: "0 0,6,12,18 * * *"
