@@ -13,11 +13,7 @@ import { readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const rootDir: string = join(
-  dirname(fileURLToPath(import.meta.url)),
-  "..",
-  "..",
-);
+const rootDir: string = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const onWindows: boolean = process.platform === "win32";
 
 function run(
@@ -33,9 +29,7 @@ function run(
     let stdout = "";
     child.stdout?.on("data", (chunk) => (stdout += chunk));
     child.on("error", reject);
-    child.on("close", (code) =>
-      resolve({ code: code ?? 0, stdout: stdout.trim() }),
-    );
+    child.on("close", (code) => resolve({ code: code ?? 0, stdout: stdout.trim() }));
   });
 }
 
@@ -56,8 +50,7 @@ async function getInstalledPnpmVersion(): Promise<string | undefined> {
 }
 
 const dryRun: boolean =
-  process.argv.includes("--dry-run") ||
-  process.env.INSTALL_PNPM_DRY_RUN === "1";
+  process.argv.includes("--dry-run") || process.env.INSTALL_PNPM_DRY_RUN === "1";
 const version: string = await getPinnedPnpmVersion();
 const npmArgs: string[] = ["install", "-g", `pnpm@${version}`];
 
@@ -69,12 +62,8 @@ if ((await getInstalledPnpmVersion()) === version) {
   console.log(`Running: npm ${npmArgs.join(" ")}`);
   const { code } = await run("npm", npmArgs, false);
   if (code !== 0) {
-    console.error(
-      `install-pnpm: \`npm ${npmArgs.join(" ")}\` failed with exit code ${code}.`,
-    );
+    console.error(`install-pnpm: \`npm ${npmArgs.join(" ")}\` failed with exit code ${code}.`);
     process.exit(1);
   }
-  console.log(
-    `Installed pnpm@${version}. Next: run \`pnpm install\` from the repo root.`,
-  );
+  console.log(`Installed pnpm@${version}. Next: run \`pnpm install\` from the repo root.`);
 }

@@ -1,3 +1,4 @@
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
 /* oxlint-disable */
 // TODO: Enable oxlint, fix errors
 
@@ -5,7 +6,7 @@ import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vite
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strictEqual } from "node:assert";
-import { join } from "path";
+import { join } from "pathe";
 import { stringify } from "yaml";
 import {
   SdkTspConfigValidationRule,
@@ -1079,12 +1080,10 @@ describe("tspconfig", function () {
     const rule = isOptional
       ? new SdkTspConfigValidationRule([], c.subRules as any)
       : new SdkTspConfigValidationRule(c.subRules, []);
-    const result = await rule.execute(c.folder);
+    const result = await rule.execute(c.folder, defaultLogger);
     strictEqual(result.success, c.success); // Verify the validation result matches the expected outcome
-    if (c.success)
-      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
-    if (!c.success)
-      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation failed."), true);
+    if (c.success) strictEqual((result.diagnostics?.length ?? 0) === 0, true);
+    if (!c.success) strictEqual((result.diagnostics?.length ?? 0) > 0, true);
   });
 
   it.each([...suppressSubRuleTestCases])(`$description`, async (c: Case) => {
@@ -1104,13 +1103,11 @@ describe("tspconfig", function () {
     });
 
     const rule = new SdkTspConfigValidationRule(c.subRules, []);
-    const result = await rule.execute(c.folder);
+    const result = await rule.execute(c.folder, defaultLogger);
     const returnSuccess = c.folder.includes(".Management") ? c.success : true;
     strictEqual(result.success, returnSuccess);
-    if (c.success)
-      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
-    if (!c.success)
-      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation failed."), true);
+    if (c.success) strictEqual((result.diagnostics?.length ?? 0) === 0, true);
+    if (!c.success) strictEqual((result.diagnostics?.length ?? 0) > 0, true);
   });
 
   it.each([suppressEntireRuleTestCase])(`$description`, async (c: Case) => {
@@ -1129,9 +1126,9 @@ describe("tspconfig", function () {
     });
 
     const rule = new SdkTspConfigValidationRule(c.subRules, []);
-    const result = await rule.execute(c.folder);
+    const result = await rule.execute(c.folder, defaultLogger);
     strictEqual(result.success, true);
-    strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation skipped."), true);
+    strictEqual(result.suppressed !== undefined, true);
   });
 
   it("Tests wildcard suppression for multiple AWS connector services", async () => {
@@ -1181,12 +1178,12 @@ parameters:
         [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
         [],
       );
-      const result = await rule.execute(awsServiceFolder);
+      const result = await rule.execute(awsServiceFolder, defaultLogger);
 
       // Validate that validation passes for each service
       strictEqual(result.success, true, `Validation should pass for ${awsServiceFolder}`);
       strictEqual(
-        result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."),
+        (result.diagnostics?.length ?? 0) === 0,
         true,
         `Output should indicate validation passed for ${awsServiceFolder}`,
       );

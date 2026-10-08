@@ -5,6 +5,7 @@
 This file provides general guidance for developers that are creating or updating REST API definitions for Azure.
 
 ## Table of Contents
+
 <!--
   You should regenerate the TOC using the `markdown-toc` node package after making changes to this file.
 
@@ -16,7 +17,7 @@ This file provides general guidance for developers that are creating or updating
 - [Reporting Problems](#reporting-problems)
 - [Avoid Breaking Changes](#avoid-breaking-changes)
 - [Design Guidelines](#design-guidelines)
-  * [Exceptions for Consistency within a Service](#exceptions-for-consistency-within-a-service)
+  - [Exceptions for Consistency within a Service](#exceptions-for-consistency-within-a-service)
 - [Coding Style](#coding-style)
 - [Directory Structure](#directory-structure)
 - [Pull Requests](#pull-requests)
@@ -58,11 +59,15 @@ See the [README.md](./README.md) for a description of the directory structure to
 
 ## Pull Requests
 
+Repository label definitions are maintained through pull requests. See
+[repository labels](./eng/README.md#repository-labels) for validation and synchronization guidance.
+
 If you want to contribute to the repository, follow these steps:
-  1. Fork the repository and create a new branch for your changes.
-  2. Push the changes to the branch in your fork until the branch is ready to be integrated.
-  3. Rebase your branch if needed to incorporate any changes to **main** and submit a pull request to the **main** branch using either the "control plane" or "data plane" PR template -- the main PR template lets you select which one.
-  4. Resolve any issues flagged by the [Pull Request checks](#pull-request-checks).
+
+1. Fork the repository and create a new branch for your changes.
+2. Push the changes to the branch in your fork until the branch is ready to be integrated.
+3. Rebase your branch if needed to incorporate any changes to **main** and submit a pull request to the **main** branch using either the "control plane" or "data plane" PR template -- the main PR template lets you select which one.
+4. Resolve any issues flagged by the [Pull Request checks](#pull-request-checks).
 
 **Note:** Microsoft employees can use tooling for adding a new API version available [here](https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-specs), specially if not working with TypeSpec.
 
@@ -82,11 +87,17 @@ Every PR in this repo will go through a series of PR checks, including:
 - PoliCheck -
 - CredScan -
 - SpellCheck -
-- PrettierCheck - 
+- PrettierCheck -
 - SDK Breaking Change -
+- Contributor readiness - reports required contributor access for PRs that change `specification/`.
+
+Internal contributors need **Azure organization membership and repository write access** for the PR workflow to work correctly. Microsoft organization membership is not required by the contributor-readiness check. Without repository write access, a PR author cannot run Azure DevOps pipelines for the PR, and a reviewer cannot provide an approval that counts toward required reviews (GitHub's green approval check). The reviewer must set up or renew their own access. Other GitHub approval rules still apply.
+
+The contributor-readiness report separates access issues from their PR impact. It checks PR authors, commit authors/committers, and reviewers with an `APPROVED` review; comments and other review states do not add reviewer participants. When findings exist, a collapsed section shows contributors with verified public Azure membership and repository write access. The check does not inspect Azure DevOps roles, and private membership or unavailable lookups do not prove missing write access. This check is non-blocking; external fork contributions remain allowed. Internal contributors can [set up or renew required access](https://aka.ms/azsdk/access), then comment `/azsdk check-access` on the PR to refresh the report.
 
 When any of these PR checks fails it will post a comment to the PR with links to information on how to resolve the problem.
 There is also the [CI Fix Guide](https://aka.ms/ci-fix) that describes how to fix common PR check failures.
 
 ## Internal Contribution Guide
+
 [Create high-level Azure REST API design](https://eng.ms/docs/products/azure-developer-experience/design/api-design)

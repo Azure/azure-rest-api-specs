@@ -3,8 +3,6 @@ import { defaultLogger } from "../../shared/src/logger.ts";
 import { getIssueNumber } from "../src/issues.ts";
 import { createMockGithub, createMockLogger } from "./mocks.ts";
 
-export type GitHub = import("@actions/github-script").AsyncFunctionArguments["github"];
-
 const mockGithub = createMockGithub();
 
 describe("getIssueNumber", () => {
@@ -35,6 +33,11 @@ describe("getIssueNumber", () => {
 
     // Call function
     const result = await getIssueNumber(mockGithub, "abc123", mockLogger);
+
+    expect(mockGithub.rest.search.issuesAndPullRequests).toHaveBeenCalledWith({
+      q: "sha:abc123 type:pr state:open",
+      advanced_search: "true",
+    });
 
     // Verify result uses first PR
     expect(result.issueNumber).toBe(123);

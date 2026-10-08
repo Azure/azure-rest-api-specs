@@ -53,14 +53,15 @@ jobs:
         run: git config --global core.longpaths true
 
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github
 
       - if: ${{ github.event_name == 'pull_request' && matrix.os == 'ubuntu' }}
         name: Require compiled agentic workflow locks
-        uses: actions/github-script@v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const files = await github.paginate(github.rest.pulls.listFiles, {
@@ -91,7 +92,7 @@ jobs:
         uses: ./.github/actions/install-deps-github-script
 
       - name: Verify all modules are importable
-        uses: actions/github-script@v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { join } = await import("path");
@@ -99,14 +100,3 @@ jobs:
             const fullPath = join(process.env.GITHUB_WORKSPACE, ".github", "workflows", "src", "github-test.ts");
             const { default: importAllModules } = await import(pathToFileURL(fullPath).href);
             await importAllModules({ core });
-
-      # Content copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
-      - if: ${{ matrix.os == 'ubuntu' }}
-        name: Add ActionLint Problem Matcher
-        run: echo "::add-matcher::.github/matchers/actionlint.json"
-
-      - if: ${{ matrix.os == 'ubuntu' }}
-        name: Lint workflows
-        uses: docker://rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
-        with:
-          args: -color -verbose

@@ -449,38 +449,39 @@ void test("groups REST contract deltas by schema identity and retains affected o
    * @param {string} operationId
    * @returns {AssessmentFact}
    */
-  const operation = (comparisonRole, operationId) => /** @type {AssessmentFact} */ (
-    /** @type {unknown} */ ({
-      comparisonRole,
-      operationId,
-      apiVersion: "v1",
-      method: "get",
-      path: "/widgets",
-      responses: [
-        {
-          status: "200",
-          headers: [],
-          schema: {
-            kind: "object",
-            properties:
-              comparisonRole === "baseline"
-                ? [
-                    {
-                      name: "state",
-                      schema: {
-                        kind: "enum",
-                        type: "string",
-                        reference: "stable/v1.json#/definitions/WidgetState",
-                        values: ["Ready", "Deleted"],
+  const operation = (comparisonRole, operationId) =>
+    /** @type {AssessmentFact} */ (
+      /** @type {unknown} */ ({
+        comparisonRole,
+        operationId,
+        apiVersion: "v1",
+        method: "get",
+        path: "/widgets",
+        responses: [
+          {
+            status: "200",
+            headers: [],
+            schema: {
+              kind: "object",
+              properties:
+                comparisonRole === "baseline"
+                  ? [
+                      {
+                        name: "state",
+                        schema: {
+                          kind: "enum",
+                          type: "string",
+                          reference: "stable/v1.json#/definitions/WidgetState",
+                          values: ["Ready", "Deleted"],
+                        },
                       },
-                    },
-                  ]
-                : [],
+                    ]
+                  : [],
+            },
           },
-        },
-      ],
-    })
-  );
+        ],
+      })
+    );
   /** @type {RestFindingFixture[]} */
   const findings = ["Widgets_Get", "Widgets_List"].map((operationId, index) => ({
     id: `rest-${index}`,
