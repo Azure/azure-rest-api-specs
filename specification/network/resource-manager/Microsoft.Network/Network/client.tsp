@@ -4521,6 +4521,7 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
+/** Properties of the load balancer. */
 @clientName("LoadBalancingRuleProperties", "csharp")
 model LoadBalancingRulePropertiesWithAdditionalProperties {
   ...Common.LoadBalancingRulePropertiesFormat;
@@ -4530,6 +4531,11 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 @@alternateType(
   Common.LoadBalancingRulePropertiesFormat,
   LoadBalancingRulePropertiesWithAdditionalProperties,
+  "csharp"
+);
+
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Common.LoadBalancingRule.properties,
   "csharp"
 );
 
