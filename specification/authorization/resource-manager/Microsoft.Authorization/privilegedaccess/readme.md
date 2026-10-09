@@ -1,18 +1,11 @@
-# PrivilegedAccess migration prototype
+# PrivilegedAccess
 
 > see https://aka.ms/autorest
 
-This AutoRest configuration is an isolated packaging prototype for the published
-Microsoft.Authorization PrivilegedAccess `2026-06-01-preview` contract. The
-shared Authorization configuration remains the active generation entry point
-until service and SDK package owners approve a cutover.
-
-> [!WARNING]
-> This folder is a local migration experiment, not a production-ready service
-> onboarding. Do not merge it, publish its provisional packages, or switch
-> generation pointers to it until the service boundary, package identities,
-> operations endpoint, release automation, and single-source cutover are
-> approved.
+This AutoRest configuration defines the independently versioned
+Microsoft.Authorization PrivilegedAccess service. The `2026-06-01-preview`
+contract is moved from the legacy composite Authorization project without
+changing its REST paths, operation IDs, schemas, examples, or API version.
 
 ## Configuration
 
@@ -107,7 +100,7 @@ directive:
       subscription or resource group.
 
       Chris Stackhouse approved this tenant-level API design during ARM API
-      Modeling Office Hours on May 21, 2026. This packaging prototype preserves
+      Modeling Office Hours on May 21, 2026. This packaging migration preserves
       the reviewed tenant-level paths without changing their authorization
       contract. Runtime authorization configuration remains a separate
       owner-reviewed concern and is not characterized by this migration.
@@ -133,8 +126,8 @@ directive:
 
 ### Swagger to SDK
 
-This section is informational only for the local prototype. Package identities
-and generation pointers require SDK-owner approval before use.
+The package identities emitted by `tspconfig.yaml` are proposed names and
+require SDK-owner approval before publication.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:

@@ -26,7 +26,7 @@ using TypeSpec.Versioning;
  * Both resource types are tenant-scoped: they are addressed at the tenant, not
  * under a subscription or resource group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Migration prototype only: the published PrivilegedAccess contract does not define Microsoft.Authorization/operations at 2026-06-01-preview. The shared Authorization service currently emits that RP-level endpoint at 2021-12-01-preview. Production cutover is blocked until the RP owner confirms actual 2026-06-01-preview endpoint support; this prototype must not invent that wire contract."
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "The published PrivilegedAccess contract does not define Microsoft.Authorization/operations at 2026-06-01-preview. The legacy Authorization service emits that RP-level endpoint at 2021-12-01-preview, but runtime support for 2026-06-01-preview has not been confirmed. This migration does not invent a new operation or API-version contract; the exception requires Authorization owner review."
 @armProviderNamespace("Microsoft.Authorization")
 @service(#{ title: "AuthorizationManagementClient" })
 @versioned(Versions)
