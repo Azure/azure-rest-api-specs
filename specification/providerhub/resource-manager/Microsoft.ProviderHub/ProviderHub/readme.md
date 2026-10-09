@@ -73,6 +73,16 @@ directive:
     where:
       - $.definitions.ManifestInfo
     reason: The service exposes the manifest only for a specific environment; there is no API to enumerate manifests across environments, so a collection GET cannot be documented.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}"]
+    reason: The nested resource type registration operations return the same ResourceTypeRegistration schema as the top-level resource type registration operations, where provisioningState is already read-only.
+  - suppress: ArmResourcePropertiesBag
+    from: providerhub.json
+    where:
+      - $.definitions.ResourceTypeRegistration
+    reason: The service returns the resource type name within properties. It is modeled as read-only to document the existing response shape and is not accepted on requests.
 ```
 
 ### Tag: package-2026-02-01-preview
