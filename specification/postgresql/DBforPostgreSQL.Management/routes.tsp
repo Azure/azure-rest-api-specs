@@ -163,6 +163,7 @@ interface MajorVersionUpgradePrecheck {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The database agent is enabled or disabled through PUT and the service does not support DELETE."
 @armResourceOperations
 @added(Versions.v2026_07_01)
+@removed(Versions.v2026_10_01)
 interface DbAgents {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "The service contract requires the DBAgent_List operation ID."
   @doc("Lists the database agent configuration for a flexible server.")
