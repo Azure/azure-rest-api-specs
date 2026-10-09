@@ -85,7 +85,6 @@ model RecoveryPointSelectionProperties {
   endTime?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service accepts only the documented recovery point selection types."
 @added(Versions.v2026_11_30_preview)
 @doc("Specifies how recovery points are selected.")
 union RecoveryPointSelectionType {
@@ -100,21 +99,22 @@ union RecoveryPointSelectionType {
   @added(Versions.v2026_11_30_preview)
   @doc("Selects a specific recovery point.")
   Specific: "Specific",
+
+  string,
 }
 
 @added(Versions.v2026_11_30_preview)
 @doc("Resource inclusion or exclusion criteria recorded for a recovery job.")
 model ResourceSelectionProperties {
   @added(Versions.v2026_11_30_preview)
-  @doc("The resource selection type.")
-  selectionType: ResourceSelectionType = ResourceSelectionType.Exclusion;
+  @doc("The resource selection type. Defaults to Exclusion when omitted.")
+  selectionType?: ResourceSelectionType = ResourceSelectionType.Exclusion;
 
   @added(Versions.v2026_11_30_preview)
   @doc("The Azure resource identifiers selected for the operation.")
   resourceIds?: armResourceIdentifier[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service accepts only the documented resource selection types."
 @added(Versions.v2026_11_30_preview)
 @doc("Specifies whether listed resources are included or excluded.")
 union ResourceSelectionType {
@@ -125,6 +125,8 @@ union ResourceSelectionType {
   @added(Versions.v2026_11_30_preview)
   @doc("Excludes the listed resources.")
   Exclusion: "Exclusion",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"

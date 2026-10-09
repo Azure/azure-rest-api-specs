@@ -11498,7 +11498,7 @@
       ],
       "x-ms-enum": {
         "name": "RecoveryPointSelectionType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "TimeRange",
@@ -12874,7 +12874,7 @@
       "properties": {
         "selectionType": {
           "type": "string",
-          "description": "The resource selection type.",
+          "description": "The resource selection type. Defaults to Exclusion when omitted.",
           "default": "Exclusion",
           "enum": [
             "Inclusion",
@@ -12882,7 +12882,7 @@
           ],
           "x-ms-enum": {
             "name": "ResourceSelectionType",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "Inclusion",
@@ -12906,10 +12906,7 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         }
-      },
-      "required": [
-        "selectionType"
-      ]
+      }
     },
     "ResourceSelectionType": {
       "type": "string",
@@ -12920,7 +12917,7 @@
       ],
       "x-ms-enum": {
         "name": "ResourceSelectionType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Inclusion",
