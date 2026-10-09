@@ -7,6 +7,7 @@ import "./common.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -25,6 +26,18 @@ model Scenario is Azure.ResourceManager.ProxyResource<ScenarioProperties> {
 
 /**
  * Model that represents the properties of the scenario.
+ *
+ * A scenario's structure comes from exactly one of two sources, and they are
+ * mutually exclusive:
+ *
+ * - **Template-based**: `createdFrom` references a scenario template version,
+ *   and that template is the authoritative source for the scenario's structure.
+ *   Inline `parameters` and `actions` are not used.
+ * - **Inline**: `createdFrom` is absent, and the scenario's structure is taken
+ *   from the `parameters` and `actions` supplied in the request.
+ *
+ * Supplying neither source is rejected. This constraint cannot be expressed in
+ * the schema and is enforced at request validation.
  */
 model ScenarioProperties {
   /**
@@ -36,13 +49,14 @@ model ScenarioProperties {
   /**
    * Resource ID of the template version this scenario was created from (optional).
    */
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   createdFrom?: string;
 
   /**
-   * Version of the scenario.
+   * Version of the scenario, supplied by the author. Defaults to `1.0` when not
+   * supplied on create. This is the scenario's own version and is independent of
+   * the version of any template it was created from.
    */
-  @visibility(Lifecycle.Read)
   version?: string;
 
   /**
@@ -51,17 +65,39 @@ model ScenarioProperties {
   description?: string;
 
   /**
-   * Parameter definitions for the scenario.
+   * Parameter definitions for the scenario. Used as the scenario's parameter
+   * definitions when `createdFrom` is not supplied; not used when it is,
+   * because the referenced template is then the authoritative source for the
+   * scenario's structure.
    */
+  @madeOptional(Microsoft.Chaos.Versions.v2026_11_01)
   @identifiers(#["name"])
-  parameters: ScenarioParameter[];
+  parameters?: ScenarioParameter[];
 
   /**
-   * Array of actions that define the scenario's orchestration.
+   * Array of actions that define the scenario's orchestration. Used as the
+   * scenario's actions when `createdFrom` is not supplied; not used when it is,
+   * because the referenced template is then the authoritative source for the
+   * scenario's structure. When supplied, at least one action must be present.
    */
+  @madeOptional(Microsoft.Chaos.Versions.v2026_11_01)
   @minItems(1)
   @identifiers(#["name"])
-  actions: ScenarioAction[];
+  actions?: ScenarioAction[];
+
+  /**
+   * Scenario-wide default for how a scenario run reacts when one of its actions fails.
+   * An action that does not supply its own `failureBehavior` inherits this value; when
+   * neither is supplied the effective behavior is `Stop`.
+   *
+   * Not used when `createdFrom` is supplied, for the same reason as `parameters` and
+   * `actions`: the referenced template version is then the authoritative source for the
+   * scenario's structure, and it supplies this policy too. A value sent in the request is
+   * ignored in that case — on create the referenced template's policy is used, and on update
+   * the policy of the already persisted template is preserved.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  failureBehavior?: FailureBehavior;
 
   /**
    * The recommendation information for this scenario.
@@ -99,6 +135,61 @@ model ScenarioParameter {
    * Description of the parameter.
    */
   description?: string;
+
+  /**
+   * Format validation applied to the parameter's value, and examples of values that satisfy it.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  format?: ScenarioParameterFormat;
+}
+
+/**
+ * Model that represents the format validation applied to a scenario parameter's value.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioParameterFormat {
+  /**
+   * The built-in format the value is validated against.
+   */
+  formatType?: ParameterFormatType;
+
+  /**
+   * Human-readable examples of values that satisfy the format.
+   */
+  examples?: string[];
+}
+
+/**
+ * Enum of the built-in formats a scenario parameter's value can be validated against.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+union ParameterFormatType {
+  string,
+
+  /**
+   * The value must be an Azure resource ID.
+   */
+  AzureResourceId: "AzureResourceId",
+
+  /**
+   * The value must be an Azure region name.
+   */
+  AzureRegion: "AzureRegion",
+
+  /**
+   * The value must be an Azure availability zone.
+   */
+  AzureZone: "AzureZone",
+
+  /**
+   * The value must be an ISO 8601 duration.
+   */
+  Duration: "Duration",
+
+  /**
+   * The value must be well-formed JSON.
+   */
+  Json: "Json",
 }
 
 /**
@@ -183,6 +274,40 @@ model ScenarioAction {
    * External resource reference for the action.
    */
   externalResource?: ExternalResource;
+
+  /**
+   * Per-action override for how the scenario run reacts when this action fails. When omitted,
+   * the action inherits the scenario-level `failureBehavior`; when neither is supplied the
+   * effective behavior is `Stop`.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  failureBehavior?: FailureBehavior;
+}
+
+/**
+ * Enum of how a scenario run reacts when an action fails.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+union FailureBehavior {
+  string,
+
+  /**
+   * The action failure stops the scenario run and drives it to the `Failed` terminal state.
+   * This is the effective behavior when no `failureBehavior` is supplied.
+   */
+  Stop: "Stop",
+
+  /**
+   * The action failure is suppressed: it does not by itself end the scenario run, and the run
+   * continues with its remaining actions. Suppression affects the run's result only. It does not
+   * change dependency scheduling, which stays under the control of each action's `runAfter` —
+   * an action that should still start after a failed dependency says so there.
+   *
+   * A run that completes normally and whose action failures were all suppressed terminates as
+   * `PartiallySucceeded`. Any failure that is not suppressed still drives the run to `Failed`,
+   * and cancellation keeps its existing result.
+   */
+  Continue: "Continue",
 }
 
 /**

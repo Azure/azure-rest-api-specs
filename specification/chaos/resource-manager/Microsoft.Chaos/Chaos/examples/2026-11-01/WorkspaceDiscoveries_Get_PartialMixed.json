@@ -1,0 +1,103 @@
+{
+  "operationId": "WorkspaceDiscoveries_Get",
+  "title": "Get a partially succeeded result with classified guidance, system uncertainty, and a truncated warning sample.",
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "workspaceName": "exampleWorkspace"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveries/latest?api-version=2026-11-01",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveries/latest",
+        "name": "latest",
+        "type": "Microsoft.Chaos/workspaces/discoveries",
+        "properties": {
+          "status": "InProgress",
+          "workspaceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveries/latest",
+        "name": "latest",
+        "type": "Microsoft.Chaos/workspaces/discoveries",
+        "properties": {
+          "status": "PartiallySucceeded",
+          "workspaceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+          "resourceSnapshotId": "44444444-4444-4444-8444-444444444444",
+          "completeness": "VerificationIncomplete",
+          "coverageSummary": {
+            "scopes": {
+              "totalCount": 3,
+              "knownExpectedSetCount": 1,
+              "unknownExpectedSetCount": 2,
+              "establishedCount": 0,
+              "baselineUnknownCount": 1,
+              "verificationIncompleteCount": 1,
+              "knownPartialCount": 1
+            },
+            "resources": {
+              "expectedCount": 6,
+              "classifiedCount": 6,
+              "unclassifiedCount": 0,
+              "coveredCount": 1
+            }
+          },
+          "warnings": [
+            {
+              "scopeId": "/providers/Microsoft.Management/serviceGroups/exampleGroup",
+              "scopeKind": "ServiceGroup",
+              "reason": "RbacValidationFailed",
+              "message": "Grant the required read permission, wait for propagation, and retry discovery.",
+              "permission": {
+                "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/targets/providers/Microsoft.Compute/virtualMachines/deniedVm",
+                "missingPermissions": [
+                  "Microsoft.Compute/virtualMachines/read"
+                ],
+                "requiredPermissions": [
+                  "Microsoft.Compute/virtualMachines/read"
+                ],
+                "recommendedRoles": [
+                  "Reader"
+                ],
+                "identity": {
+                  "objectId": "55555555-5555-4555-8555-555555555555",
+                  "tenantId": "66666666-6666-4666-8666-666666666666"
+                }
+              }
+            },
+            {
+              "scopeId": "/providers/Microsoft.Management/serviceGroups/exampleGroup",
+              "scopeKind": "ServiceGroup",
+              "reason": "TargetNotFound",
+              "message": "Remove the confirmed missing resource from this service-group membership.",
+              "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/targets/providers/Microsoft.Compute/virtualMachines/missingVm"
+            },
+            {
+              "scopeId": "/providers/Microsoft.Management/serviceGroups/exampleGroup",
+              "scopeKind": "ServiceGroup",
+              "reason": "AccessIndeterminate",
+              "message": "Grant access, or remove this membership if the resource no longer exists, then retry discovery.",
+              "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/targets/providers/Microsoft.Compute/virtualMachines/indeterminateVm"
+            }
+          ],
+          "warningsTotalCount": 5,
+          "warningsTruncated": true,
+          "errors": [
+            {
+              "errorCode": "ResourceDiscoveryScopeNotCompletedError",
+              "errorMessage": "Required child enumeration could not be completed; the accepted result could not establish all attainable coverage."
+            }
+          ]
+        }
+      }
+    }
+  }
+}
