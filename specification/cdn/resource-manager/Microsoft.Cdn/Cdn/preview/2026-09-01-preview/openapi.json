@@ -13769,6 +13769,21 @@
         "value"
       ]
     },
+    "ErrorPolicyPatchPropertiesParameters": {
+      "type": "object",
+      "description": "The JSON object that contains the properties of the error policy to update with PATCH.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A human readable description of the error policy.",
+          "maxLength": 150
+        },
+        "negativeCachingConfiguration": {
+          "$ref": "#/definitions/NegativeCachingConfigurationUpdate",
+          "description": "The negative caching settings to update. Properties omitted from this object are left unchanged."
+        }
+      }
+    },
     "ErrorPolicyProperties": {
       "type": "object",
       "description": "The JSON object that contains the properties of the error policy.",
@@ -13798,23 +13813,8 @@
       "description": "The error policy JSON object required for error policy update.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ErrorPolicyUpdatePropertiesParameters",
+          "$ref": "#/definitions/ErrorPolicyPatchPropertiesParameters",
           "description": "The JSON object that contains the properties of the error policy to update."
-        }
-      }
-    },
-    "ErrorPolicyUpdatePropertiesParameters": {
-      "type": "object",
-      "description": "The JSON object that contains the properties of the error policy to create or update.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "A human readable description of the error policy.",
-          "maxLength": 150
-        },
-        "negativeCachingConfiguration": {
-          "$ref": "#/definitions/NegativeCachingConfiguration",
-          "description": "The negative caching settings applied to the error responses that trigger this policy. Omit this object to leave those responses uncached; its presence is what enables negative caching, so there is no separate switch to turn it off."
         }
       }
     },
@@ -15261,6 +15261,23 @@
       "required": [
         "cacheBehavior"
       ]
+    },
+    "NegativeCachingConfigurationUpdate": {
+      "type": "object",
+      "description": "The negative caching settings to update with PATCH.",
+      "properties": {
+        "cacheBehavior": {
+          "$ref": "#/definitions/NegativeCacheBehavior",
+          "description": "Determines how the cache lifetime of a matched error response is chosen. Omit this property to leave the existing behavior unchanged."
+        },
+        "cacheTtlInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How long a matched error response is cached, in seconds. Omit this property to leave the existing value unchanged.",
+          "minimum": 1,
+          "maximum": 604800
+        }
+      }
     },
     "Operation": {
       "type": "object",

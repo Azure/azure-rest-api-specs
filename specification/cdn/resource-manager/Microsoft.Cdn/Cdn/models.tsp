@@ -3504,6 +3504,23 @@ model ErrorPolicyUpdatePropertiesParameters {
 }
 
 /**
+ * The JSON object that contains the properties of the error policy to update with PATCH.
+ */
+@added(Versions.v2026_09_01_preview)
+model ErrorPolicyPatchPropertiesParameters {
+  /**
+   * A human readable description of the error policy.
+   */
+  @maxLength(150)
+  description?: string;
+
+  /**
+   * The negative caching settings to update. Properties omitted from this object are left unchanged.
+   */
+  negativeCachingConfiguration?: NegativeCachingConfigurationUpdate;
+}
+
+/**
  * The error policy JSON object required for error policy update.
  */
 @added(Versions.v2026_09_01_preview)
@@ -3511,7 +3528,7 @@ model ErrorPolicyUpdateParameters {
   /**
    * The JSON object that contains the properties of the error policy to update.
    */
-  properties?: ErrorPolicyUpdatePropertiesParameters;
+  properties?: ErrorPolicyPatchPropertiesParameters;
 }
 
 /**
@@ -3526,6 +3543,24 @@ model NegativeCachingConfiguration {
 
   /**
    * How long a matched error response is cached, in seconds. A numeric value is required unless cacheBehavior is HonorOrigin, which must omit it because the origin's own caching headers supply the lifetime.
+   */
+  @maxValue(604800)
+  @minValue(1)
+  cacheTtlInSeconds?: int32;
+}
+
+/**
+ * The negative caching settings to update with PATCH.
+ */
+@added(Versions.v2026_09_01_preview)
+model NegativeCachingConfigurationUpdate {
+  /**
+   * Determines how the cache lifetime of a matched error response is chosen. Omit this property to leave the existing behavior unchanged.
+   */
+  cacheBehavior?: NegativeCacheBehavior;
+
+  /**
+   * How long a matched error response is cached, in seconds. Omit this property to leave the existing value unchanged.
    */
   @maxValue(604800)
   @minValue(1)
