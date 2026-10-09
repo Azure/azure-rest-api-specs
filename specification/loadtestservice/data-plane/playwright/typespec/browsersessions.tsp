@@ -112,6 +112,10 @@ model BrowserSessionArtifacts {
   @visibility(Lifecycle.Read)
   status?: BrowserSessionArtifactsStatus;
 
+  @doc("The URI used to view the browser session recording.")
+  @visibility(Lifecycle.Read)
+  webUri?: url;
+
   @doc("The error that occurred while collecting artifacts for the browser session.")
   @visibility(Lifecycle.Read)
   error?: Azure.Core.Foundations.Error;
