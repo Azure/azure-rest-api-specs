@@ -41,6 +41,22 @@ function isAutomation(account: Account): boolean {
   return account.type === "Bot" || (account.id === 19864447 && account.login === "web-flow");
 }
 
+type UnresolvedCommitIdentity = { shas: Set<string>; roles: Set<string> };
+
+/** Groups an unresolved commit author/committer by its git email, falling back to the commit. */
+function recordUnresolvedIdentity(
+  identities: Map<string, UnresolvedCommitIdentity>,
+  email: string | null | undefined,
+  sha: string,
+  role: string,
+): void {
+  const key = email ? `email:${email}` : `commit:${sha}`;
+  const identity = identities.get(key) ?? { shas: new Set(), roles: new Set() };
+  identity.shas.add(sha);
+  identity.roles.add(role);
+  identities.set(key, identity);
+}
+
 /** Resolves a trigger to its PR; ignored commands and unmatched notification runs return null. */
 export async function resolveReadinessPullRequest(
   inputs: GitHubScriptArgs,
@@ -156,15 +172,45 @@ export async function collectReadinessParticipants(
       message: `Only ${commits.length} of ${pr.commits} commits checked (GitHub limit: 250).`,
     });
   }
+  // Commits sharing an unresolvable email (e.g. one contributor's unlinked work email
+  // across several commits) are grouped into a single finding instead of one per commit.
+  const unresolvedIdentities = new Map<string, UnresolvedCommitIdentity>();
   for (const commit of commits) {
     const author = add(commit.author, "commit author");
     const committer = add(commit.committer, "committer");
-    if (!author || !committer)
-      findings.push({
-        subject: `Commit ${commit.sha.slice(0, 12)}`,
-        unknown: true,
-        message: "Author/committer account unavailable; check the commit email.",
-      });
+    if (!author)
+      recordUnresolvedIdentity(
+        unresolvedIdentities,
+        commit.commit?.author?.email,
+        commit.sha,
+        "author",
+      );
+    if (!committer)
+      recordUnresolvedIdentity(
+        unresolvedIdentities,
+        commit.commit?.committer?.email,
+        commit.sha,
+        "committer",
+      );
+  }
+  for (const [key, identity] of unresolvedIdentities) {
+    const shas = [...identity.shas].map((sha) => sha.slice(0, 12));
+    const roleLabel =
+      identity.roles.size > 1
+        ? "Author/committer"
+        : identity.roles.has("author")
+          ? "Author"
+          : "Committer";
+    const email = key.startsWith("email:") ? key.slice("email:".length) : undefined;
+    findings.push({
+      subject: email ?? `Commit ${shas[0]}`,
+      unknown: true,
+      message: email
+        ? `${roleLabel} account unavailable; add or verify this email on a GitHub account. Affects ${
+            shas.length === 1 ? "1 commit" : `${shas.length} commits`
+          }: ${shas.join(", ")}.`
+        : "Author/committer account unavailable; check the commit email.",
+    });
   }
   const reviews = await github.paginate(github.rest.pulls.listReviews, {
     owner,
