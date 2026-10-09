@@ -1,0 +1,2451 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingTrust Management API",
+    "version": "2026-08-10-preview",
+    "description": "Microsoft.BillingTrust resource provider. Provides Assessment and Rule resources used to evaluate trust attributes (such as education-domain qualification and business verification) of a billing account.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Assessments"
+    },
+    {
+      "name": "Rules"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.BillingTrust/assessments": {
+      "get": {
+        "operationId": "Assessments_List",
+        "tags": [
+          "Assessments"
+        ],
+        "description": "List Assessment resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandCustomerDataParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssessmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List assessments for an enrollment scope": {
+            "$ref": "./examples/Assessments_Edu_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.BillingTrust/assessments/{assessmentName}": {
+      "get": {
+        "operationId": "Assessments_Get",
+        "tags": [
+          "Assessments"
+        ],
+        "description": "Get a Assessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "The name of the assessment. Selects the assessment template to run (for example `Edu` or `CommercialMarketplace`). Case-insensitive; must match a known template or the request is rejected.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "$ref": "#/parameters/ExpandCustomerDataParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Assessment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an assessment with $expandCustomerData=true (draft and the full initialValues seed returned)": {
+            "$ref": "./examples/Assessments_Edu_Get_ExpandCustomerData.json"
+          },
+          "Get the Edu assessment for an enrollment": {
+            "$ref": "./examples/Assessments_Edu_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Assessments_CreateOrUpdate",
+        "tags": [
+          "Assessments"
+        ],
+        "description": "Create or update an Assessment. Long-running operation — returns 200 (replace) or 201 (create) with the `Azure-AsyncOperation` polling header on both responses.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "The name of the assessment. Selects the assessment template to run (for example `Edu` or `CommercialMarketplace`). Case-insensitive; must match a known template or the request is rejected.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Assessment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Assessment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "201": {
+            "description": "Resource 'Assessment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Assessment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update the CommercialMarketplace assessment for a billing account": {
+            "$ref": "./examples/Assessments_CommercialMarketplace_CreateOrUpdate.json"
+          },
+          "Create or update the Edu assessment for an enrollment": {
+            "$ref": "./examples/Assessments_Edu_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Assessments_Update",
+        "tags": [
+          "Assessments"
+        ],
+        "description": "Update an assessment. The only patchable property is `draft`; evaluation/provisioning state and `error` are server-owned. Synchronous PATCH — the `draft` list is replaced wholesale (send `[]` to clear). The value is stored in service state and returned on read only under `?$expandCustomerData=true`; it is omitted from the default read response.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "The name of the assessment. Selects the assessment template to run (for example `Edu` or `CommercialMarketplace`). Case-insensitive; must match a known template or the request is rejected.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssessmentUpdateProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Assessment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an assessment's draft": {
+            "$ref": "./examples/Assessments_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Assessments_Delete",
+        "tags": [
+          "Assessments"
+        ],
+        "description": "Delete an assessment. Long-running operation — returns 202 with a polling header, then 204 once the assessment and its rules have been removed and any rule side-effects undone. Authorized to the parent resource provider; the billing-account lifecycle also removes assessments automatically when the account is gone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "The name of the assessment. Selects the assessment template to run (for example `Edu` or `CommercialMarketplace`). Case-insensitive; must match a known template or the request is rejected.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete the Edu assessment for an enrollment": {
+            "$ref": "./examples/Assessments_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.BillingTrust/assessments/{assessmentName}/listUploadToken": {
+      "post": {
+        "operationId": "Assessments_ListUploadToken",
+        "tags": [
+          "Assessments"
+        ],
+        "description": "Request a time-bound, principal-bound upload token for a supplemental / appeal document. Returns the token and a pre-assigned document id; the document's type is bound later, when it is submitted via the rule `appeal` action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "The name of the assessment. Selects the assessment template to run (for example `Edu` or `CommercialMarketplace`). Case-insensitive; must match a known template or the request is rejected.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenerateUploadTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List an upload token for supplemental documents": {
+            "$ref": "./examples/Assessments_Edu_ListUploadToken.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.BillingTrust/assessments/{assessmentName}/rules": {
+      "get": {
+        "operationId": "Rules_List",
+        "tags": [
+          "Rules"
+        ],
+        "description": "List Rule resources by Assessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "The name of the assessment. Selects the assessment template to run (for example `Edu` or `CommercialMarketplace`). Case-insensitive; must match a known template or the request is rejected.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "$ref": "#/parameters/ExpandCustomerDataParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all rules for a CommercialMarketplace assessment with expanded customer data ($expandCustomerData)": {
+            "$ref": "./examples/Rules_CommercialMarketplace_List.json"
+          },
+          "List rules for the Edu assessment": {
+            "$ref": "./examples/Rules_Edu_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.BillingTrust/assessments/{assessmentName}/rules/{ruleName}": {
+      "get": {
+        "operationId": "Rules_Get",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Get a Rule",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "The name of the assessment. Selects the assessment template to run (for example `Edu` or `CommercialMarketplace`). Case-insensitive; must match a known template or the request is rejected.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the rule. Rules are created by the service when the parent assessment is created — the available rule names are determined by the assessment template. Names start with an alphanumeric character and may contain letters, digits, underscores, and hyphens.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "$ref": "#/parameters/ExpandCustomerDataParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an eduQualification rule": {
+            "$ref": "./examples/Rules_Edu_Get.json"
+          },
+          "Get an eduQualification rule in the failed state (TenantIneligible; error code only, customer data redacted)": {
+            "$ref": "./examples/Rules_Edu_Get_Failed.json"
+          },
+          "Get an eduQualification rule in the failed state with $expandCustomerData=true (full error message and domain names)": {
+            "$ref": "./examples/Rules_Edu_Get_Failed_Expand.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Rules_CreateOrUpdate",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Create or update a Rule. Rules are created by the service when the parent\nassessment is created; they are not directly creatable by end users. Customer\nPUT calls are rejected at runtime with `OperationNotAllowed`. Use PATCH to\nmodify rule fields that the customer is authorized to change.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "The name of the assessment. Selects the assessment template to run (for example `Edu` or `CommercialMarketplace`). Case-insensitive; must match a known template or the request is rejected.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the rule. Rules are created by the service when the parent assessment is created — the available rule names are determined by the assessment template. Names start with an alphanumeric character and may contain letters, digits, underscores, and hyphens.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Rule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "201": {
+            "description": "Resource 'Rule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update an eduQualification rule": {
+            "$ref": "./examples/Rules_Edu_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Rules_Update",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Update a Rule. The PATCH body is discriminated by `kind` and must match the existing rule's kind. For `eduQualification` rules, only `supplementalDocuments` is patchable, and only when `evaluationState == actionRequired`. For `businessVerification` rules, the patchable fields are `supplementalDocuments` and `externalId`, and only when `evaluationState` is `pending` or `actionRequired`. For `uboVerification` rules, the only patchable field is `attestation`, and only when `evaluationState` is `actionRequired` or `failed`; submitting a PATCH re-triggers provider evaluation of the UBO rule and resets downstream dependent rules. The UBO `users` list and `businessOwnership` are both server-provided (`users` from the configured provider, `businessOwnership` from the billing account sold-to) — neither is patchable. `payeeVerification`, `remQualification`, and `legalContactVerification` have no patchable fields today; PATCH on those kinds is rejected with 400 InvalidParameterValue. All other field/state combinations are rejected with 400 InvalidParameterValue or 409 RuleNotActionable.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "The name of the assessment. Selects the assessment template to run (for example `Edu` or `CommercialMarketplace`). Case-insensitive; must match a known template or the request is rejected.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the rule. Rules are created by the service when the parent assessment is created — the available rule names are determined by the assessment template. Names start with an alphanumeric character and may contain letters, digits, underscores, and hyphens.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RulePatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an eduQualification rule with supplemental documents when actionRequired": {
+            "$ref": "./examples/Rules_Edu_Update.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.BillingTrust/assessments/{assessmentName}/rules/{ruleName}/appeal": {
+      "post": {
+        "operationId": "Rules_Appeal",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Appeal a rule's failed outcome by submitting a set of previously-uploaded\ndocuments (typically one per reviewer-requested document type). Accepted\nsynchronously when the rule is `appealable` and the documents are valid; the\nrule then scans the documents, forwards them to the verification provider, and\ntransitions to `underReview` asynchronously. Rejected when the rule is not\n`appealable` or a document type is not among `documentTypeCodes`.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "The name of the assessment. Selects the assessment template to run (for example `Edu` or `CommercialMarketplace`). Case-insensitive; must match a known template or the request is rejected.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the rule. Rules are created by the service when the parent assessment is created — the available rule names are determined by the assessment template. Names start with an alphanumeric character and may contain letters, digits, underscores, and hyphens.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppealRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppealResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Appeal a failed businessVerification rule in the CommercialMarketplace assessment": {
+            "$ref": "./examples/Rules_CommercialMarketplace_Appeal.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.BillingTrust/assessments/{assessmentName}/rules/{ruleName}/startIndividualVerification": {
+      "post": {
+        "operationId": "Rules_StartIndividualVerification",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Start identity verification (IDV) for one or more of a `uboVerification` rule's individuals. Each directive targets an already-resolved UBO (by its `id` from `users[].id`) and drives that individual through the provider's identity-verification flow: `generateLink` returns a link; `sendSms` also sends the link to the individual via SMS. Returns the per-individual outcome (generated link, whether an SMS was sent, and the resulting state). Valid only for `uboVerification` rules while the rule is awaiting identity verification or has failed; it does NOT re-run business verification. Rejected with 400 InvalidParameterValue (wrong kind or invalid directive) or 409 RuleNotActionable (wrong state).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "The name of the assessment. Selects the assessment template to run (for example `Edu` or `CommercialMarketplace`). Case-insensitive; must match a known template or the request is rejected.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the rule. Rules are created by the service when the parent assessment is created — the available rule names are determined by the assessment template. Names start with an alphanumeric character and may contain letters, digits, underscores, and hyphens.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartIndividualVerificationContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StartIndividualVerificationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start identity verification for UBO individuals in a PayeeProfile assessment": {
+            "$ref": "./examples/Rules_PayeeProfile_StartIndividualVerification.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingTrust/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List operations for Microsoft.BillingTrust": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AppealDocumentRef": {
+      "type": "object",
+      "description": "A document submitted as part of an appeal — a previously-uploaded document id paired with the document type it fulfils.",
+      "properties": {
+        "documentId": {
+          "type": "string",
+          "description": "The document id returned by `listUploadToken` for the uploaded file."
+        },
+        "documentTypeCode": {
+          "type": "string",
+          "description": "The document type code this upload fulfils. Must match a reviewer-requested `documentTypeCodes` entry."
+        },
+        "fileType": {
+          "type": "string",
+          "description": "The file type of the uploaded document (for example `pdf` or `docx`), so it can be forwarded to the verification provider with the correct extension."
+        },
+        "comment": {
+          "type": "string",
+          "description": "Optional customer-supplied comment for the reviewer about this document. Forwarded to the verification provider as the evidence description."
+        }
+      },
+      "required": [
+        "documentId",
+        "documentTypeCode",
+        "fileType"
+      ]
+    },
+    "AppealRequest": {
+      "type": "object",
+      "description": "Request to appeal a rule's failed outcome by submitting a set of previously-uploaded documents.",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "The documents to submit as the appeal — one per requested document type. Each references a `documentId` from `listUploadToken` and the `documentTypeCode` it fulfils.",
+          "items": {
+            "$ref": "#/definitions/AppealDocumentRef"
+          },
+          "x-ms-identifiers": [
+            "documentId"
+          ]
+        }
+      },
+      "required": [
+        "documents"
+      ]
+    },
+    "AppealResponse": {
+      "type": "object",
+      "description": "Acknowledgement of an accepted appeal submission. The rule transitions to `underReview` asynchronously once every document scans clean and forwarding begins; poll the rule for state.",
+      "properties": {
+        "acceptedDocumentIds": {
+          "type": "array",
+          "description": "The document ids accepted for this appeal.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "acceptedDocumentIds"
+      ]
+    },
+    "Assessment": {
+      "type": "object",
+      "description": "A billing trust assessment. An assessment runs a set of rules to evaluate trust attributes of a billing account. The assessment name selects the template to run (for example `Edu` or `CommercialMarketplace`); a billing account may carry one assessment per template. The name is case-insensitive and must match a known template.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssessmentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AssessmentAction": {
+      "type": "object",
+      "description": "A server-computed next-step action surfaced for an assessment, such as a redirect to an interactive verification experience. Read-only.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the action (for example, 'Interactive Vetting Experience')."
+        },
+        "actionType": {
+          "$ref": "#/definitions/AssessmentActionType",
+          "description": "The type of action."
+        },
+        "target": {
+          "type": "string",
+          "format": "uri",
+          "description": "The target the action points to (for example, an external redirect URL)."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the action is currently enabled."
+        },
+        "reason": {
+          "type": "string",
+          "description": "A human-readable reason describing why the action is surfaced."
+        }
+      },
+      "required": [
+        "name",
+        "actionType",
+        "target",
+        "enabled"
+      ]
+    },
+    "AssessmentActionType": {
+      "type": "string",
+      "description": "The type of a next-step action surfaced for an assessment. Extensible — additional action types may be added in future API versions.",
+      "enum": [
+        "redirect"
+      ],
+      "x-ms-enum": {
+        "name": "AssessmentActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Redirect",
+            "value": "redirect",
+            "description": "Redirect the user to an external experience to complete the action (e.g. an interactive verification experience)."
+          }
+        ]
+      }
+    },
+    "AssessmentListResult": {
+      "type": "object",
+      "description": "The response of a Assessment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Assessment items on this page",
+          "items": {
+            "$ref": "#/definitions/Assessment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AssessmentProperties": {
+      "type": "object",
+      "description": "The properties of an Assessment resource",
+      "properties": {
+        "evaluationState": {
+          "$ref": "#/definitions/AssessmentState",
+          "description": "The aggregated evaluation state of all active rules within this assessment",
+          "readOnly": true
+        },
+        "nextEvaluation": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The next scheduled re-evaluation of this assessment. Only present when one or more rules in this assessment have a configured recurrence.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error information when evaluationState is failed",
+          "readOnly": true
+        },
+        "initialValues": {
+          "type": "array",
+          "description": "Optional initial values applied to the rules created with this assessment.\nSet on PUT: the values seed the per-kind rules for the assessment's current\nevaluation. Re-PUT semantics depend on whether the values changed and on\nevaluation progress — see the assessment resource's PUT contract.\n\nReturned on read. Customer data within it is omitted from the default read\nresponse: for `eduQualification`, `domainNames` is returned empty, and the\nreal names are returned only under `?$expandCustomerData=true`.",
+          "items": {
+            "$ref": "#/definitions/InitialRuleValueBase"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource",
+          "readOnly": true
+        },
+        "actions": {
+          "type": "array",
+          "description": "Server-computed next-step actions for this assessment (for example, a redirect to an interactive verification experience). Populated only for assessment templates configured to surface actions; absent otherwise. Read-only.",
+          "items": {
+            "$ref": "#/definitions/AssessmentAction"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "draft": {
+          "type": "array",
+          "description": "Customer-supplied draft data about the operation, as a list of key/value pairs\n(for example, interactive-verification form fields). Set via PATCH, which replaces\nthe whole list (send `[]` to clear). Returned on read only when\n`?$expandCustomerData=true`; omitted from the default read response.\n\n**Data classification — Personally Identifiable Information (PII):** may carry\ncontact PII (for example, names). Returned only on `?$expandCustomerData=true`\nand omitted from the default read response.",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/DraftEntry"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      }
+    },
+    "AssessmentState": {
+      "type": "string",
+      "description": "The aggregated evaluation state of an assessment, derived from its rules",
+      "enum": [
+        "pending",
+        "running",
+        "actionRequired",
+        "underReview",
+        "failed",
+        "succeeded",
+        "succeededWithOverride",
+        "failedWithOverride",
+        "expired"
+      ],
+      "x-ms-enum": {
+        "name": "AssessmentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "pending",
+            "description": "One or more rules have not reached a steady state"
+          },
+          {
+            "name": "Running",
+            "value": "running",
+            "description": "One or more rules are currently being evaluated"
+          },
+          {
+            "name": "ActionRequired",
+            "value": "actionRequired",
+            "description": "One or more rules require user action"
+          },
+          {
+            "name": "UnderReview",
+            "value": "underReview",
+            "description": "One or more rules require manual review"
+          },
+          {
+            "name": "Failed",
+            "value": "failed",
+            "description": "All rules reached a steady state, and the last non-skipped rule failed"
+          },
+          {
+            "name": "Succeeded",
+            "value": "succeeded",
+            "description": "All rules reached a steady state, and the last non-skipped rule succeeded"
+          },
+          {
+            "name": "SucceededWithOverride",
+            "value": "succeededWithOverride",
+            "description": "Assessment succeeded but with a manual override applied by an authorized reviewer"
+          },
+          {
+            "name": "FailedWithOverride",
+            "value": "failedWithOverride",
+            "description": "Assessment failed but with a manual override applied by an authorized reviewer"
+          },
+          {
+            "name": "Expired",
+            "value": "expired",
+            "description": "Assessment expired and requires re-evaluation"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AssessmentUpdateProperties": {
+      "type": "object",
+      "description": "The patchable properties of an Assessment resource. `draft` is the only field a customer can update.",
+      "properties": {
+        "draft": {
+          "type": "array",
+          "description": "Customer-supplied draft data about the operation, as a list of key/value pairs (for example, interactive-verification form fields). Replaces the stored list wholesale; send `[]` to clear. Stored in service state and returned on read only under `?$expandCustomerData=true` — omitted from the default read response.",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/DraftEntry"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "BusinessOwnership": {
+      "type": "object",
+      "description": "Business ownership context for UBO verification (business name, country, registered address). Resolved by the service from the billing account sold-to at assessment creation — not a customer input and not patchable. The configured UBO provider uses these facts to start a KYB workflow.",
+      "properties": {
+        "businessName": {
+          "type": "string",
+          "description": "Legal entity / company name resolved from the billing account sold-to (`soldTo.companyName`). Used by the configured UBO provider to start a KYB workflow.",
+          "maxLength": 256
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code resolved from the billing account sold-to (`soldTo.country`); normalized to upper case before being sent to the UBO provider to start a KYB workflow.",
+          "maxLength": 2,
+          "pattern": "^[A-Za-z]{2}$"
+        },
+        "registeredAddress": {
+          "$ref": "#/definitions/BusinessRegisteredAddress",
+          "description": "Registered postal address resolved from the billing account sold-to. Used by the UBO provider for best-effort KYB matching."
+        }
+      }
+    },
+    "BusinessRegisteredAddress": {
+      "type": "object",
+      "description": "Structured registered postal address resolved from the billing account sold-to.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "State or province resolved from the billing account sold-to (`soldTo.region`).",
+          "maxLength": 100
+        },
+        "city": {
+          "type": "string",
+          "description": "City / locality resolved from the billing account sold-to (`soldTo.city`).",
+          "maxLength": 100
+        },
+        "streetName": {
+          "type": "string",
+          "description": "Street address line resolved from the billing account sold-to (`soldTo.addressLine1`).",
+          "maxLength": 256
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal / ZIP code resolved from the billing account sold-to (`soldTo.postalCode`).",
+          "maxLength": 100
+        }
+      }
+    },
+    "BusinessVerificationRulePatchProperties": {
+      "type": "object",
+      "description": "Patch body for a businessVerification rule. Settable while evaluationState is `pending` or `actionRequired`. `externalId` lets the customer disambiguate an ambiguous verification match (e.g. via DUNS); `supplementalDocuments` carries references to documents uploaded via the assessment-scoped upload-token action.",
+      "properties": {
+        "externalId": {
+          "$ref": "#/definitions/ExternalId",
+          "description": "Optional external-registry identifier (e.g. DUNS) used to disambiguate ambiguous verification matches."
+        },
+        "supplementalDocuments": {
+          "type": "array",
+          "description": "References to supplemental documents (businessVerification rules only; only settable while evaluationState is `pending` or `actionRequired`).",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RulePatchProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "businessVerification"
+    },
+    "BusinessVerificationRuleProperties": {
+      "type": "object",
+      "description": "Properties of a business verification rule. Verifies the billing account's\nbusiness identity.\n\nSold-to, legal contact, registration number, and tax ids reflect the billing\naccount's information on file and cannot be supplied by end users.",
+      "properties": {
+        "soldTo": {
+          "$ref": "#/definitions/SoldTo",
+          "description": "Sold-to identity (company, postal address, and the account's own contact email/phone) used for business verification. Populated from the billing account at the time the rule is created. Server-managed.",
+          "readOnly": true
+        },
+        "legalContact": {
+          "$ref": "#/definitions/LegalContact",
+          "description": "Legal contact person for the billing account. Populated from the billing account at the time the rule is created. Server-managed.",
+          "readOnly": true
+        },
+        "registrationNumber": {
+          "$ref": "#/definitions/RegistrationNumber",
+          "description": "Registration number context (allowed types, registration id, and whether one is required) on file for the billing account. Populated from the billing account at the time the rule is created. Server-managed.",
+          "readOnly": true
+        },
+        "taxIds": {
+          "type": "array",
+          "description": "Tax ids associated with the billing account. Populated from the billing account at the time the rule is created. Server-managed.",
+          "items": {
+            "$ref": "#/definitions/TaxId"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "externalId": {
+          "$ref": "#/definitions/ExternalId",
+          "description": "Optional external-registry identifier (e.g. DUNS) used to disambiguate verification matches. Settable on PATCH while `evaluationState` is `pending` or `actionRequired`.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "supplementalDocuments": {
+          "type": "array",
+          "description": "References to supplemental documents (businessVerification rules only; only settable while evaluationState is `pending` or `actionRequired`).",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "businessVerification"
+    },
+    "DomainEntry": {
+      "type": "object",
+      "description": "A domain entry within an education qualification rule. `domainNames` and `tenantId` are supplied on creation; `state` and `error` are returned by the service.",
+      "properties": {
+        "domainNames": {
+          "type": "array",
+          "description": "Domain names associated with a tenant.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The Microsoft Entra tenant ID owning these domains.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "#/definitions/DomainEntryState",
+          "description": "The verification state of this domain entry. Server-managed.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error detail when state is `failed` or `actionRequired`. Omitted otherwise. Server-managed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "domainNames",
+        "tenantId"
+      ]
+    },
+    "DomainEntryState": {
+      "type": "string",
+      "description": "The verification state of a single domain entry within an eduQualification rule",
+      "enum": [
+        "pending",
+        "actionRequired",
+        "failed",
+        "succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "DomainEntryState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "pending",
+            "description": "Domain verification queued or in progress"
+          },
+          {
+            "name": "ActionRequired",
+            "value": "actionRequired",
+            "description": "Customer must supply additional evidence (e.g. supplemental documents)"
+          },
+          {
+            "name": "Failed",
+            "value": "failed",
+            "description": "Domain verification failed"
+          },
+          {
+            "name": "Succeeded",
+            "value": "succeeded",
+            "description": "Domain verification succeeded"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "DomainVerificationRuleProperties": {
+      "type": "object",
+      "description": "Properties of a domain verification rule. Verifies ownership of the DNS domain associated with the billing account.",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "The DNS domain being verified. Populated from the billing account when the rule is created. Server-managed.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "domainVerification"
+    },
+    "DraftEntry": {
+      "type": "object",
+      "description": "A single key/value entry in an assessment's `draft`.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The metadata key.",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "value": {
+          "type": "string",
+          "description": "The metadata value.",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "EduInitialValue": {
+      "type": "object",
+      "description": "Initial values for an education qualification rule. Per-domain entries (`domainNames` + `tenantId`) are used to populate the rule when the assessment is created.",
+      "properties": {
+        "domains": {
+          "type": "array",
+          "description": "Per-domain entries to use when populating the education qualification rule. Only `domainNames` and `tenantId` are read from this payload; `state` and `error` on each entry are populated by the service.",
+          "items": {
+            "$ref": "#/definitions/DomainEntry"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "domains"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InitialRuleValueBase"
+        }
+      ],
+      "x-ms-discriminator-value": "eduQualification"
+    },
+    "EduQualificationRulePatchProperties": {
+      "type": "object",
+      "description": "Patch body for an eduQualification rule. Only `supplementalDocuments` is settable, and only when evaluationState == actionRequired.",
+      "properties": {
+        "supplementalDocuments": {
+          "type": "array",
+          "description": "References to supplemental documents (eduQualification rules only; only settable when evaluationState == actionRequired).",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RulePatchProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "eduQualification"
+    },
+    "EduQualificationRuleProperties": {
+      "type": "object",
+      "description": "Properties of an eduQualification rule. Verifies education-domain ownership for a billing account.",
+      "properties": {
+        "domains": {
+          "type": "array",
+          "description": "Per-tenant domain entries to verify.",
+          "items": {
+            "$ref": "#/definitions/DomainEntry"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "supplementalDocuments": {
+          "type": "array",
+          "description": "References to supplemental documents. Settable only when evaluationState is `actionRequired`.",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "eduQualification"
+    },
+    "EmailVerificationDetails": {
+      "type": "object",
+      "description": "Email verification status and timestamp for the sold-to email address, as reported by the billing account.",
+      "properties": {
+        "verificationStatus": {
+          "$ref": "#/definitions/EmailVerificationStatus",
+          "description": "Verification status of the sold-to email address. Server-managed.",
+          "readOnly": true
+        },
+        "verificationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp of the most recent sold-to email verification. Server-managed.",
+          "readOnly": true
+        }
+      }
+    },
+    "EmailVerificationStatus": {
+      "type": "string",
+      "description": "Verification status of a legal contact's email address. Extensible — additional states may be introduced.",
+      "enum": [
+        "unknown",
+        "verified",
+        "unverified"
+      ],
+      "x-ms-enum": {
+        "name": "EmailVerificationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "unknown",
+            "description": "The email verification status is not known."
+          },
+          {
+            "name": "Verified",
+            "value": "verified",
+            "description": "The email address has been verified by the user."
+          },
+          {
+            "name": "Unverified",
+            "value": "unverified",
+            "description": "The email address has not been verified by the user."
+          }
+        ]
+      }
+    },
+    "ExternalId": {
+      "type": "object",
+      "description": "External-registry identifier (e.g. DUNS) used to disambiguate ambiguous verification matches.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Identifier type. Currently `DUNS` is supported.",
+          "maxLength": 100
+        },
+        "id": {
+          "type": "string",
+          "description": "Identifier value (e.g. the DUNS number string).",
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ]
+    },
+    "GenerateUploadTokenResponse": {
+      "type": "object",
+      "description": "Response containing an upload SAS URI for supplemental document uploads",
+      "properties": {
+        "sasUri": {
+          "type": "string",
+          "format": "password",
+          "description": "The time-bound, principal-bound SAS URI to PUT the document bytes to",
+          "x-ms-secret": true
+        },
+        "documentId": {
+          "type": "string",
+          "description": "The BillingTrust-assigned document id reserved for this upload. It is server-assigned (never client-supplied); the appeal action references it."
+        }
+      },
+      "required": [
+        "sasUri",
+        "documentId"
+      ]
+    },
+    "InitialRuleValueBase": {
+      "type": "object",
+      "description": "Base type for write-only initial values supplied when creating an assessment. Polymorphic by `kind`; per-kind initial values forward into the corresponding rule.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/RuleKind",
+          "description": "The kind of rule to initialize"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "LegalContact": {
+      "type": "object",
+      "description": "Legal contact of a billing account. All fields are read-only and populated\nfrom the billing account.\n\n**Data classification — Personally Identifiable Information (PII):** carries\ncontact PII (names, email, phone). Served only on `?$expandCustomerData=true`\nand omitted from the default read response.",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "Contact first name. PII — contact.",
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "middleName": {
+          "type": "string",
+          "description": "Contact middle name. PII — contact.",
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Contact last name. PII — contact.",
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email address. PII — contact.",
+          "maxLength": 256,
+          "readOnly": true
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Contact phone number (free-form string; format not validated server-side). PII — contact.",
+          "maxLength": 50,
+          "readOnly": true
+        },
+        "emailVerificationStatus": {
+          "$ref": "#/definitions/EmailVerificationStatus",
+          "description": "Verification status of the legal contact's email address. Server-managed.",
+          "readOnly": true
+        }
+      }
+    },
+    "LegalContactVerificationRuleProperties": {
+      "type": "object",
+      "description": "Properties of a legal contact verification rule. Verifies the billing account's legal contact is configured and its email verified.",
+      "properties": {
+        "legalContact": {
+          "$ref": "#/definitions/LegalContact",
+          "description": "The billing account's legal contact. Populated from the billing account when the rule is created. Server-managed.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "legalContactVerification"
+    },
+    "PayeeVerificationRuleProperties": {
+      "type": "object",
+      "description": "Properties of a payee verification rule. Verifies the billing account's ultimate beneficial owners satisfy the regulatory requirements to be a payee. Requires a successful UBO verification rule as a prerequisite.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "payeeVerification"
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RegistrationNumber": {
+      "type": "object",
+      "description": "Registration number context for business verification.",
+      "properties": {
+        "type": {
+          "type": "array",
+          "description": "Allowed registration-number types based on the billing-account country (e.g. `VAT`, `GST`, `EIN`).",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Registration number identifier (e.g. the VAT / GST / EIN identifier string).",
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether a registration number is required for the billing account's country.",
+          "readOnly": true
+        }
+      }
+    },
+    "RemQualificationRuleProperties": {
+      "type": "object",
+      "description": "Properties of a REM qualification rule. Determines the billing account's REM (Regulated Entity / EAA Model) qualification.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "remQualification"
+    },
+    "Rule": {
+      "type": "object",
+      "description": "A rule within an assessment",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RuleProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RuleAppeal": {
+      "type": "object",
+      "description": "Appeal state for a rule that has a failed, appeal-relevant outcome (currently\n`businessVerification`). Server-managed and read-only — set by the service from\nthe verification outcome and surfaced on GET/LIST. **Absent when\nthere is no appeal context** (the rule is pending/running/succeeded); **present**\nonce the rule fails, so the presence of this object itself signals \"an appeal may\nbe relevant here.\"",
+      "properties": {
+        "appealable": {
+          "type": "boolean",
+          "description": "Whether the current failed outcome can be appealed right now (the outcome was marked appealable and appeal quota remains).",
+          "readOnly": true
+        },
+        "quota": {
+          "$ref": "#/definitions/RuleAppealQuota",
+          "description": "Appeal quota (used vs. maximum permitted).",
+          "readOnly": true
+        },
+        "comment": {
+          "type": "string",
+          "description": "The reviewer's latest action-required message explaining what is needed for an appeal.",
+          "readOnly": true
+        },
+        "documentTypeCodes": {
+          "type": "array",
+          "description": "The document type codes the reviewer requested for an appeal that the customer has not yet supplied.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "appealable",
+        "quota"
+      ]
+    },
+    "RuleAppealQuota": {
+      "type": "object",
+      "description": "Appeal quota for a rule. Server-managed.",
+      "properties": {
+        "used": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of appeals already used for this rule.",
+          "readOnly": true
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of appeals permitted.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "used",
+        "limit"
+      ]
+    },
+    "RuleKind": {
+      "type": "string",
+      "description": "The kind of rule. Additional kinds may be added in future API versions.",
+      "enum": [
+        "eduQualification",
+        "businessVerification",
+        "verifiedCredential",
+        "domainVerification",
+        "legalContactVerification",
+        "uboVerification",
+        "payeeVerification",
+        "remQualification"
+      ],
+      "x-ms-enum": {
+        "name": "RuleKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EduQualification",
+            "value": "eduQualification",
+            "description": "Education qualification rule. Verifies education-domain ownership for the billing account."
+          },
+          {
+            "name": "BusinessVerification",
+            "value": "businessVerification",
+            "description": "Business verification rule. Verifies the business identity of the billing account."
+          },
+          {
+            "name": "VerifiedCredential",
+            "value": "verifiedCredential",
+            "description": "Verified credential rule. Verifies a user's digital identity using a credential issued by a trusted identity verifier (IDV)."
+          },
+          {
+            "name": "DomainVerification",
+            "value": "domainVerification",
+            "description": "Domain verification rule. Verifies ownership of the DNS domain associated with the billing account."
+          },
+          {
+            "name": "LegalContactVerification",
+            "value": "legalContactVerification",
+            "description": "Legal contact verification rule. Verifies the billing account's legal contact has been configured and its email verified."
+          },
+          {
+            "name": "UboVerification",
+            "value": "uboVerification",
+            "description": "Ultimate beneficial owner (UBO) verification rule. Tracks and verifies the billing account's ultimate beneficial owners."
+          },
+          {
+            "name": "PayeeVerification",
+            "value": "payeeVerification",
+            "description": "Payee verification rule. Verifies the billing account's ultimate beneficial owners satisfy the regulatory requirements to be a payee."
+          },
+          {
+            "name": "RemQualification",
+            "value": "remQualification",
+            "description": "REM qualification rule. Determines the billing account's REM (Regulated Entity / EAA Model) qualification."
+          }
+        ]
+      }
+    },
+    "RuleListResult": {
+      "type": "object",
+      "description": "The response of a Rule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Rule items on this page",
+          "items": {
+            "$ref": "#/definitions/Rule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RulePatchProperties": {
+      "type": "object",
+      "description": "Patch body for updating a rule. Polymorphic by `kind` — kind-specific patchable fields live on per-kind subtypes. PATCH cannot change a rule's kind; the discriminator carries the rule's existing kind for routing only. `eduQualification`, `businessVerification`, and `uboVerification` define patchable fields today; PATCH on `payeeVerification`, `remQualification`, and `legalContactVerification` rules is rejected with 400 InvalidParameterValue (no patchable fields).",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/RuleKind",
+          "description": "The kind of rule. Acts as a discriminator for per-kind patchable fields. Must match the existing rule's kind; PATCH cannot mutate kind."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "RuleProperties": {
+      "type": "object",
+      "description": "Base properties of a Rule resource. Polymorphic by `kind` — kind-specific writable fields live on derived models.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/RuleKind",
+          "description": "The kind of rule. Acts as a discriminator for kind-specific properties.",
+          "readOnly": true
+        },
+        "evaluationState": {
+          "$ref": "#/definitions/RuleState",
+          "description": "The evaluation state of the rule. Server-managed.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error information when evaluationState is `failed` or `actionRequired`. Server-managed.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource",
+          "readOnly": true
+        },
+        "appeal": {
+          "$ref": "#/definitions/RuleAppeal",
+          "description": "Appeal state — appealability, round usage, reviewer comment, and requested document types. Server-managed; absent when the rule has no appeal-relevant (failed) outcome.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "RuleState": {
+      "type": "string",
+      "description": "The evaluation state of a rule",
+      "enum": [
+        "pending",
+        "running",
+        "actionRequired",
+        "underReview",
+        "skipped",
+        "failed",
+        "succeeded",
+        "succeededWithOverride",
+        "failedWithOverride",
+        "expired"
+      ],
+      "x-ms-enum": {
+        "name": "RuleState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "pending",
+            "description": "Rule is queued and not yet evaluated"
+          },
+          {
+            "name": "Running",
+            "value": "running",
+            "description": "Rule evaluation is in progress"
+          },
+          {
+            "name": "ActionRequired",
+            "value": "actionRequired",
+            "description": "Customer input is required to proceed"
+          },
+          {
+            "name": "UnderReview",
+            "value": "underReview",
+            "description": "Manual review is in progress"
+          },
+          {
+            "name": "Skipped",
+            "value": "skipped",
+            "description": "Rule preconditions were not met; rule was skipped"
+          },
+          {
+            "name": "Failed",
+            "value": "failed",
+            "description": "Rule evaluation failed"
+          },
+          {
+            "name": "Succeeded",
+            "value": "succeeded",
+            "description": "Rule evaluation succeeded"
+          },
+          {
+            "name": "SucceededWithOverride",
+            "value": "succeededWithOverride",
+            "description": "Rule succeeded but with a manual override applied by an authorized reviewer"
+          },
+          {
+            "name": "FailedWithOverride",
+            "value": "failedWithOverride",
+            "description": "Rule failed but with a manual override applied by an authorized reviewer"
+          },
+          {
+            "name": "Expired",
+            "value": "expired",
+            "description": "Rule expired and requires re-evaluation"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SoldTo": {
+      "type": "object",
+      "description": "Sold-to identity used for business verification (company, postal address, and\nthe billing account's own contact email / phone).\n\n**Data classification — Personally Identifiable Information (PII):** carries\ncustomer PII (email, phone, postal address). Individual field values MUST be\ntreated as PII. Served only on\n`?$expandCustomerData=true` and omitted from the default read response.",
+      "properties": {
+        "addressLine1": {
+          "type": "string",
+          "description": "First address line. PII — postal address.",
+          "maxLength": 256
+        },
+        "addressLine2": {
+          "type": "string",
+          "description": "Second address line. PII — postal address.",
+          "maxLength": 256
+        },
+        "addressLine3": {
+          "type": "string",
+          "description": "Third address line. PII — postal address.",
+          "maxLength": 256
+        },
+        "city": {
+          "type": "string",
+          "description": "City of the address. PII — postal address.",
+          "maxLength": 100
+        },
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code of the sold-to address (e.g. `US`, `IE`, `GB`). Populated from the billing account.",
+          "maxLength": 2,
+          "pattern": "^[A-Za-z]{2}$"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Company name.",
+          "maxLength": 256
+        },
+        "district": {
+          "type": "string",
+          "description": "District or sub-region. PII — postal address.",
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "Sold-to contact email address. PII — contact.",
+          "maxLength": 256,
+          "pattern": "^[^@]+@[^@]+\\.[^@]+$"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Sold-to contact phone number (free-form string; format not validated server-side). PII — contact.",
+          "maxLength": 50
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal or ZIP code. PII — postal address.",
+          "maxLength": 50
+        },
+        "region": {
+          "type": "string",
+          "description": "State, province, or region. PII — postal address.",
+          "maxLength": 100
+        },
+        "isValidAddress": {
+          "type": "boolean",
+          "description": "Whether the sold-to postal address passed billing-account address validation. Server-managed."
+        },
+        "emailVerificationDetails": {
+          "$ref": "#/definitions/EmailVerificationDetails",
+          "description": "Verification status + timestamp of the sold-to email address. Server-managed.",
+          "readOnly": true
+        }
+      }
+    },
+    "StartIndividualVerificationContent": {
+      "type": "object",
+      "description": "Request body for the `startIndividualVerification` action: one or more per-individual identity-verification (IDV) directives to run against a uboVerification rule.",
+      "properties": {
+        "individuals": {
+          "type": "array",
+          "description": "Per-individual identity-verification directives. Each entry targets an already-resolved UBO by its `id` (from `users[].id`) and drives that individual through the provider's identity-verification flow. At least one directive is required.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/UboIndividualDirective"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "individuals"
+      ]
+    },
+    "StartIndividualVerificationResult": {
+      "type": "object",
+      "description": "Result of the `startIndividualVerification` action: the per-individual outcome of each submitted directive.",
+      "properties": {
+        "individuals": {
+          "type": "array",
+          "description": "Per-individual outcomes, one per submitted directive (correlated back by `id`).",
+          "items": {
+            "$ref": "#/definitions/UboIndividualVerificationOutcome"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "individuals"
+      ]
+    },
+    "TaxId": {
+      "type": "object",
+      "description": "Tax id entry associated with the sold-to identity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Tax id identifier (e.g. the VAT / GST / EIN identifier string).",
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code the tax id is registered in.",
+          "maxLength": 2,
+          "pattern": "^[A-Za-z]{2}$",
+          "readOnly": true
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope of the tax id (e.g. `Federal`, `State`).",
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/TaxIdStatus",
+          "description": "Status of the tax id.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of tax id (e.g. `VAT`, `GST`, `EIN`). Extensible — additional types may be returned as upstream registries evolve.",
+          "maxLength": 100,
+          "readOnly": true
+        }
+      }
+    },
+    "TaxIdStatus": {
+      "type": "string",
+      "description": "Status of a tax id record.",
+      "enum": [
+        "valid",
+        "invalid",
+        "other"
+      ],
+      "x-ms-enum": {
+        "name": "TaxIdStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Valid",
+            "value": "valid",
+            "description": "The tax id has been verified and is currently valid."
+          },
+          {
+            "name": "Invalid",
+            "value": "invalid",
+            "description": "The tax id is no longer valid (e.g. expired or revoked)."
+          },
+          {
+            "name": "Other",
+            "value": "other",
+            "description": "Status could not be determined from the upstream registry."
+          }
+        ]
+      }
+    },
+    "UboAttestation": {
+      "type": "string",
+      "description": "A UBO attestation state. Extensible — additional states may be introduced.",
+      "enum": [
+        "notAttested",
+        "attested",
+        "optedOut"
+      ],
+      "x-ms-enum": {
+        "name": "UboAttestation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotAttested",
+            "value": "notAttested",
+            "description": "The user has not attested the UBO details."
+          },
+          {
+            "name": "Attested",
+            "value": "attested",
+            "description": "The user has attested the UBO details."
+          },
+          {
+            "name": "OptedOut",
+            "value": "optedOut",
+            "description": "The user has opted out of attestation."
+          }
+        ]
+      }
+    },
+    "UboIndividualAction": {
+      "type": "string",
+      "description": "The action to perform for a UBO individual directive.",
+      "enum": [
+        "generateLink",
+        "sendSms"
+      ],
+      "x-ms-enum": {
+        "name": "UboIndividualAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GenerateLink",
+            "value": "generateLink",
+            "description": "Generate an identity-verification link for the individual and return it on the user's `redirectUri`. No SMS is sent."
+          },
+          {
+            "name": "SendSms",
+            "value": "sendSms",
+            "description": "Generate an identity-verification link for the individual and send it to the individual via SMS. Requires `phoneNumber`."
+          }
+        ]
+      }
+    },
+    "UboIndividualDirective": {
+      "type": "object",
+      "description": "A directive that drives a single UBO individual (targeted by `id`) through the provider's identity-verification flow. Extensible for future flows that direct an individual to complete an action.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable identifier of the UBO to target, taken from `users[].id`. Identity verification is targeted solely by `id`."
+        },
+        "action": {
+          "$ref": "#/definitions/UboIndividualAction",
+          "description": "The action to perform for this individual."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number in international E.164 format (e.g. `+13055551234`) the identity-verification link is sent to via SMS. Required when `action` is `sendSms`; ignored otherwise."
+        }
+      },
+      "required": [
+        "id",
+        "action"
+      ]
+    },
+    "UboIndividualVerificationOutcome": {
+      "type": "object",
+      "description": "Outcome of a single UBO individual identity-verification directive.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable identifier of the targeted UBO (echoes the request `id`)."
+        },
+        "redirectUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The generated identity-verification link, when the directive produced one (`generateLink` / `sendSms`). Absent when the directive was rejected."
+        },
+        "linkGenerated": {
+          "type": "boolean",
+          "description": "Whether an identity-verification link was generated for this individual."
+        },
+        "smsSent": {
+          "type": "boolean",
+          "description": "Whether the identity-verification link was sent to this individual via SMS."
+        },
+        "state": {
+          "$ref": "#/definitions/UboUserState",
+          "description": "The individual's resulting verification state."
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error detail when this individual's directive was rejected (e.g. the reused session was not approved, or did not match the individual's name and country)."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "UboInitialValue": {
+      "type": "object",
+      "description": "Initial values for a uboVerification rule. The only customer input is `attestation`, which may be asserted on the customer's behalf at creation to confirm the UBO details have been reviewed. The UBO `users` list and business-ownership facts (business name, country, registered address) are NOT customer inputs: `users` is fetched from the configured provider and `businessOwnership` is resolved by the service from the billing account sold-to.",
+      "properties": {
+        "attestation": {
+          "$ref": "#/definitions/UboAttestation",
+          "description": "Optional. Asserted on the customer's behalf at creation to confirm the UBO details have been reviewed. Defaults to `notAttested`. When not `attested`, the downstream PayeeVerification rule fails with `NotAttested`."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InitialRuleValueBase"
+        }
+      ],
+      "x-ms-discriminator-value": "uboVerification"
+    },
+    "UboUser": {
+      "type": "object",
+      "description": "An ultimate beneficial owner (UBO) of the billing account.\n\n**Data classification — Personally Identifiable Information (PII):** carries\nowner PII (name, email, address, nationality). Served only on\n`?$expandCustomerData=true` and omitted from the default read response.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable, server-assigned identifier for this beneficial owner (an opaque GUID), unique within the rule's `users` list and stable for the lifetime of the assessment. Use it to target this individual in the `startIndividualVerification` action — it disambiguates owners that share a `fullName`. Server-managed.",
+          "readOnly": true
+        },
+        "address": {
+          "type": "string",
+          "description": "Postal address of the owner. PII. Server-provided (retrieved from the configured provider).",
+          "maxLength": 1024,
+          "readOnly": true
+        },
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country of residence. Server-provided (retrieved from the configured provider).",
+          "maxLength": 2,
+          "pattern": "^[A-Za-z]{2}$",
+          "readOnly": true
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email address. PII. Server-provided (retrieved from the configured provider).",
+          "maxLength": 256,
+          "readOnly": true
+        },
+        "fullName": {
+          "type": "string",
+          "description": "Full legal name. PII. Server-provided (retrieved from the configured provider).",
+          "maxLength": 256,
+          "readOnly": true
+        },
+        "nationality": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 nationality. Server-provided (retrieved from the configured provider).",
+          "maxLength": 2,
+          "pattern": "^[A-Za-z]{2}$",
+          "readOnly": true
+        },
+        "percentageOfOwnership": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Percentage of ownership held by this owner (0–100). Server-provided (retrieved from the configured provider).",
+          "minimum": 0,
+          "maximum": 100,
+          "readOnly": true
+        },
+        "role": {
+          "type": "string",
+          "description": "Role of this owner (e.g. `BeneficialOwner`). Server-provided (retrieved from the configured provider).",
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "redirectUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Redirect URI to the provider's experience when `state` is `actionRequired` and the owner must resolve the action externally. For UBO individuals this carries the identity-verification link generated by the `startIndividualVerification` action. Server-managed.",
+          "readOnly": true
+        },
+        "linkGenerated": {
+          "type": "boolean",
+          "description": "Whether an identity-verification link has been generated for this individual via the `startIndividualVerification` action. False/absent until a directive targets this individual. Server-managed.",
+          "readOnly": true
+        },
+        "smsSent": {
+          "type": "boolean",
+          "description": "Whether the identity-verification link was sent to this individual via SMS (a `sendSms` directive with a phone number on the `startIndividualVerification` action). False/absent when only a link was generated. Server-managed.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/UboUserState",
+          "description": "Verification state of this owner. Server-managed.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error detail when `state` is `failed` or `actionRequired`. Omitted otherwise. Server-managed.",
+          "readOnly": true
+        }
+      }
+    },
+    "UboUserState": {
+      "type": "string",
+      "description": "Verification state of a UBO user. Extensible — additional states may be introduced.",
+      "enum": [
+        "pending",
+        "actionRequired",
+        "failed",
+        "succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "UboUserState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "pending",
+            "description": "Verification queued or in progress."
+          },
+          {
+            "name": "ActionRequired",
+            "value": "actionRequired",
+            "description": "The owner must resolve an action externally (e.g. ID verification)."
+          },
+          {
+            "name": "Failed",
+            "value": "failed",
+            "description": "Verification failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "succeeded",
+            "description": "Verification succeeded."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "UboVerificationRulePatchProperties": {
+      "type": "object",
+      "description": "Patch body for a uboVerification rule. Settable while evaluationState is `actionRequired` or `failed`. The only patchable field is `attestation`; supplying it re-triggers provider evaluation of the UBO rule and resets downstream dependent rules (e.g. payeeVerification) to pending. The UBO `users` list and `businessOwnership` facts are NOT patchable — `users` is server-provided (fetched from the configured provider) and `businessOwnership` is resolved by the service from the billing account sold-to. Per-individual identity verification (IDV) is a separate operation — the `startIndividualVerification` action on the rule — and is not driven through PATCH.",
+      "properties": {
+        "attestation": {
+          "$ref": "#/definitions/UboAttestation",
+          "description": "Set the attestation state. Must be `attested` for downstream payeeVerification to proceed. When not `attested`, the downstream PayeeVerification rule fails with `NotAttested`."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RulePatchProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "uboVerification"
+    },
+    "UboVerificationRuleProperties": {
+      "type": "object",
+      "description": "Properties of an ultimate beneficial owner (UBO) verification rule. Shared rule — multiple instances over the same billing account operate on the same underlying data.",
+      "properties": {
+        "users": {
+          "type": "array",
+          "description": "The billing account's ultimate beneficial owners. Defaults to the owners retrieved from the configured provider. Server-managed.",
+          "items": {
+            "$ref": "#/definitions/UboUser"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "businessOwnership": {
+          "$ref": "#/definitions/BusinessOwnership",
+          "description": "Business ownership context (business name, country, registered address) resolved from the billing account sold-to. Server-managed.",
+          "readOnly": true
+        },
+        "allowedAttestations": {
+          "type": "array",
+          "description": "The set of attestations allowed for this rule. Server-managed.",
+          "items": {
+            "$ref": "#/definitions/UboAttestation"
+          },
+          "readOnly": true
+        },
+        "attestation": {
+          "$ref": "#/definitions/UboAttestation",
+          "description": "Whether the user has explicitly confirmed the UBO details. Server-managed.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "uboVerification"
+    },
+    "VerifiedCredentialRuleProperties": {
+      "type": "object",
+      "description": "Properties of a verified credential rule. Verifies a user's digital identity using a credential issued by a trusted identity verifier (IDV).",
+      "properties": {
+        "verificationLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link the end user follows to present their verifiable credential. Set by the verification provider after the request is created. Server-managed.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "verifiedCredential"
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "ExpandCustomerDataParameter": {
+      "name": "$expandCustomerData",
+      "in": "query",
+      "description": "When `true`, read responses (GET and LIST) include the customer-supplied data that is omitted from the default response — for a rule, the `businessVerification` sold-to identity and tax ids or the `eduQualification` domains; for an assessment, the `eduQualification` domain names within its `initialValues` and its `draft`. Defaults to `false`.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "expandCustomerData"
+    }
+  }
+}
