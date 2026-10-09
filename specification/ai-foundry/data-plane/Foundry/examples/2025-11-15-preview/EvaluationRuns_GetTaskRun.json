@@ -1,0 +1,48 @@
+{
+  "title": "Get a task run and its grading evidence",
+  "operationId": "EvaluationRuns_getTaskRun",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "runId": "evalrun_01J9Z7F6J2",
+    "taskRunId": "taskrun_01J9Z7K81M"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "taskrun_01J9Z7K81M",
+        "evaluation_run_id": "evalrun_01J9Z7F6J2",
+        "task": {
+          "id": "covered-water-damage",
+          "name": "Covered water damage",
+          "description": "Review the claim and cite the applicable policy."
+        },
+        "repetition": 2,
+        "status": "succeeded",
+        "trajectory": {
+          "format": "atif",
+          "trajectory_id": "trajectory_01J9Z7JS3A",
+          "session_id": "session_01J9Z7HZZQ",
+          "artifact_id": "artifact_01J9Z7JY5N"
+        },
+        "grader_results": [
+          {
+            "grader": "policy_citation",
+            "passed": false,
+            "explanation": "The response did not cite the expected policy section."
+          }
+        ],
+        "passed": false,
+        "artifacts": [
+          {
+            "artifact_id": "artifact_01J9Z7JY5N",
+            "type": "trajectory",
+            "media_type": "application/json"
+          }
+        ],
+        "started_at": "2026-10-09T05:40:22Z",
+        "completed_at": "2026-10-09T05:40:27Z"
+      }
+    }
+  }
+}

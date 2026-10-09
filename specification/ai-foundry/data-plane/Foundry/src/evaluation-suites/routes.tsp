@@ -2,25 +2,24 @@ import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 import "./models.tsp";
 
-namespace Azure.AI.Projects;
-using Http;
-using OpenAPI;
-using TypeSpec.Versioning;
 using Azure.Core;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
-alias ListEvaluationSuiteVersionsParameters = {};
+namespace Azure.AI.Projects;
 
+/** Filters supported by the existing suite list operation. */
 alias EvaluationSuiteFilterQueryParams = {
-  /** The agent name query parameter. */
+  /** Filter by associated Foundry agent name. */
   @query("agent_name")
-  @doc("Filter by associated Foundry agent name (from target).")
   agent_name?: string;
 };
 
-// ---------------------------------------------------------------------------
-// CRUD operations (versioned asset pattern)
-// ---------------------------------------------------------------------------
+/** Additional parameters for listing suite versions. */
+alias ListEvaluationSuiteVersionsParameters = {};
 
+/** Operations for evaluation-suite versions. */
 @removed(Versions.v1)
 interface EvaluationSuites
   extends VersionedOperations<
@@ -29,9 +28,8 @@ interface EvaluationSuites
       EvaluationSuiteFilterQueryParams,
       ListEvaluationSuiteVersionsParameters
     > {
-  // POST /evaluation_suites/{name}/versions
-  /** Creates a new evaluation suite version with an auto-incremented version identifier. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  /** Creates a suite version with a service-generated version identifier. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing suite preview operation."
   @summary("Create an evaluation suite version")
   @post
   @route("/evaluation_suites/{name}/versions")
@@ -39,20 +37,38 @@ interface EvaluationSuites
   createEvaluationSuiteVersion is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
-      @doc("The name of the evaluation suite.")
-      @path
-      name: string;
+      /** The suite name. */
+      @path name: string;
 
-      @doc("The evaluation suite version to create.")
-      @bodyRoot
-      evaluationSuiteVersion: EvaluationSuiteVersion;
+      /** The suite version to create. */
+      @bodyRoot evaluationSuiteVersion: EvaluationSuiteVersion;
     },
     Response<201> & EvaluationSuiteVersion
   >;
 
-  // POST /evaluation_suites/{name}:run
-  /** Runs an evaluation using the suite's testing criteria and dataset. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  /** Creates a task-set-based suite at an exact version, or verifies an identical existing version. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry preview operation with an exact version and feature header."
+  @summary("Create or verify an evaluation-suite version")
+  @put
+  @route("/evaluation_suites/{name}/versions/{version}")
+  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+  createOrReplaceVersion is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      /** The suite name. */
+      @path name: string;
+
+      /** The exact version identifier. */
+      @path version: string;
+
+      /** The task-set-based suite definition. */
+      @bodyRoot evaluation_suite: EvaluationSuiteVersion;
+    },
+    Foundations.ResourceCreatedOrOkResponse<EvaluationSuiteVersion>
+  >;
+
+  /** Runs a suite using the existing evaluation preview. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing suite preview operation."
   @summary("Run an evaluation suite")
   @post
   @route("/evaluation_suites/{name}:run")
@@ -60,28 +76,23 @@ interface EvaluationSuites
   run is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
-      @doc("The name of the evaluation suite.")
-      @path
-      name: string;
+      /** The suite name. */
+      @path name: string;
 
-      @doc("The run request parameters.")
-      @body
-      body: EvaluationSuiteRunRequest;
+      /** The existing preview run parameters. */
+      @body body: EvaluationSuiteRunRequest;
     },
     Response<201> & EvaluationSuiteRunResponse
   >;
 }
 
-// ---------------------------------------------------------------------------
-// Generate API (LRO jobs pattern — follows evaluator_generation_jobs)
-// ---------------------------------------------------------------------------
-
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
+/** Operations for the existing evaluation-suite generation preview. */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing OpenAI-based suite operations are not conventionally versioned."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing OpenAI-based suite operations use the shared job pattern."
 @tag("EvaluationSuiteGenerationJobs")
 @removed(Versions.v1)
 interface EvaluationSuiteGenerationJobs {
-  /** Creates an evaluation suite generation job and returns the queued job. */
+  /** Creates a job to generate an evaluation suite. */
   @summary("Create an evaluation suite generation job")
   @route("evaluation_suite_generation_jobs")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
@@ -91,7 +102,7 @@ interface EvaluationSuiteGenerationJobs {
     EvaluationSuiteGenerationJob
   >;
 
-  /** Retrieves an evaluation suite generation job by its identifier. */
+  /** Retrieves a suite-generation job and its current status. */
   @summary("Get an evaluation suite generation job")
   @route("evaluation_suite_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
@@ -100,7 +111,7 @@ interface EvaluationSuiteGenerationJobs {
     EvaluationSuiteGenerationJob
   >;
 
-  /** Lists evaluation suite generation jobs for the project. */
+  /** Lists suite-generation jobs in the project. */
   @summary("List evaluation suite generation jobs")
   @route("evaluation_suite_generation_jobs")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
@@ -109,7 +120,7 @@ interface EvaluationSuiteGenerationJobs {
     EvaluationSuiteGenerationJob
   >;
 
-  /** Requests cancellation of a running or queued evaluation suite generation job. */
+  /** Requests cancellation of a queued or running suite-generation job. */
   @summary("Cancel an evaluation suite generation job")
   @route("evaluation_suite_generation_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
@@ -118,7 +129,7 @@ interface EvaluationSuiteGenerationJobs {
     EvaluationSuiteGenerationJob
   >;
 
-  /** Deletes an evaluation suite generation job by its identifier. */
+  /** Deletes a suite-generation job. */
   @summary("Delete an evaluation suite generation job")
   @route("evaluation_suite_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)

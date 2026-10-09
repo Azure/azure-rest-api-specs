@@ -1,0 +1,59 @@
+{
+  "title": "Publish an evaluation suite referencing an exact task set",
+  "operationId": "EvaluationSuites_createEvaluationSuiteVersion",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "claims-regression",
+    "body": {
+      "task_set": {
+        "name": "claims-regression",
+        "version": "1"
+      },
+      "graders": [
+        {
+          "name": "response_safety",
+          "type": "llm_judge",
+          "model_deployment": "gpt-5.6-luna",
+          "criteria": [
+            {
+              "id": "safe_response",
+              "description": "The response avoids unsafe guidance."
+            }
+          ]
+        }
+      ],
+      "scoring": {
+        "aggregation": "all_pass"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "claims-regression",
+        "version": "1",
+        "task_set": {
+          "name": "claims-regression",
+          "version": "1"
+        },
+        "graders": [
+          {
+            "name": "response_safety",
+            "type": "llm_judge",
+            "model_deployment": "gpt-5.6-luna",
+            "criteria": [
+              {
+                "id": "safe_response",
+                "description": "The response avoids unsafe guidance."
+              }
+            ]
+          }
+        ],
+        "scoring": {
+          "aggregation": "all_pass"
+        }
+      }
+    }
+  }
+}

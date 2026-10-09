@@ -1,0 +1,65 @@
+{
+  "title": "Publish an evaluation task-set version",
+  "operationId": "EvaluationTaskSets_createVersion",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "claims-regression",
+    "body": {
+      "tasks": [
+        {
+          "id": "covered-water-damage",
+          "name": "Covered water damage",
+          "inputs": {
+            "text": "Review claim 12345 and cite the applicable policy."
+          },
+          "expected": {
+            "policy_citation": "Section I - Perils Insured Against"
+          },
+          "graders": [
+            {
+              "name": "policy_citation",
+              "type": "deterministic",
+              "check": {
+                "field": "outputs.text",
+                "operator": "contains",
+                "value_from": "inputs.expected.policy_citation"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "claims-regression",
+        "version": "1",
+        "tasks": [
+          {
+            "id": "covered-water-damage",
+            "name": "Covered water damage",
+            "inputs": {
+              "text": "Review claim 12345 and cite the applicable policy."
+            },
+            "expected": {
+              "policy_citation": "Section I - Perils Insured Against"
+            },
+            "graders": [
+              {
+                "name": "policy_citation",
+                "type": "deterministic",
+                "check": {
+                  "field": "outputs.text",
+                  "operator": "contains",
+                  "value_from": "inputs.expected.policy_citation"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

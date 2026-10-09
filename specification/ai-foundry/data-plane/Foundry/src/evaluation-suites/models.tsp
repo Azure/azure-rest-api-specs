@@ -2,130 +2,124 @@ import "@typespec/openapi";
 
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
+import "../task-sets/models.tsp";
 import "../openai/evaluations/models.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
+using TypeSpec.Rest;
 
 namespace Azure.AI.Projects;
 
-const EvaluationSuitesRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
-};
+const EvaluationSuitesRequiredPreviews = EvaluationServiceV2RequiredPreviews;
+const EvaluationSuiteGenerationJobsRequiredPreviews = EvaluationServiceV2RequiredPreviews;
 
-const EvaluationSuiteGenerationJobsRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
-};
-
-// ---------------------------------------------------------------------------
-// Enums
-// ---------------------------------------------------------------------------
-
-@doc("The subtype of an evaluation suite.")
+/** Subtypes of the existing evaluation-suite preview. */
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 union EvaluationSuiteSubtype {
   string,
 
-  @doc("Default suite type.")
+  /** A standard evaluation suite. */
   default: "default",
 
-  @doc("Benchmark suite.")
+  /** A benchmark evaluation suite. */
   benchmark: "benchmark",
 }
 
-@doc("The category of evaluator generation.")
+/** Categories supported by the existing suite-generation preview. */
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 union EvaluationSuiteGenerationCategory {
   string,
 
-  @doc("Quality-focused rubric criteria.")
+  /** Generate quality criteria. */
   quality: "quality",
 
-  @doc("Safety-focused policy criteria.")
+  /** Generate safety criteria. */
   safety: "safety",
 }
 
-@doc("The data generation type.")
+/** Types of data supported by the existing suite-generation preview. */
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 union EvaluationDataGenerationType {
   string,
 
-  @doc("Simple question and answer generation.")
+  /** Generate question-and-answer data. */
   simple_qna: "simple_qna",
 
-  @doc("Traces-based generation.")
+  /** Generate data from traces. */
   traces: "traces",
 
-  @doc("Tool use generation.")
+  /** Generate tool-use data. */
   tool_use: "tool_use",
 
-  @doc("Task-based generation.")
+  /** Generate task-based data. */
   task: "task",
 }
 
-// ---------------------------------------------------------------------------
-// Child models
-// ---------------------------------------------------------------------------
-
-@doc("""
-  Reference to a dataset by name and version.
-  """)
+/** A reference to an existing evaluation dataset. */
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationDatasetReference {
-  @doc("Dataset name.")
+  /** The dataset name. */
   name: string;
 
-  @doc("Dataset version. If not provided, resolves to the latest version.")
+  /** The dataset version; the latest version is used when omitted. */
   version?: string;
 
-  @doc("""
-    Name of the schema file within the dataset's blob folder (e.g., "a3f2b1c4_schema.json").
-    Optional — if not provided, schema is inferred at runtime from the data.
-    Only applicable for uri_folder datasets.
-    """)
+  /** The schema filename in a folder dataset. */
   schema_file_name?: string;
 }
 
-// ---------------------------------------------------------------------------
-// CRUD Resource model
-// ---------------------------------------------------------------------------
+/** A reference to an exact task-set version. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvaluationTaskSetReference {
+  /** The task-set name. */
+  name: string;
 
-@doc("""
-  An evaluation suite bundles testing criteria — an optional dataset, one or more
-  evaluator configs with thresholds and init params — into a reusable, named artifact that
-  can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
-  """)
+  /** The exact task-set version. */
+  version: string;
+}
+
+/** A reference to an exact evaluation-suite version. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvaluationSuiteReference {
+  /** The evaluation-suite name. */
+  name: string;
+
+  /** The exact evaluation-suite version. */
+  version: string;
+}
+
+/** The supported evaluation-suite aggregation rules. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+union EvaluationAggregation {
+  string,
+
+  /** A task run passes only when every applicable grader passes. */
+  all_pass: "all_pass",
+}
+
+/** Evaluation-suite scoring configuration. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvaluationScoringConfiguration {
+  /** The rule used to combine applicable grader verdicts. */
+  aggregation: EvaluationAggregation.all_pass;
+}
+
+/** An immutable version of an evaluation suite. */
 @resource("evaluation_suites")
-@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvaluationSuiteVersion {
-  @doc("""
-    Human-readable display name.
-    Does not need to be unique. Shown in Foundry portal list views and eval reports.
-    """)
+  /** The suite display name. */
   display_name?: string;
 
-  @doc("""
-    Subtype of the evaluation suite.
-    """)
+  /** The subtype used by existing suites. */
   subtype?: EvaluationSuiteSubtype;
 
-  @doc("""
-    Dataset reference for evaluation.
-    Optional — omit for evaluator-only suites where data comes from
-    live production traces or is provided at run time.
-    The referenced dataset must exist in the project's dataset registry.
-    """)
+  /** The dataset used by existing suites. */
   dataset?: EvaluationDatasetReference;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
-  @doc("""
-    Testing criteria — the evaluator configurations for this suite.
-    Supports all grader types: azure_ai_evaluator, string_check, label_model,
-    score_model, text_similarity, python, etc.
-    At least one entry is required.
-    """)
-  @minItems(1)
-  testing_criteria: (
+  /** Existing preview grading configuration; not used for task-set-based suites. */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Existing preview grader variants remain unchanged."
+  testing_criteria?: (
     | OpenAI.EvalGraderLabelModel
     | OpenAI.EvalGraderStringCheck
     | OpenAI.EvalGraderTextSimilarity
@@ -133,246 +127,216 @@ model EvaluationSuiteVersion {
     | OpenAI.EvalGraderScoreModel
     | TestingCriterionAzureAIEvaluator)[];
 
-  @doc("""
-    Target for this evaluation suite. Uses the existing FoundryEvaluationTarget discriminated type
-    from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
-    Optional — allows suites to exist without a target.
-    """)
+  /** The target used by existing suites. */
   target?: FoundryEvaluationTarget;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
-  @doc("""
-    How to send dataset rows to the target (agent or model).
-    Supports template type (prompt with column placeholders) and
-    item_reference type (column containing pre-built messages).
-    """)
+  /** The message mapping used by existing suites. */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Existing preview input-message variants remain unchanged."
   input_messages?:
     | OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate
     | OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference;
 
-  @doc("""
-    Default evaluation level for this suite. Can be overridden at run time.
-    """)
+  /** The evaluation level used by existing suites. */
   evaluation_level?: EvaluationLevel;
 
-  @doc("The name of the resource.")
+  /** The evaluation-suite name. */
   @visibility(Lifecycle.Read)
   @key
   name: string;
 
-  @doc("The version of the resource.")
+  /** The immutable evaluation-suite version. */
   @visibility(Lifecycle.Read)
   version: string;
 
-  @doc("The asset description text.")
+  /** The evaluation-suite description. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   description?: string;
 
-  @doc("Tag dictionary. Tags can be added, removed, and updated.")
+  /** The exact task-set version evaluated by an Eval 2.0 suite. Required when using evaluation_runs. */
+  task_set?: EvaluationTaskSetReference;
+
+  /** Suite-level graders applied to every task run. */
+  graders?: InlineEvaluationGrader[];
+
+  /** The scoring rule applied to task runs. Required when using evaluation_runs. */
+  scoring?: EvaluationScoringConfiguration;
+
+  /** User-defined tags. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
 
-// ---------------------------------------------------------------------------
-// Run API models
-// ---------------------------------------------------------------------------
-
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("Request body for running an evaluation from a suite.")
+/** Request to run a suite through the existing evaluation preview. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing preview model name remains stable."
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteRunRequest {
-  @doc("Name for the evaluation. Default: '{suiteName}-runs'.")
+  /** The created evaluation name. */
   evaluation_name?: string;
 
-  @doc("Evaluation suite version to run. Default: latest.")
+  /** The suite version to run; defaults to the latest version. */
   evaluation_suite_version?: string;
 
-  @doc("Overrides the suite's default evaluation level. If omitted, uses the level from the suite.")
+  /** The evaluation level used for this run. */
   evaluation_level?: EvaluationLevel;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("Response from running an evaluation suite.")
-@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
-model EvaluationSuiteRunResponse {
-  @doc("The evaluation suite name used.")
-  evaluation_suite_name: string;
-
-  @doc("The evaluation suite version resolved.")
-  evaluation_suite_version: string;
-
-  @doc("The run results. Currently a single-element array; will support multiple runs in the future.")
-  results: EvaluationSuiteRunResult[];
-}
-
-@doc("Result of a single evaluation run within a suite execution.")
+/** One run started through the existing suite preview. */
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteRunResult {
-  @doc("The evaluation ID created.")
+  /** The created evaluation identifier. */
   eval_id: string;
 
-  @doc("The eval run ID created.")
+  /** The created run identifier. */
   run_id: string;
 
-  @doc("Status of the run.")
+  /** The run execution status. */
   status: JobStatus;
 
-  @doc("Timestamp when the run was created.")
+  /** The run creation time in Unix seconds. */
   created_at: FoundryTimestamp;
 }
 
-// ---------------------------------------------------------------------------
-// Generate API (LRO) models
-// ---------------------------------------------------------------------------
-
-// Source types use shared JobSource shapes from common/models.tsp via spread,
-// with an evaluation-suite-specific discriminated base (same pattern as
-// DataGenerationJobSource).
-
-@doc("The supported source types for evaluation suite generation jobs.")
+/** Response to a run request on an existing preview suite. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing preview model name remains stable."
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
+model EvaluationSuiteRunResponse {
+  /** The suite name used. */
+  evaluation_suite_name: string;
+
+  /** The suite version resolved. */
+  evaluation_suite_version: string;
+
+  /** The runs started by the request. */
+  results: EvaluationSuiteRunResult[];
+}
+
+/** Source types for existing suite-generation jobs. */
+@extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
 union EvaluationSuiteJobSourceType {
   string,
 
-  @doc("Prompt source — inline text provided by the user.")
+  /** User-provided text. */
   prompt: "prompt",
 
-  @doc("Agent source — references an agent.")
+  /** A Foundry agent. */
   agent: "agent",
 
-  @doc("Traces source — conversation traces from Application Insights.")
+  /** Application Insights traces. */
   traces: "traces",
 
-  @doc("Dataset source — reference to a dataset.")
+  /** An existing dataset. */
   dataset: "dataset",
 }
 
-@doc("The base source model for evaluation suite generation jobs. Polymorphic over `type`.")
+/** Shared source properties for suite-generation jobs. */
 @discriminator("type")
-@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
+@extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
 model EvaluationSuiteJobSource {
-  @doc("The type of source.")
+  /** The source type. */
   type: EvaluationSuiteJobSourceType;
 
   ...JobSourceDescription;
 }
 
-@doc("Prompt source for evaluation suite generation jobs — inline text provided by the user.")
-@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
+/** Text source for a suite-generation job. */
+@extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
 model PromptEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
   ...PromptJobSource;
 }
 
-@doc("Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from.")
-@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
+/** Agent source for a suite-generation job. */
+@extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
 model AgentEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
   ...AgentJobSource;
 }
 
-@doc("Traces source for evaluation suite generation jobs — conversation traces from Application Insights.")
-@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
+/** Trace source for a suite-generation job. */
+@extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
 model TracesEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
   ...TracesJobSource;
 }
 
-@doc("Dataset source for evaluation suite generation jobs — reference to a dataset.")
-@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
+/** Dataset source for a suite-generation job. */
+@extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
 model DatasetEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
   ...DatasetJobSource;
 }
 
-@doc("Caller-supplied inputs for an evaluation suite generation job.")
-@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
-model EvaluationSuiteGenerationJobInputs {
-  @doc("The evaluation suite name to create.")
-  evaluation_suite_name: string;
-
-  @doc("Source materials for generation — agent context, prompts, traces, or datasets.")
-  sources: EvaluationSuiteJobSource[];
-
-  @doc("The LLM model to use for rubric and data generation (e.g., 'gpt-4o').")
-  generation_model: string;
-
-  @doc("Category determines the generation focus. Default: quality.")
-  category?: EvaluationSuiteGenerationCategory = EvaluationSuiteGenerationCategory.quality;
-
-  @doc("""
-    Optional initialization parameters applied to all generated evaluators.
-    For example, deployment_name for LLM judge model, default threshold.
-    """)
-  initialization_parameters?: Record<unknown>;
-
-  @doc("""
-    Data generation options. Controls how the evaluation dataset is generated.
-    If omitted, defaults are used (simple_qna, 100 max_samples).
-    """)
-  data_generation_options?: EvaluationSuiteDataGenerationOptions;
-
-  @doc("""
-    Target for the generated suite. Stored on the suite so it can be run
-    immediately after generation completes.
-    Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
-    """)
-  target?: FoundryEvaluationTarget;
-
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
-  @doc("""
-    How to send dataset rows to the target.
-    If omitted and target is provided, defaults to a template using item.query.
-    """)
-  input_messages?:
-    | OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate
-    | OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference;
-
-  @doc("""
-    Evaluation level for the generated suite.
-    Default: turn (single-turn evaluation).
-    Use conversation for multi-turn evaluation.
-    """)
-  evaluation_level?: EvaluationLevel;
-}
-
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("Options for dataset generation within an evaluation suite generation job.")
-@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
+/** Data-generation settings for the existing suite-generation job. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Existing preview model name remains stable."
+@extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
 model EvaluationSuiteDataGenerationOptions {
-  @doc("The data generation type. Defaults to 'simple_qna' if not specified.")
+  /** The generation type; defaults to simple_qna. */
   type?: EvaluationDataGenerationType;
 
-  @doc("Maximum number of samples to generate. Valid range: 15-1000.")
+  /** The maximum number of samples. */
   @minValue(15)
   @maxValue(1000)
   max_samples?: int32;
 }
 
-@doc("Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.")
-@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
+/** Caller inputs for a suite-generation job. */
+@extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
+model EvaluationSuiteGenerationJobInputs {
+  /** The name of the suite to create. */
+  evaluation_suite_name: string;
+
+  /** Sources used for data and criteria generation. */
+  sources: EvaluationSuiteJobSource[];
+
+  /** The model deployment used for generation. */
+  generation_model: string;
+
+  /** The type of criteria to generate. */
+  category?: EvaluationSuiteGenerationCategory = EvaluationSuiteGenerationCategory.quality;
+
+  /** Evaluator initialization options. */
+  initialization_parameters?: Record<unknown>;
+
+  /** Options for generating data samples. */
+  data_generation_options?: EvaluationSuiteDataGenerationOptions;
+
+  /** The target of the generated suite. */
+  target?: FoundryEvaluationTarget;
+
+  /** The generated suite message mapping. */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Existing preview input-message variants remain unchanged."
+  input_messages?:
+    | OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate
+    | OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference;
+
+  /** The evaluation level of the generated suite. */
+  evaluation_level?: EvaluationLevel;
+}
+
+/** Token use for a suite-generation job. */
+@extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
+model EvaluationSuiteGenerationTokenUsage {
+  /** The number of input tokens. */
+  input_tokens?: int64;
+
+  /** The number of output tokens. */
+  output_tokens?: int64;
+
+  /** The total number of tokens. */
+  total_tokens?: int64;
+}
+
+/** An existing preview job that generates an evaluation suite. */
+@extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
 model EvaluationSuiteGenerationJob is JobLike<
   EvaluationSuiteVersion,
   EvaluationSuiteGenerationJobInputs
 > {
-  @doc("The timestamp when the job was created, represented in Unix time.")
+  /** The creation time in Unix seconds. */
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
 
-  @doc("The timestamp when the job finished, represented in Unix time.")
+  /** The completion time in Unix seconds. */
   @visibility(Lifecycle.Read)
   finished_at?: FoundryTimestamp;
 
-  @doc("Token consumption summary. Populated on terminal states.")
+  /** Token use on terminal states. */
   @visibility(Lifecycle.Read)
   usage?: EvaluationSuiteGenerationTokenUsage;
-}
-
-@doc("Token usage summary for an evaluation suite generation job.")
-@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
-model EvaluationSuiteGenerationTokenUsage {
-  @doc("Number of input tokens consumed.")
-  input_tokens?: int64;
-
-  @doc("Number of output tokens consumed.")
-  output_tokens?: int64;
-
-  @doc("Total tokens consumed.")
-  total_tokens?: int64;
 }

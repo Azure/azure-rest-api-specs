@@ -13,7 +13,9 @@ tags:
   - name: Agent Conversations
   - name: Agent Telephony
   - name: AgentServer Task Storage
+  - name: EvaluationTaskSets
   - name: EvaluationSuiteGenerationJobs
+  - name: EvaluationRuns
   - name: Responses Root
     description: Responses
   - name: Responses
@@ -7629,11 +7631,627 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Deployments
+  /evaluation_runs:
+    post:
+      operationId: EvaluationRuns_create
+      summary: Create an evaluation run
+      description: Creates and starts an evaluation run.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Operation-Location:
+              required: true
+              description: URL to poll for the job status.
+              schema:
+                type: string
+            Location:
+              required: true
+              description: URL of the created job resource.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationRun'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationRuns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationRunCreateContent'
+        description: The immutable evaluation-run inputs.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    get:
+      operationId: EvaluationRuns_list
+      summary: List evaluation runs
+      description: Lists evaluation runs in the project.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EvaluationRun'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationRuns
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /evaluation_runs/{runId}:
+    get:
+      operationId: EvaluationRuns_get
+      summary: Get an evaluation run
+      description: Retrieves an evaluation run and its current status.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: runId
+          in: path
+          required: true
+          description: The evaluation-run identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Retry-After:
+              required: false
+              description: Recommended number of seconds to wait before polling again.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationRun'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationRuns
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    delete:
+      operationId: EvaluationRuns_delete
+      summary: Delete an evaluation run
+      description: Deletes a terminal evaluation-run record.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: runId
+          in: path
+          required: true
+          description: The evaluation-run identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationRuns
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /evaluation_runs/{runId}/task_runs:
+    get:
+      operationId: EvaluationRuns_listTaskRuns
+      summary: List evaluation task runs
+      description: Lists task runs contained by an evaluation run.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: runId
+          in: path
+          required: true
+          description: The parent evaluation-run identifier.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/EvaluationTaskRunListParameters.status'
+        - $ref: '#/components/parameters/EvaluationTaskRunListParameters.passed'
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EvaluationTaskRun'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationRuns
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /evaluation_runs/{runId}/task_runs/{taskRunId}:
+    get:
+      operationId: EvaluationRuns_getTaskRun
+      summary: Get an evaluation task run
+      description: Retrieves one task run and its retained evidence metadata.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: runId
+          in: path
+          required: true
+          description: The parent evaluation-run identifier.
+          schema:
+            type: string
+        - name: taskRunId
+          in: path
+          required: true
+          description: The task-run identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationTaskRun'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationRuns
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /evaluation_runs/{runId}/task_runs/{taskRunId}/artifacts/{artifactId}/content:
+    get:
+      operationId: EvaluationRuns_downloadTaskRunArtifact
+      summary: Download an evaluation task-run artifact
+      description: Streams retained artifact content for a task run.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: runId
+          in: path
+          required: true
+          description: The parent evaluation-run identifier.
+          schema:
+            type: string
+        - name: taskRunId
+          in: path
+          required: true
+          description: The task-run identifier.
+          schema:
+            type: string
+        - name: artifactId
+          in: path
+          required: true
+          description: The artifact identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            '*/*':
+              schema:
+                contentMediaType: '*/*'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationRuns
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /evaluation_runs/{runId}/task_runs/{taskRunId}/trajectory:
+    get:
+      operationId: EvaluationRuns_getTaskRunTrajectory
+      summary: Get an evaluation task-run trajectory
+      description: Retrieves the normalized ATIF trajectory for a task run.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: runId
+          in: path
+          required: true
+          description: The parent evaluation-run identifier.
+          schema:
+            type: string
+        - name: taskRunId
+          in: path
+          required: true
+          description: The task-run identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationTrajectory'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationRuns
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /evaluation_runs/{runId}:cancel:
+    post:
+      operationId: EvaluationRuns_cancel
+      summary: Cancel an evaluation run
+      description: Requests cancellation of a queued or in-progress evaluation run.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: runId
+          in: path
+          required: true
+          description: The evaluation-run identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationRun'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationRuns
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
   /evaluation_suite_generation_jobs:
     post:
       operationId: EvaluationSuiteGenerationJobs_create
       summary: Create an evaluation suite generation job
-      description: Creates an evaluation suite generation job and returns the queued job.
+      description: Creates a job to generate an evaluation suite.
       parameters:
         - name: Foundry-Features
           in: header
@@ -7701,7 +8319,7 @@ paths:
     get:
       operationId: EvaluationSuiteGenerationJobs_list
       summary: List evaluation suite generation jobs
-      description: Lists evaluation suite generation jobs for the project.
+      description: Lists suite-generation jobs in the project.
       parameters:
         - name: Foundry-Features
           in: header
@@ -7805,7 +8423,7 @@ paths:
     get:
       operationId: EvaluationSuiteGenerationJobs_get
       summary: Get an evaluation suite generation job
-      description: Retrieves an evaluation suite generation job by its identifier.
+      description: Retrieves a suite-generation job and its current status.
       parameters:
         - name: Foundry-Features
           in: header
@@ -7862,7 +8480,7 @@ paths:
     delete:
       operationId: EvaluationSuiteGenerationJobs_delete
       summary: Delete an evaluation suite generation job
-      description: Deletes an evaluation suite generation job by its identifier.
+      description: Deletes a suite-generation job.
       parameters:
         - name: Foundry-Features
           in: header
@@ -7909,7 +8527,7 @@ paths:
     post:
       operationId: EvaluationSuiteGenerationJobs_cancel
       summary: Cancel an evaluation suite generation job
-      description: Requests cancellation of a running or queued evaluation suite generation job.
+      description: Requests cancellation of a queued or running suite-generation job.
       parameters:
         - name: Foundry-Features
           in: header
@@ -7966,7 +8584,7 @@ paths:
         - name: agent_name
           in: query
           required: false
-          description: Filter by associated Foundry agent name (from target).
+          description: Filter by associated Foundry agent name.
           schema:
             type: string
           explode: false
@@ -8011,7 +8629,7 @@ paths:
         - name: name
           in: path
           required: true
-          description: The name of the resource.
+          description: The evaluation-suite name.
           schema:
             type: string
       responses:
@@ -8048,7 +8666,7 @@ paths:
     post:
       operationId: EvaluationSuites_createEvaluationSuiteVersion
       summary: Create an evaluation suite version
-      description: Creates a new evaluation suite version with an auto-incremented version identifier.
+      description: Creates a suite version with a service-generated version identifier.
       parameters:
         - name: Foundry-Features
           in: header
@@ -8061,7 +8679,7 @@ paths:
         - name: name
           in: path
           required: true
-          description: The name of the evaluation suite.
+          description: The suite name.
           schema:
             type: string
         - name: api-version
@@ -8096,7 +8714,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EvaluationSuiteVersionCreate'
-        description: The evaluation suite version to create.
+        description: The suite version to create.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -8110,7 +8728,7 @@ paths:
         - name: name
           in: path
           required: true
-          description: The name of the resource.
+          description: The evaluation-suite name.
           schema:
             type: string
         - name: version
@@ -8159,7 +8777,7 @@ paths:
         - name: name
           in: path
           required: true
-          description: The name of the resource.
+          description: The evaluation-suite name.
           schema:
             type: string
         - name: version
@@ -8204,7 +8822,7 @@ paths:
         - name: name
           in: path
           required: true
-          description: The name of the resource.
+          description: The evaluation-suite name.
           schema:
             type: string
         - name: version
@@ -8257,11 +8875,10 @@ paths:
             schema:
               $ref: '#/components/schemas/EvaluationSuiteVersionUpdate'
         description: The EvaluationSuiteVersion to create or update.
-  /evaluation_suites/{name}:run:
-    post:
-      operationId: EvaluationSuites_run
-      summary: Run an evaluation suite
-      description: Runs an evaluation using the suite's testing criteria and dataset.
+    put:
+      operationId: EvaluationSuites_createOrReplaceVersion
+      summary: Create or verify an evaluation-suite version
+      description: Creates a task-set-based suite at an exact version, or verifies an identical existing version.
       parameters:
         - name: Foundry-Features
           in: header
@@ -8274,7 +8891,75 @@ paths:
         - name: name
           in: path
           required: true
-          description: The name of the evaluation suite.
+          description: The suite name.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The exact version identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteVersion'
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteVersion'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationSuiteVersionCreateOrUpdate'
+        description: The task-set-based suite definition.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /evaluation_suites/{name}:run:
+    post:
+      operationId: EvaluationSuites_run
+      summary: Run an evaluation suite
+      description: Runs a suite using the existing evaluation preview.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The suite name.
           schema:
             type: string
         - name: api-version
@@ -8309,7 +8994,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EvaluationSuiteRunRequest'
-        description: The run request parameters.
+        description: The existing preview run parameters.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -43595,6 +44280,403 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - Skills=V1Preview
+  /task_sets:
+    get:
+      operationId: EvaluationTaskSets_list
+      summary: List evaluation task sets
+      description: Lists the latest version of each task set.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EvaluationTaskSetVersion'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationTaskSets
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /task_sets/{name}/versions:
+    post:
+      operationId: EvaluationTaskSets_createVersion
+      summary: Create an evaluation task-set version
+      description: Creates a task-set version with a service-generated version identifier.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The task-set name.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationTaskSetVersion'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationTaskSets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationTaskSetVersionCreate'
+        description: The task-set version to create.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    get:
+      operationId: EvaluationTaskSets_listVersions
+      summary: List evaluation task-set versions
+      description: Lists all versions of a task set.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The task-set name.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EvaluationTaskSetVersion'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationTaskSets
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /task_sets/{name}/versions/{version}:
+    put:
+      operationId: EvaluationTaskSets_createOrReplaceVersion
+      summary: Create or verify an evaluation task-set version
+      description: Creates an explicitly versioned task set or verifies that an existing version has the same definition.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The task-set name.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The exact version identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationTaskSetVersion'
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationTaskSetVersion'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationTaskSets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationTaskSetVersionCreateOrUpdate'
+        description: The task-set version to create or reconcile.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    get:
+      operationId: EvaluationTaskSets_getVersion
+      summary: Get an evaluation task-set version
+      description: Retrieves an exact task-set version.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The task-set name.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The exact version identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationTaskSetVersion'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationTaskSets
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
   /tasks:
     post:
       operationId: createAgentServerTask
@@ -44610,6 +45692,22 @@ components:
       schema:
         type: string
         maxLength: 128
+    EvaluationTaskRunListParameters.passed:
+      name: passed
+      in: query
+      required: false
+      description: Filters task runs by evaluated pass outcome.
+      schema:
+        type: boolean
+      explode: false
+    EvaluationTaskRunListParameters.status:
+      name: status
+      in: query
+      required: false
+      description: Filters task runs by execution status.
+      schema:
+        $ref: '#/components/schemas/JobStatus'
+      explode: false
     GetRoutineParameters:
       name: routine_name
       in: path
@@ -45500,7 +46598,7 @@ components:
           description: The agent version. If not specified, the latest version is used.
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
-      description: Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from.
+      description: Agent source for a suite-generation job.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -50720,7 +51818,7 @@ components:
           description: The version of the dataset. If not specified, the latest version is used.
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
-      description: Dataset source for evaluation suite generation jobs — reference to a dataset.
+      description: Dataset source for a suite-generation job.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52014,6 +53112,30 @@ components:
           $ref: '#/components/schemas/EvaluationTarget'
           description: Specifies the type and configuration of the entity used for this evaluation.
       description: Evaluation Definition
+    EvaluationArtifact:
+      type: object
+      required:
+        - artifact_id
+        - type
+        - media_type
+      properties:
+        artifact_id:
+          type: string
+          description: The artifact identifier.
+        type:
+          type: string
+          description: The artifact type, such as `trajectory` or `harness_log`.
+        media_type:
+          type: string
+          description: The artifact media type.
+        size_bytes:
+          type: integer
+          format: int64
+          description: The artifact size in bytes, when known.
+      description: Metadata for evidence retained with a task run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationAzureStandardVoiceModelConfiguration:
       type: object
       required:
@@ -52094,6 +53216,25 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Insights=V1Preview
+    EvaluationCriterionResult:
+      type: object
+      required:
+        - id
+        - passed
+      properties:
+        id:
+          type: string
+          description: The criterion identifier.
+        passed:
+          type: boolean
+          description: Whether the criterion passed.
+        explanation:
+          type: string
+          description: An explanation of the criterion outcome.
+      description: The outcome of one rubric criterion.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationDataGenerationJob:
       type: object
       required:
@@ -52154,7 +53295,7 @@ components:
             - traces
             - tool_use
             - task
-      description: The data generation type.
+      description: Types of data supported by the existing suite-generation preview.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52182,17 +53323,162 @@ components:
       properties:
         name:
           type: string
-          description: Dataset name.
+          description: The dataset name.
         version:
           type: string
-          description: Dataset version. If not provided, resolves to the latest version.
+          description: The dataset version; the latest version is used when omitted.
         schema_file_name:
           type: string
-          description: |-
-            Name of the schema file within the dataset's blob folder (e.g., "a3f2b1c4_schema.json").
-            Optional — if not provided, schema is inferred at runtime from the data.
-            Only applicable for uri_folder datasets.
-      description: Reference to a dataset by name and version.
+          description: The schema filename in a folder dataset.
+      description: A reference to an existing evaluation dataset.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationDeterministicCheck:
+      type: object
+      required:
+        - operator
+      properties:
+        field:
+          type: string
+          description: Dot-separated field path rooted at inputs, outputs, or context; omitted for tool_called.
+        operator:
+          $ref: '#/components/schemas/EvaluationDeterministicOperator'
+          description: The operator applied to the selected value.
+        value:
+          description: The literal comparison value or tool function name. Provide exactly one of value and value_from.
+        value_from:
+          type: string
+          description: Path to the comparison value in the standard grader record. Provide exactly one of value and value_from.
+      description: A bounded check against a grader input field or a trajectory tool call.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationDeterministicGrader:
+      type: object
+      required:
+        - type
+        - check
+      properties:
+        type:
+          type: string
+          enum:
+            - deterministic
+          description: Indicates that this grader applies a deterministic operator.
+        check:
+          $ref: '#/components/schemas/EvaluationDeterministicCheck'
+          description: The built-in check applied to the evaluation record.
+      allOf:
+        - $ref: '#/components/schemas/EvaluationGrader'
+      description: An inline deterministic grader.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationDeterministicOperator:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - exact_match
+            - contains
+            - regex
+            - greater_than_or_equal
+            - less_than_or_equal
+            - tool_called
+      description: The supported deterministic grader operators.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationGrader:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+          description: The grader name, unique within its task or evaluation suite.
+        type:
+          $ref: '#/components/schemas/EvaluationGraderType'
+          description: The grader type.
+      discriminator:
+        propertyName: type
+        mapping:
+          deterministic: '#/components/schemas/EvaluationDeterministicGrader'
+          llm_judge: '#/components/schemas/EvaluationLlmJudgeGrader'
+      description: A grader that is resolved as part of a task-set or evaluation-suite version.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationGraderResult:
+      type: object
+      required:
+        - grader
+        - passed
+        - explanation
+      properties:
+        grader:
+          type: string
+          description: The resolved grader name.
+        passed:
+          type: boolean
+          description: Whether the grader passed.
+        score:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: An optional diagnostic score between zero and one.
+        explanation:
+          type: string
+          description: An explanation of the grader outcome.
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationCriterionResult'
+          description: Per-criterion outcomes when the grader has multiple criteria.
+        diagnostics:
+          type: object
+          unevaluatedProperties: {}
+          description: Additional grader diagnostics.
+      description: The outcome produced by one grader.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationGraderType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - llm_judge
+            - deterministic
+      description: The supported inline grader types.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationHarness:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/EvaluationHarnessType'
+          description: The harness type.
+      discriminator:
+        propertyName: type
+        mapping:
+          foundry_agent: '#/components/schemas/FoundryAgentHarness'
+      description: The harness used to execute evaluation tasks.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationHarnessType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - foundry_agent
+      description: The supported evaluation harness types.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52204,6 +53490,33 @@ components:
             - conversation
         - type: string
       description: The level at which evaluation is performed.
+    EvaluationLlmJudgeGrader:
+      type: object
+      required:
+        - type
+        - model_deployment
+        - criteria
+      properties:
+        type:
+          type: string
+          enum:
+            - llm_judge
+          description: Indicates that this grader uses a language model.
+        model_deployment:
+          type: string
+          description: The model deployment used by the judge.
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationRubricCriterion'
+          minItems: 1
+          description: The criteria evaluated by the judge.
+      allOf:
+        - $ref: '#/components/schemas/EvaluationGrader'
+      description: An inline language-model judge.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationModelConfiguration:
       type: object
       required:
@@ -52259,6 +53572,22 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Insights=V1Preview
+    EvaluationRubricCriterion:
+      type: object
+      required:
+        - id
+        - description
+      properties:
+        id:
+          type: string
+          description: The criterion identifier.
+        description:
+          type: string
+          description: The behavior required to pass this criterion.
+      description: One criterion evaluated by a language-model judge.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationRule:
       type: object
       required:
@@ -52341,6 +53670,51 @@ components:
           type: string
           description: Filter by agent name.
       description: Evaluation filter model.
+    EvaluationRun:
+      type: object
+      required:
+        - id
+        - status
+        - created_at
+      properties:
+        id:
+          type: string
+          description: Server-assigned unique identifier.
+          readOnly: true
+        inputs:
+          $ref: '#/components/schemas/EvaluationRunInputs'
+          description: Caller-supplied inputs.
+        result:
+          $ref: '#/components/schemas/EvaluationRunResult'
+          description: Result produced on success.
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status.
+          readOnly: true
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
+          description: Error details — populated only on failure.
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          description: The time when the run was accepted.
+          readOnly: true
+        started_at:
+          type: string
+          format: date-time
+          description: The time when execution started.
+          readOnly: true
+        completed_at:
+          type: string
+          format: date-time
+          description: The time when the run reached a terminal state.
+          readOnly: true
+      description: A durable evaluation run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationRunClusterInsightRequest:
       type: object
       required:
@@ -52389,6 +53763,102 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Insights=V1Preview
+    EvaluationRunConfig:
+      type: object
+      required:
+        - type
+        - harness
+      properties:
+        type:
+          type: string
+          enum:
+            - harness_invocation
+          description: The run-configuration type.
+        harness:
+          $ref: '#/components/schemas/FoundryAgentHarness'
+          description: The harness invoked for every task attempt.
+        repetitions:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The number of attempts created for each task.
+          default: 1
+        concurrency:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The maximum number of task attempts executed concurrently.
+          default: 1
+        constraints:
+          $ref: '#/components/schemas/ExecutionConstraints'
+          description: Per-attempt execution constraints.
+      description: Configuration for executing an evaluation run through a harness.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationRunCreateContent:
+      type: object
+      required:
+        - inputs
+      properties:
+        inputs:
+          $ref: '#/components/schemas/EvaluationRunInputs'
+          description: The immutable inputs used throughout the run.
+      description: Request to create an evaluation run with immutable caller-supplied inputs.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationRunInputs:
+      type: object
+      required:
+        - suite
+        - run_config
+      properties:
+        suite:
+          $ref: '#/components/schemas/EvaluationSuiteReference'
+          description: The exact evaluation-suite version to execute.
+        run_config:
+          $ref: '#/components/schemas/EvaluationRunConfig'
+          description: The harness and execution settings for the run.
+      description: Caller-supplied immutable inputs for an evaluation run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationRunResult:
+      type: object
+      required:
+        - task_run_count
+        - passed_count
+        - not_passed_count
+        - error_count
+        - pass_rate
+      properties:
+        task_run_count:
+          type: integer
+          format: int32
+          description: The total number of task runs.
+        passed_count:
+          type: integer
+          format: int32
+          description: The number of task runs that passed all applicable graders.
+        not_passed_count:
+          type: integer
+          format: int32
+          description: The number of gradable task runs that did not pass.
+        error_count:
+          type: integer
+          format: int32
+          description: The number of task runs that could not produce a quality verdict.
+        pass_rate:
+          anyOf:
+            - type: number
+              format: float
+            - type: 'null'
+          description: Passed task runs divided by gradable task runs, or null when none were gradable.
+      description: Aggregate results produced by a completed evaluation run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationScheduleTask:
       type: object
       required:
@@ -52413,19 +53883,33 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Schedules=V1Preview
+    EvaluationScoringConfiguration:
+      type: object
+      required:
+        - aggregation
+      properties:
+        aggregation:
+          type: string
+          enum:
+            - all_pass
+          description: The rule used to combine applicable grader verdicts.
+      description: Evaluation-suite scoring configuration.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteDataGenerationOptions:
       type: object
       properties:
         type:
           $ref: '#/components/schemas/EvaluationDataGenerationType'
-          description: The data generation type. Defaults to 'simple_qna' if not specified.
+          description: The generation type; defaults to simple_qna.
         max_samples:
           type: integer
           format: int32
           minimum: 15
           maximum: 1000
-          description: 'Maximum number of samples to generate. Valid range: 15-1000.'
-      description: Options for dataset generation within an evaluation suite generation job.
+          description: The maximum number of samples.
+      description: Data-generation settings for the existing suite-generation job.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52436,7 +53920,7 @@ components:
           enum:
             - quality
             - safety
-      description: The category of evaluator generation.
+      description: Categories supported by the existing suite-generation preview.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52468,17 +53952,17 @@ components:
           readOnly: true
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job was created, represented in Unix time.
+          description: The creation time in Unix seconds.
           readOnly: true
         finished_at:
           $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job finished, represented in Unix time.
+          description: The completion time in Unix seconds.
           readOnly: true
         usage:
           $ref: '#/components/schemas/EvaluationSuiteGenerationTokenUsage'
-          description: Token consumption summary. Populated on terminal states.
+          description: Token use on terminal states.
           readOnly: true
-      description: Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.
+      description: An existing preview job that generates an evaluation suite.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52488,7 +53972,7 @@ components:
         inputs:
           $ref: '#/components/schemas/EvaluationSuiteGenerationJobInputs'
           description: Caller-supplied inputs.
-      description: Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.
+      description: An existing preview job that generates an evaluation suite.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52501,50 +53985,38 @@ components:
       properties:
         evaluation_suite_name:
           type: string
-          description: The evaluation suite name to create.
+          description: The name of the suite to create.
         sources:
           type: array
           items:
             $ref: '#/components/schemas/EvaluationSuiteJobSource'
-          description: Source materials for generation — agent context, prompts, traces, or datasets.
+          description: Sources used for data and criteria generation.
         generation_model:
           type: string
-          description: The LLM model to use for rubric and data generation (e.g., 'gpt-4o').
+          description: The model deployment used for generation.
         category:
           $ref: '#/components/schemas/EvaluationSuiteGenerationCategory'
-          description: 'Category determines the generation focus. Default: quality.'
+          description: The type of criteria to generate.
           default: quality
         initialization_parameters:
           type: object
           unevaluatedProperties: {}
-          description: |-
-            Optional initialization parameters applied to all generated evaluators.
-            For example, deployment_name for LLM judge model, default threshold.
+          description: Evaluator initialization options.
         data_generation_options:
           $ref: '#/components/schemas/EvaluationSuiteDataGenerationOptions'
-          description: |-
-            Data generation options. Controls how the evaluation dataset is generated.
-            If omitted, defaults are used (simple_qna, 100 max_samples).
+          description: Options for generating data samples.
         target:
           $ref: '#/components/schemas/FoundryEvaluationTarget'
-          description: |-
-            Target for the generated suite. Stored on the suite so it can be run
-            immediately after generation completes.
-            Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
+          description: The target of the generated suite.
         input_messages:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate'
             - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
-          description: |-
-            How to send dataset rows to the target.
-            If omitted and target is provided, defaults to a template using item.query.
+          description: The generated suite message mapping.
         evaluation_level:
           $ref: '#/components/schemas/EvaluationLevel'
-          description: |-
-            Evaluation level for the generated suite.
-            Default: turn (single-turn evaluation).
-            Use conversation for multi-turn evaluation.
-      description: Caller-supplied inputs for an evaluation suite generation job.
+          description: The evaluation level of the generated suite.
+      description: Caller inputs for a suite-generation job.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52554,16 +54026,16 @@ components:
         input_tokens:
           type: integer
           format: int64
-          description: Number of input tokens consumed.
+          description: The number of input tokens.
         output_tokens:
           type: integer
           format: int64
-          description: Number of output tokens consumed.
+          description: The number of output tokens.
         total_tokens:
           type: integer
           format: int64
-          description: Total tokens consumed.
-      description: Token usage summary for an evaluation suite generation job.
+          description: The total number of tokens.
+      description: Token use for a suite-generation job.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52574,7 +54046,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/EvaluationSuiteJobSourceType'
-          description: The type of source.
+          description: The source type.
         description:
           type: string
           description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
@@ -52585,7 +54057,7 @@ components:
           agent: '#/components/schemas/AgentEvaluationSuiteJobSource'
           traces: '#/components/schemas/TracesEvaluationSuiteJobSource'
           dataset: '#/components/schemas/DatasetEvaluationSuiteJobSource'
-      description: The base source model for evaluation suite generation jobs. Polymorphic over `type`.
+      description: Shared source properties for suite-generation jobs.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52598,7 +54070,23 @@ components:
             - agent
             - traces
             - dataset
-      description: The supported source types for evaluation suite generation jobs.
+      description: Source types for existing suite-generation jobs.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationSuiteReference:
+      type: object
+      required:
+        - name
+        - version
+      properties:
+        name:
+          type: string
+          description: The evaluation-suite name.
+        version:
+          type: string
+          description: The exact evaluation-suite version.
+      description: A reference to an exact evaluation-suite version.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52607,14 +54095,14 @@ components:
       properties:
         evaluation_name:
           type: string
-          description: "Name for the evaluation. Default: '{suiteName}-runs'."
+          description: The created evaluation name.
         evaluation_suite_version:
           type: string
-          description: 'Evaluation suite version to run. Default: latest.'
+          description: The suite version to run; defaults to the latest version.
         evaluation_level:
           $ref: '#/components/schemas/EvaluationLevel'
-          description: Overrides the suite's default evaluation level. If omitted, uses the level from the suite.
-      description: Request body for running an evaluation from a suite.
+          description: The evaluation level used for this run.
+      description: Request to run a suite through the existing evaluation preview.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52627,16 +54115,16 @@ components:
       properties:
         evaluation_suite_name:
           type: string
-          description: The evaluation suite name used.
+          description: The suite name used.
         evaluation_suite_version:
           type: string
-          description: The evaluation suite version resolved.
+          description: The suite version resolved.
         results:
           type: array
           items:
             $ref: '#/components/schemas/EvaluationSuiteRunResult'
-          description: The run results. Currently a single-element array; will support multiple runs in the future.
-      description: Response from running an evaluation suite.
+          description: The runs started by the request.
+      description: Response to a run request on an existing preview suite.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52650,17 +54138,17 @@ components:
       properties:
         eval_id:
           type: string
-          description: The evaluation ID created.
+          description: The created evaluation identifier.
         run_id:
           type: string
-          description: The eval run ID created.
+          description: The created run identifier.
         status:
           $ref: '#/components/schemas/JobStatus'
-          description: Status of the run.
+          description: The run execution status.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
-          description: Timestamp when the run was created.
-      description: Result of a single evaluation run within a suite execution.
+          description: The run creation time in Unix seconds.
+      description: One run started through the existing suite preview.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52671,32 +54159,25 @@ components:
           enum:
             - default
             - benchmark
-      description: The subtype of an evaluation suite.
+      description: Subtypes of the existing evaluation-suite preview.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
     EvaluationSuiteVersion:
       type: object
       required:
-        - testing_criteria
         - name
         - version
       properties:
         display_name:
           type: string
-          description: |-
-            Human-readable display name.
-            Does not need to be unique. Shown in Foundry portal list views and eval reports.
+          description: The suite display name.
         subtype:
           $ref: '#/components/schemas/EvaluationSuiteSubtype'
-          description: Subtype of the evaluation suite.
+          description: The subtype used by existing suites.
         dataset:
           $ref: '#/components/schemas/EvaluationDatasetReference'
-          description: |-
-            Dataset reference for evaluation.
-            Optional — omit for evaluator-only suites where data comes from
-            live production traces or is provided at run time.
-            The referenced dataset must exist in the project's dataset registry.
+          description: The dataset used by existing suites.
         testing_criteria:
           type: array
           items:
@@ -52707,64 +54188,53 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
               - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
-          minItems: 1
-          description: |-
-            Testing criteria — the evaluator configurations for this suite.
-            Supports all grader types: azure_ai_evaluator, string_check, label_model,
-            score_model, text_similarity, python, etc.
-            At least one entry is required.
+          description: Existing preview grading configuration; not used for task-set-based suites.
         target:
           $ref: '#/components/schemas/FoundryEvaluationTarget'
-          description: |-
-            Target for this evaluation suite. Uses the existing FoundryEvaluationTarget discriminated type
-            from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
-            Optional — allows suites to exist without a target.
+          description: The target used by existing suites.
         input_messages:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate'
             - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
-          description: |-
-            How to send dataset rows to the target (agent or model).
-            Supports template type (prompt with column placeholders) and
-            item_reference type (column containing pre-built messages).
+          description: The message mapping used by existing suites.
         evaluation_level:
           $ref: '#/components/schemas/EvaluationLevel'
-          description: Default evaluation level for this suite. Can be overridden at run time.
+          description: The evaluation level used by existing suites.
         name:
           type: string
-          description: The name of the resource.
+          description: The evaluation-suite name.
           readOnly: true
         version:
           type: string
-          description: The version of the resource.
+          description: The immutable evaluation-suite version.
           readOnly: true
-      description: |-
-        An evaluation suite bundles testing criteria — an optional dataset, one or more
-        evaluator configs with thresholds and init params — into a reusable, named artifact that
-        can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+        task_set:
+          $ref: '#/components/schemas/EvaluationTaskSetReference'
+          description: The exact task-set version evaluated by an Eval 2.0 suite. Required when using evaluation_runs.
+        graders:
+          type: array
+          items:
+            $ref: '#/components/schemas/InlineEvaluationGrader'
+          description: Suite-level graders applied to every task run.
+        scoring:
+          $ref: '#/components/schemas/EvaluationScoringConfiguration'
+          description: The scoring rule applied to task runs. Required when using evaluation_runs.
+      description: An immutable version of an evaluation suite.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
     EvaluationSuiteVersionCreate:
       type: object
-      required:
-        - testing_criteria
       properties:
         display_name:
           type: string
-          description: |-
-            Human-readable display name.
-            Does not need to be unique. Shown in Foundry portal list views and eval reports.
+          description: The suite display name.
         subtype:
           $ref: '#/components/schemas/EvaluationSuiteSubtype'
-          description: Subtype of the evaluation suite.
+          description: The subtype used by existing suites.
         dataset:
           $ref: '#/components/schemas/EvaluationDatasetReference'
-          description: |-
-            Dataset reference for evaluation.
-            Optional — omit for evaluator-only suites where data comes from
-            live production traces or is provided at run time.
-            The referenced dataset must exist in the project's dataset registry.
+          description: The dataset used by existing suites.
         testing_criteria:
           type: array
           items:
@@ -52775,64 +54245,110 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
               - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
-          minItems: 1
-          description: |-
-            Testing criteria — the evaluator configurations for this suite.
-            Supports all grader types: azure_ai_evaluator, string_check, label_model,
-            score_model, text_similarity, python, etc.
-            At least one entry is required.
+          description: Existing preview grading configuration; not used for task-set-based suites.
         target:
           $ref: '#/components/schemas/FoundryEvaluationTarget'
-          description: |-
-            Target for this evaluation suite. Uses the existing FoundryEvaluationTarget discriminated type
-            from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
-            Optional — allows suites to exist without a target.
+          description: The target used by existing suites.
         input_messages:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate'
             - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
-          description: |-
-            How to send dataset rows to the target (agent or model).
-            Supports template type (prompt with column placeholders) and
-            item_reference type (column containing pre-built messages).
+          description: The message mapping used by existing suites.
         evaluation_level:
           $ref: '#/components/schemas/EvaluationLevel'
-          description: Default evaluation level for this suite. Can be overridden at run time.
+          description: The evaluation level used by existing suites.
         description:
           type: string
-          description: The asset description text.
+          description: The evaluation-suite description.
+        task_set:
+          $ref: '#/components/schemas/EvaluationTaskSetReference'
+          description: The exact task-set version evaluated by an Eval 2.0 suite. Required when using evaluation_runs.
+        graders:
+          type: array
+          items:
+            $ref: '#/components/schemas/InlineEvaluationGrader'
+          description: Suite-level graders applied to every task run.
+        scoring:
+          $ref: '#/components/schemas/EvaluationScoringConfiguration'
+          description: The scoring rule applied to task runs. Required when using evaluation_runs.
         tags:
           type: object
           unevaluatedProperties:
             type: string
-          description: Tag dictionary. Tags can be added, removed, and updated.
-      description: |-
-        An evaluation suite bundles testing criteria — an optional dataset, one or more
-        evaluator configs with thresholds and init params — into a reusable, named artifact that
-        can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+          description: User-defined tags.
+      description: An immutable version of an evaluation suite.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationSuiteVersionCreateOrUpdate:
+      type: object
+      properties:
+        display_name:
+          type: string
+          description: The suite display name.
+        subtype:
+          $ref: '#/components/schemas/EvaluationSuiteSubtype'
+          description: The subtype used by existing suites.
+        dataset:
+          $ref: '#/components/schemas/EvaluationDatasetReference'
+          description: The dataset used by existing suites.
+        testing_criteria:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.EvalGraderLabelModel'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderStringCheck'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderTextSimilarity'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
+              - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
+          description: Existing preview grading configuration; not used for task-set-based suites.
+        target:
+          $ref: '#/components/schemas/FoundryEvaluationTarget'
+          description: The target used by existing suites.
+        input_messages:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate'
+            - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
+          description: The message mapping used by existing suites.
+        evaluation_level:
+          $ref: '#/components/schemas/EvaluationLevel'
+          description: The evaluation level used by existing suites.
+        description:
+          type: string
+          description: The evaluation-suite description.
+        task_set:
+          $ref: '#/components/schemas/EvaluationTaskSetReference'
+          description: The exact task-set version evaluated by an Eval 2.0 suite. Required when using evaluation_runs.
+        graders:
+          type: array
+          items:
+            $ref: '#/components/schemas/InlineEvaluationGrader'
+          description: Suite-level graders applied to every task run.
+        scoring:
+          $ref: '#/components/schemas/EvaluationScoringConfiguration'
+          description: The scoring rule applied to task runs. Required when using evaluation_runs.
+        tags:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: User-defined tags.
+      description: An immutable version of an evaluation suite.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
     EvaluationSuiteVersionUpdate:
       type: object
-      required:
-        - testing_criteria
       properties:
         display_name:
           type: string
-          description: |-
-            Human-readable display name.
-            Does not need to be unique. Shown in Foundry portal list views and eval reports.
+          description: The suite display name.
         subtype:
           $ref: '#/components/schemas/EvaluationSuiteSubtype'
-          description: Subtype of the evaluation suite.
+          description: The subtype used by existing suites.
         dataset:
           $ref: '#/components/schemas/EvaluationDatasetReference'
-          description: |-
-            Dataset reference for evaluation.
-            Optional — omit for evaluator-only suites where data comes from
-            live production traces or is provided at run time.
-            The referenced dataset must exist in the project's dataset registry.
+          description: The dataset used by existing suites.
         testing_criteria:
           type: array
           items:
@@ -52843,41 +54359,38 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
               - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
-          minItems: 1
-          description: |-
-            Testing criteria — the evaluator configurations for this suite.
-            Supports all grader types: azure_ai_evaluator, string_check, label_model,
-            score_model, text_similarity, python, etc.
-            At least one entry is required.
+          description: Existing preview grading configuration; not used for task-set-based suites.
         target:
           $ref: '#/components/schemas/FoundryEvaluationTarget'
-          description: |-
-            Target for this evaluation suite. Uses the existing FoundryEvaluationTarget discriminated type
-            from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
-            Optional — allows suites to exist without a target.
+          description: The target used by existing suites.
         input_messages:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate'
             - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
-          description: |-
-            How to send dataset rows to the target (agent or model).
-            Supports template type (prompt with column placeholders) and
-            item_reference type (column containing pre-built messages).
+          description: The message mapping used by existing suites.
         evaluation_level:
           $ref: '#/components/schemas/EvaluationLevel'
-          description: Default evaluation level for this suite. Can be overridden at run time.
+          description: The evaluation level used by existing suites.
         description:
           type: string
-          description: The asset description text.
+          description: The evaluation-suite description.
+        task_set:
+          $ref: '#/components/schemas/EvaluationTaskSetReference'
+          description: The exact task-set version evaluated by an Eval 2.0 suite. Required when using evaluation_runs.
+        graders:
+          type: array
+          items:
+            $ref: '#/components/schemas/InlineEvaluationGrader'
+          description: Suite-level graders applied to every task run.
+        scoring:
+          $ref: '#/components/schemas/EvaluationScoringConfiguration'
+          description: The scoring rule applied to task runs. Required when using evaluation_runs.
         tags:
           type: object
           unevaluatedProperties:
             type: string
-          description: Tag dictionary. Tags can be added, removed, and updated.
-      description: |-
-        An evaluation suite bundles testing criteria — an optional dataset, one or more
-        evaluator configs with thresholds and init params — into a reusable, named artifact that
-        can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+          description: User-defined tags.
+      description: An immutable version of an evaluation suite.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52901,6 +54414,325 @@ components:
             - modelResponseGeneration
         - type: string
       description: Allowed types of evaluation targets.
+    EvaluationTask:
+      type: object
+      required:
+        - id
+        - name
+        - inputs
+      properties:
+        id:
+          type: string
+          description: The task identifier, unique within the task-set version.
+        name:
+          type: string
+          description: The human-readable task name.
+        description:
+          type: string
+          description: A description of the behavior being evaluated.
+        inputs:
+          type: object
+          unevaluatedProperties: {}
+          description: The starting request or state provided to the harness.
+        expected:
+          type: object
+          unevaluatedProperties: {}
+          description: Expected values available to deterministic and language-model graders.
+        graders:
+          type: array
+          items:
+            $ref: '#/components/schemas/InlineEvaluationGrader'
+          description: Task-level graders applied in addition to suite-level graders.
+        metadata:
+          type: object
+          unevaluatedProperties: {}
+          description: User-defined task metadata.
+      description: A reusable evaluation task.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationTaskRun:
+      type: object
+      required:
+        - id
+        - evaluation_run_id
+        - task
+        - repetition
+        - status
+        - grader_results
+        - artifacts
+      properties:
+        id:
+          type: string
+          description: The task-run identifier.
+        evaluation_run_id:
+          type: string
+          description: The parent evaluation-run identifier.
+        task:
+          $ref: '#/components/schemas/EvaluationTaskSummary'
+          description: The resolved task identity.
+        repetition:
+          type: integer
+          format: int32
+          description: The one-based attempt number for this task.
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: The task-run execution status.
+        trajectory:
+          $ref: '#/components/schemas/EvaluationTrajectoryReference'
+          description: A reference to normalized ATIF evidence.
+        grader_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationGraderResult'
+          description: Outcomes from every applicable task- and suite-level grader.
+        passed:
+          type: boolean
+          description: Whether all applicable graders passed. Unset when execution or grading failed.
+        usage:
+          $ref: '#/components/schemas/EvaluationTaskRunUsage'
+          description: Usage measurements for the task run.
+        artifacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationArtifact'
+          description: Metadata for retained evidence.
+        diagnostics:
+          $ref: '#/components/schemas/EvaluationTaskRunDiagnostics'
+          description: Retry, phase, and recovery diagnostics.
+        error:
+          $ref: '#/components/schemas/EvaluationTaskRunError'
+          description: The terminal task-run error, when execution or grading failed.
+        started_at:
+          type: string
+          format: date-time
+          description: The time when execution started.
+        completed_at:
+          type: string
+          format: date-time
+          description: The time when the task run reached a terminal state.
+      description: One attempt of one task within an evaluation run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationTaskRunAttempts:
+      type: object
+      properties:
+        harness:
+          type: integer
+          format: int32
+          description: The number of harness attempts.
+        graders:
+          type: object
+          unevaluatedProperties:
+            type: integer
+            format: int32
+          description: Grader attempt counts keyed by grader name.
+      description: Retry counts for a task-run phase.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationTaskRunDiagnostics:
+      type: object
+      properties:
+        phase_timings:
+          type: object
+          unevaluatedProperties:
+            type: integer
+            format: int64
+          description: Phase durations in milliseconds, keyed by phase name.
+        attempts:
+          $ref: '#/components/schemas/EvaluationTaskRunAttempts'
+          description: Harness and grader attempt counts.
+        last_checkpoint:
+          type: string
+          description: The latest durable phase boundary completed by this task run.
+        log_artifacts:
+          type: array
+          items:
+            type: string
+          description: Artifact identifiers containing retained diagnostic logs.
+      description: Diagnostics retained for a task run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationTaskRunError:
+      type: object
+      required:
+        - code
+        - message
+        - source
+        - retriable
+      properties:
+        code:
+          type: string
+          description: The machine-readable error code.
+        message:
+          type: string
+          description: The human-readable error description.
+        source:
+          type: string
+          description: The component where the failure occurred.
+        exception_type:
+          type: string
+          description: The exception type when available.
+        occurred_at:
+          type: string
+          format: date-time
+          description: The time when the failure occurred.
+        retriable:
+          type: boolean
+          description: Whether another attempt might succeed.
+        artifact_ids:
+          type: array
+          items:
+            type: string
+          description: Identifiers of retained artifacts with additional failure evidence.
+      description: A structured execution or grader failure for one task run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationTaskRunUsage:
+      type: object
+      properties:
+        duration_ms:
+          type: integer
+          format: int64
+          description: Total duration in milliseconds.
+        input_tokens:
+          type: integer
+          format: int64
+          description: Total input tokens, including cached input tokens.
+        cached_input_tokens:
+          type: integer
+          format: int64
+          description: The cached subset of input tokens.
+        output_tokens:
+          type: integer
+          format: int64
+          description: Total output tokens.
+        turn_count:
+          type: integer
+          format: int32
+          description: Number of conversation turns.
+        tool_call_count:
+          type: integer
+          format: int32
+          description: Number of tool calls.
+        estimated_cost_usd:
+          type: number
+          format: decimal128
+          description: Estimated cost in US dollars.
+      description: Usage measurements for one task run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationTaskSetReference:
+      type: object
+      required:
+        - name
+        - version
+      properties:
+        name:
+          type: string
+          description: The task-set name.
+        version:
+          type: string
+          description: The exact task-set version.
+      description: A reference to an exact task-set version.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationTaskSetVersion:
+      type: object
+      required:
+        - name
+        - version
+        - tasks
+      properties:
+        name:
+          type: string
+          description: The task-set name.
+          readOnly: true
+        version:
+          type: string
+          description: The immutable task-set version.
+          readOnly: true
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationTask'
+          minItems: 1
+          description: The tasks contained in this version.
+      description: An immutable version of a reusable evaluation task set.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationTaskSetVersionCreate:
+      type: object
+      required:
+        - tasks
+      properties:
+        description:
+          type: string
+          description: The task-set description.
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationTask'
+          minItems: 1
+          description: The tasks contained in this version.
+        tags:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: User-defined tags.
+      description: An immutable version of a reusable evaluation task set.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationTaskSetVersionCreateOrUpdate:
+      type: object
+      required:
+        - tasks
+      properties:
+        description:
+          type: string
+          description: The task-set description.
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationTask'
+          minItems: 1
+          description: The tasks contained in this version.
+        tags:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: User-defined tags.
+      description: An immutable version of a reusable evaluation task set.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationTaskSummary:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          description: The task identifier.
+        name:
+          type: string
+          description: The task name.
+        description:
+          type: string
+          description: The task description.
+      description: A readable task summary retained with a task run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationTaxonomy:
       type: object
       required:
@@ -53037,6 +54869,71 @@ components:
       description: Evaluation Taxonomy Definition
       x-ms-foundry-meta:
         required_previews:
+          - Evaluations=V1Preview
+    EvaluationTrajectory:
+      type: object
+      required:
+        - schema_version
+        - session_id
+        - trajectory_id
+        - agent
+        - steps
+      properties:
+        schema_version:
+          type: string
+          description: The ATIF schema version.
+        session_id:
+          type: string
+          description: The trajectory session identifier.
+        trajectory_id:
+          type: string
+          description: The trajectory identifier.
+        agent:
+          type: object
+          unevaluatedProperties: {}
+          description: The agent identity and model recorded by ATIF.
+        steps:
+          type: array
+          items:
+            type: object
+            unevaluatedProperties: {}
+          description: Ordered ATIF messages, tool calls, observations, and final output.
+        final_metrics:
+          type: object
+          unevaluatedProperties: {}
+          description: Aggregate metrics recorded by ATIF.
+      description: A normalized ATIF trajectory.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationTrajectoryReference:
+      type: object
+      required:
+        - format
+        - trajectory_id
+        - session_id
+        - artifact_id
+      properties:
+        format:
+          type: string
+          enum:
+            - atif
+          description: The trajectory format.
+        trajectory_id:
+          type: string
+          description: The trajectory identifier.
+        session_id:
+          type: string
+          description: The harness session identifier.
+        artifact_id:
+          type: string
+          description: The retained artifact identifier.
+        trace_id:
+          type: string
+          description: The associated observability trace identifier, when available.
+      description: A reference to the normalized trajectory retained for a task run.
+      x-ms-foundry-meta:
+        conditional_previews:
           - Evaluations=V1Preview
     EvaluationVoiceModelConfiguration:
       type: object
@@ -53486,6 +55383,29 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
+    ExecutionConstraints:
+      type: object
+      properties:
+        max_duration_seconds:
+          type: integer
+          format: int32
+          description: The maximum attempt duration in seconds.
+        max_tokens:
+          type: integer
+          format: int64
+          description: The maximum total tokens consumed by an attempt.
+        max_tool_calls:
+          type: integer
+          format: int32
+          description: The maximum tool calls made by an attempt.
+        max_cost_usd:
+          type: number
+          format: decimal128
+          description: The maximum estimated cost in US dollars for an attempt.
+      description: Per-attempt execution constraints.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     ExternalAgentDefinition:
       type: object
       required:
@@ -53795,6 +55715,42 @@ components:
       allOf:
         - $ref: '#/components/schemas/DatasetVersionUpdate'
       description: FileDatasetVersion Definition
+    FoundryAgentHarness:
+      type: object
+      required:
+        - type
+        - agent
+      properties:
+        type:
+          type: string
+          enum:
+            - foundry_agent
+          description: Indicates that this harness invokes a Foundry agent.
+        agent:
+          $ref: '#/components/schemas/FoundryAgentReference'
+          description: The exact agent version to invoke.
+      allOf:
+        - $ref: '#/components/schemas/EvaluationHarness'
+      description: A harness that invokes a versioned Foundry agent.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    FoundryAgentReference:
+      type: object
+      required:
+        - name
+        - version
+      properties:
+        name:
+          type: string
+          description: The agent name.
+        version:
+          type: string
+          description: The exact agent version.
+      description: A reference to an exact Foundry agent version.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     FoundryDurationMilliseconds:
       type: integer
       format: int32
@@ -54345,6 +56301,14 @@ components:
 
         The estimate is derived from reported token counts and list prices. It excludes evaluator
         and runtime usage and does not account for negotiated pricing, commitments, or discounts.
+    InlineEvaluationGrader:
+      anyOf:
+        - $ref: '#/components/schemas/EvaluationLlmJudgeGrader'
+        - $ref: '#/components/schemas/EvaluationDeterministicGrader'
+      description: The inline graders supported by the evaluation MVP.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     InputData:
       type: object
       required:
@@ -85032,7 +86996,7 @@ components:
           description: Inline prompt text (e.g., agent description, policy text, supplementary context).
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
-      description: Prompt source for evaluation suite generation jobs — inline text provided by the user.
+      description: Text source for a suite-generation job.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -89824,7 +91788,7 @@ components:
           description: End of the time window (Unix timestamp in seconds). Defaults to current time.
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
-      description: Traces source for evaluation suite generation jobs — conversation traces from Application Insights.
+      description: Trace source for a suite-generation job.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
