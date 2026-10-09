@@ -460,6 +460,9 @@ union TelephonyProvider {
 
   @doc("Twilio Programmable Voice.")
   twilio: "twilio",
+
+  @doc("Session Initiation Protocol.")
+  sip: "sip",
 }
 
 @doc("The lifecycle status of a telephony binding.")
@@ -594,6 +597,26 @@ model CreateTwilioTelephonyBindingRequest
   phone_number: string;
 }
 
+@doc("The request to create an inbound SIP binding. New SIP bindings are active. Credentials are stored in the referenced Foundry connection.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateSipTelephonyBindingContent", "csharp")
+model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
+  @doc("The SIP provider.")
+  provider: TelephonyProvider.sip;
+
+  @doc("An optional display phone number. It is not the binding identifier.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("Allowed source IP addresses or CIDR ranges. Omit or use an empty array for no source-address restriction.")
+  @maxItems(64)
+  allowed_source_cidrs?: string[];
+
+  @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omit or use an empty array for no caller-number restriction.")
+  @maxItems(64)
+  allowed_calling_numbers?: string[];
+}
+
 @doc("The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("UpdateTelephonyBindingContent", "csharp")
@@ -605,14 +628,22 @@ model UpdateTelephonyBindingRequest {
   @maxLength(128)
   label?: string | null;
 
-  @doc("The replacement Foundry connection name. This property is valid only for a Teams Phone extensibility binding; a Twilio binding's connection is immutable.")
+  @doc("The replacement Foundry connection name. This property is valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable.")
   @minLength(1)
   @maxLength(256)
   connection_name?: string;
 
-  @doc("The replacement Teams Phone extensibility display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone extensibility binding.")
+  @doc("The replacement Teams Phone extensibility or SIP display phone number. Omit it to preserve the current value; use null to clear it. Not supported for Twilio.")
   @maxLength(64)
   phone_number?: string | null;
+
+  @doc("Replacement allowed source IP addresses or CIDR ranges. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
+  @maxItems(64)
+  allowed_source_cidrs?: string[];
+
+  @doc("Replacement allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
+  @maxItems(64)
+  allowed_calling_numbers?: string[];
 }
 
 @doc("A telephony binding owned by a voice agent.")
@@ -637,7 +668,7 @@ model TelephonyBinding {
   @doc("The lifecycle status.")
   status: TelephonyBindingStatus;
 
-  @doc("The service-generated webhook URL to configure with the telephony provider.")
+  @doc("The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP.")
   incoming_call_url: url;
 }
 
@@ -666,6 +697,25 @@ model TwilioTelephonyBinding extends TelephonyBinding {
   phone_number: string;
 }
 
+@doc("A SIP binding.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model SipTelephonyBinding extends TelephonyBinding {
+  @doc("The SIP provider.")
+  provider: TelephonyProvider.sip;
+
+  @doc("An optional display phone number. It is not the binding identifier.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("Allowed source IP addresses or CIDR ranges. Omission or an empty array indicates no source-address restriction.")
+  @maxItems(64)
+  allowed_source_cidrs?: string[];
+
+  @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction.")
+  @maxItems(64)
+  allowed_calling_numbers?: string[];
+}
+
 @doc("A telephony binding returned in a list, including its entity tag.")
 @discriminator("provider")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -688,7 +738,7 @@ model TelephonyBindingListItem {
   @doc("The lifecycle status.")
   status: TelephonyBindingStatus;
 
-  @doc("The service-generated webhook URL to configure with the telephony provider.")
+  @doc("The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP.")
   incoming_call_url: url;
 
   @doc("The entity tag to send in the `If-Match` header when updating or deleting this binding.")
@@ -720,6 +770,25 @@ model TwilioTelephonyBindingListItem extends TelephonyBindingListItem {
   @doc("The Twilio E.164 phone number.")
   @pattern("^\\+[1-9]\\d{6,14}$")
   phone_number: string;
+}
+
+@doc("A SIP binding returned in a list, including its entity tag.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model SipTelephonyBindingListItem extends TelephonyBindingListItem {
+  @doc("The SIP provider.")
+  provider: TelephonyProvider.sip;
+
+  @doc("An optional display phone number. It is not the binding identifier.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("Allowed source IP addresses or CIDR ranges. Omission or an empty array indicates no source-address restriction.")
+  @maxItems(64)
+  allowed_source_cidrs?: string[];
+
+  @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction.")
+  @maxItems(64)
+  allowed_calling_numbers?: string[];
 }
 
 /** A telephony binding response with its entity tag. */
