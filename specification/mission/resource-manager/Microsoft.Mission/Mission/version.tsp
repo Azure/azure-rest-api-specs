@@ -33,4 +33,13 @@ enum Versions {
   @doc("The 2026-04-01 version.")
   @armCommonTypesVersion("v5")
   v2026_04_01: "2026-04-01",
+
+  @doc("The 2026-05-01-preview version.")
+  @armCommonTypesVersion("v5")
+  v2026_05_01_preview: "2026-05-01-preview",
+
+  @Azure.Core.previewVersion
+  @doc("The 2026-07-01-preview version.")
+  @armCommonTypesVersion("v5")
+  v2026_07_01_preview: "2026-07-01-preview",
 }

@@ -44,6 +44,14 @@ scalar CommunityResourceId
     }
   ]>;
 
+@added(Microsoft.Mission.Versions.v2026_05_01_preview)
+scalar CommunityEndpointResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.Mission/communities/communityEndpoints",
+    }
+  ]>;
+
 scalar KeyVaultResourceId
   extends armResourceIdentifier<[
     {
