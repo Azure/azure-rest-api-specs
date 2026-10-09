@@ -148,11 +148,13 @@ Vitest workspace and root `pnpm check` runs all contributor checks. Package-loca
 Vitest commands still run directly and do not forward to the root.
 
 `eng.yml` validates the workspace, runs root `pnpm build` once on Linux, and runs
-the Vitest workspace on Ubuntu and Windows. `github-test.yaml` retains production-only module import
-checks on both OSes, plus actionlint and compiled agentic workflow lock checks on Linux.
-The Linux job also runs zizmor on tracked workflow and action YAML, excluding generated `.lock.yml`
-files. External actions must be SHA-pinned. Keep any necessary audit exceptions narrowly scoped and
-explain them inline; preserve credentials only when a later Git operation requires authentication.
+the Vitest workspace on Ubuntu and Windows. Its dedicated GitHub Actions lint job runs actionlint
+and zizmor on Linux; zizmor audits tracked workflow and action YAML, excluding generated `.lock.yml`
+files and `agentics-maintenance.yml`. `github-test.yaml` retains production-only module import checks
+on both OSes and compiled
+agentic workflow lock checks on Linux. External actions must be SHA-pinned. Keep any necessary audit
+exceptions narrowly scoped and explain them inline; preserve credentials only when a later Git
+operation requires authentication.
 
 CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
 and `eng/tools`. Do not add lint or type-check steps to the test OS matrix.
@@ -288,7 +290,7 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 1. Create workflow YAML in `.github/workflows/my-workflow.yaml`
 2. Create workflow scripts in `.github/workflows/src/my-workflow.ts`
 3. Write tests in `.github/workflows/test/my-workflow.test.ts`
-4. Add workflow to `github-test.yaml` if it needs validation
+4. Keep workflow and action linting in the dedicated `eng.yml` job.
 5. Run the [required checks](#before-committing).
 
 ### Updating Dependencies
