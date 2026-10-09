@@ -1,6 +1,6 @@
 name: SDK Breaking Change Mitigation
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Only base/default-branch workflow code runs; PR content is checked out separately.
   workflow_run:
     workflows: ["SDK Breaking Change Analysis - Analyze"]
     types: [completed]
@@ -177,7 +177,7 @@ jobs:
       - name: Set up GitHub Copilot CLI
         id: setup-copilot-cli
         shell: bash
-        run: |
+        run: | # zizmor: ignore[adhoc-packages] Install the CLI into an isolated runner-temp prefix.
           set -euo pipefail
           install_dir="$RUNNER_TEMP/copilot-cli"
           npm_config_ignore_scripts=false npm install \
