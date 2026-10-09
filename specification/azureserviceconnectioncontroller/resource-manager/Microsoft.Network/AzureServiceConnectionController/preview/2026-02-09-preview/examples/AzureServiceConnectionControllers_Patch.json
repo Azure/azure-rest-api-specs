@@ -1,0 +1,50 @@
+{
+  "operationId": "AzureServiceConnectionControllers_Patch",
+  "title": "AzureServiceConnectionControllers_Patch",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "azureServiceConnectionControllerName": "po1",
+    "api-version": "2026-02-09-preview",
+    "properties": {
+      "properties": {
+        "providerConnections": [
+          {
+            "name": "conn1",
+            "ipConfiguration": {
+              "privateIpV4Address": "10.0.0.11"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "po1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureServiceConnectionControllers/po1",
+        "type": "Microsoft.Network/azureServiceConnectionControllers",
+        "location": "eastus",
+        "properties": {
+          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "providerConnections": [
+            {
+              "name": "conn1",
+              "ipConfiguration": {
+                "privateIpV4Address": "10.0.0.11"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/operationStatuses/op123",
+        "Retry-After": 10
+      }
+    }
+  }
+}
