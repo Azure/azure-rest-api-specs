@@ -1,6 +1,6 @@
 import { appendFile, readdir, readFile } from "node:fs/promises";
-import { relative, resolve, sep } from "node:path";
-import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
+import { posix, relative, resolve, sep } from "node:path";
+import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { hasTypeSpecGeneratedSwagger, isTypeSpecGenerated } from "./migration.ts";
 
@@ -17,9 +17,11 @@ interface Options {
 interface FileToCheck {
   fullPath: string;
   path: string;
+  previousPath?: string;
 }
 
 const repoRoot = resolve(import.meta.dirname, "../../../../");
+const excludedSwaggerPaths = /\/(examples|scenarios|restler|common|common-types)\//i;
 
 function escapeData(value: string): string {
   return value.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll("\n", "%0A");
@@ -125,21 +127,26 @@ async function getFilesToCheck(options: Options): Promise<FileToCheck[]> {
       };
     });
   } else {
-    files = (
-      await getChangedFiles({
-        cwd: repoRoot,
-        baseCommitish: options.baseCommitish,
-        headCommitish: options.headCommitish,
-        gitOptions: ["--diff-filter=d"],
-      })
-    )
+    const changes = await getChangedFilesStatuses({
+      cwd: repoRoot,
+      baseCommitish: options.baseCommitish,
+      headCommitish: options.headCommitish,
+      gitOptions: ["--find-renames"],
+    });
+    const previousPaths = new Map(changes.renames.map(({ from, to }) => [to, from]));
+    files = [...changes.additions, ...changes.modifications, ...previousPaths.keys()]
+      .sort()
       .filter(
         (file) =>
           file.startsWith("specification/") &&
           file.endsWith(".json") &&
           !file.includes("ChangedFiles-Functions"),
       )
-      .map((path) => ({ path, fullPath: resolve(repoRoot, path) }));
+      .map((path) => ({
+        path,
+        fullPath: resolve(repoRoot, path),
+        previousPath: previousPaths.get(path),
+      }));
   }
 
   const specTypePattern =
@@ -148,11 +155,7 @@ async function getFilesToCheck(options: Options): Promise<FileToCheck[]> {
       : options.specType === "resource-manager"
         ? /^specification\/[^/]+\/(resource-manager).*?\/(preview|stable)\/[^/]+\/[^/]+\.json$/i
         : /^specification\/[^/]+\/(data-plane|resource-manager).*?\/(preview|stable)\/[^/]+\/[^/]+\.json$/i;
-  return files.filter(
-    ({ path }) =>
-      !/\/(examples|scenarios|restler|common|common-types)\//i.test(path) &&
-      specTypePattern.test(path),
-  );
+  return files.filter(({ path }) => !excludedSwaggerPaths.test(path) && specTypePattern.test(path));
 }
 
 function getApiVersion(file: string, specType?: SpecType): string | undefined {
@@ -164,6 +167,26 @@ function getApiVersion(file: string, specType?: SpecType): string | undefined {
         : /^specification\/((?:[^/]+\/)(?:data-plane|resource-manager).*?\/(?:preview|stable)\/[^/]+)\/[^/]+\.json$/i;
   const match = pattern.exec(file);
   return match?.[1];
+}
+
+function getRelocatedApiVersionDirectories(files: FileToCheck[], specType?: SpecType): Set<string> {
+  const directories = new Set<string>();
+  for (const { path, previousPath } of files) {
+    if (!previousPath || excludedSwaggerPaths.test(previousPath)) continue;
+    const previousVersion = getApiVersion(previousPath, specType);
+    const version = getApiVersion(path, specType);
+    if (
+      previousVersion &&
+      version &&
+      previousVersion !== version &&
+      posix.basename(previousVersion) === posix.basename(version) &&
+      previousVersion.split("/").slice(0, 2).join("/").toLowerCase() ===
+        version.split("/").slice(0, 2).join("/").toLowerCase()
+    ) {
+      directories.add(posix.dirname(path));
+    }
+  }
+  return directories;
 }
 
 function getServiceDirectory(fullPath: string, servicePath: string): string | undefined {
@@ -186,6 +209,7 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
   const serviceTypeSpecCache = new Map<string, boolean>();
   let brownfield = false;
   const filesToCheck = await getFilesToCheck(options);
+  const relocatedApiVersions = getRelocatedApiVersionDirectories(filesToCheck, options.specType);
 
   if (filesToCheck.length === 0) {
     logInfo("No OpenAPI files found to check");
@@ -209,6 +233,12 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
           logJobFailure();
           return { brownfield, exitCode: 1 };
         }
+      }
+      if (relocatedApiVersions.has(posix.dirname(file))) {
+        logInfo(
+          `  Suppressed: ${String(suppression.reason ?? "<no reason specified>")} (existing API version relocated)`,
+        );
+        continue;
       }
       if (!generated) {
         const serviceDirectory = resolve(fullPath, "../../..");
