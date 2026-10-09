@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Cdn/EdgeAction",
-    "version": "2025-12-01-preview",
+    "version": "2026-10-01",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -258,7 +258,7 @@
         "tags": [
           "EdgeActions"
         ],
-        "description": "Update a EdgeAction",
+        "description": "Updates the tags of an Edge Action. Omitted tags are preserved, an empty tags object clears all tags, and supplied tags replace the entire tag collection. Null tags are rejected. Do not include sku in PATCH requests; any supplied sku, including null or the existing value, is rejected.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -588,7 +588,7 @@
         "tags": [
           "EdgeActionExecutionFilters"
         ],
-        "description": "Update a EdgeActionExecutionFilter",
+        "description": "Updates the properties and tags of an Edge Action execution filter. Omitted tags are preserved, an empty tags object clears all tags, and supplied tags replace the entire tag collection. Null tags are rejected.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -781,7 +781,7 @@
           }
         },
         "x-ms-examples": {
-          "GetEdgeActionVersionsByEdgeAction": {
+          "ListEdgeActionVersionsByEdgeAction": {
             "$ref": "./examples/EdgeActionVersions_ListByEdgeAction.json"
           }
         },
@@ -936,7 +936,7 @@
         "tags": [
           "EdgeActionVersions"
         ],
-        "description": "Update a EdgeActionVersion",
+        "description": "Updates the tags of an Edge Action version. Omitted tags are preserved, an empty tags object clears all tags, and supplied tags replace the entire tag collection. Null tags are rejected. Version properties are not changed. If deploymentType or isDefaultVersion is supplied, it must match the existing value; use swapDefault to change the default version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1004,7 +1004,7 @@
           }
         },
         "x-ms-examples": {
-          "UpdateEdgeActionVersion": {
+          "UpdateEdgeActionVersionTags": {
             "$ref": "./examples/EdgeActionVersions_Update.json"
           }
         },
@@ -1603,11 +1603,11 @@
         },
         "sku": {
           "$ref": "#/definitions/SkuTypeUpdate",
-          "description": "The sku type of the edge action"
+          "description": "The SKU of the Edge Action. Do not include sku in PATCH requests; any supplied sku, including null or the existing value, is rejected."
         },
         "tags": {
           "type": "object",
-          "description": "Resource tags.",
+          "description": "Resource tags. For PATCH requests, omitted tags are preserved, an empty tags object clears all tags, and supplied tags replace the entire tag collection. Null tags are rejected.",
           "additionalProperties": {
             "type": "string"
           }
@@ -1703,7 +1703,7 @@
       "properties": {
         "deploymentType": {
           "$ref": "#/definitions/EdgeActionVersionDeploymentType",
-          "description": "The deployment type",
+          "description": "The deployment type for the Edge Action version. Set this value when creating the version. When updating an existing version, any supplied value must match the existing value.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1722,7 +1722,7 @@
         },
         "isDefaultVersion": {
           "$ref": "#/definitions/EdgeActionIsDefaultVersion",
-          "description": "The active state",
+          "description": "Indicates whether this is the default version. When creating a version, if the Edge Action has no default version, the service makes the new version the default even when false is supplied. If another default version exists, supplying true is rejected. When updating an existing version, any supplied value must match the existing value. Use swapDefault to change the default version.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1764,7 +1764,7 @@
       "properties": {
         "deploymentType": {
           "$ref": "#/definitions/EdgeActionVersionDeploymentType",
-          "description": "The deployment type",
+          "description": "The deployment type for the Edge Action version. Set this value when creating the version. When updating an existing version, any supplied value must match the existing value.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1773,7 +1773,7 @@
         },
         "isDefaultVersion": {
           "$ref": "#/definitions/EdgeActionIsDefaultVersion",
-          "description": "The active state",
+          "description": "Indicates whether this is the default version. When creating a version, if the Edge Action has no default version, the service makes the new version the default even when false is supplied. If another default version exists, supplying true is rejected. When updating an existing version, any supplied value must match the existing value. Use swapDefault to change the default version.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1870,7 +1870,7 @@
     },
     "SkuTypeUpdate": {
       "type": "object",
-      "description": "The SKU type for update operations",
+      "description": "The SKU fields in the update model. Do not include sku in PATCH requests; any supplied sku, including null or the existing value, is rejected.",
       "properties": {
         "name": {
           "type": "string",
