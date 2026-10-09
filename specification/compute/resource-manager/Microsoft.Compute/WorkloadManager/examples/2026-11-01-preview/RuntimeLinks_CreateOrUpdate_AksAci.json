@@ -1,0 +1,62 @@
+{
+  "title": "Create a runtime link between Kubernetes and serverless containers",
+  "operationId": "RuntimeLinks_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-workload",
+    "spaceName": "managed-agents-prod",
+    "linkName": "default",
+    "api-version": "2026-11-01-preview",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "orchestratorBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
+        "executionBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
+        "capacityProfile": {
+          "minimumNodes": 1,
+          "maximumNodes": 100
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeLinks/default",
+        "name": "default",
+        "type": "Microsoft.Compute/workloadSpaces/runtimeLinks",
+        "location": "eastus2",
+        "properties": {
+          "orchestratorBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
+          "executionBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
+          "capacityProfile": {
+            "minimumNodes": 1,
+            "maximumNodes": 100
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/operationStatuses/00000000-0000-0000-0000-000000000015?api-version=2026-11-01-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeLinks/default",
+        "name": "default",
+        "type": "Microsoft.Compute/workloadSpaces/runtimeLinks",
+        "location": "eastus2",
+        "properties": {
+          "orchestratorBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
+          "executionBindingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/serverless-default",
+          "capacityProfile": {
+            "minimumNodes": 1,
+            "maximumNodes": 100
+          },
+          "provisioningState": "Provisioning"
+        }
+      }
+    }
+  }
+}

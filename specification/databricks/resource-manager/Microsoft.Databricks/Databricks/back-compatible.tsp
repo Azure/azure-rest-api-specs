@@ -8,7 +8,6 @@ using Microsoft.Databricks;
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Workspaces.update::parameters.properties, "parameters");
-@@clientLocation(Workspaces.list, "OutboundNetworkDependenciesEndpoints");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Workspace.properties);
 

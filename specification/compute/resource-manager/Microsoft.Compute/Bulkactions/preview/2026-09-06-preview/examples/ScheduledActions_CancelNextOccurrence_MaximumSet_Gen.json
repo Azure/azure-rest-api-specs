@@ -1,0 +1,49 @@
+{
+  "title": "Cancel the next scheduled action occurrence",
+  "operationId": "ScheduledActions_CancelNextOccurrence",
+  "parameters": {
+    "api-version": "2026-09-06-preview",
+    "subscriptionId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
+    "resourceGroupName": "rgcompute",
+    "scheduledActionName": "myScheduledAction",
+    "body": {
+      "resourceIds": [
+        "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm",
+        "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm2"
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/providers/Microsoft.Compute/locations/eastus/operations/2a3fce8e-874c-45f4-9d27-1a804f3b7a04?api-version=2026-09-06-preview",
+        "Location": "https://management.azure.com/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/providers/Microsoft.Compute/locations/eastus/operations/2a3fce8e-874c-45f4-9d27-1a804f3b7a04?monitor=true&api-version=2026-09-06-preview",
+        "Retry-After": 10
+      }
+    },
+    "200": {
+      "body": {
+        "totalResources": 2,
+        "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm",
+            "status": "Succeeded"
+          },
+          {
+            "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVm2",
+            "status": "Failed",
+            "error": {
+              "code": "InternalServerError",
+              "message": "An internal error occurred.",
+              "target": "virtualMachines",
+              "details": [],
+              "innererror": {
+                "code": "InnerErrorCode"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

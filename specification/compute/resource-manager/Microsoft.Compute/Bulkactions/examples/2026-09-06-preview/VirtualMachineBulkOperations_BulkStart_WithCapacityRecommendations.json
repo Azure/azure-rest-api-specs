@@ -1,0 +1,116 @@
+{
+  "title": "03 - Start virtual machines with capacity recommendations",
+  "description": "Use capacityRecommendationParameters to request placement recommendations for selected VM sizes, regions, and availability zones. Recommendations are generated only if a VM fails to start because of an allocation failure. Use Get Operation Status to view capacityRecommendation.",
+  "operationId": "VirtualMachineBulkOperations_BulkStart",
+  "parameters": {
+    "api-version": "2026-09-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "executionParameters": {
+        "retryPolicy": {
+          "retryWindowInMinutes": 30
+        },
+        "capacityRecommendationParameters": {
+          "desiredLocations": [
+            "eastus",
+            "westus2"
+          ],
+          "desiredSizes": [
+            "Standard_D2s_v5",
+            "Standard_D4s_v5"
+          ],
+          "availabilityZones": true
+        }
+      },
+      "resources": {
+        "ids": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "description": "Start Resource request",
+        "type": "VirtualMachines",
+        "location": "eastus",
+        "results": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+            "operation": {
+              "operationId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-01",
+              "opType": "Start",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "deadline": "2026-08-31T18:00:00Z",
+              "deadlineType": "InitiateAt",
+              "state": "PendingScheduling",
+              "timezone": "UTC",
+              "retryPolicy": {
+                "retryWindowInMinutes": 30,
+                "onFailureAction": "Start"
+              },
+              "capacityRecommendation": {
+                "status": "NotInitiated",
+                "details": {
+                  "desiredLocations": [
+                    "eastus",
+                    "westus2"
+                  ],
+                  "desiredSizes": [
+                    {
+                      "sku": "Standard_D2s_v5"
+                    },
+                    {
+                      "sku": "Standard_D4s_v5"
+                    }
+                  ],
+                  "availabilityZones": true
+                }
+              }
+            }
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+            "operation": {
+              "operationId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/bulk-vm-02",
+              "opType": "Start",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "deadline": "2026-08-31T18:00:00Z",
+              "deadlineType": "InitiateAt",
+              "state": "PendingScheduling",
+              "timezone": "UTC",
+              "retryPolicy": {
+                "retryWindowInMinutes": 30,
+                "onFailureAction": "Start"
+              },
+              "capacityRecommendation": {
+                "status": "NotInitiated",
+                "details": {
+                  "desiredLocations": [
+                    "eastus",
+                    "westus2"
+                  ],
+                  "desiredSizes": [
+                    {
+                      "sku": "Standard_D2s_v5"
+                    },
+                    {
+                      "sku": "Standard_D4s_v5"
+                    }
+                  ],
+                  "availabilityZones": true
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

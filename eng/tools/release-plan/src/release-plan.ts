@@ -30,7 +30,7 @@ export function ensureReleasePlan(
   allowCreate = true,
 ): EnsureReleasePlanResult {
   if (context.prUrl) {
-    const existingByPr = runGetReleasePlanByPr(context.prUrl, runner);
+    const existingByPr = runGetReleasePlanByPr(context.prUrl, context.apiReleaseType, runner);
     if (existingByPr) {
       return {
         outcome: "existing_by_pr",
@@ -42,6 +42,7 @@ export function ensureReleasePlan(
 
   const existingByPath = runGetReleasePlanByPath(
     context.tspProjectPath,
+    context.apiVersion,
     context.apiReleaseType,
     runner,
   );
@@ -79,6 +80,7 @@ function buildDetails(context: ReleasePlanCommandContext): EnsureReleasePlanResu
     prUrl: context.prUrl ?? "",
     tspProjectPath: context.tspProjectPath,
     apiVersion: context.apiVersion,
+    specCommitSha: context.specCommitSha,
     apiReleaseType: context.apiReleaseType,
     sdkReleaseType: context.sdkReleaseType,
     targetReleaseMonth: context.targetMonth,
@@ -86,25 +88,41 @@ function buildDetails(context: ReleasePlanCommandContext): EnsureReleasePlanResu
 }
 
 /**
- * Retrieves release plan by pull request URL.
+ * Retrieves release plan by pull request URL and API release type.
  * @param prUrl GitHub PR URL (e.g., https://github.com/owner/repo/pull/123)
+ * @param apiReleaseType API release type to match
  * @param runner Function to execute azsdk commands
  * @returns Release plan object if found, null if not found or error occurred
  */
-function runGetReleasePlanByPr(prUrl: string, runner: AzsdkRunner): ReleasePlanData | null {
-  const args = ["release-plan", "get", "--pull-request", prUrl, "--output", "json"];
+function runGetReleasePlanByPr(
+  prUrl: string,
+  apiReleaseType: ApiReleaseType,
+  runner: AzsdkRunner,
+): ReleasePlanData | null {
+  const args = [
+    "release-plan",
+    "get",
+    "--pull-request",
+    prUrl,
+    "--api-release-type",
+    apiReleaseType,
+    "--output",
+    "json",
+  ];
   return parseReleasePlanResult(runner(args));
 }
 
 /**
- * Retrieves release plan by TypeSpec project path and API release type.
+ * Retrieves release plan by TypeSpec project path, API version, and API release type.
  * @param tspProjectPath Path to TypeSpec project (relative to workspace)
+ * @param apiVersion API version to match
  * @param apiReleaseType API release type (Private Preview, Public Preview, or GA)
  * @param runner Function to execute azsdk commands
  * @returns Release plan object if found, null if not found or error occurred
  */
 function runGetReleasePlanByPath(
   tspProjectPath: string,
+  apiVersion: string,
   apiReleaseType: ApiReleaseType,
   runner: AzsdkRunner,
 ): ReleasePlanData | null {
@@ -113,6 +131,8 @@ function runGetReleasePlanByPath(
     "get",
     "--typespec-path",
     tspProjectPath,
+    "--api-version",
+    apiVersion,
     "--api-release-type",
     apiReleaseType,
     "--output",
@@ -175,6 +195,9 @@ function runCreateReleasePlan(
     context.prUrl,
     "--test-release",
     String(context.testReleasePlan),
+    ...(context.apiReleaseType === "Private Preview"
+      ? []
+      : ["--spec-commit-sha", context.specCommitSha]),
     "--output",
     "json",
   ];
@@ -251,6 +274,21 @@ export function getReleasePlanById(releasePlanId: string, runner?: AzsdkRunner):
   } catch {
     throw new Error(`Failed to parse JSON from azsdk output: ${result.stdout}`);
   }
+}
+
+/**
+ * Retrieves a release plan directly by id without running discovery or creation.
+ */
+export function getReleasePlanResultById(
+  releasePlanId: string,
+  runner: AzsdkRunner,
+): EnsureReleasePlanResult {
+  const trimmedId = releasePlanId.trim();
+  return {
+    outcome: "existing_by_id",
+    releasePlan: getReleasePlanById(trimmedId, runner),
+    details: { releasePlanId: trimmedId },
+  };
 }
 
 /**

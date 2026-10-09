@@ -78,7 +78,10 @@ export function parseRefreshCliArguments(
 function shouldRunForOutcome(outcome: string): boolean {
   const normalized = outcome.trim().toLowerCase();
   return (
-    normalized === "created" || normalized === "existing_by_path" || normalized === "existing_by_pr"
+    normalized === "created" ||
+    normalized === "existing_by_id" ||
+    normalized === "existing_by_path" ||
+    normalized === "existing_by_pr"
   );
 }
 
@@ -144,6 +147,11 @@ export function runUpdateSdkDetails(
     throw new Error("SDK release type could not be determined from release plan details.");
   }
 
+  const selection = artifact.details;
+  const targetArgs =
+    "specCommitSha" in selection && selection.apiReleaseType !== "Private Preview"
+      ? ["--spec-commit-sha", selection.specCommitSha, "--pull-request", selection.prUrl]
+      : [];
   console.log("Running release plan update for an in-progress release plan.");
   const updateResult = runner([
     "release-plan",
@@ -154,6 +162,7 @@ export function runUpdateSdkDetails(
     workItemId,
     "--sdk-type",
     sdkReleaseType,
+    ...targetArgs,
   ]);
 
   if (updateResult.exitCode !== 0) {

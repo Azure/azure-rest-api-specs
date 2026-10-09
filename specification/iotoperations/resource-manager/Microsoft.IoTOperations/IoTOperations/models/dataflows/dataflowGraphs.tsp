@@ -167,12 +167,14 @@ model DataflowGraphDestinationNodeSettings {
 
   /** Output schema settings. */
   @removed(Versions.`2025-10-01`)
+  @added(Versions.`2026-10-01`)
   outputSchemaSettings?: DataflowGraphDestinationSchemaSettings;
 }
 
 /** DataflowGraph destination node output schema settings. */
 @added(Versions.`2025-07-01-preview`)
 @removed(Versions.`2025-10-01`)
+@added(Versions.`2026-10-01`)
 model DataflowGraphDestinationSchemaSettings {
   /** The format of the output data. */
   serializationFormat: DataflowGraphDestinationSchemaSerializationFormat;
@@ -184,6 +186,7 @@ model DataflowGraphDestinationSchemaSettings {
 /** Serialization format for dataflow graph. */
 @added(Versions.`2025-07-01-preview`)
 @removed(Versions.`2025-10-01`)
+@added(Versions.`2026-10-01`)
 union DataflowGraphDestinationSchemaSerializationFormat {
   string,
 

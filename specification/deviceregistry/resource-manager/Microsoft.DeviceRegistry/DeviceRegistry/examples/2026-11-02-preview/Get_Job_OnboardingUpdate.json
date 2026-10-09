@@ -1,0 +1,40 @@
+{
+  "title": "Get an Onboarding Update Job",
+  "operationId": "Jobs_Get",
+  "description": "Get an onboarding update job.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "namespace-1",
+    "jobName": "adr-job-onboarding-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/jobs/adr-job-onboarding-01",
+        "name": "adr-job-onboarding-01",
+        "type": "Microsoft.DeviceRegistry/namespaces/jobs",
+        "location": "North Europe",
+        "systemData": {
+          "createdAt": "2026-04-01T21:39:27.7050447Z",
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "lastModifiedAt": "2026-04-01T21:39:27.7050447Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application"
+        },
+        "properties": {
+          "definition": {
+            "schedulingType": "Continuous",
+            "updateResourceId": "updates/providers/contoso/names/windowsApp/versions/1.0"
+          },
+          "description": "Onboarding rollout for all compatible toasters.",
+          "jobType": "OnboardingUpdate",
+          "provisioningState": "Succeeded",
+          "uuid": "91339e2f-7339-4b18-a6ae-dd3d392a4275"
+        }
+      }
+    }
+  }
+}
