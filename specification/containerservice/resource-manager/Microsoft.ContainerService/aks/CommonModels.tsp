@@ -569,7 +569,7 @@ union DriverType {
 /**
  * The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_08_01)
 union ManagementMode {
   string,
 
@@ -2072,6 +2072,18 @@ model ManagedClusterProperties {
   aiToolchainOperatorProfile?: ManagedClusterAIToolchainOperatorProfile;
 
   /**
+   * Agent Sandbox settings that apply to the whole cluster.
+   */
+  @added(Versions.v2026_08_02_preview)
+  agentSandboxProfile?: ManagedClusterAgentSandboxProfile;
+
+  /**
+   * The Pod Snapshot Restore profile for the managed cluster.
+   */
+  @added(Versions.v2026_08_02_preview)
+  podSnapshotProfile?: ManagedClusterPodSnapshotProfile;
+
+  /**
    * Profile with scheduler-related settings, like the configuration mode for each scheduler managed by AKS. See https://aka.ms/aks/scheduler-profile.
    */
   @added(Versions.v2026_05_01)
@@ -2489,11 +2501,11 @@ model ContainerServiceNetworkProfile {
   loadBalancerProfile?: ManagedClusterLoadBalancerProfile;
 
   /**
-   * Profile of the Bastion Host associated with the managed cluster.
-   * See https://aka.ms/aks/BastionConnect for more details.
+   * Configuration for accessing the managed cluster API through Bastion or Cloud Shell.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "API is the approved public API acronym."
   @added(Versions.v2026_08_02_preview)
-  bastionProfile?: BastionProfile;
+  clusterAPIConnectivityProfile?: ClusterAPIConnectivityProfile;
 
   /**
    * Profile of the cluster NAT gateway.
@@ -2542,6 +2554,166 @@ model ContainerServiceNetworkProfile {
    */
   @added(Versions.v2026_08_02_preview)
   kubeProxyConfig?: ContainerServiceNetworkProfileKubeProxyConfig;
+}
+
+/**
+ * Configuration for accessing the managed cluster API through Bastion or Cloud Shell.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "API is the approved public API acronym."
+@added(Versions.v2026_08_02_preview)
+model ClusterAPIConnectivityProfile {
+  /**
+   * Azure Bastion connectivity settings.
+   * See https://aka.ms/aks/BastionConnect for more details.
+   */
+  bastion?: BastionProfile;
+
+  /**
+   * Cloud Shell connectivity settings.
+   * For more information, see https://aka.ms/aks/CloudShellConnect.
+   */
+  cloudShell?: CloudShellProfile;
+}
+
+/**
+ * Cloud Shell connectivity and storage settings for a private managed cluster.
+ * For more information, see https://aka.ms/aks/CloudShellConnect.
+ */
+@added(Versions.v2026_08_02_preview)
+model CloudShellProfile {
+  /**
+   * Whether Cloud Shell connectivity is disabled, uses AKS-managed network resources, or uses user-provided
+   * network resources. Defaults to Disabled when omitted during create. On update, omission preserves the existing
+   * mode. Setting this property to Disabled removes AKS-created resources and connectivity artifacts. For Custom
+   * mode, AKS unregisters the user-provided resources but does not delete them.
+   */
+  mode?: CloudShellProfileMode;
+
+  /**
+   * Network resources used by Cloud Shell. When configuring Custom networking, users must provide
+   * both subnetId and relayNamespaceId. When updating an existing Custom configuration, either resource ID can be
+   * changed independently; omitted fields preserve their existing values. In Custom mode, AKS returns the user-provided
+   * values. In Managed mode, AKS populates the effective values. Users may omit Managed values or resubmit values
+   * returned by GET unchanged; different values are rejected. This property must be omitted when mode is Disabled.
+   * See https://aka.ms/aks/CloudShellConnect for Custom networking requirements.
+   */
+  network?: CloudShellNetworkProfile;
+
+  /**
+   * Storage resources used for Cloud Shell file persistence. When configuring Custom storage, users
+   * must provide both storageAccountId and fileShareName. When updating an existing Custom configuration, either
+   * property can be changed independently; omitted fields preserve their existing values. In Custom mode, AKS returns
+   * the user-provided values. In Managed mode, AKS populates the effective values. Users may omit Managed values or
+   * resubmit values returned by GET unchanged; different values are rejected. Both properties must be omitted when
+   * mode is Disabled. See https://aka.ms/aks/CloudShellConnect for Custom storage requirements.
+   */
+  storage?: CloudShellStorageProfile;
+}
+
+/**
+ * Cloud Shell connectivity mode.
+ */
+@added(Versions.v2026_08_02_preview)
+union CloudShellProfileMode {
+  string,
+
+  /**
+   * Cloud Shell connectivity is disabled.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Cloud Shell connectivity uses network resources managed by AKS.
+   */
+  Managed: "Managed",
+
+  /**
+   * Cloud Shell connectivity uses network resources provided by the user.
+   */
+  Custom: "Custom",
+}
+
+/**
+ * Network resources used by Cloud Shell. AKS peers the subnet's virtual network with the cluster virtual network.
+ * For Custom resources, their address spaces must not overlap. See https://aka.ms/aks/CloudShellConnect.
+ */
+@added(Versions.v2026_08_02_preview)
+model CloudShellNetworkProfile {
+  /**
+   * Dedicated IPv4 subnet used by Cloud Shell containers. For Custom networking, this subnet must be
+   * delegated to Microsoft.ContainerInstance/containerGroups and be /24 or larger. Grant the cluster identity
+   * Network Contributor on the containing virtual network and grant the Azure Container Instance service principal
+   * Network Contributor on this subnet or its containing virtual network. Required when Cloud Shell mode is Custom.
+   */
+  subnetId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
+
+  /**
+   * Azure Relay namespace used by Cloud Shell. For Custom networking, this existing namespace is required
+   * with subnetId. Grant the cluster identity Reader and the Azure Container Instance service principal Contributor
+   * on the namespace. Required when Cloud Shell mode is Custom.
+   */
+  relayNamespaceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Relay/namespaces";
+    }
+  ]>;
+}
+
+/**
+ * How Cloud Shell storage resources are managed.
+ */
+@added(Versions.v2026_08_02_preview)
+union CloudShellStorageProfileMode {
+  string,
+
+  /**
+   * Persistent storage is disabled.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * AKS manages the storage resources.
+   */
+  Managed: "Managed",
+
+  /**
+   * The user provides the storage resources.
+   */
+  Custom: "Custom",
+}
+
+/**
+ * Storage used for Cloud Shell file persistence.
+ */
+@added(Versions.v2026_08_02_preview)
+model CloudShellStorageProfile {
+  /**
+   * Whether persistent storage is disabled, managed by AKS, or provided by the user. Defaults to Disabled when
+   * omitted during initial Cloud Shell enablement. On update, omission preserves the existing mode.
+   */
+  mode?: CloudShellStorageProfileMode;
+
+  /**
+   * Storage account used for Cloud Shell files. For Custom storage, grant the cluster identity
+   * Storage File Data SMB Share Contributor on this existing storage account. Required when mode is Custom.
+   */
+  storageAccountId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
+
+  /**
+   * File share used for Cloud Shell files. Required when mode is Custom.
+   */
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-z0-9]+(?:-[a-z0-9]+)*$")
+  fileShareName?: string;
 }
 
 /**
@@ -3600,6 +3772,30 @@ model ManagedClusterStorageProfileDiskCSIDriver {
    * Whether to enable AzureDisk CSI Driver. The default value is true.
    */
   enabled?: boolean;
+
+  /**
+   * Quick Attach Detach settings for the AzureDisk CSI driver. Quick Attach Detach enables faster, higher-scale Azure Disk attach and detach operations for stateful AKS workloads by bypassing ARM/CRP control-plane bottlenecks. For more information, see https://aka.ms/aks/qad.
+   */
+  @added(Versions.v2026_08_02_preview)
+  quickAttachDetach?: ManagedClusterStorageProfileDiskCSIDriverQuickAttachDetach;
+}
+
+/**
+ * Quick Attach Detach settings for the AzureDisk CSI driver.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with the parent CSI driver model"
+@added(Versions.v2026_08_02_preview)
+model ManagedClusterStorageProfileDiskCSIDriverQuickAttachDetach {
+  /**
+   * Whether to enable Quick Attach Detach for the AzureDisk CSI driver. The default value is false.
+   */
+  enabled?: boolean;
+
+  /**
+   * Identity used by Quick Attach Detach. This property is returned by GET and cannot be set by clients. The Quick Attach Detach feature uses a managed identity that is automatically created and managed by the AKS resource provider. In most scenarios, no user action is required. An exception applies when using customer-managed disks that are located outside of the AKS node resource group (Bring Your Own Disk scenario). In this case, users must grant the Quick Attach Detach managed identity the required permissions on the resource group containing the disk.
+   */
+  @visibility(Lifecycle.Read)
+  identity?: UserAssignedIdentity;
 }
 
 /**
@@ -4217,6 +4413,30 @@ model ManagedClusterAIToolchainOperatorProfile {
   /**
    * Whether to enable AI toolchain operator to the cluster. Indicates if AI toolchain operator  enabled or not.
    */
+  enabled?: boolean;
+}
+
+/**
+ * Settings for the Agent Sandbox core extension managed by Azure Kubernetes Service (AKS).
+ */
+@added(Versions.v2026_08_02_preview)
+model ManagedClusterAgentSandboxProfile {
+  /**
+   * Whether the Agent Sandbox core extension is enabled for the cluster. On cluster creation, the default is false.
+   */
+  @added(Versions.v2026_08_02_preview)
+  enabled?: boolean;
+}
+
+/**
+ * The Pod Snapshot Restore profile for the managed cluster.
+ */
+@added(Versions.v2026_08_02_preview)
+model ManagedClusterPodSnapshotProfile {
+  /**
+   * Whether the Pod Snapshot Restore core extension is enabled for the managed cluster.
+   */
+  @added(Versions.v2026_08_02_preview)
   enabled?: boolean;
 }
 

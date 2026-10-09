@@ -36,10 +36,12 @@
           }
         },
         "networkProfile": {
-          "bastionProfile": {
-            "enabled": true,
-            "sku": "Premium",
-            "scaleUnits": 3
+          "clusterAPIConnectivityProfile": {
+            "bastion": {
+              "enabled": true,
+              "sku": "Premium",
+              "scaleUnits": 3
+            }
           }
         },
         "servicePrincipalProfile": {
@@ -110,12 +112,14 @@
           },
           "maxAgentPools": 1,
           "networkProfile": {
-            "bastionProfile": {
-              "enabled": true,
-              "bastionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/bastionHosts/bastionhost1",
-              "sku": "Premium",
-              "scaleUnits": 3,
-              "publicIpAddressId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/bastionPublicIP1"
+            "clusterAPIConnectivityProfile": {
+              "bastion": {
+                "enabled": true,
+                "bastionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/bastionHosts/bastionhost1",
+                "sku": "Premium",
+                "scaleUnits": 3,
+                "publicIpAddressId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/bastionPublicIP1"
+              }
             }
           },
           "nodeResourceGroup": "MC_rg1_clustername1_location1",
@@ -178,12 +182,14 @@
           },
           "maxAgentPools": 1,
           "networkProfile": {
-            "bastionProfile": {
-              "enabled": true,
-              "bastionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/bastionHosts/bastionhost1",
-              "sku": "Premium",
-              "scaleUnits": 3,
-              "publicIpAddressId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/bastionPublicIP1"
+            "clusterAPIConnectivityProfile": {
+              "bastion": {
+                "enabled": true,
+                "bastionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/bastionHosts/bastionhost1",
+                "sku": "Premium",
+                "scaleUnits": 3,
+                "publicIpAddressId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/bastionPublicIP1"
+              }
             }
           },
           "nodeResourceGroup": "MC_rg1_clustername1_location1",
