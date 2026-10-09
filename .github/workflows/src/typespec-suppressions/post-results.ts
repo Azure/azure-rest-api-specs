@@ -16,7 +16,7 @@ import type { GitHubScriptArgs } from "../github.ts";
 
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { commentOrUpdate, parseExistingComments } from "../comment.ts";
-import { extractInputs } from "../context.ts";
+import { extractInputs, getOpenPullRequest } from "../context.ts";
 import {
   TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
   TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,
@@ -69,11 +69,8 @@ async function syncReviewRequiredLabel(
 export default async function postSuppressionsResults({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
-  const { data: pr } = await github.rest.pulls.get({
-    owner,
-    repo,
-    pull_number: issue_number,
-  });
+  const pr = await getOpenPullRequest(github, core, { owner, repo, issue_number });
+  if (!pr) return;
 
   const labelNames: string[] = pr.labels.map((label: { name?: string }) => label.name ?? "");
   const isNewAnalysis = context.eventName === "workflow_run";

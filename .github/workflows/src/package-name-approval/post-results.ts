@@ -4,7 +4,7 @@ import { z } from "zod";
 import { execFile } from "../../../shared/src/exec.ts";
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { commentOrUpdate, parseExistingComments } from "../comment.ts";
-import { extractInputs } from "../context.ts";
+import { extractInputs, getOpenPullRequest } from "../context.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
 import { loadApproversConfig } from "./approvers.ts";
 import { buildApprovalResetComment } from "../protected-labels/label-comments.ts";
@@ -292,6 +292,8 @@ function buildCommentBody({
 
 export default async function postResults({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, issue_number, run_id } = await extractInputs(github, context, core);
+  const pr = await getOpenPullRequest(github, core, { owner, repo, issue_number });
+  if (!pr) return;
   const approversConfig = await loadApproversConfig();
   const results = await downloadNamespaceResults(github, core, owner, repo, run_id);
 
@@ -319,11 +321,6 @@ export default async function postResults({ github, context, core }: GitHubScrip
     // Clean up if package-name labels were previously applied but config was reverted.
     // Without this, removing package name entries from tspconfig leaves stale pending
     // labels and a blocking status check.
-    const { data: pr } = await github.rest.pulls.get({
-      owner,
-      repo,
-      pull_number: issue_number,
-    });
     const existingLabels = pr.labels.map((label: { name?: string }) => label.name ?? "");
 
     if (existingLabels.includes("package-name-review-required")) {
@@ -365,12 +362,6 @@ export default async function postResults({ github, context, core }: GitHubScrip
     }
     return;
   }
-
-  const { data: pr } = await github.rest.pulls.get({
-    owner,
-    repo,
-    pull_number: issue_number,
-  });
 
   const existingLabels: string[] = pr.labels.map((label: { name?: string }) => label.name ?? "");
   const languages = Object.keys(results.namespacesFound);

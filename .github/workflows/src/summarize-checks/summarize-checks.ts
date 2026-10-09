@@ -30,7 +30,7 @@ import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { commentOrUpdate } from "../comment.ts";
-import { extractInputs } from "../context.ts";
+import { extractInputs, getOpenPullRequest } from "../context.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 import {
   ImpactAssessmentSchema,
@@ -271,10 +271,8 @@ export default async function summarizeChecks({
 }: GitHubScriptArgs): Promise<void> {
   const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
-  if (!issue_number) {
-    core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
-    return;
-  }
+  const pr = await getOpenPullRequest(github, core, { owner, repo, issue_number });
+  if (!pr) return;
 
   // Publish PR identity as step outputs so the workflow can upload issue-number / head-sha
   // handoff artifacts. Downstream workflow_run consumers (e.g. data-plane review assignment)
@@ -305,6 +303,7 @@ export default async function summarizeChecks({
     context.eventName,
     targetBranch,
     target_url,
+    pr.labels.map((label) => label.name),
   );
 }
 
@@ -339,6 +338,7 @@ export async function summarizeChecksImpl(
   event_name: string,
   targetBranch: string | undefined,
   target_url: string,
+  existingLabels?: string[],
 ): Promise<void> {
   core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
@@ -348,7 +348,7 @@ export async function summarizeChecksImpl(
   await core.summary.write();
   core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 
-  let labelNames = await getExistingLabels(github, owner, repo, issue_number);
+  let labelNames = existingLabels ?? (await getExistingLabels(github, owner, repo, issue_number));
 
   const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
     github,

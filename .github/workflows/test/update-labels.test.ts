@@ -3,13 +3,61 @@ import { describe, expect, it } from "vitest";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { fullGitSha } from "../../shared/test/examples.ts";
 import updateLabelsSrc, { updateLabelsImpl } from "../src/update-labels.ts";
-import { createMockCore, createMockGithub, createMockRequestError } from "./mocks.ts";
+import {
+  createMockCore,
+  createMockGithub as createBaseMockGithub,
+  createMockRequestError,
+} from "./mocks.ts";
+
+function createMockGithub() {
+  const github = createBaseMockGithub();
+  github.rest.pulls.get.mockResolvedValue({ data: { state: "open" } });
+  return github;
+}
 
 function updateLabels(asyncFunctionArgs: unknown) {
   return updateLabelsSrc(asyncFunctionArgs as GitHubScriptArgs);
 }
 
 describe("updateLabels", () => {
+  it.each([false, true])(
+    "reuses identity artifacts and only checks PR state when label actions exist (%s)",
+    async (hasLabelAction) => {
+      const core = createMockCore();
+      const github = createMockGithub();
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [
+            { name: `head-sha=${fullGitSha}` },
+            { name: "issue-number=123" },
+            ...(hasLabelAction ? [{ name: "label-foo=true" }] : []),
+          ],
+        },
+      });
+
+      await updateLabels({
+        github,
+        core,
+        context: {
+          eventName: "workflow_run",
+          payload: {
+            action: "completed",
+            workflow_run: {
+              event: "check_run",
+              id: 456,
+              repository: { name: "repo", owner: { login: "owner" } },
+            },
+          },
+        },
+      });
+
+      expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledTimes(1);
+      expect(github.rest.pulls.get).toHaveBeenCalledTimes(hasLabelAction ? 1 : 0);
+      expect(github.rest.issues.addLabels).toHaveBeenCalledTimes(hasLabelAction ? 1 : 0);
+      if (!hasLabelAction) expect(core.setOutput).not.toHaveBeenCalled();
+    },
+  );
+
   it("loads inputs from context", async () => {
     const core = createMockCore();
 
@@ -82,16 +130,9 @@ describe("updateLabelsImpl", () => {
     expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
   });
 
-  it("handles missing issue_number", async () => {
+  it("skips an unresolved PR without reading or publishing artifacts", async () => {
     const github = createMockGithub();
-
-    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-      data: {
-        artifacts: [],
-      },
-    });
-
-    // No labels to add/remove, so should no-op rather than throw, even if issue_number is missing
+    const core = createMockCore();
     await expect(
       updateLabelsImpl({
         owner: "owner",
@@ -100,31 +141,36 @@ describe("updateLabelsImpl", () => {
         issue_number: NaN,
         run_id: 456,
         github: github,
-        core: createMockCore(),
+        core,
       }),
     ).resolves.toBeUndefined();
 
-    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-      data: {
-        artifacts: [{ name: "label-foo=true" }],
-      },
-    });
-
-    // Label to add/remove, but issue_number is missing, so throw
-    await expect(
-      updateLabelsImpl({
-        owner: "owner",
-        repo: "repo",
-        head_sha: fullGitSha,
-        issue_number: NaN,
-        run_id: 456,
-        github: github,
-        core: createMockCore(),
-      }),
-    ).rejects.toThrow("issue_number");
-
+    expect(github.rest.actions.listWorkflowRunArtifacts).not.toHaveBeenCalled();
+    expect(github.rest.pulls.get).not.toHaveBeenCalled();
+    expect(core.setOutput).not.toHaveBeenCalled();
+    expect(core.info).toHaveBeenCalledWith("No PR number resolved; skipping PR updates.");
     expect(github.rest.issues.addLabels).toBeCalledTimes(0);
     expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
+  });
+
+  it("does not publish PR handoff artifacts when there are no label actions", async () => {
+    const github = createMockGithub();
+    const core = createMockCore();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [{ name: `head-sha=${fullGitSha}` }, { name: "issue-number=123" }] },
+    });
+    await updateLabelsImpl({
+      owner: "owner",
+      repo: "repo",
+      head_sha: fullGitSha,
+      issue_number: 123,
+      run_id: 456,
+      github,
+      core,
+    });
+    expect(core.setOutput).not.toHaveBeenCalled();
+    expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
   });
 
   it("adds and removes labels for artifacts", async () => {

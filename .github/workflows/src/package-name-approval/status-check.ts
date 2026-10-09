@@ -1,16 +1,13 @@
 import type { GitHubScriptArgs } from "../github.ts";
-import { extractInputs } from "../context.ts";
+import { extractInputs, getOpenPullRequest } from "../context.ts";
 
 /**
  * Verify package name approval status and report as a commit status on the PR.
  */
 export default async function statusCheck({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
-  const { data: pr } = await github.rest.pulls.get({
-    owner,
-    repo,
-    pull_number: issue_number,
-  });
+  const pr = await getOpenPullRequest(github, core, { owner, repo, issue_number });
+  if (!pr) return;
 
   const labels: string[] = pr.labels.map((label: { name?: string }) => label.name ?? "");
 

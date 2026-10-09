@@ -1,13 +1,53 @@
 import { describe, expect, it } from "vitest";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { fullGitSha } from "../../shared/test/examples.ts";
-import { extractInputs as extractInputsImpl } from "../src/context.ts";
+import { extractInputs as extractInputsImpl, getOpenPullRequest } from "../src/context.ts";
 import type { Context, Core, GitHub } from "../src/github.ts";
 import { createMockCore, createMockGithub } from "./mocks.ts";
 
 function extractInputs(github: GitHub, context: unknown, core: Core) {
   return extractInputsImpl(github, context as Context, core);
 }
+
+describe("getOpenPullRequest", () => {
+  const inputs = { owner: "Azure", repo: "test-repo", issue_number: 42 };
+
+  it("returns the live open PR", async () => {
+    const github = createMockGithub();
+    const pr = { state: "open", number: 42 };
+    github.rest.pulls.get.mockResolvedValue({ data: pr });
+    expect(await getOpenPullRequest(github, createMockCore(), inputs)).toEqual(pr);
+    expect(github.rest.pulls.get).toHaveBeenCalledWith({
+      owner: "Azure",
+      repo: "test-repo",
+      pull_number: 42,
+    });
+  });
+
+  it.each([false, true])("skips a closed PR (merged: %s)", async (merged) => {
+    const github = createMockGithub();
+    const core = createMockCore();
+    github.rest.pulls.get.mockResolvedValue({ data: { state: "closed", merged } });
+    expect(await getOpenPullRequest(github, core, inputs)).toBeUndefined();
+    expect(core.info).toHaveBeenCalledWith("PR Azure/test-repo#42 is closed; skipping PR updates.");
+  });
+
+  it.each([NaN, 0, -1, 1.5])("skips unresolved PR number %s", async (issue_number) => {
+    const github = createMockGithub();
+    expect(
+      await getOpenPullRequest(github, createMockCore(), { ...inputs, issue_number }),
+    ).toBeUndefined();
+    expect(github.rest.pulls.get).not.toHaveBeenCalled();
+  });
+
+  it("does not hide API errors", async () => {
+    const github = createMockGithub();
+    github.rest.pulls.get.mockRejectedValue(new Error("API unavailable"));
+    await expect(getOpenPullRequest(github, createMockCore(), inputs)).rejects.toThrow(
+      "API unavailable",
+    );
+  });
+});
 
 describe("extractInputs", () => {
   it("unsupported_event", async () => {
@@ -422,6 +462,7 @@ describe("extractInputs", () => {
       head_sha: fullGitSha,
       issue_number: 123,
       run_id: 456,
+      artifactNames: ["issue-number=123", `head-sha=${fullGitSha}`],
     });
 
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
@@ -442,6 +483,7 @@ describe("extractInputs", () => {
       head_sha: "",
       issue_number: NaN,
       run_id: 456,
+      artifactNames: ["issue-number=not-a-number"],
     });
 
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
@@ -453,6 +495,7 @@ describe("extractInputs", () => {
       head_sha: "",
       issue_number: NaN,
       run_id: 456,
+      artifactNames: ["issue-number=null"],
     });
 
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
@@ -464,6 +507,7 @@ describe("extractInputs", () => {
       head_sha: "",
       issue_number: NaN,
       run_id: 456,
+      artifactNames: [],
     });
   });
 
@@ -515,6 +559,7 @@ describe("extractInputs", () => {
       head_sha: fullGitSha,
       issue_number: NaN,
       run_id: 456,
+      artifactNames: [`head-sha=${fullGitSha}`],
     });
   });
 

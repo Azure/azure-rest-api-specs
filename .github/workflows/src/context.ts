@@ -5,6 +5,9 @@ import { CoreLogger } from "./core-logger.ts";
 import type { Context, Core, GitHub, WebhookEvent } from "./github.ts";
 import { createLogHook, createRateLimitHook } from "./github.ts";
 import { getIssueNumber } from "./issues.ts";
+import { getCheckRunPullRequestNumber } from "./pull-request.ts";
+
+export { getOpenPullRequest } from "./pull-request.ts";
 
 export type PullRequest =
   RestEndpointMethodTypes["repos"]["listPullRequestsAssociatedWithCommit"]["response"]["data"][number];
@@ -27,6 +30,7 @@ export async function extractInputs(
   issue_number: number;
   run_id: number;
   details_url?: string;
+  artifactNames?: string[];
 }> {
   core.info("extractInputs()");
   core.info(`  eventName: ${context.eventName}`);
@@ -56,6 +60,7 @@ export async function extractInputs(
     issue_number: number;
     run_id: number;
     details_url?: string;
+    artifactNames?: string[];
   };
 
   // Add support for more event types as needed
@@ -117,6 +122,7 @@ export async function extractInputs(
 
     let issue_number = NaN;
     let head_sha = "";
+    let artifactNames: string[] | undefined;
 
     if (
       payload.workflow_run.event === "pull_request" ||
@@ -220,7 +226,7 @@ export async function extractInputs(
         per_page: PER_PAGE_MAX,
       });
 
-      const artifactNames = artifacts.map((a) => a.name);
+      artifactNames = artifacts.map((a) => a.name);
 
       core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
@@ -279,6 +285,7 @@ export async function extractInputs(
       head_sha,
       issue_number,
       run_id: payload.workflow_run.id,
+      ...(artifactNames ? { artifactNames } : {}),
     };
   } else if (context.eventName === "check_run") {
     const payload = context.payload as WebhookEvent<"check-run">;
@@ -289,7 +296,7 @@ export async function extractInputs(
       repo: repositoryInfo.repo,
       head_sha: checkRun.head_sha,
       details_url: checkRun.details_url,
-      issue_number: NaN,
+      issue_number: getCheckRunPullRequestNumber(payload),
       run_id: NaN,
     };
   } else if (context.eventName === "check_suite" && context.payload.action === "completed") {

@@ -12,6 +12,7 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
 permissions:
   contents: read
   checks: read
+  pull-requests: read
   statuses: write
   id-token: write
 
@@ -39,8 +40,17 @@ jobs:
           sparse-checkout: |
             .github
 
+      - name: Check live PR eligibility
+        id: pr-eligibility
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { shouldRunSdkWorkflow } =
+              await import('${{ github.workspace }}/.github/workflows/src/pull-request.ts');
+            return await shouldRunSdkWorkflow({ github, context, core });
+
       # Only run the login and get token steps when the repository is azure-rest-api-specs-pr
-      - if: github.event.repository.name == 'azure-rest-api-specs-pr'
+      - if: steps.pr-eligibility.outputs.result == 'true' && github.event.repository.name == 'azure-rest-api-specs-pr'
         name: Azure Login with Workload Identity Federation
         uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
         with:
@@ -48,7 +58,7 @@ jobs:
           tenant-id: "72f988bf-86f1-41af-91ab-2d7cd011db47"
           allow-no-subscriptions: true
 
-      - if: github.event.repository.name == 'azure-rest-api-specs-pr'
+      - if: steps.pr-eligibility.outputs.result == 'true' && github.event.repository.name == 'azure-rest-api-specs-pr'
         name: Get ADO Token via Managed Identity
         id: ado-token
         run: |
@@ -58,9 +68,11 @@ jobs:
           echo "token=$ADO_TOKEN" >> "$GITHUB_OUTPUT"
 
       - name: Install dependencies for github-script actions
+        if: steps.pr-eligibility.outputs.result == 'true'
         uses: ./.github/actions/install-deps-github-script
 
       - name: "SDK Validation Set Status"
+        if: steps.pr-eligibility.outputs.result == 'true'
         id: sdk-validation-status
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:

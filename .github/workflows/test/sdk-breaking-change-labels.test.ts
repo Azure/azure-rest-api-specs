@@ -10,7 +10,8 @@ import {
 import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
 
 // Mock dependencies
-vi.mock("../src/context.ts", () => ({
+vi.mock(import("../src/context.ts"), async (importOriginal) => ({
+  ...(await importOriginal()),
   extractInputs: vi.fn(),
 }));
 
@@ -32,7 +33,7 @@ describe("sdk-breaking-change-labels", () => {
     // Reset mocks
     vi.clearAllMocks();
     mockGithub.rest.pulls.get.mockResolvedValue({
-      data: { base: { ref: "main" } },
+      data: { state: "open", base: { ref: "main" } },
     });
   });
 
@@ -113,7 +114,7 @@ describe("sdk-breaking-change-labels", () => {
         const { extractInputs } = await import("../src/context.ts");
         (extractInputs as import("vitest").Mock).mockResolvedValue(mockInputs);
         mockGithub.rest.pulls.get.mockResolvedValue({
-          data: { base: { ref: targetBranch } },
+          data: { state: "open", base: { ref: targetBranch } },
         });
         mockFetch
           .mockResolvedValueOnce({
@@ -151,7 +152,7 @@ describe("sdk-breaking-change-labels", () => {
       const { extractInputs } = await import("../src/context.ts");
       (extractInputs as import("vitest").Mock).mockResolvedValue(mockInputs);
       mockGithub.rest.pulls.get.mockResolvedValue({
-        data: { base: { ref: "release-feature" } },
+        data: { state: "open", base: { ref: "release-feature" } },
       });
       mockFetch
         .mockResolvedValueOnce({
@@ -180,6 +181,8 @@ describe("sdk-breaking-change-labels", () => {
       });
 
       expect(result.labelAction).toBe(LabelAction.None);
+      expect(result.headSha).toBe("");
+      expect(result.issueNumber).toBeNaN();
     });
     it("should retain labelAction Remove without checking the target branch", async () => {
       // Setup inputs
@@ -237,8 +240,52 @@ describe("sdk-breaking-change-labels", () => {
         labelAction: LabelAction.Remove,
         issueNumber: 123,
       });
-      expect(mockGithub.rest.pulls.get).not.toHaveBeenCalled();
     });
+    it.each([true, false])(
+      "does not add or remove labels on a closed PR (%s)",
+      async (labelAction) => {
+        const { extractInputs } = await import("../src/context.ts");
+        vi.mocked(extractInputs).mockResolvedValue({
+          owner: "owner",
+          repo: "repo",
+          head_sha: "abc123",
+          issue_number: NaN,
+          run_id: NaN,
+          details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
+        });
+        mockGithub.rest.pulls.get.mockResolvedValue({ data: { state: "closed" } });
+        mockFetch
+          .mockResolvedValueOnce({
+            ok: true,
+            json: vi.fn().mockResolvedValue({
+              resource: { downloadUrl: "https://dev.azure.com/download?format=zip" },
+            }),
+          })
+          .mockResolvedValueOnce({
+            ok: true,
+            text: vi.fn().mockResolvedValue(
+              JSON.stringify(
+                createMockSpecGenSdkArtifactInfo({
+                  labelAction,
+                  language: "azure-sdk-for-js",
+                  prNumber: "123",
+                }),
+              ),
+            ),
+          });
+
+        const result = await getLabelAndAction({
+          github: mockGithub,
+          context: mockContext,
+          core: mockCore,
+        });
+        expect(result).toMatchObject({
+          labelAction: LabelAction.None,
+          headSha: "",
+          issueNumber: NaN,
+        });
+      },
+    );
     it("should correctly set labelAction to none when label name is empty", async () => {
       // Setup inputs
       const inputs = {
@@ -292,12 +339,90 @@ describe("sdk-breaking-change-labels", () => {
 
       // Verify result has none action
       expect(result).toEqual({
-        headSha: "abc123",
+        headSha: "",
         labelName: sdkLabels[language].breakingChange,
         labelAction: LabelAction.None,
-        issueNumber: 123,
+        issueNumber: NaN,
       });
+      expect(mockGithub.rest.pulls.get).not.toHaveBeenCalled();
     });
+    it("stops before ADO requests when the event identifies a closed PR", async () => {
+      const { extractInputs } = await import("../src/context.ts");
+      vi.mocked(extractInputs).mockResolvedValue({
+        owner: "owner",
+        repo: "repo",
+        head_sha: "abc123",
+        issue_number: 123,
+        run_id: NaN,
+        details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
+      });
+      mockGithub.rest.pulls.get.mockResolvedValue({ data: { state: "closed" } });
+
+      const result = await getLabelAndAction({
+        github: mockGithub,
+        context: mockContext,
+        core: mockCore,
+      });
+
+      expect(result).toMatchObject({
+        labelAction: LabelAction.None,
+        headSha: "",
+        issueNumber: NaN,
+      });
+      expect(mockFetch).not.toHaveBeenCalled();
+      expect(mockGithub.rest.pulls.get).toHaveBeenCalledTimes(1);
+    });
+    it.each([123, 456])(
+      "reuses the live PR lookup and validates artifact identity (artifact PR %s)",
+      async (artifactPr) => {
+        const { extractInputs } = await import("../src/context.ts");
+        vi.mocked(extractInputs).mockResolvedValue({
+          owner: "owner",
+          repo: "repo",
+          head_sha: "abc123",
+          issue_number: 123,
+          run_id: NaN,
+          details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
+        });
+        mockGithub.rest.pulls.get.mockResolvedValue({
+          data: { state: "open", head: { sha: "abc123" }, base: { ref: "main" } },
+        });
+        mockFetch
+          .mockResolvedValueOnce({
+            ok: true,
+            json: vi.fn().mockResolvedValue({
+              resource: { downloadUrl: "https://dev.azure.com/download?format=zip" },
+            }),
+          })
+          .mockResolvedValueOnce({
+            ok: true,
+            text: vi.fn().mockResolvedValue(
+              JSON.stringify(
+                createMockSpecGenSdkArtifactInfo({
+                  labelAction: true,
+                  language: "azure-sdk-for-go",
+                  prNumber: String(artifactPr),
+                }),
+              ),
+            ),
+          });
+
+        const result = getLabelAndAction({
+          github: mockGithub,
+          context: mockContext,
+          core: mockCore,
+        });
+        if (artifactPr === 123) {
+          await expect(result).resolves.toMatchObject({
+            labelAction: LabelAction.Add,
+            issueNumber: 123,
+          });
+        } else {
+          await expect(result).rejects.toThrow("SDK artifact PR identity does not match");
+        }
+        expect(mockGithub.rest.pulls.get).toHaveBeenCalledTimes(1);
+      },
+    );
     it("should throw error with invalid inputs", async () => {
       // Setup inputs
       const inputs = {
