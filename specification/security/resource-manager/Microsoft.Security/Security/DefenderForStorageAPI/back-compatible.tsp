@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using DefenderForStorageAPI;
 using Common;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the existing SDK flattening of CloudError.error while retaining the service's nested error response on the wire."
 @@Legacy.flattenProperty(CloudError.error);
 
 @@clientLocation(DefenderForStorageSettings.get, "DefenderForStorage");
