@@ -246,7 +246,7 @@ union DrillType {
 union VMPresent {
   string,
 
-  @doc("Atleast one VM Present.")
+  @doc("At least one VM is present.")
   Present: "Present",
 
   @doc("No VM present.")
@@ -418,7 +418,7 @@ union DrillResourceNonQualificationReasons {
 union ResourceTypeCategories {
   string,
 
-  @doc("Indicates that alteast one Azure Site Recovery VMs are present.")
+  @doc("Indicates that at least one Azure Site Recovery VM is present.")
   @added(Versions.v2026_03_01_preview)
   AzureSiteRecoveryVMsPresent: "AzureSiteRecoveryVMsPresent",
 }

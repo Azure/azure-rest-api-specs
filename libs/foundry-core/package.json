@@ -1,0 +1,67 @@
+{
+  "name": "@azure-tools/typespec-foundry-core",
+  "version": "0.1.0-beta.1",
+  "description": "Shared TypeSpec definitions for Azure AI Foundry.",
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/azure-rest-api-specs.git",
+    "directory": "libs/foundry-core"
+  },
+  "keywords": [
+    "azure",
+    "foundry",
+    "typespec"
+  ],
+  "type": "module",
+  "main": "src/index.ts",
+  "tspMain": "lib/main.tsp",
+  "exports": {
+    ".": {
+      "typespec": "./lib/main.tsp",
+      "default": "./src/index.ts"
+    }
+  },
+  "files": [
+    "lib/**/*.tsp",
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+      ".": {
+        "typespec": "./lib/main.tsp",
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc --noEmit && tsp compile . --import @typespec/library-linter --warn-as-error",
+    "prepack": "tsc -p tsconfig.build.json",
+    "test": "vitest --passWithNoTests",
+    "test:ci": "vitest run --passWithNoTests"
+  },
+  "engines": {
+    "node": ">=24.14.1"
+  },
+  "peerDependencies": {
+    "@azure-tools/typespec-azure-core": "catalog:",
+    "@typespec/compiler": "catalog:",
+    "@typespec/http": "catalog:"
+  },
+  "devDependencies": {
+    "@azure-tools/specs-shared": "workspace:*",
+    "@azure-tools/typespec-azure-core": "catalog:",
+    "@types/node": "catalog:",
+    "@typespec/compiler": "catalog:",
+    "@typespec/http": "catalog:",
+    "@typespec/library-linter": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

@@ -131,10 +131,12 @@ interface GoalAssignmentsOld {
 @armResourceOperations
 @added(Versions.v2026_09_30_preview)
 interface GoalAssignments {
+  @doc("Gets a goal assignment.")
   @route(ServiceGroupRoute)
   @sharedRoute
   get is ArmResourceRead<GoalAssignment, ServiceGroupParameters>;
 
+  @doc("Creates or updates a goal assignment.")
   @route(ServiceGroupRoute)
   @sharedRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -145,6 +147,7 @@ interface GoalAssignments {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  @doc("Updates a goal assignment.")
   @route(ServiceGroupRoute)
   @sharedRoute
   update is ArmResourcePatchAsync<
@@ -156,7 +159,7 @@ interface GoalAssignments {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @doc("Action to exclude a resource from goal assignment.")
+  @doc("Updates goal resources under a goal assignment.")
   @route(ServiceGroupRoute)
   @TypeSpec.Rest.action("updateGoalResources")
   @post
@@ -186,6 +189,7 @@ interface GoalAssignments {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  @doc("Deletes a goal assignment.")
   @route(ServiceGroupRoute)
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -196,7 +200,7 @@ interface GoalAssignments {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @doc("Recommends capacity improvements for resources under the goal assignments scope. Returns AI-powered capacity assessments and recommendations.")
+  @doc("Recommends capacity improvements for resources under the goal assignment's scope. Returns AI-powered capacity assessments and recommendations.")
   @route(ServiceGroupRoute)
   @TypeSpec.Rest.action("recommendCapacity")
   @post
@@ -211,6 +215,7 @@ interface GoalAssignments {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  @doc("Lists goal assignments in a service group.")
   @route(ServiceGroupRoute)
   @sharedRoute
   list is ArmResourceListByParent<GoalAssignment, ServiceGroupTenantParameters>;
@@ -285,10 +290,12 @@ interface GoalResourcesOld {
 @armResourceOperations
 @added(Versions.v2026_09_30_preview)
 interface GoalResources {
+  @doc("Gets a goal resource.")
   @route(ServiceGroupRoute)
   @sharedRoute
   get is ArmResourceRead<GoalResource, ServiceGroupParameters>;
 
+  @doc("Lists goal resources under a goal assignment.")
   @route(ServiceGroupRoute)
   @sharedRoute
   list is ArmResourceListByParent<GoalResource, ServiceGroupTenantParameters>;

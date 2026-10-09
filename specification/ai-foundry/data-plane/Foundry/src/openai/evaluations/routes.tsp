@@ -5,30 +5,26 @@ using TypeSpec.Http;
 namespace Azure.AI.Projects;
 
 alias EvalQueryParameters = {
-  /** The after query parameter. */
+  /** The identifier of the last item from the previous page. Use this value to retrieve the next page. */
   @query
-  @doc("Identifier for the last run from the previous pagination request.")
   after?: string;
 
-  /** The limit query parameter. */
+  /** The maximum number of items to return. The default is 20. */
   @query
-  @doc("Number of runs to retrieve.")
   limit?: integer = 20;
 
-  /** The order query parameter. */
+  /** The order in which to return items by timestamp. Use `asc` for ascending order or `desc` for descending order. The default is `asc`. */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
   @query
-  @doc("Sort order for runs by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`.")
   order?: "asc" | "desc" = "asc";
 };
 
 alias RunListQueryParameters = {
   ...EvalQueryParameters;
 
-  /** The status query parameter. */
+  /** Filter evaluation runs by status. Accepted values are `queued`, `in_progress`, `completed`, `canceled`, and `failed`. */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
   @query
-  @doc("Filter runs by status. One of `queued` | `in_progress` | `failed` | `completed` | `canceled`.")
   status?: "queued" | "in_progress" | "completed" | "canceled" | "failed";
 };
 
@@ -36,8 +32,9 @@ alias EvalListQueryParameters = {
   ...EvalQueryParameters;
 
   /**
-   * Evals can be ordered by creation time or last updated time.
-   * Use `created_at` for creation time or `updated_at` for last updated time.
+   * The evaluation timestamp field used for ordering results. Use `created_at`
+   * to order by creation time or `updated_at` to order by last modification
+   * time. The default is `created_at`.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
   @query(#{ explode: true })
@@ -48,8 +45,8 @@ alias EvalRunOutputItemsQueryParameters = {
   ...EvalQueryParameters;
 
   /**
-   * Filter output items by status. Use `failed` to filter by failed output
-   * items or `pass` to filter by passed output items.
+   * Filter output items by evaluation outcome. Use `fail` for items that did
+   * not pass or `pass` for items that passed.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
   @query(#{ explode: true })
@@ -61,7 +58,11 @@ alias EvalRunOutputItemsQueryParameters = {
 @route("openai/v1/evals")
 @tag("Evals")
 interface Evals {
-  /** Returns the evaluations configured in the current project. */
+  /**
+   * Returns a page of evaluations configured in the current project.
+   * Use `after` and `limit` to page through the results, and use `order_by`
+   * and `order` to control how the results are sorted.
+   */
   @summary("List evaluations")
   @list
   listEvals is OpenAIOperation<
@@ -72,9 +73,11 @@ interface Evals {
   >;
 
   /**
-   * Creates the structure of an evaluation that can be used to test a model's performance.
-   * An evaluation is a set of testing criteria and the config for a data source, which dictates the schema of the data used in the evaluation. After creating an evaluation, you can run it on different models and model parameters. We support several types of graders and datasources.
-   * For more information, see the [Evals guide](https://platform.openai.com/docs/guides/evals).
+   * Creates an evaluation configuration that defines the data source schema and
+   * testing criteria used to measure model or agent performance.
+   *
+   * Creating an evaluation does not execute it. To process data with the
+   * evaluation, create an evaluation run and provide a compatible data source.
    */
   @summary("Create an evaluation")
   @post
@@ -85,39 +88,50 @@ interface Evals {
     Eval
   >;
 
-  /** Removes the specified evaluation and its associated data. */
+  /**
+   * Deletes an evaluation and its associated data.
+   *
+   * This operation cannot be undone.
+   */
   @summary("Delete an evaluation")
   @delete
   @route("{eval_id}")
   deleteEval is OpenAIOperation<
     {
-      /** The ID of the evaluation to delete. */
+      /** The identifier of the evaluation to delete. */
       @path
       eval_id: string;
     },
     DeleteEvalResponse
   >;
 
-  /** Retrieves the specified evaluation and its configuration. */
+  /**
+   * Retrieves an evaluation, including its data source configuration and
+   * testing criteria.
+   */
   @summary("Get an evaluation")
   @get
   @route("{eval_id}")
   getEval is OpenAIOperation<
     {
-      /** The ID of the evaluation to retrieve. */
+      /** The identifier of the evaluation to retrieve. */
       @path
       eval_id: string;
     },
     Eval
   >;
 
-  /** Updates certain properties of an evaluation. */
+  /**
+   * Updates the specified evaluation with the supplied properties.
+   *
+   * Properties omitted from the request remain unchanged.
+   */
   @summary("Update an evaluation")
   @post
   @route("{eval_id}")
   updateEval is OpenAIOperation<
     {
-      /** The ID of the evaluation to update. */
+      /** The identifier of the evaluation to update. */
       @path
       eval_id: string;
 
@@ -126,13 +140,17 @@ interface Evals {
     Eval
   >;
 
-  /** Returns the runs associated with the specified evaluation. */
+  /**
+   * Returns a page of runs for the specified evaluation.
+   * Results can be filtered by run status and paged by using `after` and
+   * `limit`.
+   */
   @summary("List evaluation runs")
   @list
   @route("{eval_id}/runs")
   listRuns is OpenAIOperation<
     {
-      /** The ID of the evaluation to retrieve runs for. */
+      /** The identifier of the evaluation whose runs to list. */
       @path eval_id: string;
 
       ...RunListQueryParameters;
@@ -140,13 +158,19 @@ interface Evals {
     AgentsPagedResult<EvalRun>
   >;
 
-  /** Creates an evaluation run for the specified evaluation. */
+  /**
+   * Creates a run of the specified evaluation against the provided data
+   * source.
+   *
+   * Evaluation runs are processed asynchronously. Use the returned run
+   * identifier to retrieve the run and monitor its status.
+   */
   @summary("Create an evaluation run")
   @post
   @route("{eval_id}/runs")
   createEvalRun is OpenAIOperation<
     {
-      /** The ID of the evaluation to create a run for. */
+      /** The identifier of the evaluation to run. */
       @path
       eval_id: string;
 
@@ -155,68 +179,82 @@ interface Evals {
     EvalRun
   >;
 
-  /** Removes the specified evaluation run. */
+  /**
+   * Deletes an evaluation run and its associated results.
+   *
+   * This operation cannot be undone.
+   */
   @summary("Delete an evaluation run")
   @delete
   @route("{eval_id}/runs/{run_id}")
   deleteEvalRun is OpenAIOperation<
     {
-      /** The ID of the evaluation to delete the run from. */
+      /** The identifier of the evaluation that owns the run. */
       @path
       eval_id: string;
 
-      /** The ID of the run to delete. */
+      /** The identifier of the run to delete. */
       @path
       run_id: string;
     },
     DeleteEvalRunResponse
   >;
 
-  /** Retrieves the specified evaluation run and its current status. */
+  /**
+   * Retrieves an evaluation run, including its current status and available
+   * result summary.
+   */
   @summary("Get an evaluation run")
   @get
   @route("{eval_id}/runs/{run_id}")
   getEvalRun is OpenAIOperation<
     {
-      /** The ID of the evaluation to retrieve runs for. */
+      /** The identifier of the evaluation that owns the run. */
       @path
       eval_id: string;
 
-      /** The ID of the run to retrieve. */
+      /** The identifier of the run to retrieve. */
       @path
       run_id: string;
     },
     EvalRun
   >;
 
-  /** Cancels an ongoing evaluation run. */
+  /**
+   * Requests cancellation of an evaluation run that has not completed.
+   * The returned run contains the latest status known to the service.
+   */
   @summary("Cancel an evaluation run")
   @post
   @route("{eval_id}/runs/{run_id}")
   cancelEvalRun is OpenAIOperation<
     {
-      /** The ID of the evaluation whose run you want to cancel. */
+      /** The identifier of the evaluation that owns the run. */
       @path
       eval_id: string;
 
-      /** The ID of the run to cancel. */
+      /** The identifier of the run to cancel. */
       @path
       run_id: string;
     },
     EvalRun
   >;
 
-  /** Returns the output items produced by the specified evaluation run. */
+  /**
+   * Returns a page of output items produced by the specified evaluation run.
+   * Each output item contains one evaluated input, its generated output when
+   * applicable, and the results from each testing criterion.
+   */
   @summary("List evaluation run output items")
   @list
   @route("{eval_id}/runs/{run_id}/output_items")
   getEvalRunOutputItems is OpenAIOperation<
     {
-      /** The eval id path parameter. */
+      /** The identifier of the evaluation that owns the run. */
       @path
       eval_id: string;
 
-      /** The ID of the run to retrieve output items for. */
+      /** The identifier of the run whose output items to list. */
       @path
       run_id: string;
 
@@ -225,21 +263,24 @@ interface Evals {
     AgentsPagedResult<EvalRunOutputItem>
   >;
 
-  /** Retrieves a single output item from the specified evaluation run. */
+  /**
+   * Retrieves one output item produced by an evaluation run, including its
+   * input, generated output when applicable, and testing-criterion results.
+   */
   @summary("Get an output item of an evaluation run")
   @get
   @route("{eval_id}/runs/{run_id}/output_items/{output_item_id}")
   getEvalRunOutputItem is OpenAIOperation<
     {
-      /** The ID of the evaluation to retrieve runs for. */
+      /** The identifier of the evaluation that owns the run. */
       @path
       eval_id: string;
 
-      /** The ID of the run to retrieve. */
+      /** The identifier of the run that produced the output item. */
       @path
       run_id: string;
 
-      /** The ID of the output item to retrieve. */
+      /** The identifier of the output item to retrieve. */
       @path
       output_item_id: string;
     },

@@ -159,6 +159,10 @@ namespace Azure.AI.Projects {
   // WebSocket protocol upgrades are not representable by the C# HTTP client generator.
   @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!csharp");
 
+  // Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
+  @@usage(VoiceAgentTransport, Usage.input | Usage.json);
+  @@access(VoiceAgentTransport, Access.public);
+
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
   // --------------------------------------------------------------------------------
@@ -594,7 +598,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseItemKind",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -606,7 +610,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseToolKind",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -615,7 +619,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseTool",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -624,7 +628,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ComputerTool",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -634,7 +638,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.WebSearchTool",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -643,7 +647,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.FunctionTool",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -652,7 +656,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseMessageAnnotationKind",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -661,7 +665,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ApplyPatchCallOutputStatus",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -670,7 +674,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ImageGenerationTool",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -680,7 +684,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ImageGenerationToolInputImageMask",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -690,7 +694,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.CodeInterpreterCallImageOutput",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -699,7 +703,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.CodeInterpreterCallLogsOutput",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -715,7 +719,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ApplyPatchCallOutputStatus",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -724,7 +728,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ApplyPatchCallStatus",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -733,7 +737,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ApplyPatchCallStatus",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -744,7 +748,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ApplyPatchOperation",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -753,7 +757,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ApplyPatchCreateFileOperation",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -762,7 +766,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ApplyPatchDeleteFileOperation",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -771,7 +775,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ApplyPatchDeleteFileOperation",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -780,7 +784,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ApplyPatchUpdateFileOperation",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -789,7 +793,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ApplyPatchUpdateFileOperation",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -800,7 +804,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ComputerCallSafetyCheck",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -811,7 +815,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ContainerFileCitationMessageAnnotation",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -822,7 +826,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseErrorCode",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -831,7 +835,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.WebSearchToolApproximateLocation",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -840,7 +844,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.WebSearchToolApproximateLocation",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -849,7 +853,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.WebSearchToolFilters",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -860,7 +864,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseServiceTier",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -871,7 +875,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseTokenUsage",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -880,7 +884,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseInputTokenUsageDetails",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -889,7 +893,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseOutputTokenUsageDetails",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -899,7 +903,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseMessageAnnotation",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -909,7 +913,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseResult",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -919,7 +923,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseImageDetailLevel",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -928,7 +932,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ImageGenerationToolAction",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -937,7 +941,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ImageGenerationToolInputFidelity",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -946,7 +950,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseTokenTopLogProbabilityDetails",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -955,7 +959,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseTokenLogProbabilityDetails",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -965,7 +969,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseReasoningOptions",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -974,7 +978,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.ResponseError",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -983,7 +987,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.WebSearchToolApproximateLocation",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -992,7 +996,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.WebSearchToolApproximateLocation",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1001,7 +1005,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.WebSearchToolFilters",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1011,7 +1015,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.McpTool",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1020,7 +1024,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.WebSearchPreviewTool",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1029,7 +1033,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.CodeInterpreterToolContainer",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1038,7 +1042,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.McpToolDefinition",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1047,7 +1051,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.WebSearchSearchAction",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1056,7 +1060,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.WebSearchOpenPageAction",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1065,7 +1069,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.WebSearchFindInPageAction",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1074,7 +1078,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.McpToolCallApprovalPolicy",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1083,7 +1087,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Responses.McpToolFilter",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1092,7 +1096,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.FunctionToolParam",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1101,7 +1105,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Realtime.RealtimeCustomToolChoice",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1110,7 +1114,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Realtime.RealtimeCustomMcpToolChoice",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1119,7 +1123,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Realtime.RealtimeCustomFunctionToolChoice",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1272,11 +1276,6 @@ namespace Azure.AI.Projects {
     "csharp"
   );
 
-  @@clientName(
-    AgentOptimizationDatasetItem.desired_num_turns,
-    "DesiredTurnCount"
-  );
-
   // --------------------------------------------------------------------------------
   // AgentTelephony sub‐client
   // --------------------------------------------------------------------------------
@@ -1302,7 +1301,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Realtime.RealtimeAudioFormat",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1311,7 +1310,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Realtime.RealtimeItem",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1320,7 +1319,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Realtime.RealtimeResponseUsage",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1329,7 +1328,7 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Realtime.RealtimeMcpToolDefinitionListItem",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
     },
     "csharp"
   );
@@ -1338,7 +1337,207 @@ namespace Azure.AI.Projects {
     {
       identity: "OpenAI.Realtime.RealtimeResponseStatusDetails",
       package: "OpenAI",
-      minVersion: "2.12.0",
+      minVersion: "2.14.0",
+    },
+    "csharp"
+  );
+
+  // --------------------------------------------------------------------------------
+  // Fix APIView namespace leak: these Foundry-only types were generating into the
+  // OpenAI C# namespace instead of Azure.AI.Projects.Agents.
+  //
+  // The properties below are declared as anonymous inline unions on their source
+  // models in the external OpenAI package, so there is no real TypeSpec symbol
+  // named e.g. `OpenAI.VoiceResponseBaseStatus` to target directly: such names
+  // only exist post-emission, invented by the C# emitter for anonymous types.
+  // Instead, each property is first retyped (@@alternateType) to a small local
+  // named union declared here. Unions already shipped by OpenAI .NET are then
+  // mapped to those external types; only Foundry-specific unions are emitted
+  // in the Azure.AI.Projects.Agents namespace.
+  //
+  // Several of these properties are spread into a Foundry-local model via
+  // `OmitProperties`/`ToolFields` (e.g. VoiceResponseBase spreads
+  // OpenAI.RealtimeResponse). The client generator does not bind
+  // alternateType/clientNamespace to the spread-derived copy of the property,
+  // only to the property on its original declaring model, so every
+  // @@alternateType below targets `OpenAI.<Model>.<prop>` (never the Foundry
+  // model that spreads it in) -- confirmed against
+  // sdk-java-azure-ai-agents/client.tsp, which already uses this exact pattern for
+  // these same properties.
+  // --------------------------------------------------------------------------------
+  union VoiceResponseBaseStatus {
+    "completed",
+    "cancelled",
+    "failed",
+    "incomplete",
+    "in_progress",
+  }
+  @@alternateType(
+    OpenAI.RealtimeResponse.status,
+    VoiceResponseBaseStatus,
+    "csharp"
+  );
+  @@alternateType(
+    VoiceResponseBaseStatus,
+    {
+      identity: "OpenAI.Realtime.RealtimeResponseStatus",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
+    "csharp"
+  );
+
+  union VoiceResponseBaseOutputModality {
+    "text",
+    "audio",
+  }
+  @@alternateType(
+    OpenAI.RealtimeResponse.output_modalities,
+    VoiceResponseBaseOutputModality[],
+    "csharp"
+  );
+  @@alternateType(
+    VoiceResponseBaseOutputModality,
+    {
+      identity: "OpenAI.Realtime.RealtimeOutputModality",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
+    "csharp"
+  );
+
+  @@alternateType(
+    OpenAI.RealtimeClientEventType,
+    {
+      identity: "OpenAI.Realtime.RealtimeClientCommandKind",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
+    "csharp"
+  );
+
+  @@clientNamespace(
+    OpenAI.CallableToolAllowedCaller,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.ContainerMemoryLimit,
+    {
+      identity: "OpenAI.Containers.ContainerMemoryLimit",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.ContainerSkill,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.InlineSkillParam,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.InlineSkillSourceParam,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.RealtimeFunctionToolParameters,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.SkillReferenceParam,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+
+  // These unions are also anonymous inline unions on the OpenAI side. Only
+  // transcription delay lacks an equivalent in the published OpenAI .NET SDK.
+  union MCPToolboxToolConnectorId {
+    "connector_dropbox",
+    "connector_gmail",
+    "connector_googlecalendar",
+    "connector_googledrive",
+    "connector_microsoftteams",
+    "connector_outlookcalendar",
+    "connector_outlookemail",
+    "connector_sharepoint",
+  }
+  @@alternateType(
+    OpenAI.MCPTool.connector_id,
+    MCPToolboxToolConnectorId,
+    "csharp"
+  );
+  @@alternateType(
+    MCPToolboxToolConnectorId,
+    {
+      identity: "OpenAI.Responses.McpToolConnectorId",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
+    "csharp"
+  );
+
+  union VoiceAgentAudioInputConfigTranscriptionDelay {
+    "minimal",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+  }
+  @@alternateType(
+    OpenAI.AudioTranscription.delay,
+    VoiceAgentAudioInputConfigTranscriptionDelay,
+    "csharp"
+  );
+  @@clientNamespace(
+    VoiceAgentAudioInputConfigTranscriptionDelay,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+
+  union VoiceAgentSemanticVadTurnDetectionEagerness {
+    "low",
+    "medium",
+    "high",
+    "auto",
+  }
+  @@alternateType(
+    OpenAI.RealtimeTurnDetectionSemanticVad.eagerness,
+    VoiceAgentSemanticVadTurnDetectionEagerness,
+    "csharp"
+  );
+  @@alternateType(
+    VoiceAgentSemanticVadTurnDetectionEagerness,
+    {
+      identity: "OpenAI.Realtime.RealtimeSemanticVadEagernessLevel",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
+    "csharp"
+  );
+
+  union WebSearchToolSearchContextSize {
+    "low",
+    "medium",
+    "high",
+  }
+  @@alternateType(
+    OpenAI.WebSearchTool.search_context_size,
+    WebSearchToolSearchContextSize,
+    "csharp"
+  );
+  @@alternateType(
+    WebSearchToolSearchContextSize,
+    {
+      identity: "OpenAI.Responses.WebSearchToolContextSize",
+      package: "OpenAI",
+      minVersion: "2.14.0",
     },
     "csharp"
   );

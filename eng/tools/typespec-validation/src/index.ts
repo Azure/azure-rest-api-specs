@@ -3,6 +3,7 @@ import { ConsoleLogger, type ILogger } from "@azure-tools/specs-shared/logger";
 import { type Suppression } from "@azure-tools/suppressions";
 import debug from "debug";
 import { stat } from "node:fs/promises";
+import { resolve } from "pathe";
 import {
   exceptionDiagnostic,
   formatRuleStatus,
@@ -26,7 +27,7 @@ import { NpmPrefixRule } from "./rules/npm-prefix.ts";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.ts";
 import { ServiceYamlRule } from "./rules/service-yaml.ts";
 import { StaleApiVersionPinRule } from "./rules/stale-api-version-pin.ts";
-import { fileExists, getSuppressions, normalizePath } from "./utils.ts";
+import { fileExists, getSuppressions } from "./utils.ts";
 
 // Context argument may add new properties or override checkingAllSpecs
 export let context: Record<string, unknown> = { checkingAllSpecs: false };
@@ -184,6 +185,11 @@ export async function main() {
       description:
         "Select a shard using one-based indices. Each shard requires a separate checkout.",
     },
+    "github-summary": {
+      type: "boolean",
+      group: "Options for --all",
+      description: "Append failed project paths to the GitHub job summary.",
+    },
     "dry-run": {
       type: "boolean",
       group: "Options for --all or --changed",
@@ -231,6 +237,17 @@ export async function main() {
     process.exitCode = 1;
     return;
   }
+  if (values["github-summary"] && !values.all) {
+    console.error("--github-summary requires --all");
+    process.exitCode = 1;
+    return;
+  }
+  const summaryFile = values["github-summary"] ? process.env.GITHUB_STEP_SUMMARY : undefined;
+  if (values["github-summary"] && !summaryFile) {
+    console.error("--github-summary requires the GITHUB_STEP_SUMMARY environment variable");
+    process.exitCode = 1;
+    return;
+  }
 
   if (values.changed) {
     if (parsedArgs.positionals.length > 0) {
@@ -255,7 +272,7 @@ export async function main() {
   if (values.all) {
     if (parsedArgs.positionals.length > 1) {
       console.error(
-        "Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean] [--dry-run]",
+        "Usage: tsv --all [folder] [--shard=<index>/<count>] [--github-summary] [--git-clean] [--dry-run]",
       );
       process.exitCode = 1;
       return;
@@ -265,18 +282,24 @@ export async function main() {
       shard: values.shard,
       dryRun: values["dry-run"],
       verbose: values.verbose,
+      summaryFile,
     });
     if (!success) process.exitCode = 1;
     return;
   }
 
   const folder = parsedArgs.positionals[0];
+  if (folder === undefined) {
+    console.error("A project folder is required. Use --help for usage.");
+    process.exitCode = 1;
+    return;
+  }
 
   if (parsedArgs.positionals[1]) {
     context = { ...context, ...(JSON.parse(parsedArgs.positionals[1]) as Record<string, unknown>) };
   }
 
-  const absolutePath = normalizePath(folder);
+  const absolutePath = resolve(folder);
 
   if (!(await fileExists(absolutePath))) {
     console.log(`Folder ${absolutePath} does not exist`);

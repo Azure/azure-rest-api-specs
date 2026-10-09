@@ -162,6 +162,18 @@ input-file:
     // Ensures code doesn't try to read file `/fake/readme.md` which would throw
     expect(tags.size).toBe(0);
   });
+
+  it("keeps global configuration scalars as strings", async () => {
+    const readme = new Readme("readme.md", {
+      content: "```yaml\ntag: 2025-01-01\nazure-arm: true\nversion: 1\n```\n",
+    });
+
+    await expect(readme.getGlobalConfig()).resolves.toEqual({
+      tag: "2025-01-01",
+      "azure-arm": "true",
+      version: "1",
+    });
+  });
 });
 
 describe("TagMatchRegex", () => {

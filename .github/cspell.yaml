@@ -5,10 +5,13 @@ ignorePaths:
   - CODEOWNERS*
   - arm-leases/**
   - policies/**
+  - labels.yaml
+  - labels/**
   - protected-labels.yml
   - workflows/*.lock.yml
   - workflows/**/*.md
 words:
+  - agentics
   - apiver
   - azmanager
   - brch
@@ -20,6 +23,7 @@ words:
   - dedented
   - dedenting
   - dedents
+  - engsys
   - fflate
   - oapi
   - plcy
@@ -29,11 +33,22 @@ words:
   - rpaa
   - rpaas
   - tsgs
+  - unconfigured
   - unstub
   - vitest
   - whatif
+  - zizmor
+  - zizmorcore
 
 overrides:
+  - filename: "**/.github/workflows/src/protected-files.ts"
+    words:
+      - nocase
+
+  - filename: "**/.github/workflows/test/protected-files.test.ts"
+    words:
+      - gpgsign
+
   - filename: "**/.github/chatmodes/api-review-feedback.chatmode.md"
     words:
       - Swathi
