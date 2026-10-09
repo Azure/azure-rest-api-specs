@@ -36,6 +36,7 @@ using Microsoft.FileShares;
   "csharp"
 );
 @@clientName(FileShareLimitsResponse, "FileShareLimitsResult", "csharp");
+@@clientName(FileShareLimitsRequest, "FileShareLimitsContent", "csharp");
 @@clientName(
   FileShareProvisioningRecommendationResponse,
   "FileShareProvisioningRecommendationResult",

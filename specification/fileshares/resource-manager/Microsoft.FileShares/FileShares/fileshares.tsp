@@ -60,6 +60,22 @@ union MediaTier {
 
   @doc("SSD media tier.")
   SSD: "SSD",
+
+  @added(Versions.v2026_09_01)
+  @doc("HDD media tier.")
+  HDD: "HDD",
+}
+
+@added(Versions.v2026_09_01)
+@doc("Scale mode for a file share.")
+union ScaleMode {
+  string,
+
+  @doc("Compatibility scale mode.")
+  Compatibility: "Compatibility",
+
+  @doc("Scale mode.")
+  Scale: "Scale",
 }
 
 @doc("Redundancy enum.")
@@ -147,6 +163,11 @@ model FileShareProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The file sharing protocol for this file share.")
   protocol?: Protocol;
+
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The scale mode selected when the file share is created.")
+  scaleMode?: ScaleMode;
 
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @doc("The provisioned storage size of the share in GiB (1 GiB is 1024^3 bytes or 1073741824 bytes). A component of the file share's bill is the provisioned storage, regardless of the amount of used storage.")
@@ -596,6 +617,26 @@ model FileShareProvisioningConstants {
   guardrailThroughputScalar: float64;
 }
 
+@added(Versions.v2026_09_01)
+@doc("File share offer dimensions.")
+model FileShareOfferInput {
+  @doc("The file sharing protocol. Defaults to NFS.")
+  protocol?: Protocol;
+
+  @doc("The storage media tier. Defaults to SSD.")
+  mediaTier?: MediaTier;
+
+  @doc("The scale mode. Defaults to Compatibility.")
+  scaleMode?: ScaleMode;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Request structure for the file share limits API.")
+model FileShareLimitsRequest {
+  @doc("Properties used to select the file share offer.")
+  properties: FileShareOfferInput;
+}
+
 @doc("Response structure for file share limits API.")
 model FileShareLimitsResponse {
   @doc("The properties of the file share limits.")
@@ -622,6 +663,18 @@ model FileShareProvisioningRecommendationInput {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("The desired provisioned storage size of the share in GiB. Will be use to calculate the values of remaining provisioning parameters.")
   provisionedStorageGiB: int32;
+
+  @added(Versions.v2026_09_01)
+  @doc("The file sharing protocol. Defaults to NFS.")
+  protocol?: Protocol;
+
+  @added(Versions.v2026_09_01)
+  @doc("The storage media tier. Defaults to SSD.")
+  mediaTier?: MediaTier;
+
+  @added(Versions.v2026_09_01)
+  @doc("The scale mode. Defaults to Compatibility.")
+  scaleMode?: ScaleMode;
 }
 
 @doc("Response structure for file share provisioning parameters recommendation API.")
@@ -688,7 +741,22 @@ interface InformationalOperations {
 
   @doc("Get file shares limits.")
   @operationId("FileShare_GetLimits")
+  @removed(Versions.v2026_09_01)
+  @action("getLimits")
+  @sharedRoute
+  getLimitsBeforeOffer is ArmProviderActionSync<
+    Response = FileShareLimitsResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationResourceParameter
+  >;
+
+  @added(Versions.v2026_09_01)
+  @doc("Get file shares limits.")
+  @operationId("FileShare_GetLimits")
+  @action("getLimits")
+  @sharedRoute
   getLimits is ArmProviderActionSync<
+    Request = FileShareLimitsRequest,
     Response = FileShareLimitsResponse,
     Scope = SubscriptionActionScope,
     Parameters = LocationResourceParameter

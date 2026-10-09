@@ -207,6 +207,15 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileShareLimitsRequest"
+            }
           }
         ],
         "responses": {
@@ -1679,6 +1688,19 @@
         "provisioningConstants"
       ]
     },
+    "FileShareLimitsRequest": {
+      "type": "object",
+      "description": "Request structure for the file share limits API.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileShareOfferInput",
+          "description": "Properties used to select the file share offer."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
     "FileShareLimitsResponse": {
       "type": "object",
       "description": "Response structure for file share limits API.",
@@ -1712,6 +1734,24 @@
       "required": [
         "value"
       ]
+    },
+    "FileShareOfferInput": {
+      "type": "object",
+      "description": "File share offer dimensions.",
+      "properties": {
+        "protocol": {
+          "$ref": "#/definitions/Protocol",
+          "description": "The file sharing protocol. Defaults to NFS."
+        },
+        "mediaTier": {
+          "$ref": "#/definitions/MediaTier",
+          "description": "The storage media tier. Defaults to SSD."
+        },
+        "scaleMode": {
+          "$ref": "#/definitions/ScaleMode",
+          "description": "The scale mode. Defaults to Compatibility."
+        }
+      }
     },
     "FileSharePatchProperties": {
       "type": "object",
@@ -1807,6 +1847,14 @@
         "protocol": {
           "$ref": "#/definitions/Protocol",
           "description": "The file sharing protocol for this file share.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "scaleMode": {
+          "$ref": "#/definitions/ScaleMode",
+          "description": "The scale mode selected when the file share is created.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1982,6 +2030,18 @@
           "type": "integer",
           "format": "int32",
           "description": "The desired provisioned storage size of the share in GiB. Will be use to calculate the values of remaining provisioning parameters."
+        },
+        "protocol": {
+          "$ref": "#/definitions/Protocol",
+          "description": "The file sharing protocol. Defaults to NFS."
+        },
+        "mediaTier": {
+          "$ref": "#/definitions/MediaTier",
+          "description": "The storage media tier. Defaults to SSD."
+        },
+        "scaleMode": {
+          "$ref": "#/definitions/ScaleMode",
+          "description": "The scale mode. Defaults to Compatibility."
         }
       },
       "required": [
@@ -2359,7 +2419,8 @@
       "type": "string",
       "description": "Media Tier enum.",
       "enum": [
-        "SSD"
+        "SSD",
+        "HDD"
       ],
       "x-ms-enum": {
         "name": "MediaTier",
@@ -2369,6 +2430,11 @@
             "name": "SSD",
             "value": "SSD",
             "description": "SSD media tier."
+          },
+          {
+            "name": "HDD",
+            "value": "HDD",
+            "description": "HDD media tier."
           }
         ]
       }
@@ -2642,6 +2708,30 @@
       "required": [
         "properties"
       ]
+    },
+    "ScaleMode": {
+      "type": "string",
+      "description": "Scale mode for a file share.",
+      "enum": [
+        "Compatibility",
+        "Scale"
+      ],
+      "x-ms-enum": {
+        "name": "ScaleMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Compatibility",
+            "value": "Compatibility",
+            "description": "Compatibility scale mode."
+          },
+          {
+            "name": "Scale",
+            "value": "Scale",
+            "description": "Scale mode."
+          }
+        ]
+      }
     },
     "ShareRootSquash": {
       "type": "string",
