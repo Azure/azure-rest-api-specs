@@ -5,7 +5,9 @@
     "yaml": "catalog:"
   },
   "scripts": {
-    "test": "node --test scripts/*.test.mjs"
+    "build": "tsc --noEmit",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "type": "module"
 }

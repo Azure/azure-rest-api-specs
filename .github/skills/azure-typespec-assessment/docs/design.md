@@ -1345,7 +1345,7 @@ guidance, failed retrievals, confidence, and blockers. It does not repeat
 canonical catalog metadata, query profiles, source/hunk IDs, calculated
 totals/ranks, accounting, or final output wrappers.
 
-`materialize-assessment-results.mjs` then verifies canonical artifact hashes
+`materialize-assessment-results.ts` then verifies canonical artifact hashes
 and exact ID coverage/ownership. It joins canonical metadata, calculates score
 totals and stable ordering, verifies the first four retrievable documents and
 fallback sequence, derives accounting, and atomically writes `inference.json`
@@ -2529,19 +2529,19 @@ Never label a head-source artifact as a base-commit artifact.
 
 ## 12. Files
 
-| Area                             | Source of truth                                                                                                   |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Skill workflow and boundaries    | `SKILL.md`, `references/workflow.md`                                                                              |
-| Judgment rules                   | `references/classification.md`, `references/downstream-breaking-cases.md`                                         |
-| Azure Guidelines retrieval       | `references/agentic-search.md`, `references/reference-document-links.md`                                          |
-| Source-only documentation checks | `references/document-quality.md`, `scripts/document-quality-input.mjs`, `scripts/document-quality-assessment.mjs` |
-| Output contract                  | `references/output-contract.md`, `scripts/*.schema.json`                                                          |
-| Skill dependency bootstrap       | `scripts/skill-dependencies.mjs`, `scripts/npm-command.mjs`                                                       |
-| Deterministic preparation        | `scripts/prepare-assessment.mjs`, `scripts/package-manager.mjs`, `scripts/run-assessment-analysis.mjs`            |
-| Dimension analyzers              | `scripts/analyze-*.mjs`                                                                                           |
-| Assembly and validation          | `scripts/assemble-assessment.mjs`, `scripts/validate-assessment.mjs`                                              |
-| HTML presentation                | `scripts/assessment-display.mjs`, `scripts/render-assessment-html.mjs`                                            |
-| Regression coverage              | `scripts/*.test.mjs`, `evals/`                                                                                    |
+| Area                             | Source of truth                                                                                                 |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Skill workflow and boundaries    | `SKILL.md`, `references/workflow.md`                                                                            |
+| Judgment rules                   | `references/classification.md`, `references/downstream-breaking-cases.md`                                       |
+| Azure Guidelines retrieval       | `references/agentic-search.md`, `references/reference-document-links.md`                                        |
+| Source-only documentation checks | `references/document-quality.md`, `scripts/document-quality-input.ts`, `scripts/document-quality-assessment.ts` |
+| Output contract                  | `references/output-contract.md`, `scripts/*.schema.json`                                                        |
+| Skill dependency bootstrap       | `scripts/skill-dependencies.ts`, `scripts/npm-command.ts`                                                       |
+| Deterministic preparation        | `scripts/prepare-assessment.ts`, `scripts/package-manager.ts`, `scripts/run-assessment-analysis.ts`             |
+| Dimension analyzers              | `scripts/analyze-*.ts`                                                                                          |
+| Assembly and validation          | `scripts/assemble-assessment.ts`, `scripts/validate-assessment.ts`                                              |
+| HTML presentation                | `scripts/assessment-display.ts`, `scripts/render-assessment-html.ts`                                            |
+| Regression coverage              | `scripts/*.test.ts`, `evals/`                                                                                   |
 
 Preserve local assessment reports and user-owned eval changes.
 
