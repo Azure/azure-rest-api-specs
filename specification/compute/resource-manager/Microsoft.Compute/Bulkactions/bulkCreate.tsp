@@ -82,11 +82,9 @@ model BulkCreateEnvelope {
   @doc("Zones in which the BulkCreate is available")
   zones?: Array<string>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "ExtendedLocation matches the established compute contract and is applied uniformly to every virtual machine created by the operation."
-  @added(Versions.`2026-11-06-preview`)
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The extended location of the virtual machines created by the BulkCreate operation.")
-  extendedLocation?: ExtendedLocation;
+  // Spread the ARM common-types envelope property; versioning and docs are
+  // applied below via augment decorators.
+  ...ExtendedLocationProperty;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Placement matches the established compute contract and is applied uniformly to every virtual machine created by the operation."
   @added(Versions.`2026-11-06-preview`)
@@ -102,6 +100,12 @@ model BulkCreateEnvelope {
   ...ManagedServiceIdentityProperty;
   ...ResourcePlanProperty;
 }
+
+@@added(BulkCreateEnvelope.extendedLocation, Versions.`2026-11-06-preview`);
+@@doc(
+  BulkCreateEnvelope.extendedLocation,
+  "The extended location of the virtual machines created by the BulkCreate operation."
+);
 
 @added(Versions.`2026-09-06-preview`)
 @doc("Location based BulkCreate resource. The location is part of the resource path.")
