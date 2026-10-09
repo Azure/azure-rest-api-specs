@@ -121,6 +121,13 @@ model ServiceGroupAttributes {
   @minValue(0)
   @maxValue(4)
   criticality?: int32;
+
+  /**
+   * The Azure region name of the service group (for example, 'eastus2'). Only supported on service groups of kind 'StorageGroup'. Cannot be changed once set.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  memberLocationConstraint?: string;
 }
 
 /**

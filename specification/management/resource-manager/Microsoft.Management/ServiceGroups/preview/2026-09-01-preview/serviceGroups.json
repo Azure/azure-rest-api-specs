@@ -185,6 +185,9 @@
         "x-ms-examples": {
           "PutServiceGroup": {
             "$ref": "./examples/ServiceGroup_Put.json"
+          },
+          "PutStorageGroup": {
+            "$ref": "./examples/ServiceGroup_Put_StorageGroup.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -741,6 +744,14 @@
           "description": "The criticality designation of the service group. Valid values range from 0 through 4.",
           "minimum": 0,
           "maximum": 4
+        },
+        "memberLocationConstraint": {
+          "type": "string",
+          "description": "The Azure region name of the service group (for example, 'eastus2'). Only supported on service groups of kind 'StorageGroup'. Cannot be changed once set.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
