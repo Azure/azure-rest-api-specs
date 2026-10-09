@@ -2,7 +2,7 @@ import { d } from "@azure-tools/specs-shared/testing";
 import { execFile } from "node:child_process";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
 import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
@@ -37,7 +37,7 @@ async function commit(message: string) {
 }
 
 beforeEach(async () => {
-  root = await realpath(await mkdtemp(join(tmpdir(), "tsv-cli-")));
+  root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-cli-"))));
   vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.stubEnv("DEBUG", "");
   vi.stubEnv("NO_COLOR", "1");
@@ -86,6 +86,27 @@ it("shows the same help for --help and -h without a project or Git repository", 
     /^\s+--shard <index>\/<count>\s+Select a shard using one-based indices\./m,
   );
   expect(help.stdout).not.toMatch(/(?:^|\s)(?:--folder|--context|-f|-c)(?=[\s,=]|$)/);
+});
+
+it("requires an explicit project folder instead of resolving a missing argument to cwd", async () => {
+  await writeFile(join(root, "tspconfig.yaml"), "");
+  await expect(run()).rejects.toMatchObject({
+    code: 1,
+    stdout: "",
+    stderr: "A project folder is required. Use --help for usage.\n",
+  });
+});
+
+it("accepts backslash-separated relative project paths on every platform", async () => {
+  const project = "specification/service/data-plane/Project";
+  await addProject(project);
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    `- tool: TypeSpecValidation\n  paths: [${project}]\n  reason: normalized path fixture\n`,
+  );
+  const result = await run("specification\\service\\data-plane\\Project");
+  expect(result.stdout).toContain("Suppressed: normalized path fixture");
+  expect(result.stderr).toBe("");
 });
 
 it.each([
