@@ -65,7 +65,7 @@
       "post": {
         "operationId": "UnifiedOperations_UnifiedModerate",
         "summary": "Unified Moderate",
-        "description": "Synchronously evaluate a canonical Agent Hooks 0.1 context against authorized effective policy. This version evolves Unified Moderate on its existing route and supports all eight interception points. The service returns a complete Verdict; the host applies transforms, enforces decisions and resolves approvals. policyId selects an authorized policy and targetResourceId selects an authorized binding target; provide at least one. Applicable mandatory policies cannot be bypassed by either selector. Body identity metadata is not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful verdicts.",
+        "description": "Synchronously evaluate a canonical Agent Hooks 0.1 context against authorized effective policy. This version evolves Unified Moderate on its existing route and supports all eight interception points. Azure AI Content Safety composes the applicable selected, bound, subscription and hierarchy policies within this evaluation and returns a complete Verdict. The calling host owns composition across independent interceptors, transform application, final enforcement, approvals, timeouts and audit. policyId selects an authorized policy and targetResourceId selects an authorized binding target; provide at least one. Applicable mandatory policies cannot be bypassed by either selector. Body identity metadata is not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful verdicts.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2024,7 +2024,7 @@
     },
     "AgentVerdict": {
       "type": "object",
-      "description": "Canonical Agent Hooks Verdict. HTTP 200 indicates evaluation completed, not permission to proceed. The host owns composition, transform application, enforcement, approvals, timeouts and audit. The service does not return an allowed/blocked wrapper, enforced content or harmResults. Unsupported members and invalid decision/approval/transform combinations are rejected.",
+      "description": "Canonical Agent Hooks Verdict. HTTP 200 indicates evaluation completed, not permission to proceed. Azure AI Content Safety composes the applicable selected, bound, subscription and hierarchy policies within this evaluation. The calling host owns composition across independent interceptors, transform application, final enforcement, approvals, timeouts and audit. The service does not return an allowed/blocked wrapper, enforced content or harmResults. Unsupported members and invalid decision/approval/transform combinations are rejected.",
       "properties": {
         "decision": {
           "$ref": "#/definitions/AgentDecision",

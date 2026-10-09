@@ -605,7 +605,7 @@ model AgentTransform {
 
 @added(Versions.v2026_10_15_preview)
 @discriminator("decision")
-@doc("Canonical Agent Hooks Verdict. HTTP 200 indicates evaluation completed, not permission to proceed. The host owns composition, transform application, enforcement, approvals, timeouts and audit. The service does not return an allowed/blocked wrapper, enforced content or harmResults. Unsupported members and invalid decision/approval/transform combinations are rejected.")
+@doc("Canonical Agent Hooks Verdict. HTTP 200 indicates evaluation completed, not permission to proceed. Azure AI Content Safety composes the applicable selected, bound, subscription and hierarchy policies within this evaluation. The calling host owns composition across independent interceptors, transform application, final enforcement, approvals, timeouts and audit. The service does not return an allowed/blocked wrapper, enforced content or harmResults. Unsupported members and invalid decision/approval/transform combinations are rejected.")
 model AgentVerdict {
   @doc("Canonical decision: allow, deny or transform.")
   decision: AgentDecision;
