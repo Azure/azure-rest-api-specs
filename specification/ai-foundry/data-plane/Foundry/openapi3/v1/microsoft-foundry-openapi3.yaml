@@ -87614,7 +87614,11 @@ components:
           anyOf:
             - type: string
             - type: 'null'
-          description: Instructions activated for this node. Omission inherits the entrypoint instructions; null clears them.
+          description: Node-specific instructions. By default, a non-empty value is appended to the frozen entrypoint instructions, while omission, null, or an empty string preserves the exact entrypoint value. When `override_prompt` is true, this value becomes the complete active instructions, and null or an empty string clears them.
+        override_prompt:
+          type: boolean
+          description: Whether node instructions replace rather than extend the frozen entrypoint instructions.
+          default: false
         tools:
           anyOf:
             - type: array
@@ -87664,7 +87668,7 @@ components:
           type: boolean
           description: Whether this node may call customer tools in parallel. Nodes with outgoing handoff edges must use `false`.
           default: false
-      description: Node-scoped behavior that replaces the active voice-agent behavior after a handoff.
+      description: Node-scoped behavior that defines the active voice-agent behavior after a handoff.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

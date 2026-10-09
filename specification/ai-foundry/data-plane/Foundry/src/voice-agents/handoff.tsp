@@ -62,14 +62,17 @@ model VoiceAgentHandoffVoiceAdaptation {
   type: "auto";
 }
 
-@doc("Node-scoped behavior that replaces the active voice-agent behavior after a handoff.")
+@doc("Node-scoped behavior that defines the active voice-agent behavior after a handoff.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
 model VoiceAgentHandoffNodeConfig {
   @doc("The target model for a cascaded graph. Realtime graphs reject this property and retain the connection model.")
   `model`?: string;
 
-  @doc("Instructions activated for this node. Omission inherits the entrypoint instructions; null clears them.")
+  @doc("Node-specific instructions. By default, a non-empty value is appended to the frozen entrypoint instructions, while omission, null, or an empty string preserves the exact entrypoint value. When `override_prompt` is true, this value becomes the complete active instructions, and null or an empty string clears them.")
   instructions?: string | null;
+
+  @doc("Whether node instructions replace rather than extend the frozen entrypoint instructions.")
+  override_prompt?: boolean = false;
 
   @doc("Customer tools available at this node. Omission or null selects an empty customer tool set.")
   tools?: VoiceAgentTool[] | null;
