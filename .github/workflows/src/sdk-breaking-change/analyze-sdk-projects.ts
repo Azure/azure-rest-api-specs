@@ -19,17 +19,18 @@ export type AnalyzeSdkProjectsOptions = {
   analyzedSha: string;
   workflowUrl: string;
   resultDir: string;
+  azureSdkCliPath: string;
 };
 
 const Lang_METADATA_LANG_MAP: Record<string, string> = {
-  "dotnet": "dotnet",
+  dotnet: "dotnet",
   ".net": "dotnet",
-  "java": "java",
-  "python": "python",
-  "typescript": "typescript",
-  "js": "typescript",
-  "javascript": "typescript",
-  "go": "go"
+  java: "java",
+  python: "python",
+  typescript: "typescript",
+  js: "typescript",
+  javascript: "typescript",
+  go: "go",
 };
 
 function isWithin(parent: string, child: string): boolean {
@@ -46,6 +47,7 @@ export async function analyzeSdkProjects({
   analyzedSha,
   workflowUrl,
   resultDir,
+  azureSdkCliPath,
 }: AnalyzeSdkProjectsOptions): Promise<void> {
   const localSdkRepositoryPath = await realpath(unresolvedLocalSdkRepositoryPath);
   const resultsDirectory = join(resultDir, "sdk-breaking-change-results");
@@ -64,6 +66,7 @@ export async function analyzeSdkProjects({
 
   const projects: ProjectResult[] = [];
   const packageNames = new Set<string>();
+  const azureSdkCli = join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk");
   await writeFile(join(resultsDirectory, "projects.json"), "[]\n");
 
   try {
@@ -73,7 +76,7 @@ export async function analyzeSdkProjects({
       const generationResult = join(resultDir, "sdk-generation-result.json");
 
       /* Generate the SDK package */
-      const { stdout } = await execFile("azsdk", [
+      const { stdout } = await execFile(azureSdkCli, [
         "package",
         "generate",
         "--local-sdk-repo-path",
@@ -87,7 +90,8 @@ export async function analyzeSdkProjects({
 
       const metadata = await generateTypeSpecMetadata(dirname(configPath));
       console.log(`Metadata for ${typeSpecProjectPath}:`, metadata);
-      const languageMetadata = metadata.languages[Lang_METADATA_LANG_MAP[sdkLanguage.toLowerCase()]];
+      const languageMetadata =
+        metadata.languages[Lang_METADATA_LANG_MAP[sdkLanguage.toLowerCase()]];
       if (!languageMetadata || languageMetadata.length === 0) {
         throw new Error(
           `Expected language metadata for ${typeSpecProjectPath} and language ${sdkLanguage}, but none was found.`,
@@ -121,11 +125,11 @@ export async function analyzeSdkProjects({
         buildArgs.push("--additional-arguments", "/p:RunApiCompat=false");
       }
 
-      const { stdout: buildStdout } = await execFile("azsdk", buildArgs);
+      const { stdout: buildStdout } = await execFile(azureSdkCli, buildArgs);
       await writeFile(join(projectResults, "build.json"), buildStdout);
 
       /* Detect breaking changes */
-      const { stdout: breakingChangesStdout } = await execFile("azsdk", [
+      const { stdout: breakingChangesStdout } = await execFile(azureSdkCli, [
         "package",
         "detect-breaking-change",
         "--package-path",

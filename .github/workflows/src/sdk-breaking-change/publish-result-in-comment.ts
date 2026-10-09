@@ -12,7 +12,7 @@ export async function publishResultInComment(
   }
 
   const body = `${command}\n\n${content}`;
-  commentOrUpdate(
+  await commentOrUpdate(
     github,
     core,
     context.repo.owner,

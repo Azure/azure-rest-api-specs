@@ -5,11 +5,7 @@ on:
     workflows: ["SDK Breaking Change Analysis - Analyze"]
     types: [completed]
 
-permissions:
-  actions: read
-  contents: read
-  issues: write
-  pull-requests: write
+permissions: {}
 
 jobs:
   resolve:
@@ -17,11 +13,13 @@ jobs:
       github.event.workflow_run.conclusion == 'success' ||
       github.event.workflow_run.conclusion == 'failure'
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
     outputs:
       should-run: ${{ steps.read-status.outputs.should-run }}
     steps:
       - name: Download SDK analysis status
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: sdk-breaking-change-analysis-status
           path: ${{ runner.temp }}/sdk-breaking-change-analysis
@@ -43,8 +41,13 @@ jobs:
     needs: resolve
     if: needs.resolve.outputs.should-run == 'true'
     runs-on: ubuntu-slim
+    permissions:
+      actions: read
+      contents: read
+      issues: write
+      pull-requests: read
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           sparse-checkout: |
             .github
@@ -55,7 +58,7 @@ jobs:
         uses: ./.github/actions/install-deps-github-script
 
       - name: Download SDK analysis results
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: sdk-breaking-change-results
           path: ${{ runner.temp }}/sdk-breaking-change-results
@@ -63,7 +66,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: Publish SDK breaking-change analysis result
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
         with:

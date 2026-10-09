@@ -20,11 +20,13 @@ import { analyzeSdkProjects } from "../../src/sdk-breaking-change/analyze-sdk-pr
 let temporaryDirectory: string;
 let sdkRepositoryPath: string;
 let specificationRepositoryPath: string;
+let azureSdkCliPath: string;
 
 beforeEach(async () => {
   temporaryDirectory = join(import.meta.dirname, `analysis-${crypto.randomUUID()}`);
   sdkRepositoryPath = join(temporaryDirectory, "sdk");
   specificationRepositoryPath = join(temporaryDirectory, "specs");
+  azureSdkCliPath = join(temporaryDirectory, "bin");
   await mkdir(sdkRepositoryPath, { recursive: true });
   await mkdir(join(specificationRepositoryPath, "specification", "service", "Widget.Service"), {
     recursive: true,
@@ -38,7 +40,7 @@ beforeEach(async () => {
       type: "management",
     },
     languages: {
-      Go: [
+      go: [
         {
           emitterName: "@azure-tools/typespec-go",
           outputDir: "{output-dir}/sdk/armwidget",
@@ -47,9 +49,9 @@ beforeEach(async () => {
     },
   });
 
-  execFileMock.mockImplementation(async (_file, args = []) => {
+  execFileMock.mockImplementation((_file, args = []) => {
     const operation = args[1];
-    return { stdout: `${JSON.stringify({ operation })}\n`, stderr: "" };
+    return Promise.resolve({ stdout: `${JSON.stringify({ operation })}\n`, stderr: "" });
   });
 });
 
@@ -69,6 +71,7 @@ describe("analyzeSdkProjects", () => {
       analyzedSha: "a".repeat(40),
       workflowUrl: "https://github.com/owner/repo/actions/runs/123",
       resultDir: temporaryDirectory,
+      azureSdkCliPath,
     });
 
     const resultsPath = join(temporaryDirectory, "sdk-breaking-change-results");
@@ -89,11 +92,16 @@ describe("analyzeSdkProjects", () => {
     ).resolves.toContain('"operation":"detect-breaking-change"');
     await expect(readFile(join(resultsPath, "analysis.log"), "utf8")).resolves.toBe("");
     expect(execFileMock).toHaveBeenCalledTimes(3);
-    expect(execFileMock).toHaveBeenNthCalledWith(1, "azsdk", expect.arrayContaining(["generate"]));
-    expect(execFileMock).toHaveBeenNthCalledWith(2, "azsdk", expect.arrayContaining(["build"]));
+    const azureSdkCli = join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk");
+    expect(execFileMock).toHaveBeenNthCalledWith(
+      1,
+      azureSdkCli,
+      expect.arrayContaining(["generate"]),
+    );
+    expect(execFileMock).toHaveBeenNthCalledWith(2, azureSdkCli, expect.arrayContaining(["build"]));
     expect(execFileMock).toHaveBeenNthCalledWith(
       3,
-      "azsdk",
+      azureSdkCli,
       expect.arrayContaining(["detect-breaking-change"]),
     );
     expect(generateTypeSpecMetadataMock).toHaveBeenCalledWith(
@@ -121,6 +129,7 @@ describe("analyzeSdkProjects", () => {
       analyzedSha: "a".repeat(40),
       workflowUrl: "https://github.com/owner/repo/actions/runs/123",
       resultDir: temporaryDirectory,
+      azureSdkCliPath,
     });
 
     await expect(result).rejects.toThrow(
@@ -140,7 +149,7 @@ describe("analyzeSdkProjects", () => {
         type: "management",
       },
       languages: {
-        Go: [{ emitterName: "@azure-tools/typespec-go" }],
+        go: [{ emitterName: "@azure-tools/typespec-go" }],
       },
     });
 
@@ -154,6 +163,7 @@ describe("analyzeSdkProjects", () => {
         analyzedSha: "a".repeat(40),
         workflowUrl: "https://github.com/owner/repo/actions/runs/123",
         resultDir: temporaryDirectory,
+        azureSdkCliPath,
       }),
     ).rejects.toThrow(
       "Expected output directory for specification/service/Widget.Service and language Go",

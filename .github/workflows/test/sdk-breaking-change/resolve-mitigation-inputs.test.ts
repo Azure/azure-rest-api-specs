@@ -63,7 +63,7 @@ describe("resolveMitigationTrigger", () => {
       });
 
       expect(core.setOutput).toHaveBeenCalledWith("should-run", "true");
-      expect(core.setOutput).toHaveBeenCalledWith("pull-number", 42);
+      expect(core.setOutput).toHaveBeenCalledWith("pr-number", 42);
       expect(core.setOutput).toHaveBeenCalledWith("sdk-language", sdkLanguage);
       expect(core.setOutput).toHaveBeenCalledWith("sdk-repository", sdkRepository);
       expect(core.setOutput).toHaveBeenCalledWith("head-repository", "owner/repo");

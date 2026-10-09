@@ -14,7 +14,6 @@ on:
 permissions:
   actions: read
   contents: read
-  copilot-requests: write
 
 jobs:
   check-analysis-status:
@@ -27,7 +26,7 @@ jobs:
       should-run: ${{ steps.read-status.outputs.should-run }}
     steps:
       - name: Download SDK analysis status
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: sdk-breaking-change-analysis-status
           path: ${{ runner.temp }}/sdk-breaking-change-analysis
@@ -59,7 +58,7 @@ jobs:
       should-run: ${{ steps.resolve.outputs.should-run }}
     steps:
       - name: Download published analysis results
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: sdk-breaking-change-results
           path: ${{ runner.temp }}/published-analysis-results
@@ -67,7 +66,7 @@ jobs:
           run-id: ${{ inputs.workflow_run_id || github.event.workflow_run.id }}
 
       - name: Checkout workflow repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           sparse-checkout: |
             .github
@@ -79,7 +78,7 @@ jobs:
 
       - name: Resolve mitigation trigger
         id: resolve
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { resolveMitigationTrigger } =
@@ -102,14 +101,21 @@ jobs:
           SHOULD_RUN: >-
             ${{ needs.resolve-trigger.result == 'success' &&
             needs.resolve-trigger.outputs.should-run ||
-            needs.check-analysis-status.outputs.should-run }}
+            (needs.resolve-trigger.result == 'skipped' &&
+            needs.check-analysis-status.result == 'success' &&
+            needs.check-analysis-status.outputs.should-run) ||
+            'false' }}
         run: |
+          if [[ "$SHOULD_RUN" != "true" && "$SHOULD_RUN" != "false" ]]; then
+            echo "Invalid should-run value '$SHOULD_RUN'; publishing false instead." >&2
+            SHOULD_RUN="false"
+          fi
           mkdir -p "${{ runner.temp }}/sdk-breaking-change-mitigate"
           printf '%s\n' "$SHOULD_RUN" > \
             "${{ runner.temp }}/sdk-breaking-change-mitigate/run"
 
       - name: Upload mitigation status
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: sdk-breaking-change-mitigate
           path: ${{ runner.temp }}/sdk-breaking-change-mitigate/run
@@ -124,11 +130,14 @@ jobs:
         sdk-breaking-mitigate-${{ inputs.workflow_run_id || github.event.workflow_run.id }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      copilot-requests: write
     env:
       AZSDK_CLI_PATH: /tmp/bin
     steps:
       - name: Checkout workflow repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           path: repositories/workflow-repository
           persist-credentials: false
@@ -145,7 +154,7 @@ jobs:
         run: ./repositories/workflow-repository/eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory $env:AZSDK_CLI_PATH
 
       - name: Download published analysis results
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: sdk-breaking-change-results
           path: ${{ runner.temp }}/published-analysis-results
@@ -153,7 +162,7 @@ jobs:
           run-id: ${{ inputs.workflow_run_id || github.event.workflow_run.id }}
 
       - name: Checkout specification PR source
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: ${{ needs.resolve-trigger.outputs.head-repository }}
           ref: ${{ needs.resolve-trigger.outputs.head-sha }}
@@ -183,7 +192,7 @@ jobs:
 
       - name: Mitigate SDK breaking changes
         id: mitigate-sdk-breaking-changes
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           ANALYSIS_RESULT_PATH: ${{ runner.temp }}/published-analysis-results/sdk-breaking-change-analysis.json
           AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
@@ -229,7 +238,7 @@ jobs:
 
       - name: Upload mitigation result
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: sdk-breaking-change-mitigation-results
           path: ${{ runner.temp }}/published-mitigation-results/sdk-breaking-change-mitigation.json
