@@ -1883,6 +1883,17 @@
             "minLength": 1,
             "maxLength": 64,
             "pattern": "^[^\\p{Cc}\\/\\\\#\\?:;]{1,64}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {

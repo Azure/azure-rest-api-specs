@@ -255,7 +255,7 @@ interface WebPubSubChatServiceClient {
   @listsResource(ChatUserRoom)
   listRoomsForUser is Operations.ResourceList<
     ChatUserRoom,
-    {
+    ListQueryParametersTrait<{
       /** Maximum number of items to include in a page. */
       ...MaxPageSizeQueryParameter;
 
@@ -264,6 +264,6 @@ interface WebPubSubChatServiceClient {
       @continuationToken
       @minLength(1)
       continuationToken?: string;
-    }
+    }>
   >;
 }
