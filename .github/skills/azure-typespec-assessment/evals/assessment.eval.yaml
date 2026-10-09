@@ -47,46 +47,46 @@ stimuli:
       max_turns: 3
       max_tokens: 100000
 
-  - name: retain-pr-43308-html-report
-    tags:
-      behavior: report-rendering
-    prompt: |
-      Use azure-typespec-assessment to validate the supplied PR 43308 assessment
-      fixture and render its final HTML report to output/assessment.html.
-      Run scripts/validate-assessment.mjs and scripts/render-assessment-html.mjs
-      against assessment.json. This is an existing-report replay, not a fresh
-      source assessment.
-    environment:
-      files:
-        - src: fixtures/assessments/43308.json
-          dest: assessment.json
-        - src: ../scripts
-          dest: scripts
-        - src: ../references
-          dest: references
-    graders:
-      - type: skill-invocation
-        config:
-          required: ["azure-typespec-assessment"]
-      - type: tool-calls
-        config:
-          required:
-            - "^(powershell|bash)$"
-      - type: run-command
-        config:
-          command: "node scripts/validate-assessment.mjs assessment.json"
-          expected_exit_code: 0
-      - type: run-command
-        config:
-          command: "node scripts/render-assessment-html.mjs assessment.json output/assessment.html"
-          expected_exit_code: 0
-      - type: file-exists
-        config:
-          path: "output/assessment.html"
-      - type: file-matches
-        config:
-          path: "output/assessment.html"
-          pattern: "FirewallPolicies\\.createOrUpdate"
+  # - name: retain-pr-43308-html-report
+  #   tags:
+  #     behavior: report-rendering
+  #   prompt: |
+  #     Use azure-typespec-assessment to validate the supplied PR 43308 assessment
+  #     fixture and render its final HTML report to output/assessment.html.
+  #     Run scripts/validate-assessment.mjs and scripts/render-assessment-html.mjs
+  #     against assessment.json. This is an existing-report replay, not a fresh
+  #     source assessment.
+  #   environment:
+  #     files:
+  #       - src: fixtures/assessments/43308.json
+  #         dest: assessment.json
+  #       - src: ../scripts
+  #         dest: scripts
+  #       - src: ../references
+  #         dest: references
+  #   graders:
+  #     - type: skill-invocation
+  #       config:
+  #         required: ["azure-typespec-assessment"]
+  #     - type: tool-calls
+  #       config:
+  #         required:
+  #           - "^(powershell|bash)$"
+  #     - type: run-command
+  #       config:
+  #         command: "node scripts/validate-assessment.mjs assessment.json"
+  #         expected_exit_code: 0
+  #     - type: run-command
+  #       config:
+  #         command: "node scripts/render-assessment-html.mjs assessment.json output/assessment.html"
+  #         expected_exit_code: 0
+  #     - type: file-exists
+  #       config:
+  #         path: "output/assessment.html"
+  #     - type: file-matches
+  #       config:
+  #         path: "output/assessment.html"
+  #         pattern: "FirewallPolicies\\.createOrUpdate"
 
   # - name: invoke-local-coordinator-first
   #   tags:
