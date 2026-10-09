@@ -316,6 +316,7 @@ export async function evaluateReadinessParticipants(
     if (write === false) {
       const impacts: string[] = [];
       if (participant.roles.has("PR author")) {
+        impacts.push("PR author cannot run Azure DevOps pipelines for this PR.");
         impacts.push("PR author cannot add labels to this PR.");
       }
       if (participant.roles.has("approved reviewer"))
@@ -344,7 +345,7 @@ export function renderReadiness(
       "Contributor readiness: required access",
       findings.length
         ? [
-            "> [!WARNING]\n> **The access issues below can prevent PR approvals from counting or PR authors from adding labels.**",
+            "> [!WARNING]\n> **The access issues below can prevent PR approvals from counting, block Azure DevOps pipeline runs, or prevent PR authors from adding labels.**",
             renderReadinessFindings(participants, findings),
             `Internal contributors: ${link("setup / renew required access", ONBOARDING)}. Recheck: ${inlineCode(COMMAND)}.`,
             renderVerifiedContributors(verifiedParticipants),
