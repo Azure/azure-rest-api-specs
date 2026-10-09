@@ -4,7 +4,7 @@ const mockReadFile: import("vitest").Mock = vi.hoisted(() => vi.fn());
 
 const mockStat: import("vitest").Mock = vi.hoisted(() => vi.fn());
 
-vi.mock("fs/promises", () => ({
+vi.mock("node:fs/promises", () => ({
   readFile: mockReadFile,
   stat: mockStat,
 }));

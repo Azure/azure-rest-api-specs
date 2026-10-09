@@ -220,8 +220,19 @@ namespace Microsoft.HybridConnectivity;
 );
 
 @@clientName(GenerateAwsTemplate.post, "PostGenerateAwsTemplate", "csharp");
+@@clientName(GenerateGcpTemplate.post, "PostGenerateGcpTemplate", "csharp");
 @@clientName(
   TrackedResourceUpdate,
   "HybridConnectivityTrackedResourcePatch",
+  "csharp"
+);
+@@clientName(
+  PublicCloudConnectorPropertiesUpdate,
+  "PublicCloudConnectorPropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  GcpOrganizationPropertiesUpdate,
+  "GcpOrganizationPropertiesPatch",
   "csharp"
 );

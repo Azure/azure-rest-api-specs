@@ -2,15 +2,15 @@ import type { Context, Core, GitHub, GitHubScriptArgs } from "../../src/github.t
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
-vi.mock("fs/promises", () => ({
+vi.mock("node:fs/promises", () => ({
   readFile: vi.fn(),
 }));
-vi.mock("js-yaml", () => ({
-  default: { load: vi.fn() },
+vi.mock("yaml", () => ({
+  parse: vi.fn(),
 }));
 
-import { readFile } from "fs/promises";
-import yaml from "js-yaml";
+import { readFile } from "node:fs/promises";
+import { parse } from "yaml";
 import checkLabel from "../../src/protected-labels/check-label.ts";
 
 function invokeCheckLabel(args: Partial<GitHubScriptArgs>) {
@@ -36,7 +36,7 @@ const protectedLabelsConfig = {
 
 function setupMocks() {
   (readFile as ReturnType<typeof vi.fn>).mockResolvedValue("yaml-content");
-  (yaml.load as ReturnType<typeof vi.fn>).mockReturnValue(protectedLabelsConfig);
+  vi.mocked(parse).mockReturnValue(protectedLabelsConfig);
 }
 
 function createLabeledPayload({
@@ -227,7 +227,7 @@ describe("checkLabel", () => {
 
   describe("config validation", () => {
     it("throws on invalid config (not an object)", async () => {
-      (yaml.load as ReturnType<typeof vi.fn>).mockReturnValue(null);
+      vi.mocked(parse).mockReturnValue(null);
 
       context.payload = createLabeledPayload({
         labelName: "BreakingChange-Approved-Benign",
@@ -240,7 +240,7 @@ describe("checkLabel", () => {
     });
 
     it("throws on invalid entry (not an array)", async () => {
-      (yaml.load as ReturnType<typeof vi.fn>).mockReturnValue({
+      vi.mocked(parse).mockReturnValue({
         "BreakingChange-Approved-Benign": "not-an-array",
       });
 
@@ -255,7 +255,7 @@ describe("checkLabel", () => {
     });
 
     it("throws on invalid plane value (not an array or 'unprotected')", async () => {
-      (yaml.load as ReturnType<typeof vi.fn>).mockReturnValue({
+      vi.mocked(parse).mockReturnValue({
         "package-name-dotnet-approved": {
           "management-plane": "open",
         },
