@@ -32,13 +32,13 @@ model DrillResource is ProxyResource<DrillResourceProperties> {
 
 @@typeChangedFrom(
   DrillResource.properties,
-  Versions.v2026_10_31_preview,
+  Versions.v2026_10_01,
   LegacyDrillResourceProperties
 );
 
 @doc("Properties of the Resiliency Drill Resource")
-@removed(Versions.v2026_10_31_preview)
-@renamedFrom(Versions.v2026_10_31_preview, "DrillResourceProperties")
+@removed(Versions.v2026_10_01)
+@renamedFrom(Versions.v2026_10_01, "DrillResourceProperties")
 model LegacyDrillResourceProperties {
   @doc("ARM Id of the underlying resource.")
   resourceId: armResourceIdentifier<[]>;
@@ -143,7 +143,7 @@ model LegacyDrillResourceProperties {
 }
 
 @doc("Properties of the Resiliency Drill Resource")
-@added(Versions.v2026_10_31_preview)
+@added(Versions.v2026_10_01)
 @discriminator("drillType")
 model DrillResourceProperties {
   // Retired fields remain in the legacy model but must not reappear in the new base.
@@ -166,6 +166,7 @@ model DrillResourceProperties {
    * Omitted until evaluated. Eligibility does not indicate inclusion or readiness,
    * and force inclusion does not change this value.
    */
+  @added(Versions.v2026_10_31_preview)
   @visibility(Lifecycle.Read)
   faultEligibility?: FaultEligibility;
 
@@ -175,12 +176,13 @@ model DrillResourceProperties {
    * Omitted when Eligible, Unknown, or not yet evaluated. Failed or incomplete recovery-plan reads do not establish non-inclusion.
    * Binding and permission errors are reported separately in attentionReason and error fields.
    */
+  @added(Versions.v2026_10_31_preview)
   @visibility(Lifecycle.Read)
   faultIneligibleReason?: FaultIneligibleReason;
 }
 
 @doc("Properties of a resource in a zonal Resiliency Drill.")
-@added(Versions.v2026_10_31_preview)
+@added(Versions.v2026_10_01)
 model ZonalDrillResourceProperties extends DrillResourceProperties {
   @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
   @visibility(Lifecycle.Read)
@@ -196,7 +198,7 @@ model ZonalDrillResourceProperties extends DrillResourceProperties {
 }
 
 @doc("Properties of a resource in a regional Resiliency Drill.")
-@added(Versions.v2026_10_31_preview)
+@added(Versions.v2026_10_01)
 model RegionalDrillResourceProperties extends DrillResourceProperties {
   @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
   @visibility(Lifecycle.Read)
@@ -207,6 +209,7 @@ model RegionalDrillResourceProperties extends DrillResourceProperties {
    * Resilient corresponds to an available true posture value; NotResilient corresponds to an available false value.
    * Omitted when the posture is unknown or unavailable; unavailable data is not reported as NotResilient.
    */
+  @added(Versions.v2026_10_31_preview)
   @visibility(Lifecycle.Read)
   regionalResiliencyStatus?: RegionalResiliencyStatus;
 
@@ -214,6 +217,7 @@ model RegionalDrillResourceProperties extends DrillResourceProperties {
    * Replication mode of the selected regional protection solution.
    * Omitted when no applicable mode is available.
    */
+  @added(Versions.v2026_10_31_preview)
   @visibility(Lifecycle.Read)
   replicationMode?: ReplicationMode;
 
@@ -222,6 +226,7 @@ model RegionalDrillResourceProperties extends DrillResourceProperties {
    * The recommendation type is identified separately by advisorRecommendationTypeId.
    * Omitted when no matching recommendation exists.
    */
+  @added(Versions.v2026_10_31_preview)
   @visibility(Lifecycle.Read)
   advisorRegionalRecommendationId?: armResourceIdentifier<[
     {

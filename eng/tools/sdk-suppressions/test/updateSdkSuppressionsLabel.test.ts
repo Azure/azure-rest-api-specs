@@ -6,7 +6,7 @@ import {
   processLabels,
 } from "../src/updateSdkSuppressionsLabel.ts";
 
-vi.mock("process", () => ({
+vi.mock("node:process", () => ({
   exit: vi.fn(),
 }));
 

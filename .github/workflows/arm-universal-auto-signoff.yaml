@@ -2,7 +2,7 @@
 # to "ARM Auto SignOff" and remove the legacy workflow.
 name: ARM Universal Auto SignOff
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
   # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
   # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
@@ -37,11 +37,13 @@ permissions:
 jobs:
   arm-universal-auto-signoff:
     name: ARM Universal Auto SignOff
-    # workflow_run is already filtered above. For pull_request_target, run for PR-head changes
-    # and only for labels that can affect eligibility.
+    # Ignore skipped/cancelled parents. For open PRs, only handle changes that affect eligibility.
     if: |
-      github.event_name == 'workflow_run' ||
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion != 'skipped' &&
+       github.event.workflow_run.conclusion != 'cancelled') ||
       (github.event_name == 'pull_request_target' &&
+       github.event.pull_request.state == 'open' &&
        (github.event.action == 'opened' ||
         github.event.action == 'synchronize' ||
         github.event.action == 'reopened' ||
@@ -61,8 +63,9 @@ jobs:
       # For workflows that are triggered by the pull_request_target event, the workflow runs in the
       # context of the base of the pull request.  You should make sure that you do not check out,
       # build, or run untrusted code from the head of the pull request.
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           # Only needs .github folder for automation, not the files in the PR (analyzed in a
           # separate workflow).
           #
@@ -73,7 +76,7 @@ jobs:
 
       - id: get-label-action
         name: ARM Universal Auto SignOff
-        uses: actions/github-script@v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: getLabelAction } =

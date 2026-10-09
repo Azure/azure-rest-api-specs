@@ -1,8 +1,8 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
-import { dirname, join, resolve } from "path";
-import { createInterface } from "readline";
-import { fileURLToPath } from "url";
-import { parseArgs } from "util";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
+import { createInterface } from "node:readline";
+import { fileURLToPath } from "node:url";
+import { parseArgs } from "node:util";
 import { findRepoRoot } from "./arm-lease-fetch-resource-providers.ts";
 
 const DEFAULT_DURATION = "P180D";

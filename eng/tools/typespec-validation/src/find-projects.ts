@@ -1,13 +1,14 @@
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
-import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { stat } from "node:fs/promises";
-import { dirname, join, relative, resolve, sep } from "node:path";
+import { dirname, join, relative, resolve } from "pathe";
 import { globFiles } from "./glob.ts";
 
 export interface ChangedProjectsOptions {
   baseCommitish: string;
   headCommitish: string;
   ignoreCoreFiles?: boolean;
+  logger: ILogger;
 }
 
 const coreFiles = new Set([
@@ -24,7 +25,9 @@ const coreFiles = new Set([
 function isCoreFile(file: string): boolean {
   return (
     coreFiles.has(file) ||
-    (file.startsWith(".github/") && !file.startsWith(".github/arm-leases/")) ||
+    (file.startsWith(".github/") &&
+      file !== ".github/CODEOWNERS" &&
+      !file.startsWith(".github/arm-leases/")) ||
     (file.startsWith("eng/") && !file.startsWith("eng/common/")) ||
     file.startsWith("specification/common-types/")
   );
@@ -36,9 +39,7 @@ export async function findProjects(root: string): Promise<string[]> {
     cwd: root,
     exclude: ["**/node_modules/**"],
   });
-  const folders = [
-    ...new Set(configs.map((config) => dirname(config).split(sep).join("/"))),
-  ].sort();
+  const folders = [...new Set(configs.map((config) => dirname(config)))].sort();
   return folders.map((folder) => resolve(root, folder));
 }
 
@@ -51,7 +52,7 @@ export async function findChangedProjects(
       cwd: root,
       baseCommitish: options.baseCommitish,
       headCommitish: options.headCommitish,
-      logger: new ConsoleLogger(),
+      logger: options.logger,
     })
   ).filter((file) => !file.includes("ChangedFiles-Functions"));
 
@@ -87,11 +88,11 @@ export async function findChangedProjects(
       }
     }
     if (!isDirectory) {
-      console.log(`Cannot find directory ${directory}`);
+      options.logger.debug(`Cannot find directory ${directory}`);
       continue;
     }
     for (const project of await findProjects(folder)) {
-      projects.add(relative(root, project).split(sep).join("/"));
+      projects.add(relative(root, project));
     }
   }
 

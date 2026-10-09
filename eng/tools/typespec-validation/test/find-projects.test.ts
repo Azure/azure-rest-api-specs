@@ -1,7 +1,8 @@
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
+import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join } from "pathe";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { findChangedProjects } from "../src/find-projects.ts";
 
@@ -10,7 +11,7 @@ vi.mock("@azure-tools/specs-shared/changed-files", () => ({
 }));
 
 let root: string;
-const revisions = { baseCommitish: "base", headCommitish: "head" };
+const revisions = { baseCommitish: "base", headCommitish: "head", logger: new ConsoleLogger() };
 
 async function addProject(path: string, config = "tspconfig.yaml") {
   const folder = join(root, path);
@@ -23,6 +24,7 @@ beforeEach(async () => {
   root = await mkdtemp(join(tmpdir(), "tsv-find-projects-"));
   vi.mocked(getChangedFiles).mockReset().mockResolvedValue([]);
   vi.spyOn(console, "log").mockImplementation(() => {});
+  vi.spyOn(console, "debug").mockImplementation(() => {});
 });
 
 afterEach(async () => {
@@ -51,7 +53,6 @@ it("searches affected services recursively, deduplicates, and sorts projects", a
   expect(getChangedFiles).toHaveBeenCalledWith({
     cwd: root,
     ...revisions,
-    logger: expect.anything() as unknown,
   });
 });
 
@@ -75,11 +76,13 @@ it("includes deleted files whose service survives and reports deleted service fo
     "specification/removed/Project/tspconfig.yaml",
   ]);
 
-  await expect(findChangedProjects(root, revisions)).resolves.toEqual({
+  await expect(
+    findChangedProjects(root, { ...revisions, logger: new ConsoleLogger(true) }),
+  ).resolves.toEqual({
     projects: [existing],
     checkingAllSpecs: false,
   });
-  expect(console.log).toHaveBeenCalledExactlyOnceWith(
+  expect(console.debug).toHaveBeenCalledExactlyOnceWith(
     "Cannot find directory specification/removed",
   );
 });
@@ -112,6 +115,7 @@ it.each([
 
 it.each([
   ".github/arm-leases/service/lease.yaml",
+  ".github/CODEOWNERS",
   "eng/common/scripts/common.ps1",
   "eng/scripts/ChangedFiles-Functions.ps1",
   "eng/scripts/Tests/ChangedFiles-Functions.Tests.ps1",

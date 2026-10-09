@@ -1,6 +1,6 @@
 import { type OpenAPI2Document, type OpenAPI2Schema } from "@azure-tools/typespec-autorest";
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
+import path, { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import { isRef } from "./compare.ts";
 import { readFileContent } from "./helper.ts";
 
