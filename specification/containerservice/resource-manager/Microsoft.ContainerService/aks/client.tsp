@@ -873,6 +873,11 @@ using Microsoft.ContainerService;
 );
 @@clientName(ManagedClusters.post, "ResolvePrivateLinkServiceId", "csharp");
 
+@@clientName(
+  Azure.ResourceManager.CommonTypes.DelegatedResource,
+  "ManagedClusterDelegatedIdentity",
+  "csharp"
+);
 @@alternateType(ManagedClusterIdentity.principalId, uuid, "csharp");
 @@alternateType(ManagedClusterIdentity.tenantId, uuid, "csharp");
 @@alternateType(
