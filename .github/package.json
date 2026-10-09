@@ -13,10 +13,11 @@
     "@js-temporal/polyfill": "catalog:",
     "cross-spawn": "catalog:",
     "debug": "catalog:",
-    "js-yaml": "catalog:",
     "marked": "catalog:",
     "markdown-table": "catalog:",
     "minimatch": "catalog:",
+    "pathe": "catalog:",
+    "picocolors": "catalog:",
     "simple-git": "catalog:",
     "yaml": "catalog:",
     "zod": "catalog:"
@@ -34,7 +35,6 @@
     "@octokit/types": "catalog:",
     "@types/cross-spawn": "catalog:",
     "@types/debug": "catalog:",
-    "@types/js-yaml": "catalog:",
     "@types/node": "catalog:",
     "@types/semver": "catalog:",
     "@vitest/utils": "catalog:",
@@ -44,6 +44,7 @@
   },
   "scripts": {
     "build": "tsc --noEmit",
+    "labels": "node ./workflows/cmd/labels.ts",
     "check": "pnpm test:ci && pnpm lint && pnpm format:check",
     "lint": "pnpm lint:oxlint && pnpm lint:tsc",
     "lint:oxlint": "oxlint .",

@@ -1,9 +1,17 @@
-trigger: none
+trigger:
+  batch: true
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - libs/**
+
 pr: none
 
 parameters:
   - name: Publish
-    displayName: Publish packages to npm (internal main-branch runs only)
+    displayName: Publish the manifest version to npm (manual internal main-branch runs only)
     type: boolean
     default: false
 
@@ -25,12 +33,17 @@ extends:
               os: linux
             steps:
               - checkout: self
+                fetchDepth: 0
+              - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
               - template: /eng/pipelines/templates/steps/npm-install.yml
               - script: pnpm --filter @azure-tools/typespec-foundry-core build
                 displayName: Compile and lint Foundry Core
               - script: pnpm --filter @azure-tools/typespec-foundry-core test:ci
                 displayName: Test Foundry Core
-              - script: pnpm --filter @azure-tools/typespec-foundry-core pack --pack-destination "$(Build.ArtifactStagingDirectory)/packages"
+              - ${{ if and(in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI'), eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs')) }}:
+                  - script: node ./eng/scripts/library-release.ts ./libs/foundry-core
+                    displayName: Prepare automatic prerelease version
+              - script: pnpm --config.verifyDepsBeforeRun=false --filter @azure-tools/typespec-foundry-core pack --pack-destination "$(Build.ArtifactStagingDirectory)/packages"
                 displayName: Pack Foundry Core
             templateContext:
               outputs:
@@ -39,7 +52,7 @@ extends:
                   artifact: packages
                   displayName: Publish npm package artifacts
 
-      - ${{ if and(parameters.Publish, eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs')) }}:
+      - ${{ if and(or(parameters.Publish, in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI')), eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs')) }}:
           - stage: Publish
             displayName: Publish libraries to npm
             dependsOn: Build
@@ -49,4 +62,7 @@ extends:
                 parameters:
                   ArtifactName: packages
                   Environment: package-publish
-                  Tag: auto
+                  ${{ if in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI') }}:
+                    Tag: latest
+                  ${{ else }}:
+                    Tag: auto
