@@ -1,18 +1,18 @@
 import { execa } from "execa";
+import { resolve } from "node:path";
 import { describe, expect, test } from "vitest";
 
-// TODO: Actual tests
 describe("e2e", () => {
-  test("Executes", async () => {
-    const output = await execa("pnpm", ["exec", "lint-diff"], { reject: false });
+  test("reports missing required arguments", async () => {
+    const output = await execa(
+      process.execPath,
+      [resolve(import.meta.dirname, "../cmd/lint-diff.js")],
+      { reject: false },
+    );
 
-    try {
-      expect(output.exitCode).toBe(1);
-    } catch (error) {
-      console.log(`stdout: ${output.stdout}`);
-      console.log(`stderr: ${output.stderr}`);
-      console.error("Error:", error);
-      throw error;
-    }
+    expect(output.exitCode, `${output.stdout}\n${output.stderr}`).toBe(1);
+    expect(output.stdout).toContain("--before must be a valid path");
+    expect(output.stdout).toContain("--after must be a valid path");
+    expect(output.stdout).toContain("--changed-files-path missing");
   });
 });

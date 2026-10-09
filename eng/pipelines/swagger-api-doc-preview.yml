@@ -21,15 +21,15 @@ jobs:
     variables:
       - template: /eng/pipelines/templates/variables/globals.yml
       - template: /eng/pipelines/templates/variables/image.yml
-      
+
       - name: BranchName
         value: preview/$(Build.Repository.Name)/pr/$(System.PullRequest.PullRequestNumber)/build/$(Build.BuildId)/attempt/$(System.JobAttempt)
-      
+
       - name: CurrentBuildUrl
         value: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
 
       - name: StatusName
-        value: 'Swagger ApiDocPreview'
+        value: "Swagger ApiDocPreview"
 
     steps:
       - checkout: self
@@ -46,7 +46,7 @@ jobs:
         parameters:
           State: pending
           TargetUrl: $(CurrentBuildUrl)
-          Description: 'Starting docs build'
+          Description: "Starting docs build"
           Context: $(StatusName)
           GitHubToken: $(GH_TOKEN_Azure)
 
@@ -102,7 +102,7 @@ jobs:
           Condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
           State: pending
           TargetUrl: $(CurrentBuildUrl)
-          Description: 'Waiting for docs build to finish'
+          Description: "Waiting for docs build to finish"
           Context: $(StatusName)
           GitHubToken: $(GH_TOKEN_Azure)
 
@@ -120,7 +120,7 @@ jobs:
             $buildStart = Get-Content buildstart.json | ConvertFrom-Json
 
             Write-Host "Waiting for build to finish: https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=$($buildStart.id)"
-            
+
             # Timeout in 20 minutes to avoid infinite waiting
             $start = Get-Date
             while (((Get-Date) - $start).TotalMinutes -lt 20) {
@@ -209,12 +209,11 @@ jobs:
         displayName: Interpret docs build results
         condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
 
-
-      # Login to GitHub again because the token may have expired waiting for the 
+      # Login to GitHub again because the token may have expired waiting for the
       # docs build to complete
       - template: /eng/common/pipelines/templates/steps/login-to-github.yml
 
-      # Sets check status from docs build using $(CheckUrl), $(CheckState), and 
+      # Sets check status from docs build using $(CheckUrl), $(CheckState), and
       # $(CheckDescription) variables set by api-doc-preview-interpret.js.
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
@@ -236,7 +235,7 @@ jobs:
           Context: $(StatusName)
           GitHubToken: $(GH_TOKEN)
 
-      # In the event of a failure in this job (not the docs build job), set the 
+      # In the event of a failure in this job (not the docs build job), set the
       # PR status to failed and link to the current build.
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
@@ -245,6 +244,6 @@ jobs:
           Condition: failed()
           State: failure
           TargetUrl: $(CurrentBuildUrl)
-          Description: 'Orchestration build failed (click to see logs)'
+          Description: "Orchestration build failed (click to see logs)"
           Context: $(StatusName)
           GitHubToken: $(GH_TOKEN)
