@@ -115,6 +115,7 @@ union FoundryFeaturesOptInKeys {
   data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
   models_v1_preview: "Models=V1Preview",
   model_router_controls_v1_preview: "ModelRouterControls=V1Preview",
+  jobs_v1_preview: "Jobs=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<
