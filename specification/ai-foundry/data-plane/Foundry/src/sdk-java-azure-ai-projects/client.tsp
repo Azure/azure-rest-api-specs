@@ -79,6 +79,7 @@ namespace Azure.AI.Projects;
 @@clientName(EvaluationTaxonomies.update, "updateEvaluationTaxonomy");
 
 // Evaluators
+@@clientName(Evaluators.listDiagnostics, "listEvaluatorDiagnostics");
 @@clientName(Evaluators.listVersions, "listEvaluatorVersions");
 @@clientName(Evaluators.getVersion, "getEvaluatorVersion");
 @@clientName(Evaluators.createVersion, "createEvaluatorVersion");

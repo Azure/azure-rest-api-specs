@@ -1,8 +1,8 @@
 // Evaluator client-location relocations.
 //
 // Rubric-based (GA) evaluator operations live on the root Evaluators client
-// (client.evaluators.*). Custom code-based (preview) blob-upload operations
-// remain in the ".beta" sub-client (client.beta.evaluators.*).
+// (client.evaluators.*). Preview evaluator operations remain in the ".beta"
+// sub-client (client.beta.evaluators.*).
 //
 // This file is imported by ops-relocation-projects.tsp, which is imported by the
 // client.tsp files used to emit the Python, JS, and Java clients.
@@ -31,7 +31,8 @@ namespace Azure.AI.Projects {
 namespace Azure.AI.Projects.Beta {
   interface Evaluators {}
 
-  // Custom code-based (preview) blob-upload operations remain in the .beta sub-client.
+  // Preview diagnostics and custom code-based blob-upload operations remain in the .beta sub-client.
+  @@clientLocation(Azure.AI.Projects.Evaluators.listDiagnostics, Evaluators);
   @@clientLocation(Azure.AI.Projects.Evaluators.startPendingUpload, Evaluators);
   @@clientLocation(Azure.AI.Projects.Evaluators.getCredentials, Evaluators);
 }
