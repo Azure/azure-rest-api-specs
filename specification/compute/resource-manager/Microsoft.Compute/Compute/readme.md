@@ -241,6 +241,10 @@ directive:
   - suppress: APIVersionPattern
     from:
       - common.json
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: skus.json
+    where: $.definitions.ResourceSkuZoneDetails.properties.Name
+    reason: The service response uses the PascalCase property name "Name" (and always has).
   - suppress: XmsResourceInPutResponse
     from: virtualMachineScaleSet.json
     reason: x-ms-azure-resource tag makes 'ID' property required. However, VmssExtension is part of the VMSS property, not necessary a resource. So it does not always have ID.

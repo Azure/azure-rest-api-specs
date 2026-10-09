@@ -1,4 +1,4 @@
-import { basename, resolve, sep } from "path";
+import { basename, resolve, sep } from "node:path";
 import { describe, expect, it } from "vitest";
 import { includesSegment, untilLastSegment, untilLastSegmentWithParent } from "../src/path.ts";
 

@@ -2,7 +2,7 @@ import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/g
 import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
 import { extractInputs } from "./context.ts";
-import type { CheckRuns, Core, GitHubScriptArgs } from "./github.ts";
+import type { CheckRuns, Core, GitHub, GitHubScriptArgs } from "./github.ts";
 
 export default async function setSpecGenSdkStatus({
   github,
@@ -50,10 +50,7 @@ export async function setSpecGenSdkStatusImpl({
   head_sha: string;
   target_url: string;
   issue_number: number;
-  github: import("@octokit/core").Octokit &
-    import("@octokit/plugin-rest-endpoint-methods").Api & {
-      paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
-    };
+  github: GitHub;
   core: Core;
 }): Promise<void> {
   const statusName = "SDK Validation Status";

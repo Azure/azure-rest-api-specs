@@ -4,9 +4,9 @@ import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { evaluateImpact, getRPaaSFolderList } from "./impact.ts";
 
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
-import { writeFile } from "fs/promises";
+import { writeFile } from "node:fs/promises";
 import { parseArgs, type ParseArgsConfig } from "node:util";
-import { resolve } from "path";
+import { resolve } from "node:path";
 import { simpleGit } from "simple-git";
 import { type LabelContext } from "./labelling-types.ts";
 import { PRContext } from "./PRContext.ts";

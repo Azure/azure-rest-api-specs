@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest"; //vi
 import { execFileSync } from "node:child_process";
 import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import path from "path";
+import path from "node:path";
 
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import type { ImpactAssessment } from "../src/ImpactAssessment.ts";

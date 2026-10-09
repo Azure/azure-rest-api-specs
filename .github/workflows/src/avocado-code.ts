@@ -1,6 +1,6 @@
 import type { GitHubScriptArgs } from "./github.ts";
-import { readFile } from "fs/promises";
-import { inspect } from "util";
+import { readFile } from "node:fs/promises";
+import { inspect } from "node:util";
 import {
   generateMarkdownTable,
   MessageLevel,
