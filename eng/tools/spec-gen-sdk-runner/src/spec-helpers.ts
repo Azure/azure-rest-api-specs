@@ -17,7 +17,7 @@ import {
 
 export const readmeMdRegex = /^readme.md$/;
 export const typespecProjectRegex = /^tspconfig.yaml$/;
-export const typespecProjectSharedLibraryRegex = /[^/]+\.Shared/;
+export const typespecProjectSharedLibraryRegex = /[^/\\]\.Shared(?:[/\\]|$)/;
 
 /**
  * Processes typespec projects that follow the resource-manager or data-plane folder structure
