@@ -168,6 +168,7 @@ namespace Azure.AI.Projects {
   }
 
   /** A value returned in a response header from a model routing attempt. */
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
   @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
   union ModelRouterResponseHeaderValue {
     string,
