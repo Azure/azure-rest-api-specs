@@ -11,7 +11,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
-@added(Versions.v2026_10_01_preview)
 @doc("A service-managed node allocated to a HorizonDB pool.")
 @parentResource(Pool)
 model Node is Azure.ResourceManager.ProxyResource<NodeProperties> {
@@ -24,7 +23,6 @@ model Node is Azure.ResourceManager.ProxyResource<NodeProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Nodes are read-only service-managed resources whose allocation lifecycle is represented by the parent pool; they do not have an independent provisioning lifecycle."
-@added(Versions.v2026_10_01_preview)
 @doc("Properties of a service-managed HorizonDB node.")
 model NodeProperties {
   @doc("The current role performed by the node within its pool.")
@@ -36,7 +34,6 @@ model NodeProperties {
   availabilityZone: string;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The role performed by a node within its HorizonDB pool.")
 union NodeRole {
   string,
@@ -48,7 +45,6 @@ union NodeRole {
   ReadOnly: "ReadOnly",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Operations for service-managed HorizonDB nodes.")
 @armResourceOperations
 interface Nodes {

@@ -11,7 +11,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
-@added(Versions.v2026_10_01_preview)
 @doc("Represents a maintenance event for a HorizonDB pool.")
 @parentResource(Pool)
 model MaintenanceEvent
@@ -26,7 +25,6 @@ model MaintenanceEvent
   name: string;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The scheduled maintenance configuration for a HorizonDB pool.")
 @discriminator("maintenanceManagementType")
 model ScheduledMaintenanceProperties {
@@ -35,7 +33,6 @@ model ScheduledMaintenanceProperties {
   maintenanceManagementType: ScheduledMaintenanceManagementType;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The system-managed scheduled maintenance configuration for a HorizonDB pool. User-managed schedule properties must be absent.")
 model SystemScheduledMaintenanceProperties
   extends ScheduledMaintenanceProperties {
@@ -44,7 +41,6 @@ model SystemScheduledMaintenanceProperties
   maintenanceManagementType: "System";
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The scheduled maintenance configuration for a pool update operation.")
 model ScheduledMaintenancePropertiesForPatchUpdate {
   @doc("Specifies whether scheduled maintenance is managed by the system or by the user. When scheduledMaintenance is supplied, this property is required by the service.")
@@ -53,7 +49,6 @@ model ScheduledMaintenancePropertiesForPatchUpdate {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Maintenance events are read-only resources that do not have a provisioning lifecycle."
-@added(Versions.v2026_10_01_preview)
 @doc("Properties of a maintenance event resource.")
 model MaintenanceEventProperties {
   @doc("A service-generated identifier for this maintenance event, assigned by the platform. The format is not contractual, and clients should not attempt to parse or construct this value.")
@@ -105,14 +100,12 @@ model MaintenanceEventProperties {
   originalStartTimeUtc: utcDateTime;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Parameters for rescheduling a maintenance event.")
 model MaintenanceEventRescheduleRequest {
   @doc("The new start time in RFC 3339 format.")
   postponeToDateTimeUtc: utcDateTime;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The response from a maintenance event reschedule or apply-now action.")
 model MaintenanceEventActionResponse {
   @doc("The maintenance event identifier.")
@@ -141,7 +134,6 @@ model MaintenanceEventActionResponse {
   lastUpdatedTimeUtc?: utcDateTime;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Specifies who manages scheduled maintenance for a HorizonDB pool.")
 union ScheduledMaintenanceManagementType {
   string,
@@ -150,7 +142,6 @@ union ScheduledMaintenanceManagementType {
   System: "System",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The status of a maintenance event.")
 union MaintenanceEventStatus {
   string,
@@ -171,7 +162,6 @@ union MaintenanceEventStatus {
   Canceled: "Canceled",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The type of a maintenance event.")
 union MaintenanceType {
   string,
@@ -180,7 +170,6 @@ union MaintenanceType {
   PlannedMaintenance: "PlannedMaintenance",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Maintenance event operations for HorizonDB pools.")
 @armResourceOperations
 interface MaintenanceEvents {

@@ -11,7 +11,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
-@added(Versions.v2026_10_01_preview)
 @doc("A PostgreSQL major version advertised by the HorizonDB capabilities API.")
 union PostgreSqlCapabilityVersion {
   string,
@@ -23,7 +22,6 @@ union PostgreSqlCapabilityVersion {
   V18: "18",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A vCore configuration supported by a HorizonDB processor generation.")
 model ComputeSizeCapability {
   @doc("The number of vCores in the configuration.")
@@ -36,7 +34,6 @@ model ComputeSizeCapability {
   memoryPerVCoreInMb: int64;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The capabilities of a HorizonDB compute model.")
 @discriminator("type")
 model ComputeModelCapability {
@@ -45,7 +42,6 @@ model ComputeModelCapability {
   type: PoolComputeModelType;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The capabilities of the Provisioned compute model.")
 model ProvisionedComputeModelCapability extends ComputeModelCapability {
   @doc("The compute model represented by these capabilities.")
@@ -62,7 +58,6 @@ model ProvisionedComputeModelCapability extends ComputeModelCapability {
   supportedComputeSizes: ComputeSizeCapability[];
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The capabilities of a HorizonDB compute generation.")
 model ComputeGenerationCapability {
   @doc("The numeric compute generation used when configuring a HorizonDB pool.")
@@ -79,7 +74,6 @@ model ComputeGenerationCapability {
   supportedComputeModels: ComputeModelCapability[];
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The capabilities of a processor family supported by HorizonDB.")
 model ComputeProcessorCapability {
   @doc("The name of the processor family.")
@@ -92,7 +86,6 @@ model ComputeProcessorCapability {
   supportedGenerations: ComputeGenerationCapability[];
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The capabilities of a PostgreSQL major version supported by HorizonDB.")
 model PostgreSqlVersionCapability {
   @doc("The PostgreSQL major version.")
@@ -104,7 +97,6 @@ model PostgreSqlVersionCapability {
   supportedVersionsToUpgrade: PostgreSqlCapabilityVersion[];
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A HorizonDB Cluster feature supported in a location.")
 model ClusterFeatureCapability {
   @doc("The name of the Cluster feature.")
@@ -112,7 +104,6 @@ model ClusterFeatureCapability {
   name: string;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The HorizonDB Cluster capabilities available in a location.")
 model ClusterCapability {
   @doc("The PostgreSQL major version recommended for clients to select for HorizonDB Clusters in the region. This recommendation does not describe backend behavior when the PostgreSQL version is omitted from a request.")
@@ -130,7 +121,6 @@ model ClusterCapability {
   supportedFeatures: ClusterFeatureCapability[];
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A HorizonDB Pool feature supported in a location.")
 model PoolFeatureCapability {
   @doc("The name of the Pool feature.")
@@ -138,7 +128,6 @@ model PoolFeatureCapability {
   name: string;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The HorizonDB Pool capabilities available in a location.")
 model PoolCapability {
   @doc("The compute processor recommended for clients to select for HorizonDB Pools in the region. This recommendation does not describe backend behavior when the compute processor is omitted from a request.")
@@ -156,7 +145,6 @@ model PoolCapability {
   supportedFeatures: PoolFeatureCapability[];
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties of the HorizonDB capabilities available to a subscription in a location.")
 model CapabilityProperties {
   @doc("The provisioning state of the capability catalog entry.")
@@ -172,7 +160,6 @@ model CapabilityProperties {
   poolCapabilities: PoolCapability;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The singleton HorizonDB capability catalog entry available to a subscription in a location.")
 @singleton("default")
 @parentResource(SubscriptionLocationResource)
@@ -185,7 +172,6 @@ model Capability is ProxyResource<CapabilityProperties> {
   >;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Operations for the singleton HorizonDB capability catalog entry available in a location.")
 @armResourceOperations
 interface Capabilities {
