@@ -10643,6 +10643,19 @@ model BastionHostPropertiesFormat {
    */
   @added(Versions.v2026_01_01)
   sessionRecordingConfiguration?: BastionSessionRecordingConfiguration;
+
+  /**
+   * Enable/Disable Firewall In Data Path feature of the Bastion Host resource
+   */
+  @added(Versions.v2026_03_01)
+  enableFirewallInDataPath?: boolean = false;
+
+  /**
+   * Add FQDN IP Address for Bastion with Firewall In Data Path
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_03_01)
+  fqdnIPAddress?: string;
 }
 
 /**
@@ -10704,6 +10717,14 @@ model BastionHostIPConfigurationPropertiesFormat {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
+
+  /**
+   * The private IP address assigned to the Bastion host Internal Load Balancer.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_03_01)
+  @visibility(Lifecycle.Read)
+  privateIPAddress?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

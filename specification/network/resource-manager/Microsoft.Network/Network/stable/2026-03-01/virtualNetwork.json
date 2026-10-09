@@ -15256,6 +15256,11 @@
         "privateIPAllocationMethod": {
           "$ref": "./common.json#/definitions/IPAllocationMethod",
           "description": "Private IP allocation method."
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "The private IP address assigned to the Bastion host Internal Load Balancer.",
+          "readOnly": true
         }
       },
       "required": [
@@ -15360,6 +15365,15 @@
         "sessionRecordingConfiguration": {
           "$ref": "#/definitions/BastionSessionRecordingConfiguration",
           "description": "The storage account and identity to use for session recording"
+        },
+        "enableFirewallInDataPath": {
+          "type": "boolean",
+          "description": "Enable/Disable Firewall In Data Path feature of the Bastion Host resource",
+          "default": false
+        },
+        "fqdnIPAddress": {
+          "type": "string",
+          "description": "Add FQDN IP Address for Bastion with Firewall In Data Path"
         }
       }
     },
