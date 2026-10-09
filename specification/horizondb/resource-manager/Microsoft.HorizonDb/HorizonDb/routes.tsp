@@ -95,36 +95,6 @@ interface Clusters {
     LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
-
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Starts a stopped HorizonDB cluster.")
-  start is ArmResourceActionAsync<
-    Cluster,
-    void,
-    ArmResponse<Cluster>,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Stops a running HorizonDB cluster.")
-  stop is ArmResourceActionAsync<
-    Cluster,
-    void,
-    ArmResponse<Cluster>,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Restarts a HorizonDB cluster.")
-  restart is ArmResourceActionAsync<
-    Cluster,
-    void,
-    ArmResponse<Cluster>,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  >;
 }
 
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPools")
@@ -217,62 +187,6 @@ interface Pools {
   >;
 }
 
-@removed(Versions.v2026_10_01_preview)
-@armResourceOperations
-interface HorizonDbReplicas {
-  @doc("Gets information about a HorizonDB replica.")
-  get is ArmResourceRead<HorizonDbReplica>;
-
-  @doc("Lists all HorizonDB replicas in a pool.")
-  list is ArmResourceListByParent<HorizonDbReplica>;
-
-  @doc("Creates a new HorizonDB replica or updates an existing replica.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<HorizonDbReplica>;
-
-  @doc("Updates an existing HorizonDB replica (e.g., role).")
-  update is ArmCustomPatchAsync<
-    HorizonDbReplica,
-    HorizonDbReplicaForPatchUpdate
-  >;
-
-  @doc("Deletes a HorizonDB replica.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    HorizonDbReplica,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
-  >;
-}
-
-@removed(Versions.v2026_10_01_preview)
-@armResourceOperations
-interface HorizonDbFirewallRules {
-  @doc("Gets information about a HorizonDB firewall rule.")
-  @sharedRoute
-  get is ArmResourceRead<LegacyHorizonDbFirewallRule>;
-
-  @doc("Lists all HorizonDB firewall rules in a pool.")
-  @sharedRoute
-  list is ArmResourceListByParent<LegacyHorizonDbFirewallRule>;
-
-  @doc("Creates a new HorizonDB firewall rule or updates an existing rule.")
-  @sharedRoute
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<LegacyHorizonDbFirewallRule>;
-
-  @doc("Deletes a HorizonDB firewall rule.")
-  @sharedRoute
-  delete is ArmResourceDeleteWithoutOkAsync<
-    LegacyHorizonDbFirewallRule,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
-  >;
-}
-
 @added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface FirewallRules {
@@ -327,15 +241,6 @@ interface PrivateEndpointConnections {
     PrivateEndpointConnectionResource
   >;
 
-  @doc("Updates a private endpoint connection.")
-  @removed(Versions.v2026_05_01_preview)
-  @renamedFrom(Versions.v2026_05_01_preview, "update")
-  @sharedRoute
-  updateLegacy is PrivateEndpointOperations.CustomPatchAsync<
-    Cluster,
-    PrivateEndpointConnectionResource
-  >;
-
   @doc("Approves or rejects an existing private endpoint connection. Approval requires the parent Cluster to contain at least one Pool. An approval attempt when the Cluster has no Pools fails with 409 Conflict and the stable error code PrivateEndpointRequiresPool. Rejection remains allowed when the Cluster has no Pools so that existing connections can be cleaned up.")
   @added(Versions.v2026_10_01_preview)
   @sharedRoute
@@ -344,15 +249,6 @@ interface PrivateEndpointConnections {
     PrivateEndpointConnectionResource,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnectionResource> &
       Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  @doc("Approves or rejects a private endpoint connection.")
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01_preview)
-  @sharedRoute
-  updateStatus is PrivateEndpointOperations.CreateOrReplaceSync<
-    Cluster,
-    PrivateEndpointConnectionResource
   >;
 
   @doc("Deletes a private endpoint connection.")
@@ -476,33 +372,6 @@ interface DefaultParameterGroups {
 
   @doc("Gets a default parameter group available for a subscription in a specific region. Each PostgreSQL version has at most one default parameter group in a location.")
   get is ArmResourceRead<DefaultParameterGroup>;
-}
-
-@added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01_preview)
-@armResourceOperations
-interface HorizonDbAdministrators {
-  @doc("Gets information about a HorizonDB administrator.")
-  get is ArmResourceRead<HorizonDbAdministrator>;
-
-  @doc("Creates a new HorizonDB administrator or updates an existing administrator.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
-    HorizonDbAdministrator,
-    Request = HorizonDbAdministratorAdd
-  >;
-
-  @doc("Deletes a HorizonDB administrator.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    HorizonDbAdministrator,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
-  >;
-
-  @doc("Lists all HorizonDB administrators in a cluster.")
-  list is ArmResourceListByParent<HorizonDbAdministrator>;
 }
 
 @added(Versions.v2026_10_01_preview)

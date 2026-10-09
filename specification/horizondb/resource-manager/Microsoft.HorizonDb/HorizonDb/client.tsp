@@ -32,31 +32,6 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Microsoft.HorizonDb.Cluster, "HorizonDBCluster", "csharp");
 @@clientName(
-  Microsoft.HorizonDb.HorizonDbAdministrator,
-  "HorizonDBAdministrator",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.HorizonDbAdministratorProperties,
-  "HorizonDBAdministratorProperties",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.HorizonDbAdministratorPropertiesForAdd,
-  "HorizonDBAdministratorContentProperties",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.HorizonDbAdministratorAdd,
-  "HorizonDBAdministratorContent",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.HorizonDbAdministrators,
-  "HorizonDBAdministrators",
-  "csharp"
-);
-@@clientName(
   Microsoft.HorizonDb.PrincipalTypes,
   "HorizonDBPrincipalType",
   "csharp"
@@ -93,18 +68,8 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Microsoft.HorizonDb.Clusters, "HorizonDBClusters", "csharp");
 @@clientName(
-  Microsoft.HorizonDb.LegacyHorizonDbFirewallRule,
-  "HorizonDBFirewallRule",
-  "csharp"
-);
-@@clientName(
   Microsoft.HorizonDb.FirewallRuleProperties,
   "HorizonDBFirewallRuleProperties",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.HorizonDbFirewallRules,
-  "HorizonDBFirewallRules",
   "csharp"
 );
 @@clientName(
@@ -160,11 +125,6 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.PrivateEndpointConnections.updateStatus,
-  "updateStatusPrivateEndpointConnection",
-  "csharp"
-);
-@@clientName(
   Microsoft.HorizonDb.PrivateEndpointConnections.delete,
   "deletePrivateEndpointConnection",
   "csharp"
@@ -177,31 +137,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Microsoft.HorizonDb.PrivateLinkResources,
   "HorizonDBPrivateLinkResources",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.HorizonDbReplica,
-  "HorizonDBReplica",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.HorizonDbReplicaForPatchUpdate,
-  "HorizonDBReplicaPatch",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.HorizonDbReplicaProperties,
-  "HorizonDBReplicaProperties",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.HorizonDbReplicaPropertiesForPatchUpdate,
-  "HorizonDBReplicaPropertiesForPatchUpdate",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.HorizonDbReplicas,
-  "HorizonDBReplicas",
   "csharp"
 );
 @@clientName(
