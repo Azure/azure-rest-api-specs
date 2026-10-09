@@ -162,6 +162,19 @@ directive:
     reason: 'Duplicate Operations API causes generation issues'
 ```
 
+``` yaml $(tag) == 'package-2022-12' || $(tag) == 'package-subscriptions-2022-12'
+directive:
+  - from: subscriptions.json
+    suppress: BodyTopLevelProperties
+    where: $.definitions.LocationListResult
+    reason: >-
+      This GET returns read-only location discovery metadata, not a CRUD resource.
+      Location entries use an existing flat response shape, and policyRestrictions
+      is an opt-in annotation alongside that metadata, not a resource properties bag.
+      The validator reports item properties at LocationListResult, so this exception
+      is limited to that discovery model in API version 2022-12-01.
+```
+
 ---
 
 # Code Generation
