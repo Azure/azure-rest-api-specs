@@ -34,6 +34,21 @@ test("canonical counterKey is one object, not the former plural array", () => {
   assert.equal(attribute.maxLength, undefined);
 });
 
+test("counterKey documentation matches the backend summary without paraphrasing", () => {
+  assert.equal(
+    definitions.CostControlRule.properties.counterKey.description.replace(
+      /\s+/g,
+      " ",
+    ),
+    [
+      "Gets or sets the single built-in dimension used to partition consumption.",
+      "Custom dimensions are retained only for legacy reads and metadata-only updates.",
+      "Legacy singleton arrays are accepted on read; serialization always emits an object.",
+      "To track another field, create another rule.",
+    ].join(" "),
+  );
+});
+
 test("PUT, GET and PATCH use the same resource schema", () => {
   const body = route.put.parameters.find(
     (parameter) => parameter.in === "body",
@@ -67,7 +82,7 @@ test("threshold actions are explicit without an Audit authoring default", () => 
   );
   assert.match(
     definitions.CostControlRule.properties.thresholds.description,
-    /no thresholds are synthesized/,
+    /Omitted or empty thresholds track usage without explicit actions/,
   );
 });
 
@@ -77,7 +92,7 @@ test("legacy values stay readable while current authoring restrictions are docum
     definitions.CostControlDimensionType["x-ms-enum"].values.find(
       (value) => value.value === "Custom",
     ).description,
-    /legacy read-only/,
+    /Legacy read-only/,
   );
   for (const period of ["Minute", "Hour", "Year"]) {
     assert(definitions.CostControlPeriod.enum.includes(period));
@@ -85,7 +100,7 @@ test("legacy values stay readable while current authoring restrictions are docum
       definitions.CostControlPeriod["x-ms-enum"].values.find(
         (value) => value.value === period,
       ).description,
-      /Not accepted in new or replacement rules/,
+      /Legacy read-only/,
     );
   }
 });
@@ -102,7 +117,7 @@ test("agent filters use resource IDs and preserve the accepted non-agent aliases
   );
   assert.match(
     match.agentResourceIds.description,
-    /not conventional Azure Resource Manager IDs/,
+    /Agent resource IDs use \/subscriptions\//,
   );
   for (const [wire, client] of [
     ["foundry.caller.identity.oid", "legacyIdentityObjectIds"],
@@ -128,7 +143,7 @@ test("token budgets share one amount without inventing a selection default", () 
   );
   assert.match(
     definitions.CostControlRule.properties.amount.description,
-    /whole counts/,
+    /positive whole count/,
   );
 });
 
@@ -137,10 +152,16 @@ test("Application Insights remains optional and Event Grid protects Alert attach
     definitions.CostControlConnections.properties.appInsightsConnectionId;
   const event =
     definitions.CostControlConnections.properties.eventGridConnectionId;
-  assert.match(app.description, /removed while policies remain attached/);
-  assert.match(app.description, /optional for creation/);
-  assert.match(event.description, /account or deployment/);
-  assert.match(event.description, /cannot be removed/);
+  assert.match(
+    definitions.CostControlConnections.description,
+    /Application Insights is optional and may be removed while policies remain attached/,
+  );
+  assert.match(
+    definitions.CostControlConnections.description,
+    /Event Grid is required for alerts/,
+  );
+  assert.match(app.description, /optional Application Insights connection/);
+  assert.match(event.description, /optional Event Grid connection/);
   assert.equal(app["x-nullable"], true);
   assert.equal(event["x-nullable"], true);
 });
@@ -171,6 +192,11 @@ test("canonical authoring examples and legacy metadata updates are coherent", ()
         .filter((status) => status !== "default")
         .sort(),
     );
+    for (const response of Object.values(example.responses)) {
+      if (response.body?.etag !== undefined) {
+        assert.equal(response.body.etag, response.headers.ETag, file);
+      }
+    }
     const request =
       example.parameters.resource ?? example.parameters.properties;
     const authored = request?.properties?.rules;
