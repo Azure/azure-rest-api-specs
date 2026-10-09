@@ -105,7 +105,6 @@ model VoiceResponseAudio {
   output?: VoiceResponseAudioOutput;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance allows SDKs to reuse the OpenAI realtime response class without copying or replacing its properties."
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("""
   A persisted voice response representing one model inference turn within a conversation. In list results the
@@ -115,7 +114,12 @@ model VoiceResponseAudio {
   durable ordering extensions.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceResponse extends OpenAI.RealtimeResponse {
+model VoiceResponse {
+  ...OmitProperties<OpenAI.RealtimeResponse, "audio">;
+
+  @doc("The audio configuration used for the response, including the voice and audio format used for output.")
+  audio?: VoiceResponseAudio;
+
   @doc("The sampling temperature used for the response.")
   temperature?: float32;
 
