@@ -1,4 +1,4 @@
-import { exit } from "process";
+import { exit } from "node:process";
 import { getSuppressions, getSuppressionsForTools, type Suppression } from "./suppressions.ts";
 
 function getUsage(): string {

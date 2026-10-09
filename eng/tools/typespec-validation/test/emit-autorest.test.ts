@@ -1,6 +1,7 @@
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strict as assert } from "node:assert";
-import { join } from "path";
+import { join } from "pathe";
 import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
 import { EmitAutorestRule } from "../src/rules/emit-autorest.ts";
 
@@ -24,7 +25,7 @@ describe("emit-autorest", function () {
   it("should succeed if no main.tsp", async function () {
     fileExistsSpy.mockImplementation((file: string) => file != join(mockFolder, "main.tsp"));
 
-    const result = await new EmitAutorestRule().execute(mockFolder);
+    const result = await new EmitAutorestRule().execute(mockFolder, defaultLogger);
 
     assert(result.success);
   });
@@ -37,7 +38,7 @@ emit:
 `),
     );
 
-    const result = await new EmitAutorestRule().execute(mockFolder);
+    const result = await new EmitAutorestRule().execute(mockFolder, defaultLogger);
 
     assert(result.success);
   });
@@ -45,7 +46,7 @@ emit:
   it("should fail if config is empty", async function () {
     readTspConfigSpy.mockImplementation(() => Promise.resolve(""));
 
-    const result = await new EmitAutorestRule().execute(mockFolder);
+    const result = await new EmitAutorestRule().execute(mockFolder, defaultLogger);
 
     assert(!result.success);
   });
@@ -59,7 +60,7 @@ linter:
 `),
     );
 
-    const result = await new EmitAutorestRule().execute(mockFolder);
+    const result = await new EmitAutorestRule().execute(mockFolder, defaultLogger);
 
     assert(!result.success);
   });
@@ -72,7 +73,7 @@ emit:
 `),
     );
 
-    const result = await new EmitAutorestRule().execute(mockFolder);
+    const result = await new EmitAutorestRule().execute(mockFolder, defaultLogger);
 
     assert(!result.success);
   });

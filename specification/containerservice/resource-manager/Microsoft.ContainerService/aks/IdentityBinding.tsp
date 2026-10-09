@@ -28,12 +28,15 @@ model IdentityBinding
     SegmentName = "identityBindings",
     NamePattern = "^[a-z][a-z0-9]{0,63}$"
   >;
+  ...Azure.ResourceManager.ManagedByProperty;
   ...Azure.ResourceManager.EntityTagProperty;
 }
 
 @@maxLength(IdentityBinding.name, 63);
 @@minLength(IdentityBinding.name, 1);
 @@doc(IdentityBinding.name, "The name of the identity binding.");
+@@added(IdentityBinding.managedBy, Versions.v2026_07_02_preview);
+@@visibility(IdentityBinding.managedBy, Lifecycle.Read, Lifecycle.Create);
 @@doc(
   IdentityBinding.properties,
   "The resource-specific properties for this resource."
@@ -149,7 +152,7 @@ model IdentityBindingProperties {
    * authorization falls back exclusively to ClusterRole/ClusterRoleBinding
    * evaluation. Maximum 100 entries.
    */
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_07_02_preview)
   @identifiers(#[])
   @maxItems(100)
   allowedSubjects?: AllowedSubject[];
@@ -163,7 +166,7 @@ model IdentityBindingProperties {
  * AllowedSubject are AND'd; multiple AllowedSubjects on an
  * IdentityBinding are OR'd.
  */
-@added(Versions.v2026_06_02_preview)
+@added(Versions.v2026_07_02_preview)
 model AllowedSubject {
   /**
    * Label selector matching the namespaces in which this identity may be

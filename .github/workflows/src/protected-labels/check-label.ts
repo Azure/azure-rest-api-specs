@@ -11,6 +11,7 @@ import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts"
 
 import { extractInputs } from "../context.ts";
 import { evaluateLabelAuthorization, loadProtectedLabelsConfig } from "./authorization.ts";
+import { buildUnauthorizedApplyComment } from "./label-comments.ts";
 
 /**
  * Check if the actor is authorized to apply the label. If not, remove and warn.
@@ -60,14 +61,11 @@ async function enforceLabelAuthorization({
     }
   }
 
-  const authorizedList = authorizedUsers.map((u) => `@${u}`).join(", ");
   await github.rest.issues.createComment({
     owner,
     repo,
     issue_number: issueNumber,
-    body:
-      `⚠️ @${actor} is not authorized to apply \`${labelName}\`. ` +
-      `Only ${authorizedList} can apply this label.\n\nLabel removed.`,
+    body: buildUnauthorizedApplyComment({ actor, labelName, authorizedUsers }),
   });
 
   return false;
@@ -104,9 +102,13 @@ export default async function checkLabel({ github, context, core }: GitHubScript
     core.info(`"${labelName}" is not a protected label, skipping`);
     return;
   }
+  if (authorization.status === "plane-unprotected") {
+    core.info(`"${labelName}" is unprotected on this PR's plane, skipping`);
+    return;
+  }
   if (authorization.status === "unknown-plane") {
     core.info(
-      `"${labelName}" is plane-aware but PR has no plane label (Mgmt/resource-manager/data-plane), skipping`,
+      `"${labelName}" is plane-aware but PR has no plane label (resource-manager/data-plane), skipping`,
     );
     return;
   }

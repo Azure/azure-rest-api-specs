@@ -3,7 +3,7 @@ import { beforeEach } from "node:test";
 import { describe, expect, test, vi } from "vitest";
 import { isFailure, isWarning, pathExists } from "../src/util.ts";
 
-vi.mock("fs/promises", () => {
+vi.mock("node:fs/promises", () => {
   return {
     ...memfs.promises,
   };
@@ -18,7 +18,7 @@ describe("pathExists", () => {
     const files = {
       "./file-exists": "a",
     };
-    vol.fromJSON(files, ".");
+    vol.fromJSON(files);
 
     const exists = await pathExists("./file-exists");
 
@@ -29,7 +29,7 @@ describe("pathExists", () => {
     const files = {
       "./file-exists": "a",
     };
-    vol.fromJSON(files, ".");
+    vol.fromJSON(files);
 
     const exists = await pathExists("./file-does-not-exist");
 

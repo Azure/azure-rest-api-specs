@@ -1,6 +1,6 @@
 name: "TypeSpec Suppressions - Set Status"
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
   # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
   # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
@@ -36,30 +36,35 @@ jobs:
       issues: read
       pull-requests: read
       statuses: write
-    uses: ./.github/workflows/_reusable-set-check-status.yaml
+    uses: $/.github/workflows/_reusable-set-check-status.yaml
     with:
       monitored_workflow_name: "TypeSpec Suppressions - Analyze Code"
       required_check_name: "TypeSpec Suppressions"
-      overriding_label: "Approved-TypeSpecSuppression"
+      overriding_label: "typespec-suppressions-approved"
 
   post-comment:
     name: Post TypeSpec Suppressions Comment
     # Only refresh the dedicated review comment when the analyzer report
-    # completes or when the Approved-TypeSpecSuppression label is added/removed.
+    # completes or when the typespec-suppressions-approved label is added/removed.
+    # Also re-sync when typespec-suppressions-review-required is changed manually.
     # Skip plain opened/synchronize/reopened events, which fire before a report
     # artifact exists (the status job still runs on those to update the check).
     if: >-
-      github.event_name == 'workflow_run' ||
-      github.event.action == 'labeled' ||
-      github.event.action == 'unlabeled'
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped') ||
+      (github.event_name == 'pull_request_target' &&
+       github.event.pull_request.state == 'open' &&
+       (github.event.action == 'labeled' || github.event.action == 'unlabeled') &&
+       (github.event.label.name == 'typespec-suppressions-approved' ||
+        github.event.label.name == 'typespec-suppressions-review-required'))
     runs-on: ubuntu-24.04
     permissions:
       actions: read
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github/
 
@@ -67,7 +72,7 @@ jobs:
         uses: ./.github/actions/install-deps-github-script
 
       - name: Post TypeSpec suppressions review comment
-        uses: actions/github-script@v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: postSuppressionsResults } =

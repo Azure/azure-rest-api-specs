@@ -1,0 +1,74 @@
+{
+  "title": "SemanticRerank_PostJsonDocuments",
+  "operationId": "SemanticRerank",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "request": {
+      "query": "What is the capital of France?",
+      "documents": [
+        "{\"id\":\"doc-1\",\"meta\":{\"content\":\"Paris is the capital of France.\"}}",
+        "{\"id\":\"doc-2\",\"meta\":{\"content\":\"Berlin is the capital of Germany.\"}}",
+        "{\"id\":\"doc-3\",\"meta\":{\"content\":\"Madrid is the capital of Spain.\"}}"
+      ],
+      "returnDocuments": true,
+      "topK": 2,
+      "batchSize": 3,
+      "sort": true,
+      "documentType": "json",
+      "targetPaths": "meta.content,id",
+      "model": "semantic-reranker-v1",
+      "returnSentenceScore": false
+    }
+  },
+  "responses": {
+    "429": {
+      "headers": {
+        "Retry-After": 30,
+        "X-Correlation-ID": "fa7b14d8-bd8f-4557-8d21-36ed4310e74a",
+        "x-ms-error-code": "TooManyRequests"
+      },
+      "body": {
+        "error": {
+          "code": "TooManyRequests",
+          "message": "The request rate exceeded the service limit. Retry after 30 seconds.",
+          "type": "https://example.inference.azure.com/errors/too-many-requests",
+          "title": "Too many requests",
+          "status": 429,
+          "detail": "The request rate exceeded the service limit. Retry after 30 seconds.",
+          "instance": "/inference/semanticReranking"
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "X-Correlation-ID": "d70f32d5-c43d-45e2-afef-08dc03e17d32"
+      },
+      "body": {
+        "scores": [
+          {
+            "index": 0,
+            "document": "{\"id\":\"doc-1\",\"meta\":{\"content\":\"Paris is the capital of France.\"}}",
+            "score": 0.98
+          },
+          {
+            "index": 1,
+            "document": "{\"id\":\"doc-2\",\"meta\":{\"content\":\"Berlin is the capital of Germany.\"}}",
+            "score": 0.21
+          }
+        ],
+        "meta": {
+          "tokenUsage": {
+            "totalTokens": 27
+          },
+          "latency": {
+            "dataPreprocessTime": 0.14,
+            "inferenceTime": 0.119,
+            "postProcessTime": 0.7
+          },
+          "modelName": "semantic-reranker-v1",
+          "modelVersion": "2026-09-01"
+        }
+      }
+    }
+  }
+}
