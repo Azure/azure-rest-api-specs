@@ -29,7 +29,62 @@ title: ProviderHub
 description: Provider Hub
 openapi-type: arm
 openapi-subtype: arm
-tag: package-2025-10-01
+tag: package-2026-10-01
+```
+
+### Tag: package-2026-10-01
+
+These settings apply only when `--tag=package-2026-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-10-01'
+input-file:
+  - stable/2026-10-01/providerhub.json
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: providerhub.json
+    where:
+      - $.definitions.ResourceTypeRegistrationProperties.properties.resourceConcurrencyControlOptions
+      - $.definitions.ResourceTypeRegistrationProperties.properties.metadata
+      - $.definitions.RolloutStatusBase.properties.failedOrSkippedRegions
+      - $.definitions.CustomRolloutStatus.properties.failedOrSkippedRegions
+    reason: This version requires metadata to be defined as an additional property or has already been there which will break customers if we change now.
+  - suppress: PutResponseCodes
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/manifests/{environment}"].put
+    reason: The manifest is checked in to the manifest repository rather than persisted as an ARM resource, so the service only ever returns 200. Declaring a 201 would document a response the service never sends.
+  - suppress: DeleteResponseCodes
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}"].delete
+    reason: Pre-existing lint error not introduced in this API version and cannot be modified without breaking change to customers.
+  - suppress: DeleteResponseCodes
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default"].delete
+    reason: DeleteOperationsApi in the service always returns 204, including when the operations content does not exist. Declaring a 200 would document a response the service never sends.
+  - suppress: DeleteOperationResponses
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default"].delete.responses
+    reason: DeleteOperationsApi in the service always returns 204, including when the operations content does not exist. Declaring a 200 would document a response the service never sends.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: providerhub.json
+    where:
+      - $.definitions.ManifestInfo
+    reason: The service exposes the manifest only for a specific environment; there is no API to enumerate manifests across environments, so a collection GET cannot be documented.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: providerhub.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}"].put.responses["201"].schema
+    reason: The nested resource type registration operations return the same ResourceTypeRegistration schema as the top-level resource type registration operations, where provisioningState is already read-only.
+  - suppress: ArmResourcePropertiesBag
+    from: providerhub.json
+    where:
+      - $.definitions.ResourceTypeRegistration
+    reason: The service returns the resource type name within properties. It is modeled as read-only to document the existing response shape and is not accepted on requests.
 ```
 
 ### Tag: package-2026-02-01-preview
