@@ -487,6 +487,20 @@ union AllocationStrategy {
   Prioritized: "Prioritized",
 }
 
+/**
+ * Specifies how VM SKUs are distributed across instances in the virtual machine scale set.
+ */
+@added(Versions.v2026_09_01)
+union SkuDistributionMode {
+  string,
+
+  /** VMs may use different SKUs from the SkuProfile list (multi-SKU). This is the default behavior. */
+  Heterogeneous: "Heterogeneous",
+
+  /** All VMs use a single SKU selected from the SkuProfile list. */
+  Homogeneous: "Homogeneous",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForGetVMScaleSets {
   string,
@@ -1020,7 +1034,9 @@ union PatchOperationStatus {
 /**
  * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
  */
-union ZonePlacementPolicyType {
+@removed(Versions.v2026_09_01)
+@renamedFrom(Versions.v2026_09_01, "ZonePlacementPolicyType")
+union ZonePlacementPolicyTypeLegacy {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Any: "Any",
@@ -1029,6 +1045,19 @@ union ZonePlacementPolicyType {
    * Automatic zone placement in a Virtual Machine Scale Set.
    */
   @added(Versions.v2025_04_01)
+  Auto: "Auto",
+}
+
+/**
+ * Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+ */
+@added(Versions.v2026_09_01)
+union ZonePlacementPolicyType {
+  string,
+
+  /**
+   * Automatic zone placement in a Virtual Machine Scale Set.
+   */
   Auto: "Auto",
 }
 
@@ -1242,6 +1271,10 @@ union LifecycleHookActionState {
 
   /** The lifecycle hook for the target resource is rejected. */
   Rejected: "Rejected",
+
+  /** A terminal state that indicates the lifecycle hook for the target resource is no longer relevant & was abandoned by the platform. No further action on the target is expected from the customer. */
+  @added(Versions.v2026_09_01)
+  Abandoned: "Abandoned",
 }
 
 /**
@@ -1256,6 +1289,10 @@ union VMScaleSetLifecycleHookEventState {
 
   /** The lifecycle hook event is completed. i.e., all the target resources in the event have moved to a terminal state. */
   Completed: "Completed",
+
+  /** A terminal state that indicates the lifecycle hook event is no longer relevant & was abandoned by the platform. No further action on the event is expected from the customer. */
+  @added(Versions.v2026_09_01)
+  Abandoned: "Abandoned",
 }
 
 /**
@@ -3087,6 +3124,14 @@ model VirtualMachineScaleSetIPConfigurationProperties {
   privateIPAddressVersion?: IPVersion;
 
   /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  @added(Versions.v2026_09_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32;
+
+  /**
    * Specifies an array of references to backend address pools of application gateways. A scale set can reference backend address pools of multiple application gateways. Multiple scale sets cannot use the same application gateway.
    */
   applicationGatewayBackendAddressPools?: SubResource[];
@@ -3885,6 +3930,12 @@ model SkuProfile {
   allocationStrategy?: AllocationStrategy;
 
   /**
+   * Specifies how VM SKUs are distributed across instances. Heterogeneous (default) allows multiple SKUs; Homogeneous pins all VMs to a single selected SKU from the SkuProfile list.
+   */
+  @added(Versions.v2026_09_01)
+  skuDistributionMode?: SkuDistributionMode;
+
+  /**
    * Specifies the policy that controls whether the platform may automatically migrate scale set instances to a different VM size from the SKU profile depending on platform demands. When omitted, automatic SKU migration is disabled.
    */
   @added(Versions.v2026_03_01)
@@ -4412,6 +4463,15 @@ model VirtualMachineScaleSetUpdateIPConfigurationProperties {
    * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
    */
   privateIPAddressVersion?: IPVersion;
+
+  /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable only on the update (PATCH) model so callers can explicitly clear an allocated prefix; the create/read models use a plain optional int32."
+  @added(Versions.v2026_09_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32 | null;
 
   /**
    * The application gateway backend address pools.
@@ -5613,6 +5673,7 @@ model StorageProfile {
   /**
    * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
    */
+  @removed(Versions.v2026_09_01)
   alignRegionalDisksToVMZone?: boolean;
 
   /**
@@ -6216,6 +6277,14 @@ model VirtualMachineNetworkInterfaceIPConfigurationProperties {
    * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
    */
   privateIPAddressVersion?: IPVersions;
+
+  /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  @added(Versions.v2026_09_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32;
 
   /**
    * Specifies an array of references to application security group.
@@ -7089,6 +7158,14 @@ model Placement {
   /**
    * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "zonePlacementPolicy")
+  zonePlacementPolicyLegacy?: ZonePlacementPolicyTypeLegacy;
+
+  /**
+   * Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+   */
+  @added(Versions.v2026_09_01)
   zonePlacementPolicy?: ZonePlacementPolicyType;
 
   /**
