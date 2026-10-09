@@ -107,5 +107,5 @@ model WorkspaceEncryptionPatchProperties {
    * Workspace. The service validates the creation choice and merged pair first.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so JSON Merge Patch can delete encryption. This request-only transform does not change PUT or response nullability."
-  encryption?: WorkspaceEncryptionUpdate;
+  encryption?: WorkspaceEncryptionPatch;
 }

@@ -7397,7 +7397,7 @@
         "keyVaultResourceId"
       ]
     },
-    "WorkspaceCustomerManagedKeyEncryptionUpdateMergePatchUpdateOrCreate": {
+    "WorkspaceCustomerManagedKeyEncryptionPatchMergePatchUpdateOrCreate": {
       "type": "object",
       "description": "A partial customer key reference, validated after merging with the stored setting.",
       "properties": {
@@ -7567,6 +7567,17 @@
         }
       }
     },
+    "WorkspaceEncryptionPatchMergePatchUpdateOrCreate": {
+      "type": "object",
+      "description": "A partial encryption setting. Omitted fields are unchanged and null deletes a\nwritable field. A remaining customerManagedKeyEncryption object must have a\ncoherent key URL and vault resource ID. Read-only onboarding and status\ninputs are ignored. The accepted creation choice cannot change. Only a\nCMK-created Workspace can update the pair. Changing either member requires synchronous caller and\nvault validation of the merged pair, including any retained member.",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "$ref": "#/definitions/WorkspaceCustomerManagedKeyEncryptionPatchMergePatchUpdateOrCreate",
+          "description": "The customer key configuration to merge on a CMK-created Workspace.\nNull deletion is rejected on CMK and is a no-op only when already absent\non a Microsoft-managed Workspace. An empty object retains an existing\ncomplete pair without a lookup when neither member changes, but is invalid\nwhen the merged pair is incomplete. Unsupported mode changes are rejected\nbefore vault lookup, operation creation, desired mutation, or Storage effects.",
+          "x-nullable": true
+        }
+      }
+    },
     "WorkspaceEncryptionProtection": {
       "type": "string",
       "description": "The last directly observed protection of active Workspace customer data.",
@@ -7668,17 +7679,6 @@
       "required": [
         "state"
       ]
-    },
-    "WorkspaceEncryptionUpdateMergePatchUpdateOrCreate": {
-      "type": "object",
-      "description": "A partial encryption setting. Omitted fields are unchanged and null deletes a\nwritable field. A remaining customerManagedKeyEncryption object must have a\ncoherent key URL and vault resource ID. Read-only onboarding and status\ninputs are ignored. The accepted creation choice cannot change. Only a\nCMK-created Workspace can update the pair. Changing either member requires synchronous caller and\nvault validation of the merged pair, including any retained member.",
-      "properties": {
-        "customerManagedKeyEncryption": {
-          "$ref": "#/definitions/WorkspaceCustomerManagedKeyEncryptionUpdateMergePatchUpdateOrCreate",
-          "description": "The customer key configuration to merge on a CMK-created Workspace.\nNull deletion is rejected on CMK and is a no-op only when already absent\non a Microsoft-managed Workspace. An empty object retains an existing\ncomplete pair without a lookup when neither member changes, but is invalid\nwhen the merged pair is incomplete. Unsupported mode changes are rejected\nbefore vault lookup, operation creation, desired mutation, or Storage effects.",
-          "x-nullable": true
-        }
-      }
     },
     "WorkspaceEvaluation": {
       "type": "object",
@@ -7923,7 +7923,7 @@
       "description": "The Workspace properties supported by partial updates.",
       "properties": {
         "encryption": {
-          "$ref": "#/definitions/WorkspaceEncryptionUpdateMergePatchUpdateOrCreate",
+          "$ref": "#/definitions/WorkspaceEncryptionPatchMergePatchUpdateOrCreate",
           "description": "A JSON Merge Patch of the requested encryption setting. Omission leaves the\nsetting unchanged. Null deletion is rejected on a CMK-created Workspace\nand is a no-op only when the setting is already absent on a Microsoft-managed\nWorkspace. The service validates the creation choice and merged pair first.",
           "x-nullable": true
         }

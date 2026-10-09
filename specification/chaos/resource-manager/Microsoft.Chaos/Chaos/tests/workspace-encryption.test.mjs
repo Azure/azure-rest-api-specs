@@ -72,6 +72,22 @@ test("full encryption defaults to absent CMK, requires the URL and vault ID pair
 
 test("PATCH deletion is request-only, optional, and default-free at every new level", () => {
   assert.equal(
+    definitions.WorkspaceUpdateProperties.properties.encryption.$ref,
+    "#/definitions/WorkspaceEncryptionPatchMergePatchUpdateOrCreate",
+  );
+  assert.equal(
+    patchEncryption.properties.customerManagedKeyEncryption.$ref,
+    "#/definitions/WorkspaceCustomerManagedKeyEncryptionPatchMergePatchUpdateOrCreate",
+  );
+  assert.equal(
+    definitions.WorkspaceEncryptionUpdateMergePatchUpdateOrCreate,
+    undefined,
+  );
+  assert.equal(
+    definitions.WorkspaceCustomerManagedKeyEncryptionUpdateMergePatchUpdateOrCreate,
+    undefined,
+  );
+  assert.equal(
     definitions.WorkspaceUpdate.properties.properties.$ref,
     "#/definitions/WorkspaceUpdateProperties",
   );

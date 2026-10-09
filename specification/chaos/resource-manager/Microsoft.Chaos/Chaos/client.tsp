@@ -11,7 +11,7 @@ using Microsoft.Chaos;
   "csharp"
 );
 @@clientName(
-  WorkspaceCustomerManagedKeyEncryptionUpdate.keyEncryptionKeyUrl,
+  WorkspaceCustomerManagedKeyEncryptionPatch.keyEncryptionKeyUrl,
   "keyEncryptionKeyUri",
   "csharp"
 );

@@ -171,7 +171,7 @@ union WorkspaceEncryptionState {
  * vault validation of the merged pair, including any retained member.
  */
 @added(Versions.v2026_11_01)
-model WorkspaceEncryptionUpdate {
+model WorkspaceEncryptionPatch {
   /**
    * The customer key configuration to merge on a CMK-created Workspace.
    * Null deletion is rejected on CMK and is a no-op only when already absent
@@ -181,12 +181,12 @@ model WorkspaceEncryptionUpdate {
    * before vault lookup, operation creation, desired mutation, or Storage effects.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "JSON Merge Patch accepts deletion syntax. Deleting CMK is rejected for CMK-created Workspaces and is a no-op only when already absent on MMK."
-  customerManagedKeyEncryption?: WorkspaceCustomerManagedKeyEncryptionUpdate;
+  customerManagedKeyEncryption?: WorkspaceCustomerManagedKeyEncryptionPatch;
 }
 
 /** A partial customer key reference, validated after merging with the stored setting. */
 @added(Versions.v2026_11_01)
-model WorkspaceCustomerManagedKeyEncryptionUpdate {
+model WorkspaceCustomerManagedKeyEncryptionPatch {
   /**
    * The replacement versionless key URI. Omission retains the URI; null deletes
    * it. A same-vault replacement retains the stored vault ID. The effective
