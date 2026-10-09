@@ -70,7 +70,7 @@
         "tags": [
           "OccurrenceExtension"
         ],
-        "description": "Lists scheduled action occurrences associated with the specified VM.",
+        "description": "Lists recurring bulk action occurrences associated with the specified VM.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -94,7 +94,7 @@
           }
         },
         "x-ms-examples": {
-          "List recurring scheduled action occurrences for a virtual machine": {
+          "List recurring bulk action occurrences for a virtual machine": {
             "$ref": "./examples/OccurrenceExtension_ListOccurrenceByVms_BasicSuccess.json"
           }
         },
@@ -105,11 +105,11 @@
     },
     "/{resourceUri}/providers/Microsoft.Compute/associatedScheduledActions": {
       "get": {
-        "operationId": "ScheduledActionExtension_ListByVms",
+        "operationId": "RecurringBulkActionExtension_ListByVms",
         "tags": [
           "ScheduledActionExtension"
         ],
-        "description": "Lists scheduled actions associated with the specified VM.",
+        "description": "Lists recurring bulk actions associated with the specified VM.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -133,7 +133,7 @@
           }
         },
         "x-ms-examples": {
-          "List recurring scheduled actions for a VM": {
+          "List recurring bulk actions for a VM": {
             "$ref": "./examples/ScheduledActionExtension_ListByVms_MaximumSet_Gen.json"
           }
         },
@@ -386,11 +386,11 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/scheduledActionsOperationStatuses/{operationId}": {
       "get": {
-        "operationId": "ScheduledActionOperationStatus_Get",
+        "operationId": "RecurringBulkActionOperationStatus_Get",
         "tags": [
           "ScheduledActionOperationStatus"
         ],
-        "description": "Gets the status of the specified scheduled action operation.",
+        "description": "Gets the status of the specified recurring bulk action operation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -431,7 +431,7 @@
           }
         },
         "x-ms-examples": {
-          "Get scheduled action operation status": {
+          "Get recurring bulk action operation status": {
             "$ref": "./examples/ScheduledActionOperationStatus_Get_MaximumSet_Gen.json"
           }
         }
@@ -439,11 +439,11 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/scheduledActions": {
       "get": {
-        "operationId": "ScheduledActions_ListBySubscription",
+        "operationId": "RecurringBulkActions_ListBySubscription",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Lists scheduled actions in the specified subscription.",
+        "description": "Lists recurring bulk actions in the specified subscription.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -467,8 +467,8 @@
           }
         },
         "x-ms-examples": {
-          "List a page of recurring scheduled actions in a subscription": {
-            "$ref": "./examples/ScheduledActions_ListBySubscription_PagedSuccess.json"
+          "List recurring bulk actions in a subscription": {
+            "$ref": "./examples/RecurringBulkActions_ListBySubscription_PagedSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -1808,11 +1808,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions": {
       "get": {
-        "operationId": "ScheduledActions_ListByResourceGroup",
+        "operationId": "RecurringBulkActions_ListByResourceGroup",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Lists scheduled actions in the specified resource group.",
+        "description": "Lists recurring bulk actions in the specified resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1839,8 +1839,8 @@
           }
         },
         "x-ms-examples": {
-          "List a page of recurring scheduled actions in a resource group": {
-            "$ref": "./examples/ScheduledActions_ListByResourceGroup_PagedSuccess.json"
+          "List recurring bulk actions in a resource group": {
+            "$ref": "./examples/RecurringBulkActions_ListByResourceGroup_PagedSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -1850,11 +1850,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{scheduledActionName}": {
       "get": {
-        "operationId": "ScheduledActions_Get",
+        "operationId": "RecurringBulkActions_Get",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Gets the specified scheduled action.",
+        "description": "Gets the specified recurring bulk action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1868,7 +1868,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -1889,20 +1889,20 @@
           }
         },
         "x-ms-examples": {
-          "01 - Get a recurring scheduled action": {
-            "$ref": "./examples/ScheduledActions_Get_BasicSuccess.json"
+          "01 - Get a recurring bulk action": {
+            "$ref": "./examples/RecurringBulkActions_Get_BasicSuccess.json"
           },
-          "02 - Get a recurring scheduled action with complete configuration": {
-            "$ref": "./examples/ScheduledActions_Get_ComprehensiveSuccess.json"
+          "02 - Get a recurring bulk action with complete configuration": {
+            "$ref": "./examples/RecurringBulkActions_Get_ComprehensiveSuccess.json"
           }
         }
       },
       "put": {
-        "operationId": "ScheduledActions_CreateOrUpdate",
+        "operationId": "RecurringBulkActions_CreateOrUpdate",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Creates or updates a scheduled action.",
+        "description": "Creates or updates a recurring bulk action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1916,7 +1916,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -1924,7 +1924,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "The scheduled action to create or update.",
+            "description": "The recurring bulk action to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScheduledAction"
@@ -1963,11 +1963,11 @@
           }
         },
         "x-ms-examples": {
-          "01 - Create a new recurring scheduled action": {
-            "$ref": "./examples/ScheduledActions_CreateOrUpdate_BasicSuccess.json"
+          "01 - Create a new recurring bulk action": {
+            "$ref": "./examples/RecurringBulkActions_CreateOrUpdate_BasicSuccess.json"
           },
-          "02 - Create a recurring scheduled action with comprehensive settings": {
-            "$ref": "./examples/ScheduledActions_CreateOrUpdate_ComprehensiveSuccess.json"
+          "02 - Create a recurring bulk action with comprehensive settings": {
+            "$ref": "./examples/RecurringBulkActions_CreateOrUpdate_ComprehensiveSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1976,11 +1976,11 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "ScheduledActions_Update",
+        "operationId": "RecurringBulkActions_Update",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Updates the specified scheduled action.",
+        "description": "Updates the specified recurring bulk action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1994,7 +1994,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2002,7 +2002,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "The scheduled action properties to update. Omitted properties keep their current values.",
+            "description": "The recurring bulk action properties to update. Omitted properties keep their current values.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScheduledActionUpdate"
@@ -2043,11 +2043,11 @@
           }
         },
         "x-ms-examples": {
-          "01 - Update the action type of a recurring scheduled action": {
-            "$ref": "./examples/ScheduledActions_Update_BasicSuccess.json"
+          "01 - Update the action type of a recurring bulk action": {
+            "$ref": "./examples/RecurringBulkActions_Update_BasicSuccess.json"
           },
-          "02 - Update a recurring scheduled action schedule": {
-            "$ref": "./examples/ScheduledActions_Update_ComprehensiveSuccess.json"
+          "02 - Update a recurring bulk action schedule": {
+            "$ref": "./examples/RecurringBulkActions_Update_ComprehensiveSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2056,11 +2056,11 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "ScheduledActions_Delete",
+        "operationId": "RecurringBulkActions_Delete",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Deletes the specified scheduled action.",
+        "description": "Deletes the specified recurring bulk action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2074,7 +2074,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2111,8 +2111,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete a recurring scheduled action": {
-            "$ref": "./examples/ScheduledActions_Delete_BasicSuccess.json"
+          "Delete a recurring bulk action": {
+            "$ref": "./examples/RecurringBulkActions_Delete_BasicSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2123,11 +2123,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{scheduledActionName}/attachResources": {
       "post": {
-        "operationId": "ScheduledActions_AttachResources",
+        "operationId": "RecurringBulkActions_AttachResources",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Adds resources to the specified scheduled action.",
+        "description": "Adds resources to the specified recurring bulk action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2141,7 +2141,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2149,7 +2149,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The resources to add to the scheduled action.",
+            "description": "The resources to add to the recurring bulk action.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ResourceAttachRequest"
@@ -2190,14 +2190,14 @@
           }
         },
         "x-ms-examples": {
-          "01 - Attach resources to a recurring scheduled action": {
-            "$ref": "./examples/ScheduledActions_AttachResources_BasicSuccess.json"
+          "01 - Attach resources to a recurring bulk action": {
+            "$ref": "./examples/RecurringBulkActions_AttachResources_BasicSuccess.json"
           },
-          "02 - Attach resources to a recurring scheduled action with individual notification settings": {
-            "$ref": "./examples/ScheduledActions_AttachResources_ComprehensiveSuccess.json"
+          "02 - Attach resources to a recurring bulk action with individual notification settings": {
+            "$ref": "./examples/RecurringBulkActions_AttachResources_ComprehensiveSuccess.json"
           },
-          "03 - Response with partial results when attaching resources to a recurring scheduled action": {
-            "$ref": "./examples/ScheduledActions_AttachResources_PartialSuccess.json"
+          "03 - Response with partial results when attaching resources to a recurring bulk action": {
+            "$ref": "./examples/RecurringBulkActions_AttachResources_PartialSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2208,11 +2208,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{scheduledActionName}/cancelNextOccurrence": {
       "post": {
-        "operationId": "ScheduledActions_CancelNextOccurrence",
+        "operationId": "RecurringBulkActions_CancelNextOccurrence",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Cancels the next occurrence of the specified scheduled action.",
+        "description": "Cancels the next occurrence of the specified recurring bulk action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2226,7 +2226,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2275,14 +2275,14 @@
           }
         },
         "x-ms-examples": {
-          "01 - Cancel the next recurring scheduled action occurrence for multiple resources": {
-            "$ref": "./examples/ScheduledActions_CancelNextOccurrence_BasicSuccess.json"
+          "01 - Cancel the next recurring bulk action occurrence for multiple resources": {
+            "$ref": "./examples/RecurringBulkActions_CancelNextOccurrence_BasicSuccess.json"
           },
-          "02 - Cancel all operations in the next recurring scheduled action occurrence": {
-            "$ref": "./examples/ScheduledActions_CancelNextOccurrence_EntireOccurrenceSuccess.json"
+          "02 - Cancel all operations in the next recurring bulk action occurrence": {
+            "$ref": "./examples/RecurringBulkActions_CancelNextOccurrence_EntireOccurrenceSuccess.json"
           },
-          "03 - Response with partial results when canceling the next recurring scheduled action occurrence": {
-            "$ref": "./examples/ScheduledActions_CancelNextOccurrence_PartialSuccess.json"
+          "03 - Response with partial results when canceling the next recurring bulk action occurrence": {
+            "$ref": "./examples/RecurringBulkActions_CancelNextOccurrence_PartialSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2293,11 +2293,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{scheduledActionName}/detachResources": {
       "post": {
-        "operationId": "ScheduledActions_DetachResources",
+        "operationId": "RecurringBulkActions_DetachResources",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Removes resources from the specified scheduled action.",
+        "description": "Removes resources from the specified recurring bulk action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2311,7 +2311,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2319,7 +2319,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The resources to remove from the scheduled action.",
+            "description": "The resources to remove from the recurring bulk action.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ResourceDetachRequest"
@@ -2360,11 +2360,11 @@
           }
         },
         "x-ms-examples": {
-          "01 - Detach resources from a recurring scheduled action": {
-            "$ref": "./examples/ScheduledActions_DetachResources_BasicSuccess.json"
+          "01 - Detach resources from a recurring bulk action": {
+            "$ref": "./examples/RecurringBulkActions_DetachResources_BasicSuccess.json"
           },
-          "02 - Detach resources from a recurring scheduled action with partial success": {
-            "$ref": "./examples/ScheduledActions_DetachResources_PartialSuccess.json"
+          "02 - Detach resources from a recurring bulk action with partial success": {
+            "$ref": "./examples/RecurringBulkActions_DetachResources_PartialSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2375,11 +2375,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{scheduledActionName}/disable": {
       "post": {
-        "operationId": "ScheduledActions_Disable",
+        "operationId": "RecurringBulkActions_Disable",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Disables the specified scheduled action so future occurrences do not run.",
+        "description": "Disables the specified recurring bulk action so future occurrences do not run.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2393,7 +2393,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2427,8 +2427,8 @@
           }
         },
         "x-ms-examples": {
-          "Disable a recurring scheduled action": {
-            "$ref": "./examples/ScheduledActions_Disable_BasicSuccess.json"
+          "Disable a recurring bulk action": {
+            "$ref": "./examples/RecurringBulkActions_Disable_BasicSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2439,11 +2439,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{scheduledActionName}/enable": {
       "post": {
-        "operationId": "ScheduledActions_Enable",
+        "operationId": "RecurringBulkActions_Enable",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Enables the specified scheduled action so new occurrences run.",
+        "description": "Enables the specified recurring bulk action so new occurrences run.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2457,7 +2457,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2491,8 +2491,8 @@
           }
         },
         "x-ms-examples": {
-          "Enable a recurring scheduled action": {
-            "$ref": "./examples/ScheduledActions_Enable_BasicSuccess.json"
+          "Enable a recurring bulk action": {
+            "$ref": "./examples/RecurringBulkActions_Enable_BasicSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2507,7 +2507,7 @@
         "tags": [
           "Occurrences"
         ],
-        "description": "Lists occurrences for the specified scheduled action.",
+        "description": "Lists occurrences for the specified recurring bulk action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2521,7 +2521,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2542,10 +2542,10 @@
           }
         },
         "x-ms-examples": {
-          "01 - List recurring scheduled action occurrences": {
+          "01 - List recurring bulk action occurrences": {
             "$ref": "./examples/Occurrences_ListByScheduledAction_BasicSuccess.json"
           },
-          "02 - List a page of recurring scheduled action occurrences": {
+          "02 - List recurring bulk action occurrences with mixed results": {
             "$ref": "./examples/Occurrences_ListByScheduledAction_PagedSuccess.json"
           }
         },
@@ -2574,7 +2574,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2603,10 +2603,10 @@
           }
         },
         "x-ms-examples": {
-          "01 - Read a recurring scheduled action occurrence": {
+          "01 - Read a recurring bulk action occurrence": {
             "$ref": "./examples/Occurrences_Get_BasicSuccess.json"
           },
-          "02 - Read a recurring scheduled action occurrence with mixed results": {
+          "02 - Read a recurring bulk action occurrence with mixed results": {
             "$ref": "./examples/Occurrences_Get_ComprehensiveSuccess.json"
           }
         }
@@ -2632,7 +2632,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2689,13 +2689,13 @@
           }
         },
         "x-ms-examples": {
-          "01 - Cancel operations in a recurring scheduled action occurrence": {
+          "01 - Cancel operations in a recurring bulk action occurrence": {
             "$ref": "./examples/Occurrences_Cancel_BasicSuccess.json"
           },
-          "02 - Cancel all operations in a recurring scheduled action occurrence": {
+          "02 - Cancel all operations in a recurring bulk action occurrence": {
             "$ref": "./examples/Occurrences_Cancel_EntireOccurrenceSuccess.json"
           },
-          "03 - Response with partial results when canceling resources in a recurring scheduled action occurrence": {
+          "03 - Response with partial results when canceling resources in a recurring bulk action occurrence": {
             "$ref": "./examples/Occurrences_Cancel_PartialSuccess.json"
           }
         },
@@ -2725,7 +2725,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2782,13 +2782,13 @@
           }
         },
         "x-ms-examples": {
-          "01 - Delay operations in a recurring scheduled action occurrence": {
+          "01 - Delay operations in a recurring bulk action occurrence": {
             "$ref": "./examples/Occurrences_Delay_BasicSuccess.json"
           },
-          "02 - Delay all operations in a recurring scheduled action occurrence": {
+          "02 - Delay all operations in a recurring bulk action occurrence": {
             "$ref": "./examples/Occurrences_Delay_EntireOccurrenceSuccess.json"
           },
-          "03 - Response with partial success results when delaying operations in a recurring scheduled action occurrence": {
+          "03 - Response with partial success results when delaying operations in a recurring bulk action occurrence": {
             "$ref": "./examples/Occurrences_Delay_PartialSuccess.json"
           }
         },
@@ -2818,7 +2818,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2847,10 +2847,10 @@
           }
         },
         "x-ms-examples": {
-          "01 - List resources in a recurring scheduled action occurrence": {
+          "01 - List resources in a recurring bulk action occurrence": {
             "$ref": "./examples/Occurrences_ListResources_BasicSuccess.json"
           },
-          "02 - List a page of resources in a recurring scheduled action occurrence": {
+          "02 - List a page of resources in a recurring bulk action occurrence": {
             "$ref": "./examples/Occurrences_ListResources_PagedSuccess.json"
           }
         },
@@ -2861,11 +2861,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{scheduledActionName}/patchResources": {
       "post": {
-        "operationId": "ScheduledActions_PatchResources",
+        "operationId": "RecurringBulkActions_PatchResources",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Updates resource-specific settings for the specified scheduled action.",
+        "description": "Updates resource-specific settings for the specified recurring bulk action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2879,7 +2879,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2909,25 +2909,25 @@
           }
         },
         "x-ms-examples": {
-          "01 - Update settings for recurring scheduled action resources": {
-            "$ref": "./examples/ScheduledActions_PatchResources_BasicSuccess.json"
+          "01 - Update settings for recurring bulk action resources": {
+            "$ref": "./examples/RecurringBulkActions_PatchResources_BasicSuccess.json"
           },
-          "02 - Update resource-specific notification settings for a recurring scheduled action": {
-            "$ref": "./examples/ScheduledActions_PatchResources_ComprehensiveSuccess.json"
+          "02 - Update resource-specific notification settings for a recurring bulk action": {
+            "$ref": "./examples/RecurringBulkActions_PatchResources_ComprehensiveSuccess.json"
           },
-          "03 - Response with partial results when updating recurring scheduled action resources": {
-            "$ref": "./examples/ScheduledActions_PatchResources_PartialSuccess.json"
+          "03 - Response with partial results when updating recurring bulk action resources": {
+            "$ref": "./examples/RecurringBulkActions_PatchResources_PartialSuccess.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{scheduledActionName}/resources": {
       "get": {
-        "operationId": "ScheduledActions_ListResources",
+        "operationId": "RecurringBulkActions_ListResources",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Lists resources associated with the specified scheduled action.",
+        "description": "Lists resources associated with the specified recurring bulk action.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2941,7 +2941,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2962,8 +2962,8 @@
           }
         },
         "x-ms-examples": {
-          "List a page of resources associated with a recurring scheduled action": {
-            "$ref": "./examples/ScheduledActions_ListResources_PagedSuccess.json"
+          "List a page of resources associated with a recurring bulk action": {
+            "$ref": "./examples/RecurringBulkActions_ListResources_PagedSuccess.json"
           }
         },
         "x-ms-pageable": {
@@ -2973,11 +2973,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{scheduledActionName}/triggerManualOccurrence": {
       "post": {
-        "operationId": "ScheduledActions_TriggerManualOccurrence",
+        "operationId": "RecurringBulkActions_TriggerManualOccurrence",
         "tags": [
           "ScheduledActions"
         ],
-        "description": "Runs the specified scheduled action immediately.",
+        "description": "Runs the specified recurring bulk action immediately.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2991,7 +2991,7 @@
           {
             "name": "scheduledActionName",
             "in": "path",
-            "description": "The name of the scheduled action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
+            "description": "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -3031,8 +3031,8 @@
           }
         },
         "x-ms-examples": {
-          "Run a recurring scheduled action immediately": {
-            "$ref": "./examples/ScheduledActions_TriggerManualOccurrence_BasicSuccess.json"
+          "Run a recurring bulk action immediately": {
+            "$ref": "./examples/RecurringBulkActions_TriggerManualOccurrence_BasicSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3750,7 +3750,7 @@
     },
     "CancelOccurrenceRequest": {
       "type": "object",
-      "description": "Request body for canceling a scheduled action occurrence.",
+      "description": "Request body for canceling a recurring bulk action occurrence.",
       "properties": {
         "resourceIds": {
           "type": "array",
@@ -4154,7 +4154,7 @@
     },
     "DelayRequest": {
       "type": "object",
-      "description": "Request body for delaying a scheduled action occurrence.",
+      "description": "Request body for delaying a recurring bulk action occurrence.",
       "properties": {
         "delay": {
           "type": "string",
@@ -4881,7 +4881,7 @@
     },
     "Language": {
       "type": "string",
-      "description": "The language used for scheduled action notifications.",
+      "description": "The language used for recurring bulk action notifications.",
       "enum": [
         "en-us"
       ],
@@ -5222,7 +5222,7 @@
     },
     "Month": {
       "type": "string",
-      "description": "A month in which the scheduled action can run.",
+      "description": "A month in which the recurring bulk action can run.",
       "enum": [
         "January",
         "February",
@@ -5245,62 +5245,62 @@
           {
             "name": "January",
             "value": "January",
-            "description": "The scheduled action can run in January."
+            "description": "The recurring bulk action can run in January."
           },
           {
             "name": "February",
             "value": "February",
-            "description": "The scheduled action can run in February."
+            "description": "The recurring bulk action can run in February."
           },
           {
             "name": "March",
             "value": "March",
-            "description": "The scheduled action can run in March."
+            "description": "The recurring bulk action can run in March."
           },
           {
             "name": "April",
             "value": "April",
-            "description": "The scheduled action can run in April."
+            "description": "The recurring bulk action can run in April."
           },
           {
             "name": "May",
             "value": "May",
-            "description": "The scheduled action can run in May."
+            "description": "The recurring bulk action can run in May."
           },
           {
             "name": "June",
             "value": "June",
-            "description": "The scheduled action can run in June."
+            "description": "The recurring bulk action can run in June."
           },
           {
             "name": "July",
             "value": "July",
-            "description": "The scheduled action can run in July."
+            "description": "The recurring bulk action can run in July."
           },
           {
             "name": "August",
             "value": "August",
-            "description": "The scheduled action can run in August."
+            "description": "The recurring bulk action can run in August."
           },
           {
             "name": "September",
             "value": "September",
-            "description": "The scheduled action can run in September."
+            "description": "The recurring bulk action can run in September."
           },
           {
             "name": "October",
             "value": "October",
-            "description": "The scheduled action can run in October."
+            "description": "The recurring bulk action can run in October."
           },
           {
             "name": "November",
             "value": "November",
-            "description": "The scheduled action can run in November."
+            "description": "The recurring bulk action can run in November."
           },
           {
             "name": "December",
             "value": "December",
-            "description": "The scheduled action can run in December."
+            "description": "The recurring bulk action can run in December."
           },
           {
             "name": "All",
@@ -5464,7 +5464,7 @@
     },
     "NotificationProperties": {
       "type": "object",
-      "description": "Settings for notifications about upcoming scheduled action operations.",
+      "description": "Settings for notifications about upcoming recurring bulk action operations.",
       "properties": {
         "destination": {
           "type": "string",
@@ -5491,7 +5491,7 @@
     },
     "NotificationType": {
       "type": "string",
-      "description": "The delivery method for scheduled action notifications.",
+      "description": "The delivery method for recurring bulk action notifications.",
       "enum": [
         "Email"
       ],
@@ -5650,7 +5650,7 @@
     },
     "Occurrence": {
       "type": "object",
-      "description": "One scheduled execution of a scheduled action.",
+      "description": "One scheduled execution of a recurring bulk action.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/OccurrenceProperties",
@@ -5699,7 +5699,7 @@
         },
         "scheduledActionId": {
           "$ref": "#/definitions/ScheduledActionsId",
-          "description": "The Azure resource ID of the scheduled action that owns the occurrence."
+          "description": "The Azure resource ID of the recurring bulk action that owns the occurrence."
         }
       },
       "required": [
@@ -5710,7 +5710,7 @@
     },
     "OccurrenceExtensionResource": {
       "type": "object",
-      "description": "A scheduled action occurrence associated with a specific compute resource.",
+      "description": "A recurring bulk action occurrence associated with a specific compute resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/OccurrenceExtensionProperties",
@@ -5767,7 +5767,7 @@
     },
     "OccurrenceProperties": {
       "type": "object",
-      "description": "Properties of a scheduled action occurrence.",
+      "description": "Properties of a recurring bulk action occurrence.",
       "properties": {
         "scheduledTime": {
           "type": "string",
@@ -5793,7 +5793,7 @@
     },
     "OccurrenceResource": {
       "type": "object",
-      "description": "Scheduling and status details for a resource included in a scheduled action occurrence.",
+      "description": "Scheduling and status details for a resource included in a recurring bulk action occurrence.",
       "properties": {
         "name": {
           "type": "string",
@@ -5851,7 +5851,7 @@
     },
     "OccurrenceResourceListResponse": {
       "type": "object",
-      "description": "Paged list of resources included in a scheduled action occurrence.",
+      "description": "Paged list of resources included in a recurring bulk action occurrence.",
       "properties": {
         "value": {
           "type": "array",
@@ -5873,7 +5873,7 @@
     },
     "OccurrenceResourceProvisioningState": {
       "type": "string",
-      "description": "The provisioning state of a scheduled-action resource within an occurrence.",
+      "description": "The provisioning state of a recurring bulk action resource within an occurrence.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -5934,7 +5934,7 @@
     },
     "OccurrenceResultSummary": {
       "type": "object",
-      "description": "Summary of results for a scheduled action occurrence.",
+      "description": "Summary of results for a recurring bulk action occurrence.",
       "properties": {
         "total": {
           "type": "integer",
@@ -5959,7 +5959,7 @@
     },
     "OccurrenceState": {
       "type": "string",
-      "description": "The current state of a scheduled action occurrence.",
+      "description": "The current state of a recurring bulk action occurrence.",
       "enum": [
         "Created",
         "Rescheduling",
@@ -6489,11 +6489,11 @@
     },
     "ResourceAttachRequest": {
       "type": "object",
-      "description": "Resources to attach to a scheduled action.",
+      "description": "Resources to attach to a recurring bulk action.",
       "properties": {
         "resources": {
           "type": "array",
-          "description": "The list of resources to attach to the scheduled action.",
+          "description": "The list of resources to attach to the recurring bulk action.",
           "items": {
             "$ref": "#/definitions/ScheduledActionResourceInput"
           },
@@ -6508,7 +6508,7 @@
     },
     "ResourceDetachRequest": {
       "type": "object",
-      "description": "Resources to remove from a scheduled action.",
+      "description": "Resources to remove from a recurring bulk action.",
       "properties": {
         "resources": {
           "type": "array",
@@ -6538,11 +6538,11 @@
     },
     "ResourceListResponse": {
       "type": "object",
-      "description": "A paged list of compute resources associated with a scheduled action.",
+      "description": "A paged list of compute resources associated with a recurring bulk action.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The compute resources associated with the scheduled action.",
+          "description": "The compute resources associated with the recurring bulk action.",
           "items": {
             "$ref": "#/definitions/ScheduledActionResource"
           },
@@ -6683,7 +6683,7 @@
     },
     "ResourceOperationResponse": {
       "type": "object",
-      "description": "Results of a scheduled action operation for targeted resources.",
+      "description": "Results of a recurring bulk action operation for targeted resources.",
       "properties": {
         "totalResources": {
           "type": "integer",
@@ -6775,7 +6775,7 @@
     },
     "ResourcePatchRequest": {
       "type": "object",
-      "description": "Resource-specific settings to update in a scheduled action.",
+      "description": "Resource-specific settings to update in a recurring bulk action.",
       "properties": {
         "resources": {
           "type": "array",
@@ -6817,7 +6817,7 @@
     },
     "ResourceStatus": {
       "type": "object",
-      "description": "Current status for a targeted resource in a scheduled action occurrence.",
+      "description": "Current status for a targeted resource in a recurring bulk action occurrence.",
       "properties": {
         "resourceId": {
           "$ref": "#/definitions/ValidScheduledActionResourceId",
@@ -6839,7 +6839,7 @@
     },
     "ResourceType": {
       "type": "string",
-      "description": "The type of compute resource targeted by the scheduled action.",
+      "description": "The type of compute resource targeted by the recurring bulk action.",
       "enum": [
         "VirtualMachine",
         "VirtualMachineScaleSet"
@@ -6953,7 +6953,7 @@
     },
     "ScheduledAction": {
       "type": "object",
-      "description": "A recurring action that operates on specified compute resources.",
+      "description": "A recurring bulk action that operates on specified compute resources.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ScheduledActionProperties",
@@ -6989,7 +6989,7 @@
     },
     "ScheduledActionProperties": {
       "type": "object",
-      "description": "Configuration and status of a scheduled action.",
+      "description": "Configuration and status of a recurring bulk action.",
       "properties": {
         "resourceType": {
           "$ref": "#/definitions/ResourceType",
@@ -7015,7 +7015,7 @@
         },
         "notificationSettings": {
           "type": "array",
-          "description": "Notification settings that apply to the scheduled action.",
+          "description": "Notification settings that apply to the recurring bulk action.",
           "items": {
             "$ref": "#/definitions/NotificationProperties"
           },
@@ -7029,7 +7029,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ScheduledActionsProvisioningState",
-          "description": "Read-only. The provisioning state of the scheduled action.",
+          "description": "Read-only. The provisioning state of the recurring bulk action.",
           "readOnly": true
         }
       },
@@ -7043,7 +7043,7 @@
     },
     "ScheduledActionResource": {
       "type": "object",
-      "description": "A compute resource associated with a scheduled action.",
+      "description": "A compute resource associated with a recurring bulk action.",
       "properties": {
         "name": {
           "type": "string",
@@ -7084,7 +7084,7 @@
     },
     "ScheduledActionResourceInput": {
       "type": "object",
-      "description": "A compute resource to add to or update in a scheduled action.",
+      "description": "A compute resource to add to or update in a recurring bulk action.",
       "properties": {
         "resourceId": {
           "$ref": "#/definitions/ValidScheduledActionResourceId",
@@ -7107,7 +7107,7 @@
     },
     "ScheduledActionResources": {
       "type": "object",
-      "description": "A scheduled action associated with a specific compute resource.",
+      "description": "A recurring bulk action associated with a specific compute resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ScheduledActionsExtensionProperties",
@@ -7143,7 +7143,7 @@
     },
     "ScheduledActionType": {
       "type": "string",
-      "description": "The operation performed by the scheduled action.",
+      "description": "The operation performed by the recurring bulk action.",
       "enum": [
         "Start",
         "Deallocate",
@@ -7216,7 +7216,7 @@
         },
         "notificationSettings": {
           "type": "array",
-          "description": "Notification settings that apply to the scheduled action.",
+          "description": "Notification settings that apply to the recurring bulk action.",
           "items": {
             "$ref": "#/definitions/NotificationProperties"
           },
@@ -7256,7 +7256,7 @@
     },
     "ScheduledActionsExecutionParameters": {
       "type": "object",
-      "description": "Settings that control how the scheduled action operation is executed.",
+      "description": "Settings that control how the recurring bulk action operation is executed.",
       "properties": {
         "retryPolicy": {
           "$ref": "#/definitions/ScheduledActionsRetryPolicy",
@@ -7266,7 +7266,7 @@
     },
     "ScheduledActionsExtensionProperties": {
       "type": "object",
-      "description": "A scheduled action associated with a specific compute resource.",
+      "description": "A recurring bulk action associated with a specific compute resource.",
       "properties": {
         "resourceType": {
           "$ref": "#/definitions/ResourceType",
@@ -7292,7 +7292,7 @@
         },
         "notificationSettings": {
           "type": "array",
-          "description": "Notification settings that apply to the scheduled action.",
+          "description": "Notification settings that apply to the recurring bulk action.",
           "items": {
             "$ref": "#/definitions/NotificationProperties"
           },
@@ -7306,7 +7306,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ScheduledActionsProvisioningState",
-          "description": "Read-only. The provisioning state of the scheduled action.",
+          "description": "Read-only. The provisioning state of the recurring bulk action.",
           "readOnly": true
         },
         "resourceNotificationSettings": {
@@ -7332,7 +7332,7 @@
     "ScheduledActionsId": {
       "type": "string",
       "format": "arm-id",
-      "description": "The Azure resource ID of a scheduled action.",
+      "description": "The Azure resource ID of a recurring bulk action.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -7343,7 +7343,7 @@
     },
     "ScheduledActionsProvisioningState": {
       "type": "string",
-      "description": "The provisioning state of the scheduled action.",
+      "description": "The provisioning state of the recurring bulk action.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -7373,12 +7373,12 @@
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "The scheduled action is being deleted."
+            "description": "The recurring bulk action is being deleted."
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "The scheduled action is being updated."
+            "description": "The recurring bulk action is being updated."
           }
         ]
       },
@@ -7386,7 +7386,7 @@
     },
     "ScheduledActionsResourceOperationType": {
       "type": "string",
-      "description": "The operation to retry when a scheduled action fails.",
+      "description": "The operation to retry when a recurring bulk action fails.",
       "enum": [
         "Start",
         "Deallocate",
@@ -7428,7 +7428,7 @@
     },
     "ScheduledActionsRetryPolicy": {
       "type": "object",
-      "description": "Retry settings for a scheduled action operation.",
+      "description": "Retry settings for a recurring bulk action operation.",
       "properties": {
         "retryCount": {
           "type": "integer",
@@ -7448,12 +7448,12 @@
     },
     "ScheduledActionsSchedule": {
       "type": "object",
-      "description": "The recurring schedule for a scheduled action.",
+      "description": "The recurring schedule for a recurring bulk action.",
       "properties": {
         "scheduledTime": {
           "type": "string",
           "format": "time",
-          "description": "The local time of day when the scheduled action runs."
+          "description": "The local time of day when the recurring bulk action runs."
         },
         "timeZone": {
           "type": "string",
@@ -7496,12 +7496,12 @@
     },
     "ScheduledActionsScheduleUpdate": {
       "type": "object",
-      "description": "Schedule changes for a scheduled action. Omitted properties keep their current values.",
+      "description": "Schedule changes for a recurring bulk action. Omitted properties keep their current values.",
       "properties": {
         "scheduledTime": {
           "type": "string",
           "format": "time",
-          "description": "The local time of day when the scheduled action runs."
+          "description": "The local time of day when the recurring bulk action runs."
         },
         "timeZone": {
           "type": "string",
@@ -7961,7 +7961,7 @@
     "ValidScheduledActionResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "The Azure resource ID of a virtual machine attached to a scheduled action.",
+      "description": "The Azure resource ID of a virtual machine attached to a recurring bulk action.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -8359,7 +8359,7 @@
     },
     "WeekDay": {
       "type": "string",
-      "description": "A day of the week on which the scheduled action can run.",
+      "description": "A day of the week on which the recurring bulk action can run.",
       "enum": [
         "Monday",
         "Tuesday",
@@ -8377,37 +8377,37 @@
           {
             "name": "Monday",
             "value": "Monday",
-            "description": "The scheduled action can run on Monday."
+            "description": "The recurring bulk action can run on Monday."
           },
           {
             "name": "Tuesday",
             "value": "Tuesday",
-            "description": "The scheduled action can run on Tuesday."
+            "description": "The recurring bulk action can run on Tuesday."
           },
           {
             "name": "Wednesday",
             "value": "Wednesday",
-            "description": "The scheduled action can run on Wednesday."
+            "description": "The recurring bulk action can run on Wednesday."
           },
           {
             "name": "Thursday",
             "value": "Thursday",
-            "description": "The scheduled action can run on Thursday."
+            "description": "The recurring bulk action can run on Thursday."
           },
           {
             "name": "Friday",
             "value": "Friday",
-            "description": "The scheduled action can run on Friday."
+            "description": "The recurring bulk action can run on Friday."
           },
           {
             "name": "Saturday",
             "value": "Saturday",
-            "description": "The scheduled action can run on Saturday."
+            "description": "The recurring bulk action can run on Saturday."
           },
           {
             "name": "Sunday",
             "value": "Sunday",
-            "description": "The scheduled action can run on Sunday."
+            "description": "The recurring bulk action can run on Sunday."
           },
           {
             "name": "All",

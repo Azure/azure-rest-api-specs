@@ -1,0 +1,48 @@
+{
+  "title": "List a page of resources associated with a recurring bulk action",
+  "description": "Lists two resources associated with a recurring bulk action and returns a link to the next page.",
+  "operationId": "RecurringBulkActions_ListResources",
+  "parameters": {
+    "api-version": "2026-10-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "weekday-start"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01",
+            "notificationSettings": [
+              {
+                "destination": "admin@contoso.com",
+                "type": "Email",
+                "language": "en-us",
+                "disabled": true
+              }
+            ],
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start/resources/VM_00000000-0000-0000-0000-000000000000_example-rg_web-vm-01",
+            "name": "VM_00000000-0000-0000-0000-000000000000_example-rg_web-vm-01",
+            "type": "microsoft.compute/scheduledActions/resources"
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02",
+            "notificationSettings": [
+              {
+                "destination": "operations@contoso.com",
+                "type": "Email",
+                "language": "en-us",
+                "disabled": false
+              }
+            ],
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start/resources/VM_00000000-0000-0000-0000-000000000000_example-rg_web-vm-02",
+            "name": "VM_00000000-0000-0000-0000-000000000000_example-rg_web-vm-02",
+            "type": "microsoft.compute/scheduledActions/resources"
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start/resources?api-version=2026-10-06-preview&$skiptoken=L3N1YnNjcmlwdGlvbnMvMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwL3Jlc291cmNlR3JvdXBzL2V4YW1wbGUtcmcvcHJvdmlkZXJzL01pY3Jvc29mdC5Db21wdXRlL3ZpcnR1YWxNYWNoaW5lcy93ZWItdm0tMDM%3D"
+      }
+    }
+  }
+}

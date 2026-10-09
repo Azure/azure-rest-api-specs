@@ -1,0 +1,50 @@
+{
+  "title": "03 - Response with partial results when attaching resources to a recurring bulk action",
+  "description": "Attaches one resource to a recurring bulk action and rejects a second resource from a different subscription.",
+  "operationId": "RecurringBulkActions_AttachResources",
+  "parameters": {
+    "api-version": "2026-10-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "weekday-start",
+    "body": {
+      "resources": [
+        {
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-01"
+        },
+        {
+          "resourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/66666666-6666-6666-6666-666666666666?api-version=2026-10-06-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/66666666-6666-6666-6666-666666666666?api-version=2026-10-06-preview&monitor=true"
+      }
+    },
+    "200": {
+      "body": {
+        "totalResources": 2,
+        "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02",
+            "status": "Failed",
+            "error": {
+              "code": "ValidationFailed",
+              "message": "Validation failed for one or more resources.",
+              "details": [
+                {
+                  "code": "ResourceSubscriptionMismatch",
+                  "message": "Resource '/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/web-vm-02' must be in the same subscription as the scheduled action 'weekday-start'."
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

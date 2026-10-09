@@ -1,6 +1,6 @@
 {
-  "title": "02 - Delay all operations in a recurring scheduled action occurrence",
-  "description": "Delays the pending operations for every resource in the occurrence. An empty resourceIds array targets all resources in the occurrence.",
+  "title": "02 - Delay all operations in a recurring bulk action occurrence",
+  "description": "Delays the pending operations for every resource in the occurrence. An empty resourceIds array targets all resources in the occurrence. The initial response is 202 Accepted; the 200 response shows the final result from the Location polling URL.",
   "operationId": "Occurrences_Delay",
   "parameters": {
     "api-version": "2026-10-06-preview",
@@ -17,8 +17,7 @@
     "202": {
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/55555555-5555-5555-5555-555555555555?api-version=2026-10-06-preview",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/55555555-5555-5555-5555-555555555555?api-version=2026-10-06-preview&monitor=true",
-        "Retry-After": 10
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/55555555-5555-5555-5555-555555555555?api-version=2026-10-06-preview&monitor=true"
       }
     },
     "200": {

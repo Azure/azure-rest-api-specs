@@ -1,6 +1,6 @@
 {
-  "title": "List recurring scheduled actions for a VM",
-  "operationId": "ScheduledActionExtension_ListByVms",
+  "title": "List recurring bulk actions for a VM",
+  "operationId": "RecurringBulkActionExtension_ListByVms",
   "parameters": {
     "api-version": "2026-09-06-preview",
     "resourceUri": "subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVm"
@@ -53,9 +53,9 @@
                 }
               ]
             },
-            "id": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/myRg/providers/Microsoft.Compute/scheduledActions/myScheduledAction",
+            "id": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVm/providers/Microsoft.Compute/associatedScheduledActions/myScheduledAction",
             "name": "myScheduledAction",
-            "type": "Microsoft.Compute/scheduledActions",
+            "type": "microsoft.compute/associatedScheduledActions",
             "systemData": {
               "createdBy": "user@contoso.com",
               "createdByType": "User",
@@ -65,8 +65,7 @@
               "lastModifiedAt": "2025-04-17T00:23:55.288Z"
             }
           }
-        ],
-        "nextLink": "https://management.azure.com/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVm/providers/Microsoft.Compute/associatedScheduledActions?api-version=2026-09-06-preview&$skiptoken=page2"
+        ]
       }
     }
   }
