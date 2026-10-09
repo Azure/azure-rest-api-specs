@@ -31,8 +31,7 @@ const pr = {
 };
 const marker = "<!-- contributor-readiness -->";
 const notifierPath = ".github/workflows/contributor-readiness-notify.yaml";
-const authorImpact = "PR author cannot run Azure DevOps pipelines for this PR.";
-const authorLabelImpact = "PR author cannot add labels to this PR.";
+const authorImpact = "PR author cannot add labels to this PR.";
 const reviewerImpact = "Reviewer approval does not count toward required reviews";
 
 function setup() {
@@ -402,15 +401,14 @@ describe("contributor readiness", () => {
       .split("\n")
       .find((line) => line.includes(`**[${reviewer.login}]`));
     expect(authorRow).toContain(authorImpact);
-    expect(authorRow).toContain(authorLabelImpact);
+    expect(authorRow).not.toContain("Azure DevOps pipelines");
     expect(authorRow).not.toContain(reviewerImpact);
     expect(reviewerRow).toContain(reviewerImpact);
     expect(reviewerRow).toContain("GitHub's green approval check");
     expect(reviewerRow).toContain("This reviewer must set up or renew their access.");
     expect(reviewerRow).not.toContain(authorImpact);
-    expect(reviewerRow).not.toContain(authorLabelImpact);
     expect(call.body).toContain(
-      "> [!WARNING]\n> **The access issues below can prevent PR approvals from counting, block Azure DevOps pipeline runs, or prevent PR authors from adding labels.**",
+      "> [!WARNING]\n> **The access issues below can prevent PR approvals from counting or PR authors from adding labels.**",
     );
     expect(call.body).not.toContain("Internal contributors need Azure organization membership");
     expect(call.body).not.toContain("private membership cannot be verified");
@@ -435,7 +433,7 @@ describe("contributor readiness", () => {
     const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
     const rows = comment.body.split("\n").filter((line) => line.startsWith("| 🔴"));
     expect(rows).toHaveLength(1);
-    expect(rows[0]).toContain(`${authorImpact}<br>${authorLabelImpact}<br>${reviewerImpact}`);
+    expect(rows[0]).toContain(`${authorImpact}<br>${reviewerImpact}`);
   });
 
   it("does not assign author or reviewer impacts to commit-only participants", async () => {
@@ -452,7 +450,6 @@ describe("contributor readiness", () => {
     expect(comment.body).toContain("**[committer-example]");
     expect(comment.body).toContain("No repository write access. | Not determined.");
     expect(comment.body).not.toContain(authorImpact);
-    expect(comment.body).not.toContain(authorLabelImpact);
     expect(comment.body).not.toContain(reviewerImpact);
   });
 
@@ -903,7 +900,7 @@ describe("contributor readiness", () => {
           {
             subject: author.login,
             message: "No repository write access.",
-            impacts: [authorImpact, authorLabelImpact],
+            impacts: [authorImpact],
           },
           {
             subject: reviewer.login,
