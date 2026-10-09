@@ -10,3 +10,9 @@ using Azure.ClientGenerator.Core;
   Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
   "CheckNameAvailabilityResult"
 );
+
+@@clientName(
+  Microsoft.DeviceUpdate,
+  "DeviceRegistrySoftwareUpdateMgmtClient",
+  "python"
+);

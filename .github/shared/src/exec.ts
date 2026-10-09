@@ -1,7 +1,11 @@
-import child_process from "child_process";
+import child_process from "node:child_process";
 import spawn from "cross-spawn";
-import { dirname, join } from "path";
-import { promisify } from "util";
+import { readFile } from "node:fs/promises";
+import { findPackageJSON } from "node:module";
+import { pathToFileURL } from "node:url";
+import { basename, dirname, join, resolve } from "node:path";
+import { promisify } from "node:util";
+import * as z from "zod";
 const execFileImpl = promisify(child_process.execFile);
 
 export interface ExecOptions {
@@ -10,6 +14,13 @@ export interface ExecOptions {
   logger?: import("./logger.ts").ILogger;
   /** Maximum stdout or stderr size in bytes. Defaults to 16 MiB. */
   maxBuffer?: number;
+}
+
+export interface ExecFileOptions extends ExecOptions {
+  /** Environment for this command. Defaults to the current process environment. */
+  env?: NodeJS.ProcessEnv;
+  /** Maximum execution time in milliseconds. Defaults to no timeout. */
+  timeout?: number;
 }
 
 export interface NpmPrefixOptions {
@@ -43,23 +54,27 @@ export function isExecError(error: unknown): error is ExecError {
 export async function execFile(
   file: string,
   args?: string[],
-  options: ExecOptions = {},
+  options: ExecFileOptions = {},
 ): Promise<ExecResult> {
   const {
     cwd,
     logger,
+    timeout,
+    env,
     // Node default is 1024 * 1024, which is too small for some git commands returning many entities or large file content.
     // To support "git show", should be larger than the largest swagger file in the repo (2.5 MB as of 2/28/2025).
     maxBuffer = 16 * 1024 * 1024,
   } = options;
 
-  logger?.info(`execFile("${file}", ${JSON.stringify(args)})`);
+  logger?.debug(`execFile("${file}", ${JSON.stringify(args)})`);
 
   try {
     // execFile(file, args) is more secure than exec(cmd), since the latter is vulnerable to shell injection
     const result = await execFileImpl(file, args, {
       cwd,
       maxBuffer,
+      timeout,
+      ...(env === undefined ? {} : { env }),
     });
 
     logger?.debug(`stdout: '${result.stdout}'`);
@@ -72,6 +87,40 @@ export async function execFile(
 
     throw error;
   }
+}
+
+const nodeBinSchema = z.object({
+  bin: z.union([z.string(), z.record(z.string(), z.string())]),
+});
+
+/**
+ * Runs an installed package's Node.js binary without a package-manager or shell shim.
+ * Resolves the package from options.cwd (or process.cwd()), including ancestor node_modules.
+ * Uses Node's built-in package resolver; args starts with the name of the package's binary.
+ * @throws {ExecError}
+ */
+export async function execNodeBin(
+  packageName: string,
+  [binary, ...args]: [string, ...string[]],
+  options: ExecFileOptions = {},
+): Promise<ExecResult> {
+  const base = pathToFileURL(resolve(options.cwd ?? process.cwd(), "__resolve__.mjs"));
+  const packageJsonPath = findPackageJSON(packageName, base);
+  if (!packageJsonPath) {
+    throw new Error(`Cannot find package.json for "${packageName}".`);
+  }
+  const { bin } = nodeBinSchema.parse(JSON.parse(await readFile(packageJsonPath, "utf8")));
+  const entrypoint =
+    typeof bin === "string" ? (binary === basename(packageName) ? bin : undefined) : bin[binary];
+  if (!entrypoint) {
+    throw new Error(`Package "${packageName}" does not define the binary "${binary}".`);
+  }
+
+  return await execFile(
+    process.execPath,
+    [join(dirname(packageJsonPath), entrypoint), ...args],
+    options,
+  );
 }
 
 /**
@@ -137,7 +186,7 @@ export async function execPnpm(args: string[], options: ExecNpmOptions = {}): Pr
   const prefixArgs = prefix ? ["--prefix", prefix] : [];
   const allArgs = [...prefixArgs, ...args];
 
-  logger?.info(`execPnpm(${JSON.stringify(allArgs)})`);
+  logger?.debug(`execPnpm(${JSON.stringify(allArgs)})`);
 
   return await new Promise((resolve, reject) => {
     // cross-spawn resolves "pnpm" to the "pnpm.cmd" shim on Windows and spawns it

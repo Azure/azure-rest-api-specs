@@ -8,19 +8,21 @@ import {
   ensureReleasePlan,
   getApiReleaseType,
   getNextMonthTarget,
+  getReleasePlanResultById,
   getSdkReleaseType,
 } from "./release-plan.ts";
-import type { CliArguments, OctokitLike, TypeSpecProjectInfo } from "./types.ts";
+import type {
+  CliArguments,
+  EnsureReleasePlanResult,
+  OctokitLike,
+  TypeSpecProjectInfo,
+} from "./types.ts";
 import {
   createOctokit,
-  FOLDER_MIGRATION_LABEL,
   getCommitChangedFiles,
   getPrChangedFiles,
-  getPullRequestLabels,
   getTypeSpecProjectInfoFromCommit,
-  getTypeSpecProjectInfoFromPr,
   NEW_API_VERSION_LABEL,
-  SKIP_RELEASE_PLAN_AUTOMATION_LABEL,
 } from "./typespec-project.ts";
 
 /**
@@ -37,112 +39,67 @@ export async function main(): Promise<void> {
 
   try {
     args = parseCliArguments();
+    const runner = createAzdskRunner();
+
+    if (args.releasePlanId) {
+      console.log(`Getting release plan by id: ${args.releasePlanId}`);
+      const result = getReleasePlanResultById(args.releasePlanId, runner);
+      releasePlanEnsured = true;
+      writeReleasePlanResult(result, args.outputFile);
+      return;
+    }
+
     octokit = createOctokit(undefined);
 
-    // Use provided PR number if available, otherwise fall back to commit SHA
-    if (args.prNumber) {
-      console.log(`Analyzing PR #${args.prNumber} in ${args.owner}/${args.repo}`);
+    const commitSha = args.commitSha as string;
+    console.log(`Analyzing commit ${commitSha} in ${args.owner}/${args.repo}`);
 
-      const labels = await getPullRequestLabels({
-        octokit,
-        owner: args.owner,
-        repo: args.repo,
-        prNumber: args.prNumber,
-      });
+    const commitResult = await getTypeSpecProjectInfoFromCommit({
+      commitSha,
+      owner: args.owner,
+      repo: args.repo,
+      workspace: args.workspace,
+      octokit,
+    });
 
-      if (
-        labels.includes(FOLDER_MIGRATION_LABEL) ||
-        labels.includes(SKIP_RELEASE_PLAN_AUTOMATION_LABEL)
-      ) {
-        console.log(
-          `PR #${args.prNumber} has a release plan automation skip label. Skipping release plan processing.`,
-        );
-        process.exit(0);
-      }
-
-      // Check for new-api-version label
-      hasNewApiVersionLabel = labels.includes(NEW_API_VERSION_LABEL);
-
-      // Check if PR contains TypeSpec files (.tsp or tspconfig.yaml)
-      const allFiles = await getPrChangedFiles({
-        octokit,
-        owner: args.owner,
-        repo: args.repo,
-        prNumber: args.prNumber,
-      });
-
-      const specFiles = allFiles.filter((f) => f.filename.startsWith("specification/"));
-      isTspConfigChanged = specFiles.some((f) => f.filename.endsWith("tspconfig.yaml"));
-      const hasTspFiles = specFiles.some((f) => f.filename.endsWith(".tsp"));
-
-      // Skip only if both conditions are true: no label AND no TypeSpec files
-      if (!hasNewApiVersionLabel && !hasTspFiles && !isTspConfigChanged) {
-        console.log(
-          `PR #${args.prNumber} does not have the '${NEW_API_VERSION_LABEL}' label and does not contain TypeSpec files. Skipping release plan processing.`,
-        );
-        process.exit(0);
-      }
-
-      projectInfo = await getTypeSpecProjectInfoFromPr({
-        prNumber: args.prNumber,
-        owner: args.owner,
-        repo: args.repo,
-        workspace: args.workspace,
-        octokit,
-      });
-
-      resolvedPrNumber = args.prNumber;
-    } else {
-      const commitSha = args.commitSha as string;
-      console.log(`Analyzing commit ${commitSha} in ${args.owner}/${args.repo}`);
-
-      const commitResult = await getTypeSpecProjectInfoFromCommit({
-        commitSha,
-        owner: args.owner,
-        repo: args.repo,
-        workspace: args.workspace,
-        octokit,
-      });
-
-      if (commitResult.skipReleasePlanAutomation) {
-        console.log(
-          `Commit ${commitSha} is associated with a PR that skips release plan automation.`,
-        );
-        process.exit(0);
-      }
-
-      hasNewApiVersionLabel = commitResult.hasNewApiVersionLabel;
-
-      // Check if commit contains TypeSpec files (.tsp or tspconfig.yaml)
-      const commitFiles = commitResult.prNumber
-        ? await getPrChangedFiles({
-            octokit,
-            owner: args.owner,
-            repo: args.repo,
-            prNumber: commitResult.prNumber,
-          })
-        : await getCommitChangedFiles({
-            octokit,
-            owner: args.owner,
-            repo: args.repo,
-            commitSha,
-          });
-
-      const specFiles = commitFiles.filter((f) => f.filename.startsWith("specification/"));
-      const hasTspFiles = specFiles.some((f) => f.filename.endsWith(".tsp"));
-      isTspConfigChanged = specFiles.some((f) => f.filename.endsWith("tspconfig.yaml"));
-
-      // Skip only if both conditions are true: no label AND no TypeSpec files
-      if (!hasNewApiVersionLabel && !hasTspFiles && !isTspConfigChanged) {
-        console.log(
-          `Commit ${commitSha} is not associated with a PR that has the '${NEW_API_VERSION_LABEL}' label and does not contain TypeSpec files. Skipping release plan processing.`,
-        );
-        process.exit(0);
-      }
-
-      projectInfo = commitResult.projectInfo;
-      resolvedPrNumber = commitResult.prNumber;
+    if (commitResult.skipReleasePlanAutomation) {
+      console.log(
+        `Commit ${commitSha} is associated with a PR that skips release plan automation.`,
+      );
+      process.exit(0);
     }
+
+    hasNewApiVersionLabel = commitResult.hasNewApiVersionLabel;
+
+    // Check if commit contains TypeSpec files (.tsp or tspconfig.yaml)
+    const commitFiles = commitResult.prNumber
+      ? await getPrChangedFiles({
+          octokit,
+          owner: args.owner,
+          repo: args.repo,
+          prNumber: commitResult.prNumber,
+        })
+      : await getCommitChangedFiles({
+          octokit,
+          owner: args.owner,
+          repo: args.repo,
+          commitSha,
+        });
+
+    const specFiles = commitFiles.filter((f) => f.filename.startsWith("specification/"));
+    const hasTspFiles = specFiles.some((f) => f.filename.endsWith(".tsp"));
+    isTspConfigChanged = specFiles.some((f) => f.filename.endsWith("tspconfig.yaml"));
+
+    // Skip only if both conditions are true: no label AND no TypeSpec files
+    if (!hasNewApiVersionLabel && !hasTspFiles && !isTspConfigChanged) {
+      console.log(
+        `Commit ${commitSha} is not associated with a PR that has the '${NEW_API_VERSION_LABEL}' label and does not contain TypeSpec files. Skipping release plan processing.`,
+      );
+      process.exit(0);
+    }
+
+    projectInfo = commitResult.projectInfo;
+    resolvedPrNumber = commitResult.prNumber;
 
     const prUrl = resolvedPrNumber
       ? `https://github.com/${args.owner}/${args.repo}/pull/${resolvedPrNumber}`
@@ -164,25 +121,19 @@ export async function main(): Promise<void> {
       {
         prUrl,
         tspProjectPath: projectInfo.tspProjectPath,
+        specCommitSha: commitSha,
         apiReleaseType,
         sdkReleaseType,
         targetMonth,
         apiVersion: projectInfo.apiVersion,
         testReleasePlan: args.testReleasePlan,
       },
-      createAzdskRunner(),
+      runner,
       hasNewApiVersionLabel || isTspConfigChanged,
     );
     releasePlanEnsured = true;
 
-    console.log(JSON.stringify(result, null, 2));
-
-    if (args.outputFile) {
-      const outputPath = path.resolve(args.outputFile);
-      mkdirSync(path.dirname(outputPath), { recursive: true });
-      writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8");
-      console.log(`Wrote release plan details to ${outputPath}`);
-    }
+    writeReleasePlanResult(result, args.outputFile);
 
     // Post comment on PR if release plan was created
     if (result.outcome === "created" && resolvedPrNumber) {
@@ -246,6 +197,17 @@ export async function main(): Promise<void> {
   }
 }
 
+function writeReleasePlanResult(result: EnsureReleasePlanResult, outputFile?: string): void {
+  console.log(JSON.stringify(result, null, 2));
+
+  if (outputFile) {
+    const outputPath = path.resolve(outputFile);
+    mkdirSync(path.dirname(outputPath), { recursive: true });
+    writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8");
+    console.log(`Wrote release plan details to ${outputPath}`);
+  }
+}
+
 export { parseCliArguments } from "./args.ts";
 export {
   buildReleaseplanCommentBody,
@@ -259,6 +221,7 @@ export {
   getApiReleaseType,
   getNextMonthTarget,
   getReleasePlanById,
+  getReleasePlanResultById,
   getSdkReleaseType,
   runAzdskCommand,
 } from "./release-plan.ts";

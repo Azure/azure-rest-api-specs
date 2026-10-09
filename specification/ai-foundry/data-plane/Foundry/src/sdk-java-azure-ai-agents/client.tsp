@@ -14,6 +14,7 @@ import "../agents-microsoft365/routes.tsp";
 import "../agents-optimization/routes.tsp";
 // We don't need the operations for these subclients, just the models
 // so we can customize visibility where necessary.
+import "../openai/evaluations/models.tsp";
 import "../openai/responses/models.tsp";
 import "../openai/conversations/routes.tsp";
 
@@ -22,6 +23,42 @@ using Azure.Core.Experimental;
 using TypeSpec.Http;
 
 using Azure.AI.Projects;
+
+// Reuse equivalent openai-java models instead of generating duplicate public types.
+@@alternateType(
+  OpenAI.ChatCompletionTool,
+  {
+    identity: "com.openai.models.chat.completions.ChatCompletionFunctionTool",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.FunctionObject,
+  {
+    identity: "com.openai.models.FunctionDefinition",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.FunctionParameters,
+  {
+    identity: "com.openai.models.FunctionParameters",
+  },
+  "java"
+);
+
+@@clientName(ModelSamplingParams, "ModelSamplingParameters", "java");
+@@clientName(
+  UserConversationSimulationConfiguration.max_num_turns,
+  "maximumNumberOfTurns",
+  "java"
+);
+@@clientName(
+  UserConversationSimulationConfiguration.desired_num_turns,
+  "desiredNumberOfTurns",
+  "java"
+);
+@@alternateType(ModelSamplingParams.max_completion_tokens, int64, "java");
 
 // Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
@@ -486,6 +523,70 @@ using Azure.AI.Projects;
   VoiceAgentAzureSemanticVadEnTurnDetection,
   "VoiceAgentAzureSemanticVadEnglishTurnDetection"
 );
+
+// Duration-typed Java properties do not need wire-unit suffixes in their client names.
+@@clientName(
+  VoiceAgentAzureSemanticVadMultilingualTurnDetection.prefix_padding_ms,
+  "prefixPadding",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadMultilingualTurnDetection.silence_duration_ms,
+  "silenceDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadMultilingualTurnDetection.speech_duration_ms,
+  "speechDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadMultilingualTurnDetection.idle_timeout_ms,
+  "idleTimeout",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadTurnDetection.prefix_padding_ms,
+  "prefixPadding",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadTurnDetection.silence_duration_ms,
+  "silenceDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadTurnDetection.speech_duration_ms,
+  "speechDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadTurnDetection.idle_timeout_ms,
+  "idleTimeout",
+  "java"
+);
+@@clientName(VoiceAgentEndOfUtteranceDetection.timeout_ms, "timeout", "java");
+@@clientName(
+  VoiceAgentServerEventResponseAudioTimestampDelta.audio_duration_ms,
+  "audioDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerEventResponseAudioTimestampDelta.audio_offset_ms,
+  "audioOffset",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeTurnDetectionServerVad.silence_duration_ms,
+  "silenceDuration",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeTurnDetectionServerVad.idle_timeout_ms,
+  "idleTimeout",
+  "java"
+);
+@@clientName(OpenAI.TranscriptTextUsageDuration.seconds, "duration", "java");
 @@clientName(VoiceAgentDefinition.subagent_config, "subagentConfiguration");
 @@clientName(
   VoiceAgentEndOfUtteranceDetectionModel.semantic_detection_v1_en,
@@ -708,19 +809,25 @@ using Azure.AI.Projects;
 
 @@clientName(CodeConfiguration.content_hash, "contentSha256");
 
-@@clientName(AgentOptimizationCandidate.avg_score, "averageScore");
-@@clientName(AgentOptimizationCandidate.avg_tokens, "averageTokens");
-@@clientName(AgentOptimizationCandidate.eval_id, "evaluationId");
-@@clientName(AgentOptimizationCandidate.eval_run_id, "evaluationRunId");
+@@clientName(AgentOptimizationCandidateEvaluation.score, "averageScore");
+@@clientName(AgentOptimizationCandidateEvaluation.avg_tokens, "averageTokens");
 @@clientName(
-  AgentOptimizationDatasetItem.desired_num_turns,
-  "desiredNumberTurns"
+  AgentOptimizationCandidateEvaluation.avg_latency_ms,
+  "averageLatency",
+  "java"
+);
+@@clientName(AgentOptimizationCandidateEvaluation.eval_id, "evaluationId");
+@@clientName(
+  AgentOptimizationCandidateEvaluation.eval_run_id,
+  "evaluationRunId"
 );
 @@clientName(
-  AgentOptimizationEvaluatorRef,
-  "AgentOptimizationEvaluatorReference"
+  AgentOptimizationJobLatency.avg_latency_ms,
+  "averageLatency",
+  "java"
 );
-@@clientName(AgentOptimizationJobProgress.elapsed_seconds, "elapsed");
+@@clientName(AgentOptimizationJob.run_duration_ms, "runDuration", "java");
+@@clientName(AgentOptimizationEvaluator, "AgentOptimizationEvaluatorReference");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
 @@clientName(Microsoft365PublishResponse, "Microsoft365PublishResult");
@@ -828,6 +935,22 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
+@@clientName(AgentOptimizationJobs.estimate, "estimateOptimizationJob", "java");
+@@clientName(
+  AgentOptimizationJobCandidates.listCandidates,
+  "listOptimizationCandidates",
+  "java"
+);
+@@clientName(
+  AgentOptimizationJobCandidates.getCandidate,
+  "getOptimizationCandidate",
+  "java"
+);
+@@clientName(
+  AgentOptimizationJobCandidates.promoteCandidate,
+  "promoteOptimizationCandidate",
+  "java"
+);
 
 // Voice Agent Renames
 @@clientName(
@@ -1024,10 +1147,36 @@ using Azure.AI.Projects;
 // Type overrides
 // --------------------------------------------------------------------------------
 
-// Keep persisted voice-item Unix timestamps as Java longs. Treating the encoded
-// utcDateTime as OffsetDateTime conflicts with the generated integer JSON reader
-// across the polymorphic item hierarchy.
-@@alternateType(VoiceConversationItemPersistence.created_at, int64, "java");
+@@alternateType(
+  OpenAI.MisalignmentErrorDetailsResource,
+  {
+    identity: "com.openai.models.ErrorObject.Misalignment",
+  },
+  "java"
+);
+
+@@alternateType(
+  OpenAI.RealtimeServerEventInputAudioBufferDtmfEventReceived.received_at,
+  FoundryTimestamp,
+  "java"
+);
+@@alternateType(
+  VoiceAgentServerEventResponseAnimationBlendshapesDone.output_index,
+  int64,
+  "java"
+);
+
+// Expose millisecond-valued VAD properties as Duration
+@@alternateType(
+  OpenAI.RealtimeTurnDetectionServerVad.silence_duration_ms,
+  FoundryDurationMilliseconds,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeTurnDetectionServerVad.idle_timeout_ms,
+  FoundryDurationMilliseconds,
+  "java"
+);
 
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
@@ -1038,6 +1187,7 @@ using Azure.AI.Projects;
 // Structurally replace every emitted tool_choice property with an opaque union so Java exposes the wire value as
 // BinaryData. The Java emitter already emits these tool choice union as BinaryData, this type override makes the
 // tool choice discriminated hierarchy unreachable and prevents its emission in the generated Java code.
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing Java union representation."
 union ToolChoiceValue {
   string,
   object: Record<unknown>,
@@ -1239,6 +1389,7 @@ model OpenAIRealtimeSessionOutputModality {}
 )
 model OpenAIRealtimeTruncationRetentionRatio {}
 
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing Java union representation."
 union OpenAIRealtimeTruncationUnion {
   auto: "auto",
   disabled: "disabled",
@@ -1555,17 +1706,6 @@ model TimeZoneType {}
 @@alternateType(
   OpenAI.WebSearchApproximateLocation.timezone,
   TimeZoneType,
-  "java"
-);
-
-// Java-only helper scalar so `elapsed_seconds` (wire = fractional seconds as float64)
-// is exposed to callers as java.time.Duration while keeping the wire format unchanged.
-@encode(DurationKnownEncoding.seconds, float64)
-scalar DurationInFloatSeconds extends duration;
-
-@@alternateType(
-  AgentOptimizationJobProgress.elapsed_seconds,
-  DurationInFloatSeconds,
   "java"
 );
 

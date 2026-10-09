@@ -1,0 +1,50 @@
+parameters:
+  "service-dir":
+    default: "sdk/compute"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/WorkloadManager.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+    emit-lro-options: "none"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Compute.WorkloadManager"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    namespace: "azure.mgmt.computeworkloadmanager"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-computeworkloadmanager"
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-compute-workloadmanager"
+    namespace: "com.azure.resourcemanager.compute.workloadmanager"
+    service-name: "Compute Workload Manager"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-computeworkloadmanager"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-computeworkloadmanager"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/armworkloadmanager"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armworkloadmanager"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

@@ -1,4 +1,4 @@
-import type { Core, WebhookEvent } from "../github.ts";
+import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 // Protected Labels Enforcement
 // Entry point for .github/workflows/protected-labels.yaml
 //
@@ -9,105 +9,9 @@ import type { Core, WebhookEvent } from "../github.ts";
 //   Flat:  LabelName: [user1, user2]
 //   Plane: LabelName: { management-plane: [user1], data-plane: [user2] }
 
-import { readFile } from "fs/promises";
-import yaml from "js-yaml";
-import { join } from "path";
 import { extractInputs } from "../context.ts";
-
-// Bots that are trusted to apply labels as part of automated workflows.
-// github-actions[bot] applies labels from workflows running on the base branch.
-// azure-sdk applies labels from the Azure SDK automation pipeline.
-// These cannot be influenced by PR authors since they run trusted base-branch code.
-export const ALLOWED_BOT_LOGINS = ["github-actions[bot]", "azure-sdk"];
-
-// Labels that indicate PR plane context
-const MGMT_LABELS = ["Mgmt", "resource-manager"];
-const DP_LABELS = ["data-plane"];
-
-export type LabelEntry =
-  | string[]
-  | {
-      "management-plane"?: string[];
-      "data-plane"?: string[];
-    };
-
-/**
- * Load and validate the protected-labels.yml config.
- */
-async function loadConfig(): Promise<{
-  globalApprovers: string[];
-  labels: Record<string, LabelEntry>;
-}> {
-  const configPath = join(process.cwd(), ".github", "protected-labels.yml");
-  const content = await readFile(configPath, "utf8");
-  const raw = yaml.load(content) as Record<string, unknown>;
-
-  if (!raw || typeof raw !== "object") {
-    throw new Error("Invalid protected-labels.yml: expected a YAML object");
-  }
-
-  const globalApprovers = (raw["global-approvers"] as string[]) ?? [];
-  if (
-    !Array.isArray(globalApprovers) ||
-    !globalApprovers.every((u) => typeof u === "string" && u.length > 0)
-  ) {
-    throw new Error(
-      `Invalid protected-labels.yml: "global-approvers" must map to an array of non-empty strings`,
-    );
-  }
-
-  const labels: Record<string, LabelEntry> = {};
-  for (const [label, value] of Object.entries(raw)) {
-    if (label === "global-approvers") continue;
-    if (Array.isArray(value)) {
-      // Flat format: LabelName: [user1, user2]
-      if (!value.every((u) => typeof u === "string" && u.length > 0)) {
-        throw new Error(
-          `Invalid protected-labels.yml: "${label}" must map to an array of non-empty strings`,
-        );
-      }
-      labels[label] = value;
-    } else if (value && typeof value === "object") {
-      // Plane-aware format: at least one of management-plane or data-plane required
-      const obj = value as Record<string, unknown>;
-      const mgmt = obj["management-plane"];
-      const dp = obj["data-plane"];
-      if ((!mgmt && !dp) || (mgmt && !Array.isArray(mgmt)) || (dp && !Array.isArray(dp))) {
-        throw new Error(
-          `Invalid protected-labels.yml: "${label}" plane-aware entry must have "management-plane" and/or "data-plane" as arrays`,
-        );
-      }
-
-      const planeEntry: Record<string, string[]> = {};
-      if (mgmt) planeEntry["management-plane"] = mgmt as string[];
-      if (dp) planeEntry["data-plane"] = dp as string[];
-      labels[label] = planeEntry;
-    } else {
-      throw new Error(
-        `Invalid protected-labels.yml: "${label}" must map to an array or a plane-aware object`,
-      );
-    }
-  }
-  return { globalApprovers, labels };
-}
-
-/**
- * Resolve the authorized user list for a label entry, accounting for plane context.
- * @returns null means "skip enforcement" (plane-aware label but no plane context)
- */
-function resolveAuthorizedUsers(
-  entry: LabelEntry,
-  plane: "mgmt" | "data-plane" | "unknown",
-): string[] | null {
-  if (Array.isArray(entry)) {
-    return entry;
-  }
-  // Plane-aware entry: enforce only if we can determine the plane
-  if (plane === "mgmt") return entry["management-plane"] ?? [];
-  if (plane === "data-plane") return entry["data-plane"] ?? [];
-  // Unknown plane: skip enforcement for plane-aware labels
-  return null;
-}
+import { evaluateLabelAuthorization, loadProtectedLabelsConfig } from "./authorization.ts";
+import { buildUnauthorizedApplyComment } from "./label-comments.ts";
 
 /**
  * Check if the actor is authorized to apply the label. If not, remove and warn.
@@ -123,7 +27,7 @@ async function enforceLabelAuthorization({
   actor,
   authorizedUsers,
 }: {
-  github: import("@actions/github-script").AsyncFunctionArguments["github"];
+  github: GitHub;
   core: Core;
   owner: string;
   repo: string;
@@ -157,14 +61,11 @@ async function enforceLabelAuthorization({
     }
   }
 
-  const authorizedList = authorizedUsers.map((u) => `@${u}`).join(", ");
   await github.rest.issues.createComment({
     owner,
     repo,
     issue_number: issueNumber,
-    body:
-      `⚠️ @${actor} is not authorized to apply \`${labelName}\`. ` +
-      `Only ${authorizedList} can apply this label.\n\nLabel removed.`,
+    body: buildUnauthorizedApplyComment({ actor, labelName, authorizedUsers }),
   });
 
   return false;
@@ -173,11 +74,7 @@ async function enforceLabelAuthorization({
 /**
  * Main entry point - called from the workflow via github-script.
  */
-export default async function checkLabel({
-  github,
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+export default async function checkLabel({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
 
   const payload = context.payload as WebhookEvent<"pull-request", "labeled">;
@@ -188,40 +85,37 @@ export default async function checkLabel({
   }
   const actor = payload.sender.login;
 
-  if (ALLOWED_BOT_LOGINS.includes(actor)) {
+  const config = await loadProtectedLabelsConfig();
+  const prLabels = payload.pull_request.labels.map((label: { name: string }) => label.name);
+  const authorization = evaluateLabelAuthorization({
+    config,
+    labelName,
+    actor,
+    prLabels,
+  });
+
+  if (authorization.status === "trusted-bot") {
     core.info(`${actor} is a trusted bot, skipping`);
     return;
   }
-
-  const { globalApprovers, labels } = await loadConfig();
-  const entry = labels[labelName];
-
-  if (!entry) {
+  if (authorization.status === "unprotected") {
     core.info(`"${labelName}" is not a protected label, skipping`);
     return;
   }
-
-  // Determine plane from PR labels (explicit: mgmt, data-plane, or unknown)
-
-  const prLabels: string[] = payload.pull_request.labels.map((l: { name: string }) => l.name);
-  const isMgmt = prLabels.some((l) => MGMT_LABELS.includes(l));
-  const isDP = prLabels.some((l) => DP_LABELS.includes(l));
-
-  const plane: "mgmt" | "data-plane" | "unknown" = isMgmt
-    ? "mgmt"
-    : isDP
-      ? "data-plane"
-      : "unknown";
-
-  const perLabelUsers = resolveAuthorizedUsers(entry, plane);
-  if (perLabelUsers === null) {
-    // Plane-aware label on a PR with no plane context - skip enforcement
+  if (authorization.status === "plane-unprotected") {
+    core.info(`"${labelName}" is unprotected on this PR's plane, skipping`);
+    return;
+  }
+  if (authorization.status === "unknown-plane") {
     core.info(
-      `"${labelName}" is plane-aware but PR has no plane label (Mgmt/resource-manager/data-plane), skipping`,
+      `"${labelName}" is plane-aware but PR has no plane label (resource-manager/data-plane), skipping`,
     );
     return;
   }
-  const authorizedUsers = [...new Set([...perLabelUsers, ...globalApprovers])];
+  if (authorization.status === "authorized") {
+    core.info(`${actor} is authorized to apply "${labelName}"`);
+    return;
+  }
 
   await enforceLabelAuthorization({
     github,
@@ -231,6 +125,6 @@ export default async function checkLabel({
     issueNumber: issue_number,
     labelName,
     actor,
-    authorizedUsers,
+    authorizedUsers: authorization.authorizedUsers,
   });
 }

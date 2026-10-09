@@ -17,20 +17,37 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 0
+
+      - name: Resolve analysis revisions
+        id: revisions
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          # Match a three-dot PR diff while retaining the synthetic merge checkout
+          # so the workflow and its local dependencies come from the same revision.
+          base_revision="$(git merge-base "$BASE_SHA" "$HEAD_SHA")"
+          echo "base=$base_revision" >> "$GITHUB_OUTPUT"
+          echo "head=$HEAD_SHA" >> "$GITHUB_OUTPUT"
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Get impacted TypeSpec folders
         shell: pwsh
+        env:
+          BASE_REVISION: ${{ steps.revisions.outputs.base }}
+          HEAD_REVISION: ${{ steps.revisions.outputs.head }}
         run: |
-          $ignoreCoreFiles = -not (@('main', 'RPSaaSMaster') -contains $Env:GITHUB_BASE_REF)
+          $ignoreCoreFiles = $true
           $typespecFolders, $checkedAll = & "./eng/scripts/Get-TypeSpec-Folders.ps1" `
-            -BaseCommitish:"${{ github.event.pull_request.base.sha }}" `
-            -HeadCommitish:"HEAD" `
+            -BaseCommitish:$env:BASE_REVISION `
+            -HeadCommitish:$env:HEAD_REVISION `
             -IgnoreCoreFiles:$ignoreCoreFiles
 
           $typespecFolders | Set-Content -Path typespec-folders.txt
@@ -45,6 +62,7 @@ jobs:
           }
 
       - name: Run TypeSpec suppressions analysis
+        id: typespec-suppressions-analysis
         shell: bash
         env:
           # Emit inline PR `::warning` annotations only for meaningful analysis runs.
@@ -55,7 +73,12 @@ jobs:
           # solely to re-diff when the PR base branch changes; in that case
           # `github.event.changes.base` is set and annotations are emitted again.
           EMIT_ANNOTATIONS: ${{ github.event.action != 'edited' || github.event.changes.base != null }}
+          BASE_REVISION: ${{ steps.revisions.outputs.base }}
+          HEAD_REVISION: ${{ steps.revisions.outputs.head }}
+          EVENT_ACTION: ${{ github.event.action }}
         run: |
+          echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
+
           if [[ ! -s typespec-folders.txt ]]; then
             {
               echo "# TypeSpec Suppressions"
@@ -65,8 +88,8 @@ jobs:
             printf '%s\n' \
               '{' \
               '  "repoRoot": "'"$GITHUB_WORKSPACE"'",' \
-              '  "baseRevision": "'"${{ github.event.pull_request.base.sha }}"'",' \
-              '  "headRevision": "HEAD",' \
+              '  "baseRevision": "'"$BASE_REVISION"'",' \
+              '  "headRevision": "'"$HEAD_REVISION"'",' \
               '  "specPaths": [],' \
               '  "requiresApproval": false,' \
               '  "counts": {' \
@@ -89,21 +112,32 @@ jobs:
           if [[ "$EMIT_ANNOTATIONS" == "true" ]]; then
             annotations_flag=(--github-annotations)
           else
-            echo "Skipping inline suppression annotations for a '${{ github.event.action }}' event that did not change the PR base branch (avoids duplicate annotations)."
+            echo "Skipping inline suppression annotations for a '$EVENT_ACTION' event that did not change the PR base branch (avoids duplicate annotations)."
           fi
 
           pnpm exec typespec-suppressions \
-            --base "${{ github.event.pull_request.base.sha }}" \
-            --head HEAD \
+            --base "$BASE_REVISION" \
+            --head "$HEAD_REVISION" \
             --json-output "typespec-suppressions-report.json" \
             --markdown-output "$GITHUB_STEP_SUMMARY" \
             --check-rules-file "eng/tools/typespec-suppressions/check-rules.json" \
+            --fail-on-approval \
             "${annotations_flag[@]}" \
             "${spec_folders[@]}"
 
+      # Used by other workflows like set-status
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.typespec-suppressions-analysis.outputs.summary }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: job-summary
+          path: ${{ steps.typespec-suppressions-analysis.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore
+
       - name: Upload report artifact
         if: ${{ always() }}
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: typespec-suppressions-report
           path: typespec-suppressions-report.json

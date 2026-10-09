@@ -6,10 +6,6 @@ export default mergeConfig(
   defineConfig({
     test: {
       testTimeout: 20000,
-      coverage: {
-        provider: "v8",
-        reporter: ["text", "json", "html"],
-      },
     },
   }),
 );

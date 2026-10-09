@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SdkName } from "../../shared/src/sdk-types.ts";
 import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.ts";

@@ -8,6 +8,10 @@ import type { Core } from "../github.ts";
 import * as z from "zod";
 import { includesEvery, includesNone } from "../../../shared/src/array.ts";
 import {
+  TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
+  TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,
+} from "../label.ts";
+import {
   brchTsg,
   diagramTsg,
   href,
@@ -450,9 +454,10 @@ export function processImpactAssessment(
 
   // Auto-applied intake signal for data-plane stewardship review. Present exactly when a
   // data-plane PR introduces a new API version (i.e. when both `data-plane` and
-  // `new-api-version` would be present). This single label is what the merge gate, native
-  // reviewer assignment, and the review queue all key off. See rulesPri0dataPlane below and
-  // .github/workflows/src/data-plane-review/assign-reviewers.ts (TRIGGER_LABEL).
+  // `new-api-version` would be present). This single label is what the merge gate, reviewer
+  // assignment, and the review queue all key off. Reviewer assignment is owned by the
+  // azure-sdk-automation GitHub App (it requests the reviewer team with its own identity,
+  // which the default Actions token cannot do). See rulesPri0dataPlane below.
   const dataPlaneReviewRequestedLabel = new Label(
     "data-plane-review-requested",
     labelContext.present,
@@ -470,7 +475,8 @@ export function processImpactAssessment(
     labelContext.present,
   );
   suppressionReviewRequiredLabel.shouldBePresent =
-    impactAssessment.suppressionReviewRequired || false;
+    (impactAssessment.resourceManagerRequired && impactAssessment.suppressionReviewRequired) ||
+    false;
 
   const rpassReviewRequiredLabel = new Label("RPaaS", labelContext.present);
   rpassReviewRequiredLabel.shouldBePresent = impactAssessment.rpaasChange || false;
@@ -1118,6 +1124,27 @@ const rulesPri1Namespace: RequiredLabelRule[] = [
   },
 ];
 
+/** @type {RequiredLabelRule[]} */
+const rulesPri1TypeSpecSuppressions = [
+  // When typespec-suppressions-review-required is present, require typespec-suppressions-approved before
+  // merge. Mirrors the package-name-review-required/package-name-approved pattern in
+  // rulesPri1Namespace above: the "TypeSpec Suppressions - Set Status" workflow applies the
+  // typespec-suppressions-review-required prerequisite label whenever the analyzer (in checked-only
+  // mode, via check-rules.json) reports a new or changed suppression requiring review, and removes
+  // it once no checked suppressions remain. See .github/workflows/src/typespec-suppressions/.
+  {
+    precedence: 1,
+    anyPrerequisiteLabels: [TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL],
+    anyRequiredLabels: [TYPESPEC_SUPPRESSIONS_APPROVED_LABEL],
+    troubleshootingGuide:
+      "This PR introduced or changed TypeSpec suppressions that require review.<br/>" +
+      "Check the <b>TypeSpec suppressions requiring review</b> comment on this PR for the list of " +
+      "suppressions, their justifications, and source locations.<br/>" +
+      `Reviewers: apply the <code>${TYPESPEC_SUPPRESSIONS_APPROVED_LABEL}</code> label after confirming every ` +
+      "justification is acceptable.",
+  },
+];
+
 export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri0NotReadyForArmReview)
   .concat(rulesPri0ArmRpaas)
@@ -1126,6 +1153,7 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri1ArmRev)
   .concat(rulesPri1Suppressions)
   .concat(rulesPri1Namespace)
+  .concat(rulesPri1TypeSpecSuppressions)
   .concat(rulesPri2Sdk)
   .concat(rulesPri2LegacySdk)
   .concat(rulesPri3Blockers);

@@ -5,43 +5,39 @@ on:
     branches:
       - main
       - typespec-next
-    paths:
-      - .github/**
-      - eng/tools/**
-      - .oxfmtrc.json
-      - .editorconfig
-      - .gitignore
-      - package.json
-      - pnpm-lock.yaml
-      - pnpm-workspace.yaml
+    paths-ignore:
+      - specification/**
+      - eng/common/**
   pull_request:
-    paths:
-      - .github/**
-      - eng/tools/**
-      - .oxfmtrc.json
-      - .editorconfig
-      - .gitignore
-      - package.json
-      - pnpm-lock.yaml
-      - pnpm-workspace.yaml
+    paths-ignore:
+      - specification/**
+      - eng/common/**
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   format:
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            .github
-            eng/tools
+            /*
+            !/specification/
+            !/eng/common/
 
       - uses: ./.github/actions/setup-node-install-deps
         with:
           install-command: pnpm ci
 
-      - name: Check formatting for all packages
+      - name: Check repository formatting
         run: pnpm run format:check

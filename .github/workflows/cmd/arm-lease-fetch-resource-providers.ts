@@ -1,7 +1,7 @@
-import { existsSync, readdirSync, statSync, writeFileSync } from "fs";
-import { basename, dirname, join, relative, resolve } from "path";
-import { fileURLToPath } from "url";
-import { parseArgs } from "util";
+import { existsSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { basename, dirname, join, relative, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { parseArgs } from "node:util";
 
 /**
  * Check if a directory is a service name directory (not stable, preview, common-types, or examples)
