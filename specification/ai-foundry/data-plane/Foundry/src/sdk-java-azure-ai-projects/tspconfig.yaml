@@ -65,6 +65,7 @@ imports:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
   disable:
     "@azure-tools/typespec-azure-core/casing-style": "Since we have many names in the form XxxxAIXxxx"
     "@azure-tools/typespec-azure-core/no-string-discriminator": "Use an extensible union instead of a plain string"
@@ -79,3 +80,5 @@ linter:
     "@azure-tools/typespec-azure-core/no-query-explode": "Explode is used in OpenAI package."
     "@azure-tools/typespec-client-generator-core/property-name-conflict": "OpenAI package has conflict."
     "@azure-tools/typespec-azure-core/no-enum": "OpenAI uses enums."
+    "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix": "Disable csharp linting for Java tsp."
+    "@azure-tools/typespec-client-generator-core/csharp-model-suffix": "Disable csharp linting for Java tsp."

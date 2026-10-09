@@ -366,21 +366,21 @@ consumption.
   with that skill's maintainers. A rule flagged by the reviewer agent
   should not contradict guidance given by the authoring agent.
 - **Formatting:** After editing any `.md` file under `skills/` or
-  `agents/`, run `npm run format` from the `.github/` directory
-  (Prettier). Note: instruction files (`*instructions.md`) are excluded
-  from Prettier via `.prettierignore` and do not need formatting.
+  `agents/`, run `pnpm format` from the `.github/` directory
+  (Oxfmt). Note: instruction files (`*instructions.md`) are excluded
+  via the root `.oxfmtrc.json` and do not need formatting.
 
 ## Repository Documentation
 
 These documents in this repo provide additional context:
 
-- [Breaking changes guidelines](../../../documentation/Breaking%20changes%20guidelines.md)
+- [Breaking changes policy](https://aka.ms/AzBreakingChangesPolicy)
 - [Uniform versioning](../../../documentation/uniform-versioning.md)
-- [Directory structure](../../../documentation/directory-structure.md)
+- [Directory structure](https://aka.ms/azsdk/spec-dirs)
 - [OpenAPI authoring automated guidelines](../../../documentation/openapi-authoring-automated-guidelines.md)
-- [Swagger extensions](../../../documentation/swagger-extensions.md)
+- [Swagger extensions](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md)
 - [CI fix guide](../../../documentation/ci-fix.md)
-- [TypeSpec dev process](../../../documentation/typespec-rest-api-dev-process.md)
+- [TypeSpec dev process](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec)
 
 ## Relationship to Instruction Files
 

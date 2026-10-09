@@ -1741,7 +1741,7 @@
         "tags": [
           "GoalAssignments"
         ],
-        "description": "List GoalAssignment resources by tenant",
+        "description": "Lists goal assignments in a service group.",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -1789,7 +1789,7 @@
         "tags": [
           "GoalAssignments"
         ],
-        "description": "Get a GoalAssignment",
+        "description": "Gets a goal assignment.",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -1800,7 +1800,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -1831,7 +1831,7 @@
         "tags": [
           "GoalAssignments"
         ],
-        "description": "Create a GoalAssignment",
+        "description": "Creates or updates a goal assignment.",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -1842,7 +1842,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -1910,7 +1910,7 @@
         "tags": [
           "GoalAssignments"
         ],
-        "description": "Update a GoalAssignment",
+        "description": "Updates a goal assignment.",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -1921,7 +1921,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -1983,7 +1983,7 @@
         "tags": [
           "GoalAssignments"
         ],
-        "description": "Delete a GoalAssignment",
+        "description": "Deletes a goal assignment.",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -1994,7 +1994,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2046,7 +2046,7 @@
         "tags": [
           "GoalResources"
         ],
-        "description": "List GoalResource resources by GoalAssignment",
+        "description": "Lists goal resources under a goal assignment.",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -2063,7 +2063,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2099,7 +2099,7 @@
         "tags": [
           "GoalResources"
         ],
-        "description": "Get a GoalResource",
+        "description": "Gets a goal resource.",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -2110,7 +2110,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2118,7 +2118,7 @@
           {
             "name": "goalResourceName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal resource.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2157,7 +2157,7 @@
         "tags": [
           "GoalAssignments"
         ],
-        "description": "Recommends capacity improvements for resources under the goal assignments scope. Returns AI-powered capacity assessments and recommendations.",
+        "description": "Recommends capacity improvements for resources under the goal assignment's scope. Returns AI-powered capacity assessments and recommendations.",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -2168,7 +2168,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2243,7 +2243,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2298,7 +2298,7 @@
         "tags": [
           "GoalAssignments"
         ],
-        "description": "Action to exclude a resource from goal assignment.",
+        "description": "Updates goal resources under a goal assignment.",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -2309,7 +2309,7 @@
           {
             "name": "goalAssignmentName",
             "in": "path",
-            "description": "The name of the GoalAssignment",
+            "description": "The name of the goal assignment.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -5213,6 +5213,11 @@
         "recoveryPlan": {
           "$ref": "#/definitions/ExtensionObjectState",
           "description": "Recovery plan not present."
+        },
+        "healthModelAssociatedWithServiceGroup": {
+          "$ref": "#/definitions/ExtensionObjectState",
+          "description": "Indicates whether any entity in the selected Azure Health Model references the Drill Service Group through properties.signalGroups.azureResource.azureResourceId.",
+          "readOnly": true
         }
       }
     },
@@ -5263,10 +5268,6 @@
           }
         ]
       }
-    },
-    "Azure.Core.azureLocation": {
-      "type": "string",
-      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "Azure.ResourceManager.ArmResponse<Azure.ResourceManager.CommonTypes.ErrorResponse>": {
       "type": "object",
@@ -6487,11 +6488,6 @@
           "$ref": "#/definitions/DrillReportSummary",
           "description": "Summary of report generation for this Drill Run.",
           "readOnly": true
-        },
-        "recoveryTimeObjective": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Recovery time objective for the drill run.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -6974,12 +6970,12 @@
           {
             "name": "Excluded",
             "value": "Excluded",
-            "description": "Resource is not included in the goals."
+            "description": "The resource is excluded from the goals."
           },
           {
             "name": "Included",
             "value": "Included",
-            "description": "Resource is excluded from the goals."
+            "description": "The resource is included in the goals."
           }
         ]
       }
@@ -7291,7 +7287,7 @@
     },
     "GoalAssignment": {
       "type": "object",
-      "description": "Goal assignment a AzureResilienceProviderHub resource",
+      "description": "A goal assignment resource in the Azure Resilience Management provider.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GoalAssignmentProperties",
@@ -7327,19 +7323,11 @@
     },
     "GoalAssignmentProperties": {
       "type": "object",
-      "description": "Definition of goal assignment property.",
+      "description": "Properties of a goal assignment.",
       "properties": {
         "requireZonalResiliency": {
           "type": "boolean",
           "description": "Whether zonal resiliency is required for this goal assignment."
-        },
-        "requireRegionalResiliency": {
-          "type": "boolean",
-          "description": "Whether regional resiliency is required for this goal assignment."
-        },
-        "regionalObjectives": {
-          "$ref": "#/definitions/RegionalObjectives",
-          "description": "Recovery objectives targeted for regional resiliency."
         },
         "serviceLevelResources": {
           "type": "array",
@@ -7351,7 +7339,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state",
+          "description": "The provisioning state of the goal assignment.",
           "readOnly": true
         },
         "errorDetails": {
@@ -7402,19 +7390,11 @@
     },
     "GoalAssignmentPropertiesUpdate": {
       "type": "object",
-      "description": "Definition of goal assignment property.",
+      "description": "Properties of a goal assignment.",
       "properties": {
         "requireZonalResiliency": {
           "type": "boolean",
           "description": "Whether zonal resiliency is required for this goal assignment."
-        },
-        "requireRegionalResiliency": {
-          "type": "boolean",
-          "description": "Whether regional resiliency is required for this goal assignment."
-        },
-        "regionalObjectives": {
-          "$ref": "#/definitions/RegionalObjectivesUpdate",
-          "description": "Recovery objectives targeted for regional resiliency."
         },
         "serviceLevelResources": {
           "type": "array",
@@ -7428,7 +7408,7 @@
     },
     "GoalAssignmentUpdate": {
       "type": "object",
-      "description": "Goal assignment a AzureResilienceProviderHub resource",
+      "description": "A goal assignment resource in the Azure Resilience Management provider.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GoalAssignmentPropertiesUpdate",
@@ -7443,7 +7423,7 @@
     },
     "GoalResource": {
       "type": "object",
-      "description": "Goal Resource a AzureResilienceProviderHub resource",
+      "description": "A goal resource in the Azure Resilience Management provider.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GoalResourceProperties",
@@ -7479,24 +7459,20 @@
     },
     "GoalResourceProperties": {
       "type": "object",
-      "description": "Definition of goal assignment property.",
+      "description": "Properties of a goal resource.",
       "properties": {
         "resourceArmId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Arm Id of resource under the SG for which the extension resource is maintained."
+          "description": "The fully qualified ARM resource ID represented by this goal resource."
         },
         "zonalResiliency": {
           "$ref": "#/definitions/ResiliencyProperties",
-          "description": "Zonal resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Arm resource."
-        },
-        "regionalResiliency": {
-          "$ref": "#/definitions/ResiliencyProperties",
-          "description": "Regional resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Azure resource."
+          "description": "The zonal resiliency posture for the ARM resource, including participation, attestation, exclusion reason, and user confirmations."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state",
+          "description": "The provisioning state of the goal resource.",
           "readOnly": true
         }
       },
@@ -7508,54 +7484,18 @@
       "type": "object",
       "description": "Definition of goals data in unified resilience item.",
       "properties": {
-        "templateId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Arm id of the goal template."
-        },
         "assignmentId": {
           "type": "string",
           "format": "arm-id",
           "description": "Arm id of the goal assignment."
         },
-        "regionalRecoveryPointObjectiveInMinutes": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Regional RPO set in resilience goal in minutes."
-        },
-        "regionalRecoveryPointEstimatedInMinutes": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Computed recovery point estimated for the service group in minutes."
-        },
-        "regionalRecoveryPointObjectiveStatus": {
-          "$ref": "#/definitions/ResilienceHealthStatus",
-          "description": "Regional RPO status of the service group."
-        },
-        "regionalRecoveryTimeObjectiveInMinutes": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Regional RTO set in resilience goal in minutes."
-        },
-        "regionalRecoveryTimeActualInMinutes": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Computed RTA for the service group in minutes."
-        },
-        "regionalRecoveryTimeObjectiveStatus": {
-          "$ref": "#/definitions/ResilienceHealthStatus",
-          "description": "Regional RTO status of the service group."
-        },
-        "requireHighAvailability": {
-          "$ref": "#/definitions/UnifiedResilienceItemRequirementSelected",
-          "description": "Whether the resource is required for high availability."
-        },
-        "requireDisasterRecovery": {
-          "$ref": "#/definitions/UnifiedResilienceItemRequirementSelected",
-          "description": "Whether the resource is required for disaster recovery."
+        "zonalResiliency": {
+          "$ref": "#/definitions/UnifiedResilienceItemGoalRequirement",
+          "description": "Zonal resiliency goal copied from the goal assignment."
         }
       },
       "required": [
-        "templateId",
-        "assignmentId",
-        "regionalRecoveryPointObjectiveStatus",
-        "regionalRecoveryTimeObjectiveStatus"
+        "assignmentId"
       ]
     },
     "HAStatus": {
@@ -7590,14 +7530,14 @@
           "$ref": "#/definitions/AssociatedIdentity",
           "description": "Identity that the Drill uses to read the Azure Health Model. The Drill is granted Reader on the Health Model for this identity."
         },
-        "discoveryRuleId": {
+        "healthModelId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is the only identifier accepted on the wire.",
+          "description": "Full ARM Id of the Azure Health Model selected for Drill monitoring.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.CloudHealth/healthmodels/discoveryrules"
+                "type": "Microsoft.CloudHealth/healthmodels"
               }
             ]
           }
@@ -7605,7 +7545,7 @@
       },
       "required": [
         "identity",
-        "discoveryRuleId"
+        "healthModelId"
       ]
     },
     "HealthModelMonitoringPropertiesUpdate": {
@@ -7616,14 +7556,14 @@
           "$ref": "#/definitions/AssociatedIdentityUpdate",
           "description": "Identity that the Drill uses to read the Azure Health Model. The Drill is granted Reader on the Health Model for this identity."
         },
-        "discoveryRuleId": {
+        "healthModelId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is the only identifier accepted on the wire.",
+          "description": "Full ARM Id of the Azure Health Model selected for Drill monitoring.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.CloudHealth/healthmodels/discoveryrules"
+                "type": "Microsoft.CloudHealth/healthmodels"
               }
             ]
           }
@@ -8333,12 +8273,6 @@
           "$ref": "#/definitions/DrillAttestation",
           "description": "Attestation state of the last run of this Drill.",
           "readOnly": true
-        },
-        "lastRunRecoveryTimeActual": {
-          "type": "string",
-          "format": "duration",
-          "description": "Actual recovery time of the last run of this Drill.",
-          "readOnly": true
         }
       }
     },
@@ -8834,45 +8768,6 @@
         "resourceCapacities",
         "recommendations"
       ]
-    },
-    "RecommendationsData": {
-      "type": "object",
-      "description": "Definition of recommendations data in unified resilience item.",
-      "properties": {
-        "highAvailability": {
-          "$ref": "#/definitions/RecommendationsHighAvailabilityData",
-          "description": "The high availability section of resilience recommendation."
-        }
-      },
-      "required": [
-        "highAvailability"
-      ]
-    },
-    "RecommendationsHighAvailabilityData": {
-      "type": "object",
-      "description": "Definition of recommendation data related to high availability in unified resilience item.",
-      "properties": {
-        "enabledResourceCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Count of resources that have high availability enabled."
-        },
-        "notEnabledResourceCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Count of resources that do not have high availability enabled."
-        },
-        "notEvaluatedResourceCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Count of resources that have not been evaluated for high availability."
-        },
-        "evaluationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time when the high availability recommendations were last evaluated."
-        }
-      }
     },
     "RecoveryActionRequest": {
       "type": "object",
@@ -9785,14 +9680,6 @@
           "$ref": "#/definitions/ResourceInclusionState",
           "description": "A state that indicates the resource status with respect to the recovery orchestration plan."
         },
-        "inclusionDisabledReasons": {
-          "type": "array",
-          "description": "Reasons why inclusion of the resource in a recovery plan is disabled.",
-          "items": {
-            "$ref": "#/definitions/ResourceInclusionDisabledReason"
-          },
-          "readOnly": true
-        },
         "needsAttention": {
           "type": "boolean",
           "description": "Indicating if resource needs user attention and action, details will be found in attentionReasons",
@@ -9911,38 +9798,6 @@
       ],
       "x-ms-discriminator-value": "Regional"
     },
-    "RegionalObjectives": {
-      "type": "object",
-      "description": "Recovery objectives targeted by a goal assignment for regional resiliency.",
-      "properties": {
-        "targetRecoveryPointObjective": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Target regional recovery point objective. eg, PT15M for 15 minutes."
-        },
-        "targetRecoveryTimeObjective": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Target regional recovery time objective. eg, PT1H for 1 hour."
-        }
-      },
-      "required": [
-        "targetRecoveryPointObjective",
-        "targetRecoveryTimeObjective"
-      ]
-    },
-    "RegionalObjectivesUpdate": {
-      "type": "object",
-      "description": "Recovery objectives targeted by a goal assignment for regional resiliency.",
-      "properties": {
-        "targetRecoveryPointObjective": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Target regional recovery point objective. eg, PT15M for 15 minutes."
-        },
-        "targetRecoveryTimeObjective": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Target regional recovery time objective. eg, PT1H for 1 hour."
-        }
-      }
-    },
     "RelativeResourceCompositionState": {
       "type": "string",
       "description": "Enum for AttentionReason - Resource state sync between two objects.",
@@ -9963,36 +9818,6 @@
             "name": "OutOfSync",
             "value": "OutOfSync",
             "description": "Resources out of sync."
-          }
-        ]
-      }
-    },
-    "ReplicationMode": {
-      "type": "string",
-      "description": "Replication mode configured for a protected resource.",
-      "enum": [
-        "None",
-        "ActiveActive",
-        "ActivePassive"
-      ],
-      "x-ms-enum": {
-        "name": "ReplicationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No replication mode is configured for the protected resource."
-          },
-          {
-            "name": "ActiveActive",
-            "value": "ActiveActive",
-            "description": "The resource is active in multiple locations at the same time."
-          },
-          {
-            "name": "ActivePassive",
-            "value": "ActivePassive",
-            "description": "The resource has one active location and one or more passive recovery locations."
           }
         ]
       }
@@ -10051,36 +9876,6 @@
         }
       }
     },
-    "ResilienceHealthStatus": {
-      "type": "string",
-      "description": "enum for Resilience health status.",
-      "enum": [
-        "NotEvaluated",
-        "Unhealthy",
-        "Healthy"
-      ],
-      "x-ms-enum": {
-        "name": "ResilienceHealthStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotEvaluated",
-            "value": "NotEvaluated",
-            "description": "Resource is not evaluated."
-          },
-          {
-            "name": "Unhealthy",
-            "value": "Unhealthy",
-            "description": "Resource is Unhealthy."
-          },
-          {
-            "name": "Healthy",
-            "value": "Healthy",
-            "description": "Resource is Healthy."
-          }
-        ]
-      }
-    },
     "ResiliencyEligibilityCategory": {
       "type": "string",
       "description": "Classification of a resource's resiliency eligibility. Determines what guidance and alternate configurations are returned.",
@@ -10129,20 +9924,20 @@
       "properties": {
         "goalParticipation": {
           "$ref": "#/definitions/ExclusionState",
-          "description": "Flag which depicts whether the Arm resource is excluded for resiliency recommendation."
+          "description": "Indicates whether the ARM resource is excluded from resiliency recommendations."
         },
         "attestationStatus": {
           "$ref": "#/definitions/AttestationState",
-          "description": "Flag which depicts whether the Arm resource is manually attested for resiliency recommendation."
+          "description": "Indicates whether the ARM resource's resiliency posture is manually attested."
         },
         "exclusionReason": {
           "$ref": "#/definitions/ExclusionReason",
-          "description": "Reason for exclusion from resiliency goals.",
+          "description": "The reason the ARM resource is excluded from resiliency goals.",
           "readOnly": true
         },
         "userConfirmation": {
           "type": "array",
-          "description": "List of user confirmations for resiliency solutions.",
+          "description": "User confirmations for resiliency solutions recommended for the ARM resource.",
           "items": {
             "$ref": "#/definitions/UserConfirmationItem"
           },
@@ -10151,59 +9946,6 @@
           ]
         }
       }
-    },
-    "ResourceAzureTemplateProtectionSetting": {
-      "type": "object",
-      "description": "Definition of recovery orchestration resource protection using an Azure Resource Manager template.",
-      "properties": {
-        "templateSpecVersionId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource ID of the Template Spec version to deploy.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Resources/templateSpecs/versions"
-              }
-            ]
-          }
-        },
-        "deploymentScope": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure Resource Manager scope at which the recovery template is deployed. Must be the\nsubscription containing the protected resource, or a resource group within it; deployments\nabove subscription scope are not supported.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Resources/subscriptions",
-                "scopes": [
-                  "Tenant"
-                ]
-              },
-              {
-                "type": "Microsoft.Resources/resourceGroups",
-                "scopes": [
-                  "Subscription"
-                ]
-              }
-            ]
-          }
-        },
-        "deploymentLocation": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location used to store deployment metadata. Required when deploymentScope is a subscription."
-        }
-      },
-      "required": [
-        "templateSpecVersionId",
-        "deploymentScope"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureTemplate"
     },
     "ResourceBaseProtectionSolutionSetting": {
       "type": "object",
@@ -10218,16 +9960,6 @@
       "required": [
         "protectionSolutionType"
       ]
-    },
-    "ResourceCosmosDBProtectionSetting": {
-      "type": "object",
-      "description": "Definition of recovery orchestration resource protection using Azure Cosmos DB.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureCosmosDB"
     },
     "ResourceCrossZoneVmRecoveryProtectionSetting": {
       "type": "object",
@@ -10403,30 +10135,6 @@
         ]
       }
     },
-    "ResourceInclusionDisabledReason": {
-      "type": "string",
-      "description": "Reason why a recovery resource cannot be included in a recovery plan.",
-      "enum": [
-        "ResourceHighlyAvailable",
-        "ResourceActiveActiveProtection"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceInclusionDisabledReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ResourceHighlyAvailable",
-            "value": "ResourceHighlyAvailable",
-            "description": "The resource is highly available and does not require recovery-plan inclusion."
-          },
-          {
-            "name": "ResourceActiveActiveProtection",
-            "value": "ResourceActiveActiveProtection",
-            "description": "The resource uses active-active protection."
-          }
-        ]
-      }
-    },
     "ResourceInclusionState": {
       "type": "string",
       "description": "A state type that indicates inclusion of the resource with respect to the resiliency support.",
@@ -10495,16 +10203,6 @@
       ],
       "x-ms-discriminator-value": "AzureNative"
     },
-    "ResourceNetAppFilesProtectionSetting": {
-      "type": "object",
-      "description": "Definition of recovery orchestration resource protection using Azure NetApp Files.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureNetAppFiles"
-    },
     "ResourceProtectionSolutionSettings": {
       "type": "object",
       "description": "Definition of recovery resource resource protection solution settings.",
@@ -10513,10 +10211,6 @@
           "$ref": "#/definitions/ResourceProtectionSolutionType",
           "description": "A setting that indicates the resource protected with which recovery solution.",
           "readOnly": true
-        },
-        "replicationMode": {
-          "$ref": "#/definitions/ReplicationMode",
-          "description": "Replication mode configured for the protected resource."
         },
         "protectionStatus": {
           "$ref": "#/definitions/ResourceProtectionStatus",
@@ -10608,12 +10302,7 @@
         "AzureNative",
         "AzureSiteRecovery",
         "CrossZoneVMRecovery",
-        "CustomRunbook",
-        "AzureTemplate",
-        "AzureStorageAccount",
-        "AzureServiceBus",
-        "AzureNetAppFiles",
-        "AzureCosmosDB"
+        "CustomRunbook"
       ],
       "x-ms-enum": {
         "name": "ResourceProtectionSolutionType",
@@ -10643,31 +10332,6 @@
             "name": "CustomRunbook",
             "value": "CustomRunbook",
             "description": "Resource is not protected with native solution and using custom runbook automation scripts for recovery verbs."
-          },
-          {
-            "name": "AzureTemplate",
-            "value": "AzureTemplate",
-            "description": "Resource recovery is orchestrated by deploying an Azure Resource Manager template."
-          },
-          {
-            "name": "AzureStorageAccount",
-            "value": "AzureStorageAccount",
-            "description": "Resource is protected with Azure Storage account customer-managed failover."
-          },
-          {
-            "name": "AzureServiceBus",
-            "value": "AzureServiceBus",
-            "description": "Resource is protected with Azure Service Bus geo-replication, where a premium namespace replicates data to a secondary region and recovery promotes that secondary in place."
-          },
-          {
-            "name": "AzureNetAppFiles",
-            "value": "AzureNetAppFiles",
-            "description": "Resource is protected with Azure NetApp Files cross-region replication, where recovery fails over to the destination volume."
-          },
-          {
-            "name": "AzureCosmosDB",
-            "value": "AzureCosmosDB",
-            "description": "Resource is protected with Azure Cosmos DB multiregion replication using customer-managed failover, where recovery promotes a secondary region to the write region."
           }
         ]
       }
@@ -10774,16 +10438,6 @@
         ]
       }
     },
-    "ResourceServiceBusProtectionSetting": {
-      "type": "object",
-      "description": "Definition of recovery orchestration resource protection using Azure Service Bus.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureServiceBus"
-    },
     "ResourceSiteRecoveryProtectionSetting": {
       "type": "object",
       "description": "Definition of recovery orchestration resource protection with azure site recovery.",
@@ -10850,16 +10504,6 @@
         }
       }
     },
-    "ResourceStorageAccountProtectionSetting": {
-      "type": "object",
-      "description": "Definition of recovery orchestration resource protection using an Azure Storage account.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureStorageAccount"
-    },
     "ResourceTypeCategories": {
       "type": "string",
       "description": "A state type that indicates qualification of a resource for an operation.",
@@ -10873,7 +10517,7 @@
           {
             "name": "AzureSiteRecoveryVMsPresent",
             "value": "AzureSiteRecoveryVMsPresent",
-            "description": "Indicates that alteast one Azure Site Recovery VMs are present."
+            "description": "Indicates that at least one Azure Site Recovery VM is present."
           }
         ]
       }
@@ -10951,12 +10595,12 @@
     },
     "ServiceLevelResource": {
       "type": "object",
-      "description": "The Service level resource model",
+      "description": "A service-level resource associated with a goal assignment.",
       "properties": {
         "serviceLevelIndicatorResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The arm id of the service level indicator resource"
+          "description": "The ARM resource ID of the service-level indicator resource."
         }
       },
       "required": [
@@ -11282,6 +10926,50 @@
         }
       ]
     },
+    "UnifiedResilienceItemBillingInfo": {
+      "type": "object",
+      "description": "Definition of billing information in unified resilience item.",
+      "properties": {
+        "usagePlanArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Arm id of the usage plan applied to the service group."
+        },
+        "usagePlanEnrollmentArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Arm id of the usage plan enrollment that links the usage plan to the service group."
+        },
+        "usagePlanEnrollmentCreatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the usage plan enrollment was created."
+        },
+        "usagePlanEnrollmentLastUpdatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the usage plan enrollment was last updated."
+        },
+        "errorDetails": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Details of any errors encountered while resolving the billing information.",
+          "readOnly": true
+        }
+      }
+    },
+    "UnifiedResilienceItemGoalRequirement": {
+      "type": "object",
+      "description": "Definition of a resilience goal requirement copied from the goal assignment.",
+      "properties": {
+        "required": {
+          "type": "boolean",
+          "description": "Whether the goal is required for the service group."
+        }
+      },
+      "required": [
+        "required"
+      ]
+    },
     "UnifiedResilienceItemListResult": {
       "type": "object",
       "description": "The response of a UnifiedResilienceItem list operation.",
@@ -11316,9 +11004,13 @@
           "$ref": "#/definitions/GoalsData",
           "description": "Computed and copied data of resilience goals."
         },
-        "recommendations": {
-          "$ref": "#/definitions/RecommendationsData",
-          "description": "Computed and copied data of Azure recommendations."
+        "resiliencyPosture": {
+          "$ref": "#/definitions/UnifiedResilienceItemResiliencyPosture",
+          "description": "Resiliency posture computed for the service group."
+        },
+        "billingInfo": {
+          "$ref": "#/definitions/UnifiedResilienceItemBillingInfo",
+          "description": "Usage plan and enrollment billing information for the service group."
         },
         "lastModifiedTime": {
           "type": "string",
@@ -11328,47 +11020,61 @@
       },
       "required": [
         "goals",
-        "recommendations",
+        "resiliencyPosture",
         "lastModifiedTime"
       ]
     },
-    "UnifiedResilienceItemRequirementSelected": {
-      "type": "string",
-      "description": "Enum for the requirement status of the resource in the goal.",
-      "enum": [
-        "NotRequired",
-        "Required",
-        "NotSelected"
-      ],
-      "x-ms-enum": {
-        "name": "UnifiedResilienceItemRequirementSelected",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotRequired",
-            "value": "NotRequired",
-            "description": "The resource is not required for the specified goal."
-          },
-          {
-            "name": "Required",
-            "value": "Required",
-            "description": "The resource is required for the specified goal."
-          },
-          {
-            "name": "NotSelected",
-            "value": "NotSelected",
-            "description": "The resource is not selected for the specified goal."
-          }
-        ]
+    "UnifiedResilienceItemResiliencyPosture": {
+      "type": "object",
+      "description": "Definition of the resiliency posture computed for the unified resilience item.",
+      "properties": {
+        "zonalResiliency": {
+          "$ref": "#/definitions/UnifiedResilienceItemZonalResiliencyPosture",
+          "description": "The zonal resiliency section of the resiliency posture."
+        }
+      },
+      "required": [
+        "zonalResiliency"
+      ]
+    },
+    "UnifiedResilienceItemZonalResiliencyPosture": {
+      "type": "object",
+      "description": "Definition of the zonal resiliency posture computed for the unified resilience item.",
+      "properties": {
+        "enabledResourceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of resources that have zonal resiliency enabled."
+        },
+        "notEnabledResourceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of resources that do not have zonal resiliency enabled."
+        },
+        "notEvaluatedResourceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of resources that have not been evaluated for zonal resiliency."
+        },
+        "userConfirmationNeededCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of resources that require user confirmation for zonal resiliency."
+        },
+        "evaluationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the zonal resiliency posture was last evaluated."
+        }
       }
     },
     "UpdateGoalResourceRequest": {
       "type": "object",
-      "description": "Request model for update goal resource.",
+      "description": "Request body for updating goal resources.",
       "properties": {
         "resources": {
           "type": "array",
-          "description": "List of update goal resource.",
+          "description": "The goal resources to update.",
           "items": {
             "$ref": "#/definitions/GoalResource"
           }
@@ -11380,11 +11086,11 @@
     },
     "UpdateGoalResourceResponse": {
       "type": "object",
-      "description": "Response model for update goal resource.",
+      "description": "Response from updating goal resources.",
       "properties": {
         "resources": {
           "type": "array",
-          "description": "List of update goal resource.",
+          "description": "The updated goal resources.",
           "items": {
             "$ref": "#/definitions/GoalResource"
           }
@@ -11585,7 +11291,7 @@
           {
             "name": "Present",
             "value": "Present",
-            "description": "Atleast one VM Present."
+            "description": "At least one VM is present."
           },
           {
             "name": "Absent",

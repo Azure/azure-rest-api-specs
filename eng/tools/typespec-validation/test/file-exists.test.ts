@@ -1,7 +1,7 @@
-import fs from "fs";
+import fs from "node:fs";
 import { strict as assert } from "node:assert";
-import os from "os";
-import path from "path";
+import os from "node:os";
+import path from "pathe";
 import { afterEach, beforeEach, describe, it } from "vitest";
 import { fileExists } from "../src/utils.ts";
 

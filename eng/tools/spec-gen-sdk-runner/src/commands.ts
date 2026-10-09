@@ -139,6 +139,8 @@ async function runAzsdkGeneration(
   const tspClientDir = path.join(commandInput.localSdkRepoPath, "eng", "common", "tsp-client");
   if (fs.existsSync(path.join(tspClientDir, "package.json"))) {
     logMessage(`Installing tsp-client dependencies at ${tspClientDir}`, LogLevel.Info);
+    // This runs inside the cloned target SDK repo (e.g. azure-sdk-for-python), which
+    // manages its own dependencies with npm — not this repo's pnpm workspace.
     await execAsync("npm ci", { cwd: tspClientDir });
   }
 
@@ -608,11 +610,12 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
-  if (
+  const isTypeSpecBatch =
+    batchType === "sample-typespecs" ||
     batchType === "all-typespecs" ||
     batchType === "all-mgmtplane-typespecs" ||
-    batchType === "all-dataplane-typespecs"
-  ) {
+    batchType === "all-dataplane-typespecs";
+  if (isTypeSpecBatch) {
     specGenSdkCommand.push("--skip-sdk-gen-from-openapi", "true");
   }
 
@@ -639,11 +642,28 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   let stagedArtifactsFolder = "";
   let serviceFolderPath = "";
   const failedSpecs: string[] = [];
+  const runtimeMarkdownRows: string[] = [];
+  let telemetrySpecType: string | undefined;
+  switch (batchType) {
+    case "all-mgmtplane-typespecs":
+      telemetrySpecType = "management-plane";
+      break;
+    case "all-dataplane-typespecs":
+      telemetrySpecType = "data-plane";
+      break;
+    case "sample-typespecs":
+      telemetrySpecType = "sample";
+      break;
+    case "all-typespecs":
+      telemetrySpecType = "all";
+      break;
+  }
 
   await installLanguageToolchain(commandInput);
 
   // Generate SDKs for each spec
   for (const specConfigs of specConfigsArray) {
+    const specStartTime = performance.now();
     if (specConfigs.tspconfigPath && specConfigs.readmePath) {
       serviceFolderPath = getServiceFolderPath(specConfigs.tspconfigPath);
       logMessage(`Generating SDK from ${serviceFolderPath}`, LogLevel.Group);
@@ -771,6 +791,41 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
       statusCode = 1;
     }
 
+    if (
+      isTypeSpecBatch &&
+      specConfigs.tspconfigPath &&
+      executionReport &&
+      (executionReport.executionResult === "succeeded" ||
+        executionReport.executionResult === "warning")
+    ) {
+      const packageNames = executionReport.packages.length
+        ? executionReport.packages.map((pkg) => pkg.packageName ?? "")
+        : [""];
+      const durationSeconds = Math.round(performance.now() - specStartTime) / 1000;
+      for (const packageName of packageNames) {
+        runtimeMarkdownRows.push(
+          `| ${specConfigs.tspconfigPath} | ${packageName || "(not reported)"} | ${executionReport.executionResult} | ${durationSeconds} |`,
+        );
+        if (telemetrySpecType) {
+          const telemetry = {
+            eventType: "SdkBatchGenerationSpecResult",
+            timestamp: new Date().toISOString(),
+            batchType,
+            specType: telemetrySpecType,
+            sdkRepoName: commandInput.sdkRepoName,
+            language: commandInput.sdkRepoName.replace("azure-sdk-for-", ""),
+            specPath: specConfigs.tspconfigPath,
+            packageName,
+            executionResult: executionReport.executionResult,
+            durationSeconds,
+            buildId: process.env.BUILD_BUILDID ?? "",
+            pipelineUrl: `${process.env.SYSTEM_COLLECTIONURI ?? ""}${process.env.SYSTEM_TEAMPROJECT ?? ""}/_build/results?buildId=${process.env.BUILD_BUILDID ?? ""}`,
+          };
+          logMessage(`##[SdkBatchGenerationSpecResult]${JSON.stringify(telemetry)}`);
+        }
+      }
+    }
+
     logMessage("ending group logging", LogLevel.EndGroup);
     if (specConfigs.tspconfigPath && specConfigs.readmePath) {
       specConfigPath = serviceFolderPath;
@@ -794,6 +849,12 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   if (succeededCount > 0) {
     markdownContent += `${succeededContent}\n`;
   }
+  if (runtimeMarkdownRows.length > 0) {
+    markdownContent += "## TypeSpec Package Run Times\n";
+    markdownContent += "| Spec Path | Package Name | Result | Run Time (seconds) |\n";
+    markdownContent += "| --- | --- | --- | ---: |\n";
+    markdownContent += `${runtimeMarkdownRows.join("\n")}\n`;
+  }
   markdownContent += failedCount ? `## Total Failed Specs\n ${failedCount}\n` : "";
   markdownContent += warningCount ? `## Total Specs with Warnings\n ${warningCount}\n` : "";
   markdownContent += notEnabledCount
@@ -805,14 +866,13 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   markdownContent += succeededCount ? `## Total Successful Specs\n ${succeededCount}\n` : "";
   markdownContent += `## Total Specs Count\n ${specConfigsArray.length}\n\n`;
 
-  // Emit structured telemetry for Kusto ingestion (only for mgmtplane/dataplane batch types)
-  if (batchType === "all-mgmtplane-typespecs" || batchType === "all-dataplane-typespecs") {
-    const specType = batchType === "all-mgmtplane-typespecs" ? "management-plane" : "data-plane";
+  // Emit structured telemetry for Kusto ingestion.
+  if (telemetrySpecType) {
     const telemetry = {
       eventType: "SdkBatchGenerationSummary",
       timestamp: new Date().toISOString(),
       batchType: batchType,
-      specType: specType,
+      specType: telemetrySpecType,
       sdkRepoName: commandInput.sdkRepoName,
       language: commandInput.sdkRepoName.replace("azure-sdk-for-", ""),
       totalSpecs: succeededCount + failedCount,

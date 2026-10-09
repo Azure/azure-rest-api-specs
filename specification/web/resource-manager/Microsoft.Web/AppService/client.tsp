@@ -3796,6 +3796,24 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 );
 
 // --- Model renames ---
+// Preserve the App Service RBAC role helpers emitted by the reflection-based provisioning generator.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning compatibility"
+@@clientOption(
+  AppServicePlan,
+  "resource-rbac-roles",
+  #{ WebPlanContributor: "2cc479cb-7b4d-49a8-b449-8c00fd0f0a4b" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning compatibility"
+@@clientOption(
+  Site,
+  "resource-rbac-roles",
+  #{ WebsiteContributor: "de139f84-1756-47ae-9be6-808fbbe84772" },
+  "csharp"
+);
+
 @@clientName(AddressResponse, "AppServiceEnvironmentAddress", "csharp");
 @@clientName(AllowedPrincipals, "AppServiceAadAllowedPrincipals", "csharp");
 @@clientName(AnalysisData, "AnalysisDetectorEvidences", "csharp");
@@ -4178,6 +4196,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(SkuInfoCollection, "AppServicePoolSkuInfoListResult", "csharp");
 @@clientName(SkuInfos, "AppServiceSkuResult", "csharp");
 @@clientName(SlotDifferenceCollection, "SlotDifferenceListResult", "csharp");
+@@clientName(SlotConfigNames, "SlotConfigNamesProperties", "csharp");
 @@clientName(Snapshot, "AppSnapshot", "csharp");
 @@clientName(SnapshotCollection, "AppSnapshotListResult", "csharp");
 @@clientName(Solution, "DiagnosticSolution", "csharp");
@@ -6008,11 +6027,6 @@ union ConfigReferenceSource {
   "csharp"
 );
 @@alternateType(
-  StaticSiteLinkedBackend.backendResourceId,
-  armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(
   SwiftVirtualNetworkProperties.subnetResourceId,
   armResourceIdentifier,
   "csharp"
@@ -6142,6 +6156,41 @@ union ConfigReferenceSource {
   armResourceIdentifier,
   "csharp"
 );
+// Align C# scalar semantics with the existing management and provisioning APIs.
+@@alternateType(AzureBlobStorageApplicationLogsConfig.sasUrl, url, "csharp");
+@@alternateType(AzureBlobStorageHttpLogsConfig.sasUrl, url, "csharp");
+@@alternateType(
+  IpSecurityRestriction.vnetSubnetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SkuDescription.locations, azureLocation[], "csharp");
+@@alternateType(CloningInfo.correlationId, uuid, "csharp");
+@@alternateType(CloningInfo.sourceWebAppLocation, azureLocation, "csharp");
+@@alternateType(GitHubActionContainerConfiguration.serverUrl, url, "csharp");
+@@alternateType(OpenIdConnectConfig.certificationUri, url, "csharp");
+@@alternateType(
+  PrivateAccessVirtualNetwork.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RampUpRule.changeDecisionCallbackUrl, url, "csharp");
+@@alternateType(
+  ResponseMessageEnvelopeRemotePrivateEndpointConnection.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(
+  ResponseMessageEnvelopeRemotePrivateEndpointConnection.error,
+  Azure.Core.Foundations.Error,
+  "csharp"
+);
+@@alternateType(
+  DatabaseConnectionOverview.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(StaticSiteTemplateOptions.templateRepositoryUrl, url, "csharp");
 @@alternateType(SiteProperties.inProgressOperationId, uuid, "csharp");
 @@alternateType(
   SitePatchResourceProperties.inProgressOperationId,

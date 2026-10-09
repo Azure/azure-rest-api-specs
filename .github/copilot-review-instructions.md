@@ -228,6 +228,11 @@ Use for design trade-offs and best-practice recommendations:
 - Violations already flagged by CI linter checks
 - Style nits that don't affect SDK generation or customer experience
 - Issues in unchanged files not modified by the PR
+- The presence of `final-state-via` on a standard ARM PUT/PATCH/DELETE
+  operation, without evidence of a contract mismatch or SDK incompatibility.
+  Follow the
+  [shared ARM LRO reference](skills/azure-api-review/references/lro-final-state-via.md);
+  do not request removal merely because default SDK behavior would also work.
 
 ---
 
@@ -334,8 +339,6 @@ After posting comments:
 - Properties like `id`, `name`, `type` redeclared inside `properties` bag.
 - PUT operations returning `202` (deprecated; must use `201`/`200` +
   `provisioningState`).
-- `x-ms-long-running-operation-options` with `final-state-via` on PUT/PATCH/
-  DELETE (not needed for standard ARM patterns).
 
 ---
 
