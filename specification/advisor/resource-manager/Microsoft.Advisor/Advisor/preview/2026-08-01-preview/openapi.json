@@ -2557,9 +2557,8 @@
           "readOnly": true
         },
         "savings": {
-          "type": "object",
+          "$ref": "#/definitions/ResourceRecommendationSavings",
           "description": "The estimated savings associated with the recommendation.",
-          "additionalProperties": {},
           "readOnly": true
         },
         "recommendationStatus": {
@@ -2862,6 +2861,73 @@
       "required": [
         "value"
       ]
+    },
+    "ResourceRecommendationSavings": {
+      "type": "object",
+      "description": "The estimated savings associated with a resource recommendation.",
+      "properties": {
+        "providerCurrency": {
+          "type": "string",
+          "description": "The currency used by the recommendation provider."
+        },
+        "billingCurrency": {
+          "type": "string",
+          "description": "The currency used for billing."
+        },
+        "isDirectChannel": {
+          "type": "boolean",
+          "description": "Indicates whether the recommendation is for a direct billing channel."
+        },
+        "resourceDeletedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the recommended resource was deleted."
+        },
+        "retail": {
+          "$ref": "#/definitions/ResourceRecommendationSavingsDetails",
+          "description": "The savings calculated using retail pricing."
+        },
+        "contracted": {
+          "$ref": "#/definitions/ResourceRecommendationSavingsDetails",
+          "description": "The savings calculated using contracted pricing."
+        }
+      }
+    },
+    "ResourceRecommendationSavingsDetails": {
+      "type": "object",
+      "description": "The detailed savings amounts for a resource recommendation.",
+      "properties": {
+        "potentialSavings": {
+          "type": "number",
+          "format": "double",
+          "description": "The potential savings in the provider currency."
+        },
+        "potentialSavingsInBillingCurrency": {
+          "type": "number",
+          "format": "double",
+          "description": "The potential savings in the billing currency."
+        },
+        "wastedTillDate": {
+          "type": "number",
+          "format": "double",
+          "description": "The amount wasted to date in the provider currency."
+        },
+        "wastedTillDateInBillingCurrency": {
+          "type": "number",
+          "format": "double",
+          "description": "The amount wasted to date in the billing currency."
+        },
+        "realizedSavings": {
+          "type": "number",
+          "format": "double",
+          "description": "The realized savings in the provider currency."
+        },
+        "realizedSavingsInBillingCurrency": {
+          "type": "number",
+          "format": "double",
+          "description": "The realized savings in the billing currency."
+        }
+      }
     },
     "ReviewStatus": {
       "type": "string",

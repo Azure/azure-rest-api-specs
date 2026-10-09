@@ -605,10 +605,9 @@ model RecommendationProperties {
   /**
    * The estimated savings associated with the recommendation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The savings payload is an extensible service-defined JSON object whose fields can vary by recommendation type."
   @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
-  savings?: Record<unknown>;
+  savings?: ResourceRecommendationSavings;
 
   /**
    * The state of the Recommendation
@@ -773,6 +772,78 @@ model RecommendationProperties {
    * Additional notes for the Recommendation
    */
   notes?: string;
+}
+
+/**
+ * The estimated savings associated with a resource recommendation.
+ */
+@added(Versions.v2026_08_01_preview)
+model ResourceRecommendationSavings {
+  /**
+   * The currency used by the recommendation provider.
+   */
+  providerCurrency?: string;
+
+  /**
+   * The currency used for billing.
+   */
+  billingCurrency?: string;
+
+  /**
+   * Indicates whether the recommendation is for a direct billing channel.
+   */
+  isDirectChannel?: boolean;
+
+  /**
+   * The time when the recommended resource was deleted.
+   */
+  resourceDeletedOn?: utcDateTime;
+
+  /**
+   * The savings calculated using retail pricing.
+   */
+  retail?: ResourceRecommendationSavingsDetails;
+
+  /**
+   * The savings calculated using contracted pricing.
+   */
+  contracted?: ResourceRecommendationSavingsDetails;
+}
+
+/**
+ * The detailed savings amounts for a resource recommendation.
+ */
+@added(Versions.v2026_08_01_preview)
+model ResourceRecommendationSavingsDetails {
+  /**
+   * The potential savings in the provider currency.
+   */
+  potentialSavings?: float64;
+
+  /**
+   * The potential savings in the billing currency.
+   */
+  potentialSavingsInBillingCurrency?: float64;
+
+  /**
+   * The amount wasted to date in the provider currency.
+   */
+  wastedTillDate?: float64;
+
+  /**
+   * The amount wasted to date in the billing currency.
+   */
+  wastedTillDateInBillingCurrency?: float64;
+
+  /**
+   * The realized savings in the provider currency.
+   */
+  realizedSavings?: float64;
+
+  /**
+   * The realized savings in the billing currency.
+   */
+  realizedSavingsInBillingCurrency?: float64;
 }
 
 /**
