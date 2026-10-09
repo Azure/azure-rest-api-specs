@@ -73,6 +73,15 @@ input-file:
 - stable/2025-06-01/attestation.json
 ```
 
+### Tag: package-2026-03-11-preview
+
+These settings apply only when `--tag=package-2026-03-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-03-11-preview'
+input-file:
+- preview/2026-03-11-preview/attestation.json
+```
+
 ---
 # Code Generation
 
