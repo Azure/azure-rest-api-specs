@@ -24,15 +24,19 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2025_09_01: "2025-09-01",
 
-  @doc("Preview version 2026-01-01-preview with experimental features for Playwright workspace management.")
+  @doc("Preview version 2026-01-01-preview adds storage account configuration for workspace artifacts, test results, and reports.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_01_01_preview: "2026-01-01-preview",
 
-  @doc("Preview version 2026-02-01-preview with experimental features for Playwright workspace management.")
+  @doc("Preview version 2026-02-01-preview adds managed identities and reporting configuration for Playwright workspaces.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_02_01_preview: "2026-02-01-preview",
 
-  @doc("Preview version 2026-08-01-preview with experimental features for Playwright workspace management.")
+  @doc("Preview version 2026-08-01-preview adds virtual network subnet injection for private network connectivity.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_08_01_preview: "2026-08-01-preview",
+
+  @doc("Preview version 2026-10-01-preview adds session artifact collection configuration and managed identity selection for managing session artifacts.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_10_01_preview: "2026-10-01-preview",
 }
