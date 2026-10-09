@@ -104,6 +104,17 @@ function main() {
 }
 ```
 
+### Structured validation diagnostics and manifests
+
+- `diagnostic-content` — compose and render styled paths, text, lines, blocks, and
+  native command output.
+- `rule-result` — `Diagnostic`, `RuleResult`, `DiagnosticError`, `failure`, and
+  non-failing `warning` results.
+- `diagnostics` — format and report diagnostics with an explicit tool prefix,
+  select color support, and render rule statuses and summaries.
+- `service-yaml` — `parseServiceYaml` validates the shared version-list shape and
+  returns actionable YAML/schema errors.
+
 ### `console` — console output
 
 - `log(...args)` — async wrapper around `console.log`.
