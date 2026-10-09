@@ -13,6 +13,12 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.RecoveryServices;
 
 /**
+ * A string value that contains secret material.
+ */
+@secret
+scalar SecretString extends string;
+
+/**
  * Value indicating whether the health error is customer resolvable.
  */
 union HealthErrorCustomerResolvability {
@@ -10165,8 +10171,8 @@ model ExportJobDetails extends JobDetails {
   /**
    * The sas token to access blob.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  sasToken?: string;
+  @typeChangedFrom(Versions.v2026_11_01, string)
+  sasToken?: SecretString;
 
   /**
    * Gets the type of job details (see JobDetailsTypes enum for possible values).
@@ -10457,12 +10463,14 @@ model HyperVReplicaAzureApplyRecoveryPointInput
   /**
    * The primary kek certificate pfx.
    */
-  primaryKekCertificatePfx?: string;
+  @typeChangedFrom(Versions.v2026_11_01, string)
+  primaryKekCertificatePfx?: SecretString;
 
   /**
    * The secondary kek certificate pfx.
    */
-  secondaryKekCertificatePfx?: string;
+  @typeChangedFrom(Versions.v2026_11_01, string)
+  secondaryKekCertificatePfx?: SecretString;
 
   /**
    * The class type.
@@ -10839,12 +10847,14 @@ model HyperVReplicaAzurePlannedFailoverProviderInput
   /**
    * Primary kek certificate pfx.
    */
-  primaryKekCertificatePfx?: string;
+  @typeChangedFrom(Versions.v2026_11_01, string)
+  primaryKekCertificatePfx?: SecretString;
 
   /**
    * Secondary kek certificate pfx.
    */
-  secondaryKekCertificatePfx?: string;
+  @typeChangedFrom(Versions.v2026_11_01, string)
+  secondaryKekCertificatePfx?: SecretString;
 
   /**
    * The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.
@@ -11285,12 +11295,14 @@ model HyperVReplicaAzureTestFailoverInput
   /**
    * Primary kek certificate pfx.
    */
-  primaryKekCertificatePfx?: string;
+  @typeChangedFrom(Versions.v2026_11_01, string)
+  primaryKekCertificatePfx?: SecretString;
 
   /**
    * Secondary kek certificate pfx.
    */
-  secondaryKekCertificatePfx?: string;
+  @typeChangedFrom(Versions.v2026_11_01, string)
+  secondaryKekCertificatePfx?: SecretString;
 
   /**
    * The recovery point id to be passed to test failover to a particular recovery point. In case of latest recovery point, null should be passed.
@@ -11317,12 +11329,14 @@ model HyperVReplicaAzureUnplannedFailoverInput
   /**
    * Primary kek certificate pfx.
    */
-  primaryKekCertificatePfx?: string;
+  @typeChangedFrom(Versions.v2026_11_01, string)
+  primaryKekCertificatePfx?: SecretString;
 
   /**
    * Secondary kek certificate pfx.
    */
-  secondaryKekCertificatePfx?: string;
+  @typeChangedFrom(Versions.v2026_11_01, string)
+  secondaryKekCertificatePfx?: SecretString;
 
   /**
    * The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.
@@ -17765,12 +17779,14 @@ model RecoveryPlanHyperVReplicaAzureFailoverInput
   /**
    * The primary KEK certificate PFX.
    */
-  primaryKekCertificatePfx?: string;
+  @typeChangedFrom(Versions.v2026_11_01, string)
+  primaryKekCertificatePfx?: SecretString;
 
   /**
    * The secondary KEK certificate PFX.
    */
-  secondaryKekCertificatePfx?: string;
+  @typeChangedFrom(Versions.v2026_11_01, string)
+  secondaryKekCertificatePfx?: SecretString;
 
   /**
    * The recovery point type.

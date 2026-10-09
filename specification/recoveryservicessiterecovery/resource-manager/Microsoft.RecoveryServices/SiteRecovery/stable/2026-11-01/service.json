@@ -15881,7 +15881,7 @@
           "description": "BlobUri of the exported jobs."
         },
         "sasToken": {
-          "type": "string",
+          "$ref": "#/definitions/SecretString",
           "description": "The sas token to access blob."
         }
       },
@@ -16656,11 +16656,11 @@
       "description": "ApplyRecoveryPoint input specific to HyperVReplicaAzure provider.",
       "properties": {
         "primaryKekCertificatePfx": {
-          "type": "string",
+          "$ref": "#/definitions/SecretString",
           "description": "The primary kek certificate pfx."
         },
         "secondaryKekCertificatePfx": {
-          "type": "string",
+          "$ref": "#/definitions/SecretString",
           "description": "The secondary kek certificate pfx."
         }
       },
@@ -16970,11 +16970,11 @@
       "description": "HyperVReplicaAzure specific planned failover input.",
       "properties": {
         "primaryKekCertificatePfx": {
-          "type": "string",
+          "$ref": "#/definitions/SecretString",
           "description": "Primary kek certificate pfx."
         },
         "secondaryKekCertificatePfx": {
-          "type": "string",
+          "$ref": "#/definitions/SecretString",
           "description": "Secondary kek certificate pfx."
         },
         "recoveryPointId": {
@@ -17338,11 +17338,11 @@
       "description": "HvrA provider specific input for test failover.",
       "properties": {
         "primaryKekCertificatePfx": {
-          "type": "string",
+          "$ref": "#/definitions/SecretString",
           "description": "Primary kek certificate pfx."
         },
         "secondaryKekCertificatePfx": {
-          "type": "string",
+          "$ref": "#/definitions/SecretString",
           "description": "Secondary kek certificate pfx."
         },
         "recoveryPointId": {
@@ -17366,11 +17366,11 @@
       "description": "HvrA provider specific input for unplanned failover.",
       "properties": {
         "primaryKekCertificatePfx": {
-          "type": "string",
+          "$ref": "#/definitions/SecretString",
           "description": "Primary kek certificate pfx."
         },
         "secondaryKekCertificatePfx": {
-          "type": "string",
+          "$ref": "#/definitions/SecretString",
           "description": "Secondary kek certificate pfx."
         },
         "recoveryPointId": {
@@ -25585,11 +25585,11 @@
       "description": "Recovery plan HVR Azure failover input.",
       "properties": {
         "primaryKekCertificatePfx": {
-          "type": "string",
+          "$ref": "#/definitions/SecretString",
           "description": "The primary KEK certificate PFX."
         },
         "secondaryKekCertificatePfx": {
-          "type": "string",
+          "$ref": "#/definitions/SecretString",
           "description": "The secondary KEK certificate PFX."
         },
         "recoveryPointType": {
@@ -27685,6 +27685,12 @@
         }
       ],
       "x-ms-discriminator-value": "ScriptActionTaskDetails"
+    },
+    "SecretString": {
+      "type": "string",
+      "format": "password",
+      "description": "A string value that contains secret material.",
+      "x-ms-secret": true
     },
     "SecurityConfiguration": {
       "type": "string",
