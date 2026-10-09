@@ -1296,12 +1296,6 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Realtime classes replacements
   // --------------------------------------------------------------------------------
-  // OpenAI 2.14.0 lacks languages, keywords, and delay; generate the complete base locally.
-  @@clientNamespace(
-    OpenAI.AudioTranscription,
-    "Azure.AI.Projects.Agents",
-    "csharp"
-  );
   @@alternateType(
     OpenAI.RealtimeResponse,
     {

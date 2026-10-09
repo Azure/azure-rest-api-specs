@@ -91132,6 +91132,43 @@ components:
       required:
         - model
       properties:
+        language:
+          type: string
+          description: |-
+            The language of the input audio. Supplying the input language in
+              [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format
+              will improve accuracy and latency.
+        languages:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          description: Possible languages of the input audio, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format. Supported by `gpt-transcribe` and `gpt-live-transcribe`.
+        keywords:
+          type: array
+          items:
+            type: string
+          description: Words or phrases to guide transcription of the input audio. Supported by `gpt-transcribe` and `gpt-live-transcribe`.
+        prompt:
+          type: string
+          description: |-
+            An optional text to guide the model's style or continue a previous audio
+              segment.
+              For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting).
+              For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example "expect words related to technology".
+              Prompt is not supported with `gpt-realtime-whisper` in GA Realtime sessions.
+        delay:
+          type: string
+          enum:
+            - minimal
+            - low
+            - medium
+            - high
+            - xhigh
+          description: |-
+            Controls how long the model waits before emitting transcription text.
+              Higher values can improve transcription accuracy at the cost of latency.
+              Only supported with `gpt-realtime-whisper` in GA Realtime sessions.
         model:
           $ref: '#/components/schemas/VoiceAgentInputTranscriptionModel'
           description: The transcription model identifier. Configure customer custom speech deployments in `custom_speech`.
@@ -91145,8 +91182,6 @@ components:
           items:
             type: string
           description: Optional phrase hints that bias recognition toward domain terms.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.AudioTranscription'
       description: |-
         Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
         options with the Azure and MAI transcription models, custom speech models, and phrase hints.

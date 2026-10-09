@@ -787,13 +787,14 @@ union VoiceAgentInputTranscriptionModel {
   azure_speech: "azure-speech",
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the OpenAI transcription contract while specializing the required model selector and adding Foundry transcription options."
 @doc("""
   Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
   options with the Azure and MAI transcription models, custom speech models, and phrase hints.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentInputTranscription extends OpenAI.AudioTranscription {
+model VoiceAgentInputTranscription {
+  ...OmitProperties<OpenAI.AudioTranscription, "model">;
+
   @doc("The transcription model identifier. Configure customer custom speech deployments in `custom_speech`.")
   `model`: VoiceAgentInputTranscriptionModel;
 
