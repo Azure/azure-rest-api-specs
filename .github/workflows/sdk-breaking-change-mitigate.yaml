@@ -4,12 +4,6 @@ on: # zizmor: ignore[dangerous-triggers] Only base/default-branch workflow code 
   workflow_run:
     workflows: ["SDK Breaking Change Analysis - Analyze"]
     types: [completed]
-  workflow_dispatch:
-    inputs:
-      workflow_run_id:
-        description: "Completed SDK Breaking Change Analysis - Publish Results workflow run ID"
-        required: true
-        type: string
 
 permissions:
   actions: read
@@ -18,7 +12,6 @@ permissions:
 jobs:
   check-analysis-status:
     if: >-
-      github.event_name == 'workflow_dispatch' ||
       github.event.workflow_run.conclusion == 'success' ||
       github.event.workflow_run.conclusion == 'failure'
     runs-on: ubuntu-slim
@@ -57,14 +50,6 @@ jobs:
       sdk-repository: ${{ steps.resolve.outputs.sdk-repository }}
       should-run: ${{ steps.resolve.outputs.should-run }}
     steps:
-      - name: Download published analysis results
-        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
-        with:
-          name: sdk-breaking-change-results
-          path: ${{ runner.temp }}/published-analysis-results
-          github-token: ${{ github.token }}
-          run-id: ${{ inputs.workflow_run_id || github.event.workflow_run.id }}
-
       - name: Checkout workflow repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -75,6 +60,14 @@ jobs:
 
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
+
+      - name: Download published analysis results
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: sdk-breaking-change-results
+          path: ${{ runner.temp }}/published-analysis-results
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
 
       - name: Resolve mitigation trigger
         id: resolve
@@ -126,8 +119,7 @@ jobs:
     needs: resolve-trigger
     if: needs.resolve-trigger.outputs.should-run == 'true'
     concurrency:
-      group: >-
-        sdk-breaking-mitigate-${{ inputs.workflow_run_id || github.event.workflow_run.id }}
+      group: sdk-breaking-mitigate-${{ github.event.workflow_run.id }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
     permissions:
@@ -159,7 +151,7 @@ jobs:
           name: sdk-breaking-change-results
           path: ${{ runner.temp }}/published-analysis-results
           github-token: ${{ github.token }}
-          run-id: ${{ inputs.workflow_run_id || github.event.workflow_run.id }}
+          run-id: ${{ github.event.workflow_run.id }}
 
       - name: Checkout specification PR source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -173,6 +165,7 @@ jobs:
         uses: ./repositories/workflow-repository/.github/actions/setup-node-install-deps
         with:
           working-directory: repositories/azure-rest-api-specs
+          cache: "false"
 
       - name: Set up GitHub Copilot CLI
         id: setup-copilot-cli
