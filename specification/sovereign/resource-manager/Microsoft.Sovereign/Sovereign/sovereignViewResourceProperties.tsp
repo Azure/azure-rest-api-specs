@@ -143,10 +143,16 @@ model SovereignViewPolicyInitiativeDetail {
   @doc("The version of the policy initiative.")
   policyVersion: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Parameters vary based on the selected policy initiatives."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameters vary based on the selected policy initiatives."
   @doc("The parameters for the assignment of policy initiatives.")
-  assignmentParameters: Record<unknown>;
+  assignmentParameters: Record<ParameterValuesValue>;
+}
+
+@doc("The value of a parameter for the assignment of a policy initiative.")
+model ParameterValuesValue {
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Parameter values can be of any type, depending on the selected policy initiative."
+  @doc("The value of the parameter.")
+  value?: unknown;
 }
 
 @added(Versions.Preview20261031)

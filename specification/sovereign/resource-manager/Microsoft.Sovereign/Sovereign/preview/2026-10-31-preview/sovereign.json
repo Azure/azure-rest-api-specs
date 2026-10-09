@@ -1125,6 +1125,15 @@
         ]
       }
     },
+    "ParameterValuesValue": {
+      "type": "object",
+      "description": "The value of a parameter for the assignment of a policy initiative.",
+      "properties": {
+        "value": {
+          "description": "The value of the parameter."
+        }
+      }
+    },
     "PolicyComplianceState": {
       "type": "string",
       "description": "Supported compliance states for the policy initiatives.",
@@ -2434,7 +2443,9 @@
         "assignmentParameters": {
           "type": "object",
           "description": "The parameters for the assignment of policy initiatives.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterValuesValue"
+          }
         }
       },
       "required": [
