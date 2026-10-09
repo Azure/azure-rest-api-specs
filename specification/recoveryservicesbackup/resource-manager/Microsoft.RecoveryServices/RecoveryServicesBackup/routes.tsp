@@ -798,7 +798,7 @@ interface RecoveryPointsExtendedInfo {
     | ArmResponse<RPExtendedInfoResourceList>
     | ArmAcceptedResponse<
         "Accepted",
-        ArmLroLocationHeader &
+        ArmLroLocationHeader<FinalResult = RPExtendedInfoResourceList> &
           Azure.Core.Foundations.RetryAfterHeader & {
             /**
              * A link to the shared fabric level operation status endpoint, which reports the status of this long
@@ -844,7 +844,7 @@ interface RecoveryPointsExtendedInfo {
     | ArmResponse<RPExtendedInfoResourceList>
     | ArmAcceptedResponse<
         "Accepted",
-        ArmLroLocationHeader &
+        ArmLroLocationHeader<FinalResult = RPExtendedInfoResourceList> &
           Azure.Core.Foundations.RetryAfterHeader & {
             /**
              * A link to the shared fabric level operation status endpoint, which reports the status of the long
