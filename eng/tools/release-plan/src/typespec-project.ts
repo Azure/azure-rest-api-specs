@@ -370,6 +370,7 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
   apiVersion: string;
 } {
   const apiVersions = new Set<string>();
+  let hasPackage = false;
 
   for (const [, langConfigs] of Object.entries(metadata.languages)) {
     if (!Array.isArray(langConfigs)) {
@@ -379,6 +380,7 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
     for (const config of langConfigs) {
       const apiVersion = config.apiVersion;
       const packageName = config.packageName;
+      hasPackage ||= Boolean(packageName);
 
       if (!apiVersion || !packageName) {
         console.warn(
@@ -392,11 +394,11 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
     }
   }
 
-  if (apiVersions.size === 0) {
+  if (apiVersions.size === 0 && !hasPackage) {
     throw new Error("No valid language configurations found in TypeSpec metadata");
   }
 
-  return { apiVersion: Array.from(apiVersions)[0] };
+  return { apiVersion: Array.from(apiVersions)[0] ?? "" };
 }
 
 /**
@@ -413,11 +415,6 @@ export async function getTypeSpecProjectVersionFromMetadata(
   try {
     const metadata = await generateTypeSpecMetadata(tspProjectAbsPath);
     const { apiVersion } = resolveTypeSpecMetadata(metadata);
-    if (!/^\d{4}-\d{2}-\d{2}(?:-preview)?$/.test(apiVersion)) {
-      throw new Error(
-        `API version '${apiVersion}' must use YYYY-MM-DD or YYYY-MM-DD-preview format`,
-      );
-    }
     const isPreview = apiVersion.endsWith("-preview");
 
     console.log(

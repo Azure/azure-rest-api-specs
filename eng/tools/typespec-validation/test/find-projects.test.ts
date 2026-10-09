@@ -2,7 +2,7 @@ import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join } from "pathe";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { findChangedProjects } from "../src/find-projects.ts";
 

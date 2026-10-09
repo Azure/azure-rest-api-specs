@@ -204,7 +204,9 @@ describe("TypeSpec project detection edge cases", () => {
     // Setup mock metadata for the project
     setupMockMetadata(projectPath, "2025-08-01", "preview");
 
-    const get = vi.fn().mockResolvedValueOnce({ data: { labels: [] } });
+    const get = vi.fn().mockResolvedValueOnce({
+      data: { labels: [] },
+    });
     const listFiles = vi
       .fn()
       .mockResolvedValueOnce({
@@ -401,7 +403,11 @@ describe("TypeSpec project detection edge cases", () => {
     const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
       data: [{ number: 123 }],
     });
-    const get = vi.fn().mockResolvedValueOnce({ data: { labels: [{ name: "new-api-version" }] } });
+    const get = vi.fn().mockResolvedValue({
+      data: {
+        labels: [{ name: "new-api-version" }],
+      },
+    });
     const listFiles = vi
       .fn()
       .mockResolvedValueOnce({
@@ -413,7 +419,7 @@ describe("TypeSpec project detection edge cases", () => {
       .mockResolvedValueOnce({ data: [] });
 
     const result = await getTypeSpecProjectInfoFromCommit({
-      commitSha: "abc999",
+      commitSha: "abcdef",
       owner: "Azure",
       repo: "azure-rest-api-specs",
       workspace,
@@ -438,7 +444,7 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result.projectInfo?.isPreview).toBe(true);
   });
 
-  it("falls back to commit file analysis when no PR is associated", async () => {
+  it("inspects TypeSpec commit changes when no PR is associated", async () => {
     const projectPath = join(workspace, "specification/bar");
     mkdirSync(projectPath, { recursive: true });
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
@@ -457,7 +463,7 @@ describe("TypeSpec project detection edge cases", () => {
     });
 
     const result = await getTypeSpecProjectInfoFromCommit({
-      commitSha: "zzz111",
+      commitSha: "abcdef",
       owner: "Azure",
       repo: "azure-rest-api-specs",
       workspace,
@@ -560,32 +566,35 @@ describe("TypeSpec project detection edge cases", () => {
     // Setup mock metadata for the project
     setupMockMetadata(projectPath, "2025-09-01", "stable");
 
-    const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({ data: [] });
-    const getCommit = vi.fn().mockResolvedValueOnce({
-      data: {
-        files: [
-          { filename: "specification/bar/tspconfig.yaml", status: "modified" },
-          // Renamed into a folder that looks like an older API version; must be ignored.
-          { filename: "specification/bar/2020-01-01/legacy.tsp", status: "renamed" },
-          { filename: "specification/bar/2025-09-01/main.tsp", status: "added" },
-        ],
-      },
+    const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
+      data: [{ number: 123 }],
+    });
+    const get = vi.fn().mockResolvedValue({
+      data: { labels: [] },
+    });
+    const listFiles = vi.fn().mockResolvedValueOnce({
+      data: [
+        { filename: "specification/bar/tspconfig.yaml", status: "modified" },
+        // Renamed into a folder that looks like an older API version; must be ignored.
+        { filename: "specification/bar/2020-01-01/legacy.tsp", status: "renamed" },
+        { filename: "specification/bar/2025-09-01/main.tsp", status: "added" },
+      ],
     });
 
     const result = await getTypeSpecProjectInfoFromCommit({
-      commitSha: "rename1",
+      commitSha: "abcdef",
       owner: "Azure",
       repo: "azure-rest-api-specs",
       workspace,
       octokit: {
         rest: {
           pulls: {
-            get: vi.fn(),
-            listFiles: vi.fn(),
+            get,
+            listFiles,
           },
           repos: {
             listPullRequestsAssociatedWithCommit,
-            getCommit,
+            getCommit: vi.fn(),
           },
         },
       },
@@ -651,7 +660,7 @@ describe("TypeSpec metadata resolution", () => {
     expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
-  it("uses the first API version when metadata contains multiple versions", () => {
+  it("keeps the existing first-version selection when metadata contains multiple versions", () => {
     const metadata = createMetadata({
       csharp: [
         {
@@ -697,7 +706,7 @@ describe("TypeSpec metadata resolution", () => {
     expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
-  it("skips language configs with missing apiVersion and logs warning", () => {
+  it("keeps the existing concrete version when one language has no version", () => {
     const metadata = createMetadata({
       csharp: [
         {
@@ -760,7 +769,6 @@ describe("TypeSpec metadata resolution", () => {
       csharp: [
         {
           emitterName: "csharp",
-          packageName: "Azure.ResourceManager.Sample",
         },
       ],
     });
@@ -795,12 +803,15 @@ describe("TypeSpec metadata resolution", () => {
     });
   });
 
-  it("rejects API versions outside the stable and preview formats", async () => {
-    const projectPath = join(workspace, "specification/foo");
-    mockMetadataMap.set(projectPath, { apiVersion: "latest", sdkType: "stable" });
+  it.each(["", "latest", "v1"])(
+    "accepts metadata API version '%s' without date validation",
+    async (apiVersion) => {
+      const projectPath = join(workspace, "specification/foo");
+      mockMetadataMap.set(projectPath, { apiVersion, sdkType: "stable" });
 
-    await expect(
-      getTypeSpecProjectVersionFromMetadata(projectPath, "specification/foo"),
-    ).rejects.toThrow("API version 'latest' must use YYYY-MM-DD or YYYY-MM-DD-preview format");
-  });
+      await expect(
+        getTypeSpecProjectVersionFromMetadata(projectPath, "specification/foo"),
+      ).resolves.toEqual({ tspProjectPath: "specification/foo", apiVersion, isPreview: false });
+    },
+  );
 });
