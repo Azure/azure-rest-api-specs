@@ -167,6 +167,12 @@ using Microsoft.Cdn;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Route.properties);
 
+@@clientName(ErrorPolicies.create::parameters.resource, "errorPolicy");
+@@clientName(
+  ErrorPolicies.update::parameters.properties,
+  "errorPolicyUpdateProperties"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RuleSet.properties);
 

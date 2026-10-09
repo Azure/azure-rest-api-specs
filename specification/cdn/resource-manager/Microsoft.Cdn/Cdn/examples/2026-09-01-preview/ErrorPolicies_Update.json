@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "errorPolicyName": "errorPolicy1",
+    "errorPolicyUpdateProperties": {
+      "properties": {
+        "negativeCachingConfiguration": {
+          "cacheTtlInSeconds": 60
+        }
+      }
+    },
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "errorPolicy1",
+        "type": "Microsoft.Cdn/profiles/errorpolicies",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/errorpolicies/errorPolicy1",
+        "properties": {
+          "deploymentStatus": "NotStarted",
+          "description": "Cache origin failures briefly to shield the origin.",
+          "negativeCachingConfiguration": {
+            "cacheBehavior": "Override",
+            "cacheTtlInSeconds": 60
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/operationresults/operationId?api-version=2026-09-01-preview",
+        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/operationresults/operationId/profileresults/profile1/errorpolicyresults/errorPolicy1?api-version=2026-09-01-preview",
+        "retry-after": "10"
+      }
+    }
+  },
+  "operationId": "ErrorPolicies_Update",
+  "title": "ErrorPolicies_Update"
+}

@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "errorPolicy1",
+            "type": "Microsoft.Cdn/profiles/errorpolicies",
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/errorpolicies/errorPolicy1",
+            "properties": {
+              "deploymentStatus": "NotStarted",
+              "description": "Cache origin failures briefly to shield the origin.",
+              "negativeCachingConfiguration": {
+                "cacheBehavior": "Override",
+                "cacheTtlInSeconds": 30
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "errorPolicy2",
+            "type": "Microsoft.Cdn/profiles/errorpolicies",
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/errorpolicies/errorPolicy2",
+            "properties": {
+              "deploymentStatus": "NotStarted",
+              "description": "Let the origin decide how long its errors stay cached.",
+              "negativeCachingConfiguration": {
+                "cacheBehavior": "HonorOrigin"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  },
+  "operationId": "ErrorPolicies_ListByProfile",
+  "title": "ErrorPolicies_ListByProfile"
+}
