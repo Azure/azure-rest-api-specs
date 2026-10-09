@@ -1,0 +1,39 @@
+{
+  "title": "MigrateProjects_GenerateWavePlan_MaximumSet",
+  "operationId": "MigrateProjects_GenerateWavePlan",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "body": {
+      "assessmentArmId": "rwwoftf",
+      "migrationPath": "waehojas"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "wavePlanName": "WavePlan_assessment1_PaaSPreferred",
+        "provisioningState": "Succeeded",
+        "planSource": "SystemGenerated",
+        "assessmentArmId": "rwwoftf",
+        "migrationPath": "PaaSPreferred",
+        "artifactProperties": {
+          "artifactId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/MyResourceGroup/providers/Microsoft.Migrate/artifactStores/store1/artifacts/artifact1",
+          "versionId": "1"
+        },
+        "summary": {
+          "numberOfWaves": 12,
+          "risk": "Low",
+          "confidence": "High"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

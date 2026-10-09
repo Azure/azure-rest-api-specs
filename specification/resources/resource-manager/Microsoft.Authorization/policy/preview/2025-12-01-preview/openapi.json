@@ -447,6 +447,9 @@
           "Create or update a policy exemption": {
             "$ref": "./examples/createOrUpdatePolicyExemption.json"
           },
+          "Create or update a policy exemption with exemption management mode": {
+            "$ref": "./examples/createOrUpdatePolicyExemptionWithExemptionManagementMode.json"
+          },
           "Create or update a policy exemption with resource selectors": {
             "$ref": "./examples/createOrUpdatePolicyExemptionWithResourceSelectors.json"
           }
@@ -504,6 +507,9 @@
           }
         },
         "x-ms-examples": {
+          "Update a policy exemption with exemption management mode": {
+            "$ref": "./examples/updatePolicyExemptionWithExemptionManagementMode.json"
+          },
           "Update a policy exemption with resource selectors": {
             "$ref": "./examples/updatePolicyExemptionWithResourceSelectors.json"
           }
@@ -4971,6 +4977,30 @@
         ]
       }
     },
+    "ExemptionManagementMode": {
+      "type": "string",
+      "description": "The mode indicating how the policy exemption is managed. Possible values are Admin and UserSelfServe.",
+      "enum": [
+        "Admin",
+        "UserSelfServe"
+      ],
+      "x-ms-enum": {
+        "name": "ExemptionManagementMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Admin",
+            "value": "Admin",
+            "description": "This mode means the exemption is managed by an administrator and requires permission for the policy exemption action."
+          },
+          {
+            "name": "UserSelfServe",
+            "value": "UserSelfServe",
+            "description": "This mode means the exemption is managed by the user it applies to, through the self-serve exemption settings on the policy assignment."
+          }
+        ]
+      }
+    },
     "ExternalEndpointResult": {
       "type": "string",
       "description": "The result of the external endpoint. Possible values are Succeeded and Failed.",
@@ -5864,6 +5894,31 @@
         "assignmentScopeValidation": {
           "$ref": "#/definitions/AssignmentScopeValidation",
           "description": "The option whether validate the exemption is at or under the assignment scope."
+        },
+        "exemptionManagementMode": {
+          "type": "string",
+          "description": "The mode indicating how the policy exemption is managed.",
+          "default": "Admin",
+          "enum": [
+            "Admin",
+            "UserSelfServe"
+          ],
+          "x-ms-enum": {
+            "name": "ExemptionManagementMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Admin",
+                "value": "Admin",
+                "description": "This mode means the exemption is managed by an administrator and requires permission for the policy exemption action."
+              },
+              {
+                "name": "UserSelfServe",
+                "value": "UserSelfServe",
+                "description": "This mode means the exemption is managed by the user it applies to, through the self-serve exemption settings on the policy assignment."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -5899,6 +5954,10 @@
         "assignmentScopeValidation": {
           "$ref": "#/definitions/AssignmentScopeValidation",
           "description": "The option whether validate the exemption is at or under the assignment scope."
+        },
+        "exemptionManagementMode": {
+          "$ref": "#/definitions/ExemptionManagementMode",
+          "description": "The mode indicating how the policy exemption is managed."
         }
       }
     },

@@ -1,142 +1,79 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-07-24
-     Derived from:
-       - Azure REST API Guidelines (vNext)
-         https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
-       - TypeSpec visibility docs (Lifecycle visibility modifiers)
-     Data-plane counterpart to property-mutability.md, which is ARM-specific
-     (x-ms-mutability, What-If, Change Analysis). Do not apply that file here. -->
+     Upstream alignment: 2026-08-13
+     Derived from the Azure REST API Guidelines (vNext) and TypeSpec lifecycle
+     visibility guidance. Upstream documents take precedence. -->
 
 # Data-Plane Visibility and Secrets
 
-Applies to data-plane TypeSpec. Data-plane expresses mutability through
-`@visibility(Lifecycle.Read | Lifecycle.Create | Lifecycle.Update)`, not through
-`x-ms-mutability`. The ARM reasoning in
-[`property-mutability.md`](property-mutability.md) -- What-If noise, ARM Change
-Analysis -- does not apply; the underlying principle does.
+Data-plane TypeSpec expresses request/response visibility through
+`Lifecycle.Read`, `Lifecycle.Create`, and `Lifecycle.Update`. Review semantic
+exposure and model reachability, not local decorator syntax.
 
 > **Authoritative upstream:** [field mutability](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-field-mutability),
-> [round-trippable resource schemas](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-response-body-is-resource-schema),
+> [round-trippable schemas](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-response-body-is-resource-schema),
 > [no secrets in GET responses](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-no-secrets-in-get-response),
-> [retrieving secrets through POST](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-secrets-allowed-in-post-response),
 > and
-> [null response values](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#json-null-response-values)
-> in the Azure REST API Guidelines. This file maps that wire contract to
-> TypeSpec visibility; the upstream Guidelines take precedence.
+> [retrieving secrets through POST](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#rest-secrets-allowed-in-post-response).
 
-Secret **detection** signals live in [`secret-detection.md`](secret-detection.md)
-and are not restated here. This file covers how visibility and secrecy interact.
+## TypeSpec mapping
 
----
+- `@visibility(Lifecycle.Read)` is response-only; `Lifecycle.Create` and
+  `Lifecycle.Update` permit request use. Excluding `Lifecycle.Read` makes a
+  property write-only.
+- Mark credential-bearing properties with `@secret` and write-only visibility:
+  `@visibility(Lifecycle.Create, Lifecycle.Update)`.
+- Evaluate effective visibility through every request, GET, and LIST model that
+  can reach the property.
 
-## DP-VIS-01: No write-only non-secret property
+Use [`secret-detection.md`](secret-detection.md) to decide whether a property is
+credential-bearing.
 
-- **Rule ID:** `DP-VIS-01`
-- **Severity:** Warning
+## DP-VIS-01: Stored non-secret properties should round-trip
 
-Upstream anchor: the Azure REST API Guidelines say
-:white\*check_mark: **DO** \_use the same JSON schema for PUT request/response,
-PATCH response, GET response, and POST request/response on a given URL path …
-this allows one SDK type for input/output operations and **enables the response
-to be passed back in a request\***
-([`rest-response-body-is-resource-schema`](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)).
-The round-trip argument below is that clause applied to a single property.
-**The rule is this skill's synthesis, so its strength is the `Severity` field
-above, not the upstream verb** — a write-only property degrades round-tripping
-without breaking the shared schema, so it does not warrant Blocking.
+- **Severity:** Warning.
 
-A property accepted on write but never returned on read should be either a
-secret or explicitly justified. Otherwise the caller cannot read back what they
-configured, cannot diff desired against actual state, and cannot round-trip a
-GET into a PUT.
+Flag a durable non-secret property accepted on create/update but never returned
+on read when no documented semantic reason explains the write-only behavior.
 
-Flag any property with `Lifecycle.Create`/`Lifecycle.Update` but not
-`Lifecycle.Read` that is not credential-shaped.
+Do not flag secrets, one-shot tokens, idempotency inputs, or consumed values
+whose effect is fully represented by a different readable property.
 
-**Legitimate exceptions -- do not flag:**
+## DP-VIS-02: Credentials must not be readable
 
-- Genuine secrets (see `DP-VIS-02`).
-- One-shot inputs that are consumed rather than stored -- a
-  `confirmationToken`, an idempotency key.
-- Inputs whose effect is fully observable through a different, readable property.
+- **Severity:** Blocking.
+- **Strength:** `DO NOT` return secrets from GET responses.
 
-## DP-VIS-02: Secrets accepted on write, never returned on read
+Flag a credential-bearing property that is reachable from GET or ordinary
+resource responses. The fix should mark the value as secret, remove read
+visibility, and expose intentional retrieval only through a separately
+authorized operation. In TypeSpec, use `@secret` and write-only lifecycle
+visibility for the credential-bearing property.
 
-- **Rule ID:** `DP-VIS-02`
-- **Severity:** Blocking
+Property names such as `password`, `token`, `credential`, `connectionString`,
+`sasUri`, `clientSecret`, and `accountKey` are signals, not proof. Confirm the
+documented semantics before reporting.
 
-A credential-bearing property **MUST NOT** be readable. Concretely:
+## DP-VIS-03: LIST responses must not expose secrets
 
-- Mark it `@secret`.
-- Give it write-only visibility -- `@visibility(Lifecycle.Create, Lifecycle.Update)`
-  with no `Lifecycle.Read`.
-- Never include a real-looking value in an example.
+- **Severity:** Blocking.
 
-Flag as Blocking any property whose name matches the credential signals in
-[`secret-detection.md`](secret-detection.md) (`key`, `secret`, `password`,
-`token`, `credential`, `connectionString`, `sasUri`, `clientSecret`,
-`accountKey`) that is readable.
+Follow model reachability. A shared model may carry a secret into a LIST response
+even when the changed property is declared far from the list operation.
 
-The correct pattern for exposing a credential is a **separate, explicitly
-authorized operation** (`:listKeys`, `:getConnectionString`) rather than
-inclusion in the resource body -- which also keeps it out of LIST responses,
-where secrets leak in bulk.
+## DP-VIS-04: Visibility must remain coherent across a model graph
 
-## DP-VIS-03: Secrets in list responses
+- **Severity:** Warning.
 
-- **Rule ID:** `DP-VIS-03`
-- **Severity:** Blocking
+Flag the same semantic property being writable through one reachable model and
+read-only through another, or a required request property that callers cannot
+supply because its effective visibility is read-only.
 
-Even where a single-resource read of a credential is intentional, a **list**
-must not return it. Follow the graph: a model used by both `get` and `list`
-carries its secret into the list response by default. This is exactly the check
-[`think-in-graphs.md`](think-in-graphs.md) is for, and it is invisible when
-reading the model definition alone.
+Do not report basic key-visibility or decorator-usage diagnostics already
+produced mechanically.
 
-## DP-VIS-04: Visibility consistency across a model graph
+## Out of scope
 
-- **Rule ID:** `DP-VIS-04`
-- **Severity:** Warning
-
-Flag:
-
-- A property marked read-only on a parent model but writable on a nested model
-  reachable from the same request.
-- A required property with `Lifecycle.Read`-only visibility -- required on
-  create, but the caller cannot supply it.
-- A property that is read-only in one API version and writable in the next with
-  no `@added`/`@renamedFrom` explanation (see `DP-VERSION-03`).
-
-## DP-VIS-05: Server-assigned properties
-
-- **Rule ID:** `DP-VIS-05`
-- **Severity:** Suggestion
-
-Properties the service assigns -- `id`, `createdAt`, `updatedAt`, `etag`,
-`status`, computed counts -- **SHOULD** be `@visibility(Lifecycle.Read)`. If
-they are writable, callers will attempt to set them and the service will either
-silently ignore the value (confusing) or reject the request (a round-trip
-failure from GET to PUT).
-
-## DP-VIS-06: Nullability vs. optionality
-
-- **Rule ID:** `DP-VIS-06`
-- **Severity:** Suggestion
-
-`prop?: string` (may be absent) and `prop: string | null` (present, explicitly
-no value) mean different things and generate different SDK surfaces. A property
-declared as both optional **and** nullable usually indicates the author did not
-decide which they meant. Raise it as a question, with the distinction stated.
-
----
-
-## What this file does not cover
-
-- Whether the service actually rejects writes to read-only properties -- runtime,
-  out of scope.
-- ARM `x-ms-mutability` and What-If behavior -- see
-  [`property-mutability.md`](property-mutability.md), wrong plane.
-- `secret-prop` where the linter enforces it (🔒 -- see
-  [`data-plane-linter-rule-coverage.md`](data-plane-linter-rule-coverage.md));
-  the agent still owns _whether a property is a secret in the first place_,
-  which is a naming/semantics judgment no rule makes.
+- Server-assigned-property suggestions and optional-vs-nullable questions.
+- Whether the running service rejects writes to read-only properties.
+- Authentication declaration presence and authorization enforcement.
+- ARM `x-ms-mutability`, What-If, and Change Analysis behavior.

@@ -313,6 +313,42 @@ union EnableStatus {
 }
 
 /**
+ * Whether a TCP reset is sent when a session is terminated
+ */
+@added(Versions.v2026_08_27_preview)
+union TcpReset {
+  string,
+
+  /**
+   * A TCP reset is sent to the client and server
+   */
+  Enabled: "Enabled",
+
+  /**
+   * No TCP reset is sent
+   */
+  Disabled: "Disabled",
+}
+
+/**
+ * Hash algorithm used to distribute inbound traffic
+ */
+@added(Versions.v2026_08_27_preview)
+union LoadDistribution {
+  string,
+
+  /**
+   * Five-tuple hash: source IP, source port, destination IP, destination port and protocol
+   */
+  Default: "Default",
+
+  /**
+   * Two-tuple hash: source IP and destination IP
+   */
+  SourceIP: "SourceIP",
+}
+
+/**
  * Possible log types
  */
 union LogType {
@@ -1248,6 +1284,14 @@ model FirewallDeploymentProperties {
   firewallSku?: string = "STANDARD";
 
   /**
+   * Time in minutes to keep serving existing traffic during scale-in or upgrade events before removing a firewall instance. Can only be set on PUT, not updatable via PATCH, Default will be 15.
+   */
+  @added(Versions.v2026_08_27_preview)
+  @minValue(15)
+  @maxValue(120)
+  sessionDrainTimeoutInMinutes?: int32 = 15;
+
+  /**
    * Network settings
    */
   networkProfile: NetworkProfile;
@@ -1350,6 +1394,20 @@ model NetworkProfile {
    * Array of ipv4 destination address for which source NAT is to be performed
    */
   privateSourceNatRulesDestination?: string[];
+
+  /**
+   * Time in minutes an outbound source NAT session can stay inactive before termination, Default will be 4.
+   */
+  @added(Versions.v2026_08_27_preview)
+  @minValue(4)
+  @maxValue(120)
+  outboundIdleTimeoutInMinutes?: int32;
+
+  /**
+   * Send a TCP reset when an inactive outbound source NAT session is terminated, Default will be Enabled.
+   */
+  @added(Versions.v2026_08_27_preview)
+  outboundTcpReset?: TcpReset;
 }
 
 /**
@@ -1450,7 +1508,7 @@ model PanoramaConfig {
   /**
    * VM auth key for panorama connectivity
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Sensitive value returned by this read-only property in the released contract since the first stable version (2022-08-29). Applying @secret now emits `format: password` + `x-ms-secret: true`, which openapi-diff reports as TypeFormatChanged (Error) against every shipped version, and @secret cannot be version-gated (no versioning decorator targets it). Deferred to a future breaking-change window."
   @visibility(Lifecycle.Read)
   vmAuthKey?: string;
 
@@ -1566,6 +1624,26 @@ model FrontendSetting {
    * Backend configurations
    */
   backendConfiguration: EndpointConfiguration;
+
+  /**
+   * Time in minutes an inbound session can stay inactive before termination, Default will be 4.
+   */
+  @added(Versions.v2026_08_27_preview)
+  @minValue(4)
+  @maxValue(100)
+  idleTimeoutInMinutes?: int32;
+
+  /**
+   * Send a TCP reset when an inactive inbound session is terminated, Default will be Disabled.
+   */
+  @added(Versions.v2026_08_27_preview)
+  tcpReset?: TcpReset;
+
+  /**
+   * Hash algorithm used to distribute inbound traffic, Default will be a five-tuple hash.
+   */
+  @added(Versions.v2026_08_27_preview)
+  loadDistribution?: LoadDistribution;
 }
 
 /**
@@ -1890,7 +1968,7 @@ model ApplicationInsights {
   /**
    * Application Insights key
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Sensitive value present in the released contract since the first stable version (2022-08-29). Applying @secret now emits `format: password` + `x-ms-secret: true`, which openapi-diff reports as TypeFormatChanged (Error) against every shipped version, and @secret cannot be version-gated (no versioning decorator targets it). Deferred to a future breaking-change window."
   key?: string;
 }
 
@@ -1986,13 +2064,13 @@ model MonitorLog {
   /**
    * Primary Key value for Monitor
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Sensitive value present in the released contract since the first stable version (2022-08-29). Applying @secret now emits `format: password` + `x-ms-secret: true`, which openapi-diff reports as TypeFormatChanged (Error) against every shipped version, and @secret cannot be version-gated (no versioning decorator targets it). Deferred to a future breaking-change window."
   primaryKey?: string;
 
   /**
    * Secondary Key value for Monitor
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Sensitive value present in the released contract since the first stable version (2022-08-29). Applying @secret now emits `format: password` + `x-ms-secret: true`, which openapi-diff reports as TypeFormatChanged (Error) against every shipped version, and @secret cannot be version-gated (no versioning decorator targets it). Deferred to a future breaking-change window."
   secondaryKey?: string;
 }
 

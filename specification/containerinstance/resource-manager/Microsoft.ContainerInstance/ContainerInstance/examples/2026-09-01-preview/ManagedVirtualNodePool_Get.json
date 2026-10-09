@@ -1,0 +1,32 @@
+{
+  "operationId": "ManagedVirtualNodePools_Get",
+  "title": "Get a managed virtual node pool",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "demo",
+    "managedVirtualNodePoolName": "demo-pool",
+    "api-version": "2026-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/managedVirtualNodePools/demo-pool",
+        "name": "demo-pool",
+        "type": "Microsoft.ContainerInstance/managedVirtualNodePools",
+        "location": "eastus",
+        "tags": {
+          "env": "prod"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "aksClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerService/managedClusters/demo-aks",
+          "managedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ManagedIdentity/userAssignedIdentities/demo-mi",
+          "aiAgentGroupResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/aiAgentsGroups/demo-aag",
+          "subnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.Network/virtualNetworks/demo-vnet/subnets/demo-subnet",
+          "minNodes": 1,
+          "maxNodes": 5
+        }
+      }
+    }
+  }
+}

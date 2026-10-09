@@ -1,11 +1,13 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -24,12 +26,40 @@ model AzureKeyVaultSecretProviderClass
 
 @@maxLength(AzureKeyVaultSecretProviderClass.name, 253);
 
+/** Azure clouds for the in-cluster Azure Key Vault provider. */
+@added(Versions.v2026_09_25_preview)
+union AzureCloudName {
+  string,
+
+  /** Azure public cloud. */
+  AzurePublicCloud: "AzurePublicCloud",
+
+  /** Azure US Government cloud. */
+  AzureUSGovernmentCloud: "AzureUSGovernmentCloud",
+
+  /** Azure China cloud. */
+  AzureChinaCloud: "AzureChinaCloud",
+
+  /** Azure Germany cloud. */
+  AzureGermanCloud: "AzureGermanCloud",
+
+  /** Azure Stack cloud. */
+  AzureStackCloud: "AzureStackCloud",
+}
+
 @doc("The properties of the AzureKeyVaultSecretProviderClass.")
 model AzureKeyVaultSecretProviderClassProperties {
   // Azure Key Vault Provider properties
   // https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/usage/
   @doc("The name of the Azure Key Vault to sync secrets from.")
   keyvaultName: string;
+
+  /**
+   * The Azure cloud containing the key vault.
+   * If omitted, the in-cluster Azure Key Vault provider's configured default cloud is used.
+   */
+  @added(Versions.v2026_09_25_preview)
+  cloudName?: AzureCloudName;
 
   @doc("The user assigned managed identity client ID that should be used to access the Azure Key Vault.")
   @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")

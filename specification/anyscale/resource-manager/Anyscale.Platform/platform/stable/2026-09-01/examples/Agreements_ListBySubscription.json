@@ -1,0 +1,36 @@
+{
+  "operationId": "Agreements_ListBySubscription",
+  "title": "List the agreements in a subscription",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Anyscale.Platform/agreements/default",
+            "name": "default",
+            "type": "Anyscale.Platform/agreements",
+            "systemData": {
+              "createdBy": "jane.doe@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-07-01T18:30:00Z",
+              "lastModifiedBy": "jane.doe@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-07-01T18:30:00Z"
+            },
+            "properties": {
+              "displayName": "Anyscale Platform Agreement",
+              "agreementLink": "https://agreements.anyscale.com/azure/default/v1.pdf",
+              "provisioningState": "Succeeded",
+              "status": "Active",
+              "effectiveDate": "2026-07-01T18:30:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

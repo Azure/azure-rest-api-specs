@@ -2438,6 +2438,10 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2682,7 +2686,7 @@
         },
         "targetKubernetesVersion": {
           "type": "string",
-          "description": "  This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, \"1.30\".\n  By default, this is empty.\n  If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.\n  If upgrade channel is Rapid, Stable or NodeImage, this field must be empty."
+          "description": "  This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, \"1.30\".\n  By default, this is empty.\n  If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.\n  If upgrade channel is not TargetKubernetesVersion, this field must be empty."
         },
         "longTermSupport": {
           "type": "boolean",
@@ -3848,7 +3852,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the group.\nIt must match a group name of an existing fleet member. ",
+          "description": "Name of the group.\nIt must match a group name of an existing fleet member.",
           "minLength": 1,
           "maxLength": 50,
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"

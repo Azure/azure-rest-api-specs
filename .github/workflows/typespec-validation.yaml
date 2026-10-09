@@ -19,21 +19,17 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 2
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Validate Impacted Specs
-        run: |
-          # Keep processing when errors are written. Nonzero exit will mark the 
-          # step as failed. 
-          $ErrorActionPreference = 'Continue'
-
-          # Only "main" and "RPSaaSMaster" should validate all specs if core files change
-          $ignoreCoreFiles = -not (@('main', 'RPSaaSMaster') -contains $Env:GITHUB_BASE_REF)
-
-          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:$ignoreCoreFiles
-        shell: pwsh
+        # Only main and RPSaaSMaster validate all specs when core files change.
+        run: >-
+          node eng/tools/typespec-validation/cmd/tsv.js --changed --git-clean
+          ${{ runner.debug == '1' && '--verbose' || '' }}
+          ${{ github.base_ref != 'main' && github.base_ref != 'RPSaaSMaster' && '--ignore-core-files' || '' }}

@@ -1,0 +1,25 @@
+{
+  "title": "Generate a group best-updates compliance report",
+  "description": "Generate a GroupBestUpdates compliance report for a namespace.",
+  "operationId": "Namespaces_GenerateReport",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "body": {
+      "reportTarget": "my-group-1",
+      "reportType": "GroupBestUpdatesComplianceReport"
+    },
+    "namespaceName": "my-namespace-1",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DeviceRegistry/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-11-02-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DeviceRegistry/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-11-02-preview",
+        "Retry-After": 30
+      }
+    },
+    "204": {}
+  }
+}

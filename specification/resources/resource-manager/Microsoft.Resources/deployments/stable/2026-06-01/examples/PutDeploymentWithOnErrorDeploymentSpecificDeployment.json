@@ -1,0 +1,171 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01",
+    "deploymentName": "my-deployment",
+    "parameters": {
+      "properties": {
+        "mode": "Complete",
+        "onErrorDeployment": {
+          "type": "SpecificDeployment",
+          "deploymentName": "name-of-deployment-to-use"
+        },
+        "parameters": {},
+        "templateLink": {
+          "uri": "https://example.com/exampleTemplate.json"
+        }
+      }
+    },
+    "resourceGroupName": "my-resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "my-deployment",
+        "type": "Microsoft.Resources/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/my-resource-group/providers/Microsoft.Resources/deployments/my-deployment",
+        "properties": {
+          "correlationId": "00000000-0000-0000-0000-000000000000",
+          "dependencies": [
+            {
+              "dependsOn": [
+                {
+                  "id": "{resourceid}",
+                  "resourceName": "VNet1",
+                  "resourceType": "Microsoft.Network/virtualNetworks"
+                }
+              ],
+              "id": "{resourceid}",
+              "resourceName": "VNet1/Subnet1",
+              "resourceType": "Microsoft.Network/virtualNetworks/subnets"
+            },
+            {
+              "dependsOn": [
+                {
+                  "id": "{resourceid}",
+                  "resourceName": "VNet1",
+                  "resourceType": "Microsoft.Network/virtualNetworks"
+                },
+                {
+                  "id": "{resourceid}",
+                  "resourceName": "VNet1/Subnet1",
+                  "resourceType": "Microsoft.Network/virtualNetworks/subnets"
+                }
+              ],
+              "id": "{resourceid}",
+              "resourceName": "VNet1/Subnet2",
+              "resourceType": "Microsoft.Network/virtualNetworks/subnets"
+            }
+          ],
+          "duration": "PT0.8204881S",
+          "mode": "Complete",
+          "onErrorDeployment": {
+            "type": "SpecificDeployment",
+            "deploymentName": "name-of-deployment-to-use"
+          },
+          "parameters": {},
+          "providers": [
+            {
+              "namespace": "Microsoft.Network",
+              "resourceTypes": [
+                {
+                  "locations": [
+                    "centralus"
+                  ],
+                  "resourceType": "virtualNetworks"
+                },
+                {
+                  "locations": [
+                    "centralus"
+                  ],
+                  "resourceType": "virtualNetworks/subnets"
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Accepted",
+          "templateLink": {
+            "contentVersion": "1.0.0.0",
+            "uri": "https://example.com/exampleTemplate.json"
+          },
+          "timestamp": "2019-03-01T00:00:00.0000000Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "my-deployment",
+        "type": "Microsoft.Resources/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/my-resource-group/providers/Microsoft.Resources/deployments/my-deployment",
+        "properties": {
+          "correlationId": "00000000-0000-0000-0000-000000000000",
+          "dependencies": [
+            {
+              "dependsOn": [
+                {
+                  "id": "{resourceid}",
+                  "resourceName": "VNet1",
+                  "resourceType": "Microsoft.Network/virtualNetworks"
+                }
+              ],
+              "id": "{resourceid}",
+              "resourceName": "VNet1/Subnet1",
+              "resourceType": "Microsoft.Network/virtualNetworks/subnets"
+            },
+            {
+              "dependsOn": [
+                {
+                  "id": "{resourceid}",
+                  "resourceName": "VNet1",
+                  "resourceType": "Microsoft.Network/virtualNetworks"
+                },
+                {
+                  "id": "{resourceid}",
+                  "resourceName": "VNet1/Subnet1",
+                  "resourceType": "Microsoft.Network/virtualNetworks/subnets"
+                }
+              ],
+              "id": "{resourceid}",
+              "resourceName": "VNet1/Subnet2",
+              "resourceType": "Microsoft.Network/virtualNetworks/subnets"
+            }
+          ],
+          "duration": "PT0.8204881S",
+          "mode": "Complete",
+          "onErrorDeployment": {
+            "type": "SpecificDeployment",
+            "deploymentName": "name-of-deployment-to-use"
+          },
+          "parameters": {},
+          "providers": [
+            {
+              "namespace": "Microsoft.Network",
+              "resourceTypes": [
+                {
+                  "locations": [
+                    "centralus"
+                  ],
+                  "resourceType": "virtualNetworks"
+                },
+                {
+                  "locations": [
+                    "centralus"
+                  ],
+                  "resourceType": "virtualNetworks/subnets"
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Accepted",
+          "templateLink": {
+            "contentVersion": "1.0.0.0",
+            "uri": "https://example.com/exampleTemplate.json"
+          },
+          "timestamp": "2019-03-01T00:00:00.0000000Z"
+        }
+      }
+    }
+  },
+  "operationId": "Deployments_CreateOrUpdate",
+  "title": "Create a deployment that will redeploy another deployment on failure"
+}

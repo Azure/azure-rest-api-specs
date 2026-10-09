@@ -14,14 +14,12 @@ Currently, we only support `OpenAPI Specification 2.0` or `Swagger V2.0`.
 * **[`Azure REST API guidelines`](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)**
 * **[`Azure OpenAPI Style Guide`](https://github.com/Azure/azure-api-style-guide/blob/main/openapi-style-guide.md)**
 * **[`Resource Provider Guidelines`](https://aka.ms/rpguidelines)**
-* **[`Directory structure`](https://github.com/Azure/azure-rest-api-specs/blob/main/README.md#directory-structure)**
-* **[`Structure of a Swagger specification`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/creating-swagger.md)**
-* **[`Sample Swagger specification`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/Microsoft.YourServiceName/stable/YYYY-MM-DD/YourServiceName.json)**
-* **[`Sample Readme.md`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/samplereadme.md)**
-* **[`Authoring good Swagger descriptions`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-authoring-descriptions.md)**
-* **[`Validation tools`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/SwaggerValidationTools.md)**
-   * [`Validation checks through automated tools`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md)
-   * [`Validation checks done manually`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-manual-guidelines.md)
-   * [`OAV Validation checks`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md)
+* **[`Directory structure`](https://github.com/Azure/azure-rest-api-specs/wiki/Specification-Folder-Structure-Guide#overview-of-the-folder-structure)**
+* **[`OpenAPI 2.0 specification`](https://spec.openapis.org/oas/v2.0.html)**
+* **[`Sample OpenAPI specification`](./samplefiles/Microsoft.YourServiceName/stable/YYYY-MM-DD/YourServiceName.json)**
+* **[`Sample README.md`](./samplefiles/README.md)**
+* **[`CI fix guide`](./ci-fix.md)**
+   * [`Validation checks through automated tools`](./openapi-authoring-automated-guidelines.md)
+   * [`OAV Validation checks`](./Semantic-and-Model-Violations-Reference.md)
 * **[`Breaking Changes guidelines`](https://aka.ms/AzBreakingChangesPolicy)**
-* **[`x-ms-examples`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md)**
+* **[`x-ms-examples`](./x-ms-examples.md)**

@@ -1,0 +1,38 @@
+{
+  "title": "List Jobs by Namespace",
+  "description": "List all jobs under a namespace.",
+  "operationId": "Jobs_ListByNamespace",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "namespaceName": "namespace-1",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/jobs/adr-job-update-01",
+            "location": "North Europe",
+            "name": "adr-job-update-01",
+            "properties": {
+              "definition": {
+                "schedulingType": "Continuous",
+                "updateResourceId": "updates/providers/contoso/names/windowsApp/versions/1.0"
+              },
+              "description": "Continuous firmware rollout for North Europe toasters.",
+              "jobType": "SoftwareUpdate",
+              "provisioningState": "Succeeded",
+              "target": {
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/groups/group-1"
+              },
+              "uuid": "91339e2f-7339-4b18-a6ae-dd3d392a4275"
+            },
+            "type": "Microsoft.DeviceRegistry/namespaces/jobs"
+          }
+        ]
+      }
+    }
+  }
+}

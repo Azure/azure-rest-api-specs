@@ -8750,7 +8750,7 @@
         },
         "hostname": {
           "type": "string",
-          "description": "The hostname for the cloud VM cluster.",
+          "description": "The hostname for the cloud VM cluster. Hostname and domain combined length cannot exceed 112 characters.",
           "minLength": 1,
           "maxLength": 23,
           "x-ms-mutability": [
@@ -12004,6 +12004,13 @@
           }
         ]
       }
+    },
+    "LongTermBackUpRetentionPeriod": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Retention period, in days, for long-term backups",
+      "minimum": 90,
+      "maximum": 3650
     },
     "LongTermBackUpScheduleDetails": {
       "type": "object",

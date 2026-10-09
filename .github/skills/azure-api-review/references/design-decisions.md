@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-04-15
+     Upstream alignment: 2026-08-15
      Derived from:
        - ARM Wiki: api_contracts/guidelines/api_best_practices_and_design_choices.md
        - ARM Wiki: api_contracts/guidelines/openapi.md
@@ -16,8 +16,9 @@ service requirements, and platform compatibility.
 
 **How the agent should use this file:**
 
-- When a design pattern triggers one of these trade-offs, produce a
-  `💡 Suggestion` finding (never `🔴 Blocking`).
+- When a design pattern triggers one of these trade-offs, produce a Suggestion
+  finding, using the presentation marker defined by the consuming reviewer
+  (never Blocking).
 - Present the relevant factors and trade-off table to the reviewer.
 - Ask clarifying questions rather than making definitive calls.
 - The human reviewer makes the final decision.

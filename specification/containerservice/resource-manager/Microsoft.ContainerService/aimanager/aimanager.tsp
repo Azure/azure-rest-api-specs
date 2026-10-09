@@ -46,10 +46,9 @@ model AIManagerProperties {
   @doc("The name of the managed resource group created by the AI Manager to hold underlying infrastructure resources.")
   managedResourceGroupName?: string;
 
-  @added(Versions.v2026_08_02_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("""
-    The ARM resource ID of an existing AKS cluster to attach (bring-your-own). When omitted, AI Manager provisions and manages its own underlying cluster. The referenced cluster must be in the same region as this AI Manager, but may reside in a different subscription within the same Microsoft Entra tenant. This property is immutable after creation.
+    The Azure resource ID of an existing AKS cluster to attach (bring-your-own). When omitted, AI Manager provisions and manages its own underlying cluster. The referenced cluster must be in the same region as this AI Manager, but may reside in a different subscription within the same Microsoft Entra tenant. This property is immutable after creation.
     """)
   clusterResourceId?: ClusterResourceId;
 }
@@ -93,7 +92,7 @@ interface AIManagers {
 
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AIManager,
-    Azure.ResourceManager.Foundations.BaseParameters<AIManager> &
+    BaseParameters = Azure.ResourceManager.Foundations.BaseParameters<AIManager> &
       IfMatchParameters<AIManager> &
       IfNoneMatchParameters<AIManager>
   >;

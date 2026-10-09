@@ -12,7 +12,7 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Cluster Jobs resource
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @parentResource(EdgeMachine)
 model EdgeMachineJob
   is Azure.ResourceManager.ProxyResource<EdgeMachineJobProperties> {
@@ -26,7 +26,7 @@ model EdgeMachineJob
 
 @@doc(EdgeMachineJob.name, "Name of EdgeMachineJob");
 
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @armResourceOperations
 interface EdgeMachineJobs {
   /**

@@ -107,6 +107,8 @@ using Microsoft.DevOpsInfrastructure;
 
 @@clientName(StorageProfile, "DevOpsStorageProfile", "csharp");
 
+@@clientName(VmSize, "DevOpsVmSize", "csharp");
+
 @@clientName(VmssFabricProfile, "DevOpsVmssFabricProfile", "csharp");
 @@clientName(
   CheckNameAvailabilityResult,

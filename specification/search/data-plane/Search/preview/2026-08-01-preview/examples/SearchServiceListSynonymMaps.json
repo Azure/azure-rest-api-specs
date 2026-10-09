@@ -1,0 +1,39 @@
+{
+  "operationId": "SynonymMaps_List",
+  "title": "SearchServiceListSynonymMaps",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "api-version": "2026-08-01-preview",
+    "$select": null,
+    "search": "mysynonymmap",
+    "pageSize": 1,
+    "searchType": null,
+    "Accept": "application/json;odata.metadata=minimal",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "@odata.etag": "0x1234568AE7E58A1",
+            "name": "mysynonymmap",
+            "format": "solr",
+            "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA",
+            "encryptionKey": {
+              "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+              "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+              "keyVaultUri": "https://myKeyVault.vault.azure.net",
+              "isServiceLevelKey": false,
+              "accessCredentials": {
+                "applicationId": "00000000-0000-0000-0000-000000000000",
+                "applicationSecret": "<applicationSecret>"
+              }
+            }
+          }
+        ],
+        "@odata.nextLink": "https://typespecpreviewexampleservice.search.windows.net/synonymmaps?api-version=2026-08-01-preview&service=typespecpreviewexampleservice&$skiptoken=MXxteXN5bm9ueW1tYXB8bXlzeW5vbnltbWFwLTI%3d"
+      }
+    }
+  }
+}

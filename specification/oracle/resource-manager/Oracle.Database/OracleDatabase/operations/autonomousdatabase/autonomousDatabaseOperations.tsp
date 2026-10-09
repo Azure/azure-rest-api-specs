@@ -147,3 +147,5 @@ interface AutonomousDatabases
   "./examples/autonomousDatabase_delete.json",
   "Delete Autonomous Database"
 );
+
+@@Http.patch(AutonomousDatabases.update, #{ implicitOptionality: true });

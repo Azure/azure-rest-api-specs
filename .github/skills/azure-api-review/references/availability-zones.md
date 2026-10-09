@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-04-15
+     Upstream alignment: 2026-08-15
      Derived from:
        - ARM Wiki: AvailabilityZones.md
        - ARM Wiki: AvailabilityZoneCustomerExperience.md
@@ -14,7 +14,6 @@ through the `zones` property in their API specifications.
 
 - [ARM Wiki — Availability Zones](https://armwiki.azurewebsites.net/api_contracts/AvailabilityZones.html)
 - [ARM Wiki — Availability Zones Customer Experience](https://armwiki.azurewebsites.net/api_contracts/AvailabilityZoneCustomerExperience.html)
-- [Azure Resource Provider Contract — Resource API Reference](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)
 
 ---
 

@@ -26,17 +26,18 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 2
 
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
       - name: ARM Lease Validation
-        uses: actions/github-script@v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: armLeaseValidation } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-lease-validation/arm-lease-validation.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-lease-validation/arm-lease-validation.ts');
             return await armLeaseValidation(core);

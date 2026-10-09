@@ -289,6 +289,11 @@ namespace Microsoft.Authorization {
   "csharp"
 );
 @@clientName(
+  Microsoft.Authorization.ExemptionManagementMode,
+  "PolicyExemptionManagementMode",
+  "csharp"
+);
+@@clientName(
   Microsoft.Authorization.ExternalEvaluationEndpointInvocationResult,
   "PolicyExternalEvaluationEndpointInvocationResult",
   "csharp"

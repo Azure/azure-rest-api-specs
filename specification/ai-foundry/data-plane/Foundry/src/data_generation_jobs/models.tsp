@@ -12,7 +12,6 @@ const DataGenerationJobsRequiredPreviews = #{
 };
 
 @doc("The supported data generation job types.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 union DataGenerationJobType {
   string,
 
@@ -25,20 +24,19 @@ union DataGenerationJobType {
   @doc("Tool calling conversation between user and agent.")
   tool_use: "tool_use",
 
-  @doc("Task generation for evaluation scenarios.")
-  task_generation: "task_generation",
+  @doc("Simulation seed for evaluation scenarios.")
+  simulation_seed: "simulation_seed",
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("LLM model options for data generation jobs.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model DataGenerationModelOptions {
   @doc("Base model name used to generate data.")
   `model`: string;
 }
 
 @doc("Caller-supplied inputs for a data generation job.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+@discriminator("scenario")
 model DataGenerationJobInputs {
   @doc("The display name of the data generation job.")
   name: string;
@@ -46,32 +44,100 @@ model DataGenerationJobInputs {
   @doc("The sources used for the data generation job.")
   sources: DataGenerationJobSource[];
 
-  @doc("The options for the data generation job.")
-  options: DataGenerationJobOptions;
+  @doc("The generation configuration for the data generation job.")
+  generation_configuration: DataGenerationJobConfiguration;
 
   @doc("The scenario of the data generation job. Either for fine-tuning or evaluation.")
   scenario: DataGenerationJobScenario;
-
-  @doc("Optional caller-supplied metadata for the job's output. See individual fields for whether they apply to file outputs (fine-tuning scenarios), dataset outputs (evaluation scenario), or both.")
-  output_options?: DataGenerationJobOutputOptions;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("Output options for data generation job.")
+@doc("Caller-supplied inputs for an evaluation data generation job.")
+model EvaluationDataGenerationJobInputs extends DataGenerationJobInputs {
+  @doc("The scenario of the data generation job, which is Evaluation for this model.")
+  scenario: DataGenerationJobScenario.evaluation;
+
+  @doc("Optional dataset output configuration for the generated evaluation data.")
+  output_configuration?: EvaluationDataGenerationJobOutputConfiguration;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Caller-supplied inputs for a supervised fine-tuning data generation job. This is a preview feature.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-model DataGenerationJobOutputOptions {
-  @doc("Name to assign to the output. Used as the filename for Azure OpenAI file outputs (fine-tuning scenarios) and as the dataset name for dataset outputs (evaluation scenario).")
+model SupervisedFineTuningDataGenerationJobInputs
+  extends DataGenerationJobInputs {
+  @doc("The scenario of the data generation job, which is Supervised Fine-tuning preview for this model.")
+  scenario: DataGenerationJobScenario.supervised_finetuning_preview;
+
+  @doc("Optional file output configuration for the generated supervised fine-tuning data.")
+  output_configuration?: SupervisedFineTuningDataGenerationJobOutputConfiguration;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Caller-supplied inputs for a reinforcement fine-tuning data generation job. This is a preview feature.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model ReinforcementFineTuningDataGenerationJobInputs
+  extends DataGenerationJobInputs {
+  @doc("The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model.")
+  scenario: DataGenerationJobScenario.reinforcement_finetuning_preview;
+
+  @doc("Optional file output configuration for the generated reinforcement fine-tuning data.")
+  output_configuration?: ReinforcementFineTuningDataGenerationJobOutputConfiguration;
+}
+
+@doc("Dataset output configuration for an evaluation data generation job.")
+model EvaluationDataGenerationJobOutputConfiguration {
+  @doc("Dataset name to assign to the output.")
   name?: string;
 
-  @doc("Description to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.")
+  @doc("Description to assign to the output dataset.")
   description?: string;
 
-  @doc("Tags to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.")
+  @doc("Tags to assign to the output dataset.")
   tags?: Record<string>;
+
+  @doc("Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows.")
+  write_mode?: DataGenerationJobOutputWriteMode = DataGenerationJobOutputWriteMode.overwrite;
+}
+
+@doc("File output configuration for a supervised fine-tuning data generation job. This is a preview feature.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model SupervisedFineTuningDataGenerationJobOutputConfiguration {
+  @doc("Filename to assign to the generated fine-tuning file.")
+  name: string;
+
+  @doc("Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.")
+  write_mode?: DataGenerationJobOutputWriteMode = DataGenerationJobOutputWriteMode.overwrite;
+
+  @doc("File ID to merge into when `write_mode` is `merge`.")
+  merge_file_id?: string;
+}
+
+@doc("File output configuration for a reinforcement fine-tuning data generation job. This is a preview feature.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model ReinforcementFineTuningDataGenerationJobOutputConfiguration {
+  @doc("Filename to assign to the generated fine-tuning file.")
+  name: string;
+
+  @doc("Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.")
+  write_mode?: DataGenerationJobOutputWriteMode = DataGenerationJobOutputWriteMode.overwrite;
+
+  @doc("File ID to merge into when `write_mode` is `merge`.")
+  merge_file_id?: string;
+}
+
+@doc("The supported write modes for data generation job outputs.")
+union DataGenerationJobOutputWriteMode {
+  string,
+
+  @doc("Default behavior. Write newly generated output without merging it with an existing output. For dataset outputs, creates the next dataset version using only newly generated rows.")
+  overwrite: "overwrite",
+
+  @doc("Merge newly generated output into an existing output. For trace data generation jobs that output evaluation datasets, creates the next dataset version by merging newly generated rows with the latest existing dataset version and de-duping trace rows. For fine-tuning file outputs, merges into the file identified by `merge_file_id`.")
+  merge: "merge",
 }
 
 @doc("Result produced by a successful data generation job.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model DataGenerationJobResult {
   @doc("The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation.")
   outputs?: DataGenerationJobOutput[];
@@ -84,11 +150,20 @@ model DataGenerationJobResult {
 }
 
 @doc("Data Generation Job resource.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-model DataGenerationJob is JobLike<
-  DataGenerationJobResult,
-  DataGenerationJobInputs
-> {
+@discriminator("scenario")
+model DataGenerationJob is JobLike<DataGenerationJobResult, never> {
+  @doc("The display name of the data generation job.")
+  name: string;
+
+  @doc("The sources used for the data generation job.")
+  sources: DataGenerationJobSource[];
+
+  @doc("The generation configuration for the data generation job.")
+  generation_configuration: DataGenerationJobConfiguration;
+
+  @doc("The scenario of the data generation job. Either for fine-tuning or evaluation.")
+  scenario: DataGenerationJobScenario;
+
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
@@ -98,19 +173,50 @@ model DataGenerationJob is JobLike<
   finished_at?: FoundryTimestamp;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Evaluation data generation job resource.")
+model EvaluationDataGenerationJob extends DataGenerationJob {
+  @doc("The scenario of the data generation job, which is Evaluation for this model.")
+  scenario: DataGenerationJobScenario.evaluation;
+
+  @doc("Optional dataset output configuration for the generated evaluation data.")
+  output_configuration?: EvaluationDataGenerationJobOutputConfiguration;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Supervised fine-tuning data generation job resource. This is a preview feature.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model SupervisedFineTuningDataGenerationJob extends DataGenerationJob {
+  @doc("The scenario of the data generation job, which is Supervised Fine-tuning preview for this model.")
+  scenario: DataGenerationJobScenario.supervised_finetuning_preview;
+
+  @doc("Optional file output configuration for the generated supervised fine-tuning data.")
+  output_configuration?: SupervisedFineTuningDataGenerationJobOutputConfiguration;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@doc("Reinforcement fine-tuning data generation job resource. This is a preview feature.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model ReinforcementFineTuningDataGenerationJob extends DataGenerationJob {
+  @doc("The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model.")
+  scenario: DataGenerationJobScenario.reinforcement_finetuning_preview;
+
+  @doc("Optional file output configuration for the generated reinforcement fine-tuning data.")
+  output_configuration?: ReinforcementFineTuningDataGenerationJobOutputConfiguration;
+}
+
 @doc("Output information for a data generation job.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model DataGenerationJobOutput {
   @doc("The type of the output.")
   type: DataGenerationJobOutputType;
 }
 
-@doc("Azure OpenAI file output for a data generation job.")
+@doc("Azure OpenAI file output for a data generation job. This is a preview feature.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model FileDataGenerationJobOutput extends DataGenerationJobOutput {
   @doc("Azure OpenAI file output.")
-  type: "file";
+  type: DataGenerationJobOutputType.file;
 
   @doc("The id of the output Azure OpenAI file.")
   @visibility(Lifecycle.Read)
@@ -122,10 +228,9 @@ model FileDataGenerationJobOutput extends DataGenerationJobOutput {
 }
 
 @doc("Dataset output for a data generation job.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
   @doc("Dataset output.")
-  type: "dataset";
+  type: DataGenerationJobOutputType.dataset;
 
   @doc("The id of the output dataset created.")
   @visibility(Lifecycle.Read)
@@ -149,7 +254,6 @@ model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
 }
 
 @doc("The supported output file types for a data generation job.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 union DataGenerationJobOutputType {
   string,
 
@@ -161,7 +265,6 @@ union DataGenerationJobOutputType {
 }
 
 @doc("Token usage information for a data generation job.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model DataGenerationTokenUsage {
   @doc("The number of prompt tokens used.")
   @visibility(Lifecycle.Read)
@@ -177,30 +280,24 @@ model DataGenerationTokenUsage {
 }
 
 @doc("The supported scenarios for a data generation job.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 union DataGenerationJobScenario {
   string,
 
-  @doc("Supervised Fine-tuning scenario.")
-  supervised_finetuning: "supervised_finetuning",
+  @doc("Supervised Fine-tuning preview scenario.")
+  supervised_finetuning_preview: "supervised_finetuning_preview",
 
-  @doc("Reinforcement Fine-tuning scenario.")
-  reinforcement_finetuning: "reinforcement_finetuning",
+  @doc("Reinforcement Fine-tuning preview scenario.")
+  reinforcement_finetuning_preview: "reinforcement_finetuning_preview",
 
   @doc("Evaluation scenario.")
   evaluation: "evaluation",
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("Options for managing data generation jobs.")
+@doc("Configuration for managing data generation jobs.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-model DataGenerationJobOptions {
+model DataGenerationJobConfiguration {
   @doc("The data generation job type.")
   type: DataGenerationJobType;
-
-  @doc("Maximum number of samples to generate.")
-  max_samples: int32;
 
   @doc("The proportion of the generated data to be used for training when the data is used for fine-tuning. The rest will be used for validation. Value should be between 0 and 1.")
   @minValue(0)
@@ -211,44 +308,51 @@ model DataGenerationJobOptions {
   model_options?: DataGenerationModelOptions;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("The options for a data generation job with SimpleQnA type.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
+@doc("The configuration for a data generation job with SimpleQnA type.")
+model SimpleQnADataGenerationJobConfiguration
+  extends DataGenerationJobConfiguration {
   @doc("The data generation job type, which is SimpleQnA for this model.")
-  type: "simple_qna";
+  type: DataGenerationJobType.simple_qna;
+
+  @doc("Maximum number of samples to generate, up to service-defined limits.")
+  max_samples: int32;
 
   @doc("The question types to generate. Used only for fine-tuning scenarios.")
   question_types?: SimpleQnAFineTuningQuestionType[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("The options for a data generation job with Traces type.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
+@doc("The configuration for a data generation job with Traces type.")
+model TracesDataGenerationJobConfiguration
+  extends DataGenerationJobConfiguration {
   @doc("The data generation job type, which is Traces for this model.")
-  type: "traces";
+  type: DataGenerationJobType.traces;
+
+  @doc("Maximum number of samples to generate, up to service-defined limits. If omitted, sampling is turned off.")
+  max_samples?: int32;
+
+  @doc("Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.")
+  redact_private_content?: boolean = true;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-model TaskGenerationDataGenerationJobOptions extends DataGenerationJobOptions {
-  @doc("The data generation job type, which is TaskGeneration for this model.")
-  type: "task_generation";
+@doc("The configuration for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
+model SimulationSeedDataGenerationJobConfiguration
+  extends DataGenerationJobConfiguration {
+  @doc("The data generation job type, which is SimulationSeed for this model.")
+  type: DataGenerationJobType.simulation_seed;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.")
+@doc("The configuration for a data generation job with ToolUse type. This is a preview feature used only for fine-tuning scenarios.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-model ToolUseFineTuningDataGenerationJobOptions
-  extends DataGenerationJobOptions {
+model ToolUseFineTuningDataGenerationJobConfiguration
+  extends DataGenerationJobConfiguration {
   @doc("The data generation job type, which is ToolUse for this model.")
-  type: "tool_use";
+  type: DataGenerationJobType.tool_use;
+
+  @doc("Maximum number of samples to generate, up to service-defined limits.")
+  max_samples: int32;
 }
 
 @doc("The supported source types for data generation jobs.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 union DataGenerationJobSourceType {
   string,
 
@@ -267,7 +371,6 @@ union DataGenerationJobSourceType {
 
 @doc("The base source model for data generation jobs.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model DataGenerationJobSource {
   @doc("The type of source.")
   type: DataGenerationJobSourceType;
@@ -276,34 +379,33 @@ model DataGenerationJobSource {
 }
 
 @doc("Prompt source for data generation jobs — inline text provided by the user.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model PromptDataGenerationJobSource extends DataGenerationJobSource {
   ...PromptJobSource;
 }
 
 @doc("Agent source for data generation jobs — references an agent to fetch instructions and metadata from.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model AgentDataGenerationJobSource extends DataGenerationJobSource {
   ...AgentJobSource;
 }
 
 @doc("Traces source for data generation jobs — conversation traces from Application Insights.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model TracesDataGenerationJobSource extends DataGenerationJobSource {
   ...TracesJobSource;
+
+  @doc("Optional explicit list of trace IDs to include.")
+  trace_ids?: string[];
 }
 
 @doc("File source for data generation jobs — Azure OpenAI file input.")
-@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model FileDataGenerationJobSource extends DataGenerationJobSource {
   @doc("The source type for this job, which is File.")
-  type: "file";
+  type: DataGenerationJobSourceType.file;
 
   @doc("Input Azure Open AI file id used for data generation.")
   id: string;
 }
 
-@doc("The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios.")
+@doc("The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios. This is a preview feature.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 union SimpleQnAFineTuningQuestionType {
   string,

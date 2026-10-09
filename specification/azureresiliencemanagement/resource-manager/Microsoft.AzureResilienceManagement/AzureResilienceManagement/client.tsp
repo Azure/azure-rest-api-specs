@@ -64,6 +64,11 @@ using Azure.ResourceManager;
   "DrillRunTestFailoverContent",
   "csharp"
 );
+@@clientName(
+  ListReportDownloadUrlRequest,
+  "ListReportDownloadUrlContent",
+  "csharp"
+);
 
 // CSharp: AZC0030 — *Response -> *Result
 @@clientName(
@@ -79,6 +84,18 @@ using Azure.ResourceManager;
 @@clientName(
   UpdateRecoveryResourcesResponse,
   "UpdateRecoveryResourcesResult",
+  "csharp"
+);
+@@clientName(
+  ListReportDownloadUrlResponse,
+  "ListReportDownloadUrlResult",
+  "csharp"
+);
+
+// CSharp: AZC0030 — *Url -> *Uri
+@@clientName(
+  ListReportDownloadUrlResponse.downloadUrl,
+  "downloadUri",
   "csharp"
 );
 
@@ -178,6 +195,13 @@ model RecoveryPlanUpdate {
   @doc("The resource-specific properties for this resource.")
   properties?: RecoveryPlanUpdateProperties;
 }
+
+#suppress "deprecated" "The legacy RecoveryPlans update operation must retain the existing JavaScript PATCH body customization in the retired API versions."
+@@alternateType(
+  Microsoft.AzureResilienceManagement.RecoveryPlansOld.update::parameters.properties,
+  RecoveryPlanUpdate,
+  "javascript"
+);
 
 @@alternateType(
   Microsoft.AzureResilienceManagement.RecoveryPlans.update::parameters.properties,
