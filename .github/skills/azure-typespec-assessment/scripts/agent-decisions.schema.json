@@ -1,0 +1,350 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TypeSpec Assessment Compact Agent Decisions",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "semanticSummaries",
+    "restDecisions",
+    "downstreamDecisions",
+    "catalogScores",
+    "fetchedDocuments",
+    "failedRetrievals",
+    "searchBlockers",
+    "complianceJudgments",
+    "overallConfidence",
+    "blockers"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "semanticSummaries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/semanticSummary" }
+    },
+    "restDecisions": { "$ref": "#/$defs/candidateDecisions" },
+    "downstreamDecisions": { "$ref": "#/$defs/candidateDecisions" },
+    "inferenceResults": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/inferenceResult" }
+    },
+    "catalogScores": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/catalogScore" }
+    },
+    "fetchedDocuments": {
+      "type": "array",
+      "maxItems": 4,
+      "items": { "$ref": "#/$defs/fetchedDocument" }
+    },
+    "failedRetrievals": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/failedRetrieval" }
+    },
+    "searchBlockers": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "complianceJudgments": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/complianceJudgment" }
+    },
+    "overallConfidence": { "enum": ["high", "medium", "low"] },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "catalogId": {
+      "type": "string",
+      "pattern": "^catalog-entry-[0-9a-f]{12}$"
+    },
+    "semanticSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reviewUnitId", "title", "summary"],
+      "properties": {
+        "reviewUnitId": { "type": "string", "pattern": "^semantic-" },
+        "title": { "type": "string", "minLength": 1 },
+        "summary": { "type": "string", "minLength": 1 }
+      }
+    },
+    "candidateDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidateId", "decision", "rationale"],
+      "properties": {
+        "candidateId": { "type": "string", "minLength": 1 },
+        "decision": { "enum": ["approve", "reject"] },
+        "severity": { "enum": ["high", "medium", "low"] },
+        "rationale": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "decision": { "const": "approve" } } },
+          "then": { "required": ["severity"] },
+          "else": { "not": { "required": ["severity"] } }
+        }
+      ]
+    },
+    "candidateDecisions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/candidateDecision" }
+    },
+    "inferenceResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requestId", "decision", "rationale", "candidates"],
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "pattern": "^inference-request-"
+        },
+        "decision": { "enum": ["candidates", "no-impact", "blocked"] },
+        "rationale": { "type": "string", "minLength": 1 },
+        "candidates": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/inferredCandidate" }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "decision": { "const": "candidates" } } },
+          "then": { "properties": { "candidates": { "minItems": 1 } } },
+          "else": { "properties": { "candidates": { "maxItems": 0 } } }
+        }
+      ]
+    },
+    "inferredCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "dimension",
+        "rule",
+        "defaultSeverity",
+        "actual",
+        "expected",
+        "operationIds",
+        "evidenceFactIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^inferred-(rest|downstream)-"
+        },
+        "dimension": { "enum": ["rest", "downstream"] },
+        "rule": { "type": "string", "minLength": 1 },
+        "defaultSeverity": { "enum": ["high", "medium", "low"] },
+        "actual": { "type": "string", "minLength": 1 },
+        "expected": { "type": "string", "minLength": 1 },
+        "crossLanguageDefinitionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operationIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "evidenceFactIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "dimension": { "const": "downstream" } } },
+          "then": { "required": ["crossLanguageDefinitionId"] }
+        }
+      ]
+    },
+    "catalogScore": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalogId",
+        "exactSymbol",
+        "patternCategory",
+        "servicePlane",
+        "changeContext",
+        "rationale"
+      ],
+      "properties": {
+        "catalogId": { "$ref": "#/$defs/catalogId" },
+        "exactSymbol": { "enum": [0, 4] },
+        "patternCategory": { "enum": [0, 3] },
+        "servicePlane": { "enum": [0, 2] },
+        "changeContext": { "enum": [0, 1] },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    },
+    "guidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["section", "excerpt", "queryTerms", "examples"],
+      "properties": {
+        "section": { "type": "string", "minLength": 1 },
+        "excerpt": { "type": "string", "minLength": 1 },
+        "queryTerms": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "examples": {
+          "type": "array",
+          "maxItems": 2,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "applicableDeclarationIds": {
+          "deprecated": true,
+          "description": "Legacy field ignored by the materializer; applicability is derived from citing judgments.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "fetchedDocument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalogId",
+        "retrievedAt",
+        "contentHash",
+        "bytes",
+        "guidance",
+        "noRelevantGuidance"
+      ],
+      "properties": {
+        "catalogId": { "$ref": "#/$defs/catalogId" },
+        "retrievedAt": { "type": "string", "format": "date-time" },
+        "contentHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-fA-F]{64}$"
+        },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "guidance": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/guidance" }
+        },
+        "noRelevantGuidance": { "type": "boolean" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "noRelevantGuidance": { "const": true } }
+          },
+          "then": { "properties": { "guidance": { "maxItems": 0 } } },
+          "else": { "properties": { "guidance": { "minItems": 1 } } }
+        }
+      ]
+    },
+    "failedRetrieval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["catalogId", "error"],
+      "properties": {
+        "catalogId": { "$ref": "#/$defs/catalogId" },
+        "error": { "type": "string", "minLength": 1 }
+      }
+    },
+    "applicableGuidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["catalogId", "guidanceSection"],
+      "properties": {
+        "catalogId": { "$ref": "#/$defs/catalogId" },
+        "guidanceSection": { "type": "string", "minLength": 1 }
+      }
+    },
+    "complianceJudgment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reviewUnitId", "applicableGuidance", "decision", "actual", "rationale"],
+      "properties": {
+        "reviewUnitId": { "type": "string", "pattern": "^semantic-" },
+        "applicableGuidance": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/applicableGuidance" }
+        },
+        "declarationNames": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "declarationIds": {
+          "deprecated": true,
+          "description": "Legacy alternative to declarationNames; IDs must still be valid for the owning intent.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^declaration-" }
+        },
+        "decision": {
+          "enum": ["applicable-pass", "applicable-fail", "no-applicable-guidance", "not-assessed"]
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "severity": { "enum": ["high", "medium", "low"] },
+        "expected": { "type": "string", "minLength": 1 },
+        "actual": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "required": ["declarationNames"],
+              "not": { "required": ["declarationIds"] }
+            },
+            {
+              "required": ["declarationIds"],
+              "not": { "required": ["declarationNames"] }
+            }
+          ]
+        },
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "enum": ["applicable-pass", "applicable-fail"]
+              }
+            }
+          },
+          "then": {
+            "required": ["expected"],
+            "properties": {
+              "applicableGuidance": { "minItems": 1 }
+            },
+            "anyOf": [
+              {
+                "required": ["declarationNames"],
+                "properties": { "declarationNames": { "minItems": 1 } }
+              },
+              {
+                "required": ["declarationIds"],
+                "properties": { "declarationIds": { "minItems": 1 } }
+              }
+            ]
+          },
+          "else": {
+            "not": { "required": ["expected"] },
+            "properties": { "applicableGuidance": { "maxItems": 0 } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "decision": { "const": "applicable-fail" } }
+          },
+          "then": { "required": ["title", "severity"] },
+          "else": {
+            "not": {
+              "anyOf": [{ "required": ["title"] }, { "required": ["severity"] }]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

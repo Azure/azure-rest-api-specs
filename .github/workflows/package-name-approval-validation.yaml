@@ -1,6 +1,6 @@
 name: "Package Name Approval - Validate Labels"
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   pull_request_target:
     types:
       - labeled
@@ -16,12 +16,15 @@ permissions:
 jobs:
   validate-approval:
     name: Validate Package Name Approval
+    # Keep authorization enforcement active on closed PRs so reopening cannot bypass approvals.
+    if: startsWith(github.event.label.name, 'package-name-')
     runs-on: ubuntu-24.04
     steps:
       # IMPORTANT: This workflow uses pull_request_target, which runs with repo write permissions.
       # Only base-branch code is checked out below. Do NOT checkout or run code from the PR head.
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github/
 
@@ -29,17 +32,18 @@ jobs:
         uses: ./.github/actions/install-deps-github-script
 
       - name: Validate package name approval label
-        uses: actions/github-script@v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: validateApproval } =
-              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/validate-approval.js');
+              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/validate-approval.ts');
             await validateApproval({ github, context, core });
 
       - name: Update package name approval status
-        uses: actions/github-script@v8
+        if: github.event.pull_request.state == 'open'
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: statusCheck } =
-              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/status-check.js');
+              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/status-check.ts');
             await statusCheck({ github, context, core });

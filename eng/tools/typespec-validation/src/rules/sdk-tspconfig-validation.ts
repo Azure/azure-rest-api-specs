@@ -1,11 +1,13 @@
-/* eslint-disable */
-// TODO: Enable eslint, fix errors
+/* oxlint-disable */
+// TODO: Enable oxlint, fix errors
 
-import { join } from "path";
-import { type Suppression } from "suppressions";
-import { parse as yamlParse } from "yaml";
-import { type RuleResult } from "../rule-result.ts";
+import { type Suppression } from "@azure-tools/suppressions";
+import type { ILogger } from "@azure-tools/specs-shared/logger";
+import { join } from "pathe";
+import { failure, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
+import { exceptionDiagnostic } from "../diagnostics.ts";
+import { parseYaml } from "../tsp-config.ts";
 import { fileExists, getSuppressions, readTspConfig } from "../utils.ts";
 
 type ExpectedValueType = string | boolean | RegExp;
@@ -33,7 +35,7 @@ export abstract class TspconfigSubRuleBase {
     if (shouldSkip)
       return {
         success: true,
-        stdOutput: `Validation skipped. ${reason}`,
+        skipped: reason ?? "Not applicable",
       };
     return this.validate(config);
   }
@@ -44,14 +46,8 @@ export abstract class TspconfigSubRuleBase {
       return undefined;
     }
 
-    try {
-      const configText = await readTspConfig(folder);
-      const config = yamlParse(configText);
-      return config;
-    } catch (error) {
-      console.warn(`Failed to parse tspconfig.yaml in ${folder}: ${error}`);
-      return undefined;
-    }
+    const configText = await readTspConfig(folder);
+    return parseYaml(configText, join(folder, "tspconfig.yaml"));
   }
 
   protected skip(_config: any, _folder: string): SkipResult {
@@ -69,16 +65,15 @@ export abstract class TspconfigSubRuleBase {
       case "object":
         return typeof actual === "string" && expected.test(actual);
       default:
-        console.warn("Unsupported expected-value-type for tspconfig.yaml");
-        return false;
+        throw new Error("Unsupported expected-value-type for tspconfig.yaml");
     }
   }
 
   protected createFailedResult(error: string, action: string): RuleResult {
-    return {
-      success: false,
-      errorOutput: `- ${error}. ${action}.`,
-    };
+    return failure("sdk-tspconfig-validation", error, {
+      help: action,
+      url: "https://aka.ms/azsdk/spec-gen-sdk-config",
+    });
   }
 
   public abstract getPathOfKeyToValidate(): string;
@@ -874,7 +869,19 @@ export class SdkTspConfigValidationRule implements Rule {
     this.optionalRules = optionalSubRules;
   }
 
-  async execute(folder: string): Promise<RuleResult> {
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
+    try {
+      return await this.executeRules(folder, logger);
+    } catch (error) {
+      logger.debug(error instanceof Error ? (error.stack ?? error.message) : String(error));
+      return {
+        success: false,
+        diagnostics: [exceptionDiagnostic(error, join(folder, "tspconfig.yaml"))],
+      };
+    }
+  }
+
+  private async executeRules(folder: string, logger: ILogger): Promise<RuleResult> {
     const tspConfigPath = join(folder, "tspconfig.yaml");
     const suppressions = await getSuppressions(tspConfigPath);
 
@@ -882,9 +889,14 @@ export class SdkTspConfigValidationRule implements Rule {
       (s) => s.rules?.includes(this.name) === true && (!s.subRules || s.subRules.length === 0),
     );
     if (shouldSuppressEntireRule)
-      return { success: true, stdOutput: `[${this.name}]: validation skipped.` };
+      return {
+        success: true,
+        suppressed:
+          suppressions.find((s) => s.rules?.includes(this.name) && !s.subRules?.length)?.reason ??
+          "Suppressed",
+      };
 
-    this.setSuppressedKeyPaths(suppressions);
+    this.setSuppressedKeyPaths(suppressions, logger);
 
     const failedResults = [];
     let success = true;
@@ -895,6 +907,7 @@ export class SdkTspConfigValidationRule implements Rule {
       if (this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) continue;
 
       const result = await subRule.execute(folder!);
+      if (result.skipped) logger.debug(`${subRule.getPathOfKeyToValidate()}: ${result.skipped}`);
       if (!result.success) failedResults.push(result);
 
       success &&= result.success;
@@ -908,26 +921,24 @@ export class SdkTspConfigValidationRule implements Rule {
       const config = await subRule.loadConfig(folder);
       const emitterName = subRule.getEmitterName();
       if (config && this.skipIfEmitterNotConfigured(config, emitterName)) {
-        console.warn(
+        logger.debug(
           `Optional rule ${subRule.constructor.name} skipped because emitter ${emitterName} is not configured.`,
         );
         continue;
       }
 
       const result = await subRule.execute(folder!);
+      if (result.skipped) logger.debug(`${subRule.getPathOfKeyToValidate()}: ${result.skipped}`);
       if (!result.success) failedResults.push(result);
       // Optional rules affect overall success when emitter is configured
       success &&= result.success;
     }
 
-    const stdOutputFailedResults =
-      failedResults.length > 0
-        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\nPlease see https://aka.ms/azsdk/spec-gen-sdk-config for more info.\nFor additional information on TypeSpec validation, please refer to https://aka.ms/azsdk/specs/typespec-validation\nFor exception requests, please refer to https://eng.ms/docs/products/azure-developer-experience/onboard/request-exception`
-        : "";
-
     return {
       success,
-      stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
+      diagnostics: failedResults.flatMap((result) =>
+        (result.diagnostics ?? []).map((diagnostic) => ({ ...diagnostic, path: tspConfigPath })),
+      ),
     };
   }
 
@@ -936,13 +947,13 @@ export class SdkTspConfigValidationRule implements Rule {
     return !isConfigured;
   }
 
-  private setSuppressedKeyPaths(suppressions: Suppression[]) {
+  private setSuppressedKeyPaths(suppressions: Suppression[], logger: ILogger) {
     this.suppressedKeyPaths = new Set<string>();
     for (const suppression of suppressions) {
       if (!suppression.rules?.includes(this.name)) continue;
       for (const ignoredKey of suppression.subRules ?? []) {
         this.suppressedKeyPaths.add(ignoredKey);
-        console.warn(`Skip validation on ${ignoredKey}.`);
+        logger.debug(`Skip validation on ${ignoredKey}.`);
       }
     }
   }

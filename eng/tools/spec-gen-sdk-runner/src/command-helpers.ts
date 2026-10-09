@@ -189,7 +189,9 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
       break;
     }
     case "all-mgmtplane-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter((p) => p.includes(".Management"));
+      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter(
+        (p) => p.includes(".Management") || p.includes("resource-manager"),
+      );
       readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
         p.includes("resource-manager"),
       );
@@ -197,7 +199,9 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
       break;
     }
     case "all-dataplane-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter((p) => !p.includes(".Management"));
+      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter(
+        (p) => !p.includes(".Management") && !p.includes("resource-manager"),
+      );
       readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
         p.includes("data-plane"),
       );
@@ -506,6 +510,16 @@ function isAzsdkCliAvailable(): boolean {
 }
 
 /**
+ * Whether azsdk-cli SDK breaking-change detection is enabled for this run.
+ *
+ * Code-level feature flag: flip to `true` and merge to enable the whole
+ * integration.
+ */
+export function isBreakingChangeDetectionEnabled(): boolean {
+  return false;
+}
+
+/**
  * Prepare the azsdk pkg generate command arguments.
  *
  * @param commandInput - The spec-gen-sdk command input.
@@ -551,6 +565,20 @@ export function prepareAzsdkPackCommand(packagePath: string, outputPath?: string
   if (outputPath) {
     args.push("--output-path", outputPath);
   }
+  return args;
+}
+
+/**
+ * Prepare the azsdk pkg detect-breaking-change command arguments.
+ *
+ * @param packagePath - Absolute path to the generated SDK package directory.
+ * @returns Array of arguments for the azsdk detect-breaking-change command.
+ */
+export function prepareAzsdkDetectBreakingChangeCommand(packagePath: string): string[] {
+  const args = ["pkg", "detect-breaking-change", "--package-path", packagePath];
+
+  args.push("--changes-only");
+  args.push("--output", "json");
   return args;
 }
 

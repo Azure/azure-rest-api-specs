@@ -19,6 +19,7 @@ union DatasetType {
 @Rest.resource("datasets")
 @discriminator("type")
 model DatasetVersion {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("URI of the data ([example](https://go.microsoft.com/fwlink/?linkid=2202330))")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
@@ -104,6 +105,7 @@ model PendingUploadResponse {
 
 @doc("Blob reference details.")
 model BlobReference {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Blob URI path for client to upload data. Example: `https://blob.windows.core.net/Container/Path`")
   blobUri: url;
 
