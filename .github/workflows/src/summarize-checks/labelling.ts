@@ -854,9 +854,14 @@ const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
         "<b>If you haven't discussed yet:</b><br/>" +
         "Please join the ARM API Modeling Review Office Hours - a drop-in, first-come, first-served session (no booking required):<br/>" +
         "<ul>" +
-        "<li><b>When:</b> Every Tuesday and Thursday, 9:30-10:30 AM PST</li>" +
+        "<li><b>When:</b> Every Tuesday and Thursday, 9:30–10:30 AM PST</li>" +
         `<li><b>How to join:</b> ${href("Join via Teams", "https://aka.ms/apimodelingreview")}</li>` +
-        "<li>Come prepared with your questions and a design document (Word/PowerPoint is fine; TypeSpec/Swagger not required).</li>" +
+        "<li><b>Required Doc:</b> Please use the RP Agent and run the <code>/model-rp-contract</code> skill. " +
+        "The agent can interview you or review your design docs, then generate a resource contract, design rationale, " +
+        "deployment prerequisites, and an HTML review package with open questions. For Office Hours, bring the HTML " +
+        "review package. We'll use the open questions as the basis for discussion so we can focus on design decisions " +
+        "and gaps instead of starting from scratch. You can provide feedback using: <code>/rp-agent-feedback</code> " +
+        "or RP Agent Feedback.</li>" +
         `<li>For more details refer: ${href("API Review Workflow | ARM Wiki", "https://armwiki.azurewebsites.net/rp_onboarding/process/api_review.html#arm-api-modeling-review-office-hours")}</li>` +
         "</ul>" +
         "<b>If <code>ARMModelingSignedOff</code> label was removed by automation:</b><br/>" +
