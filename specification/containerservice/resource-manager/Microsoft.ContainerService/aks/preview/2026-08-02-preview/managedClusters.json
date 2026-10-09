@@ -18866,7 +18866,7 @@
     },
     "UpgradeInsightStatus": {
       "type": "string",
-      "description": "The overall status of an upgrade insight readiness evaluation. This is a rollup of the\nper-issue `severity` values in `detectedIssues`: any `Blocking` issue ⇒ `Failed`;\notherwise any `Warning` issue ⇒ `Warning`; otherwise (no issues) ⇒ `Passed`. The\nscope-level vocabulary here (Passed/Warning/Failed) intentionally differs from the\nissue-level `UpgradeIssueSeverity` (Blocking/Warning): a `Blocking` issue rolls up to\na `Failed` status, while `Warning` maps through unchanged.",
+      "description": "The overall status of an upgrade insight readiness evaluation. This is an aggregation of the\nper-issue `severity` values in `detectedIssues`: any `Blocking` issue ⇒ `Failed`;\notherwise any `Warning` issue ⇒ `Warning`; otherwise (no issues) ⇒ `Passed`. The\nscope-level vocabulary here (Passed/Warning/Failed) intentionally differs from the\nissue-level `UpgradeIssueSeverity` (Blocking/Warning): a `Blocking` issue maps to\na `Failed` status, while `Warning` maps through unchanged.",
       "enum": [
         "Passed",
         "Warning",

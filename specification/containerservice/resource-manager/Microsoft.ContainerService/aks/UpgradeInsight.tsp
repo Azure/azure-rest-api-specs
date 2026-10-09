@@ -16,11 +16,11 @@ namespace Microsoft.ContainerService;
 // =============================================================================
 
 /**
- * The overall status of an upgrade insight readiness evaluation. This is a rollup of the
+ * The overall status of an upgrade insight readiness evaluation. This is an aggregation of the
  * per-issue `severity` values in `detectedIssues`: any `Blocking` issue ⇒ `Failed`;
  * otherwise any `Warning` issue ⇒ `Warning`; otherwise (no issues) ⇒ `Passed`. The
  * scope-level vocabulary here (Passed/Warning/Failed) intentionally differs from the
- * issue-level `UpgradeIssueSeverity` (Blocking/Warning): a `Blocking` issue rolls up to
+ * issue-level `UpgradeIssueSeverity` (Blocking/Warning): a `Blocking` issue maps to
  * a `Failed` status, while `Warning` maps through unchanged.
  */
 @added(Versions.v2026_08_02_preview)
