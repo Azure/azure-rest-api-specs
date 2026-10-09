@@ -87,7 +87,7 @@ model BulkCreateEnvelope {
   ...ExtendedLocationProperty;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Placement matches the established compute contract and is applied uniformly to every virtual machine created by the operation."
-  @added(Versions.`2026-11-06-preview`)
+  @added(Versions.`2026-10-06-preview`)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The availability zone placement constraints applied to the virtual machines created by the BulkCreate operation.")
   placement?: Placement;
@@ -101,7 +101,7 @@ model BulkCreateEnvelope {
   ...ResourcePlanProperty;
 }
 
-@@added(BulkCreateEnvelope.extendedLocation, Versions.`2026-11-06-preview`);
+@@added(BulkCreateEnvelope.extendedLocation, Versions.`2026-10-06-preview`);
 @@doc(
   BulkCreateEnvelope.extendedLocation,
   "The extended location of the virtual machines created by the BulkCreate operation."
@@ -151,16 +151,16 @@ model BulkCreateProperties {
   @doc("Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs.")
   capacityType?: CapacityType;
 
-  @removed(Versions.`2026-11-06-preview`)
+  @removed(Versions.`2026-10-06-preview`)
   @doc("The minimum capacity, expressed in units specified by capacityType, that Azure must be able to allocate for the request to proceed. If Azure cannot allocate at least this capacity with high confidence, the request is rejected with 409 Conflict (InsufficientCapacity) and no VMs are created. Otherwise, Azure allocates as much capacity as possible, up to the requested capacity. Must be greater than 0, less than capacity, and requires partialFulfillmentPolicy.mode to be Enabled.")
   @minValue(1)
   minCapacity?: int32;
 
-  @removed(Versions.`2026-11-06-preview`)
+  @removed(Versions.`2026-10-06-preview`)
   @doc("Controls how partial fulfillment is handled for a BulkCreate request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures.")
   partialFulfillmentPolicy?: PartialFulfillmentPolicy;
 
-  @removed(Versions.`2026-11-06-preview`)
+  @removed(Versions.`2026-10-06-preview`)
   @doc("Configuration Options for Regular or Spot instances in BulkCreate.")
   priorityProfile: PriorityProfile;
 
