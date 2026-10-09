@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2026-08-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "body": {
+      "upgradeType": "ControlPlane",
+      "targetKubernetesVersion": "1.33.5"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/upgradeInsights/controlPlane-1.33.5",
+        "name": "controlPlane-1.33.5",
+        "type": "Microsoft.ContainerService/managedClusters/upgradeInsights",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "upgradeType": "ControlPlane",
+          "lastEvaluatedAt": "2026-07-07T10:00:00Z",
+          "expiresAt": "2026-07-21T10:00:00Z",
+          "targetKubernetesVersion": "1.33.5",
+          "currentKubernetesVersion": "1.32.7",
+          "kubernetesVersionSupportStatus": "InSupport",
+          "kubernetesVersionEndOfSupportDate": "2026-11-30",
+          "context": {
+            "currentUpgradeStrategy": "Auto",
+            "nextMaintenanceWindow": {
+              "maintenanceConfigurationName": "aksManagedAutoUpgradeSchedule",
+              "source": "ClusterAutoUpgradeSchedule",
+              "startTime": "2026-03-10T02:00:00Z",
+              "endTime": "2026-03-10T06:00:00Z"
+            },
+            "lastSuccessfulUpgradeTime": "2026-01-15T08:30:00Z"
+          },
+          "evaluation": {
+            "status": "Passed",
+            "evaluatedAt": "2026-07-07T10:00:00Z",
+            "detectedIssues": []
+          }
+        }
+      }
+    }
+  },
+  "operationId": "UpgradeInsights_Generate",
+  "title": "Generate a control plane upgrade insight"
+}

@@ -101,6 +101,9 @@
     },
     {
       "name": "AlertConfigurations"
+    },
+    {
+      "name": "UpgradeInsights"
     }
   ],
   "paths": {
@@ -3629,6 +3632,76 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/generateUpgradeInsights": {
+      "post": {
+        "operationId": "UpgradeInsights_Generate",
+        "tags": [
+          "UpgradeInsights"
+        ],
+        "description": "Generates (or refreshes) an upgrade readiness evaluation for the managed cluster.\nThe requested scope and target version(s) are supplied in the request body; the\nserver runs the readiness checks — the control plane Kubernetes version upgrade, a\nsingle agent pool Kubernetes version upgrade, a single agent pool node OS image\nupgrade, or the combined control plane and agent pools upgrade — persists the result\nas an UpgradeInsight resource with a server-generated name, and returns that\nresource. The response body is identical to a subsequent GET of the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the managed cluster resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateUpgradeInsightsContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpgradeInsight"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate a combined control plane and agent pools upgrade insight": {
+            "$ref": "./examples/ManagedClustersGenerateUpgradeInsights_ControlPlaneAndAgentPools.json"
+          },
+          "Generate a control plane upgrade insight": {
+            "$ref": "./examples/ManagedClustersGenerateUpgradeInsights_ControlPlane.json"
+          },
+          "Generate a node OS image upgrade insight": {
+            "$ref": "./examples/ManagedClustersGenerateUpgradeInsights_NodeImage.json"
+          },
+          "Generate a node OS image upgrade insight using the latest available image": {
+            "$ref": "./examples/ManagedClustersGenerateUpgradeInsights_NodeImageLatest.json"
+          },
+          "Generate a single agent pool Kubernetes version upgrade insight": {
+            "$ref": "./examples/ManagedClustersGenerateUpgradeInsights_AgentPool.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/identityBindings": {
       "get": {
         "operationId": "IdentityBindings_ListByManagedCluster",
@@ -7027,6 +7100,115 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/upgradeInsights": {
+      "get": {
+        "operationId": "UpgradeInsights_List",
+        "tags": [
+          "UpgradeInsights"
+        ],
+        "description": "Lists the stored upgrade insights for the specified managed cluster, one entry per\nscope that has been generated and not yet expired. This is a read-only operation and\ndoes not regenerate any evaluation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the managed cluster resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpgradeInsightListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the stored upgrade insights for a managed cluster": {
+            "$ref": "./examples/ManagedClustersListUpgradeInsights.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/upgradeInsights/{upgradeInsightName}": {
+      "get": {
+        "operationId": "UpgradeInsights_Get",
+        "tags": [
+          "UpgradeInsights"
+        ],
+        "description": "Gets a stored upgrade insight for the managed cluster by its server-generated name.\nThis is a read-only operation: it returns the most recently generated readiness\nevaluation for that scope from the data store, including the detected\nupgrade-blocking issues and contextual upgrade information. It does not regenerate\nthe evaluation. If no non-expired evaluation exists for the name, it returns 404.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the managed cluster resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "upgradeInsightName",
+            "in": "path",
+            "description": "The name of the UpgradeInsight",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]$|^[A-Za-z0-9][A-Za-z0-9._-]{0,126}[A-Za-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpgradeInsight"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a stored upgrade insight": {
+            "$ref": "./examples/ManagedClustersGetUpgradeInsight.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/upgradeProfiles/default": {
       "get": {
         "operationId": "ManagedClusters_GetUpgradeProfile",
@@ -8071,6 +8253,30 @@
         }
       }
     },
+    "AgentPoolGenerateUpgradeInsightsContent": {
+      "type": "object",
+      "description": "Request body to evaluate a single agent pool Kubernetes version upgrade.",
+      "properties": {
+        "agentPoolName": {
+          "type": "string",
+          "description": "The name of the agent pool to evaluate."
+        },
+        "targetKubernetesVersion": {
+          "type": "string",
+          "description": "The target Kubernetes version to evaluate."
+        }
+      },
+      "required": [
+        "agentPoolName",
+        "targetKubernetesVersion"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenerateUpgradeInsightsContent"
+        }
+      ],
+      "x-ms-discriminator-value": "AgentPool"
+    },
     "AgentPoolListResult": {
       "type": "object",
       "description": "The response of a AgentPool list operation.",
@@ -8359,6 +8565,43 @@
         ]
       }
     },
+    "AgentPoolScopeEvaluation": {
+      "type": "object",
+      "description": "The readiness evaluation for a single agent pool within a combined evaluation.",
+      "properties": {
+        "agentPoolName": {
+          "type": "string",
+          "description": "The name of the agent pool this evaluation applies to.",
+          "readOnly": true
+        },
+        "currentKubernetesVersion": {
+          "type": "string",
+          "description": "The Kubernetes version the scope was evaluated from (the upgrade source version the scope is currently running). Lets consumers read the result as \"from X to targetKubernetesVersion\" and detect a stale cached record by comparing against the live cluster version. Populated for Kubernetes version upgrades.",
+          "readOnly": true
+        },
+        "kubernetesVersionSupportStatus": {
+          "$ref": "#/definitions/KubernetesVersionSupportStatus",
+          "description": "The support status of the Kubernetes version the scope is currently running (not the target version). Populated for Kubernetes version upgrades.",
+          "readOnly": true
+        },
+        "kubernetesVersionEndOfSupportDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The date on which support ends for the Kubernetes version the scope is currently\nrunning (its end-of-support date). Returned as an absolute date so clients can apply\ntheir own \"approaching end of support\" threshold and compute the remaining days against\nthe current time; a precomputed remaining-days value is intentionally not returned so\nthat cached results do not go stale. Populated for Kubernetes version upgrades.",
+          "readOnly": true
+        },
+        "context": {
+          "$ref": "#/definitions/UpgradeContext",
+          "description": "Contextual information about how this upgrade is managed, such as the upgrade strategy, next maintenance window, and last successful upgrade time.",
+          "readOnly": true
+        },
+        "evaluation": {
+          "$ref": "#/definitions/UpgradeInsightEvaluation",
+          "description": "The evaluation result, including overall status, evaluation time, and any detected issues.",
+          "readOnly": true
+        }
+      }
+    },
     "AgentPoolSecurityProfile": {
       "type": "object",
       "description": "The security settings of an agent pool.",
@@ -8487,6 +8730,54 @@
           "description": "Specifications on how to scale a VirtualMachines agent pool."
         }
       }
+    },
+    "AgentPoolUpgradeInsightProperties": {
+      "type": "object",
+      "description": "Properties for a single agent pool Kubernetes version upgrade insight.",
+      "properties": {
+        "agentPoolName": {
+          "type": "string",
+          "description": "The name of the agent pool this insight applies to.",
+          "readOnly": true
+        },
+        "targetKubernetesVersion": {
+          "type": "string",
+          "description": "The target Kubernetes version that was evaluated.",
+          "readOnly": true
+        },
+        "currentKubernetesVersion": {
+          "type": "string",
+          "description": "The Kubernetes version the scope was evaluated from (the upgrade source version the scope is currently running). Lets consumers read the result as \"from X to targetKubernetesVersion\" and detect a stale cached record by comparing against the live cluster version. Populated for Kubernetes version upgrades.",
+          "readOnly": true
+        },
+        "kubernetesVersionSupportStatus": {
+          "$ref": "#/definitions/KubernetesVersionSupportStatus",
+          "description": "The support status of the Kubernetes version the scope is currently running (not the target version). Populated for Kubernetes version upgrades.",
+          "readOnly": true
+        },
+        "kubernetesVersionEndOfSupportDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The date on which support ends for the Kubernetes version the scope is currently\nrunning (its end-of-support date). Returned as an absolute date so clients can apply\ntheir own \"approaching end of support\" threshold and compute the remaining days against\nthe current time; a precomputed remaining-days value is intentionally not returned so\nthat cached results do not go stale. Populated for Kubernetes version upgrades.",
+          "readOnly": true
+        },
+        "context": {
+          "$ref": "#/definitions/UpgradeContext",
+          "description": "Contextual information about how this upgrade is managed, such as the upgrade strategy, next maintenance window, and last successful upgrade time.",
+          "readOnly": true
+        },
+        "evaluation": {
+          "$ref": "#/definitions/UpgradeInsightEvaluation",
+          "description": "The evaluation result, including overall status, evaluation time, and any detected issues.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpgradeInsightProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AgentPool"
     },
     "AgentPoolUpgradeProfile": {
       "type": "object",
@@ -8812,6 +9103,24 @@
       "required": [
         "namespaceSelector"
       ]
+    },
+    "ArmImpactedResource": {
+      "type": "object",
+      "description": "An Azure Resource Manager (ARM) resource impacted by a detected upgrade issue, identified by its ARM resource ID.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the impacted resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpgradeInsightImpactedResource"
+        }
+      ],
+      "x-ms-discriminator-value": "Arm"
     },
     "AutoScaleProfile": {
       "type": "object",
@@ -9751,6 +10060,77 @@
         "keyData"
       ]
     },
+    "ControlPlaneAndAgentPoolsGenerateUpgradeInsightsContent": {
+      "type": "object",
+      "description": "Request body to evaluate the combined control plane and agent pools Kubernetes version upgrade.",
+      "properties": {
+        "targetKubernetesVersion": {
+          "type": "string",
+          "description": "The target Kubernetes version to evaluate for all scopes."
+        }
+      },
+      "required": [
+        "targetKubernetesVersion"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenerateUpgradeInsightsContent"
+        }
+      ],
+      "x-ms-discriminator-value": "ControlPlaneAndAgentPools"
+    },
+    "ControlPlaneAndAgentPoolsUpgradeInsightProperties": {
+      "type": "object",
+      "description": "Properties for a combined control plane and agent pools Kubernetes version upgrade\ninsight: a single evaluation of the control plane plus every agent pool for one\ntarget Kubernetes version. This scope is Kubernetes-version-only — node OS image\nupgrades are never part of a combined evaluation and must be requested separately\nwith a `nodeImage-<agentPoolName>-<nodeImageVersion>` insight.",
+      "properties": {
+        "targetKubernetesVersion": {
+          "type": "string",
+          "description": "The target Kubernetes version that was evaluated for all scopes.",
+          "readOnly": true
+        },
+        "controlPlane": {
+          "$ref": "#/definitions/ScopeEvaluationResult",
+          "description": "The readiness evaluation for the control plane Kubernetes version upgrade.",
+          "readOnly": true
+        },
+        "agentPools": {
+          "type": "array",
+          "description": "The readiness evaluation for each agent pool Kubernetes version upgrade, one entry per agent pool.",
+          "items": {
+            "$ref": "#/definitions/AgentPoolScopeEvaluation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "agentPoolName"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpgradeInsightProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ControlPlaneAndAgentPools"
+    },
+    "ControlPlaneGenerateUpgradeInsightsContent": {
+      "type": "object",
+      "description": "Request body to evaluate a control plane (managed cluster) Kubernetes version upgrade.",
+      "properties": {
+        "targetKubernetesVersion": {
+          "type": "string",
+          "description": "The target Kubernetes version to evaluate."
+        }
+      },
+      "required": [
+        "targetKubernetesVersion"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenerateUpgradeInsightsContent"
+        }
+      ],
+      "x-ms-discriminator-value": "ControlPlane"
+    },
     "ControlPlaneScalingSize": {
       "type": "string",
       "description": "The scaling size of the control plane. Scaling sizes offer guaranteed capacity and predictable Kubernetes performance beyond standard tier defaults. Higher H sizes provide increased performance guarantees. See https://aka.ms/aks/hyperscale for performance metrics details for each size.",
@@ -9780,6 +10160,49 @@
           }
         ]
       }
+    },
+    "ControlPlaneUpgradeInsightProperties": {
+      "type": "object",
+      "description": "Properties for a control plane (managed cluster) Kubernetes version upgrade insight.",
+      "properties": {
+        "targetKubernetesVersion": {
+          "type": "string",
+          "description": "The target Kubernetes version that was evaluated.",
+          "readOnly": true
+        },
+        "currentKubernetesVersion": {
+          "type": "string",
+          "description": "The Kubernetes version the scope was evaluated from (the upgrade source version the scope is currently running). Lets consumers read the result as \"from X to targetKubernetesVersion\" and detect a stale cached record by comparing against the live cluster version. Populated for Kubernetes version upgrades.",
+          "readOnly": true
+        },
+        "kubernetesVersionSupportStatus": {
+          "$ref": "#/definitions/KubernetesVersionSupportStatus",
+          "description": "The support status of the Kubernetes version the scope is currently running (not the target version). Populated for Kubernetes version upgrades.",
+          "readOnly": true
+        },
+        "kubernetesVersionEndOfSupportDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The date on which support ends for the Kubernetes version the scope is currently\nrunning (its end-of-support date). Returned as an absolute date so clients can apply\ntheir own \"approaching end of support\" threshold and compute the remaining days against\nthe current time; a precomputed remaining-days value is intentionally not returned so\nthat cached results do not go stale. Populated for Kubernetes version upgrades.",
+          "readOnly": true
+        },
+        "context": {
+          "$ref": "#/definitions/UpgradeContext",
+          "description": "Contextual information about how this upgrade is managed, such as the upgrade strategy, next maintenance window, and last successful upgrade time.",
+          "readOnly": true
+        },
+        "evaluation": {
+          "$ref": "#/definitions/UpgradeInsightEvaluation",
+          "description": "The evaluation result, including overall status, evaluation time, and any detected issues.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpgradeInsightProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ControlPlane"
     },
     "CreationData": {
       "type": "object",
@@ -9916,6 +10339,45 @@
             "description": "Delete both the ARM resource and the Kubernetes namespace together."
           }
         ]
+      }
+    },
+    "DetectedUpgradeIssue": {
+      "type": "object",
+      "description": "A detected upgrade issue for a managed cluster.",
+      "properties": {
+        "issueType": {
+          "$ref": "#/definitions/UpgradeIssueType",
+          "description": "The type of the detected upgrade issue.",
+          "readOnly": true
+        },
+        "severity": {
+          "$ref": "#/definitions/UpgradeIssueSeverity",
+          "description": "The severity of the detected issue.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable description of the issue and why it may block or risk the upgrade.",
+          "readOnly": true
+        },
+        "impactedResources": {
+          "type": "array",
+          "description": "The Azure or Kubernetes resources impacted by this issue. A single issue can affect multiple resources (for example, one removed Kubernetes API version affecting several objects).",
+          "items": {
+            "$ref": "#/definitions/UpgradeInsightImpactedResource"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "recommendedActions": {
+          "type": "array",
+          "description": "The recommended actions to resolve this issue. Today this always contains a\nsingle action whose documentation link covers all of the options the user could\ntake to remediate the issue; it is modeled as an array so that additional distinct\nactions can be returned in the future without a breaking change.",
+          "items": {
+            "$ref": "#/definitions/UpgradeInsightRecommendedAction"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
       }
     },
     "DriftAction": {
@@ -10182,6 +10644,20 @@
           }
         ]
       }
+    },
+    "GenerateUpgradeInsightsContent": {
+      "type": "object",
+      "description": "The base request body for the generateUpgradeInsights action. The concrete shape is\ndetermined by `upgradeType`, so that each scope declares exactly the inputs it needs:\nthe schema itself enforces which of `targetKubernetesVersion`,\n`targetNodeImageVersion`, and `agentPoolName` are required or optional, rather than\nrelying on documented conventions plus server-side validation. The server generates\n(or refreshes) the corresponding UpgradeInsight and returns it.",
+      "properties": {
+        "upgradeType": {
+          "$ref": "#/definitions/UpgradeType",
+          "description": "The type of upgrade to evaluate."
+        }
+      },
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
     },
     "GuardrailsAvailableVersion": {
       "type": "object",
@@ -10513,6 +10989,30 @@
         ]
       },
       "readOnly": true
+    },
+    "ImpactedResourceKind": {
+      "type": "string",
+      "description": "The category of a resource impacted by a detected upgrade issue.",
+      "enum": [
+        "Arm",
+        "Kubernetes"
+      ],
+      "x-ms-enum": {
+        "name": "ImpactedResourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Arm",
+            "value": "Arm",
+            "description": "An Azure Resource Manager (ARM) resource."
+          },
+          {
+            "name": "Kubernetes",
+            "value": "Kubernetes",
+            "description": "A Kubernetes resource."
+          }
+        ]
+      }
     },
     "InfrastructureEncryption": {
       "type": "string",
@@ -11073,6 +11573,28 @@
         ]
       }
     },
+    "KubernetesImpactedResource": {
+      "type": "object",
+      "description": "A Kubernetes resource impacted by a detected upgrade issue, identified by its namespace and name.",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "The Kubernetes namespace of the impacted resource, if applicable.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the impacted Kubernetes resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpgradeInsightImpactedResource"
+        }
+      ],
+      "x-ms-discriminator-value": "Kubernetes"
+    },
     "KubernetesPatchVersion": {
       "type": "object",
       "description": "Kubernetes patch version profile",
@@ -11174,6 +11696,30 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "KubernetesVersionSupportStatus": {
+      "type": "string",
+      "description": "The support status of the Kubernetes version the cluster is currently running. This is\nintentionally binary — there is no discrete `ApproachingEOL` value. Proximity to end of\nsupport is derived by clients from `kubernetesVersionEndOfSupportDate` (comparing it\nagainst the current time), so no server-computed \"approaching EOS\" flag or message is\nreturned that could go stale in a cached record.",
+      "enum": [
+        "InSupport",
+        "OutOfSupport"
+      ],
+      "x-ms-enum": {
+        "name": "KubernetesVersionSupportStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InSupport",
+            "value": "InSupport",
+            "description": "The scope is running a Kubernetes version that is still within its support window."
+          },
+          {
+            "name": "OutOfSupport",
+            "value": "OutOfSupport",
+            "description": "The scope is running a Kubernetes version that is past its end of support."
+          }
+        ]
       }
     },
     "LabelSelector": {
@@ -12301,6 +12847,30 @@
         "startTime",
         "durationHours"
       ]
+    },
+    "MaintenanceWindowSource": {
+      "type": "string",
+      "description": "The auto-upgrade schedule that a maintenance window is derived from.",
+      "enum": [
+        "ClusterAutoUpgradeSchedule",
+        "NodeOSUpgradeSchedule"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceWindowSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ClusterAutoUpgradeSchedule",
+            "value": "ClusterAutoUpgradeSchedule",
+            "description": "The window is derived from the cluster auto-upgrade schedule (aksManagedAutoUpgradeSchedule), which governs Kubernetes version upgrades."
+          },
+          {
+            "name": "NodeOSUpgradeSchedule",
+            "value": "NodeOSUpgradeSchedule",
+            "description": "The window is derived from the node OS auto-upgrade schedule (aksManagedNodeOSUpgradeSchedule), which governs node OS image upgrades."
+          }
+        ]
+      }
     },
     "ManagedCluster": {
       "type": "object",
@@ -15860,6 +16430,66 @@
         }
       }
     },
+    "NodeImageGenerateUpgradeInsightsContent": {
+      "type": "object",
+      "description": "Request body to evaluate a single agent pool node OS image upgrade.",
+      "properties": {
+        "agentPoolName": {
+          "type": "string",
+          "description": "The name of the agent pool to evaluate."
+        },
+        "targetNodeImageVersion": {
+          "type": "string",
+          "description": "The target node OS image version to evaluate. If omitted, the server resolves and evaluates the latest available node image. The resolved full version is always returned in the generated insight's read-only `targetNodeImageVersion` property."
+        }
+      },
+      "required": [
+        "agentPoolName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenerateUpgradeInsightsContent"
+        }
+      ],
+      "x-ms-discriminator-value": "NodeImage"
+    },
+    "NodeImageUpgradeInsightProperties": {
+      "type": "object",
+      "description": "Properties for a single agent pool node OS image upgrade insight.",
+      "properties": {
+        "agentPoolName": {
+          "type": "string",
+          "description": "The name of the agent pool this insight applies to.",
+          "readOnly": true
+        },
+        "currentNodeImageVersion": {
+          "type": "string",
+          "description": "The node OS image version the agent pool was evaluated from (the upgrade source version it is currently running). Lets consumers read the result as \"from X to targetNodeImageVersion\" and detect a stale cached record by comparing against the live node image version.",
+          "readOnly": true
+        },
+        "targetNodeImageVersion": {
+          "type": "string",
+          "description": "The target node OS image version that was evaluated.",
+          "readOnly": true
+        },
+        "context": {
+          "$ref": "#/definitions/UpgradeContext",
+          "description": "Contextual information about how this upgrade is managed, such as the upgrade strategy, next maintenance window, and last successful upgrade time.",
+          "readOnly": true
+        },
+        "evaluation": {
+          "$ref": "#/definitions/UpgradeInsightEvaluation",
+          "description": "The evaluation result, including overall status, evaluation time, and any detected issues.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpgradeInsightProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "NodeImage"
+    },
     "NodeImageVersion": {
       "type": "object",
       "description": "node image version profile for given major.minor.patch release.",
@@ -17442,6 +18072,38 @@
         }
       }
     },
+    "ScopeEvaluationResult": {
+      "type": "object",
+      "description": "The readiness evaluation details shared by a single scope: the support status of the\nversion the scope is currently running, the upgrade context, and the evaluation\nresult. All fields are server-computed and read-only.",
+      "properties": {
+        "currentKubernetesVersion": {
+          "type": "string",
+          "description": "The Kubernetes version the scope was evaluated from (the upgrade source version the scope is currently running). Lets consumers read the result as \"from X to targetKubernetesVersion\" and detect a stale cached record by comparing against the live cluster version. Populated for Kubernetes version upgrades.",
+          "readOnly": true
+        },
+        "kubernetesVersionSupportStatus": {
+          "$ref": "#/definitions/KubernetesVersionSupportStatus",
+          "description": "The support status of the Kubernetes version the scope is currently running (not the target version). Populated for Kubernetes version upgrades.",
+          "readOnly": true
+        },
+        "kubernetesVersionEndOfSupportDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The date on which support ends for the Kubernetes version the scope is currently\nrunning (its end-of-support date). Returned as an absolute date so clients can apply\ntheir own \"approaching end of support\" threshold and compute the remaining days against\nthe current time; a precomputed remaining-days value is intentionally not returned so\nthat cached results do not go stale. Populated for Kubernetes version upgrades.",
+          "readOnly": true
+        },
+        "context": {
+          "$ref": "#/definitions/UpgradeContext",
+          "description": "Contextual information about how this upgrade is managed, such as the upgrade strategy, next maintenance window, and last successful upgrade time.",
+          "readOnly": true
+        },
+        "evaluation": {
+          "$ref": "#/definitions/UpgradeInsightEvaluation",
+          "description": "The evaluation result, including overall status, evaluation time, and any detected issues.",
+          "readOnly": true
+        }
+      }
+    },
     "SeccompDefault": {
       "type": "string",
       "description": "Specifies the default seccomp profile applied to all workloads. If not specified, 'Unconfined' will be used by default.",
@@ -18216,6 +18878,28 @@
         ]
       }
     },
+    "UpgradeContext": {
+      "type": "object",
+      "description": "Contextual information for a specific upgrade type (Kubernetes version or node OS\nimage). Because the Kubernetes version and node OS image can be managed\nindependently — for example, auto-upgrade for the node image but manual for the\nKubernetes version — this context is reported per upgrade type rather than once\nfor the whole cluster.",
+      "properties": {
+        "currentUpgradeStrategy": {
+          "$ref": "#/definitions/UpgradeInsightStrategy",
+          "description": "The strategy currently used to perform this type of upgrade (manual or auto-upgrade).",
+          "readOnly": true
+        },
+        "nextMaintenanceWindow": {
+          "$ref": "#/definitions/UpgradeInsightMaintenanceWindow",
+          "description": "The next scheduled automatic upgrade maintenance window for this upgrade type, if auto-upgrade is configured.",
+          "readOnly": true
+        },
+        "lastSuccessfulUpgradeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time of the last successful upgrade of this type for this scope.\nClients can compute \"days since last successful upgrade\" from this value and the\ncurrent time; the server intentionally does not return a precomputed value so that\ncached results do not go stale.",
+          "readOnly": true
+        }
+      }
+    },
     "UpgradeGateSettings": {
       "type": "object",
       "description": "Settings for health-aware upgrade gating.",
@@ -18224,6 +18908,306 @@
           "type": "boolean",
           "description": "Whether upgrade gating is enabled. Defaults to `false` when unset, except on a newly created agent pool in a cluster where upgrade gating is enabled, which defaults to `true`. When `true`, upgrade-gated health checks are enabled for upgrades in the corresponding scope. Setting this to `true` at the cluster scope enables gating for the entire cluster, including all agent pool upgrades. When the cluster scope is unset or `false`, an agent pool can opt in independently by setting this to `true`. When the cluster scope is `true`, an agent pool cannot set this to `false`. Force upgrade (`overrideSettings.forceUpgrade`) overrides the gate: while the override window is active, the upgrade skips health signal validation and proceeds."
         }
+      }
+    },
+    "UpgradeInsight": {
+      "type": "object",
+      "description": "An upgrade insight for a managed cluster: an on-demand readiness evaluation for an\nupgrade scope, produced by the generateUpgradeInsights action on the managed cluster\nand addressable by a server-generated name. The name identifies\nthe scope and evaluated target —\n`controlPlane-<targetKubernetesVersion>` (for example `controlPlane-1.33.5`),\n`controlPlaneAndAgentPools-<targetKubernetesVersion>`,\n`agentPool-<agentPoolName>-<targetKubernetesVersion>` (for example\n`agentPool-nodepool1-1.33.5`), or\n`nodeImage-<agentPoolName>-<nodeImageVersion>` (for example\n`nodeImage-nodepool1-202607.01.0`). The node image segment contains only the numeric\nimage version, while `properties.targetNodeImageVersion` returns the full image name.\nThe resource itself\nis read-only: GET returns the stored evaluation and LIST returns the stored\nevaluations for the cluster. Evaluations are (re)generated via the managed cluster's\ngenerateUpgradeInsights action, whose response body is the same UpgradeInsight\nrepresentation returned by GET.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpgradeInsightProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UpgradeInsightEvaluation": {
+      "type": "object",
+      "description": "The evaluation payload shared by all upgrade insight results, containing the\noverall status, evaluation time, and any detected issues. Whenever this object is\npresent the evaluation has run, so `status` and `evaluatedAt` are always populated;\nthe \"not yet evaluated\" state is signaled by the absence of this `evaluation` object\n(and by `provisioningState`), never by a present evaluation with an absent status.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/UpgradeInsightStatus",
+          "description": "The overall upgrade insight status indicating whether issues were detected. Always present when the evaluation has run; absence of the enclosing `evaluation` object—not an absent status—represents \"not yet evaluated\".",
+          "readOnly": true
+        },
+        "evaluatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time at which the upgrade insight evaluation was performed.",
+          "readOnly": true
+        },
+        "detectedIssues": {
+          "type": "array",
+          "description": "The list of detected upgrade issues, if any. Empty or absent for a `Passed` status.",
+          "items": {
+            "$ref": "#/definitions/DetectedUpgradeIssue"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "status",
+        "evaluatedAt"
+      ]
+    },
+    "UpgradeInsightImpactedResource": {
+      "type": "object",
+      "description": "A resource impacted by a detected upgrade issue. The concrete shape is determined\nby `kind`: an ARM resource is identified by its ARM resource ID, while a Kubernetes\nresource is identified by its namespace and name.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ImpactedResourceKind",
+          "description": "The category of the impacted resource.",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the impacted resource (for example, Microsoft.Network/virtualNetworks/subnets or PodDisruptionBudget).",
+          "readOnly": true
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "UpgradeInsightListResult": {
+      "type": "object",
+      "description": "The response of a UpgradeInsight list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpgradeInsight items on this page",
+          "items": {
+            "$ref": "#/definitions/UpgradeInsight"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UpgradeInsightMaintenanceWindow": {
+      "type": "object",
+      "description": "A scheduled maintenance window during which an automatic upgrade of this type is\nexpected to run. The window is derived from the maintenance configuration that\ngoverns this upgrade type — the cluster auto-upgrade schedule for Kubernetes\nversion upgrades or the node OS upgrade schedule for node image upgrades — so the\nsame model describes both without duplicating types.",
+      "properties": {
+        "maintenanceConfigurationName": {
+          "type": "string",
+          "description": "The name of the maintenance configuration that governs this window (for example, aksManagedAutoUpgradeSchedule or aksManagedNodeOSUpgradeSchedule).",
+          "readOnly": true
+        },
+        "source": {
+          "$ref": "#/definitions/MaintenanceWindowSource",
+          "description": "The auto-upgrade schedule that this window is derived from.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC start time of the next scheduled maintenance window.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC end time of the next scheduled maintenance window.",
+          "readOnly": true
+        }
+      }
+    },
+    "UpgradeInsightProperties": {
+      "type": "object",
+      "description": "The base properties of an upgrade insight. The concrete shape is determined by\n`upgradeType`, which is encoded in the resource name: single-scope evaluations\n(`ControlPlane`, `AgentPool`, `NodeImage`) carry a flat per-scope result, while a\ncombined evaluation (`ControlPlaneAndAgentPools`) carries a nested control plane\nresult plus a per-agent-pool array.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the upgrade insight evaluation.",
+          "readOnly": true
+        },
+        "upgradeType": {
+          "$ref": "#/definitions/UpgradeType",
+          "description": "The type of upgrade this insight evaluates. Derived from the resource name.",
+          "readOnly": true
+        },
+        "lastEvaluatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time at which this upgrade insight was last computed (the last time the\ncompute operation ran for this resource). This is the resource-level \"last run\"\nmarker and, for a cached record, indicates how stale the stored evaluation is. For\na combined evaluation it is the umbrella run time across all scopes, whereas each\nscope's `evaluation.evaluatedAt` records when that specific snapshot was produced.",
+          "readOnly": true
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time at which this stored upgrade insight expires and is removed from the\ndata store (currently `lastEvaluatedAt` plus a 14-day retention window). After this\ntime a GET for the resource returns 404 Not Found and it no longer appears in the\nlist, indicating the caller should call the compute operation to produce a fresh\nevaluation. Exposing the expiry lets clients decide when to recompute without\nhardcoding the retention period.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
+    },
+    "UpgradeInsightRecommendedAction": {
+      "type": "object",
+      "description": "A recommended action to resolve a detected upgrade issue.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "A short title describing the recommended action.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "string",
+          "description": "A detailed description of the recommended action and how to perform it.",
+          "readOnly": true
+        },
+        "documentationLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "A link to customer-facing documentation describing the available options for remediating the issue.",
+          "readOnly": true
+        }
+      }
+    },
+    "UpgradeInsightStatus": {
+      "type": "string",
+      "description": "The overall status of an upgrade insight readiness evaluation. This is an aggregation of the\nper-issue `severity` values in `detectedIssues`: any `Blocking` issue ⇒ `Failed`;\notherwise any `Warning` issue ⇒ `Warning`; otherwise (no issues) ⇒ `Passed`. The\nscope-level vocabulary here (Passed/Warning/Failed) intentionally differs from the\nissue-level `UpgradeIssueSeverity` (Blocking/Warning): a `Blocking` issue maps to\na `Failed` status, while `Warning` maps through unchanged.",
+      "enum": [
+        "Passed",
+        "Warning",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "UpgradeInsightStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "The evaluation completed and no upgrade issues were found for the target version; the scope appears ready to upgrade."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "The evaluation found one or more non-blocking warnings; the upgrade is expected to succeed but the warnings should be reviewed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The evaluation found one or more blocking issues that will prevent the upgrade from completing until they are resolved. This reflects the readiness result, not a failure of the compute operation itself (that is conveyed by provisioningState)."
+          }
+        ]
+      }
+    },
+    "UpgradeInsightStrategy": {
+      "type": "string",
+      "description": "The strategy currently used to perform an upgrade (manual or automatic).",
+      "enum": [
+        "Manual",
+        "Auto"
+      ],
+      "x-ms-enum": {
+        "name": "UpgradeInsightStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Upgrades are initiated manually by the customer."
+          },
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "Upgrades are performed automatically by AKS auto-upgrade."
+          }
+        ]
+      }
+    },
+    "UpgradeIssueSeverity": {
+      "type": "string",
+      "description": "The severity of a detected upgrade issue.",
+      "enum": [
+        "Blocking",
+        "Warning"
+      ],
+      "x-ms-enum": {
+        "name": "UpgradeIssueSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Blocking",
+            "value": "Blocking",
+            "description": "The issue will block the upgrade from completing successfully."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "The issue may cause problems with client applications or services on the cluster but will not necessarily prevent the upgrade from completing."
+          }
+        ]
+      }
+    },
+    "UpgradeIssueType": {
+      "type": "string",
+      "description": "The type of a detected upgrade issue.",
+      "enum": [
+        "PDBConstraint",
+        "SubnetIPExhausted",
+        "QuotaExceeded",
+        "APIBreakingChange",
+        "ComponentVersionMismatch",
+        "UnsupportedKubernetesVersion",
+        "NodeImageOutOfSLA"
+      ],
+      "x-ms-enum": {
+        "name": "UpgradeIssueType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PDBConstraint",
+            "value": "PDBConstraint",
+            "description": "A restrictive PodDisruptionBudget prevents node drain during upgrade. See https://aka.ms/aks/upgrade-insights/pdb-constraint for remediation guidance."
+          },
+          {
+            "name": "SubnetIPExhausted",
+            "value": "SubnetIPExhausted",
+            "description": "The cluster subnet does not have sufficient available IP addresses for surge nodes during upgrade. See https://aka.ms/aks/upgrade-insights/subnet-ip-exhaustion for remediation guidance."
+          },
+          {
+            "name": "QuotaExceeded",
+            "value": "QuotaExceeded",
+            "description": "Compute quota for the node pool VM SKU is insufficient to accommodate surge nodes during upgrade. See https://aka.ms/aks/upgrade-insights/quota-exceeded for remediation guidance."
+          },
+          {
+            "name": "APIBreakingChange",
+            "value": "APIBreakingChange",
+            "description": "The cluster is using deprecated Kubernetes APIs that are removed in the target version. See https://aka.ms/aks/upgrade-insights/api-breaking-change for remediation guidance."
+          },
+          {
+            "name": "ComponentVersionMismatch",
+            "value": "ComponentVersionMismatch",
+            "description": "An add-on or system component is not compatible with the target Kubernetes version. See https://aka.ms/aks/upgrade-insights/component-version-mismatch for remediation guidance."
+          },
+          {
+            "name": "UnsupportedKubernetesVersion",
+            "value": "UnsupportedKubernetesVersion",
+            "description": "The cluster is running a Kubernetes version that is no longer supported. See https://aka.ms/aks/upgrade-insights/unsupported-kubernetes-version for remediation guidance."
+          },
+          {
+            "name": "NodeImageOutOfSLA",
+            "value": "NodeImageOutOfSLA",
+            "description": "The cluster node image has not been upgraded within the required compliance interval. See https://aka.ms/aks/upgrade-insights/node-image-out-of-sla for remediation guidance."
+          }
+        ]
       }
     },
     "UpgradeOverrideSettings": {
@@ -18261,6 +19245,42 @@
             "name": "BlueGreen",
             "value": "BlueGreen",
             "description": "Specifies that the agent pool will conduct blue-green upgrade."
+          }
+        ]
+      }
+    },
+    "UpgradeType": {
+      "type": "string",
+      "description": "The type of upgrade an upgrade insight evaluates. Each upgrade insight resource\nrepresents exactly one of these scopes; the scope is encoded in the resource name.",
+      "enum": [
+        "ControlPlane",
+        "AgentPool",
+        "NodeImage",
+        "ControlPlaneAndAgentPools"
+      ],
+      "x-ms-enum": {
+        "name": "UpgradeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ControlPlane",
+            "value": "ControlPlane",
+            "description": "The control plane (managed cluster) Kubernetes version upgrade."
+          },
+          {
+            "name": "AgentPool",
+            "value": "AgentPool",
+            "description": "An agent pool (node pool) Kubernetes version upgrade."
+          },
+          {
+            "name": "NodeImage",
+            "value": "NodeImage",
+            "description": "An agent pool node OS image upgrade. NodeImage upgrade insights are evaluated per agent pool, mirroring the per-pool node-image upgrade API (.../agentPools/{name}), and cover the node OS image only; agent-pool Kubernetes version readiness is evaluated separately via the AgentPool or ControlPlaneAndAgentPools scopes."
+          },
+          {
+            "name": "ControlPlaneAndAgentPools",
+            "value": "ControlPlaneAndAgentPools",
+            "description": "A combined evaluation of the control plane plus every agent pool for a single target Kubernetes version. This scope covers Kubernetes version upgrades only; node OS image upgrades are not included and must be evaluated separately using the NodeImage scope."
           }
         ]
       }

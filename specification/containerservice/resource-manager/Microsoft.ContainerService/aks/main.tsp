@@ -39,6 +39,7 @@ import "./AgentFabricMembership.tsp";
 import "./Operations.tsp";
 import "./LocationRoutes.tsp";
 import "./AlertConfiguration.tsp";
+import "./UpgradeInsight.tsp";
 import "./client.tsp";
 
 using Azure.ResourceManager;
