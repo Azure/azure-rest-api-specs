@@ -247,6 +247,17 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/authPolicies/{authPolicyName}"].put.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/authPolicies/{authPolicyName}"].put.responses["201"].schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/authPolicies/{authPolicyName}"].patch.responses["200"].schema
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    reason: The service contract represents whether an authorization policy association applies at profile scope as a binary value.
+    where:
+      - $.definitions.AuthPolicyAssociation.properties.isProfileLevel
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    reason: The service contract represents whether an authorization token is forwarded to the origin as a binary value.
+    where:
+      - $.definitions.AuthPolicyProperties.properties.forwardTokenToOrigin
+      - $.definitions.AuthPolicyUpdatePropertiesParameters.properties.forwardTokenToOrigin
   - code: PutResponseCodes
     from: openapi.json
     reason: Preserve the bodyless 202 response used by existing clients for asynchronous AuthPolicy replacement.
