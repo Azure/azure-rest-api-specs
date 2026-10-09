@@ -24,7 +24,7 @@ model ErrorPolicy
     Resource = ErrorPolicy,
     KeyName = "errorPolicyName",
     SegmentName = "errorPolicies",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
   >;
 }
 
