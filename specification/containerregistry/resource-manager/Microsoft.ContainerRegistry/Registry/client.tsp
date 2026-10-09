@@ -61,6 +61,7 @@ using Microsoft.ContainerRegistry;
 // which matches the behavior of the previous SDK where the type was represented as a plain string.
 namespace Microsoft.ContainerRegistry {
   /** Extensible union for ContainerRegistryResourceType to accept both known enum values and arbitrary strings. */
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
   union ContainerRegistryResourceTypeExtensible {
     ContainerRegistryResourceType,
     string,
