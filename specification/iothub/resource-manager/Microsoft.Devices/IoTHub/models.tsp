@@ -171,6 +171,7 @@ union RoutingSource {
   /**
    * DigitalTwinChangeEvents
    */
+  @removed(Versions.v2026_11_01)
   DigitalTwinChangeEvents: "DigitalTwinChangeEvents",
 
   /**
@@ -181,7 +182,21 @@ union RoutingSource {
   /**
    * MqttBrokerMessages
    */
+  @removed(Versions.v2026_11_01)
   MqttBrokerMessages: "MqttBrokerMessages",
+}
+
+/**
+ * The source to which the fallback route is applied.
+ */
+@added(Versions.v2026_11_01)
+union FallbackRouteSource {
+  string,
+
+  /**
+   * Device-to-cloud messages sent by devices.
+   */
+  DeviceMessages: "DeviceMessages",
 }
 
 /**
@@ -745,6 +760,7 @@ model ErrorDetails {
  * The connection profile that the IoT hub uses for device connections.
  */
 @added(Versions.v2026_10_01_preview)
+@removed(Versions.v2026_11_01)
 union ConnectionProfile {
   string,
 
@@ -763,6 +779,7 @@ union ConnectionProfile {
  * Settings for an Event Grid-backed MQTT v5 IoT hub.
  */
 @added(Versions.v2026_10_01_preview)
+@removed(Versions.v2026_11_01)
 model MqttV5Settings {
   /**
    * The customer-defined groups of topic templates that devices publish to.
@@ -775,6 +792,7 @@ model MqttV5Settings {
  * A named set of topic templates for an Event Grid-backed MQTT v5 IoT hub.
  */
 @added(Versions.v2026_10_01_preview)
+@removed(Versions.v2026_11_01)
 model TopicGroup {
   /**
    * The customer-supplied identifier used to reconcile the topic group during updates.
@@ -922,6 +940,7 @@ model IotHubProperties {
   /**
    * The device streams properties of iothub.
    */
+  @removed(Versions.v2026_11_01)
   deviceStreams?: IotHubPropertiesDeviceStreams;
 
   /**
@@ -932,6 +951,7 @@ model IotHubProperties {
   /**
    * The encryption properties for the IoT hub.
    */
+  @removed(Versions.v2026_11_01)
   encryption?: EncryptionPropertiesDescription;
 
   /**
@@ -949,23 +969,27 @@ model IotHubProperties {
   /**
    * This property store root certificate related information
    */
+  @removed(Versions.v2026_11_01)
   rootCertificate?: RootCertificateProperties;
 
   /**
    * This property specifies the IP Version the hub is currently utilizing.
    */
+  @removed(Versions.v2026_11_01)
   ipVersion?: IpVersion;
 
   /**
    * The connection profile that the IoT hub uses for device connections. Defaults to 'Classic'.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   connectionProfile?: ConnectionProfile = ConnectionProfile.Classic;
 
   /**
    * The custom topic configuration for an Event Grid-backed MQTT v5 IoT hub. This property is valid only when connectionProfile is 'MqttV5'.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   mqttV5Settings?: MqttV5Settings;
 
   /**
@@ -1247,6 +1271,7 @@ model RoutingEndpoints {
  * The supported formats for message payloads delivered to routing endpoints.
  */
 @added(Versions.v2026_10_01_preview)
+@removed(Versions.v2026_11_01)
 union MessagePayloadFormat {
   string,
 
@@ -1317,6 +1342,7 @@ model RoutingEventStreamProperties {
    * The format of the message payload delivered to this endpoint.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   messagePayloadFormat?: MessagePayloadFormat;
 }
 
@@ -1375,6 +1401,7 @@ model RoutingServiceBusQueueEndpointProperties {
    * The format of the message payload delivered to this endpoint.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   messagePayloadFormat?: MessagePayloadFormat;
 }
 
@@ -1443,6 +1470,7 @@ model RoutingServiceBusTopicEndpointProperties {
    * The format of the message payload delivered to this endpoint.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   messagePayloadFormat?: MessagePayloadFormat;
 }
 
@@ -1501,6 +1529,7 @@ model RoutingEventHubProperties {
    * The format of the message payload delivered to this endpoint.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   messagePayloadFormat?: MessagePayloadFormat;
 }
 
@@ -1583,6 +1612,7 @@ model RoutingStorageContainerProperties {
    * The format of the message payload delivered to this endpoint.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   messagePayloadFormat?: MessagePayloadFormat;
 }
 
@@ -1664,6 +1694,7 @@ model RoutingCosmosDBSqlApiProperties {
    * The format of the message payload delivered to this endpoint.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   messagePayloadFormat?: MessagePayloadFormat;
 }
 
@@ -1691,6 +1722,7 @@ model RouteProperties {
    * The data schema reference that is used to interpret the message body.
    */
   @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
   dataSchema?: string;
 
   /**
@@ -1718,7 +1750,8 @@ model FallbackRouteProperties {
   /**
    * The source to which the routing rule is to be applied to. For example, DeviceMessages
    */
-  source: RoutingSource;
+  @typeChangedFrom(Versions.v2026_11_01, RoutingSource)
+  source: FallbackRouteSource;
 
   /**
    * The condition which is evaluated in order to apply the fallback route. If the condition is not provided it will evaluate to true by default. For grammar, See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language
@@ -1915,6 +1948,7 @@ model IotHubLocationDescription {
 /**
  * This property store root certificate related information
  */
+@removed(Versions.v2026_11_01)
 model RootCertificateProperties {
   /**
    * This property when set to true, hub will use G2 cert; while it's set to false, hub uses Baltimore Cert.
