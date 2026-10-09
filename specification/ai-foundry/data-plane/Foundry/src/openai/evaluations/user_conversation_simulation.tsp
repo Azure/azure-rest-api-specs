@@ -4,6 +4,7 @@ namespace Azure.AI.Projects;
 
 /** Sources supported by user conversation simulation. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union UserConversationSimulationSource {
   evalJsonlFileContent: OpenAI.EvalJsonlFileContentSource,
   evalJsonlFileId: OpenAI.EvalJsonlFileIdSource,
