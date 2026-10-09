@@ -4152,6 +4152,9 @@
         "x-ms-examples": {
           "Get a cost control with all settings": {
             "$ref": "./examples/CostControl/get.json"
+          },
+          "Read a legacy cost control without authoring its legacy values": {
+            "$ref": "./examples/CostControl/getLegacy.json"
           }
         }
       },
@@ -4313,6 +4316,9 @@
         "x-ms-examples": {
           "Update all configurable cost control settings": {
             "$ref": "./examples/CostControl/update.json"
+          },
+          "Update metadata while preserving legacy rules": {
+            "$ref": "./examples/CostControl/updateMetadata.json"
           }
         }
       },
@@ -16969,12 +16975,12 @@
     },
     "CostControlConnections": {
       "type": "object",
-      "description": "Account-level connections used to publish cost control telemetry and events.",
+      "description": "Defines account-level connections used to publish cost-control telemetry and events.\nApplication Insights is optional and may be removed while policies remain attached.\nEvent Grid is required for alerts; supplied connection references must still be valid.",
       "properties": {
         "appInsightsConnectionId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The full resource ID of the Application Insights connection used for cost control audit telemetry. This connection is optional for attachment, accounting, and enforcement, and can be configured later. Customer audit delivery requires this connection.",
+          "description": "Gets or sets the full resource ID of the optional Application Insights connection.",
           "x-nullable": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
@@ -17014,9 +17020,8 @@
         },
         "attribute": {
           "type": "string",
-          "description": "The request attribute used by a custom dimension. This property is required for custom dimensions and must be omitted for built-in dimensions.",
-          "maxLength": 128,
-          "pattern": "^[a-zA-Z][a-zA-Z0-9_.-]{0,127}$"
+          "description": "Gets or sets the attribute path retained for legacy Custom counters.\nAuthored rules cannot select Custom; built-in dimensions must omit this property.",
+          "readOnly": true
         }
       },
       "required": [
@@ -17025,7 +17030,7 @@
     },
     "CostControlDimensionType": {
       "type": "string",
-      "description": "The supported cost control counter dimensions.",
+      "description": "Cost control counter dimensions, including Custom retained for legacy read compatibility.",
       "enum": [
         "Agent",
         "Identity",
@@ -17066,7 +17071,7 @@
           {
             "name": "Custom",
             "value": "Custom",
-            "description": "Consumption is partitioned by a custom request attribute."
+            "description": "Legacy read-only dimension using `CostControlDimension.Attribute`.\nNew Custom counter authoring is reserved for future support."
           }
         ]
       }
@@ -17097,11 +17102,11 @@
     },
     "CostControlMatch": {
       "type": "object",
-      "description": "Up to four trusted request attributes and their allowed values used to select matching requests.",
+      "description": "Gets or sets optional match arrays keyed by `agentResourceIds`, `identityObjectIds`,\n`sessionIds`, or `projectIds`. Each array contains 1 to 20 non-empty values.\nAgent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.\nLegacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key.",
       "properties": {
-        "agentIds": {
+        "agentResourceIds": {
           "type": "array",
-          "description": "The stable Foundry agent IDs to match.",
+          "description": "Agent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.",
           "minItems": 1,
           "maxItems": 20,
           "items": {
@@ -17187,16 +17192,29 @@
     },
     "CostControlPeriod": {
       "type": "string",
-      "description": "The calendar-aligned UTC renewal periods for recurring cost control rules.",
+      "description": "Calendar-aligned UTC renewal periods, including legacy values retained for read compatibility.",
       "enum": [
+        "Minute",
+        "Hour",
         "Day",
         "Week",
-        "Month"
+        "Month",
+        "Year"
       ],
       "x-ms-enum": {
         "name": "CostControlPeriod",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Minute",
+            "value": "Minute",
+            "description": "Legacy read-only period renewing at the start of the next UTC minute."
+          },
+          {
+            "name": "Hour",
+            "value": "Hour",
+            "description": "Legacy read-only period renewing at the start of the next UTC hour."
+          },
           {
             "name": "Day",
             "value": "Day",
@@ -17211,6 +17229,11 @@
             "name": "Month",
             "value": "Month",
             "description": "Renews on the first day of each month at 00:00 UTC."
+          },
+          {
+            "name": "Year",
+            "value": "Year",
+            "description": "Legacy read-only period renewing January 1 at 00:00 UTC."
           }
         ]
       }
@@ -17256,17 +17279,9 @@
             "create"
           ]
         },
-        "counterKeys": {
-          "type": "array",
-          "description": "The built-in dimension used to partition consumption. The initial preview supports exactly one dimension.",
-          "minItems": 1,
-          "maxItems": 1,
-          "items": {
-            "$ref": "#/definitions/CostControlDimension"
-          },
-          "x-ms-identifiers": [
-            "type"
-          ]
+        "counterKey": {
+          "$ref": "#/definitions/CostControlDimension",
+          "description": "Gets or sets the single built-in dimension used to partition consumption.\nCustom dimensions are retained only for legacy reads and metadata-only updates.\nLegacy singleton arrays are accepted on read; serialization always emits an object.\nTo track another field, create another rule."
         },
         "unit": {
           "$ref": "#/definitions/CostControlUnit",
@@ -17279,7 +17294,7 @@
         },
         "period": {
           "$ref": "#/definitions/CostControlPeriod",
-          "description": "The calendar-aligned UTC renewal period. This property is required for recurring rules and omitted for non-recurring rules."
+          "description": "Gets or sets the calendar-aligned UTC renewal period. Authored rules support Day, Week, or Month.\nThis field is required for recurring rules and must be omitted for non-recurring rules.\nLegacy stored minute, hour, and year periods are preserved when reading definitions."
         },
         "recurring": {
           "type": "boolean",
@@ -17288,11 +17303,11 @@
         },
         "match": {
           "$ref": "#/definitions/CostControlMatch",
-          "description": "Trusted request attributes and allowed values used to select matching requests."
+          "description": "Gets or sets optional match arrays keyed by `agentResourceIds`, `identityObjectIds`,\n`sessionIds`, or `projectIds`. Each array contains 1 to 20 non-empty values.\nAgent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.\nLegacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key."
         },
         "thresholds": {
           "type": "array",
-          "description": "The optional actions evaluated as consumption approaches the configured amount. Omitted, null, or empty thresholds define an audit-only rule. Explicit audit thresholds must use a value of zero. Only an explicit block threshold enforces a limit.",
+          "description": "Gets or sets optional thresholds. Omitted or empty thresholds track usage without explicit actions.\nAuthored thresholds must explicitly specify Alert or Block; Audit is retained for legacy reads.",
           "maxItems": 10,
           "x-nullable": true,
           "items": {
@@ -17303,7 +17318,7 @@
       },
       "required": [
         "name",
-        "counterKeys",
+        "counterKey",
         "unit",
         "amount"
       ]
@@ -17319,44 +17334,18 @@
         "value": {
           "type": "number",
           "format": "double",
-          "description": "The threshold value. Audit thresholds must use zero. Block and alert thresholds must be greater than zero. Percentage values cannot exceed 100, and absolute values cannot exceed the rule amount.",
+          "description": "Gets or sets the threshold value. Legacy Audit definitions retain their stored values;\nnew thresholds support only Alert or Block.",
           "minimum": 0
         },
         "action": {
-          "type": "string",
-          "description": "The action taken when the threshold is reached. Omitted actions default to audit and therefore require a value of zero.",
-          "default": "Audit",
-          "enum": [
-            "Audit",
-            "Alert",
-            "Block"
-          ],
-          "x-ms-enum": {
-            "name": "CostControlThresholdAction",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Audit",
-                "value": "Audit",
-                "description": "Audits every applied usage update. Authored audit thresholds must use zero. This action is retained in the current preview for compatibility; audit-only rules may omit thresholds."
-              },
-              {
-                "name": "Alert",
-                "value": "Alert",
-                "description": "Emits a customer-facing alert without blocking requests."
-              },
-              {
-                "name": "Block",
-                "value": "Block",
-                "description": "Blocks the request without emitting a customer-facing alert."
-              }
-            ]
-          }
+          "$ref": "#/definitions/CostControlThresholdAction",
+          "description": "Gets or sets the threshold action. Authored thresholds must explicitly specify Alert or Block.\nLegacy stored definitions with omitted actions continue to read as Audit."
         }
       },
       "required": [
         "type",
-        "value"
+        "value",
+        "action"
       ]
     },
     "CostControlThresholdAction": {
@@ -17374,7 +17363,7 @@
           {
             "name": "Audit",
             "value": "Audit",
-            "description": "Audits every applied usage update. Authored audit thresholds must use zero. This action is retained in the current preview for compatibility; audit-only rules may omit thresholds."
+            "description": "Legacy read-only action retained to deserialize existing definitions without changing their semantics."
           },
           {
             "name": "Alert",

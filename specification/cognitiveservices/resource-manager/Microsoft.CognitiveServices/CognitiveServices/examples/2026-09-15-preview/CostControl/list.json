@@ -22,20 +22,11 @@
               "rules": [
                 {
                   "name": "monthly-agent-budget",
-                  "counterKeys": [
-                    {
-                      "type": "Agent"
-                    }
-                  ],
                   "unit": "Usd",
                   "amount": 1000,
                   "period": "Month",
                   "recurring": true,
                   "match": {
-                    "agentIds": [
-                      "customer-support-agent",
-                      "sales-assistant-agent"
-                    ],
                     "identityObjectIds": [
                       "11111111-2222-3333-4444-555555555555"
                     ],
@@ -44,6 +35,10 @@
                     ],
                     "projectIds": [
                       "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/projects/production"
+                    ],
+                    "agentResourceIds": [
+                      "/subscriptions/00000000-1111-2222-3333-444444444444/accounts/foundry-account/project/production/agent/customer-support-agent",
+                      "/subscriptions/00000000-1111-2222-3333-444444444444/accounts/foundry-account/project/production/agent/sales-assistant-agent"
                     ]
                   },
                   "thresholds": [
@@ -57,16 +52,13 @@
                       "value": 1000,
                       "action": "Block"
                     }
-                  ]
+                  ],
+                  "counterKey": {
+                    "type": "Agent"
+                  }
                 },
                 {
-                  "name": "daily-tenant-budget",
-                  "counterKeys": [
-                    {
-                      "type": "Custom",
-                      "attribute": "x-tenant-id"
-                    }
-                  ],
+                  "name": "daily-account-budget",
                   "unit": "Usd",
                   "amount": 100,
                   "period": "Day",
@@ -77,7 +69,10 @@
                       "value": 90,
                       "action": "Alert"
                     }
-                  ]
+                  ],
+                  "counterKey": {
+                    "type": "Account"
+                  }
                 }
               ]
             }

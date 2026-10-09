@@ -89,12 +89,14 @@ model CostControlPatch {
 }
 
 /**
- * Account-level connections used to publish cost control telemetry and events.
+ * Defines account-level connections used to publish cost-control telemetry and events.
+ * Application Insights is optional and may be removed while policies remain attached.
+ * Event Grid is required for alerts; supplied connection references must still be valid.
  */
 @added(Versions.v2026_09_15_preview)
 model CostControlConnections {
   /**
-   * The full resource ID of the Application Insights connection used for cost control audit telemetry. This connection is optional for attachment, accounting, and enforcement, and can be configured later. Customer audit delivery requires this connection.
+   * Gets or sets the full resource ID of the optional Application Insights connection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted appInsightsConnectionId from an explicit null in PATCH so callers can clear the value."
   appInsightsConnectionId?:
@@ -133,12 +135,12 @@ model CostControlRule {
   name: string;
 
   /**
-   * The built-in dimension used to partition consumption. The initial preview supports exactly one dimension.
+   * Gets or sets the single built-in dimension used to partition consumption.
+   * Custom dimensions are retained only for legacy reads and metadata-only updates.
+   * Legacy singleton arrays are accepted on read; serialization always emits an object.
+   * To track another field, create another rule.
    */
-  @minItems(1)
-  @maxItems(1)
-  @identifiers(#["type"])
-  counterKeys: CostControlDimension[];
+  counterKey: CostControlDimension;
 
   /**
    * The unit used for the cost control amount and absolute thresholds.
@@ -152,7 +154,9 @@ model CostControlRule {
   amount: float64;
 
   /**
-   * The calendar-aligned UTC renewal period. This property is required for recurring rules and omitted for non-recurring rules.
+   * Gets or sets the calendar-aligned UTC renewal period. Authored rules support Day, Week, or Month.
+   * This field is required for recurring rules and must be omitted for non-recurring rules.
+   * Legacy stored minute, hour, and year periods are preserved when reading definitions.
    */
   period?: CostControlPeriod;
 
@@ -162,14 +166,18 @@ model CostControlRule {
   recurring?: boolean = true;
 
   /**
-   * Trusted request attributes and allowed values used to select matching requests.
+   * Gets or sets optional match arrays keyed by `agentResourceIds`, `identityObjectIds`,
+   * `sessionIds`, or `projectIds`. Each array contains 1 to 20 non-empty values.
+   * Agent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.
+   * Legacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key.
    */
   match?: CostControlMatch;
 
   /**
-   * The optional actions evaluated as consumption approaches the configured amount. Omitted, null, or empty thresholds define an audit-only rule. Explicit audit thresholds must use a value of zero. Only an explicit block threshold enforces a limit.
+   * Gets or sets optional thresholds. Omitted or empty thresholds track usage without explicit actions.
+   * Authored thresholds must explicitly specify Alert or Block; Audit is retained for legacy reads.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The current preview accepts omitted, null, or empty thresholds as an audit-only rule."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service accepts omitted, null, or empty thresholds to track usage without synthesizing actions."
   @maxItems(10)
   // @identifiers does not accept nullable array unions.
   @TypeSpec.OpenAPI.extension("x-ms-identifiers", #[])
@@ -177,16 +185,19 @@ model CostControlRule {
 }
 
 /**
- * Up to four trusted request attributes and their allowed values used to select matching requests.
+ * Gets or sets optional match arrays keyed by `agentResourceIds`, `identityObjectIds`,
+ * `sessionIds`, or `projectIds`. Each array contains 1 to 20 non-empty values.
+ * Agent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.
+ * Legacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key.
  */
 @added(Versions.v2026_09_15_preview)
 model CostControlMatch {
   /**
-   * The stable Foundry agent IDs to match.
+   * Agent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.
    */
   @minItems(1)
   @maxItems(20)
-  agentIds?: CostControlMatchValue[];
+  agentResourceIds?: CostControlMatchValue[];
 
   /**
    * The authenticated principal object IDs to match.
@@ -234,15 +245,15 @@ model CostControlDimension {
   type: CostControlDimensionType;
 
   /**
-   * The request attribute used by a custom dimension. This property is required for custom dimensions and must be omitted for built-in dimensions.
+   * Gets or sets the attribute path retained for legacy Custom counters.
+   * Authored rules cannot select Custom; built-in dimensions must omit this property.
    */
-  @maxLength(128)
-  @pattern("^[a-zA-Z][a-zA-Z0-9_.-]{0,127}$")
+  @visibility(Lifecycle.Read)
   attribute?: string;
 }
 
 /**
- * The supported cost control counter dimensions.
+ * Cost control counter dimensions, including Custom retained for legacy read compatibility.
  */
 @added(Versions.v2026_09_15_preview)
 union CostControlDimensionType {
@@ -274,7 +285,8 @@ union CostControlDimensionType {
   Account: "Account",
 
   /**
-   * Consumption is partitioned by a custom request attribute.
+   * Legacy read-only dimension using `CostControlDimension.Attribute`.
+   * New Custom counter authoring is reserved for future support.
    */
   Custom: "Custom",
 }
@@ -293,11 +305,17 @@ union CostControlUnit {
 }
 
 /**
- * The calendar-aligned UTC renewal periods for recurring cost control rules.
+ * Calendar-aligned UTC renewal periods, including legacy values retained for read compatibility.
  */
 @added(Versions.v2026_09_15_preview)
 union CostControlPeriod {
   string,
+
+  /** Legacy read-only period renewing at the start of the next UTC minute. */
+  Minute: "Minute",
+
+  /** Legacy read-only period renewing at the start of the next UTC hour. */
+  Hour: "Hour",
 
   /**
    * Renews daily at 00:00 UTC.
@@ -313,6 +331,9 @@ union CostControlPeriod {
    * Renews on the first day of each month at 00:00 UTC.
    */
   Month: "Month",
+
+  /** Legacy read-only period renewing January 1 at 00:00 UTC. */
+  Year: "Year",
 }
 
 /**
@@ -326,15 +347,17 @@ model CostControlThreshold {
   type: CostControlThresholdType;
 
   /**
-   * The threshold value. Audit thresholds must use zero. Block and alert thresholds must be greater than zero. Percentage values cannot exceed 100, and absolute values cannot exceed the rule amount.
+   * Gets or sets the threshold value. Legacy Audit definitions retain their stored values;
+   * new thresholds support only Alert or Block.
    */
   @minValue(0)
   value: float64;
 
   /**
-   * The action taken when the threshold is reached. Omitted actions default to audit and therefore require a value of zero.
+   * Gets or sets the threshold action. Authored thresholds must explicitly specify Alert or Block.
+   * Legacy stored definitions with omitted actions continue to read as Audit.
    */
-  action?: CostControlThresholdAction = CostControlThresholdAction.Audit;
+  action: CostControlThresholdAction;
 }
 
 /**
@@ -363,7 +386,7 @@ union CostControlThresholdAction {
   string,
 
   /**
-   * Audits every applied usage update. Authored audit thresholds must use zero. This action is retained in the current preview for compatibility; audit-only rules may omit thresholds.
+   * Legacy read-only action retained to deserialize existing definitions without changing their semantics.
    */
   Audit: "Audit",
 
