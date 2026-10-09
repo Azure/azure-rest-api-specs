@@ -1,14 +1,12 @@
-import { mockFolder, mockSimpleGit } from "./mocks.ts";
-mockSimpleGit();
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
+import { mockFolder } from "./mocks.ts";
 
 import * as simpleGit from "simple-git";
 
 import { strict as assert } from "node:assert";
-import path from "path";
+import path from "pathe";
 import { afterEach, describe, it, vi } from "vitest";
 import { NpmPrefixRule } from "../src/rules/npm-prefix.ts";
-
-import * as utils from "../src/utils.ts";
 
 vi.mock("package-directory", () => ({
   packageDirectory: vi.fn(),
@@ -26,24 +24,20 @@ describe("npm-prefix", function () {
       `C:${path.sep}Git${path.sep}azure-rest-api-specs`,
     );
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
+    // oxlint-disable-next-line typescript/unbound-method
     vi.mocked(simpleGit.simpleGit().revparse).mockResolvedValue("c:/Git/azure-rest-api-specs");
 
-    vi.spyOn(utils, "normalizePath").mockImplementation((folder) =>
-      utils.normalizePathImpl(folder, path.win32),
-    );
-
-    const result = await new NpmPrefixRule().execute(mockFolder);
+    const result = await new NpmPrefixRule().execute(mockFolder, defaultLogger);
 
     assert(result.success);
   });
 
   it("should fail if npm prefix mismatch", async function () {
     vi.mocked(packageDirectory).mockResolvedValue("/Git/azure-rest-api-specs/specification/foo");
-    // eslint-disable-next-line @typescript-eslint/unbound-method
+    // oxlint-disable-next-line typescript/unbound-method
     vi.mocked(simpleGit.simpleGit().revparse).mockResolvedValue("/Git/azure-rest-api-specs");
 
-    const result = await new NpmPrefixRule().execute(mockFolder);
+    const result = await new NpmPrefixRule().execute(mockFolder, defaultLogger);
 
     assert(!result.success);
   });

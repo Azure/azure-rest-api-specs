@@ -203,6 +203,7 @@ model BulkCreateCustomPriorityProfile {
   @doc("Eviction Policy to follow when evicting Spot VMs.")
   evictionPolicy?: EvictionPolicy;
 
+  @removed(Versions.`2026-10-06-preview`)
   @doc("The allocation strategy for VM size selection")
   allocationStrategy?: BulkCreateCustomAllocationStrategy;
 }
@@ -252,6 +253,7 @@ model BulkCreateCustomProperties {
   @doc("Configuration Options for Regular or Spot instances in BulkCreateCustom.")
   priorityProfile: BulkCreateCustomPriorityProfile;
 
+  @removed(Versions.`2026-10-06-preview`)
   @identifiers(#[])
   @doc("List of VM sizes supported for BulkCreateCustom")
   vmSizesProfile?: Array<BulkCreateCustomVmSizeProfile>;
@@ -259,6 +261,7 @@ model BulkCreateCustomProperties {
   @doc("Compute Profile to configure the Virtual Machines.")
   computeProfile: ComputeProfile;
 
+  @removed(Versions.`2026-10-06-preview`)
   @doc("Zone Allocation Policy for launching instances.")
   zoneAllocationPolicy?: BulkCreateCustomZoneAllocationPolicy;
 

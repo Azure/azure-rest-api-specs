@@ -1324,12 +1324,12 @@
           {
             "name": "managed",
             "value": "Managed",
-            "description": "Default. Managed is the default mode for Compute Fleet where VMs are provisioned via virtual machine scale sets."
+            "description": "Default. Managed mode where Compute Fleet provisions the VMs, manages them and their lifecycle."
           },
           {
             "name": "launch",
             "value": "Launch",
-            "description": "Launch mode for Compute Fleet will directly launch VM instances to be managed by the customer."
+            "description": "Launch mode where Compute Fleet launches the VMs and the customer manages them and their lifecycle."
           }
         ]
       }
@@ -3134,6 +3134,7 @@
         },
         "protectedSettings": {
           "type": "object",
+          "format": "password",
           "description": "The extension can contain either protectedSettings or\nprotectedSettingsFromKeyVault or no protected settings at all.",
           "additionalProperties": {},
           "x-ms-mutability": [

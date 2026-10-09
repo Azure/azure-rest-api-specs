@@ -1,0 +1,530 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Data AI",
+    "version": "2026-09-01-preview",
+    "description": "Azure Data AI provides semantic reranking operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The Azure Data AI endpoint.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "https://dbinference.azure.com/.default"
+      ]
+    },
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://dbinference.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    },
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/inference/semanticReranking": {
+      "post": {
+        "operationId": "SemanticRerank",
+        "description": "Reranks documents by their relevance to a query.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The semantic reranking request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SemanticRerankingInferenceContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SemanticRerankingInferenceResult"
+            },
+            "headers": {
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              }
+            }
+          },
+          "429": {
+            "description": "The request was rate limited.",
+            "schema": {
+              "$ref": "#/definitions/TooManyRequestsResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The number of seconds the client should wait before retrying the request."
+              },
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "#/definitions/InferenceErrorResult"
+            },
+            "headers": {
+              "X-Correlation-ID": {
+                "type": "string",
+                "description": "An identifier used to correlate the response with service diagnostics."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SemanticRerank_Post": {
+            "$ref": "./examples/Inference_SemanticRerank.json"
+          },
+          "SemanticRerank_PostJsonDocuments": {
+            "$ref": "./examples/Inference_SemanticRerankJson.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "CorrelatedResponseHeaders": {
+      "type": "object",
+      "description": "Headers returned by every inference response."
+    },
+    "InferenceErrorResult": {
+      "type": "object",
+      "description": "An unexpected error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ProblemDetails",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "InferenceOperationError": {},
+    "LatencyResult": {
+      "type": "object",
+      "description": "The result of the latency in the semantic reranking operation.",
+      "properties": {
+        "dataPreprocessTime": {
+          "$ref": "#/definitions/Milliseconds",
+          "description": "The time spent on data preprocessing in the semantic reranking operation, in milliseconds.",
+          "x-ms-client-name": "dataPreprocessDuration"
+        },
+        "inferenceTime": {
+          "$ref": "#/definitions/Milliseconds",
+          "description": "The time spent on inference in the semantic reranking operation, in milliseconds.",
+          "x-ms-client-name": "inferenceDuration"
+        },
+        "postProcessTime": {
+          "$ref": "#/definitions/Milliseconds",
+          "description": "The time spent on post-processing in the semantic reranking operation, in milliseconds.",
+          "x-ms-client-name": "postProcessDuration"
+        }
+      }
+    },
+    "Milliseconds": {
+      "type": "number",
+      "format": "float"
+    },
+    "ProblemDetails": {
+      "type": "object",
+      "description": "Details about an HTTP API error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        },
+        "type": {
+          "type": "string",
+          "description": "A URI reference identifying the problem type.",
+          "x-nullable": true
+        },
+        "title": {
+          "type": "string",
+          "description": "A short, human-readable summary of the problem.",
+          "x-nullable": true
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTP status code associated with the problem.",
+          "x-nullable": true
+        },
+        "detail": {
+          "type": "string",
+          "description": "A human-readable explanation specific to this occurrence.",
+          "x-nullable": true
+        },
+        "instance": {
+          "type": "string",
+          "description": "A URI reference identifying this occurrence of the problem.",
+          "x-nullable": true
+        },
+        "extensions": {
+          "type": "object",
+          "description": "Additional service-defined details about the problem.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "additionalProperties": {}
+    },
+    "SemanticRerankingDocumentType": {
+      "type": "string",
+      "description": "The format of a document submitted for semantic reranking.",
+      "enum": [
+        "text",
+        "json"
+      ],
+      "x-ms-enum": {
+        "name": "SemanticRerankingDocumentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Text",
+            "value": "text",
+            "description": "A plain-text document."
+          },
+          {
+            "name": "Json",
+            "value": "json",
+            "description": "A JSON document."
+          }
+        ]
+      }
+    },
+    "SemanticRerankingInferenceContent": {
+      "type": "object",
+      "description": "The input for a semantic reranking operation.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query used to rank the documents.",
+          "minLength": 1,
+          "maxLength": 2147483647
+        },
+        "documents": {
+          "type": "array",
+          "description": "The documents to rank against the query.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "returnDocuments": {
+          "type": "boolean",
+          "description": "Whether the response should include the submitted documents."
+        },
+        "topK": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of ranked documents to return.",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "batchSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of documents processed in each batch.",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "sort": {
+          "type": "boolean",
+          "description": "Whether to return documents sorted by relevance score."
+        },
+        "documentType": {
+          "$ref": "#/definitions/SemanticRerankingDocumentType",
+          "description": "The format of the submitted documents."
+        },
+        "targetPaths": {
+          "type": "string",
+          "description": "The property containing text to rank when the document type is JSON.\nThis property is required for JSON documents. Use dot notation for a nested property, for example `meta.content`.\nYou can specify multiple property paths separated by commas, for example `meta.content,id`.",
+          "maxLength": 2147483647
+        },
+        "model": {
+          "type": "string",
+          "description": "The name of the model used for the semantic reranking operation.",
+          "maxLength": 2147483647
+        },
+        "returnSentenceScore": {
+          "type": "boolean",
+          "description": "Whether to return sentence-level scores in the response."
+        }
+      },
+      "required": [
+        "query",
+        "documents"
+      ]
+    },
+    "SemanticRerankingInferenceResult": {
+      "type": "object",
+      "description": "The result of a semantic reranking operation.",
+      "properties": {
+        "scores": {
+          "type": "array",
+          "description": "The relevance scores for the submitted documents.",
+          "items": {
+            "$ref": "#/definitions/SemanticRerankingScore"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/SemanticRerankingMetaResult",
+          "description": "Additional metadata about the semantic reranking operation."
+        }
+      }
+    },
+    "SemanticRerankingMetaResult": {
+      "type": "object",
+      "description": "Additional metadata about the semantic reranking operation.",
+      "properties": {
+        "tokenUsage": {
+          "$ref": "#/definitions/TokenUsageResult",
+          "description": "The number of tokens processed in the request."
+        },
+        "latency": {
+          "$ref": "#/definitions/LatencyResult",
+          "description": "The latency of the semantic reranking operation."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "The name of the model used for the semantic reranking operation."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "The version of the model used for the semantic reranking operation."
+        }
+      }
+    },
+    "SemanticRerankingResult": {
+      "type": "object",
+      "description": "A successful semantic reranking response.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/SemanticRerankingInferenceResult",
+          "description": "The semantic reranking result."
+        }
+      },
+      "required": [
+        "result"
+      ]
+    },
+    "SemanticRerankingScore": {
+      "type": "object",
+      "description": "A relevance score assigned to a submitted document.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero-based position of the document in the request."
+        },
+        "document": {
+          "type": "string",
+          "description": "The submitted document when requested in the response."
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "The relevance score assigned to the document."
+        },
+        "sentenceScores": {
+          "type": "array",
+          "description": "The sentence-level relevance scores for the submitted document.",
+          "items": {
+            "$ref": "#/definitions/SentenceScore"
+          }
+        }
+      }
+    },
+    "SentenceScore": {
+      "type": "object",
+      "description": "A sentence-level relevance score for a submitted document.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The zero-based position of the sentence in the document.",
+          "minimum": 0
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "The relevance score assigned to the sentence.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "index",
+        "score"
+      ]
+    },
+    "TokenUsageResult": {
+      "type": "object",
+      "description": "The result of the token usage in the semantic reranking operation.",
+      "properties": {
+        "totalTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens processed in the semantic reranking operation."
+        }
+      }
+    },
+    "TooManyRequestsResult": {
+      "type": "object",
+      "description": "The request was rejected because the service is receiving too many requests.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ProblemDetails",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

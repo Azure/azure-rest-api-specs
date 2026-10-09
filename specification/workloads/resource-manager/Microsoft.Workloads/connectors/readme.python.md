@@ -7,13 +7,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 title: ConnectorMgmtClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-workloads-connector
-namespace: azure.mgmt.workloads.connector
+package-name: azure-mgmt-workloadsconnector
+namespace: azure.mgmt.workloadsconnector
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/workloads/azure-mgmt-workloads/azure/mgmt/connector
+output-folder: $(python-sdks-folder)/workloads/azure-mgmt-workloadsconnector/azure/mgmt/workloadsconnector
 ```

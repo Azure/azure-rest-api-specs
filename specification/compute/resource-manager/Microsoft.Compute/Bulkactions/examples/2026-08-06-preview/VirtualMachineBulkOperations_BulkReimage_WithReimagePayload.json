@@ -1,0 +1,62 @@
+{
+  "title": "03 - Reimage virtual machines with per-VM temporary disk settings",
+  "description": "The reimageParameters request property contains a ReimagePayload with shared settings in baseProfile and per-VM settings in resourceOverrides. This example assumes both virtual machines use ephemeral OS disks, which are required for the tempDisk option. The shared baseProfile sets tempDisk to true, so ephemeral-vm-01 has both its OS disk and temporary disk reimaged. The resourceOverrides entry for ephemeral-vm-02 sets tempDisk to false, so only its OS disk is reimaged. Both OS disks are reimaged using their current image versions because exactVersion is omitted. Reimaging is destructive. The response returns operation IDs for tracking, not confirmation that reimaging has completed; use those IDs with Get Operation Status.",
+  "operationId": "VirtualMachineBulkOperations_BulkReimage",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "requestBody": {
+      "executionParameters": {},
+      "resources": {
+        "ids": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/ephemeral-vm-01",
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/ephemeral-vm-02"
+        ]
+      },
+      "reimageParameters": {
+        "baseProfile": {
+          "tempDisk": true
+        },
+        "resourceOverrides": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/ephemeral-vm-02",
+            "profile": {
+              "tempDisk": false
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "VirtualMachines",
+        "location": "eastus",
+        "description": "Reimage Resource request",
+        "results": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/ephemeral-vm-01",
+            "operation": {
+              "operationId": "589be017-3996-450c-bdc7-6041c726d703",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/ephemeral-vm-01",
+              "opType": "Reimage",
+              "state": "PendingScheduling"
+            }
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/ephemeral-vm-02",
+            "operation": {
+              "operationId": "88b90cde-28db-42c3-b356-9c601c1799e4",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/virtualMachines/ephemeral-vm-02",
+              "opType": "Reimage",
+              "state": "PendingScheduling"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

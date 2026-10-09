@@ -1,0 +1,42 @@
+{
+  "operationId": "ServiceEntitlementSettings_CreateOrUpdate",
+  "title": "Creates or updates a service entitlement setting without optional tags",
+  "parameters": {
+    "api-version": "2026-09-16-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "myResourceGroup",
+    "serviceEntitlementSettingName": "default",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "isDefault": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/serviceEntitlementSettings/default",
+        "name": "default",
+        "type": "Microsoft.Security/serviceEntitlementSettings",
+        "location": "eastus",
+        "properties": {
+          "isDefault": true,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/serviceEntitlementSettings/default",
+        "name": "default",
+        "type": "Microsoft.Security/serviceEntitlementSettings",
+        "location": "eastus",
+        "properties": {
+          "isDefault": true,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

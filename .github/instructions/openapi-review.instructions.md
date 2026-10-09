@@ -115,7 +115,7 @@ If **none** of these signals are present, the new API version is being authored 
 
 A finding "passes" the rule means the rule does not appear in the findings list at any severity. Listing it in a "Compliant Areas" or "N/A" table is acceptable.
 
-**Fix.** Author the new API version in TypeSpec using the Azure TypeSpec libraries. See [Getting Started with TypeSpec specifications](../../documentation/Getting-started-with-TypeSpec-specifications.md) and the [TypeSpec dev process](../../documentation/typespec-rest-api-dev-process.md) for end-to-end guidance. Generated OpenAPI from `tsp compile .` is then checked in alongside the TypeSpec source.
+**Fix.** Author the new API version in TypeSpec using the Azure TypeSpec libraries. See [Getting Started with TypeSpec specifications](../../documentation/Getting-started-with-TypeSpec-specifications.md) and the [TypeSpec dev process](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec) for end-to-end guidance. Generated OpenAPI from `tsp compile .` is then checked in alongside the TypeSpec source.
 
 **Enforcement.** Current CI does not deterministically enforce this exact
 new-version condition. The Reviewer must apply it without implying that an
@@ -337,7 +337,7 @@ HTTP finding against an ARM operation that follows the ARM rule.
 
 - If an operation can take more than 1 second at the 99th percentile, it **MUST** be implemented as an LRO.
 - Mark LRO operations with `"x-ms-long-running-operation": true`.
-- For POST LROs with a response schema, specify `"x-ms-long-running-operation-options"` with `"final-state-via": "location"` (or `"azure-async-operation"` only if the status monitor itself contains the result). For PUT, PATCH, and DELETE following standard ARM patterns, do **NOT** specify `final-state-via` -- the default SDK behavior is already correct. See [`.github/skills/azure-api-review/references/lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md) for the full decision table.
+- For ARM LROs, apply the [shared ARM LRO reference](../skills/azure-api-review/references/lro-final-state-via.md) when reviewing `x-ms-long-running-operation-options` and `final-state-via`. Standard template-emitted metadata on PUT/PATCH/DELETE is not inherently incorrect; require evidence of a contract mismatch or SDK incompatibility before raising a finding. For data-plane LROs, apply the data-plane guidance rather than importing ARM-specific final-result rules.
 - LRO operations **MUST** return `202-Accepted` (for POST/DELETE) or `201-Created` / `200-OK` (for PUT) with an `Operation-Location` or `Azure-AsyncOperation` header.
 
 > **Note:** This section describes general LRO patterns. For ARM control-plane,

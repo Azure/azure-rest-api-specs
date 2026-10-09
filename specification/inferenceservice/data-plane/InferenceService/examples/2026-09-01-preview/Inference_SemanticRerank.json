@@ -1,0 +1,89 @@
+{
+  "title": "SemanticRerank_Post",
+  "operationId": "SemanticRerank",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "request": {
+      "query": "What is the capital of France?",
+      "documents": [
+        "Paris is the capital and most populous city of France.",
+        "Berlin is the capital and largest city of Germany.",
+        "Madrid is the capital and most populous city of Spain."
+      ],
+      "returnDocuments": true,
+      "topK": 2,
+      "batchSize": 3,
+      "sort": true,
+      "documentType": "text",
+      "model": "semantic-reranker-v1",
+      "returnSentenceScore": true
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "X-Correlation-ID": "2f4f91d4-8f30-4f27-928f-68b03284bc3e"
+      },
+      "body": {
+        "scores": [
+          {
+            "index": 0,
+            "document": "Paris is the capital. Paris is the most populous city of France.",
+            "score": 0.98,
+            "sentenceScores": [
+              {
+                "index": 0,
+                "score": 0.98
+              },
+              {
+                "index": 1,
+                "score": 0.21
+              }
+            ]
+          },
+          {
+            "index": 1,
+            "document": "Berlin is the capital and largest city of Germany.",
+            "score": 0.21,
+            "sentenceScores": [
+              {
+                "index": 0,
+                "score": 0.21
+              }
+            ]
+          }
+        ],
+        "meta": {
+          "tokenUsage": {
+            "totalTokens": 38
+          },
+          "latency": {
+            "dataPreprocessTime": 1.2,
+            "inferenceTime": 12.7,
+            "postProcessTime": 0.8
+          },
+          "modelName": "semantic-reranker-v1",
+          "modelVersion": "2026-09-01"
+        }
+      }
+    },
+    "429": {
+      "headers": {
+        "Retry-After": 30,
+        "X-Correlation-ID": "fa7b14d8-bd8f-4557-8d21-36ed4310e74a",
+        "x-ms-error-code": "TooManyRequests"
+      },
+      "body": {
+        "error": {
+          "code": "TooManyRequests",
+          "message": "The request rate exceeded the service limit. Retry after 30 seconds.",
+          "type": "https://example.inference.azure.com/errors/too-many-requests",
+          "title": "Too many requests",
+          "status": 429,
+          "detail": "The request rate exceeded the service limit. Retry after 30 seconds.",
+          "instance": "/inference/semanticReranking"
+        }
+      }
+    }
+  }
+}

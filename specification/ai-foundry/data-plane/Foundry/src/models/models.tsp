@@ -101,6 +101,7 @@ model FoundryModelWarning {
 @Rest.resource("models")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model ModelVersion {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("URI of the model artifact in blob storage")
   blobUri: url;
 
@@ -224,6 +225,7 @@ model ModelPendingUploadResponse {
 @doc("Request to fetch credentials for a model asset.")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model ModelCredentialRequest {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Blob URI of the model asset to fetch credentials for.")
   blobUri: url;
 }
