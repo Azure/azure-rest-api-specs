@@ -101046,26 +101046,6 @@
           ]
         }
       },
-      "VoiceAgentRealtimeResponse": {
-        "type": "object",
-        "properties": {
-          "audio": {
-            "$ref": "#/components/schemas/VoiceResponseAudio",
-            "description": "The audio configuration used by the live response, including flat voice provider, locale, and format fields under `output`."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeResponse"
-          }
-        ],
-        "description": "A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceAgentSemanticVadTurnDetection": {
         "type": "object",
         "required": [
@@ -102113,48 +102093,6 @@
           }
         ],
         "description": "A persisted voice response representing one model inference turn within a conversation. In list results the\n`output` projection may be omitted; retrieve the\nfull response (`GET .../responses/{response_id}`) or the paged response-items route\n(`GET .../responses/{response_id}/items`) for its output items. `created_at`/`completed_at` are Foundry\ndurable ordering extensions.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceResponseAudio": {
-        "type": "object",
-        "properties": {
-          "output": {
-            "$ref": "#/components/schemas/VoiceResponseAudioOutput",
-            "description": "The audio output configuration used for the response."
-          }
-        },
-        "description": "Audio configuration for a response. Follows the OpenAI Realtime GA `audio` object shape.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceResponseAudioOutput": {
-        "type": "object",
-        "properties": {
-          "voice": {
-            "type": "string",
-            "description": "The voice name used for the response's audio output."
-          },
-          "voice_type": {
-            "$ref": "#/components/schemas/VoiceType",
-            "description": "The extensible provider/type of the voice used for the response's audio output."
-          },
-          "voice_locale": {
-            "type": "string",
-            "description": "The BCP-47 locale of the voice used for the response's audio output."
-          },
-          "format": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats",
-            "description": "The audio format used for the response's audio output."
-          }
-        },
-        "description": "The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

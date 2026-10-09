@@ -325,10 +325,11 @@ model VoiceAgentResponseCreateParams {
 );
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance reuses the OpenAI response contract while retaining Foundry live audio extensions."
 @doc("A live realtime response returned by the voice-agent service in both `response.created` and `response.done` events.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentRealtimeResponse extends OpenAI.RealtimeResponse {
+model VoiceAgentRealtimeResponse {
+  ...OmitProperties<OpenAI.RealtimeResponse, "audio">;
+
   @doc("The audio configuration used by the live response, including flat voice provider, locale, and format fields under `output`.")
   audio?: VoiceResponseAudio;
 }
