@@ -188,7 +188,12 @@ describe("publishAnalysisResult", () => {
     expect(github.rest.issues.createComment).toHaveBeenCalledWith(
       expect.objectContaining({
         issue_number: 42,
-        body: `/azsdk sdk-breaking-analysis Go\n\n❌ ${errorMessage}`,
+        body: [
+          `/azsdk sdk-breaking-analysis Go`,
+          "",
+          `❌ ${errorMessage}`,
+          "<!-- /azsdk sdk-breaking-analysis Go -->",
+        ].join("\n"),
       }),
     );
     expect(github.rest.pulls.get).not.toHaveBeenCalled();
@@ -210,6 +215,7 @@ describe("publishAnalysisResult", () => {
           "/azsdk sdk-breaking-analysis Go",
           "",
           `⚠️ Analysis result for ${analyzedSha} is stale; current PR head is ${currentSha}.`,
+          "<!-- /azsdk sdk-breaking-analysis Go -->",
         ].join("\n"),
       }),
     );
