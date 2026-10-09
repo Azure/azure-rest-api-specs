@@ -95,9 +95,9 @@ jobs:
       - script: |
           pwd
           ls -la
-          ls -la ../../../../spec-workspace
+          ls -la ../../../../artifacts/specs-cache/azure-rest-api-specs
           test -f ../SKILL.md
-          git -C ../../../../spec-workspace status
+          git -C ../../../../artifacts/specs-cache/azure-rest-api-specs status
         displayName: Verify assessment eval paths
         workingDirectory: $(Build.SourcesDirectory)/.github/skills/azure-typespec-assessment/evals
 

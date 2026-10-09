@@ -40,5 +40,8 @@ steps:
       SKILL_BRANCH: $(SkillBranch)
 
   - script: |
-      git clone https://github.com/Azure/azure-rest-api-specs.git "$(Build.SourcesDirectory)/spec-workspace"
-    displayName: "Clone spec repository"
+      CACHE="$(Build.SourcesDirectory)/artifacts/specs-cache/azure-rest-api-specs"
+      git clone --depth 1 --filter=blob:none --sparse \
+        https://github.com/Azure/azure-rest-api-specs.git "$CACHE"
+      git -C "$CACHE" sparse-checkout set specification/chaos
+    displayName: "Prepare sparse specification repository"
