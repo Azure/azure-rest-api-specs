@@ -3648,9 +3648,9 @@ model AuthPolicyUpdatePropertiesParameters {
 @added(Versions.v2026_09_01_preview)
 model AuthPolicyAssociation {
   /**
-   * Indicates whether the policy is associated at the profile level.
+   * Indicates whether the policy is associated at the profile level. When omitted during creation, the service defaults this value to false.
    */
-  isProfileLevel?: boolean = false;
+  isProfileLevel?: boolean;
 
   /**
    * Domains associated with the authorization policy.
