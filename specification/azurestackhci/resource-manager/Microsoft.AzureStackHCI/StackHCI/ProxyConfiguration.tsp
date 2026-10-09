@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureStackHCI;
 
 /** Proxy configuration for an Edge Machine. */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_11_01_preview)
 @parentResource(EdgeMachine)
 @singleton("default")
 model ProxyConfiguration
@@ -25,7 +25,7 @@ model ProxyConfiguration
 }
 
 /** Read operations for Edge Machine Proxy Configuration. */
-@added(Versions.v2026_10_15_preview)
+@added(Versions.v2026_11_01_preview)
 @armResourceOperations
 interface ProxyConfigurations {
   /** Get the proxy configuration of an Edge Machine. */
