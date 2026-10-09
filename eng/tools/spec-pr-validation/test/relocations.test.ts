@@ -32,7 +32,7 @@ async function checkChanges(
   changes: Record<string, string | null>,
 ) {
   const root = await mkdtemp(join(tmpdir(), "typespec-relocations-"));
-  const tool = join(root, "eng/tools/typespec-requirement");
+  const tool = join(root, "eng/tools/spec-pr-validation");
   async function writeFiles(files: Record<string, string | null>) {
     for (const [path, content] of Object.entries(files)) {
       const fullPath = join(root, path);

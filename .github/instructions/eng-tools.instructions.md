@@ -22,7 +22,7 @@ The `eng/tools` directory contains a collection of standalone Node.js packages u
 - `suppressions`
 - `tsp-client-tests`
 - `typespec-migration-validation`
-- `typespec-requirement`
+- `spec-pr-validation`
 - `typespec-validation`
 
 The top-level `eng/tools` directory holds shared configuration that the individual packages extend:

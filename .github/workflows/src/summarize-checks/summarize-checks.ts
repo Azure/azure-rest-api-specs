@@ -116,6 +116,12 @@ const MAX_IMPACT_ASSESSMENT_BYTES = 16 * 1024 * 1024;
 const CHECK_METADATA: CheckMetadata[] = [
   {
     precedence: 0,
+    name: "Spec PR Validation",
+    suppressionLabels: [],
+    troubleshootingGuide: typeSpecRequirementArmTsg,
+  },
+  {
+    precedence: 0,
     name: "TypeSpec Requirement (resource-manager)",
     suppressionLabels: [],
     troubleshootingGuide: typeSpecRequirementArmTsg,
