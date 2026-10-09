@@ -50,7 +50,7 @@ interface WebApplicationFirewallPolicies {
   /**
    * Creates or update policy with specified rule set name within a resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     WebApplicationFirewallPolicy,
     Error = CloudError
   >;
