@@ -32,7 +32,7 @@ const pr = {
 const marker = "<!-- contributor-readiness -->";
 const notifierPath = ".github/workflows/contributor-readiness-notify.yaml";
 const authorImpact = "PR author cannot run Azure DevOps pipelines for this PR.";
-const authorLabelImpact = "PR author cannot add labels, including PublishToCustomers, to this PR.";
+const authorLabelImpact = "PR author cannot add labels to this PR.";
 const reviewerImpact = "Reviewer approval does not count toward required reviews";
 
 function setup() {

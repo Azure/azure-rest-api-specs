@@ -317,7 +317,7 @@ export async function evaluateReadinessParticipants(
       const impacts: string[] = [];
       if (participant.roles.has("PR author")) {
         impacts.push("PR author cannot run Azure DevOps pipelines for this PR.");
-        impacts.push("PR author cannot add labels, including PublishToCustomers, to this PR.");
+        impacts.push("PR author cannot add labels to this PR.");
       }
       if (participant.roles.has("approved reviewer"))
         impacts.push(
