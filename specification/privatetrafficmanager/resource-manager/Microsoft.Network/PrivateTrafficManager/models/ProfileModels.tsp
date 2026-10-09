@@ -37,17 +37,9 @@ union TrafficRoutingMethod {
   @doc("Distributes traffic across endpoints based on assigned weight values.")
   Weighted: "Weighted",
 
-  @doc("Routes traffic to an endpoint by matching the source IP address of the DNS query to the endpoint's configured subnet ranges.")
-  @TypeSpec.Versioning.added(Versions.v2026_10_01_preview)
-  Subnet: "Subnet",
-
   @doc("Routes traffic to an endpoint by matching the virtual network of the DNS query to the endpoint's configured virtual networks.")
   @TypeSpec.Versioning.added(Versions.v2026_10_01_preview)
   VNet: "VNet",
-
-  @doc("Routes traffic to an endpoint by matching the site resolved for the DNS query to the endpoint's configured sites.")
-  @TypeSpec.Versioning.added(Versions.v2026_10_01_preview)
-  Site: "Site",
 }
 
 @doc("The record type of the Traffic Manager profile.")
