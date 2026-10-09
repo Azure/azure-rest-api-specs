@@ -11,7 +11,7 @@ import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts"
 
 import { extractInputs } from "../context.ts";
 import { evaluateLabelAuthorization, loadProtectedLabelsConfig } from "./authorization.ts";
-import { buildUnauthorizedApplyComment } from "./label-comments.ts";
+import { buildUnauthorizedApplyComment } from "../label-policy-comments.ts";
 
 /**
  * Check if the actor is authorized to apply the label. If not, remove and warn.
