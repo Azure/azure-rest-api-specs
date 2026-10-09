@@ -10,14 +10,12 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.HorizonDb;
 
-@added(Versions.v2026_10_01_preview)
 @doc("A caller-selected lowercase name for a HorizonDB change data capture resource.")
 @pattern("^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$")
 @minLength(1)
 @maxLength(63)
 scalar ChangeDataCaptureResourceName extends string;
 
-@added(Versions.v2026_10_01_preview)
 @doc("An Azure resource ID that identifies a HorizonDB change data capture destination.")
 scalar ChangeDataCaptureDestinationResourceId
   extends armResourceIdentifier<[
@@ -26,7 +24,6 @@ scalar ChangeDataCaptureDestinationResourceId
     }
   ]>;
 
-@added(Versions.v2026_10_01_preview)
 @doc("An Azure resource ID that identifies a HorizonDB change data capture identity assignment.")
 scalar ChangeDataCaptureIdentityAssignmentResourceId
   extends armResourceIdentifier<[
@@ -35,7 +32,6 @@ scalar ChangeDataCaptureIdentityAssignmentResourceId
     }
   ]>;
 
-@added(Versions.v2026_10_01_preview)
 @doc("An Azure resource ID that identifies a HorizonDB change data capture configuration.")
 scalar ChangeDataCaptureConfigurationResourceId
   extends armResourceIdentifier<[
@@ -44,7 +40,6 @@ scalar ChangeDataCaptureConfigurationResourceId
     }
   ]>;
 
-@added(Versions.v2026_10_01_preview)
 @doc("An Azure resource ID that identifies a user-assigned managed identity. The ID must exactly match a key in the parent cluster's top-level identity.userAssignedIdentities dictionary before it can be used by a change data capture identity assignment.")
 scalar ChangeDataCaptureUserAssignedIdentityResourceId
   extends armResourceIdentifier<[
@@ -53,7 +48,6 @@ scalar ChangeDataCaptureUserAssignedIdentityResourceId
     }
   ]>;
 
-@added(Versions.v2026_10_01_preview)
 @doc("The singleton change data capture capability for a HorizonDB cluster.")
 @singleton("default")
 @parentResource(Cluster)
@@ -68,7 +62,6 @@ model ChangeDataCaptureCapability
   ...Azure.ResourceManager.EntityTagProperty;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A reusable Microsoft Fabric destination for HorizonDB change data capture configurations.")
 @parentResource(Cluster)
 model ChangeDataCaptureDestination
@@ -82,7 +75,6 @@ model ChangeDataCaptureDestination
   ...Azure.ResourceManager.EntityTagProperty;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A user-assigned managed identity authorized for a HorizonDB change data capture destination.")
 @parentResource(ChangeDataCaptureDestination)
 model IdentityAssignment
@@ -96,7 +88,6 @@ model IdentityAssignment
   ...Azure.ResourceManager.EntityTagProperty;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A HorizonDB database enrollment for Microsoft Fabric Mirroring.")
 @parentResource(Cluster)
 model ChangeDataCaptureConfiguration
@@ -110,7 +101,6 @@ model ChangeDataCaptureConfiguration
   ...Azure.ResourceManager.EntityTagProperty;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The requested state of a HorizonDB change data capture capability, destination, or configuration.")
 union ChangeDataCaptureDesiredState {
   string,
@@ -122,7 +112,6 @@ union ChangeDataCaptureDesiredState {
   Disabled: "Disabled",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The effective state of a HorizonDB change data capture capability or configuration.")
 union ChangeDataCaptureEffectiveState {
   string,
@@ -146,7 +135,6 @@ union ChangeDataCaptureEffectiveState {
   Failed: "Failed",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The effective state of a HorizonDB change data capture destination.")
 union ChangeDataCaptureDestinationEffectiveState {
   string,
@@ -173,7 +161,6 @@ union ChangeDataCaptureDestinationEffectiveState {
   Failed: "Failed",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The implementation architecture used to capture and publish changes.")
 union ChangeDataCaptureReplicationArchitecture {
   string,
@@ -188,7 +175,6 @@ union ChangeDataCaptureReplicationArchitecture {
   Hybrid: "Hybrid",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The lifecycle state of the HorizonDB change data capture extension.")
 union ChangeDataCaptureExtensionState {
   string,
@@ -212,7 +198,6 @@ union ChangeDataCaptureExtensionState {
   Failed: "Failed",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The readiness of HorizonDB engine settings required for change data capture.")
 union ChangeDataCaptureEngineConfigurationState {
   string,
@@ -230,7 +215,6 @@ union ChangeDataCaptureEngineConfigurationState {
   Failed: "Failed",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The availability of a read-write endpoint for change data capture engine mutations.")
 union ChangeDataCaptureReadWriteEndpointState {
   string,
@@ -242,7 +226,6 @@ union ChangeDataCaptureReadWriteEndpointState {
   Unavailable: "Unavailable",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The destination type supported by this API version.")
 union ChangeDataCaptureDestinationType {
   string,
@@ -251,7 +234,6 @@ union ChangeDataCaptureDestinationType {
   Fabric: "Fabric",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The protocol used to communicate with a change data capture destination.")
 union ChangeDataCaptureProtocol {
   string,
@@ -260,7 +242,6 @@ union ChangeDataCaptureProtocol {
   Native: "Native",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The reason that a change data capture configuration exists.")
 union ChangeDataCaptureUsageProfile {
   string,
@@ -269,7 +250,6 @@ union ChangeDataCaptureUsageProfile {
   Mirroring: "Mirroring",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The lifecycle state of a change data capture identity assignment.")
 union ChangeDataCaptureIdentityAssignmentState {
   string,
@@ -287,7 +267,6 @@ union ChangeDataCaptureIdentityAssignmentState {
   Failed: "Failed",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The activation state of a change data capture identity assignment.")
 union ChangeDataCaptureIdentityActivationState {
   string,
@@ -308,7 +287,6 @@ union ChangeDataCaptureIdentityActivationState {
   Failed: "Failed",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The validation state of a change data capture identity assignment.")
 union ChangeDataCaptureIdentityValidationState {
   string,
@@ -326,7 +304,6 @@ union ChangeDataCaptureIdentityValidationState {
   Failed: "Failed",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The state of a destination-owned replication session.")
 union ChangeDataCaptureReplicationState {
   string,
@@ -359,7 +336,6 @@ union ChangeDataCaptureReplicationState {
   Failed: "Failed",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The relationship of a change data capture configuration to the current writer topology.")
 union ChangeDataCaptureTopologyBindingState {
   string,
@@ -380,7 +356,6 @@ union ChangeDataCaptureTopologyBindingState {
   Conflict: "Conflict",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Customer-safe health information for a HorizonDB change data capture resource.")
 model ChangeDataCaptureStatus {
   @doc("A stable machine-readable status code.")
@@ -392,7 +367,6 @@ model ChangeDataCaptureStatus {
   message: string;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The installed HorizonDB change data capture extension and its current state.")
 model ChangeDataCaptureExtensionStatus {
   @doc("The extension name.")
@@ -408,7 +382,6 @@ model ChangeDataCaptureExtensionStatus {
   state: ChangeDataCaptureExtensionState;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The current readiness of prerequisites shared by change data capture configurations.")
 model ChangeDataCapturePrerequisiteStatus {
   @doc("The readiness of the required engine configuration.")
@@ -420,7 +393,6 @@ model ChangeDataCapturePrerequisiteStatus {
   readWriteEndpointState: ChangeDataCaptureReadWriteEndpointState;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The current validation result for a change data capture identity assignment.")
 model IdentityValidationStatus {
   @doc("The current validation state.")
@@ -436,7 +408,6 @@ model IdentityValidationStatus {
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The destination-owned replication-session status known to HorizonDB.")
 model ChangeDataCaptureReplicationStatus {
   @doc("The current replication-session state.")
@@ -452,7 +423,6 @@ model ChangeDataCaptureReplicationStatus {
   lastConnectedAtUtc?: utcDateTime;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The current writer-topology binding of a change data capture configuration.")
 model ChangeDataCaptureTopologyBindingStatus {
   @doc("The configuration's relationship to the current writer topology.")
@@ -472,7 +442,6 @@ model ChangeDataCaptureTopologyBindingStatus {
   replacementConfigurationResourceId?: ChangeDataCaptureConfigurationResourceId;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The properties of the singleton change data capture capability.")
 model ChangeDataCaptureCapabilityProperties {
   @doc("The requested capability state.")
@@ -516,7 +485,6 @@ model ChangeDataCaptureCapabilityProperties {
   status: ChangeDataCaptureStatus;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties for updating the singleton change data capture capability. Omitted properties preserve their current values.")
 model ChangeDataCaptureCapabilityPropertiesForPatchUpdate {
   @doc("The requested capability state.")
@@ -528,14 +496,12 @@ model ChangeDataCaptureCapabilityPropertiesForPatchUpdate {
   autoUpgradeExtension?: boolean;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A sparse update request for the singleton change data capture capability.")
 model ChangeDataCaptureCapabilityForPatchUpdate {
   @doc("The capability properties to update.")
   properties?: ChangeDataCaptureCapabilityPropertiesForPatchUpdate;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Destination-specific settings discriminated by destinationType.")
 @discriminator("destinationType")
 model ChangeDataCaptureDestinationDetails {
@@ -548,7 +514,6 @@ model ChangeDataCaptureDestinationDetails {
   protocol: ChangeDataCaptureProtocol;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Settings for a Microsoft Fabric destination.")
 model FabricDestinationDetails extends ChangeDataCaptureDestinationDetails {
   @doc("Specifies a Microsoft Fabric destination.")
@@ -564,7 +529,6 @@ model FabricDestinationDetails extends ChangeDataCaptureDestinationDetails {
   workspaceId: string;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The properties of a Microsoft Fabric change data capture destination.")
 model ChangeDataCaptureDestinationProperties {
   @doc("The immutable Microsoft Fabric destination settings. Resubmitting the same values is accepted; changing them requires deleting and recreating the destination.")
@@ -596,7 +560,6 @@ model ChangeDataCaptureDestinationProperties {
   status: ChangeDataCaptureStatus;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties for updating a change data capture destination. Omitted properties preserve their current values.")
 model ChangeDataCaptureDestinationPropertiesForPatchUpdate {
   @doc("The requested destination state.")
@@ -604,14 +567,12 @@ model ChangeDataCaptureDestinationPropertiesForPatchUpdate {
   desiredState?: ChangeDataCaptureDesiredState;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A sparse update request for a change data capture destination.")
 model ChangeDataCaptureDestinationForPatchUpdate {
   @doc("The destination properties to update.")
   properties?: ChangeDataCaptureDestinationPropertiesForPatchUpdate;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The properties of a change data capture identity assignment.")
 model ChangeDataCaptureIdentityAssignmentProperties {
   @doc("The immutable resource ID of the user-assigned managed identity selected for this destination. The ID must exactly match a key in the parent cluster's top-level identity.userAssignedIdentities dictionary; otherwise creation is rejected. Attaching the identity to the cluster does not grant destination access, so required role assignments must be configured separately. Resubmitting the same value is accepted; changing it requires deleting and recreating the assignment.")
@@ -647,7 +608,6 @@ model ChangeDataCaptureIdentityAssignmentProperties {
   status: ChangeDataCaptureStatus;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The properties of a Microsoft Fabric Mirroring configuration.")
 model ChangeDataCaptureConfigurationProperties {
   @doc("The exact PostgreSQL database name enrolled in this logical stream. This value is immutable.")
@@ -695,7 +655,6 @@ model ChangeDataCaptureConfigurationProperties {
   status: ChangeDataCaptureStatus;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties for updating a change data capture configuration. Omitted properties preserve their current values.")
 model ChangeDataCaptureConfigurationPropertiesForPatchUpdate {
   @doc("The requested configuration state.")
@@ -703,14 +662,12 @@ model ChangeDataCaptureConfigurationPropertiesForPatchUpdate {
   desiredState?: ChangeDataCaptureDesiredState;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A sparse update request for a change data capture configuration.")
 model ChangeDataCaptureConfigurationForPatchUpdate {
   @doc("The configuration properties to update.")
   properties?: ChangeDataCaptureConfigurationPropertiesForPatchUpdate;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The request to activate an identity assignment for a change data capture destination.")
 model ActivateChangeDataCaptureIdentityRequest {
   @doc("The resource ID of an inactive, successfully validated identity assignment under the destination receiving the action.")
@@ -720,7 +677,6 @@ model ActivateChangeDataCaptureIdentityRequest {
   drainExistingSessions?: boolean;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The completed result of activating a change data capture destination identity.")
 model ActivateChangeDataCaptureIdentityResult {
   @doc("The completed activation status.")
@@ -736,7 +692,6 @@ model ActivateChangeDataCaptureIdentityResult {
   previousIdentityAssignmentResourceId?: ChangeDataCaptureIdentityAssignmentResourceId;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The required entity tag precondition for a change data capture destination identity activation.")
 model ChangeDataCaptureDestinationIfMatchParameter {
   @doc("The destination entity tag. The action proceeds only when this value matches the destination's current entity tag.")
@@ -744,7 +699,6 @@ model ChangeDataCaptureDestinationIfMatchParameter {
   ifMatch: string;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Operations for the singleton HorizonDB change data capture capability.")
 @armResourceOperations
 interface ChangeDataCaptureCapabilities {
@@ -774,7 +728,6 @@ interface ChangeDataCaptureCapabilities {
   list is ArmResourceListByParent<ChangeDataCaptureCapability>;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Operations for reusable Microsoft Fabric change data capture destinations.")
 @armResourceOperations
 interface ChangeDataCaptureDestinations {
@@ -824,7 +777,6 @@ interface ChangeDataCaptureDestinations {
   >;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Operations for user-assigned managed identities authorized for a change data capture destination.")
 @armResourceOperations
 interface IdentityAssignments {
@@ -854,7 +806,6 @@ interface IdentityAssignments {
   list is ArmResourceListByParent<IdentityAssignment>;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Operations for HorizonDB Microsoft Fabric Mirroring configurations.")
 @armResourceOperations
 interface ChangeDataCaptureConfigurations {

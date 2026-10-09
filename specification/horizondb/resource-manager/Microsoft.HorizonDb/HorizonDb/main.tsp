@@ -2,9 +2,15 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
+import "./common.tsp";
 import "./capabilities.tsp";
-import "./routes.tsp";
+import "./clusters.tsp";
+import "./pools.tsp";
+import "./firewall-rules.tsp";
+import "./private-links.tsp";
+import "./parameter-groups.tsp";
+import "./entra-administrators.tsp";
+import "./authentications.tsp";
 import "./change-data-capture.tsp";
 import "./endpoints.tsp";
 import "./maintenance-event.tsp";
@@ -25,12 +31,6 @@ namespace Microsoft.HorizonDb;
 
 @doc("The available API versions.")
 enum Versions {
-  @doc("The 2026-01-20-preview API version.")
-  v2026_01_20_preview: "2026-01-20-preview",
-
-  @doc("The 2026-05-01-preview API version.")
-  v2026_05_01_preview: "2026-05-01-preview",
-
   @doc("The 2026-10-01-preview API version.")
   @Azure.Core.previewVersion
   v2026_10_01_preview: "2026-10-01-preview",
