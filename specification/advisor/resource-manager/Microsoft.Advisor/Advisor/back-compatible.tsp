@@ -42,6 +42,21 @@ using Microsoft.Advisor;
   "Recommendations",
   "!csharp"
 );
+@@clientLocation(
+  ServiceGroupRecommendationOperations.listByServiceGroup,
+  "Recommendations",
+  "!csharp"
+);
+@@clientLocation(
+  ServiceGroupRecommendationOperations.getByServiceGroup,
+  "Recommendations",
+  "!csharp"
+);
+@@clientLocation(
+  ServiceGroupRecommendationOperations.patchByServiceGroup,
+  "Recommendations",
+  "!csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ResourceRecommendationBase.properties
