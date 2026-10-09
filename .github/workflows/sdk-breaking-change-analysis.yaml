@@ -186,7 +186,6 @@ jobs:
         run: |
           set -euo pipefail
           GO_BIN="$(go env GOPATH)/bin"
-          echo "$GO_BIN" >> "$GITHUB_PATH"
           export PATH="$GO_BIN:$PATH"
           go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.11.2
           golangci-lint --version
@@ -201,20 +200,22 @@ jobs:
             --global \
             --prefix "$install_dir" \
             @github/copilot
-          echo "$install_dir/bin" >> "$GITHUB_PATH"
           copilot_path="$install_dir/bin/copilot"
           test -x "$copilot_path"
           "$copilot_path" --version
           echo "path=$copilot_path" >> "$GITHUB_OUTPUT"
+          echo "copilot_dir_path=$install_dir/bin/" >> "$GITHUB_OUTPUT"
 
       - name: Set up SDK development environment
         shell: bash
         env:
           SDK_REPOSITORY_PATH: ${{ github.workspace }}/repositories/${{ needs.resolve.outputs.sdk-repository }}
           SDK_LANGUAGE: ${{ needs.resolve.outputs.sdk-language }}
+          AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
+          AZSDK_COPILOT_CLI_DIR_PATH: ${{ steps.setup-copilot-cli.outputs.copilot_dir_path }}
         run: |
           set -euo pipefail
-          export PATH="$AZSDK_CLI_PATH:$PATH"
+          export PATH="$AZSDK_CLI_PATH:$AZSDK_COPILOT_CLI_DIR_PATH:$PATH"
           azsdk verify setup install \
             --languages "$SDK_LANGUAGE" \
             --package-path "$SDK_REPOSITORY_PATH" \

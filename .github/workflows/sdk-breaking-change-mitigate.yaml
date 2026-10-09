@@ -184,7 +184,7 @@ jobs:
             --global \
             --prefix "$install_dir" \
             @github/copilot
-          echo "$install_dir/bin" >> "$GITHUB_PATH"
+
           copilot_path="$install_dir/bin/copilot"
           test -x "$copilot_path"
           "$copilot_path" --version
