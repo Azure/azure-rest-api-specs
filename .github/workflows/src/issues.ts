@@ -1,5 +1,5 @@
 import type { GitHub } from "./github.ts";
-import { inspect } from "util";
+import { inspect } from "node:util";
 
 /**
  * Retrieves the PR number associated with a specific commit SHA
@@ -23,6 +23,7 @@ export async function getIssueNumber(
   try {
     const searchResponse = await github.rest.search.issuesAndPullRequests({
       q: `sha:${head_sha} type:pr state:open`,
+      advanced_search: "true",
     });
 
     const totalCount = searchResponse.data.total_count;

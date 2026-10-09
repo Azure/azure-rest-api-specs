@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 
 import { Readme } from "@azure-tools/specs-shared/readme";
-import { resolve } from "path";
+import { resolve } from "node:path";
 import {
   correlateRuns,
   getLintDiffViolations,

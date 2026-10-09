@@ -1,0 +1,114 @@
+{
+  "operationId": "BlobAccessPointConfigurations_Create",
+  "title": "CreateBlobAccessPointConfigurationWithAzureNetAppFilesPrivateLink",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-09-01",
+    "blobAccessPointConfigurationName": "anfprivatelinkaccesspoint",
+    "accountName": "teststorageaccount",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "state": "Active",
+        "description": "Azure NetApp Files S3-compatible source over Private Link",
+        "source": {
+          "sourceType": "AzureNetAppFiles",
+          "connection": {
+            "connectionType": "PrivateLink",
+            "privateLinkIdType": "ResourceId",
+            "privateLinkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/privateLinkServices/anfpls",
+            "privateLinkGroupId": "s3",
+            "privateLinkLocation": "eastus",
+            "requestMessage": "Blob Access Point connection request for Azure NetApp Files",
+            "endpoint": "https://anf.contoso.com/bucket1",
+            "tlsVerification": "Perform"
+          },
+          "auth": {
+            "authType": "AccessKey",
+            "accessKeyId": "example-access-key",
+            "secretAccessKey": "example-secret-key",
+            "signingRegion": "us-east-1"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/blobAccessPointConfigurations/anfprivatelinkaccesspoint",
+        "name": "anfprivatelinkaccesspoint",
+        "type": "Microsoft.Storage/storageAccounts/blobAccessPointConfigurations",
+        "location": "eastus",
+        "systemData": {
+          "createdAt": "2026-09-01T00:00:00Z"
+        },
+        "properties": {
+          "uniqueId": "33333333-4444-5555-6666-777777777777",
+          "state": "Active",
+          "description": "Azure NetApp Files S3-compatible source over Private Link",
+          "source": {
+            "sourceType": "AzureNetAppFiles",
+            "connection": {
+              "connectionType": "PrivateLink",
+              "privateLinkIdType": "ResourceId",
+              "privateLinkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/privateLinkServices/anfpls",
+              "privateLinkGroupId": "s3",
+              "privateLinkLocation": "eastus",
+              "requestMessage": "Blob Access Point connection request for Azure NetApp Files",
+              "endpoint": "https://anf.contoso.com/bucket1",
+              "tlsVerification": "Perform",
+              "privateEndpointName": "anfprivateendpoint"
+            },
+            "auth": {
+              "authType": "AccessKey",
+              "accessKeyId": "example-access-key",
+              "signingRegion": "us-east-1"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/blobAccessPointConfigurations/anfprivatelinkaccesspoint",
+        "name": "anfprivatelinkaccesspoint",
+        "type": "Microsoft.Storage/storageAccounts/blobAccessPointConfigurations",
+        "location": "eastus",
+        "systemData": {
+          "createdAt": "2026-09-01T00:00:00Z"
+        },
+        "properties": {
+          "uniqueId": "33333333-4444-5555-6666-777777777777",
+          "state": "Active",
+          "description": "Azure NetApp Files S3-compatible source over Private Link",
+          "source": {
+            "sourceType": "AzureNetAppFiles",
+            "connection": {
+              "connectionType": "PrivateLink",
+              "privateLinkIdType": "ResourceId",
+              "privateLinkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/privateLinkServices/anfpls",
+              "privateLinkGroupId": "s3",
+              "privateLinkLocation": "eastus",
+              "requestMessage": "Blob Access Point connection request for Azure NetApp Files",
+              "endpoint": "https://anf.contoso.com/bucket1",
+              "tlsVerification": "Perform"
+            },
+            "auth": {
+              "authType": "AccessKey",
+              "accessKeyId": "example-access-key",
+              "signingRegion": "us-east-1"
+            }
+          },
+          "provisioningState": "Creating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/locations/eastus/DataManagementRPOperationStatuses/operation-98765?api-version=2026-09-01",
+        "Retry-After": 30
+      }
+    }
+  }
+}

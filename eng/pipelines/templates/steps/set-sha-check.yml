@@ -42,7 +42,7 @@ parameters:
 
   - name: GitHubToken
     type: string
-    default: $(azuresdk-github-pat)
+    default: ""
 
 steps:
   - bash: |
@@ -61,4 +61,4 @@ steps:
     displayName: ${{ parameters.DisplayName }}
     condition: ${{ parameters.Condition }}
     env:
-      GH_TOKEN: ${{ parameters.GitHubToken }}
+      GH_TOKEN: ${{ coalesce(parameters.GitHubToken, '$(GH_TOKEN)') }}

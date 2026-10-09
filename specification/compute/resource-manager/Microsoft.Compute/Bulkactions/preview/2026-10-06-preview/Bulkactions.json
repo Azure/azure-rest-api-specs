@@ -476,6 +476,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/acknowledgeBulkOperationErrors": {
+      "post": {
+        "operationId": "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors",
+        "description": "Acknowledge errors for specified operations in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The Bulk Action Operation Ids that identify operations for which errors should be acknowledged.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AcknowledgeBulkOperationErrorsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AcknowledgeBulkOperationErrorsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "01 - Acknowledge multiple operation errors": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_BasicSuccess.json"
+          },
+          "02 - Acknowledge operation errors with mixed results": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MixedResults.json"
+          },
+          "03 - Acknowledge operation errors with an unknown operationId resulting in not found": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_OperationNotFoundError.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreate": {
       "get": {
         "operationId": "BulkCreate_ListByResourceGroup",
@@ -2984,6 +3043,54 @@
     }
   },
   "definitions": {
+    "AcknowledgeBulkOperationErrorsRequest": {
+      "type": "object",
+      "description": "The operations for which errors should be acknowledged.",
+      "properties": {
+        "operationIds": {
+          "type": "array",
+          "description": "The Bulk Action Operation Ids that identify operations for which errors should be acknowledged.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "operationIds"
+      ]
+    },
+    "AcknowledgeBulkOperationErrorsResponse": {
+      "type": "object",
+      "description": "The result of acknowledging errors for specified operations.",
+      "properties": {
+        "acknowledged": {
+          "type": "array",
+          "description": "The Bulk Action Operation Ids that identify operations with acknowledged errors.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notFound": {
+          "type": "array",
+          "description": "The Bulk Action Operation Ids that were not found or are no longer available.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skipped": {
+          "type": "array",
+          "description": "The Bulk Action Operation Ids that identify operations with errors that could not be acknowledged.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "acknowledged",
+        "notFound",
+        "skipped"
+      ]
+    },
     "AdditionalCapabilities": {
       "type": "object",
       "description": "Enables or disables a capability on the virtual machine or virtual machine scale set.",
