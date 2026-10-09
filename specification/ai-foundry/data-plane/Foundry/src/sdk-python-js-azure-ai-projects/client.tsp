@@ -304,6 +304,35 @@ using Azure.AI.Projects;
   "promoteOptimizationCandidate"
 );
 
+alias AgentOptimizationJobServerFields =
+  | "id"
+  | "status"
+  | "run_duration_ms"
+  | "created_at"
+  | "updated_at";
+
+@withOptionalProperties
+model OptionalAgentOptimizationJobServerFields is PickProperties<
+  AgentOptimizationJob,
+  AgentOptimizationJobServerFields
+>;
+
+model JavaScriptAgentOptimizationJob {
+  ...OmitProperties<AgentOptimizationJob, AgentOptimizationJobServerFields>;
+  ...OptionalAgentOptimizationJobServerFields;
+}
+
+@@clientName(
+  JavaScriptAgentOptimizationJob,
+  "AgentOptimizationJob",
+  "javascript"
+);
+@@alternateType(
+  AgentOptimizationJob,
+  JavaScriptAgentOptimizationJob,
+  "javascript"
+);
+
 // --------------------------------------------------------------------------------
 // Beta Voice Agent Realtime sub-client
 // --------------------------------------------------------------------------------
