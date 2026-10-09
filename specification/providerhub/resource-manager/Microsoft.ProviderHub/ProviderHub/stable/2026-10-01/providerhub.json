@@ -2033,6 +2033,219 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}": {
+      "get": {
+        "operationId": "ResourceTypeRegistrations_GetNestedResourceTypeFirst",
+        "tags": [
+          "ResourceTypeRegistrations"
+        ],
+        "description": "Gets a nested resource type details in the given subscription and provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceTypeRegistrations_GetNestedResourceTypeFirst": {
+            "$ref": "./examples/ResourceTypeRegistrations_GetNestedResourceTypeFirst.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ResourceTypeRegistrations_CreateOrUpdateNestedResourceTypeFirst",
+        "tags": [
+          "ResourceTypeRegistrations"
+        ],
+        "description": "Creates or updates a nested resource type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The required request body parameters supplied to the resource type registration CreateOrUpdate operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ResourceTypeRegistration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            }
+          },
+          "201": {
+            "description": "Resource 'ResourceTypeRegistration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceTypeRegistrations_CreateOrUpdateNestedResourceTypeFirst": {
+            "$ref": "./examples/ResourceTypeRegistrations_CreateOrUpdateNestedResourceTypeFirst.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ResourceTypeRegistration"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ResourceTypeRegistrations_DeleteNestedResourceTypeFirst",
+        "tags": [
+          "ResourceTypeRegistrations"
+        ],
+        "description": "Deletes a nested resource type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceTypeRegistrations_DeleteNestedResourceTypeFirst": {
+            "$ref": "./examples/ResourceTypeRegistrations_DeleteNestedResourceTypeFirst.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/resourcetypeRegistrations/{nestedResourceTypeThird}/skus": {
       "get": {
         "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeThird",
@@ -8678,6 +8891,11 @@
     "ResourceTypeRegistrationProperties": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The resource type name. For a nested resource type, the name includes each parent resource type, separated by '/'.",
+          "readOnly": true
+        },
         "routingType": {
           "$ref": "#/definitions/RoutingType",
           "description": "The resource routing type."
