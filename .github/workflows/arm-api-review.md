@@ -77,19 +77,13 @@ on:
       run: |
         mkdir -p "$RUNNER_TEMP/arm-semantic-review"
         : > "$RUNNER_TEMP/arm-semantic-review/empty.txt"
-    - name: Upload ARM semantic review head SHA
+    - name: Upload ARM semantic review correlation
       if: steps.check_membership.outputs.is_team_member == 'true'
       uses: actions/upload-artifact@v7
       with:
-        name: "head-sha=${{ steps.resolve_target_pr.outputs.target_head_sha }}"
-        path: "${{ runner.temp }}/arm-semantic-review/empty.txt"
-        if-no-files-found: error
-        overwrite: true
-    - name: Upload ARM semantic review issue number
-      if: steps.check_membership.outputs.is_team_member == 'true'
-      uses: actions/upload-artifact@v7
-      with:
-        name: "issue-number=${{ steps.resolve_target_pr.outputs.target_pr_number }}"
+        # One artifact carries both values to save an upload step. `;` separates the
+        # `key=value` pairs; `parseWorkflowRunArtifactInputs` in context.ts reads each pair.
+        name: "head-sha=${{ steps.resolve_target_pr.outputs.target_head_sha }};issue-number=${{ steps.resolve_target_pr.outputs.target_pr_number }}"
         path: "${{ runner.temp }}/arm-semantic-review/empty.txt"
         if-no-files-found: error
         overwrite: true
@@ -136,12 +130,13 @@ jobs:
       run_attempt: ${{ steps.resolve_target_pr.outputs.run_attempt }}
       target_head_sha: ${{ steps.resolve_target_pr.outputs.target_head_sha }}
       target_pr_number: ${{ steps.resolve_target_pr.outputs.target_pr_number }}
+
   # Pre-activation posts a Pending `ARM Semantic Review` status, but the record job
   # only runs when the agent emitted a semantic item and threat detection passed.
   # The conclusion job runs after every other job regardless of their results, so it
   # resolves a Pending status that this exact run still owns. That keeps a failed,
   # cancelled, or noop run from leaving the PR waiting forever. The step reads no
-  # agent output; it takes the head SHA from the trusted `head-sha` artifact.
+  # agent output; it takes the head SHA from the trusted correlation artifact.
   # It is skipped when the record job succeeded, since that job already published.
   # Pre-steps run before the built-in conclusion steps, so `continue-on-error`
   # keeps a failure here from blocking gh-aw's own failure reporting.
@@ -154,6 +149,7 @@ jobs:
         if: needs.record_arm_semantic_review.result != 'success'
         continue-on-error: true
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github
       - name: Resolve unpublished ARM semantic review status
@@ -161,6 +157,8 @@ jobs:
         continue-on-error: true
         uses: actions/github-script@v9.0.0
         with:
+          # Retry transient API errors so a one-off failure does not leave the status Pending.
+          retries: 3
           script: |
             const { finalizeUnpublishedArmSemanticReview } =
               await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts');
@@ -335,11 +333,14 @@ safe-outputs:
       steps:
         - uses: actions/checkout@v7
           with:
+            persist-credentials: false
             sparse-checkout: |
               .github
         - name: Publish ARM semantic review status
           uses: actions/github-script@v9.0.0
           with:
+            # Retry transient API errors so a one-off failure does not leave the status Pending.
+            retries: 3
             script: |
               const { default: publishArmSemanticReviewStatus } =
                 await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts');

@@ -15,12 +15,13 @@ Short overview next to the code:
 ## Mental model
 
 ```text
-START   pre_activation          post status PENDING, upload head-sha= / issue-number= artifacts
+START   pre_activation          post status PENDING, upload one head-sha=<sha>;issue-number=<n> artifact
 MIDDLE  agent (read-only AI)    review the PR, then request record_arm_semantic_review
 END     record job (trusted)    validate the 4 values, post SUCCESS / FAILURE / ERROR
 SAFETY  conclusion job          if no result was posted, turn this run's PENDING into ERROR
-READ    Universal Auto-Signoff  newest status on the current head SHA, plus labels -> label action
-APPLY   Update Labels           re-check the live head, then add or remove the label
+READ    Universal Auto-Signoff  re-check the PR is open at the evaluated head, read the newest status
+                                on that SHA plus labels -> label action
+APPLY   Update Labels           add or remove the label as emitted
 ```
 
 The model proposes. Trusted code validates and publishes. Any doubt ends as "not Passed".
@@ -35,7 +36,6 @@ The model proposes. Trusted code validates and publishes. Any doubt ends as "not
 | [arm-semantic-review-workflow.ts](../../workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts) | I/O: publish the status, finalize an unpublished one.                        |
 | [arm-universal-auto-signoff.ts](../../workflows/src/arm-auto-signoff/arm-universal-auto-signoff.ts)     | Reads statuses and labels, decides label actions.                            |
 | [context.ts](../../workflows/src/context.ts)                                                            | `extractInputs` and the trusted-artifact parser shared by all consumers.     |
-| [update-labels.ts](../../workflows/src/update-labels.ts)                                                | Applies label artifacts after re-checking the live head.                     |
 
 ## The status contract
 
@@ -57,24 +57,40 @@ can still pass and it must never add the sticky label.
 
 ## Validation, and why each check exists
 
-Trusted inputs (never from the model): the PR number and head SHA come from the run's
-`head-sha=` and `issue-number=` artifacts, and the attempt from `GITHUB_RUN_ATTEMPT`.
+Trusted inputs (never from the model): the PR number and head SHA come from the run's correlation
+artifact, named `head-sha=<sha>;issue-number=<n>` (`;` joins the pairs so one upload carries both),
+and the attempt from `GITHUB_RUN_ATTEMPT`.
 
-| Check                                                                         | Where                       | If it fails               |
-| ----------------------------------------------------------------------------- | --------------------------- | ------------------------- |
-| Trusted artifacts present, full 40-hex SHA, no conflicting duplicates         | `context.ts`                | Nothing published / throw |
-| Output file exists and is JSON                                                | publisher `try`             | `Review incomplete`       |
-| Exactly one `record_arm_semantic_review` item                                 | `parseSemanticReviewResult` | `Review incomplete`       |
-| `blocking_count` is a digit string; the other three fields are in closed sets | `parseSemanticReviewResult` | `Review incomplete`       |
-| A `complete` review must have reason `none`                                   | `parseSemanticReviewResult` | `Review incomplete`       |
-| PR size within the cap, checked independently of the model's `scope`          | `requiresManualReview`      | `Manual review required`  |
-| Incomplete, then scoped, then Blocking, then Passed (first match wins)        | `evaluateSemanticReview`    | n/a                       |
+| Check                                                                         | Where                                  | If it fails               |
+| ----------------------------------------------------------------------------- | -------------------------------------- | ------------------------- |
+| Trusted artifacts present, full 40-hex SHA, no conflicting duplicates         | `context.ts`                           | Nothing published / throw |
+| Output file exists and is JSON                                                | publisher `try`                        | `Review incomplete`       |
+| Exactly one `record_arm_semantic_review` item                                 | `parseSemanticReviewResult`            | `Review incomplete`       |
+| `blocking_count` is a digit string; the other three fields are in closed sets | `parseSemanticReviewResult`            | `Review incomplete`       |
+| A `complete` review must have reason `none`                                   | `parseSemanticReviewResult`            | `Review incomplete`       |
+| PR size within the cap, checked independently of the model's `scope`          | `requiresManualReview` (workflow file) | `Manual review required`  |
+| Incomplete, then scoped, then Blocking, then Passed (first match wins)        | `evaluateSemanticReview`               | n/a                       |
 
-The size cap is 50 `specification/` files and 5,000 changed lines, matching the reviewer prompt.
-It is two-tier: if the PR's totals are within the cap no file list is fetched, otherwise only the
-`specification/` files are counted. A PR reporting zero files, or a truncated file list, requires
-manual review.
+### Verifying the model's scope
 
+The model reports `scope: full|scoped`, but it is untrusted. For a **full, complete** claim, the
+trusted code re-derives scope with the reviewer prompt's rule: more than 50 `specification/` files
+or 5,000 `specification/` lines needs a human. The rules are pure helpers in
+`arm-semantic-review.ts` (`checkPullRequestSize` and `addSpecificationChanges`); the workflow file's
+`getOversizeReason` does the API calls and logging. Any other claim (scoped, incomplete) already
+withholds signoff, so the check is skipped.
+
+1. Zero changed files (GitHub could not compute the diff) or 3,000 or more requires manual review
+   without listing files. 3,000 is the most files GitHub's file-listing API will return, so a PR
+   that large cannot be proven fully covered.
+2. If the PR's totals are within the cap, its `specification/` subset is too: no file list, so
+   most PRs cost one `pulls.get` call.
+3. Otherwise count only the `specification/` files, and stop paginating as soon as the count is
+   over the cap. A renamed or moved file counts when either its old or its new path is under
+   `specification/`.
+
+The status says why, for example `Manual review required: specification/ changes exceed 50 files
+or 5000 lines`. Reasons are fixed strings, never model output. Each step logs what it saw.
 Deliberately **not** validated, because it adds code without protecting signoff:
 
 - the PR being open or still at the reviewed SHA (the status is SHA-bound and Universal re-checks
@@ -112,6 +128,10 @@ never reach a public status.
 
 ## Known limitations
 
+- Update Labels applies the emitted label action without re-checking the PR head. Universal checks
+  just before emitting, so a push in the short window between the two can leave the pilot label
+  stale until the next evaluation. A stale-head guard in Update Labels is a separate, cross-cutting
+  change (it affects every producer that publishes a `head-sha=` artifact).
 - A same-SHA re-run posts `pending` but does not revoke an existing `ARMAutoSignedOff-Test`
   label until Universal next runs. This matters only once enforcement is on.
 - Universal's label filter does not include `ARMChangesRequested` or `WaitForARMFeedback`, so
@@ -121,7 +141,11 @@ never reach a public status.
   conflict and the parser throws, which can leave `Pending`.
 - `blocking_count` is the model's verdict. The Critic and threat detection are the only checks on
   it, which is an accepted trade-off.
-- If the `conclusion` job itself does not run, a `Pending` status can remain.
+- A `Pending` status is resolved in almost every failure, but can still remain when the
+  `conclusion` job does not run, the finalizer's own API calls still fail after their retries,
+  the runner or GitHub is lost mid-run, or the finalizer cannot read the head SHA (the
+  conflicting-artifacts case above). Nothing signs off in any of these cases, because only
+  `success` does.
 - A push to a draft PR, or to one without `WaitForARMFeedback`, joins the PR concurrency lane
   before the gate skips it, so it can cancel a review that is already running.
 
@@ -158,7 +182,7 @@ gh api repos/Azure/azure-rest-api-specs/commits/<head-sha>/statuses \
   --jq '.[] | select(.context=="ARM Semantic Review") | [.created_at,.state,.description,.target_url]'
 ```
 
-The `pending` status and the `head-sha=` / `issue-number=` artifacts appear on the run created
+The `pending` status and the `head-sha=<sha>;issue-number=<n>` artifact appear on the run created
 by `pre_activation`. Try: a clean review, `skip-arm-review`, a push mid-run, two `/arm-review`
 comments in a row, and cancelling a run.
 

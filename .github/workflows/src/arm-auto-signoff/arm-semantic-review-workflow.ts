@@ -3,16 +3,19 @@ import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { getWorkflowRunArtifactInputs } from "../context.ts";
 import type { GitHubScriptArgs } from "../github.ts";
 import {
+  addSpecificationChanges,
   ARM_SEMANTIC_REVIEW_STATUS,
+  checkPullRequestSize,
   evaluateSemanticReview,
-  exceedsSpecificationLimits,
   getLatestSemanticReviewStatus,
-  isWithinAutomatedReviewLimits,
   MANUAL_REVIEW_DESCRIPTION_PREFIX,
   parseSemanticReviewResult,
   REVIEW_INCOMPLETE_DESCRIPTION_PREFIX,
+  SemanticReviewCompletion,
+  SemanticReviewScope,
+  SPECIFICATION_OVER_LIMITS_REASON,
   type CommitStatus,
-  type PullRequestCounts,
+  type SpecificationTotals,
   type EvaluatedSemanticReview,
 } from "./arm-semantic-review.ts";
 
@@ -49,35 +52,73 @@ function getRunStatusUrl(
 }
 
 /**
- * Independently checks the PR against the automated-review limits, since the model's `scope` is
- * untrusted. The file list is fetched only when the PR's aggregate counters are over the limits.
+ * Independently verifies that the PR is small enough for the reviewer to have covered all of it,
+ * because the model's own `scope` is untrusted. The rules live in `arm-semantic-review.ts`; this
+ * does the API calls. It costs one `pulls.get` call, which is all most PRs need. Only when the
+ * PR's totals are over the limits does it list the files, page by page, and it stops as soon as
+ * the `specification/` changes are over the limits.
  *
- * @param issueNumber The PR number, from trusted artifacts.
- * @param pullRequest The aggregate counters from `pulls.get`.
- * @returns `true` when a human must review because the `specification/` changes exceed the limits.
+ * @returns A short fixed reason when a human must review, or `undefined` when the PR is within
+ *   the limits. The reason is published in the status, so it must never include model output.
  */
-async function requiresManualReview(
+async function getOversizeReason(
   github: GitHubScriptArgs["github"],
+  core: GitHubScriptArgs["core"],
   owner: string,
   repo: string,
   issueNumber: number,
-  pullRequest: PullRequestCounts,
-): Promise<boolean> {
-  if (isWithinAutomatedReviewLimits(pullRequest)) {
-    return false;
-  }
-  if (pullRequest.changed_files < 1) {
-    return true;
-  }
-  const changedFiles = await github.paginate(github.rest.pulls.listFiles, {
+): Promise<string | undefined> {
+  const { data: pullRequest } = await github.rest.pulls.get({
     owner,
     repo,
     pull_number: issueNumber,
-    per_page: PER_PAGE_MAX,
   });
-  return exceedsSpecificationLimits(pullRequest.changed_files, changedFiles);
-}
+  core.info(
+    `PR #${issueNumber} size: ${pullRequest.changed_files} files, ` +
+      `+${pullRequest.additions} -${pullRequest.deletions} lines`,
+  );
 
+  const size = checkPullRequestSize(pullRequest);
+  if (size.outcome === "manual-review") {
+    core.info(`Cannot be proven within the limits: ${size.reason}`);
+    return size.reason;
+  }
+  if (size.outcome === "within") {
+    core.info(
+      "Within the limits overall, so the specification/ subset is too: no file list needed",
+    );
+    return undefined;
+  }
+
+  core.info("Over the limits overall: counting only the specification/ changes");
+  const totals: SpecificationTotals = { files: 0, lines: 0 };
+  let pages = 0;
+  let overLimit = false;
+  await github.paginate(
+    github.rest.pulls.listFiles,
+    { owner, repo, pull_number: issueNumber, per_page: PER_PAGE_MAX },
+    (response, done) => {
+      pages++;
+      overLimit = addSpecificationChanges(totals, response.data);
+      core.info(
+        `  page ${pages}: ${totals.files} specification/ files, ${totals.lines} lines so far`,
+      );
+      if (overLimit) {
+        core.info("  already over the limits, so the remaining pages are not needed");
+        done();
+      }
+      return [];
+    },
+  );
+
+  if (overLimit) {
+    return SPECIFICATION_OVER_LIMITS_REASON;
+  }
+  core.info(
+    `specification/ changes are within the limits: ${totals.files} files, ${totals.lines} lines`,
+  );
+  return undefined;
+}
 /**
  * Writes one `ARM Semantic Review` commit status on the reviewed SHA.
  *
@@ -143,6 +184,7 @@ export default async function publishArmSemanticReviewStatus({
     core.info("The reviewer run has no trusted PR/SHA correlation; status is unchanged");
     return EMPTY_RESULT;
   }
+  core.info(`Publishing for PR #${issueNumber} at ${headSha}`);
 
   let status: EvaluatedSemanticReview;
   try {
@@ -150,18 +192,30 @@ export default async function publishArmSemanticReviewStatus({
       await readFile(process.env.GH_AW_AGENT_OUTPUT ?? "", "utf8"),
     ) as unknown;
     const result = parseSemanticReviewResult(agentOutput);
+    core.info(
+      `Reviewer reported: scope=${result.reviewScope}, completeness=${result.completion}, ` +
+        `incomplete reason=${result.incompleteReason}, Blocking findings=${result.blockingCount}`,
+    );
 
-    const { data: pullRequest } = await github.rest.pulls.get({
-      owner,
-      repo,
-      pull_number: issueNumber,
-    });
-    status = (await requiresManualReview(github, owner, repo, issueNumber, pullRequest))
-      ? {
+    status = evaluateSemanticReview(result);
+    if (
+      result.completion === SemanticReviewCompletion.Complete &&
+      result.reviewScope === SemanticReviewScope.Full
+    ) {
+      // Only a claim of a full, complete review can authorize signoff, so only that claim needs
+      // verifying. A scoped or incomplete review (the oversized PRs, where the check is the most
+      // expensive) is already withheld.
+      const reason = await getOversizeReason(github, core, owner, repo, issueNumber);
+      if (reason) {
+        core.info(`The reviewer claimed a full review, but ${reason}: manual review required`);
+        status = {
           state: CommitStatusState.ERROR,
-          description: `${MANUAL_REVIEW_DESCRIPTION_PREFIX}PR exceeds automated review size limits`,
-        }
-      : evaluateSemanticReview(result);
+          description: `${MANUAL_REVIEW_DESCRIPTION_PREFIX}${reason}`,
+        };
+      }
+    } else {
+      core.info("The reviewer did not claim a full, complete review: skipping the size check");
+    }
   } catch (error) {
     // Any failure here, including a transient GitHub API error, is reported as incomplete rather
     // than as a manual-review hold, so a re-run can still produce a passing result. The details go
@@ -213,13 +267,18 @@ export async function finalizeUnpublishedArmSemanticReview({
   }
 
   const targetUrl = getRunStatusUrl(context, owner, repo);
+  core.info(`Checking whether ${targetUrl} left a Pending status on ${headSha}`);
   const statuses: CommitStatus[] = await github.paginate(
     github.rest.repos.listCommitStatusesForRef,
     { owner, repo, ref: headSha, per_page: PER_PAGE_MAX },
   );
   const latestStatus = getLatestSemanticReviewStatus(statuses);
+  core.info(
+    `Latest ${ARM_SEMANTIC_REVIEW_STATUS}: ${latestStatus?.state ?? "none"} ` +
+      `(${latestStatus?.target_url ?? "no url"})`,
+  );
   if (latestStatus?.state !== CommitStatusState.PENDING || latestStatus.target_url !== targetUrl) {
-    core.info("This run does not own a Pending ARM Semantic Review status; status is unchanged");
+    core.info("This run does not own a Pending status; status is unchanged");
     return { statusPublished: false };
   }
 

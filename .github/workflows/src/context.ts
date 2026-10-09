@@ -316,8 +316,8 @@ export async function extractInputs(
 }
 
 /**
- * Reads the `head-sha=<sha>` and `issue-number=<n>` artifact names of a workflow run.
- * Only call this for runs whose artifacts come from trusted code (see `extractInputs`).
+ * Reads the `head-sha=<sha>` and `issue-number=<n>` pairs from the artifact names of a workflow
+ * run. Only call this for runs whose artifacts come from trusted code (see `extractInputs`).
  * @returns `headSha` ("" if absent) and `issueNumber` (NaN if absent or invalid).
  * @throws If the artifacts hold an invalid or conflicting head SHA, or conflicting PR numbers.
  */
@@ -347,6 +347,9 @@ export async function getWorkflowRunArtifactInputs({
 
 /**
  * Parses `head-sha=<sha>` and `issue-number=<n>` from artifact names; other names are ignored.
+ * A producer may carry both in one artifact by joining the pairs with `;`, for example
+ * `head-sha=<sha>;issue-number=<n>`, which saves an upload step. Names without `;` are a single
+ * pair, so existing single-value artifacts parse unchanged.
  * @returns `headSha` ("" if absent) and `issueNumber` (NaN if absent or invalid).
  * @throws If a head SHA is invalid, or two head SHAs or two PR numbers conflict.
  */
@@ -356,7 +359,7 @@ export function parseWorkflowRunArtifactInputs(
 ): { headSha: string; issueNumber: number } {
   let headSha = "";
   let issueNumber = NaN;
-  for (const artifactName of artifactNames) {
+  for (const artifactName of artifactNames.flatMap((name) => name.split(";"))) {
     const firstEquals = artifactName.indexOf("=");
     if (firstEquals === -1) {
       continue;

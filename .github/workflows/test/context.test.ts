@@ -653,6 +653,57 @@ describe("extractInputs", () => {
     });
   });
 
+  it("workflow_run:completed:workflow_run reads both values from one combined artifact", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [{ name: `head-sha=${fullGitSha};issue-number=123` }, { name: "unrelated=1" }],
+      },
+    });
+
+    const context = {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          event: "workflow_run",
+          head_sha: "def456",
+          id: 456,
+          repository: { name: "TestRepoName", owner: { login: "TestRepoOwnerLogin" } },
+        },
+      },
+    };
+
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: fullGitSha,
+      issue_number: 123,
+      run_id: 456,
+    });
+
+    // A combined artifact is validated exactly like separate ones.
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [{ name: "head-sha=not-full-git-sha;issue-number=123" }] },
+    });
+    await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
+      "head-sha is not a valid full git SHA",
+    );
+
+    // It also conflicts with a separate artifact that disagrees.
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [
+          { name: `head-sha=${fullGitSha};issue-number=123` },
+          { name: "issue-number=456" },
+        ],
+      },
+    });
+    await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
+      "Conflicting issue-number artifacts",
+    );
+  });
+
   it("workflow_run:completed:unsupported", async () => {
     const context = {
       eventName: "workflow_run",

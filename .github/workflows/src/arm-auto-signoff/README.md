@@ -12,13 +12,14 @@ production path. It only manages the pilot label `ARMAutoSignedOff-Test` and nev
 
 ```text
 arm-api-review (reviewer)
-  pre_activation               post status PENDING, upload head-sha= / issue-number= artifacts
+  pre_activation               post status PENDING, upload one head-sha=<sha>;issue-number=<n> artifact
   agent                        review the PR, request record_arm_semantic_review
   record_arm_semantic_review   validate the result, post SUCCESS / FAILURE / ERROR
   conclusion                   if no result was posted, turn this run's PENDING into ERROR
 
-arm-universal-auto-signoff     newest status per context on the current head SHA + labels
-update-labels                  re-check the live head, then add or remove the label
+arm-universal-auto-signoff     re-check the PR is open at the evaluated head, read the newest status
+                               per context on that SHA + labels, decide the label action
+update-labels                  add or remove the label
 ```
 
 The model proposes; trusted code validates and publishes. Any doubt ends as "not Passed".

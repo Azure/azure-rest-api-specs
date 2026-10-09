@@ -6,9 +6,9 @@ import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import {
   ARM_SEMANTIC_REVIEW_STATUS,
   evaluateSemanticReview,
-  exceedsSpecificationLimits,
-  isWithinAutomatedReviewLimits,
   getSemanticReviewOutcome,
+  addSpecificationChanges,
+  checkPullRequestSize,
   parseSemanticReviewResult,
   SemanticReviewCompletion,
   SemanticReviewIncompleteReason,
@@ -16,6 +16,7 @@ import {
   SemanticReviewScope,
   type ChangedFile,
   type SemanticReviewResult,
+  type SpecificationTotals,
 } from "../../src/arm-auto-signoff/arm-semantic-review.ts";
 import publishArmSemanticReviewStatus, {
   finalizeUnpublishedArmSemanticReview,
@@ -52,7 +53,7 @@ function agentOutput(result: SemanticReviewResult = passedResult) {
   };
 }
 
-const smallPullRequest = { changed_files: 1, additions: 10, deletions: 5 };
+const smallPullRequest = { number: issueNumber, changed_files: 1, additions: 10, deletions: 5 };
 
 function createPublisherGithub() {
   const github = createMockGithub();
@@ -273,79 +274,109 @@ describe("evaluateSemanticReview", () => {
   });
 });
 
-describe("isWithinAutomatedReviewLimits", () => {
+describe("checkPullRequestSize", () => {
   it.each([
-    { name: "a small PR", pr: smallPullRequest, expected: true },
+    { name: "a small PR", counts: [1, 10, 5], expected: { outcome: "within" } },
+    { name: "exactly 50 files", counts: [50, 50, 0], expected: { outcome: "within" } },
+    { name: "exactly 5,000 lines", counts: [1, 3_000, 2_000], expected: { outcome: "within" } },
+    { name: "51 files", counts: [51, 51, 0], expected: { outcome: "list-files" } },
+    { name: "5,001 lines", counts: [1, 5_001, 0], expected: { outcome: "list-files" } },
     {
-      name: "exactly the file limit",
-      pr: { changed_files: 50, additions: 1, deletions: 0 },
-      expected: true,
-    },
-    {
-      name: "one file over the limit",
-      pr: { changed_files: 51, additions: 1, deletions: 0 },
-      expected: false,
-    },
-    {
-      name: "exactly the line limit",
-      pr: { changed_files: 1, additions: 3_000, deletions: 2_000 },
-      expected: true,
-    },
-    {
-      name: "over the line limit",
-      pr: { changed_files: 1, additions: 4_000, deletions: 2_000 },
-      expected: false,
-    },
-    // GitHub reports zero counters when the diff is too large to compute.
-    {
+      // GitHub reports zero counters when the diff is too large for it to compute.
       name: "zero reported files",
-      pr: { changed_files: 0, additions: 0, deletions: 0 },
-      expected: false,
+      counts: [0, 0, 0],
+      expected: { outcome: "manual-review", reason: "GitHub could not compute the PR's size" },
     },
-  ])("$name", ({ pr, expected }) => {
-    expect(isWithinAutomatedReviewLimits(pr)).toBe(expected);
+    {
+      name: "one file under GitHub's listing cap",
+      counts: [2_999, 3_000, 0],
+      expected: { outcome: "list-files" },
+    },
+    {
+      // GitHub lists at most 3,000 files and does not say when it cut the list off.
+      name: "GitHub's listing cap",
+      counts: [3_000, 3_000, 0],
+      expected: { outcome: "manual-review", reason: "PR has 3000 or more changed files" },
+    },
+  ])("$name", ({ counts: [changed_files, additions, deletions], expected }) => {
+    expect(checkPullRequestSize({ changed_files, additions, deletions })).toEqual(expected);
   });
 });
 
-describe("exceedsSpecificationLimits", () => {
-  const specFile = (name: string, additions = 1, deletions = 0): ChangedFile => ({
+describe("addSpecificationChanges", () => {
+  const spec = (name: string, lines = 1): ChangedFile => ({
     filename: `specification/foo/${name}.json`,
-    additions,
-    deletions,
-  });
-  const otherFile = (name: string, additions = 1): ChangedFile => ({
-    filename: `documentation/${name}.md`,
-    additions,
+    additions: lines,
     deletions: 0,
   });
+  const other = (name: string): ChangedFile => ({
+    filename: `documentation/${name}.md`,
+    additions: 100,
+    deletions: 0,
+  });
+  const renamed = (from: string, to: string): ChangedFile => ({
+    filename: to,
+    previous_filename: from,
+    additions: 0,
+    deletions: 0,
+  });
+  const times = <T>(count: number, build: (i: number) => T) =>
+    Array.from({ length: count }, (_, i) => build(i));
+  const add = (files: ChangedFile[]) => {
+    const totals: SpecificationTotals = { files: 0, lines: 0 };
+    return { over: addSpecificationChanges(totals, files), totals };
+  };
 
-  it("ignores files and lines outside specification/", () => {
-    const files = [
-      specFile("a"),
-      ...Array.from({ length: 60 }, (_, i) => otherFile(`doc${i}`, 200)),
-    ];
-    expect(exceedsSpecificationLimits(files.length, files)).toBe(false);
+  it("is false at exactly the limits and true just over", () => {
+    expect(add(times(50, (i) => spec(`f${i}`))).over).toBe(false);
+    expect(add(times(51, (i) => spec(`f${i}`))).over).toBe(true);
+    expect(add([spec("big", 5_000)]).over).toBe(false);
+    expect(add([spec("big", 5_001)]).over).toBe(true);
   });
 
-  it("allows exactly the specification file limit", () => {
-    const files = Array.from({ length: 50 }, (_, i) => specFile(`f${i}`));
-    expect(exceedsSpecificationLimits(files.length, files)).toBe(false);
+  it("does not count files or lines outside specification/", () => {
+    const { over, totals } = add([spec("a"), ...times(500, (i) => other(`d${i}`))]);
+
+    expect(over).toBe(false);
+    expect(totals).toEqual({ files: 1, lines: 1 });
   });
 
-  it("flags more specification files than the limit", () => {
-    const files = Array.from({ length: 51 }, (_, i) => specFile(`f${i}`));
-    expect(exceedsSpecificationLimits(files.length, files)).toBe(true);
+  it("accumulates across pages", () => {
+    const totals: SpecificationTotals = { files: 0, lines: 0 };
+
+    expect(
+      addSpecificationChanges(
+        totals,
+        times(30, (i) => spec(`a${i}`)),
+      ),
+    ).toBe(false);
+    expect(
+      addSpecificationChanges(
+        totals,
+        times(21, (i) => spec(`b${i}`)),
+      ),
+    ).toBe(true);
+    expect(totals.files).toBe(51);
   });
 
-  it("flags more specification lines than the limit", () => {
-    const files = [specFile("big", 4_000, 2_000)];
-    expect(exceedsSpecificationLimits(files.length, files)).toBe(true);
+  it.each([
+    { name: "moved into specification/", from: "eng", to: "specification/foo" },
+    { name: "moved out of specification/", from: "specification/foo", to: "archive" },
+    { name: "renamed within specification/", from: "specification/foo", to: "specification/bar" },
+  ])("counts a file $name once", ({ from, to }) => {
+    const { over, totals } = add(
+      times(51, (i) => renamed(`${from}/f${i}.json`, `${to}/f${i}.json`)),
+    );
+
+    expect(over).toBe(true);
+    expect(totals.files).toBe(51);
   });
 
-  it("flags a truncated file list", () => {
-    expect(exceedsSpecificationLimits(10, [specFile("a")])).toBe(true);
-    const capped = Array.from({ length: 3_000 }, (_, i) => otherFile(`d${i}`));
-    expect(exceedsSpecificationLimits(3_000, capped)).toBe(true);
+  it("ignores a rename that never touches specification/", () => {
+    const { over, totals } = add(times(51, (i) => renamed(`eng/a${i}.json`, `docs/a${i}.json`)));
+
+    expect(over).toBe(false);
+    expect(totals.files).toBe(0);
   });
 });
 describe("publishArmSemanticReviewStatus", () => {
@@ -397,79 +428,241 @@ describe("publishArmSemanticReviewStatus", () => {
     );
   });
 
-  it("does not list files when the PR is within the aggregate limits", async () => {
-    const { github } = await runPublisher();
-
-    expect(github.rest.pulls.listFiles).not.toHaveBeenCalled();
-  });
-
-  it("publishes Passed when only non-specification files push the PR over the limits", async () => {
-    const github = createPublisherGithub();
-    const files = [
-      { filename: "specification/foo/foo.json", additions: 10, deletions: 5 },
-      ...Array.from({ length: 60 }, (_, i) => ({
-        filename: `documentation/doc${i}.md`,
-        additions: 1,
-        deletions: 0,
-      })),
-    ];
-    github.rest.pulls.get.mockResolvedValue({
-      data: { changed_files: files.length, additions: 70, deletions: 5 },
+  describe("PR size limits", () => {
+    const OVER_LIMITS =
+      "Manual review required: specification/ changes exceed 50 files or 5000 lines";
+    const spec = (name: string, lines = 1) => ({
+      filename: `specification/foo/${name}.json`,
+      additions: lines,
+      deletions: 0,
     });
-    github.rest.pulls.listFiles.mockResolvedValue({ data: files });
+    const doc = (name: string) => ({
+      filename: `documentation/${name}.md`,
+      additions: 1,
+      deletions: 0,
+    });
+    const times = <T>(count: number, build: (i: number) => T) =>
+      Array.from({ length: count }, (_, i) => build(i));
 
-    const { github: g } = await runPublisher({ github });
-    expect(g.rest.pulls.listFiles).toHaveBeenCalled();
-    expect(g.rest.repos.createCommitStatus).toHaveBeenCalledWith(
-      expect.objectContaining({ state: CommitStatusState.SUCCESS }),
-    );
-  });
+    /** Publishes for a PR with the given totals; `files` is what `pulls.listFiles` returns. */
+    async function publish(
+      totals: { changed_files: number; additions: number; deletions: number },
+      files: unknown[] = [],
+    ) {
+      const github = createPublisherGithub();
+      github.rest.pulls.get.mockResolvedValue({ data: { number: issueNumber, ...totals } });
+      github.rest.pulls.listFiles.mockResolvedValue({ data: files });
+      return (await runPublisher({ github })).github;
+    }
+    const published = (github: ReturnType<typeof createPublisherGithub>) =>
+      github.rest.repos.createCommitStatus.mock.calls[0][0] as {
+        state: string;
+        description: string;
+      };
+    const publishedState = (github: ReturnType<typeof createPublisherGithub>) =>
+      published(github).state;
+    const publishedDescription = (github: ReturnType<typeof createPublisherGithub>) =>
+      published(github).description;
 
-  it.each([
-    {
-      name: "too many specification files",
-      pr: { changed_files: 51, additions: 51, deletions: 0 },
-      files: Array.from({ length: 51 }, (_, i) => ({
-        filename: `specification/foo/f${i}.json`,
-        additions: 1,
-        deletions: 0,
-      })),
-    },
-    {
-      name: "a truncated file list",
-      pr: { changed_files: 51, additions: 51, deletions: 0 },
-      files: [{ filename: "specification/foo/foo.json", additions: 1, deletions: 0 }],
-    },
-  ])("publishes Manual review required for $name", async ({ pr, files }) => {
-    const github = createPublisherGithub();
-    github.rest.pulls.get.mockResolvedValue({ data: pr });
-    github.rest.pulls.listFiles.mockResolvedValue({ data: files });
+    it.each([
+      { name: "a small PR", totals: { changed_files: 1, additions: 10, deletions: 5 } },
+      { name: "exactly 50 files", totals: { changed_files: 50, additions: 50, deletions: 0 } },
+      {
+        name: "exactly 5,000 lines",
+        totals: { changed_files: 1, additions: 3_000, deletions: 2_000 },
+      },
+    ])("does not list files for $name", async ({ totals }) => {
+      const github = await publish(totals);
 
-    const { github: g } = await runPublisher({ github });
-    expect(g.rest.repos.createCommitStatus).toHaveBeenCalledWith(
-      expect.objectContaining({
-        state: CommitStatusState.ERROR,
-        description: "Manual review required: PR exceeds automated review size limits",
-      }),
-    );
-  });
-
-  it("publishes Manual review required without listing files when the PR reports zero files", async () => {
-    const github = createPublisherGithub();
-    github.rest.pulls.get.mockResolvedValue({
-      data: { changed_files: 0, additions: 0, deletions: 0 },
+      expect(github.rest.pulls.listFiles).not.toHaveBeenCalled();
+      expect(publishedState(github)).toBe(CommitStatusState.SUCCESS);
     });
 
-    const { github: g } = await runPublisher({ github });
-    expect(g.rest.pulls.listFiles).not.toHaveBeenCalled();
-    expect(g.rest.repos.createCommitStatus).toHaveBeenCalledWith(
-      expect.objectContaining({
-        state: CommitStatusState.ERROR,
-        description: "Manual review required: PR exceeds automated review size limits",
-      }),
-    );
-  });
+    it.each([
+      {
+        name: "zero reported files",
+        changed_files: 0,
+        reason: "GitHub could not compute the PR's size",
+      },
+      // GitHub lists at most 3,000 files and does not say when it truncated the list.
+      {
+        name: "3,000 or more files",
+        changed_files: 3_000,
+        reason: "PR has 3000 or more changed files",
+      },
+    ])(
+      "requires manual review without listing files for $name",
+      async ({ changed_files, reason }) => {
+        const github = await publish({ changed_files, additions: 0, deletions: 0 });
 
+        expect(github.rest.pulls.listFiles).not.toHaveBeenCalled();
+        expect(publishedDescription(github)).toBe(`Manual review required: ${reason}`);
+      },
+    );
+
+    it("lists the files of the trusted PR when the totals are over the limits", async () => {
+      const github = await publish({ changed_files: 51, additions: 51, deletions: 0 }, [spec("a")]);
+
+      expect(github.rest.pulls.listFiles).toHaveBeenCalledWith(
+        expect.objectContaining({ owner, repo, pull_number: issueNumber }),
+      );
+    });
+
+    it("passes when only files outside specification/ push the PR over the limits", async () => {
+      const files = [spec("a"), ...times(60, (i) => doc(`d${i}`))];
+      const github = await publish({ changed_files: 61, additions: 61, deletions: 0 }, files);
+
+      expect(publishedState(github)).toBe(CommitStatusState.SUCCESS);
+    });
+
+    it.each([
+      { name: "too many specification files", files: times(51, (i) => spec(`f${i}`)) },
+      { name: "too many specification lines", files: [spec("big", 5_001)] },
+    ])("requires manual review for $name", async ({ files }) => {
+      const additions = files.reduce((total, file) => total + file.additions, 0);
+      const github = await publish({ changed_files: 51, additions, deletions: 0 }, files);
+
+      expect(publishedDescription(github)).toBe(OVER_LIMITS);
+    });
+
+    it("overrides a Changes requested result when the PR is over the limits", async () => {
+      // The model claimed a full review of an oversized PR, so its Blocking count is not trusted.
+      const github = createPublisherGithub();
+      github.rest.pulls.get.mockResolvedValue({
+        data: { number: issueNumber, changed_files: 51, additions: 51, deletions: 0 },
+      });
+      github.rest.pulls.listFiles.mockResolvedValue({ data: times(51, (i) => spec(`f${i}`)) });
+
+      const { github: g } = await runPublisher({
+        github,
+        output: agentOutput({ ...passedResult, blockingCount: 2 }),
+      });
+      expect(publishedDescription(g)).toBe(OVER_LIMITS);
+    });
+
+    it.each([
+      {
+        name: "a scoped review",
+        result: { ...passedResult, reviewScope: SemanticReviewScope.Scoped },
+        description: "Manual review required: scoped review requires manual signoff",
+      },
+      {
+        name: "an incomplete review",
+        result: {
+          ...passedResult,
+          completion: SemanticReviewCompletion.Incomplete,
+          incompleteReason: SemanticReviewIncompleteReason.ToolFailure,
+        },
+        description: "Review incomplete: tool-failure",
+      },
+    ])(
+      "skips the size check for $name, which already withholds signoff",
+      async ({ result, description }) => {
+        const github = createPublisherGithub();
+        github.rest.pulls.get.mockResolvedValue({
+          data: { number: issueNumber, changed_files: 500, additions: 9_000, deletions: 0 },
+        });
+
+        const { github: g } = await runPublisher({ github, output: agentOutput(result) });
+        expect(g.rest.pulls.get).not.toHaveBeenCalled();
+        expect(g.rest.pulls.listFiles).not.toHaveBeenCalled();
+        expect(publishedDescription(g)).toBe(description);
+      },
+    );
+
+    it("logs each step of the size decision", async () => {
+      const github = createPublisherGithub();
+      github.rest.pulls.get.mockResolvedValue({
+        data: { number: issueNumber, changed_files: 61, additions: 61, deletions: 0 },
+      });
+      github.rest.pulls.listFiles.mockResolvedValue({
+        data: [spec("a"), ...times(60, (i) => doc(`d${i}`))],
+      });
+
+      const { core } = await runPublisher({ github });
+      const logged = core.info.mock.calls.map(([message]) => String(message));
+      expect(logged).toEqual(
+        expect.arrayContaining([
+          expect.stringContaining("Reviewer reported: scope=full, completeness=complete"),
+          expect.stringContaining("size: 61 files, +61 -0 lines"),
+          expect.stringContaining("counting only the specification/ changes"),
+          expect.stringContaining("page 1: 1 specification/ files, 1 lines so far"),
+          expect.stringContaining("specification/ changes are within the limits: 1 files, 1 lines"),
+        ]),
+      );
+    });
+
+    describe("paginating the file list", () => {
+      const PAGE_SIZE = 100;
+      const page = (start: number, count: number, prefix: string) =>
+        Array.from({ length: count }, (_, i) => ({
+          filename: `${prefix}/f${start + i}.json`,
+          additions: 1,
+          deletions: 0,
+        }));
+
+      /** Serves `pages` through paginate's map function, honouring `done()` like Octokit does. */
+      function withPages(pages: ReturnType<typeof page>[], changedFiles: number) {
+        const github = createPublisherGithub();
+        github.rest.pulls.get.mockResolvedValue({
+          data: {
+            number: issueNumber,
+            changed_files: changedFiles,
+            additions: changedFiles,
+            deletions: 0,
+          },
+        });
+        const requested: number[] = [];
+        const originalPaginate = github.paginate;
+        type MapPage = (response: { data: unknown[] }, done: () => void) => unknown[];
+        github.paginate = (async (fn: unknown, params: unknown, mapFn?: MapPage) => {
+          if (fn !== github.rest.pulls.listFiles || !mapFn) {
+            return originalPaginate(fn as never, params as never);
+          }
+          const result: unknown[] = [];
+          let stopped = false;
+          for (const [index, data] of pages.entries()) {
+            requested.push(index);
+            result.push(...mapFn({ data }, () => (stopped = true)));
+            if (stopped) break;
+          }
+          return result;
+        }) as typeof github.paginate;
+        return { github, requested };
+      }
+
+      it("stops after the first page when its specification/ files already exceed the limits", async () => {
+        const { github, requested } = withPages(
+          [
+            page(0, PAGE_SIZE, "specification/foo"),
+            page(PAGE_SIZE, PAGE_SIZE, "specification/foo"),
+            page(2 * PAGE_SIZE, 50, "specification/foo"),
+          ],
+          250,
+        );
+
+        const { github: g } = await runPublisher({ github });
+        expect(requested).toEqual([0]);
+        expect(publishedDescription(g)).toBe(OVER_LIMITS);
+      });
+
+      it("keeps paginating while the specification/ files seen are still within the limits", async () => {
+        // 250 files, but only 10 are under specification/, so no page can settle the answer early.
+        const { github, requested } = withPages(
+          [
+            page(0, PAGE_SIZE, "documentation"),
+            page(PAGE_SIZE, PAGE_SIZE, "documentation"),
+            [...page(2 * PAGE_SIZE, 40, "documentation"), ...page(0, 10, "specification/foo")],
+          ],
+          250,
+        );
+
+        const { github: g } = await runPublisher({ github });
+        expect(requested).toEqual([0, 1, 2]);
+        expect(publishedState(g)).toBe(CommitStatusState.SUCCESS);
+      });
+    });
+  });
   it.each([
     {
       name: "missing agent output",

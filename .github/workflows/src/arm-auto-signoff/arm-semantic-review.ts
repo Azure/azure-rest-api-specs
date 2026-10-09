@@ -7,31 +7,6 @@ import { byDate, invert } from "../../../shared/src/sort.ts";
  * This file makes no GitHub API calls; `arm-semantic-review-workflow.ts` does the I/O.
  */
 
-/**
- * Size limits for automated review. They mirror the cap in the reviewer prompt
- * (`arm-api-review.md`, Trigger Validation): a PR above either limit is reviewed only in part, so
- * it needs a human. Keep both copies in step.
- */
-const MAX_SPECIFICATION_FILES = 50;
-const MAX_SPECIFICATION_LINES = 5_000;
-
-/** GitHub caps the pull request file list at this many entries without reporting truncation. */
-const MAX_LISTED_FILES = 3_000;
-
-/** One entry of the pull request file list (`pulls.listFiles`). */
-export type ChangedFile = {
-  filename: string;
-  additions: number;
-  deletions: number;
-};
-
-/** The aggregate counters on a pull request object (`pulls.get`). */
-export type PullRequestCounts = {
-  changed_files: number;
-  additions: number;
-  deletions: number;
-};
-
 /** The commit status context that carries the semantic review result for a SHA. */
 export const ARM_SEMANTIC_REVIEW_STATUS = "ARM Semantic Review";
 
@@ -230,51 +205,102 @@ export function evaluateSemanticReview(result: SemanticReviewResult): EvaluatedS
   };
 }
 
-/**
- * Cheap pre-check on the PR's aggregate counters. When the whole PR is within the limits, its
- * `specification/` subset necessarily is too, so no file list is needed. A PR reporting zero
- * files is not "within": GitHub reports zero counters when a diff is too large to compute.
- *
- * @param pullRequest The aggregate counters from `pulls.get`.
- * @returns `true` when no file list is needed and the PR is within the automated-review limits.
+/*
+ * Automated-review size limits. They mirror the cap in the reviewer prompt (`arm-api-review.md`,
+ * Trigger Validation); keep both in step. A PR above either limit is only partly reviewed, so a
+ * human must review it. The model's own `scope` is untrusted, so these are checked independently.
  */
-export function isWithinAutomatedReviewLimits(pullRequest: PullRequestCounts): boolean {
-  return (
-    pullRequest.changed_files >= 1 &&
-    pullRequest.changed_files <= MAX_SPECIFICATION_FILES &&
-    pullRequest.additions + pullRequest.deletions <= MAX_SPECIFICATION_LINES
-  );
-}
+const MAX_SPECIFICATION_FILES = 50;
+const MAX_SPECIFICATION_LINES = 5_000;
+
+// GitHub's file-listing API returns at most this many files for a PR and does not say when it cut
+// the list off, so a PR this large cannot be proven fully covered.
+const MAX_LISTED_FILES = 3_000;
+
+/** The aggregate counters on a pull request object (`pulls.get`). */
+export type PullRequestCounts = {
+  changed_files: number;
+  additions: number;
+  deletions: number;
+};
+
+/** One entry of the pull request file list (`pulls.listFiles`). */
+export type ChangedFile = {
+  filename: string;
+  /** Set only for a renamed or moved file: the path it had before the PR. */
+  previous_filename?: string;
+  additions: number;
+  deletions: number;
+};
+
+/** Running totals of the `specification/` changes seen so far. */
+export type SpecificationTotals = { files: number; lines: number };
+
+/** The status reason for a PR whose `specification/` changes exceed the limits. */
+export const SPECIFICATION_OVER_LIMITS_REASON = `specification/ changes exceed ${MAX_SPECIFICATION_FILES} files or ${MAX_SPECIFICATION_LINES} lines`;
+
+/** What the PR's aggregate counters alone say about its size. */
+export type SizeCheck =
+  | { outcome: "within" }
+  | { outcome: "manual-review"; reason: string }
+  | { outcome: "list-files" };
 
 /**
- * Independent check of the `specification/` subset, because the model's own `scope` is untrusted.
- * Only needed when the aggregate counters exceed the limits. A truncated file list cannot prove
- * coverage, so it also requires manual review.
+ * First, cheapest step of the size check: decide from the PR's aggregate counters alone.
  *
- * @param changedFileCount `changed_files` from `pulls.get`, used to detect truncation.
- * @param changedFiles The paginated `pulls.listFiles` result.
- * @returns `true` when the `specification/` subset exceeds the limits or coverage is unprovable.
+ * - Zero changed files means GitHub could not compute the diff, and 3,000 or more means its file
+ *   list is cut off. Neither can prove coverage, so a human must review.
+ * - If the whole PR is within the limits, so is its `specification/` subset: nothing more to check.
+ * - Otherwise the PR may still be fine (for example many docs files and few specification
+ *   files), so the caller must list the files and count only `specification/` changes.
+ *
+ * The reasons are fixed strings because they are published in the status; never add model output.
  */
-export function exceedsSpecificationLimits(
-  changedFileCount: number,
-  changedFiles: ChangedFile[],
-): boolean {
-  if (changedFiles.length >= MAX_LISTED_FILES || changedFileCount > changedFiles.length) {
-    return true;
+export function checkPullRequestSize(pullRequest: PullRequestCounts): SizeCheck {
+  const { changed_files, additions, deletions } = pullRequest;
+  if (changed_files < 1) {
+    return { outcome: "manual-review", reason: "GitHub could not compute the PR's size" };
   }
-  const specificationFiles = changedFiles.filter((file) =>
-    file.filename.startsWith("specification/"),
-  );
-  const specificationLines = specificationFiles.reduce(
-    (total, file) => total + file.additions + file.deletions,
-    0,
-  );
-  return (
-    specificationFiles.length > MAX_SPECIFICATION_FILES ||
-    specificationLines > MAX_SPECIFICATION_LINES
-  );
+  if (changed_files >= MAX_LISTED_FILES) {
+    return {
+      outcome: "manual-review",
+      reason: `PR has ${MAX_LISTED_FILES} or more changed files`,
+    };
+  }
+  if (
+    changed_files <= MAX_SPECIFICATION_FILES &&
+    additions + deletions <= MAX_SPECIFICATION_LINES
+  ) {
+    return { outcome: "within" };
+  }
+  return { outcome: "list-files" };
 }
 
+/**
+ * Second step of the size check, run once per page of the file list: add that page's
+ * `specification/` changes to the running `totals`. A renamed or moved file counts when its old or
+ * its new path is under `specification/`, so a file moved out of it is not missed.
+ *
+ * Totals only grow, so once they are over the limits the answer is final and a caller can stop
+ * reading pages.
+ *
+ * @returns `true` when the totals now exceed the limits.
+ */
+export function addSpecificationChanges(
+  totals: SpecificationTotals,
+  files: ChangedFile[],
+): boolean {
+  for (const file of files) {
+    if (
+      file.filename.startsWith("specification/") ||
+      file.previous_filename?.startsWith("specification/")
+    ) {
+      totals.files++;
+      totals.lines += file.additions + file.deletions;
+    }
+  }
+  return totals.files > MAX_SPECIFICATION_FILES || totals.lines > MAX_SPECIFICATION_LINES;
+}
 /**
  * Interprets a commit status as a semantic review outcome. An `error` status is a manual-review
  * hold only when its description starts with `MANUAL_REVIEW_DESCRIPTION_PREFIX`; any other

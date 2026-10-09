@@ -583,6 +583,13 @@ describe("ARM API review posting reliability", () => {
     const collapsed = collapseWhitespace(source);
 
     expect(source).toContain("name: Set ARM semantic review pending");
+    // One upload carries both correlation values; the old per-value steps must not return.
+    expect(source).toContain("name: Upload ARM semantic review correlation");
+    expect(source).not.toContain("name: Upload ARM semantic review head SHA");
+    expect(source).not.toContain("name: Upload ARM semantic review issue number");
+    expect(compiled).toContain(
+      "head-sha=${{ steps.resolve_target_pr.outputs.target_head_sha }};issue-number=${{ steps.resolve_target_pr.outputs.target_pr_number }}",
+    );
     expect(source).toContain('context: "ARM Semantic Review"');
     expect(source).toContain("record-arm-semantic-review:");
     expect(source).toContain("scope:");
