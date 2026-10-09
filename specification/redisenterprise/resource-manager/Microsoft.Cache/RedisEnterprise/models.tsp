@@ -793,7 +793,7 @@ union SourceType {
 /**
  * Current provisioning status
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Migration is an operation-tracking proxy resource whose provisioningState intentionally exposes the RP's migration lifecycle, including intermediate cancellation and endpoint-unlinking states. Changing this existing property or its values would break the RP payload and previously released clients."
 union MigrationProvisioningState {
   string,
 
@@ -836,6 +836,24 @@ union MigrationProvisioningState {
    * The migration operation cancellation has failed.
    */
   CancellationFailed: "CancellationFailed",
+
+  /**
+   * The migrated endpoint is being unlinked from the cluster.
+   */
+  @added(Versions.v2026_09_01)
+  Unlinking: "Unlinking",
+
+  /**
+   * The migrated endpoint has been unlinked from the cluster.
+   */
+  @added(Versions.v2026_09_01)
+  Unlinked: "Unlinked",
+
+  /**
+   * Unlinking the migrated endpoint from the cluster has failed.
+   */
+  @added(Versions.v2026_09_01)
+  UnlinkFailed: "UnlinkFailed",
 }
 
 /**
@@ -972,6 +990,13 @@ model ClusterProperties {
   maintenanceConfiguration?: MaintenanceConfiguration;
 
   /**
+   * Firewall rules associated with the cluster.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @identifiers(#["name"])
+  firewallRules?: FirewallRule[];
+
+  /**
    * DNS name of the cluster endpoint
    */
   @visibility(Lifecycle.Read)
@@ -1013,6 +1038,23 @@ model ClusterProperties {
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_08_01_preview)
   migratedEndpoint?: string;
+}
+
+/** A firewall rule associated with the cluster. */
+@added(Versions.v2026_10_01_preview)
+model FirewallRule {
+  /** The name of the firewall rule. */
+  name: string;
+
+  /** Properties of the firewall rule. */
+  properties: FirewallRuleProperties;
+}
+
+/** Properties of a cluster firewall rule. */
+@added(Versions.v2026_10_01_preview)
+model FirewallRuleProperties {
+  /** The source address prefix for the firewall rule. */
+  sourceAddressPrefix: string;
 }
 
 /** Cluster-level maintenance configuration. */
@@ -1455,15 +1497,33 @@ model AccessPolicyAssignmentProperties {
   /**
    * **Deprecated.** This property always returns "default". Use `accessString` to configure custom Redis ACL permissions instead.
    */
-  #deprecated "`accessPolicyName` is being deprecated. Use `accessString` to configure custom Redis ACL permissions instead."
+  @removed(Versions.v2026_05_01_preview)
+  @renamedFrom(Versions.v2026_05_01_preview, "accessPolicyName")
   @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
-  @madeOptional(Versions.v2026_05_01_preview)
-  accessPolicyName?: string;
+  accessPolicyNameBeforeCustomAccessString: string;
+
+  /**
+   * **Deprecated.** This property always returns "default". Use `accessString` to configure custom Redis ACL permissions instead.
+   */
+  #deprecated "`accessPolicyName` is being deprecated. Use `accessString` to configure custom Redis ACL permissions instead."
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "accessPolicyName")
+  @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
+  accessPolicyNameWithCustomAccessString?: string;
+
+  /**
+   * Name of access policy under specific access policy assignment. Only "default" policy is supported for now.
+   */
+  @added(Versions.v2026_09_01)
+  @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
+  accessPolicyName: string;
 
   /**
    * The Redis ACL permissions string applied to this assignment, for example `+@read ~cache:*`. Defaults to `+@all ~*` if not specified.
    */
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_09_01)
   accessString?: string;
 
   /**
@@ -1471,6 +1531,7 @@ model AccessPolicyAssignmentProperties {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_09_01)
   provisioningError?: AccessPolicyAssignmentProvisioningError;
 
   /**
@@ -1493,6 +1554,7 @@ model AccessPolicyAssignmentPropertiesUser {
  * Error details for access policy assignment provisioning failures.
  */
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_09_01)
 model AccessPolicyAssignmentProvisioningError {
   /**
    * Machine-readable error code (e.g., "InvalidAccessString").
@@ -1680,8 +1742,10 @@ model MigrationProperties {
   /**
    * Additional details about the migration operation's status in free text format.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service serializes this read-only property as explicit null when no status details are present, so nullability is distinct from optionality."
+  @typeChangedFrom(Versions.v2026_09_01, string)
   @visibility(Lifecycle.Read)
-  statusDetails?: string;
+  statusDetails?: string | null;
 
   /**
    * The timestamp when the migration operation was created.
@@ -1696,6 +1760,69 @@ model MigrationProperties {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime;
+
+  /**
+   * The timestamp until which a successful migration remains eligible to be undone (rolled back) to the source cache. This property is only returned while the migration is in the Succeeded state, and is calculated from the time the migration succeeded plus the rollback window. After this time the source cache is released and the migration can no longer be undone.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  rollbackEligibleUntil?: utcDateTime;
+}
+
+/**
+ * Parameters supplied to the undo migration operation.
+ */
+model MigrationUndoRequest {
+  /**
+   * The reason for undoing (rolling back) the migration. Choose the value that best describes why the rollback is needed. This information helps us improve the migration experience and does not change how the rollback is performed.
+   */
+  rollbackReason?: MigrationRollbackReason;
+}
+
+/**
+ * The reason a migration operation is being undone (rolled back).
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Closed set: `Other` is the catch-all, and the property is request-only, so clients are never handed a value they cannot parse."
+enum MigrationRollbackReason {
+  /**
+   * The target cache did not meet the expected performance characteristics.
+   */
+  Performance: "performance",
+
+  /**
+   * The target cache was not compatible with the client application or workload.
+   */
+  Compatibility: "compatibility",
+
+  /**
+   * The client application was unable to connect to the target cache.
+   */
+  ClientConnection: "clientConnection",
+
+  /**
+   * The target cache did not meet the expected cost characteristics.
+   */
+  Cost: "cost",
+
+  /**
+   * The migration was performed as a test and is being reverted.
+   */
+  Testing: "testing",
+
+  /**
+   * The target cache did not meet the expected stability characteristics.
+   */
+  Stability: "stability",
+
+  /**
+   * Data was lost during or after the migration.
+   */
+  DataLoss: "dataLoss",
+
+  /**
+   * The migration is being undone for a reason not covered by the other values.
+   */
+  Other: "other",
 }
 
 /**
@@ -1719,6 +1846,14 @@ model AzureCacheForRedisMigrationProperties extends MigrationProperties {
   /**
    * Sets whether the data is migrated from source to target or not. This property must be true during the preview.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "skipDataMigration")
+  skipDataMigrationPreview: boolean;
+
+  /**
+   * Sets whether the data is migrated from source to target or not. Set this property to true to skip data migration.
+   */
+  @added(Versions.v2026_09_01)
   skipDataMigration: boolean;
 
   /**
@@ -1753,6 +1888,7 @@ model MigrationValidationRequest {
   /**
    * Sets whether to ignore warnings when validating if the source cache can be migrated to the target cache. If this property is true, the isValid property in the response will ignore warning-level disparities between the source and target resource. The default value is false.
    */
+  @removed(Versions.v2026_09_01)
   forceMigrate?: boolean;
 }
 
