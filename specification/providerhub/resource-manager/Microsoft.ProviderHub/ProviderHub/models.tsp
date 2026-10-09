@@ -2181,6 +2181,14 @@ model ResourceProviderManifestPropertiesResponseOptions {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceTypeRegistrationProperties {
   /**
+   * The resource type name. For a nested resource type, the name includes each parent resource type, separated by '/'.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "The service returns the resource type name within properties; it is modeled as read-only to document the existing response shape."
+  @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
    * The resource routing type.
    */
   routingType?: RoutingType;

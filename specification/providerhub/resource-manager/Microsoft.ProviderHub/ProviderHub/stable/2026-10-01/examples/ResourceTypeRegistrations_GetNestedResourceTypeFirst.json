@@ -3,6 +3,7 @@
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
     "providerNamespace": "Microsoft.Contoso",
     "resourceType": "employees",
+    "nestedResourceTypeFirst": "skills",
     "api-version": "2026-10-01"
   },
   "responses": {
@@ -10,7 +11,7 @@
       "description": "",
       "body": {
         "properties": {
-          "name": "employees",
+          "name": "employees/skills",
           "routingType": "Default",
           "regionality": "Regional",
           "crossTenantTokenValidation": "EnsureSecureValidation",
@@ -135,8 +136,8 @@
             "lifecycleStage": "InDevelopment"
           }
         },
-        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourceTypeRegistrations/employees",
-        "name": "Microsoft.Contoso/employees",
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourceTypeRegistrations/employees/resourceTypeRegistrations/skills",
+        "name": "Microsoft.Contoso/employees/skills",
         "type": "Microsoft.ProviderHub/providerRegistrations/resourceTypeRegistrations",
         "systemData": {
           "createdBy": "string",
@@ -149,6 +150,6 @@
       }
     }
   },
-  "operationId": "ResourceTypeRegistrations_Get",
-  "title": "ResourceTypeRegistrations_Get"
+  "operationId": "ResourceTypeRegistrations_GetNestedResourceTypeFirst",
+  "title": "ResourceTypeRegistrations_GetNestedResourceTypeFirst"
 }
