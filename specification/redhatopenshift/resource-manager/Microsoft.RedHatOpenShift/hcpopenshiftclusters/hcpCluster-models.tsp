@@ -122,7 +122,7 @@ model HcpOpenShiftClusterProperties {
    * Valid values are in minutes and from 0 to 10080 minutes (1 week).
    * 0 means that the MachinePool can be drained without any time limitation.
    *
-   * This is the value is used a default for all NodePools. It can be overridden
+   * This value is used as a default for all NodePools. It can be overridden
    * by specifying nodeDrainTimeoutMinutes for a given NodePool
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -140,7 +140,14 @@ model HcpOpenShiftClusterProperties {
   /** Status of the cluster resource */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_30_preview)
-  status?: ResourceStatus;
+  @renamedFrom(Versions.v2026_10_01, "status")
+  @removed(Versions.v2026_10_01)
+  resourceStatus?: ResourceStatus;
+
+  /** Status of the cluster resource */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_10_01)
+  status?: ClusterResourceStatus;
 
   /** Cryptographic restrictions for kernel and userspace libraries */
   @added(Versions.v2026_06_30_preview)
@@ -207,6 +214,9 @@ model VersionProfile {
    *  Each version belongs to only a single set.
    *
    *  If not specified, the default value is 'stable'.
+   *
+   *  This property is intended to be updateable, but that support is not yet
+   *  complete. Until then, changing this value after cluster creation is rejected.
    */
   //  Note: The default value is not declared in the API specification because
   //        of a TypeSpec bug with updatable fields. The default value will be
@@ -222,8 +232,8 @@ model DnsProfile {
   @visibility(Lifecycle.Read)
   baseDomain?: string;
 
-  /**  BaseDomainPrefix is the unique name of the cluster representing the OpenShift's cluster name.
-   * BaseDomainPrefix is the name that will appear in the cluster's DNS, provisioned cloud providers resources
+  /**  BaseDomainPrefix is the base domain prefix for the cluster ingress. It will be used to
+   * configure ingress in the cluster through the subdomain "BaseDomainPrefix.BaseDomain".
    * */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxLength(15)
@@ -332,7 +342,7 @@ union IngressType {
 
 /** Azure specific configuration */
 model PlatformProfile {
-  /** Resource group name to put cluster resources
+  /** The name of the resource group to put cluster resources in.
    *
    * If not specified then a unique name is generated from the
    * following pattern
@@ -346,7 +356,7 @@ model PlatformProfile {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   managedResourceGroup?: string;
 
-  /** The Azure resource ID of the worker subnet
+  /** The Azure resource ID of the worker subnet.
    * Note that a subnet cannot be reused between ARO-HCP Clusters.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -376,10 +386,16 @@ model PlatformProfile {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   operatorsAuthentication: OperatorsAuthenticationProfile;
 
+  /** Azure Container Registry configuration for authenticating image pulls
+   * on the cluster's worker nodes. */
+  @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  containerRegistry?: ContainerRegistryProfile;
+
   /** URL for the OIDC provider to be used for authentication
    * to authenticate against user Azure cloud account
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @clientName("issuerUri", "csharp")
   @visibility(Lifecycle.Read)
   issuerUrl: url;
 }
@@ -387,12 +403,12 @@ model PlatformProfile {
 /** ClusterAutoscaling specifies auto-scaling behavior that
  *  applies to all NodePools associated with a control plane. */
 model ClusterAutoscalingProfile {
-  /** maxNodesTotal is the maximum allowable number of nodes for the Autoscaler scale out to be operational.
-   * The autoscaler will not grow the cluster beyond this number. If omitted, the autoscaler will not have a maximum limit. */
+  /** maxNodesTotal is the maximum allowable number of nodes. The autoscaler will not grow the cluster beyond this number.
+   * If omitted, the autoscaler will not have a maximum limit. */
   @minValue(0)
   maxNodesTotal?: int32;
 
-  /** maxPodGracePeriod is the maximum seconds to wait for graceful pod termination before scaling down a NodePool.
+  /** maxPodGracePeriodSeconds is the maximum amount of time in seconds to wait for graceful pod termination before scaling down a NodePool.
    * The default is 600 seconds.
    */
   // Note: The default value is not declared in the API specification because
@@ -525,6 +541,16 @@ union OutboundType {
   LoadBalancer: "LoadBalancer",
 }
 
+/** Azure Container Registry configuration for a cluster.
+ * Configures how worker nodes authenticate container image pulls
+ * from Azure Container Registry (ACR). */
+@added(Versions.v2026_10_01)
+model ContainerRegistryProfile {
+  /** The user-assigned managed identity used for container registry image pulls. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  managedIdentity?: UserAssignedIdentityResourceId;
+}
+
 /** The configuration that the operators of the cluster have to authenticate to Azure. */
 model OperatorsAuthenticationProfile {
   /** Represents the information related to Azure User-Assigned managed identities needed
@@ -600,6 +626,18 @@ union KeyVaultVisibility {
 
   /** The keyvault is not visible from the internet. */
   Private: "Private",
+}
+
+/** The type of keyvault used for KMS encryption. */
+@added(Versions.v2026_10_01)
+union KmsKeyVaultType {
+  string,
+
+  /** Standard Azure Key Vault. */
+  KeyVault: "KeyVault",
+
+  /** Azure Managed Hardware Security Module. */
+  ManagedHSM: "ManagedHSM",
 }
 
 /** The ETCD settings and configuration options. */
@@ -704,6 +742,11 @@ model KmsEncryptionProfile {
   @added(Versions.v2026_06_30_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   activeKey: KmsKey;
+
+  /** The type of keyvault used for KMS encryption. Defaults to KeyVault when absent. */
+  @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  keyVaultType?: KmsKeyVaultType = KmsKeyVaultType.KeyVault;
 }
 
 /** The encryption types supported for a customer managed key. */
@@ -763,7 +806,14 @@ model NodePoolProperties {
   @minValue(0)
   replicas?: int32;
 
-  /** Auto-repair */
+  /** autoRepair specifies whether health checks should be enabled for machines
+   * in the NodePool. Enabling this feature will cause the controller to
+   * automatically delete unhealthy machines. The unhealthy criteria are
+   * determined by checking the Node Ready condition and a timeout that might
+   * vary depending on the platform provider. autoRepair will not take action
+   * when more than 2 Nodes are unhealthy at the same time, giving time for
+   * the cluster to stabilize or for the user to manually intervene.
+   */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   autoRepair?: boolean = true;
 
@@ -771,15 +821,15 @@ model NodePoolProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   autoScaling?: NodePoolAutoScaling;
 
-  /** Kubernetes labels to propagate to the NodePool Nodes
+  /** Kubernetes labels to propagate to the NodePool Nodes.
    * Note that when the labels are updated this is only applied to newly
-   * create nodes in the Nodepool, existing node labels remain unchanged.
+   * created nodes in the NodePool, existing node labels remain unchanged.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @identifiers(#["key", "value"])
   labels?: Label[];
 
-  /** Taints for the nodes */
+  /** Taints for the nodes. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @identifiers(#["key", "value", "effect"])
   taints?: Taint[];
@@ -800,7 +850,14 @@ model NodePoolProperties {
   /** Status of the node pool resource */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_30_preview)
-  status?: ResourceStatus;
+  @renamedFrom(Versions.v2026_10_01, "status")
+  @removed(Versions.v2026_10_01)
+  resourceStatus?: ResourceStatus;
+
+  /** Status of the node pool resource */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_10_01)
+  status?: NodePoolResourceStatus;
 }
 
 /** The taint effect the same as in Kubernetes */
@@ -862,6 +919,9 @@ model NodePoolVersionProfile {
    *  Each version belongs to only a single set.
    *
    *  If not specified, the default value is 'stable'.
+   *
+   *  This property is intended to be updateable, but that support is not yet
+   *  complete. Until then, changing this value after node pool creation is rejected.
    */
   // Note: The default value is not declared in the API specification because
   //       of a TypeSpec bug with updatable fields. The default value will be
@@ -873,7 +933,7 @@ model NodePoolVersionProfile {
 
 /** Azure node pool platform configuration */
 model NodePoolPlatformProfile {
-  /** The Azure resource ID of the worker subnet
+  /** The Azure resource ID of the worker subnet.
    * Note that a subnet cannot be reused between ARO-HCP Clusters, however the
    * same subnet can be used for NodePools of the same cluster.
    */
@@ -1069,7 +1129,14 @@ model ExternalAuthProperties {
   /** Status of the external auth resource */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_30_preview)
-  status?: ResourceStatus;
+  @renamedFrom(Versions.v2026_10_01, "status")
+  @removed(Versions.v2026_10_01)
+  resourceStatus?: ResourceStatus;
+
+  /** Status of the external auth resource */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_10_01)
+  status?: ExternalAuthResourceStatus;
 
   /** Token Issuer profile */
   issuer: TokenIssuerProfile;
@@ -1091,10 +1158,66 @@ model ExternalAuthProperties {
 @added(Versions.v2026_06_30_preview)
 model ResourceStatus {
   /** The conditions on the resource */
+  @added(Versions.v2026_06_30_preview)
   @visibility(Lifecycle.Read)
   @identifiers(#["type"])
   @maxItems(10)
   conditions?: Condition[];
+}
+
+/** ClusterResourceStatus represents the observed status of the cluster resource. */
+@added(Versions.v2026_10_01)
+model ClusterResourceStatus {
+  /** The conditions on the resource */
+  ...ResourceStatus;
+
+  /** The observed active versions of the cluster.
+   * During upgrades, both the previous and target versions may be
+   * active simultaneously until the rollout completes, so this
+   * array can contain more than one entry. The ordering of entries
+   * has no meaning.
+   */
+  @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["version"])
+  activeVersions?: ClusterActiveVersion[];
+}
+
+/** ClusterActiveVersion represents a version of a resource. */
+@added(Versions.v2026_10_01)
+model ClusterActiveVersion {
+  /** The version of the resource. Specified in major.minor, same as the input */
+  @visibility(Lifecycle.Read)
+  version: string;
+}
+
+/** NodePoolResourceStatus represents the observed status of the nodepool resource. */
+@added(Versions.v2026_10_01)
+model NodePoolResourceStatus {
+  ...ResourceStatus;
+
+  /** The observed active versions of the node pool.
+   * During upgrades, it is common for multiple versions to be active at the same time
+   * while old nodes are drained and replaced. The ordering of entries has no meaning.
+   */
+  @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["version"])
+  activeVersions?: NodePoolActiveVersion[];
+}
+
+/** NodePoolActiveVersion represents a version of a resource. */
+@added(Versions.v2026_10_01)
+model NodePoolActiveVersion {
+  /** The version of the resource. Specified in major.minor.patch, same as the input */
+  @visibility(Lifecycle.Read)
+  version: string;
+}
+
+/** ExternalAuthResourceStatus represents the observed status of the external auth resource. */
+@added(Versions.v2026_10_01)
+model ExternalAuthResourceStatus {
+  ...ResourceStatus;
 }
 
 /** Condition represents an observation of a resource's state. */
@@ -1220,17 +1343,16 @@ model TokenIssuerProfile {
    * */
   url: url;
 
-  /** This configures the acceptable audiences the JWT token, issued by the identity
-   * provider, must be issued to. At least one of the entries must match the
-   * 'aud' claim in the JWT token.
+  /** This configures the acceptable audiences for JWT tokens issued by the identity provider.
+   * At least one of the entries must match the 'aud' claim in the JWT token.
    *
-   * audiences must contain at least one entry and must not exceed ten entries.
+   * Audiences must contain at least one entry and must not exceed ten entries.
    */
   @minItems(1)
   @maxItems(10)
   audiences: string[];
 
-  /** The issuer of the token
+  /** The issuer of the token.
    *
    * Certificate bundle to use to validate server certificates for the configured URL.
    * It must be PEM encoded and when not specified, the system trust is used.
@@ -1307,10 +1429,10 @@ model ExternalAuthClientComponentProfile {
 
 /** External Auth claim profile */
 model ExternalAuthClaimProfile {
-  /** The claim mappings */
+  /** The claim mappings. */
   mappings: TokenClaimMappingsProfile;
 
-  /** The claim validation rules */
+  /** The claim validation rules. */
   @identifiers(#["type", "requiredClaim"])
   validationRules?: TokenClaimValidationRule[];
 }
@@ -1340,8 +1462,8 @@ model GroupClaimProfile {
   @maxLength(256)
   claim: string;
 
-  /** Prefix for the claim external profile
-   * If this is specified prefixPolicy will be set to "Prefix" by default
+  /** Prefix for the claim external profile.
+   * If this is specified, prefixPolicy will be set to "Prefix" by default.
    */
   prefix?: string;
 }
@@ -1356,7 +1478,7 @@ model UsernameClaimProfile {
   @maxLength(256)
   claim: string;
 
-  /** Prefix for the claim external profile
+  /** Prefix for the claim external profile.
    * Must be set when the prefixPolicy field is set to 'Prefix' and must be unset
    * otherwise.
    */

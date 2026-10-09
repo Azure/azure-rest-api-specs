@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Red Hat OpenShift Hosted Control Planes Service",
-    "version": "2024-06-10-preview",
+    "version": "2026-10-01",
     "description": "Microsoft.RedHatOpenShift Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -1307,6 +1307,15 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z]([-a-zA-Z0-9]{0,52}[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HcpOpenShiftClusterAdminCredentialRequest"
+            }
           }
         ],
         "responses": {
@@ -1504,6 +1513,20 @@
         }
       ]
     },
+    "ClusterActiveVersion": {
+      "type": "object",
+      "description": "ClusterActiveVersion represents a version of a resource.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The version of the resource. Specified in major.minor, same as the input",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "version"
+      ]
+    },
     "ClusterAutoscalingProfile": {
       "type": "object",
       "description": "ClusterAutoscaling specifies auto-scaling behavior that\napplies to all NodePools associated with a control plane.",
@@ -1568,6 +1591,110 @@
         }
       }
     },
+    "ClusterResourceStatus": {
+      "type": "object",
+      "description": "ClusterResourceStatus represents the observed status of the cluster resource.",
+      "properties": {
+        "conditions": {
+          "type": "array",
+          "description": "The conditions on the resource",
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/Condition"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "activeVersions": {
+          "type": "array",
+          "description": "The observed active versions of the cluster.\nDuring upgrades, both the previous and target versions may be\nactive simultaneously until the rollout completes, so this\narray can contain more than one entry. The ordering of entries\nhas no meaning.",
+          "items": {
+            "$ref": "#/definitions/ClusterActiveVersion"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "version"
+          ]
+        }
+      }
+    },
+    "Condition": {
+      "type": "object",
+      "description": "Condition represents an observation of a resource's state.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ConditionType",
+          "description": "Type of the condition.\nThis is a PascalCase identifier representing the type of the condition.",
+          "maxLength": 316,
+          "pattern": "^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?([A-Za-z0-9]([-A-Za-z0-9_.]*[A-Za-z0-9])?)$",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/StatusType",
+          "description": "The status of the condition.",
+          "readOnly": true
+        },
+        "lastTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time the condition transitioned from one status to another.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "A programmatic identifier indicating the reason for the condition's last transition.\nThis value should be a CamelCase string.",
+          "minLength": 1,
+          "maxLength": 1024,
+          "pattern": "^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable message indicating details about the transition.\nThis may be an empty string.",
+          "maxLength": 32768,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "type",
+        "status",
+        "lastTransitionTime",
+        "reason",
+        "message"
+      ]
+    },
+    "ConditionType": {
+      "type": "string",
+      "description": "Representation of the possible condition types.",
+      "enum": [
+        "Available",
+        "Degraded",
+        "Progressing"
+      ],
+      "x-ms-enum": {
+        "name": "ConditionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Indicates that the resource is available."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Indicates that the resource is in a degraded state."
+          },
+          {
+            "name": "Progressing",
+            "value": "Progressing",
+            "description": "Indicates that the resource is in a progressing state."
+          }
+        ]
+      }
+    },
     "ConsoleProfile": {
       "type": "object",
       "description": "Configuration of the cluster web console",
@@ -1582,6 +1709,21 @@
       "required": [
         "url"
       ]
+    },
+    "ContainerRegistryProfile": {
+      "type": "object",
+      "description": "Azure Container Registry configuration for a cluster.\nConfigures how worker nodes authenticate container image pulls\nfrom Azure Container Registry (ACR).",
+      "properties": {
+        "managedIdentity": {
+          "$ref": "#/definitions/UserAssignedIdentityResourceId",
+          "description": "The user-assigned managed identity used for container registry image pulls.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
     },
     "CustomerManagedEncryptionProfile": {
       "type": "object",
@@ -1615,6 +1757,22 @@
           "description": "The Key Management Service (KMS) encryption key details.\n\nRequired when encryptionType is \"KMS\".",
           "x-ms-mutability": [
             "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "CustomerManagedEncryptionProfileUpdate": {
+      "type": "object",
+      "description": "Customer managed encryption key profile.",
+      "properties": {
+        "kms": {
+          "$ref": "#/definitions/KmsEncryptionProfileUpdate",
+          "description": "The Key Management Service (KMS) encryption key details.\n\nRequired when encryptionType is \"KMS\".",
+          "x-ms-mutability": [
+            "read",
+            "update",
             "create"
           ]
         }
@@ -1683,34 +1841,31 @@
         ]
       }
     },
+    "EtcdDataEncryptionKeyManagementModeType": {
+      "type": "string",
+      "description": "The encryption key management mode types supported for ETCD data encryption.",
+      "enum": [
+        "CustomerManaged"
+      ],
+      "x-ms-enum": {
+        "name": "EtcdDataEncryptionKeyManagementModeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CustomerManaged",
+            "value": "CustomerManaged",
+            "description": "Customer managed encryption key management mode type."
+          }
+        ]
+      }
+    },
     "EtcdDataEncryptionProfile": {
       "type": "object",
       "description": "The ETCD data encryption settings.",
       "properties": {
         "keyManagementMode": {
-          "type": "string",
-          "description": "Specify the key management strategy used for the encryption key that encrypts the ETCD data.\nBy default, \"PlatformManaged\" is used.",
-          "default": "PlatformManaged",
-          "enum": [
-            "CustomerManaged",
-            "PlatformManaged"
-          ],
-          "x-ms-enum": {
-            "name": "EtcdDataEncryptionKeyManagementModeType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "CustomerManaged",
-                "value": "CustomerManaged",
-                "description": "Customer managed encryption key management mode type."
-              },
-              {
-                "name": "PlatformManaged",
-                "value": "PlatformManaged",
-                "description": "Platform managed encryption key management mode type."
-              }
-            ]
-          },
+          "$ref": "#/definitions/EtcdDataEncryptionKeyManagementModeType",
+          "description": "Specify the key management strategy used for the encryption key that encrypts the ETCD data.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1721,6 +1876,25 @@
           "description": "Specify customer managed encryption key details.\nRequired when keyManagementMode is \"CustomerManaged\".",
           "x-ms-mutability": [
             "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "keyManagementMode"
+      ]
+    },
+    "EtcdDataEncryptionProfileUpdate": {
+      "type": "object",
+      "description": "The ETCD data encryption settings.",
+      "properties": {
+        "customerManaged": {
+          "$ref": "#/definitions/CustomerManagedEncryptionProfileUpdate",
+          "description": "Specify customer managed encryption key details.\nRequired when keyManagementMode is \"CustomerManaged\".",
+          "x-ms-mutability": [
+            "read",
+            "update",
             "create"
           ]
         }
@@ -1735,6 +1909,22 @@
           "description": "ETCD Data Encryption settings.\nIf not specified platform managed keys are used.",
           "x-ms-mutability": [
             "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "EtcdProfileUpdate": {
+      "type": "object",
+      "description": "The ETCD settings and configuration options.",
+      "properties": {
+        "dataEncryption": {
+          "$ref": "#/definitions/EtcdDataEncryptionProfileUpdate",
+          "description": "ETCD Data Encryption settings.\nIf not specified platform managed keys are used.",
+          "x-ms-mutability": [
+            "read",
+            "update",
             "create"
           ]
         }
@@ -1877,75 +2067,6 @@
         ]
       }
     },
-    "ExternalAuthCondition": {
-      "type": "object",
-      "description": "Condition defines an observation of the external auth state.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ExternalAuthConditionType",
-          "description": "This is a PascalCase (or in foo.example.com/PascalCase) code to represent the type of condition.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/StatusType",
-          "description": "The status of the condition.",
-          "readOnly": true
-        },
-        "lastTransitionTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last time the condition transitioned from one status to another.",
-          "readOnly": true
-        },
-        "reason": {
-          "type": "string",
-          "description": "This contains a programmatic identifier indicating the reason for the condition's last transition.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "This is a human readable message indicating details about the transition.\nThis may be an empty string.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "type",
-        "status",
-        "lastTransitionTime",
-        "reason",
-        "message"
-      ]
-    },
-    "ExternalAuthConditionType": {
-      "type": "string",
-      "description": "Representation of the possible types of a external auths condition.",
-      "enum": [
-        "Available",
-        "Degraded",
-        "Progressing"
-      ],
-      "x-ms-enum": {
-        "name": "ExternalAuthConditionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Available",
-            "value": "Available",
-            "description": "Indicates that the external auth resource is available."
-          },
-          {
-            "name": "Degraded",
-            "value": "Degraded",
-            "description": "Indicates that the external auth resource is in a degraded state."
-          },
-          {
-            "name": "Progressing",
-            "value": "Progressing",
-            "description": "Indicates that the external auth resource is in a progressing state."
-          }
-        ]
-      }
-    },
     "ExternalAuthListResult": {
       "type": "object",
       "description": "The response of a ExternalAuth list operation.",
@@ -1976,9 +2097,9 @@
           "description": "Provisioning state",
           "readOnly": true
         },
-        "condition": {
-          "$ref": "#/definitions/ExternalAuthCondition",
-          "description": "An observation of the current state with additional information.",
+        "status": {
+          "$ref": "#/definitions/ExternalAuthResourceStatus",
+          "description": "Status of the external auth resource",
           "readOnly": true
         },
         "issuer": {
@@ -2096,6 +2217,24 @@
       },
       "readOnly": true
     },
+    "ExternalAuthResourceStatus": {
+      "type": "object",
+      "description": "ExternalAuthResourceStatus represents the observed status of the external auth resource.",
+      "properties": {
+        "conditions": {
+          "type": "array",
+          "description": "The conditions on the resource",
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/Condition"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "type"
+          ]
+        }
+      }
+    },
     "ExternalAuthUpdate": {
       "type": "object",
       "description": "ExternalAuth resource",
@@ -2188,6 +2327,16 @@
         "expirationTimestamp"
       ]
     },
+    "HcpOpenShiftClusterAdminCredentialRequest": {
+      "type": "object",
+      "description": "HCP cluster admin credential request body",
+      "properties": {
+        "certificateSigningRequest": {
+          "type": "string",
+          "description": "PEM encoded certificate request"
+        }
+      }
+    },
     "HcpOpenShiftClusterListResult": {
       "type": "object",
       "description": "The response of a HcpOpenShiftCluster list operation.",
@@ -2256,6 +2405,14 @@
             "create"
           ]
         },
+        "ingress": {
+          "$ref": "#/definitions/IngressProfile",
+          "description": "The cluster ingress configuration",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "platform": {
           "$ref": "#/definitions/PlatformProfile",
           "description": "Azure platform configuration",
@@ -2279,6 +2436,23 @@
           "description": "Configure ETCD.",
           "x-ms-mutability": [
             "read",
+            "update",
+            "create"
+          ]
+        },
+        "imageDigestMirrors": {
+          "type": "array",
+          "description": "imageDigestMirrors is a set of rules to allow pulling images from a\nmirrored registry by using digest specifications.\n\nWARNING: Updating this array will redeploy all node pools in the cluster.",
+          "maxItems": 240,
+          "items": {
+            "$ref": "#/definitions/ImageDigestMirror"
+          },
+          "x-ms-identifiers": [
+            "source"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
             "create"
           ]
         },
@@ -2301,9 +2475,44 @@
             "read",
             "create"
           ]
+        },
+        "status": {
+          "$ref": "#/definitions/ClusterResourceStatus",
+          "description": "Status of the cluster resource",
+          "readOnly": true
+        },
+        "cryptoRestrictions": {
+          "type": "string",
+          "description": "Cryptographic restrictions for kernel and userspace libraries",
+          "default": "None",
+          "enum": [
+            "None",
+            "FIPS"
+          ],
+          "x-ms-enum": {
+            "name": "CryptoRestrictions",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "No restrictions"
+              },
+              {
+                "name": "FIPS",
+                "value": "FIPS",
+                "description": "Use only FIPS-validated algorithms and implementations"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
+        "version",
         "platform"
       ]
     },
@@ -2312,7 +2521,7 @@
       "description": "HCP cluster properties",
       "properties": {
         "version": {
-          "$ref": "#/definitions/VersionProfile",
+          "$ref": "#/definitions/VersionProfileUpdate",
           "description": "Version of the control plane components",
           "x-ms-mutability": [
             "read",
@@ -2332,6 +2541,31 @@
         "autoscaling": {
           "$ref": "#/definitions/ClusterAutoscalingProfile",
           "description": "Configure ClusterAutoscaling .",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "etcd": {
+          "$ref": "#/definitions/EtcdProfileUpdate",
+          "description": "Configure ETCD.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "imageDigestMirrors": {
+          "type": "array",
+          "description": "imageDigestMirrors is a set of rules to allow pulling images from a\nmirrored registry by using digest specifications.\n\nWARNING: Updating this array will redeploy all node pools in the cluster.",
+          "maxItems": 240,
+          "items": {
+            "$ref": "#/definitions/ImageDigestMirror"
+          },
+          "x-ms-identifiers": [
+            "source"
+          ],
           "x-ms-mutability": [
             "read",
             "update",
@@ -2497,13 +2731,154 @@
         "dataPlaneOperators"
       ]
     },
+    "ImageDigestMirror": {
+      "type": "object",
+      "description": "ImageDigestMirror specifies a set of mirror registries to redirect image\npulls targeting the specified source registries.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ImageRepository",
+          "description": "source matches the repository that users refer to, e.g. in image pull specifications.\nSetting source to a registry hostname, e.g. docker.io, quay.io, or registry.redhat.io,\nwill match the image pull specification of the corresponding registry.\n\nsource uses one of the following formats:\n* host[:port]\n* host[:port]/namespace[/namespace...]\n* host[:port]/namespace[/namespace...]/repo\n* [*.]host\n\nfor more information about the format, see:\nhttps://github.com/containers/image/blob/main/docs/containers-registries.conf.5.md#choosing-a-registry-toml-table"
+        },
+        "mirrors": {
+          "type": "array",
+          "description": "mirrors is zero or more locations that may also contain the same images. No mirror will\nbe configured if not specified. Images can be pulled from these mirrors only if they are\nreferenced by their digests. The mirrored location is obtained by replacing the part of\nthe input reference that matches source by the mirrors entry, e.g. for\nregistry.redhat.io/product/repo reference, a (source, mirror) pair *.redhat.io,\nmirror.local/redhat causes a mirror.local/redhat/product/repo repository to be used.\n\nThe order of mirrors in this list is treated as the user's desired priority, while source\nis by default considered lower priority than all mirrors.\n\nIf no mirror is specified or all image pulls from the mirror list fail, the image will\ncontinue to be pulled from the repository in the pull spec.\n\nOther cluster configuration, including (but not limited to) other imageDigestMirrors\nobjects, may impact the exact order mirrors are contacted in, or some mirrors may be\ncontacted in parallel, so this should be considered a preference rather than a guarantee\nof ordering.\n\nmirrors uses one of the following formats:\n* host[:port]\n* host[:port]/namespace[/namespace...]\n* host[:port]/namespace[/namespace...]/repo\n\nfor more information about the format, see:\nhttps://github.com/containers/image/blob/main/docs/containers-registries.conf.5.md#choosing-a-registry-toml-table",
+          "minItems": 1,
+          "maxItems": 255,
+          "items": {
+            "$ref": "#/definitions/ImageRepository"
+          }
+        }
+      },
+      "required": [
+        "source",
+        "mirrors"
+      ]
+    },
+    "ImageRepository": {
+      "type": "string",
+      "description": "ImageRepository describes a repository for container images.",
+      "maxLength": 255
+    },
+    "IngressProfile": {
+      "type": "object",
+      "description": "Information about the Ingress of a cluster.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the default cluster ingress.",
+          "default": "Public",
+          "enum": [
+            "Public",
+            "Private",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "IngressType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Public",
+                "value": "Public",
+                "description": "The default ingress is visible from the internet."
+              },
+              {
+                "name": "Private",
+                "value": "Private",
+                "description": "The default ingress is not visible from the internet."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The default ingress is disabled."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "KeyVaultVisibility": {
+      "type": "string",
+      "description": "The internet visibility of a keyvault resource",
+      "enum": [
+        "Public",
+        "Private"
+      ],
+      "x-ms-enum": {
+        "name": "KeyVaultVisibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Public",
+            "value": "Public",
+            "description": "The keyvault is visible from the internet."
+          },
+          {
+            "name": "Private",
+            "value": "Private",
+            "description": "The keyvault is not visible from the internet."
+          }
+        ]
+      }
+    },
     "KmsEncryptionProfile": {
       "type": "object",
       "description": "Configure etcd encryption Key Management Service (KMS) key.\nYour Microsoft Entra application used to create the cluster must be authorized to access this keyvault,\ne.g using the AzureCLI: `az keyvault set-policy -n $KEYVAULT_NAME --key-permissions decrypt encrypt --spn (YOUR APPLICATION CLIENT ID)`",
       "properties": {
+        "vaultName": {
+          "type": "string",
+          "description": "vaultName is the name of the keyvault that contains the secret.",
+          "minLength": 1,
+          "maxLength": 255,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "visibility": {
+          "$ref": "#/definitions/KeyVaultVisibility",
+          "description": "visibility of the keyvault that contains the secret.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "activeKey": {
           "$ref": "#/definitions/KmsKey",
           "description": "The details of the active key.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "keyVaultType": {
+          "type": "string",
+          "description": "The type of keyvault used for KMS encryption. Defaults to KeyVault when absent.",
+          "default": "KeyVault",
+          "enum": [
+            "KeyVault",
+            "ManagedHSM"
+          ],
+          "x-ms-enum": {
+            "name": "KmsKeyVaultType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "KeyVault",
+                "value": "KeyVault",
+                "description": "Standard Azure Key Vault."
+              },
+              {
+                "name": "ManagedHSM",
+                "value": "ManagedHSM",
+                "description": "Azure Managed Hardware Security Module."
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -2511,24 +2886,39 @@
         }
       },
       "required": [
+        "vaultName",
+        "visibility",
         "activeKey"
       ]
+    },
+    "KmsEncryptionProfileUpdate": {
+      "type": "object",
+      "description": "Configure etcd encryption Key Management Service (KMS) key.\nYour Microsoft Entra application used to create the cluster must be authorized to access this keyvault,\ne.g using the AzureCLI: `az keyvault set-policy -n $KEYVAULT_NAME --key-permissions decrypt encrypt --spn (YOUR APPLICATION CLIENT ID)`",
+      "properties": {
+        "activeKey": {
+          "$ref": "#/definitions/KmsKeyUpdate",
+          "description": "The details of the active key.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
     },
     "KmsKey": {
       "type": "object",
       "description": "A representation of a KeyVault Secret.",
       "properties": {
-        "vaultName": {
-          "type": "string",
-          "description": "vaultName is the name of the keyvault that contains the secret.",
-          "minLength": 1,
-          "maxLength": 255
-        },
         "name": {
           "type": "string",
           "description": "name is the name of the keyvault key used for encryption/decryption.",
           "minLength": 1,
-          "maxLength": 255
+          "maxLength": 255,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "version": {
           "type": "string",
@@ -2543,10 +2933,26 @@
         }
       },
       "required": [
-        "vaultName",
         "name",
         "version"
       ]
+    },
+    "KmsKeyUpdate": {
+      "type": "object",
+      "description": "A representation of a KeyVault Secret.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "version contains the version of the key to use.",
+          "minLength": 1,
+          "maxLength": 255,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
     },
     "Label": {
       "type": "object",
@@ -2669,6 +3075,20 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "NodePoolActiveVersion": {
+      "type": "object",
+      "description": "NodePoolActiveVersion represents a version of a resource.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The version of the resource. Specified in major.minor.patch, same as the input",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "version"
       ]
     },
     "NodePoolAutoScaling": {
@@ -2857,6 +3277,11 @@
             "update",
             "create"
           ]
+        },
+        "status": {
+          "$ref": "#/definitions/NodePoolResourceStatus",
+          "description": "Status of the node pool resource",
+          "readOnly": true
         }
       },
       "required": [
@@ -2868,7 +3293,7 @@
       "description": "Represents the node pool properties",
       "properties": {
         "version": {
-          "$ref": "#/definitions/NodePoolVersionProfile",
+          "$ref": "#/definitions/NodePoolVersionProfileUpdate",
           "description": "OpenShift version for the nodepool",
           "x-ms-mutability": [
             "read",
@@ -2941,6 +3366,35 @@
         }
       }
     },
+    "NodePoolResourceStatus": {
+      "type": "object",
+      "description": "NodePoolResourceStatus represents the observed status of the nodepool resource.",
+      "properties": {
+        "conditions": {
+          "type": "array",
+          "description": "The conditions on the resource",
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/Condition"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "type"
+          ]
+        },
+        "activeVersions": {
+          "type": "array",
+          "description": "The observed active versions of the node pool.\nDuring upgrades, it is common for multiple versions to be active at the same time\nwhile old nodes are drained and replaced. The ordering of entries has no meaning.",
+          "items": {
+            "$ref": "#/definitions/NodePoolActiveVersion"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "version"
+          ]
+        }
+      }
+    },
     "NodePoolUpdate": {
       "type": "object",
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
@@ -2961,6 +3415,33 @@
       ]
     },
     "NodePoolVersionProfile": {
+      "type": "object",
+      "description": "Versions represents an OpenShift version.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID is the unique identifier of the version.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "channelGroup": {
+          "type": "string",
+          "description": "ChannelGroup is the name of the set to which this version belongs.\nEach version belongs to only a single set.\n\nIf not specified, the default value is 'stable'.\n\nThis property is intended to be updateable, but that support is not yet\ncomplete. Until then, changing this value after node pool creation is rejected.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "NodePoolVersionProfileUpdate": {
       "type": "object",
       "description": "Versions represents an OpenShift version.",
       "properties": {
@@ -3067,9 +3548,10 @@
         "sizeGiB": {
           "type": "integer",
           "format": "int32",
-          "description": "The OS disk size in GiB",
+          "description": "The OS disk size in GiB. Maximum is 4095 GiB for Managed disks. For Ephemeral disks,\nthe maximum is 2040 GiB; Azure may enforce a lower effective limit based on the\nselected VM size's local cache, temp, or NVMe capacity.",
           "default": 64,
           "minimum": 64,
+          "maximum": 4095,
           "x-ms-mutability": [
             "read",
             "create"
@@ -3117,6 +3599,35 @@
             "read",
             "create"
           ]
+        },
+        "diskType": {
+          "type": "string",
+          "description": "The type of the OS disk.\n- https://learn.microsoft.com/en-us/azure/virtual-machines/ephemeral-os-disks",
+          "default": "Managed",
+          "enum": [
+            "Managed",
+            "Ephemeral"
+          ],
+          "x-ms-enum": {
+            "name": "OsDiskType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Managed",
+                "value": "Managed",
+                "description": "Managed OS disk - stored as an Azure managed disk (network-attached).\nDefault behavior for VMs without sufficient cache."
+              },
+              {
+                "name": "Ephemeral",
+                "value": "Ephemeral",
+                "description": "Ephemeral OS disk - stored on local VM cache/temporary storage.\nProvides lower latency and faster node operations.\nRequires VM with sufficient cache size."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
@@ -3135,6 +3646,14 @@
         "subnetId": {
           "$ref": "#/definitions/SubnetResourceId",
           "description": "The Azure resource ID of the worker subnet.\nNote that a subnet cannot be reused between ARO-HCP Clusters.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vnetIntegrationSubnetId": {
+          "$ref": "#/definitions/SubnetResourceId",
+          "description": "The Azure resource ID of a subnet that enables direct,\nprivate network connectivity between the hosted control plane\nand your cluster's nodes. This subnet must be dedicated to ARO HCP\nand cannot be shared with the cluster subnet or any node pool subnets.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3180,6 +3699,15 @@
             "create"
           ]
         },
+        "containerRegistry": {
+          "$ref": "#/definitions/ContainerRegistryProfile",
+          "description": "Azure Container Registry configuration for authenticating image pulls\non the cluster's worker nodes.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "issuerUrl": {
           "type": "string",
           "format": "uri",
@@ -3189,6 +3717,7 @@
       },
       "required": [
         "subnetId",
+        "vnetIntegrationSubnetId",
         "networkSecurityGroupId",
         "operatorsAuthentication",
         "issuerUrl"
@@ -3201,6 +3730,15 @@
         "operatorsAuthentication": {
           "$ref": "#/definitions/OperatorsAuthenticationProfileUpdate",
           "description": "The configuration that the operators of the cluster have to authenticate to Azure",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "containerRegistry": {
+          "$ref": "#/definitions/ContainerRegistryProfile",
+          "description": "Azure Container Registry configuration for authenticating image pulls\non the cluster's worker nodes.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3672,9 +4210,37 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "ID is the unique identifier of the version.",
+          "description": "ID is the desired X.Y version of the cluster control plane.",
           "x-ms-mutability": [
             "read",
+            "update",
+            "create"
+          ]
+        },
+        "channelGroup": {
+          "type": "string",
+          "description": "ChannelGroup is the name of the set to which this version belongs.\nEach version belongs to only a single set.\n\nIf not specified, the default value is 'stable'.\n\nThis property is intended to be updateable, but that support is not yet\ncomplete. Until then, changing this value after cluster creation is rejected.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "VersionProfileUpdate": {
+      "type": "object",
+      "description": "Versions represents an OpenShift version.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID is the desired X.Y version of the cluster control plane.",
+          "x-ms-mutability": [
+            "read",
+            "update",
             "create"
           ]
         },
