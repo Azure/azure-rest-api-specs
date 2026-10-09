@@ -105,41 +105,10 @@ model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
 
 @@removed(Pool.tags, Versions.v2026_10_01_preview);
 
-@removed(Versions.v2026_10_01_preview)
-@doc("Represents the HorizonDB replica.")
-@parentResource(Pool)
-model HorizonDbReplica
-  is Azure.ResourceManager.ProxyResource<HorizonDbReplicaProperties> {
-  @doc("The name of the HorizonDB replica.")
-  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
-  @minLength(1)
-  @maxLength(63)
-  @key("replicaName")
-  @path
-  @segment("replicas")
-  name: string;
-}
-
 @added(Versions.v2026_10_01_preview)
 @doc("An IPv4 address in dotted-decimal notation.")
 @pattern("^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])[.]){3}(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$")
 scalar DottedDecimalIpv4Address extends string;
-
-@removed(Versions.v2026_10_01_preview)
-@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbFirewallRule")
-@doc("Represents the HorizonDB firewall rule.")
-@parentResource(Pool)
-model LegacyHorizonDbFirewallRule
-  is Azure.ResourceManager.ProxyResource<FirewallRuleProperties> {
-  @doc("The name of the HorizonDB firewall rule.")
-  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9]*[a-zA-Z0-9]$")
-  @minLength(1)
-  @maxLength(128)
-  @key("firewallRuleName")
-  @path
-  @segment("firewallRules")
-  name: string;
-}
 
 @added(Versions.v2026_10_01_preview)
 @doc("Represents a customer-managed firewall rule for a HorizonDB pool.")
@@ -185,20 +154,6 @@ model ParameterGroup
   name: string;
 }
 
-@added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01_preview)
-@doc("Represents an Entra ID administrator configured on a HorizonDB cluster.")
-@parentResource(Cluster)
-model HorizonDbAdministrator
-  is Azure.ResourceManager.ProxyResource<HorizonDbAdministratorProperties> {
-  @doc("The Entra ID object identifier of the principal (an RFC 4122 GUID).")
-  @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
-  @key("objectId")
-  @path
-  @segment("administrators")
-  name: string;
-}
-
 @added(Versions.v2026_10_01_preview)
 @doc("Represents a PostgreSQL role that is a member of the azure_pg_admin role and is mapped to a Microsoft Entra principal.")
 @parentResource(Cluster)
@@ -212,32 +167,50 @@ model MicrosoftEntraAdministrator
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The resource has the fixed literal name passwordMethod, which is more restrictive than a pattern."
+@added(Versions.v2026_10_01_preview)
+@doc("The name of the PostgreSQL username-and-password authentication method.")
+union PasswordAuthenticationName {
+  string,
+
+  @doc("PostgreSQL username-and-password authentication.")
+  PasswordMethod: "passwordMethod",
+}
+
 @added(Versions.v2026_10_01_preview)
 @doc("The service-created PostgreSQL username-and-password authentication method for a HorizonDB cluster. This resource configures the authentication mechanism, including its enabled state and administrator login credentials; it is not a password-only resource.")
 @singleton("passwordMethod")
 @parentResource(Cluster)
 model PasswordAuthentication
   is Azure.ResourceManager.ProxyResource<PasswordAuthenticationProperties> {
-  @doc("The fixed name of the PostgreSQL username-and-password authentication method.")
-  @key("authenticationName")
-  @path
-  @segment("authentications")
-  name: "passwordMethod";
+  ...ResourceNameParameter<
+    Resource = PasswordAuthentication,
+    KeyName = "authenticationName",
+    SegmentName = "authentications",
+    Type = PasswordAuthenticationName
+  >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The resource has the fixed literal name microsoftEntra, which is more restrictive than a pattern."
+@added(Versions.v2026_10_01_preview)
+@doc("The name of the Microsoft Entra authentication method.")
+union MicrosoftEntraAuthenticationName {
+  string,
+
+  @doc("Microsoft Entra authentication.")
+  MicrosoftEntra: "microsoftEntra",
+}
+
 @added(Versions.v2026_10_01_preview)
 @doc("The service-created Microsoft Entra authentication method for a HorizonDB cluster.")
 @singleton("microsoftEntra")
 @parentResource(Cluster)
 model MicrosoftEntraAuthentication
   is Azure.ResourceManager.ProxyResource<MicrosoftEntraAuthenticationProperties> {
-  @doc("The fixed name of the Microsoft Entra authentication method.")
-  @key("authenticationName")
-  @path
-  @segment("authentications")
-  name: "microsoftEntra";
+  ...ResourceNameParameter<
+    Resource = MicrosoftEntraAuthentication,
+    KeyName = "authenticationName",
+    SegmentName = "authentications",
+    Type = MicrosoftEntraAuthenticationName
+  >;
 }
 
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbClusterProperties")
@@ -385,83 +358,6 @@ model ClusterProperties {
   @doc("Defines connection to a parameter group.")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
-
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Authentication configuration for the HorizonDB cluster.")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  authConfig?: HorizonDbClusterAuthConfig;
-
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The compute model for the cluster.")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  computeModel?: HorizonDbComputeModel;
-
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Mirroring configuration for the HorizonDB cluster.")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  mirroring?: HorizonDbClusterMirroring;
-}
-
-@added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01_preview)
-@doc("Mirroring configuration for a HorizonDB cluster.")
-model HorizonDbClusterMirroring {
-  @doc("The names of the databases to mirror.")
-  databaseNames?: string[];
-
-  @doc("The resource ID of the user-assigned managed identity used for mirroring.")
-  userAssignedIdentityId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-}
-
-@added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01_preview)
-@doc("Authentication configuration for a HorizonDB cluster.")
-model HorizonDbClusterAuthConfig {
-  @doc("Indicates whether Microsoft Entra ID authentication is enabled or disabled.")
-  entraIdAuth?: AuthenticationState;
-
-  @doc("The Microsoft Entra tenant ID.")
-  tenantId?: string;
-
-  @doc("Indicates whether password authentication is enabled or disabled.")
-  passwordAuth?: AuthenticationState;
-}
-
-@added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01_preview)
-@doc("The compute model for a HorizonDB cluster.")
-model HorizonDbComputeModel {
-  @doc("The compute model type. Supported values: 'Provisioned', 'Serverless'.")
-  type?: HorizonDbComputeModelType;
-
-  @doc("The fixed vCore count for Provisioned compute.")
-  vCores?: int32;
-
-  @doc("The minimum vCores for Serverless compute. Defines the lower autoscaling bound.")
-  minvCores?: float64;
-
-  @doc("The maximum vCores for Serverless compute. Defines the upper autoscaling bound.")
-  maxvCores?: float64;
-}
-
-@added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01_preview)
-@doc("The compute model type.")
-union HorizonDbComputeModelType {
-  string,
-
-  @doc("Provisioned compute.")
-  Provisioned: "Provisioned",
-
-  @doc("Serverless compute.")
-  Serverless: "Serverless",
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -545,24 +441,6 @@ model ClusterPropertiesForPatchUpdate {
   @doc("Defines connection to a parameter group.")
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
 
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Authentication configuration for the HorizonDB cluster.")
-  @visibility(Lifecycle.Update)
-  authConfig?: HorizonDbClusterAuthConfig;
-
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The compute model for the cluster.")
-  @visibility(Lifecycle.Update)
-  computeModel?: HorizonDbComputeModel;
-
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Mirroring configuration for the HorizonDB cluster.")
-  @visibility(Lifecycle.Update)
-  mirroring?: HorizonDbClusterMirroring;
-
   @added(Versions.v2026_10_01_preview)
   @doc("The backup configuration for the cluster.")
   @visibility(Lifecycle.Update)
@@ -584,8 +462,6 @@ model ClusterForPatchUpdate {
   properties?: ClusterPropertiesForPatchUpdate;
 }
 
-@@added(Cluster.identity, Versions.v2026_05_01_preview);
-@@added(ClusterForPatchUpdate.identity, Versions.v2026_05_01_preview);
 @@typeChangedFrom(
   Cluster.identity,
   Versions.v2026_10_01_preview,
@@ -839,46 +715,6 @@ model NetworkForPatchUpdate {
   publicAccess?: PublicNetworkAccessState;
 }
 
-@removed(Versions.v2026_10_01_preview)
-@doc("Properties of a HorizonDB replica.")
-model HorizonDbReplicaProperties {
-  @doc("Role of the replica.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  role?: ReplicaRole;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Current status of the replica.")
-  @visibility(Lifecycle.Read)
-  status?: State;
-
-  @doc("The fully qualified domain name of the replica.")
-  @visibility(Lifecycle.Read)
-  fullyQualifiedDomainName?: string;
-
-  @doc("The availability zone of the replica.")
-  availabilityZone?: string;
-
-  @doc("The provisioning state of the replica.")
-  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyProvisioningState)
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-}
-
-@removed(Versions.v2026_10_01_preview)
-@doc("Properties of a HorizonDB replica for update operations.")
-model HorizonDbReplicaPropertiesForPatchUpdate {
-  @visibility(Lifecycle.Update)
-  @doc("Role of the replica.")
-  role?: ReplicaRole;
-}
-
-@removed(Versions.v2026_10_01_preview)
-@doc("HorizonDB replica for update operations.")
-model HorizonDbReplicaForPatchUpdate {
-  @doc("Properties of a HorizonDB replica for update operations.")
-  properties?: HorizonDbReplicaPropertiesForPatchUpdate;
-}
-
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbFirewallRuleProperties")
 @doc("Properties of a HorizonDB firewall rule.")
 model FirewallRuleProperties {
@@ -921,32 +757,6 @@ model FirewallRuleProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01_preview)
-@doc("Properties of a HorizonDB administrator.")
-model HorizonDbAdministratorProperties {
-  @doc("The display name or UPN of the Entra ID principal. For users, typically the User Principal Name (e.g., admin@contoso.com). For groups, the group display name. For service principals, the application display name.")
-  @maxLength(256)
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  principalName: string;
-
-  @doc("The type of the Entra ID principal.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  principalType: LegacyPrincipalTypes;
-
-  @doc("The Entra ID object identifier of the principal (an RFC 4122 GUID). On PUT requests, this value comes from the URI path parameter.")
-  @visibility(Lifecycle.Read)
-  objectId?: string;
-
-  @doc("The Entra ID tenant identifier (an RFC 4122 GUID). If omitted, defaults to the tenant of the subscription.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  tenantId?: string;
-
-  @doc("The provisioning state of the administrator.")
-  @visibility(Lifecycle.Read)
-  provisioningState?: LegacyProvisioningState;
-}
-
 @added(Versions.v2026_10_01_preview)
 @doc("Properties of a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
 model MicrosoftEntraAdministratorProperties {
@@ -970,29 +780,6 @@ model MicrosoftEntraAdministratorProperties {
   @doc("The provisioning state of the PostgreSQL role and Microsoft Entra principal mapping.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-}
-
-@added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01_preview)
-@doc("The properties for adding a HorizonDB administrator.")
-model HorizonDbAdministratorPropertiesForAdd {
-  @doc("The display name or UPN of the Entra ID principal. For users, typically the User Principal Name (e.g., admin@contoso.com). For groups, the group display name. For service principals, the application display name.")
-  @maxLength(256)
-  principalName: string;
-
-  @doc("The type of the Entra ID principal.")
-  principalType: LegacyPrincipalTypes;
-
-  @doc("The Entra ID tenant identifier (an RFC 4122 GUID). If omitted, defaults to the tenant of the subscription.")
-  tenantId?: string;
-}
-
-@added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01_preview)
-@doc("The request body for adding a HorizonDB administrator.")
-model HorizonDbAdministratorAdd {
-  @doc("The properties for adding a HorizonDB administrator.")
-  properties: HorizonDbAdministratorPropertiesForAdd;
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -1290,26 +1077,6 @@ union ComputeProcessorType {
   AMD: "AMD",
 }
 
-@added(Versions.v2026_05_01_preview)
-@removed(Versions.v2026_10_01_preview)
-@renamedFrom(Versions.v2026_10_01_preview, "PrincipalTypes")
-@doc("The type of the Entra ID principal.")
-union LegacyPrincipalTypes {
-  string,
-
-  @doc("Unknown or unrecognized type (internal only, not accepted in requests).")
-  Unknown: "Unknown",
-
-  @doc("An Entra ID user account (UPN-based principal).")
-  User: "User",
-
-  @doc("An Entra ID security group. All members of the group inherit admin privileges.")
-  Group: "Group",
-
-  @doc("An Entra ID application / service principal (used for automated workloads).")
-  ServicePrincipal: "ServicePrincipal",
-}
-
 @added(Versions.v2026_10_01_preview)
 @doc("The type of Microsoft Entra principal mapped to a PostgreSQL role.")
 union PrincipalTypes {
@@ -1440,11 +1207,9 @@ union State {
   @doc("Is healthy")
   Healthy: "Healthy",
 
-  @added(Versions.v2026_05_01_preview)
   @doc("Is succeeded")
   Succeeded: "Succeeded",
 
-  @added(Versions.v2026_05_01_preview)
   @doc("Is upgrading")
   Upgrading: "Upgrading",
 }
@@ -1517,7 +1282,6 @@ model ClusterCreateAcceptedResponse {
   body: Cluster;
 }
 
-@added(Versions.v2026_05_01_preview)
 @doc("Indicates if authentication state is enabled or not.")
 union AuthenticationState {
   string,
