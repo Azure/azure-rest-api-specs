@@ -27,7 +27,7 @@ union AiGatewayProvisioningState {
 }
 
 /** The type of an AI model provider. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayModelProviderKind {
   string,
 
@@ -39,7 +39,7 @@ union AiGatewayModelProviderKind {
 }
 
 /** Authentication type used by an AI model provider. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayModelProviderAuthenticationKind {
   string,
 
@@ -51,7 +51,7 @@ union AiGatewayModelProviderAuthenticationKind {
 }
 
 /** Authentication type used by a tool server endpoint. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayToolServerCredentialKind {
   string,
 
@@ -63,7 +63,7 @@ union AiGatewayToolServerCredentialKind {
 }
 
 /** The type of a tool server endpoint. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayToolServerEndpointKind {
   string,
 
@@ -75,7 +75,7 @@ union AiGatewayToolServerEndpointKind {
 }
 
 /** Transport used to connect to an MCP server. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayMcpTransport {
   string,
 
@@ -84,7 +84,7 @@ union AiGatewayMcpTransport {
 }
 
 /** Source type for an OpenAPI document. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayOpenApiSpecSourceKind {
   string,
 
@@ -96,7 +96,7 @@ union AiGatewayOpenApiSpecSourceKind {
 }
 
 /** API key slot to regenerate. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayApiKeyTarget {
   string,
 

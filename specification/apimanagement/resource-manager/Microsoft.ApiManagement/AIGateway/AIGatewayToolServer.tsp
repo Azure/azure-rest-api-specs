@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ApiManagement;
 
 /** How a tool server is exposed. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayToolServerType {
   string,
 
@@ -29,7 +29,7 @@ union AiGatewayToolServerType {
 }
 
 /** Endpoint source kind. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayToolServerEndpointSourceKind {
   string,
 
@@ -41,7 +41,7 @@ union AiGatewayToolServerEndpointSourceKind {
 }
 
 /** Endpoint authentication type. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayToolServerAuthenticationType {
   string,
 
@@ -59,7 +59,7 @@ union AiGatewayToolServerAuthenticationType {
 }
 
 /** OAuth 2.0 grant type. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayToolServerOauth2GrantType {
   string,
 
@@ -71,7 +71,7 @@ union AiGatewayToolServerOauth2GrantType {
 }
 
 /** MCP transport protocol. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayToolServerMcpTransport {
   string,
 
@@ -80,7 +80,7 @@ union AiGatewayToolServerMcpTransport {
 }
 
 /** OpenAPI document source type. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayToolServerOpenApiSourceType {
   string,
 
@@ -92,7 +92,7 @@ union AiGatewayToolServerOpenApiSourceType {
 }
 
 /** Tool server access state. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayToolServerAccessState {
   string,
 
@@ -104,7 +104,7 @@ union AiGatewayToolServerAccessState {
 }
 
 /** Managed identity authentication for a tool server endpoint. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerManagedIdentityAuthentication {
   /** Token audience for managed identity authentication. */
   resource: string;
@@ -114,7 +114,7 @@ model AiGatewayToolServerManagedIdentityAuthentication {
 }
 
 /** An additional parameter sent to an OAuth 2.0 endpoint. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerOauth2Parameter {
   /** OAuth parameter name. */
   name: string;
@@ -124,7 +124,7 @@ model AiGatewayToolServerOauth2Parameter {
 }
 
 /** OAuth 2.0 authentication for a tool server endpoint. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerOauth2Authentication {
   /** OAuth authorization endpoint. */
   @clientName("authorizationUri", "csharp")
@@ -165,7 +165,7 @@ model AiGatewayToolServerOauth2Authentication {
 }
 
 /** An HTTP header injected when calling a tool server endpoint. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerHeader {
   /** HTTP header name. */
   name: string;
@@ -176,7 +176,7 @@ model AiGatewayToolServerHeader {
 }
 
 /** Credentials for a tool server endpoint. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerCredentials {
   /** Authentication type. */
   type: AiGatewayToolServerAuthenticationType;
@@ -194,7 +194,7 @@ model AiGatewayToolServerCredentials {
 }
 
 /** MCP URL endpoint configuration. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayMcpUrlConfiguration {
   /** Backend MCP server endpoint. */
   url: string;
@@ -204,7 +204,7 @@ model AiGatewayMcpUrlConfiguration {
 }
 
 /** Source of an OpenAPI document. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayOpenApiSpecSource {
   /** Source type. */
   type: AiGatewayToolServerOpenApiSourceType;
@@ -217,14 +217,14 @@ model AiGatewayOpenApiSpecSource {
 }
 
 /** OpenAPI-backed MCP endpoint configuration. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayOpenApiConfiguration {
   /** OpenAPI document source. */
   specSource: AiGatewayOpenApiSpecSource;
 }
 
 /** A tool server endpoint. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerEndpoint {
   /** Stable endpoint identifier. Generated when omitted. */
   id?: string;
@@ -252,7 +252,7 @@ model AiGatewayToolServerEndpoint {
 }
 
 /** Tool server credentials to update. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerCredentialsUpdate {
   /** Authentication type. */
   type?: AiGatewayToolServerAuthenticationType;
@@ -270,7 +270,7 @@ model AiGatewayToolServerCredentialsUpdate {
 }
 
 /** MCP URL endpoint settings to update. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayMcpUrlConfigurationUpdate {
   /** Backend MCP server endpoint. */
   url?: string;
@@ -280,7 +280,7 @@ model AiGatewayMcpUrlConfigurationUpdate {
 }
 
 /** OpenAPI document source settings to update. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayOpenApiSpecSourceUpdate {
   /** Source type. */
   type?: AiGatewayToolServerOpenApiSourceType;
@@ -293,14 +293,14 @@ model AiGatewayOpenApiSpecSourceUpdate {
 }
 
 /** OpenAPI-backed MCP endpoint settings to update. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayOpenApiConfigurationUpdate {
   /** OpenAPI document source. */
   specSource?: AiGatewayOpenApiSpecSourceUpdate;
 }
 
 /** A tool server endpoint to update. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerEndpointUpdate {
   /** Stable endpoint identifier. */
   id?: string;
@@ -328,7 +328,7 @@ model AiGatewayToolServerEndpointUpdate {
 }
 
 /** Properties for updating an AI Gateway tool server. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerUpdateProperties {
   /** Display name of the tool server. */
   @encodedName("application/json", "name")
@@ -366,14 +366,14 @@ model AiGatewayToolServerUpdateProperties {
 }
 
 /** Parameters for updating an AI Gateway tool server. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerUpdateParameters {
   /** Tool server properties to update. */
   properties?: AiGatewayToolServerUpdateProperties;
 }
 
 /** Properties of an AI Gateway tool server. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerProperties {
   /** Display name of the tool server. */
   @encodedName("application/json", "name")
@@ -415,7 +415,7 @@ model AiGatewayToolServerProperties {
 }
 
 /** An AI Gateway tool server resource. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 @parentResource(AiGatewayWorkspaceResource)
 model AiGatewayToolServerResource
   is Azure.ResourceManager.ProxyResource<AiGatewayToolServerProperties> {

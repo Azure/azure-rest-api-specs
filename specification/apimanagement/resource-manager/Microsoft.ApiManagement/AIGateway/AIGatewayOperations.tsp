@@ -30,7 +30,7 @@ interface AiGatewayResources {
   listBySubscription is ArmListBySubscription<AiGatewayResource>;
 }
 
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface AiGatewayWorkspaceResources {
   get is ArmResourceRead<AiGatewayWorkspaceResource>;
@@ -51,7 +51,7 @@ interface AiGatewayWorkspaceResources {
   listByAiGateway is ArmResourceListByParent<AiGatewayWorkspaceResource>;
 }
 
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface AiGatewayModelProviderResources {
   get is ArmResourceRead<AiGatewayModelProviderResource>;
@@ -81,7 +81,7 @@ interface AiGatewayModelProviderResources {
   >;
 }
 
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface AiGatewayModelResources {
   get is ArmResourceRead<AiGatewayModelResource>;
@@ -102,7 +102,7 @@ interface AiGatewayModelResources {
   listByModelProvider is ArmResourceListByParent<AiGatewayModelResource>;
 }
 
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface AiGatewayToolServerResources {
   get is ArmResourceRead<AiGatewayToolServerResource>;
@@ -132,7 +132,7 @@ interface AiGatewayToolServerResources {
   >;
 }
 
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface AiGatewayApiKeyResources {
   get is ArmResourceRead<AiGatewayApiKeyResource>;
@@ -182,7 +182,7 @@ interface AiGatewayApiKeyResources {
 
 /** Cross-provider model listing operations. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This operation returns models across all providers in one workspace."
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 interface AiGatewayWorkspaceModelOperations {
   /** Lists models from every model provider in an AI Gateway workspace. */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/models")

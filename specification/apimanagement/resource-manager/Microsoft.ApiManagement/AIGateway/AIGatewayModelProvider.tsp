@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ApiManagement;
 
 /** API key credentials for an upstream service. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayApiKeyCredential {
   /** Name of the HTTP header that carries the API key. */
   headerName: string;
@@ -25,7 +25,7 @@ model AiGatewayApiKeyCredential {
 }
 
 /** Authentication configuration for a Foundry model provider. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayFoundryAuthentication {
   /** Authentication type. */
   kind: AiGatewayModelProviderAuthenticationKind;
@@ -38,7 +38,7 @@ model AiGatewayFoundryAuthentication {
 }
 
 /** Managed identity settings for a model provider. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayManagedIdentityAuthentication {
   /** Token audience requested for managed identity authentication. */
   resource?: string;
@@ -48,7 +48,7 @@ model AiGatewayManagedIdentityAuthentication {
 }
 
 /** Foundry model provider configuration. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayFoundryProviderConfiguration {
   /** Foundry endpoint. */
   endpoint?: string;
@@ -61,7 +61,7 @@ model AiGatewayFoundryProviderConfiguration {
 }
 
 /** Authentication configuration for a custom model provider. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayCustomAuthentication {
   /** Authentication type. */
   kind: "ApiKey";
@@ -71,7 +71,7 @@ model AiGatewayCustomAuthentication {
 }
 
 /** Custom model provider configuration. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayCustomProviderConfiguration {
   /** Provider base endpoint. */
   endpoint: string;
@@ -81,7 +81,7 @@ model AiGatewayCustomProviderConfiguration {
 }
 
 /** API key credentials for updating an upstream service. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayApiKeyCredentialUpdate {
   /** Name of the HTTP header that carries the API key. */
   headerName?: string;
@@ -92,7 +92,7 @@ model AiGatewayApiKeyCredentialUpdate {
 }
 
 /** Foundry authentication settings to update. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayFoundryAuthenticationUpdate {
   /** Authentication type. */
   kind?: AiGatewayModelProviderAuthenticationKind;
@@ -105,7 +105,7 @@ model AiGatewayFoundryAuthenticationUpdate {
 }
 
 /** Foundry model provider settings to update. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayFoundryProviderConfigurationUpdate {
   /** Foundry endpoint. */
   endpoint?: string;
@@ -118,7 +118,7 @@ model AiGatewayFoundryProviderConfigurationUpdate {
 }
 
 /** Custom model provider authentication settings to update. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayCustomAuthenticationUpdate {
   /** Authentication type. */
   kind?: "ApiKey";
@@ -128,7 +128,7 @@ model AiGatewayCustomAuthenticationUpdate {
 }
 
 /** Custom model provider settings to update. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayCustomProviderConfigurationUpdate {
   /** Provider base endpoint. */
   endpoint?: string;
@@ -138,7 +138,7 @@ model AiGatewayCustomProviderConfigurationUpdate {
 }
 
 /** Properties for updating an AI Gateway model provider. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayModelProviderUpdateProperties {
   /** Model provider type. */
   kind?: AiGatewayModelProviderKind;
@@ -158,14 +158,14 @@ model AiGatewayModelProviderUpdateProperties {
 }
 
 /** Parameters for updating an AI Gateway model provider. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayModelProviderUpdateParameters {
   /** Model provider properties to update. */
   properties?: AiGatewayModelProviderUpdateProperties;
 }
 
 /** Properties of an AI Gateway model provider. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayModelProviderProperties {
   /** Model provider type. This value cannot be changed after creation. */
   kind: AiGatewayModelProviderKind;
@@ -189,7 +189,7 @@ model AiGatewayModelProviderProperties {
 }
 
 /** An AI Gateway model provider resource. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 @parentResource(AiGatewayWorkspaceResource)
 model AiGatewayModelProviderResource
   is Azure.ResourceManager.ProxyResource<AiGatewayModelProviderProperties> {

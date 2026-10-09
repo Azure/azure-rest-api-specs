@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ApiManagement;
 
 /** Credential returned for a model provider. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayCredentialValue {
   /** Stored credential value. */
   @secret
@@ -22,7 +22,7 @@ model AiGatewayCredentialValue {
 }
 
 /** Secret values configured on tool server endpoints. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerSecrets {
   /** Endpoint secret values. */
   @identifiers(#["id"])
@@ -30,7 +30,7 @@ model AiGatewayToolServerSecrets {
 }
 
 /** Secret value configured on one tool server endpoint. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerSecret {
   /** Stable endpoint identifier. */
   id: string;
@@ -43,7 +43,7 @@ model AiGatewayToolServerSecret {
 }
 
 /** Primary and secondary API key values. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayApiKeyValues {
   /** Primary API key value. */
   @secret

@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ApiManagement;
 
 /** Deployment details for an AI Gateway model. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayModelDeployment {
   /** ARM resource identifier of the provider deployment. */
   resourceId?: string;
@@ -27,7 +27,7 @@ model AiGatewayModelDeployment {
 }
 
 /** Deployment details to update on an AI Gateway model. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayModelDeploymentUpdate {
   /** ARM resource identifier of the provider deployment. */
   resourceId?: string;
@@ -40,21 +40,21 @@ model AiGatewayModelDeploymentUpdate {
 }
 
 /** A fallback target for a model policy. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayFallbackTarget {
   /** Resource identifier of a model in the same workspace. */
   modelId: string;
 }
 
 /** A fallback target to update on a model policy. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayFallbackTargetUpdate {
   /** Resource identifier of a model in the same workspace. */
   modelId?: string;
 }
 
 /** The type of an inline AI Gateway policy. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayPolicyType {
   string,
 
@@ -78,7 +78,7 @@ union AiGatewayPolicyType {
 }
 
 /** Time period used by a token limit policy. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayTokenLimitPeriod {
   string,
 
@@ -96,7 +96,7 @@ union AiGatewayTokenLimitPeriod {
 }
 
 /** Severity threshold used by a content safety policy. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayContentSafetySeverity {
   string,
 
@@ -114,7 +114,7 @@ union AiGatewayContentSafetySeverity {
 }
 
 /** Action performed by an IP filtering policy. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 union AiGatewayIpFilterAction {
   string,
 
@@ -126,7 +126,7 @@ union AiGatewayIpFilterAction {
 }
 
 /** An inline policy attached to an AI Gateway model or tool server. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayPolicy {
   /** Policy type. */
   type: AiGatewayPolicyType;
@@ -196,7 +196,7 @@ model AiGatewayPolicy {
 }
 
 /** An inline policy to update on an AI Gateway model or tool server. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayPolicyUpdate {
   /** Policy type. */
   type?: AiGatewayPolicyType;
@@ -266,7 +266,7 @@ model AiGatewayPolicyUpdate {
 }
 
 /** Properties for updating an AI Gateway model. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayModelUpdateProperties {
   /** Display name of the model. */
   @encodedName("application/json", "name")
@@ -287,14 +287,14 @@ model AiGatewayModelUpdateProperties {
 }
 
 /** Parameters for updating an AI Gateway model. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayModelUpdateParameters {
   /** Model properties to update. */
   properties?: AiGatewayModelUpdateProperties;
 }
 
 /** Properties of an AI Gateway model. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 model AiGatewayModelProperties {
   /** Display name of the model. */
   @encodedName("application/json", "name")
@@ -323,7 +323,7 @@ model AiGatewayModelProperties {
 }
 
 /** An AI Gateway model resource. */
-@added(Versions.v2026_09_01_preview)
+@added(Versions.v2026_10_01_preview)
 @parentResource(AiGatewayModelProviderResource)
 model AiGatewayModelResource
   is Azure.ResourceManager.ProxyResource<AiGatewayModelProperties> {
