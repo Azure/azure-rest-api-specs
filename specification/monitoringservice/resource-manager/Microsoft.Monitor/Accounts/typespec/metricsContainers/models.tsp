@@ -12,7 +12,6 @@ namespace Microsoft.Monitor {
   model MetricsLimits {
     /**
      * Indicates whether automatic scaling of ingestion limits is enabled.
-     * Omit this property to preserve the existing automatic scaling mode.
      */
     @added(Versions.v2026_09_03_preview)
     enableAutoScale?: boolean;
