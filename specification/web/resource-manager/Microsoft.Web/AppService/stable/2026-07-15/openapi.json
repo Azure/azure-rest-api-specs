@@ -40502,6 +40502,15 @@
           "type": "boolean",
           "description": "ServerFarm supports ElasticScale. Apps in this plan will scale as if the ServerFarm was ElasticPremium sku"
         },
+        "crossPoolScaling": {
+          "type": "boolean",
+          "description": "If true, this App Service plan can scale across a wider range of available, identical worker pools.\nOnce set to true, this property cannot be set back to false, and apps in this plan no longer have pinned outbound IP addresses.\nDefaults to false on creation. Omitting this property on update preserves its current value.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "maximumElasticWorkerCount": {
           "type": "integer",
           "format": "int32",
@@ -40635,6 +40644,16 @@
         "elasticScaleEnabled": {
           "type": "boolean",
           "description": "ServerFarm supports ElasticScale. Apps in this plan will scale as if the ServerFarm was ElasticPremium sku"
+        },
+        "crossPoolScaling": {
+          "type": "boolean",
+          "description": "If true, this App Service plan can scale across a wider range of available, identical worker pools.\nOnce set to true, this property cannot be set back to false, and apps in this plan no longer have pinned outbound IP addresses.\nDefaults to false on creation. Omitting this property on update preserves its current value.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "maximumElasticWorkerCount": {
           "type": "integer",
