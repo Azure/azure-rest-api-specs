@@ -133,6 +133,11 @@ using Microsoft.Storage;
   "csharp"
 );
 @@clientName(
+  ContextCacheCheckNameAvailabilityParameters,
+  "ContextCacheNameAvailabilityContent",
+  "csharp"
+);
+@@clientName(
   StorageAccountCreateParameters,
   "StorageAccountCreateOrUpdateContent",
   "csharp"
@@ -236,6 +241,11 @@ using Microsoft.Storage;
 @@clientName(
   StorageAccounts.checkNameAvailability,
   "CheckStorageAccountNameAvailability",
+  "csharp"
+);
+@@clientName(
+  ContextCaches.checkNameAvailability,
+  "CheckContextCacheNameAvailability",
   "csharp"
 );
 @@alternateType(
@@ -352,7 +362,17 @@ union CSharpBlobInventoryPolicyName {
   "StorageAccountNameAvailabilityResult",
   "csharp"
 );
+@@clientName(
+  ContextCacheCheckNameAvailabilityResult,
+  "ContextCacheNameAvailabilityResult",
+  "csharp"
+);
 @@clientName(Reason, "StorageAccountNameUnavailableReason", "csharp");
+@@clientName(
+  ContextCacheCheckNameAvailabilityFailureReason,
+  "ContextCacheNameUnavailableReason",
+  "csharp"
+);
 @@clientName(State, "StorageAccountNetworkRuleState", "csharp");
 @@clientName(KeyType, "StorageEncryptionKeyType", "csharp");
 @@clientName(EncryptionService, "StorageEncryptionService", "csharp");
@@ -939,6 +959,76 @@ namespace Azure.ResourceManager.Models {
 // Native data sharing patch model naming
 @@clientName(TrackedResourceUpdate, "StorageTrackedResourcePatch", "csharp");
 @@clientName(
+  BlobAccessPointSourcePropertiesUpdate,
+  "BlobAccessPointSourcePropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointAzureNetAppFilesSourcePropertiesUpdate,
+  "BlobAccessPointAzureNetAppFilesSourcePropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointCommvaultSourcePropertiesUpdate,
+  "BlobAccessPointCommvaultSourcePropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointDellOneFsSourcePropertiesUpdate,
+  "BlobAccessPointDellOneFsSourcePropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointGenericS3SourcePropertiesUpdate,
+  "BlobAccessPointGenericS3SourcePropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointNasuniSourcePropertiesUpdate,
+  "BlobAccessPointNasuniSourcePropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointNetAppOntapSourcePropertiesUpdate,
+  "BlobAccessPointNetAppOntapSourcePropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointQumuloSourcePropertiesUpdate,
+  "BlobAccessPointQumuloSourcePropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointRemoteAuthPropertiesUpdate,
+  "BlobAccessPointRemoteAuthPropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointAccessKeyAuthPropertiesUpdate,
+  "BlobAccessPointAccessKeyAuthPropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointConnectionPropertiesUpdate,
+  "BlobAccessPointConnectionPropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointEndpointConnectionPropertiesUpdate,
+  "BlobAccessPointEndpointConnectionPropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointPrivateLinkConnectionPropertiesUpdate,
+  "BlobAccessPointPrivateLinkConnectionPropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  BlobAccessPointConfigurationPropertiesUpdate,
+  "BlobAccessPointConfigurationPropertiesPatch",
+  "csharp"
+);
+@@clientName(
   StorageConnectorAuthPropertiesUpdate,
   "StorageConnectorAuthPropertiesPatch",
   "csharp"
@@ -1123,6 +1213,11 @@ namespace Azure.ResourceManager.Models {
 @@clientName(FileShareProperties.deleted, "IsDeleted", "csharp");
 @@clientName(
   CheckNameAvailabilityResult.nameAvailable,
+  "IsNameAvailable",
+  "csharp"
+);
+@@clientName(
+  ContextCacheCheckNameAvailabilityResult.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
