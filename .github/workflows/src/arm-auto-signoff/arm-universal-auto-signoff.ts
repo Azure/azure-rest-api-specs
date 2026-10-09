@@ -1,6 +1,6 @@
 import { inspect } from "node:util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
-import { byDate, invert } from "../../../shared/src/sort.ts";
+import { getLatestCommitStatuses } from "../commit-statuses.ts";
 import { extractInputs } from "../context.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
 import { LabelAction } from "../label.ts";
@@ -132,20 +132,12 @@ async function getDesiredLabelAction({
     return hasAutoSignoff ? LabelAction.Remove : LabelAction.None;
   }
 
-  const statuses: import("@octokit/plugin-rest-endpoint-methods").RestEndpointMethodTypes["repos"]["listCommitStatusesForRef"]["response"]["data"] =
-    await github.paginate(github.rest.repos.listCommitStatusesForRef, {
-      owner,
-      repo,
-      ref: head_sha,
-      per_page: PER_PAGE_MAX,
-    });
+  const statuses = await getLatestCommitStatuses(github, owner, repo, head_sha);
 
   for (const statusName of requiredStatusNames) {
-    // A status context may appear more than once; only the most recently updated result applies.
-    const matchingStatuses = statuses
-      .filter((status) => status.context.toLowerCase() === statusName.toLowerCase())
-      .sort(invert(byDate((status) => status.updated_at)));
-    const latestStatus = matchingStatuses[0];
+    const latestStatus = statuses.find(
+      (status) => status.context.toLowerCase() === statusName.toLowerCase(),
+    );
 
     core.info(`${statusName}: ${latestStatus?.state ?? "missing"}`);
     if (latestStatus?.state !== CommitStatusState.SUCCESS) {

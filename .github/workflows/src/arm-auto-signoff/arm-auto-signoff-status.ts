@@ -1,7 +1,7 @@
 import { inspect } from "node:util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { equals } from "../../../shared/src/set.ts";
-import { byDate, invert } from "../../../shared/src/sort.ts";
+import { getLatestCommitStatuses, type LatestCommitStatus } from "../commit-statuses.ts";
 import { extractInputs } from "../context.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
 import { LabelAction } from "../label.ts";
@@ -16,8 +16,7 @@ export type IssueLabel =
 export type WorkflowRun =
   RestEndpointMethodTypes["actions"]["listWorkflowRunsForRepo"]["response"]["data"]["workflow_runs"][number];
 
-export type CommitStatus =
-  RestEndpointMethodTypes["repos"]["listCommitStatusesForRef"]["response"]["data"][number];
+export type CommitStatus = LatestCommitStatus;
 
 export type Artifact =
   RestEndpointMethodTypes["actions"]["listWorkflowRunArtifacts"]["response"]["data"]["artifacts"][number];
@@ -180,15 +179,7 @@ export async function getLabelActionImpl({
 
   // permissions: { statuses: read }
 
-  const statuses: CommitStatus[] = await github.paginate(
-    github.rest.repos.listCommitStatusesForRef,
-    {
-      owner: owner,
-      repo: repo,
-      ref: head_sha,
-      per_page: PER_PAGE_MAX,
-    },
-  );
+  const statuses = await getLatestCommitStatuses(github, owner, repo, head_sha);
 
   core.info("Statuses:");
   statuses.forEach((status) => {
@@ -200,14 +191,9 @@ export async function getLabelActionImpl({
   const requiredStatuses: CommitStatus[] = [];
 
   for (const statusName of requiredStatusNames) {
-    // The "statuses" array may contain multiple statuses with the same "context" (aka "name"),
-    // but different states and update times. We only care about the latest.
-    const matchingStatuses = statuses
-      .filter((status) => status.context.toLowerCase() === statusName.toLowerCase())
-      .sort(invert(byDate((status) => status.updated_at)));
-
-    // undefined if matchingStatuses.length === 0 (which is OK)
-    const matchingStatus = matchingStatuses[0];
+    const matchingStatus = statuses.find(
+      (status) => status.context.toLowerCase() === statusName.toLowerCase(),
+    );
 
     core.info(`${statusName}: State='${matchingStatus?.state}'`);
 
