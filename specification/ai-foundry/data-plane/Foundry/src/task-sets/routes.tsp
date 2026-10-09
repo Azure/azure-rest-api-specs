@@ -7,6 +7,10 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+// Open question (Eval 2.0 spec): page /task_sets/{name}/versions/{version}/tasks,
+// add GET .../tasks/{taskId}, and allow base_version + upsert_tasks/remove_task_ids
+// on createVersion to publish a new version. Never mutate pinned versions.
+
 /** Operations for immutable evaluation task-set versions. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry preview operations use the project-standard feature-header and error-envelope template."
 @tag("EvaluationTaskSets")
