@@ -53848,7 +53848,7 @@ components:
         error_count:
           type: integer
           format: int32
-          description: The number of task runs that could not produce a quality verdict.
+          description: Task runs without a quality verdict because harness invocation or grading failed.
         pass_rate:
           anyOf:
             - type: number
@@ -54571,7 +54571,7 @@ components:
           type: string
           description: The human-readable error description.
         source:
-          type: string
+          $ref: '#/components/schemas/EvaluationTaskRunErrorSource'
           description: The component where the failure occurred.
         exception_type:
           type: string
@@ -54582,13 +54582,25 @@ components:
           description: The time when the failure occurred.
         retriable:
           type: boolean
-          description: Whether another attempt might succeed.
+          description: Whether another attempt might succeed, regardless of remaining service-policy retries.
         artifact_ids:
           type: array
           items:
             type: string
           description: Identifiers of retained artifacts with additional failure evidence.
       description: A structured execution or grader failure for one task run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvaluationTaskRunErrorSource:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - harness
+            - grader
+            - orchestration
+      description: The component responsible for a task-run error.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview

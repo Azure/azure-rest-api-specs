@@ -120,7 +120,7 @@ model EvaluationRunResult {
   /** The number of gradable task runs that did not pass. */
   not_passed_count: int32;
 
-  /** The number of task runs that could not produce a quality verdict. */
+  /** Task runs without a quality verdict because harness invocation or grading failed. */
   error_count: int32;
 
   /** Passed task runs divided by gradable task runs, or null when none were gradable. */
@@ -279,6 +279,21 @@ model EvaluationTaskRunDiagnostics {
   log_artifacts?: string[];
 }
 
+/** The component responsible for a task-run error. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+union EvaluationTaskRunErrorSource {
+  string,
+
+  /** The harness could not invoke the agent or collect its evidence. */
+  harness: "harness",
+
+  /** A grader could not evaluate the captured evidence. */
+  grader: "grader",
+
+  /** Orchestration could not complete a task-run phase. */
+  orchestration: "orchestration",
+}
+
 /** A structured execution or grader failure for one task run. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvaluationTaskRunError {
@@ -289,7 +304,7 @@ model EvaluationTaskRunError {
   message: string;
 
   /** The component where the failure occurred. */
-  source: string;
+  source: EvaluationTaskRunErrorSource;
 
   /** The exception type when available. */
   exception_type?: string;
@@ -297,7 +312,7 @@ model EvaluationTaskRunError {
   /** The time when the failure occurred. */
   occurred_at?: utcDateTime;
 
-  /** Whether another attempt might succeed. */
+  /** Whether another attempt might succeed, regardless of remaining service-policy retries. */
   retriable: boolean;
 
   /** Identifiers of retained artifacts with additional failure evidence. */
