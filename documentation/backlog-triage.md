@@ -45,7 +45,13 @@ Only maintainers with write access can dispatch it. Runs are restricted to
 `Azure/azure-rest-api-specs` on `main`; adding the workflow to a fork or a PR
 branch does not enable backlog mutations. It uses the same organization-billed
 Copilot authentication as the API reviewers, a 30-minute agent timeout, and a
-250-AI-credit per-run cap. It does not need a personal access token.
+1,000-AI-credit per-run cap. It does not need a personal access token.
+
+The trusted selection step also caches each issue's body, all comments, and
+timeline events. The agent reads this evidence from the run artifact and
+investigates sequentially without subagents. If the shared GitHub MCP becomes
+unavailable, it stops retrying that service and records unresolved investigations
+as blocked, without closing issues or asking authors to fix the tool failure.
 
 Inspect the run's agent output for the decisions and evidence, and the application
 job for actions and skipped/stale decisions. The source workflow is compiled with:
@@ -71,6 +77,23 @@ The serialized workflow records successful outcomes on the dedicated orphan bran
 writes this state; the agent cannot mark work complete before its requested action
 succeeds. API and state-write failures fail the job visibly. The state branch must
 permit the workflow's GitHub Actions token to create and update it.
+
+The agent submits one checkpoint as soon as each issue is investigated, before
+starting the next. These proposals are collected in the run artifacts even if
+the agent later exhausts its budget or fails. The application job can process a
+partial batch, but only after an explicit successful threat-detection verdict.
+It still checks freshness and saves progress after each applied issue. Cancellation
+or missing/failed detection prevents application; checkpointing does not bypass
+those guards.
+
+Checkpoint submission does not immediately post to GitHub: application happens
+after the agent job ends. An issue without a submitted checkpoint remains eligible
+for the next run, and a failed agent run remains failed even when earlier
+checkpoints were recovered. Dry runs preview checkpoints without persisting progress.
+The safe-output allowance matches the five-issue batch. If output collection
+rejects a checkpoint, accepted checkpoints can still be applied, but the
+application job reports failure instead of presenting the partial batch as a
+clean run.
 
 Unchanged keep-open issues are revisited after 90 days, or sooner when their
 activity changes or a maintainer explicitly selects them. Blocked investigations

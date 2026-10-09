@@ -10,6 +10,7 @@ import {
   table,
   unorderedList,
 } from "../src/markdown.ts";
+import { d } from "../src/testing.ts";
 
 describe("Markdown composition", () => {
   it("composes optional blocks and nested sections without leaking heading depth", () => {
@@ -22,9 +23,21 @@ describe("Markdown composition", () => {
         section("First", ["Body", section("Nested", "Details")]),
         section("Second", "Last"),
       ]),
-    ).toBe(
-      ["Introduction", "# First", "Body", "## Nested", "Details", "# Second", "Last"].join("\n\n"),
-    );
+    ).toBe(d`
+      Introduction
+
+      # First
+
+      Body
+
+      ## Nested
+
+      Details
+
+      # Second
+
+      Last
+    `);
   });
 
   it("supports an explicit starting heading and empty documents", () => {
@@ -93,7 +106,11 @@ describe("tables, lists and details", () => {
         ["First", "Second"],
         ["one", "two"],
       ]),
-    ).toBe("| First | Second |\n| --- | --- |\n| one | two |");
+    ).toBe(d`
+      | First | Second |
+      | --- | --- |
+      | one | two |
+    `);
   });
 
   it("escapes pipes and line breaks without breaking inline code or existing escapes", () => {
@@ -139,16 +156,23 @@ describe("tables, lists and details", () => {
   );
 
   it("renders lists and indents continuation lines", () => {
-    expect(unorderedList(["one", "two\ncontinued\r\nagain"])).toBe(
-      "- one\n- two\n  continued\n  again",
-    );
+    expect(unorderedList(["one", "two\ncontinued\r\nagain"])).toBe(d`
+      - one
+      - two
+        continued
+        again
+    `);
     expect(unorderedList([])).toBe("");
   });
 
   it("renders collapsible content with an HTML-escaped plain-text summary", () => {
-    expect(details("<Members> & reviewers", unorderedList(["one"]))).toBe(
-      "<details><summary>&lt;Members&gt; &amp; reviewers</summary>\n\n- one\n\n</details>",
-    );
+    expect(details("<Members> & reviewers", unorderedList(["one"]))).toBe(d`
+      <details><summary>&lt;Members&gt; &amp; reviewers</summary>
+
+      - one
+
+      </details>
+    `);
     expect(details("Empty", "")).toBe("<details><summary>Empty</summary>\n\n\n</details>");
   });
 });

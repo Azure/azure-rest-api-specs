@@ -360,9 +360,10 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 - PATCH **MUST NOT** update `id`, `name`, `type`, `location`, or `properties.provisioningState` (RPC-Patch-V1-02).
 - PATCH **MUST** follow JSON Merge Patch semantics ([RFC 7396](https://tools.ietf.org/html/rfc7396)) (RPC-Patch-V1-05).
 
-### 4.2 PATCH Response Codes (RPC-Patch-V1-06)
+### 4.2 PATCH Response Codes (RPC-Patch-V1-06, RPC-Patch-V1-07)
 
-- Synchronous PATCH **MUST** return `200`; async PATCH **MUST** return `202` (plus `200` in swagger for SDK discovery). PATCH **MUST** return `404` if resource does not exist (RPC-Patch-V1-07).
+- **OpenAPI design:** Synchronous PATCH **MUST** define `200` and `default`; async PATCH **MUST** define `202`, `200` (for SDK final-response schema discovery), and `default`. These operations **MUST NOT** define an explicit `404` response. ARM OpenAPI represents all error responses through `default`, as enforced by the [`PatchResponseCodes`](https://github.com/Azure/azure-openapi-validator/blob/main/docs/patch-response-codes.md) and [`NoErrorCodeResponses`](https://github.com/Azure/azure-openapi-validator/blob/main/docs/no-error-code-responses.md) linter rules.
+- **Runtime behavior:** PATCH **MUST** return `404` if the resource group or resource does not exist (RPC-Patch-V1-07). The OpenAPI `default` response schema represents this error. Because RPC-Patch-V1-07 is a runtime requirement, its implementation cannot be verified from the OpenAPI response-code declarations alone. **Do not flag a PATCH operation for omitting an explicit `404` response when it defines the required `default` response.**
 
 > **Async PATCH uniquely requires BOTH `202` AND `200` in the swagger definition.**
 > The `200` is not the initial response -- it represents the final synchronous

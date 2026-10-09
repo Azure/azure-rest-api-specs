@@ -2,18 +2,18 @@ import type { GitHubScriptArgs } from "../../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
-vi.mock("fs/promises", () => ({
+vi.mock("node:fs/promises", () => ({
   readFile: vi.fn(),
 }));
-vi.mock("js-yaml", () => ({
-  default: { load: vi.fn() },
+vi.mock("yaml", () => ({
+  parse: vi.fn(),
 }));
 
-import { readFile } from "fs/promises";
-import yaml from "js-yaml";
+import { readFile } from "node:fs/promises";
+import { parse } from "yaml";
 import validateApproval from "../../src/package-name-approval/validate-approval.ts";
 
-/** Mock protected-labels.yml content (as yaml.load would return) */
+/** Mock protected-labels.yml content */
 const protectedLabelsYaml = {
   "global-approvers": ["global-admin1", "global-admin2"],
   "BreakingChange-Approved-Benign": ["someone"],
@@ -41,7 +41,7 @@ const protectedLabelsYaml = {
 
 function setupMocks() {
   (readFile as ReturnType<typeof vi.fn>).mockResolvedValue("yaml-content");
-  (yaml.load as ReturnType<typeof vi.fn>).mockReturnValue(protectedLabelsYaml);
+  vi.mocked(parse).mockReturnValue(protectedLabelsYaml);
 }
 
 function createPRLabeledPayload({
@@ -240,6 +240,13 @@ describe("validate-approval", () => {
       expect(core.warning).toHaveBeenCalledWith(
         "random-user is not authorized to apply package-name-java-approved, removing",
       );
+      expect(github.rest.issues.createComment).toHaveBeenCalledWith(
+        expect.objectContaining({
+          body: expect.stringContaining(
+            "is not authorized to apply `package-name-java-approved`. Label removed.",
+          ) as unknown,
+        }),
+      );
     });
 
     it("should allow any user when the plane is unprotected (#46728)", async () => {
@@ -285,6 +292,9 @@ describe("validate-approval", () => {
       expect(github.rest.issues.removeLabel).not.toHaveBeenCalledWith(
         expect.objectContaining({ name: "package-name-ruby-pending" }),
       );
+      // A label absent from protected-labels.yml has no known approver list, so the removal
+      // stays silent rather than posting an empty "Only  can apply this label" message.
+      expect(github.rest.issues.createComment).not.toHaveBeenCalled();
     });
 
     it("should skip when the plane is not yet reconciled (only stale Mgmt present) (#46785)", async () => {
@@ -380,6 +390,13 @@ describe("validate-approval", () => {
       expect(github.rest.pulls.get).not.toHaveBeenCalled();
       expect(core.warning).toHaveBeenCalledWith(
         "random-user is not authorized to apply package-name-approved-all, removing",
+      );
+      expect(github.rest.issues.createComment).toHaveBeenCalledWith(
+        expect.objectContaining({
+          body: expect.stringContaining(
+            "is not authorized to apply `package-name-approved-all`. Label removed.",
+          ) as unknown,
+        }),
       );
     });
   });

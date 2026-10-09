@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import { mkdir, writeFile } from "fs/promises";
-import { dirname, join, resolve } from "path";
-import { fileURLToPath } from "url";
-import { parseArgs } from "util";
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { parseArgs } from "node:util";
 
 import { getChangedFilesStatuses, swagger } from "../../shared/src/changed-files.ts";
 

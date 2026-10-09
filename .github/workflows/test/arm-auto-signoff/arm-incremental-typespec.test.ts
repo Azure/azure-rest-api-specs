@@ -1,4 +1,4 @@
-import { relative, resolve } from "path";
+import { relative, resolve } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { repoRoot } from "../../../shared/test/repo.ts";
 
@@ -19,7 +19,7 @@ vi.mock("simple-git", () => ({
   }),
 }));
 
-import { inspect } from "util";
+import { inspect } from "node:util";
 import * as changedFiles from "../../../shared/src/changed-files.ts";
 import {
   contosoReadme,

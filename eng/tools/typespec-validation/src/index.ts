@@ -1,9 +1,17 @@
+import { parseArgsWithHelp, type CliOption } from "@azure-tools/specs-shared/cli";
 import { ConsoleLogger, type ILogger } from "@azure-tools/specs-shared/logger";
 import { type Suppression } from "@azure-tools/suppressions";
 import debug from "debug";
 import { stat } from "node:fs/promises";
-import { type ParseArgsConfig, parseArgs } from "node:util";
-import { exceptionDiagnostic, reportDiagnostics } from "./diagnostics.ts";
+import { resolve } from "pathe";
+import {
+  exceptionDiagnostic,
+  formatRuleStatus,
+  formatRuleSummary,
+  reportDiagnostics,
+  type RuleCounts,
+  type RuleStatus,
+} from "./diagnostics.ts";
 import type { Diagnostic, RuleResult } from "./rule-result.ts";
 import { type Rule } from "./rule.ts";
 import { runAll, runChanged } from "./run-projects.ts";
@@ -19,7 +27,7 @@ import { NpmPrefixRule } from "./rules/npm-prefix.ts";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.ts";
 import { ServiceYamlRule } from "./rules/service-yaml.ts";
 import { StaleApiVersionPinRule } from "./rules/stale-api-version-pin.ts";
-import { fileExists, getSuppressions, normalizePath } from "./utils.ts";
+import { fileExists, getSuppressions } from "./utils.ts";
 
 // Context argument may add new properties or override checkingAllSpecs
 export let context: Record<string, unknown> = { checkingAllSpecs: false };
@@ -43,17 +51,21 @@ export async function runRules(
 ): Promise<RunRulesResult> {
   const result: RunRulesResult = { success: true, suppressed: [], executed: [], failed: [] };
   const diagnostics: Diagnostic[] = [];
+  const counts: RuleCounts = { PASS: 0, FAIL: 0, WARN: 0, SKIP: 0, SUPPRESSED: 0 };
+  const reportStatus = (name: string, status: RuleStatus) => {
+    counts[status]++;
+    logger.debug(formatRuleStatus(name, status));
+  };
 
   for (const rule of rules) {
-    console.log("\nExecuting rule: " + rule.name);
-
     if (rule.suppressable) {
       const ruleSuppressions = suppressions.filter(
         (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
       );
       if (ruleSuppressions.length > 0) {
-        console.log(`  Suppressed: ${ruleSuppressions[0].reason}`);
+        logger.debug(`  Suppressed: ${ruleSuppressions[0].reason}`);
         result.suppressed.push(rule.name);
+        reportStatus(rule.name, "SUPPRESSED");
         continue;
       }
     }
@@ -69,25 +81,28 @@ export async function runRules(
     diagnostics.push(...(ruleResult.diagnostics ?? []));
     if (ruleResult.skipped) logger.debug(`  Skipped: ${ruleResult.skipped}`);
     if (ruleResult.suppressed) logger.debug(`  Suppressed: ${ruleResult.suppressed}`);
-    if (ruleResult.stdOutput) console.log(ruleResult.stdOutput);
+    reportStatus(
+      rule.name,
+      !ruleResult.success
+        ? "FAIL"
+        : ruleResult.suppressed !== undefined
+          ? "SUPPRESSED"
+          : ruleResult.diagnostics?.some((diagnostic) => diagnostic.severity === "warning")
+            ? "WARN"
+            : ruleResult.skipped !== undefined
+              ? "SKIP"
+              : "PASS",
+    );
     if (!ruleResult.success) {
       result.success = false;
       result.failed.push(rule.name);
-      if (ruleResult.errorOutput) {
-        console.log("Rule " + rule.name + " failed");
-        console.log(ruleResult.errorOutput);
-      } else if (!ruleResult.diagnostics?.some((diagnostic) => diagnostic.severity === "error")) {
-        // Some unmigrated rules, including SDK config validation, report errors in stdout.
-        if (ruleResult.stdOutput) {
-          console.log("Rule " + rule.name + " failed");
-        } else {
-          diagnostics.push({
-            severity: "error",
-            code: "rule-failed",
-            message: `Rule ${rule.name} failed without reporting an error.`,
-            path: folder,
-          });
-        }
+      if (!ruleResult.diagnostics?.some((diagnostic) => diagnostic.severity === "error")) {
+        diagnostics.push({
+          severity: "error",
+          code: "rule-failed",
+          message: `Rule ${rule.name} failed without reporting an error.`,
+          path: folder,
+        });
       }
 
       // Stop executing more rules, since the results are more likely to be confusing than helpful
@@ -97,8 +112,36 @@ export async function runRules(
   }
 
   reportDiagnostics(diagnostics, logger);
+  const completed = Object.values(counts).reduce((total, count) => total + count, 0);
+  if (diagnostics.length > 0 || (logger.isDebug() && completed > 0)) logger.info("");
+  logger.info(formatRuleSummary(counts, rules.length - completed));
   return result;
 }
+
+const help = {
+  command: "pnpm tsv",
+  title: "TypeSpec Validation",
+  description: "Validate Azure TypeSpec projects.",
+  positionals: [
+    { name: "folder", description: "Project folder." },
+    {
+      name: "context-json",
+      optional: true,
+      description: "Optional JSON context for rules and suppressions in single-project mode.",
+    },
+  ],
+  notes: [
+    "Run from the repository root after installing dependencies with pnpm install.",
+    "Validation may update generated files and formatting. Changes are retained unless --git-clean is used.",
+    "Do not use --git-clean while other work is in progress.",
+  ],
+  examples: [
+    "specification/<service>/<project>",
+    "--all",
+    "--changed --base=origin/main --head=HEAD --dry-run",
+  ],
+  documentation: "https://aka.ms/azsdk/specs/typespec-validation",
+};
 
 export async function main() {
   const args = process.argv.slice(2);
@@ -106,43 +149,67 @@ export async function main() {
     verbose: {
       type: "boolean",
       short: "v",
-    },
-    folder: {
-      type: "string",
-      short: "f",
-    },
-    context: {
-      type: "string",
-      short: "c",
+      description: "Include rule progress, debug details, and Git traces.",
     },
     all: {
       type: "boolean",
+      description: "Validate all projects under the discovery root.",
     },
     changed: {
       type: "boolean",
+      description:
+        "Validate projects affected by committed changes using the current checkout. " +
+        "--all and --changed cannot be combined.",
     },
     base: {
       type: "string",
+      valueLabel: "<commit>",
+      group: "Options for --changed",
+      description: "Base revision (default: HEAD^).",
     },
     head: {
       type: "string",
+      valueLabel: "<commit>",
+      group: "Options for --changed",
+      description: "Head revision (default: HEAD).",
     },
     "ignore-core-files": {
       type: "boolean",
-    },
-    "dry-run": {
-      type: "boolean",
+      group: "Options for --changed",
+      description: "Disable all-project fallback for core-file changes.",
     },
     shard: {
       type: "string",
+      valueLabel: "<index>/<count>",
+      group: "Options for --all",
+      description:
+        "Select a shard using one-based indices. Each shard requires a separate checkout.",
+    },
+    "github-summary": {
+      type: "boolean",
+      group: "Options for --all",
+      description: "Append failed project paths to the GitHub job summary.",
+    },
+    "dry-run": {
+      type: "boolean",
+      group: "Options for --all or --changed",
+      description:
+        "List selected projects and context without validation or cleanup; disables --git-clean.",
     },
     "git-clean": {
       type: "boolean",
+      group: "Options for --all or --changed",
+      description:
+        "Restore tracked files and remove untracked files and directories across the entire repository " +
+        "after each project. Requires a clean, disposable checkout; " +
+        "ignored files are retained.",
     },
-  } satisfies ParseArgsConfig["options"];
-  const parsedArgs = parseArgs({ args, options, allowPositionals: true });
+  } satisfies Record<string, CliOption>;
+  const parsedArgs = parseArgsWithHelp({ args, options, allowPositionals: true, help });
+  if (!parsedArgs) return;
 
   const { values } = parsedArgs;
+  const logger = new ConsoleLogger(values.verbose);
   if (values.verbose) {
     debug.enable([process.env.DEBUG, "simple-git"].filter(Boolean).join(","));
   }
@@ -170,6 +237,17 @@ export async function main() {
     process.exitCode = 1;
     return;
   }
+  if (values["github-summary"] && !values.all) {
+    console.error("--github-summary requires --all");
+    process.exitCode = 1;
+    return;
+  }
+  const summaryFile = values["github-summary"] ? process.env.GITHUB_STEP_SUMMARY : undefined;
+  if (values["github-summary"] && !summaryFile) {
+    console.error("--github-summary requires the GITHUB_STEP_SUMMARY environment variable");
+    process.exitCode = 1;
+    return;
+  }
 
   if (values.changed) {
     if (parsedArgs.positionals.length > 0) {
@@ -194,7 +272,7 @@ export async function main() {
   if (values.all) {
     if (parsedArgs.positionals.length > 1) {
       console.error(
-        "Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean] [--dry-run]",
+        "Usage: tsv --all [folder] [--shard=<index>/<count>] [--github-summary] [--git-clean] [--dry-run]",
       );
       process.exitCode = 1;
       return;
@@ -204,18 +282,24 @@ export async function main() {
       shard: values.shard,
       dryRun: values["dry-run"],
       verbose: values.verbose,
+      summaryFile,
     });
     if (!success) process.exitCode = 1;
     return;
   }
 
   const folder = parsedArgs.positionals[0];
+  if (folder === undefined) {
+    console.error("A project folder is required. Use --help for usage.");
+    process.exitCode = 1;
+    return;
+  }
 
   if (parsedArgs.positionals[1]) {
     context = { ...context, ...(JSON.parse(parsedArgs.positionals[1]) as Record<string, unknown>) };
   }
 
-  const absolutePath = normalizePath(folder);
+  const absolutePath = resolve(folder);
 
   if (!(await fileExists(absolutePath))) {
     console.log(`Folder ${absolutePath} does not exist`);
@@ -225,7 +309,7 @@ export async function main() {
     console.log(`Please run TypeSpec Validation on a directory path`);
     process.exit(1);
   }
-  console.log("Running TypeSpecValidation on folder: ", absolutePath);
+  logger.debug(`Running TypeSpecValidation on folder: ${absolutePath}`);
 
   const suppressions: Suppression[] = await getSuppressions(absolutePath);
 
@@ -253,12 +337,7 @@ export async function main() {
     new StaleApiVersionPinRule(),
   ];
 
-  const result = await runRules(
-    rules,
-    absolutePath,
-    suppressions,
-    new ConsoleLogger(values.verbose),
-  );
+  const result = await runRules(rules, absolutePath, suppressions, logger);
 
   if (!result.success) {
     process.exitCode = 1;
