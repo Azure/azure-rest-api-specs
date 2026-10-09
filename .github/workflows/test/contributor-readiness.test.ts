@@ -32,7 +32,7 @@ const pr = {
 const marker = "<!-- contributor-readiness -->";
 const notifierPath = ".github/workflows/contributor-readiness-notify.yaml";
 const authorImpact = "PR author cannot run Azure DevOps pipelines for this PR.";
-const authorLabelImpact = "PR author cannot add labels (including PublishToCustomers) to this PR.";
+const authorLabelImpact = "PR author cannot add labels, including PublishToCustomers, to this PR.";
 const reviewerImpact = "Reviewer approval does not count toward required reviews";
 
 function setup() {
@@ -425,7 +425,7 @@ describe("contributor readiness", () => {
     expect(check.output.summary).toBe(report);
   });
 
-  it("shows both impacts for a PR author with an approved review", async () => {
+  it("shows author and reviewer impacts for a PR author with an approved review", async () => {
     const f = setup();
     f.listReviews.mockResolvedValue({
       data: [{ id: 20, state: "APPROVED", user: author }],
