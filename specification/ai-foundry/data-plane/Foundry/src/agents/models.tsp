@@ -590,6 +590,50 @@ union CodeDependencyResolution {
   remote_build: "remote_build",
 }
 
+@doc("The protocol used by an external agent's AI Gateway route.")
+@added(Versions.PuPr)
+@removed(Versions.v1)
+union ExternalAgentGatewayProtocol {
+  @doc("HTTP protocol over an HTTPS backend URL.")
+  http: "http",
+
+  @doc("HTTPS protocol over an HTTPS backend URL.")
+  https: "https",
+
+  @doc("Agent-to-agent protocol with an HTTPS agent card URL.")
+  a2a: "a2a",
+}
+
+@doc("""
+  The current AI Gateway routing configuration shared by all versions of an external agent.
+  The bound Gateway, resolved path, protocol, and invocation endpoint remain fixed after attachment.
+  The backend URL and, for A2A, the agent card URL can be updated in place. Historical version reads
+  return this current configuration alongside each version's own OpenTelemetry agent identifier.
+  """)
+@added(Versions.PuPr)
+@removed(Versions.v1)
+model ExternalAgentGatewayConfiguration {
+  @doc("The absolute HTTPS URL of the externally hosted agent. Required whenever a Gateway configuration is supplied, including for the `http` protocol.")
+  @pattern("^https://")
+  backend_url: url;
+
+  @doc("The Gateway protocol. Required whenever a Gateway configuration is supplied; it cannot change after the first attachment.")
+  protocol: ExternalAgentGatewayProtocol;
+
+  @doc("The Gateway API path relative to its host. On first attachment, omission defaults to the agent name. Once bound, the resolved path is immutable and omission inherits it. An occupied path returns HTTP 409; routes are not suffixed or adopted.")
+  @minLength(1)
+  base_path?: string;
+
+  @doc("The absolute HTTPS agent card URL. Required on first attachment for A2A and prohibited for other protocols. Omission on an existing A2A binding inherits the current card URL.")
+  @pattern("^https://")
+  card_url?: url;
+
+  @doc("The stable, service-generated HTTPS URL for invoking the agent through AI Gateway. Present in bound responses, including historical version reads; never supplied in a request.")
+  @visibility(Lifecycle.Read)
+  @pattern("^https://")
+  invocation_endpoint?: url;
+}
+
 @doc("""
   The external agent definition. Represents a third-party agent hosted outside Foundry (for example, on GCP or AWS).
   Registration is metadata-only: Foundry records the agent definition to light up observability experiences (traces, evaluations)
@@ -610,6 +654,24 @@ model ExternalAgentDefinition extends AgentDefinition {
     The resolved value is always echoed on read.
     """)
   otel_agent_id?: string;
+
+  @doc("""
+    (Preview) Optional AI Gateway routing for this externally hosted agent. Without this field,
+    registration remains metadata-only. Attach during creation or on a later version with
+    `api-version=virtual-public-preview` and the
+    `Foundry-Features: ExternalAgents=V1Preview` header. Omission inherits an existing binding;
+    explicit null reaches the service but cannot detach a bound Gateway and returns HTTP 409.
+    Responses omit this property when no Gateway is bound; a bound response returns an object,
+    not null. Changing the bound Gateway, resolved path, or protocol is unsupported.
+    Changing the backend URL, A2A card URL, or effective `otel_agent_id` keeps the
+    invocation endpoint stable and synchronizes Gateway metadata.
+    Individual versions of a Gateway-bound external agent cannot be deleted, even with `force=true`;
+    delete the whole agent to unregister its route. Gateway-less version deletion is unchanged.
+    Gateway changes require caller-delegated Azure resource permissions; app-only opt-in is unsupported.
+    """)
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
+  ai_gateway?: ExternalAgentGatewayConfiguration | null;
 }
 
 @doc("The hosted agent definition.")

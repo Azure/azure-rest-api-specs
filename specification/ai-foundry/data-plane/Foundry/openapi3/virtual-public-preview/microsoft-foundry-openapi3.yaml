@@ -53503,6 +53503,23 @@ components:
             Defaults to the top-level agent name when omitted. Provide an explicit value only for migration scenarios
             where the running external agent already emits a stable id that differs from the Foundry agent name.
             The resolved value is always echoed on read.
+        ai_gateway:
+          anyOf:
+            - $ref: '#/components/schemas/ExternalAgentGatewayConfiguration'
+            - type: 'null'
+          description: |-
+            (Preview) Optional AI Gateway routing for this externally hosted agent. Without this field,
+            registration remains metadata-only. Attach during creation or on a later version with
+            `api-version=virtual-public-preview` and the
+            `Foundry-Features: ExternalAgents=V1Preview` header. Omission inherits an existing binding;
+            explicit null reaches the service but cannot detach a bound Gateway and returns HTTP 409.
+            Responses omit this property when no Gateway is bound; a bound response returns an object,
+            not null. Changing the bound Gateway, resolved path, or protocol is unsupported.
+            Changing the backend URL, A2A card URL, or effective `otel_agent_id` keeps the
+            invocation endpoint stable and synchronizes Gateway metadata.
+            Individual versions of a Gateway-bound external agent cannot be deleted, even with `force=true`;
+            delete the whole agent to unregister its route. Gateway-less version deletion is unchanged.
+            Gateway changes require caller-delegated Azure resource permissions; app-only opt-in is unsupported.
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: |-
@@ -53512,6 +53529,47 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - ExternalAgents=V1Preview
+    ExternalAgentGatewayConfiguration:
+      type: object
+      required:
+        - backend_url
+        - protocol
+      properties:
+        backend_url:
+          type: string
+          format: uri
+          pattern: ^https://
+          description: The absolute HTTPS URL of the externally hosted agent. Required whenever a Gateway configuration is supplied, including for the `http` protocol.
+        protocol:
+          $ref: '#/components/schemas/ExternalAgentGatewayProtocol'
+          description: The Gateway protocol. Required whenever a Gateway configuration is supplied; it cannot change after the first attachment.
+        base_path:
+          type: string
+          minLength: 1
+          description: The Gateway API path relative to its host. On first attachment, omission defaults to the agent name. Once bound, the resolved path is immutable and omission inherits it. An occupied path returns HTTP 409; routes are not suffixed or adopted.
+        card_url:
+          type: string
+          format: uri
+          pattern: ^https://
+          description: The absolute HTTPS agent card URL. Required on first attachment for A2A and prohibited for other protocols. Omission on an existing A2A binding inherits the current card URL.
+        invocation_endpoint:
+          type: string
+          format: uri
+          pattern: ^https://
+          description: The stable, service-generated HTTPS URL for invoking the agent through AI Gateway. Present in bound responses, including historical version reads; never supplied in a request.
+          readOnly: true
+      description: |-
+        The current AI Gateway routing configuration shared by all versions of an external agent.
+        The bound Gateway, resolved path, protocol, and invocation endpoint remain fixed after attachment.
+        The backend URL and, for A2A, the agent card URL can be updated in place. Historical version reads
+        return this current configuration alongside each version's own OpenTelemetry agent identifier.
+    ExternalAgentGatewayProtocol:
+      type: string
+      enum:
+        - http
+        - https
+        - a2a
+      description: The protocol used by an external agent's AI Gateway route.
     FabricDataAgentToolCall:
       type: object
       required:
