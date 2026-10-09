@@ -76,7 +76,9 @@ directive:
   - suppress: ProvisioningStateMustBeReadOnly
     from: providerhub.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}"].put.responses["201"].schema
     reason: The nested resource type registration operations return the same ResourceTypeRegistration schema as the top-level resource type registration operations, where provisioningState is already read-only.
   - suppress: ArmResourcePropertiesBag
     from: providerhub.json
