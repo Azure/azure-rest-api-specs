@@ -5455,6 +5455,19 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
   "csharp"
 );
 
+/** Properties of Inbound NAT pool. */
+@clientName("LoadBalancerInboundNatPoolProperties", "csharp")
+model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
+  ...Common.InboundNatPoolPropertiesFormat;
+  ...Record<unknown>;
+}
+
+@@alternateType(
+  Common.InboundNatPoolPropertiesFormat,
+  LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties,
+  "csharp"
+);
+
 @@alternateType(Common.Resource.id, armResourceIdentifier, "csharp");
 
 @@alternateType(Common.Resource.type, Azure.Core.armResourceType, "csharp");
