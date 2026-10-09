@@ -1,0 +1,112 @@
+{
+  "title": "RecoveryPlans_Get_CyberRecovery",
+  "operationId": "RecoveryPlans_Get",
+  "parameters": {
+    "serviceGroupName": "contoso-service-group",
+    "recoveryPlanName": "cyber-plan",
+    "api-version": "2026-11-30-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "planType": "CyberRecovery",
+          "planState": "UnderEdit",
+          "planDescription": "Cyber recovery plan",
+          "recoveryGroupsSetting": {
+            "defaultGroup": {
+              "properties": {
+                "groupUniqueId": "b7e2a1c4-9f3b-4e2d-8c6a-2f7e4d1b5a9f",
+                "orderId": 0,
+                "description": "Foundation services"
+              },
+              "id": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan/recoveryGroups/b7e2a1c4-9f3b-4e2d-8c6a-2f7e4d1b5a9f",
+              "name": "b7e2a1c4-9f3b-4e2d-8c6a-2f7e4d1b5a9f",
+              "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryGroups"
+            },
+            "additionalGroups": [
+              {
+                "properties": {
+                  "groupUniqueId": "5d3c2b1a-8e7f-4a6b-9c0d-1e2f3a4b5c6d",
+                  "orderId": 1,
+                  "description": "Tier 1 applications",
+                  "resiliencyGroupProperties": {
+                    "resiliencyType": "CyberResiliency",
+                    "recoveryConfigProfileAssociations": [
+                      {
+                        "workloadType": "AzureVm",
+                        "recoveryConfigProfileId": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan/recoveryConfigProfiles/azure-vm-default"
+                      }
+                    ]
+                  }
+                },
+                "id": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan/recoveryGroups/5d3c2b1a-8e7f-4a6b-9c0d-1e2f3a4b5c6d",
+                "name": "5d3c2b1a-8e7f-4a6b-9c0d-1e2f3a4b5c6d",
+                "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryGroups"
+              }
+            ]
+          },
+          "resiliencyPlanProperties": {
+            "resiliencyType": "CyberResiliency",
+            "targetEnvironment": {
+              "targetSubscriptionList": [
+                "12345678-1234-1234-1234-123456789012"
+              ],
+              "targetLocationList": [
+                "eastus2"
+              ]
+            },
+            "inclusionSettings": {
+              "rules": [
+                {
+                  "include": true,
+                  "resourceType": "Microsoft.Compute/virtualMachines",
+                  "recoveryGroupId": "5d3c2b1a-8e7f-4a6b-9c0d-1e2f3a4b5c6d",
+                  "subscriptionIds": [
+                    "87654321-4321-4321-4321-210987654321"
+                  ],
+                  "tags": [
+                    {
+                      "key": "workload",
+                      "value": "tier1"
+                    }
+                  ]
+                }
+              ]
+            },
+            "linkedRecoveryPlanDetails": {
+              "isLinkedRecoveryPlan": false,
+              "syncMode": "Manual"
+            },
+            "mappedRecoveryPlanDetails": {
+              "isMappedRecoveryPlan": false
+            }
+          }
+        },
+        "identity": {
+          "principalId": "11111111-1111-1111-1111-000000000012",
+          "tenantId": "11111111-1111-1111-1111-000000000011",
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cyber-recovery-identity": {
+              "principalId": "11111111-1111-1111-1111-000000000012",
+              "clientId": "11111111-1111-1111-1111-000000000013"
+            }
+          }
+        },
+        "id": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan",
+        "name": "cyber-plan",
+        "type": "Microsoft.AzureResilienceManagement/recoveryPlans",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-09-28T04:00:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-09-28T04:00:00Z"
+        }
+      }
+    }
+  }
+}

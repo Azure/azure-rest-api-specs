@@ -1,0 +1,28 @@
+{
+  "title": "RecoveryPlanActions_CreateInfrastructure_CyberRecovery",
+  "operationId": "RecoveryPlanActions_CreateInfrastructure",
+  "parameters": {
+    "serviceGroupName": "contoso-service-group",
+    "recoveryPlanName": "cyber-plan",
+    "api-version": "2026-11-30-preview",
+    "operation-id": "0a6b1c2d-3e4f-4a5b-8c6d-7e8f9a0b1c2d",
+    "body": {
+      "selectionType": "Inclusion",
+      "resourceIds": [
+        "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/app-rg/providers/Microsoft.Compute/virtualMachines/vm-app-01"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "jobId": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan/recoveryJobs/2d3e4f5a-6b7c-4d8e-9f0a-1b2c3d4e5f6a"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
