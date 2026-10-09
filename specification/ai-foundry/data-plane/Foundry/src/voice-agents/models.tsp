@@ -79,8 +79,8 @@ model VoiceConversation {
 // Shared voice response audio
 // ---------------------------------------------------------------------------
 //
-// Live WebSocket events and persisted responses use the same flat output projection so provider and
-// locale extensions stay aligned with the OpenAI-compatible voice and format fields.
+// Live WebSocket responses include provider and locale extensions alongside the
+// OpenAI-compatible voice and format fields.
 
 @doc("The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -105,16 +105,6 @@ model VoiceResponseAudio {
   output?: VoiceResponseAudioOutput;
 }
 
-@doc("Properties shared by persisted voice responses.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceResponseBase {
-  ...OmitProperties<
-    OpenAI.RealtimeResponse,
-    "audio" | "output" | "metadata" | "conversation_id" | "id"
-  >;
-}
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the persisted projection replaces audio, output, and metadata."
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("""
   A persisted voice response representing one model inference turn within a conversation. In list results the
@@ -124,21 +114,11 @@ model VoiceResponseBase {
   durable ordering extensions.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceResponse extends VoiceResponseBase {
-  @doc("The unique id of the response.")
-  id: string;
-
-  @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.")
-  output?: OpenAI.RealtimeConversationItem[];
-
-  @doc("The id of the conversation this response belongs to.")
-  conversation_id: string;
+model VoiceResponse {
+  ...OmitProperties<OpenAI.RealtimeResponse, "audio">;
 
   @doc("The audio configuration used for the response, including the voice and audio format used for output.")
   audio?: VoiceResponseAudio;
-
-  @doc("A set of key-value pairs attached to the response.")
-  metadata?: Record<string>;
 
   @doc("The sampling temperature used for the response.")
   temperature?: float32;

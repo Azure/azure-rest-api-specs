@@ -365,17 +365,11 @@ union VoiceAgentToolResponseScheduling {
   skip_if_busy: "skip_if_busy",
 }
 
-@doc("An MCP tool available to a voice agent.")
+@doc("An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel identifiers are not supported.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentMcpTool extends VoiceAgentTool {
-  ...OmitProperties<
-    OpenAI.MCPTool,
-    "type" | "connector_id" | "tunnel_id" | "server_url"
-  >;
+  ...OmitProperties<OpenAI.MCPTool, "type" | "connector_id" | "tunnel_id">;
   type: "mcp";
-
-  @doc("The URL for the MCP server.")
-  server_url?: url;
 
   @doc("When the MCP invocation creates a follow-up response. Defaults to `when_idle`.")
   response_scheduling?: VoiceAgentToolResponseScheduling = VoiceAgentToolResponseScheduling.when_idle;
