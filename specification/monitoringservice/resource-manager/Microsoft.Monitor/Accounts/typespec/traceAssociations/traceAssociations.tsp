@@ -81,7 +81,7 @@ namespace Microsoft.Monitor {
      */
     @path
     @key
-    @pattern("^[^/]+$")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9._()-]{0,259}$")
     resourceName: string;
   };
 
