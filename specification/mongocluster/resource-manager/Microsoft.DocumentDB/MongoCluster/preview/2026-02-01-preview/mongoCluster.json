@@ -3,7 +3,7 @@
   "info": {
     "title": "MongoClusterManagementClient",
     "version": "2026-02-01-preview",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure Cosmos DB for MongoDB vCore resources including clusters and firewall rules.",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure DocumentDB resources including clusters and firewall rules.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -443,7 +443,7 @@
           "Enables data API on a mongo cluster resource.": {
             "$ref": "./examples/MongoClusters_PatchDataApi.json"
           },
-          "Enables network bypass mode on a Mongo Cluster resource to allow Azure Cosmos DB service to bypass network restrictions.": {
+          "Enables network bypass mode on a Mongo Cluster resource to allow the Azure DocumentDB service to bypass network restrictions.": {
             "$ref": "./examples/MongoClusters_PatchNetworkBypassMode.json"
           },
           "Resets the administrator login password.": {
@@ -2180,7 +2180,7 @@
         },
         "networkBypassMode": {
           "$ref": "#/definitions/NetworkBypassMode",
-          "description": "The network bypass mode for the cluster. Setting to 'AzureCosmosDB' allows Azure Cosmos DB service to bypass network restrictions."
+          "description": "The network bypass mode for the cluster. Setting to 'AzureCosmosDB' allows the Azure DocumentDB service to bypass network restrictions."
         }
       }
     },
@@ -2361,7 +2361,7 @@
         },
         "networkBypassMode": {
           "$ref": "#/definitions/NetworkBypassMode",
-          "description": "The network bypass mode for the cluster. Setting to 'AzureCosmosDB' allows Azure Cosmos DB service to bypass network restrictions."
+          "description": "The network bypass mode for the cluster. Setting to 'AzureCosmosDB' allows the Azure DocumentDB service to bypass network restrictions."
         }
       }
     },
@@ -2384,7 +2384,7 @@
           {
             "name": "AzureCosmosDB",
             "value": "AzureCosmosDB",
-            "description": "Allows Azure Cosmos DB service to bypass network restrictions."
+            "description": "Allows the Azure DocumentDB service to bypass network restrictions."
           }
         ]
       }

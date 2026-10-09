@@ -229,7 +229,7 @@ model MongoClusterProperties {
   @added(Versions.v2025_08_01_preview)
   encryption?: EncryptionProperties;
 
-  /** The network bypass mode for the cluster. Setting to 'AzureCosmosDB' allows Azure Cosmos DB service to bypass network restrictions. */
+  /** The network bypass mode for the cluster. Setting to 'AzureCosmosDB' allows the Azure DocumentDB service to bypass network restrictions. */
   @added(Versions.v2026_02_01_preview)
   networkBypassMode?: NetworkBypassMode;
 }
@@ -643,6 +643,6 @@ union NetworkBypassMode {
   /** No network bypass is enabled. */
   "None",
 
-  /** Allows Azure Cosmos DB service to bypass network restrictions. */
+  /** Allows the Azure DocumentDB service to bypass network restrictions. */
   "AzureCosmosDB",
 }
