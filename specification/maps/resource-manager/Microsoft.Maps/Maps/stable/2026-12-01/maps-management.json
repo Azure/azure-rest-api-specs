@@ -758,17 +758,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "201": {
-            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
-            },
+          "202": {
+            "description": "Resource operation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -785,6 +776,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "404": {
+            "description": "The specified private endpoint connection does not exist.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
@@ -853,8 +848,9 @@
               }
             }
           },
-          "204": {
-            "description": "Resource does not exist."
+          "404": {
+            "description": "The specified private endpoint connection does not exist.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
