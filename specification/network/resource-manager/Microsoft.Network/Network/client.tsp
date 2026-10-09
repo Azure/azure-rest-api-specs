@@ -4534,11 +4534,6 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
   "csharp"
 );
 
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  Common.LoadBalancingRule.properties,
-  "csharp"
-);
-
 @@clientName(
   Microsoft.Network.AzureFirewallPropertiesFormat.aiSecurityAddOn,
   "IsAISecurityAddOnEnabled",
