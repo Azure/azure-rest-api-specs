@@ -873,38 +873,6 @@ using Microsoft.ContainerService;
 );
 @@clientName(ManagedClusters.post, "ResolvePrivateLinkServiceId", "csharp");
 
-namespace Azure.ResourceManager.ContainerService.Models {
-  /**
-   * Delegated resource properties - internal use only.
-   */
-  model ManagedClusterDelegatedIdentity {
-    /**
-     * The ARM resource id of the delegated resource - internal use only.
-     */
-    resourceId: armResourceIdentifier;
-
-    /**
-     * The tenant id of the delegated resource - internal use only.
-     */
-    tenantId?: uuid;
-
-    /**
-     * The delegation id of the referral delegation (optional) - internal use only.
-     */
-    referralResource: string;
-
-    /**
-     * The source resource location - internal use only.
-     */
-    location?: azureLocation;
-  }
-
-  @@alternateType(
-    ManagedClusterIdentity.delegatedResources,
-    Record<ManagedClusterDelegatedIdentity>,
-    "csharp"
-  );
-}
 @@alternateType(ManagedClusterIdentity.principalId, uuid, "csharp");
 @@alternateType(ManagedClusterIdentity.tenantId, uuid, "csharp");
 @@alternateType(
