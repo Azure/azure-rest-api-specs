@@ -105,7 +105,7 @@ interface Relations {
 }
 
 @armResourceOperations
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 interface BookmarkRelationsOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -159,7 +159,7 @@ interface BookmarkRelationsOps
     > {}
 
 @armResourceOperations
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 interface BookmarkRelations {
   /**
    * Gets a bookmark relation.
@@ -216,7 +216,7 @@ interface BookmarkRelations {
 }
 
 @armResourceOperations
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 interface EntityRelationOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -268,7 +268,7 @@ interface EntityRelationOps
     > {}
 
 @armResourceOperations
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 interface EntityRelations {
   /**
    * Gets an entity relation.
