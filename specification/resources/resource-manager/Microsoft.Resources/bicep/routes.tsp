@@ -18,10 +18,8 @@ interface DecompileOperationGroup {
   /**
    * Decompiles an ARM json template into a Bicep template
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @autoRoute
   @action("decompileBicep")
-  @operationId("Decompile_Bicep")
   bicep is ArmProviderActionSync<
     Request = DecompileOperationRequest,
     Response = DecompileOperationSuccessResponse,

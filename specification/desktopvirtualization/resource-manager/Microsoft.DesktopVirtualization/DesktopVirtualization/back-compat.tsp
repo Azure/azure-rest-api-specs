@@ -185,3 +185,7 @@ using Microsoft.DesktopVirtualization;
   InitiateSessionHostUpdate.post::parameters.body,
   "The resource properties to be updated"
 );
+@@clientName(
+  SessionHosts.listSingleSessionHostRegistrationTokens,
+  "listSingleRegistrationTokens"
+);

@@ -37,8 +37,6 @@ interface Costs {
   /**
    * Get cost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Costs_Get")
   get is ArmResourceRead<
     LabCost,
     Parameters = {
@@ -53,8 +51,6 @@ interface Costs {
   /**
    * Create or replace an existing cost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Costs_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<LabCost>;
 }
 
