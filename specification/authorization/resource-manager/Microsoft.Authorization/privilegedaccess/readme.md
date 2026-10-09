@@ -7,6 +7,13 @@ Microsoft.Authorization PrivilegedAccess `2026-06-01-preview` contract. The
 shared Authorization configuration remains the active generation entry point
 until service and SDK package owners approve a cutover.
 
+> [!WARNING]
+> This folder is a local migration experiment, not a production-ready service
+> onboarding. Do not merge it, publish its provisional packages, or switch
+> generation pointers to it until the service boundary, package identities,
+> operations endpoint, release automation, and single-source cutover are
+> approved.
+
 ## Configuration
 
 ### Basic Information
@@ -100,8 +107,10 @@ directive:
       subscription or resource group.
 
       Chris Stackhouse approved this tenant-level API design during ARM API
-      Modeling Office Hours on May 21, 2026. These APIs do not use
-      `allowUnauthorizedActions` and do not bypass standard Azure RBAC.
+      Modeling Office Hours on May 21, 2026. This packaging prototype preserves
+      the reviewed tenant-level paths without changing their authorization
+      contract. Runtime authorization configuration remains a separate
+      owner-reviewed concern and is not characterized by this migration.
 ```
 
 ### Tag: package-2026-06-01-preview
