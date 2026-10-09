@@ -71,6 +71,21 @@ namespace Microsoft.ResourceGraph;
 );
 @@clientName(ResourceGraphApi.QueryResponse, "ResourceQueryResult", "csharp");
 @@clientName(ResourceGraphCommon.ErrorDetails, "FacetErrorDetails", "csharp");
+@@clientName(
+  ResourceGraphCommon.ErrorResponse,
+  "ResourceGraphErrorResponse",
+  "csharp"
+);
+@@clientName(
+  ResourceGraphCommon.ErrorResponse,
+  "ResourceGraphErrorResponse",
+  "java"
+);
+@@clientName(
+  ResourceGraphCommon.ErrorResponse,
+  "ResourceGraphErrorResponse",
+  "python"
+);
 
 // Rename DateTimeInterval properties to match GA SDK
 @@clientName(ResourceGraphCommon.DateTimeInterval.start, "StartOn", "csharp");
