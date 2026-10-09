@@ -2106,7 +2106,7 @@ model AccountProperties {
   ]>[];
 
   /**
-   * The account-level connections used to publish cost control telemetry and events. Application Insights is optional for attachment, accounting, and enforcement and can be configured later. Event Grid must be configured before attaching a cost control with an alert threshold.
+   * The account-level connections used to publish cost control telemetry and events. Application Insights is optional for creation, attachment, accounting, and enforcement and can be configured later or removed while policies remain attached. Event Grid must be configured before attaching a cost control with an Alert threshold to an account or deployment and cannot be removed while such a policy remains attached.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted costControlConnections object from an explicit null in PATCH so callers can clear the value."
   @added(Versions.v2026_09_15_preview)

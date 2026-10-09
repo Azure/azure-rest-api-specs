@@ -94,7 +94,7 @@ model CostControlPatch {
 @added(Versions.v2026_09_15_preview)
 model CostControlConnections {
   /**
-   * The full resource ID of the Application Insights connection used for cost control audit telemetry. This connection is optional for attachment, accounting, and enforcement, and can be configured later. Customer audit delivery requires this connection.
+   * The full resource ID of the Application Insights connection used for cost control audit telemetry. This connection is optional for creation, attachment, accounting, and enforcement, and can be configured later or removed while policies remain attached. Customer audit delivery requires this connection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted appInsightsConnectionId from an explicit null in PATCH so callers can clear the value."
   appInsightsConnectionId?:
@@ -106,7 +106,7 @@ model CostControlConnections {
     | null;
 
   /**
-   * The full resource ID of the Event Grid connection used for cost control alerts. This connection must be configured when an attached cost control contains an alert threshold action and cannot be removed while such an action remains attached.
+   * The full resource ID of the Event Grid connection used for cost control alerts. This connection must be configured when a cost control attached to an account or deployment contains an alert threshold action and cannot be removed while such an action remains attached.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted eventGridConnectionId from an explicit null in PATCH so callers can clear the value."
   eventGridConnectionId?:
@@ -133,26 +133,29 @@ model CostControlRule {
   name: string;
 
   /**
-   * The built-in dimension used to partition consumption. The initial preview supports exactly one dimension.
+   * The single dimension used to partition consumption. Canonical requests and responses use an object. The service accepts legacy singleton arrays on input and when reading stored definitions, but serializes the dimension as an object. New rules support only built-in dimensions; Custom is retained for legacy reads.
    */
-  @minItems(1)
-  @maxItems(1)
-  @identifiers(#["type"])
-  counterKeys: CostControlDimension[];
+  counterKey: CostControlDimension;
 
   /**
-   * The unit used for the cost control amount and absolute thresholds.
+   * The unit used for the cost control amount and absolute thresholds. The unit cannot change for a retained rule name; use a new rule name for a different unit.
    */
   unit: CostControlUnit;
 
   /**
-   * The maximum consumption allowed by this rule, expressed in the selected unit.
+   * The maximum consumption allowed by this rule, expressed in the selected unit. Token amounts must be positive whole counts no greater than 9223372036854775807. USD amounts may be fractional. Selected token types share this single amount.
    */
   @minValueExclusive(0)
   amount: float64;
 
   /**
-   * The calendar-aligned UTC renewal period. This property is required for recurring rules and omitted for non-recurring rules.
+   * The token measurements included in a Tokens budget. New rules accept input, output, or both, without duplicates; output includes reasoning. Omission selects overall tokens. This property must be omitted for other units and cannot change for a retained rule name. Readers preserve unknown future names, but new authored rules accept only the currently supported names.
+   */
+  @minItems(1)
+  tokenTypes?: CostControlTokenType[];
+
+  /**
+   * The calendar-aligned UTC renewal period. New recurring rules require Day, Week, or Month; non-recurring rules must omit it. Stored legacy periods remain readable and are preserved by PATCH requests that omit rules.
    */
   period?: CostControlPeriod;
 
@@ -167,9 +170,9 @@ model CostControlRule {
   match?: CostControlMatch;
 
   /**
-   * The optional actions evaluated as consumption approaches the configured amount. Omitted, null, or empty thresholds define an audit-only rule. Explicit audit thresholds must use a value of zero. Only an explicit block threshold enforces a limit.
+   * The optional actions evaluated as consumption approaches the configured amount. Omitted, null, or empty thresholds track usage without explicit actions; no thresholds are synthesized. Supplied thresholds require an explicit Alert or Block action. Audit is retained only for legacy reads. Only an explicit Block threshold enforces a limit.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The current preview accepts omitted, null, or empty thresholds as an audit-only rule."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service accepts omitted, null, or empty thresholds to track usage without synthesizing actions."
   @maxItems(10)
   // @identifiers does not accept nullable array unions.
   @TypeSpec.OpenAPI.extension("x-ms-identifiers", #[])
@@ -177,16 +180,16 @@ model CostControlRule {
 }
 
 /**
- * Up to four trusted request attributes and their allowed values used to select matching requests.
+ * Up to four trusted request attributes and their allowed values used to select matching requests. A canonical attribute and its legacy alias cannot be supplied together.
  */
 @added(Versions.v2026_09_15_preview)
 model CostControlMatch {
   /**
-   * The stable Foundry agent IDs to match.
+   * The full Foundry agent resource IDs to match, in the form /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}. These are not conventional Azure Resource Manager IDs. Short agent IDs and the old agentIds or dotted agent filter keys are not accepted.
    */
   @minItems(1)
   @maxItems(20)
-  agentIds?: CostControlMatchValue[];
+  agentResourceIds?: CostControlMatchValue[];
 
   /**
    * The authenticated principal object IDs to match.
@@ -212,6 +215,30 @@ model CostControlMatch {
       type: "Microsoft.CognitiveServices/accounts/projects";
     }
   ]>[];
+
+  /**
+   * The legacy alias of identityObjectIds, preserved for existing definitions and accepted for compatibility. Prefer the canonical property for new rules; do not supply both names.
+   */
+  @encodedName("application/json", "foundry.caller.identity.oid")
+  @minItems(1)
+  @maxItems(20)
+  legacyIdentityObjectIds?: CostControlMatchValue[];
+
+  /**
+   * The legacy alias of sessionIds, preserved for existing definitions and accepted for compatibility. Prefer the canonical property for new rules; do not supply both names.
+   */
+  @encodedName("application/json", "foundry.caller.session.id")
+  @minItems(1)
+  @maxItems(20)
+  legacySessionIds?: CostControlMatchValue[];
+
+  /**
+   * The legacy alias of projectIds, preserved for existing definitions and accepted for compatibility. Legacy values may use opaque project identifiers. Prefer the canonical property for new rules; do not supply both names.
+   */
+  @encodedName("application/json", "foundry.project.id")
+  @minItems(1)
+  @maxItems(20)
+  legacyProjectIds?: CostControlMatchValue[];
 }
 
 /**
@@ -234,10 +261,9 @@ model CostControlDimension {
   type: CostControlDimensionType;
 
   /**
-   * The request attribute used by a custom dimension. This property is required for custom dimensions and must be omitted for built-in dimensions.
+   * The attribute retained in a stored legacy Custom dimension. This is read-only metadata; new Custom authoring is not supported and built-in dimensions must omit it. Readers preserve existing strings without applying new authoring constraints.
    */
-  @maxLength(128)
-  @pattern("^[a-zA-Z][a-zA-Z0-9_.-]{0,127}$")
+  @visibility(Lifecycle.Read)
   attribute?: string;
 }
 
@@ -249,7 +275,7 @@ union CostControlDimensionType {
   string,
 
   /**
-   * Consumption is partitioned by the stable Foundry agent ID.
+   * Consumption is partitioned by the Foundry agent resource ID.
    */
   Agent: "Agent",
 
@@ -274,7 +300,7 @@ union CostControlDimensionType {
   Account: "Account",
 
   /**
-   * Consumption is partitioned by a custom request attribute.
+   * A legacy read-only dimension using the stored attribute. New Custom authoring is reserved for future support. New or replacement rules must use a supported built-in dimension; PATCH requests that omit rules preserve existing Custom dimensions.
    */
   Custom: "Custom",
 }
@@ -290,6 +316,25 @@ union CostControlUnit {
    * Estimated cost in United States dollars.
    */
   Usd: "Usd",
+
+  /**
+   * Overall tokens or the selected token measurements, counted as a positive whole-number budget.
+   */
+  Tokens: "Tokens",
+}
+
+/**
+ * Token measurement names used by the service. These wire names are canonical lowercase strings; known input names are normalized by the service while readers retain unknown future names.
+ */
+@added(Versions.v2026_09_15_preview)
+union CostControlTokenType {
+  string,
+
+  /** Inclusive input tokens. */
+  Input: "input",
+
+  /** Inclusive output tokens, including reasoning. */
+  Output: "output",
 }
 
 /**
@@ -298,6 +343,12 @@ union CostControlUnit {
 @added(Versions.v2026_09_15_preview)
 union CostControlPeriod {
   string,
+
+  /** Legacy read-only period renewing at the start of the next UTC minute. Not accepted in new or replacement rules. */
+  Minute: "Minute",
+
+  /** Legacy read-only period renewing at the start of the next UTC hour. Not accepted in new or replacement rules. */
+  Hour: "Hour",
 
   /**
    * Renews daily at 00:00 UTC.
@@ -313,6 +364,9 @@ union CostControlPeriod {
    * Renews on the first day of each month at 00:00 UTC.
    */
   Month: "Month",
+
+  /** Legacy read-only period renewing January 1 at 00:00 UTC. Not accepted in new or replacement rules. */
+  Year: "Year",
 }
 
 /**
@@ -326,15 +380,15 @@ model CostControlThreshold {
   type: CostControlThresholdType;
 
   /**
-   * The threshold value. Audit thresholds must use zero. Block and alert thresholds must be greater than zero. Percentage values cannot exceed 100, and absolute values cannot exceed the rule amount.
+   * The threshold value. New Alert and Block thresholds must be greater than zero. Percentage values cannot exceed 100, and absolute values cannot exceed the rule amount. Absolute Tokens thresholds must be whole counts representable by Int64. Stored legacy Audit values are preserved, rather than normalized to zero.
    */
   @minValue(0)
   value: float64;
 
   /**
-   * The action taken when the threshold is reached. Omitted actions default to audit and therefore require a value of zero.
+   * The action taken when the threshold is reached. New thresholds must explicitly specify Alert or Block; there is no authoring default. Audit is retained for legacy reads, including stored definitions that omitted action and deserialize as Audit.
    */
-  action?: CostControlThresholdAction = CostControlThresholdAction.Audit;
+  action: CostControlThresholdAction;
 }
 
 /**
@@ -363,7 +417,7 @@ union CostControlThresholdAction {
   string,
 
   /**
-   * Audits every applied usage update. Authored audit thresholds must use zero. This action is retained in the current preview for compatibility; audit-only rules may omit thresholds.
+   * Legacy read-only action retained for existing definitions. It cannot be authored in new or replacement thresholds. To track usage without an action, omit thresholds instead.
    */
   Audit: "Audit",
 
@@ -464,7 +518,7 @@ interface CostControls {
   >;
 
   /**
-   * Updates selected properties of a cost control.
+   * Updates selected properties of a cost control. Omitting rules preserves existing rules, including legacy Custom dimensions, periods and Audit thresholds. Supplying rules replaces the entire array and applies current authoring restrictions; it does not merge individual rules or repair legacy values automatically.
    */
   update is ArmCustomPatchSync<
     CostControl,
