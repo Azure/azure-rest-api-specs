@@ -114,15 +114,15 @@ interface UnifiedOperations {
   unifiedModerate is Azure.Core.RpcOperation<
     {
       @query
-      @doc("Authorized binding target whose effective policy is resolved. Required when policyId is absent. A policy-only request retains authenticated account scope; this selector cannot replace authorization or bypass mandatory policy.")
+      @doc("Identifier of the protected resource used for binding resolution, not the policy or binding object identifier. For an Azure resource, provide its full Azure Resource Manager resource ID. Project targets must be under the authenticated account and require a verified producer. Required when policyId is absent. When both selectors are provided, the selected policy is evaluated alongside the bound policy. This selector cannot replace authorization or bypass mandatory policy.")
       targetResourceId?: string;
 
       @query
-      @doc("Optional authorized policy selector. Required when targetResourceId is absent. Policy selection does not bypass applicable mandatory policies.")
+      @doc("Authorized policy selector, such as a policy name or full policy resource ID. Hierarchy-enabled scopes require a policy name. Required when targetResourceId is absent. A policy-only request retains authenticated account scope. When both selectors are provided, the selected policy is evaluated alongside the bound policy. Policy selection does not bypass applicable mandatory policies.")
       policyId?: string;
 
       @bodyRoot
-      @doc("Canonical Agent Hooks context with native JSON point payloads. AACS-specific classifier role metadata, when needed by a non-Hooks caller, belongs in extensions.aacs.role.")
+      @doc("Canonical Agent Hooks context with native JSON point payloads. Azure AI Content Safety (AACS) classifier role metadata, when needed by a non-Hooks caller, belongs in extensions.aacs.role.")
       @clientName("options", "csharp")
       @clientName("options", "python")
       @clientName("options", "java")

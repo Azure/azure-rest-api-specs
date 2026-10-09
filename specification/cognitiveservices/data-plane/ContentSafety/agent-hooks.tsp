@@ -44,7 +44,7 @@ union AgentInterceptionPoint {
 model AgentJsonObject is Record<unknown>;
 
 @added(Versions.v2026_10_15_preview)
-@doc("Classifier subject roles used by existing AACS/AOAI flows. This is not actor identity or an authorization claim.")
+@doc("Classifier subject roles used by existing Azure AI Content Safety (AACS) and Azure OpenAI (AOAI) flows. This is not actor identity or an authorization claim.")
 union AacsSubjectRole {
   string,
 
@@ -65,19 +65,19 @@ union AacsSubjectRole {
 }
 
 @added(Versions.v2026_10_15_preview)
-@doc("Minimal AACS-specific request metadata for existing non-Hooks classification paths.")
+@doc("Minimal Azure AI Content Safety (AACS) request metadata for existing non-Hooks classification paths.")
 model AacsContextExtension {
-  @doc("Optional original classifier subject role for existing AACS prompt/completion/tool paths when the canonical payload cannot represent it. Canonical payload roles take precedence; contradictory claims, unsupported roles, and use at model/startup/shutdown points are rejected. Point-derived roles are defaults only. This does not authorize a caller or change the interception point.")
+  @doc("Optional original classifier subject role for existing Azure AI Content Safety (AACS) prompt, completion and tool paths when the canonical payload cannot represent it. Canonical payload roles take precedence; contradictory claims, unsupported roles, and use at model/startup/shutdown points are rejected. Point-derived roles are defaults only. This does not authorize a caller or change the interception point.")
   role?: AacsSubjectRole;
 }
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Agent Hooks extension namespaces retain arbitrary native JSON; a string-only map would regress the canonical context."
 @added(Versions.v2026_10_15_preview)
-@doc("Canonical namespaced extensions, including the optional AACS classifier-role bridge.")
+@doc("Canonical namespaced extensions, including the optional Azure AI Content Safety (AACS) classifier-role bridge.")
 model AgentContextExtensions {
   ...AgentJsonObject;
 
-  @doc("Optional AACS-specific metadata; do not copy the legacy Unified Moderate body here.")
+  @doc("Optional Azure AI Content Safety (AACS) metadata; do not copy the legacy Unified Moderate body here.")
   aacs?: AacsContextExtension;
 }
 

@@ -73,21 +73,21 @@
           {
             "name": "targetResourceId",
             "in": "query",
-            "description": "Authorized binding target whose effective policy is resolved. Required when policyId is absent. A policy-only request retains authenticated account scope; this selector cannot replace authorization or bypass mandatory policy.",
+            "description": "Identifier of the protected resource used for binding resolution, not the policy or binding object identifier. For an Azure resource, provide its full Azure Resource Manager resource ID. Project targets must be under the authenticated account and require a verified producer. Required when policyId is absent. When both selectors are provided, the selected policy is evaluated alongside the bound policy. This selector cannot replace authorization or bypass mandatory policy.",
             "required": false,
             "type": "string"
           },
           {
             "name": "policyId",
             "in": "query",
-            "description": "Optional authorized policy selector. Required when targetResourceId is absent. Policy selection does not bypass applicable mandatory policies.",
+            "description": "Authorized policy selector, such as a policy name or full policy resource ID. Hierarchy-enabled scopes require a policy name. Required when targetResourceId is absent. A policy-only request retains authenticated account scope. When both selectors are provided, the selected policy is evaluated alongside the bound policy. Policy selection does not bypass applicable mandatory policies.",
             "required": false,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Canonical Agent Hooks context with native JSON point payloads. AACS-specific classifier role metadata, when needed by a non-Hooks caller, belongs in extensions.aacs.role.",
+            "description": "Canonical Agent Hooks context with native JSON point payloads. Azure AI Content Safety (AACS) classifier role metadata, when needed by a non-Hooks caller, belongs in extensions.aacs.role.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AgentContext"
@@ -965,17 +965,17 @@
   "definitions": {
     "AacsContextExtension": {
       "type": "object",
-      "description": "Minimal AACS-specific request metadata for existing non-Hooks classification paths.",
+      "description": "Minimal Azure AI Content Safety (AACS) request metadata for existing non-Hooks classification paths.",
       "properties": {
         "role": {
           "$ref": "#/definitions/AacsSubjectRole",
-          "description": "Optional original classifier subject role for existing AACS prompt/completion/tool paths when the canonical payload cannot represent it. Canonical payload roles take precedence; contradictory claims, unsupported roles, and use at model/startup/shutdown points are rejected. Point-derived roles are defaults only. This does not authorize a caller or change the interception point."
+          "description": "Optional original classifier subject role for existing Azure AI Content Safety (AACS) prompt, completion and tool paths when the canonical payload cannot represent it. Canonical payload roles take precedence; contradictory claims, unsupported roles, and use at model/startup/shutdown points are rejected. Point-derived roles are defaults only. This does not authorize a caller or change the interception point."
         }
       }
     },
     "AacsSubjectRole": {
       "type": "string",
-      "description": "Classifier subject roles used by existing AACS/AOAI flows. This is not actor identity or an authorization claim.",
+      "description": "Classifier subject roles used by existing Azure AI Content Safety (AACS) and Azure OpenAI (AOAI) flows. This is not actor identity or an authorization claim.",
       "enum": [
         "user",
         "system",
@@ -1264,11 +1264,11 @@
     },
     "AgentContextExtensions": {
       "type": "object",
-      "description": "Canonical namespaced extensions, including the optional AACS classifier-role bridge.",
+      "description": "Canonical namespaced extensions, including the optional Azure AI Content Safety (AACS) classifier-role bridge.",
       "properties": {
         "aacs": {
           "$ref": "#/definitions/AacsContextExtension",
-          "description": "Optional AACS-specific metadata; do not copy the legacy Unified Moderate body here."
+          "description": "Optional Azure AI Content Safety (AACS) metadata; do not copy the legacy Unified Moderate body here."
         }
       },
       "additionalProperties": {}
