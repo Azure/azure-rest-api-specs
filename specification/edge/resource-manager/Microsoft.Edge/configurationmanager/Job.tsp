@@ -111,6 +111,7 @@ model UninstallJobStepStatistics extends JobStepStatisticsBase {
 
 // Not needed anymore as the statistics type will be of different model and for union we can only add same type of models
 // Union for polymorphic statistics
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("Polymorphic statistics for a job step.")
 union JobStepStatistics {
   DeployJobStepStatistics,
