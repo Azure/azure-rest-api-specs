@@ -12,6 +12,7 @@ describe("publishResultInComment", () => {
     const github = createMockGithub();
     const context = createMockContext();
     const core = createMockCore();
+    github.rest.issues.createComment.mockResolvedValue({ data: { id: 10 } });
 
     await publishResultInComment(
       { github, context, core },
@@ -24,7 +25,12 @@ describe("publishResultInComment", () => {
       owner: "owner",
       repo: "repo",
       issue_number: 42,
-      body: "/azsdk sdk-breaking-analysis Go\n\nanalysis report",
+      body: [
+        "/azsdk sdk-breaking-analysis Go",
+        "",
+        "analysis report",
+        "<!-- /azsdk sdk-breaking-analysis Go -->",
+      ].join("\n"),
     });
   });
 
@@ -51,12 +57,17 @@ describe("publishResultInComment", () => {
       owner: "owner",
       repo: "repo",
       comment_id: 20,
-      body: "/azsdk sdk-breaking-analysis Go\n\nanalysis report",
+      body: [
+        "/azsdk sdk-breaking-analysis Go",
+        "",
+        "analysis report",
+        "<!-- /azsdk sdk-breaking-analysis Go -->",
+      ].join("\n"),
     });
     expect(github.rest.issues.createComment).not.toHaveBeenCalled();
   });
 
-  it("creates a comment when the matching comment cannot be edited", async () => {
+  it("propagates an error when the matching comment cannot be edited", async () => {
     const github = createMockGithub();
     const context = createMockContext();
     const core = createMockCore();
@@ -65,14 +76,16 @@ describe("publishResultInComment", () => {
     });
     github.rest.issues.updateComment.mockRejectedValue(createMockRequestError(403));
 
-    await publishResultInComment(
-      { github, context, core },
-      42,
-      "/azsdk sdk-breaking-analysis Go",
-      "analysis report",
-    );
+    await expect(
+      publishResultInComment(
+        { github, context, core },
+        42,
+        "/azsdk sdk-breaking-analysis Go",
+        "analysis report",
+      ),
+    ).rejects.toMatchObject({ status: 403 });
 
-    expect(core.warning).toHaveBeenCalledOnce();
-    expect(github.rest.issues.createComment).toHaveBeenCalledOnce();
+    expect(core.warning).not.toHaveBeenCalled();
+    expect(github.rest.issues.createComment).not.toHaveBeenCalled();
   });
 });
