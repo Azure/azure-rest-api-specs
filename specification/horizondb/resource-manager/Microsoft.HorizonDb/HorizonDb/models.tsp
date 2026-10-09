@@ -212,32 +212,50 @@ model MicrosoftEntraAdministrator
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The resource has the fixed literal name passwordMethod, which is more restrictive than a pattern."
+@added(Versions.v2026_10_01_preview)
+@doc("The name of the PostgreSQL username-and-password authentication method.")
+union PasswordAuthenticationName {
+  string,
+
+  @doc("PostgreSQL username-and-password authentication.")
+  PasswordMethod: "passwordMethod",
+}
+
 @added(Versions.v2026_10_01_preview)
 @doc("The service-created PostgreSQL username-and-password authentication method for a HorizonDB cluster. This resource configures the authentication mechanism, including its enabled state and administrator login credentials; it is not a password-only resource.")
 @singleton("passwordMethod")
 @parentResource(Cluster)
 model PasswordAuthentication
   is Azure.ResourceManager.ProxyResource<PasswordAuthenticationProperties> {
-  @doc("The fixed name of the PostgreSQL username-and-password authentication method.")
-  @key("authenticationName")
-  @path
-  @segment("authentications")
-  name: "passwordMethod";
+  ...ResourceNameParameter<
+    Resource = PasswordAuthentication,
+    KeyName = "authenticationName",
+    SegmentName = "authentications",
+    Type = PasswordAuthenticationName
+  >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The resource has the fixed literal name microsoftEntra, which is more restrictive than a pattern."
+@added(Versions.v2026_10_01_preview)
+@doc("The name of the Microsoft Entra authentication method.")
+union MicrosoftEntraAuthenticationName {
+  string,
+
+  @doc("Microsoft Entra authentication.")
+  MicrosoftEntra: "microsoftEntra",
+}
+
 @added(Versions.v2026_10_01_preview)
 @doc("The service-created Microsoft Entra authentication method for a HorizonDB cluster.")
 @singleton("microsoftEntra")
 @parentResource(Cluster)
 model MicrosoftEntraAuthentication
   is Azure.ResourceManager.ProxyResource<MicrosoftEntraAuthenticationProperties> {
-  @doc("The fixed name of the Microsoft Entra authentication method.")
-  @key("authenticationName")
-  @path
-  @segment("authentications")
-  name: "microsoftEntra";
+  ...ResourceNameParameter<
+    Resource = MicrosoftEntraAuthentication,
+    KeyName = "authenticationName",
+    SegmentName = "authentications",
+    Type = MicrosoftEntraAuthenticationName
+  >;
 }
 
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbClusterProperties")
