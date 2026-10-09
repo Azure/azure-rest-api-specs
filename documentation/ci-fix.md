@@ -18,6 +18,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`PoliCheck`](#policheck)
   - [`Protected Files`](#protected-files)
   - [`SDK Validation *` checks, like `SDK Validation - Go`](#sdk-validation--checks-like-sdk-validation---go)
+    - [Python package name is not registered on PyPI](#python-package-name-is-not-registered-on-pypi)
   - [`SDK Breaking Change Review`](#sdk-breaking-change-review)
   - [`Swagger APIView`](#swagger-apiview)
     - [If an expected APIView was not generated, follow the step below to troubleshoot.](#if-an-expected-apiview-was-not-generated-follow-the-step-below-to-troubleshoot)
@@ -117,6 +118,19 @@ Do the following:
        For example, for `SDK Validation - Go` check look into the `Azure Pipelines/SDK Validation - Go` pipeline run logs.
 2. If your investigation denotes this is likely a bug in the check itself and not your PR, reach out
   to the owner of the check per the aforementioned table.
+
+### Python package name is not registered on PyPI
+
+SDK Validation does not support a normal PR suppression for a Python package name that is not registered on
+[PyPI](https://pypi.org/). Confirm the declared package name in the project's `tspconfig.yaml` and, for Swagger
+projects, `readme.python.md`.
+
+- If the project will ship a Python SDK, reserve or publish the declared package name on PyPI.
+- **If the project will not ship a Python SDK**:
+  1. Get approval from the Azure SDK team first. By default, specs are expected to publish SDKs in all Tier 1
+     languages: Python, .NET, Java, JavaScript, and Go.
+  2. After approval, remove the Python emitter and package configuration from the project's `tspconfig.yaml`. This
+     prevents Python SDK validation from running and eliminates the unregistered package-name error.
 
 ## `SDK Breaking Change Review`
 
