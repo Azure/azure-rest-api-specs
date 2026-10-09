@@ -1,6 +1,6 @@
 name: "Swagger BreakingChange - Set Status"
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
   # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
   # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
@@ -33,7 +33,7 @@ permissions:
 jobs:
   breaking-change-status:
     name: Set BreakingChange Status
-    uses: ./.github/workflows/_reusable-set-check-status.yaml
+    uses: $/.github/workflows/_reusable-set-check-status.yaml
     with:
       monitored_workflow_name: "Swagger BreakingChange - Analyze Code"
       required_check_name: "Swagger BreakingChange"

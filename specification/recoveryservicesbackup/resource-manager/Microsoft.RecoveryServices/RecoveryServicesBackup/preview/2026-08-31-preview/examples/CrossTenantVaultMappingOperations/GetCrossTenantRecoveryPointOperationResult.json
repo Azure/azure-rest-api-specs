@@ -1,0 +1,46 @@
+{
+  "operationId": "RecoveryPointOperationResultsFromCrossTenantVault_Get",
+  "title": "Get Cross-Tenant Recovery Point Operation Result",
+  "parameters": {
+    "api-version": "2026-08-31-preview",
+    "vaultName": "NetSDKTestRsVault",
+    "crossTenantVaultMappingName": "crossTenantVaultMapping1",
+    "fabricName": "Azure",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "operationId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": {
+          "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/SourceRG/providers/Microsoft.RecoveryServices/vaults/SourceVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;SourceRG;testVM1/protectedItems/VM;iaasvmcontainerv2;SourceRG;testVM1": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupCrossTenantVaultMappings/crossTenantVaultMapping1/backupFabrics/Azure/recoveryPoints/348916168024334",
+            "name": "348916168024334",
+            "type": "Microsoft.RecoveryServices/vaults/backupCrossTenantVaultMappings/backupFabrics/recoveryPoints",
+            "properties": {
+              "objectType": "IaasVMRecoveryPoint",
+              "recoveryPointType": "CrashConsistent",
+              "recoveryPointTime": "2026-01-15T08:00:00.0000000Z",
+              "sourceVMStorageType": "PremiumVMOnPartialPremiumStorage",
+              "isSourceVMEncrypted": false,
+              "isInstantIlrSessionActive": false,
+              "recoveryPointTierDetails": [
+                {
+                  "type": "HardenedRP",
+                  "status": "Valid"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupCrossTenantVaultMappings/crossTenantVaultMapping1/backupFabrics/Azure/recoveryPointOperationResults/00000000-0000-0000-0000-000000000000?api-version=2026-08-31-preview",
+        "Retry-After": 60
+      }
+    }
+  }
+}

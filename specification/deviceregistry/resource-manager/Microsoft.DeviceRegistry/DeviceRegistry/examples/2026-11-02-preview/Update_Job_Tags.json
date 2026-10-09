@@ -1,0 +1,52 @@
+{
+  "title": "Update_Job_Tags",
+  "description": "Update tags on an existing job. Only tags are mutable; spec properties are immutable after create.",
+  "operationId": "Jobs_Update",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "jobName": "adr-job-update-01",
+    "namespaceName": "namespace-1",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "properties": {
+      "tags": {
+        "owner": "fleet-team",
+        "wave": "wave-3"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/jobs/adr-job-update-01",
+        "name": "adr-job-update-01",
+        "type": "Microsoft.DeviceRegistry/namespaces/jobs",
+        "location": "North Europe",
+        "tags": {
+          "owner": "fleet-team",
+          "wave": "wave-3"
+        },
+        "systemData": {
+          "createdAt": "2026-04-01T21:39:27.7050447Z",
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "lastModifiedAt": "2026-04-02T10:00:00Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application"
+        },
+        "properties": {
+          "definition": {
+            "schedulingType": "Continuous",
+            "updateResourceId": "updates/providers/contoso/names/windowsApp/versions/1.0"
+          },
+          "jobType": "SoftwareUpdate",
+          "provisioningState": "Succeeded",
+          "target": {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/groups/group-1"
+          },
+          "uuid": "91339e2f-7339-4b18-a6ae-dd3d392a4275"
+        }
+      }
+    }
+  }
+}

@@ -46,9 +46,6 @@
       "name": "Workspaces"
     },
     {
-      "name": "OutboundNetworkDependenciesEndpoints"
-    },
-    {
       "name": "PrivateLinkResources"
     },
     {
@@ -837,55 +834,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints": {
-      "get": {
-        "operationId": "OutboundNetworkDependenciesEndpoints_List",
-        "tags": [
-          "OutboundNetworkDependenciesEndpoints"
-        ],
-        "summary": "Gets a list of egress endpoints (network endpoints of all outbound dependencies) in the specified Workspace.",
-        "description": "Gets the list of endpoints that VNET Injected Workspace calls Azure Databricks Control Plane. You must configure outbound access with these endpoints. For more information, see https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/udr",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List OutboundNetworkDependenciesEndpoints by Workspace": {
-            "$ref": "./examples/OutboundNetworkDependenciesEndpointsList.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/privateEndpointConnections": {
@@ -1977,48 +1925,6 @@
         "keyVersion"
       ]
     },
-    "EndpointDependency": {
-      "type": "object",
-      "description": "A domain name or IP address the Workspace is reaching at.",
-      "properties": {
-        "domainName": {
-          "type": "string",
-          "description": "The domain name of the dependency."
-        },
-        "endpointDetails": {
-          "type": "array",
-          "description": "The Ports used when connecting to domainName.",
-          "items": {
-            "$ref": "#/definitions/EndpointDetail"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "EndpointDetail": {
-      "type": "object",
-      "description": "Connect information from the Workspace to a single endpoint.",
-      "properties": {
-        "ipAddress": {
-          "type": "string",
-          "description": "An IP Address that Domain Name currently resolves to."
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The port an endpoint is connected to."
-        },
-        "latency": {
-          "type": "number",
-          "format": "double",
-          "description": "The time in milliseconds it takes for the connection to be created from the Workspace to this IpAddress at this Port."
-        },
-        "isAccessible": {
-          "type": "boolean",
-          "description": "Whether it is possible to create a connection from the Workspace to this IpAddress at this Port."
-        }
-      }
-    },
     "EnhancedSecurityComplianceDefinition": {
       "type": "object",
       "description": "Status of settings related to the Enhanced Security and Compliance Add-On.",
@@ -2368,31 +2274,6 @@
           "description": "URL to get the next set of operation list results if there are any.",
           "readOnly": true
         }
-      }
-    },
-    "OutboundEnvironmentEndpoint": {
-      "type": "object",
-      "description": "Egress endpoints which Workspace connects to for common purposes.",
-      "properties": {
-        "category": {
-          "type": "string",
-          "description": "The category of endpoints accessed by the Workspace, e.g. azure-storage, azure-mysql, etc."
-        },
-        "endpoints": {
-          "type": "array",
-          "description": "The endpoints that Workspace connect to",
-          "items": {
-            "$ref": "#/definitions/EndpointDependency"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "OutboundEnvironmentEndpointCollection": {
-      "type": "array",
-      "description": "Collection of outbound network dependency endpoints",
-      "items": {
-        "$ref": "#/definitions/OutboundEnvironmentEndpoint"
       }
     },
     "PeeringProvisioningState": {

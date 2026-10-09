@@ -1,0 +1,57 @@
+{
+  "title": "CloudResources_Update",
+  "operationId": "CloudResources_Update",
+  "parameters": {
+    "api-version": "2026-09-01",
+    "subscriptionId": "14AB8053-986C-414E-96B3-11D82B8B478D",
+    "resourceGroupName": "rganyscale",
+    "cloudName": "AnyscaleCloud",
+    "cloudResourceName": "AnyscaleCloudResource",
+    "properties": {
+      "tags": {
+        "environment": "staging",
+        "team": "ml-platform"
+      },
+      "properties": {
+        "provider": "AWS",
+        "computeStack": "K8S",
+        "cloudStorageBucketName": "s3://anyscale-storage",
+        "cloudStorageBucketEndpoint": "https://anyscale-storage.s3.us-west-2.amazonaws.com",
+        "anyscaleOperatorIamIdentity": "arn:aws:iam::123456789012:role/anyscale-operator"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "cloudResourceId": "cldrsrc_a1b2c3d4e5f6g7h8i9j0k1l2m3",
+          "provider": "AWS",
+          "computeStack": "K8S",
+          "cloudStorageBucketName": "s3://anyscale-storage",
+          "cloudStorageBucketEndpoint": "https://anyscale-storage.s3.us-west-2.amazonaws.com",
+          "region": "us-west-2",
+          "cloudStorageBucketRegion": "us-west-2",
+          "anyscaleOperatorIamIdentity": "arn:aws:iam::123456789012:role/anyscale-operator",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "environment": "staging",
+          "team": "ml-platform"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/14AB8053-986C-414E-96B3-11D82B8B478D/resourceGroups/rganyscale/providers/Anyscale.Platform/clouds/AnyscaleCloud/cloudResources/AnyscaleCloudResource",
+        "name": "AnyscaleCloudResource",
+        "type": "Anyscale.Platform/clouds/cloudResources",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-11-01T10:30:45.678Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-11-20T10:23:45.678Z"
+        }
+      }
+    }
+  }
+}

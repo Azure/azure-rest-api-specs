@@ -17,29 +17,29 @@ parameters:
     # Unused here (no repository-resource alias needed): kept only so this template accepts the
     # same (TestType, toolsRepo) shape build-mcp.yml always forwards to mcpSetupTemplate.
     type: string
-    default: ''
+    default: ""
 
 steps:
   - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
     parameters:
       SkipCheckoutNone: true
       Paths:
-        - '/tools'
+        - "/tools"
       Repositories:
         - Name: Azure/azure-sdk-tools
           Commitish: main
           WorkingDirectory: azure-sdk-tools
 
   - ${{ if eq(parameters.TestType, 'live') }}:
-    - script: |
-        set -e
-        dotnet build tools/azsdk-cli/Azure.Sdk.Tools.Cli -c Release -o "$(Build.SourcesDirectory)/artifacts/mcp/cli" --nologo
-      displayName: 'Build MCP: Cli (live) server'
-      workingDirectory: $(Build.SourcesDirectory)/azure-sdk-tools
+      - script: |
+          set -e
+          dotnet build tools/azsdk-cli/Azure.Sdk.Tools.Cli -c Release -o "$(Build.SourcesDirectory)/artifacts/mcp/cli" --nologo
+        displayName: "Build MCP: Cli (live) server"
+        workingDirectory: $(Build.SourcesDirectory)/azure-sdk-tools
 
   - ${{ else }}:
-    - script: |
-        set -e
-        dotnet build tools/azsdk-cli/Azure.Sdk.Tools.Mock -c Release -o "$(Build.SourcesDirectory)/artifacts/mcp/mock" --nologo
-      displayName: 'Build MCP: Mock server'
-      workingDirectory: $(Build.SourcesDirectory)/azure-sdk-tools
+      - script: |
+          set -e
+          dotnet build tools/azsdk-cli/Azure.Sdk.Tools.Mock -c Release -o "$(Build.SourcesDirectory)/artifacts/mcp/mock" --nologo
+        displayName: "Build MCP: Mock server"
+        workingDirectory: $(Build.SourcesDirectory)/azure-sdk-tools

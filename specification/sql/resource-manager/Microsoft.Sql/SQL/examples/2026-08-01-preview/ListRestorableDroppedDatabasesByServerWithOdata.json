@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "serverName": "testsvr",
+    "api-version": "2026-08-01-preview",
+    "$top": 25,
+    "$skipToken": "eyJuYW1lIjoidGVzdERiMCwxMzE1OTIzODQwMDAwMDAwMDAifQ%3D%3D"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "sku": {
+              "name": "GP_Gen4_1",
+              "tier": "GeneralPurpose"
+            },
+            "location": "southeastasia",
+            "properties": {
+              "databaseName": "testDb1",
+              "maxSizeBytes": 321,
+              "creationDate": "2015-02-03T04:05:06Z",
+              "deletionDate": "2018-01-01T00:00:00Z",
+              "backupStorageRedundancy": "Geo"
+            },
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/restorableDroppedDatabases/testDb1,131592384000000000",
+            "name": "testDb1,131592384000000000",
+            "type": "Microsoft.Sql/servers/restorableDroppedDatabases"
+          }
+        ],
+        "nextLink": "https://myreferrer.example/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/restorableDroppedDatabases?api-version=2026-08-01-preview&$top=25&$skipToken=eyJuYW1lIjoidGVzdERiMSwxMzE1OTIzODQwMDAwMDAwMDAifQ%3D%3D"
+      }
+    }
+  },
+  "operationId": "RestorableDroppedDatabases_ListByServer",
+  "title": "Gets a list of restorable dropped databases with OData filtering."
+}

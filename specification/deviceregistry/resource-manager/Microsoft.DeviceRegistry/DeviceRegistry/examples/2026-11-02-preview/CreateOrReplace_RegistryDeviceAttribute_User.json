@@ -1,0 +1,68 @@
+{
+  "title": "Create or Replace a User Device Attribute",
+  "operationId": "RegistryDeviceAttributes_CreateOrReplace",
+  "description": "Create or replace a user-reported device attribute.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-1",
+    "registryDeviceName": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
+    "attributeName": "customConfig",
+    "resource": {
+      "properties": {
+        "reportedBy": "User",
+        "schema": "https://contoso.com/schemas/device-attributes/custom-config-v1.json",
+        "deploymentRing": "pilot",
+        "firmwareChannel": "stable",
+        "maintenanceWindow": "sunday-02:00-04:00"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/registryDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab/attributes/customConfig",
+        "name": "customConfig",
+        "type": "Microsoft.DeviceRegistry/namespaces/registryDevices/attributes",
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2026-11-18T08:00:00Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-11-18T08:00:00Z"
+        },
+        "properties": {
+          "reportedBy": "User",
+          "schema": "https://contoso.com/schemas/device-attributes/custom-config-v1.json",
+          "deploymentRing": "pilot",
+          "firmwareChannel": "stable",
+          "maintenanceWindow": "sunday-02:00-04:00"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/registryDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab/attributes/customConfig",
+        "name": "customConfig",
+        "type": "Microsoft.DeviceRegistry/namespaces/registryDevices/attributes",
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2026-11-18T08:00:00Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-11-18T08:00:00Z"
+        },
+        "properties": {
+          "reportedBy": "User",
+          "schema": "https://contoso.com/schemas/device-attributes/custom-config-v1.json",
+          "deploymentRing": "pilot",
+          "firmwareChannel": "stable",
+          "maintenanceWindow": "sunday-02:00-04:00"
+        }
+      }
+    }
+  }
+}
