@@ -301,5 +301,5 @@ using Microsoft.SqlVirtualMachine;
   "SqlVirtualMachineManagementClient",
   "python"
 );
-@@clientName(ReadableSecondary.No, "$DO_NOT_NORMALIZE$NO", "javascript");
-@@clientName(ReadableSecondary.All, "$DO_NOT_NORMALIZE$ALL", "javascript");
+@@clientName(ReadableSecondary.No, exact("NO"), "javascript");
+@@clientName(ReadableSecondary.All, exact("ALL"), "javascript");
