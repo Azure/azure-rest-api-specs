@@ -4,6 +4,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 alias AgentInsightsPreviewKey = FoundryFeaturesOptInKeys.agent_insights_v1_preview;

@@ -4,6 +4,8 @@ import "../common/servicepatterns.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 const RoutineRequiredPreviews = #{

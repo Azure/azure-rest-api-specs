@@ -24,6 +24,11 @@ using TypeSpec.Http;
 
 using Azure.AI.Projects;
 
+// Pin generated model names after migrating PageOrder/JobStatus to reuse the
+// Microsoft.Foundry.Core library union definitions.
+@@clientName(PageOrder, "PageOrder");
+@@clientName(JobStatus, "JobStatus");
+
 // Reuse equivalent openai-java models instead of generating duplicate public types.
 @@alternateType(
   OpenAI.ChatCompletionTool,

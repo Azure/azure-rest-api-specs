@@ -8,6 +8,8 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 const EvaluatorsRequiredPreviews = #{
@@ -367,7 +369,7 @@ union GenerationWarningType {
 }
 
 @doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.")
-model EvaluatorGenerationJob is JobLike<EvaluatorVersion, never> {
+model EvaluatorGenerationJob is JobLike<ApiError, EvaluatorVersion, never> {
   @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
   sources: EvaluatorGenerationJobSource[];
 

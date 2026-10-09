@@ -6,6 +6,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
@@ -66,6 +68,6 @@ interface ManagedAgentIdentityBlueprints {
       ...PageOrderQueryParameter;
       ...PageLimitQueryParameter;
     },
-    Foundations.CustomPage<ManagedAgentIdentityBlueprint>
+    Azure.Core.Foundations.CustomPage<ManagedAgentIdentityBlueprint>
   >;
 }

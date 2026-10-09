@@ -11,6 +11,8 @@ using Azure.Core.Experimental;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 // ============================================================================

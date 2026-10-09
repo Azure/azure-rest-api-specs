@@ -57,6 +57,10 @@ namespace Azure.AI.Projects {
 
   @@clientName(JobStatus, "AgentsJobStatus");
 
+  // Pin the generated model name after migrating PageOrder to reuse the
+  // Microsoft.Foundry.Core library union definition.
+  @@clientName(PageOrder, "PageOrder");
+
   @@clientName(
     ContainerAppAgentDefinition,
     "ContainerApplicationAgentDefinition",

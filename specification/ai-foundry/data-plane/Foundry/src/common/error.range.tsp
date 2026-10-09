@@ -1,22 +1,8 @@
 import "@typespec/http";
+import "@azure-tools/typespec-foundry-core";
 
 using TypeSpec.Http;
 
-/** Error response for Azure range errors. */
-alias AzureRangeErrorResponse<ErrorResponseParameter = Azure.Core.Foundations.ErrorResponse> =
-  | {
-      ...ErrorResponseParameter;
-
-      @maxValue(499)
-      @minValue(400)
-      @statusCode
-      statusCode: int32;
-    }
-  | {
-      ...ErrorResponseParameter;
-
-      @maxValue(599)
-      @minValue(500)
-      @statusCode
-      statusCode: int32;
-    };
+// AzureRangeErrorResponse is now referenced directly as
+// Microsoft.Foundry.Core.AzureRangeErrorResponse (or via a `using Microsoft.Foundry.Core;`
+// directive) by its consumers.

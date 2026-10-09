@@ -3,6 +3,7 @@ import "./servicepatterns.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
+using Microsoft.Foundry.Core;
 
 namespace Azure.AI.Projects;
 

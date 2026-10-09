@@ -162,6 +162,11 @@ namespace Azure.AI.FineTuning.Sessions;
   "Sort direction by created_at: asc returns oldest objects first; desc returns newest first."
 );
 
+// Pin generated model names after migrating PageOrder/JobStatus to reuse the
+// Microsoft.Foundry.Core library union definitions.
+@@clientName(Azure.AI.Projects.PageOrder, "PageOrder");
+@@clientName(Azure.AI.Projects.JobStatus, "JobStatus");
+
 // Reuse authoritative REST types whenever their Python shape is compatible.
 // The Loom aliases below are references, not copied model or enum declarations.
 @@clientName(Loom.CheckpointType, "CheckpointType", "python");

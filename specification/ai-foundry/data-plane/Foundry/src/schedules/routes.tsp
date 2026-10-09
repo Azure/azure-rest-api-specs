@@ -2,6 +2,8 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 alias SchedulesPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>;

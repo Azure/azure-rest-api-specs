@@ -39,6 +39,10 @@ namespace Azure.AI.Projects;
 
 @@clientName(JobStatus, "ProjectsJobStatus");
 
+// Pin the generated model name after migrating PageOrder to reuse the
+// Microsoft.Foundry.Core library union definition.
+@@clientName(PageOrder, "PageOrder");
+
 // Shorter method names for SDK datasets operations
 @@clientName(Datasets.listLatest, "list");
 @@clientName(Datasets.getVersion, "get");

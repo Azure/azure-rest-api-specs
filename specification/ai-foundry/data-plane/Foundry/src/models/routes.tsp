@@ -6,6 +6,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 alias ModelsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.models_v1_preview>;

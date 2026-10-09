@@ -268,4 +268,9 @@ namespace Azure.AI.Projects {
     OpenAI.ItemCustomToolCallOutput,
     "OutputItemCustomToolCallOutput"
   );
+
+  // Pin generated model names after migrating PageOrder/JobStatus to reuse the
+  // Microsoft.Foundry.Core library union definitions.
+  @@clientName(PageOrder, "PageOrder");
+  @@clientName(JobStatus, "JobStatus");
 }

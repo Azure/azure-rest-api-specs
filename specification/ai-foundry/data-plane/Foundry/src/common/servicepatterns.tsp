@@ -1,23 +1,19 @@
 import "@typespec/http";
 
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-foundry-core";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Microsoft.Foundry.Core;
 
 namespace Azure.AI.Projects;
 
 // ============================================================================
 // Foundry Data Plane Operation Infrastructure
 // ============================================================================
-
-alias FoundryDataPlaneApiVersionParameter = {
-  @doc("The API version to use for this operation.")
-  @query("api-version")
-  apiVersion: string;
-};
 
 alias FoundryDataPlaneAzureTraits = Azure.Core.Traits.SupportsClientRequestId &
   Azure.Core.Traits.NoRepeatableRequests &
@@ -120,30 +116,6 @@ union FoundryFeaturesOptInKeys {
   finetuning_sessions_v1_preview: "FineTuningSessions=V1Preview",
 }
 
-alias WithRequiredFoundryPreviewHeader<
-  RequiredPreviewOptInHeader extends
-    | FoundryFeaturesOptInKeys
-    | AgentDefinitionOptInKeys
-> = {
-  /**
-   * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-   */
-  @header("Foundry-Features")
-  foundry_features: RequiredPreviewOptInHeader;
-};
-
-alias WithConditionalFoundryPreviewHeader<
-  OptionalPreviewOptInHeader extends
-    | FoundryFeaturesOptInKeys
-    | AgentDefinitionOptInKeys
-> = {
-  /**
-   * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-   */
-  @header("Foundry-Features")
-  foundry_features?: OptionalPreviewOptInHeader;
-};
-
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 op FoundryDataPlanePreviewOperation<
@@ -180,84 +152,10 @@ op FoundryDataPlaneRequiredPreviewOperation<
 // Pagination
 // ============================================================================
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@doc("The response data for a requested list of items.")
-model AgentsPagedResult<T> {
-  /** The requested list of items. */
-  @pageItems
-  data: T[];
-
-  /** The first ID represented in this list. */
-  first_id?: string;
-
-  /** The last ID represented in this list. */
-  @continuationToken
-  last_id?: string;
-
-  /** A value indicating whether there are additional values available not captured in this list. */
-  has_more: boolean;
-}
-
-@doc("A page of items with a URL cursor to the next page.")
-model PagedResultWithNextLink<T> {
-  /** The requested list of items. */
-  @pageItems
-  data: T[];
-
-  /** The URL to fetch the next page of results, or absent if there are no additional pages. */
-  @nextLink
-  next_link?: url;
-}
-
-alias PageLimitQueryParameter = {
-  /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-   * default is 20.
-   */
-  @query limit?: int32 = 20;
-};
-
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "PageOrder is the two directions of ordering by created_at (ascending or descending); this value set is inherently immutable."
-union PageOrder {
-  /** Return items in ascending creation-time order. */
-  "asc",
-
-  /** Return items in descending creation-time order. */
-  "desc",
-}
-
-alias PageOrderQueryParameter = {
-  /**
-   * Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-   * for descending order.
-   */
-  @query order?: PageOrder;
-};
-
-alias PageAfterQueryParameter = {
-  /**
-   * A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-   * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-   * subsequent call can include after=obj_foo in order to fetch the next page of the list.
-   */
-  @query @continuationToken after?: string;
-};
-
-alias PageBeforeQueryParameter = {
-  /**
-   * A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-   * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-   * subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-   */
-  @query before?: string;
-};
-
-alias CommonPageQueryParameters = {
-  ...PageLimitQueryParameter;
-  ...PageOrderQueryParameter;
-  ...PageAfterQueryParameter;
-  ...PageBeforeQueryParameter;
-};
+// AgentsPagedResult, PagedResultWithNextLink, PageLimitQueryParameter, PageOrder,
+// PageOrderQueryParameter, PageAfterQueryParameter, PageBeforeQueryParameter, and
+// CommonPageQueryParameters are now referenced directly from Microsoft.Foundry.Core
+// via the `using` directive above.
 
 // ============================================================================
 // Versioned Resource Operations
@@ -369,87 +267,8 @@ interface VersionedOperations<
 // Long-Running Job Infrastructure
 // ============================================================================
 
-/** Extensible status values shared by Foundry jobs. */
-union JobStatus {
-  string,
-
-  /** Job is waiting to start. */
-  queued: "queued",
-
-  /** Job is actively processing. */
-  in_progress: "in_progress",
-
-  /** Job completed successfully. */
-  @lroSucceeded
-  succeeded: "succeeded",
-
-  /** Job failed. */
-  @lroFailed
-  failed: "failed",
-
-  /** Job was cancelled by the caller. */
-  @lroCanceled
-  cancelled: "cancelled",
-}
-
-/**
- * Base shape for every Foundry async job.
- *
- * @template TResult  Data produced on success (use `never` if none).
- * @template TInputs  Caller-supplied configuration (use `never` if none).
- * @template TStatus  Status union (defaults to `JobStatus`).
- */
-model JobLike<
-  TResult = never,
-  TInputs = never,
-  TStatus extends string = JobStatus
-> {
-  /** Server-assigned unique identifier. */
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  /** Caller-supplied inputs. */
-  inputs?: TInputs;
-
-  /** Result produced on success. */
-  @visibility(Lifecycle.Read)
-  result?: TResult;
-
-  /** Current lifecycle status. */
-  @visibility(Lifecycle.Read)
-  @lroStatus
-  status: TStatus;
-
-  /** Error details — populated only on failure. */
-  @visibility(Lifecycle.Read)
-  error?: ApiError;
-}
-
-/** Response envelope for job creation: 201 + Operation-Location + Location headers. */
-alias JobCreatedResponse<TJob extends TypeSpec.Reflection.Model> = Response<201> &
-  TJob & {
-    /** URL to poll for the job status. */
-    @header("Operation-Location")
-    operationLocation: string;
-
-    /** URL of the created job resource. */
-    @header("Location")
-    location: string;
-  };
-
-/** Response envelope for job status polling: body + optional Retry-After header. */
-alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
-  /** Recommended number of seconds to wait before polling again. */
-  @header("Retry-After")
-  retryAfter?: int32;
-};
-
-/** Optional Operation-Id header for idempotent job creation retries. */
-alias WithOperationId = {
-  /** Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally. */
-  @header("Operation-Id")
-  operationId?: string;
-};
+// JobStatus, JobCreatedResponse, JobStatusResponse, and WithOperationId are now
+// referenced directly from Microsoft.Foundry.Core via the `using` directive above.
 
 // ---- Operation templates ----
 
@@ -581,18 +400,5 @@ op deleteJobPreview<
   NoContentResponse
 >;
 
-// ============================================================================
-// Types and traits shared by multiple service patterns
-// ============================================================================
-
-@encode(DateTimeKnownEncoding.unixTimestamp, int32)
-scalar FoundryTimestamp extends utcDateTime;
-
-@doc("A duration encoded as an integer number of seconds.")
-@encode(DurationKnownEncoding.seconds, int32)
-scalar FoundryDurationSeconds extends duration;
-
-#suppress "@azure-tools/typespec-azure-core/known-encoding" "Foundry wire contracts encode duration values as integer milliseconds."
-@doc("A duration encoded as an integer number of milliseconds.")
-@encode(DurationKnownEncoding.milliseconds, int32)
-scalar FoundryDurationMilliseconds extends duration;
+// FoundryTimestamp, FoundryDurationSeconds, and FoundryDurationMilliseconds are
+// now referenced directly from Microsoft.Foundry.Core via the `using` directive above.

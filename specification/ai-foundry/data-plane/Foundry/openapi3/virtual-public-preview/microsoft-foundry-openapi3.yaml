@@ -168,7 +168,7 @@ paths:
           required: false
           description: Sort order by creation time. Defaults to descending.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
             default: desc
           explode: false
         - name: agent_name
@@ -484,7 +484,7 @@ paths:
           required: false
           description: Sort order by creation time. Defaults to descending.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
             default: desc
           explode: false
         - name: category
@@ -814,7 +814,7 @@ paths:
           required: false
           description: Sort order by creation time. Defaults to descending.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
             default: desc
           explode: false
         - name: status
@@ -822,7 +822,7 @@ paths:
           required: false
           description: Filter runs by status.
           schema:
-            $ref: '#/components/schemas/JobStatus'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.JobStatus'
           explode: false
         - name: trigger
           in: query
@@ -1120,7 +1120,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -1147,7 +1147,7 @@ paths:
           required: false
           description: Filter to jobs in this lifecycle state.
           schema:
-            $ref: '#/components/schemas/JobStatus'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.JobStatus'
           explode: false
         - name: agent_name
           in: query
@@ -1322,7 +1322,7 @@ paths:
           required: false
           description: Sort order by the candidate `started_at` timestamp.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -1670,7 +1670,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -2473,7 +2473,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -2838,7 +2838,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -3298,7 +3298,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -3489,7 +3489,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -3639,7 +3639,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -3753,7 +3753,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -4339,7 +4339,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -4585,7 +4585,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -4903,7 +4903,7 @@ paths:
             Retry-After:
               required: true
               schema:
-                $ref: '#/components/schemas/FoundryDurationSeconds'
+                $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationSeconds'
           content:
             application/json:
               schema:
@@ -5055,7 +5055,7 @@ paths:
             Retry-After:
               required: true
               schema:
-                $ref: '#/components/schemas/FoundryDurationSeconds'
+                $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationSeconds'
           content:
             application/json:
               schema:
@@ -5116,14 +5116,14 @@ paths:
           required: false
           description: Includes calls that started at or after this Unix timestamp in seconds.
           schema:
-            $ref: '#/components/schemas/FoundryTimestamp'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           explode: false
         - name: started_before
           in: query
           required: false
           description: Includes calls that started at or before this Unix timestamp in seconds.
           schema:
-            $ref: '#/components/schemas/FoundryTimestamp'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           explode: false
         - name: limit
           in: query
@@ -5143,7 +5143,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -5632,7 +5632,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -5928,7 +5928,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -6868,7 +6868,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -7729,7 +7729,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -9184,7 +9184,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -11287,7 +11287,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: limit
           in: query
@@ -11542,7 +11542,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -12078,7 +12078,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -19731,7 +19731,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -20582,7 +20582,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -32249,7 +32249,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -33102,7 +33102,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -42171,7 +42171,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: api-version
           in: query
@@ -42380,7 +42380,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: api-version
           in: query
@@ -42947,7 +42947,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -43345,7 +43345,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -44046,7 +44046,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -44331,7 +44331,7 @@ paths:
             Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
             for descending order.
           schema:
-            $ref: '#/components/schemas/PageOrder'
+            $ref: '#/components/schemas/Microsoft.Foundry.Core.PageOrder'
           explode: false
         - name: after
           in: query
@@ -45547,10 +45547,10 @@ components:
           type: string
           description: The version of the agent to filter traces by.
         start_time:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: Start time for the trace query window, expressed as a Unix timestamp (seconds).
         end_time:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: End time for the trace query window, expressed as a Unix timestamp (seconds).
         max_traces:
           type: integer
@@ -45673,11 +45673,11 @@ components:
           description: The number of traces that provide evidence for this insight.
           readOnly: true
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when this insight was created.
           readOnly: true
         updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when this insight was last updated.
           readOnly: true
         description:
@@ -45753,14 +45753,14 @@ components:
           type: string
           description: A short summary of the trace.
         duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: The end-to-end duration of the trace in milliseconds.
         total_tokens:
           type: integer
           format: int32
           description: Aggregate input and output tokens reported across all model inference calls in this trace, including calls to different models. Intended for relative usage comparison, not cost estimation.
         timestamp:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when the trace was recorded.
       description: A highlighted trace that provides evidence for an agent insight.
       x-ms-foundry-meta:
@@ -45777,7 +45777,7 @@ components:
           description: The trace identifier.
           readOnly: true
         timestamp:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when the trace was recorded.
           readOnly: true
       description: A lightweight trace reference linked to an agent insight as supporting evidence.
@@ -45820,7 +45820,7 @@ components:
           description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
           readOnly: true
         next_scheduled_run_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The next time a scheduled agent insight run will start. Omitted when scheduled generation is disabled.
           readOnly: true
         estimated_cost:
@@ -45840,7 +45840,7 @@ components:
           description: The effective overview, or null before an overview is available.
           readOnly: true
         updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when this monitor was last updated.
           readOnly: true
       description: A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights.
@@ -45909,7 +45909,7 @@ components:
           description: The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.
           readOnly: true
         next_scheduled_run_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The next time a scheduled agent insight run will start. Omitted when scheduled generation is disabled.
           readOnly: true
         estimated_cost:
@@ -45923,7 +45923,7 @@ components:
           description: Why the system suspended scheduled generation. Null when the monitor is not suspended.
           readOnly: true
         updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when this monitor was last updated.
           readOnly: true
       description: An Agent Insights monitor summary returned by list operations.
@@ -46081,7 +46081,7 @@ components:
           description: Result produced on success.
           readOnly: true
         status:
-          $ref: '#/components/schemas/JobStatus'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.JobStatus'
           description: Current lifecycle status.
           readOnly: true
         error:
@@ -46101,27 +46101,27 @@ components:
           description: The trigger that started the run.
           readOnly: true
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when this run was created.
           readOnly: true
         updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when this run was last updated.
           readOnly: true
         window_start:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The start of the trace window analyzed by this run.
           readOnly: true
         window_end:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The end of the trace window analyzed by this run.
           readOnly: true
         started_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when this run started processing.
           readOnly: true
         completed_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when this run reached a terminal status.
           readOnly: true
         model_deployment_name:
@@ -46232,7 +46232,7 @@ components:
           type: string
           description: Human-readable description of the suspension.
         occurred_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when the suspension occurred.
         details:
           type: object
@@ -46293,7 +46293,7 @@ components:
           $ref: '#/components/schemas/AgentInsightOverviewSource'
           description: Where the effective overview came from.
         updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when this overview was last updated.
       description: The effective overview for an Agent Insights monitor.
       x-ms-foundry-meta:
@@ -46446,7 +46446,7 @@ components:
           $ref: '#/components/schemas/AgentOptimizationCandidateStatus'
           description: The candidate's current lifecycle state.
         started_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: Timestamp when work on this candidate slot began, represented in Unix time.
         output:
           $ref: '#/components/schemas/AgentOptimizationCandidateOutput'
@@ -46476,7 +46476,7 @@ components:
           format: double
           description: Average total tokens consumed per task. Omitted when token usage was not measured.
         avg_latency_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Average end-to-end latency per task, rounded to milliseconds.
         eval_id:
           type: string
@@ -46485,7 +46485,7 @@ components:
           type: string
           description: Foundry evaluation run identifier used to score this candidate. Omitted when unavailable.
         completed_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: Timestamp when full candidate evaluation completed, represented in Unix time. Omitted when unavailable.
       description: Comparative evaluation summary for a candidate.
     AgentOptimizationCandidateExpand:
@@ -46516,7 +46516,7 @@ components:
         - promoted_agent
       properties:
         promoted_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: Timestamp when promotion occurred, represented in Unix time.
         promoted_agent:
           $ref: '#/components/schemas/AgentReference'
@@ -46672,7 +46672,7 @@ components:
           $ref: '#/components/schemas/AgentOptimizationCostEstimate'
           description: Estimated monetary cost. Omitted when no contributing model has pricing data.
         prices_as_of:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: Timestamp of the pricing snapshot used for cost estimation, represented in Unix time. Omitted when no valid pricing snapshot is available.
       description: Result returned when estimating an agent-optimization job.
     AgentOptimizationEvaluationConfiguration:
@@ -46811,7 +46811,7 @@ components:
           description: Result produced on success.
           readOnly: true
         status:
-          $ref: '#/components/schemas/JobStatus'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.JobStatus'
           description: Current lifecycle status.
           readOnly: true
         error:
@@ -46832,15 +46832,15 @@ components:
           $ref: '#/components/schemas/AgentOptimizationConfigurationBase'
           description: Type-specific optimization configuration.
         run_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Duration for which the job has been running, in milliseconds.
           readOnly: true
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The timestamp when the job was created, represented in Unix time.
           readOnly: true
         updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The timestamp when the job was last updated, represented in Unix time.
           readOnly: true
         warnings:
@@ -46864,7 +46864,7 @@ components:
           type: string
           description: Model name or deployment name measured by this entry.
         avg_latency_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Average per-call latency, rounded to milliseconds.
         call_count:
           type: integer
@@ -47779,7 +47779,7 @@ components:
           maxLength: 512
           description: A human-readable description of the agent.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (seconds) when the agent was created.
         definition:
           $ref: '#/components/schemas/AgentDefinition'
@@ -50424,7 +50424,7 @@ components:
           description: Result produced on success.
           readOnly: true
         status:
-          $ref: '#/components/schemas/JobStatus'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.JobStatus'
           description: Current lifecycle status.
           readOnly: true
         error:
@@ -50446,11 +50446,11 @@ components:
           $ref: '#/components/schemas/DataGenerationJobScenario'
           description: The scenario of the data generation job. Either for fine-tuning or evaluation.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).
           readOnly: true
         finished_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).
           readOnly: true
       discriminator:
@@ -52459,7 +52459,7 @@ components:
           description: Result produced on success.
           readOnly: true
         status:
-          $ref: '#/components/schemas/JobStatus'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.JobStatus'
           description: Current lifecycle status.
           readOnly: true
         error:
@@ -52467,11 +52467,11 @@ components:
           description: Error details — populated only on failure.
           readOnly: true
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The timestamp when the job was created, represented in Unix time.
           readOnly: true
         finished_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The timestamp when the job finished, represented in Unix time.
           readOnly: true
         usage:
@@ -52655,10 +52655,10 @@ components:
           type: string
           description: The eval run ID created.
         status:
-          $ref: '#/components/schemas/JobStatus'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.JobStatus'
           description: Status of the run.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: Timestamp when the run was created.
       description: Result of a single evaluation run within a suite execution.
       x-ms-foundry-meta:
@@ -53192,7 +53192,7 @@ components:
           description: Result produced on success.
           readOnly: true
         status:
-          $ref: '#/components/schemas/JobStatus'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.JobStatus'
           description: Current lifecycle status.
           readOnly: true
         error:
@@ -53220,11 +53220,11 @@ components:
           type: string
           description: Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).
           readOnly: true
         finished_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The timestamp when the job finished, represented in Unix time (seconds since January 1, 1970).
           readOnly: true
         usage:
@@ -53795,14 +53795,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DatasetVersionUpdate'
       description: FileDatasetVersion Definition
-    FoundryDurationMilliseconds:
-      type: integer
-      format: int32
-      description: A duration encoded as an integer number of milliseconds.
-    FoundryDurationSeconds:
-      type: integer
-      format: int32
-      description: A duration encoded as an integer number of seconds.
     FoundryEvaluationTarget:
       type: object
       required:
@@ -53904,9 +53896,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Models=V1Preview
-    FoundryTimestamp:
-      type: integer
-      format: unixtime
     FunctionToolCall:
       type: object
       required:
@@ -54746,17 +54735,6 @@ components:
             - synthetic_data_gen
             - target_completion
       description: Identifies how evaluation input items are prepared before evaluation.
-    JobStatus:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - queued
-            - in_progress
-            - succeeded
-            - failed
-            - cancelled
-      description: Extensible status values shared by Foundry jobs.
     LatencySummary:
       type: object
       required:
@@ -55014,7 +54992,7 @@ components:
           type: string
           description: The unique ID of the memory item.
         updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The last update time of the memory item.
         scope:
           type: string
@@ -55319,10 +55297,10 @@ components:
           type: string
           description: The unique identifier of the memory store.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (seconds) when the memory store was created.
         updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (seconds) when the memory store was last updated.
         name:
           type: string
@@ -55479,6 +55457,35 @@ components:
           user: '#/components/schemas/UserMessage'
           assistant: '#/components/schemas/AssistantMessage'
       description: Abstract base model representing a single message in a conversation.
+    Microsoft.Foundry.Core.FoundryDurationMilliseconds:
+      type: integer
+      format: int32
+      description: A duration encoded as an integer number of milliseconds.
+    Microsoft.Foundry.Core.FoundryDurationSeconds:
+      type: integer
+      format: int32
+      description: A duration encoded as an integer number of seconds.
+    Microsoft.Foundry.Core.FoundryTimestamp:
+      type: integer
+      format: unixtime
+      description: A Unix timestamp (seconds since epoch) used throughout Foundry wire contracts.
+    Microsoft.Foundry.Core.JobStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - queued
+            - in_progress
+            - succeeded
+            - failed
+            - cancelled
+      description: Extensible status values shared by Foundry jobs.
+    Microsoft.Foundry.Core.PageOrder:
+      type: string
+      enum:
+        - asc
+        - desc
+      description: Sort order for paginated list results.
     Microsoft365PermissionScopes:
       type: object
       required:
@@ -75852,7 +75859,7 @@ components:
           type: string
           description: 'The arguments of the function call. This is a JSON-encoded string representing the arguments passed to the function, for example `{"arg1": "value1", "arg2": 42}`.'
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the item was persisted.
           readOnly: true
         response_id:
@@ -75902,7 +75909,7 @@ components:
           type: string
           description: The output of the function call, this is free text and can contain any information or simply be empty.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the item was persisted.
           readOnly: true
         response_id:
@@ -75983,7 +75990,7 @@ components:
             $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageAssistantContent'
           description: The content of the message.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the item was persisted.
           readOnly: true
         response_id:
@@ -76052,7 +76059,7 @@ components:
             $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageSystemContent'
           description: The content of the message.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the item was persisted.
           readOnly: true
         response_id:
@@ -76128,7 +76135,7 @@ components:
             $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageUserContent'
           description: The content of the message.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the item was persisted.
           readOnly: true
         response_id:
@@ -76344,7 +76351,7 @@ components:
           type: string
           description: A JSON string of arguments for the tool.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the item was persisted.
           readOnly: true
         response_id:
@@ -76386,7 +76393,7 @@ components:
             - type: string
             - type: 'null'
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the item was persisted.
           readOnly: true
         response_id:
@@ -76463,7 +76470,7 @@ components:
             $ref: '#/components/schemas/OpenAI.MCPListToolsTool'
           description: The tools available on the server.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the item was persisted.
           readOnly: true
         response_id:
@@ -76537,7 +76544,7 @@ components:
         error:
           $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the item was persisted.
           readOnly: true
         response_id:
@@ -84588,11 +84595,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    PageOrder:
-      type: string
-      enum:
-        - asc
-        - desc
     PagedConnection:
       type: object
       required:
@@ -85599,10 +85601,10 @@ components:
           $ref: '#/components/schemas/RoutineAction'
           description: The action executed when the routine fires.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when the routine was created.
         updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when the routine was last updated.
       description: A routine definition returned by the service.
       x-ms-foundry-meta:
@@ -85769,16 +85771,16 @@ components:
           type: string
           description: The hosted-agent session identifier used by an invocations API dispatch.
         triggered_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The logical trigger time recorded for the routine attempt.
         scheduled_fire_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The scheduled fire time recorded for timer and schedule deliveries.
         started_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when the underlying run started.
         ended_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The time when the underlying run reached a terminal state.
         dispatch_id:
           type: string
@@ -87522,7 +87524,7 @@ components:
           maxLength: 1024
           description: A human-readable description of the skill.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (seconds) when the skill was created.
         default_version:
           type: string
@@ -87615,7 +87617,7 @@ components:
           maxLength: 1024
           description: A human-readable description of the skill version.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (seconds) when the skill version was created.
       description: A specific version of a skill.
       x-ms-foundry-meta:
@@ -88420,7 +88422,7 @@ components:
           minimum: 0
           description: The number of provider attempts created so far.
         next_attempt_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp in seconds at which the next retry becomes eligible.
         terminal_reason:
           $ref: '#/components/schemas/TelephonyCallJobTerminalReason'
@@ -88431,10 +88433,10 @@ components:
           minimum: 0
           description: The monotonically increasing optimistic-concurrency revision.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp in seconds when the call job was created.
         updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp in seconds when the call job was last updated.
       description: A durable direct or campaign-created outbound call intent.
       x-ms-foundry-meta:
@@ -88455,7 +88457,7 @@ components:
           type: string
           description: The cancellation mode applied to the call job.
         requested_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp in seconds when cancellation was requested.
         revision:
           type: integer
@@ -88476,10 +88478,10 @@ components:
       type: object
       properties:
         not_before:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The earliest instant at which dispatch may begin.
         expires_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The instant after which the call job expires without dispatch.
       description: The optional execution window for a direct outbound call.
       x-ms-foundry-meta:
@@ -88562,10 +88564,10 @@ components:
           $ref: '#/components/schemas/TelephonyCallLifecycleEventOutcome'
           description: The outcome of the observed lifecycle operation.
         observed_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the service observed the event.
         occurred_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the event occurred according to the provider.
         timestamp_source:
           $ref: '#/components/schemas/TelephonyCallTimestampSource'
@@ -88742,22 +88744,22 @@ components:
           $ref: '#/components/schemas/TelephonyCallPhase'
           description: The provider-neutral lifecycle phase reached by the call.
         started_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the inbound webhook was received.
         answered_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the provider reported the call as answered.
         media_connected_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the provider media channel connected.
         agent_session_ready_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the voice-agent session became ready.
         ended_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the call ended.
         duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: The call duration.
         end_reason:
           $ref: '#/components/schemas/TelephonyCallEndReason'
@@ -88841,22 +88843,22 @@ components:
           $ref: '#/components/schemas/TelephonyCallPhase'
           description: The provider-neutral lifecycle phase reached by the call.
         started_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the inbound webhook was received.
         answered_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the provider reported the call as answered.
         media_connected_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the provider media channel connected.
         agent_session_ready_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the voice-agent session became ready.
         ended_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the call ended.
         duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: The call duration.
         end_reason:
           $ref: '#/components/schemas/TelephonyCallEndReason'
@@ -88898,34 +88900,34 @@ components:
         - timestamp_source
       properties:
         received_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the provider webhook was received.
         validated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when webhook validation completed.
         admitted_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the call was admitted to an agent binding.
         answer_requested_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the service requested that the provider answer the call.
         answered_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the provider reported that the call was answered.
         media_connected_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the provider media channel connected.
         agent_session_ready_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the voice-agent session became ready.
         first_caller_audio_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when caller audio was first observed.
         first_agent_audio_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when agent audio was first observed.
         ended_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the call reached a terminal state.
         duration_basis:
           $ref: '#/components/schemas/TelephonyCallDurationBasis'
@@ -89041,7 +89043,7 @@ components:
             - fixed_interval
           description: The fixed-interval retry strategy.
         interval:
-          $ref: '#/components/schemas/FoundryDurationSeconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationSeconds'
           description: The fixed delay in seconds between attempts.
       allOf:
         - $ref: '#/components/schemas/TelephonyOutboundRetryPolicy'
@@ -89248,7 +89250,7 @@ components:
             - timer
           description: The trigger type.
         at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The UTC date and time at which the timer fires.
       allOf:
         - $ref: '#/components/schemas/RoutineTrigger'
@@ -89357,7 +89359,7 @@ components:
           maxLength: 256
           description: The name of the toolbox.
         updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (seconds) when the toolbox was last updated. This value changes when a new toolbox version is created or the toolbox is updated.
         versions:
           $ref: '#/components/schemas/ToolboxVersions'
@@ -89728,10 +89730,10 @@ components:
           type: string
           description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
         start_time:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: Start of the time window (Unix timestamp in seconds) for fetching traces.
         end_time:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: End of the time window (Unix timestamp in seconds). Defaults to current time.
         trace_ids:
           type: array
@@ -89775,7 +89777,7 @@ components:
                 For scheduled evaluations this is inferred from the recurrence interval.
           default: 168
         end_time:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: Unix timestamp (in seconds) marking the end of the trace query window. Defaults to the current time.
         max_traces:
           type: integer
@@ -89817,10 +89819,10 @@ components:
           type: string
           description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
         start_time:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: Start of the time window (Unix timestamp in seconds) for fetching traces.
         end_time:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: End of the time window (Unix timestamp in seconds). Defaults to current time.
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
@@ -89852,10 +89854,10 @@ components:
           type: string
           description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
         start_time:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: Start of the time window (Unix timestamp in seconds) for fetching traces.
         end_time:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: End of the time window (Unix timestamp in seconds). Defaults to current time.
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
@@ -90745,13 +90747,13 @@ components:
           maximum: 1
           description: Activation threshold for voice activity detection, from 0 to 1.
         prefix_padding_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Audio to include before detected speech, in milliseconds.
         silence_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Silence required to end speech detection, in milliseconds.
         idle_timeout_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Maximum idle time before the detector ends the turn, in milliseconds.
         end_of_utterance_detection:
           anyOf:
@@ -90759,7 +90761,7 @@ components:
             - type: 'null'
           description: Semantic end-of-utterance detection configuration. Set to null to disable it.
         speech_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Minimum speech duration required to trigger detection, in milliseconds.
         remove_filler_words:
           type: boolean
@@ -90795,13 +90797,13 @@ components:
           maximum: 1
           description: Activation threshold for voice activity detection, from 0 to 1.
         prefix_padding_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Audio to include before detected speech, in milliseconds.
         silence_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Silence required to end speech detection, in milliseconds.
         idle_timeout_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Maximum idle time before the detector ends the turn, in milliseconds.
         end_of_utterance_detection:
           anyOf:
@@ -90809,7 +90811,7 @@ components:
             - type: 'null'
           description: Semantic end-of-utterance detection configuration. Set to null to disable it.
         speech_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Minimum speech duration required to trigger detection, in milliseconds.
         remove_filler_words:
           type: boolean
@@ -90850,13 +90852,13 @@ components:
           maximum: 1
           description: Activation threshold for voice activity detection, from 0 to 1.
         prefix_padding_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Audio to include before detected speech, in milliseconds.
         silence_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Silence required to end speech detection, in milliseconds.
         idle_timeout_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Maximum idle time before the detector ends the turn, in milliseconds.
         end_of_utterance_detection:
           anyOf:
@@ -90864,7 +90866,7 @@ components:
             - type: 'null'
           description: Semantic end-of-utterance detection configuration. Set to null to disable it.
         speech_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Minimum speech duration required to trigger detection, in milliseconds.
         remove_filler_words:
           type: boolean
@@ -91049,7 +91051,7 @@ components:
           $ref: '#/components/schemas/VoiceAgentEndOfUtteranceThresholdLevel'
           description: The sensitivity threshold.
         timeout_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: The detection timeout in milliseconds.
       description: Semantic end-of-utterance detection configuration.
       x-ms-foundry-meta:
@@ -91466,7 +91468,7 @@ components:
           enum:
             - server_vad
         speech_duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: Minimum speech duration required to trigger detection, in milliseconds.
         end_of_utterance_detection:
           anyOf:
@@ -91841,10 +91843,10 @@ components:
           format: int32
           description: The number of audio channels.
         start_offset_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: The offset from the session start at which this segment begins.
         duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: The duration of the audio segment.
         blob_uri:
           type: string
@@ -91889,10 +91891,10 @@ components:
           $ref: '#/components/schemas/VoiceConversationStatus'
           description: The lifecycle status of the conversation.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the conversation was created.
         completed_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when session and persistence finalization reached the terminal `completed` or `failed` status. Absent while `status` is `in_progress`.
         metadata:
           type: object
@@ -91976,10 +91978,10 @@ components:
           format: int32
           description: The number of audio channels.
         start_offset_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: The offset from the session start at which this segment begins.
         duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: The duration of the audio segment.
         blob_uri:
           type: string
@@ -92077,7 +92079,7 @@ components:
           $ref: '#/components/schemas/VoiceRecordingChannelLayout'
           description: The role assigned to each stereo channel.
         duration_ms:
-          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryDurationMilliseconds'
           description: The total duration of the recording.
         blob_uri:
           type: string
@@ -92144,10 +92146,10 @@ components:
           format: float
           description: The sampling temperature used for the response.
         created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the response was created.
         completed_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
+          $ref: '#/components/schemas/Microsoft.Foundry.Core.FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the response completed.
       allOf:
         - $ref: '#/components/schemas/VoiceResponseBase'

@@ -4,6 +4,8 @@ import "../../common/models.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 /** Optional response header containing the session ID for hosted agent requests. */

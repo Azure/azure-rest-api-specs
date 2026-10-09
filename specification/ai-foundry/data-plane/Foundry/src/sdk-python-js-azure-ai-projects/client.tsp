@@ -47,6 +47,12 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects, "AIProjectClient");
 
+// Pin generated model names after migrating PageOrder/JobStatus to reuse the
+// Microsoft.Foundry.Core library union definitions: TCGC would otherwise derive
+// names from the library's namespace-qualified declarations.
+@@clientName(PageOrder, "PageOrder");
+@@clientName(JobStatus, "JobStatus");
+
 // --------------------------------------------------------------------------------
 // Namespace remapping
 // --------------------------------------------------------------------------------

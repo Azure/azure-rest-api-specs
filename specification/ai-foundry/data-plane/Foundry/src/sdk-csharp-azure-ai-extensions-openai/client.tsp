@@ -1004,4 +1004,9 @@ namespace Azure.AI.Projects {
   @@access(ApiError, Access.public);
 
   @@usage(StructuredOutputsOutputItem, Usage.input | Usage.output);
+
+  // Pin generated model names after migrating PageOrder/JobStatus to reuse the
+  // Microsoft.Foundry.Core library union definitions.
+  @@clientName(PageOrder, "PageOrder");
+  @@clientName(JobStatus, "JobStatus");
 }

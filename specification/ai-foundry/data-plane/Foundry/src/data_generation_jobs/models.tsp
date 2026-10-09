@@ -3,6 +3,8 @@ import "../common/servicepatterns.tsp";
 
 using TypeSpec.OpenAPI;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 const DataGenerationJobsRequiredPreviews = #{
@@ -151,7 +153,7 @@ model DataGenerationJobResult {
 
 @doc("Data Generation Job resource.")
 @discriminator("scenario")
-model DataGenerationJob is JobLike<DataGenerationJobResult, never> {
+model DataGenerationJob is JobLike<ApiError, DataGenerationJobResult, never> {
   @doc("The display name of the data generation job.")
   name: string;
 

@@ -5,6 +5,7 @@ using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Microsoft.Foundry.Core;
 
 /** Error response for API failures. */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
