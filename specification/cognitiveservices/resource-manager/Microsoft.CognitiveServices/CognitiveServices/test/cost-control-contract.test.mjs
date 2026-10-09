@@ -105,7 +105,7 @@ test("legacy values stay readable while current authoring restrictions are docum
   }
 });
 
-test("agent filters use resource IDs and preserve the accepted non-agent aliases", () => {
+test("agent filters use resource IDs without expanding unchanged non-agent filters", () => {
   const match = definitions.CostControlMatch.properties;
   assert.equal(Object.hasOwn(match, "agentIds"), false);
   assert.equal(Object.hasOwn(match, "foundry.caller.agent.id"), false);
@@ -119,31 +119,32 @@ test("agent filters use resource IDs and preserve the accepted non-agent aliases
     match.agentResourceIds.description,
     /Agent resource IDs use \/subscriptions\//,
   );
-  for (const [wire, client] of [
-    ["foundry.caller.identity.oid", "legacyIdentityObjectIds"],
-    ["foundry.caller.session.id", "legacySessionIds"],
-    ["foundry.project.id", "legacyProjectIds"],
-  ]) {
-    assert.equal(match[wire]["x-ms-client-name"], client);
-    assert.equal(match[wire].maxItems, 20);
-  }
+  assert.deepEqual(Object.keys(match).sort(), [
+    "agentResourceIds",
+    "identityObjectIds",
+    "projectIds",
+    "sessionIds",
+  ]);
 });
 
-test("token budgets share one amount without inventing a selection default", () => {
-  assert(definitions.CostControlUnit.enum.includes("Tokens"));
-  const selection = definitions.CostControlRule.properties.tokenTypes;
-  assert.equal(selection.minItems, 1);
-  assert.equal(selection.default, undefined);
-  assert.equal(selection["x-nullable"], undefined);
-  assert.equal(selection.items.$ref, "#/definitions/CostControlTokenType");
-  assert.deepEqual(definitions.CostControlTokenType.enum, ["input", "output"]);
+test("unchanged token capabilities stay outside this USD-only preview scope", () => {
+  assert.deepEqual(definitions.CostControlUnit.enum, ["Usd"]);
   assert.equal(
-    definitions.CostControlTokenType["x-ms-enum"].modelAsString,
-    true,
+    Object.hasOwn(definitions.CostControlRule.properties, "tokenTypes"),
+    false,
   );
-  assert.match(
-    definitions.CostControlRule.properties.amount.description,
-    /positive whole count/,
+  assert.equal(Object.hasOwn(definitions, "CostControlTokenType"), false);
+  assert.equal(
+    readdirSync(examples).includes("createOrUpdateTokens.json"),
+    false,
+  );
+  assert.equal(
+    JSON.stringify(definitions.CostControlRule).includes("Tokens"),
+    false,
+  );
+  assert.equal(
+    JSON.stringify(definitions.CostControlThreshold).includes("token"),
+    false,
   );
 });
 
@@ -161,7 +162,10 @@ test("Application Insights remains optional and Event Grid protects Alert attach
     /Event Grid is required for alerts/,
   );
   assert.match(app.description, /optional Application Insights connection/);
-  assert.match(event.description, /optional Event Grid connection/);
+  assert.match(
+    event.description,
+    /must be configured when an attached cost control contains an alert/,
+  );
   assert.equal(app["x-nullable"], true);
   assert.equal(event["x-nullable"], true);
 });
@@ -236,20 +240,13 @@ test("canonical authoring examples and legacy metadata updates are coherent", ()
     metadata.responses["200"].body.properties.rules[0].counterKey.type,
     "Custom",
   );
-  const tokens = cases.find(
-    (value) => value.file === "createOrUpdateTokens.json",
+  const create = cases.find(
+    (value) => value.file === "createOrUpdate.json",
   ).example;
-  assert.deepEqual(tokens.parameters.resource.properties.rules[0].tokenTypes, [
-    "input",
-    "output",
-  ]);
-  assert.equal(
-    Object.hasOwn(tokens.parameters.resource.properties.rules[1], "thresholds"),
-    false,
-  );
+  assert.equal(create.parameters["If-None-Match"], "*");
 });
 
-test("both entrypoints preserve canonical SDK fields and legacy compatibility members", async () => {
+test("both entrypoints expose only the scoped backend updates in SDK model graphs", async () => {
   for (const entry of ["main.tsp", "client.tsp"]) {
     const program = await compile(NodeHost, new URL(entry, project).pathname, {
       noEmit: true,
@@ -302,8 +299,26 @@ test("both entrypoints preserve canonical SDK fields and legacy compatibility me
       );
       assert(
         match.properties.some(
-          (property) => property.serializedName === "foundry.project.id",
+          (property) => property.serializedName === "identityObjectIds",
         ),
+      );
+      assert.equal(
+        match.properties.some((property) =>
+          property.serializedName.startsWith("foundry."),
+        ),
+        false,
+      );
+      assert.equal(
+        rule.properties.some(
+          (property) => property.serializedName === "tokenTypes",
+        ),
+        false,
+      );
+      assert.equal(
+        context.sdkPackage.models.some(
+          (model) => model.__raw?.name === "CostControlTokenType",
+        ),
+        false,
       );
     }
   }

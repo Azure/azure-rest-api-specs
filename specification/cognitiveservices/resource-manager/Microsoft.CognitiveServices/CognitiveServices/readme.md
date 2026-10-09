@@ -59,13 +59,6 @@ suppressions:
       - $.definitions.RaiAcsModerationBindingExtension.properties.harm_configs
       - $.definitions.RaiAcsPolicyBinding.properties.aacs_moderation
       - $.definitions.RaiAcsToolDefinition.properties.security_labels
-  - code: DefinitionsPropertiesNamesCamelCase
-    reason: CostControlMatch preserves the three existing dotted identity, session, and project filter aliases accepted by the service and returned by stored legacy definitions. Removing them from the schema would discard filters during generated-client round-trips. New authoring should prefer the canonical camelCase fields; x-ms-client-name gives the compatibility fields idiomatic SDK names.
-    from: cognitiveservices.json
-    where:
-      - $.definitions.CostControlMatch.properties["foundry.caller.identity.oid"]
-      - $.definitions.CostControlMatch.properties["foundry.caller.session.id"]
-      - $.definitions.CostControlMatch.properties["foundry.project.id"]
   - code: AvoidAdditionalProperties
     reason: The canonical ACS manifest defines metadata and tool entries as extensible JSON objects, and policies and tools as name-keyed maps. Replacing these objects with closed properties or arrays would break ACS manifest portability and round-tripping.
     from: cognitiveservices.json

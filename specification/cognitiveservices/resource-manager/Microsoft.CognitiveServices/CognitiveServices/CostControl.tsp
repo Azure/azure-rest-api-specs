@@ -108,7 +108,7 @@ model CostControlConnections {
     | null;
 
   /**
-   * Gets or sets the full resource ID of the optional Event Grid connection.
+   * The full resource ID of the Event Grid connection used for cost control alerts. This connection must be configured when an attached cost control contains an alert threshold action and cannot be removed while such an action remains attached.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted eventGridConnectionId from an explicit null in PATCH so callers can clear the value."
   eventGridConnectionId?:
@@ -121,7 +121,7 @@ model CostControlConnections {
 }
 
 /**
- * Defines a cost control limit and the population to which it applies.
+ * A cost limit and the population to which it applies.
  */
 @added(Versions.v2026_09_15_preview)
 model CostControlRule {
@@ -148,20 +148,10 @@ model CostControlRule {
   unit: CostControlUnit;
 
   /**
-   * Gets or sets the total budget. Tokens require a positive whole count representable by Int64;
-   * USD continues to support decimal amounts. Selected token types share this one amount.
+   * The maximum consumption allowed by this rule, expressed in the selected unit.
    */
   @minValueExclusive(0)
   amount: float64;
-
-  /**
-   * Gets or sets the token measurements sharing the single amount: input and/or output.
-   * Omitted means overall tokens; an explicit selection must be nonempty and is only valid for tokens.
-   * Output includes reasoning; reasoning is not separately selectable in this version.
-   * Known names use canonical casing/order; unknown future names are retained by readers.
-   */
-  @minItems(1)
-  tokenTypes?: CostControlTokenType[];
 
   /**
    * Gets or sets the calendar-aligned UTC renewal period. Authored rules support Day, Week, or Month.
@@ -233,30 +223,6 @@ model CostControlMatch {
       type: "Microsoft.CognitiveServices/accounts/projects";
     }
   ]>[];
-
-  /**
-   * Legacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key.
-   */
-  @encodedName("application/json", "foundry.caller.identity.oid")
-  @minItems(1)
-  @maxItems(20)
-  legacyIdentityObjectIds?: CostControlMatchValue[];
-
-  /**
-   * Legacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key.
-   */
-  @encodedName("application/json", "foundry.caller.session.id")
-  @minItems(1)
-  @maxItems(20)
-  legacySessionIds?: CostControlMatchValue[];
-
-  /**
-   * Legacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key.
-   */
-  @encodedName("application/json", "foundry.project.id")
-  @minItems(1)
-  @maxItems(20)
-  legacyProjectIds?: CostControlMatchValue[];
 }
 
 /**
@@ -267,7 +233,7 @@ model CostControlMatch {
 scalar CostControlMatchValue extends string;
 
 /**
- * Identifies the request dimension used to partition tracked consumption.
+ * A request dimension used to partition cost control consumption.
  */
 @added(Versions.v2026_09_15_preview)
 model CostControlDimension {
@@ -294,7 +260,7 @@ union CostControlDimensionType {
   string,
 
   /**
-   * Partitions consumption by the stable Foundry agent ID.
+   * Consumption is partitioned by the stable Foundry agent ID.
    */
   Agent: "Agent",
 
@@ -326,7 +292,7 @@ union CostControlDimensionType {
 }
 
 /**
- * Supported units for cost control amounts and thresholds.
+ * The supported unit for cost control amounts and thresholds.
  */
 @added(Versions.v2026_09_15_preview)
 union CostControlUnit {
@@ -336,25 +302,6 @@ union CostControlUnit {
    * Estimated cost in United States dollars.
    */
   Usd: "Usd",
-
-  /**
-   * Overall tokens or the selected union of token measurements.
-   */
-  Tokens: "Tokens",
-}
-
-/**
- * Extensible string identifiers for the measurements included in a combined token budget.
- */
-@added(Versions.v2026_09_15_preview)
-union CostControlTokenType {
-  string,
-
-  /** Inclusive input tokens. */
-  Input: "input",
-
-  /** Inclusive output tokens, including reasoning. */
-  Output: "output",
 }
 
 /**
@@ -390,7 +337,7 @@ union CostControlPeriod {
 }
 
 /**
- * Defines an action taken when tracked consumption reaches a threshold.
+ * An action evaluated when cost control consumption reaches a threshold.
  */
 @added(Versions.v2026_09_15_preview)
 model CostControlThreshold {
@@ -402,8 +349,6 @@ model CostControlThreshold {
   /**
    * Gets or sets the threshold value. Legacy Audit definitions retain their stored values;
    * new thresholds support only Alert or Block.
-   * Absolute token thresholds require whole counts representable by Int64.
-   * Percentage thresholds and absolute USD thresholds retain decimal semantics.
    */
   @minValue(0)
   value: float64;
@@ -434,7 +379,7 @@ union CostControlThresholdType {
 }
 
 /**
- * Supported actions when a threshold is reached.
+ * The supported actions when a threshold is reached.
  */
 @added(Versions.v2026_09_15_preview)
 union CostControlThresholdAction {
