@@ -69,7 +69,7 @@ model GoalsData {
   zonalResiliency?: UnifiedResilienceItemGoalRequirement;
 
   @doc("Regional resiliency goal copied from the goal assignment.")
-  @added(Versions.v2026_09_30_preview)
+  @added(Versions.v2026_10_31_preview)
   regionalResiliency?: UnifiedResilienceItemGoalRequirement;
 
   @doc("Regional RPO set in resilience goal in minutes.")
@@ -147,7 +147,7 @@ model UnifiedResilienceItemZonalResiliencyPosture {
   evaluationDateTime?: utcDateTime;
 }
 
-@added(Versions.v2026_09_30_preview)
+@added(Versions.v2026_10_31_preview)
 @doc("Definition of the regional resiliency posture computed for the unified resilience item.")
 model UnifiedResilienceItemRegionalResiliencyPosture {
   @doc("Count of resources that have regional resiliency enabled.")
@@ -176,6 +176,7 @@ model UnifiedResilienceItemResiliencyPosture {
   zonalResiliency: UnifiedResilienceItemZonalResiliencyPosture;
 
   @doc("The regional resiliency section of the resiliency posture.")
+  @added(Versions.v2026_10_31_preview)
   regionalResiliency?: UnifiedResilienceItemRegionalResiliencyPosture;
 }
 

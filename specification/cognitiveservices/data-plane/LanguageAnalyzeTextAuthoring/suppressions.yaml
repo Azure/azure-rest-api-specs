@@ -1,0 +1,18 @@
+- tool: TypeSpecRequirement
+  path: ./stable/2022-05-01/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2023-11-15-preview/*.json
+  reason: Brownfield service not ready to migrate
+
+- tool: TypeSpecValidation
+  paths:
+    - tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    # Suppress all Java, JS and Go SDK generator validations as this is currently only available in C# and Python
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-ts.*
+    - options.@azure-tools/typespec-go.*
+  reason: 'No existing SDKs in Java, JS, Go. Will be removed once these SDKs are introduced'

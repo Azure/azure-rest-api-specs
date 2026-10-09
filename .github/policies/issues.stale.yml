@@ -1,6 +1,6 @@
 id: issues.stale
 name: Stale Issues
-description: Mark and close stale issues
+description: Manage stale issues
 owner:
 resource: repository
 disabled: false
@@ -73,6 +73,8 @@ configuration:
               label: needs-author-feedback
           - isOpen
         then:
+          - unassign:
+              author: true
           - addLabel:
               label: needs-team-attention
           - removeLabel:
@@ -81,6 +83,7 @@ configuration:
       - description: Remove the stale label when an issue changes
         if:
           - payloadType: Issues
+          - isIssue
           - not:
               isAction:
                 action: Closed

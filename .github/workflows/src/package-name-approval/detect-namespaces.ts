@@ -1,13 +1,10 @@
-import { execFile as execFileCb } from "child_process";
-import { existsSync } from "fs";
-import { readFile, writeFile } from "fs/promises";
-import { dirname, join } from "path";
-import { promisify } from "util";
+import { existsSync } from "node:fs";
+import { writeFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
 import { getChangedFilesStatuses, tspconfig } from "../../../shared/src/changed-files.ts";
-import type { Core, WebhookEvent } from "../github.ts";
+import { generateTypeSpecMetadata } from "../../../shared/src/typespec-metadata.ts";
+import type { Core, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import { loadFormatRules, validateAllNamespaces } from "./validate-format.ts";
-
-const execFileAsync = promisify(execFileCb);
 
 // ---------------------------------------------------------------------------
 // Metadata emitter language key mapping
@@ -32,27 +29,6 @@ const METADATA_LANG_MAP: Record<string, string> = {
 // tsp compile with typespec-metadata emitter
 // ---------------------------------------------------------------------------
 
-export type LanguageMetadata = {
-  emitterName: string;
-  packageName: string;
-  namespace?: string;
-  outputDir?: string;
-  flavor?: string;
-  serviceDir?: string;
-};
-
-export type TypeSpecMetadata = {
-  emitterVersion: string;
-  generatedAt: string;
-  typespec: {
-    namespace: string;
-    documentation?: string;
-    type: "data" | "management";
-  };
-  languages: Record<string, LanguageMetadata[]>;
-  sourceConfigPath: string;
-};
-
 export type EmitterResult = {
   packageNames: Record<string, string>;
   namespaces: Record<string, string>;
@@ -75,39 +51,11 @@ async function runMetadataEmitter(
 
   const namespaces: Record<string, string> = {};
 
-  const metadataOutputDir = join(tspConfigDir, "@azure-tools", "typespec-metadata");
-  const jsonPath = join(metadataOutputDir, "typespec-metadata.json");
-
-  const tspArgs = [
-    "tsp",
-    "compile",
+  const metadata = await generateTypeSpecMetadata(tspConfigDir, {
     entrypoint,
-    "--emit",
-    "@azure-tools/typespec-metadata",
-    "--output-dir",
-    tspConfigDir,
-    "--option",
-    "@azure-tools/typespec-metadata.format=json",
-  ];
-
-  core.info(`Running: npx ${tspArgs.join(" ")}`);
-
-  const { stderr } = await execFileAsync("npx", tspArgs, {
-    cwd: tspConfigDir,
     timeout: 120_000,
+    logger: core,
   });
-
-  if (stderr) {
-    core.warning(`typespec-metadata emitter warnings: ${stderr}`);
-  }
-
-  if (!existsSync(jsonPath)) {
-    throw new Error(`typespec-metadata output not found at ${jsonPath}`);
-  }
-
-  const raw = await readFile(jsonPath, "utf8");
-
-  const metadata = JSON.parse(raw) as unknown as TypeSpecMetadata;
 
   for (const [langKey, entries] of Object.entries(metadata.languages)) {
     const normalizedLang = METADATA_LANG_MAP[langKey] || langKey;
@@ -220,10 +168,7 @@ function filterUnchanged(
  * Compiles both PR head and base branch using tsp compile with the typespec-metadata
  * emitter to reliably extract package names, then reports only changed entries.
  */
-export default async function detectNamespaces({
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+export default async function detectNamespaces({ context, core }: GitHubScriptArgs) {
   const payload = context.payload as WebhookEvent<"pull-request">;
 
   const cwd = process.env.GITHUB_WORKSPACE ?? process.cwd();

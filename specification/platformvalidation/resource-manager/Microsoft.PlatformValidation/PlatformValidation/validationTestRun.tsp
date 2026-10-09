@@ -11,7 +11,10 @@ namespace Microsoft.PlatformValidation;
 @doc("Validation Test Run represents execution instance(s) of a Validation Test instance under execution plan.")
 @parentResource(ExecutionPlanRun)
 model ValidationTestRun is ProxyResource<ValidationTestRunProperties> {
-  ...ResourceNameParameter<ValidationTestRun>;
+  ...ResourceNameParameter<
+    ValidationTestRun,
+    NamePattern = "^[a-zA-Z0-9-]{1,90}$"
+  >;
 }
 
 @doc("Validation Test Run properties.")

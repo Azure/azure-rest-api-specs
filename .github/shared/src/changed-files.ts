@@ -1,10 +1,6 @@
-import debug from "debug";
 import { simpleGit } from "simple-git";
 import { KeyedCache } from "./cache.ts";
 import { includesSegment } from "./path.ts";
-
-// Enable simple-git debug logging to improve console output
-debug.enable("simple-git");
 
 // Cache results of the `example` filter, using the un-resolved path for maximum perf
 // The `example` filter is a hot path in spec-model for large specs like "network".
@@ -12,7 +8,7 @@ debug.enable("simple-git");
 const exampleCache: KeyedCache<string, boolean> = new KeyedCache();
 
 /**
- * Get a list of changed files in a git repository
+ * Get a list of changed files in a git repository, using NUL-delimited output to preserve paths.
  * @returns List of changed files, using posix paths, relative to repo root. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(
@@ -34,11 +30,6 @@ export async function getChangedFiles(
     paths = [],
   } = options;
 
-  if (paths.length > 0) {
-    // Use "--" to separate paths from revisions
-    paths.unshift("--");
-  }
-
   // TODO: If we need to filter based on status, instead of passing an argument to `--diff-filter,
   // consider using "--name-status" instead of "--name-only", and return an array of objects like
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
@@ -46,29 +37,30 @@ export async function getChangedFiles(
   // filter based on status with a single call to `git diff`.
   const result = await simpleGit(cwd).diff([
     "--name-only",
+    "-z",
     ...gitOptions,
     baseCommitish,
     headCommitish,
-    ...paths,
+    ...(paths.length > 0 ? ["--", ...paths] : []),
   ]);
 
   const files = result
-    .trim()
-    .split("\n")
-    // ignore empty lines (e.g. when no files are changed)
+    .split("\0")
+    // Ignore the trailing separator (and empty output), without trimming filenames.
     .filter((s) => s.length > 0);
-  logger?.info("Changed Files:");
+  logger?.debug("Changed Files:");
   for (const file of files) {
-    logger?.info(`  ${file}`);
+    logger?.debug(`  ${file}`);
   }
-  logger?.info("");
+  logger?.debug("");
 
   return files;
 }
 
 /**
  * Get a list of changed files in a git repository with statuses for additions,
- * modifications, deletions, and renames. Warning: rename behavior can vary
+ * modifications, deletions, and renames. Uses NUL-delimited output to preserve paths.
+ * Warning: rename behavior can vary
  * based on the git client's configuration of diff.renames.
  */
 export async function getChangedFilesStatuses(
@@ -96,17 +88,13 @@ export async function getChangedFilesStatuses(
     paths = [],
   } = options;
 
-  if (paths.length > 0) {
-    // Use "--" to separate paths from revisions
-    paths.unshift("--");
-  }
-
   const result = await simpleGit(cwd).diff([
     "--name-status",
+    "-z",
     ...gitOptions,
     baseCommitish,
     headCommitish,
-    ...paths,
+    ...(paths.length > 0 ? ["--", ...paths] : []),
   ]);
 
   const categorizedFiles = {
@@ -120,78 +108,80 @@ export async function getChangedFilesStatuses(
     total: 0,
   };
 
-  if (result.trim()) {
-    const lines = result.trim().split("\n");
-
-    for (const line of lines) {
-      const parts = line.split("\t");
-      const status = parts[0];
-
-      switch (status[0]) {
-        case "A":
-          categorizedFiles.additions.push(parts[1]);
-          break;
-        case "M":
-          categorizedFiles.modifications.push(parts[1]);
-          break;
-        case "D":
-          categorizedFiles.deletions.push(parts[1]);
-          break;
-        case "R":
-          categorizedFiles.renames.push({
-            from: parts[1],
-            to: parts[2],
-          });
-          break;
-        case "C":
-          categorizedFiles.additions.push(parts[2]);
-          break;
-        default:
-          categorizedFiles.modifications.push(parts[1]);
-      }
+  const fields = result.split("\0");
+  if (fields.at(-1) === "") fields.pop();
+  for (let index = 0; index < fields.length; index++) {
+    const status = fields[index];
+    const path = fields[++index];
+    if (!status || !path) {
+      throw new Error("Invalid NUL-delimited git diff --name-status output");
     }
 
-    categorizedFiles.total =
-      categorizedFiles.additions.length +
-      categorizedFiles.modifications.length +
-      categorizedFiles.deletions.length +
-      categorizedFiles.renames.length;
+    switch (status[0]) {
+      case "A":
+        categorizedFiles.additions.push(path);
+        break;
+      case "D":
+        categorizedFiles.deletions.push(path);
+        break;
+      case "R":
+      case "C": {
+        const destination = fields[++index];
+        if (!destination) {
+          throw new Error("Missing destination in git diff rename/copy record");
+        }
+        if (status[0] === "R") {
+          categorizedFiles.renames.push({ from: path, to: destination });
+        } else {
+          categorizedFiles.additions.push(destination);
+        }
+        break;
+      }
+      default:
+        categorizedFiles.modifications.push(path);
+    }
   }
+
+  categorizedFiles.total =
+    categorizedFiles.additions.length +
+    categorizedFiles.modifications.length +
+    categorizedFiles.deletions.length +
+    categorizedFiles.renames.length;
 
   // Log all changed files by categories
   if (logger) {
-    logger.info("Categorized Changed Files:");
+    logger.debug("Categorized Changed Files:");
 
     if (categorizedFiles.additions.length > 0) {
-      logger.info(`  Additions (${categorizedFiles.additions.length}):`);
+      logger.debug(`  Additions (${categorizedFiles.additions.length}):`);
       for (const file of categorizedFiles.additions) {
-        logger.info(`    + ${file}`);
+        logger.debug(`    + ${file}`);
       }
     }
 
     if (categorizedFiles.modifications.length > 0) {
-      logger.info(`  Modifications (${categorizedFiles.modifications.length}):`);
+      logger.debug(`  Modifications (${categorizedFiles.modifications.length}):`);
       for (const file of categorizedFiles.modifications) {
-        logger.info(`    M ${file}`);
+        logger.debug(`    M ${file}`);
       }
     }
 
     if (categorizedFiles.deletions.length > 0) {
-      logger.info(`  Deletions (${categorizedFiles.deletions.length}):`);
+      logger.debug(`  Deletions (${categorizedFiles.deletions.length}):`);
       for (const file of categorizedFiles.deletions) {
-        logger.info(`    - ${file}`);
+        logger.debug(`    - ${file}`);
       }
     }
 
     if (categorizedFiles.renames.length > 0) {
-      logger.info(`  Renames (${categorizedFiles.renames.length}):`);
+      logger.debug(`  Renames (${categorizedFiles.renames.length}):`);
       for (const rename of categorizedFiles.renames) {
-        logger.info(`    R ${rename.from} -> ${rename.to}`);
+        logger.debug(`    R ${rename.from} -> ${rename.to}`);
       }
     }
 
-    logger.info(`  Total: ${categorizedFiles.total} files`);
-    logger.info("");
+    logger.debug(`  Total: ${categorizedFiles.total} files`);
+    logger.debug("");
   }
 
   return categorizedFiles;

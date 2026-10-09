@@ -24,6 +24,21 @@ namespace Microsoft.AppLink;
 @@clientName(UpgradeReleaseChannel, "AppLinkUpgradeReleaseChannel", "csharp");
 @@clientName(ConnectivityProfile, "AppLinkConnectivityProfile", "csharp");
 @@clientName(UpgradeProfile, "AppLinkUpgradeProfile", "csharp");
+@@clientName(
+  ConnectivityProfileUpdate,
+  "AppLinkConnectivityProfilePatch",
+  "csharp"
+);
+@@clientName(
+  UpgradeProfileUpdate,
+  "AppLinkMemberUpgradeProfilePatch",
+  "csharp"
+);
+@@clientName(
+  ManagedServiceIdentityUpdate,
+  "AppNetworkManagedServiceIdentityPatch",
+  "csharp"
+);
 @@clientName(ReleaseChannelInfo, "AppLinkReleaseChannelInfo", "csharp");
 @@clientName(VersionInfo, "AppLinkVersionInfo", "csharp");
 @@clientName(AvailableVersion, "AppLinkAvailableVersion", "csharp");

@@ -206,7 +206,7 @@ interface VolumesOperations {
       ...AzureResourceScope;
 
       /** The volume name. */
-      @path volumeName: string;
+      @path volumeName: VolumeName;
 
       /** The file or directory path to delete. */
       @query path: string;
@@ -249,7 +249,7 @@ interface VolumesOperations {
       ...AzureResourceScope;
 
       /** The volume name. */
-      @path volumeName: string;
+      @path volumeName: VolumeName;
 
       /** The directory path to list. */
       @query path?: string;
@@ -268,7 +268,7 @@ interface VolumesOperations {
       ...AzureResourceScope;
 
       /** The volume name. */
-      @path volumeName: string;
+      @path volumeName: VolumeName;
 
       /** The file path to download. */
       @query path: string;
@@ -333,7 +333,7 @@ interface VolumesOperations {
       ...AzureResourceScope;
 
       /** The volume name. */
-      @path volumeName: string;
+      @path volumeName: VolumeName;
 
       /** The file content to upload. */
       @body content: bytes;
