@@ -67,6 +67,12 @@ The `SDK breaking change mitigation` workflow then:
 ````markdown
 ## SDK breaking-change mitigation for Go
 
+**Mitigation upon commit:** `00850ca596599f280dc140fa4cc14dc613e9192b`
+
+**TypeSpec project:** specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService
+
+**SDK package:** armwebpubsub
+
 **Resolved Breaking Changes:**
 
 - **Typespec Project:** specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService
