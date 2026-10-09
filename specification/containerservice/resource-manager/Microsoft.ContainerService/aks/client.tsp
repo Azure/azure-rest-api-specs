@@ -878,6 +878,16 @@ using Microsoft.ContainerService;
   "ManagedClusterDelegatedIdentity",
   "csharp"
 );
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.DelegatedResource.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.DelegatedResource.location,
+  azureLocation,
+  "csharp"
+);
 @@alternateType(ManagedClusterIdentity.principalId, uuid, "csharp");
 @@alternateType(ManagedClusterIdentity.tenantId, uuid, "csharp");
 @@alternateType(
