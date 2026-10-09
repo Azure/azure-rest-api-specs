@@ -10,6 +10,10 @@ using OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const EvaluatorsRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+};
+
 @doc("The category of the evaluator")
 union EvaluatorCategory {
   string,
@@ -79,24 +83,38 @@ model EvaluatorDefinition {
 }
 
 @doc("Code-based evaluator definition using python code")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.code;
 
   @doc("Inline code text for the evaluator")
   code_text?: string;
 
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
   @doc("The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')")
   entry_point?: string;
 
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
   @doc("The container image tag to use for evaluator code execution")
   image_tag?: string;
 
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
   @doc("The blob URI for the evaluator storage")
   blob_uri?: url;
 }
 
 @doc("Prompt-based evaluator")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.prompt;
 
@@ -139,6 +157,7 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.endpoint;
 
@@ -334,7 +353,7 @@ model RubricGenerationInputQualityWarning {
   @doc("Which source category the warning applies to. `aggregate` is used only for cross-source warnings.")
   source: RubricGenerationInputQualityWarningSource;
 
-  @doc("Zero-based index into `EvaluatorGenerationJob.inputs.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source.")
+  @doc("Zero-based index into `EvaluatorGenerationJob.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source.")
   @minValue(0)
   source_index?: int32;
 }
@@ -348,10 +367,25 @@ union GenerationWarningType {
 }
 
 @doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.")
-model EvaluatorGenerationJob is JobLike<
-  EvaluatorVersion,
-  EvaluatorGenerationInputs
-> {
+model EvaluatorGenerationJob is JobLike<EvaluatorVersion, never> {
+  @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
+  sources: EvaluatorGenerationJobSource[];
+
+  @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.")
+  `model`: string;
+
+  @doc("The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If an evaluator with this name already exists in the project (and is rubric-subtype), the service creates a new version under the same name and uses the prior version's `dimensions` as context for incremental improvement (foundation of the post-//build adaptive loop). Old versions remain queryable via `get_version(name, version)`. If the existing evaluator is not a rubric-subtype evaluator (built-in, prompt-based, code-based), the request is rejected with `400 Bad Request`.")
+  @minLength(1)
+  @maxLength(256)
+  @pattern("^[A-Za-z0-9_.~-]+$")
+  evaluator_name: string;
+
+  @doc("Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier.")
+  evaluator_display_name?: string;
+
+  @doc("Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.")
+  evaluator_description?: string;
+
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;

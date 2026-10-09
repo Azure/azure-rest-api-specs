@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import * as fs from "fs";
+import * as fs from "node:fs";
 import * as oav from "oav";
-import * as path from "path";
+import * as path from "node:path";
 
 import {
   example,
@@ -15,7 +15,7 @@ import { untilLastSegment } from "@azure-tools/specs-shared/path";
 import { Swagger } from "@azure-tools/specs-shared/swagger";
 import { SWAGGER_SUPPRESSION_TOOLS } from "@azure-tools/specs-shared/swagger-suppressions";
 import { getSuppressionsForTools } from "@azure-tools/suppressions";
-import { inspect } from "util";
+import { inspect } from "node:util";
 import { type ReportableOavError } from "./formatting.ts";
 
 export async function preCheckFiltering(

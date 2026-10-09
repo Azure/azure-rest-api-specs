@@ -1,7 +1,7 @@
 import { SpecGenSdkArtifactInfoSchema, sdkLabels } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
 import { extractInputs } from "./context.ts";
-import type { Core } from "./github.ts";
+import type { Core, GitHubScriptArgs } from "./github.ts";
 import { LabelAction } from "./label.ts";
 
 const SUPPORTED_TARGET_BRANCHES = new Set(["main", "RPSaaSMaster"]);
@@ -16,11 +16,7 @@ export type Artifacts = {
   resource?: ArtifactResource;
 };
 
-export async function getLabelAndAction({
-  github,
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments): Promise<{
+export async function getLabelAndAction({ github, context, core }: GitHubScriptArgs): Promise<{
   labelName: string | undefined;
   labelAction: LabelAction;
   issueNumber: number;

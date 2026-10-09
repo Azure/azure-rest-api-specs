@@ -1,0 +1,112 @@
+{
+  "title": "Entities_GetSignalRecommendations",
+  "operationId": "Entities_GetSignalRecommendations",
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store",
+    "entityName": "online-store-aks"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "recommendedSignals": [
+          {
+            "signalId": "2c2d2ac1-c9bc-4bb7-997d-56af23c81f41",
+            "displayName": "AKS node CPU usage",
+            "description": "Monitors average CPU usage across nodes in the cluster.",
+            "applicableResourceTypes": [
+              "Microsoft.ContainerService/managedClusters"
+            ],
+            "refreshInterval": "PT5M",
+            "dataUnit": "Percent",
+            "configuration": {
+              "signalKind": "AzureResourceMetric",
+              "metricNamespace": "Microsoft.ContainerService/managedClusters",
+              "metricName": "node_cpu_usage_percentage",
+              "aggregationType": "Average",
+              "timeGrain": "PT5M",
+              "dimensionFilter": "nodepool eq 'systempool'"
+            },
+            "evaluationRules": {
+              "degradedRule": {
+                "operator": "GreaterThan",
+                "threshold": 75
+              },
+              "unhealthyRule": {
+                "operator": "GreaterThan",
+                "threshold": 90
+              }
+            }
+          },
+          {
+            "signalId": "bf7e57d0-1b92-4fe0-8dc8-f48d5ec89f14",
+            "displayName": "Restarting Kubernetes containers",
+            "description": "Detects containers that restart repeatedly within the evaluation window.",
+            "applicableResourceTypes": [
+              "Microsoft.ContainerService/managedClusters"
+            ],
+            "refreshInterval": "PT5M",
+            "dataUnit": "Count",
+            "configuration": {
+              "signalKind": "PrometheusMetricsQuery",
+              "queryText": "sum(increase(kube_pod_container_status_restarts_total{cluster=\"{{entity.name}}\"}[5m]))",
+              "timeGrain": "PT5M",
+              "requiredMetrics": [
+                "kube_pod_container_status_restarts_total"
+              ],
+              "requiredScrapeTargets": [
+                "kube-state-metrics"
+              ]
+            },
+            "evaluationRules": {
+              "degradedRule": {
+                "operator": "GreaterThan",
+                "threshold": 3
+              },
+              "unhealthyRule": {
+                "operator": "GreaterThan",
+                "threshold": 10
+              }
+            }
+          }
+        ],
+        "recommendedConfigurations": [
+          {
+            "signalId": "f482d4ea-3c8f-44e6-9a36-a24b6279291e",
+            "displayName": "AKS control-plane errors",
+            "description": "Counts error-level control-plane audit events for the cluster.",
+            "applicableResourceTypes": [
+              "Microsoft.ContainerService/managedClusters"
+            ],
+            "refreshInterval": "PT5M",
+            "dataUnit": "Count",
+            "configuration": {
+              "signalKind": "LogAnalyticsQuery",
+              "queryText": "AKSAuditAdmin | where _ResourceId =~ '{{entity.azureResourceId}}' | where toint(ResponseStatus.code) >= 400 | summarize value = count() by bin(TimeGenerated, 5m)",
+              "timeGrain": "PT5M",
+              "valueColumnName": "value",
+              "requiredTables": [
+                "AKSAuditAdmin"
+              ],
+              "requiredDiagnosticSettingCategories": [
+                "kube-audit-admin"
+              ]
+            },
+            "evaluationRules": {
+              "degradedRule": {
+                "operator": "GreaterThan",
+                "threshold": 0
+              },
+              "unhealthyRule": {
+                "operator": "GreaterThan",
+                "threshold": 10
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

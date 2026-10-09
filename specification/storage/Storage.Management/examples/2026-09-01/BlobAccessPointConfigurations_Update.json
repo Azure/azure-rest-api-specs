@@ -1,0 +1,65 @@
+{
+  "operationId": "BlobAccessPointConfigurations_Update",
+  "title": "UpdateBlobAccessPointConfiguration",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "accountName": "teststorageaccount",
+    "api-version": "2026-09-01",
+    "blobAccessPointConfigurationName": "testaccesspointconfig",
+    "properties": {
+      "properties": {
+        "state": "Inactive",
+        "description": "Updated NetApp ONTAP S3-compatible source",
+        "source": {
+          "sourceType": "NetAppOntap",
+          "auth": {
+            "authType": "AccessKey",
+            "secretAccessKey": "rotated-secret-key"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/blobAccessPointConfigurations/testaccesspointconfig",
+        "name": "testaccesspointconfig",
+        "type": "Microsoft.Storage/storageAccounts/blobAccessPointConfigurations",
+        "location": "eastus",
+        "systemData": {
+          "createdAt": "2026-09-01T00:00:00Z"
+        },
+        "properties": {
+          "uniqueId": "11111111-2222-3333-4444-555555555555",
+          "state": "Inactive",
+          "description": "Updated NetApp ONTAP S3-compatible source",
+          "source": {
+            "sourceType": "NetAppOntap",
+            "connection": {
+              "connectionType": "Endpoint",
+              "endpoint": "https://netapp.contoso.com/bucket1",
+              "tlsVerification": "Perform"
+            },
+            "auth": {
+              "authType": "AccessKey",
+              "accessKeyId": "example-access-key",
+              "signingRegion": "us-east-1"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "status": "Accepted",
+      "message": "The resource operation has been received and is being processed.",
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/locations/eastus/DataManagementRPOperationStatuses/operation-98765?api-version=2026-09-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/locations/eastus/DataManagementRPOperationStatuses/operation-98765?api-version=2026-09-01",
+        "Retry-After": 30
+      }
+    }
+  }
+}

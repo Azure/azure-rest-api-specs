@@ -1,8 +1,8 @@
 import { execPnpmExec } from "@azure-tools/specs-shared/exec";
 import { debugLogger } from "@azure-tools/specs-shared/logger";
 
-import { access, constants, mkdtemp, rm } from "fs/promises";
-import { join } from "path";
+import { access, constants, mkdtemp, rm } from "node:fs/promises";
+import { join } from "node:path";
 import { test } from "vitest";
 
 const repoRoot = join(import.meta.dirname, "..", "..", "..", "..");

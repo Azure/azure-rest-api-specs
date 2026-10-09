@@ -984,14 +984,15 @@ export function validateDocumentQualityDimension(
     for (const field of /** @type {const} */ (["intentAssessments", "findings", "blockers"])) {
       array(dimension[field], `dimension.${field}`);
     }
-    const intentAssessments = /** @type {{
-     *   reviewUnitId: string,
-     *   status: string,
-     *   reason?: string,
-     *   documents: DocumentationDocument[],
-     *   checks: DocumentQualityDecision[],
-     *   inheritedDocumentIds?: string[]
-     * }[]} */ (dimension.intentAssessments);
+    const intentAssessments =
+      /** @type {{
+       *   reviewUnitId: string,
+       *   status: string,
+       *   reason?: string,
+       *   documents: DocumentationDocument[],
+       *   checks: DocumentQualityDecision[],
+       *   inheritedDocumentIds?: string[]
+       * }[]} */ (dimension.intentAssessments);
     coverage(
       semanticItems.map((item) => item.id),
       intentAssessments.map((item) => item.reviewUnitId),

@@ -1,3 +1,5 @@
+import { diagnosticText } from "./diagnostics.ts";
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { generateTypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { context } from "../src/index.ts";
@@ -29,10 +31,13 @@ describe("MultipleNewApiVersionsRule", function () {
       .mockResolvedValueOnce(serviceYaml("2025-01-01"))
       .mockResolvedValueOnce(serviceYaml("2025-01-01", "2026-01-01"));
 
-    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
+    const result = await new MultipleNewApiVersionsRule().execute(
+      "specification/foo/Foo",
+      defaultLogger,
+    );
 
     expect(result.success).toBe(true);
-    expect(result.stdOutput).toContain("Only one new API version was added");
+    expect(result.skipped).toContain("Only one new API version was added");
     expect(generateTypeSpecMetadata).not.toHaveBeenCalled();
   });
 
@@ -44,10 +49,13 @@ describe("MultipleNewApiVersionsRule", function () {
       metadata({ [pythonEmitter]: "2026-01-01" }),
     );
 
-    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
+    const result = await new MultipleNewApiVersionsRule().execute(
+      "specification/foo/Foo",
+      defaultLogger,
+    );
 
     expect(result.success).toBe(true);
-    expect(result.stdOutput).toBe("All SDK language emitters target 2026-01-01.");
+    expect(result.diagnostics).toBeUndefined();
     expect(generateTypeSpecMetadata).toHaveBeenCalledOnce();
   });
 
@@ -59,10 +67,13 @@ describe("MultipleNewApiVersionsRule", function () {
       metadata({ [pythonEmitter]: "2026-02-01" }),
     );
 
-    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
+    const result = await new MultipleNewApiVersionsRule().execute(
+      "specification/foo/Foo",
+      defaultLogger,
+    );
 
     expect(result.success).toBe(false);
-    expect(result.errorOutput).toContain("To reproduce locally:");
+    expect(diagnosticText(result)).toContain("To reproduce locally:");
   });
 
   it("fails when metadata generation fails", async function () {
@@ -71,10 +82,13 @@ describe("MultipleNewApiVersionsRule", function () {
       .mockResolvedValueOnce(serviceYaml("2025-01-01", "2026-01-01", "2026-02-01"));
     vi.mocked(generateTypeSpecMetadata).mockRejectedValue(new Error("metadata failed"));
 
-    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
+    const result = await new MultipleNewApiVersionsRule().execute(
+      "specification/foo/Foo",
+      defaultLogger,
+    );
 
     expect(result.success).toBe(false);
-    expect(result.errorOutput).toContain("metadata failed");
+    expect(diagnosticText(result)).toContain("metadata failed");
   });
 
   it("is suppressable", function () {
@@ -93,16 +107,16 @@ describe("evaluateMultipleNewApiVersions", function () {
     );
 
     expect(result.success).toBe(false);
-    expect(result.errorOutput).toContain("ERROR: This pull request adds multiple API versions");
-    expect(result.errorOutput).toContain(
+    expect(diagnosticText(result)).toContain("This pull request adds multiple API versions");
+    expect(diagnosticText(result)).toContain(
       "the SDKs will be generated from API version 2026-02-01-preview",
     );
-    expect(result.errorOutput).toContain(
+    expect(diagnosticText(result)).toContain(
       'To generate and release the SDKs from 2026-01-01 first, every SDK language emitter must set "api-version" to 2026-01-01',
     );
-    expect(result.errorOutput).toContain(`${javaEmitter}: 2026-02-01-preview`);
-    expect(result.errorOutput).toContain("expected 2026-01-01");
-    expect(result.errorOutput).toContain(
+    expect(diagnosticText(result)).toContain(`${javaEmitter}: 2026-02-01-preview`);
+    expect(diagnosticText(result)).toContain("expected 2026-01-01");
+    expect(diagnosticText(result)).toContain(
       "https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation#multiplenewapiversions",
     );
   });
@@ -126,7 +140,7 @@ describe("evaluateMultipleNewApiVersions", function () {
     ]);
 
     expect(result.success).toBe(false);
-    expect(result.errorOutput).toContain(`${pythonEmitter}: <not set> (expected 2026-01-01)`);
+    expect(diagnosticText(result)).toContain(`${pythonEmitter}: <not set> (expected 2026-01-01)`);
   });
 
   it("skips validation when no SDK language emitters are configured", function () {
@@ -136,8 +150,8 @@ describe("evaluateMultipleNewApiVersions", function () {
     ]);
 
     expect(result.success).toBe(true);
-    expect(result.stdOutput).toBe(
-      "Warning: No SDK language emitters are configured; skipping API-version validation.",
+    expect(diagnosticText(result)).toBe(
+      "No SDK language emitters are configured; skipping API-version validation.",
     );
   });
 });

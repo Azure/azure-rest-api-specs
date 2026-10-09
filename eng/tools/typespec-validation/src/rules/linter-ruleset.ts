@@ -1,5 +1,6 @@
-import { join } from "path";
-import { type RuleResult } from "../rule-result.ts";
+import type { ILogger } from "@azure-tools/specs-shared/logger";
+import { join } from "pathe";
+import { type Diagnostic, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { parse } from "../tsp-config.ts";
 import { fileExists, readTspConfig } from "../utils.ts";
@@ -36,13 +37,11 @@ export class LinterRulesetRule implements Rule {
   readonly description =
     "Ensures each spec includes the correct linter ruleset (data-plane or management-plane)";
 
-  async execute(folder: string): Promise<RuleResult> {
-    let success = true;
-    let stdOutput = "";
-    let errorOutput = "";
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
+    const diagnostics: Diagnostic[] = [];
 
     const configText = await readTspConfig(folder);
-    const config = parse(configText);
+    const config = parse(configText, join(folder, "tspconfig.yaml"));
 
     const mainTspExists = await fileExists(join(folder, "main.tsp"));
     const clientTspExists = await fileExists(join(folder, "client.tsp"));
@@ -53,10 +52,10 @@ export class LinterRulesetRule implements Rule {
     if (clientTspExists) {
       files.push("client.tsp");
     }
-    stdOutput += `files: ${JSON.stringify(files)}\n`;
-
     const linterExtends = config?.linter?.extends;
-    stdOutput += `linter.extends: ${JSON.stringify(linterExtends)}`;
+    logger.debug(
+      `files: ${JSON.stringify(files)}\nlinter.extends: ${JSON.stringify(linterExtends)}`,
+    );
 
     // Normalize path separators
     const normalizedFolder = folder.replace(/\\/g, "/");
@@ -80,31 +79,25 @@ export class LinterRulesetRule implements Rule {
         if (deprecatedRulesets.has(ruleset)) {
           const newRuleset = deprecatedRulesets.get(ruleset);
 
-          success = false;
-          errorOutput +=
-            "tspconfig.yaml references the following ruleset which is deprecated:\n" +
-            "\n" +
-            "linter:\n" +
-            "  extends:\n" +
-            `    - "${ruleset}"\n` +
-            "\n" +
-            "It should be replaced with the following:\n" +
-            "\n" +
-            "linter:\n" +
-            "  extends:\n" +
-            `    - "${newRuleset}"`;
+          diagnostics.push({
+            severity: "error",
+            code: "deprecated-ruleset",
+            path: join(folder, "tspconfig.yaml"),
+            message: `Linter ruleset "${ruleset}" is deprecated.`,
+            help: `Replace it with "${newRuleset}" in linter.extends.`,
+          });
         }
       }
     }
 
     if (requiredRuleset && !linterExtends?.includes(requiredRuleset)) {
-      success = false;
-      errorOutput +=
-        "tspconfig.yaml must define the following property:\n" +
-        "\n" +
-        "linter:\n" +
-        "  extends:\n" +
-        `    - "${requiredRuleset}"`;
+      diagnostics.push({
+        severity: "error",
+        code: "linter-ruleset",
+        path: join(folder, "tspconfig.yaml"),
+        message: `Missing required linter ruleset "${requiredRuleset}".`,
+        help: `Add "${requiredRuleset}" to linter.extends.`,
+      });
     }
 
     // If any client (language) emitter has options defined, the client-sdk ruleset is required.
@@ -112,27 +105,18 @@ export class LinterRulesetRule implements Rule {
       (emitter) => config?.options?.[emitter] !== undefined,
     );
     if (emittersWithOptions.length > 0 && !linterExtends?.includes(clientSdkRuleset)) {
-      success = false;
-      if (errorOutput) {
-        errorOutput += "\n\n";
-      }
-      errorOutput +=
-        "tspconfig.yaml defines options for the following client emitter(s):\n" +
-        "\n" +
-        emittersWithOptions.map((emitter) => `    - "${emitter}"`).join("\n") +
-        "\n" +
-        "\n" +
-        "so it must define the following property:\n" +
-        "\n" +
-        "linter:\n" +
-        "  extends:\n" +
-        `    - "${clientSdkRuleset}"`;
+      diagnostics.push({
+        severity: "error",
+        code: "client-sdk-ruleset",
+        path: join(folder, "tspconfig.yaml"),
+        message: `Client emitters require the "${clientSdkRuleset}" ruleset: ${emittersWithOptions.join(", ")}.`,
+        help: `Add "${clientSdkRuleset}" to linter.extends.`,
+      });
     }
 
     return {
-      success: success,
-      stdOutput: stdOutput,
-      errorOutput: errorOutput,
+      success: diagnostics.length === 0,
+      diagnostics,
     };
   }
 }

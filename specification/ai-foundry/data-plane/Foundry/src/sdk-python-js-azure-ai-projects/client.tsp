@@ -6,6 +6,8 @@
 // Stable operations (GA routes) with preview features (optional opt-in request headers)
 import "../agents/routes.tsp";
 import "../evaluation-rules/routes.tsp";
+import "../data_generation_jobs/routes.tsp";
+import "../sdk-common/ops-relocation-datasets.tsp";
 
 // Stable operation (GA routes) without preview features
 import "../agents-optimization/routes.tsp";
@@ -29,7 +31,6 @@ import "../schedules/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
-import "../data_generation_jobs/routes.tsp";
 //import "../evaluation-suites/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
@@ -147,6 +148,7 @@ using Azure.AI.Projects;
 @@clientName(A2ATool.a2a_version, exact("a2a_version"), "python");
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
+@@clientName(ConnectionType.RemoteA2A, exact("REMOTE_A2A"), "python");
 
 // DatasetItem model has a property `response_items?: OpenAI.OutputItem[]`. It is used
 // to define Agent optimization request. If emitted as-is, it pulls in a lot of
@@ -197,11 +199,17 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 // Shorter method names for SDK datasets operations
-@@clientName(Datasets.listLatest, "list");
-@@clientName(Datasets.getVersion, "get");
-@@clientName(Datasets.deleteVersion, "delete");
-@@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
-@@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
+@@clientName(Azure.AI.Projects.Datasets.listLatest, "list");
+@@clientName(Azure.AI.Projects.Datasets.getVersion, "get");
+@@clientName(Azure.AI.Projects.Datasets.deleteVersion, "delete");
+@@clientName(
+  Azure.AI.Projects.Datasets.createOrUpdateVersion,
+  "createOrUpdate"
+);
+@@clientName(
+  Azure.AI.Projects.Datasets.startPendingUploadVersion,
+  "pendingUpload"
+);
 
 // Data generation jobs — renamed for SDK discoverability
 @@clientName(DataGenerationJobs.get, "getGenerationJob");
@@ -304,6 +312,10 @@ using Azure.AI.Projects;
 // needs its own WebSocket transport to speak the realtime protocol afterward. Exclude this
 // operation entirely from the emitted SDK; it remains in the spec for raw REST documentation only.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!(python, javascript)");
+
+// Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
+@@usage(VoiceAgentTransport, Usage.input | Usage.json);
+@@access(VoiceAgentTransport, Access.public);
 
 // --------------------------------------------------------------------------------
 // Beta Voice Agent Conversations sub-client

@@ -41,17 +41,6 @@ model DeleteEvalRunResponse {
   deleted?: boolean;
 }
 
-@doc("The level at which evaluation is performed.")
-union EvaluationLevel {
-  @doc("Evaluation is performed at the turn level.")
-  turn: "turn",
-
-  @doc("Evaluation is performed at the conversation level.")
-  conversation: "conversation",
-
-  string,
-}
-
 /**
  * An Azure AI evaluator used as a grader.
  *
@@ -500,21 +489,6 @@ model ToolDescription {
   description?: string;
 }
 
-/** Represents a set of parameters used to control the sampling behavior of a language model during text generation. */
-model ModelSamplingParams {
-  /** The temperature parameter for sampling. Defaults to 1.0. */
-  temperature?: float32 = 1.0;
-
-  /** The top-p parameter for nucleus sampling. Defaults to 1.0. */
-  top_p?: float32 = 1.0;
-
-  /** The random seed for reproducibility. Defaults to 42. */
-  seed?: int32 = 42;
-
-  /** The maximum number of tokens allowed in the completion. */
-  max_completion_tokens?: int32;
-}
-
 /** Base class for run data sources with discriminator support. */
 @discriminator("type")
 model EvalRunDataSource {
@@ -849,6 +823,31 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
   target: AzureAIModelTarget | AzureAIAgentTarget;
+}
+
+/**
+ * Evaluates a model or agent by simulating user conversations against it.
+ *
+ * Each source item defines a test scenario. Use a JSONL source or an `inline_user_conversation_simulation` source with strongly typed test cases. JSONL attributes use the inline test-case property names by default; specify `data_mapping` only when the dataset uses different names. The model specified by `model_configuration` generates the simulated user's turns and drives the conversation with `target` until it reaches the desired length or maximum turn limit. The evaluation's testing criteria are then applied to the conversation.
+ */
+model UserConversationSimulationEvalRunDataSource extends EvalRunDataSource {
+  /** The type of data source, always `azure_ai_user_conversation_simulation`. */
+  type: "azure_ai_user_conversation_simulation";
+
+  /** Test scenarios supplied as JSONL rows or strongly typed inline test cases. */
+  source: UserConversationSimulationSource;
+
+  /** Model or agent being evaluated. It receives turns from the simulated user. */
+  target: FoundryEvaluationTarget;
+
+  /** Model used to simulate the user side of each conversation by generating turns sent to the evaluated `target`. */
+  model_configuration: EvaluationModelConfiguration;
+
+  /** Default configuration for generating simulated user conversations and persisting their output. Conversation properties in a test case's `simulation_configuration` override the corresponding defaults. */
+  default_simulation_configuration?: UserConversationSimulationDefaultConfiguration;
+
+  /** Maps JSONL dataset attributes to user conversation simulation inputs when their names differ from the defaults. The default attribute names are `test_case_id`, `test_case_category`, `test_case_description`, and `simulation_configuration`, matching `UserConversationSimulationTestCase`. Omit when the dataset uses these names or when using `inline_user_conversation_simulation`. */
+  data_mapping?: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."

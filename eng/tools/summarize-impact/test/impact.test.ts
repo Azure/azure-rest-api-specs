@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest"; //vi
 import { PRContext } from "../src/PRContext.ts";
 import { evaluateImpact } from "../src/impact.ts";

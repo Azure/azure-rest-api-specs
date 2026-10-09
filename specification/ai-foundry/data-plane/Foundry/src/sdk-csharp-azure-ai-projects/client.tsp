@@ -225,6 +225,11 @@ namespace Azure.AI.Projects;
 @@access(DataGenerationJobs.cancel, Access.internal);
 @@access(DataGenerationJobs.delete, Access.internal);
 
+@@access(DataGenerationJobInputs, Access.public);
+@@access(EvaluationDataGenerationJobInputs, Access.public);
+@@access(SupervisedFineTuningDataGenerationJobInputs, Access.public);
+@@access(ReinforcementFineTuningDataGenerationJobInputs, Access.public);
+
 @@clientName(DataGenerationJobType, "DataGenerationJobKind");
 @@clientName(TracesDataGenerationJobSource.end_time, "EndAt");
 @@clientName(TracesDataGenerationJobSource.start_time, "StartAt");
@@ -234,12 +239,6 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // EvaluatorGenerationJobs sub‐client
 // --------------------------------------------------------------------------------
-// Hide the protocol methods and methods using feature headers
-@@access(EvaluatorGenerationJobs.get, Access.internal);
-@@access(EvaluatorGenerationJobs.create, Access.internal);
-@@access(EvaluatorGenerationJobs.cancel, Access.internal);
-@@access(EvaluatorGenerationJobs.delete, Access.internal);
-
 @@clientName(EvaluatorGenerationArtifacts.dataset, "Reference");
 @@clientName(EvaluatorGenerationArtifacts.kinds, "DatasetRowKinds");
 @@clientName(EvaluatorGenerationInputs.evaluator_description, "Description");
