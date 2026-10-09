@@ -126,6 +126,11 @@ export async function mitigateSdkBreakingChanges({
           `Mitigating SDK breaking change ${changeIndex + 1} of ${project.breakingChanges.length} for ${project.typespecProject}.`,
         );
         const commandResultPath = join(resultDirPath, `sdk-mitigation-result-${changeIndex}.json`);
+        let mitigatedChange: MitigatedChange = {
+          breakingChange: change.breakingChange,
+          suggestedFix: change.suggestedFix,
+          isResolved: false,
+        };
         try {
           const { stdout } = await execFile(
             join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk"),
@@ -149,11 +154,6 @@ export async function mitigateSdkBreakingChanges({
           );
           await writeFile(commandResultPath, stdout);
 
-          let mitigatedChange: MitigatedChange = {
-            breakingChange: change.breakingChange,
-            suggestedFix: change.suggestedFix,
-            isResolved: false,
-          };
           try {
             mitigatedChange = BuildMigratedBreakingChange(
               JSON.parse(stdout),
@@ -167,16 +167,21 @@ export async function mitigateSdkBreakingChanges({
               isResolved: false,
             };
           }
-          mitigationResult.projects[projectIndex].breakingChanges.push(mitigatedChange);
         } catch (error) {
           console.error(
             `Failed to mitigate SDK breaking change ${changeIndex + 1} for ${project.typespecProject}:`,
             error,
           );
+          mitigatedChange = {
+            breakingChange: change.breakingChange,
+            suggestedFix: change.suggestedFix,
+            isResolved: false,
+          };
         }
-        await writeResult(mitigationResultPath, mitigationResult);
+        mitigationResult.projects[projectIndex].breakingChanges.push(mitigatedChange);
       }
     }
+    await writeResult(mitigationResultPath, mitigationResult);
   } catch (error) {
     console.error("SDK breaking-change mitigation failed.", error);
     const failureResult: MitigationResult = {
