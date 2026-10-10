@@ -176,3 +176,11 @@ using Commvault.ContentStore;
   "csharp"
 );
 @@alternateType(StorageProperties.location, Azure.Core.azureLocation, "csharp");
+
+@@clientName(ActivateSaaSParameterRequest.saasGuid, "SaaSGUID", "go");
+@@clientName(ActivateSaaSRequestParam.saasResourceId, "SaaSResourceID", "go");
+@@clientName(
+  CloudAccountProperties.roleAssignmentsOnCcaCreate,
+  "RoleAssignmentsOnCCACreate",
+  "go"
+);
