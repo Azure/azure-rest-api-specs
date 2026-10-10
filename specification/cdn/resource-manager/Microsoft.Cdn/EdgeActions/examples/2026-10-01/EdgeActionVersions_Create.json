@@ -1,0 +1,59 @@
+{
+  "operationId": "EdgeActionVersions_Create",
+  "title": "CreateEdgeActionVersion",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-10-01",
+    "edgeActionName": "edgeAction1",
+    "version": "version2",
+    "resource": {
+      "location": "global",
+      "properties": {
+        "deploymentType": "zip"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/versions/version2",
+        "name": "version2",
+        "type": "Microsoft.Cdn/edgeActions/versions",
+        "location": "global",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentType": "zip",
+          "validationStatus": "Succeeded",
+          "versionExecutionState": "Inactive",
+          "lastPackageUpdateTime": "2024-05-25T16:19:23Z",
+          "deploymentStatus": "NotStarted"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActionOperations/11111111-1111-1111-1111-111111111111?api-version=2026-10-01",
+        "Retry-After": 10
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/versions/version2",
+        "name": "version2",
+        "type": "Microsoft.Cdn/edgeActions/versions",
+        "location": "global",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentType": "zip",
+          "validationStatus": "Succeeded",
+          "versionExecutionState": "Inactive",
+          "lastPackageUpdateTime": "2024-05-25T16:19:23Z",
+          "deploymentStatus": "NotStarted"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActionOperations/11111111-1111-1111-1111-111111111111?api-version=2026-10-01",
+        "Retry-After": 10
+      }
+    }
+  }
+}

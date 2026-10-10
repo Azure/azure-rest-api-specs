@@ -72,7 +72,44 @@ union EdgeActionIsDefaultVersion {
   False: "False",
 }
 
+/** When the edge action version executes. */
+@added(Versions.`2026-10-01`)
+union EdgeActionVersionExecutionState {
+  string,
+
+  /** Executes when no Execution Filter is exercised. Selected by swapDefault. An associated Execution Filter may additionally trigger execution; the state remains Default. */
+  Default: "Default",
+
+  /** Executes when its associated Execution Filter is exercised, and only then. */
+  Active: "Active",
+
+  /** Never executes because nothing exists to trigger it. */
+  Inactive: "Inactive",
+}
+
+/** The deployment status for edge action version code. */
+@added(Versions.`2026-10-01`)
+union EdgeActionDeploymentStatus {
+  string,
+
+  /** No code deployment has been durably accepted. */
+  NotStarted: "NotStarted",
+
+  /** A code deployment has been durably accepted and is not terminal. */
+  InProgress: "InProgress",
+
+  /** Code deployment succeeded. */
+  Succeeded: "Succeeded",
+
+  /** Code deployment failed. */
+  Failed: "Failed",
+
+  /** Code deployment was canceled. */
+  Canceled: "Canceled",
+}
+
 /** The status of an operation */
+@Azure.Core.lroStatus
 union OperationStatus {
   string,
 
@@ -87,6 +124,48 @@ union OperationStatus {
 
   /** Operation was canceled */
   Canceled: "Canceled",
+}
+
+/** Polling guidance for an asynchronous EdgeActions operation. */
+@added(Versions.`2026-10-01`)
+model EdgeActionRetryAfterHeader {
+  /** The Retry-After header can indicate how long the client should wait before polling the operation status. */
+  @header("Retry-After")
+  @minValue(10)
+  @maxValue(600)
+  retryAfter?: int32;
+}
+
+// The ARM asynchronous contract requires the result endpoint to repeat Location on every
+// non-final 202, so a client that retains only the most recent response can still poll.
+/** Polling headers returned by the operation-result endpoint while the result is not final. */
+@added(Versions.`2026-10-01`)
+model EdgeActionOperationResultPollingHeaders {
+  /** The URL to poll for the result of this operation. */
+  @Azure.Core.pollingLocation
+  @header("Location")
+  location: url;
+
+  ...EdgeActionRetryAfterHeader;
+}
+
+/** Polling headers for an asynchronous EdgeActions PUT response. */
+@added(Versions.`2026-10-01`)
+model EdgeActionPutLroHeaders<FinalResult extends TypeSpec.Reflection.Model> {
+  ...ArmAsyncOperationHeader<
+    StatusMonitor = EdgeActionOperationStatus,
+    UrlValue = ResourceLocation<EdgeActionOperationStatus>,
+    FinalResult = FinalResult
+  >;
+  ...EdgeActionRetryAfterHeader;
+}
+
+/** Resource replacement accepted for asynchronous processing. */
+@added(Versions.`2026-10-01`)
+@doc("Resource '{name}' update operation succeeded", Resource)
+model EdgeActionResourceUpdatedLroResponse<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
+  ...ArmResourceUpdatedResponse<Resource>;
+  ...EdgeActionPutLroHeaders<Resource>;
 }
 
 @pattern("[a-zA-Z0-9]+")
@@ -119,6 +198,10 @@ union ProvisioningState {
 
   @doc("Upgrade in progress")
   Upgrading: "Upgrading",
+
+  /** Deletion is in progress. */
+  @added(Versions.`2026-10-01`)
+  Deleting: "Deleting",
 }
 
 /** Edge action attachment information */
@@ -157,14 +240,22 @@ model EdgeActionProperties {
 /** The type used for update operations of the EdgeAction. */
 model EdgeActionUpdate {
   @doc("The resource-specific properties for this resource.")
+  @removed(Versions.`2026-10-01`)
   properties?: EdgeActionPropertiesUpdate;
 
   @doc("The sku type of the edge action")
+  @removed(Versions.`2026-10-01`)
   sku?: SkuTypeUpdate;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
   tags?: Record<string>;
+}
+
+/** The type used for update operations of the EdgeActionVersion. */
+@added(Versions.`2026-10-01`)
+model EdgeActionVersionUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 /** Represents an edge action properties */
@@ -187,8 +278,19 @@ model EdgeActionVersionProperties {
   provisioningState?: ProvisioningState;
 
   @doc("The active state")
+  @removed(Versions.`2026-10-01`)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isDefaultVersion: EdgeActionIsDefaultVersion;
+
+  /** How this version receives traffic. */
+  @added(Versions.`2026-10-01`)
+  @visibility(Lifecycle.Read)
+  versionExecutionState: EdgeActionVersionExecutionState;
+
+  /** The status of the latest accepted code deployment. */
+  @added(Versions.`2026-10-01`)
+  @visibility(Lifecycle.Read)
+  deploymentStatus: EdgeActionDeploymentStatus;
 
   @doc("The last update time in UTC for package update")
   @visibility(Lifecycle.Read)
@@ -227,32 +329,10 @@ model VersionCode {
   content: string;
 
   @doc("The version code name")
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "name")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  name: string;
-}
-
-/** Edge action operation properties */
-model EdgeActionOperationProperties {
-  @doc("The resource id of the operation.")
-  resourceId: string;
-
-  @doc("The GUID representing operationID.")
-  operationId: string;
-
-  @doc("The current status of the operation.")
-  status: OperationStatus;
-
-  @doc("The operation type.")
-  operationType: string;
-
-  @doc("The start time of the operation.")
-  startTime?: utcDateTime;
-
-  @doc("The end time of the operation (if completed).")
-  endTime?: utcDateTime;
-
-  @doc("Error details, if applicable.")
-  error?: ErrorDetails;
+  namePreview: string;
 }
 
 /** Error details for operations */
@@ -263,3 +343,67 @@ model ErrorDetails {
   @doc("Detailed error message.")
   message: string;
 }
+
+/**
+ * The current status of an Edge Action asynchronous operation. This is the body served by the
+ * `Azure-AsyncOperation` polling URL, and it follows the Azure Resource Manager asynchronous
+ * operation status format: `id` addresses the status resource, `name` is the operation
+ * identifier, and `properties` carries the operation outcome once the operation succeeds.
+ * `percentComplete` and nested `operations` are intentionally omitted, because the service
+ * reports neither. There is no `resourceId`: the preview api-versions returned that name
+ * carrying the operation status resource URL, which is the value `id` now carries, so this is
+ * a rename rather than a dropped field. The identifier of the resource the operation ran
+ * against is not recorded on the operation, so no field claims to supply it.
+ */
+@added(Versions.`2026-10-01`)
+model EdgeActionOperationStatus {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The success snapshot is the body the originating operation would have returned synchronously, so its shape varies by operation. Microsoft.DBforMySQL OperationStatusExtendedResult sets the same precedent."
+  @doc("Edge Action specific properties for the operation status resource. Only present when the operation ended with a Succeeded status.")
+  @visibility(Lifecycle.Read)
+  properties?: Record<unknown>;
+
+  @doc("The current status of the operation.")
+  @visibility(Lifecycle.Read)
+  status: OperationStatus;
+
+  @doc("The fully qualified identifier of the operation status resource itself, which is the URL used to read this status. Preview api-versions returned this same value under the name resourceId.")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  @doc("The name of the operation status resource, which is the operation identifier.")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("The operation type.")
+  @visibility(Lifecycle.Read)
+  operationType: string;
+
+  @doc("The start time of the operation.")
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
+  @doc("The end time of the operation (if completed).")
+  @visibility(Lifecycle.Read)
+  endTime?: utcDateTime;
+
+  @doc("The error detail, present when the operation ended with a Failed or Canceled status.")
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+}
+
+/**
+ * The operation completed. The body is the response the originating operation would have produced
+ * had it run synchronously, so its shape depends on that operation and is not one fixed schema.
+ * There is no `status` field here; the outcome is the HTTP status code.
+ */
+@added(Versions.`2026-10-01`)
+model EdgeActionOperationCompletedResult is OkResponse;
+
+// The Location result route declares no 200 schema. Its body is whatever the originating
+// operation would have returned synchronously, and OpenAPI cannot key a body to the operation an
+// id names. Reusing EdgeActionOperationStatus here would advertise status and error fields the
+// result contract does not have, so the earlier `EdgeActionOperationResult is
+// EdgeActionOperationStatus` alias was removed. Published stable precedent for a schema-less
+// result 200 alongside a typed status 200: Microsoft.ApiManagement stable 2024-05-01
+// operationStatuses.json, Microsoft.Synapse stable 2020-12-01 operations.json, and
+// Microsoft.RecoveryServices RecoveryServicesBackup stable 2016-06-01.
