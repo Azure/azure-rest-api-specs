@@ -59,9 +59,32 @@ using Microsoft.OffAzure;
 );
 
 // Resolve C# management naming review findings.
-@@clientName(MachineResource, "MigrationDiscoveryMachine", "csharp");
-@@clientName(Server, "MigrationDiscoveryServer", "csharp");
-@@clientName(Vcenter, "MigrationDiscoveryVcenter", "csharp");
+// Resource wrapper, collection, and data names come from the detected ARM
+// resource name, so override that name on each canonical Read operation.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Use a C#-specific resource name for the MigrationDiscovery machine resource trio."
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Scope the resource name override to C#."
+@@clientOption(
+  MachineResources.get,
+  "resource-name",
+  "MigrationDiscoveryMachine",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Use a C#-specific resource name for the MigrationDiscovery server resource trio."
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Scope the resource name override to C#."
+@@clientOption(
+  Servers.getMachine,
+  "resource-name",
+  "MigrationDiscoveryServer",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Use a C#-specific resource name for the MigrationDiscovery vCenter resource trio."
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Scope the resource name override to C#."
+@@clientOption(
+  Vcenters.get,
+  "resource-name",
+  "MigrationDiscoveryVcenter",
+  "csharp"
+);
 @@clientName(HypervRunAsAccountResource, "HypervRunAsAccount", "csharp");
 @@clientName(VmwareRunAsAccountResource, "VmwareRunAsAccount", "csharp");
 @@clientName(ServerSiteResource, "ServerSite", "csharp");
