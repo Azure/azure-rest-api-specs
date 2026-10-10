@@ -120,16 +120,18 @@ export async function analyzeSdkProjects({
       await mkdir(projectResults, { recursive: true });
       await rename(generationResult, join(projectResults, "generate.json"));
 
-      /* Build the SDK package */
-      const buildArgs = ["package", "build", "--package-path", packagePath, "--output", "json"];
-      // Optional: Add any additional build arguments here for .NET SDK projects
-      if (sdkLanguage === SdkLanguage.DotNet) {
-        // Example: Add a hypothetical .NET-specific build argument
-        buildArgs.push("--additional-arguments", "/p:RunApiCompat=false");
-      }
+      /* Build the SDK package, skip for Python — interpreted language, no compilation needed */
+      if (sdkLanguage !== SdkLanguage.Python) {
+        const buildArgs = ["package", "build", "--package-path", packagePath, "--output", "json"];
+        // Optional: Add any additional build arguments here for .NET SDK projects
+        if (sdkLanguage === SdkLanguage.DotNet) {
+          // Example: Add a hypothetical .NET-specific build argument
+          buildArgs.push("--additional-arguments", "/p:RunApiCompat=false");
+        }
 
-      const { stdout: buildStdout } = await execFile(azureSdkCli, buildArgs);
-      await writeFile(join(projectResults, "build.json"), buildStdout);
+        const { stdout: buildStdout } = await execFile(azureSdkCli, buildArgs);
+        await writeFile(join(projectResults, "build.json"), buildStdout);
+      }
 
       /* Detect breaking changes */
       const { stdout: breakingChangesStdout } = await execFile(azureSdkCli, [

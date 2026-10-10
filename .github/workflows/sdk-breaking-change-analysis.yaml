@@ -272,7 +272,7 @@ jobs:
               if [[ "$ANALYSIS_OUTCOME" == "failure" && -f "$error_log" ]]; then
                 echo "### Error"
                 echo
-                tail -n 30 "$analysis_log" | sed 's/^/    /'
+                tail -n 30 "$error_log" | sed 's/^/    /'
                 echo
               else
                 echo "Error output is available in the failed step log."
