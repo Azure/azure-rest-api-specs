@@ -22,9 +22,12 @@ export type AnalyzeSdkProjectsOptions = {
   azureSdkCliPath: string;
 };
 
+/**
+ * Mapping from SDK language identifiers to TypeSpec metadata language keys.
+ */
 const Lang_METADATA_LANG_MAP: Record<string, string> = {
-  dotnet: "dotnet",
-  ".net": "dotnet",
+  dotnet: "csharp",
+  ".net": "csharp",
   java: "java",
   python: "python",
   typescript: "typescript",
