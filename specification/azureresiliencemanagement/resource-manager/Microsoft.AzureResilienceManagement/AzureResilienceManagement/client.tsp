@@ -254,7 +254,7 @@ using Azure.ResourceManager;
 );
 @@clientName(
   UnifiedResilienceItemGoalRequirement.required,
-  "IsRequired",
+  "IsZonalResiliencyRequired",
   "csharp"
 );
 
@@ -267,18 +267,6 @@ using Azure.ResourceManager;
 @@alternateType(
   LegacyDrillResourceProperties.resourceType,
   armResourceType,
-  "csharp"
-);
-
-// Preserve the required nested reprotect payload so callers can construct it.
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Keep the required reprotect payload constructible until safe flattening initializes nested request models."
-@@clientOption(ReprotectRequest, "disable-safe-flatten", true, "csharp");
-// Keep the shared goal requirement under its zonal or regional property.
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the zonal and regional context of the shared goal requirement."
-@@clientOption(
-  UnifiedResilienceItemGoalRequirement,
-  "disable-safe-flatten",
-  true,
   "csharp"
 );
 
