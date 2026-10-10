@@ -5,6 +5,8 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -32,72 +34,6 @@ union Kind {
    * Gen2
    */
   Gen2: "Gen2",
-}
-
-/**
- * (Optional) Discouraged to include in resource definition. Only needed where it is possible to disable platform (AKA infrastructure) encryption. Azure SQL TDE is an example of this. Values are enabled and disabled.
- */
-union InfrastructureEncryption {
-  string,
-
-  /**
-   * enabled
-   */
-  enabled: "enabled",
-
-  /**
-   * disabled
-   */
-  disabled: "disabled",
-}
-
-/**
- * The type of identity to use. Values can be systemAssignedIdentity, userAssignedIdentity, or delegatedResourceIdentity.
- */
-union EncryptionCustomerManagedKeyEncryptionKeyEncryptionKeyIdentityIdentityType {
-  string,
-
-  /**
-   * systemAssignedIdentity
-   */
-  systemAssignedIdentity: "systemAssignedIdentity",
-
-  /**
-   * userAssignedIdentity
-   */
-  userAssignedIdentity: "userAssignedIdentity",
-
-  /**
-   * delegatedResourceIdentity
-   */
-  delegatedResourceIdentity: "delegatedResourceIdentity",
-}
-
-/**
- * The type of identity that created the resource.
- */
-union CreatedByType {
-  string,
-
-  /**
-   * User
-   */
-  User: "User",
-
-  /**
-   * Application
-   */
-  Application: "Application",
-
-  /**
-   * ManagedIdentity
-   */
-  ManagedIdentity: "ManagedIdentity",
-
-  /**
-   * Key
-   */
-  Key: "Key",
 }
 
 /**
@@ -157,40 +93,6 @@ union KeyType {
 }
 
 /**
- * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
- */
-union Origin {
-  string,
-
-  /**
-   * user
-   */
-  user: "user",
-
-  /**
-   * system
-   */
-  system: "system",
-
-  /**
-   * user,system
-   */
-  `user,system`: "user,system",
-}
-
-/**
- * Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
- */
-union ActionType {
-  string,
-
-  /**
-   * Internal
-   */
-  Internal: "Internal",
-}
-
-/**
  * The SKU of the Maps Account.
  */
 model Sku {
@@ -224,9 +126,9 @@ model MapsAccountProperties {
   /**
    * The provisioning state of the Maps account resource, Account updates can only be performed on terminal states. Terminal states: `Succeeded` and `Failed`
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @typeChangedFrom(Versions.v2026_12_01, string)
   @visibility(Lifecycle.Read)
-  provisioningState?: string;
+  provisioningState?: ResourceProvisioningState;
 
   /**
    * The array of associated resources to the Maps account. Linked resource in the array cannot individually update, you must update all linked resources in the array together. These resources may be used on operations on the Azure Maps REST API. Access is controlled by the Maps Account Managed Identity(s) permissions to those resource(s).
@@ -285,7 +187,6 @@ model CorsRules {
   /**
    * The list of CORS rules. You can include up to five CorsRule elements in the request.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   @maxItems(5)
   corsRules?: CorsRule[];
@@ -302,51 +203,6 @@ model CorsRule {
 }
 
 /**
- * All Customer-managed key encryption properties for the resource.
- */
-model EncryptionCustomerManagedKeyEncryption {
-  /**
-   * All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.
-   */
-  keyEncryptionKeyIdentity?: EncryptionCustomerManagedKeyEncryptionKeyEncryptionKeyIdentity;
-
-  /**
-   * key encryption key Url, versioned or unversioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek.
-   */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  keyEncryptionKeyUrl?: string;
-}
-
-/**
- * All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.
- */
-model EncryptionCustomerManagedKeyEncryptionKeyEncryptionKeyIdentity {
-  /**
-   * The type of identity to use. Values can be systemAssignedIdentity, userAssignedIdentity, or delegatedResourceIdentity.
-   */
-  identityType?: EncryptionCustomerManagedKeyEncryptionKeyEncryptionKeyIdentityIdentityType;
-
-  /**
-   * User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity.
-   */
-  userAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * application client identity to use for accessing key encryption key Url in a different tenant. Ex: f83c6b1b-4d34-47e4-bb34-9d83df58b540
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  federatedClientId?: string;
-
-  /**
-   * delegated identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity and userAssignedIdentity - internal use only.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  delegatedIdentityClientId?: string;
-}
-
-/**
  * Data processing location.
  */
 model LocationsItem {
@@ -359,11 +215,13 @@ model LocationsItem {
 /**
  * Parameters used to update an existing Maps Account.
  */
-model MapsAccountUpdateParameters {
+@removed(Versions.v2026_12_01)
+@renamedFrom(Versions.v2026_12_01, "MapsAccountUpdateParameters")
+model MapsAccountUpdateParametersV1 {
   /**
    * Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The previously published API version exposes PATCH tags as a free-form string map. This legacy versioned model preserves that existing wire contract. The 2026-12-01 model uses the standard ARM tags property."
   tags?: Record<string>;
 
   /**
@@ -386,6 +244,39 @@ model MapsAccountUpdateParameters {
    */
   properties?: MapsAccountProperties;
 }
+
+/**
+ * Parameters used to update an existing Maps Account.
+ */
+@added(Versions.v2026_12_01)
+model MapsAccountUpdateParameters {
+  ...ArmTagsProperty;
+
+  /**
+   * Get or Set Kind property.
+   */
+  kind?: Kind;
+
+  /**
+   * The SKU of this account.
+   */
+  sku?: Sku;
+
+  /**
+   * Managed service identity (system assigned and/or user assigned identities)
+   */
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+
+  /**
+   * The map account properties.
+   */
+  properties?: MapsAccountProperties;
+}
+
+@@doc(
+  MapsAccountUpdateParameters.tags,
+  "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource across resource groups."
+);
 
 /**
  * A list of Maps Accounts.
@@ -436,7 +327,17 @@ model MapsAccountSasToken {
   /**
    * The shared access signature access token.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The previously published API version did not mark this property as secret. This legacy versioned property preserves the existing generated contract. The 2026-12-01 replacement property is marked with @secret."
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "accountSasToken")
+  @visibility(Lifecycle.Read)
+  accountSasTokenV1?: string;
+
+  /**
+   * The shared access signature access token.
+   */
+  @added(Versions.v2026_12_01)
+  @secret
   @visibility(Lifecycle.Read)
   accountSasToken?: string;
 }
@@ -454,14 +355,34 @@ model MapsAccountKeys {
   /**
    * The primary key for accessing the Maps REST APIs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The previously published API version did not mark this property as secret. This legacy versioned property preserves the existing generated contract. The 2026-12-01 replacement property is marked with @secret."
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "primaryKey")
+  @visibility(Lifecycle.Read)
+  primaryKeyV1?: string;
+
+  /**
+   * The primary key for accessing the Maps REST APIs.
+   */
+  @added(Versions.v2026_12_01)
+  @secret
   @visibility(Lifecycle.Read)
   primaryKey?: string;
 
   /**
    * The secondary key for accessing the Maps REST APIs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The previously published API version did not mark this property as secret. This legacy versioned property preserves the existing generated contract. The 2026-12-01 replacement property is marked with @secret."
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "secondaryKey")
+  @visibility(Lifecycle.Read)
+  secondaryKeyV1?: string;
+
+  /**
+   * The secondary key for accessing the Maps REST APIs.
+   */
+  @added(Versions.v2026_12_01)
+  @secret
   @visibility(Lifecycle.Read)
   secondaryKey?: string;
 
@@ -483,35 +404,6 @@ model MapsKeySpecification {
 }
 
 /**
- * Localized display information for this particular operation.
- */
-model OperationDisplay {
-  /**
-   * The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
-   */
-  @visibility(Lifecycle.Read)
-  provider?: string;
-
-  /**
-   * The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
-   */
-  @visibility(Lifecycle.Read)
-  resource?: string;
-
-  /**
-   * The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
-   */
-  @visibility(Lifecycle.Read)
-  operation?: string;
-
-  /**
-   * The short, localized friendly description of the operation; suitable for tool tips and detailed views.
-   */
-  @visibility(Lifecycle.Read)
-  description?: string;
-}
-
-/**
  * A list of Creator resources.
  */
 model CreatorList is Azure.Core.Page<Creator>;
@@ -523,9 +415,9 @@ model CreatorProperties {
   /**
    * The state of the resource provisioning, terminal states: Succeeded, Failed, Canceled
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @typeChangedFrom(Versions.v2026_12_01, string)
   @visibility(Lifecycle.Read)
-  provisioningState?: string;
+  provisioningState?: ResourceProvisioningState;
 
   /**
    * The storage units to be allocated. Integer values from 1 to 100, inclusive.
