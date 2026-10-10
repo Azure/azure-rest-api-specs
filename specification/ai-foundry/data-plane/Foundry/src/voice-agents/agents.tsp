@@ -825,8 +825,8 @@ model VoiceAgentInputTranscription {
   phrase_list?: string[];
 
   @doc("""
-    Initialization-only profanity filtering for input transcripts. Supported only by managed Azure Fast
-    Transcription (`azure-fast-transcription`) and realtime Azure Speech (`azure-speech`). Using
+    Initialization-only profanity filtering for input transcripts. Supported only by the managed
+    Azure Speech (`azure-speech`) model, including Custom Speech. Using
     `custom_speech` with this setting requires a cascaded model, not an audio-native realtime model's
     side transcriber. Explicit settings, including null, bypass automatic native routing; unsupported
     providers reject them.
