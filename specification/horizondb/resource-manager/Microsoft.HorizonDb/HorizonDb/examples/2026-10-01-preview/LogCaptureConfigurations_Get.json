@@ -1,0 +1,25 @@
+{
+  "operationId": "LogCaptureConfigurations_Get",
+  "title": "Get the PostgreSQL server log capture configuration",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "logCaptureConfigurationName": "PostgreSqlServer",
+    "api-version": "2026-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/logCaptureConfigurations/PostgreSqlServer",
+        "name": "PostgreSqlServer",
+        "type": "Microsoft.HorizonDb/clusters/logCaptureConfigurations",
+        "properties": {
+          "state": "Enabled",
+          "retentionDays": 14,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

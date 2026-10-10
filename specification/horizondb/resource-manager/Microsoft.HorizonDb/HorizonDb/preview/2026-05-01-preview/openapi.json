@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft HorizonDB Management API",
     "version": "2026-05-01-preview",
-    "description": "Azure Resource Provider API for managing HorizonDB clusters, pools, replicas, and firewall rules",
+    "description": "Azure Resource Provider API for managing HorizonDB clusters, pools, endpoints, nodes, and firewall rules",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -2801,7 +2801,7 @@
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "The managed service identities assigned to this resource. Omitting the entire identity property from PUT or PATCH preserves all current assignments. When provided, PUT replaces the user-assigned identity set and PATCH merges it; null PATCH dictionary entries remove individual identities. Setting type to None clears all assignments."
         }
       },
       "allOf": [
@@ -2841,7 +2841,7 @@
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "The managed service identities assigned to this resource. Omitting the entire identity property from PUT or PATCH preserves all current assignments. When provided, PUT replaces the user-assigned identity set and PATCH merges it; null PATCH dictionary entries remove individual identities. Setting type to None clears all assignments."
         },
         "properties": {
           "$ref": "#/definitions/HorizonDbClusterPropertiesForPatchUpdate",

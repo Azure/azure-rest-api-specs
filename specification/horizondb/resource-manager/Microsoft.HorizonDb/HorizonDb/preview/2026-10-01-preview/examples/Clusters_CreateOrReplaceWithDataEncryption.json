@@ -1,0 +1,117 @@
+{
+  "operationId": "Clusters_CreateOrReplace",
+  "title": "Create a HorizonDB cluster with customer-managed key data encryption",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2026-10-01-preview",
+    "resource": {
+      "location": "eastus2",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/identity-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/primary-encryption-identity": {}
+        }
+      },
+      "properties": {
+        "postgreSqlVersion": "17",
+        "backup": {
+          "geoRedundancy": "Disabled",
+          "retentionDays": 14
+        },
+        "dataEncryption": {
+          "type": "AzureKeyVault",
+          "primaryKeyUri": "https://primary-key-vault.vault.azure.net/keys/horizondb-primary-key",
+          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/identity-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/primary-encryption-identity"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/11111111-1111-1111-1111-111111111111?api-version=2026-10-01-preview",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster",
+        "name": "example-cluster",
+        "type": "Microsoft.HorizonDb/clusters",
+        "location": "eastus2",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/identity-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/primary-encryption-identity": {
+              "principalId": "11111111-1111-1111-1111-111111111111",
+              "clientId": "22222222-2222-2222-2222-222222222222"
+            }
+          }
+        },
+        "properties": {
+          "postgreSqlVersion": "17",
+          "creationMode": "Create",
+          "network": {
+            "publicAccess": "Disabled"
+          },
+          "backup": {
+            "geoRedundancy": "Disabled",
+            "retentionDays": 14
+          },
+          "dataEncryption": {
+            "type": "AzureKeyVault",
+            "primaryKeyUri": "https://primary-key-vault.vault.azure.net/keys/horizondb-primary-key",
+            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/identity-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/primary-encryption-identity",
+            "primaryEncryptionKeyStatus": "Valid",
+            "primaryEncryptionKeyCurrentVersion": "33333333333333333333333333333333"
+          },
+          "state": "Updating",
+          "provisioningState": "InProgress",
+          "readWritePool": {}
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/11111111-1111-1111-1111-111111111111?api-version=2026-10-01-preview",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster",
+        "name": "example-cluster",
+        "type": "Microsoft.HorizonDb/clusters",
+        "location": "eastus2",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/identity-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/primary-encryption-identity": {
+              "principalId": "11111111-1111-1111-1111-111111111111",
+              "clientId": "22222222-2222-2222-2222-222222222222"
+            }
+          }
+        },
+        "properties": {
+          "postgreSqlVersion": "17",
+          "creationMode": "Create",
+          "network": {
+            "publicAccess": "Disabled"
+          },
+          "backup": {
+            "geoRedundancy": "Disabled",
+            "retentionDays": 14
+          },
+          "dataEncryption": {
+            "type": "AzureKeyVault",
+            "primaryKeyUri": "https://primary-key-vault.vault.azure.net/keys/horizondb-primary-key",
+            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/identity-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/primary-encryption-identity",
+            "primaryEncryptionKeyStatus": "Valid",
+            "primaryEncryptionKeyCurrentVersion": "33333333333333333333333333333333"
+          },
+          "state": "Provisioning",
+          "provisioningState": "Provisioning",
+          "readWritePool": {}
+        }
+      }
+    }
+  }
+}

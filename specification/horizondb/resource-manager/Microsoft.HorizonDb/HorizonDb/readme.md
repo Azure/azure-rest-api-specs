@@ -26,9 +26,74 @@ These are the global settings for the HorizonDb API.
 
 ```yaml
 title: HorizonDbManagementClient
-description: The Microsoft HorizonDb Management API provides Azure Resource Manager operations for managing HorizonDb clusters, pools, replicas, and firewall rules.
+description: The Microsoft HorizonDb Management API provides Azure Resource Manager operations for managing HorizonDb clusters, pools, endpoints, nodes, and firewall rules.
 openapi-type: arm
-tag: package-horizondb-2026-05-01-preview
+tag: package-horizondb-2026-10-01-preview
+```
+
+### Tag: package-horizondb-2026-10-01-preview
+
+These settings apply only when `--tag=package-horizondb-2026-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-horizondb-2026-10-01-preview'
+input-file:
+  - preview/2026-10-01-preview/openapi.json
+suppressions:
+  - code: EvenSegmentedPathForPutOperation
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/passwordMethod"]
+    reason: >-
+      PasswordAuthentication is a service-created singleton resource with the
+      fixed name passwordMethod. Its path follows the approved singleton
+      resource pattern and cannot end in a variable resource-name segment.
+  - code: PutRequestResponseSchemeArm
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/microsoftEntraAdministrators/{objectId}"].put
+    reason: >-
+      The create request uses MicrosoftEntraAdministratorAdd and omits
+      response-only fields such as objectId and provisioningState. The request
+      is a subset of the resource returned by GET and PUT, not a superset.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: openapi.json
+    where: $.definitions["PasswordAuthentication"]
+    reason: >-
+      PasswordAuthentication is created and owned by the service with the
+      parent cluster. Customers can configure the singleton but cannot delete
+      it independently.
+  - code: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/microsoftEntra"]
+    reason: >-
+      The Microsoft Entra authentication method is a service-created singleton
+      resource with the fixed name microsoftEntra under the authentications
+      collection. Customers cannot create additional instances.
+  - code: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/passwordMethod"]
+    reason: >-
+      The password authentication method is a service-created singleton resource
+      with the fixed name passwordMethod under the authentications collection.
+      Customers cannot create additional instances.
+  - code: ConsistentPatchProperties
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}"].patch.parameters[5].schema
+    reason: >-
+      The PATCH model exposes computeModel.vCores for the Provisioned compute
+      subtype. The validator compares it against the base compute model and does
+      not resolve the resource model's discriminated subtype hierarchy.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: openapi.json
+    where: $.definitions["PagedParameterGroupConnectionProperties"]
+    reason: >-
+      PagedParameterGroupConnectionProperties is a paged response envelope
+      containing value and nextLink, not an ARM resource model.
+  - code: PutInOperationName
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
+    reason: >-
+      This PUT approves or rejects an existing private endpoint connection; it
+      does not create the connection. The approval-specific operation ID
+      PrivateEndpointConnections_ApproveOrReject describes the service behavior.
 ```
 
 ### Tag: package-horizondb-2026-05-01-preview

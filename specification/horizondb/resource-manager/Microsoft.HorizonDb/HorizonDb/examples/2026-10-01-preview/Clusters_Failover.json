@@ -1,0 +1,47 @@
+{
+  "operationId": "Clusters_Failover",
+  "title": "Trigger failover within a HorizonDB cluster",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "api-version": "2026-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster",
+        "name": "example-cluster",
+        "type": "Microsoft.HorizonDb/clusters",
+        "location": "eastus2",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "postgreSqlVersion": "17",
+          "creationMode": "Create",
+          "network": {
+            "publicAccess": "Enabled"
+          },
+          "backup": {
+            "geoRedundancy": "Enabled",
+            "retentionDays": 14,
+            "earliestRestorePointUtc": "2026-07-27T02:00:00Z"
+          },
+          "state": "Ready",
+          "provisioningState": "Succeeded",
+          "readWritePool": {
+            "designatedPoolResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/pools/example-pool-01"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/operationStatuses/44444444-4444-4444-4444-444444444444",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/operationResults/44444444-4444-4444-4444-444444444444",
+        "Retry-After": 10
+      }
+    }
+  }
+}
