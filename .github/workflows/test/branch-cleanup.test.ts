@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { load } from "js-yaml";
+import { parse } from "yaml";
 import { expect, it, vi } from "vitest";
 import { cleanupBranches, isStale } from "../src/branch-cleanup.ts";
 import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
@@ -175,7 +175,7 @@ it.each([0, -1, 1.5, NaN, Infinity, Number.MAX_SAFE_INTEGER + 1])(
 
 it("defaults manual runs to dry run with separate retention inputs", async () => {
   const yaml = await readFile(join(import.meta.dirname, "../branch-cleanup.yaml"), "utf8");
-  expect(load(yaml)).toMatchObject({
+  expect(parse(yaml)).toMatchObject({
     on: {
       workflow_dispatch: {
         inputs: {

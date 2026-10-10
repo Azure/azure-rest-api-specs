@@ -70,6 +70,45 @@ jobs:
       # Avoid pnpm run auto-installing the rest of the workspace.
       - run: node ./.github/workflows/src/validate-workspace.ts
 
+  action-lint:
+    name: GitHub Actions lint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github
+
+      # Content copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
+      - name: Add ActionLint Problem Matcher
+        run: echo "::add-matcher::.github/matchers/actionlint.json"
+
+      - name: Lint workflows
+        uses: docker://rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+        with:
+          args: -color -verbose
+
+      - name: Select handwritten workflows and actions
+        id: zizmor-inputs
+        shell: bash
+        run: |
+          paths=$(git ls-files -- \
+            '.github/workflows/*.yml' '.github/workflows/*.yaml' \
+            '.github/actions/**/action.yml' '.github/actions/**/action.yaml' |
+            grep -vE '(\.lock\.yml|/agentics-maintenance\.yml)$' | paste -sd ' ' -)
+          test -n "$paths"
+          echo "paths=$paths" >> "$GITHUB_OUTPUT"
+
+      - name: Run zizmor
+        uses: zizmorcore/zizmor-action@cc914d7f3750a2d13d75c7f184a1060aa0e9d482 # v0.6.4
+        with:
+          inputs: ${{ steps.zizmor-inputs.outputs.paths }}
+          collect: workflows,actions
+          advanced-security: false
+          annotations: true
+
   build:
     name: Type check
     runs-on: ubuntu-24.04

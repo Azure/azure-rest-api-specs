@@ -1,0 +1,116 @@
+{
+  "operationId": "Workbenches_CreateOrUpdate",
+  "title": "PutWorkbench",
+  "parameters": {
+    "api-version": "2026-09-15-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rgcognitiveservices",
+    "accountName": "myAccount",
+    "projectName": "myProject",
+    "workbenchName": "myWorkbench",
+    "resource": {
+      "properties": {
+        "targetClusterId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/vc-rg/providers/Microsoft.MachineLearningServices/virtualClusters/test-vc",
+        "imageLink": "mcr.microsoft.com/azureml/curated/pytorch-gpu:latest",
+        "instanceType": "Singularity.ND12_H100_v5-n1",
+        "gpuCount": 1,
+        "idleTimeBeforeShutdown": "PT30M",
+        "datasetId": "dataset-12345",
+        "sshSettings": {
+          "sshPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQ...",
+          "adminEnabled": true
+        }
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "targetClusterId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/vc-rg/providers/Microsoft.MachineLearningServices/virtualClusters/test-vc",
+          "imageLink": "mcr.microsoft.com/azureml/curated/pytorch-gpu:latest",
+          "instanceType": "Singularity.ND12_H100_v5-n1",
+          "gpuCount": 1,
+          "idleTimeBeforeShutdown": "PT30M",
+          "datasetId": "dataset-12345",
+          "sshSettings": {
+            "sshPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQ...",
+            "adminEnabled": true
+          },
+          "connectivityEndpoints": {
+            "publicIpAddress": "20.42.51.100",
+            "sshPort": 50000
+          },
+          "webEndpoint": "https://myworkbench.eastus.api.azureml.ms",
+          "provisioningState": "Succeeded",
+          "status": "Running",
+          "errors": [],
+          "creationTime": "2026-03-24T12:00:00.000Z"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {
+              "principalId": "00000000-0000-0000-0000-000000000001",
+              "clientId": "00000000-0000-0000-0000-000000000002"
+            }
+          }
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject/workbenches/myWorkbench",
+        "name": "myWorkbench",
+        "type": "Microsoft.CognitiveServices/accounts/projects/workbenches",
+        "systemData": {
+          "createdBy": "xxx@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-24T12:00:00.000Z",
+          "lastModifiedBy": "xxx@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-24T12:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/eastus/computeoperations/op-guid?api-version=2026-01-15-preview&type=async",
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/eastus/computeoperations/op-guid?api-version=2026-01-15-preview&type=location",
+        "Retry-After": "5"
+      },
+      "body": {
+        "properties": {
+          "targetClusterId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/vc-rg/providers/Microsoft.MachineLearningServices/virtualClusters/test-vc",
+          "imageLink": "mcr.microsoft.com/azureml/curated/pytorch-gpu:latest",
+          "instanceType": "Singularity.ND12_H100_v5-n1",
+          "gpuCount": 1,
+          "idleTimeBeforeShutdown": "PT30M",
+          "datasetId": "dataset-12345",
+          "sshSettings": {
+            "sshPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQ...",
+            "adminEnabled": true
+          },
+          "provisioningState": "Creating",
+          "status": "Creating",
+          "errors": [],
+          "creationTime": "2026-03-24T12:00:00.000Z"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject/workbenches/myWorkbench",
+        "name": "myWorkbench",
+        "type": "Microsoft.CognitiveServices/accounts/projects/workbenches",
+        "systemData": {
+          "createdBy": "xxx@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-24T12:00:00.000Z",
+          "lastModifiedBy": "xxx@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-24T12:00:00.000Z"
+        }
+      }
+    }
+  }
+}
