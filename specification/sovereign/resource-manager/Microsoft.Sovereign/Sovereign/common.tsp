@@ -10,11 +10,12 @@ namespace Microsoft.Sovereign;
 
 @doc("The Microsoft Sovereign Provider version.")
 enum Versions {
-  @doc("Public preview version.")
-  Preview20250227: "2025-02-27-preview",
+  @doc("The 2026-10-31 preview version.")
+  @previewVersion
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  Preview20261031: "2026-10-31-preview",
 }
 
-@added(Versions.Preview20250227)
 @doc("The custom provisioning state.")
 union provisioningState {
   ResourceProvisioningState,
