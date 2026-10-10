@@ -86,6 +86,95 @@ interface EvaluationSuites
   >;
 }
 
+/** Operations for versioned EvalSuite job definitions. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry preview operations use the project-standard feature-header and error-envelope template."
+@tag("EvalSuites")
+@removed(Versions.v1)
+interface EvalSuites {
+  /** Lists the latest version of each EvalSuite. */
+  @summary("List EvalSuites")
+  @get
+  @list
+  @route("/eval_suites")
+  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+  list is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    CommonPageQueryParameters,
+    AgentsPagedResult<EvalSuiteVersion>
+  >;
+
+  /** Creates an EvalSuite version with a service-generated version identifier. */
+  @summary("Create an EvalSuite version")
+  @post
+  @route("/eval_suites/{name}/versions")
+  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+  createVersion is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      /** The EvalSuite name. */
+      @path name: string;
+
+      /** The complete suite definition to publish. */
+      @bodyRoot eval_suite: EvalSuiteVersion;
+    },
+    Response<201> & EvalSuiteVersion
+  >;
+
+  /** Creates or verifies an explicitly versioned EvalSuite definition. */
+  @summary("Create or verify an EvalSuite version")
+  @put
+  @route("/eval_suites/{name}/versions/{version}")
+  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+  createOrReplaceVersion is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      /** The EvalSuite name. */
+      @path name: string;
+
+      /** The exact version identifier. */
+      @path version: string;
+
+      /** The complete suite definition to publish or verify. */
+      @bodyRoot eval_suite: EvalSuiteVersion;
+    },
+    Foundations.ResourceCreatedOrOkResponse<EvalSuiteVersion>
+  >;
+
+  /** Lists every version of an EvalSuite. */
+  @summary("List EvalSuite versions")
+  @get
+  @list
+  @route("/eval_suites/{name}/versions")
+  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+  listVersions is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      /** The EvalSuite name. */
+      @path name: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<EvalSuiteVersion>
+  >;
+
+  /** Retrieves an exact EvalSuite version. */
+  @summary("Get an EvalSuite version")
+  @get
+  @route("/eval_suites/{name}/versions/{version}")
+  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+  getVersion is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      /** The EvalSuite name. */
+      @path name: string;
+
+      /** The exact version identifier. */
+      @path version: string;
+    },
+    OkResponse & EvalSuiteVersion
+  >;
+}
+
 /** Operations for the existing evaluation-suite generation preview. */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing OpenAI-based suite operations are not conventionally versioned."
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing OpenAI-based suite operations use the shared job pattern."

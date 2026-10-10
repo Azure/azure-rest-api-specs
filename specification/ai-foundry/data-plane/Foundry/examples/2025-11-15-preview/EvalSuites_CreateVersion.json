@@ -1,14 +1,26 @@
 {
-  "title": "Publish an evaluation suite referencing an exact task set",
-  "operationId": "EvaluationSuites_createEvaluationSuiteVersion",
+  "title": "Publish an EvalSuite with a pinned HarnessTaskSet and run configuration",
+  "operationId": "EvalSuites_createVersion",
   "parameters": {
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
     "name": "claims-regression",
     "body": {
-      "task_set": {
+      "harness_task_set": {
         "name": "claims-regression",
         "version": "1"
+      },
+      "run_config": {
+        "type": "harness_invocation",
+        "harness": {
+          "type": "foundry_agent",
+          "agent": {
+            "name": "claims-agent",
+            "version": "7"
+          }
+        },
+        "repetitions": 1,
+        "concurrency": 2
       },
       "graders": [
         {
@@ -33,9 +45,21 @@
       "body": {
         "name": "claims-regression",
         "version": "1",
-        "task_set": {
+        "harness_task_set": {
           "name": "claims-regression",
           "version": "1"
+        },
+        "run_config": {
+          "type": "harness_invocation",
+          "harness": {
+            "type": "foundry_agent",
+            "agent": {
+              "name": "claims-agent",
+              "version": "7"
+            }
+          },
+          "repetitions": 1,
+          "concurrency": 2
         },
         "graders": [
           {

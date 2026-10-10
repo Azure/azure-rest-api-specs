@@ -7,31 +7,31 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-// Open question (Eval 2.0 spec): page /task_sets/{name}/versions/{version}/tasks,
+// Open question (Eval 2.0 spec): page /harness_task_sets/{name}/versions/{version}/tasks,
 // add GET .../tasks/{taskId}, and allow base_version + upsert_tasks/remove_task_ids
 // on createVersion to publish a new version. Never mutate pinned versions.
 
-/** Operations for immutable evaluation task-set versions. */
+/** Operations for immutable HarnessTaskSet versions. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry preview operations use the project-standard feature-header and error-envelope template."
-@tag("EvaluationTaskSets")
+@tag("HarnessTaskSets")
 @removed(Versions.v1)
-interface EvaluationTaskSets {
+interface HarnessTaskSets {
   /** Lists the latest version of each task set. */
-  @summary("List evaluation task sets")
+  @summary("List harness task sets")
   @get
   @list
-  @route("/task_sets")
+  @route("/harness_task_sets")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   list is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     CommonPageQueryParameters,
-    AgentsPagedResult<EvaluationTaskSetVersion>
+    AgentsPagedResult<HarnessTaskSetVersion>
   >;
 
   /** Creates a task-set version with a service-generated version identifier. */
-  @summary("Create an evaluation task-set version")
+  @summary("Create a harness task-set version")
   @post
-  @route("/task_sets/{name}/versions")
+  @route("/harness_task_sets/{name}/versions")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   createVersion is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -40,15 +40,15 @@ interface EvaluationTaskSets {
       @path name: string;
 
       /** The task-set version to create. */
-      @bodyRoot task_set: EvaluationTaskSetVersion;
+      @bodyRoot task_set: HarnessTaskSetVersion;
     },
-    Response<201> & EvaluationTaskSetVersion
+    Response<201> & HarnessTaskSetVersion
   >;
 
   /** Creates an explicitly versioned task set or verifies that an existing version has the same definition. */
-  @summary("Create or verify an evaluation task-set version")
+  @summary("Create or verify a harness task-set version")
   @put
-  @route("/task_sets/{name}/versions/{version}")
+  @route("/harness_task_sets/{name}/versions/{version}")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   createOrReplaceVersion is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -60,16 +60,16 @@ interface EvaluationTaskSets {
       @path version: string;
 
       /** The task-set version to create or reconcile. */
-      @bodyRoot task_set: EvaluationTaskSetVersion;
+      @bodyRoot task_set: HarnessTaskSetVersion;
     },
-    Foundations.ResourceCreatedOrOkResponse<EvaluationTaskSetVersion>
+    Foundations.ResourceCreatedOrOkResponse<HarnessTaskSetVersion>
   >;
 
   /** Lists all versions of a task set. */
-  @summary("List evaluation task-set versions")
+  @summary("List harness task-set versions")
   @get
   @list
-  @route("/task_sets/{name}/versions")
+  @route("/harness_task_sets/{name}/versions")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   listVersions is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -79,13 +79,13 @@ interface EvaluationTaskSets {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<EvaluationTaskSetVersion>
+    AgentsPagedResult<HarnessTaskSetVersion>
   >;
 
   /** Retrieves an exact task-set version. */
-  @summary("Get an evaluation task-set version")
+  @summary("Get a harness task-set version")
   @get
-  @route("/task_sets/{name}/versions/{version}")
+  @route("/harness_task_sets/{name}/versions/{version}")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   getVersion is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -96,6 +96,6 @@ interface EvaluationTaskSets {
       /** The exact version identifier. */
       @path version: string;
     },
-    OkResponse & EvaluationTaskSetVersion
+    OkResponse & HarnessTaskSetVersion
   >;
 }

@@ -8,109 +8,29 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
-/** A reference to an exact Foundry agent version. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model FoundryAgentReference {
-  /** The agent name. */
-  name: string;
-
-  /** The exact agent version. */
-  version: string;
-}
-
-/** The supported evaluation harness types. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvaluationHarnessType {
-  string,
-
-  /** Invoke a versioned Foundry agent. */
-  foundry_agent: "foundry_agent",
-}
-
-/** The harness used to execute evaluation tasks. */
-@discriminator("type")
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationHarness {
-  /** The harness type. */
-  type: EvaluationHarnessType;
-}
-
-/** A harness that invokes a versioned Foundry agent. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model FoundryAgentHarness extends EvaluationHarness {
-  /** Indicates that this harness invokes a Foundry agent. */
-  type: EvaluationHarnessType.foundry_agent;
-
-  /** The exact agent version to invoke. */
-  agent: FoundryAgentReference;
-}
-
-/** The supported evaluation-run configuration types. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvaluationRunConfigurationType {
-  string,
-
-  /** Invoke the configured harness for each task attempt. */
-  harness_invocation: "harness_invocation",
-}
-
-/** Per-attempt execution constraints. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model ExecutionConstraints {
-  /** The maximum attempt duration in seconds. */
-  max_duration_seconds?: int32;
-
-  /** The maximum total tokens consumed by an attempt. */
-  max_tokens?: int64;
-
-  /** The maximum tool calls made by an attempt. */
-  max_tool_calls?: int32;
-
-  /** The maximum estimated cost in US dollars for an attempt. */
-  max_cost_usd?: decimal128;
-}
-
-/** Configuration for executing an evaluation run through a harness. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationRunConfig {
-  /** The run-configuration type. */
-  type: EvaluationRunConfigurationType.harness_invocation;
-
-  /** The harness invoked for every task attempt. */
-  harness: FoundryAgentHarness;
-
-  /** The number of attempts created for each task. */
-  @minValue(1)
-  repetitions?: int32 = 1;
-
-  /** The maximum number of task attempts executed concurrently. */
-  @minValue(1)
-  concurrency?: int32 = 1;
-
-  /** Per-attempt execution constraints. */
-  constraints?: ExecutionConstraints;
-}
-
 /** Caller-supplied immutable inputs for an evaluation run. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationRunInputs {
-  /** The exact evaluation-suite version to execute. */
-  suite: EvaluationSuiteReference;
+model EvalRunInputs {
+  /** The exact suite version to execute; exclusive with inline_suite. */
+  suite?: EvalSuiteReference;
 
-  /** The harness and execution settings for the run. */
-  run_config: EvaluationRunConfig;
+  /** A complete one-off suite definition; exclusive with suite and run_config_overrides. */
+  inline_suite?: InlineEvalSuite;
+
+  /** Execution settings replacing a referenced suite's defaults for this run. */
+  run_config_overrides?: EvalRunConfigOverrides;
 }
 
 /** Request to create an evaluation run with immutable caller-supplied inputs. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationRunCreateContent {
+model EvalRunCreateContent {
   /** The immutable inputs used throughout the run. */
-  inputs: EvaluationRunInputs;
+  inputs: EvalRunInputs;
 }
 
 /** Aggregate results produced by a completed evaluation run. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationRunResult {
+model EvalRunResult {
   /** The total number of task runs. */
   task_run_count: int32;
 
@@ -127,9 +47,13 @@ model EvaluationRunResult {
   pass_rate: float32 | null;
 }
 
-/** A durable evaluation run. */
+/** A durable Foundry evaluation run, distinct from the existing OpenAI EvalRun. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationRun is JobLike<EvaluationRunResult, EvaluationRunInputs> {
+model FoundryEvalRun is JobLike<EvalRunResult, EvalRunInputs> {
+  /** The effective suite execution configuration after run overrides. */
+  @visibility(Lifecycle.Read)
+  resolved_run_config: EvalRunConfig;
+
   /** The time when the run was accepted. */
   @visibility(Lifecycle.Read)
   created_at: utcDateTime;
@@ -319,14 +243,14 @@ model EvaluationTaskRunError {
   artifact_ids?: string[];
 }
 
-/** One attempt of one task within an evaluation run. */
+/** One attempt of one task within an EvalRun. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTaskRun {
+model EvalTaskRun {
   /** The task-run identifier. */
   id: string;
 
-  /** The parent evaluation-run identifier. */
-  evaluation_run_id: string;
+  /** The parent EvalRun identifier. */
+  eval_run_id: string;
 
   /** The resolved task identity. */
   task: EvaluationTaskSummary;

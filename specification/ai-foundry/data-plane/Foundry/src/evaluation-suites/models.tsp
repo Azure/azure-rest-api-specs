@@ -4,6 +4,7 @@ import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 import "../task-sets/models.tsp";
 import "../openai/evaluations/models.tsp";
+import "./run-config.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -164,6 +165,91 @@ model EvaluationSuiteVersion {
   /** User-defined tags. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
+}
+
+/** A reference to an exact HarnessTaskSet version. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model HarnessTaskSetReference {
+  /** The HarnessTaskSet name. */
+  name: string;
+
+  /** The exact HarnessTaskSet version. */
+  version: string;
+}
+
+/** A published HarnessTaskSet reference or inline tasks for a one-off suite. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+union HarnessTaskSetSource {
+  HarnessTaskSetReference,
+  InlineHarnessTaskSet,
+}
+
+/** A reference to an exact EvalSuite version. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvalSuiteReference {
+  /** The EvalSuite name. */
+  name: string;
+
+  /** The exact EvalSuite version. */
+  version: string;
+}
+
+/** The MVP rule for combining grader verdicts. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model ScoringRule {
+  /** The task passes only when every applicable grader passes. */
+  aggregation: EvaluationAggregation.all_pass;
+}
+
+/** Shared grading and execution settings for published and inline EvalSuites. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvalSuiteDefinition {
+  /** Graders applied to every task in the suite. */
+  graders?: InlineEvaluationGrader[];
+
+  /** How grader verdicts determine the task-run outcome. */
+  scoring: ScoringRule;
+
+  /** The harness and default execution settings. */
+  run_config: EvalRunConfig;
+
+  // Future scheduling settings belong to the suite, not an individual EvalRun.
+}
+
+/** An immutable version of a reusable evaluation job definition. */
+@resource("eval_suites")
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvalSuiteVersion {
+  ...EvalSuiteDefinition;
+
+  /** The suite name. */
+  @visibility(Lifecycle.Read)
+  @key
+  name: string;
+
+  /** The immutable suite version. */
+  @visibility(Lifecycle.Read)
+  version: string;
+
+  /** The suite description. */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  description?: string;
+
+  /** The exact published HarnessTaskSet version to evaluate. */
+  harness_task_set: HarnessTaskSetReference;
+
+  /** User-defined tags. */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+}
+
+/** A complete one-off suite definition that is retained only with the run. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model InlineEvalSuite {
+  ...EvalSuiteDefinition;
+
+  /** A published HarnessTaskSet version or tasks supplied just for this run. */
+  harness_task_set: HarnessTaskSetSource;
 }
 
 /** Request to run a suite through the existing evaluation preview. */

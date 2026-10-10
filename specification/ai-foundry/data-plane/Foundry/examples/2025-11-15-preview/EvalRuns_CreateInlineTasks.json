@@ -1,0 +1,117 @@
+{
+  "title": "Run a fully inline suite with tasks supplied in the request",
+  "operationId": "EvalRuns_create",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "body": {
+      "inputs": {
+        "inline_suite": {
+          "harness_task_set": {
+            "tasks": [
+              {
+                "id": "covered-water-damage",
+                "name": "Covered water damage",
+                "inputs": {
+                  "text": "Review claim 12345 and cite the applicable policy."
+                },
+                "expected": {
+                  "decision": "approved"
+                }
+              }
+            ]
+          },
+          "graders": [
+            {
+              "name": "decision_check",
+              "type": "deterministic",
+              "check": {
+                "field": "outputs.text",
+                "operator": "contains",
+                "value_from": "inputs.expected.decision"
+              }
+            }
+          ],
+          "scoring": {
+            "aggregation": "all_pass"
+          },
+          "run_config": {
+            "type": "harness_invocation",
+            "harness": {
+              "type": "foundry_agent",
+              "agent": {
+                "name": "claims-agent",
+                "version": "7"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "/eval_runs/evalrun_01J9Z8M6HE",
+        "Location": "/eval_runs/evalrun_01J9Z8M6HE"
+      },
+      "body": {
+        "id": "evalrun_01J9Z8M6HE",
+        "status": "queued",
+        "inputs": {
+          "inline_suite": {
+            "harness_task_set": {
+              "tasks": [
+                {
+                  "id": "covered-water-damage",
+                  "name": "Covered water damage",
+                  "inputs": {
+                    "text": "Review claim 12345 and cite the applicable policy."
+                  },
+                  "expected": {
+                    "decision": "approved"
+                  }
+                }
+              ]
+            },
+            "graders": [
+              {
+                "name": "decision_check",
+                "type": "deterministic",
+                "check": {
+                  "field": "outputs.text",
+                  "operator": "contains",
+                  "value_from": "inputs.expected.decision"
+                }
+              }
+            ],
+            "scoring": {
+              "aggregation": "all_pass"
+            },
+            "run_config": {
+              "type": "harness_invocation",
+              "harness": {
+                "type": "foundry_agent",
+                "agent": {
+                  "name": "claims-agent",
+                  "version": "7"
+                }
+              }
+            }
+          }
+        },
+        "resolved_run_config": {
+          "type": "harness_invocation",
+          "harness": {
+            "type": "foundry_agent",
+            "agent": {
+              "name": "claims-agent",
+              "version": "7"
+            }
+          }
+        },
+        "created_at": "2026-10-09T05:40:00Z"
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "title": "Start an evaluation run",
-  "operationId": "EvaluationRuns_create",
+  "title": "Run a published EvalSuite with execution overrides",
+  "operationId": "EvalRuns_create",
   "parameters": {
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
@@ -11,13 +11,12 @@
           "name": "claims-regression",
           "version": "1"
         },
-        "run_config": {
-          "type": "harness_invocation",
+        "run_config_overrides": {
           "harness": {
             "type": "foundry_agent",
             "agent": {
               "name": "claims-agent",
-              "version": "7"
+              "version": "8"
             }
           },
           "repetitions": 3,
@@ -29,8 +28,8 @@
   "responses": {
     "201": {
       "headers": {
-        "Operation-Location": "/evaluation_runs/evalrun_01J9Z7F6J2",
-        "Location": "/evaluation_runs/evalrun_01J9Z7F6J2"
+        "Operation-Location": "/eval_runs/evalrun_01J9Z7F6J2",
+        "Location": "/eval_runs/evalrun_01J9Z7F6J2"
       },
       "body": {
         "id": "evalrun_01J9Z7F6J2",
@@ -40,18 +39,29 @@
             "name": "claims-regression",
             "version": "1"
           },
-          "run_config": {
-            "type": "harness_invocation",
+          "run_config_overrides": {
             "harness": {
               "type": "foundry_agent",
               "agent": {
                 "name": "claims-agent",
-                "version": "7"
+                "version": "8"
               }
             },
             "repetitions": 3,
             "concurrency": 3
           }
+        },
+        "resolved_run_config": {
+          "type": "harness_invocation",
+          "harness": {
+            "type": "foundry_agent",
+            "agent": {
+              "name": "claims-agent",
+              "version": "8"
+            }
+          },
+          "repetitions": 3,
+          "concurrency": 3
         },
         "created_at": "2026-10-09T05:40:00Z"
       }

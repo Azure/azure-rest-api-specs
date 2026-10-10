@@ -37,7 +37,7 @@ model EvaluationGrader {
 
 /** One criterion evaluated by a language-model judge. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationRubricCriterion {
+model LlmJudgeCriterion {
   /** The criterion identifier. */
   id: string;
 
@@ -47,7 +47,7 @@ model EvaluationRubricCriterion {
 
 /** An inline language-model judge. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationLlmJudgeGrader extends EvaluationGrader {
+model LlmJudgeGrader extends EvaluationGrader {
   /** Indicates that this grader uses a language model. */
   type: EvaluationGraderType.llm_judge;
 
@@ -56,7 +56,7 @@ model EvaluationLlmJudgeGrader extends EvaluationGrader {
 
   /** The criteria evaluated by the judge. */
   @minItems(1)
-  criteria: EvaluationRubricCriterion[];
+  criteria: LlmJudgeCriterion[];
 }
 
 /** The supported deterministic grader operators. */
@@ -85,7 +85,7 @@ union EvaluationDeterministicOperator {
 
 /** An inline deterministic grader. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationDeterministicGrader extends EvaluationGrader {
+model DeterministicGrader extends EvaluationGrader {
   /** Indicates that this grader applies a deterministic operator. */
   type: EvaluationGraderType.deterministic;
 
@@ -112,13 +112,13 @@ model EvaluationDeterministicCheck {
 /** The inline graders supported by the evaluation MVP. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 union InlineEvaluationGrader {
-  EvaluationLlmJudgeGrader,
-  EvaluationDeterministicGrader,
+  LlmJudgeGrader,
+  DeterministicGrader,
 }
 
 /** A reusable evaluation task. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTask {
+model HarnessTask {
   /** The task identifier, unique within the task-set version. */
   id: string;
 
@@ -139,12 +139,23 @@ model EvaluationTask {
 
   /** User-defined task metadata. */
   metadata?: Record<unknown>;
+
+  /** Reserved for future multi-step tasks; rejected in the MVP. */
+  steps?: unknown[];
+}
+
+/** Task definitions supplied with a one-off inline suite. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model InlineHarnessTaskSet {
+  /** The tasks to execute without publishing a HarnessTaskSet. */
+  @minItems(1)
+  tasks: HarnessTask[];
 }
 
 /** An immutable version of a reusable evaluation task set. */
-@resource("task_sets")
+@resource("harness_task_sets")
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTaskSetVersion {
+model HarnessTaskSetVersion {
   /** The task-set name. */
   @visibility(Lifecycle.Read)
   @key
@@ -160,7 +171,7 @@ model EvaluationTaskSetVersion {
 
   /** The tasks contained in this version. */
   @minItems(1)
-  tasks: EvaluationTask[];
+  tasks: HarnessTask[];
 
   /** User-defined tags. */
   @visibility(Lifecycle.Create, Lifecycle.Update)

@@ -1,6 +1,6 @@
 {
   "title": "Get a completed evaluation run",
-  "operationId": "EvaluationRuns_get",
+  "operationId": "EvalRuns_get",
   "parameters": {
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
@@ -16,18 +16,22 @@
             "name": "claims-regression",
             "version": "1"
           },
-          "run_config": {
-            "type": "harness_invocation",
-            "harness": {
-              "type": "foundry_agent",
-              "agent": {
-                "name": "claims-agent",
-                "version": "7"
-              }
-            },
+          "run_config_overrides": {
             "repetitions": 3,
             "concurrency": 3
           }
+        },
+        "resolved_run_config": {
+          "type": "harness_invocation",
+          "harness": {
+            "type": "foundry_agent",
+            "agent": {
+              "name": "claims-agent",
+              "version": "7"
+            }
+          },
+          "repetitions": 3,
+          "concurrency": 3
         },
         "result": {
           "task_run_count": 6,
