@@ -24,6 +24,7 @@ namespace Microsoft.MachineLearningServices;
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model RaiPolicyPropertiesBasicResource is Azure.ResourceManager.ProxyResource<
   RaiPolicyProperties,
@@ -48,6 +49,7 @@ model RaiPolicyPropertiesBasicResource is Azure.ResourceManager.ProxyResource<
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface RaiPolicyPropertiesBasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -92,6 +94,7 @@ interface RaiPolicyPropertiesBasicResourceOps
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface RaiPolicyPropertiesBasicResources {
   /**
@@ -148,6 +151,7 @@ interface RaiPolicyPropertiesBasicResources {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface RaiPolicyOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -192,6 +196,7 @@ interface RaiPolicyOps
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface RaiPolicy {
   /**
