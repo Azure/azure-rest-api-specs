@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace AutoScaleApi;
 /**
@@ -23,6 +25,7 @@ model AutoscaleSettingResource is Azure.ResourceManager.TrackedResource<
     SegmentName = "autoscalesettings",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations(#{ omitTags: true })
@@ -133,6 +136,11 @@ interface AutoscaleSettingResources {
 @@doc(
   AutoscaleSettingResource.properties,
   "The autoscale setting of the resource."
+);
+@@added(AutoscaleSettingResource.identity, Versions.v2025_09_01_preview);
+@@doc(
+  AutoscaleSettingResource.identity,
+  "The managed service identities assigned to this resource. Only user-assigned identities are supported; 'SystemAssigned' and 'SystemAssigned,UserAssigned' are rejected. At most one user-assigned managed identity may be assigned to an autoscale setting. To remove the assigned identity, send 'type' as 'None'."
 );
 @@doc(
   AutoscaleSettingResources.createOrUpdate::parameters.resource,
