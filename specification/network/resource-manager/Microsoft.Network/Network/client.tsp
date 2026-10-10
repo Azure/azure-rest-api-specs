@@ -7842,3 +7842,5 @@ op replaceprivateDnsZoneGroupsList(
   "enableOnlyIpv6Peering",
   "python"
 );
+
+@@clientName(Nat64Capability, "NAT64Capability", "go");
