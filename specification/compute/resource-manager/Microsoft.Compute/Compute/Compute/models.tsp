@@ -6679,6 +6679,13 @@ model VirtualMachineProperties {
   hardwareProfile?: HardwareProfile;
 
   /**
+   * [Preview Feature] Specifies the Instance Profile to use as a template when creating the virtual machine. The resource ID must use the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/instanceProfiles/{instanceProfileName}/versions/{versionNumber}. Properties from the Instance Profile populate the VM request, and properties explicitly provided in the request override profile values. This property can be specified only during VM creation and is returned by GET and LIST operations. It cannot be added or changed on an existing VM.
+   */
+  @added(Versions.v2026_03_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  instanceProfile?: SubResource;
+
+  /**
    * Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine.
    */
   scheduledEventsPolicy?: ScheduledEventsPolicy;
