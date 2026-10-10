@@ -1632,7 +1632,7 @@ scalar TelephonyCampaignName extends string;
 @doc("A durable direct or campaign-created outbound call intent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJob {
-  ...TelephonyCallJobConfiguration;
+  ...OmitProperties<TelephonyCallJobConfiguration, "source">;
 
   @doc("The service-generated call-job identifier.")
   id: TelephonyCallJobId;
@@ -1642,10 +1642,6 @@ model TelephonyCallJob {
 
   @doc("The name of the voice agent used at execution time.")
   agent_name: string;
-
-  @doc("The owning Campaign name under this Agent. Absent for direct calls. Campaign deletion also deletes its CallJobs; owned jobs are hidden once cascade deletion is accepted. Association and cleanup use the immutable internal Campaign instance, so name reuse cannot associate old work with a replacement.")
-  @visibility(Lifecycle.Read)
-  campaign_name?: TelephonyCampaignName;
 
   @doc("The current call-job lifecycle status.")
   status: TelephonyCallJobStatus;
@@ -1675,6 +1671,13 @@ model TelephonyCallJob {
 
   @doc("The Unix timestamp in seconds when the call job was last updated.")
   updated_at: FoundryTimestamp;
+
+  // Preserve the existing SDK response order when appending Campaign fields.
+  ...PickProperties<TelephonyCallJobConfiguration, "source">;
+
+  @doc("The owning Campaign name under this Agent. Absent for direct calls. Campaign deletion also deletes its CallJobs; owned jobs are hidden once cascade deletion is accepted. Association and cleanup use the immutable internal Campaign instance, so name reuse cannot associate old work with a replacement.")
+  @visibility(Lifecycle.Read)
+  campaign_name?: TelephonyCampaignName;
 }
 
 alias TelephonyCallJobResponse = {

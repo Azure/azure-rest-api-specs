@@ -89479,7 +89479,6 @@ components:
       required:
         - destination
         - connection_name
-        - source
         - id
         - object
         - agent_name
@@ -89489,6 +89488,7 @@ components:
         - revision
         - created_at
         - updated_at
+        - source
       properties:
         destination:
           $ref: '#/components/schemas/TelephonyOutboundDestination'
@@ -89498,10 +89498,6 @@ components:
           minLength: 1
           maxLength: 256
           description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required.
-        source:
-          $ref: '#/components/schemas/TelephonyOutboundSource'
-          minLength: 1
-          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
         purpose:
           type: string
           minLength: 1
@@ -89524,10 +89520,6 @@ components:
         agent_name:
           type: string
           description: The name of the voice agent used at execution time.
-        campaign_name:
-          $ref: '#/components/schemas/TelephonyCampaignName'
-          description: The owning Campaign name under this Agent. Absent for direct calls. Campaign deletion also deletes its CallJobs; owned jobs are hidden once cascade deletion is accepted. Association and cleanup use the immutable internal Campaign instance, so name reuse cannot associate old work with a replacement.
-          readOnly: true
         status:
           $ref: '#/components/schemas/TelephonyCallJobStatus'
           description: The current call-job lifecycle status.
@@ -89559,6 +89551,14 @@ components:
         updated_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp in seconds when the call job was last updated.
+        source:
+          $ref: '#/components/schemas/TelephonyOutboundSource'
+          minLength: 1
+          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
+        campaign_name:
+          $ref: '#/components/schemas/TelephonyCampaignName'
+          description: The owning Campaign name under this Agent. Absent for direct calls. Campaign deletion also deletes its CallJobs; owned jobs are hidden once cascade deletion is accepted. Association and cleanup use the immutable internal Campaign instance, so name reuse cannot associate old work with a replacement.
+          readOnly: true
       description: A durable direct or campaign-created outbound call intent.
       x-ms-foundry-meta:
         required_previews:
