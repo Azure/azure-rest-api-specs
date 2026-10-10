@@ -8,7 +8,7 @@ import {
 } from "../../shared/src/github.ts";
 import { byDate, invert } from "../../shared/src/sort.ts";
 import { extractInputs } from "./context.ts";
-import type { Core, GitHubScriptArgs } from "./github.ts";
+import type { Core, GitHub, GitHubScriptArgs } from "./github.ts";
 
 // TODO: Add tests
 /* v8 ignore start */
@@ -58,10 +58,7 @@ export async function setStatusImpl({
   head_sha: string;
   issue_number: number;
   target_url: string;
-  github: import("@octokit/core").Octokit &
-    import("@octokit/plugin-rest-endpoint-methods").Api & {
-      paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
-    };
+  github: GitHub;
   core: Core;
   monitoredWorkflowName: string;
   requiredStatusName: string;

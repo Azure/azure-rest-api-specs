@@ -1,6 +1,6 @@
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { join } from "pathe";
 import { failure, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { fileExists } from "../utils.ts";

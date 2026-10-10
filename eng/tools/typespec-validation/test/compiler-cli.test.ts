@@ -1,12 +1,11 @@
 import { execFile } from "node:child_process";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
 import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { normalizePath } from "../src/utils.ts";
 
 const exec = promisify(execFile);
 const cli = fileURLToPath(new URL("../cmd/tsv.js", import.meta.url));
@@ -14,7 +13,7 @@ const project = "specification/service/data-plane/Project";
 let root: string;
 
 beforeEach(async () => {
-  root = await realpath(await mkdtemp(join(tmpdir(), "tsv-command-cli-")));
+  root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-command-cli-"))));
   await writeFile(join(root, ".gitattributes"), "* text=auto eol=lf\n");
   vi.stubEnv("DEBUG", "");
   vi.stubEnv("GITHUB_ACTIONS", "false");
@@ -148,7 +147,7 @@ it.each([false, true])("compiles one entrypoint with main present=%s", async (ma
     .map((line): unknown => JSON.parse(line));
   expect(args).toEqual([
     mainExists
-      ? ["compile", "--list-files", "--warn-as-error", normalizePath(folder)]
+      ? ["compile", "--list-files", "--warn-as-error", resolve(folder)]
       : ["compile", "--no-emit", "--warn-as-error", join(folder, "client.tsp")],
   ]);
 });

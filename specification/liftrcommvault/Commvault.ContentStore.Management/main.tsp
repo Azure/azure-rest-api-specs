@@ -4,7 +4,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./back-compatible.tsp";
 import "./client.tsp";
 
 using TypeSpec.Http;
@@ -53,10 +52,13 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v1_preview)
   v8_preview: "2026-07-03-preview",
 
-  @doc("The 2026-08-01-preview API version, using LiftrBase.Versions.v3_preview.")
-  @Azure.Core.previewVersion
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v3_preview")
   @useDependency(LiftrBase.Versions.v3_preview)
   v9_preview: "2026-08-01-preview",
+
+  @doc("The 2026-09-30 stable API version, dependent on LiftrBase.Versions.v3_preview.")
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v2026_09_30: "2026-09-30",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -138,6 +140,7 @@ model CompanyProfile {
 @added(Versions.v9_preview)
 model ActivateSaaSRequestParam {
   @doc("Optional Marketplace SaaS resource identifier")
+  @added(Versions.v9_preview)
   saasResourceId?: string;
 
   @doc("Optional user details")
@@ -202,15 +205,6 @@ interface CloudAccounts {
   >;
 }
 
-@@typeChangedFrom(
-  CloudAccounts.update::parameters.properties,
-  Versions.v9_preview,
-  Azure.ResourceManager.Foundations.ResourceUpdateModel<
-    CloudAccount,
-    CloudAccountProperties
-  >
-);
-
 @doc("Properties specific to Commvault Cloud Account resource")
 model CloudAccountProperties is BaseResourceProperties {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
@@ -218,24 +212,12 @@ model CloudAccountProperties is BaseResourceProperties {
   @visibility(Lifecycle.Read)
   ssoUrl?: string;
 
-  @doc("The backup administrator principal provided during CCA create. Required on create (enforced by backend), ignored on update.")
-  @added(Versions.v8_preview)
-  @removed(Versions.v9_preview)
-  @visibility(Lifecycle.Create)
-  backupAdminOnCcaCreate?: EntityInfo;
-
-  @doc("The multi-person authorization (MPA) administrator principal provided during CCA create. Required on create (enforced by backend), ignored on update.")
-  @added(Versions.v8_preview)
-  @removed(Versions.v9_preview)
-  @visibility(Lifecycle.Create)
-  multiPersonAuthorizationOnCcaCreate?: EntityInfo;
-
   @doc("Optional company details for the cloud account")
   @added(Versions.v9_preview)
   company?: CompanyProfile;
 
   @doc("Role assignments to provision during CCA creation. Each entry maps a Commvault role to its assigned Entra principals.")
-  @added(Versions.v9_preview)
+  @added(Versions.v8_preview)
   @visibility(Lifecycle.Create)
   @Azure.ResourceManager.identifiers(#["roleName"])
   roleAssignmentsOnCcaCreate?: RoleAssignment[];
@@ -292,7 +274,7 @@ model StorageProperties {
 
   @doc("The compliance lock status of the storage.")
   @visibility(Lifecycle.Read)
-  @added(Versions.v9_preview)
+  @added(Versions.v8_preview)
   complianceLockStatus?: ComplianceLockStatus;
 }
 
@@ -305,7 +287,7 @@ union StorageType {
 }
 
 @doc("Compliance lock status of a Commvault Storage.")
-@added(Versions.v9_preview)
+@added(Versions.v8_preview)
 union ComplianceLockStatus {
   @doc("Compliance lock is enabled — storage is protected.")
   Enabled: "Enabled",
@@ -346,24 +328,31 @@ interface Storages {
   listByCloudAccount is ArmResourceListByParent<Storage>;
 
   @doc("Enable compliance lock on the storage. Synchronous operation.")
-  @added(Versions.v9_preview)
-  enableComplianceLock is ArmResourceActionSync<
-    Storage,
-    void,
-    ArmResponse<Storage>
-  >;
+  @armResourceAction(Storage)
+  @action("enableComplianceLock")
+  @post
+  @added(Versions.v8_preview)
+  enableComplianceLock(...ResourceInstanceParameters<Storage>):
+    | ArmResponse<Storage>
+    | ErrorResponse;
 
   @doc("Disable compliance lock on the storage. Initiates an out-of-band multi-person authorization (MPA) email approval workflow on the partner side. The storage compliance lock status transitions to 'DisablementPending' immediately; once the MPA approval completes, the status becomes 'Disabled' (observable via the refresh action).")
-  @added(Versions.v9_preview)
-  disableComplianceLock is ArmResourceActionSync<
-    Storage,
-    void,
-    ArmResponse<Storage>
-  >;
+  @armResourceAction(Storage)
+  @action("disableComplianceLock")
+  @post
+  @added(Versions.v8_preview)
+  disableComplianceLock(...ResourceInstanceParameters<Storage>):
+    | ArmResponse<Storage>
+    | ErrorResponse;
 
   @doc("Refresh storage state from partner. Fetches latest compliance lock status from Commvault and updates the ARM resource.")
-  @added(Versions.v9_preview)
-  refresh is ArmResourceActionSync<Storage, void, ArmResponse<Storage>>;
+  @armResourceAction(Storage)
+  @action("refresh")
+  @post
+  @added(Versions.v8_preview)
+  refresh(...ResourceInstanceParameters<Storage>):
+    | ArmResponse<Storage>
+    | ErrorResponse;
 }
 
 @parentResource(CloudAccount)
@@ -754,17 +743,14 @@ model ProtectionGroupProperties {
 
   @doc("The protection group schedule")
   @visibility(Lifecycle.Read)
-  @madeRequired(Versions.v9_preview)
   protectionStatus: ProtectionStatus; //Check what values can it have
 
   @doc("The number of ProtectedItems under the Protection Group")
   @visibility(Lifecycle.Read)
-  @madeRequired(Versions.v9_preview)
   numberOfProtectedItems: int32;
 
   @doc("The Commvault Protection Group backup time")
   @visibility(Lifecycle.Read)
-  @madeRequired(Versions.v9_preview)
   lastBackUpTime: int64;
 
   @doc("The backup activity status indicating if backup is enabled or not on the protection group")
@@ -996,7 +982,8 @@ interface ProtectionGroups {
     ProtectionGroup,
     StopBackupProtectionGroupRequest,
     ArmNoContentResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @doc("Restore resource for a protected items in given protection group.")
@@ -1128,7 +1115,6 @@ model VmInfo {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   subnetId?: string;
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The identifier to check if to attach and swap disk of the VM.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   attachAndSwapOsDisk?: boolean;
@@ -1322,27 +1308,7 @@ model RoleMappingProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@doc("A role assignment mapping a Commvault role to one or more Entra entities (users or groups)")
-@added(Versions.v8_preview)
-model RoleAssignment {
-  @doc("The name of the Commvault role")
-  @madeRequired(Versions.v9_preview)
-  roleName: RoleName;
-
-  @doc("The Entra entities (users or groups) assigned to this role")
-  @removed(Versions.v9_preview)
-  @renamedFrom(Versions.v9_preview, "entities")
-  @Azure.ResourceManager.identifiers(#[])
-  oldEntities?: EntityInfo[];
-
-  @doc("The Entra entities (users or groups) assigned to this role")
-  @added(Versions.v9_preview)
-  @minItems(1)
-  @Azure.ResourceManager.identifiers(#[])
-  entities: EntityInfo[];
-}
-
-@doc("Supported Commvault role names")
+@doc("Supported Commvault role names. Extensible enum — additional roles may be added in future versions without a breaking change.")
 @added(Versions.v8_preview)
 union RoleName {
   @doc("Backup Administrator - full access to all resources")
@@ -1361,6 +1327,18 @@ union RoleName {
   MultiPersonAuthorization: "MultiPersonAuthorization",
 
   string,
+}
+
+@doc("A role assignment mapping a Commvault role to one or more Entra entities (users or groups)")
+@added(Versions.v8_preview)
+model RoleAssignment {
+  @doc("The name of the Commvault role")
+  roleName: RoleName;
+
+  @doc("The Entra entities (users or groups) assigned to this role")
+  @minItems(1)
+  @Azure.ResourceManager.identifiers(#[])
+  entities: EntityInfo[];
 }
 
 @armResourceOperations
