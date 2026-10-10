@@ -3227,6 +3227,48 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
+    "Azure.ResourceManager.CommonTypes.ExtendedLocation": {
+      "type": "object",
+      "description": "The complex type of the extended location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocationType",
+          "description": "The type of the extended location."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.ExtendedLocationType": {
+      "type": "string",
+      "description": "The supported ExtendedLocation types.",
+      "enum": [
+        "EdgeZone",
+        "CustomLocation"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EdgeZone",
+            "value": "EdgeZone",
+            "description": "Azure Edge Zones location type"
+          },
+          {
+            "name": "CustomLocation",
+            "value": "CustomLocation",
+            "description": "Azure Custom Locations type"
+          }
+        ]
+      }
+    },
     "BootDiagnostics": {
       "type": "object",
       "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. You can easily view the output of your console log. Azure also enables you to see a screenshot of the VM from the hypervisor.",
@@ -3362,6 +3404,18 @@
           "type": "string",
           "description": "ARM VM name for this VM. Optional; when omitted the name is generated from the prefix as {prefix}_{index}."
         },
+        "zone": {
+          "type": "string",
+          "description": "The availability zone this VM is created in. Overrides the operation-level zones for this VM only. A null value does not override, so the VM is placed using the operation-level zones; an empty value does override and deploys this VM as a regional (non-zonal) VM."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
+          "description": "The extended location this VM is created in. Overrides the operation-level extendedLocation for this VM only; when omitted the VM inherits the operation-level extendedLocation."
+        },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "The placement constraints applied to this VM. Overrides the operation-level placement for this VM only; when omitted the VM inherits the operation-level placement."
+        },
         "virtualMachineProfile": {
           "$ref": "#/definitions/BulkactionVMProperties",
           "description": "VM profile, the same shape as operation-level ComputeProfile.virtualMachineProfile. Overrides the operation-level VM profile."
@@ -3411,25 +3465,6 @@
         }
       }
     },
-    "BulkCreateCustomPriorityProfile": {
-      "type": "object",
-      "description": "Configuration options for Regular or Spot instances in BulkCreateCustom.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/PriorityType",
-          "description": "The priority type for VM allocation"
-        },
-        "maxPricePerVM": {
-          "type": "number",
-          "format": "float",
-          "description": "Price per hour of each Spot VM will never exceed this."
-        },
-        "evictionPolicy": {
-          "$ref": "#/definitions/EvictionPolicy",
-          "description": "Eviction Policy to follow when evicting Spot VMs."
-        }
-      }
-    },
     "BulkCreateCustomProperties": {
       "type": "object",
       "description": "Details of the BulkCreateCustom.",
@@ -3455,16 +3490,6 @@
           "$ref": "#/definitions/CapacityType",
           "description": "Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs."
         },
-        "minCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum capacity, expressed in units specified by capacityType, that Azure must be able to allocate for the request to proceed. If Azure cannot allocate at least this capacity with high confidence, the request is rejected with 409 Conflict (InsufficientCapacity) and no VMs are created. Otherwise, Azure allocates as much capacity as possible, up to the requested capacity. Must be greater than 0, less than capacity, and requires partialFulfillmentPolicy.mode to be Enabled.",
-          "minimum": 1
-        },
-        "partialFulfillmentPolicy": {
-          "$ref": "#/definitions/PartialFulfillmentPolicy",
-          "description": "Controls how partial fulfillment is handled for a BulkCreateCustom request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures."
-        },
         "resources": {
           "type": "array",
           "description": "The virtual machine resources resolved for the operation.",
@@ -3473,10 +3498,6 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
-        },
-        "priorityProfile": {
-          "$ref": "#/definitions/BulkCreateCustomPriorityProfile",
-          "description": "Configuration Options for Regular or Spot instances in BulkCreateCustom."
         },
         "computeProfile": {
           "$ref": "#/definitions/ComputeProfile",
@@ -3497,7 +3518,6 @@
       },
       "required": [
         "capacity",
-        "priorityProfile",
         "computeProfile"
       ]
     },
@@ -3602,20 +3622,6 @@
           "$ref": "#/definitions/CapacityType",
           "description": "Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs."
         },
-        "minCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum capacity, expressed in units specified by capacityType, that Azure must be able to allocate for the request to proceed. If Azure cannot allocate at least this capacity with high confidence, the request is rejected with 409 Conflict (InsufficientCapacity) and no VMs are created. Otherwise, Azure allocates as much capacity as possible, up to the requested capacity. Must be greater than 0, less than capacity, and requires partialFulfillmentPolicy.mode to be Enabled.",
-          "minimum": 1
-        },
-        "partialFulfillmentPolicy": {
-          "$ref": "#/definitions/PartialFulfillmentPolicy",
-          "description": "Controls how partial fulfillment is handled for a BulkCreate request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures."
-        },
-        "priorityProfile": {
-          "$ref": "#/definitions/PriorityProfile",
-          "description": "Configuration Options for Regular or Spot instances in BulkCreate."
-        },
         "computeProfile": {
           "$ref": "#/definitions/ComputeProfile",
           "description": "Compute Profile to configure the Virtual Machines. Applied uniformly to every virtual machine created by the operation."
@@ -3627,7 +3633,6 @@
       },
       "required": [
         "capacity",
-        "priorityProfile",
         "computeProfile"
       ]
     },
@@ -4502,30 +4507,6 @@
         }
       }
     },
-    "EvictionPolicy": {
-      "type": "string",
-      "description": "Different kind of eviction policies",
-      "enum": [
-        "Delete",
-        "Deallocate"
-      ],
-      "x-ms-enum": {
-        "name": "EvictionPolicy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Delete",
-            "value": "Delete",
-            "description": "When evicted, the Spot VM will be deleted and the corresponding capacity will be updated to reflect this."
-          },
-          {
-            "name": "Deallocate",
-            "value": "Deallocate",
-            "description": "When evicted, the Spot VM will be deallocated/stopped"
-          }
-        ]
-      }
-    },
     "ExecuteDeallocateRequest": {
       "type": "object",
       "description": "The virtual machines and execution settings for a bulk deallocate action.",
@@ -5080,6 +5061,22 @@
             "create"
           ]
         },
+        "extendedLocation": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
+          "description": "The extended location of the virtual machines created by the BulkCreate operation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "The availability zone placement constraints applied to the virtual machines created by the BulkCreate operation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -5116,6 +5113,22 @@
           "items": {
             "type": "string"
           },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
+          "description": "The extended location of the virtual machines created by the BulkCreateCustom operation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "The availability zone placement constraints applied to the virtual machines created by the BulkCreateCustom operation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -6085,78 +6098,6 @@
       },
       "readOnly": true
     },
-    "PartialFulfillmentPolicy": {
-      "type": "object",
-      "description": "Controls how partial fulfillment is handled for a BulkCreateCustom request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures.",
-      "properties": {
-        "fulfilledCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The amount of capacity that was actually attempted, expressed in the units specified by capacityType. When partial fulfillment is enabled, this value can be less than the requested capacity.",
-          "readOnly": true
-        },
-        "mode": {
-          "type": "string",
-          "description": "Specifies whether partial fulfillment is allowed. When Enabled, Azure creates as many VMs as it has high confidence can be successfully allocated. When Disabled, Azure attempts to create all requested VMs, which may result into allocation failures.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PartialFulfillmentMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Partial fulfillment is allowed."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Partial fulfillment is not allowed."
-              }
-            ]
-          }
-        },
-        "reason": {
-          "$ref": "#/definitions/PartialFulfillmentReason",
-          "description": "Indicates why the fulfilled capacity is less than the requested capacity. Possible values include InsufficientCapacity and InsufficientQuota. Returned only in the create response when partial fulfillment is enabled and the request cannot be fully satisfied.",
-          "readOnly": true
-        }
-      }
-    },
-    "PartialFulfillmentReason": {
-      "type": "string",
-      "description": "The reason the requested capacity could only be partially fulfilled.",
-      "enum": [
-        "InsufficientCapacity",
-        "InsufficientQuota",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "PartialFulfillmentReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InsufficientCapacity",
-            "value": "InsufficientCapacity",
-            "description": "The requested capacity could not be fully satisfied due to insufficient capacity in the region."
-          },
-          {
-            "name": "InsufficientQuota",
-            "value": "InsufficientQuota",
-            "description": "The requested capacity could not be fully satisfied due to insufficient quota in the subscription."
-          },
-          {
-            "name": "None",
-            "value": "None",
-            "description": "The requested capacity was successfully satisfied without any partial fulfillment."
-          }
-        ]
-      }
-    },
     "PatchSettings": {
       "type": "object",
       "description": "Specifies settings related to VM Guest Patching on Windows.",
@@ -6179,47 +6120,28 @@
         }
       }
     },
-    "PriorityProfile": {
+    "Placement": {
       "type": "object",
-      "description": "The priority and allocation preferences for virtual machines.",
+      "description": "The customer-defined constraints for virtual machine placement.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/PriorityType",
-          "description": "The priority type for virtual machine allocation."
+        "zonePlacementPolicy": {
+          "$ref": "#/definitions/ZonePlacementPolicyType",
+          "description": "The policy used to select an availability zone."
         },
-        "maxPricePerVM": {
-          "type": "number",
-          "format": "float",
-          "description": "The maximum hourly price, in US dollars, for each Spot virtual machine."
-        },
-        "evictionPolicy": {
-          "$ref": "#/definitions/EvictionPolicy",
-          "description": "The action applied to a Spot virtual machine when Azure evicts it."
-        }
-      }
-    },
-    "PriorityType": {
-      "type": "string",
-      "description": "The priority type for virtual machine allocation.",
-      "enum": [
-        "Regular",
-        "Spot"
-      ],
-      "x-ms-enum": {
-        "name": "PriorityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Regular",
-            "value": "Regular",
-            "description": "Regular, non-Spot virtual machines."
-          },
-          {
-            "name": "Spot",
-            "value": "Spot",
-            "description": "Azure Spot Virtual Machines."
+        "includeZones": {
+          "type": "array",
+          "description": "The availability zones that Bulk Actions can select. When omitted, Bulk Actions can consider any supported zone in the region.",
+          "items": {
+            "type": "string"
           }
-        ]
+        },
+        "excludeZones": {
+          "type": "array",
+          "description": "The availability zones that Bulk Actions must not select.",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "ProtocolTypes": {
@@ -8579,6 +8501,29 @@
             "name": "AutomaticByPlatform",
             "value": "AutomaticByPlatform",
             "description": "AutomaticByPlatform VM guest patch mode"
+          }
+        ]
+      }
+    },
+    "ZonePlacementPolicyType": {
+      "type": "string",
+      "description": "The policy used to select an availability zone for the virtual machine.",
+      "enum": [
+        "Any",
+        "Auto"
+      ],
+      "x-ms-enum": {
+        "name": "ZonePlacementPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Any",
+            "value": "Any"
+          },
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "Bulk Actions automatically selects an availability zone based on the request."
           }
         ]
       }
