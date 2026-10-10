@@ -404,10 +404,9 @@ interface FileShares {
 
   @added(Versions.v2026_09_01)
   @doc("Starts a redundancy conversion for the file share.")
-  startRedundancyConversion is ArmResourceActionSync<
+  startRedundancyConversion is ArmResourceActionNoContentSync<
     Resource = FileShare,
     Request = StartRedundancyConversionRequest,
-    Response = OkResponse,
     BaseParameters = BaseParameters<FileShare>,
     Error = ErrorResponse
   >;
@@ -759,7 +758,8 @@ interface InformationalOperations {
     Request = FileShareLimitsRequest,
     Response = FileShareLimitsResponse,
     Scope = SubscriptionActionScope,
-    Parameters = LocationResourceParameter
+    Parameters = LocationResourceParameter,
+    OptionalRequestBody = true
   >;
 
   @doc("Get file shares provisioning parameters recommendation.")
