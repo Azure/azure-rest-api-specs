@@ -263,8 +263,9 @@ using Azure.ResourceManager;
   armResourceType,
   "csharp"
 );
+// The current drill hierarchy copies this property from the legacy model.
 @@alternateType(
-  DrillResourceProperties.resourceType,
+  LegacyDrillResourceProperties.resourceType,
   armResourceType,
   "csharp"
 );
