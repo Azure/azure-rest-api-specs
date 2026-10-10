@@ -14,6 +14,49 @@ To see additional help and options, run:
 
 > `autorest --help`
 
+## Policy-aware locations
+
+API version `2022-12-01` supports the optional `policyAware` query parameter on
+`GET /subscriptions/{subscriptionId}/locations`. Earlier API versions do not
+support this option. This change does not introduce a new API version.
+
+When `policyAware` is omitted or `false`, the existing response is unchanged.
+When `true`, the response retains the same locations and existing fields and adds
+`policyRestrictions` to each standard location. Restricted locations are not
+removed. Extended locations, including edge zones returned with
+`includeExtendedLocations=true`, are outside this evaluation scope and remain
+unchanged without policy annotations.
+
+Evaluation considers only enforced system-policy deny rules that apply at the
+subscription scope and depend only on location, including applicable inherited
+system policies. Non-system policies and rules requiring resource type, resource
+group, or other resource data are outside this scope. An allowed result is not a
+deployment authorization or a guarantee that deployment will succeed.
+
+| Evaluation outcome | `policyRestrictions.status` | `policyRestrictions.reason` |
+| --- | --- | --- |
+| Completed with no applicable restriction | `Allowed` | Omitted |
+| Restricted by an applicable system policy | `Restricted` | `RestrictedByPolicy` |
+| Failed, timed out, unavailable, or ambiguous | `Unknown` | `EvaluationUnavailable` |
+
+When present, `policyRestrictions` always contains a non-null `status` string.
+The status is extensible: additional values may be introduced. Clients must treat
+missing or unrecognized status values as unknown, not as `Allowed`.
+Missing annotations do not imply permission.
+A missing or incomplete evaluation must not be treated as a completed evaluation
+with no restrictions. If the entire evaluation is unavailable, all standard
+locations have an unknown result. If only some results cannot be determined, those
+locations have an unknown result.
+
+If location retrieval succeeds but policy evaluation is unavailable, the operation
+returns HTTP 200 with the full location list and unknown annotations; it neither
+filters locations nor treats them as allowed. Authentication and location-list
+retrieval errors retain the existing error response behavior.
+
+Author the contract in TypeSpec and the examples in `examples/2022-12-01`, then run
+`pnpm tsp compile .` in this directory to regenerate Swagger and its examples.
+Do not hand-edit generated files or modify earlier API-version contracts.
+
 ---
 
 ## Configuration
@@ -117,6 +160,19 @@ directive:
   - from: Subscriptions.json
     suppress: OperationsAPIImplementation
     reason: 'Duplicate Operations API causes generation issues'
+```
+
+``` yaml $(tag) == 'package-2022-12' || $(tag) == 'package-subscriptions-2022-12'
+directive:
+  - from: subscriptions.json
+    suppress: BodyTopLevelProperties
+    where: $.definitions.LocationListResult
+    reason: >-
+      This GET returns read-only location discovery metadata, not a CRUD resource.
+      Location entries use an existing flat response shape, and policyRestrictions
+      is an opt-in annotation alongside that metadata, not a resource properties bag.
+      The validator reports item properties at LocationListResult, so this exception
+      is limited to that discovery model in API version 2022-12-01.
 ```
 
 ---

@@ -119,6 +119,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListResourceProviderOperations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -217,6 +222,13 @@
             "description": "Whether to include extended locations.",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "policyAware",
+            "in": "query",
+            "description": "Whether to include system-policy restrictions for standard locations. Supported only in API version 2022-12-01.\nWhen true, evaluates enforced system-policy deny rules that apply at the subscription scope and depend only on location,\nand adds policyRestrictions to each standard location without removing locations from the list.\nNon-system policies and rules requiring resource type, resource group, or other resource data are not evaluated.\nWhen omitted or false, the response is unchanged and policyRestrictions is not returned.\nExtended locations, including edge zones, remain unchanged and are not annotated.\nIf policy evaluation fails, times out, is unavailable, or cannot determine a result, successful location retrieval\nstill returns HTTP 200 with status set to Unknown and reason set to EvaluationUnavailable for affected standard locations.\nErrors retrieving the location list are returned normally.",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -234,11 +246,23 @@
           }
         },
         "x-ms-examples": {
+          "GetLocationsWhenSystemPolicyEvaluationIsUnavailable": {
+            "$ref": "./examples/GetLocationsPolicyAwareEvaluationUnavailable.json"
+          },
           "GetLocationsWithASubscriptionId": {
             "$ref": "./examples/GetLocations.json"
           },
           "GetLocationsWithExtendedLocations": {
             "$ref": "./examples/GetLocationsWithExtendedLocations.json"
+          },
+          "GetLocationsWithPolicyAwarenessDisabled": {
+            "$ref": "./examples/GetLocationsPolicyAwareFalse.json"
+          },
+          "GetLocationsWithSystemPolicyRestrictions": {
+            "$ref": "./examples/GetLocationsPolicyAware.json"
+          },
+          "GetLocationsWithSystemPolicyRestrictionsAndUnchangedExtendedLocations": {
+            "$ref": "./examples/GetLocationsPolicyAwareWithExtendedLocations.json"
           }
         },
         "x-ms-pageable": {
@@ -491,6 +515,11 @@
             "$ref": "#/definitions/AvailabilityZoneMappings"
           },
           "x-ms-identifiers": []
+        },
+        "policyRestrictions": {
+          "$ref": "#/definitions/LocationPolicyRestrictions",
+          "description": "System-policy restrictions for this standard location, returned only when policyAware is true.\nNot returned for extended locations, including edge zones. Absence does not indicate that the location is allowed.",
+          "readOnly": true
         }
       }
     },
@@ -563,6 +592,79 @@
           "readOnly": true
         }
       }
+    },
+    "LocationPolicyRestrictionReason": {
+      "type": "string",
+      "description": "The reason a location is restricted or its policy evaluation result is unknown.",
+      "enum": [
+        "RestrictedByPolicy",
+        "EvaluationUnavailable"
+      ],
+      "x-ms-enum": {
+        "name": "LocationPolicyRestrictionReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RestrictedByPolicy",
+            "value": "RestrictedByPolicy",
+            "description": "An applicable system policy denies the location."
+          },
+          {
+            "name": "EvaluationUnavailable",
+            "value": "EvaluationUnavailable",
+            "description": "Policy evaluation could not determine a result for the location."
+          }
+        ]
+      }
+    },
+    "LocationPolicyRestrictionStatus": {
+      "type": "string",
+      "description": "The outcome of evaluating system-policy restrictions for a location. Additional values may be introduced;\nclients must treat unrecognized values as unknown, not as Allowed.",
+      "enum": [
+        "Allowed",
+        "Restricted",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "LocationPolicyRestrictionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allowed",
+            "value": "Allowed",
+            "description": "Evaluation completed and found no applicable system-policy restriction for the location."
+          },
+          {
+            "name": "Restricted",
+            "value": "Restricted",
+            "description": "An applicable system policy denies the location."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Policy evaluation could not determine a result for the location."
+          }
+        ]
+      }
+    },
+    "LocationPolicyRestrictions": {
+      "type": "object",
+      "description": "The result of evaluating enforced, subscription-wide system-policy deny rules that depend only on location.\nThis result does not evaluate non-system policies or rules requiring additional resource context, and does not guarantee deployment success.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/LocationPolicyRestrictionStatus",
+          "description": "Allowed when evaluation completed and found no applicable system-policy restriction for this location.\nRestricted when an applicable system policy denies this location, with reason RestrictedByPolicy.\nUnknown when a result cannot be determined, including failed, timed-out, missing, or ambiguous evaluation, with reason EvaluationUnavailable.\nAdditional status values may be introduced. Clients must treat missing or unrecognized status values as unknown, not as Allowed.",
+          "readOnly": true
+        },
+        "reason": {
+          "$ref": "#/definitions/LocationPolicyRestrictionReason",
+          "description": "The reason for a restricted or unknown result. RestrictedByPolicy accompanies status=Restricted;\nEvaluationUnavailable accompanies status=Unknown. Omitted when status=Allowed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status"
+      ]
     },
     "LocationType": {
       "type": "string",
