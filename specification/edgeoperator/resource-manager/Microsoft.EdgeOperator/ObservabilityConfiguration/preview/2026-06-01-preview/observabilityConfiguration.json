@@ -1,0 +1,179 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.EdgeOperator - Azure Local Disconnected Operations observability configuration",
+    "version": "2026-06-01-preview",
+    "description": "Microsoft.EdgeOperator Resource Provider management API for Azure Local Disconnected Operations (ALDO) observability configuration.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ObservabilityConfiguration"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOperator/observabilityConfiguration/default": {
+      "get": {
+        "operationId": "ObservabilityConfigurationOperations_Get",
+        "tags": [
+          "ObservabilityConfiguration"
+        ],
+        "description": "Gets the active observability configuration for the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ObservabilityConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ObservabilityConfiguration_Get": {
+            "$ref": "./examples/ObservabilityConfiguration_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ObservabilityConfiguration": {
+      "type": "object",
+      "description": "The active observability configuration for a subscription.\nThis is a singleton resource; the only accepted resource name is `default`.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ObservabilityConfigurationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ObservabilityConfigurationProperties": {
+      "type": "object",
+      "description": "Observability configuration properties returned by Azure Local Disconnected Operations (ALDO).",
+      "properties": {
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group that owns the observability configuration.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Microsoft Entra tenant ID associated with the observability configuration.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure region where the observability configuration applies.",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The customer Azure subscription ID associated with observability onboarding. This is distinct from the operator subscription ID in the request URI path.",
+          "readOnly": true
+        },
+        "servicePrincipalId": {
+          "type": "string",
+          "description": "The Microsoft Entra application ID used for observability authentication.",
+          "readOnly": true
+        },
+        "cloud": {
+          "type": "string",
+          "description": "The cloud environment name. Defaults to `AzureCloud` when omitted by the service.",
+          "readOnly": true
+        },
+        "originalLocation": {
+          "type": "string",
+          "description": "The original Azure region when the service remapped the requested location.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

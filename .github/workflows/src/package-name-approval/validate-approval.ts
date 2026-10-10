@@ -7,6 +7,7 @@ import {
   type ProtectedLabelsConfig,
 } from "../protected-labels/authorization.ts";
 import { createApproversConfig } from "./approvers.ts";
+import { buildUnauthorizedApplyComment } from "../protected-labels/label-comments.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
 export type ValidateContext = {
@@ -151,6 +152,22 @@ async function handleLabeled({
   ) {
     core.warning(`${actor} is not authorized to apply ${targetLabel}, removing`);
     await removeLabelIfPresent(github, owner, repo, prNumber, targetLabel);
+    // Explain the removal so the approver is not left guessing (#46787). Only the
+    // "unauthorized" status carries a concrete approver list; "unprotected" means the
+    // label is absent from protected-labels.yml (fail-closed with no known approvers),
+    // so keep that path silent rather than posting an empty "Only  can apply" message.
+    if (authorization.status === "unauthorized") {
+      await github.rest.issues.createComment({
+        owner,
+        repo,
+        issue_number: prNumber,
+        body: buildUnauthorizedApplyComment({
+          actor,
+          labelName: targetLabel,
+          authorizedUsers: authorization.authorizedUsers,
+        }),
+      });
+    }
     return;
   }
 

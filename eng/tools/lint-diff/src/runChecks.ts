@@ -1,6 +1,6 @@
 import { execPnpmExec, isExecError } from "@azure-tools/specs-shared/exec";
 import { debugLogger } from "@azure-tools/specs-shared/logger";
-import { join } from "path";
+import { join } from "node:path";
 
 import {
   type AutoRestMessage,

@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "accountName": "staturbocontoso01",
+    "api-version": "2026-09-01",
+    "monitor": "true",
+    "parameters": {
+      "properties": {
+        "turboTier": {
+          "status": "Disabled"
+        }
+      }
+    },
+    "resourceGroupName": "res9407",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9407/providers/Microsoft.Storage/storageAccounts/staturbocontoso01",
+        "kind": "StorageV2",
+        "location": "eastus2",
+        "name": "staturbocontoso01",
+        "properties": {
+          "accessTier": "Hot",
+          "provisioningState": "Succeeded",
+          "turboTier": {
+            "status": "Disabled"
+          }
+        },
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "type": "Microsoft.Storage/storageAccounts"
+      }
+    }
+  },
+  "operationId": "StorageAccounts_Update",
+  "title": "StorageAccountUpdateDisableTurboTier"
+}

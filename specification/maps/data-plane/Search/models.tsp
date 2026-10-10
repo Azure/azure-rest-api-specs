@@ -411,7 +411,9 @@ union AutocompleteResultTypeEnum {
 
   /**
    * Third administrative level within the country/region, such as a district, parish, or
-   * municipality.
+   * municipality. Retained for API compatibility. This type is not currently returned by the
+   * Autocomplete service; requests filtered exclusively to this type return an empty result
+   * set.
    */
   AdminDivision3: "AdminDivision3",
 
@@ -427,7 +429,9 @@ union AutocompleteResultTypeEnum {
   Airport: "Airport",
 
   /**
-   * A passenger terminal building within an airport.
+   * A passenger terminal building within an airport. Availability varies by geography and
+   * might change as Azure Maps search data is updated. Matching suggestions aren't
+   * guaranteed for every query.
    */
   AirportTerminal: "AirportTerminal",
 
@@ -601,6 +605,8 @@ union AutocompleteResultTypeEnum {
 
   /**
    * A building that houses a bank, credit union, or other financial services institution.
+   * Availability varies by geography and might change as Azure Maps search data is updated.
+   * Matching suggestions aren't guaranteed for every query.
    */
   FinancialStructure: "FinancialStructure",
 
@@ -641,6 +647,8 @@ union AutocompleteResultTypeEnum {
 
   /**
    * A metropolitan area or conurbation that contains and extends beyond a populated place.
+   * Retained for API compatibility. This type is not currently returned by the Autocomplete
+   * service; requests filtered exclusively to this type return an empty result set.
    */
   GreaterPopulatedPlace: "GreaterPopulatedPlace",
 
@@ -850,7 +858,8 @@ union AutocompleteResultTypeEnum {
 
   /**
    * A celestial body orbiting a star, typically used to represent the Earth as the root of
-   * the geographic hierarchy.
+   * the geographic hierarchy. Availability varies by geography and might change as Azure
+   * Maps search data is updated. Matching suggestions aren't guaranteed for every query.
    */
   Planet: "Planet",
 
@@ -870,12 +879,16 @@ union AutocompleteResultTypeEnum {
   PlayingField: "PlayingField",
 
   /**
-   * A geographic pole, such as the North or South Pole.
+   * A geographic pole, such as the North or South Pole. Availability varies by geography
+   * and might change as Azure Maps search data is updated. Matching suggestions aren't
+   * guaranteed for every query.
    */
   Pole: "Pole",
 
   /**
    * A self-governing political entity, such as an independent or dependent state or territory.
+   * Retained for API compatibility. This type is not currently returned by the Autocomplete
+   * service; requests filtered exclusively to this type return an empty result set.
    */
   PoliticalUnit: "PoliticalUnit",
 
@@ -1003,6 +1016,8 @@ union AutocompleteResultTypeEnum {
 
   /**
    * A scenic or heritage railway operated primarily for tourism rather than regular transit.
+   * Availability varies by geography and might change as Azure Maps search data is updated.
+   * Matching suggestions aren't guaranteed for every query.
    */
   TouristRailway: "TouristRailway",
 
@@ -1044,7 +1059,9 @@ union AutocompleteResultTypeEnum {
 
   /**
    * A constructed barrier forming a continuous vertical boundary, often used for defense,
-   * separation, or commemoration.
+   * separation, or commemoration. Availability varies by geography and might change as
+   * Azure Maps search data is updated. Matching suggestions aren't guaranteed for every
+   * query.
    */
   Wall: "Wall",
 

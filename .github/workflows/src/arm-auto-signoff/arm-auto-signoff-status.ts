@@ -1,4 +1,4 @@
-import { inspect } from "util";
+import { inspect } from "node:util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { equals } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
@@ -87,10 +87,7 @@ export async function getLabelActionImpl({
   repo: string;
   issue_number: number;
   head_sha: string;
-  github: import("@octokit/core").Octokit &
-    import("@octokit/plugin-rest-endpoint-methods").Api & {
-      paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
-    };
+  github: GitHub;
   core: Core;
 }): Promise<{ headSha: string; issueNumber: number; labelActions: ManagedLabelActions }> {
   const baseResult: { headSha: string; issueNumber: number } = {

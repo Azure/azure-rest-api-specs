@@ -1,6 +1,6 @@
-import { readFile } from "fs/promises";
-import yaml from "js-yaml";
-import { join } from "path";
+import { readFile } from "node:fs/promises";
+import { parse } from "yaml";
+import { join } from "node:path";
 
 export const ALLOWED_BOT_LOGINS = ["github-actions[bot]", "azure-sdk"];
 
@@ -47,7 +47,7 @@ export async function loadProtectedLabelsConfig(
   path: string = join(process.cwd(), ".github", "protected-labels.yml"),
 ): Promise<ProtectedLabelsConfig> {
   const content = await readFile(path, "utf8");
-  const raw = yaml.load(content) as Record<string, unknown>;
+  const raw = parse(content) as Record<string, unknown>;
 
   if (!raw || typeof raw !== "object") {
     throw new Error("Invalid protected-labels.yml: expected a YAML object");
