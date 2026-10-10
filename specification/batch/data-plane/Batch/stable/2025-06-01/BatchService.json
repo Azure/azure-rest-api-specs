@@ -14959,7 +14959,6 @@
         },
         "registryServer": {
           "type": "string",
-          "format": "uri",
           "description": "The registry URL. If omitted, the default is \"docker.io\"."
         },
         "identityReference": {
@@ -15490,7 +15489,7 @@
           "description": "The protocol of the endpoint."
         },
         "publicIPAddress": {
-          "$ref": "#/definitions/Azure.Core.ipV4Address",
+          "type": "string",
           "description": "The public IP address of the Compute Node.",
           "x-ms-client-name": "publicIpAddress"
         },
@@ -16099,7 +16098,7 @@
       "properties": {
         "enableCrossZoneUpgrade": {
           "type": "boolean",
-          "description": "Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. This field is able to be set to true or false only when using NodePlacementConfiguration as Zonal."
+          "description": "Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. This field can be set to true or false only when nodePlacementConfiguration.policy is Zonal or placement.zonePlacementPolicy is Auto. Auto placement is supported starting with API version 2026-10-01."
         },
         "maxBatchInstancePercent": {
           "type": "integer",
