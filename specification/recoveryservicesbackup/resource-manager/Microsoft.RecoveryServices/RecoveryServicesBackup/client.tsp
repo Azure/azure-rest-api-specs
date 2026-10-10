@@ -2255,6 +2255,58 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(RestoreRequestResource, "TriggerRestoreContent", "csharp");
 @@clientName(RestoreRequest, "RestoreContent", "csharp");
 @@clientName(GetRPExtendedInfoRequest, "GetRPExtendedInfoContent", "csharp");
+
+// .NET API review (2026-10-01 additions): align new public .NET types with naming
+// conventions. These adjust only client-facing C# names; the wire contract is unchanged.
+//
+// POST body envelope: use a domain-specific Content name instead of the generic
+// "*RequestResource" (mirrors RestoreRequestResource -> TriggerRestoreContent above).
+@@clientName(
+  GetRPExtendedInfoRequestResource,
+  "RecoveryPointExtendedInfoContent",
+  "csharp"
+);
+// Storage-topology models: give the generic names recovery-point context and avoid
+// ambiguity with the existing DiskInformation type.
+@@clientName(DiskInfo, "RecoveryPointDiskInfo", "csharp");
+@@clientName(FilesystemInfo, "RecoveryPointFilesystemInfo", "csharp");
+@@clientName(StorageSpaceInfo, "RecoveryPointStorageSpaceInfo", "csharp");
+// OperationStatus family: disambiguate from the generic ARM OperationStatusResult /
+// ResponseError concepts by prefixing with the service context (Backup) and making the
+// status enum singular. These are new 2026-10-01 types, so renaming is non-breaking. The
+// wire model names and discriminator values are unchanged; this adjusts C# names only.
+// (Also folds in the prior Ilr-acronym fix for OperationStatusProvisionILRExtendedInfo.)
+@@clientName(OperationStatus, "BackupOperationStatus", "csharp");
+@@clientName(OperationStatusValues, "BackupOperationStatusValue", "csharp");
+@@clientName(OperationStatusError, "BackupOperationStatusError", "csharp");
+@@clientName(
+  OperationStatusExtendedInfo,
+  "BackupOperationStatusExtendedInfo",
+  "csharp"
+);
+@@clientName(
+  OperationStatusJobExtendedInfo,
+  "BackupOperationStatusJobExtendedInfo",
+  "csharp"
+);
+@@clientName(
+  OperationStatusJobsExtendedInfo,
+  "BackupOperationStatusJobsExtendedInfo",
+  "csharp"
+);
+@@clientName(
+  OperationStatusProvisionILRExtendedInfo,
+  "BackupOperationStatusProvisionIlrExtendedInfo",
+  "csharp"
+);
+@@clientName(
+  OperationStatusValidateOperationExtendedInfo,
+  "BackupOperationStatusValidateOperationExtendedInfo",
+  "csharp"
+);
+// NOTE: #9 (childDBNames -> ChildDbNames) is handled SDK-side via [CodeGenMember] in the
+// .NET repo. A property-level @clientName here does not survive the repeated @added/@removed
+// version projection on AzureVmWorkloadSQLInstanceProtectedItem, so it is intentionally omitted.
 @@clientName(
   ValidateAzureWorkloadRestoreOperationRequest,
   "ValidateAzureWorkloadRestoreOperationContent",
