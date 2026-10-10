@@ -91538,10 +91538,10 @@ components:
           anyOf:
             - type: string
             - type: 'null'
-          description: Node-specific instructions. Omission preserves the frozen entrypoint instructions. A supplied value replaces them by default; null or an empty string clears them. When `append_instructions` is true, a non-empty value is appended instead, while null or an empty string adds nothing.
-        append_instructions:
+          description: Node-specific instructions. Omission preserves the frozen entrypoint instructions. A supplied value replaces them by default; null or an empty string clears them. When `inherit_from_base_instructions` is true, the frozen entrypoint instructions precede a non-empty value, while null or an empty string adds nothing.
+        inherit_from_base_instructions:
           type: boolean
-          description: Whether node instructions append to rather than replace the frozen entrypoint instructions.
+          description: Whether this node inherits the frozen entrypoint instructions before applying its own instructions.
           default: false
         tools:
           anyOf:

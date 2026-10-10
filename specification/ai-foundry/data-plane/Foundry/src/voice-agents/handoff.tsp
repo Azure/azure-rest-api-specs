@@ -68,11 +68,11 @@ model VoiceAgentHandoffNodeConfig {
   @doc("The target model for a cascaded graph. Realtime graphs reject this property and retain the connection model.")
   `model`?: string;
 
-  @doc("Node-specific instructions. Omission preserves the frozen entrypoint instructions. A supplied value replaces them by default; null or an empty string clears them. When `append_instructions` is true, a non-empty value is appended instead, while null or an empty string adds nothing.")
+  @doc("Node-specific instructions. Omission preserves the frozen entrypoint instructions. A supplied value replaces them by default; null or an empty string clears them. When `inherit_from_base_instructions` is true, the frozen entrypoint instructions precede a non-empty value, while null or an empty string adds nothing.")
   instructions?: string | null;
 
-  @doc("Whether node instructions append to rather than replace the frozen entrypoint instructions.")
-  append_instructions?: boolean = false;
+  @doc("Whether this node inherits the frozen entrypoint instructions before applying its own instructions.")
+  inherit_from_base_instructions?: boolean = false;
 
   @doc("Customer tools available at this node. Omission or null selects an empty customer tool set.")
   tools?: VoiceAgentTool[] | null;
