@@ -28,6 +28,18 @@ model SkuType {
 }
 
 /** The SKU type for update operations */
+@removed(Versions.`2026-10-01`)
+@renamedFrom(Versions.`2026-10-01`, "SkuTypeUpdate")
+model SkuTypeUpdateV1 {
+  /** The name of the SKU */
+  name?: string;
+
+  /** The tier of the SKU */
+  tier?: string;
+}
+
+/** The SKU fields in the update model. Do not include sku in PATCH requests; any supplied sku, including null or the existing value, is rejected. */
+@added(Versions.`2026-10-01`)
 model SkuTypeUpdate {
   /** The name of the SKU */
   name?: string;
@@ -155,17 +167,34 @@ model EdgeActionProperties {
 }
 
 /** The type used for update operations of the EdgeAction. */
-model EdgeActionUpdate {
+@removed(Versions.`2026-10-01`)
+@renamedFrom(Versions.`2026-10-01`, "EdgeActionUpdate")
+model EdgeActionUpdateV1 {
   @doc("The resource-specific properties for this resource.")
   properties?: EdgeActionPropertiesUpdate;
 
   @doc("The sku type of the edge action")
+  sku?: SkuTypeUpdateV1;
+
+  ...ArmTagsProperty;
+}
+
+/** The type used for update operations of the EdgeAction. */
+@added(Versions.`2026-10-01`)
+model EdgeActionUpdate {
+  @doc("The resource-specific properties for this resource.")
+  properties?: EdgeActionPropertiesUpdate;
+
+  @doc("The SKU of the Edge Action. Do not include sku in PATCH requests; any supplied sku, including null or the existing value, is rejected.")
   sku?: SkuTypeUpdate;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("Resource tags.")
-  tags?: Record<string>;
+  ...ArmTagsProperty;
 }
+
+@@doc(
+  EdgeActionUpdate.tags,
+  "Resource tags. For PATCH requests, omitted tags are preserved, an empty tags object clears all tags, and supplied tags replace the entire tag collection. Null tags are rejected."
+);
 
 /** Represents an edge action properties */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -173,7 +202,14 @@ model EdgeActionPropertiesUpdate {}
 
 @doc("Represents an edge action version")
 model EdgeActionVersionProperties {
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "deploymentType")
   @doc("The deployment type")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  deploymentTypeV1: EdgeActionVersionDeploymentType;
+
+  @added(Versions.`2026-10-01`)
+  @doc("The deployment type for the Edge Action version. Set this value when creating the version. When updating an existing version, any supplied value must match the existing value.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   deploymentType: EdgeActionVersionDeploymentType;
 
@@ -186,7 +222,14 @@ model EdgeActionVersionProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "isDefaultVersion")
   @doc("The active state")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  isDefaultVersionV1: EdgeActionIsDefaultVersion;
+
+  @added(Versions.`2026-10-01`)
+  @doc("Indicates whether this is the default version. When creating a version, if the Edge Action has no default version, the service makes the new version the default even when false is supplied. If another default version exists, supplying true is rejected. When updating an existing version, any supplied value must match the existing value. Use swapDefault to change the default version.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isDefaultVersion: EdgeActionIsDefaultVersion;
 
