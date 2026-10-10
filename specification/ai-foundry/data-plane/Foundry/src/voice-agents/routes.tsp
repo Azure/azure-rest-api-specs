@@ -692,7 +692,7 @@ interface AgentTelephony {
     TelephonyTransferTargetsResponse
   >;
 
-  /** Creates one durable direct outbound call job. The latest agent definition is resolved when each attempt executes. */
+  /** Creates one durable direct outbound call job. Each attempt resolves the owning Agent's endpoint execution version before validation and uses that concrete version for its voice session. */
   @summary("Create an outbound telephony call job")
   @post
   @route("/agents/{agent_name}/telephony/call_jobs")

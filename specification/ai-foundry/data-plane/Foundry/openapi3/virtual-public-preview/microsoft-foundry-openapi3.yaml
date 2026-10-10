@@ -4858,7 +4858,7 @@ paths:
     post:
       operationId: AgentTelephony_createTelephonyCallJob
       summary: Create an outbound telephony call job
-      description: Creates one durable direct outbound call job. The latest agent definition is resolved when each attempt executes.
+      description: Creates one durable direct outbound call job. Each attempt resolves the owning Agent's endpoint execution version before validation and uses that concrete version for its voice session.
       parameters:
         - name: Foundry-Features
           in: header
@@ -51197,7 +51197,7 @@ components:
         - source
       properties:
         destination:
-          $ref: '#/components/schemas/TelephonyOutboundDestination'
+          $ref: '#/components/schemas/TelephonyAddress'
           description: The phone destination to call.
         connection_name:
           type: string
@@ -51205,9 +51205,8 @@ components:
           maxLength: 256
           description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required.
         source:
-          $ref: '#/components/schemas/TelephonyOutboundSource'
-          minLength: 1
-          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
+          $ref: '#/components/schemas/TelephonyAddress'
+          description: The typed caller address. Use phone_number for Twilio or teams_resource_account for ACS/Teams Phone extensibility. The connection validates the supported source role; outbound origination is independent of inbound bindings.
         purpose:
           type: string
           minLength: 1
@@ -51225,12 +51224,16 @@ components:
       description: A request to create one durable direct outbound call job.
       examples:
         - connection_name: telephony-acs
-          source: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+          source:
+            type: teams_resource_account
+            value: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
           destination:
             type: phone_number
             value: '+14255550123'
         - connection_name: telephony-twilio
-          source: '+14255550100'
+          source:
+            type: phone_number
+            value: '+14255550100'
           destination:
             type: phone_number
             value: '+14255550123'
@@ -51732,7 +51735,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Dataset source for evaluator generation jobs — reference to a dataset.
-    DatasetInputReference:
+    DatasetReference:
       type: object
       required:
         - name
@@ -51744,19 +51747,6 @@ components:
           type: string
           description: Optional Dataset version. Omit to select latest when the consuming operation resolves the reference.
       description: Reference to a Foundry Dataset in the current project. Consuming operations define supported Dataset kinds and resolution behavior.
-    DatasetReference:
-      type: object
-      required:
-        - name
-        - version
-      properties:
-        name:
-          type: string
-          description: Dataset name.
-        version:
-          type: string
-          description: Dataset version.
-      description: Reference to a versioned Foundry Dataset.
     DatasetType:
       anyOf:
         - type: string
@@ -54134,7 +54124,7 @@ components:
         - kinds
       properties:
         dataset:
-          $ref: '#/components/schemas/DatasetReference'
+          $ref: '#/components/schemas/VersionedDatasetReference'
           description: Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).
         kinds:
           type: array
@@ -89491,7 +89481,7 @@ components:
         - source
       properties:
         destination:
-          $ref: '#/components/schemas/TelephonyOutboundDestination'
+          $ref: '#/components/schemas/TelephonyAddress'
           description: The phone destination to call.
         connection_name:
           type: string
@@ -89552,9 +89542,8 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp in seconds when the call job was last updated.
         source:
-          $ref: '#/components/schemas/TelephonyOutboundSource'
-          minLength: 1
-          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
+          $ref: '#/components/schemas/TelephonyAddress'
+          description: The typed caller address. Use phone_number for Twilio or teams_resource_account for ACS/Teams Phone extensibility. The connection validates the supported source role; outbound origination is independent of inbound bindings.
         campaign_name:
           $ref: '#/components/schemas/TelephonyCampaignName'
           description: The owning Campaign name under this Agent. Absent for direct calls. Campaign deletion also deletes its CallJobs; owned jobs are hidden once cascade deletion is accepted. Association and cleanup use the immutable internal Campaign instance, so name reuse cannot associate old work with a replacement.
@@ -90198,9 +90187,9 @@ components:
           description: Human-readable name of the provider connection in the current project.
         source:
           $ref: '#/components/schemas/TelephonyAddress'
-          description: 'Authorized typed caller address. The connection validates which address variants it supports for the source role independently of recipient destination support. Generated CallJobs preserve their existing representation: scalar source and TelephonyOutboundDestination.'
+          description: Authorized typed caller address. The connection validates which address variants it supports for the source role independently of recipient destination support. Generated CallJobs use the same TelephonyAddress representation.
         recipient_dataset:
-          $ref: '#/components/schemas/DatasetInputReference'
+          $ref: '#/components/schemas/DatasetReference'
           description: |-
             Generic same-project Dataset reference, mutually exclusive with recipients. Exactly one source is required.
             Dataset name and any supplied version must be non-empty; invalid references return 400 before acceptance.
@@ -90262,7 +90251,7 @@ components:
           description: Human-readable name of the provider connection in the current project.
         source:
           $ref: '#/components/schemas/TelephonyAddress'
-          description: 'Authorized typed caller address. The connection validates which address variants it supports for the source role independently of recipient destination support. Generated CallJobs preserve their existing representation: scalar source and TelephonyOutboundDestination.'
+          description: Authorized typed caller address. The connection validates which address variants it supports for the source role independently of recipient destination support. Generated CallJobs use the same TelephonyAddress representation.
         recipients:
           type: array
           items:
@@ -90271,7 +90260,7 @@ components:
           maxItems: 100
           description: 'Inline recipients, mutually exclusive with recipient_dataset. Exactly one source is required; neither, both or an empty array returns 400. Reads omit this array; retain the original submission for row correlation. Creation body limit: 1 MiB decoded UTF-8.'
         recipient_dataset:
-          $ref: '#/components/schemas/DatasetInputReference'
+          $ref: '#/components/schemas/DatasetReference'
           description: |-
             Generic same-project Dataset reference, mutually exclusive with recipients. Exactly one source is required.
             Dataset name and any supplied version must be non-empty; invalid references return 400 before acceptance.
@@ -90526,33 +90515,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    TelephonyOutboundDestination:
-      type: object
-      required:
-        - type
-        - value
-      properties:
-        type:
-          $ref: '#/components/schemas/TelephonyOutboundDestinationType'
-          description: The destination type. Only E.164 phone numbers are currently supported.
-        value:
-          type: string
-          pattern: ^\+[1-9]\d{1,14}$
-          description: The destination E.164 phone number.
-      description: The destination of an outbound call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    TelephonyOutboundDestinationType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - phone_number
-      description: The type of destination for an outbound call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     TelephonyOutboundFixedIntervalRetryPolicy:
       type: object
       required:
@@ -90603,15 +90565,6 @@ components:
           enum:
             - fixed_interval
       description: The retry strategy for an outbound call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    TelephonyOutboundSource:
-      type: string
-      minLength: 1
-      maxLength: 36
-      pattern: ^(?:\+[1-9][0-9]{1,14}|(?!00000000-0000-0000-0000-000000000000$)[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$
-      description: 'An outbound caller identity: an E.164 phone number or a non-empty Teams Resource Account UUID. The connection category determines which form is accepted.'
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -91917,6 +91870,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VersionSelectionRule'
+    VersionedDatasetReference:
+      type: object
+      required:
+        - name
+        - version
+      properties:
+        name:
+          type: string
+          description: Dataset name.
+        version:
+          type: string
+          description: Concrete Dataset version.
+      description: Reference to a Dataset whose concrete version has already been resolved.
     VoiceAgentAudioConfig:
       type: object
       properties:

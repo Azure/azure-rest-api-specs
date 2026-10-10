@@ -95,7 +95,7 @@ model TelephonyCampaignInputs {
   @maxLength(256)
   connection_name: string;
 
-  /** Authorized typed caller address. The connection validates which address variants it supports for the source role independently of recipient destination support. Generated CallJobs preserve their existing representation: scalar source and TelephonyOutboundDestination. */
+  /** Authorized typed caller address. The connection validates which address variants it supports for the source role independently of recipient destination support. Generated CallJobs use the same TelephonyAddress representation. */
   source: TelephonyAddress;
 
   /** Inline recipients, mutually exclusive with recipient_dataset. Exactly one source is required; neither, both or an empty array returns 400. Reads omit this array; retain the original submission for row correlation. Creation body limit: 1 MiB decoded UTF-8. */
@@ -120,7 +120,7 @@ model TelephonyCampaignInputs {
    * Every input position is a separate intended call, including duplicate destinations.
    * Files contain 1-1,000,000 recipients, at most 256 MiB decoded bytes and 1 MiB per logical row.
    */
-  recipient_dataset?: DatasetInputReference;
+  recipient_dataset?: DatasetReference;
 
   /** Omit for immediate scheduling. Every mode dispatches automatically after successful preparation, subject to its schedule. */
   schedule?: TelephonyCampaignSchedule;
