@@ -1576,6 +1576,13 @@ model RecommendationUsageDetails {
    */
   @visibility(Lifecycle.Read)
   charges?: decimal[];
+
+  /**
+   * Each entry represents the hourly on-demand usage charge after the benefit is applied. The array includes one value for every hour from firstConsumptionDate through lastConsumptionDate, and matches the charges array in length and chronological order.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  postBenefitCharges?: float64[];
 }
 
 /**
