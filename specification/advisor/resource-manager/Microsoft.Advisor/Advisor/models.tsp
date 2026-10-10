@@ -575,6 +575,41 @@ model RecommendationProperties {
   impactedValue?: string;
 
   /**
+   * The criticality score assigned to the recommendation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  criticalityScore?: string;
+
+  /**
+   * The criticality assigned to the recommendation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  criticality?: string;
+
+  /**
+   * The time when the recommendation's criticality score last changed.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  scoreChangedAt?: string;
+
+  /**
+   * The service group ID associated with the recommendation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  serviceGroupId?: string;
+
+  /**
+   * The estimated savings associated with the recommendation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  savings?: ResourceRecommendationSavings;
+
+  /**
    * The state of the Recommendation
    */
   @added(Versions.v2026_02_01_preview)
@@ -737,6 +772,78 @@ model RecommendationProperties {
    * Additional notes for the Recommendation
    */
   notes?: string;
+}
+
+/**
+ * The estimated savings associated with a resource recommendation.
+ */
+@added(Versions.v2026_08_01_preview)
+model ResourceRecommendationSavings {
+  /**
+   * The currency used by the recommendation provider.
+   */
+  providerCurrency?: string;
+
+  /**
+   * The currency used for billing.
+   */
+  billingCurrency?: string;
+
+  /**
+   * Indicates whether the recommendation is for a direct billing channel.
+   */
+  isDirectChannel?: boolean;
+
+  /**
+   * The time when the recommended resource was deleted.
+   */
+  resourceDeletedOn?: utcDateTime;
+
+  /**
+   * The savings calculated using retail pricing.
+   */
+  retail?: ResourceRecommendationSavingsDetails;
+
+  /**
+   * The savings calculated using contracted pricing.
+   */
+  contracted?: ResourceRecommendationSavingsDetails;
+}
+
+/**
+ * The detailed savings amounts for a resource recommendation.
+ */
+@added(Versions.v2026_08_01_preview)
+model ResourceRecommendationSavingsDetails {
+  /**
+   * The potential savings in the provider currency.
+   */
+  potentialSavings?: float64;
+
+  /**
+   * The potential savings in the billing currency.
+   */
+  potentialSavingsInBillingCurrency?: float64;
+
+  /**
+   * The amount wasted to date in the provider currency.
+   */
+  wastedTillDate?: float64;
+
+  /**
+   * The amount wasted to date in the billing currency.
+   */
+  wastedTillDateInBillingCurrency?: float64;
+
+  /**
+   * The realized savings in the provider currency.
+   */
+  realizedSavings?: float64;
+
+  /**
+   * The realized savings in the billing currency.
+   */
+  realizedSavingsInBillingCurrency?: float64;
 }
 
 /**
