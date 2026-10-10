@@ -793,6 +793,20 @@ union VoiceAgentInputTranscriptionModel {
   azure_speech: "azure-speech",
 }
 
+@doc("The supported input-transcript profanity filtering modes. Only `masked`, `unfiltered`, and `removed` are accepted; `raw` is not supported.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentProfanityFilterMode {
+  @doc("Masks recognized profanity in the transcript.")
+  masked: "masked",
+
+  @doc("Requests recognized profanity without optional masking or removal. Mandatory service masking policies still apply.")
+  unfiltered: "unfiltered",
+
+  @doc("Removes recognized profanity from the transcript.")
+  removed: "removed",
+}
+
 @doc("""
   Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
   options with the Azure and MAI transcription models, custom speech models, and phrase hints.
@@ -809,6 +823,24 @@ model VoiceAgentInputTranscription {
 
   @doc("Optional phrase hints that bias recognition toward domain terms.")
   phrase_list?: string[];
+
+  @doc("""
+    Initialization-only profanity filtering for input transcripts. Supported only by managed Azure Fast
+    Transcription (`azure-fast-transcription`) and realtime Azure Speech (`azure-speech`). Using
+    `custom_speech` with this setting requires a cascaded model, not an audio-native realtime model's
+    side transcriber. Explicit settings, including null, bypass automatic native routing; unsupported
+    providers reject them.
+    Omit this property to retain provider defaults when initializing a session and preserve the initialized
+    setting on subsequent session updates. Explicit null requests `unfiltered`, not provider defaults,
+    and is acknowledged as `unfiltered` in session events. After initialization, updates may repeat the
+    same mode but cannot change it, disable transcription while an explicit mode is set, or switch the
+    transcription model. Repeating null and `unfiltered` is equivalent.
+    Filtering applies to transcript events and cascaded model context. Input audio, voice activity
+    detection, and assistant speech are unchanged; audio-native models still receive the original audio.
+    Mandatory service masking policies still apply, including when `unfiltered` is requested.
+    """)
+  @added(Versions.v1)
+  profanity_filter?: VoiceAgentProfanityFilterMode | null;
 }
 
 @doc("The avatar video resolution.")
