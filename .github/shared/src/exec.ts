@@ -72,6 +72,7 @@ export async function execFile(
     // execFile(file, args) is more secure than exec(cmd), since the latter is vulnerable to shell injection
     const result = await execFileImpl(file, args, {
       cwd,
+      env,
       maxBuffer,
       timeout,
       ...(env === undefined ? {} : { env }),

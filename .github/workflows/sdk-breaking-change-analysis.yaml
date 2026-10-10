@@ -1,0 +1,338 @@
+name: SDK Breaking Change Analysis - Analyze
+
+on: # zizmor: ignore[dangerous-triggers] Only base/default-branch workflow code runs; PR content is checked out separately.
+  workflow_run:
+    workflows: ["SDK Breaking Change Labels"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "Pull request number to analyze"
+        required: true
+        type: string
+      sdk_language:
+        description: "SDK language: DotNet, Go, Java, JavaScript, Python"
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: read
+
+jobs:
+  resolve:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-slim
+    outputs:
+      head-repository: ${{ steps.resolve.outputs.head-repository }}
+      head-sha: ${{ steps.resolve.outputs.head-sha }}
+      pr-number: ${{ steps.resolve.outputs.pr-number }}
+      sdk-language: ${{ steps.resolve.outputs.sdk-language }}
+      sdk-repository: ${{ steps.resolve.outputs.sdk-repository }}
+      should-run: ${{ steps.resolve.outputs.should-run }}
+      tsp-config-paths: ${{ steps.resolve-tsp-config-paths.outputs.tsp-config-paths }}
+    steps:
+      - name: Checkout workflow repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          sparse-checkout: |
+            .github
+            eng
+          persist-credentials: false
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+      - name: Resolve trigger inputs
+        id: resolve
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { resolveAnalysisTrigger } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-analysis-inputs.ts');
+            await resolveAnalysisTrigger({ github, context, core }, "${{ github.workspace }}/repositories/azure-rest-api-specs");
+      - name: Checkout specification PR head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ github.repository }}
+          # resolve-trigger restricts this to the current SHA of a branch in this repository.
+          # codeql[actions/untrusted-checkout/critical]
+          ref: refs/pull/${{ steps.resolve.outputs.pr-number }}/merge
+          path: repositories/azure-rest-api-specs
+          persist-credentials: false
+      - name: Resolve changed TypeSpec config paths
+        id: resolve-tsp-config-paths
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PR_NUMBER: ${{ steps.resolve.outputs.pr-number }}
+        with:
+          script: |
+            const { resolveChangedTypeSpecConfigPathsFromPullRequest } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-analysis-inputs.ts');
+            await resolveChangedTypeSpecConfigPathsFromPullRequest({
+              github,
+              context,
+              core,
+              pullNumber: Number(process.env.PR_NUMBER),
+              localSpecRepoPath: '${{ github.workspace }}/repositories/azure-rest-api-specs',
+            });
+
+  propagate-status:
+    needs: resolve
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write analysis status
+        shell: bash
+        env:
+          SHOULD_RUN: ${{ needs.resolve.outputs.should-run }}
+        run: |
+          mkdir -p "${{ runner.temp }}/sdk-breaking-change-analysis"
+          printf '%s\n' "$SHOULD_RUN" > \
+            "${{ runner.temp }}/sdk-breaking-change-analysis/run"
+
+      - name: Upload analysis status
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: sdk-breaking-change-analysis-status
+          path: ${{ runner.temp }}/sdk-breaking-change-analysis/run
+          if-no-files-found: error
+          retention-days: 7
+
+  analyze:
+    needs: resolve
+    if: needs.resolve.outputs.should-run == 'true'
+    permissions:
+      contents: read
+      copilot-requests: write
+    concurrency:
+      group: >-
+        sdk-breaking-analysis-${{ needs.resolve.outputs.pr-number }}-${{
+        needs.resolve.outputs.sdk-language }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    env:
+      AZSDK_CLI_PATH: /tmp/bin
+
+    steps:
+      - name: Checkout workflow repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          sparse-checkout: |
+            .github
+            eng
+          persist-credentials: false
+
+      - name: Checkout specification PR head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ github.repository }}
+          # resolve-trigger restricts this to the current SHA of a branch in this repository.
+          # codeql[actions/untrusted-checkout/critical]
+          ref: refs/pull/${{ needs.resolve.outputs.pr-number }}/merge
+          path: repositories/azure-rest-api-specs
+          persist-credentials: false
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Set up Node.js and install specification repository dependencies
+        uses: ./.github/actions/setup-node-install-deps
+        with:
+          working-directory: repositories/azure-rest-api-specs
+
+      - name: Install Azure SDK CLI
+        shell: pwsh
+        run: ./eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory $env:AZSDK_CLI_PATH
+
+      - name: Checkout target SDK repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Azure/${{ needs.resolve.outputs.sdk-repository }}
+          ref: main
+          path: repositories/${{ needs.resolve.outputs.sdk-repository }}
+          persist-credentials: false
+
+      - name: Set up Go
+        if: needs.resolve.outputs.sdk-language == 'Go'
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: "1.26.x"
+          cache: false
+
+      - name: Set up .NET
+        if: needs.resolve.outputs.sdk-language == 'DotNet'
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Set up Python
+        if: needs.resolve.outputs.sdk-language == 'Python'
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: "3.13"
+
+      - name: Set up Python SDK environment
+        if: needs.resolve.outputs.sdk-language == 'Python'
+        shell: bash
+        working-directory: repositories/${{ needs.resolve.outputs.sdk-repository }}
+        run: |
+          python -m pip install -U pip > /dev/null
+          python -m pip install 'eng/tools/azure-sdk-tools[ghtools]' > /dev/null
+
+      - name: Install golangci-lint
+        if: needs.resolve.outputs.sdk-language == 'Go'
+        shell: bash
+        run: |
+          set -euo pipefail
+          GO_BIN="$(go env GOPATH)/bin"
+          export PATH="$GO_BIN:$PATH"
+          go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.11.2
+          golangci-lint --version
+
+      - name: Set up GitHub Copilot CLI
+        id: setup-copilot-cli
+        shell: bash
+        run: | # zizmor: ignore[adhoc-packages] Install the CLI into an isolated runner-temp prefix.
+          set -euo pipefail
+          install_dir="$RUNNER_TEMP/copilot-cli"
+          npm_config_ignore_scripts=false npm install \
+            --global \
+            --prefix "$install_dir" \
+            @github/copilot
+          copilot_path="$install_dir/bin/copilot"
+          test -x "$copilot_path"
+          "$copilot_path" --version
+          echo "path=$copilot_path" >> "$GITHUB_OUTPUT"
+          echo "copilot_dir_path=$install_dir/bin/" >> "$GITHUB_OUTPUT"
+
+      - name: Set up SDK development environment
+        shell: bash
+        env:
+          SDK_REPOSITORY_PATH: ${{ github.workspace }}/repositories/${{ needs.resolve.outputs.sdk-repository }}
+          SDK_LANGUAGE: ${{ needs.resolve.outputs.sdk-language }}
+          AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
+          AZSDK_COPILOT_CLI_DIR_PATH: ${{ steps.setup-copilot-cli.outputs.copilot_dir_path }}
+        run: |
+          set -euo pipefail
+          export PATH="$AZSDK_CLI_PATH:$AZSDK_COPILOT_CLI_DIR_PATH:$PATH"
+          azsdk verify setup install \
+            --languages "$SDK_LANGUAGE" \
+            --package-path "$SDK_REPOSITORY_PATH" \
+            --yes
+
+      - name: Analyze SDK projects
+        id: analyze-sdk-projects
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
+          AZSDK_COPILOT_GITHUB_TOKEN: ${{ github.token }}
+          LOCAL_SDK_REPO_PATH: ${{ github.workspace }}/repositories/${{ needs.resolve.outputs.sdk-repository }}
+          SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
+          TYPESPEC_CONFIG_PATHS: ${{ needs.resolve.outputs.tsp-config-paths }}
+          PR_NUMBER: ${{ needs.resolve.outputs.pr-number }}
+          SDK_LANGUAGE: ${{ needs.resolve.outputs.sdk-language }}
+          ANALYZED_SHA: ${{ needs.resolve.outputs.head-sha }}
+          WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        with:
+          script: |
+            const { analyzeSdkProjects } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/analyze-sdk-projects.ts');
+            await analyzeSdkProjects({
+              localSdkRepositoryPath: process.env.LOCAL_SDK_REPO_PATH,
+              specificationRepositoryPath: process.env.SPEC_REPOSITORY_PATH,
+              typeSpecConfigPaths: JSON.parse(process.env.TYPESPEC_CONFIG_PATHS),
+              pullNumber: Number(process.env.PR_NUMBER),
+              sdkLanguage: process.env.SDK_LANGUAGE,
+              analyzedSha: process.env.ANALYZED_SHA,
+              workflowUrl: process.env.WORKFLOW_URL,
+              resultDir: process.env.RUNNER_TEMP,
+              azureSdkCliPath: process.env.AZSDK_CLI_PATH,
+            });
+
+      - name: Publish result summary
+        if: always()
+        shell: bash
+        env:
+          JOB_STATUS: ${{ job.status }}
+          ANALYSIS_OUTCOME: ${{ steps.analyze-sdk-projects.outcome }}
+          ANALYZED_SHA: ${{ needs.resolve.outputs.head-sha }}
+          JOB_LOG_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
+        run: |
+          {
+            echo "## SDK breaking-change analysis"
+            echo
+            if [[ -n "$ANALYZED_SHA" ]]; then
+              printf '%s\n\n' "**Analyzed commit:** \`$ANALYZED_SHA\`"
+            fi
+            if [[ "$JOB_STATUS" == "failure" ]]; then
+              echo "Breaking change analysis failed."
+              echo
+              error_log="$RUNNER_TEMP/sdk-breaking-change-results/error.log"
+              if [[ "$ANALYSIS_OUTCOME" == "failure" && -f "$error_log" ]]; then
+                echo "### Error"
+                echo
+                tail -n 30 "$error_log" | sed 's/^/    /'
+                echo
+              else
+                echo "Error output is available in the failed step log."
+                echo
+              fi
+              echo "[See failed step]($JOB_LOG_URL)"
+            else
+              manifest="$RUNNER_TEMP/sdk-breaking-change-results/projects.json"
+              if [[ -f "$manifest" ]]; then
+              while IFS= read -r project; do
+                typespec_project_path="$(jq -r '.typespecProjectPath' <<< "$project")"
+                package_name="$(jq -r '.packageName' <<< "$project")"
+                results_path="$RUNNER_TEMP/sdk-breaking-change-results/$(jq -r '.resultsPath' <<< "$project")"
+                echo "### $typespec_project_path"
+                echo
+                echo "**SDK Package:** $package_name"
+                echo
+                for result in generate.json build.json breaking-changes.json; do
+                  path="$results_path/$result"
+                  if [[ -f "$path" ]]; then
+                    echo "#### $result"
+                    echo '```json'
+                    cat "$path"
+                    echo '```'
+                  fi
+                done
+              done < <(jq -c '.[]' "$manifest")
+              fi
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Create SDK analysis result artifact
+        if: always() && needs.resolve.outputs.head-sha != ''
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
+          PR_NUMBER: ${{ needs.resolve.outputs.pr-number }}
+          HEAD_SHA: ${{ needs.resolve.outputs.head-sha }}
+          SDK_LANGUAGE: ${{ needs.resolve.outputs.sdk-language }}
+          ANALYSIS_WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          STATUS: ${{ steps.analyze-sdk-projects.outcome == 'success' && 'success' || 'failure' }}
+        with:
+          script: |
+            const { createAnalysisResult } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/create-analysis-result.ts');
+            await createAnalysisResult({
+              resultsPath: process.env.RESULTS_PATH,
+              prNumber: Number(process.env.PR_NUMBER),
+              headSha: process.env.HEAD_SHA,
+              sdkLanguage: process.env.SDK_LANGUAGE,
+              analysisWorkflowUrl: process.env.ANALYSIS_WORKFLOW_URL,
+              status: process.env.STATUS,
+            });
+
+      - name: Upload SDK analysis results
+        id: upload-results
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: sdk-breaking-change-results
+          path: ${{ runner.temp }}/sdk-breaking-change-results/sdk-breaking-change-analysis.json
+          if-no-files-found: warn
+          retention-days: 7

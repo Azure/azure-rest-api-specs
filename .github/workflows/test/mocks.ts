@@ -41,7 +41,7 @@ function createMockGithubImpl() {
       },
       issues: {
         addLabels: vi.fn(),
-        createComment: vi.fn(),
+        createComment: vi.fn().mockResolvedValue({ data: { id: 1 } }),
         deleteComment: vi.fn(),
         listComments: vi.fn().mockResolvedValue({ data: [] }),
         listEvents: vi.fn().mockResolvedValue({ data: [] }),
@@ -54,6 +54,7 @@ function createMockGithubImpl() {
       },
       repos: {
         createCommitStatus: vi.fn(),
+        getContent: vi.fn(),
         listCommitStatusesForRef: vi.fn().mockResolvedValue({ data: [] }),
         listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
           data: [],
