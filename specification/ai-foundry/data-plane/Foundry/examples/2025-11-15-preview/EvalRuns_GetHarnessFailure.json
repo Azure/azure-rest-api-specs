@@ -1,0 +1,47 @@
+{
+  "title": "Get a task run whose agent invocation failed after retries",
+  "operationId": "EvalRuns_getTaskRun",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "runId": "evalrun_01J9Z7F6J2",
+    "taskRunId": "taskrun_01J9Z7N4DH"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "taskrun_01J9Z7N4DH",
+        "eval_run_id": "evalrun_01J9Z7F6J2",
+        "task": {
+          "id": "covered-water-damage",
+          "name": "Covered water damage"
+        },
+        "repetition": 3,
+        "status": "failed",
+        "grader_results": [],
+        "artifacts": [
+          {
+            "artifact_id": "artifact_01J9Z7N8JK",
+            "type": "harness_log",
+            "media_type": "text/plain"
+          }
+        ],
+        "diagnostics": {
+          "attempts": {
+            "harness": 3
+          },
+          "log_artifacts": ["artifact_01J9Z7N8JK"]
+        },
+        "error": {
+          "code": "harness_invocation_failed",
+          "message": "The agent invocation timed out after retries.",
+          "source": "harness",
+          "retriable": true,
+          "artifact_ids": ["artifact_01J9Z7N8JK"]
+        },
+        "started_at": "2026-10-09T05:40:22Z",
+        "completed_at": "2026-10-09T05:41:18Z"
+      }
+    }
+  }
+}

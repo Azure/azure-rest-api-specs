@@ -1,0 +1,74 @@
+{
+  "title": "Run a published EvalSuite with execution overrides",
+  "operationId": "EvalRuns_create",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "Operation-Id": "9142f058-b4b6-425d-84ec-1bbf445a08a0",
+    "body": {
+      "inputs": {
+        "suite": {
+          "name": "claims-regression",
+          "version": "1"
+        },
+        "config_overrides": {
+          "harness_config": {
+            "type": "foundry_agent",
+            "agent": {
+              "name": "claims-agent",
+              "version": "8"
+            }
+          },
+          "execution_config": {
+            "repetitions": 3,
+            "concurrency": 3
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "/eval_runs/evalrun_01J9Z7F6J2",
+        "Location": "/eval_runs/evalrun_01J9Z7F6J2"
+      },
+      "body": {
+        "id": "evalrun_01J9Z7F6J2",
+        "status": "queued",
+        "inputs": {
+          "suite": {
+            "name": "claims-regression",
+            "version": "1"
+          },
+          "config_overrides": {
+            "harness_config": {
+              "type": "foundry_agent",
+              "agent": {
+                "name": "claims-agent",
+                "version": "8"
+              }
+            },
+            "execution_config": {
+              "repetitions": 3,
+              "concurrency": 3
+            }
+          }
+        },
+        "resolved_harness_config": {
+          "type": "foundry_agent",
+          "agent": {
+            "name": "claims-agent",
+            "version": "8"
+          }
+        },
+        "resolved_execution_config": {
+          "type": "harness_invocation",
+          "repetitions": 3,
+          "concurrency": 3
+        },
+        "created_at": "2026-10-09T05:40:00Z"
+      }
+    }
+  }
+}

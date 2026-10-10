@@ -1,0 +1,51 @@
+{
+  "title": "Get a completed evaluation run",
+  "operationId": "EvalRuns_get",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "runId": "evalrun_01J9Z7F6J2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "evalrun_01J9Z7F6J2",
+        "status": "succeeded",
+        "inputs": {
+          "suite": {
+            "name": "claims-regression",
+            "version": "1"
+          },
+          "config_overrides": {
+            "execution_config": {
+              "repetitions": 3,
+              "concurrency": 3
+            }
+          }
+        },
+        "resolved_harness_config": {
+          "type": "foundry_agent",
+          "agent": {
+            "name": "claims-agent",
+            "version": "7"
+          }
+        },
+        "resolved_execution_config": {
+          "type": "harness_invocation",
+          "repetitions": 3,
+          "concurrency": 3
+        },
+        "result": {
+          "task_run_count": 6,
+          "passed_count": 5,
+          "not_passed_count": 1,
+          "error_count": 0,
+          "pass_rate": 0.8333
+        },
+        "created_at": "2026-10-09T05:40:00Z",
+        "started_at": "2026-10-09T05:40:02Z",
+        "completed_at": "2026-10-09T05:41:18Z"
+      }
+    }
+  }
+}

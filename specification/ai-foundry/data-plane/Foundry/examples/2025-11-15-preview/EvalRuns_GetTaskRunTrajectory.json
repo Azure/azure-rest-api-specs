@@ -1,0 +1,60 @@
+{
+  "title": "Inspect the agent interaction behind a task-run result",
+  "operationId": "EvalRuns_getTaskRunTrajectory",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "runId": "evalrun_01J9Z7F6J2",
+    "taskRunId": "taskrun_01J9Z7K81M"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "schema_version": "ATIF-v1.8",
+        "session_id": "session_01J9Z7HZZQ",
+        "trajectory_id": "trajectory_01J9Z7JS3A",
+        "agent": {
+          "name": "claims-agent",
+          "version": "7",
+          "model_name": "gpt-4.1"
+        },
+        "steps": [
+          {
+            "step_id": 1,
+            "source": "user",
+            "message": "Review claim 12345 and cite the applicable policy."
+          },
+          {
+            "step_id": 2,
+            "source": "agent",
+            "tool_calls": [
+              {
+                "tool_call_id": "call_01J9Z7J4QX",
+                "function_name": "get_claim",
+                "arguments": {
+                  "claim_id": "12345"
+                }
+              }
+            ],
+            "observation": {
+              "results": [
+                {
+                  "source_call_id": "call_01J9Z7J4QX",
+                  "content": "Claim 12345 concerns damage from a burst supply line."
+                }
+              ]
+            }
+          },
+          {
+            "step_id": 3,
+            "source": "agent",
+            "message": "This claim is covered because the damage was sudden."
+          }
+        ],
+        "final_metrics": {
+          "total_steps": 3
+        }
+      }
+    }
+  }
+}

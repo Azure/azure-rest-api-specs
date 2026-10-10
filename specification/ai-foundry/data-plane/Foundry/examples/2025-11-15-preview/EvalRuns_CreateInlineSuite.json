@@ -1,0 +1,101 @@
+{
+  "title": "Run a one-off inline suite with a published HarnessTaskSet",
+  "operationId": "EvalRuns_create",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "body": {
+      "inputs": {
+        "inline_suite": {
+          "harness_task_set": {
+            "name": "claims-regression",
+            "version": "1"
+          },
+          "graders": [
+            {
+              "name": "tone",
+              "type": "llm_judge",
+              "model_deployment": "gpt-5.6-luna",
+              "criteria": [
+                {
+                  "id": "polite",
+                  "description": "The response is polite and professional."
+                }
+              ]
+            }
+          ],
+          "scoring": {
+            "aggregation": "all_pass"
+          },
+          "harness_config": {
+            "type": "foundry_agent",
+            "agent": {
+              "name": "claims-agent",
+              "version": "7"
+            }
+          },
+          "execution_config": {
+            "type": "harness_invocation"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "/eval_runs/evalrun_01J9Z8A3KD",
+        "Location": "/eval_runs/evalrun_01J9Z8A3KD"
+      },
+      "body": {
+        "id": "evalrun_01J9Z8A3KD",
+        "status": "queued",
+        "inputs": {
+          "inline_suite": {
+            "harness_task_set": {
+              "name": "claims-regression",
+              "version": "1"
+            },
+            "graders": [
+              {
+                "name": "tone",
+                "type": "llm_judge",
+                "model_deployment": "gpt-5.6-luna",
+                "criteria": [
+                  {
+                    "id": "polite",
+                    "description": "The response is polite and professional."
+                  }
+                ]
+              }
+            ],
+            "scoring": {
+              "aggregation": "all_pass"
+            },
+            "harness_config": {
+              "type": "foundry_agent",
+              "agent": {
+                "name": "claims-agent",
+                "version": "7"
+              }
+            },
+            "execution_config": {
+              "type": "harness_invocation"
+            }
+          }
+        },
+        "resolved_harness_config": {
+          "type": "foundry_agent",
+          "agent": {
+            "name": "claims-agent",
+            "version": "7"
+          }
+        },
+        "resolved_execution_config": {
+          "type": "harness_invocation"
+        },
+        "created_at": "2026-10-09T05:40:00Z"
+      }
+    }
+  }
+}

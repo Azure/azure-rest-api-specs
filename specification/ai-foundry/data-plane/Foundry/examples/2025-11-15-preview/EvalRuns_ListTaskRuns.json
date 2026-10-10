@@ -1,0 +1,40 @@
+{
+  "title": "List evaluation task runs that did not pass",
+  "operationId": "EvalRuns_listTaskRuns",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "runId": "evalrun_01J9Z7F6J2",
+    "passed": false
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "id": "taskrun_01J9Z7K81M",
+            "eval_run_id": "evalrun_01J9Z7F6J2",
+            "task": {
+              "id": "covered-water-damage",
+              "name": "Covered water damage"
+            },
+            "repetition": 2,
+            "status": "succeeded",
+            "passed": false,
+            "grader_results": [
+              {
+                "grader": "policy_citation",
+                "passed": false,
+                "explanation": "The response did not cite the expected policy section."
+              }
+            ],
+            "artifacts": []
+          }
+        ],
+        "first_id": "taskrun_01J9Z7K81M",
+        "last_id": "taskrun_01J9Z7K81M",
+        "has_more": false
+      }
+    }
+  }
+}
