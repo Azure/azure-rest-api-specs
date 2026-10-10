@@ -78,12 +78,16 @@ model KnowledgeBaseRetrievalResponse {
 
 /** Base type for reasoning effort. */
 @discriminator("kind")
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model KnowledgeRetrievalReasoningEffort {
   /** The kind of reasoning effort. */
   kind: KnowledgeRetrievalReasoningEffortKind;
 }
 
 /** Run knowledge retrieval with minimal reasoning effort. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model KnowledgeRetrievalMinimalReasoningEffort
   extends KnowledgeRetrievalReasoningEffort {
   /** The discriminator value. */
@@ -919,6 +923,8 @@ model KnowledgeBaseAgenticReasoningActivityRecord
   reasoningTokens?: int32;
 
   /** The retrieval reasoning effort configuration. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
 
   /** The logical reasoning effort requested by the customer. This is distinct from `retrievalReasoningEffort`, which reports the reasoning effort used for billing. */

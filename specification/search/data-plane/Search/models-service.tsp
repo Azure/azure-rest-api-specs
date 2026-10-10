@@ -5737,6 +5737,8 @@ model SearchServiceLimits {
 
   /** The maximum cumulative indexer runtime in seconds allowed for the service. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   maxCumulativeIndexerRuntimeSeconds?: int64 | null;
 
   /** The maximum vector index size (vector memory quota) allowed per index in bytes. */
@@ -6634,6 +6636,8 @@ model AIServicesVisionParameters {
 
 /** Specifies an Azure Machine Learning endpoint deployed via the Azure AI Foundry Model Catalog for generating the vector embedding of a query string. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model AMLVectorizer extends VectorSearchVectorizer {
   /** Specifies the properties of the AML vectorizer. */
   amlParameters?: AMLParameters;
@@ -6644,6 +6648,8 @@ model AMLVectorizer extends VectorSearchVectorizer {
 
 /** Specifies the properties for connecting to an AML vectorizer. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model AMLParameters {
   /** (Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
