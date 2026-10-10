@@ -90197,6 +90197,8 @@ components:
             An omitted version resolves to latest once per validation round and is persisted before content reads.
             Worker retries reuse that concrete version and consistent snapshot. Reads expose the requested version
             before resolution and concrete version afterward; an omitted unresolved version remains absent.
+            Recheck the submitting principal's assets/read permission for the resolved version before content reads.
+            Authorization failure fails preparation and keeps dispatch closed.
             Validation identifies CSV, JSON array or JSONL by bounded content inspection using file metadata as hints.
             Unsupported, ambiguous or malformed content fails preparation; parse failure does not select another format.
             Fixed destination_type and destination_value fields construct each recipient's TelephonyAddress.
@@ -90268,6 +90270,8 @@ components:
             An omitted version resolves to latest once per validation round and is persisted before content reads.
             Worker retries reuse that concrete version and consistent snapshot. Reads expose the requested version
             before resolution and concrete version afterward; an omitted unresolved version remains absent.
+            Recheck the submitting principal's assets/read permission for the resolved version before content reads.
+            Authorization failure fails preparation and keeps dispatch closed.
             Validation identifies CSV, JSON array or JSONL by bounded content inspection using file metadata as hints.
             Unsupported, ambiguous or malformed content fails preparation; parse failure does not select another format.
             Fixed destination_type and destination_value fields construct each recipient's TelephonyAddress.
