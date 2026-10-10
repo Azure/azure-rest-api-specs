@@ -14,11 +14,11 @@ model EvalRunInputs {
   /** The exact suite version to execute; exclusive with inline_suite. */
   suite?: EvalSuiteReference;
 
-  /** A complete one-off suite definition; exclusive with suite and run_config_overrides. */
+  /** A complete one-off suite definition; exclusive with suite and config_overrides. */
   inline_suite?: InlineEvalSuite;
 
-  /** Execution settings replacing a referenced suite's defaults for this run. */
-  run_config_overrides?: EvalRunConfigOverrides;
+  /** Harness and execution settings replacing a referenced suite's defaults for this run. */
+  config_overrides?: EvalSuiteConfigOverrides;
 }
 
 /** Request to create an evaluation run with immutable caller-supplied inputs. */
@@ -50,9 +50,13 @@ model EvalRunResult {
 /** A durable Foundry evaluation run, distinct from the existing OpenAI EvalRun. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model FoundryEvalRun is JobLike<EvalRunResult, EvalRunInputs> {
-  /** The effective suite execution configuration after run overrides. */
+  /** The effective harness and exact agent reference after run overrides. */
   @visibility(Lifecycle.Read)
-  resolved_run_config: EvalRunConfig;
+  resolved_harness_config: FoundryAgentHarness;
+
+  /** The effective execution mode and attempt limits after run overrides. */
+  @visibility(Lifecycle.Read)
+  resolved_execution_config: EvalExecutionConfig;
 
   /** The time when the run was accepted. */
   @visibility(Lifecycle.Read)

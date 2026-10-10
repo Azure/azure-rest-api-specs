@@ -1,5 +1,5 @@
 {
-  "title": "Publish an EvalSuite with a pinned HarnessTaskSet and run configuration",
+  "title": "Publish an EvalSuite with a pinned HarnessTaskSet and separate configurations",
   "operationId": "EvalSuites_createVersion",
   "parameters": {
     "api-version": "2025-11-15-preview",
@@ -10,15 +10,15 @@
         "name": "claims-regression",
         "version": "1"
       },
-      "run_config": {
+      "harness_config": {
+        "type": "foundry_agent",
+        "agent": {
+          "name": "claims-agent",
+          "version": "7"
+        }
+      },
+      "execution_config": {
         "type": "harness_invocation",
-        "harness": {
-          "type": "foundry_agent",
-          "agent": {
-            "name": "claims-agent",
-            "version": "7"
-          }
-        },
         "repetitions": 1,
         "concurrency": 2
       },
@@ -49,15 +49,15 @@
           "name": "claims-regression",
           "version": "1"
         },
-        "run_config": {
+        "harness_config": {
+          "type": "foundry_agent",
+          "agent": {
+            "name": "claims-agent",
+            "version": "7"
+          }
+        },
+        "execution_config": {
           "type": "harness_invocation",
-          "harness": {
-            "type": "foundry_agent",
-            "agent": {
-              "name": "claims-agent",
-              "version": "7"
-            }
-          },
           "repetitions": 1,
           "concurrency": 2
         },

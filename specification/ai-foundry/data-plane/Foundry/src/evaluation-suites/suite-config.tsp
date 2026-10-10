@@ -41,9 +41,9 @@ model FoundryAgentHarness extends EvaluationHarness {
   agent: FoundryAgentReference;
 }
 
-/** The supported execution configuration types. */
+/** The supported execution modes. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvalRunConfigType {
+union EvalExecutionConfigType {
   string,
 
   /** Invoke the configured harness for each task attempt. */
@@ -66,14 +66,11 @@ model ExecutionConstraints {
   max_cost_usd?: decimal128;
 }
 
-/** Suite-owned harness and execution defaults for an evaluation. */
+/** Suite-owned execution defaults, independent of the harness configuration. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalRunConfig {
-  /** The execution type. */
-  type: EvalRunConfigType.harness_invocation;
-
-  /** The harness invoked for every task attempt. */
-  harness: FoundryAgentHarness;
+model EvalExecutionConfig {
+  /** The execution mode. */
+  type: EvalExecutionConfigType.harness_invocation;
 
   /** The number of attempts created for each task. */
   @minValue(1)
@@ -89,10 +86,7 @@ model EvalRunConfig {
 
 /** Execution settings that replace a published suite's defaults for one run. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalRunConfigOverrides {
-  /** A complete harness reference, including the exact agent version. */
-  harness?: FoundryAgentHarness;
-
+model EvalExecutionConfigOverrides {
   /** The number of attempts created for each task. */
   @minValue(1)
   repetitions?: int32;

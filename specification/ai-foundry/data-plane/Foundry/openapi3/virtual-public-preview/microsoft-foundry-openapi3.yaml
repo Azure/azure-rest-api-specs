@@ -52831,6 +52831,55 @@ components:
         A CSV data source for evaluation runs.
 
         See [evaluation datasets](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluation-datasets).
+    EvalExecutionConfig:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - harness_invocation
+          description: The execution mode.
+        repetitions:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The number of attempts created for each task.
+          default: 1
+        concurrency:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The maximum number of task attempts executed concurrently.
+          default: 1
+        constraints:
+          $ref: '#/components/schemas/ExecutionConstraints'
+          description: Per-attempt execution constraints.
+      description: Suite-owned execution defaults, independent of the harness configuration.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvalExecutionConfigOverrides:
+      type: object
+      properties:
+        repetitions:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The number of attempts created for each task.
+        concurrency:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The maximum number of task attempts executed concurrently.
+        constraints:
+          $ref: '#/components/schemas/ExecutionConstraints'
+          description: Constraint fields to replace; omitted fields inherit the suite value.
+      description: Execution settings that replace a published suite's defaults for one run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvalGraderInspectAI:
       type: object
       required:
@@ -53164,62 +53213,6 @@ components:
             "error": null,
             "metadata": {}
           }
-    EvalRunConfig:
-      type: object
-      required:
-        - type
-        - harness
-      properties:
-        type:
-          type: string
-          enum:
-            - harness_invocation
-          description: The execution type.
-        harness:
-          $ref: '#/components/schemas/FoundryAgentHarness'
-          description: The harness invoked for every task attempt.
-        repetitions:
-          type: integer
-          format: int32
-          minimum: 1
-          description: The number of attempts created for each task.
-          default: 1
-        concurrency:
-          type: integer
-          format: int32
-          minimum: 1
-          description: The maximum number of task attempts executed concurrently.
-          default: 1
-        constraints:
-          $ref: '#/components/schemas/ExecutionConstraints'
-          description: Per-attempt execution constraints.
-      description: Suite-owned harness and execution defaults for an evaluation.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-    EvalRunConfigOverrides:
-      type: object
-      properties:
-        harness:
-          $ref: '#/components/schemas/FoundryAgentHarness'
-          description: A complete harness reference, including the exact agent version.
-        repetitions:
-          type: integer
-          format: int32
-          minimum: 1
-          description: The number of attempts created for each task.
-        concurrency:
-          type: integer
-          format: int32
-          minimum: 1
-          description: The maximum number of task attempts executed concurrently.
-        constraints:
-          $ref: '#/components/schemas/ExecutionConstraints'
-          description: Constraint fields to replace; omitted fields inherit the suite value.
-      description: Execution settings that replace a published suite's defaults for one run.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
     EvalRunCost:
       type: object
       properties:
@@ -53269,10 +53262,10 @@ components:
           description: The exact suite version to execute; exclusive with inline_suite.
         inline_suite:
           $ref: '#/components/schemas/InlineEvalSuite'
-          description: A complete one-off suite definition; exclusive with suite and run_config_overrides.
-        run_config_overrides:
-          $ref: '#/components/schemas/EvalRunConfigOverrides'
-          description: Execution settings replacing a referenced suite's defaults for this run.
+          description: A complete one-off suite definition; exclusive with suite and config_overrides.
+        config_overrides:
+          $ref: '#/components/schemas/EvalSuiteConfigOverrides'
+          description: Harness and execution settings replacing a referenced suite's defaults for this run.
       description: Caller-supplied immutable inputs for an evaluation run.
       x-ms-foundry-meta:
         conditional_previews:
@@ -53606,6 +53599,19 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Insights=V1Preview
+    EvalSuiteConfigOverrides:
+      type: object
+      properties:
+        harness_config:
+          $ref: '#/components/schemas/FoundryAgentHarness'
+          description: A complete harness and exact agent reference replacing the suite's harness.
+        execution_config:
+          $ref: '#/components/schemas/EvalExecutionConfigOverrides'
+          description: Execution fields to replace; omitted fields inherit the suite defaults.
+      description: Configuration replacements applied only to a run of a published suite.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvalSuiteReference:
       type: object
       required:
@@ -53626,7 +53632,8 @@ components:
       type: object
       required:
         - scoring
-        - run_config
+        - harness_config
+        - execution_config
         - name
         - version
         - harness_task_set
@@ -53639,9 +53646,12 @@ components:
         scoring:
           $ref: '#/components/schemas/ScoringRule'
           description: How grader verdicts determine the task-run outcome.
-        run_config:
-          $ref: '#/components/schemas/EvalRunConfig'
-          description: The harness and default execution settings.
+        harness_config:
+          $ref: '#/components/schemas/FoundryAgentHarness'
+          description: The harness and exact agent version used for task attempts.
+        execution_config:
+          $ref: '#/components/schemas/EvalExecutionConfig'
+          description: The execution mode and default attempt limits.
         name:
           type: string
           description: The suite name.
@@ -53661,7 +53671,8 @@ components:
       type: object
       required:
         - scoring
-        - run_config
+        - harness_config
+        - execution_config
         - harness_task_set
       properties:
         graders:
@@ -53672,9 +53683,12 @@ components:
         scoring:
           $ref: '#/components/schemas/ScoringRule'
           description: How grader verdicts determine the task-run outcome.
-        run_config:
-          $ref: '#/components/schemas/EvalRunConfig'
-          description: The harness and default execution settings.
+        harness_config:
+          $ref: '#/components/schemas/FoundryAgentHarness'
+          description: The harness and exact agent version used for task attempts.
+        execution_config:
+          $ref: '#/components/schemas/EvalExecutionConfig'
+          description: The execution mode and default attempt limits.
         description:
           type: string
           description: The suite description.
@@ -53694,7 +53708,8 @@ components:
       type: object
       required:
         - scoring
-        - run_config
+        - harness_config
+        - execution_config
         - harness_task_set
       properties:
         graders:
@@ -53705,9 +53720,12 @@ components:
         scoring:
           $ref: '#/components/schemas/ScoringRule'
           description: How grader verdicts determine the task-run outcome.
-        run_config:
-          $ref: '#/components/schemas/EvalRunConfig'
-          description: The harness and default execution settings.
+        harness_config:
+          $ref: '#/components/schemas/FoundryAgentHarness'
+          description: The harness and exact agent version used for task attempts.
+        execution_config:
+          $ref: '#/components/schemas/EvalExecutionConfig'
+          description: The execution mode and default attempt limits.
         description:
           type: string
           description: The suite description.
@@ -56102,7 +56120,8 @@ components:
       required:
         - id
         - status
-        - resolved_run_config
+        - resolved_harness_config
+        - resolved_execution_config
         - created_at
       properties:
         id:
@@ -56124,9 +56143,13 @@ components:
           $ref: '#/components/schemas/OpenAI.Error'
           description: Error details — populated only on failure.
           readOnly: true
-        resolved_run_config:
-          $ref: '#/components/schemas/EvalRunConfig'
-          description: The effective suite execution configuration after run overrides.
+        resolved_harness_config:
+          $ref: '#/components/schemas/FoundryAgentHarness'
+          description: The effective harness and exact agent reference after run overrides.
+          readOnly: true
+        resolved_execution_config:
+          $ref: '#/components/schemas/EvalExecutionConfig'
+          description: The effective execution mode and attempt limits after run overrides.
           readOnly: true
         created_at:
           type: string
@@ -56829,7 +56852,8 @@ components:
       type: object
       required:
         - scoring
-        - run_config
+        - harness_config
+        - execution_config
         - harness_task_set
       properties:
         graders:
@@ -56840,9 +56864,12 @@ components:
         scoring:
           $ref: '#/components/schemas/ScoringRule'
           description: How grader verdicts determine the task-run outcome.
-        run_config:
-          $ref: '#/components/schemas/EvalRunConfig'
-          description: The harness and default execution settings.
+        harness_config:
+          $ref: '#/components/schemas/FoundryAgentHarness'
+          description: The harness and exact agent version used for task attempts.
+        execution_config:
+          $ref: '#/components/schemas/EvalExecutionConfig'
+          description: The execution mode and default attempt limits.
         harness_task_set:
           $ref: '#/components/schemas/HarnessTaskSetSource'
           description: A published HarnessTaskSet version or tasks supplied just for this run.

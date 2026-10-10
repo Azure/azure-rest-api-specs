@@ -4,7 +4,7 @@ import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 import "../task-sets/models.tsp";
 import "../openai/evaluations/models.tsp";
-import "./run-config.tsp";
+import "./suite-config.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -201,6 +201,16 @@ model ScoringRule {
   aggregation: EvaluationAggregation.all_pass;
 }
 
+/** Configuration replacements applied only to a run of a published suite. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvalSuiteConfigOverrides {
+  /** A complete harness and exact agent reference replacing the suite's harness. */
+  harness_config?: FoundryAgentHarness;
+
+  /** Execution fields to replace; omitted fields inherit the suite defaults. */
+  execution_config?: EvalExecutionConfigOverrides;
+}
+
 /** Shared grading and execution settings for published and inline EvalSuites. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvalSuiteDefinition {
@@ -210,8 +220,11 @@ model EvalSuiteDefinition {
   /** How grader verdicts determine the task-run outcome. */
   scoring: ScoringRule;
 
-  /** The harness and default execution settings. */
-  run_config: EvalRunConfig;
+  /** The harness and exact agent version used for task attempts. */
+  harness_config: FoundryAgentHarness;
+
+  /** The execution mode and default attempt limits. */
+  execution_config: EvalExecutionConfig;
 
   // Future scheduling settings belong to the suite, not an individual EvalRun.
 }
