@@ -408,6 +408,7 @@ model TilerInfo {
  * Union type for band metadata elements
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Unions cannot be emitted to OpenAPI v2 unless all options are literals of the same type."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union BandMetadataElement {
   string,
   Record<string>,

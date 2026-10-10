@@ -24,6 +24,7 @@ namespace Microsoft.CognitiveServices;
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @parentResource(Account)
 model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   ...ResourceNameParameter<
@@ -40,11 +41,18 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   @visibility(Lifecycle.Read)
   etag?: string;
 
+  // Retain tags in historical previews without re-adding them in September.
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'tags' on the resource envelope for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> type used for 'Compute' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Published preview versions retain tags for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Published preview versions retain the string-valued tags dictionary"
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
   tags?: Record<string>;
 
   /**
@@ -66,6 +74,7 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface Computes {
   /**

@@ -1,6 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { readFile } from "node:fs/promises";
-import yaml from "js-yaml";
+import { parse } from "yaml";
 import { resolve } from "node:path";
 import * as z from "zod";
 
@@ -61,7 +61,7 @@ function buildLeasePath(
 export function parseLease(content: string): { valid: boolean; reason: string } {
   let rawParsed: unknown;
   try {
-    rawParsed = yaml.load(content, { schema: yaml.FAILSAFE_SCHEMA });
+    rawParsed = parse(content, { schema: "failsafe" });
   } catch {
     return { valid: false, reason: "YAML parse error" };
   }

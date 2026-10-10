@@ -1367,6 +1367,7 @@ model KnowledgeBaseRetrievalPartialResponse {
  * event (or an `error` event, if the retrieval fails before completing).
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "@events SSE union is delivered as a server-sent event stream and cannot be represented as an OpenAPI v2 union."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @added(Versions.v2026_08_01_preview)
 @events
 union KnowledgeBaseRetrievalStreamEvents {
@@ -1447,6 +1448,7 @@ model KnowledgeBaseStreamErrorEvent {
 }
 
 /** The semantic HTTP status of a completed streaming retrieval. */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @added(Versions.v2026_08_01_preview)
 union KnowledgeBaseRetrievalStatusCode {
   int32,
