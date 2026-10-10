@@ -27,7 +27,7 @@ model Migration is Azure.ResourceManager.ProxyResource<MigrationProperties> {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Force the OpenAPI tag to remain 'Migrations' in every API version even though the interface is renamed to singular 'Migration' in versions before 2026-06-01-preview, so the already-shipped older swagger tags are preserved unchanged."
 @armResourceOperations
 @renamedFrom(Versions.v2026_06_01_preview, "Migration")
@@ -62,11 +62,26 @@ interface Migrations {
   /**
    * Cancel or rollback the migration operation in a Redis Enterprise cluster.
    */
-  cancel is ArmResourceActionAsyncBase<
+  @renamedFrom(Versions.v2026_09_01, "cancel")
+  @action("cancel")
+  undo is ArmResourceActionAsyncBase<
+    Migration,
+    MigrationUndoRequest,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Migration>,
+    OptionalRequestBody = true
+  >;
+
+  /**
+   * Unlinks the migrated endpoint from the Azure Managed Redis cluster that was migrated from Azure Cache for Redis, removing the source cache endpoint that was redirected to this cluster during migration.
+   */
+  @added(Versions.v2026_09_01)
+  @action("unlinkMigratedEndpoint")
+  unlinkMigratedEndpoint is ArmResourceActionNoResponseContentAsync<
     Migration,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Migration>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Migration>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void>
   >;
 
   /**
@@ -84,6 +99,11 @@ interface Migrations {
 
 @@doc(Migration.name, "");
 @@doc(Migration.properties, "Properties of the migration operation.");
+@@added(Migrations.undo::parameters.body, Versions.v2026_09_01);
+@@doc(
+  Migrations.undo::parameters.body,
+  "Parameters supplied to undo a migration operation."
+);
 @@doc(
   Migrations.start::parameters.resource,
   "Parameters supplied to start a migration operation."

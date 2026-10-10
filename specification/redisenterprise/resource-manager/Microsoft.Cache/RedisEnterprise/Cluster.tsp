@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Cache;
 /**
@@ -25,14 +27,14 @@ model Cluster
   /**
    * Distinguishes the kind of cluster. Read-only.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   @visibility(Lifecycle.Read)
   kind?: Kind;
 
   /**
    * The SKU to create, which affects price, performance, and features.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   sku: Sku;
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
@@ -72,8 +74,8 @@ interface Clusters {
   /**
    * Deletes a Redis Enterprise cache cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
@@ -104,6 +106,18 @@ interface Clusters {
     Cluster,
     void,
     ArmResponse<SkuDetailsList>
+  >;
+
+  /**
+   * Unlinks the migrated endpoint from an Azure Managed Redis cluster that was migrated from Azure Cache for Redis Enterprise, removing the source cache endpoint that was redirected to this cluster during migration.
+   */
+  @added(Versions.v2026_09_01)
+  @action("unlinkMigratedEndpoint")
+  unlinkMigratedEndpoint is ArmResourceActionNoResponseContentAsync<
+    Cluster,
+    void,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void>
   >;
 
   /**

@@ -3,10 +3,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Cache;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 @@Legacy.flattenProperty(ClusterUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 @@Legacy.flattenProperty(DatabaseUpdate.properties);
 
 @@clientLocation(Clusters.get, "RedisEnterprise");
@@ -19,11 +19,11 @@ using Microsoft.Cache;
 @@clientLocation(Clusters.list, "RedisEnterprise");
 @@clientLocation(Clusters.listSkusForScaling, "RedisEnterprise");
 @@clientLocation(Clusters.listByCluster, "PrivateLinkResources");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 @@Legacy.flattenProperty(Cluster.properties);
 
 @@clientName(PrivateEndpointConnections.put::parameters.resource, "properties");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientName(Databases.create::parameters.resource, "parameters");
@@ -37,7 +37,7 @@ using Microsoft.Cache;
   "parameters"
 );
 @@clientName(Databases.flush::parameters.body, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 @@Legacy.flattenProperty(Database.properties);
 
 @@clientLocation(AccessPolicyAssignments.get, "AccessPolicyAssignment");
@@ -51,7 +51,7 @@ using Microsoft.Cache;
 );
 @@clientLocation(AccessPolicyAssignments.delete, "AccessPolicyAssignment");
 @@clientLocation(AccessPolicyAssignments.list, "AccessPolicyAssignment");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 @@Legacy.flattenProperty(AccessPolicyAssignment.properties);
 
 @@clientName(Migrations.start::parameters.resource, "parameters");
