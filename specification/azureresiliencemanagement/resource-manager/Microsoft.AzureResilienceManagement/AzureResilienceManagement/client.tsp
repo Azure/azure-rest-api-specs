@@ -114,8 +114,8 @@ using Azure.ResourceManager;
 
 @@clientName(RBACState, "ResilienceManagementRbacState", "csharp");
 @@clientName(RBACSetupMode, "ResilienceManagementRbacSetupMode", "csharp");
-@@clientName(VMPresent, "VmPresent", "csharp");
-@@clientName(HAStatus, "HighAvailabilityStatus", "csharp");
+@@clientName(VMPresent, "ZonalDrillVmPresence", "csharp");
+@@clientName(HAStatus, "DrillResourceHighAvailabilityStatus", "csharp");
 @@clientName(
   ProvisioningState,
   "ResilienceManagementProvisioningState",
@@ -152,7 +152,11 @@ using Azure.ResourceManager;
   azureLocation[],
   "csharp"
 );
-@@clientName(ForceInclusionAndUpdate, "ForceInclusionState", "csharp");
+@@clientName(
+  ForceInclusionAndUpdate,
+  "DrillResourceForceInclusionState",
+  "csharp"
+);
 @@clientName(
   AssociatedIdentity,
   "ResilienceManagementAssociatedIdentity",
@@ -165,6 +169,117 @@ using Azure.ResourceManager;
 @@clientName(GoalType, "ResilienceManagementGoalType", "csharp");
 @@clientName(MembershipType, "ResilienceManagementMembershipType", "csharp");
 @@clientName(JobStatus, "ResilienceManagementJobStatus", "csharp");
+
+@@clientName(AttentionReason, "DrillAttentionReason", "csharp");
+@@clientName(AttestationState, "GoalResourceAttestationState", "csharp");
+@@clientName(AutoFailover, "DrillRunAutoFailover", "csharp");
+@@clientName(CommentType, "ResilienceManagementJobCommentType", "csharp");
+@@clientName(ConfirmationStatus, "GoalResourceConfirmationStatus", "csharp");
+@@clientName(EnrollmentProperties, "UsagePlanEnrollmentProperties", "csharp");
+@@clientName(ExclusionReason, "GoalResourceExclusionReason", "csharp");
+@@clientName(ExclusionState, "GoalResourceExclusionState", "csharp");
+@@clientName(ExecutionReadinessState, "DrillExecutionReadinessState", "csharp");
+@@clientName(ExecutionState, "DrillExecutionState", "csharp");
+@@clientName(ExtensionObjectState, "DrillExtensionObjectState", "csharp");
+@@clientName(
+  FailoverDirectionTypes,
+  "ResilienceManagementFailoverDirection",
+  "csharp"
+);
+@@clientName(
+  FailoverRequestProperties,
+  "ResilienceManagementFailoverProperties",
+  "csharp"
+);
+@@clientName(FailoverState, "RecoveryResourceFailoverState", "csharp");
+@@clientName(InitialConfig, "DrillInitialConfig", "csharp");
+@@clientName(JobErrorInfo, "ResilienceManagementJobErrorInfo", "csharp");
+@@clientName(JobExtendedInfo, "ResilienceManagementJobExtendedInfo", "csharp");
+@@clientName(JobProperties, "ResilienceManagementJobProperties", "csharp");
+@@clientName(
+  JobResourceProperties,
+  "ResilienceManagementJobResourceProperties",
+  "csharp"
+);
+@@clientName(JobRetryDetails, "ResilienceManagementJobRetryDetails", "csharp");
+@@clientName(JobTaskDetail, "ResilienceManagementJobTaskDetail", "csharp");
+@@clientName(JobTriggeredBy, "ResilienceManagementJobTriggeredBy", "csharp");
+@@clientName(JobUserComment, "ResilienceManagementJobUserComment", "csharp");
+@@clientName(LastRunProperties, "DrillLastRunProperties", "csharp");
+@@clientName(
+  OperationQualificationDetails,
+  "RecoveryOperationQualificationDetails",
+  "csharp"
+);
+@@clientName(
+  QualificationState,
+  "RecoveryResourceQualificationState",
+  "csharp"
+);
+@@clientName(
+  ReasonForRequestingConfirmation,
+  "GoalResourceConfirmationReason",
+  "csharp"
+);
+@@clientName(ReportStageStatus, "DrillReportStageStatus", "csharp");
+@@clientName(
+  ResiliencyProperties,
+  "GoalResourceResiliencyProperties",
+  "csharp"
+);
+@@clientName(ResourceTypeCategories, "DrillResourceTypeCategory", "csharp");
+@@clientName(SkuDetails, "ResourceFeasibilitySkuDetails", "csharp");
+@@clientName(SupportedVerbsForStage, "DrillRunStageSupportedVerbs", "csharp");
+@@clientName(UserConfirmationItem, "GoalResourceUserConfirmation", "csharp");
+@@clientName(UserConsent, "RecoveryActionUserConsent", "csharp");
+@@clientName(DrillRunOperationVerbs, "DrillRunOperationVerb", "csharp");
+@@clientName(DrillRunSubtasks, "DrillRunStage", "csharp");
+@@clientName(DrillRunTasks, "DrillRunTask", "csharp");
+@@clientName(RecoveryOperationNames, "RecoveryOperationName", "csharp");
+@@clientName(
+  ResourceTypeCategories.AzureSiteRecoveryVMsPresent,
+  "AzureSiteRecoveryVmsPresent",
+  "csharp"
+);
+
+@@clientName(
+  AttentionReason.monitoringSourceNotConfigured,
+  "IsMonitoringSourceNotConfigured",
+  "csharp"
+);
+@@clientName(
+  GoalAssignmentProperties.requireZonalResiliency,
+  "IsZonalResiliencyRequired",
+  "csharp"
+);
+@@clientName(
+  UnifiedResilienceItemGoalRequirement.required,
+  "IsRequired",
+  "csharp"
+);
+
+@@alternateType(
+  ResourceFeasibilityReview.resourceType,
+  armResourceType,
+  "csharp"
+);
+@@alternateType(
+  DrillResourceProperties.resourceType,
+  armResourceType,
+  "csharp"
+);
+
+// Preserve the required nested reprotect payload so callers can construct it.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Keep the required reprotect payload constructible until safe flattening initializes nested request models."
+@@clientOption(ReprotectRequest, "disable-safe-flatten", true, "csharp");
+// Keep the shared goal requirement under its zonal or regional property.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the zonal and regional context of the shared goal requirement."
+@@clientOption(
+  UnifiedResilienceItemGoalRequirement,
+  "disable-safe-flatten",
+  true,
+  "csharp"
+);
 
 // JavaScript SDK: use an update-specific model for RecoveryPlans.update.
 // RecoveryPlans.update is an ArmResourcePatch operation, but the modular JavaScript
