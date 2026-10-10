@@ -561,6 +561,60 @@ describe("contributor readiness", () => {
     expect(call.body).toContain("Author/committer account unavailable");
   });
 
+  it("groups unresolved commit author/committer identities sharing an email into one finding", async () => {
+    const f = setup();
+    const email = "contributor@example.com";
+    f.github.rest.pulls.get.mockResolvedValue({ data: { ...pr, commits: 2 } });
+    f.listCommits.mockResolvedValue({
+      data: [
+        {
+          sha: "1".repeat(40),
+          author: null,
+          committer: null,
+          commit: { author: { email }, committer: { email } },
+        },
+        {
+          sha: "2".repeat(40),
+          author: null,
+          committer: null,
+          commit: { author: { email }, committer: { email } },
+        },
+      ],
+    });
+    await f.run();
+    const [call] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+    const escapedEmail = "contributor&#64;example.com";
+    expect(call.body.match(new RegExp(escapedEmail, "g"))).toHaveLength(1);
+    expect(call.body).toContain("Affects 2 commits");
+    expect(call.body).toContain("111111111111, 222222222222");
+  });
+
+  it("keeps commits with different unresolved emails as separate findings", async () => {
+    const f = setup();
+    f.github.rest.pulls.get.mockResolvedValue({ data: { ...pr, commits: 2 } });
+    f.listCommits.mockResolvedValue({
+      data: [
+        {
+          sha: "1".repeat(40),
+          author: null,
+          committer: null,
+          commit: { author: { email: "one@example.com" }, committer: { email: "one@example.com" } },
+        },
+        {
+          sha: "2".repeat(40),
+          author: null,
+          committer: null,
+          commit: { author: { email: "two@example.com" }, committer: { email: "two@example.com" } },
+        },
+      ],
+    });
+    await f.run();
+    const [call] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+    expect(call.body).toContain("one&#64;example.com");
+    expect(call.body).toContain("two&#64;example.com");
+    expect(call.body).toContain("Affects 1 commit:");
+  });
+
   it.each([null, {}])(
     "reports an unavailable approving reviewer as incomplete: %j",
     async (user) => {

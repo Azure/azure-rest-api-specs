@@ -75,6 +75,12 @@ your PR, including any deletions or renames. If a tooling change is needed, open
 issue for the repository maintainers instead of requesting approval to include it
 in your specification PR.
 
+This is a contribution-scope check, not an author-permission check. Maintenance-only
+PRs that do not change `specification/` pass it, but their normal CODEOWNERS review
+and other merge requirements still apply. Mixed specification/protected-file PRs
+fail regardless of ownership, approvals, labels, or who reruns the check. Deletions
+and both sides of renames count when determining specification scope.
+
 Files under `eng/common/` and `.github/skills/azsdk-common-*` are synchronized from
 [Azure/azure-sdk-tools](https://github.com/Azure/azure-sdk-tools). Make changes in
 that repository rather than editing the synchronized copies here.

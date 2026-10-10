@@ -3,7 +3,7 @@ import {
   generateTypeSpecMetadata,
   type TypeSpecMetadata,
 } from "@azure-tools/specs-shared/typespec-metadata";
-import { join } from "node:path";
+import { join } from "pathe";
 import { failure, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import {
