@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2026-08-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "upgradeInsightName": "controlPlane-1.33.5"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/upgradeInsights/controlPlane-1.33.5",
+        "name": "controlPlane-1.33.5",
+        "type": "Microsoft.ContainerService/managedClusters/upgradeInsights",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "upgradeType": "ControlPlane",
+          "lastEvaluatedAt": "2026-07-07T10:00:00Z",
+          "expiresAt": "2026-07-21T10:00:00Z",
+          "targetKubernetesVersion": "1.33.5",
+          "currentKubernetesVersion": "1.32.7",
+          "kubernetesVersionSupportStatus": "InSupport",
+          "kubernetesVersionEndOfSupportDate": "2026-11-30",
+          "context": {
+            "currentUpgradeStrategy": "Manual"
+          },
+          "evaluation": {
+            "status": "Passed",
+            "evaluatedAt": "2026-07-07T10:00:00Z",
+            "detectedIssues": []
+          }
+        }
+      }
+    }
+  },
+  "operationId": "UpgradeInsights_Get",
+  "title": "Get a stored upgrade insight"
+}
