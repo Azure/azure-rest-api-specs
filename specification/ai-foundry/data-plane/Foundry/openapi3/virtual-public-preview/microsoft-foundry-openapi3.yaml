@@ -91473,8 +91473,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VoiceAgentHandoffNode'
-          maxItems: 31
-          description: The additional specialist behaviors. `$entrypoint` is implicit and must not be included.
+          maxItems: 32
+          description: The graph behaviors. At most 31 may be additional nodes; an optional explicit `$entrypoint` must be first, allowing at most 32 authored nodes total.
         edges:
           type: array
           items:
@@ -91483,8 +91483,9 @@ components:
           maxItems: 128
           description: The allowed directed transitions. At least one edge must originate from `$entrypoint`.
       description: |-
-        A directed graph of additional voice-agent behaviors. The top-level voice-agent definition is the implicit
-        `$entrypoint` and is not repeated in `nodes`.
+        A directed graph of voice-agent behaviors. The top-level definition is the implicit `$entrypoint` when omitted
+        from `nodes`. To layer entrypoint-only behavior over shared top-level instructions, declare `$entrypoint` once as
+        the first node.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -91515,8 +91516,8 @@ components:
         - config
       properties:
         id:
-          $ref: '#/components/schemas/VoiceAgentHandoffId'
-          description: The node identifier. `$entrypoint` is reserved and cannot be declared in `nodes`.
+          $ref: '#/components/schemas/VoiceAgentHandoffNodeReference'
+          description: The node identifier. `$entrypoint` may appear once as the first node; other values use the normal handoff ID grammar.
         description:
           type: string
           minLength: 1
@@ -91524,7 +91525,7 @@ components:
         config:
           $ref: '#/components/schemas/VoiceAgentHandoffNodeConfig'
           description: The behavior activated when this node becomes active.
-      description: One explicitly configured specialist behavior in a voice-agent handoff graph.
+      description: One explicitly configured behavior in a voice-agent handoff graph.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

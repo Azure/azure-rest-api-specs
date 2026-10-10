@@ -104,11 +104,11 @@ model VoiceAgentHandoffNodeConfig {
   parallel_tool_calls?: boolean = false;
 }
 
-@doc("One explicitly configured specialist behavior in a voice-agent handoff graph.")
+@doc("One explicitly configured behavior in a voice-agent handoff graph.")
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
 model VoiceAgentHandoffNode {
-  @doc("The node identifier. `$entrypoint` is reserved and cannot be declared in `nodes`.")
-  id: VoiceAgentHandoffId;
+  @doc("The node identifier. `$entrypoint` may appear once as the first node; other values use the normal handoff ID grammar.")
+  id: VoiceAgentHandoffNodeReference;
 
   @doc("A display-only description of the specialist behavior. This value is not provided to the model.")
   @encodedName("application/json", "description")
@@ -156,8 +156,9 @@ model VoiceAgentHandoffEdge {
 }
 
 @doc("""
-  A directed graph of additional voice-agent behaviors. The top-level voice-agent definition is the implicit
-  `$entrypoint` and is not repeated in `nodes`.
+  A directed graph of voice-agent behaviors. The top-level definition is the implicit `$entrypoint` when omitted
+  from `nodes`. To layer entrypoint-only behavior over shared top-level instructions, declare `$entrypoint` once as
+  the first node.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentHandoffRequiredPreview)
 model VoiceAgentHandoffGraph {
@@ -171,8 +172,8 @@ model VoiceAgentHandoffGraph {
   @maxValue(100)
   max_attempts?: int32;
 
-  @doc("The additional specialist behaviors. `$entrypoint` is implicit and must not be included.")
-  @maxItems(31)
+  @doc("The graph behaviors. At most 31 may be additional nodes; an optional explicit `$entrypoint` must be first, allowing at most 32 authored nodes total.")
+  @maxItems(32)
   nodes: VoiceAgentHandoffNode[];
 
   @doc("The allowed directed transitions. At least one edge must originate from `$entrypoint`.")
@@ -373,7 +374,7 @@ model VoiceAgentHandoffState {
   @doc("The generated handoff function visible to the active model, or null when no route is available.")
   transfer_tool: VoiceAgentFunctionTool | null;
 
-  @doc("The compiled handoff nodes, including the implicit `$entrypoint`.")
+  @doc("The compiled handoff nodes, including the implicit or explicit `$entrypoint`.")
   nodes: VoiceAgentHandoffNodeState[];
 
   @doc("The compiled handoff edges.")
