@@ -18,7 +18,10 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
       - unlabeled
   workflow_run:
     # Re-evaluate as each mandatory status producer completes.
-    workflows: ["Swagger Avocado - Set Status", "Swagger LintDiff - Set Status"]
+    workflows:
+      - "ARM API Review: Automated Workflow"
+      - "Swagger Avocado - Set Status"
+      - "Swagger LintDiff - Set Status"
     types: [completed]
 
 permissions:
@@ -91,10 +94,16 @@ jobs:
           name: "ARMAutoSignedOff-Test"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Test'] == 'add' }}"
 
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMManualSignoffRequired'] == 'add'
+        name: Upload artifact for ARMManualSignoffRequired label
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "ARMManualSignoffRequired"
+          value: "true"
+
       # The label updater uses these trusted artifacts to associate this workflow run with its PR.
       - if: |
           always() &&
-          github.event_name == 'workflow_run' &&
           fromJson(steps.get-label-action.outputs.result).headSha
         name: Upload artifact with head SHA
         uses: ./.github/actions/add-empty-artifact
@@ -104,7 +113,6 @@ jobs:
 
       - if: |
           always() &&
-          github.event_name == 'workflow_run' &&
           fromJson(steps.get-label-action.outputs.result).issueNumber > 0
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
