@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Private Traffic Manager Service",
-    "version": "2026-02-09-preview",
+    "version": "2026-10-01-preview",
     "description": "Microsoft.Network Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -335,6 +335,9 @@
         "x-ms-examples": {
           "Profiles_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/Profiles_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Profiles_CreateOrUpdate_VNetAffinity": {
+            "$ref": "./examples/Profiles_CreateOrUpdate_VNetAffinity.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2222,6 +2225,13 @@
           "$ref": "#/definitions/HealthPolicyId",
           "description": "The health policy associated with this endpoint."
         },
+        "virtualNetworkIds": {
+          "type": "array",
+          "description": "The virtual network ARM resource IDs assigned to this endpoint when using the 'VNet' traffic routing method. A virtual network must not be assigned to more than one endpoint in the profile. A profile can have at most one fallback endpoint; an endpoint with no virtual networks is that fallback.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkId"
+          }
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
@@ -2279,6 +2289,13 @@
         "healthPolicyId": {
           "$ref": "#/definitions/HealthPolicyId",
           "description": "The health policy associated with this endpoint."
+        },
+        "virtualNetworkIds": {
+          "type": "array",
+          "description": "The virtual network ARM resource IDs assigned to this endpoint when using the 'VNet' traffic routing method. A virtual network must not be assigned to more than one endpoint in the profile. A profile can have at most one fallback endpoint; an endpoint with no virtual networks is that fallback.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkId"
+          }
         }
       }
     },
@@ -2623,6 +2640,13 @@
         "healthPolicyId": {
           "$ref": "#/definitions/HealthPolicyId",
           "description": "The health policy associated with this endpoint."
+        },
+        "virtualNetworkIds": {
+          "type": "array",
+          "description": "The virtual network ARM resource IDs assigned to this endpoint when using the 'VNet' traffic routing method. A virtual network must not be assigned to more than one endpoint in the profile. A profile can have at most one fallback endpoint; an endpoint with no virtual networks is that fallback.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkId"
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3102,7 +3126,8 @@
       "description": "The traffic routing method of the Traffic Manager profile.",
       "enum": [
         "Priority",
-        "Weighted"
+        "Weighted",
+        "VNet"
       ],
       "x-ms-enum": {
         "name": "TrafficRoutingMethod",
@@ -3117,6 +3142,11 @@
             "name": "Weighted",
             "value": "Weighted",
             "description": "Distributes traffic across endpoints based on assigned weight values."
+          },
+          {
+            "name": "VNet",
+            "value": "VNet",
+            "description": "Routes traffic to an endpoint by matching the virtual network of the DNS query to the endpoint's configured virtual networks."
           }
         ]
       }
