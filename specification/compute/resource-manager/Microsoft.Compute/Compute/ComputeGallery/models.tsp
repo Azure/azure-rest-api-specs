@@ -540,13 +540,13 @@ model SoftDeletePolicy {
   isSoftDeleteEnabled?: boolean;
 
   /**
-   * The retention period in days for a soft-deleted resource. After this period elapses, the soft-deleted gallery image version transitions to a simulated hard-deleted state.
+   * The number of days a soft-deleted resource is retained. The retention period can be configured for up to 365 days. During the retention period, the image can be recovered and remains available for creating new VMs and supporting VMSS scale-out operations.
    */
   @added(Versions.v2026_03_03)
   retentionPeriodInDays?: int32;
 
   /**
-   * The grace period in days for a simulated hard-deleted resource. During this period the gallery image version is unusable but can still be recovered if required. After this period elapses, the gallery image version is permanently (hard) deleted.
+   * Specifies the grace period, in days, for an image after the soft-delete retention period expires. The grace period can be configured for up to 90 days. During this period, the image can be recovered; however, it cannot be used to create new VMs or perform VMSS scale-out operations. After the grace period expires, the image is permanently deleted and cannot be recovered.
    */
   @added(Versions.v2026_03_03)
   gracePeriodInDays?: int32;
