@@ -3824,8 +3824,3 @@ op protectionPolicyOperationStatusesGet(
 
 @@clientName(DiskInfo.lun, "LUN", "go");
 @@clientName(DiskInformation.diskSizeInGb, "DiskSizeInGB", "go");
-@@clientName(
-  AzureVmWorkloadProtectedItemProperties.kpisHealths,
-  "KPIsHealths",
-  "go"
-);
