@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "createServiceGroupRequest": {
+      "kind": "StorageGroup",
+      "properties": {
+        "displayName": "StorageGroup 1 Name",
+        "attributes": {
+          "memberLocationConstraint": "eastus2"
+        },
+        "parent": {
+          "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+        }
+      }
+    },
+    "serviceGroupName": "StorageGroup1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "StorageGroup1",
+        "type": "Microsoft.Management/serviceGroups",
+        "id": "/providers/Microsoft.Management/serviceGroups/StorageGroup1",
+        "kind": "StorageGroup",
+        "properties": {
+          "displayName": "StorageGroup 1 Name",
+          "attributes": {
+            "memberLocationConstraint": "eastus2"
+          },
+          "parent": {
+            "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "StorageGroup1",
+        "type": "Microsoft.Management/serviceGroups",
+        "id": "/providers/Microsoft.Management/serviceGroups/StorageGroup1",
+        "kind": "StorageGroup",
+        "properties": {
+          "displayName": "StorageGroup 1 Name",
+          "attributes": {
+            "memberLocationConstraint": "eastus2"
+          },
+          "parent": {
+            "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "CreateOrUpdateServiceGroup",
+  "title": "PutStorageGroup"
+}
