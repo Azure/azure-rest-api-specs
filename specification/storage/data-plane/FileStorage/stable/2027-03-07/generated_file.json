@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure File Storage",
-    "version": "2026-10-06",
+    "version": "2027-03-07",
     "description": "Azure File Storage provides scalable file shares in the cloud using SMB and NFS protocols.",
     "x-typespec-generated": [
       {
@@ -1457,6 +1457,10 @@
                 "format": "date-time",
                 "description": "Last write time for the file/directory."
               },
+              "x-ms-file-name": {
+                "type": "string",
+                "description": "The name of the file or directory."
+              },
               "x-ms-file-parent-id": {
                 "type": "string",
                 "description": "The parent fileId of the directory/file."
@@ -1955,6 +1959,343 @@
               "x-ms-request-id": {
                 "type": "string",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
+    "?comp=hardlinks": {
+      "get": {
+        "operationId": "File_GetHardLinks",
+        "description": "Returns the hard links of a file, along with all user-defined metadata, content properties, and system properties for the file. NFS only.",
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "sharesnapshot",
+            "in": "query",
+            "description": "The snapshot parameter is an opaque DateTime value that specifies a share snapshot.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "x-ms-lease-id",
+            "in": "header",
+            "description": "If specified, the lease ID must match the lease ID of the file.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "leaseId"
+          },
+          {
+            "name": "x-ms-allow-trailing-dot",
+            "in": "header",
+            "description": "If true, the trailing dot will not be trimmed from the target file/directory path.",
+            "required": false,
+            "type": "boolean",
+            "x-ms-client-name": "allowTrailingDot"
+          },
+          {
+            "name": "x-ms-file-request-intent",
+            "in": "header",
+            "description": "Valid values are 'backup'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "backup"
+            ],
+            "x-ms-enum": {
+              "name": "ShareTokenIntent",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "backup",
+                  "value": "backup",
+                  "description": "backup"
+                }
+              ]
+            },
+            "x-ms-client-name": "fileRequestIntent"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/HardLinkList"
+            },
+            "headers": {
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "A GMT date/time value generated by the service that indicates the time the response was initiated."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that represents the version of the resource."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "Returns the date and time the resource was last modified."
+              },
+              "x-ms-cache-control": {
+                "type": "string",
+                "description": "The cache control of the file."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-content-disposition": {
+                "type": "string",
+                "description": "The Content-Disposition of the file."
+              },
+              "x-ms-content-encoding": {
+                "type": "string",
+                "description": "The content encodings that have been applied to the file."
+              },
+              "x-ms-content-language": {
+                "type": "string",
+                "description": "The natural languages used by the file."
+              },
+              "x-ms-content-length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the file."
+              },
+              "x-ms-content-md5": {
+                "type": "string",
+                "format": "byte",
+                "description": "The MD5 hash of the full file content."
+              },
+              "x-ms-content-type": {
+                "type": "string",
+                "description": "The MIME content type of the file."
+              },
+              "x-ms-copy-completion-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "Conclusion time of the last attempted Copy File operation."
+              },
+              "x-ms-copy-id": {
+                "type": "string",
+                "description": "String identifier for the last attempted Copy File operation."
+              },
+              "x-ms-copy-progress": {
+                "type": "string",
+                "description": "Contains the number of bytes copied and the total bytes in the source."
+              },
+              "x-ms-copy-source": {
+                "type": "string",
+                "description": "URL up to 2 KB in length that specifies the source blob or file."
+              },
+              "x-ms-copy-status": {
+                "type": "string",
+                "description": "State of the copy operation identified by x-ms-copy-id.",
+                "enum": [
+                  "pending",
+                  "success",
+                  "aborted",
+                  "failed"
+                ],
+                "x-ms-enum": {
+                  "name": "CopyStatus",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "Pending",
+                      "value": "pending",
+                      "description": "The copy operation is pending."
+                    },
+                    {
+                      "name": "Success",
+                      "value": "success",
+                      "description": "The copy operation succeeded."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
+                    },
+                    {
+                      "name": "Failed",
+                      "value": "failed",
+                      "description": "The copy operation failed."
+                    }
+                  ]
+                }
+              },
+              "x-ms-copy-status-description": {
+                "type": "string",
+                "description": "Only appears when x-ms-copy-status is failed or pending."
+              },
+              "x-ms-file-attributes": {
+                "type": "string",
+                "description": "Attributes set for the file/directory."
+              },
+              "x-ms-file-change-time": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Change time for the file/directory."
+              },
+              "x-ms-file-creation-time": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Creation time for the file/directory."
+              },
+              "x-ms-file-file-type": {
+                "type": "string",
+                "description": "NFS only. The file type.",
+                "enum": [
+                  "Regular",
+                  "Directory",
+                  "SymLink"
+                ],
+                "x-ms-enum": {
+                  "name": "NfsFileType",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "Regular",
+                      "value": "Regular",
+                      "description": "Regular"
+                    },
+                    {
+                      "name": "Directory",
+                      "value": "Directory",
+                      "description": "Directory"
+                    },
+                    {
+                      "name": "SymLink",
+                      "value": "SymLink",
+                      "description": "SymLink"
+                    }
+                  ]
+                }
+              },
+              "x-ms-file-id": {
+                "type": "string",
+                "description": "The fileId of the directory/file."
+              },
+              "x-ms-file-last-write-time": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Last write time for the file/directory."
+              },
+              "x-ms-file-name": {
+                "type": "string",
+                "description": "The name of the file or directory."
+              },
+              "x-ms-file-parent-id": {
+                "type": "string",
+                "description": "The parent fileId of the directory/file."
+              },
+              "x-ms-file-permission-key": {
+                "type": "string",
+                "description": "Key of the permission set for the directory/file."
+              },
+              "x-ms-group": {
+                "type": "string",
+                "description": "NFS only. The owning group."
+              },
+              "x-ms-lease-duration": {
+                "type": "string",
+                "description": "The lease duration."
+              },
+              "x-ms-lease-state": {
+                "type": "string",
+                "description": "The lease state."
+              },
+              "x-ms-lease-status": {
+                "type": "string",
+                "description": "The lease status."
+              },
+              "x-ms-link-count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "NFS only. The link count."
+              },
+              "x-ms-meta": {
+                "type": "string",
+                "description": "Optional. User-defined metadata for the resource."
+              },
+              "x-ms-mode": {
+                "type": "string",
+                "description": "NFS only. The file mode."
+              },
+              "x-ms-owner": {
+                "type": "string",
+                "description": "NFS only. The owner."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-server-encrypted": {
+                "type": "boolean",
+                "description": "The value of this header indicates whether the file data and application metadata are completely encrypted."
+              },
+              "x-ms-type": {
+                "type": "string",
+                "description": "Dummy type header, must be \"file\".",
+                "enum": [
+                  "File"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
               },
               "x-ms-version": {
                 "type": "string",
@@ -5123,6 +5464,10 @@
                 "format": "date-time",
                 "description": "Last write time for the file/directory."
               },
+              "x-ms-file-name": {
+                "type": "string",
+                "description": "The name of the file or directory."
+              },
               "x-ms-file-parent-id": {
                 "type": "string",
                 "description": "The parent fileId of the directory/file."
@@ -5251,7 +5596,11 @@
                 "Timestamps",
                 "Etag",
                 "Attributes",
-                "PermissionKey"
+                "PermissionKey",
+                "Permissions",
+                "LinkCount",
+                "NfsAttributes",
+                "All"
               ],
               "x-ms-enum": {
                 "name": "ListFilesIncludeType",
@@ -5276,6 +5625,26 @@
                     "name": "PermissionKey",
                     "value": "PermissionKey",
                     "description": "PermissionKey"
+                  },
+                  {
+                    "name": "Permissions",
+                    "value": "Permissions",
+                    "description": "Permissions"
+                  },
+                  {
+                    "name": "LinkCount",
+                    "value": "LinkCount",
+                    "description": "LinkCount"
+                  },
+                  {
+                    "name": "NfsAttributes",
+                    "value": "NfsAttributes",
+                    "description": "NfsAttributes"
+                  },
+                  {
+                    "name": "All",
+                    "value": "All",
+                    "description": "All"
                   }
                 ]
               }
@@ -6911,6 +7280,11 @@
               "x-ms-root-squash": {
                 "type": "string",
                 "description": "The root squash mode for the share."
+              },
+              "x-ms-share-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The creation time."
               },
               "x-ms-share-included-burst-iops": {
                 "type": "integer",
@@ -10425,6 +10799,122 @@
         "name": "eTag"
       }
     },
+    "BlockDeviceItem": {
+      "type": "object",
+      "description": "A listed block device item.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/StringEncoded",
+          "description": "The block device name.",
+          "xml": {
+            "name": "Name"
+          }
+        },
+        "fileId": {
+          "type": "string",
+          "description": "The file ID.",
+          "xml": {
+            "name": "FileId"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FileProperty",
+          "description": "File properties.",
+          "xml": {
+            "name": "Properties"
+          }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the block device.",
+          "xml": {
+            "name": "LinkCount"
+          }
+        },
+        "deviceMajor": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The major device number of the block device.",
+          "xml": {
+            "name": "DeviceMajor"
+          }
+        },
+        "deviceMinor": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The minor device number of the block device.",
+          "xml": {
+            "name": "DeviceMinor"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "xml": {
+        "name": "BlockDevice"
+      }
+    },
+    "CharDeviceItem": {
+      "type": "object",
+      "description": "A listed character device item.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/StringEncoded",
+          "description": "The character device name.",
+          "xml": {
+            "name": "Name"
+          }
+        },
+        "fileId": {
+          "type": "string",
+          "description": "The file ID.",
+          "xml": {
+            "name": "FileId"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FileProperty",
+          "description": "File properties.",
+          "xml": {
+            "name": "Properties"
+          }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the character device.",
+          "xml": {
+            "name": "LinkCount"
+          }
+        },
+        "deviceMajor": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The major device number of the character device.",
+          "xml": {
+            "name": "DeviceMajor"
+          }
+        },
+        "deviceMinor": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The minor device number of the character device.",
+          "xml": {
+            "name": "DeviceMinor"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "xml": {
+        "name": "CharDevice"
+      }
+    },
     "ClearRange": {
       "type": "object",
       "description": "A clear range.",
@@ -10598,6 +11088,14 @@
           "xml": {
             "name": "PermissionKey"
           }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the directory.",
+          "xml": {
+            "name": "LinkCount"
+          }
         }
       },
       "required": [
@@ -10649,6 +11147,48 @@
         }
       }
     },
+    "FifoItem": {
+      "type": "object",
+      "description": "A listed FIFO item.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/StringEncoded",
+          "description": "The FIFO name.",
+          "xml": {
+            "name": "Name"
+          }
+        },
+        "fileId": {
+          "type": "string",
+          "description": "The file ID.",
+          "xml": {
+            "name": "FileId"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FileProperty",
+          "description": "File properties.",
+          "xml": {
+            "name": "Properties"
+          }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the FIFO.",
+          "xml": {
+            "name": "LinkCount"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "xml": {
+        "name": "Fifo"
+      }
+    },
     "FileItem": {
       "type": "object",
       "description": "A listed file item.",
@@ -10686,6 +11226,14 @@
           "description": "The permission key.",
           "xml": {
             "name": "PermissionKey"
+          }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the file.",
+          "xml": {
+            "name": "LinkCount"
           }
         }
       },
@@ -10802,6 +11350,27 @@
           "description": "The ETag of the file.",
           "xml": {
             "name": "Etag"
+          }
+        },
+        "owner": {
+          "type": "string",
+          "description": "NFS only. The owner user identifier (UID) of the file.",
+          "xml": {
+            "name": "Uid"
+          }
+        },
+        "group": {
+          "type": "string",
+          "description": "NFS only. The owner group identifier (GID) of the file.",
+          "xml": {
+            "name": "Gid"
+          }
+        },
+        "fileMode": {
+          "type": "string",
+          "description": "NFS only. The mode of the file.",
+          "xml": {
+            "name": "Mode"
           }
         }
       },
@@ -10929,6 +11498,61 @@
             "name": "File",
             "wrapped": false
           }
+        },
+        "symLinkItems": {
+          "type": "array",
+          "description": "The symbolic link items.",
+          "items": {
+            "$ref": "#/definitions/SymLinkItem"
+          },
+          "xml": {
+            "name": "SymLink",
+            "wrapped": false
+          }
+        },
+        "blockDeviceItems": {
+          "type": "array",
+          "description": "The block device items.",
+          "items": {
+            "$ref": "#/definitions/BlockDeviceItem"
+          },
+          "xml": {
+            "name": "BlockDevice",
+            "wrapped": false
+          }
+        },
+        "charDeviceItems": {
+          "type": "array",
+          "description": "The character device items.",
+          "items": {
+            "$ref": "#/definitions/CharDeviceItem"
+          },
+          "xml": {
+            "name": "CharDevice",
+            "wrapped": false
+          }
+        },
+        "fifoItems": {
+          "type": "array",
+          "description": "The FIFO items.",
+          "items": {
+            "$ref": "#/definitions/FifoItem"
+          },
+          "xml": {
+            "name": "Fifo",
+            "wrapped": false
+          }
+        },
+        "socketItems": {
+          "type": "array",
+          "description": "The socket items.",
+          "items": {
+            "$ref": "#/definitions/SocketItem"
+          },
+          "xml": {
+            "name": "Socket",
+            "wrapped": false
+          }
         }
       },
       "required": [
@@ -11028,6 +11652,53 @@
       ],
       "xml": {
         "name": "Handle"
+      }
+    },
+    "HardLink": {
+      "type": "object",
+      "description": "A hard link to a file.",
+      "properties": {
+        "fileName": {
+          "$ref": "#/definitions/StringEncoded",
+          "description": "The name of the hard link.",
+          "xml": {
+            "name": "FileName"
+          }
+        },
+        "parentId": {
+          "type": "string",
+          "description": "The fileId of the parent directory of the hard link.",
+          "xml": {
+            "name": "ParentId"
+          }
+        }
+      },
+      "required": [
+        "fileName",
+        "parentId"
+      ]
+    },
+    "HardLinkList": {
+      "type": "object",
+      "description": "The list of hard links for a file.",
+      "properties": {
+        "hardLinks": {
+          "type": "array",
+          "description": "The hard links.",
+          "items": {
+            "$ref": "#/definitions/HardLink"
+          },
+          "xml": {
+            "name": "HardLink",
+            "wrapped": false
+          }
+        }
+      },
+      "required": [
+        "hardLinks"
+      ],
+      "xml": {
+        "name": "HardLinks"
       }
     },
     "KeyInfo": {
@@ -11259,7 +11930,11 @@
         "Timestamps",
         "Etag",
         "Attributes",
-        "PermissionKey"
+        "PermissionKey",
+        "Permissions",
+        "LinkCount",
+        "NfsAttributes",
+        "All"
       ],
       "x-ms-enum": {
         "name": "ListFilesIncludeType",
@@ -11284,6 +11959,26 @@
             "name": "PermissionKey",
             "value": "PermissionKey",
             "description": "PermissionKey"
+          },
+          {
+            "name": "Permissions",
+            "value": "Permissions",
+            "description": "Permissions"
+          },
+          {
+            "name": "LinkCount",
+            "value": "LinkCount",
+            "description": "LinkCount"
+          },
+          {
+            "name": "NfsAttributes",
+            "value": "NfsAttributes",
+            "description": "NfsAttributes"
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All"
           }
         ]
       }
@@ -11992,6 +12687,14 @@
           "xml": {
             "name": "EnableSmbDirectoryLease"
           }
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "The creation time.",
+          "xml": {
+            "name": "Creation-Time"
+          }
         }
       },
       "required": [
@@ -12181,6 +12884,48 @@
       },
       "xml": {
         "name": "Multichannel"
+      }
+    },
+    "SocketItem": {
+      "type": "object",
+      "description": "A listed socket item.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/StringEncoded",
+          "description": "The socket name.",
+          "xml": {
+            "name": "Name"
+          }
+        },
+        "fileId": {
+          "type": "string",
+          "description": "The file ID.",
+          "xml": {
+            "name": "FileId"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FileProperty",
+          "description": "File properties.",
+          "xml": {
+            "name": "Properties"
+          }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the socket.",
+          "xml": {
+            "name": "LinkCount"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "xml": {
+        "name": "Socket"
       }
     },
     "StorageErrorCode": {
@@ -12714,6 +13459,55 @@
             "x-ms-text": true
           }
         }
+      }
+    },
+    "SymLinkItem": {
+      "type": "object",
+      "description": "A listed symbolic link item.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/StringEncoded",
+          "description": "The symbolic link name.",
+          "xml": {
+            "name": "Name"
+          }
+        },
+        "fileId": {
+          "type": "string",
+          "description": "The file ID.",
+          "xml": {
+            "name": "FileId"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FileProperty",
+          "description": "File properties.",
+          "xml": {
+            "name": "Properties"
+          }
+        },
+        "linkCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The link count of the symbolic link.",
+          "xml": {
+            "name": "LinkCount"
+          }
+        },
+        "linkText": {
+          "type": "string",
+          "description": "The path to the original file, the symbolic link is pointing to.",
+          "xml": {
+            "name": "LinkText"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "xml": {
+        "name": "SymLink"
       }
     },
     "UserDelegationKey": {
