@@ -6,6 +6,23 @@ using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
+/** Reference to a Foundry Dataset in the current project. Consuming operations define supported Dataset kinds and resolution behavior. */
+model DatasetReference {
+  /** Dataset name. */
+  name: string;
+
+  /** Optional Dataset version. Omit to select latest when the consuming operation resolves the reference. */
+  version?: string;
+}
+
+/** Reference to a Dataset whose concrete version has already been resolved. */
+model VersionedDatasetReference {
+  ...OmitProperties<DatasetReference, "version">;
+
+  /** Concrete Dataset version. */
+  version: string;
+}
+
 /** Error response for API failures. */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error

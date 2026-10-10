@@ -1357,26 +1357,6 @@ alias TelephonyTransferTargetsResponse = TelephonyTransferTargets & {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyCallJobId extends string;
 
-@doc("The type of destination for an outbound call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyOutboundDestinationType {
-  string,
-
-  @doc("An E.164 phone number.")
-  phone_number: "phone_number",
-}
-
-@doc("The destination of an outbound call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyOutboundDestination {
-  @doc("The destination type. Only E.164 phone numbers are currently supported.")
-  type: TelephonyOutboundDestinationType;
-
-  @doc("The destination E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{1,14}$")
-  value: string;
-}
-
 @doc("The retry strategy for an outbound call.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyOutboundRetryPolicyType {
@@ -1421,27 +1401,63 @@ model TelephonyCallJobSchedule {
   expires_at?: FoundryTimestamp;
 }
 
-@doc("An outbound caller identity: an E.164 phone number or a non-empty Teams Resource Account UUID. The connection category determines which form is accepted.")
+/** Extensible endpoint address kinds. Address type describes the endpoint independently of the provider. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@minLength(1)
-@maxLength(36)
-@pattern("^(?:\\+[1-9][0-9]{1,14}|(?!00000000-0000-0000-0000-000000000000$)[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$")
-scalar TelephonyOutboundSource extends string;
+union TelephonyAddressType {
+  string,
+
+  /** An E.164 phone number. */
+  phone_number: "phone_number",
+
+  /** A Teams resource account identified by its Entra object ID. */
+  teams_resource_account: "teams_resource_account",
+}
+
+/** Shared typed address for an outbound source or recipient destination. Connections validate supported variants separately for each role. Unknown or unsupported variants are rejected before dialing. Additional non-phone variants may be introduced as provider support becomes available. */
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyAddress {
+  /** Endpoint address type. */
+  type: TelephonyAddressType;
+
+  /** Concrete address value. Known variants apply their format constraints; unknown variants are rejected before dialing. */
+  @minLength(1)
+  value: string;
+}
+
+/** Phone-number address used by supported source and destination roles. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model PhoneNumberTelephonyAddress extends TelephonyAddress {
+  type: TelephonyAddressType.phone_number;
+
+  /** E.164 phone number. */
+  @pattern("^\\+[1-9]\\d{1,14}$")
+  value: string;
+}
+
+/** Teams resource-account address supported as a source through an ACS / Teams Phone Extension connection. Destination support is validated independently and is not implied by this address variant. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TeamsResourceAccountTelephonyAddress extends TelephonyAddress {
+  type: TelephonyAddressType.teams_resource_account;
+
+  /** Non-empty Teams resource-account Entra object ID. */
+  @pattern("^(?!00000000-0000-0000-0000-000000000000$)[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  value: Azure.Core.uuid;
+}
 
 @doc("Customer-controlled configuration shared by direct and campaign-created call jobs.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
-  destination: TelephonyOutboundDestination;
+  destination: TelephonyAddress;
 
   @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required.")
   @minLength(1)
   @maxLength(256)
   connection_name: string;
 
-  @doc("The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.")
-  @minLength(1)
-  source: TelephonyOutboundSource;
+  @doc("The typed caller address. Use phone_number for Twilio or teams_resource_account for ACS/Teams Phone extensibility. The connection validates the supported source role; outbound origination is independent of inbound bindings.")
+  source: TelephonyAddress;
 
   @doc("An optional customer-declared purpose for placing the call.")
   @minLength(1)
@@ -1459,18 +1475,21 @@ model TelephonyCallJobConfiguration {
 @clientName("CreateTelephonyCallJobContent", "csharp")
 @example(#{
   connection_name: "telephony-twilio",
-  source: "+14255550100",
+  source: #{ type: "phone_number", value: "+14255550100" },
   destination: #{ type: "phone_number", value: "+14255550123" },
 })
 @example(#{
   connection_name: "telephony-acs",
-  source: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  source: #{
+    type: "teams_resource_account",
+    value: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  },
   destination: #{ type: "phone_number", value: "+14255550123" },
 })
 model CreateTelephonyCallJobRequest {
   ...TelephonyCallJobConfiguration;
 
-  @doc("The provider-attempt retry policy. Omit it for one attempt with no retry delay.")
+  @doc("The provider-attempt retry policy. Omit it for one initial attempt with no retry. Returned CallJobs normalize an omitted policy to fixed_interval with max_attempts=1 and interval=0 seconds.")
   retry_policy?: TelephonyOutboundRetryPolicy;
 }
 
@@ -1578,10 +1597,17 @@ model TelephonyCallJobCancellation {
   revision: int64;
 }
 
+/** Immutable customer-chosen Campaign name within a project and Agent. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@minLength(1)
+@maxLength(64)
+@pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$")
+scalar TelephonyCampaignName extends string;
+
 @doc("A durable direct or campaign-created outbound call intent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJob {
-  ...TelephonyCallJobConfiguration;
+  ...OmitProperties<TelephonyCallJobConfiguration, "source">;
 
   @doc("The service-generated call-job identifier.")
   id: TelephonyCallJobId;
@@ -1598,7 +1624,7 @@ model TelephonyCallJob {
   @doc("The recorded cancellation request, when cancellation was requested.")
   cancellation?: TelephonyCallJobCancellation;
 
-  @doc("The frozen provider-attempt retry policy.")
+  @doc("The frozen provider-attempt retry policy. When omitted on direct CallJob or Campaign creation, this is fixed_interval with max_attempts=1 and interval=0 seconds: only the initial attempt is made, with no retry.")
   retry_policy: TelephonyOutboundRetryPolicy;
 
   @doc("The number of provider attempts created so far.")
@@ -1620,6 +1646,13 @@ model TelephonyCallJob {
 
   @doc("The Unix timestamp in seconds when the call job was last updated.")
   updated_at: FoundryTimestamp;
+
+  // Preserve the existing SDK response order when appending Campaign fields.
+  ...PickProperties<TelephonyCallJobConfiguration, "source">;
+
+  @doc("The owning Campaign name under this Agent. Absent for direct calls. Campaign deletion also deletes its CallJobs; owned jobs are hidden once cascade deletion is accepted. Association and cleanup use the immutable internal Campaign instance, so name reuse cannot associate old work with a replacement.")
+  @visibility(Lifecycle.Read)
+  campaign_name?: TelephonyCampaignName;
 }
 
 alias TelephonyCallJobResponse = {
