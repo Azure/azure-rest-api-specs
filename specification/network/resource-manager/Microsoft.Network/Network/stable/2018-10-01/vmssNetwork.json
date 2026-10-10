@@ -5672,6 +5672,11 @@
           "description": "The resource GUID property of the virtual network tap resource.",
           "readOnly": true
         },
+        "virtualNetworkTapType": {
+          "$ref": "#/definitions/VirtualNetworkTapType",
+          "description": "The type of the virtual network tap.",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the virtual network tap resource.",
@@ -5681,7 +5686,7 @@
           "$ref": "#/definitions/NetworkInterfaceIPConfiguration",
           "description": "The reference to the private IP Address of the collector nic that will receive the tap."
         },
-        "destinationLoadBalancerFrontEndIPConfiguration": {
+        "destinationLoadBalancerFrontendIPConfiguration": {
           "$ref": "#/definitions/FrontendIPConfiguration",
           "description": "The reference to the private IP address on the internal Load Balancer that will receive the tap."
         },
@@ -5690,6 +5695,30 @@
           "format": "int32",
           "description": "The VXLAN destination port that will receive the tapped traffic."
         }
+      }
+    },
+    "VirtualNetworkTapType": {
+      "type": "string",
+      "description": "The type of a virtual network tap.",
+      "enum": [
+        "Basic",
+        "ManagedVtap"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkTapType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic virtual network tap."
+          },
+          {
+            "name": "ManagedVtap",
+            "value": "ManagedVtap",
+            "description": "Managed virtual network tap."
+          }
+        ]
       }
     }
   },

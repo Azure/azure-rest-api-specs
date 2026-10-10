@@ -2810,6 +2810,13 @@ model VirtualNetworkTapPropertiesFormat {
   resourceGuid?: string;
 
   /**
+   * The type of the virtual network tap.
+   */
+  @added(Versions.v2025_09_01)
+  @visibility(Lifecycle.Read)
+  virtualNetworkTapType?: VirtualNetworkTapType;
+
+  /**
    * The provisioning state of the virtual network tap resource.
    */
   @visibility(Lifecycle.Read)
@@ -2824,13 +2831,30 @@ model VirtualNetworkTapPropertiesFormat {
   /**
    * The reference to the private IP address on the internal Load Balancer that will receive the tap.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  destinationLoadBalancerFrontEndIPConfiguration?: FrontendIPConfiguration;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve the service's existing acronym capitalization in this public property name."
+  @renamedFrom(
+    Versions.v2025_09_01,
+    "destinationLoadBalancerFrontEndIPConfiguration"
+  )
+  destinationLoadBalancerFrontendIPConfiguration?: FrontendIPConfiguration;
 
   /**
    * The VXLAN destination port that will receive the tapped traffic.
    */
   destinationPort?: int32;
+}
+
+/**
+ * The type of a virtual network tap.
+ */
+union VirtualNetworkTapType {
+  /** Basic virtual network tap. */
+  Basic: "Basic",
+
+  /** Managed virtual network tap. */
+  ManagedVtap: "ManagedVtap",
+
+  string,
 }
 
 /**
