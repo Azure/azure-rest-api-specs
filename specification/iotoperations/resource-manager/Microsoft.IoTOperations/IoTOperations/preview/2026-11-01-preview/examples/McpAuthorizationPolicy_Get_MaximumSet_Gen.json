@@ -1,0 +1,51 @@
+{
+  "title": "McpAuthorizationPolicy_Get_MaximumSet",
+  "operationId": "McpAuthorizationPolicy_Get",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-123",
+    "mcpAuthorizationPolicyName": "resource-123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "policies": [
+            {
+              "action": "ToolCall",
+              "principal": {
+                "principalType": "Identities",
+                "identities": [
+                  "admin-user",
+                  "operations-agent"
+                ]
+              },
+              "resources": [
+                "list_assets",
+                "get_asset"
+              ]
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/mcpAuthorizationPolicies/resource-name123",
+        "name": "resource-name123",
+        "type": "Microsoft.IoTOperations/mcpAuthorizationPolicies",
+        "systemData": {
+          "createdBy": "contosouser",
+          "createdByType": "User",
+          "createdAt": "2026-09-01T00:00:00Z",
+          "lastModifiedBy": "contosouser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-09-01T00:00:00Z"
+        }
+      }
+    }
+  }
+}

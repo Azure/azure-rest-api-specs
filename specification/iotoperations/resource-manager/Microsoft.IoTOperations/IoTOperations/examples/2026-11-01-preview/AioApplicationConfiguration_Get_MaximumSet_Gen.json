@@ -1,0 +1,38 @@
+{
+  "title": "AioApplicationConfiguration_Get",
+  "operationId": "AioApplicationConfiguration_Get",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "aio-instance",
+    "aioApplicationDefinitionName": "application-definition-1",
+    "aioApplicationConfigurationName": "edge-application-configuration-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/aio-instance/aioApplicationDefinitions/application-definition-1/aioApplicationConfigurations/edge-application-configuration-1",
+        "name": "edge-application-configuration-1",
+        "type": "Microsoft.IoTOperations/instances/aioApplicationDefinitions/aioApplicationConfigurations",
+        "properties": {
+          "aioIntegration": {
+            "mqttBroker": {
+              "accessMode": "NotAllowed"
+            },
+            "stateStore": {
+              "accessMode": "NotAllowed"
+            }
+          },
+          "runtimeConfiguration": {
+            "runtimeConfigurationType": "ImageConfiguration",
+            "imageConfigurationSettings": {
+              "imagePullPolicy": "IfNotPresent"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

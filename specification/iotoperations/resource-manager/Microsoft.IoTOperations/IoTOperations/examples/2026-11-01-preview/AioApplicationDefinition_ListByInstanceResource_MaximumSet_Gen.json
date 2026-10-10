@@ -1,0 +1,50 @@
+{
+  "title": "AioApplicationDefinition_ListByInstanceResource",
+  "operationId": "AioApplicationDefinition_ListByInstanceResource",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "aio-instance"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/aio-instance/aioApplicationDefinitions/application-definition-1",
+            "name": "application-definition-1",
+            "type": "Microsoft.IoTOperations/instances/aioApplicationDefinitions",
+            "properties": {
+              "aioMetadata": {
+                "aioMinVersion": "1.2.0",
+                "aioMaxVersion": "1.4.0"
+              },
+              "applicationMetadataRef": "akri-connectors/rest-metadata:0.5.0",
+              "imageDetails": {
+                "imageName": "akri-connectors/rest"
+              },
+              "resources": {
+                "requests": {
+                  "cpu": "250m",
+                  "memory": "512Mi"
+                }
+              },
+              "applicationSource": "Marketplace",
+              "applicationType": "Connector",
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2024-08-01T00:00:00.000Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-08-01T00:00:00.000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
