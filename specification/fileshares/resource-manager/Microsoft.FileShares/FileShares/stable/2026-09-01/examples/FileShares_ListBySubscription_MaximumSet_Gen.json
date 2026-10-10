@@ -1,0 +1,112 @@
+{
+  "title": "FileShares_ListBySubscription_MaximumSet",
+  "operationId": "FileShares_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-09-01",
+    "subscriptionId": "0681745E-3F9F-4966-80E6-69624A3B29F2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "mountName": "riibzjwvfjsrhqpvmxxoflcsyopvfo",
+              "hostName": "venxryqlzdhnb",
+              "mediaTier": "SSD",
+              "redundancy": "Local",
+              "protocol": "NFS",
+              "provisionedStorageGiB": 20,
+              "provisionedStorageNextAllowedDowngrade": "2025-07-23T12:37:53.954Z",
+              "provisionedIOPerSec": 9,
+              "provisionedIOPerSecNextAllowedDowngrade": "2025-07-23T12:37:53.954Z",
+              "provisionedThroughputMiBPerSec": 5,
+              "provisionedThroughputNextAllowedDowngrade": "2025-07-23T12:37:53.954Z",
+              "includedBurstIOPerSec": 24523,
+              "maxBurstIOPerSecCredits": 0,
+              "nfsProtocolProperties": {
+                "rootSquash": "NoRootSquash",
+                "encryptionInTransitRequired": "Enabled"
+              },
+              "publicAccessProperties": {
+                "allowedSubnets": [
+                  "/subscriptions/9760acf5-4638-11e7-9bdb-020073ca7778/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3"
+                ]
+              },
+              "provisioningState": "Succeeded",
+              "publicNetworkAccess": "Enabled",
+              "privateEndpointConnections": [
+                {
+                  "properties": {
+                    "groupIds": [
+                      "ndoii"
+                    ],
+                    "privateEndpoint": {
+                      "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.Network/privateEndpoints/testresourcename"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Pending",
+                      "description": "a",
+                      "actionsRequired": "pvlmopquhexpdjpcaruvj"
+                    },
+                    "provisioningState": "Succeeded"
+                  },
+                  "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.FileShares/fileShares/testresourcename/privateEndpointConnections/privateEndpointConnectionName",
+                  "name": "kjavgkroj",
+                  "type": "Microsoft.FileShares/fileShares/privateEndpointConnections",
+                  "systemData": {
+                    "createdBy": "moat",
+                    "createdByType": "User",
+                    "createdAt": "2025-07-23T12:37:53.955Z",
+                    "lastModifiedBy": "dxukcadzapywjcgnxsqchaa",
+                    "lastModifiedByType": "User",
+                    "lastModifiedAt": "2025-07-23T12:37:53.955Z"
+                  }
+                }
+              ],
+              "encryption": {
+                "infrastructureEncryption": "enabled",
+                "customerManagedKeyEncryption": {
+                  "keyEncryptionKeyIdentity": {
+                    "identityType": "userAssignedIdentity",
+                    "userAssignedIdentityResourceId": "/subscriptions/0590b445-524e-4caa-9870-2e2461d23434/resourceGroups/fiddler-mfs-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+                  },
+                  "keyEncryptionKeyUrl": "https://myvault.vault.azure.net/keys/myfilesharekey"
+                },
+                "currentKeyEncryptionKeyUrl": "https://myvault.vault.azure.net/keys/myfilesharekey/0123456789abcdef0123456789abcdef",
+                "lastKeyRotationTimestamp": "2026-09-01T12:00:00.000Z"
+              }
+            },
+            "tags": {
+              "key9647": "xwokdvyoae"
+            },
+            "location": "westus",
+            "id": "/subscriptions/0590b445-524e-4caa-9870-2e2461d23434/resourceGroups/fiddler-mfs-rg/providers/Microsoft.FileShares/fileShares/fileshare",
+            "name": "fileshare",
+            "type": "Microsoft.FileShares/fileShares",
+            "systemData": {
+              "createdBy": "moat",
+              "createdByType": "User",
+              "createdAt": "2025-07-23T12:37:53.955Z",
+              "lastModifiedBy": "dxukcadzapywjcgnxsqchaa",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-23T12:37:53.955Z"
+            },
+            "identity": {
+              "type": "SystemAssigned,UserAssigned",
+              "principalId": "11111111-1111-1111-1111-111111111111",
+              "tenantId": "22222222-2222-2222-2222-222222222222",
+              "userAssignedIdentities": {
+                "/subscriptions/0590b445-524e-4caa-9870-2e2461d23434/resourceGroups/fiddler-mfs-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {
+                  "principalId": "33333333-3333-3333-3333-333333333333",
+                  "clientId": "44444444-4444-4444-4444-444444444444"
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

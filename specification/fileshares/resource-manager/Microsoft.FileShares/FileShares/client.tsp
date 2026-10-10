@@ -36,6 +36,7 @@ using Microsoft.FileShares;
   "csharp"
 );
 @@clientName(FileShareLimitsResponse, "FileShareLimitsResult", "csharp");
+@@clientName(FileShareLimitsRequest, "FileShareLimitsContent", "csharp");
 @@clientName(
   FileShareProvisioningRecommendationResponse,
   "FileShareProvisioningRecommendationResult",
@@ -93,6 +94,26 @@ using Microsoft.FileShares;
   "csharp"
 );
 @@clientName(PublicNetworkAccess, "FileSharePublicNetworkAccess", "csharp");
+@@clientName(
+  StartRedundancyConversionRequest,
+  "StartRedundancyConversionContent",
+  "csharp"
+);
+@@clientName(
+  StartRedundancyConversionInput,
+  "StartRedundancyConversionInputProperties",
+  "csharp"
+);
+@@clientName(
+  RedundancyConversionStatusResponse,
+  "RedundancyConversionStatusResult",
+  "csharp"
+);
+@@clientName(
+  RedundancyConversionStatusOutput,
+  "RedundancyConversionStatusOutputProperties",
+  "csharp"
+);
 @@clientName(MediaTier, "FileShareMediaTier", "csharp");
 @@clientName(MediaTier.SSD, "Ssd", "csharp");
 @@clientName(Redundancy, "FileShareRedundancyLevel", "csharp");

@@ -3,6 +3,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "./FileShareMigrations.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
 
@@ -33,6 +34,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("Version 2026-06-01")
   v2026_06_01: "2026-06-01",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("Version 2026-09-01")
+  v2026_09_01: "2026-09-01",
 }
 
 @doc("File share resource")
@@ -43,7 +48,11 @@ model FileShare is Azure.ResourceManager.TrackedResource<FileShareProperties> {
   @path
   @segment("fileShares")
   name: string;
+
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
+
+@@added(FileShare.identity, Versions.v2026_09_01);
 
 @doc("Media Tier enum.")
 union MediaTier {
@@ -51,6 +60,22 @@ union MediaTier {
 
   @doc("SSD media tier.")
   SSD: "SSD",
+
+  @added(Versions.v2026_09_01)
+  @doc("HDD media tier.")
+  HDD: "HDD",
+}
+
+@added(Versions.v2026_09_01)
+@doc("Scale mode for a file share.")
+union ScaleMode {
+  string,
+
+  @doc("Compatibility scale mode.")
+  Compatibility: "Compatibility",
+
+  @doc("Scale mode.")
+  Scale: "Scale",
 }
 
 @doc("Redundancy enum.")
@@ -139,6 +164,11 @@ model FileShareProperties {
   @doc("The file sharing protocol for this file share.")
   protocol?: Protocol;
 
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The scale mode selected when the file share is created.")
+  scaleMode?: ScaleMode;
+
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @doc("The provisioned storage size of the share in GiB (1 GiB is 1024^3 bytes or 1073741824 bytes). A component of the file share's bill is the provisioned storage, regardless of the amount of used storage.")
   provisionedStorageGiB?: int32;
@@ -197,6 +227,35 @@ model FileShareProperties {
   @visibility(Lifecycle.Read)
   @doc("The list of associated private endpoint connections.")
   privateEndpointConnections?: PrivateEndpointConnection[];
+
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  @doc("The current migration state of the file share.")
+  migrationState?: MigrationState;
+
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @doc("Encryption settings for the file share.")
+  encryption?: FileShareEncryption;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Encryption settings for the file share. Composes the standard common encryption type with read-only customer-managed key rotation status owned by the file share resource provider. Automatic key rotation follows the Azure Storage account model and is derived from the key URL shape: an unversioned customerManagedKeyEncryption.keyEncryptionKeyUrl opts into automatic rotation to the latest key version, while a versioned URL pins a specific version.")
+model FileShareEncryption {
+  ...CommonTypes.Encryption;
+
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Uses the Url suffix to stay consistent with the sibling customerManagedKeyEncryption.keyEncryptionKeyUrl defined in Azure.ResourceManager.CommonTypes.Encryption (common-types v6 customermanagedkeys.json); this property is the resolved value of that same key vault key URL, so renaming only this one to Uri would make the pair inconsistent."
+  @visibility(Lifecycle.Read)
+  @doc("The versioned key encryption key URL currently applied to the file share by the service. When an unversioned keyEncryptionKeyUrl is supplied, this reflects the resolved latest key version currently in use.")
+  currentKeyEncryptionKeyUrl?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The UTC timestamp when the service last successfully rotated the active customer-managed key version.")
+  lastKeyRotationTimestamp?: utcDateTime;
+
+  @visibility(Lifecycle.Read)
+  @doc("The last customer-actionable error encountered while automatically rotating to the latest key version.")
+  autoKeyRotationError?: ErrorDetail;
 }
 
 #deprecated "Deprecating 202 for PUT requests. Use 201 instead."
@@ -267,6 +326,11 @@ model FileSharePatchProperties {
   @visibility(Lifecycle.Update)
   @doc("Gets or sets allow or disallow public network access to azure managed file share")
   publicNetworkAccess?: PublicNetworkAccess;
+
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Update)
+  @doc("Encryption settings for the file share.")
+  encryption?: FileShareEncryption;
 }
 
 @lroStatus
@@ -337,6 +401,25 @@ interface FileShares {
   >;
 
   checkNameAvailability is checkLocalNameAvailability;
+
+  @added(Versions.v2026_09_01)
+  @doc("Starts a redundancy conversion for the file share.")
+  startRedundancyConversion is ArmResourceActionNoContentSync<
+    Resource = FileShare,
+    Request = StartRedundancyConversionRequest,
+    BaseParameters = BaseParameters<FileShare>,
+    Error = ErrorResponse
+  >;
+
+  @added(Versions.v2026_09_01)
+  @doc("Gets the status and details of the current or most recent redundancy conversion for the file share.")
+  getRedundancyConversionStatus is ArmResourceActionSync<
+    Resource = FileShare,
+    Request = void,
+    Response = RedundancyConversionStatusResponse,
+    BaseParameters = BaseParameters<FileShare>,
+    Error = ErrorResponse
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
@@ -533,6 +616,26 @@ model FileShareProvisioningConstants {
   guardrailThroughputScalar: float64;
 }
 
+@added(Versions.v2026_09_01)
+@doc("File share offer dimensions.")
+model FileShareOfferInput {
+  @doc("The file sharing protocol. Defaults to NFS.")
+  protocol?: Protocol;
+
+  @doc("The storage media tier. Defaults to SSD.")
+  mediaTier?: MediaTier;
+
+  @doc("The scale mode. Defaults to Compatibility.")
+  scaleMode?: ScaleMode;
+}
+
+@added(Versions.v2026_09_01)
+@doc("Request structure for the file share limits API.")
+model FileShareLimitsRequest {
+  @doc("Properties used to select the file share offer.")
+  properties: FileShareOfferInput;
+}
+
 @doc("Response structure for file share limits API.")
 model FileShareLimitsResponse {
   @doc("The properties of the file share limits.")
@@ -559,6 +662,18 @@ model FileShareProvisioningRecommendationInput {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("The desired provisioned storage size of the share in GiB. Will be use to calculate the values of remaining provisioning parameters.")
   provisionedStorageGiB: int32;
+
+  @added(Versions.v2026_09_01)
+  @doc("The file sharing protocol. Defaults to NFS.")
+  protocol?: Protocol;
+
+  @added(Versions.v2026_09_01)
+  @doc("The storage media tier. Defaults to SSD.")
+  mediaTier?: MediaTier;
+
+  @added(Versions.v2026_09_01)
+  @doc("The scale mode. Defaults to Compatibility.")
+  scaleMode?: ScaleMode;
 }
 
 @doc("Response structure for file share provisioning parameters recommendation API.")
@@ -625,10 +740,26 @@ interface InformationalOperations {
 
   @doc("Get file shares limits.")
   @operationId("FileShare_GetLimits")
-  getLimits is ArmProviderActionSync<
+  @removed(Versions.v2026_09_01)
+  @action("getLimits")
+  @sharedRoute
+  getLimitsBeforeOffer is ArmProviderActionSync<
     Response = FileShareLimitsResponse,
     Scope = SubscriptionActionScope,
     Parameters = LocationResourceParameter
+  >;
+
+  @added(Versions.v2026_09_01)
+  @doc("Get file shares limits.")
+  @operationId("FileShare_GetLimits")
+  @action("getLimits")
+  @sharedRoute
+  getLimits is ArmProviderActionSync<
+    Request = FileShareLimitsRequest,
+    Response = FileShareLimitsResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationResourceParameter,
+    OptionalRequestBody = true
   >;
 
   @doc("Get file shares provisioning parameters recommendation.")
