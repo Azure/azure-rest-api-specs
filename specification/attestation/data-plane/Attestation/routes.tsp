@@ -4,6 +4,7 @@ import "./models.tsp";
 import "@typespec/openapi";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace AttestationService;
 
@@ -201,6 +202,21 @@ interface Attestation {
   attestTdxVm is Azure.Core.Foundations.Operation<
     AttestTdxVmRequest,
     AttestationResponse
+  >;
+
+   /**
+   * Processes attestation evidence from a Pluton processor, producing an attestation
+   * result. The attestation result produced is dependent upon the attestation
+   * policy.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @summary("Attest a Pluton processor.")
+  @route("/attest/Pluton")
+  @added(Versions.v2026_03_11_preview)
+  @post
+  attestPluton is Azure.Core.Foundations.Operation<
+    PlutonAttestationRequest,
+    PlutonAttestationResponse
   >;
 }
 
