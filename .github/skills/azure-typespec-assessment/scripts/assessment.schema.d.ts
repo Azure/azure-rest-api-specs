@@ -70,6 +70,7 @@ export type DocumentCheck = {
 
 export interface TypeSpecAssessment {
   schemaVersion: 1;
+  assessmentMode?: "full" | "fast";
   pullRequest?: {
     number: number;
     url: string;
@@ -86,7 +87,7 @@ export interface TypeSpecAssessment {
   confidence: "high" | "medium" | "low";
   safety: {
     scope: "rest-and-downstream-only";
-    status: "passed" | "failed" | "not-assessed";
+    status: "passed" | "failed" | "not-assessed" | "skipped";
     [k: string]: unknown;
   };
   dimensions: {

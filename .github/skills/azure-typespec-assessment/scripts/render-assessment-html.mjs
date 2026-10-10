@@ -286,9 +286,12 @@ function headerSummary(assessment) {
     complianceIssueCount,
     complianceCoveredCount,
     complianceMaterialCount,
-    complianceCoverageDetail: compliance.legacyDocuments
-      ? `${compliance.legacyDocuments.length} documents assessed`
-      : `${complianceCoveredCount}/${complianceMaterialCount} intents assessed`,
+    complianceCoverageDetail:
+      compliance.status === "skipped"
+        ? "Skipped in fast mode"
+        : compliance.legacyDocuments
+          ? `${compliance.legacyDocuments.length} documents assessed`
+          : `${complianceCoveredCount}/${complianceMaterialCount} intents assessed`,
   };
 }
 
@@ -297,6 +300,7 @@ function complianceStatus(status) {
   if (status === "passed" || status === "assessed")
     return { icon: "✓", className: "pass", label: "Pass" };
   if (status === "failed") return { icon: "×", className: "fail", label: "Fail" };
+  if (status === "skipped") return { icon: "–", className: "", label: "Skipped" };
   return { icon: "i", className: "", label: "N/A" };
 }
 
@@ -2098,6 +2102,7 @@ ${affectedMethods(card.affectedMethods)}
  */
 function renderCurrent(assessment, options = {}) {
   const { dimensions } = assessment;
+  const fastMode = assessment.assessmentMode === "fast";
   const summary = headerSummary(assessment);
   const reportHelpers = {
     escapeHtml,
@@ -2155,10 +2160,10 @@ function renderCurrent(assessment, options = {}) {
 ${reportStyles}
 </style></head><body>
 <header class="hero"><div class="container"><div class="eyebrow">TypeSpec Assessment</div><h1>${escapeHtml(headerTitle(assessment))}</h1>
-<p class="hero-meta">TypeSpec source diff: ${comparisonHeader}</p>
+<p class="hero-meta">Assessment mode: <strong>${escapeHtml(assessment.assessmentMode ?? "full")}</strong>${fastMode ? "<br>Included: REST breaking changes, downstream SDK breaking changes, and Documentation Completeness.<br>Skipped: Semantic intents and Azure Guidelines." : ""}<br>TypeSpec source diff: ${comparisonHeader}</p>
 <div class="summary-grid">
-<a class="summary-card" href="#semantic-intents">${summaryHeading("Semantic intents", { icon: "ⓘ", className: "info", label: "Information only" })}<div class="summary-detail">${summary.semanticItems.length} ${summary.semanticItems.length === 1 ? "intent" : "intents"}<br>${summary.operationCount} operations<br>${summary.actionCounts.add} Added, ${summary.actionCounts.modify} Modified, ${summary.actionCounts.remove} Removed</div></a>
-<a class="summary-card" href="#azure-compliance">${summaryHeading("Azure Guidelines", complianceStatus(summary.complianceStatus))}<div class="summary-detail">${complianceStatus(summary.complianceStatus).label === "N/A" ? "Not assessed<br>" : ""}${summary.complianceFindingCount} ${summary.complianceFindingCount === 1 ? "finding" : "findings"}<br>${escapeHtml(summary.complianceCoverageDetail)}</div></a>
+${fastMode ? "" : `<a class="summary-card" href="#semantic-intents">${summaryHeading("Semantic intents", { icon: "ⓘ", className: "info", label: "Information only" })}<div class="summary-detail">${summary.semanticItems.length} ${summary.semanticItems.length === 1 ? "intent" : "intents"}<br>${summary.operationCount} operations<br>${summary.actionCounts.add} Added, ${summary.actionCounts.modify} Modified, ${summary.actionCounts.remove} Removed</div></a>`}
+${fastMode ? "" : `<a class="summary-card" href="#azure-compliance">${summaryHeading("Azure Guidelines", complianceStatus(summary.complianceStatus))}<div class="summary-detail">${complianceStatus(summary.complianceStatus).label === "N/A" ? "Not assessed<br>" : ""}${summary.complianceFindingCount} ${summary.complianceFindingCount === 1 ? "finding" : "findings"}<br>${escapeHtml(summary.complianceCoverageDetail)}</div></a>`}
 <a class="summary-card" href="#rest-breaking">${summaryHeading("REST breaking changes", restStatus)}<div class="summary-detail">${restStatus.label === "N/A" ? "Not assessed<br>" : ""}${summary.restFindingCount} ${summary.restFindingCount === 1 ? "finding" : "findings"}</div></a>
 <a class="summary-card" href="#downstream-breaking">${summaryHeading("Downstream breaking changes", downstreamStatus)}<div class="summary-detail">${downstreamStatus.label === "N/A" ? "Not assessed<br>" : ""}${summary.downstreamFindingCount} ${summary.downstreamFindingCount === 1 ? "finding" : "findings"}</div></a>
 <a class="summary-card" href="#document-quality">${summaryHeading("Documentation Completeness", documentStatus)}<div class="summary-detail">${documentQuality.compactDetail.map(escapeHtml).join("<br>")}</div></a>
@@ -2171,8 +2176,7 @@ ${report.html}
 <section id="appendix"><details class="dimension-details"><summary><h2>Appendix</h2></summary><div class="panel">${report.appendixHtml}<h3 id="potential-limits">Potential limits</h3>${assessment.blockers.length ? `<ul>${assessment.blockers.map((blocker) => `<li>${escapeHtml(isRecord(blocker) ? blocker.message : blocker)}</li>`).join("")}</ul>` : "<p>None</p>"}
 <h3 id="projects-and-compiler-status">Projects and compiler status</h3><table><thead><tr><th>Project</th><th>Mode</th><th>Baseline commit@version</th><th>Target commit@version</th><th>Baseline AutoRest / TCGC</th><th>Target AutoRest / TCGC</th></tr></thead><tbody>${projects}</tbody></table>
 <p><strong>Pull request:</strong> ${pullRequestLink(assessment)}</p>
-<h3 id="compliance-search-evidence">Guidance fetched</h3>
-${complianceEvidenceAppendix(dimensions.compliance)}
+${fastMode ? "" : `<h3 id="compliance-search-evidence">Guidance fetched</h3>${complianceEvidenceAppendix(dimensions.compliance)}`}
 <h3>Changed files</h3><ul>${(assessment.changedFiles ?? []).map((file) => `<li><code>${escapeHtml(file.path)}</code> (${escapeHtml(file.origins.join(", "))})</li>`).join("")}</ul>
 <h3>Timing and model input</h3><pre>${escapeHtml(JSON.stringify({ timings: assessment.timings, inputAccounting: assessment.inputAccounting }, null, 2))}</pre>
 <p><strong>Provenance:</strong> ${Object.values(assessment.provenance ?? {})
