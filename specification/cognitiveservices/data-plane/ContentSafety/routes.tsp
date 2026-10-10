@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
+import "./agent-hooks.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -85,11 +86,14 @@ interface ImageOperations {
 
 @added(ContentSafety.Versions.v2026_09_01_preview)
 interface UnifiedOperations {
+  @removed(ContentSafety.Versions.v2026_10_15_preview)
+  @renamedFrom(ContentSafety.Versions.v2026_10_15_preview, "unifiedModerate")
   @summary("Unified Moderate")
   @doc("A synchronous API that evaluates input, output, a proposed tool call, or a completed tool result against an applicable Agent Control Specification policy and returns the enforced content and policy verdict.")
   @route("/content:unifiedModerate")
+  @sharedRoute
   @post
-  unifiedModerate is Azure.Core.RpcOperation<
+  unifiedModerateLegacy is Azure.Core.RpcOperation<
     {
       @bodyRoot
       @doc("The unified moderation request.")
@@ -99,6 +103,34 @@ interface UnifiedOperations {
       body: UnifiedModerateOptions;
     },
     UnifiedModerateResult
+  >;
+
+  @added(ContentSafety.Versions.v2026_10_15_preview)
+  @summary("Unified Moderate")
+  @doc("Synchronously evaluate a canonical Agent Hooks 0.1 context against authorized effective policy. This version evolves Unified Moderate on its existing route and supports all eight interception points. Azure AI Content Safety composes the applicable selected, bound, subscription and hierarchy policies within this evaluation and returns a complete Verdict. The calling host owns composition across independent interceptors, transform application, final enforcement, approvals, timeouts and audit. policyId selects an authorized policy and targetResourceId selects an authorized binding target; provide at least one. Applicable mandatory policies cannot be bypassed by either selector. Body identity metadata is not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful verdicts.")
+  @route("/content:unifiedModerate")
+  @sharedRoute
+  @post
+  unifiedModerate is Azure.Core.RpcOperation<
+    {
+      @query
+      @doc("Identifier of the protected resource used for binding resolution, not the policy or binding object identifier. For an Azure resource, provide its full Azure Resource Manager resource ID. Project targets must be under the authenticated account and require a verified producer. Required when policyId is absent. When both selectors are provided, the selected policy is evaluated alongside the bound policy. This selector cannot replace authorization or bypass mandatory policy.")
+      targetResourceId?: string;
+
+      @query
+      @doc("Authorized policy selector, such as a policy name or full policy resource ID. Hierarchy-enabled scopes require a policy name. Required when targetResourceId is absent. A policy-only request retains authenticated account scope. When both selectors are provided, the selected policy is evaluated alongside the bound policy. Policy selection does not bypass applicable mandatory policies.")
+      policyId?: string;
+
+      @bodyRoot
+      @doc("Canonical Agent Hooks context with native JSON point payloads. Azure AI Content Safety (AACS) classifier role metadata, when needed by a non-Hooks caller, belongs in extensions.aacs.role.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: AgentContext;
+    },
+    AgentVerdict,
+    {},
+    AgentEvaluationError | Azure.Core.Foundations.ErrorResponse
   >;
 }
 
