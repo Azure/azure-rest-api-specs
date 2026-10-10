@@ -69,6 +69,8 @@ model AccountProperties {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   entraIdConfig?: EntraIdConfig;
 
   /**
@@ -171,7 +173,8 @@ model NetAppAccountPatchStable {
   /**
    * NetApp Account properties
    */
-  properties?: AccountProperties;
+  @typeChangedFrom(Versions.v2026_07_01, AccountProperties)
+  properties?: AccountPropertiesPatch;
 
   /**
    * The identity used for the resource.
@@ -203,10 +206,36 @@ model NetAppAccountPatch is PatchModel<NetAppAccount> {
 /**
  * NetApp account patch properties
  */
+// Every inherited property is re-declared here so that emitted property order matches
+// the previously published order; template-derived properties always precede body ones.
 model AccountPropertiesPatch is PatchModel<
   AccountProperties,
-  "entraIdConfig" | "ldapConfiguration"
+  | "entraIdConfig"
+  | "ldapConfiguration"
+  | "activeDirectories"
+  | "encryption"
+  | "nfsV4IDDomain"
 > {
+  /**
+   * Active Directories
+   */
+  @identifiers(#["activeDirectoryId"])
+  @typeChangedFrom(Versions.v2026_07_01, ActiveDirectory[])
+  activeDirectories?: ActiveDirectoryPatch[];
+
+  /**
+   * Encryption settings
+   */
+  @typeChangedFrom(Versions.v2026_07_01, AccountEncryption)
+  encryption?: AccountEncryptionPatch;
+
+  /**
+   * Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  nfsV4IDDomain?: VfsV4IDDomain | null;
+
   /**
    * Entra ID configuration for the account.
    */
@@ -221,6 +250,8 @@ model AccountPropertiesPatch is PatchModel<
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   entraIdConfig?: EntraIdConfigPatch;
 
   /**
@@ -254,6 +285,8 @@ model AccountPropertiesPatch is PatchModel<
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model EntraIdConfigPatch is PatchModel<EntraIdConfig, "entraIdAkvConfig"> {
   /**
    * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
@@ -275,6 +308,8 @@ model EntraIdConfigPatch is PatchModel<EntraIdConfig, "entraIdAkvConfig"> {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model EntraIdAkvConfigPatch is PatchModel<EntraIdAkvConfig>;
 
 /**
@@ -304,6 +339,44 @@ model LdapConfigurationPatch is PatchModel<
   @added(Versions.v2026_06_15_preview)
   bindPasswordAkvConfig?: BindPasswordAkvConfigPatch;
 }
+
+/**
+ * Active Directory settings for PATCH operations (no default values)
+ */
+@added(Versions.v2026_07_01)
+model ActiveDirectoryPatch is PatchModel<ActiveDirectory>;
+
+/**
+ * Properties of key vault for PATCH operations (no required properties)
+ */
+@added(Versions.v2026_07_01)
+model KeyVaultPropertiesPatch is PatchModel<KeyVaultProperties>;
+
+/**
+ * Identity used to authenticate with key vault for PATCH operations
+ */
+@added(Versions.v2026_07_01)
+model EncryptionIdentityPatch is PatchModel<EncryptionIdentity>;
+
+/**
+ * Encryption settings for PATCH operations (no default values)
+ */
+@added(Versions.v2026_07_01)
+model AccountEncryptionPatch is PatchModel<
+  AccountEncryption,
+  "keyVaultProperties" | "identity"
+> {
+  /**
+   * Properties provided by KeVault. Applicable if keySource is 'Microsoft.KeyVault'.
+   */
+  keyVaultProperties?: KeyVaultPropertiesPatch;
+
+  /**
+   * Identity used to authenticate to KeyVault. Applicable if keySource is 'Microsoft.KeyVault'.
+   */
+  identity?: EncryptionIdentityPatch;
+}
+
 /**
  * Entra ID configuration for the account.
  */
@@ -318,6 +391,8 @@ model LdapConfigurationPatch is PatchModel<
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model EntraIdConfig {
   /**
    * ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.
@@ -362,6 +437,8 @@ model EntraIdConfig {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model EntraIdAkvConfig {
   /**
    * The Azure Key Vault URI where the Entra ID credentials are stored.
