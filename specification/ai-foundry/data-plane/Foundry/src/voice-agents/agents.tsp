@@ -171,6 +171,12 @@ model VoiceAgentDefinition extends AgentDefinition {
   subagent_config?: VoiceAgentSubagentConfig;
 
   @doc("""
+    Optional directed graph of specialist behaviors that may become active during one voice session. The top-level
+    voice-agent definition is the implicit `$entrypoint`; configured nodes contain only additional behaviors.
+    """)
+  handoff?: VoiceAgentHandoffGraph;
+
+  @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
     `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
     timeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate
