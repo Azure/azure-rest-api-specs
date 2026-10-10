@@ -233,6 +233,12 @@ union VolumeCreateOption {
   Disk: "Disk",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DiskRestorePoint: "DiskRestorePoint",
+
+  /**
+   * Create a thin clone from an existing Elastic SAN volume.
+   */
+  @added(Versions.v2026_10_01_preview)
+  Volume: "Volume",
 }
 
 /**
@@ -1062,6 +1068,76 @@ model VolumeGroupUpdateProperties {
 }
 
 /**
+ * The replica type of a volume clone. Thin shares blocks with the source; Full is an independent copy.
+ */
+@added(Versions.v2026_10_01_preview)
+union ReplicaType {
+  string,
+
+  /**
+   * The clone shares data blocks with its source volume and remains dependent on it.
+   */
+  Thin: "Thin",
+
+  /**
+   * The clone holds an independent copy of the data and no longer depends on its source volume.
+   */
+  Full: "Full",
+}
+
+/**
+ * The backfill (independence) status of a volume clone.
+ */
+@added(Versions.v2026_10_01_preview)
+union BackfillStatus {
+  string,
+
+  /**
+   * The backfill has not been started.
+   */
+  NotStarted: "NotStarted",
+
+  /**
+   * The backfill is currently copying data from the source volume.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * The backfill has finished and the clone is fully independent of its source volume.
+   */
+  Complete: "Complete",
+}
+
+/**
+ * Clone details for a volume. Present only for clone volumes (createSource == Volume).
+ */
+@added(Versions.v2026_10_01_preview)
+model CloneDetails {
+  /**
+   * The replica type of the clone. Writable on create and on promote (Thin to Full).
+   */
+  replicaType?: ReplicaType;
+
+  /**
+   * The backfill status of the clone. Independence is reached when this is Complete.
+   */
+  @visibility(Lifecycle.Read)
+  backfillStatus?: BackfillStatus;
+
+  /**
+   * The time the data copy for the promote/backfill started. Null before promote, and may remain null briefly after a promote is accepted until the underlying data copy begins.
+   */
+  @visibility(Lifecycle.Read)
+  backfillStartedAt?: utcDateTime;
+
+  /**
+   * The time the backfill completed. Null until backfillStatus is Complete.
+   */
+  @visibility(Lifecycle.Read)
+  backfillCompletedAt?: utcDateTime;
+}
+
+/**
  * Volume response properties.
  */
 model VolumeProperties {
@@ -1101,6 +1177,19 @@ model VolumeProperties {
   @renamedFrom(Versions.v2026_05_01_preview, "managedBy")
   @identifiers(#[])
   managedBy?: ManagedByResources[];
+
+  /**
+   * Clone details for the volume. Present only for clone volumes (createSource == Volume).
+   */
+  @added(Versions.v2026_10_01_preview)
+  cloneDetails?: CloneDetails;
+
+  /**
+   * The number of live dependent thin clones sourced from this volume.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @visibility(Lifecycle.Read)
+  activeCloneCount?: int32;
 
   /**
    * State of the operation on the resource.
@@ -1225,6 +1314,12 @@ model VolumeUpdateProperties {
   @renamedFrom(Versions.v2026_05_01_preview, "managedBy")
   @identifiers(#[])
   managedBy?: ManagedByResources[];
+
+  /**
+   * Clone details for the volume. On update, replicaType may be set to Full to promote a thin clone.
+   */
+  @added(Versions.v2026_10_01_preview)
+  cloneDetails?: CloneDetails;
 }
 
 /**
