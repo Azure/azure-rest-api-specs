@@ -87258,6 +87258,24 @@ components:
           items:
             type: string
           description: Optional phrase hints that bias recognition toward domain terms.
+        profanity_filter:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentProfanityFilterMode'
+            - type: 'null'
+          description: |-
+            Initialization-only profanity filtering for input transcripts. Supported only by the managed
+            Azure Speech (`azure-speech`) model, including Custom Speech. Using
+            `custom_speech` with this setting requires a cascaded model, not an audio-native realtime model's
+            side transcriber. Explicit settings, including null, bypass automatic native routing; unsupported
+            providers reject them.
+            Omit this property to retain provider defaults when initializing a session and preserve the initialized
+            setting on subsequent session updates. Explicit null requests `unfiltered`, not provider defaults,
+            and is acknowledged as `unfiltered` in session events. After initialization, updates may repeat the
+            same mode but cannot change it, disable transcription while an explicit mode is set, or switch the
+            transcription model. Repeating null and `unfiltered` is equivalent.
+            Filtering applies to transcript events and cascaded model context. Input audio, voice activity
+            detection, and assistant speech are unchanged; audio-native models still receive the original audio.
+            Mandatory service masking policies still apply, including when `unfiltered` is requested.
       description: |-
         Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription
         options with the Azure and MAI transcription models, custom speech models, and phrase hints.
@@ -87484,6 +87502,16 @@ components:
             - far_field
             - azure_deep_noise_suppression
       description: The input audio noise reduction mode.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentProfanityFilterMode:
+      type: string
+      enum:
+        - masked
+        - unfiltered
+        - removed
+      description: The supported input-transcript profanity filtering modes. Only `masked`, `unfiltered`, and `removed` are accepted; `raw` is not supported.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
