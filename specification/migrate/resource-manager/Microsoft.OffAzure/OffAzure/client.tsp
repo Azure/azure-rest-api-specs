@@ -85,6 +85,9 @@ using Microsoft.OffAzure;
   "MigrationDiscoveryVcenter",
   "csharp"
 );
+@@clientName(MachineResource, "MigrationDiscoveryMachine", "csharp");
+@@clientName(Server, "MigrationDiscoveryServer", "csharp");
+@@clientName(Vcenter, "MigrationDiscoveryVcenter", "csharp");
 @@clientName(HypervRunAsAccountResource, "HypervRunAsAccount", "csharp");
 @@clientName(VmwareRunAsAccountResource, "VmwareRunAsAccount", "csharp");
 @@clientName(ServerSiteResource, "ServerSite", "csharp");
