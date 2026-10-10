@@ -32,6 +32,48 @@ namespace Azure.ResourceManager.Models {
   "javascript"
 );
 
+@@clientName(HostEndpointSettings, "ProxyAgentHostEndpointSettings", "csharp");
+@@clientName(
+  SfmcOperationStatus,
+  "ServiceFabricManagedClusterOperationStatus",
+  "csharp"
+);
+@@clientName(
+  FaultSimulationContentWrapper,
+  "StartFaultSimulationContent",
+  "csharp"
+);
+@@clientName(SkuProfile, "ServiceFabricManagedNodeTypeSkuProfile", "csharp");
+@@clientName(SkuProfileVmSize, "ServiceFabricManagedNodeTypeVmSize", "csharp");
+@@clientName(
+  AllocationStrategy,
+  "ServiceFabricManagedNodeTypeAllocationStrategy",
+  "csharp"
+);
+@@clientName(DiskCachingType, "ServiceFabricManagedDiskCachingType", "csharp");
+@@clientName(
+  NodeTypeProperties.dataDiskIOPSReadWrite,
+  "DataDiskIopsReadWrite",
+  "csharp"
+);
+@@clientName(
+  NodeTypeProperties.dataDiskMBpsReadWrite,
+  "DataDiskMbpsReadWrite",
+  "csharp"
+);
+@@clientName(
+  NodeTypeProperties.dataDiskWriteAcceleratorEnabled,
+  "IsDataDiskWriteAcceleratorEnabled",
+  "csharp"
+);
+@@clientName(VmssDataDisk.diskIOPSReadWrite, "DiskIopsReadWrite", "csharp");
+@@clientName(VmssDataDisk.diskMBpsReadWrite, "DiskMbpsReadWrite", "csharp");
+@@clientName(
+  VmssDataDisk.writeAcceleratorEnabled,
+  "IsWriteAcceleratorEnabled",
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VMSSExtension.properties);
 
@@ -102,6 +144,7 @@ namespace Azure.ResourceManager.Models {
 @@clientName(NodeTypes.getFaultSimulation::parameters.body, "parameters");
 @@clientName(NodeTypes.redeploy::parameters.body, "parameters");
 @@clientName(NodeTypes.reimage::parameters.body, "parameters");
+@@clientName(NodeTypes.reimageAllDisks::parameters.body, "parameters");
 @@clientName(NodeTypes.restart::parameters.body, "parameters");
 @@clientName(NodeTypes.start::parameters.body, "parameters");
 @@clientName(NodeTypes.startFaultSimulation::parameters.body, "parameters");
@@ -405,6 +448,8 @@ namespace Azure.ResourceManager.Models {
 @@clientName(FrontendConfiguration.ipAddressType, "IPAddressType", "csharp");
 @@clientName(NodeTypeActionParameters, "NodeTypeActionContent", "csharp");
 @@clientName(NodeTypeActionParameters.force, "IsForced", "csharp");
+@@clientName(ReimageAllDisksParameters, "ReimageAllDisksContent", "csharp");
+@@clientName(ReimageAllDisksParameters.force, "IsForced", "csharp");
 @@clientName(FaultSimulationContent.force, "IsForced", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
@@ -778,6 +823,7 @@ namespace Azure.ResourceManager.Models {
 );
 @@clientName(NodeTypes.redeploy::parameters.body, "content", "csharp");
 @@clientName(NodeTypes.reimage::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.reimageAllDisks::parameters.body, "content", "csharp");
 @@clientName(NodeTypes.restart::parameters.body, "content", "csharp");
 @@clientName(NodeTypes.start::parameters.body, "content", "csharp");
 @@clientName(
