@@ -26,8 +26,17 @@ These are the global settings for the AppConfiguration API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-08-01-preview
+tag: package-2026-09-01-preview
 ```
+### Tag: package-2026-09-01-preview
+
+These settings apply only when `--tag=package-2026-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09-01-preview'
+input-file:
+  - preview/2026-09-01-preview/appconfiguration.json
+```
+
 ### Tag: package-2025-08-01-preview
 
 These settings apply only when `--tag=package-2025-08-01-preview` is specified on the command line.
@@ -246,6 +255,12 @@ See configuration in [readme.cli.md](./readme.cli.md)
 
 ``` yaml
 directive:
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: appconfiguration.json
+    reason: provisioningState is marked read-only in TypeSpec via @visibility(Lifecycle.Read), but the autorest emitter places readOnly as a sibling of $ref rather than in the type definition itself. The linter does not follow $ref siblings per OpenAPI 2.0 spec. Known issue https://github.com/Azure/azure-openapi-validator/issues/637
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile"].post.responses["200"].schema
   - suppress: EnumInsteadOfBoolean
     from: appconfiguration.json
     where: $.definitions.NameAvailabilityStatus.properties.nameAvailable
@@ -274,6 +289,10 @@ directive:
     from: appconfiguration.json
     where: $.definitions.KeyValue
     reason: Listing is not supported in ARM templates.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: appconfiguration.json
+    where: $.definitions.FeatureFlag
+    reason: Feature flags support point GET, PUT, and DELETE operations through the management endpoint for ARM template deployments. Collection listing is intentionally supported only by the data-plane API.
   - suppress: TrackedResourceListByImmediateParent
     from: appconfiguration.json
     where: $.definitions.KeyValue
