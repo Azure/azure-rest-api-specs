@@ -95423,11 +95423,11 @@
                 "type": "null"
               }
             ],
-            "description": "Node-specific instructions. By default, a non-empty value is appended to the frozen entrypoint instructions, while omission, null, or an empty string preserves the exact entrypoint value. When `override_prompt` is true, this value becomes the complete active instructions, and null or an empty string clears them."
+            "description": "Node-specific instructions. Omission preserves the frozen entrypoint instructions. A supplied value replaces them by default; null or an empty string clears them. When `append_instructions` is true, a non-empty value is appended instead, while null or an empty string adds nothing."
           },
-          "override_prompt": {
+          "append_instructions": {
             "type": "boolean",
-            "description": "Whether node instructions replace rather than extend the frozen entrypoint instructions.",
+            "description": "Whether node instructions append to rather than replace the frozen entrypoint instructions.",
             "default": false
           },
           "tools": {
