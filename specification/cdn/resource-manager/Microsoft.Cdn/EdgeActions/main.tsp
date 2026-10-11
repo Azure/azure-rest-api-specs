@@ -25,6 +25,7 @@ namespace Microsoft.Cdn;
 enum Versions {
   `2025-09-01-preview`,
   `2025-12-01-preview`,
+  `2026-10-01`,
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SKU property required at envelope level for backwards compatibility with 2024-07-22-preview"
@@ -91,6 +92,15 @@ model EdgeActionExecutionFilter
 interface EdgeActions {
   get is ArmResourceRead<EdgeAction>;
   create is ArmResourceCreateOrUpdateAsync<EdgeAction>;
+
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "update")
+  @sharedRoute
+  updateV1 is ArmCustomPatchAsync<EdgeAction, EdgeActionUpdateV1>;
+
+  @added(Versions.`2026-10-01`)
+  @sharedRoute
+  @doc("Updates the tags of an Edge Action. Omitted tags are preserved, an empty tags object clears all tags, and supplied tags replace the entire tag collection. Null tags are rejected. Do not include sku in PATCH requests; any supplied sku, including null or the existing value, is rejected.")
   update is ArmCustomPatchAsync<EdgeAction, EdgeActionUpdate>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Service returns 200 for successful delete operations"
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -126,6 +136,21 @@ interface EdgeActions {
 interface EdgeActionVersions {
   get is ArmResourceRead<EdgeActionVersion>;
   create is ArmResourceCreateOrUpdateAsync<EdgeActionVersion>;
+
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "update")
+  @sharedRoute
+  updateV1 is ArmCustomPatchAsync<
+    EdgeActionVersion,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      EdgeActionVersion,
+      EdgeActionVersionProperties
+    >
+  >;
+
+  @added(Versions.`2026-10-01`)
+  @sharedRoute
+  @doc("Updates the tags of an Edge Action version. Omitted tags are preserved, an empty tags object clears all tags, and supplied tags replace the entire tag collection. Null tags are rejected. Version properties are not changed. If deploymentType or isDefaultVersion is supplied, it must match the existing value; use swapDefault to change the default version.")
   update is ArmCustomPatchAsync<
     EdgeActionVersion,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -179,6 +204,21 @@ interface EdgeActionVersions {
 interface EdgeActionExecutionFilters {
   get is ArmResourceRead<EdgeActionExecutionFilter>;
   create is ArmResourceCreateOrUpdateAsync<EdgeActionExecutionFilter>;
+
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "update")
+  @sharedRoute
+  updateV1 is ArmCustomPatchAsync<
+    EdgeActionExecutionFilter,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      EdgeActionExecutionFilter,
+      EdgeActionExecutionFilterProperties
+    >
+  >;
+
+  @added(Versions.`2026-10-01`)
+  @sharedRoute
+  @doc("Updates the properties and tags of an Edge Action execution filter. Omitted tags are preserved, an empty tags object clears all tags, and supplied tags replace the entire tag collection. Null tags are rejected.")
   update is ArmCustomPatchAsync<
     EdgeActionExecutionFilter,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

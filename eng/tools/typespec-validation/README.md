@@ -11,6 +11,11 @@ pnpm tsv --changed
 pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
 ```
 
+TSV uses `pathe` for path operations and normalizes separators to `/` on every
+platform. Use ordinary relative paths or absolute drive-qualified Windows paths.
+Native Windows UNC, drive-relative, and case-insensitive path-comparison semantics
+are not preserved; backslashes are treated as separators even on POSIX.
+
 Use `--help` (or `-h`) to see all command-line options without running validation.
 For single-project validation, pass the folder and optional JSON context for rules
 and suppressions as positional arguments:

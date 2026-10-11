@@ -1,5 +1,5 @@
 import { glob, stat } from "node:fs/promises";
-import { matchesGlob, resolve } from "node:path";
+import { matchesGlob, resolve } from "pathe";
 
 /** Finds files using native glob semantics, without traversing directory symlinks. */
 export async function globFiles(

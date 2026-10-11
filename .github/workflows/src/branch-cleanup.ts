@@ -4,7 +4,7 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_RETENTION = { copilotDays: 90, otherDays: 2 * 365 };
 const PRESERVED_NAMES =
   /^(main|master|develop|gh-pages|typespec-next|RPSaas|RPSaaSMaster|RPSaaSCanary|ARMCoreRPDev)$/i;
-const PRESERVED_PREFIXES = /^(dev[-/]|release[-/]|feature[-/]|published\/|archive\/|hotfix\/)/i;
+const PRESERVED_PREFIXES = /^(release[-/]|feature[-/]|archive\/|hotfix\/)/i;
 
 interface Branch {
   name: string;

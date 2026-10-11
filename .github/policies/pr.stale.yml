@@ -1,6 +1,6 @@
 id: pr.stale
 name: Stale PR
-description: Mark and close stale pull requests
+description: Manage stale pull requests
 owner:
 resource: repository
 disabled: false
@@ -8,6 +8,25 @@ where:
 configuration:
   resourceManagementConfiguration:
     scheduledSearches:
+      - description: Close PRs against typespec-next 14 days after creation
+        frequencies:
+          - daily:
+              time: 14:00
+        filters:
+          - isPullRequest
+          - isOpen
+          - hasLabel:
+              label: ttl
+          - created:
+              before: 14
+        actions:
+          - closeIssue
+          - addReply:
+              reply: >-
+                Hi @${issueAuthor}.
+                This PR has been closed because PRs targeting the `typespec-next` branch are automatically closed 14 days after creation, since that branch is periodically rewritten and long-lived PRs against it fall out of date.
+                If you still need this change, please reopen the PR and rebase it onto the latest `typespec-next`, or retarget it to `main`.
+
       - description: Close PRs with no activity for 365 days without requiring a stale label
         frequencies:
           - daily:
@@ -63,6 +82,16 @@ configuration:
                 This PR has been closed since it had no activity for 28 days. If you still need this change, please reopen the PR and @mention the assignee for review.
 
     eventResponderTasks:
+      - description: Label PRs targeting typespec-next so the schedule above can find them
+        if:
+          - payloadType: Pull_Request
+          - isOpen
+          - targetsBranch:
+              branch: typespec-next
+        then:
+          - addLabel:
+              label: ttl
+
       - description: Remove the stale label when the PR author updates the PR
         if:
           - payloadType: Pull_Request

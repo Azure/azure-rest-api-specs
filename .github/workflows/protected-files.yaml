@@ -33,15 +33,16 @@ jobs:
         if: ${{ env.user-allowed == 'true' }}
         run: echo "Trusted automation account is allowed to update protected files"
 
-      - uses: $/.github/actions/checkout
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         if: ${{ env.user-allowed != 'true' }}
         with:
+          persist-credentials: false
           # Compare the PR merge commit with its base-branch parent.
           fetch-depth: 2
           sparse-checkout: |
             .github
 
-      - uses: $/.github/actions/install-deps-github-script
+      - uses: ./.github/actions/install-deps-github-script
         if: ${{ env.user-allowed != 'true' }}
 
       - name: Detect changes to protected files
@@ -50,4 +51,5 @@ jobs:
         with:
           script: |
             const { checkProtectedFiles } = await import("${{ github.workspace }}/.github/workflows/src/protected-files.ts");
-            await checkProtectedFiles({ context, core });
+            const result = await checkProtectedFiles({ context, core });
+            await core.summary.addRaw(`## ${result.title}\n\n${result.summary}`).write();

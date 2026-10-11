@@ -6,6 +6,7 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
       - "Breaking Change(Cross-Version) - Set Status"
       - "Package Name Approval - Set Status"
       - "Package Name Approval - Validate Labels"
+      - "Protected Files"
       - "SDK Validation Status"
       - "Summarize PR Impact"
       - "Swagger Avocado - Set Status"
@@ -39,7 +40,9 @@ permissions:
 
 jobs:
   run-summarize-checks:
-    if: ${{ github.event_name == 'pull_request_target' || github.event.workflow_run.conclusion != 'skipped' }}
+    if: >-
+      (github.event_name == 'pull_request_target' && github.event.pull_request.state == 'open') ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped')
     name: "Summarize Checks"
     runs-on: ubuntu-slim
 
@@ -48,8 +51,9 @@ jobs:
       # For workflows that are triggered by the pull_request_target event, the workflow runs in the
       # context of the base of the pull request.  You should make sure that you do not check out,
       # build, or run untrusted code from the head of the pull request.
-      - uses: $/.github/actions/checkout
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           # Only needs .github folder for automation, not the files in the PR (analyzed in a
           # separate workflow).
           #
@@ -59,7 +63,7 @@ jobs:
             .github
 
       - name: Install dependencies for github-script actions
-        uses: $/.github/actions/install-deps-github-script
+        uses: ./.github/actions/install-deps-github-script
 
       - id: dump-trigger-metadata
         name: Dump Trigger Metadata
@@ -82,7 +86,7 @@ jobs:
       # May be used by downstream workflows
       - name: Set job-summary artifact
         if: ${{ always() && steps.summarize-checks.outputs.summary }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: job-summary
           path: ${{ steps.summarize-checks.outputs.summary }}
@@ -94,14 +98,14 @@ jobs:
       # so consumers react to this run and resolve the PR from these artifacts.
       - if: ${{ always() && steps.summarize-checks.outputs.issue_number }}
         name: Upload artifact with issue number
-        uses: $/.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: issue-number
           value: ${{ steps.summarize-checks.outputs.issue_number }}
 
       - if: ${{ always() && steps.summarize-checks.outputs.head_sha }}
         name: Upload artifact with head SHA
-        uses: $/.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: head-sha
           value: ${{ steps.summarize-checks.outputs.head_sha }}

@@ -1,5 +1,5 @@
 import { type TypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
-import { join } from "node:path";
+import { join } from "pathe";
 import { context } from "../index.ts";
 import { failure, warning, type RuleResult } from "../rule-result.ts";
 import { parseServiceYaml } from "../service-yaml.ts";

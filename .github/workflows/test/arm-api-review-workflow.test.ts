@@ -1,5 +1,5 @@
 import { readFile, readdir } from "node:fs/promises";
-import { load } from "js-yaml";
+import { parse } from "yaml";
 import { join } from "node:path";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import { runInNewContext } from "node:vm";
@@ -93,7 +93,7 @@ function parseArmApiReviewerModels(content: string): {
     throw new Error(`Expected workflow frontmatter in ${SOURCE_FILE}`);
   }
 
-  const frontmatter = /** @type {unknown} */ load(match[1]);
+  const frontmatter: unknown = parse(match[1]);
   if (!isRecord(frontmatter)) {
     throw new Error(`Expected workflow frontmatter object in ${SOURCE_FILE}`);
   }
@@ -163,7 +163,7 @@ beforeAll(async () => {
     throw new Error("ARM API review workflow frontmatter was not found");
   }
 
-  const frontmatter = load(match[1]) as WorkflowFrontmatter;
+  const frontmatter = parse(match[1]) as WorkflowFrontmatter;
   const resolver = frontmatter.on?.steps?.find((step) => step.id === "resolve_target_pr");
   resolverScript = resolver?.with?.script ?? "";
   if (!resolverScript) {
@@ -1547,13 +1547,13 @@ describe("ARM paging and example enum calibration", () => {
     }
   });
 
-  it("keeps the eval catalog counts aligned with 90 scenarios and 57 fixtures", async () => {
+  it("keeps the eval catalog counts aligned with 91 scenarios and 57 fixtures", async () => {
     const evalDir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
     const evalFiles = (await readdir(evalDir)).filter((file) => file.endsWith(".yaml"));
     let stimulusCount = 0;
 
     for (const file of evalFiles) {
-      const parsed = load(await readFile(join(evalDir, file), "utf8")) as {
+      const parsed = parse(await readFile(join(evalDir, file), "utf8")) as {
         stimuli?: unknown[];
       };
       stimulusCount += parsed.stimuli?.length ?? 0;
@@ -1568,11 +1568,11 @@ describe("ARM paging and example enum calibration", () => {
       { recursive: true, withFileTypes: true },
     );
     expect(evalFiles).toHaveLength(18);
-    expect(stimulusCount).toBe(90);
+    expect(stimulusCount).toBe(91);
     expect(
       fixtureEntries.filter((entry) => entry.isFile() && entry.name !== "README.md"),
     ).toHaveLength(57);
-    expect(readme).toContain("Total: 90 stimuli across 18 eval files.");
+    expect(readme).toContain("Total: 91 stimuli across 18 eval files.");
     expect(readme).toContain("All 57 fixture data files");
     expect(readme).toContain("`--timeout <duration>`");
     expect(readme).toContain("`defaults.timeout`");
@@ -1588,7 +1588,7 @@ describe("ARM paging and example enum calibration", () => {
   }, 15_000);
 
   it("covers ARM LRO header customization in the TypeSpec eval", async () => {
-    const evalSpec = load(
+    const evalSpec = parse(
       await readFile(
         join(ROOT, ".github/skills/evals/arm-api-reviewer/vally/eval-typespec.yaml"),
         "utf8",
@@ -1626,7 +1626,7 @@ describe("ARM paging and example enum calibration", () => {
   });
 
   it("maps every EX-PAYLOAD example reference into each enum eval workspace", async () => {
-    const evalSpec = load(
+    const evalSpec = parse(
       await readFile(
         join(ROOT, ".github/skills/evals/arm-api-reviewer/vally/eval-examples.yaml"),
         "utf8",
@@ -1978,7 +1978,7 @@ describe("ARM Reviewer alignment and dependency consistency", () => {
   });
 
   it("keeps EX-PAYLOAD fixtures isolated from title violations", async () => {
-    const evalSpec = load(
+    const evalSpec: unknown = parse(
       await readFile(
         join(ROOT, ".github/skills/evals/arm-api-reviewer/vally/eval-examples.yaml"),
         "utf8",
