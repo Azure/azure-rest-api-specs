@@ -793,10 +793,11 @@ union VoiceAgentInputTranscriptionModel {
   azure_speech: "azure-speech",
 }
 
-@doc("The supported input-transcript profanity filtering modes. Only `masked`, `unfiltered`, and `removed` are accepted; `raw` is not supported.")
-@added(Versions.v1)
+@doc("The supported input-transcript profanity filtering modes.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentProfanityFilterMode {
+  string,
+
   @doc("Masks recognized profanity in the transcript.")
   masked: "masked",
 
@@ -839,7 +840,6 @@ model VoiceAgentInputTranscription {
     detection, and assistant speech are unchanged; audio-native models still receive the original audio.
     Mandatory service masking policies still apply, including when `unfiltered` is requested.
     """)
-  @added(Versions.v1)
   profanity_filter?: VoiceAgentProfanityFilterMode | null;
 }
 

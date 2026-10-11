@@ -3545,7 +3545,7 @@
             "explode": false
           },
           {
-            "name": "structured_input",
+            "name": "structured_inputs",
             "in": "query",
             "required": false,
             "description": "Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and\nURL-encoded as this query parameter. Supplied values override definition defaults when rendering the\nagent's instructions and session-start greeting for this session only. The decoded value must be a JSON\nobject no larger than 32 KiB with a maximum nesting depth of 16.",
@@ -95279,13 +95279,20 @@
         }
       },
       "VoiceAgentProfanityFilterMode": {
-        "type": "string",
-        "enum": [
-          "masked",
-          "unfiltered",
-          "removed"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "masked",
+              "unfiltered",
+              "removed"
+            ]
+          }
         ],
-        "description": "The supported input-transcript profanity filtering modes. Only `masked`, `unfiltered`, and `removed` are accepted; `raw` is not supported.",
+        "description": "The supported input-transcript profanity filtering modes.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

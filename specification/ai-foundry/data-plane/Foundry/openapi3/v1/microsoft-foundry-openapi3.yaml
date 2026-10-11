@@ -2376,7 +2376,7 @@ paths:
           schema:
             type: boolean
           explode: false
-        - name: structured_input
+        - name: structured_inputs
           in: query
           required: false
           description: |-
@@ -87506,12 +87506,14 @@ components:
         required_previews:
           - VoiceAgents=V1Preview
     VoiceAgentProfanityFilterMode:
-      type: string
-      enum:
-        - masked
-        - unfiltered
-        - removed
-      description: The supported input-transcript profanity filtering modes. Only `masked`, `unfiltered`, and `removed` are accepted; `raw` is not supported.
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - masked
+            - unfiltered
+            - removed
+      description: The supported input-transcript profanity filtering modes.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
