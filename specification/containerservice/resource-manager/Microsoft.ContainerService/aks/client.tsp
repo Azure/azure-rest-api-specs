@@ -252,6 +252,7 @@ using Microsoft.ContainerService;
 @@clientName(ManagedClusterAddonProfile.enabled, "IsEnabled", "csharp");
 @@clientName(ManagedClusterPodIdentityProfile.enabled, "IsEnabled", "csharp");
 @@clientName(WindowsGmsaProfile.enabled, "IsEnabled", "csharp");
+@@clientName(UpgradeGateSettings.enabled, "IsEnabled", "csharp");
 @@clientName(TimeSpan.start, "StartOn", "csharp");
 @@clientName(TimeSpan.end, "EndOn", "csharp");
 @@clientName(KubeletConfig.failSwapOn, "ShouldFailStartWithSwapOn", "csharp");
