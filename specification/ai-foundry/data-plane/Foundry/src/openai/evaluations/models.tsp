@@ -1,6 +1,8 @@
+import "../../common/custom-types.tsp";
 import "../../common/models.tsp";
 import "../../common/servicepatterns.tsp";
 import "../../data_generation_jobs/models.tsp";
+import "../../evaluators/models.tsp";
 import "../../red-teams/models.tsp";
 import "./common.tsp";
 import "./user_conversation_simulation.tsp";
