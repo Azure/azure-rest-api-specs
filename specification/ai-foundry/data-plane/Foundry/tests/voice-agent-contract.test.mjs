@@ -17,7 +17,10 @@ import {
   NodeHost,
   resolveCompilerOptions,
 } from "@typespec/compiler";
-import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
+import {
+  createSdkContext,
+  isInScope,
+} from "@azure-tools/typespec-client-generator-core";
 
 const project = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const repo = resolve(project, "../../../..");
@@ -311,7 +314,7 @@ test("only the native server discriminator gains the six Foundry managed-delegat
     if (name === "LiveServerEventType") {
       expected.push(
         ...managedEventKinds.map((stage) =>
-          JSON.stringify(`session.managed_delegation.${stage}`),
+          JSON.stringify(`session.managed_agent_delegation.${stage}`),
         ),
       );
     }
@@ -349,7 +352,7 @@ test("managed lifecycle notifications contain only correlation and failure detai
     const p = fields(model);
     assert.equal(
       p.get("type").type.value,
-      `session.managed_delegation.${stage}`,
+      `session.managed_agent_delegation.${stage}`,
     );
     assert.deepEqual(
       [...p.keys()].sort(),
@@ -388,7 +391,7 @@ test("managed output_item streams an indexed result, not a delegation snapshot",
   for (const field of p.values()) assert.equal(field.optional, false);
   assert.equal(
     p.get("type").type.value,
-    "session.managed_delegation.output_item",
+    "session.managed_agent_delegation.output_item",
   );
   assert.equal(getTypeName(p.get("output_index").type), "int32");
   assert.equal(getMinValue(program, p.get("output_index")), 0);
@@ -398,7 +401,7 @@ test("managed output_item streams an indexed result, not a delegation snapshot",
   );
   assert.ok(
     ![...type("OpenAI.LiveClientEventType").variants.values()].some(
-      (v) => v.type.value === "session.managed_delegation.output_item",
+      (v) => v.type.value === "session.managed_agent_delegation.output_item",
     ),
   );
 });
@@ -479,7 +482,7 @@ test("delegation results contain only optional commentary and thinking strings",
 const resultText = { commentary: "Say: Yesterday I went to school." };
 const samples = managedStages.map((stage) => {
   const payload = {
-    type: `session.managed_delegation.${stage}`,
+    type: `session.managed_agent_delegation.${stage}`,
     event_id: `evt_managed_${stage}`,
     delegation_id: "del_1",
   };
@@ -513,7 +516,7 @@ const outputSamples = [
 ].map((payload, index) => ({
   model: managedModel("output_item"),
   payload: {
-    type: "session.managed_delegation.output_item",
+    type: "session.managed_agent_delegation.output_item",
     event_id: `evt_output_${index}`,
     ...payload,
   },
@@ -583,6 +586,43 @@ test("lifecycle, streamed output, and native startup examples validate", async (
     ...outputSamples,
   ]);
   checkErrors(result.diagnostics);
+});
+
+test("managed-agent events do not retain the old event-name prefix", async () => {
+  const serverTypes = [...type("OpenAI.LiveServerEventType").variants.values()]
+    .map((variant) => variant.type.value)
+    .filter((value) => typeof value === "string");
+  assert.ok(
+    !serverTypes.some((value) =>
+      value.startsWith("session.managed_delegation."),
+    ),
+  );
+  for (const kind of managedEventKinds)
+    assert.ok(serverTypes.includes(`session.managed_agent_delegation.${kind}`));
+
+  const oldExamples = managedEventKinds.map((kind) => {
+    const sample = structuredClone(
+      kind === "output_item"
+        ? outputSamples[0]
+        : samples.find((sample) => sample.model === managedModel(kind)),
+    );
+    sample.payload.type = `session.managed_delegation.${kind}`;
+    return sample;
+  });
+  const result = await validateExamples(
+    "removed-managed-event-prefix",
+    oldExamples,
+  );
+  const errors = result.diagnostics.filter((d) => d.severity === "error");
+  assert.equal(errors.length, oldExamples.length);
+  assert.ok(
+    errors.every((d) => ["invalid-argument", "unassignable"].includes(d.code)),
+  );
+  for (const sample of oldExamples)
+    assert.ok(
+      errors.some((d) => d.message.includes(sample.payload.type)),
+      sample.payload.type,
+    );
 });
 
 test("malformed lifecycle payloads are rejected by the actual TypeSpec models", async () => {
@@ -959,22 +999,94 @@ test("SDK metadata exports native events and separate Live persistence discrimin
   );
 });
 
+test("Java SDK customization targets Realtime fields and keeps Live events without HTTP upgrade methods", async () => {
+  const entrypoint = join(project, "src/sdk-java-azure-ai-agents/client.tsp");
+  const [options, diagnostics] = await resolveCompilerOptions(NodeHost, {
+    entrypoint,
+    cwd: project,
+  });
+  checkErrors(diagnostics);
+  const sdkProgram = await compile(NodeHost, entrypoint, {
+    ...options,
+    noEmit: true,
+  });
+  checkErrors(sdkProgram.diagnostics);
+  const context = await createSdkContext(
+    {
+      program: sdkProgram,
+      options: { "api-version": "v1" },
+      emitterOutputDir: output,
+    },
+    "@azure-tools/typespec-java",
+  );
+  checkErrors(context.diagnostics);
+  const model = (name) => {
+    const value = context.sdkPackage.models.find((m) => m.__raw?.name === name);
+    assert.ok(value, `Java SDK metadata missing ${name}`);
+    return value;
+  };
+
+  const realtime = type(
+    "Azure.AI.Projects.VoiceAgentRealtimeDefinition",
+    sdkProgram,
+  );
+  assert.equal(
+    realtime.properties.get("tool_choice").type.name,
+    "ToolChoiceValue",
+  );
+  assert.equal(
+    model("VoiceAgentRealtimeDefinition").properties.find(
+      (p) => p.serializedName === "subagent_config",
+    ).name,
+    "subagentConfiguration",
+  );
+  assert.equal(
+    fields(type("Azure.AI.Projects.VoiceAgentDefinition", sdkProgram)).has(
+      "tool_choice",
+    ),
+    false,
+  );
+  assert.equal(
+    fields(type("Azure.AI.Projects.VoiceAgentLiveDefinition", sdkProgram)).has(
+      "tool_choice",
+    ),
+    false,
+  );
+
+  for (const name of [
+    "Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent",
+    "Azure.AI.Projects.VoiceAgentLiveWebSocket.connectLiveVoiceAgent",
+  ])
+    assert.equal(isInScope(context, type(name, sdkProgram)), false, name);
+  for (const name of ["LiveClientEvent", "LiveServerEvent"]) {
+    assert.equal(model(name).access, "public");
+  }
+  for (const kind of managedEventKinds) {
+    const event = model(managedModel(kind).split(".").at(-1));
+    assert.equal(event.baseModel, model("LiveServerEvent"));
+    assert.equal(
+      event.discriminatorValue,
+      `session.managed_agent_delegation.${kind}`,
+    );
+  }
+});
+
 test("cancel is server-only and the removed request event has no typed variant", () => {
   const literals = (root) =>
     [...type(root).variants.values()].map((v) => v.type.value);
   assert.ok(
     literals("OpenAI.LiveServerEventType").includes(
-      "session.managed_delegation.cancel",
+      "session.managed_agent_delegation.cancel",
     ),
   );
   assert.ok(
     !literals("OpenAI.LiveServerEventType").includes(
-      "session.managed_delegation.request",
+      "session.managed_agent_delegation.request",
     ),
   );
   assert.ok(
     !literals("OpenAI.LiveClientEventType").includes(
-      "session.managed_delegation.cancel",
+      "session.managed_agent_delegation.cancel",
     ),
   );
   assert.ok(

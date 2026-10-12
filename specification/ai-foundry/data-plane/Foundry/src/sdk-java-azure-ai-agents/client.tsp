@@ -63,6 +63,7 @@ using Azure.AI.Projects;
 // Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
+@@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!java");
 
 // Keep the OpenAI realtime discriminator roots reachable even though the WebSocket operation is excluded.
 @@usage(OpenAI.RealtimeClientEvent, Usage.input | Usage.json);
@@ -587,7 +588,10 @@ using Azure.AI.Projects;
   "java"
 );
 @@clientName(OpenAI.TranscriptTextUsageDuration.seconds, "duration", "java");
-@@clientName(VoiceAgentDefinition.subagent_config, "subagentConfiguration");
+@@clientName(
+  VoiceAgentRealtimeDefinition.subagent_config,
+  "subagentConfiguration"
+);
 @@clientName(
   VoiceAgentEndOfUtteranceDetectionModel.semantic_detection_v1_en,
   "SEMANTIC_DETECTION_V1_ENGLISH"
@@ -1193,7 +1197,7 @@ union ToolChoiceValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@changePropertyType(VoiceAgentDefinition.tool_choice, ToolChoiceValue);
+@@changePropertyType(VoiceAgentRealtimeDefinition.tool_choice, ToolChoiceValue);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(
   VoiceAgentLlmGeneratedGreetingConfig.tool_choice,

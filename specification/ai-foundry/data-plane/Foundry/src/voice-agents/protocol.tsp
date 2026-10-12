@@ -793,12 +793,12 @@ alias VoiceAgentLiveServerEvent = OpenAI.LiveServerEvent;
 @doc("Additional server-event types for Foundry managed prompt-agent delegation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentLiveServerEventTypeExtension {
-  managed_delegation_started: "session.managed_delegation.started",
-  managed_delegation_progress: "session.managed_delegation.progress",
-  managed_delegation_completed: "session.managed_delegation.completed",
-  managed_delegation_failed: "session.managed_delegation.failed",
-  managed_delegation_cancel: "session.managed_delegation.cancel",
-  managed_delegation_output_item: "session.managed_delegation.output_item",
+  managed_agent_delegation_started: "session.managed_agent_delegation.started",
+  managed_agent_delegation_progress: "session.managed_agent_delegation.progress",
+  managed_agent_delegation_completed: "session.managed_agent_delegation.completed",
+  managed_agent_delegation_failed: "session.managed_agent_delegation.failed",
+  managed_agent_delegation_cancel: "session.managed_agent_delegation.cancel",
+  managed_agent_delegation_output_item: "session.managed_agent_delegation.output_item",
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Register Foundry server events in the native discriminator, following the existing realtime protocol extension pattern."
@@ -830,15 +830,15 @@ alias VoiceAgentLiveManagedDelegationEventCorrelation = {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveManagedDelegationStartedEvent
   extends OpenAI.LiveServerEvent {
-  type: "session.managed_delegation.started";
+  type: "session.managed_agent_delegation.started";
   ...VoiceAgentLiveManagedDelegationEventCorrelation;
 }
 
-@doc("The managed invocation is still progressing. This notification only identifies the delegation; new results arrive separately in session.managed_delegation.output_item events.")
+@doc("The managed invocation is still progressing. This notification only identifies the delegation; new results arrive separately in session.managed_agent_delegation.output_item events.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveManagedDelegationProgressEvent
   extends OpenAI.LiveServerEvent {
-  type: "session.managed_delegation.progress";
+  type: "session.managed_agent_delegation.progress";
   ...VoiceAgentLiveManagedDelegationEventCorrelation;
 }
 
@@ -846,7 +846,7 @@ model VoiceAgentLiveManagedDelegationProgressEvent
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveManagedDelegationCompletedEvent
   extends OpenAI.LiveServerEvent {
-  type: "session.managed_delegation.completed";
+  type: "session.managed_agent_delegation.completed";
   ...VoiceAgentLiveManagedDelegationEventCorrelation;
 }
 
@@ -854,7 +854,7 @@ model VoiceAgentLiveManagedDelegationCompletedEvent
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveManagedDelegationFailedEvent
   extends OpenAI.LiveServerEvent {
-  type: "session.managed_delegation.failed";
+  type: "session.managed_agent_delegation.failed";
   ...VoiceAgentLiveManagedDelegationEventCorrelation;
 
   @doc("A machine-readable code identifying the managed delegation failure.")
@@ -868,7 +868,7 @@ model VoiceAgentLiveManagedDelegationFailedEvent
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveManagedDelegationCancelEvent
   extends OpenAI.LiveServerEvent {
-  type: "session.managed_delegation.cancel";
+  type: "session.managed_agent_delegation.cancel";
   ...VoiceAgentLiveManagedDelegationEventCorrelation;
 }
 
@@ -876,7 +876,7 @@ model VoiceAgentLiveManagedDelegationCancelEvent
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveManagedDelegationOutputItemEvent
   extends OpenAI.LiveServerEvent {
-  type: "session.managed_delegation.output_item";
+  type: "session.managed_agent_delegation.output_item";
   ...VoiceAgentLiveManagedDelegationEventCorrelation;
 
   @doc("The zero-based position of this result in the delegation's output array. Scoped to delegation_id, not to the whole Live session.")
