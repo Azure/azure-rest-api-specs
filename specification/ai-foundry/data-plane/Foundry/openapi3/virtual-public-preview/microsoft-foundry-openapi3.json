@@ -42838,6 +42838,67 @@
           ]
         }
       },
+      "CloudComputerUsePreviewTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "cloud_pc_pool_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "cloud_computer_use_preview"
+            ],
+            "description": "The object type, which is always `cloud_computer_use_preview`."
+          },
+          "cloud_pc_pool_id": {
+            "type": "string",
+            "description": "The ID of the Windows 365 Cloud PC pool used by the tool at runtime."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "The input definition information for a cloud computer use tool, as used to configure an agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "preview_tool"
+          ]
+        }
+      },
+      "CloudComputerUsePreviewToolboxTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "cloud_pc_pool_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "cloud_computer_use_preview"
+            ]
+          },
+          "cloud_pc_pool_id": {
+            "type": "string",
+            "description": "The ID of the Windows 365 Cloud PC pool used by the tool at runtime."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ToolboxTool"
+          }
+        ],
+        "description": "A cloud computer use tool stored in a toolbox.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "preview_tool"
+          ]
+        }
+      },
       "ClusterInsightResult": {
         "type": "object",
         "required": [
@@ -88297,6 +88358,7 @@
             "openapi": "#/components/schemas/OpenApiTool",
             "bing_custom_search_preview": "#/components/schemas/BingCustomSearchPreviewTool",
             "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewTool",
+            "cloud_computer_use_preview": "#/components/schemas/CloudComputerUsePreviewTool",
             "browser_automation": "#/components/schemas/BrowserAutomationTool",
             "azure_function": "#/components/schemas/AzureFunctionTool",
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
@@ -88838,6 +88900,7 @@
               "a2a_preview",
               "bing_custom_search_preview",
               "browser_automation_preview",
+              "cloud_computer_use_preview",
               "fabric_dataagent_preview",
               "sharepoint_grounding_preview",
               "memory_search_preview",
@@ -98325,6 +98388,7 @@
             "a2a": "#/components/schemas/A2AToolboxTool",
             "a2a_preview": "#/components/schemas/A2APreviewToolboxTool",
             "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewToolboxTool",
+            "cloud_computer_use_preview": "#/components/schemas/CloudComputerUsePreviewToolboxTool",
             "browser_automation": "#/components/schemas/BrowserAutomationToolboxTool",
             "reminder_preview": "#/components/schemas/ReminderPreviewToolboxTool",
             "work_iq_preview": "#/components/schemas/WorkIQPreviewToolboxTool",
@@ -98347,6 +98411,7 @@
           "openapi",
           "a2a_preview",
           "browser_automation_preview",
+          "cloud_computer_use_preview",
           "reminder_preview",
           "work_iq_preview",
           "fabric_iq_preview",
