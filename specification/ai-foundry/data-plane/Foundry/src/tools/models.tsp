@@ -15,9 +15,11 @@ namespace Azure.AI.Projects {
     a2a_preview: "a2a_preview",
     bing_custom_search_preview: "bing_custom_search_preview",
     browser_automation_preview: "browser_automation_preview",
+
     @added(Versions.PuPr)
     @removed(Versions.v1)
     cloud_computer_use_preview: "cloud_computer_use_preview",
+
     fabric_dataagent_preview: "fabric_dataagent_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
     memory_search_preview: "memory_search_preview",
