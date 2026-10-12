@@ -815,7 +815,7 @@ union VoiceAgentLiveServerEventTypeExtension {
 @@copyProperties(
   OpenAI.LiveServerEventLiveSessionStarted,
   {
-    @doc("The Foundry conversation ID, present when this connection's effective store setting is true. Use it with the existing voice conversation APIs. This is separate from session.id and does not enable native Live recording storage.")
+    @doc("The Foundry conversation ID, present when this connection's effective store setting is true. Use it with protocols/voice/live/conversations. This is separate from session.id and does not enable native Live recording storage.")
     conversation_id?: string,
   }
 );

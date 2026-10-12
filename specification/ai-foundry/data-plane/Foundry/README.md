@@ -74,8 +74,9 @@ pnpm exec node --test specification/ai-foundry/data-plane/Foundry/tests/voice-ag
 
 These checks compile both Foundry API versions, compare the imported Live models with the published
 OpenAI package using an explicit allowlist for Foundry server extensions, and verify the agent
-hierarchy, managed-agent delegation, lifecycle payloads, stored delegation items and their isolation
-from realtime inference, SDK model metadata, and WebSocket handshake.
+hierarchy, managed-agent delegation, lifecycle payloads, SDK model metadata, and WebSocket handshake.
+They also verify the separate Live conversation routes, input/output/delegation item discriminators,
+shared audio metadata, and unchanged Realtime item references.
 They do not generate a client SDK or call the running agent service.
 
 ## Emitting Python code

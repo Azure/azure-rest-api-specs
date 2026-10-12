@@ -18,6 +18,9 @@
       "name": "Agent Conversations"
     },
     {
+      "name": "Agent Live Conversations"
+    },
+    {
       "name": "Agent Telephony"
     },
     {
@@ -4110,7 +4113,7 @@
       "get": {
         "operationId": "AgentEndpointConversations_listAgentConversationItems",
         "summary": "List items in a voice agent conversation",
-        "description": "Returns a paged collection of items — the complete ordered conversation history, including user input,\nassistant output, client-created tool outputs, and Live delegation items (`type: live_delegation`).\nDelegation items contain captured execution data, not spoken transcripts. Returns `404` when the\nconversation was not persisted (`store = false`).",
+        "description": "Returns a paged collection of items — the complete ordered conversation history, including user input,\nassistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the\nconversation was not persisted (`store = false`).",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -4210,14 +4213,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "anyOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
-                          },
-                          {
-                            "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
-                          }
-                        ]
+                        "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
                       },
                       "description": "The requested list of items."
                     },
@@ -4274,7 +4270,7 @@
       "get": {
         "operationId": "AgentEndpointConversations_getAgentConversationItem",
         "summary": "Get a voice agent conversation item",
-        "description": "Retrieves a single item from the specified conversation by its id, including its transcript or\ncaptured Live delegation data. An\n`input_audio`/`output_audio` content part indicates that audio is available for the item; the canonical per-item\naudio metadata is the `/items/{item_id}/audio` resource, and the bytes are streamed by\n`/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted\n(`store = false`).",
+        "description": "Retrieves a single item from the specified conversation by its id, including its transcript. An\n`input_audio`/`output_audio` content part indicates that audio is available for the item; the canonical per-item\naudio metadata is the `/items/{item_id}/audio` resource, and the bytes are streamed by\n`/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted\n(`store = false`).",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -4332,14 +4328,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
-                    },
-                    {
-                      "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
                 }
               }
             }
@@ -5135,14 +5124,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "anyOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
-                          },
-                          {
-                            "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
-                          }
-                        ]
+                        "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
                       },
                       "description": "The requested list of items."
                     },
@@ -5187,6 +5169,952 @@
         },
         "tags": [
           "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_listLiveAgentConversations",
+        "summary": "List Live voice agent conversations",
+        "description": "Lists conversations persisted for a Live voice agent. The effective store setting includes the session override. Only Live conversations are returned.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/VoiceAgentLiveConversation"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_getLiveAgentConversation",
+        "summary": "Get a Live voice agent conversation",
+        "description": "Retrieves one persisted Live conversation by its Foundry conversation ID. Items are retrieved separately through the items route. Returns 404 when the conversation does not exist or was not stored.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceAgentLiveConversation"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "AgentEndpointLiveConversations_deleteLiveAgentConversation",
+        "summary": "Delete a Live voice agent conversation",
+        "description": "Deletes a stored Live conversation and its input, output, delegation, and audio data. This is Foundry persistence deletion, not an upstream native Live session control.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/audio": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_getLiveAgentConversationAudio",
+        "summary": "Get a Live conversation's merged recording metadata",
+        "description": "Returns shared whole-conversation stereo recording metadata: user audio on the left, assistant audio on the right. For BYOS, blob_uri points to customer storage without a SAS token. Returns 409 recording_not_ready while finalization is pending, with Retry-After when available; 409 recording_unavailable after failed finalization; or 404 when no stored audio exists. The recording is derived from captured Live audio, not native response turns or proof of playback.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceRecording"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/audio/content": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_getLiveAgentConversationAudioContent",
+        "summary": "Stream a Live conversation's merged recording",
+        "description": "Streams the merged captured Live recording as stereo WAV without a SAS URL. Foundry-managed storage only; BYOS returns 409 and callers use the metadata blob_uri. Returns 409 recording_not_ready while finalization is pending, 409 recording_unavailable after failed finalization, or 404 when no stored audio exists.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.",
+            "content": {
+              "audio/wav": {
+                "schema": {
+                  "contentMediaType": "audio/wav"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_listLiveAgentConversationItems",
+        "summary": "List items in a Live voice agent conversation",
+        "description": "Returns the ordered persisted input, output, and delegation items. Pagination cursors refer to the item's id. These items are independent of Realtime messages and do not imply native Live turns. Returns 404 when the conversation was not stored or does not exist.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/VoiceAgentLiveConversationItem"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_getLiveAgentConversationItem",
+        "summary": "Get a Live voice agent conversation item",
+        "description": "Retrieves a persisted Live input, output, or delegation item by its id. For delegation items, id is the native delegation id. Returns 404 when the conversation or item was not stored or does not exist.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id returned on the persisted item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceAgentLiveConversationItem"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}/audio": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_getLiveAgentConversationAudioItem",
+        "summary": "Get a Live conversation item's audio metadata",
+        "description": "Returns the existing voice audio metadata shape for a captured Live input or output segment. For BYOS, blob_uri identifies customer storage without a SAS token; otherwise bytes are retrieved through this Live item's audio/content route. Captured output does not prove client playback. Returns 404 for delegation items, absent audio, or unstored conversations.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id returned on the persisted item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceAudioItem"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}/audio/content": {
+      "get": {
+        "operationId": "AgentEndpointLiveConversations_getLiveAgentConversationAudioItemContent",
+        "summary": "Stream a Live conversation item's audio",
+        "description": "Streams captured Live input or output audio as WAV through the service, without a SAS URL. Foundry-managed storage only; BYOS callers use the metadata blob_uri and this route returns 409. Returns 404 for delegation items, absent audio, or unstored conversations.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Live voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The Foundry conversation ID returned in session.started.conversation_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id returned on the persisted item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.",
+            "content": {
+              "audio/wav": {
+                "schema": {
+                  "contentMediaType": "audio/wav"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Live Conversations"
         ],
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -69994,6 +70922,19 @@
         ],
         "description": "Raw, mono G.711 μ-law audio for a Live WebSocket connection."
       },
+      "OpenAI.LiveSessionUsage": {
+        "type": "object",
+        "required": [
+          "seconds"
+        ],
+        "properties": {
+          "seconds": {
+            "$ref": "#/components/schemas/OpenAI.numeric",
+            "description": "The cumulative Live audio duration in seconds. Do not sum this value across usage events."
+          }
+        },
+        "description": "Cumulative audio duration for a Live session. Values are totals for the session, not increments to sum across usage events."
+      },
       "OpenAI.LiveTextVerbosity": {
         "type": "string",
         "enum": [
@@ -93521,7 +94462,7 @@
           },
           "store": {
             "type": "boolean",
-            "description": "Whether Foundry persists the conversation and audio. Defaults to false. Both protocols use the same conversation retrieval experience. For Live, Foundry derives persisted turns from the native audio/transcript timeline; those projected turns do not change the inference events. This does not enable native GPT Live recording/fork storage.",
+            "description": "Whether Foundry persists the conversation and audio. Defaults to false. Realtime uses protocols/voice/conversations; Live uses protocols/voice/live/conversations with persisted input, output, and delegation items. Foundry groups Live speech segments from the audio/transcript timeline without introducing native turns or changing inference events. This does not enable native GPT Live recording/fork storage.",
             "default": false
           }
         },
@@ -93905,6 +94846,134 @@
           ]
         }
       },
+      "VoiceAgentLiveClientDelegationConversationItem": {
+        "type": "object",
+        "required": [
+          "target"
+        ],
+        "properties": {
+          "target": {
+            "type": "string",
+            "enum": [
+              "client"
+            ]
+          },
+          "commentary": {
+            "type": "string",
+            "description": "Optional guidance for Live to communicate to the user."
+          },
+          "thinking": {
+            "type": "string",
+            "description": "Optional background context for Live; this does not directly request speech."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
+          }
+        ],
+        "description": "The result supplied by an application for a client-owned delegation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveConversation": {
+        "type": "object",
+        "required": [
+          "id",
+          "object",
+          "status",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique id of the conversation."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "voice.conversation"
+            ],
+            "description": "The object type. Always `voice.conversation`."
+          },
+          "status": {
+            "$ref": "#/components/schemas/VoiceConversationStatus",
+            "description": "The lifecycle status of the conversation."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the conversation was created."
+          },
+          "completed_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when session and persistence finalization reached the terminal `completed` or `failed` status. Absent while `status` is `in_progress`."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "A set of key-value pairs attached to the conversation."
+          },
+          "last_error": {
+            "$ref": "#/components/schemas/OpenAI.Error",
+            "description": "The terminal error that prevented persistence finalization. Present only when `status` is `failed`."
+          },
+          "usage": {
+            "$ref": "#/components/schemas/OpenAI.LiveSessionUsage",
+            "description": "The final observed cumulative Live audio usage. This is separate from delegated backend token usage and may be absent if the session did not finish normally."
+          }
+        },
+        "description": "A persisted Live session, available only when the effective store setting is true. Items are retrieved through the Live conversation items route; Live does not expose Realtime response/turn resources. Lifecycle, retention, and audio retrieval follow the existing Foundry voice experience.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveConversationItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VoiceAgentLiveConversationItemType",
+            "description": "The persisted item kind."
+          },
+          "id": {
+            "type": "string",
+            "description": "The item ID used by the Live items and item-audio routes. Speech item IDs are assigned by Foundry; delegation items retain the native delegation id."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "input": "#/components/schemas/VoiceAgentLiveInputConversationItem",
+            "output": "#/components/schemas/VoiceAgentLiveOutputConversationItem",
+            "delegation": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
+          }
+        },
+        "description": "A Foundry-owned Live conversation item. Input and output items are persisted speech segments, not native model turns. Delegation items describe delegated work separately from spoken transcription. This hierarchy is independent of Realtime items and native Live inference events.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveConversationItemType": {
+        "type": "string",
+        "enum": [
+          "input",
+          "output",
+          "delegation"
+        ],
+        "description": "The kind of a persisted Live conversation item."
+      },
       "VoiceAgentLiveDelegation": {
         "oneOf": [
           {
@@ -93928,57 +94997,46 @@
         "type": "object",
         "required": [
           "type",
-          "id",
-          "delegation_id",
-          "created_at",
-          "target"
+          "target",
+          "created_at"
         ],
         "properties": {
           "type": {
             "type": "string",
             "enum": [
-              "live_delegation"
+              "delegation"
             ],
-            "description": "The persisted item discriminator."
+            "description": "The object type, always `delegation`.",
+            "x-stainless-const": true,
+            "default": "delegation"
           },
-          "id": {
+          "response_id": {
             "type": "string",
-            "description": "The Foundry conversation item ID, distinct from the native delegation ID."
-          },
-          "delegation_id": {
-            "type": "string",
-            "description": "The originating native Live delegation ID."
-          },
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The service-observed creation time, encoded as Unix seconds."
+            "description": "The ID of the Responses API response associated with a Responses delegation. Omitted for client delegations."
           },
           "target": {
             "$ref": "#/components/schemas/VoiceAgentLiveDelegationTarget",
-            "description": "The configured delegation owner. Foundry-managed prompt agents use foundry_managed_agent, not client."
+            "description": "The configured delegation owner. Foundry-managed prompt agents use foundry_managed_agent here while their native Live transport still uses client delegation."
           },
-          "output": {
-            "type": "string",
-            "description": "Final backend output text for responses delegation. Omitted when final output is unavailable and for other delegation targets. Not raw tool output or streamed event objects."
-          },
-          "commentary": {
-            "type": "string",
-            "description": "Optional guidance for Live to communicate to the user."
-          },
-          "thinking": {
-            "type": "string",
-            "description": "Optional background context for Live; this does not directly request speech."
-          },
-          "delegation_context": {
-            "type": "string",
-            "description": "Plain-text task context for a foundry_managed_agent delegation, when available. Omitted for other targets. This is not the backend request body."
-          },
-          "status": {
-            "$ref": "#/components/schemas/VoiceAgentLiveDelegationStatus",
-            "description": "Execution status for a foundry_managed_agent delegation. Required for that target and omitted for client and responses delegations."
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The service-observed delegation creation time, encoded as Unix seconds."
           }
         },
-        "description": "One stored Live delegation, available only with store enabled. Common fields identify the item, originating delegation, creation time, and configured owner. Responses delegations use only output; client delegations use commentary/thinking; managed-agent delegations use commentary/thinking, optional delegation_context, and required status. Fields for other targets are omitted. This is a Foundry persistence item, not a native inference event or a spoken transcript.",
+        "discriminator": {
+          "propertyName": "target",
+          "mapping": {
+            "client": "#/components/schemas/VoiceAgentLiveClientDelegationConversationItem",
+            "responses": "#/components/schemas/VoiceAgentLiveResponsesDelegationConversationItem",
+            "foundry_managed_agent": "#/components/schemas/VoiceAgentLiveFoundryManagedAgentDelegationConversationItem"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveConversationItem"
+          }
+        ],
+        "description": "A persisted delegation that reuses native OpenAI delegation fields and locally extends target for Foundry-managed agents. The inherited id is the native delegation id, used both for correlation and to retrieve this stored item. This composition does not widen the target or add persistence fields on OpenAI.LiveDelegationItem itself.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -94011,6 +95069,81 @@
           "foundry_managed_agent"
         ],
         "description": "The configured delegation owner recorded by Foundry. A managed prompt agent is distinct here even though its native Live transport uses client delegation."
+      },
+      "VoiceAgentLiveFoundryManagedAgentDelegationConversationItem": {
+        "type": "object",
+        "required": [
+          "target",
+          "status"
+        ],
+        "properties": {
+          "target": {
+            "type": "string",
+            "enum": [
+              "foundry_managed_agent"
+            ]
+          },
+          "commentary": {
+            "type": "string",
+            "description": "Optional guidance for Live to communicate to the user."
+          },
+          "thinking": {
+            "type": "string",
+            "description": "Optional background context for Live; this does not directly request speech."
+          },
+          "delegation_context": {
+            "type": "string",
+            "description": "Plain-text task context supplied to the managed prompt agent, when available. This is not the backend request body."
+          },
+          "status": {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegationStatus",
+            "description": "The managed delegation's execution outcome, independent of Live speech and client playback."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
+          }
+        ],
+        "description": "Context, accepted result text, and execution status for a Foundry-managed prompt-agent delegation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveInputConversationItem": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input"
+            ]
+          },
+          "transcription": {
+            "type": "string",
+            "description": "The captured user transcription, when available. Its grouping is a Foundry persistence projection, not a native Live turn boundary."
+          },
+          "audio": {
+            "$ref": "#/components/schemas/VoiceAudioItem",
+            "description": "Metadata for captured input audio, when available. Reuses the existing voice audio shape; the audio metadata item_id matches this item's id. Bytes are retrieved through the Live item's audio/content route, or directly from blob_uri for BYOS."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveConversationItem"
+          }
+        ],
+        "description": "A persisted user input segment in a Live conversation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentLiveManagedAgentDelegation": {
         "type": "object",
@@ -94053,6 +95186,68 @@
           }
         },
         "description": "A same-project prompt agent executed by Foundry on behalf of the Live frontend. Foundry resolves\nand pins the target version once per voice connection, configures native client delegation upstream,\nand injects the target's validated output using native commentary/thinking messages.\nThis is agent configuration, not an additional OpenAI inference-event variant.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveOutputConversationItem": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "output"
+            ]
+          },
+          "transcription": {
+            "type": "string",
+            "description": "The captured assistant speech transcription, when available. This is not delegated backend output or commentary guidance."
+          },
+          "audio": {
+            "$ref": "#/components/schemas/VoiceAudioItem",
+            "description": "Metadata for captured output audio, when available. Reuses the existing voice audio shape; the audio metadata item_id matches this item's id. Bytes are retrieved through the Live item's audio/content route, or directly from blob_uri for BYOS."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveConversationItem"
+          }
+        ],
+        "description": "A persisted assistant output segment in a Live conversation. Captured output does not prove that the client played the audio.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveResponsesDelegationConversationItem": {
+        "type": "object",
+        "required": [
+          "target"
+        ],
+        "properties": {
+          "target": {
+            "type": "string",
+            "enum": [
+              "responses"
+            ]
+          },
+          "output": {
+            "type": "string",
+            "description": "Final backend output text, omitted when no final output is available. This is not raw tool output or a stream of backend events."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
+          }
+        ],
+        "description": "Final text from a native Responses delegation, separate from what Live actually spoke.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -95364,16 +96559,9 @@
           "output": {
             "type": "array",
             "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
-                },
-                {
-                  "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
-                }
-              ]
+              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
             },
-            "description": "The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. A native transcript or tool item's `response_id` also links it back to this response in the conversation-level items list; Live delegation items are correlated by `delegation_id`."
+            "description": "The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list."
           },
           "conversation_id": {
             "type": "string",

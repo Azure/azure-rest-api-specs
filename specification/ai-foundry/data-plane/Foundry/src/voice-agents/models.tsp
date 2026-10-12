@@ -128,8 +128,8 @@ model VoiceResponse extends VoiceResponseBase {
   @doc("The unique id of the response.")
   id: string;
 
-  @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. A native transcript or tool item's `response_id` also links it back to this response in the conversation-level items list; Live delegation items are correlated by `delegation_id`.")
-  output?: VoiceConversationItem[];
+  @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.")
+  output?: OpenAI.RealtimeConversationItem[];
 
   @doc("The id of the conversation this response belongs to.")
   conversation_id: string;
@@ -173,14 +173,6 @@ union VoiceAgentLiveFailureContextStatus {
   skipped: "skipped",
 }
 
-// A source-only alias, not a new named item hierarchy. The read APIs can return
-// native Realtime items or a stored Live delegation without extending inference.
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "This read-only alias reuses the native realtime hierarchy without adding a Live persistence item to inference."
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Reuse the two existing item shapes through a source-only alias instead of introducing another named conversation item type."
-alias VoiceConversationItem =
-  | OpenAI.RealtimeConversationItem
-  | VoiceAgentLiveDelegationConversationItem;
-
 @doc("The configured delegation owner recorded by Foundry. A managed prompt agent is distinct here even though its native Live transport uses client delegation.")
 union VoiceAgentLiveDelegationTarget {
   responses: "responses",
@@ -198,34 +190,106 @@ union VoiceAgentLiveDelegationStatus {
   cancelled: "cancelled",
 }
 
-@doc("One stored Live delegation, available only with store enabled. Common fields identify the item, originating delegation, creation time, and configured owner. Responses delegations use only output; client delegations use commentary/thinking; managed-agent delegations use commentary/thinking, optional delegation_context, and required status. Fields for other targets are omitted. This is a Foundry persistence item, not a native inference event or a spoken transcript.")
+@doc("A persisted Live session, available only when the effective store setting is true. Items are retrieved through the Live conversation items route; Live does not expose Realtime response/turn resources. Lifecycle, retention, and audio retrieval follow the existing Foundry voice experience.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveDelegationConversationItem {
-  @doc("The persisted item discriminator.")
-  type: "live_delegation";
+model VoiceAgentLiveConversation {
+  ...OmitProperties<VoiceConversation, "usage">;
 
-  @doc("The Foundry conversation item ID, distinct from the native delegation ID.")
+  @doc("The final observed cumulative Live audio usage. This is separate from delegated backend token usage and may be absent if the session did not finish normally.")
+  usage?: OpenAI.LiveSessionUsage;
+}
+
+@doc("The kind of a persisted Live conversation item.")
+union VoiceAgentLiveConversationItemType {
+  input: "input",
+  output: "output",
+  delegation: "delegation",
+}
+
+@doc("A Foundry-owned Live conversation item. Input and output items are persisted speech segments, not native model turns. Delegation items describe delegated work separately from spoken transcription. This hierarchy is independent of Realtime items and native Live inference events.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveConversationItem {
+  @doc("The persisted item kind.")
+  type: VoiceAgentLiveConversationItemType;
+
+  @doc("The item ID used by the Live items and item-audio routes. Speech item IDs are assigned by Foundry; delegation items retain the native delegation id.")
   id: string;
+}
 
-  @doc("The originating native Live delegation ID.")
-  delegation_id: string;
+@doc("A persisted user input segment in a Live conversation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveInputConversationItem
+  extends VoiceAgentLiveConversationItem {
+  type: "input";
 
-  @doc("The service-observed creation time, encoded as Unix seconds.")
-  created_at: FoundryTimestamp;
+  @doc("The captured user transcription, when available. Its grouping is a Foundry persistence projection, not a native Live turn boundary.")
+  transcription?: string;
 
-  @doc("The configured delegation owner. Foundry-managed prompt agents use foundry_managed_agent, not client.")
+  @doc("Metadata for captured input audio, when available. Reuses the existing voice audio shape; the audio metadata item_id matches this item's id. Bytes are retrieved through the Live item's audio/content route, or directly from blob_uri for BYOS.")
+  audio?: VoiceAudioItem;
+}
+
+@doc("A persisted assistant output segment in a Live conversation. Captured output does not prove that the client played the audio.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveOutputConversationItem
+  extends VoiceAgentLiveConversationItem {
+  type: "output";
+
+  @doc("The captured assistant speech transcription, when available. This is not delegated backend output or commentary guidance.")
+  transcription?: string;
+
+  @doc("Metadata for captured output audio, when available. Reuses the existing voice audio shape; the audio metadata item_id matches this item's id. Bytes are retrieved through the Live item's audio/content route, or directly from blob_uri for BYOS.")
+  audio?: VoiceAudioItem;
+}
+
+@doc("A persisted delegation that reuses native OpenAI delegation fields and locally extends target for Foundry-managed agents. The inherited id is the native delegation id, used both for correlation and to retrieve this stored item. This composition does not widen the target or add persistence fields on OpenAI.LiveDelegationItem itself.")
+@discriminator("target")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveDelegationConversationItem
+  extends VoiceAgentLiveConversationItem {
+  // id is already declared by the common item base and retains the native id.
+  // Reuse native type and response_id; replace the closed target only on this
+  // stored Foundry projection, never on native inference.
+  ...OmitProperties<OpenAI.LiveDelegationItem, "id" | "target">;
+
+  @doc("The configured delegation owner. Foundry-managed prompt agents use foundry_managed_agent here while their native Live transport still uses client delegation.")
   target: VoiceAgentLiveDelegationTarget;
 
-  @doc("Final backend output text for responses delegation. Omitted when final output is unavailable and for other delegation targets. Not raw tool output or streamed event objects.")
-  output?: string;
+  @doc("The service-observed delegation creation time, encoded as Unix seconds.")
+  created_at: FoundryTimestamp;
+}
 
+@doc("The result supplied by an application for a client-owned delegation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveClientDelegationConversationItem
+  extends VoiceAgentLiveDelegationConversationItem {
+  target: "client";
+  ...VoiceAgentLiveDelegationResultItem;
+}
+
+@doc("Final text from a native Responses delegation, separate from what Live actually spoke.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveResponsesDelegationConversationItem
+  extends VoiceAgentLiveDelegationConversationItem {
+  target: "responses";
+
+  @doc("Final backend output text, omitted when no final output is available. This is not raw tool output or a stream of backend events.")
+  output?: string;
+}
+
+@doc("Context, accepted result text, and execution status for a Foundry-managed prompt-agent delegation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveFoundryManagedAgentDelegationConversationItem
+  extends VoiceAgentLiveDelegationConversationItem {
+  target: "foundry_managed_agent";
   ...VoiceAgentLiveDelegationResultItem;
 
-  @doc("Plain-text task context for a foundry_managed_agent delegation, when available. Omitted for other targets. This is not the backend request body.")
+  @doc("Plain-text task context supplied to the managed prompt agent, when available. This is not the backend request body.")
   delegation_context?: string;
 
-  @doc("Execution status for a foundry_managed_agent delegation. Required for that target and omitted for client and responses delegations.")
-  status?: VoiceAgentLiveDelegationStatus;
+  @doc("The managed delegation's execution outcome, independent of Live speech and client playback.")
+  status: VoiceAgentLiveDelegationStatus;
 }
 
 // ---------------------------------------------------------------------------

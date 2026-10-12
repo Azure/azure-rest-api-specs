@@ -128,7 +128,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Structured inputs rendered into frontend instructions before the session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
-  @doc("Whether Foundry persists the conversation and audio. Defaults to false. Both protocols use the same conversation retrieval experience. For Live, Foundry derives persisted turns from the native audio/transcript timeline; those projected turns do not change the inference events. This does not enable native GPT Live recording/fork storage.")
+  @doc("Whether Foundry persists the conversation and audio. Defaults to false. Realtime uses protocols/voice/conversations; Live uses protocols/voice/live/conversations with persisted input, output, and delegation items. Foundry groups Live speech segments from the audio/transcript timeline without introducing native turns or changing inference events. This does not enable native GPT Live recording/fork storage.")
   store?: boolean = false;
 }
 
