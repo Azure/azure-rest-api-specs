@@ -23,6 +23,7 @@ using Azure.Core.Experimental;
 using TypeSpec.Http;
 
 using Azure.AI.Projects;
+using Microsoft.Foundry.Core;
 
 // Pin generated model names after migrating PageOrder/JobStatus to reuse the
 // Microsoft.Foundry.Core library union definitions.

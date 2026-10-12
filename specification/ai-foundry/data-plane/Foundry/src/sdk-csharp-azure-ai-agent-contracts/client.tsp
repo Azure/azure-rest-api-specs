@@ -13,6 +13,7 @@ import "../toolboxes/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
+using Microsoft.Foundry.Core;
 
 @clientNamespace("Azure.AI.Agents.Contracts.V2.Models")
 namespace OpenAI {

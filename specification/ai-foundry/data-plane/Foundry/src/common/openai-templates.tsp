@@ -49,7 +49,7 @@ op OpenAIAgentSessionOperation<
   ErrorResponse = ApiErrorResponse
 >(...UserIsolationKeyHeader, ...Params):
   | (Response & AgentSessionIdResponseHeader)
-  | AzureRangeErrorResponse<ErrorResponse>;
+  | global.AzureRangeErrorResponse<ErrorResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
@@ -61,7 +61,7 @@ op OpenAIAgentStreamingOperation<
   ErrorResponse = ApiErrorResponse
 >(...UserIsolationKeyHeader, ...Params):
   | SseResponseOf<Event>
-  | AzureRangeErrorResponse<ErrorResponse>;
+  | global.AzureRangeErrorResponse<ErrorResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
@@ -89,4 +89,4 @@ op OpenAIAgentFilteredPagedOperation<
   ErrorResponse = ApiErrorResponse
 >(...UserIsolationKeyHeader, ...CommonPageQueryParameters, ...Params):
   | AgentsPagedResult<Item>
-  | AzureRangeErrorResponse<ErrorResponse>;
+  | global.AzureRangeErrorResponse<ErrorResponse>;

@@ -9,6 +9,7 @@ import "../agents-optimization/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
+using Microsoft.Foundry.Core;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @clientNamespace("Azure.AI.Projects.Agents")

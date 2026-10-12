@@ -23,6 +23,7 @@ import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/ops-relocation-datasets.tsp";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.Foundry.Core;
 namespace Azure.AI.Projects;
 
 // --------------------------------------------------------------------------------

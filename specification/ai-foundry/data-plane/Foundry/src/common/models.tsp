@@ -77,7 +77,7 @@ op OpenAIOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...Params): Response | AzureRangeErrorResponse<ErrorResponse>;
+>(...Params): Response | global.AzureRangeErrorResponse<ErrorResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
@@ -88,7 +88,7 @@ op OpenAIOperationWithPreview<
   ErrorResponse = ApiErrorResponse
 >(...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>, ...Params):
   | Response
-  | AzureRangeErrorResponse<ErrorResponse>;
+  | global.AzureRangeErrorResponse<ErrorResponse>;
 
 alias AssetBase = {
   @doc("Asset ID, a unique identifier for the asset")

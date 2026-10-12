@@ -20,6 +20,7 @@ import "../agents/models.tsp";
 import "../skills/models.tsp";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.Foundry.Core;
 namespace Azure.AI.Projects;
 
 // --------------------------------------------------------------------------------

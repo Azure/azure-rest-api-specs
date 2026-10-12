@@ -22,14 +22,14 @@ alias FoundryDataPlaneAzureTraits = Azure.Core.Traits.SupportsClientRequestId &
 
 alias FoundryAzureOperations<ExtraTraits> = Azure.Core.ResourceOperations<
   ExtraTraits & FoundryDataPlaneAzureTraits,
-  AzureRangeErrorResponse
+  global.AzureRangeErrorResponse
 >;
 
 alias FoundryStandardResourceOperations = Azure.Core.ResourceOperations<
   Azure.Core.Traits.NoConditionalRequests &
     Azure.Core.Traits.NoRepeatableRequests &
     Azure.Core.Traits.NoClientRequestId,
-  AzureRangeErrorResponse
+  global.AzureRangeErrorResponse
 >;
 
 op FoundryOperation<
@@ -40,7 +40,7 @@ op FoundryOperation<
   Params,
   Response,
   Traits,
-  AzureRangeErrorResponse
+  global.AzureRangeErrorResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -54,7 +54,7 @@ op FoundryResourceOperation<
   Params,
   Response,
   Traits,
-  AzureRangeErrorResponse
+  global.AzureRangeErrorResponse
 >;
 
 op FoundryResourceList<
@@ -67,7 +67,7 @@ op FoundryResourceList<
   Params,
   Response,
   Traits,
-  AzureRangeErrorResponse
+  global.AzureRangeErrorResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
@@ -78,7 +78,7 @@ op FoundryDataPlaneOperation<
   ErrorResponse = ApiErrorResponse
 >(...Params, ...FoundryDataPlaneApiVersionParameter):
   | Response
-  | AzureRangeErrorResponse<ErrorResponse>;
+  | global.AzureRangeErrorResponse<ErrorResponse>;
 
 // ---- Feature opt-in keys & preview headers ----
 

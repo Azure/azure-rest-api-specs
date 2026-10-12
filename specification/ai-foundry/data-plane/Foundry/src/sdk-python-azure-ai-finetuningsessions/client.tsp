@@ -42,7 +42,7 @@ namespace Azure.AI.FineTuning.Sessions;
 @@clientLocation(Operations.get, "Operations", "python");
 
 @@apiVersion(
-  Azure.AI.Projects.FoundryDataPlaneApiVersionParameter.apiVersion,
+  Microsoft.Foundry.Core.FoundryDataPlaneApiVersionParameter.apiVersion,
   false,
   "python"
 );
@@ -158,14 +158,14 @@ namespace Azure.AI.FineTuning.Sessions;
   "Opts in to the V1 preview of container agent definitions."
 );
 @@doc(
-  Azure.AI.Projects.PageOrder,
+  Microsoft.Foundry.Core.PageOrder,
   "Sort direction by created_at: asc returns oldest objects first; desc returns newest first."
 );
 
 // Pin generated model names after migrating PageOrder/JobStatus to reuse the
 // Microsoft.Foundry.Core library union definitions.
-@@clientName(Azure.AI.Projects.PageOrder, "PageOrder");
-@@clientName(Azure.AI.Projects.JobStatus, "JobStatus");
+@@clientName(Microsoft.Foundry.Core.PageOrder, "PageOrder");
+@@clientName(Microsoft.Foundry.Core.JobStatus, "JobStatus");
 
 // Reuse authoritative REST types whenever their Python shape is compatible.
 // The Loom aliases below are references, not copied model or enum declarations.

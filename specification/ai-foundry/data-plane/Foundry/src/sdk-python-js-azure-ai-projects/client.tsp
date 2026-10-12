@@ -41,6 +41,7 @@ import "../sdk-common/error.default.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.AI.Projects;
+using Microsoft.Foundry.Core;
 
 // --------------------------------------------------------------------------------
 // Root client
