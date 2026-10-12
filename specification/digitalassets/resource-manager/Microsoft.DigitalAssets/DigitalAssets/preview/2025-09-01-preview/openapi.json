@@ -829,7 +829,7 @@
     },
     "PartitionProperties": {
       "type": "object",
-      "description": "Properties of a ZkpRollup partition. The partition properties are not patchable at this point in the Private Preview.",
+      "description": "Read-only status properties of a ZkpRollup partition. In Public Preview, shared service configuration comes from the parent rollup. The partition name and location select the deployment, so no writable service-specific properties are needed. PATCH updates tags only.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1024,7 +1024,7 @@
         },
         "bootNodeId": {
           "type": "string",
-          "description": "Enode id (public key) of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.",
+          "description": "Enode id (public key) of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1032,7 +1032,7 @@
         },
         "bootNodeIp": {
           "type": "string",
-          "description": "Private IPv4 address of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.",
+          "description": "Private IPv4 address of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1041,7 +1041,7 @@
         "bootNodeP2pPort": {
           "type": "integer",
           "format": "int32",
-          "description": "P2P (devp2p) port of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.",
+          "description": "P2P (devp2p) port of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.",
           "minimum": 1,
           "maximum": 65535,
           "x-ms-mutability": [
@@ -1052,7 +1052,7 @@
         "bootNodeRpcPort": {
           "type": "integer",
           "format": "int32",
-          "description": "JSON-RPC (HTTP) port of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.",
+          "description": "JSON-RPC (HTTP) port of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.",
           "minimum": 1,
           "maximum": 65535,
           "x-ms-mutability": [
@@ -1063,7 +1063,7 @@
         "serviceBusEndpoint": {
           "type": "string",
           "format": "uri",
-          "description": "Service Bus endpoint (URL) for customer access. Set on create or replace; not updatable via PATCH.",
+          "description": "URL of the customer-provided Service Bus namespace to which proofs are published. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1071,7 +1071,7 @@
         },
         "serviceBusQueueName": {
           "type": "string",
-          "description": "Queue name for customer Service Bus access. Set on create or replace; not updatable via PATCH.",
+          "description": "Name of the customer-provided Service Bus queue to which proofs are published. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1091,7 +1091,13 @@
       "required": [
         "tokenOwnerAccounts",
         "keyVault",
-        "keyVaultUserAssignedIdentityResourceId"
+        "keyVaultUserAssignedIdentityResourceId",
+        "bootNodeId",
+        "bootNodeIp",
+        "bootNodeP2pPort",
+        "bootNodeRpcPort",
+        "serviceBusEndpoint",
+        "serviceBusQueueName"
       ]
     },
     "ZkpRollupUpdate": {

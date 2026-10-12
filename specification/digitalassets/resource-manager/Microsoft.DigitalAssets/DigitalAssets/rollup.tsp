@@ -50,32 +50,32 @@ model ZkpRollupProperties {
   serviceVpnAddressSpace?: string;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Enode id (public key) of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.")
-  bootNodeId?: string;
+  @doc("Enode id (public key) of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.")
+  bootNodeId: string;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Private IPv4 address of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.")
-  bootNodeIp?: string;
+  @doc("Private IPv4 address of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.")
+  bootNodeIp: string;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("P2P (devp2p) port of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.")
+  @doc("P2P (devp2p) port of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.")
   @minValue(1)
   @maxValue(65535)
-  bootNodeP2pPort?: int32;
+  bootNodeP2pPort: int32;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("JSON-RPC (HTTP) port of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.")
+  @doc("JSON-RPC (HTTP) port of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.")
   @minValue(1)
   @maxValue(65535)
-  bootNodeRpcPort?: int32;
+  bootNodeRpcPort: int32;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Service Bus endpoint (URL) for customer access. Set on create or replace; not updatable via PATCH.")
-  serviceBusEndpoint?: url;
+  @doc("URL of the customer-provided Service Bus namespace to which proofs are published. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.")
+  serviceBusEndpoint: url;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Queue name for customer Service Bus access. Set on create or replace; not updatable via PATCH.")
-  serviceBusQueueName?: string;
+  @doc("Name of the customer-provided Service Bus queue to which proofs are published. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.")
+  serviceBusQueueName: string;
 
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")

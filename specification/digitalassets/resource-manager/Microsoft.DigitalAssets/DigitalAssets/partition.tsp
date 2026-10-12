@@ -15,7 +15,7 @@ model Partition is TrackedResource<PartitionProperties> {
   name: string;
 }
 
-@doc("Properties of a ZkpRollup partition. The partition properties are not patchable at this point in the Private Preview.")
+@doc("Read-only status properties of a ZkpRollup partition. In Public Preview, shared service configuration comes from the parent rollup. The partition name and location select the deployment, so no writable service-specific properties are needed. PATCH updates tags only.")
 model PartitionProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
