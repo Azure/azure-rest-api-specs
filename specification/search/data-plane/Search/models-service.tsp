@@ -6729,6 +6729,7 @@ model AIServicesVisionParameters {
 
 /** Specifies an Azure Machine Learning endpoint deployed via the Azure AI Foundry Model Catalog for generating the vector embedding of a query string. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model AMLVectorizer extends VectorSearchVectorizer {
@@ -6741,6 +6742,7 @@ model AMLVectorizer extends VectorSearchVectorizer {
 
 /** Specifies the properties for connecting to an AML vectorizer. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@removed(Versions.v2026_10_01)
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model AMLParameters {

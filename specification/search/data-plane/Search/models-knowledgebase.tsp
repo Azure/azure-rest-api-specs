@@ -977,6 +977,7 @@ model KnowledgeBaseAgenticReasoningActivityRecord
   reasoningTokens?: int32;
 
   /** The retrieval reasoning effort configuration. */
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
