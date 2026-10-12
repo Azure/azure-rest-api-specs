@@ -841,19 +841,6 @@ model VoiceAgentLiveFoundryManagedAgentDelegationMetadata {
   @doc("The backend response ID when available, otherwise null.")
   response_id: string | null;
 
-  @doc("A content-free failure category, otherwise null. A partial_ prefix means earlier guidance was accepted before a later failure.")
-  error_code: string | null;
-
-  @doc("Whether the available validated result contains commentary. This does not assert speech or playback.")
-  has_spoken_text: boolean;
-
-  @doc("Whether the available validated result contains background context.")
-  has_background_context: boolean;
-
-  @doc("The number of completed MCP calls observed in the available backend result.")
-  @minValue(0)
-  mcp_call_count: int32;
-
   @doc("The originating native delegation's session-relative audio offset, in milliseconds.")
   offset_ms: int64;
 }
@@ -895,8 +882,11 @@ model VoiceAgentLiveManagedDelegationFailedEvent
   ...VoiceAgentLiveFoundryManagedAgentDelegationMetadata;
   ...VoiceAgentLiveDelegationResultItem;
 
-  @doc("Whether trusted failure context reached Live: accepted, rejected, unconfirmed, or skipped; null if unavailable. Even accepted does not turn the failed invocation into success.")
-  failure_context_status: VoiceAgentLiveFailureContextStatus | null;
+  @doc("A machine-readable code identifying the managed delegation failure.")
+  error_code: string;
+
+  @doc("A human-readable description of the managed delegation failure.")
+  error_message: string;
 }
 
 @doc("Server notification that the managed invocation was cancelled or superseded. This is not a client cancellation command. Earlier accepted output may remain, but no new guidance or successful completion is implied.")

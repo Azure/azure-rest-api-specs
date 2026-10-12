@@ -336,10 +336,6 @@ test("managed notifications keep correlation and expose flat optional result tex
       "agent_version",
       "result_format",
       "response_id",
-      "error_code",
-      "has_spoken_text",
-      "has_background_context",
-      "mcp_call_count",
       "offset_ms",
     ])
       assert.equal(p.get(field).optional, false, `${stage}.${field}`);
@@ -352,9 +348,19 @@ test("managed notifications keep correlation and expose flat optional result tex
       "background_context",
       "output_items",
       "appends",
+      "has_spoken_text",
+      "has_background_context",
+      "mcp_call_count",
+      "failure_context_status",
     ])
       assert.equal(p.has(field), false, `${stage}.${field}`);
-    assert.equal(p.has("failure_context_status"), stage === "failed");
+    for (const field of ["error_code", "error_message"]) {
+      assert.equal(p.has(field), stage === "failed", `${stage}.${field}`);
+      if (stage === "failed") {
+        assert.equal(p.get(field).optional, false);
+        assert.equal(getTypeName(p.get(field).type), "string");
+      }
+    }
     assert.equal(p.has("backend_conversation_id"), stage === "completed");
     for (const field of ["commentary", "thinking"]) {
       assert.equal(p.has(field), stage !== "started", `${stage}.${field}`);
@@ -386,6 +392,7 @@ test("delegation results contain only optional commentary and thinking strings",
   for (const name of [
     "VoiceAgentLiveManagedAppendType",
     "VoiceAgentLiveDelegationResultEventType",
+    "VoiceAgentLiveFailureContextStatus",
   ])
     assert.ok(!ns.unions.has(name), name);
 });
@@ -399,10 +406,6 @@ const metadata = {
   agent_version: "1",
   result_format: "tagged_text",
   response_id: null,
-  error_code: null,
-  has_spoken_text: false,
-  has_background_context: false,
-  mcp_call_count: 0,
   offset_ms: 1200,
 };
 const resultText = { commentary: "Say: Yesterday I went to school." };
@@ -411,22 +414,16 @@ const samples = managedStages.map((stage) => {
   if (["progress", "completed"].includes(stage))
     Object.assign(payload, {
       response_id: "resp_1",
-      has_spoken_text: true,
       ...resultText,
     });
   if (stage === "completed") payload.backend_conversation_id = "conv_backend";
   if (stage === "failed")
     Object.assign(payload, {
       error_code: "partial_backend_timeout",
-      failure_context_status: "accepted",
+      error_message: "The backend timed out after some guidance was accepted.",
       ...resultText,
     });
-  if (stage === "cancel")
-    Object.assign(payload, {
-      error_code: "partial_cancelled_or_superseded",
-      ...resultText,
-    });
-  payload.has_spoken_text = Boolean(payload.commentary);
+  if (stage === "cancel") Object.assign(payload, resultText);
   return { model: managedModel(stage), payload };
 });
 const sessionStarted = {
@@ -498,8 +495,8 @@ test("malformed lifecycle payloads are rejected by the actual TypeSpec models", 
     samples.find((s) => s.payload.type.endsWith(".cancel")),
   );
   delete missingDelegationId.payload.delegation_id;
-  const invalidCount = structuredClone(samples[0]);
-  invalidCount.payload.mcp_call_count = "one";
+  const invalidOffset = structuredClone(samples[0]);
+  invalidOffset.payload.offset_ms = "one";
   const invalidResult = structuredClone(
     samples.find((s) => s.payload.type.endsWith(".progress")),
   );
@@ -507,10 +504,10 @@ test("malformed lifecycle payloads are rejected by the actual TypeSpec models", 
   const invalidFailure = structuredClone(
     samples.find((s) => s.payload.type.endsWith(".failed")),
   );
-  invalidFailure.payload.failure_context_status = 42;
+  invalidFailure.payload.error_code = 42;
   const result = await validateExamples("invalid-events", [
     missingDelegationId,
-    invalidCount,
+    invalidOffset,
     invalidResult,
     invalidFailure,
   ]);
@@ -525,6 +522,44 @@ test("malformed lifecycle payloads are rejected by the actual TypeSpec models", 
     ),
     errors.map((d) => `${d.code}: ${d.message}`).join("\n"),
   );
+});
+
+test("failure notifications require string error code and message", async (t) => {
+  const failed = samples.find((s) => s.payload.type.endsWith(".failed"));
+  const withoutResults = structuredClone(failed);
+  delete withoutResults.payload.commentary;
+  checkErrors(
+    (await validateExamples("failure-without-results", [withoutResults]))
+      .diagnostics,
+  );
+
+  for (const field of ["error_code", "error_message"]) {
+    for (const [name, value] of [
+      ["missing", undefined],
+      ["null", null],
+      ["number", 42],
+      ["object", { message: "Not a string" }],
+    ]) {
+      await t.test(`${field}: ${name}`, async () => {
+        const sample = structuredClone(failed);
+        if (value === undefined) delete sample.payload[field];
+        else sample.payload[field] = value;
+        const result = await validateExamples(`failure-${field}-${name}`, [
+          sample,
+        ]);
+        const errors = result.diagnostics.filter((d) => d.severity === "error");
+        assert.ok(errors.length > 0);
+        assert.ok(
+          errors.every((d) =>
+            ["invalid-argument", "unassignable", "missing-property"].includes(
+              d.code,
+            ),
+          ),
+          errors.map((d) => `${d.code}: ${d.message}`).join("\n"),
+        );
+      });
+    }
+  }
 });
 
 test("SDK metadata exports native events and separate Live persistence discriminators", async () => {
@@ -562,6 +597,24 @@ test("SDK metadata exports native events and separate Live persistence discrimin
     assert.ok(
       value.properties.some((p) => p.serializedName === "delegation_id"),
     );
+    for (const field of [
+      "has_spoken_text",
+      "has_background_context",
+      "mcp_call_count",
+      "failure_context_status",
+    ])
+      assert.ok(
+        !value.properties.some((p) => p.serializedName === field),
+        `${stage}.${field}`,
+      );
+    for (const field of ["error_code", "error_message"]) {
+      const property = value.properties.find((p) => p.serializedName === field);
+      assert.equal(Boolean(property), stage === "failed", `${stage}.${field}`);
+      if (property) {
+        assert.equal(property.type.kind, "string");
+        assert.equal(property.optional, false);
+      }
+    }
   }
   assert.ok(
     !context.sdkPackage.models.some(

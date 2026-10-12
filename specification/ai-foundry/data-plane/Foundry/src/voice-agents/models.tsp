@@ -164,15 +164,6 @@ model VoiceAgentLiveDelegationResultItem {
   thinking?: string;
 }
 
-@doc("Outcome of injecting trusted failure context into Live; this never changes the failed delegation outcome.")
-union VoiceAgentLiveFailureContextStatus {
-  string,
-  accepted: "accepted",
-  rejected: "rejected",
-  unconfirmed: "unconfirmed",
-  skipped: "skipped",
-}
-
 @doc("The configured delegation owner recorded by Foundry. A managed prompt agent is distinct here even though its native Live transport uses client delegation.")
 union VoiceAgentLiveDelegationTarget {
   responses: "responses",
