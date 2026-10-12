@@ -203,6 +203,45 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs", "rust,go");
 @@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs", "rust,go");
 
+/** Rust-specific parameters used to test client generation for the blob acquire lease operation. */
+model RustBlobAcquireLeaseParameters {
+  /** Specifies the duration of the lease, in seconds. */
+  @clientName("renamed_duration", "rust")
+  @header("x-ms-lease-duration")
+  duration: int32;
+
+  /** The proposed lease ID for the lease. */
+  @clientName("renamed_proposed_lease_id", "rust")
+  @header("x-ms-proposed-lease-id")
+  proposedLeaseId?: string;
+
+  /** An experimental arbitrary client option. */
+  foo?: string;
+}
+
+alias RustBlobAcquireLeaseWithRenamedDuration = replaceParameter(
+  Storage.Blob.Blob.acquireLease,
+  "duration",
+  RustBlobAcquireLeaseParameters.duration
+);
+
+alias RustBlobAcquireLeaseWithRenamedProposedLeaseId = replaceParameter(
+  RustBlobAcquireLeaseWithRenamedDuration,
+  "proposedLeaseId",
+  RustBlobAcquireLeaseParameters.proposedLeaseId
+);
+
+alias RustBlobAcquireLeaseExperiment = addParameter(
+  RustBlobAcquireLeaseWithRenamedProposedLeaseId,
+  RustBlobAcquireLeaseParameters.foo
+);
+
+@@override(
+  Storage.Blob.Blob.acquireLease,
+  RustBlobAcquireLeaseExperiment,
+  "rust"
+);
+
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
 @@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
