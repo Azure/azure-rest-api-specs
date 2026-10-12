@@ -57,11 +57,13 @@ interface CapacityReservations {
   @tag("CapacityReservations")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     CapacityReservation,
-    Response = ArmResponse<CapacityReservation> | ArmResourceCreatedResponse<
-      CapacityReservation,
-      LroHeaders = ArmLroLocationHeader<FinalResult = CapacityReservation> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<CapacityReservation>
+      | ArmResourceCreatedResponse<
+          CapacityReservation,
+          LroHeaders = ArmLroLocationHeader<FinalResult = CapacityReservation> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -105,12 +107,15 @@ interface CapacityReservations {
 }
 
 @@doc(CapacityReservation.name, "The name of the capacity reservation.");
-@@doc(CapacityReservation.properties,
+@@doc(
+  CapacityReservation.properties,
   "Properties of the Capacity reservation."
 );
-@@doc(CapacityReservations.createOrUpdate::parameters.resource,
+@@doc(
+  CapacityReservations.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create capacity reservation."
 );
-@@doc(CapacityReservations.update::parameters.properties,
+@@doc(
+  CapacityReservations.update::parameters.properties,
   "Parameters supplied to the Update capacity reservation operation."
 );
