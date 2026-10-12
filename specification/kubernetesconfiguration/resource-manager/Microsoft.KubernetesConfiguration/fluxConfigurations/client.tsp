@@ -118,14 +118,22 @@ using Microsoft.KubernetesConfiguration;
 // C# fixes (AZC0031): drop redundant "Definition" suffix from model type names
 @@clientName(AzureBlobDefinition, "AzureBlob", "csharp");
 @@clientName(AzureBlobPatchDefinition, "AzureBlobPatch", "csharp");
-@@clientName(BucketDefinition, "Bucket", "csharp");
-@@clientName(BucketPatchDefinition, "BucketPatch", "csharp");
-@@clientName(GitRepositoryDefinition, "GitRepository", "csharp");
-@@clientName(GitRepositoryPatchDefinition, "GitRepositoryPatch", "csharp");
-@@clientName(KustomizationDefinition, "Kustomization", "csharp");
-@@clientName(KustomizationPatchDefinition, "KustomizationPatch", "csharp");
-@@clientName(LayerSelectorDefinition, "LayerSelector", "csharp");
-@@clientName(LayerSelectorPatchDefinition, "LayerSelectorPatch", "csharp");
+@@clientName(BucketDefinition, "FluxBucket", "csharp");
+@@clientName(BucketPatchDefinition, "FluxBucketPatch", "csharp");
+@@clientName(GitRepositoryDefinition, "FluxGitRepository", "csharp");
+@@clientName(GitRepositoryPatchDefinition, "FluxGitRepositoryPatch", "csharp");
+@@clientName(
+  KustomizationDefinition,
+  "FluxConfigurationsKustomization",
+  "csharp"
+);
+@@clientName(
+  KustomizationPatchDefinition,
+  "FluxConfigurationsKustomizationPatch",
+  "csharp"
+);
+@@clientName(LayerSelectorDefinition, "FluxLayerSelector", "csharp");
+@@clientName(LayerSelectorPatchDefinition, "FluxLayerSelectorPatch", "csharp");
 @@clientName(MatchOidcIdentityDefinition, "MatchOidcIdentity", "csharp");
 @@clientName(
   MatchOidcIdentityPatchDefinition,
@@ -140,18 +148,18 @@ using Microsoft.KubernetesConfiguration;
   "OciRepositoryRefPatch",
   "csharp"
 );
-@@clientName(PostBuildDefinition, "PostBuild", "csharp");
-@@clientName(PostBuildPatchDefinition, "PostBuildPatch", "csharp");
+@@clientName(PostBuildDefinition, "FluxPostBuild", "csharp");
+@@clientName(PostBuildPatchDefinition, "FluxPostBuildPatch", "csharp");
 @@clientName(ServicePrincipalDefinition, "FluxServicePrincipal", "csharp");
 @@clientName(
   ServicePrincipalPatchDefinition,
   "FluxServicePrincipalPatch",
   "csharp"
 );
-@@clientName(SubstituteFromDefinition, "Substitution", "csharp");
-@@clientName(SubstituteFromPatchDefinition, "SubstitutionPatch", "csharp");
-@@clientName(TlsConfigDefinition, "TlsConfig", "csharp");
-@@clientName(TlsConfigPatchDefinition, "TlsConfigPatch", "csharp");
+@@clientName(SubstituteFromDefinition, "FluxSubstitution", "csharp");
+@@clientName(SubstituteFromPatchDefinition, "FluxSubstitutionPatch", "csharp");
+@@clientName(TlsConfigDefinition, "FluxTlsConfig", "csharp");
+@@clientName(TlsConfigPatchDefinition, "FluxTlsConfigPatch", "csharp");
 @@clientName(VerifyDefinition, "OciRepositoryVerify", "csharp");
 @@clientName(VerifyPatchDefinition, "OciRepositoryVerifyPatch", "csharp");
 @@clientName(
@@ -159,14 +167,14 @@ using Microsoft.KubernetesConfiguration;
   "HelmReleaseProperties",
   "csharp"
 );
-@@clientName(ObjectReferenceDefinition, "ObjectReference", "csharp");
+@@clientName(ObjectReferenceDefinition, "FluxObjectReference", "csharp");
 @@clientName(
   ObjectStatusConditionDefinition,
-  "ObjectStatusCondition",
+  "FluxObjectStatusCondition",
   "csharp"
 );
-@@clientName(ObjectStatusDefinition, "ObjectStatus", "csharp");
-@@clientName(RepositoryRefDefinition, "RepositoryReference", "csharp");
+@@clientName(ObjectStatusDefinition, "FluxObjectStatus", "csharp");
+@@clientName(RepositoryRefDefinition, "FluxRepositoryReference", "csharp");
 @@clientName(SourceKindType.OCIRepository, "OciRepository", "csharp");
 
 // Exclude OperationStatus APIs from C# SDK - they are built into the core library

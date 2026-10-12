@@ -1,0 +1,60 @@
+{
+  "operationId": "Indexers_List",
+  "title": "SearchServiceListIndexers",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "api-version": "2026-08-01-preview",
+    "$select": null,
+    "search": "myindexer",
+    "pageSize": 1,
+    "searchType": null,
+    "Accept": "application/json;odata.metadata=minimal",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "@odata.etag": "0x1234568AE7E58A1",
+            "name": "myindexer",
+            "description": "Description of the indexer",
+            "dataSourceName": "indexertestdatasource",
+            "skillsetName": "myskillset",
+            "targetIndexName": "preview-test",
+            "disabled": false,
+            "schedule": {
+              "interval": "P1D",
+              "startTime": "2024-06-06T00:01:50.265Z"
+            },
+            "parameters": {
+              "batchSize": 10,
+              "maxFailedItems": 10,
+              "maxFailedItemsPerBatch": 5,
+              "configuration": {}
+            },
+            "fieldMappings": [
+              {
+                "sourceFieldName": "/document",
+                "targetFieldName": "name",
+                "mappingFunction": {
+                  "name": "base64Encode"
+                }
+              }
+            ],
+            "outputFieldMappings": [
+              {
+                "sourceFieldName": "/document",
+                "targetFieldName": "name",
+                "mappingFunction": {
+                  "name": "base64Encode"
+                }
+              }
+            ]
+          }
+        ],
+        "@odata.nextLink": "https://typespecpreviewexampleservice.search.windows.net/indexers?api-version=2026-08-01-preview&service=typespecpreviewexampleservice&$skiptoken=MXxteWluZGV4ZXJ8bXlpbmRleGVyLTI%3d"
+      }
+    }
+  }
+}

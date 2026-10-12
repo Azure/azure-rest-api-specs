@@ -48,6 +48,15 @@ model PlaywrightWorkspaceProperties {
   @added(Versions.v2026_01_01_preview)
   @doc("The URI of the Azure storage account used to store workspace artifacts, test results, and reports.")
   storageUri?: url;
+
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The ARM resource ID of the virtual network subnet to inject the workspace into for private network connectivity. This is of the form '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}'. This value cannot be changed after the workspace is created.")
+  subnetId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
 }
 
 @doc("The status of the last resource operation.")

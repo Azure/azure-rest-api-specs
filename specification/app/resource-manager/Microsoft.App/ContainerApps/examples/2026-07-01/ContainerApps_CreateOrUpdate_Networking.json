@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01",
+    "containerAppEnvelope": {
+      "location": "East US",
+      "properties": {
+        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/expressenv",
+        "networking": {
+          "outboundVnetSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/appsubnet"
+        },
+        "template": {
+          "containers": [
+            {
+              "name": "testcontainerApp0",
+              "image": "repo/testcontainerApp0:v1",
+              "resources": {
+                "cpu": 0.2,
+                "memory": "100Mi"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "containerAppName": "testcontainerApp0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testcontainerApp0",
+        "type": "Microsoft.App/containerApps",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/expressenv",
+          "networking": {
+            "outboundVnetSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/appsubnet"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testcontainerApp0",
+        "type": "Microsoft.App/containerApps",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "InProgress",
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/expressenv",
+          "networking": {
+            "outboundVnetSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/appsubnet"
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ContainerApps_CreateOrUpdate",
+  "title": "Create or Update Container App with per-app outbound VNet subnet"
+}

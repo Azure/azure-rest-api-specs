@@ -194,7 +194,8 @@ model QuotaTransferProperties {
   /**
    * Billing account id both donor and recipient subscriptions must roll up to.
    */
-  billingAccountId: string;
+  @visibility(Lifecycle.Read)
+  billingAccountId?: string;
 
   /**
    * The quota dimension being moved, scoped by the URI's target provider
@@ -334,7 +335,6 @@ model IncomingQuotaTransferProperties {
 /**
  * Request body for the donor cancel action.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_09_01_preview)
 model QuotaTransferCancelRequest {
   /**
@@ -347,7 +347,6 @@ model QuotaTransferCancelRequest {
 /**
  * Request body for the recipient approve action.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_09_01_preview)
 model IncomingQuotaTransferApproveRequest {
   /**
@@ -360,7 +359,6 @@ model IncomingQuotaTransferApproveRequest {
 /**
  * Request body for the recipient reject action.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_09_01_preview)
 model IncomingQuotaTransferRejectRequest {
   /**

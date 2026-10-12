@@ -99,12 +99,15 @@ union CustomerTransitState {
 union autoUpdateRingType {
   string,
 
+  /** Legacy update ring retained for backward compatibility. This value was used prior to 2026-06-01. */
   /** customer selection of preview update install mcc on their physical vm */
   Preview: "Preview",
 
+  /** Legacy update ring retained for backward compatibility. This value was used prior to 2026-06-01. */
   /** customer selection of slow update to install mcc on their physical vm */
   Slow: "Slow",
 
+  /** Legacy update ring retained for backward compatibility. This value was used prior to 2026-06-01. */
   /** customer selection of fast / auto update to install mcc on their physical vm */
   Fast: "Fast",
 

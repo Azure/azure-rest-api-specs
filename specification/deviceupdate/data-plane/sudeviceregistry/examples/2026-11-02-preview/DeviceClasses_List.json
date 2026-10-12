@@ -1,0 +1,43 @@
+{
+  "operationId": "DeviceClasses_List",
+  "title": "DeviceClasses_List",
+  "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "api-version": "2026-11-02-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "deviceClassId": "6f8d9c2b1a4e7d30",
+            "deviceClassProperties": {
+              "compatProperties": {
+                "manufacturer": "contoso",
+                "model": "tractor"
+              },
+              "agentProfile": 1
+            },
+            "bestCompatibleUpdate": {
+              "updateId": {
+                "provider": "contoso",
+                "name": "tractor",
+                "version": "1.0.0.0"
+              }
+            }
+          },
+          {
+            "deviceClassId": "1c3a5e7092b4d6f8",
+            "deviceClassProperties": {
+              "compatProperties": {
+                "manufacturer": "fabrikam",
+                "model": "toaster"
+              },
+              "agentProfile": 1
+            }
+          }
+        ]
+      }
+    }
+  }
+}

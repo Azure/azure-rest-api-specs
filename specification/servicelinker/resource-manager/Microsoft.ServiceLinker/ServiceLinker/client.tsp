@@ -291,3 +291,113 @@ op dryrunResourcesListDryrun(
 ): DryrunList;
 
 @@override(DryrunResources.listDryrun, dryrunResourcesListDryrun);
+
+// C# customizations preserve the shipped SDK surface and disambiguate dry-run resources.
+@@clientName(ActionType, "LinkerActionType", "csharp");
+@@clientName(AllowType, "LinkerAllowType", "csharp");
+@@clientName(AuthInfoBase, "AuthBaseInfo", "csharp");
+@@clientName(AuthMode, "LinkerAuthMode", "csharp");
+@@clientName(Microsoft.ServiceLinker.AuthType, "LinkerAuthType", "csharp");
+@@clientName(
+  AzureAppConfigProperties.connectWithKubernetesExtension,
+  "IsConnectedWithKubernetesExtension",
+  "csharp"
+);
+@@clientName(
+  AzureKeyVaultProperties.connectAsKubernetesCsiDriver,
+  "DoesConnectAsKubernetesCsiDriver",
+  "csharp"
+);
+@@clientName(AzureResource, "AzureResourceInfo", "csharp");
+@@clientName(
+  AzureResourcePropertiesBase,
+  "AzureResourceBaseProperties",
+  "csharp"
+);
+@@clientName(ClientType, "LinkerClientType", "csharp");
+@@clientName(ConfigurationInfo, "LinkerConfigurationInfo", "csharp");
+@@clientName(ConfigurationName, "LinkerConfigurationName", "csharp");
+@@clientName(ConfigurationName.required, "IsRequired", "csharp");
+@@clientName(ConfigurationNameItem, "LinkerConfigurationNameItem", "csharp");
+@@clientName(ConfigurationResult, "SourceConfigurationResult", "csharp");
+@@clientName(
+  ConfluentBootstrapServer,
+  "ConfluentBootstrapServerInfo",
+  "csharp"
+);
+@@clientName(ConfluentSchemaRegistry, "ConfluentSchemaRegistryInfo", "csharp");
+@@clientName(
+  CreateOrUpdateDryrunParameters,
+  "CreateOrUpdateDryrunContent",
+  "csharp"
+);
+@@clientName(DaprConfigurationResource, "DaprConfiguration", "csharp");
+@@clientName(DeleteOrUpdateBehavior, "LinkerDeleteOrUpdateBehavior", "csharp");
+@@clientName(DryrunParameters, "DryrunContent", "csharp");
+@@clientName(DryrunResource, "LinkerDryrun", "csharp");
+@@clientName(DryrunResources, "ConnectorDryruns", "csharp");
+@@clientName(
+  EasyAuthMicrosoftEntraIDAuthInfo,
+  "EasyAuthMicrosoftEntraIdAuthInfo",
+  "csharp"
+);
+@@clientName(FabricPlatform, "FabricPlatformTargetService", "csharp");
+@@clientName(FirewallRules, "LinkerFirewallRules", "csharp");
+@@clientName(Linker, "LinkerResources", "csharp");
+@@clientName(LinkerPatch, "LinkerResourcePatch", "csharp");
+@@clientName(LinkerResources, "LinkerConnectors", "csharp");
+@@clientName(Linkers, "LinkerDryruns", "csharp");
+@@clientName(PublicNetworkSolution, "LinkerPublicNetworkSolution", "csharp");
+@@clientName(SecretInfoBase, "SecretBaseInfo", "csharp");
+@@clientName(SecretSourceType, "LinkerSecretSourceType", "csharp");
+@@clientName(SecretStore.keyVaultId, "SecretStoreKeyVaultId", "csharp");
+@@clientName(SecretStore, "LinkerSecretStore", "csharp");
+@@clientName(SecretType, "LinkerSecretType", "csharp");
+@@clientName(SelfHostedServer, "SelfHostedServerTargetService", "csharp");
+@@clientName(TargetServiceBase, "TargetServiceBaseInfo", "csharp");
+@@clientName(
+  ValidateOperationResult,
+  "LinkerValidateOperationResult",
+  "csharp"
+);
+@@clientName(ValidateResult.reportEndTimeUtc, "ReportEndOn", "csharp");
+@@clientName(ValidateResult.reportStartTimeUtc, "ReportStartOn", "csharp");
+@@clientName(ValidationResultItem, "LinkerValidationResultItemInfo", "csharp");
+@@clientName(ValidationResultStatus, "LinkerValidationResultStatus", "csharp");
+@@clientName(ValueSecretInfo, "RawValueSecretInfo", "csharp");
+@@clientName(VNetSolution, "VnetSolution", "csharp");
+@@clientName(VNetSolution.type, "SolutionType", "csharp");
+@@clientName(VNetSolutionType, "VnetSolutionType", "csharp");
+
+@@alternateType(AzureResource.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  SecretStore.keyVaultId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ValidateOperationResult.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ValidateResult.sourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ValidateResult.targetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LinkerProperties.secretStore,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LinkerProperties.vNetSolution,
+  "csharp"
+);

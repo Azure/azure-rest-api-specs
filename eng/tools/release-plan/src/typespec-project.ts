@@ -1,3 +1,7 @@
+import {
+  generateTypeSpecMetadata,
+  type TypeSpecMetadata,
+} from "@azure-tools/specs-shared/typespec-metadata";
 import { Octokit } from "@octokit/rest";
 import { execSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
@@ -18,16 +22,20 @@ export const NEW_API_VERSION_LABEL = "new-api-version";
  */
 export const FOLDER_MIGRATION_LABEL = "FolderMigrationV2";
 
+/** Label indicating that release plan automation should not process a spec PR. */
+export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "Skip-ReleasePlan-Automation";
+
 /**
  * Identifies one TypeSpec project path and selected API version from a pull request.
  * Returns null when no specification files were modified, or when zero/multiple projects found.
+ * Uses TypeSpec metadata emitter to determine API version and SDK type.
  * @param params Object containing PR details, owner, repo, workspace, and Octokit instance
  * @param params.prNumber Pull request number
  * @param params.owner Repository owner
  * @param params.repo Repository name
  * @param params.workspace Absolute path to workspace root
  * @param params.octokit Octokit instance for GitHub API calls
- * @returns TypeSpec project info with path and API version, or null if no spec changes, no projects found, multiple projects found, or no API version detected
+ * @returns TypeSpec project info with path and API version, or null if no spec changes, no projects found, multiple projects found, or API version detection fails
  */
 export async function getTypeSpecProjectInfoFromPr(params: {
   prNumber: number;
@@ -63,30 +71,21 @@ export async function getTypeSpecProjectInfoFromPr(params: {
     return null;
   }
 
-  const tspProjectPath = tspProjectPaths[0];
-  const versionResult = detectApiVersions(
-    specFiles.filter((f) => f.status !== "renamed").map((f) => f.filename),
-    tspProjectPath,
-    workspace,
-  );
+  const tspProjectRelPath = tspProjectPaths[0];
+  const tspProjectAbsPath = join(workspace, tspProjectRelPath);
 
-  if (versionResult.apiVersions.length === 0) {
-    console.log(
-      "No API version detected in modified files or TypeSpec project. Skipping release plan creation.",
-    );
+  try {
+    return await getTypeSpecProjectVersionFromMetadata(tspProjectAbsPath, tspProjectRelPath);
+  } catch {
+    console.error(`Failed to determine API version for TypeSpec project at ${tspProjectRelPath}`);
     return null;
   }
-
-  return {
-    tspProjectPath,
-    apiVersion: versionResult.apiVersions[0],
-    isPreview: versionResult.isPreview,
-  };
 }
 
 /**
  * Identifies TypeSpec project info from a commit SHA.
  * Attempts to resolve an associated PR first; if not found, inspects commit file changes directly.
+ * Uses TypeSpec metadata emitter to determine API version and SDK type.
  * @returns TypeSpec project info and optional associated PR number
  */
 export async function getTypeSpecProjectInfoFromCommit(params: {
@@ -113,15 +112,18 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
       prNumber: associatedPrNumber,
     });
 
-    if (labels.includes(FOLDER_MIGRATION_LABEL)) {
+    if (
+      labels.includes(FOLDER_MIGRATION_LABEL) ||
+      labels.includes(SKIP_RELEASE_PLAN_AUTOMATION_LABEL)
+    ) {
       console.log(
-        `PR #${associatedPrNumber} has the '${FOLDER_MIGRATION_LABEL}' label. Skipping release plan processing.`,
+        `PR #${associatedPrNumber} has a release plan automation skip label. Skipping release plan processing.`,
       );
       return {
         projectInfo: null,
         prNumber: associatedPrNumber,
         hasNewApiVersionLabel: false,
-        isFolderMigration: true,
+        skipReleasePlanAutomation: true,
       };
     }
 
@@ -166,28 +168,22 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
     return { projectInfo: null, hasNewApiVersionLabel: false };
   }
 
-  const tspProjectPath = tspProjectPaths[0];
-  const versionResult = detectApiVersions(
-    specFiles.filter((f) => f.status !== "renamed").map((f) => f.filename),
-    tspProjectPath,
-    workspace,
-  );
+  const tspProjectRelPath = tspProjectPaths[0];
+  const tspProjectAbsPath = join(workspace, tspProjectRelPath);
 
-  if (versionResult.apiVersions.length === 0) {
-    console.log(
-      "No API version detected in modified files or TypeSpec project. Skipping release plan creation.",
+  try {
+    const projectInfo = await getTypeSpecProjectVersionFromMetadata(
+      tspProjectAbsPath,
+      tspProjectRelPath,
     );
+    return {
+      projectInfo,
+      hasNewApiVersionLabel: false,
+    };
+  } catch {
+    console.error(`Failed to determine API version for TypeSpec project at ${tspProjectRelPath}`);
     return { projectInfo: null, hasNewApiVersionLabel: false };
   }
-
-  return {
-    projectInfo: {
-      tspProjectPath,
-      apiVersion: versionResult.apiVersions[0],
-      isPreview: versionResult.isPreview,
-    },
-    hasNewApiVersionLabel: false,
-  };
 }
 
 /**
@@ -365,6 +361,78 @@ export function findTspConfigDir(relativeFilePath: string, workspace: string): s
   }
 
   return null;
+}
+
+/**
+ * Extracts the API version from TypeSpec metadata.
+ */
+export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
+  apiVersion: string;
+} {
+  const apiVersions = new Set<string>();
+  let hasPackage = false;
+
+  for (const [, langConfigs] of Object.entries(metadata.languages)) {
+    if (!Array.isArray(langConfigs)) {
+      continue;
+    }
+
+    for (const config of langConfigs) {
+      const apiVersion = config.apiVersion;
+      const packageName = config.packageName;
+      hasPackage ||= Boolean(packageName);
+
+      if (!apiVersion || !packageName) {
+        console.warn(
+          `Skipping language config with missing apiVersion or packageName: ${JSON.stringify(config)}`,
+        );
+        continue;
+      }
+
+      console.log(`language config: ${JSON.stringify(config)}`);
+      apiVersions.add(apiVersion);
+    }
+  }
+
+  if (apiVersions.size === 0 && !hasPackage) {
+    throw new Error("No valid language configurations found in TypeSpec metadata");
+  }
+
+  return { apiVersion: Array.from(apiVersions)[0] ?? "" };
+}
+
+/**
+ * Gets TypeSpec project version info using TypeSpec metadata emitter.
+ * Runs the metadata emitter and derives preview status from the API version suffix.
+ * @param tspProjectAbsPath Absolute path to TypeSpec project
+ * @param tspProjectRelPath Relative path to TypeSpec project (for logging)
+ * @returns TypeSpecProjectInfo with apiVersion and isPreview, or throws error
+ */
+export async function getTypeSpecProjectVersionFromMetadata(
+  tspProjectAbsPath: string,
+  tspProjectRelPath: string,
+): Promise<TypeSpecProjectInfo> {
+  try {
+    const metadata = await generateTypeSpecMetadata(tspProjectAbsPath);
+    const { apiVersion } = resolveTypeSpecMetadata(metadata);
+    const isPreview = apiVersion.endsWith("-preview");
+
+    console.log(
+      `Found TypeSpec project at ${tspProjectRelPath} with API version ${apiVersion} (${isPreview ? "preview" : "stable"})`,
+    );
+
+    return {
+      tspProjectPath: tspProjectRelPath,
+      apiVersion,
+      isPreview,
+    };
+  } catch (error) {
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.error(
+      `Failed to extract version from TypeSpec project at ${tspProjectRelPath}: ${errorMsg}`,
+    );
+    throw error;
+  }
 }
 
 /**

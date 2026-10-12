@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import * as fs from "fs";
+import * as fs from "node:fs";
 import * as oav from "oav";
-import * as path from "path";
+import * as path from "node:path";
 
 import {
   example,
@@ -13,22 +13,42 @@ import {
 } from "@azure-tools/specs-shared/changed-files";
 import { untilLastSegment } from "@azure-tools/specs-shared/path";
 import { Swagger } from "@azure-tools/specs-shared/swagger";
-import { inspect } from "util";
+import { SWAGGER_SUPPRESSION_TOOLS } from "@azure-tools/specs-shared/swagger-suppressions";
+import { getSuppressionsForTools } from "@azure-tools/suppressions";
+import { inspect } from "node:util";
 import { type ReportableOavError } from "./formatting.ts";
 
 export async function preCheckFiltering(
   rootDirectory: string,
+  suppressionTool: string,
   fileList?: string[],
 ): Promise<string[]> {
   const changedFiles =
     fileList ?? (await getChangedFiles({ cwd: rootDirectory, paths: ["specification"] }));
 
   const swaggerFiles = await processFilesToSpecificationList(rootDirectory, changedFiles);
+  const unsuppressedSwaggerFiles: string[] = [];
+
+  for (const swaggerFile of swaggerFiles) {
+    const suppressions = await getSuppressionsForTools(
+      [suppressionTool, SWAGGER_SUPPRESSION_TOOLS.all],
+      path.join(rootDirectory, swaggerFile),
+    );
+    const isSuppressed = suppressions.some(
+      (suppression) => !suppression.rules?.length && !suppression.subRules?.length,
+    );
+
+    if (isSuppressed) {
+      console.log(`Skipping suppressed Swagger file: ${swaggerFile}`);
+    } else {
+      unsuppressedSwaggerFiles.push(swaggerFile);
+    }
+  }
 
   console.log("oav-runner is checking the following specification rooted files:");
-  swaggerFiles.forEach((file) => console.log(`- ${file}`));
+  unsuppressedSwaggerFiles.forEach((file) => console.log(`- ${file}`));
 
-  return swaggerFiles;
+  return unsuppressedSwaggerFiles;
 }
 
 export async function checkExamples(
@@ -37,7 +57,11 @@ export async function checkExamples(
 ): Promise<[number, string[], ReportableOavError[]]> {
   const errors: ReportableOavError[] = [];
 
-  const swaggerFiles = await preCheckFiltering(rootDirectory, fileList);
+  const swaggerFiles = await preCheckFiltering(
+    rootDirectory,
+    SWAGGER_SUPPRESSION_TOOLS.modelValidation,
+    fileList,
+  );
 
   for (const swaggerFile of swaggerFiles) {
     try {
@@ -81,7 +105,11 @@ export async function checkSpecs(
 ): Promise<[number, string[], ReportableOavError[]]> {
   const errors: ReportableOavError[] = [];
 
-  const swaggerFiles = await preCheckFiltering(rootDirectory, fileList);
+  const swaggerFiles = await preCheckFiltering(
+    rootDirectory,
+    SWAGGER_SUPPRESSION_TOOLS.semanticValidation,
+    fileList,
+  );
 
   for (const swaggerFile of swaggerFiles) {
     try {

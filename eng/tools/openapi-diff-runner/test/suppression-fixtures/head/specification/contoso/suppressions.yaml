@@ -1,0 +1,16 @@
+- tool: SwaggerBreakingChange
+  path: stable/**
+  reason: Skip same-version checks for this directory
+
+- tool: SwaggerAll
+  path: preview/**
+  reason: Skip all Swagger checks for this directory
+
+- tool: SwaggerBreakingChange
+  path: rules/rule-scoped.json
+  rules: [ExampleRule]
+  reason: Rule-scoped entries do not skip a file
+
+- tool: SwaggerBreakingChangeCrossVersion
+  path: cross/**
+  reason: Skip cross-version checks for this directory

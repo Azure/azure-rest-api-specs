@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "agentPoolName": "agentpool1",
+    "api-version": "2026-06-02-preview",
+    "parameters": {
+      "properties": {
+        "count": 5
+      }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "properties": {
+          "count": 5,
+          "currentOrchestratorVersion": "1.9.6",
+          "eTag": "ebwiyfneowv",
+          "maxPods": 110,
+          "nodeImageVersion": "AKSUbuntu:1604:2020.03.11",
+          "orchestratorVersion": "1.9.6",
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "upgradeSettings": {
+            "maxSurge": "33%"
+          },
+          "vmSize": "Standard_DS1_v2"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2026-06-02-preview",
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/eastus/operationresults/00000000-0000-0000-0000-000000000000?api-version=2026-06-02-preview"
+      }
+    }
+  },
+  "operationId": "AgentPools_Update",
+  "title": "Update Agent Pool - Scale VMSS"
+}

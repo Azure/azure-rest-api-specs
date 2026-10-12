@@ -1,7 +1,7 @@
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { kebabCase } from "change-case";
 import { marked, type Tokens } from "marked";
-import { inspect } from "util";
+import { inspect } from "node:util";
 
 export const MarkdownType = {
   Arm: "arm",

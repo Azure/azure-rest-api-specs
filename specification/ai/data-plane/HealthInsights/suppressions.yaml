@@ -1,0 +1,20 @@
+- tool: TypeSpecValidation
+  reason: >
+    Suppressed pending tsp-validation support for the new structure.
+    Responsibility: Service team.
+  rules: [FolderStructure]
+  paths:
+    - RadiologyInsights
+- tool: TypeSpecValidation
+  reason: >
+    TypeSpec Config Incomplete - Missing required emitter options in tspconfig.yaml.
+    Responsibility: Spec owner would update missing configurations.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-ts.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-csharp.*
+  paths:
+    - tspconfig.yaml
