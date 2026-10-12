@@ -109,6 +109,58 @@ interface VoiceAgentWebSocket {
   >;
 }
 
+/** A successful Live WebSocket upgrade. The Live route does not negotiate the realtime subprotocol. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveWebSocketUpgradeResult {
+  @statusCode
+  status_code: 101;
+}
+
+/**
+ * Connects a Live voice agent to its Foundry GPT Live deployment. Foundry applies the persisted
+ * agent configuration and sends the native session.start upstream. The client waits for
+ * session.started, then exchanges native OpenAI Live events; it does not send session.start.
+ * The definition's sub_protocol selects the agent type, not an inference-event discriminator
+ * or a negotiated WebSocket subprotocol.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "A WebSocket protocol upgrade does not match a standard resource operation template."
+@tag("Voice Agent Live WebSocket")
+interface VoiceAgentLiveWebSocket {
+  /**
+   * Establishes a primary WebSocket for an agent with sub_protocol=live. This is not the native
+   * OpenAI POST /live/sessions WebRTC operation. Only WebSocket transport is supported here.
+   * Native session.update changes delegation settings only; it cannot switch the configured
+   * Foundry-managed target. Foundry owns execution and result injection for managed delegation.
+   * Do not negotiate the realtime WebSocket subprotocol on this route.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "The successful WebSocket 101 upgrade has no HTTP entity body."
+  @summary("Connect to a GPT Live voice agent")
+  @get
+  @sharedRoute
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/sessions")
+  connectLiveVoiceAgent is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent in this project. */
+      @path agent_name: string;
+
+      /** A query alternative to the Foundry-Features opt-in header. */
+      @query("foundry_features")
+      foundry_features_query?: AgentDefinitionOptInKeys.voice_agents_v1_preview;
+
+      /** Selects a specific immutable version of the Live voice agent. */
+      @query("x-agent-version-override") agent_version_override?: string;
+
+      /** Per-session structured input values, serialized as a URL-encoded JSON object. */
+      @query structured_input?: string;
+
+      /** Overrides Foundry conversation/audio persistence for this connection, not native Live recording storage. */
+      @query store?: boolean;
+    },
+    VoiceAgentLiveWebSocketUpgradeResult
+  >;
+}
+
 /**
  * Read-only, endpoint-scoped retrieval of the conversations, responses, transcript items, per-turn
  * metrics, and audio recorded by a voice agent. For a `voice` agent, the service is the sole writer of
@@ -462,6 +514,181 @@ interface AgentEndpointConversations {
       @path agent_name: string;
 
       /** The id of the conversation whose merged recording is streamed. */
+      @path conversation_id: string;
+    },
+    VoiceAudioStream
+  >;
+}
+
+/**
+ * Live-only conversation persistence under its own protocol namespace. Realtime
+ * conversation operations and item types remain unchanged. The service is the
+ * sole writer: this surface offers read operations and cascading conversation
+ * deletion, not item writes. It has no Realtime response/turn resources.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The Live endpoint-scoped read-only conversation, item, and audio projection does not match a standard resource operation template."
+@tag("Agent Live Conversations")
+interface AgentEndpointLiveConversations {
+  /** Lists conversations persisted for a Live voice agent. The effective store setting includes the session override. Only Live conversations are returned. */
+  @summary("List Live voice agent conversations")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations")
+  @list
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  listLiveAgentConversations is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<VoiceAgentLiveConversation>
+  >;
+
+  /** Retrieves one persisted Live conversation by its Foundry conversation ID. Items are retrieved separately through the items route. Returns 404 when the conversation does not exist or was not stored. */
+  @summary("Get a Live voice agent conversation")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getLiveAgentConversation is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+    },
+    VoiceAgentLiveConversation
+  >;
+
+  /** Deletes a stored Live conversation and its input, output, delegation, and audio data. This is Foundry persistence deletion, not an upstream native Live session control. */
+  @summary("Delete a Live voice agent conversation")
+  @delete
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  deleteLiveAgentConversation is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+    },
+    NoContentResponse
+  >;
+
+  /** Returns the ordered persisted input, output, and delegation items. Pagination cursors refer to the item's id. These items are independent of Realtime messages and do not imply native Live turns. Returns 404 when the conversation was not stored or does not exist. */
+  @summary("List items in a Live voice agent conversation")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items")
+  @list
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  listLiveAgentConversationItems is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<VoiceAgentLiveConversationItem>
+  >;
+
+  /** Retrieves a persisted Live input, output, or delegation item by its id. For delegation items, id is the native delegation id. Returns 404 when the conversation or item was not stored or does not exist. */
+  @summary("Get a Live voice agent conversation item")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getLiveAgentConversationItem is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+
+      /** The id returned on the persisted item. */
+      @path item_id: string;
+    },
+    VoiceAgentLiveConversationItem
+  >;
+
+  /** Returns the existing voice audio metadata shape for a captured Live input or output segment. For BYOS, blob_uri identifies customer storage without a SAS token; otherwise bytes are retrieved through this Live item's audio/content route. Captured output does not prove client playback. Returns 404 for delegation items, absent audio, or unstored conversations. */
+  @summary("Get a Live conversation item's audio metadata")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}/audio")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getLiveAgentConversationAudioItem is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+
+      /** The id returned on the persisted item. */
+      @path item_id: string;
+    },
+    VoiceAudioItem
+  >;
+
+  /** Streams captured Live input or output audio as WAV through the service, without a SAS URL. Foundry-managed storage only; BYOS callers use the metadata blob_uri and this route returns 409. Returns 404 for delegation items, absent audio, or unstored conversations. */
+  @summary("Stream a Live conversation item's audio")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}/audio/content")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getLiveAgentConversationAudioItemContent is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+
+      /** The id returned on the persisted item. */
+      @path item_id: string;
+    },
+    VoiceAudioStream
+  >;
+
+  /** Returns shared whole-conversation stereo recording metadata: user audio on the left, assistant audio on the right. For BYOS, blob_uri points to customer storage without a SAS token. Returns 409 recording_not_ready while finalization is pending, with Retry-After when available; 409 recording_unavailable after failed finalization; or 404 when no stored audio exists. The recording is derived from captured Live audio, not native response turns or proof of playback. */
+  @summary("Get a Live conversation's merged recording metadata")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/audio")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getLiveAgentConversationAudio is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
+      @path conversation_id: string;
+    },
+    VoiceRecording
+  >;
+
+  /** Streams the merged captured Live recording as stereo WAV without a SAS URL. Foundry-managed storage only; BYOS returns 409 and callers use the metadata blob_uri. Returns 409 recording_not_ready while finalization is pending, 409 recording_unavailable after failed finalization, or 404 when no stored audio exists. */
+  @summary("Stream a Live conversation's merged recording")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/audio/content")
+  @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
+  getLiveAgentConversationAudioContent is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent. */
+      @path agent_name: string;
+
+      /** The Foundry conversation ID returned in session.started.conversation_id. */
       @path conversation_id: string;
     },
     VoiceAudioStream
