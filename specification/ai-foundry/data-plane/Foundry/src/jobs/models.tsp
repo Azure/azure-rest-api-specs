@@ -351,12 +351,12 @@ model CommandJob extends JobProperties {
   @doc("Is the asset archived?")
   isArchived?: boolean;
 
-  @doc("Status of the job.")
+  @doc("Execution state, not the status of an API request. Non-terminal states include `NotStarted`, `Queued`, `Running`, `CancelRequested`, and `Finalizing`. Terminal states are `Completed` (execution succeeded), `Failed` (execution failed), and `Canceled` (execution was canceled). A successful cancellation request can precede a terminal state. Values are case-sensitive; clients must tolerate additional states. For a failed job, inspect its log artifacts for execution diagnostics.")
   @visibility(Lifecycle.Read)
   status?: string;
 }
 
-@doc("Job resource.")
+@doc("A Foundry Training Job resource whose creation and updates complete independently of its asynchronous execution.")
 @Rest.resource("training_jobs")
 model Job {
   @doc("The name of the Job. This is case-sensitive.")
@@ -378,34 +378,6 @@ model Job {
   @doc("Metadata pertaining to creation and last modification of the resource.")
   @visibility(Lifecycle.Read)
   systemData?: SystemData;
-}
-
-@doc("Response returned when a job delete operation is accepted asynchronously.")
-@clientName("JobDeleteAcceptedResult", "csharp")
-model JobDeleteAcceptedResponse {
-  @statusCode statusCode: 202;
-
-  @doc("URL to poll for the status of the delete operation.")
-  @header("Location")
-  location: string;
-
-  @doc("Suggested delay in seconds before polling.")
-  @header("Retry-After")
-  retryAfter?: int32;
-}
-
-@doc("Response returned when a job cancel operation is accepted asynchronously.")
-@clientName("JobCancelAcceptedResult", "csharp")
-model JobCancelAcceptedResponse {
-  @statusCode statusCode: 202;
-
-  @doc("URL to poll for the status of the cancel operation.")
-  @header("Location")
-  location: string;
-
-  @doc("Suggested delay in seconds before polling.")
-  @header("Retry-After")
-  retryAfter?: int32;
 }
 
 @doc("Specifies which jobs to include in a list result based on their lifecycle state.")
