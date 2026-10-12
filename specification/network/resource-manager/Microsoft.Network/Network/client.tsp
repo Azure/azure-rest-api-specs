@@ -142,12 +142,12 @@ namespace Common {
 @@clientName(
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "ArmProxyResource",
-  "javascript"
+  "javascript,python"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.Resource,
   "ArmResource",
-  "javascript"
+  "javascript,python"
 );
 
 // Java naming mitigations
@@ -7842,3 +7842,5 @@ op replaceprivateDnsZoneGroupsList(
   "enableOnlyIpv6Peering",
   "python"
 );
+
+@@clientName(Nat64Capability, "NAT64Capability", "go");
