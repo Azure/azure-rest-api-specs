@@ -10572,6 +10572,9 @@
           },
           "Get a virtual machine with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithVMSizeProperties.json"
+          },
+          "Get a virtual machine with an Instance Profile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithInstanceProfile.json"
           }
         }
       },
@@ -10694,6 +10697,9 @@
           },
           "Create a VM with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithVMSizeProperties.json"
+          },
+          "Create a VM with an Instance Profile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithInstanceProfile.json"
           },
           "Create a VM with automatic zone placement": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPlacement.json"
@@ -20933,6 +20939,14 @@
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the virtual machine."
+        },
+        "instanceProfile": {
+          "$ref": "../../common-types/v1/common.json#/definitions/SubResource",
+          "description": "[Preview Feature] Specifies the Instance Profile to use as a template when creating the virtual machine. The resource ID must use the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/instanceProfiles/{instanceProfileName}/versions/{versionNumber}. Properties from the Instance Profile populate the VM request, and properties explicitly provided in the request override profile values. This property can be specified only during VM creation and is returned by GET and LIST operations. It cannot be added or changed on an existing VM.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "scheduledEventsPolicy": {
           "$ref": "#/definitions/ScheduledEventsPolicy",
