@@ -453,6 +453,16 @@ namespace Azure.AI.Projects {
     type: "cloud_computer_use_preview";
 
     /**
+     * The cloud computer use tool parameters.
+     */
+    cloud_computer_use_preview: CloudComputerUseToolParameters;
+  }
+
+  /**
+   * Definition of input parameters for the cloud computer use tool.
+   */
+  model CloudComputerUseToolParameters {
+    /**
      * The ID of the Windows 365 Cloud PC pool used by the tool at runtime.
      */
     cloud_pc_pool_id: string;

@@ -49321,16 +49321,16 @@ components:
       type: object
       required:
         - type
-        - cloud_pc_pool_id
+        - cloud_computer_use_preview
       properties:
         type:
           type: string
           enum:
             - cloud_computer_use_preview
           description: The object type, which is always `cloud_computer_use_preview`.
-        cloud_pc_pool_id:
-          type: string
-          description: The ID of the Windows 365 Cloud PC pool used by the tool at runtime.
+        cloud_computer_use_preview:
+          $ref: '#/components/schemas/CloudComputerUseToolParameters'
+          description: The cloud computer use tool parameters.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a cloud computer use tool, as used to configure an agent.
@@ -49341,21 +49341,30 @@ components:
       type: object
       required:
         - type
-        - cloud_pc_pool_id
+        - cloud_computer_use_preview
       properties:
         type:
           type: string
           enum:
             - cloud_computer_use_preview
-        cloud_pc_pool_id:
-          type: string
-          description: The ID of the Windows 365 Cloud PC pool used by the tool at runtime.
+        cloud_computer_use_preview:
+          $ref: '#/components/schemas/CloudComputerUseToolParameters'
+          description: The cloud computer use tool parameters.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A cloud computer use tool stored in a toolbox.
       x-ms-foundry-meta:
         required_previews:
           - preview_tool
+    CloudComputerUseToolParameters:
+      type: object
+      required:
+        - cloud_pc_pool_id
+      properties:
+        cloud_pc_pool_id:
+          type: string
+          description: The ID of the Windows 365 Cloud PC pool used by the tool at runtime.
+      description: Definition of input parameters for the cloud computer use tool.
     ClusterInsightResult:
       type: object
       required:

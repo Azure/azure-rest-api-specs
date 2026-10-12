@@ -42842,7 +42842,7 @@
         "type": "object",
         "required": [
           "type",
-          "cloud_pc_pool_id"
+          "cloud_computer_use_preview"
         ],
         "properties": {
           "type": {
@@ -42852,9 +42852,9 @@
             ],
             "description": "The object type, which is always `cloud_computer_use_preview`."
           },
-          "cloud_pc_pool_id": {
-            "type": "string",
-            "description": "The ID of the Windows 365 Cloud PC pool used by the tool at runtime."
+          "cloud_computer_use_preview": {
+            "$ref": "#/components/schemas/CloudComputerUseToolParameters",
+            "description": "The cloud computer use tool parameters."
           }
         },
         "allOf": [
@@ -42873,7 +42873,7 @@
         "type": "object",
         "required": [
           "type",
-          "cloud_pc_pool_id"
+          "cloud_computer_use_preview"
         ],
         "properties": {
           "type": {
@@ -42882,9 +42882,9 @@
               "cloud_computer_use_preview"
             ]
           },
-          "cloud_pc_pool_id": {
-            "type": "string",
-            "description": "The ID of the Windows 365 Cloud PC pool used by the tool at runtime."
+          "cloud_computer_use_preview": {
+            "$ref": "#/components/schemas/CloudComputerUseToolParameters",
+            "description": "The cloud computer use tool parameters."
           }
         },
         "allOf": [
@@ -42898,6 +42898,19 @@
             "preview_tool"
           ]
         }
+      },
+      "CloudComputerUseToolParameters": {
+        "type": "object",
+        "required": [
+          "cloud_pc_pool_id"
+        ],
+        "properties": {
+          "cloud_pc_pool_id": {
+            "type": "string",
+            "description": "The ID of the Windows 365 Cloud PC pool used by the tool at runtime."
+          }
+        },
+        "description": "Definition of input parameters for the cloud computer use tool."
       },
       "ClusterInsightResult": {
         "type": "object",
