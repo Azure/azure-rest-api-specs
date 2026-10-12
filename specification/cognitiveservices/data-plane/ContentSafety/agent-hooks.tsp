@@ -668,6 +668,9 @@ union AgentPolicyLayerKind {
   @doc("An explicitly selected developer policy.")
   Developer: "developer",
 
+  @doc("An explicitly selected primary policy for a named-policy gateway evaluation.")
+  NamedPolicy: "namedPolicy",
+
   @doc("A mandatory subscription policy.")
   Subscription: "subscription",
 
@@ -741,11 +744,26 @@ model AgentHarmResult {
   license?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The October hosted transport admits exactly the Foundry-project and named-policy profiles. Local in-process integrations do not call this route."
 @added(Versions.v2026_10_15_preview)
-@doc("Versioned enforcement receipt for one AACS evaluation attempt. It proves what was evaluated and under which policy/readiness fences; it does not replace the Verdict or prove that the calling host enforced it.")
+@doc("Hosted Unified Moderate evaluation profile. Local Copilot and WorkIQ integrations use in-process Agent Hooks/ACS and are not represented by this hosted HTTP profile.")
+union AgentEvaluationProfile {
+  @doc("A governed Foundry project with a mandatory project binding and optional exact developer policy.")
+  FoundryProject: "foundryProject",
+
+  @doc("An authorized named-policy gateway evaluation without a Foundry project target.")
+  NamedPolicy: "namedPolicy",
+}
+
+@added(Versions.v2026_10_15_preview)
+@discriminator("profile")
+@doc("Common versioned receipt fields for one AACS evaluation attempt. The receipt proves what was evaluated; it does not replace the Verdict or prove that the calling host enforced it.")
 model AgentPolicyEvaluationReceipt {
   @doc("Receipt schema version. This version is tied to the October transport contract rather than customer-controlled feature activation.")
   receiptVersion: "2026-10-15-preview";
+
+  @doc("Hosted evaluation profile.")
+  profile: AgentEvaluationProfile;
 
   @doc("Stable evaluation identifier used to join AACS evaluation evidence to a separate host action or release attestation.")
   @minLength(1)
@@ -755,33 +773,16 @@ model AgentPolicyEvaluationReceipt {
   @minValue(1)
   attempt: int64;
 
-  @doc("Governed target selected by targetResourceId.")
-  @minLength(1)
-  targetResourceId: string;
-
-  @doc("Opaque target incarnation that changes when the target is deleted and recreated.")
-  @minLength(1)
-  targetIncarnation: string;
-
-  @doc("Monotonic active-binding epoch authoritatively read for this attempt.")
-  @minValue(0)
-  bindingEpoch: int64;
-
-  @doc("Monotonic operation-readiness epoch authoritatively read for this attempt.")
-  @minValue(0)
-  readinessEpoch: int64;
-
-  @doc("Immutable target-effective policy generation evaluated by this attempt.")
-  @minValue(0)
-  appliedGeneration: int64;
-
   @doc("Exact policy layers evaluated and composed into the aggregate Verdict.")
   evaluatedPolicyLayers: AgentEvaluatedPolicyLayer[];
 
-  @doc("Intervention points required by every applicable policy layer.")
+  @doc("The single intervention point evaluated by this receipt.")
+  evaluatedInterventionPoint: AgentInterceptionPoint;
+
+  @doc("Intervention points required by every applicable policy layer for this host profile. This is capability evidence, not a claim that those points ran in this evaluation.")
   requiredInterventionPoints: AgentInterceptionPoint[];
 
-  @doc("Required intervention points supported by the admitted host profile for this target and operation.")
+  @doc("Required intervention points supported by the admitted host profile. This is capability evidence, not a list of points evaluated by this receipt.")
   satisfiedInterventionPoints: AgentInterceptionPoint[];
 
   @doc("AACS host-profile version included in executable artifact identity.")
@@ -802,6 +803,38 @@ model AgentPolicyEvaluationReceipt {
 }
 
 @added(Versions.v2026_10_15_preview)
+@doc("Receipt for a governed Foundry project. These fencing fields are required only for this profile and must come from authoritative Foundry/PMS state rather than request metadata.")
+model AgentFoundryProjectReceipt extends AgentPolicyEvaluationReceipt {
+  profile: "foundryProject";
+
+  @doc("Governed project selected by targetResourceId.")
+  @minLength(1)
+  targetResourceId: string;
+
+  @doc("Opaque project incarnation that changes when the target is deleted and recreated.")
+  @minLength(1)
+  targetIncarnation: string;
+
+  @doc("Monotonic active-binding epoch authoritatively read for this attempt.")
+  @minValue(0)
+  bindingEpoch: int64;
+
+  @doc("Monotonic operation-readiness epoch authoritatively read for this attempt.")
+  @minValue(0)
+  readinessEpoch: int64;
+
+  @doc("Immutable target-effective policy generation evaluated by this attempt.")
+  @minValue(0)
+  appliedGeneration: int64;
+}
+
+@added(Versions.v2026_10_15_preview)
+@doc("Receipt for an authorized named-policy gateway evaluation. This profile has no Foundry project incarnation, binding epoch, readiness epoch or project generation.")
+model AgentNamedPolicyReceipt extends AgentPolicyEvaluationReceipt {
+  profile: "namedPolicy";
+}
+
+@added(Versions.v2026_10_15_preview)
 @doc("October Unified Moderate transport response. Verdict is the canonical closed Agent Hooks object. Receipt is separate transport metadata used by the host to fence enforcement and join later host-action evidence.")
 model AgentEvaluationResult {
   @doc("Canonical aggregate Agent Hooks Verdict.")
@@ -819,7 +852,7 @@ union AgentEvaluationErrorCode {
   @doc("The selector combination or AgentContext is invalid.")
   InvalidRequest: "InvalidRequest",
 
-  @doc("policyId was supplied without both policyRevision and policySemanticDigest.")
+  @doc("developerPolicyId was supplied without both developerPolicyRevision and developerPolicySemanticDigest.")
   DeveloperPolicyRevisionRequired: "DeveloperPolicyRevisionRequired",
 
   @doc("The selected developer policy no longer matches the admitted revision or semantic digest.")

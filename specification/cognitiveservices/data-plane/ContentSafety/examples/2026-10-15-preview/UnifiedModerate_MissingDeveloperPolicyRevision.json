@@ -25,7 +25,7 @@
         "role": "user"
       }
     },
-    "policyId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account/raiPolicies/example-developer-policy"
+    "developerPolicyId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account/raiPolicies/example-developer-policy"
   },
   "responses": {
     "200": {
@@ -40,13 +40,9 @@
         },
         "receipt": {
           "receiptVersion": "2026-10-15-preview",
+          "profile": "foundryProject",
           "evaluationId": "evaluation-example-session-1",
           "attempt": 1,
-          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account/projects/example-project",
-          "targetIncarnation": "project-incarnation-17",
-          "bindingEpoch": 41,
-          "readinessEpoch": 73,
-          "appliedGeneration": 11,
           "evaluatedPolicyLayers": [
             {
               "kind": "project",
@@ -57,6 +53,7 @@
               "decision": "deny"
             }
           ],
+          "evaluatedInterventionPoint": "input",
           "requiredInterventionPoints": [
             "input"
           ],
@@ -72,7 +69,12 @@
           ],
           "hostProfileVersion": "aacs-frontdoor/2",
           "capabilityVersion": "foundry-agent-hooks/2026-10-15-preview",
-          "authenticatedProducerResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/foundry-agent-host"
+          "authenticatedProducerResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/foundry-agent-host",
+          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account/projects/example-project",
+          "targetIncarnation": "project-incarnation-17",
+          "bindingEpoch": 41,
+          "readinessEpoch": 73,
+          "appliedGeneration": 11
         }
       }
     },
