@@ -42,9 +42,11 @@ If no `provisioningState` is returned in a response, ARM assumes `Succeeded`.
 `provisioningState` **MUST** be marked as read-only:
 
 - **OpenAPI JSON:** `"readOnly": true`
-- **TypeSpec:** Set `use-read-only-status-schema: true` in the
-  `@azure-tools/typespec-autorest` emitter options (default `false`).
-  Without it, the `ProvisioningStateMustBeReadOnly` LintDiff check fails. With it, the emitter stamps `readOnly: true`
+- **TypeSpec:** The `use-read-only-status-schema: true` option in the
+  `@azure-tools/typespec-autorest` emitter options (default `false`) can
+  resolve `ProvisioningStateMustBeReadOnly` LintDiff failures, provided
+  enabling it does not change previously shipped OpenAPI.
+  With it, the emitter stamps `readOnly: true`
   onto the status **schema definition** itself, which is what the check inspects. The emitter auto-recognizes a schema
   as an LRO status schema when its members are **named** `Succeeded`, `Failed`, and `Canceled` (which
   `ResourceProvisioningState` supplies);
@@ -137,10 +139,10 @@ The `string` base type is included via `ResourceProvisioningState` to keep the e
 
 ## `ProvisioningStateMustBeReadOnly` -- Emitter Workaround (`use-read-only-status-schema`)
 
-Apply this whenever a PR **suppresses** the
-`ProvisioningStateMustBeReadOnly` linter rule, or whenever **LintDiff
-fails** with `ProvisioningStateMustBeReadOnly`. Recommend the emitter
-workaround below instead of (or before) adding or keeping a suppression.
+When a PR **suppresses** the `ProvisioningStateMustBeReadOnly` linter
+rule, or **LintDiff fails** with `ProvisioningStateMustBeReadOnly`, first
+check whether enabling the emitter option would change previously shipped
+OpenAPI. Recommend the option only when it preserves shipped OpenAPI.
 
 **Root cause.** The rule fires because `azure-openapi-validator` and
 `oav` ignore siblings of `$ref`. When the emitter produces
@@ -156,12 +158,12 @@ References:
 - [Support $ref siblings -- Azure/oav#848](https://github.com/Azure/oav/issues/848)
 - [Discussion -- Azure/azure-sdk-tools#6191](https://github.com/Azure/azure-sdk-tools/issues/6191)
 
-**Recommended fix (TypeSpec projects).** Add
+**Fix when compatible with shipped OpenAPI (TypeSpec projects).** If
+enabling the option does not change previously shipped OpenAPI, add
 `use-read-only-status-schema: true` to the `@azure-tools/typespec-autorest`
 emitter options in `tspconfig.yaml`. With this option the emitter
 generates a dedicated read-only status schema (without the
-`$ref`-sibling `readOnly` pattern) that the linter recognizes, so the
-suppression is no longer needed:
+`$ref`-sibling `readOnly` pattern) that the linter recognizes:
 
 ```yaml
 options:
@@ -179,8 +181,17 @@ surrounding keys are the emitter block the project typically already
 has. If the project's `tspconfig.yaml` has no
 `@azure-tools/typespec-autorest` options block, add one.
 
-**The ARM scaffolding template enables this option automatically**, so a
-failing check usually means an older or hand-configured `tspconfig.yaml`.
+**If the option would change previously shipped OpenAPI, do not enable it
+project-wide.** In particular, do not recommend a
+`@azure-tools/typespec-azure-core/no-openapi` suppression for a new API
+version to work around this validator limitation. Instead, preserve the
+shipped contract and add a scoped Swagger LintDiff suppression for the
+affected `ProvisioningStateMustBeReadOnly` finding, with a specific
+`from:` / `where:` scope and a clear reason.
+
+**The ARM scaffolding template enables this option automatically**, so
+verify that using it does not alter previously shipped OpenAPI before
+recommending it in an existing project.
 
 **How recognition works (and a silent-failure trap).** With the option on,
 the emitter stamps `readOnly: true` onto any `enum`/`union` it recognizes as
@@ -192,15 +203,15 @@ changes nothing.
 
 **How to apply during review:**
 
-- **Suppression present (new or carried-over):** recommend adding
-  `use-read-only-status-schema: true`, then -- once the swagger is
-  regenerated -- removing the `ProvisioningStateMustBeReadOnly`
-  suppression (subject to the removal-safety rule
-  RPC-SUPPRESS-REMOVE-SAFELY). Note it is a **project-wide** option, so
-  it clears every `ProvisioningStateMustBeReadOnly` suppression in the
-  project, not just the one under review.
+- **Suppression present (new or carried-over):** recommend the emitter
+  option and subsequent suppression removal only if the option preserves
+  previously shipped OpenAPI. Regenerate and verify the output first, and
+  follow the removal-safety rule RPC-SUPPRESS-REMOVE-SAFELY. The option is
+  project-wide; otherwise, keep or add a scoped LintDiff suppression.
 - **LintDiff failure with no suppression yet:** recommend the emitter
-  option as the fix rather than adding a suppression.
+  option only if it preserves previously shipped OpenAPI. If it would
+  change shipped OpenAPI, use a scoped LintDiff suppression with a
+  specific reason instead.
 - **Handwritten OpenAPI (no TypeSpec):** the emitter option does not
   apply. Inline the enum (drop the `$ref`) or wrap it in `allOf` so
   `readOnly: true` is honored on the emitted schema.

@@ -128,7 +128,7 @@ as license to recommend deletion.
    `ProvisioningStateMustBeReadOnly`: confirm no `provisioningState`
    property in the emitted swagger is shaped as `{ "$ref": "...",
 "readOnly": true }`, because `readOnly` siblings of `$ref` are
-   ignored per JSON Schema). For TypeSpec projects, the preferred remedy is the emitter option `use-read-only-status-schema: true` in `tspconfig.yaml` -- recommend it over keeping the suppression; see [`provisioning-state.md`](./provisioning-state.md), section "`ProvisioningStateMustBeReadOnly` -- Emitter Workaround".
+   ignored per JSON Schema). For TypeSpec projects, recommend the emitter option `use-read-only-status-schema: true` in `tspconfig.yaml` only if it does not change previously shipped OpenAPI. Otherwise, preserve the shipped contract and use a scoped LintDiff suppression with a clear reason; do not recommend `@azure-tools/typespec-azure-core/no-openapi` for a new API version. See [`provisioning-state.md`](./provisioning-state.md), section "`ProvisioningStateMustBeReadOnly` -- Emitter Workaround".
 3. **Name the safe alternative explicitly.** If the rule still fires
    on the emitted artifact, the alternatives are (a) fix the source so
    the emitter produces a compliant shape, or (b) narrow the
