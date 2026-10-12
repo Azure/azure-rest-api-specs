@@ -203,21 +203,9 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs", "rust,go");
 @@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs", "rust,go");
 
-/** The lease duration parameter with its Rust client name customized. */
-alias RustBlobAcquireLeaseDurationParameter = {
-  /** Specifies the duration of the lease, in seconds, or negative one for a lease that never expires. */
-  @clientName("renamed_duration", "rust")
-  @header("x-ms-lease-duration")
-  duration: int32;
-};
-
-@@override(
-  Storage.Blob.Blob.acquireLease,
-  replaceParameter(
-    Storage.Blob.Blob.acquireLease,
-    "duration",
-    RustBlobAcquireLeaseDurationParameter.duration
-  ),
+@@clientName(
+  LeaseDurationHeaderParameter.duration,
+  "renamed_duration",
   "rust"
 );
 
