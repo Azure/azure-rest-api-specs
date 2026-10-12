@@ -1617,7 +1617,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponse"
+              "$ref": "#/definitions/ValidateConfigurationResponseV2"
             }
           },
           "202": {
@@ -4192,7 +4192,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponse"
+              "$ref": "#/definitions/ValidateConfigurationResponseV2"
             }
           },
           "202": {
@@ -5938,7 +5938,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponse"
+              "$ref": "#/definitions/ValidateConfigurationResponseV2"
             }
           },
           "202": {
@@ -11035,7 +11035,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponse"
+              "$ref": "#/definitions/ValidateConfigurationResponseV2"
             }
           },
           "202": {
@@ -12562,7 +12562,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponse"
+              "$ref": "#/definitions/ValidateConfigurationResponseV2"
             }
           },
           "202": {
@@ -13497,7 +13497,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponse"
+              "$ref": "#/definitions/ValidateConfigurationResponseV2"
             }
           },
           "202": {
@@ -28555,30 +28555,6 @@
         }
       }
     },
-    "ValidateConfigurationResponse": {
-      "type": "object",
-      "description": "The response of the action validate configuration.",
-      "properties": {
-        "configurationState": {
-          "$ref": "#/definitions/ConfigurationState",
-          "description": "Gets the configuration state.",
-          "readOnly": true
-        },
-        "url": {
-          "type": "string",
-          "description": "URL for the details of the response."
-        },
-        "properties": {
-          "$ref": "#/definitions/ValidateConfigurationResponseProperties",
-          "description": "Network Device Run Rw Command Response properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-        }
-      ]
-    },
     "ValidateConfigurationResponseProperties": {
       "type": "object",
       "description": "The response of the action validate configuration.",
@@ -28593,6 +28569,66 @@
           "description": "URL for the details of the response."
         }
       }
+    },
+    "ValidateConfigurationResponseV2": {
+      "type": "object",
+      "description": "The response of the action validate configuration.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ID for the async operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the async operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status."
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "Percent of the operation that is complete.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation."
+        },
+        "operations": {
+          "type": "array",
+          "description": "The operations list.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+          }
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "If present, details of the operation error."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ID of the resource against which the original async operation was started.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ValidateConfigurationResponseProperties",
+          "description": "Network Device Run Rw Command Response properties."
+        }
+      },
+      "required": [
+        "status"
+      ]
     },
     "ViewDeviceConfigurationOperationResponse": {
       "type": "object",
