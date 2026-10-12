@@ -160,6 +160,7 @@ model MCPToolResource {
 
 /** The Union of approval types. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @added(Versions.v2025_05_15_preview)
 union MCPRequiredApproval {
   string,

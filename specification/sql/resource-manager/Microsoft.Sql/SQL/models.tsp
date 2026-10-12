@@ -16,6 +16,7 @@ namespace Microsoft.Sql;
  * The differential backup interval in hours. This is how many interval hours between each differential backup will be supported. This is only applicable to live databases but not dropped databases.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @Azure.ResourceManager.Legacy.feature(Features.BackupShortTermRetentionPolicies)
 union DiffBackupIntervalInHours {
   int32,
