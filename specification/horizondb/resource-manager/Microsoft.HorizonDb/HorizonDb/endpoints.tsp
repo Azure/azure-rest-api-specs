@@ -10,14 +10,12 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.HorizonDb;
 
-@added(Versions.v2026_10_01_preview)
 @doc("A platform-assigned HorizonDB endpoint name that matches the name of its associated Cluster or Pool.")
 @pattern("^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$")
 @minLength(1)
 @maxLength(63)
 scalar EndpointName extends string;
 
-@added(Versions.v2026_10_01_preview)
 @doc("Represents a service-generated, service-managed HorizonDB endpoint. The Cluster-scoped Endpoint is created and deleted with its parent Cluster. A Pool-scoped Endpoint is created and deleted with the Pool identified by associatedResourceId. Endpoints cannot be created or deleted independently from their lifecycle owner.")
 @parentResource(Cluster)
 model Endpoint is Azure.ResourceManager.ProxyResource<EndpointProperties> {
@@ -38,7 +36,6 @@ model Endpoint is Azure.ResourceManager.ProxyResource<EndpointProperties> {
 @@maxLength(Endpoint.name, 63);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Endpoint is a service-managed resource with no asynchronous PUT or PATCH operation whose status would require provisioningState."
-@added(Versions.v2026_10_01_preview)
 @doc("Properties of a service-generated HorizonDB endpoint.")
 model EndpointProperties {
   @doc("The scope of the endpoint. Cluster-scoped Endpoints provide the cluster connection, and Pool-scoped Endpoints provide read-only connections to eligible nodes in one pool.")
@@ -58,7 +55,6 @@ model EndpointProperties {
   role: EndpointRole;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The scope of a HorizonDB endpoint.")
 union EndpointScope {
   string,
@@ -70,7 +66,6 @@ union EndpointScope {
   Pool: "Pool",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Role of the endpoint.")
 union EndpointRole {
   string,
@@ -82,7 +77,6 @@ union EndpointRole {
   ReadWrite: "ReadWrite",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The Azure resource ID of the HorizonDB cluster or pool associated with an endpoint.")
 scalar EndpointAssociatedResourceId
   extends armResourceIdentifier<[
@@ -96,7 +90,6 @@ scalar EndpointAssociatedResourceId
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Endpoint instances are service-created with their lifecycle owner and cannot be deleted independently."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Endpoint instances are service-created with their lifecycle owner and expose no customer-configurable properties."
-@added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface Endpoints {
   @doc("Gets information about a service-generated HorizonDB Cluster- or Pool-scoped Endpoint.")

@@ -9310,6 +9310,13 @@
         "properties": {
           "$ref": "#/definitions/PoolProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -9478,6 +9485,13 @@
       "type": "object",
       "description": "HorizonDB pool for update operations.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
           "$ref": "#/definitions/PoolPropertiesForPatchUpdate",
           "description": "The properties that can be updated for a HorizonDB pool."

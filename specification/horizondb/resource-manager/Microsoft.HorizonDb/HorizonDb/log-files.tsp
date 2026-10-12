@@ -11,7 +11,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.HorizonDb;
 
-@added(Versions.v2026_10_01_preview)
 @doc("A predefined log capture configuration created by the service for a HorizonDB cluster.")
 @parentResource(Cluster)
 model LogCaptureConfiguration
@@ -24,7 +23,6 @@ model LogCaptureConfiguration
   >;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The settings for capturing a specific type of HorizonDB log.")
 model LogCaptureConfigurationProperties {
   @doc("Specifies whether HorizonDB captures this type of log. Disabling capture stops the production of new log files; existing files remain available until their retention period expires.")
@@ -42,7 +40,6 @@ model LogCaptureConfigurationProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties for updating the log capture configuration. Omitted properties preserve their current values.")
 model LogCaptureConfigurationPropertiesForPatchUpdate {
   @doc("Specifies whether HorizonDB captures this type of log. Disabling capture stops the production of new log files; existing files remain available until their retention period expires.")
@@ -56,14 +53,12 @@ model LogCaptureConfigurationPropertiesForPatchUpdate {
   retentionDays?: int32;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A sparse update request for a log capture configuration.")
 model LogCaptureConfigurationForPatchUpdate {
   @doc("The log capture properties to update.")
   properties?: LogCaptureConfigurationPropertiesForPatchUpdate;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Specifies whether HorizonDB captures log files.")
 union LogCaptureState {
   string,
@@ -75,7 +70,6 @@ union LogCaptureState {
   Disabled: "Disabled",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A service-generated log file captured for a HorizonDB cluster.")
 @parentResource(Cluster)
 model LogFile is Azure.ResourceManager.ProxyResource<LogFileProperties> {
@@ -88,7 +82,6 @@ model LogFile is Azure.ResourceManager.ProxyResource<LogFileProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Log files are immutable or actively written service-generated artifacts and do not have an independent provisioning lifecycle."
-@added(Versions.v2026_10_01_preview)
 @doc("Metadata for a service-generated HorizonDB log file.")
 model LogFileProperties {
   @doc("The type of the captured log file.")
@@ -129,7 +122,6 @@ model LogFileProperties {
   role: NodeRole;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The type of a captured HorizonDB log file.")
 union LogFileType {
   string,
@@ -138,7 +130,6 @@ union LogFileType {
   PostgreSqlServer: "PostgreSqlServer",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A short-lived signed URL for downloading a captured log file.")
 model LogFileDownloadUrl {
   @doc("A short-lived signed URL from which the original log file can be downloaded.")
@@ -151,7 +142,6 @@ model LogFileDownloadUrl {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Log capture configurations are predefined and created by the service with the parent cluster. Customers can modify existing configurations but cannot create or replace them."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Log capture configurations are predefined service-created resources and cannot be deleted. Customers disable log capture through the state property."
-@added(Versions.v2026_10_01_preview)
 @doc("Operations for HorizonDB log capture configurations.")
 @armResourceOperations
 interface LogCaptureConfigurations {
@@ -172,7 +162,6 @@ interface LogCaptureConfigurations {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Log files are service-generated and expire according to the configured retention period; customers cannot delete them independently."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Log files are read-only service-generated artifacts and cannot be created or replaced independently."
-@added(Versions.v2026_10_01_preview)
 @doc("Operations for captured HorizonDB log files.")
 @armResourceOperations
 interface LogFiles {

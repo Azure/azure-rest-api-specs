@@ -154,8 +154,6 @@ using Azure.ClientGenerator.Core;
   "HorizonDBPublicNetworkAccessState",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.ReplicaRole, "HorizonDBReplicaRole", "csharp");
-@@clientName(Microsoft.HorizonDb.State, "HorizonDBClusterState", "csharp");
 @@clientName(
   Microsoft.HorizonDb.ZonePlacementEnforcement,
   "HorizonDBZonePlacementPolicy",
@@ -184,35 +182,5 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Azure.ResourceManager.PrivateEndpointConnectionUpdate.properties,
   "HorizonDBPrivateEndpointConnectionPatchProperties",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.HorizonDbClusterParameterGroupConnectionProperties.applyImmediately,
-  "ShouldApplyImmediately",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.ParameterGroupProperties.applyImmediately,
-  "ShouldApplyImmediately",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.ParameterGroupPropertiesForPatchUpdate.applyImmediately,
-  "ShouldApplyImmediately",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.ClusterProperties.legacyPointInTime,
-  "PointInTimeUtcOn",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.ClusterProperties.readonlyEndpoint,
-  "ReadOnlyEndpoint",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.ParameterGroupProperties.legacyPgVersion,
-  "PostgreSqlVersion",
   "csharp"
 );
