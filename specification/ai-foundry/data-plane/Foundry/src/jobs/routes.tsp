@@ -101,14 +101,14 @@ interface Jobs {
   ): ArtifactContentInformation | Azure.Core.Foundations.ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT create-or-update pattern required by the Job API wire format"
-  @doc("Create or update a job resource. Returns 201 when the resource is created or 200 when it is updated; these responses do not wait for training to finish. Use `get` to observe execution state. On update, the supplied tags replace the existing tags.")
+  @doc("Create, replay, or update a named job resource without waiting for training to finish. The first request pins the submitted configuration. Retry the same name with the same configuration to reuse the persisted job or resume an incomplete submission, rather than create another execution. Returns 201 for the create/resume path or 200 for an existing tracked job, including a no-op replay. A deleted name cannot be reused (409); use a new name for a new execution. Changing submitted command, environment, compute, code, experiment, bindings, resources, distribution, limits, services, or priority is rejected with 400. While submission is incomplete, retries must reproduce the original submitted configuration; metadata changes must wait until submission is tracked. Once tracked, running and terminal jobs permit changes only to display name, description, tags and user properties, without restarting execution. Omitted metadata stays unchanged; empty text clears display name/description. Supplied tags replace the entire map and an empty map clears it. User properties add new keys only: existing values cannot change and omitted keys are preserved. Concurrent metadata writes can return 409; read the latest job and retry the intended change. No public ETag precondition or conditional-write guarantee is provided, so a read-modify-write sequence is not protected against intervening writes. Use `get` to observe execution state.")
   @put
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<
     Job,
     {
       ...JobsPreviewHeader;
 
-      @doc("The job to create or update.")
+      @doc("The job definition for creation, same-name replay, or metadata update. Include the required command, environment and compute fields even when updating metadata. Submitted configuration values must match the existing job; optional omitted configuration stays unchanged on a tracked update. To change execution configuration, create a job with a different name.")
       @bodyRoot
       job: Job;
     },
