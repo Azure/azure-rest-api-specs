@@ -1,9 +1,9 @@
 import { assert } from "vitest";
-import { readComplianceCatalog } from "./compliance-assessment.ts";
+import { readComplianceCatalog } from "../scripts/compliance-assessment.ts";
 
-type AssessmentOutput = import("./runtime-types.ts").AssessmentOutput;
+type AssessmentOutput = import("../scripts/runtime-types.ts").AssessmentOutput;
 
-type FinalComplianceAssessment = import("./runtime-types.ts").FinalComplianceAssessment;
+type FinalComplianceAssessment = import("../scripts/runtime-types.ts").FinalComplianceAssessment;
 
 type CatalogEntry = ReturnType<typeof readComplianceCatalog>[number];
 

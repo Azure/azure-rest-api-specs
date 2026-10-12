@@ -1,12 +1,12 @@
 import { assert, test } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
-import { documentQualitySummary } from "./assessment-report-ui.ts";
-import { readComplianceCatalog } from "./compliance-assessment.ts";
+import { documentQualitySummary } from "../scripts/assessment-report-ui.ts";
+import { readComplianceCatalog } from "../scripts/compliance-assessment.ts";
 import {
   assembleDocumentQuality,
   DOCUMENT_QUALITY_ARTIFACT,
-} from "./document-quality-assessment.ts";
-import { buildDocumentQualityInput } from "./document-quality-input.ts";
+} from "../scripts/document-quality-assessment.ts";
+import { buildDocumentQualityInput } from "../scripts/document-quality-input.ts";
 import {
   complianceFindingGroups,
   downstreamTypeCards,
@@ -16,20 +16,20 @@ import {
   representativeSource,
   restContractCards,
   visibleSharedTypeImpacts,
-} from "./render-assessment-html.ts";
+} from "../scripts/render-assessment-html.ts";
 import { normalizeRecordedAssessment, reportSection } from "./report-test-utils.ts";
 
-type AssessmentFact = import("./runtime-types.ts").AssessmentFact;
+type AssessmentFact = import("../scripts/runtime-types.ts").AssessmentFact;
 
-type AssessmentFinding = import("./runtime-types.ts").AssessmentFinding;
+type AssessmentFinding = import("../scripts/runtime-types.ts").AssessmentFinding;
 
-type AssessmentOutput = import("./runtime-types.ts").AssessmentOutput;
+type AssessmentOutput = import("../scripts/runtime-types.ts").AssessmentOutput;
 
-type AssessmentTypeImpact = import("./runtime-types.ts").AssessmentTypeImpact;
+type AssessmentTypeImpact = import("../scripts/runtime-types.ts").AssessmentTypeImpact;
 
-type DocumentQualityDimension = import("./runtime-types.ts").DocumentQualityDimension;
+type DocumentQualityDimension = import("../scripts/runtime-types.ts").DocumentQualityDimension;
 
-type FinalComplianceAssessment = import("./runtime-types.ts").FinalComplianceAssessment;
+type FinalComplianceAssessment = import("../scripts/runtime-types.ts").FinalComplianceAssessment;
 
 type RenderOptions = NonNullable<Parameters<typeof renderCurrentAssessmentHtml>[1]>;
 

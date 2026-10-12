@@ -6,7 +6,7 @@ import {
   isInformationalPublicationIntent,
   partitionSemanticIntents,
   semanticIntentType,
-} from "./semantic-assessment-scope.ts";
+} from "../scripts/semantic-assessment-scope.ts";
 
 function publicationUnit(operationCount = 20) {
   return {

@@ -2,10 +2,10 @@ import { assert, test } from "vitest";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { buildAgentWorkspace } from "./build-agent-workspace.ts";
-import { readJson, writeJson } from "./cli.ts";
+import { buildAgentWorkspace } from "../scripts/build-agent-workspace.ts";
+import { readJson, writeJson } from "../scripts/cli.ts";
 
-type AssessmentModelInput = import("./runtime-types.ts").AssessmentModelInput;
+type AssessmentModelInput = import("../scripts/runtime-types.ts").AssessmentModelInput;
 
 type TestWorkflowState = {
   state: string;

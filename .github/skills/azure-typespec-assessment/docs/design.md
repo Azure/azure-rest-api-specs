@@ -55,7 +55,7 @@ Neither mode requires an outer checkout or manual repository/project discovery.
 Local mode retains staged, unstaged, and untracked overlays; immutable PR/head
 mode excludes them.
 
-Production behavior lives under `scripts/`. Code under `evals/` and test files
+Production behavior lives under `scripts/`. Code under `evals/` and `tests/`
 is not imported or used by the runtime.
 
 The coordinator bootstraps the skill's workspace-locked dependencies before
@@ -2541,7 +2541,7 @@ Never label a head-source artifact as a base-commit artifact.
 | Dimension analyzers              | `scripts/analyze-*.ts`                                                                                          |
 | Assembly and validation          | `scripts/assemble-assessment.ts`, `scripts/validate-assessment.ts`                                              |
 | HTML presentation                | `scripts/assessment-display.ts`, `scripts/render-assessment-html.ts`                                            |
-| Regression coverage              | `scripts/*.test.ts`, `evals/`                                                                                   |
+| Regression coverage              | `tests/*.test.ts`, `evals/`                                                                                     |
 
 Preserve local assessment reports and user-owned eval changes.
 

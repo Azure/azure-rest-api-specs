@@ -7,28 +7,28 @@ import {
   downstreamPresentationDimension,
   renderReportSections,
   sdkTypeName,
-} from "./assessment-report-ui.ts";
+} from "../scripts/assessment-report-ui.ts";
 import {
   escapeHtml,
   renderAssessmentHtml as renderCurrentAssessmentHtml,
-} from "./render-assessment-html.ts";
+} from "../scripts/render-assessment-html.ts";
 import { normalizeRecordedAssessment, reportSection } from "./report-test-utils.ts";
 
-type AssessmentFact = import("./runtime-types.ts").AssessmentFact;
+type AssessmentFact = import("../scripts/runtime-types.ts").AssessmentFact;
 
-type AssessmentOutput = import("./runtime-types.ts").AssessmentOutput;
+type AssessmentOutput = import("../scripts/runtime-types.ts").AssessmentOutput;
 
-type DocumentQualityDimension = import("./runtime-types.ts").DocumentQualityDimension;
+type DocumentQualityDimension = import("../scripts/runtime-types.ts").DocumentQualityDimension;
 
-type DocumentQualityDecision = import("./runtime-types.ts").DocumentQualityDecision;
+type DocumentQualityDecision = import("../scripts/runtime-types.ts").DocumentQualityDecision;
 
-type DocumentationDocument = import("./runtime-types.ts").DocumentationDocument;
+type DocumentationDocument = import("../scripts/runtime-types.ts").DocumentationDocument;
 
-type DocumentationSnapshot = import("./runtime-types.ts").DocumentationSnapshot;
+type DocumentationSnapshot = import("../scripts/runtime-types.ts").DocumentationSnapshot;
 
-type DownstreamAnalysis = import("./runtime-types.ts").DownstreamAnalysis;
+type DownstreamAnalysis = import("../scripts/runtime-types.ts").DownstreamAnalysis;
 
-type SourceChange = import("./runtime-types.ts").SourceChange;
+type SourceChange = import("../scripts/runtime-types.ts").SourceChange;
 
 type RenderOptions = NonNullable<Parameters<typeof renderCurrentAssessmentHtml>[1]>;
 

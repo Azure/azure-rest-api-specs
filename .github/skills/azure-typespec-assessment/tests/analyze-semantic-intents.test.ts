@@ -2,13 +2,16 @@ import { assert, test, vi, type TestContext } from "vitest";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { analyzeSemanticIntents, dedupePublicationHunks } from "./analyze-semantic-intents.ts";
+import {
+  analyzeSemanticIntents,
+  dedupePublicationHunks,
+} from "../scripts/analyze-semantic-intents.ts";
 
-type InternalSemanticUnit = import("./runtime-types.ts").InternalSemanticUnit;
+type InternalSemanticUnit = import("../scripts/runtime-types.ts").InternalSemanticUnit;
 
-type OpenApiSchema = import("./runtime-types.ts").OpenApiSchema;
+type OpenApiSchema = import("../scripts/runtime-types.ts").OpenApiSchema;
 
-type SourceChange = import("./runtime-types.ts").SourceChange;
+type SourceChange = import("../scripts/runtime-types.ts").SourceChange;
 
 type SemanticAnalysisOptions = Parameters<typeof analyzeSemanticIntents>[0];
 

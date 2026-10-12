@@ -3,7 +3,7 @@ import {
   diffPublicParameters,
   publicParameterContract,
   semanticLroContract,
-} from "./sdk-method-delta.ts";
+} from "../scripts/sdk-method-delta.ts";
 
 type SdkParameter = {
   name: string;

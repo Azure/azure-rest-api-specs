@@ -4,7 +4,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { isMain, readJson } from "./cli.ts";
+import { isMain, readJson } from "../scripts/cli.ts";
 
 type NoChangeManifest = {
   status: string;
@@ -37,8 +37,8 @@ function git(repo: string, ...args: string[]) {
 
 void test("resolves the shared entrypoint at most once across imported modules", () => {
   const realpath = vi.spyOn(fs, "realpathSync");
-  assert.equal(isMain(new URL("./cli.ts", import.meta.url).href), false);
-  assert.equal(isMain(new URL("./git-evidence.ts", import.meta.url).href), false);
+  assert.equal(isMain(new URL("../scripts/cli.ts", import.meta.url).href), false);
+  assert.equal(isMain(new URL("../scripts/git-evidence.ts", import.meta.url).href), false);
   assert.ok(realpath.mock.calls.length <= 1);
 });
 
@@ -49,7 +49,7 @@ void test("detects direct and linked entrypoints without running imported script
   const linked = path.join(root, "linked");
   fs.mkdirSync(actual);
   fs.symlinkSync(actual, linked, process.platform === "win32" ? "junction" : "dir");
-  const helper = new URL("./cli.ts", import.meta.url).href;
+  const helper = new URL("../scripts/cli.ts", import.meta.url).href;
   fs.writeFileSync(
     path.join(actual, "entry.ts"),
     [

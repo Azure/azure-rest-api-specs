@@ -3,17 +3,17 @@ import {
   assembleDocumentQuality as assembleDocumentQualityRuntime,
   DOCUMENT_QUALITY_ARTIFACT,
   validateDocumentQualityDimension as validateDocumentQualityDimensionRuntime,
-} from "./document-quality-assessment.ts";
+} from "../scripts/document-quality-assessment.ts";
 import {
   buildDocumentQualityInput as buildDocumentQualityInputRuntime,
   DOCUMENT_QUALITY_CRITERION,
-} from "./document-quality-input.ts";
+} from "../scripts/document-quality-input.ts";
 
-type DocumentQualityDecision = import("./runtime-types.ts").DocumentQualityDecision;
+type DocumentQualityDecision = import("../scripts/runtime-types.ts").DocumentQualityDecision;
 
-type DocumentQualityDimension = import("./runtime-types.ts").DocumentQualityDimension;
+type DocumentQualityDimension = import("../scripts/runtime-types.ts").DocumentQualityDimension;
 
-type SemanticDocumentItem = import("./runtime-types.ts").SemanticDocumentItem;
+type SemanticDocumentItem = import("../scripts/runtime-types.ts").SemanticDocumentItem;
 
 type NonEmptyArray<T> = [T, ...T[]];
 

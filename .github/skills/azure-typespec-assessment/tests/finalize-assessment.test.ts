@@ -2,8 +2,8 @@ import { assert, test } from "vitest";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { readJson, writeJson } from "./cli.ts";
-import { finalizeAssessment } from "./finalize-assessment.ts";
+import { readJson, writeJson } from "../scripts/cli.ts";
+import { finalizeAssessment } from "../scripts/finalize-assessment.ts";
 
 type FinalAssessment = {
   dimensions: {
@@ -13,7 +13,8 @@ type FinalAssessment = {
   };
 };
 
-type AssessmentJudgment = import("./assessment-judgment.schema.js").TypeSpecAssessmentJudgment;
+type AssessmentJudgment =
+  import("../scripts/assessment-judgment.schema.js").TypeSpecAssessmentJudgment;
 
 type TestWorkflowState = {
   state: string;

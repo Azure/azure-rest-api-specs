@@ -1,5 +1,5 @@
 import { assert, test } from "vitest";
-import { extractApiVersions, selectApiVersionPair } from "./api-version-selection.ts";
+import { extractApiVersions, selectApiVersionPair } from "../scripts/api-version-selection.ts";
 
 const source = (members: string) => `
 @versioned(Versions)

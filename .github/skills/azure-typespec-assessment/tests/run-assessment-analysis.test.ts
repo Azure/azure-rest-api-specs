@@ -6,7 +6,7 @@ import {
   assertFreshOutput,
   blockedAssessment,
   buildModelInput,
-} from "./run-assessment-analysis.ts";
+} from "../scripts/run-assessment-analysis.ts";
 
 type ModelInputOptions = Parameters<typeof buildModelInput>[0];
 
@@ -14,12 +14,12 @@ type BlockedAssessmentParameters = Parameters<typeof blockedAssessment>;
 
 type ModelSemanticReviewUnit = ReturnType<typeof buildModelInput>["semanticReviewUnits"][number];
 
-type AssessmentFact = import("./runtime-types.ts").AssessmentFact;
+type AssessmentFact = import("../scripts/runtime-types.ts").AssessmentFact;
 
 type TestModelInput = ReturnType<typeof buildModelInput> & {
   evidenceSets: Record<
     string,
-    import("./runtime-types.ts").EvidenceSet & {
+    import("../scripts/runtime-types.ts").EvidenceSet & {
       declarationCount?: number;
     }
   >;

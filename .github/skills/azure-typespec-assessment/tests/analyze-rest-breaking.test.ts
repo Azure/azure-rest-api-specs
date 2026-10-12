@@ -1,7 +1,7 @@
 import { assert, test } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
-import { analyzeRestBreaking } from "./analyze-rest-breaking.ts";
+import { analyzeRestBreaking } from "../scripts/analyze-rest-breaking.ts";
 
 function writeJson(file: string, value: unknown) {
   fs.mkdirSync(path.dirname(file), { recursive: true });

@@ -1,21 +1,22 @@
 import { assert, test } from "vitest";
-import { assembleCompliance, readComplianceCatalog } from "./compliance-assessment.ts";
-import { buildComplianceSearchRequests } from "./compliance-search-request.ts";
+import { assembleCompliance, readComplianceCatalog } from "../scripts/compliance-assessment.ts";
+import { buildComplianceSearchRequests } from "../scripts/compliance-search-request.ts";
 
-type ComplianceDocument = import("./compliance-search-evidence.schema.js").Document;
+type ComplianceDocument = import("../scripts/compliance-search-evidence.schema.js").Document;
 
-type RankedCatalogEntry = import("./compliance-search-evidence.schema.js").RankedCatalogEntry;
+type RankedCatalogEntry =
+  import("../scripts/compliance-search-evidence.schema.js").RankedCatalogEntry;
 
-type ComplianceScore = import("./compliance-search-evidence.schema.js").Score;
+type ComplianceScore = import("../scripts/compliance-search-evidence.schema.js").Score;
 
 type SearchEvidence =
-  import("./compliance-search-evidence.schema.js").TypeSpecAzureGuidelinesSearchEvidence;
+  import("../scripts/compliance-search-evidence.schema.js").TypeSpecAzureGuidelinesSearchEvidence;
 
-type ComplianceDecision = import("./runtime-types.ts").ComplianceDecision;
+type ComplianceDecision = import("../scripts/runtime-types.ts").ComplianceDecision;
 
-type ComplianceSearchRequest = import("./runtime-types.ts").ComplianceSearchRequest;
+type ComplianceSearchRequest = import("../scripts/runtime-types.ts").ComplianceSearchRequest;
 
-type SourceChange = import("./runtime-types.ts").SourceChange;
+type SourceChange = import("../scripts/runtime-types.ts").SourceChange;
 
 type FixtureEvidence = SearchEvidence & {
   rankedDocuments: [ComplianceDocument, ComplianceDocument, ComplianceDocument, ComplianceDocument];

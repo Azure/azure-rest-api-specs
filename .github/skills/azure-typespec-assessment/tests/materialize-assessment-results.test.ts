@@ -1,23 +1,24 @@
 import { assert, test } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
-import { buildAgentWorkspace } from "./build-agent-workspace.ts";
-import { readJson, writeJson } from "./cli.ts";
+import { buildAgentWorkspace } from "../scripts/build-agent-workspace.ts";
+import { readJson, writeJson } from "../scripts/cli.ts";
 import {
   materializeAssessmentResults,
   validateCompactDecisions,
-} from "./materialize-assessment-results.ts";
+} from "../scripts/materialize-assessment-results.ts";
 
-type CatalogScore = import("./agent-decisions.schema.js").CatalogScore;
+type CatalogScore = import("../scripts/agent-decisions.schema.js").CatalogScore;
 
-type FetchedDocument = import("./agent-decisions.schema.js").FetchedDocument;
+type FetchedDocument = import("../scripts/agent-decisions.schema.js").FetchedDocument;
 
-type AssessmentJudgment = import("./assessment-judgment.schema.js").TypeSpecAssessmentJudgment;
+type AssessmentJudgment =
+  import("../scripts/assessment-judgment.schema.js").TypeSpecAssessmentJudgment;
 
 type ComplianceSearchEvidence =
-  import("./compliance-search-evidence.schema.js").TypeSpecAzureGuidelinesSearchEvidence;
+  import("../scripts/compliance-search-evidence.schema.js").TypeSpecAzureGuidelinesSearchEvidence;
 
-type AssessmentModelInput = import("./runtime-types.ts").AssessmentModelInput;
+type AssessmentModelInput = import("../scripts/runtime-types.ts").AssessmentModelInput;
 
 type TestAgentDecisions = {
   catalogScores: CatalogScore[];

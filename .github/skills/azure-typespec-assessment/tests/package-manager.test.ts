@@ -9,7 +9,7 @@ import {
   dependencyProcessCommand,
   detectPackageManager,
   preflightToolchain,
-} from "./package-manager.ts";
+} from "../scripts/package-manager.ts";
 
 function fixture() {
   return fs.mkdtempSync(path.join(os.tmpdir(), "assessment-package-manager-"));

@@ -2,7 +2,7 @@ import { assert, test, type TestContext } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import { stringify } from "yaml";
-import { analyzeDownstreamBreaking } from "./analyze-downstream-breaking.ts";
+import { analyzeDownstreamBreaking } from "../scripts/analyze-downstream-breaking.ts";
 
 function packageShape(current: boolean) {
   const stringType = { kind: "string" };

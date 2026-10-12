@@ -6,7 +6,7 @@ import {
   normalizeAutorestDocuments,
   responseStatusKind,
   sameAutorestContract,
-} from "./autorest-contract.ts";
+} from "../scripts/autorest-contract.ts";
 
 function fixtureDirectory() {
   return fs.mkdtempSync(path.join(process.cwd(), ".autorest-contract-test-"));

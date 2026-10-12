@@ -2,22 +2,22 @@ import { assert, test } from "vitest";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { assembleAssessment, matchTypeFindingIntents } from "./assemble-assessment.ts";
-import { readJson, writeJson } from "./cli.ts";
-import { readComplianceCatalog } from "./compliance-assessment.ts";
-import { renderAssessmentHtml } from "./render-assessment-html.ts";
+import { assembleAssessment, matchTypeFindingIntents } from "../scripts/assemble-assessment.ts";
+import { readJson, writeJson } from "../scripts/cli.ts";
+import { readComplianceCatalog } from "../scripts/compliance-assessment.ts";
+import { renderAssessmentHtml } from "../scripts/render-assessment-html.ts";
 import { reportSection } from "./report-test-utils.ts";
-import { validateAssessment } from "./validate-assessment.ts";
+import { validateAssessment } from "../scripts/validate-assessment.ts";
 
-type AssessmentModelInput = import("./runtime-types.ts").AssessmentModelInput;
+type AssessmentModelInput = import("../scripts/runtime-types.ts").AssessmentModelInput;
 
-type AssessmentJudgment = import("./runtime-types.ts").AssessmentJudgment;
+type AssessmentJudgment = import("../scripts/runtime-types.ts").AssessmentJudgment;
 
-type AssessmentMethodGroup = import("./runtime-types.ts").AssessmentMethodGroup;
+type AssessmentMethodGroup = import("../scripts/runtime-types.ts").AssessmentMethodGroup;
 
-type AssessmentOutput = import("./runtime-types.ts").AssessmentOutput;
+type AssessmentOutput = import("../scripts/runtime-types.ts").AssessmentOutput;
 
-type ComplianceDecision = import("./runtime-types.ts").ComplianceDecision;
+type ComplianceDecision = import("../scripts/runtime-types.ts").ComplianceDecision;
 
 function assembleTestAssessment(
   options: Parameters<typeof assembleAssessment>[0],

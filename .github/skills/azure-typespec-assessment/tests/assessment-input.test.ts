@@ -9,7 +9,7 @@ import {
   parseGitHubRepository,
   parsePullRequest,
   resolveAssessmentInput,
-} from "./assessment-input.ts";
+} from "../scripts/assessment-input.ts";
 
 function git(repo: string, ...args: string[]) {
   const result = spawnSync("git", ["-C", repo, ...args], {

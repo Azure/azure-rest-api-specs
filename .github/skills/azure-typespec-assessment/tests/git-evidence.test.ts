@@ -10,7 +10,7 @@ import {
   normalizeSparseRoots,
   normalizeSpecification,
   resolveComparison,
-} from "./git-evidence.ts";
+} from "../scripts/git-evidence.ts";
 
 function git(repo: string, ...args: string[]) {
   const result = spawnSync("git", ["-C", repo, ...args], { encoding: "utf8" });

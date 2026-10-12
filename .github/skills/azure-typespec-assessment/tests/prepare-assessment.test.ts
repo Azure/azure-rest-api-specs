@@ -1,9 +1,12 @@
 import { assert, test } from "vitest";
-import { prepareProjectRecords, typeSpecChangesForAnalysis } from "./prepare-assessment.ts";
+import {
+  prepareProjectRecords,
+  typeSpecChangesForAnalysis,
+} from "../scripts/prepare-assessment.ts";
 
-type PreparationBlocker = import("./runtime-types.ts").PreparationBlocker;
+type PreparationBlocker = import("../scripts/runtime-types.ts").PreparationBlocker;
 
-type SourceIndex = import("./runtime-types.ts").SourceIndex;
+type SourceIndex = import("../scripts/runtime-types.ts").SourceIndex;
 
 void test("expands renamed TypeSpec evidence into analyzable paths", () => {
   assert.deepEqual(

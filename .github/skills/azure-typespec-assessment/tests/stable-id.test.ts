@@ -1,5 +1,5 @@
 import { assert, test } from "vitest";
-import { canonicalJson, stableId } from "./stable-id.ts";
+import { canonicalJson, stableId } from "../scripts/stable-id.ts";
 
 void test("canonical JSON and IDs are independent of object key order", () => {
   assert.equal(canonicalJson({ b: 2, a: { d: 4, c: 3 } }), '{"a":{"c":3,"d":4},"b":2}');

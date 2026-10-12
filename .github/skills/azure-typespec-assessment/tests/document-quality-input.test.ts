@@ -1,13 +1,16 @@
 import { assert, test } from "vitest";
-import { buildDocumentQualityInput, DOCUMENT_QUALITY_CRITERION } from "./document-quality-input.ts";
+import {
+  buildDocumentQualityInput,
+  DOCUMENT_QUALITY_CRITERION,
+} from "../scripts/document-quality-input.ts";
 
 type DocumentQualityArguments = Parameters<typeof buildDocumentQualityInput>[0];
 
-type SourceChange = import("./runtime-types.ts").SourceChange;
+type SourceChange = import("../scripts/runtime-types.ts").SourceChange;
 
-type SourceDeclaration = import("./runtime-types.ts").SourceDeclaration;
+type SourceDeclaration = import("../scripts/runtime-types.ts").SourceDeclaration;
 
-type SourceRevision = import("./runtime-types.ts").SourceRevision;
+type SourceRevision = import("../scripts/runtime-types.ts").SourceRevision;
 
 function required<T>(value: T | null | undefined): T {
   assert.ok(value);

@@ -7,7 +7,10 @@ export default mergeConfig(
     test: {
       name: "azure-typespec-assessment",
       fileParallelism: false,
-      include: ["scripts/**/*.test.ts"],
+      include: ["tests/**/*.test.ts"],
+      coverage: {
+        exclude: ["**/tests/**"],
+      },
       restoreMocks: true,
       testTimeout: 60_000,
     },

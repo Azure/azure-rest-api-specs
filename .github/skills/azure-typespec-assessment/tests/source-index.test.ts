@@ -1,8 +1,12 @@
 import { assert, test } from "vitest";
 import path from "node:path";
-import { addCompilerEvidence, buildSourceIndex, parseUnifiedHunks } from "./source-index.ts";
+import {
+  addCompilerEvidence,
+  buildSourceIndex,
+  parseUnifiedHunks,
+} from "../scripts/source-index.ts";
 
-type CompilerApi = import("./runtime-types.ts").CompilerApi;
+type CompilerApi = import("../scripts/runtime-types.ts").CompilerApi;
 
 function required<T>(value: T | undefined): T {
   if (value === undefined) {

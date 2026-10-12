@@ -6,7 +6,7 @@ import {
   normalizeTcgcContract,
   normalizeTcgcPackage,
   parseTcgcYaml,
-} from "./tcgc-contract.ts";
+} from "../scripts/tcgc-contract.ts";
 
 function required<T>(value: T | null | undefined): T {
   assert.ok(value);
@@ -58,7 +58,7 @@ void test("indexes compiler identities once per normalized contract and selected
     },
   };
   const normalizedContract =
-    contract as unknown as import("./runtime-types.ts").NormalizedTcgcContract;
+    contract as unknown as import("../scripts/runtime-types.ts").NormalizedTcgcContract;
   const first = indexTcgcOperations(normalizedContract, "v1");
   assert.deepEqual(
     [...required(required(first.get("Owner.post")).get("Service.Owner.post"))],

@@ -2,7 +2,7 @@ import { assert, expect, test } from "vitest";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { serveAssessment } from "./serve-assessment.ts";
+import { serveAssessment } from "../scripts/serve-assessment.ts";
 
 void test("serves only the selected assessment report on localhost", async (context) => {
   const work = fs.mkdtempSync(path.join(os.tmpdir(), "typespec-assessment-server-"));

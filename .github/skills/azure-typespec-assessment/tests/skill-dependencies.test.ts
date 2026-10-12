@@ -2,7 +2,10 @@ import { assert, expect, test } from "vitest";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { ensureSkillDependencies, skillDependencyInstallCommand } from "./skill-dependencies.ts";
+import {
+  ensureSkillDependencies,
+  skillDependencyInstallCommand,
+} from "../scripts/skill-dependencies.ts";
 
 function fixture() {
   const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "assessment-skill-dependencies-"));

@@ -2,7 +2,7 @@ import { assert, test } from "vitest";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { resolveTsp } from "./compiler-runner.ts";
+import { resolveTsp } from "../scripts/compiler-runner.ts";
 
 void test("runs the Windows TypeSpec shim through its JavaScript CLI without a shell", () => {
   const worktree = fs.mkdtempSync(path.join(os.tmpdir(), "assessment-compiler-runner-"));
