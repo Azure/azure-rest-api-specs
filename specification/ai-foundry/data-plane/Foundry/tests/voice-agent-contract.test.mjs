@@ -74,7 +74,7 @@ function wireShape(model, context) {
 }
 
 before(async () => {
-  output = await mkdtemp(join(tmpdir(), "foundry-live-contract-"));
+  output = await mkdtemp(join(tmpdir(), "foundry-voice-contract-"));
   const entrypoint = join(project, "main.tsp");
   const [options, diagnostics] = await resolveCompilerOptions(NodeHost, {
     entrypoint,

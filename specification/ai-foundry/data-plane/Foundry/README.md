@@ -63,13 +63,13 @@ The `npx tsv .` has a console spew that shows the diff between current and stage
 changes. Once you `git add` all the changed files and run `npx tsv .` again, there should
 no longer be any diffs to show.
 
-## Live contract checks
+## Voice agent contract checks
 
 Use the repository's required Node and pnpm versions. From the repository root, after installing
 the pinned dependencies with `pnpm install --frozen-lockfile`:
 
 ```sh
-pnpm exec node --test specification/ai-foundry/data-plane/Foundry/tests/live-contract.test.mjs
+pnpm exec node --test specification/ai-foundry/data-plane/Foundry/tests/voice-agent-contract.test.mjs
 ```
 
 These checks compile both Foundry API versions, compare the imported Live models with the published

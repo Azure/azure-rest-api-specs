@@ -2,7 +2,6 @@ import "../common/models.tsp";
 import "../agents/models.tsp";
 import "./models.tsp";
 import "./protocol.tsp";
-import "./live-protocol.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
