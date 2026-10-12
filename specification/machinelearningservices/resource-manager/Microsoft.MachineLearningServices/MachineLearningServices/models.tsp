@@ -151,6 +151,7 @@ union ComputeType {
   DataLakeAnalytics: "DataLakeAnalytics",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SynapseSpark: "SynapseSpark",
+
   /** An attached Fabric custom Spark pool. */
   FabricSpark: "FabricSpark",
 }
