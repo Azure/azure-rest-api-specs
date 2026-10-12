@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Defines the device properties.")
 model NamespaceDeviceProperties {
   @doc("A unique identifier for the device.")
@@ -68,13 +68,13 @@ model NamespaceDeviceProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @added(Versions.v2025_11_01_preview)
+  @added(Versions.v2026_03_01_preview)
   @removed(Versions.v2026_04_01)
   @doc("Policy used to issue device certificates.")
   policy?: DeviceCredentialPolicy;
 }
 
-@added(Versions.v2025_11_01_preview)
+@added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
 @doc("Defines the Policy used to issue device certificates if any.")
 model DeviceCredentialPolicy {
@@ -87,7 +87,7 @@ model DeviceCredentialPolicy {
 }
 
 @doc("Connection endpoint URL a device can use to connect to a service.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model MessagingEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("Set of endpoints to connect to the device.")
@@ -98,7 +98,7 @@ model MessagingEndpoints {
 }
 
 @doc("Property bag contains the device's outbound endpoints")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model OutboundEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("Endpoints the device can connect to.")
@@ -110,7 +110,7 @@ model OutboundEndpoints {
 }
 
 @doc("An endpoint to connect to the device.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model InboundEndpoints {
   @doc("Type of connection endpoint.")
   endpointType: string;
@@ -132,14 +132,14 @@ model InboundEndpoints {
 }
 
 @doc("Defines server trust settings for an endpoint.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model TrustSettings {
   @doc("Defines a secret reference for certificates to trust.")
   trustList?: string;
 }
 
 @doc("Definition of the client authentication mechanism to the host.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model HostAuthentication {
   @doc("Defines the method to authenticate the user of the client at the server.")
   // Default mode is Certificate
@@ -154,7 +154,7 @@ model HostAuthentication {
 }
 
 @doc("Defines the device status properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model DeviceStatus {
   @doc("Defines the device status config properties.")
   @visibility(Lifecycle.Read)
@@ -166,7 +166,7 @@ model DeviceStatus {
 }
 
 @doc("Defines the device status for inbound/outbound endpoints.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model DeviceStatusEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("KeyValue pair representing status of inbound endpoints.")
@@ -175,7 +175,7 @@ model DeviceStatusEndpoints {
 }
 
 @doc("Defines the device status properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model DeviceStatusEndpoint {
   @doc("Defines the error related to this endpoint.")
   @visibility(Lifecycle.Read)
@@ -187,7 +187,7 @@ model DeviceStatusEndpoint {
   healthState?: HealthState;
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Device messaging endpoint model.")
 model DeviceMessagingEndpoint {
   @doc("Type of connection used for the messaging endpoint.")

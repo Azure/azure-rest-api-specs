@@ -16,7 +16,7 @@ namespace Microsoft.DeviceRegistry;
 
 @doc("Discovered device definition.")
 @parentResource(Namespace)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceDiscoveredDevice
   is TrackedResource<NamespaceDiscoveredDeviceProperties> {
   @doc("The name of the discovered device.")
@@ -36,7 +36,7 @@ model NamespaceDiscoveredDevice
 }
 
 @armResourceOperations
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 interface NamespaceDiscoveredDevices {
   get is ArmResourceRead<NamespaceDiscoveredDevice>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<NamespaceDiscoveredDevice>;

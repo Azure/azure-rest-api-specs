@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 namespace Microsoft.DeviceRegistry;
 
 @doc("Defines the asset properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceAssetProperties {
   @doc("Globally unique, immutable, non-reusable ID.")
   @visibility(Lifecycle.Read)
@@ -109,12 +109,6 @@ model NamespaceAssetProperties {
   @Azure.ResourceManager.identifiers(#[])
   datasets?: NamespaceDataset[];
 
-  @doc("Array of events that are part of the asset. Each event can have per-event configuration.")
-  @Azure.ResourceManager.identifiers(#[])
-  @added(Versions.v2025_07_01_preview)
-  @removed(Versions.v2025_10_01)
-  events?: NamespaceEvent[];
-
   @doc("Array of event groups that are part of the asset. Each event group can have per-event group configuration.")
   @added(Versions.v2025_10_01)
   @Azure.ResourceManager.identifiers(#[])
@@ -122,12 +116,12 @@ model NamespaceAssetProperties {
 
   @doc("Array of streams that are part of the asset. Each stream can have a per-stream configuration.")
   @identifiers(#[])
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2025_10_01)
   streams?: NamespaceStream[];
 
   @doc("Array of management groups that are part of the asset. Each management group can have a per-group configuration.")
   @identifiers(#[])
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2025_10_01)
   managementGroups?: ManagementGroup[];
 
   @doc("Read only object to reflect changes that have occurred on the Edge. Similar to Kubernetes status property for custom resources.")
@@ -140,7 +134,7 @@ model NamespaceAssetProperties {
 }
 
 @doc("Defines the dataset properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceDataset {
   @doc("Name of the dataset.")
   name: string;
@@ -164,7 +158,7 @@ model NamespaceDataset {
 }
 
 @doc("Defines the data point properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceDataPoint {
   @doc("The name of the data point.")
   name: string;
@@ -177,16 +171,12 @@ model NamespaceDataPoint {
 }
 
 @doc("Defines the dataset data point properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceDatasetDataPoint is NamespaceDataPoint {
   @doc("URI or type definition ID.")
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2025_10_01)
   typeRef?: string;
 }
-
-@doc("Defines the event data point properties.")
-@added(Versions.v2025_07_01_preview)
-model NamespaceEventDataPoint is NamespaceDataPoint;
 
 @doc("Defines the event group properties.")
 @added(Versions.v2025_10_01)
@@ -213,7 +203,7 @@ model NamespaceEventGroup {
 }
 
 @doc("Defines the event properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceEvent {
   @doc("The name of the event.")
   name: string;
@@ -221,11 +211,6 @@ model NamespaceEvent {
   @doc("Reference to a data source for a given event.")
   @added(Versions.v2025_10_01)
   dataSource?: string;
-
-  @doc("The address of the notifier of the event in the asset (e.g. URL) so that a client can access the event on the asset.")
-  @added(Versions.v2025_07_01_preview)
-  @removed(Versions.v2025_10_01)
-  eventNotifier: string;
 
   @doc("Stringified JSON that contains connector-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize.")
   eventConfiguration?: string;
@@ -236,15 +221,10 @@ model NamespaceEvent {
 
   @doc("URI or type definition ID.")
   typeRef?: string;
-
-  @doc("Array of data points that are part of the event. Each data point can have a per-data point configuration.")
-  @removed(Versions.v2025_10_01)
-  @identifiers(#[])
-  dataPoints?: NamespaceEventDataPoint[];
 }
 
 @doc("Defines the stream properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceStream {
   @doc("Name of the stream definition.")
   name: string;
@@ -261,7 +241,7 @@ model NamespaceStream {
 }
 
 @doc("Defines the management group properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model ManagementGroup {
   @doc("Name of the management group.")
   name: string;
@@ -288,7 +268,7 @@ model ManagementGroup {
 }
 
 @doc("Defines the action properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model ManagementAction {
   @doc("Name of the action.")
   name: string;
@@ -313,7 +293,7 @@ model ManagementAction {
 }
 
 @doc("Defines the ManagementAction's type.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 union ManagementActionType {
   @doc("Call action type.")
   Call: "Call",
@@ -328,7 +308,7 @@ union ManagementActionType {
 }
 
 @doc("Defines the asset status properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceAssetStatus {
   @doc("Defines the asset status config properties.")
   @visibility(Lifecycle.Read)
@@ -368,7 +348,7 @@ model NamespaceAssetStatus {
 }
 
 @doc("Defines the asset status dataset properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceAssetStatusDataset {
   @doc("The name of the dataset. Must be unique within the status.datasets array. This name is used to correlate between the spec and status dataset information.")
   @visibility(Lifecycle.Read)
@@ -397,7 +377,7 @@ model NamespaceAssetStatusEventGroup {
 }
 
 @doc("Defines the asset status event properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceAssetStatusEvent {
   @doc("The name of the event. Must be unique within the status.events array. This name is used to correlate between the spec and status event information.")
   @visibility(Lifecycle.Read)
@@ -413,7 +393,7 @@ model NamespaceAssetStatusEvent {
 }
 
 @doc("Defines the asset status stream properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceAssetStatusStream {
   @doc("The name of the stream. Must be unique within the status.streams array. This name is used to correlate between the spec and status event information.")
   @visibility(Lifecycle.Read)
@@ -429,7 +409,7 @@ model NamespaceAssetStatusStream {
 }
 
 @doc("Defines the asset status management group properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceAssetStatusManagementGroup {
   @doc("The name of the management group. Must be unique within the status.managementGroups array. This name is used to correlate between the spec and status event information.")
   @visibility(Lifecycle.Read)
@@ -442,7 +422,7 @@ model NamespaceAssetStatusManagementGroup {
 }
 
 @doc("Defines the asset status action properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceAssetStatusManagementAction {
   @doc("The name of the action. Must be unique within the status.actions array. This name is used to correlate between the spec and status event information.")
   @visibility(Lifecycle.Read)
@@ -462,7 +442,7 @@ model NamespaceAssetStatusManagementAction {
 }
 
 @doc("Defines the message schema reference properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceMessageSchemaReference {
   @doc("The message schema registry namespace.")
   @visibility(Lifecycle.Read)

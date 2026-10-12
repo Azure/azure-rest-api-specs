@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.DeviceRegistry;
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Namespace definition.")
 model Namespace is TrackedResource<NamespaceProperties> {
   @doc("The name of the namespace.")
@@ -34,7 +34,7 @@ model Namespace is TrackedResource<NamespaceProperties> {
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("The namespace messaging endpoints model.")
 model Messaging {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
@@ -50,7 +50,7 @@ model Management {
   endpoints?: Record<ManagementEndpoint>;
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("The namespace properties model.")
 model NamespaceProperties {
   @doc("Globally unique, immutable, non-reusable ID.")
@@ -95,7 +95,7 @@ model NamespaceProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Namespace messaging endpoint model used by a device to connect to a service.")
 model MessagingEndpoint {
   @doc("Type of connection used for messaging endpoint.")
@@ -148,7 +148,7 @@ model ManagementEndpoint {
   resourceId: string;
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Request body for the migrate resources operation in to Namespace resource.")
 model NamespaceMigrateRequest {
   @doc("Scope of the migrate resources operation.")
@@ -159,7 +159,7 @@ model NamespaceMigrateRequest {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Response for the migrate asset resources operation into Namespace resource.")
 model NamespaceMigrateResponse {
   @doc("List of migrate results containing result of each asset migrate operation.")
@@ -167,7 +167,7 @@ model NamespaceMigrateResponse {
   migrateResults?: MigrateResult[];
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Result of Migrate operation of asset resource into Namespace resource.")
 model MigrateResult {
   @doc("The resource Id of the asset resource.")
@@ -180,7 +180,7 @@ model MigrateResult {
   error?: Error;
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Result Type of Migrate Operation.")
 union MigrateResultType {
   @doc("Resource Migrate operation is successful.")
@@ -192,7 +192,7 @@ union MigrateResultType {
   string,
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("Scope of the migrate resources operation.")
 union Scope {
   @doc("Scoping the migration to resourceIds provided")
@@ -655,7 +655,7 @@ model GroupInstallableUpdatesReport extends Report {
   installableUpdatesAndTargetDevices: InstallableUpdatesForTargetDevices[];
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @armResourceOperations
 interface Namespaces {
   get is ArmResourceRead<Namespace>;
@@ -675,7 +675,7 @@ interface Namespaces {
   listBySubscription is ArmListBySubscription<Namespace>;
 
   @doc("Migrate the resources into Namespace")
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2025_10_01)
   migrate is ArmResourceActionAsync<
     Namespace,
     NamespaceMigrateRequest,
