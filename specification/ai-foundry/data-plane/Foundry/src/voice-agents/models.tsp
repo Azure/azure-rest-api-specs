@@ -154,7 +154,7 @@ model VoiceResponse extends VoiceResponseBase {
 // Live delegation results and persisted conversation items
 // ---------------------------------------------------------------------------
 
-@doc("Text returned to Live for a delegation. Commentary is speakable guidance; thinking is background context, not private model reasoning. Managed lifecycle notifications report cumulative accepted text, not spoken transcripts or playback completion.")
+@doc("One result returned to Live for a delegation. Commentary is speakable guidance; thinking is background context, not private model reasoning. Each managed output_item event carries one new result, not cumulative text. These results do not represent spoken transcripts or playback completion.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveDelegationResultItem {
   @doc("Optional guidance for Live to communicate to the user.")
@@ -269,12 +269,26 @@ model VoiceAgentLiveResponsesDelegationConversationItem
   output?: string;
 }
 
-@doc("Context, accepted result text, and execution status for a Foundry-managed prompt-agent delegation.")
+@doc("The persisted aggregate for a Foundry-managed prompt-agent delegation. Its id is the native delegation ID referenced by managed-delegation events. Results are retained in output order, including accepted results produced before failure or cancellation; lifecycle notifications do not repeat this item.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveFoundryManagedAgentDelegationConversationItem
+model VoiceAgentLiveFoundryManagedAgentDelegationItem
   extends VoiceAgentLiveDelegationConversationItem {
   target: "foundry_managed_agent";
-  ...VoiceAgentLiveDelegationResultItem;
+
+  @doc("The same-project prompt-agent name.")
+  agent_name: string;
+
+  @doc("The target version pinned when this voice connection started.")
+  agent_version: string;
+
+  @doc("The originating native delegation's session-relative audio offset, in milliseconds.")
+  offset_ms: int64;
+
+  @doc("The backend agent's conversation ID, when available. Distinct from the stored voice conversation ID and the native Live session ID.")
+  backend_conversation_id?: string;
+
+  @doc("The ordered accepted results. Empty before the first result. Each session.managed_delegation.output_item event contributes one item at its zero-based output_index; earlier entries are not replaced by cumulative text. Partial results remain available after failure or cancellation.")
+  output: VoiceAgentLiveDelegationResultItem[];
 
   @doc("Plain-text task context supplied to the managed prompt agent, when available. This is not the backend request body.")
   delegation_context?: string;

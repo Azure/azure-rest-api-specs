@@ -27,8 +27,14 @@ let native;
 let compilerOptions;
 const documents = [];
 const managedStages = ["started", "progress", "completed", "failed", "cancel"];
+const managedEventKinds = [...managedStages, "output_item"];
 const managedModel = (stage) =>
-  `Azure.AI.Projects.VoiceAgentLiveManagedDelegation${stage[0].toUpperCase()}${stage.slice(1)}Event`;
+  `Azure.AI.Projects.VoiceAgentLiveManagedDelegation${stage
+    .split("_")
+    .map((part) => part[0].toUpperCase() + part.slice(1))
+    .join("")}Event`;
+const managedItemModel =
+  "Azure.AI.Projects.VoiceAgentLiveFoundryManagedAgentDelegationItem";
 
 function type(name, context = program) {
   const [value, diagnostics] = context.resolveTypeReference(name);
@@ -155,28 +161,19 @@ test("voice model renames remove legacy names and inline the single result-forma
     "LiveVoiceAgentDefinition",
     "VoiceAgentLiveManagedResultFormat",
     "VoiceAgentLiveFoundryManagedAgentDelegationMetadata",
+    "VoiceAgentLiveFoundryManagedAgentDelegationConversationItem",
   ]) {
     const [removed] = program.resolveTypeReference(`Azure.AI.Projects.${name}`);
     assert.equal(removed, undefined, name);
   }
-  const item = type(
-    "Azure.AI.Projects.VoiceAgentLiveFoundryManagedAgentDelegationItem",
-  );
-  const format = item.properties.get("result_format");
-  assert.equal(format.type.kind, "String");
-  assert.equal(format.type.value, "tagged_text");
-  assert.equal(format.optional, false);
+  assert.equal(fields(type(managedItemModel)).has("result_format"), false);
   const configuration = type(
     "Azure.AI.Projects.VoiceAgentLiveManagedAgentDelegation",
   ).properties.get("result_format");
-  assert.equal(configuration.type, format.type);
+  assert.equal(configuration.type.kind, "String");
+  assert.equal(configuration.type.value, "tagged_text");
   assert.equal(configuration.optional, true);
   assert.equal(configuration.defaultValue.value, "tagged_text");
-  for (const stage of managedStages)
-    assert.equal(
-      fields(type(managedModel(stage))).get("result_format").type,
-      format.type,
-    );
 });
 
 test("Live configuration references native model identities, not local copies", () => {
@@ -273,7 +270,7 @@ test("native Live models change only through the explicitly allowed Foundry exte
       const extensions = actual.children.filter((child) =>
         child.startsWith("Azure.AI.Projects."),
       );
-      assert.deepEqual(extensions, managedStages.map(managedModel).sort());
+      assert.deepEqual(extensions, managedEventKinds.map(managedModel).sort());
       actual.children = actual.children.filter(
         (child) => !extensions.includes(child),
       );
@@ -304,7 +301,7 @@ test("native Live models change only through the explicitly allowed Foundry exte
   );
 });
 
-test("only the native server discriminator gains the five Foundry lifecycle literals", () => {
+test("only the native server discriminator gains the six Foundry managed-delegation literals", () => {
   const ns = type("OpenAI", native);
   for (const [name, union] of ns.unions) {
     if (!name.startsWith("Live") && name !== "DelegationType") continue;
@@ -313,7 +310,7 @@ test("only the native server discriminator gains the five Foundry lifecycle lite
     const expected = variants(union);
     if (name === "LiveServerEventType") {
       expected.push(
-        ...managedStages.map((stage) =>
+        ...managedEventKinds.map((stage) =>
           JSON.stringify(`session.managed_delegation.${stage}`),
         ),
       );
@@ -345,10 +342,7 @@ test("session.started exposes optional Foundry correlation without replacing the
   );
 });
 
-test("managed notifications keep correlation and expose flat optional result text", () => {
-  assert.ok(
-    type("Azure.AI.Projects.VoiceAgentLiveFoundryManagedAgentDelegationItem"),
-  );
+test("managed lifecycle notifications contain only correlation and failure details", () => {
   for (const stage of managedStages) {
     const model = type(managedModel(stage));
     assert.equal(model.baseModel, type("OpenAI.LiveServerEvent"));
@@ -357,31 +351,19 @@ test("managed notifications keep correlation and expose flat optional result tex
       p.get("type").type.value,
       `session.managed_delegation.${stage}`,
     );
-    for (const field of [
-      "event_id",
-      "delegation_id",
-      "agent_name",
-      "agent_version",
-      "result_format",
-      "response_id",
-      "offset_ms",
-    ])
+    assert.deepEqual(
+      [...p.keys()].sort(),
+      [
+        "type",
+        "event_id",
+        "delegation_id",
+        ...(stage === "failed" ? ["error_code", "error_message"] : []),
+      ].sort(),
+    );
+    for (const field of ["event_id", "delegation_id"]) {
       assert.equal(p.get(field).optional, false, `${stage}.${field}`);
-    for (const field of [
-      "sub_protocol",
-      "request",
-      "stream",
-      "backend_store",
-      "spoken_text",
-      "background_context",
-      "output_items",
-      "appends",
-      "has_spoken_text",
-      "has_background_context",
-      "mcp_call_count",
-      "failure_context_status",
-    ])
-      assert.equal(p.has(field), false, `${stage}.${field}`);
+      assert.equal(getTypeName(p.get(field).type), "string");
+    }
     for (const field of ["error_code", "error_message"]) {
       assert.equal(p.has(field), stage === "failed", `${stage}.${field}`);
       if (stage === "failed") {
@@ -389,14 +371,81 @@ test("managed notifications keep correlation and expose flat optional result tex
         assert.equal(getTypeName(p.get(field).type), "string");
       }
     }
-    assert.equal(p.has("backend_conversation_id"), stage === "completed");
-    for (const field of ["commentary", "thinking"]) {
-      assert.equal(p.has(field), stage !== "started", `${stage}.${field}`);
-      if (stage !== "started") {
-        assert.equal(p.get(field).optional, true);
-        assert.equal(getTypeName(p.get(field).type), "string");
-      }
-    }
+  }
+});
+
+test("managed output_item streams an indexed result, not a delegation snapshot", () => {
+  const model = type(managedModel("output_item"));
+  assert.equal(model.baseModel, type("OpenAI.LiveServerEvent"));
+  const p = fields(model);
+  assert.deepEqual([...p.keys()].sort(), [
+    "delegation_id",
+    "event_id",
+    "item",
+    "output_index",
+    "type",
+  ]);
+  for (const field of p.values()) assert.equal(field.optional, false);
+  assert.equal(
+    p.get("type").type.value,
+    "session.managed_delegation.output_item",
+  );
+  assert.equal(getTypeName(p.get("output_index").type), "int32");
+  assert.equal(getMinValue(program, p.get("output_index")), 0);
+  assert.equal(
+    p.get("item").type,
+    type("Azure.AI.Projects.VoiceAgentLiveDelegationResultItem"),
+  );
+  assert.ok(
+    ![...type("OpenAI.LiveClientEventType").variants.values()].some(
+      (v) => v.type.value === "session.managed_delegation.output_item",
+    ),
+  );
+});
+
+test("managed delegation aggregate retains an ordered result list without event metadata", () => {
+  const item = type(managedItemModel);
+  assert.equal(
+    item.baseModel,
+    type("Azure.AI.Projects.VoiceAgentLiveDelegationConversationItem"),
+  );
+  const p = fields(item);
+  for (const field of [
+    "event_id",
+    "delegation_id",
+    "result_format",
+    "commentary",
+    "thinking",
+  ])
+    assert.equal(p.has(field), false, field);
+  assert.equal(p.get("id").optional, false);
+  assert.equal(p.get("output").optional, false);
+  assert.equal(
+    p.get("output").type.indexer.value,
+    type("Azure.AI.Projects.VoiceAgentLiveDelegationResultItem"),
+  );
+  assert.equal(p.get("status").optional, false);
+  assert.equal(p.get("backend_conversation_id").optional, true);
+  for (const doc of documents) {
+    const schema =
+      doc.components.schemas.VoiceAgentLiveFoundryManagedAgentDelegationItem;
+    assert.equal(schema.properties.output.type, "array");
+    assert.equal(
+      schema.properties.output.items.$ref,
+      "#/components/schemas/VoiceAgentLiveDelegationResultItem",
+    );
+    assert.ok(schema.required.includes("output"));
+    assert.equal(schema.properties.result_format, undefined);
+    assert.equal(
+      doc.components.schemas.VoiceAgentLiveDelegationConversationItem
+        .discriminator.mapping.foundry_managed_agent,
+      "#/components/schemas/VoiceAgentLiveFoundryManagedAgentDelegationItem",
+    );
+    assert.equal(
+      doc.components.schemas
+        .VoiceAgentLiveFoundryManagedAgentDelegationConversationItem,
+      undefined,
+    );
   }
 });
 
@@ -427,33 +476,48 @@ test("delegation results contain only optional commentary and thinking strings",
 
 // Target-contract examples. Vienna runtime alignment is a separate follow-up;
 // these payloads are not captures from an already-updated service.
-const metadata = {
-  event_id: "evt_managed_1",
-  delegation_id: "del_1",
-  agent_name: "english-teacher",
-  agent_version: "1",
-  result_format: "tagged_text",
-  response_id: null,
-  offset_ms: 1200,
-};
 const resultText = { commentary: "Say: Yesterday I went to school." };
 const samples = managedStages.map((stage) => {
-  const payload = { ...metadata, type: `session.managed_delegation.${stage}` };
-  if (["progress", "completed"].includes(stage))
-    Object.assign(payload, {
-      response_id: "resp_1",
-      ...resultText,
-    });
-  if (stage === "completed") payload.backend_conversation_id = "conv_backend";
+  const payload = {
+    type: `session.managed_delegation.${stage}`,
+    event_id: `evt_managed_${stage}`,
+    delegation_id: "del_1",
+  };
   if (stage === "failed")
     Object.assign(payload, {
       error_code: "partial_backend_timeout",
       error_message: "The backend timed out after some guidance was accepted.",
-      ...resultText,
     });
-  if (stage === "cancel") Object.assign(payload, resultText);
   return { model: managedModel(stage), payload };
 });
+const outputSamples = [
+  {
+    delegation_id: "del_1",
+    output_index: 0,
+    item: { thinking: "Focus on irregular past-tense verbs." },
+  },
+  {
+    delegation_id: "del_2",
+    output_index: 0,
+    item: { commentary: "Try a greeting." },
+  },
+  { delegation_id: "del_1", output_index: 1, item: resultText },
+  {
+    delegation_id: "del_1",
+    output_index: 2,
+    item: {
+      commentary: "Now tell me what you ate yesterday.",
+      thinking: "Move on to another irregular verb.",
+    },
+  },
+].map((payload, index) => ({
+  model: managedModel("output_item"),
+  payload: {
+    type: "session.managed_delegation.output_item",
+    event_id: `evt_output_${index}`,
+    ...payload,
+  },
+}));
 const sessionStarted = {
   type: "session.started",
   event_id: "evt_started",
@@ -495,7 +559,7 @@ function exampleValue({ model, payload }) {
   return tspValue(
     payload,
     model.startsWith("Azure.AI.Projects.VoiceAgentLive") &&
-      model.includes("Conversation"),
+      (model.includes("Conversation") || model === managedItemModel),
   );
 }
 
@@ -513,8 +577,11 @@ async function validateExamples(name, examples) {
   return compile(NodeHost, path, { ...compilerOptions, noEmit: true });
 }
 
-test("lifecycle contract examples including cancel and native startup validate", async () => {
-  const result = await validateExamples("valid-events", samples);
+test("lifecycle, streamed output, and native startup examples validate", async () => {
+  const result = await validateExamples("valid-events", [
+    ...samples,
+    ...outputSamples,
+  ]);
   checkErrors(result.diagnostics);
 });
 
@@ -523,19 +590,17 @@ test("malformed lifecycle payloads are rejected by the actual TypeSpec models", 
     samples.find((s) => s.payload.type.endsWith(".cancel")),
   );
   delete missingDelegationId.payload.delegation_id;
-  const invalidOffset = structuredClone(samples[0]);
-  invalidOffset.payload.offset_ms = "one";
-  const invalidResult = structuredClone(
-    samples.find((s) => s.payload.type.endsWith(".progress")),
-  );
-  invalidResult.payload.commentary = { content: "Not a plain string" };
+  const invalidIndex = structuredClone(outputSamples[0]);
+  invalidIndex.payload.output_index = "one";
+  const invalidResult = structuredClone(outputSamples[0]);
+  invalidResult.payload.item.commentary = { content: "Not a plain string" };
   const invalidFailure = structuredClone(
     samples.find((s) => s.payload.type.endsWith(".failed")),
   );
   invalidFailure.payload.error_code = 42;
   const result = await validateExamples("invalid-events", [
     missingDelegationId,
-    invalidOffset,
+    invalidIndex,
     invalidResult,
     invalidFailure,
   ]);
@@ -552,13 +617,112 @@ test("malformed lifecycle payloads are rejected by the actual TypeSpec models", 
   );
 });
 
+test("streamed output requires correlation, an integer index, and one typed item", async (t) => {
+  const cases = [
+    [
+      "missing delegation ID",
+      (p) => {
+        delete p.delegation_id;
+      },
+    ],
+    [
+      "missing output index",
+      (p) => {
+        delete p.output_index;
+      },
+    ],
+    [
+      "fractional output index",
+      (p) => {
+        p.output_index = 0.5;
+      },
+    ],
+    [
+      "missing result item",
+      (p) => {
+        delete p.item;
+      },
+    ],
+    [
+      "list instead of one result",
+      (p) => {
+        p.item = [p.item];
+      },
+    ],
+    [
+      "nullable result text",
+      (p) => {
+        p.item.thinking = null;
+      },
+    ],
+    [
+      "legacy result format",
+      (p) => {
+        p.result_format = "tagged_text";
+      },
+    ],
+  ];
+  for (const [index, [name, mutate]] of cases.entries()) {
+    await t.test(name, async () => {
+      const sample = structuredClone(outputSamples[0]);
+      mutate(sample.payload);
+      const result = await validateExamples(`invalid-stream-output-${index}`, [
+        sample,
+      ]);
+      const errors = result.diagnostics.filter((d) => d.severity === "error");
+      assert.ok(errors.length > 0, name);
+      assert.ok(
+        errors.every((d) =>
+          [
+            "invalid-argument",
+            "unassignable",
+            "missing-property",
+            "unexpected-property",
+          ].includes(d.code),
+        ),
+        errors.map((d) => `${d.code}: ${d.message}`).join("\n"),
+      );
+    });
+  }
+});
+
+test("lifecycle notifications reject copied delegation metadata and result text", async (t) => {
+  for (const stage of [
+    "started",
+    "progress",
+    "completed",
+    "failed",
+    "cancel",
+  ]) {
+    await t.test(stage, async () => {
+      const sample = structuredClone(
+        samples.find((s) => s.payload.type.endsWith(`.${stage}`)),
+      );
+      Object.assign(sample.payload, {
+        agent_name: "english-teacher",
+        result_format: "tagged_text",
+        commentary: "Must be sent as an output_item, not in a lifecycle event.",
+      });
+      const result = await validateExamples(
+        `invalid-lifecycle-snapshot-${stage}`,
+        [sample],
+      );
+      const errors = result.diagnostics.filter((d) => d.severity === "error");
+      assert.ok(errors.length > 0, stage);
+      assert.ok(
+        errors.every((d) =>
+          ["invalid-argument", "unexpected-property"].includes(d.code),
+        ),
+        errors.map((d) => `${d.code}: ${d.message}`).join("\n"),
+      );
+    });
+  }
+});
+
 test("failure notifications require string error code and message", async (t) => {
   const failed = samples.find((s) => s.payload.type.endsWith(".failed"));
-  const withoutResults = structuredClone(failed);
-  delete withoutResults.payload.commentary;
   checkErrors(
-    (await validateExamples("failure-without-results", [withoutResults]))
-      .diagnostics,
+    (await validateExamples("failure-without-results", [failed])).diagnostics,
   );
 
   for (const field of ["error_code", "error_message"]) {
@@ -634,7 +798,7 @@ test("SDK metadata exports native events and separate Live persistence discrimin
       !context.sdkPackage.models.some((m) => m.__raw?.name === name),
       name,
     );
-  for (const stage of managedStages) {
+  for (const stage of managedEventKinds) {
     const value = model(managedModel(stage).split(".").at(-1));
     assert.equal(value.baseModel.__raw.name, "LiveServerEvent");
     assert.ok(
@@ -645,6 +809,15 @@ test("SDK metadata exports native events and separate Live persistence discrimin
       "has_background_context",
       "mcp_call_count",
       "failure_context_status",
+      "result_format",
+      "agent_name",
+      "agent_version",
+      "response_id",
+      "backend_conversation_id",
+      "offset_ms",
+      "output",
+      "commentary",
+      "thinking",
     ])
       assert.ok(
         !value.properties.some((p) => p.serializedName === field),
@@ -699,7 +872,6 @@ test("SDK metadata exports native events and separate Live persistence discrimin
   for (const [name, textFields] of [
     ["Client", ["commentary", "thinking"]],
     ["Responses", ["output"]],
-    ["FoundryManagedAgent", ["commentary", "thinking", "delegation_context"]],
   ]) {
     const stored = model(`VoiceAgentLive${name}DelegationConversationItem`);
     assert.equal(stored.baseModel, delegation);
@@ -709,6 +881,41 @@ test("SDK metadata exports native events and separate Live persistence discrimin
         "string",
       );
   }
+  const managed = model("VoiceAgentLiveFoundryManagedAgentDelegationItem");
+  assert.equal(managed.baseModel, delegation);
+  assert.equal(delegation.discriminatedSubtypes.foundry_managed_agent, managed);
+  const outputArray = managed.properties.find(
+    (p) => p.serializedName === "output",
+  );
+  assert.equal(outputArray.optional, false);
+  assert.equal(outputArray.type.kind, "array");
+  const resultItem = model("VoiceAgentLiveDelegationResultItem");
+  assert.equal(outputArray.type.valueType, resultItem);
+  const outputEvent = model("VoiceAgentLiveManagedDelegationOutputItemEvent");
+  assert.equal(
+    outputEvent.properties.find((p) => p.serializedName === "item").type,
+    resultItem,
+  );
+  assert.equal(
+    outputEvent.properties.find((p) => p.serializedName === "output_index").type
+      .kind,
+    "int32",
+  );
+  assert.ok(
+    !context.sdkPackage.models.some(
+      (m) =>
+        m.__raw?.name ===
+        "VoiceAgentLiveFoundryManagedAgentDelegationConversationItem",
+    ),
+  );
+  for (const name of [
+    "event_id",
+    "delegation_id",
+    "result_format",
+    "commentary",
+    "thinking",
+  ])
+    assert.ok(!managed.properties.some((p) => p.serializedName === name), name);
   for (const stored of context.sdkPackage.models.filter(
     (m) =>
       m.__raw?.name?.startsWith("VoiceAgentLive") &&
@@ -956,11 +1163,6 @@ test("stored delegation reuses native fields and discriminates target-specific r
   for (const [name, target, ownFields] of [
     ["Client", "client", ["target", "commentary", "thinking"]],
     ["Responses", "responses", ["target", "output"]],
-    [
-      "FoundryManagedAgent",
-      "foundry_managed_agent",
-      ["target", "commentary", "thinking", "delegation_context", "status"],
-    ],
   ]) {
     const subtype = type(
       `Azure.AI.Projects.VoiceAgentLive${name}DelegationConversationItem`,
@@ -971,8 +1173,11 @@ test("stored delegation reuses native fields and discriminates target-specific r
     assert.ok(!fields(subtype).has("item_id"));
     assert.ok(!fields(subtype).has("delegation_id"));
   }
-  const managed = type(
-    "Azure.AI.Projects.VoiceAgentLiveFoundryManagedAgentDelegationConversationItem",
+  const managed = type(managedItemModel);
+  assert.equal(managed.baseModel, item);
+  assert.equal(
+    managed.properties.get("target").type.value,
+    "foundry_managed_agent",
   );
   assert.equal(managed.properties.get("status").optional, false);
   assert.equal(
@@ -1036,6 +1241,14 @@ const storedDelegation = {
   id: "del_1",
   created_at: 1791763200,
 };
+const managedIdentity = {
+  agent_name: "english-teacher",
+  agent_version: "1",
+  offset_ms: 1200,
+};
+const managedOutput = outputSamples
+  .filter((sample) => sample.payload.delegation_id === storedDelegation.id)
+  .map((sample) => sample.payload.item);
 const storedExamples = [
   { ...storedDelegation, target: "client", commentary: "Use went, not goed." },
   {
@@ -1051,27 +1264,42 @@ const storedExamples = [
   },
   {
     ...storedDelegation,
+    ...managedIdentity,
     target: "foundry_managed_agent",
     status: "completed",
+    response_id: "resp_managed_1",
+    backend_conversation_id: "conv_backend",
     delegation_context: "The learner asked how to describe yesterday's trip.",
-    commentary: "Say: Yesterday I went to school.",
-    thinking: "Focus on irregular verbs.",
+    output: managedOutput,
   },
   {
     ...storedDelegation,
+    ...managedIdentity,
     target: "foundry_managed_agent",
     status: "cancelled",
+    output: managedOutput.slice(0, 1),
     delegation_context:
       "The learner changed the question before the backend finished.",
   },
+  {
+    ...storedDelegation,
+    ...managedIdentity,
+    target: "foundry_managed_agent",
+    status: "in_progress",
+    output: [],
+  },
+  {
+    ...storedDelegation,
+    ...managedIdentity,
+    target: "foundry_managed_agent",
+    status: "failed",
+    output: managedOutput.slice(0, 2),
+  },
 ].map((payload) => ({
-  model: `Azure.AI.Projects.VoiceAgentLive${
-    {
-      client: "Client",
-      responses: "Responses",
-      foundry_managed_agent: "FoundryManagedAgent",
-    }[payload.target]
-  }DelegationConversationItem`,
+  model:
+    payload.target === "foundry_managed_agent"
+      ? managedItemModel
+      : `Azure.AI.Projects.VoiceAgentLive${payload.target === "client" ? "Client" : "Responses"}DelegationConversationItem`,
   payload,
 }));
 
@@ -1081,6 +1309,26 @@ test("speech, partial capture, and target-specific delegation examples validate"
     ...storedExamples,
   ]);
   checkErrors(result.diagnostics);
+});
+
+test("streamed result indices map to the managed aggregate independently per delegation", async () => {
+  const collected = new Map();
+  for (const { payload } of outputSamples) {
+    const output = collected.get(payload.delegation_id) ?? [];
+    assert.equal(payload.output_index, output.length);
+    output.push(payload.item);
+    collected.set(payload.delegation_id, output);
+  }
+  assert.deepEqual(collected.get("del_1"), storedExamples[3].payload.output);
+  assert.equal(collected.get("del_2").length, 1);
+  // Validate the second independent aggregate too, including the shared result identity.
+  const second = structuredClone(storedExamples[3]);
+  second.payload.id = "del_2";
+  second.payload.output = collected.get("del_2");
+  checkErrors(
+    (await validateExamples("interleaved-delegation-output", [second]))
+      .diagnostics,
+  );
 });
 
 test("Live conversation envelope uses native Live seconds usage, not Realtime token usage", async () => {
@@ -1222,6 +1470,48 @@ test("malformed Live speech and delegation items are rejected", async (t) => {
       },
     ],
     [
+      "missing managed result list",
+      storedExamples[3],
+      (p) => {
+        delete p.output;
+      },
+    ],
+    [
+      "object instead of a managed result list",
+      storedExamples[3],
+      (p) => {
+        p.output = resultText;
+      },
+    ],
+    [
+      "null managed result entry",
+      storedExamples[3],
+      (p) => {
+        p.output = [null];
+      },
+    ],
+    [
+      "invalid managed result entry",
+      storedExamples[3],
+      (p) => {
+        p.output[0].thinking = ["Not a string"];
+      },
+    ],
+    [
+      "flattened managed result text",
+      storedExamples[3],
+      (p) => {
+        p.commentary = "Use an output item.";
+      },
+    ],
+    [
+      "removed result format on managed item",
+      storedExamples[3],
+      (p) => {
+        p.result_format = "tagged_text";
+      },
+    ],
+    [
       "Responses fields on client delegation",
       storedExamples[0],
       (p) => {
@@ -1288,7 +1578,6 @@ test("result strings are optional, not nullable or acknowledgment structures", a
   for (const [subtype, names] of [
     ["Responses", ["output"]],
     ["Client", ["commentary", "thinking"]],
-    ["FoundryManagedAgent", ["commentary", "thinking", "delegation_context"]],
   ])
     for (const name of names)
       assert.equal(
@@ -1298,6 +1587,10 @@ test("result strings are optional, not nullable or acknowledgment structures", a
         true,
         `${subtype}.${name}`,
       );
+  assert.equal(
+    type(managedItemModel).properties.get("delegation_context").optional,
+    true,
+  );
 });
 
 test("OpenAPI exposes the Foundry Live handshake without native REST operations", () => {
