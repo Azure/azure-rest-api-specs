@@ -7,6 +7,7 @@ import "./routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 /** Azure Web PubSub Chat REST API */
 @service(#{ title: "Azure Web PubSub Chat REST API" })
@@ -34,4 +35,7 @@ namespace WebPubSubChat;
 enum Versions {
   /** The 2026-02-01-preview API version. */
   v2026_02_01_preview: "2026-02-01-preview",
+
+  /** The 2026-11-01 API version. */
+  v2026_11_01: "2026-11-01",
 }
