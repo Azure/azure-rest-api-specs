@@ -657,7 +657,7 @@ union ApiSourceLinkState {
    */
   Initializing: "initializing",
 
-  /***
+  /**
    * The API source is syncing.
    */
   Syncing: "syncing",
