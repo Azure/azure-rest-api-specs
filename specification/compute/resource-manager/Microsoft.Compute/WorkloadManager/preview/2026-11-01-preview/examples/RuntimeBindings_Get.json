@@ -1,0 +1,29 @@
+{
+  "title": "Get a runtime binding",
+  "operationId": "RuntimeBindings_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-workload",
+    "spaceName": "managed-agents-prod",
+    "bindingName": "kubernetes-default",
+    "api-version": "2026-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/kubernetes-default",
+        "name": "kubernetes-default",
+        "type": "Microsoft.Compute/workloadSpaces/runtimeBindings",
+        "location": "eastus2",
+        "kind": "Kubernetes",
+        "properties": {
+          "provisioningMode": "Managed",
+          "managedProfile": {
+            "offering": "Automatic"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

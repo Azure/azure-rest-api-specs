@@ -1196,6 +1196,7 @@ union PolicyMode {
 /**
  * If the action type is block, this field defines the default customer overridable http response status code.
  */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union PolicySettingsDefaultCustomBlockResponseStatusCode {
   int32,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

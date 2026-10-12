@@ -1,8 +1,8 @@
-import { dirname, join, resolve } from "path";
+import { dirname, join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { API_VERSION_LIFECYCLE_STAGES, Swagger } from "../src/swagger.ts";
 
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 import { ConsoleLogger } from "../src/logger.ts";
 import { Readme } from "../src/readme.ts";
 import { SpecModel } from "../src/spec-model.ts";
@@ -182,7 +182,7 @@ describe("Swagger", () => {
         Problem File: ${resolve("/fake/invalid.json")}
         Readme: ${resolve("/fake/readme.md")}
         Tag: test-tag
-        Cause: ResolverError: Error reading file "${resolve("/does/not/exist.json").replace(/\\/g, "/").toLowerCase()}"]
+        Cause: ResolverError: ENOENT: no such file or directory, open '${resolve("/does/not/exist.json").toLowerCase()}']
     `,
     );
   });

@@ -186,12 +186,6 @@ model StorageApplianceSpec {
   rackId: Azure.Core.armResourceIdentifier;
 
   /**
-   * The SKU for the storage appliance.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  storageApplianceSkuId: string;
-
-  /**
    * The slot the storage appliance is in the rack based on the BOM configuration.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -203,6 +197,12 @@ model StorageApplianceSpec {
    * The serial number for the storage appliance.
    */
   serialNumber: string;
+
+  /**
+   * The SKU for the storage appliance.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  storageApplianceSkuId: string;
 }
 
 /**

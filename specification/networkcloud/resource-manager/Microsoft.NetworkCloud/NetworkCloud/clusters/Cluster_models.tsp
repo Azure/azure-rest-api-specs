@@ -336,7 +336,7 @@ union ClusterSecretArchiveEnabled {
 }
 
 /**
- * The mode of operation for runtime protection.
+ * The strategy for updating the cluster.
  */
 union ClusterUpdateStrategyType {
   string,
@@ -1262,7 +1262,7 @@ model ClusterUpdateStrategy {
   maxUnavailable?: int64;
 
   /**
-   * The mode of operation for runtime protection.
+   * The strategy for updating the cluster.
    */
   strategyType: ClusterUpdateStrategyType;
 
@@ -1516,7 +1516,7 @@ model ClusterUpdateStrategyPatch {
   maxUnavailable?: int64;
 
   /**
-   * The mode of operation for runtime protection.
+   * The strategy for updating the cluster.
    */
   strategyType?: ClusterUpdateStrategyType;
 

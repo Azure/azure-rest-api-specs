@@ -5,6 +5,12 @@ self-hosted-runner:
     - azsdk-pool-github-test-pr
 
 paths:
+  # Temporary compatibility for https://github.com/rhysd/actionlint/pull/732.
+  # Only suppress unsupported syntax for the self-repository reusable workflow.
+  .github/workflows/*.{yaml,yml}:
+    ignore:
+      - '^reusable workflow call "\$/\.github/workflows/_reusable-set-check-status\.yaml" at "uses" is not following the format '
+
   .github/workflows/*.lock.yml:
     ignore:
       - ".+"

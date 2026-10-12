@@ -1,0 +1,128 @@
+name: Sync repository labels
+
+on:
+  pull_request:
+    paths:
+      - .github/labels.yaml
+      - .github/labels/**
+      - .github/workflows/sync-repo-labels.yaml
+      - .github/workflows/src/label-catalog.ts
+      - .github/workflows/src/label-catalog-loader.ts
+      - .github/workflows/src/sync-repo-labels.ts
+      - .github/workflows/cmd/labels.ts
+      - .github/workflows/test/*label*.test.ts
+      - .github/package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+  push:
+    branches: [main]
+    paths:
+      - .github/labels.yaml
+      - .github/labels/**
+      - .github/workflows/sync-repo-labels.yaml
+      - .github/workflows/src/label-catalog.ts
+      - .github/workflows/src/label-catalog-loader.ts
+      - .github/workflows/src/sync-repo-labels.ts
+      - .github/package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+  label: {}
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Report changes without changing label definitions or assignments"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: .github
+      - uses: ./.github/actions/install-deps-github-script
+      - run: node .github/workflows/cmd/labels.ts
+
+  sync:
+    if: >-
+      github.event_name != 'pull_request' &&
+      github.repository == 'Azure/azure-rest-api-specs' &&
+      github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: read
+    concurrency:
+      group: sync-repo-labels
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        id: checkout
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.repository.default_branch }}
+          sparse-checkout: .github
+      - uses: ./.github/actions/install-deps-github-script
+
+      - name: Prepare label changes
+        id: prepare
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          SOURCE_SHA: ${{ steps.checkout.outputs.commit }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }}
+        with:
+          script: |
+            const { prepareLabelSync } = await import(
+              `${process.env.GITHUB_WORKSPACE}/.github/workflows/src/sync-repo-labels.ts`
+            );
+            await prepareLabelSync({ github, context, core }, {
+              catalogPath: `${process.env.GITHUB_WORKSPACE}/.github/labels.yaml`,
+              auditDirectory: `${process.env.RUNNER_TEMP}/label-audit`,
+              sourceSha: process.env.SOURCE_SHA,
+              dryRun: process.env.DRY_RUN === "true",
+            });
+
+      - name: Persist pre-change audit
+        id: audit
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: label-audit-before-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/label-audit/before.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Apply audited changes
+        id: apply
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          AUDIT_HASH: ${{ steps.prepare.outputs.audit-hash }}
+          AUDIT_ARTIFACT_ID: ${{ steps.audit.outputs.artifact-id }}
+        with:
+          script: |
+            const { applyLabelSync } = await import(
+              `${process.env.GITHUB_WORKSPACE}/.github/workflows/src/sync-repo-labels.ts`
+            );
+            await applyLabelSync({ github, context, core }, {
+              auditDirectory: `${process.env.RUNNER_TEMP}/label-audit`,
+              auditHash: process.env.AUDIT_HASH,
+              artifactId: process.env.AUDIT_ARTIFACT_ID,
+            });
+
+      - name: Persist outcome
+        if: ${{ always() && steps.apply.outcome != 'skipped' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: label-audit-outcome-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/label-audit/outcome.json
+          if-no-files-found: error
+          retention-days: 90
