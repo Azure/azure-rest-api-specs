@@ -129,8 +129,8 @@ after(async () => {
 
 test("voice definitions retain kind -> sub_protocol with separate audio ownership", () => {
   const base = type("Azure.AI.Projects.VoiceAgentDefinition");
-  const live = type("Azure.AI.Projects.LiveVoiceAgentDefinition");
-  const realtime = type("Azure.AI.Projects.RealtimeVoiceAgentDefinition");
+  const live = type("Azure.AI.Projects.VoiceAgentLiveDefinition");
+  const realtime = type("Azure.AI.Projects.VoiceAgentRealtimeDefinition");
   assert.equal(getDiscriminator(program, base).propertyName, "sub_protocol");
   assert.equal(getDiscriminator(program, base.baseModel).propertyName, "kind");
   assert.equal(live.baseModel, base);
@@ -149,8 +149,38 @@ test("voice definitions retain kind -> sub_protocol with separate audio ownershi
   assert.ok(realtime.properties.has("subagent_config"));
 });
 
+test("voice model renames remove legacy names and inline the single result-format value", () => {
+  for (const name of [
+    "RealtimeVoiceAgentDefinition",
+    "LiveVoiceAgentDefinition",
+    "VoiceAgentLiveManagedResultFormat",
+    "VoiceAgentLiveFoundryManagedAgentDelegationMetadata",
+  ]) {
+    const [removed] = program.resolveTypeReference(`Azure.AI.Projects.${name}`);
+    assert.equal(removed, undefined, name);
+  }
+  const item = type(
+    "Azure.AI.Projects.VoiceAgentLiveFoundryManagedAgentDelegationItem",
+  );
+  const format = item.properties.get("result_format");
+  assert.equal(format.type.kind, "String");
+  assert.equal(format.type.value, "tagged_text");
+  assert.equal(format.optional, false);
+  const configuration = type(
+    "Azure.AI.Projects.VoiceAgentLiveManagedAgentDelegation",
+  ).properties.get("result_format");
+  assert.equal(configuration.type, format.type);
+  assert.equal(configuration.optional, true);
+  assert.equal(configuration.defaultValue.value, "tagged_text");
+  for (const stage of managedStages)
+    assert.equal(
+      fields(type(managedModel(stage))).get("result_format").type,
+      format.type,
+    );
+});
+
 test("Live configuration references native model identities, not local copies", () => {
-  const live = type("Azure.AI.Projects.LiveVoiceAgentDefinition");
+  const live = type("Azure.AI.Projects.VoiceAgentLiveDefinition");
   assert.equal(
     live.properties.get("audio").type,
     type("OpenAI.LiveInitialSessionAudioParam"),
@@ -317,9 +347,7 @@ test("session.started exposes optional Foundry correlation without replacing the
 
 test("managed notifications keep correlation and expose flat optional result text", () => {
   assert.ok(
-    type(
-      "Azure.AI.Projects.VoiceAgentLiveFoundryManagedAgentDelegationMetadata",
-    ),
+    type("Azure.AI.Projects.VoiceAgentLiveFoundryManagedAgentDelegationItem"),
   );
   for (const stage of managedStages) {
     const model = type(managedModel(stage));
@@ -591,6 +619,21 @@ test("SDK metadata exports native events and separate Live persistence discrimin
     assert.ok(value, `SDK metadata missing ${name}`);
     return value;
   };
+  const voice = model("VoiceAgentDefinition");
+  assert.equal(model("VoiceAgentRealtimeDefinition").baseModel, voice);
+  assert.equal(model("VoiceAgentLiveDefinition").baseModel, voice);
+  assert.deepEqual(Object.keys(voice.discriminatedSubtypes).sort(), [
+    "live",
+    "realtime",
+  ]);
+  for (const name of [
+    "RealtimeVoiceAgentDefinition",
+    "LiveVoiceAgentDefinition",
+  ])
+    assert.ok(
+      !context.sdkPackage.models.some((m) => m.__raw?.name === name),
+      name,
+    );
   for (const stage of managedStages) {
     const value = model(managedModel(stage).split(".").at(-1));
     assert.equal(value.baseModel.__raw.name, "LiveServerEvent");
@@ -1290,8 +1333,14 @@ test("persisted definitions remain flat with Foundry store and native configurat
   for (const doc of documents) {
     const schemas = doc.components.schemas;
     const base = schemas.VoiceAgentDefinition;
-    const live = schemas.LiveVoiceAgentDefinition;
+    const live = schemas.VoiceAgentLiveDefinition;
     assert.equal(base.discriminator.propertyName, "sub_protocol");
+    assert.deepEqual(base.discriminator.mapping, {
+      realtime: "#/components/schemas/VoiceAgentRealtimeDefinition",
+      live: "#/components/schemas/VoiceAgentLiveDefinition",
+    });
+    assert.equal(schemas.RealtimeVoiceAgentDefinition, undefined);
+    assert.equal(schemas.LiveVoiceAgentDefinition, undefined);
     assert.equal(base.properties.store.default, false);
     assert.equal(base.properties.audio, undefined);
     assert.equal(live.properties.live_config, undefined);

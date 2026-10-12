@@ -139,7 +139,7 @@ union VoiceAgentSubProtocol {
 
 @doc("Voice Live settings for the realtime protocol, including cascaded models. Native Live-only fields are not applicable.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model RealtimeVoiceAgentDefinition extends VoiceAgentDefinition {
+model VoiceAgentRealtimeDefinition extends VoiceAgentDefinition {
   @doc("The existing voice protocol. Legacy requests and stored versions may omit this field.")
   sub_protocol: VoiceAgentSubProtocol.realtime;
 
@@ -202,7 +202,7 @@ model RealtimeVoiceAgentDefinition extends VoiceAgentDefinition {
 
 @doc("Native GPT Live settings for a Foundry deployment. This protocol does not use the Voice Live backend or its realtime/cascaded configuration.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model LiveVoiceAgentDefinition extends VoiceAgentDefinition {
+model VoiceAgentLiveDefinition extends VoiceAgentDefinition {
   @doc("The native GPT Live protocol.")
   sub_protocol: VoiceAgentSubProtocol.live;
 
@@ -237,9 +237,6 @@ union VoiceAgentLiveDelegation {
   foundry_managed_agent: VoiceAgentLiveManagedAgentDelegation,
 }
 
-/** The current managed prompt-agent output contract. */
-alias VoiceAgentLiveManagedResultFormat = "tagged_text";
-
 @doc("""
   A same-project prompt agent executed by Foundry on behalf of the Live frontend. Foundry resolves
   and pins the target version once per voice connection, configures native client delegation upstream,
@@ -260,7 +257,7 @@ model VoiceAgentLiveManagedAgentDelegation {
   agent_version?: string | null;
 
   @doc("The target's output contract: plain text with explicit commentary and thinking section markers. Foundry validates the target and translates these sections to native Live messages.")
-  result_format?: VoiceAgentLiveManagedResultFormat = "tagged_text";
+  result_format?: "tagged_text" = "tagged_text";
 }
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult.")

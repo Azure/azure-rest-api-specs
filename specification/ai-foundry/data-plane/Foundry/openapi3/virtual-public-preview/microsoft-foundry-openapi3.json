@@ -51206,73 +51206,6 @@
         },
         "description": "Run-wide end-to-end latency percentiles for the evaluation target."
       },
-      "LiveVoiceAgentDefinition": {
-        "type": "object",
-        "required": [
-          "sub_protocol",
-          "model_type",
-          "model"
-        ],
-        "properties": {
-          "sub_protocol": {
-            "type": "string",
-            "enum": [
-              "live"
-            ],
-            "description": "The native GPT Live protocol."
-          },
-          "model_type": {
-            "type": "string",
-            "enum": [
-              "self_deployed"
-            ],
-            "description": "Native Live uses a deployment in the Foundry resource, not a Voice Live-hosted model."
-          },
-          "model": {
-            "type": "string",
-            "minLength": 1,
-            "description": "The Foundry GPT Live deployment name. Sent in session.start.session.model."
-          },
-          "audio": {
-            "$ref": "#/components/schemas/OpenAI.LiveInitialSessionAudioParam",
-            "description": "Startup-only bidirectional audio format and output voice. No realtime VAD or Azure speech processing settings."
-          },
-          "delegation": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceAgentLiveDelegation"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Who handles delegated work: the connected application, a native Responses backend, or a Foundry-managed same-project prompt agent. Omission or null uses native client delegation."
-          },
-          "input": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.LiveInitialItem"
-            },
-            "maxItems": 128,
-            "description": "Native initial developer, user, or assistant text context. At most 128 messages, with one text part per message."
-          },
-          "client": {
-            "$ref": "#/components/schemas/OpenAI.LiveClientConfigParam",
-            "description": "Frontend data-channel event permissions."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceAgentDefinition"
-          }
-        ],
-        "description": "Native GPT Live settings for a Foundry deployment. This protocol does not use the Voice Live backend or its realtime/cascaded configuration.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "LoraConfig": {
         "type": "object",
         "properties": {
@@ -94878,101 +94811,6 @@
         },
         "description": "An SSE event-type to text-field selector for streaming invocation output."
       },
-      "RealtimeVoiceAgentDefinition": {
-        "type": "object",
-        "required": [
-          "sub_protocol"
-        ],
-        "properties": {
-          "sub_protocol": {
-            "type": "string",
-            "enum": [
-              "realtime"
-            ],
-            "description": "The existing voice protocol. Legacy requests and stored versions may omit this field."
-          },
-          "model_type": {
-            "$ref": "#/components/schemas/VoiceModelType",
-            "description": "How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_engine` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model."
-          },
-          "model": {
-            "type": "string",
-            "description": "The model to use for this agent. Required with `model_type` for a model-backed voice agent and omitted when `conversation_engine` is provided. The model must support realtime or cascaded voice."
-          },
-          "conversation_engine": {
-            "$ref": "#/components/schemas/VoiceConversationEngine",
-            "description": "The engine that owns conversation handling for this voice agent. Exactly one of this property and the model-backed configuration (`model_type` with `model`) must be provided. When this property is provided, `model_type`, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the engine owns the conversation logic. The initial implementation supports a hosted-agent engine."
-          },
-          "greeting": {
-            "$ref": "#/components/schemas/VoiceAgentGreetingConfig",
-            "description": "Optional session-start greeting. Template mode speaks exact rendered text; LLM-generated mode asks the session model to author the opening response and may use configured tools."
-          },
-          "audio": {
-            "$ref": "#/components/schemas/VoiceAgentAudioConfig",
-            "description": "The audio configuration, including input and output formats, voice, turn detection, noise reduction, and\ntranscription. These values are session defaults; a client may override supported fields when connecting."
-          },
-          "output_modalities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceOutputModality"
-            },
-            "description": "The output modalities the agent produces. Defaults to `[\"audio\"]`. `animation` and `avatar` are available\nwhen an avatar is configured.",
-            "default": [
-              "audio"
-            ]
-          },
-          "max_output_tokens": {
-            "$ref": "#/components/schemas/VoiceAgentMaxOutputTokens",
-            "description": "The maximum output-token count for one response."
-          },
-          "include": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceAgentSessionIncludeOption"
-            },
-            "description": "Additional fields to include in service outputs."
-          },
-          "interim_response": {
-            "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig",
-            "description": "Interim-response settings for latency and tool execution."
-          },
-          "avatar": {
-            "$ref": "#/components/schemas/VoiceAgentAvatarConfig",
-            "description": "Optional avatar configuration. These values are session defaults and may be overridden when connecting."
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceAgentTool"
-            },
-            "description": "The tools the voice agent may use. Supported tool kinds are `function` (executed by the client), `mcp`,\n`system` (service-managed session controls), and `toolbox`. Server-side tools such as `web_search`,\n`azure_ai_search`, and `openapi` are provided through a toolbox rather than declared directly."
-          },
-          "tool_choice": {
-            "$ref": "#/components/schemas/VoiceAgentToolChoice",
-            "description": "How the model chooses tools for generated responses. `none` prevents tool calls, `auto` lets the model decide,\n`required` requires at least one tool call, and a specific function or MCP tool can be selected with an object.\nDefaults to `auto`.",
-            "default": "auto"
-          },
-          "parallel_tool_calls": {
-            "type": "boolean",
-            "description": "Whether the model may call multiple tools in parallel."
-          },
-          "subagent_config": {
-            "$ref": "#/components/schemas/VoiceAgentSubagentConfig",
-            "description": "Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceAgentDefinition"
-          }
-        ],
-        "description": "Voice Live settings for the realtime protocol, including cascaded models. Native Live-only fields are not applicable.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "RecurrenceSchedule": {
         "type": "object",
         "required": [
@@ -103063,8 +102901,8 @@
         "discriminator": {
           "propertyName": "sub_protocol",
           "mapping": {
-            "realtime": "#/components/schemas/RealtimeVoiceAgentDefinition",
-            "live": "#/components/schemas/LiveVoiceAgentDefinition"
+            "realtime": "#/components/schemas/VoiceAgentRealtimeDefinition",
+            "live": "#/components/schemas/VoiceAgentLiveDefinition"
           }
         },
         "allOf": [
@@ -103567,6 +103405,73 @@
           "delegation"
         ],
         "description": "The kind of a persisted Live conversation item."
+      },
+      "VoiceAgentLiveDefinition": {
+        "type": "object",
+        "required": [
+          "sub_protocol",
+          "model_type",
+          "model"
+        ],
+        "properties": {
+          "sub_protocol": {
+            "type": "string",
+            "enum": [
+              "live"
+            ],
+            "description": "The native GPT Live protocol."
+          },
+          "model_type": {
+            "type": "string",
+            "enum": [
+              "self_deployed"
+            ],
+            "description": "Native Live uses a deployment in the Foundry resource, not a Voice Live-hosted model."
+          },
+          "model": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The Foundry GPT Live deployment name. Sent in session.start.session.model."
+          },
+          "audio": {
+            "$ref": "#/components/schemas/OpenAI.LiveInitialSessionAudioParam",
+            "description": "Startup-only bidirectional audio format and output voice. No realtime VAD or Azure speech processing settings."
+          },
+          "delegation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentLiveDelegation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Who handles delegated work: the connected application, a native Responses backend, or a Foundry-managed same-project prompt agent. Omission or null uses native client delegation."
+          },
+          "input": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.LiveInitialItem"
+            },
+            "maxItems": 128,
+            "description": "Native initial developer, user, or assistant text context. At most 128 messages, with one text part per message."
+          },
+          "client": {
+            "$ref": "#/components/schemas/OpenAI.LiveClientConfigParam",
+            "description": "Frontend data-channel event permissions."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentDefinition"
+          }
+        ],
+        "description": "Native GPT Live settings for a Foundry deployment. This protocol does not use the Voice Live backend or its realtime/cascaded configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceAgentLiveDelegation": {
         "oneOf": [
@@ -104101,6 +104006,101 @@
           }
         ],
         "description": "The input audio noise reduction mode.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentRealtimeDefinition": {
+        "type": "object",
+        "required": [
+          "sub_protocol"
+        ],
+        "properties": {
+          "sub_protocol": {
+            "type": "string",
+            "enum": [
+              "realtime"
+            ],
+            "description": "The existing voice protocol. Legacy requests and stored versions may omit this field."
+          },
+          "model_type": {
+            "$ref": "#/components/schemas/VoiceModelType",
+            "description": "How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_engine` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model."
+          },
+          "model": {
+            "type": "string",
+            "description": "The model to use for this agent. Required with `model_type` for a model-backed voice agent and omitted when `conversation_engine` is provided. The model must support realtime or cascaded voice."
+          },
+          "conversation_engine": {
+            "$ref": "#/components/schemas/VoiceConversationEngine",
+            "description": "The engine that owns conversation handling for this voice agent. Exactly one of this property and the model-backed configuration (`model_type` with `model`) must be provided. When this property is provided, `model_type`, `model`, `instructions`, `tools`, and `tool_choice` must be omitted, and `greeting.tool_choice` cannot be `required`, because the engine owns the conversation logic. The initial implementation supports a hosted-agent engine."
+          },
+          "greeting": {
+            "$ref": "#/components/schemas/VoiceAgentGreetingConfig",
+            "description": "Optional session-start greeting. Template mode speaks exact rendered text; LLM-generated mode asks the session model to author the opening response and may use configured tools."
+          },
+          "audio": {
+            "$ref": "#/components/schemas/VoiceAgentAudioConfig",
+            "description": "The audio configuration, including input and output formats, voice, turn detection, noise reduction, and\ntranscription. These values are session defaults; a client may override supported fields when connecting."
+          },
+          "output_modalities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceOutputModality"
+            },
+            "description": "The output modalities the agent produces. Defaults to `[\"audio\"]`. `animation` and `avatar` are available\nwhen an avatar is configured.",
+            "default": [
+              "audio"
+            ]
+          },
+          "max_output_tokens": {
+            "$ref": "#/components/schemas/VoiceAgentMaxOutputTokens",
+            "description": "The maximum output-token count for one response."
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentSessionIncludeOption"
+            },
+            "description": "Additional fields to include in service outputs."
+          },
+          "interim_response": {
+            "$ref": "#/components/schemas/VoiceAgentInterimResponseConfig",
+            "description": "Interim-response settings for latency and tool execution."
+          },
+          "avatar": {
+            "$ref": "#/components/schemas/VoiceAgentAvatarConfig",
+            "description": "Optional avatar configuration. These values are session defaults and may be overridden when connecting."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentTool"
+            },
+            "description": "The tools the voice agent may use. Supported tool kinds are `function` (executed by the client), `mcp`,\n`system` (service-managed session controls), and `toolbox`. Server-side tools such as `web_search`,\n`azure_ai_search`, and `openapi` are provided through a toolbox rather than declared directly."
+          },
+          "tool_choice": {
+            "$ref": "#/components/schemas/VoiceAgentToolChoice",
+            "description": "How the model chooses tools for generated responses. `none` prevents tool calls, `auto` lets the model decide,\n`required` requires at least one tool call, and a specific function or MCP tool can be selected with an object.\nDefaults to `auto`.",
+            "default": "auto"
+          },
+          "parallel_tool_calls": {
+            "type": "boolean",
+            "description": "Whether the model may call multiple tools in parallel."
+          },
+          "subagent_config": {
+            "$ref": "#/components/schemas/VoiceAgentSubagentConfig",
+            "description": "Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentDefinition"
+          }
+        ],
+        "description": "Voice Live settings for the realtime protocol, including cascaded models. Native Live-only fields are not applicable.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

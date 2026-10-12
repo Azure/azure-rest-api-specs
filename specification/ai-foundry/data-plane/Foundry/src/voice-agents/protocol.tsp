@@ -817,7 +817,7 @@ union VoiceAgentLiveServerEventTypeExtension {
 
 @doc("Common metadata for advisory managed-delegation notifications. Correlate by delegation_id, not by a projected conversation turn. Notifications can be emitted without storing the voice conversation and are best-effort rather than a durable execution log.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveFoundryManagedAgentDelegationMetadata {
+model VoiceAgentLiveFoundryManagedAgentDelegationItem {
   @doc("The unique ID of this Foundry server event.")
   event_id: string;
 
@@ -831,7 +831,7 @@ model VoiceAgentLiveFoundryManagedAgentDelegationMetadata {
   agent_version: string;
 
   @doc("The configured managed prompt-agent result format.")
-  result_format: VoiceAgentLiveManagedResultFormat;
+  result_format: "tagged_text";
 
   @doc("The backend response ID when available, otherwise null.")
   response_id: string | null;
@@ -845,7 +845,7 @@ model VoiceAgentLiveFoundryManagedAgentDelegationMetadata {
 model VoiceAgentLiveManagedDelegationStartedEvent
   extends OpenAI.LiveServerEvent {
   type: "session.managed_delegation.started";
-  ...VoiceAgentLiveFoundryManagedAgentDelegationMetadata;
+  ...VoiceAgentLiveFoundryManagedAgentDelegationItem;
 }
 
 @doc("More validated managed output has been accepted by Live while the backend invocation is running.")
@@ -853,7 +853,7 @@ model VoiceAgentLiveManagedDelegationStartedEvent
 model VoiceAgentLiveManagedDelegationProgressEvent
   extends OpenAI.LiveServerEvent {
   type: "session.managed_delegation.progress";
-  ...VoiceAgentLiveFoundryManagedAgentDelegationMetadata;
+  ...VoiceAgentLiveFoundryManagedAgentDelegationItem;
   ...VoiceAgentLiveDelegationResultItem;
 }
 
@@ -862,7 +862,7 @@ model VoiceAgentLiveManagedDelegationProgressEvent
 model VoiceAgentLiveManagedDelegationCompletedEvent
   extends OpenAI.LiveServerEvent {
   type: "session.managed_delegation.completed";
-  ...VoiceAgentLiveFoundryManagedAgentDelegationMetadata;
+  ...VoiceAgentLiveFoundryManagedAgentDelegationItem;
   ...VoiceAgentLiveDelegationResultItem;
 
   @doc("The backend agent's conversation ID when available, otherwise null. Distinct from the voice conversation_id and the native Live session.id.")
@@ -874,7 +874,7 @@ model VoiceAgentLiveManagedDelegationCompletedEvent
 model VoiceAgentLiveManagedDelegationFailedEvent
   extends OpenAI.LiveServerEvent {
   type: "session.managed_delegation.failed";
-  ...VoiceAgentLiveFoundryManagedAgentDelegationMetadata;
+  ...VoiceAgentLiveFoundryManagedAgentDelegationItem;
   ...VoiceAgentLiveDelegationResultItem;
 
   @doc("A machine-readable code identifying the managed delegation failure.")
@@ -889,6 +889,6 @@ model VoiceAgentLiveManagedDelegationFailedEvent
 model VoiceAgentLiveManagedDelegationCancelEvent
   extends OpenAI.LiveServerEvent {
   type: "session.managed_delegation.cancel";
-  ...VoiceAgentLiveFoundryManagedAgentDelegationMetadata;
+  ...VoiceAgentLiveFoundryManagedAgentDelegationItem;
   ...VoiceAgentLiveDelegationResultItem;
 }
