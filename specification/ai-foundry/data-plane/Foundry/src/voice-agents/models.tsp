@@ -437,6 +437,11 @@ model VoiceRecording {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyBindingId extends string;
 
+@doc("An allowed canonical E.164 number or regular-expression pattern.")
+@maxLength(256)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar SipAllowedCallingNumber extends string;
+
 @doc("A service-generated telephony call identifier.")
 @minLength(1)
 @maxLength(128)
@@ -568,11 +573,9 @@ model CreateTelephonyBindingRequest {
   label?: string;
 }
 
-@doc("The request to create a Microsoft Teams Phone extensibility binding.")
+@doc("Properties of a Microsoft Teams Phone extensibility binding.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateTeamsPhoneExtensibilityTelephonyBindingContent", "csharp")
-model CreateTeamsPhoneExtensibilityTelephonyBindingRequest
-  extends CreateTelephonyBindingRequest {
+model TeamsPhoneExtensibilityTelephonyBindingProperties {
   @doc("The Microsoft Teams Phone extensibility provider.")
   provider: TelephonyProvider.teams_phone_extensibility;
 
@@ -584,11 +587,9 @@ model CreateTeamsPhoneExtensibilityTelephonyBindingRequest
   resource_account_object_id: Azure.Core.uuid;
 }
 
-@doc("The request to create a Twilio binding.")
+@doc("Properties of a Twilio binding.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateTwilioTelephonyBindingContent", "csharp")
-model CreateTwilioTelephonyBindingRequest
-  extends CreateTelephonyBindingRequest {
+model TwilioTelephonyBindingProperties {
   @doc("The Twilio provider.")
   provider: TelephonyProvider.twilio;
 
@@ -597,10 +598,9 @@ model CreateTwilioTelephonyBindingRequest
   phone_number: string;
 }
 
-@doc("The request to create an inbound SIP binding. New SIP bindings are active. Credentials are stored in the referenced Foundry connection.")
+@doc("Properties of an inbound SIP binding.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateSipTelephonyBindingContent", "csharp")
-model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
+model SipTelephonyBindingProperties {
   @doc("The SIP provider.")
   provider: TelephonyProvider.sip;
 
@@ -608,13 +608,36 @@ model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
   @maxLength(64)
   phone_number?: string;
 
-  @doc("Allowed source IP addresses or CIDR ranges. Omit or use an empty array for no source-address restriction.")
+  @doc("Allowed source IP addresses or CIDR ranges. Omission or an empty array indicates no source-address restriction.")
   @maxItems(64)
   allowed_source_cidrs?: string[];
 
-  @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omit or use an empty array for no caller-number restriction.")
+  @doc("Allowed canonical E.164 numbers or regular-expression patterns. Omission or an empty array indicates no caller-number restriction.")
   @maxItems(64)
-  allowed_calling_numbers?: string[];
+  allowed_calling_numbers?: SipAllowedCallingNumber[];
+}
+
+@doc("The request to create a Microsoft Teams Phone extensibility binding.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateTeamsPhoneExtensibilityTelephonyBindingContent", "csharp")
+model CreateTeamsPhoneExtensibilityTelephonyBindingRequest
+  extends CreateTelephonyBindingRequest {
+  ...TeamsPhoneExtensibilityTelephonyBindingProperties;
+}
+
+@doc("The request to create a Twilio binding.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateTwilioTelephonyBindingContent", "csharp")
+model CreateTwilioTelephonyBindingRequest
+  extends CreateTelephonyBindingRequest {
+  ...TwilioTelephonyBindingProperties;
+}
+
+@doc("The request to create an inbound SIP binding. New SIP bindings are active. Credentials are stored in the referenced Foundry connection.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateSipTelephonyBindingContent", "csharp")
+model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
+  ...SipTelephonyBindingProperties;
 }
 
 @doc("The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.")
@@ -641,105 +664,66 @@ model UpdateTelephonyBindingRequest {
   @maxItems(64)
   allowed_source_cidrs?: string[];
 
-  @doc("Replacement allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
+  @doc("Replacement allowed canonical E.164 numbers or regular-expression patterns. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
   @maxItems(64)
-  allowed_calling_numbers?: string[];
+  allowed_calling_numbers?: SipAllowedCallingNumber[];
+}
+
+@doc("Properties shared by telephony binding response models.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyBindingProperties {
+  @doc("The service-generated binding identifier.")
+  id: TelephonyBindingId;
+
+  @doc("The telephony provider.")
+  provider: TelephonyProvider;
+
+  @doc("The Foundry connection name for the telephony provider.")
+  @minLength(1)
+  @maxLength(256)
+  connection_name: string;
+
+  @doc("The optional display label for the binding.")
+  @maxLength(128)
+  label?: string;
+
+  @doc("The lifecycle status.")
+  status: TelephonyBindingStatus;
+
+  @doc("The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP.")
+  incoming_call_url: url;
 }
 
 @doc("A telephony binding owned by a voice agent.")
 @discriminator("provider")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyBinding {
-  @doc("The service-generated binding identifier.")
-  id: TelephonyBindingId;
-
-  @doc("The telephony provider.")
-  provider: TelephonyProvider;
-
-  @doc("The Foundry connection name for the telephony provider.")
-  @minLength(1)
-  @maxLength(256)
-  connection_name: string;
-
-  @doc("The optional display label for the binding.")
-  @maxLength(128)
-  label?: string;
-
-  @doc("The lifecycle status.")
-  status: TelephonyBindingStatus;
-
-  @doc("The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP.")
-  incoming_call_url: url;
+  ...TelephonyBindingProperties;
 }
 
 @doc("A Microsoft Teams Phone extensibility binding owned by a voice agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsPhoneExtensibilityTelephonyBinding extends TelephonyBinding {
-  @doc("The Microsoft Teams Phone extensibility provider.")
-  provider: TelephonyProvider.teams_phone_extensibility;
-
-  @doc("The optional display phone number for the Teams resource account.")
-  @maxLength(64)
-  phone_number?: string;
-
-  @doc("The Microsoft Teams resource-account object identifier as a GUID.")
-  resource_account_object_id: Azure.Core.uuid;
+  ...TeamsPhoneExtensibilityTelephonyBindingProperties;
 }
 
 @doc("A Twilio binding owned by a voice agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBinding extends TelephonyBinding {
-  @doc("The Twilio provider.")
-  provider: TelephonyProvider.twilio;
-
-  @doc("The Twilio E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{6,14}$")
-  phone_number: string;
+  ...TwilioTelephonyBindingProperties;
 }
 
 @doc("A SIP binding.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model SipTelephonyBinding extends TelephonyBinding {
-  @doc("The SIP provider.")
-  provider: TelephonyProvider.sip;
-
-  @doc("An optional display phone number. It is not the binding identifier.")
-  @maxLength(64)
-  phone_number?: string;
-
-  @doc("Allowed source IP addresses or CIDR ranges. Omission or an empty array indicates no source-address restriction.")
-  @maxItems(64)
-  allowed_source_cidrs?: string[];
-
-  @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction.")
-  @maxItems(64)
-  allowed_calling_numbers?: string[];
+  ...SipTelephonyBindingProperties;
 }
 
 @doc("A telephony binding returned in a list, including its entity tag.")
 @discriminator("provider")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyBindingListItem {
-  @doc("The service-generated binding identifier.")
-  id: TelephonyBindingId;
-
-  @doc("The telephony provider.")
-  provider: TelephonyProvider;
-
-  @doc("The Foundry connection name for the telephony provider.")
-  @minLength(1)
-  @maxLength(256)
-  connection_name: string;
-
-  @doc("The optional display label for the binding.")
-  @maxLength(128)
-  label?: string;
-
-  @doc("The lifecycle status.")
-  status: TelephonyBindingStatus;
-
-  @doc("The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP.")
-  incoming_call_url: url;
+  ...TelephonyBindingProperties;
 
   @doc("The entity tag to send in the `If-Match` header when updating or deleting this binding.")
   @visibility(Lifecycle.Read)
@@ -750,45 +734,19 @@ model TelephonyBindingListItem {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsPhoneExtensibilityTelephonyBindingListItem
   extends TelephonyBindingListItem {
-  @doc("The Microsoft Teams Phone extensibility provider.")
-  provider: TelephonyProvider.teams_phone_extensibility;
-
-  @doc("The optional display phone number for the Teams resource account.")
-  @maxLength(64)
-  phone_number?: string;
-
-  @doc("The Microsoft Teams resource-account object identifier as a GUID.")
-  resource_account_object_id: Azure.Core.uuid;
+  ...TeamsPhoneExtensibilityTelephonyBindingProperties;
 }
 
 @doc("A Twilio binding returned in a list, including its entity tag.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBindingListItem extends TelephonyBindingListItem {
-  @doc("The Twilio provider.")
-  provider: TelephonyProvider.twilio;
-
-  @doc("The Twilio E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{6,14}$")
-  phone_number: string;
+  ...TwilioTelephonyBindingProperties;
 }
 
 @doc("A SIP binding returned in a list, including its entity tag.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model SipTelephonyBindingListItem extends TelephonyBindingListItem {
-  @doc("The SIP provider.")
-  provider: TelephonyProvider.sip;
-
-  @doc("An optional display phone number. It is not the binding identifier.")
-  @maxLength(64)
-  phone_number?: string;
-
-  @doc("Allowed source IP addresses or CIDR ranges. Omission or an empty array indicates no source-address restriction.")
-  @maxItems(64)
-  allowed_source_cidrs?: string[];
-
-  @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction.")
-  @maxItems(64)
-  allowed_calling_numbers?: string[];
+  ...SipTelephonyBindingProperties;
 }
 
 /** A telephony binding response with its entity tag. */

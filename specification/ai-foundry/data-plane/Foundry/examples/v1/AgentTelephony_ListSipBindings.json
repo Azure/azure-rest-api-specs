@@ -1,0 +1,39 @@
+{
+  "title": "List SIP bindings",
+  "operationId": "AgentTelephony_listTelephonyBindings",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "agent_name": "support-agent",
+    "provider": "sip",
+    "status": "active",
+    "limit": 20
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "id": "binding_support_sip",
+            "provider": "sip",
+            "connection_name": "sip-support-connection",
+            "phone_number": "+14255550100",
+            "label": "Customer support SIP",
+            "status": "active",
+            "incoming_call_url": "sip:support-agent@voice.contoso.com",
+            "etag": "\"binding-etag-sip-1\"",
+            "allowed_source_cidrs": [
+              "192.0.2.0/24"
+            ],
+            "allowed_calling_numbers": [
+              "+14255550123"
+            ]
+          }
+        ],
+        "first_id": "binding_support_sip",
+        "last_id": "binding_support_sip",
+        "has_more": false
+      }
+    }
+  }
+}

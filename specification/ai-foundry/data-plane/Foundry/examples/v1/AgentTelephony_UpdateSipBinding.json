@@ -1,0 +1,37 @@
+{
+  "title": "Update SIP binding access controls",
+  "operationId": "AgentTelephony_updateTelephonyBinding",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "agent_name": "support-agent",
+    "binding_id": "binding_support_sip",
+    "If-Match": "\"binding-etag-sip-1\"",
+    "body": {
+      "allowed_source_cidrs": [],
+      "allowed_calling_numbers": [
+        "+14255550123"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"binding-etag-sip-2\""
+      },
+      "body": {
+        "id": "binding_support_sip",
+        "provider": "sip",
+        "connection_name": "sip-support-connection",
+        "phone_number": "+14255550100",
+        "label": "Customer support SIP",
+        "status": "active",
+        "incoming_call_url": "sip:support-agent@voice.contoso.com",
+        "allowed_source_cidrs": [],
+        "allowed_calling_numbers": [
+          "+14255550123"
+        ]
+      }
+    }
+  }
+}
