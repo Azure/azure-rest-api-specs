@@ -28,14 +28,6 @@ These are the global settings for the SRE Agent.
 openapi-type: arm
 tag: package-2026-07-01
 
-suppressions:
-  - code: OperationsAPIImplementation
-    reason: The operations API is defined in a separate file.
-    from: sreagent.json
-  - code: MissingSegmentsInNestedResourceListOperation
-    reason: The parent resource Get call is defined in a separate file.
-    from: sreagent.json
-    
 ```
 
 ### Tag: package-2026-07-01
@@ -47,10 +39,11 @@ input-file:
 directive:
   - suppress: AvoidAdditionalProperties
     from: sreagent.json
-    reason: A dictionary allow passing through various key-value pairs
+    reason: A dictionary allows passing through service-specific key-value pairs.
     where:
-    - $.definitions.AgentConnectorProperties.properties.extendedProperties
-    - $.definitions.Connector.properties.extendedProperties
+      - $.definitions.AgentConnectorProperties.properties.extendedProperties
+      - $.definitions.AgentConnectorPropertiesWithSecrets.properties.extendedProperties
+      - $.definitions.Connector.properties.extendedProperties
 
 ```
 

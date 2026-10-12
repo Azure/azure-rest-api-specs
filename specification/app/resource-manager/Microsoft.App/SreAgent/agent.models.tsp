@@ -474,6 +474,14 @@ model IncidentManagementConfiguration {
   connectionUrl?: string;
 
   /** The key for the connection */
+  @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "connectionKey")
+  @secret
+  connectionKeyV1?: string;
+
+  /** The key supplied when creating or updating the connection. */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   connectionKey?: string;
 
@@ -493,6 +501,14 @@ model ApplicationInsightsConfiguration {
   appId?: string;
 
   /** The connection string for the Application Insights resource */
+  @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "connectionString")
+  @secret
+  connectionStringV1?: string;
+
+  /** The connection string supplied when creating or updating the Application Insights configuration. */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   connectionString?: string;
 }
