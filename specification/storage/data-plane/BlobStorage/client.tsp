@@ -203,7 +203,21 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs", "rust,go");
 @@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs", "rust,go");
 
-@@scope(ProposedLeaseIdOptionalParameter.proposedLeaseId, "!rust");
+/** An arbitrary optional parameter used to test Rust options-bag generation. */
+alias RustBlobAcquireLeaseAdditionalOptions = {
+  /** An arbitrary client option. */
+  @clientName("foo", "rust")
+  workaroundFoo?: string;
+};
+
+@@override(
+  Storage.Blob.Blob.acquireLease,
+  addParameter(
+    Storage.Blob.Blob.acquireLease,
+    RustBlobAcquireLeaseAdditionalOptions.workaroundFoo
+  ),
+  "rust"
+);
 
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
 @@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
