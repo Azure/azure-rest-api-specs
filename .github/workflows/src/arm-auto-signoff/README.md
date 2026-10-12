@@ -55,6 +55,3 @@ no longer the PR head is never read for the new head.
 | [arm-universal-auto-signoff.ts](./arm-universal-auto-signoff.ts)         | Read statuses and labels, decide label actions                      |
 | [arm-api-review.md](../../arm-api-review.md)                             | Reviewer workflow source (the `.lock.yml` is generated from it)     |
 | [arm-universal-auto-signoff.yaml](../../arm-universal-auto-signoff.yaml) | Universal workflow                                                  |
-
-The design rationale, validation rules, invariants, edge cases, and debugging steps are in the
-[arm-semantic-review skill](../../../skills/arm-semantic-review/SKILL.md).
