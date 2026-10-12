@@ -2254,6 +2254,12 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(ExtendedProperties, "IaasVmBackupExtendedProperties", "csharp");
 @@clientName(RestoreRequestResource, "TriggerRestoreContent", "csharp");
 @@clientName(RestoreRequest, "RestoreContent", "csharp");
+@@clientName(GetRPExtendedInfoRequest, "GetRPExtendedInfoContent", "csharp");
+@@clientName(
+  ValidateAzureWorkloadRestoreOperationRequest,
+  "ValidateAzureWorkloadRestoreOperationContent",
+  "csharp"
+);
 @@clientName(IaaSVMBulkRestoreRequest, "IaaSVMBulkRestoreContent", "csharp");
 @@clientName(
   FetchRPForBulkRestoreRequest,
@@ -3815,3 +3821,6 @@ op protectionPolicyOperationStatusesGet(
   "ProtectionIntentOperations",
   "javascript"
 );
+
+@@clientName(DiskInfo.lun, "LUN", "go");
+@@clientName(DiskInformation.diskSizeInGb, "DiskSizeInGB", "go");
