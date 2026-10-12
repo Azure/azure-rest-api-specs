@@ -254,7 +254,12 @@ async function getDesiredLabelActions({
         labelActions[ArmAutoSignoffLabel.ArmManualSignoffRequired] = LabelAction.Add;
       }
     } else {
-      core.info("ARM semantic review has not passed");
+      core.info(
+        `ARM semantic review has not passed: ${semanticReviewOutcome ?? "missing"}` +
+          (latestSemanticReviewStatus?.description
+            ? ` (${latestSemanticReviewStatus.description})`
+            : ""),
+      );
     }
     labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest] = hasAutoSignoff
       ? LabelAction.Remove
