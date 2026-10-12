@@ -791,6 +791,10 @@ union WorkloadType {
   SAPAseDatabase: "SAPAseDatabase",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SAPHanaDBInstance: "SAPHanaDBInstance",
+
+  /** A SQL Server instance. */
+  @added(Versions.v2026_10_01)
+  SQLInstance: "SQLInstance",
 }
 
 /**
