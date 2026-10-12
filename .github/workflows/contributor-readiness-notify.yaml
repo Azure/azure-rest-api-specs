@@ -1,0 +1,18 @@
+name: Contributor Readiness - Events
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+    paths: ["specification/**"]
+  pull_request_review:
+    types: [submitted, dismissed]
+
+permissions: {}
+
+jobs:
+  notify:
+    runs-on: ubuntu-slim
+    steps:
+      # Fork PR/review workflows cannot write comments. The trusted workflow_run
+      # consumer reads GitHub's run metadata, not PR code or uploaded artifacts.
+      - run: echo "Refresh contributor readiness from the trusted workflow."

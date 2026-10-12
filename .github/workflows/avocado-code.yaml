@@ -20,8 +20,9 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           # Must include all branches, for git branch logic in Avocado to work correctly
           fetch-depth: 0
 
@@ -37,12 +38,13 @@ jobs:
 
           echo "output-file=$AVOCADO_OUTPUT_FILE" >> "$GITHUB_OUTPUT"
 
-          npm exec --no -- avocado \
+          pnpm exec avocado \
             --excludePaths \
               "/common-types/" \
               "/scenarios/" \
               "/package.json" \
-              "/package-lock.json" \
+              "/pnpm-lock.yaml" \
+              "/pnpm-workspace.yaml" \
               "/cadl/examples/" \
               '(?=/examples/)(?!(?:/stable/|/preview/))' \
               "/\\.github/" \
@@ -73,11 +75,11 @@ jobs:
       - if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
         name: Generate job summary
         id: generate-job-summary
-        uses: actions/github-script@v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: generateJobSummary } =
-              await import('${{ github.workspace }}/.github/workflows/src/avocado-code.js');
+              await import('${{ github.workspace }}/.github/workflows/src/avocado-code.ts');
             return await generateJobSummary({ core });
         env:
           AVOCADO_OUTPUT_FILE: ${{ steps.run-avocado.outputs.output-file }}
@@ -85,7 +87,7 @@ jobs:
       # Used by other workflows like set-status
       - if: ${{ always() && steps.generate-job-summary.outputs.summary }}
         name: Set job-summary artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: job-summary
           path: ${{ steps.generate-job-summary.outputs.summary }}

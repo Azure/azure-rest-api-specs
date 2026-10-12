@@ -90,7 +90,8 @@ interface NamespaceDevices {
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceDevice>;
-  listByResourceGroup is ArmResourceListByParent<NamespaceDevice>;
+  @renamedFrom(Versions.v2026_11_01, "listByResourceGroup")
+  listByNamespace is ArmResourceListByParent<NamespaceDevice>;
 
   @doc("A long-running resource action.")
   @added(Versions.v2026_03_01_preview)

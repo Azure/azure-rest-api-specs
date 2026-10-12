@@ -18,6 +18,7 @@ import "./ApplicationGatewayAvailableSslOptions.tsp";
 import "./ApplicationGatewayPrivateEndpointConnection.tsp";
 import "./ApplicationGatewayWafDynamicManifestResult.tsp";
 import "./ApplicationSecurityGroup.tsp";
+import "./AuthenticationPolicy.tsp";
 import "./AzureFirewall.tsp";
 import "./AzureWebCategory.tsp";
 import "./BastionHost.tsp";
@@ -39,6 +40,7 @@ import "./ExpressRoutePortsLocation.tsp";
 import "./ExpressRoutePort.tsp";
 import "./ExpressRoutePortAuthorization.tsp";
 import "./ExpressRouteLag.tsp";
+import "./ExpressRouteLagAuthorization.tsp";
 import "./FirewallPolicy.tsp";
 import "./FirewallPolicyRuleCollectionGroup.tsp";
 import "./FirewallPolicyKubeSelectorGroup.tsp";
@@ -136,6 +138,7 @@ import "./ConnectionPolicy.tsp";
 import "./WebApplicationFirewallPolicy.tsp";
 import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
+import "./VirtualNetworkApplianceCapability.tsp";
 import "./ServiceGateway.tsp";
 import "./InterconnectGroup.tsp";
 import "./FirstPartyServiceTag.tsp";
@@ -180,6 +183,18 @@ enum Versions {
    */
   @useDependency(Common.Versions.v2025_09_01)
   v2025_09_01: "2025-09-01",
+
+  /**
+   * The 2026-01-01 API version.
+   */
+  @useDependency(Common.Versions.v2026_01_01)
+  v2026_01_01: "2026-01-01",
+
+  /**
+   * The 2026-03-01 API version.
+   */
+  @useDependency(Common.Versions.v2026_03_01)
+  v2026_03_01: "2026-03-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -1,0 +1,24 @@
+{
+  "title": "Generate a namespace update compliance report",
+  "operationId": "Namespaces_GenerateReport",
+  "description": "Generate a NamespaceUpdateCompliance report for a namespace.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-1",
+    "body": {
+      "reportType": "NamespaceUpdateComplianceReport"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DeviceRegistry/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-11-02-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DeviceRegistry/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-11-02-preview",
+        "Retry-After": 30
+      }
+    },
+    "204": {}
+  }
+}
