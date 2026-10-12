@@ -1,4 +1,4 @@
-# credvalidation-v5-1791834086
+# credvalidation-v5-1791834939
 
 > see https://aka.ms/autorest
 
@@ -9,6 +9,7 @@
 ``` yaml
 openapi-type: arm
 tag: package-2026-10-12
+package-version: 1.0.0b1
 ```
 
 ### Tag: package-2026-10-12
@@ -20,11 +21,11 @@ input-file:
   - Microsoft.Test/stable/2026-10-12/test.json
 ```
 
-## Python track2
+## Python
 
-These settings apply only when `--track2` is specified on the command line.
+These settings apply only when `--python` is specified on the command line.
 
-``` yaml $(azure-sdk-for-python-track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.credvalidation
