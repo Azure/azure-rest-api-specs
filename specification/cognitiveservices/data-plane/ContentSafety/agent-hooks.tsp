@@ -756,6 +756,20 @@ union AgentEvaluationProfile {
 }
 
 @added(Versions.v2026_10_15_preview)
+@doc("Cryptographic binding between this receipt and the exact Unified Moderate request. The host recomputes the digest before trusting receipt metadata.")
+model AgentEvaluationRequestBinding {
+  @doc("Digest algorithm. SHA-256 is required for this receipt version.")
+  algorithm: "sha256";
+
+  @doc("Canonicalization algorithm. rfc8785 means the RFC 8785 JSON Canonicalization Scheme applied to the documented digest input.")
+  canonicalization: "rfc8785";
+
+  @doc("Lowercase SHA-256 digest of the RFC 8785 canonical UTF-8 JSON object { apiVersion, context, selectors }, prefixed with sha256:. context is the exact decoded AgentContext request body. selectors contains the exact decoded query selector values used for admission: { targetResourceId, developerPolicyId?, developerPolicyRevision?, developerPolicySemanticDigest? } for foundryProject or { policyId } for namedPolicy. Omitted optional selectors are omitted rather than encoded as null. The service derives this value from the accepted request; it is never copied from request metadata.")
+  @pattern("^sha256:[0-9a-f]{64}$")
+  digest: string;
+}
+
+@added(Versions.v2026_10_15_preview)
 @discriminator("profile")
 @doc("Common versioned receipt fields for one AACS evaluation attempt. The receipt proves what was evaluated; it does not replace the Verdict or prove that the calling host enforced it.")
 model AgentPolicyEvaluationReceipt {
@@ -773,25 +787,21 @@ model AgentPolicyEvaluationReceipt {
   @minValue(1)
   attempt: int64;
 
+  @doc("Binding to the exact API version, AgentContext and admitted selector values evaluated in this attempt.")
+  requestBinding: AgentEvaluationRequestBinding;
+
   @doc("Exact policy layers evaluated and composed into the aggregate Verdict.")
   evaluatedPolicyLayers: AgentEvaluatedPolicyLayer[];
 
   @doc("The single intervention point evaluated by this receipt.")
   evaluatedInterventionPoint: AgentInterceptionPoint;
 
-  @doc("Intervention points required by every applicable policy layer for this host profile. This is capability evidence, not a claim that those points ran in this evaluation.")
+  @doc("Intervention points required by every applicable policy layer. This states policy requirements, not host support and not points executed in this evaluation.")
   requiredInterventionPoints: AgentInterceptionPoint[];
-
-  @doc("Required intervention points supported by the admitted host profile. This is capability evidence, not a list of points evaluated by this receipt.")
-  satisfiedInterventionPoints: AgentInterceptionPoint[];
 
   @doc("AACS host-profile version included in executable artifact identity.")
   @minLength(1)
   hostProfileVersion: string;
-
-  @doc("Foundry-owned effective capability version admitted for this target, region, cohort and operation. API version alone does not establish this capability.")
-  @minLength(1)
-  capabilityVersion: string;
 
   @doc("Authenticated producer resource ID established by the service transport. This value is service-derived and never accepted from the request body or a customer-settable identity header.")
   @minLength(1)
@@ -807,6 +817,13 @@ model AgentPolicyEvaluationReceipt {
 model AgentFoundryProjectReceipt extends AgentPolicyEvaluationReceipt {
   profile: "foundryProject";
 
+  @doc("Required intervention points supported by the admitted Foundry host capability. Foundry's authenticated capability authority supplies this value; AACS must not infer it, echo request metadata or claim support when the authoritative value is unavailable. This is not a list of points evaluated by this receipt.")
+  supportedInterventionPoints: AgentInterceptionPoint[];
+
+  @doc("Foundry-owned effective capability version admitted for this target, region, cohort and operation. AACS obtains it from the authenticated capability authority and fails closed when it cannot. API version and request metadata do not establish this capability.")
+  @minLength(1)
+  capabilityVersion: string;
+
   @doc("Governed project selected by targetResourceId.")
   @minLength(1)
   targetResourceId: string;
@@ -815,16 +832,19 @@ model AgentFoundryProjectReceipt extends AgentPolicyEvaluationReceipt {
   @minLength(1)
   targetIncarnation: string;
 
-  @doc("Monotonic active-binding epoch authoritatively read for this attempt.")
+  @doc("Monotonic active-binding epoch obtained from the approved authoritative binding interface for this attempt. AACS must not infer or echo it. Producers constrain this integer to JavaScript's exact range, 0 through 9,007,199,254,740,991.")
   @minValue(0)
+  @maxValue(9007199254740991)
   bindingEpoch: int64;
 
-  @doc("Monotonic operation-readiness epoch authoritatively read for this attempt.")
+  @doc("Monotonic operation-readiness epoch obtained from the approved authoritative readiness interface for this attempt. AACS must fail closed when it is unavailable and must not infer or echo it. Producers constrain this integer to JavaScript's exact range, 0 through 9,007,199,254,740,991.")
   @minValue(0)
+  @maxValue(9007199254740991)
   readinessEpoch: int64;
 
-  @doc("Immutable target-effective policy generation evaluated by this attempt.")
+  @doc("Immutable target-effective policy generation obtained from authoritative target state and evaluated by this attempt. AACS must not infer or echo it. Producers constrain this integer to JavaScript's exact range, 0 through 9,007,199,254,740,991.")
   @minValue(0)
+  @maxValue(9007199254740991)
   appliedGeneration: int64;
 }
 

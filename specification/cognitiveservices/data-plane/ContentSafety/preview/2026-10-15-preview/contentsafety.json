@@ -65,7 +65,7 @@
       "post": {
         "operationId": "UnifiedOperations_UnifiedModerate",
         "summary": "Unified Moderate",
-        "description": "Synchronously evaluate a canonical Agent Hooks 0.1 context and return a closed canonical Verdict plus a separate enforcement receipt. The hosted API supports two selector profiles. The Foundry-project profile uses targetResourceId for the mandatory project binding and may add one exact admitted developer policy through the all-or-none developerPolicyId/revision/digest tuple. The named-policy profile uses policyId without requiring a Foundry project. Exactly one profile is selected; targetResourceId and policyId cannot be combined. Local Copilot and WorkIQ integrations use in-process Agent Hooks/ACS rather than this hosted protocol. The calling host validates the receipt and owns transform application, final enforcement, approvals, timeouts, audit and the separate host-action attestation. API version establishes wire compatibility only; regional/cohort activation comes from the relevant capability authority. Body identity metadata and customer-settable headers are not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful responses.",
+        "description": "Synchronously evaluate a canonical Agent Hooks 0.1 context and return a closed canonical Verdict plus a separate enforcement receipt. The hosted API supports two selector profiles. The Foundry-project profile uses targetResourceId for the mandatory project binding and may add one exact admitted developer policy through the all-or-none developerPolicyId/revision/digest tuple. The named-policy profile uses policyId without requiring a Foundry project. Exactly one profile is selected; targetResourceId and policyId cannot be combined. Local Copilot and WorkIQ integrations use in-process Agent Hooks/ACS rather than this hosted protocol. The receipt binds its policy metadata to the exact API version, AgentContext and admitted selectors through an RFC 8785 SHA-256 request digest. The calling host recomputes that binding, validates any profile-specific authoritative capability and readiness evidence, and owns transform application, final enforcement, approvals, timeouts, audit and the separate host-action attestation. API version establishes wire compatibility only; regional/cohort activation comes from the relevant capability authority. Body identity metadata and customer-settable headers are not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful responses.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1587,6 +1587,42 @@
         ]
       }
     },
+    "AgentEvaluationRequestBinding": {
+      "type": "object",
+      "description": "Cryptographic binding between this receipt and the exact Unified Moderate request. The host recomputes the digest before trusting receipt metadata.",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "Digest algorithm. SHA-256 is required for this receipt version.",
+          "enum": [
+            "sha256"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "canonicalization": {
+          "type": "string",
+          "description": "Canonicalization algorithm. rfc8785 means the RFC 8785 JSON Canonicalization Scheme applied to the documented digest input.",
+          "enum": [
+            "rfc8785"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "digest": {
+          "type": "string",
+          "description": "Lowercase SHA-256 digest of the RFC 8785 canonical UTF-8 JSON object { apiVersion, context, selectors }, prefixed with sha256:. context is the exact decoded AgentContext request body. selectors contains the exact decoded query selector values used for admission: { targetResourceId, developerPolicyId?, developerPolicyRevision?, developerPolicySemanticDigest? } for foundryProject or { policyId } for namedPolicy. Omitted optional selectors are omitted rather than encoded as null. The service derives this value from the accepted request; it is never copied from request metadata.",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "algorithm",
+        "canonicalization",
+        "digest"
+      ]
+    },
     "AgentEvaluationResult": {
       "type": "object",
       "description": "October Unified Moderate transport response. Verdict is the canonical closed Agent Hooks object. Receipt is separate transport metadata used by the host to fence enforcement and join later host-action evidence.",
@@ -1628,6 +1664,18 @@
       "type": "object",
       "description": "Receipt for a governed Foundry project. These fencing fields are required only for this profile and must come from authoritative Foundry/PMS state rather than request metadata.",
       "properties": {
+        "supportedInterventionPoints": {
+          "type": "array",
+          "description": "Required intervention points supported by the admitted Foundry host capability. Foundry's authenticated capability authority supplies this value; AACS must not infer it, echo request metadata or claim support when the authoritative value is unavailable. This is not a list of points evaluated by this receipt.",
+          "items": {
+            "$ref": "#/definitions/AgentInterceptionPoint"
+          }
+        },
+        "capabilityVersion": {
+          "type": "string",
+          "description": "Foundry-owned effective capability version admitted for this target, region, cohort and operation. AACS obtains it from the authenticated capability authority and fails closed when it cannot. API version and request metadata do not establish this capability.",
+          "minLength": 1
+        },
         "targetResourceId": {
           "type": "string",
           "description": "Governed project selected by targetResourceId.",
@@ -1641,23 +1689,28 @@
         "bindingEpoch": {
           "type": "integer",
           "format": "int64",
-          "description": "Monotonic active-binding epoch authoritatively read for this attempt.",
-          "minimum": 0
+          "description": "Monotonic active-binding epoch obtained from the approved authoritative binding interface for this attempt. AACS must not infer or echo it. Producers constrain this integer to JavaScript's exact range, 0 through 9,007,199,254,740,991.",
+          "minimum": 0,
+          "maximum": 9007199254740991
         },
         "readinessEpoch": {
           "type": "integer",
           "format": "int64",
-          "description": "Monotonic operation-readiness epoch authoritatively read for this attempt.",
-          "minimum": 0
+          "description": "Monotonic operation-readiness epoch obtained from the approved authoritative readiness interface for this attempt. AACS must fail closed when it is unavailable and must not infer or echo it. Producers constrain this integer to JavaScript's exact range, 0 through 9,007,199,254,740,991.",
+          "minimum": 0,
+          "maximum": 9007199254740991
         },
         "appliedGeneration": {
           "type": "integer",
           "format": "int64",
-          "description": "Immutable target-effective policy generation evaluated by this attempt.",
-          "minimum": 0
+          "description": "Immutable target-effective policy generation obtained from authoritative target state and evaluated by this attempt. AACS must not infer or echo it. Producers constrain this integer to JavaScript's exact range, 0 through 9,007,199,254,740,991.",
+          "minimum": 0,
+          "maximum": 9007199254740991
         }
       },
       "required": [
+        "supportedInterventionPoints",
+        "capabilityVersion",
         "targetResourceId",
         "targetIncarnation",
         "bindingEpoch",
@@ -2057,6 +2110,10 @@
           "description": "One-based attempt number for evaluation retries sharing the same evaluation identifier.",
           "minimum": 1
         },
+        "requestBinding": {
+          "$ref": "#/definitions/AgentEvaluationRequestBinding",
+          "description": "Binding to the exact API version, AgentContext and admitted selector values evaluated in this attempt."
+        },
         "evaluatedPolicyLayers": {
           "type": "array",
           "description": "Exact policy layers evaluated and composed into the aggregate Verdict.",
@@ -2070,14 +2127,7 @@
         },
         "requiredInterventionPoints": {
           "type": "array",
-          "description": "Intervention points required by every applicable policy layer for this host profile. This is capability evidence, not a claim that those points ran in this evaluation.",
-          "items": {
-            "$ref": "#/definitions/AgentInterceptionPoint"
-          }
-        },
-        "satisfiedInterventionPoints": {
-          "type": "array",
-          "description": "Required intervention points supported by the admitted host profile. This is capability evidence, not a list of points evaluated by this receipt.",
+          "description": "Intervention points required by every applicable policy layer. This states policy requirements, not host support and not points executed in this evaluation.",
           "items": {
             "$ref": "#/definitions/AgentInterceptionPoint"
           }
@@ -2085,11 +2135,6 @@
         "hostProfileVersion": {
           "type": "string",
           "description": "AACS host-profile version included in executable artifact identity.",
-          "minLength": 1
-        },
-        "capabilityVersion": {
-          "type": "string",
-          "description": "Foundry-owned effective capability version admitted for this target, region, cohort and operation. API version alone does not establish this capability.",
           "minLength": 1
         },
         "authenticatedProducerResourceId": {
@@ -2111,12 +2156,11 @@
         "profile",
         "evaluationId",
         "attempt",
+        "requestBinding",
         "evaluatedPolicyLayers",
         "evaluatedInterventionPoint",
         "requiredInterventionPoints",
-        "satisfiedInterventionPoints",
         "hostProfileVersion",
-        "capabilityVersion",
         "authenticatedProducerResourceId"
       ]
     },

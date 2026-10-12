@@ -62,6 +62,11 @@
           "profile": "foundryProject",
           "evaluationId": "evaluation-example-session-2",
           "attempt": 1,
+          "requestBinding": {
+            "algorithm": "sha256",
+            "canonicalization": "rfc8785",
+            "digest": "sha256:f22c22eeb3b6b3ad79d277df41a4d33960d30d679c02aa2b5757821363c696e0"
+          },
           "evaluatedPolicyLayers": [
             {
               "kind": "project",
@@ -76,7 +81,15 @@
           "requiredInterventionPoints": [
             "pre_model_call"
           ],
-          "satisfiedInterventionPoints": [
+          "hostProfileVersion": "aacs-frontdoor/2",
+          "capabilityVersion": "foundry-agent-hooks/2026-10-15-preview",
+          "authenticatedProducerResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/foundry-agent-host",
+          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account/projects/example-project",
+          "targetIncarnation": "project-incarnation-17",
+          "bindingEpoch": 41,
+          "readinessEpoch": 73,
+          "appliedGeneration": 11,
+          "supportedInterventionPoints": [
             "agent_startup",
             "input",
             "pre_model_call",
@@ -85,15 +98,7 @@
             "post_tool_call",
             "output",
             "agent_shutdown"
-          ],
-          "hostProfileVersion": "aacs-frontdoor/2",
-          "capabilityVersion": "foundry-agent-hooks/2026-10-15-preview",
-          "authenticatedProducerResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/foundry-agent-host",
-          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account/projects/example-project",
-          "targetIncarnation": "project-incarnation-17",
-          "bindingEpoch": 41,
-          "readinessEpoch": 73,
-          "appliedGeneration": 11
+          ]
         }
       }
     },

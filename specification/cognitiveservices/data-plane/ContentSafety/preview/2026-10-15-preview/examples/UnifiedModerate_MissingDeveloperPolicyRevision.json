@@ -28,61 +28,11 @@
     "developerPolicyId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account/raiPolicies/example-developer-policy"
   },
   "responses": {
-    "200": {
-      "body": {
-        "verdict": {
-          "decision": "deny",
-          "reason": "mandatory_policy_denied",
-          "message": "This action is not permitted.",
-          "result_labels": [
-            "harm:Violence"
-          ]
-        },
-        "receipt": {
-          "receiptVersion": "2026-10-15-preview",
-          "profile": "foundryProject",
-          "evaluationId": "evaluation-example-session-1",
-          "attempt": 1,
-          "evaluatedPolicyLayers": [
-            {
-              "kind": "project",
-              "policyResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account/raiPolicies/__managed_project_effective_generation_11",
-              "policyRevision": "project-policy-etag-11",
-              "policySemanticDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
-              "manifestRegoDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
-              "decision": "deny"
-            }
-          ],
-          "evaluatedInterventionPoint": "input",
-          "requiredInterventionPoints": [
-            "input"
-          ],
-          "satisfiedInterventionPoints": [
-            "agent_startup",
-            "input",
-            "pre_model_call",
-            "post_model_call",
-            "pre_tool_call",
-            "post_tool_call",
-            "output",
-            "agent_shutdown"
-          ],
-          "hostProfileVersion": "aacs-frontdoor/2",
-          "capabilityVersion": "foundry-agent-hooks/2026-10-15-preview",
-          "authenticatedProducerResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/foundry-agent-host",
-          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.CognitiveServices/accounts/example-account/projects/example-project",
-          "targetIncarnation": "project-incarnation-17",
-          "bindingEpoch": 41,
-          "readinessEpoch": 73,
-          "appliedGeneration": 11
-        }
-      }
-    },
     "400": {
       "body": {
         "error": {
           "code": "DeveloperPolicyRevisionRequired",
-          "message": "policyId requires an exact policyRevision and policySemanticDigest."
+          "message": "developerPolicyId requires developerPolicyRevision and developerPolicySemanticDigest."
         }
       }
     },
