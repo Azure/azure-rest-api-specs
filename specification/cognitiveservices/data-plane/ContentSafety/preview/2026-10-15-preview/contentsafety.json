@@ -65,7 +65,7 @@
       "post": {
         "operationId": "UnifiedOperations_UnifiedModerate",
         "summary": "Unified Moderate",
-        "description": "Synchronously evaluate a canonical Agent Hooks 0.1 context against authorized effective policy. This version evolves Unified Moderate on its existing route and supports all eight interception points. Azure AI Content Safety composes the applicable selected, bound, subscription and hierarchy policies within this evaluation and returns a complete Verdict. The calling host owns composition across independent interceptors, transform application, final enforcement, approvals, timeouts and audit. policyId selects an authorized policy and targetResourceId selects an authorized binding target; provide at least one. Applicable mandatory policies cannot be bypassed by either selector. Body identity metadata is not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful verdicts.",
+        "description": "Synchronously evaluate a canonical Agent Hooks 0.1 context against authorized effective policy. This version evolves Unified Moderate on its existing route and supports all eight interception points. Azure AI Content Safety composes the applicable project, developer, subscription and hierarchy policies and returns a closed canonical Verdict plus a separate enforcement receipt. The calling host validates the receipt and owns transform application, final enforcement, approvals, timeouts, audit and the separate host-action attestation. targetResourceId selects the project binding. An explicit developer policy is selected by the all-or-none policyId, policyRevision and policySemanticDigest tuple so a mutable name cannot change an admitted operation. Applicable mandatory policies cannot be bypassed by either selector. API version establishes wire compatibility only; regional/cohort activation comes from the Foundry-owned capability authority. Body identity metadata and customer-settable headers are not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful responses.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -73,16 +73,31 @@
           {
             "name": "targetResourceId",
             "in": "query",
-            "description": "Identifier of the protected resource used for binding resolution, not the policy or binding object identifier. For an Azure resource, provide its full Azure Resource Manager resource ID. Project targets must be under the authenticated account and require a verified producer. Required when policyId is absent. When both selectors are provided, the selected policy is evaluated alongside the bound policy. This selector cannot replace authorization or bypass mandatory policy.",
-            "required": false,
+            "description": "Full Azure resource ID of the governed Foundry project used for binding resolution. This selects the mandatory project policy and is required for the October Foundry profile. It is not the policy or binding resource ID. The target must be under the authenticated serving account and the request requires a verified producer. This selector cannot replace authorization or bypass mandatory policy.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "policyId",
             "in": "query",
-            "description": "Authorized policy selector, such as a policy name or full policy resource ID. Hierarchy-enabled scopes require a policy name. Required when targetResourceId is absent. A policy-only request retains authenticated account scope. When both selectors are provided, the selected policy is evaluated alongside the bound policy. Policy selection does not bypass applicable mandatory policies.",
+            "description": "Optional full developer policy resource ID evaluated as a separate stricter layer. When present, policyRevision and policySemanticDigest are required. The exact tuple must match the policy admitted for the agent operation; missing, stale, mismatched or deleted revisions fail closed and never follow the current content behind a mutable policy name.",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "policyRevision",
+            "in": "query",
+            "description": "Opaque exact developer policy revision admitted for the operation. Current RP/PMS resources use the RP-assigned ETag preserved verbatim. Required exactly when policyId is present.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "policySemanticDigest",
+            "in": "query",
+            "description": "SHA-256 digest of the admitted developer policy semantic closure. Required exactly when policyId is present and verified with policyRevision before evaluation.",
+            "required": false,
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
           },
           {
             "name": "body",
@@ -98,11 +113,11 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AgentVerdict"
+              "$ref": "#/definitions/AgentEvaluationResult"
             }
           },
           "400": {
-            "description": "A validation, authorization, throttling or operational failure. This is an HTTP error, never a successful allow verdict.",
+            "description": "A validation, authorization, conflict, throttling or operational failure. This is an HTTP error, never a successful allow verdict. Known codes include InvalidRequest, DeveloperPolicyRevisionRequired, DeveloperPolicyRevisionMismatch, DeveloperPolicyRevisionUnavailable, PolicyFenceChanged, UnsupportedCapability, MandatoryPolicyUnavailable and NativeRouteDisabled.",
             "schema": {
               "$ref": "#/definitions/AgentEvaluationError"
             },
@@ -115,7 +130,7 @@
             "x-ms-error-response": true
           },
           "401": {
-            "description": "A validation, authorization, throttling or operational failure. This is an HTTP error, never a successful allow verdict.",
+            "description": "A validation, authorization, conflict, throttling or operational failure. This is an HTTP error, never a successful allow verdict. Known codes include InvalidRequest, DeveloperPolicyRevisionRequired, DeveloperPolicyRevisionMismatch, DeveloperPolicyRevisionUnavailable, PolicyFenceChanged, UnsupportedCapability, MandatoryPolicyUnavailable and NativeRouteDisabled.",
             "schema": {
               "$ref": "#/definitions/AgentEvaluationError"
             },
@@ -128,7 +143,33 @@
             "x-ms-error-response": true
           },
           "403": {
-            "description": "A validation, authorization, throttling or operational failure. This is an HTTP error, never a successful allow verdict.",
+            "description": "A validation, authorization, conflict, throttling or operational failure. This is an HTTP error, never a successful allow verdict. Known codes include InvalidRequest, DeveloperPolicyRevisionRequired, DeveloperPolicyRevisionMismatch, DeveloperPolicyRevisionUnavailable, PolicyFenceChanged, UnsupportedCapability, MandatoryPolicyUnavailable and NativeRouteDisabled.",
+            "schema": {
+              "$ref": "#/definitions/AgentEvaluationError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "A validation, authorization, conflict, throttling or operational failure. This is an HTTP error, never a successful allow verdict. Known codes include InvalidRequest, DeveloperPolicyRevisionRequired, DeveloperPolicyRevisionMismatch, DeveloperPolicyRevisionUnavailable, PolicyFenceChanged, UnsupportedCapability, MandatoryPolicyUnavailable and NativeRouteDisabled.",
+            "schema": {
+              "$ref": "#/definitions/AgentEvaluationError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "A validation, authorization, conflict, throttling or operational failure. This is an HTTP error, never a successful allow verdict. Known codes include InvalidRequest, DeveloperPolicyRevisionRequired, DeveloperPolicyRevisionMismatch, DeveloperPolicyRevisionUnavailable, PolicyFenceChanged, UnsupportedCapability, MandatoryPolicyUnavailable and NativeRouteDisabled.",
             "schema": {
               "$ref": "#/definitions/AgentEvaluationError"
             },
@@ -141,7 +182,7 @@
             "x-ms-error-response": true
           },
           "429": {
-            "description": "A validation, authorization, throttling or operational failure. This is an HTTP error, never a successful allow verdict.",
+            "description": "A validation, authorization, conflict, throttling or operational failure. This is an HTTP error, never a successful allow verdict. Known codes include InvalidRequest, DeveloperPolicyRevisionRequired, DeveloperPolicyRevisionMismatch, DeveloperPolicyRevisionUnavailable, PolicyFenceChanged, UnsupportedCapability, MandatoryPolicyUnavailable and NativeRouteDisabled.",
             "schema": {
               "$ref": "#/definitions/AgentEvaluationError"
             },
@@ -154,7 +195,7 @@
             "x-ms-error-response": true
           },
           "500": {
-            "description": "A validation, authorization, throttling or operational failure. This is an HTTP error, never a successful allow verdict.",
+            "description": "A validation, authorization, conflict, throttling or operational failure. This is an HTTP error, never a successful allow verdict. Known codes include InvalidRequest, DeveloperPolicyRevisionRequired, DeveloperPolicyRevisionMismatch, DeveloperPolicyRevisionUnavailable, PolicyFenceChanged, UnsupportedCapability, MandatoryPolicyUnavailable and NativeRouteDisabled.",
             "schema": {
               "$ref": "#/definitions/AgentEvaluationError"
             },
@@ -167,7 +208,7 @@
             "x-ms-error-response": true
           },
           "503": {
-            "description": "A validation, authorization, throttling or operational failure. This is an HTTP error, never a successful allow verdict.",
+            "description": "A validation, authorization, conflict, throttling or operational failure. This is an HTTP error, never a successful allow verdict. Known codes include InvalidRequest, DeveloperPolicyRevisionRequired, DeveloperPolicyRevisionMismatch, DeveloperPolicyRevisionUnavailable, PolicyFenceChanged, UnsupportedCapability, MandatoryPolicyUnavailable and NativeRouteDisabled.",
             "schema": {
               "$ref": "#/definitions/AgentEvaluationError"
             },
@@ -205,8 +246,8 @@
           "Evaluate a non-Hooks function-authored prompt with preserved AACS classifier role": {
             "$ref": "./examples/UnifiedModerate_AacsSubjectRole.json"
           },
-          "Evaluate a selected developer policy or reject an unresolved selector": {
-            "$ref": "./examples/UnifiedModerate_UnknownPolicy.json"
+          "Fail closed when the mandatory project policy is unavailable": {
+            "$ref": "./examples/UnifiedModerate_MandatoryPolicyUnavailable.json"
           },
           "Input": {
             "$ref": "./examples/UnifiedModerate_Input.json"
@@ -234,6 +275,27 @@
           },
           "PreToolCall": {
             "$ref": "./examples/UnifiedModerate_PreToolCall.json"
+          },
+          "Reject a deleted exact developer policy revision": {
+            "$ref": "./examples/UnifiedModerate_UnknownPolicy.json"
+          },
+          "Reject a disabled native route": {
+            "$ref": "./examples/UnifiedModerate_NativeRouteDisabled.json"
+          },
+          "Reject a stale binding or readiness fence": {
+            "$ref": "./examples/UnifiedModerate_PolicyFenceChanged.json"
+          },
+          "Reject a stale developer policy revision": {
+            "$ref": "./examples/UnifiedModerate_DeveloperPolicyRevisionMismatch.json"
+          },
+          "Reject an incomplete developer policy selector": {
+            "$ref": "./examples/UnifiedModerate_MissingDeveloperPolicyRevision.json"
+          },
+          "Reject an unsupported host capability": {
+            "$ref": "./examples/UnifiedModerate_UnsupportedCapability.json"
+          },
+          "Reject revision fields without a developer policy": {
+            "$ref": "./examples/UnifiedModerate_InvalidSelectorCombination.json"
           }
         }
       }
@@ -1347,17 +1409,170 @@
       ],
       "x-ms-discriminator-value": "deny"
     },
+    "AgentEvaluatedPolicyLayer": {
+      "type": "object",
+      "description": "One exact policy artifact evaluated during this attempt. The resource ID, revision and semantic digest identify the admitted policy; the artifact digest identifies the activated manifest, Rego and immutable dependencies under the declared host profile.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AgentPolicyLayerKind",
+          "description": "Layer role in the evaluation."
+        },
+        "policyResourceId": {
+          "type": "string",
+          "description": "Full policy resource ID. Service-owned built-ins use their stable service identifier.",
+          "minLength": 1
+        },
+        "policyRevision": {
+          "type": "string",
+          "description": "Exact opaque policy revision. For current RP/PMS resources this is the RP-assigned ETag, preserved verbatim.",
+          "minLength": 1
+        },
+        "policySemanticDigest": {
+          "type": "string",
+          "description": "SHA-256 digest of the admitted semantic policy closure. This prevents a mutable policy name from resolving to different content during an admitted or resumed operation.",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "manifestRegoDigest": {
+          "type": "string",
+          "description": "SHA-256 digest of the activated manifest, Rego and immutable runtime dependencies under the declared host profile.",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "decision": {
+          "$ref": "#/definitions/AgentDecision",
+          "description": "Decision returned by this layer before aggregate composition."
+        }
+      },
+      "required": [
+        "kind",
+        "policyResourceId",
+        "policyRevision",
+        "policySemanticDigest",
+        "manifestRegoDigest",
+        "decision"
+      ]
+    },
     "AgentEvaluationError": {
       "type": "object",
-      "description": "A validation, authorization, throttling or operational failure. This is an HTTP error, never a successful allow verdict.",
+      "description": "A validation, authorization, conflict, throttling or operational failure. This is an HTTP error, never a successful allow verdict. Known codes include InvalidRequest, DeveloperPolicyRevisionRequired, DeveloperPolicyRevisionMismatch, DeveloperPolicyRevisionUnavailable, PolicyFenceChanged, UnsupportedCapability, MandatoryPolicyUnavailable and NativeRouteDisabled.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "$ref": "#/definitions/AgentEvaluationErrorDetail",
           "description": "The error object."
         }
       },
       "required": [
         "error"
+      ]
+    },
+    "AgentEvaluationErrorCode": {
+      "type": "string",
+      "description": "Known October Unified Moderate error codes. The standard Azure error response remains extensible.",
+      "enum": [
+        "InvalidRequest",
+        "DeveloperPolicyRevisionRequired",
+        "DeveloperPolicyRevisionMismatch",
+        "DeveloperPolicyRevisionUnavailable",
+        "PolicyFenceChanged",
+        "UnsupportedCapability",
+        "MandatoryPolicyUnavailable",
+        "NativeRouteDisabled"
+      ],
+      "x-ms-enum": {
+        "name": "AgentEvaluationErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InvalidRequest",
+            "value": "InvalidRequest",
+            "description": "The selector combination or AgentContext is invalid."
+          },
+          {
+            "name": "DeveloperPolicyRevisionRequired",
+            "value": "DeveloperPolicyRevisionRequired",
+            "description": "policyId was supplied without both policyRevision and policySemanticDigest."
+          },
+          {
+            "name": "DeveloperPolicyRevisionMismatch",
+            "value": "DeveloperPolicyRevisionMismatch",
+            "description": "The selected developer policy no longer matches the admitted revision or semantic digest."
+          },
+          {
+            "name": "DeveloperPolicyRevisionUnavailable",
+            "value": "DeveloperPolicyRevisionUnavailable",
+            "description": "The exact admitted developer policy revision was deleted or is no longer resolvable."
+          },
+          {
+            "name": "PolicyFenceChanged",
+            "value": "PolicyFenceChanged",
+            "description": "The active binding or readiness epoch changed before evaluation completed."
+          },
+          {
+            "name": "UnsupportedCapability",
+            "value": "UnsupportedCapability",
+            "description": "The caller or host profile does not support a mandatory policy requirement."
+          },
+          {
+            "name": "MandatoryPolicyUnavailable",
+            "value": "MandatoryPolicyUnavailable",
+            "description": "A mandatory project policy, binding or applied generation is unavailable."
+          },
+          {
+            "name": "NativeRouteDisabled",
+            "value": "NativeRouteDisabled",
+            "description": "The October native route is registered but disabled for this region, cohort or target."
+          }
+        ]
+      }
+    },
+    "AgentEvaluationErrorDetail": {
+      "type": "object",
+      "description": "Actionable October Unified Moderate error details.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/AgentEvaluationErrorCode",
+          "description": "Server-defined error code. Known October codes describe selector, revision, readiness and capability failures."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Optional request field or policy resource associated with the failure."
+        },
+        "details": {
+          "type": "array",
+          "description": "Nested errors that contributed to this failure.",
+          "items": {
+            "$ref": "#/definitions/AgentEvaluationErrorDetail"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Optional implementation-specific inner error that does not expose credentials or trust inputs."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "AgentEvaluationResult": {
+      "type": "object",
+      "description": "October Unified Moderate transport response. Verdict is the canonical closed Agent Hooks object. Receipt is separate transport metadata used by the host to fence enforcement and join later host-action evidence.",
+      "properties": {
+        "verdict": {
+          "$ref": "#/definitions/AgentVerdict",
+          "description": "Canonical aggregate Agent Hooks Verdict."
+        },
+        "receipt": {
+          "$ref": "#/definitions/AgentPolicyEvaluationReceipt",
+          "description": "Policy-evaluation receipt for this attempt."
+        }
+      },
+      "required": [
+        "verdict",
+        "receipt"
       ]
     },
     "AgentEvidence": {
@@ -1378,6 +1593,69 @@
           "x-ms-client-name": "verificationPointers"
         }
       }
+    },
+    "AgentHarmDetail": {
+      "type": "object",
+      "description": "One detection detail associated with a public harm summary.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Whether this detail was detected."
+        },
+        "id": {
+          "type": "string",
+          "description": "Stable public detail identifier, such as a configured blocklist or provider name."
+        }
+      },
+      "required": [
+        "detected",
+        "id"
+      ]
+    },
+    "AgentHarmResult": {
+      "type": "object",
+      "description": "Public classifier summary preserved from Unified Moderate. This excludes model family/version, thresholds, private configuration and raw confidence or probability scores.",
+      "properties": {
+        "blocked": {
+          "type": "boolean",
+          "description": "Whether this category contributed to a blocking policy result."
+        },
+        "detected": {
+          "type": "boolean",
+          "description": "Whether the classifier detected this category."
+        },
+        "severity": {
+          "type": "string",
+          "description": "Optional public risk label."
+        },
+        "numericSeverity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional ordinal public severity on the existing 0–7 Content Safety scale. This is not a confidence or probability. Detection-only categories omit it.",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "details": {
+          "type": "array",
+          "description": "Optional public detection details.",
+          "items": {
+            "$ref": "#/definitions/AgentHarmDetail"
+          }
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional public result URL."
+        },
+        "license": {
+          "type": "string",
+          "description": "Optional public result license."
+        }
+      },
+      "required": [
+        "blocked",
+        "detected"
+      ]
     },
     "AgentInitialization": {
       "type": "object",
@@ -1662,6 +1940,162 @@
         }
       ],
       "x-ms-discriminator-value": "output"
+    },
+    "AgentPolicyEvaluationReceipt": {
+      "type": "object",
+      "description": "Versioned enforcement receipt for one AACS evaluation attempt. It proves what was evaluated and under which policy/readiness fences; it does not replace the Verdict or prove that the calling host enforced it.",
+      "properties": {
+        "receiptVersion": {
+          "type": "string",
+          "description": "Receipt schema version. This version is tied to the October transport contract rather than customer-controlled feature activation.",
+          "enum": [
+            "2026-10-15-preview"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "evaluationId": {
+          "type": "string",
+          "description": "Stable evaluation identifier used to join AACS evaluation evidence to a separate host action or release attestation.",
+          "minLength": 1
+        },
+        "attempt": {
+          "type": "integer",
+          "format": "int64",
+          "description": "One-based attempt number for evaluation retries sharing the same evaluation identifier.",
+          "minimum": 1
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "Governed target selected by targetResourceId.",
+          "minLength": 1
+        },
+        "targetIncarnation": {
+          "type": "string",
+          "description": "Opaque target incarnation that changes when the target is deleted and recreated.",
+          "minLength": 1
+        },
+        "bindingEpoch": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Monotonic active-binding epoch authoritatively read for this attempt.",
+          "minimum": 0
+        },
+        "readinessEpoch": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Monotonic operation-readiness epoch authoritatively read for this attempt.",
+          "minimum": 0
+        },
+        "appliedGeneration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Immutable target-effective policy generation evaluated by this attempt.",
+          "minimum": 0
+        },
+        "evaluatedPolicyLayers": {
+          "type": "array",
+          "description": "Exact policy layers evaluated and composed into the aggregate Verdict.",
+          "items": {
+            "$ref": "#/definitions/AgentEvaluatedPolicyLayer"
+          }
+        },
+        "requiredInterventionPoints": {
+          "type": "array",
+          "description": "Intervention points required by every applicable policy layer.",
+          "items": {
+            "$ref": "#/definitions/AgentInterceptionPoint"
+          }
+        },
+        "satisfiedInterventionPoints": {
+          "type": "array",
+          "description": "Required intervention points supported by the admitted host profile for this target and operation.",
+          "items": {
+            "$ref": "#/definitions/AgentInterceptionPoint"
+          }
+        },
+        "hostProfileVersion": {
+          "type": "string",
+          "description": "AACS host-profile version included in executable artifact identity.",
+          "minLength": 1
+        },
+        "capabilityVersion": {
+          "type": "string",
+          "description": "Foundry-owned effective capability version admitted for this target, region, cohort and operation. API version alone does not establish this capability.",
+          "minLength": 1
+        },
+        "authenticatedProducerResourceId": {
+          "type": "string",
+          "description": "Authenticated producer resource ID established by the service transport. This value is service-derived and never accepted from the request body or a customer-settable identity header.",
+          "minLength": 1
+        },
+        "harmResults": {
+          "type": "object",
+          "description": "Optional public classifier summaries keyed by harm category. numericSeverity preserves the existing ordinal 0–7 result; raw model scores and internal diagnostics are not exposed.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AgentHarmResult"
+          }
+        }
+      },
+      "required": [
+        "receiptVersion",
+        "evaluationId",
+        "attempt",
+        "targetResourceId",
+        "targetIncarnation",
+        "bindingEpoch",
+        "readinessEpoch",
+        "appliedGeneration",
+        "evaluatedPolicyLayers",
+        "requiredInterventionPoints",
+        "satisfiedInterventionPoints",
+        "hostProfileVersion",
+        "capabilityVersion",
+        "authenticatedProducerResourceId"
+      ]
+    },
+    "AgentPolicyLayerKind": {
+      "type": "string",
+      "description": "The policy layer evaluated by Azure AI Content Safety. Unknown future layer kinds are preserved for forward compatibility and do not change the aggregate Verdict semantics.",
+      "enum": [
+        "project",
+        "developer",
+        "subscription",
+        "hierarchy",
+        "builtIn"
+      ],
+      "x-ms-enum": {
+        "name": "AgentPolicyLayerKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Project",
+            "value": "project",
+            "description": "The project or resource policy resolved from targetResourceId."
+          },
+          {
+            "name": "Developer",
+            "value": "developer",
+            "description": "An explicitly selected developer policy."
+          },
+          {
+            "name": "Subscription",
+            "value": "subscription",
+            "description": "A mandatory subscription policy."
+          },
+          {
+            "name": "Hierarchy",
+            "value": "hierarchy",
+            "description": "A policy inherited from an enrolled resource hierarchy."
+          },
+          {
+            "name": "BuiltIn",
+            "value": "builtIn",
+            "description": "A service-owned built-in policy."
+          }
+        ]
+      }
     },
     "AgentPostModelCallContext": {
       "type": "object",
@@ -2024,7 +2458,7 @@
     },
     "AgentVerdict": {
       "type": "object",
-      "description": "Canonical Agent Hooks Verdict. HTTP 200 indicates evaluation completed, not permission to proceed. Azure AI Content Safety composes the applicable selected, bound, subscription and hierarchy policies within this evaluation. The calling host owns composition across independent interceptors, transform application, final enforcement, approvals, timeouts and audit. The service does not return an allowed/blocked wrapper, enforced content or harmResults. Unsupported members and invalid decision/approval/transform combinations are rejected.",
+      "description": "Canonical closed Agent Hooks Verdict. HTTP 200 indicates evaluation completed, not permission to proceed. Azure AI Content Safety composes the applicable selected, bound, subscription and hierarchy policies within this evaluation. The calling host owns composition across independent interceptors, transform application, final enforcement, approvals, timeouts and audit. The service does not add transport or policy-evaluation metadata to this object.",
       "properties": {
         "decision": {
           "$ref": "#/definitions/AgentDecision",

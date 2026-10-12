@@ -605,7 +605,7 @@ model AgentTransform {
 
 @added(Versions.v2026_10_15_preview)
 @discriminator("decision")
-@doc("Canonical Agent Hooks Verdict. HTTP 200 indicates evaluation completed, not permission to proceed. Azure AI Content Safety composes the applicable selected, bound, subscription and hierarchy policies within this evaluation. The calling host owns composition across independent interceptors, transform application, final enforcement, approvals, timeouts and audit. The service does not return an allowed/blocked wrapper, enforced content or harmResults. Unsupported members and invalid decision/approval/transform combinations are rejected.")
+@doc("Canonical closed Agent Hooks Verdict. HTTP 200 indicates evaluation completed, not permission to proceed. Azure AI Content Safety composes the applicable selected, bound, subscription and hierarchy policies within this evaluation. The calling host owns composition across independent interceptors, transform application, final enforcement, approvals, timeouts and audit. The service does not add transport or policy-evaluation metadata to this object.")
 model AgentVerdict {
   @doc("Canonical decision: allow, deny or transform.")
   decision: AgentDecision;
@@ -658,13 +658,216 @@ model AgentTransformVerdict extends AgentVerdict {
 }
 
 @added(Versions.v2026_10_15_preview)
+@doc("The policy layer evaluated by Azure AI Content Safety. Unknown future layer kinds are preserved for forward compatibility and do not change the aggregate Verdict semantics.")
+union AgentPolicyLayerKind {
+  string,
+
+  @doc("The project or resource policy resolved from targetResourceId.")
+  Project: "project",
+
+  @doc("An explicitly selected developer policy.")
+  Developer: "developer",
+
+  @doc("A mandatory subscription policy.")
+  Subscription: "subscription",
+
+  @doc("A policy inherited from an enrolled resource hierarchy.")
+  Hierarchy: "hierarchy",
+
+  @doc("A service-owned built-in policy.")
+  BuiltIn: "builtIn",
+}
+
+@added(Versions.v2026_10_15_preview)
+@doc("One exact policy artifact evaluated during this attempt. The resource ID, revision and semantic digest identify the admitted policy; the artifact digest identifies the activated manifest, Rego and immutable dependencies under the declared host profile.")
+model AgentEvaluatedPolicyLayer {
+  @doc("Layer role in the evaluation.")
+  kind: AgentPolicyLayerKind;
+
+  @doc("Full policy resource ID. Service-owned built-ins use their stable service identifier.")
+  @minLength(1)
+  policyResourceId: string;
+
+  @doc("Exact opaque policy revision. For current RP/PMS resources this is the RP-assigned ETag, preserved verbatim.")
+  @minLength(1)
+  policyRevision: string;
+
+  @doc("SHA-256 digest of the admitted semantic policy closure. This prevents a mutable policy name from resolving to different content during an admitted or resumed operation.")
+  @pattern("^sha256:[0-9a-f]{64}$")
+  policySemanticDigest: string;
+
+  @doc("SHA-256 digest of the activated manifest, Rego and immutable runtime dependencies under the declared host profile.")
+  @pattern("^sha256:[0-9a-f]{64}$")
+  manifestRegoDigest: string;
+
+  @doc("Decision returned by this layer before aggregate composition.")
+  decision: AgentDecision;
+}
+
+@added(Versions.v2026_10_15_preview)
+@doc("One detection detail associated with a public harm summary.")
+model AgentHarmDetail {
+  @doc("Whether this detail was detected.")
+  detected: boolean;
+
+  @doc("Stable public detail identifier, such as a configured blocklist or provider name.")
+  id: string;
+}
+
+@added(Versions.v2026_10_15_preview)
+@doc("Public classifier summary preserved from Unified Moderate. This excludes model family/version, thresholds, private configuration and raw confidence or probability scores.")
+model AgentHarmResult {
+  @doc("Whether this category contributed to a blocking policy result.")
+  blocked: boolean;
+
+  @doc("Whether the classifier detected this category.")
+  detected: boolean;
+
+  @doc("Optional public risk label.")
+  severity?: string;
+
+  @doc("Optional ordinal public severity on the existing 0–7 Content Safety scale. This is not a confidence or probability. Detection-only categories omit it.")
+  @minValue(0)
+  @maxValue(7)
+  numericSeverity?: int32;
+
+  @doc("Optional public detection details.")
+  details?: AgentHarmDetail[];
+
+  @doc("Optional public result URL.")
+  url?: url;
+
+  @doc("Optional public result license.")
+  license?: string;
+}
+
+@added(Versions.v2026_10_15_preview)
+@doc("Versioned enforcement receipt for one AACS evaluation attempt. It proves what was evaluated and under which policy/readiness fences; it does not replace the Verdict or prove that the calling host enforced it.")
+model AgentPolicyEvaluationReceipt {
+  @doc("Receipt schema version. This version is tied to the October transport contract rather than customer-controlled feature activation.")
+  receiptVersion: "2026-10-15-preview";
+
+  @doc("Stable evaluation identifier used to join AACS evaluation evidence to a separate host action or release attestation.")
+  @minLength(1)
+  evaluationId: string;
+
+  @doc("One-based attempt number for evaluation retries sharing the same evaluation identifier.")
+  @minValue(1)
+  attempt: int64;
+
+  @doc("Governed target selected by targetResourceId.")
+  @minLength(1)
+  targetResourceId: string;
+
+  @doc("Opaque target incarnation that changes when the target is deleted and recreated.")
+  @minLength(1)
+  targetIncarnation: string;
+
+  @doc("Monotonic active-binding epoch authoritatively read for this attempt.")
+  @minValue(0)
+  bindingEpoch: int64;
+
+  @doc("Monotonic operation-readiness epoch authoritatively read for this attempt.")
+  @minValue(0)
+  readinessEpoch: int64;
+
+  @doc("Immutable target-effective policy generation evaluated by this attempt.")
+  @minValue(0)
+  appliedGeneration: int64;
+
+  @doc("Exact policy layers evaluated and composed into the aggregate Verdict.")
+  evaluatedPolicyLayers: AgentEvaluatedPolicyLayer[];
+
+  @doc("Intervention points required by every applicable policy layer.")
+  requiredInterventionPoints: AgentInterceptionPoint[];
+
+  @doc("Required intervention points supported by the admitted host profile for this target and operation.")
+  satisfiedInterventionPoints: AgentInterceptionPoint[];
+
+  @doc("AACS host-profile version included in executable artifact identity.")
+  @minLength(1)
+  hostProfileVersion: string;
+
+  @doc("Foundry-owned effective capability version admitted for this target, region, cohort and operation. API version alone does not establish this capability.")
+  @minLength(1)
+  capabilityVersion: string;
+
+  @doc("Authenticated producer resource ID established by the service transport. This value is service-derived and never accepted from the request body or a customer-settable identity header.")
+  @minLength(1)
+  authenticatedProducerResourceId: string;
+
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Public classifier categories are policy-configured keys and require a typed map."
+  @doc("Optional public classifier summaries keyed by harm category. numericSeverity preserves the existing ordinal 0–7 result; raw model scores and internal diagnostics are not exposed.")
+  harmResults?: Record<AgentHarmResult>;
+}
+
+@added(Versions.v2026_10_15_preview)
+@doc("October Unified Moderate transport response. Verdict is the canonical closed Agent Hooks object. Receipt is separate transport metadata used by the host to fence enforcement and join later host-action evidence.")
+model AgentEvaluationResult {
+  @doc("Canonical aggregate Agent Hooks Verdict.")
+  verdict: AgentVerdict;
+
+  @doc("Policy-evaluation receipt for this attempt.")
+  receipt: AgentPolicyEvaluationReceipt;
+}
+
+@added(Versions.v2026_10_15_preview)
+@doc("Known October Unified Moderate error codes. The standard Azure error response remains extensible.")
+union AgentEvaluationErrorCode {
+  string,
+
+  @doc("The selector combination or AgentContext is invalid.")
+  InvalidRequest: "InvalidRequest",
+
+  @doc("policyId was supplied without both policyRevision and policySemanticDigest.")
+  DeveloperPolicyRevisionRequired: "DeveloperPolicyRevisionRequired",
+
+  @doc("The selected developer policy no longer matches the admitted revision or semantic digest.")
+  DeveloperPolicyRevisionMismatch: "DeveloperPolicyRevisionMismatch",
+
+  @doc("The exact admitted developer policy revision was deleted or is no longer resolvable.")
+  DeveloperPolicyRevisionUnavailable: "DeveloperPolicyRevisionUnavailable",
+
+  @doc("The active binding or readiness epoch changed before evaluation completed.")
+  PolicyFenceChanged: "PolicyFenceChanged",
+
+  @doc("The caller or host profile does not support a mandatory policy requirement.")
+  UnsupportedCapability: "UnsupportedCapability",
+
+  @doc("A mandatory project policy, binding or applied generation is unavailable.")
+  MandatoryPolicyUnavailable: "MandatoryPolicyUnavailable",
+
+  @doc("The October native route is registered but disabled for this region, cohort or target.")
+  NativeRouteDisabled: "NativeRouteDisabled",
+}
+
+@added(Versions.v2026_10_15_preview)
+@doc("Actionable October Unified Moderate error details.")
+model AgentEvaluationErrorDetail {
+  @doc("Server-defined error code. Known October codes describe selector, revision, readiness and capability failures.")
+  code: AgentEvaluationErrorCode;
+
+  @doc("Human-readable error message.")
+  message: string;
+
+  @doc("Optional request field or policy resource associated with the failure.")
+  target?: string;
+
+  @doc("Nested errors that contributed to this failure.")
+  details?: AgentEvaluationErrorDetail[];
+
+  @doc("Optional implementation-specific inner error that does not expose credentials or trust inputs.")
+  innererror?: Azure.Core.Foundations.InnerError;
+}
+
+@added(Versions.v2026_10_15_preview)
 @error
-@doc("A validation, authorization, throttling or operational failure. This is an HTTP error, never a successful allow verdict.")
+@doc("A validation, authorization, conflict, throttling or operational failure. This is an HTTP error, never a successful allow verdict. Known codes include InvalidRequest, DeveloperPolicyRevisionRequired, DeveloperPolicyRevisionMismatch, DeveloperPolicyRevisionUnavailable, PolicyFenceChanged, UnsupportedCapability, MandatoryPolicyUnavailable and NativeRouteDisabled.")
 model AgentEvaluationError {
-  ...Azure.Core.Foundations.ErrorResponse;
+  ...Azure.Core.Foundations.ErrorResponseBase<AgentEvaluationErrorDetail>;
 
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "These literals declare HTTP transport status codes, not an extensible body enum."
   @statusCode
   @doc("The HTTP failure status.")
-  statusCode: 400 | 401 | 403 | 429 | 500 | 503;
+  statusCode: 400 | 401 | 403 | 404 | 409 | 429 | 500 | 503;
 }

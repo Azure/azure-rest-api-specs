@@ -107,19 +107,28 @@ interface UnifiedOperations {
 
   @added(ContentSafety.Versions.v2026_10_15_preview)
   @summary("Unified Moderate")
-  @doc("Synchronously evaluate a canonical Agent Hooks 0.1 context against authorized effective policy. This version evolves Unified Moderate on its existing route and supports all eight interception points. Azure AI Content Safety composes the applicable selected, bound, subscription and hierarchy policies within this evaluation and returns a complete Verdict. The calling host owns composition across independent interceptors, transform application, final enforcement, approvals, timeouts and audit. policyId selects an authorized policy and targetResourceId selects an authorized binding target; provide at least one. Applicable mandatory policies cannot be bypassed by either selector. Body identity metadata is not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful verdicts.")
+  @doc("Synchronously evaluate a canonical Agent Hooks 0.1 context against authorized effective policy. This version evolves Unified Moderate on its existing route and supports all eight interception points. Azure AI Content Safety composes the applicable project, developer, subscription and hierarchy policies and returns a closed canonical Verdict plus a separate enforcement receipt. The calling host validates the receipt and owns transform application, final enforcement, approvals, timeouts, audit and the separate host-action attestation. targetResourceId selects the project binding. An explicit developer policy is selected by the all-or-none policyId, policyRevision and policySemanticDigest tuple so a mutable name cannot change an admitted operation. Applicable mandatory policies cannot be bypassed by either selector. API version establishes wire compatibility only; regional/cohort activation comes from the Foundry-owned capability authority. Body identity metadata and customer-settable headers are not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful responses.")
   @route("/content:unifiedModerate")
   @sharedRoute
   @post
   unifiedModerate is Azure.Core.RpcOperation<
     {
       @query
-      @doc("Identifier of the protected resource used for binding resolution, not the policy or binding object identifier. For an Azure resource, provide its full Azure Resource Manager resource ID. Project targets must be under the authenticated account and require a verified producer. Required when policyId is absent. When both selectors are provided, the selected policy is evaluated alongside the bound policy. This selector cannot replace authorization or bypass mandatory policy.")
-      targetResourceId?: string;
+      @doc("Full Azure resource ID of the governed Foundry project used for binding resolution. This selects the mandatory project policy and is required for the October Foundry profile. It is not the policy or binding resource ID. The target must be under the authenticated serving account and the request requires a verified producer. This selector cannot replace authorization or bypass mandatory policy.")
+      targetResourceId: string;
 
       @query
-      @doc("Authorized policy selector, such as a policy name or full policy resource ID. Hierarchy-enabled scopes require a policy name. Required when targetResourceId is absent. A policy-only request retains authenticated account scope. When both selectors are provided, the selected policy is evaluated alongside the bound policy. Policy selection does not bypass applicable mandatory policies.")
+      @doc("Optional full developer policy resource ID evaluated as a separate stricter layer. When present, policyRevision and policySemanticDigest are required. The exact tuple must match the policy admitted for the agent operation; missing, stale, mismatched or deleted revisions fail closed and never follow the current content behind a mutable policy name.")
       policyId?: string;
+
+      @query
+      @doc("Opaque exact developer policy revision admitted for the operation. Current RP/PMS resources use the RP-assigned ETag preserved verbatim. Required exactly when policyId is present.")
+      policyRevision?: string;
+
+      @query
+      @doc("SHA-256 digest of the admitted developer policy semantic closure. Required exactly when policyId is present and verified with policyRevision before evaluation.")
+      @pattern("^sha256:[0-9a-f]{64}$")
+      policySemanticDigest?: string;
 
       @bodyRoot
       @doc("Canonical Agent Hooks context with native JSON point payloads. Azure AI Content Safety (AACS) classifier role metadata, when needed by a non-Hooks caller, belongs in extensions.aacs.role.")
@@ -128,7 +137,7 @@ interface UnifiedOperations {
       @clientName("options", "java")
       body: AgentContext;
     },
-    AgentVerdict,
+    AgentEvaluationResult,
     {},
     AgentEvaluationError | Azure.Core.Foundations.ErrorResponse
   >;
