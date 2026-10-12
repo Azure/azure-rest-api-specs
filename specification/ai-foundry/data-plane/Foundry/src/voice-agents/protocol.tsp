@@ -822,7 +822,7 @@ union VoiceAgentLiveServerEventTypeExtension {
 
 @doc("Common metadata for advisory managed-delegation notifications. Correlate by delegation_id, not by a projected conversation turn. Notifications can be emitted without storing the voice conversation and are best-effort rather than a durable execution log.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveManagedDelegationMetadata {
+model VoiceAgentLiveFoundryManagedAgentDelegationMetadata {
   @doc("The unique ID of this Foundry server event.")
   event_id: string;
 
@@ -854,32 +854,8 @@ model VoiceAgentLiveManagedDelegationMetadata {
   @minValue(0)
   mcp_call_count: int32;
 
-  @doc("The managed backend invocation uses streaming.")
-  stream: true;
-
   @doc("The originating native delegation's session-relative audio offset, in milliseconds.")
   offset_ms: int64;
-
-  @doc("The backend Responses store value when reported. Omitted when unknown; independent of the voice agent's store setting.")
-  backend_store?: boolean;
-}
-
-@doc("Accepted guidance reported by progress and completion notifications. Values are cumulative validated guidance, not transcript deltas or proof of spoken delivery.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveManagedGuidance {
-  @doc("Validated commentary text, or null when the result has no commentary.")
-  spoken_text: string | null;
-
-  @doc("Validated background-context text, or null. This is not private model reasoning.")
-  background_context: string | null;
-}
-
-@doc("Optional cumulative accepted output items, including partial success before a later failure.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveManagedOutputs {
-  @doc("Validated assistant output items with accepted native appends. Omitted when there are none.")
-  @minItems(1)
-  output_items?: VoiceAgentLiveManagedOutput[];
 }
 
 @doc("Foundry has prepared valid context and is beginning a managed prompt-agent invocation.")
@@ -887,7 +863,7 @@ model VoiceAgentLiveManagedOutputs {
 model VoiceAgentLiveManagedDelegationStartedEvent
   extends OpenAI.LiveServerEvent {
   type: "session.managed_delegation.started";
-  ...VoiceAgentLiveManagedDelegationMetadata;
+  ...VoiceAgentLiveFoundryManagedAgentDelegationMetadata;
 }
 
 @doc("More validated managed output has been accepted by Live while the backend invocation is running.")
@@ -895,9 +871,8 @@ model VoiceAgentLiveManagedDelegationStartedEvent
 model VoiceAgentLiveManagedDelegationProgressEvent
   extends OpenAI.LiveServerEvent {
   type: "session.managed_delegation.progress";
-  ...VoiceAgentLiveManagedDelegationMetadata;
-  ...VoiceAgentLiveManagedGuidance;
-  ...VoiceAgentLiveManagedOutputs;
+  ...VoiceAgentLiveFoundryManagedAgentDelegationMetadata;
+  ...VoiceAgentLiveDelegationResultItem;
 }
 
 @doc("The managed invocation and native result injection completed successfully. This does not mean Live speech or client playback has completed.")
@@ -905,21 +880,20 @@ model VoiceAgentLiveManagedDelegationProgressEvent
 model VoiceAgentLiveManagedDelegationCompletedEvent
   extends OpenAI.LiveServerEvent {
   type: "session.managed_delegation.completed";
-  ...VoiceAgentLiveManagedDelegationMetadata;
-  ...VoiceAgentLiveManagedGuidance;
-  ...VoiceAgentLiveManagedOutputs;
+  ...VoiceAgentLiveFoundryManagedAgentDelegationMetadata;
+  ...VoiceAgentLiveDelegationResultItem;
 
   @doc("The backend agent's conversation ID when available, otherwise null. Distinct from the voice conversation_id and the native Live session.id.")
   backend_conversation_id: string | null;
 }
 
-@doc("The managed invocation or native result injection failed. Cancellation and supersession use the separate cancel notification. Accepted earlier output may be retained, but failed result text is not exposed as spoken_text or background_context.")
+@doc("The managed invocation or native result injection failed. Cancellation and supersession use the separate cancel notification. Earlier accepted commentary/thinking may be retained; failed or unvalidated result text is never included.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveManagedDelegationFailedEvent
   extends OpenAI.LiveServerEvent {
   type: "session.managed_delegation.failed";
-  ...VoiceAgentLiveManagedDelegationMetadata;
-  ...VoiceAgentLiveManagedOutputs;
+  ...VoiceAgentLiveFoundryManagedAgentDelegationMetadata;
+  ...VoiceAgentLiveDelegationResultItem;
 
   @doc("Whether trusted failure context reached Live: accepted, rejected, unconfirmed, or skipped; null if unavailable. Even accepted does not turn the failed invocation into success.")
   failure_context_status: VoiceAgentLiveFailureContextStatus | null;
@@ -930,6 +904,6 @@ model VoiceAgentLiveManagedDelegationFailedEvent
 model VoiceAgentLiveManagedDelegationCancelEvent
   extends OpenAI.LiveServerEvent {
   type: "session.managed_delegation.cancel";
-  ...VoiceAgentLiveManagedDelegationMetadata;
-  ...VoiceAgentLiveManagedOutputs;
+  ...VoiceAgentLiveFoundryManagedAgentDelegationMetadata;
+  ...VoiceAgentLiveDelegationResultItem;
 }

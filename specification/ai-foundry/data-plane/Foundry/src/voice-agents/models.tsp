@@ -128,7 +128,7 @@ model VoiceResponse extends VoiceResponseBase {
   @doc("The unique id of the response.")
   id: string;
 
-  @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.")
+  @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. A native transcript or tool item's `response_id` also links it back to this response in the conversation-level items list; Live delegation items are correlated by `delegation_id`.")
   output?: VoiceConversationItem[];
 
   @doc("The id of the conversation this response belongs to.")
@@ -154,41 +154,14 @@ model VoiceResponse extends VoiceResponseBase {
 // Live delegation results and persisted conversation items
 // ---------------------------------------------------------------------------
 
-@doc("Native context-append channels accepted from a managed prompt-agent result.")
-union VoiceAgentLiveManagedAppendType {
-  commentary: "session.commentary.append",
-  thinking: "session.thinking.append",
-}
-
-@doc("An accepted native context append. This is a receipt, not proof that the Live model spoke the content or that the client played audio.")
+@doc("Text returned to Live for a delegation. Commentary is speakable guidance; thinking is background context, not private model reasoning. Managed lifecycle notifications report cumulative accepted text, not spoken transcripts or playback completion.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveManagedAppend {
-  @doc("The service-generated native append event ID, correlated with its acknowledgment.")
-  event_id: string;
+model VoiceAgentLiveDelegationResultItem {
+  @doc("Optional guidance for Live to communicate to the user.")
+  commentary?: string;
 
-  @doc("The native context-append event type.")
-  type: VoiceAgentLiveManagedAppendType;
-
-  @doc("The validated commentary or background-context text accepted by Live. Background context is not private model reasoning.")
-  content: string;
-
-  @doc("Managed output diagnostics include only appends acknowledged as accepted.")
-  status: "accepted";
-
-  @doc("A correlated service error, when available. Omitted for successful receipts.")
-  error?: string;
-}
-
-@doc("One validated assistant output item and its accepted native appends, in delivery order. Raw tool output is not included.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveManagedOutput {
-  @doc("The item's original index in the backend Responses output array.")
-  @minValue(0)
-  output_index: int32;
-
-  @doc("Accepted native appends derived from this item.")
-  @minItems(1)
-  appends: VoiceAgentLiveManagedAppend[];
+  @doc("Optional background context for Live; this does not directly request speech.")
+  thinking?: string;
 }
 
 @doc("Outcome of injecting trusted failure context into Live; this never changes the failed delegation outcome.")
@@ -200,29 +173,23 @@ union VoiceAgentLiveFailureContextStatus {
   skipped: "skipped",
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "A persistence-only union reuses native realtime items without adding Live-only item types to the realtime inference hierarchy."
-@doc("An item returned by the shared voice conversation read APIs: a native realtime item or a persisted Live delegation. This union is not used by realtime or Live inference commands.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@oneOf
-union VoiceConversationItem {
-  message: OpenAI.RealtimeConversationItemMessage,
-  function_call: OpenAI.RealtimeConversationItemFunctionCall,
-  function_call_output: OpenAI.RealtimeConversationItemFunctionCallOutput,
-  mcp_list_tools: OpenAI.RealtimeMCPListTools,
-  mcp_call: OpenAI.RealtimeMCPToolCall,
-  mcp_approval_request: OpenAI.RealtimeMCPApprovalRequest,
-  mcp_approval_response: OpenAI.RealtimeMCPApprovalResponse,
-  live_delegation: VoiceLiveDelegationConversationItem,
-}
+// A source-only alias, not a new named item hierarchy. The read APIs can return
+// native Realtime items or a stored Live delegation without extending inference.
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "This read-only alias reuses the native realtime hierarchy without adding a Live persistence item to inference."
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Reuse the two existing item shapes through a source-only alias instead of introducing another named conversation item type."
+alias VoiceConversationItem =
+  | OpenAI.RealtimeConversationItem
+  | VoiceAgentLiveDelegationConversationItem;
 
-@doc("The native delegation target. A Foundry-managed prompt agent uses native client delegation.")
-union VoiceLiveDelegationTarget {
+@doc("The configured delegation owner recorded by Foundry. A managed prompt agent is distinct here even though its native Live transport uses client delegation.")
+union VoiceAgentLiveDelegationTarget {
   responses: "responses",
   client: "client",
+  foundry_managed_agent: "foundry_managed_agent",
 }
 
-@doc("Observed delegation or backend execution status, independent of speech and playback.")
-union VoiceLiveDelegationStatus {
+@doc("The managed delegation's execution outcome, independent of Live speech and playback.")
+union VoiceAgentLiveDelegationStatus {
   string,
   in_progress: "in_progress",
   completed: "completed",
@@ -231,195 +198,34 @@ union VoiceLiveDelegationStatus {
   cancelled: "cancelled",
 }
 
-@doc("Whether the bounded capture retained all observed delegation data.")
-union VoiceLiveDelegationCaptureStatus {
-  string,
-  complete: "complete",
-  incomplete: "incomplete",
-}
-
-@doc("The source of captured delegation input, not an inferred native backend request.")
-union VoiceLiveDelegationInputSource {
-  string,
-  live_transcript_context: "live_transcript_context",
-  managed_responses_request: "managed_responses_request",
-}
-
-@doc("A durable Live-only delegation item. One item represents one native delegation ID and may link to a projected voice turn through response_id. This is not an assistant transcript, a native tool call, or an inference event. Available only when the voice conversation is stored.")
+@doc("One stored Live delegation, available only with store enabled. Common fields identify the item, originating delegation, creation time, and configured owner. Responses delegations use only output; client delegations use commentary/thinking; managed-agent delegations use commentary/thinking, optional delegation_context, and required status. Fields for other targets are omitted. This is a Foundry persistence item, not a native inference event or a spoken transcript.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceLiveDelegationConversationItem {
+model VoiceAgentLiveDelegationConversationItem {
   @doc("The persisted item discriminator.")
   type: "live_delegation";
 
   @doc("The Foundry conversation item ID, distinct from the native delegation ID.")
   id: string;
 
-  @doc("The projected voice response/turn ID when association can be resolved; otherwise omitted.")
-  response_id?: string;
+  @doc("The originating native Live delegation ID.")
+  delegation_id: string;
 
   @doc("The service-observed creation time, encoded as Unix seconds.")
   created_at: FoundryTimestamp;
 
-  @doc("The originating native Live delegation ID.")
-  delegation_id: string;
+  @doc("The configured delegation owner. Foundry-managed prompt agents use foundry_managed_agent, not client.")
+  target: VoiceAgentLiveDelegationTarget;
 
-  @doc("The native target. Managed prompt-agent executions are recorded under client.")
-  target: VoiceLiveDelegationTarget;
+  @doc("Final backend output text for responses delegation. Omitted when final output is unavailable and for other delegation targets. Not raw tool output or streamed event objects.")
+  output?: string;
 
-  @doc("The native delegation's session-relative offset in milliseconds, when provided. This is not a WAV byte offset.")
-  offset_ms?: int64;
+  ...VoiceAgentLiveDelegationResultItem;
 
-  @doc("Observed backend/client completion, never completion of spoken audio.")
-  status: VoiceLiveDelegationStatus;
+  @doc("Plain-text task context for a foundry_managed_agent delegation, when available. Omitted for other targets. This is not the backend request body.")
+  delegation_context?: string;
 
-  @doc("Whether all observed delegation data was retained within capture limits.")
-  capture_status: VoiceLiveDelegationCaptureStatus;
-
-  @doc("Why capture is incomplete, such as connection_lost, capture_limit, or delegation_event_missing.")
-  capture_reason?: string;
-
-  @doc("Available input provenance and bounded caption context.")
-  input: VoiceLiveDelegationInput;
-
-  @doc("Observed native backend responses, client append receipts, or managed-agent execution.")
-  output: VoiceLiveDelegationOutput;
-}
-
-@doc("Captured input provenance. Caption-derived context does not claim to reconstruct the exact native backend request.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceLiveDelegationInput {
-  @doc("Where this recorded input came from.")
-  source: VoiceLiveDelegationInputSource;
-
-  @doc("Whether output.managed_prompt_agent.request contains the exact prepared backend request.")
-  exact_backend_request_available: boolean;
-
-  @doc("Whether the bounded context window omitted older transcript fragments.")
-  truncated: boolean;
-
-  @doc("Observed user/assistant captions up to the delegation boundary. Empty when the exact managed request is recorded instead.")
-  messages: VoiceLiveDelegationContextMessage[];
-}
-
-@doc("A caption-derived context message, not a reconstructed native input item.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceLiveDelegationContextMessage {
-  @doc("The original speaker.")
-  role: VoiceLiveDelegationContextRole;
-
-  @doc("The original caption text.")
-  text: string;
-}
-
-@doc("The speaker of a captured caption.")
-union VoiceLiveDelegationContextRole {
-  user: "user",
-  assistant: "assistant",
-}
-
-@doc("Recorded output for native client/Responses delegation and Foundry-managed prompt agents.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceLiveDelegationOutput {
-  @doc("The managed execution, when Foundry executed a same-project prompt agent.")
-  managed_prompt_agent?: VoiceLiveManagedPromptAgentExecution;
-
-  @doc("One entry per observed backend response, including distinct tool continuations.")
-  responses: VoiceLiveDelegationBackendResult[];
-
-  @doc("Client append messages actually sent to Live and their separately observed acceptance.")
-  client_messages: VoiceLiveDelegationClientMessage[];
-}
-
-@doc("A recorded managed prompt-agent execution. Null optional values are omitted, unlike the nullable fields of transient lifecycle notifications.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceLiveManagedPromptAgentExecution {
-  @doc("The exact prepared backend JSON request, when retained. This stored diagnostic is separate from the removed request notification and contains no HTTP headers or credentials.")
-  request?: Record<unknown>;
-
-  @doc("Validated assistant outputs whose native appends were accepted, in delivery order.")
-  output_items?: VoiceAgentLiveManagedOutput[];
-
-  @doc("The same-project target name.")
-  agent_name: string;
-
-  @doc("The target version pinned for the voice connection.")
-  agent_version: string;
-
-  @doc("The declared result interpretation.")
-  result_format: VoiceAgentLiveManagedResultFormat;
-
-  @doc("The independently executed backend response ID, when available.")
-  response_id?: string;
-
-  @doc("The execution/injection outcome, including cancelled when superseded.")
-  status: VoiceLiveDelegationStatus;
-
-  @doc("A content-free failure or cancellation category, when available.")
-  error_code?: string;
-
-  @doc("The native acceptance outcome for trusted failure context, when applicable.")
-  failure_context_status?: VoiceAgentLiveFailureContextStatus;
-
-  @doc("Validated commentary, not proof of speech or playback.")
-  spoken_text?: string;
-
-  @doc("Validated background facts, not private model reasoning.")
-  background_context?: string;
-}
-
-@doc("A backend response reconstructed from observed public events. An empty terminal output array does not erase previously captured streamed output.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceLiveDelegationBackendResult {
-  @doc("The native backend response ID, when available.")
-  id?: string;
-
-  @doc("The model reported by the backend, not a guessed deployment name.")
-  `model`?: string;
-
-  @doc("The last observed response status.")
-  status: VoiceLiveDelegationStatus;
-
-  @doc("Text reconstructed from observed deltas or output items.")
-  text: string;
-
-  @doc("Observed heterogeneous Responses item objects, including tool arguments/results and partial captures. They are retained as received rather than forced into a completed-item schema.")
-  output: Record<unknown>[];
-
-  @doc("A reported backend error or incomplete reason, when available.")
-  error?: string;
-}
-
-@doc("Native append commands that can supply client delegation context.")
-union VoiceLiveDelegationClientMessageType {
-  commentary: "session.commentary.append",
-  thinking: "session.thinking.append",
-  instructions: "session.instructions.append",
-}
-
-@doc("Observed native acceptance, independent of message submission.")
-union VoiceLiveDelegationClientMessageStatus {
-  accepted: "accepted",
-  rejected: "rejected",
-  unconfirmed: "unconfirmed",
-}
-
-@doc("A recorded client delegation result and its acknowledgment state, not an unapproved draft or a spoken transcript.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceLiveDelegationClientMessage {
-  @doc("The client event ID used for acknowledgment correlation.")
-  event_id: string;
-
-  @doc("The native context-append command.")
-  type: VoiceLiveDelegationClientMessageType;
-
-  @doc("The actual submitted content.")
-  content: string;
-
-  @doc("Whether Live accepted, rejected, or did not confirm the append.")
-  status: VoiceLiveDelegationClientMessageStatus;
-
-  @doc("A correlated service error, when present.")
-  error?: string;
+  @doc("Execution status for a foundry_managed_agent delegation. Required for that target and omitted for client and responses delegations.")
+  status?: VoiceAgentLiveDelegationStatus;
 }
 
 // ---------------------------------------------------------------------------

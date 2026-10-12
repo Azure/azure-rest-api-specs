@@ -4216,7 +4216,14 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/VoiceConversationItem"
+                        "anyOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+                          },
+                          {
+                            "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
+                          }
+                        ]
                       },
                       "description": "The requested list of items."
                     },
@@ -4331,7 +4338,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VoiceConversationItem"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+                    },
+                    {
+                      "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
+                    }
+                  ]
                 }
               }
             }
@@ -5127,7 +5141,14 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/VoiceConversationItem"
+                        "anyOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+                          },
+                          {
+                            "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
+                          }
+                        ]
                       },
                       "description": "The requested list of items."
                     },
@@ -80229,13 +80250,13 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "message": "#/components/schemas/OpenAI.RealtimeConversationItemMessage",
             "function_call": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCall",
             "function_call_output": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput",
             "mcp_approval_response": "#/components/schemas/OpenAI.RealtimeMCPApprovalResponse",
             "mcp_list_tools": "#/components/schemas/OpenAI.RealtimeMCPListTools",
             "mcp_call": "#/components/schemas/OpenAI.RealtimeMCPToolCall",
-            "mcp_approval_request": "#/components/schemas/OpenAI.RealtimeMCPApprovalRequest",
-            "message": "#/components/schemas/OpenAI.RealtimeConversationItemMessage"
+            "mcp_approval_request": "#/components/schemas/OpenAI.RealtimeMCPApprovalRequest"
           }
         },
         "description": "A single item within a Realtime conversation.",
@@ -99604,7 +99625,68 @@
           ]
         }
       },
-      "VoiceAgentLiveFailureContextStatus": {
+      "VoiceAgentLiveDelegationConversationItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "delegation_id",
+          "created_at",
+          "target"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "live_delegation"
+            ],
+            "description": "The persisted item discriminator."
+          },
+          "id": {
+            "type": "string",
+            "description": "The Foundry conversation item ID, distinct from the native delegation ID."
+          },
+          "delegation_id": {
+            "type": "string",
+            "description": "The originating native Live delegation ID."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The service-observed creation time, encoded as Unix seconds."
+          },
+          "target": {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegationTarget",
+            "description": "The configured delegation owner. Foundry-managed prompt agents use foundry_managed_agent, not client."
+          },
+          "output": {
+            "type": "string",
+            "description": "Final backend output text for responses delegation. Omitted when final output is unavailable and for other delegation targets. Not raw tool output or streamed event objects."
+          },
+          "commentary": {
+            "type": "string",
+            "description": "Optional guidance for Live to communicate to the user."
+          },
+          "thinking": {
+            "type": "string",
+            "description": "Optional background context for Live; this does not directly request speech."
+          },
+          "delegation_context": {
+            "type": "string",
+            "description": "Plain-text task context for a foundry_managed_agent delegation, when available. Omitted for other targets. This is not the backend request body."
+          },
+          "status": {
+            "$ref": "#/components/schemas/VoiceAgentLiveDelegationStatus",
+            "description": "Execution status for a foundry_managed_agent delegation. Required for that target and omitted for client and responses delegations."
+          }
+        },
+        "description": "One stored Live delegation, available only with store enabled. Common fields identify the item, originating delegation, creation time, and configured owner. Responses delegations use only output; client delegations use commentary/thinking; managed-agent delegations use commentary/thinking, optional delegation_context, and required status. Fields for other targets are omitted. This is a Foundry persistence item, not a native inference event or a spoken transcript.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentLiveDelegationStatus": {
         "anyOf": [
           {
             "type": "string"
@@ -99612,14 +99694,24 @@
           {
             "type": "string",
             "enum": [
-              "accepted",
-              "rejected",
-              "unconfirmed",
-              "skipped"
+              "in_progress",
+              "completed",
+              "failed",
+              "incomplete",
+              "cancelled"
             ]
           }
         ],
-        "description": "Outcome of injecting trusted failure context into Live; this never changes the failed delegation outcome."
+        "description": "The managed delegation's execution outcome, independent of Live speech and playback."
+      },
+      "VoiceAgentLiveDelegationTarget": {
+        "type": "string",
+        "enum": [
+          "responses",
+          "client",
+          "foundry_managed_agent"
+        ],
+        "description": "The configured delegation owner recorded by Foundry. A managed prompt agent is distinct here even though its native Live transport uses client delegation."
       },
       "VoiceAgentLiveManagedAgentDelegation": {
         "type": "object",
@@ -99662,83 +99754,6 @@
           }
         },
         "description": "A same-project prompt agent executed by Foundry on behalf of the Live frontend. Foundry resolves\nand pins the target version once per voice connection, configures native client delegation upstream,\nand injects the target's validated output using native commentary/thinking messages.\nThis is agent configuration, not an additional OpenAI inference-event variant.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAgentLiveManagedAppend": {
-        "type": "object",
-        "required": [
-          "event_id",
-          "type",
-          "content",
-          "status"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "description": "The service-generated native append event ID, correlated with its acknowledgment."
-          },
-          "type": {
-            "$ref": "#/components/schemas/VoiceAgentLiveManagedAppendType",
-            "description": "The native context-append event type."
-          },
-          "content": {
-            "type": "string",
-            "description": "The validated commentary or background-context text accepted by Live. Background context is not private model reasoning."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "accepted"
-            ],
-            "description": "Managed output diagnostics include only appends acknowledged as accepted."
-          },
-          "error": {
-            "type": "string",
-            "description": "A correlated service error, when available. Omitted for successful receipts."
-          }
-        },
-        "description": "An accepted native context append. This is a receipt, not proof that the Live model spoke the content or that the client played audio.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAgentLiveManagedAppendType": {
-        "type": "string",
-        "enum": [
-          "session.commentary.append",
-          "session.thinking.append"
-        ],
-        "description": "Native context-append channels accepted from a managed prompt-agent result."
-      },
-      "VoiceAgentLiveManagedOutput": {
-        "type": "object",
-        "required": [
-          "output_index",
-          "appends"
-        ],
-        "properties": {
-          "output_index": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0,
-            "description": "The item's original index in the backend Responses output array."
-          },
-          "appends": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceAgentLiveManagedAppend"
-            },
-            "minItems": 1,
-            "description": "Accepted native appends derived from this item."
-          }
-        },
-        "description": "One validated assistant output item and its accepted native appends, in delivery order. Raw tool output is not included.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -100793,40 +100808,6 @@
           ]
         }
       },
-      "VoiceConversationItem": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessage"
-          },
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCall"
-          },
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemFunctionCallOutput"
-          },
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeMCPListTools"
-          },
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeMCPToolCall"
-          },
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeMCPApprovalRequest"
-          },
-          {
-            "$ref": "#/components/schemas/OpenAI.RealtimeMCPApprovalResponse"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceLiveDelegationConversationItem"
-          }
-        ],
-        "description": "An item returned by the shared voice conversation read APIs: a native realtime item or a persisted Live delegation. This union is not used by realtime or Live inference commands.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceConversationStatus": {
         "anyOf": [
           {
@@ -100943,403 +100924,6 @@
           }
         ],
         "description": "A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceLiveDelegationBackendResult": {
-        "type": "object",
-        "required": [
-          "status",
-          "text",
-          "output"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The native backend response ID, when available."
-          },
-          "model": {
-            "type": "string",
-            "description": "The model reported by the backend, not a guessed deployment name."
-          },
-          "status": {
-            "$ref": "#/components/schemas/VoiceLiveDelegationStatus",
-            "description": "The last observed response status."
-          },
-          "text": {
-            "type": "string",
-            "description": "Text reconstructed from observed deltas or output items."
-          },
-          "output": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": {}
-            },
-            "description": "Observed heterogeneous Responses item objects, including tool arguments/results and partial captures. They are retained as received rather than forced into a completed-item schema."
-          },
-          "error": {
-            "type": "string",
-            "description": "A reported backend error or incomplete reason, when available."
-          }
-        },
-        "description": "A backend response reconstructed from observed public events. An empty terminal output array does not erase previously captured streamed output.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceLiveDelegationCaptureStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "complete",
-              "incomplete"
-            ]
-          }
-        ],
-        "description": "Whether the bounded capture retained all observed delegation data."
-      },
-      "VoiceLiveDelegationClientMessage": {
-        "type": "object",
-        "required": [
-          "event_id",
-          "type",
-          "content",
-          "status"
-        ],
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "description": "The client event ID used for acknowledgment correlation."
-          },
-          "type": {
-            "$ref": "#/components/schemas/VoiceLiveDelegationClientMessageType",
-            "description": "The native context-append command."
-          },
-          "content": {
-            "type": "string",
-            "description": "The actual submitted content."
-          },
-          "status": {
-            "$ref": "#/components/schemas/VoiceLiveDelegationClientMessageStatus",
-            "description": "Whether Live accepted, rejected, or did not confirm the append."
-          },
-          "error": {
-            "type": "string",
-            "description": "A correlated service error, when present."
-          }
-        },
-        "description": "A recorded client delegation result and its acknowledgment state, not an unapproved draft or a spoken transcript.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceLiveDelegationClientMessageStatus": {
-        "type": "string",
-        "enum": [
-          "accepted",
-          "rejected",
-          "unconfirmed"
-        ],
-        "description": "Observed native acceptance, independent of message submission."
-      },
-      "VoiceLiveDelegationClientMessageType": {
-        "type": "string",
-        "enum": [
-          "session.commentary.append",
-          "session.thinking.append",
-          "session.instructions.append"
-        ],
-        "description": "Native append commands that can supply client delegation context."
-      },
-      "VoiceLiveDelegationContextMessage": {
-        "type": "object",
-        "required": [
-          "role",
-          "text"
-        ],
-        "properties": {
-          "role": {
-            "$ref": "#/components/schemas/VoiceLiveDelegationContextRole",
-            "description": "The original speaker."
-          },
-          "text": {
-            "type": "string",
-            "description": "The original caption text."
-          }
-        },
-        "description": "A caption-derived context message, not a reconstructed native input item.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceLiveDelegationContextRole": {
-        "type": "string",
-        "enum": [
-          "user",
-          "assistant"
-        ],
-        "description": "The speaker of a captured caption."
-      },
-      "VoiceLiveDelegationConversationItem": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "created_at",
-          "delegation_id",
-          "target",
-          "status",
-          "capture_status",
-          "input",
-          "output"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "live_delegation"
-            ],
-            "description": "The persisted item discriminator."
-          },
-          "id": {
-            "type": "string",
-            "description": "The Foundry conversation item ID, distinct from the native delegation ID."
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The projected voice response/turn ID when association can be resolved; otherwise omitted."
-          },
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The service-observed creation time, encoded as Unix seconds."
-          },
-          "delegation_id": {
-            "type": "string",
-            "description": "The originating native Live delegation ID."
-          },
-          "target": {
-            "$ref": "#/components/schemas/VoiceLiveDelegationTarget",
-            "description": "The native target. Managed prompt-agent executions are recorded under client."
-          },
-          "offset_ms": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The native delegation's session-relative offset in milliseconds, when provided. This is not a WAV byte offset."
-          },
-          "status": {
-            "$ref": "#/components/schemas/VoiceLiveDelegationStatus",
-            "description": "Observed backend/client completion, never completion of spoken audio."
-          },
-          "capture_status": {
-            "$ref": "#/components/schemas/VoiceLiveDelegationCaptureStatus",
-            "description": "Whether all observed delegation data was retained within capture limits."
-          },
-          "capture_reason": {
-            "type": "string",
-            "description": "Why capture is incomplete, such as connection_lost, capture_limit, or delegation_event_missing."
-          },
-          "input": {
-            "$ref": "#/components/schemas/VoiceLiveDelegationInput",
-            "description": "Available input provenance and bounded caption context."
-          },
-          "output": {
-            "$ref": "#/components/schemas/VoiceLiveDelegationOutput",
-            "description": "Observed native backend responses, client append receipts, or managed-agent execution."
-          }
-        },
-        "description": "A durable Live-only delegation item. One item represents one native delegation ID and may link to a projected voice turn through response_id. This is not an assistant transcript, a native tool call, or an inference event. Available only when the voice conversation is stored.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceLiveDelegationInput": {
-        "type": "object",
-        "required": [
-          "source",
-          "exact_backend_request_available",
-          "truncated",
-          "messages"
-        ],
-        "properties": {
-          "source": {
-            "$ref": "#/components/schemas/VoiceLiveDelegationInputSource",
-            "description": "Where this recorded input came from."
-          },
-          "exact_backend_request_available": {
-            "type": "boolean",
-            "description": "Whether output.managed_prompt_agent.request contains the exact prepared backend request."
-          },
-          "truncated": {
-            "type": "boolean",
-            "description": "Whether the bounded context window omitted older transcript fragments."
-          },
-          "messages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceLiveDelegationContextMessage"
-            },
-            "description": "Observed user/assistant captions up to the delegation boundary. Empty when the exact managed request is recorded instead."
-          }
-        },
-        "description": "Captured input provenance. Caption-derived context does not claim to reconstruct the exact native backend request.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceLiveDelegationInputSource": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "live_transcript_context",
-              "managed_responses_request"
-            ]
-          }
-        ],
-        "description": "The source of captured delegation input, not an inferred native backend request."
-      },
-      "VoiceLiveDelegationOutput": {
-        "type": "object",
-        "required": [
-          "responses",
-          "client_messages"
-        ],
-        "properties": {
-          "managed_prompt_agent": {
-            "$ref": "#/components/schemas/VoiceLiveManagedPromptAgentExecution",
-            "description": "The managed execution, when Foundry executed a same-project prompt agent."
-          },
-          "responses": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceLiveDelegationBackendResult"
-            },
-            "description": "One entry per observed backend response, including distinct tool continuations."
-          },
-          "client_messages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceLiveDelegationClientMessage"
-            },
-            "description": "Client append messages actually sent to Live and their separately observed acceptance."
-          }
-        },
-        "description": "Recorded output for native client/Responses delegation and Foundry-managed prompt agents.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceLiveDelegationStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "failed",
-              "incomplete",
-              "cancelled"
-            ]
-          }
-        ],
-        "description": "Observed delegation or backend execution status, independent of speech and playback."
-      },
-      "VoiceLiveDelegationTarget": {
-        "type": "string",
-        "enum": [
-          "responses",
-          "client"
-        ],
-        "description": "The native delegation target. A Foundry-managed prompt agent uses native client delegation."
-      },
-      "VoiceLiveManagedPromptAgentExecution": {
-        "type": "object",
-        "required": [
-          "agent_name",
-          "agent_version",
-          "result_format",
-          "status"
-        ],
-        "properties": {
-          "request": {
-            "type": "object",
-            "additionalProperties": {},
-            "description": "The exact prepared backend JSON request, when retained. This stored diagnostic is separate from the removed request notification and contains no HTTP headers or credentials."
-          },
-          "output_items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceAgentLiveManagedOutput"
-            },
-            "description": "Validated assistant outputs whose native appends were accepted, in delivery order."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "The same-project target name."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The target version pinned for the voice connection."
-          },
-          "result_format": {
-            "type": "string",
-            "enum": [
-              "tagged_text"
-            ],
-            "description": "The declared result interpretation."
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The independently executed backend response ID, when available."
-          },
-          "status": {
-            "$ref": "#/components/schemas/VoiceLiveDelegationStatus",
-            "description": "The execution/injection outcome, including cancelled when superseded."
-          },
-          "error_code": {
-            "type": "string",
-            "description": "A content-free failure or cancellation category, when available."
-          },
-          "failure_context_status": {
-            "$ref": "#/components/schemas/VoiceAgentLiveFailureContextStatus",
-            "description": "The native acceptance outcome for trusted failure context, when applicable."
-          },
-          "spoken_text": {
-            "type": "string",
-            "description": "Validated commentary, not proof of speech or playback."
-          },
-          "background_context": {
-            "type": "string",
-            "description": "Validated background facts, not private model reasoning."
-          }
-        },
-        "description": "A recorded managed prompt-agent execution. Null optional values are omitted, unlike the nullable fields of transient lifecycle notifications.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -101481,9 +101065,16 @@
           "output": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/VoiceConversationItem"
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+                },
+                {
+                  "$ref": "#/components/schemas/VoiceAgentLiveDelegationConversationItem"
+                }
+              ]
             },
-            "description": "The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list."
+            "description": "The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. A native transcript or tool item's `response_id` also links it back to this response in the conversation-level items list; Live delegation items are correlated by `delegation_id`."
           },
           "conversation_id": {
             "type": "string",
