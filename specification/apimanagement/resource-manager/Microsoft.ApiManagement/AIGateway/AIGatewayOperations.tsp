@@ -6,10 +6,104 @@ import "@typespec/versioning";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ApiManagement;
+
+@added(Versions.v2026_10_01_preview)
+@armResourceOperations
+interface AiGatewayNameAvailabilityOperations {
+  /** Checks whether an AI Gateway name is valid and available in a location. */
+  checkNameAvailability is checkLocalNameAvailability<
+    AiGatewayCheckNameAvailabilityRequest,
+    AiGatewayCheckNameAvailabilityResponse
+  >;
+}
+
+/** OAuth actions on a tool-server endpoint, which is not an independent resource. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "The nested OAuth endpoint action uses the implemented explicit route and is not a separate ARM resource."
+@added(Versions.v2026_10_01_preview)
+interface AiGatewayToolServerEndpointOperations {
+  /** Gets links to complete OAuth consent for a tool-server endpoint. */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}/endpoints/{endpointId}/oauth2/getLoginLinks")
+  @post
+  getLoginLinks(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /** AI Gateway resource name. */
+    @pattern("^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$")
+    @path
+    aiGatewayName: string,
+
+    /** Default workspace resource name. */
+    @pattern("^default$")
+    @path
+    workspaceName: string,
+
+    /** Tool server resource name. */
+    @pattern("^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$")
+    @path
+    toolServerName: string,
+
+    /** Stable identifier of the tool-server endpoint. */
+    @path
+    endpointId: string,
+  ): ArmResponse<AiGatewayToolServerOauth2LoginLinks> | ErrorResponse;
+}
+
+@added(Versions.v2026_10_01_preview)
+@armResourceOperations
+interface AiGatewayTelemetryExporterResources {
+  checkExistence is ArmResourceCheckExistence<
+    AiGatewayTelemetryExporterResource,
+    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
+  >;
+  get is ArmResourceRead<AiGatewayTelemetryExporterResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    AiGatewayTelemetryExporterResource,
+    Parameters = AiGatewayIfMatchOptional
+  >;
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    AiGatewayTelemetryExporterResource,
+    PatchModel = AiGatewayTelemetryExporterUpdateParameters,
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
+  >;
+  delete is ArmResourceDeleteSync<
+    AiGatewayTelemetryExporterResource,
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
+  >;
+  listByWorkspace is ArmResourceListByParent<AiGatewayTelemetryExporterResource>;
+}
+
+@added(Versions.v2026_10_01_preview)
+@armResourceOperations
+interface AiGatewayAliasResources {
+  checkExistence is ArmResourceCheckExistence<
+    AiGatewayAliasResource,
+    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
+  >;
+  get is ArmResourceRead<AiGatewayAliasResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    AiGatewayAliasResource,
+    Parameters = AiGatewayIfMatchOptional
+  >;
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    AiGatewayAliasResource,
+    PatchModel = AiGatewayAliasUpdateParameters,
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
+  >;
+  delete is ArmResourceDeleteSync<
+    AiGatewayAliasResource,
+    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
+  >;
+  listByWorkspace is ArmResourceListByParent<AiGatewayAliasResource>;
+}
 
 @added(Versions.v2026_09_01_preview)
 @armResourceOperations
@@ -33,45 +127,44 @@ interface AiGatewayResources {
 @added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface AiGatewayWorkspaceResources {
-  get is ArmResourceRead<AiGatewayWorkspaceResource>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  checkExistence is ArmResourceCheckExistence<
     AiGatewayWorkspaceResource,
-    Parameters = AiGatewayIfMatchOptional
+    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
   >;
+  get is ArmResourceRead<AiGatewayWorkspaceResource>;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is ArmCustomPatchSync<
     AiGatewayWorkspaceResource,
     PatchModel = AiGatewayWorkspaceUpdateParameters,
     Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
-  delete is ArmResourceDeleteWithoutOkAsync<
-    AiGatewayWorkspaceResource,
-    Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
-  >;
-  listByAiGateway is ArmResourceListByParent<AiGatewayWorkspaceResource>;
 }
 
 @added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface AiGatewayModelProviderResources {
+  checkExistence is ArmResourceCheckExistence<
+    AiGatewayModelProviderResource,
+    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
+  >;
   get is ArmResourceRead<AiGatewayModelProviderResource>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
     AiGatewayModelProviderResource,
     Parameters = AiGatewayIfMatchOptional
   >;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is ArmCustomPatchSync<
     AiGatewayModelProviderResource,
     PatchModel = AiGatewayModelProviderUpdateParameters,
     Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ArmResourceDeleteSync<
     AiGatewayModelProviderResource,
     Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
   listByWorkspace is ArmResourceListByParent<AiGatewayModelProviderResource>;
 
-  /** Gets credential metadata for a model provider. Secret values are not returned. */
+  /** Returns the stored model-provider credential value, including the secret. */
   @post
   @action("listCredentials")
   listCredentials is ArmResourceActionSync<
@@ -84,18 +177,22 @@ interface AiGatewayModelProviderResources {
 @added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface AiGatewayModelResources {
+  checkExistence is ArmResourceCheckExistence<
+    AiGatewayModelResource,
+    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
+  >;
   get is ArmResourceRead<AiGatewayModelResource>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
     AiGatewayModelResource,
     Parameters = AiGatewayIfMatchOptional
   >;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is ArmCustomPatchSync<
     AiGatewayModelResource,
     PatchModel = AiGatewayModelUpdateParameters,
     Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ArmResourceDeleteSync<
     AiGatewayModelResource,
     Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
@@ -105,18 +202,22 @@ interface AiGatewayModelResources {
 @added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface AiGatewayToolServerResources {
+  checkExistence is ArmResourceCheckExistence<
+    AiGatewayToolServerResource,
+    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
+  >;
   get is ArmResourceRead<AiGatewayToolServerResource>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
     AiGatewayToolServerResource,
     Parameters = AiGatewayIfMatchOptional
   >;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is ArmCustomPatchSync<
     AiGatewayToolServerResource,
     PatchModel = AiGatewayToolServerUpdateParameters,
     Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ArmResourceDeleteSync<
     AiGatewayToolServerResource,
     Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
@@ -135,18 +236,22 @@ interface AiGatewayToolServerResources {
 @added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface AiGatewayApiKeyResources {
+  checkExistence is ArmResourceCheckExistence<
+    AiGatewayApiKeyResource,
+    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
+  >;
   get is ArmResourceRead<AiGatewayApiKeyResource>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
     AiGatewayApiKeyResource,
     Parameters = AiGatewayIfMatchOptional
   >;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is ArmCustomPatchSync<
     AiGatewayApiKeyResource,
     PatchModel = AiGatewayApiKeyUpdateParameters,
     Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ArmResourceDeleteSync<
     AiGatewayApiKeyResource,
     Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
@@ -199,7 +304,7 @@ interface AiGatewayWorkspaceModelOperations {
     aiGatewayName: string,
 
     /** Workspace resource name. */
-    @pattern("^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$")
+    @pattern("^default$")
     @path
     workspaceName: string,
   ): ArmResponse<ResourceListResult<AiGatewayModelResource>> | ErrorResponse;

@@ -75,11 +75,20 @@ union AiGatewayPolicyType {
 
   /** Configure cross-origin resource sharing. */
   Cors: "cors",
+
+  /** Limit cumulative spending in US dollars. */
+  CostLimit: "costLimit",
+
+  /** Check tool requests and responses for threats. */
+  ToolThreatProtection: "toolThreatProtection",
+
+  /** Invoke external pre-tool-call and post-tool-call hooks when authoring is enabled. */
+  AgentHooks: "agentHooks",
 }
 
-/** Time period used by a token limit policy. */
+/** Counter period. Token limits support minute/hour/day; cost limits support hour/day/week/month/year. */
 @added(Versions.v2026_10_01_preview)
-union AiGatewayTokenLimitPeriod {
+union AiGatewayPolicyPeriod {
   string,
 
   /** One minute. */
@@ -91,8 +100,171 @@ union AiGatewayTokenLimitPeriod {
   /** One day. */
   Day: "day",
 
-  /** One month. */
+  /** One week, for cost limits only. */
+  Week: "week",
+
+  /** One month, for cost limits only. */
   Month: "month",
+
+  /** One year, for cost limits only. */
+  Year: "year",
+}
+
+/** Aggregation scope of an inline policy. */
+@added(Versions.v2026_10_01_preview)
+union AiGatewayPolicyScope {
+  string,
+
+  /** Apply the policy to its resource. */
+  Resource: "resource",
+
+  /** Aggregate counters across the workspace. Supported for workspace counter policies only. */
+  Workspace: "workspace",
+}
+
+/** Public request dimension used to partition a policy counter. */
+@added(Versions.v2026_10_01_preview)
+union AiGatewayCounterDimension {
+  string,
+
+  /** Authenticated request identity. */
+  Identity: "identity",
+
+  /** Request source IP address. */
+  IpAddress: "ipAddress",
+}
+
+/** An ordered cost-budget override; exactly one selector must be specified. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayCostLimitOverride {
+  /** Authenticated token claims that must all match. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Authenticated token claim names form an extensible selector map in the implementation wire contract."
+  claims?: Record<string>;
+
+  /** Azure resource identifier of the API key selecting this override. */
+  apiKeyResourceId?: string;
+
+  /** Override budget in US dollars. */
+  @minValueExclusive(0)
+  amount: decimal128;
+}
+
+/** An ordered cost-budget override to update. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayCostLimitOverrideUpdate
+  is OptionalProperties<AiGatewayCostLimitOverride>;
+
+/** Authorization kind for an agent hook. */
+@added(Versions.v2026_10_01_preview)
+union AiGatewayAgentHookAuthorizationType {
+  string,
+
+  /** Call without authentication. */
+  Anonymous: "anonymous",
+
+  /** Authenticate using a managed identity. */
+  ManagedIdentity: "managedIdentity",
+}
+
+/** Managed identity kind selected for an agent hook. */
+@added(Versions.v2026_10_01_preview)
+union AiGatewayAgentHookIdentityType {
+  string,
+
+  /** Use the gateway's system-assigned identity. */
+  SystemAssigned: "systemAssigned",
+
+  /** Use a user-assigned identity. */
+  UserAssigned: "userAssigned",
+}
+
+/** Managed identity selected to authorize an agent hook. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayAgentHookIdentity {
+  /** Managed identity kind. */
+  type: AiGatewayAgentHookIdentityType;
+
+  /** User-assigned identity client ID; omit for a system-assigned identity. */
+  clientId?: string;
+}
+
+/** Agent-hook managed identity settings to update. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayAgentHookIdentityUpdate
+  is OptionalProperties<AiGatewayAgentHookIdentity>;
+
+/** Authorization settings for an external agent hook. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayAgentHookAuthorization {
+  /** Authorization kind. */
+  type: AiGatewayAgentHookAuthorizationType;
+
+  /** Managed identity selection, required for managedIdentity authorization. */
+  identity?: AiGatewayAgentHookIdentity;
+
+  /** Absolute token audience URI, required for managedIdentity authorization. */
+  audience?: url;
+}
+
+/** Agent-hook authorization settings to update. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayAgentHookAuthorizationUpdate {
+  /** Authorization kind. */
+  type?: AiGatewayAgentHookAuthorizationType;
+
+  /** Managed identity selection. */
+  identity?: AiGatewayAgentHookIdentityUpdate;
+
+  /** Token audience URI. */
+  audience?: url;
+}
+
+/** External hook settings; omitted fields inherit policy-level settings. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayAgentHook {
+  /** Hook destination HTTPS URL. */
+  endpoint?: url;
+
+  /** Hook authorization settings. */
+  authorization?: AiGatewayAgentHookAuthorization;
+
+  /** Literal, non-secret HTTP headers, returned by read operations. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Agent hooks accept arbitrary non-secret HTTP header names in the implementation wire contract."
+  headers?: Record<string>;
+}
+
+/** External hook settings to update. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayAgentHookUpdate {
+  /** Hook destination HTTPS URL. */
+  endpoint?: url;
+
+  /** Hook authorization settings. */
+  authorization?: AiGatewayAgentHookAuthorizationUpdate;
+
+  /** Literal, non-secret HTTP headers. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Agent hooks accept arbitrary non-secret HTTP header names in the implementation wire contract."
+  headers?: Record<string>;
+}
+
+/** Lifecycle hooks supported on tool servers. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayAgentHooks {
+  /** Hook invoked before calling a tool. */
+  preToolCall?: AiGatewayAgentHook;
+
+  /** Hook invoked after calling a tool. */
+  postToolCall?: AiGatewayAgentHook;
+}
+
+/** Lifecycle hook settings to update. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayAgentHooksUpdate {
+  /** Hook invoked before calling a tool. */
+  preToolCall?: AiGatewayAgentHookUpdate;
+
+  /** Hook invoked after calling a tool. */
+  postToolCall?: AiGatewayAgentHookUpdate;
 }
 
 /** Severity threshold used by a content safety policy. */
@@ -125,28 +297,55 @@ union AiGatewayIpFilterAction {
   Deny: "Deny",
 }
 
-/** An inline policy attached to an AI Gateway model or tool server. */
+/** An inline policy. Supported policy types and scopes depend on the parent resource. */
 @added(Versions.v2026_10_01_preview)
 model AiGatewayPolicy {
   /** Policy type. */
   type: AiGatewayPolicyType;
 
+  /** Policy scope. Workspace counter policies use workspace; other policies use resource. Agent hooks require an explicit resource scope. */
+  scope?: AiGatewayPolicyScope;
+
+  /** Stable identifier, required for costLimit and agentHooks policies. */
+  id?: string;
+
   /** Token count allowed during a token limit period. */
-  count?: int64;
+  @minValue(1)
+  count?: int32;
 
-  /** Token limit period. */
-  period?: AiGatewayTokenLimitPeriod;
+  /** Counter period. Token limits support minute/hour/day; cost limits support hour/day/week/month/year. */
+  period?: AiGatewayPolicyPeriod;
 
-  /** Key used to partition a token or request rate limit counter. */
+  /** Unique public dimensions used to partition a token, cost, or request counter. */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The counter key selects a public request attribute and is not a credential."
-  counterKey?: string;
+  counterKey?: AiGatewayCounterDimension[];
 
-  /** Content safety service endpoint. */
-  endpoint?: string;
+  /** Cost budget in US dollars. */
+  @minValueExclusive(0)
+  amount?: decimal128;
 
-  /** Content safety service key. */
-  @secret
-  key?: string;
+  /** Ordered cost-budget overrides; supported only for counterKey [identity]. The first match wins. */
+  @identifiers(#[])
+  overrides?: AiGatewayCostLimitOverride[];
+
+  /** Whether to check tool requests for threats. */
+  preInvocation?: boolean;
+
+  /** Whether to check tool responses for threats. */
+  postInvocation?: boolean;
+
+  /** Default HTTPS destination for agent hooks. */
+  endpoint?: url;
+
+  /** Default authorization for agent hooks. */
+  authorization?: AiGatewayAgentHookAuthorization;
+
+  /** Literal non-secret default HTTP headers for agent hooks. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Agent hooks accept arbitrary non-secret HTTP header names in the implementation wire contract."
+  headers?: Record<string>;
+
+  /** Lifecycle hooks; requires agent-hook authoring to be enabled on the gateway. */
+  hooks?: AiGatewayAgentHooks;
 
   /** Hate-content severity threshold. */
   hateSeverity?: AiGatewayContentSafetySeverity;
@@ -177,7 +376,8 @@ model AiGatewayPolicy {
   cidrRanges?: string[];
 
   /** Request count allowed during the configured period. */
-  callsPerPeriod?: int64;
+  @minValue(1)
+  callsPerPeriod?: int32;
 
   /** Request rate limit period in seconds. */
   periodSeconds?: int32;
@@ -191,8 +391,17 @@ model AiGatewayPolicy {
   /** HTTP headers allowed by a CORS policy. */
   allowedHeaders?: string[];
 
+  /** Response headers exposed to the browser. */
+  exposeHeaders?: string[];
+
+  /** Whether browsers may send credentials. */
+  allowCredentials?: boolean;
+
+  /** Whether unmatched CORS requests are terminated. */
+  terminateUnmatchedRequest?: boolean;
+
   /** Browser preflight cache duration in seconds. */
-  maxAgeSeconds?: int32;
+  preflightResultMaxAge?: int32;
 }
 
 /** An inline policy to update on an AI Gateway model or tool server. */
@@ -201,22 +410,49 @@ model AiGatewayPolicyUpdate {
   /** Policy type. */
   type?: AiGatewayPolicyType;
 
+  /** Aggregation scope supported by the policy and its parent resource. */
+  scope?: AiGatewayPolicyScope;
+
+  /** Stable identifier for costLimit or agentHooks. */
+  id?: string;
+
   /** Token count allowed during a token limit period. */
-  count?: int64;
+  @minValue(1)
+  count?: int32;
 
-  /** Token limit period. */
-  period?: AiGatewayTokenLimitPeriod;
+  /** Counter period. Token limits support minute/hour/day; cost limits support hour/day/week/month/year. */
+  period?: AiGatewayPolicyPeriod;
 
-  /** Key used to partition a token or request rate limit counter. */
+  /** Public dimensions used to partition a token, cost, or request counter. */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The counter key selects a public request attribute and is not a credential."
-  counterKey?: string;
+  counterKey?: AiGatewayCounterDimension[];
 
-  /** Content safety service endpoint. */
-  endpoint?: string;
+  /** Cost budget in US dollars. */
+  @minValueExclusive(0)
+  amount?: decimal128;
 
-  /** Content safety service key. */
-  @secret
-  key?: string;
+  /** Ordered cost-budget overrides. */
+  @identifiers(#[])
+  overrides?: AiGatewayCostLimitOverrideUpdate[];
+
+  /** Whether to check tool requests for threats. */
+  preInvocation?: boolean;
+
+  /** Whether to check tool responses for threats. */
+  postInvocation?: boolean;
+
+  /** Default HTTPS destination for agent hooks. */
+  endpoint?: url;
+
+  /** Default authorization for agent hooks. */
+  authorization?: AiGatewayAgentHookAuthorizationUpdate;
+
+  /** Literal non-secret default HTTP headers for agent hooks. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Agent hooks accept arbitrary non-secret HTTP header names in the implementation wire contract."
+  headers?: Record<string>;
+
+  /** Lifecycle hooks to update. */
+  hooks?: AiGatewayAgentHooksUpdate;
 
   /** Hate-content severity threshold. */
   hateSeverity?: AiGatewayContentSafetySeverity;
@@ -247,7 +483,8 @@ model AiGatewayPolicyUpdate {
   cidrRanges?: string[];
 
   /** Request count allowed during the configured period. */
-  callsPerPeriod?: int64;
+  @minValue(1)
+  callsPerPeriod?: int32;
 
   /** Request rate limit period in seconds. */
   periodSeconds?: int32;
@@ -261,8 +498,17 @@ model AiGatewayPolicyUpdate {
   /** HTTP headers allowed by a CORS policy. */
   allowedHeaders?: string[];
 
+  /** Response headers exposed to the browser. */
+  exposeHeaders?: string[];
+
+  /** Whether browsers may send credentials. */
+  allowCredentials?: boolean;
+
+  /** Whether unmatched CORS requests are terminated. */
+  terminateUnmatchedRequest?: boolean;
+
   /** Browser preflight cache duration in seconds. */
-  maxAgeSeconds?: int32;
+  preflightResultMaxAge?: int32;
 }
 
 /** Properties for updating an AI Gateway model. */

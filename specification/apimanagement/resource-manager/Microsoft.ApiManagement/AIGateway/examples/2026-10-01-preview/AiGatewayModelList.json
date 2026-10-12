@@ -4,7 +4,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "example-rg",
     "aiGatewayName": "example-gateway",
-    "workspaceName": "default-workspace",
+    "workspaceName": "default",
     "modelProviderName": "foundry-provider"
   },
   "responses": {
@@ -12,7 +12,7 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default-workspace/modelProviders/foundry-provider/models/gpt-4o",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/modelProviders/foundry-provider/models/gpt-4o",
             "name": "gpt-4o",
             "type": "Microsoft.ApiManagement/aigateways/workspaces/modelProviders/models",
             "eTag": "W/\"1\"",
@@ -33,7 +33,9 @@
                   "type": "tokenLimit",
                   "count": 100000,
                   "period": "day",
-                  "counterKey": "identity"
+                  "counterKey": [
+                    "identity"
+                  ]
                 }
               ],
               "provisioningState": "Succeeded",

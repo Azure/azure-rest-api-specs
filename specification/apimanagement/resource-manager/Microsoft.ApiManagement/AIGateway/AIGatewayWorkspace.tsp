@@ -17,11 +17,17 @@ namespace Microsoft.ApiManagement;
 @added(Versions.v2026_10_01_preview)
 model AiGatewayWorkspaceProperties {
   /** Display name of the workspace. */
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "name")
   displayName: string;
 
   /** Description of the workspace. */
+  @visibility(Lifecycle.Read)
   description: string;
+
+  /** Inline governance policies for the default workspace. */
+  @identifiers(#[])
+  policies?: AiGatewayPolicy[];
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
@@ -31,12 +37,9 @@ model AiGatewayWorkspaceProperties {
 /** Properties for updating an AI Gateway workspace. */
 @added(Versions.v2026_10_01_preview)
 model AiGatewayWorkspaceUpdateProperties {
-  /** Display name of the workspace. */
-  @encodedName("application/json", "name")
-  displayName?: string;
-
-  /** Description of the workspace. */
-  description?: string;
+  /** Inline governance policies to replace on the default workspace. */
+  @identifiers(#[])
+  policies?: AiGatewayPolicyUpdate[];
 }
 
 /** Parameters for updating an AI Gateway workspace. */
@@ -55,7 +58,7 @@ model AiGatewayWorkspaceResource
     Resource = AiGatewayWorkspaceResource,
     KeyName = "workspaceName",
     SegmentName = "workspaces",
-    NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+    NamePattern = "^default$"
   >;
   ...Azure.ResourceManager.EntityTagProperty;
 }

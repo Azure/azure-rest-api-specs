@@ -126,6 +126,9 @@ model AiGatewayToolServerOauth2Parameter {
 /** OAuth 2.0 authentication for a tool server endpoint. */
 @added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerOauth2Authentication {
+  /** Expected OAuth authorization-server issuer for remote MCP discovery. */
+  issuer?: url;
+
   /** OAuth authorization endpoint. */
   @clientName("authorizationUri", "csharp")
   authorizationUrl?: string;
@@ -162,6 +165,10 @@ model AiGatewayToolServerOauth2Authentication {
   /** Login link used to complete interactive authorization. */
   @visibility(Lifecycle.Read)
   loginLink?: string;
+
+  /** UTC timestamp of the last OAuth connection-status transition. */
+  @visibility(Lifecycle.Read)
+  statusUpdatedUtc?: utcDateTime;
 }
 
 /** An HTTP header injected when calling a tool server endpoint. */
@@ -210,6 +217,7 @@ model AiGatewayOpenApiSpecSource {
   type: AiGatewayToolServerOpenApiSourceType;
 
   /** Base64-encoded OpenAPI document. Required when kind is Inline. */
+  @secret
   contentBase64?: bytes;
 
   /** URL of the OpenAPI document. Required when kind is Url. */
@@ -247,8 +255,8 @@ model AiGatewayToolServerEndpoint {
   /** Upstream tool names or glob patterns to expose. */
   tools?: string[];
 
-  /** Whether endpoint failure fails the whole federation. */
-  required: boolean;
+  /** Whether endpoint failure fails the whole federation. Defaults to false. */
+  required?: boolean = false;
 }
 
 /** Tool server credentials to update. */
@@ -286,6 +294,7 @@ model AiGatewayOpenApiSpecSourceUpdate {
   type?: AiGatewayToolServerOpenApiSourceType;
 
   /** Base64-encoded OpenAPI document. */
+  @secret
   contentBase64?: bytes;
 
   /** URL of the OpenAPI document. */
@@ -344,6 +353,9 @@ model AiGatewayToolServerUpdateProperties {
   @encodedName("application/json", "type")
   toolServerType?: AiGatewayToolServerType;
 
+  /** Runtime API versions exposed by this tool server. */
+  versions?: string[];
+
   /** Tool names or patterns explicitly allowed. */
   allowList?: string[];
 
@@ -389,6 +401,9 @@ model AiGatewayToolServerProperties {
   @encodedName("application/json", "type")
   toolServerType: AiGatewayToolServerType;
 
+  /** Runtime API versions exposed by this tool server. */
+  versions?: string[];
+
   /** Tool names or patterns explicitly allowed. */
   allowList?: string[];
 
@@ -408,6 +423,11 @@ model AiGatewayToolServerProperties {
 
   /** Whether a subscription is required to invoke the tool server. */
   subscriptionRequired?: boolean;
+
+  /** Read-only invocation URLs, with optional SDK metadata when endpoint enrichment is enabled. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["url"])
+  gatewayEndpoints?: AiGatewayEndpoint[];
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)

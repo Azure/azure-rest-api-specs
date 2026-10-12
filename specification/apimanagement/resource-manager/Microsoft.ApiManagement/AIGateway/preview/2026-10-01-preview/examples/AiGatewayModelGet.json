@@ -6,12 +6,12 @@
     "aiGatewayName": "example-gateway",
     "modelName": "gpt-4o",
     "modelProviderName": "foundry-provider",
-    "workspaceName": "default-workspace"
+    "workspaceName": "default"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default-workspace/modelProviders/foundry-provider/models/gpt-4o",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/modelProviders/foundry-provider/models/gpt-4o",
         "name": "gpt-4o",
         "type": "Microsoft.ApiManagement/aigateways/workspaces/modelProviders/models",
         "eTag": "W/\"1\"",
@@ -32,7 +32,9 @@
               "type": "tokenLimit",
               "count": 100000,
               "period": "day",
-              "counterKey": "identity"
+              "counterKey": [
+                "identity"
+              ]
             }
           ],
           "provisioningState": "Succeeded",

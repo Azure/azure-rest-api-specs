@@ -5,12 +5,12 @@
     "resourceGroupName": "example-rg",
     "aiGatewayName": "example-gateway",
     "toolServerName": "weather-tools",
-    "workspaceName": "default-workspace"
+    "workspaceName": "default"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default-workspace/toolServers/weather-tools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/toolServers/weather-tools",
         "name": "weather-tools",
         "type": "Microsoft.ApiManagement/aigateways/workspaces/toolServers",
         "eTag": "W/\"1\"",
@@ -32,7 +32,70 @@
           ],
           "provisioningState": "Succeeded",
           "name": "Weather tools",
-          "type": "mcp"
+          "type": "mcp",
+          "versions": [
+            "v1"
+          ],
+          "gatewayEndpoints": [
+            {
+              "url": "https://example-gateway.azure-api.net/default/toolServers/weather-tools/mcp",
+              "baseUrl": "https://example-gateway.azure-api.net/default/toolServers/weather-tools",
+              "api": "mcp"
+            }
+          ],
+          "policies": [
+            {
+              "type": "toolThreatProtection",
+              "scope": "resource",
+              "preInvocation": true,
+              "postInvocation": true
+            },
+            {
+              "type": "agentHooks",
+              "id": "tool-audit",
+              "scope": "resource",
+              "hooks": {
+                "preToolCall": {
+                  "endpoint": "https://hooks.example.com/pre-tool",
+                  "authorization": {
+                    "type": "anonymous"
+                  },
+                  "headers": {
+                    "X-Audit-Source": "gateway"
+                  }
+                },
+                "postToolCall": {
+                  "endpoint": "https://hooks.example.com/post-tool",
+                  "authorization": {
+                    "type": "managedIdentity",
+                    "identity": {
+                      "type": "systemAssigned"
+                    },
+                    "audience": "https://hooks.example.com/"
+                  }
+                }
+              }
+            },
+            {
+              "type": "cors",
+              "scope": "resource",
+              "allowedOrigins": [
+                "https://portal.example.com"
+              ],
+              "allowedMethods": [
+                "POST"
+              ],
+              "allowedHeaders": [
+                "Content-Type"
+              ],
+              "exposeHeaders": [
+                "X-Request-Id"
+              ],
+              "allowCredentials": false,
+              "terminateUnmatchedRequest": true,
+              "preflightResultMaxAge": 300
+            }
+          ]
         }
       }
     }
