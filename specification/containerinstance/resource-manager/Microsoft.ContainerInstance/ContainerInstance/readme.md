@@ -29,6 +29,203 @@ openapi-type: arm
 tag: package-2026-07-01
 ```
 
+### Tag: package-preview-2026-09
+
+These settings apply only when `--tag=package-preview-2026-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-09'
+input-file:
+  - ./preview/2026-09-01-preview/containerInstance.json
+directive:
+  - suppress: OperationsApiResponseSchema
+    from: containerInstance.json
+    where:
+      - $.paths["/providers/Microsoft.ContainerInstance/operations"].get.responses["200"].schema
+    reason: The operations endpoint retains the provider's published OperationListResult response shape; replacing it with the common-types shape would change the generated SDK contract.
+  - suppress: OperationsApiSchemaUsesCommonTypes
+    from: containerInstance.json
+    where:
+      - $.paths["/providers/Microsoft.ContainerInstance/operations"].get.responses["200"].schema["$ref"]
+    reason: The operations endpoint intentionally references the provider's legacy OperationListResult model to preserve the published response and SDK contract.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: containerInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/logs"].get.responses["200"].schema.properties
+    reason: This endpoint returns log content for one container and is a resource action, not a collection GET; the list heuristic is triggered by the legacy ListLogs operation name.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: containerInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/aiAgentsGroups/{aiAgentsGroupName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/aiAgentsGroups/{aiAgentsGroupName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/aiAgentsGroups/{aiAgentsGroupName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/aiAgentsGroups/{aiAgentsGroupName}"].patch.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/managedVirtualNodePools/{managedVirtualNodePoolName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/managedVirtualNodePools/{managedVirtualNodePoolName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/managedVirtualNodePools/{managedVirtualNodePoolName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/managedVirtualNodePools/{managedVirtualNodePoolName}"].patch.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}"].patch.responses["200"].schema
+    reason: Each referenced resource model defines provisioningState as read-only in TypeSpec; the validator does not follow the response schema reference to the nested read-only property.
+  - suppress: LroErrorContent
+    from: containerInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/aiAgentsGroups/{aiAgentsGroupName}"].put.responses.default.schema["$ref"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/aiAgentsGroups/{aiAgentsGroupName}"].patch.responses.default.schema["$ref"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/aiAgentsGroups/{aiAgentsGroupName}"].delete.responses.default.schema["$ref"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}"].put.responses.default.schema["$ref"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}"].delete.responses.default.schema["$ref"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/restart"].post.responses.default.schema["$ref"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/start"].post.responses.default.schema["$ref"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/managedVirtualNodePools/{managedVirtualNodePoolName}"].put.responses.default.schema["$ref"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/managedVirtualNodePools/{managedVirtualNodePoolName}"].patch.responses.default.schema["$ref"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/managedVirtualNodePools/{managedVirtualNodePoolName}"].delete.responses.default.schema["$ref"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/providers/Microsoft.ContainerInstance/serviceAssociationLinks/default"].delete.responses.default.schema["$ref"]
+    reason: These long-running operations retain the provider's published CloudError response; changing the error envelope would break the existing wire and generated SDK contract.
+  - suppress: ResourceNameRestriction
+    from: containerInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/attach"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/exec"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/logs"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/outboundNetworkDependenciesEndpoints"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/restart"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/start"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/stop"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/providers/Microsoft.ContainerInstance/serviceAssociationLinks/default"]
+    reason: These legacy name parameters intentionally preserve the service's published unconstrained name contract; adding a pattern would introduce a new client-side restriction for existing operations.
+  - suppress: PatchIdentityProperty
+    from: containerInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}"].patch.parameters[4]
+    reason: The legacy container group PATCH operation updates the published ContainerGroupUpdate shape, which does not support identity updates; adding identity would change the existing patch contract.
+  - suppress: UnSupportedPatchProperties
+    from: containerInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}"].patch.parameters[4]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}"].patch.parameters[4]
+    reason: These PATCH request shapes preserve published legacy fields; removing location or provisioningState from the emitted request models would change existing SDK model shapes.
+  - suppress: DeleteResponseCodes
+    from: containerInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/providers/Microsoft.ContainerInstance/serviceAssociationLinks/default"].delete
+    reason: These legacy long-running delete operations document the response codes implemented by the service; removing the existing 200 response would change the published wire contract.
+  - suppress: DeleteResponseBodyEmpty
+    from: containerInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}"].delete.responses["200"].schema
+    reason: The service's published container group delete operation can return the deleted resource in its 200 response; removing that schema would change the wire and SDK contract.
+  - suppress: XmsPageableForListCalls
+    from: containerInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/logs"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/outboundNetworkDependenciesEndpoints"].get
+    reason: These GET operations are resource actions returning log content or network dependencies, not pageable collection-list operations; their legacy operation names trigger the list heuristic.
+  - suppress: PostResponseCodes
+    from: containerInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/restart"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}/restart"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}/start"].post
+    reason: These legacy actions preserve the response-code behavior already implemented and published by the service; changing the codes would alter the wire contract.
+  - suppress: DescriptionMustNotBeNodeName
+    from: containerInstance.json
+    where:
+      - $.definitions.AzureFileShareAccessType["x-ms-enum"].values[0].description
+      - $.definitions.AzureFileShareAccessType["x-ms-enum"].values[1].description
+      - $.definitions.ContainerGroupIpAddressType["x-ms-enum"].values[0].description
+      - $.definitions.ContainerGroupIpAddressType["x-ms-enum"].values[1].description
+      - $.definitions.ContainerGroupNetworkProtocol["x-ms-enum"].values[0].description
+      - $.definitions.ContainerGroupNetworkProtocol["x-ms-enum"].values[1].description
+      - $.definitions.ContainerGroupPriority["x-ms-enum"].values[0].description
+      - $.definitions.ContainerGroupPriority["x-ms-enum"].values[1].description
+      - $.definitions.ContainerGroupProvisioningState["x-ms-enum"].values[0].description
+      - $.definitions.ContainerGroupProvisioningState["x-ms-enum"].values[1].description
+      - $.definitions.ContainerGroupProvisioningState["x-ms-enum"].values[2].description
+      - $.definitions.ContainerGroupProvisioningState["x-ms-enum"].values[3].description
+      - $.definitions.ContainerGroupProvisioningState["x-ms-enum"].values[4].description
+      - $.definitions.ContainerGroupProvisioningState["x-ms-enum"].values[5].description
+      - $.definitions.ContainerGroupProvisioningState["x-ms-enum"].values[6].description
+      - $.definitions.ContainerGroupProvisioningState["x-ms-enum"].values[7].description
+      - $.definitions.ContainerGroupProvisioningState["x-ms-enum"].values[8].description
+      - $.definitions.ContainerGroupProvisioningState["x-ms-enum"].values[9].description
+      - $.definitions.ContainerGroupProvisioningState["x-ms-enum"].values[10].description
+      - $.definitions.ContainerGroupProvisioningState["x-ms-enum"].values[11].description
+      - $.definitions.ContainerGroupProvisioningState["x-ms-enum"].values[12].description
+      - $.definitions.ContainerGroupRestartPolicy["x-ms-enum"].values[0].description
+      - $.definitions.ContainerGroupRestartPolicy["x-ms-enum"].values[1].description
+      - $.definitions.ContainerGroupRestartPolicy["x-ms-enum"].values[2].description
+      - $.definitions.ContainerGroupSku["x-ms-enum"].values[0].description
+      - $.definitions.ContainerGroupSku["x-ms-enum"].values[1].description
+      - $.definitions.ContainerGroupSku["x-ms-enum"].values[2].description
+      - $.definitions.ContainerGroupSku["x-ms-enum"].values[3].description
+      - $.definitions.ContainerInstanceOperationsOrigin["x-ms-enum"].values[0].description
+      - $.definitions.ContainerInstanceOperationsOrigin["x-ms-enum"].values[1].description
+      - $.definitions.ContainerNetworkProtocol["x-ms-enum"].values[0].description
+      - $.definitions.ContainerNetworkProtocol["x-ms-enum"].values[1].description
+      - $.definitions.FileShareProperties.properties.shareAccessTier["x-ms-enum"].values[0].description
+      - $.definitions.FileShareProperties.properties.shareAccessTier["x-ms-enum"].values[1].description
+      - $.definitions.FileShareProperties.properties.shareAccessTier["x-ms-enum"].values[2].description
+      - $.definitions.FileShareProperties.properties.shareAccessTier["x-ms-enum"].values[3].description
+      - $.definitions.GpuSku["x-ms-enum"].values[0].description
+      - $.definitions.GpuSku["x-ms-enum"].values[1].description
+      - $.definitions.GpuSku["x-ms-enum"].values[2].description
+      - $.definitions.IdentityAccessLevel["x-ms-enum"].values[0].description
+      - $.definitions.IdentityAccessLevel["x-ms-enum"].values[1].description
+      - $.definitions.IdentityAccessLevel["x-ms-enum"].values[2].description
+      - $.definitions.IpAddress.properties.autoGeneratedDomainNameLabelScope["x-ms-enum"].values[0].description
+      - $.definitions.IpAddress.properties.autoGeneratedDomainNameLabelScope["x-ms-enum"].values[1].description
+      - $.definitions.IpAddress.properties.autoGeneratedDomainNameLabelScope["x-ms-enum"].values[2].description
+      - $.definitions.IpAddress.properties.autoGeneratedDomainNameLabelScope["x-ms-enum"].values[3].description
+      - $.definitions.IpAddress.properties.autoGeneratedDomainNameLabelScope["x-ms-enum"].values[4].description
+      - $.definitions.LogAnalyticsLogType["x-ms-enum"].values[0].description
+      - $.definitions.LogAnalyticsLogType["x-ms-enum"].values[1].description
+      - $.definitions.NGroupProvisioningState["x-ms-enum"].values[0].description
+      - $.definitions.NGroupProvisioningState["x-ms-enum"].values[1].description
+      - $.definitions.NGroupProvisioningState["x-ms-enum"].values[2].description
+      - $.definitions.NGroupProvisioningState["x-ms-enum"].values[3].description
+      - $.definitions.NGroupProvisioningState["x-ms-enum"].values[4].description
+      - $.definitions.NGroupProvisioningState["x-ms-enum"].values[5].description
+      - $.definitions.NGroupProvisioningState["x-ms-enum"].values[6].description
+      - $.definitions.NGroupUpdateMode["x-ms-enum"].values[0].description
+      - $.definitions.NGroupUpdateMode["x-ms-enum"].values[1].description
+      - $.definitions.OperatingSystemTypes["x-ms-enum"].values[0].description
+      - $.definitions.OperatingSystemTypes["x-ms-enum"].values[1].description
+      - $.definitions.ResourceIdentityType["x-ms-enum"].values[0].description
+      - $.definitions.ResourceIdentityType["x-ms-enum"].values[1].description
+      - $.definitions.ResourceIdentityType["x-ms-enum"].values[2].description
+      - $.definitions.ResourceIdentityType["x-ms-enum"].values[3].description
+      - $.definitions.Scheme["x-ms-enum"].values[0].description
+      - $.definitions.Scheme["x-ms-enum"].values[1].description
+    reason: These enum descriptions are part of the generated legacy contract carried forward into this preview; changing them is outside the ManagedVirtualNodePool scope, so suppression is limited to the exact existing description nodes.
+  - suppress: AvoidAdditionalProperties
+    from: containerInstance.json
+    where:
+      - $.definitions.LogAnalytics.properties.metadata
+      - $.definitions.Volume.properties.secret
+      - $.definitions.Volume.properties.secretReference
+    reason: These properties are published string dictionaries whose arbitrary keys are part of the service contract; replacing them with fixed-property models would be a breaking change.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: containerInstance.json
+    where:
+      - $.definitions.OperationListResult
+      - $.definitions.CachedImagesListResult
+      - $.definitions.CapabilitiesListResult
+      - $.definitions.UsageListResult
+      - $.definitions.Logs
+      - $.definitions.NetworkDependenciesResponse
+    reason: These schemas are collection or action response payloads rather than ARM resource models, so resource envelope properties id, name, and type do not apply.
+  - suppress: ArmResourcePropertiesBag
+    from: containerInstance.json
+    where:
+      - $.definitions.ContainerGroup
+      - $.definitions.ContainerGroupProfile
+    reason: The nested sku properties are part of the published resource-specific properties contract; renaming or moving them would break existing clients.
+```
+
 ### Tag: package-preview-2026-08
 
 These settings apply only when `--tag=package-preview-2026-08` is specified on the command line.

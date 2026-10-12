@@ -7,6 +7,7 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace Azure.AI.Projects;
@@ -133,6 +134,7 @@ interface AgentServerTaskStorage {
   @post
   @route("/tasks")
   @extension("x-ms-foundry-meta", AgentServerPersistenceRequiredPreviews)
+  @removed(Versions.v1)
   createAgentServerTask is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.routines_v2_preview,
     CreateAgentServerTaskRequest,
@@ -146,6 +148,7 @@ interface AgentServerTaskStorage {
   @get
   @route("/tasks/{task_id}")
   @extension("x-ms-foundry-meta", AgentServerPersistenceRequiredPreviews)
+  @removed(Versions.v1)
   getAgentServerTask is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.routines_v2_preview,
     GetAgentServerTaskRequest,
@@ -159,6 +162,7 @@ interface AgentServerTaskStorage {
   @patch
   @route("/tasks/{task_id}")
   @extension("x-ms-foundry-meta", AgentServerPersistenceRequiredPreviews)
+  @removed(Versions.v1)
   patchAgentServerTask is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.routines_v2_preview,
     PatchAgentServerTaskRequest,
@@ -172,6 +176,7 @@ interface AgentServerTaskStorage {
   @delete
   @route("/tasks/{task_id}")
   @extension("x-ms-foundry-meta", AgentServerPersistenceRequiredPreviews)
+  @removed(Versions.v1)
   deleteAgentServerTask is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.routines_v2_preview,
     DeleteAgentServerTaskRequest,
@@ -186,6 +191,7 @@ interface AgentServerTaskStorage {
   @list
   @route("/tasks")
   @extension("x-ms-foundry-meta", AgentServerPersistenceRequiredPreviews)
+  @removed(Versions.v1)
   listAgentServerTasks is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.routines_v2_preview,
     ListAgentServerTasksRequest,

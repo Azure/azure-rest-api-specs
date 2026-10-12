@@ -1,5 +1,5 @@
-# Create a "status" check for a SHA (inferred from PR by default) in a GitHub 
-# repository. By default this uses the azure-sdk account. This might not work 
+# Create a "status" check for a SHA (inferred from PR by default) in a GitHub
+# repository. By default this uses the azure-sdk account. This might not work
 # for required checks where a source must be configured.
 
 parameters:
@@ -13,7 +13,7 @@ parameters:
 
   - name: State
     type: string
-    default: 'pending'
+    default: "pending"
     # Valid values:
     # - error
     # - failure
@@ -22,11 +22,11 @@ parameters:
 
   - name: TargetUrl
     type: string
-    default: ''
+    default: ""
 
   - name: Description
     type: string
-    default: ''
+    default: ""
 
   - name: Context
     type: string
@@ -38,11 +38,11 @@ parameters:
 
   - name: DisplayName
     type: string
-    default: 'Set PR status'
+    default: "Set PR status"
 
   - name: GitHubToken
     type: string
-    default: $(azuresdk-github-pat)
+    default: ""
 
 steps:
   - bash: |
@@ -61,4 +61,4 @@ steps:
     displayName: ${{ parameters.DisplayName }}
     condition: ${{ parameters.Condition }}
     env:
-      GH_TOKEN: ${{ parameters.GitHubToken }}
+      GH_TOKEN: ${{ coalesce(parameters.GitHubToken, '$(GH_TOKEN)') }}

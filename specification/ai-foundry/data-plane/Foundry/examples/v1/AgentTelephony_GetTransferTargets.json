@@ -1,0 +1,28 @@
+{
+  "title": "Get telephony transfer targets",
+  "operationId": "AgentTelephony_getTelephonyTransferTargets",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "agent_name": "support-agent"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"targets-etag-1\""
+      },
+      "body": {
+        "transfer_targets": [
+          {
+            "name": "billing",
+            "description": "Transfer when the caller needs help with an invoice or payment.",
+            "destination": {
+              "kind": "pstn",
+              "value": "+14255550150"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

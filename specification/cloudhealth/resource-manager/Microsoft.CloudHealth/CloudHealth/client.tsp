@@ -49,6 +49,8 @@ using Microsoft.CloudHealth;
 @@clientName(AuthenticationKind, "HealthModelAuthenticationKind", "csharp");
 @@clientName(EvaluationRule, "EntitySignalEvaluationRule", "csharp");
 @@clientName(HealthState, "EntityHealthState", "csharp");
+@@clientName(AggregationType, "HealthStateAggregationType", "csharp");
+@@clientName(AggregationUnit, "HealthStateAggregationUnit", "csharp");
 @@clientName(ThresholdRule, "EntitySignalThresholdRule", "csharp");
 @@clientName(IconDefinition, "EntityIcon", "csharp");
 @@clientName(RefreshInterval, "EntitySignalRefreshInterval", "csharp");
@@ -103,6 +105,11 @@ using Microsoft.CloudHealth;
   "csharp"
 );
 @@clientName(AzureResourceHealthSignal, "ResourceHealthSignal", "csharp");
+@@clientName(
+  SignalAggregationGroup.ignoreUnknown,
+  "shouldIgnoreUnknown",
+  "csharp"
+);
 @@clientName(
   DependenciesSignalGroupV2.ignoreUnknown,
   "shouldIgnoreUnknown",

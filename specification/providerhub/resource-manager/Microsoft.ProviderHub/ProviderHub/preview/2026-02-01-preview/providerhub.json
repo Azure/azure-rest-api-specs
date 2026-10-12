@@ -46,9 +46,6 @@
       "name": "CustomRollouts"
     },
     {
-      "name": "NewRegionFrontloadRelease"
-    },
-    {
       "name": "ProviderRegistrations"
     },
     {
@@ -1236,58 +1233,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/generateNewRegionFrontloadManifest": {
-      "post": {
-        "operationId": "NewRegionFrontloadRelease_GenerateManifest",
-        "tags": [
-          "ProviderRegistrations"
-        ],
-        "description": "Generates the new region frontload manifest.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FrontloadPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderManifest"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NewRegionFrontloadRelease_GenerateManifest": {
-            "$ref": "./examples/NewRegionFrontloadRelease_GenerateManifest.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/generateOperations": {
       "post": {
         "operationId": "ProviderRegistrations_GenerateOperations",
@@ -1437,169 +1382,6 @@
         "x-ms-examples": {
           "Manifests_CreateOrUpdate": {
             "$ref": "./examples/Manifests_CreateOrUpdate.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}": {
-      "get": {
-        "operationId": "NewRegionFrontloadRelease_Get",
-        "tags": [
-          "NewRegionFrontloadRelease"
-        ],
-        "description": "Gets a new region frontload release.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "releaseName",
-            "in": "path",
-            "description": "The name of the release.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NewRegionFrontloadRelease_Get": {
-            "$ref": "./examples/NewRegionFrontloadRelease_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "NewRegionFrontloadRelease_CreateOrUpdate",
-        "tags": [
-          "NewRegionFrontloadRelease"
-        ],
-        "description": "Creates or updates a new region frontload release.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "releaseName",
-            "in": "path",
-            "description": "The name of the release.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FrontloadPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            }
-          },
-          "201": {
-            "description": "Resource 'DefaultRollout' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NewRegionFrontloadRelease_CreateOrUpdate": {
-            "$ref": "./examples/NewRegionFrontloadRelease_CreateOrUpdate.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}/stop": {
-      "post": {
-        "operationId": "NewRegionFrontloadRelease_Stop",
-        "tags": [
-          "NewRegionFrontloadRelease"
-        ],
-        "description": "Stops a new region frontload release.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "releaseName",
-            "in": "path",
-            "description": "The name of the release.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NewRegionFrontloadRelease_Stop": {
-            "$ref": "./examples/NewRegionFrontloadRelease_Stop.json"
           }
         }
       }
@@ -3929,48 +3711,6 @@
         ]
       }
     },
-    "AvailableCheckInManifestEnvironment": {
-      "type": "string",
-      "description": "The environment type.",
-      "enum": [
-        "NotSpecified",
-        "Canary",
-        "Prod",
-        "All",
-        "Mooncake",
-        "Fairfax"
-      ],
-      "x-ms-enum": {
-        "name": "AvailableCheckInManifestEnvironment",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified"
-          },
-          {
-            "name": "Canary",
-            "value": "Canary"
-          },
-          {
-            "name": "Prod",
-            "value": "Prod"
-          },
-          {
-            "name": "All",
-            "value": "All"
-          },
-          {
-            "name": "Mooncake",
-            "value": "Mooncake"
-          },
-          {
-            "name": "Fairfax",
-            "value": "Fairfax"
-          }
-        ]
-      }
-    },
     "BlockActionVerb": {
       "type": "string",
       "description": "The action verb that will be blocked when the resource group is locked during move.",
@@ -4681,22 +4421,6 @@
         }
       }
     },
-    "DstsConfiguration": {
-      "type": "object",
-      "properties": {
-        "serviceName": {
-          "type": "string",
-          "description": "The service name."
-        },
-        "serviceDnsName": {
-          "type": "string",
-          "description": "This is a URI property."
-        }
-      },
-      "required": [
-        "serviceName"
-      ]
-    },
     "EndpointInformation": {
       "type": "object",
       "properties": {
@@ -5068,21 +4792,8 @@
             "$ref": "#/definitions/ResourceProviderEndpoint"
           },
           "x-ms-identifiers": []
-        },
-        "dstsConfiguration": {
-          "$ref": "#/definitions/FanoutLinkedNotificationRuleDstsConfiguration",
-          "description": "The dsts configuration."
         }
       }
-    },
-    "FanoutLinkedNotificationRuleDstsConfiguration": {
-      "type": "object",
-      "description": "The dsts configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DstsConfiguration"
-        }
-      ]
     },
     "FeaturesPolicy": {
       "type": "string",
@@ -5178,107 +4889,6 @@
           }
         ]
       }
-    },
-    "FrontloadPayload": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FrontloadPayloadProperties",
-          "description": "Properties of the frontload payload."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "FrontloadPayloadProperties": {
-      "type": "object",
-      "properties": {
-        "operationType": {
-          "type": "string",
-          "description": "The operation type."
-        },
-        "providerNamespace": {
-          "type": "string",
-          "description": "The provider namespace."
-        },
-        "frontloadLocation": {
-          "type": "string",
-          "description": "The frontload location."
-        },
-        "copyFromLocation": {
-          "type": "string",
-          "description": "The copy from location."
-        },
-        "environmentType": {
-          "$ref": "#/definitions/AvailableCheckInManifestEnvironment",
-          "description": "The environment type."
-        },
-        "serviceFeatureFlag": {
-          "$ref": "#/definitions/ServiceFeatureFlagAction",
-          "description": "The service feature flag."
-        },
-        "includeResourceTypes": {
-          "type": "array",
-          "description": "The resource types to include.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "excludeResourceTypes": {
-          "type": "array",
-          "description": "The resource types to exclude.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "overrideManifestLevelFields": {
-          "$ref": "#/definitions/FrontloadPayloadPropertiesOverrideManifestLevelFields",
-          "description": "The manifest level fields to override."
-        },
-        "overrideEndpointLevelFields": {
-          "$ref": "#/definitions/FrontloadPayloadPropertiesOverrideEndpointLevelFields",
-          "description": "The endpoint level fields to override."
-        },
-        "ignoreFields": {
-          "type": "array",
-          "description": "The fields to ignore.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "operationType",
-        "providerNamespace",
-        "frontloadLocation",
-        "copyFromLocation",
-        "environmentType",
-        "serviceFeatureFlag",
-        "includeResourceTypes",
-        "excludeResourceTypes",
-        "overrideManifestLevelFields",
-        "overrideEndpointLevelFields",
-        "ignoreFields"
-      ]
-    },
-    "FrontloadPayloadPropertiesOverrideEndpointLevelFields": {
-      "type": "object",
-      "description": "The endpoint level fields to override.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceTypeEndpointBase"
-        }
-      ]
-    },
-    "FrontloadPayloadPropertiesOverrideManifestLevelFields": {
-      "type": "object",
-      "description": "The manifest level fields to override.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ManifestLevelPropertyBag"
-        }
-      ]
     },
     "GroupConnectivityInformation": {
       "type": "object",
@@ -6283,21 +5893,6 @@
           "type": "string",
           "description": "The manifest commit identifier.",
           "readOnly": true
-        }
-      }
-    },
-    "ManifestLevelPropertyBag": {
-      "type": "object",
-      "properties": {
-        "resourceHydrationAccounts": {
-          "type": "array",
-          "description": "The resource hydration accounts.",
-          "items": {
-            "$ref": "#/definitions/ResourceHydrationAccount"
-          },
-          "x-ms-identifiers": [
-            "accountName"
-          ]
         }
       }
     },
@@ -7403,63 +6998,6 @@
         "enabled"
       ]
     },
-    "Readiness": {
-      "type": "string",
-      "description": "The readiness.",
-      "enum": [
-        "ClosingDown",
-        "Deprecated",
-        "GA",
-        "InDevelopment",
-        "InternalOnly",
-        "PrivatePreview",
-        "PublicPreview",
-        "RemovedFromARM",
-        "Retired"
-      ],
-      "x-ms-enum": {
-        "name": "Readiness",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ClosingDown",
-            "value": "ClosingDown"
-          },
-          {
-            "name": "Deprecated",
-            "value": "Deprecated"
-          },
-          {
-            "name": "GA",
-            "value": "GA"
-          },
-          {
-            "name": "InDevelopment",
-            "value": "InDevelopment"
-          },
-          {
-            "name": "InternalOnly",
-            "value": "InternalOnly"
-          },
-          {
-            "name": "PrivatePreview",
-            "value": "PrivatePreview"
-          },
-          {
-            "name": "PublicPreview",
-            "value": "PublicPreview"
-          },
-          {
-            "name": "RemovedFromARM",
-            "value": "RemovedFromARM"
-          },
-          {
-            "name": "Retired",
-            "value": "Retired"
-          }
-        ]
-      }
-    },
     "Regionality": {
       "type": "string",
       "description": "The regionality.",
@@ -7504,13 +7042,17 @@
       "type": "string",
       "description": "The resource access policy.",
       "enum": [
-        "NotSpecified",
-        "AcisReadAllowed",
-        "AcisActionAllowed"
+        "NotSpecified"
       ],
       "x-ms-enum": {
         "name": "ResourceAccessPolicy",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified"
+          }
+        ]
       }
     },
     "ResourceAccessRole": {
@@ -7955,14 +7497,6 @@
           "type": "string",
           "description": "The incident contact email."
         },
-        "serviceTreeInfos": {
-          "type": "array",
-          "description": "The service tree infos.",
-          "items": {
-            "$ref": "#/definitions/ServiceTreeInfo"
-          },
-          "x-ms-identifiers": []
-        },
         "resourceAccessPolicy": {
           "$ref": "#/definitions/ResourceAccessPolicy",
           "description": "The resource access policy."
@@ -8303,10 +7837,6 @@
           "$ref": "#/definitions/ResourceProviderAuthorizationRules",
           "description": "The resource provider authorization rules."
         },
-        "dstsConfiguration": {
-          "$ref": "#/definitions/ResourceProviderManifestPropertiesDstsConfiguration",
-          "description": "The dsts configuration."
-        },
         "notificationOptions": {
           "$ref": "#/definitions/NotificationOptions",
           "description": "Notification options."
@@ -8362,15 +7892,6 @@
           "description": "Custom manifest version."
         }
       }
-    },
-    "ResourceProviderManifestPropertiesDstsConfiguration": {
-      "type": "object",
-      "description": "The dsts configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DstsConfiguration"
-        }
-      ]
     },
     "ResourceProviderManifestPropertiesFeaturesRule": {
       "type": "object",
@@ -8683,14 +8204,6 @@
           },
           "x-ms-identifiers": []
         },
-        "serviceTreeInfos": {
-          "type": "array",
-          "description": "The service tree infos.",
-          "items": {
-            "$ref": "#/definitions/ServiceTreeInfo"
-          },
-          "x-ms-identifiers": []
-        },
         "requestHeaderOptions": {
           "$ref": "#/definitions/ResourceTypeRequestHeaderOptions",
           "description": "The request header options."
@@ -8897,122 +8410,11 @@
             "type": "string"
           }
         },
-        "dstsConfiguration": {
-          "$ref": "#/definitions/ResourceTypeEndpointDstsConfiguration",
-          "description": "The dsts configuration."
-        },
         "dataBoundary": {
           "$ref": "#/definitions/DataBoundary",
           "description": "The data boundary."
         }
       }
-    },
-    "ResourceTypeEndpointBase": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether it's enabled."
-        },
-        "apiVersions": {
-          "type": "array",
-          "description": "The api versions.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "endpointUri": {
-          "type": "string",
-          "description": "The endpoint uri."
-        },
-        "locations": {
-          "type": "array",
-          "description": "The locations.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "requiredFeatures": {
-          "type": "array",
-          "description": "The required features.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "featuresRule": {
-          "$ref": "#/definitions/ResourceTypeEndpointBaseFeaturesRule",
-          "description": "The features rule."
-        },
-        "timeout": {
-          "type": "string",
-          "format": "duration",
-          "description": "This is a TimeSpan property."
-        },
-        "endpointType": {
-          "$ref": "#/definitions/EndpointType",
-          "description": "The endpoint type."
-        },
-        "dstsConfiguration": {
-          "$ref": "#/definitions/ResourceTypeEndpointBaseDstsConfiguration",
-          "description": "The dsts configuration."
-        },
-        "skuLink": {
-          "type": "string",
-          "description": "The sku link."
-        },
-        "apiVersion": {
-          "type": "string",
-          "description": "The api version."
-        },
-        "zones": {
-          "type": "array",
-          "description": "The zones.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "enabled",
-        "apiVersions",
-        "endpointUri",
-        "locations",
-        "requiredFeatures",
-        "featuresRule",
-        "timeout",
-        "endpointType",
-        "dstsConfiguration",
-        "skuLink",
-        "apiVersion",
-        "zones"
-      ]
-    },
-    "ResourceTypeEndpointBaseDstsConfiguration": {
-      "type": "object",
-      "description": "The dsts configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DstsConfiguration"
-        }
-      ]
-    },
-    "ResourceTypeEndpointBaseFeaturesRule": {
-      "type": "object",
-      "description": "The features rule.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FeaturesRule"
-        }
-      ]
-    },
-    "ResourceTypeEndpointDstsConfiguration": {
-      "type": "object",
-      "description": "The dsts configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DstsConfiguration"
-        }
-      ]
     },
     "ResourceTypeEndpointFeaturesRule": {
       "type": "object",
@@ -9413,14 +8815,6 @@
             "type": "string"
           }
         },
-        "serviceTreeInfos": {
-          "type": "array",
-          "description": "The service tree infos.",
-          "items": {
-            "$ref": "#/definitions/ServiceTreeInfo"
-          },
-          "x-ms-identifiers": []
-        },
         "requestHeaderOptions": {
           "$ref": "#/definitions/ResourceTypeRegistrationPropertiesRequestHeaderOptions",
           "description": "The request header options."
@@ -9573,10 +8967,6 @@
         "availabilityZoneRule": {
           "$ref": "#/definitions/ResourceTypeRegistrationPropertiesAvailabilityZoneRule",
           "description": "The availability zone rule."
-        },
-        "dstsConfiguration": {
-          "$ref": "#/definitions/ResourceTypeRegistrationPropertiesDstsConfiguration",
-          "description": "The dsts configuration."
         },
         "asyncTimeoutRules": {
           "type": "array",
@@ -9735,15 +9125,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/CheckNameAvailabilitySpecifications"
-        }
-      ]
-    },
-    "ResourceTypeRegistrationPropertiesDstsConfiguration": {
-      "type": "object",
-      "description": "The dsts configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DstsConfiguration"
         }
       ]
     },
@@ -10233,28 +9614,6 @@
         ]
       }
     },
-    "ServiceFeatureFlagAction": {
-      "type": "string",
-      "description": "The service feature flag.",
-      "enum": [
-        "DoNotCreate",
-        "Create"
-      ],
-      "x-ms-enum": {
-        "name": "ServiceFeatureFlagAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DoNotCreate",
-            "value": "DoNotCreate"
-          },
-          {
-            "name": "Create",
-            "value": "Create"
-          }
-        ]
-      }
-    },
     "ServiceStatus": {
       "type": "string",
       "description": "The status.",
@@ -10275,23 +9634,6 @@
             "value": "Inactive"
           }
         ]
-      }
-    },
-    "ServiceTreeInfo": {
-      "type": "object",
-      "properties": {
-        "serviceId": {
-          "type": "string",
-          "description": "The service id."
-        },
-        "componentId": {
-          "type": "string",
-          "description": "The component id."
-        },
-        "readiness": {
-          "$ref": "#/definitions/Readiness",
-          "description": "The readiness."
-        }
       }
     },
     "SignedRequestScope": {

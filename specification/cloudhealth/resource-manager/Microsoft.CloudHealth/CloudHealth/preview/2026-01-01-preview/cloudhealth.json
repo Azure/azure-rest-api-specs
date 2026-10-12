@@ -2193,10 +2193,8 @@
           "maxLength": 256
         },
         "dimensionFilter": {
-          "type": "string",
-          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
-          "minLength": 1,
-          "maxLength": 256
+          "$ref": "#/definitions/string2048",
+          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set."
         },
         "displayName": {
           "type": "string",
@@ -3580,10 +3578,8 @@
           "maxLength": 256
         },
         "dimensionFilter": {
-          "type": "string",
-          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
-          "minLength": 1,
-          "maxLength": 256
+          "$ref": "#/definitions/string2048",
+          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set."
         }
       },
       "required": [
@@ -4013,6 +4009,12 @@
       "type": "string",
       "description": "Type for signal name.",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+    },
+    "string2048": {
+      "type": "string",
+      "description": "String with max length validation of 2048 characters",
+      "minLength": 1,
+      "maxLength": 2048
     },
     "string4096": {
       "type": "string",

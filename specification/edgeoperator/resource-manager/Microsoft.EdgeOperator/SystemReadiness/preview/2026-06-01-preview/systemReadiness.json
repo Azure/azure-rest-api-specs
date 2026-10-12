@@ -1,0 +1,196 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.EdgeOperator - Azure Local Disconnected Operations system readiness",
+    "version": "2026-06-01-preview",
+    "description": "Microsoft.EdgeOperator Resource Provider management API for Azure Local Disconnected Operations (ALDO) system readiness.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "SystemReadinessOperations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.EdgeOperator/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOperator/systemReadiness/default": {
+      "get": {
+        "operationId": "SystemReadinessOperations_Get",
+        "tags": [
+          "SystemReadinessOperations"
+        ],
+        "description": "Gets the Azure Local Disconnected Operations (ALDO) system readiness status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SystemReadiness"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SystemReadinessOperations_Get": {
+            "$ref": "./examples/SystemReadinessOperations_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SystemReadiness": {
+      "type": "object",
+      "description": "The system readiness status for Azure Local Disconnected Operations (ALDO).\nReports whether the ALDO system is ready. This is a read-only singleton resource — the only\naccepted resource name is `default`.\n\nThe subscription in the request path must be the Operator subscription. This subscription is used\nonly for the access check: the resource provider verifies it on every request, and only operators\nhave access to the Operator subscription and can therefore invoke the Microsoft.EdgeOperator APIs.\nRequests scoped to any other subscription are rejected.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SystemReadinessProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SystemReadinessCategory": {
+      "type": "object",
+      "description": "The readiness state reported for a single provider-defined category.",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "The provider-defined name of the readiness category (for example, `services`, `diagnostics`, `identity`, `networking`). Categories may be added, renamed, or removed without an API-version change and must be treated as an open string."
+        },
+        "readinessPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The readiness percentage reported by the category, from 0 (not ready) to 100 (fully ready).",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "errorMessageDetails": {
+          "type": "array",
+          "description": "The error messages reported for the category. The list is empty when no specific errors are available.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "categoryName",
+        "readinessPercentage",
+        "errorMessageDetails"
+      ]
+    },
+    "SystemReadinessProperties": {
+      "type": "object",
+      "description": "The readiness state of the Azure Local Disconnected Operations (ALDO) system.\nAll fields are computed by the resource provider and are read-only.",
+      "properties": {
+        "systemReady": {
+          "type": "boolean",
+          "description": "Indicates whether the system is ready. `true` when every readiness category has reported 100 percent.",
+          "readOnly": true
+        },
+        "categories": {
+          "type": "array",
+          "description": "The readiness state reported for each provider-defined category.",
+          "items": {
+            "$ref": "#/definitions/SystemReadinessCategory"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "categoryName"
+          ]
+        }
+      },
+      "required": [
+        "systemReady",
+        "categories"
+      ]
+    }
+  },
+  "parameters": {}
+}

@@ -40,6 +40,7 @@ model ErrorDetail {
 /**
  * The error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /** The error detail body. */
@@ -65,6 +66,7 @@ model ClientDetail {
 /**
  * The response object containing the client access token
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClientTokenResponse {
   /** Access token for the client to connect Azure Web PubSub service */
   token: string;
@@ -73,6 +75,7 @@ model ClientTokenResponse {
 /**
  * Request object to add connections to groups
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AddToGroupsRequest {
   /** Target groups */
   groups: string[];
@@ -84,6 +87,7 @@ model AddToGroupsRequest {
 /**
  * Request object to remove connections from groups
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RemoveFromGroupsRequest {
   /** Target groups */
   groups: string[];

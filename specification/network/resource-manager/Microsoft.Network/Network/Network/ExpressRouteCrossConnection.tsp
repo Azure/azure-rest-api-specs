@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/main.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
@@ -285,6 +287,126 @@ interface ExpressRouteCrossConnections {
         >,
     OverrideErrorType = CloudError
   >;
+
+  /**
+   * Validates express route circuit migration for a cross connection.
+   */
+  @tag("ExpressRouteCrossConnections")
+  @action("validateCircuitMigration")
+  @added(Versions.v2026_01_01)
+  @Azure.Core.useFinalStateVia("location")
+  validateCircuitMigration is ArmResourceActionAsync<
+    ExpressRouteCrossConnection,
+    MigrateExpressRouteCircuitValidateAndHealthCheckRequest,
+    MigrateExpressRouteCircuitValidateResponse,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateExpressRouteCircuitValidateResponse>,
+    Error = CloudError
+  >;
+
+  /**
+   * Gets migration health information for an express route circuit cross connection.
+   */
+  @tag("ExpressRouteCrossConnections")
+  @action("getCircuitMigrationInfo")
+  @added(Versions.v2026_01_01)
+  @Azure.Core.useFinalStateVia("location")
+  getCircuitMigrationInfo is ArmResourceActionAsync<
+    ExpressRouteCrossConnection,
+    MigrateExpressRouteCircuitValidateAndHealthCheckRequest,
+    MigrateExpressRouteCircuitHealthCheckResponse,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateExpressRouteCircuitHealthCheckResponse>,
+    Error = CloudError
+  >;
+
+  /**
+   * Prepares an express route circuit migration for a cross connection.
+   */
+  @tag("ExpressRouteCrossConnections")
+  @action("prepareCircuitMigration")
+  @added(Versions.v2026_01_01)
+  @Azure.Core.useFinalStateVia("location")
+  prepareCircuitMigration is ArmResourceActionAsync<
+    ExpressRouteCrossConnection,
+    MigrateExpressRouteCircuitRequest,
+    MigrateExpressRouteCircuitHealthCheckResponse,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateExpressRouteCircuitHealthCheckResponse>,
+    Error = CloudError
+  >;
+
+  /**
+   * Shuts down BGP sessions as part of an express route circuit migration for a cross connection.
+   */
+  @tag("ExpressRouteCrossConnections")
+  @action("shutDownBgpForCircuitMigration")
+  @added(Versions.v2026_01_01)
+  @Azure.Core.useFinalStateVia("location")
+  shutDownBgpForCircuitMigration is ArmResourceActionAsync<
+    ExpressRouteCrossConnection,
+    MigrateExpressRouteCircuitRequest,
+    MigrateExpressRouteCircuitHealthCheckResponse,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateExpressRouteCircuitHealthCheckResponse>,
+    Error = CloudError
+  >;
+
+  /**
+   * Restores BGP sessions as part of an express route circuit migration for a cross connection.
+   */
+  @tag("ExpressRouteCrossConnections")
+  @action("restoreBgpForCircuitMigration")
+  @added(Versions.v2026_01_01)
+  @Azure.Core.useFinalStateVia("location")
+  restoreBgpForCircuitMigration is ArmResourceActionAsync<
+    ExpressRouteCrossConnection,
+    MigrateExpressRouteCircuitRequest,
+    MigrateExpressRouteCircuitHealthCheckResponse,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateExpressRouteCircuitHealthCheckResponse>,
+    Error = CloudError
+  >;
+
+  /**
+   * Executes the express route circuit migration for a cross connection.
+   */
+  @tag("ExpressRouteCrossConnections")
+  @action("migrateCircuit")
+  @added(Versions.v2026_01_01)
+  @Azure.Core.useFinalStateVia("location")
+  migrateCircuit is ArmResourceActionAsync<
+    ExpressRouteCrossConnection,
+    MigrateExpressRouteCircuitRequest,
+    MigrateExpressRouteCircuitHealthCheckResponse,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateExpressRouteCircuitHealthCheckResponse>,
+    Error = CloudError
+  >;
+
+  /**
+   * Commits the express route circuit migration for a cross connection.
+   */
+  @tag("ExpressRouteCrossConnections")
+  @action("commitCircuitMigration")
+  @added(Versions.v2026_01_01)
+  @Azure.Core.useFinalStateVia("location")
+  commitCircuitMigration is ArmResourceActionAsync<
+    ExpressRouteCrossConnection,
+    MigrateExpressRouteCircuitRequest,
+    MigrateExpressRouteCircuitHealthCheckResponse,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateExpressRouteCircuitHealthCheckResponse>,
+    Error = CloudError
+  >;
+
+  /**
+   * Rolls back the express route circuit migration for a cross connection.
+   */
+  @tag("ExpressRouteCrossConnections")
+  @action("rollbackCircuitMigration")
+  @added(Versions.v2026_01_01)
+  @Azure.Core.useFinalStateVia("location")
+  rollbackCircuitMigration is ArmResourceActionAsync<
+    ExpressRouteCrossConnection,
+    MigrateExpressRouteCircuitRequest,
+    MigrateExpressRouteCircuitHealthCheckResponse,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateExpressRouteCircuitHealthCheckResponse>,
+    Error = CloudError
+  >;
 }
 
 @@doc(
@@ -306,4 +428,36 @@ interface ExpressRouteCrossConnections {
 @@doc(
   ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
   "Parameters supplied to the create or update ExpressRouteCrossConnection peering operation."
+);
+@@doc(
+  ExpressRouteCrossConnections.validateCircuitMigration::parameters.body,
+  "Parameters supplied to validate express route circuit migration."
+);
+@@doc(
+  ExpressRouteCrossConnections.getCircuitMigrationInfo::parameters.body,
+  "Parameters supplied to get express route circuit migration information."
+);
+@@doc(
+  ExpressRouteCrossConnections.prepareCircuitMigration::parameters.body,
+  "Parameters supplied to prepare the express route circuit migration."
+);
+@@doc(
+  ExpressRouteCrossConnections.shutDownBgpForCircuitMigration::parameters.body,
+  "Parameters supplied to shut down BGP for the express route circuit migration."
+);
+@@doc(
+  ExpressRouteCrossConnections.restoreBgpForCircuitMigration::parameters.body,
+  "Parameters supplied to restore BGP for the express route circuit migration."
+);
+@@doc(
+  ExpressRouteCrossConnections.migrateCircuit::parameters.body,
+  "Parameters supplied to execute the express route circuit migration."
+);
+@@doc(
+  ExpressRouteCrossConnections.commitCircuitMigration::parameters.body,
+  "Parameters supplied to commit the express route circuit migration."
+);
+@@doc(
+  ExpressRouteCrossConnections.rollbackCircuitMigration::parameters.body,
+  "Parameters supplied to roll back the express route circuit migration."
 );

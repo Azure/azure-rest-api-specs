@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01",
+    "ddosCustomPolicyName": "test-ddos-custom-policy",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-ddos-custom-policy",
+        "type": "Microsoft.Network/ddosCustomPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy",
+        "location": "westus",
+        "properties": {
+          "detectionRules": [
+            {
+              "name": "detectionRuleTcp",
+              "type": "Microsoft.Network/ddosCustomPolicies/ddosDetectionRules",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy/ddosDetectionRules/detectionRuleTcp",
+              "properties": {
+                "detectionMode": "TrafficThreshold",
+                "provisioningState": "Succeeded",
+                "trafficDetectionRule": {
+                  "packetsPerSecond": 1000000,
+                  "trafficType": "Tcp"
+                }
+              }
+            }
+          ],
+          "mitigationRules": [
+            {
+              "name": "mitigationRuleTcp",
+              "type": "Microsoft.Network/ddosCustomPolicies/ddosMitigationRules",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy/ddosMitigationRules/mitigationRuleTcp",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "trafficScope": "Tcp",
+                "tcpDefaultMitigations": {
+                  "perSourceRateLimiting": {
+                    "packetsPerSecond": 100000
+                  },
+                  "perSourceConnectionRateLimiting": {
+                    "connectionsPerSecond": 1000
+                  }
+                },
+                "sourcePolicyOverrides": [
+                  {
+                    "policyAction": {
+                      "actionType": "Deny"
+                    },
+                    "conditions": {
+                      "ipPrefixes": [
+                        "198.51.100.0/24"
+                      ],
+                      "geoMatches": [
+                        {
+                          "countryCode": "CA"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "policyAction": {
+                      "actionType": "Permit"
+                    },
+                    "conditions": {
+                      "ipPrefixes": [
+                        "203.0.113.0/24"
+                      ],
+                      "geoMatches": [
+                        {
+                          "continent": "NorthAmerica"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "mitigationRuleUdp",
+              "type": "Microsoft.Network/ddosCustomPolicies/ddosMitigationRules",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/ddosCustomPolicies/test-ddos-custom-policy/ddosMitigationRules/mitigationRuleUdp",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "trafficScope": "Udp",
+                "udpDefaultMitigations": {
+                  "perSourceRateLimiting": {
+                    "packetsPerSecond": 50000
+                  }
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    }
+  },
+  "operationId": "DdosCustomPolicies_Get",
+  "title": "Get DDoS custom policy"
+}

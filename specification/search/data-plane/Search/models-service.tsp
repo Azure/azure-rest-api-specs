@@ -7365,6 +7365,14 @@ model ContentUnderstandingSkill extends SearchIndexerSkill {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   chunkingProperties?: ContentUnderstandingSkillChunkingProperties | null;
 
+  /** The name of the chat-completion model used for image description. Must be provided together with modelDeployment. */
+  @added(Versions.v2026_05_01_preview)
+  modelName?: string;
+
+  /** The deployment name of the chat-completion model used for image description. Must be provided together with modelName. */
+  @added(Versions.v2026_05_01_preview)
+  modelDeployment?: string;
+
   /** A URI fragment specifying the type of skill. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Util.ContentUnderstandingSkill";

@@ -30,7 +30,7 @@ vi.mock("node:fs/promises", async () => {
 });
 
 import { Readme } from "@azure-tools/specs-shared/readme";
-import { readFile } from "fs/promises";
+import { readFile } from "node:fs/promises";
 
 vi.mock("../src/util.ts", async () => {
   const original = await vi.importActual("../src/util.ts");
