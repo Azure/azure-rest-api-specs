@@ -2304,9 +2304,7 @@ op protectionPolicyOperationStatusesGet(
   "BackupOperationStatusValidateOperationExtendedInfo",
   "csharp"
 );
-// NOTE: #9 (childDBNames -> ChildDbNames) is handled SDK-side via [CodeGenMember] in the
-// .NET repo. A property-level @clientName here does not survive the repeated @added/@removed
-// version projection on AzureVmWorkloadSQLInstanceProtectedItem, so it is intentionally omitted.
+
 @@clientName(
   ValidateAzureWorkloadRestoreOperationRequest,
   "ValidateAzureWorkloadRestoreOperationContent",

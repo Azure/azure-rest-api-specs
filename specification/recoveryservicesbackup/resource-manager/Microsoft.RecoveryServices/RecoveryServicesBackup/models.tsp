@@ -4940,7 +4940,8 @@ model AzureVmWorkloadSQLInstanceProtectedItem extends ProtectedItem {
   /**
    * Name of Child Dbs protected under this parent.
    */
-  childDBNames?: string[];
+  @renamedFrom(Versions.v2026_10_01, "childDBNames")
+  childDatabaseNameList?: string[];
 
   /**
    * The state of instance protection.
