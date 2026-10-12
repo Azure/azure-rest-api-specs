@@ -43,7 +43,7 @@ interface Jobs {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
-  @doc("Get a job resource by name, including its execution state in `properties.status`. This is a resource read, not an operation-status monitor. To observe training or cancellation, repeat this request at a client-selected interval; the service does not specify an execution-polling interval. `Completed`, `Failed`, and `Canceled` are terminal execution states. A missing or soft-deleted job returns 404.")
+  @doc("Get a job resource by name, including execution state in `properties.status` and stored failure diagnostics in `properties.error` when available. HTTP 200 means the resource was read successfully, not that training succeeded: Failed and Canceled jobs also return 200. This is a resource read, not an operation-status monitor. To observe training or cancellation, repeat this request at a client-selected interval; the service does not specify an execution-polling interval and runtime-dependent stages may be skipped. Only Completed, Failed, and Canceled are terminal execution states; tolerate additional values without assuming completion. On Failed, inspect the structured diagnostic codes/message, then list log artifacts and request content information for the selected exact path before downloading it. Missing diagnostics or logs do not imply success. Cancellation can finish as Completed or Failed rather than Canceled. A missing or soft-deleted job returns 404.")
   @get
   get is Azure.Core.Foundations.ResourceOperation<
     Job,

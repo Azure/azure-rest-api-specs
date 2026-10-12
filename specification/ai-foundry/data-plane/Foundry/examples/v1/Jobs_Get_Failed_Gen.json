@@ -15,7 +15,19 @@
           "command": "python train.py",
           "environmentImageReference": "mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04:latest",
           "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
-          "status": "Failed"
+          "status": "Failed",
+          "error": {
+            "code": "UserError",
+            "message": "The training command failed. Inspect user_logs/std_log.txt for details.",
+            "referenceCode": "ExampleRuntimeFailure",
+            "target": null,
+            "details": [],
+            "innerError": {
+              "code": "ExampleCommandFailure",
+              "innerError": null
+            },
+            "detailsUri": null
+          }
         }
       }
     }
