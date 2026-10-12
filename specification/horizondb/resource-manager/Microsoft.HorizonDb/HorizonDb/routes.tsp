@@ -43,7 +43,6 @@ interface HorizonDbClusters {
   @doc("Lists all HorizonDB clusters in a subscription.")
   listBySubscription is ArmListBySubscription<HorizonDbCluster>;
 
-  //@added(Versions.v2026_05_01_preview)
   @doc("Starts a stopped HorizonDB cluster.")
   start is ArmResourceActionAsync<
     HorizonDbCluster,
@@ -52,7 +51,6 @@ interface HorizonDbClusters {
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  //@added(Versions.v2026_05_01_preview)
   @doc("Stops a running HorizonDB cluster.")
   stop is ArmResourceActionAsync<
     HorizonDbCluster,
@@ -61,7 +59,6 @@ interface HorizonDbClusters {
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  //@added(Versions.v2026_05_01_preview)
   @doc("Restarts a HorizonDB cluster.")
   restart is ArmResourceActionAsync<
     HorizonDbCluster,
@@ -144,15 +141,7 @@ interface HorizonDbPrivateEndpointConnections {
     PrivateEndpointConnectionResource
   >;
 
-  @doc("Updates a private endpoint connection.")
-  //@removed(Versions.v2026_05_01_preview)
-  update is HorizonDbPrivateEndpointOperations.CustomPatchAsync<
-    HorizonDbCluster,
-    PrivateEndpointConnectionResource
-  >;
-
   @doc("Approves or rejects a private endpoint connection.")
-  //@added(Versions.v2026_05_01_preview)
   updateStatus is HorizonDbPrivateEndpointOperations.CreateOrReplaceSync<
     HorizonDbCluster,
     PrivateEndpointConnectionResource
@@ -234,7 +223,6 @@ interface HorizonDbParameterGroups {
   >;
 }
 
-//@added(Versions.v2026_05_01_preview)
 @armResourceOperations
 interface HorizonDbAdministrators {
   @doc("Gets information about a HorizonDB administrator.")

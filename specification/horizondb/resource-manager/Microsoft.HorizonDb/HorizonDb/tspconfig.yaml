@@ -10,8 +10,9 @@ options:
     use-read-only-status-schema: true
     output-file: "{version-status}/{version}/openapi.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    examples-dir: "{project-root}/examples"
+    examples-dir: "{project-root}/{version-status}/{version}/examples"
     emit-lro-options: "all"
+    skip-example-copying: true
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-horizondb"
     namespace: "azure.mgmt.horizondb"

@@ -181,23 +181,19 @@ model HorizonDbClusterProperties {
   @visibility(Lifecycle.Update, Lifecycle.Read)
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
 
-  //@added(Versions.v2026_05_01_preview)
   @doc("Authentication configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   authConfig?: HorizonDbClusterAuthConfig;
 
-  //@added(Versions.v2026_05_01_preview)
   @doc("The compute model for the cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   computeModel?: HorizonDbComputeModel;
 
-  //@added(Versions.v2026_05_01_preview)
   @doc("Mirroring configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   mirroring?: HorizonDbClusterMirroring;
 }
 
-//@added(Versions.v2026_05_01_preview)
 @doc("Mirroring configuration for a HorizonDB cluster.")
 model HorizonDbClusterMirroring {
   @doc("The names of the databases to mirror.")
@@ -211,7 +207,6 @@ model HorizonDbClusterMirroring {
   ]>;
 }
 
-//@added(Versions.v2026_05_01_preview)
 @doc("Authentication configuration for a HorizonDB cluster.")
 model HorizonDbClusterAuthConfig {
   @doc("Indicates whether Microsoft Entra ID authentication is enabled or disabled.")
@@ -224,7 +219,6 @@ model HorizonDbClusterAuthConfig {
   passwordAuth?: AuthenticationState;
 }
 
-//@added(Versions.v2026_05_01_preview)
 @doc("The compute model for a HorizonDB cluster.")
 model HorizonDbComputeModel {
   @doc("The compute model type. Supported values: 'Provisioned', 'Serverless'.")
@@ -269,17 +263,14 @@ model HorizonDbClusterPropertiesForPatchUpdate {
   @doc("Defines connection to a parameter group.")
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
 
-  //@added(Versions.v2026_05_01_preview)
   @doc("Authentication configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Update)
   authConfig?: HorizonDbClusterAuthConfig;
 
-  //@added(Versions.v2026_05_01_preview)
   @doc("The compute model for the cluster.")
   @visibility(Lifecycle.Update)
   computeModel?: HorizonDbComputeModel;
 
-  //@added(Versions.v2026_05_01_preview)
   @doc("Mirroring configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Update)
   mirroring?: HorizonDbClusterMirroring;
@@ -293,9 +284,6 @@ model HorizonDbClusterForPatchUpdate {
   @doc("The properties that can be updated for a HorizonDB cluster.")
   properties?: HorizonDbClusterPropertiesForPatchUpdate;
 }
-
-//@@added(HorizonDbCluster.identity, Versions.v2026_05_01_preview);
-//@@added(HorizonDbClusterForPatchUpdate.identity, Versions.v2026_05_01_preview);
 
 @doc("Properties of a HorizonDB pool.")
 model HorizonDbPoolProperties {
@@ -413,7 +401,6 @@ model HorizonDbAdministratorProperties {
   provisioningState?: ProvisioningState;
 }
 
-//@added(Versions.v2026_05_01_preview)
 @doc("The properties for adding a HorizonDB administrator.")
 model HorizonDbAdministratorPropertiesForAdd {
   @doc("The display name or UPN of the Entra ID principal. For users, typically the User Principal Name (e.g., admin@contoso.com). For groups, the group display name. For service principals, the application display name.")
@@ -427,14 +414,12 @@ model HorizonDbAdministratorPropertiesForAdd {
   tenantId?: string;
 }
 
-//@added(Versions.v2026_05_01_preview)
 @doc("The request body for adding a HorizonDB administrator.")
 model HorizonDbAdministratorAdd {
   @doc("The properties for adding a HorizonDB administrator.")
   properties: HorizonDbAdministratorPropertiesForAdd;
 }
 
-//@added(Versions.v2026_05_01_preview)
 @doc("The type of the Entra ID principal.")
 union PrincipalTypes {
   string,
@@ -516,11 +501,9 @@ union State {
   @doc("Is healthy")
   Healthy: "Healthy",
 
-  //@added(Versions.v2026_05_01_preview)
   @doc("Is succeeded")
   Succeeded: "Succeeded",
 
-  //@added(Versions.v2026_05_01_preview)
   @doc("Is upgrading")
   Upgrading: "Upgrading",
 }

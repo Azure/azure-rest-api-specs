@@ -35,7 +35,7 @@ tag: package-horizondb-2026-09-01-preview
 
 These settings apply only when `--tag=package-horizondb-2026-09-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-horizondb-2026-05-01-preview'
+```yaml $(tag) == 'package-horizondb-2026-09-01-preview'
 input-file:
   - preview/2026-09-01-preview/openapi.json
 suppressions:

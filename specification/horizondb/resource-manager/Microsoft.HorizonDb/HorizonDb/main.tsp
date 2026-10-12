@@ -23,7 +23,7 @@ namespace Microsoft.HorizonDb;
 enum Versions {
   @previewVersion
   @doc("The 2026-05-01-preview API version.")
-  v2026_09_preview: "2026-09-01-preview",
+  v2026_10_preview: "2026-10-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
