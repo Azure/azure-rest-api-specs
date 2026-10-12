@@ -252,7 +252,7 @@ test("service observations and consent identity are read-only without a second p
   ]);
   assert.match(
     definitions.WorkspaceEncryptionStatus.properties.error.$ref,
-    /\/v5\/types.json#\/definitions\/ErrorDetail$/,
+    /\/v6\/types.json#\/definitions\/ErrorDetail$/,
   );
   assert.deepEqual(definitions.WorkspaceEncryptionProtection.enum, [
     "CustomerManaged",

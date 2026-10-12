@@ -297,10 +297,9 @@ and observations available without adding a desired CMK object.
 C# client names use a `Uri` suffix through `client.tsp`; the public JSON names
 retain the ARM-preferred `Url` suffix without a wire alias.
 
-The status error uses
-common-types v5 because the existing service selects v5 in `main.tsp`; mixing
-versions conflicts with `SCHEMA-COMMON-TYPES-VERSION`. A service-wide upgrade is
-not part of this change. The nested encryption object preserves the public
+The November API version selects common-types v6; earlier API versions retain
+v5. The existing operation-status location parameter uses the library's v5
+fallback because that legacy parameter has no v6 registration. The nested encryption object preserves the public
 Workspace contract. It is not flattened: the current TypeSpec review guidance
 prohibits new `@flattenProperty` decorators. No common-types or nesting warning
 is suppressed.
