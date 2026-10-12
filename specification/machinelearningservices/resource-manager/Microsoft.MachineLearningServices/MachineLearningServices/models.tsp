@@ -151,6 +151,8 @@ union ComputeType {
   DataLakeAnalytics: "DataLakeAnalytics",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   SynapseSpark: "SynapseSpark",
+  /** An attached Fabric custom Spark pool. */
+  FabricSpark: "FabricSpark",
 }
 
 /**
@@ -11480,6 +11482,34 @@ model SynapseSparkProperties {
   /**
    * Pool name.
    */
+  poolName?: string;
+}
+
+/** An existing Fabric custom Spark pool attached to a Machine Learning workspace. */
+model FabricSpark extends Compute {
+  /** Fabric workspace, Lakehouse, Environment, and Spark pool details. */
+  properties?: FabricSparkProperties;
+
+  /** The type of compute. */
+  computeType: "FabricSpark";
+}
+
+/** Resources belonging to the Fabric compute attachment. */
+model FabricSparkProperties {
+  /** ID of the Fabric workspace. */
+  fabricWorkspaceId: string;
+
+  /** ID of the Fabric Lakehouse. */
+  lakehouseId: string;
+
+  /** ID of the published Fabric Environment. */
+  environmentId: string;
+
+  /** ID of the Fabric custom Spark pool. */
+  poolId: string;
+
+  /** Name of the pool returned by the service. */
+  @visibility(Lifecycle.Read)
   poolName?: string;
 }
 
