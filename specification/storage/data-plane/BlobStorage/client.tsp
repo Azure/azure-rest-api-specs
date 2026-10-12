@@ -203,11 +203,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs", "rust,go");
 @@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs", "rust,go");
 
-@@clientName(
-  LeaseDurationHeaderParameter.duration,
-  "renamed_duration",
-  "rust"
-);
+@@scope(ProposedLeaseIdOptionalParameter.proposedLeaseId, "!rust");
 
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
 @@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
