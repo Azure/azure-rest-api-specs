@@ -52,14 +52,12 @@ model HorizonDbClusterManagedServiceIdentityProperty {
   identity?: HorizonDbClusterManagedServiceIdentity;
 }
 
-@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbCluster")
 @doc("Represents the HorizonDB cluster.")
 model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
   @doc("The name of the HorizonDB cluster.")
   @key("clusterName")
   @path
   @segment("clusters")
-  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyClusterName)
   name: ClusterName;
 
   ...HorizonDbClusterManagedServiceIdentityProperty;
@@ -77,19 +75,16 @@ scalar LegacyPoolName extends string;
 @maxLength(63)
 scalar PoolName extends string;
 
-@added(Versions.v2026_10_01_preview)
 @doc("A provisioned HorizonDB pool compute capacity in vCores, from 1 through 192.")
 @minValue(1)
 @maxValue(192)
 scalar PoolVCores extends int32;
 
-@added(Versions.v2026_10_01_preview)
 @doc("A HorizonDB pool node count, from 1 through 16.")
 @minValue(1)
 @maxValue(16)
 scalar PoolNodeCount extends int32;
 
-@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPool")
 @doc("Represents the HorizonDB pool.")
 @parentResource(Cluster)
 model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
@@ -97,20 +92,15 @@ model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
   @key("poolName")
   @path
   @segment("pools")
-  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyPoolName)
   name: PoolName;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
-@@removed(Pool.tags, Versions.v2026_10_01_preview);
-
-@added(Versions.v2026_10_01_preview)
 @doc("An IPv4 address in dotted-decimal notation.")
 @pattern("^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])[.]){3}(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$")
 scalar DottedDecimalIpv4Address extends string;
 
-@added(Versions.v2026_10_01_preview)
 @doc("Represents a customer-managed firewall rule for a HorizonDB pool.")
 @parentResource(Pool)
 model FirewallRule
@@ -125,7 +115,6 @@ model FirewallRule
   name: string;
 }
 
-@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPrivateLinkResource")
 @doc("Represents the HorizonDB private link resource.")
 @parentResource(Cluster)
 model PrivateLinkResource
@@ -140,7 +129,6 @@ model PrivateLinkResource
   name: string;
 }
 
-@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbParameterGroup")
 @doc("Represents the HorizonDB parameter group.")
 model ParameterGroup
   is Azure.ResourceManager.TrackedResource<ParameterGroupProperties> {
@@ -154,7 +142,6 @@ model ParameterGroup
   name: string;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Represents a PostgreSQL role that is a member of the azure_pg_admin role and is mapped to a Microsoft Entra principal.")
 @parentResource(Cluster)
 model MicrosoftEntraAdministrator
@@ -167,7 +154,6 @@ model MicrosoftEntraAdministrator
   name: string;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The name of the PostgreSQL username-and-password authentication method.")
 union PasswordAuthenticationName {
   string,
@@ -176,7 +162,6 @@ union PasswordAuthenticationName {
   PasswordMethod: "passwordMethod",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The service-created PostgreSQL username-and-password authentication method for a HorizonDB cluster. This resource configures the authentication mechanism, including its enabled state and administrator login credentials; it is not a password-only resource.")
 @singleton("passwordMethod")
 @parentResource(Cluster)
@@ -190,7 +175,6 @@ model PasswordAuthentication
   >;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The name of the Microsoft Entra authentication method.")
 union MicrosoftEntraAuthenticationName {
   string,
@@ -199,7 +183,6 @@ union MicrosoftEntraAuthenticationName {
   MicrosoftEntra: "microsoftEntra",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The service-created Microsoft Entra authentication method for a HorizonDB cluster.")
 @singleton("microsoftEntra")
 @parentResource(Cluster)
@@ -213,60 +196,20 @@ model MicrosoftEntraAuthentication
   >;
 }
 
-@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbClusterProperties")
 @doc("Properties of a HorizonDB cluster.")
 model ClusterProperties {
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The administrator login name.")
-  @minLength(1)
-  @maxLength(63)
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  administratorLogin: string;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The administrator login password.")
-  @secret
-  @minLength(8)
-  @maxLength(128)
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  administratorLoginPassword?: string;
-
-  @removed(Versions.v2026_10_01_preview)
-  @renamedFrom(Versions.v2026_10_01_preview, "version")
-  @doc("The version of the HorizonDB cluster.")
-  legacyPgVersion?: string;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("The PostgreSQL major version used by the HorizonDB cluster. API version 2026-10-01-preview supports versions 17 and 18. For ordinary cluster creation, the version is supplied in the request and is immutable after creation. For point-in-time restore, the service obtains the version from the source backup metadata and the request must omit this property. This API version does not support in-place PostgreSQL major-version upgrades.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   postgreSqlVersion?: PostgreSqlVersion;
 
-  @removed(Versions.v2026_10_01_preview)
-  @renamedFrom(Versions.v2026_10_01_preview, "createMode")
-  @doc("The mode to create a new HorizonDB cluster.")
-  legacyCreateMode?: CreateModeCluster;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must be omitted because it is obtained from the backup metadata, and creationSourceClusterLocation is required when the source and target cluster locations differ. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   creationMode?: ClusterCreateMode;
 
-  @removed(Versions.v2026_10_01_preview)
-  @renamedFrom(Versions.v2026_10_01_preview, "pointInTimeUTC")
-  @doc("Restore point creation time specifying the time to restore from.")
-  legacyPointInTime?: utcDateTime;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("The requested point in time, in UTC. This property is required in every PointInTimeRestore request. For a same-location restore, the service restores the latest backup available at or before this value. For a cross-location restore, the service requires but ignores this value and restores the latest available backup; cross-location responses omit this property. This property must be absent for other creation modes or when creationMode is omitted and can only be specified during resource creation.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   pointInTimeUtc?: utcDateTime;
 
-  @removed(Versions.v2026_10_01_preview)
-  @renamedFrom(Versions.v2026_10_01_preview, "sourceClusterResourceId")
-  @doc("The source cluster resource ID for restore or replica creation.")
-  legacySourceClusterResourceId?: armResourceIdentifier;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("The Azure resource ID of the source HorizonDB cluster used by the selected creation mode. This property is required for PointInTimeRestore and other source-based creation modes, and must be absent when creationMode is Create or omitted. A source cluster does not need to have a pool to be restored, provided an available backup exists. This immutable creation-provenance value does not change after creation.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   creationSourceClusterResourceId?: armResourceIdentifier<[
@@ -275,92 +218,36 @@ model ClusterProperties {
     }
   ]>;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The Azure location of the source HorizonDB cluster used for point-in-time restore. This property is optional when the source and target cluster locations are the same. It is required when the source cluster location differs from the target cluster location and must identify the source cluster's location. This property must be absent for creation modes other than PointInTimeRestore or when creationMode is omitted. This immutable creation-provenance value does not change after creation.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   creationSourceClusterLocation?: string;
 
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The pool name for restore or replica operations.")
-  poolName?: string;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Number of replicas.")
-  @minValue(1)
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  replicaCount?: int32;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Number of vCores.")
-  @minValue(1)
-  @maxValue(96)
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  vCores?: int32;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The processor type for the HorizonDB cluster.")
-  processorType?: string;
-
-  @removed(Versions.v2026_10_01_preview)
-  @renamedFrom(Versions.v2026_10_01_preview, "network")
-  @doc("The network related info.")
-  legacyNetwork?: Network;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("The network configuration for the cluster. When this object is omitted, the service defaults it to publicAccess Disabled.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   network?: Network = #{ publicAccess: "Disabled" };
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The backup configuration for the cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   backup?: BackupProperties;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The data encryption configuration for the cluster. When omitted during initial cluster creation, the service uses SystemManaged encryption. When supplied during initial cluster creation, type is required. For PUT updates of an existing cluster, type may be omitted; if provided, it must match the existing encryption type. The encryption type is selected at cluster creation; switching between SystemManaged and AzureKeyVault after creation is not supported.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   dataEncryption?: HorizonDbClusterDataEncryption;
 
-  @typeChangedFrom(Versions.v2026_10_01_preview, State)
-  @madeRequired(Versions.v2026_10_01_preview)
   @doc("Current state of the cluster.")
   @visibility(Lifecycle.Read)
   state: ClusterState;
 
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The fully qualified domain name of the cluster.")
-  @visibility(Lifecycle.Read)
-  fullyQualifiedDomainName?: string;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The fully qualified domain name used for readonly endpoint for the cluster.")
-  @visibility(Lifecycle.Read)
-  readonlyEndpoint?: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "API version 2026-10-01-preview guarantees provisioningState in every Cluster response; the 2026-01-20-preview projection remains optional."
-  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyProvisioningState)
-  @madeRequired(Versions.v2026_10_01_preview)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The service guarantees provisioningState in every Cluster response."
   @doc("The provisioning state of the cluster.")
   @visibility(Lifecycle.Read)
   provisioningState: ProvisioningState;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The pool currently designated to host the cluster's read-write node.")
   @visibility(Lifecycle.Read)
   readWritePool: ReadWritePoolProperties;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Defines how replicas are placed across availability zones.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  zonePlacementPolicy?: ZonePlacementEnforcement;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Defines connection to a parameter group.")
-  @visibility(Lifecycle.Update, Lifecycle.Read)
-  parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The pool currently designated to host a HorizonDB cluster's read-write node. When a pool is created while the cluster currently has no pools, the service automatically designates the new pool as the read-write pool. This behavior also applies after all pools that existed earlier in the cluster's lifetime have been deleted.")
 model ReadWritePoolProperties {
   @doc("The Azure resource ID of the pool designated to host the cluster's read-write node. The pool is a child resource of this cluster. When a pool is created while the cluster currently has no pools, the service automatically sets this property to the new pool's resource ID, including when all pools that existed earlier in the cluster's lifetime were deleted. This property is absent when no pool is designated, such as after clearReadWritePool succeeds.")
@@ -368,7 +255,6 @@ model ReadWritePoolProperties {
   designatedPoolResourceId?: PoolResourceId;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("An Azure resource ID that identifies a HorizonDB cluster.")
 scalar HorizonDbClusterResourceId
   extends armResourceIdentifier<[
@@ -377,7 +263,6 @@ scalar HorizonDbClusterResourceId
     }
   ]>;
 
-@added(Versions.v2026_10_01_preview)
 @doc("The Azure resource ID of a HorizonDB pool.")
 scalar PoolResourceId
   extends armResourceIdentifier<[
@@ -386,21 +271,18 @@ scalar PoolResourceId
     }
   ]>;
 
-@added(Versions.v2026_10_01_preview)
 @doc("Long-running operation headers returned while creating or replacing a HorizonDB resource.")
 model HorizonDbResourceLroHeaders<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
   ...ArmAsyncOperationHeader<FinalResult = Resource>;
   ...Azure.Core.Foundations.RetryAfterHeader;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The response returned when an asynchronous HorizonDB resource replacement is accepted.")
 model HorizonDbResourceUpdatedLroResponse<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
   ...ArmResourceUpdatedResponse<Resource>;
   ...HorizonDbResourceLroHeaders<Resource>;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The response returned when asynchronous HorizonDB pool creation is accepted.")
 model PoolCreateAcceptedResponse {
   ...CreatedResponse;
@@ -411,48 +293,21 @@ model PoolCreateAcceptedResponse {
   body: Pool;
 }
 
-@renamedFrom(
-  Versions.v2026_10_01_preview,
-  "HorizonDbClusterPropertiesForPatchUpdate"
-)
 @doc("Properties of a HorizonDB cluster for update operations.")
 model ClusterPropertiesForPatchUpdate {
-  @removed(Versions.v2026_10_01_preview)
-  @secret
-  @minLength(8)
-  @maxLength(128)
-  @doc("The administrator login password.")
-  @visibility(Lifecycle.Update)
-  administratorLoginPassword?: string;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("The network configuration to update for the cluster.")
   @visibility(Lifecycle.Update)
   network?: NetworkForPatchUpdate;
 
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Number of vCores.")
-  @minValue(1)
-  @maxValue(96)
-  @visibility(Lifecycle.Update)
-  vCores?: int32;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Defines connection to a parameter group.")
-  parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("The backup configuration for the cluster.")
   @visibility(Lifecycle.Update)
   backup?: BackupPropertiesForPatchUpdate;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The data encryption configuration to update for the cluster. Omitted properties preserve their current values. Updates can modify settings within the existing encryption type, but switching between SystemManaged and AzureKeyVault after cluster creation is not supported.")
   @visibility(Lifecycle.Update)
   dataEncryption?: HorizonDbClusterDataEncryptionForPatchUpdate;
 }
 
-@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbClusterForPatchUpdate")
 @doc("HorizonDB cluster for update operations.")
 model ClusterForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -462,109 +317,60 @@ model ClusterForPatchUpdate {
   properties?: ClusterPropertiesForPatchUpdate;
 }
 
-@@typeChangedFrom(
-  Cluster.identity,
-  Versions.v2026_10_01_preview,
-  Azure.ResourceManager.Foundations.ManagedServiceIdentity
-);
-@@typeChangedFrom(
-  ClusterForPatchUpdate.identity,
-  Versions.v2026_10_01_preview,
-  Azure.ResourceManager.Foundations.ManagedServiceIdentity
-);
-
-@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPoolProperties")
 @doc("Properties of a HorizonDB pool.")
 model PoolProperties {
-  @doc("The location of the HorizonDB pool.")
-  @removed(Versions.v2026_10_01_preview)
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: azureLocation;
-
-  @typeChangedFrom(Versions.v2026_10_01_preview, State)
   @doc("Current state of the pool.")
   @visibility(Lifecycle.Read)
   state?: PoolState;
 
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Number of replicas in the pool.")
-  @visibility(Lifecycle.Read)
-  replicaCount?: int32;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The version of the HorizonDB pool.")
-  @visibility(Lifecycle.Read)
-  version?: string;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The create mode for the pool.")
-  @visibility(Lifecycle.Read)
-  createMode?: CreateModePool;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("The required compute model for the HorizonDB pool.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   computeModel: PoolComputeModel;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The required number of nodes to allocate and assign to the pool. Allowed values are 1 through 16. To deallocate runtime compute without changing the configured node count, stop the pool.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   nodeCount: PoolNodeCount;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The required high-availability configuration for the pool. mode must be Disabled when nodeCount is 1, and must be AnyZone or ZoneRedundant when nodeCount is 2 through 16.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   highAvailability: PoolHighAvailability;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The required parameter group associated with the pool. When creating a new pool in this API version, the caller must supply the corresponding default parameter group; customer-created parameter groups are not accepted during creation. For an existing pool, PUT or PATCH can associate either the corresponding default parameter group or a customer-created parameter group. The create-visible shape intentionally supports both resource ID forms so a future API version can allow customer-created parameter groups during creation without a breaking schema change.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   parameterGroup: PoolParameterGroupReference;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The scheduled maintenance configuration for the pool. The properties available depend on the selected maintenance management type.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   scheduledMaintenance?: ScheduledMaintenanceProperties;
 
   @doc("The provisioning state of the pool.")
-  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-@renamedFrom(
-  Versions.v2026_10_01_preview,
-  "HorizonDbPoolPropertiesForPatchUpdate"
-)
 @doc("Properties of a HorizonDB pool for update operations.")
 model PoolPropertiesForPatchUpdate {
-  @added(Versions.v2026_10_01_preview)
   @doc("The compute model properties to update. Omitted properties preserve their current values. To change the compute model type, supply the complete target compute model, including type, computeProcessor, computeGeneration, and all properties required by the target type.")
   @visibility(Lifecycle.Update)
   computeModel?: PoolComputeModelForPatchUpdate;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The number of nodes to allocate and assign to the pool. Allowed values are 1 through 16. Omission preserves the current configured value. To deallocate runtime compute without changing the configured node count, stop the pool.")
   @visibility(Lifecycle.Update)
   nodeCount?: PoolNodeCount;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The high-availability configuration to update. Omission preserves the current mode. The service recursively merges omitted PATCH properties with the existing resource before validating the effective nodeCount and mode together.")
   @visibility(Lifecycle.Update)
   highAvailability?: PoolHighAvailabilityPatch;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The corresponding default or a customer-created parameter group to associate with the existing pool. Customers can switch in either direction between these group types. Omission preserves the current association.")
   @visibility(Lifecycle.Update)
   parameterGroup?: PoolParameterGroupReferenceForPatchUpdate;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The scheduled maintenance configuration to update for the pool. When supplied, the complete configuration for the selected maintenance management type is required. Omission preserves the current configuration.")
   @visibility(Lifecycle.Update)
   scheduledMaintenance?: ScheduledMaintenancePropertiesForPatchUpdate;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The high-availability configuration for a HorizonDB pool.")
 model PoolHighAvailability {
   @doc("The high-availability mode. Disabled is required when nodeCount is 1. AnyZone or ZoneRedundant is required when nodeCount is 2 through 16.")
@@ -572,7 +378,6 @@ model PoolHighAvailability {
   mode: PoolHighAvailabilityMode;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The high-availability configuration for a HorizonDB pool update.")
 model PoolHighAvailabilityPatch {
   @doc("The high-availability mode. Omission preserves the current mode before the service validates it with the effective nodeCount.")
@@ -580,7 +385,6 @@ model PoolHighAvailabilityPatch {
   mode?: PoolHighAvailabilityMode;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The high-availability mode requested for a HorizonDB pool.")
 union PoolHighAvailabilityMode {
   string,
@@ -595,7 +399,6 @@ union PoolHighAvailabilityMode {
   ZoneRedundant: "ZoneRedundant",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A reference to the parameter group associated with a HorizonDB pool. The schema represents both default and customer-created parameter groups for create and update compatibility. In this API version, initial pool creation accepts only the corresponding default parameter group; PUT updates to an existing pool can associate either group type.")
 model PoolParameterGroupReference {
   @doc("The Azure resource ID of the associated parameter group. Initial pool creation in this API version requires the corresponding Microsoft.HorizonDb/locations/parameterGroups resource. For an existing pool, PUT can specify either the corresponding default group or a customer-created Microsoft.HorizonDb/parameterGroups resource.")
@@ -618,7 +421,6 @@ model PoolParameterGroupReference {
   syncStatus?: ParameterGroupSyncStatus;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A parameter group reference for updating an existing HorizonDB pool. The pool can switch in either direction between its corresponding default parameter group and a customer-created parameter group.")
 model PoolParameterGroupReferenceForPatchUpdate {
   @doc("The Azure resource ID of the corresponding default or customer-created parameter group to associate with the existing pool.")
@@ -637,7 +439,6 @@ model PoolParameterGroupReferenceForPatchUpdate {
   applyMethod?: ParameterApplyMethod;
 }
 
-@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbPoolForPatchUpdate")
 @doc("HorizonDB pool for update operations.")
 model PoolForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -646,9 +447,6 @@ model PoolForPatchUpdate {
   properties?: PoolPropertiesForPatchUpdate;
 }
 
-@@removed(PoolForPatchUpdate.tags, Versions.v2026_10_01_preview);
-
-@added(Versions.v2026_10_01_preview)
 @doc("The compute model for a HorizonDB pool.")
 model PoolComputeModel {
   @doc("The type of compute model.")
@@ -669,7 +467,6 @@ model PoolComputeModel {
   vCores: PoolVCores;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The compute model properties of a HorizonDB pool that can be updated. The object is recursively mergeable: omitted properties preserve their current values. Properties that do not apply to the current or target compute model type are rejected. When type changes, the request must include the complete target compute model. Subtype-specific constraints are validated against the effective merged configuration; invalid requests are rejected without changing the resource.")
 model PoolComputeModelForPatchUpdate {
   @doc("The compute model type. Omit this property to retain the current type. Resubmitting the current type succeeds as an idempotent no-op. To change the type, supply all common properties and all properties required by the target type.")
@@ -692,21 +489,12 @@ model PoolComputeModelForPatchUpdate {
 
 @doc("Network properties.")
 model Network {
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "publicNetworkAccess is a configuration flag, not sensitive data"
-  @removed(Versions.v2026_10_01_preview)
-  @renamedFrom(Versions.v2026_10_01_preview, "publicNetworkAccess")
-  @doc("The flag indicating whether public ip is requested.")
-  @visibility(Lifecycle.Read)
-  legacyPublicNetworkAccess?: PublicNetworkAccessState;
-
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "publicAccess is a configuration flag, not sensitive data"
-  @added(Versions.v2026_10_01_preview)
   @doc("Specifies whether public access is enabled for the cluster. The service defaults to Disabled when this property is omitted.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   publicAccess?: PublicNetworkAccessState = PublicNetworkAccessState.Disabled;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Network properties for updating a HorizonDB cluster.")
 model NetworkForPatchUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "publicAccess is a configuration flag, not sensitive data"
@@ -715,49 +503,25 @@ model NetworkForPatchUpdate {
   publicAccess?: PublicNetworkAccessState;
 }
 
-@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbFirewallRuleProperties")
 @doc("Properties of a HorizonDB firewall rule.")
 model FirewallRuleProperties {
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The start IP address of the firewall rule (IPv4).")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  @renamedFrom(Versions.v2026_10_01_preview, "startIpAddress")
-  legacyStartIpAddress: string;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("The start IPv4 address of the firewall rule in dotted-decimal notation.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   startIpAddress: DottedDecimalIpv4Address;
 
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The end IP address of the firewall rule (IPv4).")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  @renamedFrom(Versions.v2026_10_01_preview, "endIpAddress")
-  legacyEndIpAddress: string;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("The end IPv4 address of the firewall rule in dotted-decimal notation. This address must be numerically greater than or equal to startIpAddress.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   endIpAddress: DottedDecimalIpv4Address;
 
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The description of the HorizonDB firewall rule.")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  @renamedFrom(Versions.v2026_10_01_preview, "description")
-  legacyDescription?: string;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("The description of the HorizonDB firewall rule. The maximum length is 1024 characters.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   description?: WritableDescription;
 
   @doc("The provisioning state of the firewall rule.")
-  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties of a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
 model MicrosoftEntraAdministratorProperties {
   @doc("The display name or user principal name of the Microsoft Entra principal mapped to the PostgreSQL role. For users, this is typically the user principal name, such as admin@contoso.com. For groups, this is the group display name. For service principals, this is the application display name.")
@@ -782,7 +546,6 @@ model MicrosoftEntraAdministratorProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties for creating or updating a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
 model MicrosoftEntraAdministratorPropertiesForAdd {
   @doc("The display name or user principal name of the Microsoft Entra principal to map to the PostgreSQL role. For users, this is typically the user principal name, such as admin@contoso.com. For groups, this is the group display name. For service principals, this is the application display name.")
@@ -796,14 +559,12 @@ model MicrosoftEntraAdministratorPropertiesForAdd {
   tenantId?: string;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The request body for creating or updating a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
 model MicrosoftEntraAdministratorAdd {
   @doc("The PostgreSQL role and Microsoft Entra principal mapping properties.")
   properties: MicrosoftEntraAdministratorPropertiesForAdd;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A service-created authentication configuration returned by the authentications collection. The resource name is passwordMethod or microsoftEntra.")
 @parentResource(Cluster)
 model Authentication
@@ -816,7 +577,6 @@ model Authentication
   >;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The name of a service-created authentication configuration.")
 union AuthenticationName {
   string,
@@ -828,7 +588,6 @@ union AuthenticationName {
   MicrosoftEntra: "microsoftEntra",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Common read-only properties of a service-created authentication configuration.")
 model AuthenticationProperties {
   @doc("The state of the authentication configuration.")
@@ -840,7 +599,6 @@ model AuthenticationProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties of the service-created PostgreSQL username-and-password authentication method.")
 model PasswordAuthenticationProperties {
   @doc("The state of PostgreSQL username-and-password authentication.")
@@ -865,7 +623,6 @@ model PasswordAuthenticationProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties of the service-created Microsoft Entra authentication method.")
 model MicrosoftEntraAuthenticationProperties {
   @doc("The state of Microsoft Entra authentication.")
@@ -877,7 +634,6 @@ model MicrosoftEntraAuthenticationProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. This API version supports enabling or disabling the authentication method, and resetting its password. Supported changes can be combined.")
 model PasswordAuthenticationPropertiesForPatchUpdate {
   @doc("The target password-authentication state. Enabled can be combined with administratorLoginPassword to re-enable password authentication and reset the password for a cluster that already has an administrator. Disabling password authentication does not remove or modify existing database users or roles. Disabled cannot be combined with administratorLoginPassword.")
@@ -892,7 +648,6 @@ model PasswordAuthenticationPropertiesForPatchUpdate {
   administratorLoginPassword?: string;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties for updating Microsoft Entra authentication. State Enabled enables the feature and State Disabled disables it. Disabling Microsoft Entra authentication does not remove or modify database roles or users previously created through the MicrosoftEntraAdministrators control-plane API or directly through pgaadauth extension functions.")
 model MicrosoftEntraAuthenticationPropertiesForPatchUpdate {
   @doc("The target Microsoft Entra authentication state. Omission preserves the current state.")
@@ -900,21 +655,18 @@ model MicrosoftEntraAuthenticationPropertiesForPatchUpdate {
   state?: AuthenticationState;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A sparse update request for PostgreSQL username-and-password authentication.")
 model PasswordAuthenticationForPatchUpdate {
   @doc("The PostgreSQL username-and-password authentication properties to update.")
   properties?: PasswordAuthenticationPropertiesForPatchUpdate;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A sparse update request for Microsoft Entra authentication.")
 model MicrosoftEntraAuthenticationForPatchUpdate {
   @doc("The Microsoft Entra authentication properties to update.")
   properties?: MicrosoftEntraAuthenticationPropertiesForPatchUpdate;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The type of data encryption used by a HorizonDB cluster. The type is selected at cluster creation; switching between SystemManaged and AzureKeyVault after creation is not supported.")
 union HorizonDbClusterDataEncryptionType {
   string,
@@ -926,7 +678,6 @@ union HorizonDbClusterDataEncryptionType {
   AzureKeyVault: "AzureKeyVault",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The validation status of a customer-managed encryption key used by a HorizonDB cluster.")
 union HorizonDbClusterEncryptionKeyStatus {
   string,
@@ -938,25 +689,20 @@ union HorizonDbClusterEncryptionKeyStatus {
   Invalid: "Invalid",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A versionless HTTPS Azure Key Vault key URI. The URI must use a supported public or sovereign Azure Key Vault DNS suffix and the path /keys/{key-name}. Key version paths are not supported.")
 @pattern("^https://[A-Za-z0-9-]+[.]vault([.]azure[.]net|[.]usgovcloudapi[.]net|[.]azure[.]cn)/keys/[A-Za-z0-9-]+/?$")
 scalar VersionlessKeyVaultKeyUri extends url;
 
-@added(Versions.v2026_10_01_preview)
 @doc("The Cluster-level data encryption configuration. The encryption type is selected at cluster creation; switching between SystemManaged and AzureKeyVault after creation is not supported. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required, and backup.geoRedundancy must be Disabled. Both primaryKeyUri and primaryUserAssignedIdentityId can be provided during initial cluster creation. For updates to an existing cluster through PUT or PATCH, only one of these properties can change per request, and that update must complete before submitting a separate update to change the other property. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. Only versionless Azure Key Vault key URIs are supported; key version paths are rejected. For SystemManaged encryption, key and identity properties must be omitted.")
 model HorizonDbClusterDataEncryption {
-  @added(Versions.v2026_10_01_preview)
   @doc("The type of data encryption used by the cluster. When the data encryption configuration is supplied during initial cluster creation, this property is required. For PUT updates of an existing cluster, this property may be omitted; if provided, it must match the existing encryption type. This value is selected at cluster creation and cannot later be changed from SystemManaged to AzureKeyVault or from AzureKeyVault to SystemManaged.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   type?: HorizonDbClusterDataEncryptionType;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported. During initial cluster creation, this property can be provided together with primaryUserAssignedIdentityId. For updates to an existing cluster through PUT or PATCH, this property and primaryUserAssignedIdentityId cannot both change in the same request; the first update must complete before submitting a separate update for the other property.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   primaryKeyUri?: VersionlessKeyVaultKeyUri;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property. During initial cluster creation, this property can be provided together with primaryKeyUri. For updates to an existing cluster through PUT or PATCH, this property and primaryKeyUri cannot both change in the same request; the first update must complete before submitting a separate update for the other property.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   primaryUserAssignedIdentityId?: armResourceIdentifier<[
@@ -965,31 +711,25 @@ model HorizonDbClusterDataEncryption {
     }
   ]>;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The validation status of the primary encryption key. This property is returned for AzureKeyVault encryption and is absent for SystemManaged encryption.")
   @visibility(Lifecycle.Read)
   primaryEncryptionKeyStatus?: HorizonDbClusterEncryptionKeyStatus;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The current version of the primary encryption key used by the cluster. This property is returned for AzureKeyVault encryption and is absent for SystemManaged encryption.")
   @visibility(Lifecycle.Read)
   primaryEncryptionKeyCurrentVersion?: string;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties for sparsely updating Cluster-level data encryption. Omitted properties preserve their current values. Updates can modify settings within the existing encryption type, such as the primary Azure Key Vault key URI, but switching between SystemManaged and AzureKeyVault after cluster creation is not supported. AzureKeyVault encryption is not supported when backup.geoRedundancy is Enabled. An update can change only one of primaryKeyUri or primaryUserAssignedIdentityId; that update must complete before submitting a separate update to change the other property.")
 model HorizonDbClusterDataEncryptionForPatchUpdate {
-  @added(Versions.v2026_10_01_preview)
   @doc("The existing data encryption type used by the cluster. PATCH is a sparse update, so this property may be omitted. If provided, it must match the existing encryption type. This value cannot be changed from SystemManaged to AzureKeyVault or from AzureKeyVault to SystemManaged after cluster creation.")
   @visibility(Lifecycle.Update)
   type?: HorizonDbClusterDataEncryptionType;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported. This property and primaryUserAssignedIdentityId cannot both change in the same update; the first update must complete before submitting a separate update for the other property.")
   @visibility(Lifecycle.Update)
   primaryKeyUri?: VersionlessKeyVaultKeyUri;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property. This property and primaryKeyUri cannot both change in the same update; the first update must complete before submitting a separate update for the other property.")
   @visibility(Lifecycle.Update)
   primaryUserAssignedIdentityId?: armResourceIdentifier<[
@@ -999,7 +739,6 @@ model HorizonDbClusterDataEncryptionForPatchUpdate {
   ]>;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Backup configuration properties for a HorizonDB cluster.")
 model BackupProperties {
   @doc("The geo-redundancy state. Geo-redundant backup is not supported when dataEncryption.type is AzureKeyVault.")
@@ -1017,7 +756,6 @@ model BackupProperties {
   earliestRestorePointUtc?: utcDateTime;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Backup configuration properties for updating a HorizonDB cluster.")
 model BackupPropertiesForPatchUpdate {
   @doc("The number of days that automatic backups are retained.")
@@ -1027,7 +765,6 @@ model BackupPropertiesForPatchUpdate {
   retentionDays?: int32;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Indicates the geo-redundancy state.")
 union GeoRedundancyState {
   string,
@@ -1039,12 +776,10 @@ union GeoRedundancyState {
   Disabled: "Disabled",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A user-supplied description with a maximum length of 1024 characters.")
 @maxLength(1024)
 scalar WritableDescription extends string;
 
-@added(Versions.v2026_10_01_preview)
 @doc("A PostgreSQL major version supported by HorizonDB. API version 2026-10-01-preview accepts 17 and 18. Future API versions may add named values, and clients must tolerate unknown values returned by the service.")
 union PostgreSqlVersion {
   string,
@@ -1056,7 +791,6 @@ union PostgreSqlVersion {
   V18: "18",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The compute model type.")
 union PoolComputeModelType {
   string,
@@ -1065,7 +799,6 @@ union PoolComputeModelType {
   Provisioned: "Provisioned",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The compute processor type.")
 union ComputeProcessorType {
   string,
@@ -1077,7 +810,6 @@ union ComputeProcessorType {
   AMD: "AMD",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The type of Microsoft Entra principal mapped to a PostgreSQL role.")
 union PrincipalTypes {
   string,
@@ -1102,15 +834,10 @@ union CreateModeCluster {
   /** Create a new cluster */
   Create: "Create",
 
-  /** Update an existing cluster */
-  @removed(Versions.v2026_10_01_preview)
-  Update: "Update",
-
   /** Create cluster from point-in-time restore */
   PointInTimeRestore: "PointInTimeRestore",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Controls how a HorizonDB cluster PUT request is processed.")
 union ClusterCreateMode {
   string,
@@ -1133,7 +860,6 @@ union CreateModePool {
   Update: "Update",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Current state of a HorizonDB pool.")
 union PoolState {
   string,
@@ -1166,7 +892,6 @@ union PoolState {
   Stopped: "Stopped",
 }
 
-@renamedFrom(Versions.v2026_10_01_preview, "ZonePlacementPolicy")
 @doc("The zone redundancy option for the cluster.")
 union ZonePlacementEnforcement {
   string,
@@ -1178,43 +903,6 @@ union ZonePlacementEnforcement {
   BestEffort: "BestEffort",
 }
 
-@removed(Versions.v2026_10_01_preview)
-@doc("Current states.")
-union State {
-  string,
-
-  @doc("Is ready and operational")
-  Ready: "Ready",
-
-  @doc("Is being dropped/deleted")
-  Dropping: "Dropping",
-
-  @doc("Is disabled")
-  Disabled: "Disabled",
-
-  @doc("Is starting up")
-  Starting: "Starting",
-
-  @doc("Is stopping")
-  Stopping: "Stopping",
-
-  @doc("Is stopped")
-  Stopped: "Stopped",
-
-  @doc("Is being updated")
-  Updating: "Updating",
-
-  @doc("Is healthy")
-  Healthy: "Healthy",
-
-  @doc("Is succeeded")
-  Succeeded: "Succeeded",
-
-  @doc("Is upgrading")
-  Upgrading: "Upgrading",
-}
-
-@added(Versions.v2026_10_01_preview)
 @doc("Current state of a HorizonDB cluster.")
 union ClusterState {
   string,
@@ -1241,7 +929,6 @@ model ClusterUpdateAcceptedHeaders is ArmLroLocationHeader<
   Cluster,
   string
 > {
-  @added(Versions.v2026_10_01_preview)
   @doc("A link to the status monitor for the cluster update operation.")
   @Azure.Core.pollingLocation(
     Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>
@@ -1250,7 +937,6 @@ model ClusterUpdateAcceptedHeaders is ArmLroLocationHeader<
   azureAsyncOperation?: string;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Long-running operation headers returned when an asynchronous HorizonDB cluster create or replacement is accepted.")
 model ClusterCreateOrReplaceLroHeaders {
   @doc("A link to the status monitor for the cluster create or replacement operation.")
@@ -1260,7 +946,6 @@ model ClusterCreateOrReplaceLroHeaders {
   ...Azure.Core.Foundations.RetryAfterHeader;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The response returned when an asynchronous HorizonDB cluster replacement is accepted.")
 model ClusterReplaceAcceptedResponse {
   ...OkResponse;
@@ -1271,7 +956,6 @@ model ClusterReplaceAcceptedResponse {
   body: Cluster;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("The response returned when asynchronous HorizonDB cluster creation is accepted.")
 model ClusterCreateAcceptedResponse {
   ...CreatedResponse;
@@ -1304,41 +988,6 @@ union PublicNetworkAccessState {
   Disabled: "Disabled",
 }
 
-@removed(Versions.v2026_10_01_preview)
-@doc("Role of the replica.")
-union ReplicaRole {
-  string,
-
-  /** Read-only replica */
-  Read: "Read",
-
-  /** ReadWrite replica */
-  ReadWrite: "ReadWrite",
-}
-
-@removed(Versions.v2026_10_01_preview)
-@renamedFrom(Versions.v2026_10_01_preview, "ProvisioningState")
-@doc("The provisioning state.")
-union LegacyProvisioningState {
-  string,
-
-  /** Provisioning completed successfully */
-  Succeeded: "Succeeded",
-
-  /** Provisioning failed */
-  Failed: "Failed",
-
-  /** Provisioning was canceled */
-  Canceled: "Canceled",
-
-  /** Provisioning is in progress */
-  InProgress: "InProgress",
-
-  /** Provisioning is in progress */
-  Provisioning: "Provisioning",
-}
-
-@added(Versions.v2026_10_01_preview)
 @doc("The provisioning state.")
 @lroStatus
 union ProvisioningState {
@@ -1351,94 +1000,26 @@ union ProvisioningState {
   Provisioning: "Provisioning",
 }
 
-@renamedFrom(Versions.v2026_10_01_preview, "HorizonDbParameterGroupProperties")
 @doc("Properties of a HorizonDB parameter group.")
 model ParameterGroupProperties {
   @doc("Parameters in the parameter group.")
   @identifiers(#["name"])
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyParameterProperties[])
   parameters?: ParameterProperties[];
 
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Description of the parameter group.")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  @renamedFrom(Versions.v2026_10_01_preview, "description")
-  legacyDescription?: string;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("Description of the parameter group. The maximum length is 1024 characters.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   description?: WritableDescription;
 
-  @removed(Versions.v2026_10_01_preview)
-  @renamedFrom(Versions.v2026_10_01_preview, "pgVersion")
-  @doc("PostgreSQL version for the parameter group.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  legacyPgVersion?: int32;
-
-  @removed(Versions.v2026_10_01_preview)
-  @renamedFrom(Versions.v2026_10_01_preview, "version")
-  @doc("Current version of the parameter group.")
-  @visibility(Lifecycle.Read)
-  currentVersion?: int32;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("The PostgreSQL major version for the parameter group. This property is required during creation and is immutable thereafter. The service selects the unique location-scoped default parameter group for this version in the resource location. The DefaultParameterGroups APIs return at most one default parameter group for each PostgreSQL version in a location, so this selection is unambiguous.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   postgreSqlVersion: PostgreSqlVersion;
 
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Indicates whether the parameters should be applied immediately.")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  applyImmediately?: boolean;
-
   @doc("The provisioning state of the parameter group.")
-  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyProvisioningState)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-@removed(Versions.v2026_10_01_preview)
-@renamedFrom(Versions.v2026_10_01_preview, "ParameterProperties")
-@doc("Properties of a HorizonDB parameters.")
-model LegacyParameterProperties {
-  @doc("The name of the parameter.")
-  name?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The description of the parameter.")
-  description?: string;
-
-  @doc("The value of the configuration.")
-  value?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The data type of the parameter.")
-  dataType?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The allowed values for the parameter.")
-  allowedValues?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("Whether the parameter can be changed dynamically.")
-  isDynamic?: boolean;
-
-  @visibility(Lifecycle.Read)
-  @doc("Whether the parameter is a read-only parameter.")
-  isReadOnly?: boolean;
-
-  @visibility(Lifecycle.Read)
-  @doc("Link to parameter documentation.")
-  documentationLink?: url;
-
-  @visibility(Lifecycle.Read)
-  @doc("The unit of measurement for the parameter.")
-  unit?: string;
-}
-
-@added(Versions.v2026_10_01_preview)
 @doc("The source of the effective value assigned to a HorizonDB parameter.")
 union ParameterValueSource {
   string,
@@ -1450,7 +1031,6 @@ union ParameterValueSource {
   UserOverride: "UserOverride",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties of a HorizonDB parameter.")
 model ParameterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
@@ -1498,39 +1078,18 @@ model ParameterProperties {
   unit?: string;
 }
 
-@renamedFrom(
-  Versions.v2026_10_01_preview,
-  "HorizonDbParameterGroupPropertiesForPatchUpdate"
-)
 @doc("Properties of a HorizonDB parameter group for update operations.")
 model ParameterGroupPropertiesForPatchUpdate {
   @doc("Parameters in the parameter group.")
   @identifiers(#["name"])
   @visibility(Lifecycle.Update)
-  @typeChangedFrom(Versions.v2026_10_01_preview, LegacyParameterProperties[])
   parameters?: ParameterProperties[];
 
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Description of the parameter group.")
-  @visibility(Lifecycle.Update)
-  @renamedFrom(Versions.v2026_10_01_preview, "description")
-  legacyDescription?: string;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("Description of the parameter group. The maximum length is 1024 characters.")
   @visibility(Lifecycle.Update)
   description?: WritableDescription;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Indicates whether the parameters should be applied immediately.")
-  @visibility(Lifecycle.Update)
-  applyImmediately?: boolean;
 }
 
-@renamedFrom(
-  Versions.v2026_10_01_preview,
-  "HorizonDbParameterGroupForPatchUpdate"
-)
 @doc("HorizonDB parameter group for update operations.")
 model ParameterGroupForPatchUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -1539,28 +1098,8 @@ model ParameterGroupForPatchUpdate {
   properties?: ParameterGroupPropertiesForPatchUpdate;
 }
 
-@renamedFrom(
-  Versions.v2026_10_01_preview,
-  "HorizonDbParameterGroupConnectionProperties"
-)
 @doc("Connection information for HorizonDB parameter group.")
 model ParameterGroupConnectionProperties {
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The name of the connected resource.")
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The resource ID of the connected resource.")
-  @visibility(Lifecycle.Read)
-  id?: armResourceIdentifier;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("The type of the resource.")
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  @added(Versions.v2026_10_01_preview)
   @doc("The Azure resource ID of the connected HorizonDB pool.")
   @visibility(Lifecycle.Read)
   poolResourceId: PoolResourceId;
@@ -1578,7 +1117,6 @@ model PagedParameterGroupConnectionProperties {
   nextLink?: url;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("A default parameter group available in a specific region. It contains engine-defined parameters and excludes service and other non-engine entries. For each PostgreSQL version, the DefaultParameterGroups APIs return at most one default parameter group in a location.")
 @parentResource(SubscriptionLocationResource)
 model DefaultParameterGroup is ProxyResource<DefaultParameterGroupProperties> {
@@ -1590,7 +1128,6 @@ model DefaultParameterGroup is ProxyResource<DefaultParameterGroupProperties> {
   >;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Properties of a default parameter group.")
 model DefaultParameterGroupProperties {
   @doc("The provisioning state of the default parameter group.")
@@ -1616,16 +1153,9 @@ model HorizonDbClusterParameterGroupConnectionProperties {
 
   @doc("Indication of if parameter group is applied on HorizonDB resource.")
   @visibility(Lifecycle.Read)
-  @typeChangedFrom(Versions.v2026_10_01_preview, string)
   syncStatus?: ParameterGroupSyncStatus;
-
-  @removed(Versions.v2026_10_01_preview)
-  @doc("Indicates whether the parameters should be applied immediately.")
-  @visibility(Lifecycle.Update, Lifecycle.Read)
-  applyImmediately?: boolean;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Controls when dynamic parameter changes become effective. Static parameter changes always become effective only after a customer-initiated pool Restart. Stop followed by Start and scheduled maintenance do not apply pending parameter changes.")
 union ParameterApplyMethod {
   string,
@@ -1637,7 +1167,6 @@ union ParameterApplyMethod {
   PendingReboot: "PendingReboot",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Indicates synchronization status between a HorizonDB resource and its parameter group.")
 union ParameterGroupSyncStatus {
   string,
