@@ -14,9 +14,8 @@ namespace Microsoft.Compute;
 
 // =====================================================================
 // Recurring Bulk Actions (RBA) — exposed through the `scheduledActions` resource
-// family, folded into the BulkActions project. Resource types, REST paths, and
-// request/response schemas are unchanged. Operation-ID prefixes change starting
-// in 2026-09-06-preview; direct TypeSpec SDK group names are preserved in client.tsp.
+// family, folded into the BulkActions project. Resource types, REST paths,
+// request/response schemas, operation IDs, and SDK group names are unchanged.
 //
 // NAMING NOTE: RBA collision-renames take the `ScheduledActions*` prefix to avoid
 // colliding with BulkActions' bare shared types (e.g. `ProvisioningState`,
@@ -746,12 +745,9 @@ model OccurrenceExtensionResource
 
 // ------------------ Recurring bulk action operations ------------------
 
-// Keep Swagger tags stable for existing consumers; Learn groups use operation IDs.
 @added(Versions.`2026-07-06-preview`)
-@renamedFrom(Versions.`2026-09-06-preview`, "ScheduledActions")
 @armResourceOperations
-@tag("ScheduledActions")
-interface RecurringBulkActions {
+interface ScheduledActions {
   @doc("Gets the specified recurring bulk action.")
   @errorsDoc("The request failed. The response contains error details.")
   get is ArmResourceRead<ScheduledAction>;
@@ -874,20 +870,16 @@ interface RecurringBulkActions {
 }
 
 @added(Versions.`2026-07-06-preview`)
-@renamedFrom(Versions.`2026-09-06-preview`, "ScheduledActionExtension")
 @armResourceOperations
-@tag("ScheduledActionExtension")
-interface RecurringBulkActionExtension {
+interface ScheduledActionExtension {
   @doc("Lists recurring bulk actions associated with the specified VM.")
   @errorsDoc("The request failed. The response contains error details.")
   listByVms is ArmResourceListByParent<ScheduledActionResources>;
 }
 
 @added(Versions.`2026-07-06-preview`)
-@renamedFrom(Versions.`2026-09-06-preview`, "ScheduledActionOperationStatus")
 @armResourceOperations(#{ allowStaticRoutes: true })
-@tag("ScheduledActionOperationStatus")
-interface RecurringBulkActionOperationStatus {
+interface ScheduledActionOperationStatus {
   @doc("Gets the status of the specified recurring bulk action operation.")
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/scheduledActionsOperationStatuses/{operationId}")
@@ -980,32 +972,32 @@ interface OccurrenceExtension {
 @@doc(Occurrence.name, "The occurrence ID in UUID format.");
 
 @@doc(
-  RecurringBulkActions.createOrUpdate::parameters.resource,
+  ScheduledActions.createOrUpdate::parameters.resource,
   "The recurring bulk action to create or update."
 );
 
 @@doc(
-  RecurringBulkActions.update::parameters.properties,
+  ScheduledActions.update::parameters.properties,
   "The recurring bulk action properties to update. Omitted properties keep their current values."
 );
 
 @@doc(
-  RecurringBulkActions.attachResources::parameters.body,
+  ScheduledActions.attachResources::parameters.body,
   "The resources to add to the recurring bulk action."
 );
 
 @@doc(
-  RecurringBulkActions.detachResources::parameters.body,
+  ScheduledActions.detachResources::parameters.body,
   "The resources to remove from the recurring bulk action."
 );
 
 @@doc(
-  RecurringBulkActions.patchResources::parameters.body,
+  ScheduledActions.patchResources::parameters.body,
   "The resource-specific settings to update."
 );
 
 @@doc(
-  RecurringBulkActions.cancelNextOccurrence::parameters.body,
+  ScheduledActions.cancelNextOccurrence::parameters.body,
   "The resources to cancel in the next occurrence. If no resource IDs are provided, the occurrence is canceled for all resources."
 );
 
