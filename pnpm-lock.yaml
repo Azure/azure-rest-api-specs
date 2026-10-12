@@ -483,6 +483,9 @@ importers:
       '@azure-tools/spec-gen-sdk':
         specifier: 'catalog:'
         version: 0.9.7
+      '@azure-tools/specs-typespec-rulesets':
+        specifier: workspace:*
+        version: link:eng/typespec-rulesets
       '@azure-tools/summarize-impact':
         specifier: workspace:*
         version: link:eng/tools/summarize-impact
@@ -1081,9 +1084,28 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
     devDependencies:
+      '@azure-tools/specs-typespec-rulesets':
+        specifier: workspace:*
+        version: link:../../typespec-rulesets
       '@types/debug':
         specifier: 'catalog:'
         version: 4.1.13
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.13.1
+      '@typespec/compiler':
+        specifier: 'catalog:'
+        version: 1.16.0(@types/node@24.13.1)
+
+  eng/typespec-rulesets:
+    dependencies:
+      '@azure-tools/typespec-azure-rulesets':
+        specifier: 'catalog:'
+        version: 0.72.0(@azure-tools/typespec-azure-core@0.72.1(@typespec/compiler@1.16.0(@types/node@24.13.1))(@typespec/http@1.16.0(@typespec/compiler@1.16.0(@types/node@24.13.1))(@typespec/streams@0.86.0(@typespec/compiler@1.16.0(@types/node@24.13.1))))(@typespec/rest@0.86.0(@typespec/compiler@1.16.0(@types/node@24.13.1))(@typespec/http@1.16.0(@typespec/compiler@1.16.0(@types/node@24.13.1))(@typespec/streams@0.86.0(@typespec/compiler@1.16.0(@types/node@24.13.1))))))(@azure-tools/typespec-azure-resource-manager@0.72.1(5d09011cc47c59c21dd88a05245e6151))(@azure-tools/typespec-client-generator-core@0.72.2(a67670347f12c7f75fe322b80ebd19d1))(@typespec/compiler@1.16.0(@types/node@24.13.1))
+      '@typespec/compiler':
+        specifier: 'catalog:'
+        version: 1.16.0(@types/node@24.13.1)
+    devDependencies:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1

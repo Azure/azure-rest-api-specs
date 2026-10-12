@@ -1,6 +1,6 @@
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strict as assert } from "node:assert";
-import path, { join } from "path";
+import { join } from "path";
 import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
 import { LinterRulesetRule } from "../src/rules/linter-ruleset.ts";
 
@@ -10,13 +10,6 @@ import { mockFolder } from "./mocks.ts";
 const dataPlaneFolder = "specification/foo/data-plane/Foo";
 const resourceManagerFolder = "specification/foo/resource-manager/Foo";
 const managementFolder = "specification/foo/Foo.Management";
-
-function ruleset(folder: string, name: string): string {
-  const relativePath = path
-    .relative(folder, path.join("eng/typespec-rulesets", name))
-    .replaceAll("\\", "/");
-  return `file:${relativePath}`;
-}
 
 describe("linter-ruleset", function () {
   let fileExistsSpy: MockInstance;
@@ -42,7 +35,7 @@ describe("linter-ruleset", function () {
       Promise.resolve(`
 linter:
   extends:
-    - "${ruleset(resourceManagerFolder, "resource-manager.yaml")}"
+    - "@azure-tools/specs-typespec-rulesets/resource-manager"
 `),
     );
     const result = await new LinterRulesetRule().execute(resourceManagerFolder);
@@ -54,7 +47,7 @@ linter:
       Promise.resolve(`
 linter:
   extends:
-    - "${ruleset(dataPlaneFolder, "data-plane.yaml")}"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 `),
     );
     const result = await new LinterRulesetRule().execute(dataPlaneFolder);
@@ -66,7 +59,7 @@ linter:
       Promise.resolve(`
 linter:
   extends:
-    - "${ruleset(mockFolder, "data-plane.yaml")}"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 `),
     );
 
@@ -95,7 +88,7 @@ linter:
       Promise.resolve(`
 linter:
   extends:
-    - "${ruleset(managementFolder, "data-plane.yaml")}"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 `),
     );
     const result = await new LinterRulesetRule().execute(managementFolder);
@@ -107,7 +100,7 @@ linter:
       Promise.resolve(`
 linter:
   extends:
-    - "${ruleset(dataPlaneFolder, "resource-manager.yaml")}"
+    - "@azure-tools/specs-typespec-rulesets/resource-manager"
 `),
     );
     const result = await new LinterRulesetRule().execute(dataPlaneFolder);
@@ -124,7 +117,32 @@ linter:
     );
     const result = await new LinterRulesetRule().execute(dataPlaneFolder);
     assert(!result.success);
-    assert(result.errorOutput?.includes(ruleset(dataPlaneFolder, "data-plane.yaml")) === true);
+    assert(
+      result.errorOutput?.includes("@azure-tools/specs-typespec-rulesets/data-plane") === true,
+    );
+  });
+
+  it("fails with the old file reference instead of the package ruleset", async function () {
+    readTspConfigSpy.mockResolvedValue(`
+linter:
+  extends:
+    - "file:../../../../eng/typespec-rulesets/data-plane.yaml"
+`);
+    const result = await new LinterRulesetRule().execute(dataPlaneFolder);
+    assert(!result.success);
+    assert(result.errorOutput?.includes("@azure-tools/specs-typespec-rulesets/data-plane"));
+  });
+
+  it("succeeds with an absolute Windows project path", async function () {
+    readTspConfigSpy.mockResolvedValue(`
+linter:
+  extends:
+    - "@azure-tools/specs-typespec-rulesets/resource-manager"
+`);
+    const result = await new LinterRulesetRule().execute(
+      "C:\\repo\\specification\\foo\\resource-manager\\Foo",
+    );
+    assert(result.success);
   });
 
   it("fails with data-plane/old-and-new", async function () {
@@ -133,7 +151,7 @@ linter:
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
-    - "${ruleset(dataPlaneFolder, "data-plane.yaml")}"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 `),
     );
     const result = await new LinterRulesetRule().execute(dataPlaneFolder);
@@ -146,7 +164,7 @@ linter:
 linter:
   extends:
     - "@azure-tools/typespec-azure-resource-manager/all"
-    - "${ruleset(resourceManagerFolder, "resource-manager.yaml")}"
+    - "@azure-tools/specs-typespec-rulesets/resource-manager"
 `),
     );
     const result = await new LinterRulesetRule().execute(resourceManagerFolder);
@@ -159,8 +177,8 @@ linter:
       Promise.resolve(`
 linter:
   extends:
-    - "${ruleset(dataPlaneFolder, "data-plane.yaml")}"
-    - "${ruleset(dataPlaneFolder, "client-sdk.yaml")}"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
+    - "@azure-tools/specs-typespec-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-python":
     package-dir: "azure-contoso-widgetmanager"
@@ -175,7 +193,7 @@ options:
       Promise.resolve(`
 linter:
   extends:
-    - "${ruleset(dataPlaneFolder, "data-plane.yaml")}"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 options:
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Template.Contoso"
@@ -190,7 +208,7 @@ options:
       Promise.resolve(`
 linter:
   extends:
-    - "${ruleset(dataPlaneFolder, "data-plane.yaml")}"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 `),
     );
     const result = await new LinterRulesetRule().execute(dataPlaneFolder);
@@ -202,7 +220,7 @@ linter:
       Promise.resolve(`
 linter:
   extends:
-    - "${ruleset(dataPlaneFolder, "data-plane.yaml")}"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"

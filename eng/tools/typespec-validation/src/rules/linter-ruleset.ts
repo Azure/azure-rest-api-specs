@@ -1,4 +1,4 @@
-import path, { join } from "path";
+import { join } from "path";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { parse } from "../tsp-config.ts";
@@ -9,27 +9,7 @@ const deprecatedRulesets = new Set([
   "@azure-tools/typespec-azure-resource-manager/all",
 ]);
 
-const rulesetDirectory = "eng/typespec-rulesets";
-
-function getRulesetPath(repositoryRoot: string, folder: string, ruleset: string): string {
-  const relativePath = path
-    .relative(folder, path.join(repositoryRoot, rulesetDirectory, ruleset))
-    .replaceAll("\\", "/");
-  return `file:${relativePath}`;
-}
-
-function getRepositoryRoot(folder: string): string {
-  const normalizedFolder = folder.replaceAll("\\", "/");
-  const specificationMarker = "/specification/";
-  const specificationIndex = normalizedFolder.lastIndexOf(specificationMarker);
-  if (specificationIndex >= 0) {
-    return normalizedFolder.slice(0, specificationIndex);
-  }
-  if (normalizedFolder.startsWith("specification/")) {
-    return ".";
-  }
-  throw new Error(`TypeSpec project folder must be under specification/: ${folder}`);
-}
+const rulesetPackage = "@azure-tools/specs-typespec-rulesets";
 
 // Known client (language) emitters. When any of these has options defined in tspconfig.yaml,
 // the client-sdk ruleset must be enabled. Excludes non-client emitters such as
@@ -75,20 +55,19 @@ export class LinterRulesetRule implements Rule {
 
     // Normalize path separators
     const normalizedFolder = folder.replace(/\\/g, "/");
-    const repositoryRoot = getRepositoryRoot(folder);
 
     let requiredRuleset;
     if (
       normalizedFolder.includes("/resource-manager/") ||
       normalizedFolder.trim().endsWith(".Management")
     ) {
-      requiredRuleset = getRulesetPath(repositoryRoot, folder, "resource-manager.yaml");
+      requiredRuleset = `${rulesetPackage}/resource-manager`;
     } else if (clientTspExists && !mainTspExists) {
       // Assume folders with no autorest setting, containing only "client.tsp" but no "main.tsp",
       // are data-plane (e.g. HealthInsights.TrialMatcher)
-      requiredRuleset = getRulesetPath(repositoryRoot, folder, "data-plane.yaml");
+      requiredRuleset = `${rulesetPackage}/data-plane`;
     } else {
-      requiredRuleset = getRulesetPath(repositoryRoot, folder, "data-plane.yaml");
+      requiredRuleset = `${rulesetPackage}/data-plane`;
     }
 
     if (linterExtends) {
@@ -125,7 +104,7 @@ export class LinterRulesetRule implements Rule {
     const emittersWithOptions = clientEmitters.filter(
       (emitter) => config?.options?.[emitter] !== undefined,
     );
-    const clientSdkRuleset = getRulesetPath(repositoryRoot, folder, "client-sdk.yaml");
+    const clientSdkRuleset = `${rulesetPackage}/client-sdk`;
     if (emittersWithOptions.length > 0 && !linterExtends?.includes(clientSdkRuleset)) {
       success = false;
       if (errorOutput) {

@@ -18,8 +18,8 @@ emit:
   - "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "file:../../../eng/typespec-rulesets/data-plane.yaml"
-    - "file:../../../eng/typespec-rulesets/client-sdk.yaml"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
+    - "@azure-tools/specs-typespec-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"

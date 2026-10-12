@@ -82,8 +82,8 @@ imports:
   - "@azure-tools/openai-typespec/models/responses"
 linter:
   extends:
-    - "file:../../../../../../eng/typespec-rulesets/data-plane.yaml"
-    - "file:../../../../../../eng/typespec-rulesets/client-sdk.yaml"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
+    - "@azure-tools/specs-typespec-rulesets/client-sdk"
   disable:
     "@azure-tools/typespec-azure-core/casing-style": "Since we have many names in the form XxxxAIXxxx"
     "@azure-tools/typespec-azure-core/no-string-discriminator": "Use an extensible union instead of a plain string"

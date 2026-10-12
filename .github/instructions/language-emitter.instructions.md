@@ -11,8 +11,8 @@ Use this guidance whenever someone needs to add language emitters to an existing
 
 ## 1. Identify the service type
 
-- Path contains `/resource-manager/` or the linter extends `file:<relative-path>/eng/typespec-rulesets/resource-manager.yaml` → ARM
-- Path contains `/data-plane/` or the linter extends `file:<relative-path>/eng/typespec-rulesets/data-plane.yaml` → Data plane
+- Path contains `/resource-manager/` or the linter extends `@azure-tools/specs-typespec-rulesets/resource-manager` → ARM
+- Path contains `/data-plane/` or the linter extends `@azure-tools/specs-typespec-rulesets/data-plane` → Data plane
 
 ## 2. Reference the official widget template
 
@@ -31,6 +31,7 @@ Always read the template before editing so you follow the canonical configuratio
 
 - Paste the customized block under `options:` in the target `tspconfig.yaml`, keeping YAML indentation intact.
 - Confirm the `parameters:` section defines `"service-dir"` (for example `sdk/<servicename>`); add it if missing.
+- Ensure `linter.extends` includes `@azure-tools/specs-typespec-rulesets/client-sdk`.
 
 **Quick checks**
 
