@@ -764,7 +764,7 @@ model AgentEvaluationRequestBinding {
   @doc("Canonicalization algorithm. rfc8785 means the RFC 8785 JSON Canonicalization Scheme applied to the documented digest input.")
   canonicalization: "rfc8785";
 
-  @doc("Lowercase SHA-256 digest of the RFC 8785 canonical UTF-8 JSON object { apiVersion, context, selectors }, prefixed with sha256:. context is the exact decoded AgentContext request body. selectors contains the exact decoded query selector values used for admission: { targetResourceId, developerPolicyId?, developerPolicyRevision?, developerPolicySemanticDigest? } for foundryProject or { policyId } for namedPolicy. Omitted optional selectors are omitted rather than encoded as null. The service derives this value from the accepted request; it is never copied from request metadata.")
+  @doc("Lowercase SHA-256 digest of the RFC 8785 canonical UTF-8 JSON object whose properties are apiVersion, context and selectors, prefixed with sha256:. context is the exact decoded AgentContext request body. For foundryProject, selectors contains targetResourceId plus the optional developerPolicyId, developerPolicyRevision and developerPolicySemanticDigest values. For namedPolicy, selectors contains policyId. Omitted optional selectors are omitted rather than encoded as null. The service derives this value from the accepted request; it is never copied from request metadata.")
   @pattern("^sha256:[0-9a-f]{64}$")
   digest: string;
 }
