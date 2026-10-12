@@ -28,16 +28,16 @@ These are the global settings for the HorizonDb API.
 title: HorizonDbManagementClient
 description: The Microsoft HorizonDb Management API provides Azure Resource Manager operations for managing HorizonDb clusters, pools, replicas, and firewall rules.
 openapi-type: arm
-tag: package-horizondb-2026-09-01-preview
+tag: package-horizondb-2026-10-01-preview
 ```
 
-### Tag: package-horizondb-2026-09-01-preview
+### Tag: package-horizondb-2026-10-01-preview
 
-These settings apply only when `--tag=package-horizondb-2026-09-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-horizondb-2026-10-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-horizondb-2026-09-01-preview'
 input-file:
-  - preview/2026-09-01-preview/openapi.json
+  - preview/2026-10-01-preview/openapi.json
 suppressions:
   - code: PutRequestResponseSchemeArm
     from: openapi.json
