@@ -852,13 +852,13 @@ interface RecoveryPointsExtendedInfo {
           @header("Location")
           location?: string;
         } & Azure.Core.Foundations.RetryAfterHeader & {
-          /**
-           * A link to the shared fabric level operation status endpoint, which reports the status of the long
-           * running operation whose result this endpoint returns.
-           */
-          @header("Azure-AsyncOperation")
-          azureAsyncOperation?: string;
-        }
+            /**
+             * A link to the shared fabric level operation status endpoint, which reports the status of the long
+             * running operation whose result this endpoint returns.
+             */
+            @header("Azure-AsyncOperation")
+            azureAsyncOperation?: string;
+          }
       >
     | ErrorResponse;
 }
