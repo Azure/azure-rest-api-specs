@@ -296,7 +296,7 @@ interface NetworkFabrics {
   validateConfiguration is ArmResourceActionAsync<
     NetworkFabric,
     ValidateConfigurationProperties,
-    ValidateConfigurationResponseV2
+    ValidateConfigurationResponse
   >;
 
   @doc("Validates the configuration of the underlying resources in the given Network Fabric instance.")

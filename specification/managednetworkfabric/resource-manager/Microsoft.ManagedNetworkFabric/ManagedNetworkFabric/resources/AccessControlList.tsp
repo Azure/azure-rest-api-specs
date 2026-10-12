@@ -96,7 +96,7 @@ interface AccessControlLists {
   validateConfiguration is ArmResourceActionAsync<
     AccessControlList,
     void,
-    ValidateConfigurationResponseV2
+    ValidateConfigurationResponse
   >;
 }
 

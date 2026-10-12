@@ -94,7 +94,7 @@ interface L2IsolationDomains {
   validateConfiguration is ArmResourceActionAsync<
     L2IsolationDomain,
     void,
-    ValidateConfigurationResponseV2
+    ValidateConfigurationResponse
   >;
 
   @doc("Commits the configuration of the given resources.")

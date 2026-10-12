@@ -88,7 +88,7 @@ interface RoutePolicies {
   validateConfiguration is ArmResourceActionAsync<
     RoutePolicy,
     void,
-    ValidateConfigurationResponseV2
+    ValidateConfigurationResponse
   >;
   @doc("Commits the configuration of the given resources.")
   commitConfiguration is ArmResourceActionAsync<

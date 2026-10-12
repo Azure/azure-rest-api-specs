@@ -98,7 +98,7 @@ interface NetworkTapRules {
   validateConfiguration is ArmResourceActionAsync<
     NetworkTapRule,
     void,
-    ValidateConfigurationResponseV2
+    ValidateConfigurationResponse
   >;
 }
 

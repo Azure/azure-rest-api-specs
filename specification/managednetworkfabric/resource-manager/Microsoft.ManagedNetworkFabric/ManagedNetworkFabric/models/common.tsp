@@ -579,6 +579,10 @@ model ValidateConfigurationResponse extends CommonErrorResponse {
 
   @doc("URL for the details of the response.")
   url?: string;
+
+  @added(Versions.v2026_01_15_preview)
+  @doc("Network Device Run Rw Command Response properties.")
+  properties?: ValidateConfigurationResponseProperties;
 }
 
 @doc("The response of the action validate configuration.")
