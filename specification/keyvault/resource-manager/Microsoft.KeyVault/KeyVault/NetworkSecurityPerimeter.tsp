@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "./Vault.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -11,9 +10,24 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.KeyVault;
 
+/** The key vault parent scope for network security perimeter configuration operations. */
+@added(Versions.v2026_10_01_preview)
+@armVirtualResource
+@resourceGroupResource
+model NetworkSecurityPerimeterVault {
+  /** The name of the key vault. */
+  @path
+  @key("vaultName")
+  @segment("vaults")
+  @pattern("^[A-Za-z]([A-Za-z0-9]|-[A-Za-z0-9])+$")
+  @minLength(3)
+  @maxLength(24)
+  name: string;
+}
+
 /** A network security perimeter configuration associated with a key vault. */
 @added(Versions.v2026_10_01_preview)
-@parentResource(Vault)
+@parentResource(NetworkSecurityPerimeterVault)
 model NetworkSecurityPerimeterConfiguration
   is ProxyResource<CommonTypes.NetworkSecurityPerimeterConfigurationProperties> {
   ...ResourceNameParameter<
@@ -58,6 +72,16 @@ interface NetworkSecurityPerimeterConfigurations {
 @@doc(
   NetworkSecurityPerimeterConfiguration.properties,
   "Network security perimeter configuration properties."
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the existing NSP common-types v5 response contract while ARM parameters use v6; explicit common-schema references currently require this legacy decorator."
+@@Azure.ResourceManager.Legacy.externalTypeRef(
+  CommonTypes.NetworkSecurityPerimeterConfiguration,
+  "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the existing NSP common-types v5 list response contract while ARM parameters use v6; explicit common-schema references currently require this legacy decorator."
+@@Azure.ResourceManager.Legacy.externalTypeRef(
+  CommonTypes.NetworkSecurityPerimeterConfigurationListResult,
+  "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
 );
 @@pageItems(CommonTypes.NetworkSecurityPerimeterConfigurationListResult.value);
 @@nextLink(
