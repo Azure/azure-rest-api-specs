@@ -100,9 +100,11 @@ union ToolboxToolType {
   openapi: ToolboxOpenApiToolType,
   a2a_preview: ToolboxA2APreviewToolType,
   browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
+
   @added(Versions.PuPr)
   @removed(Versions.v1)
   cloud_computer_use_preview: ToolboxCloudComputerUsePreviewToolType,
+
   reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
