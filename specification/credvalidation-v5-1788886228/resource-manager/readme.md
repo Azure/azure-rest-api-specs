@@ -1,4 +1,4 @@
-# credvalidation-v5-1791831673
+# credvalidation-v5-1791832921
 
 > see https://aka.ms/autorest
 
@@ -20,11 +20,23 @@ input-file:
   - Microsoft.Test/stable/2026-10-12/test.json
 ```
 
+## Python track2
+
+These settings apply only when `--track2` is specified on the command line.
+
+``` yaml $(azure-sdk-for-python-track2)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.credvalidation
+package-name: azure-mgmt-credvalidation
+package-version: 1.0.0b1
+clear-output-folder: true
+```
+
 ## swagger-to-sdk
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
     after_scripts:
       - >-
