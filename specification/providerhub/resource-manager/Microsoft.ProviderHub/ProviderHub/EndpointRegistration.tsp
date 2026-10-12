@@ -38,7 +38,6 @@ model EndpointRegistration is Azure.ResourceManager.ProxyResource<
   /** The endpoint kind used to select the routing behavior. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is a standard ARM resource envelope property; it is declared directly to preserve the service's Managed default."
   @pattern("^[-\\w\\._,\\(\\\\\\)]+$")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
   kind?: ResourceTypeEndpointKind = ResourceTypeEndpointKind.Managed;
 
   ...ResourceNameParameter<

@@ -1261,10 +1261,9 @@ model CustomRolloutSpecification {
   rolloutId?: string;
 
   /**
-   * Immutable orchestration metadata associated with the rollout.
+   * Orchestration metadata associated with the rollout.
    */
   @added(Versions.v2026_09_01_preview)
-  @visibility(Lifecycle.Create, Lifecycle.Read)
   rolloutOrchestrationMetadata?: RolloutOrchestrationMetadata;
 
   /**
@@ -1275,38 +1274,33 @@ model CustomRolloutSpecification {
 }
 
 /**
- * Immutable orchestration metadata associated with a rollout.
+ * Orchestration metadata associated with a rollout.
  */
 @added(Versions.v2026_09_01_preview)
 model RolloutOrchestrationMetadata {
   /**
    * Whether the rollout is used for manifest buildout.
    */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
   isForManifestBuildout?: boolean;
 
   /**
    * The deployment type associated with the rollout.
    */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
   deploymentType?: string;
 
   /**
    * The traffic ring associated with the rollout.
    */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
   trafficRing?: string;
 
   /**
    * The service group associated with the rollout.
    */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
   serviceGroup?: string;
 
   /**
    * The identifier of the service associated with the rollout.
    */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
   serviceIdentifier?: string;
 }
 
