@@ -204,7 +204,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs", "rust,go");
 
 /** Rust-specific parameters used to test client generation for the blob acquire lease operation. */
-model RustBlobAcquireLeaseParameters {
+alias RustBlobAcquireLeaseParameters = {
   /** Specifies the duration of the lease, in seconds. */
   @clientName("renamed_duration", "rust")
   @header("x-ms-lease-duration")
@@ -217,30 +217,35 @@ model RustBlobAcquireLeaseParameters {
 
   /** An experimental arbitrary client option. */
   foo?: string;
-}
+};
 
-alias RustBlobAcquireLeaseWithRenamedDuration = replaceParameter(
-  Storage.Blob.Blob.acquireLease,
-  "duration",
-  RustBlobAcquireLeaseParameters.duration
-);
+/** Requests a new lease on the specified blob with experimental Rust client parameters. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+@put
+@sharedRoute
+@route("?comp=lease")
+op acquireLeaseRustExperiment is StorageOperationNoBody<
+  {
+    ...TimeoutParameter;
+    ...RustBlobAcquireLeaseParameters;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...IfNoneMatchParameter;
+    ...IfMatchParameter;
+    ...IfTagsParameter;
+    ...LeaseActionParameter<"acquire">;
+  },
+  {
+    @statusCode statusCode: 201;
+    ...EtagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...LeaseIdResponseHeader;
+  }
+>;
 
-alias RustBlobAcquireLeaseWithRenamedProposedLeaseId = replaceParameter(
-  RustBlobAcquireLeaseWithRenamedDuration,
-  "proposedLeaseId",
-  RustBlobAcquireLeaseParameters.proposedLeaseId
-);
-
-alias RustBlobAcquireLeaseExperiment = addParameter(
-  RustBlobAcquireLeaseWithRenamedProposedLeaseId,
-  RustBlobAcquireLeaseParameters.foo
-);
-
-@@override(
-  Storage.Blob.Blob.acquireLease,
-  RustBlobAcquireLeaseExperiment,
-  "rust"
-);
+@@override(Storage.Blob.Blob.acquireLease, acquireLeaseRustExperiment, "rust");
 
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
 @@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
