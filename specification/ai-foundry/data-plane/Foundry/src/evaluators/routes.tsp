@@ -175,10 +175,20 @@ interface EvaluatorGenerationJobs {
    * Creates an evaluator generation job. The service generates rubric-based evaluator
    * definitions from the provided source materials asynchronously.
    */
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
   @summary("Create an evaluator generation job")
   @route("evaluator_generation_jobs")
   @pollingOperation(EvaluatorGenerationJobs.get)
-  create is postJob<EvaluatorGenerationJob>;
+  @post
+  create is FoundryDataPlaneOperation<
+    {
+      ...WithOperationId;
+
+      /** The evaluator generation job inputs to create. */
+      @body job: EvaluatorGenerationInputs;
+    },
+    JobCreatedResponse<EvaluatorGenerationJob>
+  >;
 
   /**
    * Gets the details of an evaluator generation job by its ID.

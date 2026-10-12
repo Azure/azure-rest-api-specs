@@ -8,6 +8,7 @@ using Azure.Core;
 @@clientName(SkuName, "ElasticSanSkuName", "csharp");
 @@clientName(SkuName.Premium_LRS, "PremiumLrs", "csharp");
 @@clientName(SkuName.Premium_ZRS, "PremiumZrs", "csharp");
+@@clientName(SkuName.ElasticSAN_LRS, "ElasticSanLrs", "csharp");
 @@clientName(EncryptionType, "ElasticSanEncryptionType", "csharp");
 @@clientName(Volume, "ElasticSanVolume", "csharp");
 @@alternateType(VolumeProperties.volumeId, uuid, "csharp");
@@ -63,6 +64,15 @@ using Azure.Core;
 );
 @@clientName(`x-ms-force-delete`, "ElasticSanForceDeleteVolume", "csharp");
 @@clientName(ElasticSanProperties.totalMBps, "totalMbps", "csharp");
+@@clientName(ElasticSanUpdateProperties.totalMBps, "totalMbps", "csharp");
+@@clientName(
+  VolumeGroupProperties.encryptionInTransit,
+  "isEncryptionInTransitEnabled",
+  "csharp"
+);
+@@clientName(ManagedByResources, "ElasticSanManagedByInfo", "csharp");
+@@clientName(QualityOfService, "ElasticSanQualityOfService", "csharp");
+@@clientName(SkuZoneDetails, "ElasticSanSkuZoneDetails", "csharp");
 @@clientName(
   Microsoft.ElasticSan.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",

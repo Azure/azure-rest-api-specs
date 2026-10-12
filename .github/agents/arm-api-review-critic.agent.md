@@ -188,10 +188,12 @@ read-only inspection"):
   `git checkout` of branches you do not currently have checked out,
   `git tag -d`, anything that mutates the working tree or remote.
 - Any file write (`Set-Content`, `Out-File`, `>` / `>>` redirects,
-`Add-Content`, `New-Item -ItemType File` outside a temp directory used
-purely for ephemeral fetched content). The critic produces output as
-chat text only; it does not write to the workspace.
+  `Add-Content`, `New-Item -ItemType File` outside a temp directory used
+  purely for ephemeral fetched content). The critic produces output as
+  chat text only; it does not write to the workspace.
+
 <!-- cspell:ignore choco -->
+
 - Any installer / package manager (`npm`, `pip`, `winget`, `choco`, etc.),
   `Invoke-WebRequest` to write a downloaded file into the workspace, or
   any command that mounts, modifies, or executes downloaded content.
@@ -244,10 +246,12 @@ and adds Critic-specific behavioral notes that are not in the protocol.
 3. The **full** findings report as produced in Step 6.
 4. The list of files reviewed.
 5. The previous-version path and full base commit SHA used for `[NEW]`/`[EXISTING]`
-classification. Local mode always includes `Repository HEAD:
+   classification. Local mode always includes `Repository HEAD:
 <full-40-char-sha>`, previous-version path/hash or `None - new service`, and
-any `head` manifest entries needed for in-place comparison.
+   any `head` manifest entries needed for in-place comparison.
+
 <!-- cspell:ignore REPOST -->
+
 6. **The Step 5.5 reconciliation plan** (verbatim) - all three discussion
    surface counts and pagination status; per-finding actions (POST-NEW /
    SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT /
@@ -982,7 +986,7 @@ auto-invalidates if the underlying rule moves.
   required on tracked resources, not on proxy or extension resources.
   Anchor: `arm-api-review.instructions.md`, provisioning-state section.
 - **Enum value additions inside `x-ms-enum.modelAsString: true`.** Not a
-  breaking change. Anchor: `documentation/Breaking changes guidelines.md`.
+  breaking change. Anchor: [Azure Breaking Changes Policy](https://aka.ms/AzBreakingChangesPolicy).
 - **Collection GET paging parameters `$top` and `$skipToken`.** These are
   RPC-defined paging parameters and are allowed alongside `api-version` and
   `$filter`. Drop a finding whose only claim is that either parameter is

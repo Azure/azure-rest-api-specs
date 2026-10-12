@@ -11,6 +11,7 @@ import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 /**
  * The Azure Storage Discovery Management API.

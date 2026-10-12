@@ -125,8 +125,12 @@ invented coverage status.
 
 The unattended entry point is the gh-aw workflow
 [`.github/workflows/data-plane-api-review.md`](../workflows/data-plane-api-review.md),
-which normally runs when a maintainer applies the
-`data-plane-api-review-needed` label. `workflow_dispatch` with a PR number is
+which runs while a non-draft PR carries the
+`data-plane-review-requested` label (auto-applied on new-api-version data-plane
+PRs, or added by a maintainer): it fires on `opened` / `synchronize` /
+`ready_for_review` with the label present, or when the label is applied
+directly. It re-runs while the label is present (for example on each push), and
+skips drafts. `workflow_dispatch` with a PR number is
 retained for testing workflow changes from a branch. The reviewer has no
 mutating GitHub tools; `safe-outputs` is the only write channel.
 

@@ -189,7 +189,9 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
       break;
     }
     case "all-mgmtplane-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter((p) => p.includes(".Management"));
+      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter(
+        (p) => p.includes(".Management") || p.includes("resource-manager"),
+      );
       readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
         p.includes("resource-manager"),
       );
@@ -197,7 +199,9 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
       break;
     }
     case "all-dataplane-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter((p) => !p.includes(".Management"));
+      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter(
+        (p) => !p.includes(".Management") && !p.includes("resource-manager"),
+      );
       readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
         p.includes("data-plane"),
       );

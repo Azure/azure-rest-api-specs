@@ -1258,7 +1258,6 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A browser automation tool call.")
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolCall extends OpenAI.OutputItem {
     type: "browser_automation_preview_call";
 
@@ -1273,7 +1272,6 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a browser automation tool call.")
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolCallOutput extends OpenAI.OutputItem {
     type: "browser_automation_preview_call_output";
 

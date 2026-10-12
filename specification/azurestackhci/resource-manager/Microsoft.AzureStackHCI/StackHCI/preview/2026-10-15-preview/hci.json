@@ -9954,6 +9954,62 @@
       },
       "readOnly": true
     },
+    "ArcGatewayProperties": {
+      "type": "object",
+      "description": "Azure Arc Gateway properties of the cluster.",
+      "properties": {
+        "arcGatewayStatus": {
+          "type": "string",
+          "description": "Status of the Azure Arc Gateway on the cluster.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ArcGatewayStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Azure Arc Gateway is enabled on the cluster."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Azure Arc Gateway is disabled on the cluster."
+              }
+            ]
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ArcGatewayStatus": {
+      "type": "string",
+      "description": "Status of the Azure Arc Gateway on the cluster.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ArcGatewayStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Azure Arc Gateway is enabled on the cluster."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Azure Arc Gateway is disabled on the cluster."
+          }
+        ]
+      }
+    },
     "ArcIdentityResponse": {
       "type": "object",
       "description": "ArcIdentity details.",
@@ -10985,6 +11041,11 @@
         "sdnProperties": {
           "$ref": "#/definitions/ClusterSdnProperties",
           "description": "Software Defined Networking Properties of the cluster",
+          "readOnly": true
+        },
+        "arcGatewayProperties": {
+          "$ref": "#/definitions/ArcGatewayProperties",
+          "description": "Azure Arc Gateway properties of the cluster.",
           "readOnly": true
         },
         "localAvailabilityZones": {

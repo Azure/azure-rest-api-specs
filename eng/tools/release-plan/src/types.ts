@@ -22,6 +22,7 @@ export type AzsdkRunner = (args: string[]) => CommandResult;
 export interface ReleasePlanCommandContext {
   prUrl?: string;
   tspProjectPath: string;
+  specCommitSha: string;
   apiReleaseType: ApiReleaseType;
   sdkReleaseType: "beta" | "stable";
   targetMonth: string;
@@ -90,16 +91,19 @@ export interface ReleasePlanDetails extends Record<string, unknown> {
 }
 
 export interface EnsureReleasePlanResult {
-  outcome: "existing_by_pr" | "existing_by_path" | "created" | "not_found";
+  outcome: "existing_by_id" | "existing_by_pr" | "existing_by_path" | "created" | "not_found";
   releasePlan: ReleasePlanData | null;
-  details: {
-    prUrl: string;
-    tspProjectPath: string;
-    apiVersion: string;
-    apiReleaseType: ApiReleaseType;
-    sdkReleaseType: "beta" | "stable";
-    targetReleaseMonth: string;
-  };
+  details:
+    | { releasePlanId: string }
+    | {
+        prUrl: string;
+        tspProjectPath: string;
+        apiVersion: string;
+        specCommitSha: string;
+        apiReleaseType: ApiReleaseType;
+        sdkReleaseType: "beta" | "stable";
+        targetReleaseMonth: string;
+      };
 }
 
 export interface CommitProjectInfoResult {
@@ -111,7 +115,7 @@ export interface CommitProjectInfoResult {
 
 export interface CliArguments {
   commitSha?: string;
-  prNumber?: number;
+  releasePlanId?: string;
   owner: string;
   repo: string;
   workspace: string;

@@ -1,0 +1,39 @@
+parameters:
+  "service-dir":
+    default: "sdk/ai"
+emit:
+  - "@azure-tools/typespec-python"
+options:
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-finetuningsessions"
+    package-name: azure-ai-finetuningsessions
+    api-version: "v1"
+    namespace: azure.ai.finetuningsessions
+    flavor: azure
+    package-version: "1.0.0b1"
+    # Keep the established model API without adding a parallel TypedDict surface.
+    generate-typeddict: false
+    # SDK validation starts from main, where this new package does not exist.
+    # Emit installable metadata in clean outputs; public packaging customizations
+    # remain checked in and are not replaced by the reproducibility verifier.
+    generate-packaging-files: true
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/ai-foundry/data-plane/Foundry/src/session-finetuning/"
+      - "specification/ai-foundry/data-plane/Foundry/src/common/"
+imports:
+  - "@azure-tools/typespec-azure-core"
+  - "@azure-tools/typespec-azure-core/experimental"
+  - "@typespec/openapi"
+  - "@azure-tools/openai-typespec/models/responses"
+  - "@azure-tools/typespec-client-generator-core"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "Fine-tuning session API uses snake_case field names matching the wire format"
+    "@azure-tools/typespec-azure-core/no-string-discriminator": "OperationResult discriminator uses a plain string union"
+    "@azure-tools/typespec-azure-core/use-standard-names": "The preview session API preserves existing operation names"
+    "@azure-tools/typespec-azure-core/no-nullable": "The existing service returns JSON null for optional result fields"
+    "@azure-tools/typespec-azure-core/bad-record-type": "Metadata and asynchronous result payloads preserve arbitrary JSON values"
