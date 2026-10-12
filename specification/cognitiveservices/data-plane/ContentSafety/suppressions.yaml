@@ -4,3 +4,6 @@
 - tool: TypeSpecRequirement
   path: ./preview/2026-07-01-preview/*.json
   reason: Brownfield service not ready to migrate
+- tool: SwaggerModelValidation
+  path: ./preview/2026-10-15-preview/contentsafety.json
+  reason: OAV requires every x-ms-example to duplicate every operation response. The deterministic invalid-selector fixtures intentionally omit HTTP 200 receipts; exact schema and response validation is enforced by the contract conformance test.
