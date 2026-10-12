@@ -19,7 +19,7 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Disk resource representing a physical disk on an Edge Machine.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @parentResource(EdgeMachine)
 model EdgeMachineDisk
   is Azure.ResourceManager.ProxyResource<EdgeMachineDiskProperties> {
@@ -34,7 +34,7 @@ model EdgeMachineDisk
 /**
  * Operations for Edge Machine Disks.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @armResourceOperations
 interface EdgeMachineDisks {
   /** Get a specific disk on an Edge Machine. */
@@ -55,7 +55,7 @@ interface EdgeMachineDisks {
 /**
  * Volume resource representing a storage volume on an Edge Machine.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @parentResource(EdgeMachine)
 model EdgeMachineVolume
   is Azure.ResourceManager.ProxyResource<EdgeMachineVolumeProperties> {
@@ -70,7 +70,7 @@ model EdgeMachineVolume
 /**
  * Operations for Edge Machine Volumes.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @armResourceOperations
 interface EdgeMachineVolumes {
   /** Get a specific volume on an Edge Machine. */
@@ -92,7 +92,7 @@ interface EdgeMachineVolumes {
  * Disk Job resource for managing operations on disks.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @parentResource(EdgeMachineDisk)
 model EdgeMachineDiskJob
   is Azure.ResourceManager.ProxyResource<EdgeMachineDiskJobProperties> {
@@ -107,7 +107,7 @@ model EdgeMachineDiskJob
 /**
  * Operations for Edge Machine Disk Jobs.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @armResourceOperations
 interface EdgeMachineDiskJobs {
   /** Get a specific disk job. */
@@ -128,7 +128,7 @@ interface EdgeMachineDiskJobs {
 /**
  * Disk Privileged Job resource for managing privileged operations on disk volumes.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @parentResource(EdgeMachineDisk)
 model EdgeMachineDiskPrivilegedJob
   is Azure.ResourceManager.ProxyResource<EdgeMachineDiskPrivilegedJobProperties> {
@@ -143,7 +143,7 @@ model EdgeMachineDiskPrivilegedJob
 /**
  * Operations for Edge Machine Disk Privileged Jobs.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @armResourceOperations
 interface EdgeMachineDiskPrivilegedJobs {
   /** Get a specific privileged job. */

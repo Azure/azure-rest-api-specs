@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WidgetManagement",
+    "version": "2026-01-01",
+    "description": "A minimal ARM API for conversion tests."
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Widgets/widgets/{widgetName}": {
+      "get": {
+        "operationId": "Widgets_Get",
+        "description": "Get a widget.",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The subscription ID."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name."
+          },
+          {
+            "name": "widgetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The widget name."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The widget.",
+            "schema": {
+              "$ref": "#/definitions/Widget"
+            }
+          },
+          "default": {
+            "description": "An error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Widget": {
+      "type": "object",
+      "description": "A widget resource.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource ID."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        }
+      },
+      "required": ["location"]
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "An error response.",
+      "properties": {
+        "error": {
+          "type": "object",
+          "description": "The error details.",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "The error code."
+            },
+            "message": {
+              "type": "string",
+              "description": "The error message."
+            }
+          }
+        }
+      }
+    }
+  }
+}

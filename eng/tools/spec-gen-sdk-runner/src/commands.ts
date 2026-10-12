@@ -4,9 +4,11 @@ import path from "node:path";
 import { inspect } from "node:util";
 import {
   type AzsdkBuildResponse,
+  type AzsdkDetectBreakingChangeResponse,
   type AzsdkGenerateResponse,
   type AzsdkPackResponse,
   buildExecutionReport,
+  getBreakingChangeSignal,
   parseAzsdkResponse,
 } from "./azsdk-adapter.ts";
 import {
@@ -16,9 +18,11 @@ import {
   getExecutionReport,
   getSpecPaths,
   installLanguageToolchain,
+  isBreakingChangeDetectionEnabled,
   logIssuesToPipeline,
   parseArguments,
   prepareAzsdkBuildCommand,
+  prepareAzsdkDetectBreakingChangeCommand,
   prepareAzsdkGenerateCommand,
   prepareAzsdkPackCommand,
   prepareSpecGenSdkCommand,
@@ -135,6 +139,8 @@ async function runAzsdkGeneration(
   const tspClientDir = path.join(commandInput.localSdkRepoPath, "eng", "common", "tsp-client");
   if (fs.existsSync(path.join(tspClientDir, "package.json"))) {
     logMessage(`Installing tsp-client dependencies at ${tspClientDir}`, LogLevel.Info);
+    // This runs inside the cloned target SDK repo (e.g. azure-sdk-for-python), which
+    // manages its own dependencies with npm — not this repo's pnpm workspace.
     await execAsync("npm ci", { cwd: tspClientDir });
   }
 
@@ -318,6 +324,41 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
   return { statusCode, executionResult: executionReport?.executionResult ?? "" };
 }
 
+/**
+ * Run azsdk-cli SDK breaking-change detection for each generated package in the
+ * execution report and fold the result into it. Non-fatal by contract: any
+ * failure leaves the package's existing breaking-change label untouched.
+ */
+async function detectSdkBreakingChange(executionReport: ExecutionReport): Promise<void> {
+  const azsdkExe = process.env.AZSDK || "azsdk";
+  for (const pkg of executionReport.packages) {
+    if (!pkg.packageRootPath) {
+      logMessage(
+        `Skipping breaking-change detection: no packageRootPath for ${pkg.packageName ?? "unknown package"}`,
+        LogLevel.Warn,
+      );
+      continue;
+    }
+    let signal: boolean | undefined;
+    try {
+      const args = prepareAzsdkDetectBreakingChangeCommand(pkg.packageRootPath);
+      logMessage(`Running: ${azsdkExe} ${args.join(" ")}`, LogLevel.Info);
+      const output = await runCommandWithOutput(azsdkExe, args);
+      const response = parseAzsdkResponse<AzsdkDetectBreakingChangeResponse>(output);
+      signal = getBreakingChangeSignal(response);
+      logMessage(`azsdk pkg detect-breaking-change hasBreakingChange: ${signal}`, LogLevel.Info);
+    } catch (error) {
+      logMessage(`Error running azsdk pkg detect-breaking-change:${inspect(error)}`, LogLevel.Warn);
+    }
+
+    // A definitive result is the single source of truth for the label; an
+    // error/unknown result leaves the spec-gen-sdk value in place.
+    if (signal !== undefined) {
+      pkg.shouldLabelBreakingChange = signal;
+    }
+  }
+}
+
 /* Generate SDKs for spec pull request */
 export async function generateSdkForSpecPr(): Promise<CommandResult> {
   // Parse the arguments
@@ -340,6 +381,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
   let currentExecutionResult: string;
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
+  const breakingChangeDetectionEnabled = isBreakingChangeDetectionEnabled();
   // Tracks whether the SDK repo is currently checked out on a non-`main` branch
   // due to a `sdk-validation.yaml` pin from a previous spec in this run.
   let sdkRepoBranchSwitched = false;
@@ -481,6 +523,21 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
       }
     }
 
+    // Run azsdk-cli breaking-change detection (spec-PR only, feature-flagged) and
+    // let its definitive result override the label from spec-gen-sdk.
+    if (
+      breakingChangeDetectionEnabled &&
+      changedSpec.typespecProject &&
+      executionReport &&
+      executionReport.packages.length > 0
+    ) {
+      try {
+        await detectSdkBreakingChange(executionReport);
+      } catch (error) {
+        logMessage(`Runner: error in breaking-change detection:${inspect(error)}`, LogLevel.Warn);
+      }
+    }
+
     // Process execution report (common path for both tools)
     try {
       if (executionReport) {
@@ -553,11 +610,12 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
-  if (
+  const isTypeSpecBatch =
+    batchType === "sample-typespecs" ||
     batchType === "all-typespecs" ||
     batchType === "all-mgmtplane-typespecs" ||
-    batchType === "all-dataplane-typespecs"
-  ) {
+    batchType === "all-dataplane-typespecs";
+  if (isTypeSpecBatch) {
     specGenSdkCommand.push("--skip-sdk-gen-from-openapi", "true");
   }
 
@@ -584,11 +642,28 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   let stagedArtifactsFolder = "";
   let serviceFolderPath = "";
   const failedSpecs: string[] = [];
+  const runtimeMarkdownRows: string[] = [];
+  let telemetrySpecType: string | undefined;
+  switch (batchType) {
+    case "all-mgmtplane-typespecs":
+      telemetrySpecType = "management-plane";
+      break;
+    case "all-dataplane-typespecs":
+      telemetrySpecType = "data-plane";
+      break;
+    case "sample-typespecs":
+      telemetrySpecType = "sample";
+      break;
+    case "all-typespecs":
+      telemetrySpecType = "all";
+      break;
+  }
 
   await installLanguageToolchain(commandInput);
 
   // Generate SDKs for each spec
   for (const specConfigs of specConfigsArray) {
+    const specStartTime = performance.now();
     if (specConfigs.tspconfigPath && specConfigs.readmePath) {
       serviceFolderPath = getServiceFolderPath(specConfigs.tspconfigPath);
       logMessage(`Generating SDK from ${serviceFolderPath}`, LogLevel.Group);
@@ -716,6 +791,41 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
       statusCode = 1;
     }
 
+    if (
+      isTypeSpecBatch &&
+      specConfigs.tspconfigPath &&
+      executionReport &&
+      (executionReport.executionResult === "succeeded" ||
+        executionReport.executionResult === "warning")
+    ) {
+      const packageNames = executionReport.packages.length
+        ? executionReport.packages.map((pkg) => pkg.packageName ?? "")
+        : [""];
+      const durationSeconds = Math.round(performance.now() - specStartTime) / 1000;
+      for (const packageName of packageNames) {
+        runtimeMarkdownRows.push(
+          `| ${specConfigs.tspconfigPath} | ${packageName || "(not reported)"} | ${executionReport.executionResult} | ${durationSeconds} |`,
+        );
+        if (telemetrySpecType) {
+          const telemetry = {
+            eventType: "SdkBatchGenerationSpecResult",
+            timestamp: new Date().toISOString(),
+            batchType,
+            specType: telemetrySpecType,
+            sdkRepoName: commandInput.sdkRepoName,
+            language: commandInput.sdkRepoName.replace("azure-sdk-for-", ""),
+            specPath: specConfigs.tspconfigPath,
+            packageName,
+            executionResult: executionReport.executionResult,
+            durationSeconds,
+            buildId: process.env.BUILD_BUILDID ?? "",
+            pipelineUrl: `${process.env.SYSTEM_COLLECTIONURI ?? ""}${process.env.SYSTEM_TEAMPROJECT ?? ""}/_build/results?buildId=${process.env.BUILD_BUILDID ?? ""}`,
+          };
+          logMessage(`##[SdkBatchGenerationSpecResult]${JSON.stringify(telemetry)}`);
+        }
+      }
+    }
+
     logMessage("ending group logging", LogLevel.EndGroup);
     if (specConfigs.tspconfigPath && specConfigs.readmePath) {
       specConfigPath = serviceFolderPath;
@@ -739,6 +849,12 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   if (succeededCount > 0) {
     markdownContent += `${succeededContent}\n`;
   }
+  if (runtimeMarkdownRows.length > 0) {
+    markdownContent += "## TypeSpec Package Run Times\n";
+    markdownContent += "| Spec Path | Package Name | Result | Run Time (seconds) |\n";
+    markdownContent += "| --- | --- | --- | ---: |\n";
+    markdownContent += `${runtimeMarkdownRows.join("\n")}\n`;
+  }
   markdownContent += failedCount ? `## Total Failed Specs\n ${failedCount}\n` : "";
   markdownContent += warningCount ? `## Total Specs with Warnings\n ${warningCount}\n` : "";
   markdownContent += notEnabledCount
@@ -750,14 +866,13 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   markdownContent += succeededCount ? `## Total Successful Specs\n ${succeededCount}\n` : "";
   markdownContent += `## Total Specs Count\n ${specConfigsArray.length}\n\n`;
 
-  // Emit structured telemetry for Kusto ingestion (only for mgmtplane/dataplane batch types)
-  if (batchType === "all-mgmtplane-typespecs" || batchType === "all-dataplane-typespecs") {
-    const specType = batchType === "all-mgmtplane-typespecs" ? "management-plane" : "data-plane";
+  // Emit structured telemetry for Kusto ingestion.
+  if (telemetrySpecType) {
     const telemetry = {
       eventType: "SdkBatchGenerationSummary",
       timestamp: new Date().toISOString(),
       batchType: batchType,
-      specType: specType,
+      specType: telemetrySpecType,
       sdkRepoName: commandInput.sdkRepoName,
       language: commandInput.sdkRepoName.replace("azure-sdk-for-", ""),
       totalSpecs: succeededCount + failedCount,

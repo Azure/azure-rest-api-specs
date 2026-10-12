@@ -36,7 +36,7 @@ model SecretSyncProperties {
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
   serviceAccountName: string;
 
-  @doc("Type specifies the type of the Kubernetes secret object, e.g. \"Opaque\" or\"kubernetes.io/tls\". The controller must have permission to create secrets of the specified type.")
+  @doc("Type specifies the type of the Kubernetes secret object, e.g. `Opaque` or `kubernetes.io/tls`. The controller must have permission to create secrets of the specified type.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   kubernetesSecretType: KubernetesSecretType;
 
@@ -116,7 +116,7 @@ model SecretSyncStatus {
   @visibility(Lifecycle.Read)
   conditions?: SecretSyncCondition[];
 
-  // Not including syncHash at the moment for security concerns TODO #28507544 https://msazure.visualstudio.com/One/_workitems/edit/28507544
+  // Not including syncHash at the moment for security concerns
 }
 
 @doc("A condition represents the status of the secret create and update processes.")

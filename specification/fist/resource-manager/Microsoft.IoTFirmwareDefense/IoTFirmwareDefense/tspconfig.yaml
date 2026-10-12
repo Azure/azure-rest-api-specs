@@ -17,20 +17,20 @@ options:
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-iotfirmwaredefense"
     namespace: "azure.mgmt.iotfirmwaredefense"
-    flavor: "azure"
     generate-test: true
     generate-sample: true
-  "@azure-tools/typespec-ts":
-    flavor: azure
-    experimental-extensible-enums: true
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-iotfirmwaredefense"
-    package-details:
-      name: "@azure/arm-iotfirmwaredefense"
+    flavor: "azure"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-iotfirmwaredefense"
     namespace: "com.azure.resourcemanager.iotfirmwaredefense"
-    flavor: "azure"
-    service-name: "IoT Firmware Defense"
+    service-name: "IoT Firmware Defense" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-iotfirmwaredefense"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-iotfirmwaredefense"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/iotfirmwaredefense"
     emitter-output-dir: "{output-dir}/{service-dir}/armiotfirmwaredefense"

@@ -16,7 +16,7 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Cluster Jobs resource
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @parentResource(Cluster)
 model ClusterJob is Azure.ResourceManager.ProxyResource<ClusterJobProperties> {
   ...ResourceNameParameter<
@@ -30,7 +30,7 @@ model ClusterJob is Azure.ResourceManager.ProxyResource<ClusterJobProperties> {
 /**
  * ClusterJobs operations
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @armResourceOperations
 interface ClusterJobs {
   /** Get a ClusterJob */

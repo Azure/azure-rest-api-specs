@@ -755,6 +755,9 @@ union SandboxCustomImageType {
 @@alternateType(ClusterProperties.uri, url, "csharp");
 @@clientName(ClusterProperties.dataIngestionUri, "DataIngestionUri", "csharp");
 @@alternateType(ClusterProperties.dataIngestionUri, url, "csharp");
+@@alternateType(KeyVaultProperties.keyVaultUri, url, "csharp");
+@@alternateType(MigrationClusterProperties.uri, url, "csharp");
+@@alternateType(MigrationClusterProperties.dataIngestionUri, url, "csharp");
 @@clientName(
   ClusterProperties.allowedIpRangeList,
   "AllowedIPRangeList",

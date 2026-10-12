@@ -1,0 +1,66 @@
+{
+  "operationId": "ManagedVirtualNodePools_CreateOrUpdate",
+  "title": "Create or update a managed virtual node pool",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "demo",
+    "managedVirtualNodePoolName": "demo-pool",
+    "api-version": "2026-09-01-preview",
+    "resource": {
+      "location": "eastus",
+      "tags": {
+        "env": "prod"
+      },
+      "properties": {
+        "aksClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerService/managedClusters/demo-aks",
+        "managedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ManagedIdentity/userAssignedIdentities/demo-mi",
+        "aiAgentGroupResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/aiAgentsGroups/demo-aag",
+        "minNodes": 1,
+        "maxNodes": 5
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/managedVirtualNodePools/demo-pool",
+        "name": "demo-pool",
+        "type": "Microsoft.ContainerInstance/managedVirtualNodePools",
+        "location": "eastus",
+        "tags": {
+          "env": "prod"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "aksClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerService/managedClusters/demo-aks",
+          "managedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ManagedIdentity/userAssignedIdentities/demo-mi",
+          "aiAgentGroupResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/aiAgentsGroups/demo-aag",
+          "minNodes": 1,
+          "maxNodes": 5
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerInstance/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-09-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/managedVirtualNodePools/demo-pool",
+        "name": "demo-pool",
+        "type": "Microsoft.ContainerInstance/managedVirtualNodePools",
+        "location": "eastus",
+        "tags": {
+          "env": "prod"
+        },
+        "properties": {
+          "provisioningState": "Creating",
+          "aksClusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerService/managedClusters/demo-aks",
+          "managedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ManagedIdentity/userAssignedIdentities/demo-mi",
+          "aiAgentGroupResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/aiAgentsGroups/demo-aag",
+          "minNodes": 1,
+          "maxNodes": 5
+        }
+      }
+    }
+  }
+}

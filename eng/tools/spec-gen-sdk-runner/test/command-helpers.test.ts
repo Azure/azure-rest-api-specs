@@ -10,8 +10,10 @@ import {
   getBuildFailedInfo,
   getRequiredSettingValue,
   getSpecPaths,
+  isBreakingChangeDetectionEnabled,
   logIssuesToPipeline,
   parseArguments,
+  prepareAzsdkDetectBreakingChangeCommand,
   prepareSpecGenSdkCommand,
   selectGenerationTool,
   setBuildFailedLabelVariable,
@@ -260,7 +262,11 @@ describe("commands.ts", () => {
     });
 
     test("should return management plane TypeSpec and resource-manager readme paths for 'all-mgmtplane-typespecs'", () => {
-      const managementTypespecs = ["typespec1.Management", "typespec2.Management"];
+      const managementTypespecs = [
+        "typespec1.Management",
+        "typespec2.Management",
+        "resource-manager/typespec3",
+      ];
       const resourceManagerReadmes = ["resource-manager/readme-rm1", "resource-manager/readme-rm2"];
 
       vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue([
@@ -276,6 +282,7 @@ describe("commands.ts", () => {
       vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
         { tspconfigPath: "typespec1.Management", readmePath: "resource-manager/readme-rm1" },
         { tspconfigPath: "typespec2.Management", readmePath: "resource-manager/readme-rm2" },
+        { tspconfigPath: "resource-manager/typespec3", readmePath: undefined },
       ]);
 
       const result = getSpecPaths("all-mgmtplane-typespecs", "/spec/path");
@@ -287,7 +294,7 @@ describe("commands.ts", () => {
         resourceManagerReadmes,
         true,
       );
-      expect(result).toHaveLength(2);
+      expect(result).toHaveLength(3);
     });
 
     test("should return data plane TypeSpec and data-plane readme paths for 'all-dataplane-typespecs'", () => {
@@ -298,6 +305,7 @@ describe("commands.ts", () => {
         ...dataPlaneTypespecs,
         "typespec1.Management",
         "typespec2.Management",
+        "resource-manager/typespec5",
       ]);
       vi.spyOn(utils, "findReadmeFiles").mockReturnValue([
         ...dataPlaneReadmes,
@@ -808,5 +816,25 @@ describe("commands.ts", () => {
       const result = selectGenerationTool(undefined, undefined, SdkName.Rust);
       expect(result).toBe("spec-gen-sdk");
     });
+  });
+});
+
+describe("prepareAzsdkDetectBreakingChangeCommand", () => {
+  test("includes package path, changes-only, and json output", () => {
+    expect(prepareAzsdkDetectBreakingChangeCommand("/pkg/path")).toEqual([
+      "pkg",
+      "detect-breaking-change",
+      "--package-path",
+      "/pkg/path",
+      "--changes-only",
+      "--output",
+      "json",
+    ]);
+  });
+});
+
+describe("isBreakingChangeDetectionEnabled", () => {
+  test("is disabled by default (code-level feature flag)", () => {
+    expect(isBreakingChangeDetectionEnabled()).toBe(false);
   });
 });

@@ -1,0 +1,76 @@
+{
+  "operationId": "ContextCaches_Update",
+  "title": "Update a Context Cache tags",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-06-01",
+    "contextCacheName": "testaccount",
+    "properties": {
+      "tags": {
+        "environment": "production",
+        "team": "context-cache"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "description": "Updated Prompt Service account description"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/contextCaches/testaccount",
+        "name": "testaccount",
+        "type": "Microsoft.Storage/contextCaches",
+        "location": "eastus",
+        "tags": {
+          "environment": "production",
+          "team": "context-cache"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "properties": {
+          "accountKind": "Regional",
+          "description": "Updated Prompt Service account description",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "identityType": "systemAssignedIdentity"
+              },
+              "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey"
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-01T00:00:00Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/contextCaches/testaccount?api-version=2026-06-01",
+        "Retry-After": "10"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InvalidOperation",
+          "message": "Invalid request body or parameters"
+        }
+      }
+    }
+  }
+}
