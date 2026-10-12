@@ -1,0 +1,50 @@
+{
+  "operationId": "RaiBindings_CreateOrUpdate",
+  "parameters": {
+    "accountName": "safety-account",
+    "api-version": "2026-09-15-preview",
+    "If-Match": "\"00000000-0000-0000-0000-000000000002\"",
+    "raiBindingName": "chat-guard",
+    "raiBinding": {
+      "properties": {
+        "boundResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/target-resource-group/providers/Microsoft.CognitiveServices/accounts/aoai-account/deployments/chat-canary",
+        "targetPolicyName": "agent-guard-v2"
+      }
+    },
+    "resourceGroupName": "resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Update a RAI binding target conditionally across subscriptions",
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000005\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiBindings/chat-guard",
+        "name": "chat-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiBindings",
+        "etag": "\"00000000-0000-0000-0000-000000000005\"",
+        "properties": {
+          "boundResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/target-resource-group/providers/Microsoft.CognitiveServices/accounts/aoai-account/deployments/chat-canary",
+          "targetPolicyName": "agent-guard-v2"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000005\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiBindings/chat-guard",
+        "name": "chat-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiBindings",
+        "etag": "\"00000000-0000-0000-0000-000000000005\"",
+        "properties": {
+          "boundResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/target-resource-group/providers/Microsoft.CognitiveServices/accounts/aoai-account/deployments/chat-canary",
+          "targetPolicyName": "agent-guard-v2"
+        }
+      }
+    }
+  }
+}

@@ -2,11 +2,18 @@
 # https://github.com/Azure/azure-sdk/blob/main/docs/policies/opensource.md#codeowners
 
 #########
-# Specification
+# Default ownership
 #########
 
+# The last matching entry wins, so defaults must precede explicit owners.
+# GitHub supports these defaults; the SDK linter exceptions are in CODEOWNERS_baseline_errors.txt.
+* @Azure/azure-rest-api-specs-maintainers
+
+# Unlisted services use normal reviewer approval, not a default code owner.
+/specification/
+
 #########
-# Codeowner assignments are made from the _last_ matching entry in CODEOWNERS, so catch-all entries must come first
+# Specification
 #########
 
 # PRLabel: %Schema Registry
@@ -231,7 +238,7 @@
 /specification/search/data-plane/ @BevLoh @giulianob @xiangyan99 @yangylu91 @efrainretana @admayber @Draconicida @xiong-qiao
 
 # PRLabel: %Search
-/specification/search/resource-manager/ @BevLoh @efrainretana @yangylu91 @admayber @Draconicida @xiong-qiao
+/specification/search/resource-manager/ @BevLoh @efrainretana @yangylu91 @admayber @Draconicida @xiong-qiao @lc48t @hillarykhuu
 
 /specification/serialconsole/ @amitchat @craigw @asinn826
 
@@ -288,31 +295,16 @@
 # PRLabel: %Profile
 /profile/ @shahabhijeet
 
-/specification/contosowidgetmanager/ @mikeharder @raych1 @maririos
+/specification/contosowidgetmanager/ @raych1 @Azure/azure-rest-api-specs-maintainers
 
 ###########
 # Eng Sys
 ###########
-/.gitattributes     @mikeharder @benbp
-/.gitignore         @mikeharder @benbp @Azure/azure-rest-api-specs-maintainers
-/cspell.json        @mikeharder @benbp @Azure/azure-rest-api-specs-maintainers
-/cspell.yaml        @mikeharder @benbp @Azure/azure-rest-api-specs-maintainers
-/.prettierrc.json   @mikeharder @benbp
-/.oxfmtrc.json      @mikeharder @benbp
-/pnpm-lock.yaml     @mikeharder @benbp @Azure/azure-rest-api-specs-maintainers
-/pnpm-workspace.yaml @mikeharder @benbp @Azure/azure-rest-api-specs-maintainers
-/package.json       @mikeharder @benbp @Azure/azure-rest-api-specs-maintainers
-/tsconfig.json      @mikeharder @benbp
-/.github/           @mikeharder @benbp @Azure/azure-rest-api-specs-maintainers
-/.vscode/           @mikeharder @benbp @Azure/azure-rest-api-specs-maintainers
-/dev/               @mikeharder @benbp
-/eng/               @mikeharder @benbp @Azure/azure-rest-api-specs-maintainers
 /eng/common/        @Azure/azure-sdk-eng @Azure/azure-sdk-sync-approvers
 /eng/tools/typespec-migration-validation @pshao25 @live1206
 /eng/tools/typespec-suppressions @timotheeguerin @markcowl @catalinaperalta @iscai-msft
-/eng/tools/typespec-validation/**/sdk-tspconfig-validation*.ts @marygao @raych1 @maririos
-/scripts/           @mikeharder @benbp
-/specification/suppressions.yaml @mikeharder @benbp @raych1 @marygao @maririos @qiaozha
+/eng/tools/typespec-validation/**/sdk-tspconfig-validation*.ts @marygao @raych1
+/specification/suppressions.yaml @raych1 @marygao @qiaozha
 /.github/CODEOWNERS @Azure/azure-sdk-eng
 /.github/skills     @Azure/azure-sdk-eng @chunyu3 @lirenhe @ArthurMa1978 @haolingdong-msft
 
@@ -321,11 +313,11 @@
 
 ## Copilot
 
-/.github/copilot-instructions.md         @praveenkuttappan @maririos
+/.github/copilot-instructions.md         @praveenkuttappan
 /.github/copilot-review-instructions.md  @ravimeda @praveenkuttappan
-/.github/prompts/                        @praveenkuttappan @maririos
-/.github/instructions/                   @praveenkuttappan @maririos
-/.github/chatmodes/                      @praveenkuttappan @maririos
+/.github/prompts/                        @praveenkuttappan
+/.github/instructions/                   @praveenkuttappan
+/.github/chatmodes/                      @praveenkuttappan
 
 ## ARM API Reviewer
 
@@ -345,6 +337,3 @@
 /.github/workflows/typespec-suppressions-*.yaml   @timotheeguerin @markcowl @catalinaperalta @iscai-msft
 /.github/workflows/src/typespec-suppressions/     @timotheeguerin @markcowl @catalinaperalta @iscai-msft
 /.github/workflows/test/typespec-suppressions/    @timotheeguerin @markcowl @catalinaperalta @iscai-msft
-
-# Add owners for notifications for specific pipelines
-/eng/common/pipelines/codeowners-linter.yml

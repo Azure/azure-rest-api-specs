@@ -113,7 +113,7 @@ From `package.json` comments:
 - `@actions/core`, `@actions/github`: Types for the injected GitHub Actions toolkit (devDependencies)
 - `@octokit/rest`, `@octokit/types`: GitHub REST API client
 - `simple-git`: Git operations
-- `js-yaml`: YAML parsing
+- `yaml`: YAML parsing
 - `debug`: Debug logging
 - `vitest`, `@vitest/coverage-v8`: Root development dependencies for testing and coverage
 - `oxlint`, `oxlint-tsgolint`: Root development dependencies for linting
@@ -148,11 +148,13 @@ Vitest workspace and root `pnpm check` runs all contributor checks. Package-loca
 Vitest commands still run directly and do not forward to the root.
 
 `eng.yml` validates the workspace, runs root `pnpm build` once on Linux, and runs
-the Vitest workspace on Ubuntu and Windows. `github-test.yaml` retains production-only module import
-checks on both OSes, plus actionlint and compiled agentic workflow lock checks on Linux.
-The Linux job also runs zizmor on tracked workflow and action YAML, excluding generated `.lock.yml`
-files. External actions must be SHA-pinned. Keep any necessary audit exceptions narrowly scoped and
-explain them inline; preserve credentials only when a later Git operation requires authentication.
+the Vitest workspace on Ubuntu and Windows. Its dedicated GitHub Actions lint job runs actionlint
+and zizmor on Linux; zizmor audits tracked workflow and action YAML, excluding generated `.lock.yml`
+files and `agentics-maintenance.yml`. `github-test.yaml` retains production-only module import checks
+on both OSes and compiled
+agentic workflow lock checks on Linux. External actions must be SHA-pinned. Keep any necessary audit
+exceptions narrowly scoped and explain them inline; preserve credentials only when a later Git
+operation requires authentication.
 
 CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
 and `eng/tools`. Do not add lint or type-check steps to the test OS matrix.
@@ -237,7 +239,7 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 - **Pull request target**: Use `pull_request_target` carefully; only support specific actions
 - **Permissions**: Define minimal `permissions` in workflow files
 - **Token usage**: Use `GITHUB_TOKEN` with least privilege
-- **Action references**: Pin external actions to a full commit SHA and retain a version comment for dependency updates.
+- **Action references**: Pin external actions to a full commit SHA and retain a matching full release version comment (e.g., `# v7.0.0`) for dependency updates. Do not use floating major or minor version comments.
 - **Repository references**: After checkout, use `./...` for local composite actions and preserve the intended checkout revision. Privileged workflows must only execute actions from a trusted base/default-branch checkout, never a PR-head checkout. The `self-repository` audit is disabled repository-wide in `.github/zizmor.yaml` because `$/...` actions download the entire specs repository; do not add inline suppressions for this rule. Keep `$/...` for reusable workflows, which do not download an action archive.
 - **Checkout**: Use direct SHA-pinned `actions/checkout` with a version comment and explicit `persist-credentials: false`; enable credentials only for later authenticated Git operations. Do not wrap the initial checkout in a self-repository action: preparing it downloads and extracts the entire specs repository before the actual checkout, adding minutes to every job (see [actions/runner#4631](https://github.com/actions/runner/issues/4631)).
 
@@ -288,7 +290,7 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 1. Create workflow YAML in `.github/workflows/my-workflow.yaml`
 2. Create workflow scripts in `.github/workflows/src/my-workflow.ts`
 3. Write tests in `.github/workflows/test/my-workflow.test.ts`
-4. Add workflow to `github-test.yaml` if it needs validation
+4. Keep workflow and action linting in the dedicated `eng.yml` job.
 5. Run the [required checks](#before-committing).
 
 ### Updating Dependencies
