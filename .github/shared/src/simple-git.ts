@@ -1,4 +1,4 @@
-import { resolve } from "path";
+import { resolve } from "node:path";
 import { simpleGit } from "simple-git";
 
 export async function getRootFolder(inputPath: string): Promise<string> {

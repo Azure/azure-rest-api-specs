@@ -1,8 +1,8 @@
 import { readme, swagger } from "@azure-tools/specs-shared/changed-files";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
-import { readFile } from "fs/promises";
+import { readFile } from "node:fs/promises";
 import { isDeepStrictEqual } from "node:util";
-import { join, relative, resolve, sep } from "path";
+import { join, relative, resolve, sep } from "node:path";
 import { type ReadmeAffectedTags } from "./lintdiff-types.ts";
 import { getUnsuppressedSwaggers } from "./swagger-suppressions.ts";
 import { pathExists } from "./util.ts";

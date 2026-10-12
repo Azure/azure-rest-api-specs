@@ -20,21 +20,24 @@ jobs:
 
     steps:
       - name: Checkout eng
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             eng/
             .github/
 
       - name: Checkout 'after' state
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 2
           path: after
 
       - name: Checkout 'before' state
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           ref: ${{ github.event.pull_request.base.sha }}
           path: before
 
@@ -42,7 +45,7 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Get changed files
-        uses: actions/github-script@v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { getChangedFiles } = await import('${{ github.workspace }}/.github/shared/src/changed-files.ts');
@@ -69,18 +72,19 @@ jobs:
             --before before \
             --after after \
             --changed-files-path changed-files.txt \
-            --base-branch ${{ github.event.pull_request.base.ref }} \
+            --base-branch "$BASE_REF" \
             --compare-sha ${{ github.event.pull_request.head.sha }} \
             --out-file "$GITHUB_STEP_SUMMARY"
         env:
           # Some LintDiff runs are memory intensive and require more than the
           # default.
           NODE_OPTIONS: "--max-old-space-size=16384"
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
 
       # Used by other workflows like set-status
       - name: Set job-summary artifact
         if: ${{ always() && steps.run-lintdiff.outputs.summary }}
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: job-summary
           path: ${{ steps.run-lintdiff.outputs.summary }}

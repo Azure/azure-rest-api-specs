@@ -1,0 +1,30 @@
+{
+  "operationId": "RaiRegos_List",
+  "parameters": {
+    "accountName": "safety-account",
+    "api-version": "2026-09-15-preview",
+    "$top": 10,
+    "resourceGroupName": "resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "List reusable Rego artifacts",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiRegos/input-guard",
+            "name": "input-guard",
+            "type": "Microsoft.CognitiveServices/accounts/raiRegos",
+            "etag": "\"00000000-0000-0000-0000-000000000001\"",
+            "properties": {
+              "encoding": "None",
+              "rego": "package input_guard\n\nimport rego.v1\n\ndefault verdict := {\"decision\": \"allow\"}\n\nverdict := {\"decision\": \"deny\", \"reason\": \"prompt_injection_detected\"} if {\n  input.snapshot.moderation.harm.PromptInjection.detected\n}"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiRegos?api-version=2026-09-15-preview&%24top=10&%24skiptoken=aW5wdXQtZ3VhcmQ="
+      }
+    }
+  }
+}

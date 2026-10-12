@@ -59,6 +59,9 @@ See the [README.md](./README.md) for a description of the directory structure to
 
 ## Pull Requests
 
+Repository label definitions are maintained through pull requests. See
+[repository labels](./eng/README.md#repository-labels) for validation and synchronization guidance.
+
 If you want to contribute to the repository, follow these steps:
 
 1. Fork the repository and create a new branch for your changes.
@@ -86,6 +89,11 @@ Every PR in this repo will go through a series of PR checks, including:
 - SpellCheck -
 - PrettierCheck -
 - SDK Breaking Change -
+- Contributor readiness - reports required contributor access for PRs that change `specification/`.
+
+Internal contributors need **Azure organization membership and repository write access** for the PR workflow to work correctly. Microsoft organization membership is not required by the contributor-readiness check. Without repository write access, a PR author cannot run Azure DevOps pipelines for the PR, and a reviewer cannot provide an approval that counts toward required reviews (GitHub's green approval check). The reviewer must set up or renew their own access. Other GitHub approval rules still apply.
+
+The contributor-readiness report separates access issues from their PR impact. It checks PR authors, commit authors/committers, and reviewers with an `APPROVED` review; comments and other review states do not add reviewer participants. When findings exist, a collapsed section shows contributors with verified public Azure membership and repository write access. The check does not inspect Azure DevOps roles, and private membership or unavailable lookups do not prove missing write access. This check is non-blocking; external fork contributions remain allowed. Internal contributors can [set up or renew required access](https://aka.ms/azsdk/access), then comment `/azsdk check-access` on the PR to refresh the report.
 
 When any of these PR checks fails it will post a comment to the PR with links to information on how to resolve the problem.
 There is also the [CI Fix Guide](https://aka.ms/ci-fix) that describes how to fix common PR check failures.

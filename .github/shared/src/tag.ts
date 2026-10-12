@@ -1,4 +1,4 @@
-import { inspect } from "util";
+import { inspect } from "node:util";
 import { mapAsync } from "./array.ts";
 import { embedError } from "./spec-model.ts";
 import { Swagger } from "./swagger.ts";

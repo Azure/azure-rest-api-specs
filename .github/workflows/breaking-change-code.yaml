@@ -20,20 +20,23 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 0
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Setup .NET 6 SDK
-        uses: actions/setup-dotnet@v6
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
           dotnet-version: "6.0.x"
 
       - name: Swagger Breaking Change - Analyze Code
         id: swagger-breaking-change-analyze-code
+        env:
+          SOURCE_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
         run: |
           echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
           pnpm exec openapi-diff-runner \
@@ -42,7 +45,7 @@ jobs:
             --pr-target-branch "$GITHUB_BASE_REF" \
             --head-commit "${{ github.event.pull_request.head.sha }}" \
             --pr-number "${{ github.event.pull_request.number }}" \
-            --source-repo "${{ github.event.pull_request.head.repo.full_name }}" \
+            --source-repo "$SOURCE_REPOSITORY" \
             --target-repo "$GITHUB_REPOSITORY"
 
       # Upload artifact for 'BreakingChangeReviewRequired' label
@@ -68,7 +71,7 @@ jobs:
       # Used by other workflows like set-status
       - name: Set job-summary artifact
         if: ${{ always() && steps.swagger-breaking-change-analyze-code.outputs.summary }}
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: job-summary
           path: ${{ steps.swagger-breaking-change-analyze-code.outputs.summary }}

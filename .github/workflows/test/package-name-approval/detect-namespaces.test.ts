@@ -1,7 +1,7 @@
 import type { GitHubScriptArgs } from "../../src/github.ts";
-import { existsSync } from "fs";
-import { writeFile } from "fs/promises";
-import { dirname, join, resolve } from "path";
+import { existsSync } from "node:fs";
+import { writeFile } from "node:fs/promises";
+import { dirname, join, resolve } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { getChangedFilesStatuses } from "../../../shared/src/changed-files.ts";
 import {
@@ -15,12 +15,12 @@ import {
 } from "../../src/package-name-approval/validate-format.ts";
 import { createMockContext, createMockCore } from "../mocks.ts";
 
-vi.mock("fs/promises", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("fs/promises")>()),
+vi.mock("node:fs/promises", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("node:fs/promises")>()),
   writeFile: vi.fn(),
 }));
-vi.mock("fs", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("fs")>()),
+vi.mock("node:fs", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("node:fs")>()),
   existsSync: vi.fn(),
 }));
 vi.mock("../../../shared/src/typespec-metadata.ts", () => ({
