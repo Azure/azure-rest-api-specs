@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./Vault.tsp";
 import "./DeletedVault.tsp";
 import "./PrivateEndpointConnection.tsp";
+import "./NetworkSecurityPerimeter.tsp";
 import "./ManagedHsm.tsp";
 import "./DeletedManagedHsm.tsp";
 import "./MhsmPrivateEndpointConnection.tsp";
