@@ -89242,12 +89242,6 @@ components:
             - type: 'null'
           pattern: ^[1-9][0-9]{0,19}$
           description: A positive-integer agent version. Omission or null selects the active version, resolved once when the voice connection starts.
-        result_format:
-          type: string
-          enum:
-            - tagged_text
-          description: "The target's output contract: plain text with explicit commentary and thinking section markers. Foundry validates the target and translates these sections to native Live messages."
-          default: tagged_text
       description: |-
         A same-project prompt agent executed by Foundry on behalf of the Live frontend. Foundry resolves
         and pins the target version once per voice connection, configures native client delegation upstream,

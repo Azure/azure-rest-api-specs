@@ -255,9 +255,6 @@ model VoiceAgentLiveManagedAgentDelegation {
   @doc("A positive-integer agent version. Omission or null selects the active version, resolved once when the voice connection starts.")
   @pattern("^[1-9][0-9]{0,19}$")
   agent_version?: string | null;
-
-  @doc("The target's output contract: plain text with explicit commentary and thinking section markers. Foundry validates the target and translates these sections to native Live messages.")
-  result_format?: "tagged_text" = "tagged_text";
 }
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult.")

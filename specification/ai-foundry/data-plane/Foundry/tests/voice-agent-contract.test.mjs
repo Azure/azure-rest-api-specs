@@ -158,7 +158,7 @@ test("voice definitions retain kind -> sub_protocol with separate audio ownershi
   assert.ok(realtime.properties.has("subagent_config"));
 });
 
-test("voice model renames remove legacy names and inline the single result-format value", () => {
+test("voice model renames remove legacy names and the result-format alias", () => {
   for (const name of [
     "RealtimeVoiceAgentDefinition",
     "LiveVoiceAgentDefinition",
@@ -170,13 +170,10 @@ test("voice model renames remove legacy names and inline the single result-forma
     assert.equal(removed, undefined, name);
   }
   assert.equal(fields(type(managedItemModel)).has("result_format"), false);
-  const configuration = type(
-    "Azure.AI.Projects.VoiceAgentLiveManagedAgentDelegation",
-  ).properties.get("result_format");
-  assert.equal(configuration.type.kind, "String");
-  assert.equal(configuration.type.value, "tagged_text");
-  assert.equal(configuration.optional, true);
-  assert.equal(configuration.defaultValue.value, "tagged_text");
+  for (const [name, model] of type("Azure.AI.Projects").models) {
+    if (name.startsWith("VoiceAgentLive"))
+      assert.equal(fields(model).has("result_format"), false, name);
+  }
 });
 
 test("Live configuration references native model identities, not local copies", () => {
@@ -209,18 +206,14 @@ test("Live configuration references native model identities, not local copies", 
   );
 });
 
-test("managed prompt-agent configuration matches Vienna's canonical contract", () => {
+test("managed prompt-agent configuration contains only target identity", () => {
   const config = type("Azure.AI.Projects.VoiceAgentLiveManagedAgentDelegation");
   const p = config.properties;
-  assert.deepEqual(
-    [...p.keys()],
-    ["type", "agent_name", "agent_version", "result_format"],
-  );
+  assert.deepEqual([...p.keys()], ["type", "agent_name", "agent_version"]);
   assert.equal(p.get("type").type.value, "foundry_managed_agent");
   assert.equal(p.get("agent_name").optional, false);
   assert.equal(p.get("agent_version").optional, true);
-  assert.equal(p.get("result_format").type.value, "tagged_text");
-  assert.equal(p.get("result_format").defaultValue.value, "tagged_text");
+  assert.equal(p.has("result_format"), false);
   const name = new RegExp(getPattern(program, p.get("agent_name")));
   const version = new RegExp(getPattern(program, p.get("agent_version")));
   for (const value of ["teacher", "english_teacher-1", "a".repeat(63)])
@@ -580,6 +573,34 @@ async function validateExamples(name, examples) {
   return compile(NodeHost, path, { ...compilerOptions, noEmit: true });
 }
 
+test("managed configuration needs no format selector and rejects the removed field", async () => {
+  const model = "Azure.AI.Projects.VoiceAgentLiveManagedAgentDelegation";
+  const payload = {
+    type: "foundry_managed_agent",
+    agent_name: "english-teacher",
+  };
+  const valid = await validateExamples("managed-config-no-format", [
+    { model, payload },
+    { model, payload: { ...payload, agent_version: "1" } },
+    { model, payload: { ...payload, agent_version: null } },
+  ]);
+  checkErrors(valid.diagnostics);
+
+  // This is a rejected legacy payload, not a supported configuration example.
+  const invalid = await validateExamples("removed-config-result-format", [
+    { model, payload: { ...payload, result_format: "tagged_text" } },
+  ]);
+  const errors = invalid.diagnostics.filter((d) => d.severity === "error");
+  assert.ok(errors.length > 0);
+  assert.ok(
+    errors.every((d) =>
+      ["invalid-argument", "unexpected-property"].includes(d.code),
+    ),
+    errors.map((d) => `${d.code}: ${d.message}`).join("\n"),
+  );
+  assert.ok(errors.some((d) => d.message.includes("result_format")));
+});
+
 test("lifecycle, streamed output, and native startup examples validate", async () => {
   const result = await validateExamples("valid-events", [
     ...samples,
@@ -823,6 +844,13 @@ test("SDK metadata exports native events and separate Live persistence discrimin
     assert.ok(value, `SDK metadata missing ${name}`);
     return value;
   };
+  for (const value of context.sdkPackage.models) {
+    if (value.__raw?.name?.startsWith("VoiceAgentLive"))
+      assert.ok(
+        !value.properties.some((p) => p.serializedName === "result_format"),
+        value.__raw.name,
+      );
+  }
   const voice = model("VoiceAgentDefinition");
   assert.equal(model("VoiceAgentRealtimeDefinition").baseModel, voice);
   assert.equal(model("VoiceAgentLiveDefinition").baseModel, voice);
@@ -1025,6 +1053,13 @@ test("Java SDK customization targets Realtime fields and keeps Live events witho
     assert.ok(value, `Java SDK metadata missing ${name}`);
     return value;
   };
+  for (const value of context.sdkPackage.models) {
+    if (value.__raw?.name?.startsWith("VoiceAgentLive"))
+      assert.ok(
+        !value.properties.some((p) => p.serializedName === "result_format"),
+        value.__raw.name,
+      );
+  }
 
   const realtime = type(
     "Azure.AI.Projects.VoiceAgentRealtimeDefinition",
@@ -1756,6 +1791,15 @@ test("persisted definitions remain flat with Foundry store and native configurat
     );
     const managed = schemas.VoiceAgentLiveManagedAgentDelegation;
     assert.deepEqual(managed.required, ["type", "agent_name"]);
-    assert.equal(managed.properties.result_format.default, "tagged_text");
+    assert.equal(managed.properties.result_format, undefined);
+    assert.deepEqual(Object.keys(managed.properties), [
+      "type",
+      "agent_name",
+      "agent_version",
+    ]);
+    for (const [name, schema] of Object.entries(schemas)) {
+      if (name.startsWith("VoiceAgentLive"))
+        assert.equal(schema.properties?.result_format, undefined, name);
+    }
   }
 });
