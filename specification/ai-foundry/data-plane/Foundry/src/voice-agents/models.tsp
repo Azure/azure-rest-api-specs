@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "../agents/models.tsp";
 import "./agents.tsp";
 import "./openai-preview-models.tsp";
+import "./live-conversation.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -129,7 +130,7 @@ model VoiceResponse extends VoiceResponseBase {
   id: string;
 
   @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.")
-  output?: OpenAI.RealtimeConversationItem[];
+  output?: VoiceConversationItem[];
 
   @doc("The id of the conversation this response belongs to.")
   conversation_id: string;

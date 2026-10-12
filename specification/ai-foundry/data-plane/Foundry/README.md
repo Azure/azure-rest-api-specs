@@ -63,6 +63,21 @@ The `npx tsv .` has a console spew that shows the diff between current and stage
 changes. Once you `git add` all the changed files and run `npx tsv .` again, there should
 no longer be any diffs to show.
 
+## Live contract checks
+
+Use the repository's required Node and pnpm versions. From the repository root, after installing
+the pinned dependencies with `pnpm install --frozen-lockfile`:
+
+```sh
+pnpm exec node --test specification/ai-foundry/data-plane/Foundry/tests/live-contract.test.mjs
+```
+
+These checks compile both Foundry API versions, compare the imported Live models with the published
+OpenAI package using an explicit allowlist for Foundry server extensions, and verify the agent
+hierarchy, managed-agent delegation, lifecycle payloads, stored delegation items and their isolation
+from realtime inference, SDK model metadata, and WebSocket handshake.
+They do not generate a client SDK or call the running agent service.
+
 ## Emitting Python code
 
 Please do not emit SDKs in the public Python repo. SDK originated from TypeSpec that is private should not be pushed into a branch in a public GitHub repo.

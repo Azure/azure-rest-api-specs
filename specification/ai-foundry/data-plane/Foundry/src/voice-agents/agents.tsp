@@ -104,7 +104,8 @@ model VoiceAgentLlmInterimResponseConfig
   Shared settings for the voice agent kind. The sub_protocol discriminator selects either
   the existing realtime protocol (including cascaded models), or native GPT Live on a Foundry
   deployment. Configuration is flat; audio and other protocol-specific fields belong to the
-  selected subtype. Every create or update produces an immutable version.
+  selected subtype. Every create or update produces an immutable version. An existing agent cannot
+  change its protocol, including by creating another version; create a different agent instead.
   Compatibility: legacy requests and stored definitions that omit sub_protocol are interpreted
   as realtime. New clients should send the explicit discriminator. Null and unknown values are
   invalid. A read must not rewrite an existing stored version just to add the default.
@@ -124,7 +125,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Structured inputs rendered into frontend instructions before the session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
-  @doc("Whether Foundry persists the session. Defaults to false. Realtime retains its conversation/audio storage; Live stores one whole-session WAV and both speakers' transcripts as one session-level aggregate turn using the existing conversation items. This does not enable native GPT Live session storage.")
+  @doc("Whether Foundry persists the conversation and audio. Defaults to false. Both protocols use the same conversation retrieval experience. For Live, Foundry derives persisted turns from the native audio/transcript timeline; those projected turns do not change the inference events. This does not enable native GPT Live recording/fork storage.")
   store?: boolean = false;
 }
 
@@ -211,17 +212,17 @@ model LiveVoiceAgentDefinition extends VoiceAgentDefinition {
   `model`: string;
 
   @doc("Startup-only bidirectional audio format and output voice. No realtime VAD or Azure speech processing settings.")
-  audio?: LiveInitialSessionAudioParam;
+  audio?: OpenAI.LiveInitialSessionAudioParam;
 
-  @doc("Who handles delegated work. Omission or null selects the connected application.")
-  delegation?: LiveDelegation | null;
+  @doc("Who handles delegated work: the connected application, a native Responses backend, or a Foundry-managed same-project prompt agent. Omission or null uses native client delegation.")
+  delegation?: VoiceAgentLiveDelegation | null;
 
-  @doc("Initial text-only session context. At most 128 messages, with one text part per message.")
+  @doc("Native initial developer, user, or assistant text context. At most 128 messages, with one text part per message.")
   @maxItems(128)
-  input?: LiveInitialItem[];
+  input?: OpenAI.LiveInitialItem[];
 
   @doc("Frontend data-channel event permissions.")
-  client?: LiveClientConfigParam;
+  client?: OpenAI.LiveClientConfigParam;
 }
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult.")

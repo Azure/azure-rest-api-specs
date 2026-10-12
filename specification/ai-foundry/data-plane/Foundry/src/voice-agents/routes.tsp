@@ -2,6 +2,7 @@ import "../common/models.tsp";
 import "../agents/models.tsp";
 import "./models.tsp";
 import "./protocol.tsp";
+import "./live-protocol.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -106,6 +107,58 @@ interface VoiceAgentWebSocket {
       websocket_subprotocol?: VoiceAgentWebSocketSubprotocol;
     },
     VoiceAgentWebSocketUpgradeResponse
+  >;
+}
+
+/** A successful Live WebSocket upgrade. The Live route does not negotiate the realtime subprotocol. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveWebSocketUpgradeResult {
+  @statusCode
+  status_code: 101;
+}
+
+/**
+ * Connects a Live voice agent to its Foundry GPT Live deployment. Foundry applies the persisted
+ * agent configuration and sends the native session.start upstream. The client waits for
+ * session.started, then exchanges native OpenAI Live events; it does not send session.start.
+ * The definition's sub_protocol selects the agent type, not an inference-event discriminator
+ * or a negotiated WebSocket subprotocol.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "A WebSocket protocol upgrade does not match a standard resource operation template."
+@tag("Voice Agent Live WebSocket")
+interface VoiceAgentLiveWebSocket {
+  /**
+   * Establishes a primary WebSocket for an agent with sub_protocol=live. This is not the native
+   * OpenAI POST /live/sessions WebRTC operation. Only WebSocket transport is supported here.
+   * Native session.update changes delegation settings only; it cannot switch the configured
+   * Foundry-managed target. Foundry owns execution and result injection for managed delegation.
+   * Do not negotiate the realtime WebSocket subprotocol on this route.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "The successful WebSocket 101 upgrade has no HTTP entity body."
+  @summary("Connect to a GPT Live voice agent")
+  @get
+  @sharedRoute
+  @route("/agents/{agent_name}/endpoint/protocols/voice/live/sessions")
+  connectLiveVoiceAgent is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the Live voice agent in this project. */
+      @path agent_name: string;
+
+      /** A query alternative to the Foundry-Features opt-in header. */
+      @query("foundry_features")
+      foundry_features_query?: AgentDefinitionOptInKeys.voice_agents_v1_preview;
+
+      /** Selects a specific immutable version of the Live voice agent. */
+      @query("x-agent-version-override") agent_version_override?: string;
+
+      /** Per-session structured input values, serialized as a URL-encoded JSON object. */
+      @query structured_input?: string;
+
+      /** Overrides Foundry conversation/audio persistence for this connection, not native Live recording storage. */
+      @query store?: boolean;
+    },
+    VoiceAgentLiveWebSocketUpgradeResult
   >;
 }
 
@@ -254,12 +307,13 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<OpenAI.RealtimeConversationItem>
+    AgentsPagedResult<VoiceConversationItem>
   >;
 
   /**
    * Returns a paged collection of items — the complete ordered conversation history, including user input,
-   * assistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the
+   * assistant output, client-created tool outputs, and Live delegation items (`type: live_delegation`).
+   * Delegation items contain captured execution data, not spoken transcripts. Returns `404` when the
    * conversation was not persisted (`store = false`).
    */
   @summary("List items in a voice agent conversation")
@@ -278,11 +332,12 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<OpenAI.RealtimeConversationItem>
+    AgentsPagedResult<VoiceConversationItem>
   >;
 
   /**
-   * Retrieves a single item from the specified conversation by its id, including its transcript. An
+   * Retrieves a single item from the specified conversation by its id, including its transcript or
+   * captured Live delegation data. An
    * `input_audio`/`output_audio` content part indicates that audio is available for the item; the canonical per-item
    * audio metadata is the `/items/{item_id}/audio` resource, and the bytes are streamed by
    * `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted
@@ -304,7 +359,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item to retrieve. */
       @path item_id: string;
     },
-    OpenAI.RealtimeConversationItem
+    VoiceConversationItem
   >;
 
   /**
