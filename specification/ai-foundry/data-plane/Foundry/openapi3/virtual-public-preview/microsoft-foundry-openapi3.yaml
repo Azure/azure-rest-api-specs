@@ -88920,6 +88920,9 @@ components:
           description: |-
             The audio configuration, including input and output formats, voice, turn detection, noise reduction, and
             transcription. These values are session defaults; a client may override supported fields when connecting.
+        soundscape:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeConfig'
+          description: Optional background ambience and event cues, stored with the agent version and separate from the audio configuration sent to Voice Live. Currently rendered only for telephony calls, not browser WebRTC or direct voice WebSocket sessions. Omit this property to disable all auxiliary audio. Persisted conversation recordings do not include the soundscape mix.
         output_modalities:
           type: array
           items:
@@ -89502,6 +89505,113 @@ components:
         - item.input_audio_transcription.phrases
         - file_search_call.results
       description: Additional fields that a voice-agent session may include in service outputs.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSoundscapeConfig:
+      type: object
+      properties:
+        background:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeTrackConfig'
+          description: Continuous background ambience that continues during caller and agent speech.
+        working:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeWorkingTrackConfig'
+          description: A loop played while a non-call-control tool is pending and the agent is silent, after the configured delay.
+        opening:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeTrackConfig'
+          description: An interruptible cue played before the first agent speech.
+        transfer:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeTrackConfig'
+          description: A one-shot cue played after queued agent speech drains and before a committed call transfer.
+        closing:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeTrackConfig'
+          description: A one-shot cue played after queued agent speech drains and before a committed session end.
+      unevaluatedProperties:
+        not: {}
+      description: Agent-owned background ambience and event cues. Each omitted track is disabled. Unknown fields are rejected; custom uploads, URLs, and inline audio are not supported.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSoundscapeSound:
+      type: string
+      enum:
+        - office
+        - call_center
+        - busy_street_iphone_mic
+        - people_talking
+        - street_and_metro_station_iphone_mic
+        - ding1
+        - ding2
+      description: The packaged sounds accepted by a built-in soundscape source.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSoundscapeSourceConfig:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+          enum:
+            - built_in
+          description: The audio source type. Always `built_in`.
+        name:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeSound'
+          description: The name of the packaged sound. Only the listed built-in sounds are accepted.
+      unevaluatedProperties:
+        not: {}
+      description: A packaged sound selected from the service-managed catalogue. Unknown source fields and discriminator values are rejected.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSoundscapeTrackConfig:
+      type: object
+      required:
+        - source
+      properties:
+        source:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeSourceConfig'
+          description: The required audio source for this track.
+        gain:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: Linear playback gain from 0 to 1, independent of agent speech volume. Defaults to 1. A value of 0 mutes this track.
+          default: 1
+      unevaluatedProperties:
+        not: {}
+      description: A soundscape track with its own audio source and playback volume.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentSoundscapeWorkingTrackConfig:
+      type: object
+      required:
+        - source
+      properties:
+        source:
+          $ref: '#/components/schemas/VoiceAgentSoundscapeSourceConfig'
+          description: The required audio source for this track.
+        gain:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: Linear playback gain from 0 to 1, independent of agent speech volume. Defaults to 1. A value of 0 mutes this track.
+          default: 1
+        delay_ms:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 10000
+          description: The delay in milliseconds before working audio starts, from 0 to 10000. Defaults to 1000. This delays only working audio, not tool execution, and is valid only on the working track.
+          default: 1000
+      unevaluatedProperties:
+        not: {}
+      description: A working-loop track with a delay measured from the first pending non-call-control tool.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

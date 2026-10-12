@@ -1,0 +1,117 @@
+{
+  "title": "Agents_CreateVoiceAgent_Soundscape",
+  "operationId": "Agents_createAgent_Agents_createAgentFromCode",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "name": "support-soundscape-agent",
+    "description": "A telephone support agent with background ambience and call cues.",
+    "definition": {
+      "kind": "voice",
+      "model_type": "managed",
+      "model": "gpt-realtime",
+      "instructions": "Help callers with their support requests.",
+      "soundscape": {
+        "background": {
+          "source": {
+            "type": "built_in",
+            "name": "office"
+          },
+          "gain": 0.2
+        },
+        "working": {
+          "source": {
+            "type": "built_in",
+            "name": "call_center"
+          },
+          "gain": 0.15,
+          "delay_ms": 1000
+        },
+        "opening": {
+          "source": {
+            "type": "built_in",
+            "name": "ding1"
+          },
+          "gain": 0.5
+        },
+        "transfer": {
+          "source": {
+            "type": "built_in",
+            "name": "ding2"
+          }
+        },
+        "closing": {
+          "source": {
+            "type": "built_in",
+            "name": "ding1"
+          },
+          "gain": 0.5
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "agent",
+        "id": "agent_support_soundscape",
+        "name": "support-soundscape-agent",
+        "state": "enabled",
+        "configuration_state": "enabled",
+        "versions": {
+          "latest": {
+            "metadata": null,
+            "object": "agent.version",
+            "id": "agent_support_soundscape:1",
+            "name": "support-soundscape-agent",
+            "version": "1",
+            "created_at": 1791792000,
+            "definition": {
+              "kind": "voice",
+              "model_type": "managed",
+              "model": "gpt-realtime",
+              "instructions": "Help callers with their support requests.",
+              "soundscape": {
+                "background": {
+                  "source": {
+                    "type": "built_in",
+                    "name": "office"
+                  },
+                  "gain": 0.2
+                },
+                "working": {
+                  "source": {
+                    "type": "built_in",
+                    "name": "call_center"
+                  },
+                  "gain": 0.15,
+                  "delay_ms": 1000
+                },
+                "opening": {
+                  "source": {
+                    "type": "built_in",
+                    "name": "ding1"
+                  },
+                  "gain": 0.5
+                },
+                "transfer": {
+                  "source": {
+                    "type": "built_in",
+                    "name": "ding2"
+                  }
+                },
+                "closing": {
+                  "source": {
+                    "type": "built_in",
+                    "name": "ding1"
+                  },
+                  "gain": 0.5
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
