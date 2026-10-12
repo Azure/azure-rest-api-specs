@@ -100250,6 +100250,11 @@
             ],
             "description": "The kind discriminator for a voice agent definition. Always `voice`."
           },
+          "hosted_session_warmup": {
+            "type": "boolean",
+            "description": "Whether to use service-managed prewarmed Hosted Sessions for a compatible hosted-agent backend.\nDefaults to false. Saving this definition does not create sessions; eligible authorized voice-session\nrequests activate prewarming. The service controls pool capacity, and a prewarmed session is not guaranteed.\nPrewarming may incur additional Hosted Agent resource charges. This setting does not enable session sharing\nor language-model inference warmup and cannot be changed through session.update. The service rejects true\nwhen the selected backend does not use Hosted Sessions.",
+            "default": false
+          },
           "model_type": {
             "$ref": "#/components/schemas/VoiceModelType",
             "description": "How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_engine` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model."

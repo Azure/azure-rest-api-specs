@@ -108,6 +108,16 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("The kind discriminator for a voice agent definition. Always `voice`.")
   kind: AgentKind.voice;
 
+  @doc("""
+    Whether to use service-managed prewarmed Hosted Sessions for a compatible hosted-agent backend.
+    Defaults to false. Saving this definition does not create sessions; eligible authorized voice-session
+    requests activate prewarming. The service controls pool capacity, and a prewarmed session is not guaranteed.
+    Prewarming may incur additional Hosted Agent resource charges. This setting does not enable session sharing
+    or language-model inference warmup and cannot be changed through session.update. The service rejects true
+    when the selected backend does not use Hosted Sessions.
+    """)
+  hosted_session_warmup?: boolean = false;
+
   @doc("How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_engine` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.")
   model_type?: VoiceModelType;
 
