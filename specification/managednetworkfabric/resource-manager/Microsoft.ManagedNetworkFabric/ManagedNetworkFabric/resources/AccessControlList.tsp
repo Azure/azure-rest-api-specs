@@ -78,20 +78,6 @@ interface AccessControlLists {
     CommonPostActionResponseForStateUpdate
   >;
 
-  @action("validateConfiguration")
-  @removed(Versions.v2026_01_15_preview)
-  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
-  @sharedRoute
-  @doc("Implements the operation to the underlying resources.")
-  validateConfigurationDeprecated is ArmResourceActionAsync<
-    AccessControlList,
-    void,
-    ValidateConfigurationResponse
-  >;
-
-  @action("validateConfiguration")
-  @added(Versions.v2026_01_15_preview)
-  @sharedRoute
   @doc("Implements the operation to the underlying resources.")
   validateConfiguration is ArmResourceActionAsync<
     AccessControlList,
@@ -111,10 +97,6 @@ interface AccessControlLists {
 );
 @@doc(
   AccessControlLists.updateAdministrativeState::parameters.body,
-  "Request payload."
-);
-@@doc(
-  AccessControlLists.validateConfigurationDeprecated::parameters.body,
   "Request payload."
 );
 @@doc(
