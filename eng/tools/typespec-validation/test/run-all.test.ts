@@ -3,7 +3,7 @@ import { ChildProcess, spawn } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { access, mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join, relative, sep } from "node:path";
+import { join, relative, resolve } from "pathe";
 import { PassThrough } from "node:stream";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
@@ -76,7 +76,7 @@ async function commitFixture() {
 }
 
 beforeEach(async () => {
-  root = await realpath(await mkdtemp(join(tmpdir(), "tsv-all-")));
+  root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-all-"))));
   vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.spyOn(console, "log").mockImplementation(() => {});
   vi.spyOn(console, "error").mockImplementation(() => {});
@@ -145,7 +145,7 @@ it("logs repository-relative paths but passes absolute paths to validation", asy
 it("uses cwd-relative paths outside a Git repository", async () => {
   const project = await addProject("project");
   await expect(runAll(root)).resolves.toBe(true);
-  const name = relative(process.cwd(), project).split(sep).join("/");
+  const name = relative(process.cwd(), project);
   expect(console.log).toHaveBeenCalledWith(`Checking 1 TypeSpec folders:\n${name}`);
   expect(console.log).toHaveBeenCalledWith(`\npass ${name}`);
 });

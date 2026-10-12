@@ -2104,7 +2104,7 @@ paths:
             application/json:
               schema:
                 type: object
-                unevaluatedProperties: {}
+                additionalProperties: {}
         4XX:
           description: Client error
           content:
@@ -8638,7 +8638,7 @@ paths:
                   description: A human-readable description of the memory store.
                 metadata:
                   type: object
-                  unevaluatedProperties:
+                  additionalProperties:
                     type: string
                   description: Arbitrary key-value metadata to associate with the memory store.
                 definition:
@@ -8814,7 +8814,7 @@ paths:
                   description: A human-readable description of the memory store.
                 metadata:
                   type: object
-                  unevaluatedProperties:
+                  additionalProperties:
                     type: string
                   description: Arbitrary key-value metadata to associate with the memory store.
       x-ms-foundry-meta:
@@ -22901,7 +22901,7 @@ paths:
           schema:
             anyOf:
               - type: object
-                unevaluatedProperties:
+                additionalProperties:
                   type: string
               - type: 'null'
       responses:
@@ -27486,11 +27486,9 @@ paths:
                     description: Unix timestamp (in seconds) of when this Response was created.
                   completed_at:
                     anyOf:
-                      - type: string
-                        format: date-time
+                      - type: integer
+                        format: unixtime
                       - type: 'null'
-                    type: integer
-                    format: unixTimestamp
                   error:
                     anyOf:
                       - $ref: '#/components/schemas/OpenAI.ResponseError'
@@ -27741,7 +27739,7 @@ paths:
                   description: The agent to use for generating the response.
                 structured_inputs:
                   type: object
-                  unevaluatedProperties: {}
+                  additionalProperties: {}
                   description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
                 user_security_context:
                   $ref: '#/components/schemas/AzureUserSecurityContext'
@@ -40979,7 +40977,7 @@ paths:
                   description: A human-readable description of the toolbox.
                 metadata:
                   type: object
-                  unevaluatedProperties:
+                  additionalProperties:
                     type: string
                   description: Arbitrary key-value metadata to associate with the toolbox.
                 tools:
@@ -41227,7 +41225,7 @@ paths:
           '*/*':
             schema:
               type: object
-              unevaluatedProperties: {}
+              additionalProperties: {}
         description: The MCP request body.
   /training_jobs:
     get:
@@ -42954,7 +42952,7 @@ components:
           description: The time when the suspension occurred.
         details:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: Additional reason-specific suspension details.
       description: Structured reason why scheduled generation is suspended for a monitor.
       x-ms-foundry-meta:
@@ -43460,7 +43458,7 @@ components:
           description: Evaluator version. Omitted to use the latest version.
         initialization_parameters:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: Parameters passed to the evaluator at initialization. Omitted when the evaluator requires no initialization parameters.
       description: Reference to a named evaluator, optionally pinned to a version.
     AgentOptimizationFoundryAgentTargetConfiguration:
@@ -44173,7 +44171,7 @@ components:
         metadata:
           anyOf:
             - type: object
-              unevaluatedProperties:
+              additionalProperties:
                 type: string
             - type: 'null'
           description: |-
@@ -44755,7 +44753,7 @@ components:
           deprecated: true
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
@@ -45129,7 +45127,7 @@ components:
               description: A description of what the function does, used by the model to choose when and how to call the function.
             parameters:
               type: object
-              unevaluatedProperties: {}
+              additionalProperties: {}
               description: The parameters the functions accepts, described as a JSON Schema object.
           required:
             - name
@@ -45168,7 +45166,7 @@ components:
           description: The object type, which is always 'browser_automation'.
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
@@ -45480,7 +45478,7 @@ components:
           deprecated: true
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
@@ -45746,7 +45744,7 @@ components:
           deprecated: true
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
@@ -45811,7 +45809,7 @@ components:
           description: List of clusters identified in the insights.
         coordinates:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ChartCoordinate'
           description: |2-
               Optional mapping of IDs to 2D coordinates used by the UX for visualization.
@@ -45989,12 +45987,12 @@ components:
           description: The name of the experiment the job belongs to. If not set, the job is placed in the "Default" experiment.
         tags:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: The asset property dictionary.
         codeId:
@@ -46005,17 +46003,17 @@ components:
           description: Compute resource ID.
         inputs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/Input'
           description: Mapping of input data bindings used in the job.
         outputs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/Output'
           description: Mapping of output data bindings used in the job.
         environmentVariables:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Environment variables included in the job.
         resources:
@@ -46029,7 +46027,7 @@ components:
           description: Command Job limit.
         services:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/JobService'
           description: List of job services.
         queueSettings:
@@ -46129,7 +46127,7 @@ components:
           readOnly: true
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Metadata of the connection
           readOnly: true
@@ -46294,7 +46292,7 @@ components:
             - Must not exceed 63 characters.
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -46313,7 +46311,7 @@ components:
           description: The manifest ID to import the agent version from.
         parameter_values:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The inputs to the manifest that will result in a fully materialized Agent.
     CreateAgentRequest:
       type: object
@@ -46335,7 +46333,7 @@ components:
           default: enabled
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -46427,7 +46425,7 @@ components:
           description: A human-readable description of the agent.
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -46453,7 +46451,7 @@ components:
       properties:
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -46472,7 +46470,7 @@ components:
           description: The manifest ID to import the agent version from.
         parameter_values:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The inputs to the manifest that will result in a fully materialized Agent.
     CreateAgentVersionRequest:
       type: object
@@ -46481,7 +46479,7 @@ components:
       properties:
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -46565,7 +46563,7 @@ components:
             configuration. At least one testing criterion is required.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
@@ -46617,7 +46615,7 @@ components:
               The selected source must conform to the evaluation's `data_source_config`.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
@@ -46719,7 +46717,7 @@ components:
           description: An optional customer-declared purpose for placing the call.
         structured_inputs:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.
         schedule:
           $ref: '#/components/schemas/TelephonyCallJobSchedule'
@@ -46842,7 +46840,7 @@ components:
           description: The provider-specific event name that fires the routine.
         parameters:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: Provider-specific trigger parameters.
       allOf:
         - $ref: '#/components/schemas/RoutineTrigger'
@@ -47122,7 +47120,7 @@ components:
           description: The data source type discriminator.
         schema:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: |-
             The overall object JSON schema for the run data source items.
 
@@ -47160,7 +47158,7 @@ components:
           readOnly: true
         tags:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Tag dictionary of the output dataset.
           readOnly: true
@@ -47265,7 +47263,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       discriminator:
@@ -47676,7 +47674,7 @@ components:
           description: The name of the person who created the evaluation.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
@@ -47883,7 +47881,7 @@ components:
           description: The name of the person who created the evaluation run.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
@@ -48168,7 +48166,7 @@ components:
           description: The identifier for the data source item.
         datasource_item:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: Details of the input data source item.
         results:
           type: array
@@ -48258,7 +48256,7 @@ components:
         sample:
           anyOf:
             - type: object
-              unevaluatedProperties: {}
+              additionalProperties: {}
             - type: 'null'
           description: Optional sample or intermediate data produced by the grader.
         status:
@@ -48279,10 +48277,10 @@ components:
           description: The reason for the test criteria metric.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Additional details about the test criteria metric.
-      unevaluatedProperties: {}
+      additionalProperties: {}
       description: A single grader result for an evaluation run output item.
       title: EvalRunOutputItemResult
     EvalRunOutputItemResultStatus:
@@ -48536,7 +48534,7 @@ components:
           description: Description to assign to the output dataset.
         tags:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Tags to assign to the output dataset.
         write_mode:
@@ -48660,7 +48658,7 @@ components:
           description: Indicates whether the evaluation rule is enabled. Default is true.
         systemData:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: System metadata for the evaluation rule.
           readOnly: true
@@ -48768,7 +48766,7 @@ components:
           description: Identifier of the evaluation group.
         evalRun:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The evaluation run payload.
       allOf:
         - $ref: '#/components/schemas/ScheduleTask'
@@ -48805,7 +48803,7 @@ components:
           description: List of taxonomy categories.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Additional properties for the evaluation taxonomy.
       description: Evaluation Taxonomy Definition
@@ -48822,7 +48820,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
         taxonomyInput:
@@ -48835,7 +48833,7 @@ components:
           description: List of taxonomy categories.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Additional properties for the evaluation taxonomy.
       description: Evaluation Taxonomy Definition
@@ -48893,7 +48891,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
         taxonomyInput:
@@ -48906,7 +48904,7 @@ components:
           description: List of taxonomy categories.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Additional properties for the evaluation taxonomy.
       description: Evaluation Taxonomy Definition
@@ -48955,15 +48953,15 @@ components:
           description: The type of evaluator definition
         init_parameters:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The JSON schema (Draft 2020-12) for the evaluator's input parameters. This includes parameters like type, properties, required.
         data_schema:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The JSON schema (Draft 2020-12) for the evaluator's input data. This includes parameters like type, properties, required.
         metrics:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/EvaluatorMetric'
           description: List of output metrics produced by this evaluator
       discriminator:
@@ -49209,7 +49207,7 @@ components:
           description: Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Metadata about the evaluator
         evaluator_type:
@@ -49281,7 +49279,7 @@ components:
           description: Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Metadata about the evaluator
         evaluator_type:
@@ -49307,7 +49305,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
@@ -49319,7 +49317,7 @@ components:
           description: Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Metadata about the evaluator
         categories:
@@ -49339,7 +49337,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
@@ -50014,7 +50012,7 @@ components:
             - 0.5Gi
         environment_variables:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Environment variables to set in the hosted agent container.
           examples:
@@ -50131,7 +50129,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       discriminator:
@@ -50357,11 +50355,11 @@ components:
           description: Sample type
         features:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: Features to help with additional filtering of data in UX.
         correlationInfo:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: Info about the correlation for the analysis sample.
       discriminator:
         propertyName: type
@@ -50647,7 +50645,7 @@ components:
           description: Optional type of VM used as supported by the compute target.
         properties:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: Additional properties bag.
         shmSize:
           type: string
@@ -50671,7 +50669,7 @@ components:
           description: Url for endpoint.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Additional properties to set on the endpoint.
         nodes:
@@ -50821,7 +50819,7 @@ components:
         headers:
           anyOf:
             - type: object
-              unevaluatedProperties:
+              additionalProperties:
                 type: string
             - type: 'null'
         allowed_tools:
@@ -51250,7 +51248,7 @@ components:
           description: A human-readable description of the memory store.
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Arbitrary key-value metadata to associate with the memory store.
         definition:
@@ -51648,7 +51646,7 @@ components:
           readOnly: true
         capabilities:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Capabilities of deployed model
           readOnly: true
@@ -51752,7 +51750,7 @@ components:
           description: The HTTP status code returned by the model.
         headers:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ModelRouterResponseHeaderValue'
           description: Response headers returned by the model.
         error:
@@ -51902,7 +51900,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Model Version Definition
@@ -53025,7 +53023,7 @@ components:
           type: array
           items:
             type: object
-            unevaluatedProperties: {}
+            additionalProperties: {}
           description: |-
             A list of tool definitions that the model should be allowed to call.
               For the Chat Completions API, the list of tool definitions might look like:
@@ -54264,7 +54262,7 @@ components:
           deprecated: true
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
@@ -55906,7 +55904,7 @@ components:
             - type: 'null'
         error:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The error from the tool call, if any.
         status:
           $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
@@ -56613,7 +56611,7 @@ components:
         logit_bias:
           anyOf:
             - type: object
-              unevaluatedProperties:
+              additionalProperties:
                 $ref: '#/components/schemas/OpenAI.integer'
             - type: 'null'
           description: |-
@@ -57034,7 +57032,7 @@ components:
         logit_bias:
           anyOf:
             - type: object
-              unevaluatedProperties:
+              additionalProperties:
                 $ref: '#/components/schemas/OpenAI.integer'
             - type: 'null'
           description: |-
@@ -57234,7 +57232,7 @@ components:
           type: array
           items:
             type: object
-            unevaluatedProperties:
+            additionalProperties:
               $ref: '#/components/schemas/OpenAI.numeric'
     OpenAI.CreateContainerBody:
       type: object
@@ -57500,7 +57498,7 @@ components:
           default: custom
         item_schema:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The json schema for each row in the data source.
         include_sample_schema:
           type: boolean
@@ -57572,7 +57570,7 @@ components:
           default: logs
         metadata:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: Metadata filters for the logs data source.
       description: |-
         A data source config which specifies the metadata property of your logs query.
@@ -57716,7 +57714,7 @@ components:
           default: stored_completions
         metadata:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: Metadata filters for the stored completions data source.
       description: Deprecated in favor of LogsDataSourceConfig.
       title: StoredCompletionsDataSourceConfig
@@ -60258,10 +60256,10 @@ components:
             $ref: '#/components/schemas/OpenAI.Error'
         additionalInfo:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
         debugInfo:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
     OpenAI.Error-2:
       type: object
       required:
@@ -60678,10 +60676,10 @@ components:
       properties:
         item:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
         sample:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
     OpenAI.EvalJsonlFileIdSource:
       type: object
       required:
@@ -60712,7 +60710,7 @@ components:
         metadata:
           anyOf:
             - type: object
-              unevaluatedProperties: {}
+              additionalProperties: {}
             - type: 'null'
         model:
           anyOf:
@@ -61080,7 +61078,7 @@ components:
           deprecated: true
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
@@ -61389,11 +61387,9 @@ components:
             - type: 'null'
         finished_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
         hyperparameters:
           $ref: '#/components/schemas/OpenAI.FineTuningJobHyperparameters'
           description: The hyperparameters used for the fine-tuning job. This value will only be returned when running `supervised` jobs.
@@ -61446,11 +61442,9 @@ components:
           description: The seed used for the fine-tuning job.
         estimated_finish:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
         method:
           $ref: '#/components/schemas/OpenAI.FineTuneMethod'
         metadata:
@@ -61816,7 +61810,7 @@ components:
             - type: 'null'
     OpenAI.FunctionParameters:
       type: object
-      unevaluatedProperties: {}
+      additionalProperties: {}
       description: |-
         The parameters the functions accepts, described as a JSON Schema object. See the [guide](/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
         Omitting `parameters` defines a function with an empty parameter list.
@@ -62141,7 +62135,7 @@ components:
           deprecated: true
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
@@ -62234,12 +62228,12 @@ components:
         parameters:
           anyOf:
             - type: object
-              unevaluatedProperties: {}
+              additionalProperties: {}
             - type: 'null'
         output_schema:
           anyOf:
             - type: object
-              unevaluatedProperties: {}
+              additionalProperties: {}
             - type: 'null'
         strict:
           anyOf:
@@ -62293,7 +62287,7 @@ components:
         output_schema:
           anyOf:
             - type: object
-              unevaluatedProperties: {}
+              additionalProperties: {}
             - type: 'null'
         defer_loading:
           type: boolean
@@ -62834,7 +62828,7 @@ components:
           deprecated: true
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
@@ -64158,7 +64152,7 @@ components:
             - type: 'null'
         error:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The error from the tool call, if any.
         status:
           $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
@@ -65722,7 +65716,7 @@ components:
             - type: 'null'
         error:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The error from the tool call, if any.
         status:
           $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
@@ -66527,7 +66521,7 @@ components:
             - type: 'null'
         error:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The error from the tool call, if any.
         status:
           $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
@@ -67566,7 +67560,7 @@ components:
             - type: 'null'
         error:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The error from the tool call, if any.
         status:
           $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
@@ -68546,7 +68540,7 @@ components:
             - type: 'null'
         env:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Environment variables to set for the command.
           x-oaiTypeLabel: map
@@ -68577,7 +68571,7 @@ components:
           deprecated: true
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
@@ -68721,7 +68715,7 @@ components:
         headers:
           anyOf:
             - type: object
-              unevaluatedProperties:
+              additionalProperties:
                 type: string
             - type: 'null'
         allowed_tools:
@@ -68754,7 +68748,7 @@ components:
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
@@ -69221,18 +69215,14 @@ components:
             - type: 'null'
         completed_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
         incomplete_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
         role:
           type: string
           enum:
@@ -69380,7 +69370,7 @@ components:
         - incomplete
     OpenAI.Metadata:
       type: object
-      unevaluatedProperties:
+      additionalProperties:
         type: string
       description: |-
         Set of 16 key-value pairs that can be attached to an object. This can be
@@ -69599,19 +69589,19 @@ components:
           description: A boolean indicating whether the content was flagged by any category.
         categories:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: boolean
           description: A dictionary of moderation categories to booleans, True if the input is flagged under this category.
           x-oaiTypeLabel: map
         category_scores:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/OpenAI.numeric'
           description: A dictionary of moderation categories to scores.
           x-oaiTypeLabel: map
         category_applied_input_types:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: array
             items:
               $ref: '#/components/schemas/OpenAI.ModerationInputType'
@@ -70910,7 +70900,7 @@ components:
             - type: 'null'
         error:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The error from the tool call, if any.
         status:
           $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
@@ -72652,7 +72642,7 @@ components:
                   type: string
                 metadata:
                   type: object
-                  unevaluatedProperties: {}
+                  additionalProperties: {}
           description: |-
             Configuration options for tracing. Set to null to disable tracing. Once
               tracing is enabled for a session, the configuration cannot be modified.
@@ -72917,7 +72907,7 @@ components:
           type: string
         metadata:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -73045,7 +73035,7 @@ components:
                   type: string
                 metadata:
                   type: object
-                  unevaluatedProperties: {}
+                  additionalProperties: {}
           description: |-
             Configuration options for tracing. Set to null to disable tracing. Once
               tracing is enabled for a session, the configuration cannot be modified.
@@ -73936,11 +73926,9 @@ components:
           description: Unix timestamp (in seconds) of when this Response was created.
         completed_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
         error:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ResponseError'
@@ -74980,7 +74968,7 @@ components:
             - type: 'null'
     OpenAI.ResponseFormatJsonSchemaSchema:
       type: object
-      unevaluatedProperties: {}
+      additionalProperties: {}
       description: |-
         The schema for the response format, described as a JSON Schema object.
         Learn how to build JSON schemas [here](https://json-schema.org/).
@@ -75906,7 +75894,7 @@ components:
       title: Prompt cache options
     OpenAI.ResponsePromptVariables:
       type: object
-      unevaluatedProperties:
+      additionalProperties:
         anyOf:
           - type: string
           - $ref: '#/components/schemas/OpenAI.InputTextContent'
@@ -77011,10 +76999,10 @@ components:
           $ref: '#/components/schemas/OpenAI.RunGraderResponseMetadata'
         sub_rewards:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
         model_grader_token_usage_per_model:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
     OpenAI.RunGraderResponseMetadata:
       type: object
       required:
@@ -77036,7 +77024,7 @@ components:
           $ref: '#/components/schemas/OpenAI.numeric'
         scores:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
         token_usage:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -77160,43 +77148,33 @@ components:
           description: The last error associated with this run. Will be `null` if there are no errors.
         expires_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
           description: The Unix timestamp (in seconds) for when the run will expire.
         started_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
           description: The Unix timestamp (in seconds) for when the run was started.
         cancelled_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
           description: The Unix timestamp (in seconds) for when the run was cancelled.
         failed_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
           description: The Unix timestamp (in seconds) for when the run failed.
         completed_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
           description: The Unix timestamp (in seconds) for when the run was completed.
         incomplete_details:
           anyOf:
@@ -77698,32 +77676,24 @@ components:
             - type: 'null'
         expired_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
         cancelled_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
         failed_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
         completed_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
         metadata:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
@@ -78411,7 +78381,7 @@ components:
           type: array
           items:
             type: object
-            unevaluatedProperties: {}
+            additionalProperties: {}
           description: |-
             A list of tool definitions that the model should be allowed to call.
               For the Responses API, the list of tool definitions might look like:
@@ -79257,7 +79227,7 @@ components:
       title: Vector store expiration policy
     OpenAI.VectorStoreFileAttributes:
       type: object
-      unevaluatedProperties:
+      additionalProperties:
         anyOf:
           - type: string
           - $ref: '#/components/schemas/OpenAI.numeric'
@@ -79507,18 +79477,14 @@ components:
           $ref: '#/components/schemas/OpenAI.VectorStoreExpirationAfter'
         expires_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
         last_active_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
         metadata:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
@@ -79826,19 +79792,15 @@ components:
           description: Unix timestamp (seconds) for when the job was created.
         completed_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
           description: Unix timestamp (seconds) for when the job completed, if finished.
         expires_at:
           anyOf:
-            - type: string
-              format: date-time
+            - type: integer
+              format: unixtime
             - type: 'null'
-          type: integer
-          format: unixTimestamp
           description: Unix timestamp (seconds) for when the downloadable assets expire, if set.
         prompt:
           anyOf:
@@ -80143,7 +80105,7 @@ components:
           deprecated: true
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
@@ -80246,7 +80208,7 @@ components:
           description: A description of what the function does, used by the model to choose when and how to call the function.
         spec:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The openapi function shape, described as a JSON Schema object.
         auth:
           $ref: '#/components/schemas/OpenApiAuthDetails'
@@ -80269,7 +80231,7 @@ components:
                 description: A description of what the function does, used by the model to choose when and how to call the function.
               parameters:
                 type: object
-                unevaluatedProperties: {}
+                additionalProperties: {}
                 description: The parameters the functions accepts, described as a JSON Schema object.
             required:
               - name
@@ -80342,7 +80304,7 @@ components:
           description: The object type, which is always 'openapi'.
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
@@ -80860,7 +80822,7 @@ components:
           description: Configuration options for a text response from the model. Can be plain text or structured JSON data.
         structured_inputs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/StructuredInputDefinition'
           description: Set of structured inputs that can participate in prompt template substitution or tool argument bindings.
       allOf:
@@ -81234,12 +81196,12 @@ components:
           description: Application scenario for the red team operation, to generate scenario specific attacks.
         tags:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Red team's tags. Unlike properties, tags are fully mutable.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Red team's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.
         status:
@@ -81464,7 +81426,7 @@ components:
           description: The maximum number of turns of chat history to evaluate.
         data_mapping:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Maps `response_id` to the source field that contains a stored Responses API
@@ -81524,7 +81486,7 @@ components:
           description: Whether the routine is enabled.
         triggers:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/RoutineTrigger'
           description: The triggers configured for the routine.
         action:
@@ -81605,7 +81567,7 @@ components:
           description: Whether the routine is enabled.
         triggers:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/RoutineTrigger'
           description: The triggers configured for the routine. In v1, exactly one trigger entry is supported.
         action:
@@ -81680,7 +81642,7 @@ components:
           description: The configured trigger name that produced the routine attempt.
         trigger_event_payload:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The event payload captured from the event that triggered the routine attempt, when available.
         attempt_source:
           $ref: '#/components/schemas/RoutineAttemptSource'
@@ -81988,17 +81950,17 @@ components:
           description: Task for the schedule.
         tags:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Schedule's tags. Unlike properties, tags are fully mutable.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Schedule's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.
         systemData:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: System metadata for the resource.
           readOnly: true
@@ -82072,7 +82034,7 @@ components:
           readOnly: true
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Properties of the schedule run.
           readOnly: true
@@ -82090,7 +82052,7 @@ components:
           description: Type of the task.
         configuration:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Configuration for the task.
       discriminator:
@@ -82550,7 +82512,7 @@ components:
           description: Environment requirements or compatibility notes for the skill.
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Arbitrary key-value metadata for additional properties.
         allowed_tools:
@@ -82669,7 +82631,7 @@ components:
           description: The default value for the input if no run-time value is provided.
         schema:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The JSON schema for the structured input (optional).
         required:
           type: boolean
@@ -82692,7 +82654,7 @@ components:
           description: A description of the output to emit. Used by the model to determine when to emit the output.
         schema:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The JSON schema for the structured output.
         strict:
           anyOf:
@@ -83012,7 +82974,7 @@ components:
           description: List of taxonomy sub categories.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Additional properties for the taxonomy category.
       description: Taxonomy category definition.
@@ -83040,7 +83002,7 @@ components:
           description: List of taxonomy items under this sub-category.
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Additional properties for the taxonomy sub-category.
       description: Taxonomy sub-category definition.
@@ -83396,7 +83358,7 @@ components:
           description: An optional customer-declared purpose for placing the call.
         structured_inputs:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.
         schedule:
           $ref: '#/components/schemas/TelephonyCallJobSchedule'
@@ -84237,7 +84199,7 @@ components:
           description: The version of the evaluator. Latest version if not specified.
         initialization_parameters:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: |-
             Evaluator-specific configuration applied when the evaluator is initialized.
             Accepted parameters and defaults depend on the selected evaluator and
@@ -84248,7 +84210,7 @@ components:
             property and use their documented defaults.
         data_mapping:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Maps the evaluator's input names to fields in the evaluation data. Use
@@ -84287,7 +84249,7 @@ components:
     ToolCallOutputContent:
       anyOf:
         - type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
         - type: string
         - type: array
           items: {}
@@ -84555,7 +84517,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -84616,7 +84578,7 @@ components:
         metadata:
           anyOf:
             - type: object
-              unevaluatedProperties:
+              additionalProperties:
                 type: string
             - type: 'null'
           description: |-
@@ -84947,7 +84909,7 @@ components:
       properties:
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -84966,7 +84928,7 @@ components:
           description: The manifest ID to import the agent version from.
         parameter_values:
           type: object
-          unevaluatedProperties: {}
+          additionalProperties: {}
           description: The inputs to the manifest that will result in a fully materialized Agent.
     UpdateAgentRequest:
       type: object
@@ -84975,7 +84937,7 @@ components:
       properties:
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -85024,7 +84986,7 @@ components:
             - type: 'null'
         properties:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
@@ -85037,7 +84999,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Request body for updating a model version. Only description and tags can be modified.
@@ -85208,7 +85170,7 @@ components:
           description: Default configuration for generating simulated user conversations and persisting their output. Conversation properties in a test case's `simulation_configuration` override the corresponding defaults.
         data_mapping:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Maps JSONL dataset attributes to user conversation simulation inputs when their names differ from the defaults. The default attribute names are `test_case_id`, `test_case_category`, `test_case_description`, and `simulation_configuration`, matching `UserConversationSimulationTestCase`. Omit when the dataset uses these names or when using `inline_user_conversation_simulation`.
       allOf:
@@ -85938,7 +85900,7 @@ components:
           description: Whether the model may call multiple tools in parallel.
         structured_inputs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/StructuredInputDefinition'
           description: Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.
         subagent_config:
@@ -86150,7 +86112,7 @@ components:
           description: The transcription model identifier. Configure customer custom speech deployments in `custom_speech`.
         custom_speech:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: Optional customer custom speech deployment configuration, keyed by locale.
         phrase_list:
@@ -86308,7 +86270,7 @@ components:
         headers:
           anyOf:
             - type: object
-              unevaluatedProperties:
+              additionalProperties:
                 type: string
             - type: 'null'
         allowed_tools:
@@ -86341,7 +86303,7 @@ components:
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
         tool_configs:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: Deprecated. This property is deprecated and will be removed in a future version.
           deprecated: true
@@ -86872,7 +86834,7 @@ components:
           description: The Unix timestamp (in seconds) for when session and persistence finalization reached the terminal `completed` or `failed` status. Absent while `status` is `in_progress`.
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: A set of key-value pairs attached to the conversation.
         usage:
@@ -87112,7 +87074,7 @@ components:
           description: The audio configuration used for the response, including the voice and audio format used for output.
         metadata:
           type: object
-          unevaluatedProperties:
+          additionalProperties:
             type: string
           description: A set of key-value pairs attached to the response.
         temperature:

@@ -1,0 +1,59 @@
+{
+  "operationId": "PrivilegedResources_List",
+  "title": "List privileged resources for the caller (last page)",
+  "parameters": {
+    "api-version": "2026-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "projectionId": "L3N1YnNjcmlwdGlvbnMvMTExMTExMTEtMjIyMi0zMzMzLTQ0NDQtNTU1NTU1NTU1NTU1L3Jlc291cmNlR3JvdXBzL215LXJnLTIvcHJvdmlkZXJzL21pY3Jvc29mdC5jb21wdXRlL3ZpcnR1YWxtYWNoaW5lcy9hbm90aGVyLXZt",
+            "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/my-rg-2/providers/Microsoft.Compute/virtualMachines/another-vm",
+            "displayName": "another-vm",
+            "type": "microsoft.compute/virtualmachines",
+            "location": "westus2",
+            "tags": {},
+            "parentResource": {
+              "type": "resourceGroup",
+              "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/my-rg-2",
+              "displayName": "my-rg-2",
+              "properties": {},
+              "parentResource": {
+                "type": "subscription",
+                "scope": "/subscriptions/11111111-2222-3333-4444-555555555555",
+                "displayName": "My Subscription",
+                "properties": {
+                  "managementGroupPath": [
+                    "Tenant Root Group"
+                  ]
+                }
+              }
+            },
+            "roles": [
+              {
+                "roleId": "1a2b3c4d-5e6f-7890-abcd-ef0123456789",
+                "roleDefinitionId": "/subscriptions/11111111-2222-3333-4444-555555555555/providers/Microsoft.Authorization/roleDefinitions/fb879df8-f326-4884-b1cf-06f3ad86be52",
+                "roleDisplayName": "Virtual Machine User Login",
+                "scope": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/my-rg-2",
+                "assignmentStatus": "active",
+                "scheduleInfo": {
+                  "startDateTime": "2025-11-01T00:00:00Z",
+                  "expiration": {
+                    "type": "NoExpiration"
+                  }
+                },
+                "source": {
+                  "memberType": "direct"
+                },
+                "isLeastPrivilege": false
+              }
+            ],
+            "isFavorite": false
+          }
+        ]
+      }
+    }
+  }
+}

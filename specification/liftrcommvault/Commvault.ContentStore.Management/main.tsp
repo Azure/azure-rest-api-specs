@@ -55,6 +55,10 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v3_preview")
   @useDependency(LiftrBase.Versions.v3_preview)
   v9_preview: "2026-08-01-preview",
+
+  @doc("The 2026-09-30 stable API version, dependent on LiftrBase.Versions.v3_preview.")
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v2026_09_30: "2026-09-30",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 

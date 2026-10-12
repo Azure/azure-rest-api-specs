@@ -25,6 +25,7 @@ namespace Microsoft.MachineLearningServices;
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 @parentResource(Workspace)
 model InferenceGroup is Azure.ResourceManager.TrackedResource<
   InferenceGroupProperties,
@@ -58,6 +59,7 @@ model InferenceGroup is Azure.ResourceManager.TrackedResource<
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface InferenceGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -102,6 +104,7 @@ interface InferenceGroupOps
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
 @armResourceOperations
 interface InferenceGroups {
   /**
