@@ -177,7 +177,11 @@ using Microsoft.OffAzure;
   "IsSecureBootEnabled",
   "csharp"
 );
-@@clientName(ServerProperties.secureBootEnabled, "IsSecureBootEnabled", "csharp");
+@@clientName(
+  ServerProperties.secureBootEnabled,
+  "IsSecureBootEnabled",
+  "csharp"
+);
 @@clientName(
   DeleteImportedMachinesJobProperties.deletionConfirmation,
   "IsDeletionConfirmation",
