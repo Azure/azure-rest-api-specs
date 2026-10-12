@@ -270,6 +270,83 @@ union JobType {
   Command: "Command",
 }
 
+@doc("Case-sensitive execution states reported by the job runtime, not operation-monitor states. Runtime-dependent stages can be skipped, and observations are not guaranteed to follow a fixed linear sequence. `Completed`, `Failed`, and `Canceled` are terminal; a terminal job does not transition to another execution state. Other known states are non-terminal. Clients must tolerate additional values and must not infer completion from an absent or unrecognized status.")
+union CommandJobStatus {
+  string,
+
+  @doc("The job has not started execution.")
+  NotStarted: "NotStarted",
+
+  @doc("The job is awaiting approval in a runtime that requires it.")
+  Unapproved: "Unapproved",
+
+  @doc("The runtime is pausing execution; this is not a terminal state.")
+  Pausing: "Pausing",
+
+  @doc("Execution is paused; this is not a terminal state and does not imply cancellation.")
+  Paused: "Paused",
+
+  @doc("The runtime is starting the job.")
+  Starting: "Starting",
+
+  @doc("The runtime is preparing the job environment.")
+  Preparing: "Preparing",
+
+  @doc("The job is waiting for compute capacity.")
+  Queued: "Queued",
+
+  @doc("The training command is executing.")
+  Running: "Running",
+
+  @doc("Execution has finished on compute and output collection is in progress; this is not yet a terminal state.")
+  Finalizing: "Finalizing",
+
+  @doc("Cancellation has been requested but execution is not confirmed stopped. The final state can be Canceled, Completed, or Failed.")
+  CancelRequested: "CancelRequested",
+
+  @doc("Execution and output collection completed successfully. Terminal.")
+  Completed: "Completed",
+
+  @doc("Execution failed. Terminal, even when no stored error is available. Inspect the job's error details and log artifacts.")
+  Failed: "Failed",
+
+  @doc("Execution was canceled. Terminal; a successful cancellation request alone does not establish this outcome.")
+  Canceled: "Canceled",
+}
+
+@doc("Stored job-level failure diagnostics returned inside a successful job-resource response. This is a direct error object, not the HTTP error-response envelope. The fields follow the existing resource wire contract, including camel-case `innerError` and `referenceCode`; they are distinct from the HTTP error envelope's `innererror`. Some stored diagnostics are incomplete. Missing or null diagnostic fields do not change a Failed execution outcome. Internal debug information is not part of this contract.")
+model CommandJobError {
+  @doc("Server-defined failure classification, or null if it was not recorded. Codes are extensible; use recognized codes for programmatic handling, not message text.")
+  code: string | null;
+
+  @doc("Human-readable diagnostic information, or null if it was not recorded. Intended for developers; do not parse it for programmatic handling or assume it is localized for end users.")
+  message: string | null;
+
+  @doc("A more specific service-defined failure reference, when recorded. Tolerate unrecognized values.")
+  referenceCode?: string | null;
+
+  @doc("The failure target, when recorded.")
+  target?: string | null;
+
+  @doc("Related structured failure details, when recorded.")
+  details?: CommandJobError[] | null;
+
+  @doc("More specific nested diagnostic codes, when recorded. Inspect the deepest code that the client recognizes.")
+  innerError?: CommandJobInnerError | null;
+
+  @doc("A URI pointing to additional failure context, when supplied by the runtime. It is not an operation-monitor or artifact-download URI.")
+  detailsUri?: url | null;
+}
+
+@doc("Nested diagnostic codes in the job-resource error. The existing JSON spelling is `innerError`, including at each nested level.")
+model CommandJobInnerError {
+  @doc("A more specific server-defined diagnostic code, when recorded.")
+  code?: string | null;
+
+  @doc("A further nested diagnostic code, when recorded.")
+  innerError?: CommandJobInnerError | null;
+}
+
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
 @doc("Base properties of a Job.")
 @discriminator("jobType")
@@ -371,9 +448,13 @@ model CommandJob extends JobProperties {
   @doc("Is the asset archived?")
   isArchived?: boolean;
 
-  @doc("Execution state, not the status of an API request. Non-terminal states include `NotStarted`, `Queued`, `Running`, `CancelRequested`, and `Finalizing`. Terminal states are `Completed` (execution succeeded), `Failed` (execution failed), and `Canceled` (execution was canceled). A successful cancellation request can precede a terminal state. Values are case-sensitive; clients must tolerate additional states. For a failed job, inspect its log artifacts for execution diagnostics.")
+  @doc("Execution state, not the status of an API request. A job returned with HTTP 200 can be Failed or Canceled. Only Completed, Failed, and Canceled are terminal; other or unrecognized values must not be treated as successful completion. Runtime-dependent stages may be skipped. Cancellation can race with Completed or Failed and does not guarantee Canceled. For Failed, inspect error when available, then use the artifact operations to retrieve log files. Absence of an error does not imply execution success.")
   @visibility(Lifecycle.Read)
-  status?: string;
+  status?: CommandJobStatus;
+
+  @doc("Server-owned stored failure diagnostics for a Failed job, when available. GET and LIST still return successful HTTP responses for failed executions; this is application-level failure information, not an HTTP exception. The property is omitted if no stored failure is available, and no error is projected for other execution states. Inspect recognized code/referenceCode/innerError values and message, then list the job's log artifacts and obtain content information for the selected exact file. Diagnostics or log files are not guaranteed for every failure. Retry execution with a different job name after correcting the submitted configuration; same-name replay does not restart a failed job.")
+  @visibility(Lifecycle.Read)
+  error?: CommandJobError;
 }
 
 @doc("A Foundry Training Job resource whose creation and updates complete independently of its asynchronous execution.")

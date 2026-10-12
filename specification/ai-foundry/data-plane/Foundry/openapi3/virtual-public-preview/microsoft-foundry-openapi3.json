@@ -34666,7 +34666,7 @@
     "/training_jobs/{name}": {
       "get": {
         "operationId": "Jobs_get",
-        "description": "Get a job resource by name, including its execution state in `properties.status`. This is a resource read, not an operation-status monitor. To observe training or cancellation, repeat this request at a client-selected interval; the service does not specify an execution-polling interval. `Completed`, `Failed`, and `Canceled` are terminal execution states. A missing or soft-deleted job returns 404.",
+        "description": "Get a job resource by name, including execution state in `properties.status` and stored failure diagnostics in `properties.error` when available. HTTP 200 means the resource was read successfully, not that training succeeded: Failed and Canceled jobs also return 200. This is a resource read, not an operation-status monitor. To observe training or cancellation, repeat this request at a client-selected interval; the service does not specify an execution-polling interval and runtime-dependent stages may be skipped. Only Completed, Failed, and Canceled are terminal execution states; tolerate additional values without assuming completion. On Failed, inspect the structured diagnostic codes/message, then list log artifacts and request content information for the selected exact path before downloading it. Missing diagnostics or logs do not imply success. Cancellation can finish as Completed or Failed rather than Canceled. A missing or soft-deleted job returns 404.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -42312,8 +42312,13 @@
             "description": "Is the asset archived?"
           },
           "status": {
-            "type": "string",
-            "description": "Execution state, not the status of an API request. Non-terminal states include `NotStarted`, `Queued`, `Running`, `CancelRequested`, and `Finalizing`. Terminal states are `Completed` (execution succeeded), `Failed` (execution failed), and `Canceled` (execution was canceled). A successful cancellation request can precede a terminal state. Values are case-sensitive; clients must tolerate additional states. For a failed job, inspect its log artifacts for execution diagnostics.",
+            "$ref": "#/components/schemas/CommandJobStatus",
+            "description": "Execution state, not the status of an API request. A job returned with HTTP 200 can be Failed or Canceled. Only Completed, Failed, and Canceled are terminal; other or unrecognized values must not be treated as successful completion. Runtime-dependent stages may be skipped. Cancellation can race with Completed or Failed and does not guarantee Canceled. For Failed, inspect error when available, then use the artifact operations to retrieve log files. Absence of an error does not imply execution success.",
+            "readOnly": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/CommandJobError",
+            "description": "Server-owned stored failure diagnostics for a Failed job, when available. GET and LIST still return successful HTTP responses for failed executions; this is application-level failure information, not an HTTP exception. The property is omitted if no stored failure is available, and no error is projected for other execution states. Inspect recognized code/referenceCode/innerError values and message, then list the job's log artifacts and obtain content information for the selected exact file. Diagnostics or log files are not guaranteed for every failure. Retry execution with a different job name after correcting the submitted configuration; same-name replay does not restart a failed job.",
             "readOnly": true
           }
         },
@@ -42323,6 +42328,125 @@
           }
         ],
         "description": "A command job's submitted configuration and metadata. Creation-only fields are pinned on the first persisted submission and cannot be changed by a same-name PUT. After submission is tracked, display name, description, tags and additive user properties can change while the job is running or terminal; such changes do not restart execution."
+      },
+      "CommandJobError": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Server-defined failure classification, or null if it was not recorded. Codes are extensible; use recognized codes for programmatic handling, not message text."
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Human-readable diagnostic information, or null if it was not recorded. Intended for developers; do not parse it for programmatic handling or assume it is localized for end users."
+          },
+          "referenceCode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A more specific service-defined failure reference, when recorded. Tolerate unrecognized values."
+          },
+          "target": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The failure target, when recorded."
+          },
+          "details": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CommandJobError"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Related structured failure details, when recorded."
+          },
+          "innerError": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CommandJobInnerError"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "More specific nested diagnostic codes, when recorded. Inspect the deepest code that the client recognizes."
+          },
+          "detailsUri": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A URI pointing to additional failure context, when supplied by the runtime. It is not an operation-monitor or artifact-download URI."
+          }
+        },
+        "description": "Stored job-level failure diagnostics returned inside a successful job-resource response. This is a direct error object, not the HTTP error-response envelope. The fields follow the existing resource wire contract, including camel-case `innerError` and `referenceCode`; they are distinct from the HTTP error envelope's `innererror`. Some stored diagnostics are incomplete. Missing or null diagnostic fields do not change a Failed execution outcome. Internal debug information is not part of this contract."
+      },
+      "CommandJobInnerError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A more specific server-defined diagnostic code, when recorded."
+          },
+          "innerError": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CommandJobInnerError"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A further nested diagnostic code, when recorded."
+          }
+        },
+        "description": "Nested diagnostic codes in the job-resource error. The existing JSON spelling is `innerError`, including at each nested level."
       },
       "CommandJobLimits": {
         "type": "object",
@@ -42344,6 +42468,32 @@
           }
         },
         "description": "Command Job limit class."
+      },
+      "CommandJobStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "NotStarted",
+              "Unapproved",
+              "Pausing",
+              "Paused",
+              "Starting",
+              "Preparing",
+              "Queued",
+              "Running",
+              "Finalizing",
+              "CancelRequested",
+              "Completed",
+              "Failed",
+              "Canceled"
+            ]
+          }
+        ],
+        "description": "Case-sensitive execution states reported by the job runtime, not operation-monitor states. Runtime-dependent stages can be skipped, and observations are not guaranteed to follow a fixed linear sequence. `Completed`, `Failed`, and `Canceled` are terminal; a terminal job does not transition to another execution state. Other known states are non-terminal. Clients must tolerate additional values and must not infer completion from an absent or unrecognized status."
       },
       "CompletionMessageToolCallChunk": {
         "type": "object",
