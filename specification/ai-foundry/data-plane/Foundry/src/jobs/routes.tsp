@@ -54,7 +54,7 @@ interface Jobs {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Artifact sub-resource path; cannot be expressed with standard resource operations."
-  @doc("List artifact descriptors for a job, including its log files, without returning download credentials. Logs are ordinary artifacts under the `azureml-logs/`, `user_logs/` and `system_logs/` directories. Follow `nextLink` unchanged to retrieve subsequent pages.")
+  @doc("List artifact descriptors for a job, including its log files, without returning download credentials. Logs are ordinary artifacts under the `azureml-logs/`, `user_logs/` and `system_logs/` directories. Follow `nextLink` unchanged to retrieve subsequent pages. Returns 400 if `maxpagesize` is outside 1 to 500, and 404 if the job is missing or deleted. A directory prefix with no matching artifacts returns 200 with an empty `value` array. Failures use the shared Azure error response.")
   @route("/training_jobs/{name}/artifacts")
   @get
   @list
@@ -74,16 +74,16 @@ interface Jobs {
     @query("$skipToken")
     skipToken?: string,
 
-    @doc("Maximum number of artifacts in one page, from 1 to 500. The service may return fewer items and uses 100 when omitted.")
+    @doc("Maximum number of artifacts in one page, from 1 to 500. The service may return fewer items and uses 100 when omitted. Values outside this range are rejected with 400; valid values are supported by this FTJ-only API.")
     @query("maxpagesize")
     @pageSize
     @minValue(1)
     @maxValue(500)
     maxPageSize?: int32,
-  ): ArtifactList;
+  ): ArtifactList | Azure.Core.Foundations.ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Artifact sub-resource path; cannot be expressed with standard resource operations."
-  @doc("Get content access information for one artifact identified by its exact path. Returns a download URI and the byte length when available; this operation does not list a directory or return a page of artifacts.")
+  @doc("Get content access information for one artifact identified by its exact path. Returns a download URI and the byte length when available; this operation does not list a directory or return a page of artifacts. Returns 400 if `path` is omitted, empty, or whitespace-only. Returns 404 if the job is missing or deleted, or no artifact exists at the exact case-sensitive path. Failures use the shared Azure error response.")
   @route("/training_jobs/{name}/artifacts/contentinfo")
   @get
   getArtifactContentInformation(
@@ -94,11 +94,11 @@ interface Jobs {
     @path
     name: string,
 
-    @doc("The required, case-sensitive path of one artifact relative to the job's artifact container, such as `user_logs/std_log.txt`. A directory prefix is not accepted.")
+    @doc("The required, case-sensitive path of one artifact relative to the job's artifact container, such as `user_logs/std_log.txt`. A directory prefix is not accepted. An omitted, empty, or whitespace-only path is rejected with 400; a non-matching exact path returns 404.")
     @query
     @minLength(1)
     path: string,
-  ): ArtifactContentInformation;
+  ): ArtifactContentInformation | Azure.Core.Foundations.ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT create-or-update pattern required by the Job API wire format"
   @doc("Create or update a job resource. Returns 201 when the resource is created or 200 when it is updated; these responses do not wait for training to finish. Use `get` to observe execution state. On update, the supplied tags replace the existing tags.")
