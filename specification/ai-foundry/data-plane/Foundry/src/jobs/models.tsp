@@ -278,74 +278,94 @@ model JobProperties {
   jobType: string;
 }
 
-@doc("Properties of a Command Job.")
+@doc("A command job's submitted configuration and metadata. Creation-only fields are pinned on the first persisted submission and cannot be changed by a same-name PUT. After submission is tracked, display name, description, tags and additive user properties can change while the job is running or terminal; such changes do not restart execution.")
 model CommandJob extends JobProperties {
   @doc("Job type.")
   jobType: "Command";
 
-  @doc("The command to execute on startup of the job.")
+  @doc("The command to execute on startup of the job. Immutable after the initial submission.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   command: string;
 
-  @doc("ACR path of environment.")
+  @doc("ACR path of the environment image. Immutable after the initial submission.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   environmentImageReference: string;
 
-  @doc("Display name of job.")
+  @doc("Mutable display name. Omission preserves the current value on update; an empty string clears it. Can be updated on tracked running or terminal jobs without restarting execution.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   displayName?: string;
 
-  @doc("The asset description text.")
+  @doc("Mutable job description. Omission preserves the current value on update; an empty string clears it.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   description?: string;
 
-  @doc("The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.")
+  @doc("The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment. This assignment is immutable after the initial submission.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   experimentName?: string;
 
-  @doc("Tag dictionary. Tags can be added, removed, and updated.")
+  @doc("Mutable tags. A supplied map replaces the entire stored map; omitted tags remain unchanged and an empty map clears all tags. Tags can be changed on tracked running or terminal jobs without restarting execution.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   tags?: Record<string>;
 
-  @doc("The asset property dictionary.")
+  @doc("Additive user properties. Updates may add new keys or repeat existing values, but changing an existing value is rejected with 400. Existing keys omitted from an update are preserved; an empty map does not clear them.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   properties?: Record<string>;
 
   @doc("Code asset reference.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @encodedName("application/json", "codeId")
   code?: string;
 
   @doc("Compute resource ID.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @encodedName("application/json", "computeId")
   compute: string;
 
   @doc("Mapping of input data bindings used in the job.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   inputs?: Record<Input>;
 
   @doc("Mapping of output data bindings used in the job.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   outputs?: Record<Output>;
 
   @doc("Environment variables included in the job.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   environmentVariables?: Record<string>;
 
   @doc("Compute Resource configuration for the job.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   resources?: JobResourceConfiguration;
 
   @doc("Distribution configuration of the job.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   distribution?: DistributionConfiguration;
 
   @doc("Command Job limit.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   limits?: CommandJobLimits;
 
   @doc("List of job services.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   services?: Record<JobService>;
 
   @doc("Queue settings for the job.")
   queueSettings?: QueueSettings;
 
   @doc("User-visible scheduling priority for the job.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   priority?: JobPriority;
 
   @doc("user-assigned managed identity")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   userAssignedIdentityId?: string;
 
   @doc("Number of capacity units to allocate for the job. When set, the service resolves the VM SKU from the compute target and calculates the required node count automatically. Virtual cluster targets must also specify `resources.instanceType`. Valid values are 1, 2, 4, 8, or any multiple of 8 for values greater than 8. `gpuCount` takes precedence over this property when both are supplied.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   capacityUnitCount?: int32;
 
   @doc("Number of GPUs to allocate for the job. Takes precedence over `capacityUnitCount` when both are supplied, and is used to resolve a partial (sub-node) VM SKU for GPU computes. Only applies to GPU computes; CPU computes always resolve to a full-node SKU and ignore this value. Valid values are 1, 2, 4, 8, or any multiple of 8 for values greater than 8.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   gpuCount?: int32;
 
   @doc("Is the asset archived?")

@@ -31304,7 +31304,7 @@
       },
       "put": {
         "operationId": "Jobs_createOrUpdate",
-        "description": "Create or update a job resource. Returns 201 when the resource is created or 200 when it is updated; these responses do not wait for training to finish. Use `get` to observe execution state. On update, the supplied tags replace the existing tags.",
+        "description": "Create, replay, or update a named job resource without waiting for training to finish. The first request pins the submitted configuration. Retry the same name with the same configuration to reuse the persisted job or resume an incomplete submission, rather than create another execution. Returns 201 for the create/resume path or 200 for an existing tracked job, including a no-op replay. A deleted name cannot be reused (409); use a new name for a new execution. Changing submitted command, environment, compute, code, experiment, bindings, resources, distribution, limits, services, or priority is rejected with 400. While submission is incomplete, retries must reproduce the original submitted configuration; metadata changes must wait until submission is tracked. Once tracked, running and terminal jobs permit changes only to display name, description, tags and user properties, without restarting execution. Omitted metadata stays unchanged; empty text clears display name/description. Supplied tags replace the entire map and an empty map clears it. User properties add new keys only: existing values cannot change and omitted keys are preserved. Concurrent metadata writes can return 409; read the latest job and retry the intended change. No public ETag precondition or conditional-write guarantee is provided, so a read-modify-write sequence is not protected against intervening writes. Use `get` to observe execution state.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -31384,7 +31384,7 @@
               }
             }
           },
-          "description": "The job to create or update."
+          "description": "The job definition for creation, same-name replay, or metadata update. Include the required command, environment and compute fields even when updating metadata. Submitted configuration values must match the existing job; optional omitted configuration stays unchanged on a tracked update. To change execution configuration, create a job with a different name."
         }
       },
       "delete": {
@@ -37899,37 +37899,37 @@
           },
           "command": {
             "type": "string",
-            "description": "The command to execute on startup of the job."
+            "description": "The command to execute on startup of the job. Immutable after the initial submission."
           },
           "environmentImageReference": {
             "type": "string",
-            "description": "ACR path of environment."
+            "description": "ACR path of the environment image. Immutable after the initial submission."
           },
           "displayName": {
             "type": "string",
-            "description": "Display name of job."
+            "description": "Mutable display name. Omission preserves the current value on update; an empty string clears it. Can be updated on tracked running or terminal jobs without restarting execution."
           },
           "description": {
             "type": "string",
-            "description": "The asset description text."
+            "description": "Mutable job description. Omission preserves the current value on update; an empty string clears it."
           },
           "experimentName": {
             "type": "string",
-            "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment."
+            "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment. This assignment is immutable after the initial submission."
           },
           "tags": {
             "type": "object",
             "additionalProperties": {
               "type": "string"
             },
-            "description": "Tag dictionary. Tags can be added, removed, and updated."
+            "description": "Mutable tags. A supplied map replaces the entire stored map; omitted tags remain unchanged and an empty map clears all tags. Tags can be changed on tracked running or terminal jobs without restarting execution."
           },
           "properties": {
             "type": "object",
             "additionalProperties": {
               "type": "string"
             },
-            "description": "The asset property dictionary."
+            "description": "Additive user properties. Updates may add new keys or repeat existing values, but changing an existing value is rejected with 400. Existing keys omitted from an update are preserved; an empty map does not clear them."
           },
           "codeId": {
             "type": "string",
@@ -38016,7 +38016,7 @@
             "$ref": "#/components/schemas/JobProperties"
           }
         ],
-        "description": "Properties of a Command Job."
+        "description": "A command job's submitted configuration and metadata. Creation-only fields are pinned on the first persisted submission and cannot be changed by a same-name PUT. After submission is tracked, display name, description, tags and additive user properties can change while the job is running or terminal; such changes do not restart execution."
       },
       "CommandJobLimits": {
         "type": "object",
