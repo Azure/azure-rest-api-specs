@@ -16,6 +16,9 @@ global-approvers:
   - lmazuel
   - samvaity
   - praveenkuttappan
+  - catalinaperalta
+  - timotheeguerin
+  - xirzec
 
 # Data-plane REST stewardship reviewers. Gated here as the only users who may apply the
 # sign-off label, the approval that clears the merge gate.
@@ -27,10 +30,33 @@ global-approvers:
 # Since this low cost effort and the list changes rarely, the simpler path
 # fits better for now, so we mirror the members by hand. Keep this in sync when team
 # membership changes.
-data-plane-review-signoff:
-  - JonathanGiles
+data-plane-review-signoff: &data-plane-reviewers
+  - alzimmermsft
   - heaths
+  - jeremymeng
+  - jhendrixMSFT
+  - JonathanGiles
+  - JoshLove-msft
+  - kashifkhan
+  - LarryOsterman
+  - m-nash
+  - maorleger
+  - qiaozha
+  - samvaity
+  - tjprescott
   - weidongxu-microsoft
+  - xirzec
+
+# TypeSpec lint-suppression approval (data-plane stewardship review).
+# `typespec-suppressions-approved` clears the suppression review on a data-plane spec PR.
+# Only the data-plane stewardship reviewers may apply it, mirroring the azure-data-plane-api-reviewers
+# team (same pool as `data-plane-review-signoff`); the alias keeps the two rosters in sync.
+# Management-plane is left `unprotected`: ARM runs its own suppression review process, and
+# this preserves today's behavior (the label was previously unprotected on all planes).
+# See the stewardship board member guide (aka.ms/azsdk/architect-guidance).
+typespec-suppressions-approved:
+  data-plane: *data-plane-reviewers
+  management-plane: unprotected
 
 # Package name approval labels (plane-aware)
 package-name-dotnet-approved:
@@ -54,14 +80,12 @@ package-name-python-approved:
     - ArthurMa1978
     - m-nash
   data-plane:
-    - xirzec
     - kashifkhan
 package-name-typescript-approved:
   management-plane:
     - ArthurMa1978
     - m-nash
   data-plane:
-    - xirzec
     - maorleger
 package-name-go-approved:
   management-plane:
@@ -79,6 +103,66 @@ package-name-approved-all:
   management-plane:
     - ArthurMa1978
     - m-nash
+
+# SDK breaking-change board approval labels.
+# These labels clear the per-language SDK breaking-change merge gates (rulesPri2Sdk in
+# .github/workflows/src/summarize-checks/labelling.ts). Only authorized reviewers may apply
+# them; if anyone else does, the bot removes the label.
+#
+# The roster is the union of the Azure/azure-data-plane-api-reviewers team and the
+# contributors who actually apply these labels today (audited from recent PR label history).
+# It is hand-maintained as one flat list; keep it in sync when either pool changes.
+#
+# Only the labels that currently exist in the repo are listed. The Java and Python-Track2
+# approval labels (BreakingChange-Java-Sdk-Approved, BreakingChange-Java-Sdk-Suppression-Approved,
+# BreakingChange-Python-Track2-Sdk-Approved) are defined in labelling.ts but not yet created
+# as repo labels; add them here once they exist.
+BreakingChange-Go-Sdk-Approved: &sdk-breaking-change-approvers
+  - alzimmermsft
+  - ArcturusZhang
+  - ArthurMa1978
+  - heaths
+  - jeremymeng
+  - jhendrixMSFT
+  - JialinHuang803
+  - JonathanGiles
+  - JoshLove-msft
+  - kashifkhan
+  - kazrael2119
+  - LarryOsterman
+  - m-nash
+  - maorleger
+  - msyyc
+  - nasc17
+  - qiaozha
+  - samvaity
+  - tadelesh
+  - tjprescott
+  - v-jiaodi
+  - v-xuto
+  - weidongxu-microsoft
+  - xirzec
+BreakingChange-Go-Sdk-Suppression-Approved: *sdk-breaking-change-approvers
+BreakingChange-JavaScript-Sdk-Approved: *sdk-breaking-change-approvers
+BreakingChange-JavaScript-Sdk-Suppression-Approved: *sdk-breaking-change-approvers
+BreakingChange-Python-Sdk-Approved: *sdk-breaking-change-approvers
+BreakingChange-Python-Sdk-Suppression-Approved: *sdk-breaking-change-approvers
+
+# Label to skip release plan automation when applied to spec PR.
+Skip-ReleasePlan-Automation:
+  - msyyc
+  - ArthurMa1978
+  - tadelesh
+  - JiaqiZhang-Dev
+  - JialinHuang803
+  - ArcturusZhang
+  - weidongxu-microsoft
+  - XiaofeiCao
+  - ChenxiJiang333
+  - kazrael2119
+  - v-jiaodi
+  - v-xuto
+  - live1206
 
 # Tier 1 languages: all must approve package names for cross-language alignment.
 tier1:

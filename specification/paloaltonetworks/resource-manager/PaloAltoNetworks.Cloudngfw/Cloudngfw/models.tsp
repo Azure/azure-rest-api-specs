@@ -1508,7 +1508,7 @@ model PanoramaConfig {
   /**
    * VM auth key for panorama connectivity
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Sensitive value returned by this read-only property in the released contract since the first stable version (2022-08-29). Applying @secret now emits `format: password` + `x-ms-secret: true`, which openapi-diff reports as TypeFormatChanged (Error) against every shipped version, and @secret cannot be version-gated (no versioning decorator targets it). Deferred to a future breaking-change window."
   @visibility(Lifecycle.Read)
   vmAuthKey?: string;
 
@@ -1968,7 +1968,7 @@ model ApplicationInsights {
   /**
    * Application Insights key
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Sensitive value present in the released contract since the first stable version (2022-08-29). Applying @secret now emits `format: password` + `x-ms-secret: true`, which openapi-diff reports as TypeFormatChanged (Error) against every shipped version, and @secret cannot be version-gated (no versioning decorator targets it). Deferred to a future breaking-change window."
   key?: string;
 }
 
@@ -2064,13 +2064,13 @@ model MonitorLog {
   /**
    * Primary Key value for Monitor
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Sensitive value present in the released contract since the first stable version (2022-08-29). Applying @secret now emits `format: password` + `x-ms-secret: true`, which openapi-diff reports as TypeFormatChanged (Error) against every shipped version, and @secret cannot be version-gated (no versioning decorator targets it). Deferred to a future breaking-change window."
   primaryKey?: string;
 
   /**
    * Secondary Key value for Monitor
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Sensitive value present in the released contract since the first stable version (2022-08-29). Applying @secret now emits `format: password` + `x-ms-secret: true`, which openapi-diff reports as TypeFormatChanged (Error) against every shipped version, and @secret cannot be version-gated (no versioning decorator targets it). Deferred to a future breaking-change window."
   secondaryKey?: string;
 }
 

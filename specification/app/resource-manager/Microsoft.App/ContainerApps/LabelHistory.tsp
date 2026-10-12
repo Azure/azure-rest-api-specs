@@ -67,7 +67,8 @@ alias LabelHistoryPreviewOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @pattern("^[-\\w\\._\\(\\)]+$")
     labelName: string;
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppLabelHistory"
 >;
 
 alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -92,7 +93,8 @@ alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @pattern("^[-\\w\\._\\(\\)]+$")
     labelName: string;
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppLabelHistory"
 >;
 
 @removed(Versions.v2026_01_01)

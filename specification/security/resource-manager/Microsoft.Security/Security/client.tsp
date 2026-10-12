@@ -5,6 +5,7 @@ import "./ApplicationsAPI/main.tsp";
 import "./AssessmentAPI/main.tsp";
 import "./ATPSettingsAPI/main.tsp";
 import "./AutomationsAPI/main.tsp";
+import "./BatchPricingsAPI/main.tsp";
 import "./ComplianceResultsAPI/main.tsp";
 import "./DefenderForStorageAPI/main.tsp";
 import "./GovernanceAPI/main.tsp";
@@ -69,6 +70,7 @@ using StandardsAPI;
     AssessmentAPI,
     ATPSettingsAPI,
     AutomationsAPI,
+    BatchPricingsAPI,
     ComplianceResultsAPI,
     DefenderForStorageAPI,
     GovernanceAPI,
@@ -796,6 +798,11 @@ op privateLinkResourcesGetCustomization(
 @@clientName(AutomationsAPI.EventSource, "SecurityEventSource", "csharp");
 @@clientName(LocationsAPI.AscLocation, "SecurityCenterLocation", "csharp");
 @@clientName(PricingsAPI.Pricing, "SecurityCenterPricing", "csharp");
+@@clientName(
+  PrivateLinksAPI.PrivateLinkResource,
+  "SecurityCenterPrivateLinkResource",
+  "csharp"
+);
 @@clientName(LegacySettingsAPI.Compliance, "SecurityCompliance", "csharp");
 @@clientName(LegacySettingsAPI.Rank, "SensitivityLabelRank", "csharp");
 @@clientName(ApplicationsAPI.Application, "SecurityApplication", "csharp");

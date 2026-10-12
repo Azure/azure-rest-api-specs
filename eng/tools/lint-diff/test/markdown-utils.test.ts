@@ -1,4 +1,4 @@
-import { readFile } from "fs/promises";
+import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { type Mock, beforeEach, describe, expect, test, vi } from "vitest";
 

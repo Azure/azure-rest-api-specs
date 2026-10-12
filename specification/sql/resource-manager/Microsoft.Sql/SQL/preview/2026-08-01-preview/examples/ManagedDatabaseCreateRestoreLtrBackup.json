@@ -4,15 +4,13 @@
     "databaseName": "managedDatabase",
     "managedInstanceName": "managedInstance",
     "parameters": {
-      "location": "southeastasia",
+      "location": "EastAsia",
       "properties": {
-        "collation": "SQL_Latin1_General_CP1_CI_AS",
-        "createMode": "RestoreExternalBackup",
-        "storageContainerSasToken": "sv=2015-12-11&sr=c&sp=rl&sig=1234",
-        "storageContainerUri": "https://myaccountname.blob.core.windows.net/backups"
+        "createMode": "RestoreLongTermRetentionBackup",
+        "longTermRetentionBackupResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-EastAsia/providers/Microsoft.Sql/locations/EastAsia/longTermRetentionManagedInstances/managedInstance/longTermRetentionDatabases/managedDatabase/longTermRetentionManagedInstanceBackups/66349b17-1afa-47af-af39-82d2118bbab8;134269634640000000;Hot"
       }
     },
-    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "resourceGroupName": "Default-SQL-EastAsia",
     "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
@@ -20,12 +18,12 @@
       "body": {
         "name": "testdb1",
         "type": "Microsoft.Sql/managedInstances/databases",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/testsvr/databases/testdb1",
-        "location": "southeastasia",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-EastAsia/providers/Microsoft.Sql/managedInstances/testsvr/databases/testdb1",
+        "location": "EastAsia",
         "properties": {
           "collation": "SQL_Latin1_General_CP1_CI_AS",
-          "creationDate": "2017-06-07T04:41:33.937Z",
-          "defaultSecondaryLocation": "North Europe",
+          "creationDate": "2026-08-01T12:27:58.79Z",
+          "defaultSecondaryLocation": "Southeast Asia",
           "isLedgerOn": false,
           "status": "Online"
         },
@@ -38,12 +36,12 @@
       "body": {
         "name": "testdb2",
         "type": "Microsoft.Sql/managedInstances/databases",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/testsvr/databases/testdb2",
-        "location": "southeastasia",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-EastAsia/providers/Microsoft.Sql/managedInstances/testsvr/databases/testdb2",
+        "location": "EastAsia",
         "properties": {
           "collation": "SQL_Latin1_General_CP1_CI_AS",
-          "creationDate": "2017-06-07T04:41:33.937Z",
-          "defaultSecondaryLocation": "North Europe",
+          "creationDate": "2026-08-01T12:27:58.79Z",
+          "defaultSecondaryLocation": "Southeast Asia",
           "isLedgerOn": false,
           "status": "Online"
         },
