@@ -71,18 +71,6 @@ suppressions:
       - $.definitions.AiGatewayPolicyUpdate.properties.allowCredentials
       - $.definitions.AiGatewayPolicyUpdate.properties.terminateUnmatchedRequest
     reason: These implemented fields are binary enable-or-disable and required-or-optional switches, not extensible states.
-  - code: AvoidAdditionalProperties
-    from: openapi.json
-    where:
-      - $.definitions.AiGatewayTelemetryCredentials.properties.headers
-      - $.definitions.AiGatewayOpenTelemetryConfiguration.properties.headers
-      - $.definitions.AiGatewayCostLimitOverride.properties.claims
-      - $.definitions.AiGatewayCostLimitOverrideUpdate.properties.claims
-      - $.definitions.AiGatewayAgentHook.properties.headers
-      - $.definitions.AiGatewayAgentHookUpdate.properties.headers
-      - $.definitions.AiGatewayPolicy.properties.headers
-      - $.definitions.AiGatewayPolicyUpdate.properties.headers
-    reason: OTLP and agent-hook HTTP header names and authenticated-token claim selectors are arbitrary keys in the implemented wire contract. These maps are retained for wire compatibility; tool-server credential and OAuth parameter collections remain typed arrays.
   - code: XMSSecretInResponse
     from: openapi.json
     where:

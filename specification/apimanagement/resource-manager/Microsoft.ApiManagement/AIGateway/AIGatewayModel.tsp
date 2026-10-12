@@ -134,12 +134,22 @@ union AiGatewayCounterDimension {
   IpAddress: "ipAddress",
 }
 
+/** An authenticated token claim and its expected value. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayClaimSelector {
+  /** Case-sensitive claim name. */
+  name: string;
+
+  /** Expected claim value. */
+  value: string;
+}
+
 /** An ordered cost-budget override; exactly one selector must be specified. */
 @added(Versions.v2026_10_01_preview)
 model AiGatewayCostLimitOverride {
-  /** Authenticated token claims that must all match. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Authenticated token claim names form an extensible selector map in the implementation wire contract."
-  claims?: Record<string>;
+  /** Authenticated token claims that must all match; claim names must be unique. */
+  @identifiers(#["name"])
+  claims?: AiGatewayClaimSelector[];
 
   /** Azure resource identifier of the API key selecting this override. */
   apiKeyResourceId?: string;
@@ -219,6 +229,16 @@ model AiGatewayAgentHookAuthorizationUpdate {
   audience?: url;
 }
 
+/** A literal, non-secret HTTP header sent to an agent hook. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayAgentHookHeader {
+  /** HTTP header name. */
+  name: string;
+
+  /** Non-secret HTTP header value, returned by read operations. */
+  value: string;
+}
+
 /** External hook settings; omitted fields inherit policy-level settings. */
 @added(Versions.v2026_10_01_preview)
 model AiGatewayAgentHook {
@@ -229,8 +249,8 @@ model AiGatewayAgentHook {
   authorization?: AiGatewayAgentHookAuthorization;
 
   /** Literal, non-secret HTTP headers, returned by read operations. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Agent hooks accept arbitrary non-secret HTTP header names in the implementation wire contract."
-  headers?: Record<string>;
+  @identifiers(#["name"])
+  headers?: AiGatewayAgentHookHeader[];
 }
 
 /** External hook settings to update. */
@@ -243,8 +263,8 @@ model AiGatewayAgentHookUpdate {
   authorization?: AiGatewayAgentHookAuthorizationUpdate;
 
   /** Literal, non-secret HTTP headers. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Agent hooks accept arbitrary non-secret HTTP header names in the implementation wire contract."
-  headers?: Record<string>;
+  @identifiers(#["name"])
+  headers?: AiGatewayAgentHookHeader[];
 }
 
 /** Lifecycle hooks supported on tool servers. */
@@ -341,8 +361,8 @@ model AiGatewayPolicy {
   authorization?: AiGatewayAgentHookAuthorization;
 
   /** Literal non-secret default HTTP headers for agent hooks. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Agent hooks accept arbitrary non-secret HTTP header names in the implementation wire contract."
-  headers?: Record<string>;
+  @identifiers(#["name"])
+  headers?: AiGatewayAgentHookHeader[];
 
   /** Lifecycle hooks; requires agent-hook authoring to be enabled on the gateway. */
   hooks?: AiGatewayAgentHooks;
@@ -448,8 +468,8 @@ model AiGatewayPolicyUpdate {
   authorization?: AiGatewayAgentHookAuthorizationUpdate;
 
   /** Literal non-secret default HTTP headers for agent hooks. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Agent hooks accept arbitrary non-secret HTTP header names in the implementation wire contract."
-  headers?: Record<string>;
+  @identifiers(#["name"])
+  headers?: AiGatewayAgentHookHeader[];
 
   /** Lifecycle hooks to update. */
   hooks?: AiGatewayAgentHooksUpdate;

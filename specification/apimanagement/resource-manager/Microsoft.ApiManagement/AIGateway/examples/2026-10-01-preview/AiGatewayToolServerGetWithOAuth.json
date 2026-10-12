@@ -72,9 +72,12 @@
                   "authorization": {
                     "type": "anonymous"
                   },
-                  "headers": {
-                    "X-Audit-Source": "gateway"
-                  }
+                  "headers": [
+                    {
+                      "name": "X-Audit-Source",
+                      "value": "gateway"
+                    }
+                  ]
                 },
                 "postToolCall": {
                   "endpoint": "https://hooks.example.com/post-tool",

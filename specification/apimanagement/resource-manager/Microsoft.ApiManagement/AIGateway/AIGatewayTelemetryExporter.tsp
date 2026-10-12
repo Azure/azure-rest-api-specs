@@ -31,13 +31,24 @@ model AiGatewayTelemetryManagedIdentity {
   clientId?: string;
 }
 
+/** A secret HTTP header sent with telemetry export requests. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayTelemetryHeader {
+  /** HTTP header name. */
+  name: string;
+
+  /** Secret HTTP header value. */
+  @secret
+  value: string;
+}
+
 /** Authentication settings for an OpenTelemetry exporter. */
 @added(Versions.v2026_10_01_preview)
 model AiGatewayTelemetryCredentials {
   /** Secret HTTP headers sent with export requests. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "OTLP authentication accepts arbitrary HTTP header names in the implementation wire contract."
+  @identifiers(#["name"])
   @secret
-  headers?: Record<string>;
+  headers?: AiGatewayTelemetryHeader[];
 
   /** Managed identity authentication for export requests. */
   managedIdentity?: AiGatewayTelemetryManagedIdentity;
@@ -56,9 +67,9 @@ model AiGatewayOpenTelemetryConfiguration {
   tracesEndpoint?: url;
 
   /** Legacy secret HTTP headers, mutually exclusive with credentials. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The legacy OTLP authentication wire contract uses arbitrary HTTP header names."
+  @identifiers(#["name"])
   @secret
-  headers?: Record<string>;
+  headers?: AiGatewayTelemetryHeader[];
 
   /** Legacy managed identity settings, mutually exclusive with credentials. */
   managedIdentity?: AiGatewayTelemetryManagedIdentity;
