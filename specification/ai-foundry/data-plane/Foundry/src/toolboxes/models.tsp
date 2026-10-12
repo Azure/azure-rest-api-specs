@@ -79,6 +79,7 @@ alias ToolboxOpenApiToolType = "openapi";
 alias ToolboxA2AToolType = "a2a";
 alias ToolboxA2APreviewToolType = "a2a_preview";
 alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
+alias ToolboxCloudComputerUsePreviewToolType = "cloud_computer_use_preview";
 alias ToolboxBrowserAutomationToolType = "browser_automation";
 alias ToolboxReminderPreviewToolType = "reminder_preview";
 alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
@@ -99,6 +100,9 @@ union ToolboxToolType {
   openapi: ToolboxOpenApiToolType,
   a2a_preview: ToolboxA2APreviewToolType,
   browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
+  cloud_computer_use_preview: ToolboxCloudComputerUsePreviewToolType,
   reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
@@ -278,6 +282,17 @@ model A2APreviewToolboxTool extends ToolboxTool {
 model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
   type: ToolboxBrowserAutomationPreviewToolType;
   ...ToolFields<BrowserAutomationPreviewTool>;
+}
+
+/**
+ * A cloud computer use tool stored in a toolbox.
+ */
+@added(Versions.PuPr)
+@removed(Versions.v1)
+@extension("x-ms-foundry-meta", PreviewTool)
+model CloudComputerUsePreviewToolboxTool extends ToolboxTool {
+  type: ToolboxCloudComputerUsePreviewToolType;
+  ...ToolFields<CloudComputerUsePreviewTool>;
 }
 
 /**
