@@ -3194,7 +3194,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "unevaluatedProperties": {}
+                  "additionalProperties": {}
                 }
               }
             }
@@ -17178,7 +17178,7 @@
                   },
                   "metadata": {
                     "type": "object",
-                    "unevaluatedProperties": {
+                    "additionalProperties": {
                       "type": "string"
                     },
                     "description": "Arbitrary key-value metadata to associate with the memory store."
@@ -17427,7 +17427,7 @@
                   },
                   "metadata": {
                     "type": "object",
-                    "unevaluatedProperties": {
+                    "additionalProperties": {
                       "type": "string"
                     },
                     "description": "Arbitrary key-value metadata to associate with the memory store."
@@ -24775,7 +24775,7 @@
               "anyOf": [
                 {
                   "type": "object",
-                  "unevaluatedProperties": {
+                  "additionalProperties": {
                     "type": "string"
                   }
                 },
@@ -26868,15 +26868,13 @@
                     "completed_at": {
                       "anyOf": [
                         {
-                          "type": "string",
-                          "format": "date-time"
+                          "type": "integer",
+                          "format": "unixtime"
                         },
                         {
                           "type": "null"
                         }
-                      ],
-                      "type": "integer",
-                      "format": "unixTimestamp"
+                      ]
                     },
                     "error": {
                       "anyOf": [
@@ -27365,7 +27363,7 @@
                   },
                   "structured_inputs": {
                     "type": "object",
-                    "unevaluatedProperties": {},
+                    "additionalProperties": {},
                     "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
                   },
                   "user_security_context": {
@@ -35728,7 +35726,7 @@
                   },
                   "metadata": {
                     "type": "object",
-                    "unevaluatedProperties": {
+                    "additionalProperties": {
                       "type": "string"
                     },
                     "description": "Arbitrary key-value metadata to associate with the toolbox."
@@ -36090,7 +36088,7 @@
             "*/*": {
               "schema": {
                 "type": "object",
-                "unevaluatedProperties": {}
+                "additionalProperties": {}
               }
             }
           },
@@ -37270,7 +37268,7 @@
           },
           "evaluators": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/EvaluatorConfiguration"
             },
             "description": "Evaluators to be used for the evaluation."
@@ -37339,7 +37337,7 @@
           },
           "additionalDetails": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Additional properties relevant to the evaluator. These will differ between evaluators."
@@ -38440,7 +38438,7 @@
           },
           "details": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Additional reason-specific suspension details."
           }
         },
@@ -39159,7 +39157,7 @@
           },
           "initialization_parameters": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Parameters passed to the evaluator at initialization. Omitted when the evaluator requires no initialization parameters."
           }
         },
@@ -40038,7 +40036,7 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Initial string tags."
@@ -40049,7 +40047,7 @@
           },
           "attachments": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Initial JSON-serializable attachment values keyed by attachment name."
           }
         },
@@ -40080,7 +40078,7 @@
             "default": "error"
           }
         },
-        "unevaluatedProperties": {},
+        "additionalProperties": {},
         "description": "Structured error persisted on a task record.",
         "x-ms-foundry-meta": {
           "contract": "agentserver-persistence",
@@ -40264,7 +40262,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {
+                "additionalProperties": {
                   "type": "string"
                 }
               },
@@ -40289,7 +40287,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {}
+                "additionalProperties": {}
               },
               {
                 "type": "null"
@@ -40396,7 +40394,7 @@
             "description": "ISO 8601 UTC instant when the source object was last updated."
           }
         },
-        "unevaluatedProperties": {},
+        "additionalProperties": {},
         "description": "Provenance and recovery-routing metadata for an AgentServer durable task record.",
         "x-ms-foundry-meta": {
           "contract": "agentserver-persistence",
@@ -40614,7 +40612,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {
+                "additionalProperties": {
                   "type": "string"
                 }
               },
@@ -41343,7 +41341,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -41864,7 +41862,7 @@
               },
               "parameters": {
                 "type": "object",
-                "unevaluatedProperties": {},
+                "additionalProperties": {},
                 "description": "The parameters the functions accepts, described as a JSON Schema object."
               }
             },
@@ -41919,7 +41917,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -42362,7 +42360,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -42763,7 +42761,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -42858,7 +42856,7 @@
           },
           "coordinates": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ChartCoordinate"
             },
             "description": "  Optional mapping of IDs to 2D coordinates used by the UX for visualization.\n\n  The map keys are string identifiers (for example, a cluster id or a sample id)\n  and the values are the coordinates and visual size for rendering on a 2D chart.\n\n  This property is omitted unless the client requests coordinates (for example,\n  by passing `includeCoordinates=true` as a query parameter).\n\n  Example:\n  ```\n  {\n    \"cluster-1\": { \"x\": 12, \"y\": 34, \"size\": 8 },\n    \"sample-123\": { \"x\": 18, \"y\": 22, \"size\": 4 }\n  }\n  ```\n\n  Coordinates are intended only for client-side visualization and do not\n  modify the canonical insights results."
@@ -43119,7 +43117,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Metadata of the connection",
@@ -43494,7 +43492,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
@@ -43511,7 +43509,7 @@
           },
           "parameter_values": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The inputs to the manifest that will result in a fully materialized Agent."
           }
         }
@@ -43535,7 +43533,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
@@ -43655,7 +43653,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
@@ -43677,7 +43675,7 @@
         "properties": {
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
@@ -43694,7 +43692,7 @@
           },
           "parameter_values": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The inputs to the manifest that will result in a fully materialized Agent."
           }
         }
@@ -43707,7 +43705,7 @@
         "properties": {
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
@@ -43830,7 +43828,7 @@
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
@@ -43878,7 +43876,7 @@
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
@@ -44025,7 +44023,7 @@
           },
           "structured_inputs": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables."
           },
           "schedule": {
@@ -44221,7 +44219,7 @@
           },
           "parameters": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Provider-specific trigger parameters."
           }
         },
@@ -44622,7 +44620,7 @@
           },
           "schema": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The overall object JSON schema for the run data source items.\n\nSee the [evaluation dataset schema](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluation-dataset-schema)."
           }
         },
@@ -44669,7 +44667,7 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Tag dictionary of the output dataset.",
@@ -44858,7 +44856,7 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Tag dictionary. Tags can be added, removed, and updated."
@@ -45475,7 +45473,7 @@
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
@@ -45712,7 +45710,7 @@
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
@@ -45846,7 +45844,7 @@
           },
           "datasource_item": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Details of the input data source item."
           },
           "results": {
@@ -45897,7 +45895,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {}
+                "additionalProperties": {}
               },
               {
                 "type": "null"
@@ -45928,13 +45926,13 @@
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Additional details about the test criteria metric."
           }
         },
-        "unevaluatedProperties": {},
+        "additionalProperties": {},
         "description": "A single grader result for an evaluation run output item.",
         "title": "EvalRunOutputItemResult"
       },
@@ -46149,21 +46147,21 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Evaluation's tags. Unlike properties, tags are fully mutable."
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed."
           },
           "evaluators": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/EvaluatorConfiguration"
             },
             "description": "Evaluators to be used for the evaluation."
@@ -46355,7 +46353,7 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Tags to assign to the output dataset."
@@ -46584,7 +46582,7 @@
           },
           "systemData": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "System metadata for the evaluation rule.",
@@ -46751,7 +46749,7 @@
           },
           "evalRun": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The evaluation run payload."
           }
         },
@@ -46909,7 +46907,7 @@
           },
           "initialization_parameters": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Optional initialization parameters applied to all generated evaluators.\nFor example, deployment_name for LLM judge model, default threshold."
           },
           "data_generation_options": {
@@ -47283,7 +47281,7 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Tag dictionary. Tags can be added, removed, and updated."
@@ -47366,7 +47364,7 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Tag dictionary. Tags can be added, removed, and updated."
@@ -47448,7 +47446,7 @@
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Additional properties for the evaluation taxonomy."
@@ -47473,7 +47471,7 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Tag dictionary. Tags can be added, removed, and updated."
@@ -47491,7 +47489,7 @@
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Additional properties for the evaluation taxonomy."
@@ -47581,7 +47579,7 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Tag dictionary. Tags can be added, removed, and updated."
@@ -47599,7 +47597,7 @@
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Additional properties for the evaluation taxonomy."
@@ -47659,12 +47657,12 @@
           },
           "initParams": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Initialization parameters of the evaluator."
           },
           "dataMapping": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Data parameters of the evaluator."
@@ -47698,17 +47696,17 @@
           },
           "init_parameters": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The JSON schema (Draft 2020-12) for the evaluator's input parameters. This includes parameters like type, properties, required."
           },
           "data_schema": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The JSON schema (Draft 2020-12) for the evaluator's input data. This includes parameters like type, properties, required."
           },
           "metrics": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/EvaluatorMetric"
             },
             "description": "List of output metrics produced by this evaluator"
@@ -48050,7 +48048,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Metadata about the evaluator"
@@ -48145,7 +48143,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Metadata about the evaluator"
@@ -48181,7 +48179,7 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Tag dictionary. Tags can be added, removed, and updated."
@@ -48198,7 +48196,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Metadata about the evaluator"
@@ -48226,7 +48224,7 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Tag dictionary. Tags can be added, removed, and updated."
@@ -49239,7 +49237,7 @@
           },
           "environment_variables": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Environment variables to set in the hosted agent container.",
@@ -49452,7 +49450,7 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Tag dictionary. Tags can be added, removed, and updated."
@@ -49764,12 +49762,12 @@
           },
           "features": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Features to help with additional filtering of data in UX."
           },
           "correlationInfo": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Info about the correlation for the analysis sample."
           }
         },
@@ -50234,7 +50232,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {
+                "additionalProperties": {
                   "type": "string"
                 }
               },
@@ -50940,7 +50938,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Arbitrary key-value metadata to associate with the memory store."
@@ -51479,7 +51477,7 @@
           },
           "capabilities": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Capabilities of deployed model",
@@ -51627,7 +51625,7 @@
           },
           "headers": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ModelRouterResponseHeaderValue"
             },
             "description": "Response headers returned by the model."
@@ -51841,7 +51839,7 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Tag dictionary. Tags can be added, removed, and updated."
@@ -53340,7 +53338,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "unevaluatedProperties": {}
+              "additionalProperties": {}
             },
             "description": "A list of tool definitions that the model should be allowed to call.\n  For the Chat Completions API, the list of tool definitions might look like:\n  ```json\n  [\n    { \"type\": \"function\", \"function\": { \"name\": \"get_weather\" } },\n    { \"type\": \"function\", \"function\": { \"name\": \"get_time\" } }\n  ]\n  ```"
           }
@@ -55081,7 +55079,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -57429,7 +57427,7 @@
           },
           "error": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The error from the tool call, if any."
           },
           "status": {
@@ -58492,7 +58490,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {
+                "additionalProperties": {
                   "$ref": "#/components/schemas/OpenAI.integer"
                 }
               },
@@ -59038,7 +59036,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {
+                "additionalProperties": {
                   "$ref": "#/components/schemas/OpenAI.integer"
                 }
               },
@@ -59303,7 +59301,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "unevaluatedProperties": {
+              "additionalProperties": {
                 "$ref": "#/components/schemas/OpenAI.numeric"
               }
             }
@@ -59703,7 +59701,7 @@
           },
           "item_schema": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The json schema for each row in the data source."
           },
           "include_sample_schema": {
@@ -59772,7 +59770,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Metadata filters for the logs data source."
           }
         },
@@ -59962,7 +59960,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Metadata filters for the stored completions data source."
           }
         },
@@ -63620,12 +63618,12 @@
           },
           "additionalInfo": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Additional structured information about the failure."
           },
           "debugInfo": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Diagnostic information supplied by the service for troubleshooting."
           }
         }
@@ -64203,11 +64201,11 @@
         "properties": {
           "item": {
             "type": "object",
-            "unevaluatedProperties": {}
+            "additionalProperties": {}
           },
           "sample": {
             "type": "object",
-            "unevaluatedProperties": {}
+            "additionalProperties": {}
           }
         }
       },
@@ -64251,7 +64249,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {}
+                "additionalProperties": {}
               },
               {
                 "type": "null"
@@ -64795,7 +64793,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -65298,15 +65296,13 @@
           "finished_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
-            ],
-            "type": "integer",
-            "format": "unixTimestamp"
+            ]
           },
           "hyperparameters": {
             "$ref": "#/components/schemas/OpenAI.FineTuningJobHyperparameters",
@@ -65391,15 +65387,13 @@
           "estimated_finish": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
-            ],
-            "type": "integer",
-            "format": "unixTimestamp"
+            ]
           },
           "method": {
             "$ref": "#/components/schemas/OpenAI.FineTuneMethod"
@@ -65867,7 +65861,7 @@
       },
       "OpenAI.FunctionParameters": {
         "type": "object",
-        "unevaluatedProperties": {},
+        "additionalProperties": {},
         "description": "The parameters the functions accepts, described as a JSON Schema object. See the [guide](/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.\nOmitting `parameters` defines a function with an empty parameter list."
       },
       "OpenAI.FunctionShellAction": {
@@ -66367,7 +66361,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -66511,7 +66505,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {}
+                "additionalProperties": {}
               },
               {
                 "type": "null"
@@ -66522,7 +66516,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {}
+                "additionalProperties": {}
               },
               {
                 "type": "null"
@@ -66624,7 +66618,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {}
+                "additionalProperties": {}
               },
               {
                 "type": "null"
@@ -67187,7 +67181,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -69200,7 +69194,7 @@
           },
           "error": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The error from the tool call, if any."
           },
           "status": {
@@ -71496,7 +71490,7 @@
           },
           "error": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The error from the tool call, if any."
           },
           "status": {
@@ -72709,7 +72703,7 @@
           },
           "error": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The error from the tool call, if any."
           },
           "status": {
@@ -74187,7 +74181,7 @@
           },
           "error": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The error from the tool call, if any."
           },
           "status": {
@@ -75521,7 +75515,7 @@
           },
           "env": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Environment variables to set for the command.",
@@ -75567,7 +75561,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -75750,7 +75744,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {
+                "additionalProperties": {
                   "type": "string"
                 }
               },
@@ -75816,7 +75810,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -76492,28 +76486,24 @@
           "completed_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
-            ],
-            "type": "integer",
-            "format": "unixTimestamp"
+            ]
           },
           "incomplete_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
-            ],
-            "type": "integer",
-            "format": "unixTimestamp"
+            ]
           },
           "role": {
             "type": "string",
@@ -76711,7 +76701,7 @@
       },
       "OpenAI.Metadata": {
         "type": "object",
-        "unevaluatedProperties": {
+        "additionalProperties": {
           "type": "string"
         },
         "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
@@ -77020,7 +77010,7 @@
           },
           "categories": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "boolean"
             },
             "description": "A dictionary of moderation categories to booleans, True if the input is flagged under this category.",
@@ -77028,7 +77018,7 @@
           },
           "category_scores": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/OpenAI.numeric"
             },
             "description": "A dictionary of moderation categories to scores.",
@@ -77036,7 +77026,7 @@
           },
           "category_applied_input_types": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "array",
               "items": {
                 "$ref": "#/components/schemas/OpenAI.ModerationInputType"
@@ -78954,7 +78944,7 @@
           },
           "error": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The error from the tool call, if any."
           },
           "status": {
@@ -81350,7 +81340,7 @@
                   },
                   "metadata": {
                     "type": "object",
-                    "unevaluatedProperties": {}
+                    "additionalProperties": {}
                   }
                 }
               }
@@ -81669,7 +81659,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {}
+            "additionalProperties": {}
           }
         },
         "x-ms-foundry-meta": {
@@ -81840,7 +81830,7 @@
                   },
                   "metadata": {
                     "type": "object",
-                    "unevaluatedProperties": {}
+                    "additionalProperties": {}
                   }
                 }
               }
@@ -83011,15 +83001,13 @@
           "completed_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
-            ],
-            "type": "integer",
-            "format": "unixTimestamp"
+            ]
           },
           "error": {
             "anyOf": [
@@ -84188,7 +84176,7 @@
       },
       "OpenAI.ResponseFormatJsonSchemaSchema": {
         "type": "object",
-        "unevaluatedProperties": {},
+        "additionalProperties": {},
         "description": "The schema for the response format, described as a JSON Schema object.\nLearn how to build JSON schemas [here](https://json-schema.org/).",
         "title": "JSON schema"
       },
@@ -85166,7 +85154,7 @@
       },
       "OpenAI.ResponsePromptVariables": {
         "type": "object",
-        "unevaluatedProperties": {
+        "additionalProperties": {
           "anyOf": [
             {
               "type": "string"
@@ -86471,11 +86459,11 @@
           },
           "sub_rewards": {
             "type": "object",
-            "unevaluatedProperties": {}
+            "additionalProperties": {}
           },
           "model_grader_token_usage_per_model": {
             "type": "object",
-            "unevaluatedProperties": {}
+            "additionalProperties": {}
           }
         }
       },
@@ -86505,7 +86493,7 @@
           },
           "scores": {
             "type": "object",
-            "unevaluatedProperties": {}
+            "additionalProperties": {}
           },
           "token_usage": {
             "anyOf": [
@@ -86697,71 +86685,61 @@
           "expires_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
             ],
-            "type": "integer",
-            "format": "unixTimestamp",
             "description": "The Unix timestamp (in seconds) for when the run will expire."
           },
           "started_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
             ],
-            "type": "integer",
-            "format": "unixTimestamp",
             "description": "The Unix timestamp (in seconds) for when the run was started."
           },
           "cancelled_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
             ],
-            "type": "integer",
-            "format": "unixTimestamp",
             "description": "The Unix timestamp (in seconds) for when the run was cancelled."
           },
           "failed_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
             ],
-            "type": "integer",
-            "format": "unixTimestamp",
             "description": "The Unix timestamp (in seconds) for when the run failed."
           },
           "completed_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
             ],
-            "type": "integer",
-            "format": "unixTimestamp",
             "description": "The Unix timestamp (in seconds) for when the run was completed."
           },
           "incomplete_details": {
@@ -87457,54 +87435,46 @@
           "expired_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
-            ],
-            "type": "integer",
-            "format": "unixTimestamp"
+            ]
           },
           "cancelled_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
-            ],
-            "type": "integer",
-            "format": "unixTimestamp"
+            ]
           },
           "failed_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
-            ],
-            "type": "integer",
-            "format": "unixTimestamp"
+            ]
           },
           "completed_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
-            ],
-            "type": "integer",
-            "format": "unixTimestamp"
+            ]
           },
           "metadata": {
             "anyOf": [
@@ -88426,7 +88396,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "unevaluatedProperties": {}
+              "additionalProperties": {}
             },
             "description": "A list of tool definitions that the model should be allowed to call.\n  For the Responses API, the list of tool definitions might look like:\n  ```json\n  [\n    { \"type\": \"function\", \"name\": \"get_weather\" },\n    { \"type\": \"mcp\", \"server_label\": \"deepwiki\" },\n    { \"type\": \"image_generation\" }\n  ]\n  ```"
           }
@@ -89560,7 +89530,7 @@
       },
       "OpenAI.VectorStoreFileAttributes": {
         "type": "object",
-        "unevaluatedProperties": {
+        "additionalProperties": {
           "anyOf": [
             {
               "type": "string"
@@ -89865,28 +89835,24 @@
           "expires_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
-            ],
-            "type": "integer",
-            "format": "unixTimestamp"
+            ]
           },
           "last_active_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
-            ],
-            "type": "integer",
-            "format": "unixTimestamp"
+            ]
           },
           "metadata": {
             "anyOf": [
@@ -90321,29 +90287,25 @@
           "completed_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
             ],
-            "type": "integer",
-            "format": "unixTimestamp",
             "description": "Unix timestamp (seconds) for when the job completed, if finished."
           },
           "expires_at": {
             "anyOf": [
               {
-                "type": "string",
-                "format": "date-time"
+                "type": "integer",
+                "format": "unixtime"
               },
               {
                 "type": "null"
               }
             ],
-            "type": "integer",
-            "format": "unixTimestamp",
             "description": "Unix timestamp (seconds) for when the downloadable assets expire, if set."
           },
           "prompt": {
@@ -90806,7 +90768,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -90955,7 +90917,7 @@
           },
           "spec": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The openapi function shape, described as a JSON Schema object."
           },
           "auth": {
@@ -90984,7 +90946,7 @@
                 },
                 "parameters": {
                   "type": "object",
-                  "unevaluatedProperties": {},
+                  "additionalProperties": {},
                   "description": "The parameters the functions accepts, described as a JSON Schema object."
                 }
               },
@@ -91093,7 +91055,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -91845,7 +91807,7 @@
           },
           "structured_inputs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/StructuredInputDefinition"
             },
             "description": "Set of structured inputs that can participate in prompt template substitution or tool argument bindings."
@@ -92342,14 +92304,14 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Red team's tags. Unlike properties, tags are fully mutable."
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Red team's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed."
@@ -92679,7 +92641,7 @@
           },
           "data_mapping": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Maps `response_id` to the source field that contains a stored Responses API\nresponse identifier. For example, `{\"response_id\": \"{{item.resp_id}}\"}`.\nField names are case-sensitive."
@@ -92757,7 +92719,7 @@
           },
           "triggers": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/RoutineTrigger"
             },
             "description": "The triggers configured for the routine."
@@ -92880,7 +92842,7 @@
           },
           "triggers": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/RoutineTrigger"
             },
             "description": "The triggers configured for the routine. In v1, exactly one trigger entry is supported."
@@ -92995,7 +92957,7 @@
           },
           "trigger_event_payload": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The event payload captured from the event that triggered the routine attempt, when available."
           },
           "attempt_source": {
@@ -93435,21 +93397,21 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Schedule's tags. Unlike properties, tags are fully mutable."
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Schedule's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed."
           },
           "systemData": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "System metadata for the resource.",
@@ -93556,7 +93518,7 @@
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Properties of the schedule run.",
@@ -93582,7 +93544,7 @@
           },
           "configuration": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Configuration for the task."
@@ -93904,7 +93866,7 @@
           },
           "result": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Raw result payload, whose properties depend on the submitted request."
           }
         },
@@ -93939,7 +93901,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {}
+                "additionalProperties": {}
               },
               {
                 "type": "null"
@@ -94028,7 +93990,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {}
+                "additionalProperties": {}
               },
               {
                 "type": "null"
@@ -94184,7 +94146,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {}
+                "additionalProperties": {}
               },
               {
                 "type": "null"
@@ -94663,7 +94625,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {}
+                "additionalProperties": {}
               },
               {
                 "type": "null"
@@ -94849,21 +94811,24 @@
         "description": "Fine-tuning session type."
       },
       "SessionFineTuning.FineTuningStopCriteria": {
-        "anyOf": [
-          {
+        "type": "object",
+        "properties": {
+          "stop_token_ids": {
             "type": "array",
             "items": {
               "type": "integer",
               "format": "int32"
-            }
+            },
+            "description": "Stop when any of these token IDs is produced."
           },
-          {
+          "stop_strings": {
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "description": "Stop when any of these strings appears in the output."
           }
-        ],
+        },
         "description": "Stop criteria for generation — either a list of token IDs or a list of\nstrings, but never both."
       },
       "SessionFineTuning.FineTuningTrainingType": {
@@ -95110,7 +95075,7 @@
           },
           "metrics": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Per-step evaluation metrics at checkpoint time. Optional."
           }
         },
@@ -95548,7 +95513,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Arbitrary key-value metadata for additional properties."
@@ -95713,7 +95678,7 @@
           },
           "schema": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The JSON schema for the structured input (optional)."
           },
           "required": {
@@ -95743,7 +95708,7 @@
           },
           "schema": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The JSON schema for the structured output."
           },
           "strict": {
@@ -96174,7 +96139,7 @@
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Additional properties for the taxonomy category."
@@ -96213,7 +96178,7 @@
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Additional properties for the taxonomy sub-category."
@@ -96726,7 +96691,7 @@
           },
           "structured_inputs": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables."
           },
           "schedule": {
@@ -97870,12 +97835,12 @@
           },
           "initialization_parameters": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Evaluator-specific configuration applied when the evaluator is initialized.\nAccepted parameters and defaults depend on the selected evaluator and\nversion. AI-assisted evaluators require a judge model setting, such as\n`model` or `deployment_name`, that identifies a chat-completion deployment\nin the current project. The judge model must support structured outputs.\nEvaluators without required initialization parameters can omit this\nproperty and use their documented defaults."
           },
           "data_mapping": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Maps the evaluator's input names to fields in the evaluation data. Use\n`{{item.<field>}}` to reference a field from a dataset item and\n`{{sample.<field>}}` to reference output generated by a model or agent\ntarget. Field names are case-sensitive.\n\nThis property can be omitted when the evaluator uses standard dataset\ncolumns with matching names. Provide a mapping when dataset columns use\ndifferent names, when a target generates the response at run time, or when\nthe evaluator consumes structured target output."
@@ -97918,7 +97883,7 @@
         "anyOf": [
           {
             "type": "object",
-            "unevaluatedProperties": {}
+            "additionalProperties": {}
           },
           {
             "type": "string"
@@ -98311,7 +98276,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
@@ -98379,7 +98344,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {
+                "additionalProperties": {
                   "type": "string"
                 }
               },
@@ -98902,7 +98867,7 @@
         "properties": {
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
@@ -98919,7 +98884,7 @@
           },
           "parameter_values": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The inputs to the manifest that will result in a fully materialized Agent."
           }
         }
@@ -98932,7 +98897,7 @@
         "properties": {
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
@@ -98993,7 +98958,7 @@
           },
           "properties": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
@@ -99009,7 +98974,7 @@
           },
           "tags": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Tag dictionary. Tags can be added, removed, and updated."
@@ -99251,7 +99216,7 @@
           },
           "data_mapping": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Maps JSONL dataset attributes to user conversation simulation inputs when their names differ from the defaults. The default attribute names are `test_case_id`, `test_case_category`, `test_case_description`, and `simulation_configuration`, matching `UserConversationSimulationTestCase`. Omit when the dataset uses these names or when using `inline_user_conversation_simulation`."
@@ -100326,7 +100291,7 @@
           },
           "structured_inputs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/StructuredInputDefinition"
             },
             "description": "Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts."
@@ -100606,7 +100571,7 @@
           },
           "custom_speech": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Optional customer custom speech deployment configuration, keyed by locale."
@@ -100833,7 +100798,7 @@
             "anyOf": [
               {
                 "type": "object",
-                "unevaluatedProperties": {
+                "additionalProperties": {
                   "type": "string"
                 }
               },
@@ -100899,7 +100864,7 @@
           },
           "tool_configs": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Deprecated. This property is deprecated and will be removed in a future version.",
@@ -101709,7 +101674,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "A set of key-value pairs attached to the conversation."
@@ -102025,7 +101990,7 @@
           },
           "metadata": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "A set of key-value pairs attached to the response."
@@ -102567,7 +102532,7 @@
           },
           "modelParams": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "Optional parameters passed to the model for evaluation."
           }
         },

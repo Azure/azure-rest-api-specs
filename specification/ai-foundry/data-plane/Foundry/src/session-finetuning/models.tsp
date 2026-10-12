@@ -226,12 +226,12 @@ model AdamParams {
  * Stop criteria for generation — either a list of token IDs or a list of
  * strings, but never both.
  */
-union FineTuningStopCriteria {
+model FineTuningStopCriteria {
   /** Stop when any of these token IDs is produced. */
-  stop_token_ids: int32[],
+  stop_token_ids?: int32[];
 
   /** Stop when any of these strings appears in the output. */
-  stop_strings: string[],
+  stop_strings?: string[];
 }
 
 /** Token-generation sampling parameters. */
