@@ -216,7 +216,8 @@ alias RustBlobAcquireLeaseParameters = {
   proposedLeaseId?: string;
 
   /** An experimental arbitrary client option. */
-  foo?: string;
+  @clientName("foo", "rust")
+  workaroundFoo?: string;
 };
 
 /** Requests a new lease on the specified blob with experimental Rust client parameters. */
