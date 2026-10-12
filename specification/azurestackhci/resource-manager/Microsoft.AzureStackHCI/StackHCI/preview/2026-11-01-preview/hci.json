@@ -115,6 +115,9 @@
       "name": "ClusterVolumes"
     },
     {
+      "name": "CapacitySettings"
+    },
+    {
       "name": "DevicePools"
     },
     {
@@ -2620,6 +2623,323 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/capacitySettings": {
+      "get": {
+        "operationId": "CapacitySettings_ListByClusters",
+        "tags": [
+          "CapacitySettings"
+        ],
+        "description": "List the Capacity Settings singletons under a cluster. The collection contains the\nsingle `default` resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacitySettingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Capacity Settings by Cluster": {
+            "$ref": "./examples/ListCapacitySettingsByCluster.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/capacitySettings/{capacitySettingsName}": {
+      "get": {
+        "operationId": "CapacitySettings_Get",
+        "tags": [
+          "CapacitySettings"
+        ],
+        "description": "Get the Capacity Settings singleton for a cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "capacitySettingsName",
+            "in": "path",
+            "description": "Name of the Capacity Settings singleton. Always `default` in v1.",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^default$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacitySetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get CapacitySettings": {
+            "$ref": "./examples/GetCapacitySettings.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CapacitySettings_CreateOrUpdate",
+        "tags": [
+          "CapacitySettings"
+        ],
+        "description": "Create or update the Capacity Settings singleton for a cluster. Only\n`appliedPolicy` fields are client-settable; reported capacity and provisioning\nstate remain service-owned.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "capacitySettingsName",
+            "in": "path",
+            "description": "Name of the Capacity Settings singleton. Always `default` in v1.",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^default$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapacitySetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CapacitySetting' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CapacitySetting"
+            }
+          },
+          "201": {
+            "description": "Resource 'CapacitySetting' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CapacitySetting"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Capacity Settings": {
+            "$ref": "./examples/CreateOrUpdateCapacitySettings.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CapacitySettings_Update",
+        "tags": [
+          "CapacitySettings"
+        ],
+        "description": "Update the applied capacity policy on the Capacity Settings singleton (Day N\nedits). Only `appliedPolicy` fields are updatable; reported capacity and\nprovisioning state remain service-owned.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "capacitySettingsName",
+            "in": "path",
+            "description": "Name of the Capacity Settings singleton. Always `default` in v1.",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^default$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapacitySettingPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacitySetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Capacity Settings policy (Day N edit)": {
+            "$ref": "./examples/UpdateCapacitySettings.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CapacitySettings_Delete",
+        "tags": [
+          "CapacitySettings"
+        ],
+        "description": "Delete the Capacity Settings singleton for a cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "capacitySettingsName",
+            "in": "path",
+            "description": "Name of the Capacity Settings singleton. Always `default` in v1.",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^default$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Capacity Settings": {
+            "$ref": "./examples/DeleteCapacitySettings.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -10082,6 +10402,31 @@
         "serverResourceId"
       ]
     },
+    "AppliedCapacityPolicy": {
+      "type": "object",
+      "description": "Cluster-wide placement policy used by capacity calculations. Day Zero values are\nhydrated from Deployment Settings; missing values are filled in with service defaults.\nDay N updates use PATCH on the Capacity Settings singleton.",
+      "properties": {
+        "cpuOvercommitRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Cluster-wide CPU overcommit ratio used to calculate effective vCPU capacity. Default: 1.0.",
+          "minimum": 1
+        },
+        "failureDomainReservationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of failure domains to reserve for n+1/n+2 style placement planning. Default: 0.",
+          "minimum": 0
+        },
+        "reservedNodes": {
+          "type": "array",
+          "description": "Explicit node names or machine references held back from placement for upgrade or\nmaintenance. Empty by default.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ApplyConfigurationNetworkAdapterJobProperties": {
       "type": "object",
       "description": "Properties for applying network adapter configuration.",
@@ -10683,6 +11028,612 @@
             "description": "The system will notify the user when update content becomes available."
           }
         ]
+      }
+    },
+    "CapacityCpuSnapshot": {
+      "type": "object",
+      "description": "Cluster-wide CPU capacity summary. Useful for fleet reporting and coarse filtering;\nnot a single-workload fit signal. Final placement must evaluate machines[] with\nworkload-specific constraints.",
+      "properties": {
+        "physicalCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Physical CPU core count (P-core count) aggregated across cluster machines.",
+          "readOnly": true
+        },
+        "logicalCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Logical CPU core count (L-core count) aggregated across cluster machines.",
+          "readOnly": true
+        },
+        "processorCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Processor package count aggregated across cluster machines.",
+          "readOnly": true
+        },
+        "socketCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "CPU socket count aggregated across cluster machines.",
+          "readOnly": true
+        },
+        "cpuOvercommitRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Effective cluster policy value mirrored from appliedPolicy.cpuOvercommitRatio.",
+          "readOnly": true
+        },
+        "totalEffectiveVirtualCpuCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total cluster vCPU supply after applying cpuOvercommitRatio, before allocation\nand reservation. For v1 this is calculated from logicalCoreCount * cpuOvercommitRatio.",
+          "readOnly": true
+        },
+        "workloadAllocatedVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vCPU already allocated to workloads. This is not runtime CPU utilization.",
+          "readOnly": true
+        },
+        "policyReservedVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vCPU withheld by reserved nodes, failure-domain reservation policy, upgrade, or\nmaintenance policy.",
+          "readOnly": true
+        },
+        "aggregateAvailableVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total remaining vCPU across nodes, derived from node-level availability after\nmachine-level system reserve, workload allocation, and policy reservation. This\nis a summed value and must not be treated as the largest VM that can fit.",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last CPU inventory or consumption update.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityGpuGroup": {
+      "type": "object",
+      "description": "GPU capacity for devices grouped by type, mode, and partition size.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "GPU type represented by the group.",
+          "readOnly": true
+        },
+        "mode": {
+          "type": "string",
+          "description": "GPU assignment mode represented by the group.",
+          "readOnly": true
+        },
+        "partitionSizeInMB": {
+          "type": "string",
+          "description": "Partition size in megabytes, represented as a decimal string.",
+          "readOnly": true
+        },
+        "totalAssignableGpuCount": {
+          "type": "string",
+          "description": "Total number of assignable GPUs, represented as a decimal string.",
+          "readOnly": true
+        },
+        "reservedAssignableGpuCount": {
+          "type": "string",
+          "description": "Number of assignable GPUs reserved by policy, represented as a decimal string.",
+          "readOnly": true
+        },
+        "consumedAssignableGpuCount": {
+          "type": "string",
+          "description": "Number of assignable GPUs consumed by workloads, represented as a decimal string.",
+          "readOnly": true
+        },
+        "totalPartitionableGpuCount": {
+          "type": "string",
+          "description": "Total number of partitionable GPUs, represented as a decimal string.",
+          "readOnly": true
+        },
+        "reservedPartitionableGpuCount": {
+          "type": "string",
+          "description": "Number of partitionable GPUs reserved by policy, represented as a decimal string.",
+          "readOnly": true
+        },
+        "consumedPartitionableGpuCount": {
+          "type": "string",
+          "description": "Number of partitionable GPUs consumed by workloads, represented as a decimal string.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityGpuSnapshot": {
+      "type": "object",
+      "description": "Cluster-wide GPU capacity summary. Per-GPU details remain available through the\nEdgeMachineGpu resource tree.",
+      "properties": {
+        "totalGpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total GPU resources discovered across edge machines.",
+          "readOnly": true
+        },
+        "assignableGpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of GPUs where properties.assignable is true.",
+          "readOnly": true
+        },
+        "consumedGpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of GPUs assigned in DDA mode or otherwise consumed by workloads.",
+          "readOnly": true
+        },
+        "totalPartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sum of GPU-P partitionDetails.totalPartitions across GPUs in partitioned mode.",
+          "readOnly": true
+        },
+        "consumedPartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sum of GPU-P partitionDetails.assignedPartitions across GPUs in partitioned mode.",
+          "readOnly": true
+        },
+        "effectiveAvailablePartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "GPU-P partitions available for placement after assignments and reservation policy.",
+          "readOnly": true
+        },
+        "groups": {
+          "type": "array",
+          "description": "GPU capacity grouped by type, mode, and partition size.",
+          "items": {
+            "$ref": "#/definitions/CapacityGpuGroup"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "type",
+            "mode",
+            "partitionSizeInMB"
+          ]
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last GPU inventory update time.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityMachineConnectivityStatus": {
+      "type": "string",
+      "description": "Connectivity status reported by Arc for a cluster machine.",
+      "enum": [
+        "Connected",
+        "Disconnected",
+        "Expired",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "CapacityMachineConnectivityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The machine is connected to Arc."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The machine is disconnected from Arc."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "The machine has expired Arc credentials."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The connectivity status is unknown."
+          }
+        ]
+      }
+    },
+    "CapacityMachineSnapshot": {
+      "type": "object",
+      "description": "Per-machine capacity breakdown. Includes identifiers, node state, connectivity, and\nthe CPU, memory, and GPU facts upper-layer placement systems need for fit-aware\ndecisions.",
+      "properties": {
+        "machineName": {
+          "type": "string",
+          "description": "Cluster node name as reported by Arc (properties.displayName).",
+          "readOnly": true
+        },
+        "edgeMachineResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the corresponding EdgeMachine resource when available.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/edgeMachines"
+              }
+            ]
+          }
+        },
+        "arcMachineResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the corresponding Arc for Server machine resource when available.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/machines"
+              }
+            ]
+          }
+        },
+        "machineState": {
+          "$ref": "#/definitions/CapacityMachineState",
+          "description": "Cluster-perspective state of the machine, such as whether it is active, reserved,\ndraining, or excluded from placement.",
+          "readOnly": true
+        },
+        "connectivityStatus": {
+          "$ref": "#/definitions/CapacityMachineConnectivityStatus",
+          "description": "Connectivity status reported by Arc for the underlying machine.",
+          "readOnly": true
+        },
+        "cpu": {
+          "$ref": "#/definitions/MachineCpuCapacity",
+          "description": "Node-local CPU capacity breakdown.",
+          "readOnly": true
+        },
+        "memory": {
+          "$ref": "#/definitions/MachineMemoryCapacity",
+          "description": "Node-local memory capacity breakdown.",
+          "readOnly": true
+        },
+        "gpu": {
+          "$ref": "#/definitions/MachineGpuCapacity",
+          "description": "Node-local GPU capacity breakdown.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityMachineState": {
+      "type": "string",
+      "description": "Cluster-perspective state of a machine for capacity and placement.",
+      "enum": [
+        "Active",
+        "Reserved",
+        "Draining",
+        "Maintenance",
+        "Excluded",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "CapacityMachineState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The machine is an active placement target."
+          },
+          {
+            "name": "Reserved",
+            "value": "Reserved",
+            "description": "The machine is explicitly reserved (for example, listed in appliedPolicy.reservedNodes)."
+          },
+          {
+            "name": "Draining",
+            "value": "Draining",
+            "description": "The machine is being drained for maintenance or upgrade."
+          },
+          {
+            "name": "Maintenance",
+            "value": "Maintenance",
+            "description": "The machine is in maintenance and not a placement target."
+          },
+          {
+            "name": "Excluded",
+            "value": "Excluded",
+            "description": "The machine is excluded from placement for another reason."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The machine is in an unknown state."
+          }
+        ]
+      }
+    },
+    "CapacityMemorySnapshot": {
+      "type": "object",
+      "description": "Cluster-wide memory capacity summary. Useful for reporting and coarse filtering;\nnot a single-workload fit guarantee.",
+      "properties": {
+        "totalBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total memory across cluster machines, in bytes.",
+          "readOnly": true
+        },
+        "workloadAllocatedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory allocated to workloads across the cluster. This is not runtime memory pressure.",
+          "readOnly": true
+        },
+        "policyReservedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory withheld for host OS, Azure Local platform services, reserved nodes,\nfailure-domain reservation policy, upgrade, or maintenance policy.",
+          "readOnly": true
+        },
+        "aggregateAvailableBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total remaining memory across nodes after workload allocation and\npolicy/platform reservation. Summed value; not a per-node fit guarantee.",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last memory update time.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityNetworkingSnapshot": {
+      "type": "object",
+      "description": "Cluster-wide workload networking capacity summary. Represents workload logical\nnetworks and the static IP address pools VMs can attach to. Infrastructure logical\nnetworks are excluded.",
+      "properties": {
+        "totalLogicalNetworkCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of workload logical networks known to the cluster. Infrastructure logical\nnetworks are excluded.",
+          "readOnly": true
+        },
+        "availableLogicalNetworkCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of workload logical networks that can accept new VM network interfaces.\nFor static IP networks, this requires at least one available static IP address.",
+          "readOnly": true
+        },
+        "staticLogicalNetworkCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of workload logical networks using static IP address pools.",
+          "readOnly": true
+        },
+        "dhcpLogicalNetworkCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of workload logical networks using DHCP address assignment. DHCP IP pool\ncapacity is not calculated in v1.",
+          "readOnly": true
+        },
+        "totalStaticIpAddressCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total allocatable static IP addresses across workload logical network IP pools.",
+          "readOnly": true
+        },
+        "allocatedStaticIpAddressCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Static IP addresses already assigned or reserved for VM network interfaces across\nworkload logical networks.",
+          "readOnly": true
+        },
+        "effectiveAvailableStaticIpAddressCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Remaining allocatable static IP addresses across workload logical networks after\nassignments and reservations.",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last logical network or IP pool capacity update time.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacitySetting": {
+      "type": "object",
+      "description": "Capacity Settings singleton child resource of a cluster. Exposes placement-oriented\ncapacity information for Azure Local clusters, including the applied capacity policy\nand the latest reported capacity snapshot collated by the service.\n\nThe resource is hydrated by the service during cluster deployment with the\nconventional singleton name `default`. The v1 API supports GET (single), LIST,\nPUT (createOrUpdate), PATCH (for Day N policy edits), and DELETE.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapacitySettingProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CapacitySettingListResult": {
+      "type": "object",
+      "description": "The response of a CapacitySetting list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CapacitySetting items on this page",
+          "items": {
+            "$ref": "#/definitions/CapacitySetting"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CapacitySettingPatch": {
+      "type": "object",
+      "description": "Patch shape for Day N edits to Capacity Settings. Only appliedPolicy fields are\nupdatable; reportedCapacity, provisioningState, and lastUpdated remain service-owned.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapacitySettingPatchProperties",
+          "description": "The patchable properties of the Capacity Settings resource."
+        }
+      }
+    },
+    "CapacitySettingPatchProperties": {
+      "type": "object",
+      "description": "Patchable properties of the Capacity Settings resource for Day N edits.",
+      "properties": {
+        "appliedPolicy": {
+          "$ref": "#/definitions/AppliedCapacityPolicy",
+          "description": "Updated placement policy to apply to capacity calculations."
+        }
+      }
+    },
+    "CapacitySettingProperties": {
+      "type": "object",
+      "description": "Properties of the Capacity Settings singleton child resource. Capacity Settings\nis hydrated by the service during cluster deployment and surfaces the applied\ncapacity policy plus the latest reported capacity snapshot collated from cluster\nservices and edge machines.",
+      "properties": {
+        "appliedPolicy": {
+          "$ref": "#/definitions/AppliedCapacityPolicy",
+          "description": "Placement settings currently applied to capacity calculations. Service-hydrated\nduring cluster deployment and updatable through PATCH for Day N edits."
+        },
+        "reportedCapacity": {
+          "$ref": "#/definitions/ReportedCapacitySnapshot",
+          "description": "The latest aggregate capacity snapshot reported by the cluster, with effective\navailability already adjusted by the applied policy. Read-only.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the Capacity Settings resource.",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the top-level Capacity Settings projection was refreshed by the service.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityStorageSnapshot": {
+      "type": "object",
+      "description": "Cluster-wide storage capacity aggregate derived from eligible user volumes\nprojected by the Cluster Volume resource.",
+      "properties": {
+        "totalBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Sum of reportedProperties.sizeInBytes across user volumes.",
+          "readOnly": true
+        },
+        "consumedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Sum of sizeInBytes minus sizeRemainingInBytes across user volumes.",
+          "readOnly": true
+        },
+        "effectiveAvailableBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Sum of reportedProperties.sizeRemainingInBytes across user volumes.",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last storage update time.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityVolumeSnapshot": {
+      "type": "object",
+      "description": "Capacity details for a volume reported by the cluster.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the volume.",
+          "readOnly": true
+        },
+        "path": {
+          "type": "string",
+          "description": "Path of the volume.",
+          "readOnly": true
+        },
+        "sizeInBytes": {
+          "type": "string",
+          "description": "Total size of the volume in bytes, represented as a decimal string.",
+          "readOnly": true
+        },
+        "sizeRemainingInBytes": {
+          "type": "string",
+          "description": "Remaining size of the volume in bytes, represented as a decimal string.",
+          "readOnly": true
+        },
+        "sizeConsumedInBytes": {
+          "type": "string",
+          "description": "Consumed size of the volume in bytes, represented as a decimal string.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityWorkloadConsumption": {
+      "type": "object",
+      "description": "Placement-relevant workload allocation record, collated from EdgeMachine workload\ninventory reported by the device management extension. For v1 this is intentionally\nVM-shaped and does not distinguish between standalone Hyper-V VMs, Azure-created VMs,\nor VMs that back AKS nodes.",
+      "properties": {
+        "workloadId": {
+          "type": "string",
+          "description": "Stable device-reported workload identifier, such as the Hyper-V VM ID when available.",
+          "readOnly": true
+        },
+        "workloadName": {
+          "type": "string",
+          "description": "Hyper-V VM name reported by the node.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Optional ARM resource ID when the service can map the local VM to an ARM resource.",
+          "readOnly": true
+        },
+        "workloadType": {
+          "type": "string",
+          "description": "Workload type. For v1 this should be VirtualMachine.",
+          "readOnly": true
+        },
+        "machineName": {
+          "type": "string",
+          "description": "Cluster node name that currently hosts the workload.",
+          "readOnly": true
+        },
+        "workloadState": {
+          "type": "string",
+          "description": "Hyper-V VM state reported by the node.",
+          "readOnly": true
+        },
+        "virtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Configured virtual processor count from Hyper-V used for vCPU allocation accounting.",
+          "readOnly": true
+        },
+        "memoryBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum memory the VM can consume, in bytes, used for memory allocation accounting.\nFor a dynamic memory VM this is the Hyper-V maximum memory value; for a fixed\nmemory VM this is the configured startup memory.",
+          "readOnly": true
+        }
       }
     },
     "ChangeRingRequest": {
@@ -19344,6 +20295,144 @@
       },
       "readOnly": true
     },
+    "MachineCpuCapacity": {
+      "type": "object",
+      "description": "Node-local CPU capacity values used for fit-aware placement. CPU overcommit\nremains a cluster-level policy and is not exposed per machine; effective vCPU\nvalues here already reflect that policy.",
+      "properties": {
+        "physicalCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Physical CPU core count on the machine.",
+          "readOnly": true
+        },
+        "logicalCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Logical CPU core count on the machine.",
+          "readOnly": true
+        },
+        "processorCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Processor package count on the machine.",
+          "readOnly": true
+        },
+        "socketCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "CPU socket count on the machine.",
+          "readOnly": true
+        },
+        "effectiveVirtualCpuCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Node-local vCPU supply after applying the cluster-level CPU overcommit policy.",
+          "readOnly": true
+        },
+        "systemReservedVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Service-computed vCPU-equivalent host and platform reserve on this machine. The\ninitial implementation may compute this as a percentage of the machine's effective\nvCPU capacity; later implementations can replace the rule with CPU model-aware\ncalculation while preserving this field.",
+          "readOnly": true
+        },
+        "workloadAllocatedVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vCPU already allocated to workloads on this machine.",
+          "readOnly": true
+        },
+        "policyReservedVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vCPU withheld from this machine because the node or its failure domain is reserved.",
+          "readOnly": true
+        },
+        "availableVirtualCpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Node-local vCPU available for placement after system reserve, workload allocation,\nand policy reservation. Upper-layer systems should use this value with memory and\nother constraints to evaluate VM fit.",
+          "readOnly": true
+        }
+      }
+    },
+    "MachineGpuCapacity": {
+      "type": "object",
+      "description": "Node-local GPU capacity values used for placement. Per-GPU details remain available\nthrough the EdgeMachineGpu resource tree under each machine.",
+      "properties": {
+        "totalGpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total GPUs on this machine.",
+          "readOnly": true
+        },
+        "assignableGpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of GPUs on this machine where properties.assignable is true.",
+          "readOnly": true
+        },
+        "consumedGpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of GPUs on this machine assigned in DDA mode or otherwise consumed by workloads.",
+          "readOnly": true
+        },
+        "totalPartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sum of GPU-P partitionDetails.totalPartitions across GPUs on this machine in\npartitioned mode.",
+          "readOnly": true
+        },
+        "consumedPartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sum of GPU-P partitionDetails.assignedPartitions across GPUs on this machine in\npartitioned mode.",
+          "readOnly": true
+        },
+        "effectiveAvailablePartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "GPU-P partitions available for placement on this machine after assignments and\nreservation policy.",
+          "readOnly": true
+        }
+      }
+    },
+    "MachineMemoryCapacity": {
+      "type": "object",
+      "description": "Node-local memory capacity values used for fit-aware placement.",
+      "properties": {
+        "totalBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total memory on the machine, in bytes.",
+          "readOnly": true
+        },
+        "systemReservedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory withheld for host OS and Azure Local platform services on this machine.",
+          "readOnly": true
+        },
+        "workloadAllocatedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory allocated to workloads on this machine.",
+          "readOnly": true
+        },
+        "policyReservedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory withheld from this machine because the node or its failure domain is reserved.",
+          "readOnly": true
+        },
+        "availableBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Node-local memory available for placement after system reserve, workload allocation,\nand policy reservation.",
+          "readOnly": true
+        }
+      }
+    },
     "Metadata": {
       "type": "object",
       "description": "Metadata associated with a deployment step.",
@@ -22678,6 +23767,76 @@
         "serverName",
         "serverResourceId"
       ]
+    },
+    "ReportedCapacitySnapshot": {
+      "type": "object",
+      "description": "Aggregate, placement-oriented capacity snapshot reported by the cluster. All\nproperties are read-only and reflect the latest service-collated view.",
+      "properties": {
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the aggregate snapshot was updated.",
+          "readOnly": true
+        },
+        "storage": {
+          "$ref": "#/definitions/CapacityStorageSnapshot",
+          "description": "Storage capacity aggregated from eligible user Cluster Volume resources.\nInfrastructure volumes are excluded.",
+          "readOnly": true
+        },
+        "volumes": {
+          "type": "array",
+          "description": "Capacity details for volumes reported by the cluster.",
+          "items": {
+            "$ref": "#/definitions/CapacityVolumeSnapshot"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "cpu": {
+          "$ref": "#/definitions/CapacityCpuSnapshot",
+          "description": "CPU capacity summary including P-core, L-core, policy-adjusted vCPU, and consumption.",
+          "readOnly": true
+        },
+        "memory": {
+          "$ref": "#/definitions/CapacityMemorySnapshot",
+          "description": "Memory capacity summary including supply, allocation, and policy reservation.",
+          "readOnly": true
+        },
+        "gpu": {
+          "$ref": "#/definitions/CapacityGpuSnapshot",
+          "description": "GPU capacity summary including device, mode, partition, and assignment data.",
+          "readOnly": true
+        },
+        "networking": {
+          "$ref": "#/definitions/CapacityNetworkingSnapshot",
+          "description": "Workload networking capacity summary covering workload logical networks and\nstatic IP address pools. Infrastructure logical networks are excluded.",
+          "readOnly": true
+        },
+        "machines": {
+          "type": "array",
+          "description": "Per-machine capacity breakdown for cluster nodes. Upper-layer placement systems\nshould use this list, with workload-specific constraints, to evaluate VM fit.",
+          "items": {
+            "$ref": "#/definitions/CapacityMachineSnapshot"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "machineName"
+          ]
+        },
+        "workloads": {
+          "type": "array",
+          "description": "Placement-relevant workload allocation records collated from EdgeMachine\nworkload inventory across the cluster.",
+          "items": {
+            "$ref": "#/definitions/CapacityWorkloadConsumption"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "workloadId"
+          ]
+        }
+      }
     },
     "ReportedProperties": {
       "type": "object",

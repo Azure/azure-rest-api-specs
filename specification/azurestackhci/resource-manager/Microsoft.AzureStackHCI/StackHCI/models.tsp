@@ -12185,3 +12185,834 @@ union NetworkProfileDriftSeverity {
   /** The drift affects cluster networking and requires remediation. */
   Error: "Error",
 }
+
+////////////////////////////////////////////////////////////////
+//////// Capacity Settings Models ////////////
+////////////////////////////////////////////////////////////////
+
+/**
+ * Properties of the Capacity Settings singleton child resource. Capacity Settings
+ * is hydrated by the service during cluster deployment and surfaces the applied
+ * capacity policy plus the latest reported capacity snapshot collated from cluster
+ * services and edge machines.
+ */
+@added(Versions.v2026_11_01_preview)
+model CapacitySettingProperties {
+  /**
+   * Placement settings currently applied to capacity calculations. Service-hydrated
+   * during cluster deployment and updatable through PATCH for Day N edits.
+   */
+  appliedPolicy?: AppliedCapacityPolicy;
+
+  /**
+   * The latest aggregate capacity snapshot reported by the cluster, with effective
+   * availability already adjusted by the applied policy. Read-only.
+   */
+  @visibility(Lifecycle.Read)
+  reportedCapacity?: ReportedCapacitySnapshot;
+
+  /**
+   * Provisioning state of the Capacity Settings resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Last time the top-level Capacity Settings projection was refreshed by the service.
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+}
+
+/**
+ * Cluster-wide placement policy used by capacity calculations. Day Zero values are
+ * hydrated from Deployment Settings; missing values are filled in with service defaults.
+ * Day N updates use PATCH on the Capacity Settings singleton.
+ */
+@added(Versions.v2026_11_01_preview)
+model AppliedCapacityPolicy {
+  /**
+   * Cluster-wide CPU overcommit ratio used to calculate effective vCPU capacity. Default: 1.0.
+   */
+  @minValue(1.0)
+  cpuOvercommitRatio?: float32;
+
+  /**
+   * Number of failure domains to reserve for n+1/n+2 style placement planning. Default: 0.
+   */
+  @minValue(0)
+  failureDomainReservationCount?: int32;
+
+  /**
+   * Explicit node names or machine references held back from placement for upgrade or
+   * maintenance. Empty by default.
+   */
+  reservedNodes?: string[];
+}
+
+/**
+ * Aggregate, placement-oriented capacity snapshot reported by the cluster. All
+ * properties are read-only and reflect the latest service-collated view.
+ */
+@added(Versions.v2026_11_01_preview)
+model ReportedCapacitySnapshot {
+  /**
+   * Last time the aggregate snapshot was updated.
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+
+  /**
+   * Storage capacity aggregated from eligible user Cluster Volume resources.
+   * Infrastructure volumes are excluded.
+   */
+  @visibility(Lifecycle.Read)
+  storage?: CapacityStorageSnapshot;
+
+  /**
+   * Capacity details for volumes reported by the cluster.
+   */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["id"])
+  volumes?: CapacityVolumeSnapshot[];
+
+  /**
+   * CPU capacity summary including P-core, L-core, policy-adjusted vCPU, and consumption.
+   */
+  @visibility(Lifecycle.Read)
+  cpu?: CapacityCpuSnapshot;
+
+  /**
+   * Memory capacity summary including supply, allocation, and policy reservation.
+   */
+  @visibility(Lifecycle.Read)
+  memory?: CapacityMemorySnapshot;
+
+  /**
+   * GPU capacity summary including device, mode, partition, and assignment data.
+   */
+  @visibility(Lifecycle.Read)
+  gpu?: CapacityGpuSnapshot;
+
+  /**
+   * Workload networking capacity summary covering workload logical networks and
+   * static IP address pools. Infrastructure logical networks are excluded.
+   */
+  @visibility(Lifecycle.Read)
+  networking?: CapacityNetworkingSnapshot;
+
+  /**
+   * Per-machine capacity breakdown for cluster nodes. Upper-layer placement systems
+   * should use this list, with workload-specific constraints, to evaluate VM fit.
+   */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["machineName"])
+  machines?: CapacityMachineSnapshot[];
+
+  /**
+   * Placement-relevant workload allocation records collated from EdgeMachine
+   * workload inventory across the cluster.
+   */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["workloadId"])
+  workloads?: CapacityWorkloadConsumption[];
+}
+
+/**
+ * Cluster-wide storage capacity aggregate derived from eligible user volumes
+ * projected by the Cluster Volume resource.
+ */
+@added(Versions.v2026_11_01_preview)
+model CapacityStorageSnapshot {
+  /**
+   * Sum of reportedProperties.sizeInBytes across user volumes.
+   */
+  @visibility(Lifecycle.Read)
+  totalBytes?: int64;
+
+  /**
+   * Sum of sizeInBytes minus sizeRemainingInBytes across user volumes.
+   */
+  @visibility(Lifecycle.Read)
+  consumedBytes?: int64;
+
+  /**
+   * Sum of reportedProperties.sizeRemainingInBytes across user volumes.
+   */
+  @visibility(Lifecycle.Read)
+  effectiveAvailableBytes?: int64;
+
+  /**
+   * Last storage update time.
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+}
+
+/**
+ * Capacity details for a volume reported by the cluster.
+ */
+@added(Versions.v2026_11_01_preview)
+model CapacityVolumeSnapshot {
+  /**
+   * Unique identifier of the volume.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Path of the volume.
+   */
+  @visibility(Lifecycle.Read)
+  path?: string;
+
+  /**
+   * Total size of the volume in bytes, represented as a decimal string.
+   */
+  @visibility(Lifecycle.Read)
+  sizeInBytes?: string;
+
+  /**
+   * Remaining size of the volume in bytes, represented as a decimal string.
+   */
+  @visibility(Lifecycle.Read)
+  sizeRemainingInBytes?: string;
+
+  /**
+   * Consumed size of the volume in bytes, represented as a decimal string.
+   */
+  @visibility(Lifecycle.Read)
+  sizeConsumedInBytes?: string;
+}
+
+/**
+ * Cluster-wide CPU capacity summary. Useful for fleet reporting and coarse filtering;
+ * not a single-workload fit signal. Final placement must evaluate machines[] with
+ * workload-specific constraints.
+ */
+@added(Versions.v2026_11_01_preview)
+model CapacityCpuSnapshot {
+  /**
+   * Physical CPU core count (P-core count) aggregated across cluster machines.
+   */
+  @visibility(Lifecycle.Read)
+  physicalCoreCount?: int32;
+
+  /**
+   * Logical CPU core count (L-core count) aggregated across cluster machines.
+   */
+  @visibility(Lifecycle.Read)
+  logicalCoreCount?: int32;
+
+  /**
+   * Processor package count aggregated across cluster machines.
+   */
+  @visibility(Lifecycle.Read)
+  processorCount?: int32;
+
+  /**
+   * CPU socket count aggregated across cluster machines.
+   */
+  @visibility(Lifecycle.Read)
+  socketCount?: int32;
+
+  /**
+   * Effective cluster policy value mirrored from appliedPolicy.cpuOvercommitRatio.
+   */
+  @visibility(Lifecycle.Read)
+  cpuOvercommitRatio?: float32;
+
+  /**
+   * Total cluster vCPU supply after applying cpuOvercommitRatio, before allocation
+   * and reservation. For v1 this is calculated from logicalCoreCount * cpuOvercommitRatio.
+   */
+  @visibility(Lifecycle.Read)
+  totalEffectiveVirtualCpuCapacity?: int32;
+
+  /**
+   * vCPU already allocated to workloads. This is not runtime CPU utilization.
+   */
+  @visibility(Lifecycle.Read)
+  workloadAllocatedVirtualCpu?: int32;
+
+  /**
+   * vCPU withheld by reserved nodes, failure-domain reservation policy, upgrade, or
+   * maintenance policy.
+   */
+  @visibility(Lifecycle.Read)
+  policyReservedVirtualCpu?: int32;
+
+  /**
+   * Total remaining vCPU across nodes, derived from node-level availability after
+   * machine-level system reserve, workload allocation, and policy reservation. This
+   * is a summed value and must not be treated as the largest VM that can fit.
+   */
+  @visibility(Lifecycle.Read)
+  aggregateAvailableVirtualCpu?: int32;
+
+  /**
+   * Last CPU inventory or consumption update.
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+}
+
+/**
+ * Cluster-wide memory capacity summary. Useful for reporting and coarse filtering;
+ * not a single-workload fit guarantee.
+ */
+@added(Versions.v2026_11_01_preview)
+model CapacityMemorySnapshot {
+  /**
+   * Total memory across cluster machines, in bytes.
+   */
+  @visibility(Lifecycle.Read)
+  totalBytes?: int64;
+
+  /**
+   * Memory allocated to workloads across the cluster. This is not runtime memory pressure.
+   */
+  @visibility(Lifecycle.Read)
+  workloadAllocatedBytes?: int64;
+
+  /**
+   * Memory withheld for host OS, Azure Local platform services, reserved nodes,
+   * failure-domain reservation policy, upgrade, or maintenance policy.
+   */
+  @visibility(Lifecycle.Read)
+  policyReservedBytes?: int64;
+
+  /**
+   * Total remaining memory across nodes after workload allocation and
+   * policy/platform reservation. Summed value; not a per-node fit guarantee.
+   */
+  @visibility(Lifecycle.Read)
+  aggregateAvailableBytes?: int64;
+
+  /**
+   * Last memory update time.
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+}
+
+/**
+ * Cluster-wide GPU capacity summary. Per-GPU details remain available through the
+ * EdgeMachineGpu resource tree.
+ */
+@added(Versions.v2026_11_01_preview)
+model CapacityGpuSnapshot {
+  /**
+   * Total GPU resources discovered across edge machines.
+   */
+  @visibility(Lifecycle.Read)
+  totalGpuCount?: int32;
+
+  /**
+   * Count of GPUs where properties.assignable is true.
+   */
+  @visibility(Lifecycle.Read)
+  assignableGpuCount?: int32;
+
+  /**
+   * Count of GPUs assigned in DDA mode or otherwise consumed by workloads.
+   */
+  @visibility(Lifecycle.Read)
+  consumedGpuCount?: int32;
+
+  /**
+   * Sum of GPU-P partitionDetails.totalPartitions across GPUs in partitioned mode.
+   */
+  @visibility(Lifecycle.Read)
+  totalPartitionCount?: int32;
+
+  /**
+   * Sum of GPU-P partitionDetails.assignedPartitions across GPUs in partitioned mode.
+   */
+  @visibility(Lifecycle.Read)
+  consumedPartitionCount?: int32;
+
+  /**
+   * GPU-P partitions available for placement after assignments and reservation policy.
+   */
+  @visibility(Lifecycle.Read)
+  effectiveAvailablePartitionCount?: int32;
+
+  /**
+   * GPU capacity grouped by type, mode, and partition size.
+   */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["type", "mode", "partitionSizeInMB"])
+  groups?: CapacityGpuGroup[];
+
+  /**
+   * Last GPU inventory update time.
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+}
+
+/**
+ * GPU capacity for devices grouped by type, mode, and partition size.
+ */
+@added(Versions.v2026_11_01_preview)
+model CapacityGpuGroup {
+  /**
+   * GPU type represented by the group.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * GPU assignment mode represented by the group.
+   */
+  @visibility(Lifecycle.Read)
+  mode?: string;
+
+  /**
+   * Partition size in megabytes, represented as a decimal string.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches the capacity response wire format."
+  @visibility(Lifecycle.Read)
+  partitionSizeInMB?: string;
+
+  /**
+   * Total number of assignable GPUs, represented as a decimal string.
+   */
+  @visibility(Lifecycle.Read)
+  totalAssignableGpuCount?: string;
+
+  /**
+   * Number of assignable GPUs reserved by policy, represented as a decimal string.
+   */
+  @visibility(Lifecycle.Read)
+  reservedAssignableGpuCount?: string;
+
+  /**
+   * Number of assignable GPUs consumed by workloads, represented as a decimal string.
+   */
+  @visibility(Lifecycle.Read)
+  consumedAssignableGpuCount?: string;
+
+  /**
+   * Total number of partitionable GPUs, represented as a decimal string.
+   */
+  @visibility(Lifecycle.Read)
+  totalPartitionableGpuCount?: string;
+
+  /**
+   * Number of partitionable GPUs reserved by policy, represented as a decimal string.
+   */
+  @visibility(Lifecycle.Read)
+  reservedPartitionableGpuCount?: string;
+
+  /**
+   * Number of partitionable GPUs consumed by workloads, represented as a decimal string.
+   */
+  @visibility(Lifecycle.Read)
+  consumedPartitionableGpuCount?: string;
+}
+
+/**
+ * Cluster-wide workload networking capacity summary. Represents workload logical
+ * networks and the static IP address pools VMs can attach to. Infrastructure logical
+ * networks are excluded.
+ */
+@added(Versions.v2026_11_01_preview)
+model CapacityNetworkingSnapshot {
+  /**
+   * Count of workload logical networks known to the cluster. Infrastructure logical
+   * networks are excluded.
+   */
+  @visibility(Lifecycle.Read)
+  totalLogicalNetworkCount?: int32;
+
+  /**
+   * Count of workload logical networks that can accept new VM network interfaces.
+   * For static IP networks, this requires at least one available static IP address.
+   */
+  @visibility(Lifecycle.Read)
+  availableLogicalNetworkCount?: int32;
+
+  /**
+   * Count of workload logical networks using static IP address pools.
+   */
+  @visibility(Lifecycle.Read)
+  staticLogicalNetworkCount?: int32;
+
+  /**
+   * Count of workload logical networks using DHCP address assignment. DHCP IP pool
+   * capacity is not calculated in v1.
+   */
+  @visibility(Lifecycle.Read)
+  dhcpLogicalNetworkCount?: int32;
+
+  /**
+   * Total allocatable static IP addresses across workload logical network IP pools.
+   */
+  @visibility(Lifecycle.Read)
+  totalStaticIpAddressCount?: int32;
+
+  /**
+   * Static IP addresses already assigned or reserved for VM network interfaces across
+   * workload logical networks.
+   */
+  @visibility(Lifecycle.Read)
+  allocatedStaticIpAddressCount?: int32;
+
+  /**
+   * Remaining allocatable static IP addresses across workload logical networks after
+   * assignments and reservations.
+   */
+  @visibility(Lifecycle.Read)
+  effectiveAvailableStaticIpAddressCount?: int32;
+
+  /**
+   * Last logical network or IP pool capacity update time.
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: utcDateTime;
+}
+
+/**
+ * Per-machine capacity breakdown. Includes identifiers, node state, connectivity, and
+ * the CPU, memory, and GPU facts upper-layer placement systems need for fit-aware
+ * decisions.
+ */
+@added(Versions.v2026_11_01_preview)
+model CapacityMachineSnapshot {
+  /**
+   * Cluster node name as reported by Arc (properties.displayName).
+   */
+  @visibility(Lifecycle.Read)
+  machineName?: string;
+
+  /**
+   * ARM resource ID of the corresponding EdgeMachine resource when available.
+   */
+  @visibility(Lifecycle.Read)
+  edgeMachineResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/edgeMachines";
+    }
+  ]>;
+
+  /**
+   * ARM resource ID of the corresponding Arc for Server machine resource when available.
+   */
+  @visibility(Lifecycle.Read)
+  arcMachineResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridCompute/machines";
+    }
+  ]>;
+
+  /**
+   * Cluster-perspective state of the machine, such as whether it is active, reserved,
+   * draining, or excluded from placement.
+   */
+  @visibility(Lifecycle.Read)
+  machineState?: CapacityMachineState;
+
+  /**
+   * Connectivity status reported by Arc for the underlying machine.
+   */
+  @visibility(Lifecycle.Read)
+  connectivityStatus?: CapacityMachineConnectivityStatus;
+
+  /**
+   * Node-local CPU capacity breakdown.
+   */
+  @visibility(Lifecycle.Read)
+  cpu?: MachineCpuCapacity;
+
+  /**
+   * Node-local memory capacity breakdown.
+   */
+  @visibility(Lifecycle.Read)
+  memory?: MachineMemoryCapacity;
+
+  /**
+   * Node-local GPU capacity breakdown.
+   */
+  @visibility(Lifecycle.Read)
+  gpu?: MachineGpuCapacity;
+}
+
+/**
+ * Cluster-perspective state of a machine for capacity and placement.
+ */
+@added(Versions.v2026_11_01_preview)
+union CapacityMachineState {
+  string,
+
+  /** The machine is an active placement target. */
+  Active: "Active",
+
+  /** The machine is explicitly reserved (for example, listed in appliedPolicy.reservedNodes). */
+  Reserved: "Reserved",
+
+  /** The machine is being drained for maintenance or upgrade. */
+  Draining: "Draining",
+
+  /** The machine is in maintenance and not a placement target. */
+  Maintenance: "Maintenance",
+
+  /** The machine is excluded from placement for another reason. */
+  Excluded: "Excluded",
+
+  /** The machine is in an unknown state. */
+  Unknown: "Unknown",
+}
+
+/**
+ * Connectivity status reported by Arc for a cluster machine.
+ */
+@added(Versions.v2026_11_01_preview)
+union CapacityMachineConnectivityStatus {
+  string,
+
+  /** The machine is connected to Arc. */
+  Connected: "Connected",
+
+  /** The machine is disconnected from Arc. */
+  Disconnected: "Disconnected",
+
+  /** The machine has expired Arc credentials. */
+  Expired: "Expired",
+
+  /** The connectivity status is unknown. */
+  Unknown: "Unknown",
+}
+
+/**
+ * Node-local CPU capacity values used for fit-aware placement. CPU overcommit
+ * remains a cluster-level policy and is not exposed per machine; effective vCPU
+ * values here already reflect that policy.
+ */
+@added(Versions.v2026_11_01_preview)
+model MachineCpuCapacity {
+  /**
+   * Physical CPU core count on the machine.
+   */
+  @visibility(Lifecycle.Read)
+  physicalCoreCount?: int32;
+
+  /**
+   * Logical CPU core count on the machine.
+   */
+  @visibility(Lifecycle.Read)
+  logicalCoreCount?: int32;
+
+  /**
+   * Processor package count on the machine.
+   */
+  @visibility(Lifecycle.Read)
+  processorCount?: int32;
+
+  /**
+   * CPU socket count on the machine.
+   */
+  @visibility(Lifecycle.Read)
+  socketCount?: int32;
+
+  /**
+   * Node-local vCPU supply after applying the cluster-level CPU overcommit policy.
+   */
+  @visibility(Lifecycle.Read)
+  effectiveVirtualCpuCapacity?: int32;
+
+  /**
+   * Service-computed vCPU-equivalent host and platform reserve on this machine. The
+   * initial implementation may compute this as a percentage of the machine's effective
+   * vCPU capacity; later implementations can replace the rule with CPU model-aware
+   * calculation while preserving this field.
+   */
+  @visibility(Lifecycle.Read)
+  systemReservedVirtualCpu?: int32;
+
+  /**
+   * vCPU already allocated to workloads on this machine.
+   */
+  @visibility(Lifecycle.Read)
+  workloadAllocatedVirtualCpu?: int32;
+
+  /**
+   * vCPU withheld from this machine because the node or its failure domain is reserved.
+   */
+  @visibility(Lifecycle.Read)
+  policyReservedVirtualCpu?: int32;
+
+  /**
+   * Node-local vCPU available for placement after system reserve, workload allocation,
+   * and policy reservation. Upper-layer systems should use this value with memory and
+   * other constraints to evaluate VM fit.
+   */
+  @visibility(Lifecycle.Read)
+  availableVirtualCpu?: int32;
+}
+
+/**
+ * Node-local memory capacity values used for fit-aware placement.
+ */
+@added(Versions.v2026_11_01_preview)
+model MachineMemoryCapacity {
+  /**
+   * Total memory on the machine, in bytes.
+   */
+  @visibility(Lifecycle.Read)
+  totalBytes?: int64;
+
+  /**
+   * Memory withheld for host OS and Azure Local platform services on this machine.
+   */
+  @visibility(Lifecycle.Read)
+  systemReservedBytes?: int64;
+
+  /**
+   * Memory allocated to workloads on this machine.
+   */
+  @visibility(Lifecycle.Read)
+  workloadAllocatedBytes?: int64;
+
+  /**
+   * Memory withheld from this machine because the node or its failure domain is reserved.
+   */
+  @visibility(Lifecycle.Read)
+  policyReservedBytes?: int64;
+
+  /**
+   * Node-local memory available for placement after system reserve, workload allocation,
+   * and policy reservation.
+   */
+  @visibility(Lifecycle.Read)
+  availableBytes?: int64;
+}
+
+/**
+ * Node-local GPU capacity values used for placement. Per-GPU details remain available
+ * through the EdgeMachineGpu resource tree under each machine.
+ */
+@added(Versions.v2026_11_01_preview)
+model MachineGpuCapacity {
+  /**
+   * Total GPUs on this machine.
+   */
+  @visibility(Lifecycle.Read)
+  totalGpuCount?: int32;
+
+  /**
+   * Count of GPUs on this machine where properties.assignable is true.
+   */
+  @visibility(Lifecycle.Read)
+  assignableGpuCount?: int32;
+
+  /**
+   * Count of GPUs on this machine assigned in DDA mode or otherwise consumed by workloads.
+   */
+  @visibility(Lifecycle.Read)
+  consumedGpuCount?: int32;
+
+  /**
+   * Sum of GPU-P partitionDetails.totalPartitions across GPUs on this machine in
+   * partitioned mode.
+   */
+  @visibility(Lifecycle.Read)
+  totalPartitionCount?: int32;
+
+  /**
+   * Sum of GPU-P partitionDetails.assignedPartitions across GPUs on this machine in
+   * partitioned mode.
+   */
+  @visibility(Lifecycle.Read)
+  consumedPartitionCount?: int32;
+
+  /**
+   * GPU-P partitions available for placement on this machine after assignments and
+   * reservation policy.
+   */
+  @visibility(Lifecycle.Read)
+  effectiveAvailablePartitionCount?: int32;
+}
+
+/**
+ * Placement-relevant workload allocation record, collated from EdgeMachine workload
+ * inventory reported by the device management extension. For v1 this is intentionally
+ * VM-shaped and does not distinguish between standalone Hyper-V VMs, Azure-created VMs,
+ * or VMs that back AKS nodes.
+ */
+@added(Versions.v2026_11_01_preview)
+model CapacityWorkloadConsumption {
+  /**
+   * Stable device-reported workload identifier, such as the Hyper-V VM ID when available.
+   */
+  @visibility(Lifecycle.Read)
+  workloadId?: string;
+
+  /**
+   * Hyper-V VM name reported by the node.
+   */
+  @visibility(Lifecycle.Read)
+  workloadName?: string;
+
+  /**
+   * Optional ARM resource ID when the service can map the local VM to an ARM resource.
+   */
+  @visibility(Lifecycle.Read)
+  resourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Workload type. For v1 this should be VirtualMachine.
+   */
+  @visibility(Lifecycle.Read)
+  workloadType?: string;
+
+  /**
+   * Cluster node name that currently hosts the workload.
+   */
+  @visibility(Lifecycle.Read)
+  machineName?: string;
+
+  /**
+   * Hyper-V VM state reported by the node.
+   */
+  @visibility(Lifecycle.Read)
+  workloadState?: string;
+
+  /**
+   * Configured virtual processor count from Hyper-V used for vCPU allocation accounting.
+   */
+  @visibility(Lifecycle.Read)
+  virtualCpu?: int32;
+
+  /**
+   * Maximum memory the VM can consume, in bytes, used for memory allocation accounting.
+   * For a dynamic memory VM this is the Hyper-V maximum memory value; for a fixed
+   * memory VM this is the configured startup memory.
+   */
+  @visibility(Lifecycle.Read)
+  memoryBytes?: int64;
+}
+
+/**
+ * Patch shape for Day N edits to Capacity Settings. Only appliedPolicy fields are
+ * updatable; reportedCapacity, provisioningState, and lastUpdated remain service-owned.
+ */
+@added(Versions.v2026_11_01_preview)
+model CapacitySettingPatch {
+  /**
+   * The patchable properties of the Capacity Settings resource.
+   */
+  properties?: CapacitySettingPatchProperties;
+}
+
+/**
+ * Patchable properties of the Capacity Settings resource for Day N edits.
+ */
+@added(Versions.v2026_11_01_preview)
+model CapacitySettingPatchProperties {
+  /**
+   * Updated placement policy to apply to capacity calculations.
+   */
+  appliedPolicy?: AppliedCapacityPolicy;
+}
