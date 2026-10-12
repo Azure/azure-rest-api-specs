@@ -78,6 +78,15 @@ interface Volumes {
       @added(Versions.v2026_05_01_preview)
       @query("deleteType")
       deleteType?: DeleteType;
+
+      /**
+       * Optional, used to delete a source volume together with its dependent clones (see activeCloneCount). Allowed values are only true or false. Default value is false. Without it, deleting a volume that has dependent clones is rejected; the delete is also rejected if any dependent clone is attached.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Header name follows the existing x-ms-delete-snapshots and x-ms-force-delete convention on this operation."
+      @added(Versions.v2026_10_01_preview)
+      @header
+      @clientName("deleteClones", "csharp") // this could be temporary because we cannot reference this parameter through ::parameter syntax.
+      `x-ms-delete-clones`?: `x-ms-delete-clones`;
     },
     Response =
       | ArmDeletedResponse
@@ -101,7 +110,15 @@ interface Volumes {
       `x-ms-access-soft-deleted-resources`?: `x-ms-access-soft-deleted-resources`;
 
       /**
-       * Optional, filters the volumes that are returned. Specify `creationData/sourceId eq '<source volume ARM id>'` to list the thin clones of a source volume, optionally combined with ` and creationData/createSource eq 'Volume'`. creationData/sourceId is required when this parameter is used, and the source volume must be in the same volume group as the listed scope.
+       * Lists the dependent clones of a source volume: Thin clones, and Full clones whose backfill has not completed.
+       *
+       * The filter must be exactly
+       * $filter="creationData/sourceId eq '<source volume ARM id>' and creationData/createSource eq 'Volume'".
+       * Both clauses are required, values must be enclosed in single quotes, and 'Volume' is currently the
+       * only supported creationData/createSource value. The source volume must be in the same volume group
+       * as the listed scope. Any other property, operator, value or extra clause is rejected.
+       *
+       * Results are always live volumes: $filter cannot be combined with x-ms-access-soft-deleted-resources.
        */
       @added(Versions.v2026_10_01_preview)
       @query("$filter")

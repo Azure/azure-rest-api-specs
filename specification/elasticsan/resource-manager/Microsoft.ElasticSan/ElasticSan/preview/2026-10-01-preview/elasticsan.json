@@ -1860,7 +1860,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "Optional, filters the volumes that are returned. Specify `creationData/sourceId eq '<source volume ARM id>'` to list the thin clones of a source volume, optionally combined with ` and creationData/createSource eq 'Volume'`. creationData/sourceId is required when this parameter is used, and the source volume must be in the same volume group as the listed scope.",
+            "description": "Lists the dependent clones of a source volume: Thin clones, and Full clones whose backfill has not completed.\n\nThe filter must be exactly\n$filter=\"creationData/sourceId eq '<source volume ARM id>' and creationData/createSource eq 'Volume'\".\nBoth clauses are required, values must be enclosed in single quotes, and 'Volume' is currently the\nonly supported creationData/createSource value. The source volume must be in the same volume group\nas the listed scope. Any other property, operator, value or extra clause is rejected.\n\nResults are always live volumes: $filter cannot be combined with x-ms-access-soft-deleted-resources.",
             "required": false,
             "type": "string"
           }
@@ -2287,6 +2287,33 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-ms-delete-clones",
+            "in": "header",
+            "description": "Optional, used to delete a source volume together with its dependent clones (see activeCloneCount). Allowed values are only true or false. Default value is false. Without it, deleting a volume that has dependent clones is rejected; the delete is also rejected if any dependent clone is attached.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "x-ms-delete-clones",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "true",
+                  "value": "true",
+                  "description": "Delete the dependent clones together with the source volume."
+                },
+                {
+                  "name": "false",
+                  "value": "false",
+                  "description": "Do not delete dependent clones. The delete is rejected while the volume has dependent clones."
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -2323,6 +2350,9 @@
           },
           "Volumes_Delete_MinimumSet_Gen": {
             "$ref": "./examples/Volumes_Delete_MinimumSet_Gen.json"
+          },
+          "Volumes_Delete_WithDependentClones": {
+            "$ref": "./examples/Volumes_Delete_WithDependentClones.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2493,11 +2523,11 @@
     },
     "CloneDetails": {
       "type": "object",
-      "description": "Clone details for a volume. Present only for clone volumes (createSource == Volume).",
+      "description": "Clone details for a volume. Present only for clone volumes (createSource == Volume). Clone volumes and the volumes they are cloned from are never soft-deleted: deleting them is permanent and they cannot be restored.",
       "properties": {
         "replicaType": {
           "$ref": "#/definitions/ReplicaType",
-          "description": "The replica type of the clone. Writable on create and on promote (Thin to Full)."
+          "description": "Required when createSource is Volume: specify Thin or Full. On an existing clone, through either PUT or PATCH: omit this property for ordinary changes; repeating the clone's current value is accepted and changes nothing; Full promotes a Thin clone; Thin on a Full clone is rejected because promotion is one-way. A Thin clone may also become Full automatically (see ReplicaType). A promotion cannot be combined with a sizeGiB change."
         },
         "backfillStatus": {
           "$ref": "#/definitions/BackfillStatus",
@@ -2507,13 +2537,19 @@
         "backfillStartedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the data copy for the promote/backfill started. Null before promote, and may remain null briefly after a promote is accepted until the underlying data copy begins.",
+          "description": "The time the data copy for the promote/backfill started. Null before promote, and may remain\nnull briefly after a promote is accepted until the underlying data copy begins.",
           "readOnly": true
         },
         "backfillCompletedAt": {
           "type": "string",
           "format": "date-time",
           "description": "The time the backfill completed. Null until backfillStatus is Complete.",
+          "readOnly": true
+        },
+        "backfillPercentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "The percentage of the backfill completed so far (0-100). Null until the data copy reports progress.",
           "readOnly": true
         }
       }
@@ -3436,12 +3472,12 @@
           {
             "name": "Thin",
             "value": "Thin",
-            "description": "The clone shares data blocks with its source volume and remains dependent on it."
+            "description": "The clone shares data blocks with its source volume and remains dependent on it. A Thin clone is promoted to Full automatically after a service-defined period; replicaType then changes to Full without a request from the caller."
           },
           {
             "name": "Full",
             "value": "Full",
-            "description": "The clone holds an independent copy of the data and no longer depends on its source volume."
+            "description": "The clone copies all data from its source volume and becomes independent of it once backfillStatus is Complete."
           }
         ]
       }
@@ -3955,7 +3991,7 @@
           {
             "name": "Volume",
             "value": "Volume",
-            "description": "Create a thin clone from an existing Elastic SAN volume."
+            "description": "Create a clone of an existing Elastic SAN volume. The source must be in the same volume group, which must be a Performance Critical volume group with the DirectAttach protocol. cloneDetails.replicaType selects a Thin or Full clone, and sizeGiB must equal the source volume's size. Clones and instant-access snapshots of a source volume count against one shared per-volume limit. A volume that is itself a clone can be used as a source only once its backfillStatus is Complete."
           }
         ]
       }
@@ -4221,7 +4257,7 @@
         "activeCloneCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of live dependent thin clones sourced from this volume.",
+          "description": "The number of clones of this volume that still depend on it: Thin clones, and Full clones whose backfill has not completed. Together with the volume's instant-access snapshots this counts against the per-volume clone limit. While this is non-zero, deleting the volume requires the x-ms-delete-clones header. Reported on GET and List; omitted when cloning is not enabled for the subscription.",
           "readOnly": true
         },
         "provisioningState": {
@@ -4264,7 +4300,7 @@
         },
         "cloneDetails": {
           "$ref": "#/definitions/CloneDetails",
-          "description": "Clone details for the volume. On update, replicaType may be set to Full to promote a thin clone."
+          "description": "Clone details for the volume. Set replicaType to Full to promote a Thin clone; repeating the clone's current replicaType is accepted and changes nothing, and Thin on a Full clone is rejected. A promotion cannot be combined with a sizeGiB change; other writable properties follow normal update validation."
         }
       }
     }
