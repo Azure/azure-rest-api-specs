@@ -3,40 +3,25 @@ import { isMain, isRecord, parseArgs, readJsonObject, runMain, writeJson } from 
 import { typeIdentity } from "./sdk-method-delta.ts";
 import { canonicalJson, stableId } from "./stable-id.ts";
 import { normalizeTcgcContract } from "./tcgc-contract.ts";
-
-type ArtifactComparison = import("./runtime-types.ts").ArtifactComparison;
-
-type AssessmentFact = import("./runtime-types.ts").AssessmentFact;
-
-type DownstreamAnalysis = import("./runtime-types.ts").DownstreamAnalysis;
-
-type DownstreamCandidate = import("./runtime-types.ts").DownstreamCandidate;
-
-type DownstreamRootCause = import("./runtime-types.ts").DownstreamRootCause;
-
-type NormalizedTcgcContract = import("./runtime-types.ts").NormalizedTcgcContract;
-
-type NormalizedTcgcMethod = import("./runtime-types.ts").NormalizedTcgcMethod;
-
-type NormalizedTcgcNamedType = import("./runtime-types.ts").NormalizedTcgcNamedType;
-
-type NormalizedTcgcParameter = import("./runtime-types.ts").NormalizedTcgcParameter;
-
-type NormalizedTcgcType = import("./runtime-types.ts").NormalizedTcgcType;
-
-type PreparationBlocker = import("./runtime-types.ts").PreparationBlocker;
-
-type PreparationManifest = import("./runtime-types.ts").PreparationManifest;
-
-type PreparationProject = import("./runtime-types.ts").PreparationProject;
-
-type SourceChange = import("./runtime-types.ts").SourceChange;
-
-type SourceDeclaration = import("./runtime-types.ts").SourceDeclaration;
-
-type SourceIndex = import("./runtime-types.ts").SourceIndex;
-
-type TcgcArtifact = import("./runtime-types.ts").TcgcArtifact;
+import type {
+  ArtifactComparison,
+  AssessmentFact,
+  DownstreamAnalysis,
+  DownstreamCandidate,
+  DownstreamRootCause,
+  NormalizedTcgcContract,
+  NormalizedTcgcMethod,
+  NormalizedTcgcNamedType,
+  NormalizedTcgcParameter,
+  NormalizedTcgcType,
+  PreparationBlocker,
+  PreparationManifest,
+  PreparationProject,
+  SourceChange,
+  SourceDeclaration,
+  SourceIndex,
+  TcgcArtifact,
+} from "./runtime-types.ts";
 
 type DownstreamEvidence = {
   sourceChangeIds: string[];
