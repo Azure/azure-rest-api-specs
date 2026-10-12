@@ -2,10 +2,12 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./GalleryImage.tsp";
 
 using TypeSpec.Rest;
+using Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -81,6 +83,14 @@ interface GalleryImageVersions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ComputeResourceDeleteAsync<
     GalleryImageVersion,
+    Parameters = {
+      /**
+       * Specifies whether to bypass the gallery's soft-delete policy and permanently delete the gallery image version. If true, the version is not retained in the recycle bin and cannot be restored. If false or omitted, the version is soft-deleted when the gallery's soft-delete policy is enabled and permanently deleted when the policy is disabled.
+       */
+      @added(Versions.v2026_03_03)
+      @query("bypassSoftDelete")
+      bypassSoftDelete?: boolean;
+    },
     Response =
       | ArmDeletedResponse
       | ArmDeleteAcceptedLroResponse

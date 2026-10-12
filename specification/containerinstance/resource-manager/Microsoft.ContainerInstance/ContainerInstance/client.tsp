@@ -383,3 +383,23 @@ using Microsoft.ContainerInstance;
 @@clientName(AzureFileVolume.readOnly, "IsReadOnly", "csharp");
 @@clientName(VolumeMount.readOnly, "IsReadOnly", "csharp");
 @@clientName(SecurityContextDefinition.privileged, "IsPrivileged", "csharp");
+
+@@clientName(SandboxGroup, "ContainerGroupSandbox", "csharp");
+@@clientName(
+  SandboxGroupProperties,
+  "ContainerGroupSandboxProperties",
+  "csharp"
+);
+@@clientName(
+  SandboxGroupProvisioningState,
+  "ContainerGroupSandboxProvisioningState",
+  "csharp"
+);
+@@clientName(SubnetReference, "ContainerSandboxGroupSubnetReference", "csharp");
+@@clientName(SandboxGroupTagsUpdate, "ContainerSandboxGroupPatch", "csharp");
+@@clientName(
+  SandboxGroupAccessToken,
+  "ContainerSandboxGroupAccessToken",
+  "csharp"
+);
+@@clientName(SandboxGroupAccessToken.notAfter, "NotAfterOn", "csharp");

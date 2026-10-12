@@ -1,3 +1,4 @@
+import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { type RuleResult } from "./rule-result.ts";
 
 export interface Rule {
@@ -9,5 +10,5 @@ export interface Rule {
   readonly link?: string;
   /** When true, the rule runner automatically skips this rule if a matching suppression exists. */
   readonly suppressable?: boolean;
-  execute(folder: string): Promise<RuleResult>;
+  execute(folder: string, logger: ILogger): Promise<RuleResult>;
 }

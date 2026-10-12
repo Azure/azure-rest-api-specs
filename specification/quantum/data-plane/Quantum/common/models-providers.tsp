@@ -72,24 +72,31 @@ model TargetStatus {
   @visibility(Lifecycle.Read)
   averageQueueTime: int64;
 
+  /** Average high-priority queue time in seconds. Only populated for v2 workspaces and suite offers; omitted otherwise. */
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
+  @visibility(Lifecycle.Read)
+  averageQueueTimeHighPriority?: int64;
+
+  /** Average standard-priority queue time in seconds. Only populated for v2 workspaces and suite offers; omitted otherwise. */
+  @added(QuantumWorkspaceAPIVersion.v2026_01_15_preview)
+  @visibility(Lifecycle.Read)
+  averageQueueTimeStandardPriority?: int64;
+
   /** A page with detailed status of the provider. */
   @visibility(Lifecycle.Read)
   statusPage?: string;
 
   /** The qubit number. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   @visibility(Lifecycle.Read)
   @minValue(1)
   @maxValue(100000)
   numQubits?: int32;
 
   /** Target QIR profile. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   @visibility(Lifecycle.Read)
   targetProfile?: string;
 
   /** The metadata of this target. */
-  @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
   @visibility(Lifecycle.Read)
   metadata?: {};
 }
