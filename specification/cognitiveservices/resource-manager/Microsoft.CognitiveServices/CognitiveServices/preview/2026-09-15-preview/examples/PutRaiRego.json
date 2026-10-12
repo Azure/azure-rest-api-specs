@@ -1,0 +1,59 @@
+{
+  "operationId": "RaiRegos_CreateOrUpdate",
+  "parameters": {
+    "accountName": "safety-account",
+    "api-version": "2026-09-15-preview",
+    "If-None-Match": "*",
+    "raiRegoName": "input-guard",
+    "raiRego": {
+      "properties": {
+        "encoding": "None",
+        "rego": "package input_guard\n\nimport rego.v1\n\ndefault verdict := {\"decision\": \"allow\"}\n\nverdict := {\"decision\": \"deny\", \"reason\": \"prompt_injection_detected\"} if {\n  input.snapshot.moderation.harm.PromptInjection.detected\n}"
+      },
+      "tags": {
+        "environment": "production"
+      }
+    },
+    "resourceGroupName": "resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Create a reusable Rego artifact",
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000001\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiRegos/input-guard",
+        "name": "input-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiRegos",
+        "etag": "\"00000000-0000-0000-0000-000000000001\"",
+        "properties": {
+          "encoding": "None",
+          "rego": "package input_guard\n\nimport rego.v1\n\ndefault verdict := {\"decision\": \"allow\"}\n\nverdict := {\"decision\": \"deny\", \"reason\": \"prompt_injection_detected\"} if {\n  input.snapshot.moderation.harm.PromptInjection.detected\n}"
+        },
+        "tags": {
+          "environment": "production"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000001\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiRegos/input-guard",
+        "name": "input-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiRegos",
+        "etag": "\"00000000-0000-0000-0000-000000000001\"",
+        "properties": {
+          "encoding": "None",
+          "rego": "package input_guard\n\nimport rego.v1\n\ndefault verdict := {\"decision\": \"allow\"}\n\nverdict := {\"decision\": \"deny\", \"reason\": \"prompt_injection_detected\"} if {\n  input.snapshot.moderation.harm.PromptInjection.detected\n}"
+        },
+        "tags": {
+          "environment": "production"
+        }
+      }
+    }
+  }
+}
