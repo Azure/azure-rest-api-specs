@@ -1046,13 +1046,6 @@ model FirewallRule {
   /** The name of the firewall rule. */
   name: string;
 
-  /** Properties of the firewall rule. */
-  properties: FirewallRuleProperties;
-}
-
-/** Properties of a cluster firewall rule. */
-@added(Versions.v2026_10_01_preview)
-model FirewallRuleProperties {
   /** The source address prefix for the firewall rule. */
   sourceAddressPrefix: string;
 }
