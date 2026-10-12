@@ -27,14 +27,14 @@ model Cluster
   /**
    * Distinguishes the kind of cluster. Read-only.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   @visibility(Lifecycle.Read)
   kind?: Kind;
 
   /**
    * The SKU to create, which affects price, performance, and features.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   sku: Sku;
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
@@ -74,8 +74,8 @@ interface Clusters {
   /**
    * Deletes a Redis Enterprise cache cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
@@ -111,14 +111,13 @@ interface Clusters {
   /**
    * Unlinks the migrated endpoint from an Azure Managed Redis cluster that was migrated from Azure Cache for Redis Enterprise, removing the source cache endpoint that was redirected to this cluster during migration.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The service never returns a 204 for this LRO; it always returns 202 and the operation completes with no final body. Declaring the 204 this rule expects would document a response the service does not produce."
   @added(Versions.v2026_09_01)
   @action("unlinkMigratedEndpoint")
-  unlinkMigratedEndpoint is ArmResourceActionAsyncBase<
+  unlinkMigratedEndpoint is ArmResourceActionNoResponseContentAsync<
     Cluster,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void>
   >;
 
   /**

@@ -98,6 +98,7 @@ model CreateCodeInterpreterToolResourceOptions {
  * a list of vector store IDs.
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @added(ServiceApiVersions.v2024_05_01_preview)
 union CreateFileSearchToolResourceOptions {
   /** The vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant. */
