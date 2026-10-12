@@ -1,4 +1,4 @@
-# credvalidation-v5-1791832921
+# credvalidation-v5-1791834086
 
 > see https://aka.ms/autorest
 
@@ -37,6 +37,7 @@ clear-output-folder: true
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
     after_scripts:
       - >-
