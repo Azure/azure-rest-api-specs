@@ -855,9 +855,6 @@ model AgentEvaluationErrorDetail {
 
   @doc("Nested errors that contributed to this failure.")
   details?: AgentEvaluationErrorDetail[];
-
-  @doc("Optional implementation-specific inner error that does not expose credentials or trust inputs.")
-  innererror?: Azure.Core.Foundations.InnerError;
 }
 
 @added(Versions.v2026_10_15_preview)
