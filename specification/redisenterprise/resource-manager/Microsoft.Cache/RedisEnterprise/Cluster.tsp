@@ -108,7 +108,7 @@ interface Clusters {
     ArmResponse<SkuDetailsList>
   >;
 
-   /**
+  /**
    * Unlinks the migrated endpoint from an Azure Managed Redis cluster that was migrated from Azure Cache for Redis Enterprise, removing the source cache endpoint that was redirected to this cluster during migration.
    */
   @added(Versions.v2026_09_01)
