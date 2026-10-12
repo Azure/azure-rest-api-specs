@@ -38,8 +38,8 @@ function createNoneLabelActions(): ManagedLabelActions {
  * Workflow entry point. Resolves the PR and head SHA from the triggering event (see
  * `extractInputs`), logs the correlation for diagnosis, and returns the label actions to apply.
  *
- * @returns The correlated head SHA and PR number, which the workflow uploads as artifacts so
- *   `Update Labels` can re-check the live head, and the label actions to apply.
+ * @returns The correlated head SHA and PR number, which the workflow uploads as artifacts on
+ *   `workflow_run` triggers so `Update Labels` can find the PR, and the label actions to apply.
  */
 export default async function getLabelAction({ github, context, core }: GitHubScriptArgs): Promise<{
   headSha: string;

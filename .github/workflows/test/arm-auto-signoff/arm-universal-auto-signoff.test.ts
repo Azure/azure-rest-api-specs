@@ -165,7 +165,7 @@ describe("getLabelActionImpl", () => {
       expect(workflow).not.toContain("ARM Semantic Review - Set Status");
     });
 
-    it("always publishes live-head correlation artifacts", async () => {
+    it("publishes correlation artifacts only for workflow_run triggers", async () => {
       const workflow = await readFile(
         join(GITHUB_ROOT, "workflows", "arm-universal-auto-signoff.yaml"),
         "utf8",
@@ -175,11 +175,11 @@ describe("getLabelActionImpl", () => {
 
       expect(headArtifact).toBeGreaterThan(-1);
       expect(issueArtifact).toBeGreaterThan(headArtifact);
-      expect(workflow.slice(headArtifact - 180, headArtifact)).not.toContain(
-        "github.event_name ==",
+      expect(workflow.slice(headArtifact - 180, headArtifact)).toContain(
+        "github.event_name == 'workflow_run'",
       );
-      expect(workflow.slice(issueArtifact - 180, issueArtifact)).not.toContain(
-        "github.event_name ==",
+      expect(workflow.slice(issueArtifact - 180, issueArtifact)).toContain(
+        "github.event_name == 'workflow_run'",
       );
     });
   });
@@ -254,6 +254,83 @@ describe("getLabelActionImpl", () => {
       [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.None,
       [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
     });
+  });
+
+  it("logs the reason when semantic review is incomplete", async () => {
+    const loggingCore = createMockCore();
+    const github = createMockGithub({
+      labelNames: ["ARMReview"],
+      statuses: [
+        {
+          context: "ARM Semantic Review",
+          state: CommitStatusState.ERROR,
+          description: "Review incomplete: tool-failure",
+          updated_at: "2026-01-01",
+        },
+        ...deterministicStatuses,
+      ],
+    });
+
+    await getLabelActionImpl({
+      owner,
+      repo,
+      head_sha: headSha,
+      issue_number: issueNumber,
+      github,
+      core: loggingCore,
+    });
+
+    expect(loggingCore.info).toHaveBeenCalledWith(
+      "ARM semantic review has not passed: review-incomplete (Review incomplete: tool-failure)",
+    );
+  });
+
+  it("logs the reason when semantic review requested changes", async () => {
+    const loggingCore = createMockCore();
+    const github = createMockGithub({
+      labelNames: ["ARMReview"],
+      statuses: [
+        {
+          context: "ARM Semantic Review",
+          state: CommitStatusState.FAILURE,
+          description: "Changes requested: 2 Blocking finding(s)",
+          updated_at: "2026-01-01",
+        },
+        ...deterministicStatuses,
+      ],
+    });
+
+    await getLabelActionImpl({
+      owner,
+      repo,
+      head_sha: headSha,
+      issue_number: issueNumber,
+      github,
+      core: loggingCore,
+    });
+
+    expect(loggingCore.info).toHaveBeenCalledWith(
+      "ARM semantic review has not passed: changes-requested (Changes requested: 2 Blocking finding(s))",
+    );
+  });
+
+  it("logs a missing semantic review status", async () => {
+    const loggingCore = createMockCore();
+    const github = createMockGithub({
+      labelNames: ["ARMReview"],
+      statuses: deterministicStatuses,
+    });
+
+    await getLabelActionImpl({
+      owner,
+      repo,
+      head_sha: headSha,
+      issue_number: issueNumber,
+      github,
+      core: loggingCore,
+    });
+
+    expect(loggingCore.info).toHaveBeenCalledWith("ARM semantic review has not passed: missing");
   });
 
   it("logs why an existing manual signoff label produces no new action", async () => {
