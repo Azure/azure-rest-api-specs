@@ -34,6 +34,11 @@ describe("getIssueNumber", () => {
     // Call function
     const result = await getIssueNumber(mockGithub, "abc123", mockLogger);
 
+    expect(mockGithub.rest.search.issuesAndPullRequests).toHaveBeenCalledWith({
+      q: "sha:abc123 type:pr state:open",
+      advanced_search: "true",
+    });
+
     // Verify result uses first PR
     expect(result.issueNumber).toBe(123);
 

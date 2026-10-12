@@ -17,6 +17,7 @@ scalar ChangeDataCaptureStatusResponse extends string;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @Azure.ClientGenerator.Core.alternateType(
   {
     identity: "Azure.Core.Expressions.DataFactoryElement",

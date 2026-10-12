@@ -1,6 +1,7 @@
-import { readFile } from "fs/promises";
-import { join } from "path";
-import { type RuleResult } from "../rule-result.ts";
+import type { ILogger } from "@azure-tools/specs-shared/logger";
+import { readFile } from "node:fs/promises";
+import { join } from "pathe";
+import { failure, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { fileExists } from "../utils.ts";
 
@@ -9,7 +10,7 @@ export class ClientTspImportRule implements Rule {
   readonly description = "Validates that main.tsp imports client.tsp when client.tsp exists";
   readonly suppressable = true;
 
-  async execute(folder: string): Promise<RuleResult> {
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     const mainTspPath = join(folder, "main.tsp");
     const clientTspPath = join(folder, "client.tsp");
 
@@ -17,7 +18,7 @@ export class ClientTspImportRule implements Rule {
     const clientExists = await fileExists(clientTspPath);
 
     if (!mainExists || !clientExists) {
-      return { success: true, stdOutput: "Skipped: main.tsp or client.tsp not found" };
+      return { success: true, skipped: "main.tsp or client.tsp not found" };
     }
 
     const mainContent = await readFile(mainTspPath, { encoding: "utf8" });
@@ -26,16 +27,13 @@ export class ClientTspImportRule implements Rule {
     const importPattern = /^\s*import\s+['"]\.\/client\.tsp['"]\s*;\s*$/m;
 
     if (importPattern.test(mainContent)) {
-      return { success: true, stdOutput: "main.tsp correctly imports client.tsp" };
+      logger.debug("main.tsp correctly imports client.tsp");
+      return { success: true };
     }
 
-    return {
-      success: false,
-      errorOutput:
-        `main.tsp does not import client.tsp. ` +
-        `When a client.tsp file exists alongside main.tsp, the main.tsp must include:\n\n` +
-        `  import "./client.tsp";\n\n` +
-        `This ensures client customizations are included during compilation.`,
-    };
+    return failure("client-tsp-import", "main.tsp does not import client.tsp.", {
+      path: mainTspPath,
+      help: 'Add import "./client.tsp"; so client customizations are included during compilation.',
+    });
   }
 }

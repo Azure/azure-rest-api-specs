@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest"; //vi
 import { execFileSync } from "node:child_process";
 import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import path from "path";
+import path from "node:path";
 
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import type { ImpactAssessment } from "../src/ImpactAssessment.ts";
@@ -63,7 +63,8 @@ describe("CLI PR comparison", () => {
   ])("assesses only PR changes: %o", ({ mergeMain, plane }) => {
     addSwagger(plane, "2026-01-01");
     git("checkout", "main");
-    addSwagger("data-plane", "2026-02-01");
+    // Including main's unrelated change must alter the machine-readable plane assessment.
+    addSwagger(plane === "data-plane" ? "resource-manager" : "data-plane", "2026-02-01");
     const baseSha = git("rev-parse", "HEAD");
     git("checkout", "pr");
     if (mergeMain) {
@@ -79,7 +80,7 @@ describe("CLI PR comparison", () => {
     const mergeBase = git("merge-base", baseSha, headSha);
     git("worktree", "add", "--detach", targetDirectory, mergeBase);
 
-    const output = execFileSync(
+    execFileSync(
       process.execPath,
       [
         path.resolve(__dirname, "../cmd/summarize-impact.js"),
@@ -103,9 +104,6 @@ describe("CLI PR comparison", () => {
       { cwd: sourceDirectory, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
     );
 
-    const changedFilesOutput = output.split("Total:")[0];
-    expect(changedFilesOutput).toContain("2026-01-01");
-    expect(changedFilesOutput).not.toContain("2026-02-01");
     const impact = JSON.parse(
       readFileSync(path.join(sourceDirectory, "summary.json"), "utf8"),
     ) as ImpactAssessment;

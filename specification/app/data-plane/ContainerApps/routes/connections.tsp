@@ -271,7 +271,7 @@ interface ConnectionsOperations {
       ...AzureResourceScope;
 
       /** The connection identifier. */
-      @path id: string;
+      @path id: ConnectionId;
 
       /** The policy rules and enabled tool groups to apply. */
       @body body: UpdatePolicyRulesContent;

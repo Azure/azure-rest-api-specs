@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { resolve } from "path";
+import { resolve } from "node:path";
 import { Tag } from "../src/tag.ts";
 
 describe("Tag", () => {
