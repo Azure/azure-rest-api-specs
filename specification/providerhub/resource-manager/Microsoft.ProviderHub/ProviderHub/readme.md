@@ -80,11 +80,6 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}"].put.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}"].put.responses["201"].schema
     reason: The nested resource type registration operations return the same ResourceTypeRegistration schema as the top-level resource type registration operations, where provisioningState is already read-only.
-  - suppress: ArmResourcePropertiesBag
-    from: providerhub.json
-    where:
-      - $.definitions.ResourceTypeRegistration
-    reason: The service returns the resource type name within properties. It is modeled as read-only to document the existing response shape and is not accepted on requests.
 ```
 
 ### Tag: package-2026-09-01-preview
