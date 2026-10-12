@@ -96,11 +96,27 @@ model ScenarioTemplateVersionProperties {
    * - `%%\{filters.\<dimension\>\}%%` — deprecated spelling of `resourceTargeting.include.`,
    *   retained only so that superseded template versions keep resolving. Do not depend on it;
    *   the newest version of every template uses `resourceTargeting.include.`.
+   *
+   * An action's `failureBehavior` overrides the template-wide `failureBehavior` for that action
+   * alone; an action that does not carry one inherits the template-wide value.
    */
   @visibility(Lifecycle.Read)
   @minItems(1)
   @identifiers(#["name"])
   actions: ScenarioAction[];
+
+  /**
+   * Template-wide default for how a scenario run reacts when one of this template's actions
+   * fails. An action that does not carry its own `failureBehavior` inherits this value; when
+   * neither is present the effective behavior is `Stop`.
+   *
+   * A scenario created from this template takes this policy with the rest of the template's
+   * structure, so it is also the scenario's resolved `failureBehavior`. Template versions
+   * published before this policy existed do not carry one and report it as absent, which the
+   * run resolves as `Stop`.
+   */
+  @visibility(Lifecycle.Read)
+  failureBehavior?: FailureBehavior;
 }
 
 /**

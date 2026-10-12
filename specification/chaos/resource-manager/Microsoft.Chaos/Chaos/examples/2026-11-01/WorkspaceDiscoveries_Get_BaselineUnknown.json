@@ -1,0 +1,57 @@
+{
+  "operationId": "WorkspaceDiscoveries_Get",
+  "title": "Get a healthy container scan with a structurally unknown inventory denominator.",
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "workspaceName": "exampleWorkspace"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveries/latest?api-version=2026-11-01",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveries/latest",
+        "name": "latest",
+        "type": "Microsoft.Chaos/workspaces/discoveries",
+        "properties": {
+          "status": "InProgress",
+          "workspaceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveries/latest",
+        "name": "latest",
+        "type": "Microsoft.Chaos/workspaces/discoveries",
+        "properties": {
+          "status": "Succeeded",
+          "startTime": "2026-11-01T10:00:00Z",
+          "endTime": "2026-11-01T10:01:00Z",
+          "workspaceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+          "resourceSnapshotId": "22222222-2222-4222-8222-222222222222",
+          "completeness": "BaselineUnknown",
+          "coverageSummary": {
+            "scopes": {
+              "totalCount": 1,
+              "knownExpectedSetCount": 0,
+              "unknownExpectedSetCount": 1,
+              "establishedCount": 0,
+              "baselineUnknownCount": 1,
+              "verificationIncompleteCount": 0,
+              "knownPartialCount": 0
+            }
+          },
+          "warnings": [],
+          "warningsTotalCount": 0,
+          "warningsTruncated": false,
+          "errors": []
+        }
+      }
+    }
+  }
+}

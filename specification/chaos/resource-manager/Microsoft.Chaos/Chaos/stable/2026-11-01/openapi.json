@@ -73,6 +73,9 @@
       "name": "Workspaces"
     },
     {
+      "name": "WorkspaceDiscoveries"
+    },
+    {
       "name": "DiscoveredResources"
     },
     {
@@ -2856,6 +2859,84 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveries/latest": {
+      "get": {
+        "operationId": "WorkspaceDiscoveries_Get",
+        "tags": [
+          "WorkspaceDiscoveries"
+        ],
+        "description": "Gets the latest discovery result. Returns 202 with Location pointing to this same polling resource while discovery is processing, and 200 for a terminal result, including Failed with an error and no snapshot when completion could not be accepted.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceDiscovery"
+            }
+          },
+          "202": {
+            "description": "The nonterminal discovery result returned from the polling location.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceDiscovery"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The absolute URL of this same discovery polling resource, including the requested API version."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a healthy container scan with a structurally unknown inventory denominator.": {
+            "$ref": "./examples/WorkspaceDiscoveries_Get_BaselineUnknown.json"
+          },
+          "Get a partially succeeded result with classified guidance, system uncertainty, and a truncated warning sample.": {
+            "$ref": "./examples/WorkspaceDiscoveries_Get_PartialMixed.json"
+          },
+          "Get a terminal failed discovery without an accepted inventory result.": {
+            "$ref": "./examples/WorkspaceDiscoveries_Get_Failed.json"
+          },
+          "Get an established discovery result with a known resource population.": {
+            "$ref": "./examples/WorkspaceDiscoveries_Get_Established.json"
+          },
+          "Get an established discovery result with an authoritatively empty expected set.": {
+            "$ref": "./examples/WorkspaceDiscoveries_Get_KnownEmpty.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/evaluate": {
       "post": {
         "operationId": "Workspaces_Evaluate",
@@ -3090,6 +3171,9 @@
         "x-ms-examples": {
           "Create a scenario from a built-in scenario template version.": {
             "$ref": "./examples/Scenarios_CreateOrUpdate_From_Template.json"
+          },
+          "Create or update a scenario that continues past suppressed action failures.": {
+            "$ref": "./examples/Scenarios_CreateOrUpdate_With_Failure_Behavior.json"
           },
           "Create or update a scenario.": {
             "$ref": "./examples/Scenarios_CreateOrUpdate.json"
@@ -3835,6 +3919,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a scenario run that completed with suppressed action failures.": {
+            "$ref": "./examples/ScenarioRuns_Get_Partially_Succeeded.json"
+          },
           "Get a scenario run.": {
             "$ref": "./examples/ScenarioRuns_Get.json"
           }
@@ -3978,6 +4065,60 @@
           }
         ]
       }
+    },
+    "ActionError": {
+      "type": "object",
+      "description": "Structured information about a scenario action failure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The stable code that identifies the action failure.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The customer-safe description of the action failure.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Additional customer-safe details about the action failure.",
+          "items": {
+            "$ref": "#/definitions/ActionErrorDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ActionErrorDetail": {
+      "type": "object",
+      "description": "Additional information about a scenario action failure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The stable code that identifies the failure detail.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The customer-safe description of the failure detail.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target associated with the failure detail.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "ActionKind": {
       "type": "string",
@@ -5371,6 +5512,30 @@
         }
       }
     },
+    "FailureBehavior": {
+      "type": "string",
+      "description": "Enum of how a scenario run reacts when an action fails.",
+      "enum": [
+        "Stop",
+        "Continue"
+      ],
+      "x-ms-enum": {
+        "name": "FailureBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Stop",
+            "value": "Stop",
+            "description": "The action failure stops the scenario run and drives it to the `Failed` terminal state.\nThis is the effective behavior when no `failureBehavior` is supplied."
+          },
+          {
+            "name": "Continue",
+            "value": "Continue",
+            "description": "The action failure is suppressed: it does not by itself end the scenario run, and the run\ncontinues with its remaining actions. Suppression affects the run's result only. It does not\nchange dependency scheduling, which stays under the control of each action's `runAfter` —\nan action that should still start after a failed dependency says so there.\n\nA run that completes normally and whose action failures were all suppressed terminates as\n`PartiallySucceeded`. Any failure that is not suppressed still drives the run to `Failed`,\nand cancellation keeps its existing result."
+          }
+        ]
+      }
+    },
     "FilterType": {
       "type": "string",
       "description": "Enum that discriminates between filter types. Currently only `Simple` type is supported.",
@@ -5876,8 +6041,7 @@
           "readOnly": true
         },
         "errorCode": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "The error code.",
           "readOnly": true
         },
@@ -6190,6 +6354,10 @@
         "externalResource": {
           "$ref": "#/definitions/ExternalResource",
           "description": "External resource reference for the action."
+        },
+        "failureBehavior": {
+          "$ref": "#/definitions/FailureBehavior",
+          "description": "Per-action override for how the scenario run reacts when this action fails. When omitted,\nthe action inherits the scenario-level `failureBehavior`; when neither is supplied the\neffective behavior is `Stop`."
         }
       },
       "required": [
@@ -6426,6 +6594,10 @@
             "name"
           ]
         },
+        "failureBehavior": {
+          "$ref": "#/definitions/FailureBehavior",
+          "description": "Scenario-wide default for how a scenario run reacts when one of its actions fails.\nAn action that does not supply its own `failureBehavior` inherits this value; when\nneither is supplied the effective behavior is `Stop`.\n\nNot used when `createdFrom` is supplied, for the same reason as `parameters` and\n`actions`: the referenced template version is then the authoritative source for the\nscenario's structure, and it supplies this policy too. A value sent in the request is\nignored in that case — on create the referenced template's policy is used, and on update\nthe policy of the already persisted template is preserved."
+        },
         "recommendation": {
           "$ref": "#/definitions/Recommendation",
           "description": "The recommendation information for this scenario.",
@@ -6534,6 +6706,15 @@
           "readOnly": true,
           "x-ms-identifiers": []
         },
+        "warnings": {
+          "type": "array",
+          "description": "Customer-actionable warnings encountered during the scenario run.",
+          "items": {
+            "$ref": "#/definitions/ScenarioRunWarning"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "executionErrors": {
           "$ref": "#/definitions/ScenarioErrors",
           "description": "Business errors from fault injection — permission and resource state issues.",
@@ -6613,6 +6794,7 @@
         "Canceling",
         "Canceled",
         "Succeeded",
+        "PartiallySucceeded",
         "Failed"
       ],
       "x-ms-enum": {
@@ -6680,6 +6862,11 @@
             "description": "The scenario run has completed successfully."
           },
           {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The scenario run completed, but one or more actions failed and every one of those\nfailures was suppressed by the effective `failureBehavior`."
+          },
+          {
             "name": "Failed",
             "value": "Failed",
             "description": "The scenario run has failed."
@@ -6724,12 +6911,76 @@
           "format": "date-time",
           "description": "When the action was completed.",
           "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/ActionError",
+          "description": "Structured information about the action failure.",
+          "readOnly": true
+        },
+        "failureSuppressed": {
+          "type": "boolean",
+          "description": "Whether this action's failure was suppressed by the effective `failureBehavior`\nand therefore did not fail the scenario run. Present only for actions in the\n`Failed` state; absent otherwise.",
+          "readOnly": true
         }
       },
       "required": [
         "resources",
         "actionUrn",
         "state"
+      ]
+    },
+    "ScenarioRunWarning": {
+      "type": "object",
+      "description": "Customer-actionable warning associated with a scenario run.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The stable code that identifies the warning.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The customer-safe description of the warning.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Additional customer-safe details about the warning.",
+          "items": {
+            "$ref": "#/definitions/ScenarioRunWarningDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ScenarioRunWarningDetail": {
+      "type": "object",
+      "description": "Additional information about a scenario run warning.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The stable code that identifies the warning detail.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The customer-safe description of the warning detail.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target associated with the warning detail.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "code",
+        "message"
       ]
     },
     "ScenarioSummaryState": {
@@ -6876,7 +7127,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nThree macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.",
+          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nThree macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.\n\nAn action's `failureBehavior` overrides the template-wide `failureBehavior` for that action\nalone; an action that does not carry one inherits the template-wide value.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ScenarioAction"
@@ -6885,6 +7136,11 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "failureBehavior": {
+          "$ref": "#/definitions/FailureBehavior",
+          "description": "Template-wide default for how a scenario run reacts when one of this template's actions\nfails. An action that does not carry its own `failureBehavior` inherits this value; when\nneither is present the effective behavior is `Stop`.\n\nA scenario created from this template takes this policy with the rest of the template's\nstructure, so it is also the scenario's resolved `failureBehavior`. Template versions\npublished before this policy existed do not carry one and report it as absent, which the\nrun resolves as `Stop`.",
+          "readOnly": true
         }
       },
       "required": [
@@ -6958,7 +7214,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nThree macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.",
+          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nThree macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.\n\nAn action's `failureBehavior` overrides the template-wide `failureBehavior` for that action\nalone; an action that does not carry one inherits the template-wide value.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ScenarioAction"
@@ -6967,6 +7223,11 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "failureBehavior": {
+          "$ref": "#/definitions/FailureBehavior",
+          "description": "Template-wide default for how a scenario run reacts when one of this template's actions\nfails. An action that does not carry its own `failureBehavior` inherits this value; when\nneither is present the effective behavior is `Stop`.\n\nA scenario created from this template takes this policy with the rest of the template's\nstructure, so it is also the scenario's resolved `failureBehavior`. Template versions\npublished before this policy existed do not carry one and report it as absent, which the\nrun resolves as `Stop`.",
+          "readOnly": true
         }
       },
       "required": [
@@ -7451,6 +7712,108 @@
         }
       ]
     },
+    "WorkspaceDiscoveryAccessWarning": {
+      "type": "object",
+      "description": "Neutral guidance when access versus absence could not be established.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The affected resource or member identity.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceDiscoveryWarning"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessIndeterminate"
+    },
+    "WorkspaceDiscoveryCompleteness": {
+      "type": "string",
+      "description": "The coverage classification of the accepted Azure Resource Manager discovery result, independent of operation status and cause.",
+      "enum": [
+        "Established",
+        "BaselineUnknown",
+        "VerificationIncomplete",
+        "KnownPartial"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceDiscoveryCompleteness",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Established",
+            "value": "Established",
+            "description": "All attainable expected resource occurrences were classified and represented, with no observed shortfall."
+          },
+          {
+            "name": "BaselineUnknown",
+            "value": "BaselineUnknown",
+            "description": "Required work completed without an observed gap, but a complete inventory denominator is structurally unavailable."
+          },
+          {
+            "name": "VerificationIncomplete",
+            "value": "VerificationIncomplete",
+            "description": "Required system verification did not complete or a proven accessible required resource was not represented."
+          },
+          {
+            "name": "KnownPartial",
+            "value": "KnownPartial",
+            "description": "Confirmed undelivered obligations remain and no required system-verification gap remains."
+          }
+        ]
+      }
+    },
+    "WorkspaceDiscoveryCount": {
+      "type": "integer",
+      "format": "int64",
+      "description": "A nonnegative count of the named discovery coverage unit. No resource-count maximum is defined.",
+      "minimum": 0
+    },
+    "WorkspaceDiscoveryCoverageSummary": {
+      "type": "object",
+      "description": "Aggregate coverage of expanded Azure Resource Manager scope occurrences. Non-Azure Resource Manager discovery ingress is outside this population. VerificationIncomplete dominates KnownPartial, then BaselineUnknown, then Established.",
+      "properties": {
+        "scopes": {
+          "$ref": "#/definitions/WorkspaceDiscoveryScopeCoverageSummary",
+          "description": "The scope-occurrence coverage partitions for this discovery result.",
+          "readOnly": true
+        },
+        "resources": {
+          "$ref": "#/definitions/WorkspaceDiscoveryResourceCoverageSummary",
+          "description": "Required resource occurrences only from scopes with a known complete expected inventory set. Absent exactly when knownExpectedSetCount is zero. Unknown is not a known empty set.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "scopes"
+      ]
+    },
+    "WorkspaceDiscoveryPermissionWarning": {
+      "type": "object",
+      "description": "Confirmed read-authorization guidance. Permission details are required composition, not an optional shell reused for other causes.",
+      "properties": {
+        "permission": {
+          "$ref": "#/definitions/PermissionError",
+          "description": "The affected resource, required permissions, recommended roles, and optional identity details.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "permission"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceDiscoveryWarning"
+        }
+      ],
+      "x-ms-discriminator-value": "RbacValidationFailed"
+    },
     "WorkspaceDiscoveryProperties": {
       "type": "object",
       "description": "Model that represents the properties of the workspace discovery.",
@@ -7491,11 +7854,143 @@
           "type": "string",
           "description": "The resource snapshot ID produced by this discovery.",
           "readOnly": true
+        },
+        "completeness": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCompleteness",
+          "description": "The coverage established by the accepted discovery result for Azure Resource Manager scopes. Present with coverageSummary on newly produced snapshot results; absence is not Established or a known zero.",
+          "readOnly": true
+        },
+        "coverageSummary": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCoverageSummary",
+          "description": "Coverage facts for the accepted result. Scope counts, resource-occurrence counts, warning counts, and returned inventory-row counts are different units and must not be combined.",
+          "readOnly": true
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Confirmed access, missing-resource, or access-indeterminate guidance. System verification failures are reported in errors, not as permission warnings. The returned array may be a subset; use warningsTotalCount and warningsTruncated.",
+          "items": {
+            "$ref": "#/definitions/WorkspaceDiscoveryWarning"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "warningsTotalCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The deduplicated number of warning identities before sampling. Identity consists of the expanded scope, affected resource, and reason. Absent means no accepted warning population was recorded, not zero warnings.",
+          "readOnly": true
+        },
+        "warningsTruncated": {
+          "type": "boolean",
+          "description": "Whether warnings contains fewer entries than warningsTotalCount. False requires equality; true requires a smaller returned array. An accepted empty warning population is an empty array, zero total, and false.",
+          "readOnly": true
         }
       },
       "required": [
         "status",
         "workspaceId"
+      ]
+    },
+    "WorkspaceDiscoveryResourceCoverageSummary": {
+      "type": "object",
+      "description": "Required resource occurrences from known-set scopes, keyed by normalized scope and resource before global inventory-row deduplication. classifiedCount plus unclassifiedCount equals expectedCount, and coveredCount does not exceed classifiedCount.",
+      "properties": {
+        "expectedCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of unique required resource occurrences across known-set scopes, not the number of service-group container members or listed inventory rows.",
+          "readOnly": true
+        },
+        "classifiedCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of expected occurrences with a terminal access or presence classification.",
+          "readOnly": true
+        },
+        "unclassifiedCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of expected occurrences that required system verification could not classify.",
+          "readOnly": true
+        },
+        "coveredCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of classified expected occurrences actually represented in the produced snapshot. Access to a container or its descendants does not invent a resource occurrence.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "expectedCount",
+        "classifiedCount",
+        "unclassifiedCount",
+        "coveredCount"
+      ]
+    },
+    "WorkspaceDiscoveryResourceWarning": {
+      "type": "object",
+      "description": "Guidance for a resource or membership confirmed missing.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The affected resource or member identity.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceDiscoveryWarning"
+        }
+      ],
+      "x-ms-discriminator-value": "TargetNotFound"
+    },
+    "WorkspaceDiscoveryScopeCoverageSummary": {
+      "type": "object",
+      "description": "Two independent partitions of expanded scope occurrences after normalized-scope deduplication. Distinct service groups remain distinct even if their members coincide. The known/unknown counts and the four completeness counts each sum to totalCount.",
+      "properties": {
+        "totalCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of expanded Azure Resource Manager scope occurrences represented by the result.",
+          "readOnly": true
+        },
+        "knownExpectedSetCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of scopes with an authoritative complete expected resource-occurrence set, including authoritatively empty sets.",
+          "readOnly": true
+        },
+        "unknownExpectedSetCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of scopes whose complete expected inventory set is unavailable. A service group's known subscription or resource-group membership does not establish its descendant-resource denominator.",
+          "readOnly": true
+        },
+        "establishedCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of scopes with Established coverage.",
+          "readOnly": true
+        },
+        "baselineUnknownCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of scopes with a structurally unavailable denominator and no observed shortfall, including successful observed-empty container scans.",
+          "readOnly": true
+        },
+        "verificationIncompleteCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of scopes with required verification failure, unavailable required child enumeration, or a proven accessible required resource absent from the snapshot.",
+          "readOnly": true
+        },
+        "knownPartialCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of scopes with confirmed undelivered obligations and no remaining system-verification gap.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "totalCount",
+        "knownExpectedSetCount",
+        "unknownExpectedSetCount",
+        "establishedCount",
+        "baselineUnknownCount",
+        "verificationIncompleteCount",
+        "knownPartialCount"
       ]
     },
     "WorkspaceDiscoveryStatus": {
@@ -7506,6 +8001,7 @@
         "Queued",
         "InProgress",
         "Succeeded",
+        "PartiallySucceeded",
         "Failed",
         "Canceled"
       ],
@@ -7534,6 +8030,11 @@
             "description": "The discovery completed successfully."
           },
           {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "Discovery produced an admissible result with an observed coverage shortfall. This status does not itself block scenario runs or evaluations; consumers requiring established coverage must also check completeness."
+          },
+          {
             "name": "Failed",
             "value": "Failed",
             "description": "The discovery failed."
@@ -7546,6 +8047,70 @@
         ]
       },
       "readOnly": true
+    },
+    "WorkspaceDiscoveryWarning": {
+      "type": "object",
+      "description": "The common fields of a discovery guidance warning, discriminated by reason. Known reasons use their corresponding subtype; unknown future reasons retain these base fields.",
+      "properties": {
+        "scopeId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The normalized expanded source scope where the affected obligation was encountered.",
+          "readOnly": true
+        },
+        "scopeKind": {
+          "type": "string",
+          "description": "The source scope kind, such as Subscription, ResourceGroup, ServiceGroup, or Resource.",
+          "readOnly": true
+        },
+        "reason": {
+          "$ref": "#/definitions/WorkspaceDiscoveryWarningReason",
+          "description": "The confirmed guidance reason, not a system-verification failure.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable guidance with attribution appropriate to the reason.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "reason",
+      "required": [
+        "scopeId",
+        "scopeKind",
+        "reason",
+        "message"
+      ]
+    },
+    "WorkspaceDiscoveryWarningReason": {
+      "type": "string",
+      "description": "The confirmed guidance reason. Unknown future reasons preserve the common warning fields and must not be interpreted as a permission denial.",
+      "enum": [
+        "RbacValidationFailed",
+        "TargetNotFound",
+        "AccessIndeterminate"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceDiscoveryWarningReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RbacValidationFailed",
+            "value": "RbacValidationFailed",
+            "description": "The affected resource could not be read because of a confirmed authorization denial."
+          },
+          {
+            "name": "TargetNotFound",
+            "value": "TargetNotFound",
+            "description": "The affected resource or configured membership was confirmed missing."
+          },
+          {
+            "name": "AccessIndeterminate",
+            "value": "AccessIndeterminate",
+            "description": "Access versus absence could not be determined; guidance must state both possibilities."
+          }
+        ]
+      }
     },
     "WorkspaceEncryption": {
       "type": "object",
