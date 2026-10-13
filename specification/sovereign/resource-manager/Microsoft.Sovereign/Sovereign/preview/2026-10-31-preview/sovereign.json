@@ -301,7 +301,7 @@
         "tags": [
           "SovereignViewOperations"
         ],
-        "description": "Creates the Sovereign View resource.",
+        "description": "Creates or updates the Sovereign View resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -784,7 +784,7 @@
         "tags": [
           "SovereignViewOperations"
         ],
-        "description": "Remediates the Sovereign View resource for the given ARM resource IDs.",
+        "description": "Remediates the Sovereign View resource for the given Azure Resource Manager resource IDs.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1324,15 +1324,15 @@
     },
     "SovereignViewArmTemplateBundle": {
       "type": "object",
-      "description": "An ARM template bundle produced by a remediation.",
+      "description": "An Azure Resource Manager template bundle produced by a remediation.",
       "properties": {
         "template": {
           "type": "string",
-          "description": "The ARM template, serialized as a JSON string."
+          "description": "The Azure Resource Manager template, serialized as a JSON string."
         },
         "parameters": {
           "type": "string",
-          "description": "The ARM template parameters, serialized as a JSON string."
+          "description": "The Azure Resource Manager template parameters, serialized as a JSON string."
         }
       },
       "required": [
@@ -1802,7 +1802,7 @@
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The full ARM resource identifier of the resource for which compliance reasoning is requested."
+          "description": "The full Azure Resource Manager resource identifier of the resource for which compliance reasoning is requested."
         },
         "dimension": {
           "$ref": "#/definitions/ComplianceDimension",
@@ -1826,7 +1826,7 @@
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The evaluated resource ARM identifier."
+          "description": "The evaluated resource Azure Resource Manager identifier."
         },
         "dimension": {
           "$ref": "#/definitions/ComplianceDimension",
@@ -1951,7 +1951,7 @@
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM identifier of the linked or replica resource associated with the outcome."
+          "description": "The Azure Resource Manager identifier of the linked or replica resource associated with the outcome."
         },
         "state": {
           "$ref": "#/definitions/PolicyComplianceState",
@@ -2521,7 +2521,7 @@
           {
             "name": "ArmTemplateBundle",
             "value": "ArmTemplateBundle",
-            "description": "The remediation payload is an ARM template bundle."
+            "description": "The remediation payload is an Azure Resource Manager template bundle."
           }
         ]
       }
@@ -2592,7 +2592,7 @@
       "properties": {
         "resourceIds": {
           "type": "array",
-          "description": "The ARM resource IDs this result item applies to.",
+          "description": "The Azure Resource Manager resource IDs this result item applies to.",
           "items": {
             "type": "string",
             "format": "arm-id",
@@ -2687,7 +2687,7 @@
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM resource ID of the resource to remediate."
+          "description": "The Azure Resource Manager resource ID of the resource to remediate."
         },
         "configuration": {
           "$ref": "#/definitions/SovereignViewResidencyRemediationResourceConfiguration",
