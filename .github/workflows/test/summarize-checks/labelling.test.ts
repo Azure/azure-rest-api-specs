@@ -503,10 +503,11 @@ describe("update labels", () => {
   it.each([
     { targetBranch: "release-network-2025-03-01", requiresReview: true },
     { targetBranch: "ARMCoreRPDev", requiresReview: true },
-    { targetBranch: "kamboj-prjwl/release-network-2025-03-01", requiresReview: false },
+    { targetBranch: "feature/release-network-2025-03-01", requiresReview: false },
     { targetBranch: "feature/main", requiresReview: false },
     { targetBranch: "RPSaaSMaster-feature", requiresReview: false },
     { targetBranch: "ARMCoreRPDev-feature", requiresReview: false },
+    // cspell:ignore releas
     { targetBranch: "releas", requiresReview: false },
   ])(
     "only adds review labels for release branches: $targetBranch",
