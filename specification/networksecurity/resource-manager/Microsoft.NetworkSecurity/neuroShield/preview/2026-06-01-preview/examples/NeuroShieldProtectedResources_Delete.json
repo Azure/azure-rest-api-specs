@@ -1,0 +1,25 @@
+{
+  "operationId": "NeuroShieldProtectedResources_Delete",
+  "title": "Delete protected resource",
+  "description": "Deletes a protected resource under a NeuroShield resource.",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "protectedResourceName": "vm-01",
+    "api-version": "2026-06-01-preview",
+    "neuroShieldName": "myNeuroShield"
+  },
+  "responses": {
+    "202": {
+      "description": "Delete operation accepted",
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetworkSecurity/locations/eastus2/neuroShieldOperationStatuses/40000000-0000-0000-0000-000000000000?api-version=2026-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetworkSecurity/locations/eastus2/neuroShieldOperationStatuses/40000000-0000-0000-0000-000000000000?api-version=2026-06-01-preview",
+        "Retry-After": 30
+      }
+    },
+    "204": {
+      "description": "Protected resource deleted"
+    }
+  }
+}

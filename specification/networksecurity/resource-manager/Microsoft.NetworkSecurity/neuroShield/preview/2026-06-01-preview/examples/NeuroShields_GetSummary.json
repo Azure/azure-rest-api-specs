@@ -1,0 +1,32 @@
+{
+  "operationId": "NeuroShields_GetSummary",
+  "title": "Get a NeuroShield fleet summary",
+  "description": "Gets an aggregate fleet overview for a NeuroShield resource.",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "neuroShieldName": "myNeuroShield",
+    "api-version": "2026-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.NetworkSecurity/neuroShields/myNeuroShield",
+        "protectedCount": 12,
+        "scannedProtectedCount": 10,
+        "activeFindings": 8,
+        "criticalFindings": 1,
+        "highFindings": 2,
+        "mediumFindings": 3,
+        "lowFindings": 1,
+        "unreachableFindings": 1,
+        "awaitingApprovalMitigations": 3,
+        "queuedMitigations": 2,
+        "inProgressMitigations": 1,
+        "succeededMitigations": 14,
+        "failedMitigations": 2,
+        "rollbackInProgressMitigations": 1
+      }
+    }
+  }
+}
