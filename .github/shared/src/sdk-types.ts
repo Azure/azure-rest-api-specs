@@ -41,7 +41,7 @@ export type SdkLabelInfo = {
   breakingChangeSuppression: string | undefined;
   breakingChangeSuppressionApproved: string | undefined;
   buildFailed: string | undefined;
-  management: string[] | undefined;
+  management: string | undefined;
 };
 
 export type SdkLabels = Record<SdkName, SdkLabelInfo>;
@@ -72,7 +72,7 @@ export const sdkLabels: SdkLabels = {
     breakingChangeSuppression: "BreakingChange-JavaScript-Sdk-Suppression",
     breakingChangeSuppressionApproved: "BreakingChange-JavaScript-Sdk-Suppression-Approved",
     buildFailed: undefined,
-    management: ["Mgmt", "mgmt-review-needed"],
+    management: "mgmt-review-needed",
   },
   "azure-sdk-for-net": {
     breakingChange: undefined,

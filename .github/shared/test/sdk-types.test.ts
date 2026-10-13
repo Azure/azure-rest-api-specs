@@ -4,10 +4,7 @@ import { createMockSpecGenSdkArtifactInfo } from "./sdk-types.ts";
 
 describe("sdk-types", () => {
   it("defines management labels only for JavaScript", () => {
-    expect(sdkLabels["azure-sdk-for-js"].management).toEqual([
-      "Mgmt",
-      "mgmt-review-needed",
-    ]);
+    expect(sdkLabels["azure-sdk-for-js"].management).toBe("mgmt-review-needed");
     expect(
       Object.entries(sdkLabels)
         .filter(([sdkName]) => sdkName !== "azure-sdk-for-js")

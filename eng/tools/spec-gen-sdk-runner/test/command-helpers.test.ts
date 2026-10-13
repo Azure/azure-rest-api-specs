@@ -18,7 +18,7 @@ import {
   prepareSpecGenSdkCommand,
   selectGenerationTool,
   setBuildFailedLabelVariable,
-  setManagementLabelsVariable,
+  setManagementLabelVariable,
   setPipelineVariables,
 } from "../src/command-helpers.ts";
 import * as log from "../src/log.ts";
@@ -597,11 +597,11 @@ describe("commands.ts", () => {
     });
   });
 
-  describe("setManagementLabelsVariable", () => {
+  describe("setManagementLabelVariable", () => {
     const mockCommandInput = (
       sdkLanguage: SdkName,
       runMode = "release",
-    ): Parameters<typeof setManagementLabelsVariable>[0] => ({
+    ): Parameters<typeof setManagementLabelVariable>[0] => ({
       workingFolder: "/working/folder",
       sdkLanguage,
       runMode,
@@ -613,17 +613,14 @@ describe("commands.ts", () => {
       specRepoHttpsUrl: "",
     });
 
-    test("sets comma-separated JavaScript management labels for a release", () => {
+    test("sets the JavaScript management label for a release", () => {
       vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
         // mock implementation intentionally left blank
       });
 
-      setManagementLabelsVariable(mockCommandInput(SdkName.Js));
+      setManagementLabelVariable(mockCommandInput(SdkName.Js));
 
-      expect(log.setVsoVariable).toHaveBeenCalledWith(
-        "ManagementLabels",
-        "Mgmt,mgmt-review-needed",
-      );
+      expect(log.setVsoVariable).toHaveBeenCalledWith("ManagementLabel", "mgmt-review-needed");
     });
 
     test("does not set management labels for a non-JavaScript language", () => {
@@ -631,7 +628,7 @@ describe("commands.ts", () => {
         // mock implementation intentionally left blank
       });
 
-      setManagementLabelsVariable(mockCommandInput(SdkName.Net));
+      setManagementLabelVariable(mockCommandInput(SdkName.Net));
 
       expect(log.setVsoVariable).not.toHaveBeenCalled();
     });
@@ -641,7 +638,7 @@ describe("commands.ts", () => {
         // mock implementation intentionally left blank
       });
 
-      setManagementLabelsVariable(mockCommandInput(SdkName.Js, runMode));
+      setManagementLabelVariable(mockCommandInput(SdkName.Js, runMode));
 
       expect(log.setVsoVariable).not.toHaveBeenCalled();
     });

@@ -29,7 +29,7 @@ import {
   resolvePackagePath,
   selectGenerationTool,
   setBuildFailedLabelVariable,
-  setManagementLabelsVariable,
+  setManagementLabelVariable,
   setPipelineVariables,
 } from "./command-helpers.ts";
 import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
@@ -316,7 +316,7 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
   if (executionReport) {
     setBuildFailedLabelVariable(commandInput, executionReport);
   }
-  setManagementLabelsVariable(commandInput);
+  setManagementLabelVariable(commandInput);
 
   logMessage("ending group logging", LogLevel.EndGroup);
   if (executionReport?.vsoLogPath) {

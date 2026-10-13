@@ -12,7 +12,7 @@ const pipelineTemplate = fs.readFileSync(pipelineTemplatePath, "utf8");
 
 test("combines configured labels before creating the SDK pull request", () => {
   expect(pipelineTemplate).toContain('"$(BuildFailedLabel)"');
-  expect(pipelineTemplate).toContain('"$(ManagementLabels)"');
+  expect(pipelineTemplate).toContain('"$(ManagementLabel)"');
   expect(pipelineTemplate).toContain('$pullRequestLabels = $pullRequestLabels -join ","');
   expect(pipelineTemplate).toContain('-PRLabels "$(PullRequestLabels)"');
 });

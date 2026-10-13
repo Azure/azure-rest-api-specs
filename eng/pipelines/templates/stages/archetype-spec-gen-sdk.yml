@@ -130,8 +130,8 @@ stages:
               Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
               $buildFailedLabel = ""
               Write-Host "##vso[task.setvariable variable=BuildFailedLabel]$buildFailedLabel"
-              $managementLabels = ""
-              Write-Host "##vso[task.setvariable variable=ManagementLabels]$managementLabels"
+              $managementLabel = ""
+              Write-Host "##vso[task.setvariable variable=ManagementLabel]$managementLabel"
               $pullRequestLabels = ""
               Write-Host "##vso[task.setvariable variable=PullRequestLabels]$pullRequestLabels"
             displayName: "Create Run Time Variables"
@@ -374,7 +374,7 @@ stages:
               - pwsh: |
                   $pullRequestLabels = @(
                     "$(BuildFailedLabel)"
-                    "$(ManagementLabels)"
+                    "$(ManagementLabel)"
                   ) | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
                   $pullRequestLabels = $pullRequestLabels -join ","
                   Write-Host "##vso[task.setvariable variable=PullRequestLabels]$pullRequestLabels"

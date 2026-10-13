@@ -407,7 +407,7 @@ export function isManagementPlaneSpecConfig(
  *
  * @param commandInput - The single-spec command input.
  */
-export function setManagementLabelsVariable(commandInput: SpecGenSdkCmdInput): void {
+export function setManagementLabelVariable(commandInput: SpecGenSdkCmdInput): void {
   if (
     commandInput.runMode !== "release" ||
     !isManagementPlaneSpecConfig(commandInput.tspConfigPath, commandInput.readmePath)
@@ -415,11 +415,10 @@ export function setManagementLabelsVariable(commandInput: SpecGenSdkCmdInput): v
     return;
   }
 
-  const managementLabels = sdkLabels[commandInput.sdkLanguage]?.management;
-  if (managementLabels?.length) {
-    const labels = managementLabels.join(",");
-    logMessage(`Runner: setting ManagementLabels variable to '${labels}'`);
-    setVsoVariable("ManagementLabels", labels);
+  const managementLabel = sdkLabels[commandInput.sdkLanguage]?.management;
+  if (managementLabel) {
+    logMessage(`Runner: setting ManagementLabel variable to '${managementLabel}'`);
+    setVsoVariable("ManagementLabel", managementLabel);
   }
 }
 
