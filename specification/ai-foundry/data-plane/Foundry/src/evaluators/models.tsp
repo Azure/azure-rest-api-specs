@@ -163,18 +163,6 @@ union RubricScoringDecision {
   not_applicable: "not_applicable",
 }
 
-@doc("Fields shared by Boolean and Likert scoring results for a rubric.")
-@added(Versions.v1)
-@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
-@discriminator("mode")
-model RubricScoringResultBase {
-  @doc("The resolved scoring mode discriminator.")
-  mode: RubricScoringMode;
-
-  @doc("Overall decision from the selected scoring rule.")
-  decision: RubricScoringDecision;
-}
-
 @doc("Fields shared by Boolean and Likert results for one rubric dimension.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
@@ -226,33 +214,45 @@ model LikertRubricDimensionResult {
   raw_score?: int32;
 }
 
-@doc("Explainable Boolean scoring results for a rubric.")
+@doc("Flat result properties for explicit Boolean rubric scoring.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
-model BooleanRubricScoringResult extends RubricScoringResultBase {
-  mode: RubricScoringMode.boolean;
+model BooleanRubricResultProperties {
+  @doc("The resolved Boolean scoring mode.")
+  mode: "boolean";
 
-  @doc("One Boolean result for every configured dimension.")
+  @doc("Overall decision from the Boolean scoring rule.")
+  decision: RubricScoringDecision;
+
+  @doc("One Boolean judgment for every configured dimension.")
   dimension_results: BooleanRubricDimensionResult[];
+
+  ...Record<string>;
 }
 
-@doc("Explainable Likert scoring results for a rubric.")
+@doc("Flat result properties for explicit Likert rubric scoring.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
-model LikertRubricScoringResult extends RubricScoringResultBase {
-  mode: RubricScoringMode.likert;
+model LikertRubricResultProperties {
+  @doc("The resolved Likert scoring mode.")
+  mode: "likert";
 
-  @doc("One Likert result for every configured dimension.")
+  @doc("Overall decision from the Likert scoring rule.")
+  decision: RubricScoringDecision;
+
+  @doc("One Likert judgment for every configured dimension.")
   dimension_results: LikertRubricDimensionResult[];
+
+  ...Record<string>;
 }
 
-@doc("A mode-discriminated Boolean or Likert rubric scoring result.")
+@doc("Flat rubric result properties selected by the existing mode field.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
-@oneOf
-union RubricScoringResult {
-  boolean: BooleanRubricScoringResult,
-  likert: LikertRubricScoringResult,
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "mode" })
+union RubricResultProperties {
+  boolean: BooleanRubricResultProperties,
+  likert: LikertRubricResultProperties,
 }
 
 @doc("A single dimension — one independent, measurable criterion within a rubric evaluator's scoring blueprint.")

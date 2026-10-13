@@ -1124,12 +1124,14 @@ union EvalRunOutputItemResultStatus {
 );
 
 /** Structured and evaluator-specific details attached to an evaluation result. */
-model EvalRunOutputItemResultProperties {
-  /** Dimension judgments and the rubric's scoring decision. Present for evaluators using explicit rubric scoring. */
-  @added(Versions.v1)
-  rubric_scoring?: RubricScoringResult;
+@TypeSpec.OpenAPI.oneOf
+union EvalRunOutputItemResultProperties {
+  /** Existing string-valued properties for legacy evaluators. */
+  legacy: Record<string>,
 
-  ...Record<string>;
+  /** Mode-specific rubric judgments without an additional scoring wrapper. */
+  @added(Versions.v1)
+  rubric: RubricResultProperties,
 }
 
 model EvalRunOutputItemResult is OpenAI.EvalRunOutputItemResult;

@@ -46191,24 +46191,29 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    BooleanRubricScoringResult:
+    BooleanRubricResultProperties:
       type: object
       required:
         - mode
+        - decision
         - dimension_results
       properties:
         mode:
           type: string
           enum:
             - boolean
+          description: The resolved Boolean scoring mode.
+        decision:
+          $ref: '#/components/schemas/RubricScoringDecision'
+          description: Overall decision from the Boolean scoring rule.
         dimension_results:
           type: array
           items:
             $ref: '#/components/schemas/BooleanRubricDimensionResult'
-          description: One Boolean result for every configured dimension.
-      allOf:
-        - $ref: '#/components/schemas/RubricScoringResultBase'
-      description: Explainable Boolean scoring results for a rubric.
+          description: One Boolean judgment for every configured dimension.
+      unevaluatedProperties:
+        type: string
+      description: Flat result properties for explicit Boolean rubric scoring.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -48809,13 +48814,11 @@ components:
       description: A single grader result for an evaluation run output item.
       title: EvalRunOutputItemResult
     EvalRunOutputItemResultProperties:
-      type: object
-      properties:
-        rubric_scoring:
-          $ref: '#/components/schemas/RubricScoringResult'
-          description: Dimension judgments and the rubric's scoring decision. Present for evaluators using explicit rubric scoring.
-      unevaluatedProperties:
-        type: string
+      oneOf:
+        - type: object
+          unevaluatedProperties:
+            type: string
+        - $ref: '#/components/schemas/RubricResultProperties'
       description: Structured and evaluator-specific details attached to an evaluation result.
     EvalRunOutputItemResultStatus:
       anyOf:
@@ -51185,24 +51188,29 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    LikertRubricScoringResult:
+    LikertRubricResultProperties:
       type: object
       required:
         - mode
+        - decision
         - dimension_results
       properties:
         mode:
           type: string
           enum:
             - likert
+          description: The resolved Likert scoring mode.
+        decision:
+          $ref: '#/components/schemas/RubricScoringDecision'
+          description: Overall decision from the Likert scoring rule.
         dimension_results:
           type: array
           items:
             $ref: '#/components/schemas/LikertRubricDimensionResult'
-          description: One Likert result for every configured dimension.
-      allOf:
-        - $ref: '#/components/schemas/RubricScoringResultBase'
-      description: Explainable Likert scoring results for a rubric.
+          description: One Likert judgment for every configured dimension.
+      unevaluatedProperties:
+        type: string
+      description: Flat result properties for explicit Likert rubric scoring.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -82255,6 +82263,20 @@ components:
             - dataset
             - aggregate
       description: Warning source attribution for a rubric-generation input-quality warning. Per-source values (`prompt`, `agent`, `dataset`) match the source category visible to the generation runtime. `aggregate` is a synthetic value used only for warnings computed across successfully resolved sources. `traces` is not exposed because trace sources resolve into dataset content upstream.
+    RubricResultProperties:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/BooleanRubricResultProperties'
+        - $ref: '#/components/schemas/LikertRubricResultProperties'
+      discriminator:
+        propertyName: mode
+        mapping:
+          boolean: '#/components/schemas/BooleanRubricResultProperties'
+          likert: '#/components/schemas/LikertRubricResultProperties'
+      description: Flat rubric result properties selected by the existing mode field.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     RubricScoring:
       type: object
       properties:
@@ -82282,35 +82304,6 @@ components:
         - boolean
         - likert
       description: The scoring mode selected for an entire rubric.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    RubricScoringResult:
-      oneOf:
-        - $ref: '#/components/schemas/BooleanRubricScoringResult'
-        - $ref: '#/components/schemas/LikertRubricScoringResult'
-      description: A mode-discriminated Boolean or Likert rubric scoring result.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    RubricScoringResultBase:
-      type: object
-      required:
-        - mode
-        - decision
-      properties:
-        mode:
-          $ref: '#/components/schemas/RubricScoringMode'
-          description: The resolved scoring mode discriminator.
-        decision:
-          $ref: '#/components/schemas/RubricScoringDecision'
-          description: Overall decision from the selected scoring rule.
-      discriminator:
-        propertyName: mode
-        mapping:
-          likert: '#/components/schemas/LikertRubricScoringResult'
-          boolean: '#/components/schemas/BooleanRubricScoringResult'
-      description: Fields shared by Boolean and Likert scoring results for a rubric.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
