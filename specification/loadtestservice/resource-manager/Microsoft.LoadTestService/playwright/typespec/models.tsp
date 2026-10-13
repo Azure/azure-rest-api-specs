@@ -57,6 +57,14 @@ model PlaywrightWorkspaceProperties {
       type: "Microsoft.Network/virtualNetworks/subnets";
     }
   ]>;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("Indicates whether browser proxy is enabled for the workspace. When set to true, browser proxy can be used for the workspace.")
+  browserProxy?: EnablementStatus = EnablementStatus.Disabled;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("Indicates whether browser proxy is enabled for the workspace. When set to true, browser proxy can be used for the workspace.")
+  linkedKeyVault?: LinkedKeyVaultProperties;
 }
 
 @doc("The status of the last resource operation.")
@@ -83,4 +91,33 @@ union EnablementStatus {
 
   @doc("The feature is disabled.")
   Disabled: "Disabled",
+}
+
+@doc("Linked Key Vault properties for the Playwright workspace.")
+model LinkedKeyVaultProperties {
+  @doc("The URI of the linked Key Vault.")
+  vaultUri?: url;
+
+  @doc("The identity used to access the linked Key Vault.")
+  vaultIdentity?: ManagedIdentityProperties;
+}
+
+@doc("Managed identity properties for accessing Azure resources.")
+model ManagedIdentityProperties {
+  @doc("The type of the managed identity.")
+  type: ManagedIdentityType;
+
+  @doc("The resource ID of the user-assigned managed identity.")
+  resourceId?: Azure.Core.armResourceIdentifier;
+}
+
+@doc("The type of the managed identity.")
+union ManagedIdentityType {
+  string,
+
+  @doc("System-assigned managed identity.")
+  SystemAssigned: "SystemAssigned",
+
+  @doc("User-assigned managed identity.")
+  UserAssigned: "UserAssigned",
 }

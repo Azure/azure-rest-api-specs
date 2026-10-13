@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Playwright Service Management API",
-    "version": "2026-08-01-preview",
+    "version": "2026-11-01-preview",
     "description": "Playwright Service Management API provides access to Playwright workspace resources and their operations through Azure Resource Manager.",
     "x-typespec-generated": [
       {
@@ -752,6 +752,63 @@
         ]
       }
     },
+    "LinkedKeyVaultProperties": {
+      "type": "object",
+      "description": "Linked Key Vault properties for the Playwright workspace.",
+      "properties": {
+        "vaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the linked Key Vault."
+        },
+        "vaultIdentity": {
+          "$ref": "#/definitions/ManagedIdentityProperties",
+          "description": "The identity used to access the linked Key Vault."
+        }
+      }
+    },
+    "ManagedIdentityProperties": {
+      "type": "object",
+      "description": "Managed identity properties for accessing Azure resources.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityType",
+          "description": "The type of the managed identity."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned managed identity."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ManagedIdentityType": {
+      "type": "string",
+      "description": "The type of the managed identity.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System-assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identity."
+          }
+        ]
+      }
+    },
     "PlaywrightQuota": {
       "type": "object",
       "description": "Subscription-level location-based Playwright quota resource.",
@@ -1009,6 +1066,35 @@
               }
             ]
           }
+        },
+        "browserProxy": {
+          "type": "string",
+          "description": "Indicates whether browser proxy is enabled for the workspace. When set to true, browser proxy can be used for the workspace.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is disabled."
+              }
+            ]
+          }
+        },
+        "linkedKeyVault": {
+          "$ref": "#/definitions/LinkedKeyVaultProperties",
+          "description": "Indicates whether browser proxy is enabled for the workspace. When set to true, browser proxy can be used for the workspace."
         }
       }
     },
@@ -1107,6 +1193,14 @@
           "type": "string",
           "format": "uri",
           "description": "The URI of the Azure storage account used to store workspace artifacts, test results, and reports."
+        },
+        "browserProxy": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "Indicates whether browser proxy is enabled for the workspace. When set to true, browser proxy can be used for the workspace."
+        },
+        "linkedKeyVault": {
+          "$ref": "#/definitions/LinkedKeyVaultProperties",
+          "description": "Indicates whether browser proxy is enabled for the workspace. When set to true, browser proxy can be used for the workspace."
         }
       }
     },
