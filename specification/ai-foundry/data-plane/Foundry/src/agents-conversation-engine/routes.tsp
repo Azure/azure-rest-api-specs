@@ -17,10 +17,9 @@ interface AgentConversationEngine {
    * `ws://container:8088/conversation_engine` without rewriting the protocol path. The AgentServer SDK
    * exposes that container endpoint only when a Conversation Engine handler is registered.
    *
-   * Voice Live Bridge integration requires agent metadata `voiceLiveCompatible=true`. The declared
-   * `conversation_engine` version `1.0.0` identifies the engine protocol; no separate Bridge-version
-   * metadata is required. The Bridge message version `1.0` and Hosted Agents API version `v1` are
-   * independent of the declared container protocol version.
+   * The declared `conversation_engine` version `1.0.0` identifies the Bridge conversation-engine
+   * protocol. Its container protocol version is independent of Bridge message version `1.0` and
+   * Hosted Agents API version `v1`.
    *
    * Voice Live owns audio, STT, TTS, turn detection, and interruption. The engine reuses the existing
    * Bridge Protocol 1.0 wire semantics. Voice Live sends `session.start` with `protocol_version: "1.0"`;

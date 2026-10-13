@@ -2030,10 +2030,9 @@ paths:
         `ws://container:8088/conversation_engine` without rewriting the protocol path. The AgentServer SDK
         exposes that container endpoint only when a Conversation Engine handler is registered.
 
-        Voice Live Bridge integration requires agent metadata `voiceLiveCompatible=true`. The declared
-        `conversation_engine` version `1.0.0` identifies the engine protocol; no separate Bridge-version
-        metadata is required. The Bridge message version `1.0` and Hosted Agents API version `v1` are
-        independent of the declared container protocol version.
+        The declared `conversation_engine` version `1.0.0` identifies the Bridge conversation-engine
+        protocol. Its container protocol version is independent of Bridge message version `1.0` and
+        Hosted Agents API version `v1`.
 
         Voice Live owns audio, STT, TTS, turn detection, and interruption. The engine reuses the existing
         Bridge Protocol 1.0 wire semantics. Voice Live sends `session.start` with `protocol_version: "1.0"`;
@@ -92112,7 +92111,7 @@ components:
         not: {}
       allOf:
         - $ref: '#/components/schemas/VoiceConversationEngine'
-      description: A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must declare `conversation_engine` version `1.0.0` and provide agent metadata `voiceLiveCompatible=true`. Voice Live connects through the dedicated conversation-engine endpoint using the existing Bridge Protocol 1.0 wire semantics; the Bridge message version is independent of the container protocol version and the Hosted Agents API version `v1`. Declaring `invocations_ws` is optional and does not substitute for `conversation_engine`.
+      description: A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must declare `conversation_engine` version `1.0.0`. Voice Live connects through the dedicated conversation-engine endpoint using the existing Bridge Protocol 1.0 wire semantics; the Bridge message version is independent of the container protocol version and the Hosted Agents API version `v1`. Declaring `invocations_ws` is optional and does not substitute for `conversation_engine`.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
