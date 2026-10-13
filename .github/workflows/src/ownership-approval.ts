@@ -215,14 +215,17 @@ export async function checkOwnershipApproval(
     core.info("Skipping ownership approval for a closed PR.");
     return;
   }
-  const { data: check } = await github.rest.checks.create({
+  const statusRequest = {
     owner,
     repo,
-    name: CHECK_NAME,
-    head_sha: pr.head.sha,
-    external_id: `ownership-approval:${number}`,
-    status: "in_progress",
-    output: { title: "Evaluating ownership approvals", summary: "Reading current PR reviews." },
+    sha: pr.head.sha,
+    context: CHECK_NAME,
+    target_url: `${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`,
+  };
+  await github.rest.repos.createCommitStatus({
+    ...statusRequest,
+    state: "pending",
+    description: "Evaluating ownership approvals",
   });
   try {
     const [files, reviews, codeowners, policyContents, associated] = await Promise.all([
@@ -316,33 +319,29 @@ export async function checkOwnershipApproval(
       throw new Error("PR or reviews changed during authorization; refresh ownership approval");
     }
     const summary = renderOwnershipApproval(result);
-    await github.rest.checks.update({
-      owner,
-      repo,
-      check_run_id: check.id,
-      status: "completed",
-      conclusion: result.missing.length ? "failure" : "success",
-      output: {
-        title: result.missing.length ? "Awaiting primary-owner approval" : "Ownership approved",
-        summary,
-      },
-    });
     await core.summary.addRaw(`## ${CHECK_NAME}\n\n${summary}`).write();
+    await github.rest.repos.createCommitStatus({
+      ...statusRequest,
+      state: result.missing.length ? "failure" : "success",
+      description: result.missing.length
+        ? "Awaiting primary-owner approval"
+        : "All changed files have an authorized approval",
+    });
     if (result.missing.length) core.setFailed("Awaiting primary-owner approval.");
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     core.error(message);
-    await github.rest.checks.update({
-      owner,
-      repo,
-      check_run_id: check.id,
-      status: "completed",
-      conclusion: "failure",
-      output: {
-        title: "Unable to evaluate ownership approval",
-        summary: `Authorization could not be verified: ${inlineCode(message)}. Rerun the check.`,
-      },
+    await github.rest.repos.createCommitStatus({
+      ...statusRequest,
+      state: "error",
+      description: "Unable to evaluate ownership approval",
     });
+    await core.summary
+      .addRaw(
+        `## ${CHECK_NAME}\n\n` +
+          `Authorization could not be verified: ${inlineCode(message)}. Rerun the check.`,
+      )
+      .write();
     throw error;
   }
 }

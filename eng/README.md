@@ -54,12 +54,23 @@ head commits because checks are commit-scoped. Primary-owner guidance is in the
 
 ### Configuration and activation
 
-Install a dedicated GitHub App on this repository with organization **Members:
-read**, repository **Contents: read**, **Pull requests: read**, and **Checks:
-write**. Set repository variable `OWNERSHIP_APPROVAL_APP_ID` and secret
-`OWNERSHIP_APPROVAL_APP_PRIVATE_KEY`. The workflow requests only those permissions
-and only this repository. Set `client-team` to `@Azure/<team-slug>` when ready;
-`null` explicitly disables the client-team exception.
+The workflow reuses the existing **azure-sdk-automation** GitHub App and
+[shared login action](../eng/common/actions/login-to-github/action.yml). Azure
+OIDC authenticates to Key Vault, which signs the App token without exporting its
+private key. No new App or GitHub private-key secret is needed.
+
+Work with EngSys to configure the **AzureSDKEngKeyVault** environment and its
+federated credential for this repository. Set that environment's `AZURE_CLIENT_ID`,
+`AZURE_TENANT_ID`, and `AZURE_SUBSCRIPTION_ID` variables to the identity authorized
+to sign with the automation App's Key Vault key. Existing repository-level Azure
+variables are not necessarily for this identity. Restrict the environment to
+trusted default-branch workflows.
+
+The App already has organization **Members: read** and repository **Statuses:
+write**, so authorization is published as a commit status, not a check run.
+The status's Details link opens the workflow run containing the full primary-owner
+report. Set `client-team` to `@Azure/<team-slug>` when ready; `null` explicitly
+disables the client-team exception.
 
 The event notifier has no checkout or token permissions. The privileged
 `workflow_run` publisher executes only default-branch code and resolves the PR
@@ -67,11 +78,11 @@ from GitHub metadata, not artifacts. `/azsdk check-ownership` also runs trusted
 default-branch code and refreshes actual reviews without granting authority.
 PR changes, new reviews and review dismissals trigger evaluation. Permission or
 team-membership changes require a refresh; fork workflow-approval policies can
-delay event delivery. Missing App credentials fail the workflow rather than
+delay event delivery. Azure login or Key Vault signing failures fail the workflow rather than
 falling back to an unrestricted token.
 
 First merge and configure the check, exercise its allowed and denied cases,
-then require **Ownership approval** with this App as its expected source.
+then require **Ownership approval** with **azure-sdk-automation** as its expected source.
 Before accepting fallback approvals, disable native **Require review from Code
 Owners** in every applicable ruleset. The default branch currently has both the
 organization `azure-sdk-ruleset-codeowners` and repository `Require Code owner

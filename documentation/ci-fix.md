@@ -103,10 +103,12 @@ it is not itself an approval. Renames require coverage for both the old and new
 paths, and deletions require approval too. If a file has no primary owner,
 configure its ownership in CODEOWNERS.
 
-An evaluation error is not an approval failure: rerun the workflow and contact
-the repository maintainers if it persists. The check needs a configured GitHub
-App to resolve private team membership. Other merge requirements, including
-Protected Files, still apply.
+The status's **Details** link opens the workflow run with the full primary-owner
+report. An evaluation error is not an approval failure: rerun the workflow and
+contact the repository maintainers if it persists. The workflow uses the existing
+Azure SDK automation App; Azure login and Key Vault signing must be configured
+for it to resolve private team membership and publish the status. Other merge
+requirements, including Protected Files, still apply.
 
 ## `SDK Validation *` checks, like `SDK Validation - Go`
 

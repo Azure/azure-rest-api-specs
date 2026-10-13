@@ -51,6 +51,8 @@ function setup() {
   const context = createMockContext();
   context.repo.owner = "Azure";
   context.repo.repo = "example";
+  context.serverUrl = "https://github.com";
+  context.runId = 456;
   const pr = {
     number: 1,
     state: "open",
@@ -87,20 +89,23 @@ function setup() {
     },
   );
   const associated = vi.fn().mockResolvedValue({ data: [] });
-  const createCheck = vi.fn().mockResolvedValue({ data: { id: 123 } });
-  const updateCheck = vi
-    .fn<(params: RestEndpointMethodTypes["checks"]["update"]["parameters"]) => Promise<void>>()
+  const createStatus = vi
+    .fn<
+      (
+        params: RestEndpointMethodTypes["repos"]["createCommitStatus"]["parameters"],
+      ) => Promise<void>
+    >()
     .mockResolvedValue(undefined);
   Object.assign(github.rest.pulls, { listFiles, listReviews });
   Object.assign(github.rest.repos, {
     getContent,
+    createCommitStatus: createStatus,
     getCollaboratorPermissionLevel: permission,
     listPullRequestsAssociatedWithCommit: associated,
   });
   Object.assign(github.rest, {
     teams: { getByName: getTeam, getMembershipForUserInOrg: getMembership },
   });
-  Object.assign(github.rest.checks, { create: createCheck, update: updateCheck });
   return {
     github,
     core,
@@ -113,8 +118,7 @@ function setup() {
     getTeam,
     getMembership,
     associated,
-    createCheck,
-    updateCheck,
+    createStatus,
     run: () => checkOwnershipApproval({ github, context, core }, 1),
   };
 }
@@ -271,22 +275,35 @@ describe("ownership approval policy", () => {
 });
 
 describe("trusted ownership evaluation", () => {
-  it("uses base-branch policy and current reviews, publishing a check on the actual PR head", async () => {
+  it("uses base-branch policy and current reviews, publishing status and report for the actual PR head", async () => {
     const f = setup();
     await f.run();
     expect(f.getContent.mock.calls).toEqual([
       [{ owner: "Azure", repo: "example", ref: base, path: ".github/CODEOWNERS" }],
       [{ owner: "Azure", repo: "example", ref: base, path: ".github/ownership-approval.yml" }],
     ]);
-    expect(f.createCheck).toHaveBeenCalledWith(
-      expect.objectContaining({
-        name: "Ownership approval",
-        head_sha: head,
-        status: "in_progress",
-      }),
-    );
-    expect(f.updateCheck).toHaveBeenLastCalledWith(
-      expect.objectContaining({ check_run_id: 123, conclusion: "success" }),
+    expect(f.createStatus.mock.calls.map(([status]) => status)).toEqual([
+      {
+        owner: "Azure",
+        repo: "example",
+        sha: head,
+        context: "Ownership approval",
+        target_url: "https://github.com/Azure/example/actions/runs/456",
+        state: "pending",
+        description: "Evaluating ownership approvals",
+      },
+      {
+        owner: "Azure",
+        repo: "example",
+        sha: head,
+        context: "Ownership approval",
+        target_url: "https://github.com/Azure/example/actions/runs/456",
+        state: "success",
+        description: "All changed files have an authorized approval",
+      },
+    ]);
+    expect(f.core.summary.addRaw).toHaveBeenCalledWith(
+      expect.stringContaining("All changed files have an authorized approval"),
     );
     expect(f.core.setFailed).not.toHaveBeenCalled();
   });
@@ -303,9 +320,7 @@ describe("trusted ownership evaluation", () => {
     await f.run();
     expect(f.permission).not.toHaveBeenCalled();
     expect(f.getMembership).not.toHaveBeenCalled();
-    expect(f.updateCheck).toHaveBeenLastCalledWith(
-      expect.objectContaining({ conclusion: "failure" }),
-    );
+    expect(f.createStatus).toHaveBeenLastCalledWith(expect.objectContaining({ state: "failure" }));
   });
 
   it.each(["DISMISSED", "CHANGES_REQUESTED"])(
@@ -329,9 +344,7 @@ describe("trusted ownership evaluation", () => {
       data: [approved, { ...approved, id: 3, state: "COMMENTED" }],
     });
     await f.run();
-    expect(f.updateCheck).toHaveBeenLastCalledWith(
-      expect.objectContaining({ conclusion: "success" }),
-    );
+    expect(f.createStatus).toHaveBeenLastCalledWith(expect.objectContaining({ state: "success" }));
   });
 
   it("requires repository write access even from a named service owner", async () => {
@@ -339,9 +352,7 @@ describe("trusted ownership evaluation", () => {
     f.permission.mockResolvedValue({ data: { permission: "read" } });
     await f.run();
     expect(f.getMembership).not.toHaveBeenCalled();
-    expect(f.updateCheck).toHaveBeenLastCalledWith(
-      expect.objectContaining({ conclusion: "failure" }),
-    );
+    expect(f.createStatus).toHaveBeenLastCalledWith(expect.objectContaining({ state: "failure" }));
   });
 
   it("requires approval for the old path when a non-client file is renamed to client.tsp", async () => {
@@ -351,10 +362,13 @@ describe("trusted ownership evaluation", () => {
     });
     f.listReviews.mockResolvedValue({ data: [review("client-owner")] });
     await f.run();
-    const output = f.updateCheck.mock.calls.at(-1)?.[0].output;
-    expect(output?.summary).toContain(storage);
-    expect(output?.summary).not.toContain(`\`${storageClient}\``);
-    expect(output?.summary).not.toContain("@Azure/clients");
+    expect(f.core.summary.addRaw).toHaveBeenCalledWith(expect.stringContaining(storage));
+    expect(f.core.summary.addRaw).not.toHaveBeenCalledWith(
+      expect.stringContaining(`\`${storageClient}\``),
+    );
+    expect(f.core.summary.addRaw).not.toHaveBeenCalledWith(
+      expect.stringContaining("@Azure/clients"),
+    );
     expect(f.getTeam).toHaveBeenCalledTimes(2);
     expect(f.getMembership).toHaveBeenCalledTimes(2);
   });
@@ -364,9 +378,7 @@ describe("trusted ownership evaluation", () => {
     f.listReviews.mockResolvedValue({ data: [review("maintainer")] });
     f.getMembership.mockResolvedValue({ data: { state: "pending" } });
     await f.run();
-    expect(f.updateCheck).toHaveBeenLastCalledWith(
-      expect.objectContaining({ conclusion: "failure" }),
-    );
+    expect(f.createStatus).toHaveBeenLastCalledWith(expect.objectContaining({ state: "failure" }));
   });
 
   it("requires maintainer approval for an engineering deletion, including on refresh", async () => {
@@ -374,11 +386,11 @@ describe("trusted ownership evaluation", () => {
     f.listFiles.mockResolvedValue({ data: [{ filename: "eng/tool.ts", status: "removed" }] });
     f.listReviews.mockResolvedValue({ data: [review("client-owner")] });
     await f.run();
-    expect(f.updateCheck.mock.calls.at(-1)?.[0].conclusion).toBe("failure");
-    expect(f.updateCheck.mock.calls.at(-1)?.[0].output?.summary).toContain("eng/tool.ts");
+    expect(f.createStatus.mock.calls.at(-1)?.[0].state).toBe("failure");
+    expect(f.core.summary.addRaw).toHaveBeenCalledWith(expect.stringContaining("eng/tool.ts"));
     f.listReviews.mockResolvedValue({ data: [review("maintainer")] });
     await f.run();
-    expect(f.updateCheck.mock.calls.at(-1)?.[0].conclusion).toBe("success");
+    expect(f.createStatus.mock.calls.at(-1)?.[0].state).toBe("success");
   });
 
   it("fails explicitly when the app cannot resolve a configured team", async () => {
@@ -386,10 +398,11 @@ describe("trusted ownership evaluation", () => {
     f.getTeam.mockRejectedValue(createMockRequestError(404));
     await expect(f.run()).rejects.toThrow("404");
     expect(f.getMembership).not.toHaveBeenCalled();
-    expect(f.updateCheck.mock.calls.at(-1)?.[0].conclusion).toBe("failure");
-    expect(f.updateCheck.mock.calls.at(-1)?.[0].output?.title).toBe(
+    expect(f.createStatus.mock.calls.at(-1)?.[0].state).toBe("error");
+    expect(f.createStatus.mock.calls.at(-1)?.[0].description).toBe(
       "Unable to evaluate ownership approval",
     );
+    expect(f.core.summary.addRaw).toHaveBeenCalledWith(expect.stringContaining("404"));
   });
 
   it("fails explicitly rather than approving when membership lookup is forbidden", async () => {
@@ -397,9 +410,7 @@ describe("trusted ownership evaluation", () => {
     f.getMembership.mockRejectedValue(createMockRequestError(403));
     await expect(f.run()).rejects.toThrow("403");
     expect(f.core.error).toHaveBeenCalled();
-    expect(f.updateCheck).toHaveBeenLastCalledWith(
-      expect.objectContaining({ conclusion: "failure" }),
-    );
+    expect(f.createStatus).toHaveBeenLastCalledWith(expect.objectContaining({ state: "error" }));
   });
 
   it("rejects an incomplete changed-file list rather than approving the visible subset", async () => {
@@ -407,9 +418,7 @@ describe("trusted ownership evaluation", () => {
     f.pr.changed_files = 2;
     await expect(f.run()).rejects.toThrow("incomplete changed-file list");
     expect(f.permission).not.toHaveBeenCalled();
-    expect(f.updateCheck).toHaveBeenLastCalledWith(
-      expect.objectContaining({ conclusion: "failure" }),
-    );
+    expect(f.createStatus).toHaveBeenLastCalledWith(expect.objectContaining({ state: "error" }));
   });
 
   it("does not publish stale success when a review is dismissed during evaluation", async () => {
@@ -418,9 +427,7 @@ describe("trusted ownership evaluation", () => {
       .mockResolvedValueOnce({ data: [review("storage-owner")] })
       .mockResolvedValueOnce({ data: [review("storage-owner", 2, "DISMISSED")] });
     await expect(f.run()).rejects.toThrow("PR or reviews changed");
-    expect(f.updateCheck).toHaveBeenLastCalledWith(
-      expect.objectContaining({ conclusion: "failure" }),
-    );
+    expect(f.createStatus).toHaveBeenLastCalledWith(expect.objectContaining({ state: "error" }));
   });
 
   it.each(["head", "base"] as const)(
@@ -431,9 +438,7 @@ describe("trusted ownership evaluation", () => {
         data: { ...f.pr, [changed]: { ...f.pr[changed], sha: "c".repeat(40) } },
       });
       await expect(f.run()).rejects.toThrow("PR or reviews changed");
-      expect(f.updateCheck).toHaveBeenLastCalledWith(
-        expect.objectContaining({ conclusion: "failure" }),
-      );
+      expect(f.createStatus).toHaveBeenLastCalledWith(expect.objectContaining({ state: "error" }));
     },
   );
 
@@ -443,10 +448,10 @@ describe("trusted ownership evaluation", () => {
     await expect(f.run()).rejects.toThrow("Multiple open PRs share this head and base");
   });
 
-  it("does not write checks for closed PRs", async () => {
+  it("does not write statuses for closed PRs", async () => {
     const f = setup();
     f.pr.state = "closed";
     await f.run();
-    expect(f.createCheck).not.toHaveBeenCalled();
+    expect(f.createStatus).not.toHaveBeenCalled();
   });
 });

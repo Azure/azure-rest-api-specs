@@ -40,38 +40,41 @@ jobs:
   authorize:
     needs: resolve
     if: needs.resolve.outputs.pr != 'null'
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-24.04
+    environment: AzureSDKEngKeyVault
     timeout-minutes: 10
     concurrency:
       group: ownership-approval-${{ needs.resolve.outputs.pr }}
       cancel-in-progress: false
     permissions:
       contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           ref: ${{ github.event.repository.default_branch }}
-          sparse-checkout: .github
+          sparse-checkout: |
+            .github
+            eng/common
       - uses: ./.github/actions/install-deps-github-script
-      - name: Create ownership app token
-        id: app-token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+      - name: Authenticate to Azure Key Vault
+        uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 # v2.3.0
         with:
-          app-id: ${{ vars.OWNERSHIP_APPROVAL_APP_ID }}
-          private-key: ${{ secrets.OWNERSHIP_APPROVAL_APP_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
-          repositories: ${{ github.event.repository.name }}
-          permission-members: read
-          permission-contents: read
-          permission-pull-requests: read
-          permission-checks: write
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - name: Create Azure SDK automation token
+        uses: ./eng/common/actions/login-to-github
+        with:
+          token-owners: ${{ github.repository_owner }}
+          variable-name-prefix: OWNERSHIP_APPROVAL_TOKEN
       - name: Evaluate ownership
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           PR_NUMBER: ${{ needs.resolve.outputs.pr }}
         with:
-          github-token: ${{ steps.app-token.outputs.token }}
+          github-token: ${{ env.OWNERSHIP_APPROVAL_TOKEN }}
           script: |
             const { checkOwnershipApproval } =
               await import('${{ github.workspace }}/.github/workflows/src/ownership-approval.ts');
