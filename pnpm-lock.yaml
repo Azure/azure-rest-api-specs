@@ -747,6 +747,9 @@ importers:
       '@azure-tools/sdk-suppressions':
         specifier: workspace:*
         version: link:sdk-suppressions
+      '@azure-tools/spec-change-policies':
+        specifier: workspace:*
+        version: link:spec-change-policies
       '@azure-tools/spec-gen-sdk-runner':
         specifier: workspace:*
         version: link:spec-gen-sdk-runner
@@ -765,9 +768,6 @@ importers:
       '@azure-tools/typespec-migration-validation':
         specifier: workspace:*
         version: link:typespec-migration-validation
-      '@azure-tools/typespec-requirement':
-        specifier: workspace:*
-        version: link:typespec-requirement
       '@azure-tools/typespec-suppressions':
         specifier: workspace:*
         version: link:typespec-suppressions
@@ -900,6 +900,22 @@ importers:
         specifier: 'catalog:'
         version: 26.6.3
 
+  eng/tools/spec-change-policies:
+    dependencies:
+      '@azure-tools/specs-shared':
+        specifier: workspace:*
+        version: link:../../../.github/shared
+      '@azure-tools/suppressions':
+        specifier: workspace:*
+        version: link:../suppressions
+    devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.3
+      execa:
+        specifier: 'catalog:'
+        version: 10.0.1
+
   eng/tools/spec-gen-sdk-runner:
     dependencies:
       '@azure-tools/specs-shared':
@@ -996,22 +1012,6 @@ importers:
       '@types/yargs':
         specifier: 'catalog:'
         version: 17.0.35
-
-  eng/tools/typespec-requirement:
-    dependencies:
-      '@azure-tools/specs-shared':
-        specifier: workspace:*
-        version: link:../../../.github/shared
-      '@azure-tools/suppressions':
-        specifier: workspace:*
-        version: link:../suppressions
-    devDependencies:
-      '@types/node':
-        specifier: 'catalog:'
-        version: 26.6.3
-      execa:
-        specifier: 'catalog:'
-        version: 10.0.1
 
   eng/tools/typespec-suppressions:
     dependencies:
