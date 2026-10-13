@@ -131,6 +131,16 @@ interface VoiceAgentLiveWebSocket {
    * OpenAI POST /live/sessions WebRTC operation. Only WebSocket transport is supported here.
    * Native session.update changes delegation settings only; it cannot switch the configured
    * Foundry-managed or hosted target. Foundry owns execution and result injection for both.
+   * Managed and hosted agents retain [thinking] and [commentary] output sections; the voice agent
+   * translates validated text into native session.thinking.append and session.commentary.append commands.
+   * Permitted backend text, tool, and lifecycle events reuse response.event with the native client
+   * delegation ID in delegation_id. Dispatch on the nested event.type. Backend text retains its markers;
+   * observing it is independent of successful Live injection. Lifecycle snapshots omit input and clear
+   * instructions, tools and output; credentials and private reasoning are not forwarded.
+   * The existing managed/hosted output_item notifications and stored output arrays describe accepted
+   * Live-injection results, not original backend items. Their indices are independent of backend indices.
+   * This event forwarding does not change tool execution ownership: native response.item.create and
+   * response.create remain Responses-delegation-only commands, not managed/hosted tool-result routing.
    * Do not negotiate the realtime WebSocket subprotocol on this route.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "The successful WebSocket 101 upgrade has no HTTP entity body."

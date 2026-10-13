@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import {
   compile,
   getDiscriminator,
+  getDoc,
   getMaxItems,
   getMaxLength,
   getMaxValue,
@@ -45,6 +46,7 @@ const foundryEventModels = [
   ...managedEventKinds.map(managedModel),
   ...managedEventKinds.map(hostedModel),
 ];
+const backendEnvelopeModel = "OpenAI.LiveServerEventLiveResponseEvent";
 
 function type(name, context = program) {
   const [value, diagnostics] = context.resolveTypeReference(name);
@@ -415,6 +417,68 @@ test("session.started exposes optional Foundry correlation without replacing the
   );
 });
 
+test("managed and hosted delegation retain tagged output without a format selector", () => {
+  for (const kind of ["Managed", "Hosted"]) {
+    const config = type(
+      `Azure.AI.Projects.VoiceAgentLive${kind}AgentDelegation`,
+    );
+    const doc = getDoc(program, config);
+    for (const text of [
+      "[thinking]",
+      "[commentary]",
+      "session.thinking.append",
+      "session.commentary.append",
+      "response.event",
+    ])
+      assert.ok(doc.includes(text), `${kind}: ${text}`);
+    assert.equal(config.properties.has("result_format"), false);
+  }
+  const route = getDoc(
+    program,
+    type("Azure.AI.Projects.VoiceAgentLiveWebSocket.connectLiveVoiceAgent"),
+  );
+  assert.ok(route.includes("private reasoning are not forwarded"));
+  assert.ok(route.includes("Responses-delegation-only"));
+  for (const doc of documents) {
+    const description =
+      doc.paths["/agents/{agent_name}/endpoint/protocols/voice/live/sessions"]
+        .get.description;
+    for (const text of ["[thinking]", "[commentary]", "response.event"])
+      assert.ok(description.includes(text), text);
+  }
+});
+
+test("backend observation reuses the native response.event without a new wrapper or discriminator", () => {
+  const envelope = type(backendEnvelopeModel);
+  assert.equal(envelope.baseModel, type("OpenAI.LiveServerEvent"));
+  assert.deepEqual(
+    wireShape(envelope, program),
+    wireShape(type(backendEnvelopeModel, native), native),
+  );
+  assert.equal(envelope.properties.get("event").optional, false);
+  assert.equal(
+    envelope.properties.get("event").type.indexer.value.name,
+    "unknown",
+  );
+  // Retain native optional/null correlation compatibility. Foundry's producer
+  // supplies delegation_id for the managed/hosted events it wraps.
+  assert.equal(envelope.properties.get("delegation_id").optional, true);
+  const wrappers = type("OpenAI.LiveServerEvent").derivedModels.filter(
+    (model) => fields(model).get("type").type.value === "response.event",
+  );
+  assert.deepEqual(wrappers, [envelope]);
+  for (const model of type("Azure.AI.Projects").models.values())
+    assert.notEqual(fields(model).get("type")?.type.value, "response.event");
+  for (const command of [
+    "LiveResponseItemCreateParam",
+    "LiveResponseCreateParam",
+  ])
+    assert.deepEqual(
+      wireShape(type(`OpenAI.${command}`), program),
+      wireShape(type(`OpenAI.${command}`, native), native),
+    );
+});
+
 test("managed lifecycle notifications contain only correlation and failure details", () => {
   for (const stage of managedStages) {
     const model = type(managedModel(stage));
@@ -669,6 +733,73 @@ const hostedSamples = [...samples, ...outputSamples].map((sample) => ({
     delegation_id: `hosted_${sample.payload.delegation_id}`,
   },
 }));
+const taggedThinking = "Focus on irregular past-tense verbs.";
+const taggedCommentary = "Say: Yesterday I went to school.";
+const taggedBackendText = `[thinking]\n${taggedThinking}\n[commentary]\n${taggedCommentary}`;
+
+// Illustrative permitted backend events, not captures or a runtime forwarding
+// implementation. Native event: Record<unknown> preserves nested event shapes;
+// the compiler validates the envelope, not backend visibility or payload policy.
+const backendSamples = ["managed", "hosted"].flatMap((kind) => {
+  const response = {
+    id: `resp_${kind}_1`,
+    instructions: null,
+    tools: [],
+    output: [],
+  };
+  return [
+    {
+      type: "response.created",
+      response: { ...response, status: "in_progress" },
+    },
+    {
+      type: "response.output_item.done",
+      output_index: 0,
+      item: {
+        type: "web_search_call",
+        id: `ws_${kind}_1`,
+        status: "completed",
+        action: {
+          type: "search",
+          queries: ["beginner irregular past tense lesson"],
+        },
+      },
+    },
+    {
+      type: "response.output_text.delta",
+      item_id: `msg_${kind}_1`,
+      output_index: 1,
+      content_index: 0,
+      delta: taggedBackendText,
+      logprobs: [],
+    },
+    {
+      type: "response.output_item.done",
+      output_index: 1,
+      item: {
+        type: "message",
+        id: `msg_${kind}_1`,
+        role: "assistant",
+        status: "completed",
+        content: [
+          { type: "output_text", text: taggedBackendText, annotations: [] },
+        ],
+      },
+    },
+    {
+      type: "response.completed",
+      response: { ...response, status: "completed" },
+    },
+  ].map((event, index) => ({
+    model: backendEnvelopeModel,
+    payload: {
+      type: "response.event",
+      event_id: `evt_backend_${kind}_${index}`,
+      delegation_id: `del_${kind}_1`,
+      event: { ...event, sequence_number: index },
+    },
+  }));
+});
 const sessionStarted = {
   type: "session.started",
   event_id: "evt_started",
@@ -728,6 +859,119 @@ async function validateExamples(name, examples) {
   );
   return compile(NodeHost, path, { ...compilerOptions, noEmit: true });
 }
+
+test("managed and hosted backend text, tool and lifecycle samples use the native envelope", async () => {
+  checkErrors(
+    (await validateExamples("foundry-backend-events", backendSamples))
+      .diagnostics,
+  );
+  assert.equal(
+    new Set(backendSamples.map((s) => s.payload.event_id)).size,
+    backendSamples.length,
+  );
+  for (const { payload } of backendSamples) {
+    assert.ok(payload.delegation_id);
+    assert.equal(payload.type, "response.event");
+    assert.equal("output_index" in payload, false);
+    const event = payload.event;
+    if (event.type === "response.output_text.delta")
+      assert.equal(event.delta, taggedBackendText);
+    if (event.response) {
+      assert.equal("input" in event.response, false);
+      assert.equal(event.response.instructions, null);
+      assert.deepEqual(event.response.tools, []);
+      assert.deepEqual(event.response.output, []);
+    }
+  }
+});
+
+test("backend observations and accepted Live injections have distinct payloads and indices", async () => {
+  const examples = [];
+  for (const kind of ["managed", "hosted"]) {
+    const source = backendSamples.find(
+      (s) =>
+        s.payload.delegation_id === `del_${kind}_1` &&
+        s.payload.event.type === "response.output_item.done" &&
+        s.payload.event.item.type === "message",
+    );
+    assert.equal(source.payload.event.output_index, 1);
+    assert.equal(source.payload.event.item.content[0].text, taggedBackendText);
+    const projected = {
+      model:
+        kind === "managed"
+          ? managedModel("output_item")
+          : hostedModel("output_item"),
+      payload: {
+        type: `session.${kind}_agent_delegation.output_item`,
+        event_id: `evt_injected_${kind}_1`,
+        delegation_id: source.payload.delegation_id,
+        output_index: 0,
+        item: { thinking: taggedThinking, commentary: taggedCommentary },
+      },
+    };
+    examples.push(projected);
+    for (const [channel, content] of Object.entries(projected.payload.item)) {
+      assert.ok(!content.includes(`[${channel}]`));
+      examples.push({
+        model: `OpenAI.LiveClientEventLive${channel === "thinking" ? "Thinking" : "Commentary"}AppendParam`,
+        payload: {
+          type: `session.${channel}.append`,
+          event_id: `evt_append_${kind}_${channel}`,
+          delegation_id: source.payload.delegation_id,
+          content,
+        },
+      });
+    }
+  }
+  checkErrors(
+    (await validateExamples("tagged-output-and-live-injection", examples))
+      .diagnostics,
+  );
+});
+
+test("backend observation envelopes reject malformed outer fields", async (t) => {
+  for (const [name, mutate] of [
+    [
+      "missing event",
+      (p) => {
+        delete p.event;
+      },
+    ],
+    [
+      "missing event ID",
+      (p) => {
+        delete p.event_id;
+      },
+    ],
+    [
+      "non-object event",
+      (p) => {
+        p.event = "backend text";
+      },
+    ],
+    [
+      "invalid correlation",
+      (p) => {
+        p.delegation_id = 42;
+      },
+    ],
+    [
+      "invented wrapper",
+      (p) => {
+        p.type = "session.managed_agent_delegation.event";
+      },
+    ],
+  ]) {
+    await t.test(name, async () => {
+      const sample = structuredClone(backendSamples[0]);
+      mutate(sample.payload);
+      checkInvalidExample(
+        (await validateExamples(`invalid-backend-envelope-${name}`, [sample]))
+          .diagnostics,
+      );
+    });
+  }
+});
 
 test("managed configuration needs no format selector and rejects the removed field", async () => {
   const model = "Azure.AI.Projects.VoiceAgentLiveManagedAgentDelegation";
@@ -1113,6 +1357,13 @@ test("SDK metadata exports native events and separate Live persistence discrimin
     assert.ok(value, `SDK metadata missing ${name}`);
     return value;
   };
+  const backend = model("LiveServerEventLiveResponseEvent");
+  assert.equal(backend.baseModel, model("LiveServerEvent"));
+  assert.equal(backend.discriminatorValue, "response.event");
+  assert.equal(
+    backend.properties.find((p) => p.serializedName === "event").type.kind,
+    "dict",
+  );
   for (const value of context.sdkPackage.models) {
     if (value.__raw?.name?.startsWith("VoiceAgentLive"))
       assert.ok(
@@ -1388,6 +1639,11 @@ test("Java SDK customization targets Realtime fields and keeps Live events witho
   for (const name of ["LiveClientEvent", "LiveServerEvent"]) {
     assert.equal(model(name).access, "public");
   }
+  assert.equal(model("LiveServerEventLiveResponseEvent").access, "public");
+  assert.equal(
+    model("LiveServerEventLiveResponseEvent").discriminatorValue,
+    "response.event",
+  );
   for (const name of foundryEventModels) {
     const event = model(name.split(".").at(-1));
     assert.equal(event.baseModel, model("LiveServerEvent"));

@@ -782,7 +782,23 @@ model VoiceAgentWebSocketUpgradeResponse {
 /** The native OpenAI Live client-event hierarchy. Foundry owns session.start; clients wait for session.started before sending the other supported native commands. */
 alias VoiceAgentLiveClientEvent = OpenAI.LiveClientEvent;
 
-/** OpenAI Live server events plus Foundry conversation correlation and managed/hosted-delegation diagnostics. */
+/**
+ * OpenAI Live server events plus Foundry conversation correlation and managed/hosted-delegation diagnostics.
+ *
+ * Managed and hosted backend streams reuse OpenAI.LiveServerEventLiveResponseEvent (type response.event);
+ * there is no separate Foundry backend-event wrapper. Foundry-generated envelopes carry the native
+ * client delegation ID in delegation_id and a unique outer event_id. The nested event retains its
+ * backend event type, item/call/response IDs and sequence_number; dispatch on event.type.
+ * Forward only permitted public text, tool and lifecycle events, never credentials or private reasoning.
+ * Preserve the native lifecycle snapshot minimization: omit input and clear instructions, tools and output.
+ *
+ * Forwarded assistant text retains its [thinking] and [commentary] section markers. Independently,
+ * the voice agent validates completed output items and translates the sections into native
+ * session.thinking.append and session.commentary.append commands. Observing backend output or
+ * response.completed does not confirm Live injection, speech or playback. The existing managed/hosted
+ * lifecycle and output_item notifications describe Foundry orchestration and accepted Live injections.
+ * A forwarded tool event does not grant permission to execute that tool or add client tool-result routing.
+ */
 alias VoiceAgentLiveServerEvent = OpenAI.LiveServerEvent;
 
 // WebSocket frames are not HTTP request/response bodies. Mark their native roots
@@ -878,14 +894,14 @@ model VoiceAgentLiveManagedDelegationCancelEvent
   ...VoiceAgentLiveManagedDelegationEventCorrelation;
 }
 
-@doc("One new validated result item has been accepted by Live for a managed delegation. Results stream in zero-based output_index order within each delegation and may interleave across delegations. Each event carries only the new item, not a cumulative snapshot; an index identifies the same entry in the stored delegation's output array. It does not guarantee speech or client playback and can be emitted when persistence is disabled.")
+@doc("One new validated result item has been accepted by Live for a managed delegation after translating tagged assistant output into native append commands. This is distinct from a backend response.output_item.done observed inside response.event. Results stream in zero-based output_index order within each delegation and may interleave across delegations. Each event carries only the new item, not a cumulative snapshot; an index identifies the same entry in the stored delegation's output array. It does not guarantee speech or client playback and can be emitted when persistence is disabled.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveManagedDelegationOutputItemEvent
   extends OpenAI.LiveServerEvent {
   type: "session.managed_agent_delegation.output_item";
   ...VoiceAgentLiveManagedDelegationEventCorrelation;
 
-  @doc("The zero-based position of this result in the delegation's output array. Scoped to delegation_id, not to the whole Live session.")
+  @doc("The zero-based position of this accepted result in the delegation's output array. Scoped to delegation_id, not to the whole Live session, and independent of backend output_index values inside response.event.")
   @minValue(0)
   output_index: int32;
 
@@ -931,7 +947,7 @@ model VoiceAgentLiveHostedDelegationCancelEvent extends OpenAI.LiveServerEvent {
   ...OmitProperties<VoiceAgentLiveManagedDelegationCancelEvent, "type">;
 }
 
-@doc("One new validated result item has been accepted by Live for a hosted delegation. Results stream in zero-based output_index order within each delegation and may interleave across delegations. Each event carries only the new item, not a cumulative snapshot; an index identifies the same entry in the stored delegation's output array. It does not guarantee speech or client playback and can be emitted when persistence is disabled.")
+@doc("One new validated result item has been accepted by Live for a hosted delegation after translating tagged assistant output into native append commands. This is distinct from a backend response.output_item.done observed inside response.event. Results stream in zero-based output_index order within each delegation and may interleave across delegations. Each event carries only the new item, not a cumulative snapshot; an index identifies the same entry in the stored delegation's output array. It does not guarantee speech or client playback and can be emitted when persistence is disabled.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveHostedDelegationOutputItemEvent
   extends OpenAI.LiveServerEvent {

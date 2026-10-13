@@ -154,7 +154,7 @@ model VoiceResponse extends VoiceResponseBase {
 // Live delegation results and persisted conversation items
 // ---------------------------------------------------------------------------
 
-@doc("One result returned to Live for a delegation. Commentary is speakable guidance; thinking is background context, not private model reasoning. Each managed or hosted output_item event carries one new result, not cumulative text. These results do not represent spoken transcripts or playback completion.")
+@doc("One result returned to Live for a delegation. For managed and hosted agents, this contains validated text extracted from [commentary] and [thinking] sections, without the markers. The voice agent translates it into native session.commentary.append and session.thinking.append commands. Permitted original backend events, including tagged assistant text and tool events, are observed separately through response.event. Each managed or hosted output_item event carries one new accepted result, not cumulative text. These results are not private model reasoning, spoken transcripts, or playback confirmation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveDelegationResultItem {
   @doc("Optional guidance for Live to communicate to the user.")
@@ -301,7 +301,7 @@ alias VoiceAgentLiveFoundryAgentDelegationFields = {
   @doc("The backend agent's conversation ID, when available. Distinct from the stored voice conversation ID and the native Live session ID.")
   backend_conversation_id?: string;
 
-  @doc("The ordered accepted results. Empty before the first result. Each session.managed_agent_delegation.output_item or session.hosted_agent_delegation.output_item event contributes one item at its zero-based output_index; earlier entries are not replaced by cumulative text. Partial results remain available after failure or cancellation.")
+  @doc("The ordered accepted Live-injection results, not original backend output items or tool results. Empty before the first result. Each session.managed_agent_delegation.output_item or session.hosted_agent_delegation.output_item event contributes one item at its zero-based output_index; earlier entries are not replaced by cumulative text. These indices are independent of backend output_index values inside response.event. Partial results remain available after failure or cancellation.")
   output: VoiceAgentLiveDelegationResultItem[];
 
   @doc("Plain-text task context supplied to the target agent, when available. This is not the backend request body.")

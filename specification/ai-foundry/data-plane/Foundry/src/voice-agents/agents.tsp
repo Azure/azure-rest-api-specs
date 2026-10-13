@@ -241,7 +241,11 @@ union VoiceAgentLiveDelegation {
 @doc("""
   A same-project prompt agent executed by Foundry on behalf of the Live frontend. Foundry resolves
   and pins the target version once per voice connection, configures native client delegation upstream,
-  and injects the target's validated output using native commentary/thinking messages.
+  and requires assistant output with [thinking] and/or [commentary] section markers. The voice agent
+  validates completed output items, removes the markers, and translates their text into
+  session.thinking.append and session.commentary.append commands for the native client delegation.
+  Permitted backend text, tool, and lifecycle events are forwarded to the caller through the existing
+  response.event envelope, independently of Live injection. No result-format selector is required.
   This is agent configuration, not an additional OpenAI inference-event variant.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -261,7 +265,11 @@ model VoiceAgentLiveManagedAgentDelegation {
 @doc("""
   A same-project hosted agent executed by Foundry on behalf of the Live frontend. Foundry resolves
   and pins the target version once per voice connection, configures native client delegation upstream,
-  and injects the target's validated output using native commentary/thinking messages.
+  and requires assistant output with [thinking] and/or [commentary] section markers. The voice agent
+  validates completed output items, removes the markers, and translates their text into
+  session.thinking.append and session.commentary.append commands for the native client delegation.
+  Permitted backend text, tool, and lifecycle events are forwarded to the caller through the existing
+  response.event envelope, independently of Live injection. No result-format selector is required.
   Hosted delegation uses the same lifecycle and result payloads as managed prompt-agent delegation,
   with session.hosted_agent_delegation event types. This is agent configuration, not an additional
   OpenAI inference-event variant.
