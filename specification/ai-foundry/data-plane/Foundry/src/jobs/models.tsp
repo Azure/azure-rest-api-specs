@@ -185,19 +185,19 @@ model Output {
   mode?: OutputDeliveryMode;
 
   @doc("Name of the output data asset to register.")
-  assetName?: string;
+  assetName?: string | null;
 
   @doc("Version of the output data asset to register.")
-  assetVersion?: string;
+  assetVersion?: string | null;
 
   @doc("Optional output destination URI. When omitted on submission, the runtime can materialize the output in job storage; a subsequent resource read can include the resolved URI.")
-  uri?: string;
+  uri?: string | null;
 
   @doc("Base model ID.")
-  baseModelId?: string;
+  baseModelId?: string | null;
 
   @doc("Description for the output.")
-  description?: string;
+  description?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
@@ -217,28 +217,28 @@ model AllNodes extends NodeCollection {
 @doc("Job endpoint definition.")
 model JobService {
   @doc("Endpoint type.")
-  jobServiceType?: string;
+  jobServiceType?: string | null;
 
   @doc("Port for endpoint.")
-  port?: int32;
+  port?: int32 | null;
 
   @doc("Service-resolved endpoint URI, when available. The caller requests a service using its type, port, properties and nodes; it does not select the endpoint URI. Resource reads can include runtime-resolved endpoints and server-generated Tracking/Studio helper services.")
   @visibility(Lifecycle.Read)
-  endpoint?: string;
+  endpoint?: string | null;
 
   @doc("Additional properties to set on the endpoint.")
-  properties?: Record<string>;
+  properties?: Record<string> | null;
 
   @doc("Nodes that user would like to start the service on.")
-  nodes?: AllNodes;
+  nodes?: AllNodes | null;
 
   @doc("Status of endpoint.")
   @visibility(Lifecycle.Read)
-  status?: string;
+  status?: string | null;
 
   @doc("Any error in the service.")
   @visibility(Lifecycle.Read)
-  errorMessage?: string;
+  errorMessage?: string | null;
 }
 
 @doc("Submitted compute configuration. The service persists the requested settings and resource reads return that persisted configuration, not a resolved-allocation receipt. Runtime VM/SKU and node-count resolution is separate and can differ from the request. Same-name PUTs must preserve submitted configuration; omit unchanged optional configuration when updating metadata. Omit server-owned response fields when constructing a PUT from a GET.")
@@ -247,21 +247,21 @@ model JobResourceConfiguration {
   instanceCount?: int32;
 
   @doc("Requested VM type, as supported by the compute target. Virtual cluster targets require an explicit instance type when gpuCount is supplied. The service can select a different partial GPU SKU for execution; that resolved SKU does not replace this persisted request field.")
-  instanceType?: string;
+  instanceType?: string | null;
 
-  @doc("Requested total GPU count, serialized only as resources.gpuCount. Valid values are 1, 2, 4, 8, or multiples of 8 greater than 8; other values are rejected with 400. The value maps to the persisted compute allocation request and is returned at the same location by resource reads. It can determine the execution SKU and node count instead of resources.instanceCount. CPU compute targets ignore the count for placement while retaining the submitted configuration. Virtual cluster targets also require resources.instanceType. This is immutable submitted configuration, not the resolved runtime GPU allocation. There is no top-level gpuCount or capacityUnitCount alias.")
+  @doc("Requested total GPU count, serialized only as resources.gpuCount. Omitted or null means no GPU-count request. Non-null valid values are 1, 2, 4, 8, or multiples of 8 greater than 8; other non-null values are rejected with 400. The value maps to the persisted compute allocation request and is returned at the same location by resource reads. It can determine the execution SKU and node count instead of resources.instanceCount. CPU compute targets ignore the count for placement while retaining the submitted configuration. Virtual cluster targets also require resources.instanceType. This is immutable submitted configuration, not the resolved runtime GPU allocation. There is no top-level gpuCount or capacityUnitCount alias.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @minValue(1)
-  gpuCount?: int32;
+  gpuCount?: int32 | null;
 
   @doc("Additional properties bag.")
-  properties?: Record<unknown>;
+  properties?: Record<unknown> | null;
 
   @doc("Size of the docker container's shared memory block.")
   shmSize?: string;
 
   @doc("Extra arguments to pass to the Docker run command.")
-  dockerArgs?: string;
+  dockerArgs?: string | null;
 }
 
 @doc("Command Job limit class.")
@@ -413,7 +413,7 @@ model JobProperties {
   jobType: string;
 }
 
-@doc("A command job's submitted configuration and metadata. Creation-only fields are pinned on the first persisted submission and cannot be changed by a same-name PUT. After submission is tracked, display name, description, tags and additive user properties can change while the job is running or terminal; such changes do not restart execution.")
+@doc("A command job's submitted configuration and metadata. Creation-only fields are pinned on the first persisted submission and cannot be changed by a same-name PUT. After submission is tracked, display name, description, tags and additive user properties can change while the job is running or terminal; such changes do not restart execution. The existing public projection returns explicit null for some unset optional fields, as modeled below. Required command, environment and compute fields remain non-null. A null metadata value is not a request to clear it.")
 model CommandJob extends JobProperties {
   @doc("Job type.")
   jobType: "Command";
@@ -426,30 +426,30 @@ model CommandJob extends JobProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   environmentImageReference: string;
 
-  @doc("Mutable display name. Omission preserves the current value on update; an empty string clears it. Can be updated on tracked running or terminal jobs without restarting execution.")
+  @doc("Mutable display name. Omission or null preserves the current value on update; an empty string clears it. Can be updated on tracked running or terminal jobs without restarting execution. Resource reads can return null when unset.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  displayName?: string;
+  displayName?: string | null;
 
-  @doc("Mutable job description. Omission preserves the current value on update; an empty string clears it.")
+  @doc("Mutable job description. Omission or null preserves the current value on update; an empty string clears it. Resource reads can return null when unset.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  description?: string;
+  description?: string | null;
 
   @doc("The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment. This assignment is immutable after the initial submission.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   experimentName?: string;
 
-  @doc("Mutable tags. A supplied map replaces the entire stored map; omitted tags remain unchanged and an empty map clears all tags. Tags can be changed on tracked running or terminal jobs without restarting execution.")
+  @doc("Mutable tags. A supplied map replaces the entire stored map; omitted or null tags remain unchanged and an empty map clears all tags. Tags can be changed on tracked running or terminal jobs without restarting execution. Resource reads can return null when unset.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  tags?: Record<string>;
+  tags?: Record<string> | null;
 
-  @doc("Additive user properties. Updates may add new keys or repeat existing values, but changing an existing value is rejected with 400. Existing keys omitted from an update are preserved; an empty map does not clear them.")
+  @doc("Additive user properties. Updates may add new keys or repeat existing values, but changing an existing value is rejected with 400. Omission or null preserves existing properties; an empty map does not clear them. Resource reads can return null when unset.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  properties?: Record<string>;
+  properties?: Record<string> | null;
 
   @doc("Code asset reference.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @encodedName("application/json", "codeId")
-  code?: string;
+  code?: string | null;
 
   @doc("Compute resource ID.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -458,15 +458,15 @@ model CommandJob extends JobProperties {
 
   @doc("Mapping of input data bindings used in the job.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  inputs?: Record<Input>;
+  inputs?: Record<Input> | null;
 
   @doc("Mapping of output data bindings used in the job.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  outputs?: Record<Output>;
+  outputs?: Record<Output> | null;
 
   @doc("Environment variables included in the job.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  environmentVariables?: Record<string>;
+  environmentVariables?: Record<string> | null;
 
   @doc("Submitted compute configuration. GPU allocation is specified only by resources.gpuCount. GET returns the persisted request settings, not a guarantee of the runtime-resolved SKU or node count. Preserve submitted settings on same-name replay or omit unchanged optional configuration on a tracked metadata update.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -474,28 +474,30 @@ model CommandJob extends JobProperties {
 
   @doc("Distribution configuration of the job.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  distribution?: DistributionConfiguration;
+  distribution?: DistributionConfiguration | null;
 
   @doc("Command Job limit.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  limits?: CommandJobLimits;
+  limits?: CommandJobLimits | null;
 
   @doc("List of job services.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  services?: Record<JobService>;
+  services?: Record<JobService> | null;
 
-  @doc("Queue settings for the job.")
+  @doc("Creation-time queue configuration, not mutable job metadata. A tracked same-name PUT does not provide a queue-setting or priority update.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   queueSettings?: QueueSettings;
 
   @doc("User-visible scheduling priority for the job.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  priority?: JobPriority;
+  priority?: JobPriority | null;
 
   @doc("user-assigned managed identity")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  userAssignedIdentityId?: string;
+  userAssignedIdentityId?: string | null;
 
-  @doc("Is the asset archived?")
+  @doc("Read-only legacy compatibility flag. Foundry Training Jobs are not archived and this flag is false; this API does not support archiving or resetting the archive flag by PUT. Use delete for soft-deletion.")
+  @visibility(Lifecycle.Read)
   isArchived?: boolean;
 
   @doc("Execution state, not the status of an API request. A job returned with HTTP 200 can be Failed or Canceled. Only Completed, Failed, and Canceled are terminal; other or unrecognized values must not be treated as successful completion. Runtime-dependent stages may be skipped. Cancellation can race with Completed or Failed and does not guarantee Canceled. For Failed, inspect error when available, then use the artifact operations to retrieve log files. Absence of an error does not imply execution success.")
@@ -531,17 +533,17 @@ model Job {
   systemData?: SystemData;
 }
 
-@doc("Specifies which jobs to include in a list result based on their lifecycle state.")
+@doc("Legacy-compatible archive view selector. Foundry Training Jobs do not support archiving. ActiveOnly and All select the same non-deleted training jobs; ArchivedOnly returns an empty page after the service validates the other query options. This is not an execution-status filter or an archive mutation capability.")
 union ListViewType {
   string,
 
-  @doc("Show only active (non-archived) jobs.")
+  @doc("Show non-deleted training jobs. This is the default and has the same FTJ result set as All.")
   ActiveOnly: "ActiveOnly",
 
-  @doc("Show only archived jobs.")
+  @doc("Return an empty page because training jobs are never archived. Other query options are still validated.")
   ArchivedOnly: "ArchivedOnly",
 
-  @doc("Show all jobs regardless of archived state.")
+  @doc("Show non-deleted training jobs, the same FTJ result set as ActiveOnly.")
   All: "All",
 }
 
