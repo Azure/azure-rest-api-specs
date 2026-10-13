@@ -9,15 +9,6 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects.Beta;
 
-interface Jobs {}
-@@clientLocation(Azure.AI.Projects.Jobs.list, Jobs);
-@@clientLocation(Azure.AI.Projects.Jobs.get, Jobs);
-@@clientLocation(Azure.AI.Projects.Jobs.createOrUpdate, Jobs);
-@@clientLocation(Azure.AI.Projects.Jobs.delete, Jobs);
-@@clientLocation(Azure.AI.Projects.Jobs.cancel, Jobs);
-@@clientLocation(Azure.AI.Projects.Jobs.listArtifacts, Jobs);
-@@clientLocation(Azure.AI.Projects.Jobs.getArtifactContentInformation, Jobs);
-
 interface Models {}
 @@clientLocation(Azure.AI.Projects.Models.listVersions, Models);
 @@clientLocation(Azure.AI.Projects.Models.listLatest, Models);
