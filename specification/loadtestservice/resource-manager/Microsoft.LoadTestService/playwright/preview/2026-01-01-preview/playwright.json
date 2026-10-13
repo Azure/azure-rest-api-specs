@@ -752,6 +752,61 @@
         ]
       }
     },
+    "LinkedKeyVaultPropertiesUpdate": {
+      "type": "object",
+      "description": "Linked Key Vault properties that can be updated.",
+      "properties": {
+        "vaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the linked Key Vault."
+        },
+        "vaultIdentity": {
+          "$ref": "#/definitions/ManagedIdentityPropertiesUpdate",
+          "description": "The identity used to access the linked Key Vault.",
+          "x-ms-client-name": "vaultIdentityUpdate"
+        }
+      }
+    },
+    "ManagedIdentityPropertiesUpdate": {
+      "type": "object",
+      "description": "Managed identity properties that can be updated.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityType",
+          "description": "The type of the managed identity."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned managed identity."
+        }
+      }
+    },
+    "ManagedIdentityType": {
+      "type": "string",
+      "description": "The type of the managed identity.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System-assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identity."
+          }
+        ]
+      }
+    },
     "PlaywrightQuota": {
       "type": "object",
       "description": "Subscription-level location-based Playwright quota resource.",
@@ -1054,6 +1109,11 @@
           "type": "string",
           "format": "uri",
           "description": "The URI of the Azure storage account used to store workspace artifacts, test results, and reports."
+        },
+        "linkedKeyVault": {
+          "$ref": "#/definitions/LinkedKeyVaultPropertiesUpdate",
+          "description": "The linked Key Vault configuration for the workspace.",
+          "x-ms-client-name": "linkedKeyVaultUpdate"
         }
       }
     },
