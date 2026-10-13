@@ -3,14 +3,35 @@
 
 ## Configuration
 
-```yaml $(tag) == 'package-2022-12-01'
+### Basic Information
+
+``` yaml
+openapi-type: arm
+tag: package-2024-01-01
+package-version: 1.0.0b1
+```
+
+### Tag: package-2024-01-01
+
+``` yaml $(tag) == 'package-2024-01-01'
 input-file:
-  - Microsoft.CredValidation/stable/2022-12-01/credvalidation.json
+  - Microsoft.Test/stable/2026-10-12/test.json
+```
+
+## Python
+
+``` yaml $(python)
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  package-name: credvalidation-v5
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/credvalidation/azure-mgmt-credvalidation
 ```
 
 ## swagger-to-sdk
 
-```yaml $(swagger-to-sdk)
+``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
