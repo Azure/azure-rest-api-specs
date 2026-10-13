@@ -53,18 +53,42 @@ union ServerProtectionSettingsName {
 }
 
 /** Settings that control protection against deletion of a managed instance. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This always-existing settings resource has no provisioningState property; asynchronous update status is reported through the polling headers."
 @added(Versions.v2026_11_01_preview)
 model ServerProtectionSettingsProperties {
+  /**
+   * The state of the latest retained protection settings update for the current
+   * managed instance. Updating indicates an operation in progress; Succeeded,
+   * Failed, and Canceled are terminal states. If no operation history is retained,
+   * GET and LIST return Succeeded with the persisted setting. In that case,
+   * Succeeded describes the persisted setting, not the outcome of a past update;
+   * historical failure or cancellation states are not preserved after the
+   * corresponding operation history is removed.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ServerProtectionSettingsProvisioningState;
+
   /**
    * Whether to block deletion of the managed instance while any live user database
    * exists or any dropped user database has immutable point-in-time restore backups
    * within retention. Supported request values
    * are enabled and disabled, compared case-insensitively. Setting enabled is an
    * irreversible opt-in. Setting disabled before opt-in is a no-op; changing from
-   * enabled to disabled is rejected.
+   * enabled to disabled is rejected. While provisioningState is Updating,
+   * responses show the accepted requested value, which does not confirm that
+   * protection is effective. In terminal states, GET and LIST show the effective
+   * persisted setting, including when no operation history is retained. A Failed
+   * or Canceled update does not imply that protection is disabled.
    */
   blockDropWhenImmutablePitrBackupInRetention: BlockDropWhenImmutablePitrBackupInRetention;
+}
+
+/** The state of the latest retained protection settings update, or Succeeded for the persisted setting when no operation history is retained. */
+@added(Versions.v2026_11_01_preview)
+union ServerProtectionSettingsProvisioningState {
+  ResourceProvisioningState,
+
+  /** The settings update is in progress. */
+  Updating: "Updating",
 }
 
 /**
@@ -76,8 +100,10 @@ union BlockDropWhenImmutablePitrBackupInRetention {
   string,
 
   /**
-   * Protection is permanently enabled. Instance deletion is blocked while a live
-   * user database exists or a dropped user database has immutable PITR backups in retention.
+   * Permanent protection is requested. Once applied, instance deletion is blocked
+   * while a live user database exists or a dropped user database has immutable PITR
+   * backups in retention. While provisioningState is Updating, the requested
+   * protection is not yet confirmed effective.
    */
   Enabled: "enabled",
 
@@ -89,29 +115,15 @@ union BlockDropWhenImmutablePitrBackupInRetention {
 }
 
 /**
- * Information returned when a managed instance protection settings update is
- * accepted.
+ * The protection settings update was accepted or has completed. The resource
+ * contains its provisioning state; use the polling headers while the update is
+ * in progress and the Location header to retrieve the final resource result.
  */
 @added(Versions.v2026_11_01_preview)
-model ServerProtectionSettingsOperation {
-  /** The name of the accepted operation. */
-  operation: string;
-
-  /** The UTC time when the operation started. */
-  startTime: utcDateTime;
-}
-
-/**
- * The update was accepted; use the polling headers to track completion and
- * retrieve the result.
- */
-@added(Versions.v2026_11_01_preview)
-model ServerProtectionSettingsAcceptedResult
-  is ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServerProtectionSettings> &
-    Azure.Core.Foundations.RetryAfterHeader> {
-  /** Information about the accepted update, not the final resource state. */
-  @bodyRoot
-  body: ServerProtectionSettingsOperation;
+model ServerProtectionSettingsUpdateResult
+  is ArmResponse<ServerProtectionSettings> {
+  ...ArmCombinedLroHeaders<FinalResult = ServerProtectionSettings>;
+  ...Azure.Core.Foundations.RetryAfterHeader;
 }
 
 /** Read, list, and update the default protection settings of a managed instance. */
@@ -131,15 +143,16 @@ interface ManagedInstanceServerProtectionSettings {
    */
   listByManagedInstance is ArmResourceListByParent<ServerProtectionSettings>;
 
-  /** Updates managed instance server protection setting. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The singleton settings always exist: PUT returns 200 when complete or 202 when accepted, never 201."
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The service returns operation and startTime in the 202 response; retain this acceptance payload rather than documenting an empty body."
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The service returns the resource on completion (200) and operation metadata on acceptance (202); these are intentionally different successful response bodies."
+  /**
+   * Updates managed instance server protection setting. A successful request
+   * returns HTTP 200 with the resource. While the update is in progress,
+   * provisioningState is Updating; use the polling headers to track completion
+   * and retrieve the final resource result from the Location URL.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The singleton settings always exist with the managed instance, so PUT updates an existing resource and returns 200, never 201."
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerProtectionSettings,
-    Response =
-      | ArmResourceUpdatedResponse<ServerProtectionSettings>
-      | ServerProtectionSettingsAcceptedResult
+    Response = ServerProtectionSettingsUpdateResult
   >;
 }
 

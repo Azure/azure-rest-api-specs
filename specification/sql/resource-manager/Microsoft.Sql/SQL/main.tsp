@@ -317,7 +317,7 @@ enum Features {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedInstances,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy output-splitting enum values have no descriptions to avoid regenerating metadata for all existing members; the feature description is supplied below."
+  /** Read, list, and update the singleton managed instance protection settings. */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The project uses legacy-feature-files output splitting; preserve the requested server protection settings specification filename."
   @Azure.ResourceManager.Legacy.featureOptions(#{
     featureName: "ManagedInstanceServerProtectionSettings",
