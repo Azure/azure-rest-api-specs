@@ -1,4 +1,4 @@
-name: TypeSpec Requirement
+name: Spec Change Policies
 
 on:
   pull_request:
@@ -14,8 +14,8 @@ permissions:
   contents: read
 
 jobs:
-  TypeSpec-Requirement:
-    name: TypeSpec Requirement
+  spec-change-policies:
+    name: Spec Change Policies
 
     runs-on: ubuntu-24.04
 
@@ -23,13 +23,13 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-          # Required since "HEAD^" is passed to the TypeSpec Requirement check.
+          # Compare the synthetic merge commit with its target-branch parent.
           fetch-depth: 2
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      - run: node eng/tools/typespec-requirement/src/index.ts --base-commitish HEAD^ --head-commitish HEAD
+      - run: node eng/tools/spec-change-policies/src/index.ts --base-commitish HEAD^ --head-commitish HEAD
         id: tsr
 
       # Always add label artifact, even if "brownfield=false", to ensure label is removed when necessary
@@ -38,3 +38,17 @@ jobs:
         with:
           name: "brownfield"
           value: "${{ steps.tsr.outputs.brownfield == 'true' }}"
+
+  # Temporary required-check compatibility.
+  # Cleanup: https://github.com/Azure/azure-rest-api-specs/issues/47248
+  legacy-required-check:
+    name: TypeSpec Requirement
+    needs: spec-change-policies
+    if: ${{ always() }}
+    runs-on: ubuntu-slim
+    permissions: {}
+    steps:
+      - name: Mirror Spec Change Policies result
+        env:
+          RESULT: ${{ needs.spec-change-policies.result }}
+        run: test "$RESULT" = success
