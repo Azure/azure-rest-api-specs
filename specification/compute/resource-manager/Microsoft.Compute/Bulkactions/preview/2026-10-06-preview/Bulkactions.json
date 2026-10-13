@@ -3720,6 +3720,19 @@
           "items": {
             "$ref": "#/definitions/BulkactionVMExtension"
           }
+        },
+        "priority": {
+          "$ref": "#/definitions/PriorityType",
+          "description": "Specifies the priority for the virtual machines. Mirrors the priority property on Microsoft.Compute/virtualMachines."
+        },
+        "maxPricePerVM": {
+          "type": "number",
+          "format": "float",
+          "description": "Specifies the maximum price, in US Dollars, you are willing to pay per hour for each Azure Spot virtual machine. This price is compared with the current Azure Spot price for the virtual machine size at create time, and the operation only succeeds if maxPricePerVM is greater than the current Azure Spot price. It is also used to evict a virtual machine if the current Azure Spot price rises above it after creation. Possible values are any decimal value greater than zero, or -1 to indicate the default price is up-to on-demand and the virtual machine should not be evicted for price reasons. The default is -1 when not provided. Only applies when priority is Spot."
+        },
+        "evictionPolicy": {
+          "$ref": "#/definitions/EvictionPolicy",
+          "description": "Specifies the eviction policy for the Azure Spot virtual machines. Both Deallocate and Delete are supported. Mirrors the evictionPolicy property on Microsoft.Compute/virtualMachines. Only applies when priority is Spot."
         }
       }
     },
@@ -4505,6 +4518,30 @@
           "type": "string",
           "description": "Specifies the api-version to determine which Scheduled Events configuration schema version will be delivered."
         }
+      }
+    },
+    "EvictionPolicy": {
+      "type": "string",
+      "description": "Different kind of eviction policies",
+      "enum": [
+        "Delete",
+        "Deallocate"
+      ],
+      "x-ms-enum": {
+        "name": "EvictionPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "When evicted, the Spot VM will be deleted and the corresponding capacity will be updated to reflect this."
+          },
+          {
+            "name": "Deallocate",
+            "value": "Deallocate",
+            "description": "When evicted, the Spot VM will be deallocated/stopped"
+          }
+        ]
       }
     },
     "ExecuteDeallocateRequest": {
@@ -6142,6 +6179,30 @@
             "type": "string"
           }
         }
+      }
+    },
+    "PriorityType": {
+      "type": "string",
+      "description": "The priority type for virtual machine allocation.",
+      "enum": [
+        "Regular",
+        "Spot"
+      ],
+      "x-ms-enum": {
+        "name": "PriorityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Regular",
+            "value": "Regular",
+            "description": "Regular, non-Spot virtual machines."
+          },
+          {
+            "name": "Spot",
+            "value": "Spot",
+            "description": "Azure Spot Virtual Machines."
+          }
+        ]
       }
     },
     "ProtocolTypes": {
