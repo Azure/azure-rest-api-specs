@@ -83,6 +83,11 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/originGroups/{originGroupName}/origins/{originName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets/{ruleSetName}/rules/{ruleName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/securityPolicies/{securityPolicyName}"].patch.parameters[5].schema.properties.properties
+  - code: PatchBodyParametersSchema
+    from: openapi.json
+    reason: Error policy PATCH keeps nested objects as atomic replacements, consistent with the existing CDN APIs. Nested partial PATCH support will be introduced consistently in a future API version.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/errorPolicies/{errorPolicyName}"].patch.parameters[5].schema.properties.properties
   - code: ProvisioningStateMustBeReadOnly
     from: openapi.json
     reason: These response schemas have the same provisioning state shape in the 2026-07-01 stable API.
