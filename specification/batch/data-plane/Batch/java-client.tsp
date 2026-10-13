@@ -267,7 +267,7 @@ op disablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
 // Enable Pool Autoscale Operation
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Optional parameters for Enable Pool AutoScale operation.")
-model BatchPoolEnableAutoScaleOptions {
+model BatchPoolAutoScaleEnableOptions {
   ...Azure.Batch.CommonJsonParameters;
 }
 
@@ -280,7 +280,7 @@ op enablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
 
     @doc("Optional parameters for Enable Pool AutoScale operation.")
     @bodyIgnore
-    options?: BatchPoolEnableAutoScaleOptions;
+    options?: BatchPoolAutoScaleEnableOptions;
 
     ...Azure.Batch.BatchMatchHeaders;
   },
@@ -1944,6 +1944,7 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
   "BatchPoolCreateParameters",
   "java"
 );
+@@clientName(Azure.Batch.ContainerType, "BatchContainerType", "java");
 @@clientName(
   Azure.Batch.BatchPoolReplaceOptions,
   "BatchPoolReplaceParameters",
@@ -1956,7 +1957,13 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
 );
 @@clientName(
   Azure.Batch.BatchPoolEnableAutoScaleOptions,
-  "BatchPoolEnableAutoScaleParameters",
+  "BatchPoolAutoScaleEnableParameters",
+  "java"
+);
+@@clientName(Azure.Batch.VMExtension, "VirtualMachineExtension", "java");
+@@clientName(
+  Azure.Batch.VMExtensionInstanceView,
+  "VirtualMachineExtensionInstanceView",
   "java"
 );
 @@clientName(
@@ -2006,7 +2013,7 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
 );
 @@clientName(
   Azure.Batch.BatchNodeDisableSchedulingOptions,
-  "BatchNodeDisableSchedulingParameters",
+  "BatchNodeSchedulingDisableParameters ",
   "java"
 );
 @@clientName(

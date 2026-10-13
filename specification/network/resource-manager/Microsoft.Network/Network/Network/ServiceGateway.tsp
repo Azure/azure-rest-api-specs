@@ -61,6 +61,7 @@ model ServiceGatewayActionOkResponseBody {
 }
 
 /** Status-only success response for synchronous service gateway update actions. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model ServiceGatewayActionOkResponse {
   /** HTTP status code for successful request processing. */
   @statusCode

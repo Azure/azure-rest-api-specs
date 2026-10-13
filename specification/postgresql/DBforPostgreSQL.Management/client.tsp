@@ -62,6 +62,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(PostgresMajorVersion.`18`, "Eighteen", "go");
 
 // C# configuration
+@@clientName(DbAgentAcceptedResponse, "DbAgentAcceptedResult", "csharp");
 @@clientName(Cluster, "PostgreSqlFlexibleServerClusterProperties", "csharp");
 @@clientName(Configuration, "PostgreSqlFlexibleServerConfiguration", "csharp");
 @@clientName(
@@ -711,6 +712,27 @@ using Azure.ClientGenerator.Core;
 @@clientName(PostgresMajorVersion.`16`, "Sixteen", "csharp");
 @@clientName(PostgresMajorVersion.`17`, "Seventeen", "csharp");
 @@clientName(PostgresMajorVersion.`18`, "Eighteen", "csharp");
+// Pin management-compatible names for emitters whose root namespaces differ.
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState,
+  "PostgreSqlFlexibleServersPrivateLinkServiceConnectionState",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState,
+  "PostgreSqlFlexibleServersPrivateEndpointConnectionProvisioningState",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointServiceConnectionStatus,
+  "PostgreSqlFlexibleServersPrivateEndpointServiceConnectionStatus",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties,
+  "PostgreSqlFlexibleServersPrivateLinkResourceProperties",
+  "csharp"
+);
 @@clientName(
   Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
