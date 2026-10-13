@@ -28,6 +28,33 @@ interface AgentConversationEngine {
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "A successful WebSocket 101 upgrade has no HTTP entity body; messages follow as WebSocket frames."
   @summary("Connect to a hosted conversation engine")
+  @opExample(
+    #{
+      parameters: #{
+        apiVersion: "v1",
+        agent_name: "support-conversation-engine",
+      },
+      returnType: #{ status_code: 101, session_id: "session_support_01" },
+    },
+    #{
+      title: "NewSession",
+      description: "Connects with the GA v1 API using a WebSocket upgrade request and no session ID. The 101 response returns an automatically generated x-agent-session-id header and no body.",
+    }
+  )
+  @opExample(
+    #{
+      parameters: #{
+        apiVersion: "v1",
+        agent_name: "support-conversation-engine",
+        agent_session_id: "session_support_01",
+      },
+      returnType: #{ status_code: 101, session_id: "session_support_01" },
+    },
+    #{
+      title: "Reconnect",
+      description: "Reconnects with the GA v1 API using a WebSocket upgrade request and an existing session ID. The 101 response returns the same x-agent-session-id header and no body.",
+    }
+  )
   @get
   @route("/agents/{agent_name}/endpoint/protocols/conversation_engine")
   connectEndpointConversationEngine is FoundryDataPlaneOperation<
