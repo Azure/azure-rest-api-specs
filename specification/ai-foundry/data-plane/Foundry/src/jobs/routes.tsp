@@ -19,7 +19,7 @@ alias JobsFilterQueryParams = {
   @query
   tag?: string;
 
-  @doc("Specifies which view type to apply when listing jobs.")
+  @doc("Legacy-compatible archive view. FTJ jobs are never archived: ActiveOnly (the default) and All return the same non-deleted jobs, and ArchivedOnly returns an empty page after validation of the other query options.")
   @query
   listViewType?: ListViewType;
 
