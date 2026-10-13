@@ -12,17 +12,21 @@ using TypeSpec.Versioning;
 
 namespace NeuroShield.Management;
 
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 @armResourceOperations
-interface NeuroShieldMitigations {
+interface NeuroShieldMitigations
+  extends NeuroShieldMitigationOperations<NeuroShieldMitigation> {}
+
+/** Operations shared by the version-specific mitigation resource envelopes. */
+interface NeuroShieldMitigationOperations<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
   /**
    * Gets a mitigation under a protected resource.
    */
   @summary("Get a mitigation")
+  @sharedRoute
   get is ArmResourceRead<
-    NeuroShieldMitigation,
-    Response = ArmResponse<NeuroShieldMitigation> &
-      Azure.Core.EtagResponseEnvelope,
+    Resource,
+    Response = ArmResponse<Resource> & Azure.Core.EtagResponseEnvelope,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
 
@@ -30,8 +34,9 @@ interface NeuroShieldMitigations {
    * Lists mitigations under a protected resource.
    */
   @summary("List mitigations")
+  @sharedRoute
   list is ArmResourceListByParent<
-    NeuroShieldMitigation,
+    Resource,
     Parameters = NeuroShieldPaginationParameters,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
@@ -40,13 +45,14 @@ interface NeuroShieldMitigations {
    * Lists mitigations across all protected resources under a NeuroShield resource.
    */
   @summary("List mitigations by NeuroShield")
+  @sharedRoute
   @list
   @get
   @action("mitigations")
   listByNeuroShield is ArmResourceActionSync<
     NeuroShieldResource,
     void,
-    ArmResponse<ResourceListResult<NeuroShieldMitigation>>,
+    ArmResponse<ResourceListResult<Resource>>,
     Parameters = NeuroShieldPaginationParameters,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
@@ -55,11 +61,12 @@ interface NeuroShieldMitigations {
    * Approves and queues a mitigation for execution.
    */
   @summary("Execute a mitigation")
+  @sharedRoute
   @action("execute")
   execute is ArmResourceActionSync<
-    NeuroShieldMitigation,
+    Resource,
     void,
-    ArmResponse<NeuroShieldMitigation>,
+    ArmResponse<Resource>,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
 
@@ -67,11 +74,12 @@ interface NeuroShieldMitigations {
    * Rolls back a mitigation when rollback is available.
    */
   @summary("Roll back a mitigation")
+  @sharedRoute
   @action("rollback")
   rollback is ArmResourceActionSync<
-    NeuroShieldMitigation,
+    Resource,
     void,
-    ArmResponse<NeuroShieldMitigation>,
+    ArmResponse<Resource>,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
 }

@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 
 namespace NeuroShield.Management;
 
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface NeuroShieldProtectedResources {
   /**
@@ -32,6 +32,12 @@ interface NeuroShieldProtectedResources {
   @summary("Create or update a protected resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NeuroShieldProtectedResource,
+    Parameters = {
+      /** The entity tag that makes the request conditional. */
+      @header("If-Match")
+      @added(Versions.v2026_10_01_preview)
+      ifMatch?: string;
+    },
     LroHeaders = ArmAsyncOperationHeader<FinalResult = NeuroShieldProtectedResource> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
@@ -44,6 +50,12 @@ interface NeuroShieldProtectedResources {
   @summary("Delete a protected resource")
   delete is ArmResourceDeleteWithoutOkAsync<
     NeuroShieldProtectedResource,
+    Parameters = {
+      /** The entity tag that makes the request conditional. */
+      @header("If-Match")
+      @added(Versions.v2026_10_01_preview)
+      ifMatch?: string;
+    },
     LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse

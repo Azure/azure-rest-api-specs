@@ -23,14 +23,14 @@ namespace NeuroShield.Management;
 
 /** The available API versions. */
 enum Versions {
-  /** 2026-06-01-preview version */
+  /** 2026-10-01-preview version */
   @Azure.Core.previewVersion
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  v2026_06_01_preview: "2026-06-01-preview",
+  v2026_10_01_preview: "2026-10-01-preview",
 }
 
 /** The operations available from the Microsoft.NetworkSecurity provider. */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 interface Operations extends Azure.ResourceManager.Operations {}
 
 /** Parameters for subscription- and location-scoped NeuroShield operation status. */
@@ -56,7 +56,7 @@ alias NeuroShieldOperationStatusParameters = {
   "The ID of an ongoing asynchronous NeuroShield operation."
 );
 
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface NeuroShieldOperationStatuses {
   /** Gets the status of an asynchronous NeuroShield operation. */

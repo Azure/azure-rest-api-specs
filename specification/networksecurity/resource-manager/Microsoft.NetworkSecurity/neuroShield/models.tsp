@@ -18,7 +18,7 @@ namespace NeuroShield.Management;
  * asynchronous protected-resource operations; synchronous NeuroShield operations return only
  * terminal states.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 union ProvisioningStateNeuroShield {
   Azure.ResourceManager.ResourceProvisioningState,
 
@@ -41,7 +41,7 @@ union ProvisioningStateNeuroShield {
 /**
  * Properties of the NeuroShield resource.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 model NeuroShieldProperties {
   /**
    * Provisioning state of the NeuroShield resource.
@@ -53,28 +53,36 @@ model NeuroShieldProperties {
    * System-generated globally unique identifier (GUID) for the NeuroShield resource.
    */
   @visibility(Lifecycle.Read)
-  resourceGuid?: string;
+  resourceGuid?: NeuroShieldGuid;
 
   /**
-   * Response mode that controls mitigation serving behavior.
+   * Response mode that controls mitigation serving behavior. A full create or
+   * update (PUT) request must specify Auto or Manual; there is no default.
+   * Omitting responseMode from a PATCH request preserves the existing mode.
    */
-  responseMode?: NeuroShieldResponseMode;
+  @added(Versions.v2026_10_01_preview)
+  responseMode: NeuroShieldResponseMode;
 
   /**
-   * Minimum severity level for mitigation generation.
+   * Minimum severity level for mitigation generation. Omission in a full PUT
+   * request resolves to Low; omission in PATCH preserves the value.
    */
+  @added(Versions.v2026_10_01_preview)
   severityThreshold?: NeuroShieldSeverityThreshold;
 
   /**
-   * Human-readable description of the NeuroShield resource.
+   * Human-readable description of the NeuroShield resource. Omission in a full
+   * PUT request resolves to an empty string. Control characters other than tab,
+   * line feed, and carriage return are not allowed.
    */
-  description?: string;
+  @added(Versions.v2026_10_01_preview)
+  description?: NeuroShieldDescription;
 }
 
 /**
  * Response modes for mitigation serving behavior.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 union NeuroShieldResponseMode {
   string,
 
@@ -87,17 +95,12 @@ union NeuroShieldResponseMode {
    * Requires explicit customer approval before serving mitigations.
    */
   Manual: "Manual",
-
-  /**
-   * Detection only mode with no mitigation generation.
-   */
-  AlertOnly: "AlertOnly",
 }
 
 /**
  * Severity threshold used for finding and mitigation generation.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 union NeuroShieldSeverityThreshold {
   string,
 
@@ -125,7 +128,7 @@ union NeuroShieldSeverityThreshold {
 /**
  * Properties to patch on a NeuroShield resource.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 model NeuroShieldPatchProperties {
   /**
    * Response mode that controls mitigation serving behavior.
@@ -140,15 +143,18 @@ model NeuroShieldPatchProperties {
   /**
    * Human-readable description of the NeuroShield resource.
    */
-  description?: string;
+  description?: NeuroShieldDescription;
 }
 
 /**
  * Patch request body for updating a NeuroShield resource.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 model NeuroShieldPatch {
-  ...ArmTagsProperty;
+  /** Resource tags. */
+  tags?: {
+    ...Record<NeuroShieldTagValue>;
+  };
 
   /**
    * Patch properties for the NeuroShield resource.
@@ -156,10 +162,35 @@ model NeuroShieldPatch {
   properties?: NeuroShieldPatchProperties;
 }
 
+/** Text that excludes control characters other than tab, line feed, and carriage return. */
+@added(Versions.v2026_10_01_preview)
+@pattern("^(?![\\s\\S]*[\\x00-\\x08\\x0B\\x0C\\x0E-\\x1F\\x7F-\\x9F])[\\s\\S]*$")
+scalar NeuroShieldText extends string;
+
+/** Description accepted by the resource provider. */
+@added(Versions.v2026_10_01_preview)
+@maxLength(512)
+scalar NeuroShieldDescription extends NeuroShieldText;
+
+/** Tag value accepted by the resource provider. */
+@added(Versions.v2026_10_01_preview)
+@maxLength(256)
+scalar NeuroShieldTagValue extends NeuroShieldText;
+
+/** A GUID in canonical 36-character hyphenated form; input accepts either hexadecimal case. */
+@added(Versions.v2026_10_01_preview)
+@pattern("^[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
+scalar NeuroShieldGuid extends string;
+
+/** Resource-name grammar accepted by the resource provider. */
+@added(Versions.v2026_10_01_preview)
+@pattern("^[a-zA-Z0-9]([a-zA-Z0-9._-]{0,62}[a-zA-Z0-9])?$")
+scalar NeuroShieldResourceName extends string;
+
 /**
  * Azure Resource Manager tracked resource representing a NeuroShield instance.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 model NeuroShieldResource is Azure.ResourceManager.TrackedResource<
   NeuroShieldProperties,
   false
@@ -173,8 +204,7 @@ model NeuroShieldResource is Azure.ResourceManager.TrackedResource<
   @path
   @key("neuroShieldName")
   @segment("neuroShields")
-  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
-  name: string;
+  name: NeuroShieldResourceName;
 }
 
 @@encodedName(NeuroShieldResource.eTag, "application/json", "etag");
@@ -182,7 +212,7 @@ model NeuroShieldResource is Azure.ResourceManager.TrackedResource<
 /**
  * Approximate Neuron agent liveness projected onto a protected resource.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 model NeuroShieldAgentHealth {
   /**
    * The most recent time a liveness signal was observed. The value is absent until the first signal is received.
@@ -194,13 +224,13 @@ model NeuroShieldAgentHealth {
 /**
  * A server-owned request for the Neuron agents associated with a protected resource to upload fresh inventory.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 model NeuroShieldInventoryUploadRequestMetadata {
   /**
    * The stable identifier for the request.
    */
   @visibility(Lifecycle.Read)
-  requestId: string;
+  requestId: NeuroShieldGuid;
 
   /**
    * The time when the resource provider accepted the request.
@@ -218,12 +248,12 @@ model NeuroShieldInventoryUploadRequestMetadata {
 /**
  * The result of requesting a fresh inventory upload.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 model NeuroShieldInventoryUploadRequestResult {
   /**
    * The stable identifier for the accepted request.
    */
-  requestId: string;
+  requestId: NeuroShieldGuid;
 
   /**
    * The time when the resource provider accepted the request.
@@ -244,7 +274,7 @@ model NeuroShieldInventoryUploadRequestResult {
 /**
  * Properties of a protected resource.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 model NeuroShieldProtectedResourceProperties {
   /**
    * Provisioning state of the protected resource.
@@ -266,6 +296,21 @@ model NeuroShieldProtectedResourceProperties {
   ]>;
 
   /**
+   * The optional customer VM or VMSS identity used by the Neuron agent. Omission
+   * and explicit None are accepted on create. SystemAssigned requires nonzero
+   * principalId and tenantId; UserAssigned requires exactly one non-null dictionary
+   * entry with nonzero principalId and clientId and no top-level IDs. The declared
+   * combined identity kind is rejected. Caller-supplied identifiers are returned
+   * on read; service-side verification of their association with the target remains
+   * required. Omission on update preserves the stored identity; a supplied identity
+   * must be unchanged. Explicit None cannot clear an existing identity. Changing
+   * identity requires deleting and recreating the protected resource.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  targetIdentity?: NeuroShieldProtectedResourceIdentity;
+
+  /**
    * Approximate health of the Neuron agent, derived from its most recent authenticated data-plane signal.
    */
   @visibility(Lifecycle.Read)
@@ -279,27 +324,78 @@ model NeuroShieldProtectedResourceProperties {
 }
 
 /**
+ * Microsoft Entra identity identifier in canonical hyphenated GUID form.
+ * Identity-kind validation requires nonzero identifiers where applicable.
+ */
+@added(Versions.v2026_10_01_preview)
+scalar NeuroShieldTargetIdentityId extends NeuroShieldGuid;
+
+/**
+ * Caller-supplied identity of the target VM or VMSS, retained on the protected resource.
+ * These identifiers are not independently resolved or verified by this API contract.
+ */
+@added(Versions.v2026_10_01_preview)
+model NeuroShieldProtectedResourceIdentity {
+  /**
+   * Microsoft Entra service principal ID of the target's system-assigned identity.
+   * A nonzero value is required for SystemAssigned; omit for UserAssigned.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  principalId?: NeuroShieldTargetIdentityId;
+
+  /**
+   * Microsoft Entra tenant ID of the target's system-assigned identity.
+   * A nonzero value is required for SystemAssigned; omit for UserAssigned.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  tenantId?: NeuroShieldTargetIdentityId;
+
+  /**
+   * Type of the target identity. None, SystemAssigned, and UserAssigned are supported.
+   * The declared combined system/user-assigned value is rejected by the operation.
+   * There is no default when an identity object is supplied.
+   */
+  type: Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType;
+
+  /**
+   * User-assigned identities keyed by Azure Resource Manager resource ID.
+   * For UserAssigned, supply exactly one non-null entry with a nonblank key and
+   * nonzero principalId and clientId. Other identity kinds reject a nonempty map.
+   */
+  userAssignedIdentities?: {
+    ...Record<NeuroShieldProtectedResourceUserAssignedIdentity>;
+  };
+}
+
+/**
+ * Caller-supplied identifiers of a user-assigned identity associated with the target.
+ */
+@added(Versions.v2026_10_01_preview)
+model NeuroShieldProtectedResourceUserAssignedIdentity {
+  /**
+   * Microsoft Entra service principal ID of the target's user-assigned identity.
+   * A non-null, nonzero value is required when using UserAssigned.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  principalId?: NeuroShieldTargetIdentityId;
+
+  /**
+   * Microsoft Entra client ID of the target's user-assigned identity.
+   * A non-null, nonzero value is required when using UserAssigned.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  clientId?: NeuroShieldTargetIdentityId;
+}
+
+/**
  * Azure Resource Manager proxy child resource representing a protected resource.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 @parentResource(NeuroShieldResource)
 model NeuroShieldProtectedResource is Azure.ResourceManager.ProxyResource<
   NeuroShieldProtectedResourceProperties,
   false
 > {
-  /**
-   * The customer VM or VMSS identity used by the Neuron agent. Specify SystemAssigned
-   * to use the target resource's system-assigned identity, or UserAssigned with exactly
-   * one user-assigned identity ARM resource ID mapped to an empty object. Principal,
-   * client, and tenant IDs are resolved by the service and returned as read-only values.
-   * None, combined system/user-assigned identity, and multiple user-assigned identities
-   * are not supported. Changing the identity requires deleting and recreating the
-   * protected resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This is the required form of the standard ManagedServiceIdentityProperty envelope. The explicit declaration changes only requiredness while retaining the standard ARM managed-identity type."
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  identity: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
-
   /**
    * The name of the protected resource.
    */
@@ -307,14 +403,13 @@ model NeuroShieldProtectedResource is Azure.ResourceManager.ProxyResource<
   @path
   @key("protectedResourceName")
   @segment("protectedResources")
-  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
-  name: string;
+  name: NeuroShieldResourceName;
 }
 
 /**
  * Runtime operational status for findings.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 union NeuroShieldFindingStatus {
   string,
 
@@ -358,7 +453,7 @@ union NeuroShieldFindingStatus {
  * Properties of a finding resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Findings are immutable service-generated observations. Their operational lifecycle is represented by status and they do not have a separate ARM provisioning lifecycle."
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 model NeuroShieldFindingProperties {
   /**
    * Common Vulnerabilities and Exposures (CVE) identifier associated with this finding.
@@ -406,13 +501,13 @@ model NeuroShieldFindingProperties {
 /**
  * Azure Resource Manager proxy child resource representing a finding.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 @parentResource(NeuroShieldProtectedResource)
-model NeuroShieldFinding
-  is Azure.ResourceManager.ProxyResource<NeuroShieldFindingProperties> {
-  /**
-   * The system-generated identifier of the finding.
-   */
+model NeuroShieldFinding is Azure.ResourceManager.ProxyResource<
+  NeuroShieldFindingProperties,
+  false
+> {
+  /** The system-generated identifier of the finding. */
   @visibility(Lifecycle.Read)
   @path
   @key("findingId")
@@ -424,7 +519,7 @@ model NeuroShieldFinding
 /**
  * Runtime operational status for mitigations.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 union NeuroShieldMitigationStatus {
   string,
 
@@ -478,7 +573,7 @@ union NeuroShieldMitigationStatus {
  * Properties of a mitigation resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Mitigations are immutable service-generated recommendations. Their execution lifecycle is represented by status and they do not have a separate ARM provisioning lifecycle."
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 model NeuroShieldMitigationProperties {
   /**
    * Resource identifier of the associated finding.
@@ -540,13 +635,13 @@ model NeuroShieldMitigationProperties {
 /**
  * Azure Resource Manager proxy child resource representing a mitigation.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 @parentResource(NeuroShieldProtectedResource)
-model NeuroShieldMitigation
-  is Azure.ResourceManager.ProxyResource<NeuroShieldMitigationProperties> {
-  /**
-   * The system-generated identifier of the mitigation.
-   */
+model NeuroShieldMitigation is Azure.ResourceManager.ProxyResource<
+  NeuroShieldMitigationProperties,
+  false
+> {
+  /** The system-generated identifier of the mitigation. */
   @visibility(Lifecycle.Read)
   @path
   @key("mitigationId")
@@ -558,7 +653,7 @@ model NeuroShieldMitigation
 /**
  * Mitigations updated by a Finding action.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 model NeuroShieldMitigationActionResult {
   /**
    * The complete set of mitigations updated by the action.
@@ -569,13 +664,15 @@ model NeuroShieldMitigationActionResult {
 /**
  * Query parameters for paginated NeuroShield collections.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 model NeuroShieldPaginationParameters {
   /**
    * The maximum number of items to return.
    */
+  @added(Versions.v2026_10_01_preview)
   @query("top")
   @minValue(1)
+  @maxValue(50)
   top?: int32;
 
   /**
@@ -586,15 +683,43 @@ model NeuroShieldPaginationParameters {
 }
 
 /**
- * Aggregate fleet overview for a NeuroShield resource.
+ * Query parameters for listing the singleton NeuroShield summary.
  */
-@added(Versions.v2026_06_01_preview)
-model NeuroShieldFleetSummary {
+@added(Versions.v2026_10_01_preview)
+model NeuroShieldSummaryListParameters {
   /**
-   * Azure Resource Manager resource ID of the NeuroShield resource.
+   * The maximum number of items to return.
    */
-  resourceId: Azure.Core.armResourceIdentifier;
+  @query("top")
+  @minValue(1)
+  @maxValue(50)
+  top?: int32;
+}
 
+/**
+ * Azure Resource Manager read-only singleton proxy child resource exposing the aggregate fleet overview for a NeuroShield resource.
+ */
+@added(Versions.v2026_10_01_preview)
+@singleton("default")
+@parentResource(NeuroShieldResource)
+model NeuroShieldSummary is Azure.ResourceManager.ProxyResource<
+  NeuroShieldSummaryProperties,
+  false
+> {
+  ...ResourceNameParameter<
+    Resource = NeuroShieldSummary,
+    KeyName = "summaryName",
+    SegmentName = "summary",
+    NamePattern = ""
+  >;
+}
+
+/**
+ * Aggregate fleet overview counts for a NeuroShield resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The summary is a read-only, service-computed singleton projection over the parent NeuroShield resource. It is never created, updated, or deleted and therefore has no ARM provisioning lifecycle."
+@added(Versions.v2026_10_01_preview)
+model NeuroShieldSummaryProperties {
   /**
    * Number of protected resources.
    */

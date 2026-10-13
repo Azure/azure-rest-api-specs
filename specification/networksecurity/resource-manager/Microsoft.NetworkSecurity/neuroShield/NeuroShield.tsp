@@ -11,7 +11,7 @@ using TypeSpec.Versioning;
 
 namespace NeuroShield.Management;
 
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 @armResourceOperations
 interface NeuroShields {
   /**
@@ -89,17 +89,28 @@ interface NeuroShields {
     Parameters = NeuroShieldPaginationParameters,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
+}
+
+@added(Versions.v2026_10_01_preview)
+@armResourceOperations
+interface NeuroShieldSummaries {
+  /**
+   * Lists the aggregate fleet overview singleton for a NeuroShield resource.
+   */
+  @sharedRoute
+  @summary("List NeuroShield fleet summaries")
+  list is ArmResourceListByParent<
+    NeuroShieldSummary,
+    Parameters = NeuroShieldSummaryListParameters,
+    Error = Azure.ResourceManager.CommonTypes.ErrorResponse
+  >;
 
   /**
-   * Gets an aggregate fleet overview for a NeuroShield resource.
+   * Gets the aggregate fleet overview singleton for a NeuroShield resource.
    */
   @summary("Get a NeuroShield fleet summary")
-  @get
-  @action("summary")
-  getSummary is ArmResourceActionSync<
-    NeuroShieldResource,
-    void,
-    ArmResponse<NeuroShieldFleetSummary>,
+  get is ArmResourceRead<
+    NeuroShieldSummary,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
 }

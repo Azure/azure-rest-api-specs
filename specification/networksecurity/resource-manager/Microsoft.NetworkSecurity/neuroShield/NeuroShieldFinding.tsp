@@ -12,17 +12,21 @@ using TypeSpec.Versioning;
 
 namespace NeuroShield.Management;
 
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_10_01_preview)
 @armResourceOperations
-interface NeuroShieldFindings {
+interface NeuroShieldFindings
+  extends NeuroShieldFindingOperations<NeuroShieldFinding> {}
+
+/** Operations shared by the version-specific finding resource envelopes. */
+interface NeuroShieldFindingOperations<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
   /**
    * Gets a finding under a protected resource.
    */
   @summary("Get a finding")
+  @sharedRoute
   get is ArmResourceRead<
-    NeuroShieldFinding,
-    Response = ArmResponse<NeuroShieldFinding> &
-      Azure.Core.EtagResponseEnvelope,
+    Resource,
+    Response = ArmResponse<Resource> & Azure.Core.EtagResponseEnvelope,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
 
@@ -30,8 +34,9 @@ interface NeuroShieldFindings {
    * Lists findings under a protected resource.
    */
   @summary("List findings")
+  @sharedRoute
   list is ArmResourceListByParent<
-    NeuroShieldFinding,
+    Resource,
     Parameters = NeuroShieldPaginationParameters,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
@@ -40,13 +45,14 @@ interface NeuroShieldFindings {
    * Lists findings across all protected resources under a NeuroShield resource.
    */
   @summary("List findings by NeuroShield")
+  @sharedRoute
   @list
   @get
   @action("findings")
   listByNeuroShield is ArmResourceActionSync<
     NeuroShieldResource,
     void,
-    ArmResponse<ResourceListResult<NeuroShieldFinding>>,
+    ArmResponse<ResourceListResult<Resource>>,
     Parameters = NeuroShieldPaginationParameters,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
@@ -55,9 +61,10 @@ interface NeuroShieldFindings {
    * Triggers mitigation for all awaiting-approval mitigations under a finding.
    */
   @summary("Mitigate a finding")
+  @sharedRoute
   @action("mitigate")
   mitigate is ArmResourceActionSync<
-    NeuroShieldFinding,
+    Resource,
     void,
     ArmResponse<NeuroShieldMitigationActionResult>,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
@@ -67,9 +74,10 @@ interface NeuroShieldFindings {
    * Rolls back succeeded rollbackable mitigations under a finding.
    */
   @summary("Roll back mitigations for a finding")
+  @sharedRoute
   @action("rollback")
   rollback is ArmResourceActionSync<
-    NeuroShieldFinding,
+    Resource,
     void,
     ArmResponse<NeuroShieldMitigationActionResult>,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse

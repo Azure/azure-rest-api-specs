@@ -1,0 +1,34 @@
+{
+  "operationId": "NeuroShieldFindings_List",
+  "title": "List findings",
+  "description": "Lists findings under a protected resource.",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "protectedResourceName": "vm-01",
+    "api-version": "2026-10-01-preview",
+    "neuroShieldName": "myNeuroShield"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "CVE-2026-12345-vm-01",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.networksecurity/neuroShields/myNeuroShield/protectedResources/vm-01/findings/CVE-2026-12345-vm-01",
+            "type": "microsoft.networksecurity/neuroShields/protectedResources/findings",
+            "properties": {
+              "cveId": "CVE-2026-12345",
+              "virtualMachineArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myComputeRg/providers/Microsoft.Compute/virtualMachines/vm-01",
+              "severity": "High",
+              "description": "Kernel package vulnerability detected on vm-01.",
+              "reason": "The installed kernel package is within the affected version range.",
+              "detectedTime": "2026-05-28T10:15:00Z",
+              "status": "Active"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
