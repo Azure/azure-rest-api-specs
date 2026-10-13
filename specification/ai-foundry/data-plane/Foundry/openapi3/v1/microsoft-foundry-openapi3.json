@@ -65,6 +65,11 @@
       "description": "Agent Invocations (WebSocket)"
     },
     {
+      "name": "Agent Conversation Engine",
+      "parent": "Agents Root",
+      "description": "Hosted conversation-engine connections for Voice Live"
+    },
+    {
       "name": "Agent Sessions",
       "parent": "Agents Root"
     },
@@ -3047,6 +3052,81 @@
         },
         "tags": [
           "Agents"
+        ]
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/conversation_engine": {
+      "get": {
+        "operationId": "AgentConversationEngine_connectEndpointConversationEngine",
+        "summary": "Connect to a hosted conversation engine",
+        "description": "Establishes a WebSocket connection to a hosted conversational engine. The client must send an HTTP GET\nwith `Upgrade: websocket` headers. The target hosted agent must declare `conversation_engine` version\n`1.0.0`. An `invocations_ws` declaration is neither required nor a fallback. Both protocols may be\ndeclared independently during migration; this operation always selects `conversation_engine`.\n\nThe service resolves or creates a hosted session and forwards the connection to\n`ws://container:8088/conversation_engine` without rewriting the protocol path. The AgentServer SDK\nexposes that container endpoint only when a Conversation Engine handler is registered.\n\nVoice Live owns audio, STT, TTS, turn detection, and interruption. The engine processes conversational\nturns and streams text responses using the existing `invocations_ws` message semantics:\n`session.start`, `session.ready`, `user.message`, `response.started`, `response.text.delta`,\n`response.done`, `response.cancel`, `response.cancelled`, and `error`. Each turn carries a `turn_id`,\nand ordered events carry sequence numbers. Version 1.0 supports one active response per session,\ncancellation for interruption, bounded messages, and reconnection through `agent_session_id`.\nAudio transport is not part of this contract. WebSocket close codes and ping/pong are preserved;\nauthorization, throttling, metrics, and tracing are applied to the selected CE protocol.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the target hosted conversational engine in the current project.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_session_id",
+            "in": "query",
+            "required": false,
+            "description": "Optional hosted session ID. Supply the same ID to reconnect to an existing session; omit it to create a session with an automatically generated ID.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "101": {
+            "description": "Informational",
+            "headers": {
+              "x-agent-session-id": {
+                "required": true,
+                "description": "The resolved hosted session ID, either the supplied ID or an automatically generated one.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversation Engine"
         ]
       }
     },
@@ -33582,7 +33662,8 @@
               "mcp",
               "invocations",
               "voice",
-              "invocations_ws"
+              "invocations_ws",
+              "conversation_engine"
             ]
           }
         ]
@@ -96168,7 +96249,7 @@
             "$ref": "#/components/schemas/VoiceConversationEngine"
           }
         ],
-        "description": "A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must support the `invocations_ws` protocol, Voice Live compatibility, and Bridge Protocol 1.0.",
+        "description": "A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must support `conversation_engine` version `1.0.0` and Voice Live compatibility. Voice Live connects through the dedicated conversation-engine endpoint using the existing Bridge message semantics. Declaring `invocations_ws` is optional and does not substitute for `conversation_engine`.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
