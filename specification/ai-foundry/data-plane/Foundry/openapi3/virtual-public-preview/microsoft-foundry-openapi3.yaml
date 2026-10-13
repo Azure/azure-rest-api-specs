@@ -50166,19 +50166,19 @@ components:
         phone_number:
           type: string
           maxLength: 64
-          description: An optional display phone number. It is not the binding identifier.
+          description: An optional display phone number, up to 64 characters. It is not the binding identifier.
         allowed_source_cidrs:
           type: array
           items:
             type: string
           maxItems: 64
-          description: Allowed source IP addresses or CIDR ranges. Omission or an empty array indicates no source-address restriction.
+          description: Up to 64 allowed source IP addresses or CIDR ranges. Bare IPv4 and IPv6 addresses become /32 and /128; host bits are masked and duplicates are removed. Omission or an empty array indicates no source-address restriction.
         allowed_calling_numbers:
           type: array
           items:
             $ref: '#/components/schemas/SipAllowedCallingNumber'
           maxItems: 64
-          description: Allowed canonical E.164 numbers or regular-expression patterns. Omission or an empty array indicates no caller-number restriction.
+          description: Up to 64 allowed canonical E.164 numbers or .NET regular-expression patterns, each up to 256 characters. Patterns match against the normalized E.164 caller number and may match a substring unless anchored with ^ and $. Omission or an empty array indicates no caller-number restriction.
       allOf:
         - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
       description: The request to create an inbound SIP binding. New SIP bindings are active. Credentials are stored in the referenced Foundry connection.
@@ -87516,7 +87516,7 @@ components:
     SipAllowedCallingNumber:
       type: string
       maxLength: 256
-      description: An allowed canonical E.164 number or regular-expression pattern.
+      description: An allowed canonical E.164 number or .NET regular-expression pattern, up to 256 characters. Patterns are matched against the normalized E.164 caller number; without ^ and $ anchors, a pattern may match part of the number.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -87533,19 +87533,19 @@ components:
         phone_number:
           type: string
           maxLength: 64
-          description: An optional display phone number. It is not the binding identifier.
+          description: An optional display phone number, up to 64 characters. It is not the binding identifier.
         allowed_source_cidrs:
           type: array
           items:
             type: string
           maxItems: 64
-          description: Allowed source IP addresses or CIDR ranges. Omission or an empty array indicates no source-address restriction.
+          description: Up to 64 allowed source IP addresses or CIDR ranges. Bare IPv4 and IPv6 addresses become /32 and /128; host bits are masked and duplicates are removed. Omission or an empty array indicates no source-address restriction.
         allowed_calling_numbers:
           type: array
           items:
             $ref: '#/components/schemas/SipAllowedCallingNumber'
           maxItems: 64
-          description: Allowed canonical E.164 numbers or regular-expression patterns. Omission or an empty array indicates no caller-number restriction.
+          description: Up to 64 allowed canonical E.164 numbers or .NET regular-expression patterns, each up to 256 characters. Patterns match against the normalized E.164 caller number and may match a substring unless anchored with ^ and $. Omission or an empty array indicates no caller-number restriction.
       allOf:
         - $ref: '#/components/schemas/TelephonyBinding'
       description: A SIP binding.
@@ -87565,19 +87565,19 @@ components:
         phone_number:
           type: string
           maxLength: 64
-          description: An optional display phone number. It is not the binding identifier.
+          description: An optional display phone number, up to 64 characters. It is not the binding identifier.
         allowed_source_cidrs:
           type: array
           items:
             type: string
           maxItems: 64
-          description: Allowed source IP addresses or CIDR ranges. Omission or an empty array indicates no source-address restriction.
+          description: Up to 64 allowed source IP addresses or CIDR ranges. Bare IPv4 and IPv6 addresses become /32 and /128; host bits are masked and duplicates are removed. Omission or an empty array indicates no source-address restriction.
         allowed_calling_numbers:
           type: array
           items:
             $ref: '#/components/schemas/SipAllowedCallingNumber'
           maxItems: 64
-          description: Allowed canonical E.164 numbers or regular-expression patterns. Omission or an empty array indicates no caller-number restriction.
+          description: Up to 64 allowed canonical E.164 numbers or .NET regular-expression patterns, each up to 256 characters. Patterns match against the normalized E.164 caller number and may match a substring unless anchored with ^ and $. Omission or an empty array indicates no caller-number restriction.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingListItem'
       description: A SIP binding returned in a list, including its entity tag.
@@ -90186,13 +90186,13 @@ components:
           items:
             type: string
           maxItems: 64
-          description: Replacement allowed source IP addresses or CIDR ranges. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.
+          description: Replacement allowed source IP addresses or CIDR ranges, up to 64 entries. Bare addresses gain /32 or /128; host bits are masked and duplicates removed. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.
         allowed_calling_numbers:
           type: array
           items:
             $ref: '#/components/schemas/SipAllowedCallingNumber'
           maxItems: 64
-          description: Replacement allowed canonical E.164 numbers or regular-expression patterns. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.
+          description: Replacement allowed canonical E.164 numbers or .NET regular-expression patterns, up to 64 entries of at most 256 characters each. Patterns match the normalized E.164 caller number and may match a substring unless anchored with ^ and $. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.
       description: The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.
       x-ms-foundry-meta:
         required_previews:

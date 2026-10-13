@@ -437,7 +437,7 @@ model VoiceRecording {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyBindingId extends string;
 
-@doc("An allowed canonical E.164 number or regular-expression pattern.")
+@doc("An allowed canonical E.164 number or .NET regular-expression pattern, up to 256 characters. Patterns are matched against the normalized E.164 caller number; without ^ and $ anchors, a pattern may match part of the number.")
 @maxLength(256)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar SipAllowedCallingNumber extends string;
@@ -604,15 +604,15 @@ model SipTelephonyBindingProperties {
   @doc("The SIP provider.")
   provider: TelephonyProvider.sip;
 
-  @doc("An optional display phone number. It is not the binding identifier.")
+  @doc("An optional display phone number, up to 64 characters. It is not the binding identifier.")
   @maxLength(64)
   phone_number?: string;
 
-  @doc("Allowed source IP addresses or CIDR ranges. Omission or an empty array indicates no source-address restriction.")
+  @doc("Up to 64 allowed source IP addresses or CIDR ranges. Bare IPv4 and IPv6 addresses become /32 and /128; host bits are masked and duplicates are removed. Omission or an empty array indicates no source-address restriction.")
   @maxItems(64)
   allowed_source_cidrs?: string[];
 
-  @doc("Allowed canonical E.164 numbers or regular-expression patterns. Omission or an empty array indicates no caller-number restriction.")
+  @doc("Up to 64 allowed canonical E.164 numbers or .NET regular-expression patterns, each up to 256 characters. Patterns match against the normalized E.164 caller number and may match a substring unless anchored with ^ and $. Omission or an empty array indicates no caller-number restriction.")
   @maxItems(64)
   allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
@@ -660,11 +660,11 @@ model UpdateTelephonyBindingRequest {
   @maxLength(64)
   phone_number?: string | null;
 
-  @doc("Replacement allowed source IP addresses or CIDR ranges. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
+  @doc("Replacement allowed source IP addresses or CIDR ranges, up to 64 entries. Bare addresses gain /32 or /128; host bits are masked and duplicates removed. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
   @maxItems(64)
   allowed_source_cidrs?: string[];
 
-  @doc("Replacement allowed canonical E.164 numbers or regular-expression patterns. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
+  @doc("Replacement allowed canonical E.164 numbers or .NET regular-expression patterns, up to 64 entries of at most 256 characters each. Patterns match the normalized E.164 caller number and may match a substring unless anchored with ^ and $. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
   @maxItems(64)
   allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
