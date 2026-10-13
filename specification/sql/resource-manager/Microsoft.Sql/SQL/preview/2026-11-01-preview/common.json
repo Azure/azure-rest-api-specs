@@ -870,6 +870,30 @@
         ]
       }
     },
+    "BlockDropWhenImmutablePitrBackupInRetention": {
+      "type": "string",
+      "description": "Opt-in state for managed instance deletion protection while immutable backups\nare retained.",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "BlockDropWhenImmutablePitrBackupInRetention",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "enabled",
+            "description": "Protection is permanently enabled. Instance deletion is blocked while a live\nuser database exists or a dropped user database has immutable PITR backups in retention."
+          },
+          {
+            "name": "Disabled",
+            "value": "disabled",
+            "description": "Deletion protection has not been enabled. Requesting this state before opt-in\nleaves the settings unchanged."
+          }
+        ]
+      }
+    },
     "CapabilityGroup": {
       "type": "string",
       "enum": [
@@ -2883,6 +2907,7 @@
         "ManagedInstancePrivateEndpointConnections",
         "ManagedInstancePrivateLinkResources",
         "ManagedInstances",
+        "ManagedInstanceServerProtectionSettings",
         "ManagedInstanceTdeCertificates",
         "ManagedInstanceVulnerabilityAssessments",
         "ManagedLedgerDigestUploads",
@@ -6949,6 +6974,69 @@
           }
         ]
       }
+    },
+    "ServerProtectionSettingsAcceptedResult": {
+      "type": "object",
+      "description": "The update was accepted; use the polling headers to track completion and\nretrieve the result.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/ServerProtectionSettingsOperation",
+          "description": "Information about the accepted update, not the final resource state."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "ServerProtectionSettingsName": {
+      "type": "string",
+      "description": "The singleton name for managed instance protection settings.",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "ServerProtectionSettingsName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "default",
+            "description": "The only supported protection settings resource, matched case-insensitively."
+          }
+        ]
+      }
+    },
+    "ServerProtectionSettingsOperation": {
+      "type": "object",
+      "description": "Information returned when a managed instance protection settings update is\naccepted.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "The name of the accepted operation."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time when the operation started."
+        }
+      },
+      "required": [
+        "operation",
+        "startTime"
+      ]
+    },
+    "ServerProtectionSettingsProperties": {
+      "type": "object",
+      "description": "Settings that control protection against deletion of a managed instance.",
+      "properties": {
+        "blockDropWhenImmutablePitrBackupInRetention": {
+          "$ref": "#/definitions/BlockDropWhenImmutablePitrBackupInRetention",
+          "description": "Whether to block deletion of the managed instance while any live user database\nexists or any dropped user database has immutable point-in-time restore backups\nwithin retention. Supported request values\nare enabled and disabled, compared case-insensitively. Setting enabled is an\nirreversible opt-in. Setting disabled before opt-in is a no-op; changing from\nenabled to disabled is rejected."
+        }
+      },
+      "required": [
+        "blockDropWhenImmutablePitrBackupInRetention"
+      ]
     },
     "ServerPublicNetworkAccessFlag": {
       "type": "string",
