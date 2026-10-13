@@ -774,15 +774,15 @@ model VoiceAgentWebSocketUpgradeResponse {
 }
 
 // ---------------------------------------------------------------------------
-// Native Live protocol and Foundry managed-delegation notifications
+// Native Live protocol and Foundry managed/hosted-delegation notifications
 // ---------------------------------------------------------------------------
 
 // Reuse native model identities. Foundry adds only the server-side correlation
-// field and managed-delegation diagnostics below; sub_protocol stays on agents.
+// field and managed/hosted-delegation diagnostics below; sub_protocol stays on agents.
 /** The native OpenAI Live client-event hierarchy. Foundry owns session.start; clients wait for session.started before sending the other supported native commands. */
 alias VoiceAgentLiveClientEvent = OpenAI.LiveClientEvent;
 
-/** OpenAI Live server events plus Foundry conversation correlation and managed-delegation diagnostics. */
+/** OpenAI Live server events plus Foundry conversation correlation and managed/hosted-delegation diagnostics. */
 alias VoiceAgentLiveServerEvent = OpenAI.LiveServerEvent;
 
 // WebSocket frames are not HTTP request/response bodies. Mark their native roots
@@ -790,7 +790,7 @@ alias VoiceAgentLiveServerEvent = OpenAI.LiveServerEvent;
 @@usage(OpenAI.LiveClientEvent, Usage.input | Usage.json);
 @@usage(OpenAI.LiveServerEvent, Usage.output | Usage.json);
 
-@doc("Additional server-event types for Foundry managed prompt-agent delegation.")
+@doc("Additional server-event types for Foundry managed prompt-agent and hosted-agent delegation. Both delegation kinds use the same lifecycle and result payloads.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentLiveServerEventTypeExtension {
   managed_agent_delegation_started: "session.managed_agent_delegation.started",
@@ -799,6 +799,12 @@ union VoiceAgentLiveServerEventTypeExtension {
   managed_agent_delegation_failed: "session.managed_agent_delegation.failed",
   managed_agent_delegation_cancel: "session.managed_agent_delegation.cancel",
   managed_agent_delegation_output_item: "session.managed_agent_delegation.output_item",
+  hosted_agent_delegation_started: "session.hosted_agent_delegation.started",
+  hosted_agent_delegation_progress: "session.hosted_agent_delegation.progress",
+  hosted_agent_delegation_completed: "session.hosted_agent_delegation.completed",
+  hosted_agent_delegation_failed: "session.hosted_agent_delegation.failed",
+  hosted_agent_delegation_cancel: "session.hosted_agent_delegation.cancel",
+  hosted_agent_delegation_output_item: "session.hosted_agent_delegation.output_item",
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Register Foundry server events in the native discriminator, following the existing realtime protocol extension pattern."
@@ -822,7 +828,7 @@ alias VoiceAgentLiveManagedDelegationEventCorrelation = {
   @doc("The unique ID of this Foundry server event.")
   event_id: string;
 
-  @doc("The native Live delegation ID, matching the id of the stored managed-delegation item when persistence is enabled.")
+  @doc("The native Live delegation ID, matching the id of the stored managed or hosted delegation item when persistence is enabled.")
   delegation_id: string;
 };
 
@@ -857,10 +863,10 @@ model VoiceAgentLiveManagedDelegationFailedEvent
   type: "session.managed_agent_delegation.failed";
   ...VoiceAgentLiveManagedDelegationEventCorrelation;
 
-  @doc("A machine-readable code identifying the managed delegation failure.")
+  @doc("A machine-readable code identifying the delegation failure.")
   error_code: string;
 
-  @doc("A human-readable description of the managed delegation failure.")
+  @doc("A human-readable description of the delegation failure.")
   error_message: string;
 }
 
@@ -885,4 +891,50 @@ model VoiceAgentLiveManagedDelegationOutputItemEvent
 
   @doc("The new result item at output_index. Append this item once rather than concatenating it with earlier results.")
   item: VoiceAgentLiveDelegationResultItem;
+}
+
+@doc("Foundry has prepared valid context and is beginning a hosted-agent invocation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveHostedDelegationStartedEvent
+  extends OpenAI.LiveServerEvent {
+  type: "session.hosted_agent_delegation.started";
+  ...OmitProperties<VoiceAgentLiveManagedDelegationStartedEvent, "type">;
+}
+
+@doc("The hosted invocation is still progressing. This notification only identifies the delegation; new results arrive separately in session.hosted_agent_delegation.output_item events.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveHostedDelegationProgressEvent
+  extends OpenAI.LiveServerEvent {
+  type: "session.hosted_agent_delegation.progress";
+  ...OmitProperties<VoiceAgentLiveManagedDelegationProgressEvent, "type">;
+}
+
+@doc("The hosted invocation and native result injection completed successfully. Result items have been streamed separately and are not repeated here. This does not mean Live speech or client playback has completed.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveHostedDelegationCompletedEvent
+  extends OpenAI.LiveServerEvent {
+  type: "session.hosted_agent_delegation.completed";
+  ...OmitProperties<VoiceAgentLiveManagedDelegationCompletedEvent, "type">;
+}
+
+@doc("The hosted invocation or native result injection failed. Cancellation and supersession use the separate cancel notification. Previously streamed result items remain valid and are not repeated here; failed or unvalidated result text is never included.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveHostedDelegationFailedEvent extends OpenAI.LiveServerEvent {
+  type: "session.hosted_agent_delegation.failed";
+  ...OmitProperties<VoiceAgentLiveManagedDelegationFailedEvent, "type">;
+}
+
+@doc("Server notification that the hosted invocation was cancelled or superseded. This is not a client cancellation command. Previously streamed result items are not repeated here; no new guidance or successful completion is implied.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveHostedDelegationCancelEvent extends OpenAI.LiveServerEvent {
+  type: "session.hosted_agent_delegation.cancel";
+  ...OmitProperties<VoiceAgentLiveManagedDelegationCancelEvent, "type">;
+}
+
+@doc("One new validated result item has been accepted by Live for a hosted delegation. Results stream in zero-based output_index order within each delegation and may interleave across delegations. Each event carries only the new item, not a cumulative snapshot; an index identifies the same entry in the stored delegation's output array. It does not guarantee speech or client playback and can be emitted when persistence is disabled.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveHostedDelegationOutputItemEvent
+  extends OpenAI.LiveServerEvent {
+  type: "session.hosted_agent_delegation.output_item";
+  ...OmitProperties<VoiceAgentLiveManagedDelegationOutputItemEvent, "type">;
 }

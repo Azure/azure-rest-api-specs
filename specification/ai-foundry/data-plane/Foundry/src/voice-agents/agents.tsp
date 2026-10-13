@@ -216,7 +216,7 @@ model VoiceAgentLiveDefinition extends VoiceAgentDefinition {
   @doc("Startup-only bidirectional audio format and output voice. No realtime VAD or Azure speech processing settings.")
   audio?: OpenAI.LiveInitialSessionAudioParam;
 
-  @doc("Who handles delegated work: the connected application, a native Responses backend, or a Foundry-managed same-project prompt agent. Omission or null uses native client delegation.")
+  @doc("Who handles delegated work: the connected application, a native Responses backend, or a same-project Foundry-managed prompt agent or hosted agent. Omission or null uses native client delegation.")
   delegation?: VoiceAgentLiveDelegation | null;
 
   @doc("Native initial developer, user, or assistant text context. At most 128 messages, with one text part per message.")
@@ -228,13 +228,14 @@ model VoiceAgentLiveDefinition extends VoiceAgentDefinition {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Reuse the native OpenAI delegation models without reparenting or changing their wire contract."
-@doc("Delegation configured on a Foundry Live voice agent. Native client and Responses configurations are reused unchanged; Foundry may also execute a same-project prompt agent.")
+@doc("Delegation configured on a Foundry Live voice agent. Native client and Responses configurations are reused unchanged; Foundry may also execute a same-project prompt agent or hosted agent.")
 @oneOf
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentLiveDelegation {
   client: OpenAI.LiveClientDelegationParam,
   responses: OpenAI.LiveResponsesDelegationParam,
   foundry_managed_agent: VoiceAgentLiveManagedAgentDelegation,
+  foundry_hosted_agent: VoiceAgentLiveHostedAgentDelegation,
 }
 
 @doc("""
@@ -249,6 +250,28 @@ model VoiceAgentLiveManagedAgentDelegation {
   type: "foundry_managed_agent";
 
   @doc("The name of a prompt agent in the same Foundry project, not a URL or resource path. Hosted and voice agents are not supported targets.")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$")
+  agent_name: string;
+
+  @doc("A positive-integer agent version. Omission or null selects the active version, resolved once when the voice connection starts.")
+  @pattern("^[1-9][0-9]{0,19}$")
+  agent_version?: string | null;
+}
+
+@doc("""
+  A same-project hosted agent executed by Foundry on behalf of the Live frontend. Foundry resolves
+  and pins the target version once per voice connection, configures native client delegation upstream,
+  and injects the target's validated output using native commentary/thinking messages.
+  Hosted delegation uses the same lifecycle and result payloads as managed prompt-agent delegation,
+  with session.hosted_agent_delegation event types. This is agent configuration, not an additional
+  OpenAI inference-event variant.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveHostedAgentDelegation {
+  @doc("Selects a Foundry-hosted agent as the delegation target.")
+  type: "foundry_hosted_agent";
+
+  @doc("The name of a hosted agent in the same Foundry project, not a URL or resource path. Prompt and voice agents are not supported by this delegation type.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$")
   agent_name: string;
 

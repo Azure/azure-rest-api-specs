@@ -38,6 +38,13 @@ const managedModel = (stage) =>
     .join("")}Event`;
 const managedItemModel =
   "Azure.AI.Projects.VoiceAgentLiveFoundryManagedAgentDelegationItem";
+const hostedModel = (stage) => managedModel(stage).replace("Managed", "Hosted");
+const hostedItemModel =
+  "Azure.AI.Projects.VoiceAgentLiveFoundryHostedAgentDelegationItem";
+const foundryEventModels = [
+  ...managedEventKinds.map(managedModel),
+  ...managedEventKinds.map(hostedModel),
+];
 
 function type(name, context = program) {
   const [value, diagnostics] = context.resolveTypeReference(name);
@@ -59,6 +66,22 @@ function checkErrors(diagnostics) {
       .filter((d) => d.severity === "error")
       .map((d) => `${d.code}: ${d.message}`),
     [],
+  );
+}
+
+function checkInvalidExample(diagnostics) {
+  const errors = diagnostics.filter((d) => d.severity === "error");
+  assert.ok(errors.length > 0);
+  assert.ok(
+    errors.every((d) =>
+      [
+        "invalid-argument",
+        "unassignable",
+        "missing-property",
+        "unexpected-property",
+      ].includes(d.code),
+    ),
+    errors.map((d) => `${d.code}: ${d.message}`).join("\n"),
   );
 }
 
@@ -202,7 +225,7 @@ test("Live configuration references native model identities, not local copies", 
   );
   assert.deepEqual(
     [...delegation.variants.keys()],
-    ["client", "responses", "foundry_managed_agent"],
+    ["client", "responses", "foundry_managed_agent", "foundry_hosted_agent"],
   );
 });
 
@@ -232,6 +255,57 @@ test("managed prompt-agent configuration contains only target identity", () => {
     assert.ok(!version.test(value));
 });
 
+test("hosted agent configuration mirrors managed identity without reparenting it", () => {
+  const managed = type(
+    "Azure.AI.Projects.VoiceAgentLiveManagedAgentDelegation",
+  );
+  const hosted = type("Azure.AI.Projects.VoiceAgentLiveHostedAgentDelegation");
+  assert.equal(hosted.baseModel, undefined);
+  assert.equal(
+    hosted.properties.get("type").type.value,
+    "foundry_hosted_agent",
+  );
+  assert.equal(
+    type("Azure.AI.Projects.VoiceAgentLiveDelegation").variants.get(
+      "foundry_hosted_agent",
+    ).type,
+    hosted,
+  );
+  assert.ok(
+    [
+      ...type("Azure.AI.Projects.VoiceAgentLiveDefinition")
+        .properties.get("delegation")
+        .type.variants.values(),
+    ].some(
+      (variant) =>
+        variant.type === type("Azure.AI.Projects.VoiceAgentLiveDelegation"),
+    ),
+  );
+  const identity = (model) =>
+    wireShape(model, program).properties.filter((p) => p.name !== "type");
+  assert.deepEqual(identity(hosted), identity(managed));
+  // @example validates TypeSpec types, not @pattern constraints. Check those
+  // constraints explicitly, including the OpenAPI emitted form.
+  for (const [name, invalid] of [
+    [
+      "agent_name",
+      ["", "_teacher", "https://other/agent", "../teacher", "a".repeat(64)],
+    ],
+    ["agent_version", ["0", "01", "-1", "latest", "1.2", "1".repeat(21)]],
+  ]) {
+    const pattern = getPattern(program, hosted.properties.get(name));
+    for (const value of invalid)
+      assert.equal(new RegExp(pattern).test(value), false, `${name}: ${value}`);
+    for (const doc of documents)
+      assert.equal(
+        doc.components.schemas.VoiceAgentLiveHostedAgentDelegation.properties[
+          name
+        ].pattern,
+        pattern,
+      );
+  }
+});
+
 test("Foundry delegation stays on the definition and inference reuses the native roots", () => {
   const nativeDelegation = type(
     "OpenAI.LiveSessionCreateParams",
@@ -243,7 +317,7 @@ test("Foundry delegation stays on the definition and inference reuses the native
   assert.ok(choices.includes("OpenAI.LiveResponsesDelegationParam"));
   assert.ok(choices.includes("null"));
   assert.equal(
-    choices.some((name) => name.includes("Managed")),
+    choices.some((name) => /Managed|Hosted/.test(name)),
     false,
   );
   assert.equal(
@@ -266,7 +340,7 @@ test("native Live models change only through the explicitly allowed Foundry exte
       const extensions = actual.children.filter((child) =>
         child.startsWith("Azure.AI.Projects."),
       );
-      assert.deepEqual(extensions, managedEventKinds.map(managedModel).sort());
+      assert.deepEqual(extensions, [...foundryEventModels].sort());
       actual.children = actual.children.filter(
         (child) => !extensions.includes(child),
       );
@@ -297,7 +371,7 @@ test("native Live models change only through the explicitly allowed Foundry exte
   );
 });
 
-test("only the native server discriminator gains the six Foundry managed-delegation literals", () => {
+test("only the native server discriminator gains the twelve Foundry managed/hosted-delegation literals", () => {
   const ns = type("OpenAI", native);
   for (const [name, union] of ns.unions) {
     if (!name.startsWith("Live") && name !== "DelegationType") continue;
@@ -308,6 +382,9 @@ test("only the native server discriminator gains the six Foundry managed-delegat
       expected.push(
         ...managedEventKinds.map((stage) =>
           JSON.stringify(`session.managed_agent_delegation.${stage}`),
+        ),
+        ...managedEventKinds.map((stage) =>
+          JSON.stringify(`session.hosted_agent_delegation.${stage}`),
         ),
       );
     }
@@ -399,6 +476,40 @@ test("managed output_item streams an indexed result, not a delegation snapshot",
   );
 });
 
+test("hosted events reuse managed payloads with distinct server-only discriminators", () => {
+  const serverTypes = type("OpenAI.LiveServerEventType");
+  for (const stage of managedEventKinds) {
+    const hosted = type(hostedModel(stage));
+    const managed = type(managedModel(stage));
+    const literal = `session.hosted_agent_delegation.${stage}`;
+    assert.equal(hosted.baseModel, type("OpenAI.LiveServerEvent"));
+    assert.equal(hosted.properties.get("type").type.value, literal);
+    assert.ok(
+      [...serverTypes.variants.values()].some((v) => v.type.value === literal),
+    );
+    assert.deepEqual(
+      wireShape(hosted, program).properties.filter((p) => p.name !== "type"),
+      wireShape(managed, program).properties.filter((p) => p.name !== "type"),
+    );
+    for (const root of [
+      "OpenAI.LiveClientEventType",
+      "OpenAI.LiveSidebandClientEventType",
+      "OpenAI.LiveSidebandServerEventType",
+    ])
+      assert.ok(
+        ![...type(root).variants.values()].some(
+          (v) => v.type.value === literal,
+        ),
+        `${root}: ${stage}`,
+      );
+  }
+  assert.ok(
+    ![...serverTypes.variants.values()].some(
+      (v) => v.type.value === "session.hosted_agent_delegation.request",
+    ),
+  );
+});
+
 test("managed delegation aggregate retains an ordered result list without event metadata", () => {
   const item = type(managedItemModel);
   assert.equal(
@@ -442,6 +553,41 @@ test("managed delegation aggregate retains an ordered result list without event 
         .VoiceAgentLiveFoundryManagedAgentDelegationConversationItem,
       undefined,
     );
+  }
+});
+
+test("hosted aggregate shares managed fields and result identity, not its discriminator", () => {
+  const hosted = type(hostedItemModel);
+  const managed = type(managedItemModel);
+  assert.equal(hosted.baseModel, managed.baseModel);
+  assert.equal(
+    hosted.properties.get("target").type.value,
+    "foundry_hosted_agent",
+  );
+  assert.deepEqual(
+    wireShape(hosted, program).properties.filter((p) => p.name !== "target"),
+    wireShape(managed, program).properties.filter((p) => p.name !== "target"),
+  );
+  assert.equal(
+    hosted.properties.get("output").type.indexer.value,
+    type(hostedModel("output_item")).properties.get("item").type,
+  );
+  for (const doc of documents) {
+    const schemas = doc.components.schemas;
+    const schema = schemas.VoiceAgentLiveFoundryHostedAgentDelegationItem;
+    assert.equal(
+      schemas.VoiceAgentLiveDelegationConversationItem.discriminator.mapping
+        .foundry_hosted_agent,
+      "#/components/schemas/VoiceAgentLiveFoundryHostedAgentDelegationItem",
+    );
+    assert.equal(schema.properties.output.type, "array");
+    assert.equal(
+      schema.properties.output.items.$ref,
+      "#/components/schemas/VoiceAgentLiveDelegationResultItem",
+    );
+    assert.ok(schema.required.includes("output"));
+    assert.ok(schema.required.includes("status"));
+    assert.equal(schemas.VoiceAgentLiveFoundryAgentDelegationFields, undefined);
   }
 });
 
@@ -514,6 +660,15 @@ const outputSamples = [
     ...payload,
   },
 }));
+const hostedSamples = [...samples, ...outputSamples].map((sample) => ({
+  model: sample.model.replace("Managed", "Hosted"),
+  payload: {
+    ...sample.payload,
+    type: sample.payload.type.replace("managed_agent", "hosted_agent"),
+    event_id: `hosted_${sample.payload.event_id}`,
+    delegation_id: `hosted_${sample.payload.delegation_id}`,
+  },
+}));
 const sessionStarted = {
   type: "session.started",
   event_id: "evt_started",
@@ -555,7 +710,8 @@ function exampleValue({ model, payload }) {
   return tspValue(
     payload,
     model.startsWith("Azure.AI.Projects.VoiceAgentLive") &&
-      (model.includes("Conversation") || model === managedItemModel),
+      (model.includes("Conversation") ||
+        [managedItemModel, hostedItemModel].includes(model)),
   );
 }
 
@@ -601,12 +757,125 @@ test("managed configuration needs no format selector and rejects the removed fie
   assert.ok(errors.some((d) => d.message.includes("result_format")));
 });
 
+test("hosted configuration supports default, explicit, and null versions without a format selector", async () => {
+  const model = "Azure.AI.Projects.VoiceAgentLiveHostedAgentDelegation";
+  const payload = {
+    type: "foundry_hosted_agent",
+    agent_name: "hosted-english-teacher",
+  };
+  const examples = [
+    { model, payload },
+    { model, payload: { ...payload, agent_version: "1" } },
+    { model, payload: { ...payload, agent_version: null } },
+  ];
+  checkErrors((await validateExamples("hosted-config", examples)).diagnostics);
+});
+
+test("hosted configuration rejects invalid identity, wrong type, and removed format", async (t) => {
+  const model = "Azure.AI.Projects.VoiceAgentLiveHostedAgentDelegation";
+  for (const [name, fields] of [
+    ["missing name", {}],
+    ["invalid name type", { agent_name: ["teacher"] }],
+    ["invalid version type", { agent_name: "teacher", agent_version: 1 }],
+    ["wrong kind", { agent_name: "teacher", type: "foundry_managed_agent" }],
+    ["removed format", { agent_name: "teacher", result_format: "tagged_text" }],
+  ]) {
+    await t.test(name, async () => {
+      const result = await validateExamples(`invalid-hosted-config-${name}`, [
+        { model, payload: { type: "foundry_hosted_agent", ...fields } },
+      ]);
+      checkInvalidExample(result.diagnostics);
+    });
+  }
+});
+
 test("lifecycle, streamed output, and native startup examples validate", async () => {
   const result = await validateExamples("valid-events", [
     ...samples,
     ...outputSamples,
+    ...hostedSamples,
   ]);
   checkErrors(result.diagnostics);
+});
+
+test("hosted events reject managed discriminators, missing correlation, and malformed results", async (t) => {
+  const cases = [
+    [
+      "missing delegation ID",
+      "progress",
+      (p) => {
+        delete p.delegation_id;
+      },
+    ],
+    [
+      "missing event ID",
+      "started",
+      (p) => {
+        delete p.event_id;
+      },
+    ],
+    [
+      "wrong discriminator",
+      "progress",
+      (p) => {
+        p.type = "session.managed_agent_delegation.progress";
+      },
+    ],
+    [
+      "snapshot in lifecycle",
+      "completed",
+      (p) => {
+        p.output = [];
+      },
+    ],
+    [
+      "missing failure code",
+      "failed",
+      (p) => {
+        delete p.error_code;
+      },
+    ],
+    [
+      "invalid failure message",
+      "failed",
+      (p) => {
+        p.error_message = null;
+      },
+    ],
+    [
+      "fractional output index",
+      "output_item",
+      (p) => {
+        p.output_index = 0.5;
+      },
+    ],
+    [
+      "missing result",
+      "output_item",
+      (p) => {
+        delete p.item;
+      },
+    ],
+    [
+      "invalid result text",
+      "output_item",
+      (p) => {
+        p.item = { commentary: ["Not a string"] };
+      },
+    ],
+  ];
+  for (const [name, stage, mutate] of cases) {
+    await t.test(name, async () => {
+      const sample = structuredClone(
+        hostedSamples.find((s) => s.payload.type.endsWith(`.${stage}`)),
+      );
+      mutate(sample.payload);
+      const result = await validateExamples(`invalid-hosted-event-${name}`, [
+        sample,
+      ]);
+      checkInvalidExample(result.diagnostics);
+    });
+  }
 });
 
 test("managed-agent events do not retain the old event-name prefix", async () => {
@@ -866,8 +1135,11 @@ test("SDK metadata exports native events and separate Live persistence discrimin
       !context.sdkPackage.models.some((m) => m.__raw?.name === name),
       name,
     );
-  for (const stage of managedEventKinds) {
-    const value = model(managedModel(stage).split(".").at(-1));
+  for (const name of foundryEventModels) {
+    const stage = managedEventKinds.find((kind) =>
+      [managedModel(kind), hostedModel(kind)].includes(name),
+    );
+    const value = model(name.split(".").at(-1));
     assert.equal(value.baseModel.__raw.name, "LiveServerEvent");
     assert.ok(
       value.properties.some((p) => p.serializedName === "delegation_id"),
@@ -917,6 +1189,7 @@ test("SDK metadata exports native events and separate Live persistence discrimin
   assert.equal(delegation.discriminatorProperty.serializedName, "target");
   assert.deepEqual(Object.keys(delegation.discriminatedSubtypes).sort(), [
     "client",
+    "foundry_hosted_agent",
     "foundry_managed_agent",
     "responses",
   ]);
@@ -959,6 +1232,25 @@ test("SDK metadata exports native events and separate Live persistence discrimin
   assert.equal(outputArray.type.kind, "array");
   const resultItem = model("VoiceAgentLiveDelegationResultItem");
   assert.equal(outputArray.type.valueType, resultItem);
+  const hosted = model("VoiceAgentLiveFoundryHostedAgentDelegationItem");
+  assert.equal(hosted.baseModel, delegation);
+  assert.equal(delegation.discriminatedSubtypes.foundry_hosted_agent, hosted);
+  assert.equal(
+    hosted.properties.find((p) => p.serializedName === "output").type.valueType,
+    resultItem,
+  );
+  assert.equal(
+    model("VoiceAgentLiveHostedDelegationOutputItemEvent").properties.find(
+      (p) => p.serializedName === "item",
+    ).type,
+    resultItem,
+  );
+  assert.equal(
+    model("VoiceAgentLiveHostedAgentDelegation").properties.find(
+      (p) => p.serializedName === "type",
+    ).type.value,
+    "foundry_hosted_agent",
+  );
   const outputEvent = model("VoiceAgentLiveManagedDelegationOutputItemEvent");
   assert.equal(
     outputEvent.properties.find((p) => p.serializedName === "item").type,
@@ -1096,14 +1388,19 @@ test("Java SDK customization targets Realtime fields and keeps Live events witho
   for (const name of ["LiveClientEvent", "LiveServerEvent"]) {
     assert.equal(model(name).access, "public");
   }
-  for (const kind of managedEventKinds) {
-    const event = model(managedModel(kind).split(".").at(-1));
+  for (const name of foundryEventModels) {
+    const event = model(name.split(".").at(-1));
     assert.equal(event.baseModel, model("LiveServerEvent"));
     assert.equal(
       event.discriminatorValue,
-      `session.managed_agent_delegation.${kind}`,
+      fields(type(name, sdkProgram)).get("type").type.value,
     );
   }
+  for (const name of [
+    "VoiceAgentLiveHostedAgentDelegation",
+    "VoiceAgentLiveFoundryHostedAgentDelegationItem",
+  ])
+    assert.equal(model(name).access, "public");
 });
 
 test("cancel is server-only and the removed request event has no typed variant", () => {
@@ -1334,7 +1631,7 @@ test("stored delegation reuses native fields and discriminates target-specific r
   const target = type("Azure.AI.Projects.VoiceAgentLiveDelegationTarget");
   assert.deepEqual(
     [...target.variants.values()].map((v) => v.type.value),
-    ["responses", "client", "foundry_managed_agent"],
+    ["responses", "client", "foundry_managed_agent", "foundry_hosted_agent"],
   );
   // Foundry ownership is a persistence extension, not a new native Live target.
   const nativeTarget = nativeItem.properties.get("target").type;
@@ -1449,13 +1746,117 @@ const storedExamples = [
       : `Azure.AI.Projects.VoiceAgentLive${payload.target === "client" ? "Client" : "Responses"}DelegationConversationItem`,
   payload,
 }));
+const hostedStoredExamples = storedExamples
+  .filter((sample) => sample.model === managedItemModel)
+  .map((sample) => ({
+    model: hostedItemModel,
+    payload: {
+      ...sample.payload,
+      target: "foundry_hosted_agent",
+      id: `hosted_${sample.payload.id}`,
+      agent_name: "hosted-english-teacher",
+    },
+  }));
 
 test("speech, partial capture, and target-specific delegation examples validate", async () => {
   const result = await validateExamples("persisted-live-items", [
     ...speechExamples,
     ...storedExamples,
+    ...hostedStoredExamples,
   ]);
   checkErrors(result.diagnostics);
+});
+
+test("hosted streamed results retain the same per-delegation output ordering in persistence", async () => {
+  const collected = new Map();
+  for (const { payload } of hostedSamples.filter((s) =>
+    s.payload.type.endsWith(".output_item"),
+  )) {
+    const items = collected.get(payload.delegation_id) ?? [];
+    assert.equal(payload.output_index, items.length);
+    items.push(payload.item);
+    collected.set(payload.delegation_id, items);
+  }
+  assert.deepEqual(
+    collected.get(hostedStoredExamples[0].payload.id),
+    hostedStoredExamples[0].payload.output,
+  );
+  const second = structuredClone(hostedStoredExamples[0]);
+  second.payload.id = "hosted_del_2";
+  second.payload.output = collected.get("hosted_del_2");
+  assert.equal(second.payload.output.length, 1);
+  checkErrors(
+    (await validateExamples("interleaved-hosted-output", [second])).diagnostics,
+  );
+});
+
+test("hosted aggregates reject missing identity, invalid results, and legacy fields", async (t) => {
+  const cases = [
+    [
+      "missing id",
+      (p) => {
+        delete p.id;
+      },
+    ],
+    [
+      "missing version",
+      (p) => {
+        delete p.agent_version;
+      },
+    ],
+    [
+      "missing status",
+      (p) => {
+        delete p.status;
+      },
+    ],
+    [
+      "missing output",
+      (p) => {
+        delete p.output;
+      },
+    ],
+    [
+      "non-array output",
+      (p) => {
+        p.output = resultText;
+      },
+    ],
+    [
+      "invalid result entry",
+      (p) => {
+        p.output = [{ thinking: 42 }];
+      },
+    ],
+    [
+      "wrong target",
+      (p) => {
+        p.target = "foundry_managed_agent";
+      },
+    ],
+    [
+      "event metadata",
+      (p) => {
+        p.delegation_id = p.id;
+      },
+    ],
+    [
+      "removed format",
+      (p) => {
+        p.result_format = "tagged_text";
+      },
+    ],
+  ];
+  for (const [name, mutate] of cases) {
+    await t.test(name, async () => {
+      const sample = structuredClone(hostedStoredExamples[0]);
+      mutate(sample.payload);
+      const result = await validateExamples(`invalid-hosted-item-${name}`, [
+        sample,
+      ]);
+      checkInvalidExample(result.diagnostics);
+    });
+  }
 });
 
 test("streamed result indices map to the managed aggregate independently per delegation", async () => {
@@ -1797,6 +2198,20 @@ test("persisted definitions remain flat with Foundry store and native configurat
       "agent_name",
       "agent_version",
     ]);
+    const hosted = schemas.VoiceAgentLiveHostedAgentDelegation;
+    assert.deepEqual(hosted.required, managed.required);
+    assert.deepEqual(
+      Object.keys(hosted.properties),
+      Object.keys(managed.properties),
+    );
+    assert.equal(hosted.properties.type.enum[0], "foundry_hosted_agent");
+    assert.ok(
+      schemas.VoiceAgentLiveDelegation.oneOf.some(
+        (choice) =>
+          choice.$ref ===
+          "#/components/schemas/VoiceAgentLiveHostedAgentDelegation",
+      ),
+    );
     for (const [name, schema] of Object.entries(schemas)) {
       if (name.startsWith("VoiceAgentLive"))
         assert.equal(schema.properties?.result_format, undefined, name);

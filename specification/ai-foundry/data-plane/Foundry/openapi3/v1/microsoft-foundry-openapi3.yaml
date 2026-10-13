@@ -4207,7 +4207,7 @@ paths:
         Establishes a primary WebSocket for an agent with sub_protocol=live. This is not the native
         OpenAI POST /live/sessions WebRTC operation. Only WebSocket transport is supported here.
         Native session.update changes delegation settings only; it cannot switch the configured
-        Foundry-managed target. Foundry owns execution and result injection for managed delegation.
+        Foundry-managed or hosted target. Foundry owns execution and result injection for both.
         Do not negotiate the realtime WebSocket subprotocol on this route.
       parameters:
         - name: Foundry-Features
@@ -89065,7 +89065,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/VoiceAgentLiveDelegation'
             - type: 'null'
-          description: 'Who handles delegated work: the connected application, a native Responses backend, or a Foundry-managed same-project prompt agent. Omission or null uses native client delegation.'
+          description: 'Who handles delegated work: the connected application, a native Responses backend, or a same-project Foundry-managed prompt agent or hosted agent. Omission or null uses native client delegation.'
         input:
           type: array
           items:
@@ -89086,7 +89086,8 @@ components:
         - $ref: '#/components/schemas/OpenAI.LiveClientDelegationParam'
         - $ref: '#/components/schemas/OpenAI.LiveResponsesDelegationParam'
         - $ref: '#/components/schemas/VoiceAgentLiveManagedAgentDelegation'
-      description: Delegation configured on a Foundry Live voice agent. Native client and Responses configurations are reused unchanged; Foundry may also execute a same-project prompt agent.
+        - $ref: '#/components/schemas/VoiceAgentLiveHostedAgentDelegation'
+      description: Delegation configured on a Foundry Live voice agent. Native client and Responses configurations are reused unchanged; Foundry may also execute a same-project prompt agent or hosted agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89109,7 +89110,7 @@ components:
           description: The ID of the Responses API response associated with a Responses delegation. Omitted for client delegations.
         target:
           $ref: '#/components/schemas/VoiceAgentLiveDelegationTarget'
-          description: The configured delegation owner. Foundry-managed prompt agents use foundry_managed_agent here while their native Live transport still uses client delegation.
+          description: The configured delegation owner. Foundry-managed prompt agents use foundry_managed_agent and hosted agents use foundry_hosted_agent here; both use native Live client delegation upstream.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The service-observed delegation creation time, encoded as Unix seconds.
@@ -89119,9 +89120,10 @@ components:
           client: '#/components/schemas/VoiceAgentLiveClientDelegationConversationItem'
           responses: '#/components/schemas/VoiceAgentLiveResponsesDelegationConversationItem'
           foundry_managed_agent: '#/components/schemas/VoiceAgentLiveFoundryManagedAgentDelegationItem'
+          foundry_hosted_agent: '#/components/schemas/VoiceAgentLiveFoundryHostedAgentDelegationItem'
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveConversationItem'
-      description: A persisted delegation that reuses native OpenAI delegation fields and locally extends target for Foundry-managed agents. The inherited id is the native delegation id, used both for correlation and to retrieve this stored item. This composition does not widen the target or add persistence fields on OpenAI.LiveDelegationItem itself.
+      description: A persisted delegation that reuses native OpenAI delegation fields and locally extends target for Foundry-managed prompt agents and hosted agents. The inherited id is the native delegation id, used both for correlation and to retrieve this stored item. This composition does not widen the target or add persistence fields on OpenAI.LiveDelegationItem itself.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89134,7 +89136,7 @@ components:
         thinking:
           type: string
           description: Optional background context for Live; this does not directly request speech.
-      description: One result returned to Live for a delegation. Commentary is speakable guidance; thinking is background context, not private model reasoning. Each managed output_item event carries one new result, not cumulative text. These results do not represent spoken transcripts or playback completion.
+      description: One result returned to Live for a delegation. Commentary is speakable guidance; thinking is background context, not private model reasoning. Each managed or hosted output_item event carries one new result, not cumulative text. These results do not represent spoken transcripts or playback completion.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89148,14 +89150,59 @@ components:
             - failed
             - incomplete
             - cancelled
-      description: The managed delegation's execution outcome, independent of Live speech and playback.
+      description: The managed or hosted delegation's execution outcome, independent of Live speech and playback.
     VoiceAgentLiveDelegationTarget:
       type: string
       enum:
         - responses
         - client
         - foundry_managed_agent
-      description: The configured delegation owner recorded by Foundry. A managed prompt agent is distinct here even though its native Live transport uses client delegation.
+        - foundry_hosted_agent
+      description: The configured delegation owner recorded by Foundry. Managed prompt agents and hosted agents have distinct targets here even though both use native Live client delegation.
+    VoiceAgentLiveFoundryHostedAgentDelegationItem:
+      type: object
+      required:
+        - target
+        - agent_name
+        - agent_version
+        - offset_ms
+        - output
+        - status
+      properties:
+        target:
+          type: string
+          enum:
+            - foundry_hosted_agent
+        agent_name:
+          type: string
+          description: The same-project target agent's name.
+        agent_version:
+          type: string
+          description: The target version pinned when this voice connection started.
+        offset_ms:
+          type: integer
+          format: int64
+          description: The originating native delegation's session-relative audio offset, in milliseconds.
+        backend_conversation_id:
+          type: string
+          description: The backend agent's conversation ID, when available. Distinct from the stored voice conversation ID and the native Live session ID.
+        output:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentLiveDelegationResultItem'
+          description: The ordered accepted results. Empty before the first result. Each session.managed_agent_delegation.output_item or session.hosted_agent_delegation.output_item event contributes one item at its zero-based output_index; earlier entries are not replaced by cumulative text. Partial results remain available after failure or cancellation.
+        delegation_context:
+          type: string
+          description: Plain-text task context supplied to the target agent, when available. This is not the backend request body.
+        status:
+          $ref: '#/components/schemas/VoiceAgentLiveDelegationStatus'
+          description: The delegation's execution outcome, independent of Live speech and client playback.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentLiveDelegationConversationItem'
+      description: The persisted aggregate for a Foundry-hosted agent delegation. Its id is the native delegation ID referenced by hosted-delegation events. It uses the same fields and ordered results as managed prompt-agent delegation, including accepted results produced before failure or cancellation; lifecycle notifications do not repeat this item.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentLiveFoundryManagedAgentDelegationItem:
       type: object
       required:
@@ -89172,7 +89219,7 @@ components:
             - foundry_managed_agent
         agent_name:
           type: string
-          description: The same-project prompt-agent name.
+          description: The same-project target agent's name.
         agent_version:
           type: string
           description: The target version pinned when this voice connection started.
@@ -89187,16 +89234,47 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VoiceAgentLiveDelegationResultItem'
-          description: The ordered accepted results. Empty before the first result. Each session.managed_agent_delegation.output_item event contributes one item at its zero-based output_index; earlier entries are not replaced by cumulative text. Partial results remain available after failure or cancellation.
+          description: The ordered accepted results. Empty before the first result. Each session.managed_agent_delegation.output_item or session.hosted_agent_delegation.output_item event contributes one item at its zero-based output_index; earlier entries are not replaced by cumulative text. Partial results remain available after failure or cancellation.
         delegation_context:
           type: string
-          description: Plain-text task context supplied to the managed prompt agent, when available. This is not the backend request body.
+          description: Plain-text task context supplied to the target agent, when available. This is not the backend request body.
         status:
           $ref: '#/components/schemas/VoiceAgentLiveDelegationStatus'
-          description: The managed delegation's execution outcome, independent of Live speech and client playback.
+          description: The delegation's execution outcome, independent of Live speech and client playback.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveDelegationConversationItem'
       description: The persisted aggregate for a Foundry-managed prompt-agent delegation. Its id is the native delegation ID referenced by managed-delegation events. Results are retained in output order, including accepted results produced before failure or cancellation; lifecycle notifications do not repeat this item.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentLiveHostedAgentDelegation:
+      type: object
+      required:
+        - type
+        - agent_name
+      properties:
+        type:
+          type: string
+          enum:
+            - foundry_hosted_agent
+          description: Selects a Foundry-hosted agent as the delegation target.
+        agent_name:
+          type: string
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$
+          description: The name of a hosted agent in the same Foundry project, not a URL or resource path. Prompt and voice agents are not supported by this delegation type.
+        agent_version:
+          anyOf:
+            - type: string
+            - type: 'null'
+          pattern: ^[1-9][0-9]{0,19}$
+          description: A positive-integer agent version. Omission or null selects the active version, resolved once when the voice connection starts.
+      description: |-
+        A same-project hosted agent executed by Foundry on behalf of the Live frontend. Foundry resolves
+        and pins the target version once per voice connection, configures native client delegation upstream,
+        and injects the target's validated output using native commentary/thinking messages.
+        Hosted delegation uses the same lifecycle and result payloads as managed prompt-agent delegation,
+        with session.hosted_agent_delegation event types. This is agent configuration, not an additional
+        OpenAI inference-event variant.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

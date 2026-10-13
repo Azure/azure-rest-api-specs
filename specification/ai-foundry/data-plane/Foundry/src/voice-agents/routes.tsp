@@ -130,7 +130,7 @@ interface VoiceAgentLiveWebSocket {
    * Establishes a primary WebSocket for an agent with sub_protocol=live. This is not the native
    * OpenAI POST /live/sessions WebRTC operation. Only WebSocket transport is supported here.
    * Native session.update changes delegation settings only; it cannot switch the configured
-   * Foundry-managed target. Foundry owns execution and result injection for managed delegation.
+   * Foundry-managed or hosted target. Foundry owns execution and result injection for both.
    * Do not negotiate the realtime WebSocket subprotocol on this route.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "The successful WebSocket 101 upgrade has no HTTP entity body."
