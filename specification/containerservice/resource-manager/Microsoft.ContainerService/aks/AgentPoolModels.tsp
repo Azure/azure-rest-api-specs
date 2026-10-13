@@ -808,7 +808,8 @@ model SysctlConfig {
   /**
    * Sysctl setting fs.file-max.
    */
-  fsFileMax?: int32;
+  @typeChangedFrom(Versions.v2026_08_01, int32)
+  fsFileMax?: int64;
 
   /**
    * Sysctl setting fs.aio-max-nr.
