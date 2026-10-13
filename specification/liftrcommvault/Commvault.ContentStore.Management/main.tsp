@@ -182,7 +182,7 @@ interface CloudAccounts {
     CloudAccount,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       CloudAccount,
-      CloudAccountProperties
+      CloudAccountPatchProperties
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<CloudAccount>;
@@ -209,6 +209,60 @@ interface CloudAccounts {
     void,
     ArmResponse<LatestLinkedSaaSResponse>
   >;
+}
+
+// An alias keeps this out of the emitted Swagger; ResourceUpdateModel names the PATCH schema.
+alias CloudAccountPatchProperties = {
+  ...OmitProperties<CloudAccountProperties, "marketplace" | "user">;
+
+  @doc("Marketplace details of the resource.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  marketplace: CloudAccountMarketplaceUpdate;
+
+  @doc("Details of the user.")
+  user: CloudAccountUserUpdate;
+};
+
+@doc("Marketplace details that can be updated on a Commvault Cloud Account.")
+model CloudAccountMarketplaceUpdate {
+  ...OptionalProperties<UpdateableProperties<OmitProperties<
+    LiftrBase.MarketplaceDetails,
+    "subscriptionId" | "offerDetails"
+  >>>;
+
+  @doc("Azure subscription id for the the marketplace offer is purchased from")
+  subscriptionId?: string;
+
+  @doc("Offer details for the marketplace that is selected by the user")
+  offerDetails?: CloudAccountOfferDetailsUpdate;
+}
+
+@doc("Marketplace offer details that can be updated on a Commvault Cloud Account.")
+model CloudAccountOfferDetailsUpdate {
+  ...OptionalProperties<UpdateableProperties<OmitProperties<
+    LiftrBase.OfferDetails,
+    "planId"
+  >>>;
+
+  @doc("Plan Id for the marketplace offer")
+  planId?: string;
+}
+
+@doc("User details that can be updated on a Commvault Cloud Account.")
+model CloudAccountUserUpdate {
+  ...OptionalProperties<UpdateableProperties<OmitProperties<
+    LiftrBase.UserDetails,
+    "firstName" | "lastName" | "emailAddress"
+  >>>;
+
+  @doc("First name of the user")
+  firstName?: string;
+
+  @doc("Last name of the user")
+  lastName?: string;
+
+  @doc("Email address of the user")
+  emailAddress?: LiftrBase.email;
 }
 
 @doc("Properties specific to Commvault Cloud Account resource")

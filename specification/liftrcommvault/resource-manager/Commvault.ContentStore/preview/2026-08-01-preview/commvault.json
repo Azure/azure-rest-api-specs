@@ -2790,6 +2790,54 @@
         "value"
       ]
     },
+    "CloudAccountMarketplaceUpdate": {
+      "type": "object",
+      "description": "Marketplace details that can be updated on a Commvault Cloud Account.",
+      "properties": {
+        "saasResourceId": {
+          "type": "string",
+          "description": "Marketplace SaaS Resource Id"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Azure subscription id for the the marketplace offer is purchased from"
+        },
+        "offerDetails": {
+          "$ref": "#/definitions/CloudAccountOfferDetailsUpdate",
+          "description": "Offer details for the marketplace that is selected by the user"
+        }
+      }
+    },
+    "CloudAccountOfferDetailsUpdate": {
+      "type": "object",
+      "description": "Marketplace offer details that can be updated on a Commvault Cloud Account.",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id for the marketplace offer"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id for the marketplace offer"
+        },
+        "planName": {
+          "type": "string",
+          "description": "Plan Name for the marketplace offer"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Plan Display Name for the marketplace offer"
+        },
+        "termId": {
+          "type": "string",
+          "description": "Plan Display Name for the marketplace offer"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id for the marketplace offer"
+        }
+      }
+    },
     "CloudAccountProperties": {
       "type": "object",
       "description": "Properties specific to Commvault Cloud Account resource",
@@ -2865,8 +2913,12 @@
       "type": "object",
       "description": "The updatable properties of the CloudAccount.",
       "properties": {
+        "company": {
+          "$ref": "#/definitions/CompanyProfile",
+          "description": "Optional company details for the cloud account"
+        },
         "marketplace": {
-          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
+          "$ref": "#/definitions/CloudAccountMarketplaceUpdate",
           "description": "Marketplace details of the resource.",
           "x-ms-mutability": [
             "read",
@@ -2875,12 +2927,34 @@
           ]
         },
         "user": {
-          "$ref": "#/definitions/LiftrBase.UserDetails",
+          "$ref": "#/definitions/CloudAccountUserUpdate",
           "description": "Details of the user."
+        }
+      }
+    },
+    "CloudAccountUserUpdate": {
+      "type": "object",
+      "description": "User details that can be updated on a Commvault Cloud Account.",
+      "properties": {
+        "upn": {
+          "type": "string",
+          "description": "User's principal name"
         },
-        "company": {
-          "$ref": "#/definitions/CompanyProfile",
-          "description": "Optional company details for the cloud account"
+        "phoneNumber": {
+          "type": "string",
+          "description": "User's phone number"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user"
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/LiftrBase.email",
+          "description": "Email address of the user"
         }
       }
     },
