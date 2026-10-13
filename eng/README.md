@@ -13,8 +13,12 @@ Requirement policies for committed specification changes:
 node eng/tools/spec-change-policies/src/index.ts --base-commitish HEAD^ --head-commitish HEAD
 ```
 
-Repository administrators must update required-check settings from **TypeSpec
-Requirement** to **Spec Change Policies** when deploying the workflow rename.
+The workflow temporarily also publishes **TypeSpec Requirement**, which passes
+only when **Spec Change Policies** succeeds. Keep the old check required during
+the rollout so existing PR results remain usable.
+[Cleanup issue](https://github.com/Azure/azure-rest-api-specs/issues/47248) tracks
+switching the requirement and removing the compatibility job after old-only PRs
+drain. Preserve separate externally produced Requirement statuses where still in use.
 
 ## Protected files
 

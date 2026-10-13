@@ -38,3 +38,17 @@ jobs:
         with:
           name: "brownfield"
           value: "${{ steps.tsr.outputs.brownfield == 'true' }}"
+
+  # Temporary required-check compatibility.
+  # Cleanup: https://github.com/Azure/azure-rest-api-specs/issues/47248
+  legacy-required-check:
+    name: TypeSpec Requirement
+    needs: spec-change-policies
+    if: ${{ always() }}
+    runs-on: ubuntu-slim
+    permissions: {}
+    steps:
+      - name: Mirror Spec Change Policies result
+        env:
+          RESULT: ${{ needs.spec-change-policies.result }}
+        run: test "$RESULT" = success
