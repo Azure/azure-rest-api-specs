@@ -60,14 +60,21 @@ model BulkactionVMProperties {
   @doc("Specifies the priority for the virtual machines. Mirrors the priority property on Microsoft.Compute/virtualMachines.")
   priority?: PriorityType;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "maxPricePerVM has VM which does not follow camel casing"
   @added(Versions.`2026-10-06-preview`)
-  @doc("Specifies the maximum price, in US Dollars, you are willing to pay per hour for each Azure Spot virtual machine. This price is compared with the current Azure Spot price for the virtual machine size at create time, and the operation only succeeds if maxPricePerVM is greater than the current Azure Spot price. It is also used to evict a virtual machine if the current Azure Spot price rises above it after creation. Possible values are any decimal value greater than zero, or -1 to indicate the default price is up-to on-demand and the virtual machine should not be evicted for price reasons. The default is -1 when not provided. Only applies when priority is Spot.")
-  maxPricePerVM?: float32;
+  @doc("Specifies the billing related details of the Azure Spot virtual machines. Mirrors the billingProfile property on Microsoft.Compute/virtualMachines. Only applies when priority is Spot.")
+  billingProfile?: BillingProfile;
 
   @added(Versions.`2026-10-06-preview`)
   @doc("Specifies the eviction policy for the Azure Spot virtual machines. Both Deallocate and Delete are supported. Mirrors the evictionPolicy property on Microsoft.Compute/virtualMachines. Only applies when priority is Spot.")
   evictionPolicy?: EvictionPolicy;
+}
+
+@added(Versions.`2026-10-06-preview`)
+@doc("Specifies the billing related details of the Azure Spot virtual machines.")
+model BillingProfile {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "maxPricePerVM has VM which does not follow camel casing"
+  @doc("Specifies the maximum price, in US Dollars, you are willing to pay per hour for each Azure Spot virtual machine. This price is compared with the current Azure Spot price for the virtual machine size at create time, and the operation only succeeds if maxPricePerVM is greater than the current Azure Spot price. It is also used to evict a virtual machine if the current Azure Spot price rises above it after creation. Possible values are any decimal value greater than zero, or -1 to indicate the default price is up-to on-demand and the virtual machine should not be evicted for price reasons. The default is -1 when not provided.")
+  maxPricePerVM?: float32;
 }
 
 @doc("Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations.")
