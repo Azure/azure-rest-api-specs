@@ -13,6 +13,15 @@ using Microsoft.Network;
 using Microsoft.Compute;
 using Common;
 
+// Restore the released C# native date contracts and original security-provider name.
+@@alternateType(Microsoft.Network.ExpressRouteFailoverConnectionResourceDetails.lastUpdatedTime, utcDateTime, "csharp");
+@@clientName(Microsoft.Network.ExpressRouteFailoverConnectionResourceDetails.lastUpdatedTime, "LastUpdatedOn", "csharp");
+@@alternateType(Microsoft.Network.ExpressRouteFailoverTestDetails.endTime, utcDateTime, "csharp");
+@@clientName(Microsoft.Network.ExpressRouteFailoverTestDetails.endTime, "EndOn", "csharp");
+@@alternateType(Microsoft.Network.ExpressRouteFailoverTestDetails.startTime, utcDateTime, "csharp");
+@@clientName(Microsoft.Network.ExpressRouteFailoverTestDetails.startTime, "StartOn", "csharp");
+@@clientName(Microsoft.Network.VirtualWanSecurityProvider.type, "ProviderType", "csharp");
+
 // Preserve the naming requirements used by the released C# provisioning library.
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve C# provisioning resource naming compatibility."
 @@clientOption(
