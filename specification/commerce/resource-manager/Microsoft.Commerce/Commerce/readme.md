@@ -17,6 +17,22 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
+## Authoring API Examples
+
+Author examples in [`examples/RateCard.yaml`](./examples/RateCard.yaml) and
+[`examples/UsageAggregates.yaml`](./examples/UsageAggregates.yaml). The TypeSpec
+emitter regenerates the JSON files under `preview/2015-06-01-preview/examples/`;
+do not edit those generated files. The request API version is implicit.
+
+From this directory, validate the examples and regenerate Swagger:
+
+```sh
+pnpm --package=@azure-tools/typespec-azure-examples@0.2.0 dlx tsp-examples validate . --warn-as-error
+pnpm exec tsp compile .
+```
+
+---
+
 ## Configuration
 
 
@@ -113,7 +129,6 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
 
 
 
