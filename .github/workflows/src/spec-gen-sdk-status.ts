@@ -62,21 +62,31 @@ export async function setSpecGenSdkStatusImpl({
   } else {
     // check_run payloads can omit PRs (notably for forks); resolve against the checked commit.
     let hasAssociatedPr = false;
-    const prs = await github.paginate(
-      github.rest.repos.listPullRequestsAssociatedWithCommit,
-      { owner, repo, commit_sha: head_sha, per_page: PER_PAGE_MAX },
-      (response, done) => {
-        hasAssociatedPr ||= response.data.length > 0;
-        const pr = response.data.find(
-          (pr) =>
-            pr.state === "open" &&
-            pr.head.sha === head_sha &&
-            pr.base.repo.full_name.toLowerCase() === `${owner}/${repo}`.toLowerCase(),
+    const prs = await github
+      .paginate(
+        github.rest.repos.listPullRequestsAssociatedWithCommit,
+        { owner, repo, commit_sha: head_sha, per_page: PER_PAGE_MAX },
+        (response, done) => {
+          hasAssociatedPr ||= response.data.length > 0;
+          const pr = response.data.find(
+            (pr) =>
+              pr.state === "open" &&
+              pr.head.sha === head_sha &&
+              pr.base.repo.full_name.toLowerCase() === `${owner}/${repo}`.toLowerCase(),
+          );
+          if (pr) done();
+          return pr ? [pr] : [];
+        },
+      )
+      .catch((error: unknown) => {
+        hasAssociatedPr = false;
+        core.warning(
+          `Commit-to-PR lookup failed; falling back to repository search: ${
+            error instanceof Error ? error.message : "unknown error"
+          }`,
         );
-        if (pr) done();
-        return pr ? [pr] : [];
-      },
-    );
+        return [];
+      });
     issue_number = prs[0]?.number ?? NaN;
     // The commits API can return no PRs for forks; use the same search fallback as extractInputs.
     if (!hasAssociatedPr) {

@@ -174,9 +174,18 @@ describe("spec-gen-sdk-status", () => {
     },
   );
 
-  it.each(["open", "closed"])(
-    "rechecks PR state after a fork commit needs the search fallback (%s)",
-    async (state) => {
+  it.each([
+    { state: "open", lookupFails: false },
+    { state: "closed", lookupFails: false },
+    { state: "open", lookupFails: true },
+  ])(
+    "rechecks PR state after fork lookup needs search ($state, lookup failure: $lookupFails)",
+    async ({ state, lookupFails }) => {
+      if (lookupFails) {
+        mockGithub.rest.repos.listPullRequestsAssociatedWithCommit.mockRejectedValue(
+          new Error("Commit lookup unavailable"),
+        );
+      }
       mockGithub.rest.search.issuesAndPullRequests.mockResolvedValue({
         data: { total_count: 1, items: [{ number: 123 }] },
       });
@@ -191,13 +200,21 @@ describe("spec-gen-sdk-status", () => {
         },
       });
       await runStatus({ issue_number: NaN });
-      expect(mockGithub.rest.search.issuesAndPullRequests).toHaveBeenCalledWith({
+      expect(mockGithub.rest.search.issuesAndPullRequests).toHaveBeenCalledExactlyOnceWith({
         q: "sha:testSha type:pr state:open repo:testOwner/testRepo",
         advanced_search: "true",
       });
       expect(mockGithub.rest.repos.createCommitStatus).toHaveBeenCalledTimes(
         state === "open" ? 1 : 0,
       );
+      if (lookupFails) {
+        expect(mockCore.warning).toHaveBeenCalledWith(
+          expect.stringContaining("Commit lookup unavailable"),
+        );
+        expect(mockGithub.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+          expect.objectContaining({ state: "pending", sha: "testSha" }),
+        );
+      }
     },
   );
 
