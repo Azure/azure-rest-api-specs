@@ -1,6 +1,7 @@
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { d } from "@azure-tools/specs-shared/testing";
 import { ChildProcess, spawn } from "node:child_process";
+import { writeFileSync } from "node:fs";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "pathe";
@@ -179,13 +180,22 @@ it.each(["false", "true"])(
       projects: [project, other],
       checkingAllSpecs: false,
     });
+    const git = simpleGit(root);
+    await git
+      .addConfig("user.name", "Test")
+      .addConfig("user.email", "test@example.com")
+      .addConfig("commit.gpgsign", "false")
+      .add(".")
+      .commit("Fixture");
     vi.mocked(spawn).mockImplementationOnce(() => {
+      writeFileSync(join(root, "generated.txt"), "generated");
       const child = new ChildProcess();
       queueMicrotask(() => child.emit("close", 1, null));
       return child;
     });
-    await expect(runChanged(root)).resolves.toBe(false);
+    await expect(runChanged(root, { gitClean: true })).resolves.toBe(false);
     expect(spawn).toHaveBeenCalledTimes(2);
+    expect((await git.status()).isClean()).toBe(true);
     expect(console.error).toHaveBeenLastCalledWith(d`
       TypeSpec Validation failed for some folder to fix run and address any errors:
        > pnpm install

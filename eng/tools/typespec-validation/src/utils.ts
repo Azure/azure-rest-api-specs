@@ -85,6 +85,10 @@ export async function readFileAtCommit(
   }
 }
 
+export function getStructureVersion(relativePath: string): 1 | 2 {
+  return relativePath.includes("data-plane") || relativePath.includes("resource-manager") ? 2 : 1;
+}
+
 export async function gitDiffTopSpecFolder(folder: string, logger: ILogger) {
   const git = simpleGit(folder);
   const topSpecFolder = resolve(folder).replace(/(^.*specification\/[^/]*)(.*)/, "$1");
