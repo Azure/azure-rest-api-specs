@@ -170,7 +170,7 @@
         "tags": [
           "ManagedInstanceServerProtectionSettings"
         ],
-        "description": "Updates managed instance server protection setting.",
+        "description": "Updates managed instance server protection setting. A successful request\nreturns HTTP 200 with the resource. While the update is in progress,\nprovisioningState is Updating; use the polling headers to track completion\nand retrieve the final resource result from the Location URL.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -221,15 +221,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ServerProtectionSettings' update operation succeeded",
+            "description": "The protection settings update was accepted or has completed. The resource\ncontains its provisioning state; use the polling headers while the update is\nin progress and the Location header to retrieve the final resource result.",
             "schema": {
               "$ref": "#/definitions/ServerProtectionSettings"
-            }
-          },
-          "202": {
-            "description": "The update was accepted; use the polling headers to track completion and\nretrieve the result.",
-            "schema": {
-              "$ref": "./common.json#/definitions/ServerProtectionSettingsOperation"
             },
             "headers": {
               "Azure-AsyncOperation": {

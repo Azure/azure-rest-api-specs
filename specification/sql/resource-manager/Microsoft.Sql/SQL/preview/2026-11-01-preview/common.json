@@ -884,7 +884,7 @@
           {
             "name": "Enabled",
             "value": "enabled",
-            "description": "Protection is permanently enabled. Instance deletion is blocked while a live\nuser database exists or a dropped user database has immutable PITR backups in retention."
+            "description": "Permanent protection is requested. Once applied, instance deletion is blocked\nwhile a live user database exists or a dropped user database has immutable PITR\nbackups in retention. While provisioningState is Updating, the requested\nprotection is not yet confirmed effective."
           },
           {
             "name": "Disabled",
@@ -2967,7 +2967,578 @@
       ],
       "x-ms-enum": {
         "name": "Features",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "BackupShortTermRetentionPolicies",
+            "value": "BackupShortTermRetentionPolicies"
+          },
+          {
+            "name": "BlobAuditing",
+            "value": "BlobAuditing"
+          },
+          {
+            "name": "DatabaseAdvancedThreatProtectionSettings",
+            "value": "DatabaseAdvancedThreatProtectionSettings"
+          },
+          {
+            "name": "DatabaseAdvisors",
+            "value": "DatabaseAdvisors"
+          },
+          {
+            "name": "DatabaseAutomaticTuning",
+            "value": "DatabaseAutomaticTuning"
+          },
+          {
+            "name": "DatabaseColumns",
+            "value": "DatabaseColumns"
+          },
+          {
+            "name": "DatabaseEncryptionProtectorRevalidate",
+            "value": "DatabaseEncryptionProtectorRevalidate"
+          },
+          {
+            "name": "DatabaseEncryptionProtectorRevert",
+            "value": "DatabaseEncryptionProtectorRevert"
+          },
+          {
+            "name": "DatabaseExtensions",
+            "value": "DatabaseExtensions"
+          },
+          {
+            "name": "DatabaseOperations",
+            "value": "DatabaseOperations"
+          },
+          {
+            "name": "DatabaseRecommendedActions",
+            "value": "DatabaseRecommendedActions"
+          },
+          {
+            "name": "Databases",
+            "value": "Databases"
+          },
+          {
+            "name": "DatabaseSchemas",
+            "value": "DatabaseSchemas"
+          },
+          {
+            "name": "DatabaseSecurityAlertPolicies",
+            "value": "DatabaseSecurityAlertPolicies"
+          },
+          {
+            "name": "DatabaseSqlVulnerabilityAssessmentBaselines",
+            "value": "DatabaseSqlVulnerabilityAssessmentBaselines"
+          },
+          {
+            "name": "DatabaseSqlVulnerabilityAssessmentExecuteScan",
+            "value": "DatabaseSqlVulnerabilityAssessmentExecuteScan"
+          },
+          {
+            "name": "DatabaseSqlVulnerabilityAssessmentRuleBaselines",
+            "value": "DatabaseSqlVulnerabilityAssessmentRuleBaselines"
+          },
+          {
+            "name": "DatabaseSqlVulnerabilityAssessmentScanResult",
+            "value": "DatabaseSqlVulnerabilityAssessmentScanResult"
+          },
+          {
+            "name": "DatabaseSqlVulnerabilityAssessmentScans",
+            "value": "DatabaseSqlVulnerabilityAssessmentScans"
+          },
+          {
+            "name": "DatabaseSqlVulnerabilityAssessmentsSettings",
+            "value": "DatabaseSqlVulnerabilityAssessmentsSettings"
+          },
+          {
+            "name": "DatabaseTables",
+            "value": "DatabaseTables"
+          },
+          {
+            "name": "DatabaseUsages",
+            "value": "DatabaseUsages"
+          },
+          {
+            "name": "DatabaseVulnerabilityAssessmentRuleBaselines",
+            "value": "DatabaseVulnerabilityAssessmentRuleBaselines"
+          },
+          {
+            "name": "DatabaseVulnerabilityAssessments",
+            "value": "DatabaseVulnerabilityAssessments"
+          },
+          {
+            "name": "DatabaseVulnerabilityAssessmentScans",
+            "value": "DatabaseVulnerabilityAssessmentScans"
+          },
+          {
+            "name": "DataMaskingPolicies",
+            "value": "DataMaskingPolicies"
+          },
+          {
+            "name": "DataMaskingRules",
+            "value": "DataMaskingRules"
+          },
+          {
+            "name": "DataWarehouseUserActivities",
+            "value": "DataWarehouseUserActivities"
+          },
+          {
+            "name": "DeletedServers",
+            "value": "DeletedServers"
+          },
+          {
+            "name": "DistributedAvailabilityGroups",
+            "value": "DistributedAvailabilityGroups"
+          },
+          {
+            "name": "ElasticPoolOperations",
+            "value": "ElasticPoolOperations"
+          },
+          {
+            "name": "ElasticPools",
+            "value": "ElasticPools"
+          },
+          {
+            "name": "EncryptionProtectors",
+            "value": "EncryptionProtectors"
+          },
+          {
+            "name": "EndpointCertificates",
+            "value": "EndpointCertificates"
+          },
+          {
+            "name": "FailoverGroups",
+            "value": "FailoverGroups"
+          },
+          {
+            "name": "FirewallRules",
+            "value": "FirewallRules"
+          },
+          {
+            "name": "GeoBackupPolicies",
+            "value": "GeoBackupPolicies"
+          },
+          {
+            "name": "InstanceFailoverGroups",
+            "value": "InstanceFailoverGroups"
+          },
+          {
+            "name": "InstancePoolOperations",
+            "value": "InstancePoolOperations"
+          },
+          {
+            "name": "InstancePools",
+            "value": "InstancePools"
+          },
+          {
+            "name": "IPv6FirewallRules",
+            "value": "IPv6FirewallRules"
+          },
+          {
+            "name": "JobAgents",
+            "value": "JobAgents"
+          },
+          {
+            "name": "JobCredentials",
+            "value": "JobCredentials"
+          },
+          {
+            "name": "JobExecutions",
+            "value": "JobExecutions"
+          },
+          {
+            "name": "JobPrivateEndpoints",
+            "value": "JobPrivateEndpoints"
+          },
+          {
+            "name": "Jobs",
+            "value": "Jobs"
+          },
+          {
+            "name": "JobStepExecutions",
+            "value": "JobStepExecutions"
+          },
+          {
+            "name": "JobSteps",
+            "value": "JobSteps"
+          },
+          {
+            "name": "JobTargetExecutions",
+            "value": "JobTargetExecutions"
+          },
+          {
+            "name": "JobTargetGroups",
+            "value": "JobTargetGroups"
+          },
+          {
+            "name": "JobVersions",
+            "value": "JobVersions"
+          },
+          {
+            "name": "LedgerDigestUploads",
+            "value": "LedgerDigestUploads"
+          },
+          {
+            "name": "LocationCapabilities",
+            "value": "LocationCapabilities"
+          },
+          {
+            "name": "LongTermRetentionBackups",
+            "value": "LongTermRetentionBackups"
+          },
+          {
+            "name": "LongTermRetentionManagedInstanceBackups",
+            "value": "LongTermRetentionManagedInstanceBackups"
+          },
+          {
+            "name": "LongTermRetentionPolicies",
+            "value": "LongTermRetentionPolicies"
+          },
+          {
+            "name": "MaintenanceWindowOptions",
+            "value": "MaintenanceWindowOptions"
+          },
+          {
+            "name": "MaintenanceWindows",
+            "value": "MaintenanceWindows"
+          },
+          {
+            "name": "ManagedBackupShortTermRetentionPolicies",
+            "value": "ManagedBackupShortTermRetentionPolicies"
+          },
+          {
+            "name": "ManagedDatabaseAdvancedThreatProtectionSettings",
+            "value": "ManagedDatabaseAdvancedThreatProtectionSettings"
+          },
+          {
+            "name": "ManagedDatabaseColumns",
+            "value": "ManagedDatabaseColumns"
+          },
+          {
+            "name": "ManagedDatabaseMoveOperations",
+            "value": "ManagedDatabaseMoveOperations"
+          },
+          {
+            "name": "ManagedDatabaseQueries",
+            "value": "ManagedDatabaseQueries"
+          },
+          {
+            "name": "ManagedDatabaseRestoreDetails",
+            "value": "ManagedDatabaseRestoreDetails"
+          },
+          {
+            "name": "ManagedDatabases",
+            "value": "ManagedDatabases"
+          },
+          {
+            "name": "ManagedDatabaseSchemas",
+            "value": "ManagedDatabaseSchemas"
+          },
+          {
+            "name": "ManagedDatabaseSecurityAlertPolicies",
+            "value": "ManagedDatabaseSecurityAlertPolicies"
+          },
+          {
+            "name": "ManagedDatabaseSecurityEvents",
+            "value": "ManagedDatabaseSecurityEvents"
+          },
+          {
+            "name": "ManagedDatabaseSensitivityLabels",
+            "value": "ManagedDatabaseSensitivityLabels"
+          },
+          {
+            "name": "ManagedDatabaseTables",
+            "value": "ManagedDatabaseTables"
+          },
+          {
+            "name": "ManagedDatabaseTransparentDataEncryption",
+            "value": "ManagedDatabaseTransparentDataEncryption"
+          },
+          {
+            "name": "ManagedDatabaseVulnerabilityAssessmentRuleBaselines",
+            "value": "ManagedDatabaseVulnerabilityAssessmentRuleBaselines"
+          },
+          {
+            "name": "ManagedDatabaseVulnerabilityAssessments",
+            "value": "ManagedDatabaseVulnerabilityAssessments"
+          },
+          {
+            "name": "ManagedDatabaseVulnerabilityAssessmentScans",
+            "value": "ManagedDatabaseVulnerabilityAssessmentScans"
+          },
+          {
+            "name": "ManagedInstanceAdministrators",
+            "value": "ManagedInstanceAdministrators"
+          },
+          {
+            "name": "ManagedInstanceAdvancedThreatProtectionSettings",
+            "value": "ManagedInstanceAdvancedThreatProtectionSettings"
+          },
+          {
+            "name": "ManagedInstanceAzureADOnlyAuthentications",
+            "value": "ManagedInstanceAzureADOnlyAuthentications"
+          },
+          {
+            "name": "ManagedInstanceDtcs",
+            "value": "ManagedInstanceDtcs"
+          },
+          {
+            "name": "ManagedInstanceEncryptionProtectors",
+            "value": "ManagedInstanceEncryptionProtectors"
+          },
+          {
+            "name": "ManagedInstanceKeys",
+            "value": "ManagedInstanceKeys"
+          },
+          {
+            "name": "ManagedInstanceLongTermRetentionPolicies",
+            "value": "ManagedInstanceLongTermRetentionPolicies"
+          },
+          {
+            "name": "ManagedInstanceOperations",
+            "value": "ManagedInstanceOperations"
+          },
+          {
+            "name": "ManagedInstancePrivateEndpointConnections",
+            "value": "ManagedInstancePrivateEndpointConnections"
+          },
+          {
+            "name": "ManagedInstancePrivateLinkResources",
+            "value": "ManagedInstancePrivateLinkResources"
+          },
+          {
+            "name": "ManagedInstances",
+            "value": "ManagedInstances"
+          },
+          {
+            "name": "ManagedInstanceServerProtectionSettings",
+            "value": "ManagedInstanceServerProtectionSettings",
+            "description": "Read, list, and update the singleton managed instance protection settings."
+          },
+          {
+            "name": "ManagedInstanceTdeCertificates",
+            "value": "ManagedInstanceTdeCertificates"
+          },
+          {
+            "name": "ManagedInstanceVulnerabilityAssessments",
+            "value": "ManagedInstanceVulnerabilityAssessments"
+          },
+          {
+            "name": "ManagedLedgerDigestUploads",
+            "value": "ManagedLedgerDigestUploads"
+          },
+          {
+            "name": "ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies",
+            "value": "ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies"
+          },
+          {
+            "name": "ManagedServerDnsAliases",
+            "value": "ManagedServerDnsAliases"
+          },
+          {
+            "name": "ManagedServerSecurityAlertPolicies",
+            "value": "ManagedServerSecurityAlertPolicies"
+          },
+          {
+            "name": "NetworkSecurityPerimeterConfigurations",
+            "value": "NetworkSecurityPerimeterConfigurations"
+          },
+          {
+            "name": "Operations",
+            "value": "Operations"
+          },
+          {
+            "name": "OutboundFirewallRules",
+            "value": "OutboundFirewallRules"
+          },
+          {
+            "name": "PrivateEndpointConnections",
+            "value": "PrivateEndpointConnections"
+          },
+          {
+            "name": "PrivateLinkResources",
+            "value": "PrivateLinkResources"
+          },
+          {
+            "name": "RecoverableDatabases",
+            "value": "RecoverableDatabases"
+          },
+          {
+            "name": "RecoverableManagedDatabases",
+            "value": "RecoverableManagedDatabases"
+          },
+          {
+            "name": "ReplicationLinks",
+            "value": "ReplicationLinks"
+          },
+          {
+            "name": "RestorableDroppedDatabases",
+            "value": "RestorableDroppedDatabases"
+          },
+          {
+            "name": "RestorableDroppedManagedDatabases",
+            "value": "RestorableDroppedManagedDatabases"
+          },
+          {
+            "name": "RestorePoints",
+            "value": "RestorePoints"
+          },
+          {
+            "name": "SensitivityLabels",
+            "value": "SensitivityLabels"
+          },
+          {
+            "name": "ServerAdvancedThreatProtectionSettings",
+            "value": "ServerAdvancedThreatProtectionSettings"
+          },
+          {
+            "name": "ServerAdvisors",
+            "value": "ServerAdvisors"
+          },
+          {
+            "name": "ServerAutomaticTuning",
+            "value": "ServerAutomaticTuning"
+          },
+          {
+            "name": "ServerAzureADAdministrators",
+            "value": "ServerAzureADAdministrators"
+          },
+          {
+            "name": "ServerAzureADOnlyAuthentications",
+            "value": "ServerAzureADOnlyAuthentications"
+          },
+          {
+            "name": "ServerConfigurationOptions",
+            "value": "ServerConfigurationOptions"
+          },
+          {
+            "name": "ServerConnectionPolicies",
+            "value": "ServerConnectionPolicies"
+          },
+          {
+            "name": "ServerDevOpsAudit",
+            "value": "ServerDevOpsAudit"
+          },
+          {
+            "name": "ServerDnsAliases",
+            "value": "ServerDnsAliases"
+          },
+          {
+            "name": "ServerKeys",
+            "value": "ServerKeys"
+          },
+          {
+            "name": "ServerOperations",
+            "value": "ServerOperations"
+          },
+          {
+            "name": "Servers",
+            "value": "Servers"
+          },
+          {
+            "name": "ServerSecurityAlertPolicies",
+            "value": "ServerSecurityAlertPolicies"
+          },
+          {
+            "name": "ServerTrustCertificates",
+            "value": "ServerTrustCertificates"
+          },
+          {
+            "name": "ServerTrustGroups",
+            "value": "ServerTrustGroups"
+          },
+          {
+            "name": "ServerUsages",
+            "value": "ServerUsages"
+          },
+          {
+            "name": "ServerVulnerabilityAssessments",
+            "value": "ServerVulnerabilityAssessments"
+          },
+          {
+            "name": "SqlAgent",
+            "value": "SqlAgent"
+          },
+          {
+            "name": "SqlVulnerabilityAssessmentBaseline",
+            "value": "SqlVulnerabilityAssessmentBaseline"
+          },
+          {
+            "name": "SqlVulnerabilityAssessmentExecuteScan",
+            "value": "SqlVulnerabilityAssessmentExecuteScan"
+          },
+          {
+            "name": "SqlVulnerabilityAssessmentRuleBaseline",
+            "value": "SqlVulnerabilityAssessmentRuleBaseline"
+          },
+          {
+            "name": "SqlVulnerabilityAssessmentScanResult",
+            "value": "SqlVulnerabilityAssessmentScanResult"
+          },
+          {
+            "name": "SqlVulnerabilityAssessmentScans",
+            "value": "SqlVulnerabilityAssessmentScans"
+          },
+          {
+            "name": "SqlVulnerabilityAssessmentsSettings",
+            "value": "SqlVulnerabilityAssessmentsSettings"
+          },
+          {
+            "name": "StartStopManagedInstanceSchedules",
+            "value": "StartStopManagedInstanceSchedules"
+          },
+          {
+            "name": "SubscriptionUsages",
+            "value": "SubscriptionUsages"
+          },
+          {
+            "name": "SynapseLinkWorkspaces",
+            "value": "SynapseLinkWorkspaces"
+          },
+          {
+            "name": "SyncAgents",
+            "value": "SyncAgents"
+          },
+          {
+            "name": "SyncGroups",
+            "value": "SyncGroups"
+          },
+          {
+            "name": "SyncMembers",
+            "value": "SyncMembers"
+          },
+          {
+            "name": "TdeCertificates",
+            "value": "TdeCertificates"
+          },
+          {
+            "name": "TimeZones",
+            "value": "TimeZones"
+          },
+          {
+            "name": "TransparentDataEncryptions",
+            "value": "TransparentDataEncryptions"
+          },
+          {
+            "name": "Usages",
+            "value": "Usages"
+          },
+          {
+            "name": "VirtualClusters",
+            "value": "VirtualClusters"
+          },
+          {
+            "name": "VirtualNetworkRules",
+            "value": "VirtualNetworkRules"
+          },
+          {
+            "name": "WorkloadClassifiers",
+            "value": "WorkloadClassifiers"
+          },
+          {
+            "name": "WorkloadGroups",
+            "value": "WorkloadGroups"
+          }
+        ]
       }
     },
     "FreeLimitExhaustionBehavior": {
@@ -6975,19 +7546,6 @@
         ]
       }
     },
-    "ServerProtectionSettingsAcceptedResult": {
-      "type": "object",
-      "description": "The update was accepted; use the polling headers to track completion and\nretrieve the result.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ServerProtectionSettingsOperation",
-          "description": "Information about the accepted update, not the final resource state."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "ServerProtectionSettingsName": {
       "type": "string",
       "description": "The singleton name for managed instance protection settings.",
@@ -7006,36 +7564,71 @@
         ]
       }
     },
-    "ServerProtectionSettingsOperation": {
-      "type": "object",
-      "description": "Information returned when a managed instance protection settings update is\naccepted.",
-      "properties": {
-        "operation": {
-          "type": "string",
-          "description": "The name of the accepted operation."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The UTC time when the operation started."
-        }
-      },
-      "required": [
-        "operation",
-        "startTime"
-      ]
-    },
     "ServerProtectionSettingsProperties": {
       "type": "object",
       "description": "Settings that control protection against deletion of a managed instance.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ServerProtectionSettingsProvisioningState",
+          "description": "The state of the latest retained protection settings update for the current\nmanaged instance. Updating indicates an operation in progress; Succeeded,\nFailed, and Canceled are terminal states. If no operation history is retained,\nGET and LIST return Succeeded with the persisted setting. In that case,\nSucceeded describes the persisted setting, not the outcome of a past update;\nhistorical failure or cancellation states are not preserved after the\ncorresponding operation history is removed.",
+          "readOnly": true
+        },
         "blockDropWhenImmutablePitrBackupInRetention": {
           "$ref": "#/definitions/BlockDropWhenImmutablePitrBackupInRetention",
-          "description": "Whether to block deletion of the managed instance while any live user database\nexists or any dropped user database has immutable point-in-time restore backups\nwithin retention. Supported request values\nare enabled and disabled, compared case-insensitively. Setting enabled is an\nirreversible opt-in. Setting disabled before opt-in is a no-op; changing from\nenabled to disabled is rejected."
+          "description": "Whether to block deletion of the managed instance while any live user database\nexists or any dropped user database has immutable point-in-time restore backups\nwithin retention. Supported request values\nare enabled and disabled, compared case-insensitively. Setting enabled is an\nirreversible opt-in. Setting disabled before opt-in is a no-op; changing from\nenabled to disabled is rejected. While provisioningState is Updating,\nresponses show the accepted requested value, which does not confirm that\nprotection is effective. In terminal states, GET and LIST show the effective\npersisted setting, including when no operation history is retained. A Failed\nor Canceled update does not imply that protection is disabled."
         }
       },
       "required": [
         "blockDropWhenImmutablePitrBackupInRetention"
+      ]
+    },
+    "ServerProtectionSettingsProvisioningState": {
+      "type": "string",
+      "description": "The state of the latest retained protection settings update, or Succeeded for the persisted setting when no operation history is retained.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ServerProtectionSettingsProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The settings update is in progress."
+          }
+        ]
+      }
+    },
+    "ServerProtectionSettingsUpdateResult": {
+      "type": "object",
+      "description": "The protection settings update was accepted or has completed. The resource\ncontains its provisioning state; use the polling headers while the update is\nin progress and the Location header to retrieve the final resource result.",
+      "properties": {
+        "body": {
+          "$ref": "./ManagedInstanceServerProtectionSettings.json#/definitions/ServerProtectionSettings",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
       ]
     },
     "ServerPublicNetworkAccessFlag": {
