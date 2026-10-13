@@ -2030,14 +2030,31 @@ paths:
         `ws://container:8088/conversation_engine` without rewriting the protocol path. The AgentServer SDK
         exposes that container endpoint only when a Conversation Engine handler is registered.
 
-        Voice Live owns audio, STT, TTS, turn detection, and interruption. The engine processes conversational
-        turns and streams text responses using the existing `invocations_ws` message semantics:
-        `session.start`, `session.ready`, `user.message`, `response.started`, `response.text.delta`,
-        `response.done`, `response.cancel`, `response.cancelled`, and `error`. Each turn carries a `turn_id`,
-        and ordered events carry sequence numbers. Version 1.0 supports one active response per session,
-        cancellation for interruption, bounded messages, and reconnection through `agent_session_id`.
-        Audio transport is not part of this contract. WebSocket close codes and ping/pong are preserved;
-        authorization, throttling, metrics, and tracing are applied to the selected CE protocol.
+        Voice Live Bridge integration requires agent metadata `voiceLiveCompatible=true`. The declared
+        `conversation_engine` version `1.0.0` identifies the engine protocol; no separate Bridge-version
+        metadata is required. The Bridge message version `1.0` and Hosted Agents API version `v1` are
+        independent of the declared container protocol version.
+
+        Voice Live owns audio, STT, TTS, turn detection, and interruption. The engine reuses the existing
+        Bridge Protocol 1.0 wire semantics. Voice Live sends `session.start` with `protocol_version: "1.0"`;
+        the engine acknowledges activation with `session.ready` or rejects it with `session.rejected`.
+        Caller input uses `user.message`. The engine opens a response with `response.created`, emits
+        `response.output_text.delta` and `response.output_text.done` for text or `response.output_data.done`
+        for non-audio structured output, and completes generation with `response.done`. `response.none`
+        consumes input without opening a response; failures use `error`.
+
+        Messages carry envelope `id` and `ts` fields. Inputs and output items use `item_id`; responses use
+        `response_id`, and replies correlate consumed inputs through ordered-prefix `in_reply_to` values.
+        Voice Live reports interruption through `barge_in`, including `heard_text`. An engine-initiated
+        `response.cancel` is acknowledged by Voice Live with `response.cancelled` after playback stops.
+        Existing bounded-message, timeout, and proactive-response admission semantics are retained.
+
+        Reconnection obtains fresh authentication and reattaches through the same `agent_session_id`, then
+        sends `session.start` with `reconnect: true` and waits for `session.ready`. In-flight response state
+        is abandoned, not replayed; there is no sequence acknowledgement or cursor-based recovery.
+        Audio transport is outside this contract. The service relays frames without changing their message
+        semantics; WebSocket close codes and ping/pong are preserved. Authorization, throttling, metrics,
+        and tracing are applied to the selected CE protocol.
       parameters:
         - name: agent_name
           in: path
@@ -92095,7 +92112,7 @@ components:
         not: {}
       allOf:
         - $ref: '#/components/schemas/VoiceConversationEngine'
-      description: A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must support `conversation_engine` version `1.0.0` and Voice Live compatibility. Voice Live connects through the dedicated conversation-engine endpoint using the existing Bridge message semantics. Declaring `invocations_ws` is optional and does not substitute for `conversation_engine`.
+      description: A closed reference to the hosted text agent that owns conversation handling for a voice agent. The hosted agent is resolved within the same project and must declare `conversation_engine` version `1.0.0` and provide agent metadata `voiceLiveCompatible=true`. Voice Live connects through the dedicated conversation-engine endpoint using the existing Bridge Protocol 1.0 wire semantics; the Bridge message version is independent of the container protocol version and the Hosted Agents API version `v1`. Declaring `invocations_ws` is optional and does not substitute for `conversation_engine`.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
