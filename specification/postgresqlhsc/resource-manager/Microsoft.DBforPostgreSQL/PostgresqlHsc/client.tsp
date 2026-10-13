@@ -215,6 +215,7 @@ using Microsoft.DBforPostgreSQL;
 /**
  * Resource type used for name availability verification.
  */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
 union CheckNameAvailabilityResourceTypeReplacement {
   CheckNameAvailabilityResourceType,
   string,

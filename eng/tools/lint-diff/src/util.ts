@@ -1,6 +1,6 @@
 import { access, constants, readFile } from "node:fs/promises";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 /**
  * Enumerate files in a directory that match the given string ending

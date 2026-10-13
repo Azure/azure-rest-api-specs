@@ -1,4 +1,4 @@
-import { exit } from "process";
+import { exit } from "node:process";
 import { updateSdkSuppressionsLabels } from "./updateSdkSuppressionsLabel.ts";
 
 function getArgsError(args: string[]): string {

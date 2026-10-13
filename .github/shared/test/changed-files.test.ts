@@ -8,7 +8,7 @@ vi.mock("simple-git", () => ({
   }),
 }));
 
-import { resolve } from "path";
+import { resolve } from "node:path";
 import * as simpleGit from "simple-git";
 import {
   dataPlane,

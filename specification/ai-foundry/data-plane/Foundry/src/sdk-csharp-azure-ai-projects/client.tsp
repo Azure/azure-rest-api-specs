@@ -225,6 +225,11 @@ namespace Azure.AI.Projects;
 @@access(DataGenerationJobs.cancel, Access.internal);
 @@access(DataGenerationJobs.delete, Access.internal);
 
+@@access(DataGenerationJobInputs, Access.public);
+@@access(EvaluationDataGenerationJobInputs, Access.public);
+@@access(SupervisedFineTuningDataGenerationJobInputs, Access.public);
+@@access(ReinforcementFineTuningDataGenerationJobInputs, Access.public);
+
 @@clientName(DataGenerationJobType, "DataGenerationJobKind");
 @@clientName(TracesDataGenerationJobSource.end_time, "EndAt");
 @@clientName(TracesDataGenerationJobSource.start_time, "StartAt");
