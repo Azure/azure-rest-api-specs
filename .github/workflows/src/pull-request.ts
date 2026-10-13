@@ -41,12 +41,5 @@ export async function shouldRunSdkWorkflow({ github, context, core }: GitHubScri
 
   const pr = await getOpenPullRequest(github, core, { ...context.repo, issue_number });
   if (!pr) return false;
-  if (
-    context.eventName === "check_run" &&
-    pr.head.sha !== (payload as WebhookEvent<"check-run">).check_run.head_sha
-  ) {
-    core.info("The checked commit is no longer the PR head; skipping SDK workflow.");
-    return false;
-  }
   return true;
 }

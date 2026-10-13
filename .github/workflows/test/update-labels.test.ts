@@ -20,57 +20,19 @@ function updateLabels(asyncFunctionArgs: unknown) {
 }
 
 describe("updateLabels", () => {
-  it("reuses trusted pull_request_target artifacts and their reviewed SHA", async () => {
-    const github = createMockGithub();
-    const core = createMockCore();
-    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-      data: {
-        artifacts: [
-          { name: `head-sha=${fullGitSha};issue-number=123` },
-          { name: "label-foo=true" },
-        ],
-      },
-    });
-
-    await updateLabels({
-      github,
-      core,
-      context: {
-        eventName: "workflow_run",
-        payload: {
-          action: "completed",
-          workflow_run: {
-            event: "pull_request_target",
-            head_sha: "payload-sha",
-            id: 456,
-            repository: { name: "repo", owner: { login: "owner" } },
-            pull_requests: [{ number: 123 }],
-          },
-        },
-      },
-    });
-
-    expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledTimes(1);
-    expect(github.rest.pulls.get).toHaveBeenCalledTimes(1);
-    expect(core.setOutput).toHaveBeenCalledWith("head_sha", fullGitSha);
-    expect(github.rest.issues.addLabels).toHaveBeenCalledWith({
-      owner: "owner",
-      repo: "repo",
-      issue_number: 123,
-      labels: ["foo"],
-    });
-  });
-
-  it.each([false, true])(
-    "reuses identity artifacts and only checks PR state when label actions exist (%s)",
-    async (hasLabelAction) => {
+  it.each([
+    { event: "check_run", hasLabelAction: false },
+    { event: "check_run", hasLabelAction: true },
+    { event: "pull_request_target", hasLabelAction: true },
+  ])(
+    "reuses $event artifacts and only checks PR state when label actions exist ($hasLabelAction)",
+    async ({ event, hasLabelAction }) => {
       const core = createMockCore();
       const github = createMockGithub();
       github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
         data: {
           artifacts: [
-            { name: `head-sha=${fullGitSha}` },
-            { name: "issue-number=123" },
+            { name: `head-sha=${fullGitSha};issue-number=123` },
             ...(hasLabelAction ? [{ name: "label-foo=true" }] : []),
           ],
         },
@@ -84,9 +46,11 @@ describe("updateLabels", () => {
           payload: {
             action: "completed",
             workflow_run: {
-              event: "check_run",
+              event,
+              head_sha: "payload-sha",
               id: 456,
               repository: { name: "repo", owner: { login: "owner" } },
+              pull_requests: [{ number: 123 }],
             },
           },
         },
@@ -95,7 +59,17 @@ describe("updateLabels", () => {
       expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledTimes(1);
       expect(github.rest.pulls.get).toHaveBeenCalledTimes(hasLabelAction ? 1 : 0);
       expect(github.rest.issues.addLabels).toHaveBeenCalledTimes(hasLabelAction ? 1 : 0);
-      if (!hasLabelAction) expect(core.setOutput).not.toHaveBeenCalled();
+      if (hasLabelAction) {
+        expect(core.setOutput).toHaveBeenCalledWith("head_sha", fullGitSha);
+        expect(github.rest.issues.addLabels).toHaveBeenCalledWith({
+          owner: "owner",
+          repo: "repo",
+          issue_number: 123,
+          labels: ["foo"],
+        });
+      } else {
+        expect(core.setOutput).not.toHaveBeenCalled();
+      }
     },
   );
 
