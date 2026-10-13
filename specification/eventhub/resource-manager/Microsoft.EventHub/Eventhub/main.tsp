@@ -24,7 +24,10 @@ import "./Eventhub.tsp";
 import "./ConsumerGroup.tsp";
 import "./SchemaGroup.tsp";
 import "./ApplicationGroup.tsp";
+import "./FabricShortcut.tsp";
+import "./UpgradePreferences.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -38,7 +41,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "EventHubManagementClient" })
 @versioned(Versions)
-// FIXME: Common type version not set. Set to v3.
+// Common type version set to v3 as required by the ARM resource manager.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.EventHub;
 
@@ -50,6 +53,16 @@ enum Versions {
    * The 2025-05-01-preview API version.
    */
   v2025_05_01_preview: "2025-05-01-preview",
+
+  /**
+   * The 2026-01-01 API version.
+   */
+  v2026_01_01: "2026-01-01",
+
+  /**
+   * The 2026-07-01-preview API version.
+   */
+  v2026_07_01_preview: "2026-07-01-preview",
 }
 
 interface Operations
@@ -57,6 +70,7 @@ interface Operations
       ArmResponse<OperationListResult>,
       ErrorResponse
     > {}
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available Event Hub REST API operations."
 );

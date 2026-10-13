@@ -24,22 +24,116 @@ To see additional help and options, run:
 
 These are the global settings for the PostgreSQL API.
 
-``` yaml
+```yaml
 title: PostgreSQLManagementClient
 description: The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.
 openapi-type: arm
-tag: package-flexibleserver-2026-01-01-preview
+tag: package-flexibleserver-2025-08-01
 ```
 
-``` yaml $(package-singleservers)
+```yaml $(package-singleservers)
 tag: package-2020-01-01
+```
+
+### Tag: package-flexibleserver-2026-07-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2026-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-flexibleserver-2026-07-01-preview'
+input-file:
+  - Microsoft.DBforPostgreSQL/preview/2026-07-01-preview/openapi.json
+suppressions:
+  - code: GuidUsage
+    from: openapi.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: >-
+      Used only for Microsoft Entra application clientId properties on
+      DataEncryption (primaryFederatedIdentityClientId,
+      geoBackupFederatedIdentityClientId). Both are RFC 4122 UUIDs per ARM
+      identity guidelines. Approved by Azure API review board pull request 43065.
+  - code: GuidUsage
+    from: openapi.json
+    where: $.definitions.DataEncryption.properties.geoBackupFederatedIdentityClientId
+    reason: Microsoft Entra application client ID for geo-redundant backups (RFC 4122 UUID) per ARM identity guidelines. Approved by Azure API review board pull request 43065.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.PolicyDetail.properties.passed
+    reason: This is a simple pass/fail indicator.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.MaintenanceEventResourceProperties.properties.deferrable
+    reason: This is a binary status indicator.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.MaintenanceEventActionResponse.properties.appliedNow
+    reason: This is a binary status indicator.
+  - code: EvenSegmentedPathForPutOperation
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"]
+    reason: The path represents a singleton resource whose fixed resource name is Default. The validator does not recognize the literal singleton name as a resource-name segment. See https://github.com/Azure/azure-openapi-validator/issues/646.
+  - code: PathResourceTypeNameCamelCase
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"]
+    reason: Default is the fixed singleton resource name, not a resource type. The actual resource type segment, dbAgents, follows camel-case naming.
+  - code: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].put.responses["202"].schema
+    reason: The provisioningState property is marked readOnly in the generated OpenAPI, but the validator does not recognize readOnly when it is a sibling of $ref. See https://github.com/Azure/azure-openapi-validator/issues/637.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: openapi.json
+    where: $.definitions.DbAgent
+    reason: The singleton database agent resource is enabled or disabled through PUT and is not deleted. A configured resource remains present when its state is Disabled.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].put
+    reason: The implemented database agent PUT operation returns only HTTP 202. The rule reports missing provisioningState schemas for HTTP 200 and 201 responses that are not part of the service contract.
+  - code: PutResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/dbAgents/Default"].put
+    reason: The implemented database agent PUT operation is long-running and returns HTTP 202 for both initial configuration and subsequent state changes.
+```
+
+### Tag: package-flexibleserver-2026-04-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2026-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-flexibleserver-2026-04-01-preview'
+input-file:
+  - Microsoft.DBforPostgreSQL/preview/2026-04-01-preview/openapi.json
+suppressions:
+  - code: GuidUsage
+    from: openapi.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: >-
+      Used only for Microsoft Entra application clientId properties on
+      DataEncryption (primaryFederatedIdentityClientId,
+      geoBackupFederatedIdentityClientId). Both are RFC 4122 UUIDs per ARM
+      identity guidelines. Approved by Azure API review board pull request 43065.
+  - code: GuidUsage
+    from: openapi.json
+    where: $.definitions.DataEncryption.properties.geoBackupFederatedIdentityClientId
+    reason: Microsoft Entra application client ID for geo-redundant backups (RFC 4122 UUID) per ARM identity guidelines. Approved by Azure API review board pull request 43065.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.PolicyDetail.properties.passed
+    reason: This is a simple pass/fail indicator.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.MaintenanceEventResourceProperties.properties.deferrable
+    reason: This is a binary status indicator.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.MaintenanceEventActionResponse.properties.appliedNow
+    reason: This is a binary status indicator.
 ```
 
 ### Tag: package-flexibleserver-2026-01-01-preview
 
 These settings apply only when `--tag=package-flexibleserver-2026-01-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2026-01-01-preview'
+```yaml $(tag) == 'package-flexibleserver-2026-01-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2026-01-01-preview/openapi.json
 ```
@@ -48,7 +142,7 @@ input-file:
 
 These settings apply only when `--tag=package-flexibleserver-2025-08-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2025-08-01'
+```yaml $(tag) == 'package-flexibleserver-2025-08-01'
 input-file:
   - Microsoft.DBforPostgreSQL/stable/2025-08-01/openapi.json
 suppressions:
@@ -199,7 +293,7 @@ suppressions:
 
 These settings apply only when `--tag=package-flexibleserver-2025-06-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2025-06-01-preview'
+```yaml $(tag) == 'package-flexibleserver-2025-06-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/AdministratorsMicrosoftEntra.json
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/AdvancedThreatProtectionSettings.json
@@ -370,7 +464,7 @@ suppressions:
 
 These settings apply only when `--tag=package-flexibleserver-2025-01-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2025-01-01-preview'
+```yaml $(tag) == 'package-flexibleserver-2025-01-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2025-01-01-preview/Administrators.json
   - Microsoft.DBforPostgreSQL/preview/2025-01-01-preview/Backups.json
@@ -433,7 +527,7 @@ suppressions:
 
 These settings apply only when `--tag=package-flexibleserver-2024-11-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2024-11-01-preview'
+```yaml $(tag) == 'package-flexibleserver-2024-11-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2024-11-01-preview/Administrators.json
   - Microsoft.DBforPostgreSQL/preview/2024-11-01-preview/Backups.json
@@ -488,7 +582,7 @@ suppressions:
 
 These settings apply only when `--tag=package-flexibleserver-2024-08-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2024-08-01'
+```yaml $(tag) == 'package-flexibleserver-2024-08-01'
 input-file:
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/Administrators.json
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/Backups.json
@@ -541,7 +635,7 @@ suppressions:
 
 These settings apply only when `--tag=package-flexibleserver-2024-03-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2024-03-01-preview'
+```yaml $(tag) == 'package-flexibleserver-2024-03-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/Administrators.json
   - Microsoft.DBforPostgreSQL/preview/2024-03-01-preview/Backups.json
@@ -591,12 +685,11 @@ suppressions:
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
 ```
 
-
 ### Tag: package-2023-12-01-preview
 
 These settings apply only when `--tag=package-flexibleserver-2023-12-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2023-12-01-preview'
+```yaml $(tag) == 'package-flexibleserver-2023-12-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/Administrators.json
   - Microsoft.DBforPostgreSQL/preview/2023-12-01-preview/Backups.json
@@ -644,7 +737,7 @@ suppressions:
 
 These settings apply only when `--tag=package-flexibleserver-2023-06-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2023-06-01-preview'
+```yaml $(tag) == 'package-flexibleserver-2023-06-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Administrators.json
   - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Backups.json
@@ -692,7 +785,7 @@ suppressions:
 
 These settings apply only when `--tag=package-flexibleserver-2023-03-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2023-03-01-preview'
+```yaml $(tag) == 'package-flexibleserver-2023-03-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Administrators.json
   - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Backups.json
@@ -716,7 +809,7 @@ input-file:
 
 These settings apply only when `--tag=package-flexibleserver-2022-12-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2022-12-01'
+```yaml $(tag) == 'package-flexibleserver-2022-12-01'
 input-file:
   - Microsoft.DBforPostgreSQL/stable/2022-12-01/Administrators.json
   - Microsoft.DBforPostgreSQL/stable/2022-12-01/Backups.json
@@ -737,7 +830,7 @@ input-file:
 
 These settings apply only when `--tag=package-flexibleserver-2022-05-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2022-05-01-preview'
+```yaml $(tag) == 'package-flexibleserver-2022-05-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Migrations.json
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Operations.json
@@ -747,7 +840,7 @@ input-file:
 
 These settings apply only when `--tag=package-flexibleserver-2022-03-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2022-03-preview'
+```yaml $(tag) == 'package-flexibleserver-2022-03-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Administrators.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Backups.json
@@ -768,19 +861,19 @@ input-file:
 
 These settings apply only when `--tag=package-flexibleserver-2022-03-08-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2022-03-08-privatepreview'
+```yaml $(tag) == 'package-flexibleserver-2022-03-08-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2022-03-08-privatepreview/getCachedServerName.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/postgresql.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-privatepreview/getCachedServerName.json
+  - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/postgresql.json
 ```
 
 ### Tag: package-flexibleserver-2022-01-20-preview
 
 These settings apply only when `--tag=package-flexibleserver-2022-01-20-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2022-01-20-preview'
+```yaml $(tag) == 'package-flexibleserver-2022-01-20-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
   - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
@@ -791,155 +884,154 @@ input-file:
 
 These settings apply only when `--tag=package-2021-06-15-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-06-15-privatepreview'
+```yaml $(tag) == 'package-2021-06-15-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Migrations.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
+  - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Migrations.json
+  - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
 ```
 
 ### Tag: package-flexibleserver-2021-06-01
 
 These settings apply only when `--tag=package-flexibleserver-2021-06-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2021-06-01'
+```yaml $(tag) == 'package-flexibleserver-2021-06-01'
 input-file:
-- Microsoft.DBforPostgreSQL/stable/2021-06-01/postgresql.json
-- Microsoft.DBforPostgreSQL/stable/2021-06-01/Databases.json
-- Microsoft.DBforPostgreSQL/stable/2021-06-01/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/stable/2021-06-01/postgresql.json
+  - Microsoft.DBforPostgreSQL/stable/2021-06-01/Databases.json
+  - Microsoft.DBforPostgreSQL/stable/2021-06-01/PrivateDnsZone.json
 ```
 
 ### Tag: package-flexibleserver-2021-06-01-preview
 
 These settings apply only when `--tag=package-flexibleserver-2021-06-01-preview` is specified on the command line.cd ..
 
-``` yaml $(tag) == 'package-flexibleserver-2021-06-01-preview'
+```yaml $(tag) == 'package-flexibleserver-2021-06-01-preview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
+  - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
+  - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
+  - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
 ```
 
 ### Tag: package-2021-04-10-privatepreview
 
 These settings apply only when `--tag=package-2021-04-10-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-04-10-privatepreview'
+```yaml $(tag) == 'package-2021-04-10-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
-- Microsoft.DBforPostgreSQL/preview/2021-04-10-privatepreview/postgresql.json
+  - Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/preview/2021-04-10-privatepreview/postgresql.json
 ```
 
 ### Tag: package-2021-03-31-privatepreview
 
 These settings apply only when `--tag=package-2021-03-31-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-03-31-privatepreview'
+```yaml $(tag) == 'package-2021-03-31-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
+  - Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
 ```
 
 ### Tag: package-2020-11-05-preview
 
 These settings apply only when `--tag=package-2020-11-05-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-11-05-preview'
+```yaml $(tag) == 'package-2020-11-05-preview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
+  - Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
 ```
 
 ### Tag: package-2020-02-14-preview
 
 These settings apply only when `--tag=package-2020-02-14-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-02-14-preview'
+```yaml $(tag) == 'package-2020-02-14-preview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
+  - Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
 ```
 
 ### Tag: package-2020-02-14-privatepreview
 
 These settings apply only when `--tag=package-2020-02-14-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-02-14-privatepreview'
+```yaml $(tag) == 'package-2020-02-14-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
+  - Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
 ```
 
 ### Tag: package-2020-01-01-privatepreview
 
 These settings apply only when `--tag=package-2020-01-01-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01-01-privatepreview'
+```yaml $(tag) == 'package-2020-01-01-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+  - Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 ```
 
 ### Tag: package-2020-01-01
 
 These settings apply only when `--tag=package-2020-01-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01-01'
+```yaml $(tag) == 'package-2020-01-01'
 input-file:
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
-- Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
+  - Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+  - Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
+  - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
+  - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
+  - Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
 ```
 
 ### Tag: package-2018-06-01-privatepreview
 
 These settings apply only when `--tag=package-2018-06-01-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-06-01-privatepreview'
+```yaml $(tag) == 'package-2018-06-01-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
-- Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+  - Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+  - Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
 ```
 
 ### Tag: package-2018-06-01
 
 These settings apply only when `--tag=package-2018-06-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-06-01'
+```yaml $(tag) == 'package-2018-06-01'
 input-file:
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/QueryPerformanceInsights.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/PerformanceRecommendations.json
-
+  - Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+  - Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
+  - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
+  - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
+  - Microsoft.DBforPostgreSQL/stable/2018-06-01/QueryPerformanceInsights.json
+  - Microsoft.DBforPostgreSQL/stable/2018-06-01/PerformanceRecommendations.json
 ```
 
 ### Tag: package-2017-12-01-preview
 
 These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-12-01-preview'
+```yaml $(tag) == 'package-2017-12-01-preview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
+  - Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
 ```
 
 ### Tag: package-2017-12-01
 
 These settings apply only when `--tag=package-2017-12-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-12-01'
+```yaml $(tag) == 'package-2017-12-01'
 input-file:
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
+  - Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+  - Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 ```
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: PathResourceProviderNamePascalCase
     reason: The name of the provider is DBforPostgreSQL
@@ -954,7 +1046,7 @@ directive:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python

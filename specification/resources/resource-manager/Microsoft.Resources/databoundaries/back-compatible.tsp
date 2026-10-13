@@ -5,6 +5,7 @@ using Microsoft.Resources;
 
 @@clientLocation(DataBoundaryDefinitions.getTenant, DataBoundaries);
 @@clientLocation(DataBoundaryDefinitions.put, DataBoundaries);
-@@clientName(DataBoundaryDefinitions.put::parameters.resource,
+@@clientName(
+  DataBoundaryDefinitions.put::parameters.resource,
   "dataBoundaryDefinition"
 );

@@ -1,32 +1,34 @@
 {
   "parameters": {
-    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3",
+    "api-version": "2025-11-01-preview",
+    "orgName": "myAzDevOpsOrg",
     "resourceGroupName": "myRg",
     "securityConnectorName": "mySecurityConnectorName",
-    "orgName": "myAzDevOpsOrg",
-    "api-version": "2025-11-01-preview"
+    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
+            "name": "myAzDevOpsProject",
+            "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs/projects",
+            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/myAzDevOpsOrg/projects/myAzDevOpsProject",
             "properties": {
-              "parentOrgName": "myAzDevOpsOrg",
-              "projectId": "9ebbed8f-a9cc-405f-a647-b235e22179de",
-              "onboardingState": "Onboarded",
               "actionableRemediation": {
                 "state": "Enabled"
               },
+              "onboardingState": "Onboarded",
+              "parentOrgName": "myAzDevOpsOrg",
+              "projectId": "9ebbed8f-a9cc-405f-a647-b235e22179de",
               "provisioningState": "Succeeded"
-            },
-            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/myAzDevOpsOrg/projects/myAzDevOpsProject",
-            "name": "myAzDevOpsProject",
-            "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs/projects"
+            }
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "AzureDevOpsProjects_List",
+  "title": "List_AzureDevOpsProjects"
 }

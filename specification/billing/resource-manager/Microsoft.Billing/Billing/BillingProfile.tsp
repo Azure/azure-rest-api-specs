@@ -56,11 +56,14 @@ interface BillingProfiles {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BillingProfile,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Response = ArmResourceUpdatedResponse<BillingProfile> | ArmResourceCreatedResponse<
-      BillingProfile,
-      ArmLroLocationHeader<FinalResult = BillingProfile> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<BillingProfile>
+      | ArmResourceCreatedResponse<
+          BillingProfile,
+          ArmLroLocationHeader<FinalResult = BillingProfile> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -510,16 +513,20 @@ alias BillingRoleAssignmentsResolveByBillingProfileParameters = {
   filter?: string;
 };
 
-@@doc(BillingProfile.name,
+@@doc(
+  BillingProfile.name,
   "The ID that uniquely identifies a billing profile."
 );
 @@doc(BillingProfile.properties, "A billing profile.");
-@@doc(BillingProfiles.createOrUpdate::parameters.resource,
+@@doc(
+  BillingProfiles.createOrUpdate::parameters.resource,
   "A billing profile."
 );
-@@doc(BillingProfiles.checkAccessByBillingProfile::parameters.body,
+@@doc(
+  BillingProfiles.checkAccessByBillingProfile::parameters.body,
   "The request object against which access of the caller will be checked."
 );
-@@doc(BillingProfiles.createByBillingProfile::parameters.body,
+@@doc(
+  BillingProfiles.createByBillingProfile::parameters.body,
   "The properties of the billing role assignment."
 );

@@ -5,49 +5,59 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.AgriculturePlatform;
 
-@@clientName(Microsoft.AgriculturePlatform,
+@@clientName(
+  Microsoft.AgriculturePlatform,
   "AgriculturePlatformMgmtClient",
   "python,java"
 );
 
-@@clientNamespace(Microsoft.AgriculturePlatform,
+@@clientNamespace(
+  Microsoft.AgriculturePlatform,
   "com.azure.resourcemanager.agricultureplatform",
   "java"
 );
 
 // csharp
 @@clientName(AgriServiceResource, "AgricultureService", "csharp");
-@@clientName(AgriServiceResourceProperties,
+@@clientName(
+  AgriServiceResourceProperties,
   "AgricultureServiceProperties",
   "csharp"
 );
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "AgriculturePlatformProvisioningState",
   "csharp"
 );
 @@clientName(Solution, "AgricultureSolution", "csharp");
 @@clientName(AgriServiceConfig, "AgricultureServiceConfig", "csharp");
-@@alternateType(AgriServiceConfig.appServiceResourceId,
+@@alternateType(
+  AgriServiceConfig.appServiceResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AgriServiceConfig.cosmosDbResourceId,
+@@alternateType(
+  AgriServiceConfig.cosmosDbResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(AgriServiceConfig.cosmosDbResourceId,
+@@clientName(
+  AgriServiceConfig.cosmosDbResourceId,
   "cosmosDBResourceId",
   "csharp"
 );
-@@alternateType(AgriServiceConfig.storageAccountResourceId,
+@@alternateType(
+  AgriServiceConfig.storageAccountResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AgriServiceConfig.keyVaultResourceId,
+@@alternateType(
+  AgriServiceConfig.keyVaultResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AgriServiceConfig.redisCacheResourceId,
+@@alternateType(
+  AgriServiceConfig.redisCacheResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -62,7 +72,8 @@ namespace Azure.ResourceManager.Models {
   }
 }
 
-@@alternateType(ManagedOnBehalfOfConfiguration.moboBrokerResources,
+@@alternateType(
+  ManagedOnBehalfOfConfiguration.moboBrokerResources,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );

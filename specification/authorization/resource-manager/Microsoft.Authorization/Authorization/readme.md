@@ -24,16 +24,16 @@ To see additional help and options, run:
 
 These are the global settings for the Authorization API.
 
-``` yaml
+```yaml
 openapi-type: arm
-tag: package-2025-12-01-preview
+tag: package-2026-06-01-preview
 modelerfour:
   lenient-model-deduplication: true
 ```
 
 ### Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: OperationsAPIImplementation
     reason: we do have a operations api as "/providers/Microsoft.Authorization/operations"
@@ -91,7 +91,7 @@ directive:
     from: authorization-AccessReviewCalls.json
     reason: Disambiguation resolution is acceptable and desired. When generating the models the _Suffix doesn't get included
   - suppress: R2015
-    from: common-types.json
+    from: openapi.json
     reason: common-types doesn't need to reference api version.
   - suppress: NoDuplicatePathsForScopeParameter
     from: authorization-DenyAssignmentCalls.json
@@ -102,6 +102,115 @@ directive:
   - suppress: RepeatedPathInfo
     from: authorization-DenyAssignmentCalls.json
     reason: The scope property in DenyAssignmentProperties is readOnly and returned in responses only. It does not repeat the path parameter in requests.
+  - suppress: AvoidAdditionalProperties
+    from: authorization-PrivilegedAccess.json
+    where:
+      - $.definitions.ParentResource.properties.properties
+      - $.definitions.ResourceProjection.properties.tags
+    reason: |
+      `ResourceProjection.tags` and `ParentResource.properties` are
+      pass-through, open key/value bags with no service-side validation on
+      their contents. `ResourceProjection.tags` mirrors the upstream Azure
+      resource's tags verbatim — identical semantics to the standard Azure
+      Resource Manager `TrackedResource.tags` open string map. The
+      `ParentResource.properties` bag mirrors per-scope-tier metadata from the
+      upstream Azure scope; its field set is determined by the sibling `type`
+      discriminator (`resourceGroup`, `subscription`, and future scope tiers).
+      Strong typing at the schema layer would defeat the purpose — user-defined
+      tags are arbitrary, and new scope tiers (e.g., `managementGroup`,
+      `tenant`) must be addable server-side without an API contract break or
+      SDK regeneration.
+  - suppress: LocationMustHaveXmsMutability
+    from: authorization-PrivilegedAccess.json
+    where: $.definitions.ResourceProjection.properties.location
+    reason: |
+      `ResourceProjection.location` is a response-only projection field on a
+      server-side aggregation view, not the `location` of a tracked ARM
+      resource. The `x-ms-mutability: ["read", "create"]` rule targets tracked
+      resources whose location is set on create; the projection has no PUT
+      path that accepts a location.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: authorization-PrivilegedAccess.json
+    where: $.definitions.PagedResourceProjection
+    reason: |
+      `PagedResourceProjection` is the paging envelope returned by the
+      `privilegedResources` list operation, not an ARM resource. It spreads the
+      standard `Azure.Core.Page<ResourceProjection>` shape (`value` + `nextLink`)
+      and adds the optional `count` field ($count=true). The linter heuristic
+      mis-classifies this envelope definition as a resource model. The actual ARM
+      resource invariants (id/name/type/readonly) are enforced on the page's
+      items (`ResourceProjection`), not on the envelope itself.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: authorization-PrivilegedAccess.json
+    where: $.paths['/providers/Microsoft.Authorization/privilegedResources'].get.responses['200'].schema.properties
+    reason: |
+      The optional `count` property is returned only when the caller requests
+      `$count=true`. It reports the complete post-filter cardinality before
+      pagination and is an intentional part of this API contract. Existing
+      Azure Resource Manager APIs, including Microsoft.DataLakeAnalytics
+      `Accounts_List`, use the same `$count` query and response `count` pattern.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: authorization-PrivilegedAccess.json
+    where: $.definitions.PagedRelatedResourceProjection
+    reason: |
+      `PagedRelatedResourceProjection` is the swagger-emit of
+      `Azure.Core.Page<RelatedResourceProjection>` — the paging envelope returned
+      by the `privilegedResources/{privilegedResourceId}/relatedResources` list
+      operation, not an ARM resource. The envelope is unnamed in TypeSpec
+      (inlined as the operation's return type) but the autorest emitter generates
+      a named definition; the linter heuristic mis-classifies that generated name
+      as a resource model. The actual ARM resource invariants
+      (id/name/type/readonly) are enforced on the page's items
+      (`RelatedResourceProjection`), not on the envelope itself — identical
+      treatment to `PagedResourceProjection` above.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: authorization-PrivilegedAccess.json
+    where:
+      - $.paths['/providers/Microsoft.Authorization/privilegedResourceFavorites']
+      - $.paths['/providers/Microsoft.Authorization/privilegedResourceFavorites/{favoriteId}']
+      - $.paths['/providers/Microsoft.Authorization/privilegedResources']
+      - $.paths['/providers/Microsoft.Authorization/privilegedResources/{privilegedResourceId}/relatedResources']
+    reason: |
+      `privilegedResources` returns a caller-specific view aggregated across
+      subscriptions, so subscription or resource-group scoping would prevent
+      the operation from representing the caller's complete accessible set.
+      `relatedResources` follows the same tenant-scoped parent collection.
+      `privilegedResourceFavorites` stores private per-caller state; the caller
+      identity partitions records, and favorites do not belong to an Azure
+      subscription or resource group.
+
+      Chris Stackhouse approved this tenant-level API design during ARM API
+      Modeling Office Hours on May 21, 2026. These APIs do not use
+      `allowUnauthorizedActions` and do not bypass standard Azure RBAC.
+```
+
+### Tag: package-2026-06-01-preview-only
+
+These settings apply only when `--tag=package-2026-06-01-preview-only` is specified on the command line.
+This opt-in PrivilegedAccess-only tag contains only the `2026-06-01-preview` PrivilegedAccess Swagger.
+The shared Authorization default remains the composite `package-2026-06-01-preview` tag.
+
+```yaml $(tag) == 'package-2026-06-01-preview-only'
+input-file:
+  - preview/2026-06-01-preview/authorization-PrivilegedAccess.json
+```
+
+### Tag: package-2026-06-01-preview
+
+These settings apply only when `--tag=package-2026-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01-preview'
+input-file:
+  - stable/2015-07-01/ClassicAdmin.json
+  - preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
+  - stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
+  - preview/2024-09-01-preview/openapi.json
+  - preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+  - preview/2022-08-01-preview/RoleManagementAlerts.json
+  - preview/2025-12-01-preview/AttributeNamespaces.json
+  - preview/2026-06-01-preview/authorization-PrivilegedAccess.json
 ```
 
 ### Tag: package-2025-12-01-preview
@@ -110,23 +219,13 @@ These settings apply only when `--tag=package-2025-12-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-12-01-preview'
 input-file:
-  - stable/2015-07-01/authorization-ClassicAdminCalls.json
-  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - stable/2015-07-01/ClassicAdmin.json
   - preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
   - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
   - preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
-  - preview/2024-09-01-preview/common-types.json
+  - preview/2024-09-01-preview/openapi.json
   - preview/2021-12-01-preview/authorization-AccessReviewCalls.json
-  - preview/2024-09-01-preview/EligibleChildResources.json
-  - preview/2024-09-01-preview/RoleAssignmentSchedule.json
-  - preview/2024-09-01-preview/RoleAssignmentScheduleInstance.json
-  - preview/2024-09-01-preview/RoleAssignmentScheduleRequest.json
-  - preview/2024-09-01-preview/RoleEligibilitySchedule.json
-  - preview/2024-09-01-preview/RoleEligibilityScheduleInstance.json
-  - preview/2024-09-01-preview/RoleEligibilityScheduleRequest.json
-  - preview/2024-09-01-preview/RoleManagementPolicy.json
-  - preview/2024-09-01-preview/RoleManagementPolicyAssignment.json
   - preview/2022-08-01-preview/RoleManagementAlerts.json
   - preview/2025-12-01-preview/AttributeNamespaces.json
 ```
@@ -137,23 +236,14 @@ These settings apply only when `--tag=package-2024-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-09-01-preview'
 input-file:
-  - stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - stable/2015-07-01/ClassicAdmin.json
   - stable/2015-07-01/authorization-ElevateAccessCalls.json
   - stable/2022-04-01/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
   - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
   - preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
-  - preview/2024-09-01-preview/common-types.json
   - preview/2021-12-01-preview/authorization-AccessReviewCalls.json
-  - preview/2024-09-01-preview/EligibleChildResources.json
-  - preview/2024-09-01-preview/RoleAssignmentSchedule.json
-  - preview/2024-09-01-preview/RoleAssignmentScheduleInstance.json
-  - preview/2024-09-01-preview/RoleAssignmentScheduleRequest.json
-  - preview/2024-09-01-preview/RoleEligibilitySchedule.json
-  - preview/2024-09-01-preview/RoleEligibilityScheduleInstance.json
-  - preview/2024-09-01-preview/RoleEligibilityScheduleRequest.json
-  - preview/2024-09-01-preview/RoleManagementPolicy.json
-  - preview/2024-09-01-preview/RoleManagementPolicyAssignment.json
+  - preview/2024-09-01-preview/openapi.json
   - preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 
@@ -163,8 +253,7 @@ These settings apply only when `--tag=package-preview-2024-02` is specified on t
 
 ```yaml $(tag) == 'package-2024-02-01-preview'
 input-file:
-  - stable/2015-07-01/authorization-ClassicAdminCalls.json
-  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - stable/2015-07-01/ClassicAdmin.json
   - stable/2022-04-01/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
   - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
@@ -192,15 +281,14 @@ input-file:
   - preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
   - preview/2022-05-01-preview/common-types.json
 ```
+
 ### Tag: package-2022-05-01-preview
 
 These settings apply only when `--package-2022-05-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2022-05-01-preview'
 input-file:
-  
-  - stable/2015-07-01/authorization-ClassicAdminCalls.json
-  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - stable/2015-07-01/ClassicAdmin.json
   - stable/2022-04-01/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
   - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
@@ -218,86 +306,114 @@ input-file:
   - preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
   - preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
+
 ### Tag: package-2021-12-01-preview-only
 
 These settings apply only when `--tag=package-2021-12-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-12-01-preview-only'
+```yaml $(tag) == 'package-2021-12-01-preview-only'
 input-file:
-- preview/2021-12-01-preview/authorization-AccessReviewCalls.json
-- preview/2022-08-01-preview/RoleManagementAlerts.json
+  - preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+  - preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 
 ### Tag: package-2021-12-01-preview-python-only
 
 These settings apply only when `--tag=package-2021-12-01-preview-python-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-12-01-preview-python-only'
+```yaml $(tag) == 'package-2021-12-01-preview-python-only'
 input-file:
-- preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+  - preview/2021-12-01-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2022-04-01
 
 These settings apply only when `--tag=package-2022-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-04-01'
+```yaml $(tag) == 'package-2022-04-01'
 input-file:
-- stable/2015-07-01/authorization-ClassicAdminCalls.json
-- stable/2015-07-01/authorization-ElevateAccessCalls.json
-- stable/2022-04-01/authorization-DenyAssignmentCalls.json
-- stable/2022-04-01/authorization-ProviderOperationsCalls.json
-- stable/2022-04-01/authorization-RoleAssignmentsCalls.json
-- stable/2022-04-01/authorization-RoleDefinitionsCalls.json
-- stable/2022-04-01/common-types.json
-- stable/2020-10-01/EligibleChildResources.json
-- stable/2020-10-01/RoleAssignmentSchedule.json
-- stable/2020-10-01/RoleAssignmentScheduleInstance.json
-- stable/2020-10-01/RoleAssignmentScheduleRequest.json
-- stable/2020-10-01/RoleEligibilitySchedule.json
-- stable/2020-10-01/RoleEligibilityScheduleInstance.json
-- stable/2020-10-01/RoleEligibilityScheduleRequest.json
-- stable/2020-10-01/RoleManagementPolicy.json
-- stable/2020-10-01/RoleManagementPolicyAssignment.json
+  - stable/2015-07-01/ClassicAdmin.json
+  - stable/2022-04-01/authorization-DenyAssignmentCalls.json
+  - stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - stable/2022-04-01/authorization-RoleDefinitionsCalls.json
+  - stable/2022-04-01/common-types.json
+  - stable/2020-10-01/EligibleChildResources.json
+  - stable/2020-10-01/RoleAssignmentSchedule.json
+  - stable/2020-10-01/RoleAssignmentScheduleInstance.json
+  - stable/2020-10-01/RoleAssignmentScheduleRequest.json
+  - stable/2020-10-01/RoleEligibilitySchedule.json
+  - stable/2020-10-01/RoleEligibilityScheduleInstance.json
+  - stable/2020-10-01/RoleEligibilityScheduleRequest.json
+  - stable/2020-10-01/RoleManagementPolicy.json
+  - stable/2020-10-01/RoleManagementPolicyAssignment.json
+```
+
+### Tag: package-2022-04-01-with-deny-assignment-crud
+
+These settings apply only when `--tag=package-2022-04-01-with-deny-assignment-crud` is specified on the command line.
+
+This tag is identical to `package-2022-04-01` except the deny assignment input file is swapped to the
+`2024-07-01-preview` version, which adds the deny assignment `CreateOrUpdate` (PUT) and `Delete` (DELETE)
+operations. It is consumed only by the .NET (`Azure.ResourceManager.Authorization`) AutoRest configuration to
+generate deny assignment create/delete support on top of the existing stable surface.
+
+```yaml $(tag) == 'package-2022-04-01-with-deny-assignment-crud'
+input-file:
+  - stable/2015-07-01/ClassicAdmin.json
+  - preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
+  - stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - stable/2022-04-01/authorization-RoleDefinitionsCalls.json
+  - stable/2022-04-01/common-types.json
+  - stable/2020-10-01/EligibleChildResources.json
+  - stable/2020-10-01/RoleAssignmentSchedule.json
+  - stable/2020-10-01/RoleAssignmentScheduleInstance.json
+  - stable/2020-10-01/RoleAssignmentScheduleRequest.json
+  - stable/2020-10-01/RoleEligibilitySchedule.json
+  - stable/2020-10-01/RoleEligibilityScheduleInstance.json
+  - stable/2020-10-01/RoleEligibilityScheduleRequest.json
+  - stable/2020-10-01/RoleManagementPolicy.json
+  - stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2022-04-01-only
 
 These settings apply only when `--tag=package-2022-04-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-04-01-only'
+```yaml $(tag) == 'package-2022-04-01-only'
 input-file:
-- stable/2022-04-01/authorization-DenyAssignmentCalls.json
-- stable/2022-04-01/authorization-ProviderOperationsCalls.json
-- stable/2022-04-01/authorization-RoleAssignmentsCalls.json
-- stable/2022-04-01/authorization-RoleDefinitionsCalls.json
-- stable/2022-04-01/common-types.json
+  - stable/2022-04-01/authorization-DenyAssignmentCalls.json
+  - stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - stable/2022-04-01/authorization-RoleDefinitionsCalls.json
+  - stable/2022-04-01/common-types.json
 ```
 
 ### Tag: package-2022-04-01-preview-only
 
 These settings apply only when `--tag=package-2022-04-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-04-01-preview-only'
+```yaml $(tag) == 'package-2022-04-01-preview-only'
 input-file:
-- preview/2022-04-01-preview/RoleAssignmentScheduleRequest.json
-- preview/2022-04-01-preview/RoleEligibilityScheduleRequest.json
+  - preview/2022-04-01-preview/RoleAssignmentScheduleRequest.json
+  - preview/2022-04-01-preview/RoleEligibilityScheduleRequest.json
 ```
 
 ### Tag: package-2022-08-01-preview-only
 
 These settings apply only when `--tag=package-2022-08-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-08-01-preview-only'
+```yaml $(tag) == 'package-2022-08-01-preview-only'
 input-file:
-- preview/2022-08-01-preview/RoleManagementAlerts.json
+  - preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 
 ### Tag: package-preview-2021-11
 
 These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2021-11'
+```yaml $(tag) == 'package-preview-2021-11'
 input-file:
   - preview/2021-11-16-preview/authorization-AccessReviewCalls.json
 ```
@@ -306,111 +422,111 @@ input-file:
 
 These settings apply only when `--tag=package-2021-07-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-07-01-preview-only'
+```yaml $(tag) == 'package-2021-07-01-preview-only'
 input-file:
-- preview/2021-07-01-preview/authorization-AccessReviewCalls.json
+  - preview/2021-07-01-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2021-03-01-preview-only
 
 These settings apply only when `--tag=package-2021-03-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-03-01-preview-only'
+```yaml $(tag) == 'package-2021-03-01-preview-only'
 input-file:
-- preview/2021-03-01-preview/authorization-AccessReviewCalls.json
+  - preview/2021-03-01-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2021-01-01-preview-only
 
 These settings apply only when `--tag=package-2021-01-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-01-01-preview-only'
+```yaml $(tag) == 'package-2021-01-01-preview-only'
 input-file:
-- preview/2021-01-01-preview/authorization-RoleAssignmentApprovalCalls.json
+  - preview/2021-01-01-preview/authorization-RoleAssignmentApprovalCalls.json
 ```
 
 ### Tag: package-2020-10-01
 
 These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01'
+```yaml $(tag) == 'package-2020-10-01'
 input-file:
-- stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- stable/2015-07-01/authorization-ElevateAccessCalls.json
-- stable/2015-07-01/authorization-RoleAssignmentsCalls.json
-- stable/2015-07-01/authorization-ClassicAdminCalls.json
-- stable/2020-10-01/common-types.json
-- stable/2020-10-01/EligibleChildResources.json
-- stable/2020-10-01/RoleAssignmentSchedule.json
-- stable/2020-10-01/RoleAssignmentScheduleInstance.json
-- stable/2020-10-01/RoleAssignmentScheduleRequest.json
-- stable/2020-10-01/RoleEligibilitySchedule.json
-- stable/2020-10-01/RoleEligibilityScheduleInstance.json
-- stable/2020-10-01/RoleEligibilityScheduleRequest.json
-- stable/2020-10-01/RoleManagementPolicy.json
-- stable/2020-10-01/RoleManagementPolicyAssignment.json
+  - stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+  - stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - stable/2020-10-01/common-types.json
+  - stable/2020-10-01/EligibleChildResources.json
+  - stable/2020-10-01/RoleAssignmentSchedule.json
+  - stable/2020-10-01/RoleAssignmentScheduleInstance.json
+  - stable/2020-10-01/RoleAssignmentScheduleRequest.json
+  - stable/2020-10-01/RoleEligibilitySchedule.json
+  - stable/2020-10-01/RoleEligibilityScheduleInstance.json
+  - stable/2020-10-01/RoleEligibilityScheduleRequest.json
+  - stable/2020-10-01/RoleManagementPolicy.json
+  - stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2020-10-01-only
 
 These settings apply only when `--tag=package-2020-10-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01-only'
+```yaml $(tag) == 'package-2020-10-01-only'
 input-file:
-- stable/2020-10-01/common-types.json
-- stable/2020-10-01/EligibleChildResources.json
-- stable/2020-10-01/RoleAssignmentSchedule.json
-- stable/2020-10-01/RoleAssignmentScheduleInstance.json
-- stable/2020-10-01/RoleAssignmentScheduleRequest.json
-- stable/2020-10-01/RoleEligibilitySchedule.json
-- stable/2020-10-01/RoleEligibilityScheduleInstance.json
-- stable/2020-10-01/RoleEligibilityScheduleRequest.json
-- stable/2020-10-01/RoleManagementPolicy.json
-- stable/2020-10-01/RoleManagementPolicyAssignment.json
+  - stable/2020-10-01/common-types.json
+  - stable/2020-10-01/EligibleChildResources.json
+  - stable/2020-10-01/RoleAssignmentSchedule.json
+  - stable/2020-10-01/RoleAssignmentScheduleInstance.json
+  - stable/2020-10-01/RoleAssignmentScheduleRequest.json
+  - stable/2020-10-01/RoleEligibilitySchedule.json
+  - stable/2020-10-01/RoleEligibilityScheduleInstance.json
+  - stable/2020-10-01/RoleEligibilityScheduleRequest.json
+  - stable/2020-10-01/RoleManagementPolicy.json
+  - stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2020-10-01-preview
 
 These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01-preview'
+```yaml $(tag) == 'package-2020-10-01-preview'
 input-file:
-- preview/2018-05-01-preview/authorization-AccessReviewCalls.json
-- preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
-- preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- preview/2020-10-01-preview/authorization-RoleAssignmentsCalls.json
-- preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
-- preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
-- preview/2020-10-01-preview/common-types.json
-- preview/2020-10-01-preview/EligibleChildResources.json
-- preview/2020-10-01-preview/RoleAssignmentSchedule.json
-- preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
-- preview/2020-10-01-preview/RoleAssignmentScheduleRequest.json
-- preview/2020-10-01-preview/RoleEligibilitySchedule.json
-- preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
-- preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
-- preview/2020-10-01-preview/RoleManagementPolicy.json
-- preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
+  - preview/2018-05-01-preview/authorization-AccessReviewCalls.json
+  - preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - preview/2020-10-01-preview/authorization-RoleAssignmentsCalls.json
+  - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+  - preview/2020-10-01-preview/common-types.json
+  - preview/2020-10-01-preview/EligibleChildResources.json
+  - preview/2020-10-01-preview/RoleAssignmentSchedule.json
+  - preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
+  - preview/2020-10-01-preview/RoleAssignmentScheduleRequest.json
+  - preview/2020-10-01-preview/RoleEligibilitySchedule.json
+  - preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
+  - preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
+  - preview/2020-10-01-preview/RoleManagementPolicy.json
+  - preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2020-10-01-preview-only
 
 These settings apply only when `--tag=package-2020-10-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01-preview-only'
+```yaml $(tag) == 'package-2020-10-01-preview-only'
 input-file:
-- preview/2020-10-01-preview/authorization-RoleAssignmentsCalls.json
-- preview/2020-10-01-preview/common-types.json
-- preview/2020-10-01-preview/EligibleChildResources.json
-- preview/2020-10-01-preview/RoleAssignmentSchedule.json
-- preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
-- preview/2020-10-01-preview/RoleAssignmentScheduleRequest.json
-- preview/2020-10-01-preview/RoleEligibilitySchedule.json
-- preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
-- preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
-- preview/2020-10-01-preview/RoleManagementPolicy.json
-- preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
+  - preview/2020-10-01-preview/authorization-RoleAssignmentsCalls.json
+  - preview/2020-10-01-preview/common-types.json
+  - preview/2020-10-01-preview/EligibleChildResources.json
+  - preview/2020-10-01-preview/RoleAssignmentSchedule.json
+  - preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
+  - preview/2020-10-01-preview/RoleAssignmentScheduleRequest.json
+  - preview/2020-10-01-preview/RoleEligibilitySchedule.json
+  - preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
+  - preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
+  - preview/2020-10-01-preview/RoleManagementPolicy.json
+  - preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
@@ -418,75 +534,75 @@ input-file:
 These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
 Creating this tag to pick proper resources from the hybrid profile.
 
-``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+```yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-- stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- stable/2015-07-01/authorization-ElevateAccessCalls.json
-- stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+  - stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2020-08-01-preview
 
 These settings apply only when `--tag=package-2020-08-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-08-01-preview'
+```yaml $(tag) == 'package-2020-08-01-preview'
 input-file:
-- stable/2015-06-01/authorization-ClassicAdminCalls.json
-- stable/2015-07-01/authorization-ElevateAccessCalls.json
-- preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
-- preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
-- preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
-- preview/2020-08-01-preview/authorization-RoleAssignmentsCalls.json
+  - stable/2015-06-01/authorization-ClassicAdminCalls.json
+  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+  - preview/2020-08-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2020-04-01-preview
 
 These settings apply only when `--tag=package-2020-04-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-04-01-preview'
+```yaml $(tag) == 'package-2020-04-01-preview'
 input-file:
-- stable/2015-06-01/authorization-ClassicAdminCalls.json
-- stable/2015-07-01/authorization-ElevateAccessCalls.json
-- preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
-- preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
-- preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
-- preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
+  - stable/2015-06-01/authorization-ClassicAdminCalls.json
+  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+  - preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2020-04-01-preview-only
 
 These settings apply only when `--tag=package-2020-04-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-04-01-preview-only'
+```yaml $(tag) == 'package-2020-04-01-preview-only'
 input-file:
-- preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
+  - preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2020-03-01-preview
 
 These settings apply only when `--tag=package-2020-03-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-03-01-preview'
+```yaml $(tag) == 'package-2020-03-01-preview'
 input-file:
-- stable/2015-06-01/authorization-ClassicAdminCalls.json
-- stable/2015-07-01/authorization-ElevateAccessCalls.json
-- preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
-- preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
-- preview/2020-03-01-preview/authorization-RoleAssignmentsCalls.json
-- preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+  - stable/2015-06-01/authorization-ClassicAdminCalls.json
+  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - preview/2020-03-01-preview/authorization-RoleAssignmentsCalls.json
+  - preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
 ```
 
 ### Tag: package-2019-08-01-preview-only
 
 These settings apply only when `--tag=package-2019-08-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-08-01-preview-only'
+```yaml $(tag) == 'package-2019-08-01-preview-only'
 input-file:
-- preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+  - preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
 ```
 
 ### Tag: profile-hybrid-2019-03-01
@@ -494,135 +610,135 @@ input-file:
 These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
 Creating this tag to pick proper resources from the hybrid profile.
 
-``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+```yaml $(tag) == 'profile-hybrid-2019-03-01'
 input-file:
-- stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- stable/2015-07-01/authorization-ElevateAccessCalls.json
-- stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+  - stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2018-09-01-preview
 
 These settings apply only when `--tag=package-2018-09-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-09-01-preview'
+```yaml $(tag) == 'package-2018-09-01-preview'
 input-file:
-- stable/2015-06-01/authorization-ClassicAdminCalls.json
-- stable/2015-07-01/authorization-ElevateAccessCalls.json
-- preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
-- preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
-- preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - stable/2015-06-01/authorization-ClassicAdminCalls.json
+  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
+  - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 ```
 
 ### Tag: package-2018-09-01-preview-only
 
 These settings apply only when `--tag=package-2018-09-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-09-01-preview-only'
+```yaml $(tag) == 'package-2018-09-01-preview-only'
 input-file:
-- preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
+  - preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2018-07-01-preview
 
 These settings apply only when `--tag=package-2018-07-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-07-01-preview'
+```yaml $(tag) == 'package-2018-07-01-preview'
 input-file:
-- stable/2015-06-01/authorization-ClassicAdminCalls.json
-- stable/2015-07-01/authorization-ElevateAccessCalls.json
-- preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
-- preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
-- preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - stable/2015-06-01/authorization-ClassicAdminCalls.json
+  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+  - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 ```
 
 ### Tag: package-2018-07-01-preview-only
 
 These settings apply only when `--tag=package-2018-07-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-07-01-preview-only'
+```yaml $(tag) == 'package-2018-07-01-preview-only'
 input-file:
-- preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 ```
 
 ### Tag: package-2018-05-01-preview
 
 These settings apply only when `--tag=package-2018-05-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-05-01-preview'
+```yaml $(tag) == 'package-2018-05-01-preview'
 input-file:
-- preview/2018-05-01-preview/authorization-AccessReviewCalls.json
+  - preview/2018-05-01-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2018-01-01-preview
 
 These settings apply only when `--tag=package-2018-01-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-01-01-preview'
+```yaml $(tag) == 'package-2018-01-01-preview'
 input-file:
-- stable/2015-06-01/authorization-ClassicAdminCalls.json
-- stable/2015-07-01/authorization-ElevateAccessCalls.json
-- preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
-- preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - stable/2015-06-01/authorization-ClassicAdminCalls.json
+  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+  - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
 ```
 
 ### Tag: package-2018-01-01-preview-only
 
 These settings apply only when `--tag=package-2018-01-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-01-01-preview-only'
+```yaml $(tag) == 'package-2018-01-01-preview-only'
 input-file:
-- preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
-- preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+  - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
 ```
 
 ### Tag: package-2017-10-01-preview
 
 These settings apply only when `--tag=package-2017-10-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-10-01-preview'
+```yaml $(tag) == 'package-2017-10-01-preview'
 input-file:
-- stable/2015-06-01/authorization-ClassicAdminCalls.json
-- stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- stable/2015-07-01/authorization-ElevateAccessCalls.json
-- preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
+  - stable/2015-06-01/authorization-ClassicAdminCalls.json
+  - stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2017-10-01-preview-only
 
 These settings apply only when `--tag=package-2017-10-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-10-01-preview-only'
+```yaml $(tag) == 'package-2017-10-01-preview-only'
 input-file:
-- preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
+  - preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2015-07-01
 
 These settings apply only when `--tag=package-2015-07-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-07-01'
+```yaml $(tag) == 'package-2015-07-01'
 input-file:
-- stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- stable/2015-07-01/authorization-ElevateAccessCalls.json
-- stable/2015-07-01/authorization-RoleAssignmentsCalls.json
-- stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+  - stable/2015-07-01/authorization-ClassicAdminCalls.json
 ```
 
 ### Tag: package-2015-06-01-preview
 
 These settings apply only when `--tag=package-2015-06-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-06-01-preview'
+```yaml $(tag) == 'package-2015-06-01-preview'
 input-file:
-- stable/2015-06-01/authorization-ClassicAdminCalls.json
+  - stable/2015-06-01/authorization-ClassicAdminCalls.json
 ```
 
 ---
@@ -634,7 +750,7 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python

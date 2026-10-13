@@ -1,0 +1,1031 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Servers"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/checkNameAvailability": {
+      "post": {
+        "operationId": "Servers_CheckNameAvailability",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Determines whether a resource can be created with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check for a server name that already exists": {
+            "$ref": "./examples/CheckNameAvailabilityServerAlreadyExists.json"
+          },
+          "Check for a server name that is available": {
+            "$ref": "./examples/CheckNameAvailabilityServerAvailable.json"
+          },
+          "Check for a server name that is invalid": {
+            "$ref": "./examples/CheckNameAvailabilityServerInvalid.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/servers": {
+      "get": {
+        "operationId": "Servers_List",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Gets a list of all servers in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List servers": {
+            "$ref": "./examples/ServerList.json"
+          },
+          "List servers with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ServerListWithExpandEqualsAdministrators.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers": {
+      "get": {
+        "operationId": "Servers_ListByResourceGroup",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Gets a list of servers in a resource groups.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List servers by resource group": {
+            "$ref": "./examples/ServerListByResourceGroup.json"
+          },
+          "List servers by resource group with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ServerListByResourceGroupWithExpandEqualsAdministrators.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}": {
+      "get": {
+        "operationId": "Servers_Get",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Gets a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get server": {
+            "$ref": "./examples/ServerGet.json"
+          },
+          "Get server with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ServerGetWithExpandEqualsAdministrators.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Servers_CreateOrUpdate",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Creates or updates a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested server resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Server' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "201": {
+            "description": "Resource 'Server' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create server": {
+            "$ref": "./examples/ServerCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Server"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Servers_Update",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Updates a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested server resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a server": {
+            "$ref": "./examples/ServerUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Server"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Servers_Delete",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Deletes a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete server": {
+            "$ref": "./examples/ServerDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/import": {
+      "post": {
+        "operationId": "Servers_ImportDatabase",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Imports a bacpac into a new database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The database import request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportNewDatabaseDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ImportExportOperationResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Imports to a new database, using Managed Identity for the SQL server and storage account.": {
+            "$ref": "./examples/ImportNewDatabaseWithManagedIdentity.json"
+          },
+          "Imports to a new database, using private link for the SQL server and storage account.": {
+            "$ref": "./examples/ImportNewDatabaseWithNetworkIsolation.json"
+          },
+          "Imports to a new database.": {
+            "$ref": "./examples/ImportNewDatabase.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "./common.json#/definitions/ImportExportOperationResult"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/refreshExternalGovernanceStatus": {
+      "post": {
+        "operationId": "Servers_RefreshStatus",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Refresh external governance enablement status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RefreshExternalGovernanceStatusOperationResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Refresh external governance enablement status.": {
+            "$ref": "./examples/RefreshExternalGovernanceStatus.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RefreshExternalGovernanceStatusOperationResult"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "CheckNameAvailabilityRequest": {
+      "type": "object",
+      "description": "A request to check whether the specified name for a resource is available.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "./common.json#/definitions/CheckNameAvailabilityResourceType"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "CheckNameAvailabilityResponse": {
+      "type": "object",
+      "description": "The result of a name availability check.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name whose availability was checked.",
+          "readOnly": true
+        },
+        "available": {
+          "type": "boolean",
+          "description": "True if the name is available, otherwise false.",
+          "readOnly": true
+        },
+        "reason": {
+          "$ref": "./common.json#/definitions/CheckNameAvailabilityReason",
+          "description": "The reason code explaining why the name is unavailable. Will be undefined if the name is available.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A message explaining why the name is unavailable. Will be undefined if the name is available.",
+          "readOnly": true
+        }
+      }
+    },
+    "ImportNewDatabaseDefinition": {
+      "type": "object",
+      "description": "Contains the information necessary to perform import operation for new database.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the import database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "edition": {
+          "type": "string",
+          "description": "Edition of the import database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "serviceObjectiveName": {
+          "type": "string",
+          "description": "Service level objective name of the import database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "maxSizeBytes": {
+          "type": "string",
+          "description": "Max size in bytes for the import database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageKeyType": {
+          "$ref": "./common.json#/definitions/StorageKeyType",
+          "description": "Storage key type: StorageAccessKey, SharedAccessKey, or ManagedIdentity.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageKey": {
+          "type": "string",
+          "description": "Storage key for the storage account. If StorageKeyType is ManagedIdentity, this field should specify the Managed Identity's resource ID.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageUri": {
+          "type": "string",
+          "description": "Storage Uri.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLogin": {
+          "type": "string",
+          "description": "Administrator login name. If AuthenticationType is ManagedIdentity, this field should specify the Managed Identity's resource ID.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Administrator login password. If AuthenticationType is ManagedIdentity, this field should not be specified.",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "authenticationType": {
+          "type": "string",
+          "description": "Type of credentials provided for access to the target SQL server: SQL, ADPassword or ManagedIdentity.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "networkIsolation": {
+          "$ref": "./common.json#/definitions/NetworkIsolationSettings",
+          "description": "Optional resource information to enable network isolation for request.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "storageKeyType",
+        "storageKey",
+        "storageUri",
+        "administratorLogin"
+      ]
+    },
+    "RefreshExternalGovernanceStatusOperationResult": {
+      "type": "object",
+      "description": "An RefreshExternalGovernanceStatus operation result resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RefreshExternalGovernanceStatusOperationResultProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RefreshExternalGovernanceStatusOperationResultProperties": {
+      "type": "object",
+      "description": "Contains the operation result properties for refresh external governance status operation.",
+      "properties": {
+        "requestId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "Request Id.",
+          "readOnly": true
+        },
+        "requestType": {
+          "type": "string",
+          "description": "Request type.",
+          "readOnly": true
+        },
+        "queuedTime": {
+          "type": "string",
+          "description": "Queued time.",
+          "readOnly": true
+        },
+        "serverName": {
+          "type": "string",
+          "description": "Server name.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message.",
+          "readOnly": true
+        }
+      }
+    },
+    "Server": {
+      "type": "object",
+      "description": "An Azure SQL Database server.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ResourceIdentity",
+          "description": "The Azure Active Directory identity of the server."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of sql server. This is metadata used for the Azure portal experience.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ServerExternalAdministrator": {
+      "type": "object",
+      "description": "Properties of a active directory administrator.",
+      "properties": {
+        "administratorType": {
+          "$ref": "./common.json#/definitions/AdministratorType",
+          "description": "Type of the sever administrator."
+        },
+        "principalType": {
+          "$ref": "./common.json#/definitions/PrincipalType",
+          "description": "Principal Type of the sever administrator."
+        },
+        "login": {
+          "type": "string",
+          "description": "Login name of the server administrator."
+        },
+        "sid": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "SID (object ID) of the server administrator."
+        },
+        "tenantId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "Tenant ID of the administrator."
+        },
+        "azureADOnlyAuthentication": {
+          "type": "boolean",
+          "description": "Azure Active Directory only Authentication enabled."
+        }
+      }
+    },
+    "ServerListResult": {
+      "type": "object",
+      "description": "The response of a Server list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Server items on this page",
+          "items": {
+            "$ref": "#/definitions/Server"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServerPrivateEndpointConnection": {
+      "type": "object",
+      "description": "A private endpoint connection under a server",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "./common.json#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerProperties": {
+      "type": "object",
+      "description": "The properties of a server.",
+      "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "Administrator username for the server. Once created it cannot be changed.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "The administrator login password (required for server creation).",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the server."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the server.",
+          "readOnly": true
+        },
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name of the server.",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "List of private endpoint connections on a server",
+          "items": {
+            "$ref": "#/definitions/ServerPrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "minimalTlsVersion": {
+          "$ref": "./common.json#/definitions/MinimalTlsVersion",
+          "description": "Minimal TLS version. Allowed values: 'None', 1.0', '1.1', '1.2', '1.3'"
+        },
+        "publicNetworkAccess": {
+          "$ref": "./common.json#/definitions/ServerPublicNetworkAccessFlag",
+          "description": "Whether or not public endpoint access is allowed for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled' or 'SecuredByPerimeter'"
+        },
+        "workspaceFeature": {
+          "$ref": "./common.json#/definitions/ServerWorkspaceFeature",
+          "description": "Whether or not existing server has a workspace created and if it allows connection from workspace",
+          "readOnly": true
+        },
+        "primaryUserAssignedIdentityId": {
+          "type": "string",
+          "description": "The resource id of a user assigned identity to be used by default."
+        },
+        "federatedClientId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "The Client id used for cross tenant CMK scenario"
+        },
+        "keyId": {
+          "type": "string",
+          "description": "A CMK URI of the key to use for encryption."
+        },
+        "administrators": {
+          "$ref": "#/definitions/ServerExternalAdministrator",
+          "description": "The Azure Active Directory administrator can be utilized during server creation and for server updates, except for the azureADOnlyAuthentication property. To update the azureADOnlyAuthentication property, individual API must be used.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "restrictOutboundNetworkAccess": {
+          "$ref": "./common.json#/definitions/ServerNetworkAccessFlag",
+          "description": "Whether or not to restrict outbound network access for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
+        },
+        "isIPv6Enabled": {
+          "$ref": "./common.json#/definitions/ServerNetworkAccessFlag",
+          "description": "Whether or not to enable IPv6 support for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
+        },
+        "externalGovernanceStatus": {
+          "$ref": "./common.json#/definitions/ExternalGovernanceStatus",
+          "description": "Status of external governance.",
+          "readOnly": true
+        },
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of days this server will stay soft-deleted."
+        },
+        "createMode": {
+          "$ref": "./common.json#/definitions/ServerCreateMode",
+          "description": "Create mode for server, only valid values for this are Normal and Restore.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "ServerUpdate": {
+      "type": "object",
+      "description": "An update request for an Azure SQL Database server.",
+      "properties": {
+        "identity": {
+          "$ref": "./common.json#/definitions/ResourceIdentity",
+          "description": "Server identity"
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

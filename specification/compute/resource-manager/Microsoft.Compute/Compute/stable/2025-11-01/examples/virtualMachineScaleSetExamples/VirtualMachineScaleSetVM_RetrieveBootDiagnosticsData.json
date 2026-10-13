@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "ResourceGroup",
+    "api-version": "2025-11-01",
+    "vmScaleSetName": "myvmScaleSet",
+    "instanceId": "0",
+    "sasUriExpirationTimeInMinutes": 60
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "consoleScreenshotBlobUri": "https://storageuri/myvmScaleSetinstance.screenshot.bmp?{saskey}",
+        "serialConsoleLogBlobUri": "https://storageuri/myvmScaleSetinstance.serialconsole.log?{saskey}"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMs_RetrieveBootDiagnosticsData",
+  "title": "RetrieveBootDiagnosticsData of a virtual machine."
+}

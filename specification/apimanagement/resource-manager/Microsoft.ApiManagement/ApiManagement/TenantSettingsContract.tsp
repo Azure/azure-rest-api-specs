@@ -39,7 +39,7 @@ interface TenantSettingsContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -61,6 +61,7 @@ interface TenantSettingsContracts {
 }
 
 @@doc(TenantSettingsContract.name, "The identifier of the settings.");
-@@doc(TenantSettingsContract.properties,
+@@doc(
+  TenantSettingsContract.properties,
   "TenantSettings entity contract properties."
 );

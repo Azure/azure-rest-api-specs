@@ -38,11 +38,22 @@
       }
     }
   },
-  "tags": [],
+  "tags": [
+    {
+      "name": "Skus"
+    },
+    {
+      "name": "AvailabilitySets"
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/skus": {
       "get": {
         "operationId": "ResourceSkus_List",
+        "tags": [
+          "Skus",
+          "AvailabilitySets"
+        ],
         "description": "Gets the list of Microsoft.Compute SKUs available for your Subscription.",
         "parameters": [
           {
@@ -313,7 +324,7 @@
           },
           "readOnly": true,
           "x-ms-identifiers": [
-            "name"
+            "Name"
           ]
         },
         "extendedLocations": {
@@ -410,13 +421,14 @@
       "type": "object",
       "description": "Describes The zonal capabilities of a SKU.",
       "properties": {
-        "name": {
+        "Name": {
           "type": "array",
           "description": "The set of zones that the SKU is available in with the specified capabilities.",
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "name"
         },
         "capabilities": {
           "type": "array",

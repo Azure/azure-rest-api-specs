@@ -78,6 +78,7 @@ import "./UserContract.tsp";
 import "./ApiManagementWorkspaceLinksResource.tsp";
 import "./WorkspaceContract.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -91,8 +92,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "ApiManagementClient" })
 @versioned(Versions)
-// FIXME: Common type version v2 is not supported for now. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.ApiManagement;
 
 /**
@@ -100,9 +100,10 @@ namespace Microsoft.ApiManagement;
  */
 enum Versions {
   /**
-   * The 2025-03-01-preview API version.
+   * The 2025-09-01-preview API version.
    */
-  v2025_03_01_preview: "2025-03-01-preview",
+  @previewVersion
+  v2025_09_01_preview: "2025-09-01-preview",
 }
 
 @armResourceOperations(#{ omitTags: true })
@@ -111,7 +112,8 @@ interface Operations
       ArmResponse<OperationListResult>,
       ErrorResponse
     > {}
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available REST API operations of the Microsoft.ApiManagement provider."
 );
 @@tag(Operations.list, "ApiManagementOperations");

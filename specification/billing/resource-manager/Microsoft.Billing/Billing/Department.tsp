@@ -120,9 +120,11 @@ interface Departments {
 }
 
 @@doc(Department.name, "The name of the department.");
-@@doc(Department.properties,
+@@doc(
+  Department.properties,
   "Optional grouping of enrollment accounts to segment costs into logical groupings and set budgets."
 );
-@@doc(Departments.checkAccessByDepartment::parameters.body,
+@@doc(
+  Departments.checkAccessByDepartment::parameters.body,
   "The request object against which access of the caller will be checked."
 );

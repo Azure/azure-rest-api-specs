@@ -62,6 +62,7 @@ model SubscriptionValidationEventData {
   /** The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).
    * To complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,
    * or perform a GET request on the validationUrl (available starting version 2018-05-01-preview). */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   validationUrl: string;
 }
 
@@ -71,6 +72,7 @@ either the validationCode or the validationUrl received in a
 SubscriptionValidationEvent. When the validationCode is used, the
 SubscriptionValidationResponse can be used to build the response.
 */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SubscriptionValidationResponse {
   /** The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription. */
   validationResponse: string;

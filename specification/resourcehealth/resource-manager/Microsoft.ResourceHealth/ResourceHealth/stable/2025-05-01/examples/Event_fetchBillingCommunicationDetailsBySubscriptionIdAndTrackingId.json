@@ -1,71 +1,47 @@
 {
   "parameters": {
-    "subscriptionId": "subscriptionId",
+    "api-version": "2025-05-01",
     "eventTrackingId": "eventTrackingId",
-    "api-version": "2025-05-01"
+    "subscriptionId": "subscriptionId"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.ResourceHealth/events/{eventTrackingId}",
         "name": "{eventTrackingId}",
         "type": "/providers/Microsoft.ResourceHealth/events",
+        "id": "/providers/Microsoft.ResourceHealth/events/{eventTrackingId}",
         "properties": {
-          "eventType": "Billing",
-          "eventSubType": "Underbilling",
-          "eventSource": "ServiceHealth",
-          "status": "Active",
-          "title": "Upcoming billing changes to your resources",
-          "summary": "Upcoming billing changes to your resources.",
-          "header": "Your service might have been impacted by an Azure service issue",
           "article": {
             "articleContent": "<html>Upcoming billing changes to your resources</html>"
           },
-          "links": [
+          "billingId": "595959",
+          "currencyType": "USD",
+          "enableChatWithUs": false,
+          "enableMicrosoftSupport": true,
+          "eventLevel": "Warning",
+          "eventSource": "ServiceHealth",
+          "eventSubType": "Underbilling",
+          "eventType": "Billing",
+          "faqs": [
             {
-              "type": "Hyperlink",
-              "displayText": {
-                "value": "Request RCA",
-                "localizedValue": "Request RCA"
-              },
-              "extensionName": "Microsoft_Azure_Health",
-              "bladeName": "RequestRCABlade",
-              "parameters": {
-                "trackingId": "{eventTrackingId}",
-                "rcaRequested": "False"
-              }
-            },
-            {
-              "type": "Button",
-              "displayText": {
-                "value": "Sign up for updates",
-                "localizedValue": "Sign up for updates"
-              },
-              "extensionName": "Microsoft_Azure_Health",
-              "bladeName": "AzureHealthBrowseBlade",
-              "parameters": {
-                "trackingId": "{eventTrackingId}"
-              }
+              "answer": "This is an answer",
+              "localeCode": "en",
+              "question": "This is a question"
             }
           ],
-          "level": "Warning",
-          "eventLevel": "Warning",
-          "isEventSensitive": false,
-          "impactStartTime": "2025-06-12T14:45:48.1203530Z",
-          "impactMitigationTime": "2025-07-14T15:43:48.1203530Z",
+          "header": "Your service might have been impacted by an Azure service issue",
+          "hirStage": "resolved",
           "impact": [
             {
-              "impactedService": "Microsoft Cost Management",
-              "impactedServiceGuid": "80853877-1df8-40c2-9c79-44c0d1c95e01",
               "impactedRegions": [
                 {
                   "impactedRegion": "Global",
-                  "status": "Active",
                   "impactedSubscriptions": [
                     "{subscriptionId}"
                   ],
                   "impactedTenants": [],
                   "lastUpdateTime": "2025-05-13T15:43:48.1203530Z",
+                  "status": "Active",
                   "updates": [
                     {
                       "summary": "Upcoming billing changes to your resources.",
@@ -73,42 +49,68 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "impactedService": "Microsoft Cost Management",
+              "impactedServiceGuid": "80853877-1df8-40c2-9c79-44c0d1c95e01"
             }
           ],
+          "impactMitigationTime": "2025-07-14T15:43:48.1203530Z",
+          "impactStartTime": "2025-06-12T14:45:48.1203530Z",
+          "isEventSensitive": false,
+          "isHIR": false,
+          "lastUpdateTime": "2025-05-13T15:43:48.1203530Z",
+          "level": "Warning",
+          "links": [
+            {
+              "type": "Hyperlink",
+              "bladeName": "RequestRCABlade",
+              "displayText": {
+                "localizedValue": "Request RCA",
+                "value": "Request RCA"
+              },
+              "extensionName": "Microsoft_Azure_Health",
+              "parameters": {
+                "rcaRequested": "False",
+                "trackingId": "{eventTrackingId}"
+              }
+            },
+            {
+              "type": "Button",
+              "bladeName": "AzureHealthBrowseBlade",
+              "displayText": {
+                "localizedValue": "Sign up for updates",
+                "value": "Sign up for updates"
+              },
+              "extensionName": "Microsoft_Azure_Health",
+              "parameters": {
+                "trackingId": "{eventTrackingId}"
+              }
+            }
+          ],
+          "newRate": 1,
+          "oldRate": 0.88,
+          "priority": 2,
           "recommendedActions": {
-            "message": "Recommended actions title",
             "actions": [
               {
-                "groupId": 23243,
-                "actionText": "action 1"
+                "actionText": "action 1",
+                "groupId": 23243
               },
               {
-                "groupId": 23432,
-                "actionText": "action 2"
+                "actionText": "action 2",
+                "groupId": 23432
               }
             ],
-            "localeCode": "en"
+            "localeCode": "en",
+            "message": "Recommended actions title"
           },
-          "faqs": [
-            {
-              "question": "This is a question",
-              "answer": "This is an answer",
-              "localeCode": "en"
-            }
-          ],
-          "newRate": 1.0,
-          "oldRate": 0.88,
-          "currencyType": "USD",
-          "billingId": "595959",
-          "isHIR": false,
-          "enableMicrosoftSupport": true,
-          "enableChatWithUs": false,
-          "priority": 2,
-          "lastUpdateTime": "2025-05-13T15:43:48.1203530Z",
-          "hirStage": "resolved"
+          "status": "Active",
+          "summary": "Upcoming billing changes to your resources.",
+          "title": "Upcoming billing changes to your resources"
         }
       }
     }
-  }
+  },
+  "operationId": "Event_fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId",
+  "title": "BillingEventDetailsBySubscriptionIdAndTrackingId"
 }

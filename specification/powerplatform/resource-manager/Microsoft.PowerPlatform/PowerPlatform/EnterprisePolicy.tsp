@@ -78,12 +78,15 @@ interface EnterprisePolicies {
 }
 
 @@doc(EnterprisePolicy.name, "The EnterprisePolicy name.");
-@@doc(EnterprisePolicy.properties,
+@@doc(
+  EnterprisePolicy.properties,
   "The properties that define configuration for the enterprise policy"
 );
-@@doc(EnterprisePolicies.createOrUpdate::parameters.resource,
+@@doc(
+  EnterprisePolicies.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update EnterprisePolicy."
 );
-@@doc(EnterprisePolicies.update::parameters.properties,
+@@doc(
+  EnterprisePolicies.update::parameters.properties,
   "Parameters supplied to update EnterprisePolicy."
 );

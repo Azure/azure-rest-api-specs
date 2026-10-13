@@ -19,6 +19,7 @@ union DatasetType {
 @Rest.resource("datasets")
 @discriminator("type")
 model DatasetVersion {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("URI of the data ([example](https://go.microsoft.com/fwlink/?linkid=2202330))")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
@@ -58,8 +59,11 @@ union PendingUploadType {
   @doc("No pending upload.")
   none: "None",
 
-  @doc("Blob Reference is the only supported type.")
+  @doc("Deprecated: the service never read this value and silently ignored it. Use TemporaryBlobReference instead.")
   BlobReference: "BlobReference",
+
+  @doc("Temporary blob reference.")
+  TemporaryBlobReference: "TemporaryBlobReference",
 }
 
 @doc("The type of credential used to access the storage account.")
@@ -70,6 +74,7 @@ union PendingUploadCredentialType {
   sas: "SAS",
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Represents a request for a pending upload.")
 model PendingUploadRequest {
   @doc("If PendingUploadId is not provided, a random GUID will be used.")
@@ -78,10 +83,11 @@ model PendingUploadRequest {
   @doc("Azure Storage Account connection name to use for generating temporary SAS token")
   connectionName?: string;
 
-  @doc("BlobReference is the only supported type.")
+  @doc("The type of pending upload.")
   pendingUploadType: PendingUploadType.BlobReference;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Represents the response for a pending upload request")
 model PendingUploadResponse {
   @doc("Container-level read, write, list SAS.")
@@ -93,12 +99,13 @@ model PendingUploadResponse {
   @doc("Version of asset to be created if user did not specify version when initially creating upload")
   version?: string;
 
-  @doc("BlobReference is the only supported type")
+  @doc("The type of pending upload.")
   pendingUploadType: PendingUploadType.BlobReference;
 }
 
 @doc("Blob reference details.")
 model BlobReference {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Blob URI path for client to upload data. Example: `https://blob.windows.core.net/Container/Path`")
   blobUri: url;
 
@@ -109,6 +116,7 @@ model BlobReference {
   credential: SasCredential;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Represents a reference to a blob for consumption")
 model AssetCredentialResponse {
   @doc("Credential info to access the storage account.")

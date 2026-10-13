@@ -18,6 +18,7 @@ import "./ApplicationGatewayAvailableSslOptions.tsp";
 import "./ApplicationGatewayPrivateEndpointConnection.tsp";
 import "./ApplicationGatewayWafDynamicManifestResult.tsp";
 import "./ApplicationSecurityGroup.tsp";
+import "./AuthenticationPolicy.tsp";
 import "./AzureFirewall.tsp";
 import "./AzureWebCategory.tsp";
 import "./BastionHost.tsp";
@@ -38,8 +39,11 @@ import "./ExpressRouteCrossConnection.tsp";
 import "./ExpressRoutePortsLocation.tsp";
 import "./ExpressRoutePort.tsp";
 import "./ExpressRoutePortAuthorization.tsp";
+import "./ExpressRouteLag.tsp";
+import "./ExpressRouteLagAuthorization.tsp";
 import "./FirewallPolicy.tsp";
 import "./FirewallPolicyRuleCollectionGroup.tsp";
+import "./FirewallPolicyKubeSelectorGroup.tsp";
 import "./SignaturesOverrides.tsp";
 import "./FirewallPolicyDraft.tsp";
 import "./FirewallPolicyRuleCollectionGroupDraft.tsp";
@@ -66,6 +70,7 @@ import "./NetworkManagerRoutingConfiguration.tsp";
 import "./RoutingRuleCollection.tsp";
 import "./RoutingRule.tsp";
 import "./ScopeConnection.tsp";
+import "./Commit.tsp";
 import "./SecurityAdminConfiguration.tsp";
 import "./AdminRuleCollection.tsp";
 import "./BaseAdminRule.tsp";
@@ -129,10 +134,16 @@ import "./BgpConnection.tsp";
 import "./HubIpConfiguration.tsp";
 import "./HubRouteTable.tsp";
 import "./RoutingIntent.tsp";
+import "./ConnectionPolicy.tsp";
 import "./WebApplicationFirewallPolicy.tsp";
 import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
+import "./VirtualNetworkApplianceCapability.tsp";
 import "./ServiceGateway.tsp";
+import "./InterconnectGroup.tsp";
+import "./FirstPartyServiceTag.tsp";
+import "./AddressPrefixSet.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -140,8 +151,9 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Common;
 /**
- * APIs to manage web application firewall rules.
+ * APIs to manage Microsoft Azure network resources.
  */
 @Azure.ResourceManager.Legacy.features(Features)
 @armProviderNamespace
@@ -157,7 +169,32 @@ enum Versions {
   /**
    * The 2025-05-01 API version.
    */
+  @useDependency(Common.Versions.v2025_05_01)
   v2025_05_01: "2025-05-01",
+
+  /**
+   * The 2025-07-01 API version.
+   */
+  @useDependency(Common.Versions.v2025_07_01)
+  v2025_07_01: "2025-07-01",
+
+  /**
+   * The 2025-09-01 API version.
+   */
+  @useDependency(Common.Versions.v2025_09_01)
+  v2025_09_01: "2025-09-01",
+
+  /**
+   * The 2026-01-01 API version.
+   */
+  @useDependency(Common.Versions.v2026_01_01)
+  v2026_01_01: "2026-01-01",
+
+  /**
+   * The 2026-03-01 API version.
+   */
+  @useDependency(Common.Versions.v2026_03_01)
+  v2026_03_01: "2026-03-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -169,9 +206,11 @@ interface Operations
       CloudError
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available Network Rest API operations."
 );
-@@armResourceOperations(Azure.ResourceManager.Legacy.Operations,
+@@armResourceOperations(
+  Azure.ResourceManager.Legacy.Operations,
   #{ omitTags: true }
 );

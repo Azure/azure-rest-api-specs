@@ -1,0 +1,36 @@
+{
+  "operationId": "SandboxGroups_ListBySubscription",
+  "title": "List SandboxGroups by subscription",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerInstance/sandboxGroups/mySandboxGroup1",
+            "name": "mySandboxGroup1",
+            "type": "Microsoft.ContainerInstance/sandboxGroups",
+            "location": "eastus",
+            "tags": {
+              "environment": "test"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "networkProfile": {
+                "subnets": [
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVNet/subnets/mySubnet"
+                  }
+                ]
+              },
+              "managementResourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mySandboxGroup1-mrg"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

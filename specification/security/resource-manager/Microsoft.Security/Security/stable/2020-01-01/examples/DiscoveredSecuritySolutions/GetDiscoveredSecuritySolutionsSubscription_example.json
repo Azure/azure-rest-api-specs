@@ -8,31 +8,33 @@
       "body": {
         "value": [
           {
-            "properties": {
-              "securityFamily": "Ngfw",
-              "offer": "cisco-asav",
-              "publisher": "cisco",
-              "sku": "asav-azure-byol"
-            },
-            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Security/locations/centralus/discoveredSecuritySolutions/CP",
             "name": "CP",
             "type": "Microsoft.Security/locations/discoveredSecuritySolutions",
-            "location": "eastus"
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Security/locations/centralus/discoveredSecuritySolutions/CP",
+            "location": "eastus",
+            "properties": {
+              "offer": "cisco-asav",
+              "publisher": "cisco",
+              "securityFamily": "Ngfw",
+              "sku": "asav-azure-byol"
+            }
           },
           {
-            "properties": {
-              "securityFamily": "Ngfw",
-              "offer": "vmseries1",
-              "publisher": "paloaltonetworks",
-              "sku": "byol"
-            },
-            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg2/providers/Microsoft.Security/locations/centralus/discoveredSecuritySolutions/paloalto7",
             "name": "paloalto7",
             "type": "Microsoft.Security/locations/discoveredSecuritySolutions",
-            "location": "eastus2"
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg2/providers/Microsoft.Security/locations/centralus/discoveredSecuritySolutions/paloalto7",
+            "location": "eastus2",
+            "properties": {
+              "offer": "vmseries1",
+              "publisher": "paloaltonetworks",
+              "securityFamily": "Ngfw",
+              "sku": "byol"
+            }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "DiscoveredSecuritySolutions_List",
+  "title": "Get discovered security solutions"
 }

@@ -1,0 +1,43 @@
+{
+  "operationId": "DataCollectionRuleConfigurationMetadata_Fetch",
+  "title": "Fetch configuration metadata",
+  "parameters": {
+    "subscriptionId": "703362b3-f278-4e4b-9179-c76eaf41ffc2",
+    "location": "eastus",
+    "api-version": "2025-01-01",
+    "body": {
+      "dcrKind": "PlatformTelemetry"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "configurationMetadata": {
+          "platformTelemetry": {
+            "platformLogs": {
+              "supportedDestinations": [
+                "Microsoft.OperationalInsights/workspaces",
+                "Microsoft.EventHub/namespaces",
+                "Microsoft.Storage/storageAccounts"
+              ],
+              "supportedResourceTypes": [
+                "Microsoft.Cache/Redis",
+                "Microsoft.Storage/storageAccounts"
+              ]
+            },
+            "platformMetrics": {
+              "supportedDestinations": [
+                "Microsoft.OperationalInsights/workspaces",
+                "Microsoft.Storage/storageAccounts"
+              ],
+              "supportedResourceTypes": [
+                "Microsoft.Cache/Redis",
+                "Microsoft.Storage/storageAccounts"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

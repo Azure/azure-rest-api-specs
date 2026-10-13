@@ -323,13 +323,16 @@ op getOperationResult is GetOperationResultOps.Read<
 
 @@doc(Vault.name, "The name of the recovery services vault.");
 @@doc(Vault.properties, "Properties of the vault.");
-@@doc(Vaults.createOrUpdate::parameters.resource,
+@@doc(
+  Vaults.createOrUpdate::parameters.resource,
   "Recovery Services Vault to be created."
 );
-@@doc(Vaults.update::parameters.properties,
+@@doc(
+  Vaults.update::parameters.properties,
   "Recovery Services Vault to be created."
 );
 
-@@doc(Vaults.create::parameters.resource,
+@@doc(
+  Vaults.create::parameters.resource,
   "Input parameters for uploading the vault certificate."
 );

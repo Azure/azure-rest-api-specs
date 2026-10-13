@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01-preview",
+    "body": {
+      "properties": {
+        "accessRecommendationsEnabled": true,
+        "autoApplyReviewResultsEnabled": true,
+        "autoReviewEnabled": true,
+        "autoReviewNotReviewedResult": "Approve",
+        "justificationRequiredOnApproval": true,
+        "mailNotificationsEnabled": true,
+        "recurrenceSettings": {
+          "durationInDays": 5,
+          "recurrenceCount": 0,
+          "recurrenceEndType": "never",
+          "recurrenceType": "weekly"
+        },
+        "remindersEnabled": true
+      }
+    },
+    "id": "fa73e90b-5bf1-45fd-a182-35ce5fc0674d",
+    "properties": {},
+    "scope": "subscriptions/fa73e90b-5bf1-45fd-a182-35ce5fc0674d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Authorization/accessReviewSettings",
+        "id": "/subscriptions/fa73e90b-5bf1-45fd-a182-35ce5fc0674d/providers/Microsoft.Authorization/accessReviewSettings/default",
+        "properties": {
+          "autoApplyDecisionsEnabled": true,
+          "defaultDecision": "Approve",
+          "defaultDecisionEnabled": true,
+          "instanceDurationInDays": 30,
+          "justificationRequiredOnApproval": true,
+          "mailNotificationsEnabled": true,
+          "recommendationsEnabled": true,
+          "recurrence": {
+            "range": {
+              "type": "endDate",
+              "endDate": "2018-08-03T21:17:30.513Z",
+              "numberOfOccurrences": 1,
+              "startDate": "2018-08-03T21:02:30.667Z"
+            }
+          },
+          "reminderNotificationsEnabled": true
+        }
+      }
+    }
+  },
+  "operationId": "ScopeAccessReviewDefaultSettings_Put",
+  "title": "GetAccessReviewDefaultSettings"
+}

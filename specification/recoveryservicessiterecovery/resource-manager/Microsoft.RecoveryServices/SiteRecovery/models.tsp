@@ -1,10 +1,11 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -1078,6 +1079,47 @@ union InMageRcmFailbackRecoveryPointType {
    * CrashConsistent
    */
   CrashConsistent: "CrashConsistent",
+}
+
+/**
+ * The network access policy for managed disks.
+ */
+@added(Versions.v2026_02_01)
+union DiskNetworkAccessPolicy {
+  string,
+
+  /**
+   * Allow all network access.
+   */
+  AllowAll: "AllowAll",
+
+  /**
+   * Allow private access through disk access resource.
+   */
+  AllowPrivate: "AllowPrivate",
+
+  /**
+   * Deny all network access.
+   */
+  DenyAll: "DenyAll",
+}
+
+/**
+ * The public network access setting for managed disks.
+ */
+@added(Versions.v2026_02_01)
+union DiskPublicNetworkAccess {
+  string,
+
+  /**
+   * Public network access is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Public network access is disabled.
+   */
+  Disabled: "Disabled",
 }
 
 /**
@@ -5239,6 +5281,7 @@ model AddVCenterRequestProperties {
  * Input required to update vCenter.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateVCenterRequest {
   /**
    * The update VCenter Request Properties.
@@ -6549,6 +6592,24 @@ model A2AVmManagedDiskInputDetails {
    * The recovery disk encryption information (for one / single pass flows).
    */
   diskEncryptionInfo?: DiskEncryptionInfo;
+
+  /**
+   * The network access policy for the recovery managed disk.
+   */
+  @added(Versions.v2026_02_01)
+  recoveryNetworkAccessPolicy?: DiskNetworkAccessPolicy;
+
+  /**
+   * The recovery disk access Arm Id.
+   */
+  @added(Versions.v2026_02_01)
+  recoveryDiskAccessId?: string;
+
+  /**
+   * The public network access setting for the recovery managed disk.
+   */
+  @added(Versions.v2026_02_01)
+  recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
 }
 
 /**
@@ -7746,6 +7807,24 @@ model A2AProtectedManagedDiskDetails {
    * The test failover name for the managed disk.
    */
   tfoDiskName?: string;
+
+  /**
+   * The network access policy for the recovery managed disk.
+   */
+  @added(Versions.v2026_02_01)
+  recoveryNetworkAccessPolicy?: DiskNetworkAccessPolicy;
+
+  /**
+   * The recovery disk access Arm Id.
+   */
+  @added(Versions.v2026_02_01)
+  recoveryDiskAccessId?: string;
+
+  /**
+   * The public network access setting for the recovery managed disk.
+   */
+  @added(Versions.v2026_02_01)
+  recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
 }
 
 /**
@@ -8138,6 +8217,7 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The OS family name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osFamilyName?: string;
 
   /**
@@ -9969,6 +10049,7 @@ model FabricQueryParameter {
   /**
    * The OS type to be used for fetching agent details.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 }
 
@@ -11690,6 +11771,7 @@ alias HyperVVirtualMachineDetailsProperties = {
   /**
    * The Last replication time.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osDetails?: OSDetails;
 
   /**
@@ -12979,6 +13061,7 @@ model InMageDiskExclusionInput {
 /**
  * Guest disk signature based disk exclusion option when doing enable protection of virtual machine in InMage provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InMageVolumeExclusionOptions {
   /**
    * The volume label. The disk having any volume with this label will be excluded from replication.
@@ -12994,6 +13077,7 @@ model InMageVolumeExclusionOptions {
 /**
  * Guest disk signature based disk exclusion option when doing enable protection of virtual machine in InMage provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InMageDiskSignatureExclusionOptions {
   /**
    * The guest signature of disk to be excluded from replication.
@@ -13326,6 +13410,12 @@ model InMageRcmDiskInput {
    * The DiskEncryptionSet ARM Id.
    */
   diskEncryptionSetId?: string;
+
+  /**
+   * The ConfidentialDiskEncryptionSet ARM Id.
+   */
+  @added(Versions.v2026_02_01)
+  confidentialDiskEncryptionSetId?: string;
 
   /**
    * The logical sector size (in bytes), 512 by default.
@@ -14191,6 +14281,12 @@ model InMageRcmDisksDefaultInput {
    * The DiskEncryptionSet ARM Id.
    */
   diskEncryptionSetId?: string;
+
+  /**
+   * The ConfidentialDiskEncryptionSet ARM Id.
+   */
+  @added(Versions.v2026_02_01)
+  confidentialDiskEncryptionSetId?: string;
 
   /**
    * The logical sector size (in bytes), 512 by default.
@@ -15325,8 +15421,9 @@ model InMageRcmMobilityAgentDetails {
   /**
    * The agent auto reinstall state.
    */
+  @typeChangedFrom(Versions.v2026_02_01, MobilityAgentReinstallType[])
   @visibility(Lifecycle.Read)
-  agentReinstallState?: MobilityAgentReinstallType[];
+  agentReinstallState?: MobilityAgentReinstallType;
 
   /**
    * The last agent reinstall type.
@@ -15349,6 +15446,7 @@ model InMageRcmMobilityAgentDetails {
   /**
    * The OS family name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osFamilyName?: string;
 
   /**
@@ -15629,6 +15727,13 @@ model InMageRcmProtectedDiskDetails {
    */
   @visibility(Lifecycle.Read)
   diskEncryptionSetId?: string;
+
+  /**
+   * The ConfidentialDiskEncryptionSet ARM Id.
+   */
+  @added(Versions.v2026_02_01)
+  @visibility(Lifecycle.Read)
+  confidentialDiskEncryptionSetId?: string;
 
   /**
    * The ARM Id of the seed managed disk.
@@ -16799,6 +16904,7 @@ model ManagedRunCommandScriptInput {
   /**
    * The script url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   scriptUrl: string;
 
   /**
@@ -18024,6 +18130,12 @@ model VMwareCbtDiskInput {
   diskEncryptionSetId?: string;
 
   /**
+   * The ConfidentialDiskEncryptionSet ARM Id.
+   */
+  @added(Versions.v2026_02_01)
+  confidentialDiskEncryptionSetId?: string;
+
+  /**
    * The logical sector size (in bytes), 512 by default.
    */
   sectorSizeInBytes?: int32;
@@ -18637,6 +18749,13 @@ model VMwareCbtProtectedDiskDetails {
    */
   @visibility(Lifecycle.Read)
   diskEncryptionSetId?: string;
+
+  /**
+   * The ConfidentialDiskEncryptionSet ARM Id.
+   */
+  @added(Versions.v2026_02_01)
+  @visibility(Lifecycle.Read)
+  confidentialDiskEncryptionSetId?: string;
 
   /**
    * The ARM Id of the seed managed disk.

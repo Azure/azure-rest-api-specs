@@ -1,8 +1,8 @@
 import { mapAsync } from "@azure-tools/specs-shared/array";
 import { basename } from "node:path";
-import { logError } from "../log.js";
-import { ApiVersionLifecycleStage } from "../types/breaking-change.js";
-import { getVersionFromInputFile } from "./common-utils.js";
+import { logError } from "../log.ts";
+import { ApiVersionLifecycleStage } from "../types/breaking-change.ts";
+import { getVersionFromInputFile } from "./common-utils.ts";
 
 // Type definitions
 export interface Operation {

@@ -1,0 +1,56 @@
+- tool: TypeSpecValidation
+  paths:
+    - tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-java.emitter-output-dir
+    - options.@azure-tools/typespec-ts.emitter-output-dir
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-python.emitter-output-dir
+    - options.@azure-tools/typespec-csharp.namespace
+    - options.@azure-tools/typespec-csharp.clear-output-folder
+    - options.@azure-tools/typespec-csharp.emitter-output-dir
+  reason: >
+    Suppress SDK configuration validation until TypeSpec conversion is ready.
+    Go options suppressed until service team is ready to update the go package with typespec.
+
+- tool: TypeSpecValidation
+  rules: [FolderStructure]
+  reason: >
+    Custom SDK configuration directories
+  paths:
+    - SdkBatchCsharp
+    - SdkDatalakeGo
+
+- tool: TypeSpecRequirement
+  path: ./stable/2020-10-02/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2020-12-06/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2021-02-12/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2021-04-10/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2021-08-06/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2021-12-02/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2024-08-04/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2025-01-05/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2025-07-05/*.json
+  reason: Brownfield service not ready to migrate

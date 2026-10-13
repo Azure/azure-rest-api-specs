@@ -1,10 +1,7 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
-    "environmentName": "managedEnv",
-    "privateEndpointConnectionName": "jlaw-demo1",
     "api-version": "2025-10-02-preview",
+    "environmentName": "managedEnv",
     "privateEndpointConnectionEnvelope": {
       "properties": {
         "privateLinkServiceConnectionState": {
@@ -12,14 +9,17 @@
           "status": "Approved"
         }
       }
-    }
+    },
+    "privateEndpointConnectionName": "jlaw-demo1",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/managedEnv/privateEndpointConenctions/jlaw-demo1",
         "name": "jlaw-demo1",
         "type": "Microsoft.App/managedEnvironments/privateEndpointConnections",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/managedEnv/privateEndpointConenctions/jlaw-demo1",
         "properties": {
           "groupIds": [
             "managedEnvironments"
@@ -37,9 +37,9 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/managedEnv/privateEndpointConenctions/jlaw-demo1",
         "name": "jlaw-demo1",
         "type": "Microsoft.App/managedEnvironments/privateEndpointConnections",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/managedEnv/privateEndpointConenctions/jlaw-demo1",
         "properties": {
           "groupIds": [
             "managedEnvironments"
@@ -55,5 +55,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "ManagedEnvironmentPrivateEndpointConnections_CreateOrUpdate",
+  "title": "Update a Private Endpoint Connection by Managed Environment"
 }

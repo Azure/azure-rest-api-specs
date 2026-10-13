@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "environmentEnvelope": {
+      "location": "East US",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "environmentName": "testcontainerenv",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "jlaw-demo1",
+        "type": "Microsoft.App/managedEnvironments",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/jlaw-demo1",
+        "location": "East US",
+        "properties": {
+          "availabilityZones": [
+            "1",
+            "2",
+            "3"
+          ],
+          "customDomainConfiguration": {
+            "customDomainVerificationId": "custom domain verification id",
+            "dnsSuffix": "www.my-name.com",
+            "expirationDate": "2022-11-06T04:00:00Z",
+            "subjectName": "CN=www.my-name.com",
+            "thumbprint": "CERTIFICATE_THUMBPRINT"
+          },
+          "defaultDomain": "jlaw-demo1.k4apps.io",
+          "deploymentErrors": null,
+          "eventStreamEndpoint": "testEndpoint",
+          "infrastructureResourceGroup": "capp-svc-jlaw-demo1-northcentralus",
+          "provisioningState": "Succeeded",
+          "staticIp": "20.42.33.145",
+          "workloadProfiles": [
+            {
+              "name": "My-GP-01",
+              "enableFips": true,
+              "maximumCount": 12,
+              "minimumCount": 3,
+              "workloadProfileType": "GeneralPurpose"
+            },
+            {
+              "name": "My-MO-01",
+              "maximumCount": 6,
+              "minimumCount": 3,
+              "workloadProfileType": "MemoryOptimized"
+            },
+            {
+              "name": "My-CO-01",
+              "maximumCount": 6,
+              "minimumCount": 3,
+              "workloadProfileType": "ComputeOptimized"
+            },
+            {
+              "name": "My-consumption-01",
+              "workloadProfileType": "Consumption"
+            }
+          ],
+          "zoneRedundant": true
+        },
+        "tags": {}
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.App/locations/eastus/managedEnvironmentOperationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2025-10-02-preview"
+      }
+    }
+  },
+  "operationId": "ManagedEnvironments_Update",
+  "title": "Patch Managed Environment"
+}

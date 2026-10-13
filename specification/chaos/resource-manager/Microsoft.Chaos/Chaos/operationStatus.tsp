@@ -33,7 +33,9 @@ interface OperationStatuses {
 
     ...LocationParameter,
     ...Foundations.OperationIdParameter,
-  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
+  ):
+    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
+    | ErrorResponse;
 }
 
 @@segment(OperationStatuses.get::parameters.operationId, "operationStatuses");

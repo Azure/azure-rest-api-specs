@@ -56,7 +56,8 @@ interface WorkerPoolResourceOps
         @segment("multiRolePools")
         @key
         default: "default",
-      }
+      },
+      ResourceName = "HostingEnvironmentMultiRolePool"
     > {}
 
 alias WorkerPoolActionParamsOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -73,7 +74,7 @@ alias WorkerPoolActionParamsOps = Azure.ResourceManager.Legacy.RoutedOperations<
     name: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments",
   }
 >;
 
@@ -97,7 +98,7 @@ alias WorkerPoolInstanceMetricActionParamsOps = Azure.ResourceManager.Legacy.Rou
     workerPoolName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/workerPools",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools",
   }
 >;
 
@@ -122,10 +123,12 @@ interface WorkerPoolResources {
   @summary("Create or update a multi-role pool.")
   createOrUpdateMultiRolePool is WorkerPoolResourceOps.CreateOrUpdateAsync<
     WorkerPoolResource,
-    Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
-      @bodyRoot
-      _: WorkerPoolResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<WorkerPoolResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
+          @bodyRoot
+          _: WorkerPoolResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -139,10 +142,12 @@ interface WorkerPoolResources {
   updateMultiRolePool is WorkerPoolResourceOps.CustomPatchSync<
     WorkerPoolResource,
     PatchModel = WorkerPoolResource,
-    Response = ArmResponse<WorkerPoolResource> | (AcceptedResponse & {
-      @bodyRoot
-      _: WorkerPoolResource;
-    }),
+    Response =
+      | ArmResponse<WorkerPoolResource>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: WorkerPoolResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -163,7 +168,7 @@ interface WorkerPoolResources {
   @summary("Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.")
   @get
   @list
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}/metricdefinitions")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}/metricdefinitions")
   listMultiRolePoolInstanceMetricDefinitions is WorkerPoolActionParamsOps.ActionSync<
     WorkerPoolResource,
     void,
@@ -241,7 +246,8 @@ interface AppServiceEnvironmentOps
         @segment("workerPools")
         @key
         workerPoolName: string,
-      }
+      },
+      ResourceName = "HostingEnvironmentWorkerPool"
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true })
@@ -263,10 +269,12 @@ interface AppServiceEnvironments {
   @summary("Create or update a worker pool.")
   createOrUpdateWorkerPool is AppServiceEnvironmentOps.CreateOrUpdateAsync<
     WorkerPoolResource,
-    Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
-      @bodyRoot
-      _: WorkerPoolResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<WorkerPoolResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
+          @bodyRoot
+          _: WorkerPoolResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -280,10 +288,12 @@ interface AppServiceEnvironments {
   updateWorkerPool is AppServiceEnvironmentOps.CustomPatchSync<
     WorkerPoolResource,
     PatchModel = WorkerPoolResource,
-    Response = ArmResponse<WorkerPoolResource> | (AcceptedResponse & {
-      @bodyRoot
-      _: WorkerPoolResource;
-    }),
+    Response =
+      | ArmResponse<WorkerPoolResource>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: WorkerPoolResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -305,7 +315,7 @@ interface AppServiceEnvironments {
   @get
   @action("metricdefinitions")
   @list
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}/metricdefinitions")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}/metricdefinitions")
   listWorkerPoolInstanceMetricDefinitions is WorkerPoolInstanceMetricActionParamsOps.ActionSync<
     WorkerPoolResource,
     void,
@@ -365,15 +375,19 @@ interface AppServiceEnvironments {
 
 @@doc(WorkerPoolResource.name, "");
 @@doc(WorkerPoolResource.properties, "Core resource properties");
-@@doc(WorkerPoolResources.createOrUpdateMultiRolePool::parameters.resource,
+@@doc(
+  WorkerPoolResources.createOrUpdateMultiRolePool::parameters.resource,
   "Properties of the multi-role pool."
 );
-@@doc(WorkerPoolResources.updateMultiRolePool::parameters.properties,
+@@doc(
+  WorkerPoolResources.updateMultiRolePool::parameters.properties,
   "Properties of the multi-role pool."
 );
-@@doc(AppServiceEnvironments.createOrUpdateWorkerPool::parameters.resource,
+@@doc(
+  AppServiceEnvironments.createOrUpdateWorkerPool::parameters.resource,
   "Properties of the worker pool."
 );
-@@doc(AppServiceEnvironments.updateWorkerPool::parameters.properties,
+@@doc(
+  AppServiceEnvironments.updateWorkerPool::parameters.properties,
   "Properties of the worker pool."
 );

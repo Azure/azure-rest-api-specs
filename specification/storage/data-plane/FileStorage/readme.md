@@ -1,0 +1,307 @@
+# FileStorage
+
+> see https://aka.ms/autorest
+
+This is the configuration file for FileStorage swaggers.
+
+---
+
+## Getting Started
+
+To generate the swagger in this folder, run:
+
+> `tsp compile .`
+
+To see additional help and options, run:
+
+> `tsp --help`
+
+---
+
+## Configuration
+
+### Basic Information
+
+These are the global settings for the FileStorage API.
+
+```yaml
+openapi-type: data-plane
+tag: package-2026-12-tsp
+use-internal-constructors: true
+add-credentials: true
+```
+
+### Tag: package-2020-10
+
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-10'
+input-file:
+  - stable/2020-10-02/file.json
+```
+
+### Tag: package-2021-02
+
+These settings apply only when `--tag=package-2021-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-02'
+input-file:
+  - stable/2021-02-12/file.json
+```
+
+### Tag: package-2021-04
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04'
+input-file:
+  - stable/2021-04-10/file.json
+```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - stable/2021-06-08/file.json
+```
+
+### Tag: package-2021-12
+
+These settings apply only when `--tag=package-2021-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-12'
+input-file:
+  - stable/2021-12-02/file.json
+```
+
+### Tag: package-2022-11
+
+These settings apply only when `--tag=package-2022-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-11'
+input-file:
+  - stable/2022-11-02/file.json
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01'
+input-file:
+  - stable/2023-01-03/file.json
+```
+
+### Tag: package-2023-08
+
+These settings apply only when `--tag=package-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08'
+input-file:
+  - stable/2023-08-03/file.json
+```
+
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02'
+input-file:
+  - stable/2024-02-04/file.json
+```
+
+### Tag: package-2024-05
+
+These settings apply only when `--tag=package-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-05'
+input-file:
+  - stable/2024-05-04/file.json
+```
+
+### Tag: package-2024-08
+
+These settings apply only when `--tag=package-2024-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08'
+input-file:
+  - stable/2024-08-04/file.json
+```
+
+### Tag: package-2024-11
+
+These settings apply only when `--tag=package-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-11'
+input-file:
+  - stable/2024-11-04/file.json
+```
+
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01'
+input-file:
+  - stable/2025-01-05/file.json
+```
+
+### Tag: package-2025-05
+
+These settings apply only when `--tag=package-2025-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05'
+input-file:
+  - stable/2025-05-05/file.json
+```
+
+### Tag: package-2025-11
+
+These settings apply only when `--tag=package-2025-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11'
+input-file:
+  - stable/2025-11-05/file.json
+```
+
+### Tag: package-2026-02
+
+These settings apply only when `--tag=package-2026-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02'
+input-file:
+  - stable/2026-02-06/file.json
+```
+
+### Tag: package-2026-04
+
+These settings apply only when `--tag=package-2026-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04'
+input-file:
+  - stable/2026-04-06/file.json
+```
+
+### Tag: package-2026-06
+
+These settings apply only when `--tag=package-2026-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06'
+input-file:
+  - stable/2026-06-06/file.json
+```
+
+### Tag: package-2026-06-tsp
+
+These settings apply only when `--tag=package-2026-06-tsp` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-tsp'
+input-file:
+  - stable/2026-06-06/generated_file.json
+```
+
+### Tag: package-2026-10
+
+These settings apply only when `--tag=package-2026-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-10'
+input-file:
+  - stable/2026-10-06/file.json
+```
+
+### Tag: package-2026-10-tsp
+
+These settings apply only when `--tag=package-2026-10-tsp` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-10-tsp'
+input-file:
+  - stable/2026-10-06/generated_file.json
+```
+
+### Tag: package-2026-12
+
+These settings apply only when `--tag=package-2026-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-12'
+input-file:
+  - stable/2026-12-06/file.json
+```
+
+### Tag: package-2026-12-tsp
+
+These settings apply only when `--tag=package-2026-12-tsp` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-12-tsp'
+input-file:
+  - stable/2026-12-06/generated_file.json
+```
+
+### Suppression
+
+```yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: These parameters are predfined by storage specifications
+  - suppress: XmsPathsMustOverloadPaths
+  - suppress: XmsExamplesRequired
+  - suppress: LongRunningOperationsWithLongRunningExtension
+  - suppress: OAV107
+```
+
+```yaml
+suppressions:
+  - code: LroExtension
+    from: generated_file.json
+    reason: Legacy operations not defined as lro
+```
+
+```yaml
+directive:
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: generated_file.json
+    reason: Service uses XML, not JSON, so cannot validate.
+  - suppress: ValidFormats
+    from: generated_file.json
+    reason: Properly specifying parameter format.
+  - suppress: EnumInsteadOfBoolean
+    from: generated_file.json
+    reason: Existing API contract
+  - suppress: ErrorResponse
+    from: generated_file.json
+    reason: Existing API contract
+  - suppress: MsPaths
+    from: generated_file.json
+    reason: Auto-generated swagger based on typespec
+  - suppress: SuccessResponseBody
+    from: generated_file.json
+    reason: Existing API contract
+  - suppress: LroHeaders
+    from: generated_file.json
+    reason: Existing API contract
+  - suppress: VersionPolicy
+    from: generated_file.json
+    reason: Existing API with api version header
+  - suppress: PutInOperationName
+    from: generated_file.json
+    reason: Existing API with sdk usage
+  - suppress: OperationId
+    from: generated_file.json
+  - suppress: GetInOperationName
+    from: generated_file.json
+  - suppress: XmsEnumValidation
+    from: generated_file.json
+    reason: Existing API contract and auto-generated enum definitions
+  - suppress: SecurityDefinitionDescription
+    from: generated_file.json
+    reason: Auto-generated swagger from typespec
+  - suppress: PathParameterSchema
+    from: generated_file.json
+    reason: Existing API contract
+  - suppress: PutRequestResponseScheme
+    from: generated_file.json
+    reason: Existing API contract
+```
+
+---

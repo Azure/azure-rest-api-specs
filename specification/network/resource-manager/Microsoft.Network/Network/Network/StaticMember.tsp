@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./NetworkGroup.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -85,6 +87,7 @@ interface StaticMembers {
 
 @@doc(StaticMember.name, "The name of the static member.");
 @@doc(StaticMember.properties, "The Static Member properties");
-@@doc(StaticMembers.createOrUpdate::parameters.resource,
+@@doc(
+  StaticMembers.createOrUpdate::parameters.resource,
   "Parameters supplied to the specify the static member to create"
 );

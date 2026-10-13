@@ -1,0 +1,64 @@
+{
+  "title": "ObservabilityAgents_CreateOrUpdate_MinimumSet",
+  "operationId": "ObservabilityAgents_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "observabilityAgentName": "myObservabilityAgent",
+    "resource": {
+      "location": "eastus",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
+        }
+      },
+      "properties": {
+        "monitoringAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/observabilityAgents/myObservabilityAgent",
+        "name": "myObservabilityAgent",
+        "type": "Microsoft.Monitor/observabilityAgents",
+        "location": "eastus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {
+              "principalId": "11111111-1111-1111-1111-111111111111",
+              "clientId": "33333333-3333-3333-3333-333333333333"
+            }
+          }
+        },
+        "properties": {
+          "monitoringAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/observabilityAgents/myObservabilityAgent",
+        "name": "myObservabilityAgent",
+        "type": "Microsoft.Monitor/observabilityAgents",
+        "location": "eastus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {
+              "principalId": "11111111-1111-1111-1111-111111111111",
+              "clientId": "33333333-3333-3333-3333-333333333333"
+            }
+          }
+        },
+        "properties": {
+          "monitoringAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace"
+        }
+      }
+    }
+  }
+}

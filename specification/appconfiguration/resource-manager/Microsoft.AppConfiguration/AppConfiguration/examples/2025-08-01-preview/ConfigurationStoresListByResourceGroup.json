@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "contoso",
+            "type": "Microsoft.AppConfiguration/configurationStores",
+            "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
+            "location": "westus",
+            "properties": {
+              "creationDate": "2018-04-24T16:30:55+00:00",
+              "dataPlaneProxy": {
+                "authenticationMode": "Pass-through",
+                "privateLinkDelegation": "Disabled"
+              },
+              "defaultKeyValueRevisionRetentionPeriodInSeconds": 2592000,
+              "disableLocalAuth": false,
+              "enablePurgeProtection": false,
+              "encryption": {
+                "keyVaultProperties": {
+                  "identityClientId": null,
+                  "keyIdentifier": null
+                }
+              },
+              "endpoint": "https://contoso.azconfig.io",
+              "privateEndpointConnections": [],
+              "provisioningState": "Succeeded",
+              "publicNetworkAccess": "Disabled",
+              "softDeleteRetentionInDays": 30
+            },
+            "sku": {
+              "name": "Standard"
+            },
+            "systemData": {
+              "createdAt": "2018-04-24T16:30:55+00:00",
+              "createdBy": "foo@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2018-04-24T16:30:55+00:00",
+              "lastModifiedBy": "foo@contoso.com",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
+          },
+          {
+            "name": "contoso2",
+            "type": "Microsoft.AppConfiguration/configurationStores",
+            "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso2",
+            "location": "westus",
+            "properties": {
+              "creationDate": "2018-04-24T23:06:59+00:00",
+              "dataPlaneProxy": {
+                "authenticationMode": "Pass-through",
+                "privateLinkDelegation": "Disabled"
+              },
+              "defaultKeyValueRevisionRetentionPeriodInSeconds": 2592000,
+              "disableLocalAuth": false,
+              "enablePurgeProtection": false,
+              "encryption": {
+                "keyVaultProperties": {
+                  "identityClientId": null,
+                  "keyIdentifier": null
+                }
+              },
+              "endpoint": "https://contoso2.azconfig.io",
+              "privateEndpointConnections": [],
+              "provisioningState": "Succeeded",
+              "publicNetworkAccess": "Disabled",
+              "softDeleteRetentionInDays": 30
+            },
+            "sku": {
+              "name": "Standard"
+            },
+            "systemData": {
+              "createdAt": "2018-04-24T16:30:55+00:00",
+              "createdBy": "foo@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2018-04-24T16:30:55+00:00",
+              "lastModifiedBy": "foo@contoso.com",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ConfigurationStores_ListByResourceGroup",
+  "title": "ConfigurationStores_ListByResourceGroup"
+}

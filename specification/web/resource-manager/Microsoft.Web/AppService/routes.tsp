@@ -2,12 +2,14 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
@@ -16,7 +18,9 @@ namespace Microsoft.Web;
 /**
  * Description for Validate whether a resource can be moved.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Validate whether a resource can be moved.")
 @summary("Validate whether a resource can be moved.")
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources")
@@ -35,7 +39,9 @@ op validateMove(
 /**
  * Description for Validate if a resource can be created.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Validate if a resource can be created.")
 @summary("Validate if a resource can be created.")
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/validate")
@@ -55,7 +61,9 @@ op validate(
 /**
  * Description for Gets list of available geo regions plus ministamps
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Gets list of available geo regions plus ministamps")
 @autoRoute
 @get
@@ -70,7 +78,9 @@ op getSubscriptionDeploymentLocations is ArmProviderActionSync<
 /**
  * Description for get a list of available ASE regions and its supported Skus.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Get a list of available ASE regions and its supported Skus.")
 @autoRoute
 @get
@@ -86,7 +96,9 @@ op listAseRegions is ArmProviderActionSync<
 /**
  * Description for Gets a list of meters for a given location.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Gets a list of meters for a given location.")
 @autoRoute
@@ -106,6 +118,7 @@ op listBillingMeters is ArmProviderActionSync<
     /**
      * App Service OS type meters used for
      */
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
     @query("osType")
     osType?: string;
   },
@@ -115,7 +128,9 @@ op listBillingMeters is ArmProviderActionSync<
 /**
  * Description for Check if a resource name is available.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Check if a resource name is available.")
 @autoRoute
 @action("checknameavailability")
@@ -130,7 +145,9 @@ op checkNameAvailability is ArmProviderActionSync<
 /**
  * Get custom hostnames under this subscription
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Get custom hostnames under this subscription")
 @autoRoute
 @get
@@ -152,7 +169,9 @@ op listCustomHostNameSites is ArmProviderActionSync<
 /**
  * Description for Get a list of available geographical regions.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Get a list of available geographical regions.")
 @autoRoute
 @get
@@ -198,7 +217,9 @@ op listGeoRegions is ArmProviderActionSync<
 /**
  * Description for List all apps that are assigned to a hostname.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("List all apps that are assigned to a hostname.")
 @autoRoute
 @action("listSitesAssignedToHostName")
@@ -214,7 +235,9 @@ op listSiteIdentifiersAssignedToHostName is ArmProviderActionSync<
 /**
  * Check if a resource name is available for DNL sites.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Check if a resource name is available for DNL sites.")
 @autoRoute
 @action("checknameavailability")
@@ -222,14 +245,16 @@ op regionalCheckNameAvailability is ArmProviderActionSync<
   Request = DnlResourceNameAvailabilityRequest,
   Response = DnlResourceNameAvailability,
   Scope = SubscriptionActionScope,
-  Parameters = LocationParameter,
+  Parameters = LocationResourceParameter,
   Error = DefaultErrorResponse
 >;
 
 /**
  * Description for List all premier add-on offers.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("List all premier add-on offers.")
 @autoRoute
 @get
@@ -245,7 +270,9 @@ op listPremierAddOnOffers is ArmProviderActionSync<
 /**
  * Description for List all SKUs.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("List all SKUs.")
 @autoRoute
 @get
@@ -260,7 +287,9 @@ op listSkus is ArmProviderActionSync<
 /**
  * Description for Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.")
 @autoRoute
 op verifyHostingEnvironmentVnet is ArmProviderActionSync<
@@ -274,7 +303,9 @@ op verifyHostingEnvironmentVnet is ArmProviderActionSync<
 /**
  * Description for Move resources between resource groups.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Move resources between resource groups.")
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources")
 @post
@@ -296,7 +327,9 @@ interface GlobalOperationGroup {
   /**
    * Description for Gets an operation in a subscription and given region
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets an operation in a subscription and given region")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/operations/{operationId}")
   @get
@@ -329,6 +362,7 @@ interface ProviderOperationGroup {
     Response = ApplicationStackCollection,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("osTypeSelected")
       osTypeSelected?: ProviderOsTypeSelected;
     },
@@ -348,6 +382,7 @@ interface ProviderOperationGroup {
       /**
        * Stack OS Type
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -364,11 +399,12 @@ interface ProviderOperationGroup {
   getFunctionAppStacksForLocation is ArmProviderActionSync<
     Response = FunctionAppStackCollection,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * Stack OS Type
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -385,11 +421,12 @@ interface ProviderOperationGroup {
   getWebAppStacksForLocation is ArmProviderActionSync<
     Response = WebAppStackCollection,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
 
       /**
        * Stack OS Type
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -409,6 +446,7 @@ interface ProviderOperationGroup {
       /**
        * Stack OS Type
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("stackOsType")
       stackOsType?: ProviderStackOsType;
     },
@@ -427,6 +465,7 @@ interface ProviderOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
       @query("osTypeSelected")
       osTypeSelected?: ProviderOsTypeSelected;
     },
@@ -517,7 +556,9 @@ interface ResourceHealthMetadataNonResourceOperationGroup {
   /**
    * Description for List all ResourceHealthMetadata for all sites in the resource group in the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("List all ResourceHealthMetadata for all sites in the resource group in the subscription.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/resourceHealthMetadata")
   @get
@@ -544,7 +585,7 @@ interface GetUsagesInLocationOperationGroup {
   list is ArmProviderActionSync<
     Response = CsmUsageQuotaCollection,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = DefaultErrorResponse
   >;
 }
@@ -562,7 +603,7 @@ interface StaticSitesOperationGroup {
     Request = StaticSitesWorkflowPreviewRequest,
     Response = StaticSitesWorkflowPreview,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = DefaultErrorResponse
   >;
 }

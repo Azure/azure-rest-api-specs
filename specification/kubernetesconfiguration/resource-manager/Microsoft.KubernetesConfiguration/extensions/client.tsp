@@ -4,32 +4,38 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.KubernetesConfiguration;
 
-@@clientName(Microsoft.KubernetesConfiguration,
+@@clientName(
+  Microsoft.KubernetesConfiguration,
   "KubernetesConfigurationExtensionsMgmtClient",
   "python"
 );
 
-@@clientName(Microsoft.KubernetesConfiguration,
+@@clientName(
+  Microsoft.KubernetesConfiguration,
   "ExtensionsClient",
   "javascript"
 );
 
-@@clientName(Microsoft.KubernetesConfiguration.AKSIdentityType,
+@@clientName(
+  Microsoft.KubernetesConfiguration.AKSIdentityType,
   "AksIdentityType",
   "java"
 );
 
-@@alternateType(Azure.ResourceManager.CommonTypes.Identity.type,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Identity.type,
   "SystemAssigned",
   "go"
 );
 
 // C# type customizations and renames for backward compatibility with the existing SDK
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Extension.identity,
+@@alternateType(
+  Extension.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -38,25 +44,30 @@ using Microsoft.KubernetesConfiguration;
 @@clientName(Scope, "KubernetesClusterExtensionScope", "csharp");
 @@clientName(ExtensionStatus, "KubernetesClusterExtensionStatus", "csharp");
 @@clientName(LevelType, "KubernetesClusterExtensionStatusLevel", "csharp");
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "KubernetesConfigurationProvisioningState",
   "csharp"
 );
 @@clientName(PatchExtension, "KubernetesClusterExtensionPatch", "csharp");
-@@clientName(PatchExtensionProperties,
+@@clientName(
+  PatchExtensionProperties,
   "KubernetesClusterExtensionPatchProperties",
   "csharp"
 );
-@@clientName(ExtensionProperties,
+@@clientName(
+  ExtensionProperties,
   "KubernetesClusterExtensionProperties",
   "csharp"
 );
-@@clientName(ExtensionPropertiesAksAssignedIdentity,
+@@clientName(
+  ExtensionPropertiesAksAssignedIdentity,
   "KubernetesClusterExtensionAksAssignedIdentity",
   "csharp"
 );
 @@clientName(ScopeCluster, "KubernetesClusterExtensionScopeCluster", "csharp");
-@@clientName(ScopeNamespace,
+@@clientName(
+  ScopeNamespace,
   "KubernetesClusterExtensionScopeNamespace",
   "csharp"
 );
@@ -64,11 +75,13 @@ using Microsoft.KubernetesConfiguration;
 @@clientName(AutoUpgradeMode, "KubernetesClusterAutoUpgradeMode", "csharp");
 @@clientName(AdditionalDetails, "KubernetesClusterAdditionalDetails", "csharp");
 @@clientName(ManagementDetails, "KubernetesClusterManagementDetails", "csharp");
-@@clientName(ExtensionProperties.autoUpgradeMinorVersion,
+@@clientName(
+  ExtensionProperties.autoUpgradeMinorVersion,
   "IsAutoUpgradeMinorVersionEnabled",
   "csharp"
 );
-@@clientName(PatchExtensionProperties.autoUpgradeMinorVersion,
+@@clientName(
+  PatchExtensionProperties.autoUpgradeMinorVersion,
   "IsAutoUpgradeMinorVersionEnabled",
   "csharp"
 );
@@ -78,7 +91,8 @@ using Microsoft.KubernetesConfiguration;
 @@scope(Extensions.operationStatusGet, "!csharp");
 
 // Backward compatibility: old SDK used ManagedServiceIdentity for AksAssignedIdentity
-@@alternateType(ExtensionProperties.aksAssignedIdentity,
+@@alternateType(
+  ExtensionProperties.aksAssignedIdentity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );

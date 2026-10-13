@@ -26,15 +26,14 @@ model AcsIncomingCallEventData {
   /** Signed incoming call context. */
   incomingCallContext?: string;
 
-  /** The communication identifier of the user on behalf of whom the call is made. */
+  /** The communication identifier of the callee for the "on behalf of" call. */
   onBehalfOfCallee?: CommunicationIdentifierModel;
 
-  /** The communication identifier of the user or application on whose behalf the call was initiated. */
+  /** The communication identifier on behalf of whom the call is made. */
   onBehalfOf?: CommunicationIdentifierModel;
 
   /** Display metadata associated with the incoming call arrival. */
   callArrivalDisplayInfo?: AcsIncomingCallCallArrivalDisplayInfo;
-
   /** CorrelationId (CallId). */
   correlationId?: string;
 }
@@ -1523,6 +1522,11 @@ model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
   /** The message id */
   messageId?: string;
 
+  /** Optional. The BSUID of the recipient. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  @encodedName("application/json", "toBSUID")
+  toBsuid?: string;
+
   /** The updated message status */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   status: AcsMessageDeliveryStatus;
@@ -1541,6 +1545,11 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
 
   /** Optional. Message ID. Format is Guid as string. */
   messageId?: string;
+
+  /** Optional. The BSUID of the sender. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  @encodedName("application/json", "fromBSUID")
+  fromBsuid?: string;
 
   /** Required. The message channel type */
   @madeRequired(ServiceApiVersions.v2024_01_01)

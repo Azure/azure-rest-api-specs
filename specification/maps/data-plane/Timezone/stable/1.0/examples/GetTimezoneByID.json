@@ -1,61 +1,64 @@
 {
   "parameters": {
+    "endpoint": "https://atlas.microsoft.com",
     "format": "json",
     "api-version": "1.0",
-    "query": "Asia/Bahrain",
-    "options": "all"
+    "options": "all",
+    "query": "Asia/Bahrain"
   },
   "responses": {
     "200": {
       "body": {
-        "Version": "2018c",
-        "ReferenceUtcTimestamp": "2018-01-31T00:03:15.1349348Z",
-        "TimeZones": [
+        "referenceUtcTimestamp": "2018-01-31T00:03:15.1349348Z",
+        "timeZones": [
           {
-            "Id": "Asia/Qatar",
-            "Aliases": [
+            "aliases": [
               "Asia/Bahrain"
             ],
-            "Countries": [
+            "countries": [
               {
-                "Name": "Qatar",
-                "Code": "QA"
+                "code": "QA",
+                "name": "Qatar"
               },
               {
-                "Name": "Bahrain",
-                "Code": "BH"
+                "code": "BH",
+                "name": "Bahrain"
               }
             ],
-            "Names": {
-              "ISO6391LanguageCode": "en",
-              "Generic": "Arabian Time",
-              "Standard": "Arabian Standard Time",
-              "Daylight": "Arabian Daylight Time"
+            "id": "Asia/Qatar",
+            "names": {
+              "daylight": "Arabian Daylight Time",
+              "generic": "Arabian Time",
+              "iso6391LanguageCode": "en",
+              "standard": "Arabian Standard Time"
             },
-            "ReferenceTime": {
-              "Tag": "+03",
-              "StandardOffset": "03:00:00",
-              "DaylightSavings": "00:00:00",
-              "WallTime": "2018-01-31T03:03:15.1349348+03:00",
-              "PosixTzValidYear": 2018,
-              "PosixTz": "<+03>-3"
+            "referenceTime": {
+              "daylightSavings": "00:00:00",
+              "posixTz": "<+03>-3",
+              "posixTzValidYear": 2018,
+              "standardOffset": "03:00:00",
+              "tag": "+03",
+              "wallTime": "2018-01-31T03:03:15.1349348+03:00"
             },
-            "RepresentativePoint": {
-              "Latitude": 25.283333333333335,
-              "Longitude": 51.533333333333331
+            "representativePoint": {
+              "latitude": 25.283333333333335,
+              "longitude": 51.53333333333333
             },
-            "TimeTransitions": [
+            "timeTransitions": [
               {
-                "Tag": "+03",
-                "StandardOffset": "03:00:00",
-                "DaylightSavings": "00:00:00",
-                "UtcStart": "1972-05-31T20:00:00Z",
-                "UtcEnd": "9999-12-31T23:59:59.9999999Z"
+                "daylightSavings": "00:00:00",
+                "standardOffset": "03:00:00",
+                "tag": "+03",
+                "utcEnd": "9999-12-31T23:59:59.9999999Z",
+                "utcStart": "1972-05-31T20:00:00Z"
               }
             ]
           }
-        ]
+        ],
+        "version": "2018c"
       }
     }
-  }
+  },
+  "operationId": "Timezone_GetTimezoneByID",
+  "title": "Successfully retrieve timezone by ID"
 }

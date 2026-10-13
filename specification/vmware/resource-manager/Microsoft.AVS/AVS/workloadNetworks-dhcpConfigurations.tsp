@@ -13,7 +13,9 @@ interface WorkloadNetworkDhcpConfigurations {
     Response = ArmResponse<ResourceList<WorkloadNetworkDhcp>>
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DhcpIdParameter should be last, but it is breaking to correct it."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "DhcpIdParameter should be last, but it is breaking to correct it."
   // get is ArmResourceRead<WorkloadNetworkDhcp>;
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}")
   @doc("Get a {name}", WorkloadNetworkDhcp)
@@ -40,15 +42,18 @@ interface WorkloadNetworkDhcpConfigurations {
   delete is ArmResourceDeleteAsync<WorkloadNetworkDhcp>;
 }
 
-@@clientName(WorkloadNetworkDhcpConfigurations.create::parameters.resource,
+@@clientName(
+  WorkloadNetworkDhcpConfigurations.create::parameters.resource,
   "workloadNetworkDhcp"
 );
 
-@@clientName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
+@@clientName(
+  WorkloadNetworkDhcpConfigurations.update::parameters.properties,
   "workloadNetworkDhcp"
 );
 
-@@clientName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
+@@clientName(
+  WorkloadNetworkDhcpConfigurations.update::parameters.properties,
   "workloadNetworkDhcp"
 );
 

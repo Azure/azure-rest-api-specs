@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./RoutingRuleCollection.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -68,7 +70,10 @@ interface RoutingRules {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -98,6 +103,7 @@ interface RoutingRules {
 
 @@doc(RoutingRule.name, "The name of the rule.");
 @@doc(RoutingRule.properties, "Indicates the properties of the routing rule");
-@@doc(RoutingRules.createOrUpdate::parameters.resource,
+@@doc(
+  RoutingRules.createOrUpdate::parameters.resource,
   "The routing rule to create or update"
 );

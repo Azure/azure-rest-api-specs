@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sample1",
+            "type": "Microsoft.App/connectedEnvironments",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/sample1",
+            "location": "North Central US",
+            "properties": {
+              "customDomainConfiguration": {
+                "customDomainVerificationId": "custom domain verification id",
+                "dnsSuffix": "www.my-name.com",
+                "expirationDate": "2022-11-06T04:00:00Z",
+                "subjectName": "CN=www.my-name.com",
+                "thumbprint": "CERTIFICATE_THUMBPRINT"
+              },
+              "defaultDomain": "sample1.k4apps.io",
+              "deploymentErrors": null,
+              "provisioningState": "Succeeded",
+              "staticIp": "20.42.33.145"
+            },
+            "tags": {}
+          },
+          {
+            "name": "sample2",
+            "type": "Microsoft.App/connectedEnvironments",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/DemoRG/providers/Microsoft.App/connectedEnvironments/sample2",
+            "location": "North Central US",
+            "properties": {
+              "customDomainConfiguration": {
+                "customDomainVerificationId": "custom domain verification id",
+                "dnsSuffix": "www.my-name2.com",
+                "expirationDate": "2022-11-06T04:00:00Z",
+                "subjectName": "CN=www.my-name2.com",
+                "thumbprint": "CERTIFICATE_THUMBPRINT"
+              },
+              "defaultDomain": "sample2.k4apps.io",
+              "deploymentErrors": null,
+              "provisioningState": "Succeeded",
+              "staticIp": "52.142.21.61"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ConnectedEnvironments_ListBySubscription",
+  "title": "List connected environments by subscription"
+}

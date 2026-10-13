@@ -86,6 +86,7 @@ interface DataFlowResources {
 @@minLength(DataFlowResource.name, 1);
 @@doc(DataFlowResource.name, "The data flow name.");
 @@doc(DataFlowResource.properties, "Data flow properties.");
-@@doc(DataFlowResources.createOrUpdate::parameters.resource,
+@@doc(
+  DataFlowResources.createOrUpdate::parameters.resource,
   "Data flow resource definition."
 );

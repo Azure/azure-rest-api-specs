@@ -1,0 +1,50 @@
+{
+  "title": "UnifiedResilienceItems_Get_MaximumSet",
+  "operationId": "UnifiedResilienceItems_Get",
+  "parameters": {
+    "serviceGroupName": "sg1",
+    "api-version": "2026-04-01-preview",
+    "unifiedResilienceItemName": "uri1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "goals": {
+            "templateId": "/providers/Microsoft.AzureResilienceManagement/goalTemplates/gt1",
+            "assignmentId": "/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1",
+            "regionalRecoveryPointObjectiveInMinutes": "PT15M",
+            "regionalRecoveryPointEstimatedInMinutes": "PT10M",
+            "regionalRecoveryPointObjectiveStatus": "Healthy",
+            "regionalRecoveryTimeObjectiveInMinutes": "PT1H",
+            "regionalRecoveryTimeActualInMinutes": "PT45M",
+            "regionalRecoveryTimeObjectiveStatus": "Healthy",
+            "requireHighAvailability": "Required",
+            "requireDisasterRecovery": "NotRequired"
+          },
+          "recommendations": {
+            "highAvailability": {
+              "enabledResourceCount": 5,
+              "notEnabledResourceCount": 2,
+              "notEvaluatedResourceCount": 1,
+              "evaluationDateTime": "2025-05-01T08:00:00Z"
+            }
+          },
+          "lastModifiedTime": "2025-05-01T08:00:00Z"
+        },
+        "id": "/providers/Microsoft.AzureResilienceManagement/unifiedResilienceItems/uri1",
+        "name": "uri1",
+        "type": "Microsoft.AzureResilienceManagement/unifiedResilienceItems",
+        "systemData": {
+          "createdBy": "dvnfxbuyqhvivfjddjccdtlwajfht",
+          "createdByType": "User",
+          "createdAt": "2025-02-06T15:03:42.796Z",
+          "lastModifiedBy": "lndhhaimomorael",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-02-06T15:03:42.797Z"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "virtualWANName": "wan1",
+    "vpnClientParams": {
+      "authenticationMethod": "EAPTLS",
+      "vpnServerConfigurationResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/vpnServerConfigurations/vpnconfig1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "profileUrl": "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
+      }
+    }
+  },
+  "operationId": "generatevirtualwanvpnserverconfigurationvpnprofile",
+  "title": "GenerateVirtualWanVpnServerConfigurationVpnProfile"
+}

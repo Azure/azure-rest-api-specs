@@ -1,3 +1,23 @@
-- tool: TypeSpecRequirement
-  path: ./stable/2021-10-01/*.json
-  reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  paths:
+    - "."
+    - ./device
+    - ./service
+  rules: [FolderStructure]
+  reason: >
+    DPS data-plane has two distinct API surfaces (device registration and service management)
+    that require two separate TypeSpec projects under DeviceProvisioningServices.
+    Each must remain at sub-folder depth (device/ and service/) rather than being merged
+    into a single top-level TypeSpec project.
+- tool: TypeSpecValidation
+  paths:
+    - ./tspconfig.yaml
+    - ./device/tspconfig.yaml
+    - ./service/tspconfig.yaml
+  rules: [SdkTspConfigValidation]
+  reason: >
+    DPS data-plane uses a sub-folder TypeSpec structure (device/ and service/ sub-projects).
+    The root tspconfig.yaml is a stub required only for tsv compatibility (FlavorAzure and
+    LinterRuleset rules). SDK emitter configurations (Java, Python, TypeScript) for the
+    device/ and service/ sub-projects will be added in a follow-up PR as part of SDK
+    onboarding; they are not required for this TypeSpec source migration PR.

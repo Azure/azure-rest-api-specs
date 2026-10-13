@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model WebApplicationFirewallPolicy extends Resource {
+model WebApplicationFirewallPolicy extends Common.Resource {
   properties?: WebApplicationFirewallPolicyPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -59,7 +61,10 @@ interface WebApplicationFirewallPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     WebApplicationFirewallPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -84,9 +89,11 @@ interface WebApplicationFirewallPolicies {
 
 @@maxLength(WebApplicationFirewallPolicy.name, 128);
 @@doc(WebApplicationFirewallPolicy.name, "The name of the policy.");
-@@doc(WebApplicationFirewallPolicy.properties,
+@@doc(
+  WebApplicationFirewallPolicy.properties,
   "Properties of the web application firewall policy."
 );
-@@doc(WebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  WebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
   "Policy to be created."
 );

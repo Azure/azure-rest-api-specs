@@ -2,12 +2,16 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +23,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model BastionHost extends Resource {
+model BastionHost extends Common.Resource {
   properties?: BastionHostPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -42,6 +46,12 @@ model BastionHost extends Resource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
+
+  /**
+   * The identity assigned to the Bastion Host resource
+   */
+  @added(Versions.v2026_01_01)
+  identity?: Common.ManagedServiceIdentity;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -62,9 +72,27 @@ interface BastionHosts {
   >;
 
   /**
+   * Updates Tags or identity for BastionHost resource
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Rename of previous updateTags operation which uses a legacy async polling pattern"
+  @added(Versions.v2026_01_01)
+  @sharedRoute
+  @patch(#{ implicitOptionality: false })
+  @renamedFrom(Versions.v2026_01_01, "updateTags")
+  update is ArmCustomPatchAsync<
+    BastionHost,
+    PatchModel = BastionHostUpdate,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = BastionHost> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
    * Updates Tags for BastionHost resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_01_01)
+  @sharedRoute
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchAsync<
     BastionHost,
@@ -80,7 +108,10 @@ interface BastionHosts {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     BastionHost,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -193,24 +224,35 @@ interface BastionHosts {
 
 @@doc(BastionHost.name, "The name of the Bastion Host.");
 @@doc(BastionHost.properties, "Represents the bastion host resource.");
-@@doc(BastionHosts.createOrUpdate::parameters.resource,
+@@doc(
+  BastionHosts.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Bastion Host operation."
 );
-@@doc(BastionHosts.updateTags::parameters.properties,
+@@doc(
+  BastionHosts.updateTags::parameters.properties,
   "Parameters supplied to update BastionHost tags."
 );
-@@doc(BastionHosts.putBastionShareableLink::parameters.body,
+@@doc(
+  BastionHosts.update::parameters.properties,
+  "Parameters supplied to update BastionHost tags or identity."
+);
+@@doc(
+  BastionHosts.putBastionShareableLink::parameters.body,
   "Post request for Create/Delete/Get Bastion Shareable Link endpoints."
 );
-@@doc(BastionHosts.deleteBastionShareableLink::parameters.body,
+@@doc(
+  BastionHosts.deleteBastionShareableLink::parameters.body,
   "Post request for Create/Delete/Get Bastion Shareable Link endpoints."
 );
-@@doc(BastionHosts.deleteBastionShareableLinkByToken::parameters.body,
+@@doc(
+  BastionHosts.deleteBastionShareableLinkByToken::parameters.body,
   "Post request for Delete Bastion Shareable Link By Token endpoint."
 );
-@@doc(BastionHosts.getBastionShareableLink::parameters.body,
+@@doc(
+  BastionHosts.getBastionShareableLink::parameters.body,
   "Post request for Create/Delete/Get Bastion Shareable Link endpoints."
 );
-@@doc(BastionHosts.disconnectActiveSessions::parameters.body,
+@@doc(
+  BastionHosts.disconnectActiveSessions::parameters.body,
   "The list of sessionids to disconnect."
 );

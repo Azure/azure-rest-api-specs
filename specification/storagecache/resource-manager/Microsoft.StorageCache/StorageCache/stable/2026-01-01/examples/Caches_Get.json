@@ -1,81 +1,41 @@
 {
   "parameters": {
-    "resourceGroupName": "scgroup",
+    "api-version": "2026-01-01",
     "cacheName": "sc1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "api-version": "2026-01-01"
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "tags": {
-          "Dept": "Contoso"
-        },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1",
-        "location": "westus",
         "name": "sc1",
         "type": "Microsoft.StorageCache/Cache",
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
-        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1",
+        "location": "westus",
         "properties": {
           "cacheSizeGB": 3072,
-          "health": {
-            "state": "Transitioning",
-            "statusDescription": "Cache is being created.",
-            "conditions": [
-              {
-                "timestamp": "2021-04-21T18:25:43.511Z",
-                "message": "Cannot contact DNS server"
-              }
-            ]
-          },
-          "mountAddresses": [
-            "192.168.1.1",
-            "192.168.1.2"
-          ],
-          "provisioningState": "Succeeded",
-          "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
-          "upgradeStatus": {
-            "currentFirmwareVersion": "2022.08.1",
-            "firmwareUpdateStatus": "available",
-            "firmwareUpdateDeadline": "2019-04-21T18:25:43.511Z",
-            "lastFirmwareUpdate": "2019-01-21T18:25:43.511Z",
-            "pendingFirmwareVersion": "2022.08.1"
-          },
-          "networkSettings": {
-            "mtu": 1500,
-            "dnsServers": [
-              "10.1.22.33",
-              "10.1.12.33"
-            ],
-            "dnsSearchDomain": "contoso.com",
-            "ntpServer": "time.contoso.com"
-          },
-          "securitySettings": {
-            "accessPolicies": [
-              {
-                "name": "default",
-                "accessRules": [
-                  {
-                    "scope": "default",
-                    "access": "rw",
-                    "suid": false,
-                    "submountAccess": true,
-                    "rootSquash": false
-                  }
-                ]
-              }
-            ]
-          },
-          "upgradeSettings": {
-            "upgradeScheduleEnabled": true,
-            "scheduledTime": "2022-04-26T18:25:43.511Z"
+          "directoryServicesSettings": {
+            "activeDirectory": {
+              "cacheNetBiosName": "contosoSmb",
+              "domainJoined": "Yes",
+              "domainName": "contosoAd.contoso.local",
+              "domainNetBiosName": "contosoAd",
+              "primaryDnsIpAddress": "192.0.2.10",
+              "secondaryDnsIpAddress": "192.0.2.11"
+            },
+            "usernameDownload": {
+              "autoDownloadCertificate": false,
+              "caCertificateURI": "http://contoso.net/cacert.pem",
+              "encryptLdapConnection": false,
+              "extendedGroups": true,
+              "groupFileURI": "http://contoso.net/group.file",
+              "ldapBaseDN": "dc=contosoad,dc=contoso,dc=local",
+              "ldapServer": "192.0.2.12",
+              "requireValidCertificate": false,
+              "userFileURI": "http://contoso.net/passwd.file",
+              "usernameDownloaded": "Yes",
+              "usernameSource": "LDAP"
+            }
           },
           "encryptionSettings": {
             "keyEncryptionKey": {
@@ -85,47 +45,64 @@
               }
             }
           },
-          "directoryServicesSettings": {
-            "activeDirectory": {
-              "primaryDnsIpAddress": "192.0.2.10",
-              "secondaryDnsIpAddress": "192.0.2.11",
-              "domainName": "contosoAd.contoso.local",
-              "domainNetBiosName": "contosoAd",
-              "cacheNetBiosName": "contosoSmb",
-              "domainJoined": "Yes"
-            },
-            "usernameDownload": {
-              "extendedGroups": true,
-              "usernameSource": "LDAP",
-              "groupFileURI": "http://contoso.net/group.file",
-              "userFileURI": "http://contoso.net/passwd.file",
-              "ldapServer": "192.0.2.12",
-              "ldapBaseDN": "dc=contosoad,dc=contoso,dc=local",
-              "encryptLdapConnection": false,
-              "requireValidCertificate": false,
-              "autoDownloadCertificate": false,
-              "caCertificateURI": "http://contoso.net/cacert.pem",
-              "usernameDownloaded": "Yes"
-            }
+          "health": {
+            "conditions": [
+              {
+                "message": "Cannot contact DNS server",
+                "timestamp": "2021-04-21T18:25:43.511Z"
+              }
+            ],
+            "state": "Transitioning",
+            "statusDescription": "Cache is being created."
+          },
+          "mountAddresses": [
+            "192.168.1.1",
+            "192.168.1.2"
+          ],
+          "networkSettings": {
+            "dnsSearchDomain": "contoso.com",
+            "dnsServers": [
+              "10.1.22.33",
+              "10.1.12.33"
+            ],
+            "mtu": 1500,
+            "ntpServer": "time.contoso.com"
           },
           "primingJobs": [
             {
-              "primingJobName": "contosoJob1",
-              "primingJobId": "00000000000_0000000000",
-              "primingJobState": "Complete",
-              "primingJobStatus": "success",
               "primingJobDetails": "Files: Cached=635, Failed=0, Excluded=80, Data=346030 bytes, Directories: Cached=1003, Failed=0, Excluded=0",
-              "primingJobPercentComplete": 100.0
+              "primingJobId": "00000000000_0000000000",
+              "primingJobName": "contosoJob1",
+              "primingJobPercentComplete": 100,
+              "primingJobState": "Complete",
+              "primingJobStatus": "success"
             },
             {
-              "primingJobName": "contosoJob2",
-              "primingJobId": "11111111111_1111111111",
-              "primingJobState": "Queued",
-              "primingJobStatus": "",
               "primingJobDetails": "",
-              "primingJobPercentComplete": 0.0
+              "primingJobId": "11111111111_1111111111",
+              "primingJobName": "contosoJob2",
+              "primingJobPercentComplete": 0,
+              "primingJobState": "Queued",
+              "primingJobStatus": ""
             }
           ],
+          "provisioningState": "Succeeded",
+          "securitySettings": {
+            "accessPolicies": [
+              {
+                "name": "default",
+                "accessRules": [
+                  {
+                    "access": "rw",
+                    "rootSquash": false,
+                    "scope": "default",
+                    "submountAccess": true,
+                    "suid": false
+                  }
+                ]
+              }
+            ]
+          },
           "spaceAllocation": [
             {
               "name": "st1",
@@ -140,14 +117,39 @@
               "allocationPercentage": 25
             }
           ],
+          "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
+          "upgradeSettings": {
+            "scheduledTime": "2022-04-26T18:25:43.511Z",
+            "upgradeScheduleEnabled": true
+          },
+          "upgradeStatus": {
+            "currentFirmwareVersion": "2022.08.1",
+            "firmwareUpdateDeadline": "2019-04-21T18:25:43.511Z",
+            "firmwareUpdateStatus": "available",
+            "lastFirmwareUpdate": "2019-01-21T18:25:43.511Z",
+            "pendingFirmwareVersion": "2022.08.1"
+          },
           "zones": [
             "1"
           ]
         },
         "sku": {
           "name": "Standard_2G"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "Dept": "Contoso"
         }
       }
     }
-  }
+  },
+  "operationId": "Caches_Get",
+  "title": "Caches_Get"
 }

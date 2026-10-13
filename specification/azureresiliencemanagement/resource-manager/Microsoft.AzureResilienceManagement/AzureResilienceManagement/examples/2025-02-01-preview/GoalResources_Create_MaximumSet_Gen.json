@@ -1,0 +1,61 @@
+{
+  "title": "GoalResources_Create_MaximumSet",
+  "operationId": "GoalResources_Create",
+  "parameters": {
+    "serviceGroupName": "sg1",
+    "api-version": "2025-02-01-preview",
+    "goalAssignmentName": "ga1",
+    "goalResourceName": "gr1",
+    "properties": {
+      "properties": {
+        "resourceArmId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/MyVirtualMachine",
+        "highAvailabilityGoalParticipation": "Excluded",
+        "highAvailabilityAttestationStatus": "ManuallyAttested",
+        "disasterRecoveryGoalParticipation": "Excluded",
+        "disasterRecoveryAttestationStatus": "ManuallyAttested",
+        "exclusionReasonForHighAvailabilityGoals": "UserSelectedExclusion",
+        "exclusionReasonForDisasterRecoveryGoals": "UnsupportedResource"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "resourceArmId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/MyVirtualMachine",
+          "highAvailabilityGoalParticipation": "Excluded",
+          "highAvailabilityAttestationStatus": "ManuallyAttested",
+          "disasterRecoveryGoalParticipation": "Excluded",
+          "disasterRecoveryAttestationStatus": "ManuallyAttested",
+          "exclusionReasonForHighAvailabilityGoals": "UserSelectedExclusion",
+          "exclusionReasonForDisasterRecoveryGoals": "UnsupportedResource",
+          "serviceGroupMemberships": [
+            {
+              "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sg1",
+              "membershipType": "ThroughResourceGroup"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1/goalResources/gr1",
+        "name": "gr1",
+        "type": "Microsoft.AzureResilienceManagement/goalAssignments/goalResources",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-02-06T15:03:42.796Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-02-06T15:03:42.797Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus",
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Retry-After": 30
+      }
+    }
+  }
+}

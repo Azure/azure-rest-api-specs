@@ -1,0 +1,87 @@
+﻿import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "../Common/main.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Common;
+
+namespace PrivateLinksAPI;
+
+/**
+ * This determines if traffic is allowed over public network. By default it is disabled.
+ */
+union PublicNetworkAccess {
+  string,
+
+  /**
+   * Enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Disabled
+   */
+  Disabled: "Disabled",
+}
+
+/**
+ * Paginated list of private link resources. Contains an array of private links and optional pagination information.
+ */
+model PrivateLinksList {
+  /**
+   * The PrivateLinkResource items on this page
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value: PrivateLinkResource[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Properties of a private link resource. These properties control the behavior and configuration of private endpoint connectivity to Defender services.
+ */
+model PrivateLinkProperties {
+  /**
+   * The current provisioning state of the private link resource. Indicates whether the resource is being created, updated, deleted, or has completed successfully.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * List of private endpoint connections associated with this private link. Each connection represents a private endpoint from a customer's virtual network.
+   */
+  @visibility(Lifecycle.Read)
+  privateEndpointConnections?: PrivateEndpointConnection[];
+
+  /**
+   * List of private link resources available for connection. For Defender services, this typically includes the 'containers' group with 'api' and regional data endpoints.
+   */
+  @visibility(Lifecycle.Read)
+  privateLinkResources?: PrivateLinkGroupResource[];
+
+  /**
+   * This determines if traffic is allowed over public network. By default it is disabled.
+   */
+  publicNetworkAccess?: PublicNetworkAccess = PublicNetworkAccess.Disabled;
+}
+
+/**
+ * Request payload for updating a private link resource. Used in PATCH operations to update specific mutable properties without affecting the entire resource configuration.
+ */
+model PrivateLinkUpdate {
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+}

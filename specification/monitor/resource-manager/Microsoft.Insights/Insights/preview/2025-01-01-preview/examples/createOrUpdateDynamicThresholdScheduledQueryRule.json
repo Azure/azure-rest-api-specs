@@ -1,28 +1,29 @@
 {
   "parameters": {
-    "subscriptionId": "dd4bfc94-a096-412b-9c43-4bd13e35afbc",
-    "resourceGroupName": "QueryResourceGroupName",
-    "ruleName": "perf",
     "api-version": "2025-01-01-preview",
     "parameters": {
       "location": "eastus",
       "properties": {
         "description": "Performance rule",
-        "severity": 4,
-        "enabled": true,
-        "evaluationFrequency": "PT5M",
-        "scopes": [
-          "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
-        ],
-        "windowSize": "PT10M",
+        "actions": {
+          "actionGroups": [
+            "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
+          ],
+          "actionProperties": {
+            "Icm.Title": "Custom title in ICM",
+            "Icm.TsgId": "https://tsg.url"
+          },
+          "customProperties": {
+            "key11": "value11",
+            "key12": "value12"
+          }
+        },
+        "checkWorkspaceAlertsStorageConfigured": true,
         "criteria": {
           "allOf": [
             {
+              "alertSensitivity": "Medium",
               "criterionType": "DynamicThresholdCriterion",
-              "query": "Perf | where ObjectName == \"Processor\"",
-              "timeAggregation": "Average",
-              "metricMeasureColumn": "% Processor Time",
-              "resourceIdColumn": "resourceId",
               "dimensions": [
                 {
                   "name": "ComputerIp",
@@ -39,57 +40,58 @@
                   ]
                 }
               ],
+              "ignoreDataBefore": "2024-06-01T21:00:00.000Z",
+              "metricMeasureColumn": "% Processor Time",
               "operator": "GreaterOrLessThan",
-              "alertSensitivity": "Medium",
-              "ignoreDataBefore": "2024-06-01T21:00:00.000Z"
+              "query": "Perf | where ObjectName == \"Processor\"",
+              "resourceIdColumn": "resourceId",
+              "timeAggregation": "Average"
             }
           ]
         },
+        "enabled": true,
+        "evaluationFrequency": "PT5M",
         "muteActionsDuration": "PT30M",
-        "actions": {
-          "actionGroups": [
-            "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
-          ],
-          "actionProperties": {
-            "Icm.TsgId": "https://tsg.url",
-            "Icm.Title": "Custom title in ICM"
-          },
-          "customProperties": {
-            "key11": "value11",
-            "key12": "value12"
-          }
-        },
-        "checkWorkspaceAlertsStorageConfigured": true,
-        "skipQueryValidation": true
+        "scopes": [
+          "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+        ],
+        "severity": 4,
+        "skipQueryValidation": true,
+        "windowSize": "PT10M"
       }
-    }
+    },
+    "resourceGroupName": "QueryResourceGroupName",
+    "ruleName": "perf",
+    "subscriptionId": "dd4bfc94-a096-412b-9c43-4bd13e35afbc"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
         "name": "perf",
         "type": "microsoft.insights/scheduledqueryrules",
+        "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
         "location": "eastus",
-        "tags": {},
         "properties": {
           "description": "Performance rule",
-          "severity": 4,
-          "enabled": true,
-          "evaluationFrequency": "PT5M",
-          "scopes": [
-            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
-          ],
-          "windowSize": "PT10M",
+          "actions": {
+            "actionGroups": [
+              "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
+            ],
+            "actionProperties": {
+              "Icm.Title": "Custom title in ICM",
+              "Icm.TsgId": "https://tsg.url"
+            },
+            "customProperties": {
+              "key11": "value11",
+              "key12": "value12"
+            }
+          },
+          "checkWorkspaceAlertsStorageConfigured": true,
           "criteria": {
             "allOf": [
               {
+                "alertSensitivity": "Medium",
                 "criterionType": "DynamicThresholdCriterion",
-                "query": "Perf | where ObjectName == \"Processor\"",
-                "timeAggregation": "Average",
-                "metricMeasureColumn": "% Processor Time",
-                "resourceIdColumn": "resourceId",
                 "dimensions": [
                   {
                     "name": "ComputerIp",
@@ -106,57 +108,57 @@
                     ]
                   }
                 ],
+                "ignoreDataBefore": "2024-06-01T21:00:00.000Z",
+                "metricMeasureColumn": "% Processor Time",
                 "operator": "GreaterOrLessThan",
-                "alertSensitivity": "Medium",
-                "ignoreDataBefore": "2024-06-01T21:00:00.000Z"
+                "query": "Perf | where ObjectName == \"Processor\"",
+                "resourceIdColumn": "resourceId",
+                "timeAggregation": "Average"
               }
             ]
           },
-          "muteActionsDuration": "PT30M",
-          "actions": {
-            "actionGroups": [
-              "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
-            ],
-            "actionProperties": {
-              "Icm.TsgId": "https://tsg.url",
-              "Icm.Title": "Custom title in ICM"
-            },
-            "customProperties": {
-              "key11": "value11",
-              "key12": "value12"
-            }
-          },
+          "enabled": true,
+          "evaluationFrequency": "PT5M",
           "isWorkspaceAlertsStorageConfigured": true,
-          "checkWorkspaceAlertsStorageConfigured": true,
-          "skipQueryValidation": true
-        }
-      }
+          "muteActionsDuration": "PT30M",
+          "scopes": [
+            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+          ],
+          "severity": 4,
+          "skipQueryValidation": true,
+          "windowSize": "PT10M"
+        },
+        "tags": {}
+      },
+      "headers": {}
     },
     "201": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
         "name": "perf",
         "type": "microsoft.insights/scheduledqueryrules",
+        "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
         "location": "eastus",
-        "tags": {},
         "properties": {
           "description": "Performance rule",
-          "severity": 4,
-          "enabled": true,
-          "evaluationFrequency": "PT5M",
-          "scopes": [
-            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
-          ],
-          "windowSize": "PT10M",
+          "actions": {
+            "actionGroups": [
+              "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
+            ],
+            "actionProperties": {
+              "Icm.Title": "Custom title in ICM",
+              "Icm.TsgId": "https://tsg.url"
+            },
+            "customProperties": {
+              "key11": "value11",
+              "key12": "value12"
+            }
+          },
+          "checkWorkspaceAlertsStorageConfigured": true,
           "criteria": {
             "allOf": [
               {
+                "alertSensitivity": "Medium",
                 "criterionType": "DynamicThresholdCriterion",
-                "query": "Perf | where ObjectName == \"Processor\"",
-                "timeAggregation": "Average",
-                "metricMeasureColumn": "% Processor Time",
-                "resourceIdColumn": "resourceId",
                 "dimensions": [
                   {
                     "name": "ComputerIp",
@@ -173,35 +175,35 @@
                     ]
                   }
                 ],
+                "ignoreDataBefore": "2024-06-01T21:00:00.000Z",
+                "metricMeasureColumn": "% Processor Time",
                 "operator": "GreaterOrLessThan",
-                "alertSensitivity": "Medium",
-                "ignoreDataBefore": "2024-06-01T21:00:00.000Z"
+                "query": "Perf | where ObjectName == \"Processor\"",
+                "resourceIdColumn": "resourceId",
+                "timeAggregation": "Average"
               }
             ]
           },
+          "enabled": true,
+          "evaluationFrequency": "PT5M",
+          "isWorkspaceAlertsStorageConfigured": true,
           "muteActionsDuration": "PT30M",
-          "actions": {
-            "actionGroups": [
-              "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
-            ],
-            "actionProperties": {
-              "Icm.TsgId": "https://tsg.url",
-              "Icm.Title": "Custom title in ICM"
-            },
-            "customProperties": {
-              "key11": "value11",
-              "key12": "value12"
-            }
-          },
           "resolveConfiguration": {
             "autoResolved": true,
             "timeToResolve": "PT10M"
           },
-          "isWorkspaceAlertsStorageConfigured": true,
-          "checkWorkspaceAlertsStorageConfigured": true,
-          "skipQueryValidation": true
-        }
-      }
+          "scopes": [
+            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+          ],
+          "severity": 4,
+          "skipQueryValidation": true,
+          "windowSize": "PT10M"
+        },
+        "tags": {}
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ScheduledQueryRules_CreateOrUpdate",
+  "title": "create or update dynamic threshold scheduled query rule on Subscription "
 }

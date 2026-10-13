@@ -1,0 +1,309 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Data Collection Rule Configuration Metadata API",
+    "version": "2025-01-01",
+    "description": "Azure Monitor Data Collection Rule Configuration Metadata API\nProvides operations for fetching configuration metadata for data collection rules,\nincluding supported data sources, destinations, and stream specifications.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "DataCollectionRuleConfigurationMetadata"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Insights/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List available operations for Microsoft.Insights": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/fetchDataCollectionRuleConfigurationMetadata": {
+      "post": {
+        "operationId": "DataCollectionRuleConfigurationMetadata_Fetch",
+        "tags": [
+          "DataCollectionRuleConfigurationMetadata"
+        ],
+        "description": "Fetches configuration metadata for data collection rules. When withStreamMetadata is true, returns detailed stream information.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The Azure region for the metadata request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body containing filter options and stream metadata flag.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleConfigurationMetadataRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleConfigurationMetadataResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fetch configuration metadata": {
+            "$ref": "./examples/DataCollectionRuleConfigurationMetadataFetch.json"
+          },
+          "Fetch configuration metadata with stream details": {
+            "$ref": "./examples/DataCollectionRuleConfigurationMetadataFetchWithStreamMetadata.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConfigurationMetadata": {
+      "type": "object",
+      "description": "Configuration metadata for data collection.",
+      "properties": {
+        "platformTelemetry": {
+          "$ref": "#/definitions/PlatformTelemetryMetadata",
+          "description": "Platform telemetry configuration metadata."
+        }
+      }
+    },
+    "DataCollectionRuleConfigurationMetadataRequest": {
+      "type": "object",
+      "description": "Request body for fetching configuration metadata.",
+      "properties": {
+        "dcrKind": {
+          "type": "string",
+          "description": "DCR Kind for which metadata is being requested (e.g., PlatformTelemetry)."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Optional resource type filter (e.g., Microsoft.Compute/virtualMachines). If specified, returns configuration metadata for that resource type."
+        },
+        "withStreamMetadata": {
+          "type": "boolean",
+          "description": "When true, returns detailed stream metadata in the response. Defaults to false."
+        }
+      }
+    },
+    "DataCollectionRuleConfigurationMetadataResponse": {
+      "type": "object",
+      "description": "Response containing configuration metadata for data collection rules.",
+      "properties": {
+        "configurationMetadata": {
+          "$ref": "#/definitions/ConfigurationMetadata",
+          "description": "The configuration metadata for platform telemetry."
+        }
+      }
+    },
+    "LogsSpecification": {
+      "type": "object",
+      "description": "Specification for a logs stream.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the logs stream."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the logs stream."
+        },
+        "groups": {
+          "type": "array",
+          "description": "Categorization groups for the logs stream.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MetricsSpecification": {
+      "type": "object",
+      "description": "Specification for a metrics stream. Properties are driven by the service and are manifest driven.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the metric."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit of measurement for the metric.\nThis value is provided by the service and is manifest-driven; the set of possible values may evolve over time.\nExample: \"Count\"."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The aggregation type for the metric.\nThis value is provided by the service and is manifest-driven; the set of possible values may evolve over time.\nExample: \"Total\"."
+        },
+        "groups": {
+          "type": "array",
+          "description": "Categorization groups for the metric.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PlatformTelemetryMetadata": {
+      "type": "object",
+      "description": "Metadata for platform telemetry (logs and metrics).",
+      "properties": {
+        "platformLogs": {
+          "$ref": "#/definitions/TelemetryTypeMetadata",
+          "description": "Configuration metadata for platform logs."
+        },
+        "platformMetrics": {
+          "$ref": "#/definitions/TelemetryTypeMetadata",
+          "description": "Configuration metadata for platform metrics."
+        }
+      }
+    },
+    "StreamDetailMetadata": {
+      "type": "object",
+      "description": "Detailed metadata for a stream (logs or metrics specification).",
+      "properties": {
+        "logsSpecification": {
+          "$ref": "#/definitions/LogsSpecification",
+          "description": "Specification for logs stream."
+        },
+        "metricsSpecification": {
+          "$ref": "#/definitions/MetricsSpecification",
+          "description": "Specification for metrics stream."
+        }
+      }
+    },
+    "StreamMetadata": {
+      "type": "object",
+      "description": "Metadata for a specific data stream.",
+      "properties": {
+        "streamId": {
+          "type": "string",
+          "description": "The unique identifier for the stream."
+        },
+        "metadata": {
+          "$ref": "#/definitions/StreamDetailMetadata",
+          "description": "Additional metadata about the stream."
+        }
+      }
+    },
+    "TelemetryTypeMetadata": {
+      "type": "object",
+      "description": "Metadata for a specific telemetry type (logs or metrics).",
+      "properties": {
+        "supportedDestinations": {
+          "type": "array",
+          "description": "List of supported destination resource types.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedResourceTypes": {
+          "type": "array",
+          "description": "List of supported source resource types.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedStreams": {
+          "type": "array",
+          "description": "Detailed stream information. Only returned when withStreamMetadata is true in the request.",
+          "items": {
+            "$ref": "#/definitions/StreamMetadata"
+          },
+          "x-ms-identifiers": [
+            "streamId"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

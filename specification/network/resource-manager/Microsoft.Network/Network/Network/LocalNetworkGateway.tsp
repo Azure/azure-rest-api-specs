@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model LocalNetworkGateway extends Resource {
+model LocalNetworkGateway extends Common.Resource {
   properties: LocalNetworkGatewayPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -68,7 +70,10 @@ interface LocalNetworkGateways {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     LocalNetworkGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -80,12 +85,15 @@ interface LocalNetworkGateways {
 
 @@minLength(LocalNetworkGateway.name, 1);
 @@doc(LocalNetworkGateway.name, "The name of the local network gateway.");
-@@doc(LocalNetworkGateway.properties,
+@@doc(
+  LocalNetworkGateway.properties,
   "Properties of the local network gateway."
 );
-@@doc(LocalNetworkGateways.createOrUpdate::parameters.resource,
+@@doc(
+  LocalNetworkGateways.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update local network gateway operation."
 );
-@@doc(LocalNetworkGateways.updateTags::parameters.properties,
+@@doc(
+  LocalNetworkGateways.updateTags::parameters.properties,
   "Parameters supplied to update local network gateway tags."
 );

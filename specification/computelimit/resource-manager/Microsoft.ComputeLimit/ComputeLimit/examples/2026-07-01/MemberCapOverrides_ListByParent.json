@@ -1,0 +1,36 @@
+{
+  "title": "List all member cap overrides under a shared limit cap",
+  "operationId": "MemberCapOverrides_ListByParent",
+  "parameters": {
+    "api-version": "2026-07-01",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "location": "eastus",
+    "vmFamilyName": "StandardDSv3Family"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.ComputeLimit/locations/eastus/sharedLimitCaps/StandardDSv3Family/memberCapOverrides/11111111-1111-1111-1111-111111111111",
+            "name": "11111111-1111-1111-1111-111111111111",
+            "type": "Microsoft.ComputeLimit/locations/sharedLimitCaps/memberCapOverrides",
+            "properties": {
+              "cap": 200,
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.ComputeLimit/locations/eastus/sharedLimitCaps/StandardDSv3Family/memberCapOverrides/22222222-2222-2222-2222-222222222222",
+            "name": "22222222-2222-2222-2222-222222222222",
+            "type": "Microsoft.ComputeLimit/locations/sharedLimitCaps/memberCapOverrides",
+            "properties": {
+              "cap": 350,
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

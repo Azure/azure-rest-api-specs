@@ -1,11 +1,11 @@
 {
   "parameters": {
-    "componentPolicyStatesResource": "latest",
-    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
-    "resourceGroupName": "myResourceGroup",
-    "api-version": "2024-10-01",
+    "$apply": "groupby((type,complianceState),aggregate($count as count))",
     "$filter": "policyAssignmentId eq '/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/560050f83dbb4a24974323f8'",
-    "$apply": "groupby((type,complianceState),aggregate($count as count))"
+    "api-version": "2024-10-01",
+    "componentPolicyStatesResource": "latest",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852"
   },
   "responses": {
     "200": {
@@ -14,17 +14,19 @@
         "@odata.count": 2,
         "value": [
           {
-            "componentType": "Certificate",
             "complianceState": "NonCompliant",
+            "componentType": "Certificate",
             "count": 26
           },
           {
-            "componentType": "Certificate",
             "complianceState": "Compliant",
+            "componentType": "Certificate",
             "count": 10
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ComponentPolicyStates_ListQueryResultsForResourceGroup",
+  "title": "Query latest component policy compliance state count grouped by component type at resource group scope filtered by given assignment."
 }

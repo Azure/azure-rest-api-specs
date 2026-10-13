@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "nspConfigName": "00000001-2222-3333-4444-111144444444.assoc1",
+    "resourceGroupName": "sqlcrudtest-7398",
+    "serverName": "sqlcrudtest-7398",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "00000001-2222-3333-4444-111144444444.assoc1",
+        "type": "Microsoft.Sql/servers/networkSecurityPerimeterConfigurations",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645/networkSecurityPerimeterConfigurations/00000001-2222-3333-4444-111144444444.assoc1",
+        "properties": {
+          "networkSecurityPerimeter": {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/networkRG/providers/Microsoft.Network/networkSecurityPerimeters/perimeter1",
+            "location": "japaneast"
+          },
+          "profile": {
+            "name": "profile1",
+            "accessRules": [
+              {
+                "name": "rule1",
+                "properties": {
+                  "addressPrefixes": [
+                    "148.0.0.0/8",
+                    "152.4.6.0/24"
+                  ],
+                  "direction": "Inbound"
+                }
+              }
+            ],
+            "accessRulesVersion": "0"
+          },
+          "provisioningState": "Accepted",
+          "resourceAssociation": {
+            "name": "assoc1",
+            "accessMode": "Enforced"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/locations/japaneast/networkSecurityPerimeterReconciliationOperationResults/11111111-1111-1111-1111-111111111111"
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
+  "title": "Reconcile NSP Config"
+}

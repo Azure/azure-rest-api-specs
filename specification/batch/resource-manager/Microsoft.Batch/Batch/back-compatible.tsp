@@ -27,23 +27,28 @@ using Microsoft.Batch;
 @@clientLocation(BatchAccounts.regenerateKey, "BatchAccount");
 @@clientName(BatchAccounts.regenerateKey::parameters.body, "parameters");
 @@clientLocation(BatchAccounts.getKeys, "BatchAccount");
-@@clientLocation(BatchAccounts.listOutboundNetworkDependenciesEndpoints,
+@@clientLocation(
+  BatchAccounts.listOutboundNetworkDependenciesEndpoints,
   "BatchAccount"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(BatchAccount.properties);
 
 @@clientLocation(PrivateEndpointConnections.get, "PrivateEndpointConnection");
-@@clientLocation(PrivateEndpointConnections.update,
+@@clientLocation(
+  PrivateEndpointConnections.update,
   "PrivateEndpointConnection"
 );
-@@clientName(PrivateEndpointConnections.update::parameters.properties,
+@@clientName(
+  PrivateEndpointConnections.update::parameters.properties,
   "parameters"
 );
-@@clientLocation(PrivateEndpointConnections.delete,
+@@clientLocation(
+  PrivateEndpointConnections.delete,
   "PrivateEndpointConnection"
 );
-@@clientLocation(PrivateEndpointConnections.listByBatchAccount,
+@@clientLocation(
+  PrivateEndpointConnections.listByBatchAccount,
   "PrivateEndpointConnection"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
@@ -86,7 +91,8 @@ using Microsoft.Batch;
 @@flattenProperty(DetectorResponse.properties);
 
 @@clientLocation(PrivateLinkResources.get, "PrivateLinkResource");
-@@clientLocation(PrivateLinkResources.listByBatchAccount,
+@@clientLocation(
+  PrivateLinkResources.listByBatchAccount,
   "PrivateLinkResource"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
@@ -104,26 +110,32 @@ using Microsoft.Batch;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(Pool.properties);
 
-@@clientLocation(NetworkSecurityPerimeterConfigurations.getConfiguration,
+@@clientLocation(
+  NetworkSecurityPerimeterConfigurations.getConfiguration,
   "NetworkSecurityPerimeter"
 );
-@@clientLocation(NetworkSecurityPerimeterConfigurations.listConfigurations,
+@@clientLocation(
+  NetworkSecurityPerimeterConfigurations.listConfigurations,
   "NetworkSecurityPerimeter"
 );
-@@clientLocation(NetworkSecurityPerimeterConfigurations.reconcileConfiguration,
+@@clientLocation(
+  NetworkSecurityPerimeterConfigurations.reconcileConfiguration,
   "NetworkSecurityPerimeter"
 );
 
 @@clientLocation(LocationOperationGroup.getQuotas, "Location");
-@@clientLocation(LocationOperationGroup.listSupportedVirtualMachineSkus,
+@@clientLocation(
+  LocationOperationGroup.listSupportedVirtualMachineSkus,
   "Location"
 );
 @@clientLocation(LocationOperationGroup.checkNameAvailability, "Location");
-@@clientName(LocationOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  LocationOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
 @@alternateType(DiffDiskSettings.placement, "CacheDisk", "go");
-@@alternateType(CheckNameAvailabilityParameters.type,
+@@alternateType(
+  CheckNameAvailabilityParameters.type,
   "Microsoft.Batch/batchAccounts",
   "go"
 );
@@ -136,7 +148,8 @@ model AccessRulePropertiesSubscriptionsItem {
   /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
   id?: Azure.Core.armResourceIdentifier;
 }
-@@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   AccessRulePropertiesSubscriptionsItem[],
   "go, javascript"
 );

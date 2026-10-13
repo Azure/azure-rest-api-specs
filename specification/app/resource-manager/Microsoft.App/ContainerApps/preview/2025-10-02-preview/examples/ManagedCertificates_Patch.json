@@ -1,30 +1,32 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "examplerg",
-    "environmentName": "testcontainerenv",
-    "managedCertificateName": "certificate-firendly-name",
     "api-version": "2025-10-02-preview",
+    "environmentName": "testcontainerenv",
     "managedCertificateEnvelope": {
       "tags": {
         "tag1": "value1",
         "tag2": "value2"
       }
-    }
+    },
+    "managedCertificateName": "certificate-firendly-name",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/managedCertificates/certificate-firendly-name",
         "type": "Microsoft.App/ManagedEnvironments/managedCertificates",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/managedCertificates/certificate-firendly-name",
         "location": "East US",
         "properties": {
-          "subjectName": "CN=my-subject-name.company.country.net",
+          "domainControlValidation": "CNAME",
           "provisioningState": "Succeeded",
-          "domainControlValidation": "CNAME"
+          "subjectName": "CN=my-subject-name.company.country.net"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ManagedCertificates_Update",
+  "title": "Patch Managed Certificate"
 }

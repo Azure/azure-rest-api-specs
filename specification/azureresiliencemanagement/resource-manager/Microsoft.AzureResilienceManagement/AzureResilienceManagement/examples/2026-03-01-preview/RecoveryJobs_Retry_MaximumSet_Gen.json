@@ -1,0 +1,33 @@
+{
+  "title": "RecoveryJobs_Retry_MaximumSet",
+  "operationId": "RecoveryJobs_Retry",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-03-01-preview",
+    "recoveryPlanName": "samplePlanName",
+    "recoveryJobName": "c56888ef-9ced-4001-a6d4-7145a0309bdb"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "error": {
+          "code": "SampleErrorCode",
+          "message": "Sample error message",
+          "target": "SampleTarget",
+          "details": [],
+          "additionalInfo": [
+            {
+              "type": "SampleType",
+              "info": {}
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

@@ -1,28 +1,70 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-10-02-preview",
     "environmentName": "myenvironment",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/reddog",
             "name": "reddog",
             "type": "Microsoft.App/managedEnvironments/daprcomponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/reddog",
             "properties": {
               "componentType": "state.azure.cosmosdb",
-              "version": "v1",
               "ignoreErrors": false,
               "initTimeout": "50s",
+              "metadata": [
+                {
+                  "name": "url",
+                  "value": "<COSMOS-URL>"
+                },
+                {
+                  "name": "database",
+                  "value": "itemsDB"
+                },
+                {
+                  "name": "collection",
+                  "value": "items"
+                },
+                {
+                  "name": "masterkey",
+                  "secretRef": "masterkey"
+                }
+              ],
+              "scopes": [
+                "container-app-1",
+                "container-app-2"
+              ],
               "secrets": [
                 {
                   "name": "masterkey"
                 }
               ],
+              "serviceComponentBind": [
+                {
+                  "name": "statestore",
+                  "metadata": {
+                    "name": "daprcomponentBind",
+                    "value": "redis-bind"
+                  },
+                  "serviceId": "/subscriptions/9f7371f1-b593-4c3c-84e2-9167806ad358/resourceGroups/ca-syn2-group/providers/Microsoft.App/containerapps/cappredis"
+                }
+              ],
+              "version": "v1"
+            }
+          },
+          {
+            "name": "vaultdog",
+            "type": "Microsoft.App/managedEnvironments/daprcomponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/vaultdog",
+            "properties": {
+              "componentType": "state.azure.cosmosdb",
+              "ignoreErrors": false,
+              "initTimeout": "50s",
               "metadata": [
                 {
                   "name": "url",
@@ -45,72 +87,28 @@
                 "container-app-1",
                 "container-app-2"
               ],
+              "secretStoreComponent": "my-secret-store",
               "serviceComponentBind": [
                 {
                   "name": "statestore",
-                  "serviceId": "/subscriptions/9f7371f1-b593-4c3c-84e2-9167806ad358/resourceGroups/ca-syn2-group/providers/Microsoft.App/containerapps/cappredis",
                   "metadata": {
                     "name": "daprcomponentBind",
                     "value": "redis-bind"
-                  }
+                  },
+                  "serviceId": "/subscriptions/9f7371f1-b593-4c3c-84e2-9167806ad358/resourceGroups/ca-syn2-group/providers/Microsoft.App/containerapps/cappredis"
                 }
-              ]
+              ],
+              "version": "v1"
             }
           },
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/vaultdog",
             "name": "vaultdog",
             "type": "Microsoft.App/managedEnvironments/daprcomponents",
-            "properties": {
-              "componentType": "state.azure.cosmosdb",
-              "version": "v1",
-              "ignoreErrors": false,
-              "initTimeout": "50s",
-              "secretStoreComponent": "my-secret-store",
-              "metadata": [
-                {
-                  "name": "url",
-                  "value": "<COSMOS-URL>"
-                },
-                {
-                  "name": "database",
-                  "value": "itemsDB"
-                },
-                {
-                  "name": "collection",
-                  "value": "items"
-                },
-                {
-                  "name": "masterkey",
-                  "secretRef": "masterkey"
-                }
-              ],
-              "scopes": [
-                "container-app-1",
-                "container-app-2"
-              ],
-              "serviceComponentBind": [
-                {
-                  "name": "statestore",
-                  "serviceId": "/subscriptions/9f7371f1-b593-4c3c-84e2-9167806ad358/resourceGroups/ca-syn2-group/providers/Microsoft.App/containerapps/cappredis",
-                  "metadata": {
-                    "name": "daprcomponentBind",
-                    "value": "redis-bind"
-                  }
-                }
-              ]
-            }
-          },
-          {
             "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/vaultdog",
-            "name": "vaultdog",
-            "type": "Microsoft.App/managedEnvironments/daprcomponents",
             "properties": {
               "componentType": "state.azure.cosmosdb",
-              "version": "v1",
               "ignoreErrors": false,
               "initTimeout": "50s",
-              "secretStoreComponent": "my-secret-store",
               "metadata": [
                 {
                   "name": "url",
@@ -133,20 +131,24 @@
                 "container-app-1",
                 "container-app-2"
               ],
+              "secretStoreComponent": "my-secret-store",
               "serviceComponentBind": [
                 {
                   "name": "statestore",
-                  "serviceId": "/subscriptions/9f7371f1-b593-4c3c-84e2-9167806ad358/resourceGroups/ca-syn2-group/providers/Microsoft.App/containerapps/cappredis",
                   "metadata": {
                     "name": "daprcomponentBind",
                     "value": "redis-bind"
-                  }
+                  },
+                  "serviceId": "/subscriptions/9f7371f1-b593-4c3c-84e2-9167806ad358/resourceGroups/ca-syn2-group/providers/Microsoft.App/containerapps/cappredis"
                 }
-              ]
+              ],
+              "version": "v1"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "DaprComponents_List",
+  "title": "List Dapr Components"
 }

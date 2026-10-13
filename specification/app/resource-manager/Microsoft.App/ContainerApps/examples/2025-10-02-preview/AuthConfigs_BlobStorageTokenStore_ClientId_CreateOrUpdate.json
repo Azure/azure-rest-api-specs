@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "authConfigEnvelope": {
+      "properties": {
+        "encryptionSettings": {
+          "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
+          "containerAppAuthSigningSecretName": "testSigningSecretName"
+        },
+        "globalValidation": {
+          "unauthenticatedClientAction": "AllowAnonymous"
+        },
+        "identityProviders": {
+          "facebook": {
+            "registration": {
+              "appId": "123",
+              "appSecretSettingName": "facebook-secret"
+            }
+          }
+        },
+        "login": {
+          "tokenStore": {
+            "azureBlobStorage": {
+              "blobContainerUri": "https://test.blob.core.windows.net/container1",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "platform": {
+          "enabled": true
+        }
+      }
+    },
+    "authConfigName": "current",
+    "containerAppName": "myapp",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "current",
+        "type": "Microsoft.App/containerapps/authconfigs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.App/containerApps/myapp/authconfigs/current",
+        "properties": {
+          "encryptionSettings": {
+            "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
+            "containerAppAuthSigningSecretName": "testSigningSecretName"
+          },
+          "globalValidation": {
+            "unauthenticatedClientAction": "AllowAnonymous"
+          },
+          "identityProviders": {
+            "facebook": {
+              "registration": {
+                "appId": "123",
+                "appSecretSettingName": "facebook-secret"
+              }
+            }
+          },
+          "login": {
+            "tokenStore": {
+              "azureBlobStorage": {
+                "blobContainerUri": "https://test.blob.core.windows.net/container1",
+                "clientId": "00000000-0000-0000-0000-000000000000"
+              }
+            }
+          },
+          "platform": {
+            "enabled": true
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ContainerAppsAuthConfigs_CreateOrUpdate",
+  "title": "Create or Update Container App AuthConfig with msi clientID blob storage token store"
+}

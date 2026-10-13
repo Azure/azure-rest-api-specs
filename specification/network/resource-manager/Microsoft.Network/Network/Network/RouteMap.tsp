@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VirtualHub.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -64,7 +66,10 @@ interface RouteMaps {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     RouteMap,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -78,10 +83,12 @@ interface RouteMaps {
   >;
 }
 
-@@doc(RouteMap.name,
+@@doc(
+  RouteMap.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(RouteMap.properties, "Properties of the RouteMap resource.");
-@@doc(RouteMaps.createOrUpdate::parameters.resource,
+@@doc(
+  RouteMaps.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update a RouteMap."
 );

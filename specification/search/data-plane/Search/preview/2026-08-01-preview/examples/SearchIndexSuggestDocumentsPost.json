@@ -1,0 +1,61 @@
+{
+  "operationId": "Documents_SuggestPost",
+  "title": "SearchIndexSuggestDocumentsPost",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "indexName": "preview-test",
+    "api-version": "2026-08-01-preview",
+    "Accept": "application/json;odata.metadata=none",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "body": {
+      "search": "p",
+      "suggesterName": "sg",
+      "filter": "ownerId eq 'sam' and id lt '15'",
+      "fuzzy": true,
+      "highlightPostTag": "</em>",
+      "highlightPreTag": "<em>",
+      "minimumCoverage": 80,
+      "orderby": "id desc",
+      "searchFields": "category",
+      "select": "id,name,category,ownerId",
+      "top": 10
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.coverage": 100.0,
+        "value": [
+          {
+            "@search.text": "<em>pu</em>rple",
+            "id": "14",
+            "name": "test",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.text": "<em>pu</em>rple",
+            "id": "13",
+            "name": "test",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.text": "<em>pu</em>rple",
+            "id": "11",
+            "name": "test",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.text": "<em>pu</em>rple",
+            "id": "1",
+            "name": "test",
+            "category": "purple",
+            "ownerId": "sam"
+          }
+        ]
+      }
+    }
+  }
+}

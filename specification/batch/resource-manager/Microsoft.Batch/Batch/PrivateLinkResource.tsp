@@ -66,9 +66,11 @@ interface PrivateLinkResources {
 
 @@maxLength(PrivateLinkResource.name, 101);
 @@minLength(PrivateLinkResource.name, 1);
-@@doc(PrivateLinkResource.name,
+@@doc(
+  PrivateLinkResource.name,
   "The private link resource name. This must be unique within the account."
 );
-@@doc(PrivateLinkResource.properties,
+@@doc(
+  PrivateLinkResource.properties,
   "The properties associated with the private link resource."
 );

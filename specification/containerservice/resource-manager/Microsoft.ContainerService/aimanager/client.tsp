@@ -1,0 +1,76 @@
+import "./main.tsp";
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
+using Microsoft.ContainerService;
+using Azure.Core;
+using TypeSpec.Http;
+
+// Client name customizations
+@@clientName(
+  Microsoft.ContainerService,
+  "ContainerServiceAIManagerClient",
+  "java"
+);
+
+@@clientName(
+  Microsoft.ContainerService,
+  "ContainerServiceAIManagerMgmtClient",
+  "python"
+);
+
+@@clientName(
+  Microsoft.ContainerService,
+  "ContainerServiceAIManagerClient",
+  "csharp"
+);
+
+@@clientName(CalculateCostRequest, "CalculateCostContent", "csharp");
+
+@@clientName(CalculateCostResponse, "CalculateCostResult", "csharp");
+
+@@clientName(
+  Microsoft.ContainerService,
+  "ContainerServiceAIManagerClient",
+  "go"
+);
+
+// Property name customizations
+@@clientName(Azure.ResourceManager.EntityTagProperty.eTag, "etag", "java");
+@@clientName(CalculateCostPlan.feasible, "IsFeasible", "csharp");
+@@clientName(CalculateCostPlan.priceAsOf, "PriceAsOfOn", "csharp");
+
+// C# type customizations
+@@alternateType(
+  Azure.ResourceManager.EntityTagProperty.eTag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
+  "ContainerServiceAIManagerProvisioningState",
+  "csharp"
+);
+@@clientName(CalculateCostRequest, "CalculateCostContent", "csharp");
+@@clientName(CalculateCostResponse, "CalculateCostResult", "csharp");
+@@clientName(DeletePolicy, "AIManagerDeletePolicy", "csharp");
+@@clientName(ScalingProfile, "ModelDeploymentScalingProfile", "csharp");
+@@clientName(AutoscaleProfile, "ModelDeploymentAutoscaleProfile", "csharp");
+@@clientName(CredentialResult, "AIManagerCredentialResult", "csharp");
+@@clientName(CredentialResults, "AIManagerCredentialResults", "csharp");
+@@clientName(InfeasibilityReason, "AIModelInfeasibilityReason", "csharp");
+@@clientName(InfeasibleCode, "AIModelInfeasibleCode", "csharp");
+@@clientName(ModelSpec, "AIModelSpec", "csharp");
+@@clientName(NamespaceAccessInfo, "AIManagerNamespaceAccessInfo", "csharp");
+@@clientName(
+  ServingPerformanceEstimation,
+  "AIModelServingPerformanceEstimation",
+  "csharp"
+);
+
+// Legacy type handling
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+@@clientName(
+  Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
+  "ManagedServiceIdentity"
+);

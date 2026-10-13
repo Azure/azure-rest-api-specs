@@ -1,17 +1,17 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2023-06-01-preview",
+    "groupName": "azuremonitor",
     "resourceGroupName": "MyResourceGroup",
     "scopeName": "MyPrivateLinkScope",
-    "api-version": "2023-06-01-preview",
-    "groupName": "azuremonitor"
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/privateLinkScopes/MyPrivateLinkScope/privateLinkResources/azuremonitor",
         "name": "azuremonitor",
         "type": "Microsoft.Insights/privateLinkScopes/privateLinkResources",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/privateLinkScopes/MyPrivateLinkScope/privateLinkResources/azuremonitor",
         "properties": {
           "groupId": "azuremonitor",
           "requiredMembers": [
@@ -33,5 +33,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "PrivateLinkResources_Get",
+  "title": "Gets private endpoint connection."
 }

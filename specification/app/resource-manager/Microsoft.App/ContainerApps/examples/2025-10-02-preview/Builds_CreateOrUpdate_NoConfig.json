@@ -1,0 +1,61 @@
+{
+  "operationId": "Builds_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "buildEnvelope": {},
+    "buildName": "testBuild",
+    "builderName": "testBuilder",
+    "resourceGroupName": "rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Builds_CreateOrUpdate_NoConfig",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testBuild",
+        "type": "Microsoft.App/builders/builds",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder/builds/testBuild",
+        "properties": {
+          "buildStatus": "InProgress",
+          "logStreamEndpoint": "https://foo.azurecontainerapps.dev/logstream",
+          "provisioningState": "Succeeded",
+          "tokenEndpoint": "https://management.azure.com/subscriptions/{subscription-id}/resourcegroups/{rg-id}/Microsoft.App/builders/testBuilder/builds/testBuild/listAuthToken",
+          "uploadEndpoint": "https://foo.azurecontainerapps.dev/upload"
+        },
+        "systemData": {
+          "createdAt": "2022-10-11T11:05:51.4940669Z",
+          "createdBy": "sample@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-10-11T11:05:51.4940669Z",
+          "lastModifiedBy": "sample@microsoft.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testBuild",
+        "type": "Microsoft.App/build",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder/builds/testBuild",
+        "properties": {
+          "buildStatus": "InProgress",
+          "logStreamEndpoint": "https://foo.azurecontainerapps.dev/logstream",
+          "provisioningState": "Creating",
+          "tokenEndpoint": "https://management.azure.com/subscriptions/{subscription-id}/resourcegroups/{rg-id}/Microsoft.App/builders/testBuilder/builds/testBuild/listAuthToken",
+          "uploadEndpoint": "https://foo.azurecontainerapps.dev/upload"
+        },
+        "systemData": {
+          "createdAt": "2022-10-11T11:05:51.4940669Z",
+          "createdBy": "sample@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-10-11T11:05:51.4940669Z",
+          "lastModifiedBy": "sample@microsoft.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.App/locations/{location}/operationStatuses/{operationId}"
+      }
+    }
+  }
+}

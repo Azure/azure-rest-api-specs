@@ -1,0 +1,48 @@
+{
+  "title": "UsagePlans_Update_MaximumSet",
+  "operationId": "UsagePlans_Update",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "MyResourceGroup",
+    "usagePlanName": "myUsagePlan",
+    "api-version": "2026-03-01-preview",
+    "properties": {
+      "tags": {
+        "environment": "staging",
+        "costCenter": "12345"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "planType": "Standard",
+          "provisioningState": "Succeeded"
+        },
+        "location": "global",
+        "tags": {
+          "environment": "staging",
+          "costCenter": "12345"
+        },
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.AzureResilienceManagement/usagePlans/myUsagePlan",
+        "name": "myUsagePlan",
+        "type": "Microsoft.AzureResilienceManagement/usagePlans",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-06-01T10:00:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-06-01T12:00:00.000Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.AzureResilienceManagement/locations/global/operationStatuses/op123?api-version=2026-03-01-preview",
+        "Retry-After": 10
+      }
+    }
+  }
+}

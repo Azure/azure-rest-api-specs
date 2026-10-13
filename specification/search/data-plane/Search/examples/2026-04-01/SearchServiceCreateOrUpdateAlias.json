@@ -1,0 +1,38 @@
+{
+  "operationId": "Aliases_CreateOrUpdate",
+  "title": "SearchServiceCreateOrUpdateAlias",
+  "parameters": {
+    "endpoint": "https://exampleservice.search.windows.net",
+    "aliasName": "myalias",
+    "api-version": "2026-04-01",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "If-Match": null,
+    "If-None-Match": null,
+    "Prefer": "return=representation",
+    "alias": {
+      "name": "myalias",
+      "indexes": [
+        "example-index"
+      ],
+      "@odata.etag": "0x1234568AE7E58A1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myalias",
+        "indexes": [
+          "example-index"
+        ]
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myalias",
+        "indexes": [
+          "example-index"
+        ]
+      }
+    }
+  }
+}

@@ -18,6 +18,7 @@ import "./GetTenantPolicyResponse.tsp";
 import "./BillingAccountPoliciesResponse.tsp";
 import "./TargetDirectoryResult.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -46,6 +47,7 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available Microsoft.Subscription API operations."
 );

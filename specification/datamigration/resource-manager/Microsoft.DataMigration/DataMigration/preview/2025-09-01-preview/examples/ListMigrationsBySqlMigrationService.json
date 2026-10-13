@@ -1,56 +1,58 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2025-09-01-preview",
     "resourceGroupName": "testrg",
     "sqlMigrationServiceName": "service1",
-    "api-version": "2025-09-01-preview"
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "name": "targetdb",
+            "type": "Microsoft.DataMigration/dataMigrations",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname/providers/Microsoft.DataMigration/databaseMigrations/targetdb",
             "properties": {
+              "endedOn": "0001-01-01T08:00:00Z",
               "kind": "SqlMi",
-              "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname",
+              "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd",
               "migrationStatus": "InProgress",
               "migrationStatusDetails": {
-                "migrationState": "WaitForFullBackupUploadOperation",
                 "activeBackupSets": [],
-                "isFullBackupRestored": false
+                "isFullBackupRestored": false,
+                "migrationState": "WaitForFullBackupUploadOperation"
               },
-              "startedOn": "0001-01-01T08:00:00Z",
-              "endedOn": "0001-01-01T08:00:00Z",
+              "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname",
               "sourceDatabaseName": "sourcename",
               "sqlServerInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/instanceName",
-              "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd"
-            },
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname/providers/Microsoft.DataMigration/databaseMigrations/targetdb",
-            "name": "targetdb",
-            "type": "Microsoft.DataMigration/dataMigrations"
+              "startedOn": "0001-01-01T08:00:00Z"
+            }
           },
           {
+            "name": "targetdb",
+            "type": "Microsoft.DataMigration/dataMigrations",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname/providers/Microsoft.DataMigration/databaseMigrations/targetdb",
             "properties": {
+              "endedOn": "0001-01-01T08:00:00Z",
               "kind": "SqlMi",
-              "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname",
+              "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd",
               "migrationStatus": "InProgress",
               "migrationStatusDetails": {
-                "migrationState": "WaitForFullBackupUploadOperation",
                 "activeBackupSets": [],
-                "isFullBackupRestored": false
+                "isFullBackupRestored": false,
+                "migrationState": "WaitForFullBackupUploadOperation"
               },
-              "startedOn": "0001-01-01T08:00:00Z",
-              "endedOn": "0001-01-01T08:00:00Z",
+              "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname",
               "sourceDatabaseName": "sourcename",
               "sqlServerInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/instanceName",
-              "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd"
-            },
-            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/miname/providers/Microsoft.DataMigration/databaseMigrations/targetdb",
-            "name": "targetdb",
-            "type": "Microsoft.DataMigration/dataMigrations"
+              "startedOn": "0001-01-01T08:00:00Z"
+            }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "SqlMigrationServices_listMigrations",
+  "title": "List database migrations attached to the service."
 }

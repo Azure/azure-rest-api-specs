@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-04-01",
     "resourceProviderNamespace": "Microsoft.TestRP",
-    "api-version": "2025-04-01"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -10,28 +10,30 @@
         "value": [
           {
             "applicationId": "00000000-0000-0000-0000-000000000000",
+            "providerAuthorizationConsentState": "Consented",
             "roleDefinition": {
-              "id": "00000000000000000000000000000000",
               "name": "Contoso service role",
+              "id": "00000000000000000000000000000000",
               "isServiceRole": true,
               "permissions": [
                 {
                   "actions": [
                     "Microsoft.Contoso/*"
                   ],
-                  "notActions": [],
                   "dataActions": [],
+                  "notActions": [],
                   "notDataActions": []
                 }
               ],
               "scopes": [
                 "/"
               ]
-            },
-            "providerAuthorizationConsentState": "Consented"
+            }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Providers_ProviderPermissions",
+  "title": "Get provider resource types."
 }

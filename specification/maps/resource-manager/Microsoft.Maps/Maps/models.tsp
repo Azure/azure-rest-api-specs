@@ -313,6 +313,7 @@ model EncryptionCustomerManagedKeyEncryption {
   /**
    * key encryption key Url, versioned or unversioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyEncryptionKeyUrl?: string;
 }
 

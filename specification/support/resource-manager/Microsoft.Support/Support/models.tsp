@@ -371,6 +371,7 @@ model ProblemClassificationsClassificationResult {
    * Related service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-flatten' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to explicit modeling without flattening."
   @OpenAPI.extension("x-ms-client-flatten", true)
   @added(Versions.v2025_06_01_preview)
   relatedService?: ClassificationService;
@@ -1054,6 +1055,7 @@ model LookUpResourceIdRequest {
    * The type of resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-enum' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a named enum or union."
   @OpenAPI.extension(
     "x-ms-enum",
     #{ name: "ResourceType", modelAsString: false }

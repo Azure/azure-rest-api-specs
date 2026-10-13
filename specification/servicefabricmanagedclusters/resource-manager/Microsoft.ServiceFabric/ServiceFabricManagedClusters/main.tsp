@@ -46,9 +46,9 @@ interface Operations {
   @get
   @armResourceList(OperationListResult)
   @list
-  list(
-    ...ApiVersionParameter,
-  ): ArmResponse<OperationListResult> | ErrorResponse;
+  list(...ApiVersionParameter):
+    | ArmResponse<OperationListResult>
+    | ErrorResponse;
 }
 
 /**
@@ -69,4 +69,7 @@ enum Versions {
 
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2026_02_01: "2026-02-01",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2026_05_01_preview: "2026-05-01-preview",
 }

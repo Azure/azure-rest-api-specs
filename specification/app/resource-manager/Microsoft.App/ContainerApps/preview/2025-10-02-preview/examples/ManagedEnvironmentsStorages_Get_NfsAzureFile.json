@@ -1,25 +1,27 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-10-02-preview",
     "environmentName": "managedEnv",
+    "resourceGroupName": "examplerg",
     "storageName": "jlaw-demo1",
-    "api-version": "2025-10-02-preview"
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/managedEnv/storages/jlaw-demo1",
         "name": "jlaw-demo1",
         "type": "Microsoft.App/managedEnvironments/storages",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/managedEnv/storages/jlaw-demo1",
         "properties": {
           "nfsAzureFile": {
+            "accessMode": "ReadOnly",
             "server": "server1",
-            "shareName": "share1",
-            "accessMode": "ReadOnly"
+            "shareName": "share1"
           }
         }
       }
     }
-  }
+  },
+  "operationId": "ManagedEnvironmentsStorages_Get",
+  "title": "get a environments storage for NFS Azure file"
 }

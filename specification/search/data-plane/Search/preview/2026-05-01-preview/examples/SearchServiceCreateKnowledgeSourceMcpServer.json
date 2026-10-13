@@ -1,0 +1,90 @@
+{
+  "operationId": "KnowledgeSources_Create",
+  "title": "SearchServiceCreateKnowledgeSourceMcpServer",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2026-05-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "knowledgeSource": {
+      "mcpServerParameters": {
+        "serverURL": "https://mcp.contoso.com/sse",
+        "authentication": {
+          "foundryConnectionParameters": {
+            "connectionId": "conn-123"
+          },
+          "kind": "foundryConnection"
+        },
+        "tools": [
+          {
+            "name": "search-code",
+            "outputParsing": {
+              "jsonParameters": {
+                "documentsPath": "$.documents[*]",
+                "includeContext": true
+              },
+              "kind": "json"
+            },
+            "inclusionMode": "reranked",
+            "maxOutputTokens": 4096
+          }
+        ]
+      },
+      "name": "ks-preview-test",
+      "description": "Description of the MCP server knowledge source.",
+      "kind": "mcpServer",
+      "@odata.etag": "0x1234568AE7E58A1",
+      "encryptionKey": {
+        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+        "keyVaultUri": "https://myKeyVault.vault.azure.net",
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "<applicationSecret>"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "ks-preview-test",
+        "kind": "mcpServer",
+        "description": "Description of the MCP server knowledge source.",
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "isServiceLevelKey": false,
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        },
+        "mcpServerParameters": {
+          "serverURL": "https://mcp.contoso.com/sse",
+          "authentication": {
+            "kind": "foundryConnection",
+            "foundryConnectionParameters": {
+              "connectionId": "conn-123"
+            }
+          },
+          "tools": [
+            {
+              "name": "search-code",
+              "inclusionMode": "reranked",
+              "maxOutputTokens": 4096,
+              "outputParsing": {
+                "kind": "json",
+                "jsonParameters": {
+                  "documentsPath": "$.documents[*]",
+                  "includeContext": true
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

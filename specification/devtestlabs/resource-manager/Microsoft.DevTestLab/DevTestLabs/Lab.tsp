@@ -68,7 +68,10 @@ interface Labs {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Lab,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -209,15 +212,19 @@ interface Labs {
 @@doc(Lab.properties, "The properties of the resource.");
 @@doc(Labs.createOrUpdate::parameters.resource, "A lab.");
 @@doc(Labs.update::parameters.properties, "A lab.");
-@@doc(Labs.createEnvironment::parameters.body,
+@@doc(
+  Labs.createEnvironment::parameters.body,
   "Properties for creating a virtual machine."
 );
-@@doc(Labs.exportResourceUsage::parameters.body,
+@@doc(
+  Labs.exportResourceUsage::parameters.body,
   "The parameters of the export operation."
 );
-@@doc(Labs.generateUploadUri::parameters.body,
+@@doc(
+  Labs.generateUploadUri::parameters.body,
   "Properties for generating an upload URI."
 );
-@@doc(Labs.importVirtualMachine::parameters.body,
+@@doc(
+  Labs.importVirtualMachine::parameters.body,
   "This represents the payload required to import a virtual machine from a different lab into the current one"
 );

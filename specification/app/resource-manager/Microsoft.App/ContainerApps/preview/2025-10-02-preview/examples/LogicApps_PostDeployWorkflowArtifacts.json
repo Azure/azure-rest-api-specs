@@ -1,12 +1,29 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "testrg123",
+    "api-version": "2025-10-02-preview",
     "containerAppName": "testapp2",
     "logicAppName": "testapp2",
-    "api-version": "2025-10-02-preview",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "workflowArtifacts": {
+      "appSettings": {
+        "eventHub_connectionString": "Endpoint=sb://example.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=EXAMPLE1a2b3c4d5e6fEXAMPLE="
+      },
       "files": {
+        "connections.json": {
+          "managedApiConnections": {},
+          "serviceProviderConnections": {
+            "eventHub": {
+              "displayName": "example1",
+              "parameterValues": {
+                "connectionString": "@appsetting('eventHub_connectionString')"
+              },
+              "serviceProvider": {
+                "id": "/serviceProviders/eventHub"
+              }
+            }
+          }
+        },
         "test1/workflow.json": {
           "definition": {
             "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
@@ -15,44 +32,29 @@
             "outputs": {},
             "triggers": {
               "When_events_are_available_in_Event_hub": {
+                "type": "ServiceProvider",
                 "inputs": {
                   "parameters": {
                     "eventHubName": "test123"
                   },
                   "serviceProviderConfiguration": {
-                    "connectionName": "eventHub",
                     "operationId": "receiveEvents",
+                    "connectionName": "eventHub",
                     "serviceProviderId": "/serviceProviders/eventHub"
                   }
                 },
-                "splitOn": "@triggerOutputs()?['body']",
-                "type": "ServiceProvider"
+                "splitOn": "@triggerOutputs()?['body']"
               }
             }
           },
           "kind": "Stateful"
-        },
-        "connections.json": {
-          "serviceProviderConnections": {
-            "eventHub": {
-              "parameterValues": {
-                "connectionString": "@appsetting('eventHub_connectionString')"
-              },
-              "serviceProvider": {
-                "id": "/serviceProviders/eventHub"
-              },
-              "displayName": "example1"
-            }
-          },
-          "managedApiConnections": {}
         }
-      },
-      "appSettings": {
-        "eventHub_connectionString": "Endpoint=sb://example.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=EXAMPLE1a2b3c4d5e6fEXAMPLE="
       }
     }
   },
   "responses": {
     "200": {}
-  }
+  },
+  "operationId": "LogicApps_DeployWorkflowArtifacts",
+  "title": "Deploys workflow artifacts"
 }

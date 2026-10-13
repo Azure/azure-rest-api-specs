@@ -104,9 +104,11 @@ interface Formulas {
 
 @@doc(Formula.name, "The name of the formula.");
 @@doc(Formula.properties, "The properties of the formula.");
-@@doc(Formulas.createOrUpdate::parameters.resource,
+@@doc(
+  Formulas.createOrUpdate::parameters.resource,
   "A formula for creating a VM, specifying an image base and other parameters"
 );
-@@doc(Formulas.update::parameters.properties,
+@@doc(
+  Formulas.update::parameters.properties,
   "A formula for creating a VM, specifying an image base and other parameters"
 );

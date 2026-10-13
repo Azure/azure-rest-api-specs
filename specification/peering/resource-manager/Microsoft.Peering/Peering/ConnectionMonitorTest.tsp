@@ -49,9 +49,11 @@ interface ConnectionMonitorTests {
 }
 
 @@doc(ConnectionMonitorTest.name, "The name of the connection monitor test");
-@@doc(ConnectionMonitorTest.properties,
+@@doc(
+  ConnectionMonitorTest.properties,
   "The properties that define a Connection Monitor Test."
 );
-@@doc(ConnectionMonitorTests.createOrUpdate::parameters.resource,
+@@doc(
+  ConnectionMonitorTests.createOrUpdate::parameters.resource,
   "The properties needed to create a connection monitor test"
 );

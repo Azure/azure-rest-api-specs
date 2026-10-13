@@ -13,16 +13,24 @@ namespace Microsoft.EventGrid;
 /**
  * Partner configuration information
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 model PartnerConfiguration
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PartnerConfigurationProperties> {
+  is Azure.ResourceManager.ProxyResource<PartnerConfigurationProperties> {
   ...ResourceNameParameter<
     Resource = PartnerConfiguration,
     KeyName = "partnerConfiguration",
     SegmentName = "partnerConfigurations",
     NamePattern = ""
   >;
+
+  /** Tags of the resource. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** Location of the resource. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
 }
 
 @armResourceOperations
@@ -51,7 +59,9 @@ interface PartnerConfigurations {
   update is ArmCustomPatchAsync<
     PartnerConfiguration,
     PatchModel = PartnerConfigurationUpdateParameters,
-    Response = PartnerConfiguration | ArmResourceCreatedResponse<PartnerConfiguration>
+    Response =
+      | PartnerConfiguration
+      | ArmResourceCreatedResponse<PartnerConfiguration>
   >;
 
   /**
@@ -61,7 +71,10 @@ interface PartnerConfigurations {
   @summary("Delete a partner configuration.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -117,18 +130,23 @@ interface PartnerConfigurations {
 }
 
 @@doc(PartnerConfiguration.name, "");
-@@doc(PartnerConfiguration.properties,
+@@doc(
+  PartnerConfiguration.properties,
   "Properties of the partner configuration."
 );
-@@doc(PartnerConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  PartnerConfigurations.createOrUpdate::parameters.resource,
   "Partner configuration information."
 );
-@@doc(PartnerConfigurations.update::parameters.properties,
+@@doc(
+  PartnerConfigurations.update::parameters.properties,
   "Partner configuration update information."
 );
-@@doc(PartnerConfigurations.authorizePartner::parameters.body,
+@@doc(
+  PartnerConfigurations.authorizePartner::parameters.body,
   "The information of the partner to be authorized."
 );
-@@doc(PartnerConfigurations.unauthorizePartner::parameters.body,
+@@doc(
+  PartnerConfigurations.unauthorizePartner::parameters.body,
   "The information of the partner to be unauthorized."
 );

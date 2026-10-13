@@ -396,11 +396,11 @@
             "name": "type",
             "in": "query",
             "description": "the type of format like document or glossary ",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
-              "document",
-              "glossary"
+              "Document",
+              "Glossary"
             ],
             "x-ms-enum": {
               "name": "FileFormatType",
@@ -408,12 +408,12 @@
               "values": [
                 {
                   "name": "Document",
-                  "value": "document",
+                  "value": "Document",
                   "description": "Document type file format"
                 },
                 {
                   "name": "Glossary",
-                  "value": "glossary",
+                  "value": "Glossary",
                   "description": "Glossary type file format"
                 }
               ]
@@ -803,8 +803,8 @@
       "type": "string",
       "description": "Format types",
       "enum": [
-        "document",
-        "glossary"
+        "Document",
+        "Glossary"
       ],
       "x-ms-enum": {
         "name": "FileFormatType",
@@ -812,12 +812,12 @@
         "values": [
           {
             "name": "Document",
-            "value": "document",
+            "value": "Document",
             "description": "Document type file format"
           },
           {
             "name": "Glossary",
-            "value": "glossary",
+            "value": "Glossary",
             "description": "Glossary type file format"
           }
         ]

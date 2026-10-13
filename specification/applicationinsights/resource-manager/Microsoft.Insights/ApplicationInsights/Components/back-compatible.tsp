@@ -65,20 +65,24 @@ using Components;
 
 @@clientLocation(ApplicationInsightsComponents.get, "Components");
 @@clientLocation(ApplicationInsightsComponents.createOrUpdate, "Components");
-@@clientName(ApplicationInsightsComponents.createOrUpdate::parameters.resource,
+@@clientName(
+  ApplicationInsightsComponents.createOrUpdate::parameters.resource,
   "InsightProperties"
 );
 @@clientLocation(ApplicationInsightsComponents.updateTags, "Components");
-@@clientName(ApplicationInsightsComponents.updateTags::parameters.properties,
+@@clientName(
+  ApplicationInsightsComponents.updateTags::parameters.properties,
   "ComponentTags"
 );
 @@clientLocation(ApplicationInsightsComponents.delete, "Components");
-@@clientLocation(ApplicationInsightsComponents.listByResourceGroup,
+@@clientLocation(
+  ApplicationInsightsComponents.listByResourceGroup,
   "Components"
 );
 @@clientLocation(ApplicationInsightsComponents.list, "Components");
 @@clientLocation(ApplicationInsightsComponents.purge, "Components");
-@@clientLocation(ComponentPurgeStatusOperationGroup.getPurgeStatus,
+@@clientLocation(
+  ComponentPurgeStatusOperationGroup.getPurgeStatus,
   "Components"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

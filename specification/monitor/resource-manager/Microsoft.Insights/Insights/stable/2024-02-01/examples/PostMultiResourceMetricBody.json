@@ -1,370 +1,372 @@
 {
+  "operationId": "Metrics_ListAtSubscriptionScopePost",
   "parameters": {
-    "subscriptionId": "92d2a2d8-b514-432d-8cc9-a5f9272630d5",
-    "region": "westus2",
     "api-version": "2024-02-01",
     "body": {
-      "timespan": "2021-06-08T19:00:00Z/2021-06-12T01:00:00Z",
+      "aggregation": "count",
+      "autoAdjustTimegrain": true,
+      "filter": "LUN eq '0' and Microsoft.ResourceId eq '*'",
+      "interval": "PT6H",
       "metricNames": "Data Disk Max Burst IOPS",
       "metricNamespace": "microsoft.compute/virtualmachines",
-      "filter": "LUN eq '0' and Microsoft.ResourceId eq '*'",
-      "rollUpBy": "LUN",
-      "top": 10,
       "orderBy": "count desc",
-      "aggregation": "count",
-      "interval": "PT6H",
-      "autoAdjustTimegrain": true,
+      "rollUpBy": "LUN",
+      "timespan": "2021-06-08T19:00:00Z/2021-06-12T01:00:00Z",
+      "top": 10,
       "validateDimensions": false
-    }
+    },
+    "region": "westus2",
+    "subscriptionId": "92d2a2d8-b514-432d-8cc9-a5f9272630d5"
   },
+  "title": "Post request for subscription level metric data using body params",
   "responses": {
     "200": {
       "body": {
         "cost": 4679,
-        "timespan": "2021-06-08T19:00:00Z/2021-06-12T01:00:00Z",
         "interval": "PT6H",
+        "namespace": "microsoft.compute/virtualmachines",
+        "resourceregion": "westus2",
+        "timespan": "2021-06-08T19:00:00Z/2021-06-12T01:00:00Z",
         "value": [
           {
-            "id": "subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/providers/Microsoft.Insights/metrics/Data Disk Max Burst IOPS",
-            "type": "Microsoft.Insights/metrics",
             "name": {
-              "value": "Data Disk Max Burst IOPS",
-              "localizedValue": "Data Disk Max Burst IOPS"
+              "localizedValue": "Data Disk Max Burst IOPS",
+              "value": "Data Disk Max Burst IOPS"
             },
+            "type": "Microsoft.Insights/metrics",
             "displayDescription": "Maximum IOPS Data Disk can achieve with bursting",
-            "unit": "Count",
+            "errorCode": "Success",
+            "id": "subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/providers/Microsoft.Insights/metrics/Data Disk Max Burst IOPS",
             "timeseries": [
               {
+                "data": [
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-08T19:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T19:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T07:00:00Z"
+                  },
+                  {
+                    "count": 413,
+                    "timeStamp": "2021-06-10T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T19:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T19:00:00Z"
+                  }
+                ],
                 "metadatavalues": [
                   {
                     "name": {
-                      "value": "microsoft.resourceid",
-                      "localizedValue": "microsoft.resourceid"
+                      "localizedValue": "microsoft.resourceid",
+                      "value": "microsoft.resourceid"
                     },
                     "value": "/subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/resourceGroups/sas1/providers/Microsoft.Compute/virtualMachines/sas1-dev"
                   }
-                ],
-                "data": [
-                  {
-                    "timeStamp": "2021-06-08T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T01:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T01:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T13:00:00Z",
-                    "count": 413.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T01:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T19:00:00Z",
-                    "count": 72.0
-                  }
                 ]
               },
               {
+                "data": [
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-08T19:00:00Z"
+                  },
+                  {
+                    "count": 133,
+                    "timeStamp": "2021-06-09T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T19:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T19:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T19:00:00Z"
+                  }
+                ],
                 "metadatavalues": [
                   {
                     "name": {
-                      "value": "microsoft.resourceid",
-                      "localizedValue": "microsoft.resourceid"
+                      "localizedValue": "microsoft.resourceid",
+                      "value": "microsoft.resourceid"
                     },
                     "value": "/subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/resourceGroups/sas2/providers/Microsoft.Compute/virtualMachines/sas2-vm"
                   }
-                ],
-                "data": [
-                  {
-                    "timeStamp": "2021-06-08T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T01:00:00Z",
-                    "count": 133.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T01:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T01:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T19:00:00Z",
-                    "count": 72.0
-                  }
                 ]
               },
               {
+                "data": [
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-08T19:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T19:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T19:00:00Z"
+                  },
+                  {
+                    "count": 78,
+                    "timeStamp": "2021-06-11T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T19:00:00Z"
+                  }
+                ],
                 "metadatavalues": [
                   {
                     "name": {
-                      "value": "microsoft.resourceid",
-                      "localizedValue": "microsoft.resourceid"
+                      "localizedValue": "microsoft.resourceid",
+                      "value": "microsoft.resourceid"
                     },
                     "value": "/subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/resourceGroups/sas3/providers/Microsoft.Compute/virtualMachines/sas3-vm"
                   }
-                ],
-                "data": [
-                  {
-                    "timeStamp": "2021-06-08T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T01:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T01:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T01:00:00Z",
-                    "count": 78.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T19:00:00Z",
-                    "count": 72.0
-                  }
                 ]
               },
               {
+                "data": [
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-08T19:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T19:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T19:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T19:00:00Z"
+                  }
+                ],
                 "metadatavalues": [
                   {
                     "name": {
-                      "value": "microsoft.resourceid",
-                      "localizedValue": "microsoft.resourceid"
+                      "localizedValue": "microsoft.resourceid",
+                      "value": "microsoft.resourceid"
                     },
                     "value": "/subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/resourceGroups/sas4/providers/Microsoft.Compute/virtualMachines/sas4-vm"
                   }
-                ],
-                "data": [
-                  {
-                    "timeStamp": "2021-06-08T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T01:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T01:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T01:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T19:00:00Z",
-                    "count": 72.0
-                  }
                 ]
               },
               {
+                "data": [
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-08T19:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-09T19:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-10T19:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T01:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T07:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T13:00:00Z"
+                  },
+                  {
+                    "count": 72,
+                    "timeStamp": "2021-06-11T19:00:00Z"
+                  }
+                ],
                 "metadatavalues": [
                   {
                     "name": {
-                      "value": "microsoft.resourceid",
-                      "localizedValue": "microsoft.resourceid"
+                      "localizedValue": "microsoft.resourceid",
+                      "value": "microsoft.resourceid"
                     },
                     "value": "/subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/resourceGroups/sas5/providers/Microsoft.Compute/virtualMachines/sas5-vm-asc"
-                  }
-                ],
-                "data": [
-                  {
-                    "timeStamp": "2021-06-08T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T01:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-09T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T01:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-10T19:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T01:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T07:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T13:00:00Z",
-                    "count": 72.0
-                  },
-                  {
-                    "timeStamp": "2021-06-11T19:00:00Z",
-                    "count": 72.0
                   }
                 ]
               }
             ],
-            "errorCode": "Success"
+            "unit": "Count"
           }
-        ],
-        "namespace": "microsoft.compute/virtualmachines",
-        "resourceregion": "westus2"
+        ]
       }
     },
     "default": {

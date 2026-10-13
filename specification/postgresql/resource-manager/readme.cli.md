@@ -2,7 +2,7 @@
 
 These settings don't need to apply `--cli` on the command line.
 
-``` yaml
+```yaml
 cli:
   cli-name: postgresql
   package-name: azure-mgmt-rdbms-postgresql

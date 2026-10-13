@@ -1,0 +1,49 @@
+{
+  "title": "ScheduledActions_TriggerManualOccurrence_MaximumSet",
+  "operationId": "ScheduledActions_TriggerManualOccurrence",
+  "parameters": {
+    "api-version": "2026-04-15-preview",
+    "subscriptionId": "B4D97119-C802-4ADE-AF16-D9F92C9962C4",
+    "resourceGroupName": "rgcomputeschedule",
+    "scheduledActionName": "my-scheduled-action"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "scheduledTime": "2026-04-01T18:53:47.024Z",
+          "resultSummary": {
+            "total": 18,
+            "statuses": [
+              {
+                "code": "Success",
+                "count": 3,
+                "errorDetails": {
+                  "code": "ResourceNotFound",
+                  "message": "The specified resource was not found.",
+                  "target": "virtualMachines/myVm",
+                  "details": [],
+                  "innererror": {
+                    "code": "ResourceNotFoundError"
+                  }
+                }
+              }
+            ]
+          },
+          "provisioningState": "Created"
+        },
+        "id": "/subscriptions/B4D97119-C802-4ADE-AF16-D9F92C9962C4/resourceGroups/rgcomputeschedule/providers/Microsoft.ComputeSchedule/scheduledActions/my-scheduled-action/occurrences/12345678-1234-1234-1234-123456789012",
+        "name": "12345678-1234-1234-1234-123456789012",
+        "type": "Microsoft.ComputeSchedule/scheduledActions/occurrences",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-01T18:53:38.591Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-01T18:53:38.591Z"
+        }
+      }
+    }
+  }
+}

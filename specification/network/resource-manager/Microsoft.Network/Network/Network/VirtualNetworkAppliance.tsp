@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Network;
@@ -20,7 +22,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model VirtualNetworkAppliance extends Resource {
+model VirtualNetworkAppliance extends Common.Resource {
   properties?: VirtualNetworkAppliancePropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -84,21 +86,27 @@ interface VirtualNetworkAppliances {
   listAll is ArmListBySubscription<VirtualNetworkAppliance, Error = CloudError>;
 }
 
-@@doc(VirtualNetworkAppliance.name,
+@@doc(
+  VirtualNetworkAppliance.name,
   "The name of the virtual network appliance."
 );
-@@doc(VirtualNetworkAppliance.properties,
+@@doc(
+  VirtualNetworkAppliance.properties,
   "Properties of the virtual network appliance."
 );
-@@doc(VirtualNetworkAppliances.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworkAppliances.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update virtual network appliance operation."
 );
-@@doc(VirtualNetworkAppliances.updateTags::parameters.properties,
+@@doc(
+  VirtualNetworkAppliances.updateTags::parameters.properties,
   "Parameters supplied to update virtual network appliance tags."
 );
-@@clientName(VirtualNetworkAppliances.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualNetworkAppliances.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(VirtualNetworkAppliances.updateTags::parameters.properties,
+@@clientName(
+  VirtualNetworkAppliances.updateTags::parameters.properties,
   "parameters"
 );

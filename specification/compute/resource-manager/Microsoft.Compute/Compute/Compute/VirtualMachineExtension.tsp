@@ -28,9 +28,12 @@ model VirtualMachineExtension
 
 @armResourceOperations
 interface VirtualMachineExtensionOps
-  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
-        ...Azure.ResourceManager.Legacy.BasePath,
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         @doc("The name of the virtual machine.")
         @path
@@ -44,7 +47,8 @@ interface VirtualMachineExtensionOps
           KeyName = "vmExtensionName",
           NamePattern = ""
         >,
-      }>
+      }>,
+      CloudError
     > {}
 
 @armResourceOperations
@@ -108,15 +112,19 @@ interface VirtualMachineExtensions {
   >;
 }
 
-@@doc(VirtualMachineExtension.name,
+@@doc(
+  VirtualMachineExtension.name,
   "The name of the virtual machine extension."
 );
-@@doc(VirtualMachineExtension.properties,
+@@doc(
+  VirtualMachineExtension.properties,
   "Describes the properties of a Virtual Machine Extension."
 );
-@@doc(VirtualMachineExtensions.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachineExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine Extension operation."
 );
-@@doc(VirtualMachineExtensions.update::parameters.properties,
+@@doc(
+  VirtualMachineExtensions.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine Extension operation."
 );

@@ -1,0 +1,57 @@
+{
+  "title": "ScheduledActions_VirtualMachinesGetOperationStatus_MaximumSet",
+  "operationId": "ScheduledActions_VirtualMachinesGetOperationStatus",
+  "parameters": {
+    "api-version": "2026-04-15-preview",
+    "subscriptionId": "732116BD-AF31-4E74-9283-B387C44B4A44",
+    "locationparameter": "eastus2",
+    "requestBody": {
+      "operationIds": [
+        "01234567-89ab-cdef-0123-456789abcdef"
+      ],
+      "correlationid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "resourceId": "/subscriptions/732116BD-AF31-4E74-9283-B387C44B4A44/resourceGroups/rgcomputeschedule/providers/Microsoft.Compute/virtualMachines/myVm",
+            "errorCode": "Success",
+            "errorDetails": "",
+            "operation": {
+              "operationId": "ce3eeb40-0ed2-4d74-9fd9-25d660f3bd0a",
+              "resourceId": "/subscriptions/732116BD-AF31-4E74-9283-B387C44B4A44/resourceGroups/rgcomputeschedule/providers/Microsoft.Compute/virtualMachines/myVm",
+              "opType": "Unknown",
+              "subscriptionId": "732116BD-AF31-4E74-9283-B387C44B4A44",
+              "deadline": "2026-03-12T02:39:42.468Z",
+              "deadlineType": "Unknown",
+              "state": "Unknown",
+              "timezone": "UTC",
+              "timeZone": "UTC",
+              "resourceOperationError": {
+                "errorCode": "",
+                "errorDetails": ""
+              },
+              "fallbackOperationInfo": {
+                "lastOpType": "Unknown",
+                "status": "Succeeded",
+                "error": {
+                  "errorCode": "",
+                  "errorDetails": ""
+                }
+              },
+              "completedAt": "2026-03-12T02:39:42.468Z",
+              "retryPolicy": {
+                "retryCount": 3,
+                "retryWindowInMinutes": 30,
+                "onFailureAction": "Unknown"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

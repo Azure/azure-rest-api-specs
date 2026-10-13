@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "vnet1",
+            "type": "Microsoft.Network/virtualNetworks",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1",
+            "location": "westus",
+            "properties": {
+              "addressSpace": {
+                "addressPrefixes": [
+                  "10.0.0.0/8"
+                ]
+              },
+              "defaultPublicNatGateway": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-ngw"
+              },
+              "dhcpOptions": {
+                "dnsServers": []
+              },
+              "provisioningState": "Succeeded",
+              "subnets": [
+                {
+                  "name": "test-1",
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/test-1",
+                  "properties": {
+                    "addressPrefix": "10.0.0.0/24",
+                    "provisioningState": "Succeeded"
+                  }
+                }
+              ],
+              "virtualNetworkPeerings": []
+            }
+          },
+          {
+            "name": "vnet2",
+            "type": "Microsoft.Network/virtualNetworks",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg2/providers/Microsoft.Network/virtualNetworks/vnet2",
+            "location": "westus",
+            "properties": {
+              "addressSpace": {
+                "addressPrefixes": [
+                  "10.0.0.0/16"
+                ]
+              },
+              "defaultPublicNatGateway": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-ngw"
+              },
+              "dhcpOptions": {
+                "dnsServers": [
+                  "8.8.8.8"
+                ]
+              },
+              "provisioningState": "Succeeded",
+              "subnets": [],
+              "virtualNetworkPeerings": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualNetworks_ListAll",
+  "title": "List all virtual networks"
+}

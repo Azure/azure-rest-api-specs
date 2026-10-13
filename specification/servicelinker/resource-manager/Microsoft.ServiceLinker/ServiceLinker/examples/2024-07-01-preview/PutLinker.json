@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "linkerName": "linkName",
+    "parameters": {
+      "properties": {
+        "authInfo": {
+          "name": "name",
+          "authType": "secret",
+          "secretInfo": {
+            "secretType": "rawValue",
+            "value": "secret"
+          }
+        },
+        "targetService": {
+          "type": "AzureResource",
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DBforPostgreSQL/servers/test-pg/databases/test-db"
+        },
+        "vNetSolution": {
+          "type": "serviceEndpoint"
+        }
+      }
+    },
+    "resourceUri": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "linkName",
+        "type": "Microsoft.ServiceLinker/links",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app/providers/Microsoft.ServiceLinker/links/linkName",
+        "properties": {
+          "authInfo": {
+            "name": "name",
+            "authType": "secret"
+          },
+          "targetService": {
+            "type": "AzureResource",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DBforPostgreSQL/servers/test-pg/databases/test-db"
+          },
+          "vNetSolution": {
+            "type": "serviceEndpoint"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "linkName",
+        "type": "Microsoft.ServiceLinker/links",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app/providers/Microsoft.ServiceLinker/links/linkName",
+        "properties": {
+          "authInfo": {
+            "name": "name",
+            "authType": "secret"
+          },
+          "targetService": {
+            "type": "AzureResource",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DBforPostgreSQL/servers/test-pg/databases/test-db"
+          },
+          "vNetSolution": {
+            "type": "serviceEndpoint"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Linker_CreateOrUpdate",
+  "title": "PutLinker"
+}

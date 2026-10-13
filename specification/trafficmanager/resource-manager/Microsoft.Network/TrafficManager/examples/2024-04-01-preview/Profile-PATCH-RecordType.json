@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "parameters": {
+      "properties": {
+        "recordType": "CNAME"
+      }
+    },
+    "profileName": "azuresdkfornetautoresttrafficmanager6192",
+    "resourceGroupName": "azuresdkfornetautoresttrafficmanager2583",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "azuresdkfornetautoresttrafficmanager6192",
+        "type": "Microsoft.Network/trafficManagerProfiles",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192",
+        "location": "global",
+        "properties": {
+          "dnsConfig": {
+            "fqdn": "azuresdkfornetautoresttrafficmanager6192.tmpreview.watmtest.azure-test.net",
+            "relativeName": "azuresdkfornetautoresttrafficmanager6192",
+            "ttl": 35
+          },
+          "endpoints": [
+            {
+              "name": "My external endpoint",
+              "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192/externalEndpoints/My external endpoint",
+              "properties": {
+                "endpointLocation": "North Europe",
+                "endpointMonitorStatus": "CheckingEndpoint",
+                "endpointStatus": "Enabled",
+                "priority": 1,
+                "target": "foobar.contoso.com",
+                "weight": 1
+              }
+            }
+          ],
+          "monitorConfig": {
+            "path": "/testpath.aspx",
+            "intervalInSeconds": 30,
+            "port": 80,
+            "profileMonitorStatus": "CheckingEndpoints",
+            "timeoutInSeconds": 10,
+            "toleratedNumberOfFailures": 3,
+            "protocol": "HTTP"
+          },
+          "profileStatus": "Enabled",
+          "trafficRoutingMethod": "Performance",
+          "recordType": "CNAME"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "Profiles_Update",
+  "title": "Profile-PATCH-RecordType"
+}

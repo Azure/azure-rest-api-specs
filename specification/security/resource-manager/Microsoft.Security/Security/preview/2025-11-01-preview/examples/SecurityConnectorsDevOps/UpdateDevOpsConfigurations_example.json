@@ -1,85 +1,87 @@
 {
   "parameters": {
-    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3",
-    "resourceGroupName": "myRg",
-    "securityConnectorName": "mySecurityConnectorName",
+    "api-version": "2025-11-01-preview",
     "devOpsConfiguration": {
       "properties": {
-        "autoDiscovery": "Enabled",
         "agentlessConfiguration": {
-          "agentlessEnabled": "Enabled",
           "agentlessAutoDiscovery": "Disabled",
-          "scanners": [
-            "scanner1",
-            "scanner2"
-          ],
-          "inventoryListType": "Inclusion",
+          "agentlessEnabled": "Enabled",
           "inventoryList": [
             {
               "inventoryKind": "AzureDevOpsOrganization",
               "value": "org1"
             }
+          ],
+          "inventoryListType": "Inclusion",
+          "scanners": [
+            "scanner1",
+            "scanner2"
           ]
-        }
+        },
+        "autoDiscovery": "Enabled"
       }
     },
-    "api-version": "2025-11-01-preview"
+    "resourceGroupName": "myRg",
+    "securityConnectorName": "mySecurityConnectorName",
+    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "name": "default",
+        "type": "Microsoft.Security/securityConnectors/devops",
+        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default",
         "properties": {
-          "autoDiscovery": "Enabled",
           "agentlessConfiguration": {
-            "agentlessEnabled": "Enabled",
             "agentlessAutoDiscovery": "Disabled",
-            "scanners": [
-              "scanner1",
-              "scanner2"
-            ],
-            "inventoryListType": "Inclusion",
+            "agentlessEnabled": "Enabled",
             "inventoryList": [
               {
                 "inventoryKind": "AzureDevOpsOrganization",
                 "value": "org1"
               }
+            ],
+            "inventoryListType": "Inclusion",
+            "scanners": [
+              "scanner1",
+              "scanner2"
             ]
           },
+          "autoDiscovery": "Enabled",
           "provisioningState": "Succeeded"
-        },
-        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default",
-        "name": "default",
-        "type": "Microsoft.Security/securityConnectors/devops"
-      }
+        }
+      },
+      "headers": {}
     },
     "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/operationResults/4e826cf1-5c36-4808-a7d2-fb4f5170978b?api-version=2025-11-01-preview"
-      },
       "body": {
+        "name": "default",
+        "type": "Microsoft.Security/securityConnectors/devops",
+        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default",
         "properties": {
           "agentlessConfiguration": {
-            "agentlessEnabled": "Enabled",
             "agentlessAutoDiscovery": "Disabled",
-            "scanners": [
-              "scanner1",
-              "scanner2"
-            ],
-            "inventoryListType": "Inclusion",
+            "agentlessEnabled": "Enabled",
             "inventoryList": [
               {
                 "inventoryKind": "AzureDevOpsOrganization",
                 "value": "org1"
               }
+            ],
+            "inventoryListType": "Inclusion",
+            "scanners": [
+              "scanner1",
+              "scanner2"
             ]
           },
           "provisioningState": "Accepted"
-        },
-        "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default",
-        "name": "default",
-        "type": "Microsoft.Security/securityConnectors/devops"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/operationResults/4e826cf1-5c36-4808-a7d2-fb4f5170978b?api-version=2025-11-01-preview"
       }
     }
-  }
+  },
+  "operationId": "DevOpsConfigurations_Update",
+  "title": "Update_DevOpsConfigurations"
 }

@@ -1,0 +1,50 @@
+{
+  "operationId": "DataCollectionEndpoints_ListNSP",
+  "parameters": {
+    "api-version": "2021-10-01",
+    "dataCollectionEndpointName": "someDataCollectionEndpoint",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "title": "List NSP configs by data collection endpoint",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "somePerimeterConfiguration",
+            "type": "Microsoft.Insights/dataCollectionEndpoints/networkSecurityPerimeterConfigurations",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/exampleRG/providers/Microsoft.Insights/dataCollectionEndpoints/someDataCollectionEndpoint/networkSecurityPerimeterConfigurations/somePerimeterConfiguration",
+            "properties": {
+              "networkSecurityPerimeter": {
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/networkRG/providers/Microsoft.Network/networkSecurityPerimeters/perimeter1",
+                "location": "japaneast"
+              },
+              "profile": {
+                "name": "profile1",
+                "accessRules": [
+                  {
+                    "name": "rule1",
+                    "properties": {
+                      "addressPrefixes": [
+                        "148.0.0.0/8",
+                        "152.4.6.0/24"
+                      ],
+                      "direction": "Inbound"
+                    }
+                  }
+                ],
+                "accessRulesVersion": 0
+              },
+              "provisioningState": "Accepted",
+              "resourceAssociation": {
+                "name": "assoc1",
+                "accessMode": "Enforced"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

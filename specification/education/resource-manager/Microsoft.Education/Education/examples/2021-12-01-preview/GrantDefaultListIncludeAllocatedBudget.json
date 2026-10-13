@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
+    "includeAllocatedBudget": false
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.Education/Grants",
+            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants/default",
+            "properties": {
+              "allocatedBudget": {
+                "currency": "USD",
+                "value": 0
+              },
+              "effectiveDate": "2021-11-09T09:08:05.505Z",
+              "expirationDate": "2021-11-09T09:08:05.505Z",
+              "offerCap": {
+                "currency": "USD",
+                "value": 1000
+              },
+              "offerType": "Academic",
+              "status": "Active"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Grants_List",
+  "title": "GrantListIncludeAllocatedBudget"
+}

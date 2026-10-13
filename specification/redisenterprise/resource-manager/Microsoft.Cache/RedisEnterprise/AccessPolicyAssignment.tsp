@@ -41,7 +41,7 @@ interface AccessPolicyAssignments {
   /**
    * Deletes a single access policy assignment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     AccessPolicyAssignment,
@@ -57,12 +57,15 @@ interface AccessPolicyAssignments {
   >;
 }
 
-@@doc(AccessPolicyAssignment.name,
+@@doc(
+  AccessPolicyAssignment.name,
   "The name of the Redis Enterprise database access policy assignment."
 );
-@@doc(AccessPolicyAssignment.properties,
+@@doc(
+  AccessPolicyAssignment.properties,
   "Properties of the access policy assignment."
 );
-@@doc(AccessPolicyAssignments.createUpdate::parameters.resource,
+@@doc(
+  AccessPolicyAssignments.createUpdate::parameters.resource,
   "Parameters supplied to the create access policy assignment for database."
 );

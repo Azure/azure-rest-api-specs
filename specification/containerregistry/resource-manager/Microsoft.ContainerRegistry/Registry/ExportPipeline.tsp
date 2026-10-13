@@ -58,7 +58,10 @@ interface ExportPipelines {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ExportPipeline,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -75,6 +78,7 @@ interface ExportPipelines {
 @@minLength(ExportPipeline.name, 5);
 @@doc(ExportPipeline.name, "The name of the export pipeline.");
 @@doc(ExportPipeline.properties, "The properties of the export pipeline.");
-@@doc(ExportPipelines.create::parameters.resource,
+@@doc(
+  ExportPipelines.create::parameters.resource,
   "The parameters for creating an export pipeline."
 );

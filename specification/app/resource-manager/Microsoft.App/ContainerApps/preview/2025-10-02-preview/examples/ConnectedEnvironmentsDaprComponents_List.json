@@ -1,30 +1,23 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-10-02-preview",
     "connectedEnvironmentName": "myenvironment",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/myenvironment/daprcomponents/reddog",
             "name": "reddog",
             "type": "Microsoft.App/connectedEnvironments/daprcomponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/myenvironment/daprcomponents/reddog",
             "properties": {
-              "provisioningState": "Succeeded",
-              "deploymentErrors": null,
               "componentType": "state.azure.cosmosdb",
-              "version": "v1",
+              "deploymentErrors": null,
               "ignoreErrors": false,
               "initTimeout": "50s",
-              "secrets": [
-                {
-                  "name": "masterkey"
-                }
-              ],
               "metadata": [
                 {
                   "name": "url",
@@ -43,24 +36,33 @@
                   "secretRef": "masterkey"
                 }
               ],
+              "provisioningState": "Succeeded",
               "scopes": [
                 "container-app-1",
                 "container-app-2"
               ],
+              "secrets": [
+                {
+                  "name": "masterkey"
+                }
+              ],
               "serviceComponentBind": [
                 {
                   "name": "statestore",
-                  "serviceId": "/subscriptions/9f7371f1-b593-4c3c-84e2-9167806ad358/resourceGroups/ca-syn2-group/providers/Microsoft.App/containerapps/cappredis",
                   "metadata": {
                     "name": "daprcomponentBind",
                     "value": "redis-bind"
-                  }
+                  },
+                  "serviceId": "/subscriptions/9f7371f1-b593-4c3c-84e2-9167806ad358/resourceGroups/ca-syn2-group/providers/Microsoft.App/containerapps/cappredis"
                 }
-              ]
+              ],
+              "version": "v1"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ConnectedEnvironmentsDaprComponents_List",
+  "title": "List Dapr Components"
 }

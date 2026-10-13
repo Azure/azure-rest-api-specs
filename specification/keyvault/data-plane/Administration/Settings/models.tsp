@@ -14,6 +14,7 @@ model SettingNameParameter {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
   @OpenAPI.extension("x-ms-parameter-location", "method")
   @path
   `setting-name`: string;
@@ -34,6 +35,7 @@ union SettingTypeEnum {
 /**
  * The update settings request object.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateSettingRequest {
   /**
    * The value of the pool setting.

@@ -5,11 +5,13 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 
@@ -593,9 +595,11 @@ interface UsagesOperationGroup {
   >;
 }
 
-@@Azure.ClientGenerator.Core.clientName(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup::parameters.body,
+@@Azure.ClientGenerator.Core.clientName(
+  PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup::parameters.body,
   "parameters"
 );
-@@Azure.ClientGenerator.Core.clientName(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibility::parameters.body,
+@@Azure.ClientGenerator.Core.clientName(
+  PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibility::parameters.body,
   "parameters"
 );

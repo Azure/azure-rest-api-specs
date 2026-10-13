@@ -8,34 +8,36 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityContact/default",
             "name": "default",
             "type": "Microsoft.Security/securityContact",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityContact/default",
             "properties": {
+              "emails": "john@contoso.com;Jane@contoso.com",
+              "isEnabled": true,
               "notificationsByRole": {
-                "state": "On",
                 "roles": [
                   "Owner",
                   "Admin"
-                ]
+                ],
+                "state": "On"
               },
-              "isEnabled": true,
-              "emails": "john@contoso.com;Jane@contoso.com",
-              "phone": "(214)275-4038",
               "notificationsSources": [
                 {
-                  "sourceType": "AttackPath",
-                  "minimalRiskLevel": "Critical"
+                  "minimalRiskLevel": "Critical",
+                  "sourceType": "AttackPath"
                 },
                 {
-                  "sourceType": "Alert",
-                  "minimalSeverity": "Medium"
+                  "minimalSeverity": "Medium",
+                  "sourceType": "Alert"
                 }
-              ]
+              ],
+              "phone": "(214)275-4038"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "SecurityContacts_List",
+  "title": "List security contact data"
 }

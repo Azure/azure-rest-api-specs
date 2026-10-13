@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./back-compatible.tsp";
 import "./Alert.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -42,6 +43,7 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "List all operations available through Azure Alerts Management Resource Provider."
 );

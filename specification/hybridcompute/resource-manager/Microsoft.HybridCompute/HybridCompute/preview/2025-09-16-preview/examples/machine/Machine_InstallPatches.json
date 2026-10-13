@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroupName",
     "name": "myMachineName",
     "api-version": "2025-09-16-preview",
     "installPatchesInput": {
@@ -13,32 +11,34 @@
           "Security"
         ],
         "maxPatchPublishDate": "2021-08-19T02:36:43.0539904+00:00",
-        "patchNameMasksToInclude": [
-          "*SQL*"
-        ],
         "patchNameMasksToExclude": [
           "*Windows*"
+        ],
+        "patchNameMasksToInclude": [
+          "*SQL*"
         ]
       }
-    }
+    },
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "status": "Succeeded",
-        "installationActivityId": "68f8b292-dfc2-4646-9781-33cc88631968",
-        "rebootStatus": "Completed",
-        "maintenanceWindowExceeded": false,
+        "errorDetails": null,
         "excludedPatchCount": 0,
-        "notSelectedPatchCount": 0,
-        "pendingPatchCount": 2,
-        "installedPatchCount": 3,
         "failedPatchCount": 0,
-        "startDateTime": "2021-08-22T02:15:06.9740000Z",
+        "installationActivityId": "68f8b292-dfc2-4646-9781-33cc88631968",
+        "installedPatchCount": 3,
         "lastModifiedDateTime": "2021-08-22T02:16:06.9740000Z",
-        "startedBy": "User",
+        "maintenanceWindowExceeded": false,
+        "notSelectedPatchCount": 0,
         "osType": "Windows",
-        "errorDetails": null
+        "pendingPatchCount": 2,
+        "rebootStatus": "Completed",
+        "startDateTime": "2021-08-22T02:15:06.9740000Z",
+        "startedBy": "User",
+        "status": "Succeeded"
       }
     },
     "202": {
@@ -46,5 +46,7 @@
         "Location": "eastus2euap"
       }
     }
-  }
+  },
+  "operationId": "Machines_InstallPatches",
+  "title": "Install patch state of a machine."
 }

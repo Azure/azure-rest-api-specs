@@ -1,21 +1,18 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-10-02-preview",
     "environmentName": "testcontainerenv",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/httpRouteConfigs/route-1",
             "type": "Microsoft.App/managedEnvironments/httpRouteConfigs",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/httpRouteConfigs/route-1",
             "properties": {
-              "fqdn": "app1.example.com",
-              "provisioningState": "Succeeded",
               "customDomains": [
                 {
                   "name": "example.com",
@@ -23,22 +20,24 @@
                   "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-1"
                 }
               ],
+              "fqdn": "app1.example.com",
+              "provisioningState": "Succeeded",
               "rules": [
                 {
+                  "routes": [
+                    {
+                      "action": {
+                        "prefixRewrite": "/v1/api"
+                      },
+                      "match": {
+                        "caseSensitive": true,
+                        "prefix": "/api"
+                      }
+                    }
+                  ],
                   "targets": [
                     {
                       "containerApp": "containerApp1"
-                    }
-                  ],
-                  "routes": [
-                    {
-                      "match": {
-                        "prefix": "/api",
-                        "caseSensitive": true
-                      },
-                      "action": {
-                        "prefixRewrite": "/v1/api"
-                      }
                     }
                   ]
                 }
@@ -46,11 +45,9 @@
             }
           },
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/httpRouteConfigs/route-2",
             "type": "Microsoft.App/managedEnvironments/httpRouteConfigs",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/httpRouteConfigs/route-2",
             "properties": {
-              "fqdn": "app2.example.com",
-              "provisioningState": "Succeeded",
               "customDomains": [
                 {
                   "name": "example.com",
@@ -58,8 +55,21 @@
                   "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-2"
                 }
               ],
+              "fqdn": "app2.example.com",
+              "provisioningState": "Succeeded",
               "rules": [
                 {
+                  "routes": [
+                    {
+                      "action": {
+                        "prefixRewrite": "/v2/api"
+                      },
+                      "match": {
+                        "caseSensitive": false,
+                        "prefix": "/api"
+                      }
+                    }
+                  ],
                   "targets": [
                     {
                       "containerApp": "containerApp2",
@@ -71,24 +81,16 @@
                       "revision": "rev-3",
                       "weight": 50
                     }
-                  ],
-                  "routes": [
-                    {
-                      "match": {
-                        "prefix": "/api",
-                        "caseSensitive": false
-                      },
-                      "action": {
-                        "prefixRewrite": "/v2/api"
-                      }
-                    }
                   ]
                 }
               ]
             }
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "HttpRouteConfig_List",
+  "title": "List Managed Http Routes by Managed Environment"
 }

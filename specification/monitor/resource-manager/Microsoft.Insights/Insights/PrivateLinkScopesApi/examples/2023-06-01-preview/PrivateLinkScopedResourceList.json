@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "resourceGroupName": "MyResourceGroup",
+    "scopeName": "MyPrivateLinkScope",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "scoped-resource-name-one",
+            "type": "Microsoft.Insights/privateLinkScopes/scopedResources",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/privateLinkScopes/MyPrivateLinkScope/scopedResources/scoped-resource-name-one",
+            "properties": {
+              "kind": "Resource",
+              "linkedResourceId": "/subscriptions/00000000-0000-2222-3333-444444444444/resourceGroups/MyComponentResourceGroup/providers/Microsoft.Insights/components/my-component",
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2021-06-16T12:59:57.051056Z",
+              "createdBy": "bobby@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-06-16T12:59:57.051056Z",
+              "lastModifiedBy": "bobby@contoso.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "scoped-resource-name-two",
+            "type": "Microsoft.Insights/privateLinkScopes/scopedResources",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/privateLinkScopes/MyPrivateLinkScope/scopedResources/scoped-resource-name-two",
+            "properties": {
+              "kind": "PlatformMetrics",
+              "linkedResourceId": "/subscriptions/00000000-3333-2222-5555-444444444444",
+              "provisioningState": "Provisioning",
+              "subscriptionLocation": "westus"
+            },
+            "systemData": {
+              "createdAt": "2021-06-16T12:59:57.051056Z",
+              "createdBy": "bobby@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-06-16T12:59:57.051056Z",
+              "lastModifiedBy": "bobby@contoso.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "scoped-resource-name-three",
+            "type": "Microsoft.Insights/privateLinkScopes/scopedResources",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/privateLinkScopes/MyPrivateLinkScope/scopedResources/scoped-resource-name-three",
+            "properties": {
+              "kind": "PlatformMetrics",
+              "linkedResourceId": "/subscriptions/00000000-3333-2222-5555-444444444444",
+              "provisioningState": "Succeeded",
+              "subscriptionLocation": "eastus"
+            },
+            "systemData": {
+              "createdAt": "2021-06-16T12:59:57.051056Z",
+              "createdBy": "bobby@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-06-16T12:59:57.051056Z",
+              "lastModifiedBy": "bobby@contoso.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateLinkScopedResources_ListByPrivateLinkScope",
+  "title": "Gets list of scoped resources in a private link scope."
+}

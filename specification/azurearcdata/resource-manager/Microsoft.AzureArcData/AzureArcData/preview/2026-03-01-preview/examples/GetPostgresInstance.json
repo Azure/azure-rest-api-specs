@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "postgresInstanceName": "testpostgresInstances",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testpostgresInstances",
+        "type": "Microsoft.AzureArcData/PostgresInstances",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.ExtendedLocation/customLocations/arclocation",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/PostgresInstances/testpostgresInstances",
+        "location": "northeurope",
+        "properties": {
+          "basicLoginInformation": {
+            "username": "username"
+          }
+        },
+        "sku": {
+          "name": "default",
+          "dev": true,
+          "tier": "Hyperscale"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    }
+  },
+  "operationId": "PostgresInstances_Get",
+  "title": "Gets a postgres Instances."
+}

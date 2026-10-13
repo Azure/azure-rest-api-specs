@@ -1,0 +1,830 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DistributedAvailabilityGroups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups": {
+      "get": {
+        "operationId": "DistributedAvailabilityGroups_ListByInstance",
+        "tags": [
+          "DistributedAvailabilityGroups"
+        ],
+        "description": "Gets a list of a distributed availability groups in instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DistributedAvailabilityGroupsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all distributed availability groups in instance.": {
+            "$ref": "./examples/DistributedAvailabilityGroupsListByInstance.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}": {
+      "get": {
+        "operationId": "DistributedAvailabilityGroups_Get",
+        "tags": [
+          "DistributedAvailabilityGroups"
+        ],
+        "description": "Gets a distributed availability group info.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "distributedAvailabilityGroupName",
+            "in": "path",
+            "description": "The distributed availability group name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DistributedAvailabilityGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the distributed availability group info.": {
+            "$ref": "./examples/DistributedAvailabilityGroupsGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DistributedAvailabilityGroups_CreateOrUpdate",
+        "tags": [
+          "DistributedAvailabilityGroups"
+        ],
+        "description": "Creates a distributed availability group between Sql On-Prem and Sql Managed Instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "distributedAvailabilityGroupName",
+            "in": "path",
+            "description": "The distributed availability group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The distributed availability group info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DistributedAvailabilityGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DistributedAvailabilityGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DistributedAvailabilityGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'DistributedAvailabilityGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DistributedAvailabilityGroup"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a distributed availability group with all properties.": {
+            "$ref": "./examples/DistributedAvailabilityGroupsCreateMax.json"
+          },
+          "Create a distributed availability group with minimal properties.": {
+            "$ref": "./examples/DistributedAvailabilityGroupsCreateMin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DistributedAvailabilityGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DistributedAvailabilityGroups_Update",
+        "tags": [
+          "DistributedAvailabilityGroups"
+        ],
+        "description": "Updates a distributed availability group replication mode.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "distributedAvailabilityGroupName",
+            "in": "path",
+            "description": "The distributed availability group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The distributed availability group info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DistributedAvailabilityGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DistributedAvailabilityGroup"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the distributed availability group replication mode before deleting it.": {
+            "$ref": "./examples/DistributedAvailabilityGroupsUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DistributedAvailabilityGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DistributedAvailabilityGroups_Delete",
+        "tags": [
+          "DistributedAvailabilityGroups"
+        ],
+        "description": "Drops a distributed availability group between Sql On-Prem and Sql Managed Instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "distributedAvailabilityGroupName",
+            "in": "path",
+            "description": "The distributed availability group name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Initiate a distributed availability group drop.": {
+            "$ref": "./examples/DistributedAvailabilityGroupsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/failover": {
+      "post": {
+        "operationId": "DistributedAvailabilityGroups_Failover",
+        "tags": [
+          "DistributedAvailabilityGroups"
+        ],
+        "description": "Performs requested failover type in this distributed availability group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "distributedAvailabilityGroupName",
+            "in": "path",
+            "description": "The distributed availability group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The distributed availability group failover request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DistributedAvailabilityGroupsFailoverRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DistributedAvailabilityGroup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Failover a distributed availability group.": {
+            "$ref": "./examples/DistributedAvailabilityGroupsFailover.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DistributedAvailabilityGroup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/setRole": {
+      "post": {
+        "operationId": "DistributedAvailabilityGroups_SetRole",
+        "tags": [
+          "DistributedAvailabilityGroups"
+        ],
+        "description": "Sets the role for managed instance in a distributed availability group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "distributedAvailabilityGroupName",
+            "in": "path",
+            "description": "The distributed availability group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The distributed availability group set role request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DistributedAvailabilityGroupSetRole"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DistributedAvailabilityGroup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Set distributed availability group primary replica to managed instance.": {
+            "$ref": "./examples/DistributedAvailabilityGroupsSetRole.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DistributedAvailabilityGroup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "CertificateInfo": {
+      "type": "object",
+      "description": "Certificate information",
+      "properties": {
+        "certificateName": {
+          "type": "string",
+          "description": "The certificate name",
+          "readOnly": true
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The certificate expiry date",
+          "readOnly": true
+        }
+      }
+    },
+    "DistributedAvailabilityGroup": {
+      "type": "object",
+      "description": "Distributed availability group between box and Sql Managed Instance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DistributedAvailabilityGroupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DistributedAvailabilityGroupDatabase": {
+      "type": "object",
+      "description": "Database specific information",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database in link"
+        },
+        "instanceReplicaId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "Managed instance replica id",
+          "readOnly": true
+        },
+        "partnerReplicaId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "SQL server replica id",
+          "readOnly": true
+        },
+        "replicaState": {
+          "type": "string",
+          "description": "Current link state",
+          "readOnly": true
+        },
+        "seedingProgress": {
+          "type": "string",
+          "description": "Seeding progress",
+          "readOnly": true
+        },
+        "synchronizationHealth": {
+          "$ref": "./common.json#/definitions/ReplicaSynchronizationHealth",
+          "description": "Link health state",
+          "readOnly": true
+        },
+        "connectedState": {
+          "$ref": "./common.json#/definitions/ReplicaConnectedState",
+          "description": "Link connected state",
+          "readOnly": true
+        },
+        "lastReceivedLsn": {
+          "type": "string",
+          "description": "Last received LSN",
+          "readOnly": true
+        },
+        "lastReceivedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last received LSN time",
+          "readOnly": true
+        },
+        "lastSentLsn": {
+          "type": "string",
+          "description": "Last sent LSN",
+          "readOnly": true
+        },
+        "lastSentTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last sent LSN time",
+          "readOnly": true
+        },
+        "lastCommitLsn": {
+          "type": "string",
+          "description": "Last commit LSN",
+          "readOnly": true
+        },
+        "lastCommitTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last commit LSN time",
+          "readOnly": true
+        },
+        "lastHardenedLsn": {
+          "type": "string",
+          "description": "Last hardened LSN",
+          "readOnly": true
+        },
+        "lastHardenedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last hardened LSN time",
+          "readOnly": true
+        },
+        "lastBackupLsn": {
+          "type": "string",
+          "description": "Last backup LSN",
+          "readOnly": true
+        },
+        "lastBackupTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last backup LSN time",
+          "readOnly": true
+        },
+        "mostRecentLinkError": {
+          "type": "string",
+          "description": "The most recent link connection error description",
+          "readOnly": true
+        },
+        "partnerAuthCertValidity": {
+          "$ref": "#/definitions/CertificateInfo",
+          "description": "SQL server certificate validity",
+          "readOnly": true
+        },
+        "instanceSendReplicationLagSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Replication lag when Managed Instance link side is primary",
+          "readOnly": true
+        },
+        "instanceRedoReplicationLagSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Redo lag when Managed Instance link side is primary",
+          "readOnly": true
+        }
+      }
+    },
+    "DistributedAvailabilityGroupProperties": {
+      "type": "object",
+      "description": "The properties of a distributed availability group.",
+      "properties": {
+        "distributedAvailabilityGroupName": {
+          "type": "string",
+          "description": "Name of the distributed availability group",
+          "readOnly": true
+        },
+        "distributedAvailabilityGroupId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "ID of the distributed availability group",
+          "readOnly": true
+        },
+        "replicationMode": {
+          "$ref": "./common.json#/definitions/ReplicationModeType",
+          "description": "Replication mode of the link"
+        },
+        "partnerLinkRole": {
+          "$ref": "./common.json#/definitions/LinkRole",
+          "description": "SQL server side link role",
+          "readOnly": true
+        },
+        "partnerAvailabilityGroupName": {
+          "type": "string",
+          "description": "SQL server side availability group name"
+        },
+        "partnerEndpoint": {
+          "type": "string",
+          "description": "SQL server side endpoint - IP or DNS resolvable name"
+        },
+        "instanceLinkRole": {
+          "$ref": "./common.json#/definitions/LinkRole",
+          "description": "Managed instance side link role"
+        },
+        "instanceAvailabilityGroupName": {
+          "type": "string",
+          "description": "Managed instance side availability group name"
+        },
+        "failoverMode": {
+          "$ref": "./common.json#/definitions/FailoverModeType",
+          "description": "The link failover mode - can be Manual if intended to be used for two-way failover with a supported SQL Server, or None for one-way failover to Azure."
+        },
+        "seedingMode": {
+          "$ref": "./common.json#/definitions/SeedingModeType",
+          "description": "Database seeding mode – can be Automatic (default), or Manual for supported scenarios."
+        },
+        "databases": {
+          "type": "array",
+          "description": "Databases in the distributed availability group",
+          "items": {
+            "$ref": "#/definitions/DistributedAvailabilityGroupDatabase"
+          }
+        }
+      }
+    },
+    "DistributedAvailabilityGroupSetRole": {
+      "type": "object",
+      "description": "Distributed availability group failover request.",
+      "properties": {
+        "instanceRole": {
+          "$ref": "./common.json#/definitions/InstanceRole",
+          "description": "New role of managed instance in a distributed availability group, can be Primary or Secondary.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "roleChangeType": {
+          "$ref": "./common.json#/definitions/RoleChangeType",
+          "description": "The type of the role change, can be Planned or Forced.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "instanceRole",
+        "roleChangeType"
+      ]
+    },
+    "DistributedAvailabilityGroupsFailoverRequest": {
+      "type": "object",
+      "description": "Distributed availability group failover.",
+      "properties": {
+        "failoverType": {
+          "$ref": "./common.json#/definitions/FailoverType",
+          "description": "The failover type, can be ForcedAllowDataLoss or Planned.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "failoverType"
+      ]
+    },
+    "DistributedAvailabilityGroupsListResult": {
+      "type": "object",
+      "description": "A list of distributed availability groups in instance.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of results.",
+          "items": {
+            "$ref": "#/definitions/DistributedAvailabilityGroup"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

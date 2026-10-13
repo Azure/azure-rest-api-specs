@@ -52,7 +52,8 @@ interface CsmDeploymentStatusOps
         @segment("deploymentStatus")
         @key
         deploymentStatusId: string,
-      }
+      },
+      ResourceName = "CsmSiteDeploymentStatus"
     > {}
 
 @tag("WebApps")
@@ -68,10 +69,12 @@ interface CsmDeploymentStatuses {
   @Azure.ClientGenerator.Core.Legacy.markAsLro
   getProductionSiteDeploymentStatus is CsmDeploymentStatusOps.Read<
     CsmDeploymentStatus,
-    Response = ArmResponse<CsmDeploymentStatus> | (ArmAcceptedResponse & {
-      @bodyRoot
-      _: CsmDeploymentStatus;
-    }),
+    Response =
+      | ArmResponse<CsmDeploymentStatus>
+      | (ArmAcceptedResponse & {
+          @bodyRoot
+          _: CsmDeploymentStatus;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -112,7 +115,8 @@ interface CsmDeploymentStatusOperationGroupOps
         @segment("deploymentStatus")
         @key
         deploymentStatusId: string,
-      }
+      },
+      ResourceName = "CsmSiteSlotDeploymentStatus"
     > {}
 
 @tag("WebApps")
@@ -128,10 +132,12 @@ interface CsmDeploymentStatusOperationGroup {
   @Azure.ClientGenerator.Core.Legacy.markAsLro
   getSlotSiteDeploymentStatusSlot is CsmDeploymentStatusOperationGroupOps.Read<
     CsmDeploymentStatus,
-    Response = ArmResponse<CsmDeploymentStatus> | (ArmAcceptedResponse & {
-      @bodyRoot
-      _: CsmDeploymentStatus;
-    }),
+    Response =
+      | ArmResponse<CsmDeploymentStatus>
+      | (ArmAcceptedResponse & {
+          @bodyRoot
+          _: CsmDeploymentStatus;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -147,6 +153,7 @@ interface CsmDeploymentStatusOperationGroup {
 }
 
 @@doc(CsmDeploymentStatus.name, "GUID of the deployment operation.");
-@@doc(CsmDeploymentStatus.properties,
+@@doc(
+  CsmDeploymentStatus.properties,
   "CsmDeploymentStatus resource specific properties"
 );

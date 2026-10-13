@@ -35,6 +35,7 @@ interface Devices {
 }
 
 @@doc(NetworkSettings.name, "");
-@@doc(NetworkSettings.properties,
+@@doc(
+  NetworkSettings.properties,
   "The properties of network settings of a device."
 );

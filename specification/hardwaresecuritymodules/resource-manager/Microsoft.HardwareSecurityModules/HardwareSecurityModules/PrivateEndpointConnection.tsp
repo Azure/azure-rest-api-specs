@@ -62,10 +62,12 @@ interface PrivateEndpointConnections {
 
 @@maxLength(PrivateEndpointConnection.name, 24);
 @@minLength(PrivateEndpointConnection.name, 3);
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "Name of the private endpoint connection associated with the Cloud HSM Cluster."
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(PrivateEndpointConnections.create::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.create::parameters.resource,
   "Parameters of the PrivateEndpointConnection"
 );

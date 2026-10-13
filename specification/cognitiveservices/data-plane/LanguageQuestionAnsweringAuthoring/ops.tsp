@@ -16,6 +16,7 @@ using Azure.Core.Traits;
 
 namespace Language.QuestionAnswering.Authoring;
 
+#suppress "@typespec/http/deprecated-implicit-optionality" "Legacy - DO NOT COPY"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Need to define custom ops for older predefined PATCH ops"
 @Foundations.Private.ensureVerb("ResourceCreateOrUpdate", "PATCH")
 @createsOrUpdatesResource(Resource)

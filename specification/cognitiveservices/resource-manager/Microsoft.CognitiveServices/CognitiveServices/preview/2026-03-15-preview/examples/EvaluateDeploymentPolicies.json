@@ -1,0 +1,70 @@
+{
+  "operationId": "Accounts_EvaluateDeploymentPolicies",
+  "title": "EvaluateDeploymentPolicies",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "api-version": "2026-03-15-preview",
+    "body": {
+      "deployments": [
+        {
+          "name": "gpt4o-deployment",
+          "properties": {
+            "model": {
+              "format": "OpenAI",
+              "name": "gpt-4o",
+              "version": "2024-11-20"
+            },
+            "raiPolicyName": "Microsoft.DefaultV2"
+          }
+        },
+        {
+          "name": "ada-embedding",
+          "properties": {
+            "model": {
+              "format": "OpenAI",
+              "name": "text-embedding-ada-002",
+              "version": "2"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": {
+          "gpt4o-deployment": {
+            "evaluationOutcome": "Compliant",
+            "nonCompliantAssignments": []
+          },
+          "ada-embedding": {
+            "evaluationOutcome": "NonCompliant",
+            "errorMessage": null,
+            "nonCompliantAssignments": [
+              {
+                "assignmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policyAssignments/deny-gpt-models",
+                "policyDefinitionId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policyDefinitions/deny-embedding-models",
+                "evaluationOutcome": "NonCompliant",
+                "nonComplianceReason": "Model text-embedding-ada-002 is not allowed by policy.",
+                "effect": "Deny",
+                "expressionEvaluations": [
+                  {
+                    "expression": "Microsoft.CognitiveServices/accounts/deployments/model.name",
+                    "expressionKind": "Field",
+                    "operator": "notIn",
+                    "result": "True",
+                    "targetValue": "[\"gpt-4o\",\"gpt-4\"]",
+                    "expressionValue": "text-embedding-ada-002"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

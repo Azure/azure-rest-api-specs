@@ -92,7 +92,9 @@ interface SessionHosts {
 
       /**
        * The path to the VM.
+       * @Introduced in 2026-01-01-preview
        */
+      @added(Versions.vLatestPreview)
       @query("vmPath")
       @maxLength(1092)
       @minLength(3)
@@ -104,21 +106,25 @@ interface SessionHosts {
 
   /**
    * create or update a sessionHost.
+   * @Introduced in 2026-01-01-preview
    */
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.vLatestPreview)
   create is ArmResourceCreateOrReplaceSync<SessionHost>;
 
   /**
    * Retry provisioning on a SessionHost.
+   * @Introduced in version 2023-11-01-preview
    */
+  @added(Versions.vLatestPreview)
   retryProvisioning is ArmResourceActionSync<SessionHost, void, OkResponse>;
 
   /**
    * Operation to list the scoped RegistrationTokens associated with the SessionHost.
+   * @Introduced in 2026-01-01-preview
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SessionHosts_ListSingleRegistrationTokens")
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.vLatestPreview)
   listSingleSessionHostRegistrationTokens is ArmResourceActionSync<
     SessionHost,
     ScopedRegistrationTokenProperties,
@@ -128,7 +134,8 @@ interface SessionHosts {
 
 @@maxLength(SessionHost.name, 48);
 @@minLength(SessionHost.name, 3);
-@@doc(SessionHost.name,
+@@doc(
+  SessionHost.name,
   "The name of the session host within the specified host pool"
 );
 @@doc(SessionHost.properties, "Detailed properties for SessionHost");

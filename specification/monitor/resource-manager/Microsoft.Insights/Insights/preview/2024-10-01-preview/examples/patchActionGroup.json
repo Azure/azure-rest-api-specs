@@ -1,42 +1,39 @@
 {
   "parameters": {
-    "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
-    "resourceGroupName": "Default-NotificationRules",
     "actionGroupName": "SampleActionGroup",
-    "api-version": "2024-10-01-preview",
     "actionGroupPatch": {
-      "tags": {
-        "key1": "value1",
-        "key2": "value2"
-      },
       "identity": {
         "type": "SystemAssigned"
       },
       "properties": {
         "enabled": false
+      },
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
       }
-    }
+    },
+    "api-version": "2024-10-01-preview",
+    "resourceGroupName": "Default-NotificationRules",
+    "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/microsoft.insights/actionGroups/SampleActionGroup",
-        "type": "Microsoft.Insights/ActionGroups",
         "name": "SampleActionGroup",
-        "location": "Global",
-        "tags": {
-          "key1": "value1",
-          "key2": "value2"
-        },
+        "type": "Microsoft.Insights/ActionGroups",
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/microsoft.insights/actionGroups/SampleActionGroup",
         "identity": {
           "type": "SystemAssigned",
-          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-          "principalId": "f11979a4-36d1-45d0-9097-a0da3c7e855d"
+          "principalId": "f11979a4-36d1-45d0-9097-a0da3c7e855d",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
         },
+        "location": "Global",
         "properties": {
-          "groupShortName": "sample",
-          "enabled": true,
+          "armRoleReceivers": [],
+          "automationRunbookReceivers": [],
+          "azureAppPushReceivers": [],
+          "azureFunctionReceivers": [],
           "emailReceivers": [
             {
               "name": "John Doe's email",
@@ -51,6 +48,12 @@
               "useCommonAlertSchema": true
             }
           ],
+          "enabled": true,
+          "eventHubReceivers": [],
+          "groupShortName": "sample",
+          "incidentReceivers": [],
+          "itsmReceivers": [],
+          "logicAppReceivers": [],
           "smsReceivers": [
             {
               "name": "John Doe's mobile",
@@ -65,6 +68,7 @@
               "status": "Enabled"
             }
           ],
+          "voiceReceivers": [],
           "webhookReceivers": [
             {
               "name": "Sample webhook",
@@ -73,25 +77,23 @@
             },
             {
               "name": "Sample webhook 2",
-              "serviceUri": "http://www.example.com/webhook2",
-              "useCommonAlertSchema": true,
-              "useAadAuth": true,
-              "objectId": "d3bb868c-fe44-452c-aa26-769a6538c808",
               "identifierUri": "http://someidentifier/d7811ba3-7996-4a93-99b6-6b2f3f355f8a",
-              "tenantId": "68a4459a-ccb8-493c-b9da-dd30457d1b84"
+              "objectId": "d3bb868c-fe44-452c-aa26-769a6538c808",
+              "serviceUri": "http://www.example.com/webhook2",
+              "tenantId": "68a4459a-ccb8-493c-b9da-dd30457d1b84",
+              "useAadAuth": true,
+              "useCommonAlertSchema": true
             }
-          ],
-          "itsmReceivers": [],
-          "azureAppPushReceivers": [],
-          "automationRunbookReceivers": [],
-          "voiceReceivers": [],
-          "logicAppReceivers": [],
-          "azureFunctionReceivers": [],
-          "armRoleReceivers": [],
-          "eventHubReceivers": [],
-          "incidentReceivers": []
+          ]
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ActionGroups_Update",
+  "title": "Patch an action group"
 }

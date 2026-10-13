@@ -1,5 +1,6 @@
 {
   "parameters": {
+    "endpoint": "https://atlas.microsoft.com",
     "format": "json",
     "api-version": "1.0",
     "query": "pacific standard time"
@@ -8,11 +9,13 @@
     "200": {
       "body": [
         {
-          "Id": "America/Los_Angeles",
-          "IsAlias": false,
-          "HasZone1970Location": true
+          "hasZone1970Location": true,
+          "id": "America/Los_Angeles",
+          "isAlias": false
         }
       ]
     }
-  }
+  },
+  "operationId": "Timezone_GetTimezoneWindowsToIANA",
+  "title": "Successfully retrieve corresponding timezone IANA"
 }

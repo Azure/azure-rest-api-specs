@@ -27,6 +27,7 @@ export interface ExecutionReportPackage {
   installationInstructions?: string;
   apiViewArtifact?: string;
   shouldLabelBreakingChange?: boolean;
+  packageRootPath?: string;
 }
 
 /**
@@ -123,5 +124,9 @@ export const SpecGenSdkRequiredSettings: Record<SdkName, PlaneTypeSettings> = {
   "azure-sdk-for-python": {
     dataPlane: true,
     managementPlane: true,
+  },
+  "azure-sdk-for-rust": {
+    dataPlane: false,
+    managementPlane: false,
   },
 };

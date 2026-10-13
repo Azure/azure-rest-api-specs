@@ -43,11 +43,13 @@ interface Replications {
   update is ArmCustomPatchAsync<
     Replication,
     PatchModel = ReplicationUpdateParameters,
-    Response = ArmResponse<Replication> | ArmResourceCreatedResponse<
-      Replication,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = Replication> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<Replication>
+      | ArmResourceCreatedResponse<
+          Replication,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = Replication> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -56,7 +58,10 @@ interface Replications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Replication,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -73,9 +78,11 @@ interface Replications {
 @@minLength(Replication.name, 5);
 @@doc(Replication.name, "The name of the replication.");
 @@doc(Replication.properties, "The properties of the replication.");
-@@doc(Replications.create::parameters.resource,
+@@doc(
+  Replications.create::parameters.resource,
   "The parameters for creating a replication."
 );
-@@doc(Replications.update::parameters.properties,
+@@doc(
+  Replications.update::parameters.properties,
   "The parameters for updating a replication."
 );

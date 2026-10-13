@@ -42,7 +42,7 @@ interface PrivateEndpointConnectionOps
       },
       {},
       ResourceRoute = #{
-        route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}",
+        route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}",
       }
     > {}
 
@@ -53,7 +53,7 @@ interface PrivateEndpointConnections {
    */
   @summary("Get a specific private endpoint connection.")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
   get is PrivateEndpointConnectionOps.ActionSync<
     PrivateEndpointConnection,
     Request = void,
@@ -72,16 +72,18 @@ interface PrivateEndpointConnections {
    */
   @put
   @summary("Update a specific private endpoint connection.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
   update is PrivateEndpointConnectionOps.ActionAsync<
     PrivateEndpointConnection,
     Request = PrivateEndpointConnection,
     Result = void,
-    Response = ArmResponse<PrivateEndpointConnection> | ArmResourceCreatedResponse<
-      PrivateEndpointConnection,
-      LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<PrivateEndpointConnection>
+      | ArmResourceCreatedResponse<
+          PrivateEndpointConnection,
+          LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     Parameters = {
       /**
        * The type of the parent resource. This can be either \'topics\', \'domains\', or \'partnerNamespaces\' or \'namespaces\'.
@@ -98,7 +100,7 @@ interface PrivateEndpointConnections {
    */
   @summary("Delete a specific private endpoint connection.")
   @delete
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
   delete is PrivateEndpointConnectionOps.ActionAsync<
     PrivateEndpointConnection,
     Request = void,
@@ -150,12 +152,15 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The name of the private endpoint connection connection."
 );
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "Properties of the PrivateEndpointConnection."
 );
-@@doc(PrivateEndpointConnections.update::parameters.body,
+@@doc(
+  PrivateEndpointConnections.update::parameters.body,
   "The private endpoint connection object to update."
 );

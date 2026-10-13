@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-03-02",
+    "snapshotName": "myConfidentialSnapshot"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "osType": "Windows",
+          "securityProfile": {
+            "securityType": "ConfidentialVM_DiskEncryptedWithPlatformKey",
+            "confidentialVMVersion": "V2"
+          },
+          "hyperVGeneration": "V2",
+          "purchasePlan": {
+            "name": "test_sku",
+            "publisher": "test_test_pmc2pc1",
+            "product": "marketplace_vm_test"
+          },
+          "supportedCapabilities": {
+            "acceleratedNetwork": true
+          },
+          "supportsHibernation": true,
+          "creationData": {
+            "createOption": "Copy",
+            "sourceResourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myConfidentialDisk",
+            "sourceUniqueId": "d633885d-d102-4481-901e-5b2413d1a7be"
+          },
+          "diskSizeGB": 10,
+          "encryption": {
+            "type": "EncryptionAtRestWithPlatformKey"
+          },
+          "timeCreated": "2026-04-20T04:41:35.079872+00:00",
+          "provisioningState": "Succeeded"
+        },
+        "type": "Microsoft.Compute/snapshots",
+        "location": "westus",
+        "tags": {
+          "department": "Development",
+          "project": "Snapshots"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/myConfidentialSnapshot",
+        "name": "myConfidentialSnapshot"
+      }
+    }
+  },
+  "operationId": "Snapshots_Get",
+  "title": "Get information about a ConfidentialVM snapshot with confidentialVMVersion"
+}

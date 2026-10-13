@@ -1,0 +1,137 @@
+{
+  "parameters": {
+    "$filter": "properties/status eq 'Active'",
+    "api-version": "2025-05-01",
+    "eventTrackingId": "eventTrackingId",
+    "queryStartTime": "5/12/2025",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{eventTrackingId}",
+        "type": "/providers/Microsoft.ResourceHealth/events",
+        "id": "/providers/Microsoft.ResourceHealth/events/{eventTrackingId}",
+        "properties": {
+          "article": {
+            "articleContent": "<html>An outage alert is being investigated. More information will be provided as it is known</html>"
+          },
+          "enableChatWithUs": false,
+          "enableMicrosoftSupport": true,
+          "eventLevel": "Warning",
+          "eventSource": "ResourceHealth",
+          "eventTags": [
+            "Action Recommended",
+            "False Positive",
+            "Preliminary PIR",
+            "Final PIR"
+          ],
+          "eventType": "ServiceIssue",
+          "faqs": [
+            {
+              "answer": "This is an answer",
+              "localeCode": "en",
+              "question": "This is a question"
+            }
+          ],
+          "header": "Your service might have been impacted by an Azure service issue",
+          "hirStage": "resolved",
+          "impact": [
+            {
+              "impactedRegions": [
+                {
+                  "impactedRegion": "West US",
+                  "impactedSubscriptions": [
+                    "{subscriptionId}"
+                  ],
+                  "impactedTenants": [],
+                  "lastUpdateTime": "2025-05-13T15:43:48.1203530Z",
+                  "status": "Active",
+                  "updates": [
+                    {
+                      "eventTags": [
+                        "Final PIR"
+                      ],
+                      "summary": "Update 3 - An outage alert is being investigated. More information will be provided as it is known.",
+                      "updateDateTime": "2025-05-13T15:43:48.1203530Z"
+                    },
+                    {
+                      "eventTags": [
+                        "False Positive",
+                        "Preliminary PIR"
+                      ],
+                      "summary": "Update 2 - An outage alert is being investigated. More information will be provided as it is known.",
+                      "updateDateTime": "2025-05-13T10:32:48.1203530Z"
+                    },
+                    {
+                      "eventTags": [
+                        "Action Recommended"
+                      ],
+                      "summary": "Update 1 - An outage alert is being investigated. More information will be provided as it is known.",
+                      "updateDateTime": "2025-05-12T15:00:48.1203530Z"
+                    }
+                  ]
+                }
+              ],
+              "impactedService": "Virtual Machines",
+              "impactedServiceGuid": "fd8065f5-ffd0-4756-8788-e6a11bf36257"
+            }
+          ],
+          "impactMitigationTime": "2025-05-14T15:43:48.1203530Z",
+          "impactStartTime": "2025-05-12T14:45:48.1203530Z",
+          "isEventSensitive": false,
+          "isHIR": false,
+          "lastUpdateTime": "2025-05-13T15:43:48.1203530Z",
+          "level": "Warning",
+          "links": [
+            {
+              "type": "Hyperlink",
+              "bladeName": "RequestRCABlade",
+              "displayText": {
+                "localizedValue": "Request RCA",
+                "value": "Request RCA"
+              },
+              "extensionName": "Microsoft_Azure_Health",
+              "parameters": {
+                "rcaRequested": "False",
+                "trackingId": "{eventTrackingId}"
+              }
+            },
+            {
+              "type": "Button",
+              "bladeName": "AzureHealthBrowseBlade",
+              "displayText": {
+                "localizedValue": "Sign up for updates",
+                "value": "Sign up for updates"
+              },
+              "extensionName": "Microsoft_Azure_Health",
+              "parameters": {
+                "trackingId": "{eventTrackingId}"
+              }
+            }
+          ],
+          "priority": 2,
+          "recommendedActions": {
+            "actions": [
+              {
+                "actionText": "action 1",
+                "groupId": 23243
+              },
+              {
+                "actionText": "action 2",
+                "groupId": 23432
+              }
+            ],
+            "localeCode": "en",
+            "message": "Recommended actions title"
+          },
+          "status": "Active",
+          "summary": "An outage alert is being investigated. More information will be provided as it is known.",
+          "title": "ACTIVE: Virtual machines in West US"
+        }
+      }
+    }
+  },
+  "operationId": "Event_GetBySubscriptionIdAndTrackingId",
+  "title": "SecurityAdvisoriesEventBySubscriptionIdAndTrackingId"
+}

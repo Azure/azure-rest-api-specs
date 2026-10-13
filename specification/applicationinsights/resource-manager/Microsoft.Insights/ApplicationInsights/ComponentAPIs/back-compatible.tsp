@@ -234,79 +234,102 @@ using ComponentAPIs;
 @@clientLocation(APIKeysOperationGroup.delete, "APIKeys");
 @@clientLocation(APIKeysOperationGroup.get, "APIKeys");
 
-@@clientLocation(ExportConfigurationsOperationGroup.list,
+@@clientLocation(
+  ExportConfigurationsOperationGroup.list,
   "ExportConfigurations"
 );
-@@clientLocation(ExportConfigurationsOperationGroup.create,
+@@clientLocation(
+  ExportConfigurationsOperationGroup.create,
   "ExportConfigurations"
 );
-@@clientLocation(ExportConfigurationsOperationGroup.delete,
+@@clientLocation(
+  ExportConfigurationsOperationGroup.delete,
   "ExportConfigurations"
 );
-@@clientLocation(ExportConfigurationsOperationGroup.get,
+@@clientLocation(
+  ExportConfigurationsOperationGroup.get,
   "ExportConfigurations"
 );
-@@clientLocation(ExportConfigurationsOperationGroup.update,
+@@clientLocation(
+  ExportConfigurationsOperationGroup.update,
   "ExportConfigurations"
 );
 
-@@clientLocation(ComponentCurrentBillingFeaturesOperationGroup.get,
+@@clientLocation(
+  ComponentCurrentBillingFeaturesOperationGroup.get,
   "ComponentCurrentBillingFeatures"
 );
-@@clientLocation(ComponentCurrentBillingFeaturesOperationGroup.update,
+@@clientLocation(
+  ComponentCurrentBillingFeaturesOperationGroup.update,
   "ComponentCurrentBillingFeatures"
 );
 
-@@clientLocation(ComponentQuotaStatusOperationGroup.get,
+@@clientLocation(
+  ComponentQuotaStatusOperationGroup.get,
   "ComponentQuotaStatus"
 );
 
-@@clientLocation(ComponentFeatureCapabilitiesOperationGroup.get,
+@@clientLocation(
+  ComponentFeatureCapabilitiesOperationGroup.get,
   "ComponentFeatureCapabilities"
 );
 
-@@clientLocation(ComponentAvailableFeaturesOperationGroup.get,
+@@clientLocation(
+  ComponentAvailableFeaturesOperationGroup.get,
   "ComponentAvailableFeatures"
 );
 
-@@clientLocation(ProactiveDetectionConfigurationsOperationGroup.list,
+@@clientLocation(
+  ProactiveDetectionConfigurationsOperationGroup.list,
   "ProactiveDetectionConfigurations"
 );
-@@clientLocation(ProactiveDetectionConfigurationsOperationGroup.get,
+@@clientLocation(
+  ProactiveDetectionConfigurationsOperationGroup.get,
   "ProactiveDetectionConfigurations"
 );
-@@clientLocation(ProactiveDetectionConfigurationsOperationGroup.update,
+@@clientLocation(
+  ProactiveDetectionConfigurationsOperationGroup.update,
   "ProactiveDetectionConfigurations"
 );
 
-@@clientLocation(WorkItemConfigurationsOperationGroup.list,
+@@clientLocation(
+  WorkItemConfigurationsOperationGroup.list,
   "WorkItemConfigurations"
 );
-@@clientLocation(WorkItemConfigurationsOperationGroup.create,
+@@clientLocation(
+  WorkItemConfigurationsOperationGroup.create,
   "WorkItemConfigurations"
 );
-@@clientLocation(WorkItemConfigurationsOperationGroup.getDefault,
+@@clientLocation(
+  WorkItemConfigurationsOperationGroup.getDefault,
   "WorkItemConfigurations"
 );
-@@clientLocation(WorkItemConfigurationsOperationGroup.delete,
+@@clientLocation(
+  WorkItemConfigurationsOperationGroup.delete,
   "WorkItemConfigurations"
 );
-@@clientLocation(WorkItemConfigurationsOperationGroup.getItem,
+@@clientLocation(
+  WorkItemConfigurationsOperationGroup.getItem,
   "WorkItemConfigurations"
 );
-@@clientLocation(WorkItemConfigurationsOperationGroup.updateItem,
+@@clientLocation(
+  WorkItemConfigurationsOperationGroup.updateItem,
   "WorkItemConfigurations"
 );
-@@clientName(AnnotationsOperationGroup.create::parameters.body,
+@@clientName(
+  AnnotationsOperationGroup.create::parameters.body,
   "AnnotationProperties"
 );
 @@clientName(APIKeysOperationGroup.create::parameters.body, "APIKeyProperties");
-@@clientName(ComponentCurrentBillingFeaturesOperationGroup.update::parameters.body,
+@@clientName(
+  ComponentCurrentBillingFeaturesOperationGroup.update::parameters.body,
   "BillingFeaturesProperties"
 );
-@@clientName(ExportConfigurationsOperationGroup.create::parameters.body,
+@@clientName(
+  ExportConfigurationsOperationGroup.create::parameters.body,
   "ExportProperties"
 );
-@@clientName(WorkItemConfigurationsOperationGroup.create::parameters.body,
+@@clientName(
+  WorkItemConfigurationsOperationGroup.create::parameters.body,
   "WorkItemConfigurationProperties"
 );

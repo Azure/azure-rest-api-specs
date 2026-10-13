@@ -1,73 +1,75 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-10-02-preview",
     "environmentName": "myenvironment",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mybulksubscription",
             "name": "mybulksubscription",
             "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mybulksubscription",
             "properties": {
-              "pubsubName": "mypubsubcomponent",
-              "topic": "inventory",
-              "routes": {
-                "rules": [],
-                "default": "/products"
-              },
               "bulkSubscribe": {
                 "enabled": true,
-                "maxMessagesCount": 123,
-                "maxAwaitDurationMs": 500
-              }
+                "maxAwaitDurationMs": 500,
+                "maxMessagesCount": 123
+              },
+              "pubsubName": "mypubsubcomponent",
+              "routes": {
+                "default": "/products",
+                "rules": []
+              },
+              "topic": "inventory"
             }
           },
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mydefaultsubscription",
             "name": "mydefaultsubscription",
             "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/mydefaultsubscription",
             "properties": {
               "pubsubName": "mypubsubcomponent",
-              "topic": "inventory",
               "routes": {
-                "rules": [],
-                "default": "/products"
-              }
+                "default": "/products",
+                "rules": []
+              },
+              "topic": "inventory"
             }
           },
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/myroutingsubscription",
             "name": "myroutingsubscription",
             "type": "Microsoft.App/managedEnvironments/daprSubscriptions",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprSubscriptions/myroutingsubscription",
             "properties": {
-              "pubsubName": "mypubsubcomponent",
-              "topic": "inventory",
-              "routes": {
-                "rules": [
-                  {
-                    "match": "event.type == 'widget'",
-                    "path": "/widgets"
-                  },
-                  {
-                    "match": "event.type == 'gadget'",
-                    "path": "/gadgets"
-                  }
-                ],
-                "default": "/products"
-              },
               "metadata": {
                 "foo": "bar",
                 "hello": "world"
-              }
+              },
+              "pubsubName": "mypubsubcomponent",
+              "routes": {
+                "default": "/products",
+                "rules": [
+                  {
+                    "path": "/widgets",
+                    "match": "event.type == 'widget'"
+                  },
+                  {
+                    "path": "/gadgets",
+                    "match": "event.type == 'gadget'"
+                  }
+                ]
+              },
+              "topic": "inventory"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "DaprSubscriptions_List",
+  "title": "List Dapr subscriptions"
 }

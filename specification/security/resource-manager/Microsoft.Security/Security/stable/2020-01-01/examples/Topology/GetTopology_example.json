@@ -1,37 +1,39 @@
 {
   "parameters": {
     "api-version": "2020-01-01",
-    "subscriptionId": "3eeab341-f466-499c-a8be-85427e154bad",
-    "resourceGroupName": "myservers",
     "ascLocation": "centralus",
+    "resourceGroupName": "myservers",
+    "subscriptionId": "3eeab341-f466-499c-a8be-85427e154bad",
     "topologyResourceName": "vnets"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "vnets",
+        "type": "Microsoft.Security/locations/topologies",
+        "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Security/locations/centralus/topologies/vnets",
+        "location": "westus",
         "properties": {
           "calculatedDateTime": "2018-07-10T13:56:10.5755270Z",
           "topologyResources": [
             {
-              "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Network/virtualNetworks/myvnet",
-              "severity": "Healthy",
-              "networkZones": "InternetFacing",
-              "recommendationsExist": false,
-              "topologyScore": 0,
-              "location": "westus",
               "children": [
                 {
                   "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/mysubnet"
                 }
-              ]
+              ],
+              "location": "westus",
+              "networkZones": "InternetFacing",
+              "recommendationsExist": false,
+              "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Network/virtualNetworks/myvnet",
+              "severity": "Healthy",
+              "topologyScore": 0
             }
           ]
-        },
-        "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Security/locations/centralus/topologies/vnets",
-        "name": "vnets",
-        "type": "Microsoft.Security/locations/topologies",
-        "location": "westus"
+        }
       }
     }
-  }
+  },
+  "operationId": "Topology_Get",
+  "title": "Get topology"
 }

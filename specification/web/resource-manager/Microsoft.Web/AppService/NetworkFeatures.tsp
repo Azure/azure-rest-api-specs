@@ -52,7 +52,8 @@ interface NetworkFeaturesOperationGroupOps
         @segment("networkFeatures")
         @key
         view: string,
-      }
+      },
+      ResourceName = "SiteNetworkFeature"
     > {}
 
 @tag("WebApps")
@@ -95,7 +96,8 @@ interface NetworkFeaturesSlotOperationGroupOps
         @segment("networkFeatures")
         @key
         view: string,
-      }
+      },
+      ResourceName = "NetworkFeature"
     > {}
 @tag("WebApps")
 @armResourceOperations(#{ omitTags: true })
@@ -110,6 +112,7 @@ interface NetworkFeaturesSlotOperationGroup {
     OverrideErrorType = DefaultErrorResponse
   >;
 }
-@@doc(NetworkFeatures.properties,
+@@doc(
+  NetworkFeatures.properties,
   "NetworkFeatures resource specific properties"
 );

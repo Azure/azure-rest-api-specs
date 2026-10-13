@@ -18,7 +18,7 @@ namespace ComputeGallery;
 @subscriptionResource
 @parentResource(SubscriptionLocationResource)
 model CommunityGallery is ProxyResourceCommunity<CommunityGalleryProperties> {
-  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
+  ...ResourceNameParameter<
     Resource = CommunityGallery,
     KeyName = "publicGalleryName",
     SegmentName = "communityGalleries",
@@ -38,6 +38,7 @@ interface CommunityGalleries {
 }
 
 @@doc(CommunityGallery.name, "The public name of the community gallery.");
-@@doc(CommunityGallery.properties,
+@@doc(
+  CommunityGallery.properties,
   "Describes the properties of a community gallery."
 );

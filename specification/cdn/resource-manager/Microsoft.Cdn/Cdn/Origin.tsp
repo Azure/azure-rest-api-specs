@@ -38,14 +38,17 @@ interface Origins {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     Origin,
-    Response = ArmResourceUpdatedResponse<Origin> | ArmResourceCreatedResponse<
-      Origin,
-      ArmLroLocationHeader<FinalResult = Origin> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Origin>> & {
-      @bodyRoot
-      _: Origin;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Origin>
+      | ArmResourceCreatedResponse<
+          Origin,
+          ArmLroLocationHeader<FinalResult = Origin> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Origin>> & {
+          @bodyRoot
+          _: Origin;
+        })
   >;
 
   /**
@@ -56,10 +59,12 @@ interface Origins {
   update is ArmCustomPatchAsync<
     Origin,
     PatchModel = OriginUpdateParameters,
-    Response = ArmResponse<Origin> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Origin>> & {
-      @bodyRoot
-      _: Origin;
-    })
+    Response =
+      | ArmResponse<Origin>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Origin>> & {
+          @bodyRoot
+          _: Origin;
+        })
   >;
 
   /**
@@ -68,7 +73,10 @@ interface Origins {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Origin,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -79,7 +87,8 @@ interface Origins {
 }
 
 @@doc(Origin.name, "Name of the origin which is unique within the endpoint.");
-@@doc(Origin.properties,
+@@doc(
+  Origin.properties,
   "The JSON object that contains the properties of the origin."
 );
 @@doc(Origins.create::parameters.resource, "Origin properties");

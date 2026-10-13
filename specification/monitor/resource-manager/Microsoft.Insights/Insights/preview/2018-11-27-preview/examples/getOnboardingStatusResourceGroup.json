@@ -1,16 +1,17 @@
 {
+  "operationId": "VMInsights_GetOnboardingStatus",
   "parameters": {
-    "resourceUri": "subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87/resourceGroups/resource-group-with-vms",
-    "api-version": "2018-11-27-preview"
+    "api-version": "2018-11-27-preview",
+    "resourceUri": "subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87/resourceGroups/resource-group-with-vms"
   },
+  "title": "Get status for a resource group that has at least one VM that is actively reporting data",
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "name": "default",
+        "type": "Microsoft.Insights/vmInsightsOnboardingStatuses",
+        "id": "/subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87/resourceGroups/resource-group-with-vms/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default",
         "properties": {
-          "resourceId": "/subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87/resourceGroups/resource-group-with-vms",
-          "onboardingStatus": "onboarded",
-          "dataStatus": "present",
           "data": [
             {
               "workspace": {
@@ -21,12 +22,13 @@
                 }
               }
             }
-          ]
-        },
-        "id": "/subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87/resourceGroups/resource-group-with-vms/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default",
-        "type": "Microsoft.Insights/vmInsightsOnboardingStatuses",
-        "name": "default"
-      }
+          ],
+          "dataStatus": "present",
+          "onboardingStatus": "onboarded",
+          "resourceId": "/subscriptions/3d51de47-8d1c-4d24-b42f-bcae075dfa87/resourceGroups/resource-group-with-vms"
+        }
+      },
+      "headers": {}
     }
   }
 }

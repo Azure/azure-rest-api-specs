@@ -1,0 +1,65 @@
+name: arm-api-reviewer-eval-check-name-availability
+description: |
+  Check Name Availability tests (08xxxx).
+  Validates compatible custom checkNameAvailability request/response models
+  and detection of missing input validation on the name field.
+
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+  files:
+    - src: "../../../../instructions/arm-api-review.instructions.md"
+      dest: ".github/instructions/arm-api-review.instructions.md"
+    - src: "../../../../../specification/common-types/resource-management/v5/types.json"
+      dest: "specification/common-types/resource-management/v5/types.json"
+
+tags:
+  area: arm-api-reviewer
+
+defaults:
+  runs: 1
+  timeout: "300s"
+  model: gpt-5.6-sol?effort=high
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  # Any failed grader must fail this focused semantic scenario.
+  threshold: 1.0
+
+stimuli:
+  # 080001 — checkNameAvailability with custom models and no input validation
+  - name: detect-cna-violations
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/cna-violations.json"
+          dest: "specification/cnatestsvc/resource-manager/Microsoft.CnaTest/stable/2025-01-01/cnatestsvc.json"
+    prompt: >
+      Read `.github/instructions/arm-api-review.instructions.md` section 21 and
+      review only the `checkNameAvailability` operation and its request and
+      response models in the following ARM resource-manager OpenAPI
+      specification. Compare custom shapes with the supplied common-types v5
+      definitions. Assess contract compatibility, input validation on the
+      request `name` field, and the strength of the common-types guidance. Do
+      not report unrelated resource lifecycle, example, or naming findings.
+      Report findings with rule IDs, line numbers, and fix suggestions.
+
+      File: specification/cnatestsvc/resource-manager/Microsoft.CnaTest/stable/2025-01-01/cnatestsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "checkNameAvailability"
+      - type: output-matches
+        config:
+          pattern: "(?i)CNA|common.types|CheckNameAvailabilityRequest"
+      - type: prompt
+    rubric:
+      - Did not flag the compatible inline request/response shapes for omitting OpenAPI required arrays, because the canonical common-types definitions omit those arrays too
+      - "Identified the name field in CheckNameAvailabilityRequest as lacking input validation (no pattern or maxLength constraint)"
+      - Recommended common-types reuse as a non-blocking way to avoid schema drift, not as a mandatory `$ref`

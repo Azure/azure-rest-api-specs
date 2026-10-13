@@ -1,17 +1,18 @@
 {
   "parameters": {
-    "subscriptionId": "subscriptionId",
+    "api-version": "2025-05-01",
     "eventTrackingId": "BC_1-FXZ",
-    "api-version": "2025-05-01"
+    "subscriptionId": "subscriptionId"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}",
         "value": [
           {
-            "id": "/subscriptions/{subscripitionId}/providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/jkl-901-hgy-445",
             "name": "jkl-901-hgy-445",
             "type": "Microsoft.ResourceHealth/events/impactedResources",
+            "id": "/subscriptions/{subscripitionId}/providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/jkl-901-hgy-445",
             "properties": {
               "info": [
                 {
@@ -34,9 +35,9 @@
             }
           },
           {
-            "id": "/subscriptions/{subscripitionId}/providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/wer-345-tyu-789",
             "name": "wer-345-tyu-789",
             "type": "Microsoft.ResourceHealth/events/impactedResources",
+            "id": "/subscriptions/{subscripitionId}/providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/wer-345-tyu-789",
             "properties": {
               "info": [
                 {
@@ -58,9 +59,10 @@
               ]
             }
           }
-        ],
-        "nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}"
+        ]
       }
     }
-  }
+  },
+  "operationId": "SecurityAdvisoryImpactedResources_ListBySubscriptionIdAndEventId",
+  "title": "ListSecurityAdvisoryImpactedResourcesBySubscriptionId"
 }

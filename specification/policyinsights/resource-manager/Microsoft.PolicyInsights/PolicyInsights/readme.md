@@ -145,14 +145,7 @@ These settings apply only when `--tag=package-2024-10` is specified on the comma
 ```yaml $(tag) == 'package-2024-10'
 input-file:
   - preview/2018-07-01-preview/policyTrackedResources.json
-  - stable/2024-10-01/remediations.json
-  - stable/2024-10-01/policyEvents.json
-  - stable/2024-10-01/policyStates.json
-  - stable/2024-10-01/policyMetadata.json
-  - stable/2024-10-01/checkPolicyRestrictions.json
-  - stable/2024-10-01/componentPolicyStates.json
-  - stable/2024-10-01/operations.json
-  - stable/2024-10-01/attestations.json
+  - stable/2024-10-01/openapi.json
 ```
 
 ### Tag: package-2023-03

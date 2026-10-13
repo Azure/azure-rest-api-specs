@@ -71,9 +71,11 @@ interface Migrations {
 
 @@doc(Migration.name, "Name of migration.");
 @@doc(Migration.properties, "Migration properties.");
-@@doc(Migrations.create::parameters.resource,
+@@doc(
+  Migrations.create::parameters.resource,
   "Parameters required for creating a migration."
 );
-@@doc(Migrations.update::parameters.properties,
+@@doc(
+  Migrations.update::parameters.properties,
   "Parameters required to update an existing migration."
 );

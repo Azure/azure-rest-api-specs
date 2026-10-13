@@ -83,10 +83,12 @@ interface ManagementGroups {
     ManagementGroup,
     Request = CreateManagementGroupRequest,
     Parameters = ManagementGroupsParameters,
-    Response = ArmResourceUpdatedResponse<ManagementGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagementGroup>> & {
-      @bodyRoot
-      _: AzureAsyncOperationResults;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ManagementGroup>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagementGroup>> & {
+          @bodyRoot
+          _: AzureAsyncOperationResults;
+        })
   >;
 
   /**
@@ -116,11 +118,13 @@ interface ManagementGroups {
     Extension.Tenant,
     ManagementGroup,
     Parameters = ManagementGroupsParameters,
-    Response = (ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: AzureAsyncOperationResults;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | (ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: AzureAsyncOperationResults;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -168,12 +172,15 @@ interface ManagementGroups {
 }
 
 @@doc(ManagementGroup.name, "Management Group ID.");
-@@doc(ManagementGroup.properties,
+@@doc(
+  ManagementGroup.properties,
   "The generic properties of a management group."
 );
-@@doc(ManagementGroups.createOrUpdate::parameters.resource,
+@@doc(
+  ManagementGroups.createOrUpdate::parameters.resource,
   "Management group creation parameters."
 );
-@@doc(ManagementGroups.update::parameters.properties,
+@@doc(
+  ManagementGroups.update::parameters.properties,
   "Management group patch parameters."
 );
