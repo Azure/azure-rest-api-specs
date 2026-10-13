@@ -251,7 +251,7 @@ it.each([
       expect(stderr.includes("\x1b[31merror\x1b[39m")).toBe(color);
       expect(stderr).not.toContain("\n    at ");
       expect(stripVTControlCharacters(String(error.stdout))).toBe(
-        "\n2 passed | 1 failed | 9 not run\n",
+        "\n2 passed | 1 failed | 7 not run\n",
       );
       expect(String(error.stdout)).not.toMatch(
         /Executing rule:|config files:|imports:|Expected npm prefix:/,
