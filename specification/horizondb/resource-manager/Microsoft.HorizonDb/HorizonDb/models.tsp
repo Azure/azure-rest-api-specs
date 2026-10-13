@@ -75,8 +75,8 @@ scalar LegacyPoolName extends string;
 @maxLength(63)
 scalar PoolName extends string;
 
-@doc("A provisioned HorizonDB pool compute capacity in vCores, from 1 through 192.")
-@minValue(1)
+@doc("A provisioned HorizonDB pool compute capacity in vCores, from 2 through 192.")
+@minValue(2)
 @maxValue(192)
 scalar PoolVCores extends int32;
 
