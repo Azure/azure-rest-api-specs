@@ -26,6 +26,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.credvalidation
   package-name: azure-mgmt-credvalidation
+  package-version: 1.0.0b1
   clear-output-folder: true
 ```
 
