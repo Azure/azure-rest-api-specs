@@ -663,7 +663,7 @@ model AIProjectClientOptions {
 );
 
 // --------------------------------------------------------------------------------
-// Jobs (Foundry training jobs) sub-client
+// Beta Jobs (Foundry training jobs) sub-client
 // --------------------------------------------------------------------------------
 @@clientName(Jobs.get, "get", "python");
 @@clientName(Jobs.list, "list", "python");
@@ -671,7 +671,9 @@ model AIProjectClientOptions {
 @@clientName(Jobs.delete, "delete", "python");
 @@clientName(Jobs.cancel, "cancel", "python");
 
-// Artifact reads (including log files) are not part of the initial public SDK
-// surface. They remain in the REST contract; the SDK shape is a follow-up.
-@@access(Jobs.listArtifacts, Access.internal);
-@@access(Jobs.getArtifactContentInformation, Access.internal);
+@@clientName(Jobs.listArtifacts, "list_artifacts", "python");
+@@clientName(
+  Jobs.getArtifactContentInformation,
+  "get_artifact_content_information",
+  "python"
+);
