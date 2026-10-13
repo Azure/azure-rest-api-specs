@@ -7,18 +7,10 @@
 
 These are the global settings for this spec.
 
-``` yaml $(isAutoRest)
+``` yaml
 title: credvalidation-v5-1788886228
-description: credvalidation-v5-1788886228
 openapi-type: arm
 tag: package-2023-01
-```
-
-### Tag: package-2023-01
-
-These settings apply only when `--tag=package-2023-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-01'
 input-file:
   - Microsoft.CredValidation/stable/2023-01-01/credvalidation.json
 ```
