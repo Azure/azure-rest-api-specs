@@ -1,5 +1,5 @@
 import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
-import { load } from "js-yaml";
+import { parse } from "yaml";
 import { tmpdir } from "node:os";
 import { dirname, extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -30,7 +30,7 @@ describe("workflow files", () => {
         }),
       })
       .parse(
-        load(await readFile(resolve(workflowsDir, "typespec-suppressions-code.yaml"), "utf8")),
+        parse(await readFile(resolve(workflowsDir, "typespec-suppressions-code.yaml"), "utf8")),
       );
     const steps = workflow.jobs["typespec-suppressions"].steps;
     const analysis = steps.find((step) => step.name === "Run TypeSpec suppressions analysis");
@@ -62,7 +62,7 @@ describe("workflow files", () => {
             }),
           ),
         })
-        .parse(load(await readFile(resolve(workflowsDir, file), "utf8")));
+        .parse(parse(await readFile(resolve(workflowsDir, file), "utf8")));
       const commands = Object.values(workflow.jobs)
         .flatMap((job) => job.steps)
         .flatMap((step) =>
