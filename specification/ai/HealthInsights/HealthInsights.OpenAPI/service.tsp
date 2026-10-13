@@ -18,8 +18,10 @@ using TypeSpec.Versioning;
 namespace AzureHealthInsights;
 
 @doc("The secret key for your Azure Cognitive Services subscription.")
-model AzureKey
-  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+model AzureKey is ApiKeyAuth<
+  ApiKeyLocation.header,
+  "Ocp-Apim-Subscription-Key"
+>;
 
 @doc("The Microsoft Entra Id Flow")
 model EntraIdToken

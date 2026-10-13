@@ -409,6 +409,12 @@ using Microsoft.NetApp;
 @@clientName(BucketPatchProperties.akvDetails, "KeyVaultDetails", "csharp");
 @@clientName(CertificateAkvDetails, "CertificateKeyVaultDetails", "csharp");
 @@clientName(CredentialsAkvDetails, "CredentialsKeyVaultDetails", "csharp");
+@@clientName(BindPasswordAkvConfig, "BindPasswordKeyVaultConfig", "csharp");
+@@clientName(
+  BindPasswordAkvConfigPatch,
+  "BindPasswordKeyVaultConfigPatch",
+  "csharp"
+);
 @@clientName(
   AzureKeyVaultDetails.certificateAkvDetails,
   "CertificateKeyVaultDetails",
@@ -594,6 +600,7 @@ using Microsoft.NetApp;
 @@clientName(VolumeLanguage.utf8mb4, "Utf8Mb4", "csharp");
 @@clientName(ElasticProtocolType.NFSv3, "Nfsv3", "csharp");
 @@clientName(ElasticProtocolType.NFSv4, "Nfsv4", "csharp");
+@@clientName(SecureLdapType.LdapOverTLS, "LdapOverTls", "csharp");
 
 // Body parameter rename to restore previous property name
 @@clientName(

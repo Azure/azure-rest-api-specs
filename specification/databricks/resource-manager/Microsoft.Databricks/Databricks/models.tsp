@@ -474,6 +474,7 @@ model WorkspaceProperties {
   /**
    * The workspace URL which is of the format 'adb-{workspaceId}.{random}.azuredatabricks.net'
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   workspaceUrl?: string;
 
@@ -568,6 +569,7 @@ model WorkspaceCustomParameters {
   /**
    * Boolean indicating whether the public IP should be disabled. Default value is true. Not allowed in Serverless ComputeMode workspace.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   enableNoPublicIp?: WorkspaceNoPublicIPBooleanParameter;
 
   /**
@@ -588,6 +590,7 @@ model WorkspaceCustomParameters {
   /**
    * Name of the Public IP for No Public IP workspace with managed vNet. Not allowed in Serverless ComputeMode workspace.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpName?: WorkspaceCustomStringParameter;
 
   /**
@@ -1112,6 +1115,7 @@ model Resource {
 /**
  * Contains details when the response code indicates an error.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -1296,6 +1300,7 @@ model EndpointDetail {
   /**
    * An IP Address that Domain Name currently resolves to.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipAddress?: string;
 
   /**

@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./models-shared.tsp";
 
 using Azure.ClientGenerator.Core.Legacy;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Search;
@@ -872,6 +873,22 @@ union AzureOpenAIModelName {
   /** Gpt54Nano model. */
   @added(Versions.v2026_04_01)
   Gpt54Nano: "gpt-5.4-nano",
+
+  /** Gpt55 model. */
+  @added(Versions.v2026_05_01_preview)
+  Gpt55: "gpt-5.5",
+
+  /** Gpt56Sol model. */
+  @added(Versions.v2026_08_01_preview)
+  Gpt56Sol: "gpt-5.6-sol",
+
+  /** Gpt56Terra model. */
+  @added(Versions.v2026_08_01_preview)
+  Gpt56Terra: "gpt-5.6-terra",
+
+  /** Gpt56Luna model. */
+  @added(Versions.v2026_08_01_preview)
+  Gpt56Luna: "gpt-5.6-luna",
 }
 
 /** The name of the embedding model from the Azure AI Foundry Catalog that will be called. */
@@ -3276,9 +3293,17 @@ model ListDataSourcesResult {
   @pageItems
   @visibility(Lifecycle.Read)
   value: SearchIndexerDataSource[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** The type of the keysOrIds. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DocumentKeysOrIds {
   /** document keys to be reset */
   documentKeys?: string[];
@@ -3478,6 +3503,13 @@ model ListIndexersResult {
   @pageItems
   @visibility(Lifecycle.Read)
   value: SearchIndexer[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** Represents the current status and execution history of an indexer. */
@@ -3899,9 +3931,17 @@ model ListSkillsetsResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value: SearchIndexerSkillset[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** The type of the skill names. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict"
 model SkillNames {
   /** the names of skills to be reset. */
@@ -3937,6 +3977,13 @@ model ListSynonymMapsResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value: SynonymMap[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** Represents a search index definition, which describes the fields and search behavior of an index. */
@@ -4015,6 +4062,7 @@ model SearchIndex {
 }
 
 /** Represents a search index definition, which describes the fields and search behavior of an index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SearchIndexResponse {
   /** The name of the index. */
   name: string;
@@ -4138,6 +4186,7 @@ model SearchField {
   sourceDocumentId?: boolean;
 
   /** A value indicating whether the field contains a SharePoint site URL used for SharePoint group-based filtering. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   @added(Versions.v2026_05_01_preview)
   sharepointSiteUrl?: boolean;
 
@@ -4217,6 +4266,7 @@ model ScoringFunction {
 }
 
 /** Defines options to control Cross-Origin Resource Sharing (CORS) for an index. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CorsOptions {
   /** The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended). */
   allowedOrigins: string[];
@@ -4421,6 +4471,7 @@ model VectorSearchCompression {
 }
 
 /** Contains the options for rescoring. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RescoringOptions {
   /** If set to true, after the initial search on the compressed vectors, the similarity scores are recalculated using the full-precision vectors. This will improve recall at the expense of latency. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -4495,6 +4546,7 @@ model GetIndexStatisticsResult {
 }
 
 /** Specifies some text and analysis components used to break that text into tokens. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AnalyzeRequest {
   /** The text to break into tokens. */
   text: string;
@@ -4559,6 +4611,13 @@ model ListAliasesResult {
   @pageItems
   @visibility(Lifecycle.Read)
   value: SearchAlias[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 // Knowledge Base models
@@ -4594,6 +4653,10 @@ model KnowledgeBase {
   /** The description of the knowledge base. */
   description?: string;
 
+  /** User-defined key-value pairs for categorizing the knowledge base and attributing its usage and costs. */
+  @added(Versions.v2026_08_01_preview)
+  tags?: Record<string>;
+
   /** Instructions considered by the knowledge base when developing query plan. */
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -4607,6 +4670,23 @@ model KnowledgeBase {
   /** Options to control Cross-Origin Resource Sharing (CORS) for the knowledge base. */
   @added(Versions.v2026_05_01_preview)
   corsOptions?: CorsOptions;
+
+  /** Persisted request-wide retrieve defaults for this knowledge base. These values apply to retrieve requests that omit the corresponding fields; request-time values take precedence when present. */
+  @added(Versions.v2026_08_01_preview)
+  retrieveDefaults?: KnowledgeBaseRetrieveDefaults;
+}
+
+/** Persisted request-wide defaults for knowledge base retrieve requests. Each value provides the default for the matching retrieve-request field; service defaults apply when unset, and request-time values take precedence when present. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseRetrieveDefaults {
+  /** The default maximum runtime in seconds for a retrieve request. */
+  maxRuntimeInSeconds?: int32;
+
+  /** The default maximum number of documents in the retrieve output. */
+  maxOutputDocuments?: int32;
+
+  /** The default maximum size, in tokens, of the content in the retrieve output. */
+  maxOutputSizeInTokens?: int32;
 }
 
 /** Result from listing knowledge bases. */
@@ -4614,6 +4694,13 @@ model ListKnowledgeBasesResult {
   /** The knowledge bases in the service. */
   @pageItems
   value: KnowledgeBase[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** Specifies the connection parameters for the model to use for query planning. */
@@ -4689,6 +4776,10 @@ model KnowledgeSource {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   kind: KnowledgeSourceKind;
 
+  /** Controls whether results from this knowledge source are reranked before they are included in the final result set. Defaults to 'rerank' when not specified. */
+  @added(Versions.v2026_08_01_preview)
+  resultsProcessing?: KnowledgeSourceResultsProcessing;
+
   /** The ETag of the knowledge source. */
   @encodedName("application/json", "@odata.etag")
   eTag?: string;
@@ -4696,6 +4787,18 @@ model KnowledgeSource {
   /** A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your knowledge source definition when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your knowledge source definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your knowledge source definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   encryptionKey?: SearchResourceEncryptionKey | null;
+}
+
+/** Controls whether a knowledge source's results are reranked. */
+@added(Versions.v2026_08_01_preview)
+union KnowledgeSourceResultsProcessing {
+  string,
+
+  /** Results from this knowledge source go through the reranking pipeline. This is the default behavior. */
+  Rerank: "rerank",
+
+  /** Results from this knowledge source bypass reranking and preserve their underlying order. */
+  None: "none",
 }
 
 /** The kind of the knowledge source. */
@@ -4774,6 +4877,91 @@ model SearchIndexKnowledgeSourceParameters {
   /** A default filter condition applied to the index at retrieval time (e.g., 'State eq VA'). Can be overridden at query time via knowledge source runtime parameters. */
   @added(Versions.v2026_05_01_preview)
   baseFilter?: string;
+
+  /** Default hints that guide query planning toward useful filters and boosts for this search index knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @added(Versions.v2026_08_01_preview)
+  queryHints?: SearchIndexKnowledgeSourceQueryHints;
+}
+
+/** Hints that guide query planning toward useful filters and boosts for a search index knowledge source. */
+@added(Versions.v2026_08_01_preview)
+model SearchIndexKnowledgeSourceQueryHints {
+  /** Filter hints that identify fields and representative values the query planner can use when constructing filters. */
+  filters?: SearchIndexKnowledgeSourceFilterHint[];
+
+  /** Boost hints that identify conditions the query planner can use to influence document ranking. */
+  boosts?: SearchIndexKnowledgeSourceBoost[];
+}
+
+/** A hint that identifies a field and representative values the query planner can use when constructing a filter. */
+@added(Versions.v2026_08_01_preview)
+model SearchIndexKnowledgeSourceFilterHint {
+  /** The name of the filterable search index field. */
+  @minLength(1)
+  field: string;
+
+  /** Representative values for the field. */
+  @minItems(1)
+  fieldValues: string[];
+
+  /** Natural-language instructions that explain when and how to filter on the field. */
+  filterInstructions?: string;
+}
+
+/** A hint that identifies a condition the query planner can use to influence document ranking. */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "The boost kind is extensible."
+@discriminator("kind")
+@added(Versions.v2026_08_01_preview)
+model SearchIndexKnowledgeSourceBoost {
+  /** The kind of boost hint. */
+  kind: SearchIndexKnowledgeSourceBoostKind;
+
+  /** Natural-language instructions that explain when and how to apply the boost. */
+  boostInstructions?: string;
+}
+
+/** The kind of boost hint for a search index knowledge source. */
+@added(Versions.v2026_08_01_preview)
+union SearchIndexKnowledgeSourceBoostKind {
+  string,
+
+  /** Boost documents based on a field value. */
+  FieldValue: "fieldValue",
+
+  /** Boost documents based on a multi-word expression. */
+  MultiWordExpression: "multiWordExpression",
+}
+
+/** A hint that boosts documents based on a field value. */
+@added(Versions.v2026_08_01_preview)
+model SearchIndexKnowledgeSourceFieldValueBoost
+  extends SearchIndexKnowledgeSourceBoost {
+  /** The discriminator value. */
+  kind: SearchIndexKnowledgeSourceBoostKind.FieldValue;
+
+  /** The name of the search index field. */
+  @minLength(1)
+  field: string;
+
+  /** Representative values for the field. */
+  fieldValues?: string[];
+
+  /** A multiplier for the document score. Must be a positive number not equal to 1.0. */
+  boost: float64;
+}
+
+/** A hint that boosts documents based on a multi-word expression. */
+@added(Versions.v2026_08_01_preview)
+model SearchIndexKnowledgeSourceMultiWordExpressionBoost
+  extends SearchIndexKnowledgeSourceBoost {
+  /** The discriminator value. */
+  kind: SearchIndexKnowledgeSourceBoostKind.MultiWordExpression;
+
+  /** Representative values for the boost. */
+  fieldValues?: string[];
+
+  /** A multiplier for the document score. Must be a positive number not equal to 1.0. */
+  boost: float64;
 }
 
 /** Field reference for a search index. */
@@ -4810,6 +4998,10 @@ model AzureBlobKnowledgeSourceParameters {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   ingestionParameters?: KnowledgeSourceIngestionParameters | null;
 
+  /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @added(Versions.v2026_08_01_preview)
+  queryHints?: SearchIndexKnowledgeSourceQueryHints;
+
   /** Resources created by the knowledge source. */
   @visibility(Lifecycle.Read)
   createdResources?: CreatedResources;
@@ -4843,6 +5035,10 @@ model IndexedSharePointKnowledgeSourceParameters {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   ingestionParameters?: KnowledgeSourceIngestionParameters | null;
 
+  /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @added(Versions.v2026_08_01_preview)
+  queryHints?: SearchIndexKnowledgeSourceQueryHints;
+
   /** Resources created by the knowledge source. */
   @visibility(Lifecycle.Read)
   createdResources?: CreatedResources;
@@ -4870,6 +5066,10 @@ model IndexedOneLakeKnowledgeSourceParameters {
 
   /** Consolidates all general ingestion settings. */
   ingestionParameters?: KnowledgeSourceIngestionParameters;
+
+  /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @added(Versions.v2026_08_01_preview)
+  queryHints?: SearchIndexKnowledgeSourceQueryHints;
 
   /** Resources created by the knowledge source. */
   @visibility(Lifecycle.Read)
@@ -4907,6 +5107,10 @@ model IndexedSqlKnowledgeSourceParameters {
   /** Consolidates all general ingestion settings including embedding model, schedule, and identity. */
   ingestionParameters?: KnowledgeSourceIngestionParameters;
 
+  /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @added(Versions.v2026_08_01_preview)
+  queryHints?: SearchIndexKnowledgeSourceQueryHints;
+
   /** Resources created by the knowledge source. */
   @visibility(Lifecycle.Read)
   createdResources?: CreatedResources;
@@ -4943,17 +5147,70 @@ model FileKnowledgeSource extends KnowledgeSource {
 
   /** The parameters for the File knowledge source. */
   fileParameters: FileKnowledgeSourceParameters;
+
+  /** Options to control Cross-Origin Resource Sharing (CORS) for the File knowledge source's file endpoints (upload, list, update, delete). */
+  @added(Versions.v2026_08_01_preview)
+  corsOptions?: CorsOptions;
 }
 
 /** Parameters for File knowledge source. */
 @added(Versions.v2026_05_01_preview)
 model FileKnowledgeSourceParameters {
-  /** Consolidates all general ingestion settings. Only 'minimal' content extraction mode and embeddingModel are supported for file knowledge sources. */
+  /** Consolidates all general ingestion settings for the File knowledge source, including the content extraction mode and an optional embeddingModel. */
   ingestionParameters?: KnowledgeSourceIngestionParameters;
+
+  /** Default hints that guide query planning toward useful filters and boosts for this index-backed knowledge source. Request-time query hints replace these defaults as a complete object. */
+  @added(Versions.v2026_08_01_preview)
+  queryHints?: SearchIndexKnowledgeSourceQueryHints;
 
   /** Resources created by the file knowledge source. */
   @visibility(Lifecycle.Read)
   createdResources?: CreatedResources;
+}
+
+/** The extraction effort applied to an individual file. 'minimal' (the default) uses built-in extraction; 'standard' uses Content Understanding. */
+@added(Versions.v2026_08_01_preview)
+union FileKnowledgeSourceExtractionMode {
+  string,
+
+  /** Built-in extraction was performed. */
+  Minimal: "minimal",
+
+  /** Content Understanding extraction was performed. */
+  Standard: "standard",
+}
+
+/** The JSON 'metadata' part of a multipart/form-data file upload: the full file name/path and custom key/value metadata. The parsing mode and extraction mode are both chosen by the service and are not supplied by the caller. */
+#suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "The 'metadata' part is intentionally a structured JSON object; Swagger 2.0 cannot represent it as a primitive multipart part."
+@added(Versions.v2026_08_01_preview)
+model FileUploadMetadata {
+  /** The full relative file name/path to store the file under (prefixes are derived from it). */
+  fileName?: string;
+
+  /** Custom key/value metadata to store with the file. */
+  metadata?: Record<string>;
+}
+
+/** Multipart request for uploading a file to a File knowledge source. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@added(Versions.v2026_08_01_preview)
+model UploadKnowledgeSourceFileMultipartRequest {
+  /** The JSON metadata describing the file. */
+  metadata: HttpPart<FileUploadMetadata>;
+
+  /** The raw file content. */
+  content: HttpPart<File>;
+}
+
+/** Multipart request for updating a file in a File knowledge source. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@added(Versions.v2026_08_01_preview)
+model UpdateKnowledgeSourceFileRequest {
+  /** The JSON metadata describing the file. */
+  metadata: HttpPart<FileUploadMetadata>;
+
+  /** The raw file content. */
+  content: HttpPart<File>;
 }
 
 /** Metadata for a file uploaded to a File knowledge source. */
@@ -4983,6 +5240,26 @@ model KnowledgeSourceFile {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @visibility(Lifecycle.Read)
   errorMessage?: string | null;
+
+  /** The prefix (directory-like path) derived from the full file name. */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  prefix?: string;
+
+  /** Custom key/value metadata stored with the file. Returned but not searchable or filterable. */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  metadata?: Record<string>;
+
+  /** The parsing mode applied to the file (auto-detected from the file). */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  parsingMode?: BlobIndexerParsingMode;
+
+  /** The extraction mode applied to the file. */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  extractionMode?: FileKnowledgeSourceExtractionMode;
 }
 
 /** Response from a List Files request. */
@@ -4991,6 +5268,13 @@ model ListKnowledgeSourceFilesResult {
   /** The list of files. */
   @pageItems
   value: KnowledgeSourceFile[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** Knowledge Source targeting web results. */
@@ -5071,6 +5355,32 @@ model RemoteSharePointKnowledgeSourceParameters {
 model WorkIQKnowledgeSource extends KnowledgeSource {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.WorkIQ;
+
+  /** The parameters for the WorkIQ knowledge source, including the customer-owned Entra app configuration used for on-behalf-of authentication. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  @added(Versions.v2026_08_01_preview)
+  workIQParameters: WorkIQKnowledgeSourceParameters;
+}
+
+/** Parameters for a WorkIQ knowledge source. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_08_01_preview)
+model WorkIQKnowledgeSourceParameters {
+  /** The customer-owned Microsoft Entra app registration configuration used for on-behalf-of authentication to the Work IQ API. The customer registers a tenant-owned Entra app, grants it the WorkIQAgent.Ask delegated permission, and configures a federated credential so Azure AI Search can authenticate as that app without a stored client secret. */
+  entraAppAuthentication: EntraAppAuthentication;
+}
+
+/** Configuration for a customer-owned Microsoft Entra app registration used for federated credential-based on-behalf-of authentication. */
+@added(Versions.v2026_08_01_preview)
+model EntraAppAuthentication {
+  /** The application (client) ID of the customer-owned Entra app registration. */
+  applicationId: Azure.Core.uuid;
+
+  /** The federated credential ID configured on the app registration, enabling the search service to authenticate as the app without a stored client secret. */
+  federatedCredentialId: Azure.Core.uuid;
+
+  /** The tenant ID of the app registration. Required when the app registration is in a different tenant than the search service. If omitted, the search service's tenant is used. */
+  tenantId?: Azure.Core.uuid;
 }
 
 /** Configuration for a knowledge source backed by an MCP (Model Context Protocol) server. */
@@ -5168,7 +5478,12 @@ model McpServerTool {
   outputParsing?: McpServerOutputParsing;
 
   /** Controls how the parsed results from this tool are integrated into the final result set. Defaults to 'reranked' when not specified. */
+  @removed(Versions.v2026_08_01_preview)
   inclusionMode?: McpServerToolInclusionMode;
+
+  /** Controls whether the parsed results from this tool are reranked. Defaults to 'rerank' when not specified. */
+  @added(Versions.v2026_08_01_preview)
+  resultsProcessing?: KnowledgeSourceResultsProcessing;
 
   /** Optional post-parsing token cap for this tool's output. Must be greater than 0 when specified. */
   maxOutputTokens?: int32;
@@ -5176,6 +5491,7 @@ model McpServerTool {
 
 /** Controls how parsed MCP tool results are integrated into the final result set. */
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_08_01_preview)
 union McpServerToolInclusionMode {
   string,
 
@@ -5321,6 +5637,13 @@ model ListKnowledgeSourcesResult {
   /** The knowledge sources in the service. */
   @pageItems
   value: KnowledgeSource[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_08_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** Resources created by the knowledge source. Keys represent resource types (e.g., 'datasource', 'indexer', 'skillset', 'index') and values represent resource names. */
@@ -5415,6 +5738,11 @@ model SearchServiceLimits {
   /** The maximum cumulative indexer runtime in seconds allowed for the service. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maxCumulativeIndexerRuntimeSeconds?: int64 | null;
+
+  /** The maximum vector index size (vector memory quota) allowed per index in bytes. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_08_01_preview)
+  maxVectorIndexSizePerIndexInBytes?: int64 | null;
 }
 
 /** Represents service-level indexer runtime counters. */
@@ -6503,6 +6831,7 @@ model AIServicesAccountKey extends CognitiveServicesAccount {
   key: string;
 
   /** The subdomain/Azure AI Services endpoint url for the corresponding AI Service. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Pre-existing API contract and shipped name with url"
   subdomainUrl: string;
 
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */

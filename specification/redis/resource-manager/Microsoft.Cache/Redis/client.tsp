@@ -63,12 +63,10 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
   "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
   "java,javascript"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility for C# SDK"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility for C# SDK"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
@@ -201,6 +199,33 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
 );
 @@scope(Operations.list, "!csharp");
 @@clientName(RedisResource, "Redis", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  RedisResource,
+  "resource-name-constraint",
+  #{
+    minLength: 1,
+    maxLength: 63,
+    pattern: "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$",
+  },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  RedisFirewallRule,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 256, pattern: "^[a-zA-Z0-9]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+@@clientOption(
+  RedisResource,
+  "resource-rbac-roles",
+  #{ RedisCacheContributor: "e0f68234-74aa-48ed-b826-c38b57376e17" },
+  "csharp"
+);
 @@clientName(
   Azure.ResourceManager.CommonTypes.PrivateLinkResource,
   "RedisPrivateLinkResource",

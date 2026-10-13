@@ -5,6 +5,7 @@ using Microsoft.Network;
 
 @@clientName(Microsoft.Network, "PrivateDnsManagementClient", "javascript");
 @@clientName(Microsoft.Network, "PrivateDnsManagementClient", "java");
+@@clientName(Microsoft.Network, "PrivateDnsManagementClient", "python");
 
 // Add .NET SDK config
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Customize generated C# resource names for expanded Private DNS record-set resources."
@@ -111,6 +112,11 @@ using Microsoft.Network;
   "csharp"
 );
 @@alternateType(RecordSet.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Azure.ResourceManager.ProxyResource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(ARecord.ipv4Address, Azure.Core.ipV4Address, "csharp");
 @@alternateType(AaaaRecord.ipv6Address, Azure.Core.ipV6Address, "csharp");
 @@alternateType(

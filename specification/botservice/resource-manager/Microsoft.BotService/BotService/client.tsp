@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Microsoft.BotService {
+  @@clientName(Microsoft.BotService, "AzureBotServiceMgmtClient", "python");
   @@scope(Operations.list, "!csharp");
   @@clientName(AlexaChannelProperties.urlFragment, "UriFragment", "csharp");
   @@alternateType(AlexaChannelProperties.serviceEndpointUri, url, "csharp");
@@ -280,6 +281,38 @@ namespace Microsoft.BotService {
     "GetBotServiceQnAMakerEndpointKey",
     "csharp"
   );
+  @@clientName(Omnichannel, "Dynamics365OmnichannelChannel", "csharp");
+  @@clientName(ConnectionSetting, "BotConnectionSetting", "csharp");
+  @@clientName(
+    PrivateLinkResource,
+    "BotServicePrivateLinkResourceData",
+    "csharp"
+  );
+  @@usage(PrivateLinkResource, Usage.input | Usage.output, "csharp");
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+  @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+    PrivateLinkResource.properties
+  );
+
+  @@clientName(
+    NetworkSecurityPerimeterConfiguration,
+    "BotServiceNetworkSecurityPerimeterConfiguration",
+    "csharp"
+  );
+
+  @@clientName(
+    ListChannelWithKeysResponse,
+    "BotChannelGetWithKeysResult",
+    "csharp"
+  );
+  // TODO: Remove this hierarchyBuilding once https://github.com/Azure/azure-sdk-for-net/issues/60923 is resolved
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# back-compat"
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    ListChannelWithKeysResponse,
+    Azure.ResourceManager.CommonTypes.TrackedResource,
+    "csharp"
+  );
+  @@usage(ListChannelWithKeysResponse, Usage.input | Usage.output, "csharp");
 
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
   @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
@@ -300,130 +333,6 @@ namespace Microsoft.BotService {
   // previously published C# SDK exposed. They do not affect the service contract
   // or swagger output.
   // =============================================================================
-
-  /**
-   * Bot resource definition
-   */
-  model BotReplacement is Azure.ResourceManager.TrackedResource<BotProperties> {
-    ...ResourceNameParameter<
-      Resource = Bot,
-      KeyName = "resourceName",
-      SegmentName = "botServices",
-      NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-    >;
-    ...OmitProperties<
-      Bot,
-      "location" | "tags" | "properties" | "id" | "name" | "type"
-    >;
-  }
-
-  @@alternateType(Bot, BotReplacement, "csharp");
-  @@clientName(Bot, "BotTemp", "csharp");
-  @@clientName(BotReplacement, "Bot", "csharp");
-
-  /**
-   * Bot channel resource definition
-   */
-  model BotChannelReplacement
-    is Azure.ResourceManager.TrackedResource<Channel> {
-    ...ResourceNameParameter<
-      Resource = BotChannel,
-      KeyName = "channelName",
-      SegmentName = "channels",
-      NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-    >;
-    ...OmitProperties<
-      BotChannel,
-      "location" | "tags" | "properties" | "name" | "id" | "type"
-    >;
-  }
-
-  @@alternateType(BotChannel, BotChannelReplacement, "csharp");
-  @@clientName(BotChannel, "BotChannelTemp", "csharp");
-  @@clientName(BotChannelReplacement, "BotChannel", "csharp");
-
-  /**
-   * Connection setting resource definition
-   */
-  model ConnectionSettingReplacement
-    is Azure.ResourceManager.TrackedResource<ConnectionSettingProperties> {
-    ...ResourceNameParameter<
-      Resource = ConnectionSetting,
-      KeyName = "connectionName",
-      SegmentName = "connections",
-      NamePattern = "^[a-zA-Z0-9][\\sa-zA-Z0-9_.-]*$"
-    >;
-    ...OmitProperties<
-      ConnectionSetting,
-      "location" | "tags " | "properties" | "id" | "name" | "type"
-    >;
-  }
-
-  @@alternateType(ConnectionSetting, ConnectionSettingReplacement, "csharp");
-  @@clientName(ConnectionSetting, "ConnectionSettingTemp", "csharp");
-  @@clientName(ConnectionSettingReplacement, "BotConnectionSetting", "csharp");
-
-  /**
-   * The ARM channel of list channel with keys operation response
-   */
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C# back-compat"
-  model ListChannelWithKeysResponseReplacement
-    extends Azure.ResourceManager.CommonTypes.TrackedResource {
-    ...OmitProperties<
-      ListChannelWithKeysResponse,
-      "location" | "tags" | "name" | "id" | "type"
-    >;
-  }
-
-  @@alternateType(
-    ListChannelWithKeysResponse,
-    ListChannelWithKeysResponseReplacement,
-    "csharp"
-  );
-  @@clientName(
-    ListChannelWithKeysResponseReplacement,
-    "BotChannelGetWithKeysResult",
-    "csharp"
-  );
-  @@usage(
-    ListChannelWithKeysResponseReplacement,
-    Usage.input | Usage.output,
-    "csharp"
-  );
-
-  /**
-   * A private link resource
-   */
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C# back-compat"
-  model PrivateLinkResourceReplacement
-    extends Azure.ResourceManager.CommonTypes.Resource {
-    /**
-     * Resource properties.
-     */
-    properties?: PrivateLinkResourceProperties;
-  }
-
-  @@alternateType(
-    PrivateLinkResource,
-    PrivateLinkResourceReplacement,
-    "csharp"
-  );
-  @@clientName(
-    PrivateLinkResourceReplacement,
-    "BotServicePrivateLinkResourceData",
-    "csharp"
-  );
-  @@usage(PrivateLinkResourceReplacement, Usage.input | Usage.output, "csharp");
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-  @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-    PrivateLinkResourceReplacement.properties
-  );
-
-  @@clientName(
-    NetworkSecurityPerimeterConfiguration,
-    "BotServiceNetworkSecurityPerimeterConfiguration",
-    "csharp"
-  );
 
   // Suppress OperationResults_Get LRO polling operation from C# SDK — it's an
   // infrastructure operation, not user-facing.
@@ -452,7 +361,9 @@ namespace Microsoft.BotService {
 // not pick them up (which would add them as new swagger paths).
 namespace Customizations {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   op BotChannelsUpdate(
     ...ApiVersionParameter,
@@ -498,14 +409,19 @@ namespace Customizations {
   @@override(BotChannels.update, BotChannelsUpdate, "javascript");
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   op BotsUpdate(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
     ...Azure.ResourceManager.Legacy.Provider,
+
+    @path
     resourceName: string,
+
     properties?: Microsoft.BotService.BotProperties,
 
     @visibility(Lifecycle.Read)

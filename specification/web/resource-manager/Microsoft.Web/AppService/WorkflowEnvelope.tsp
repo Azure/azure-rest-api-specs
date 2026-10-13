@@ -68,7 +68,8 @@ interface WorkflowEnvelopeOps
         @maxLength(63)
         @minLength(3)
         workflowName: string,
-      }
+      },
+      ResourceName = "SiteSlotWorkflow"
     > {}
 
 @tag("WebApps")
@@ -118,7 +119,8 @@ interface WorkflowEnvelopeOperationGroupOps
         @maxLength(63)
         @minLength(3)
         workflowName: string,
-      }
+      },
+      ResourceName = "SiteWorkflow"
     > {}
 
 @tag("WebApps")

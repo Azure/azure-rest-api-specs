@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Workspace)
-model FeaturesetContainer
-  is Azure.ResourceManager.ProxyResource<FeaturesetContainerProperties, false> {
+model FeaturesetContainer is Azure.ResourceManager.ProxyResource<
+  FeaturesetContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = FeaturesetContainer,
     KeyName = "name",

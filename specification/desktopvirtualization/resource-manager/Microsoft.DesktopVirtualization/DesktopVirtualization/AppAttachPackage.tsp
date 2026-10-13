@@ -15,8 +15,10 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for App Attach Package properties.
  */
-model AppAttachPackage
-  is Azure.ResourceManager.TrackedResource<AppAttachPackageProperties, false> {
+model AppAttachPackage is Azure.ResourceManager.TrackedResource<
+  AppAttachPackageProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = AppAttachPackage,
     KeyName = "appAttachPackageName",

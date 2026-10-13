@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.Batch;
 
 @@clientName(Microsoft.Batch, "BatchManagementClient", "javascript, python");
@@ -598,7 +599,6 @@ using Microsoft.Batch;
   "BatchAccountRegenerateKeyContent",
   "csharp"
 );
-@@clientName(BatchAccount, "BatchAccountRenamed", "csharp");
 @@clientName(
   LocationOperationGroup.checkNameAvailability,
   "CheckBatchNameAvailability",
@@ -626,11 +626,6 @@ using Microsoft.Batch;
   "csharp"
 );
 @@alternateType(
-  Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
-  Azure.ResourceManager.Models.SubResource[],
-  "csharp"
-);
-@@alternateType(
   BatchAccountUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
@@ -646,10 +641,14 @@ using Microsoft.Batch;
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(BatchAccount, BatchAccountData, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  BatchAccountData.properties,
+@@usage(BatchAccount, Usage.input, "csharp");
+// TODO: Replace this legacy hierarchy override with a custom base type after
+// https://github.com/Azure/azure-sdk-for-net/issues/62140 is fixed. Narrowing the
+// generated base through custom code currently drops the Location and Tags properties.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the BatchAccount base type back to ResourceData for backward compatibility"
+@@hierarchyBuilding(
+  BatchAccount,
+  Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 @@alternateType(
@@ -658,32 +657,7 @@ using Microsoft.Batch;
   "csharp"
 );
 
-// added to solve the problem that the c# resource class can inherit the `resource data` class
 namespace Microsoft.Batch {
-  /**
-   * Contains information about an Azure Batch account.
-   */
-  @usage(Usage.input, "csharp")
-  @clientName("BatchAccount", "csharp")
-  model BatchAccountData
-    is Azure.ResourceManager.ProxyResource<BatchAccountProperties> {
-    ...Azure.ResourceManager.ResourceNameParameter<
-      Resource = BatchAccount,
-      KeyName = "accountName",
-      SegmentName = "batchAccounts",
-      NamePattern = "^[a-zA-Z0-9]+$"
-    >;
-    ...OmitProperties<
-      BatchAccount,
-      "id" | "name" | "type" | "properties" | "location"
-    >;
-
-    /** The geo-location where the resource lives */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @visibility(Lifecycle.Read, Lifecycle.Create)
-    location?: Azure.Core.azureLocation;
-  }
-
   /**
    * The provisioned state of the resource
    */
@@ -730,14 +704,5 @@ namespace Microsoft.Batch {
   union BatchAccountCertificateProvisioningState {
     CertificateProvisioningState,
     string,
-  }
-}
-
-// we add this model in this namespace in order to replace some models with this model via alternateType decorator
-namespace Azure.ResourceManager.Models {
-  /** represents a reference to an existing resource by its id */
-  model SubResource {
-    /** the id */
-    id?: Azure.Core.armResourceIdentifier;
   }
 }

@@ -58,7 +58,8 @@ interface AnalysisDefinitionOps
         @segment("analyses")
         @key
         analysisName: string,
-      }
+      },
+      ResourceName = "SiteDiagnosticAnalysis"
     > {}
 
 @tag("Diagnostics")
@@ -148,7 +149,8 @@ interface AnalysisDefinitionOperationGroupOps
         @segment("analyses")
         @key
         analysisName: string,
-      }
+      },
+      ResourceName = "SiteSlotDiagnosticAnalysis"
     > {}
 
 @tag("Diagnostics")

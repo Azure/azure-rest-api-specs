@@ -4,12 +4,12 @@ parameters:
 
 emit:
   - "@azure-tools/typespec-autorest"
-    # - "@azure-tools/typespec-csharp",
     # - "@azure-tools/typespec-python",
     # - "@azure-tools/typespec-ts"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 options:
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
@@ -47,11 +47,6 @@ options:
         final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
       copyModelTo:
         final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
-    flavor: azure
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "Azure.AI.DocumentIntelligence"
-    model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
     title: DocumentIntelligence

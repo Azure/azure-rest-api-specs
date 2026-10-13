@@ -54,7 +54,8 @@ interface SiteOps
         @segment("sites")
         @key
         name: string,
-      }
+      },
+      ResourceName = "WebSite"
     > {}
 
 @armResourceOperations
@@ -96,7 +97,8 @@ interface WorkflowRegenerateAccessKeyOps
         @segment("workflows")
         @key
         workflowName: string,
-      }
+      },
+      ResourceName = "WorkflowAccessKey"
     > {}
 
 @tag("WebApps")
@@ -407,7 +409,6 @@ interface Sites {
    * Description for Gets the Git/FTP publishing credentials of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the Git/FTP publishing credentials of an app.")
   @action("config/publishingcredentials/list")
   listPublishingCredentials is Azure.ResourceManager.ArmResourceActionAsyncBase<
@@ -453,16 +454,15 @@ interface Sites {
   getWebSiteContainerLogs is SiteOps.ActionSync<
     Site,
     void,
+    | {
+        @header("Content-Type")
+        contentType: "application/octet-stream";
 
-      | {
-          @header("Content-Type")
-          contentType: "application/octet-stream";
-
-          @doc("Receipt body in COSE format")
-          @bodyRoot
-          body: bytes;
-        }
-      | NoContentResponse,
+        @doc("Receipt body in COSE format")
+        @bodyRoot
+        body: bytes;
+      }
+    | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -475,16 +475,15 @@ interface Sites {
   getContainerLogsZip is SiteOps.ActionSync<
     Site,
     void,
+    | {
+        @header("Content-Type")
+        contentType: "application/zip";
 
-      | {
-          @header("Content-Type")
-          contentType: "application/zip";
-
-          @doc("Receipt body in COSE format")
-          @bodyRoot
-          body: bytes;
-        }
-      | NoContentResponse,
+        @doc("Receipt body in COSE format")
+        @bodyRoot
+        body: bytes;
+      }
+    | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -835,6 +834,7 @@ interface Sites {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -850,13 +850,12 @@ interface Sites {
   startWebSiteNetworkTraceOperation is SiteOps.ActionSync<
     Site,
     void,
-
-      | ArmResponse<NetworkTrace[]>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
-          @bodyRoot
-          @identifiers(#[])
-          _?: NetworkTrace[];
-        }),
+    | ArmResponse<NetworkTrace[]>
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+        @bodyRoot
+        @identifiers(#[])
+        _?: NetworkTrace[];
+      }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -873,6 +872,7 @@ interface Sites {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -888,11 +888,10 @@ interface Sites {
   stopWebSiteNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-
-      | {
-          @body body: void;
-        }
-      | NoContentResponse,
+    | {
+        @body body: void;
+      }
+    | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -972,11 +971,10 @@ interface Sites {
   generateNewSitePublishingPassword is SiteOps.ActionSync<
     Site,
     void,
-
-      | {
-          @body body: void;
-        }
-      | NoContentResponse,
+    | {
+        @body body: void;
+      }
+    | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1228,14 +1226,13 @@ interface Sites {
   startNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-
-      | ArmResponse<NetworkTrace[]>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot
-          @identifiers(#[])
-          _?: NetworkTrace[];
-        }),
+    | ArmResponse<NetworkTrace[]>
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
+        Azure.Core.Foundations.RetryAfterHeader> & {
+        @bodyRoot
+        @identifiers(#[])
+        _?: NetworkTrace[];
+      }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -1252,6 +1249,7 @@ interface Sites {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -1280,11 +1278,10 @@ interface Sites {
   stopNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-
-      | {
-          @body body: void;
-        }
-      | NoContentResponse,
+    | {
+        @body body: void;
+      }
+    | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1503,7 +1500,8 @@ interface WebAppOps
         @segment("slots")
         @key
         slot: string,
-      }
+      },
+      ResourceName = "WebSiteSlot"
     > {}
 
 alias ActionParameterSlotWebAppOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -1871,7 +1869,6 @@ interface WebApps {
    * Description for Gets the Git/FTP publishing credentials of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the Git/FTP publishing credentials of an app.")
   @action("config/publishingcredentials/list")
   listPublishingCredentialsSlot is Azure.ResourceManager.ArmResourceActionAsyncBase<
@@ -1926,16 +1923,15 @@ interface WebApps {
   getWebSiteContainerLogsSlot is WebAppOps.ActionSync<
     Site,
     void,
+    | {
+        @header("Content-Type")
+        contentType: "application/octet-stream";
 
-      | {
-          @header("Content-Type")
-          contentType: "application/octet-stream";
-
-          @doc("Receipt body in COSE format")
-          @bodyRoot
-          body: bytes;
-        }
-      | NoContentResponse,
+        @doc("Receipt body in COSE format")
+        @bodyRoot
+        body: bytes;
+      }
+    | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1949,16 +1945,15 @@ interface WebApps {
   getContainerLogsZipSlot is WebAppOps.ActionSync<
     Site,
     void,
+    | {
+        @header("Content-Type")
+        contentType: "application/zip";
 
-      | {
-          @header("Content-Type")
-          contentType: "application/zip";
-
-          @doc("Receipt body in COSE format")
-          @bodyRoot
-          body: bytes;
-        }
-      | NoContentResponse,
+        @doc("Receipt body in COSE format")
+        @bodyRoot
+        body: bytes;
+      }
+    | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2197,6 +2192,7 @@ interface WebApps {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -2212,13 +2208,12 @@ interface WebApps {
   startWebSiteNetworkTraceOperationSlot is WebAppOps.ActionSync<
     Site,
     void,
-
-      | ArmResponse<NetworkTrace[]>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
-          @bodyRoot
-          @identifiers(#[])
-          _?: NetworkTrace[];
-        }),
+    | ArmResponse<NetworkTrace[]>
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+        @bodyRoot
+        @identifiers(#[])
+        _?: NetworkTrace[];
+      }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -2235,6 +2230,7 @@ interface WebApps {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -2250,11 +2246,10 @@ interface WebApps {
   stopWebSiteNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-
-      | {
-          @body body: void;
-        }
-      | NoContentResponse,
+    | {
+        @body body: void;
+      }
+    | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2331,11 +2326,10 @@ interface WebApps {
   generateNewSitePublishingPasswordSlot is WebAppOps.ActionSync<
     Site,
     void,
-
-      | {
-          @body body: void;
-        }
-      | NoContentResponse,
+    | {
+        @body body: void;
+      }
+    | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2591,14 +2585,13 @@ interface WebApps {
   startNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-
-      | ArmResponse<NetworkTrace[]>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot
-          @identifiers(#[])
-          _?: NetworkTrace[];
-        }),
+    | ArmResponse<NetworkTrace[]>
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
+        Azure.Core.Foundations.RetryAfterHeader> & {
+        @bodyRoot
+        @identifiers(#[])
+        _?: NetworkTrace[];
+      }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -2615,6 +2608,7 @@ interface WebApps {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -2644,11 +2638,10 @@ interface WebApps {
   stopNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-
-      | {
-          @body body: void;
-        }
-      | NoContentResponse,
+    | {
+        @body body: void;
+      }
+    | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 

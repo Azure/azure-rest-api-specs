@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 // FIXME: EntityQueryTemplate has no properties property
@@ -58,3 +59,6 @@ interface EntityQueryTemplates {
 }
 
 @@doc(EntityQueryTemplate.name, "entity query template ID");
+
+@@added(EntityQueryTemplate, Versions.v2025_10_01_preview);
+@@added(EntityQueryTemplates, Versions.v2025_10_01_preview);

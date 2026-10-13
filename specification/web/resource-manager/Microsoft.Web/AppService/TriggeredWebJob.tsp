@@ -58,7 +58,8 @@ interface TriggeredWebJobOps
         @segment("triggeredwebjobs")
         @key
         webJobName: string,
-      }
+      },
+      ResourceName = "WebSiteSlotTriggeredWebJob"
     > {}
 
 @tag("WebApps")
@@ -102,11 +103,10 @@ interface TriggeredWebJobs {
   runTriggeredWebJobSlot is TriggeredWebJobOps.ActionSync<
     TriggeredWebJob,
     void,
-
-      | {
-          @body body: void;
-        }
-      | ArmNotFoundResponse,
+    | {
+        @body body: void;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
@@ -131,7 +131,8 @@ interface TriggeredWebJobOperationGroupOps
         @segment("triggeredwebjobs")
         @key
         webJobName: string,
-      }
+      },
+      ResourceName = "WebSiteTriggeredwebJob"
     > {}
 
 @tag("WebApps")
@@ -175,11 +176,10 @@ interface TriggeredWebJobOperationGroup {
   runTriggeredWebJob is TriggeredWebJobOperationGroupOps.ActionSync<
     TriggeredWebJob,
     void,
-
-      | {
-          @body body: void;
-        }
-      | ArmNotFoundResponse,
+    | {
+        @body body: void;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }

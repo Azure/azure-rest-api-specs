@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Registry)
-model CodeContainer
-  is Azure.ResourceManager.ProxyResource<CodeContainerProperties, false> {
+model CodeContainer is Azure.ResourceManager.ProxyResource<
+  CodeContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CodeContainer,
     KeyName = "codeName",

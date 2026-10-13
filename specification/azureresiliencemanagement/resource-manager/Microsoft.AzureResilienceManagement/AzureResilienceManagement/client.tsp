@@ -19,6 +19,7 @@ using Azure.ResourceManager;
 
 // CSharp: AZC0030 — *Request -> *Content
 @@clientName(DrillRunFailoverRequest, "DrillRunFailoverContent", "csharp");
+@@clientName(DrillRunReprotectRequest, "DrillRunReprotectContent", "csharp");
 @@clientName(DrillEndRequest, "DrillEndContent", "csharp");
 @@clientName(FailoverRequest, "ResilienceManagementFailoverContent", "csharp");
 @@clientName(
@@ -63,6 +64,11 @@ using Azure.ResourceManager;
   "DrillRunTestFailoverContent",
   "csharp"
 );
+@@clientName(
+  ListReportDownloadUrlRequest,
+  "ListReportDownloadUrlContent",
+  "csharp"
+);
 
 // CSharp: AZC0030 — *Response -> *Result
 @@clientName(
@@ -78,6 +84,18 @@ using Azure.ResourceManager;
 @@clientName(
   UpdateRecoveryResourcesResponse,
   "UpdateRecoveryResourcesResult",
+  "csharp"
+);
+@@clientName(
+  ListReportDownloadUrlResponse,
+  "ListReportDownloadUrlResult",
+  "csharp"
+);
+
+// CSharp: AZC0030 — *Url -> *Uri
+@@clientName(
+  ListReportDownloadUrlResponse.downloadUrl,
+  "downloadUri",
   "csharp"
 );
 

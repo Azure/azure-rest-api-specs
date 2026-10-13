@@ -2,8 +2,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using Azure.ResourceManager.Foundations;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Devices;
@@ -43,6 +45,7 @@ model Operation {
   /**
    * The display information for the operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   display?: {
     /**
      * Service provider: Microsoft Devices.
@@ -376,7 +379,18 @@ model IotDpsPropertiesDescription {
   /**
    * The Device Registry namespace that is linked to the provisioning service.
    */
+  @removed(Versions.v2026_06_01_preview)
   deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
+
+  /**
+   * The Device Registry namespaces linked to the provisioning service.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_08_31)
+  @maxItems(1)
+  @identifiers(#["namespaceUuid"])
+  deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
 
   /**
    * Allocation policy to be used by this provisioning service.
@@ -417,6 +431,12 @@ model IotDpsPropertiesDescription {
    * Portal endpoint to enable CORS for this provisioning service.
    */
   portalOperationsHostName?: string;
+
+  /**
+   * Disables all authentication methods other than Azure RBAC.
+   */
+  @added(Versions.v2026_06_01_preview)
+  disableLocalAuth?: boolean = false;
 }
 
 /**
@@ -578,6 +598,34 @@ model DeviceRegistryNamespaceDescription {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
     }
   ]>;
+
+  /**
+   * Unique identifier of the linked Device Registry namespace.
+   */
+  @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_08_31)
+  namespaceUuid?: string;
+
+  /**
+   * The data plane address of the linked Azure Device Registry namespace.
+   */
+  @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_08_31)
+  dataAddress?: string;
+
+  /**
+   * Azure location of the linked Device Registry namespace.
+   */
+  @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_08_31)
+  location?: Azure.Core.azureLocation;
+
+  /**
+   * The linking state of this namespace.
+   */
+  @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_08_31)
+  linkingState?: LinkingState;
 }
 
 /**
@@ -944,4 +992,33 @@ model CertificateBodyDescription {
    * True indicates that the certificate will be created in verified state and proof of possession will not be required.
    */
   isVerified?: boolean;
+}
+
+/**
+ * The state of ADR linking for a provisioning service.
+ */
+@added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_08_31)
+union LinkingState {
+  string,
+
+  /**
+   * The provisioning service is not linked to a Device Registry namespace.
+   */
+  NotLinked: "NotLinked",
+
+  /**
+   * The linking process is in progress.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * The linking process succeeded.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The linked Device Registry namespace no longer exists.
+   */
+  Orphaned: "Orphaned",
 }

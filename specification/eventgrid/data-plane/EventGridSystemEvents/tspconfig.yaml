@@ -8,6 +8,7 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}"
@@ -26,12 +27,6 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Messaging.EventGrid.SystemEvents
     model-namespace: false
-    api-version: "2018-01-01"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    model-namespace: false
-    namespace: Azure.Messaging.EventGrid.SystemEvents
-    flavor: azure
     api-version: "2018-01-01"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true

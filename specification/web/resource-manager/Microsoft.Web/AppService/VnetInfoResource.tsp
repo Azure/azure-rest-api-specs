@@ -51,7 +51,8 @@ interface VnetInfoResourceOps
         @segment("virtualNetworkConnections")
         @key
         vnetName: string,
-      }
+      },
+      ResourceName = "AppServicePlanVirtualNetworkConnection"
     > {}
 
 @tag("AppServicePlans")
@@ -104,7 +105,8 @@ interface VnetInfoResourceOperationGroupOps
         @segment("virtualNetworkConnections")
         @key
         vnetName: string,
-      }
+      },
+      ResourceName = "SiteSlotVirtualNetworkConnection"
     > {}
 
 @tag("WebApps")
@@ -183,7 +185,8 @@ interface VnetConnectionOperationGroupOps
         @segment("virtualNetworkConnections")
         @key
         vnetName: string,
-      }
+      },
+      ResourceName = "SiteVirtualNetworkConnection"
     > {}
 
 @tag("WebApps")

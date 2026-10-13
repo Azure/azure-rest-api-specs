@@ -1,0 +1,130 @@
+{
+  "title": "SignalDefinitions_ListByHealthModel",
+  "operationId": "SignalDefinitions_ListByHealthModel",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "displayName": "SQL CPU utilization",
+              "signalKind": "AzureResourceMetric",
+              "refreshInterval": "PT1M",
+              "tags": {
+                "environment": "production",
+                "team": "online-store"
+              },
+              "dataUnit": "Percent",
+              "metricNamespace": "Microsoft.Sql/servers/databases",
+              "metricName": "cpu_percent",
+              "timeGrain": "PT5M",
+              "aggregationType": "Average",
+              "evaluationRules": {
+                "degradedRule": {
+                  "operator": "GreaterThan",
+                  "threshold": 70
+                },
+                "unhealthyRule": {
+                  "operator": "Dynamic",
+                  "sensitivity": "Medium",
+                  "lookBackWindow": "PT1H"
+                }
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/signalDefinitions/sql-cpu-percent",
+            "name": "sql-cpu-percent",
+            "type": "Microsoft.CloudHealth/healthmodels/signalDefinitions",
+            "systemData": {
+              "createdBy": "admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-05-04T08:15:00.000Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-05-04T09:30:00.000Z"
+            }
+          },
+          {
+            "properties": {
+              "displayName": "Failed request rate",
+              "signalKind": "LogAnalyticsQuery",
+              "refreshInterval": "PT5M",
+              "tags": {
+                "environment": "production",
+                "team": "online-store"
+              },
+              "dataUnit": "Percent",
+              "queryText": "requests | where timestamp > ago(5m) | summarize failureRate = 100.0 * countif(success == false) / count()",
+              "timeGrain": "PT5M",
+              "valueColumnName": "failureRate",
+              "evaluationRules": {
+                "degradedRule": {
+                  "operator": "GreaterThan",
+                  "threshold": 1
+                },
+                "unhealthyRule": {
+                  "operator": "GreaterThan",
+                  "threshold": 5
+                }
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/signalDefinitions/app-failed-requests",
+            "name": "app-failed-requests",
+            "type": "Microsoft.CloudHealth/healthmodels/signalDefinitions",
+            "systemData": {
+              "createdBy": "admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-05-04T08:15:00.000Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-05-04T09:30:00.000Z"
+            }
+          },
+          {
+            "properties": {
+              "displayName": "Pod CPU utilization",
+              "signalKind": "PrometheusMetricsQuery",
+              "refreshInterval": "PT1M",
+              "tags": {
+                "environment": "production",
+                "team": "online-store"
+              },
+              "dataUnit": "Percent",
+              "queryText": "sum(rate(container_cpu_usage_seconds_total{namespace=\"online-store\", pod=~\"orders-api-.*\"}[5m])) * 100",
+              "timeGrain": "PT5M",
+              "evaluationRules": {
+                "degradedRule": {
+                  "operator": "GreaterThan",
+                  "threshold": 70
+                },
+                "unhealthyRule": {
+                  "operator": "GreaterThan",
+                  "threshold": 90
+                }
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/signalDefinitions/pod-cpu-usage",
+            "name": "pod-cpu-usage",
+            "type": "Microsoft.CloudHealth/healthmodels/signalDefinitions",
+            "systemData": {
+              "createdBy": "admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-05-04T08:15:00.000Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-05-04T09:30:00.000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

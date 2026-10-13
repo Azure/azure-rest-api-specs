@@ -13,8 +13,10 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MachineLearningServices;
 
 @parentResource(BatchEndpoint)
-model BatchDeployment
-  is Azure.ResourceManager.TrackedResource<BatchDeploymentProperties, false> {
+model BatchDeployment is Azure.ResourceManager.TrackedResource<
+  BatchDeploymentProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = BatchDeployment,
     KeyName = "deploymentName",

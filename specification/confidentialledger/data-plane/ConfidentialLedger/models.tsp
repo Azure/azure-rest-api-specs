@@ -435,6 +435,39 @@ model LedgerWriteResult {
    * The collection identifier of the ledger entry.
    */
   collectionId: string;
+
+  /**
+   * The receipt certifying the committed transaction.
+   */
+  @added(Versions.v2026_07_31_preview)
+  receipt?: ReceiptContents;
+
+  /**
+   * State of the write transaction.
+   */
+  @added(Versions.v2026_07_31_preview)
+  state: TransactionState;
+
+  /**
+   * The list of application claims.
+   */
+  @added(Versions.v2026_07_31_preview)
+  applicationClaims?: ApplicationClaim[];
+}
+
+/**
+ * The transaction was rolled back before it could be committed.
+ */
+@added(Versions.v2026_07_31_preview)
+@error
+model TransactionRolledBackErrorResponse {
+  /**
+   * The HTTP status code.
+   */
+  @statusCode
+  statusCode: 503;
+
+  ...ConfidentialLedgerCommon.ConfidentialLedgerError;
 }
 
 /**

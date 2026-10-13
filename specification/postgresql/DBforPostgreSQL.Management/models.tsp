@@ -2037,32 +2037,38 @@ model MigrationProperties {
   /**
    * Metadata of source database server.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   sourceDbServerMetadata?: DbServerMetadata;
 
   /**
    * Metadata of target database server.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   targetDbServerMetadata?: DbServerMetadata;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Identifier of the source database server resource, when 'sourceType' is 'PostgreSQLSingleServer'. For other source types this must be set to ipaddress:port@username or hostname:port@username.")
   sourceDbServerResourceId?: string;
 
   /**
    * Fully qualified domain name (FQDN) or IP address of the source server. This property is optional. When provided, the migration service will always use it to connect to the source server.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   sourceDbServerFullyQualifiedDomainName?: string;
 
   /**
    * Identifier of the target database server resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   targetDbServerResourceId?: string;
 
   /**
    * Fully qualified domain name (FQDN) or IP address of the target server. This property is optional. When provided, the migration service will always use it to connect to the target server.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   targetDbServerFullyQualifiedDomainName?: string;
 
   /**
@@ -2081,6 +2087,7 @@ model MigrationProperties {
   /**
    * Indicates whether to setup logical replication on source server, if needed.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   setupLogicalReplicationOnSourceDbIfNeeded?: LogicalReplicationOnSourceServer;
 
   /**
@@ -2170,6 +2177,7 @@ model MigrationSubstateDetails {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   dbDetails?: Record<DatabaseMigrationState>;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationDetails?: ValidationDetails;
@@ -2178,6 +2186,7 @@ model MigrationSubstateDetails {
 /**
  * Migration state of a database.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model DatabaseMigrationState {
   /**
    * Name of database.
@@ -2292,6 +2301,7 @@ model ValidationDetails {
   /**
    * Details of server level validations.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @identifiers(#["databaseName"])
   dbLevelValidationDetails?: DbLevelValidationStatus[];
 }
@@ -2335,6 +2345,7 @@ model ValidationMessage {
 /**
  * Validation status summary for a database.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model DbLevelValidationStatus {
   /**
    * Name of database.
@@ -2464,17 +2475,20 @@ model MigrationResourceForPatch {
  * Migration properties.
  */
 model MigrationPropertiesForPatch {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("Identifier of the source database server resource, when 'sourceType' is 'PostgreSQLSingleServer'. For other source types this must be set to ipaddress:port@username or hostname:port@username.")
   sourceDbServerResourceId?: string;
 
   /**
    * Fully qualified domain name (FQDN) or IP address of the source server. This property is optional. When provided, the migration service will always use it to connect to the source server.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   sourceDbServerFullyQualifiedDomainName?: string;
 
   /**
    * Fully qualified domain name (FQDN) or IP address of the target server. This property is optional. When provided, the migration service will always use it to connect to the target server.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   targetDbServerFullyQualifiedDomainName?: string;
 
   /**
@@ -2493,6 +2507,7 @@ model MigrationPropertiesForPatch {
   /**
    * Indicates whether to setup logical replication on source server, if needed.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   setupLogicalReplicationOnSourceDbIfNeeded?: LogicalReplicationOnSourceServer;
 
   /**
@@ -3425,6 +3440,17 @@ model ServerPropertiesForPatch {
   createMode?: CreateModeForPatch;
 
   /**
+   * Identifier of the server to be used as the source of the new server.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Update)
+  sourceServerResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.DBforPostgreSQL/flexibleServers";
+    }
+  ]>;
+
+  /**
    * Role of the server in a replication set.
    */
   replicationRole?: ReplicationRole;
@@ -3845,6 +3871,7 @@ scalar PrivateDnsZoneSuffix extends string;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model CustomErrorResponse {
   @body
@@ -3904,6 +3931,7 @@ union NetworkMigrationState {
 /**
  * Status of a network migration operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model MigrateNetworkStatus {
   /**
    * Identifier of the subscription.

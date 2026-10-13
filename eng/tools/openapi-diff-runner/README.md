@@ -16,10 +16,10 @@ The OpenAPI Diff Runner is designed to:
 
 ```bash
 # Install dependencies
-npm ci
+pnpm install
 
 # Build the project
-npm run build
+pnpm build
 ```
 
 ## Usage
@@ -28,10 +28,10 @@ npm run build
 
 ```bash
 # Basic usage
-npx openapi-diff-runner --srp <spec-repo-path> --repo <github-repo> --number <pr-number>
+pnpm exec openapi-diff-runner --srp <spec-repo-path> --repo <github-repo> --number <pr-number>
 
 # Example
-npx openapi-diff-runner \
+pnpm exec openapi-diff-runner \
   --srp /path/to/azure-rest-api-specs \
   --repo Azure/azure-rest-api-specs \
   --number 12345 \
@@ -77,7 +77,7 @@ npx openapi-diff-runner \
 ### Prerequisites
 
 - Node.js >= 20.0.0
-- npm
+- pnpm
 - .NET 6
 - Git
 
@@ -85,14 +85,14 @@ npx openapi-diff-runner \
 
 ```bash
 # Build TypeScript files
-npm run build
+pnpm build
 
 # Run tests
-npm test
+pnpm test
 
 # Run tests with coverage
-npm run test:ci
+pnpm test:ci
 
 # Lint code
-npm run prettier
+pnpm prettier
 ```

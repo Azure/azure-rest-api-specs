@@ -16,11 +16,10 @@ namespace Microsoft.Devices;
  * The private endpoint connection of an IotHub
  */
 @parentResource(IotHubDescription)
-model PrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<
-    PrivateEndpointConnectionProperties,
-    false
-  > {
+model PrivateEndpointConnection is Azure.ResourceManager.ProxyResource<
+  PrivateEndpointConnectionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",

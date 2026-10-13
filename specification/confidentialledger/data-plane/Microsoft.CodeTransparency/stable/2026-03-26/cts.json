@@ -589,9 +589,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Response containing the service public keys used to verify receipts.",
             "schema": {
-              "$ref": "#/definitions/JwksDocument"
+              "$ref": "#/definitions/JsonWebKeySet"
             }
           },
           "400": {
@@ -783,95 +783,28 @@
       "type": "object",
       "description": "Response for async entry submission in SCRAPI v09, returns 303 See Other with empty body"
     },
-    "JsonWebKey": {
+    "GetPublicKeysResponse": {
       "type": "object",
-      "description": "rfc7517 JSON Web Key representation adapted from a shared swagger definition in the common types",
+      "description": "Response containing the service public keys used to verify receipts.",
       "properties": {
-        "alg": {
-          "type": "string",
-          "description": "The \"alg\" (algorithm) parameter identifies the algorithm intended for\nuse with the key.  The values used should either be registered in the\nIANA \"JSON Web Signature and Encryption Algorithms\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name."
-        },
-        "crv": {
-          "type": "string",
-          "description": "The \"crv\" (curve) parameter identifies the curve type"
-        },
-        "d": {
-          "type": "string",
-          "description": "RSA private exponent or ECC private key"
-        },
-        "dp": {
-          "type": "string",
-          "description": "RSA Private Key Parameter"
-        },
-        "dq": {
-          "type": "string",
-          "description": "RSA Private Key Parameter"
-        },
-        "e": {
-          "type": "string",
-          "description": "RSA public exponent, in Base64"
-        },
-        "k": {
-          "type": "string",
-          "description": "Symmetric key"
-        },
-        "kid": {
-          "type": "string",
-          "description": "The \"kid\" (key ID) parameter is used to match a specific key.  This\nis used, for instance, to choose among a set of keys within a JWK Set\nduring key rollover.  The structure of the \"kid\" value is\nunspecified.  When \"kid\" values are used within a JWK Set, different\nkeys within the JWK Set SHOULD use distinct \"kid\" values.  (One\nexample in which different keys might use the same \"kid\" value is if\nthey have different \"kty\" (key type) values but are considered to be\nequivalent alternatives by the application using them.)  The \"kid\"\nvalue is a case-sensitive string."
-        },
-        "kty": {
-          "type": "string",
-          "description": "The \"kty\" (key type) parameter identifies the cryptographic algorithm\nfamily used with the key, such as \"RSA\" or \"EC\". \"kty\" values should\neither be registered in the IANA \"JSON Web Key Types\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name.  The \"kty\" value is a case-sensitive string."
-        },
-        "n": {
-          "type": "string",
-          "description": "RSA modulus, in Base64"
-        },
-        "p": {
-          "type": "string",
-          "description": "RSA secret prime"
-        },
-        "q": {
-          "type": "string",
-          "description": "RSA secret prime, with p < q"
-        },
-        "qi": {
-          "type": "string",
-          "description": "RSA Private Key Parameter"
-        },
-        "use": {
-          "type": "string",
-          "description": "Use (\"public key use\") identifies the intended use of\nthe public key. The \"use\" parameter is employed to indicate whether\na public key is used for encrypting data or verifying the signature\non data. Values are commonly \"sig\" (signature) or \"enc\" (encryption)."
-        },
-        "x": {
-          "type": "string",
-          "description": "X coordinate for the Elliptic Curve point"
-        },
-        "x5c": {
-          "type": "array",
-          "description": "The \"x5c\" (X.509 certificate chain) parameter contains a chain of one\nor more PKIX certificates [RFC5280].  The certificate chain is\nrepresented as a JSON array of certificate value strings.  Each\nstring in the array is a base64-encoded (Section 4 of [RFC4648] --\nnot base64url-encoded) DER [ITU.X690.1994] PKIX certificate value.\nThe PKIX certificate containing the key value MUST be the first\ncertificate.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "y": {
-          "type": "string",
-          "description": "Y coordinate for the Elliptic Curve point"
+        "body": {
+          "$ref": "#/definitions/JsonWebKeySet",
+          "description": "The JSON Web Key Set response body."
         }
       },
       "required": [
-        "kty"
+        "body"
       ]
     },
-    "JwksDocument": {
+    "JsonWebKeySet": {
       "type": "object",
-      "description": "A JWKS like document",
+      "description": "A JSON Web Key Set containing service receipt-verification keys.",
       "properties": {
         "keys": {
           "type": "array",
-          "description": "List of public keys used for receipt verification.",
+          "description": "The service public keys used to verify receipts.",
           "items": {
-            "$ref": "#/definitions/JsonWebKey"
+            "$ref": "#/definitions/PublicJsonWebKey"
           }
         }
       },
@@ -896,6 +829,69 @@
     "OperationStatusPending": {
       "type": "object",
       "description": "Pending response if the operation was not complete, mandatory in IETF SCITT draft"
+    },
+    "PublicJsonWebKey": {
+      "type": "object",
+      "description": "A public asymmetric key represented as an RFC 7517 JSON Web Key.",
+      "properties": {
+        "kty": {
+          "type": "string",
+          "description": "The asymmetric key type, such as EC, RSA, or OKP.",
+          "x-ms-client-name": "keyType"
+        },
+        "kid": {
+          "type": "string",
+          "description": "The case-sensitive key ID.",
+          "x-ms-client-name": "keyId"
+        },
+        "alg": {
+          "type": "string",
+          "description": "The algorithm intended for use with the key.",
+          "x-ms-client-name": "algorithm"
+        },
+        "use": {
+          "type": "string",
+          "description": "The intended public-key use, such as signature verification.",
+          "x-ms-client-name": "publicKeyUse"
+        },
+        "crv": {
+          "type": "string",
+          "description": "The named curve for EC or OKP keys.",
+          "x-ms-client-name": "curveName"
+        },
+        "x": {
+          "type": "string",
+          "description": "The base64url-encoded X coordinate for EC keys, or public key for OKP keys.",
+          "x-ms-client-name": "xCoordinate"
+        },
+        "y": {
+          "type": "string",
+          "description": "The base64url-encoded Y coordinate for EC keys.",
+          "x-ms-client-name": "yCoordinate"
+        },
+        "n": {
+          "type": "string",
+          "description": "The base64url-encoded modulus for RSA keys.",
+          "x-ms-client-name": "modulus"
+        },
+        "e": {
+          "type": "string",
+          "description": "The base64url-encoded exponent for RSA keys.",
+          "x-ms-client-name": "exponent"
+        },
+        "x5c": {
+          "type": "array",
+          "description": "The base64-encoded X.509 certificate chain.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "certificateChain"
+        }
+      },
+      "required": [
+        "kty",
+        "kid"
+      ]
     },
     "ReceiptEntry": {
       "type": "object",

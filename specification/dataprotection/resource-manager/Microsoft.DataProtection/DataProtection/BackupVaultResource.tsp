@@ -14,8 +14,10 @@ namespace Microsoft.DataProtection;
 /**
  * Backup Vault Resource
  */
-model BackupVaultResource
-  is Azure.ResourceManager.TrackedResource<BackupVault, false> {
+model BackupVaultResource is Azure.ResourceManager.TrackedResource<
+  BackupVault,
+  false
+> {
   ...ResourceNameParameter<
     Resource = BackupVaultResource,
     KeyName = "vaultName",

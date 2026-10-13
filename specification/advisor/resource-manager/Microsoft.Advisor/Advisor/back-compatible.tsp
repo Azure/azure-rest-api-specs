@@ -4,17 +4,14 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Advisor;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfigData.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   PredictionRequest.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   PredictionResponse.properties
 );
@@ -46,7 +43,6 @@ using Microsoft.Advisor;
   "!csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ResourceRecommendationBase.properties
 );
@@ -60,7 +56,6 @@ using Microsoft.Advisor;
 );
 @@clientLocation(SuppressionContracts.delete, "Suppressions", "!csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SuppressionContract.properties
 );
@@ -68,13 +63,11 @@ using Microsoft.Advisor;
 @@clientLocation(MetadataEntities.get, "RecommendationMetadata", "!csharp");
 @@clientLocation(MetadataEntities.list, "RecommendationMetadata", "!csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MetadataEntity.properties);
 
 @@clientLocation(AdvisorScoreEntities.get, "AdvisorScores", "!csharp");
 @@clientLocation(AdvisorScoreEntities.list, "AdvisorScores", "!csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   AdvisorScoreEntity.properties
 );
@@ -89,7 +82,6 @@ using Microsoft.Advisor;
 @@clientLocation(AssessmentResults.delete, "Assessments", "!csharp");
 @@clientLocation(AssessmentResults.list, "Assessments", "!csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   AssessmentResult.properties
 );
@@ -97,7 +89,6 @@ using Microsoft.Advisor;
 @@clientLocation(ResiliencyReviews.get, "resiliencyReviews", "!csharp");
 @@clientLocation(ResiliencyReviews.list, "resiliencyReviews", "!csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ResiliencyReview.properties
 );
@@ -129,7 +120,6 @@ using Microsoft.Advisor;
   "!csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   TriageRecommendation.properties
 );
@@ -137,7 +127,6 @@ using Microsoft.Advisor;
 @@clientLocation(TriageResources.get, "triageResources", "!csharp");
 @@clientLocation(TriageResources.list, "triageResources", "!csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TriageResource.properties);
 
 @@clientLocation(

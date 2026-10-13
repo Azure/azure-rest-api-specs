@@ -57,6 +57,11 @@ options:
     namespace: "{package-name}"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     enable-wire-path-attribute: true
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.EventHubs"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2026-01-01"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

@@ -25,6 +25,7 @@ enum Versions {
 @doc("A successful response from getUploadToken will contain an 'uploadUrl' field. This uploadUrl field's value should follow the format: https://[storage-account-name].blob.core.windows.net/[container-name]/[your-blob.extension]?[SAS-token]")
 @added(Versions.v2025_01_01_preview)
 model UploadTokenResult {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The SAS token URL for uploading")
   @secret
   uploadUrl: url;

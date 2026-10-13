@@ -29,15 +29,14 @@ model AssessedWebApplication
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
 @doc("Assessed Web Application Properties.")
-model AssessedWebApplicationProperties
-  is AssessedWorkloadProperties<
-    Linkages,
-    Recommendations<
-      MigrationIssues,
-      MigrationSuitability,
-      Skus<MigrationSuitability>
-    >
-  > {
+model AssessedWebApplicationProperties is AssessedWorkloadProperties<
+  Linkages,
+  Recommendations<
+    MigrationIssues,
+    MigrationSuitability,
+    Skus<MigrationSuitability>
+  >
+> {
   @doc("Recommendation Result of assessed webapp.")
   recommendationResult: RecommendationResult;
 

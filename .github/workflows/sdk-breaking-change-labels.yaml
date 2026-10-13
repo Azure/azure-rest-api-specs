@@ -18,7 +18,7 @@ jobs:
     name: SDK Breaking Change Labels
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           sparse-checkout: |
             .github
@@ -48,7 +48,7 @@ jobs:
         with:
           script: |
             const { getLabelAndAction } =
-              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-labels.js');
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-labels.ts');
             return await getLabelAndAction({ github, context, core });
 
       - if: |

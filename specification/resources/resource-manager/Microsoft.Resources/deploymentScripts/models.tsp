@@ -361,6 +361,7 @@ model StorageAccountConfiguration {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy - @secret produces format:password instead of x-ms-secret"
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Using x-ms-secret extension for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-secret' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to the @secret decorator."
   @extension("x-ms-secret", true)
   storageAccountKey?: string;
 }
@@ -470,6 +471,7 @@ model EnvironmentVariable {
    * The value of the secure environment variable.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-secret' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to the @secret decorator."
   @extension("x-ms-secret", true)
   secureValue?: string;
 }

@@ -233,18 +233,30 @@ Use for design trade-offs and best-practice recommendations:
 
 ## Comment Volume Control
 
-Do not flood a PR with comments. Prioritize and cap:
+Do not flood a PR with comments. **Limit: 20 inline comments per session.**
 
-1. **Security issues** -- always post (no cap)
-2. **Breaking changes** -- always post (no cap)
-3. **ARM contract violations** -- post up to 15
-4. **Property design / naming** -- post up to 5
-5. **Documentation gaps** -- post up to 3
+At 20 or fewer, post every finding. Do not trim a small review. There are no
+per-category caps: sized by how often a category occurs they would give the
+smallest allowance to the rarest categories, and security is the rarest.
 
-If more findings exist beyond the cap, summarize them in a single comment:
-"_N additional warnings/suggestions were identified but not posted individually.
-Key themes: [list]. The author should review the full checklist in
-`arm-api-review.instructions.md`._"
+With more than 20, trim to fit and disclose, dropping in this order:
+
+1. Documentation and examples
+2. Schema and property design, naming, SDK impact
+3. Resource modeling, operations and HTTP semantics, LRO, suppressions, review readiness
+4. Versioning and compatibility
+5. Security and secrets
+
+Security and versioning are trimmed **last**. Frequency is not importance.
+
+The limit is a reviewed per-session guardrail against pathological output. It is
+not a per-category quota or a permanent claim about a mutable telemetry sample.
+
+If findings are withheld, summarize them in a single comment with severity
+counts:
+"_N additional finding candidates were identified but not individually
+verified or posted (Blocking: B, Warning: W, Suggestion: S). Key themes: [list].
+Review the full checklist in `arm-api-review.instructions.md`._"
 
 ---
 
@@ -277,11 +289,16 @@ addressed in the latest changes._"
 
 After posting comments:
 
-- If any 🔴 Blocking findings were posted:
+- If any 🔴 Blocking findings were posted **and** the ARM API Review Critic
+  verified them:
   **Add** `ARMChangesRequested`, **remove** `WaitForARMFeedback` (if present).
 - If no blocking findings:
   **Remove** `WaitForARMFeedback` (if present). Do not add
   `ARMChangesRequested`.
+- If the Critic could not be reached, do **not** add `ARMChangesRequested` even
+  when Blocking findings were posted. Those findings keep their severity, but
+  nothing independently verified them, so a human decides whether they should
+  move the ARM review queue.
 
 ---
 

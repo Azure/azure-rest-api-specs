@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 /**
@@ -72,6 +73,7 @@ interface Bookmarks {
    * Expand an bookmark
    */
   @tag("Bookmark")
+  @added(Versions.v2025_10_01_preview)
   expand is Extension.ActionSync<
     OperationalInsights,
     Bookmark,

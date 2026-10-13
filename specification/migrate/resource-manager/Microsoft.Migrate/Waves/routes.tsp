@@ -2,7 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@azure-tools/typespec-client-generator-core";
 import "./ApiVersions.tsp";
-import "./WebModels/Waves/GenerateWavePlan.tsp";
+import "./WebModels/WavePlans/GenerateWavePlan.tsp";
+import "./WebModels/WavePlans/CreateWavesFromPlan.tsp";
+import "./WebModels/WavePlans/GetWavePlans.tsp";
+import "./WebModels/WavePlans/FetchSasUri.tsp";
+import "./WebModels/WavePlans/ImportWavePlan.tsp";
 import "./WebModels/Waves/MigrationWaves.tsp";
 import "./WebModels/RefreshEntities/RefreshEntities.tsp";
 import "./WebModels/MigrationEntity/MigrationEntity.tsp";
@@ -22,6 +26,7 @@ namespace Microsoft.Migrate;
 
 @armResourceOperations
 interface MigrateProjects {
+  @doc("A long-running resource action.")
   @added(ApiVersions.v2025_12_01_preview)
   generateWavePlan is ArmResourceActionAsync<
     MigrateProject,
@@ -36,6 +41,41 @@ interface MigrateProjects {
     MigrateProject,
     RefreshEntitiesRequest,
     RefreshEntitiesResponse
+  >;
+
+  @added(ApiVersions.v2026_06_01_preview)
+  @doc("Create waves from a previously generated wave plan based on assessment data and selected wave names.")
+  createWavesFromPlan is ArmResourceActionAsync<
+    MigrateProject,
+    CreateWavesFromPlanRequest,
+    CreateWavesFromPlanResponse
+  >;
+
+  @added(ApiVersions.v2026_06_01_preview)
+  @doc("List wave plans previously generated for a given assessment, optionally scoped to a migration path.")
+  @action("getWavePlans")
+  getWavePlans is ArmResourceActionSync<
+    MigrateProject,
+    GetWavePlansRequest,
+    GetWavePlansResponse
+  >;
+
+  @added(ApiVersions.v2026_06_01_preview)
+  @doc("Mint a write-only SAS URI for customer CSV uploads, later consumed by importWavePlan.")
+  @action("fetchSASUri")
+  fetchSasUri is ArmResourceActionSync<
+    MigrateProject,
+    FetchSasUriRequest,
+    FetchSasUriResponse
+  >;
+
+  @added(ApiVersions.v2026_06_01_preview)
+  @doc("Ingest a customer-uploaded wave-plan CSV and produce the updated wave-plan artifacts. Long-running operation.")
+  @action("importWavePlan")
+  importWavePlan is ArmResourceActionAsync<
+    MigrateProject,
+    ImportWavePlanRequest,
+    ImportWavePlanResponse
   >;
 }
 

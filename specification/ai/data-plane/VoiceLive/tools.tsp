@@ -96,7 +96,7 @@ model MCPServer extends Tool {
   headers?: Record<string>;
   allowed_tools?: string[];
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval is represented this way in OpenAI style."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   require_approval?: MCPApprovalType | Record<string[]>;
 }
 

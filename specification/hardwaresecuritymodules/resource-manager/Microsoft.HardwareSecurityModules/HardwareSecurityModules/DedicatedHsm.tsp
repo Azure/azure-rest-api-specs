@@ -14,8 +14,10 @@ namespace Microsoft.HardwareSecurityModules;
  * Resource information with extended details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DedicatedHsm
-  is Azure.ResourceManager.TrackedResource<DedicatedHsmProperties, false> {
+model DedicatedHsm is Azure.ResourceManager.TrackedResource<
+  DedicatedHsmProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DedicatedHsm,
     KeyName = "name",

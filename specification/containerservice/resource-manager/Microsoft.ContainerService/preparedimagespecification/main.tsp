@@ -1,6 +1,7 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./operations.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -18,4 +19,16 @@ enum Versions {
   @doc("Azure Kubernetes Prepared Image Specification api version 2026-02-02-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_02_02_preview: "2026-02-02-preview",
+
+  @doc("Azure Kubernetes Prepared Image Specification api version 2026-03-02-preview.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_03_02_preview: "2026-03-02-preview",
+
+  @doc("Azure Kubernetes Prepared Image Specification api version 2026-04-02-preview.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_04_02_preview: "2026-04-02-preview",
+
+  @doc("Azure Kubernetes Prepared Image Specification api version 2026-05-02-preview.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_05_02_preview: "2026-05-02-preview",
 }

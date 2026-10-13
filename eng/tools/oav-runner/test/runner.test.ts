@@ -1,7 +1,7 @@
 import path from "path";
 import { simpleGit } from "simple-git";
 import { describe, expect, it } from "vitest";
-import { processFilesToSpecificationList } from "../src/runner.ts";
+import { preCheckFiltering, processFilesToSpecificationList } from "../src/runner.ts";
 
 const ROOT = path.resolve(__dirname, "..", "test", "fixtures");
 
@@ -33,6 +33,7 @@ describe("file processing", () => {
         "specification/serviceA/resource-manager/service.A/stable/2025-06-01/serviceAspec.json",
         "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
         "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
+        "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec2.json",
       ]
     `);
   });
@@ -108,5 +109,21 @@ describe("file processing", () => {
         "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
       ]
     `);
+  });
+
+  it("should filter file, directory, and SwaggerAll suppressions", async () => {
+    const changedFiles = [
+      "specification/serviceB/data-plane/service.B/preview/2025-07-01-preview/serviceBspec.json",
+      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
+      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec2.json",
+    ];
+
+    await expect(
+      preCheckFiltering(ROOT, "SwaggerSemanticValidation", changedFiles),
+    ).resolves.toEqual([]);
+    await expect(preCheckFiltering(ROOT, "SwaggerModelValidation", changedFiles)).resolves.toEqual([
+      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
+      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec2.json",
+    ]);
   });
 });

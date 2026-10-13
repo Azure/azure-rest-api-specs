@@ -69,7 +69,8 @@ interface TagContractOps
         @minLength(1)
         @maxLength(80)
         tagId: string,
-      }
+      },
+      ResourceName = "ApiOperationTag"
     > {}
 
 @armResourceOperations
@@ -181,7 +182,8 @@ interface TagOps
         @minLength(1)
         @maxLength(80)
         tagId: string,
-      }
+      },
+      ResourceName = "ApiTag"
     > {}
 
 @armResourceOperations
@@ -307,7 +309,8 @@ interface TagContractOperationOps
         @minLength(1)
         @maxLength(80)
         tagId: string,
-      }
+      },
+      ResourceName = "ApiManagementProductTag"
     > {}
 
 @armResourceOperations
@@ -410,7 +413,8 @@ interface TagContractOperationGroupOps
         @minLength(1)
         @maxLength(80)
         tagId: string,
-      }
+      },
+      ResourceName = "ApiManagementTag"
     > {}
 
 @armResourceOperations
@@ -584,7 +588,8 @@ interface WorkspaceTagOps
         @minLength(1)
         @maxLength(80)
         tagId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceTag"
     > {}
 
 @armResourceOperations

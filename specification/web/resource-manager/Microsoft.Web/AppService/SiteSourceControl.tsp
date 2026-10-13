@@ -59,7 +59,8 @@ interface SiteSourceControlOps
         @segment("sourcecontrols")
         @key
         web: "web",
-      }
+      },
+      ResourceName = "WebSiteSlotSourceControl"
     > {}
 
 @tag("WebApps")
@@ -163,7 +164,8 @@ interface SiteSourceControlOperationGroupOps
         @segment("sourcecontrols")
         @key
         web: "web",
-      }
+      },
+      ResourceName = "WebSiteSourceControl"
     > {}
 
 @tag("WebApps")

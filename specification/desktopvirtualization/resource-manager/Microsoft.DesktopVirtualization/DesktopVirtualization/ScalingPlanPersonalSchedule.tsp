@@ -16,11 +16,10 @@ namespace Microsoft.DesktopVirtualization;
  * Represents a ScalingPlanPersonalSchedule definition.
  */
 @parentResource(ScalingPlan)
-model ScalingPlanPersonalSchedule
-  is Azure.ResourceManager.ProxyResource<
-    ScalingPlanPersonalScheduleProperties,
-    false
-  > {
+model ScalingPlanPersonalSchedule is Azure.ResourceManager.ProxyResource<
+  ScalingPlanPersonalScheduleProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ScalingPlanPersonalSchedule,
     KeyName = "scalingPlanScheduleName",

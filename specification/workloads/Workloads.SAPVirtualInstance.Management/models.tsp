@@ -1005,6 +1005,7 @@ model Resource {
  * Defines the request body for updating Virtual Instance for SAP.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateSAPVirtualInstanceRequest {
   /**
    * Gets or sets the Resource tags.
@@ -1311,6 +1312,7 @@ model StorageInformation {
  * Defines the request body for updating SAP Central Instance.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateSAPCentralInstanceRequest {
   /**
    * Gets or sets the Resource tags.
@@ -1408,6 +1410,7 @@ model DatabaseVmDetails {
  * Defines the request body for updating SAP Database Instance.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateSAPDatabaseInstanceRequest {
   /**
    * Gets or sets the Resource tags.
@@ -1547,6 +1550,7 @@ model ApplicationServerVmDetails {
  * Defines the request body for updating SAP Application Instance.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateSAPApplicationInstanceRequest {
   /**
    * Gets or sets the Resource tags.
@@ -1617,6 +1621,7 @@ model WindowsConfiguration extends OSConfiguration {
   /**
    * The OS Type
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType: OSType.Windows;
 }
 
@@ -1629,6 +1634,7 @@ model OSConfiguration {
   /**
    * The OS Type
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType: OSType;
 }
 
@@ -1675,6 +1681,7 @@ model LinuxConfiguration extends OSConfiguration {
   /**
    * The OS Type
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType: OSType.Linux;
 }
 
@@ -2287,6 +2294,7 @@ model ServiceInitiatedSoftwareConfiguration extends SoftwareConfiguration {
   /**
    * The URL to the SAP Build of Materials(BOM) file.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   bomUrl: string;
 
   /**
@@ -2346,6 +2354,7 @@ model SAPInstallWithoutOSConfigSoftwareConfiguration
   /**
    * The URL to the SAP Build of Materials(BOM) file.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   bomUrl: string;
 
   /**

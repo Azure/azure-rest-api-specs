@@ -15,11 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Workspace)
-model MarketplaceSubscription
-  is Azure.ResourceManager.ProxyResource<
-    MarketplaceSubscriptionProperties,
-    false
-  > {
+model MarketplaceSubscription is Azure.ResourceManager.ProxyResource<
+  MarketplaceSubscriptionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = MarketplaceSubscription,
     KeyName = "name",

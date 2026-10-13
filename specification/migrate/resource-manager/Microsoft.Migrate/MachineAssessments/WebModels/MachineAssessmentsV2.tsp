@@ -25,8 +25,11 @@ model MachineAssessmentV2 is ProxyResource<MachineAssessmentV2Properties> {
   name: string;
 }
 
-model MachineAssessmentV2Properties
-  is AssessmentProperties<Scope, MachineAssessmentSettings, AssessmentDetails>;
+model MachineAssessmentV2Properties is AssessmentProperties<
+  Scope,
+  MachineAssessmentSettings,
+  AssessmentDetails
+>;
 
 @doc("Properties of an assessment.")
 model MachineAssessmentSettings is AssessmentSettings {

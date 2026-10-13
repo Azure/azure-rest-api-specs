@@ -54,7 +54,8 @@ interface RemotePrivateEndpointConnectionARMResourceOps
         @segment("privateEndpointConnections")
         @key
         privateEndpointConnectionName: string,
-      }
+      },
+      ResourceName = "HostingEnvironmentPrivateEndpointConnection"
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -141,7 +142,8 @@ interface StaticSiteOps
         @segment("privateEndpointConnections")
         @key
         privateEndpointConnectionName: string,
-      }
+      },
+      ResourceName = "StaticSitePrivateEndpointConnection"
     > {}
 
 @armResourceOperations
@@ -226,7 +228,8 @@ interface PrivateEndpointConnectionOperationGroupOps
         @segment("privateEndpointConnections")
         @key
         privateEndpointConnectionName: string,
-      }
+      },
+      ResourceName = "SitePrivateEndpointConnection"
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -319,7 +322,8 @@ interface PrivateEndpointConnectionSlotOperationGroupOps
         @segment("privateEndpointConnections")
         @key
         privateEndpointConnectionName: string,
-      }
+      },
+      ResourceName = "SiteSlotPrivateEndpointConnection"
     > {}
 
 @tag("WebApps")

@@ -37,6 +37,7 @@ model VoiceLiveErrorDetails {
 }
 
 /** Standard error response envelope. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 @usage(ResponseUsage)
 model ErrorResponse {
@@ -203,6 +204,7 @@ model ConversationItemBase {
 
 /** The response resource. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @usage(ResponseUsage)
 model Response {
   /** The unique ID of the response. */
@@ -267,7 +269,7 @@ model Response {
    * inclusive of tool calls, that was used in this response.
    */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This is how it's represented OpenAI Style."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   max_output_tokens?: int32 | "inf";
 
   /**
@@ -1123,7 +1125,7 @@ model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
   output_index: int32;
   content_index: int32;
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This is how it's represented OpenAI Style."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   frames: float32[][] | string;
   frame_index: int32;
 }
@@ -1258,7 +1260,7 @@ model ResponseCreateParams {
    * given model. Defaults to `inf`.
    */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This is how it's represented OpenAI Style."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   max_output_tokens?: int32 | "inf";
 
   /** Create the response with pre-generated assistant message. The message item would be
@@ -1284,7 +1286,7 @@ model ResponseCreateParams {
   @added(Versions.v2026_04_10)
   interim_response?: InterimResponseConfig;
 
-  /** Input data to invoke the hosted agent. This feature is in preview. */
+  /** Input data to invoke the hosted agent. */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Opaque passthrough: values are user-provided input forwarded to the hosted agent, whose schema is not defined by this API."
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque passthrough JSON from hosted agent; values are not limited to strings."
   @added(Versions.v2026_06_01_preview)
@@ -1773,6 +1775,7 @@ model ClientEventOutputAudioBufferClear extends ClientEvent {
 /** Sent by the client to initiate a WebRTC session with an SDP offer. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(RequestUsage)
 model ClientEventRtcCallSdpCreate extends ClientEvent {
   /** The event type, must be `rtc.call.sdp.create`. */
@@ -1788,6 +1791,7 @@ model ClientEventRtcCallSdpCreate extends ClientEvent {
 /** Returned when the WebRTC SDP negotiation completes successfully. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(ResponseUsage)
 model ServerEventRtcCallSdpCreated extends ServerEvent {
   /** The event type, must be `rtc.call.sdp.created`. */
@@ -1805,6 +1809,7 @@ model ServerEventRtcCallSdpCreated extends ServerEvent {
 /** Error details for RTC call errors. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(ResponseUsage)
 model RtcCallErrorDetails {
   /** The error category: `invalid_request_error` or `server_error`. */
@@ -1820,6 +1825,7 @@ model RtcCallErrorDetails {
 /** Returned when a WebRTC call operation fails. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(ResponseUsage)
 model ServerEventRtcCallError extends ServerEvent {
   /** The event type, must be `rtc.call.error`. */
@@ -1840,6 +1846,7 @@ model ServerEventRtcCallError extends ServerEvent {
 /** Returned when model audio output starts playing. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(ResponseUsage)
 model ServerEventOutputAudioBufferStarted extends ServerEvent {
   /** The event type, must be `output_audio_buffer.started`. */
@@ -1852,6 +1859,7 @@ model ServerEventOutputAudioBufferStarted extends ServerEvent {
 /** Returned when model audio output finishes playing. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(ResponseUsage)
 model ServerEventOutputAudioBufferStopped extends ServerEvent {
   /** The event type, must be `output_audio_buffer.stopped`. */

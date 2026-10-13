@@ -3253,6 +3253,9 @@
           },
           "SearchServiceListKnowledgeSourcesWeb": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesWeb.json"
+          },
+          "SearchServiceListKnowledgeSourcesWorkIQ": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesWorkIQ.json"
           }
         }
       },
@@ -3328,6 +3331,9 @@
           },
           "SearchServiceCreateKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceWeb.json"
+          },
+          "SearchServiceCreateKnowledgeSourceWorkIQ": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceWorkIQ.json"
           }
         }
       }
@@ -3404,6 +3410,9 @@
           },
           "SearchServiceGetKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceWeb.json"
+          },
+          "SearchServiceGetKnowledgeSourceWorkIQ": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceWorkIQ.json"
           }
         }
       },
@@ -3523,6 +3532,9 @@
           },
           "SearchServiceCreateOrUpdateKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceWeb.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceWorkIQ": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceWorkIQ.json"
           }
         }
       },
@@ -3610,6 +3622,9 @@
           },
           "SearchServiceDeleteKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceDeleteKnowledgeSourceWeb.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceWorkIQ": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceWorkIQ.json"
           }
         }
       }
@@ -5392,7 +5407,8 @@
         "gpt-5.2",
         "gpt-5.4",
         "gpt-5.4-mini",
-        "gpt-5.4-nano"
+        "gpt-5.4-nano",
+        "gpt-5.5"
       ],
       "x-ms-enum": {
         "name": "AzureOpenAIModelName",
@@ -5477,6 +5493,11 @@
             "name": "Gpt54Nano",
             "value": "gpt-5.4-nano",
             "description": "Gpt54Nano model."
+          },
+          {
+            "name": "Gpt55",
+            "value": "gpt-5.5",
+            "description": "Gpt55 model."
           }
         ]
       }
@@ -8032,7 +8053,7 @@
       "properties": {
         "ingestionParameters": {
           "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
-          "description": "Consolidates all general ingestion settings. Only 'minimal' content extraction mode and embeddingModel are supported for file knowledge sources."
+          "description": "Consolidates all general ingestion settings for the File knowledge source, including the content extraction mode and an optional embeddingModel."
         },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",

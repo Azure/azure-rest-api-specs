@@ -1,0 +1,52 @@
+parameters:
+  "service-dir":
+    default: "sdk/workloadorchestration"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/configurationmanager.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-typespec/http-client-csharp-mgmt":
+    api-version: "2026-05-01-preview"
+    namespace: "Azure.ResourceManager.WorkloadOrchestration"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-go":
+    api-version: "2026-05-01-preview"
+    service-dir: "sdk/resourcemanager/workloadorchestration"
+    emitter-output-dir: "{output-dir}/{service-dir}/armworkloadorchestration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armworkloadorchestration"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    api-version: "2026-05-01-preview"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-workloadorchestration"
+    namespace: "azure.mgmt.workloadorchestration"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    api-version: "2026-05-01-preview"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-workloadorchestration"
+    service-dir: "sdk/workloadorchestration"
+    flavor: azure
+    namespace: com.azure.resourcemanager.workloadorchestration
+    service-name: Workload Orchestration
+  "@azure-tools/typespec-ts":
+    api-version: "2026-05-01-preview"
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-workloadorchestration"
+    flavor: azure
+    package-details:
+      name: "@azure/arm-workloadorchestration"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

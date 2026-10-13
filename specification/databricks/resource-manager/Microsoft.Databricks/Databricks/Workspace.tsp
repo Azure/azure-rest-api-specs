@@ -13,8 +13,10 @@ namespace Microsoft.Databricks;
 /**
  * Information about workspace.
  */
-model Workspace
-  is Azure.ResourceManager.TrackedResource<WorkspaceProperties, false> {
+model Workspace is Azure.ResourceManager.TrackedResource<
+  WorkspaceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Workspace,
     KeyName = "workspaceName",

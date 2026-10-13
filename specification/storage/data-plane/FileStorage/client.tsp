@@ -448,6 +448,12 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "python,javascript,csharp,go"
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
+@@Legacy.disablePageable(
+  Storage.File.File.listAllRanges,
+  "python,javascript,csharp,go"
+);
+
 @@alternateType(Storage.File.FileProperty.creationTime, string, "python");
 @@alternateType(Storage.File.FileProperty.lastWriteTime, string, "python");
 @@alternateType(Storage.File.FileProperty.changeTime, string, "python");
@@ -469,6 +475,7 @@ model FileClientParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
   allowSourceTrailingDot?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   fileRangeWriteFromUrl: FileRangeWriteFromUrlType;
 }
 

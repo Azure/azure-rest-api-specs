@@ -4,21 +4,17 @@ using Azure.ClientGenerator.Core;
 using Microsoft.EventHub;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy behavior required for backward compatibility with the original OpenAPI specification."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(FailOver.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy behavior required for backward compatibility with the original OpenAPI specification."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   PrivateLinkResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy behavior required for backward compatibility with the original OpenAPI specification."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy behavior required for backward compatibility with the original OpenAPI specification."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Destination.properties);
 
 @@clientName(Clusters.createOrUpdate::parameters.resource, "parameters");

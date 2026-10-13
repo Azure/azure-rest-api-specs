@@ -165,26 +165,25 @@ interface ServerEndpoints {
   recallAction is ArmResourceActionSync<
     ServerEndpoint,
     RecallActionParameters,
+    | (OkResponse & {
+        @header("x-ms-correlation-request-id")
+        @doc("correlation request id.")
+        xMsCorrelationRequestId?: string;
 
-      | (OkResponse & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id.")
-          xMsCorrelationRequestId?: string;
+        @header("x-ms-request-id")
+        @doc("request id.")
+        xMsRequestId?: string;
+      })
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+        Azure.Core.Foundations.RetryAfterHeader> & {
+        @header("x-ms-correlation-request-id")
+        @doc("correlation request id.")
+        xMsCorrelationRequestId?: string;
 
-          @header("x-ms-request-id")
-          @doc("request id.")
-          xMsRequestId?: string;
-        })
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id.")
-          xMsCorrelationRequestId?: string;
-
-          @header("x-ms-request-id")
-          @doc("request id.")
-          xMsRequestId?: string;
-        }),
+        @header("x-ms-request-id")
+        @doc("request id.")
+        xMsRequestId?: string;
+      }),
     Error = StorageSyncError
   >;
 }

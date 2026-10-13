@@ -99,3 +99,58 @@ Changes to any of these files should pass the eval suite before merging:
 - `.github/instructions/*review*.instructions.md`
 - `.github/skills/azure-api-review/**`
 - `.github/skills/evals/arm-api-reviewer/**`
+
+---
+
+## Data-Plane API Reviewer
+
+The **Data-Plane API Reviewer** agent
+([`.github/agents/data-plane-api-reviewer.agent.md`](../agents/data-plane-api-reviewer.agent.md))
+is a read-only, advisory reviewer for **data-plane TypeSpec** specifications
+against the
+[Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md).
+
+Its unattended scope is intentionally narrow:
+
+- secret and visibility exposure;
+- stable breaking changes and versioning correctness;
+- resource addressability and actions that disguise CRUD;
+- error contract semantics;
+- LRO and paging correctness.
+
+Naming, documentation quality, grey-area design questions, runtime behavior,
+and deterministic compiler or linter diagnostics are out of scope. A candidate
+outside the retained data-plane references is dropped rather than assigned an
+invented coverage status.
+
+The unattended entry point is the gh-aw workflow
+[`.github/workflows/data-plane-api-review.md`](../workflows/data-plane-api-review.md),
+which normally runs when a maintainer applies the
+`data-plane-api-review-needed` label. `workflow_dispatch` with a PR number is
+retained for testing workflow changes from a branch. The reviewer has no
+mutating GitHub tools; `safe-outputs` is the only write channel.
+
+The workflow is stateless and emits at most five findings. Each finding is
+re-fetched and verified at the pinned PR head SHA immediately before emission,
+or at the base SHA for a deleted line. Silence means only that this one
+non-deterministic pass found nothing in its narrow scope; it is not API
+approval.
+
+### Manual validation
+
+Material prompt or model changes should be exercised with controlled workflow
+runs and a small provenance corpus:
+
+| PR     | Useful signal                                                                 |
+| ------ | ----------------------------------------------------------------------------- |
+| #45069 | Secret detection plus low-value LRO/paging suggestions to avoid reintroducing |
+| #43270 | Secret reachability through GET/LIST models                                   |
+| #44399 | Same-SHA non-determinism and scope consistency                                |
+| #45113 | A clean-result case with stable-version context                               |
+
+Use a designated test PR when a branch run would post comments. For production
+rollout, selected live PRs and author feedback are the primary signal.
+
+After changing the gh-aw source, run
+`gh aw compile data-plane-api-review --no-check-update` and commit the generated
+`.lock.yml` in the same change.

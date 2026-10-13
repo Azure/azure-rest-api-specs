@@ -60,7 +60,8 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOps
         @segment("userProvidedFunctionApps")
         @key
         functionAppName: string,
-      }
+      },
+      ResourceName = "StaticSiteBuildUserProvidedFunctionApp"
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -141,7 +142,8 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps
         @segment("userProvidedFunctionApps")
         @key
         functionAppName: string,
-      }
+      },
+      ResourceName = "StaticSiteUserProvidedFunctionApp"
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

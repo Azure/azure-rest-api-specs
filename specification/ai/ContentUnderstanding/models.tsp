@@ -131,7 +131,6 @@ union ContentAnalyzerStatus {
   failed: "failed",
 }
 
-// @added(Versions.v2025_05_01_preview)
 @doc("The location where the data may be processed.")
 union ProcessingLocation {
   string,
@@ -146,34 +145,15 @@ union ProcessingLocation {
   global: "global",
 }
 
-// @added(Versions.v2025_05_01_preview)
-// @removed(Versions.v2025_11_01)
-// @doc("Analysis mode.")
-// union AnalysisMode {
-//   string,
-
-//   @doc("Standard analysis mode.")
-//   standard: "standard",
-
-//   @doc("Pro analysis mode.")
-//   pro: "pro",
-// }
-
-// @added(Versions.v2025_05_01_preview)
 @doc("Knowledge source kind.")
 union KnowledgeSourceKind {
   string,
-
-  // @removed(Versions.v2025_11_01)
-  // @doc("A reference knowledge source.")
-  // reference: "reference",
 
   @added(Versions.v2025_11_01)
   @doc("A labeled data knowledge source.")
   labeledData: "labeledData",
 }
 
-// @added(Versions.v2025_05_01_preview)
 @doc("Knowledge source.")
 @discriminator("kind")
 model KnowledgeSource {
@@ -181,29 +161,13 @@ model KnowledgeSource {
   kind: KnowledgeSourceKind;
 }
 
-// @added(Versions.v2025_05_01_preview)
-// @removed(Versions.v2025_11_01)
-// @doc("File knowledge source.")
-// model ReferenceKnowledgeSource extends KnowledgeSource {
-//   @doc("A blob container containing reference data for analysis.")
-//   kind: KnowledgeSourceKind.reference;
-
-//   @doc("The URL of the blob container.")
-//   containerUrl: url;
-
-//   @doc("An optional prefix to filter blobs within the container.")
-//   prefix?: string;
-
-//   @doc("Path to a file listing specific blobs to include.")
-//   fileListPath: string;
-// }
-
 @added(Versions.v2025_11_01)
 @doc("Labeled data knowledge source.")
 model LabeledDataKnowledgeSource extends KnowledgeSource {
   @doc("A blob container containing labeled data.")
   kind: KnowledgeSourceKind.labeledData;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The URL of the blob container containing labeled data.")
   containerUrl: url;
 
@@ -242,15 +206,6 @@ model ContentAnalyzerConfig {
   @doc("List of locale hints for speech transcription.")
   locales?: string[];
 
-  // @removed(Versions.v2025_11_01)
-  // @doc("Enable face detection.")
-  // enableFace?: boolean;
-
-  // @added(Versions.v2025_05_01_preview)
-  // @removed(Versions.v2025_11_01)
-  // @doc("Specify the person directory used for identifying detected faces.")
-  // personDirectoryId?: string;
-
   @doc("Enable optical character recognition (OCR).")
   enableOcr?: boolean;
 
@@ -265,14 +220,9 @@ model ContentAnalyzerConfig {
   @doc("Enable analysis of figures, such as charts and diagrams.")
   enableFigureAnalysis?: boolean;
 
-  // @removed(Versions.v2025_05_01_preview)
-  // @doc("Enable barcode detection.")
-  // enableBarcode?: boolean;
-
   @doc("Enable mathematical formula detection.")
   enableFormula?: boolean;
 
-  // @added(Versions.v2025_05_01_preview)
   @doc("Representation format of tables in analyze result markdown.")
   tableFormat?: TableFormat = TableFormat.html;
 
@@ -284,28 +234,11 @@ model ContentAnalyzerConfig {
   @doc("Representation format of annotations in analyze result markdown.")
   annotationFormat?: AnnotationFormat = AnnotationFormat.markdown;
 
-  // @added(Versions.v2025_05_01_preview)
   @doc("Disable the default blurring of faces for privacy while processing the content.")
   disableFaceBlurring?: boolean;
 
-  // @added(Versions.v2025_05_01_preview)
-  // @removed(Versions.v2025_11_01)
-  // @doc("Disable content filtering that detects and prevents the output of harmful content.")
-  // disableContentFiltering?: boolean;
-
-  // @added(Versions.v2025_05_01_preview)
   @doc("Return field grounding source and confidence.")
   estimateFieldSourceAndConfidence?: boolean;
-
-  // @added(Versions.v2025_05_01_preview)
-  // @removed(Versions.v2025_11_01)
-  // @doc("Segmentation mode used to split audio/visual content.")
-  // segmentationMode?: SegmentationMode = SegmentationMode.noSegmentation;
-
-  // @added(Versions.v2025_05_01_preview)
-  // @removed(Versions.v2025_11_01)
-  // @doc("Segmentation definition for use with custom segmentation mode.")
-  // segmentationDefinition?: string;
 
   @added(Versions.v2025_11_01)
   @doc("Map of categories to classify the input content(s) against.")
@@ -325,9 +258,56 @@ model ContentAnalyzerConfig {
     Only return content(s) from additional analyzers specified in contentCategories, if any.
     """)
   omitContent?: boolean;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Workflow used for content analysis.")
+  workflow?: ContentAnalyzerWorkflow;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("""
+    When true, input that exceeds the service's processable-unit limit is truncated to the limit and returned as a
+    partial result with a warning, instead of failing. Field extraction and segmentation, where configured, run over
+    the processed content and may be inaccurate. Defaults to false. Overridable per request by the allowInputTruncation
+    query parameter.
+    """)
+  allowInputTruncation?: boolean;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Enable sub-page segmentation. When true, segments may cover a portion of a page instead of full pages.")
+  allowInPageSegments?: boolean;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Strategy for chunking document content into smaller units for RAG scenarios. When omitted, chunking is disabled.")
+  chunkingStrategy?: ChunkingStrategy;
 }
 
-// @added(Versions.v2025_05_01_preview)
+@added(Versions.v2026_06_01_preview)
+@doc("The kind of chunking strategy.")
+union ChunkingStrategyKind {
+  string,
+
+  @doc("Semantic chunking strategy.")
+  semantic: "semantic",
+}
+
+@added(Versions.v2026_06_01_preview)
+@doc("Strategy for chunking document content. The `kind` property serves as the discriminator.")
+@discriminator("kind")
+model ChunkingStrategy {
+  @doc("The chunking strategy kind.")
+  kind: ChunkingStrategyKind;
+}
+
+@added(Versions.v2026_06_01_preview)
+@doc("Semantic chunking strategy that splits content into semantically meaningful, size-controlled chunks.")
+model SemanticChunkingStrategy extends ChunkingStrategy {
+  @doc("The chunking strategy kind.")
+  kind: ChunkingStrategyKind.semantic;
+
+  @doc("Target chunk size expressed in tokens. Interpreted as a soft limit; the chunking process may slightly exceed this value to respect semantic or structural boundaries.")
+  maxTokens?: int32;
+}
+
 @doc("Representation format of tables in analyze result markdown.")
 union TableFormat {
   string,
@@ -364,54 +344,17 @@ union AnnotationFormat {
   markdown: "markdown",
 }
 
-// @added(Versions.v2025_05_01_preview)
-// @removed(Versions.v2025_11_01)
-// @doc("Segmentation mode used to split audio/visual content.")
-// union SegmentationMode {
-//   string,
+@added(Versions.v2026_06_01_preview)
+@doc("Workflow used for document analysis.")
+union ContentAnalyzerWorkflow {
+  string,
 
-//   @doc("No segmentation.")
-//   noSegmentation: "noSegmentation",
+  @doc("Default analysis workflow. The service selects standard or advanced contextualization as appropriate for the analyzer.")
+  default: "default",
 
-//   @doc("Automatic segmentation.")
-//   auto: "auto",
-
-//   @doc("Segment according to custom segmentation definition.")
-//   custom: "custom",
-// }
-
-// @removed(Versions.v2025_11_01)
-// @doc("Data source kind.")
-// union DataSourceKind {
-//   string,
-
-//   @doc("A blob storage data source.")
-//   blob: "blob",
-// }
-
-// @removed(Versions.v2025_11_01)
-// @doc("Data source specifying a set of documents.")
-// @discriminator("kind")
-// model DataSource {
-//   @doc("The kind of data source.")
-//   kind: DataSourceKind;
-// }
-
-// @removed(Versions.v2025_11_01)
-// @doc("Blob storage data source.")
-// model BlobDataSource extends DataSource {
-//   @doc("Indicates that the data source is a blob.")
-//   kind: "blob";
-
-//   @doc("The URL of the blob container.")
-//   containerUrl: url;
-
-//   @doc("An optional prefix to filter blobs within the container.")
-//   prefix?: string;
-
-//   @doc("An optional path to a file listing specific blobs to include.")
-//   fileListPath?: string;
-// }
+  @doc("Agentic analysis workflow using iterative reasoning with integrated tool calling for enhanced accuracy on complex documents.")
+  agentic: "agentic",
+}
 
 @doc("Definition of the field using a JSON Schema like syntax.")
 model ContentFieldDefinition {
@@ -509,7 +452,6 @@ model ContentCategoryDefinition {
 
 @doc("Analyze operation parameters.")
 model AnalyzeParameters {
-  // @added(Versions.v2025_05_01_preview)
   @doc("""
       The string encoding format for content spans in the response.
       Possible values are 'codePoint', 'utf16', and `utf8`.  Default is `codePoint`.")
@@ -517,26 +459,21 @@ model AnalyzeParameters {
   @query
   stringEncoding?: string = "codePoint";
 
-  // @added(Versions.v2025_05_01_preview)
   @doc("The location where the data may be processed.  Defaults to global.")
   @query
   processingLocation?: ProcessingLocation = ProcessingLocation.global;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Overrides the analyzer's allowInputTruncation setting for this request. When omitted, the analyzer's configured value applies.")
+  @query
+  allowInputTruncation?: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Analyze operation request.")
 model AnalyzeRequest {
   ...AnalyzeParameters;
 
-  // @removed(Versions.v2025_11_01)
-  // @doc("The URL of the primary input to analyze.  Only one of url or data should be specified.")
-  // url?: url;
-
-  // @removed(Versions.v2025_11_01)
-  // @added(Versions.v2025_05_01_preview)
-  // @doc("Base64-encoded binary content of the primary input to analyze.  Only one of url or data should be specified.")
-  // data?: bytes;
-
-  // @added(Versions.v2025_05_01_preview)
   @doc("Inputs to analyze.  Currently, only pro mode supports multiple inputs.")
   inputs: AnalysisInput[];
 
@@ -552,7 +489,6 @@ model AnalyzeRequest {
   """)
 scalar RangeExpression extends string;
 
-// @added(Versions.v2025_05_01_preview)
 @doc("Additional input to analyze.")
 model AnalysisInput {
   @doc("The URL of the input to analyze.  Only one of url or data should be specified.")
@@ -573,11 +509,11 @@ model AnalysisInput {
   range?: RangeExpression;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Analyze operation request directly from binary content.")
 model AnalyzeBinaryRequest {
   ...AnalyzeParameters;
 
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Conflicts with @typespec/http/content-type-string"
   @doc("Request content type.")
   @header
   contentType: string = "application/octet-stream";
@@ -611,6 +547,10 @@ model AnalysisResult {
 
   @doc("Warnings encountered while analyzing the document.")
   warnings?: Azure.Core.Foundations.Error[];
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Additional diagnostic information about the analysis.")
+  infos?: Azure.Core.Foundations.Error[];
 
   // @added(Versions.v2025_05_01_preview)
   @doc("""
@@ -664,6 +604,10 @@ model AnalysisContent {
 
   @doc("Extracted fields from the content.")
   fields?: Record<ContentField>;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Metadata extracted from the input as string key/value pairs, such as author, title, creation date, or media properties. Keys and values are strings. Only keys with extracted values are present.")
+  metadata?: Record<string>;
 }
 
 @doc("Position of the element in markdown, specified as a character offset and length.")
@@ -800,6 +744,27 @@ model UsageDetails {
     """)
   documentPagesStandard?: int32;
 
+  @added(Versions.v2026_06_01_preview)
+  @doc("""
+    The number of document pages processed at the minimal level by an inline analyze operation.
+    For documents without explicit pages (ex. txt, html), every 3000 UTF-16 characters is counted as one page.
+    """)
+  documentPagesMinimalInline?: int32;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("""
+    The number of document pages processed at the basic level by an inline analyze operation.
+    For documents without explicit pages (ex. txt, html), every 3000 UTF-16 characters is counted as one page.
+    """)
+  documentPagesBasicInline?: int32;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("""
+    The number of document pages processed at the standard level by an inline analyze operation.
+    For documents without explicit pages (ex. txt, html), every 3000 UTF-16 characters is counted as one page.
+    """)
+  documentPagesStandardInline?: int32;
+
   @doc("The hours of audio processed.")
   audioHours?: float32;
 
@@ -808,6 +773,10 @@ model UsageDetails {
 
   @doc("The number of contextualization tokens consumed for preparing context, generating confidence scores, source grounding, and output formatting.")
   contextualizationTokens?: int32;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("The number of advanced contextualization tokens consumed for preparing context, generating confidence scores, source grounding, and output formatting.")
+  advancedContextualizationTokens?: int32;
 
   @doc("The number of LLM and embedding tokens consumed, grouped by model (ex. GTP 4.1) and type (ex. input, cached input, output).")
   tokens?: Record<int32>;
@@ -844,6 +813,20 @@ model ContentAnalyzerAnalyzeOperationStatus {
   usage?: UsageDetails;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
+@added(Versions.v2026_06_01_preview)
+@doc("Provides inline response details for analyze operations.")
+model ContentAnalyzerInlineResponse {
+  @doc("The status of the inline analyze request.")
+  status: Azure.Core.Foundations.OperationState;
+
+  @doc("The result of the inline analyze request.")
+  result: AnalysisResult;
+
+  @doc("Usage details of the inline analyze request.")
+  usage?: UsageDetails;
+}
+
 @added(Versions.v2025_11_01)
 @doc("Default settings for this Content Understanding resource.")
 model ContentUnderstandingDefaults {
@@ -852,6 +835,7 @@ model ContentUnderstandingDefaults {
   modelDeployments: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_11_01)
 @doc("Copy operation request.")
 model CopyRequest {
@@ -865,6 +849,7 @@ model CopyRequest {
   sourceAnalyzerId: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_11_01)
 @doc("Grant copy authorization request.")
 model GrantCopyAuthorizationRequest {

@@ -1,0 +1,54 @@
+{
+  "title": "Get a scheduled action occurrence",
+  "operationId": "Occurrences_Get",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
+    "resourceGroupName": "rgcompute",
+    "scheduledActionName": "myScheduledAction",
+    "occurrenceId": "67b5bada-4772-43fc-8dbb-402476d98a45"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "scheduledTime": "2026-08-05T00:30:00Z",
+          "resultSummary": {
+            "total": 25,
+            "statuses": [
+              {
+                "code": "Succeeded",
+                "count": 24
+              },
+              {
+                "code": "Failed",
+                "count": 1,
+                "errorDetails": {
+                  "code": "InternalServerError",
+                  "message": "An internal error occurred.",
+                  "target": "virtualMachines",
+                  "details": [],
+                  "innererror": {
+                    "code": "InnerErrorCode"
+                  }
+                }
+              }
+            ]
+          },
+          "provisioningState": "Failed"
+        },
+        "id": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/scheduledActions/myScheduledAction/occurrences/67b5bada-4772-43fc-8dbb-402476d98a45",
+        "name": "67b5bada-4772-43fc-8dbb-402476d98a45",
+        "type": "Microsoft.Compute/scheduledActions/occurrences",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-08-01T12:00:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-08-05T00:31:00Z"
+        }
+      }
+    }
+  }
+}

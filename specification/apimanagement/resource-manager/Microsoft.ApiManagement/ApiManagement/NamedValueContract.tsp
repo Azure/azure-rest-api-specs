@@ -51,7 +51,8 @@ interface NamedValueContractOps
         @pattern("^[^*#&+:<>?]+$")
         @maxLength(256)
         namedValueId: string,
-      }
+      },
+      ResourceName = "ApiManagementNamedValue"
     > {}
 
 @armResourceOperations
@@ -265,7 +266,8 @@ interface WorkspaceNamedValueOps
         @pattern("^[^*#&+:<>?]+$")
         @maxLength(256)
         namedValueId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceNamedValue"
     > {}
 
 @armResourceOperations

@@ -1,8 +1,8 @@
 # `.github/shared`
 
-Shared JavaScript helper library (`@azure-tools/specs-shared`) used by tooling and GitHub Actions
-across the `Azure/azure-rest-api-specs` repository. The code is plain ESM JavaScript annotated with
-JSDoc, so it can be consumed from both JavaScript and TypeScript without a build step.
+Shared TypeScript helper library (`@azure-tools/specs-shared`) used by tooling and GitHub Actions
+across the `Azure/azure-rest-api-specs` repository. Node.js 24 executes the ESM TypeScript sources
+using native type stripping, so both JavaScript and TypeScript consumers need no build step.
 
 This document has two audiences:
 
@@ -16,12 +16,12 @@ This document has two audiences:
 Each module is published as a subpath export in [`package.json`](./package.json) (for example
 `@azure-tools/specs-shared/array`). Import directly from the subpath, e.g.:
 
-```js
+```typescript
 import { mapAsync } from "@azure-tools/specs-shared/array";
 ```
 
 > The list below is generated from the `export` statements under [`src`](./src). When in doubt, read
-> the JSDoc on the function/class itself — it is the source of truth for parameters and return types.
+> the TypeScript declarations and documentation on the function/class itself.
 
 ### `array` — async array helpers
 
@@ -67,6 +67,8 @@ Single source of truth for breaking-change and versioning approval label names a
 - `execFile(file, args, options)` — promisified `child_process.execFile`.
 - `execNpm(args, options)` — run an `npm` command.
 - `execNpmExec(args, options)` — run an `npm exec` command.
+- `execPnpm(args, options)` — run a `pnpm` command (via `cross-spawn`).
+- `execPnpmExec(args, options)` — run a `pnpm exec` command (via `cross-spawn`).
 
 ### `git` — git helpers
 
@@ -80,7 +82,7 @@ Single source of truth for breaking-change and versioning approval label names a
 
 ### `logger` — logging
 
-- `ILogger` (JSDoc typedef) — the logger interface (`debug`/`error`/`info`/`warning`/`isDebug`).
+- `ILogger` — the logger interface (`debug`/`error`/`info`/`warning`/`isDebug`).
 - `ConsoleLogger` — `ILogger` implementation backed by the console.
 - `defaultLogger` — shared non-debug logger instance.
 - `debugLogger` — shared debug-enabled logger instance.
@@ -107,7 +109,7 @@ Single source of truth for breaking-change and versioning approval label names a
 
 - `SdkName` — frozen enum of SDK language identifiers (Go/Java/Js/Net/Python/Rust).
 - `SdkNameSchema`, `APIViewRequestDataSchema`, `SpecGenSdkArtifactInfoSchema` — zod schemas (plus
-  inferred typedefs) for SDK tooling payloads.
+  inferred TypeScript types) for SDK tooling payloads.
 - `sdkLabels` — per-language SDK label configuration.
 
 ### `set` — set helpers
@@ -157,6 +159,12 @@ Single source of truth for breaking-change and versioning approval label names a
 - `formatDuration(ms)` — human-readable duration string.
 - `getDuration(from, to)` — milliseconds between two dates.
 
+### `typespec-metadata` — TypeSpec SDK metadata
+
+- `generateTypeSpecMetadata(folder, options)` — run the `@azure-tools/typespec-metadata` emitter,
+  validate its JSON output, and clean up its temporary output.
+- `TypeSpecMetadataSchema`, `TypeSpecLanguageMetadataSchema` — zod schemas for metadata output.
+
 ## Folder structure & contributing
 
 ```
@@ -167,8 +175,7 @@ Single source of truth for breaking-change and versioning approval label names a
 ├── test/     # Vitest unit tests + fixtures and test helpers
 ├── package.json        # Subpath "exports", "bin", scripts, dependencies
 ├── tsconfig.json       # Type-checking config (lint:tsc)
-├── eslint.config.js    # ESLint config (also re-exported as eslint-base-config)
-└── vitest.config.js    # Test + coverage config
+└── vitest.config.ts    # Test + coverage config
 ```
 
 ### `src`
@@ -179,38 +186,45 @@ exposed to consumers through a subpath in [`package.json`](./package.json)'s `ex
 
 Conventions:
 
-- Plain ESM JavaScript annotated with JSDoc — no separate `.ts` sources or build step. Types are
-  inferred from JSDoc, so keep annotations accurate.
+- Use `.ts` files with native TypeScript declarations, `.ts` relative imports, and `import type`
+  for type-only dependencies. There is no emit/build step; `tsc` only checks types.
+- Use erasable syntax compatible with Node.js type stripping: no enums, parameter properties, or
+  namespaces.
+- Linting uses the repository-root `.oxlintrc.json` with oxlint and `oxlint-tsgolint`.
+  CI lints the previously linted packages once in `.github/workflows/lint.yaml`, separately from package tests.
 - Runtime dependencies are kept to an absolute minimum (ideally zero transitive dependencies) for
   performance, and must be a subset of the parent [`../package.json`](../package.json).
 
 ### `test`
 
-[Vitest](https://vitest.dev/) unit tests. Each `src/<module>.js` has a matching
-`test/<module>.test.js`. Supporting assets live alongside the tests:
+[Vitest](https://vitest.dev/) unit tests. Each `src/<module>.ts` has a matching
+`test/<module>.test.ts`. Supporting assets live alongside the tests:
 
 - `test/fixtures/` — sample specs/swaggers/readmes used by the tests.
-- `test/examples.js` — shared example data (also exported publicly as
+- `test/examples.ts` — shared example data (also exported publicly as
   `@azure-tools/specs-shared/test/examples`).
-- `test/repo.js`, `test/sdk-types.js` — local test helpers.
+- `test/repo.ts`, `test/sdk-types.ts` — local test helpers.
 
 ### `perf`
 
-[`perf/perf.js`](./perf/perf.js) contains [tinybench](https://github.com/tinylibs/tinybench)
+[`perf/perf.ts`](./perf/perf.ts) contains [tinybench](https://github.com/tinylibs/tinybench)
 micro-benchmarks (for example comparing `resolve()` vs `resolveCached()`). Run with `npm run perf`.
 
 ### `cmd`
 
-CLI entry points exposed via `package.json` `"bin"`. [`cmd/spec-model.js`](./cmd/spec-model.js)
+CLI entry points exposed via `package.json` `"bin"`. [`cmd/spec-model.ts`](./cmd/spec-model.ts)
 backs `npx spec-model` for dumping a `SpecModel` to JSON.
+After pulling the TypeScript migration into an existing checkout, run
+`pnpm install --no-optimistic-repeat-install` from the repository root to refresh any CLI shims
+that still point at the old `.js` entry point.
 
 ### Contributing
 
 When adding or changing shared code:
 
-1. **Add the module** under `src` as a single-responsibility file with JSDoc-annotated exports.
+1. **Add the module** under `src` as a single-responsibility TypeScript file with typed exports.
 2. **Export it** by adding a subpath entry to the `exports` map in [`package.json`](./package.json).
-3. **Test it** by adding/updating `test/<module>.test.js`; add fixtures under `test/fixtures` if
+3. **Test it** by adding/updating `test/<module>.test.ts`; add fixtures under `test/fixtures` if
    needed.
 4. **Keep dependencies minimal** — avoid new runtime dependencies; any you add must already exist in
    [`../package.json`](../package.json).
@@ -218,12 +232,12 @@ When adding or changing shared code:
 
 Useful scripts (run from `.github/shared`):
 
-| Command                | Description                                        |
-| ---------------------- | -------------------------------------------------- |
-| `npm test`             | Run tests in watch mode (vitest).                  |
-| `npm run test:ci`      | Run tests once with coverage.                      |
-| `npm run lint`         | Run ESLint and `tsc` type-checking.                |
-| `npm run format`       | Auto-format with prettier.                         |
-| `npm run format:check` | Check formatting without writing.                  |
-| `npm run perf`         | Run performance benchmarks.                        |
-| `npm run check`        | Run tests, lint, and format check (the full gate). |
+| Command                | Description                                          |
+| ---------------------- | ---------------------------------------------------- |
+| `npm test`             | Run tests in watch mode (vitest).                    |
+| `npm run test:ci`      | Run tests once with coverage.                        |
+| `pnpm run lint`        | Run oxlint and `tsc` type-checking for this package. |
+| `npm run format`       | Auto-format with prettier.                           |
+| `npm run format:check` | Check formatting without writing.                    |
+| `npm run perf`         | Run performance benchmarks.                          |
+| `npm run check`        | Run tests, lint, and format check (the full gate).   |

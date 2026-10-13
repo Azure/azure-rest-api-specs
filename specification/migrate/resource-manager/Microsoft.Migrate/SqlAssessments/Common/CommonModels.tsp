@@ -275,6 +275,7 @@ model SqlMigrationGuideline {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("SQL target options.")
 model SqlPaaSTargetOptions {
   @doc("Gets or sets the Azure SQL compute tier.")
@@ -302,6 +303,7 @@ model SqlMiSettings {
   azureSqlInstanceType?: AzureSqlInstanceType;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("SQL database assessment settings.")
 model SqlDbSettings {
   @doc("Gets or sets the azure SQL service tier.")
@@ -326,6 +328,7 @@ model SqlMiSettingsV3 {
   azureSqlInstanceType?: AzureSqlInstanceType;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("SQL database assessment settings V3.")
 model SqlDbSettingsV3 {
   @doc("Gets or sets the azure SQL service tier.")
@@ -462,12 +465,11 @@ model SqlAvailabilityGroupDataOverview {
 }
 
 @doc("Recommendations for assessed sql entities.")
-model SqlEntityRecommendations
-  is Recommendations<
-    SqlAssessmentMigrationIssue,
-    MigrationSuitability,
-    Skus<MigrationSuitability>
-  > {
+model SqlEntityRecommendations is Recommendations<
+  SqlAssessmentMigrationIssue,
+  MigrationSuitability,
+  Skus<MigrationSuitability>
+> {
   @doc("Gets a value indicating whether replicas should be provisioned.")
   @visibility(Lifecycle.Read)
   shouldProvisionReplicas?: boolean;

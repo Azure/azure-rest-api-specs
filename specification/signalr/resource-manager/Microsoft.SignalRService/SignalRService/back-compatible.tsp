@@ -4,7 +4,6 @@ using Azure.ClientGenerator.Core;
 using Microsoft.SignalRService;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   PrivateLinkResource.properties
 );
@@ -16,7 +15,6 @@ using Microsoft.SignalRService;
 @@clientName(SignalRResources.update::parameters.properties, "parameters");
 @@clientName(SignalRResources.regenerateKey::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SignalRResource.properties);
 
 @@clientName(
@@ -24,7 +22,6 @@ using Microsoft.SignalRService;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   PrivateEndpointConnection.properties
 );
@@ -38,7 +35,6 @@ using Microsoft.SignalRService;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SharedPrivateLinkResource.properties
 );
@@ -48,20 +44,17 @@ using Microsoft.SignalRService;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   CustomCertificate.properties
 );
 
 @@clientName(CustomDomains.createOrUpdate::parameters.resource, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CustomDomain.properties);
 
 @@clientName(Replicas.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Replicas.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Replica.properties);
 
 @@clientName(

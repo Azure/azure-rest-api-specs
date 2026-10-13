@@ -81,6 +81,7 @@ interface Services {
     Response = ArmResponse<ServiceResourceList>
   >;
 
+  @doc("A long-running resource action.")
   @added(Versions.v2025_10_01_preview)
   restartReplica is ArmResourceActionAsync<
     ServiceResource,

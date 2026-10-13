@@ -94,6 +94,7 @@ op analyzeFromUrl is Azure.Core.RpcOperation<
     @header
     contentType: "application/json";
 
+    #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
     @doc("The image to be analyzed")
     @bodyRoot
     imageUrl: ImageUrl;

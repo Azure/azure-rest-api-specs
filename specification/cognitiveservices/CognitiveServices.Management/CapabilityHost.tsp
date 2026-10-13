@@ -15,8 +15,10 @@ namespace Microsoft.CognitiveServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Account)
-model CapabilityHost
-  is Azure.ResourceManager.ProxyResource<CapabilityHostProperties, false> {
+model CapabilityHost is Azure.ResourceManager.ProxyResource<
+  CapabilityHostProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CapabilityHost,
     KeyName = "capabilityHostName",

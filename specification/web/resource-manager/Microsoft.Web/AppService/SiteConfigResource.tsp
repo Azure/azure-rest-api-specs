@@ -50,7 +50,8 @@ interface SiteConfigResourceOps
         @segment("config")
         @key
         web: "web",
-      }
+      },
+      ResourceName = "WebSiteConfig"
     > {}
 
 @tag("WebApps")
@@ -129,7 +130,8 @@ interface SiteConfigResourceOperationGroupOps
         @segment("snapshots")
         @key
         snapshotId: string,
-      }
+      },
+      ResourceName = "SiteConfigSnapshot"
     > {}
 
 @armResourceOperations
@@ -217,7 +219,8 @@ interface SiteConfigSlotResourceOperationGroupOps
         @segment("config")
         @key
         web: "web",
-      }
+      },
+      ResourceName = "WebSiteSlotConfig"
     > {}
 
 @tag("WebApps")
@@ -302,7 +305,8 @@ interface SiteConfigResourceSnapshotSlotOperationGroupOps
         @segment("snapshots")
         @key
         snapshotId: string,
-      }
+      },
+      ResourceName = "SiteSlotConfigSnapshot"
     > {}
 
 @armResourceOperations

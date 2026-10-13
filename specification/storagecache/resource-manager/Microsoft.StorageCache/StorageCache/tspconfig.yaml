@@ -40,7 +40,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/storagecache"
     emitter-output-dir: "{output-dir}/{service-dir}/armstoragecache"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armstoragecache/v4"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armstoragecache"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -50,3 +50,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

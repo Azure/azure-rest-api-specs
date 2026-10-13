@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "es2024",
+    "module": "NodeNext",
+    // override "importHelpers:true" in root tsconfig.json
+    "importHelpers": false,
+    "noEmit": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    // default changed to [] (empty array) in typescript v6
+    "types": ["node"],
+  },
+  "include": ["*.mts"],
+}

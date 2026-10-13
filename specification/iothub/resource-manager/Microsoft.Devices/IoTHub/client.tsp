@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
 
@@ -37,6 +38,14 @@ using Http;
   "disableDeviceSas",
   "java"
 );
+
+// Preserve backward-compatible Java surface (free-form Object) for device twin
+// free-form maps. These properties are `Record<unknown>` in the spec, which the
+// Java emitter maps to `Map`; prior releases generated `Object`. Keep `Object`
+// for Java only to avoid a breaking change, while other languages keep `Map`.
+@@alternateType(RoutingTwin.tags, unknown, "java");
+@@alternateType(RoutingTwinProperties.desired, unknown, "java");
+@@alternateType(RoutingTwinProperties.reported, unknown, "java");
 
 @@scope(GroupIdInformations.get, "!csharp");
 @@scope(GroupIdInformations.list, "!csharp");
@@ -340,12 +349,17 @@ using Http;
 /**
  * override for IotHubDescriptions.manualFailover
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op replaceManualFailover(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
+
+  @path
   iotHubName: string,
+
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   @body body: Microsoft.Devices.FailoverInput,
@@ -364,12 +378,17 @@ op replaceManualFailover(
 /**
  * override for IotHubDescriptions.testAllRoutes
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op replaceTestAllRoutes(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
+
+  @path
   iotHubName: string,
+
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   @body body: Microsoft.Devices.TestAllRoutesInput,
@@ -383,12 +402,17 @@ op replaceTestAllRoutes(
 /**
  * override for IotHubDescriptions.testRoute
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op replaceTestRoute(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
+
+  @path
   iotHubName: string,
+
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   @body body: Microsoft.Devices.TestRouteInput,

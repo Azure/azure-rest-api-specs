@@ -330,6 +330,11 @@ interface BatchClient {
 @@clientName(BatchClient.getNodeFile, "download_node_file", "python");
 
 @@clientName(BatchClient.listSubTasks, "list_subtasks", "python");
+// Re-export LRO option models so they are public in azure.batch.models
+@@access(Azure.Batch.BatchJobTerminateOptions, Access.public, "python");
+@@access(Azure.Batch.BatchNodeDeallocateOptions, Access.public, "python");
+@@access(Azure.Batch.BatchNodeRebootOptions, Access.public, "python");
+@@access(Azure.Batch.BatchNodeReimageOptions, Access.public, "python");
 // Python LRO private methods
 @@access(Azure.Batch.Pools.removeNodes, Access.internal, "python");
 @@clientName(BatchClient.removeNodes, "removeNodesInternal", "python");

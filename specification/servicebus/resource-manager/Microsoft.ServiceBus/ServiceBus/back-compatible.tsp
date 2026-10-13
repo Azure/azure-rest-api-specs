@@ -4,27 +4,22 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ServiceBus;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SBNamespaceUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(FailOver.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   PrivateLinkResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   NamespaceFailoverProperties.properties
 );
@@ -48,7 +43,6 @@ using Microsoft.ServiceBus;
 );
 @@clientName(SBNamespaces.checkNameAvailability::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBNamespace.properties);
 
 @@clientName(
@@ -56,7 +50,6 @@ using Microsoft.ServiceBus;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   PrivateEndpointConnection.properties
 );
@@ -66,7 +59,6 @@ using Microsoft.ServiceBus;
   "NetworkSecurityPerimeterConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   NetworkSecurityPerimeterConfiguration.properties
 );
@@ -83,7 +75,6 @@ using Microsoft.ServiceBus;
 @@clientLocation(ArmDisasterRecoveries.failOver, DisasterRecoveryConfigs);
 @@clientName(ArmDisasterRecoveries.failOver::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ArmDisasterRecovery.properties
 );
@@ -93,7 +84,6 @@ using Microsoft.ServiceBus;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   MigrationConfigProperties.properties
 );
@@ -107,7 +97,6 @@ using Microsoft.ServiceBus;
 
 @@clientLocation(NetworkRuleSets.listNetworkRuleSets, "Namespaces");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkRuleSet.properties);
 
 @@clientLocation(
@@ -151,7 +140,6 @@ using Microsoft.ServiceBus;
 );
 @@clientName(Topics.regenerateKeys::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SBAuthorizationRule.properties
 );
@@ -162,7 +150,6 @@ using Microsoft.ServiceBus;
 @@clientLocation(SBQueues.delete, Queues);
 @@clientLocation(SBQueues.listByNamespace, Queues);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBQueue.properties);
 
 @@clientLocation(SBTopics.get, Topics);
@@ -171,12 +158,10 @@ using Microsoft.ServiceBus;
 @@clientLocation(SBTopics.delete, Topics);
 @@clientLocation(SBTopics.listByNamespace, Topics);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBTopic.properties);
 
 @@clientName(Rules.createOrUpdate::parameters.resource, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Rule.properties);
 
 @@clientLocation(SBSubscriptions.get, "Subscriptions");
@@ -185,7 +170,6 @@ using Microsoft.ServiceBus;
 @@clientLocation(SBSubscriptions.delete, "Subscriptions");
 @@clientLocation(SBSubscriptions.listByTopic, "Subscriptions");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBSubscription.properties);
 
 @@clientLocation(NamespacesOperationGroup.checkNameAvailability, "Namespaces");

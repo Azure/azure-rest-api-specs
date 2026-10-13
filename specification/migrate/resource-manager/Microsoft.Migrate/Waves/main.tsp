@@ -10,6 +10,7 @@ import "./ApiVersions.tsp";
 
 // Add all service routes here.
 import "./routes.tsp";
+import "./client.tsp";
 
 // using Autorest;
 using TypeSpec.Http;
