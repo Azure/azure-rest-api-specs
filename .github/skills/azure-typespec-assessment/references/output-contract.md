@@ -176,6 +176,13 @@ Dimension statuses are derived, not authored:
   declaration/documented/missing coverage;
 - safety scope: `rest-and-downstream-only`, never Azure Guidelines or document quality.
 
+Fast-mode HTML reports contain only REST breaking changes, downstream SDK
+breaking changes, and Documentation Completeness sections. They identify
+Semantic intents and Azure Guidelines as skipped in the report header without
+rendering those dimensions as report sections. Structured output retains
+internal Semantic correlation data and an explicit skipped Azure Guidelines
+dimension for provenance and validation.
+
 A blocked implemented dimension cannot pass. Documentation Completeness is
 `failed` when one or more eligible newly added declarations lack a nonempty effective
 compiler document, `not-assessed` when compiler evidence is incomplete,
