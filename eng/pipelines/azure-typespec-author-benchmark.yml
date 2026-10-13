@@ -1,0 +1,134 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+# Internal Usage Guide:
+# - Purpose: benchmark azure-typespec-author in two execution modes:
+#   1) forced mode (code-quality oriented), 2) trigger mode (skill-invocation oriented).
+# - Entry: run this pipeline manually (trigger/pr are disabled).
+# - Skill source:
+#   - SkillBranch empty: evaluate the current checked-out branch.
+#   - SkillBranch set: overlay SKILL.md + references from that branch before evaluation.
+#
+# Structure:
+# - PrepareShared builds the selected MCP binary once and publishes it as the mcp-servers artifact.
+# - PrepareForced / PrepareTrigger generate area-based shard matrices from eval file metadata.
+# - EvalForced / EvalTrigger run one matrix job per area.
+# - SummaryForced / SummaryTrigger roll up JUnit results.
+trigger: none
+pr: none
+
+parameters:
+- name: SkillBranch
+  displayName: Branch containing the azure-typespec-author skill source (SKILL.md + references/) to evaluate. Defaults to the full source branch ref.
+  type: string
+  default: $(Build.SourceBranch)
+- name: McpKind
+  displayName: MCP implementation
+  type: string
+  default: live
+  values:
+    - live
+    - mock
+- name: Runs
+  displayName: Vally trials per stimulus
+  type: number
+  default: 1
+
+variables:
+- template: /eng/pipelines/templates/variables/image.yml
+- group: AzSDK_Eval_Variable_group
+- name: SkillBranch
+  value: ${{ parameters.SkillBranch }}
+
+extends:
+  template: /eng/pipelines/templates/stages/1es-redirect.yml
+  parameters:
+    Use1ESOfficial: true
+    stages:
+      - stage: PrepareShared
+        displayName: Prepare shared MCP artifact
+        dependsOn: []
+        jobs:
+          - template: /eng/common/pipelines/templates/jobs/build-mcp.yml
+            parameters:
+              mcpSetupTemplate: /eng/common/pipelines/templates/steps/eval-mcp-setup.yml
+              TestType: ${{ parameters.McpKind }}
+
+      - stage: PrepareForced
+        displayName: Prepare forced track
+        dependsOn: PrepareShared
+        jobs:
+          - template: /eng/common/pipelines/templates/jobs/generate-eval-matrix.yml
+            parameters:
+              vallyRoot: .github/skills/azure-typespec-author/evaluate
+              evalGlobs:
+                - 'evals/*.eval.yaml'
+
+      - stage: EvalForced
+        displayName: Eval forced track
+        dependsOn: PrepareForced
+        variables:
+          TypeSpecAuthorEvalExtraArgs: '--tag mode=forced --skill-dir ..'
+        jobs:
+          - template: /.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-eval-shard.yml
+            parameters:
+              matrixStageName: PrepareForced
+              vallyRoot: .github/skills/azure-typespec-author/evaluate
+              mcpEnvironment: ${{ parameters.McpKind }}
+              azureSubscription: azuresdkqabot-dev
+              runs: ${{ parameters.Runs }}
+              # Azure Pipelines has no template arithmetic, so scale in explicit tiers.
+              ${{ if eq(parameters.Runs, 1) }}:
+                shardTimeoutInMinutes: 50
+              ${{ elseif eq(parameters.Runs, 2) }}:
+                shardTimeoutInMinutes: 80
+              ${{ else }}:
+                shardTimeoutInMinutes: 120
+
+      - stage: SummaryForced
+        displayName: Summary forced track
+        dependsOn: EvalForced
+        condition: always()
+        jobs:
+          - template: /.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-summary.yml
+            parameters:
+              resultArtifactPrefix: eval-result-PrepareForced-
+              failOnFailedTests: false
+
+      - stage: PrepareTrigger
+        displayName: Prepare trigger track
+        dependsOn: PrepareShared
+        jobs:
+          - template: /eng/common/pipelines/templates/jobs/generate-eval-matrix.yml
+            parameters:
+              vallyRoot: .github/skills/azure-typespec-author/evaluate
+              evalGlobs:
+                - 'evals/*.eval.yaml'
+
+      - stage: EvalTrigger
+        displayName: Eval trigger track
+        dependsOn: PrepareTrigger
+        variables:
+          TypeSpecAuthorEvalExtraArgs: '--tag mode=trigger --skill-dir ..'
+        jobs:
+          - template: /.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-eval-shard.yml
+            parameters:
+              matrixStageName: PrepareTrigger
+              vallyRoot: .github/skills/azure-typespec-author/evaluate
+              mcpEnvironment: ${{ parameters.McpKind }}
+              azureSubscription: azuresdkqabot-dev
+              runs: ${{ parameters.Runs }}
+              ${{ if eq(parameters.Runs, 1) }}:
+                shardTimeoutInMinutes: 50
+              ${{ elseif eq(parameters.Runs, 2) }}:
+                shardTimeoutInMinutes: 80
+              ${{ else }}:
+                shardTimeoutInMinutes: 120
+
+      - stage: SummaryTrigger
+        displayName: Summary trigger track
+        dependsOn: EvalTrigger
+        condition: always()
+        jobs:
+          - template: /.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-summary.yml
+            parameters:
+              resultArtifactPrefix: eval-result-PrepareTrigger-
+              failOnFailedTests: false

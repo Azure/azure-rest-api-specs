@@ -1,0 +1,48 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+# This pipeline runs evaluations WITHOUT loading the azure-typespec-author skill,
+# testing the agent's baseline capability with the selected live or mock MCP tool surface.
+trigger: none
+pr: none
+
+parameters:
+  - name: McpKind
+    displayName: MCP implementation
+    type: string
+    default: live
+    values:
+      - live
+      - mock
+  - name: Runs
+    displayName: Vally trials per stimulus
+    type: number
+    default: 1
+
+variables:
+  - template: /eng/pipelines/templates/variables/image.yml
+  - group: AzSDK_Eval_Variable_group
+  - name: TypeSpecAuthorEvalExtraArgs
+    value: '--tag mode=no-skill --skill-dir /tmp/no-skills'
+  - name: AZSDK_EVAL_MCP_KIND
+    value: ${{ parameters.McpKind }}
+  - name: TypeSpecAuthorEvalRuns
+    value: ${{ parameters.Runs }}
+
+extends:
+  template: /eng/common/pipelines/templates/stages/archetype-eval.yml
+  parameters:
+    vallyRoot: .github/skills/azure-typespec-author/evaluate
+    evalGlobs:
+      - 'evals/*.eval.yaml'
+    mcpSetupTemplate: /eng/common/pipelines/templates/steps/eval-mcp-setup.yml
+    TestType: ${{ parameters.McpKind }}
+    evalInvokeTemplate: /.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-noskill-eval-invoke.yml
+    UseAzSdkAuthentication: ${{ eq(parameters.McpKind, 'live') }}
+    preEvalTemplate: /.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-preeval.yml
+    failOnFailedTests: false
+    # Keep timeout scaling aligned with the with-skill benchmark.
+    ${{ if eq(parameters.Runs, 1) }}:
+      shardTimeoutInMinutes: 50
+    ${{ elseif eq(parameters.Runs, 2) }}:
+      shardTimeoutInMinutes: 80
+    ${{ else }}:
+      shardTimeoutInMinutes: 120
