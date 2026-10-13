@@ -97,4 +97,14 @@ test("rejects missing, empty, duplicate, or unknown direction roots", () => {
     ...source.components.schemas.Server,
   };
   assert.throws(() => buildVoiceEventBundle(source), /server event union/);
+
+  delete source.components.schemas.OtherServer;
+  source.components.schemas.Unknown = {
+    "x-foundry-event-direction": "unknown",
+    oneOf: [{ $ref: "#/components/schemas/Append" }],
+  };
+  assert.throws(
+    () => buildVoiceEventBundle(source),
+    /Only client and server event roots/,
+  );
 });
