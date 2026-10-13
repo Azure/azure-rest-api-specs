@@ -71,6 +71,24 @@ suppressions:
       - $.definitions.AiGatewayPolicyUpdate.properties.allowCredentials
       - $.definitions.AiGatewayPolicyUpdate.properties.terminateUnmatchedRequest
     reason: These implemented fields are binary enable-or-disable and required-or-optional switches, not extensible states.
+  - code: ValidFormats
+    from: openapi.json
+    where:
+      - $.definitions.AiGatewayCostLimitOverride.properties.amount.format
+      - $.definitions.AiGatewayCostLimitOverrideUpdate.properties.amount.format
+      - $.definitions.AiGatewayPolicy.properties.amount.format
+      - $.definitions.AiGatewayPolicyUpdate.properties.amount.format
+    reason: Cost-limit amounts are monetary JSON numbers bound to System.Decimal by the RP. The contract explicitly excludes double to preserve decimal precision. TypeSpec decimal128 emits the decimal format; retain that format rather than changing the monetary API and SDK types to binary floating point.
+  - code: PathForResourceAction
+    from: openapi.json
+    where:
+      - "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}/endpoints/{endpointId}/oauth2/getLoginLinks']"
+    reason: The RP implements this endpoint-scoped OAuth action at endpoints/{endpointId}/oauth2/getLoginLinks. The endpoint is an embedded tool-server item, not a separately managed ARM resource. Retain the implemented route instead of advertising an unsupported action URL.
+  - code: NestedResourcesMustHaveListOperation
+    from: openapi.json
+    where:
+      - $.definitions.AiGatewayWorkspaceResource
+    reason: AI Gateway exposes only the predefined default workspace with GET, HEAD, and policy-only PATCH. The workspace collection route is explicitly restricted to non-AI-Gateway SKUs in the RP. Do not advertise an unsupported collection operation for this singleton workspace.
   - code: XMSSecretInResponse
     from: openapi.json
     where:

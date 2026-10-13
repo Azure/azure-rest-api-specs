@@ -104,7 +104,7 @@ model AiGatewayAliasUpdateParameters {
 model AiGatewayAliasResource is ProxyResource<AiGatewayAliasProperties> {
   ...ResourceNameParameter<
     Resource = AiGatewayAliasResource,
-    KeyName = "aliasName",
+    KeyName = "aliasId",
     SegmentName = "aliases",
     NamePattern = "^[a-zA-Z0-9_.-]+$"
   >;

@@ -60,7 +60,7 @@ interface AiGatewayToolServerEndpointOperations {
 interface AiGatewayTelemetryExporterResources {
   checkExistence is ArmResourceCheckExistence<
     AiGatewayTelemetryExporterResource,
-    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
+    Response = AiGatewayResourceExistsResponse
   >;
   get is ArmResourceRead<AiGatewayTelemetryExporterResource>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<
@@ -85,7 +85,7 @@ interface AiGatewayTelemetryExporterResources {
 interface AiGatewayAliasResources {
   checkExistence is ArmResourceCheckExistence<
     AiGatewayAliasResource,
-    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
+    Response = AiGatewayResourceExistsResponse
   >;
   get is ArmResourceRead<AiGatewayAliasResource>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<
@@ -129,7 +129,7 @@ interface AiGatewayResources {
 interface AiGatewayWorkspaceResources {
   checkExistence is ArmResourceCheckExistence<
     AiGatewayWorkspaceResource,
-    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
+    Response = AiGatewayResourceExistsResponse
   >;
   get is ArmResourceRead<AiGatewayWorkspaceResource>;
   @patch(#{ implicitOptionality: false })
@@ -145,7 +145,7 @@ interface AiGatewayWorkspaceResources {
 interface AiGatewayModelProviderResources {
   checkExistence is ArmResourceCheckExistence<
     AiGatewayModelProviderResource,
-    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
+    Response = AiGatewayResourceExistsResponse
   >;
   get is ArmResourceRead<AiGatewayModelProviderResource>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<
@@ -179,7 +179,7 @@ interface AiGatewayModelProviderResources {
 interface AiGatewayModelResources {
   checkExistence is ArmResourceCheckExistence<
     AiGatewayModelResource,
-    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
+    Response = AiGatewayResourceExistsResponse
   >;
   get is ArmResourceRead<AiGatewayModelResource>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<
@@ -204,7 +204,7 @@ interface AiGatewayModelResources {
 interface AiGatewayToolServerResources {
   checkExistence is ArmResourceCheckExistence<
     AiGatewayToolServerResource,
-    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
+    Response = AiGatewayResourceExistsResponse
   >;
   get is ArmResourceRead<AiGatewayToolServerResource>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<
@@ -238,7 +238,7 @@ interface AiGatewayToolServerResources {
 interface AiGatewayApiKeyResources {
   checkExistence is ArmResourceCheckExistence<
     AiGatewayApiKeyResource,
-    Response = AiGatewayResourceExistsResponse | ArmResourceNotFoundResponse
+    Response = AiGatewayResourceExistsResponse
   >;
   get is ArmResourceRead<AiGatewayApiKeyResource>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<
