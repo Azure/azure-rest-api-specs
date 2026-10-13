@@ -66,7 +66,6 @@ model MetadataSnapshotPolicy {
 }
 
 /** The properties of a storage account metadata policy. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Metadata policy PUT and DELETE operations complete synchronously, so the resource has no asynchronous provisioning lifecycle to report."
 @added(Versions.v2026_12_01)
 model MetadataPolicyProperties {
   /** The date and time when the metadata policy was last modified. */
