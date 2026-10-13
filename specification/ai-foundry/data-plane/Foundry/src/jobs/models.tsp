@@ -193,7 +193,7 @@ model Output {
   @doc("Optional output destination URI. When omitted on submission, the runtime can materialize the output in job storage; a subsequent resource read can include the resolved URI.")
   uri?: string | null;
 
-  @doc("Base model ID.")
+  @doc("Optional base-model asset URI returned by asset registration or read operations, not a deployment name or shorthand alias. A non-empty value must start with azureai:// or azureml://; unsupported reference forms return 400. Register or locate the base model and use its returned URI, with access configured for the job's execution identity.")
   baseModelId?: string | null;
 
   @doc("Description for the output.")
@@ -422,7 +422,7 @@ model CommandJob extends JobProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   command: string;
 
-  @doc("ACR path of the environment image. Immutable after the initial submission.")
+  @doc("Container image reference in Azure Container Registry for the project's Azure cloud, or Microsoft Container Registry (mcr.microsoft.com). Use the registry/repository:tag or registry/repository@digest reference, not an Azure ML environment asset alias, a local path, or an arbitrary registry. Unsupported reference forms return 400. The image must already exist and be accessible to the job's execution identity; submitting a job does not upload an image or grant registry access. Immutable after the initial submission.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   environmentImageReference: string;
 
@@ -446,7 +446,7 @@ model CommandJob extends JobProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   properties?: Record<string> | null;
 
-  @doc("Code asset reference.")
+  @doc("Optional Foundry code asset URI returned by asset registration or read operations. A non-empty value must start with azureai://; Azure Resource Manager IDs, azureml:// code references, shorthand aliases and local paths are rejected with 400. Register the code and use its returned URI, with access configured for the job's execution identity. Omit this field when the code is already packaged in the environment image. Serialized as codeId and immutable after the initial submission.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @encodedName("application/json", "codeId")
   code?: string | null;
@@ -456,7 +456,7 @@ model CommandJob extends JobProperties {
   @encodedName("application/json", "computeId")
   compute: string;
 
-  @doc("Mapping of input data bindings used in the job.")
+  @doc("Mapping of input data bindings used in the job. For registered assets, use the URI returned by asset operations; a local path is not automatically uploaded. The name _code_ is reserved, case-insensitively; supplying it returns 400. Supply code through the code field (serialized as codeId), not a reserved input binding. Configure data access for the job's execution identity before submission.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   inputs?: Record<Input> | null;
 
