@@ -2313,6 +2313,24 @@ union AdministratorName {
   ActiveDirectory: "ActiveDirectory",
 }
 
+/**
+ * The status of the external administrator.
+ */
+@added(Versions.v2026_11_01_preview)
+union ExternalAdminStatus {
+  string,
+
+  /**
+   * The external administrator is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * The external administrator is disabled.
+   */
+  Disabled: "Disabled",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AuthenticationName {
   string,
@@ -14190,6 +14208,13 @@ model AdministratorProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   azureADOnlyAuthentication?: boolean;
+
+  /**
+   * The status of the external administrator.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  status?: ExternalAdminStatus;
 }
 
 /**
@@ -14683,6 +14708,13 @@ model ServerExternalAdministrator {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureADOnlyAuthentication?: boolean;
+
+  /**
+   * The status of the external administrator.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  status?: ExternalAdminStatus;
 }
 
 /**

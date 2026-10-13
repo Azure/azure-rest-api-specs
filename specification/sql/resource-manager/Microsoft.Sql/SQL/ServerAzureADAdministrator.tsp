@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 /**
@@ -73,6 +74,40 @@ interface ServerAzureADAdministrators {
   listByServer is ArmResourceListByParent<
     ServerAzureADAdministrator,
     Response = AdministratorListResult
+  >;
+
+  /**
+   * Enables the Azure Active Directory administrator on the server.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @action("enable")
+  enable is ArmResourceActionAsyncBase<
+    ServerAzureADAdministrator,
+    void,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ServerAzureADAdministrator>,
+    Response =
+      | ArmResponse<ServerAzureADAdministrator>
+      | ArmAcceptedLroResponse<
+          Description = "Enabling the Azure Active Directory administrator is in progress.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = ServerAzureADAdministrator>
+        >
+  >;
+
+  /**
+   * Disables the Azure Active Directory administrator on the server.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @action("disable")
+  disable is ArmResourceActionAsyncBase<
+    ServerAzureADAdministrator,
+    void,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ServerAzureADAdministrator>,
+    Response =
+      | ArmResponse<ServerAzureADAdministrator>
+      | ArmAcceptedLroResponse<
+          Description = "Disabling the Azure Active Directory administrator is in progress.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = ServerAzureADAdministrator>
+        >
   >;
 }
 
