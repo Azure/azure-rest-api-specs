@@ -560,21 +560,13 @@ describe("commands.ts", () => {
         "specification\\compute\\Compute.Management\\tspconfig.yaml",
         undefined,
       ],
-      [
-        "Windows OpenAPI path",
-        undefined,
-        "specification\\compute\\resource-manager\\readme.md",
-      ],
+      ["Windows OpenAPI path", undefined, "specification\\compute\\resource-manager\\readme.md"],
     ])("identifies %s", (_name, tspConfigPath, readmePath) => {
       expect(isManagementPlaneSpecConfig(tspConfigPath, readmePath)).toBe(true);
     });
 
     test.each([
-      [
-        "TypeSpec data plane",
-        "specification/compute/data-plane/Compute/tspconfig.yaml",
-        undefined,
-      ],
+      ["TypeSpec data plane", "specification/compute/data-plane/Compute/tspconfig.yaml", undefined],
       ["OpenAPI data plane", undefined, "specification/compute/data-plane/readme.md"],
       [
         "similar OpenAPI plane segment",
