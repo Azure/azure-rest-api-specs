@@ -435,6 +435,17 @@ GitHub Actions lint job runs actionlint and zizmor without installing workspace 
 New tools do not need their own workflows. `github-test.yaml` separately verifies
 production-only module imports and compiled agentic workflow locks.
 
+## TypeSpec examples
+
+The root install includes the unified-example CLI. Validate a project's
+`examples.yaml` or `examples/*.yaml` files from the repository root:
+
+```bash
+pnpm tsp-examples validate specification/<service>/<project> --warn-as-error
+```
+
+Use `pnpm tsp-examples --help` for available commands.
+
 ## Publishing TypeSpec libraries
 
 Publishable TypeSpec libraries live under `libs/` and participate in the pnpm
