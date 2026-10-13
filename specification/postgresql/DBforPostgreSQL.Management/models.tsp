@@ -659,6 +659,7 @@ union IdentityType {
 /**
  * Major version of PostgreSQL database engine.
  */
+@removed(Versions.v2026_10_01)
 union PostgresMajorVersion {
   string,
 
@@ -2981,7 +2982,8 @@ model ServerProperties {
   /**
    * Major version of PostgreSQL database engine.
    */
-  version?: PostgresMajorVersion;
+  @typeChangedFrom(Versions.v2026_10_01, PostgresMajorVersion)
+  version?: string;
 
   /**
    * Minor version of PostgreSQL database engine.
@@ -3439,7 +3441,8 @@ model ServerPropertiesForPatch {
   /**
    * Major version of PostgreSQL database engine.
    */
-  version?: PostgresMajorVersion;
+  @typeChangedFrom(Versions.v2026_10_01, PostgresMajorVersion)
+  version?: string;
 
   /**
    * Storage properties of a server.
@@ -4163,10 +4166,12 @@ model MaintenanceEventActionResponse {
 @added(Versions.v2026_04_01)
 model UpgradeSequence {
   @doc("The source PostgreSQL version.")
-  sourceVersion?: PostgresMajorVersion;
+  @typeChangedFrom(Versions.v2026_10_01, PostgresMajorVersion)
+  sourceVersion?: string;
 
   @doc("The target PostgreSQL version.")
-  targetVersion?: PostgresMajorVersion;
+  @typeChangedFrom(Versions.v2026_10_01, PostgresMajorVersion)
+  targetVersion?: string;
 }
 
 @doc("Precheck result details.")
@@ -4216,7 +4221,8 @@ model MajorVersionUpgradePrecheckResourceProperties {
   precheckResult?: PrecheckResult;
 
   @doc("The target PostgreSQL major version for the upgrade.")
-  targetVersion?: PostgresMajorVersion;
+  @typeChangedFrom(Versions.v2026_10_01, PostgresMajorVersion)
+  targetVersion?: string;
 
   @doc("Array of policy validation details.")
   @identifiers(#["policyName"])
@@ -4227,7 +4233,8 @@ model MajorVersionUpgradePrecheckResourceProperties {
 @added(Versions.v2026_04_01)
 model StartMajorVersionUpgradePrecheckRequest {
   @doc("The target major version to upgrade to.")
-  targetVersion: PostgresMajorVersion;
+  @typeChangedFrom(Versions.v2026_10_01, PostgresMajorVersion)
+  targetVersion: string;
 }
 
 @doc("Response model for starting a major version upgrade precheck.")
@@ -4276,6 +4283,7 @@ model MajorVersionUpgradePrecheckResource
 
 @doc("The database agent configuration for a PostgreSQL flexible server.")
 @added(Versions.v2026_07_01)
+@removed(Versions.v2026_10_01)
 @singleton("Default")
 @parentResource(Server)
 model DbAgent is Azure.ResourceManager.ProxyResource<DbAgentProperties> {
@@ -4289,6 +4297,7 @@ model DbAgent is Azure.ResourceManager.ProxyResource<DbAgentProperties> {
 
 @doc("Properties of the database agent configuration.")
 @added(Versions.v2026_07_01)
+@removed(Versions.v2026_10_01)
 model DbAgentProperties {
   @doc("The state of the database agent.")
   @visibility(Lifecycle.Read)
@@ -4305,6 +4314,7 @@ model DbAgentProperties {
 
 @doc("A request to enable or disable the database agent.")
 @added(Versions.v2026_07_01)
+@removed(Versions.v2026_10_01)
 model DbAgentForUpdate {
   @doc("The requested database agent properties.")
   properties: DbAgentForUpdateProperties;
@@ -4312,6 +4322,7 @@ model DbAgentForUpdate {
 
 @doc("Writable properties of the database agent configuration.")
 @added(Versions.v2026_07_01)
+@removed(Versions.v2026_10_01)
 model DbAgentForUpdateProperties {
   @doc("The requested state of the database agent.")
   state: DbAgentForUpdateState;
@@ -4319,6 +4330,7 @@ model DbAgentForUpdateProperties {
 
 @doc("The state of the database agent.")
 @added(Versions.v2026_07_01)
+@removed(Versions.v2026_10_01)
 union DbAgentState {
   string,
 
@@ -4340,6 +4352,7 @@ union DbAgentState {
 
 @doc("The provisioning state of the database agent resource.")
 @added(Versions.v2026_07_01)
+@removed(Versions.v2026_10_01)
 union DbAgentProvisioningState {
   ResourceProvisioningState,
 
@@ -4350,6 +4363,7 @@ union DbAgentProvisioningState {
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "PUT requests accept only Enabled or Disabled; additional values must be rejected."
 @doc("The database agent states accepted in a write request.")
 @added(Versions.v2026_07_01)
+@removed(Versions.v2026_10_01)
 union DbAgentForUpdateState {
   @doc("Enable the database agent.")
   Enabled: "Enabled",
@@ -4360,6 +4374,7 @@ union DbAgentForUpdateState {
 
 @doc("The response returned when a database agent write is accepted.")
 @added(Versions.v2026_07_01)
+@removed(Versions.v2026_10_01)
 model DbAgentAcceptedResponse {
   ...AcceptedResponse;
   ...ArmCombinedLroHeaders<FinalResult = DbAgent>;
