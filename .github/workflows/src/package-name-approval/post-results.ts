@@ -1,5 +1,6 @@
-import { unlink, writeFile } from "fs/promises";
-import { join } from "path";
+import { renderMarkdownDoc } from "@azure-tools/specs-shared/markdown";
+import { unlink, writeFile } from "node:fs/promises";
+import { join } from "node:path";
 import { z } from "zod";
 import { execFile } from "../../../shared/src/exec.ts";
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
@@ -7,6 +8,8 @@ import { commentOrUpdate, parseExistingComments } from "../comment.ts";
 import { extractInputs } from "../context.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
 import { loadApproversConfig } from "./approvers.ts";
+import { buildApprovalResetComment } from "../protected-labels/label-comments.ts";
+import { ALLOWED_BOT_LOGINS } from "../protected-labels/authorization.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
 const FormatValidationResultSchema = z.object({
@@ -80,16 +83,23 @@ async function downloadNamespaceResults(
   }
 }
 
-function getApprovers(
+export function getApprovers(
   approversConfig: import("./approvers.ts").ApproversConfig,
   isMgmt: boolean,
   language: string,
-): string[] {
+): string[] | "unprotected" {
   if (isMgmt) {
+    if (approversConfig.unprotected?.["management-plane"]?.includes(language)) {
+      return "unprotected";
+    }
     const mgmtApprovers = approversConfig["management-plane"]?.all;
     if (mgmtApprovers) {
       return mgmtApprovers;
     }
+  }
+
+  if (approversConfig.unprotected?.["data-plane"]?.includes(language)) {
+    return "unprotected";
   }
 
   const approvers = approversConfig["data-plane"]?.[language];
@@ -127,7 +137,61 @@ export function parseCommentTable(
   return results;
 }
 
-function buildCommentBody({
+/**
+ * Whether the add-only "Mgmt" label should be cleared. post-results is its only writer,
+ * so it goes stale when a push removes the management tspconfig. Label hygiene now that
+ * authorization keys off resource-manager, not "Mgmt" (#46785). Mixed PRs (isMgmt) keep it.
+ */
+export function shouldRemoveStaleMgmtLabel(isMgmt: boolean, existingLabels: string[]): boolean {
+  return !isMgmt && existingLabels.includes("Mgmt");
+}
+
+/**
+ * Resolve who applied each reset language's approval label so the reset notice can
+ * @-mention them (#46786). Reads the structured label timeline (issue events) rather than
+ * scraping the rendered review comment: the "labeled" event carries the actor directly, so
+ * there is no dependency on the comment's markdown formatting. Trusted bots are excluded (a
+ * label re-applied by automation is not a person to ping), and only the latest approver of
+ * each label is kept (a name can be approved, reset, then re-approved by someone else).
+ */
+export async function resolveResetApprovers(
+  github: GitHub,
+  owner: string,
+  repo: string,
+  issueNumber: number,
+  resetLanguages: string[],
+): Promise<string[]> {
+  if (resetLanguages.length === 0) return [];
+
+  const approvedLabels = new Set(resetLanguages.map((lang) => `package-name-${lang}-approved`));
+  const events = await github.paginate(github.rest.issues.listEvents, {
+    owner,
+    repo,
+    issue_number: issueNumber,
+    per_page: PER_PAGE_MAX,
+  });
+
+  // Events are returned in chronological order, so a later "labeled" event overwrites an
+  // earlier one for the same label, leaving the most recent approver per label.
+  const latestApproverByLabel = new Map<string, string>();
+  for (const event of events) {
+    if (event.event !== "labeled" || !("label" in event)) continue;
+    const labelName = event.label?.name;
+    const login = event.actor?.login;
+    if (
+      labelName &&
+      approvedLabels.has(labelName) &&
+      login &&
+      !ALLOWED_BOT_LOGINS.includes(login)
+    ) {
+      latestApproverByLabel.set(labelName, login);
+    }
+  }
+
+  return [...new Set(latestApproverByLabel.values())];
+}
+
+export function buildCommentBody({
   approversConfig,
   namespacesFound,
   namespaces,
@@ -153,9 +217,10 @@ function buildCommentBody({
   allLanguages: string[];
 }) {
   const planeType = isMgmt ? "Management Plane" : "Data Plane";
-  let body = `## Package Name Review Required\n\n**Plane:** ${planeType}\n\n`;
-  body += `| Language | Package Name | Namespace | Format | Status | Approvers |\n`;
-  body += `|----------|--------------|-----------|--------|--------|----------|\n`;
+  const reviewTable = [
+    "| Language | Package Name | Namespace | Format | Status | Approvers |",
+    "|----------|--------------|-----------|--------|--------|----------|",
+  ];
 
   const formatMap: Map<string, z.infer<typeof FormatValidationResultSchema>> = new Map();
   for (const r of formatResults) {
@@ -199,35 +264,43 @@ function buildCommentBody({
         : formatResult.valid
           ? "✅"
           : "⚠️ Invalid";
-    body += `| ${language} | ${displayName} | ${displayNs} | ${formatStatus} | ${status} | ${getApprovers(
-      approversConfig,
-      isMgmt,
-      language,
-    )
-      .map((a) => `@${a}`)
-      .join(", ")} |\n`;
+    const approversCell = getApprovers(approversConfig, isMgmt, language);
+    const approversText =
+      approversCell === "unprotected" ? "_anyone_" : approversCell.map((a) => `@${a}`).join(", ");
+    reviewTable.push(
+      `| ${language} | ${displayName} | ${displayNs} | ${formatStatus} | ${status} | ${approversText} |`,
+    );
   }
 
   const formatErrors = formatResults.filter((result) => !result.valid);
-  if (formatErrors.length > 0) {
-    body += `\n> **⚠️ Format issues detected:**\n`;
-    for (const error of formatErrors) {
-      body += `> - **${error.language}:** ${error.error}\n`;
-    }
-    body += `>\n> _Format validation does not block approval but should be reviewed._\n`;
-  }
-
-  body += `\n**How to approve:**\n`;
-  body += `- Per language: apply \`package-name-<language>-approved\` label\n`;
-  body += `- All at once: apply \`package-name-approved-all\` label (shortcut for mgmt plane)\n\n`;
-  body += `Merge is blocked until all languages are approved.\n`;
-  if (resetLanguages && resetLanguages.length > 0) {
-    body += `\n> ⚠️ **Package name changed** -- approvals for ${resetLanguages.join(", ")} have been reset.\n`;
-  }
-  body += `\n_Approver list: [.github/protected-labels.yml](../blob/${baseRef}/.github/protected-labels.yml)_\n`;
-  body += `_Process: [.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/${baseRef}/.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_\n`;
-  body += `_Package names extracted via tsp compile with typespec-metadata emitter_`;
-  return body;
+  return renderMarkdownDoc([
+    "## Package Name Review Required",
+    `**Plane:** ${planeType}`,
+    reviewTable.join("\n"),
+    formatErrors.length > 0
+      ? [
+          "> **⚠️ Format issues detected:**",
+          ...formatErrors.map((error) => `> - **${error.language}:** ${error.error}`),
+          ">",
+          "> _Format validation does not block approval but should be reviewed._",
+        ].join("\n")
+      : undefined,
+    [
+      "**How to approve:**",
+      "- Per language: apply `package-name-<language>-approved` label",
+      "- All at once: apply `package-name-approved-all` label (shortcut for mgmt plane)",
+      "",
+      "Merge is blocked until all languages are approved.",
+    ].join("\n"),
+    resetLanguages && resetLanguages.length > 0
+      ? `> ⚠️ **Package name changed** -- approvals for ${resetLanguages.join(", ")} have been reset.`
+      : undefined,
+    [
+      `_Approver list: [.github/protected-labels.yml](../blob/${baseRef}/.github/protected-labels.yml)_`,
+      `_Process: [.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/${baseRef}/.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_`,
+      "_Package names extracted via tsp compile with typespec-metadata emitter_",
+    ].join("\n"),
+  ]);
 }
 
 export default async function postResults({ github, context, core }: GitHubScriptArgs) {
@@ -272,6 +345,10 @@ export default async function postResults({ github, context, core }: GitHubScrip
       for (const label of packageNameLabels) {
         await removeLabelIfPresent(github, owner, repo, issue_number, label);
       }
+      // The tspconfig was removed, so this is no longer a package PR. Clear the stale
+      // add-only "Mgmt" label here too, since the results-based reconcile below is
+      // skipped on the no-artifact path (#46785).
+      await removeLabelIfPresent(github, owner, repo, issue_number, "Mgmt");
 
       // Update status check to success
       await github.rest.repos.createCommitStatus({
@@ -434,6 +511,11 @@ export default async function postResults({ github, context, core }: GitHubScrip
     }
   }
 
+  // Clear the stale add-only "Mgmt" label. See shouldRemoveStaleMgmtLabel (#46785).
+  if (shouldRemoveStaleMgmtLabel(results.isMgmt, existingLabels)) {
+    await removeLabelIfPresent(github, owner, repo, issue_number, "Mgmt");
+  }
+
   const body = buildCommentBody({
     approversConfig,
     namespacesFound: results.namespacesFound,
@@ -449,4 +531,24 @@ export default async function postResults({ github, context, core }: GitHubScrip
   });
 
   await commentOrUpdate(github, core, owner, repo, issue_number, body, "package-name-review-bot");
+
+  // Notify approvers whose sign-off was invalidated by the package name change (#46786).
+  // The review table already shows the reset row, but updating that comment does not send
+  // a notification, so post a distinct note (naturally de-duplicated: the approved label is
+  // gone after the reset, so a later synchronize will not re-detect the same reset).
+  if (resetLanguages.length > 0) {
+    const approvers = await resolveResetApprovers(
+      github,
+      owner,
+      repo,
+      issue_number,
+      resetLanguages,
+    );
+    await github.rest.issues.createComment({
+      owner,
+      repo,
+      issue_number,
+      body: buildApprovalResetComment({ resetLanguages, approvers }),
+    });
+  }
 }

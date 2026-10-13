@@ -1,7 +1,7 @@
 import type { Core } from "../github.ts";
 // For now, treat all paths as posix, since this is the format returned from git commands
 import debug from "debug";
-import { dirname, join, relative, resolve } from "path";
+import { dirname, join, relative, resolve } from "node:path";
 import { simpleGit } from "simple-git";
 import {
   example,

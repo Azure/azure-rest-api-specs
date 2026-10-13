@@ -4,6 +4,13 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Commvault.ContentStore;
 
+// Preserve the public request name and documentation when using the ARM action template.
+@@clientName(ProtectionGroups.stopBackup::parameters.body, "request");
+@@doc(
+  ProtectionGroups.stopBackup::parameters.body,
+  "The body type of the operation request."
+);
+
 @@clientName(
   Commvault.ContentStore,
   "CommvaultContentStoreMgmtClient",
@@ -169,3 +176,11 @@ using Commvault.ContentStore;
   "csharp"
 );
 @@alternateType(StorageProperties.location, Azure.Core.azureLocation, "csharp");
+
+@@clientName(ActivateSaaSParameterRequest.saasGuid, "SaaSGUID", "go");
+@@clientName(ActivateSaaSRequestParam.saasResourceId, "SaaSResourceID", "go");
+@@clientName(
+  CloudAccountProperties.roleAssignmentsOnCcaCreate,
+  "RoleAssignmentsOnCCACreate",
+  "go"
+);

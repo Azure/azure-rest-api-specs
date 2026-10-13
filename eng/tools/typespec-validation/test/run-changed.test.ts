@@ -1,7 +1,10 @@
+import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import { d } from "@azure-tools/specs-shared/testing";
 import { ChildProcess, spawn } from "node:child_process";
+import { writeFileSync } from "node:fs";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "pathe";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { findChangedProjects } from "../src/find-projects.ts";
@@ -20,7 +23,7 @@ let root: string;
 let project: string;
 
 beforeEach(async () => {
-  root = await realpath(await mkdtemp(join(tmpdir(), "tsv-changed-")));
+  root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-changed-"))));
   project = join(root, "specification/service/Project");
   await mkdir(project, { recursive: true });
   await writeFile(join(project, "tspconfig.yaml"), "");
@@ -55,12 +58,14 @@ it("uses the repository root and passes the default revisions to each project", 
     baseCommitish: "HEAD^",
     headCommitish: "HEAD",
     ignoreCoreFiles: undefined,
+    logger: expect.any(ConsoleLogger) as unknown,
   });
   expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
     expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/),
     project,
     '{"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
   ]);
+  expect(vi.mocked(findChangedProjects).mock.calls[0][1].logger.isDebug()).toBe(false);
 });
 
 it("passes explicit revisions and the core-file policy without losing context", async () => {
@@ -75,10 +80,28 @@ it("passes explicit revisions and the core-file policy without losing context", 
     baseCommitish: "origin/main",
     headCommitish: "feature",
     ignoreCoreFiles: true,
+    logger: expect.any(ConsoleLogger) as unknown,
   });
   expect(vi.mocked(spawn).mock.calls[0][1]?.[2]).toBe(
     '{"checkingAllSpecs":false,"baseCommitish":"origin/main","headCommitish":"feature"}',
   );
+});
+
+it("forwards verbose logging without adding presentation options to suppression context", async () => {
+  await expect(runChanged(root, { verbose: true })).resolves.toBe(true);
+  expect(findChangedProjects).toHaveBeenCalledWith(
+    root,
+    expect.objectContaining({
+      logger: expect.objectContaining({ isDebug: expect.any(Function) as unknown }) as unknown,
+    }),
+  );
+  expect(vi.mocked(findChangedProjects).mock.calls[0][1].logger.isDebug()).toBe(true);
+  expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
+    expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/),
+    project,
+    '{"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
+    "--verbose",
+  ]);
 });
 
 it("does not honor all-spec suppressions for scoped changed projects", async () => {
@@ -142,10 +165,9 @@ it("dry runs list project context but do not validate or clean a dirty checkout"
   await expect(runChanged(root, { dryRun: true, gitClean: true })).resolves.toBe(true);
   expect(spawn).not.toHaveBeenCalled();
   expect(await readFile(untracked, "utf8")).toBe("keep");
-  expect(console.log).toHaveBeenCalledWith(
+  expect(console.log).toHaveBeenLastCalledWith(
     'Dry run: would validate specification/service/Project with context {"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
   );
-  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
 });
 
 it.each(["false", "true"])(
@@ -158,18 +180,28 @@ it.each(["false", "true"])(
       projects: [project, other],
       checkingAllSpecs: false,
     });
+    const git = simpleGit(root);
+    await git
+      .addConfig("user.name", "Test")
+      .addConfig("user.email", "test@example.com")
+      .addConfig("commit.gpgsign", "false")
+      .add(".")
+      .commit("Fixture");
     vi.mocked(spawn).mockImplementationOnce(() => {
+      writeFileSync(join(root, "generated.txt"), "generated");
       const child = new ChildProcess();
       queueMicrotask(() => child.emit("close", 1, null));
       return child;
     });
-    await expect(runChanged(root)).resolves.toBe(false);
+    await expect(runChanged(root, { gitClean: true })).resolves.toBe(false);
     expect(spawn).toHaveBeenCalledTimes(2);
-    expect(console.error).toHaveBeenLastCalledWith(
-      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-        " > pnpm install\n > pnpm tsv specification/service/Project\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
-    );
+    expect((await git.status()).isClean()).toBe(true);
+    expect(console.error).toHaveBeenLastCalledWith(d`
+      TypeSpec Validation failed for some folder to fix run and address any errors:
+       > pnpm install
+       > pnpm tsv specification/service/Project
+      For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+    `);
     if (githubActions === "true") {
       expect(console.log).toHaveBeenCalledWith(
         "::error::TypeSpec Validation failed for project specification/service/Project run the following command locally to validate.%0A" +

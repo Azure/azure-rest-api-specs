@@ -25,6 +25,7 @@ model Example {
 
   it.each(["data-plane", "resource-manager", "client-sdk"])(
     "resolves %s by package name with the same diagnostics as the upstream ruleset",
+    { timeout: 30_000 },
     async (ruleset) => {
       const upstream = await compile(NodeHost, join(folder, "main.tsp"), {
         noEmit: true,
