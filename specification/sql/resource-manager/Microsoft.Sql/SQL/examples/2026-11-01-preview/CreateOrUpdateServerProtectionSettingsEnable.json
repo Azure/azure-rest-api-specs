@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rg",
+    "managedInstanceName": "testsvr",
+    "serverProtectionSettingsName": "default",
+    "api-version": "2026-11-01-preview",
+    "parameters": {
+      "location": "Japan East",
+      "properties": {
+        "blockDropWhenImmutablePitrBackupInRetention": "enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg/providers/Microsoft.Sql/managedInstances/testsvr/serverProtectionSettings/default",
+        "name": "default",
+        "type": "Microsoft.Sql/managedInstances/serverProtectionSettings",
+        "location": "japaneast",
+        "properties": {
+          "blockDropWhenImmutablePitrBackupInRetention": "enabled"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "operation": "UpdateManagedServerProtectionSettings",
+        "startTime": "2026-10-09T13:11:45.89Z"
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg/providers/Microsoft.Sql/locations/japaneast/managedInstanceServerProtectionSettingsOperationResults/11111111-2222-3333-4444-555555555555?api-version=2026-11-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg/providers/Microsoft.Sql/locations/japaneast/managedInstanceServerProtectionSettingsAzureAsyncOperation/11111111-2222-3333-4444-555555555555?api-version=2026-11-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "ManagedInstanceServerProtectionSettings_CreateOrUpdate",
+  "title": "Enable managed instance deletion protection irreversibly"
+}
