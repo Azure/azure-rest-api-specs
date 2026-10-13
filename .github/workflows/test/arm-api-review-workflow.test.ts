@@ -3,6 +3,7 @@ import { parse } from "yaml";
 import { join } from "node:path";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import { runInNewContext } from "node:vm";
+import { fullGitSha } from "../../shared/test/examples.ts";
 
 // cspell:ignore REPOST vally
 
@@ -59,7 +60,7 @@ function createResolverHarness(
         github: { rest: { pulls: { get } } },
         context,
         core: { setOutput },
-        process: { env: { TARGET_PR_NUMBER: value } },
+        process: { env: { GITHUB_RUN_ATTEMPT: "1", TARGET_PR_NUMBER: value } },
       }),
   };
 }
@@ -179,6 +180,7 @@ describe("ARM API review workflow", () => {
     expect(source).toContain(`TARGET_PR_NUMBER: ${TARGET_EXPRESSION}`);
     expect(source).toContain("const { data: pull } = await github.rest.pulls.get({");
     expect(source).toContain('core.setOutput("target_pr_number", String(pull.number))');
+    expect(source).toContain('core.setOutput("run_attempt", runAttempt)');
     expect(source).toContain(
       "target_pr_number: ${{ steps.resolve_target_pr.outputs.target_pr_number }}",
     );
@@ -209,7 +211,7 @@ describe("ARM API review workflow", () => {
   describe("target PR resolver", () => {
     it("resolves a workflow-dispatch target and publishes the canonical PR number", async () => {
       const harness = createResolverHarness(resolverScript, { value: "44499" });
-      harness.get.mockResolvedValue({ data: { number: 44499 } });
+      harness.get.mockResolvedValue({ data: { number: 44499, head: { sha: fullGitSha } } });
 
       await harness.run();
 
@@ -220,6 +222,8 @@ describe("ARM API review workflow", () => {
         pull_number: 44499,
       });
       expect(harness.setOutput).toHaveBeenCalledWith("target_pr_number", "44499");
+      expect(harness.setOutput).toHaveBeenCalledWith("target_head_sha", fullGitSha);
+      expect(harness.setOutput).toHaveBeenCalledWith("run_attempt", "1");
     });
 
     it("accepts an issue-shaped pull request comment payload", async () => {
@@ -228,7 +232,7 @@ describe("ARM API review workflow", () => {
         eventName: "issue_comment",
         payload: { issue: { pull_request: { url: "https://api.github.com/pulls/44499" } } },
       });
-      harness.get.mockResolvedValue({ data: { number: 44499 } });
+      harness.get.mockResolvedValue({ data: { number: 44499, head: { sha: fullGitSha } } });
 
       await harness.run();
 
@@ -283,6 +287,8 @@ describe("ARM API review workflow", () => {
 
     expect(source).toContain("github.event.comment.body == '/arm-review'");
     expect(source).not.toContain("contains(github.event.comment.body, '/arm-review')");
+    expect(source).toContain("types: [opened, synchronize, reopened, labeled, ready_for_review]");
+    expect(source).toContain("github.event.action == 'reopened'");
     expect(source).toContain('bots: ["github-actions[bot]"]');
     expect(source).toContain("status-comment: true");
     expect(source).toContain(`run-name: "ARM API Review #${TARGET_EXPRESSION}`);
@@ -290,6 +296,8 @@ describe("ARM API review workflow", () => {
     expect(compiled).toContain('GH_AW_ALLOWED_BOTS: "github-actions[bot]"');
     expect(compiled).toContain("- name: Add comment with workflow run link");
     expect(compiled).toContain("- name: Update reaction comment with completion status");
+    expect(compiled).toContain("      - reopened");
+    expect(compiled).toContain("github.event.action == 'reopened'");
     expect(compiled).toContain(`run-name: "ARM API Review #${TARGET_EXPRESSION}`);
 
     const statusCommentStart = compiled.indexOf("- name: Add comment with workflow run link");
@@ -313,12 +321,27 @@ describe("ARM API review workflow", () => {
 
   it("wires the mandatory ARM Critic as an inline runtime subagent", async () => {
     const [source, compiled] = await readWorkflowFiles();
+    const criticRuntime = source.slice(
+      source.indexOf("## agent: `arm-api-review-critic-runtime`"),
+      source.indexOf("## end agent: `arm-api-review-critic-runtime`") +
+        "## end agent: `arm-api-review-critic-runtime`".length,
+    );
+    const criticRuntimeImports = [
+      ".github/agents/arm-api-review-critic.agent.md",
+      ".github/agents/protocols/arm-api-review-critic.protocol.md",
+      ".github/agents/protocols/arm-api-review-critic-inputs.template.md",
+    ];
 
     expect(source).toContain(
       "## agent: `arm-api-review-critic-runtime`\n---\ndescription: Independently verifies ARM API Reviewer findings before publication\n---",
     );
     expect(source).toContain("dispatch the inline\n`arm-api-review-critic-runtime` subagent");
-    expect(source).toContain("`.github/agents/arm-api-review-critic.agent.md`");
+    expect(criticRuntime).toContain("Treat the embedded sections as already loaded");
+    for (const importPath of criticRuntimeImports) {
+      expect(criticRuntime).toContain(`{{#runtime-import ${importPath}}}`);
+      await expect(readFile(join(ROOT, importPath), "utf8")).resolves.not.toHaveLength(0);
+    }
+    expect(criticRuntime).toContain("## end agent: `arm-api-review-critic-runtime`");
     expect(source).toContain("Never claim that the review was Critic-verified");
     expect(compiled).toContain("- name: Restore inline sub-agents from activation artifact");
     expect(compiled).toContain('GH_AW_SUB_AGENT_DIR: ".github/agents"');
@@ -444,15 +467,20 @@ describe("ARM API review workflow", () => {
 
   it("keeps the agent read-only and preserves the human queue after a clean review", async () => {
     const [source, compiled] = await readWorkflowFiles();
+    const collapsed = collapseWhitespace(source);
 
-    expect(source).toContain("permissions:\n    pull-requests: read\n  steps:");
     expect(source).toContain(
-      "**At least one Blocking `POST-NEW` or Blocking `RESOLVE-AND-REPOST` queued",
+      "permissions:\n    pull-requests: read\n    statuses: write\n  steps:",
     );
-    expect(source).toContain("_and_ the Critic returned a verdict**");
-    expect(source).toContain("**No Blocking finding queued for publication**");
     expect(source).toContain(
-      "clean, covered,\n  clarification-only, Critic-dropped, or overflow-only",
+      "**The review is full and complete, and at least one verified, currently",
+    );
+    expect(collapsed).toContain("including `SKIP-COVERED`, `POST-NEW`, and `RESOLVE-AND-REPOST`");
+    expect(source).toContain(
+      "**No verified, currently applicable Blocking finding remains, and the review",
+    );
+    expect(collapsed).toContain(
+      "remove `ARMChangesRequested` if present; leave `WaitForARMFeedback`",
     );
     expect(source).not.toContain("**Blocking findings found**");
 
@@ -478,6 +506,7 @@ describe("ARM API review workflow", () => {
     expect(agentJob).not.toContain("issues: write");
     expect(agentJob).not.toContain("pull-requests: write");
     expect(preActivationJob).toContain("pull-requests: read");
+    expect(preActivationJob).toContain("statuses: write");
     expect(preActivationJob).not.toContain("issues: write");
     expect(safeOutputsJob).toContain("issues: write");
     expect(safeOutputsJob).toContain("pull-requests: write");
@@ -533,19 +562,102 @@ describe("ARM API review posting reliability", () => {
   it("leaves no metadata-driven exception to the ARMChangesRequested label rule", async () => {
     const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
 
-    expect(source).toContain("These three rules are **exhaustive**.");
+    expect(source).toContain("These rules are **exhaustive**.");
+    expect(source).toContain(
+      "The review is scoped or incomplete** → leave `WaitForARMFeedback`, `ARMChangesRequested`, and `ARMSignedOff` unchanged",
+    );
+    expect(source).toContain(
+      "No verified, currently applicable Blocking finding remains, and the review is full and complete",
+    );
     expect(source).toContain(
       "draft status, a `[Test]` or `[Do-Not-Merge]` title, a revert, a bot-authored PR, or the author's stated intent not to merge are **not** grounds to skip a label change",
     );
-    // The decision now has exactly two inputs, not one: a Blocking finding must
-    // be queued AND the Critic must have verified it. PR metadata still may not
-    // influence the outcome.
     expect(source).toContain(
-      "There are exactly **two** inputs to this decision: whether a Blocking finding was queued for publication, and whether the Critic verified it.",
+      "The decision uses only the verified, currently applicable Blocking findings after reconciliation, review scope, and review completeness.",
     );
-    expect(source).toContain(
-      "Nothing else, and in particular nothing read from PR metadata, may change the outcome.",
+    expect(source).toContain("Nothing read from unrelated PR metadata may change the outcome.");
+  });
+
+  it("publishes one head-bound semantic review status from the trusted safe-output job", async () => {
+    const [source, compiled] = await readWorkflowFiles();
+    const collapsed = collapseWhitespace(source);
+
+    expect(source).toContain("name: Set ARM semantic review pending");
+    // One upload carries both correlation values; the old per-value steps must not return.
+    expect(source).toContain("name: Upload ARM semantic review correlation");
+    expect(source).not.toContain("name: Upload ARM semantic review head SHA");
+    expect(source).not.toContain("name: Upload ARM semantic review issue number");
+    expect(compiled).toContain(
+      "head-sha=${{ steps.resolve_target_pr.outputs.target_head_sha }};issue-number=${{ steps.resolve_target_pr.outputs.target_pr_number }}",
     );
+    expect(source).toContain('context: "ARM Semantic Review"');
+    expect(source).toContain("record-arm-semantic-review:");
+    expect(source).toContain("scope:");
+    expect(source).toContain("completeness:");
+    expect(source).toContain("### Step 9: Record Semantic Result");
+    expect(collapsed).toContain(
+      "Call `record_arm_semantic_review` exactly once after queuing the summary",
+    );
+    expect(compiled).toContain("record_arm_semantic_review");
+    expect(compiled).toContain("ARM Semantic Review");
+    expect(compiled).toContain("Publish ARM semantic review status");
+    expect(compiled).not.toContain("Upload ARM semantic review receipt");
+    const semanticJob = compiled.slice(
+      compiled.indexOf("\n  record_arm_semantic_review:\n"),
+      compiled.indexOf("\n  safe_outputs:\n"),
+    );
+    const semanticConfig = source.slice(
+      source.indexOf("    record-arm-semantic-review:\n"),
+      source.indexOf("  noop:\n"),
+    );
+    expect(semanticJob).toContain("name: Publish ARM semantic review status");
+    expect(semanticJob).toContain("actions: read");
+    expect(semanticJob).toContain("statuses: write");
+    expect(semanticJob).not.toContain("TARGET_PR_NUMBER");
+    expect(semanticJob).toContain("permissions:");
+    expect(semanticConfig).not.toContain("issue_number:");
+    expect(semanticConfig).not.toContain("head_sha:");
+    expect(semanticConfig).not.toContain("run_attempt:");
+    expect(semanticConfig).not.toContain('"degraded"');
+    expect(semanticConfig).toContain("incomplete_reason:");
+    expect(semanticConfig).toContain('"critic-unavailable"');
+    expect(semanticConfig).toContain('"discussion-data-unavailable"');
+    expect(collapsed).toContain(
+      "Trusted workflow artifacts attach the pull request, head SHA, and run attempt",
+    );
+    expect(collapsed).toContain(
+      "The trusted `record_arm_semantic_review` job validates the item and publishes the head-bound status inside this reviewer run",
+    );
+    expect(collapsed).toContain(
+      "Universal Auto-Signoff consumes the status only after the entire reviewer workflow completes",
+    );
+  });
+
+  it("resolves an unpublished Pending status from the conclusion job", async () => {
+    const [source, compiled] = await readWorkflowFiles();
+    const conclusionStart = compiled.indexOf("\n  conclusion:\n");
+    const conclusionJob = compiled.slice(
+      conclusionStart,
+      compiled.indexOf("\n  detection:\n", conclusionStart),
+    );
+    const finalizerStep = conclusionJob.indexOf(
+      "name: Resolve unpublished ARM semantic review status",
+    );
+
+    expect(source).toContain("finalizeUnpublishedArmSemanticReview");
+    expect(conclusionStart).toBeGreaterThan(-1);
+    expect(conclusionJob).toContain("statuses: write");
+    expect(finalizerStep).toBeGreaterThan(-1);
+    // The finalizer is a pre-step, so it must not be able to block gh-aw's own
+    // failure reporting that runs after it.
+    expect(conclusionJob.slice(finalizerStep, finalizerStep + 700)).toContain(
+      "continue-on-error: true",
+    );
+    // The record job already published when it succeeded, so the finalizer's reads are skipped.
+    expect(conclusionJob.slice(finalizerStep, finalizerStep + 200)).toContain(
+      "if: needs.record_arm_semantic_review.result != 'success'",
+    );
+    expect(conclusionJob.indexOf("name: Process no-op messages")).toBeGreaterThan(finalizerStep);
   });
 
   it("withholds ARMChangesRequested when the Critic could not verify the findings", async () => {
@@ -749,11 +861,10 @@ describe("ARM API review consistency and hardening", () => {
   it("gives the label rules a single unambiguous outcome per case", async () => {
     const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
 
-    // Rule 1 and the Critic-unavailable rule both matched the case
-    // (Blocking queued AND Critic unavailable) with opposite outcomes and no
-    // stated precedence. Rule 1 now carries the Critic condition itself.
+    // Unverified findings from a Critic-unavailable run do not satisfy the
+    // verified-finding rule, so the explicit Critic-unavailable rule remains authoritative.
     expect(source).toContain(
-      "**At least one Blocking `POST-NEW` or Blocking `RESOLVE-AND-REPOST` queued _and_ the Critic returned a verdict**",
+      "**The review is full and complete, and at least one verified, currently applicable Blocking finding remains**",
     );
   });
 

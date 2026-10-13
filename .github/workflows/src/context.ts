@@ -15,6 +15,15 @@ export type RestEndpointMethodTypes =
 /**
  * Extracts inputs from context based on event name and properties.
  * run_id is only defined for "workflow_run:completed" events.
+ *
+ * For "workflow_run:completed", `workflow_run.event` is the event that triggered the completed
+ * (upstream) run, and decides where the head SHA and PR number come from:
+ * - "pull_request": the payload only (fork code could forge artifacts).
+ * - "pull_request_target": the payload, overridden by the upstream run's trusted artifacts.
+ * - "issue_comment", "workflow_run", "check_run", "workflow_dispatch": artifacts only.
+ *
+ * `head_sha` may be "" and `issue_number` may be NaN when they can't be determined.
+ * @throws If artifacts conflict with each other or with the event, or the event is unsupported.
  */
 export async function extractInputs(
   github: GitHub,
@@ -36,6 +45,12 @@ export async function extractInputs(
   if (context.eventName === "workflow_run") {
     const payload = context.payload as WebhookEvent<"workflow-run">;
     workflowRunEvent = payload.workflow_run?.event;
+    core.info(`  payload.workflow_run.id: ${payload.workflow_run?.id ?? "undefined"}`);
+    core.info(`  payload.workflow_run.name: ${payload.workflow_run?.name ?? "undefined"}`);
+    core.info(`  payload.workflow_run.path: ${payload.workflow_run?.path ?? "undefined"}`);
+    core.info(
+      `  payload.workflow_run.conclusion: ${payload.workflow_run?.conclusion ?? "undefined"}`,
+    );
   }
   core.info(`  payload.workflow_run.event: ${workflowRunEvent}`);
 
@@ -115,8 +130,8 @@ export async function extractInputs(
   } else if (context.eventName === "workflow_run" && context.payload.action === "completed") {
     const payload = context.payload as WebhookEvent<"workflow-run", "completed">;
 
-    let issue_number = NaN;
-    let head_sha = "";
+    let issue_number: number;
+    let head_sha: string;
 
     if (
       payload.workflow_run.event === "pull_request" ||
@@ -131,9 +146,8 @@ export async function extractInputs(
       // For pull_request, do NOT attempt to extract the issue number from an artifact, since this could be modified
       // in a fork PR.
       //
-      // For pull_request_target, it might be safe to extract the issue number from an artifact, since the workflow runs
-      // on the target branch and can be trusted.  But it should also be unnecessary, since we should be able extract
-      // the issue number from the payload itself, just like pull_request.
+      // For pull_request_target, the workflow runs from the base branch, so its artifacts are trusted and
+      // override the SHA and are checked against the PR number below.
 
       const pullRequest = payload.workflow_run.pull_requests?.find((pr) => pr !== null);
       if (pullRequest) {
@@ -207,57 +221,42 @@ export async function extractInputs(
           );
         }
       }
+
+      if (payload.workflow_run.event === "pull_request_target") {
+        const artifactInputs = await getWorkflowRunArtifactInputs({
+          github,
+          core,
+          ...getRepositoryInfo(payload.workflow_run.repository),
+          runId: payload.workflow_run.id,
+        });
+        if (artifactInputs.headSha) {
+          // The artifact can be newer than the SHA that triggered the run if a push landed in between.
+          head_sha = artifactInputs.headSha;
+        }
+        if (artifactInputs.issueNumber) {
+          if (issue_number && issue_number !== artifactInputs.issueNumber) {
+            throw new Error(
+              `Workflow artifacts reference PR ${artifactInputs.issueNumber}, but the event references PR ${issue_number}`,
+            );
+          }
+          issue_number = artifactInputs.issueNumber;
+        }
+      }
     } else if (
       payload.workflow_run.event === "issue_comment" ||
       payload.workflow_run.event == "workflow_run" ||
-      payload.workflow_run.event == "check_run"
+      payload.workflow_run.event == "check_run" ||
+      payload.workflow_run.event == "workflow_dispatch"
     ) {
-      // Attempt to extract issue number from artifact.  This can be trusted, because it was uploaded from a workflow that is trusted,
-      // because "issue_comment" and "workflow_run" only trigger on workflows in the default branch.
-      const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+      // These artifacts can be trusted because these event types run workflows from the default branch.
+      const artifactInputs = await getWorkflowRunArtifactInputs({
+        github,
+        core,
         ...getRepositoryInfo(payload.workflow_run.repository),
-        run_id: payload.workflow_run.id,
-        per_page: PER_PAGE_MAX,
+        runId: payload.workflow_run.id,
       });
-
-      const artifactNames = artifacts.map((a) => a.name);
-
-      core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
-
-      for (const artifactName of artifactNames) {
-        // If artifactName has format "head-sha=valid-full-sha", set head_sha=value
-        //   Else, if artifactName has format "head-sha=other-string", warn and set head_sha=""
-        // Else, if artifactName has format "issue-number=positive-integer", set issue_number=value
-        //   Else, if artifactName has format "issue-number=other-string", warn and set issue_number=NaN
-        //   - Workflows should probably only set "issue-number" to positive integers, but sometimes set it to "null"
-        // Else, if artifactName does not start with "head-sha=" or "issue-number=", ignore it
-        const firstEquals = artifactName.indexOf("=");
-        if (firstEquals !== -1) {
-          const key = artifactName.substring(0, firstEquals);
-          if (key === "head-sha") {
-            const value = artifactName.substring(firstEquals + 1);
-            if (isFullGitSha(value)) {
-              head_sha = value;
-            } else {
-              // Producers must ensure they only set head-sha to valid full git SHA
-              throw new Error(`head-sha is not a valid full git SHA: '${value}'`);
-            }
-            continue;
-          } else if (key === "issue-number") {
-            const value = artifactName.substring(firstEquals + 1);
-            const parsedValue = Number.parseInt(value);
-            if (parsedValue > 0) {
-              issue_number = parsedValue;
-            } else {
-              // TODO: Consider throwing instead of warning.  May need to handle `issue-number=null|undefined`,
-              // but invalid integers should throw.
-              core.info(`Invalid issue-number: '${value}' parsed to '${parsedValue}'`);
-              issue_number = NaN;
-            }
-            continue;
-          }
-        }
-      }
+      head_sha = artifactInputs.headSha;
+      issue_number = artifactInputs.issueNumber;
       if (!head_sha) {
         core.info(
           `Could not find 'head-sha' artifact, which is required to associate the triggering workflow run with the head SHA of a PR`,
@@ -314,6 +313,86 @@ export async function extractInputs(
 
   core.info(`inputs: ${JSON.stringify(inputs)}`);
   return inputs;
+}
+
+/**
+ * Reads the `head-sha=<sha>` and `issue-number=<n>` pairs from the artifact names of a workflow
+ * run. Only call this for runs whose artifacts come from trusted code (see `extractInputs`).
+ * @returns `headSha` ("" if absent) and `issueNumber` (NaN if absent or invalid).
+ * @throws If the artifacts hold an invalid or conflicting head SHA, or conflicting PR numbers.
+ */
+export async function getWorkflowRunArtifactInputs({
+  github,
+  core,
+  owner,
+  repo,
+  runId,
+}: {
+  github: GitHub;
+  core: Core;
+  owner: string;
+  repo: string;
+  runId: number;
+}): Promise<{ headSha: string; issueNumber: number }> {
+  const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+    owner,
+    repo,
+    run_id: runId,
+    per_page: PER_PAGE_MAX,
+  });
+  const artifactNames = artifacts.map((artifact) => artifact.name);
+  core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
+  return parseWorkflowRunArtifactInputs(artifactNames, core);
+}
+
+/**
+ * Parses `head-sha=<sha>` and `issue-number=<n>` from artifact names; other names are ignored.
+ * A producer may carry both in one artifact by joining the pairs with `;`, for example
+ * `head-sha=<sha>;issue-number=<n>`, which saves an upload step. Names without `;` are a single
+ * pair, so existing single-value artifacts parse unchanged.
+ * @returns `headSha` ("" if absent) and `issueNumber` (NaN if absent or invalid).
+ * @throws If a head SHA is invalid, or two head SHAs or two PR numbers conflict.
+ */
+export function parseWorkflowRunArtifactInputs(
+  artifactNames: string[],
+  core: Core,
+): { headSha: string; issueNumber: number } {
+  let headSha = "";
+  let issueNumber = NaN;
+  for (const artifactName of artifactNames.flatMap((name) => name.split(";"))) {
+    const firstEquals = artifactName.indexOf("=");
+    if (firstEquals === -1) {
+      continue;
+    }
+
+    const key = artifactName.substring(0, firstEquals);
+    const value = artifactName.substring(firstEquals + 1);
+    if (key === "head-sha") {
+      if (!isFullGitSha(value)) {
+        throw new Error(`head-sha is not a valid full git SHA: '${value}'`);
+      }
+      if (headSha && headSha.toLowerCase() !== value.toLowerCase()) {
+        throw new Error(`Conflicting head-sha artifacts: '${headSha}' and '${value}'`);
+      }
+      headSha = value;
+    } else if (key === "issue-number") {
+      // Stricter than parseInt, which would accept "12abc".
+      const parsedValue = /^[1-9]\d*$/.test(value) ? Number(value) : NaN;
+      if (Number.isSafeInteger(parsedValue)) {
+        if (Number.isSafeInteger(issueNumber) && issueNumber !== parsedValue) {
+          throw new Error(
+            `Conflicting issue-number artifacts: '${issueNumber}' and '${parsedValue}'`,
+          );
+        }
+        issueNumber = parsedValue;
+      } else {
+        core.info(`Invalid issue-number artifact: '${value}'`);
+        issueNumber = NaN;
+      }
+    }
+  }
+
+  return { headSha, issueNumber };
 }
 
 function getRepositoryInfo(
