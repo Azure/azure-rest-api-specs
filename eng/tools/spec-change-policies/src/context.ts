@@ -20,11 +20,12 @@ export async function createContext(
 ): Promise<PrContext> {
   const root = resolve(await getRootFolder(cwd));
   const git = simpleGit(root);
-  const [baseCommitish, headCommitish] = await Promise.all(
-    [base, head].map(async (revision) =>
-      (await git.revparse(["--verify", "--end-of-options", `${revision}^{commit}`])).trim(),
-    ),
-  );
+  const baseCommitish = (
+    await git.revparse(["--verify", "--end-of-options", `${base}^{commit}`])
+  ).trim();
+  const headCommitish = (
+    await git.revparse(["--verify", "--end-of-options", `${head}^{commit}`])
+  ).trim();
   const changes = await getChangedFilesStatuses({
     cwd: root,
     baseCommitish,

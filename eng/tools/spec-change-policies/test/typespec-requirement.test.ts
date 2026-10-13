@@ -108,9 +108,9 @@ test("Caches rejected upstream lookups and continues other API versions", async 
       [`${service}/2026-02-01/openapi.json`]: "{}",
     },
   );
-  const checkUpstream = vi.fn(async (url: string) => {
-    if (url.endsWith("/2026-01-01")) throw new Error("Network unavailable");
-    return 200;
+  const checkUpstream = vi.fn((url: string) => {
+    if (url.endsWith("/2026-01-01")) return Promise.reject(new Error("Network unavailable"));
+    return Promise.resolve(200);
   });
   const result = await validatePr({ cwd: root, base: "HEAD^", checkUpstream });
 
