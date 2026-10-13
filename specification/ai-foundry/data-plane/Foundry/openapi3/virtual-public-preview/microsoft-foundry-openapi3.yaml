@@ -48897,7 +48897,7 @@ components:
           description: The command to execute on startup of the job. Immutable after the initial submission.
         environmentImageReference:
           type: string
-          description: ACR path of the environment image. Immutable after the initial submission.
+          description: Container image reference in Azure Container Registry for the project's Azure cloud, or Microsoft Container Registry (mcr.microsoft.com). Use the registry/repository:tag or registry/repository@digest reference, not an Azure ML environment asset alias, a local path, or an arbitrary registry. Unsupported reference forms return 400. The image must already exist and be accessible to the job's execution identity; submitting a job does not upload an image or grant registry access. Immutable after the initial submission.
         displayName:
           anyOf:
             - type: string
@@ -48929,7 +48929,7 @@ components:
           anyOf:
             - type: string
             - type: 'null'
-          description: Code asset reference.
+          description: Optional Foundry code asset URI returned by asset registration or read operations. A non-empty value must start with azureai://; Azure Resource Manager IDs, azureml:// code references, shorthand aliases and local paths are rejected with 400. Register the code and use its returned URI, with access configured for the job's execution identity. Omit this field when the code is already packaged in the environment image. Serialized as codeId and immutable after the initial submission.
         computeId:
           type: string
           description: Compute resource ID.
@@ -48939,7 +48939,7 @@ components:
               additionalProperties:
                 $ref: '#/components/schemas/Input'
             - type: 'null'
-          description: Mapping of input data bindings used in the job.
+          description: Mapping of input data bindings used in the job. For registered assets, use the URI returned by asset operations; a local path is not automatically uploaded. The name _code_ is reserved, case-insensitively; supplying it returns 400. Supply code through the code field (serialized as codeId), not a reserved input binding. Configure data access for the job's execution identity before submission.
         outputs:
           anyOf:
             - type: object
@@ -84417,7 +84417,7 @@ components:
           anyOf:
             - type: string
             - type: 'null'
-          description: Base model ID.
+          description: Optional base-model asset URI returned by asset registration or read operations, not a deployment name or shorthand alias. A non-empty value must start with azureai:// or azureml://; unsupported reference forms return 400. Register or locate the base model and use its returned URI, with access configured for the job's execution identity.
         description:
           anyOf:
             - type: string
