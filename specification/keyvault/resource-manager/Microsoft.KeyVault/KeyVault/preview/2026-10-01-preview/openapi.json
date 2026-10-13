@@ -1690,6 +1690,9 @@
           "Create a new vault or update an existing vault": {
             "$ref": "./examples/createVault.json"
           },
+          "Create a vault with cross-tenant access protection enabled": {
+            "$ref": "./examples/createVaultWithCrossTenantAccessProtection.json"
+          },
           "Create or update a vault with network acls": {
             "$ref": "./examples/createVaultWithNetworkAcls.json"
           }
@@ -1754,6 +1757,9 @@
           }
         },
         "x-ms-examples": {
+          "Enable cross-tenant access protection on an existing vault": {
+            "$ref": "./examples/updateVaultWithCrossTenantAccessProtection.json"
+          },
           "Update an existing vault": {
             "$ref": "./examples/updateVault.json"
           }
@@ -6218,6 +6224,10 @@
         "tokenBindingParameters": {
           "$ref": "#/definitions/TokenBindingParameters",
           "description": "Configuration for Token Binding for Entra tokens"
+        },
+        "enableCrossTenantAccessProtection": {
+          "type": "boolean",
+          "description": "Whether cross-tenant access protection is enabled for this vault. When enabled, changes to the vault tenant ID must use the subscription's home tenant ID. Once enabled, this protection cannot be disabled. If omitted, the existing value is preserved."
         }
       }
     },
@@ -6321,6 +6331,10 @@
         "tokenBindingParameters": {
           "$ref": "#/definitions/TokenBindingParameters",
           "description": "Configuration for Token Binding for Entra tokens"
+        },
+        "enableCrossTenantAccessProtection": {
+          "type": "boolean",
+          "description": "Whether cross-tenant access protection is enabled for this vault. When enabled, the vault tenant ID can only be set or changed to the subscription's home tenant ID. Once enabled, this protection cannot be disabled. If omitted when creating a vault, protection is disabled. If omitted when updating a vault, the existing value is preserved."
         }
       },
       "required": [
