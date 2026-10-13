@@ -2,9 +2,11 @@ import { execa } from "execa";
 import { glob, mkdir, mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, relative, resolve } from "pathe";
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import { writeBrownfield } from "../src/cli.ts";
+import { validatePr } from "../src/index.ts";
 import { checkRequirements } from "../src/typespec-requirement.ts";
+import { createRepo } from "./repo.ts";
 
 async function checkAllUnder(
   path: string,
@@ -94,6 +96,33 @@ test.concurrent("No files to check", async ({ expect }) => {
 
   expect(stdout).toMatchInlineSnapshot(`"No OpenAPI files found to check"`);
   expect(exitCode).toBe(0);
+});
+
+test("Caches rejected upstream lookups and continues other API versions", async () => {
+  const service = "specification/foo/data-plane/Foo/stable";
+  const { root } = await createRepo(
+    {},
+    {
+      [`${service}/2026-01-01/a.json`]: "{}",
+      [`${service}/2026-01-01/b.json`]: "{}",
+      [`${service}/2026-02-01/openapi.json`]: "{}",
+    },
+  );
+  const checkUpstream = vi.fn(async (url: string) => {
+    if (url.endsWith("/2026-01-01")) throw new Error("Network unavailable");
+    return 200;
+  });
+  const result = await validatePr({ cwd: root, base: "HEAD^", checkUpstream });
+
+  expect(checkUpstream.mock.calls.map(([url]) => url)).toEqual([
+    `https://github.com/Azure/azure-rest-api-specs/tree/main/${service}/2026-01-01`,
+    `https://github.com/Azure/azure-rest-api-specs/tree/main/${service}/2026-02-01`,
+  ]);
+  expect(result.success).toBe(false);
+  expect(result.diagnostics.some(({ message }) => message.includes("Network unavailable"))).toBe(
+    true,
+  );
+  expect(result.brownfield).toBe(true);
 });
 
 test("Rejects removed CLI options", async ({ expect }) => {

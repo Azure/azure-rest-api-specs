@@ -88,7 +88,7 @@ export async function checkRequirements(
 ): Promise<RequirementResult> {
   const diagnostics: Diagnostic[] = [];
   const serviceTypeSpecCache = new Map<string, boolean>();
-  const responseCache = new Map<string, number>();
+  const responseCache = new Map<string, Promise<number>>();
   let brownfield = false;
   let complete = true;
   const files = getFilesToCheck(context);
@@ -164,11 +164,12 @@ export async function checkRequirements(
       if (!apiVersion) throw new Error(`Unable to extract API-version directory: ${file}`);
       const url = `https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${apiVersion}`;
       logInfo(`  Checking ${url.replace(/^https:\/\//, "")}`);
-      let status = responseCache.get(url);
-      if (status === undefined) {
-        status = await checkUpstream(url);
-        responseCache.set(url, status);
+      let response = responseCache.get(url);
+      if (response === undefined) {
+        response = Promise.resolve().then(() => checkUpstream(url));
+        responseCache.set(url, response);
       }
+      const status = await response;
       logInfo(`    Status: ${status}`);
       if (status === 200) {
         if (suppression) {
