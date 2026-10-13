@@ -4210,6 +4210,10 @@ paths:
         OpenAI POST /live/sessions WebRTC operation. Only WebSocket transport is supported here.
         Native session.update changes delegation settings only; it cannot switch the configured
         Foundry-managed or hosted target. Foundry owns execution and result injection for both.
+        Foundry renders an optional template greeting from structured inputs for session-start playback;
+        greeting is not forwarded as a native session field and cannot select llm_generated mode.
+        For responses delegation, responses.model identifies the backend deployment available to the
+        configured Foundry GPT Live resource, including when that setting is changed with session.update.
         Managed and hosted agents retain [thinking] and [commentary] output sections; the voice agent
         translates validated text into native session.thinking.append and session.commentary.append commands.
         Permitted backend text, tool, and lifecycle events reuse response.event with the native client
@@ -4260,7 +4264,7 @@ paths:
         - name: structured_input
           in: query
           required: false
-          description: Per-session structured input values, serialized as a URL-encoded JSON object.
+          description: Per-session structured input values used to render the agent's instructions and template greeting, serialized as a URL-encoded JSON object.
           schema:
             type: string
           explode: false
@@ -92997,6 +93001,9 @@ components:
           type: string
           minLength: 1
           description: The Foundry GPT Live deployment name. Sent in session.start.session.model.
+        greeting:
+          $ref: '#/components/schemas/VoiceAgentTemplateGreetingConfig'
+          description: "Optional Foundry-managed session-start greeting. Only template mode is supported: render the Handlebars text with the session's structured inputs before playback. LLM-generated greetings, prompt, and tool_choice are not supported. Omit to configure no explicit greeting. This is Foundry agent configuration, not a native Live session field."
         audio:
           $ref: '#/components/schemas/OpenAI.LiveInitialSessionAudioParam'
           description: Startup-only bidirectional audio format and output voice. No realtime VAD or Azure speech processing settings.
@@ -93004,7 +93011,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/VoiceAgentLiveDelegation'
             - type: 'null'
-          description: 'Who handles delegated work: the connected application, a native Responses backend, or a same-project Foundry-managed prompt agent or hosted agent. Omission or null uses native client delegation.'
+          description: "Who handles delegated work: the connected application, a native Responses backend, or a same-project Foundry-managed prompt agent or hosted agent. For responses delegation, responses.model is the backend model deployment name available to the configured Foundry GPT Live resource, not a model catalog ID or agent name. It may differ from the underlying model name and is independent of this definition's frontend model deployment. Omission or null uses native client delegation."
         input:
           type: array
           items:

@@ -131,6 +131,10 @@ interface VoiceAgentLiveWebSocket {
    * OpenAI POST /live/sessions WebRTC operation. Only WebSocket transport is supported here.
    * Native session.update changes delegation settings only; it cannot switch the configured
    * Foundry-managed or hosted target. Foundry owns execution and result injection for both.
+   * Foundry renders an optional template greeting from structured inputs for session-start playback;
+   * greeting is not forwarded as a native session field and cannot select llm_generated mode.
+   * For responses delegation, responses.model identifies the backend deployment available to the
+   * configured Foundry GPT Live resource, including when that setting is changed with session.update.
    * Managed and hosted agents retain [thinking] and [commentary] output sections; the voice agent
    * translates validated text into native session.thinking.append and session.commentary.append commands.
    * Permitted backend text, tool, and lifecycle events reuse response.event with the native client
@@ -166,7 +170,7 @@ interface VoiceAgentLiveWebSocket {
       /** Selects a specific immutable version of the Live voice agent. */
       @query("x-agent-version-override") agent_version_override?: string;
 
-      /** Per-session structured input values, serialized as a URL-encoded JSON object. */
+      /** Per-session structured input values used to render the agent's instructions and template greeting, serialized as a URL-encoded JSON object. */
       @query structured_input?: string;
 
       /** Overrides Foundry conversation/audio persistence for this connection, not native Live recording storage. */

@@ -213,10 +213,13 @@ model VoiceAgentLiveDefinition extends VoiceAgentDefinition {
   @minLength(1)
   `model`: string;
 
+  @doc("Optional Foundry-managed session-start greeting. Only template mode is supported: render the Handlebars text with the session's structured inputs before playback. LLM-generated greetings, prompt, and tool_choice are not supported. Omit to configure no explicit greeting. This is Foundry agent configuration, not a native Live session field.")
+  greeting?: VoiceAgentTemplateGreetingConfig;
+
   @doc("Startup-only bidirectional audio format and output voice. No realtime VAD or Azure speech processing settings.")
   audio?: OpenAI.LiveInitialSessionAudioParam;
 
-  @doc("Who handles delegated work: the connected application, a native Responses backend, or a same-project Foundry-managed prompt agent or hosted agent. Omission or null uses native client delegation.")
+  @doc("Who handles delegated work: the connected application, a native Responses backend, or a same-project Foundry-managed prompt agent or hosted agent. For responses delegation, responses.model is the backend model deployment name available to the configured Foundry GPT Live resource, not a model catalog ID or agent name. It may differ from the underlying model name and is independent of this definition's frontend model deployment. Omission or null uses native client delegation.")
   delegation?: VoiceAgentLiveDelegation | null;
 
   @doc("Native initial developer, user, or assistant text context. At most 128 messages, with one text part per message.")

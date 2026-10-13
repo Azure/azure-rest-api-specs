@@ -59,6 +59,11 @@ const nativeEventModels = {
   "session.commentary.appended": "OpenAI.LiveServerEventLiveCommentaryAppended",
   error: "OpenAI.LiveServerEventLiveErrorEvent",
 };
+// Probe the actual Live greeting property without the independent agent-kind
+// and sub-protocol union-member value conversions required by @example.
+const liveGreetingProbe = [
+  'model LiveGreetingProbe { ...PickProperties<Azure.AI.Projects.VoiceAgentLiveDefinition, "greeting">; }',
+];
 
 function type(name, context = program) {
   const [value, diagnostics] = context.resolveTypeReference(name);
@@ -137,6 +142,35 @@ function checkNativeSdkEvents(context) {
         eventType,
       ),
     );
+}
+
+function checkSdkGreetingModels(context) {
+  const model = (name) => {
+    const value = context.sdkPackage.models.find((m) => m.__raw?.name === name);
+    assert.ok(value, `SDK metadata missing ${name}`);
+    return value;
+  };
+  const greeting = model("VoiceAgentLiveDefinition").properties.find(
+    (p) => p.serializedName === "greeting",
+  );
+  assert.equal(greeting.optional, true);
+  assert.equal(greeting.type, model("VoiceAgentTemplateGreetingConfig"));
+  assert.equal(greeting.type.discriminatorValue, "template");
+  assert.equal(
+    model("VoiceAgentRealtimeDefinition").properties.find(
+      (p) => p.serializedName === "greeting",
+    ).type,
+    model("VoiceAgentGreetingConfig"),
+  );
+  assert.deepEqual(
+    Object.keys(model("VoiceAgentGreetingConfig").discriminatedSubtypes).sort(),
+    ["llm_generated", "template"],
+  );
+  assert.ok(
+    !model("VoiceAgentDefinition").properties.some(
+      (p) => p.serializedName === "greeting",
+    ),
+  );
 }
 
 before(async () => {
@@ -261,6 +295,80 @@ test("Live configuration references native model identities, not local copies", 
     [...delegation.variants.keys()],
     ["client", "responses", "foundry_managed_agent", "foundry_hosted_agent"],
   );
+});
+
+test("Live greeting reuses only the existing template subtype while Realtime retains both modes", () => {
+  const live = type("Azure.AI.Projects.VoiceAgentLiveDefinition");
+  const template = type("Azure.AI.Projects.VoiceAgentTemplateGreetingConfig");
+  const greeting = live.properties.get("greeting");
+  assert.equal(greeting.optional, true);
+  assert.equal(greeting.defaultValue, undefined);
+  assert.equal(greeting.type, template);
+  assert.equal(fields(template).get("type").type.value, "template");
+  assert.equal(fields(template).get("text").optional, false);
+  assert.equal(getMinLength(program, fields(template).get("text")), 1);
+  assert.deepEqual([...fields(template).keys()].sort(), ["text", "type"]);
+  const root = type("Azure.AI.Projects.VoiceAgentGreetingConfig");
+  assert.equal(
+    type("Azure.AI.Projects.VoiceAgentRealtimeDefinition").properties.get(
+      "greeting",
+    ).type,
+    root,
+  );
+  assert.deepEqual(
+    root.derivedModels.map((m) => m.properties.get("type").type.value).sort(),
+    ["llm_generated", "template"],
+  );
+  assert.ok(
+    !fields(type("Azure.AI.Projects.VoiceAgentDefinition")).has("greeting"),
+  );
+  for (const name of ["LiveSessionCreateParams", "LiveSessionUpdateParams"])
+    assert.ok(!fields(type(`OpenAI.${name}`)).has("greeting"), name);
+  for (const doc of documents) {
+    const schemas = doc.components.schemas;
+    assert.equal(
+      schemas.VoiceAgentLiveDefinition.properties.greeting.$ref,
+      "#/components/schemas/VoiceAgentTemplateGreetingConfig",
+    );
+    assert.ok(!schemas.VoiceAgentLiveDefinition.required.includes("greeting"));
+    assert.equal(
+      schemas.VoiceAgentTemplateGreetingConfig.properties.text.minLength,
+      1,
+    );
+    assert.equal(
+      schemas.VoiceAgentRealtimeDefinition.properties.greeting.$ref,
+      "#/components/schemas/VoiceAgentGreetingConfig",
+    );
+  }
+});
+
+test("Responses model remains a native string while Foundry documents deployment-name semantics", () => {
+  const live = type("Azure.AI.Projects.VoiceAgentLiveDefinition");
+  assert.match(
+    getDoc(program, live.properties.get("delegation")),
+    /responses\.model.*deployment name/,
+  );
+  assert.match(
+    getDoc(program, live.properties.get("model")),
+    /deployment name/,
+  );
+  for (const name of [
+    "LiveResponsesDelegationSettingsInputParam",
+    "LiveResponsesDelegationSettingsUpdateInputParam",
+  ]) {
+    const settings = type(`OpenAI.${name}`);
+    assert.equal(getTypeName(settings.properties.get("model").type), "string");
+    assert.deepEqual(
+      wireShape(settings, program),
+      wireShape(type(`OpenAI.${name}`, native), native),
+    );
+  }
+  for (const doc of documents)
+    assert.match(
+      doc.components.schemas.VoiceAgentLiveDefinition.properties.delegation
+        .description,
+      /deployment name.*not a model catalog ID/,
+    );
 });
 
 test("managed prompt-agent configuration contains only target identity", () => {
@@ -786,12 +894,13 @@ function exampleValue({ model, payload }) {
   );
 }
 
-async function validateExamples(name, examples) {
+async function validateExamples(name, examples, declarations = []) {
   const path = join(output, `${name}.tsp`);
   await writeFile(
     path,
     [
       `import ${JSON.stringify(join(project, "main.tsp"))};`,
+      ...declarations,
       ...examples.map(
         (sample) => `@@example(${sample.model}, ${exampleValue(sample)});`,
       ),
@@ -799,6 +908,78 @@ async function validateExamples(name, examples) {
   );
   return compile(NodeHost, path, { ...compilerOptions, noEmit: true });
 }
+
+test("optional Live template greetings and existing Realtime greeting examples validate", async () => {
+  const examples = [
+    { model: "LiveGreetingProbe", payload: {} },
+    ...[
+      "Hello! I am your English teacher.",
+      "Hello {{student_name}}! What would you like to practice?",
+      "你好 {{student_name}}，我们开始今天的练习吧。",
+    ].map((text) => ({
+      model: "LiveGreetingProbe",
+      payload: { greeting: { type: "template", text } },
+    })),
+    {
+      model: "Azure.AI.Projects.VoiceAgentLlmGeneratedGreetingConfig",
+      payload: {
+        type: "llm_generated",
+        prompt: "Introduce yourself as an English teacher.",
+      },
+    },
+  ];
+  checkErrors(
+    (
+      await validateExamples(
+        "live-template-greeting",
+        examples,
+        liveGreetingProbe,
+      )
+    ).diagnostics,
+  );
+});
+
+test("Live greeting rejects generated mode and unsupported greeting fields", async (t) => {
+  for (const [name, greeting] of [
+    ["null", null],
+    [
+      "generated mode",
+      { type: "llm_generated", prompt: "Introduce yourself." },
+    ],
+    ["missing mode", { text: "Hello!" }],
+    ["missing text", { type: "template" }],
+    ["non-string text", { type: "template", text: 42 }],
+    ["prompt", { type: "template", text: "Hello!", prompt: "Rewrite it." }],
+    ["tool choice", { type: "template", text: "Hello!", tool_choice: "none" }],
+  ]) {
+    await t.test(name, async () => {
+      checkInvalidExample(
+        (
+          await validateExamples(
+            `invalid-live-greeting-${name}`,
+            [{ model: "LiveGreetingProbe", payload: { greeting } }],
+            liveGreetingProbe,
+          )
+        ).diagnostics,
+      );
+    });
+  }
+});
+
+test("Responses configuration accepts deployment aliases without requiring catalog-name equality", async () => {
+  const examples = [
+    "LiveResponsesDelegationSettingsInputParam",
+    "LiveResponsesDelegationSettingsUpdateInputParam",
+  ].flatMap((name) =>
+    ["teacher-backend", "gpt-5.6-terra"].map((deployment) => ({
+      model: `OpenAI.${name}`,
+      payload: { model: deployment },
+    })),
+  );
+  checkErrors(
+    (await validateExamples("responses-deployment-name", examples)).diagnostics,
+  );
+});
 
 test("native startup, delegation creation and errors validate for Foundry-owned work", async () => {
   const examples = [
@@ -1174,6 +1355,7 @@ test("SDK metadata exports native events and separate Live persistence discrimin
     return value;
   };
   const backend = model("LiveServerEventLiveResponseEvent");
+  checkSdkGreetingModels(context);
   checkNativeSdkEvents(context);
   assert.equal(backend.baseModel, model("LiveServerEvent"));
   assert.equal(backend.discriminatorValue, "response.event");
@@ -1372,6 +1554,7 @@ test("Java SDK customization targets Realtime fields and keeps Live events witho
     "Azure.AI.Projects.VoiceAgentRealtimeDefinition",
     sdkProgram,
   );
+  checkSdkGreetingModels(context);
   assert.equal(
     realtime.properties.get("tool_choice").type.name,
     "ToolChoiceValue",

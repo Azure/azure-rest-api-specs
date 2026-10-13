@@ -6142,7 +6142,7 @@
       "get": {
         "operationId": "VoiceAgentLiveWebSocket_connectLiveVoiceAgent",
         "summary": "Connect to a GPT Live voice agent",
-        "description": "Establishes a primary WebSocket for an agent with sub_protocol=live. This is not the native\nOpenAI POST /live/sessions WebRTC operation. Only WebSocket transport is supported here.\nNative session.update changes delegation settings only; it cannot switch the configured\nFoundry-managed or hosted target. Foundry owns execution and result injection for both.\nManaged and hosted agents retain [thinking] and [commentary] output sections; the voice agent\ntranslates validated text into native session.thinking.append and session.commentary.append commands.\nPermitted backend text, tool, and lifecycle events reuse response.event with the native client\ndelegation ID in delegation_id. Dispatch on the nested event.type. Backend text retains its markers;\nobserving it is independent of successful Live injection. Lifecycle snapshots omit input and clear\ninstructions, tools and output; credentials and private reasoning are not forwarded.\nFollow the native event lifecycle: session.delegation.created identifies work; response.event carries\nbackend response status and output; session.thinking.appended and session.commentary.appended acknowledge\naccepted context. These acknowledgments correlate through client_event_id with outgoing append commands,\nnot with a result payload or delegation ID in the acknowledgment. Failures outside a backend response\nuse the native error shape without manufacturing backend responses. No additional Foundry delegation\nstatus or output-item notifications are emitted. Stored output arrays still contain accepted\nLive-injection results, not original backend items; their positions are independent of backend indices.\nThis event forwarding does not change tool execution ownership: native response.item.create and\nresponse.create remain Responses-delegation-only commands, not managed/hosted tool-result routing.\nDo not negotiate the realtime WebSocket subprotocol on this route.",
+        "description": "Establishes a primary WebSocket for an agent with sub_protocol=live. This is not the native\nOpenAI POST /live/sessions WebRTC operation. Only WebSocket transport is supported here.\nNative session.update changes delegation settings only; it cannot switch the configured\nFoundry-managed or hosted target. Foundry owns execution and result injection for both.\nFoundry renders an optional template greeting from structured inputs for session-start playback;\ngreeting is not forwarded as a native session field and cannot select llm_generated mode.\nFor responses delegation, responses.model identifies the backend deployment available to the\nconfigured Foundry GPT Live resource, including when that setting is changed with session.update.\nManaged and hosted agents retain [thinking] and [commentary] output sections; the voice agent\ntranslates validated text into native session.thinking.append and session.commentary.append commands.\nPermitted backend text, tool, and lifecycle events reuse response.event with the native client\ndelegation ID in delegation_id. Dispatch on the nested event.type. Backend text retains its markers;\nobserving it is independent of successful Live injection. Lifecycle snapshots omit input and clear\ninstructions, tools and output; credentials and private reasoning are not forwarded.\nFollow the native event lifecycle: session.delegation.created identifies work; response.event carries\nbackend response status and output; session.thinking.appended and session.commentary.appended acknowledge\naccepted context. These acknowledgments correlate through client_event_id with outgoing append commands,\nnot with a result payload or delegation ID in the acknowledgment. Failures outside a backend response\nuse the native error shape without manufacturing backend responses. No additional Foundry delegation\nstatus or output-item notifications are emitted. Stored output arrays still contain accepted\nLive-injection results, not original backend items; their positions are independent of backend indices.\nThis event forwarding does not change tool execution ownership: native response.item.create and\nresponse.create remain Responses-delegation-only commands, not managed/hosted tool-result routing.\nDo not negotiate the realtime WebSocket subprotocol on this route.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -6192,7 +6192,7 @@
             "name": "structured_input",
             "in": "query",
             "required": false,
-            "description": "Per-session structured input values, serialized as a URL-encoded JSON object.",
+            "description": "Per-session structured input values used to render the agent's instructions and template greeting, serialized as a URL-encoded JSON object.",
             "schema": {
               "type": "string"
             },
@@ -97732,6 +97732,10 @@
             "minLength": 1,
             "description": "The Foundry GPT Live deployment name. Sent in session.start.session.model."
           },
+          "greeting": {
+            "$ref": "#/components/schemas/VoiceAgentTemplateGreetingConfig",
+            "description": "Optional Foundry-managed session-start greeting. Only template mode is supported: render the Handlebars text with the session's structured inputs before playback. LLM-generated greetings, prompt, and tool_choice are not supported. Omit to configure no explicit greeting. This is Foundry agent configuration, not a native Live session field."
+          },
           "audio": {
             "$ref": "#/components/schemas/OpenAI.LiveInitialSessionAudioParam",
             "description": "Startup-only bidirectional audio format and output voice. No realtime VAD or Azure speech processing settings."
@@ -97745,7 +97749,7 @@
                 "type": "null"
               }
             ],
-            "description": "Who handles delegated work: the connected application, a native Responses backend, or a same-project Foundry-managed prompt agent or hosted agent. Omission or null uses native client delegation."
+            "description": "Who handles delegated work: the connected application, a native Responses backend, or a same-project Foundry-managed prompt agent or hosted agent. For responses delegation, responses.model is the backend model deployment name available to the configured Foundry GPT Live resource, not a model catalog ID or agent name. It may differ from the underlying model name and is independent of this definition's frontend model deployment. Omission or null uses native client delegation."
           },
           "input": {
             "type": "array",
