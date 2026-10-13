@@ -111,29 +111,6 @@ model ManagedIdentityProperties {
   resourceId?: Azure.Core.armResourceIdentifier;
 }
 
-@doc("Managed identity properties that can be updated.")
-model ManagedIdentityPropertiesUpdate
-  is OptionalProperties<ManagedIdentityProperties>;
-
-@doc("Linked Key Vault properties that can be updated.")
-model LinkedKeyVaultPropertiesUpdate
-  is OmitProperties<LinkedKeyVaultProperties, "vaultIdentity"> {
-  @encodedName("application/json", "vaultIdentity")
-  @doc("The identity used to access the linked Key Vault.")
-  vaultIdentityUpdate?: ManagedIdentityPropertiesUpdate;
-}
-
-@doc("Playwright workspace properties that can be updated.")
-model PlaywrightWorkspacePropertiesUpdate
-  is OmitProperties<
-    OmitDefaults<PlaywrightWorkspaceProperties>,
-    "linkedKeyVault"
-  > {
-  @encodedName("application/json", "linkedKeyVault")
-  @doc("The linked Key Vault configuration for the workspace.")
-  linkedKeyVaultUpdate?: LinkedKeyVaultPropertiesUpdate;
-}
-
 @doc("The type of the managed identity.")
 union ManagedIdentityType {
   string,

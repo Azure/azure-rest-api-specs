@@ -26,7 +26,7 @@ interface PlaywrightWorkspaces
     PlaywrightWorkspace,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       PlaywrightWorkspace,
-      PlaywrightWorkspacePropertiesUpdate
+      OmitDefaults<PlaywrightWorkspaceProperties>
     >
   >;
   @doc("Checks if a Playwright workspace name is available globally.")
