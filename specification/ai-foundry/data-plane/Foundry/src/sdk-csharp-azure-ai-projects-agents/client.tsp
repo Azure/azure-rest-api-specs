@@ -32,11 +32,6 @@ namespace Azure.AI.Projects {
   @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!csharp");
 
   // --------------------------------------------------------------------------------
-  // Fix the xref.
-  // --------------------------------------------------------------------------------
-  //@@clientNamespace(OpenAI, "Azure.AI.Projects.Agents", "csharp");
-
-  // --------------------------------------------------------------------------------
   // Root client
   // --------------------------------------------------------------------------------
   @@clientName(Agents, "AgentAdministrationClient", "csharp");
@@ -162,6 +157,7 @@ namespace Azure.AI.Projects {
   // Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
   @@usage(VoiceAgentTransport, Usage.input | Usage.json);
   @@access(VoiceAgentTransport, Access.public);
+  @@alternateType(OpenAI.RealtimeResponse.metadata, Record<unknown>);
 
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
