@@ -13,12 +13,9 @@ export default async function setSpecGenSdkStatus({
 }: GitHubScriptArgs): Promise<void> {
   const inputs = await extractInputs(github, context, core);
   const head_sha = inputs.head_sha;
-  const details_url = inputs.details_url;
   const issue_number = inputs.issue_number;
-  if (!details_url || !head_sha) {
-    throw new Error(
-      `Required inputs are not valid: details_url:${details_url}, head_sha:${head_sha}`,
-    );
+  if (!head_sha) {
+    throw new Error(`Required input is not valid: head_sha:${head_sha}`);
   }
   const owner = inputs.owner;
   const repo = inputs.repo;
@@ -56,7 +53,12 @@ export async function setSpecGenSdkStatusImpl({
   core: Core;
 }): Promise<void> {
   if (Number.isInteger(issue_number) && issue_number > 0) {
-    if (!(await getOpenPullRequest(github, core, { owner, repo, issue_number }))) return;
+    const pr = await getOpenPullRequest(github, core, { owner, repo, issue_number });
+    if (!pr) return;
+    if (pr.head.sha !== head_sha) {
+      core.info("The checked commit is no longer the PR head; skipping SDK status updates.");
+      return;
+    }
   } else {
     // check_run payloads can omit PRs (notably for forks); resolve against the checked commit.
     let hasAssociatedPr = false;
@@ -68,6 +70,7 @@ export async function setSpecGenSdkStatusImpl({
         const pr = response.data.find(
           (pr) =>
             pr.state === "open" &&
+            pr.head.sha === head_sha &&
             pr.base.repo.full_name.toLowerCase() === `${owner}/${repo}`.toLowerCase(),
         );
         if (pr) done();
@@ -82,10 +85,10 @@ export async function setSpecGenSdkStatusImpl({
         repo,
       });
       const pr = await getOpenPullRequest(github, core, { owner, repo, issue_number: issueNumber });
-      issue_number = pr ? issueNumber : NaN;
+      issue_number = pr?.head.sha === head_sha ? issueNumber : NaN;
     }
     if (!Number.isInteger(issue_number) || issue_number <= 0) {
-      core.info("No open PR associated with the checked commit; skipping SDK status updates.");
+      core.info("No open PR for the checked commit; skipping SDK status updates.");
       return;
     }
   }
