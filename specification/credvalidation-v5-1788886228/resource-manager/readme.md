@@ -1,11 +1,10 @@
 # credvalidation-v5-1788886228
 > see https://aka.ms/autorest
+> updated: 2026-10-13T04:35
 
 ## Configuration
 
 ### Basic Information
-
-These are the global settings for the API.
 
 `````` yaml $(tag==default)
 input-file: 
