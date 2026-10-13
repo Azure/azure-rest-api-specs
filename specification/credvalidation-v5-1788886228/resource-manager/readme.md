@@ -1,9 +1,28 @@
-# credvalidation-v5-1791856232
+# credvalidation-v5-1791845298
 > see https://aka.ms/autorest
 
 ## Configuration
 
+### Basic Information
+
+``` yaml
+openapi-type: arm
+tag: package-2026-10-12
+package-version: 1.0.0b1
+```
+
+### Tag: package-2026-10-12
+
+These settings apply only when `--tag=package-2026-10-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-10-12'
+input-file:
+  - Microsoft.Test/stable/2026-10-12/test.json
+```
+
 ## Python
+
+These settings apply only when `--python` is specified on the command line.
 
 ``` yaml $(python)
 python:
