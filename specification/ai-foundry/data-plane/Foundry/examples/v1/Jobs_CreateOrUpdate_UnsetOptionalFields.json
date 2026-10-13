@@ -1,0 +1,55 @@
+{
+  "title": "Jobs_CreateOrUpdate_UnsetOptionalFields",
+  "operationId": "Jobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "v1",
+    "name": "my_training_job_01",
+    "job": {
+      "properties": {
+        "jobType": "Command",
+        "command": "python train.py",
+        "environmentImageReference": "mcr.microsoft.com/azureml/test:latest",
+        "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-compute"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "my_training_job_01",
+        "properties": {
+          "jobType": "Command",
+          "command": "python train.py",
+          "environmentImageReference": "mcr.microsoft.com/azureml/test:latest",
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-compute",
+          "displayName": null,
+          "description": null,
+          "tags": null,
+          "properties": null,
+          "codeId": null,
+          "inputs": null,
+          "outputs": null,
+          "environmentVariables": null,
+          "resources": {
+            "instanceCount": 1,
+            "instanceType": null,
+            "gpuCount": null,
+            "properties": null,
+            "dockerArgs": null
+          },
+          "distribution": null,
+          "limits": null,
+          "services": null,
+          "queueSettings": {
+            "jobTier": "Null"
+          },
+          "priority": null,
+          "userAssignedIdentityId": null,
+          "experimentName": "Default",
+          "isArchived": false,
+          "status": "NotStarted"
+        }
+      }
+    }
+  }
+}
