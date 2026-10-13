@@ -34,6 +34,7 @@ model AcsIncomingCallEventData {
 
   /** Display metadata associated with the incoming call arrival. */
   callArrivalDisplayInfo?: AcsIncomingCallCallArrivalDisplayInfo;
+
   /** CorrelationId (CallId). */
   correlationId?: string;
 }
