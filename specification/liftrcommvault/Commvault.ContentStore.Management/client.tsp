@@ -4,19 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Commvault.ContentStore;
 
-namespace CommvaultContentStoreClient {
-  model CloudAccountUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
-    Commvault.ContentStore.CloudAccount,
-    Commvault.ContentStore.CloudAccountProperties
-  >;
-}
-
-@@alternateType(
-  CloudAccounts.update::parameters.properties,
-  CommvaultContentStoreClient.CloudAccountUpdate,
-  "csharp"
-);
-
 // Preserve the public request name and documentation when using the ARM action template.
 @@clientName(ProtectionGroups.stopBackup::parameters.body, "request");
 @@doc(

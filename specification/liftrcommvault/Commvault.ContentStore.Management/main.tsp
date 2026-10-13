@@ -178,7 +178,13 @@ model LatestLinkedSaaSResponse {
 interface CloudAccounts {
   get is ArmResourceRead<CloudAccount>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudAccount>;
-  update is ArmResourcePatchAsync<CloudAccount, CloudAccountProperties>;
+  update is ArmCustomPatchAsync<
+    CloudAccount,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      CloudAccount,
+      CloudAccountProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<CloudAccount>;
   listByResourceGroup is ArmResourceListByParent<CloudAccount>;
   listBySubscription is ArmListBySubscription<CloudAccount>;
