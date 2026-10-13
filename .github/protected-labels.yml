@@ -30,7 +30,7 @@ global-approvers:
 # Since this low cost effort and the list changes rarely, the simpler path
 # fits better for now, so we mirror the members by hand. Keep this in sync when team
 # membership changes.
-data-plane-review-signoff:
+data-plane-review-signoff: &data-plane-reviewers
   - alzimmermsft
   - heaths
   - jeremymeng
@@ -46,6 +46,17 @@ data-plane-review-signoff:
   - tjprescott
   - weidongxu-microsoft
   - xirzec
+
+# TypeSpec lint-suppression approval (data-plane stewardship review).
+# `typespec-suppressions-approved` clears the suppression review on a data-plane spec PR.
+# Only the data-plane stewardship reviewers may apply it, mirroring the azure-data-plane-api-reviewers
+# team (same pool as `data-plane-review-signoff`); the alias keeps the two rosters in sync.
+# Management-plane is left `unprotected`: ARM runs its own suppression review process, and
+# this preserves today's behavior (the label was previously unprotected on all planes).
+# See the stewardship board member guide (aka.ms/azsdk/architect-guidance).
+typespec-suppressions-approved:
+  data-plane: *data-plane-reviewers
+  management-plane: unprotected
 
 # Package name approval labels (plane-aware)
 package-name-dotnet-approved:
@@ -113,6 +124,7 @@ BreakingChange-Go-Sdk-Approved: &sdk-breaking-change-approvers
   - heaths
   - jeremymeng
   - jhendrixMSFT
+  - JialinHuang803
   - JonathanGiles
   - JoshLove-msft
   - kashifkhan
@@ -143,6 +155,14 @@ Skip-ReleasePlan-Automation:
   - tadelesh
   - JiaqiZhang-Dev
   - JialinHuang803
+  - ArcturusZhang
+  - weidongxu-microsoft
+  - XiaofeiCao
+  - ChenxiJiang333
+  - kazrael2119
+  - v-jiaodi
+  - v-xuto
+  - live1206
 
 # Tier 1 languages: all must approve package names for cross-language alignment.
 tier1:

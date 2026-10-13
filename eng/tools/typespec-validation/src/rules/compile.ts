@@ -1,14 +1,22 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
+import { untilLastSegmentWithParent } from "@azure-tools/specs-shared/path";
+import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { readFile } from "node:fs/promises";
 import { stripVTControlCharacters } from "node:util";
-import path, { basename, dirname, normalize } from "node:path";
+import path, { basename, dirname, normalize } from "pathe";
 import { reportCommandOutput } from "../command-output.ts";
 import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
 import { globFiles } from "../glob.ts";
 import { type Diagnostic, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
-import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNodeBin } from "../utils.ts";
+import {
+  fileExists,
+  getStructureVersion,
+  getSuppressions,
+  gitDiffTopSpecFolder,
+  runNodeBin,
+} from "../utils.ts";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -56,7 +64,7 @@ export class CompileRule implements Rule {
           const outputSwaggers = outputLines
             // Remove leading and trailing whitespace
             .map((l) => l.trim())
-            // Normalize to platform-specific path
+            // Normalize separators to forward slashes
             .map((l) => normalize(l))
             // Filter to JSON files
             .filter((p) => basename(p).toLowerCase().endsWith(".json"))
@@ -74,11 +82,40 @@ export class CompileRule implements Rule {
 
             logger.debug(`Output folder:\n${outputFolder}`);
 
+            const gitRoot = await getRootFolder(folder);
+            const relativeFolder = path.relative(gitRoot, folder).split(path.sep).join("/");
+
+            if (getStructureVersion(relativeFolder) === 2) {
+              // Projects may intentionally share emitted Swagger at their service's specification root.
+              const allowedOutputFolderPath = untilLastSegmentWithParent(folder, "specification");
+              if (!allowedOutputFolderPath) {
+                throw new Error(`Could not determine the allowed output folder for '${folder}'`);
+              }
+
+              const allowedOutputFolder = path.relative(process.cwd(), allowedOutputFolderPath);
+              const outputFolderRelativeToAllowed = path.relative(
+                allowedOutputFolderPath,
+                path.resolve(outputFolder),
+              );
+
+              logger.debug(`Allowed output folder:\n${allowedOutputFolder}`);
+
+              if (
+                outputFolderRelativeToAllowed === ".." ||
+                outputFolderRelativeToAllowed.startsWith(`..${path.sep}`) ||
+                path.isAbsolute(outputFolderRelativeToAllowed)
+              ) {
+                throw new Error(
+                  `Output folder '${outputFolder}' must be under path '${allowedOutputFolder}'`,
+                );
+              }
+            }
+
             // Filter to only specs matching the folder and filename extracted from the first output-file.
             // Necessary to handle multi-project specs like keyvault.
             //
             // Glob patterns use forward slashes on all platforms.
-            const pattern = path.posix.join(...outputFolder.split(path.sep), "**", outputFilename);
+            const pattern = path.join(outputFolder, "**", outputFilename);
             const allSwaggers = (await globFiles(pattern, { exclude: ["**/examples/**"] })).map(
               (p) => normalize(p),
             );
@@ -148,18 +185,13 @@ export class CompileRule implements Rule {
 
             if (extraSwaggers.length > 0) {
               // Helper function to extract version from swagger path
-              // Normalize to POSIX path for consistent pattern matching
               const extractVersion = (swaggerPath: string): string | null => {
-                const posixPath = swaggerPath.split(path.sep).join(path.posix.sep);
-                const match = posixPath.match(/\/(preview|stable)\/([^/]+)\//);
+                const match = swaggerPath.match(/\/(preview|stable)\/([^/]+)\//);
                 return match ? match[2] : null;
               };
 
               // Check if all extra swaggers are preview versions
-              const allArePreview = extraSwaggers.every((s) => {
-                const posixPath = s.split(path.sep).join(path.posix.sep);
-                return posixPath.includes("/preview/");
-              });
+              const allArePreview = extraSwaggers.every((s) => s.includes("/preview/"));
 
               let isOnlyOlderPreviews = false;
               if (allArePreview) {

@@ -313,3 +313,150 @@ test.concurrent("Hand-written, unexpected response checking main", async ({ expe
   expect(stdout).toContain("Unexpected response");
   expect(exitCode).toBe(1);
 });
+
+const generatedSwagger =
+  '{"info":{"x-typespec-generated":[{"emitter":"@azure-tools/typespec-autorest"}]}}';
+const migratedService = "migrated/resource-manager/Microsoft.Migrated/Service";
+
+test.concurrent.each([false, true])(
+  "Preserves existing API-version behavior after migration (suppressed=%s)",
+  async (suppressed) => {
+    const apiVersion = `${migratedService}/stable/2025-01-01`;
+    const { stdout, exitCode, githubOutput } = await checkFixtures(
+      {
+        "migrated/tspconfig.yaml": "{}",
+        [`${migratedService}/stable/2026-01-01/generated.json`]: generatedSwagger,
+        [`${apiVersion}/handwritten.json`]: "{}",
+        ...(suppressed
+          ? {
+              [`${migratedService}/suppressions.yaml`]:
+                "- tool: TypeSpecRequirement\n  path: ./stable/2025-01-01/*.json\n  reason: Legacy exemption\n",
+            }
+          : {}),
+      },
+      {
+        [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${apiVersion}`]: 200,
+      },
+      true,
+    );
+    expect(exitCode).toBe(0);
+    expect(stdout).toContain(suppressed ? "Suppressed" : "not required to use TypeSpec");
+    expect(githubOutput).toBe(suppressed ? "" : "brownfield=true\n");
+  },
+);
+
+test.concurrent.each([
+  { service: migratedService, first: "stable/2026-01-01", target: "stable/2025-01-01" },
+  {
+    service: migratedService,
+    first: "Preview/2026-01-01-preview",
+    target: "stable/2027-01-01",
+  },
+  {
+    service: "migrated/data-plane/Microsoft.Migrated/Service",
+    first: "stable/2026-01-01",
+    target: "preview/2027-01-01-preview",
+  },
+])(
+  "Rejects suppressed new API version $target in $service when $first uses TypeSpec",
+  async ({ service, first, target }) => {
+    const apiVersion = `${service}/${target}`;
+    const { stdout, exitCode, githubOutput } = await checkFixtures(
+      {
+        "migrated/tspconfig.yaml": "{}",
+        [`${service}/${first}/generated.json`]: generatedSwagger,
+        [`${apiVersion}/handwritten.json`]: "{}",
+        [`${service}/suppressions.yaml`]: `- tool: TypeSpecRequirement\n  path: ./${target}/*.json\n  reason: Legacy exemption\n`,
+      },
+      {
+        [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${apiVersion}`]: 404,
+      },
+      true,
+    );
+    expect(exitCode).toBe(1);
+    expect(stdout).toContain("suppressions cannot permit new handwritten API versions");
+    expect(stdout).not.toContain("Suppressed:");
+    expect(githubOutput).toBe("");
+  },
+);
+
+test.concurrent("Preserves brownfield output when a new API version's suppression is rejected", async ({
+  expect,
+}) => {
+  const existingVersion = `${migratedService}/stable/2025-01-01`;
+  const apiVersion = `${migratedService}/preview/2027-01-01-preview`;
+  const { stdout, exitCode, githubOutput } = await checkFixtures(
+    {
+      "migrated/tspconfig.yaml": "{}",
+      [`${migratedService}/stable/2026-01-01/generated.json`]: generatedSwagger,
+      [`${existingVersion}/handwritten.json`]: "{}",
+      [`${apiVersion}/handwritten.json`]: "{}",
+      [`${migratedService}/suppressions.yaml`]:
+        "- tool: TypeSpecRequirement\n  path: ./preview/2027-01-01-preview/*.json\n  reason: Legacy exemption\n",
+    },
+    {
+      [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${existingVersion}`]: 200,
+      [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${apiVersion}`]: 404,
+    },
+    true,
+  );
+  expect(exitCode).toBe(1);
+  expect(stdout).toContain("suppressions cannot permit new handwritten API versions");
+  expect(githubOutput).toBe("brownfield=true\n");
+});
+
+test.concurrent("Preserves suppressions for generated Swagger without tspconfig.yaml", async ({
+  expect,
+}) => {
+  const { stdout, exitCode } = await checkFixtures({
+    [`${migratedService}/stable/2027-01-01/generated.json`]: generatedSwagger,
+    [`${migratedService}/suppressions.yaml`]:
+      "- tool: TypeSpecRequirement\n  path: ./stable/2027-01-01/*.json\n  reason: Legacy exemption\n",
+  });
+  expect(exitCode).toBe(0);
+  expect(stdout).toContain("Suppressed:");
+});
+
+test.concurrent.each([
+  "migrated/resource-manager/Microsoft.Migrated/OtherService",
+  "migrated/data-plane/Microsoft.Migrated/Service",
+  "migrated/resource-manager/Microsoft.Other/Service",
+])("Does not share migration state with %s", async (otherService) => {
+  const apiVersion = `${migratedService}/stable/2027-01-01`;
+  const { stdout, exitCode } = await checkFixtures(
+    {
+      "migrated/tspconfig.yaml": "{}",
+      [`${otherService}/stable/2026-01-01/generated.json`]: generatedSwagger,
+      [`${apiVersion}/handwritten.json`]: "{}",
+      [`${migratedService}/suppressions.yaml`]:
+        "- tool: TypeSpecRequirement\n  path: ./stable/2027-01-01/*.json\n  reason: Legacy exemption\n",
+    },
+    {
+      [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${apiVersion}`]: 404,
+    },
+  );
+  expect(exitCode).toBe(0);
+  expect(stdout).toContain("Suppressed:");
+});
+
+test.concurrent("Does not infer migration from examples, common types, or tspconfig alone", async ({
+  expect,
+}) => {
+  const apiVersion = `${migratedService}/stable/2027-01-01`;
+  const { stdout, exitCode } = await checkFixtures(
+    {
+      "migrated/tspconfig.yaml": "{}",
+      [`${migratedService}/stable/2026-01-01/examples/generated.json`]: generatedSwagger,
+      [`${migratedService}/stable/2026-01-01/common/generated.json`]: generatedSwagger,
+      [`${apiVersion}/handwritten.json`]: "{}",
+      [`${migratedService}/suppressions.yaml`]:
+        "- tool: TypeSpecRequirement\n  path: ./stable/2027-01-01/*.json\n  reason: Legacy exemption\n",
+    },
+    {
+      [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${apiVersion}`]: 404,
+    },
+  );
+  expect(exitCode).toBe(0);
+  expect(stdout).toContain("Suppressed:");
+  expect(stdout).not.toContain("Checking github.com");
+});
