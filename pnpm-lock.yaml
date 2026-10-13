@@ -741,12 +741,12 @@ importers:
       '@azure-tools/sdk-suppressions':
         specifier: workspace:*
         version: link:sdk-suppressions
+      '@azure-tools/spec-change-policies':
+        specifier: workspace:*
+        version: link:spec-change-policies
       '@azure-tools/spec-gen-sdk-runner':
         specifier: workspace:*
         version: link:spec-gen-sdk-runner
-      '@azure-tools/spec-pr-validation':
-        specifier: workspace:*
-        version: link:spec-pr-validation
       '@azure-tools/specs-shared':
         specifier: workspace:*
         version: link:../../.github/shared
@@ -894,20 +894,7 @@ importers:
         specifier: 'catalog:'
         version: 26.6.3
 
-  eng/tools/spec-gen-sdk-runner:
-    dependencies:
-      '@azure-tools/specs-shared':
-        specifier: workspace:*
-        version: link:../../../.github/shared
-      yaml:
-        specifier: 'catalog:'
-        version: 2.9.1
-    devDependencies:
-      '@types/node':
-        specifier: 'catalog:'
-        version: 26.6.3
-
-  eng/tools/spec-pr-validation:
+  eng/tools/spec-change-policies:
     dependencies:
       '@azure-tools/specs-shared':
         specifier: workspace:*
@@ -922,6 +909,19 @@ importers:
       execa:
         specifier: 'catalog:'
         version: 10.0.1
+
+  eng/tools/spec-gen-sdk-runner:
+    dependencies:
+      '@azure-tools/specs-shared':
+        specifier: workspace:*
+        version: link:../../../.github/shared
+      yaml:
+        specifier: 'catalog:'
+        version: 2.9.1
+    devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.3
 
   eng/tools/summarize-impact:
     dependencies:

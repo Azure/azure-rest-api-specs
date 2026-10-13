@@ -109,7 +109,7 @@ describe("workflow files", () => {
           "summarize-impact",
           "suppressions",
           "tsp-client-tests",
-          "spec-pr-validation",
+          "spec-change-policies",
           "typespec-suppressions",
           "typespec-validation",
         ].map((name) => `eng/tools/${name}`),
