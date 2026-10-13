@@ -1,8 +1,8 @@
-import { dirname, join, resolve } from "path";
+import { dirname, join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { API_VERSION_LIFECYCLE_STAGES, Swagger } from "../src/swagger.ts";
 
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 import { ConsoleLogger } from "../src/logger.ts";
 import { Readme } from "../src/readme.ts";
 import { SpecModel } from "../src/spec-model.ts";

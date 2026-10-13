@@ -1,0 +1,59 @@
+{
+  "operationId": "DocumentClassifiers_ListClassifiers",
+  "title": "Get Document Classifiers",
+  "parameters": {
+    "endpoint": "https://myendpoint.cognitiveservices.azure.com",
+    "api-version": "2024-02-29-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "classifierId": "classifier1",
+            "description": "Classifier1 description",
+            "createdDateTime": "2022-07-30T00:00:00Z",
+            "expirationDateTime": "2023-01-01T00:00:00Z",
+            "apiVersion": "2024-02-29-preview",
+            "docTypes": {
+              "formA": {
+                "azureBlobSource": {
+                  "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer",
+                  "prefix": "formADocs/"
+                }
+              },
+              "formB": {
+                "azureBlobSource": {
+                  "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer",
+                  "prefix": "formBDocs/"
+                }
+              }
+            }
+          },
+          {
+            "classifierId": "classifier2",
+            "description": "Classifier2 description",
+            "createdDateTime": "2022-07-30T00:00:00Z",
+            "expirationDateTime": "2023-01-01T00:00:00Z",
+            "apiVersion": "2024-02-29-preview",
+            "docTypes": {
+              "formB": {
+                "azureBlobSource": {
+                  "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer",
+                  "prefix": "formBDocs/"
+                }
+              },
+              "formC": {
+                "azureBlobSource": {
+                  "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer",
+                  "prefix": "formCDocs/"
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": "https://myendpoint.cognitiveservices.azure.com/documentintelligence/documentClassifiers?nextLink=nextLinkData"
+      }
+    }
+  }
+}

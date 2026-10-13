@@ -548,12 +548,11 @@ model ContainerConfiguration {
 @doc("Session defaults applied to sessions created for a hosted agent version.")
 model SessionConfiguration {
   @doc("""
-    The idle duration, in seconds, before a session's sandbox is suspended. Optional — when
-    unset, the server default of 900 seconds is used. Must be between 120 and 3600 seconds
-    (inclusive).
+    The idle duration, in seconds, before a session's sandbox is suspended. When omitted,
+    the server defaults to 900 seconds. Must be between 120 and 14400 seconds (4 hours).
     """)
   @minValue(duration.fromISO("PT120S"))
-  @maxValue(duration.fromISO("PT3600S"))
+  @maxValue(duration.fromISO("PT14400S"))
   @example(duration.fromISO("PT300S"))
   @encode(DurationKnownEncoding.seconds, int32)
   idle_timeout_seconds?: duration = duration.fromISO("PT900S");
@@ -652,6 +651,9 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("Optional session defaults (for example, the idle timeout) applied to sessions created for this agent version.")
   @example(#{ idle_timeout_seconds: duration.fromISO("PT300S") })
   session_configuration?: SessionConfiguration;
+
+  @doc("Whether this agent version uses memory snapshots. Sessions for a snapshot-enabled version start from a snapshot of the agent's initialized process rather than starting the process from its image. Defaults to false.")
+  enable_memory_snapshot?: boolean = false;
 }
 
 @doc("The container app agent definition.")
