@@ -69,8 +69,8 @@ model RayDistribution extends DistributionConfiguration {
   workerNodeAdditionalArgs?: string;
 }
 
-@doc("Enum to determine the input/output data delivery mode.")
-union InputOutputModes {
+@doc("Delivery modes for asset inputs. Literal inputs do not use a delivery mode. The service uses ReadOnlyMount when an asset input's mode is omitted. Tolerate additional response values; extensibility does not make unsupported request values valid.")
+union InputDeliveryMode {
   string,
 
   @doc("Read-only mount mode.")
@@ -85,12 +85,29 @@ union InputOutputModes {
   @doc("Direct mode.")
   Direct: "Direct",
 
-  @doc("Upload mode.")
-  Upload: "Upload",
+  @doc("Evaluation mount mode.")
+  EvalMount: "EvalMount",
+
+  @doc("Evaluation download mode.")
+  EvalDownload: "EvalDownload",
 }
 
-@doc("Type of job input/output asset.")
-union AssetTypes {
+@doc("Delivery modes for job outputs. The service uses ReadWriteMount when omitted. ReadOnlyMount, Download and the evaluation input modes are not output modes. Tolerate additional response values; extensibility does not make unsupported request values valid.")
+union OutputDeliveryMode {
+  string,
+
+  @doc("Read-write mount mode.")
+  ReadWriteMount: "ReadWriteMount",
+
+  @doc("Upload mode.")
+  Upload: "Upload",
+
+  @doc("Direct mode.")
+  Direct: "Direct",
+}
+
+@doc("Input types faithfully supported by the Foundry Training Job mapping. Asset types require a non-empty URI; literal requires a non-empty value instead. Tolerate additional response values; extensibility does not make unsupported request values valid.")
+union JobInputType {
   string,
 
   @doc("URI file asset.")
@@ -99,38 +116,73 @@ union AssetTypes {
   @doc("URI folder asset.")
   UriFolder: "uri_folder",
 
-  @doc("Safetensors model asset.")
-  SafetensorsModel: "safetensors_model",
+  @doc("MLTable asset.")
+  MLTable: "mltable",
+
+  @doc("Custom model asset.")
+  CustomModel: "custom_model",
+
+  @doc("MLflow model asset.")
+  MLflowModel: "mlflow_model",
+
+  @doc("Triton model asset.")
+  TritonModel: "triton_model",
 
   @doc("Literal value (inputs only).")
   Literal: "literal",
 }
 
-@doc("Job input definition.")
+@doc("Output asset types. A literal value is not a job output. Tolerate additional response values; extensibility does not make unsupported request values valid.")
+union JobOutputType {
+  string,
+
+  @doc("URI file asset.")
+  UriFile: "uri_file",
+
+  @doc("URI folder asset.")
+  UriFolder: "uri_folder",
+
+  @doc("MLTable asset.")
+  MLTable: "mltable",
+
+  @doc("Custom model asset.")
+  CustomModel: "custom_model",
+
+  @doc("MLflow model asset.")
+  MLflowModel: "mlflow_model",
+
+  @doc("Triton model asset.")
+  TritonModel: "triton_model",
+
+  @doc("Safetensors model asset.")
+  SafetensorsModel: "safetensors_model",
+}
+
+@doc("A job input with type-dependent fields. For literal, supply a non-empty value and omit path/mode. For an asset type, supply a non-empty path (serialized as uri), omit value, and optionally select an input delivery mode. The service validates the required field for the selected type and returns 400 when it is absent or empty. The flat shape and existing jobInputType wire name are retained for compatibility.")
 model Input {
   @doc("Specifies the type of job input.")
   @encodedName("application/json", "jobInputType")
-  type: AssetTypes;
+  type: JobInputType;
 
-  @doc("Input Asset URI.")
+  @doc("Required non-empty asset URI for non-literal inputs. This property is serialized as uri. It is not used for literal inputs; supply value instead.")
   @encodedName("application/json", "uri")
   path?: string;
 
-  @doc("Input Asset Delivery Mode.")
-  mode?: InputOutputModes;
+  @doc("Delivery mode for asset inputs only. Defaults to ReadOnlyMount in the service when omitted. Not used for literal inputs.")
+  mode?: InputDeliveryMode;
 
-  @doc("Literal value for literal-type inputs.")
+  @doc("Required non-empty string for literal inputs. Not used for asset inputs; supply path instead.")
   value?: string;
 }
 
-@doc("Job output definition.")
+@doc("A job output asset, never a literal value. A destination URI is optional at submission: the runtime can materialize the output in job storage and the service can return its resolved URI later. Omit uri to use that behavior. The flat shape and existing jobOutputType wire name are retained for compatibility.")
 model Output {
   @doc("Specifies the type of job output.")
   @encodedName("application/json", "jobOutputType")
-  type: AssetTypes;
+  type: JobOutputType;
 
-  @doc("Output Asset Delivery Mode.")
-  mode?: InputOutputModes;
+  @doc("Output delivery mode. Defaults to ReadWriteMount in the service when omitted. Input-only delivery modes are not supported.")
+  mode?: OutputDeliveryMode;
 
   @doc("Name of the output data asset to register.")
   assetName?: string;
@@ -138,7 +190,7 @@ model Output {
   @doc("Version of the output data asset to register.")
   assetVersion?: string;
 
-  @doc("Output Asset URI.")
+  @doc("Optional output destination URI. When omitted on submission, the runtime can materialize the output in job storage; a subsequent resource read can include the resolved URI.")
   uri?: string;
 
   @doc("Base model ID.")
@@ -170,7 +222,8 @@ model JobService {
   @doc("Port for endpoint.")
   port?: int32;
 
-  @doc("Url for endpoint.")
+  @doc("Service-resolved endpoint URI, when available. The caller requests a service using its type, port, properties and nodes; it does not select the endpoint URI. Resource reads can include runtime-resolved endpoints and server-generated Tracking/Studio helper services.")
+  @visibility(Lifecycle.Read)
   endpoint?: string;
 
   @doc("Additional properties to set on the endpoint.")
@@ -188,13 +241,18 @@ model JobService {
   errorMessage?: string;
 }
 
-@doc("Compute Resource configuration for the job.")
+@doc("Submitted compute configuration. The service persists the requested settings and resource reads return that persisted configuration, not a resolved-allocation receipt. Runtime VM/SKU and node-count resolution is separate and can differ from the request. Same-name PUTs must preserve submitted configuration; omit unchanged optional configuration when updating metadata. Omit server-owned response fields when constructing a PUT from a GET.")
 model JobResourceConfiguration {
-  @doc("Optional number of instances or nodes used by the compute target.")
+  @doc("Requested instance or node count; the service uses 1 when omitted. GPU allocation can resolve a different node count from gpuCount and the selected SKU. Resource reads reflect the persisted requested count rather than guaranteeing the resolved execution node count.")
   instanceCount?: int32;
 
-  @doc("Optional type of VM used as supported by the compute target.")
+  @doc("Requested VM type, as supported by the compute target. Virtual cluster targets require an explicit instance type when gpuCount is supplied. The service can select a different partial GPU SKU for execution; that resolved SKU does not replace this persisted request field.")
   instanceType?: string;
+
+  @doc("Requested total GPU count, serialized only as resources.gpuCount. Valid values are 1, 2, 4, 8, or multiples of 8 greater than 8; other values are rejected with 400. The value maps to the persisted compute allocation request and is returned at the same location by resource reads. It can determine the execution SKU and node count instead of resources.instanceCount. CPU compute targets ignore the count for placement while retaining the submitted configuration. Virtual cluster targets also require resources.instanceType. This is immutable submitted configuration, not the resolved runtime GPU allocation. There is no top-level gpuCount or capacityUnitCount alias.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @minValue(1)
+  gpuCount?: int32;
 
   @doc("Additional properties bag.")
   properties?: Record<unknown>;
@@ -410,7 +468,7 @@ model CommandJob extends JobProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   environmentVariables?: Record<string>;
 
-  @doc("Compute Resource configuration for the job.")
+  @doc("Submitted compute configuration. GPU allocation is specified only by resources.gpuCount. GET returns the persisted request settings, not a guarantee of the runtime-resolved SKU or node count. Preserve submitted settings on same-name replay or omit unchanged optional configuration on a tracked metadata update.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   resources?: JobResourceConfiguration;
 
@@ -436,14 +494,6 @@ model CommandJob extends JobProperties {
   @doc("user-assigned managed identity")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   userAssignedIdentityId?: string;
-
-  @doc("Number of capacity units to allocate for the job. When set, the service resolves the VM SKU from the compute target and calculates the required node count automatically. Virtual cluster targets must also specify `resources.instanceType`. Valid values are 1, 2, 4, 8, or any multiple of 8 for values greater than 8. `gpuCount` takes precedence over this property when both are supplied.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  capacityUnitCount?: int32;
-
-  @doc("Number of GPUs to allocate for the job. Takes precedence over `capacityUnitCount` when both are supplied, and is used to resolve a partial (sub-node) VM SKU for GPU computes. Only applies to GPU computes; CPU computes always resolve to a full-node SKU and ignore this value. Valid values are 1, 2, 4, 8, or any multiple of 8 for values greater than 8.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  gpuCount?: int32;
 
   @doc("Is the asset archived?")
   isArchived?: boolean;

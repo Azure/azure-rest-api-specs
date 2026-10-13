@@ -34,7 +34,7 @@ alias JobOperations = FoundryAzureOperations<{}>;
 @doc("Manage command jobs backed by the Foundry Training Job service. The public `/training_jobs` routes require FTJ-only gateway routing and do not expose legacy Run History operations. Resource requests complete independently of the asynchronous training execution.")
 interface Jobs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
-  @doc("List Jobs.")
+  @doc("List job resources using the FTJ-only gateway route. Follow nextLink unchanged for subsequent pages. Artifact page sizing is configured separately by listArtifacts; this operation does not advertise an artifact maxpagesize parameter or legacy Run History page-size behavior.")
   @Rest.listsResource(Job)
   list is Azure.Core.Foundations.ResourceList<
     Job,
@@ -128,7 +128,7 @@ interface Jobs {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Explicit FTJ resource action preserves the required preview header."
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "FTJ cancellation acknowledges the request with 200 and no response body."
-  @doc("Request cancellation of a job. Returns 200 with no body after the cancellation request is processed, or if the job is already terminal. This acknowledgement does not guarantee that training has stopped or will end as `Canceled`. Use `get` to observe execution state; `Completed` or `Failed` may be observed if execution finishes before cancellation takes effect. A missing or deleted job returns 404, and a job that has not been submitted can return 409. Request failures use the normal API error response, not an asynchronous operation result. No operation monitor or polling URL is returned.")
+  @doc("Request cancellation of a job. Returns 200 with no body after the cancellation request is processed, or if the job is already terminal. This acknowledgement does not guarantee that training has stopped or will end as `Canceled`. Use `get` to observe execution state; `Completed` or `Failed` may be observed if execution finishes before cancellation takes effect. A missing or deleted job returns 404, and a job that has not been submitted can return 409. Request failures use the normal API error response, not an asynchronous operation result. No operation monitor or polling URL is returned. This contract retains /training_jobs/{name}/cancel to match the existing Foundry backend action shape and both gateway registrations; :cancel is not an alternate route.")
   @post
   @Rest.action("cancel")
   @actionSeparator("/")
