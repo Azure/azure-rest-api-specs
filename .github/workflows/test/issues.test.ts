@@ -77,10 +77,12 @@ describe("getIssueNumber", () => {
     mockGithub.rest.search.issuesAndPullRequests.mockResolvedValue({
       data: { total_count: 1, items: [{ number: 123 }] },
     });
-    await getIssueNumber(mockGithub, "abc123", createMockLogger(), {
-      owner: "Azure",
-      repo: "test-repo",
-    });
+    await expect(
+      getIssueNumber(mockGithub, "abc123", createMockLogger(), {
+        owner: "Azure",
+        repo: "test-repo",
+      }),
+    ).resolves.toEqual({ issueNumber: 123 });
     expect(mockGithub.rest.search.issuesAndPullRequests).toHaveBeenCalledWith({
       q: "sha:abc123 type:pr state:open repo:Azure/test-repo",
       advanced_search: "true",

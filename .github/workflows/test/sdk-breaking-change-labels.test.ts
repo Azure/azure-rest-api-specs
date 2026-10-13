@@ -221,16 +221,11 @@ describe("sdk-breaking-change-labels", () => {
       expect(result.headSha).toBe("");
       expect(result.issueNumber).toBeNaN();
     });
-    it("should retain labelAction Remove without checking the target branch", async () => {
-      // Setup inputs
-      const inputs = {
-        details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
-        head_sha: "abc123",
-      };
-
-      // Setup mock for extractInputs
-      const { extractInputs } = await import("../src/context.ts");
-      (extractInputs as import("vitest").Mock)(inputs);
+    it("removes labels even on unsupported target branches", async () => {
+      mockCheckRunInputs();
+      mockGithub.rest.pulls.get.mockResolvedValue({
+        data: { state: "open", base: { ref: "release-feature" } },
+      });
 
       // Mock artifact responses with 'remove' action
       const mockArtifactResponse = {
@@ -298,15 +293,7 @@ describe("sdk-breaking-change-labels", () => {
       },
     );
     it("should correctly set labelAction to none when label name is empty", async () => {
-      // Setup inputs
-      const inputs = {
-        details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
-        head_sha: "abc123",
-      };
-
-      // Setup mock for extractInputs
-      const { extractInputs } = await import("../src/context.ts");
-      (extractInputs as import("vitest").Mock)(inputs);
+      mockCheckRunInputs();
 
       // Mock artifact responses with 'remove' action
       const mockArtifactResponse = {

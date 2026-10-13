@@ -22,28 +22,56 @@ const consumers: [string, (args: GitHubScriptArgs) => Promise<unknown>][] = [
   ["label updates", updateLabels],
 ];
 
-it.each(
-  consumers.filter(([name]) => ["shared status", "summary", "legacy ARM signoff"].includes(name)),
-)("%s reuses labels from its live PR lookup", async (_name, run) => {
-  const github = createMockGithub();
-  const core = createMockCore();
-  const context = createMockContext();
-  context.eventName = "pull_request_target";
-  context.payload = {
-    action: "labeled",
-    repository: { name: "repo", owner: { login: "owner" } },
-    pull_request: { number: 42, head: { sha: fullGitSha }, base: { ref: "main" } },
-  };
-  github.rest.pulls.get.mockResolvedValue({
-    data: { state: "open", labels: [{ name: "ARMReview" }] },
-  });
-  github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
+const labelConsumers: [string, (args: GitHubScriptArgs) => Promise<unknown>, string][] = [
+  [
+    "shared status",
+    (args) => setStatus(args, "analyzer", "status", "Approved-Avocado"),
+    "Approved-Avocado",
+  ],
+  ["summary", summarizeChecks, "ARMReview"],
+  ["legacy ARM signoff", getArmLabelAction, "ARMAutoSignedOff-IncrementalTSP"],
+];
 
-  await run({ github, context, core });
+it.each(labelConsumers)(
+  "%s uses live PR labels without refetching them",
+  async (name, run, label) => {
+    const github = createMockGithub();
+    const core = createMockCore();
+    const context = createMockContext();
+    context.eventName = "pull_request_target";
+    context.payload = {
+      action: "labeled",
+      repository: { name: "repo", owner: { login: "owner" } },
+      pull_request: { number: 42, head: { sha: fullGitSha }, base: { ref: "main" } },
+    };
+    github.rest.pulls.get.mockResolvedValue({
+      data: { state: "open", labels: [{ name: label }] },
+    });
+    github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
 
-  expect(github.rest.pulls.get).toHaveBeenCalledTimes(1);
-  expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
-});
+    const result = await run({ github, context, core });
+
+    expect(github.rest.pulls.get).toHaveBeenCalledTimes(1);
+    expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
+    if (name === "shared status") {
+      expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({ state: "success", sha: fullGitSha, context: "status" }),
+      );
+    } else if (name === "summary") {
+      expect(github.rest.issues.createComment.mock.calls[0]?.[0]).toHaveProperty(
+        "body",
+        expect.stringContaining(label),
+      );
+    } else {
+      expect(result).toMatchObject({
+        labelActions: {
+          ARMSignedOff: "remove",
+          "ARMAutoSignedOff-IncrementalTSP": "remove",
+        },
+      });
+    }
+  },
+);
 
 describe.each(["pull_request_target", "workflow_run"])("closed PR during %s", (eventName) => {
   it.each(consumers.filter(([, run]) => eventName === "workflow_run" || run !== updateLabels))(

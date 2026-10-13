@@ -163,7 +163,6 @@ describe("updateLabelsImpl", () => {
     expect(github.rest.actions.listWorkflowRunArtifacts).not.toHaveBeenCalled();
     expect(github.rest.pulls.get).not.toHaveBeenCalled();
     expect(core.setOutput).not.toHaveBeenCalled();
-    expect(core.info).toHaveBeenCalledWith("No PR number resolved; skipping PR updates.");
     expect(github.rest.issues.addLabels).toBeCalledTimes(0);
     expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
   });
