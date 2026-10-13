@@ -34,7 +34,7 @@ describe("sdk-breaking-change-labels", () => {
     // Reset mocks
     vi.clearAllMocks();
     mockGithub.rest.pulls.get.mockResolvedValue({
-      data: { state: "open", base: { ref: "main" } },
+      data: { state: "open", head: { sha: "abc123" }, base: { ref: "main" } },
     });
   });
 
@@ -374,12 +374,27 @@ describe("sdk-breaking-change-labels", () => {
       ).resolves.toMatchObject({ labelAction: LabelAction.Add, issueNumber: 123 });
       expect(mockGithub.rest.pulls.get).toHaveBeenCalledTimes(1);
     });
-    it("checks the artifact PR state when its number differs from the event", async () => {
+    it.each([
+      { prNumber: "456", headSha: "abc123" },
+      { prNumber: "123", headSha: "wrongSha" },
+    ])("rejects mismatched SDK artifact identity ($prNumber, $headSha)", async (identity) => {
       mockCheckRunInputs(123);
-      mockSdkArtifact({ prNumber: "456" });
-      mockGithub.rest.pulls.get
-        .mockResolvedValueOnce({ data: { state: "open", base: { ref: "main" } } })
-        .mockResolvedValueOnce({ data: { state: "closed" } });
+      mockSdkArtifact(identity);
+
+      await expect(
+        getLabelAndAction({
+          github: mockGithub,
+          context: mockContext,
+          core: mockCore,
+        }),
+      ).rejects.toThrow("SDK artifact PR identity does not match");
+      expect(mockGithub.rest.pulls.get).toHaveBeenCalledTimes(1);
+    });
+    it("stops before ADO requests if the PR head changed during setup", async () => {
+      mockCheckRunInputs(123);
+      mockGithub.rest.pulls.get.mockResolvedValue({
+        data: { state: "open", head: { sha: "newSha" } },
+      });
 
       await expect(
         getLabelAndAction({
@@ -388,7 +403,7 @@ describe("sdk-breaking-change-labels", () => {
           core: mockCore,
         }),
       ).resolves.toMatchObject({ labelAction: LabelAction.None, headSha: "", issueNumber: NaN });
-      expect(mockGithub.rest.pulls.get).toHaveBeenCalledTimes(2);
+      expect(mockFetch).not.toHaveBeenCalled();
     });
     it("should throw error with invalid inputs", async () => {
       // Setup inputs

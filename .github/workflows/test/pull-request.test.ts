@@ -23,11 +23,12 @@ function createCheckRunContext(withPullRequests = true) {
 
 describe("SDK PR preflight", () => {
   it.each([
-    { state: "open", allowed: true },
-    { state: "closed", allowed: false },
-  ])("checks live PR state ($state)", async ({ state, allowed }) => {
+    { state: "open", sha: "checked-sha", allowed: true },
+    { state: "closed", sha: "checked-sha", allowed: false },
+    { state: "open", sha: "new-sha", allowed: false },
+  ])("checks live PR state and reviewed head ($state, $sha)", async ({ state, sha, allowed }) => {
     const github = createMockGithub();
-    github.rest.pulls.get.mockResolvedValue({ data: { state } });
+    github.rest.pulls.get.mockResolvedValue({ data: { state, head: { sha } } });
 
     expect(
       await shouldRunSdkWorkflow({

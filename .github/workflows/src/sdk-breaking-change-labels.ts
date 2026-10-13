@@ -30,8 +30,8 @@ export async function getLabelAndAction({ github, context, core }: GitHubScriptA
   let pullRequest: Awaited<ReturnType<typeof getOpenPullRequest>>;
   if (Number.isInteger(inputs.issue_number) && inputs.issue_number > 0) {
     pullRequest = await getOpenPullRequest(github, core, inputs);
-    if (!pullRequest) {
-      core.info("No open PR; skipping SDK label artifacts.");
+    if (!pullRequest || pullRequest.head.sha !== inputs.head_sha) {
+      core.info("No open PR at the checked commit; skipping SDK label artifacts.");
       return { labelName: undefined, labelAction: LabelAction.None, headSha: "", issueNumber: NaN };
     }
   }
@@ -44,8 +44,11 @@ export async function getLabelAndAction({ github, context, core }: GitHubScriptA
   if (result.labelAction === LabelAction.None) {
     return { ...result, headSha: "", issueNumber: NaN };
   }
-  if (pullRequest && result.issueNumber !== inputs.issue_number) {
-    pullRequest = undefined;
+  if (
+    pullRequest &&
+    (result.issueNumber !== inputs.issue_number || result.headSha !== inputs.head_sha)
+  ) {
+    throw new Error("SDK artifact PR identity does not match the checked PR and commit.");
   }
   pullRequest ??= await getOpenPullRequest(github, core, {
     ...context.repo,
