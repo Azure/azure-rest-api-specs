@@ -437,8 +437,9 @@ model VoiceRecording {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyBindingId extends string;
 
-@doc("An allowed canonical E.164 number or .NET regular-expression pattern, up to 256 characters. Patterns are matched against the normalized E.164 caller number; without ^ and $ anchors, a pattern may match part of the number.")
+@doc("An exact canonical E.164 number or a restricted pattern for E.164 caller numbers, up to 256 characters. Patterns must start with ^ followed by an escaped plus sign, a nonzero first digit or [1-9], ASCII digit literals or ranges, bounded {n} or {n,m} quantifiers, and a final $. Other regex constructs, including Unicode digit shortcuts, groups, alternation, lookarounds, backreferences, and unbounded repetition, are not supported. The service validates that every number the pattern can match has 2 to 15 ASCII digits after the plus sign, starts with a nonzero digit, and matches the entire normalized E.164 caller number.")
 @maxLength(256)
+@pattern("^(?:\\+[1-9][0-9]{1,14}|\\^\\\\\\+(?:[1-9]|\\[1-9\\])(?:(?:[0-9]|\\[[0-9](?:-[0-9])?\\])(?:\\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\\})?)+\\$)$")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar SipAllowedCallingNumber extends string;
 
@@ -612,7 +613,7 @@ model SipTelephonyBindingProperties {
   @maxItems(64)
   allowed_source_cidrs?: string[];
 
-  @doc("Up to 64 allowed canonical E.164 numbers or .NET regular-expression patterns, each up to 256 characters. Patterns match against the normalized E.164 caller number and may match a substring unless anchored with ^ and $. Omission or an empty array indicates no caller-number restriction.")
+  @doc("Up to 64 exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, each up to 256 characters. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Omission or an empty array indicates no caller-number restriction.")
   @maxItems(64)
   allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
@@ -664,7 +665,7 @@ model UpdateTelephonyBindingRequest {
   @maxItems(64)
   allowed_source_cidrs?: string[];
 
-  @doc("Replacement allowed canonical E.164 numbers or .NET regular-expression patterns, up to 64 entries of at most 256 characters each. Patterns match the normalized E.164 caller number and may match a substring unless anchored with ^ and $. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
+  @doc("Replacement exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, up to 64 entries of at most 256 characters each. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
   @maxItems(64)
   allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
