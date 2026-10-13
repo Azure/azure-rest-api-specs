@@ -44,13 +44,65 @@
     }
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverProtectionSettings": {
+      "get": {
+        "operationId": "ManagedInstanceServerProtectionSettings_ListByManagedInstance",
+        "tags": [
+          "ManagedInstanceServerProtectionSettings"
+        ],
+        "description": "Lists the managed instance's server protection settings. The collection contains the default resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerProtectionSettingsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List managed instance server protection settings": {
+            "$ref": "./examples/ListServerProtectionSettings.json"
+          },
+          "List settings before opting in": {
+            "$ref": "./examples/ListServerProtectionSettingsDisabled.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverProtectionSettings/{serverProtectionSettingsName}": {
       "get": {
         "operationId": "ManagedInstanceServerProtectionSettings_Get",
         "tags": [
           "ManagedInstanceServerProtectionSettings"
         ],
-        "description": "Gets the managed instance's current protection settings.",
+        "description": "Gets a managed instance's server protection settings.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -105,10 +157,10 @@
           }
         },
         "x-ms-examples": {
-          "Get enabled managed instance protection settings": {
+          "Get managed instance server protection settings": {
             "$ref": "./examples/GetServerProtectionSettings.json"
           },
-          "Get managed instance protection settings before opt-in": {
+          "Get settings before opting in": {
             "$ref": "./examples/GetServerProtectionSettingsDisabled.json"
           }
         }
@@ -118,7 +170,7 @@
         "tags": [
           "ManagedInstanceServerProtectionSettings"
         ],
-        "description": "Updates the managed instance's protection settings. Enabling protection is\nirreversible. Requesting disabled before opt-in is a no-op; requesting disabled\nafter protection has been enabled is rejected.",
+        "description": "Updates managed instance server protection setting.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -204,11 +256,8 @@
           }
         },
         "x-ms-examples": {
-          "Enable managed instance deletion protection irreversibly": {
-            "$ref": "./examples/CreateOrUpdateServerProtectionSettingsEnable.json"
-          },
-          "Keep managed instance deletion protection disabled before opt-in": {
-            "$ref": "./examples/CreateOrUpdateServerProtectionSettingsDisabled.json"
+          "Opt in block server drop": {
+            "$ref": "./examples/CreateOrUpdateServerProtectionSettingsOptInBlockServerDrop.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -240,6 +289,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "ServerProtectionSettingsListResult": {
+      "type": "object",
+      "description": "The response of a ServerProtectionSettings list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServerProtectionSettings items on this page",
+          "items": {
+            "$ref": "#/definitions/ServerProtectionSettings"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     }
   },
