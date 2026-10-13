@@ -2283,6 +2283,12 @@ union ProvisioningStateUnion {
   "FrontEndIPConfiguration",
   "csharp"
 );
+// Retain legacy element identity; WritableSubResource intentionally keeps only the modeled ID.
+@@alternateType(
+  Microsoft.Network.DdosCustomPolicyPropertiesFormat.frontEndIpConfiguration,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
 @@clientName(
   Microsoft.Network.DisassociateCloudServicePublicIpRequest.publicIpArmId,
   "PublicIPArmId",
@@ -8008,6 +8014,24 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 @@clientName(Microsoft.Network.PacketCaptureResult, "PacketCapture", "csharp");
 
 @@clientName(Microsoft.Network.AdminRuleCollection, "AdminRuleGroup", "csharp");
+
+@@clientName(
+  Microsoft.Network.ActiveConnectivityConfiguration.commitTime,
+  "CommittedOn",
+  "csharp"
+);
+@@clientName(Microsoft.Network.AzureFirewallPacketCaptureFlags.type, "FlagsType", "csharp");
+
+@@clientName(Microsoft.Network.ConnectivityHop.type, "ConnectivityHopType", "csharp");
+@@clientName(Microsoft.Network.ConnectivityIssue.type, "ConnectivityIssueType", "csharp");
+@@clientName(Microsoft.Network.ConnectivityIssue.context, "Contexts", "csharp");
+
+// Normalize the C# acronym; ConnectivityContent customizes the flattened property name.
+@@clientName(
+  Microsoft.Network.ProtocolConfiguration.HTTPConfiguration,
+  "HttpConfiguration",
+  "csharp"
+);
 
 @@clientName(
   Microsoft.Network.ApplicationGatewayWafDynamicManifestResult,
