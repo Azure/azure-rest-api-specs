@@ -651,6 +651,9 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("Optional session defaults (for example, the idle timeout) applied to sessions created for this agent version.")
   @example(#{ idle_timeout_seconds: duration.fromISO("PT300S") })
   session_configuration?: SessionConfiguration;
+
+  @doc("Whether this agent version uses memory snapshots. Sessions for a snapshot-enabled version start from a snapshot of the agent's initialized process rather than starting the process from its image. Defaults to false.")
+  enable_memory_snapshot?: boolean = false;
 }
 
 @doc("The container app agent definition.")
