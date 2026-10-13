@@ -21,6 +21,20 @@ input-file:
   - Microsoft.Test/stable/2026-10-12/test.json
 ```
 
+## Python
+
+These settings apply only when `--python` is specified on the command line.
+
+``` yaml $(python)
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  package-name: credvalidation-v5
+  clear-output-folder: true
+  no-namespace-folders: true
+  package-version: 1.0.0b1
+```
+
 ## swagger-to-sdk
 
 ``` yaml $(swagger-to-sdk)
