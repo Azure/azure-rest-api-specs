@@ -80,21 +80,24 @@ describe("spec-gen-sdk-status", () => {
     const fetchMock = vi.fn((input: Parameters<typeof fetch>[0]) => {
       const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
       if (url.includes("/pulls")) {
-        const page = url.includes("page=2") ? 2 : 1;
+        const page = Number(new URL(url).searchParams.get("page") ?? 1);
         return Promise.resolve(
           Response.json(
             [
               {
                 number: 123,
-                state: page === 1 ? "closed" : "open",
+                state: page === 2 ? "open" : "closed",
                 head: { sha: "testSha" },
                 base: { repo: { full_name: "testOwner/testRepo" } },
               },
             ],
             {
-              headers: {
-                link: `<https://api.github.com/repos/testOwner/testRepo/commits/testSha/pulls?page=${page + 1}>; rel="next"`,
-              },
+              headers:
+                page < 3
+                  ? {
+                      link: `<https://api.github.com/repos/testOwner/testRepo/commits/testSha/pulls?page=${page + 1}>; rel="next"`,
+                    }
+                  : {},
             },
           ),
         );

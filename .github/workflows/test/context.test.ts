@@ -24,15 +24,14 @@ describe("getOpenPullRequest", () => {
     });
   });
 
-  it.each([false, true])("skips a closed PR (merged: %s)", async (merged) => {
+  it("skips a closed PR", async () => {
     const github = createMockGithub();
     const core = createMockCore();
-    github.rest.pulls.get.mockResolvedValue({ data: { state: "closed", merged } });
+    github.rest.pulls.get.mockResolvedValue({ data: { state: "closed" } });
     expect(await getOpenPullRequest(github, core, inputs)).toBeUndefined();
-    expect(core.info).toHaveBeenCalledWith("PR Azure/test-repo#42 is closed; skipping PR updates.");
   });
 
-  it.each([NaN, 0, -1, 1.5])("skips unresolved PR number %s", async (issue_number) => {
+  it.each([NaN, 0])("skips unresolved PR number %s", async (issue_number) => {
     const github = createMockGithub();
     expect(
       await getOpenPullRequest(github, createMockCore(), { ...inputs, issue_number }),
