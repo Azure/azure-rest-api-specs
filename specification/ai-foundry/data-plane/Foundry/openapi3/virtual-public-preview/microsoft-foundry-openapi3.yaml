@@ -43536,7 +43536,7 @@ paths:
         - name: listViewType
           in: query
           required: false
-          description: Specifies which view type to apply when listing jobs.
+          description: 'Legacy-compatible archive view. FTJ jobs are never archived: ActiveOnly (the default) and All return the same non-deleted jobs, and ArchivedOnly returns an empty page after validation of the other query options.'
           schema:
             $ref: '#/components/schemas/ListViewType'
           explode: false
@@ -48899,71 +48899,98 @@ components:
           type: string
           description: ACR path of the environment image. Immutable after the initial submission.
         displayName:
-          type: string
-          description: Mutable display name. Omission preserves the current value on update; an empty string clears it. Can be updated on tracked running or terminal jobs without restarting execution.
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Mutable display name. Omission or null preserves the current value on update; an empty string clears it. Can be updated on tracked running or terminal jobs without restarting execution. Resource reads can return null when unset.
         description:
-          type: string
-          description: Mutable job description. Omission preserves the current value on update; an empty string clears it.
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Mutable job description. Omission or null preserves the current value on update; an empty string clears it. Resource reads can return null when unset.
         experimentName:
           type: string
           description: The name of the experiment the job belongs to. If not set, the job is placed in the "Default" experiment. This assignment is immutable after the initial submission.
         tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Mutable tags. A supplied map replaces the entire stored map; omitted tags remain unchanged and an empty map clears all tags. Tags can be changed on tracked running or terminal jobs without restarting execution.
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: 'null'
+          description: Mutable tags. A supplied map replaces the entire stored map; omitted or null tags remain unchanged and an empty map clears all tags. Tags can be changed on tracked running or terminal jobs without restarting execution. Resource reads can return null when unset.
         properties:
-          type: object
-          additionalProperties:
-            type: string
-          description: Additive user properties. Updates may add new keys or repeat existing values, but changing an existing value is rejected with 400. Existing keys omitted from an update are preserved; an empty map does not clear them.
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: 'null'
+          description: Additive user properties. Updates may add new keys or repeat existing values, but changing an existing value is rejected with 400. Omission or null preserves existing properties; an empty map does not clear them. Resource reads can return null when unset.
         codeId:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: Code asset reference.
         computeId:
           type: string
           description: Compute resource ID.
         inputs:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Input'
+          anyOf:
+            - type: object
+              additionalProperties:
+                $ref: '#/components/schemas/Input'
+            - type: 'null'
           description: Mapping of input data bindings used in the job.
         outputs:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Output'
+          anyOf:
+            - type: object
+              additionalProperties:
+                $ref: '#/components/schemas/Output'
+            - type: 'null'
           description: Mapping of output data bindings used in the job.
         environmentVariables:
-          type: object
-          additionalProperties:
-            type: string
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: 'null'
           description: Environment variables included in the job.
         resources:
           $ref: '#/components/schemas/JobResourceConfiguration'
           description: Submitted compute configuration. GPU allocation is specified only by resources.gpuCount. GET returns the persisted request settings, not a guarantee of the runtime-resolved SKU or node count. Preserve submitted settings on same-name replay or omit unchanged optional configuration on a tracked metadata update.
         distribution:
-          $ref: '#/components/schemas/DistributionConfiguration'
+          anyOf:
+            - $ref: '#/components/schemas/DistributionConfiguration'
+            - type: 'null'
           description: Distribution configuration of the job.
         limits:
-          $ref: '#/components/schemas/CommandJobLimits'
+          anyOf:
+            - $ref: '#/components/schemas/CommandJobLimits'
+            - type: 'null'
           description: Command Job limit.
         services:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/JobService'
+          anyOf:
+            - type: object
+              additionalProperties:
+                $ref: '#/components/schemas/JobService'
+            - type: 'null'
           description: List of job services.
         queueSettings:
           $ref: '#/components/schemas/QueueSettings'
-          description: Queue settings for the job.
+          description: Creation-time queue configuration, not mutable job metadata. A tracked same-name PUT does not provide a queue-setting or priority update.
         priority:
-          $ref: '#/components/schemas/JobPriority'
+          anyOf:
+            - $ref: '#/components/schemas/JobPriority'
+            - type: 'null'
           description: User-visible scheduling priority for the job.
         userAssignedIdentityId:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: user-assigned managed identity
         isArchived:
           type: boolean
-          description: Is the asset archived?
+          description: Read-only legacy compatibility flag. Foundry Training Jobs are not archived and this flag is false; this API does not support archiving or resetting the archive flag by PUT. Use delete for soft-deletion.
+          readOnly: true
         status:
           $ref: '#/components/schemas/CommandJobStatus'
           description: Execution state, not the status of an API request. A job returned with HTTP 200 can be Failed or Canceled. Only Completed, Failed, and Canceled are terminal; other or unrecognized values must not be treated as successful completion. Runtime-dependent stages may be skipped. Cancellation can race with Completed or Failed and does not guarantee Canceled. For Failed, inspect error when available, then use the artifact operations to retrieve log files. Absence of an error does not imply execution success.
@@ -48974,7 +49001,7 @@ components:
           readOnly: true
       allOf:
         - $ref: '#/components/schemas/JobProperties'
-      description: A command job's submitted configuration and metadata. Creation-only fields are pinned on the first persisted submission and cannot be changed by a same-name PUT. After submission is tracked, display name, description, tags and additive user properties can change while the job is running or terminal; such changes do not restart execution.
+      description: A command job's submitted configuration and metadata. Creation-only fields are pinned on the first persisted submission and cannot be changed by a same-name PUT. After submission is tracked, display name, description, tags and additive user properties can change while the job is running or terminal; such changes do not restart execution. The existing public projection returns explicit null for some unset optional fields, as modeled below. Required command, environment and compute fields remain non-null. A null metadata value is not a request to clear it.
     CommandJobError:
       type: object
       required:
@@ -54461,52 +54488,74 @@ components:
           format: int32
           description: Requested instance or node count; the service uses 1 when omitted. GPU allocation can resolve a different node count from gpuCount and the selected SKU. Resource reads reflect the persisted requested count rather than guaranteeing the resolved execution node count.
         instanceType:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: Requested VM type, as supported by the compute target. Virtual cluster targets require an explicit instance type when gpuCount is supplied. The service can select a different partial GPU SKU for execution; that resolved SKU does not replace this persisted request field.
         gpuCount:
-          type: integer
-          format: int32
+          anyOf:
+            - type: integer
+              format: int32
+            - type: 'null'
           minimum: 1
-          description: Requested total GPU count, serialized only as resources.gpuCount. Valid values are 1, 2, 4, 8, or multiples of 8 greater than 8; other values are rejected with 400. The value maps to the persisted compute allocation request and is returned at the same location by resource reads. It can determine the execution SKU and node count instead of resources.instanceCount. CPU compute targets ignore the count for placement while retaining the submitted configuration. Virtual cluster targets also require resources.instanceType. This is immutable submitted configuration, not the resolved runtime GPU allocation. There is no top-level gpuCount or capacityUnitCount alias.
+          description: Requested total GPU count, serialized only as resources.gpuCount. Omitted or null means no GPU-count request. Non-null valid values are 1, 2, 4, 8, or multiples of 8 greater than 8; other non-null values are rejected with 400. The value maps to the persisted compute allocation request and is returned at the same location by resource reads. It can determine the execution SKU and node count instead of resources.instanceCount. CPU compute targets ignore the count for placement while retaining the submitted configuration. Virtual cluster targets also require resources.instanceType. This is immutable submitted configuration, not the resolved runtime GPU allocation. There is no top-level gpuCount or capacityUnitCount alias.
         properties:
-          type: object
-          additionalProperties: {}
+          anyOf:
+            - type: object
+              additionalProperties: {}
+            - type: 'null'
           description: Additional properties bag.
         shmSize:
           type: string
           description: Size of the docker container's shared memory block.
         dockerArgs:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: Extra arguments to pass to the Docker run command.
       description: Submitted compute configuration. The service persists the requested settings and resource reads return that persisted configuration, not a resolved-allocation receipt. Runtime VM/SKU and node-count resolution is separate and can differ from the request. Same-name PUTs must preserve submitted configuration; omit unchanged optional configuration when updating metadata. Omit server-owned response fields when constructing a PUT from a GET.
     JobService:
       type: object
       properties:
         jobServiceType:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: Endpoint type.
         port:
-          type: integer
-          format: int32
+          anyOf:
+            - type: integer
+              format: int32
+            - type: 'null'
           description: Port for endpoint.
         endpoint:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: Service-resolved endpoint URI, when available. The caller requests a service using its type, port, properties and nodes; it does not select the endpoint URI. Resource reads can include runtime-resolved endpoints and server-generated Tracking/Studio helper services.
           readOnly: true
         properties:
-          type: object
-          additionalProperties:
-            type: string
+          anyOf:
+            - type: object
+              additionalProperties:
+                type: string
+            - type: 'null'
           description: Additional properties to set on the endpoint.
         nodes:
-          $ref: '#/components/schemas/AllNodes'
+          anyOf:
+            - $ref: '#/components/schemas/AllNodes'
+            - type: 'null'
           description: Nodes that user would like to start the service on.
         status:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: Status of endpoint.
           readOnly: true
         errorMessage:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: Any error in the service.
           readOnly: true
       description: Job endpoint definition.
@@ -54559,7 +54608,7 @@ components:
             - ActiveOnly
             - ArchivedOnly
             - All
-      description: Specifies which jobs to include in a list result based on their lifecycle state.
+      description: Legacy-compatible archive view selector. Foundry Training Jobs do not support archiving. ActiveOnly and All select the same non-deleted training jobs; ArchivedOnly returns an empty page after the service validates the other query options. This is not an execution-status filter or an archive mutation capability.
     LoraConfig:
       type: object
       properties:
@@ -84350,19 +84399,29 @@ components:
           $ref: '#/components/schemas/OutputDeliveryMode'
           description: Output delivery mode. Defaults to ReadWriteMount in the service when omitted. Input-only delivery modes are not supported.
         assetName:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: Name of the output data asset to register.
         assetVersion:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: Version of the output data asset to register.
         uri:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: Optional output destination URI. When omitted on submission, the runtime can materialize the output in job storage; a subsequent resource read can include the resolved URI.
         baseModelId:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: Base model ID.
         description:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
           description: Description for the output.
       description: 'A job output asset, never a literal value. A destination URI is optional at submission: the runtime can materialize the output in job storage and the service can return its resolved URI later. Omit uri to use that behavior. The flat shape and existing jobOutputType wire name are retained for compatibility.'
     OutputDeliveryMode:
