@@ -1164,6 +1164,12 @@ model VaultProperties {
    */
   @Versioning.added(KeyVault.Versions.v2026_06_01_preview)
   tokenBindingParameters?: TokenBindingParameters;
+
+  /**
+   * Whether cross-tenant access protection is enabled for this vault. When enabled, the vault tenant ID can only be set or changed to the subscription's home tenant ID. Once enabled, this protection cannot be disabled. If omitted when creating a vault, protection is disabled. If omitted when updating a vault, the existing value is preserved.
+   */
+  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  enableCrossTenantAccessProtection?: boolean;
 }
 
 /**
@@ -1492,6 +1498,12 @@ model VaultPatchProperties {
    */
   @Versioning.added(KeyVault.Versions.v2026_06_01_preview)
   tokenBindingParameters?: TokenBindingParameters;
+
+  /**
+   * Whether cross-tenant access protection is enabled for this vault. When enabled, changes to the vault tenant ID must use the subscription's home tenant ID. Once enabled, this protection cannot be disabled. If omitted, the existing value is preserved.
+   */
+  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  enableCrossTenantAccessProtection?: boolean;
 }
 
 /**
