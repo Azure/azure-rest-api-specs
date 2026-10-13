@@ -30,8 +30,7 @@ model FirewallPolicy extends Common.Resource {
   @path
   @key("firewallPolicyName")
   @segment("firewallPolicies")
-  @typeChangedFrom(Versions.v2026_03_01, string)
-  name: FirewallPolicyName;
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -44,11 +43,6 @@ model FirewallPolicy extends Common.Resource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Common.ManagedServiceIdentity;
 }
-
-/** The name of the Firewall Policy. */
-@added(Versions.v2026_03_01)
-@pattern("^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,78}[A-Za-z0-9_])?$")
-scalar FirewallPolicyName extends string;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
