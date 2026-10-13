@@ -13,11 +13,11 @@ parameters:
   - name: preEvalTemplate
     # Optional repo-specific setup run before the eval (e.g. start a bot/agent). Placeholder by default.
     type: string
-    default: ''
+    default: ""
   - name: postEvalTemplate
     # Optional repo-specific teardown run after the eval. Placeholder by default.
     type: string
-    default: ''
+    default: ""
   - name: shardTimeoutInMinutes
     # Per-shard job timeout. Must be a parameter (not a runtime variable) so 1ES resolves it at compile time.
     type: number
@@ -25,7 +25,7 @@ parameters:
 
 jobs:
   - job: RunShard
-    displayName: 'Eval'
+    displayName: "Eval"
     pool:
       name: $(LINUXPOOL)
       image: $(LINUXVMIMAGE)
@@ -42,13 +42,13 @@ jobs:
         # name instead of colliding with the prior attempt's artifact (which fails the rerun).
         # The Summary job keeps only the highest attempt per shard so retries supersede cleanly.
         - output: pipelineArtifact
-          displayName: 'Publish $(shardName) JUnit'
-          artifactName: 'eval-result-$(shardName)-$(System.JobAttempt)'
+          displayName: "Publish $(shardName) JUnit"
+          artifactName: "eval-result-$(shardName)-$(System.JobAttempt)"
           targetPath: $(Build.ArtifactStagingDirectory)/junit
           condition: always()
         - output: pipelineArtifact
-          displayName: 'Publish $(shardName) transcripts (on failure)'
-          artifactName: 'eval-debug-$(shardName)-$(System.JobAttempt)'
+          displayName: "Publish $(shardName) transcripts (on failure)"
+          artifactName: "eval-debug-$(shardName)-$(System.JobAttempt)"
           targetPath: $(Build.ArtifactStagingDirectory)/debug
           condition: failed()
     steps:
@@ -56,7 +56,7 @@ jobs:
         fetchDepth: 1
 
       - task: UseNode@1
-        displayName: 'Use Node.js 22.x'
+        displayName: "Use Node.js 22.x"
         inputs:
           version: 22.x
 
@@ -68,12 +68,12 @@ jobs:
 
       # Installs vally-cli + its pinned copilot-sdk executor into node_modules.
       - script: npm ci --userconfig $(Build.SourcesDirectory)/.npmrc
-        displayName: 'Install Vally CLI + copilot-sdk (pinned)'
+        displayName: "Install Vally CLI + copilot-sdk (pinned)"
         workingDirectory: eng/common/scripts/eval
 
       # Optional repo-specific setup (e.g. start a bot/agent) before the eval runs.
       - ${{ if parameters.preEvalTemplate }}:
-        - template: ${{ parameters.preEvalTemplate }}
+          - template: ${{ parameters.preEvalTemplate }}
 
       # Clone only the git fixtures this shard's evals reference (Vally won't clone them).
       - script: |
@@ -87,10 +87,10 @@ jobs:
           node --experimental-strip-types "$(Build.SourcesDirectory)/eng/common/scripts/eval/init-eval-git-fixtures.ts" \
             --eval-root "$(Build.SourcesDirectory)/${{ parameters.vallyRoot }}" \
             "${patterns[@]}"
-        displayName: 'Prime eval git fixtures'
+        displayName: "Prime eval git fixtures"
         env:
           EVAL_ARGS: $(evalArgs)
-      
+
       # Verify that the assessment evaluation paths are correctly set up before running the eval.
       - script: |
           pwd
@@ -108,7 +108,7 @@ jobs:
 
       # Optional repo-specific teardown after the eval.
       - ${{ if parameters.postEvalTemplate }}:
-        - template: ${{ parameters.postEvalTemplate }}
+          - template: ${{ parameters.postEvalTemplate }}
 
       # JUnit is tiny — stage it always; heavy transcripts stage separately on failure.
       # Also create the debug dir here so the failed()-gated debug publish always has a target
@@ -116,7 +116,7 @@ jobs:
       - script: |
           mkdir -p "$(Build.ArtifactStagingDirectory)/junit" "$(Build.ArtifactStagingDirectory)/debug"
           find "$(Build.SourcesDirectory)/artifacts/vally-results/$(shardName)" -name '*.junit.xml' -exec cp {} "$(Build.ArtifactStagingDirectory)/junit/" \;
-        displayName: 'Collect $(shardName) JUnit'
+        displayName: "Collect $(shardName) JUnit"
         condition: always()
 
       # On a real failure keep transcripts; strip JUnit so Summary can't double-count it.
@@ -128,5 +128,5 @@ jobs:
             cp -r "$src/." "$dest/"
             find "$dest" -name '*.junit.xml' -delete
           fi
-        displayName: 'Collect $(shardName) transcripts (on failure)'
+        displayName: "Collect $(shardName) transcripts (on failure)"
         condition: failed()

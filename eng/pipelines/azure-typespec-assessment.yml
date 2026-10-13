@@ -28,7 +28,7 @@ extends:
             parameters:
               vallyRoot: /.github/skills/azure-typespec-assessment/evals
               evalGlobs:
-                - 'assessment.eval.yaml'
+                - "assessment.eval.yaml"
 
       - stage: Eval
         displayName: Run Eval
@@ -40,9 +40,9 @@ extends:
               evalInvokeTemplate: /.github/skills/azure-typespec-assessment/evals/pipeline/typespec-assessment-eval-invoke.yml
               preEvalTemplate: /.github/skills/azure-typespec-assessment/evals/pipeline/typespec-assessment-preeval.yml
               shardTimeoutInMinutes: 50
-      
+
       - stage: Summary
-        displayName: 'Summarize results'
+        displayName: "Summarize results"
         dependsOn: Eval
         condition: always()
         jobs:

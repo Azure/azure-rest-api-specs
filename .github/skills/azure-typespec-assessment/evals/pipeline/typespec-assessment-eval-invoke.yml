@@ -8,7 +8,7 @@ steps:
         --eval-args "$(evalArgs)" \
         --shard-name "$(shardName)" \
         --output-dir "$(Build.SourcesDirectory)/artifacts/vally-results/$(shardName)" \
-    displayName: 'vally eval $(shardName)'
+    displayName: "vally eval $(shardName)"
     workingDirectory: ${{ parameters.vallyRoot }}
     env:
       GITHUB_TOKEN: $(azuresdk-copilot-github-pat)
