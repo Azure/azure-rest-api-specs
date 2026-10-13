@@ -2,18 +2,31 @@
   "title": "PlaywrightWorkspaces_Update",
   "operationId": "PlaywrightWorkspaces_Update",
   "parameters": {
-    "api-version": "2026-08-01-preview",
+    "api-version": "2026-11-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "dummyrg",
+    "resourceGroupName": "rgplaywright",
     "playwrightWorkspaceName": "myWorkspace",
     "properties": {
-      "tags": {
-        "Team": "Dev Exp",
-        "Division": "LT"
-      },
+      "tags": {},
       "properties": {
         "regionalAffinity": "Disabled",
-        "reporting": "Disabled"
+        "reporting": "Disabled",
+        "localAuth": "Enabled",
+        "storageUri": "https://microsoft.com/a",
+        "browserProxy": "Enabled",
+        "linkedKeyVault": {
+          "vaultUri": "https://microsoft.com/a",
+          "vaultIdentity": {
+            "type": "UserAssigned",
+            "resourceId": "wdyvtciwageebn"
+          }
+        }
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "key848": {}
+        }
       }
     }
   },
@@ -21,22 +34,39 @@
     "200": {
       "body": {
         "location": "westus3",
+        "tags": {},
         "properties": {
-          "dataplaneUri": "https://api.dataplane.00000000-0000-0000-0000-000000000000.domain.com",
-          "regionalAffinity": "Disabled",
+          "regionalAffinity": "Enabled",
           "localAuth": "Enabled",
-          "reporting": "Disabled",
-          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "reporting": "Enabled",
           "storageUri": "https://examplestorageaccount.blob.core.windows.net",
-          "provisioningState": "Succeeded"
+          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+          "provisioningState": "Succeeded",
+          "dataplaneUri": "https://api.dataplane.00000000-0000-0000-0000-000000000000.domain.com",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "browserProxy": "Enabled",
+          "linkedKeyVault": {
+            "vaultUri": "https://microsoft.com/a",
+            "vaultIdentity": {
+              "type": "UserAssigned",
+              "resourceId": "wdyvtciwageebn"
+            }
+          }
+        },
+        "identity": {
+          "principalId": "utevwdn",
+          "tenantId": "hienttwgrtzreiakzz",
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "key848": {
+              "principalId": "aswmqyshdo",
+              "clientId": "cidqhljywolmcqsphfurzzm"
+            }
+          }
         },
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/PlaywrightWorkspaces/myWorkspace",
         "name": "myWorkspace",
         "type": "Microsoft.LoadTestService/PlaywrightWorkspaces",
-        "tags": {
-          "Team": "Dev Exp",
-          "Division": "LT"
-        },
         "systemData": {
           "createdBy": "userId1001",
           "createdByType": "User",

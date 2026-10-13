@@ -2,31 +2,48 @@
   "title": "PlaywrightWorkspaces_Get",
   "operationId": "PlaywrightWorkspaces_Get",
   "parameters": {
-    "api-version": "2026-08-01-preview",
+    "api-version": "2026-11-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "dummyrg",
+    "resourceGroupName": "rgplaywright",
     "playwrightWorkspaceName": "myWorkspace"
   },
   "responses": {
     "200": {
       "body": {
         "location": "westus3",
+        "tags": {},
         "properties": {
-          "dataplaneUri": "https://api.dataplane.00000000-0000-0000-0000-000000000000.domain.com",
           "regionalAffinity": "Enabled",
           "localAuth": "Enabled",
           "reporting": "Enabled",
-          "workspaceId": "00000000-0000-0000-0000-000000000000",
           "storageUri": "https://examplestorageaccount.blob.core.windows.net",
           "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "dataplaneUri": "https://api.dataplane.00000000-0000-0000-0000-000000000000.domain.com",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "browserProxy": "Enabled",
+          "linkedKeyVault": {
+            "vaultUri": "https://microsoft.com/a",
+            "vaultIdentity": {
+              "type": "UserAssigned",
+              "resourceId": "wdyvtciwageebn"
+            }
+          }
+        },
+        "identity": {
+          "principalId": "utevwdn",
+          "tenantId": "hienttwgrtzreiakzz",
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "key848": {
+              "principalId": "aswmqyshdo",
+              "clientId": "cidqhljywolmcqsphfurzzm"
+            }
+          }
         },
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/PlaywrightWorkspaces/myWorkspace",
         "name": "myWorkspace",
         "type": "Microsoft.LoadTestService/PlaywrightWorkspaces",
-        "tags": {
-          "Team": "Dev Exp"
-        },
         "systemData": {
           "createdBy": "userId1001",
           "createdByType": "User",
