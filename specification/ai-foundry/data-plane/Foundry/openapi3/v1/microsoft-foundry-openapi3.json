@@ -31143,7 +31143,7 @@
     "/training_jobs": {
       "get": {
         "operationId": "Jobs_list",
-        "description": "List Jobs.",
+        "description": "List job resources using the FTJ-only gateway route. Follow nextLink unchanged for subsequent pages. Artifact page sizing is configured separately by listArtifacts; this operation does not advertise an artifact maxpagesize parameter or legacy Run History page-size behavior.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -31638,7 +31638,7 @@
     "/training_jobs/{name}/cancel": {
       "post": {
         "operationId": "Jobs_cancel",
-        "description": "Request cancellation of a job. Returns 200 with no body after the cancellation request is processed, or if the job is already terminal. This acknowledgement does not guarantee that training has stopped or will end as `Canceled`. Use `get` to observe execution state; `Completed` or `Failed` may be observed if execution finishes before cancellation takes effect. A missing or deleted job returns 404, and a job that has not been submitted can return 409. Request failures use the normal API error response, not an asynchronous operation result. No operation monitor or polling URL is returned.",
+        "description": "Request cancellation of a job. Returns 200 with no body after the cancellation request is processed, or if the job is already terminal. This acknowledgement does not guarantee that training has stopped or will end as `Canceled`. Use `get` to observe execution state; `Completed` or `Failed` may be observed if execution finishes before cancellation takes effect. A missing or deleted job returns 404, and a job that has not been submitted can return 409. Request failures use the normal API error response, not an asynchronous operation result. No operation monitor or polling URL is returned. This contract retains /training_jobs/{name}/cancel to match the existing Foundry backend action shape and both gateway registrations; :cancel is not an alternate route.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -35651,23 +35651,6 @@
         "type": "string",
         "description": "Identifier of a saved asset."
       },
-      "AssetTypes": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "uri_file",
-              "uri_folder",
-              "safetensors_model",
-              "literal"
-            ]
-          }
-        ],
-        "description": "Type of job input/output asset."
-      },
       "AttackStrategy": {
         "anyOf": [
           {
@@ -37962,7 +37945,7 @@
           },
           "resources": {
             "$ref": "#/components/schemas/JobResourceConfiguration",
-            "description": "Compute Resource configuration for the job."
+            "description": "Submitted compute configuration. GPU allocation is specified only by resources.gpuCount. GET returns the persisted request settings, not a guarantee of the runtime-resolved SKU or node count. Preserve submitted settings on same-name replay or omit unchanged optional configuration on a tracked metadata update."
           },
           "distribution": {
             "$ref": "#/components/schemas/DistributionConfiguration",
@@ -37990,16 +37973,6 @@
           "userAssignedIdentityId": {
             "type": "string",
             "description": "user-assigned managed identity"
-          },
-          "capacityUnitCount": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of capacity units to allocate for the job. When set, the service resolves the VM SKU from the compute target and calculates the required node count automatically. Virtual cluster targets must also specify `resources.instanceType`. Valid values are 1, 2, 4, 8, or any multiple of 8 for values greater than 8. `gpuCount` takes precedence over this property when both are supplied."
-          },
-          "gpuCount": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of GPUs to allocate for the job. Takes precedence over `capacityUnitCount` when both are supplied, and is used to resolve a partial (sub-node) VM SKU for GPU computes. Only applies to GPU computes; CPU computes always resolve to a full-node SKU and ignore this value. Valid values are 1, 2, 4, 8, or any multiple of 8 for values greater than 8."
           },
           "isArchived": {
             "type": "boolean",
@@ -43649,25 +43622,25 @@
         ],
         "properties": {
           "jobInputType": {
-            "$ref": "#/components/schemas/AssetTypes",
+            "$ref": "#/components/schemas/JobInputType",
             "description": "Specifies the type of job input."
           },
           "uri": {
             "type": "string",
-            "description": "Input Asset URI."
+            "description": "Required non-empty asset URI for non-literal inputs. This property is serialized as uri. It is not used for literal inputs; supply value instead."
           },
           "mode": {
-            "$ref": "#/components/schemas/InputOutputModes",
-            "description": "Input Asset Delivery Mode."
+            "$ref": "#/components/schemas/InputDeliveryMode",
+            "description": "Delivery mode for asset inputs only. Defaults to ReadOnlyMount in the service when omitted. Not used for literal inputs."
           },
           "value": {
             "type": "string",
-            "description": "Literal value for literal-type inputs."
+            "description": "Required non-empty string for literal inputs. Not used for asset inputs; supply path instead."
           }
         },
-        "description": "Job input definition."
+        "description": "A job input with type-dependent fields. For literal, supply a non-empty value and omit path/mode. For an asset type, supply a non-empty path (serialized as uri), omit value, and optionally select an input delivery mode. The service validates the required field for the selected type and returns 400 when it is absent or empty. The flat shape and existing jobInputType wire name are retained for compatibility."
       },
-      "InputOutputModes": {
+      "InputDeliveryMode": {
         "anyOf": [
           {
             "type": "string"
@@ -43679,11 +43652,12 @@
               "ReadWriteMount",
               "Download",
               "Direct",
-              "Upload"
+              "EvalMount",
+              "EvalDownload"
             ]
           }
         ],
-        "description": "Enum to determine the input/output data delivery mode."
+        "description": "Delivery modes for asset inputs. Literal inputs do not use a delivery mode. The service uses ReadOnlyMount when an asset input's mode is omitted. Tolerate additional response values; extensibility does not make unsupported request values valid."
       },
       "Insight": {
         "type": "object",
@@ -44249,6 +44223,46 @@
         },
         "description": "A Foundry Training Job resource whose creation and updates complete independently of its asynchronous execution."
       },
+      "JobInputType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "uri_file",
+              "uri_folder",
+              "mltable",
+              "custom_model",
+              "mlflow_model",
+              "triton_model",
+              "literal"
+            ]
+          }
+        ],
+        "description": "Input types faithfully supported by the Foundry Training Job mapping. Asset types require a non-empty URI; literal requires a non-empty value instead. Tolerate additional response values; extensibility does not make unsupported request values valid."
+      },
+      "JobOutputType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "uri_file",
+              "uri_folder",
+              "mltable",
+              "custom_model",
+              "mlflow_model",
+              "triton_model",
+              "safetensors_model"
+            ]
+          }
+        ],
+        "description": "Output asset types. A literal value is not a job output. Tolerate additional response values; extensibility does not make unsupported request values valid."
+      },
       "JobPriority": {
         "anyOf": [
           {
@@ -44290,11 +44304,17 @@
           "instanceCount": {
             "type": "integer",
             "format": "int32",
-            "description": "Optional number of instances or nodes used by the compute target."
+            "description": "Requested instance or node count; the service uses 1 when omitted. GPU allocation can resolve a different node count from gpuCount and the selected SKU. Resource reads reflect the persisted requested count rather than guaranteeing the resolved execution node count."
           },
           "instanceType": {
             "type": "string",
-            "description": "Optional type of VM used as supported by the compute target."
+            "description": "Requested VM type, as supported by the compute target. Virtual cluster targets require an explicit instance type when gpuCount is supplied. The service can select a different partial GPU SKU for execution; that resolved SKU does not replace this persisted request field."
+          },
+          "gpuCount": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Requested total GPU count, serialized only as resources.gpuCount. Valid values are 1, 2, 4, 8, or multiples of 8 greater than 8; other values are rejected with 400. The value maps to the persisted compute allocation request and is returned at the same location by resource reads. It can determine the execution SKU and node count instead of resources.instanceCount. CPU compute targets ignore the count for placement while retaining the submitted configuration. Virtual cluster targets also require resources.instanceType. This is immutable submitted configuration, not the resolved runtime GPU allocation. There is no top-level gpuCount or capacityUnitCount alias."
           },
           "properties": {
             "type": "object",
@@ -44310,7 +44330,7 @@
             "description": "Extra arguments to pass to the Docker run command."
           }
         },
-        "description": "Compute Resource configuration for the job."
+        "description": "Submitted compute configuration. The service persists the requested settings and resource reads return that persisted configuration, not a resolved-allocation receipt. Runtime VM/SKU and node-count resolution is separate and can differ from the request. Same-name PUTs must preserve submitted configuration; omit unchanged optional configuration when updating metadata. Omit server-owned response fields when constructing a PUT from a GET."
       },
       "JobService": {
         "type": "object",
@@ -44326,7 +44346,8 @@
           },
           "endpoint": {
             "type": "string",
-            "description": "Url for endpoint."
+            "description": "Service-resolved endpoint URI, when available. The caller requests a service using its type, port, properties and nodes; it does not select the endpoint URI. Resource reads can include runtime-resolved endpoints and server-generated Tracking/Studio helper services.",
+            "readOnly": true
           },
           "properties": {
             "type": "object",
@@ -85470,12 +85491,12 @@
         ],
         "properties": {
           "jobOutputType": {
-            "$ref": "#/components/schemas/AssetTypes",
+            "$ref": "#/components/schemas/JobOutputType",
             "description": "Specifies the type of job output."
           },
           "mode": {
-            "$ref": "#/components/schemas/InputOutputModes",
-            "description": "Output Asset Delivery Mode."
+            "$ref": "#/components/schemas/OutputDeliveryMode",
+            "description": "Output delivery mode. Defaults to ReadWriteMount in the service when omitted. Input-only delivery modes are not supported."
           },
           "assetName": {
             "type": "string",
@@ -85487,7 +85508,7 @@
           },
           "uri": {
             "type": "string",
-            "description": "Output Asset URI."
+            "description": "Optional output destination URI. When omitted on submission, the runtime can materialize the output in job storage; a subsequent resource read can include the resolved URI."
           },
           "baseModelId": {
             "type": "string",
@@ -85498,7 +85519,23 @@
             "description": "Description for the output."
           }
         },
-        "description": "Job output definition."
+        "description": "A job output asset, never a literal value. A destination URI is optional at submission: the runtime can materialize the output in job storage and the service can return its resolved URI later. Omit uri to use that behavior. The flat shape and existing jobOutputType wire name are retained for compatibility."
+      },
+      "OutputDeliveryMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ReadWriteMount",
+              "Upload",
+              "Direct"
+            ]
+          }
+        ],
+        "description": "Delivery modes for job outputs. The service uses ReadWriteMount when omitted. ReadOnlyMount, Download and the evaluation input modes are not output modes. Tolerate additional response values; extensibility does not make unsupported request values valid."
       },
       "PSTNTelephonyTransferDestination": {
         "type": "object",
