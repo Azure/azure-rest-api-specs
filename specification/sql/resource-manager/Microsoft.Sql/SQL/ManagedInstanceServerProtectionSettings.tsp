@@ -114,7 +114,7 @@ model ServerProtectionSettingsAcceptedResult
   body: ServerProtectionSettingsOperation;
 }
 
-/** Read and update the default protection settings of a managed instance. */
+/** Read, list, and update the default protection settings of a managed instance. */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "These settings always exist with the managed instance and cannot be deleted; enabling protection is irreversible."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This SQL project requires legacy-feature-files output splitting for operation registration."
 @added(Versions.v2026_11_01_preview)
@@ -123,14 +123,15 @@ model ServerProtectionSettingsAcceptedResult
   Features.ManagedInstanceServerProtectionSettings
 )
 interface ManagedInstanceServerProtectionSettings {
-  /** Gets the managed instance's current protection settings. */
+  /** Gets a managed instance's server protection settings. */
   get is ArmResourceRead<ServerProtectionSettings>;
 
   /**
-   * Updates the managed instance's protection settings. Enabling protection is
-   * irreversible. Requesting disabled before opt-in is a no-op; requesting disabled
-   * after protection has been enabled is rejected.
+   * Lists the managed instance's server protection settings. The collection contains the default resource.
    */
+  listByManagedInstance is ArmResourceListByParent<ServerProtectionSettings>;
+
+  /** Updates managed instance server protection setting. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The singleton settings always exist: PUT returns 200 when complete or 202 when accepted, never 201."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The service returns operation and startTime in the 202 response; retain this acceptance payload rather than documenting an empty body."
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The service returns the resource on completion (200) and operation metadata on acceptance (202); these are intentionally different successful response bodies."
