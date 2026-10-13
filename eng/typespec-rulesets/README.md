@@ -21,20 +21,40 @@ Projects configured with client emitters also extend `/client-sdk`.
 The canonical examples are the [data-plane Widget template](../../specification/widget/data-plane/WidgetAnalytics/tspconfig.yaml)
 and [ARM Widget template](../../specification/widget/resource-manager/Microsoft.Widget/Widget/tspconfig.yaml).
 
-## Enable individual rules
+## Enable a rule repository-wide
 
-To opt in to a rule disabled by the inherited ruleset, add its fully qualified
-rule name under `linter.enable` in the project's `tspconfig.yaml`. For example:
+Update the appropriate entry in `$linter.ruleSets` in `index.ts`: `data-plane`
+for data-plane API rules, `resource-manager` for ARM API rules, or `client-sdk`
+for SDK rules. Add the rule's fully qualified name to that entry's `enable`
+map, keeping its upstream `extends` entry and any existing overrides.
 
-```yaml
-linter:
-  extends:
-    - "@azure-tools/specs-typespec-rulesets/data-plane"
-    - "@azure-tools/specs-typespec-rulesets/client-sdk"
-  enable:
-    "@azure-tools/typespec-azure-core/no-boolean": true
+For example, to enable `no-boolean` for every data-plane project:
+
+```ts
+export const $linter = defineLinter({
+  rules: [],
+  ruleSets: {
+    "data-plane": {
+      extends: ["@azure-tools/typespec-azure-rulesets/data-plane"],
+      enable: {
+        "@azure-tools/typespec-azure-core/no-boolean": true,
+      },
+    },
+    "resource-manager": {
+      extends: ["@azure-tools/typespec-azure-rulesets/resource-manager"],
+    },
+    "client-sdk": {
+      extends: ["@azure-tools/typespec-azure-rulesets/client-sdk"],
+    },
+  },
+});
 ```
 
-Keep the required `extends` entries. The rule name belongs to the library that
-defines the rule, not this wrapper package. To enable a rule repository-wide,
-add the same `enable` entry to the appropriate ruleset in `index.ts`.
+The rule name belongs to the library that defines the rule, not this wrapper
+package. Projects already extend the repository-owned rulesets, so no changes to
+individual `tspconfig.yaml` files are needed. Keep rule policy centralized here
+rather than asking services to opt in individually.
+
+Before submitting a ruleset change, run `pnpm --filter @azure-tools/specs-typespec-rulesets build`
+and `pnpm --filter @azure-tools/typespec-validation check`, then validate affected
+projects with TypeSpec Validation to assess the new diagnostics.
