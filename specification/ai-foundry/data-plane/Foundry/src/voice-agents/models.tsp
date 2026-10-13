@@ -154,7 +154,7 @@ model VoiceResponse extends VoiceResponseBase {
 // Live delegation results and persisted conversation items
 // ---------------------------------------------------------------------------
 
-@doc("One result returned to Live for a delegation. For managed and hosted agents, this contains validated text extracted from [commentary] and [thinking] sections, without the markers. The voice agent translates it into native session.commentary.append and session.thinking.append commands. Permitted original backend events, including tagged assistant text and tool events, are observed separately through response.event. Each managed or hosted output_item event carries one new accepted result, not cumulative text. These results are not private model reasoning, spoken transcripts, or playback confirmation.")
+@doc("A persisted result returned to Live for a delegation, not a streaming event. For managed and hosted agents, this contains validated text extracted from [commentary] and [thinking] sections, without the markers. The voice agent translates it into native session.commentary.append and session.thinking.append commands and records accepted results using native append acknowledgments. Permitted original backend events, including tagged assistant text and tool events, are observed separately through response.event. These results are not private model reasoning, spoken transcripts, or playback confirmation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveDelegationResultItem {
   @doc("Optional guidance for Live to communicate to the user.")
@@ -172,7 +172,7 @@ union VoiceAgentLiveDelegationTarget {
   foundry_hosted_agent: "foundry_hosted_agent",
 }
 
-@doc("The managed or hosted delegation's execution outcome, independent of Live speech and playback.")
+@doc("The persisted managed or hosted delegation's execution outcome, independent of Live speech and playback. This is resource state, not a separate delegation status-event family.")
 union VoiceAgentLiveDelegationStatus {
   string,
   in_progress: "in_progress",
@@ -270,7 +270,7 @@ model VoiceAgentLiveResponsesDelegationConversationItem
   output?: string;
 }
 
-@doc("The persisted aggregate for a Foundry-managed prompt-agent delegation. Its id is the native delegation ID referenced by managed-delegation events. Results are retained in output order, including accepted results produced before failure or cancellation; lifecycle notifications do not repeat this item.")
+@doc("The persisted aggregate for a Foundry-managed prompt-agent delegation. Its id is the native delegation ID from session.delegation.created, also used as delegation_id in response.event. Results are retained in accepted order, including results produced before failure or cancellation. This resource is retrieved through the conversation API and is not emitted as a delegation event.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveFoundryManagedAgentDelegationItem
   extends VoiceAgentLiveDelegationConversationItem {
@@ -278,7 +278,7 @@ model VoiceAgentLiveFoundryManagedAgentDelegationItem
   ...VoiceAgentLiveFoundryAgentDelegationFields;
 }
 
-@doc("The persisted aggregate for a Foundry-hosted agent delegation. Its id is the native delegation ID referenced by hosted-delegation events. It uses the same fields and ordered results as managed prompt-agent delegation, including accepted results produced before failure or cancellation; lifecycle notifications do not repeat this item.")
+@doc("The persisted aggregate for a Foundry-hosted agent delegation. Its id is the native delegation ID from session.delegation.created, also used as delegation_id in response.event. It uses the same fields and ordered results as managed prompt-agent delegation, including accepted results produced before failure or cancellation. This resource is retrieved through the conversation API and is not emitted as a delegation event.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveFoundryHostedAgentDelegationItem
   extends VoiceAgentLiveDelegationConversationItem {
@@ -301,7 +301,7 @@ alias VoiceAgentLiveFoundryAgentDelegationFields = {
   @doc("The backend agent's conversation ID, when available. Distinct from the stored voice conversation ID and the native Live session ID.")
   backend_conversation_id?: string;
 
-  @doc("The ordered accepted Live-injection results, not original backend output items or tool results. Empty before the first result. Each session.managed_agent_delegation.output_item or session.hosted_agent_delegation.output_item event contributes one item at its zero-based output_index; earlier entries are not replaced by cumulative text. These indices are independent of backend output_index values inside response.event. Partial results remain available after failure or cancellation.")
+  @doc("The ordered accepted Live-injection results, not original backend output items or tool results. Empty before the first accepted result. Foundry correlates native session.thinking.appended and session.commentary.appended acknowledgments with its outgoing commands to record accepted text. Each entry is a new result rather than cumulative text; array positions are independent of backend output_index values inside response.event. Partial results remain available after failure or cancellation. There is no corresponding public output-item notification.")
   output: VoiceAgentLiveDelegationResultItem[];
 
   @doc("Plain-text task context supplied to the target agent, when available. This is not the backend request body.")

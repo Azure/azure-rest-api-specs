@@ -4214,8 +4214,13 @@ paths:
         delegation ID in delegation_id. Dispatch on the nested event.type. Backend text retains its markers;
         observing it is independent of successful Live injection. Lifecycle snapshots omit input and clear
         instructions, tools and output; credentials and private reasoning are not forwarded.
-        The existing managed/hosted output_item notifications and stored output arrays describe accepted
-        Live-injection results, not original backend items. Their indices are independent of backend indices.
+        Follow the native event lifecycle: session.delegation.created identifies work; response.event carries
+        backend response status and output; session.thinking.appended and session.commentary.appended acknowledge
+        accepted context. These acknowledgments correlate through client_event_id with outgoing append commands,
+        not with a result payload or delegation ID in the acknowledgment. Failures outside a backend response
+        use the native error shape without manufacturing backend responses. No additional Foundry delegation
+        status or output-item notifications are emitted. Stored output arrays still contain accepted
+        Live-injection results, not original backend items; their positions are independent of backend indices.
         This event forwarding does not change tool execution ownership: native response.item.create and
         response.create remain Responses-delegation-only commands, not managed/hosted tool-result routing.
         Do not negotiate the realtime WebSocket subprotocol on this route.
@@ -89146,7 +89151,7 @@ components:
         thinking:
           type: string
           description: Optional background context for Live; this does not directly request speech.
-      description: One result returned to Live for a delegation. For managed and hosted agents, this contains validated text extracted from [commentary] and [thinking] sections, without the markers. The voice agent translates it into native session.commentary.append and session.thinking.append commands. Permitted original backend events, including tagged assistant text and tool events, are observed separately through response.event. Each managed or hosted output_item event carries one new accepted result, not cumulative text. These results are not private model reasoning, spoken transcripts, or playback confirmation.
+      description: A persisted result returned to Live for a delegation, not a streaming event. For managed and hosted agents, this contains validated text extracted from [commentary] and [thinking] sections, without the markers. The voice agent translates it into native session.commentary.append and session.thinking.append commands and records accepted results using native append acknowledgments. Permitted original backend events, including tagged assistant text and tool events, are observed separately through response.event. These results are not private model reasoning, spoken transcripts, or playback confirmation.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89160,7 +89165,7 @@ components:
             - failed
             - incomplete
             - cancelled
-      description: The managed or hosted delegation's execution outcome, independent of Live speech and playback.
+      description: The persisted managed or hosted delegation's execution outcome, independent of Live speech and playback. This is resource state, not a separate delegation status-event family.
     VoiceAgentLiveDelegationTarget:
       type: string
       enum:
@@ -89200,7 +89205,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VoiceAgentLiveDelegationResultItem'
-          description: The ordered accepted Live-injection results, not original backend output items or tool results. Empty before the first result. Each session.managed_agent_delegation.output_item or session.hosted_agent_delegation.output_item event contributes one item at its zero-based output_index; earlier entries are not replaced by cumulative text. These indices are independent of backend output_index values inside response.event. Partial results remain available after failure or cancellation.
+          description: The ordered accepted Live-injection results, not original backend output items or tool results. Empty before the first accepted result. Foundry correlates native session.thinking.appended and session.commentary.appended acknowledgments with its outgoing commands to record accepted text. Each entry is a new result rather than cumulative text; array positions are independent of backend output_index values inside response.event. Partial results remain available after failure or cancellation. There is no corresponding public output-item notification.
         delegation_context:
           type: string
           description: Plain-text task context supplied to the target agent, when available. This is not the backend request body.
@@ -89209,7 +89214,7 @@ components:
           description: The delegation's execution outcome, independent of Live speech and client playback.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveDelegationConversationItem'
-      description: The persisted aggregate for a Foundry-hosted agent delegation. Its id is the native delegation ID referenced by hosted-delegation events. It uses the same fields and ordered results as managed prompt-agent delegation, including accepted results produced before failure or cancellation; lifecycle notifications do not repeat this item.
+      description: The persisted aggregate for a Foundry-hosted agent delegation. Its id is the native delegation ID from session.delegation.created, also used as delegation_id in response.event. It uses the same fields and ordered results as managed prompt-agent delegation, including accepted results produced before failure or cancellation. This resource is retrieved through the conversation API and is not emitted as a delegation event.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89244,7 +89249,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VoiceAgentLiveDelegationResultItem'
-          description: The ordered accepted Live-injection results, not original backend output items or tool results. Empty before the first result. Each session.managed_agent_delegation.output_item or session.hosted_agent_delegation.output_item event contributes one item at its zero-based output_index; earlier entries are not replaced by cumulative text. These indices are independent of backend output_index values inside response.event. Partial results remain available after failure or cancellation.
+          description: The ordered accepted Live-injection results, not original backend output items or tool results. Empty before the first accepted result. Foundry correlates native session.thinking.appended and session.commentary.appended acknowledgments with its outgoing commands to record accepted text. Each entry is a new result rather than cumulative text; array positions are independent of backend output_index values inside response.event. Partial results remain available after failure or cancellation. There is no corresponding public output-item notification.
         delegation_context:
           type: string
           description: Plain-text task context supplied to the target agent, when available. This is not the backend request body.
@@ -89253,7 +89258,7 @@ components:
           description: The delegation's execution outcome, independent of Live speech and client playback.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveDelegationConversationItem'
-      description: The persisted aggregate for a Foundry-managed prompt-agent delegation. Its id is the native delegation ID referenced by managed-delegation events. Results are retained in output order, including accepted results produced before failure or cancellation; lifecycle notifications do not repeat this item.
+      description: The persisted aggregate for a Foundry-managed prompt-agent delegation. Its id is the native delegation ID from session.delegation.created, also used as delegation_id in response.event. Results are retained in accepted order, including results produced before failure or cancellation. This resource is retrieved through the conversation API and is not emitted as a delegation event.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89286,9 +89291,9 @@ components:
         session.thinking.append and session.commentary.append commands for the native client delegation.
         Permitted backend text, tool, and lifecycle events are forwarded to the caller through the existing
         response.event envelope, independently of Live injection. No result-format selector is required.
-        Hosted delegation uses the same lifecycle and result payloads as managed prompt-agent delegation,
-        with session.hosted_agent_delegation event types. This is agent configuration, not an additional
-        OpenAI inference-event variant.
+        Delegation creation, backend status, append acknowledgments and errors use native OpenAI events,
+        just as for managed prompt-agent delegation; there is no separate Foundry delegation status or
+        output-item event family. This is agent configuration, not an additional OpenAI inference-event variant.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89342,6 +89347,8 @@ components:
         session.thinking.append and session.commentary.append commands for the native client delegation.
         Permitted backend text, tool, and lifecycle events are forwarded to the caller through the existing
         response.event envelope, independently of Live injection. No result-format selector is required.
+        Delegation creation, backend status, append acknowledgments and errors use native OpenAI events;
+        there is no separate Foundry delegation status or output-item event family.
         This is agent configuration, not an additional OpenAI inference-event variant.
       x-ms-foundry-meta:
         required_previews:

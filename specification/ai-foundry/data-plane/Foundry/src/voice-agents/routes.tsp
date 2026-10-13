@@ -137,8 +137,13 @@ interface VoiceAgentLiveWebSocket {
    * delegation ID in delegation_id. Dispatch on the nested event.type. Backend text retains its markers;
    * observing it is independent of successful Live injection. Lifecycle snapshots omit input and clear
    * instructions, tools and output; credentials and private reasoning are not forwarded.
-   * The existing managed/hosted output_item notifications and stored output arrays describe accepted
-   * Live-injection results, not original backend items. Their indices are independent of backend indices.
+   * Follow the native event lifecycle: session.delegation.created identifies work; response.event carries
+   * backend response status and output; session.thinking.appended and session.commentary.appended acknowledge
+   * accepted context. These acknowledgments correlate through client_event_id with outgoing append commands,
+   * not with a result payload or delegation ID in the acknowledgment. Failures outside a backend response
+   * use the native error shape without manufacturing backend responses. No additional Foundry delegation
+   * status or output-item notifications are emitted. Stored output arrays still contain accepted
+   * Live-injection results, not original backend items; their positions are independent of backend indices.
    * This event forwarding does not change tool execution ownership: native response.item.create and
    * response.create remain Responses-delegation-only commands, not managed/hosted tool-result routing.
    * Do not negotiate the realtime WebSocket subprotocol on this route.

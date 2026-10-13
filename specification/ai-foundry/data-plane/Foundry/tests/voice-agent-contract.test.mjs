@@ -30,23 +30,35 @@ let program;
 let native;
 let compilerOptions;
 const documents = [];
-const managedStages = ["started", "progress", "completed", "failed", "cancel"];
-const managedEventKinds = [...managedStages, "output_item"];
-const managedModel = (stage) =>
-  `Azure.AI.Projects.VoiceAgentLiveManagedDelegation${stage
-    .split("_")
-    .map((part) => part[0].toUpperCase() + part.slice(1))
-    .join("")}Event`;
+const retiredEventKinds = [
+  "started",
+  "progress",
+  "completed",
+  "failed",
+  "cancel",
+  "output_item",
+];
+const retiredEventModels = ["Managed", "Hosted"].flatMap((kind) =>
+  retiredEventKinds.map(
+    (stage) =>
+      `VoiceAgentLive${kind}Delegation${stage
+        .split("_")
+        .map((part) => part[0].toUpperCase() + part.slice(1))
+        .join("")}Event`,
+  ),
+);
 const managedItemModel =
   "Azure.AI.Projects.VoiceAgentLiveFoundryManagedAgentDelegationItem";
-const hostedModel = (stage) => managedModel(stage).replace("Managed", "Hosted");
 const hostedItemModel =
   "Azure.AI.Projects.VoiceAgentLiveFoundryHostedAgentDelegationItem";
-const foundryEventModels = [
-  ...managedEventKinds.map(managedModel),
-  ...managedEventKinds.map(hostedModel),
-];
 const backendEnvelopeModel = "OpenAI.LiveServerEventLiveResponseEvent";
+const nativeEventModels = {
+  "session.delegation.created": "OpenAI.LiveServerEventLiveDelegationCreated",
+  "response.event": backendEnvelopeModel,
+  "session.thinking.appended": "OpenAI.LiveServerEventLiveThinkingAppended",
+  "session.commentary.appended": "OpenAI.LiveServerEventLiveCommentaryAppended",
+  error: "OpenAI.LiveServerEventLiveErrorEvent",
+};
 
 function type(name, context = program) {
   const [value, diagnostics] = context.resolveTypeReference(name);
@@ -105,6 +117,26 @@ function wireShape(model, context) {
       maxItems: getMaxItems(context, p),
     })),
   };
+}
+
+function checkNativeSdkEvents(context) {
+  const models = context.sdkPackage.models;
+  const root = models.find((m) => m.__raw?.name === "LiveServerEvent");
+  for (const [eventType, name] of Object.entries(nativeEventModels)) {
+    const model = models.find((m) => m.__raw?.name === name.split(".").at(-1));
+    assert.ok(model, `Missing native SDK event: ${name}`);
+    assert.equal(model.access, "public");
+    assert.equal(model.baseModel, root);
+    assert.equal(model.discriminatorValue, eventType);
+  }
+  for (const name of retiredEventModels)
+    assert.ok(!models.some((m) => m.__raw?.name === name), name);
+  for (const eventType of Object.keys(root.discriminatedSubtypes))
+    assert.ok(
+      !/^session\.(managed_agent|hosted_agent|managed)_delegation\./.test(
+        eventType,
+      ),
+    );
 }
 
 before(async () => {
@@ -332,21 +364,12 @@ test("Foundry delegation stays on the definition and inference reuses the native
   );
 });
 
-test("native Live models change only through the explicitly allowed Foundry extensions", () => {
+test("native Live models change only through optional Foundry session correlation", () => {
   const ns = type("OpenAI", native);
   let checked = 0;
   for (const [name, model] of ns.models) {
     if (!name.startsWith("Live")) continue;
     const actual = wireShape(type(`OpenAI.${name}`), program);
-    if (name === "LiveServerEvent") {
-      const extensions = actual.children.filter((child) =>
-        child.startsWith("Azure.AI.Projects."),
-      );
-      assert.deepEqual(extensions, [...foundryEventModels].sort());
-      actual.children = actual.children.filter(
-        (child) => !extensions.includes(child),
-      );
-    }
     if (name === "LiveServerEventLiveSessionStarted") {
       const correlation = actual.properties.filter(
         (p) => p.name === "conversation_id",
@@ -373,25 +396,77 @@ test("native Live models change only through the explicitly allowed Foundry exte
   );
 });
 
-test("only the native server discriminator gains the twelve Foundry managed/hosted-delegation literals", () => {
+test("all native Live event discriminators remain identical to the published package", () => {
   const ns = type("OpenAI", native);
   for (const [name, union] of ns.unions) {
     if (!name.startsWith("Live") && name !== "DelegationType") continue;
     const variants = (value) =>
       [...value.variants.values()].map((v) => getTypeName(v.type));
     const expected = variants(union);
-    if (name === "LiveServerEventType") {
-      expected.push(
-        ...managedEventKinds.map((stage) =>
-          JSON.stringify(`session.managed_agent_delegation.${stage}`),
-        ),
-        ...managedEventKinds.map((stage) =>
-          JSON.stringify(`session.hosted_agent_delegation.${stage}`),
-        ),
-      );
-    }
     assert.deepEqual(variants(type(`OpenAI.${name}`)), expected, name);
   }
+});
+
+test("custom delegation lifecycle and output-item types are absent from the contract", () => {
+  for (const name of [
+    ...retiredEventModels,
+    "VoiceAgentLiveServerEventTypeExtension",
+    "VoiceAgentLiveManagedDelegationEventCorrelation",
+  ]) {
+    const [removed] = program.resolveTypeReference(`Azure.AI.Projects.${name}`);
+    assert.equal(removed, undefined, name);
+    for (const document of documents)
+      assert.equal(document.components.schemas[name], undefined, name);
+  }
+  const serverTypes = [
+    ...type("OpenAI.LiveServerEventType").variants.values(),
+  ].map((v) => v.type.value);
+  for (const kind of ["managed_agent", "hosted_agent", "managed"])
+    for (const stage of [...retiredEventKinds, "request"])
+      assert.ok(!serverTypes.includes(`session.${kind}_delegation.${stage}`));
+  // Do not replace the removed extensions with invented native lifecycle events.
+  for (const stage of [
+    "started",
+    "progress",
+    "completed",
+    "failed",
+    "cancel",
+    "output_item",
+  ])
+    assert.ok(!serverTypes.includes(`session.delegation.${stage}`));
+});
+
+test("native delegation, append acknowledgment and error fields are not widened", () => {
+  for (const [eventType, name] of Object.entries(nativeEventModels)) {
+    const model = type(name);
+    assert.equal(model.baseModel, type("OpenAI.LiveServerEvent"));
+    assert.equal(fields(model).get("type").type.value, eventType);
+    assert.deepEqual(
+      wireShape(model, program),
+      wireShape(type(name, native), native),
+    );
+  }
+  for (const channel of ["thinking", "commentary"]) {
+    const p = fields(type(nativeEventModels[`session.${channel}.appended`]));
+    assert.deepEqual([...p.keys()].sort(), [
+      "client_event_id",
+      "end_ms",
+      "event_id",
+      "start_ms",
+      "type",
+    ]);
+    assert.equal(p.get("client_event_id").optional, true);
+  }
+  const error = fields(type(nativeEventModels.error));
+  assert.equal(error.get("error").type, type("OpenAI.LiveLiveError"));
+  for (const field of ["type", "code", "message"])
+    assert.equal(
+      type("OpenAI.LiveLiveError").properties.get(field).optional,
+      false,
+    );
+  assert.ok(!error.has("delegation_id"));
+  assert.ok(!error.has("error_code"));
+  assert.ok(!error.has("error_message"));
 });
 
 test("session.started exposes optional Foundry correlation without replacing the native session ID", () => {
@@ -479,101 +554,6 @@ test("backend observation reuses the native response.event without a new wrapper
     );
 });
 
-test("managed lifecycle notifications contain only correlation and failure details", () => {
-  for (const stage of managedStages) {
-    const model = type(managedModel(stage));
-    assert.equal(model.baseModel, type("OpenAI.LiveServerEvent"));
-    const p = fields(model);
-    assert.equal(
-      p.get("type").type.value,
-      `session.managed_agent_delegation.${stage}`,
-    );
-    assert.deepEqual(
-      [...p.keys()].sort(),
-      [
-        "type",
-        "event_id",
-        "delegation_id",
-        ...(stage === "failed" ? ["error_code", "error_message"] : []),
-      ].sort(),
-    );
-    for (const field of ["event_id", "delegation_id"]) {
-      assert.equal(p.get(field).optional, false, `${stage}.${field}`);
-      assert.equal(getTypeName(p.get(field).type), "string");
-    }
-    for (const field of ["error_code", "error_message"]) {
-      assert.equal(p.has(field), stage === "failed", `${stage}.${field}`);
-      if (stage === "failed") {
-        assert.equal(p.get(field).optional, false);
-        assert.equal(getTypeName(p.get(field).type), "string");
-      }
-    }
-  }
-});
-
-test("managed output_item streams an indexed result, not a delegation snapshot", () => {
-  const model = type(managedModel("output_item"));
-  assert.equal(model.baseModel, type("OpenAI.LiveServerEvent"));
-  const p = fields(model);
-  assert.deepEqual([...p.keys()].sort(), [
-    "delegation_id",
-    "event_id",
-    "item",
-    "output_index",
-    "type",
-  ]);
-  for (const field of p.values()) assert.equal(field.optional, false);
-  assert.equal(
-    p.get("type").type.value,
-    "session.managed_agent_delegation.output_item",
-  );
-  assert.equal(getTypeName(p.get("output_index").type), "int32");
-  assert.equal(getMinValue(program, p.get("output_index")), 0);
-  assert.equal(
-    p.get("item").type,
-    type("Azure.AI.Projects.VoiceAgentLiveDelegationResultItem"),
-  );
-  assert.ok(
-    ![...type("OpenAI.LiveClientEventType").variants.values()].some(
-      (v) => v.type.value === "session.managed_agent_delegation.output_item",
-    ),
-  );
-});
-
-test("hosted events reuse managed payloads with distinct server-only discriminators", () => {
-  const serverTypes = type("OpenAI.LiveServerEventType");
-  for (const stage of managedEventKinds) {
-    const hosted = type(hostedModel(stage));
-    const managed = type(managedModel(stage));
-    const literal = `session.hosted_agent_delegation.${stage}`;
-    assert.equal(hosted.baseModel, type("OpenAI.LiveServerEvent"));
-    assert.equal(hosted.properties.get("type").type.value, literal);
-    assert.ok(
-      [...serverTypes.variants.values()].some((v) => v.type.value === literal),
-    );
-    assert.deepEqual(
-      wireShape(hosted, program).properties.filter((p) => p.name !== "type"),
-      wireShape(managed, program).properties.filter((p) => p.name !== "type"),
-    );
-    for (const root of [
-      "OpenAI.LiveClientEventType",
-      "OpenAI.LiveSidebandClientEventType",
-      "OpenAI.LiveSidebandServerEventType",
-    ])
-      assert.ok(
-        ![...type(root).variants.values()].some(
-          (v) => v.type.value === literal,
-        ),
-        `${root}: ${stage}`,
-      );
-  }
-  assert.ok(
-    ![...serverTypes.variants.values()].some(
-      (v) => v.type.value === "session.hosted_agent_delegation.request",
-    ),
-  );
-});
-
 test("managed delegation aggregate retains an ordered result list without event metadata", () => {
   const item = type(managedItemModel);
   assert.equal(
@@ -634,7 +614,7 @@ test("hosted aggregate shares managed fields and result identity, not its discri
   );
   assert.equal(
     hosted.properties.get("output").type.indexer.value,
-    type(hostedModel("output_item")).properties.get("item").type,
+    type("Azure.AI.Projects.VoiceAgentLiveDelegationResultItem"),
   );
   for (const doc of documents) {
     const schemas = doc.components.schemas;
@@ -683,56 +663,6 @@ test("delegation results contain only optional commentary and thinking strings",
 // Target-contract examples. Vienna runtime alignment is a separate follow-up;
 // these payloads are not captures from an already-updated service.
 const resultText = { commentary: "Say: Yesterday I went to school." };
-const samples = managedStages.map((stage) => {
-  const payload = {
-    type: `session.managed_agent_delegation.${stage}`,
-    event_id: `evt_managed_${stage}`,
-    delegation_id: "del_1",
-  };
-  if (stage === "failed")
-    Object.assign(payload, {
-      error_code: "partial_backend_timeout",
-      error_message: "The backend timed out after some guidance was accepted.",
-    });
-  return { model: managedModel(stage), payload };
-});
-const outputSamples = [
-  {
-    delegation_id: "del_1",
-    output_index: 0,
-    item: { thinking: "Focus on irregular past-tense verbs." },
-  },
-  {
-    delegation_id: "del_2",
-    output_index: 0,
-    item: { commentary: "Try a greeting." },
-  },
-  { delegation_id: "del_1", output_index: 1, item: resultText },
-  {
-    delegation_id: "del_1",
-    output_index: 2,
-    item: {
-      commentary: "Now tell me what you ate yesterday.",
-      thinking: "Move on to another irregular verb.",
-    },
-  },
-].map((payload, index) => ({
-  model: managedModel("output_item"),
-  payload: {
-    type: "session.managed_agent_delegation.output_item",
-    event_id: `evt_output_${index}`,
-    ...payload,
-  },
-}));
-const hostedSamples = [...samples, ...outputSamples].map((sample) => ({
-  model: sample.model.replace("Managed", "Hosted"),
-  payload: {
-    ...sample.payload,
-    type: sample.payload.type.replace("managed_agent", "hosted_agent"),
-    event_id: `hosted_${sample.payload.event_id}`,
-    delegation_id: `hosted_${sample.payload.delegation_id}`,
-  },
-}));
 const taggedThinking = "Focus on irregular past-tense verbs.";
 const taggedCommentary = "Say: Yesterday I went to school.";
 const taggedBackendText = `[thinking]\n${taggedThinking}\n[commentary]\n${taggedCommentary}`;
@@ -811,10 +741,20 @@ const sessionStarted = {
     store: false,
   },
 };
-samples.push({
-  model: "OpenAI.LiveServerEventLiveSessionStarted",
-  payload: sessionStarted,
-});
+const nativeFailure = {
+  model: nativeEventModels.error,
+  payload: {
+    type: "error",
+    event_id: "evt_append_error_1",
+    error: {
+      type: "invalid_request_error",
+      code: "invalid_delegation_result",
+      message:
+        "The delegated result could not be injected into the Live session.",
+      client_event_id: "evt_append_managed_thinking",
+    },
+  },
+};
 
 function tspValue(value, stored = false, key = "") {
   // @example takes TypeSpec values, not wire-encoded JSON scalars.
@@ -860,6 +800,131 @@ async function validateExamples(name, examples) {
   return compile(NodeHost, path, { ...compilerOptions, noEmit: true });
 }
 
+test("native startup, delegation creation and errors validate for Foundry-owned work", async () => {
+  const examples = [
+    {
+      model: "OpenAI.LiveServerEventLiveSessionStarted",
+      payload: sessionStarted,
+    },
+    nativeFailure,
+    {
+      model: nativeEventModels.error,
+      payload: {
+        type: "error",
+        event_id: "evt_target_error",
+        error: {
+          type: "server_error",
+          code: "delegation_target_unavailable",
+          message: "The delegated agent could not be reached.",
+        },
+      },
+    },
+    ...["managed", "hosted"].map((kind) => ({
+      model: nativeEventModels["session.delegation.created"],
+      payload: {
+        type: "session.delegation.created",
+        event_id: `evt_delegation_${kind}`,
+        offset_ms: 1200,
+        delegation: {
+          id: `del_${kind}_1`,
+          type: "delegation",
+          target: "client",
+        },
+      },
+    })),
+  ];
+  checkErrors(
+    (await validateExamples("native-foundry-notifications", examples))
+      .diagnostics,
+  );
+});
+
+test("native backend status remains nested and correlated across concurrent delegations", async () => {
+  const examples = ["managed", "hosted"].flatMap((kind) =>
+    ["in_progress", "completed", "failed", "incomplete"].map(
+      (status, index) => ({
+        model: backendEnvelopeModel,
+        payload: {
+          type: "response.event",
+          event_id: `evt_backend_${kind}_${status}`,
+          delegation_id: `del_${kind}_1`,
+          event: {
+            type: `response.${status}`,
+            sequence_number: index,
+            response: {
+              id: `resp_${kind}_${status}`,
+              status,
+              instructions: null,
+              tools: [],
+              output: [],
+            },
+          },
+        },
+      }),
+    ),
+  );
+  for (const sample of examples) {
+    assert.equal(sample.payload.type, "response.event");
+    assert.ok(sample.payload.delegation_id);
+    assert.equal("status" in sample.payload, false);
+  }
+  checkErrors(
+    (await validateExamples("native-backend-status", examples)).diagnostics,
+  );
+});
+
+test("native errors reject retired flattened failure fields and missing required details", async (t) => {
+  for (const [name, mutate] of [
+    [
+      "missing error",
+      (p) => {
+        delete p.error;
+      },
+    ],
+    [
+      "missing code",
+      (p) => {
+        delete p.error.code;
+      },
+    ],
+    [
+      "missing message",
+      (p) => {
+        delete p.error.message;
+      },
+    ],
+    [
+      "non-string message",
+      (p) => {
+        p.error.message = 42;
+      },
+    ],
+    [
+      "flattened error",
+      (p) => {
+        p.error_code = p.error.code;
+        p.error_message = p.error.message;
+        delete p.error;
+      },
+    ],
+    [
+      "delegation field",
+      (p) => {
+        p.delegation_id = "del_managed_1";
+      },
+    ],
+  ]) {
+    await t.test(name, async () => {
+      const sample = structuredClone(nativeFailure);
+      mutate(sample.payload);
+      checkInvalidExample(
+        (await validateExamples(`invalid-native-error-${name}`, [sample]))
+          .diagnostics,
+      );
+    });
+  }
+});
+
 test("managed and hosted backend text, tool and lifecycle samples use the native envelope", async () => {
   checkErrors(
     (await validateExamples("foundry-backend-events", backendSamples))
@@ -885,7 +950,7 @@ test("managed and hosted backend text, tool and lifecycle samples use the native
   }
 });
 
-test("backend observations and accepted Live injections have distinct payloads and indices", async () => {
+test("tagged backend output becomes native appends and a separate persisted result", async () => {
   const examples = [];
   for (const kind of ["managed", "hosted"]) {
     const source = backendSamples.find(
@@ -897,28 +962,42 @@ test("backend observations and accepted Live injections have distinct payloads a
     assert.equal(source.payload.event.output_index, 1);
     assert.equal(source.payload.event.item.content[0].text, taggedBackendText);
     const projected = {
-      model:
-        kind === "managed"
-          ? managedModel("output_item")
-          : hostedModel("output_item"),
+      model: kind === "managed" ? managedItemModel : hostedItemModel,
       payload: {
-        type: `session.${kind}_agent_delegation.output_item`,
-        event_id: `evt_injected_${kind}_1`,
-        delegation_id: source.payload.delegation_id,
-        output_index: 0,
-        item: { thinking: taggedThinking, commentary: taggedCommentary },
+        type: "delegation",
+        target: `foundry_${kind}_agent`,
+        id: source.payload.delegation_id,
+        created_at: 1791763200,
+        agent_name: "english-teacher",
+        agent_version: "1",
+        offset_ms: 1200,
+        status: "in_progress",
+        output: [{ thinking: taggedThinking, commentary: taggedCommentary }],
       },
     };
     examples.push(projected);
-    for (const [channel, content] of Object.entries(projected.payload.item)) {
+    for (const [channel, content] of Object.entries(
+      projected.payload.output[0],
+    )) {
       assert.ok(!content.includes(`[${channel}]`));
+      const eventId = `evt_append_${kind}_${channel}`;
       examples.push({
         model: `OpenAI.LiveClientEventLive${channel === "thinking" ? "Thinking" : "Commentary"}AppendParam`,
         payload: {
           type: `session.${channel}.append`,
-          event_id: `evt_append_${kind}_${channel}`,
+          event_id: eventId,
           delegation_id: source.payload.delegation_id,
           content,
+        },
+      });
+      examples.push({
+        model: nativeEventModels[`session.${channel}.appended`],
+        payload: {
+          type: `session.${channel}.appended`,
+          event_id: `evt_ack_${kind}_${channel}`,
+          client_event_id: eventId,
+          start_ms: 1400,
+          end_ms: 1420,
         },
       });
     }
@@ -927,6 +1006,38 @@ test("backend observations and accepted Live injections have distinct payloads a
     (await validateExamples("tagged-output-and-live-injection", examples))
       .diagnostics,
   );
+});
+
+test("native append acknowledgments reject custom output-item payloads", async (t) => {
+  for (const channel of ["thinking", "commentary"]) {
+    for (const [field, value] of [
+      ["content", "Use the text from the outgoing append command."],
+      ["delegation_id", "del_managed_1"],
+      ["output_index", 0],
+      ["item", { commentary: taggedCommentary }],
+    ]) {
+      await t.test(`${channel}: ${field}`, async () => {
+        const sample = {
+          model: nativeEventModels[`session.${channel}.appended`],
+          payload: {
+            type: `session.${channel}.appended`,
+            event_id: `evt_ack_${channel}`,
+            client_event_id: `evt_append_${channel}`,
+            start_ms: 1400,
+            end_ms: 1420,
+            [field]: value,
+          },
+        };
+        checkInvalidExample(
+          (
+            await validateExamples(`invalid-native-ack-${channel}-${field}`, [
+              sample,
+            ])
+          ).diagnostics,
+        );
+      });
+    }
+  }
 });
 
 test("backend observation envelopes reject malformed outer fields", async (t) => {
@@ -1033,301 +1144,6 @@ test("hosted configuration rejects invalid identity, wrong type, and removed for
   }
 });
 
-test("lifecycle, streamed output, and native startup examples validate", async () => {
-  const result = await validateExamples("valid-events", [
-    ...samples,
-    ...outputSamples,
-    ...hostedSamples,
-  ]);
-  checkErrors(result.diagnostics);
-});
-
-test("hosted events reject managed discriminators, missing correlation, and malformed results", async (t) => {
-  const cases = [
-    [
-      "missing delegation ID",
-      "progress",
-      (p) => {
-        delete p.delegation_id;
-      },
-    ],
-    [
-      "missing event ID",
-      "started",
-      (p) => {
-        delete p.event_id;
-      },
-    ],
-    [
-      "wrong discriminator",
-      "progress",
-      (p) => {
-        p.type = "session.managed_agent_delegation.progress";
-      },
-    ],
-    [
-      "snapshot in lifecycle",
-      "completed",
-      (p) => {
-        p.output = [];
-      },
-    ],
-    [
-      "missing failure code",
-      "failed",
-      (p) => {
-        delete p.error_code;
-      },
-    ],
-    [
-      "invalid failure message",
-      "failed",
-      (p) => {
-        p.error_message = null;
-      },
-    ],
-    [
-      "fractional output index",
-      "output_item",
-      (p) => {
-        p.output_index = 0.5;
-      },
-    ],
-    [
-      "missing result",
-      "output_item",
-      (p) => {
-        delete p.item;
-      },
-    ],
-    [
-      "invalid result text",
-      "output_item",
-      (p) => {
-        p.item = { commentary: ["Not a string"] };
-      },
-    ],
-  ];
-  for (const [name, stage, mutate] of cases) {
-    await t.test(name, async () => {
-      const sample = structuredClone(
-        hostedSamples.find((s) => s.payload.type.endsWith(`.${stage}`)),
-      );
-      mutate(sample.payload);
-      const result = await validateExamples(`invalid-hosted-event-${name}`, [
-        sample,
-      ]);
-      checkInvalidExample(result.diagnostics);
-    });
-  }
-});
-
-test("managed-agent events do not retain the old event-name prefix", async () => {
-  const serverTypes = [...type("OpenAI.LiveServerEventType").variants.values()]
-    .map((variant) => variant.type.value)
-    .filter((value) => typeof value === "string");
-  assert.ok(
-    !serverTypes.some((value) =>
-      value.startsWith("session.managed_delegation."),
-    ),
-  );
-  for (const kind of managedEventKinds)
-    assert.ok(serverTypes.includes(`session.managed_agent_delegation.${kind}`));
-
-  const oldExamples = managedEventKinds.map((kind) => {
-    const sample = structuredClone(
-      kind === "output_item"
-        ? outputSamples[0]
-        : samples.find((sample) => sample.model === managedModel(kind)),
-    );
-    sample.payload.type = `session.managed_delegation.${kind}`;
-    return sample;
-  });
-  const result = await validateExamples(
-    "removed-managed-event-prefix",
-    oldExamples,
-  );
-  const errors = result.diagnostics.filter((d) => d.severity === "error");
-  assert.equal(errors.length, oldExamples.length);
-  assert.ok(
-    errors.every((d) => ["invalid-argument", "unassignable"].includes(d.code)),
-  );
-  for (const sample of oldExamples)
-    assert.ok(
-      errors.some((d) => d.message.includes(sample.payload.type)),
-      sample.payload.type,
-    );
-});
-
-test("malformed lifecycle payloads are rejected by the actual TypeSpec models", async () => {
-  const missingDelegationId = structuredClone(
-    samples.find((s) => s.payload.type.endsWith(".cancel")),
-  );
-  delete missingDelegationId.payload.delegation_id;
-  const invalidIndex = structuredClone(outputSamples[0]);
-  invalidIndex.payload.output_index = "one";
-  const invalidResult = structuredClone(outputSamples[0]);
-  invalidResult.payload.item.commentary = { content: "Not a plain string" };
-  const invalidFailure = structuredClone(
-    samples.find((s) => s.payload.type.endsWith(".failed")),
-  );
-  invalidFailure.payload.error_code = 42;
-  const result = await validateExamples("invalid-events", [
-    missingDelegationId,
-    invalidIndex,
-    invalidResult,
-    invalidFailure,
-  ]);
-  const errors = result.diagnostics.filter((d) => d.severity === "error");
-  assert.ok(
-    errors.length >= 4,
-    errors.map((d) => `${d.code}: ${d.message}`).join("\n"),
-  );
-  assert.ok(
-    errors.every((d) =>
-      ["invalid-argument", "unassignable", "missing-property"].includes(d.code),
-    ),
-    errors.map((d) => `${d.code}: ${d.message}`).join("\n"),
-  );
-});
-
-test("streamed output requires correlation, an integer index, and one typed item", async (t) => {
-  const cases = [
-    [
-      "missing delegation ID",
-      (p) => {
-        delete p.delegation_id;
-      },
-    ],
-    [
-      "missing output index",
-      (p) => {
-        delete p.output_index;
-      },
-    ],
-    [
-      "fractional output index",
-      (p) => {
-        p.output_index = 0.5;
-      },
-    ],
-    [
-      "missing result item",
-      (p) => {
-        delete p.item;
-      },
-    ],
-    [
-      "list instead of one result",
-      (p) => {
-        p.item = [p.item];
-      },
-    ],
-    [
-      "nullable result text",
-      (p) => {
-        p.item.thinking = null;
-      },
-    ],
-    [
-      "legacy result format",
-      (p) => {
-        p.result_format = "tagged_text";
-      },
-    ],
-  ];
-  for (const [index, [name, mutate]] of cases.entries()) {
-    await t.test(name, async () => {
-      const sample = structuredClone(outputSamples[0]);
-      mutate(sample.payload);
-      const result = await validateExamples(`invalid-stream-output-${index}`, [
-        sample,
-      ]);
-      const errors = result.diagnostics.filter((d) => d.severity === "error");
-      assert.ok(errors.length > 0, name);
-      assert.ok(
-        errors.every((d) =>
-          [
-            "invalid-argument",
-            "unassignable",
-            "missing-property",
-            "unexpected-property",
-          ].includes(d.code),
-        ),
-        errors.map((d) => `${d.code}: ${d.message}`).join("\n"),
-      );
-    });
-  }
-});
-
-test("lifecycle notifications reject copied delegation metadata and result text", async (t) => {
-  for (const stage of [
-    "started",
-    "progress",
-    "completed",
-    "failed",
-    "cancel",
-  ]) {
-    await t.test(stage, async () => {
-      const sample = structuredClone(
-        samples.find((s) => s.payload.type.endsWith(`.${stage}`)),
-      );
-      Object.assign(sample.payload, {
-        agent_name: "english-teacher",
-        result_format: "tagged_text",
-        commentary: "Must be sent as an output_item, not in a lifecycle event.",
-      });
-      const result = await validateExamples(
-        `invalid-lifecycle-snapshot-${stage}`,
-        [sample],
-      );
-      const errors = result.diagnostics.filter((d) => d.severity === "error");
-      assert.ok(errors.length > 0, stage);
-      assert.ok(
-        errors.every((d) =>
-          ["invalid-argument", "unexpected-property"].includes(d.code),
-        ),
-        errors.map((d) => `${d.code}: ${d.message}`).join("\n"),
-      );
-    });
-  }
-});
-
-test("failure notifications require string error code and message", async (t) => {
-  const failed = samples.find((s) => s.payload.type.endsWith(".failed"));
-  checkErrors(
-    (await validateExamples("failure-without-results", [failed])).diagnostics,
-  );
-
-  for (const field of ["error_code", "error_message"]) {
-    for (const [name, value] of [
-      ["missing", undefined],
-      ["null", null],
-      ["number", 42],
-      ["object", { message: "Not a string" }],
-    ]) {
-      await t.test(`${field}: ${name}`, async () => {
-        const sample = structuredClone(failed);
-        if (value === undefined) delete sample.payload[field];
-        else sample.payload[field] = value;
-        const result = await validateExamples(`failure-${field}-${name}`, [
-          sample,
-        ]);
-        const errors = result.diagnostics.filter((d) => d.severity === "error");
-        assert.ok(errors.length > 0);
-        assert.ok(
-          errors.every((d) =>
-            ["invalid-argument", "unassignable", "missing-property"].includes(
-              d.code,
-            ),
-          ),
-          errors.map((d) => `${d.code}: ${d.message}`).join("\n"),
-        );
-      });
-    }
-  }
-});
-
 test("SDK metadata exports native events and separate Live persistence discriminators", async () => {
   const entrypoint = join(
     project,
@@ -1358,6 +1174,7 @@ test("SDK metadata exports native events and separate Live persistence discrimin
     return value;
   };
   const backend = model("LiveServerEventLiveResponseEvent");
+  checkNativeSdkEvents(context);
   assert.equal(backend.baseModel, model("LiveServerEvent"));
   assert.equal(backend.discriminatorValue, "response.event");
   assert.equal(
@@ -1386,43 +1203,6 @@ test("SDK metadata exports native events and separate Live persistence discrimin
       !context.sdkPackage.models.some((m) => m.__raw?.name === name),
       name,
     );
-  for (const name of foundryEventModels) {
-    const stage = managedEventKinds.find((kind) =>
-      [managedModel(kind), hostedModel(kind)].includes(name),
-    );
-    const value = model(name.split(".").at(-1));
-    assert.equal(value.baseModel.__raw.name, "LiveServerEvent");
-    assert.ok(
-      value.properties.some((p) => p.serializedName === "delegation_id"),
-    );
-    for (const field of [
-      "has_spoken_text",
-      "has_background_context",
-      "mcp_call_count",
-      "failure_context_status",
-      "result_format",
-      "agent_name",
-      "agent_version",
-      "response_id",
-      "backend_conversation_id",
-      "offset_ms",
-      "output",
-      "commentary",
-      "thinking",
-    ])
-      assert.ok(
-        !value.properties.some((p) => p.serializedName === field),
-        `${stage}.${field}`,
-      );
-    for (const field of ["error_code", "error_message"]) {
-      const property = value.properties.find((p) => p.serializedName === field);
-      assert.equal(Boolean(property), stage === "failed", `${stage}.${field}`);
-      if (property) {
-        assert.equal(property.type.kind, "string");
-        assert.equal(property.optional, false);
-      }
-    }
-  }
   assert.ok(
     !context.sdkPackage.models.some(
       (m) => m.__raw?.name === "VoiceAgentLiveManagedDelegationRequestEvent",
@@ -1491,26 +1271,10 @@ test("SDK metadata exports native events and separate Live persistence discrimin
     resultItem,
   );
   assert.equal(
-    model("VoiceAgentLiveHostedDelegationOutputItemEvent").properties.find(
-      (p) => p.serializedName === "item",
-    ).type,
-    resultItem,
-  );
-  assert.equal(
     model("VoiceAgentLiveHostedAgentDelegation").properties.find(
       (p) => p.serializedName === "type",
     ).type.value,
     "foundry_hosted_agent",
-  );
-  const outputEvent = model("VoiceAgentLiveManagedDelegationOutputItemEvent");
-  assert.equal(
-    outputEvent.properties.find((p) => p.serializedName === "item").type,
-    resultItem,
-  );
-  assert.equal(
-    outputEvent.properties.find((p) => p.serializedName === "output_index").type
-      .kind,
-    "int32",
   );
   assert.ok(
     !context.sdkPackage.models.some(
@@ -1644,42 +1408,12 @@ test("Java SDK customization targets Realtime fields and keeps Live events witho
     model("LiveServerEventLiveResponseEvent").discriminatorValue,
     "response.event",
   );
-  for (const name of foundryEventModels) {
-    const event = model(name.split(".").at(-1));
-    assert.equal(event.baseModel, model("LiveServerEvent"));
-    assert.equal(
-      event.discriminatorValue,
-      fields(type(name, sdkProgram)).get("type").type.value,
-    );
-  }
+  checkNativeSdkEvents(context);
   for (const name of [
     "VoiceAgentLiveHostedAgentDelegation",
     "VoiceAgentLiveFoundryHostedAgentDelegationItem",
   ])
     assert.equal(model(name).access, "public");
-});
-
-test("cancel is server-only and the removed request event has no typed variant", () => {
-  const literals = (root) =>
-    [...type(root).variants.values()].map((v) => v.type.value);
-  assert.ok(
-    literals("OpenAI.LiveServerEventType").includes(
-      "session.managed_agent_delegation.cancel",
-    ),
-  );
-  assert.ok(
-    !literals("OpenAI.LiveServerEventType").includes(
-      "session.managed_agent_delegation.request",
-    ),
-  );
-  assert.ok(
-    !literals("OpenAI.LiveClientEventType").includes(
-      "session.managed_agent_delegation.cancel",
-    ),
-  );
-  assert.ok(
-    !fields(type(managedModel("cancel"))).has("failure_context_status"),
-  );
 });
 
 test("Realtime persistence and inference retain the native Realtime item hierarchy", () => {
@@ -1946,9 +1680,14 @@ const managedIdentity = {
   agent_version: "1",
   offset_ms: 1200,
 };
-const managedOutput = outputSamples
-  .filter((sample) => sample.payload.delegation_id === storedDelegation.id)
-  .map((sample) => sample.payload.item);
+const managedOutput = [
+  { thinking: "Focus on irregular past-tense verbs." },
+  resultText,
+  {
+    commentary: "Now tell me what you ate yesterday.",
+    thinking: "Move on to another irregular verb.",
+  },
+];
 const storedExamples = [
   { ...storedDelegation, target: "client", commentary: "Use went, not goed." },
   {
@@ -2023,29 +1762,6 @@ test("speech, partial capture, and target-specific delegation examples validate"
   checkErrors(result.diagnostics);
 });
 
-test("hosted streamed results retain the same per-delegation output ordering in persistence", async () => {
-  const collected = new Map();
-  for (const { payload } of hostedSamples.filter((s) =>
-    s.payload.type.endsWith(".output_item"),
-  )) {
-    const items = collected.get(payload.delegation_id) ?? [];
-    assert.equal(payload.output_index, items.length);
-    items.push(payload.item);
-    collected.set(payload.delegation_id, items);
-  }
-  assert.deepEqual(
-    collected.get(hostedStoredExamples[0].payload.id),
-    hostedStoredExamples[0].payload.output,
-  );
-  const second = structuredClone(hostedStoredExamples[0]);
-  second.payload.id = "hosted_del_2";
-  second.payload.output = collected.get("hosted_del_2");
-  assert.equal(second.payload.output.length, 1);
-  checkErrors(
-    (await validateExamples("interleaved-hosted-output", [second])).diagnostics,
-  );
-});
-
 test("hosted aggregates reject missing identity, invalid results, and legacy fields", async (t) => {
   const cases = [
     [
@@ -2113,26 +1829,6 @@ test("hosted aggregates reject missing identity, invalid results, and legacy fie
       checkInvalidExample(result.diagnostics);
     });
   }
-});
-
-test("streamed result indices map to the managed aggregate independently per delegation", async () => {
-  const collected = new Map();
-  for (const { payload } of outputSamples) {
-    const output = collected.get(payload.delegation_id) ?? [];
-    assert.equal(payload.output_index, output.length);
-    output.push(payload.item);
-    collected.set(payload.delegation_id, output);
-  }
-  assert.deepEqual(collected.get("del_1"), storedExamples[3].payload.output);
-  assert.equal(collected.get("del_2").length, 1);
-  // Validate the second independent aggregate too, including the shared result identity.
-  const second = structuredClone(storedExamples[3]);
-  second.payload.id = "del_2";
-  second.payload.output = collected.get("del_2");
-  checkErrors(
-    (await validateExamples("interleaved-delegation-output", [second]))
-      .diagnostics,
-  );
 });
 
 test("Live conversation envelope uses native Live seconds usage, not Realtime token usage", async () => {

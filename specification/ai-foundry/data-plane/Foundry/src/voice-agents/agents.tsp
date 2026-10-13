@@ -246,6 +246,8 @@ union VoiceAgentLiveDelegation {
   session.thinking.append and session.commentary.append commands for the native client delegation.
   Permitted backend text, tool, and lifecycle events are forwarded to the caller through the existing
   response.event envelope, independently of Live injection. No result-format selector is required.
+  Delegation creation, backend status, append acknowledgments and errors use native OpenAI events;
+  there is no separate Foundry delegation status or output-item event family.
   This is agent configuration, not an additional OpenAI inference-event variant.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -270,9 +272,9 @@ model VoiceAgentLiveManagedAgentDelegation {
   session.thinking.append and session.commentary.append commands for the native client delegation.
   Permitted backend text, tool, and lifecycle events are forwarded to the caller through the existing
   response.event envelope, independently of Live injection. No result-format selector is required.
-  Hosted delegation uses the same lifecycle and result payloads as managed prompt-agent delegation,
-  with session.hosted_agent_delegation event types. This is agent configuration, not an additional
-  OpenAI inference-event variant.
+  Delegation creation, backend status, append acknowledgments and errors use native OpenAI events,
+  just as for managed prompt-agent delegation; there is no separate Foundry delegation status or
+  output-item event family. This is agent configuration, not an additional OpenAI inference-event variant.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveHostedAgentDelegation {
