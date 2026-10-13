@@ -21,6 +21,7 @@ using Common;
 @@alternateType(Microsoft.Network.ExpressRouteFailoverTestDetails.startTime, utcDateTime, "csharp");
 @@clientName(Microsoft.Network.ExpressRouteFailoverTestDetails.startTime, "StartOn", "csharp");
 @@clientName(Microsoft.Network.VirtualWanSecurityProvider.type, "ProviderType", "csharp");
+@@clientName(Microsoft.Network.EffectiveNetworkSecurityGroup.tagMap, "TagToIPAddresses", "csharp");
 
 // Preserve the naming requirements used by the released C# provisioning library.
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve C# provisioning resource naming compatibility."
