@@ -25,6 +25,7 @@ import "./StorageAccount.tsp";
 import "./StorageAccountMigration.tsp";
 import "./DeletedAccount.tsp";
 import "./ManagementPolicy.tsp";
+import "./MetadataPolicy.tsp";
 import "./BlobInventoryPolicy.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./ObjectReplicationPolicy.tsp";
