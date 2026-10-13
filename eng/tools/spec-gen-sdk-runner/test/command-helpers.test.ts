@@ -10,6 +10,7 @@ import {
   getBuildFailedInfo,
   getRequiredSettingValue,
   getSpecPaths,
+  isManagementPlaneSpecConfig,
   isBreakingChangeDetectionEnabled,
   logIssuesToPipeline,
   parseArguments,
@@ -17,6 +18,7 @@ import {
   prepareSpecGenSdkCommand,
   selectGenerationTool,
   setBuildFailedLabelVariable,
+  setManagementLabelsVariable,
   setPipelineVariables,
 } from "../src/command-helpers.ts";
 import * as log from "../src/log.ts";
@@ -531,6 +533,115 @@ describe("commands.ts", () => {
         executionResult: "warning",
         packages: [],
       });
+
+      expect(log.setVsoVariable).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("isManagementPlaneSpecConfig", () => {
+    test.each([
+      [
+        "TypeSpec .Management project",
+        "specification/compute/Compute.Management/tspconfig.yaml",
+        undefined,
+      ],
+      [
+        "TypeSpec under resource-manager",
+        "specification/compute/resource-manager/Microsoft.Compute/tspconfig.yaml",
+        undefined,
+      ],
+      [
+        "OpenAPI under resource-manager",
+        undefined,
+        "specification/compute/resource-manager/readme.md",
+      ],
+      [
+        "Windows TypeSpec path",
+        "specification\\compute\\Compute.Management\\tspconfig.yaml",
+        undefined,
+      ],
+      [
+        "Windows OpenAPI path",
+        undefined,
+        "specification\\compute\\resource-manager\\readme.md",
+      ],
+    ])("identifies %s", (_name, tspConfigPath, readmePath) => {
+      expect(isManagementPlaneSpecConfig(tspConfigPath, readmePath)).toBe(true);
+    });
+
+    test.each([
+      [
+        "TypeSpec data plane",
+        "specification/compute/data-plane/Compute/tspconfig.yaml",
+        undefined,
+      ],
+      ["OpenAPI data plane", undefined, "specification/compute/data-plane/readme.md"],
+      [
+        "similar OpenAPI plane segment",
+        undefined,
+        "specification/compute/resource-manager-tools/readme.md",
+      ],
+      [
+        "similar TypeSpec suffix",
+        "specification/compute/Compute.ManagementTools/tspconfig.yaml",
+        undefined,
+      ],
+      ["missing configuration", undefined, undefined],
+      [
+        "ambiguous configurations",
+        "specification/compute/Compute.Management/tspconfig.yaml",
+        "specification/compute/data-plane/readme.md",
+      ],
+    ])("rejects %s", (_name, tspConfigPath, readmePath) => {
+      expect(isManagementPlaneSpecConfig(tspConfigPath, readmePath)).toBe(false);
+    });
+  });
+
+  describe("setManagementLabelsVariable", () => {
+    const mockCommandInput = (
+      sdkLanguage: SdkName,
+      runMode = "release",
+    ): Parameters<typeof setManagementLabelsVariable>[0] => ({
+      workingFolder: "/working/folder",
+      sdkLanguage,
+      runMode,
+      localSpecRepoPath: "",
+      localSdkRepoPath: "",
+      tspConfigPath: "specification/compute/Compute.Management/tspconfig.yaml",
+      sdkRepoName: "",
+      specCommitSha: "abc123",
+      specRepoHttpsUrl: "",
+    });
+
+    test("sets comma-separated JavaScript management labels for a release", () => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setManagementLabelsVariable(mockCommandInput(SdkName.Js));
+
+      expect(log.setVsoVariable).toHaveBeenCalledWith(
+        "ManagementLabels",
+        "Mgmt,mgmt-review-needed",
+      );
+    });
+
+    test("does not set management labels for a non-JavaScript language", () => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setManagementLabelsVariable(mockCommandInput(SdkName.Net));
+
+      expect(log.setVsoVariable).not.toHaveBeenCalled();
+    });
+
+    test.each(["batch", "spec-pull-request"])("does not label %s runs", (runMode) => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setManagementLabelsVariable(mockCommandInput(SdkName.Js, runMode));
 
       expect(log.setVsoVariable).not.toHaveBeenCalled();
     });

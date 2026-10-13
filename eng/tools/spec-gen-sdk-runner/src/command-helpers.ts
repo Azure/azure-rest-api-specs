@@ -23,6 +23,7 @@ import {
   findReadmeFiles,
   getAllTypeSpecPaths,
   getArgumentValue,
+  getPlaneFolderPath,
   objectToMap,
   type SpecConfigs,
 } from "./utils.ts";
@@ -362,6 +363,63 @@ export function setBuildFailedLabelVariable(
       `Runner: SDK generation succeeded but the build failed; setting BuildFailedLabel variable to '${buildFailedLabel}'`,
     );
     setVsoVariable("BuildFailedLabel", buildFailedLabel);
+  }
+}
+
+/**
+ * Determine whether a single configured specification is management plane.
+ *
+ * OpenAPI configurations are classified only by an exact `resource-manager` plane
+ * segment. TypeSpec configurations use that same plane classification when present,
+ * otherwise their immediate project folder must end exactly in `.Management`.
+ *
+ * @param tspConfigPath - The configured TypeSpec project path.
+ * @param readmePath - The configured OpenAPI readme path.
+ * @returns true only for one unambiguous management-plane configuration.
+ */
+export function isManagementPlaneSpecConfig(
+  tspConfigPath: string | undefined,
+  readmePath: string | undefined,
+): boolean {
+  const configuredPaths = [tspConfigPath, readmePath].filter(
+    (configuredPath): configuredPath is string => Boolean(configuredPath),
+  );
+  if (configuredPaths.length !== 1) {
+    return false;
+  }
+
+  const configPath = configuredPaths[0].replaceAll("\\", "/");
+  const planeFolderPath = getPlaneFolderPath(configPath);
+  if (planeFolderPath) {
+    return planeFolderPath.split("/").at(-1) === "resource-manager";
+  }
+  if (!tspConfigPath) {
+    return false;
+  }
+
+  const segments = configPath.split("/").filter(Boolean);
+  const projectFolder = segments.at(-2);
+  return projectFolder?.endsWith(".Management") === true;
+}
+
+/**
+ * Emit management-plane labels for a single-spec SDK release pull request.
+ *
+ * @param commandInput - The single-spec command input.
+ */
+export function setManagementLabelsVariable(commandInput: SpecGenSdkCmdInput): void {
+  if (
+    commandInput.runMode !== "release" ||
+    !isManagementPlaneSpecConfig(commandInput.tspConfigPath, commandInput.readmePath)
+  ) {
+    return;
+  }
+
+  const managementLabels = sdkLabels[commandInput.sdkLanguage]?.management;
+  if (managementLabels?.length) {
+    const labels = managementLabels.join(",");
+    logMessage(`Runner: setting ManagementLabels variable to '${labels}'`);
+    setVsoVariable("ManagementLabels", labels);
   }
 }
 
