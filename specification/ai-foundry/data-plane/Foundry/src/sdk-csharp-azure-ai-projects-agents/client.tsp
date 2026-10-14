@@ -162,8 +162,17 @@ namespace Azure.AI.Projects {
   // Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
   @@usage(VoiceAgentTransport, Usage.input | Usage.json);
   @@access(VoiceAgentTransport, Access.public);
+
+  // Change types to avoid serialization as BinaryData
   @@alternateType(OpenAI.RealtimeResponse.metadata, Record<unknown>);
   @@alternateType(OpenAI.MCPTool.allowed_tools, OpenAI.MCPToolFilter | null);
+
+  // Rename Time properties for compliance
+  @@clientName(
+    VoiceAgentAzureSemanticVadOptions.idle_timeout_ms,
+    "IdleTimeout"
+  );
+  @@clientName(VoiceAgentSubagent.invoke_timeout_seconds, "InvokeTimeout");
 
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
