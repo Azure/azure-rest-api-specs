@@ -4880,7 +4880,11 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/AiGatewayModelProviderKind",
-          "description": "Model provider type. This value cannot be changed after creation."
+          "description": "Model provider type. This value cannot be changed after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "name": {
           "type": "string",
@@ -4965,10 +4969,6 @@
       "type": "object",
       "description": "Properties for updating an AI Gateway model provider.",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/AiGatewayModelProviderKind",
-          "description": "Model provider type."
-        },
         "name": {
           "type": "string",
           "description": "Display name of the model provider.",

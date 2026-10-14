@@ -148,9 +148,6 @@ model AiGatewayCustomProviderConfigurationUpdate {
 /** Properties for updating an AI Gateway model provider. */
 @added(Versions.v2026_10_01_preview)
 model AiGatewayModelProviderUpdateProperties {
-  /** Model provider type. */
-  kind?: AiGatewayModelProviderKind;
-
   /** Display name of the model provider. */
   @encodedName("application/json", "name")
   displayName?: string;
@@ -176,6 +173,7 @@ model AiGatewayModelProviderUpdateParameters {
 @added(Versions.v2026_10_01_preview)
 model AiGatewayModelProviderProperties {
   /** Model provider type. This value cannot be changed after creation. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   kind: AiGatewayModelProviderKind;
 
   /** Display name of the model provider. */
