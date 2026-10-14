@@ -2,7 +2,7 @@ import { vi } from "vitest";
 
 export const mockFolder = "specification/foo/Foo";
 
-vi.mock("fs/promises", () => ({
+vi.mock("node:fs/promises", () => ({
   readFile: vi.fn().mockResolvedValue('{"info": {"x-typespec-generated": true}}'),
 }));
 
@@ -14,6 +14,7 @@ vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({
     revparse: vi.fn().mockResolvedValue(""),
     status: vi.fn().mockResolvedValue({
+      files: [],
       modified: [],
       not_added: [],
       isClean: () => true,

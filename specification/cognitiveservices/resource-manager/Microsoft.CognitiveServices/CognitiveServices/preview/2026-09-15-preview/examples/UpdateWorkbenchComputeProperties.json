@@ -1,0 +1,53 @@
+{
+  "operationId": "Workbenches_Update",
+  "title": "UpdateWorkbenchComputeProperties",
+  "parameters": {
+    "api-version": "2026-09-15-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rgcognitiveservices",
+    "accountName": "myAccount",
+    "projectName": "myProject",
+    "workbenchName": "myWorkbench",
+    "properties": {
+      "properties": {
+        "targetClusterId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/vc-rg/providers/Microsoft.MachineLearningServices/virtualClusters/test-vc",
+        "idleTimeBeforeShutdown": "PT1H",
+        "instanceType": "Singularity.ND12_H100_v5-n1",
+        "gpuCount": 1
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject/workbenches/myWorkbench",
+        "name": "myWorkbench",
+        "type": "Microsoft.CognitiveServices/accounts/projects/workbenches",
+        "properties": {
+          "targetClusterId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/vc-rg/providers/Microsoft.MachineLearningServices/virtualClusters/test-vc",
+          "imageLink": "mcr.microsoft.com/azureml/curated/pytorch-gpu:latest",
+          "idleTimeBeforeShutdown": "PT1H",
+          "instanceType": "Singularity.ND12_H100_v5-n1",
+          "gpuCount": 1,
+          "provisioningState": "Succeeded",
+          "status": "Stopped"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {
+              "principalId": "00000000-0000-0000-0000-000000000001",
+              "clientId": "00000000-0000-0000-0000-000000000002"
+            }
+          }
+        }
+      }
+    }
+  }
+}
