@@ -10,6 +10,13 @@
       "kind": "voice",
       "model_type": "managed",
       "model": "gpt-realtime",
+      "post_call_config": {
+        "event_grid_connection_name": "post-call-events",
+        "routine_names": [
+          "archive",
+          "analysis"
+        ]
+      },
       "audio": {
         "input": {
           "turn_detection": {
@@ -49,6 +56,13 @@
               "kind": "voice",
               "model_type": "managed",
               "model": "gpt-realtime",
+              "post_call_config": {
+                "event_grid_connection_name": "post-call-events",
+                "routine_names": [
+                  "archive",
+                  "analysis"
+                ]
+              },
               "audio": {
                 "input": {
                   "turn_detection": {

@@ -97437,6 +97437,22 @@
             "$ref": "#/components/schemas/VoiceAgentSubagentConfig",
             "description": "Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists."
           },
+          "post_call_config": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentPostCallConfig"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional post-call targets stored with this immutable agent version. Omit this property or set it to null when\ncreating or replacing a complete definition to leave that version unconfigured; earlier versions are unchanged.\nSaving the configuration does not send events or dispatch routines. The service validates that the selected\nvoice-agent definition supports post-call processing.",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
           "store": {
             "type": "boolean",
             "description": "Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to\n`false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event\ntimeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate\naudio-logging control; audio is persisted only as part of this switch. Latency/performance telemetry (e.g.\ntime-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and\nis not part of the persisted conversation content.",
@@ -98069,6 +98085,53 @@
           }
         ],
         "description": "The input audio noise reduction mode.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentPostCallConfig": {
+        "type": "object",
+        "properties": {
+          "event_grid_connection_name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The nonblank bare name of the Event Grid connection in the same project. The connection stores the endpoint\nand authentication settings; URLs, resource paths, and whitespace are invalid. This single target may be\nconfigured together with routine_names and does not count toward the ten-routine limit.",
+            "examples": [
+              "post-call-events"
+            ]
+          },
+          "routine_names": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentPostCallRoutineName"
+            },
+            "minItems": 0,
+            "maxItems": 10,
+            "description": "Zero to ten bare names of routines in the same project, resolved from the versioned routine definitions at\npost-call dispatch. Only names are stored here, not routine versions, endpoints, credentials, timeouts, or\npolicies. Omit this property or supply an empty list to configure no routines; an Event Grid target is then\nrequired. Null is invalid. The service rejects duplicate names using the routine resource's name-comparison\nsemantics rather than silently deduplicating the list.",
+            "examples": [
+              [
+                "archive",
+                "analysis"
+              ]
+            ]
+          }
+        },
+        "unevaluatedProperties": {
+          "not": {}
+        },
+        "description": "Post-call targets in the same project. Event Grid and routines may be configured separately or together; the\nservice requires at least one valid target. A missing or empty routine_names list configures no routines and\ntherefore requires event_grid_connection_name. Unknown properties and null target fields or list members are\ninvalid. After an observable session end, the service attempts all configured targets independently and\nconcurrently on a best-effort basis, sharing one captured snapshot and an overall deadline. One target's failure\ndoes not prevent attempts to the others. Delivery is not guaranteed after a hard crash and is not exactly once.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentPostCallRoutineName": {
+        "type": "string",
+        "minLength": 1,
+        "description": "A nonempty bare routine name in the same project. The service validates the routine resource's name syntax\nand rejects blank names, whitespace, URLs, and resource paths. This is a name reference, not a routine version.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

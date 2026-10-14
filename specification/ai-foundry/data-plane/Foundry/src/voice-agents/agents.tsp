@@ -172,6 +172,15 @@ model VoiceAgentDefinition extends AgentDefinition {
   subagent_config?: VoiceAgentSubagentConfig;
 
   @doc("""
+    Optional post-call targets stored with this immutable agent version. Omit this property or set it to null when
+    creating or replacing a complete definition to leave that version unconfigured; earlier versions are unchanged.
+    Saving the configuration does not send events or dispatch routines. The service validates that the selected
+    voice-agent definition supports post-call processing.
+    """)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  post_call_config?: VoiceAgentPostCallConfig | null;
+
+  @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
     `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
     timeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate
@@ -181,6 +190,48 @@ model VoiceAgentDefinition extends AgentDefinition {
     """)
   store?: boolean = false;
 }
+
+@doc("""
+  Post-call targets in the same project. Event Grid and routines may be configured separately or together; the
+  service requires at least one valid target. A missing or empty routine_names list configures no routines and
+  therefore requires event_grid_connection_name. Unknown properties and null target fields or list members are
+  invalid. After an observable session end, the service attempts all configured targets independently and
+  concurrently on a best-effort basis, sharing one captured snapshot and an overall deadline. One target's failure
+  does not prevent attempts to the others. Delivery is not guaranteed after a hard crash and is not exactly once.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentPostCallConfig {
+  ...Record<never>;
+
+  @doc("""
+    The nonblank bare name of the Event Grid connection in the same project. The connection stores the endpoint
+    and authentication settings; URLs, resource paths, and whitespace are invalid. This single target may be
+    configured together with routine_names and does not count toward the ten-routine limit.
+    """)
+  @minLength(1)
+  @example("post-call-events")
+  event_grid_connection_name?: string;
+
+  @doc("""
+    Zero to ten bare names of routines in the same project, resolved from the versioned routine definitions at
+    post-call dispatch. Only names are stored here, not routine versions, endpoints, credentials, timeouts, or
+    policies. Omit this property or supply an empty list to configure no routines; an Event Grid target is then
+    required. Null is invalid. The service rejects duplicate names using the routine resource's name-comparison
+    semantics rather than silently deduplicating the list.
+    """)
+  @minItems(0)
+  @maxItems(10)
+  @example(#["archive", "analysis"])
+  routine_names?: VoiceAgentPostCallRoutineName[];
+}
+
+@doc("""
+  A nonempty bare routine name in the same project. The service validates the routine resource's name syntax
+  and rejects blank names, whitespace, URLs, and resource paths. This is a name reference, not a routine version.
+  """)
+@minLength(1)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar VoiceAgentPostCallRoutineName extends string;
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
