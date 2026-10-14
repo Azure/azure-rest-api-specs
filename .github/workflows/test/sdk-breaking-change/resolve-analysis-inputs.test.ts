@@ -1,42 +1,12 @@
-import { mkdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   resolveAnalysisTrigger,
-  resolveChangedTypeSpecConfigPathsFromPullRequest,
   resolveSdkLanguageConfig,
   validateAnalysisSource,
 } from "../../src/sdk-breaking-change/resolve-analysis-inputs.ts";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
-const temporaryDirectories: string[] = [];
-
-function createRepository(): string {
-  const repositoryPath = join(import.meta.dirname, `repo-${crypto.randomUUID()}`);
-  temporaryDirectories.push(repositoryPath);
-  mkdirSync(join(repositoryPath, "specification", "service", "Widget.Service", "models"), {
-    recursive: true,
-  });
-  mkdirSync(join(repositoryPath, "specification", "service", "Widget.Service", "new"), {
-    recursive: true,
-  });
-  mkdirSync(join(repositoryPath, "specification", "other", "Other.Service"), {
-    recursive: true,
-  });
-  writeFileSync(
-    join(repositoryPath, "specification", "service", "Widget.Service", "tspconfig.yaml"),
-    "emit: []\n",
-  );
-  writeFileSync(
-    join(repositoryPath, "specification", "other", "Other.Service", "tspconfig.yaml"),
-    "emit: []\n",
-  );
-  return repositoryPath;
-}
-
-afterEach(async () => {
-  const { rm } = await import("node:fs/promises");
-  await Promise.all(temporaryDirectories.splice(0).map((path) => rm(path, { recursive: true })));
+afterEach(() => {
   vi.unstubAllEnvs();
 });
 
@@ -236,45 +206,5 @@ describe("validateAnalysisSource", () => {
         actualSha: "b".repeat(40),
       }),
     ).toThrow("Pull request head changed");
-  });
-});
-
-describe("resolveChangedTypeSpecConfigPathsFromPullRequest", () => {
-  it("reads all pull request files and sets the config path output", async () => {
-    const github = createMockGithub();
-    const context = createMockContext();
-    const core = createMockCore();
-    const localSpecRepoPath = createRepository();
-    const listFiles = vi.fn().mockResolvedValue({
-      data: [
-        {
-          filename: "specification/service/Widget.Service/new/main.tsp",
-          previous_filename: "specification/service/Widget.Service/main.tsp",
-        },
-      ],
-    });
-    Object.assign(github.rest.pulls, { listFiles });
-    github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: "a".repeat(40) } } });
-
-    await expect(
-      resolveChangedTypeSpecConfigPathsFromPullRequest({
-        github,
-        context,
-        core,
-        pullNumber: 42,
-        localSpecRepoPath,
-      }),
-    ).resolves.toEqual(["specification/service/Widget.Service/tspconfig.yaml"]);
-    expect(listFiles).toHaveBeenCalledWith({
-      owner: "owner",
-      repo: "repo",
-      pull_number: 42,
-      per_page: 100,
-    });
-    expect(github.rest.repos.getContent).not.toHaveBeenCalled();
-    expect(core.setOutput).toHaveBeenCalledWith(
-      "tsp-config-paths",
-      '["specification/service/Widget.Service/tspconfig.yaml"]',
-    );
   });
 });
