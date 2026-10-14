@@ -1,0 +1,61 @@
+{
+  "operationId": "WorkspaceDiscoveries_Get",
+  "title": "Get an established discovery result with an authoritatively empty expected set.",
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "workspaceName": "exampleWorkspace"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveries/latest?api-version=2026-11-01",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveries/latest",
+        "name": "latest",
+        "type": "Microsoft.Chaos/workspaces/discoveries",
+        "properties": {
+          "status": "InProgress",
+          "workspaceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveries/latest",
+        "name": "latest",
+        "type": "Microsoft.Chaos/workspaces/discoveries",
+        "properties": {
+          "status": "Succeeded",
+          "workspaceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+          "resourceSnapshotId": "33333333-3333-4333-8333-333333333333",
+          "completeness": "Established",
+          "coverageSummary": {
+            "scopes": {
+              "totalCount": 1,
+              "knownExpectedSetCount": 1,
+              "unknownExpectedSetCount": 0,
+              "establishedCount": 1,
+              "baselineUnknownCount": 0,
+              "verificationIncompleteCount": 0,
+              "knownPartialCount": 0
+            },
+            "resources": {
+              "expectedCount": 0,
+              "classifiedCount": 0,
+              "unclassifiedCount": 0,
+              "coveredCount": 0
+            }
+          },
+          "warnings": [],
+          "warningsTotalCount": 0,
+          "warningsTruncated": false,
+          "errors": []
+        }
+      }
+    }
+  }
+}

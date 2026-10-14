@@ -73,15 +73,6 @@ model ScenarioTemplateVersionProperties {
   description?: string;
 
   /**
-   * The resource selectors the template's actions target. Each selector names a group of
-   * resources of a single Azure resource type, and is referenced from an action through the
-   * `%%\{resourceSelectors.\<name\>\}%%` macro.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
-  resourceSelectors?: ScenarioTemplateResourceSelector[];
-
-  /**
    * Parameter definitions the template accepts. Values are supplied when the scenario created
    * from this template is configured, and are referenced from an action through the
    * `%%\{parameters.\<name\>\}%%` macro.
@@ -95,23 +86,37 @@ model ScenarioTemplateVersionProperties {
    * publishes, and carry unresolved `%%\{...\}%%` macros; the macros are substituted when the
    * scenario runs, not when it is read or created.
    *
-   * Four macro namespaces may appear:
+   * Three macro namespaces may appear:
    *
    * - `%%\{parameters.\<name\>\}%%` — resolves from the parameter values supplied when the
    *   scenario is configured. The accepted names are declared by `parameters`.
-   * - `%%\{resourceSelectors.\<name\>\}%%` — resolves to the resources discovered for that
-   *   selector. The accepted names are declared by `resourceSelectors`.
    * - `%%\{resourceTargeting.include.\<dimension\>\}%%` — resolves from the resource targeting
    *   of the scenario's configuration (for example `zones`, `locations`). The template does not
    *   declare these; they are dimensions of the configuration supplied at run time.
    * - `%%\{filters.\<dimension\>\}%%` — deprecated spelling of `resourceTargeting.include.`,
    *   retained only so that superseded template versions keep resolving. Do not depend on it;
    *   the newest version of every template uses `resourceTargeting.include.`.
+   *
+   * An action's `failureBehavior` overrides the template-wide `failureBehavior` for that action
+   * alone; an action that does not carry one inherits the template-wide value.
    */
   @visibility(Lifecycle.Read)
   @minItems(1)
   @identifiers(#["name"])
   actions: ScenarioAction[];
+
+  /**
+   * Template-wide default for how a scenario run reacts when one of this template's actions
+   * fails. An action that does not carry its own `failureBehavior` inherits this value; when
+   * neither is present the effective behavior is `Stop`.
+   *
+   * A scenario created from this template takes this policy with the rest of the template's
+   * structure, so it is also the scenario's resolved `failureBehavior`. Template versions
+   * published before this policy existed do not carry one and report it as absent, which the
+   * run resolves as `Stop`.
+   */
+  @visibility(Lifecycle.Read)
+  failureBehavior?: FailureBehavior;
 }
 
 /**
@@ -130,26 +135,6 @@ model ScenarioTemplateProperties {
   latestVersion: string;
 
   ...ScenarioTemplateVersionProperties;
-}
-
-/**
- * Model that represents a named group of resources of a single Azure resource type that a
- * scenario template's actions target.
- */
-@added(Microsoft.Chaos.Versions.v2026_11_01)
-model ScenarioTemplateResourceSelector {
-  /**
-   * The name of the selector, as referenced by the `%%\{resourceSelectors.\<name\>\}%%` macro.
-   */
-  @minLength(1)
-  name: string;
-
-  /**
-   * The Azure resource type the selector matches, for example
-   * `Microsoft.Compute/virtualMachines`.
-   */
-  @minLength(1)
-  resourceType: string;
 }
 
 /**

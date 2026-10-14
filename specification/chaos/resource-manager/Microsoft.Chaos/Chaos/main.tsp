@@ -19,6 +19,7 @@ import "./target.tsp";
 import "./targetType.tsp";
 import "./operationStatus.tsp";
 import "./workspace.tsp";
+import "./workspaceDiscovery.tsp";
 import "./discoveredResource.tsp";
 import "./scenario.tsp";
 import "./scenarioTemplate.tsp";
@@ -65,5 +66,6 @@ enum Versions {
   /**
    * The 2026-11-01 API version.
    */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_11_01: "2026-11-01",
 }

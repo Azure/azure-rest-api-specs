@@ -5,6 +5,21 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Chaos;
 
 // csharp
+@@clientName(
+  WorkspaceCustomerManagedKeyEncryption.keyEncryptionKeyUrl,
+  "keyEncryptionKeyUri",
+  "csharp"
+);
+@@clientName(
+  WorkspaceCustomerManagedKeyEncryptionPatch.keyEncryptionKeyUrl,
+  "keyEncryptionKeyUri",
+  "csharp"
+);
+@@clientName(
+  WorkspaceEncryptionStatus.observedKeyEncryptionKeyUrl,
+  "observedKeyEncryptionKeyUri",
+  "csharp"
+);
 @@clientName(Workspace, "ChaosWorkspace", "csharp");
 @@clientName(Scenario, "ChaosScenario", "csharp");
 @@clientName(ScenarioTemplate, "ChaosScenarioTemplate", "csharp");

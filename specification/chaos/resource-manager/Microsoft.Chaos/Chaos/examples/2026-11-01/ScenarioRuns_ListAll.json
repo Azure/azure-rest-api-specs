@@ -51,7 +51,7 @@
               "scenarioName": "12345678-1234-1234-1234-123456789012",
               "workspaceName": "exampleWorkspace",
               "managedIdentityPrincipalId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
-              "status": "Failed",
+              "status": "PartiallySucceeded",
               "resources": [
                 {
                   "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
@@ -78,8 +78,46 @@
                     "errorMessage": "The workspace managed identity is missing the required permissions to run this action on the target resource."
                   }
                 ],
-                "resource": []
+                "resource": [
+                  {
+                    "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2",
+                    "errorCode": "ResourceNotReady",
+                    "errorMessage": "The target resource was not ready for fault injection.",
+                    "remediationUri": "https://aka.ms/azure-chaos-studio"
+                  }
+                ]
               },
+              "scenarioRunSummary": [
+                {
+                  "actionUrn": "urn:csci:provider:microsoft:VirtualMachine_Restart/1.0",
+                  "state": "Failed",
+                  "startedAt": "2025-01-19T10:15:00.000Z",
+                  "completedAt": "2025-01-19T10:18:00.000Z",
+                  "resources": [
+                    {
+                      "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
+                    }
+                  ],
+                  "error": {
+                    "code": "ActionExecutionFailed",
+                    "message": "The action failed on the target resource.",
+                    "details": [
+                      {
+                        "code": "TargetExecutionFailed",
+                        "message": "The target resource was not ready for fault injection.",
+                        "target": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
+                      }
+                    ]
+                  },
+                  "failureSuppressed": true
+                }
+              ],
+              "warnings": [
+                {
+                  "code": "AgentCleanupIncomplete",
+                  "message": "Cleanup could not be confirmed for one target."
+                }
+              ],
               "startTime": "2025-01-19T10:15:00.000Z",
               "endTime": "2025-01-19T10:18:00.000Z"
             },

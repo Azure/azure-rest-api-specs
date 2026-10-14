@@ -58,12 +58,6 @@
       "name": "ExperimentExecutions"
     },
     {
-      "name": "PrivateAccesses"
-    },
-    {
-      "name": "PrivateEndpointConnections"
-    },
-    {
       "name": "Actions"
     },
     {
@@ -77,6 +71,9 @@
     },
     {
       "name": "Workspaces"
+    },
+    {
+      "name": "WorkspaceDiscoveries"
     },
     {
       "name": "DiscoveredResources"
@@ -110,20 +107,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -146,7 +143,7 @@
         "description": "Get a list of the scenario templates published by Microsoft.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -159,7 +156,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -182,7 +179,7 @@
         "description": "Get a scenario template, described by its newest published version.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "scenarioTemplateName",
@@ -204,7 +201,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -224,7 +221,7 @@
         "description": "Get a list of the published versions of a scenario template, including superseded ones.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "scenarioTemplateName",
@@ -246,7 +243,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -269,7 +266,7 @@
         "description": "Get a single published version of a scenario template.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "scenarioTemplateName",
@@ -300,7 +297,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -320,10 +317,10 @@
         "description": "Get a list of Experiment resources in a subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "running",
@@ -350,7 +347,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -373,13 +370,13 @@
         "description": "Get a list of Action resources for a given location.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "continuationToken",
@@ -399,7 +396,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -422,13 +419,13 @@
         "description": "Get an Action resource for a given location.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "actionName",
@@ -449,7 +446,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -469,13 +466,13 @@
         "description": "Get a list of Action Version resources for a given location and action.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "actionName",
@@ -503,7 +500,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -526,13 +523,13 @@
         "description": "Get an Action Version resource for a given location and action.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "actionName",
@@ -561,7 +558,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -581,33 +578,36 @@
         "description": "Returns the current status of an async operation.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
+          "Get a failed Workspace encryption operation status": {
+            "$ref": "./examples/OperationStatuses_Get_CustomerKeyAccessFailed.json"
+          },
           "Gets Chaos Studio async operation status.": {
             "$ref": "./examples/OperationStatuses_Get.json"
           }
@@ -623,13 +623,13 @@
         "description": "Get a list of Target Type resources for given location.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "continuationToken",
@@ -649,7 +649,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -672,13 +672,13 @@
         "description": "Get a Target Type resources for given location.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "targetTypeName",
@@ -699,7 +699,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -719,13 +719,13 @@
         "description": "Get a list of Capability Type resources for given Target Type and location.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "targetTypeName",
@@ -753,7 +753,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -776,13 +776,13 @@
         "description": "Get a Capability Type resource for given Target Type and location.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "targetTypeName",
@@ -811,7 +811,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -819,52 +819,6 @@
           "Get a Capability Type for a virtual machine Target resource on westus2 location.": {
             "$ref": "./examples/CapabilityTypes_Get.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/privateAccesses": {
-      "get": {
-        "operationId": "PrivateAccesses_ListAll",
-        "tags": [
-          "PrivateAccesses"
-        ],
-        "description": "Get a list of private access resources in a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "continuationToken",
-            "in": "query",
-            "description": "String that sets the continuation token.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PrivateAccessListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all private accesses in a subscription.": {
-            "$ref": "./examples/PrivateAccesses_ListAll.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -877,10 +831,10 @@
         "description": "Get a list of all Workspace resources in a subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "continuationToken",
@@ -900,7 +854,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -923,13 +877,13 @@
         "description": "Get a list of Target resources that extend a tracked regional resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "parentProviderNamespace",
@@ -976,7 +930,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -999,13 +953,13 @@
         "description": "Get a Target resource that extends a tracked regional resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "parentProviderNamespace",
@@ -1053,7 +1007,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1071,13 +1025,13 @@
         "description": "Create or update a Target resource that extends a tracked regional resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "parentProviderNamespace",
@@ -1140,7 +1094,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1158,13 +1112,13 @@
         "description": "Delete a Target resource that extends a tracked regional resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "parentProviderNamespace",
@@ -1212,7 +1166,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1232,13 +1186,13 @@
         "description": "Get a list of Capability resources that extend a Target resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "parentProviderNamespace",
@@ -1293,7 +1247,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1316,13 +1270,13 @@
         "description": "Get a Capability resource that extends a Target resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "parentProviderNamespace",
@@ -1378,7 +1332,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1396,13 +1350,13 @@
         "description": "Create or update a Capability resource that extends a Target resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "parentProviderNamespace",
@@ -1473,7 +1427,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1491,13 +1445,13 @@
         "description": "Delete a Capability that extends a Target resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "parentProviderNamespace",
@@ -1553,7 +1507,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1573,13 +1527,13 @@
         "description": "Get a list of Experiment resources in a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "running",
@@ -1606,7 +1560,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1629,13 +1583,13 @@
         "description": "Get a Experiment resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "experimentName",
@@ -1657,7 +1611,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1675,13 +1629,13 @@
         "description": "Create or update a Experiment resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "experimentName",
@@ -1729,7 +1683,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1751,13 +1705,13 @@
         "description": "Update an experiment.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "experimentName",
@@ -1802,7 +1756,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1824,13 +1778,13 @@
         "description": "Delete a Experiment resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "experimentName",
@@ -1863,7 +1817,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1887,13 +1841,13 @@
         "description": "Cancel a running Experiment resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "experimentName",
@@ -1923,7 +1877,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1947,13 +1901,13 @@
         "description": "Get a list of executions of an Experiment resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "experimentName",
@@ -1975,7 +1929,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1998,13 +1952,13 @@
         "description": "Get an execution of an Experiment resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "experimentName",
@@ -2034,7 +1988,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2054,13 +2008,13 @@
         "description": "Execution details of an experiment resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "experimentName",
@@ -2090,7 +2044,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2110,13 +2064,13 @@
         "description": "Start a Experiment resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "experimentName",
@@ -2146,7 +2100,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2161,546 +2115,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses": {
-      "get": {
-        "operationId": "PrivateAccesses_List",
-        "tags": [
-          "PrivateAccesses"
-        ],
-        "description": "Get a list of private access resources in a resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "continuationToken",
-            "in": "query",
-            "description": "String that sets the continuation token.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PrivateAccessListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all private access in a resource group.": {
-            "$ref": "./examples/PrivateAccesses_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}": {
-      "get": {
-        "operationId": "PrivateAccesses_Get",
-        "tags": [
-          "PrivateAccesses"
-        ],
-        "description": "Get a private access resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateAccessName",
-            "in": "path",
-            "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateAccess"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a private access resource": {
-            "$ref": "./examples/PrivateAccesses_Get_Get_A_Private_Access_Resource.json"
-          },
-          "Get a private access resource with private endpoint": {
-            "$ref": "./examples/PrivateAccesses_Get_Get_A_Private_Access_Resource_With_Private_Endpoint.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "PrivateAccesses_CreateOrUpdate",
-        "tags": [
-          "PrivateAccesses"
-        ],
-        "description": "Create or update a private access",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateAccessName",
-            "in": "path",
-            "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "private access resource to be created or updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PrivateAccess"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'PrivateAccess' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateAccess"
-            }
-          },
-          "201": {
-            "description": "Resource 'PrivateAccess' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateAccess"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or Update a private access resource": {
-            "$ref": "./examples/PrivateAccesses_CreateOrUpdate_Create_Or_Update_A_Private_Access_Resource.json"
-          },
-          "Create or Update a private access resource with publicNetworkAccess": {
-            "$ref": "./examples/PrivateAccesses_CreateOrUpdate_Create_Or_Update_A_Private_Access_Resource_With_Public_Network_Access.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "PrivateAccesses_Update",
-        "tags": [
-          "PrivateAccesses"
-        ],
-        "description": "Patch a private access tags",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateAccessName",
-            "in": "path",
-            "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "private access resource's tags to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PrivateAccessPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateAccess"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a private access resource's tags": {
-            "$ref": "./examples/PrivateAccesses_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "PrivateAccesses_Delete",
-        "tags": [
-          "PrivateAccesses"
-        ],
-        "description": "Delete a private access",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateAccessName",
-            "in": "path",
-            "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a private access resource": {
-            "$ref": "./examples/PrivateAccesses_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateEndpointConnections": {
-      "get": {
-        "operationId": "PrivateAccesses_ListPrivateEndpointConnections",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "List information about private endpoint connections under a private access resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateAccessName",
-            "in": "path",
-            "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all private endpoint connections under a private access resource.": {
-            "$ref": "./examples/PrivateAccesses_ListPrivateEndpointConnections.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateEndpointConnections/{privateEndpointConnectionName}": {
-      "get": {
-        "operationId": "PrivateAccesses_GetAPrivateEndpointConnection",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Gets information about a private endpoint connection under a private access resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateAccessName",
-            "in": "path",
-            "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get information about a private endpoint connection under a private access resource.": {
-            "$ref": "./examples/PrivateAccesses_GetAPrivateEndpointConnection.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "PrivateAccesses_DeleteAPrivateEndpointConnection",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Deletes a private endpoint connection under a private access resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateAccessName",
-            "in": "path",
-            "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The name of the private endpoint connection.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a private endpoint connection under a private access resource.": {
-            "$ref": "./examples/PrivateAccesses_DeleteAPrivateEndpointConnection.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateLinkResources": {
-      "get": {
-        "operationId": "PrivateAccesses_GetPrivateLinkResources",
-        "tags": [
-          "PrivateAccesses"
-        ],
-        "description": "Gets the private link resources possible under private access resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "privateAccessName",
-            "in": "path",
-            "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all possible private link resources under private access resource.": {
-            "$ref": "./examples/PrivateAccesses_GetPrivateLinkResources.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces": {
       "get": {
         "operationId": "Workspaces_List",
@@ -2710,13 +2124,13 @@
         "description": "Get a list of Workspace resources in a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "continuationToken",
@@ -2736,11 +2150,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
+          "List CMK-created Workspaces with customer key replacement pending": {
+            "$ref": "./examples/Workspaces_List_EncryptionPending.json"
+          },
           "List all Workspaces in a resource group.": {
             "$ref": "./examples/Workspaces_List.json"
           }
@@ -2759,13 +2176,13 @@
         "description": "Get a Workspace resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -2787,13 +2204,25 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
+          "Get a CMK-created Workspace while its customer key is being replaced": {
+            "$ref": "./examples/Workspaces_Get_EncryptionPending.json"
+          },
+          "Get a Workspace after a customer key replacement fails": {
+            "$ref": "./examples/Workspaces_Get_EncryptionFailed.json"
+          },
           "Get a Workspace in a resource group.": {
             "$ref": "./examples/Workspaces_Get.json"
+          },
+          "Get a Workspace service application before customer key enrollment": {
+            "$ref": "./examples/Workspaces_Get_EncryptionNotConfigured.json"
+          },
+          "Get a Workspace when active encryption protection is unknown": {
+            "$ref": "./examples/Workspaces_Get_EncryptionUnknown.json"
           }
         }
       },
@@ -2805,13 +2234,13 @@
         "description": "Create or update a Workspace resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -2859,11 +2288,20 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
+          "Create or update a Microsoft-managed Workspace with empty encryption settings": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate_EmptyEncryption.json"
+          },
+          "Create or update a Microsoft-managed Workspace without encryption settings": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate_OmitEncryption.json"
+          },
+          "Create or update a Workspace with a customer-managed key": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate_WithCustomerKey.json"
+          },
           "Create/update a workspace in a resource group.": {
             "$ref": "./examples/Workspaces_CreateOrUpdate.json"
           }
@@ -2881,13 +2319,13 @@
         "description": "Update a Workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -2932,13 +2370,25 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
+          "Update Workspace tags without changing customer-managed encryption": {
+            "$ref": "./examples/Workspaces_Update_OmitEncryption.json"
+          },
           "Update a Workspace in a resource group.": {
             "$ref": "./examples/Workspaces_Update.json"
+          },
+          "Update a Workspace with a validated key and resource ID in another vault": {
+            "$ref": "./examples/Workspaces_Update_ChangeKeyVault.json"
+          },
+          "Update a Workspace with an empty CMK patch and retain its existing key URL": {
+            "$ref": "./examples/Workspaces_Update_EmptyCustomerKeyPatch.json"
+          },
+          "Update only the customer key URI of an encrypted Workspace": {
+            "$ref": "./examples/Workspaces_Update_ReplaceCustomerKey.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2954,13 +2404,13 @@
         "description": "Delete a Workspace resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -2993,7 +2443,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3017,13 +2467,13 @@
         "description": "Get a list of connections.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3045,7 +2495,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3068,13 +2518,13 @@
         "description": "Get a connection.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3105,7 +2555,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3123,13 +2573,13 @@
         "description": "Create or update a connection.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3175,7 +2625,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3193,13 +2643,13 @@
         "description": "Delete a connection.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3230,7 +2680,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3250,13 +2700,13 @@
         "description": "Triggers resource discovery for the workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3286,7 +2736,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3310,13 +2760,13 @@
         "description": "Get a list of discovered resources for a workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3338,7 +2788,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3361,13 +2811,13 @@
         "description": "Get a discovered resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3398,13 +2848,91 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Get a discovered resource.": {
             "$ref": "./examples/DiscoveredResources_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveries/latest": {
+      "get": {
+        "operationId": "WorkspaceDiscoveries_Get",
+        "tags": [
+          "WorkspaceDiscoveries"
+        ],
+        "description": "Gets the latest discovery result. Returns 202 with Location pointing to this same polling resource while discovery is processing, and 200 for a terminal result, including Failed with an error and no snapshot when completion could not be accepted.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceDiscovery"
+            }
+          },
+          "202": {
+            "description": "The nonterminal discovery result returned from the polling location.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceDiscovery"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The absolute URL of this same discovery polling resource, including the requested API version."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a healthy container scan with a structurally unknown inventory denominator.": {
+            "$ref": "./examples/WorkspaceDiscoveries_Get_BaselineUnknown.json"
+          },
+          "Get a partially succeeded result with classified guidance, system uncertainty, and a truncated warning sample.": {
+            "$ref": "./examples/WorkspaceDiscoveries_Get_PartialMixed.json"
+          },
+          "Get a terminal failed discovery without an accepted inventory result.": {
+            "$ref": "./examples/WorkspaceDiscoveries_Get_Failed.json"
+          },
+          "Get an established discovery result with a known resource population.": {
+            "$ref": "./examples/WorkspaceDiscoveries_Get_Established.json"
+          },
+          "Get an established discovery result with an authoritatively empty expected set.": {
+            "$ref": "./examples/WorkspaceDiscoveries_Get_KnownEmpty.json"
           }
         }
       }
@@ -3418,13 +2946,13 @@
         "description": "Triggers scenario evaluation for the workspace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3454,7 +2982,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3478,13 +3006,13 @@
         "description": "Get a list of scenarios.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3506,7 +3034,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3529,13 +3057,13 @@
         "description": "Get a scenario.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3566,7 +3094,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3584,13 +3112,13 @@
         "description": "Create or update a scenario.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3636,13 +3164,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Create a scenario from a built-in scenario template version.": {
             "$ref": "./examples/Scenarios_CreateOrUpdate_From_Template.json"
+          },
+          "Create or update a scenario that continues past suppressed action failures.": {
+            "$ref": "./examples/Scenarios_CreateOrUpdate_With_Failure_Behavior.json"
           },
           "Create or update a scenario.": {
             "$ref": "./examples/Scenarios_CreateOrUpdate.json"
@@ -3657,13 +3188,13 @@
         "description": "Delete a scenario.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3694,7 +3225,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3714,13 +3245,13 @@
         "description": "Get a list of scenario definitions.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3751,7 +3282,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3774,13 +3305,13 @@
         "description": "Get a scenario definition.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3820,7 +3351,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3838,13 +3369,13 @@
         "description": "Create or update a scenario definition.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3910,7 +3441,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3935,13 +3466,13 @@
         "description": "Delete a scenario definition.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -3992,7 +3523,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4016,13 +3547,13 @@
         "description": "Execute the scenario execution with the given scenario configuration.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -4070,7 +3601,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4094,13 +3625,13 @@
         "description": "Fixes resource permissions for the given scenario configuration.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -4156,7 +3687,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4180,13 +3711,13 @@
         "description": "Validate the given scenario configuration.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -4234,7 +3765,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4258,13 +3789,13 @@
         "description": "Get a list of scenario runs.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -4295,7 +3826,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4318,13 +3849,13 @@
         "description": "Get a scenario run.\n\nThis endpoint is also the polling target for ScenarioConfigurations.execute\nand ScenarioRuns.cancel (final-state-via: location). While the run is in\nprogress the service returns 202 with a Location header pointing back to\nthis URL; clients must keep polling until they receive 200, which carries\nthe final ScenarioRun body.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -4383,11 +3914,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
+          "Get a scenario run that completed with suppressed action failures.": {
+            "$ref": "./examples/ScenarioRuns_Get_Partially_Succeeded.json"
+          },
           "Get a scenario run.": {
             "$ref": "./examples/ScenarioRuns_Get.json"
           }
@@ -4403,13 +3937,13 @@
         "description": "Cancel the currently running scenario execution.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -4456,7 +3990,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4488,7 +4022,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4531,6 +4065,60 @@
           }
         ]
       }
+    },
+    "ActionError": {
+      "type": "object",
+      "description": "Structured information about a scenario action failure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The stable code that identifies the action failure.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The customer-safe description of the action failure.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Additional customer-safe details about the action failure.",
+          "items": {
+            "$ref": "#/definitions/ActionErrorDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ActionErrorDetail": {
+      "type": "object",
+      "description": "Additional information about a scenario action failure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The stable code that identifies the failure detail.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The customer-safe description of the failure detail.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target associated with the failure detail.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "ActionKind": {
       "type": "string",
@@ -4765,7 +4353,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4843,7 +4431,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4918,7 +4506,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5223,7 +4811,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5232,8 +4820,7 @@
       "description": "The kind of connection, indicating the actor type authorized to reach the Chaos Studio data plane for the workspace and target.",
       "enum": [
         "AksExtension",
-        "ChaosAgent",
-        "Csfi"
+        "ChaosAgent"
       ],
       "x-ms-enum": {
         "name": "ConnectionKind",
@@ -5248,11 +4835,6 @@
             "name": "ChaosAgent",
             "value": "ChaosAgent",
             "description": "A connection backed by the Chaos agent installed on the target resource."
-          },
-          {
-            "name": "Csfi",
-            "value": "Csfi",
-            "description": "A connection backed by Cloud Service Fault Injection (CSFI)."
           }
         ]
       }
@@ -5306,10 +4888,6 @@
         "certificateIssuer": {
           "type": "string",
           "description": "The issuer of the certificate used to authenticate the connection."
-        },
-        "dstsPrincipal": {
-          "type": "string",
-          "description": "The dSTS principal name used to authenticate the connection."
         },
         "dataPlaneEndpoint": {
           "type": "string",
@@ -5462,7 +5040,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5521,6 +5099,19 @@
         "scope": {
           "type": "string",
           "description": "The scope of the discovered resource.",
+          "readOnly": true
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure region of the discovered resource.",
+          "readOnly": true
+        },
+        "zones": {
+          "type": "array",
+          "description": "The availability zones of the discovered resource.",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true
         }
       },
@@ -5589,7 +5180,7 @@
       "description": "Model that represents a Experiment resource.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "properties": {
@@ -5603,7 +5194,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -5646,7 +5237,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5905,7 +5496,7 @@
           }
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       }
@@ -5919,6 +5510,30 @@
           "format": "arm-id",
           "description": "The resource ID of the external resource."
         }
+      }
+    },
+    "FailureBehavior": {
+      "type": "string",
+      "description": "Enum of how a scenario run reacts when an action fails.",
+      "enum": [
+        "Stop",
+        "Continue"
+      ],
+      "x-ms-enum": {
+        "name": "FailureBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Stop",
+            "value": "Stop",
+            "description": "The action failure stops the scenario run and drives it to the `Failed` terminal state.\nThis is the effective behavior when no `failureBehavior` is supplied."
+          },
+          {
+            "name": "Continue",
+            "value": "Continue",
+            "description": "The action failure is suppressed: it does not by itself end the scenario run, and the run\ncontinues with its remaining actions. Suppression affects the run's result only. It does not\nchange dependency scheduling, which stays under the control of each action's `runAfter` —\nan action that should still start after a failed dependency says so there.\n\nA run that completes normally and whose action failures were all suppressed terminates as\n`PartiallySucceeded`. Any failure that is not suppressed still drives the run to `Failed`,\nand cancellation keeps its existing result."
+          }
+        ]
       }
     },
     "FilterType": {
@@ -6134,7 +5749,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -6292,279 +5907,6 @@
         "logicalZone"
       ]
     },
-    "PrivateAccess": {
-      "type": "object",
-      "description": "PrivateAccesses tracked resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateAccessProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "PrivateAccessListResult": {
-      "type": "object",
-      "description": "Model that represents a list of private access resources and a link for pagination.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PrivateAccess items on this page",
-          "items": {
-            "$ref": "#/definitions/PrivateAccess"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PrivateAccessPatch": {
-      "type": "object",
-      "description": "Describes a private access update.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "PrivateAccessProperties": {
-      "type": "object",
-      "description": "The properties of a private access resource",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Most recent provisioning state for the given privateAccess resource.",
-          "readOnly": true
-        },
-        "privateEndpointConnections": {
-          "type": "array",
-          "description": "A readonly collection of private endpoint connection. Currently only one endpoint connection is supported.",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          },
-          "readOnly": true
-        },
-        "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccessOption",
-          "description": "Public Network Access Control for PrivateAccess resource."
-        }
-      }
-    },
-    "PrivateEndpoint": {
-      "type": "object",
-      "description": "The private endpoint resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The Azure identifier for private endpoint.",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "type": "object",
-      "description": "The private endpoint connection resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateEndpointConnectionListResult": {
-      "type": "object",
-      "description": "A list of private link resources",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PrivateEndpointConnection items on this page",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PrivateEndpointConnectionProperties": {
-      "type": "object",
-      "description": "Properties of the private endpoint connection.",
-      "properties": {
-        "groupIds": {
-          "type": "array",
-          "description": "The group ids for the private endpoint resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "The private endpoint resource."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "A collection of information about the state of the connection between service consumer and provider."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the private endpoint connection resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "privateLinkServiceConnectionState"
-      ]
-    },
-    "PrivateEndpointServiceConnectionStatus": {
-      "type": "string",
-      "description": "The private endpoint connection status.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Rejected"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointServiceConnectionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "Pending status."
-          },
-          {
-            "name": "Approved",
-            "value": "Approved",
-            "description": "Approved status."
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected",
-            "description": "Rejected status."
-          }
-        ]
-      }
-    },
-    "PrivateLinkResource": {
-      "type": "object",
-      "description": "A private link resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "A list of private link resources",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PrivateLinkResource items on this page",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PrivateLinkResourceProperties": {
-      "type": "object",
-      "description": "Properties of a private link resource.",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "The private link resource group id.",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "type": "array",
-          "description": "The private link resource required member names.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "description": "The private link resource private link DNS zone name.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Resource provisioning state. Not currently in use.",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "type": "object",
-      "description": "A collection of information about the state of the connection between service consumer and provider.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
-        },
-        "description": {
-          "type": "string",
-          "description": "The reason for approval/rejection of the connection."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "A message indicating if changes on the service provider require any updates on the consumer."
-        }
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "Current provisioning state for a given Azure Chaos resource.",
@@ -6619,30 +5961,6 @@
         ]
       },
       "readOnly": true
-    },
-    "PublicNetworkAccessOption": {
-      "type": "string",
-      "description": "Public Network Access Control for PrivateAccess resource.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "PublicNetworkAccessOption",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enabled access."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled access."
-          }
-        ]
-      }
     },
     "Recommendation": {
       "type": "object",
@@ -6723,8 +6041,7 @@
           "readOnly": true
         },
         "errorCode": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "The error code.",
           "readOnly": true
         },
@@ -6964,7 +6281,6 @@
         "items": {
           "type": "array",
           "description": "Array of action dependencies.",
-          "minItems": 1,
           "items": {
             "$ref": "#/definitions/ActionDependency"
           },
@@ -6988,7 +6304,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -7038,6 +6354,10 @@
         "externalResource": {
           "$ref": "#/definitions/ExternalResource",
           "description": "External resource reference for the action."
+        },
+        "failureBehavior": {
+          "$ref": "#/definitions/FailureBehavior",
+          "description": "Per-action override for how the scenario run reacts when this action fails. When omitted,\nthe action inherits the scenario-level `failureBehavior`; when neither is supplied the\neffective behavior is `Stop`."
         }
       },
       "required": [
@@ -7057,7 +6377,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -7230,7 +6550,7 @@
     },
     "ScenarioProperties": {
       "type": "object",
-      "description": "Model that represents the properties of the scenario.",
+      "description": "Model that represents the properties of the scenario.\n\nA scenario's structure comes from exactly one of two sources, and they are\nmutually exclusive:\n\n- **Template-based**: `createdFrom` references a scenario template version,\nand that template is the authoritative source for the scenario's structure.\nInline `parameters` and `actions` are not used.\n- **Inline**: `createdFrom` is absent, and the scenario's structure is taken\nfrom the `parameters` and `actions` supplied in the request.\n\nSupplying neither source is rejected. This constraint cannot be expressed in\nthe schema and is enforced at request validation.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -7247,8 +6567,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Version of the scenario.",
-          "readOnly": true
+          "description": "Version of the scenario, supplied by the author. Defaults to `1.0` when not\nsupplied on create. This is the scenario's own version and is independent of\nthe version of any template it was created from."
         },
         "description": {
           "type": "string",
@@ -7256,7 +6575,7 @@
         },
         "parameters": {
           "type": "array",
-          "description": "Parameter definitions for the scenario.",
+          "description": "Parameter definitions for the scenario. Used as the scenario's parameter\ndefinitions when `createdFrom` is not supplied; not used when it is,\nbecause the referenced template is then the authoritative source for the\nscenario's structure.",
           "items": {
             "$ref": "#/definitions/ScenarioParameter"
           },
@@ -7266,7 +6585,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "Array of actions that define the scenario's orchestration.",
+          "description": "Array of actions that define the scenario's orchestration. Used as the\nscenario's actions when `createdFrom` is not supplied; not used when it is,\nbecause the referenced template is then the authoritative source for the\nscenario's structure. When supplied, at least one action must be present.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ScenarioAction"
@@ -7275,16 +6594,16 @@
             "name"
           ]
         },
+        "failureBehavior": {
+          "$ref": "#/definitions/FailureBehavior",
+          "description": "Scenario-wide default for how a scenario run reacts when one of its actions fails.\nAn action that does not supply its own `failureBehavior` inherits this value; when\nneither is supplied the effective behavior is `Stop`.\n\nNot used when `createdFrom` is supplied, for the same reason as `parameters` and\n`actions`: the referenced template version is then the authoritative source for the\nscenario's structure, and it supplies this policy too. A value sent in the request is\nignored in that case — on create the referenced template's policy is used, and on update\nthe policy of the already persisted template is preserved."
+        },
         "recommendation": {
           "$ref": "#/definitions/Recommendation",
           "description": "The recommendation information for this scenario.",
           "readOnly": true
         }
-      },
-      "required": [
-        "parameters",
-        "actions"
-      ]
+      }
     },
     "ScenarioRun": {
       "type": "object",
@@ -7297,7 +6616,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -7387,6 +6706,15 @@
           "readOnly": true,
           "x-ms-identifiers": []
         },
+        "warnings": {
+          "type": "array",
+          "description": "Customer-actionable warnings encountered during the scenario run.",
+          "items": {
+            "$ref": "#/definitions/ScenarioRunWarning"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "executionErrors": {
           "$ref": "#/definitions/ScenarioErrors",
           "description": "Business errors from fault injection — permission and resource state issues.",
@@ -7466,6 +6794,7 @@
         "Canceling",
         "Canceled",
         "Succeeded",
+        "PartiallySucceeded",
         "Failed"
       ],
       "x-ms-enum": {
@@ -7533,6 +6862,11 @@
             "description": "The scenario run has completed successfully."
           },
           {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The scenario run completed, but one or more actions failed and every one of those\nfailures was suppressed by the effective `failureBehavior`."
+          },
+          {
             "name": "Failed",
             "value": "Failed",
             "description": "The scenario run has failed."
@@ -7577,12 +6911,76 @@
           "format": "date-time",
           "description": "When the action was completed.",
           "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/ActionError",
+          "description": "Structured information about the action failure.",
+          "readOnly": true
+        },
+        "failureSuppressed": {
+          "type": "boolean",
+          "description": "Whether this action's failure was suppressed by the effective `failureBehavior`\nand therefore did not fail the scenario run. Present only for actions in the\n`Failed` state; absent otherwise.",
+          "readOnly": true
         }
       },
       "required": [
         "resources",
         "actionUrn",
         "state"
+      ]
+    },
+    "ScenarioRunWarning": {
+      "type": "object",
+      "description": "Customer-actionable warning associated with a scenario run.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The stable code that identifies the warning.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The customer-safe description of the warning.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Additional customer-safe details about the warning.",
+          "items": {
+            "$ref": "#/definitions/ScenarioRunWarningDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ScenarioRunWarningDetail": {
+      "type": "object",
+      "description": "Additional information about a scenario run warning.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The stable code that identifies the warning detail.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The customer-safe description of the warning detail.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target associated with the warning detail.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "code",
+        "message"
       ]
     },
     "ScenarioSummaryState": {
@@ -7672,7 +7070,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -7716,17 +7114,6 @@
           "description": "Description of what the template does, and what resilience question it answers.",
           "readOnly": true
         },
-        "resourceSelectors": {
-          "type": "array",
-          "description": "The resource selectors the template's actions target. Each selector names a group of\nresources of a single Azure resource type, and is referenced from an action through the\n`%%\\{resourceSelectors.\\<name\\>\\}%%` macro.",
-          "items": {
-            "$ref": "#/definitions/ScenarioTemplateResourceSelector"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
         "parameters": {
           "type": "array",
           "description": "Parameter definitions the template accepts. Values are supplied when the scenario created\nfrom this template is configured, and are referenced from an action through the\n`%%\\{parameters.\\<name\\>\\}%%` macro.",
@@ -7740,7 +7127,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nFour macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceSelectors.\\<name\\>\\}%%` — resolves to the resources discovered for that\nselector. The accepted names are declared by `resourceSelectors`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.",
+          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nThree macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.\n\nAn action's `failureBehavior` overrides the template-wide `failureBehavior` for that action\nalone; an action that does not carry one inherits the template-wide value.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ScenarioAction"
@@ -7749,31 +7136,16 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "failureBehavior": {
+          "$ref": "#/definitions/FailureBehavior",
+          "description": "Template-wide default for how a scenario run reacts when one of this template's actions\nfails. An action that does not carry its own `failureBehavior` inherits this value; when\nneither is present the effective behavior is `Stop`.\n\nA scenario created from this template takes this policy with the rest of the template's\nstructure, so it is also the scenario's resolved `failureBehavior`. Template versions\npublished before this policy existed do not carry one and report it as absent, which the\nrun resolves as `Stop`.",
+          "readOnly": true
         }
       },
       "required": [
         "latestVersion",
         "actions"
-      ]
-    },
-    "ScenarioTemplateResourceSelector": {
-      "type": "object",
-      "description": "Model that represents a named group of resources of a single Azure resource type that a\nscenario template's actions target.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the selector, as referenced by the `%%\\{resourceSelectors.\\<name\\>\\}%%` macro.",
-          "minLength": 1
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "The Azure resource type the selector matches, for example\n`Microsoft.Compute/virtualMachines`.",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "name",
-        "resourceType"
       ]
     },
     "ScenarioTemplateVersion": {
@@ -7790,7 +7162,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -7829,17 +7201,6 @@
           "description": "Description of what the template does, and what resilience question it answers.",
           "readOnly": true
         },
-        "resourceSelectors": {
-          "type": "array",
-          "description": "The resource selectors the template's actions target. Each selector names a group of\nresources of a single Azure resource type, and is referenced from an action through the\n`%%\\{resourceSelectors.\\<name\\>\\}%%` macro.",
-          "items": {
-            "$ref": "#/definitions/ScenarioTemplateResourceSelector"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
         "parameters": {
           "type": "array",
           "description": "Parameter definitions the template accepts. Values are supplied when the scenario created\nfrom this template is configured, and are referenced from an action through the\n`%%\\{parameters.\\<name\\>\\}%%` macro.",
@@ -7853,7 +7214,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nFour macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceSelectors.\\<name\\>\\}%%` — resolves to the resources discovered for that\nselector. The accepted names are declared by `resourceSelectors`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.",
+          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nThree macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.\n\nAn action's `failureBehavior` overrides the template-wide `failureBehavior` for that action\nalone; an action that does not carry one inherits the template-wide value.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ScenarioAction"
@@ -7862,6 +7223,11 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "failureBehavior": {
+          "$ref": "#/definitions/FailureBehavior",
+          "description": "Template-wide default for how a scenario run reacts when one of this template's actions\nfails. An action that does not carry its own `failureBehavior` inherits this value; when\nneither is present the effective behavior is `Stop`.\n\nA scenario created from this template takes this policy with the rest of the template's\nstructure, so it is also the scenario's resolved `failureBehavior`. Template versions\npublished before this policy existed do not carry one and report it as absent, which the\nrun resolves as `Stop`.",
+          "readOnly": true
         }
       },
       "required": [
@@ -8009,7 +7375,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8086,7 +7452,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8173,7 +7539,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8248,7 +7614,7 @@
       "description": "Model that represents a Workspace resource.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "properties": {
@@ -8262,8 +7628,73 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "WorkspaceCustomerManagedKeyEncryption": {
+      "type": "object",
+      "description": "A customer-managed key reference, not key material.",
+      "properties": {
+        "keyEncryptionKeyUrl": {
+          "$ref": "#/definitions/WorkspaceKeyEncryptionKeyUrl",
+          "description": "The versionless HTTPS Key Vault key URI in the supported cloud and Workspace\ntenant. The key vault must belong to the same Microsoft Entra tenant as\nthe Workspace. Its HTTPS origin must match the vault referenced by\nkeyVaultResourceId. The service validates the effective pair and caller\nvault-read permission synchronously through Azure Resource Manager before\ncreating public operation metadata, accepting the configuration operation,\npersisting requested encryption, or changing Storage or customer data.\nSupports RSA keys in Azure Key Vault and RSA-HSM keys in Premium Key Vault,\nwith key sizes of 2048, 3072, or 4096 bits. Premium RSA-HSM keys use the same\nvault URL. The separate Azure Managed HSM service is not supported;\nManaged HSM endpoints are rejected before operation acceptance.\nA key version, query string, or fragment is not permitted.\nAzure Storage follows key versions automatically. Keep the previous version\navailable for at least 24 hours after rotation."
+        },
+        "keyVaultResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified Azure resource ID of the key vault that contains the key.\nUse /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName},\nnot a key child resource, Managed HSM, or URL. Full PUT with CMK and PATCH\nthat changes either CMK member require Microsoft.KeyVault/vaults/read on\nthe effective vault. The service compares its canonical ID, tenant, and\nvault URI with the requested pair before accepting the operation.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "keyEncryptionKeyUrl",
+        "keyVaultResourceId"
+      ]
+    },
+    "WorkspaceCustomerManagedKeyEncryptionPatchMergePatchUpdateOrCreate": {
+      "type": "object",
+      "description": "A partial customer key reference, validated after merging with the stored setting.",
+      "properties": {
+        "keyEncryptionKeyUrl": {
+          "$ref": "#/definitions/WorkspaceKeyEncryptionKeyUrl",
+          "description": "The replacement versionless key URI. Omission retains the URI; null deletes\nit. A same-vault replacement retains the stored vault ID. The effective\npair is authorized and validated before acceptance; an incomplete or\nmismatched pair is rejected. Key path and name casing is preserved.",
+          "x-nullable": true
+        },
+        "keyVaultResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The vault resource ID to merge with the key URL. Omission retains the ID,\nbut does not bypass caller authorization when the URL changes. Null deletes\nthe ID; a remaining CMK object without both members is invalid. Changing\nvault requires a coherent new URL and ID pair.",
+          "x-nullable": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "WorkspaceCustomerManagedKeyOnboarding": {
+      "type": "object",
+      "description": "The service application that the customer authorizes to use the key.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "The Microsoft Entra application ID used for customer consent, returned for\nexisting Workspaces, including Microsoft-managed Workspaces. This does not\npermit adding CMK to an existing Microsoft-managed Workspace. Before\ncreating a Workspace with a customer key, obtain the application name and\nID for the target cloud from the service onboarding documentation or Portal,\nthen consent and grant key access. The configuring caller separately needs\nMicrosoft.KeyVault/vaults/read on the referenced vault.\nGET returns the same application ID.\nThis is not a service principal object ID or an identity selector.\nThe Workspace's top-level identity does not select this application.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "applicationId"
       ]
     },
     "WorkspaceDiscovery": {
@@ -8277,9 +7708,111 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "WorkspaceDiscoveryAccessWarning": {
+      "type": "object",
+      "description": "Neutral guidance when access versus absence could not be established.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The affected resource or member identity.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceDiscoveryWarning"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessIndeterminate"
+    },
+    "WorkspaceDiscoveryCompleteness": {
+      "type": "string",
+      "description": "The coverage classification of the accepted Azure Resource Manager discovery result, independent of operation status and cause.",
+      "enum": [
+        "Established",
+        "BaselineUnknown",
+        "VerificationIncomplete",
+        "KnownPartial"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceDiscoveryCompleteness",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Established",
+            "value": "Established",
+            "description": "All attainable expected resource occurrences were classified and represented, with no observed shortfall."
+          },
+          {
+            "name": "BaselineUnknown",
+            "value": "BaselineUnknown",
+            "description": "Required work completed without an observed gap, but a complete inventory denominator is structurally unavailable."
+          },
+          {
+            "name": "VerificationIncomplete",
+            "value": "VerificationIncomplete",
+            "description": "Required system verification did not complete or a proven accessible required resource was not represented."
+          },
+          {
+            "name": "KnownPartial",
+            "value": "KnownPartial",
+            "description": "Confirmed undelivered obligations remain and no required system-verification gap remains."
+          }
+        ]
+      }
+    },
+    "WorkspaceDiscoveryCount": {
+      "type": "integer",
+      "format": "int64",
+      "description": "A nonnegative count of the named discovery coverage unit. No resource-count maximum is defined.",
+      "minimum": 0
+    },
+    "WorkspaceDiscoveryCoverageSummary": {
+      "type": "object",
+      "description": "Aggregate coverage of expanded Azure Resource Manager scope occurrences. Non-Azure Resource Manager discovery ingress is outside this population. VerificationIncomplete dominates KnownPartial, then BaselineUnknown, then Established.",
+      "properties": {
+        "scopes": {
+          "$ref": "#/definitions/WorkspaceDiscoveryScopeCoverageSummary",
+          "description": "The scope-occurrence coverage partitions for this discovery result.",
+          "readOnly": true
+        },
+        "resources": {
+          "$ref": "#/definitions/WorkspaceDiscoveryResourceCoverageSummary",
+          "description": "Required resource occurrences only from scopes with a known complete expected inventory set. Absent exactly when knownExpectedSetCount is zero. Unknown is not a known empty set.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "scopes"
+      ]
+    },
+    "WorkspaceDiscoveryPermissionWarning": {
+      "type": "object",
+      "description": "Confirmed read-authorization guidance. Permission details are required composition, not an optional shell reused for other causes.",
+      "properties": {
+        "permission": {
+          "$ref": "#/definitions/PermissionError",
+          "description": "The affected resource, required permissions, recommended roles, and optional identity details.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "permission"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceDiscoveryWarning"
+        }
+      ],
+      "x-ms-discriminator-value": "RbacValidationFailed"
     },
     "WorkspaceDiscoveryProperties": {
       "type": "object",
@@ -8321,11 +7854,143 @@
           "type": "string",
           "description": "The resource snapshot ID produced by this discovery.",
           "readOnly": true
+        },
+        "completeness": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCompleteness",
+          "description": "The coverage established by the accepted discovery result for Azure Resource Manager scopes. Present with coverageSummary on newly produced snapshot results; absence is not Established or a known zero.",
+          "readOnly": true
+        },
+        "coverageSummary": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCoverageSummary",
+          "description": "Coverage facts for the accepted result. Scope counts, resource-occurrence counts, warning counts, and returned inventory-row counts are different units and must not be combined.",
+          "readOnly": true
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Confirmed access, missing-resource, or access-indeterminate guidance. System verification failures are reported in errors, not as permission warnings. The returned array may be a subset; use warningsTotalCount and warningsTruncated.",
+          "items": {
+            "$ref": "#/definitions/WorkspaceDiscoveryWarning"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "warningsTotalCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The deduplicated number of warning identities before sampling. Identity consists of the expanded scope, affected resource, and reason. Absent means no accepted warning population was recorded, not zero warnings.",
+          "readOnly": true
+        },
+        "warningsTruncated": {
+          "type": "boolean",
+          "description": "Whether warnings contains fewer entries than warningsTotalCount. False requires equality; true requires a smaller returned array. An accepted empty warning population is an empty array, zero total, and false.",
+          "readOnly": true
         }
       },
       "required": [
         "status",
         "workspaceId"
+      ]
+    },
+    "WorkspaceDiscoveryResourceCoverageSummary": {
+      "type": "object",
+      "description": "Required resource occurrences from known-set scopes, keyed by normalized scope and resource before global inventory-row deduplication. classifiedCount plus unclassifiedCount equals expectedCount, and coveredCount does not exceed classifiedCount.",
+      "properties": {
+        "expectedCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of unique required resource occurrences across known-set scopes, not the number of service-group container members or listed inventory rows.",
+          "readOnly": true
+        },
+        "classifiedCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of expected occurrences with a terminal access or presence classification.",
+          "readOnly": true
+        },
+        "unclassifiedCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of expected occurrences that required system verification could not classify.",
+          "readOnly": true
+        },
+        "coveredCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of classified expected occurrences actually represented in the produced snapshot. Access to a container or its descendants does not invent a resource occurrence.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "expectedCount",
+        "classifiedCount",
+        "unclassifiedCount",
+        "coveredCount"
+      ]
+    },
+    "WorkspaceDiscoveryResourceWarning": {
+      "type": "object",
+      "description": "Guidance for a resource or membership confirmed missing.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The affected resource or member identity.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceDiscoveryWarning"
+        }
+      ],
+      "x-ms-discriminator-value": "TargetNotFound"
+    },
+    "WorkspaceDiscoveryScopeCoverageSummary": {
+      "type": "object",
+      "description": "Two independent partitions of expanded scope occurrences after normalized-scope deduplication. Distinct service groups remain distinct even if their members coincide. The known/unknown counts and the four completeness counts each sum to totalCount.",
+      "properties": {
+        "totalCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of expanded Azure Resource Manager scope occurrences represented by the result.",
+          "readOnly": true
+        },
+        "knownExpectedSetCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of scopes with an authoritative complete expected resource-occurrence set, including authoritatively empty sets.",
+          "readOnly": true
+        },
+        "unknownExpectedSetCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of scopes whose complete expected inventory set is unavailable. A service group's known subscription or resource-group membership does not establish its descendant-resource denominator.",
+          "readOnly": true
+        },
+        "establishedCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of scopes with Established coverage.",
+          "readOnly": true
+        },
+        "baselineUnknownCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of scopes with a structurally unavailable denominator and no observed shortfall, including successful observed-empty container scans.",
+          "readOnly": true
+        },
+        "verificationIncompleteCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of scopes with required verification failure, unavailable required child enumeration, or a proven accessible required resource absent from the snapshot.",
+          "readOnly": true
+        },
+        "knownPartialCount": {
+          "$ref": "#/definitions/WorkspaceDiscoveryCount",
+          "description": "The number of scopes with confirmed undelivered obligations and no remaining system-verification gap.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "totalCount",
+        "knownExpectedSetCount",
+        "unknownExpectedSetCount",
+        "establishedCount",
+        "baselineUnknownCount",
+        "verificationIncompleteCount",
+        "knownPartialCount"
       ]
     },
     "WorkspaceDiscoveryStatus": {
@@ -8336,6 +8001,7 @@
         "Queued",
         "InProgress",
         "Succeeded",
+        "PartiallySucceeded",
         "Failed",
         "Canceled"
       ],
@@ -8364,6 +8030,11 @@
             "description": "The discovery completed successfully."
           },
           {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "Discovery produced an admissible result with an observed coverage shortfall. This status does not itself block scenario runs or evaluations; consumers requiring established coverage must also check completeness."
+          },
+          {
             "name": "Failed",
             "value": "Failed",
             "description": "The discovery failed."
@@ -8377,6 +8048,203 @@
       },
       "readOnly": true
     },
+    "WorkspaceDiscoveryWarning": {
+      "type": "object",
+      "description": "The common fields of a discovery guidance warning, discriminated by reason. Known reasons use their corresponding subtype; unknown future reasons retain these base fields.",
+      "properties": {
+        "scopeId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The normalized expanded source scope where the affected obligation was encountered.",
+          "readOnly": true
+        },
+        "scopeKind": {
+          "type": "string",
+          "description": "The source scope kind, such as Subscription, ResourceGroup, ServiceGroup, or Resource.",
+          "readOnly": true
+        },
+        "reason": {
+          "$ref": "#/definitions/WorkspaceDiscoveryWarningReason",
+          "description": "The confirmed guidance reason, not a system-verification failure.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable guidance with attribution appropriate to the reason.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "reason",
+      "required": [
+        "scopeId",
+        "scopeKind",
+        "reason",
+        "message"
+      ]
+    },
+    "WorkspaceDiscoveryWarningReason": {
+      "type": "string",
+      "description": "The confirmed guidance reason. Unknown future reasons preserve the common warning fields and must not be interpreted as a permission denial.",
+      "enum": [
+        "RbacValidationFailed",
+        "TargetNotFound",
+        "AccessIndeterminate"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceDiscoveryWarningReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RbacValidationFailed",
+            "value": "RbacValidationFailed",
+            "description": "The affected resource could not be read because of a confirmed authorization denial."
+          },
+          {
+            "name": "TargetNotFound",
+            "value": "TargetNotFound",
+            "description": "The affected resource or configured membership was confirmed missing."
+          },
+          {
+            "name": "AccessIndeterminate",
+            "value": "AccessIndeterminate",
+            "description": "Access versus absence could not be determined; guidance must state both possibilities."
+          }
+        ]
+      }
+    },
+    "WorkspaceEncryption": {
+      "type": "object",
+      "description": "The validated requested key and vault reference, onboarding information, and service observations.",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "$ref": "#/definitions/WorkspaceCustomerManagedKeyEncryption",
+          "description": "The requested customer-managed key. Its presence is fixed by accepted\nWorkspace creation: adding CMK to a Microsoft-managed Workspace or removing\nCMK from a CMK-created Workspace is rejected with InvalidEncryptionConfiguration.\nThe key pair remains updateable on CMK-created Workspaces, including after\na failed creation. A present object requires a coherent keyEncryptionKeyUrl and\nkeyVaultResourceId pair. After synchronous caller and vault validation,\nthe accepted pair can be returned while configuration is Pending.\nIt does not prove that active data already uses the requested key."
+        },
+        "customerManagedKeyOnboarding": {
+          "$ref": "#/definitions/WorkspaceCustomerManagedKeyOnboarding",
+          "description": "The service application to authorize before creating a new CMK Workspace; also returned for existing Workspaces.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/WorkspaceEncryptionStatus",
+          "description": "The observed result, separate from the requested setting.",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkspaceEncryptionPatchMergePatchUpdateOrCreate": {
+      "type": "object",
+      "description": "A partial encryption setting. Omitted fields are unchanged and null deletes a\nwritable field. A remaining customerManagedKeyEncryption object must have a\ncoherent key URL and vault resource ID. Read-only onboarding and status\ninputs are ignored. The accepted creation choice cannot change. Only a\nCMK-created Workspace can update the pair. Changing either member requires synchronous caller and\nvault validation of the merged pair, including any retained member.",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "$ref": "#/definitions/WorkspaceCustomerManagedKeyEncryptionPatchMergePatchUpdateOrCreate",
+          "description": "The customer key configuration to merge on a CMK-created Workspace.\nNull deletion is rejected on CMK and is a no-op only when already absent\non a Microsoft-managed Workspace. An empty object retains an existing\ncomplete pair without a lookup when neither member changes, but is invalid\nwhen the merged pair is incomplete. Unsupported mode changes are rejected\nbefore vault lookup, operation creation, desired mutation, or Storage effects.",
+          "x-nullable": true
+        }
+      }
+    },
+    "WorkspaceEncryptionProtection": {
+      "type": "string",
+      "description": "The last directly observed protection of active Workspace customer data.",
+      "enum": [
+        "CustomerManaged",
+        "MicrosoftManaged"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceEncryptionProtection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CustomerManaged",
+            "value": "CustomerManaged",
+            "description": "Active customer data uses customer-managed key protection."
+          },
+          {
+            "name": "MicrosoftManaged",
+            "value": "MicrosoftManaged",
+            "description": "Active customer data uses Microsoft-managed key protection."
+          }
+        ]
+      }
+    },
+    "WorkspaceEncryptionState": {
+      "type": "string",
+      "description": "The observed encryption state; this does not replace Workspace provisioningState.",
+      "enum": [
+        "NotConfigured",
+        "Pending",
+        "Applied",
+        "Failed",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceEncryptionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotConfigured",
+            "value": "NotConfigured",
+            "description": "No per-Workspace encryption configuration exists. Microsoft-managed protection applies."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "An encryption configuration operation is in progress."
+          },
+          {
+            "name": "Applied",
+            "value": "Applied",
+            "description": "A fresh check confirms the requested customer key and scoped customer-data access."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "An encryption configuration step or health check failed. See the error for corrective action."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "No usable fresh observation is available."
+          }
+        ]
+      }
+    },
+    "WorkspaceEncryptionStatus": {
+      "type": "object",
+      "description": "Service observations of protection and access for customer data under the Workspace encryption scope.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/WorkspaceEncryptionState",
+          "description": "The result of configuration or the most recent usable health observation.",
+          "readOnly": true
+        },
+        "observedProtection": {
+          "$ref": "#/definitions/WorkspaceEncryptionProtection",
+          "description": "The last directly observed active protection. Omitted when unknown.",
+          "readOnly": true
+        },
+        "observedKeyEncryptionKeyUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The active key URI reported by Azure Storage, including its version when\navailable. Omitted when unknown or when protection is Microsoft-managed.\nThis value is not inferred from the requested key.",
+          "readOnly": true
+        },
+        "lastCheckedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time of the observation, including a failed check.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The configuration or health error. Failed state includes a code and message.\nCustomerKeyAccessFailed means Azure Storage cannot use the customer key.\nEncryptionConfigurationFailed means a service-side configuration step failed.\nA more specific cause is included only when the platform response identifies it.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
     "WorkspaceEvaluation": {
       "type": "object",
       "description": "Model that represents the latest workspace evaluation result.",
@@ -8388,7 +8256,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8535,6 +8403,12 @@
       },
       "readOnly": true
     },
+    "WorkspaceKeyEncryptionKeyUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "A versionless HTTPS Azure Key Vault key URI, including Premium-vault RSA-HSM\nkeys. Azure Managed HSM endpoints are not supported. The service also\nvalidates the cloud host allowlist and tenant; a vault URL does not identify\nthe key type.",
+      "pattern": "^https://[a-zA-Z0-9-]+\\.vault\\.[a-zA-Z0-9.-]+/keys/[a-zA-Z0-9-]+$"
+    },
     "WorkspaceListResult": {
       "type": "object",
       "description": "Model that represents a list of Workspace resources and a link for pagination.",
@@ -8578,6 +8452,10 @@
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
+        },
+        "encryption": {
+          "$ref": "#/definitions/WorkspaceEncryption",
+          "description": "The requested customer key and service observations. Accepted creation fixes\nwhether customerManagedKeyEncryption is present. On PUT, omission of\nencryption or its CMK object, or an empty encryption object, is valid for\nMicrosoft-managed Workspaces but rejected for CMK-created Workspaces.\nNull is not a valid PUT value. A CMK-created Workspace can replace its key."
         }
       },
       "required": [
@@ -8596,8 +8474,23 @@
           }
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkspaceUpdateProperties",
+          "description": "The resource-specific fields to update. Omitted fields are unchanged."
+        }
+      }
+    },
+    "WorkspaceUpdateProperties": {
+      "type": "object",
+      "description": "The Workspace properties supported by partial updates.",
+      "properties": {
+        "encryption": {
+          "$ref": "#/definitions/WorkspaceEncryptionPatchMergePatchUpdateOrCreate",
+          "description": "A JSON Merge Patch of the requested encryption setting. Omission leaves the\nsetting unchanged. Null deletion is rejected on a CMK-created Workspace\nand is a no-op only when the setting is already absent on a Microsoft-managed\nWorkspace. The service validates the creation choice and merged pair first.",
+          "x-nullable": true
         }
       }
     },
