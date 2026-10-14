@@ -102,3 +102,35 @@ using TypeSpec.Http;
   "K8StransparentDataEncryption",
   "python"
 );
+
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+@@clientName(
+  SqlServerInstanceManagedInstanceLinkAssessmentRequest,
+  "ArcDataSqlServerInstanceManagedInstanceLinkAssessmentRequestContent",
+  "csharp"
+);
+@@clientName(
+  SqlServerInstanceRunTargetRecommendationJobRequest,
+  "ArcDataSqlServerInstanceRunTargetRecommendationJobRequestContent",
+  "csharp"
+);
+@@clientName(
+  SqlServerInstanceTargetRecommendationReportsRequest,
+  "ArcDataSqlServerInstanceTargetRecommendationReportsRequestContent",
+  "csharp"
+);
+@@clientName(
+  SqlServerInstanceJobsRequest,
+  "ArcDataSqlServerInstanceJobsRequestContent",
+  "csharp"
+);
+@@clientName(
+  SqlServerInstanceJobsStatusRequest,
+  "ArcDataSqlServerInstanceJobsStatusRequestContent",
+  "csharp"
+);
