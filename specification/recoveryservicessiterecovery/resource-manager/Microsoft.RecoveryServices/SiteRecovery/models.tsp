@@ -1,4 +1,4 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -5281,6 +5281,7 @@ model AddVCenterRequestProperties {
  * Input required to update vCenter.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model UpdateVCenterRequest {
   /**
    * The update VCenter Request Properties.
@@ -8216,6 +8217,7 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The OS family name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osFamilyName?: string;
 
   /**
@@ -10047,6 +10049,7 @@ model FabricQueryParameter {
   /**
    * The OS type to be used for fetching agent details.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 }
 
@@ -11768,6 +11771,7 @@ alias HyperVVirtualMachineDetailsProperties = {
   /**
    * The Last replication time.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osDetails?: OSDetails;
 
   /**
@@ -13057,6 +13061,7 @@ model InMageDiskExclusionInput {
 /**
  * Guest disk signature based disk exclusion option when doing enable protection of virtual machine in InMage provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InMageVolumeExclusionOptions {
   /**
    * The volume label. The disk having any volume with this label will be excluded from replication.
@@ -13072,6 +13077,7 @@ model InMageVolumeExclusionOptions {
 /**
  * Guest disk signature based disk exclusion option when doing enable protection of virtual machine in InMage provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model InMageDiskSignatureExclusionOptions {
   /**
    * The guest signature of disk to be excluded from replication.
@@ -15440,6 +15446,7 @@ model InMageRcmMobilityAgentDetails {
   /**
    * The OS family name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osFamilyName?: string;
 
   /**
@@ -16897,6 +16904,7 @@ model ManagedRunCommandScriptInput {
   /**
    * The script url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   scriptUrl: string;
 
   /**

@@ -130,7 +130,6 @@ model InvestigationResult {
   result: string;
 }
 
-@@clientName(RunParameters, "RunParametersContent", "csharp");
 @removed(Versions.v2025_10_03)
 @doc("The parameters used to run the investigation")
 model RunParameters {
@@ -396,7 +395,6 @@ model IssueResourceUpdate {
   properties?: IssuePropertiesUpdate;
 }
 
-@@clientName(ListParameter, "ListParameterContent", "csharp");
 @doc("Parameters for listing related entities")
 model ListParameter {
   @doc("The filter to apply on the operation. For example, to filter by relevance, use \"$filter=relevance eq 'Relevant'\". Note: this property is currently a placeholder and is not in use.")

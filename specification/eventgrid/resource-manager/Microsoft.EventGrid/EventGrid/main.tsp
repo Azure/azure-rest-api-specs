@@ -13,10 +13,11 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 import "./CaCertificate.tsp";
 import "./Channel.tsp";
 import "./ClientGroup.tsp";
-import "./Client.tsp";
+import "./ClientResource.tsp";
 import "./Domain.tsp";
 import "./DomainTopic.tsp";
 import "./EventSubscription.tsp";
@@ -60,9 +61,15 @@ namespace Microsoft.EventGrid;
  */
 enum Versions {
   /**
-   * The 2025-07-15-preview API version.
+   * The 2025-11-15-preview API version.
    */
-  v2025_07_15_preview: "2025-07-15-preview",
+  v2025_11_15_preview: "2025-11-15-preview",
+
+  /**
+   * The 2026-06-15-preview API version.
+   */
+  @previewVersion
+  v2026_06_15_preview: "2026-06-15-preview",
 }
 
 interface Operations

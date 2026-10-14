@@ -138,12 +138,55 @@ using TypeSpec.Http;
   "AggregatedCost"
 );
 
-@@clientLocation(EventsOperationGroup.listByBillingProfile, "Events");
-@@clientLocation(EventsOperationGroup.listByBillingAccount, "Events");
+@@clientLocation(
+  EventsOperationGroup.listByBillingProfile,
+  "Events",
+  "!javascript"
+);
+@@clientLocation(
+  EventsOperationGroup.listByBillingAccount,
+  "Events",
+  "!javascript"
+);
 
-@@clientLocation(LotsOperationGroup.listByBillingProfile, "Lots");
-@@clientLocation(LotsOperationGroup.listByBillingAccount, "Lots");
-@@clientLocation(LotsOperationGroup.listByCustomer, "Lots");
+@@clientLocation(
+  LotsOperationGroup.listByBillingProfile,
+  "Lots",
+  "!javascript"
+);
+@@clientLocation(
+  LotsOperationGroup.listByBillingAccount,
+  "Lots",
+  "!javascript"
+);
+@@clientLocation(LotsOperationGroup.listByCustomer, "Lots", "!javascript");
+
+@@clientLocation(
+  EventsOperationGroup.listByBillingProfile,
+  "EventsOperations",
+  "javascript"
+);
+@@clientLocation(
+  EventsOperationGroup.listByBillingAccount,
+  "EventsOperations",
+  "javascript"
+);
+
+@@clientLocation(
+  LotsOperationGroup.listByBillingProfile,
+  "LotsOperations",
+  "javascript"
+);
+@@clientLocation(
+  LotsOperationGroup.listByBillingAccount,
+  "LotsOperations",
+  "javascript"
+);
+@@clientLocation(
+  LotsOperationGroup.listByCustomer,
+  "LotsOperations",
+  "javascript"
+);
 
 @@path(
   ResourceScopeActionScope.scope,

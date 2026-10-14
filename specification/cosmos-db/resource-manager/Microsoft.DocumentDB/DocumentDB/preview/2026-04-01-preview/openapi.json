@@ -18481,7 +18481,7 @@
             "name": "body",
             "in": "body",
             "description": "The parameters to provide for the current fleet.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/FleetResourceUpdate"
             }
@@ -26016,6 +26016,13 @@
       "type": "object",
       "description": "Represents a fleet resource for updates.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
           "$ref": "#/definitions/FleetResourceProperties",
           "description": "Properties to update Azure Cosmos DB fleet resource.",

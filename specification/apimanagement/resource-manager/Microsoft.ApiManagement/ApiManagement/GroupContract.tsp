@@ -51,7 +51,8 @@ interface GroupContractOps
         @minLength(1)
         @maxLength(256)
         groupId: string,
-      }
+      },
+      ResourceName = "ApiManagementGroup"
     > {}
 
 alias GroupUserParentParameters = {
@@ -351,7 +352,9 @@ interface GroupContracts {
   /**
    * Remove existing user from existing group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{userId}")
   groupUserDelete is GroupUserOps.ActionSync<
@@ -395,7 +398,8 @@ interface WorkspaceGroupOps
         @minLength(1)
         @maxLength(256)
         groupId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceGroup"
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true })
@@ -599,7 +603,9 @@ interface WorkspaceGroup {
   /**
    * Remove existing user from existing group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/groups/{groupId}/users/{userId}")
   workspaceGroupUserDelete is WorkspaceGroupUserOps.ActionSync<

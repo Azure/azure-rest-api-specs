@@ -65,6 +65,14 @@ Cross-cutting review rules (secret detection, property mutability, naming conven
 
 Follow [github-actions.instructions.md](./instructions/github-actions.instructions.md) for instructions on developing and maintaining GitHub Actions code in this repository. This includes workflows, composite actions, and shared utilities.
 
+# eng/tools Development
+
+Follow [eng-tools.instructions.md](./instructions/eng-tools.instructions.md) for instructions on developing and testing the engineering tools under `eng/tools`. All tools in that directory follow the same patterns for development and testing.
+
+# Tooling documentation
+
+Keep READMEs focused on current contributor-facing guidance, not tooling history. Do not add documentation for routine dependency upgrades, internal refactors, or implementation changes when contributor commands, prerequisites, and workflows remain unchanged. When those do change, update the existing guidance rather than appending a migration narrative. Put upgrade rationale and implementation details in the PR description.
+
 <!-- LINKS -->
 
 [contoso-widget-manager]: ../specification/contosowidgetmanager/Contoso.WidgetManager/

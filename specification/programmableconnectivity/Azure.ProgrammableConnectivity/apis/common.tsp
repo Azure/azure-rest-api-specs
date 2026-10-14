@@ -56,6 +56,7 @@ model NetworkAccessIdentifierModel {
   networkAccessIdentifier?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 @doc("A custom error response for APC.")
 model ApcErrorResponse {
@@ -71,6 +72,7 @@ model ApcErrorResponse {
 model ApcError {
   ...Azure.Core.Foundations.Error;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The consent URL in case of a consent failure")
   consentUrl?: url;
 }

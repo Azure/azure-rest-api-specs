@@ -1,0 +1,66 @@
+{
+  "title": "Get KubernetesResources - ValidatingAdmissionPolicyBinding",
+  "operationId": "KubernetesResources_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubernetesResourceName": "validatingadmissionpolicybinding-deny-privileged-binding",
+    "api-version": "2026-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubernetesResources/validatingadmissionpolicybinding-deny-privileged-binding",
+        "name": "validatingadmissionpolicybinding-deny-privileged-binding",
+        "type": "Microsoft.KubernetesConfiguration/kubernetesResources",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "admissionregistration.k8s.io/v1",
+          "kind": "ValidatingAdmissionPolicyBinding",
+          "metadata": {
+            "name": "deny-privileged-binding",
+            "uid": "c9d0e1f2-a3b4-5678-cdef-901234567890",
+            "resourceVersion": "6789012",
+            "generation": 1,
+            "creationTimestamp": "2026-03-15T11:05:00Z",
+            "labels": [
+              {
+                "name": "policy.security.io/category",
+                "value": "pod-security"
+              }
+            ]
+          },
+          "spec": {
+            "admissionPolicyBindingPolicyName": "deny-privileged-containers",
+            "admissionPolicyValidationActions": [
+              "Deny",
+              "Audit"
+            ]
+          },
+          "status": {
+            "conditions": [
+              {
+                "type": "Ready",
+                "status": "True",
+                "reason": "BindingApplied",
+                "message": "PolicyBinding is active.",
+                "lastTransitionTime": "2026-03-15T11:06:00Z"
+              }
+            ]
+          },
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

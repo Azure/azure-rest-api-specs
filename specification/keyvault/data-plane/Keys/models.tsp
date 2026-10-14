@@ -83,6 +83,14 @@ union JsonWebKeyOperation {
   /** Indicates that the key can be used to unwrap another key. */
   unwrapKey: "unwrapKey",
 
+  /** Indicates that the key can be used to securely wrap another key. */
+  @added(KeyVault.Versions.v2026_05_01_preview)
+  secureWrapKey: "secureWrapKey",
+
+  /** Indicates that the key can be used to securely unwrap another key. */
+  @added(KeyVault.Versions.v2026_05_01_preview)
+  secureUnwrapKey: "secureUnwrapKey",
+
   /** Indicates that the key can be imported during creation. */
   `import`: "import",
 
@@ -1293,6 +1301,7 @@ model KeyRotationPolicyAttributes {
 /**
  * The get random bytes request object.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GetRandomBytesRequest {
   /**
    * The requested number of random bytes.

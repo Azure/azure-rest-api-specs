@@ -282,6 +282,23 @@ union DiskSecurityTypes {
 }
 
 /**
+ * Indicates the version of Confidential VM for the resource.
+ */
+union ConfidentialVMVersion {
+  string,
+
+  /**
+   * V1 indicates the resource does not have an associated Virtual Machine Metadata.
+   */
+  V1: "V1",
+
+  /**
+   * V2 indicates the resource has an associated Virtual Machine Metadata.
+   */
+  V2: "V2",
+}
+
+/**
  * Policy for controlling export on the disk.
  */
 union PublicNetworkAccess {
@@ -870,6 +887,7 @@ model KeyVaultAndSecretReference {
   /**
    * Url pointing to a key or secret in KeyVault
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretUrl: string;
 }
 
@@ -895,6 +913,7 @@ model KeyVaultAndKeyReference {
   /**
    * Url pointing to a key or secret in KeyVault
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl: string;
 }
 
@@ -946,6 +965,14 @@ model DiskSecurityProfile {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   secureVMDiskEncryptionSetId?: string;
+
+  /**
+   * Indicates the version of Confidential VM for the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_02)
+  confidentialVMVersion?: ConfidentialVMVersion;
 }
 
 /**
@@ -1111,6 +1138,94 @@ model GrantAccessData {
    * Used to specify the file format when making request for SAS on a VHDX file format snapshot
    */
   fileFormat?: FileFormat;
+}
+
+/**
+ * The type of the immutability policy. 'Unlocked' allows the policy to be modified by privileged users; 'Locked' prevents reduction of the immutability duration but allows extension of the lock period.
+ */
+@added(Versions.v2026_03_02)
+union ImmutabilityPolicyType {
+  string,
+
+  /**
+   * Privileged users can modify the snapshot's immutability policy, if it is unlocked type.
+   */
+  Unlocked: "Unlocked",
+
+  /**
+   * The snapshot immutability policy duration cannot be reduced but can be extended. The policy cannot be removed until the lock period expires.
+   */
+  Locked: "Locked",
+}
+
+/**
+ * Data used for updating the immutability policy of a snapshot.
+ */
+@added(Versions.v2026_03_02)
+model ImmutabilityPolicyData {
+  /**
+   * The immutability duration for the snapshot, in number of days.
+   */
+  @minValue(1)
+  immutabilityDurationDays: int32;
+
+  /**
+   * The type of the immutability policy. 'Unlocked' allows the policy to be modified by privileged users; 'Locked' prevents reduction of the immutability duration but allows extension of the lock period.
+   */
+  type: ImmutabilityPolicyType;
+}
+
+/**
+ * Data used for locking the immutability policy of a snapshot.
+ */
+@added(Versions.v2026_03_02)
+model ImmutabilityPolicyLockData {
+  /**
+   * The immutability duration for the snapshot, in number of days.
+   */
+  @minValue(0)
+  immutabilityDurationDays: int32;
+
+  /**
+   * The type of the immutability policy. 'Unlocked' allows the policy to be modified by privileged users; 'Locked' prevents reduction of the immutability duration but allows extension of the lock period.
+   */
+  type: ImmutabilityPolicyType;
+}
+
+/**
+ * The immutability policy currently applied to a snapshot.
+ */
+@added(Versions.v2026_03_02)
+model ImmutabilityPolicy {
+  /**
+   * The immutability duration for the snapshot, in number of days.
+   */
+  @visibility(Lifecycle.Read)
+  immutabilityDurationDays?: int32;
+
+  /**
+   * The type of the immutability policy.
+   */
+  @visibility(Lifecycle.Read)
+  type?: ImmutabilityPolicyType;
+
+  /**
+   * The time when the immutability policy was set on the snapshot.
+   */
+  @visibility(Lifecycle.Read)
+  policyStartTime?: utcDateTime;
+
+  /**
+   * The time when the immutability policy will expire on the snapshot.
+   */
+  @visibility(Lifecycle.Read)
+  policyExpirationTime?: utcDateTime;
+
+  /**
+   * Indicates whether the immutability policy has expired.
+   */
+  @visibility(Lifecycle.Read)
+  isPolicyExpired?: boolean;
 }
 
 /**
@@ -1391,6 +1506,7 @@ model KeyForDiskEncryptionSet {
   /**
    * Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl: string;
 }
 
@@ -1571,6 +1687,13 @@ model DiskRestorePointProperties {
    */
   @visibility(Lifecycle.Read)
   logicalSectorSize?: int32;
+
+  /**
+   * The state of snapshot which determines the access availability of the snapshot.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_02)
+  snapshotAccessState?: SnapshotAccessState;
 }
 
 /**
@@ -1751,6 +1874,13 @@ model SnapshotProperties {
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_01_02)
   snapshotAccessState?: SnapshotAccessState;
+
+  /**
+   * The immutability policy currently applied to this snapshot. Present only when an immutability policy has been configured.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_02)
+  immutabilityPolicy?: ImmutabilityPolicy;
 }
 
 /**

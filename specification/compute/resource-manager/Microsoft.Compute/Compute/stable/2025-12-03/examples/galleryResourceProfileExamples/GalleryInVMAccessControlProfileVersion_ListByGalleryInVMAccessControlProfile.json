@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-12-03",
+    "galleryName": "myGalleryName",
+    "inVMAccessControlProfileName": "myInVMAccessControlProfileName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery/inVMAccessControlProfiles/myInVMAccessControlProfileName/versions/1.0.0",
+            "properties": {
+              "mode": "Audit",
+              "defaultAccess": "Allow",
+              "rules": {
+                "privileges": [
+                  {
+                    "name": "GoalState",
+                    "path": "/machine",
+                    "queryParameters": {
+                      "comp": "goalstate"
+                    }
+                  }
+                ],
+                "roles": [
+                  {
+                    "name": "Provisioning",
+                    "privileges": [
+                      "GoalState"
+                    ]
+                  }
+                ],
+                "identities": [
+                  {
+                    "name": "WinPA",
+                    "userName": "SYSTEM",
+                    "groupName": "Administrators",
+                    "exePath": "C:\\Windows\\System32\\cscript.exe",
+                    "processName": "cscript"
+                  }
+                ],
+                "roleAssignments": [
+                  {
+                    "role": "Provisioning",
+                    "identities": [
+                      "WinPA"
+                    ]
+                  }
+                ]
+              },
+              "targetLocations": [
+                {
+                  "name": "West US"
+                },
+                {
+                  "name": "South Central US"
+                },
+                {
+                  "name": "East US"
+                }
+              ],
+              "excludeFromLatest": false,
+              "publishedDate": "2024-01-01T00:00:00Z",
+              "provisioningState": "Succeeded"
+            },
+            "location": "West US",
+            "name": "1.0.0"
+          }
+        ],
+        "nextLink": "http://svchost:99/subscriptions/subscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/inVMAccessControlProfiles/myInVMAccessControlProfileName/versions?$skiptoken=token/Subscriptions/subscriptionId/ResourceGroups/myResourceGroup/galleries/myGalleryName/inVMAccessControlProfiles/myInVMAccessControlProfileName/versions/myInVMAccessControlProfileVersionName"
+      }
+    }
+  },
+  "operationId": "GalleryInVMAccessControlProfileVersions_ListByGalleryInVMAccessControlProfile",
+  "title": "List gallery inVMAccessControlProfile versions in a gallery inVMAccessControlProfile."
+}

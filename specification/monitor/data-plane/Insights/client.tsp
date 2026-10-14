@@ -7,7 +7,7 @@ namespace ClientCustomizations;
 
 @@clientName(MonitorQueryMetrics, "Client", "go");
 
-@@clientName(MonitorQueryMetrics.batch, "queryResources");
+@@clientName(MonitorQueryMetrics.batch, "queryResources", "!autorest");
 
 using MonitorQueryMetrics;
 

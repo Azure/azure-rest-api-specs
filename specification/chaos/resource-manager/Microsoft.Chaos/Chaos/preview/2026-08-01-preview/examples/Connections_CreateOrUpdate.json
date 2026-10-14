@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "workspaceName": "exampleWorkspace",
+    "connectionName": "aksClusterConnection",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resource": {
+      "properties": {
+        "kind": "AksExtension",
+        "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/exampleRG/providers/Microsoft.ContainerService/managedClusters/exampleCluster",
+        "principalId": "00000000-0000-0000-0000-000000000000",
+        "tenantId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/connections/aksClusterConnection",
+        "name": "aksClusterConnection",
+        "type": "Microsoft.Chaos/workspaces/connections",
+        "properties": {
+          "kind": "AksExtension",
+          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/exampleRG/providers/Microsoft.ContainerService/managedClusters/exampleCluster",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "dataPlaneEndpoint": "https://eastus.dp.chaos.azure.com",
+          "status": "Connected",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2025-01-15T10:30:00.000Z",
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-01-15T10:30:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/connections/aksClusterConnection",
+        "name": "aksClusterConnection",
+        "type": "Microsoft.Chaos/workspaces/connections",
+        "properties": {
+          "kind": "AksExtension",
+          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/exampleRG/providers/Microsoft.ContainerService/managedClusters/exampleCluster",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "status": "Pending",
+          "provisioningState": "Creating"
+        },
+        "systemData": {
+          "createdAt": "2025-01-15T10:30:00.000Z",
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-01-15T10:30:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Connections_CreateOrUpdate",
+  "title": "Create or update a connection."
+}

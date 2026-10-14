@@ -355,7 +355,8 @@ interface WorkspaceApiOps
         @minLength(1)
         @maxLength(256)
         apiId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApi"
     > {}
 
 @armResourceOperations

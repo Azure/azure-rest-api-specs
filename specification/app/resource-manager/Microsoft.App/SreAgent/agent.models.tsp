@@ -24,13 +24,6 @@ model AgentPatch {
  * PATCH request bodies must not include required properties and should not include read-only properties.
  */
 model AgentPatchProperties {
-  /** The agent space ID referenced by the agent */
-  agentSpaceId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.App/agentSpaces";
-    }
-  ]>;
-
   /** Knowledge graph configuration for agent */
   knowledgeGraphConfiguration?: KnowledgeGraphConfiguration;
 
@@ -70,13 +63,6 @@ model AgentProperties {
   /** The power state of the Agent */
   @visibility(Lifecycle.Read)
   powerState?: AgentPowerState;
-
-  /** The agent space ID referenced by the agent */
-  agentSpaceId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.App/agentSpaces";
-    }
-  ]>;
 
   /** Knowledge graph configuration for agent */
   knowledgeGraphConfiguration?: KnowledgeGraphConfiguration;
@@ -228,6 +214,7 @@ model IncidentManagementConfiguration {
   connectionName?: string;
 
   /** The URL of the connection */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   connectionUrl?: string;
 
   /** The key for the connection */

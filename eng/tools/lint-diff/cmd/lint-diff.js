@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import { main } from "../dist/src/lint-diff.js";
+import { main } from "../src/lint-diff.ts";
 
 await main();

@@ -236,6 +236,7 @@ model ErrorResponseBody {
 /**
  * Describes the format of Error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse {
   /**
    * Error code
@@ -251,6 +252,7 @@ model ErrorResponse {
 /**
  * Describes the error if the operation is not successful.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**
@@ -263,6 +265,7 @@ model DefaultErrorResponse {
 /**
  * Error response describing why the operation failed.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DeleteErrorResponse {
   /**
@@ -275,6 +278,7 @@ model DeleteErrorResponse {
 /**
  * List of Grants info.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GrantListResponse {
   /**
    * The GrantDetails items on this page.

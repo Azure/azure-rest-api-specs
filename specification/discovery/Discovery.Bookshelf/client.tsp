@@ -19,3 +19,10 @@ using Azure.ClientGenerator.Core;
   "DiscoveryProvisioningState",
   "csharp"
 );
+
+// Bookshelf types
+@@clientName(
+  Microsoft.Discovery.Bookshelf.Citation,
+  "DiscoveryCitation",
+  "csharp"
+);

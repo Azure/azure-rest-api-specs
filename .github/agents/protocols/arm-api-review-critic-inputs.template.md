@@ -1,38 +1,28 @@
 <!-- Source of truth for the Critic-invocation input block. Both the
      Reviewer (Step 7) and the Critic (Operating mode) link here.
-     Schema definitions live in `arm-api-review-critic.protocol.md`; this file
-     is the **literal template** the Reviewer copies into every dispatch
-     prompt and every session-handoff paste. -->
+     Schema definitions and the non-empty response invariant live in
+     `arm-api-review-critic.protocol.md`; this file is the **reference
+     template** the Reviewer uses when constructing dispatch prompts. -->
 
-# Critic input-block template
+# Critic input block template
 
-The Reviewer MUST embed exactly one fenced YAML block with this schema
-in the prompt body it sends to the Critic dispatch (or pastes into the
-session-handoff prompt). The Critic MUST refuse to validate any
-invocation whose prompt does not contain exactly one such block. Field
-semantics, the empty-list rule, and the sentinel-string contract are
-defined in [`arm-api-review-critic.protocol.md` → Inputs the Reviewer passes
-to the Critic](./arm-api-review-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic).
+The Reviewer includes a labeled input block in every Critic dispatch
+prompt. The Critic uses **tolerant prose parsing**: it reads the labeled
+fields in any order, and applies the documented default for any optional
+field that is absent or unclear. Review target, Session SHA, the Step 6 findings
+report, and the Step 5.5 reconciliation plan or explicit sentinel are required.
 
-## Template (copy verbatim; substitute placeholders)
+## Template (copy and fill in; fields in any order are accepted)
 
-````markdown
-```yaml
-# critic-inputs/v1
-pr_url: https://github.com/<owner>/<repo>/pull/<number>
-session_sha: <full-40-char-sha> # Input #2
-files_reviewed: # Input #4
-  - path/to/file-a.json
-  - path/to/file-b.tsp
-previous_version: # Input #5; null when new service
-  base_sha_or_ref: <sha-or-ref>
-  path: specification/<service>/.../stable/<prev-version>
-prior_fail_sets: # Input #7; [] on iteration 1
-  iteration_n_minus_1: []
-  iteration_n_minus_2: []
-considered_and_declined: [] # Input #8; [] on iteration 1
-graphs_produced: true # Input #9; true | false | downgraded | degraded
-iteration: 1 # Input #10; 1..3
+```text
+Review target: PR https://github.com/<owner>/<repo>/pull/<number>
+Session SHA: <full-40-char-sha>
+Iteration: 1
+Graphs: true
+Files reviewed: path/to/file-a.json, path/to/file-b.tsp
+Previous version: specification/<service>/.../stable/<prev-version> at <full-40-char-base-sha>
+Prior fail sets: none
+Considered and declined: none
 ```
 
 ## Step 6 findings report
@@ -41,27 +31,76 @@ iteration: 1 # Input #10; 1..3
 
 ## Step 5.5 reconciliation plan
 
+Discussion inventory: inline threads <count> (pagination complete: yes/no);
+top-level PR comments <count> (pagination complete: yes/no); review bodies
+<count> (pagination complete: yes/no)
+
 <verbatim Step 5.5 plan from the Reviewer, or the literal string `reconciliation skipped`>
-````
 
-## Required invariants
+For a local review, replace the first six fields with:
 
-- The `# critic-inputs/v1` header comment is part of the contract;
-  removing it FAILs Critic input validation.
-- Inputs #7 and #8 MUST be explicit empty containers (`[]` or `none`)
-  on iteration 1, not omitted.
-- Input #6 is either a real plan under the `## Step 5.5 reconciliation
-plan` heading or the literal sentinel `reconciliation skipped` --
-  never an empty plan or omitted heading.
-- `session_sha` is the full 40-char commit SHA; short SHAs are a
-  validation failure.
-- `iteration` is `1`, `2`, or `3` -- the iteration cap (see
-  [protocol → Iteration discipline](./arm-api-review-critic.protocol.md#critic-verdict-tracks)).
+```text
+Review target: local workspace: <absolute-file-or-directory>
+Session SHA: local-sha256:<64-lowercase-hex>
+Iteration: 1
+Graphs: true
+Source manifest: <reviewed|previous-version|head>:<source>@sha256:<hash>, ...
+Previous version: <local-path>@sha256:<hash> (or None - new service); Repository HEAD: <full-40-char-sha>
+```
 
-## When something cannot be assembled
+Local review always uses the literal `reconciliation skipped` under
+`## Step 5.5 reconciliation plan`.
 
-If a required field cannot be filled in (e.g., session SHA never pinned
-because Step 1 failed), do **not** dispatch the Critic. Surface the gap
-to the human per Reviewer Step 7's fallback ladder; the Critic will
-return `Finding accuracy = FAIL` reason `missing-inputs` against any
-incomplete block.
+## Field reference
+
+| Field                            | Required?              | Default when absent            | Notes                                                                                                                               |
+| -------------------------------- | ---------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Review target                    | **Yes**                | —                              | Full PR URL / `owner/repo#number`, or `local workspace: <absolute-target>`.                                                         |
+| Session SHA                      | **Yes**                | —                              | PR: full 40-char head SHA. Local: `local-sha256:<64-lowercase-hex>` manifest digest.                                                |
+| Iteration                        | No                     | `1`                            | `1` through `3`.                                                                                                                    |
+| Graphs                           | No                     | `false; graph-mode: fast-path` | `true` = full graph diff. When false, mode is `fast-path`, `size-downgrade`, or `derivation-failed`.                                |
+| Files reviewed / source manifest | PR: No; local: **Yes** | PR: derived from findings      | PR: workspace-relative reviewed paths. Local: complete `reviewed`, `previous-version`, and applicable `head` source manifest.       |
+| Previous version                 | **Yes**                | —                              | PR path or `None - new service`, always with full base commit SHA. Local path/hash or `None - new service`, plus repository `HEAD`. |
+| Prior fail sets                  | No                     | Empty (none)                   | Rule-ID + file/line tuples from prior iterations; `none` on iteration 1.                                                            |
+| Considered and declined          | No                     | Empty (none)                   | Candidates the Reviewer chose not to promote, with one-line rationales.                                                             |
+| Step 6 findings report           | **Yes**                | —                              | Verbatim, under the `## Step 6 findings report` heading.                                                                            |
+| Step 5.5 reconciliation plan     | **Yes**                | —                              | Verbatim, including all three discussion-surface counts/pagination status, or the explicit sentinel `reconciliation skipped`.       |
+
+## Compact-mode template (iterations 2 and 3)
+
+For iterations 2 and 3, the Reviewer MAY send a compact payload. Include
+only the changed findings under `## Step 6 findings report` and a brief
+carry-over summary under `## Carry-over verdicts`. Re-pin the session SHA
+and run the file-drift check before sending.
+
+```text
+Review target: PR https://github.com/<owner>/<repo>/pull/<number>
+Session SHA: <full-40-char-sha>   (re-verified before this dispatch)
+Previous version: <path or None - new service>; Base SHA: <full-40-char-base-sha>
+Iteration: 2
+Graphs: true
+Prior fail sets: <rule-ID + file/line tuples from iteration 1>
+Considered and declined: <candidates declined in iteration 1 with rationales>
+```
+
+<!-- markdownlint-disable MD024 -->
+
+## Step 6 findings report
+
+<only the changed/added findings since iteration 1>
+
+## Carry-over verdicts
+
+<brief list: finding label — prior verdict — carry-over-stale: no/yes>
+
+## Step 5.5 reconciliation plan
+
+<verbatim plan, or `reconciliation skipped`>
+
+<!-- markdownlint-enable MD024 -->
+
+For a local compact dispatch, use `Review target: local workspace:
+<absolute-target>`, repeat the complete path/hash manifest, recompute the
+`local-sha256:` value before dispatch, repeat `Previous version: <path/hash or
+None - new service>; Repository HEAD: <full-40-char-sha>`, and keep
+`reconciliation skipped`.

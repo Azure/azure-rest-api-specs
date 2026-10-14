@@ -57,6 +57,7 @@ import "./MachineResource.tsp";
 import "./VmwareMachineSoftwareInventory.tsp";
 import "./VmwareRunAsAccountResource.tsp";
 import "./Vcenter.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

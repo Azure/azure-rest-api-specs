@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./back-compatible.tsp";
 import "./AzureTrafficCollector.tsp";
 import "./CollectorPolicy.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

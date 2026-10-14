@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-liftr-base";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -26,6 +27,11 @@ namespace Napster.CompanionAPI {
     @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
     @useDependency(LiftrBase.Versions.v3_preview)
     v2025_12_24_preview: "2025-12-24-preview",
+
+    /** 2026-08-11 version */
+    @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+    @useDependency(LiftrBase.Versions.v3_preview)
+    v2026_08_11: "2026-08-11",
   }
 
   @doc("Partner's specific Properties")

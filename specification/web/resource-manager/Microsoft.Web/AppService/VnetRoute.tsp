@@ -56,7 +56,8 @@ interface VnetRoutesOps
         @segment("routes")
         @key
         routeName: string,
-      }
+      },
+      ResourceName = "AppServicePlanVirtualNetworkConnectionRoute"
     > {}
 
 @tag("AppServicePlans")

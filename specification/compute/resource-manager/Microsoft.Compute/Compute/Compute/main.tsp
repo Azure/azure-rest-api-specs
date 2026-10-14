@@ -30,9 +30,12 @@ import "./RestorePointCollection.tsp";
 import "./RestorePoint.tsp";
 import "./CapacityReservationGroup.tsp";
 import "./CapacityReservation.tsp";
+import "./InterconnectBlock.tsp";
 import "./VirtualMachineRunCommand.tsp";
+import "./VirtualMachineDiagnosticRunCommand.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -69,10 +72,23 @@ enum Versions {
    */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_11_01: "2025-11-01",
+
+  /**
+   * The 2026-03-01 API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2026_03_01: "2026-03-01",
+
+  /**
+   * The 2026-04-01 API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2026_04_01: "2026-04-01",
 }
 
 // Fix https://github.com/Azure/typespec-azure/issues/4518 to use template
 interface Operations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @tag("ComputeOperations")
   @autoRoute
   @doc("List the operations for the provider")

@@ -12,8 +12,10 @@ namespace Microsoft.Cache;
 /**
  * A single Redis item in List or Get Operation.
  */
-model RedisResource
-  is Azure.ResourceManager.TrackedResource<RedisProperties, false> {
+model RedisResource is Azure.ResourceManager.TrackedResource<
+  RedisProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = RedisResource,
     KeyName = "cacheName",

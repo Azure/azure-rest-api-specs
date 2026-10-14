@@ -42,7 +42,6 @@ using Reservations;
 @@clientLocation(ReservationResponses.archive, "Reservation");
 @@clientLocation(ReservationResponses.unarchive, "Reservation");
 @@clientLocation(ReservationResponses.listRevisions, "Reservation");
-
 @@clientLocation(ReservationOperationGroup.listAll, "Reservation");
 
 @@clientLocation(ReservationOrderOperationGroup.calculate, "ReservationOrder");

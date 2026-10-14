@@ -7,6 +7,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

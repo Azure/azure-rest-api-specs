@@ -15,8 +15,10 @@ namespace Microsoft.DataFactory;
  * Change data capture resource type.
  */
 @parentResource(Factory)
-model ChangeDataCaptureResource
-  is Azure.ResourceManager.ProxyResource<ChangeDataCapture, false> {
+model ChangeDataCaptureResource is Azure.ResourceManager.ProxyResource<
+  ChangeDataCapture,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ChangeDataCaptureResource,
     KeyName = "changeDataCaptureName",

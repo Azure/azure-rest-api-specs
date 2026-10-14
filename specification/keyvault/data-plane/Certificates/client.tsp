@@ -12,6 +12,39 @@ namespace Customizations;
 @@clientName(KeyVault, "Client", "go");
 @@clientName(KeyVault, "Certificate", "rust");
 
+// C# customizations: the public Key Vault Certificates surface in .NET is the
+// hand-written `CertificateClient`, so the generated low-level transport is
+// renamed to avoid name collisions. The TypeSpec emitter places generated
+// types in the same `Azure.Security.KeyVault.Certificates` namespace as the
+// existing hand-written types (model-namespace: true is honored
+// inconsistently), so every wire model whose default name matches a
+// hand-written type needs a `csharp`-scoped rename. This is purely additive
+// — every rule is gated by the `"csharp"` discriminator and leaves Java /
+// Python / Go / JS / Rust output unchanged.
+@@clientName(KeyVault, "KeyVaultCertificatesClient", "csharp");
+@@clientName(CertificateAttributes, "CertificateAttributesBundle", "csharp");
+@@clientName(CertificateOperation, "CertificateOperationBundle", "csharp");
+@@clientName(CertificatePolicy, "CertificatePolicyBundle", "csharp");
+@@clientName(LifetimeAction, "LifetimeActionBundle", "csharp");
+@@clientName(
+  SubjectAlternativeNames,
+  "SubjectAlternativeNamesProperties",
+  "csharp"
+);
+@@clientName(
+  CertificateCreateParameters,
+  "CertificateCreateParametersBundle",
+  "csharp"
+);
+@@clientName(
+  CertificateUpdateParameters,
+  "CertificateUpdateParametersBundle",
+  "csharp"
+);
+@@clientName(IssuerParameters, "IssuerParametersBundle", "csharp");
+
+@@access(KeyVault, Access.internal, "csharp");
+
 using KeyVault;
 
 // Make optional path parameter required for all languages

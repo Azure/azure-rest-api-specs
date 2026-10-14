@@ -52,7 +52,8 @@ interface CertificateContractOps
         @minLength(1)
         @maxLength(80)
         certificateId: string,
-      }
+      },
+      ResourceName = "ApiManagementCertificate"
     > {}
 
 @armResourceOperations
@@ -227,7 +228,8 @@ interface WorkspaceCertificateOps
         @minLength(1)
         @maxLength(80)
         certificateId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceCertificate"
     > {}
 
 @armResourceOperations

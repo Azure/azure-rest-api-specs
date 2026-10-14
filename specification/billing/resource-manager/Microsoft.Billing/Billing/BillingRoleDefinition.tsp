@@ -65,7 +65,8 @@ alias BillingRoleDefinitionOps = Azure.ResourceManager.Legacy.ExtensionOperation
     @key
     @pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
     roleDefinitionName: string;
-  }
+  },
+  "BillingProfileRoleDefinition"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -128,7 +129,8 @@ alias BillingRoleDefinitionByCustomerOps = Azure.ResourceManager.Legacy.Extensio
     @key
     @pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
     roleDefinitionName: string;
-  }
+  },
+  "BillingCustomerRoleDefinition"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -191,7 +193,8 @@ alias BillingRoleDefinitionByInvoiceSectionOps = Azure.ResourceManager.Legacy.Ex
     @key
     @pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
     roleDefinitionName: string;
-  }
+  },
+  "BillingInvoiceSectionRoleDefinition"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -240,7 +243,8 @@ alias BillingRoleDefinitionByBillingAccountOps = Azure.ResourceManager.Legacy.Ex
     @key
     @pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
     roleDefinitionName: string;
-  }
+  },
+  "BillingRoleDefinition"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -296,7 +300,8 @@ alias BillingRoleDefinitionByDepartmentOps = Azure.ResourceManager.Legacy.Extens
     @key
     @pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
     roleDefinitionName: string;
-  }
+  },
+  "BillingDepartmentRoleDefinition"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -352,7 +357,8 @@ alias BillingRoleDefinitionByEnrollmentAccountOps = Azure.ResourceManager.Legacy
     @key
     @pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
     roleDefinitionName: string;
-  }
+  },
+  "BillingEnrollmentAccountRoleDefinition"
 >;
 
 @armResourceOperations(#{ omitTags: true })

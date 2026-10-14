@@ -14,28 +14,26 @@ export async function getSDKSuppressionsChangedFiles() {
 }
 
 /**
- * @param yamlContent
- * @returns {result: string | object | undefined | null, message: string}
- * special return
- * if the content is empty, return {result: null, message: string
- * if the file parse error, return {result: undefined, message: string
+ * Parses YAML for subsequent schema validation.
+ * Returns null for empty content and undefined when parsing fails.
  */
 export function parseYamlContent(
   yamlContent: string,
   path: string,
 ): {
-  result: string | object | undefined | null;
+  result: unknown;
   message: string;
 } {
-  let content = undefined;
+  let content: unknown;
   // if yaml file is not a valid yaml, catch error and return undefined
   try {
     content = yamlParse(yamlContent);
   } catch (error) {
-    console.error(`The file parsing failed in the ${path}. Details: ${error}`);
+    const message = `The file parsing failed in the ${path}. Details: ${String(error)}`;
+    console.error(message);
     return {
       result: content,
-      message: `The file parsing failed in the ${path}. Details: ${error}`,
+      message,
     };
   }
 

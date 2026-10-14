@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -97,6 +99,18 @@ union AuthenticationType {
 
   /**
    * identityBased
+   */
+  identityBased: "identityBased",
+}
+
+/**
+ * Specifies authentication type being used for connecting to the event stream account.
+ */
+union EventStreamAuthenticationType {
+  string,
+
+  /**
+   * identityBased authentication
    */
   identityBased: "identityBased",
 }
@@ -270,6 +284,7 @@ union IotHubSku {
   /**
    * GEN2
    */
+  @removed(Versions.v2026_05_01_preview)
   GEN2: "GEN2",
 }
 
@@ -431,7 +446,7 @@ union RouteErrorSeverity {
 /**
  * The permissions assigned to the shared access policy.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of access-right combinations (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum AccessRights {
   /**
    * RegistryRead
@@ -512,7 +527,7 @@ enum AccessRights {
 /**
  * The desired action for requests captured by this rule.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of values (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum IpFilterActionType {
   /**
    * Accept
@@ -528,7 +543,7 @@ enum IpFilterActionType {
 /**
  * The billing tier for the IoT hub.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of billing tiers (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum IotHubSkuTier {
   /**
    * Free
@@ -548,13 +563,14 @@ enum IotHubSkuTier {
   /**
    * Generation2
    */
+  @removed(Versions.v2026_05_01_preview)
   Generation2,
 }
 
 /**
  * The type of identity used for the resource. The type 'SystemAssigned,UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of identity types (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum ResourceIdentityType {
   /**
    * SystemAssigned
@@ -580,7 +596,7 @@ enum ResourceIdentityType {
 /**
  * The type of the scaling enabled.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of values (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum IotHubScaleType {
   /**
    * Automatic
@@ -601,7 +617,7 @@ enum IotHubScaleType {
 /**
  * The status of the job.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of job statuses (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum JobStatus {
   /**
    * unknown
@@ -637,7 +653,7 @@ enum JobStatus {
 /**
  * The reason for unavailability.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of values (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum IotHubNameUnavailabilityReason {
   /**
    * Invalid
@@ -726,6 +742,52 @@ model ErrorDetails {
 }
 
 /**
+ * The connection profile that the IoT hub uses for device connections.
+ */
+@added(Versions.v2026_10_01_preview)
+union ConnectionProfile {
+  string,
+
+  /**
+   * Classic connection profile.
+   */
+  Classic: "Classic",
+
+  /**
+   * MQTT v5 connection profile.
+   */
+  MqttV5: "MqttV5",
+}
+
+/**
+ * Settings for an Event Grid-backed MQTT v5 IoT hub.
+ */
+@added(Versions.v2026_10_01_preview)
+model MqttV5Settings {
+  /**
+   * The customer-defined groups of topic templates that devices publish to.
+   */
+  @identifiers(#["topicGroupId"])
+  topicGroups?: TopicGroup[];
+}
+
+/**
+ * A named set of topic templates for an Event Grid-backed MQTT v5 IoT hub.
+ */
+@added(Versions.v2026_10_01_preview)
+model TopicGroup {
+  /**
+   * The customer-supplied identifier used to reconcile the topic group during updates.
+   */
+  topicGroupId?: string;
+
+  /**
+   * The topic templates in this group.
+   */
+  topicTemplates?: string[];
+}
+
+/**
  * The properties of an IoT hub.
  */
 model IotHubProperties {
@@ -743,13 +805,13 @@ model IotHubProperties {
   /**
    * If true, all device(including Edge devices but excluding modules) scoped SAS keys cannot be used for authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name retained as-is to preserve backward compatibility with the published API; 'SAS' is a well-known acronym."
   disableDeviceSAS?: boolean;
 
   /**
    * If true, all module scoped SAS keys cannot be used for authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name retained as-is to preserve backward compatibility with the published API; 'SAS' is a well-known acronym."
   disableModuleSAS?: boolean;
 
   /**
@@ -791,7 +853,7 @@ model IotHubProperties {
   /**
    * The provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "provisioningState is typed as a free-form string in the published API; retained as-is to preserve backward compatibility."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -822,7 +884,7 @@ model IotHubProperties {
   /**
    * The Event Hub-compatible endpoint properties. The only possible keys to this dictionary is events. This key has to be present in the dictionary while making create or update calls for the IoT hub.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a dynamically-keyed dictionary of endpoints in the published API; a Record type is required to represent the open-ended key set."
   eventHubEndpoints?: Record<EventHubProperties>;
 
   /**
@@ -833,13 +895,13 @@ model IotHubProperties {
   /**
    * The list of Azure Storage endpoints where you can upload files. Currently you can configure only one Azure Storage account and that MUST have its key as $default. Specifying more than one storage account causes an error to be thrown. Not specifying a value for this property when the enableFileUploadNotifications property is set to True, causes an error to be thrown.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a dynamically-keyed dictionary of storage endpoints in the published API; a Record type is required to represent the open-ended key set."
   storageEndpoints?: Record<StorageEndpointProperties>;
 
   /**
    * The messaging endpoint properties for the file upload notification queue.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a dynamically-keyed dictionary of messaging endpoints in the published API; a Record type is required to represent the open-ended key set."
   messagingEndpoints?: Record<MessagingEndpointProperties>;
 
   /**
@@ -895,8 +957,29 @@ model IotHubProperties {
   ipVersion?: IpVersion;
 
   /**
+   * The connection profile that the IoT hub uses for device connections. Defaults to 'Classic'.
+   */
+  @added(Versions.v2026_10_01_preview)
+  connectionProfile?: ConnectionProfile = ConnectionProfile.Classic;
+
+  /**
+   * The custom topic configuration for an Event Grid-backed MQTT v5 IoT hub. This property is valid only when connectionProfile is 'MqttV5'.
+   */
+  @added(Versions.v2026_10_01_preview)
+  mqttV5Settings?: MqttV5Settings;
+
+  /**
    * Represents properties related to the Azure Device Registry (ADR).
    */
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "deviceRegistry")
+  deviceRegistryV1?: DeviceRegistry;
+
+  /**
+   * Represents properties related to the Azure Device Registry (ADR).
+   */
+  @added(Versions.v2026_10_01_preview)
+  @visibility(Lifecycle.Read)
   deviceRegistry?: DeviceRegistry;
 
   /**
@@ -941,13 +1024,13 @@ model SharedAccessSignatureAuthorizationRule {
   /**
    * The primary key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This key is part of the established response contract of the published API and cannot be removed without a breaking change."
   primaryKey?: string;
 
   /**
    * The secondary key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This key is part of the established response contract of the published API and cannot be removed without a breaking change."
   secondaryKey?: string;
 
   /**
@@ -1020,7 +1103,7 @@ model NetworkRuleSetIpRule {
 /**
  * The properties of a private endpoint connection
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "provisioningState on this properties model is typed per the published API contract and retained as-is to preserve backward compatibility."
 model PrivateEndpointConnectionProperties {
   /**
    * The private endpoint property of a private endpoint connection
@@ -1150,8 +1233,91 @@ model RoutingEndpoints {
   /**
    * The list of Cosmos DB container endpoints that IoT hub routes messages to, based on the routing rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name retained to match the published API; 'DB' reflects the Cosmos DB product name."
   cosmosDBSqlContainers?: RoutingCosmosDBSqlApiProperties[];
+
+  /**
+   * The list of event stream endpoints that IoT hub routes messages to, based on the routing rules.
+   */
+  @added(Versions.v2026_05_01_preview)
+  eventStreams?: RoutingEventStreamProperties[];
+}
+
+/**
+ * The supported formats for message payloads delivered to routing endpoints.
+ */
+@added(Versions.v2026_10_01_preview)
+union MessagePayloadFormat {
+  string,
+
+  /**
+   * Formats the message as a com.do.telemetry.observation.v1 payload.
+   */
+  DOObservationV1: "DOObservationV1",
+
+  /**
+   * Preserves the original message payload.
+   */
+  None: "None",
+}
+
+/**
+ * The properties related to an event stream endpoint.
+ */
+@added(Versions.v2026_05_01_preview)
+model RoutingEventStreamProperties {
+  /**
+   * The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.
+   */
+  @pattern("^[A-Za-z0-9-._]{1,64}$")
+  name: string;
+
+  /**
+   * Id of the event stream endpoint
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The url of the underlying event hub namespace of the event stream endpoint. It must include the protocol sb://
+   */
+  endpointUri: string;
+
+  /**
+   * Event hub name on the event hub namespace
+   */
+  entityPath: string;
+
+  /**
+   * Method used to authenticate against the event stream endpoint
+   */
+  authenticationType?: EventStreamAuthenticationType;
+
+  /**
+   * Managed identity properties of routing event stream endpoint.
+   */
+  identity?: ManagedIdentity;
+
+  /**
+   * The unique GUID of the target Microsoft Fabric workspace for the event stream endpoint.
+   */
+  workspaceId?: string;
+
+  /**
+   * The unique GUID of the target event stream under the workspace.
+   */
+  eventStreamId?: string;
+
+  /**
+   * The unique GUID of the custom source for the event stream.
+   */
+  sourceId?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1204,6 +1370,12 @@ model RoutingServiceBusQueueEndpointProperties {
    * The name of the resource group of the service bus queue endpoint.
    */
   resourceGroup?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1266,6 +1438,12 @@ model RoutingServiceBusTopicEndpointProperties {
    * The name of the resource group of the service bus topic endpoint.
    */
   resourceGroup?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1318,6 +1496,12 @@ model RoutingEventHubProperties {
    * The name of the resource group of the event hub endpoint.
    */
   resourceGroup?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1394,12 +1578,18 @@ model RoutingStorageContainerProperties {
    * Encoding that is used to serialize messages to blobs. Supported values are 'avro', 'avrodeflate', and 'JSON'. Default value is 'avro'.
    */
   encoding?: RoutingStorageContainerPropertiesEncoding;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
  * The properties related to a cosmos DB sql container endpoint.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Model name retained to match the published API schema name; 'DB' reflects the Cosmos DB product name."
 model RoutingCosmosDBSqlApiProperties {
   /**
    * The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.
@@ -1469,6 +1659,12 @@ model RoutingCosmosDBSqlApiProperties {
    * The template for generating a synthetic partition key value for use with this cosmos DB sql container. The template must include at least one of the following placeholders: {iothub}, {deviceid}, {DD}, {MM}, and {YYYY}. Any one placeholder may be specified at most once, but order and non-placeholder components are arbitrary. This parameter is only required if PartitionKeyName is specified.
    */
   partitionKeyTemplate?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1490,6 +1686,12 @@ model RouteProperties {
    * The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language
    */
   condition?: string;
+
+  /**
+   * The data schema reference that is used to interpret the message body.
+   */
+  @added(Versions.v2026_10_01_preview)
+  dataSchema?: string;
 
   /**
    * The list of endpoints to which messages that satisfy the condition are routed. Currently only one endpoint is allowed.
@@ -1543,7 +1745,7 @@ model EnrichmentProperties {
   /**
    * The key or name for the enrichment property.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is the enrichment property key/name, not a secret; it is part of the published API contract and retained for backward compatibility."
   key: string;
 
   /**
@@ -1732,14 +1934,120 @@ model RootCertificateProperties {
  */
 model DeviceRegistry {
   /**
-   * The identifier of the Azure Device Registry namespace associated with the GEN2 SKU hub.
+   * The identifier of the Azure Device Registry namespace
    */
   namespaceResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
+   * The UUID of the associated Azure Device Registry namespace.
+   */
+  @added(Versions.v2026_10_01_preview)
+  namespaceUuid?: string;
+
+  /**
+   * The host name for the data plane endpoint of the associated Azure Device Registry.
+   */
+  @added(Versions.v2026_10_01_preview)
+  dataPlaneHostName?: string;
+
+  /**
    * The identity used to manage the ADR namespace from the data plane.
    */
+  @removed(Versions.v2026_10_01_preview)
   identityResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The identity used to manage the ADR namespace from the data plane.
+   */
+  @added(Versions.v2026_10_01_preview)
+  identity?: DeviceRegistryIdentity;
+
+  /**
+   * The properties related to linking the IoT Hub with the Azure Device Registry.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @visibility(Lifecycle.Read)
+  linkingProperties?: DeviceRegistryLinkingProperties;
+}
+
+/**
+ * The identity used to manage the ADR namespace from the data plane.
+ */
+@added(Versions.v2026_10_01_preview)
+model DeviceRegistryIdentity {
+  /**
+   * The type of the identity.
+   */
+  type?: DeviceRegistryIdentityType;
+
+  /**
+   * The user assigned identity if the identity type is 'UserAssigned'.
+   */
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * The type of the identity.
+ */
+@added(Versions.v2026_10_01_preview)
+union DeviceRegistryIdentityType {
+  string,
+
+  /**
+   * Use a system-assigned managed identity to manage the ADR namespace.
+   */
+  SystemAssigned: "SystemAssigned",
+
+  /**
+   * Use a user-assigned managed identity to manage the ADR namespace.
+   */
+  UserAssigned: "UserAssigned",
+}
+
+/**
+ * The properties related to linking the IoT Hub with the Azure Device Registry.
+ */
+@added(Versions.v2026_10_01_preview)
+model DeviceRegistryLinkingProperties {
+  /**
+   * Indicates whether the IoT Hub is linked with an Azure Device Registry.
+   */
+  @visibility(Lifecycle.Read)
+  state?: DeviceRegistryLinkingState;
+
+  /**
+   * The last error encountered when linking the IoT Hub with an Azure Device Registry.
+   */
+  @visibility(Lifecycle.Read)
+  error?: ErrorDetails;
+}
+
+/**
+ * Indicates whether the IoT Hub is linked with an Azure Device Registry.
+ */
+@added(Versions.v2026_10_01_preview)
+union DeviceRegistryLinkingState {
+  string,
+
+  /**
+   * The IoT Hub linking with an Azure Device Registry is in progress.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * The IoT Hub is successfully linked with an Azure Device Registry.
+   */
+  Success: "Success",
+
+  /**
+   * The linked Azure Device Registry is no longer associated with the IoT Hub.
+   */
+  Orphaned: "Orphaned",
+
+  /**
+   * The IoT Hub failed to link with an Azure Device Registry.
+   */
+  Failed: "Failed",
 }
 
 /**
@@ -1763,7 +2071,7 @@ model IotHubSkuInfo {
   capacity?: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Model mirrors the published API identity contract; descriptions are retained as in the original specification."
 model ArmIdentity {
   /**
    * Principal Id
@@ -1785,17 +2093,17 @@ model ArmIdentity {
   /**
    * Dictionary of <ArmUserIdentity>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-assigned identities are keyed by resource ID in the published API; a Record type is required to represent the open-ended key set."
   userAssignedIdentities?: Record<ArmUserIdentity>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Model mirrors the published API user-assigned identity contract; descriptions are retained as in the original specification."
 model ArmUserIdentity {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Property mirrors the published API user-assigned identity contract; description retained as in the original specification."
   @visibility(Lifecycle.Read)
   principalId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Property mirrors the published API user-assigned identity contract; description retained as in the original specification."
   @visibility(Lifecycle.Read)
   clientId?: string;
 }
@@ -1868,19 +2176,19 @@ model Resource {
   /**
    * The resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM resource tags are an open-ended, user-defined key/value dictionary; a Record type is required to represent the open-ended key set."
   tags?: Record<string>;
 }
 
 /**
  * A container holding only the Tags for a resource, allowing the user to update the tags on an IoT Hub instance.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Tags-only PATCH body retained to match the published API update contract for backward compatibility."
 model TagsResource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM resource tags are an open-ended, user-defined key/value dictionary; a Record type is required to represent the open-ended key set."
   tags?: Record<string>;
 }
 
@@ -2134,6 +2442,7 @@ model OperationInputs {
 /**
  * The properties indicating whether a given IoT hub name is available.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IotHubNameAvailabilityInfo {
   /**
    * The value which indicates whether the provided name is available.
@@ -2253,13 +2562,13 @@ model RoutingMessage {
   /**
    * App properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Message application properties are user-defined, free-form key/value pairs with no fixed schema; a Record type is required to represent the open-ended key set."
   appProperties?: Record<string>;
 
   /**
    * System properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Message system properties are a free-form key/value map with no fixed schema; a Record type is required to represent the open-ended key set."
   systemProperties?: Record<string>;
 }
 
@@ -2270,26 +2579,26 @@ model RoutingTwin {
   /**
    * Twin Tags
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Device twin tags are user-defined, free-form key/value pairs with no fixed schema"
+  tags?: Record<unknown>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Property mirrors the published API device twin contract; description retained as in the original specification."
   properties?: RoutingTwinProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Model mirrors the published API device twin properties contract; description retained as in the original specification."
 model RoutingTwinProperties {
   /**
    * Twin desired properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  desired?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Device Twin Desired properties are user-defined, free-form key/value pairs with no fixed schema"
+  desired?: Record<unknown>;
 
   /**
-   * Twin desired properties
+   * Twin reported properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  reported?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Device Twin Reported properties are user-defined, free-form key/value pairs with no fixed schema"
+  reported?: Record<unknown>;
 }
 
 /**
@@ -2514,7 +2823,7 @@ model CertificateListDescription {
 /**
  * The description of an X509 CA Certificate.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This certificate properties model intentionally has no provisioningState in the published API; retained as-is to preserve backward compatibility."
 model CertificateProperties {
   /**
    * The certificate's subject name.
@@ -2562,15 +2871,22 @@ model CertificateProperties {
   /**
    * The reference to policy stored in Azure Device Registry (ADR).
    */
+  @removed(Versions.v2026_10_01_preview)
   policyResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Full certificate authority resource ID for ADR linked standard SKU hubs.
+   */
+  @added(Versions.v2026_10_01_preview)
+  certificateAuthorityResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 /**
  * The X509 Certificate.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "This is a non-standard resource shape from the published API's Proof-Of-Possession flow; a custom resource is required to faithfully reproduce the existing contract."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "This custom resource is returned only as the body of the generate-verification-code action and is not directly addressable, so it has no resource key."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy custom-resource support is required to faithfully reproduce the published API's non-standard certificate resource shape."
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model CertificateWithNonceDescription {
   /**
@@ -2661,7 +2977,14 @@ model CertificatePropertiesWithNonce {
   /**
    * The reference to policy stored in Azure Device Registry (ADR).
    */
+  @removed(Versions.v2026_10_01_preview)
   policyResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Full certificate authority resource ID for ADR linked standard SKU hubs.
+   */
+  @added(Versions.v2026_10_01_preview)
+  certificateAuthorityResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -2698,7 +3021,7 @@ model PrivateLinkResources {
 /**
  * The properties for a group information object
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This group-information properties model intentionally has no provisioningState in the published API; retained as-is to preserve backward compatibility."
 model GroupIdInformationProperties {
   /**
    * The group id

@@ -15,8 +15,10 @@ namespace Microsoft.Network;
  * Describes a DNS security rule.
  */
 @parentResource(DnsResolverPolicy)
-model DnsSecurityRule
-  is Azure.ResourceManager.TrackedResource<DnsSecurityRuleProperties, false> {
+model DnsSecurityRule is Azure.ResourceManager.TrackedResource<
+  DnsSecurityRuleProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DnsSecurityRule,
     KeyName = "dnsSecurityRuleName",

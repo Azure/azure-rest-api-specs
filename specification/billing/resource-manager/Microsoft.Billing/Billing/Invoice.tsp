@@ -58,7 +58,8 @@ alias InvoiceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     @pattern("^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$")
     invoiceName: string;
-  }
+  },
+  "BillingInvoice"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -300,7 +301,8 @@ alias InvoiceByBillingSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOp
     @key
     @pattern("^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$")
     invoiceName: string;
-  }
+  },
+  "SubscriptionBillingInvoice"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -417,7 +419,8 @@ alias InvoiceByIdOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     @pattern("^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$")
     invoiceName: string;
-  }
+  },
+  "DefaultBillingInvoice"
 >;
 
 @armResourceOperations(#{ omitTags: true })

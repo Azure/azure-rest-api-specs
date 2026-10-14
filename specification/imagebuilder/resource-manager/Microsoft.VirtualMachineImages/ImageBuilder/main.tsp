@@ -16,6 +16,7 @@ import "./back-compatible.tsp";
 import "./ImageTemplate.tsp";
 import "./RunOutput.tsp";
 import "./Trigger.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

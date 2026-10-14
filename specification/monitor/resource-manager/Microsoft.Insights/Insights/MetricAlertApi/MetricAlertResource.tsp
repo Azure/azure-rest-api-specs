@@ -14,8 +14,10 @@ namespace MetricAlertApi;
 /**
  * The metric alert resource.
  */
-model MetricAlertResource
-  is Azure.ResourceManager.TrackedResource<MetricAlertProperties, false> {
+model MetricAlertResource is Azure.ResourceManager.TrackedResource<
+  MetricAlertProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = MetricAlertResource,
     KeyName = "ruleName",

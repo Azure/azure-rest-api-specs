@@ -52,7 +52,8 @@ interface RelayServiceConnectionEntityOps
         @segment("hybridconnection")
         @key
         entityName: string,
-      }
+      },
+      ResourceName = "WebSiteHybridConnection"
     > {}
 
 @tag("WebApps")
@@ -127,7 +128,8 @@ interface RelayServiceConnectionEntityOperationGroupOps
         @segment("hybridconnection")
         @key
         entityName: string,
-      }
+      },
+      ResourceName = "WebSiteSlotHybridConnection"
     > {}
 
 @tag("WebApps")

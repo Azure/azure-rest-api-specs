@@ -26,8 +26,11 @@ model AvsAssessmentV2 is ProxyResource<AvsAssessmentPropertiesV2> {
   name: string;
 }
 
-model AvsAssessmentPropertiesV2
-  is AssessmentProperties<Scope, AvsAssessmentSettings, AssessmentDetails> {
+model AvsAssessmentPropertiesV2 is AssessmentProperties<
+  Scope,
+  AvsAssessmentSettings,
+  AssessmentDetails
+> {
   @doc("Gets or sets the machine assessment ARM ID for VM fallback.")
   fallbackMachineAssessmentArmId?: string;
 }

@@ -17,6 +17,7 @@ import "./Account.tsp";
 import "./EnterprisePolicy.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

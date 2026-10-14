@@ -27,7 +27,7 @@ model CertificateDescription
   /**
    * The entity tag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "etag is exposed at the resource envelope root in the published API; retained at this position to preserve backward compatibility."
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -52,7 +52,7 @@ interface CertificateDescriptions {
       /**
        * ETag of the Certificate. Do not specify for creating a brand new certificate. Required to update an existing certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "'If-Match' is a standard HTTP header name (RFC 9110) and must retain its canonical casing."
       @header("If-Match")
       `If-Match`?: string;
     },
@@ -70,7 +70,7 @@ interface CertificateDescriptions {
       /**
        * ETag of the Certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "'If-Match' is a standard HTTP header name (RFC 9110) and must retain its canonical casing."
       @header("If-Match")
       `If-Match`: string;
     },
@@ -101,7 +101,7 @@ interface CertificateDescriptions {
       /**
        * ETag of the Certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "'If-Match' is a standard HTTP header name (RFC 9110) and must retain its canonical casing."
       @header("If-Match")
       `If-Match`: string;
     },
@@ -121,7 +121,7 @@ interface CertificateDescriptions {
       /**
        * ETag of the Certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "'If-Match' is a standard HTTP header name (RFC 9110) and must retain its canonical casing."
       @header("If-Match")
       `If-Match`: string;
     },

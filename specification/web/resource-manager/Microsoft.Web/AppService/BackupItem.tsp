@@ -51,7 +51,8 @@ interface BackupItemOps
         @segment("backups")
         @key
         backupId: string,
-      }
+      },
+      ResourceName = "SiteBackup"
     > {}
 
 @tag("WebApps")
@@ -141,7 +142,8 @@ interface BackupItemOperationGroupOps
         @segment("backups")
         @key
         backupId: string,
-      }
+      },
+      ResourceName = "SiteSlotBackup"
     > {}
 
 @tag("WebApps")

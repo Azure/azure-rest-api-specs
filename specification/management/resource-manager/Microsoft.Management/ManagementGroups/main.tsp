@@ -17,6 +17,7 @@ import "./ManagementGroup.tsp";
 import "./SubscriptionUnderManagementGroup.tsp";
 import "./HierarchySettings.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

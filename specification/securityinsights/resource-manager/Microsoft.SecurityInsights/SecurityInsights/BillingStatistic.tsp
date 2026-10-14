@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 // FIXME: BillingStatistic has no properties property
@@ -63,3 +64,6 @@ interface BillingStatistics {
 @@doc(BillingStatistic.name, "The name of the billing statistic");
 @@minLength(Extension.ExternalResource.name, 1);
 @@maxLength(Extension.ExternalResource.name, 90);
+
+@@added(BillingStatistic, Versions.v2025_10_01_preview);
+@@added(BillingStatistics, Versions.v2025_10_01_preview);

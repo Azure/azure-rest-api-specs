@@ -51,7 +51,8 @@ interface LoggerContractOps
         @pattern("^[^*#&+:<>?]+$")
         @maxLength(256)
         loggerId: string,
-      }
+      },
+      ResourceName = "ApiManagementLogger"
     > {}
 
 @armResourceOperations
@@ -219,7 +220,8 @@ interface WorkspaceLoggerOps
         @pattern("^[^*#&+:<>?]+$")
         @maxLength(256)
         loggerId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceLogger"
     > {}
 
 @armResourceOperations

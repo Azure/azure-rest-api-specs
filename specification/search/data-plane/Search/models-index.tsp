@@ -325,9 +325,13 @@ union VectorQueryKind {
   Text: "text",
 
   /** Vector query where an url that represents an image value that needs to be vectorized is provided. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   ImageUrl: "imageUrl",
 
   /** Vector query where a base 64 encoded binary of an image that needs to be vectorized is provided. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   ImageBinary: "imageBinary",
 }
 
@@ -353,6 +357,8 @@ union VectorFilterMode {
   PreFilter: "preFilter",
 
   /** The filter will be applied after the global top-k candidate set of vector results is returned. This will result in fewer results than requested by the parameter 'k'. */
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   StrictPostFilter: "strictPostFilter",
 }
 
@@ -480,6 +486,7 @@ union AutocompleteMode {
 }
 
 /** Parameters grouped for search operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SearchOptions {
   /** A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. */
   @query("$count")
@@ -611,6 +618,7 @@ model SearchOptions {
 }
 
 /** Parameters grouped for suggest operations. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SuggestOptions {
   /** An OData expression that filters the documents considered for suggestions. */
   @query("$filter")
@@ -781,10 +789,10 @@ model QueryAnswerResult is Record<unknown> {
 }
 
 /** Contains debugging information that can be used to further explore your search results. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model DebugInfo {
   /** Contains debugging information specific to query rewrites. */
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   queryRewrites?: QueryRewritesDebugInfo;
 }
@@ -816,6 +824,7 @@ model QueryRewritesValuesDebugInfo {
 }
 
 /** Parameters for filtering, sorting, faceting, paging, and other search query behaviors. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SearchRequest {
   /** A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. */
   count?: boolean;
@@ -1195,6 +1204,7 @@ model SuggestResult {
 }
 
 /** Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SuggestRequest {
   /** An OData expression that filters the documents considered for suggestions. */
   filter?: string;
@@ -1318,6 +1328,7 @@ model AutocompleteItem {
 }
 
 /** Parameters for fuzzy matching, and other autocomplete query behaviors. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AutocompleteRequest {
   /** The search text on which to base autocomplete results. */
   search: string;
@@ -1343,7 +1354,6 @@ model AutocompleteRequest {
   /** The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. */
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
-  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @encode(ArrayEncoding.commaDelimited)
   searchFields?: string[];
 
@@ -1378,6 +1388,8 @@ model VectorizableTextQuery extends VectorQuery {
 }
 
 /** The query parameters to use for vector search when an url that represents an image value that needs to be vectorized is provided. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model VectorizableImageUrlQuery extends VectorQuery {
   /** The URL of an image to be vectorized to perform a vector search query. */
   url?: string;
@@ -1387,6 +1399,8 @@ model VectorizableImageUrlQuery extends VectorQuery {
 }
 
 /** The query parameters to use for vector search when a base 64 encoded binary of an image that needs to be vectorized is provided. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model VectorizableImageBinaryQuery extends VectorQuery {
   /** The base 64 encoded binary of an image to be vectorized to perform a vector search query. */
   base64Image?: string;

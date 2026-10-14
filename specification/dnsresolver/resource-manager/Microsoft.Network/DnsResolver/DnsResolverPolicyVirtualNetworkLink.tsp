@@ -14,18 +14,16 @@ namespace Microsoft.Network;
  * Describes a DNS resolver policy virtual network link.
  */
 @parentResource(DnsResolverPolicy)
-model DnsResolverPolicyVirtualNetworkLink
-  is Azure.ResourceManager.TrackedResource<
-    DnsResolverPolicyVirtualNetworkLinkProperties,
-    false
-  > {
+model DnsResolverPolicyVirtualNetworkLink is Azure.ResourceManager.TrackedResource<
+  DnsResolverPolicyVirtualNetworkLinkProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = DnsResolverPolicyVirtualNetworkLink,
     KeyName = "dnsResolverPolicyVirtualNetworkLinkName",
     SegmentName = "virtualNetworkLinks",
     NamePattern = "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
   >;
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   ...Legacy.EntityTagProperty;
 }

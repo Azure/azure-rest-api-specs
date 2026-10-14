@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "applicationName": "myManagedApplication",
+    "parameters": {
+      "authorizationAudience": "authorizationAudience",
+      "userAssignedIdentities": [
+        "IdentityOne",
+        "IdentityTwo"
+      ]
+    },
+    "resourceGroupName": "rg",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "accessToken": "access_token",
+            "authorizationAudience": "authorizationAudience",
+            "expiresIn": "1500",
+            "expiresOn": "1500",
+            "notBefore": "1500",
+            "resourceId": "resourceId",
+            "tokenType": "Bearer"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Applications_ListTokens",
+  "title": "List tokens for application"
+}

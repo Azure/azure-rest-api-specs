@@ -15,8 +15,10 @@ namespace Microsoft.OperationalInsights;
  * Value object for saved search results.
  */
 @parentResource(Workspace)
-model SavedSearch
-  is Azure.ResourceManager.ProxyResource<SavedSearchProperties, false> {
+model SavedSearch is Azure.ResourceManager.ProxyResource<
+  SavedSearchProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SavedSearch,
     KeyName = "savedSearchId",

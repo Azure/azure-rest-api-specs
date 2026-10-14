@@ -135,7 +135,8 @@ using Microsoft.Kusto;
   Databases.removePrincipals::parameters.body,
   "databasePrincipalsToRemove"
 );
-@@clientLocation(Databases.inviteFollower, "Database");
+@@clientLocation(Databases.inviteFollower, "Database", "!javascript");
+@@clientLocation(Databases.inviteFollower, "DatabaseOperations", "javascript");
 @@clientName(Databases.inviteFollower::parameters.body, "parameters");
 @@clientLocation(Databases.checkNameAvailability, DatabasePrincipalAssignments);
 @@clientName(

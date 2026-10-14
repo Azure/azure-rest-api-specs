@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./models/common.models.tsp";
 import "./models/pii.entity.recognition.tsp";
 import "./models/summarization.tsp";
+import "./client.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;

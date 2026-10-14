@@ -20,6 +20,7 @@ import "./AdooAuthResponse.tsp";
 import "./Template.tsp";
 import "./VersionedTemplate.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

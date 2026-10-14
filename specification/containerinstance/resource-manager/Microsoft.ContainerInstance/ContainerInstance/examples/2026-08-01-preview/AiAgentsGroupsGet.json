@@ -1,0 +1,34 @@
+{
+  "operationId": "AiAgentsGroups_Get",
+  "title": "Get a AiAgentsGroup",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "resourceGroupName": "myResourceGroup",
+    "aiAgentsGroupName": "myAiAgentsGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerInstance/aiAgentsGroups/myAiAgentsGroup",
+        "name": "myAiAgentsGroup",
+        "type": "Microsoft.ContainerInstance/aiAgentsGroups",
+        "location": "eastus",
+        "tags": {
+          "environment": "test"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "networkProfile": {
+            "subnets": [
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVNet/subnets/mySubnet"
+              }
+            ]
+          },
+          "managementResourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myAiAgentsGroup-mrg"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "Credits",
+          "properties": {
+            "location": "global",
+            "properties": {
+              "credit": {
+                "amount": 20000,
+                "currencyCode": "USD",
+                "grain": "FullTerm"
+              },
+              "endAt": "2027-12-12T00:00:00Z",
+              "productCode": "0002d726-0000-0160-330f-a0b98cdbbdc4",
+              "displayName": "Test Credit",
+              "startAt": "2026-12-12T00:00:00Z"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "valid": true
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Benefit_Validate",
+  "title": "CreditsValidateCreate"
+}

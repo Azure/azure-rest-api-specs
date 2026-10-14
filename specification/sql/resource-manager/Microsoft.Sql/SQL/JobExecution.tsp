@@ -56,7 +56,8 @@ alias JobExecutionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("executions")
     @key
     jobExecutionId: Azure.Core.uuid;
-  }
+  },
+  ResourceName = "SqlServerJobExecution"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -182,7 +183,8 @@ alias JobStepExecutionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("steps")
     @key
     stepName: string;
-  }
+  },
+  ResourceName = "SqlServerJobExecutionStep"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -289,7 +291,8 @@ alias JobTargetExecutionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("targets")
     @key
     targetId: Azure.Core.uuid;
-  }
+  },
+  ResourceName = "SqlServerJobExecutionStepTarget"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

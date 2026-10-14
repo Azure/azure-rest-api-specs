@@ -22,11 +22,10 @@ namespace Microsoft.DesktopVirtualization;
 @added(Versions.vLatestPreview)
 @parentResource(HostPool)
 @singleton("default")
-model SessionHostManagement
-  is Azure.ResourceManager.ProxyResource<
-    SessionHostManagementProperties,
-    false
-  > {
+model SessionHostManagement is Azure.ResourceManager.ProxyResource<
+  SessionHostManagementProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = SessionHostManagement,
     KeyName = "sessionHostManagements",
@@ -42,7 +41,7 @@ interface InitiateSessionHostUpdate {
   /**
    * Initiates a hostpool update or schedule an update for the future.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @action("initiateSessionHostUpdate")
   post is ArmResourceActionSync<
     SessionHostManagement,

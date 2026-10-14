@@ -254,6 +254,20 @@ union ImmutabilityState {
   Locked: "Locked",
 }
 
+/**
+ * Immutability config type.
+ */
+@added(Versions.v2026_05_01)
+union ImmutabilityType {
+  string,
+
+  /** Immutability is governed by policy. */
+  AsPerPolicy: "AsPerPolicy",
+
+  /** Immutability duration is time-based. */
+  TimeBased: "TimeBased",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union SoftDeleteState {
   string,
@@ -403,6 +417,7 @@ model RawCertificateData {
 /**
  * Certificate corresponding to a vault that can be used by clients to register themselves with the vault.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VaultCertificateResponse {
   /**
    * Resource name associated with the resource.
@@ -917,6 +932,12 @@ model VaultProperties {
    * ResourceGuardOperationRequests on which LAC check will be performed
    */
   resourceGuardOperationRequests?: string[];
+
+  /**
+   * Region of choice settings for this vault.
+   */
+  @added(Versions.v2026_07_01)
+  regionOfChoiceSettings?: RegionOfChoiceSettings;
 }
 
 /**
@@ -1273,6 +1294,30 @@ model SecuritySettings {
 model ImmutabilitySettings {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   state?: ImmutabilityState;
+
+  /**
+   * Immutability configuration of the vault — selects whether immutability is
+   * inherited from the backup policy (AsPerPolicy) or fixed for a specific
+   * duration (TimeBased).
+   */
+  @added(Versions.v2026_05_01)
+  configuration?: ImmutabilityConfiguration;
+}
+
+/**
+ * Immutability configuration of vault.
+ */
+@added(Versions.v2026_05_01)
+model ImmutabilityConfiguration {
+  /** Immutability type. 'AsPerPolicy' inherits duration from backup policy; 'TimeBased' requires explicit durationInDays. */
+  type?: ImmutabilityType;
+
+  /**
+   * Duration in days. Required when type is TimeBased, omitted when AsPerPolicy.
+   */
+  @minValue(30)
+  @maxValue(36135)
+  durationInDays?: int32;
 }
 
 /**
@@ -1684,6 +1729,7 @@ model ResourceCertificateAndAcsDetails extends ResourceCertificateDetails {
   authType: "AccessControlService";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClientDiscoveryResponse
   is Azure.Core.Page<ClientDiscoveryValueForSingleApi>;
 
@@ -1790,3 +1836,15 @@ model DeletedVaultUndeleteInput {
   VaultPropertiesRedundancySettings.crossRegionRestore,
   "Flag to show if Cross Region Restore is enabled on the Vault or not"
 );
+
+/**
+ * Region of choice settings at vault level.
+ * This setting allows customers to configure backups for datasources from different region.
+ */
+@added(Versions.v2026_07_01)
+model RegionOfChoiceSettings {
+  /**
+   * The status of region of choice settings - Enabled or Disabled.
+   */
+  status?: State;
+}

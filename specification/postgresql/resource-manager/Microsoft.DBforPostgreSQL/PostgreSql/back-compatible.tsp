@@ -185,11 +185,36 @@ using Microsoft.DBforPostgreSQL;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualEndpoint.properties);
 
-@@clientLocation(TuningOptionsOperationGroup.get, "TuningOptions");
-@@clientLocation(TuningOptionsOperationGroup.listByServer, "TuningOptions");
+@@clientLocation(
+  TuningOptionsOperationGroup.get,
+  "TuningOptions",
+  "!javascript"
+);
+@@clientLocation(
+  TuningOptionsOperationGroup.listByServer,
+  "TuningOptions",
+  "!javascript"
+);
 @@clientLocation(
   TuningOptionsOperationGroup.listRecommendations,
-  "TuningOptions"
+  "TuningOptions",
+  "!javascript"
+);
+
+@@clientLocation(
+  TuningOptionsOperationGroup.get,
+  "TuningOptionsOperations",
+  "javascript"
+);
+@@clientLocation(
+  TuningOptionsOperationGroup.listByServer,
+  "TuningOptionsOperations",
+  "javascript"
+);
+@@clientLocation(
+  TuningOptionsOperationGroup.listRecommendations,
+  "TuningOptionsOperations",
+  "javascript"
 );
 
 @@clientName(VirtualEndpoints.create::parameters.resource, "parameters");

@@ -25,11 +25,15 @@ options:
     service-name: "Cosmos DB for PostgreSql" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-postgresqlhsc"
+    service-dir: "sdk/cosmosforpostgresql"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-cosmosdbforpostgresql"
     flavor: azure
+    typespec-title-map:
+      DBforPostgreSQLClient: CosmosDBForPostgreSQL
+    compatibility-lro: true
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-postgresqlhsc"
+      name: "@azure/arm-cosmosdbforpostgresql"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/postgresqlhsc"
     emitter-output-dir: "{output-dir}/{service-dir}/armpostgresqlhsc"
@@ -46,3 +50,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

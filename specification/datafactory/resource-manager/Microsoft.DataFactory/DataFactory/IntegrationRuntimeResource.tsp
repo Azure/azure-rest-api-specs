@@ -15,8 +15,10 @@ namespace Microsoft.DataFactory;
  * Integration runtime resource type.
  */
 @parentResource(Factory)
-model IntegrationRuntimeResource
-  is Azure.ResourceManager.ProxyResource<IntegrationRuntime, false> {
+model IntegrationRuntimeResource is Azure.ResourceManager.ProxyResource<
+  IntegrationRuntime,
+  false
+> {
   ...ResourceNameParameter<
     Resource = IntegrationRuntimeResource,
     KeyName = "integrationRuntimeName",

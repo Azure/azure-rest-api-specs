@@ -85,6 +85,7 @@ import "./WorkflowTrigger.tsp";
 import "./WorkflowTriggerHistory.tsp";
 import "./WorkflowVersion.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -122,6 +123,11 @@ enum Versions {
    * The 2026-03-15 API version.
    */
   v2026_03_15: "2026-03-15",
+
+  /**
+   * The 2026-07-15 API version.
+   */
+  v2026_07_15: "2026-07-15",
 }
 
 @tag("Provider")

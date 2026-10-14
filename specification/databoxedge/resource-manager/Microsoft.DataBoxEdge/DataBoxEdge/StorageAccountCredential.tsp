@@ -15,11 +15,10 @@ namespace Microsoft.DataBoxEdge;
  * The storage account credential.
  */
 @parentResource(DataBoxEdgeDevice)
-model StorageAccountCredential
-  is Azure.ResourceManager.ProxyResource<
-    StorageAccountCredentialProperties,
-    false
-  > {
+model StorageAccountCredential is Azure.ResourceManager.ProxyResource<
+  StorageAccountCredentialProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = StorageAccountCredential,
     KeyName = "name",

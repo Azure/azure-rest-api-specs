@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./SyncGroup.tsp";
 
 using TypeSpec.Rest;
@@ -9,6 +10,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.StorageSync;
 /**
@@ -72,6 +74,37 @@ interface CloudEndpoints {
           @header("x-ms-request-id")
           @doc("Request id")
           xMsRequestId?: string;
+        }),
+    Error = StorageSyncError
+  >;
+
+  /**
+   * Patch a given CloudEndpoint.
+   */
+  @added(Versions.v2025_12_01)
+  @Azure.Core.useFinalStateVia("location")
+  update is ArmCustomPatchSync<
+    CloudEndpoint,
+    PatchModel = CloudEndpointUpdateParameters,
+    Response =
+      | (ArmResponse<CloudEndpoint> & {
+          @header("x-ms-correlation-request-id")
+          @doc("correlation request id.")
+          correlationRequestId?: string;
+
+          @header("x-ms-request-id")
+          @doc("request id.")
+          requestId?: string;
+        })
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CloudEndpoint> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @header("x-ms-correlation-request-id")
+          @doc("correlation request id.")
+          correlationRequestId?: string;
+
+          @header("x-ms-request-id")
+          @doc("request id.")
+          requestId?: string;
         }),
     Error = StorageSyncError
   >;
@@ -165,30 +198,29 @@ interface CloudEndpoints {
   postBackup is ArmResourceActionSync<
     CloudEndpoint,
     BackupRequest,
+    | (PostBackupResponse & {
+        @header("Location")
+        @doc("Operation Status Location URI")
+        location?: string;
 
-      | (PostBackupResponse & {
-          @header("Location")
-          @doc("Operation Status Location URI")
-          location?: string;
+        @header("x-ms-correlation-request-id")
+        @doc("correlation request id.")
+        xMsCorrelationRequestId?: string;
 
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id.")
-          xMsCorrelationRequestId?: string;
+        @header("x-ms-request-id")
+        @doc("request id.")
+        xMsRequestId?: string;
+      })
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PostBackupResponse> &
+        Azure.Core.Foundations.RetryAfterHeader> & {
+        @header("x-ms-correlation-request-id")
+        @doc("correlation request id.")
+        xMsCorrelationRequestId?: string;
 
-          @header("x-ms-request-id")
-          @doc("request id.")
-          xMsRequestId?: string;
-        })
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PostBackupResponse> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id.")
-          xMsCorrelationRequestId?: string;
-
-          @header("x-ms-request-id")
-          @doc("request id.")
-          xMsRequestId?: string;
-        }),
+        @header("x-ms-request-id")
+        @doc("request id.")
+        xMsRequestId?: string;
+      }),
     Error = StorageSyncError
   >;
 
@@ -199,18 +231,17 @@ interface CloudEndpoints {
   preRestore is ArmResourceActionSync<
     CloudEndpoint,
     PreRestoreRequest,
+    | OkResponse
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+        Azure.Core.Foundations.RetryAfterHeader> & {
+        @header("x-ms-correlation-request-id")
+        @doc("correlation request id.")
+        xMsCorrelationRequestId?: string;
 
-      | OkResponse
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id.")
-          xMsCorrelationRequestId?: string;
-
-          @header("x-ms-request-id")
-          @doc("request id.")
-          xMsRequestId?: string;
-        }),
+        @header("x-ms-request-id")
+        @doc("request id.")
+        xMsRequestId?: string;
+      }),
     Error = StorageSyncError
   >;
 
@@ -241,18 +272,17 @@ interface CloudEndpoints {
   postRestore is ArmResourceActionSync<
     CloudEndpoint,
     PostRestoreRequest,
+    | OkResponse
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+        Azure.Core.Foundations.RetryAfterHeader> & {
+        @header("x-ms-correlation-request-id")
+        @doc("correlation request id.")
+        xMsCorrelationRequestId?: string;
 
-      | OkResponse
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id.")
-          xMsCorrelationRequestId?: string;
-
-          @header("x-ms-request-id")
-          @doc("request id.")
-          xMsRequestId?: string;
-        }),
+        @header("x-ms-request-id")
+        @doc("request id.")
+        xMsRequestId?: string;
+      }),
     Error = StorageSyncError
   >;
 
@@ -262,18 +292,17 @@ interface CloudEndpoints {
   triggerChangeDetection is ArmResourceActionSync<
     CloudEndpoint,
     TriggerChangeDetectionParameters,
+    | OkResponse
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+        Azure.Core.Foundations.RetryAfterHeader> & {
+        @header("x-ms-correlation-request-id")
+        @doc("correlation request id.")
+        xMsCorrelationRequestId?: string;
 
-      | OkResponse
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id.")
-          xMsCorrelationRequestId?: string;
-
-          @header("x-ms-request-id")
-          @doc("request id.")
-          xMsRequestId?: string;
-        }),
+        @header("x-ms-request-id")
+        @doc("request id.")
+        xMsRequestId?: string;
+      }),
     Error = StorageSyncError
   >;
 

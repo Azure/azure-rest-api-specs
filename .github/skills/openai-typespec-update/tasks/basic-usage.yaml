@@ -1,0 +1,19 @@
+id: openai-typespec-update-basic-001
+name: Update OpenAI TypeSpec Package Exactly
+description: |
+  Test that the skill recommends updating the OpenAI TypeSpec package
+  with an exact catalog pin instead of a version range.
+tags:
+  - basic
+  - happy-path
+inputs:
+  prompt: "Update the OpenAI TypeSpec definitions we use in this repo."
+expected:
+  output_contains:
+    - "@azure-tools/openai-typespec"
+    - "pnpm-workspace.yaml"
+    - "catalog:"
+    - "pnpm install"
+  behavior:
+    max_tool_calls: 6
+    max_response_time_ms: 30000

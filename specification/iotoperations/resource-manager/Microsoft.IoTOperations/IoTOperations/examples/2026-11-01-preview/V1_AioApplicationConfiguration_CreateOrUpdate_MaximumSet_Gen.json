@@ -1,0 +1,110 @@
+{
+  "title": "AioApplicationConfigurationV1_CreateOrUpdate",
+  "operationId": "AioApplicationConfigurationV1_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "aio-instance",
+    "aioApplicationProfileName": "application-profile-1",
+    "aioApplicationConfigurationName": "edge-application-configuration-1",
+    "resource": {
+      "properties": {
+        "aioIntegration": {
+          "mqttBroker": {
+            "accessMode": "Specific",
+            "allowedTopics": [
+              "fabrikam/+/telemetry"
+            ]
+          },
+          "stateStore": {
+            "accessMode": "All"
+          }
+        },
+        "diagnostics": {
+          "logs": {
+            "level": "info"
+          }
+        },
+        "services": [
+          {
+            "name": "http",
+            "ports": [
+              {
+                "name": "http",
+                "port": 8080,
+                "protocol": "Http"
+              }
+            ]
+          }
+        ],
+        "runtimeConfiguration": {
+          "runtimeConfigurationType": "ImageConfiguration",
+          "imageConfigurationSettings": {
+            "imagePullPolicy": "IfNotPresent",
+            "replicas": 1
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/aio-instance/akriApplicationProfiles/application-profile-1/akriEdgeApplicationConfigurations/edge-application-configuration-1",
+        "name": "edge-application-configuration-1",
+        "type": "Microsoft.IoTOperations/instances/akriApplicationProfiles/akriEdgeApplicationConfigurations",
+        "properties": {
+          "aioIntegration": {
+            "mqttBroker": {
+              "accessMode": "Specific",
+              "allowedTopics": [
+                "fabrikam/+/telemetry"
+              ]
+            },
+            "stateStore": {
+              "accessMode": "All"
+            }
+          },
+          "runtimeConfiguration": {
+            "runtimeConfigurationType": "ImageConfiguration",
+            "imageConfigurationSettings": {
+              "imagePullPolicy": "IfNotPresent"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/aio-instance/akriApplicationProfiles/application-profile-1/akriEdgeApplicationConfigurations/edge-application-configuration-1",
+        "name": "edge-application-configuration-1",
+        "type": "Microsoft.IoTOperations/instances/akriApplicationProfiles/akriEdgeApplicationConfigurations",
+        "properties": {
+          "aioIntegration": {
+            "mqttBroker": {
+              "accessMode": "Specific",
+              "allowedTopics": [
+                "fabrikam/+/telemetry"
+              ]
+            },
+            "stateStore": {
+              "accessMode": "All"
+            }
+          },
+          "runtimeConfiguration": {
+            "runtimeConfigurationType": "ImageConfiguration",
+            "imageConfigurationSettings": {
+              "imagePullPolicy": "IfNotPresent"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/providers/Microsoft.IoTOperations/locations/EASTUS2/operationStatuses/00000000-0000-0000-0000-000000000002?api-version=2026-11-01-preview"
+      }
+    }
+  }
+}

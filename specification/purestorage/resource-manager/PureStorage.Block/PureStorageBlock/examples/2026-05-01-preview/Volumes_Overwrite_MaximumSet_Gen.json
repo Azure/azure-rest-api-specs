@@ -1,0 +1,28 @@
+{
+  "title": "Volumes_Overwrite",
+  "operationId": "Volumes_Overwrite",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "storagepool-01",
+    "volumeGroupName": "volumegroup-01",
+    "volumeName": "volume-01",
+    "body": {
+      "sourceType": "snapshot",
+      "sourceVolumeGroupResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01/volumeGroups/volumegroup-01",
+      "sourceVolumeSnapshot": {
+        "volumeGroupSnapshotResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01/volumeGroups/volumegroup-01/snapshots/snapshot-01",
+        "volumeSnapshotName": "volume-01"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/11111111-1111-1111-1111-111111111111/providers/PureStorage.Block/locations/eastus/operationStatuses/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa?api-version=2026-02-01-preview",
+        "Retry-After": "30"
+      }
+    }
+  }
+}

@@ -2,21 +2,28 @@
 # https://github.com/Azure/azure-sdk/blob/main/docs/policies/opensource.md#codeowners
 
 #########
-# Specification
+# Default ownership
 #########
 
+# The last matching entry wins, so defaults must precede explicit owners.
+# GitHub supports these defaults; the SDK linter exceptions are in CODEOWNERS_baseline_errors.txt.
+* @Azure/azure-rest-api-specs-maintainers
+
+# Unlisted services use normal reviewer approval, not a default code owner.
+/specification/
+
 #########
-# Codeowner assignments are made from the _last_ matching entry in CODEOWNERS, so catch-all entries must come first
+# Specification
 #########
 
 # PRLabel: %Schema Registry
 /specification/schemaregistry/ @hmlam @nickghardwick @lmazuel @deyaaeldeen @JoshLove-msft @swathipil @conniey @minhanh-phan
 
 # PRLabel: %Cognitive Services
-/dev/cognitiveservices/data-plane/Language/ @assafi @rokulka @ChongTang @annatisch @heaths @deyaaeldeen @joseharriaga @minhanh-phan
+/dev/cognitiveservices/data-plane/Language/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan
 
 # PRLabel: %Foundry  %Client
-/specification/ai-foundry/data-plane/Foundry @johanste @trrwilson @glecaros @balapv @dargilco
+/specification/ai-foundry/data-plane/Foundry @glecaros @balapv @dargilco @rhurey
 
 # PRLabel: %Analysis Services
 /specification/analysisservices/ @taiwu
@@ -37,7 +44,7 @@
 /specification/applicationinsights/data-plane/LiveMetrics/ @ramthi @rajkumar-rangaraj @hectorhdzg
 
 # PRLabel: %Container Apps
-/specification/app/ @jijohn14 @Juliehzl
+/specification/app/ @jijohn14 @Juliehzl @vturecek @Tratcher @vinisoto
 
 /specification/asazure/ @athipp
 
@@ -50,10 +57,7 @@
 /specification/azsadmin/ @deathly809
 
 # PRLabel: %Batch
-/specification/batch/ @wiboris @dpwatrous @skapur12 @cRui861 @wanghoppe @ReneOv-MSFT
-
-# PRLabel: %BatchAI
-/specification/batchai/ @alexanderyukhanov
+/specification/batch/ @wiboris @dpwatrous @skapur12 @cRui861 @wanghoppe @ReneOv-MSFT @xingwu1 @iwang2 @lilinvictorms
 
 # PRLabel: %Billing
 /specification/billing/ @wilcobmsft @asarkar84
@@ -65,29 +69,35 @@
 /specification/cdn/resource-manager/Microsoft.Cdn/EdgeActions/ @tundwed @anamikanupur
 
 # PRLabel: %Cognitive Services
-/specification/cognitiveservices/ @rkuthala @fmabroukmsft
+/specification/cognitiveservices/ @rkuthala @fmabroukmsft @iyangchen
+
+# PRLabel: %Cognitive - Content Safety
+/specification/cognitiveservices/ContentSafety/ @Azure/azure-sdk-write-contentsafety
+
+# PRLabel: %Cognitive - Content Safety
+/specification/cognitiveservices/data-plane/ContentSafety/ @Azure/azure-sdk-write-contentsafety
 
 # PRLabel: %Cognitive Services - Form Recognizer
 /specification/cognitiveservices/data-plane/FormRecognizer/ @bojunehsu @nizi1127 @johanste
 
 # PRLabel: %Cognitive - Language
-/specification/cognitiveservices/data-plane/LanguageAnalyzeConversations/ @assafi @rokulka @ChongTang @annatisch @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageAnalyzeConversations/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
-/specification/cognitiveservices/data-plane/LanguageAnalyzeConversationsAuthoring/ @assafi @rokulka @ChongTang @annatisch @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageAnalyzeConversationsAuthoring/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
-/specification/cognitiveservices/data-plane/LanguageAnalyzeDocuments/ @assafi @rokulka @ChongTang @annatisch @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageAnalyzeDocuments/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
-/specification/cognitiveservices/data-plane/LanguageAnalyzeText/ @assafi @rokulka @ChongTang @annatisch @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageAnalyzeText/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
-/specification/cognitiveservices/data-plane/LanguageAnalyzeTextAuthoring/ @assafi @rokulka @ChongTang @annatisch @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageAnalyzeTextAuthoring/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
-/specification/cognitiveservices/data-plane/LanguageQuestionAnswering/ @assafi @rokulka @ChongTang @annatisch @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageQuestionAnswering/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
-/specification/cognitiveservices/data-plane/LanguageQuestionAnsweringAuthoring/ @assafi @rokulka @ChongTang @annatisch @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
+/specification/cognitiveservices/data-plane/LanguageQuestionAnsweringAuthoring/ @assafi @rokulka @ChongTang @heaths @deyaaeldeen @joseharriaga @minhanh-phan @bidisha-c @mikaelsitruk @sarkar-rajarshi @quentinRobinson @ahmedaashour
 
 
 # PRLabel: %Compute
-/specification/compute/ @xinzewang233 @ookoka @audreyttt @haagha @bilaakpan-ms @grizzlytheodore @mabhard @danielli90 @smotwani @ppatwa @vikramd-ms @yunusm @ZhidongPeng @nkuchta @maheshnemichand @najams @changov
+/specification/compute/ @haagha @audreyttt
 
 /specification/consumption/ @arusing @micahbresette
 
@@ -131,8 +141,8 @@
 /specification/domainservices/ @jihochang
 
 # PRLabel: %Event Grid
-/specification/eventgrid/resource-manager/ @shankarsama @Kishp01 @a-hamad
-/specification/eventgrid/ @Kishp01 @shankarsama @rajeshka
+/specification/eventgrid/resource-manager/ @shankarsama @Kishp01 @a-hamad @Nishanth-MS
+/specification/eventgrid/ @Kishp01 @shankarsama @rajeshka @Nishanth-MS
 
 # PRLabel: %Event Hubs
 /specification/eventhub/ @v-ajnava @dsouzaarun @damodaravadhani
@@ -228,7 +238,7 @@
 /specification/search/data-plane/ @BevLoh @giulianob @xiangyan99 @yangylu91 @efrainretana @admayber @Draconicida @xiong-qiao
 
 # PRLabel: %Search
-/specification/search/resource-manager/ @BevLoh @efrainretana @yangylu91 @admayber @Draconicida @xiong-qiao
+/specification/search/resource-manager/ @BevLoh @efrainretana @yangylu91 @admayber @Draconicida @xiong-qiao @lc48t @hillarykhuu
 
 /specification/serialconsole/ @amitchat @craigw @asinn826
 
@@ -285,37 +295,29 @@
 # PRLabel: %Profile
 /profile/ @shahabhijeet
 
-/specification/contosowidgetmanager/ @mikeharder @raych1 @maririos
+/specification/contosowidgetmanager/ @raych1 @Azure/azure-rest-api-specs-maintainers
 
 ###########
 # Eng Sys
 ###########
-/.gitattributes     @mikeharder @benbp
-/.gitignore         @mikeharder @benbp
-/.prettierrc.json   @mikeharder @benbp
-/package-lock.json  @mikeharder @benbp
-/package.json       @mikeharder @benbp
-/tsconfig.json      @mikeharder @benbp
-/.azure-pipelines/  @mikeharder @benbp
-/.github/           @mikeharder @benbp
-/.vscode/           @mikeharder @benbp
-/dev/               @mikeharder @benbp
-/eng/               @mikeharder @benbp
-/eng/common/        @Azure/azure-sdk-eng
+/eng/common/        @Azure/azure-sdk-eng @Azure/azure-sdk-sync-approvers
 /eng/tools/typespec-migration-validation @pshao25 @live1206
-/eng/tools/typespec-validation/**/sdk-tspconfig-validation*.ts @marygao @raych1 @maririos
-/scripts/           @mikeharder @benbp
-/specification/suppressions.yaml @mikeharder @benbp @raych1 @marygao @maririos @qiaozha
+/eng/tools/typespec-suppressions @timotheeguerin @markcowl @catalinaperalta @iscai-msft
+/eng/tools/typespec-validation/**/sdk-tspconfig-validation*.ts @marygao @raych1
+/specification/suppressions.yaml @raych1 @marygao @qiaozha
 /.github/CODEOWNERS @Azure/azure-sdk-eng
 /.github/skills     @Azure/azure-sdk-eng @chunyu3 @lirenhe @ArthurMa1978 @haolingdong-msft
 
+## OpenAI TypeSpec Definitions (@azure-tools/openai-typespec)
+/.github/skills/openai-typespec-update/ @Azure/azure-sdk-eng @baywet @glecaros
+
 ## Copilot
 
-/.github/copilot-instructions.md         @praveenkuttappan @maririos
+/.github/copilot-instructions.md         @praveenkuttappan
 /.github/copilot-review-instructions.md  @ravimeda @praveenkuttappan
-/.github/prompts/                        @praveenkuttappan @maririos
-/.github/instructions/                   @praveenkuttappan @maririos
-/.github/chatmodes/                      @praveenkuttappan @maririos
+/.github/prompts/                        @praveenkuttappan
+/.github/instructions/                   @praveenkuttappan
+/.github/chatmodes/                      @praveenkuttappan
 
 ## ARM API Reviewer
 
@@ -325,8 +327,13 @@
 
 ## ARM API Modeling Reviewers
 
-/.github/arm-leases/     @raosuhas @tejaswiminnu @akhilailla @msevanhi 
+/.github/arm-leases/     @raosuhas @tejaswiminnu @akhilailla @msevanhi @vikeshi26 @vidapour @bubbles4096
 /.github/workflows/**/arm-*     @raosuhas @tejaswiminnu @akhilailla @msevanhi
 
-# Add owners for notifications for specific pipelines
-/eng/common/pipelines/codeowners-linter.yml
+## package-name-approval
+/.github/**/package-name-approval/          @samvaity @praveenkuttappan
+
+## typespec-suppressions
+/.github/workflows/typespec-suppressions-*.yaml   @timotheeguerin @markcowl @catalinaperalta @iscai-msft
+/.github/workflows/src/typespec-suppressions/     @timotheeguerin @markcowl @catalinaperalta @iscai-msft
+/.github/workflows/test/typespec-suppressions/    @timotheeguerin @markcowl @catalinaperalta @iscai-msft

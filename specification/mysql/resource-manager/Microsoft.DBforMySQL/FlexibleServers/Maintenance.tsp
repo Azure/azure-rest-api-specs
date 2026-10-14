@@ -15,8 +15,10 @@ namespace Microsoft.DBforMySQL;
  * Represents a maintenance.
  */
 @parentResource(Server)
-model Maintenance
-  is Azure.ResourceManager.ProxyResource<MaintenanceProperties, false> {
+model Maintenance is Azure.ResourceManager.ProxyResource<
+  MaintenanceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = Maintenance,
     KeyName = "maintenanceName",

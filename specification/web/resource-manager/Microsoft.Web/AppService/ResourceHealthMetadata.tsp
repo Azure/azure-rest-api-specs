@@ -53,7 +53,8 @@ interface ResourceHealthMetadataOperationGroupOps
         @segment("resourceHealthMetadata")
         @key
         default: "default",
-      }
+      },
+      ResourceName = "WebSiteResourceHealthMetadata"
     > {}
 
 @tag("ResourceHealthMetadata")
@@ -105,7 +106,8 @@ interface BySiteSlotOperationGroupOps
         @segment("resourceHealthMetadata")
         @key
         default: "default",
-      }
+      },
+      ResourceName = "WebSiteSlotResourceHealthMetadata"
     > {}
 
 @tag("ResourceHealthMetadata")

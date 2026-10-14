@@ -2077,6 +2077,7 @@ enum ServerLevelPermissionsGroup {
  * Database Migration Resource properties for CosmosDb for Mongo.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model DatabaseMigrationPropertiesCosmosDbMongo
   extends DatabaseMigrationBaseProperties {
   /**
@@ -3099,6 +3100,7 @@ model DatabaseMigrationBaseListResult is Azure.Core.Page<DatabaseMigrationBase>;
 /**
  * The response of a DatabaseMigrationCosmosDbMongo list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model DatabaseMigrationCosmosDbMongoListResult
   is Azure.Core.Page<DatabaseMigrationCosmosDbMongo>;
 
@@ -3556,6 +3558,7 @@ model ServiceSku {
 /**
  * Service health status
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DataMigrationServiceStatusResponse {
   /**
    * The DMS instance agent version
@@ -6562,6 +6565,7 @@ model MigrateSqlServerSqlDbSyncDatabaseInput {
 /**
  * Types of validations to run after the migration
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MigrationValidationOptions {
   /**
    * Allows to compare the schema information between source and target.
@@ -7151,6 +7155,7 @@ model MigrationReportResult {
   /**
    * The url of the report.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   reportUrl?: string;
 }
 
@@ -11137,6 +11142,7 @@ model DataMigrationProjectMetadata {
   /**
    * Target database name
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   targetDbName?: string;
 

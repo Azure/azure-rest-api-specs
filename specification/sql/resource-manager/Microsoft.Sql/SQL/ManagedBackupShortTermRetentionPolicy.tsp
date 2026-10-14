@@ -51,7 +51,8 @@ alias ManagedBackupShortTermRetentionPolicyOps = Azure.ResourceManager.Legacy.Le
     @segment("backupShortTermRetentionPolicies")
     @key
     policyName: ManagedShortTermRetentionPolicyName;
-  }
+  },
+  ResourceName = "ManagedBackupShortTermRetentionPolicy"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -117,7 +118,8 @@ alias ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicyOps = Azure.
     @segment("backupShortTermRetentionPolicies")
     @key
     policyName: ManagedShortTermRetentionPolicyName;
-  }
+  },
+  ResourceName = "ManagedRestorableDroppedDbBackupShortTermRetentionPolicy"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

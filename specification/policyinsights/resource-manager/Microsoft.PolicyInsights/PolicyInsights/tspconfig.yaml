@@ -19,6 +19,7 @@ options:
     flavor: azure
     experimental-extensible-enums: true
     compatibility-lro: true
+    treat-unknown-as-record: true
     package-details:
       name: "@azure/arm-policyinsights"
   "@azure-tools/typespec-go":
@@ -32,6 +33,10 @@ options:
     head-as-boolean: true
     inject-spans: true
     factory-gather-all-params: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.PolicyInsights"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

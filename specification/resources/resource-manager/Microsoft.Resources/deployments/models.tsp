@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -15,6 +16,7 @@ model DeploymentListResult is Azure.Core.Page<DeploymentExtended>;
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ErrorResponse {
   /** The error code. */
   @visibility(Lifecycle.Read)
@@ -39,7 +41,10 @@ model ErrorResponse {
   additionalInfo?: ErrorAdditionalInfo[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Type of an extension config property value.
+ */
+@removed(Versions.v2026_06_01)
 union ExtensionConfigPropertyType {
   string,
 
@@ -534,6 +539,11 @@ enum ProvisioningOperation {
 }
 
 /**
+ * A symbolic name path to a resource or other subject in a deployment template.
+ */
+alias SymbolicNamePath = string[];
+
+/**
  * An error response for a resource management request.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
@@ -768,12 +778,15 @@ model ParametersLink {
   contentVersion?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Represents the value for an extension config property.
+ */
 model DeploymentExtensionConfigItem {
   /**
    * The value type of the extension config property.
    */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_06_01)
   type?: ExtensionConfigPropertyType;
 
   /**
@@ -816,6 +829,7 @@ model OnErrorDeployment {
 /**
  * Specifies whether template expressions are evaluated within the scope of the parent template or nested template.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ExpressionEvaluationOptions {
   /**
    * The scope to be used for evaluation of parameters, variables and functions in a nested template.
@@ -1277,10 +1291,17 @@ model DeploymentExtensionDefinition {
   version?: string;
 
   /**
-   * The extension configuration ID. It uniquely identifies a deployment control plane within an extension.
+   * The extension configuration ID. It uniquely identifies a deployment target within an extension.
    */
   @visibility(Lifecycle.Read)
   configId?: string;
+
+  /**
+   * The extension configuration hash. Can be used to distinguish different configurations that have the same config ID.
+   */
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read)
+  configHash?: string;
 
   /**
    * The extension configuration.
@@ -1345,6 +1366,12 @@ model ResourceReference {
    */
   @visibility(Lifecycle.Read)
   apiVersion?: string;
+
+  /**
+   * The symbolic name path to the resource in the deployment template, including nested deployment(s) and extension if applicable.
+   */
+  @added(Versions.v2026_06_01)
+  symbolicNamePath?: SymbolicNamePath;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -1471,6 +1498,13 @@ model DeploymentWhatIfProperties extends DeploymentProperties {
    * Optional What-If operation settings.
    */
   whatIfSettings?: DeploymentWhatIfSettings;
+
+  /**
+   * Resource predictions that can be utilized by what-if to produce potential modification changes.
+   */
+  @added(Versions.v2026_06_01)
+  @identifiers(#[])
+  resourcePredictions?: DeploymentResourceWhatIfPrediction[];
 }
 
 /**
@@ -1481,6 +1515,43 @@ model DeploymentWhatIfSettings {
    * The format of the What-If results
    */
   resultFormat?: WhatIfResultFormat;
+}
+
+/**
+ * A prediction for a deployment resource by its symbolic name path.
+ */
+@added(Versions.v2026_06_01)
+model DeploymentResourceWhatIfPrediction {
+  /**
+   * The symbolic name path to the resource in the deployment template, including nested deployment(s) and extension if applicable.
+   */
+  symbolicNamePath: SymbolicNamePath;
+
+  /**
+   * The predicted fully-qualified Azure resource ID.
+   */
+  resourceId?: string;
+
+  /**
+   * The predicted extension usage.
+   */
+  extension?: DeploymentExtensionDefinition;
+
+  /**
+   * The predicted resource type.
+   */
+  resourceType?: string;
+
+  /**
+   * The predicted extensible resource identifiers.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Schema is opaque to our service"
+  identifiers?: unknown;
+
+  /**
+   * The predicted API version.
+   */
+  apiVersion?: string;
 }
 
 /**
@@ -1532,7 +1603,7 @@ model WhatIfOperationProperties {
  */
 model WhatIfChange {
   /**
-   * Resource ID
+   * The fully-qualified ARM resource ID for this change.
    */
   resourceId?: string;
 
@@ -1545,6 +1616,12 @@ model WhatIfChange {
    * The symbolic name of the resource responsible for this change.
    */
   symbolicName?: string;
+
+  /**
+   * The resource type of the resource.
+   */
+  @added(Versions.v2026_06_01)
+  resourceType?: string;
 
   /**
    * A subset of properties that uniquely identify a Bicep extensible resource because it lacks a resource id like an Azure resource has.
@@ -1776,6 +1853,12 @@ model TargetResource {
    * The symbolic name of the resource as defined in the deployment template.
    */
   symbolicName?: string;
+
+  /**
+   * The symbolic name path to the resource in the deployment template, including nested deployment(s) and extension if applicable.
+   */
+  @added(Versions.v2026_06_01)
+  symbolicNamePath?: SymbolicNamePath;
 }
 
 /**

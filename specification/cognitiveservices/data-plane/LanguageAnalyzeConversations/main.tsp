@@ -10,6 +10,7 @@ import "./models/summarization.tsp";
 import "./models/pii.tsp";
 import "./models/common.tsp";
 import "./models/common.union.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -68,6 +69,7 @@ model AADToken
   is OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit;
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
       scopes: ["https://cognitiveservices.azure.com/.default"];
     }

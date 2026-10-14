@@ -16,11 +16,10 @@ namespace Microsoft.Web;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(WorkflowRunAction)
-model WorkflowRunActionRepetitionDefinition
-  is Azure.ResourceManager.TrackedResource<
-    WorkflowRunActionRepetitionProperties,
-    false
-  > {
+model WorkflowRunActionRepetitionDefinition is Azure.ResourceManager.TrackedResource<
+  WorkflowRunActionRepetitionProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = WorkflowRunActionRepetitionDefinition,
     KeyName = "repetitionName",
@@ -86,7 +85,8 @@ interface WorkflowRunActionRepetitionDefinitionOps
         @segment("repetitions")
         @key
         repetitionName: string,
-      }
+      },
+      ResourceName = "WorkflowRunActionRepetition"
     > {}
 
 @tag("WorkflowRunActions")
@@ -177,7 +177,8 @@ interface WorkflowRunActionScopeRepetitionOps
         @segment("scopeRepetitions")
         @key
         repetitionName: string,
-      }
+      },
+      ResourceName = "WorkflowRunActionScopeRepetition"
     > {}
 
 @tag("WorkflowRunActions")

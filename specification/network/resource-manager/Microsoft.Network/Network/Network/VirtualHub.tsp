@@ -321,7 +321,7 @@ interface VirtualHubs {
   virtualHubRouteTableV2sList is ArmResourceActionSync<
     VirtualHub,
     void,
-    ArmResponse<ListVirtualHubRouteTableV2SResult>,
+    ArmResponse<ListVirtualHubRouteTableV2sResult>,
     Error = CloudError
   >;
 }

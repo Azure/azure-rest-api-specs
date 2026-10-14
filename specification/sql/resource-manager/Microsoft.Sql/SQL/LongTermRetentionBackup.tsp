@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 /**
@@ -41,7 +42,7 @@ alias LongTermRetentionBackupOps = Azure.ResourceManager.Legacy.LegacyOperations
     @path
     @segment("locations")
     @key
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
 
     /** The name of the server */
     @path
@@ -61,7 +62,8 @@ alias LongTermRetentionBackupOps = Azure.ResourceManager.Legacy.LegacyOperations
     @segment("longTermRetentionBackups")
     @key
     backupName: string;
-  }
+  },
+  ResourceName = "SubscriptionLongTermRetentionBackup"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -198,7 +200,7 @@ alias LongTermRetentionBackupOperationGroupOps = Azure.ResourceManager.Legacy.Le
     @path
     @segment("locations")
     @key
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
 
     /** The name of the server */
     @path
@@ -218,7 +220,8 @@ alias LongTermRetentionBackupOperationGroupOps = Azure.ResourceManager.Legacy.Le
     @segment("longTermRetentionBackups")
     @key
     backupName: string;
-  }
+  },
+  ResourceName = "ResourceGroupLongTermRetentionBackup"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

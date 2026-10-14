@@ -117,12 +117,11 @@ interface SignalRResources {
   regenerateKey is ArmResourceActionAsyncBase<
     SignalRResource,
     RegenerateKeyParameters,
-
-      | ArmResponse<SignalRKeys>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SignalRKeys> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot body: SignalRKeys;
-        }),
+    | ArmResponse<SignalRKeys>
+    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SignalRKeys> &
+        Azure.Core.Foundations.RetryAfterHeader> & {
+        @bodyRoot body: SignalRKeys;
+      }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SignalRResource>
   >;
 

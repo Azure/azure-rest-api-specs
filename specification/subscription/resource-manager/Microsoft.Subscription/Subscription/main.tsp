@@ -18,6 +18,7 @@ import "./GetTenantPolicyResponse.tsp";
 import "./BillingAccountPoliciesResponse.tsp";
 import "./TargetDirectoryResult.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -1,0 +1,36 @@
+{
+  "title": "Get Content Provenance Detection Status",
+  "operationId": "ContentProvenanceOperations_GetOperationStatus",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "operationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "kind": "Detect",
+        "status": "Succeeded",
+        "createdAt": "2026-07-15T10:30:00Z",
+        "lastUpdatedAt": "2026-07-15T10:30:05Z",
+        "result": {
+          "outcome": "ProvenanceDetected",
+          "results": [
+            {
+              "type": "Watermark",
+              "provider": "Microsoft",
+              "modelName": "Azure OpenAI ImageGen",
+              "timestamp": "2026-07-15T10:29:55Z"
+            },
+            {
+              "type": "C2PA",
+              "provider": "Microsoft",
+              "modelName": "Azure OpenAI ImageGen",
+              "timestamp": "2026-07-15T10:29:55Z"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

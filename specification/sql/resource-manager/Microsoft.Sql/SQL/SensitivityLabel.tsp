@@ -69,7 +69,8 @@ alias SensitivityLabelOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     columnName: string;
   },
-  {}
+  {},
+  ResourceName = "ManagedDatabaseSensitivityLabel"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -172,7 +173,8 @@ alias SensitivityLabelOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOpe
     @key
     columnName: string;
   },
-  {}
+  {},
+  ResourceName = "SqlDatabaseSensitivityLabel"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

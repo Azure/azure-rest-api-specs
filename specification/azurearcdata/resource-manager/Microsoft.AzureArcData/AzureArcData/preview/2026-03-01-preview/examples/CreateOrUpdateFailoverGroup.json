@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "failoverGroupName": "testFailoverGroupName",
+    "failoverGroupResource": {
+      "properties": {
+        "partnerManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlManagedInstances/partnerMI",
+        "spec": {
+          "partnerSyncMode": "async",
+          "role": "primary"
+        }
+      }
+    },
+    "resourceGroupName": "testrg",
+    "sqlManagedInstanceName": "testSqlManagedInstance",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testFailoverGroupName",
+        "type": "Microsoft.AzureArcData/sqlManagedInstances/failoverGroups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlManagedInstances/testSqlManagedInstance/failoverGroups/testFailoverGroupName",
+        "properties": {
+          "partnerManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlManagedInstances/partnerMI",
+          "spec": {
+            "partnerMI": "partnerMI",
+            "partnerMirroringCert": "testCert",
+            "partnerMirroringURL": "11.11.111.111:1111",
+            "partnerSyncMode": "async",
+            "role": "primary",
+            "sharedName": "testSharedName",
+            "sourceMI": "sourceSQLMI"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testFailoverGroupName",
+        "type": "Microsoft.AzureArcData/sqlManagedInstances/failoverGroups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlManagedInstances/testSqlManagedInstance/failoverGroups/testFailoverGroupName",
+        "properties": {
+          "partnerManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlManagedInstances/partnerMI",
+          "spec": {
+            "partnerMI": "partnerMI",
+            "partnerMirroringCert": "testCert",
+            "partnerMirroringURL": "11.11.111.111:1111",
+            "partnerSyncMode": "async",
+            "role": "primary",
+            "sharedName": "testSharedName",
+            "sourceMI": "sourceSQLMI"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "FailoverGroups_Create",
+  "title": "Create or update a failover group instance."
+}

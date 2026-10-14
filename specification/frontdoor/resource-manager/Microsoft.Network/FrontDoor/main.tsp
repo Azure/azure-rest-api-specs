@@ -13,6 +13,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 import "./WebApplicationFirewallPolicy.tsp";
 import "./FrontDoor.tsp";
 import "./FrontendEndpoint.tsp";
@@ -51,4 +52,9 @@ enum Versions {
    * The 2025-11-01 API version.
    */
   v2025_11_01: "2025-11-01",
+
+  /**
+   * The 2026-04-01 API version.
+   */
+  v2026_04_01: "2026-04-01",
 }
