@@ -36,14 +36,6 @@ These settings apply only when `--tag=package-2026-07-01` is specified on the co
 ```yaml $(tag) == 'package-2026-07-01'
 input-file:
   - stable/2026-07-01/sreagent.json
-directive:
-  - suppress: AvoidAdditionalProperties
-    from: sreagent.json
-    reason: A dictionary allows passing through service-specific key-value pairs.
-    where:
-      - $.definitions.AgentConnectorProperties.properties.extendedProperties
-      - $.definitions.AgentConnectorPropertiesWithSecrets.properties.extendedProperties
-      - $.definitions.Connector.properties.extendedProperties
 
 ```
 
@@ -53,6 +45,12 @@ These settings apply only when `--tag=package-2026-01-01` is specified on the co
 ```yaml $(tag) == 'package-2026-01-01'
 input-file:
   - stable/2026-01-01/sreagent.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: sreagent.json
+    where:
+      - $
+    reason: The 2026-01-01 package predates this service's operations endpoint; 2026-07-01 and later include it.
 directive:
   - suppress: AvoidAdditionalProperties
     from: sreagent.json
