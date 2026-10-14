@@ -932,12 +932,6 @@ interface Blob {
         accessTierInferred?: boolean;
 
         ...AccessTierChangeTimeResponseHeaderV2026_10_06;
-
-        /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
-        @added(Versions.v2026_10_06)
-        @header("x-ms-smart-access-tier")
-        smartAccessTier?: string;
-
         ...DownloadHintResponseHeader;
         ...ApiVersionHeader;
       })
@@ -1005,12 +999,6 @@ interface Blob {
         accessTierInferred?: boolean;
 
         ...AccessTierChangeTimeResponseHeaderV2026_10_06;
-
-        /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
-        @added(Versions.v2026_10_06)
-        @header("x-ms-smart-access-tier")
-        smartAccessTier?: string;
-
         ...DownloadHintResponseHeader;
         ...ApiVersionHeader;
       })
@@ -1093,12 +1081,6 @@ interface Blob {
       archiveStatus?: ArchiveStatus;
 
       ...AccessTierChangeTimeResponseHeader;
-
-      /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
-      @added(Versions.v2026_06_06)
-      @header("x-ms-smart-access-tier")
-      smartAccessTier?: string;
-
       ...VersionIdResponseHeader;
       ...IsCurrentVersionResponseHeader;
       ...TagCountResponseHeader;

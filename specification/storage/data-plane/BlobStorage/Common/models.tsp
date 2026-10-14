@@ -967,10 +967,6 @@ union ArchiveStatus {
   /** The archive status is rehydrating pending to Cold. */
   RehydratePendingToCold: "rehydrate-pending-to-cold",
 
-  /** The archive status is rehydrating pending to Smart. */
-  @added(Versions.v2026_06_06)
-  RehydratePendingToSmart: "rehydrate-pending-to-smart",
-
   /** Extensible. */
   string,
 }
@@ -1130,11 +1126,6 @@ model BlobProperties {
 
   /** The archive status of the blob. */
   @Xml.name("ArchiveStatus") archiveStatus?: ArchiveStatus;
-
-  /** The smart access tier of the blob. */
-  @added(Versions.v2026_06_06)
-  @Xml.name("SmartAccessTier")
-  smartAccessTier?: AccessTier;
 
   /** The SHA-256 hash of the blob's encryption key, if provided. */
   @Xml.name("CustomerProvidedKeySha256") customerProvidedKeySha256?: string;
@@ -1565,10 +1556,6 @@ alias BlobLayoutResponseHeaders = {
   /** Included if the access tier is inferred. */
   @header("x-ms-access-tier-inferred")
   accessTierInferred?: boolean;
-
-  /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
-  @header("x-ms-smart-access-tier")
-  smartAccessTier?: string;
 
   /** Included if the blob rehydrate operation is pending. Indicates the destination tier. */
   @header("x-ms-archive-status")
