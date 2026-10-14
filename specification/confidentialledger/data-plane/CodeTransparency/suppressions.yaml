@@ -1,0 +1,19 @@
+- tool: TypeSpecValidation
+  paths:
+    - tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    # JS and Python SDK generation are intentionally not configured for the Code
+    # Transparency Service. Their emitter blocks have been removed from
+    # tspconfig.yaml, so their emitter options are intentionally absent.
+    - options.@azure-tools/typespec-ts.*
+    - options.@azure-tools/typespec-python.*
+  reason: >
+    Code Transparency Service does not ship JavaScript or Python SDKs. Their
+    emitter blocks are intentionally omitted from tspconfig.yaml, so
+    SdkTspConfigValidation sub-rules that require their options to be present
+    do not apply. JS SDK generation is also blocked by an upstream emitter bug
+    that leaks NodeJS.ReadableStream into browser builds; tracked at
+    https://github.com/Azure/autorest.typescript/issues/3990. The corresponding
+    suppression can be removed if support for either language is added.

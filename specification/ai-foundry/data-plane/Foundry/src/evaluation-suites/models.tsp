@@ -117,7 +117,7 @@ model EvaluationSuiteVersion {
     """)
   dataset?: EvaluationDatasetReference;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching eval group testing_criteria pattern"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @doc("""
     Testing criteria — the evaluator configurations for this suite.
     Supports all grader types: azure_ai_evaluator, string_check, label_model,
@@ -134,13 +134,13 @@ model EvaluationSuiteVersion {
     | TestingCriterionAzureAIEvaluator)[];
 
   @doc("""
-    Target for this evaluation suite. Uses the existing Target discriminated type
+    Target for this evaluation suite. Uses the existing FoundryEvaluationTarget discriminated type
     from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
     Optional — allows suites to exist without a target.
     """)
-  target?: Target;
+  target?: FoundryEvaluationTarget;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Supporting both input message types"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @doc("""
     How to send dataset rows to the target (agent or model).
     Supports template type (prompt with column placeholders) and
@@ -313,9 +313,9 @@ model EvaluationSuiteGenerationJobInputs {
     immediately after generation completes.
     Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
     """)
-  target?: Target;
+  target?: FoundryEvaluationTarget;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Supporting both input message types"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @doc("""
     How to send dataset rows to the target.
     If omitted and target is provided, defaults to a template using item.query.

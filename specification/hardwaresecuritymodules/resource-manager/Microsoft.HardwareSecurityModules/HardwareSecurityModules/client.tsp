@@ -43,6 +43,7 @@ using Azure.Core;
 );
 @@clientName(EndpointDetail, "DedicatedHsmEndpointDetail", "csharp");
 @@clientName(EndpointDependency, "DedicatedHsmEndpointDependency", "csharp");
+@@clientName(HsmState, "HardwareSecurityModuleState", "csharp");
 @@clientName(JsonWebKeyType, "DedicatedHsmJsonWebKeyType", "csharp");
 @@clientName(NetworkInterface, "DedicatedHsmNetworkInterface", "csharp");
 @@clientName(NetworkProfile, "DedicatedHsmNetworkProfile", "csharp");

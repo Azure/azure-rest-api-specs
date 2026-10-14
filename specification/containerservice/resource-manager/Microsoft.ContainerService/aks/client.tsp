@@ -60,6 +60,24 @@ using Microsoft.ContainerService;
 
 @@clientName(Microsoft.ContainerService.IPFamily, "IpFamily", "javascript");
 
+// .NET SDK acronym casing.
+@@clientName(
+  ManagedClusterNATGatewaySku,
+  "ManagedClusterNatGatewaySku",
+  "csharp"
+);
+@@clientName(DRANETMode, "DranetMode", "csharp");
+@@clientName(
+  AgentPoolNICPublicIPAddressConfiguration,
+  "AgentPoolNicPublicIPAddressConfiguration",
+  "csharp"
+);
+@@clientName(
+  AgentPoolNICPublicIPAddressVersion,
+  "AgentPoolNicPublicIPAddressVersion",
+  "csharp"
+);
+
 // Java specific renaming for backward compatibility
 @@clientName(
   ManagedClusterAPIServerAccessProfile,
@@ -148,6 +166,11 @@ using Microsoft.ContainerService;
   "count_ipv6",
   "python"
 );
+@@clientName(
+  ManagedClusterManagedOutboundIPProfile.countIPv6,
+  "count_ipv6",
+  "python"
+);
 
 @@clientName(
   ManagedClusterPodIdentityProvisioningError.error,
@@ -229,6 +252,7 @@ using Microsoft.ContainerService;
 @@clientName(ManagedClusterAddonProfile.enabled, "IsEnabled", "csharp");
 @@clientName(ManagedClusterPodIdentityProfile.enabled, "IsEnabled", "csharp");
 @@clientName(WindowsGmsaProfile.enabled, "IsEnabled", "csharp");
+@@clientName(UpgradeGateSettings.enabled, "IsEnabled", "csharp");
 @@clientName(TimeSpan.start, "StartOn", "csharp");
 @@clientName(TimeSpan.end, "EndOn", "csharp");
 @@clientName(KubeletConfig.failSwapOn, "ShouldFailStartWithSwapOn", "csharp");
@@ -564,7 +588,6 @@ using Microsoft.ContainerService;
 );
 @@clientName(OutboundType, "ContainerServiceOutboundType", "csharp");
 @@clientName(OutboundType.managedNATGateway, "ManagedNatGateway", "csharp");
-@@clientName(OutboundType.managedNATGatewayV2, "ManagedNatGatewayV2", "csharp");
 @@clientName(
   OutboundType.userAssignedNATGateway,
   "UserAssignedNatGateway",
@@ -851,38 +874,21 @@ using Microsoft.ContainerService;
 );
 @@clientName(ManagedClusters.post, "ResolvePrivateLinkServiceId", "csharp");
 
-namespace Azure.ResourceManager.ContainerService.Models {
-  /**
-   * Delegated resource properties - internal use only.
-   */
-  model ManagedClusterDelegatedIdentity {
-    /**
-     * The ARM resource id of the delegated resource - internal use only.
-     */
-    resourceId: armResourceIdentifier;
-
-    /**
-     * The tenant id of the delegated resource - internal use only.
-     */
-    tenantId?: uuid;
-
-    /**
-     * The delegation id of the referral delegation (optional) - internal use only.
-     */
-    referralResource: string;
-
-    /**
-     * The source resource location - internal use only.
-     */
-    location?: azureLocation;
-  }
-
-  @@alternateType(
-    ManagedClusterIdentity.delegatedResources,
-    Record<ManagedClusterDelegatedIdentity>,
-    "csharp"
-  );
-}
+@@clientName(
+  Azure.ResourceManager.CommonTypes.DelegatedResource,
+  "ManagedClusterDelegatedIdentity",
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.DelegatedResource.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.DelegatedResource.location,
+  azureLocation,
+  "csharp"
+);
 @@alternateType(ManagedClusterIdentity.principalId, uuid, "csharp");
 @@alternateType(ManagedClusterIdentity.tenantId, uuid, "csharp");
 @@alternateType(
@@ -1147,11 +1153,6 @@ namespace Azure.ResourceManager.ContainerService.Models {
   "csharp"
 );
 @@clientName(
-  ManagedClusterAzureMonitorProfileContainerInsights.disableCustomMetrics,
-  "IsCustomMetricsDisabled",
-  "csharp"
-);
-@@clientName(
   ManagedClusterAzureMonitorProfileContainerInsights.disablePrometheusMetricsScraping,
   "IsPrometheusMetricsScrapingDisabled",
   "csharp"
@@ -1376,6 +1377,7 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@scope(ManagedClusters.operationStatusResultList, "!csharp");
 @@scope(ManagedClusters.operationStatusResultGet, "!csharp");
 @@scope(AgentPools.getByAgentPool, "!csharp");
+@@scope(AgentPools.listByAgentPool, "!csharp");
 @@scope(Operations.list, "!csharp");
 
 // we add this model in this namespace in order to replace some models with this model via alternateType decorator

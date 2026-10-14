@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -477,6 +479,24 @@ union TablePlanEnum {
 }
 
 /**
+ * The protection level of the table. Determines the default data access isolation behavior.
+ */
+@added(Versions.v2026_03_01)
+union TableProtectionLevelEnum {
+  string,
+
+  /**
+   * The default protection level. Table data is accessible through standard permissions.
+   */
+  General: "General",
+
+  /**
+   * Table data is isolated by default. Accessing or exporting data requires explicit, scoped authorization.
+   */
+  Protected: "Protected",
+}
+
+/**
  * Column data type.
  */
 union ColumnTypeEnum {
@@ -546,6 +566,12 @@ union ColumnDataTypeHintEnum {
    * A standard V4/V6 ip address following the standard shape, x.x.x.x/y:y:y:y:y:y:y:y
    */
   ip: "ip",
+
+  /**
+   * A vector of single-precision floating-point values used for semantic / similarity search.
+   */
+  @added(Versions.v2026_03_01)
+  vector16: "vector16",
 }
 
 /**
@@ -2265,6 +2291,12 @@ model TableProperties {
   plan?: TablePlanEnum;
 
   /**
+   * The protection level of the table. Determines the default data access isolation behavior.
+   */
+  @added(Versions.v2026_03_01)
+  protectionLevel?: TableProtectionLevelEnum;
+
+  /**
    * The timestamp that table plan was last modified (UTC).
    */
   @visibility(Lifecycle.Read)
@@ -2478,7 +2510,7 @@ model Column {
   dataTypeHint?: ColumnDataTypeHintEnum;
 
   /**
-   * Column display name.
+   * Column display name. Can be set at creation time; after creation, updates must either match column name or set to null/empty. If not provided, defaults to column name.
    */
   displayName?: string;
 
@@ -2629,6 +2661,38 @@ model WorkspacePurgeStatusResponse {
    * Status of the operation represented by the requested Id.
    */
   status: PurgeState;
+}
+
+/**
+ * Describes the body of a request to purge data lake data in a Log Analytics workspace.
+ */
+@added(Versions.v2026_03_01)
+model WorkspacePurgeLakeDataBody {
+  /**
+   * The name of the table from which to purge data lake data. Must be an Auxiliary table, or an Analytics table that is mirrored to the data lake.
+   */
+  table: string;
+
+  /**
+   * The time range over which data lake data is purged.
+   */
+  timeRange: WorkspacePurgeLakeDataTimeRange;
+}
+
+/**
+ * The time range over which a data lake purge request operates.
+ */
+@added(Versions.v2026_03_01)
+model WorkspacePurgeLakeDataTimeRange {
+  /**
+   * The inclusive start of the time range, in UTC. Must fall on an hour boundary (minutes and seconds must be zero).
+   */
+  startTime: utcDateTime;
+
+  /**
+   * The exclusive end of the time range, in UTC. Must fall on an hour boundary and be earlier than the start of the current hour.
+   */
+  endTime: utcDateTime;
 }
 
 /**
@@ -2845,6 +2909,13 @@ model WorkspaceFeatures {
    */
   @visibility(Lifecycle.Read)
   associations?: string[];
+
+  /**
+   * Enable Data authorization mode for the workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "dataAuthorizationMode is tri-state: null indicates 'not set/inherited' which must be distinguishable from an explicit false; sending null is a valid no-op that carries different semantics than false."
+  @added(Versions.v2026_03_01)
+  dataAuthorizationMode?: boolean | null;
 }
 
 /**
@@ -3087,6 +3158,71 @@ model SummaryLogsRetryBinProperties {
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   retryBinStartTime: utcDateTime;
+}
+
+/**
+ * Type of managed service identity.
+ */
+@added(Versions.v2026_03_01)
+union SummaryLogsIdentityType {
+  string,
+
+  /**
+   * The default identity type. summary logs do not have a managed identity.
+   */
+  None: "None",
+
+  /**
+   * summary logs is associated with a user assigned managed identity. User assigned identities are created as separate Azure resources and can be shared across multiple summary logs.
+   */
+  UserAssigned: "UserAssigned",
+}
+
+/**
+ * Identity for the summary logs resource.
+ */
+@added(Versions.v2026_03_01)
+model SummaryLogsIdentity {
+  /**
+   * The principal ID of resource identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The tenant ID of resource.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /**
+   * Type of managed service identity.
+   */
+  type: SummaryLogsIdentityType;
+
+  /**
+   * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "userAssignedIdentities is an ARM-standard map keyed by the user-assigned identity resource ID, which requires a Record type to represent the open-ended key set."
+  userAssignedIdentities?: Record<SummaryLogsUserIdentityProperties>;
+}
+
+/**
+ * User assigned identity properties.
+ */
+@added(Versions.v2026_03_01)
+model SummaryLogsUserIdentityProperties {
+  /**
+   * The principal id of user assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The client id of user assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  clientId?: string;
 }
 
 /**

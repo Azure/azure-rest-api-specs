@@ -1,5 +1,6 @@
 import "../common/models.tsp";
 import "./models.tsp";
+import "../voice-agents/agents.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -41,6 +42,24 @@ interface Agents {
   createAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     CreateAgentRequest,
+    AgentObject
+  >;
+
+  /**
+   * Generates and creates an agent from kind-specific high-level inputs.
+   * The generated definition remains fully editable through the standard agent versioning operations.
+   */
+  @summary("Generate an agent")
+  @post
+  @route("/agents:generate")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @tag("Agents")
+  generateAgent is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The kind-specific inputs for generating and creating an agent. */
+      @body body: GenerateAgentRequest;
+    },
     AgentObject
   >;
 
@@ -340,7 +359,7 @@ interface Agents {
   /**
    * Applies a merge-patch update to the specified agent endpoint configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @summary("Update an agent endpoint")
   @patch(#{ implicitOptionality: true })
   @route("/agents/{agent_name}")

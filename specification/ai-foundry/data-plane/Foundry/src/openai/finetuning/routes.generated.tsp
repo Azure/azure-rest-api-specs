@@ -55,7 +55,7 @@ interface FineTuning {
       /** The order in which to retrieve permissions. */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Auto-suppressed warnings non-applicable rules during import."
-      #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
       @query(#{ explode: true })
       order?: "ascending" | "descending" = "descending";
     },
