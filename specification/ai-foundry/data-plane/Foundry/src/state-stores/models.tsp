@@ -282,6 +282,7 @@ alias GetStateStoreItemResponse = Response<200> &
   StateStoreItemEtagResponseHeader;
 
 /** Error envelope for conditional item operations. The ETag header is returned on a 412 response when a current item exists. */
+@Azure.ClientGenerator.Core.clientName("StateStoreConditionalErrorResult", "csharp")
 @error
 model StateStoreConditionalErrorResponse {
   error: ApiError;
