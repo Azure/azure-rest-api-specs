@@ -38,6 +38,7 @@ for (const requiredFile of [instructionsSource, workspaceFile]) {
   }
 }
 
+/** @type {Map<string, string>} */
 const catalog = new Map();
 let inCatalog = false;
 for (const line of fs.readFileSync(workspaceFile, "utf8").split(/\r?\n/)) {
@@ -51,12 +52,13 @@ for (const line of fs.readFileSync(workspaceFile, "utf8").split(/\r?\n/)) {
   if (!inCatalog) {
     continue;
   }
-  const match = line.match(/^  "([^"]+)":\s*(\S+)\s*$/);
+  const match = line.match(/^[ ]{2}"([^"]+)":\s*(\S+)\s*$/);
   if (match) {
     catalog.set(match[1], match[2]);
   }
 }
 
+/** @type {Record<string, string>} */
 const devDependencies = {};
 for (const dependency of fixtureDependencies) {
   const version = catalog.get(dependency);

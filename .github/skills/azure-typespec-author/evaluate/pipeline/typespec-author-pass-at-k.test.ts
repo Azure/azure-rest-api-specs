@@ -26,8 +26,8 @@ afterEach(() => {
   }
 });
 
-describe("TypeSpec pass@k", () => {
-  it("passes when one of three trials passes", () => {
+await describe("TypeSpec pass@k", async () => {
+  await it("passes when one of three trials passes", () => {
     const root = newResults([
       {
         type: "trial-result",
@@ -53,7 +53,7 @@ describe("TypeSpec pass@k", () => {
     assert.equal(getPassAtKVerdict(root).passed, true);
   });
 
-  it("fails when none of ten trials passes", () => {
+  await it("fails when none of ten trials passes", () => {
     const trials = Array.from({ length: 10 }, () => ({
       type: "trial-result",
       evalFilePath: "001.eval.yaml",
@@ -65,7 +65,7 @@ describe("TypeSpec pass@k", () => {
     assert.equal(getPassAtKVerdict(root).passed, false);
   });
 
-  it("sets the JUnit threshold to one required pass for any run count", () => {
+  await it("sets the JUnit threshold to one required pass for any run count", () => {
     const root = newResults([{ type: "run-summary" }]);
     const junit = path.join(root, "eval-results.junit.xml");
     fs.writeFileSync(

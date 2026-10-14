@@ -20,8 +20,20 @@ if (mode === "node_modules") {
   process.exit(0);
 }
 
+/** @type {unknown} */
 const fixturePackage = JSON.parse(fs.readFileSync("package.json", "utf8"));
-const requiredPackages = Object.keys(fixturePackage.devDependencies ?? {});
+if (
+  typeof fixturePackage !== "object" ||
+  fixturePackage === null ||
+  !("devDependencies" in fixturePackage) ||
+  typeof fixturePackage.devDependencies !== "object" ||
+  fixturePackage.devDependencies === null
+) {
+  console.error("[dependency-check:packages] package.json has no devDependencies");
+  process.exit(2);
+}
+
+const requiredPackages = Object.keys(fixturePackage.devDependencies);
 if (!requiredPackages.length) {
   console.error("[dependency-check:packages] package.json has no devDependencies");
   process.exit(2);

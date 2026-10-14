@@ -20,6 +20,12 @@ type PassAtKVerdict = {
   lines: string[];
 };
 
+function isResultRecord(value: unknown): value is TrialResult | RunSummary {
+  return (
+    typeof value === "object" && value !== null && "type" in value && typeof value.type === "string"
+  );
+}
+
 function findNewestFile(root: string, fileName: string): string | undefined {
   let newestFile: string | undefined;
   let newestMtime = -Infinity;
@@ -69,12 +75,16 @@ export function getPassAtKVerdict(resultsDir: string): PassAtKVerdict {
       continue;
     }
 
-    let record: TrialResult | RunSummary;
+    let parsed: unknown;
     try {
-      record = JSON.parse(line);
+      parsed = JSON.parse(line);
     } catch {
       continue;
     }
+    if (!isResultRecord(parsed)) {
+      continue;
+    }
+    const record = parsed;
 
     if (record.type === "run-summary") {
       runSummary = record;

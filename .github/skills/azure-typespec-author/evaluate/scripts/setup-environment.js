@@ -26,6 +26,11 @@ if (!["live", "mock"].includes(mcpKind) || process.argv.length !== 4) {
   process.exit(1);
 }
 
+/**
+ * @param {string} command
+ * @param {string[]} args
+ * @param {import("node:child_process").ExecFileSyncOptions} [options]
+ */
 function run(command, args, options = {}) {
   process.stderr.write(`> ${command} ${args.join(" ")}\n`);
   execFileSync(command, args, {
