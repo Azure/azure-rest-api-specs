@@ -49,7 +49,7 @@ extends:
         jobs:
           - template: /eng/common/pipelines/templates/jobs/build-mcp.yml
             parameters:
-              mcpSetupTemplate: /eng/common/pipelines/templates/steps/eval-mcp-setup.yml
+              mcpSetupTemplate: /eng/pipelines/templates/steps/eval-mcp-setup.yml
               TestType: ${{ parameters.McpKind }}
 
       - stage: PrepareForced

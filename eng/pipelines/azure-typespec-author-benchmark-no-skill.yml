@@ -33,7 +33,7 @@ extends:
     vallyRoot: .github/skills/azure-typespec-author/evaluate
     evalGlobs:
       - 'evals/*.eval.yaml'
-    mcpSetupTemplate: /eng/common/pipelines/templates/steps/eval-mcp-setup.yml
+    mcpSetupTemplate: /eng/pipelines/templates/steps/eval-mcp-setup.yml
     TestType: ${{ parameters.McpKind }}
     evalInvokeTemplate: /.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-noskill-eval-invoke.yml
     UseAzSdkAuthentication: ${{ eq(parameters.McpKind, 'live') }}
