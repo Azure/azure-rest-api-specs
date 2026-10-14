@@ -79,11 +79,6 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@clientName(
-    CloudComputerUsePreviewTool.cloud_computer_use_preview,
-    "ToolParameters",
-    "csharp"
-  );
-  @@clientName(
     BrowserAutomationToolParameters.connection,
     "ToolConnectionParameters",
     "csharp"
