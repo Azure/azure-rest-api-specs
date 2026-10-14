@@ -10,6 +10,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { inspect } from "node:util";
+import { basename, dirname, normalize } from "pathe";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.ts";
 import { groupSpecConfigPaths } from "./spec-helpers.ts";
 import {
@@ -388,18 +389,17 @@ export function isManagementPlaneSpecConfig(
     return false;
   }
 
-  const configPath = configuredPaths[0].replaceAll("\\", "/");
+  const configPath = normalize(configuredPaths[0]);
   const planeFolderPath = getPlaneFolderPath(configPath);
   if (planeFolderPath) {
-    return planeFolderPath.split("/").at(-1) === "resource-manager";
+    return basename(planeFolderPath) === "resource-manager";
   }
   if (!tspConfigPath) {
     return false;
   }
 
-  const segments = configPath.split("/").filter(Boolean);
-  const projectFolder = segments.at(-2);
-  return projectFolder?.endsWith(".Management") === true;
+  const projectFolder = basename(dirname(configPath));
+  return projectFolder.endsWith(".Management");
 }
 
 /**
