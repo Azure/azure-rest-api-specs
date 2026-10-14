@@ -6520,7 +6520,7 @@ model VaultSettingCreationInputProperties {
   vmwareToAzureProviderType?: string;
 
   /**
-   * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine. As with the other properties on this resource, the stored value is updated only when the property is supplied; omitting it retains the previously stored policy rather than resetting it.
+   * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine. If the property is omitted from the request body, the policy is set to `Disabled`.
    */
   @added(Versions.v2026_11_01)
   recoveryNetworkConfigAutoSync?: RecoveryNetworkConfigAutoSyncPolicy;
