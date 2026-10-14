@@ -168,7 +168,7 @@ export async function detectChangedSpecConfigFiles(
   });
   const typespecProjectResult = Object.fromEntries(
     [...projects].map(([directory, files]) => [
-      path.relative(commandInput.localSpecRepoPath, directory),
+      path.relative(commandInput.localSpecRepoPath, directory).replaceAll("\\", "/"),
       files,
     ]),
   );

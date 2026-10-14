@@ -1,7 +1,7 @@
 import { SdkName } from "@azure-tools/specs-shared/sdk-types";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import {
   detectChangedSpecConfigFiles,
   groupSpecConfigPaths,
@@ -63,6 +63,10 @@ describe("detectChangedSpecConfigFiles", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   test("case with empty change files", async () => {
@@ -188,6 +192,41 @@ describe("detectChangedSpecConfigFiles", () => {
       readmeMd: "specification/contosowidgetmanager/data-plane/readme.md",
       typespecProject: "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
     });
+  });
+
+  test("keeps README pairing and shared-library merging with Windows relative paths", async () => {
+    const relative = path.relative;
+    vi.spyOn(path, "relative").mockImplementation((from, to) =>
+      relative(from, to).replaceAll("/", "\\"),
+    );
+    const managementFile = "specification/contosowidgetmanager/Contoso.Management/client.tsp";
+    const configFile = "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml";
+    const sharedFile = "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp";
+    const swaggerFile =
+      "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/preview/2022-11-01-preview/widgets.json";
+    vi.mocked(getChangedFiles).mockResolvedValue([
+      swaggerFile,
+      managementFile,
+      configFile,
+      sharedFile,
+    ]);
+
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
+
+    expect(result).toHaveLength(2);
+    expect(result.map(normalizeResultItem)).toEqual(
+      expect.arrayContaining([
+        {
+          specs: [managementFile],
+          typespecProject: "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+        },
+        {
+          specs: [swaggerFile, configFile, sharedFile],
+          readmeMd: "specification/contosowidgetmanager/data-plane/readme.md",
+          typespecProject: configFile,
+        },
+      ]),
+    );
   });
 
   test("case with V2 folder structure - resource-manager", async () => {
