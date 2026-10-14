@@ -507,6 +507,7 @@ union RaiPolicyMode {
  * The public representation used by a RAI policy body.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union RaiPolicyFormat {
   string,
 
@@ -521,6 +522,7 @@ union RaiPolicyFormat {
  * The transport encoding of reusable Rego source.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union RaiRegoEncoding {
   string,
 
@@ -533,6 +535,7 @@ union RaiRegoEncoding {
 
 /** A customer-visible reference to a subscription-level external safety provider. */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiPolicyCustomExternalSafetyProviderReference {
   /** The registered external safety-provider name. */
   @minLength(1)
@@ -550,6 +553,7 @@ model RaiPolicyCustomExternalSafetyProviderReference {
 
 /** The policy language supported by the Azure AI Content Safety Unified Moderate host profile. */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union RaiAcsPolicyDefinitionType {
   string,
 
@@ -559,6 +563,7 @@ union RaiAcsPolicyDefinitionType {
 
 /** The representation sent to Azure AI Content Safety moderation capabilities. */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union RaiAcsModerationSubjectFormat {
   string,
 
@@ -571,6 +576,7 @@ union RaiAcsModerationSubjectFormat {
 
 /** Harm categories supported by the Unified Moderate text profile. */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union RaiAcsHarmCategory {
   string,
 
@@ -598,6 +604,7 @@ union RaiAcsHarmCategory {
 
 /** A Rego policy definition in the Azure AI Content Safety Unified Moderate host profile. */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiAcsRegoPolicyDefinition {
   /** The policy language. This profile supports only Rego. */
   type: RaiAcsPolicyDefinitionType;
@@ -609,6 +616,7 @@ model RaiAcsRegoPolicyDefinition {
 
 /** Selects one Azure AI Content Safety harm-detector configuration. */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiAcsHarmConfiguration {
   /** The logical harm category exposed under input.snapshot.moderation.harm. */
   category: RaiAcsHarmCategory;
@@ -627,6 +635,7 @@ model RaiAcsHarmConfiguration {
  * Specification runtime evaluates the selected Rego query.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiAcsModerationBindingExtension {
   /** How the selected policy target is represented to moderation capabilities. */
   @encodedName("application/json", "subject_format")
@@ -641,11 +650,13 @@ model RaiAcsModerationBindingExtension {
 /** An object that must contain no properties. */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "The AACS host profile permits these fields only when they are empty"
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiAcsEmptyObject {}
 
 /** Static policy metadata for one Agent Control Specification tool catalog entry. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS tool entries permit extensible policy metadata"
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiAcsToolDefinition {
   ...Record<unknown>;
 
@@ -673,6 +684,7 @@ model RaiAcsToolDefinition {
  * Identifies the logical policy evaluated at an Agent Control Specification intervention point.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiAcsPolicyBinding {
   /** The logical policy identifier. */
   @minLength(1)
@@ -689,6 +701,7 @@ model RaiAcsPolicyBinding {
 
 /** Canonical policy targets supported by the Azure AI Content Safety Unified Moderate host profile. */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union RaiAcsPolicyTarget {
   string,
 
@@ -707,6 +720,7 @@ union RaiAcsPolicyTarget {
 
 /** Canonical target kinds supported by the Azure AI Content Safety Unified Moderate host profile. */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union RaiAcsPolicyTargetKind {
   string,
 
@@ -728,6 +742,7 @@ union RaiAcsPolicyTargetKind {
  * The listed values are recognized by the Azure AI Content Safety Unified Moderate host profile; other values are allowed for forward compatibility.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union RaiAcsToolNameSelector {
   string,
 
@@ -742,6 +757,7 @@ union RaiAcsToolNameSelector {
  * Binds one logical policy to an Agent Control Specification intervention point.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiAcsInterventionPoint {
   /** The canonical Agent Hooks snapshot path projected as the policy target. */
   @encodedName("application/json", "policy_target")
@@ -760,6 +776,7 @@ model RaiAcsInterventionPoint {
 
 /** Binds one logical policy to a tool-call intervention point. */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiAcsToolInterventionPoint {
   ...RaiAcsInterventionPoint;
 
@@ -770,6 +787,7 @@ model RaiAcsToolInterventionPoint {
 
 /** Intervention points supported by the Azure AI Content Safety Unified Moderate host profile. */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiAcsInterventionPoints {
   /** The policy evaluated for user input. */
   input?: RaiAcsInterventionPoint;
@@ -791,6 +809,7 @@ model RaiAcsInterventionPoints {
  * Azure AI Content Safety Unified Moderate.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiAcsManifest {
   /** The declared Agent Control Specification manifest version. */
   @encodedName("application/json", "agent_control_specification_version")
@@ -824,6 +843,7 @@ model RaiAcsManifest {
  * References one reusable Rego resource on the same account.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiRegoReference {
   /** The same-account Rego resource name. */
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{1,63}$")
@@ -837,6 +857,7 @@ model RaiRegoReference {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Reusable Rego resources are synchronously persisted and do not expose provisioningState"
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiRegoProperties {
   /** How the Rego source is encoded on the wire. The default is None. */
   encoding?: RaiRegoEncoding = RaiRegoEncoding.None;
@@ -851,6 +872,7 @@ model RaiRegoProperties {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "RAI bindings are synchronously persisted and do not expose provisioningState"
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiBindingProperties {
   /** A valid Azure Resource Manager resource ID of the resource to bind to the target RAI policy. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -865,10 +887,14 @@ model RaiBindingProperties {
 @added(Versions.v2026_09_15_preview)
 model RaiResourcePutConditionalHeaders {
   /** Proceed only when the current resource ETag matches this value. */
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @header("If-Match")
   ifMatch?: string;
 
   /** Proceed only when no current resource ETag matches this value. */
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @header("If-None-Match")
   ifNoneMatch?: string;
 }
@@ -877,6 +903,8 @@ model RaiResourcePutConditionalHeaders {
 @added(Versions.v2026_09_15_preview)
 model RaiResourceDeleteConditionalHeaders {
   /** Proceed only when the current resource ETag matches this value. */
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @header("If-Match")
   ifMatch?: string;
 }
@@ -885,6 +913,8 @@ model RaiResourceDeleteConditionalHeaders {
 @added(Versions.v2026_09_15_preview)
 model RaiResourceEtagResponseHeader {
   /** The entity tag for the returned resource representation. */
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @header("ETag")
   etagHeader?: string;
 }
@@ -1163,6 +1193,7 @@ union ConnectionCategory {
 
   /** Connection to an endpoint described by an OpenAPI specification. */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   OpenAPI: "OpenAPI",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Amazon Marketplace Web Service connection"
@@ -2102,6 +2133,7 @@ model AccountProperties {
    * At the moment the service only supports a single cost control. This will be expanded in future API versions.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @maxItems(1)
   costControlIds?: Azure.Core.armResourceIdentifier<[
     {
@@ -2114,6 +2146,7 @@ model AccountProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted costControlConnections object from an explicit null in PATCH so callers can clear the value."
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read, Lifecycle.Update)
   costControlConnections?: CostControlConnections | null;
 }
@@ -2878,6 +2911,7 @@ model Usage {
    * Fully qualified resource ID for the usage. Ex - /subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/usages/{usageName}
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
@@ -2885,6 +2919,7 @@ model Usage {
    * The type of the usage resource. E.g. "Microsoft.CognitiveServices/locations/usages"
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   type?: string;
 
@@ -3783,6 +3818,7 @@ model DeploymentProperties {
    * At the moment the service only supports a single cost control. This will be expanded in future API versions.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @maxItems(1)
   costControlIds?: Azure.Core.armResourceIdentifier<[
     {
@@ -4044,17 +4080,20 @@ model RaiPolicyProperties {
    * creation and replacement require ACS.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   format?: RaiPolicyFormat;
 
   /** The ACS manifest. Required by service validation when format is ACS. */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   acs?: RaiAcsManifest;
 
   /**
    * Reusable same-account Rego resources loaded with the ACS manifest.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @identifiers(#["regoName"])
   acsRegos?: RaiRegoReference[];
 
@@ -4102,6 +4141,7 @@ model RaiPolicyProperties {
 
   /** Optional external safety-provider references used by this policy. */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @identifiers(#["externalSafetyProviderName", "source"])
   customExternalSafetyProviders?: RaiPolicyCustomExternalSafetyProviderReference[];
 
@@ -6378,6 +6418,7 @@ model RaiPolicyListResult {
  * The list of account-scoped reusable Rego resources.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiRegoListResult {
   /** The link used to get the next page. */
   @nextLink
@@ -6393,6 +6434,7 @@ model RaiRegoListResult {
  * The list of account-scoped RAI bindings.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model RaiBindingListResult {
   /** The link used to get the next page. */
   @nextLink
@@ -6409,6 +6451,7 @@ model RaiBindingListResult {
  * Properties of an adapter deployment.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model AdapterDeploymentProperties {
   /**
    * The immutable Project Models version produced by Foundry fine-tuning.
@@ -6454,6 +6497,7 @@ model AdapterDeploymentProperties {
  * Lifecycle operation types reported by an adapter deployment.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union AdapterDeploymentOperationType {
   string,
 
@@ -6471,6 +6515,7 @@ union AdapterDeploymentOperationType {
  * Lifecycle operation states reported by an adapter deployment.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union AdapterDeploymentOperationState {
   string,
 
@@ -6491,6 +6536,7 @@ union AdapterDeploymentOperationState {
  * The most recently requested adapter lifecycle operation.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model AdapterDeploymentLastOperation {
   /**
    * The type of lifecycle operation.
@@ -6529,6 +6575,7 @@ model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
  * Gated model access configuration for a managed compute deployment.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model GatedModelAccessProperties {
   /**
    * The fully qualified Azure resource ID of the project connection used to authorize access to a gated model during deployment creation.
@@ -7210,6 +7257,7 @@ model WorkbenchProperties {
  * Provisioning state of a workbench resource, independent of runtime lifecycle status.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union WorkbenchProvisioningState {
   string,
 
@@ -7230,6 +7278,7 @@ union WorkbenchProvisioningState {
  * Runtime lifecycle status of a workbench.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union WorkbenchStatus {
   string,
 
@@ -7268,6 +7317,7 @@ union WorkbenchStatus {
  * Mutable properties for a Workbench resource.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model WorkbenchUpdateProperties {
   /**
    * Resource ID of the Foundry Compute or virtual cluster that hosts this workbench. Changing the cluster requires the workbench to be stopped.

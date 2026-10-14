@@ -87,6 +87,7 @@ model Workbench is Azure.ResourceManager.ProxyResource<
  * The mutable fields of a workbench resource.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model WorkbenchUpdate {
   /**
    * Properties of the workbench to update.
