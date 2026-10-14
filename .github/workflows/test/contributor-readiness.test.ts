@@ -424,8 +424,10 @@ describe("contributor readiness", () => {
     );
     expect(call.body).not.toContain("Internal contributors need Azure organization membership");
     expect(call.body).not.toContain("private membership cannot be verified");
-    expect(call.body).toContain("Non-blocking report");
-    expect(call.body).toContain("external fork contributions are allowed");
+    expect(call.body).toContain(
+      "Non-blocking report; access issues must be resolved to unblock PR actions.",
+    );
+    expect(call.body).toContain("External fork contributions are allowed");
     const report = call.body.replace(`\n${marker}`, "");
     expect(f.core.summary.addRaw).toHaveBeenCalledWith(report);
     const [check] = f.createCheck.mock.calls[0] as [

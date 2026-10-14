@@ -348,7 +348,7 @@ export function renderReadiness(
             renderReadinessFindings(participants, findings),
             `Internal contributors: ${link("setup / renew required access", ONBOARDING)}. Recheck: ${inlineCode(COMMAND)}.`,
             renderVerifiedContributors(verifiedParticipants),
-            "Non-blocking report; external fork contributions are allowed. GitHub review rules still apply.",
+            "Non-blocking report; access issues must be resolved to unblock PR actions. External fork contributions are allowed. GitHub review rules still apply.",
           ]
         : "✅ No contributor-readiness issues found.",
       `Last updated: ${new Date().toISOString()}`,
