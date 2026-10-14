@@ -92731,7 +92731,7 @@ components:
           type: string
           enum:
             - live
-          description: The native GPT Live protocol.
+          description: Selects the Live protocol.
         model_type:
           type: string
           enum:
@@ -92752,7 +92752,10 @@ components:
           description: Delegation settings. Omit for client mode. responses.model is a backend deployment name in the Live resource, not a model catalog ID.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentDefinition'
-      description: Native GPT Live configuration for a Foundry deployment.
+      description: |-
+        The Live voice agent definition. Its configuration (model, instructions, audio, and delegation) drives a
+        managed speech-to-speech experience using a Foundry GPT Live deployment. Establish Live voice sessions through
+        `GET /agents/{agent_name}/endpoint/protocols/voice/live/sessions`. Every create or update produces a new immutable version.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -93193,7 +93196,10 @@ components:
           description: Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentDefinition'
-      description: Realtime and cascaded Voice Live configuration.
+      description: |-
+        The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
+        managed speech-to-speech experience. Establish realtime voice sessions through
+        `GET /agents/{agent_name}/endpoint/protocols/voice`. Every create or update produces a new immutable version.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

@@ -68,6 +68,11 @@ const liveGreetingProbe = [
 const liveDelegationProbe = [
   'model LiveDelegationProbe { ...PickProperties<Azure.AI.Projects.VoiceAgentLiveDefinition, "delegation">; }',
 ];
+const originalVoiceDefinitionDoc = [
+  "The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a",
+  "managed speech-to-speech experience. Establish realtime voice sessions through",
+  "`GET /agents/{agent_name}/endpoint/protocols/voice`. Every create or update produces a new immutable version.",
+].join("\n");
 
 function type(name, context = program) {
   const [value, diagnostics] = context.resolveTypeReference(name);
@@ -239,6 +244,14 @@ function checkSdkVoiceInheritance(context) {
   }
   assert.equal(model("VoiceAgentRealtimeDefinition").baseModel, voice);
   assert.equal(model("VoiceAgentLiveDefinition").baseModel, voice);
+  for (const name of [
+    "VoiceAgentRealtimeDefinition",
+    "VoiceAgentLiveDefinition",
+  ])
+    assert.equal(
+      model(name).doc,
+      getDoc(program, type(`Azure.AI.Projects.${name}`)),
+    );
   assert.ok(
     !context.sdkPackage.unions.some((u) =>
       ["VoiceAgentDefinition", "AgentDefinitionUnion"].includes(u.__raw?.name),
@@ -362,6 +375,32 @@ before(async () => {
 
 after(async () => {
   if (output) await rm(output, { recursive: true, force: true });
+});
+
+test("voice subtype docs preserve the original Realtime description and parallel Live guidance", () => {
+  const realtime = type("Azure.AI.Projects.VoiceAgentRealtimeDefinition");
+  const live = type("Azure.AI.Projects.VoiceAgentLiveDefinition");
+  assert.equal(getDoc(program, realtime), originalVoiceDefinitionDoc);
+  const liveDoc = getDoc(program, live);
+  assert.ok(liveDoc.startsWith("The Live voice agent definition."));
+  for (const text of [
+    "model, instructions, audio, and delegation",
+    "Foundry GPT Live deployment",
+    "`GET /agents/{agent_name}/endpoint/protocols/voice/live/sessions`",
+    "Every create or update produces a new immutable version.",
+  ])
+    assert.ok(liveDoc.includes(text), text);
+  assert.doesNotMatch(liveDoc, /\bnative\b/i);
+  assert.equal(
+    getDoc(program, live.properties.get("sub_protocol")),
+    "Selects the Live protocol.",
+  );
+  for (const doc of documents)
+    for (const model of [realtime, live])
+      assert.equal(
+        doc.components.schemas[model.name].description,
+        getDoc(program, model),
+      );
 });
 
 test("voice models retain inheritance and optional protocol fields with separate audio ownership", () => {

@@ -144,7 +144,11 @@ union VoiceAgentSubProtocol {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Voice-local OpenAPI metadata defines the optional discriminator; SDKs must customize dispatch."
-@doc("Realtime and cascaded Voice Live configuration.")
+@doc("""
+  The voice agent definition. Its configuration (model, instructions, audio, tools, and optional avatar) drives a
+  managed speech-to-speech experience. Establish realtime voice sessions through
+  `GET /agents/{agent_name}/endpoint/protocols/voice`. Every create or update produces a new immutable version.
+  """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentRealtimeDefinition extends VoiceAgentDefinition {
   @doc("Selects Realtime. May be omitted for legacy agents.")
@@ -208,10 +212,14 @@ model VoiceAgentRealtimeDefinition extends VoiceAgentDefinition {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Voice-local OpenAPI metadata defines the optional discriminator; SDKs must customize dispatch."
-@doc("Native GPT Live configuration for a Foundry deployment.")
+@doc("""
+  The Live voice agent definition. Its configuration (model, instructions, audio, and delegation) drives a
+  managed speech-to-speech experience using a Foundry GPT Live deployment. Establish Live voice sessions through
+  `GET /agents/{agent_name}/endpoint/protocols/voice/live/sessions`. Every create or update produces a new immutable version.
+  """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveDefinition extends VoiceAgentDefinition {
-  @doc("The native GPT Live protocol.")
+  @doc("Selects the Live protocol.")
   sub_protocol: "live";
 
   @doc("Uses a Foundry model deployment.")
