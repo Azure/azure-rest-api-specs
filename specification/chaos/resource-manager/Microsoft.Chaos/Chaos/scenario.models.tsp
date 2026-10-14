@@ -49,6 +49,15 @@ model ScenarioProperties {
   /**
    * Resource ID of the template version this scenario was created from (optional).
    */
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "createdFrom")
+  @visibility(Lifecycle.Read)
+  createdFromReadOnly?: string;
+
+  /**
+   * Resource ID of the template version this scenario was created from (optional).
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   createdFrom?: string;
 
@@ -57,6 +66,17 @@ model ScenarioProperties {
    * supplied on create. This is the scenario's own version and is independent of
    * the version of any template it was created from.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "version")
+  @visibility(Lifecycle.Read)
+  versionReadOnly?: string;
+
+  /**
+   * Version of the scenario, supplied by the author. Defaults to `1.0` when not
+   * supplied on create. This is the scenario's own version and is independent of
+   * the version of any template it was created from.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
   version?: string;
 
   /**
