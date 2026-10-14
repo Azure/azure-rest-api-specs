@@ -1,0 +1,23 @@
+{
+  "title": "Get VM Protection when protection is not enabled",
+  "operationId": "VirtualMachineProtections_Get",
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/vmProtection/default",
+        "name": "default",
+        "type": "Microsoft.Compute/virtualMachines/vmProtection",
+        "properties": {
+          "protectionType": "None",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

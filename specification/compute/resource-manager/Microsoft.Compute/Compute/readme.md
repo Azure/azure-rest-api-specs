@@ -213,6 +213,11 @@ directive:
       - NestedResourcesMustHaveListOperation
     reason: CRP supports the list /restorePoint operation by allowing customers to call Get RestorePointCollection with $expand=RestorePoints
   - where:
+      - $.definitions.VirtualMachineProtection
+    suppress:
+      - NestedResourcesMustHaveListOperation
+    reason: VirtualMachineProtection is a singleton child resource of a virtual machine, addressable only as vmProtection/default, so a list operation is not applicable.
+  - where:
       - $.definitions.SubResourceWithColocationStatus.properties
     suppress:
       - BodyTopLevelProperties
@@ -849,6 +854,10 @@ suppressions:
     reason: Existing POST response codes maintained for backward compatibility.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/restart"].post
+  - code: PostResponseCodes
+    reason: The restore action is a long-running POST that returns no content, matching the 202 and default response shape used by all other Microsoft.Compute virtual machine action operations.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/restore"].post
   - code: PostResponseCodes
     reason: Existing POST response codes maintained for backward compatibility.
     from: ComputeRP.json

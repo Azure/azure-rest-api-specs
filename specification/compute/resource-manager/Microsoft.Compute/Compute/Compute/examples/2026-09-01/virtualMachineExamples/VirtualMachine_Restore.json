@@ -1,0 +1,21 @@
+{
+  "title": "Restore all disks of a virtual machine",
+  "operationId": "VirtualMachines_Restore",
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "api-version": "2026-09-01",
+    "body": {
+      "restorePointId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/AzureManagedRPC-myVM-0f47b100-583c-48e3-a4c0-aefc2c9bbcc1/restorePoints/daily-restore-point"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.Compute/locations/westus/operations/{operation-id}?api-version=2026-09-01",
+        "Retry-After": 10
+      }
+    }
+  }
+}
