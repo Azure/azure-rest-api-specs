@@ -106,13 +106,12 @@ model VoiceAgentLlmInterimResponseConfig
   Creates and updates produce immutable versions. An agent's protocol cannot change across versions.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@discriminator("sub_protocol")
-model VoiceAgentDefinition extends AgentDefinition {
+model VoiceAgentDefinitionBase extends AgentDefinition {
   @doc("Always voice.")
-  kind: AgentKind.voice;
+  kind: "voice";
 
-  @doc("Protocol discriminator. Legacy omission means realtime; null and unknown values are invalid. Reads preserve omission in stored versions.")
-  sub_protocol: VoiceAgentSubProtocol;
+  @doc("Omission selects Realtime. Null and unknown values are invalid. Reads preserve omission.")
+  sub_protocol?: VoiceAgentSubProtocol;
 
   @doc("Frontend instructions, templated with structured_inputs. Backend instructions belong in delegation.responses.")
   instructions?: string | null;
@@ -124,17 +123,26 @@ model VoiceAgentDefinition extends AgentDefinition {
   store?: boolean = false;
 }
 
+@doc("Voice definitions. Omitted sub_protocol selects Realtime; Live requires an explicit value.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "sub_protocol" })
+union VoiceAgentDefinition {
+  VoiceAgentRealtimeDefinition,
+  live: VoiceAgentLiveDefinition,
+}
+
 @doc("Voice protocol; realtime includes cascaded models.")
 union VoiceAgentSubProtocol {
   realtime: "realtime",
   live: "live",
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The union provides protocol discrimination; the base preserves shared SDK fields."
 @doc("Realtime and cascaded Voice Live configuration.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentRealtimeDefinition extends VoiceAgentDefinition {
-  @doc("Selects the realtime protocol.")
-  sub_protocol: VoiceAgentSubProtocol.realtime;
+model VoiceAgentRealtimeDefinition extends VoiceAgentDefinitionBase {
+  @doc("Selects Realtime. May be omitted for legacy agents.")
+  sub_protocol?: "realtime";
 
   @doc("How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_engine` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.")
   model_type?: VoiceModelType;
@@ -193,11 +201,12 @@ model VoiceAgentRealtimeDefinition extends VoiceAgentDefinition {
   subagent_config?: VoiceAgentSubagentConfig;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The union provides protocol discrimination; the base preserves shared SDK fields."
 @doc("Native GPT Live configuration for a Foundry deployment.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveDefinition extends VoiceAgentDefinition {
+model VoiceAgentLiveDefinition extends VoiceAgentDefinitionBase {
   @doc("The native GPT Live protocol.")
-  sub_protocol: VoiceAgentSubProtocol.live;
+  sub_protocol: "live";
 
   @doc("Uses a Foundry model deployment.")
   model_type: "self_deployed";

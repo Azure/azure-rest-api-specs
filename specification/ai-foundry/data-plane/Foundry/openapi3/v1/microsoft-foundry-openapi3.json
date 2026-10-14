@@ -34530,10 +34530,10 @@
           "propertyName": "kind",
           "mapping": {
             "hosted": "#/components/schemas/HostedAgentDefinition",
-            "prompt": "#/components/schemas/PromptAgentDefinition",
             "workflow": "#/components/schemas/WorkflowAgentDefinition",
             "external": "#/components/schemas/ExternalAgentDefinition",
-            "voice": "#/components/schemas/VoiceAgentDefinition"
+            "voice": "#/components/schemas/VoiceAgentDefinitionBase",
+            "prompt": "#/components/schemas/PromptAgentDefinition"
           }
         }
       },
@@ -34549,6 +34549,37 @@
           "Skills=V1Preview"
         ],
         "description": "Feature opt-in keys for agent definition operations supporting conditional preview features."
+      },
+      "AgentDefinitionUnion": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/PromptAgentDefinition"
+          },
+          {
+            "$ref": "#/components/schemas/HostedAgentDefinition"
+          },
+          {
+            "$ref": "#/components/schemas/WorkflowAgentDefinition"
+          },
+          {
+            "$ref": "#/components/schemas/ExternalAgentDefinition"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentDefinition"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "prompt": "#/components/schemas/PromptAgentDefinition",
+            "hosted": "#/components/schemas/HostedAgentDefinition",
+            "workflow": "#/components/schemas/WorkflowAgentDefinition",
+            "external": "#/components/schemas/ExternalAgentDefinition"
+          },
+          "defaultMapping": "#/components/schemas/VoiceAgentDefinition"
+        },
+        "description": "Agent definitions, with protocol selection for voice agents."
       },
       "AgentEndpointAuthorizationScheme": {
         "type": "object",
@@ -37442,7 +37473,7 @@
             "description": "The Unix timestamp (seconds) when the agent was created."
           },
           "definition": {
-            "$ref": "#/components/schemas/AgentDefinition"
+            "$ref": "#/components/schemas/AgentDefinitionUnion"
           },
           "draft": {
             "type": "boolean",
@@ -40157,7 +40188,7 @@
             "description": "A human-readable description of the agent."
           },
           "definition": {
-            "$ref": "#/components/schemas/AgentDefinition",
+            "$ref": "#/components/schemas/AgentDefinitionUnion",
             "description": "The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
@@ -40329,7 +40360,7 @@
             "description": "A human-readable description of the agent."
           },
           "definition": {
-            "$ref": "#/components/schemas/AgentDefinition",
+            "$ref": "#/components/schemas/AgentDefinitionUnion",
             "description": "The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
@@ -95508,7 +95539,7 @@
             "description": "A human-readable description of the agent."
           },
           "definition": {
-            "$ref": "#/components/schemas/AgentDefinition",
+            "$ref": "#/components/schemas/AgentDefinitionUnion",
             "description": "The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
@@ -96782,9 +96813,32 @@
       },
       "VoiceAgentDefinition": {
         "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentLiveDefinition"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentRealtimeDefinition"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "sub_protocol",
+          "mapping": {
+            "live": "#/components/schemas/VoiceAgentLiveDefinition"
+          },
+          "defaultMapping": "#/components/schemas/VoiceAgentRealtimeDefinition"
+        },
+        "description": "Voice definitions. Omitted sub_protocol selects Realtime; Live requires an explicit value.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentDefinitionBase": {
+        "type": "object",
         "required": [
-          "kind",
-          "sub_protocol"
+          "kind"
         ],
         "properties": {
           "kind": {
@@ -96796,7 +96850,7 @@
           },
           "sub_protocol": {
             "$ref": "#/components/schemas/VoiceAgentSubProtocol",
-            "description": "Protocol discriminator. Legacy omission means realtime; null and unknown values are invalid. Reads preserve omission in stored versions."
+            "description": "Omission selects Realtime. Null and unknown values are invalid. Reads preserve omission."
           },
           "instructions": {
             "anyOf": [
@@ -96820,13 +96874,6 @@
             "type": "boolean",
             "description": "Persists conversation content and audio in Foundry, not native Live recordings. Defaults to false.",
             "default": false
-          }
-        },
-        "discriminator": {
-          "propertyName": "sub_protocol",
-          "mapping": {
-            "realtime": "#/components/schemas/VoiceAgentRealtimeDefinition",
-            "live": "#/components/schemas/VoiceAgentLiveDefinition"
           }
         },
         "allOf": [
@@ -97372,7 +97419,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/VoiceAgentDefinition"
+            "$ref": "#/components/schemas/VoiceAgentDefinitionBase"
           }
         ],
         "description": "Native GPT Live configuration for a Foundry deployment.",
@@ -97947,16 +97994,13 @@
       },
       "VoiceAgentRealtimeDefinition": {
         "type": "object",
-        "required": [
-          "sub_protocol"
-        ],
         "properties": {
           "sub_protocol": {
             "type": "string",
             "enum": [
               "realtime"
             ],
-            "description": "Selects the realtime protocol."
+            "description": "Selects Realtime. May be omitted for legacy agents."
           },
           "model_type": {
             "$ref": "#/components/schemas/VoiceModelType",
@@ -98030,7 +98074,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/VoiceAgentDefinition"
+            "$ref": "#/components/schemas/VoiceAgentDefinitionBase"
           }
         ],
         "description": "Realtime and cascaded Voice Live configuration.",

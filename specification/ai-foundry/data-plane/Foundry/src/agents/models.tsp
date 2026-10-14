@@ -30,7 +30,7 @@ model CreateAgentVersionRequest {
 
   @doc("The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
-  definition: AgentDefinition;
+  definition: AgentDefinitionUnion;
 
   @doc("The blueprint reference for the agent.")
   blueprint_reference?: AgentBlueprintReference;
@@ -240,7 +240,7 @@ model AgentVersionObject {
   @doc("The Unix timestamp (seconds) when the agent was created.")
   created_at: FoundryTimestamp;
 
-  definition: AgentDefinition;
+  definition: AgentDefinitionUnion;
 
   @doc("Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.")
   @extension(
@@ -395,6 +395,21 @@ model RaiInvocationModeration {
   stream_selectors?: RaiSseTextSelector[];
 }
 
+@doc("Agent definitions, with protocol selection for voice agents.")
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
+union AgentDefinitionUnion {
+  prompt: PromptAgentDefinition,
+  hosted: HostedAgentDefinition,
+  #suppress "deprecated" "Preserve existing workflow agent definitions."
+  workflow: WorkflowAgentDefinition,
+  external: ExternalAgentDefinition,
+
+  @removed(Versions.v1)
+  container_app: ContainerAppAgentDefinition,
+
+  VoiceAgentDefinition,
+}
+
 @discriminator("kind")
 model AgentDefinition {
   kind: AgentKind;
@@ -405,7 +420,7 @@ model AgentDefinition {
 
 @doc("The prompt agent definition")
 model PromptAgentDefinition extends AgentDefinition {
-  kind: AgentKind.prompt;
+  kind: "prompt";
 
   @doc("The managed runtime and agent loop used to execute this prompt agent.")
   @extension(
@@ -522,7 +537,7 @@ model PromptAgentDefinitionTextOptions {
   #{ required_previews: #[AgentDefinitionOptInKeys.workflow_agents_v1_preview] }
 )
 model WorkflowAgentDefinition extends AgentDefinition {
-  kind: AgentKind.workflow;
+  kind: "workflow";
 
   @doc("The CSDL YAML definition of the workflow.")
   workflow?: string;
@@ -600,7 +615,7 @@ union CodeDependencyResolution {
   #{ required_previews: #[AgentDefinitionOptInKeys.external_agents_v1_preview] }
 )
 model ExternalAgentDefinition extends AgentDefinition {
-  kind: AgentKind.external;
+  kind: "external";
 
   @doc("""
     The OpenTelemetry agent identifier used to attribute customer-emitted spans to this Foundry agent.
@@ -614,7 +629,7 @@ model ExternalAgentDefinition extends AgentDefinition {
 
 @doc("The hosted agent definition.")
 model HostedAgentDefinition extends AgentDefinition {
-  kind: AgentKind.hosted;
+  kind: "hosted";
 
   /**
    * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
@@ -665,7 +680,7 @@ model HostedAgentDefinition extends AgentDefinition {
 )
 @removed(Versions.v1)
 model ContainerAppAgentDefinition extends AgentDefinition {
-  kind: AgentKind.container_app;
+  kind: "container_app";
 
   @doc("The protocols that the agent supports for ingress communication of the containers.")
   @example(#[
