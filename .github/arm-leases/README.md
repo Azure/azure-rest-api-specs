@@ -102,6 +102,16 @@ If your PR check **"ARM Lease Validation"** is failing, review the error message
 - **Missing or empty fields**: All fields (`resource-provider`, `startdate`, `duration`, `reviewer`) are required
 - **Disallowed files**: Only `lease.yaml` and `README.md` files are permitted in `.github/arm-leases/`
 
+## Unexpected ARM Modeling Review After Migration
+
+If a pull request starts requiring ARM modeling review unexpectedly after a migration, verify that the applicable ARM lease still exists in the expected `.github/arm-leases/<orgName>/<rpNamespace>/[<serviceName>]/lease.yaml` location and that its metadata still matches the migrated folder structure.
+
+A migration can fail to carry forward lease location or related metadata correctly. In that case, the review requirement may reflect a migration-process gap rather than a mistake in the current PR authoring.
+
+This migration explanation is historical and scoped to known migration issues during earlier conversions. Before relying on it for a current issue, confirm whether the migration tooling or process has already been updated and whether the lease is actually missing, misplaced, or mismatched under the current rules.
+
+Leases are read only from public `main`, so check the lease there. If the lease is present and valid in the expected location on public `main`, use the check output to investigate other causes instead of assuming a migration problem.
+
 ## Automation Scripts
 
 Scripts are located in `.github/workflows/cmd/`. Run from the repository root.
