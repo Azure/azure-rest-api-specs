@@ -211,10 +211,10 @@ alias CloudAccountPatchProperties = {
 
   @doc("Marketplace details of the resource.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  marketplace: CloudAccountMarketplaceUpdate;
+  marketplace?: CloudAccountMarketplaceUpdate;
 
   @doc("Details of the user.")
-  user: CloudAccountUserUpdate;
+  user?: CloudAccountUserUpdate;
 };
 
 @doc("Managed service identity (system assigned and/or user assigned identities)")
