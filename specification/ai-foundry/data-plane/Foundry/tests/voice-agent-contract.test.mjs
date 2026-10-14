@@ -6,7 +6,6 @@ import { after, before, test } from "node:test";
 import { fileURLToPath } from "node:url";
 import {
   compile,
-  getDiscriminatedUnion,
   getDiscriminator,
   getDoc,
   getMaxItems,
@@ -172,7 +171,7 @@ function checkSdkGreetingModels(context) {
     ["llm_generated", "template"],
   );
   assert.ok(
-    !model("VoiceAgentDefinitionBase").properties.some(
+    !model("VoiceAgentDefinition").properties.some(
       (p) => p.serializedName === "greeting",
     ),
   );
@@ -185,7 +184,7 @@ function checkSdkSessionFields(context) {
     return value;
   };
   for (const name of [
-    "VoiceAgentDefinitionBase",
+    "VoiceAgentDefinition",
     "VoiceAgentRealtimeDefinition",
     "VoiceAgentLiveDefinition",
   ])
@@ -212,74 +211,46 @@ function checkSdkSessionFields(context) {
   );
 }
 
-function checkSdkDefinitionUnions(context) {
+function checkSdkVoiceInheritance(context) {
   const model = (name) => {
     const value = context.sdkPackage.models.find((m) => m.__raw?.name === name);
     assert.ok(value, `SDK metadata missing ${name}`);
     return value;
   };
-  const union = (name) => {
-    const value = context.sdkPackage.unions.find((u) => u.__raw?.name === name);
-    assert.ok(value, `SDK metadata missing ${name}`);
-    return value;
-  };
-  const voice = union("VoiceAgentDefinition");
-  assert.equal(voice.discriminatedOptions.envelope, "none");
-  assert.equal(
-    voice.discriminatedOptions.discriminatorPropertyName,
-    "sub_protocol",
-  );
-  assert.deepEqual(voice.variantTypes, [
-    model("VoiceAgentRealtimeDefinition"),
-    model("VoiceAgentLiveDefinition"),
-  ]);
-  const [selector, diagnostics] = getDiscriminatedUnion(
-    context.program,
-    voice.__raw,
-  );
-  checkErrors(diagnostics);
-  assert.equal(
-    selector.defaultVariant,
-    model("VoiceAgentRealtimeDefinition").__raw,
-  );
+  const voice = model("VoiceAgentDefinition");
+  const definition = model("AgentDefinition");
+  assert.equal(voice.baseModel, definition);
+  assert.equal(definition.discriminatedSubtypes.voice, voice);
+  // OpenAPI metadata does not implement SDK subtype dispatch.
+  assert.equal(voice.discriminatorProperty, undefined);
+  assert.deepEqual(Object.keys(voice.discriminatedSubtypes ?? {}), []);
   for (const [name, optional] of [
-    ["VoiceAgentDefinitionBase", true],
+    ["VoiceAgentDefinition", true],
     ["VoiceAgentRealtimeDefinition", true],
     ["VoiceAgentLiveDefinition", false],
-  ])
+  ]) {
+    assert.equal(model(name).access, "public", name);
     assert.equal(
       model(name).properties.find((p) => p.serializedName === "sub_protocol")
         .optional,
       optional,
       name,
     );
-  assert.equal(
-    model("VoiceAgentRealtimeDefinition").baseModel,
-    model("VoiceAgentDefinitionBase"),
+  }
+  assert.equal(model("VoiceAgentRealtimeDefinition").baseModel, voice);
+  assert.equal(model("VoiceAgentLiveDefinition").baseModel, voice);
+  assert.ok(
+    !context.sdkPackage.unions.some((u) =>
+      ["VoiceAgentDefinition", "AgentDefinitionUnion"].includes(u.__raw?.name),
+    ),
   );
-  assert.equal(
-    model("VoiceAgentLiveDefinition").baseModel,
-    model("VoiceAgentDefinitionBase"),
-  );
-  assert.equal(
-    model("VoiceAgentDefinitionBase").baseModel,
-    model("AgentDefinition"),
-  );
-  const definition = union("AgentDefinitionUnion");
-  assert.equal(definition.discriminatedOptions.envelope, "none");
-  assert.equal(
-    definition.discriminatedOptions.discriminatorPropertyName,
-    "kind",
-  );
-  assert.ok(definition.variantTypes.includes(voice));
   for (const name of [
     "PromptAgentDefinition",
     "HostedAgentDefinition",
     "WorkflowAgentDefinition",
     "ExternalAgentDefinition",
   ]) {
-    assert.ok(definition.variantTypes.includes(model(name)), name);
-    assert.equal(model(name).baseModel, model("AgentDefinition"), name);
+    assert.equal(model(name).baseModel, definition, name);
   }
   assert.equal(
     model("AgentVersionObject").properties.find(
@@ -393,17 +364,11 @@ after(async () => {
   if (output) await rm(output, { recursive: true, force: true });
 });
 
-test("voice definitions retain kind -> sub_protocol with separate audio ownership", () => {
-  const base = type("Azure.AI.Projects.VoiceAgentDefinitionBase");
-  const union = type("Azure.AI.Projects.VoiceAgentDefinition");
+test("voice models retain inheritance and optional protocol fields with separate audio ownership", () => {
+  const base = type("Azure.AI.Projects.VoiceAgentDefinition");
   const live = type("Azure.AI.Projects.VoiceAgentLiveDefinition");
   const realtime = type("Azure.AI.Projects.VoiceAgentRealtimeDefinition");
-  const [selector, diagnostics] = getDiscriminatedUnion(program, union);
-  checkErrors(diagnostics);
-  assert.equal(selector.options.envelope, "none");
-  assert.equal(selector.options.discriminatorPropertyName, "sub_protocol");
-  assert.equal(selector.defaultVariant, realtime);
-  assert.deepEqual([...selector.variants], [["live", live]]);
+  assert.equal(base.kind, "Model");
   assert.equal(getDiscriminator(program, base), undefined);
   assert.equal(getDiscriminator(program, base.baseModel).propertyName, "kind");
   assert.equal(live.baseModel, base);
@@ -424,14 +389,12 @@ test("voice definitions retain kind -> sub_protocol with separate audio ownershi
   assert.ok(realtime.properties.has("subagent_config"));
 });
 
-test("shared request and response definitions dispatch through the voice protocol union", () => {
-  const definition = type("Azure.AI.Projects.AgentDefinitionUnion");
+test("shared request and response definitions retain the original AgentDefinition model", () => {
+  const definition = type("Azure.AI.Projects.AgentDefinition");
   const voice = type("Azure.AI.Projects.VoiceAgentDefinition");
-  const [selector, diagnostics] = getDiscriminatedUnion(program, definition);
-  checkErrors(diagnostics);
-  assert.equal(selector.options.envelope, "none");
-  assert.equal(selector.options.discriminatorPropertyName, "kind");
-  assert.equal(selector.defaultVariant, voice);
+  assert.equal(definition.kind, "Model");
+  assert.equal(getDiscriminator(program, definition).propertyName, "kind");
+  assert.equal(voice.baseModel, definition);
   for (const name of [
     "CreateAgentVersionRequest",
     "CreateAgentRequest",
@@ -443,10 +406,11 @@ test("shared request and response definitions dispatch through the voice protoco
       definition,
       name,
     );
-  for (const kind of ["prompt", "hosted", "workflow", "external"])
+  for (const name of ["AgentDefinitionUnion", "VoiceAgentDefinitionBase"])
     assert.equal(
-      selector.variants.get(kind).baseModel,
-      type("Azure.AI.Projects.AgentDefinition"),
+      program.resolveTypeReference(`Azure.AI.Projects.${name}`)[0],
+      undefined,
+      name,
     );
 });
 
@@ -564,7 +528,7 @@ test("Live hosted delegation is absent while the Realtime hosted engine remains"
 
 test("input and client permissions belong to native sessions, not persisted voice definitions", () => {
   for (const name of [
-    "VoiceAgentDefinitionBase",
+    "VoiceAgentDefinition",
     "VoiceAgentRealtimeDefinition",
     "VoiceAgentLiveDefinition",
   ])
@@ -614,7 +578,7 @@ test("Live greeting reuses only the existing template subtype while Realtime ret
     ["llm_generated", "template"],
   );
   assert.ok(
-    !fields(type("Azure.AI.Projects.VoiceAgentDefinitionBase")).has("greeting"),
+    !fields(type("Azure.AI.Projects.VoiceAgentDefinition")).has("greeting"),
   );
   for (const name of ["LiveSessionCreateParams", "LiveSessionUpdateParams"])
     assert.ok(!fields(type(`OpenAI.${name}`)).has("greeting"), name);
@@ -1108,7 +1072,7 @@ async function validateExamples(name, examples, declarations = []) {
   return compile(NodeHost, path, { ...compilerOptions, noEmit: true });
 }
 
-test("legacy and explicit voice definitions validate through create, update, and read contracts", async () => {
+test("typed voice definitions remain assignable to unchanged create, update, and read contracts", async () => {
   const definitions = [
     { kind: "voice", model_type: "managed", model: "gpt-realtime" },
     { kind: "voice", model_type: "managed", model: "gpt-4o" },
@@ -1126,39 +1090,42 @@ test("legacy and explicit voice definitions validate through create, update, and
       model: "gpt-live-1",
     },
   ];
-  const examples = definitions.flatMap((definition) => [
-    { model: "Azure.AI.Projects.VoiceAgentDefinition", payload: definition },
-    { model: "Azure.AI.Projects.AgentDefinitionUnion", payload: definition },
-    {
-      model: "Azure.AI.Projects.CreateAgentRequest",
-      payload: { name: "english-teacher", definition },
-    },
-    {
-      model: "Azure.AI.Projects.CreateAgentVersionRequest",
-      payload: { definition },
-    },
-    { model: "Azure.AI.Projects.UpdateAgentRequest", payload: { definition } },
-    { model: "ReadDefinitionProbe", payload: { definition } },
-  ]);
+  const examplesFor = (name) => [
+    `@@example(Azure.AI.Projects.CreateAgentRequest, #{name: "teacher", definition: ${name}});`,
+    `@@example(Azure.AI.Projects.CreateAgentVersionRequest, #{definition: ${name}});`,
+    `@@example(Azure.AI.Projects.UpdateAgentRequest, #{definition: ${name}});`,
+    `@@example(ReadDefinitionProbe, #{definition: ${name}});`,
+  ];
+  const declarations = definitions.flatMap((definition, index) => {
+    const model =
+      definition.sub_protocol === "live"
+        ? "VoiceAgentLiveDefinition"
+        : "VoiceAgentRealtimeDefinition";
+    const name = `voice${index}`;
+    return [
+      `const ${name}: Azure.AI.Projects.${model} = ${tspValue(definition)};`,
+      ...examplesFor(name),
+    ];
+  });
   checkErrors(
     (
-      await validateExamples("optional-voice-protocol", examples, [
-        'model ReadDefinitionProbe { ...PickProperties<Azure.AI.Projects.AgentVersionObject, "definition">; }',
-        // Preserve the sealed engine subtype when checking inherited properties.
-        'const engine: Azure.AI.Projects.VoiceHostedAgentConversationEngine = #{type: "hosted_agent", name: "english-teacher"};',
-        'const hostedVoice = #{kind: "voice", conversation_engine: engine};',
-        "@@example(Azure.AI.Projects.VoiceAgentDefinition, hostedVoice);",
-        "@@example(Azure.AI.Projects.AgentDefinitionUnion, hostedVoice);",
-        '@@example(Azure.AI.Projects.CreateAgentRequest, #{name: "teacher", definition: hostedVoice});',
-        "@@example(Azure.AI.Projects.CreateAgentVersionRequest, #{definition: hostedVoice});",
-        "@@example(Azure.AI.Projects.UpdateAgentRequest, #{definition: hostedVoice});",
-        "@@example(ReadDefinitionProbe, #{definition: hostedVoice});",
-      ])
+      await validateExamples(
+        "optional-voice-protocol",
+        [],
+        [
+          'model ReadDefinitionProbe { ...PickProperties<Azure.AI.Projects.AgentVersionObject, "definition">; }',
+          ...declarations,
+          // Preserve the sealed engine subtype when checking inherited properties.
+          'const engine: Azure.AI.Projects.VoiceHostedAgentConversationEngine = #{type: "hosted_agent", name: "english-teacher"};',
+          'const hostedVoice: Azure.AI.Projects.VoiceAgentRealtimeDefinition = #{kind: "voice", conversation_engine: engine};',
+          ...examplesFor("hostedVoice"),
+        ],
+      )
     ).diagnostics,
   );
 });
 
-test("shared definitions reject invalid protocols and incomplete Live definitions", async (t) => {
+test("concrete voice definitions reject invalid protocols and incomplete Live definitions", async (t) => {
   const live = {
     kind: "voice",
     sub_protocol: "live",
@@ -1179,37 +1146,31 @@ test("shared definitions reject invalid protocols and incomplete Live definition
     await t.test(name, async () => {
       const result = await validateExamples(`invalid-voice-protocol-${name}`, [
         {
-          model: "Azure.AI.Projects.CreateAgentRequest",
-          payload: { name: "teacher", definition },
+          model: "Azure.AI.Projects.VoiceAgentLiveDefinition",
+          payload: definition,
         },
       ]);
       checkInvalidExample(result.diagnostics);
     });
 });
 
-test("non-Voice definitions remain valid through the shared definition union", async () => {
-  const definitions = [
-    { kind: "prompt", model: "gpt-4o" },
-    { kind: "external" },
-    { kind: "workflow", workflow: "kind: workflow" },
-    {
-      kind: "hosted",
-      cpu: "1",
-      memory: "2Gi",
-      container_configuration: { image: "example.azurecr.io/teacher:v1" },
-    },
-  ];
-  checkErrors(
-    (
-      await validateExamples(
-        "non-voice-definition-union",
-        definitions.map((definition) => ({
-          model: "Azure.AI.Projects.CreateAgentRequest",
-          payload: { name: "teacher", definition },
-        })),
-      )
-    ).diagnostics,
-  );
+test("non-Voice definitions retain their original base and kind union members", () => {
+  const ns = type("Azure.AI.Projects");
+  for (const [name, kind] of [
+    ["Prompt", "prompt"],
+    ["Hosted", "hosted"],
+    ["External", "external"],
+    ["Workflow", "workflow"],
+    ["ContainerApp", "container_app"],
+  ]) {
+    const model = ns.models.get(`${name}AgentDefinition`);
+    assert.ok(model, name);
+    assert.equal(model.baseModel, ns.models.get("AgentDefinition"));
+    assert.equal(
+      model.properties.get("kind").type,
+      ns.unions.get("AgentKind").variants.get(kind),
+    );
+  }
 });
 
 test("Live delegation accepts omission and managed target versions", async () => {
@@ -1780,10 +1741,10 @@ test("SDK metadata exports native events and separate Live persistence discrimin
         value.__raw.name,
       );
   }
-  const voice = model("VoiceAgentDefinitionBase");
+  const voice = model("VoiceAgentDefinition");
   assert.equal(model("VoiceAgentRealtimeDefinition").baseModel, voice);
   assert.equal(model("VoiceAgentLiveDefinition").baseModel, voice);
-  checkSdkDefinitionUnions(context);
+  checkSdkVoiceInheritance(context);
   for (const name of [
     "RealtimeVoiceAgentDefinition",
     "LiveVoiceAgentDefinition",
@@ -1948,7 +1909,7 @@ test("Java SDK customization targets Realtime fields and keeps Live events witho
   checkSdkGreetingModels(context);
   checkSdkSessionFields(context);
   checkSdkLiveDelegation(context);
-  checkSdkDefinitionUnions(context);
+  checkSdkVoiceInheritance(context);
   assert.equal(
     realtime.properties.get("tool_choice").type.name,
     "ToolChoiceValue",
@@ -1960,7 +1921,7 @@ test("Java SDK customization targets Realtime fields and keeps Live events witho
     "subagentConfiguration",
   );
   assert.equal(
-    fields(type("Azure.AI.Projects.VoiceAgentDefinitionBase", sdkProgram)).has(
+    fields(type("Azure.AI.Projects.VoiceAgentDefinition", sdkProgram)).has(
       "tool_choice",
     ),
     false,
@@ -2659,22 +2620,26 @@ test("OpenAPI exposes the Foundry Live handshake without native REST operations"
 test("persisted definitions remain flat with Foundry store and native configuration refs", () => {
   for (const doc of documents) {
     const schemas = doc.components.schemas;
-    const base = schemas.VoiceAgentDefinitionBase;
+    const base = schemas.VoiceAgentDefinition;
     const voice = schemas.VoiceAgentDefinition;
     const live = schemas.VoiceAgentLiveDefinition;
     assert.equal(voice.discriminator.propertyName, "sub_protocol");
     assert.deepEqual(voice.discriminator.mapping, {
+      realtime: "#/components/schemas/VoiceAgentRealtimeDefinition",
       live: "#/components/schemas/VoiceAgentLiveDefinition",
     });
     assert.equal(
       voice.discriminator.defaultMapping,
       "#/components/schemas/VoiceAgentRealtimeDefinition",
     );
-    assert.deepEqual(voice.oneOf, [
-      { $ref: "#/components/schemas/VoiceAgentLiveDefinition" },
-      { $ref: "#/components/schemas/VoiceAgentRealtimeDefinition" },
-    ]);
-    assert.equal(base.discriminator, undefined);
+    assert.equal(voice.oneOf, undefined);
+    for (const ref of [
+      ...Object.values(voice.discriminator.mapping),
+      voice.discriminator.defaultMapping,
+    ])
+      assert.ok(schemas[ref.split("/").at(-1)], ref);
+    assert.deepEqual(schemas.VoiceAgentSubProtocol.enum, ["realtime", "live"]);
+    assert.equal(schemas.VoiceAgentSubProtocol.type, "string");
     assert.ok(!base.required?.includes("sub_protocol"));
     assert.ok(
       !schemas.VoiceAgentRealtimeDefinition.required?.includes("sub_protocol"),
@@ -2683,7 +2648,7 @@ test("persisted definitions remain flat with Foundry store and native configurat
     for (const schema of [base, schemas.VoiceAgentRealtimeDefinition])
       assert.equal(schema.properties.sub_protocol.default, undefined);
     assert.equal(
-      schemas.AgentDefinitionUnion.discriminator.defaultMapping,
+      schemas.AgentDefinition.discriminator.mapping.voice,
       "#/components/schemas/VoiceAgentDefinition",
     );
     for (const name of [
@@ -2694,16 +2659,18 @@ test("persisted definitions remain flat with Foundry store and native configurat
     ])
       assert.equal(
         schemas[name].properties.definition.$ref,
-        "#/components/schemas/AgentDefinitionUnion",
+        "#/components/schemas/AgentDefinition",
         name,
       );
     assert.equal(
       Object.hasOwn(
-        schemas.AgentDefinitionUnion.discriminator.mapping,
+        schemas.AgentDefinition.discriminator.mapping,
         "container_app",
       ),
       doc.info.version === "virtual-public-preview",
     );
+    assert.equal(schemas.AgentDefinitionUnion, undefined);
+    assert.equal(schemas.VoiceAgentDefinitionBase, undefined);
     assert.equal(schemas.RealtimeVoiceAgentDefinition, undefined);
     assert.equal(schemas.LiveVoiceAgentDefinition, undefined);
     assert.equal(base.properties.store.default, false);

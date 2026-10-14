@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/openai-typespec/models/realtime";
 import "@azure-tools/openai-typespec/models/live";
 // OpenAI 1.29.0 Live models need the webhook-defined target_uri.
@@ -12,6 +13,7 @@ import "../openai/responses/models.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
@@ -106,7 +108,19 @@ model VoiceAgentLlmInterimResponseConfig
   Creates and updates produce immutable versions. An agent's protocol cannot change across versions.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentDefinitionBase extends AgentDefinition {
+// OpenAPI-only fallback; SDKs must customize subtype dispatch and preserve omission.
+@extension(
+  "discriminator",
+  #{
+    propertyName: "sub_protocol",
+    mapping: #{
+      realtime: "#/components/schemas/VoiceAgentRealtimeDefinition",
+      live: "#/components/schemas/VoiceAgentLiveDefinition",
+    },
+    defaultMapping: "#/components/schemas/VoiceAgentRealtimeDefinition",
+  }
+)
+model VoiceAgentDefinition extends AgentDefinition {
   @doc("Always voice.")
   kind: "voice";
 
@@ -123,24 +137,16 @@ model VoiceAgentDefinitionBase extends AgentDefinition {
   store?: boolean = false;
 }
 
-@doc("Voice definitions. Omitted sub_protocol selects Realtime; Live requires an explicit value.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@discriminated(#{ envelope: "none", discriminatorPropertyName: "sub_protocol" })
-union VoiceAgentDefinition {
-  VoiceAgentRealtimeDefinition,
-  live: VoiceAgentLiveDefinition,
-}
-
 @doc("Voice protocol; realtime includes cascaded models.")
 union VoiceAgentSubProtocol {
   realtime: "realtime",
   live: "live",
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The union provides protocol discrimination; the base preserves shared SDK fields."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Voice-local OpenAPI metadata defines the optional discriminator; SDKs must customize dispatch."
 @doc("Realtime and cascaded Voice Live configuration.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentRealtimeDefinition extends VoiceAgentDefinitionBase {
+model VoiceAgentRealtimeDefinition extends VoiceAgentDefinition {
   @doc("Selects Realtime. May be omitted for legacy agents.")
   sub_protocol?: "realtime";
 
@@ -201,10 +207,10 @@ model VoiceAgentRealtimeDefinition extends VoiceAgentDefinitionBase {
   subagent_config?: VoiceAgentSubagentConfig;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The union provides protocol discrimination; the base preserves shared SDK fields."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Voice-local OpenAPI metadata defines the optional discriminator; SDKs must customize dispatch."
 @doc("Native GPT Live configuration for a Foundry deployment.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveDefinition extends VoiceAgentDefinitionBase {
+model VoiceAgentLiveDefinition extends VoiceAgentDefinition {
   @doc("The native GPT Live protocol.")
   sub_protocol: "live";
 
@@ -224,6 +230,10 @@ model VoiceAgentLiveDefinition extends VoiceAgentDefinitionBase {
   @doc("Delegation settings. Omit for client mode. responses.model is a backend deployment name in the Live resource, not a model catalog ID.")
   delegation?: VoiceAgentLiveDelegation;
 }
+
+// Generate the concrete models for SDK-specific subtype dispatch.
+@@usage(VoiceAgentRealtimeDefinition, Usage.input | Usage.output | Usage.json);
+@@usage(VoiceAgentLiveDefinition, Usage.input | Usage.output | Usage.json);
 
 #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Reuse the native OpenAI delegation models without reparenting or changing their wire contract."
 @doc("Who handles delegated work for a Live voice agent.")
