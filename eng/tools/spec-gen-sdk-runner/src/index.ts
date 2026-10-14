@@ -16,7 +16,6 @@ export {
   type AzsdkGenerateResponse,
   parseAzsdkResponse,
 } from "./azsdk-adapter.ts";
-
 export { resolvePackagePath } from "./command-helpers.ts";
 export { resolveLanguageKey } from "./emitter-check.ts";
 

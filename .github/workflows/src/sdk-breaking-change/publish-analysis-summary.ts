@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { escapeMarkdown, inlineCode, link } from "@azure-tools/specs-shared/markdown";
 import { z } from "zod";
-import { escapeMarkdown, inlineCode, link } from "../../../shared/src/markdown.ts";
 import type { Core } from "../github.ts";
 
 const ProjectResultSchema = z.object({

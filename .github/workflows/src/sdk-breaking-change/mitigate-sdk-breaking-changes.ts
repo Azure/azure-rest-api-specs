@@ -1,9 +1,9 @@
 import { mkdir, readFile, realpath, stat, writeFile } from "node:fs/promises";
 import { dirname, isAbsolute, join, relative, sep } from "node:path";
+import { parseAzsdkResponse } from "@azure-tools/spec-gen-sdk-runner";
+import { execFile } from "@azure-tools/specs-shared/exec";
 import { z } from "zod";
 import { AnalysisResultSchema } from "./create-analysis-result.ts";
-import { execFile } from "../../../shared/src/exec.ts";
-import { parseAzsdkResponse } from "../../../../eng/tools/spec-gen-sdk-runner/src/azsdk-adapter.ts";
 
 export interface AzsdkCustomizedCodeUpdateResponse {
   success: boolean;

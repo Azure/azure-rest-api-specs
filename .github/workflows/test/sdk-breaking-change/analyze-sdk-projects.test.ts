@@ -1,8 +1,8 @@
 import { mkdir, readFile, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type { ExecFileOptions, ExecResult } from "../../../shared/src/exec.ts";
-import type { TypeSpecMetadata } from "../../../shared/src/typespec-metadata.ts";
+import type { ExecFileOptions, ExecResult } from "@azure-tools/specs-shared/exec";
+import type { TypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
 
 const { execFileMock, generateTypeSpecMetadataMock } = vi.hoisted(() => ({
   execFileMock:
@@ -10,8 +10,8 @@ const { execFileMock, generateTypeSpecMetadataMock } = vi.hoisted(() => ({
   generateTypeSpecMetadataMock: vi.fn<(folder: string) => Promise<TypeSpecMetadata>>(),
 }));
 
-vi.mock("../../../shared/src/exec.ts", () => ({ execFile: execFileMock }));
-vi.mock("../../../shared/src/typespec-metadata.ts", () => ({
+vi.mock("@azure-tools/specs-shared/exec", () => ({ execFile: execFileMock }));
+vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
   generateTypeSpecMetadata: generateTypeSpecMetadataMock,
 }));
 

@@ -1,14 +1,14 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import type { ExecFileOptions, ExecResult } from "@azure-tools/specs-shared/exec";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type { ExecFileOptions, ExecResult } from "../../../shared/src/exec.ts";
 
 const { execFileMock } = vi.hoisted(() => ({
   execFileMock:
     vi.fn<(file: string, args?: string[], options?: ExecFileOptions) => Promise<ExecResult>>(),
 }));
 
-vi.mock("../../../shared/src/exec.ts", () => ({ execFile: execFileMock }));
+vi.mock("@azure-tools/specs-shared/exec", () => ({ execFile: execFileMock }));
 
 import {
   mitigateSdkBreakingChanges,
@@ -55,10 +55,8 @@ beforeEach(async () => {
 
   execFileMock.mockResolvedValue({
     stdout: `${JSON.stringify({
-      result: {
-        success: true,
-        typeSpecChangesSummary: ["Added client customization"],
-      },
+      success: true,
+      typeSpecChangesSummary: ["Added client customization"],
     })}\n`,
     stderr: "",
   });
@@ -118,6 +116,33 @@ describe("mitigateSdkBreakingChanges", () => {
       "Failed to mitigate SDK breaking change 1 for specification/service/Widget.Service:",
       error,
     );
+  });
+
+  it("marks the change unresolved when customization does not succeed", async () => {
+    execFileMock.mockResolvedValue({
+      stdout: `${JSON.stringify({ success: false })}\n`,
+      stderr: "",
+    });
+
+    await mitigateSdkBreakingChanges({
+      analysisResultPath,
+      mitigationResultPath,
+      mitigationWorkflowUrl: "https://github.com/owner/repo/actions/runs/456",
+      specificationRepositoryPath,
+      resultDirPath: temporaryDirectory,
+      azureSdkCliPath: join(temporaryDirectory, "azsdk"),
+    });
+
+    const result = MitigationResultSchema.parse(
+      JSON.parse(await readFile(mitigationResultPath, "utf8")),
+    );
+    expect(result.projects[0].breakingChanges).toEqual([
+      {
+        breakingChange: "Model changed",
+        suggestedFix: "Restore compatibility",
+        isResolved: false,
+      },
+    ]);
   });
 
   it("writes a failure result for orchestration errors", async () => {

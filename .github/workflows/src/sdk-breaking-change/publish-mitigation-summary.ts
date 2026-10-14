@@ -1,4 +1,4 @@
-import { escapeMarkdown, inlineCode } from "../../../shared/src/markdown.ts";
+import { escapeMarkdown, inlineCode } from "@azure-tools/specs-shared/markdown";
 import type { Core } from "../github.ts";
 
 export function buildMitigationSummary({

@@ -1,8 +1,8 @@
 import type { GitHubScriptArgs } from "../github.ts";
 import { readFile } from "node:fs/promises";
+import { escapeMarkdown, table } from "@azure-tools/specs-shared/markdown";
 import { type MitigationResult, MitigationResultSchema } from "./mitigate-sdk-breaking-changes.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
-import { escapeMarkdown, table } from "../../../shared/src/markdown.ts";
 
 const MAX_CHANGED_CODE_LENGTH = 12_000;
 

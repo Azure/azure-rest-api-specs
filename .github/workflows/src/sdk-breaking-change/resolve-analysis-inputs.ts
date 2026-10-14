@@ -1,6 +1,6 @@
+import { detectChangedSpecConfigFromChangedFiles } from "@azure-tools/spec-gen-sdk-runner";
 import { isFullGitSha } from "@azure-tools/specs-shared/git";
 import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
-import { detectChangedSpecConfigFromChangedFiles } from "@azure-tools/spec-gen-sdk-runner";
 
 interface PullRequestFile {
   filename: string;
@@ -228,6 +228,7 @@ export async function resolveChangedTypeSpecConfigPathsFromPullRequest({
   const sortedConfigPaths = configPaths
     .map((config) => config.typespecProject)
     .filter((path): path is string => path !== undefined)
+    .map((path) => path.replaceAll("\\", "/"))
     .sort();
   core.setOutput("tsp-config-paths", JSON.stringify(sortedConfigPaths));
   return sortedConfigPaths;
