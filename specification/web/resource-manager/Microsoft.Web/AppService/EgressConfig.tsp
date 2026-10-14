@@ -168,9 +168,10 @@ model VirtualConnectionSetting {
 }
 
 /** Where to resolve settings from. */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The 2026-09-01 service rejects unknown virtual connection setting sources, so this union intentionally models a closed set."
 @added(Versions.v2026_09_01)
 union VirtualConnectionSettingSource {
+  string,
+
   /** App Settings (config/appsettings). */
   AppSettings: "AppSettings",
 
@@ -179,9 +180,10 @@ union VirtualConnectionSettingSource {
 }
 
 /** Protocol for the backend service. */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The 2026-09-01 service rejects unsupported virtual connection protocols, so this union intentionally models a closed set."
 @added(Versions.v2026_09_01)
 union VirtualConnectionProtocol {
+  string,
+
   /** HTTP/HTTPS (Azure Storage, Cosmos DB REST, Key Vault, custom APIs). */
   Http: "Http",
 
@@ -196,9 +198,10 @@ union VirtualConnectionProtocol {
 }
 
 /** Authentication strategy for upstream connections. */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The 2026-09-01 service rejects unsupported virtual connection authentication types, so this union intentionally models a closed set."
 @added(Versions.v2026_09_01)
 union VirtualConnectionAuthType {
+  string,
+
   /** Proxy injects the original credential from the setting value. */
   Credential: "Credential",
 
@@ -207,9 +210,10 @@ union VirtualConnectionAuthType {
 }
 
 /** The role a setting plays in a connection. */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The 2026-09-01 service rejects unsupported virtual connection setting roles, so this union intentionally models a closed set."
 @added(Versions.v2026_09_01)
 union VirtualConnectionSettingRole {
+  string,
+
   /** Plain hostname or IP — identifies the intercept target. */
   Host: "Host",
 
