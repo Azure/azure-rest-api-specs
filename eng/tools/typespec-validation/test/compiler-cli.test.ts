@@ -25,7 +25,7 @@ beforeEach(async () => {
   await writeFile(join(root, project, "service.yaml"), "versions: []\n");
   await writeFile(
     join(root, project, "tspconfig.yaml"),
-    "emit:\n  - '@azure-tools/typespec-autorest'\nlinter:\n  extends:\n    - '@azure-tools/typespec-azure-rulesets/data-plane'\n",
+    "emit:\n  - '@azure-tools/typespec-autorest'\nlinter:\n  extends:\n    - '@azure-tools/specs-typespec-rulesets/data-plane'\n",
   );
   // Isolate command reporting from SDK configuration checks; use real suppression handling.
   await writeFile(
