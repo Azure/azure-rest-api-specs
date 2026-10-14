@@ -1,0 +1,83 @@
+{
+  "operationId": "DataOnboardings_Get",
+  "title": "Get a data onboarding",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "offeringName": "contoso-insights",
+    "dataOnboardingName": "microsoft-network-20260414091500"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/dataOnboardings/microsoft-network-20260414091500",
+        "name": "microsoft-network-20260414091500",
+        "type": "Microsoft.ResourceGraph/offerings/dataOnboardings",
+        "properties": {
+          "publisherNamespace": "microsoft.network",
+          "types": [
+            {
+              "kind": "Node",
+              "resourceType": "microsoft.network/virtualnetworks",
+              "totalRowCount": 4200000,
+              "payloadSizeKb": 12.5,
+              "peakNotificationRates": {
+                "write": 1800,
+                "delete": 120,
+                "snapshot": 400,
+                "event": 60
+              },
+              "visibility": "InternalOnly",
+              "status": "Approved",
+              "ingestionEndpoint": {
+                "uri": "https://arg-ingestion-westus2.resourcegraph.azure.com/notifications",
+                "supportedFormats": [
+                  "ARNSchemaV3"
+                ]
+              }
+            },
+            {
+              "kind": "Node",
+              "resourceType": "microsoft.network/networkinterfaces",
+              "visibility": "InternalOnly",
+              "status": "Approved",
+              "ingestionEndpoint": {
+                "uri": "https://arg-ingestion-westus2.resourcegraph.azure.com/notifications",
+                "supportedFormats": [
+                  "ARNSchemaV3"
+                ]
+              }
+            },
+            {
+              "kind": "Edge",
+              "relationshipType": "Microsoft.Network/attachedTo",
+              "sourceNodeType": "microsoft.network/networkinterfaces",
+              "targetNodeType": "microsoft.network/virtualnetworks",
+              "expectedEdgeCount": 3900000,
+              "visibility": "InternalOnly",
+              "status": "Approved",
+              "ingestionEndpoint": {
+                "uri": "https://arg-ingestion-westus2.resourcegraph.azure.com/notifications",
+                "supportedFormats": [
+                  "ARNSchemaV3"
+                ]
+              }
+            }
+          ],
+          "targetRegions": [
+            "westus2",
+            "eastus"
+          ],
+          "ontologyRef": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/ontologies/network-topology",
+          "activatedRegions": [
+            "westus2",
+            "eastus"
+          ],
+          "provisioningState": "Succeeded",
+          "reviewStatus": "Approved",
+          "activationStatus": "Active"
+        }
+      }
+    }
+  }
+}

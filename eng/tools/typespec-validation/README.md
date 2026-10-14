@@ -11,6 +11,11 @@ pnpm tsv --changed
 pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
 ```
 
+TSV uses `pathe` for path operations and normalizes separators to `/` on every
+platform. Use ordinary relative paths or absolute drive-qualified Windows paths.
+Native Windows UNC, drive-relative, and case-insensitive path-comparison semantics
+are not preserved; backslashes are treated as separators even on POSIX.
+
 Use `--help` (or `-h`) to see all command-line options without running validation.
 For single-project validation, pass the folder and optional JSON context for rules
 and suppressions as positional arguments:
@@ -121,3 +126,9 @@ are retained. In a disposable checkout, `--git-clean` restores tracked files and
 removes untracked files and directories across the entire repository after each
 project. It requires an initially clean checkout; ignored files are retained.
 Do not use it while other work is in progress. `--dry-run` disables cleanup.
+
+Cleanup is skipped when the checkout is already clean. Otherwise, tracked files
+are restored from the index and untracked files are cleaned repository-wide.
+Git errors or changes remaining after cleanup stop validation rather than letting
+the next project run in a dirty checkout. Nested repositories are not forcibly deleted.
+Use `--verbose` to include per-command cleanup timings.

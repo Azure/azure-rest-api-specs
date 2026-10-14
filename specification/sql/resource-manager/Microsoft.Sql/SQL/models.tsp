@@ -16,6 +16,7 @@ namespace Microsoft.Sql;
  * The differential backup interval in hours. This is how many interval hours between each differential backup will be supported. This is only applicable to live databases but not dropped databases.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @Azure.ResourceManager.Legacy.feature(Features.BackupShortTermRetentionPolicies)
 union DiffBackupIntervalInHours {
   int32,
@@ -4312,6 +4313,13 @@ model BackupShortTermRetentionPolicyProperties {
 @Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model ServerBlobAuditingPolicyProperties {
   /**
+   * **Note:** This field will soon be deprecated. Going forward, use the dedicated Server DevOps Audit Settings APIs to configure DevOps audit. See:
+   *
+   * - [Server DevOps Audit Settings - Create Or Update](https://learn.microsoft.com/en-us/rest/api/sql/server-devops-audit-settings/create-or-update)
+   * - [Server DevOps Audit Settings - Get](https://learn.microsoft.com/en-us/rest/api/sql/server-devops-audit-settings/get)
+   *
+   * ---
+   *
    * Specifies the state of devops audit. If state is Enabled, devops logs will be sent to Azure Monitor.
    * In order to send the events to Azure Monitor, specify 'State' as 'Enabled', 'IsAzureMonitorTargetEnabled' as true and 'IsDevopsAuditEnabled' as true
    *
@@ -4773,6 +4781,13 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
 @Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model ExtendedServerBlobAuditingPolicyProperties {
   /**
+   * **Note:** This field will soon be deprecated. Going forward, use the dedicated Server DevOps Audit Settings APIs to configure DevOps audit. See:
+   *
+   * - [Server DevOps Audit Settings - Create Or Update](https://learn.microsoft.com/en-us/rest/api/sql/server-devops-audit-settings/create-or-update)
+   * - [Server DevOps Audit Settings - Get](https://learn.microsoft.com/en-us/rest/api/sql/server-devops-audit-settings/get)
+   *
+   * ---
+   *
    * Specifies the state of devops audit. If state is Enabled, devops logs will be sent to Azure Monitor.
    * In order to send the events to Azure Monitor, specify 'State' as 'Enabled', 'IsAzureMonitorTargetEnabled' as true and 'IsDevopsAuditEnabled' as true
    *

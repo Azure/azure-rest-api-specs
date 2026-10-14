@@ -1,6 +1,6 @@
 import { mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join, normalize, sep } from "node:path";
+import { join, normalize } from "pathe";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { globFiles } from "../src/glob.ts";
 
@@ -41,7 +41,7 @@ describe("globFiles", () => {
       await writeFile(join(folder, file), "");
     }
 
-    const pattern = join(folder, "**tspconfig.*").split(sep).join("/");
+    const pattern = join(folder, "**tspconfig.*");
     expect((await globFiles([pattern])).map(normalize).sort()).toEqual(
       [join(folder, "tspconfig.yaml"), join(folder, "bad-tspconfig.json")].sort(),
     );
@@ -65,7 +65,7 @@ describe("globFiles", () => {
       await writeFile(join(folder, file), "{}");
     }
 
-    const pattern = join(folder, "**", "foo.json").split(sep).join("/");
+    const pattern = join(folder, "**", "foo.json");
     expect(
       (await globFiles(pattern, { exclude: ["**/examples/**"] })).map(normalize).sort(),
     ).toEqual([join(folder, "stable/v1/foo.json"), join(folder, "preview/v2/foo.json")].sort());
