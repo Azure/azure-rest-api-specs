@@ -1,0 +1,249 @@
+{
+  "operationId": "Indexes_CreateOrUpdate",
+  "title": "SearchServiceCreateOrUpdateIndexOpenAICompatible",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "indexName": "compatible-preview-index",
+    "api-version": "2026-11-01-preview",
+    "allowIndexDowntime": null,
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "Accept": "application/json;odata.metadata=minimal",
+    "If-Match": null,
+    "If-None-Match": null,
+    "Prefer": "return=representation",
+    "index": {
+      "name": "compatible-preview-index",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Edm.String",
+          "key": true
+        },
+        {
+          "name": "content",
+          "type": "Edm.String",
+          "searchable": true
+        },
+        {
+          "name": "embedding",
+          "type": "Collection(Edm.Single)",
+          "searchable": true,
+          "dimensions": 1024,
+          "vectorSearchProfile": "catalog-profile"
+        }
+      ],
+      "vectorSearch": {
+        "profiles": [
+          {
+            "name": "catalog-profile",
+            "algorithm": "catalog-hnsw",
+            "vectorizer": "catalog-vectorizer"
+          }
+        ],
+        "algorithms": [
+          {
+            "name": "catalog-hnsw",
+            "kind": "hnsw"
+          }
+        ],
+        "vectorizers": [
+          {
+            "name": "catalog-vectorizer",
+            "kind": "openAICompatible",
+            "openAICompatibleParameters": {
+              "uri": "https://model-gateway.contoso.com/teams/catalog/embeddings?route=primary&api-version=2026-01-01",
+              "modelName": "text-embedding-3-small",
+              "dimensions": 1024,
+              "headers": {
+                "api-key": "EXAMPLE-NOT-A-REAL-SECRET",
+                "x-route-key": "EXAMPLE-NOT-A-REAL-ROUTING-SECRET"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "compatible-preview-index",
+        "purviewEnabled": false,
+        "fields": [
+          {
+            "name": "id",
+            "type": "Edm.String",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": true,
+            "synonymMaps": []
+          },
+          {
+            "name": "content",
+            "type": "Edm.String",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "embedding",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": false,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "dimensions": 1024,
+            "vectorSearchProfile": "catalog-profile",
+            "synonymMaps": []
+          }
+        ],
+        "scoringProfiles": [],
+        "suggesters": [],
+        "analyzers": [],
+        "normalizers": [],
+        "tokenizers": [],
+        "tokenFilters": [],
+        "charFilters": [],
+        "similarity": {
+          "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+        },
+        "vectorSearch": {
+          "algorithms": [
+            {
+              "name": "catalog-hnsw",
+              "kind": "hnsw",
+              "hnswParameters": {
+                "metric": "cosine",
+                "m": 4,
+                "efConstruction": 400,
+                "efSearch": 500
+              }
+            }
+          ],
+          "profiles": [
+            {
+              "name": "catalog-profile",
+              "algorithm": "catalog-hnsw",
+              "vectorizer": "catalog-vectorizer"
+            }
+          ],
+          "vectorizers": [
+            {
+              "name": "catalog-vectorizer",
+              "kind": "openAICompatible",
+              "openAICompatibleParameters": {
+                "uri": "https://model-gateway.contoso.com/teams/catalog/embeddings?route=primary&api-version=2026-01-01",
+                "modelName": "text-embedding-3-small",
+                "dimensions": 1024
+              }
+            }
+          ],
+          "compressions": [],
+          "graphCommunitiesProfiles": []
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "compatible-preview-index",
+        "purviewEnabled": false,
+        "fields": [
+          {
+            "name": "id",
+            "type": "Edm.String",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": true,
+            "synonymMaps": []
+          },
+          {
+            "name": "content",
+            "type": "Edm.String",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "embedding",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": false,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "dimensions": 1024,
+            "vectorSearchProfile": "catalog-profile",
+            "synonymMaps": []
+          }
+        ],
+        "scoringProfiles": [],
+        "suggesters": [],
+        "analyzers": [],
+        "normalizers": [],
+        "tokenizers": [],
+        "tokenFilters": [],
+        "charFilters": [],
+        "similarity": {
+          "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+        },
+        "vectorSearch": {
+          "algorithms": [
+            {
+              "name": "catalog-hnsw",
+              "kind": "hnsw",
+              "hnswParameters": {
+                "metric": "cosine",
+                "m": 4,
+                "efConstruction": 400,
+                "efSearch": 500
+              }
+            }
+          ],
+          "profiles": [
+            {
+              "name": "catalog-profile",
+              "algorithm": "catalog-hnsw",
+              "vectorizer": "catalog-vectorizer"
+            }
+          ],
+          "vectorizers": [
+            {
+              "name": "catalog-vectorizer",
+              "kind": "openAICompatible",
+              "openAICompatibleParameters": {
+                "uri": "https://model-gateway.contoso.com/teams/catalog/embeddings?route=primary&api-version=2026-01-01",
+                "modelName": "text-embedding-3-small",
+                "dimensions": 1024
+              }
+            }
+          ],
+          "compressions": [],
+          "graphCommunitiesProfiles": []
+        }
+      }
+    }
+  }
+}

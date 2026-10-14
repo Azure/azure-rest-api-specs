@@ -48,6 +48,30 @@ union ListingSearchType {
   Prefix: "prefix",
 }
 
+/** Community-based vector search options. */
+@added(Versions.v2026_11_01_preview)
+model VectorQueryGraphCommunities {
+  /** The kind of community-based vector search to use. */
+  kind: VectorQueryGraphCommunitiesKind;
+
+  /** The diversity factor used for community-based vector search. This property is only allowed when kind is diverse. If omitted, the default configured on the index is used. */
+  @minValue(0)
+  @maxValue(1)
+  diversityFactor?: float32;
+}
+
+/** The kind of community-based vector search to use. */
+@added(Versions.v2026_11_01_preview)
+union VectorQueryGraphCommunitiesKind {
+  string,
+
+  /** Use normal vector search when community-based diverse retrieval is off. */
+  none: "none",
+
+  /** Use community-based diverse retrieval. */
+  diverse: "diverse",
+}
+
 /** Reusable server-driven pagination query parameters shared by all listing operations. */
 alias listingPaginationQuery = {
   /** A string used to narrow down the listing so that fewer results need to be paged through. If omitted or an empty string is passed, no narrowing is applied. */
@@ -59,7 +83,6 @@ alias listingPaginationQuery = {
   @added(Versions.v2026_08_01_preview)
   @minValue(1)
   @maxValue(3000)
-  @pageSize
   @query
   pageSize?: int32;
 
@@ -144,6 +167,7 @@ alias querySourceAuthorizationHeader = {
 alias queryWorkIQSourceAuthorizationHeader = {
   /** User assertion token for a customer-owned Entra app registration configured on a Work IQ knowledge source. Used for on-behalf-of authentication to the Work IQ API. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   @secret
