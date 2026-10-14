@@ -16,17 +16,13 @@ const repoRoot = path.resolve(scriptDir, "../../../../..");
 const evalsDir = path.resolve(scriptDir, "../evals");
 const toolsRoot = path.resolve(repoRoot, "artifacts", "azure-sdk-tools");
 const copilotNpmRegistryUrl =
-  process.env.COPILOT_NPM_REGISTRY_URL ??
-  "https://packagefeedproxy.microsoft.io/npm/";
+  process.env.COPILOT_NPM_REGISTRY_URL ?? "https://packagefeedproxy.microsoft.io/npm/";
 const pnpmCommand = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
 
 const kindArgIndex = process.argv.indexOf("--mcp-kind");
-const mcpKind =
-  kindArgIndex === -1 ? undefined : process.argv[kindArgIndex + 1];
+const mcpKind = kindArgIndex === -1 ? undefined : process.argv[kindArgIndex + 1];
 if (!["live", "mock"].includes(mcpKind) || process.argv.length !== 4) {
-  process.stderr.write(
-    "Usage: node scripts/setup-environment.js --mcp-kind live|mock\n",
-  );
+  process.stderr.write("Usage: node scripts/setup-environment.js --mcp-kind live|mock\n");
   process.exit(1);
 }
 
@@ -39,28 +35,20 @@ function run(command, args, options = {}) {
   });
 }
 
-const evalEnvironment =
-  mcpKind === "live" ? "azsdk-mcp-local" : "azsdk-mcp-mock-local";
-for (const fileName of fs
-  .readdirSync(evalsDir)
-  .filter((name) => name.endsWith(".eval.yaml"))) {
+const evalEnvironment = mcpKind === "live" ? "azsdk-mcp-local" : "azsdk-mcp-mock-local";
+for (const fileName of fs.readdirSync(evalsDir).filter((name) => name.endsWith(".eval.yaml"))) {
   const filePath = path.join(evalsDir, fileName);
   const content = fs.readFileSync(filePath, "utf8");
   const environmentPattern = /^environment:[ \t]+\S+[ \t]*(?=\r?$)/m;
   if (!environmentPattern.test(content)) {
     continue;
   }
-  const updatedContent = content.replace(
-    environmentPattern,
-    `environment: ${evalEnvironment}`,
-  );
+  const updatedContent = content.replace(environmentPattern, `environment: ${evalEnvironment}`);
   if (updatedContent !== content) {
     fs.writeFileSync(filePath, updatedContent);
   }
 }
-process.stderr.write(
-  `==> Using local prebuilt MCP startup (${evalEnvironment}).\n`,
-);
+process.stderr.write(`==> Using local prebuilt MCP startup (${evalEnvironment}).\n`);
 
 if (!fs.existsSync(path.join(toolsRoot, ".git"))) {
   fs.mkdirSync(path.dirname(toolsRoot), { recursive: true });
@@ -79,9 +67,7 @@ if (!fs.existsSync(path.join(toolsRoot, ".git"))) {
   run("git", ["-C", toolsRoot, "checkout", "--detach", "FETCH_HEAD"]);
 }
 
-process.stderr.write(
-  "==> Building prebuilt MCP binaries into artifacts/mcp...\n",
-);
+process.stderr.write("==> Building prebuilt MCP binaries into artifacts/mcp...\n");
 for (const [project, output] of [
   ["Azure.Sdk.Tools.Cli", "cli"],
   ["Azure.Sdk.Tools.Mock", "mock"],
@@ -102,29 +88,20 @@ for (const [project, output] of [
   );
 }
 
-process.stderr.write(
-  "==> Installing frozen spec repository dependencies with pnpm...\n",
-);
-run(
-  process.execPath,
-  [path.join(repoRoot, "eng", "scripts", "install-pnpm.mts")],
-  {
-    cwd: repoRoot,
-  },
-);
+process.stderr.write("==> Installing frozen spec repository dependencies with pnpm...\n");
+run(process.execPath, [path.join(repoRoot, "eng", "scripts", "install-pnpm.mts")], {
+  cwd: repoRoot,
+});
 run(pnpmCommand, ["install", "--frozen-lockfile"], { cwd: repoRoot });
 
-process.stderr.write(
-  "==> Preparing fixture files from the current checkout...\n",
-);
+process.stderr.write("==> Preparing fixture files from the current checkout...\n");
 run(process.execPath, [path.join(scriptDir, "setup-fixture-files.js")], {
   cwd: repoRoot,
 });
 
 const nodeModules = path.join(repoRoot, "node_modules");
 const shell = process.env.SHELL ?? "";
-const isPowerShell =
-  !shell && process.platform === "win32" && !process.env.BASH;
+const isPowerShell = !shell && process.platform === "win32" && !process.env.BASH;
 if (isPowerShell) {
   console.log(`$env:AZSDK_EVAL_REPO_ROOT="${repoRoot}"`);
   console.log(`$env:FIXTURE_NODE_MODULES="${nodeModules}"`);

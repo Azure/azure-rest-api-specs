@@ -6,9 +6,7 @@ import path from "node:path";
 const mcpKind = process.env.AZSDK_EVAL_MCP_KIND;
 const repoRoot = process.env.AZSDK_EVAL_REPO_ROOT || process.cwd();
 if (!["live", "mock"].includes(mcpKind) || !repoRoot) {
-  console.error(
-    "MCP kind must be live or mock, and the repository root must be available.",
-  );
+  console.error("MCP kind must be live or mock, and the repository root must be available.");
   process.exit(1);
 }
 

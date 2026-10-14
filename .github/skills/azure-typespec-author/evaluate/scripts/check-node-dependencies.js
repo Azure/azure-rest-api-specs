@@ -23,16 +23,12 @@ if (mode === "node_modules") {
 const fixturePackage = JSON.parse(fs.readFileSync("package.json", "utf8"));
 const requiredPackages = Object.keys(fixturePackage.devDependencies ?? {});
 if (!requiredPackages.length) {
-  console.error(
-    "[dependency-check:packages] package.json has no devDependencies",
-  );
+  console.error("[dependency-check:packages] package.json has no devDependencies");
   process.exit(2);
 }
 
 const missing = requiredPackages.filter((packageName) => {
-  return !fs.existsSync(
-    path.join("node_modules", ...packageName.split("/"), "package.json"),
-  );
+  return !fs.existsSync(path.join("node_modules", ...packageName.split("/"), "package.json"));
 });
 
 if (missing.length) {
