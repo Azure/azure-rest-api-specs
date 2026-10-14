@@ -52,7 +52,7 @@ describe("buildAnalysisSummary", () => {
     expect(summary).toContain("#### breaking-changes.json");
   });
 
-  it("renders only the last 30 error lines for a failed analysis", async () => {
+  it("renders only the last 10 error lines for a failed analysis", async () => {
     await writeFile(
       join(resultsPath, "error.log"),
       `${Array.from({ length: 35 }, (_, index) => `error ${index + 1}`).join("\n")}\n`,
@@ -66,8 +66,8 @@ describe("buildAnalysisSummary", () => {
       jobLogUrl: "https://github.com/owner/repo/actions/runs/1/job/2",
     });
 
-    expect(summary).not.toContain("error 5\n");
-    expect(summary).toContain("    error 6\n");
+    expect(summary).not.toContain("error 25\n");
+    expect(summary).toContain("    error 26\n");
     expect(summary).toContain("    error 35");
     expect(summary).toContain(
       "[See failed step](https://github.com/owner/repo/actions/runs/1/job/2)",
