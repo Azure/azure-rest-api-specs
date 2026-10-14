@@ -377,7 +377,6 @@ describe("contributor readiness", () => {
     expect(f.createCheck).toHaveBeenCalledWith(expect.objectContaining({ conclusion: "neutral" }));
     const call = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
     expect(call[0].body).toContain("Internal contributors:");
-    expect(call[0].body).toContain("External contributions allowed.");
     expect(call[0].body).toContain("Not determined.");
     expect(call[0].body).not.toContain(authorImpact);
     expect(call[0].body).not.toContain(reviewerImpact);
@@ -426,7 +425,6 @@ describe("contributor readiness", () => {
     expect(call.body).toContain(
       "Non-blocking check; fix access issues to unblock affected actions.",
     );
-    expect(call.body).toContain("External contributions allowed.");
     const report = call.body.replace(`\n${marker}`, "");
     expect(f.core.summary.addRaw).toHaveBeenCalledWith(report);
     const [check] = f.createCheck.mock.calls[0] as [

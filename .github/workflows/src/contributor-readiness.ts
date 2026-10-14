@@ -346,7 +346,7 @@ export function renderReadiness(
             renderReadinessFindings(participants, findings),
             `Internal contributors: ${link("set up / renew access", ONBOARDING)}. Recheck: ${inlineCode(COMMAND)}.`,
             renderVerifiedContributors(verifiedParticipants),
-            "Non-blocking check; fix access issues to unblock affected actions. External contributions allowed.",
+            "Non-blocking check; fix access issues to unblock affected actions.",
           ]
         : "✅ No contributor-readiness issues found.",
       `Last updated: ${new Date().toISOString()}`,
