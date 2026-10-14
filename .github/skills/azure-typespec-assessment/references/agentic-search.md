@@ -32,7 +32,7 @@
      Scores range from 0 through 10. Rank by descending total and break ties by
      catalog order.
      Obtain canonical titles, URLs, and `catalogOrder` values with the exported
-     `readComplianceCatalog()` in `scripts/compliance-assessment.mjs`; preserve
+     `readComplianceCatalog()` in `scripts/compliance-assessment.ts`; preserve
      them exactly instead of reconstructing metadata or renumbering entries.
      This helper only reads catalog metadata; scoring and judgment remain Agent
      work.
