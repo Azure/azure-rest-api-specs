@@ -1,0 +1,165 @@
+{
+  "title": "Organizations_Create",
+  "operationId": "Organizations_Create",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso-rg",
+    "organizationName": "contoso-org",
+    "resource": {
+      "location": "eastus2euap",
+      "tags": {
+        "environment": "production"
+      },
+      "properties": {
+        "partnerProperties": {
+          "organizationName": "Contoso AI Platform",
+          "billingEmail": "billing@contoso.com",
+          "ownerEmail": "admin@contoso.com",
+          "defaultWorkspace": {
+            "name": "my first workspace",
+            "product": "aiforwork",
+            "marketplaceDetails": [
+              {
+                "offerDetails": {
+                  "offerId": "kore-ai-platform",
+                  "planId": "business-monthly",
+                  "publisherId": "kore-ai",
+                  "planName": "Business Monthly",
+                  "termId": "1m",
+                  "termUnit": "P1M"
+                },
+                "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.SaaS/resources/kore-ai-saas",
+                "subscriptionStatus": "Subscribed"
+              }
+            ]
+          }
+        },
+        "user": {
+          "firstName": "Jane",
+          "lastName": "Doe",
+          "emailAddress": "jane.doe@contoso.com",
+          "upn": "jane.doe@contoso.onmicrosoft.com",
+          "phoneNumber": "+1-425-555-0100"
+        },
+        "companyDetails": {
+          "companyName": "Contoso Ltd.",
+          "country": "US",
+          "domain": "contoso.com",
+          "businessType": "Technology",
+          "numberOfEmployees": 500
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Kore.AgentPlatform/organizations/contoso-org",
+        "name": "contoso-org",
+        "type": "Kore.AgentPlatform/organizations",
+        "location": "eastus2euap",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "partnerProperties": {
+            "organizationName": "Contoso AI Platform",
+            "billingEmail": "billing@contoso.com",
+            "ownerEmail": "admin@contoso.com",
+            "defaultWorkspace": {
+              "name": "my first workspace",
+              "product": "aiforwork",
+              "marketplaceDetails": [
+                {
+                  "offerDetails": {
+                    "offerId": "kore-ai-platform",
+                    "planId": "business-monthly",
+                    "publisherId": "kore-ai",
+                    "planName": "Business Monthly",
+                    "termId": "1m",
+                    "termUnit": "P1M"
+                  },
+                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.SaaS/resources/kore-ai-saas",
+                  "subscriptionStatus": "Subscribed"
+                }
+              ]
+            },
+            "partnerResourceId": "org_01JK2MXYZ9ABCDEF123456"
+          },
+          "user": {
+            "firstName": "Jane",
+            "lastName": "Doe",
+            "emailAddress": "jane.doe@contoso.com",
+            "upn": "jane.doe@contoso.onmicrosoft.com",
+            "phoneNumber": "+1-425-555-0100"
+          },
+          "companyDetails": {
+            "companyName": "Contoso Ltd.",
+            "country": "US",
+            "domain": "contoso.com",
+            "businessType": "Technology",
+            "numberOfEmployees": 500
+          },
+          "singleSignOn": {
+            "type": "Saml",
+            "url": "https://app.kore.ai/sso/login?token=eyJ..."
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-05-18T08:00:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-05-18T08:00:00Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Kore.AgentPlatform/locations/eastus2euap/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-07-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Kore.AgentPlatform/organizations/contoso-org",
+        "name": "contoso-org",
+        "type": "Kore.AgentPlatform/organizations",
+        "location": "eastus2euap",
+        "properties": {
+          "partnerProperties": {
+            "organizationName": "Contoso AI Platform",
+            "billingEmail": "billing@contoso.com",
+            "ownerEmail": "admin@contoso.com",
+            "defaultWorkspace": {
+              "name": "my first workspace",
+              "product": "aiforwork",
+              "marketplaceDetails": [
+                {
+                  "offerDetails": {
+                    "offerId": "kore-ai-platform",
+                    "planId": "business-monthly",
+                    "publisherId": "kore-ai",
+                    "planName": "Business Monthly",
+                    "termId": "1m",
+                    "termUnit": "P1M"
+                  },
+                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.SaaS/resources/kore-ai-saas",
+                  "subscriptionStatus": "Subscribed"
+                }
+              ]
+            }
+          },
+          "user": {
+            "firstName": "Jane",
+            "lastName": "Doe",
+            "emailAddress": "jane.doe@contoso.com",
+            "upn": "jane.doe@contoso.onmicrosoft.com",
+            "phoneNumber": "+1-425-555-0100"
+          },
+          "provisioningState": "Provisioning"
+        }
+      }
+    }
+  }
+}
