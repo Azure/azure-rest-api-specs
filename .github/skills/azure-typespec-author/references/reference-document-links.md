@@ -16,8 +16,10 @@
 
 ## Data-Plane Operations
 
-- [Azure.Core operation interfaces](https://azure.github.io/typespec-azure/docs/getstarted/azure-core/step05/): Add data-plane resource interfaces with standard Azure.Core create, read, update, delete, list, and polling operation templates.
-- [Azure.Core interface reference](https://azure.github.io/typespec-azure/docs/libraries/azure-core/reference/interfaces/): Use Azure.Core resource operation templates for data-plane create, read, update, delete, and list operations.
+- [Azure.Core reference](https://azure.github.io/typespec-azure/docs/libraries/azure-core/reference): Full reference for Azure.Core decorators, interfaces, operations, and models.
+- [Standard resource operations](https://azure.github.io/typespec-azure/docs/libraries/azure-core/reference/interfaces): Azure.Core operation templates (ResourceRead, ResourceList, ResourceCreateOrUpdate, ResourceDelete, etc.).
+- [Data-plane getting started](https://azure.github.io/typespec-azure/docs/getstarted/azure-core/step01): Getting started guide for creating data-plane TypeSpec services with Azure.Core.
+- [Deep Dive: Long-running (Asynchronous) Operations](https://azure.github.io/typespec-azure/docs/howtos/azure-core/long-running-operations/): Defining asynchronous (long-running) operations
 
 ## API Versioning
 
