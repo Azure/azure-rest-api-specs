@@ -549,6 +549,23 @@ model EvaluatorGenerationJob is JobLike<EvaluatorVersion, never> {
   @doc("Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.")
   evaluator_description?: string;
 
+  @doc("Rubric scoring selected for this generation attempt, including an inherited saved mode. Omitted for legacy generation.")
+  @added(Versions.v1)
+  @visibility(Lifecycle.Read)
+  scoring?: RubricScoring;
+
+  @doc("Normalized pass threshold supplied or inherited for this generation attempt. Omitted when no threshold was supplied or saved. Boolean scoring always uses an effective threshold of 1.")
+  @added(Versions.v1)
+  @visibility(Lifecycle.Read)
+  @minValue(0.0)
+  @maxValue(1.0)
+  pass_threshold?: float32;
+
+  @doc("Caller-approved dimensions fixed for this generation attempt, not the complete generated result. Omission retains normal regeneration ownership handling; an empty list explicitly clears the fixed set.")
+  @added(Versions.v1)
+  @visibility(Lifecycle.Read)
+  dimensions?: Dimension[];
+
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;

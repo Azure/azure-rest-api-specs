@@ -49625,6 +49625,23 @@ components:
         evaluator_description:
           type: string
           description: Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.
+        scoring:
+          $ref: '#/components/schemas/RubricScoring'
+          description: Rubric scoring selected for this generation attempt, including an inherited saved mode. Omitted for legacy generation.
+          readOnly: true
+        pass_threshold:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Normalized pass threshold supplied or inherited for this generation attempt. Omitted when no threshold was supplied or saved. Boolean scoring always uses an effective threshold of 1.
+          readOnly: true
+        dimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dimension'
+          description: Caller-approved dimensions fixed for this generation attempt, not the complete generated result. Omission retains normal regeneration ownership handling; an empty list explicitly clears the fixed set.
+          readOnly: true
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).
