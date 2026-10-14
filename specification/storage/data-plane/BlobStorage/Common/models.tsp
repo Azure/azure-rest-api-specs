@@ -952,10 +952,6 @@ union AccessTier {
   /** The Cold access tier. */
   Cold: "Cold",
 
-  /** The Smart access tier. */
-  @added(Versions.v2026_06_06)
-  Smart: "Smart",
-
   /** Extensible. */
   string,
 }
