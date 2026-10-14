@@ -4,12 +4,11 @@ import { execFile } from "../../../shared/src/exec.ts";
 import { SdkLanguage } from "./resolve-analysis-inputs.ts";
 import { generateTypeSpecMetadata } from "../../../shared/src/typespec-metadata.ts";
 
-interface ProjectResult
-{
+interface ProjectResult {
   typespecProjectPath: string;
   packageName: string;
   resultsPath: string;
-};
+}
 
 export interface AnalyzeSdkProjectsOptions {
   localSdkRepositoryPath: string;
@@ -21,7 +20,7 @@ export interface AnalyzeSdkProjectsOptions {
   workflowUrl: string;
   resultDir: string;
   azureSdkCliPath: string;
-};
+}
 
 /**
  * Mapping from SDK language identifiers to TypeSpec metadata language keys.

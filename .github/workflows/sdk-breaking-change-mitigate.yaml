@@ -239,26 +239,20 @@ jobs:
           retention-days: 7
 
       - name: Publish mitigation summary
-        shell: bash
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           PR_NUMBER: ${{ needs.resolve-trigger.outputs.pr-number }}
           SDK_LANGUAGE: ${{ needs.resolve-trigger.outputs.sdk-language }}
           MITIGATION_COMMIT: ${{ needs.resolve-trigger.outputs.head-sha }}
           MITIGATION_CHANGED_CODE: ${{ steps.get-changed-code.outputs.changed-code }}
-        run: |
-          {
-            echo "## SDK breaking-change mitigation"
-            echo
-            printf '%s\n\n' "**Pull request:** #$PR_NUMBER"
-            printf '%s\n\n' "**SDK language:** $SDK_LANGUAGE"
-            printf '%s\n\n' "**Mitigation upon commit:** \`$MITIGATION_COMMIT\`"
-            echo "## Customization Code"
-            echo
-            if [[ -n "$MITIGATION_CHANGED_CODE" ]]; then
-              echo '````diff'
-              printf '%s\n' "$MITIGATION_CHANGED_CODE"
-              echo '````'
-            else
-              echo "No mitigation changes were produced."
-            fi
-          } >> "$GITHUB_STEP_SUMMARY"
+        with:
+          script: |
+            const { publishMitigationSummary } =
+              await import('${{ github.workspace }}/repositories/workflow-repository/.github/workflows/src/sdk-breaking-change/publish-mitigation-summary.ts');
+            await publishMitigationSummary({
+              core,
+              prNumber: process.env.PR_NUMBER,
+              sdkLanguage: process.env.SDK_LANGUAGE,
+              mitigationCommit: process.env.MITIGATION_COMMIT,
+              changedCode: process.env.MITIGATION_CHANGED_CODE,
+            });

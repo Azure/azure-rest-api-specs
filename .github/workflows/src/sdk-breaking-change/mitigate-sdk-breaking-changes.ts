@@ -40,7 +40,7 @@ export interface MitigateSdkBreakingChangesOptions {
   specificationRepositoryPath: string;
   resultDirPath: string;
   azureSdkCliPath: string;
-};
+}
 
 const CustomizedUpdateResultSchema = z.object({
   success: z.boolean().optional().default(false),

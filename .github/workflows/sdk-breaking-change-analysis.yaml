@@ -253,57 +253,25 @@ jobs:
 
       - name: Publish result summary
         if: always()
-        shell: bash
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
+          RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
           JOB_STATUS: ${{ job.status }}
           ANALYSIS_OUTCOME: ${{ steps.analyze-sdk-projects.outcome }}
           ANALYZED_SHA: ${{ needs.resolve.outputs.head-sha }}
           JOB_LOG_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
-        run: |
-          {
-            echo "## SDK breaking-change analysis"
-            echo
-            if [[ -n "$ANALYZED_SHA" ]]; then
-              printf '%s\n\n' "**Analyzed commit:** \`$ANALYZED_SHA\`"
-            fi
-            if [[ "$JOB_STATUS" == "failure" ]]; then
-              echo "Breaking change analysis failed."
-              echo
-              error_log="$RUNNER_TEMP/sdk-breaking-change-results/error.log"
-              if [[ "$ANALYSIS_OUTCOME" == "failure" && -f "$error_log" ]]; then
-                echo "### Error"
-                echo
-                tail -n 30 "$error_log" | sed 's/^/    /'
-                echo
-              else
-                echo "Error output is available in the failed step log."
-                echo
-              fi
-              echo "[See failed step]($JOB_LOG_URL)"
-            else
-              manifest="$RUNNER_TEMP/sdk-breaking-change-results/projects.json"
-              if [[ -f "$manifest" ]]; then
-              while IFS= read -r project; do
-                typespec_project_path="$(jq -r '.typespecProjectPath' <<< "$project")"
-                package_name="$(jq -r '.packageName' <<< "$project")"
-                results_path="$RUNNER_TEMP/sdk-breaking-change-results/$(jq -r '.resultsPath' <<< "$project")"
-                echo "### $typespec_project_path"
-                echo
-                echo "**SDK Package:** $package_name"
-                echo
-                for result in generate.json build.json breaking-changes.json; do
-                  path="$results_path/$result"
-                  if [[ -f "$path" ]]; then
-                    echo "#### $result"
-                    echo '```json'
-                    cat "$path"
-                    echo '```'
-                  fi
-                done
-              done < <(jq -c '.[]' "$manifest")
-              fi
-            fi
-          } >> "$GITHUB_STEP_SUMMARY"
+        with:
+          script: |
+            const { publishAnalysisSummary } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/publish-analysis-summary.ts');
+            await publishAnalysisSummary({
+              core,
+              resultsPath: process.env.RESULTS_PATH,
+              jobStatus: process.env.JOB_STATUS,
+              analysisOutcome: process.env.ANALYSIS_OUTCOME,
+              analyzedSha: process.env.ANALYZED_SHA,
+              jobLogUrl: process.env.JOB_LOG_URL,
+            });
 
       - name: Create SDK analysis result artifact
         if: always() && needs.resolve.outputs.head-sha != ''
