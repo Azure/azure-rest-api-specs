@@ -13,7 +13,14 @@ namespace Microsoft.ApiManagement;
 @added(Versions.v2026_10_01_preview)
 model AiGatewayAliasTarget {
   /** Azure resource identifier of the target model in the default workspace. */
-  resourceId: string;
+  resourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ApiManagement/aigateways/workspaces/modelProviders/models";
+    },
+    {
+      type: "Microsoft.ApiManagement/service/workspaces/modelProviders/models";
+    }
+  ]>;
 
   /** Routing priority. Lower values are preferred; the effective default is zero. */
   @minValue(0)
