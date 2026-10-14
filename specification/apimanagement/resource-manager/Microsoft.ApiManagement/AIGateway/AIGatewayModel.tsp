@@ -17,7 +17,11 @@ namespace Microsoft.ApiManagement;
 @added(Versions.v2026_10_01_preview)
 model AiGatewayModelDeployment {
   /** ARM resource identifier of the provider deployment. */
-  resourceId?: string;
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/deployments";
+    }
+  ]>;
 
   /** Provider-side model name. */
   modelName: string;
@@ -30,7 +34,11 @@ model AiGatewayModelDeployment {
 @added(Versions.v2026_10_01_preview)
 model AiGatewayModelDeploymentUpdate {
   /** ARM resource identifier of the provider deployment. */
-  resourceId?: string;
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/deployments";
+    }
+  ]>;
 
   /** Provider-side model name. */
   modelName?: string;
@@ -43,14 +51,28 @@ model AiGatewayModelDeploymentUpdate {
 @added(Versions.v2026_10_01_preview)
 model AiGatewayFallbackTarget {
   /** Resource identifier of a model in the same workspace. */
-  modelId: string;
+  modelId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ApiManagement/aigateways/workspaces/modelProviders/models";
+    },
+    {
+      type: "Microsoft.ApiManagement/service/workspaces/modelProviders/models";
+    }
+  ]>;
 }
 
 /** A fallback target to update on a model policy. */
 @added(Versions.v2026_10_01_preview)
 model AiGatewayFallbackTargetUpdate {
   /** Resource identifier of a model in the same workspace. */
-  modelId?: string;
+  modelId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ApiManagement/aigateways/workspaces/modelProviders/models";
+    },
+    {
+      type: "Microsoft.ApiManagement/service/workspaces/modelProviders/models";
+    }
+  ]>;
 }
 
 /** The type of an inline AI Gateway policy. */
@@ -142,7 +164,14 @@ model AiGatewayCostLimitOverride {
   claims?: Record<string>;
 
   /** Azure resource identifier of the API key selecting this override. */
-  apiKeyResourceId?: string;
+  apiKeyResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ApiManagement/aigateways/apiKeys";
+    },
+    {
+      type: "Microsoft.ApiManagement/service/apiKeys";
+    }
+  ]>;
 
   /** Override budget in US dollars. */
   @minValueExclusive(0)

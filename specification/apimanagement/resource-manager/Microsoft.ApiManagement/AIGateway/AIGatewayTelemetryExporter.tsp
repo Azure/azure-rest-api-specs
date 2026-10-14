@@ -75,7 +75,11 @@ model AiGatewayApplicationInsightsConfiguration {
   connectionString?: string;
 
   /** Azure resource identifier of the Application Insights component. */
-  resourceId?: string;
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Insights/components";
+    }
+  ]>;
 }
 
 /** Telemetry signal receiving a claim attribute. */

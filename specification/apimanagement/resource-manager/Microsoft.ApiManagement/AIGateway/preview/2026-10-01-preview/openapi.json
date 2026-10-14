@@ -4173,7 +4173,15 @@
         },
         "resourceId": {
           "type": "string",
-          "description": "Azure resource identifier of the Application Insights component."
+          "format": "arm-id",
+          "description": "Azure resource identifier of the Application Insights component.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/components"
+              }
+            ]
+          }
         }
       }
     },
@@ -4274,7 +4282,18 @@
         },
         "apiKeyResourceId": {
           "type": "string",
-          "description": "Azure resource identifier of the API key selecting this override."
+          "format": "arm-id",
+          "description": "Azure resource identifier of the API key selecting this override.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/aigateways/apiKeys"
+              },
+              {
+                "type": "Microsoft.ApiManagement/service/apiKeys"
+              }
+            ]
+          }
         },
         "amount": {
           "type": "number",
@@ -4299,7 +4318,18 @@
         },
         "apiKeyResourceId": {
           "type": "string",
-          "description": "Azure resource identifier of the API key selecting this override."
+          "format": "arm-id",
+          "description": "Azure resource identifier of the API key selecting this override.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/aigateways/apiKeys"
+              },
+              {
+                "type": "Microsoft.ApiManagement/service/apiKeys"
+              }
+            ]
+          }
         },
         "amount": {
           "type": "number",
@@ -4452,7 +4482,18 @@
       "properties": {
         "modelId": {
           "type": "string",
-          "description": "Resource identifier of a model in the same workspace."
+          "format": "arm-id",
+          "description": "Resource identifier of a model in the same workspace.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/aigateways/workspaces/modelProviders/models"
+              },
+              {
+                "type": "Microsoft.ApiManagement/service/workspaces/modelProviders/models"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -4465,7 +4506,18 @@
       "properties": {
         "modelId": {
           "type": "string",
-          "description": "Resource identifier of a model in the same workspace."
+          "format": "arm-id",
+          "description": "Resource identifier of a model in the same workspace.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/aigateways/workspaces/modelProviders/models"
+              },
+              {
+                "type": "Microsoft.ApiManagement/service/workspaces/modelProviders/models"
+              }
+            ]
+          }
         }
       }
     },
@@ -4520,7 +4572,16 @@
           "type": "array",
           "description": "Cognitive Services account resource identifiers available to this provider.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.CognitiveServices/accounts"
+                }
+              ]
+            }
           }
         },
         "authentication": {
@@ -4545,7 +4606,16 @@
           "type": "array",
           "description": "Cognitive Services account resource identifiers available to this provider.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.CognitiveServices/accounts"
+                }
+              ]
+            }
           }
         },
         "authentication": {
@@ -4658,7 +4728,15 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "ARM resource identifier of the provider deployment."
+          "format": "arm-id",
+          "description": "ARM resource identifier of the provider deployment.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CognitiveServices/accounts/deployments"
+              }
+            ]
+          }
         },
         "modelName": {
           "type": "string",
@@ -4679,7 +4757,15 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "ARM resource identifier of the provider deployment."
+          "format": "arm-id",
+          "description": "ARM resource identifier of the provider deployment.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CognitiveServices/accounts/deployments"
+              }
+            ]
+          }
         },
         "modelName": {
           "type": "string",

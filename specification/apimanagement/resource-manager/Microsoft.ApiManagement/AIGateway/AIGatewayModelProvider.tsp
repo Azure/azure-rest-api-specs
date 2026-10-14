@@ -54,7 +54,11 @@ model AiGatewayFoundryProviderConfiguration {
   endpoint?: string;
 
   /** Cognitive Services account resource identifiers available to this provider. */
-  resourceIds: string[];
+  resourceIds: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts";
+    }
+  ]>[];
 
   /** Authentication configuration. */
   authentication: AiGatewayFoundryAuthentication;
@@ -111,7 +115,11 @@ model AiGatewayFoundryProviderConfigurationUpdate {
   endpoint?: string;
 
   /** Cognitive Services account resource identifiers available to this provider. */
-  resourceIds?: string[];
+  resourceIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts";
+    }
+  ]>[];
 
   /** Authentication configuration. */
   authentication?: AiGatewayFoundryAuthenticationUpdate;
