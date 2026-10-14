@@ -773,17 +773,21 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/ManagedIdentityType",
-          "description": "The type of the managed identity."
+          "description": "The type of the managed identity, either SystemAssigned or UserAssigned."
         },
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource ID of the user-assigned managed identity."
+          "description": "The resource ID of the user-assigned managed identity.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
     "ManagedIdentityType": {
       "type": "string",
