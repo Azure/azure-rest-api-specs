@@ -32,6 +32,11 @@ namespace Azure.AI.Projects {
   @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!csharp");
 
   // --------------------------------------------------------------------------------
+  // Fix the xref.
+  // --------------------------------------------------------------------------------
+  @@clientNamespace(OpenAI, "Azure.AI.Projects.Agents", "csharp");
+
+  // --------------------------------------------------------------------------------
   // Root client
   // --------------------------------------------------------------------------------
   @@clientName(Agents, "AgentAdministrationClient", "csharp");
@@ -158,6 +163,7 @@ namespace Azure.AI.Projects {
   @@usage(VoiceAgentTransport, Usage.input | Usage.json);
   @@access(VoiceAgentTransport, Access.public);
   @@alternateType(OpenAI.RealtimeResponse.metadata, Record<unknown>);
+  @@alternateType(OpenAI.MCPTool.allowed_tools, OpenAI.MCPToolFilter | null);
 
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
