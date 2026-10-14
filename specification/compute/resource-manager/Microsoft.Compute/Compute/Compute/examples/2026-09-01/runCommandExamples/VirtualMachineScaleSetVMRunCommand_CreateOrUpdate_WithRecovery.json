@@ -1,0 +1,53 @@
+{
+  "title": "Create or update a managed Run Command in Windows Recovery Environment on a VM scale set VM",
+  "operationId": "VirtualMachineScaleSetVMRunCommands_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myVMSS",
+    "instanceId": "0",
+    "runCommandName": "myRecoveryRunCommand",
+    "api-version": "2026-09-01",
+    "runCommand": {
+      "location": "westus",
+      "properties": {
+        "source": {
+          "script": "Write-Output 'Running in Windows Recovery Environment'"
+        },
+        "isRecoveryRunCommand": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVMSS/virtualMachines/0/runCommands/myRecoveryRunCommand",
+        "name": "myRecoveryRunCommand",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/runCommands",
+        "location": "westus",
+        "properties": {
+          "source": {
+            "script": "Write-Output 'Running in Windows Recovery Environment'"
+          },
+          "isRecoveryRunCommand": true,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVMSS/virtualMachines/0/runCommands/myRecoveryRunCommand",
+        "name": "myRecoveryRunCommand",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/runCommands",
+        "location": "westus",
+        "properties": {
+          "source": {
+            "script": "Write-Output 'Running in Windows Recovery Environment'"
+          },
+          "isRecoveryRunCommand": true,
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  }
+}

@@ -10651,6 +10651,9 @@
         "x-ms-examples": {
           "Create VirtualMachineScaleSet VM run command.": {
             "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_CreateOrUpdate.json"
+          },
+          "Create or update a managed Run Command in Windows Recovery Environment on a VM scale set VM": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_CreateOrUpdate_WithRecovery.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13510,6 +13513,9 @@
           }
         },
         "x-ms-examples": {
+          "Create or update a managed Run Command in Windows Recovery Environment on a VM": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_CreateOrUpdate_WithRecovery.json"
+          },
           "Create or update a run command.": {
             "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_CreateOrUpdate.json"
           }
@@ -22772,6 +22778,18 @@
         "asyncExecution": {
           "type": "boolean",
           "description": "Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete."
+        },
+        "forceRerun": {
+          "type": "boolean",
+          "description": "Specifies whether the Run Command should be executed again even if the\nscript source and settings have not changed. When set to true, the\nunderlying Run Command execution sequence number is incremented.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "isRecoveryRunCommand": {
+          "type": "boolean",
+          "description": "Specifies whether the Run Command is executed in Windows Recovery\nEnvironment (WinRE). Recovery Run Commands use the recovery execution\npath instead of the standard VM Run Command execution path."
         },
         "runAsUser": {
           "type": "string",
