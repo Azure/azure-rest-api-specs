@@ -46,27 +46,6 @@ interface EvaluationSuites
     Response<201> & EvaluationSuiteVersion
   >;
 
-  /** Creates a task-set-based suite at an exact version, or verifies an identical existing version. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry preview operation with an exact version and feature header."
-  @summary("Create or verify an evaluation-suite version")
-  @put
-  @route("/evaluation_suites/{name}/versions/{version}")
-  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-  createOrReplaceVersion is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    {
-      /** The suite name. */
-      @path name: string;
-
-      /** The exact version identifier. */
-      @path version: string;
-
-      /** The task-set-based suite definition. */
-      @bodyRoot evaluation_suite: EvaluationSuiteVersion;
-    },
-    Foundations.ResourceCreatedOrOkResponse<EvaluationSuiteVersion>
-  >;
-
   /** Runs a suite using the existing evaluation preview. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing suite preview operation."
   @summary("Run an evaluation suite")
@@ -86,12 +65,12 @@ interface EvaluationSuites
   >;
 }
 
-/** Operations for versioned EvalSuite job definitions. */
+/** Operations for editable named EvalSuite definitions. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry preview operations use the project-standard feature-header and error-envelope template."
 @tag("EvalSuites")
 @removed(Versions.v1)
 interface EvalSuites {
-  /** Lists the latest version of each EvalSuite. */
+  /** Lists named EvalSuites. */
   @summary("List EvalSuites")
   @get
   @list
@@ -100,75 +79,38 @@ interface EvalSuites {
   list is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     CommonPageQueryParameters,
-    AgentsPagedResult<EvalSuiteVersion>
+    AgentsPagedResult<EvalSuite>
   >;
 
-  /** Creates an EvalSuite if absent, or appends a version only when its complete definition changes. */
-  @summary("Reconcile an EvalSuite")
-  @post
+  /** Creates or replaces the current definition of a named EvalSuite. */
+  @summary("Create or replace an EvalSuite")
+  @put
   @route("/eval_suites/{name}")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-  reconcile is FoundryDataPlanePreviewOperation<
+  createOrReplace is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
       /** The stable EvalSuite name. */
       @path name: string;
 
-      /** The complete definition to publish if changed. */
-      @bodyRoot eval_suite: EvalSuiteVersion;
+      /** The complete suite definition. */
+      @bodyRoot eval_suite: EvalSuite;
     },
-    Foundations.ResourceCreatedOrOkResponse<EvalSuiteVersion>
+    Foundations.ResourceCreatedOrOkResponse<EvalSuite>
   >;
 
-  /** Always appends an EvalSuite version with a service-assigned identifier. */
-  @summary("Create an EvalSuite version")
-  @post
-  @route("/eval_suites/{name}/versions")
-  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-  createVersion is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    {
-      /** The EvalSuite name. */
-      @path name: string;
-
-      /** The complete suite definition to publish. */
-      @bodyRoot eval_suite: EvalSuiteVersion;
-    },
-    Response<201> & EvalSuiteVersion
-  >;
-
-  /** Lists every version of an EvalSuite. */
-  @summary("List EvalSuite versions")
+  /** Retrieves the current definition of a named EvalSuite. */
+  @summary("Get an EvalSuite")
   @get
-  @list
-  @route("/eval_suites/{name}/versions")
+  @route("/eval_suites/{name}")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-  listVersions is FoundryDataPlanePreviewOperation<
+  get is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
       /** The EvalSuite name. */
       @path name: string;
-
-      ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<EvalSuiteVersion>
-  >;
-
-  /** Retrieves an exact EvalSuite version. */
-  @summary("Get an EvalSuite version")
-  @get
-  @route("/eval_suites/{name}/versions/{version}")
-  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-  getVersion is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    {
-      /** The EvalSuite name. */
-      @path name: string;
-
-      /** The exact version identifier. */
-      @path version: string;
-    },
-    OkResponse & EvalSuiteVersion
+    OkResponse & EvalSuite
   >;
 }
 

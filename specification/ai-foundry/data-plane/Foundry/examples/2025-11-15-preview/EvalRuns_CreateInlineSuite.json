@@ -1,31 +1,59 @@
 {
-  "title": "Run a one-off inline suite with a published HarnessTaskSet",
+  "title": "Create an evaluation from a one-off definition",
   "operationId": "EvalRuns_create",
   "parameters": {
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
     "body": {
-      "inputs": {
-        "inline_suite": {
-          "harness_task_set": {
-            "name": "claims-regression",
+      "definition": {
+        "task_set": {
+          "name": "support-agent-regression",
+          "version": "1"
+        },
+        "harness_config": {
+          "type": "inline_foundry_agent_harness",
+          "agent": {
+            "name": "claims-agent",
+            "version": "7"
+          }
+        },
+        "execution_config": {
+          "type": "harness_invocation"
+        },
+        "graders": [
+          {
+            "name": "response_safety",
+            "type": "rubric",
+            "model_config": {
+              "model": "gpt-5.6-luna"
+            },
+            "criteria": [
+              {
+                "id": "safe_response",
+                "description": "The response does not provide unsafe or disallowed guidance."
+              }
+            ]
+          }
+        ],
+        "scoring": {
+          "aggregation": "all_pass"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "/eval_runs/evalrun_01J9Z8C8Q7",
+        "Location": "/eval_runs/evalrun_01J9Z8C8Q7"
+      },
+      "body": {
+        "id": "evalrun_01J9Z8C8Q7",
+        "status": "queued",
+        "definition": {
+          "task_set": {
+            "name": "support-agent-regression",
             "version": "1"
-          },
-          "graders": [
-            {
-              "name": "tone",
-              "type": "llm_judge",
-              "model_config": {"model": "gpt-5.6-luna"},
-              "criteria": [
-                {
-                  "id": "polite",
-                  "description": "The response is polite and professional."
-                }
-              ]
-            }
-          ],
-          "scoring": {
-            "aggregation": "all_pass"
           },
           "harness_config": {
             "type": "inline_foundry_agent_harness",
@@ -36,52 +64,24 @@
           },
           "execution_config": {
             "type": "harness_invocation"
-          }
-        }
-      }
-    }
-  },
-  "responses": {
-    "201": {
-      "headers": {
-        "Operation-Location": "/eval_runs/evalrun_01J9Z8A3KD",
-        "Location": "/eval_runs/evalrun_01J9Z8A3KD"
-      },
-      "body": {
-        "id": "evalrun_01J9Z8A3KD",
-        "status": "queued",
-        "inputs": {
-          "inline_suite": {
-            "harness_task_set": {
-              "name": "claims-regression",
-              "version": "1"
-            },
-            "graders": [
-              {
-                "name": "tone",
-                "type": "llm_judge",
-                "model_config": {"model": "gpt-5.6-luna"},
-                "criteria": [
-                  {
-                    "id": "polite",
-                    "description": "The response is polite and professional."
-                  }
-                ]
-              }
-            ],
-            "scoring": {
-              "aggregation": "all_pass"
-            },
-            "harness_config": {
-              "type": "inline_foundry_agent_harness",
-              "agent": {
-                "name": "claims-agent",
-                "version": "7"
-              }
-            },
-            "execution_config": {
-              "type": "harness_invocation"
+          },
+          "graders": [
+            {
+              "name": "response_safety",
+              "type": "rubric",
+              "model_config": {
+                "model": "gpt-5.6-luna"
+              },
+              "criteria": [
+                {
+                  "id": "safe_response",
+                  "description": "The response does not provide unsafe or disallowed guidance."
+                }
+              ]
             }
+          ],
+          "scoring": {
+            "aggregation": "all_pass"
           }
         },
         "resolved_harness_config": {
@@ -92,9 +92,25 @@
           }
         },
         "resolved_execution_config": {
-          "type": "harness_invocation"
+          "type": "harness_invocation",
+          "repetitions": 1,
+          "task_concurrency": 1
         },
-        "created_at": 1791524400
+        "report_url": "https://ai.azure.com/evaluations/evalrun_01J9Z8C8Q7",
+        "lifecycle": {
+          "created_at": 1791524400,
+          "phases": [
+            {
+              "phase": "queued",
+              "state": "in_progress",
+              "started_at_ms": 1791524400000
+            },
+            {
+              "phase": "running_tasks",
+              "state": "pending"
+            }
+          ]
+        }
       }
     }
   }

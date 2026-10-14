@@ -35,8 +35,26 @@ interface EvalRuns {
     {
       ...WithOperationId;
 
-      /** The immutable evaluation-run inputs. */
+      /** A named suite or a complete one-off definition. */
       @body request: EvalRunCreateContent;
+    },
+    JobCreatedResponse<FoundryEvalRun>
+  >;
+
+  /** Starts a new full run from a terminal run's captured definition and resolved settings. */
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client through Operation-Location."
+  @summary("Rerun a completed evaluation")
+  @post
+  @route("/eval_runs/{runId}:rerun")
+  @pollingOperation(EvalRuns.get)
+  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+  rerun is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      /** The terminal source run identifier. */
+      @path runId: string;
+
+      ...WithOperationId;
     },
     JobCreatedResponse<FoundryEvalRun>
   >;

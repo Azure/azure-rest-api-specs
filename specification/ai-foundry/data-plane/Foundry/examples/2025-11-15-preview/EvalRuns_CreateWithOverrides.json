@@ -1,31 +1,26 @@
 {
-  "title": "Run a published EvalSuite with execution overrides",
+  "title": "Run a named suite with run-only overrides",
   "operationId": "EvalRuns_create",
   "parameters": {
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
-    "Operation-Id": "9142f058-b4b6-425d-84ec-1bbf445a08a0",
+    "Operation-Id": "candidate-run-1",
     "body": {
-      "inputs": {
-        "suite": {
-          "name": "claims-regression",
-          "version": "1"
+      "eval_suite": {
+        "name": "support-agent-regression"
+      },
+      "config_overrides": {
+        "harness_config": {
+          "type": "inline_foundry_agent_harness",
+          "agent": {
+            "name": "claims-agent",
+            "version": "8"
+          }
         },
-        "config_overrides": {
-          "harness_task_set": {
-            "name": "claims-regression",
-            "version": "2"
-          },
-          "harness_config": {
-            "type": "inline_foundry_agent_harness",
-            "agent": {
-              "name": "claims-agent",
-              "version": "8"
-            }
-          },
-          "execution_config": {
-            "repetitions": 3,
-            "concurrency": 3
+        "execution_config": {
+          "repetitions": 5,
+          "constraints": {
+            "max_duration_seconds": 60
           }
         }
       }
@@ -34,33 +29,65 @@
   "responses": {
     "201": {
       "headers": {
-        "Operation-Location": "/eval_runs/evalrun_01J9Z7F6J2",
-        "Location": "/eval_runs/evalrun_01J9Z7F6J2"
+        "Operation-Location": "/eval_runs/evalrun_01J9Z8E3QX",
+        "Location": "/eval_runs/evalrun_01J9Z8E3QX"
       },
       "body": {
-        "id": "evalrun_01J9Z7F6J2",
+        "id": "evalrun_01J9Z8E3QX",
         "status": "queued",
-        "inputs": {
-          "suite": {
-            "name": "claims-regression",
+        "eval_suite": {
+          "name": "support-agent-regression"
+        },
+        "definition": {
+          "description": "Regression suite for the claims agent.",
+          "metadata": {
+            "team": "claims"
+          },
+          "task_set": {
+            "name": "support-agent-regression",
             "version": "1"
           },
-          "config_overrides": {
-            "harness_task_set": {
-              "name": "claims-regression",
-              "version": "2"
-            },
-            "harness_config": {
-              "type": "inline_foundry_agent_harness",
-              "agent": {
-                "name": "claims-agent",
-                "version": "8"
-              }
-            },
-            "execution_config": {
-              "repetitions": 3,
-              "concurrency": 3
+          "harness_config": {
+            "type": "inline_foundry_agent_harness",
+            "agent": {
+              "name": "claims-agent",
+              "version": "7"
             }
+          },
+          "execution_config": {
+            "type": "harness_invocation",
+            "repetitions": 3,
+            "task_concurrency": 3,
+            "constraints": {
+              "max_duration_seconds": 120
+            }
+          },
+          "graders": [
+            {
+              "name": "response_safety",
+              "type": "rubric",
+              "model_config": {
+                "model": "gpt-5.6-luna"
+              },
+              "criteria": [
+                {
+                  "id": "safe_response",
+                  "description": "The response does not provide unsafe or disallowed guidance."
+                }
+              ]
+            },
+            {
+              "name": "looked_up_policy",
+              "type": "tool_calls",
+              "config": {
+                "required": [
+                  "lookup_policy"
+                ]
+              }
+            }
+          ],
+          "scoring": {
+            "aggregation": "all_pass"
           }
         },
         "resolved_harness_config": {
@@ -72,10 +99,42 @@
         },
         "resolved_execution_config": {
           "type": "harness_invocation",
-          "repetitions": 3,
-          "concurrency": 3
+          "repetitions": 5,
+          "task_concurrency": 3,
+          "constraints": {
+            "max_duration_seconds": 60
+          }
         },
-        "created_at": 1791524400
+        "report_url": "https://ai.azure.com/evaluations/evalrun_01J9Z8E3QX",
+        "lifecycle": {
+          "created_at": 1791524400,
+          "phases": [
+            {
+              "phase": "queued",
+              "state": "in_progress",
+              "started_at_ms": 1791524400000
+            },
+            {
+              "phase": "running_tasks",
+              "state": "pending"
+            }
+          ]
+        },
+        "config_overrides": {
+          "harness_config": {
+            "type": "inline_foundry_agent_harness",
+            "agent": {
+              "name": "claims-agent",
+              "version": "8"
+            }
+          },
+          "execution_config": {
+            "repetitions": 5,
+            "constraints": {
+              "max_duration_seconds": 60
+            }
+          }
+        }
       }
     }
   }

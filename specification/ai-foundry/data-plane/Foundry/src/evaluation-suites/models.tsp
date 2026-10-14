@@ -167,106 +167,79 @@ model EvaluationSuiteVersion {
   tags?: Record<string>;
 }
 
-/** A reference to an exact HarnessTaskSet version. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model HarnessTaskSetReference {
-  /** The HarnessTaskSet name. */
-  name: string;
-
-  /** The exact HarnessTaskSet version. */
-  version: string;
-}
-
-/** A published HarnessTaskSet reference or inline tasks for a one-off suite. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union HarnessTaskSetSource {
-  HarnessTaskSetReference,
-  InlineHarnessTaskSet,
-}
-
-/** A reference to an exact EvalSuite version. */
+/** A reference to the current definition of a named EvalSuite. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvalSuiteReference {
-  /** The EvalSuite name. */
+  /** The published EvalSuite name. */
   name: string;
-
-  /** The exact EvalSuite version. */
-  version: string;
 }
 
-/** Configuration replacements applied only to a run of a published suite. */
+/** Run-only overrides of a named suite's harness and execution settings. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvalSuiteConfigOverrides {
-  /** A complete harness and exact agent reference replacing the suite's harness. */
+  /** A complete harness definition replacing the suite's harness. */
   harness_config?: InlineFoundryAgentHarness;
 
   /** Execution fields to replace; omitted fields inherit the suite defaults. */
   execution_config?: EvalExecutionConfigOverrides;
-
-  /** Another exact version of the same HarnessTaskSet used by the published suite. */
-  harness_task_set?: HarnessTaskSetReference;
 }
 
-/** Shared grading and execution settings for published and inline EvalSuites. */
+/** Shared grading and execution settings for a published or one-off suite. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalSuiteDefinition {
+model EvalDefinitionSettings {
+  /** Human-readable description of the evaluation. */
+  description?: string;
+
   /** Graders applied to every task in the suite. */
   graders?: InlineEvaluationGrader[];
 
-  /** How grader verdicts determine the task-run outcome. */
-  scoring: ScoringRule;
+  /** How completed grader verdicts determine the task-run outcome; defaults to all_pass. */
+  scoring?: ScoringRule;
 
-  /** The harness and exact agent version used for task attempts. */
+  /** The harness and agent used for task attempts. */
   harness_config: InlineFoundryAgentHarness;
 
-  /** The execution mode and default attempt limits. */
-  execution_config: EvalExecutionConfig;
+  /** Execution defaults, when different from one invocation per task. */
+  execution_config?: EvalExecutionConfig;
 
-  // Future scheduling settings belong to the suite, not an individual EvalRun.
+  /** User-defined string labels. */
+  metadata?: Record<string>;
 }
 
-/** An immutable version of a reusable evaluation job definition. */
+/** A one-off or captured suite definition; embedded tasks are not published. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvalDefinition {
+  ...EvalDefinitionSettings;
+
+  /** A pinned TaskSet version, or tasks embedded in this definition. */
+  task_set: TaskSetSource;
+}
+
+/** The editable current definition of a named evaluation suite. */
 @resource("eval_suites")
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalSuiteVersion {
-  ...EvalSuiteDefinition;
+model EvalSuite {
+  ...EvalDefinitionSettings;
 
-  /** The suite name. */
+  /** The stable suite name. */
   @visibility(Lifecycle.Read)
   @key
   name: string;
 
-  /** The immutable suite version. */
-  @visibility(Lifecycle.Read)
-  version: string;
+  /** The pinned TaskSet version evaluated by this suite. */
+  task_set: TaskSetReference;
 
-  /** The suite description. */
-  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  description?: string;
-
-  /** The exact published HarnessTaskSet version to evaluate. */
-  harness_task_set: HarnessTaskSetReference;
-
-  /** User-defined string labels for this suite version. */
-  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  metadata?: Record<string>;
-
-  /** The time when this version was published. */
+  /** The time when the suite was created. */
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
 
-  /** The identity that published this version. */
+  /** The time when the suite was last changed. */
+  @visibility(Lifecycle.Read)
+  updated_at: FoundryTimestamp;
+
+  /** The identity that created this suite. */
   @visibility(Lifecycle.Read)
   created_by: string;
-}
-
-/** A complete one-off suite definition that is retained only with the run. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model InlineEvalSuite {
-  ...EvalSuiteDefinition;
-
-  /** A published HarnessTaskSet version or tasks supplied just for this run. */
-  harness_task_set: HarnessTaskSetSource;
 }
 
 /** Request to run a suite through the existing evaluation preview. */

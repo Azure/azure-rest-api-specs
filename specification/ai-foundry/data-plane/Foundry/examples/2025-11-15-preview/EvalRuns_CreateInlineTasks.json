@@ -1,50 +1,47 @@
 {
-  "title": "Run a fully inline suite with tasks supplied in the request",
+  "title": "Create an evaluation from a one-off definition",
   "operationId": "EvalRuns_create",
   "parameters": {
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
     "body": {
-      "inputs": {
-        "inline_suite": {
-          "harness_task_set": {
-            "tasks": [
-              {
-                "id": "covered-water-damage",
-                "inputs": {
-                  "type": "prompt",
-                  "instruction": "Review claim 12345 and cite the applicable policy."
-                },
-                "expected": {
-                  "decision": "approved"
-                }
-              }
-            ]
-          },
-          "graders": [
+      "definition": {
+        "task_set": {
+          "tasks": [
             {
-              "name": "decision_check",
-              "type": "deterministic",
-              "check": {
-                "field": "outputs.text",
-                "operator": "contains",
-                "value_from": "inputs.expected.decision"
+              "id": "covered-water-damage",
+              "inputs": {
+                "type": "prompt",
+                "instruction": "Review claim 12345. Answer in lowercase with approved or denied, and cite the policy."
+              },
+              "expected": {
+                "decision": "approved"
               }
             }
-          ],
-          "scoring": {
-            "aggregation": "all_pass"
-          },
-          "harness_config": {
-            "type": "inline_foundry_agent_harness",
-            "agent": {
-              "name": "claims-agent",
-              "version": "7"
-            }
-          },
-          "execution_config": {
-            "type": "harness_invocation"
+          ]
+        },
+        "harness_config": {
+          "type": "inline_foundry_agent_harness",
+          "agent": {
+            "name": "claims-agent"
           }
+        },
+        "graders": [
+          {
+            "name": "decision_check",
+            "type": "substring_match",
+            "config": {
+              "text": {
+                "path": "outputs.text"
+              },
+              "substring": {
+                "path": "inputs.expected.decision"
+              }
+            }
+          }
+        ],
+        "scoring": {
+          "aggregation": "all_pass"
         }
       }
     }
@@ -52,52 +49,49 @@
   "responses": {
     "201": {
       "headers": {
-        "Operation-Location": "/eval_runs/evalrun_01J9Z8M6HE",
-        "Location": "/eval_runs/evalrun_01J9Z8M6HE"
+        "Operation-Location": "/eval_runs/evalrun_01J9Z8D9QV",
+        "Location": "/eval_runs/evalrun_01J9Z8D9QV"
       },
       "body": {
-        "id": "evalrun_01J9Z8M6HE",
+        "id": "evalrun_01J9Z8D9QV",
         "status": "queued",
-        "inputs": {
-          "inline_suite": {
-            "harness_task_set": {
-              "tasks": [
-                {
-                  "id": "covered-water-damage",
-                  "inputs": {
-                    "type": "prompt",
-                    "instruction": "Review claim 12345 and cite the applicable policy."
-                  },
-                  "expected": {
-                    "decision": "approved"
-                  }
-                }
-              ]
-            },
-            "graders": [
+        "definition": {
+          "task_set": {
+            "tasks": [
               {
-                "name": "decision_check",
-                "type": "deterministic",
-                "check": {
-                  "field": "outputs.text",
-                  "operator": "contains",
-                  "value_from": "inputs.expected.decision"
+                "id": "covered-water-damage",
+                "inputs": {
+                  "type": "prompt",
+                  "instruction": "Review claim 12345. Answer in lowercase with approved or denied, and cite the policy."
+                },
+                "expected": {
+                  "decision": "approved"
                 }
               }
-            ],
-            "scoring": {
-              "aggregation": "all_pass"
-            },
-            "harness_config": {
-              "type": "inline_foundry_agent_harness",
-              "agent": {
-                "name": "claims-agent",
-                "version": "7"
-              }
-            },
-            "execution_config": {
-              "type": "harness_invocation"
+            ]
+          },
+          "harness_config": {
+            "type": "inline_foundry_agent_harness",
+            "agent": {
+              "name": "claims-agent"
             }
+          },
+          "graders": [
+            {
+              "name": "decision_check",
+              "type": "substring_match",
+              "config": {
+                "text": {
+                  "path": "outputs.text"
+                },
+                "substring": {
+                  "path": "inputs.expected.decision"
+                }
+              }
+            }
+          ],
+          "scoring": {
+            "aggregation": "all_pass"
           }
         },
         "resolved_harness_config": {
@@ -108,9 +102,25 @@
           }
         },
         "resolved_execution_config": {
-          "type": "harness_invocation"
+          "type": "harness_invocation",
+          "repetitions": 1,
+          "task_concurrency": 1
         },
-        "created_at": 1791524400
+        "report_url": "https://ai.azure.com/evaluations/evalrun_01J9Z8D9QV",
+        "lifecycle": {
+          "created_at": 1791524400,
+          "phases": [
+            {
+              "phase": "queued",
+              "state": "in_progress",
+              "started_at_ms": 1791524400000
+            },
+            {
+              "phase": "running_tasks",
+              "state": "pending"
+            }
+          ]
+        }
       }
     }
   }

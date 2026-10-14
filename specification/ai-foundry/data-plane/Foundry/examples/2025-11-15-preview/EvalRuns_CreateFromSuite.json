@@ -1,15 +1,12 @@
 {
-  "title": "Run a published EvalSuite with its defaults",
+  "title": "Run a named EvalSuite",
   "operationId": "EvalRuns_create",
   "parameters": {
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
     "body": {
-      "inputs": {
-        "suite": {
-          "name": "claims-regression",
-          "version": "1"
-        }
+      "eval_suite": {
+        "name": "claims-regression"
       }
     }
   },
@@ -22,10 +19,24 @@
       "body": {
         "id": "evalrun_01J9Z8A3KD",
         "status": "queued",
-        "inputs": {
-          "suite": {
+        "eval_suite": {
+          "name": "claims-regression"
+        },
+        "definition": {
+          "task_set": {
             "name": "claims-regression",
             "version": "1"
+          },
+          "harness_config": {
+            "type": "inline_foundry_agent_harness",
+            "agent": {
+              "name": "claims-agent"
+            }
+          },
+          "execution_config": {
+            "type": "harness_invocation",
+            "repetitions": 1,
+            "task_concurrency": 2
           }
         },
         "resolved_harness_config": {
@@ -38,9 +49,23 @@
         "resolved_execution_config": {
           "type": "harness_invocation",
           "repetitions": 1,
-          "concurrency": 2
+          "task_concurrency": 2
         },
-        "created_at": 1791524400
+        "report_url": "https://ai.azure.com/evaluations/evalrun_01J9Z8A3KD",
+        "lifecycle": {
+          "created_at": 1791524400,
+          "phases": [
+            {
+              "phase": "queued",
+              "state": "in_progress",
+              "started_at_ms": 1791524400000
+            },
+            {
+              "phase": "running_tasks",
+              "state": "pending"
+            }
+          ]
+        }
       }
     }
   }

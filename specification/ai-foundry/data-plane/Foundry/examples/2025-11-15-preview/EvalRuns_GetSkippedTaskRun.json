@@ -1,0 +1,68 @@
+{
+  "title": "Get an all-skipped TaskRun",
+  "operationId": "EvalRuns_getTaskRun",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "runId": "evalrun_01J9Z7F6J3",
+    "taskRunId": "taskrun_01J9Z7N4DN"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "taskrun_01J9Z7N4DN",
+        "eval_run_id": "evalrun_01J9Z7F6J3",
+        "task": {
+          "id": "out-of-scope-task"
+        },
+        "repetition_number": 1,
+        "status": "succeeded",
+        "record": {
+          "inputs": {
+            "type": "prompt",
+            "instruction": "Review the claim."
+          },
+          "outputs": {
+            "text": "The claim is outside the applicable policy."
+          },
+          "artifacts": []
+        },
+        "grader_results": [
+          {
+            "grader": "optional_quality",
+            "status": "skipped",
+            "explanation": "This Task is explicitly outside this grader's scope."
+          }
+        ],
+        "overall_result": "skipped",
+        "lifecycle": {
+          "created_at": 1791524400,
+          "started_at": 1791524405,
+          "completed_at": 1791524410,
+          "queue_duration_ms": 5000,
+          "total_duration_ms": 10000,
+          "phases": [
+            {
+              "phase": "queued",
+              "state": "completed",
+              "started_at_ms": 1791524400000,
+              "completed_at_ms": 1791524405000
+            },
+            {
+              "phase": "invoking",
+              "state": "completed",
+              "started_at_ms": 1791524405000,
+              "completed_at_ms": 1791524409000
+            },
+            {
+              "phase": "grading",
+              "state": "completed",
+              "started_at_ms": 1791524409000,
+              "completed_at_ms": 1791524410000
+            }
+          ]
+        }
+      }
+    }
+  }
+}

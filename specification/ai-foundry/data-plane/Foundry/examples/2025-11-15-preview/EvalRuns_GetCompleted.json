@@ -1,5 +1,5 @@
 {
-  "title": "Get a completed evaluation run",
+  "title": "Get a completed EvalRun with outcome counts",
   "operationId": "EvalRuns_get",
   "parameters": {
     "api-version": "2025-11-15-preview",
@@ -11,16 +11,31 @@
       "body": {
         "id": "evalrun_01J9Z7F6J2",
         "status": "succeeded",
-        "inputs": {
-          "suite": {
+        "eval_suite": {
+          "name": "claims-regression"
+        },
+        "config_overrides": {
+          "execution_config": {
+            "repetitions": 3,
+            "task_concurrency": 3
+          }
+        },
+        "definition": {
+          "task_set": {
             "name": "claims-regression",
             "version": "1"
           },
-          "config_overrides": {
-            "execution_config": {
-              "repetitions": 3,
-              "concurrency": 3
+          "harness_config": {
+            "type": "inline_foundry_agent_harness",
+            "agent": {
+              "name": "claims-agent",
+              "version": "7"
             }
+          },
+          "execution_config": {
+            "type": "harness_invocation",
+            "repetitions": 1,
+            "task_concurrency": 2
           }
         },
         "resolved_harness_config": {
@@ -33,18 +48,39 @@
         "resolved_execution_config": {
           "type": "harness_invocation",
           "repetitions": 3,
-          "concurrency": 3
+          "task_concurrency": 3
         },
         "result": {
-          "task_run_count": 6,
-          "passed_count": 5,
-          "not_passed_count": 1,
-          "error_count": 0,
+          "counts": {
+            "pass": 5,
+            "fail": 1,
+            "skipped": 0,
+            "error": 0
+          },
           "pass_rate": 0.8333
         },
-        "created_at": 1791524400,
-        "started_at": 1791524402,
-        "completed_at": 1791524478
+        "report_url": "https://ai.azure.com/evaluations/evalrun_01J9Z7F6J2",
+        "lifecycle": {
+          "created_at": 1791524400,
+          "started_at": 1791524402,
+          "completed_at": 1791524478,
+          "queue_duration_ms": 2000,
+          "total_duration_ms": 78000,
+          "phases": [
+            {
+              "phase": "queued",
+              "state": "completed",
+              "started_at_ms": 1791524400000,
+              "completed_at_ms": 1791524402000
+            },
+            {
+              "phase": "running_tasks",
+              "state": "completed",
+              "started_at_ms": 1791524402000,
+              "completed_at_ms": 1791524478000
+            }
+          ]
+        }
       }
     }
   }

@@ -17,11 +17,23 @@ const EvaluationServiceV2RequiredPreviews = #{
 union EvaluationGraderType {
   string,
 
-  /** A grader that uses a language model to judge rubric criteria. */
-  llm_judge: "llm_judge",
+  /** One model call evaluates all rubric criteria. */
+  rubric: "rubric",
 
-  /** A grader that applies a bounded deterministic operator. */
-  deterministic: "deterministic",
+  /** Compare JSON scalar values. */
+  exact_match: "exact_match",
+
+  /** Require a substring in the answer. */
+  substring_match: "substring_match",
+
+  /** Match a regular expression in the answer. */
+  regex: "regex",
+
+  /** Check inclusive numeric bounds. */
+  numeric_range: "numeric_range",
+
+  /** Check required or disallowed ATIF tool calls. */
+  tool_calls: "tool_calls",
 }
 
 /** A grader that is resolved as part of a task-set or evaluation-suite version. */
@@ -35,9 +47,9 @@ model EvaluationGrader {
   type: EvaluationGraderType;
 }
 
-/** One criterion evaluated by a language-model judge. */
+/** One criterion evaluated by a rubric judge. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model LlmJudgeCriterion {
+model RubricCriterion {
   /** The criterion identifier. */
   id: string;
 
@@ -45,18 +57,17 @@ model LlmJudgeCriterion {
   description: string;
 }
 
-/** An inline language-model judge. */
+/** A rubric judged in one model call. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model LlmJudgeGrader extends EvaluationGrader {
-  /** Indicates that this grader uses a language model. */
-  type: EvaluationGraderType.llm_judge;
+model RubricGrader extends EvaluationGrader {
+  type: EvaluationGraderType.rubric;
 
   /** The model selected to judge this grader. */
   model_config: EvaluationJudgeModelConfig;
 
   /** The criteria evaluated by the judge. */
   @minItems(1)
-  criteria: LlmJudgeCriterion[];
+  criteria: RubricCriterion[];
 }
 
 /** The model chosen for one language-model grader. */
@@ -66,61 +77,136 @@ model EvaluationJudgeModelConfig {
   `model`: string;
 }
 
-/** The supported deterministic grader operators. */
+/** A path in the transient grader evidence view. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvaluationDeterministicOperator {
+model EvaluationPathSource {
+  /** Dot-separated path rooted at inputs or outputs. */
+  path: string;
+}
+
+/** A literal value compared with evidence. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvaluationLiteralSource {
+  /** JSON value to compare. */
+  literal: unknown;
+}
+
+/** Exactly one of a path or a literal. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+union EvaluationValueSource {
+  EvaluationPathSource,
+  EvaluationLiteralSource,
+}
+
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model ExactMatchConfig {
+  /** Observed JSON scalar. */
+  actual: EvaluationValueSource;
+
+  /** Expected JSON scalar. */
+  expected: EvaluationValueSource;
+}
+
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model SubstringMatchConfig {
+  /** Observed text. */
+  text: EvaluationValueSource;
+
+  /** Required substring. */
+  substring: EvaluationValueSource;
+}
+
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model RegexCheckConfig {
+  /** Observed text. */
+  text: EvaluationValueSource;
+
+  /** Regular expression to match. */
+  pattern: EvaluationValueSource;
+}
+
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model NumericRangeConfig {
+  /** Observed numeric value. */
+  actual: EvaluationValueSource;
+
+  /** Inclusive lower bound; at least one bound is required. */
+  min?: EvaluationValueSource;
+
+  /** Inclusive upper bound; at least one bound is required. */
+  max?: EvaluationValueSource;
+}
+
+/** A literal tool name or a path to one in the grader evidence view. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+union EvaluationToolNameSource {
   string,
-
-  /** The selected value must exactly equal the expected value. */
-  exact_match: "exact_match",
-
-  /** The selected value must contain the expected value. */
-  contains: "contains",
-
-  /** The selected value must match the configured regular expression. */
-  regex: "regex",
-
-  /** The selected numeric value must be greater than or equal to the expected value. */
-  greater_than_or_equal: "greater_than_or_equal",
-
-  /** The selected numeric value must be less than or equal to the expected value. */
-  less_than_or_equal: "less_than_or_equal",
-
-  /** The trajectory must contain a matching tool call. */
-  tool_called: "tool_called",
+  EvaluationPathSource,
 }
 
-/** An inline deterministic grader. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model DeterministicGrader extends EvaluationGrader {
-  /** Indicates that this grader applies a deterministic operator. */
-  type: EvaluationGraderType.deterministic;
+model ToolCallsConfig {
+  /** Tool names or reference paths, all of which must occur. */
+  required?: EvaluationToolNameSource[];
 
-  /** The built-in check applied to the evaluation record. */
-  check: EvaluationDeterministicCheck;
+  /** Tool names or reference paths, none of which may occur. */
+  disallowed?: EvaluationToolNameSource[];
 }
 
-/** A bounded check against a grader input field or a trajectory tool call. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationDeterministicCheck {
-  /** Dot-separated field path rooted at inputs, outputs, or context; omitted for tool_called. */
-  field?: string;
+model ExactMatchGrader extends EvaluationGrader {
+  /** The exact-match grader type. */
+  type: EvaluationGraderType.exact_match;
 
-  /** The operator applied to the selected value. */
-  operator: EvaluationDeterministicOperator;
+  /** Observed and expected values. */
+  config: ExactMatchConfig;
+}
 
-  /** The literal comparison value or tool function name. Provide exactly one of value and value_from. */
-  value?: unknown;
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model SubstringMatchGrader extends EvaluationGrader {
+  /** The substring-match grader type. */
+  type: EvaluationGraderType.substring_match;
 
-  /** Path to the comparison value in the standard grader record. Provide exactly one of value and value_from. */
-  value_from?: string;
+  /** Observed text and required substring. */
+  config: SubstringMatchConfig;
+}
+
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model RegexCheckGrader extends EvaluationGrader {
+  /** The regular-expression grader type. */
+  type: EvaluationGraderType.regex;
+
+  /** Observed text and pattern. */
+  config: RegexCheckConfig;
+}
+
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model NumericRangeGrader extends EvaluationGrader {
+  /** The numeric-range grader type. */
+  type: EvaluationGraderType.numeric_range;
+
+  /** Observed number and inclusive bounds. */
+  config: NumericRangeConfig;
+}
+
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model ToolCallsGrader extends EvaluationGrader {
+  /** The tool-call grader type. */
+  type: EvaluationGraderType.tool_calls;
+
+  /** Required or disallowed tool names. */
+  config: ToolCallsConfig;
 }
 
 /** The inline graders supported by the evaluation MVP. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 union InlineEvaluationGrader {
-  LlmJudgeGrader,
-  DeterministicGrader,
+  RubricGrader,
+  ExactMatchGrader,
+  SubstringMatchGrader,
+  RegexCheckGrader,
+  NumericRangeGrader,
+  ToolCallsGrader,
 }
 
 /** The rule for combining applicable grader verdicts. */
@@ -182,7 +268,7 @@ model PromptTaskInput {
 
 /** A reusable evaluation task. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model HarnessTask {
+model Task {
   /** The task identifier, unique within the task-set version. */
   @minLength(1)
   id: string;
@@ -194,7 +280,7 @@ model HarnessTask {
   inputs: PromptTaskInput;
 
   /** Reference values visible to graders but not to the agent. */
-  expected?: Record<EvaluationTaskContent>;
+  expected?: Record<unknown>;
 
   /** Task-level graders applied in addition to suite-level graders. */
   graders?: InlineEvaluationGrader[];
@@ -206,18 +292,44 @@ model HarnessTask {
   scoring?: ScoringRule;
 }
 
-/** Task definitions supplied with a one-off inline suite. */
+/** A complete task-set definition, reusable or embedded in a one-off run. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model InlineHarnessTaskSet {
-  /** The tasks to execute without publishing a HarnessTaskSet. */
+model TaskSetDefinition {
+  /** Description of the collection. */
+  description?: string;
+
+  /** The tasks to execute. */
   @minItems(1)
-  tasks: HarnessTask[];
+  tasks: Task[];
+
+  /** User-defined string labels. */
+  metadata?: Record<string>;
 }
 
-/** An immutable version of a reusable evaluation task set. */
-@resource("harness_task_sets")
+/** A reference to a published TaskSet version. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model HarnessTaskSetVersion {
+model TaskSetReference {
+  /** Published TaskSet name. */
+  name: string;
+
+  /** Pinned, service-assigned version. */
+  version: string;
+}
+
+/** A pinned TaskSet or a complete inline task definition. */
+@oneOf
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+union TaskSetSource {
+  TaskSetReference,
+  TaskSetDefinition,
+}
+
+/** An immutable version of a reusable TaskSet. */
+@resource("task_sets")
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model TaskSetVersion {
+  ...TaskSetDefinition;
+
   /** The task-set name. */
   @visibility(Lifecycle.Read)
   @key
@@ -226,18 +338,6 @@ model HarnessTaskSetVersion {
   /** The immutable task-set version. */
   @visibility(Lifecycle.Read)
   version: string;
-
-  /** The task-set description. */
-  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  description?: string;
-
-  /** The tasks contained in this version. */
-  @minItems(1)
-  tasks: HarnessTask[];
-
-  /** User-defined string labels for this task-set version. */
-  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  metadata?: Record<string>;
 
   /** The time when this version was published. */
   @visibility(Lifecycle.Read)
