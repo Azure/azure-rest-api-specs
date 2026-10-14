@@ -341,8 +341,7 @@ export function renderReadiness(
   verifiedParticipants: Participant[] = [],
 ): string {
   return renderMarkdownDoc(
-    section(
-      "Contributor readiness: required access",
+    section("Contributor readiness: required access", [
       findings.length
         ? [
             "> [!WARNING]\n> **The access issues below can prevent PR approvals from counting, block Azure DevOps pipeline runs, or prevent PR authors from adding labels.**",
@@ -352,7 +351,8 @@ export function renderReadiness(
             "Non-blocking report; external fork contributions are allowed. GitHub review rules still apply.",
           ]
         : "✅ No contributor-readiness issues found.",
-    ),
+      `Last updated: ${new Date().toISOString()}`,
+    ]),
     2,
   );
 }

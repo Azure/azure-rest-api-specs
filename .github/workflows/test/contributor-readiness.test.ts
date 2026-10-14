@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { isMap, isSeq, parseDocument } from "yaml";
 import {
   checkContributorReadiness,
@@ -34,6 +34,7 @@ const notifierPath = ".github/workflows/contributor-readiness-notify.yaml";
 const authorImpact = "PR author cannot run Azure DevOps pipelines for this PR.";
 const authorLabelImpact = "PR author cannot add labels to this PR.";
 const reviewerImpact = "Reviewer approval does not count toward required reviews";
+const updatedAt = "2026-10-14T16:24:22.000Z";
 
 function setup() {
   const github = createMockGithub();
@@ -90,6 +91,15 @@ function setup() {
 }
 
 describe("contributor readiness", () => {
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date(updatedAt));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it("routes PR events through an unprivileged notifier and trusted workflow_run publisher", () => {
     const publisher = parseDocument(
       readFileSync(new URL("../contributor-readiness-report.yaml", import.meta.url), "utf8"),
@@ -719,7 +729,7 @@ describe("contributor readiness", () => {
     expect(f.github.rest.issues.createComment).not.toHaveBeenCalled();
   });
 
-  it("does not update an unchanged comment", async () => {
+  it("refreshes the timestamp across report surfaces when findings are unchanged", async () => {
     const f = setup();
     f.permission.mockResolvedValue({ data: { permission: "read" } });
     await f.run();
@@ -733,8 +743,18 @@ describe("contributor readiness", () => {
         },
       ],
     });
+    const refreshedAt = "2026-10-14T17:24:22.000Z";
+    vi.setSystemTime(new Date(refreshedAt));
     await f.run();
-    expect(f.github.rest.issues.updateComment).not.toHaveBeenCalled();
+    const refreshedBody = comment.body.replace(updatedAt, refreshedAt);
+    expect(refreshedBody).toContain(`Last updated: ${refreshedAt}`);
+    expect(f.github.rest.issues.updateComment).toHaveBeenCalledWith(
+      expect.objectContaining({ comment_id: 5, body: refreshedBody }),
+    );
+    expect(f.github.rest.issues.createComment).toHaveBeenCalledOnce();
+    const report = refreshedBody.replace(`\n${marker}`, "");
+    expect(f.core.summary.addRaw).toHaveBeenLastCalledWith(report);
+    expect(f.createCheck.mock.lastCall?.[0]).toMatchObject({ output: { summary: report } });
   });
 
   it("allows affected reviewers without write access to refresh", async () => {
