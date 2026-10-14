@@ -11060,6 +11060,9 @@
           },
           "Get a virtual machine with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithVMSizeProperties.json"
+          },
+          "Get a virtual machine with a FlexProfile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithFlexProfile.json"
           }
         }
       },
@@ -11188,6 +11191,9 @@
           },
           "Create a VM with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithVMSizeProperties.json"
+          },
+          "Create a VM with a FlexProfile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithFlexProfile.json"
           },
           "Create a VM with automatic zone placement": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPlacement.json"
@@ -11399,6 +11405,9 @@
           },
           "Update a VM by force-detaching data disk": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_ForceDetachDataDisk.json"
+          },
+          "Update a VM's FlexProfile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_WithFlexProfile.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -16080,6 +16089,19 @@
           "description": "Grace period for newly created VMs or when the External Health policy is first applied on VMSS. Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 4 hours (PT4H)."
         }
       }
+    },
+    "FlexProfile": {
+      "type": "object",
+      "description": "Specifies the FlexProfile for a virtual machine. When set, Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and the deployed size is returned in hardwareProfile.vmSize. See the properties.flexProfile description for the full usage rules, including how it interacts with hardwareProfile.vmSize.",
+      "properties": {
+        "preferredVMSize": {
+          "type": "string",
+          "description": "Specifies the preferred VM size, for example Standard_D4s_v5. Azure may deploy a compatible alternative size based on capacity and placement considerations. Supported VM families for FlexProfile may vary by region. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes)."
+        }
+      },
+      "required": [
+        "preferredVMSize"
+      ]
     },
     "HardwareProfile": {
       "type": "object",
@@ -22358,6 +22380,10 @@
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the virtual machine."
+        },
+        "flexProfile": {
+          "$ref": "#/definitions/FlexProfile",
+          "description": "[Preview Feature] Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and returns the deployed size in hardwareProfile.vmSize. A request that adds flexProfile must omit hardwareProfile.vmSize. For a virtual machine that uses FlexProfile, a hardwareProfile.vmSize equal to the deployed size is ignored, so a GET response can be sent back unchanged. A PATCH request that omits flexProfile keeps it. A PUT request that omits flexProfile and sets hardwareProfile.vmSize clears it. This property cannot exist along with a non-null properties.availabilitySet, properties.capacityReservation, properties.host, properties.hostGroup, properties.proximityPlacementGroup or properties.virtualMachineScaleSet."
         },
         "scheduledEventsPolicy": {
           "$ref": "#/definitions/ScheduledEventsPolicy",
