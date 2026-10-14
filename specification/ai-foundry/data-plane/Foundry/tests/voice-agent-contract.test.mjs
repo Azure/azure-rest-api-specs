@@ -172,6 +172,40 @@ function checkSdkGreetingModels(context) {
   );
 }
 
+function checkSdkSessionFields(context) {
+  const model = (name) => {
+    const value = context.sdkPackage.models.find((m) => m.__raw?.name === name);
+    assert.ok(value, `SDK metadata missing ${name}`);
+    return value;
+  };
+  for (const name of [
+    "VoiceAgentDefinition",
+    "VoiceAgentRealtimeDefinition",
+    "VoiceAgentLiveDefinition",
+  ])
+    for (const field of ["input", "client"])
+      assert.ok(
+        !model(name).properties.some((p) => p.serializedName === field),
+        `${name}.${field}`,
+      );
+  for (const name of ["LiveSessionCreateParams", "LiveSessionResourceParam"]) {
+    const properties = model(name).properties;
+    const input = properties.find((p) => p.serializedName === "input");
+    assert.equal(input.optional, true);
+    assert.equal(input.type.kind, "array");
+    assert.equal(input.type.valueType, model("LiveInitialItem"));
+    const client = properties.find((p) => p.serializedName === "client");
+    assert.equal(client.optional, true);
+    assert.equal(client.type, model("LiveClientConfigParam"));
+  }
+  assert.equal(
+    model("LiveSessionStartEvent").properties.find(
+      (p) => p.serializedName === "session",
+    ).type,
+    model("LiveSessionCreateParams"),
+  );
+}
+
 before(async () => {
   output = await mkdtemp(join(tmpdir(), "foundry-voice-contract-"));
   const entrypoint = join(project, "main.tsp");
@@ -270,15 +304,6 @@ test("Live configuration references native model identities, not local copies", 
     live.properties.get("audio").type,
     type("OpenAI.LiveInitialSessionAudioParam"),
   );
-  assert.equal(
-    live.properties.get("client").type,
-    type("OpenAI.LiveClientConfigParam"),
-  );
-  assert.equal(
-    live.properties.get("input").type.indexer.value,
-    type("OpenAI.LiveInitialItem"),
-  );
-  assert.equal(getMaxItems(program, live.properties.get("input")), 128);
   const delegation = type("Azure.AI.Projects.VoiceAgentLiveDelegation");
   assert.equal(
     delegation.variants.get("client").type,
@@ -291,6 +316,35 @@ test("Live configuration references native model identities, not local copies", 
   assert.deepEqual(
     [...delegation.variants.keys()],
     ["client", "responses", "foundry_managed_agent", "foundry_hosted_agent"],
+  );
+});
+
+test("input and client permissions belong to native sessions, not persisted voice definitions", () => {
+  for (const name of [
+    "VoiceAgentDefinition",
+    "VoiceAgentRealtimeDefinition",
+    "VoiceAgentLiveDefinition",
+  ])
+    for (const field of ["input", "client"])
+      assert.equal(
+        fields(type(`Azure.AI.Projects.${name}`)).has(field),
+        false,
+        `${name}.${field}`,
+      );
+  for (const name of ["LiveSessionCreateParams", "LiveSessionResourceParam"]) {
+    const p = fields(type(`OpenAI.${name}`));
+    assert.equal(p.get("input").optional, true);
+    assert.equal(
+      p.get("input").type.indexer.value,
+      type("OpenAI.LiveInitialItem"),
+    );
+    assert.equal(getMaxItems(program, p.get("input")), 128);
+    assert.equal(p.get("client").optional, true);
+    assert.equal(p.get("client").type, type("OpenAI.LiveClientConfigParam"));
+  }
+  assert.equal(
+    fields(type("OpenAI.LiveSessionStartEvent")).get("session").type,
+    type("OpenAI.LiveSessionCreateParams"),
   );
 });
 
@@ -901,6 +955,65 @@ async function validateExamples(name, examples, declarations = []) {
   return compile(NodeHost, path, { ...compilerOptions, noEmit: true });
 }
 
+test("Live definition examples reject session-only input and client fields", async (t) => {
+  // Exclude discriminator conversions so failures identify the removed fields.
+  const declarations = [
+    'model LiveDefinitionProbe { ...OmitProperties<Azure.AI.Projects.VoiceAgentLiveDefinition, "kind" | "sub_protocol">; }',
+  ];
+  const model = "LiveDefinitionProbe";
+  const payload = { model_type: "self_deployed", model: "gpt-live-1" };
+  checkErrors(
+    (
+      await validateExamples(
+        "live-definition",
+        [{ model, payload }],
+        declarations,
+      )
+    ).diagnostics,
+  );
+  for (const [field, value] of [
+    ["input", []],
+    ["client", { data_channel: { allowed_client_events: "all" } }],
+  ])
+    await t.test(field, async () => {
+      const result = await validateExamples(
+        `live-definition-rejects-${field}`,
+        [{ model, payload: { ...payload, [field]: value } }],
+        declarations,
+      );
+      checkInvalidExample(result.diagnostics);
+      assert.ok(
+        result.diagnostics.some(
+          (d) => d.severity === "error" && d.message.includes(field),
+        ),
+      );
+    });
+});
+
+test("native session examples still accept input and client permissions", async () => {
+  checkErrors(
+    (
+      await validateExamples("native-session-fields", [
+        {
+          model: "OpenAI.LiveSessionCreateParams",
+          payload: {
+            model: "gpt-live-1",
+            input: [],
+            client: {
+              data_channel: {
+                allowed_client_events: "all",
+                allowed_server_events: [
+                  { type: "session.output_transcript.delta" },
+                ],
+              },
+            },
+          },
+        },
+      ])
+    ).diagnostics,
+  );
+});
+
 test("optional Live template greetings and existing Realtime greeting examples validate", async () => {
   const examples = [
     { model: "LiveGreetingProbe", payload: {} },
@@ -1348,6 +1461,7 @@ test("SDK metadata exports native events and separate Live persistence discrimin
   };
   const backend = model("LiveServerEventLiveResponseEvent");
   checkSdkGreetingModels(context);
+  checkSdkSessionFields(context);
   checkNativeSdkEvents(context);
   assert.equal(backend.baseModel, model("LiveServerEvent"));
   assert.equal(backend.discriminatorValue, "response.event");
@@ -1545,6 +1659,7 @@ test("Java SDK customization targets Realtime fields and keeps Live events witho
     sdkProgram,
   );
   checkSdkGreetingModels(context);
+  checkSdkSessionFields(context);
   assert.equal(
     realtime.properties.get("tool_choice").type.name,
     "ToolChoiceValue",
@@ -2311,6 +2426,9 @@ test("persisted definitions remain flat with Foundry store and native configurat
     assert.equal(base.properties.audio, undefined);
     assert.equal(live.properties.live_config, undefined);
     assert.equal(live.properties.session, undefined);
+    for (const schema of [base, live, schemas.VoiceAgentRealtimeDefinition])
+      for (const field of ["input", "client"])
+        assert.equal(schema.properties[field], undefined, field);
     assert.equal(
       live.properties.audio.$ref,
       "#/components/schemas/OpenAI.LiveInitialSessionAudioParam",

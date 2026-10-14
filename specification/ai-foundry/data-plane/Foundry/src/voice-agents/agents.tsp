@@ -214,13 +214,6 @@ model VoiceAgentLiveDefinition extends VoiceAgentDefinition {
 
   @doc("Delegation settings. Omit or use null for client mode. responses.model is a backend deployment name in the Live resource, not a model catalog ID.")
   delegation?: VoiceAgentLiveDelegation | null;
-
-  @doc("Initial developer, user, or assistant text messages: at most 128, with one text part each.")
-  @maxItems(128)
-  input?: OpenAI.LiveInitialItem[];
-
-  @doc("Frontend data-channel event permissions.")
-  client?: OpenAI.LiveClientConfigParam;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Reuse the native OpenAI delegation models without reparenting or changing their wire contract."
