@@ -372,6 +372,38 @@ describe("detectChangedSpecConfigFiles", () => {
         "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
     });
   });
+
+  test("keeps old-layout generation scoped to the nearest changed project", async () => {
+    const file = "specification/contosowidgetmanager/Contoso.Management/NestedService/main.tsp";
+    vi.mocked(getChangedFiles).mockResolvedValue([file]);
+
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
+
+    expect(result.map(normalizeResultItem)).toEqual([
+      {
+        specs: [file],
+        typespecProject:
+          "specification/contosowidgetmanager/Contoso.Management/NestedService/tspconfig.yaml",
+      },
+    ]);
+  });
+
+  test("keeps V2 ancestor generation and file associations without selecting sibling projects", async () => {
+    const parent = "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/Service1";
+    const nestedFile = `${parent}/SubService1/main.tsp`;
+    const parentFile = `${parent}/main.tsp`;
+    vi.mocked(getChangedFiles).mockResolvedValue([nestedFile, parentFile]);
+
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
+
+    expect(result).toHaveLength(2);
+    expect(result.map(normalizeResultItem)).toEqual(
+      expect.arrayContaining([
+        { specs: [nestedFile, parentFile], typespecProject: `${parent}/tspconfig.yaml` },
+        { specs: [nestedFile], typespecProject: `${parent}/SubService1/tspconfig.yaml` },
+      ]),
+    );
+  });
 });
 
 describe("groupSpecConfigPaths", () => {
