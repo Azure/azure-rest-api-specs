@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "backupName": "55555555-6666-7777-8888-999999999999;131637960820000000;Archive",
+    "databaseName": "testDatabase",
+    "locationName": "japaneast",
+    "managedInstanceName": "testInstance",
+    "resourceGroupName": "testResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "55555555-6666-7777-8888-999999999999;131637960820000000;Archive",
+        "type": "Microsoft.Sql/locations/longTermRetentionManagedInstances/longTermRetentionDatabases/longTermRetentionManagedInstanceBackups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japaneast/longTermRetentionManagedInstances/testInstance/longTermRetentionDatabases/testDatabase/longTermRetentionManagedInstanceBackups/55555555-6666-7777-8888-999999999999;131637960820000000;Archive",
+        "properties": {
+          "backupStorageAccessTier": "Archive",
+          "backupStorageRedundancy": "Geo",
+          "backupTime": "2018-08-23T08:00:00Z",
+          "databaseDeletionTime": null,
+          "databaseName": "testDatabase",
+          "legalHoldImmutability": "Disabled",
+          "managedInstanceCreateTime": "2017-09-01T08:00:00Z",
+          "managedInstanceName": "testInstance"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japaneast/longTermRetentionManagedInstanceBackupOperationResults/01234567-890a-bcde-f012-34567890abcd?api-version=2026-08-01-preview"
+      }
+    }
+  },
+  "operationId": "LongTermRetentionManagedInstanceBackups_RemoveLegalHoldImmutabilityByResourceGroup",
+  "title": "Remove legal hold immutability of the managed instance long term retention backup."
+}

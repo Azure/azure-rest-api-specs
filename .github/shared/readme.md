@@ -57,6 +57,64 @@ Single source of truth for breaking-change and versioning approval label names a
   `readme`, `dataPlane`, `resourceManager`, `preview`, `stable`, `example`, `typespec`,
   `quickstartTemplate`, `swagger`, `scenario`.
 
+### `cli` — command-line arguments and help
+
+- `parseArgsWithHelp(config)` — Node's `parseArgs` with automatic `--help` / `-h` support.
+  Options include a required `description` and optional `valueLabel` and `group` for generated
+  help. Supply `help.command` and structured metadata rather than formatting a header or footer.
+- `CliOption`, `CliPositional`, `CliHelp`, `CliArgsConfig` — argument definitions, help metadata,
+  and parser configuration.
+
+The helper generates usage, positional-argument descriptions, options, notes, examples, and a
+documentation link. `help.title` and `help.description` introduce the tool. Define the
+positional arguments in `help.positionals`, with a `name`, `description`, and `optional: true`
+for optional arguments. Required positionals appear as `<name>`, optional ones as `[name]`.
+Descriptions and notes wrap automatically.
+
+`help.examples` contains argument strings; the helper prefixes each with `help.command`.
+Use `help.notes` for additional guidance and `help.documentation` for a documentation URL.
+These are help metadata only: Node still returns positionals as an array, and callers retain
+responsibility for validating required arguments and option combinations.
+
+The helper preserves Node's parser options, errors, and inferred result types. When help is
+requested it prints to stdout and returns `undefined`; the caller must return before doing any
+work. It does not call `process.exit`. The option names `help` and `h` and short alias `h` are
+reserved; conflicting definitions throw rather than silently overriding an option.
+
+```typescript
+import { parseArgsWithHelp } from "@azure-tools/specs-shared/cli";
+
+function main() {
+  const args = parseArgsWithHelp({
+    options: {
+      verbose: { type: "boolean", short: "v", description: "Show details." },
+      output: { type: "string", valueLabel: "<path>", description: "Output file." },
+    },
+    allowPositionals: true,
+    help: {
+      command: "example",
+      description: "Process input files.",
+      positionals: [{ name: "file", description: "Input file." }],
+      examples: ["input.json --verbose", "input.json --output result.json"],
+    },
+  });
+  if (!args) return;
+
+  // Run the command using args.values.
+}
+```
+
+### Structured validation diagnostics and manifests
+
+- `diagnostic-content` — compose and render styled paths, text, lines, blocks, and
+  native command output.
+- `rule-result` — `Diagnostic`, `RuleResult`, `DiagnosticError`, `failure`, and
+  non-failing `warning` results.
+- `diagnostics` — format and report diagnostics with an explicit tool prefix,
+  select color support, and render rule statuses and summaries.
+- `service-yaml` — `parseServiceYaml` validates the shared version-list shape and
+  returns actionable YAML/schema errors.
+
 ### `console` — console output
 
 - `log(...args)` — async wrapper around `console.log`.
@@ -65,6 +123,8 @@ Single source of truth for breaking-change and versioning approval label names a
 
 - `isExecError(error)` — type guard for errors thrown by the exec helpers.
 - `execFile(file, args, options)` — promisified `child_process.execFile`.
+- `ExecFileOptions` — direct execution options, including an optional `timeout` in milliseconds
+  for `execFile` and `execNodeBin`. Omit it for no execution timeout.
 - `execNodeBin(packageName, [binary, ...args], options)` — run an installed Node.js CLI directly
   with the current Node executable, without starting npm/pnpm or a shell shim. Resolves the package
   from `options.cwd` (or the current directory) using Node's `findPackageJSON`, reads its `bin`
@@ -96,6 +156,45 @@ Single source of truth for breaking-change and versioning approval label names a
 ### `math` — math helpers
 
 - `toPercent(value, decimals)` — format a `0..1` ratio as a percentage string.
+
+### `markdown` — composable report helpers
+
+- `MarkdownDoc`, `MarkdownSection` — trusted Markdown blocks, optional content, arrays and sections.
+- `section(title, body)` — group content under a heading; nested sections increase the heading level.
+- `renderMarkdownDoc(doc, heading = 1)` — render blocks separated by blank lines, omitting empty blocks.
+- `escapeMarkdown(text)` — escape untrusted single-line text, including HTML, table pipes and mentions.
+- `inlineCode(text)` — render nonempty code text, preserving embedded backticks and edge spaces.
+- `link(label, url)` — create a link from trusted inline Markdown and a trusted destination.
+- `table([header, ...rows])` — render equal-width GFM rows, escaping pipes and preserving line breaks.
+- `unorderedList(items)` — render Markdown list items, indenting continuation lines.
+- `details(summary, body)` — create a collapsible block with a plain-text summary and Markdown body.
+
+Like [TypeSpec's Markdown helpers](https://github.com/microsoft/typespec/blob/main/packages/tspd/src/ref-doc/utils/markdown.ts),
+callers describe the document structure rather than hand-joining every line. Strings are trusted
+Markdown: apply `escapeMarkdown` to external text before putting it in a heading,
+table cell, list item or link label. Link destinations must be trusted separately.
+
+```typescript
+import {
+  details,
+  escapeMarkdown,
+  renderMarkdownDoc,
+  section,
+  table,
+  unorderedList,
+} from "@azure-tools/specs-shared/markdown";
+
+const report = renderMarkdownDoc(
+  section("Contributor readiness", [
+    table([
+      ["Participant", "Finding"],
+      [escapeMarkdown(login), escapeMarkdown(message)],
+    ]),
+    details("Participants", unorderedList([escapeMarkdown(login)])),
+  ]),
+  2,
+);
+```
 
 ### `path` — path helpers (with caching)
 
@@ -158,6 +257,27 @@ Single source of truth for breaking-change and versioning approval label names a
 - `Tag` — model of an autorest tag: `inputFiles`, `name`, `readme`, `toJSONAsync(options)`,
   `toString()`.
 
+### `testing` — test helpers
+
+- `d` — template tag for readable multiline assertions. Removes one leading newline, the trailing
+  newline and spaces before the closing backtick, and the first line's indentation from lines
+  sharing that prefix. Nested indentation, interior blank lines, and other whitespace are preserved.
+  Values are interpolated before dedenting; `null` and `undefined` become empty strings.
+
+```typescript
+import { d } from "@azure-tools/specs-shared/testing";
+
+expect(output).toBe(d`
+  Summary
+    Details
+
+  Next section
+`);
+```
+
+The expected string is `"Summary\n  Details\n\nNext section"`. Only the expectation is dedented,
+so the assertion still catches whitespace changes in the actual output.
+
 ### `time` — time/duration helpers
 
 - `Duration` — frozen map of common durations in milliseconds.
@@ -168,7 +288,14 @@ Single source of truth for breaking-change and versioning approval label names a
 ### `typespec-metadata` — TypeSpec SDK metadata
 
 - `generateTypeSpecMetadata(folder, options)` — run the `@azure-tools/typespec-metadata` emitter,
-  validate its JSON output, and clean up its temporary output.
+  validate its JSON output, and clean up its unique temporary output on success or failure.
+  Resolves the compiler from the project folder. The optional `entrypoint` overrides project
+  discovery and may be absolute or relative to that folder; otherwise, compilation targets the
+  folder, falling back to `client.tsp` when `main.tsp` is absent. The optional `timeout` limits
+  compiler execution in milliseconds, with no timeout by default. Pass `logger` to receive
+  execution logs, with stdout and stderr recorded at debug level without inferring severity.
+  Failures throw, retaining compiler diagnostics and the execution error as their cause rather
+  than reporting that no emitter is configured.
 - `TypeSpecMetadataSchema`, `TypeSpecLanguageMetadataSchema` — zod schemas for metadata output.
 
 ## Folder structure & contributing

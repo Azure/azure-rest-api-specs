@@ -261,6 +261,7 @@ model PriorityProfile {
   @doc("The action applied to a Spot virtual machine when Azure evicts it.")
   evictionPolicy?: EvictionPolicy;
 
+  @removed(Microsoft.Compute.Versions.`2026-10-06-preview`)
   @doc("The strategy used to select a virtual machine size.")
   allocationStrategy?: AllocationStrategy;
 }
@@ -415,6 +416,11 @@ model ExecutionParameters {
   @added(Microsoft.Compute.Versions.`2026-08-06-preview`)
   @doc("Capacity recommendation parameters for the request. When provided on an executeStart request, the service computes placement recommendations only if the VM fails to start due to an allocation failure; the recommendations for the desired sizes and locations are then surfaced in the operation's capacityRecommendation response.")
   capacityRecommendationParameters?: CapacityRecommendationParameters;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form JSON object to allow loosely-typed create configuration passthrough"
+  @added(Microsoft.Compute.Versions.`2026-10-06-preview`)
+  @doc("Additional configuration for Create.")
+  additionalCreateParameters?: Record<unknown>;
 }
 
 @added(Microsoft.Compute.Versions.`2026-08-06-preview`)

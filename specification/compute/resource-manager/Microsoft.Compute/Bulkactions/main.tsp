@@ -8,7 +8,7 @@ import "./vmAttributes.tsp";
 import "./launchBulkInstancesOperation.tsp";
 import "./bulkCreateCustom.tsp";
 import "./bulkCreate.tsp";
-import "./recurringScheduledActions.tsp";
+import "./recurringBulkActions.tsp";
 import "./client.tsp";
 
 using Azure.ResourceManager;
@@ -41,4 +41,8 @@ enum Versions {
   /** 2026-09-06-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   `2026-09-06-preview`,
+
+  /** 2026-10-06-preview version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  `2026-10-06-preview`,
 }
