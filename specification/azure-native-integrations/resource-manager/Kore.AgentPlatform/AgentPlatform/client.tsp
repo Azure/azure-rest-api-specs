@@ -4,64 +4,64 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Kore.AgentPlatform;
 
-@@clientName(Kore.AgentPlatform, "KoreAgentPlatformMgmtClient", "python");
+@@clientName(Kore.AgentPlatform, "KoreAIArtemisMgmtClient", "python");
 // java
-@@clientName(Kore.AgentPlatform, "KoreAgentPlatformManagementClient", "java");
+@@clientName(Kore.AgentPlatform, "KoreAIArtemisManagementClient", "java");
 
 // csharp
 @@clientName(
   Kore.AgentPlatform.OrganizationResource,
-  "KoreAgentPlatformOrganization",
+  "KoreAIArtemisOrganization",
   "csharp"
 );
 @@clientName(
   Kore.AgentPlatform.OrganizationProperties,
-  "KoreAgentPlatformOrganizationProperties",
+  "KoreAIArtemisOrganizationProperties",
   "csharp"
 );
 @@clientName(
   Kore.AgentPlatform.OrganizationPartnerProperties,
-  "KoreAgentPlatformOrganizationPartnerProperties",
+  "KoreAIArtemisOrganizationPartnerProperties",
   "csharp"
 );
 @@clientName(
   Kore.AgentPlatform.DefaultWorkspaceProperties,
-  "KoreAgentPlatformDefaultWorkspaceProperties",
+  "KoreAIArtemisDefaultWorkspaceProperties",
   "csharp"
 );
 @@clientName(
   Kore.AgentPlatform.WorkspaceResource,
-  "KoreAgentPlatformWorkspace",
+  "KoreAIArtemisWorkspace",
   "csharp"
 );
 @@clientName(
   Kore.AgentPlatform.WorkspaceProperties,
-  "KoreAgentPlatformWorkspaceProperties",
+  "KoreAIArtemisWorkspaceProperties",
   "csharp"
 );
 @@clientName(
   Kore.AgentPlatform.WorkspacePartnerProperties,
-  "KoreAgentPlatformWorkspacePartnerProperties",
+  "KoreAIArtemisWorkspacePartnerProperties",
   "csharp"
 );
 @@clientName(
   Kore.AgentPlatform.WorkspaceLifecycleStatus,
-  "KoreAgentPlatformWorkspaceLifecycleStatus",
+  "KoreAIArtemisWorkspaceLifecycleStatus",
   "csharp"
 );
 @@clientName(
   Kore.AgentPlatform.UserDetails,
-  "KoreAgentPlatformUserDetails",
+  "KoreAIArtemisUserDetails",
   "csharp"
 );
 @@clientName(
   Kore.AgentPlatform.CompanyDetails,
-  "KoreAgentPlatformCompanyDetails",
+  "KoreAIArtemisCompanyDetails",
   "csharp"
 );
 @@clientName(
   Kore.AgentPlatform.SingleSignOnProperties,
-  "KoreAgentPlatformSingleSignOnProperties",
+  "KoreAIArtemisSingleSignOnProperties",
   "csharp"
 );
 @@clientName(
@@ -70,15 +70,15 @@ using Kore.AgentPlatform;
   "csharp"
 );
 
-@@clientName(LiftrBase.OfferDetails, "KoreAgentPlatformOfferDetails", "csharp");
+@@clientName(LiftrBase.OfferDetails, "KoreAIArtemisOfferDetails", "csharp");
 @@clientName(
   LiftrBase.MarketplaceDetails,
-  "KoreAgentPlatformMarketplaceDetails",
+  "KoreAIArtemisMarketplaceDetails",
   "csharp"
 );
 
 @@clientName(
   Azure.ResourceManager.ResourceProvisioningState,
-  "KoreAgentPlatformResourceProvisioningState",
+  "KoreAIArtemisResourceProvisioningState",
   "csharp"
 );

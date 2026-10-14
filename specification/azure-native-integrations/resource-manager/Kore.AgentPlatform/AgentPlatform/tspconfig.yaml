@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/agentplatform"
+    default: "sdk/koreaiartemis"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -14,16 +14,16 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "Azure.ResourceManager.KoreAgentPlatform"
+    namespace: "Azure.ResourceManager.KoreAIArtemis"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-agentplatform"
-    namespace: "com.azure.resourcemanager.agentplatform"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-koreaiartemis"
+    namespace: "com.azure.resourcemanager.koreaiartemis"
     flavor: "azure"
-    service-name: "KoreAgentPlatform"
+    service-name: "Kore.ai Artemis"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/agentplatform"
-    emitter-output-dir: "{output-dir}/{service-dir}/armagentplatform"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armagentplatform"
+    service-dir: "sdk/resourcemanager/koreaiartemis"
+    emitter-output-dir: "{output-dir}/{service-dir}/armkoreaiartemis"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armkoreaiartemis"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -32,13 +32,13 @@ options:
     inject-spans: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-agentplatform"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-koreaiartemis"
     flavor: "azure"
     package-details:
-      name: "@azure/arm-agentplatform"
+      name: "@azure/arm-koreaiartemis"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-agentplatform"
-    namespace: "azure.mgmt.agentplatform"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-koreaiartemis"
+    namespace: "azure.mgmt.koreaiartemis"
     flavor: "azure"
     generate-test: true
     generate-sample: true
