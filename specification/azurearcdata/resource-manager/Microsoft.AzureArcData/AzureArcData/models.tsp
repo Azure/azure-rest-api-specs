@@ -1139,7 +1139,7 @@ union JobStatus {
 /**
  * The activation state of the license.
  */
-union State {
+union SqlServerEsuLicenseActivationState {
   string,
 
   /**
@@ -1156,6 +1156,13 @@ union State {
    * Terminated
    */
   Terminated: "Terminated",
+}
+
+/**
+ * The state of the background job.
+ */
+union BackgroundJobState {
+  string,
 
   /**
    * Enabled
@@ -4212,7 +4219,7 @@ model BackgroundJob {
   /**
    * The state of the background job.
    */
-  state?: State;
+  state?: BackgroundJobState;
 
   /**
    * The execution state of the background job.
@@ -6589,7 +6596,7 @@ model SqlServerEsuLicenseProperties {
   /**
    * The activation state of the license.
    */
-  activationState: State;
+  activationState: SqlServerEsuLicenseActivationState;
 
   /**
    * The Azure scope to which the license will apply.
@@ -6711,7 +6718,7 @@ model SqlServerEsuLicenseUpdateProperties {
   /**
    * The activation state of the license.
    */
-  activationState?: State;
+  activationState?: SqlServerEsuLicenseActivationState;
 
   /**
    * The Azure scope to which the license will apply.
