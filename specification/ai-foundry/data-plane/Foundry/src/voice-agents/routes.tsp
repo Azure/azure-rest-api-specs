@@ -109,48 +109,25 @@ interface VoiceAgentWebSocket {
   >;
 }
 
-/** A successful Live WebSocket upgrade. The Live route does not negotiate the realtime subprotocol. */
+/** A successful Live WebSocket upgrade. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLiveWebSocketUpgradeResult {
   @statusCode
   status_code: 101;
 }
 
-/**
- * Connects a Live voice agent to its Foundry GPT Live deployment. Foundry applies the persisted
- * agent configuration and sends the native session.start upstream. The client waits for
- * session.started, then exchanges native OpenAI Live events; it does not send session.start.
- * The definition's sub_protocol selects the agent type, not an inference-event discriminator
- * or a negotiated WebSocket subprotocol.
- */
+/** WebSocket sessions for Live voice agents. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "A WebSocket protocol upgrade does not match a standard resource operation template."
 @tag("Voice Agent Live WebSocket")
 interface VoiceAgentLiveWebSocket {
   /**
-   * Establishes a primary WebSocket for an agent with sub_protocol=live. This is not the native
-   * OpenAI POST /live/sessions WebRTC operation. Only WebSocket transport is supported here.
-   * Native session.update changes delegation settings only; it cannot switch the configured
-   * Foundry-managed or hosted target. Foundry owns execution and result injection for both.
-   * Foundry renders an optional template greeting from structured inputs for session-start playback;
-   * greeting is not forwarded as a native session field and cannot select llm_generated mode.
-   * For responses delegation, responses.model identifies the backend deployment available to the
-   * configured Foundry GPT Live resource, including when that setting is changed with session.update.
-   * Managed and hosted agents retain [thinking] and [commentary] output sections; the voice agent
-   * translates validated text into native session.thinking.append and session.commentary.append commands.
-   * Permitted backend text, tool, and lifecycle events reuse response.event with the native client
-   * delegation ID in delegation_id. Dispatch on the nested event.type. Backend text retains its markers;
-   * observing it is independent of successful Live injection. Lifecycle snapshots omit input and clear
-   * instructions, tools and output; credentials and private reasoning are not forwarded.
-   * Follow the native event lifecycle: session.delegation.created identifies work; response.event carries
-   * backend response status and output; session.thinking.appended and session.commentary.appended acknowledge
-   * accepted context. These acknowledgments correlate through client_event_id with outgoing append commands,
-   * not with a result payload or delegation ID in the acknowledgment. Failures outside a backend response
-   * use the native error shape without manufacturing backend responses. No additional Foundry delegation
-   * status or output-item notifications are emitted. Stored output arrays still contain accepted
-   * Live-injection results, not original backend items; their positions are independent of backend indices.
-   * This event forwarding does not change tool execution ownership: native response.item.create and
-   * response.create remain Responses-delegation-only commands, not managed/hosted tool-result routing.
+   * Opens a Live session. Foundry sends session.start; clients wait for session.started.
    * Do not negotiate the realtime WebSocket subprotocol on this route.
+   * session.update changes backend settings, not the Foundry delegation target.
+   * Foundry translates validated [thinking]/[commentary] sections into session.thinking.append/
+   * session.commentary.append; permitted backend events use response.event.
+   * Credentials and private reasoning are not forwarded.
+   * response.item.create and response.create are Responses-delegation-only commands.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "The successful WebSocket 101 upgrade has no HTTP entity body."
   @summary("Connect to a GPT Live voice agent")
@@ -160,20 +137,20 @@ interface VoiceAgentLiveWebSocket {
   connectLiveVoiceAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
-      /** The name of the Live voice agent in this project. */
+      /** Live voice agent name in this project. */
       @path agent_name: string;
 
-      /** A query alternative to the Foundry-Features opt-in header. */
+      /** Query alternative to the Foundry-Features opt-in header. */
       @query("foundry_features")
       foundry_features_query?: AgentDefinitionOptInKeys.voice_agents_v1_preview;
 
-      /** Selects a specific immutable version of the Live voice agent. */
+      /** Agent version to connect to. */
       @query("x-agent-version-override") agent_version_override?: string;
 
-      /** Per-session structured input values used to render the agent's instructions and template greeting, serialized as a URL-encoded JSON object. */
+      /** URL-encoded JSON values for instruction and greeting templates. */
       @query structured_input?: string;
 
-      /** Overrides Foundry conversation/audio persistence for this connection, not native Live recording storage. */
+      /** Overrides Foundry conversation and audio persistence for this session. */
       @query store?: boolean;
     },
     VoiceAgentLiveWebSocketUpgradeResult
@@ -539,16 +516,11 @@ interface AgentEndpointConversations {
   >;
 }
 
-/**
- * Live-only conversation persistence under its own protocol namespace. Realtime
- * conversation operations and item types remain unchanged. The service is the
- * sole writer: this surface offers read operations and cascading conversation
- * deletion, not item writes. It has no Realtime response/turn resources.
- */
+/** Read or delete stored Live conversations and captured audio; no item writes or native turn resources. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The Live endpoint-scoped read-only conversation, item, and audio projection does not match a standard resource operation template."
 @tag("Agent Live Conversations")
 interface AgentEndpointLiveConversations {
-  /** Lists conversations persisted for a Live voice agent. The effective store setting includes the session override. Only Live conversations are returned. */
+  /** Lists stored Live conversations for this agent, including sessions stored via an override. */
   @summary("List Live voice agent conversations")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations")
@@ -565,7 +537,7 @@ interface AgentEndpointLiveConversations {
     AgentsPagedResult<VoiceAgentLiveConversation>
   >;
 
-  /** Retrieves one persisted Live conversation by its Foundry conversation ID. Items are retrieved separately through the items route. Returns 404 when the conversation does not exist or was not stored. */
+  /** Gets a stored Live conversation; fetch items separately. Returns 404 if absent or not stored. */
   @summary("Get a Live voice agent conversation")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}")
@@ -582,7 +554,7 @@ interface AgentEndpointLiveConversations {
     VoiceAgentLiveConversation
   >;
 
-  /** Deletes a stored Live conversation and its input, output, delegation, and audio data. This is Foundry persistence deletion, not an upstream native Live session control. */
+  /** Deletes the stored conversation and its items/audio, without closing the Live session. */
   @summary("Delete a Live voice agent conversation")
   @delete
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}")
@@ -599,7 +571,7 @@ interface AgentEndpointLiveConversations {
     NoContentResponse
   >;
 
-  /** Returns the ordered persisted input, output, and delegation items. Pagination cursors refer to the item's id. These items are independent of Realtime messages and do not imply native Live turns. Returns 404 when the conversation was not stored or does not exist. */
+  /** Lists stored speech and delegation items in order; cursors use item IDs. Returns 404 if the conversation is absent or unstored. */
   @summary("List items in a Live voice agent conversation")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items")
@@ -619,7 +591,7 @@ interface AgentEndpointLiveConversations {
     AgentsPagedResult<VoiceAgentLiveConversationItem>
   >;
 
-  /** Retrieves a persisted Live input, output, or delegation item by its id. For delegation items, id is the native delegation id. Returns 404 when the conversation or item was not stored or does not exist. */
+  /** Gets a stored item by ID. Returns 404 if the item or conversation is absent. */
   @summary("Get a Live voice agent conversation item")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}")
@@ -639,7 +611,7 @@ interface AgentEndpointLiveConversations {
     VoiceAgentLiveConversationItem
   >;
 
-  /** Returns the existing voice audio metadata shape for a captured Live input or output segment. For BYOS, blob_uri identifies customer storage without a SAS token; otherwise bytes are retrieved through this Live item's audio/content route. Captured output does not prove client playback. Returns 404 for delegation items, absent audio, or unstored conversations. */
+  /** Gets captured speech-audio metadata. BYOS uses unsigned blob_uri. Returns 404 for missing audio, unstored conversations, or delegation items. */
   @summary("Get a Live conversation item's audio metadata")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}/audio")
@@ -659,7 +631,7 @@ interface AgentEndpointLiveConversations {
     VoiceAudioItem
   >;
 
-  /** Streams captured Live input or output audio as WAV through the service, without a SAS URL. Foundry-managed storage only; BYOS callers use the metadata blob_uri and this route returns 409. Returns 404 for delegation items, absent audio, or unstored conversations. */
+  /** Streams captured speech as WAV. BYOS returns 409; use blob_uri. Returns 404 for missing audio, unstored conversations, or delegation items. */
   @summary("Stream a Live conversation item's audio")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/items/{item_id}/audio/content")
@@ -679,7 +651,7 @@ interface AgentEndpointLiveConversations {
     VoiceAudioStream
   >;
 
-  /** Returns shared whole-conversation stereo recording metadata: user audio on the left, assistant audio on the right. For BYOS, blob_uri points to customer storage without a SAS token. Returns 409 recording_not_ready while finalization is pending, with Retry-After when available; 409 recording_unavailable after failed finalization; or 404 when no stored audio exists. The recording is derived from captured Live audio, not native response turns or proof of playback. */
+  /** Gets merged stereo recording metadata (user left, assistant right). BYOS uses unsigned blob_uri. Returns 404 for no audio, or 409 recording_not_ready/recording_unavailable for pending/failed finalization; pending responses may include Retry-After. */
   @summary("Get a Live conversation's merged recording metadata")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/audio")
@@ -696,7 +668,7 @@ interface AgentEndpointLiveConversations {
     VoiceRecording
   >;
 
-  /** Streams the merged captured Live recording as stereo WAV without a SAS URL. Foundry-managed storage only; BYOS returns 409 and callers use the metadata blob_uri. Returns 409 recording_not_ready while finalization is pending, 409 recording_unavailable after failed finalization, or 404 when no stored audio exists. */
+  /** Streams the merged stereo WAV. BYOS returns 409; use blob_uri. Returns 404 for no audio, or 409 recording_not_ready/recording_unavailable for pending/failed finalization. */
   @summary("Stream a Live conversation's merged recording")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/live/conversations/{conversation_id}/audio/content")

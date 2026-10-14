@@ -65,24 +65,14 @@ no longer be any diffs to show.
 
 ## Voice agent contract checks
 
-Use the repository's required Node and pnpm versions. From the repository root, after installing
-the pinned dependencies with `pnpm install --frozen-lockfile`:
+With the repository's Node/pnpm versions and pinned dependencies installed, run:
 
 ```sh
 pnpm exec node --test specification/ai-foundry/data-plane/Foundry/tests/voice-agent-contract.test.mjs
 ```
 
-These checks compile both Foundry API versions, compare the imported Live models with the published
-OpenAI package allowing only Foundry conversation correlation, and verify the agent
-hierarchy, managed/hosted-agent delegation, native lifecycle events, SDK model metadata, and WebSocket handshake.
-They verify that Live accepts only the shared template greeting subtype while Realtime keeps both greeting modes,
-and that Responses delegation retains its native schema with Foundry deployment-name semantics.
-They cover native `response.event` reuse for permitted backend events, preservation of tagged assistant
-output, native append acknowledgments, and persisted accepted Live-injection results. They also ensure
-that custom managed/hosted delegation status and output-item event types are not exposed.
-They also verify the separate Live conversation routes, input/output/delegation item discriminators,
-shared audio metadata, and unchanged Realtime item references.
-They do not generate a client SDK or call the running agent service.
+Checks both API versions, native Live compatibility, greetings, delegation, persistence,
+Realtime isolation, and SDK metadata. Does not generate SDKs or run service E2E tests.
 
 ## Emitting Python code
 

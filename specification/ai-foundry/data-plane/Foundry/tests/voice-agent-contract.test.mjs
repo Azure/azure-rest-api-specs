@@ -59,8 +59,7 @@ const nativeEventModels = {
   "session.commentary.appended": "OpenAI.LiveServerEventLiveCommentaryAppended",
   error: "OpenAI.LiveServerEventLiveErrorEvent",
 };
-// Probe the actual Live greeting property without the independent agent-kind
-// and sub-protocol union-member value conversions required by @example.
+// Test greeting without @example's agent-discriminator conversions.
 const liveGreetingProbe = [
   'model LiveGreetingProbe { ...PickProperties<Azure.AI.Projects.VoiceAgentLiveDefinition, "greeting">; }',
 ];
@@ -201,8 +200,7 @@ before(async () => {
     );
   }
 
-  // Compile the published package in isolation as a native wire-contract oracle.
-  // Absolute imports allow the temporary probe to resolve the repo's pinned packages.
+  // Compare against the pinned OpenAI package without Foundry extensions.
   const nativeRoot = join(
     repo,
     "node_modules/@azure-tools/openai-typespec/src",
@@ -214,8 +212,7 @@ before(async () => {
       `import ${JSON.stringify(join(nativeRoot, "live/models.tsp"))};`,
       `import ${JSON.stringify(join(nativeRoot, "webhooks/models.tsp"))};`,
       `import ${JSON.stringify(join(repo, "node_modules/@azure-tools/typespec-azure-core/lib/experimental/lib.tsp"))};`,
-      // Foundry already maps integer/numeric to int64/float64 for every OpenAI API.
-      // Apply that same existing scalar convention on both sides of this comparison.
+      // Match Foundry's scalar mappings in the native baseline.
       `import ${JSON.stringify(join(project, "src/common/custom-types.tsp"))};`,
     ].join("\n"),
   );
@@ -426,8 +423,7 @@ test("hosted agent configuration mirrors managed identity without reparenting it
   const identity = (model) =>
     wireShape(model, program).properties.filter((p) => p.name !== "type");
   assert.deepEqual(identity(hosted), identity(managed));
-  // @example validates TypeSpec types, not @pattern constraints. Check those
-  // constraints explicitly, including the OpenAPI emitted form.
+  // @example skips @pattern checks; verify compiler and OpenAPI constraints directly.
   for (const [name, invalid] of [
     [
       "agent_name",
@@ -606,13 +602,7 @@ test("managed and hosted delegation retain tagged output without a format select
       `Azure.AI.Projects.VoiceAgentLive${kind}AgentDelegation`,
     );
     const doc = getDoc(program, config);
-    for (const text of [
-      "[thinking]",
-      "[commentary]",
-      "session.thinking.append",
-      "session.commentary.append",
-      "response.event",
-    ])
+    for (const text of ["[thinking]", "[commentary]"])
       assert.ok(doc.includes(text), `${kind}: ${text}`);
     assert.equal(config.properties.has("result_format"), false);
   }
@@ -622,6 +612,12 @@ test("managed and hosted delegation retain tagged output without a format select
   );
   assert.ok(route.includes("private reasoning are not forwarded"));
   assert.ok(route.includes("Responses-delegation-only"));
+  for (const text of [
+    "session.thinking.append",
+    "session.commentary.append",
+    "response.event",
+  ])
+    assert.ok(route.includes(text), text);
   for (const doc of documents) {
     const description =
       doc.paths["/agents/{agent_name}/endpoint/protocols/voice/live/sessions"]
@@ -643,8 +639,7 @@ test("backend observation reuses the native response.event without a new wrapper
     envelope.properties.get("event").type.indexer.value.name,
     "unknown",
   );
-  // Retain native optional/null correlation compatibility. Foundry's producer
-  // supplies delegation_id for the managed/hosted events it wraps.
+  // Foundry supplies correlation without narrowing the native optional field.
   assert.equal(envelope.properties.get("delegation_id").optional, true);
   const wrappers = type("OpenAI.LiveServerEvent").derivedModels.filter(
     (model) => fields(model).get("type").type.value === "response.event",
@@ -759,7 +754,7 @@ test("delegation results contain only optional commentary and thinking strings",
     "VoiceAgentLiveManagedDelegationMetadata",
   ])
     assert.ok(!ns.models.has(name), name);
-  // Flattening removes the event-type selector too; there is no unused renamed enum.
+  // Retired format and event types stay absent.
   for (const name of [
     "VoiceAgentLiveManagedAppendType",
     "VoiceAgentLiveDelegationResultEventType",
@@ -768,16 +763,13 @@ test("delegation results contain only optional commentary and thinking strings",
     assert.ok(!ns.unions.has(name), name);
 });
 
-// Target-contract examples. Vienna runtime alignment is a separate follow-up;
-// these payloads are not captures from an already-updated service.
+// Contract fixtures, not service captures; runtime filtering is not tested.
 const resultText = { commentary: "Say: Yesterday I went to school." };
 const taggedThinking = "Focus on irregular past-tense verbs.";
 const taggedCommentary = "Say: Yesterday I went to school.";
 const taggedBackendText = `[thinking]\n${taggedThinking}\n[commentary]\n${taggedCommentary}`;
 
-// Illustrative permitted backend events, not captures or a runtime forwarding
-// implementation. Native event: Record<unknown> preserves nested event shapes;
-// the compiler validates the envelope, not backend visibility or payload policy.
+// Native nested events are Record<unknown>; only the envelope is type-checked.
 const backendSamples = ["managed", "hosted"].flatMap((kind) => {
   const response = {
     id: `resp_${kind}_1`,
@@ -1278,7 +1270,7 @@ test("managed configuration needs no format selector and rejects the removed fie
   ]);
   checkErrors(valid.diagnostics);
 
-  // This is a rejected legacy payload, not a supported configuration example.
+  // Rejected legacy field.
   const invalid = await validateExamples("removed-config-result-format", [
     { model, payload: { ...payload, result_format: "tagged_text" } },
   ]);
@@ -1500,9 +1492,7 @@ test("SDK metadata exports native events and separate Live persistence discrimin
       (m) => m.__raw?.name === "VoiceConversationItem",
     ),
   );
-  // @example arguments are checked before copyProperties runs. Verify the final
-  // SDK shape for this late augmentation rather than accepting a premature
-  // "unexpected-property" diagnostic as evidence about the emitted contract.
+  // copyProperties runs after @example validation; inspect the final SDK shape.
   const correlation = model(
     "LiveServerEventLiveSessionStarted",
   ).properties.find((p) => p.serializedName === "conversation_id");
@@ -1749,7 +1739,7 @@ test("Live speech items use id and share only the existing audio metadata struct
     assert.equal(p.get("audio").optional, true);
     assert.equal(p.get("audio").type, type("Azure.AI.Projects.VoiceAudioItem"));
   }
-  // The shared audio DTO keeps its existing item_id for Realtime compatibility.
+  // Preserve Realtime's audio.item_id.
   assert.equal(
     type("Azure.AI.Projects.VoiceAudioItem").properties.get("item_id").optional,
     false,
@@ -1806,7 +1796,7 @@ test("stored delegation reuses native fields and discriminates target-specific r
     [...target.variants.values()].map((v) => v.type.value),
     ["responses", "client", "foundry_managed_agent", "foundry_hosted_agent"],
   );
-  // Foundry ownership is a persistence extension, not a new native Live target.
+  // Foundry targets extend persistence only.
   const nativeTarget = nativeItem.properties.get("target").type;
   assert.deepEqual(
     [...nativeTarget.variants.values()].map((v) => v.type.value),

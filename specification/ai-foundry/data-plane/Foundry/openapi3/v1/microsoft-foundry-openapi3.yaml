@@ -3565,7 +3565,7 @@ paths:
     get:
       operationId: AgentEndpointLiveConversations_listLiveAgentConversations
       summary: List Live voice agent conversations
-      description: Lists conversations persisted for a Live voice agent. The effective store setting includes the session override. Only Live conversations are returned.
+      description: Lists stored Live conversations for this agent, including sessions stored via an override.
       parameters:
         - name: Foundry-Features
           in: header
@@ -3675,7 +3675,7 @@ paths:
     get:
       operationId: AgentEndpointLiveConversations_getLiveAgentConversation
       summary: Get a Live voice agent conversation
-      description: Retrieves one persisted Live conversation by its Foundry conversation ID. Items are retrieved separately through the items route. Returns 404 when the conversation does not exist or was not stored.
+      description: Gets a stored Live conversation; fetch items separately. Returns 404 if absent or not stored.
       parameters:
         - name: Foundry-Features
           in: header
@@ -3731,7 +3731,7 @@ paths:
     delete:
       operationId: AgentEndpointLiveConversations_deleteLiveAgentConversation
       summary: Delete a Live voice agent conversation
-      description: Deletes a stored Live conversation and its input, output, delegation, and audio data. This is Foundry persistence deletion, not an upstream native Live session control.
+      description: Deletes the stored conversation and its items/audio, without closing the Live session.
       parameters:
         - name: Foundry-Features
           in: header
@@ -3784,7 +3784,7 @@ paths:
     get:
       operationId: AgentEndpointLiveConversations_getLiveAgentConversationAudio
       summary: Get a Live conversation's merged recording metadata
-      description: 'Returns shared whole-conversation stereo recording metadata: user audio on the left, assistant audio on the right. For BYOS, blob_uri points to customer storage without a SAS token. Returns 409 recording_not_ready while finalization is pending, with Retry-After when available; 409 recording_unavailable after failed finalization; or 404 when no stored audio exists. The recording is derived from captured Live audio, not native response turns or proof of playback.'
+      description: Gets merged stereo recording metadata (user left, assistant right). BYOS uses unsigned blob_uri. Returns 404 for no audio, or 409 recording_not_ready/recording_unavailable for pending/failed finalization; pending responses may include Retry-After.
       parameters:
         - name: Foundry-Features
           in: header
@@ -3841,7 +3841,7 @@ paths:
     get:
       operationId: AgentEndpointLiveConversations_getLiveAgentConversationAudioContent
       summary: Stream a Live conversation's merged recording
-      description: Streams the merged captured Live recording as stereo WAV without a SAS URL. Foundry-managed storage only; BYOS returns 409 and callers use the metadata blob_uri. Returns 409 recording_not_ready while finalization is pending, 409 recording_unavailable after failed finalization, or 404 when no stored audio exists.
+      description: Streams the merged stereo WAV. BYOS returns 409; use blob_uri. Returns 404 for no audio, or 409 recording_not_ready/recording_unavailable for pending/failed finalization.
       parameters:
         - name: Foundry-Features
           in: header
@@ -3898,7 +3898,7 @@ paths:
     get:
       operationId: AgentEndpointLiveConversations_listLiveAgentConversationItems
       summary: List items in a Live voice agent conversation
-      description: Returns the ordered persisted input, output, and delegation items. Pagination cursors refer to the item's id. These items are independent of Realtime messages and do not imply native Live turns. Returns 404 when the conversation was not stored or does not exist.
+      description: Lists stored speech and delegation items in order; cursors use item IDs. Returns 404 if the conversation is absent or unstored.
       parameters:
         - name: Foundry-Features
           in: header
@@ -4014,7 +4014,7 @@ paths:
     get:
       operationId: AgentEndpointLiveConversations_getLiveAgentConversationItem
       summary: Get a Live voice agent conversation item
-      description: Retrieves a persisted Live input, output, or delegation item by its id. For delegation items, id is the native delegation id. Returns 404 when the conversation or item was not stored or does not exist.
+      description: Gets a stored item by ID. Returns 404 if the item or conversation is absent.
       parameters:
         - name: Foundry-Features
           in: header
@@ -4077,7 +4077,7 @@ paths:
     get:
       operationId: AgentEndpointLiveConversations_getLiveAgentConversationAudioItem
       summary: Get a Live conversation item's audio metadata
-      description: Returns the existing voice audio metadata shape for a captured Live input or output segment. For BYOS, blob_uri identifies customer storage without a SAS token; otherwise bytes are retrieved through this Live item's audio/content route. Captured output does not prove client playback. Returns 404 for delegation items, absent audio, or unstored conversations.
+      description: Gets captured speech-audio metadata. BYOS uses unsigned blob_uri. Returns 404 for missing audio, unstored conversations, or delegation items.
       parameters:
         - name: Foundry-Features
           in: header
@@ -4140,7 +4140,7 @@ paths:
     get:
       operationId: AgentEndpointLiveConversations_getLiveAgentConversationAudioItemContent
       summary: Stream a Live conversation item's audio
-      description: Streams captured Live input or output audio as WAV through the service, without a SAS URL. Foundry-managed storage only; BYOS callers use the metadata blob_uri and this route returns 409. Returns 404 for delegation items, absent audio, or unstored conversations.
+      description: Streams captured speech as WAV. BYOS returns 409; use blob_uri. Returns 404 for missing audio, unstored conversations, or delegation items.
       parameters:
         - name: Foundry-Features
           in: header
@@ -4204,30 +4204,13 @@ paths:
       operationId: VoiceAgentLiveWebSocket_connectLiveVoiceAgent
       summary: Connect to a GPT Live voice agent
       description: |-
-        Establishes a primary WebSocket for an agent with sub_protocol=live. This is not the native
-        OpenAI POST /live/sessions WebRTC operation. Only WebSocket transport is supported here.
-        Native session.update changes delegation settings only; it cannot switch the configured
-        Foundry-managed or hosted target. Foundry owns execution and result injection for both.
-        Foundry renders an optional template greeting from structured inputs for session-start playback;
-        greeting is not forwarded as a native session field and cannot select llm_generated mode.
-        For responses delegation, responses.model identifies the backend deployment available to the
-        configured Foundry GPT Live resource, including when that setting is changed with session.update.
-        Managed and hosted agents retain [thinking] and [commentary] output sections; the voice agent
-        translates validated text into native session.thinking.append and session.commentary.append commands.
-        Permitted backend text, tool, and lifecycle events reuse response.event with the native client
-        delegation ID in delegation_id. Dispatch on the nested event.type. Backend text retains its markers;
-        observing it is independent of successful Live injection. Lifecycle snapshots omit input and clear
-        instructions, tools and output; credentials and private reasoning are not forwarded.
-        Follow the native event lifecycle: session.delegation.created identifies work; response.event carries
-        backend response status and output; session.thinking.appended and session.commentary.appended acknowledge
-        accepted context. These acknowledgments correlate through client_event_id with outgoing append commands,
-        not with a result payload or delegation ID in the acknowledgment. Failures outside a backend response
-        use the native error shape without manufacturing backend responses. No additional Foundry delegation
-        status or output-item notifications are emitted. Stored output arrays still contain accepted
-        Live-injection results, not original backend items; their positions are independent of backend indices.
-        This event forwarding does not change tool execution ownership: native response.item.create and
-        response.create remain Responses-delegation-only commands, not managed/hosted tool-result routing.
+        Opens a Live session. Foundry sends session.start; clients wait for session.started.
         Do not negotiate the realtime WebSocket subprotocol on this route.
+        session.update changes backend settings, not the Foundry delegation target.
+        Foundry translates validated [thinking]/[commentary] sections into session.thinking.append/
+        session.commentary.append; permitted backend events use response.event.
+        Credentials and private reasoning are not forwarded.
+        response.item.create and response.create are Responses-delegation-only commands.
       parameters:
         - name: Foundry-Features
           in: header
@@ -4240,13 +4223,13 @@ paths:
         - name: agent_name
           in: path
           required: true
-          description: The name of the Live voice agent in this project.
+          description: Live voice agent name in this project.
           schema:
             type: string
         - name: foundry_features
           in: query
           required: false
-          description: A query alternative to the Foundry-Features opt-in header.
+          description: Query alternative to the Foundry-Features opt-in header.
           schema:
             type: string
             enum:
@@ -4255,21 +4238,21 @@ paths:
         - name: x-agent-version-override
           in: query
           required: false
-          description: Selects a specific immutable version of the Live voice agent.
+          description: Agent version to connect to.
           schema:
             type: string
           explode: false
         - name: structured_input
           in: query
           required: false
-          description: Per-session structured input values used to render the agent's instructions and template greeting, serialized as a URL-encoded JSON object.
+          description: URL-encoded JSON values for instruction and greeting templates.
           schema:
             type: string
           explode: false
         - name: store
           in: query
           required: false
-          description: Overrides Foundry conversation/audio persistence for this connection, not native Live recording storage.
+          description: Overrides Foundry conversation and audio persistence for this session.
           schema:
             type: boolean
           explode: false
@@ -4282,7 +4265,7 @@ paths:
           explode: false
       responses:
         '101':
-          description: A successful Live WebSocket upgrade. The Live route does not negotiate the realtime subprotocol.
+          description: A successful Live WebSocket upgrade.
         4XX:
           description: Client error
           content:
@@ -88671,23 +88654,23 @@ components:
           type: string
           enum:
             - voice
-          description: The agent kind. Always voice, independently of the selected voice protocol.
+          description: Always voice.
         sub_protocol:
           $ref: '#/components/schemas/VoiceAgentSubProtocol'
-          description: The voice protocol. Legacy omission selects realtime; explicit unknown or null values are invalid.
+          description: Protocol discriminator. Legacy omission means realtime; null and unknown values are invalid. Reads preserve omission in stored versions.
         instructions:
           anyOf:
             - type: string
             - type: 'null'
-          description: Frontend instructions. Supports template substitution through structured_inputs. Backend Responses instructions belong to delegation.responses.
+          description: Frontend instructions, templated with structured_inputs. Backend instructions belong in delegation.responses.
         structured_inputs:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/StructuredInputDefinition'
-          description: Structured inputs rendered into frontend instructions before the session starts.
+          description: Template inputs for session instructions and supported greetings.
         store:
           type: boolean
-          description: Whether Foundry persists the conversation and audio. Defaults to false. Realtime uses protocols/voice/conversations; Live uses protocols/voice/live/conversations with persisted input, output, and delegation items. Foundry groups Live speech segments from the audio/transcript timeline without introducing native turns or changing inference events. This does not enable native GPT Live recording/fork storage.
+          description: Persists conversation content and audio in Foundry, not native Live recordings. Defaults to false.
           default: false
       discriminator:
         propertyName: sub_protocol
@@ -88697,14 +88680,8 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: |-
-        Shared settings for the voice agent kind. The sub_protocol discriminator selects either
-        the existing realtime protocol (including cascaded models), or native GPT Live on a Foundry
-        deployment. Configuration is flat; audio and other protocol-specific fields belong to the
-        selected subtype. Every create or update produces an immutable version. An existing agent cannot
-        change its protocol, including by creating another version; create a different agent instead.
-        Compatibility: legacy requests and stored definitions that omit sub_protocol are interpreted
-        as realtime. New clients should send the explicit discriminator. Null and unknown values are
-        invalid. A read must not rewrite an existing stored version just to add the default.
+        Shared voice-agent settings; protocol-specific fields remain flat on each subtype.
+        Creates and updates produce immutable versions. An agent's protocol cannot change across versions.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -88981,13 +88958,13 @@ components:
             - client
         commentary:
           type: string
-          description: Optional guidance for Live to communicate to the user.
+          description: Guidance for Live to communicate to the user.
         thinking:
           type: string
-          description: Optional background context for Live; this does not directly request speech.
+          description: Background context, not private reasoning or a request to speak.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveDelegationConversationItem'
-      description: The result supplied by an application for a client-owned delegation.
+      description: Results supplied by the application for client delegation.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89026,8 +89003,8 @@ components:
           description: The terminal error that prevented persistence finalization. Present only when `status` is `failed`.
         usage:
           $ref: '#/components/schemas/OpenAI.LiveSessionUsage'
-          description: The final observed cumulative Live audio usage. This is separate from delegated backend token usage and may be absent if the session did not finish normally.
-      description: A persisted Live session, available only when the effective store setting is true. Items are retrieved through the Live conversation items route; Live does not expose Realtime response/turn resources. Lifecycle, retention, and audio retrieval follow the existing Foundry voice experience.
+          description: Cumulative Live audio usage, excluding delegated-model tokens. May be absent after abnormal close.
+      description: A Live session persisted when effective store is true. Uses voice-conversation lifecycle and retention; items are retrieved separately.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89042,14 +89019,14 @@ components:
           description: The persisted item kind.
         id:
           type: string
-          description: The item ID used by the Live items and item-audio routes. Speech item IDs are assigned by Foundry; delegation items retain the native delegation id.
+          description: Item ID used for retrieval. Foundry assigns speech IDs; delegation IDs retain their native value.
       discriminator:
         propertyName: type
         mapping:
           input: '#/components/schemas/VoiceAgentLiveInputConversationItem'
           output: '#/components/schemas/VoiceAgentLiveOutputConversationItem'
           delegation: '#/components/schemas/VoiceAgentLiveDelegationConversationItem'
-      description: A Foundry-owned Live conversation item. Input and output items are persisted speech segments, not native model turns. Delegation items describe delegated work separately from spoken transcription. This hierarchy is independent of Realtime items and native Live inference events.
+      description: A stored speech segment or delegation. Speech segments are not native turns or proof of playback; delegation results are separate from spoken transcripts.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89076,34 +89053,34 @@ components:
           type: string
           enum:
             - self_deployed
-          description: Native Live uses a deployment in the Foundry resource, not a Voice Live-hosted model.
+          description: Uses a Foundry model deployment.
         model:
           type: string
           minLength: 1
-          description: The Foundry GPT Live deployment name. Sent in session.start.session.model.
+          description: The GPT Live deployment name.
         greeting:
           $ref: '#/components/schemas/VoiceAgentTemplateGreetingConfig'
-          description: "Optional Foundry-managed session-start greeting. Only template mode is supported: render the Handlebars text with the session's structured inputs before playback. LLM-generated greetings, prompt, and tool_choice are not supported. Omit to configure no explicit greeting. This is Foundry agent configuration, not a native Live session field."
+          description: Template-only startup greeting, rendered with session structured inputs. Foundry-only; not sent in native Live settings.
         audio:
           $ref: '#/components/schemas/OpenAI.LiveInitialSessionAudioParam'
-          description: Startup-only bidirectional audio format and output voice. No realtime VAD or Azure speech processing settings.
+          description: Startup audio formats and output voice.
         delegation:
           anyOf:
             - $ref: '#/components/schemas/VoiceAgentLiveDelegation'
             - type: 'null'
-          description: "Who handles delegated work: the connected application, a native Responses backend, or a same-project Foundry-managed prompt agent or hosted agent. For responses delegation, responses.model is the backend model deployment name available to the configured Foundry GPT Live resource, not a model catalog ID or agent name. It may differ from the underlying model name and is independent of this definition's frontend model deployment. Omission or null uses native client delegation."
+          description: Delegation settings. Omit or use null for client mode. responses.model is a backend deployment name in the Live resource, not a model catalog ID.
         input:
           type: array
           items:
             $ref: '#/components/schemas/OpenAI.LiveInitialItem'
           maxItems: 128
-          description: Native initial developer, user, or assistant text context. At most 128 messages, with one text part per message.
+          description: 'Initial developer, user, or assistant text messages: at most 128, with one text part each.'
         client:
           $ref: '#/components/schemas/OpenAI.LiveClientConfigParam'
           description: Frontend data-channel event permissions.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentDefinition'
-      description: Native GPT Live settings for a Foundry deployment. This protocol does not use the Voice Live backend or its realtime/cascaded configuration.
+      description: Native GPT Live configuration for a Foundry deployment.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89113,7 +89090,7 @@ components:
         - $ref: '#/components/schemas/OpenAI.LiveResponsesDelegationParam'
         - $ref: '#/components/schemas/VoiceAgentLiveManagedAgentDelegation'
         - $ref: '#/components/schemas/VoiceAgentLiveHostedAgentDelegation'
-      description: Delegation configured on a Foundry Live voice agent. Native client and Responses configurations are reused unchanged; Foundry may also execute a same-project prompt agent or hosted agent.
+      description: Who handles delegated work for a Live voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89136,10 +89113,10 @@ components:
           description: The ID of the Responses API response associated with a Responses delegation. Omitted for client delegations.
         target:
           $ref: '#/components/schemas/VoiceAgentLiveDelegationTarget'
-          description: The configured delegation owner. Foundry-managed prompt agents use foundry_managed_agent and hosted agents use foundry_hosted_agent here; both use native Live client delegation upstream.
+          description: The configured delegation owner.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
-          description: The service-observed delegation creation time, encoded as Unix seconds.
+          description: Observed delegation creation time, in Unix seconds.
       discriminator:
         propertyName: target
         mapping:
@@ -89149,7 +89126,7 @@ components:
           foundry_hosted_agent: '#/components/schemas/VoiceAgentLiveFoundryHostedAgentDelegationItem'
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveConversationItem'
-      description: A persisted delegation that reuses native OpenAI delegation fields and locally extends target for Foundry-managed prompt agents and hosted agents. The inherited id is the native delegation id, used both for correlation and to retrieve this stored item. This composition does not widen the target or add persistence fields on OpenAI.LiveDelegationItem itself.
+      description: A stored delegation using native fields with Foundry-specific targets. Its id is the native delegation ID.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89158,11 +89135,11 @@ components:
       properties:
         commentary:
           type: string
-          description: Optional guidance for Live to communicate to the user.
+          description: Guidance for Live to communicate to the user.
         thinking:
           type: string
-          description: Optional background context for Live; this does not directly request speech.
-      description: A persisted result returned to Live for a delegation, not a streaming event. For managed and hosted agents, this contains validated text extracted from [commentary] and [thinking] sections, without the markers. The voice agent translates it into native session.commentary.append and session.thinking.append commands and records accepted results using native append acknowledgments. Permitted original backend events, including tagged assistant text and tool events, are observed separately through response.event. These results are not private model reasoning, spoken transcripts, or playback confirmation.
+          description: Background context, not private reasoning or a request to speak.
+      description: Persisted guidance accepted by Live. For agent delegations, [thinking] and [commentary] markers are removed before storage.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89176,7 +89153,7 @@ components:
             - failed
             - incomplete
             - cancelled
-      description: The persisted managed or hosted delegation's execution outcome, independent of Live speech and playback. This is resource state, not a separate delegation status-event family.
+      description: Persisted delegation outcome, not speech or playback status.
     VoiceAgentLiveDelegationTarget:
       type: string
       enum:
@@ -89184,7 +89161,7 @@ components:
         - client
         - foundry_managed_agent
         - foundry_hosted_agent
-      description: The configured delegation owner recorded by Foundry. Managed prompt agents and hosted agents have distinct targets here even though both use native Live client delegation.
+      description: Delegation owner. Foundry agent targets use native client delegation upstream.
     VoiceAgentLiveFoundryHostedAgentDelegationItem:
       type: object
       required:
@@ -89201,31 +89178,31 @@ components:
             - foundry_hosted_agent
         agent_name:
           type: string
-          description: The same-project target agent's name.
+          description: Target agent name in the same project.
         agent_version:
           type: string
-          description: The target version pinned when this voice connection started.
+          description: Target version pinned at connection start.
         offset_ms:
           type: integer
           format: int64
-          description: The originating native delegation's session-relative audio offset, in milliseconds.
+          description: Native delegation offset from session start, in milliseconds.
         backend_conversation_id:
           type: string
-          description: The backend agent's conversation ID, when available. Distinct from the stored voice conversation ID and the native Live session ID.
+          description: Backend conversation ID, distinct from the voice conversation and Live session IDs.
         output:
           type: array
           items:
             $ref: '#/components/schemas/VoiceAgentLiveDelegationResultItem'
-          description: The ordered accepted Live-injection results, not original backend output items or tool results. Empty before the first accepted result. Foundry correlates native session.thinking.appended and session.commentary.appended acknowledgments with its outgoing commands to record accepted text. Each entry is a new result rather than cumulative text; array positions are independent of backend output_index values inside response.event. Partial results remain available after failure or cancellation. There is no corresponding public output-item notification.
+          description: Accepted guidance in order; empty until a result is accepted. Entries are noncumulative and independent of backend output_index. Partial results survive failure or cancellation.
         delegation_context:
           type: string
-          description: Plain-text task context supplied to the target agent, when available. This is not the backend request body.
+          description: Task context sent to the target agent, not the full request body.
         status:
           $ref: '#/components/schemas/VoiceAgentLiveDelegationStatus'
-          description: The delegation's execution outcome, independent of Live speech and client playback.
+          description: The persisted delegation outcome.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveDelegationConversationItem'
-      description: The persisted aggregate for a Foundry-hosted agent delegation. Its id is the native delegation ID from session.delegation.created, also used as delegation_id in response.event. It uses the same fields and ordered results as managed prompt-agent delegation, including accepted results produced before failure or cancellation. This resource is retrieved through the conversation API and is not emitted as a delegation event.
+      description: Stored hosted-agent delegation state and accepted results.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89245,31 +89222,31 @@ components:
             - foundry_managed_agent
         agent_name:
           type: string
-          description: The same-project target agent's name.
+          description: Target agent name in the same project.
         agent_version:
           type: string
-          description: The target version pinned when this voice connection started.
+          description: Target version pinned at connection start.
         offset_ms:
           type: integer
           format: int64
-          description: The originating native delegation's session-relative audio offset, in milliseconds.
+          description: Native delegation offset from session start, in milliseconds.
         backend_conversation_id:
           type: string
-          description: The backend agent's conversation ID, when available. Distinct from the stored voice conversation ID and the native Live session ID.
+          description: Backend conversation ID, distinct from the voice conversation and Live session IDs.
         output:
           type: array
           items:
             $ref: '#/components/schemas/VoiceAgentLiveDelegationResultItem'
-          description: The ordered accepted Live-injection results, not original backend output items or tool results. Empty before the first accepted result. Foundry correlates native session.thinking.appended and session.commentary.appended acknowledgments with its outgoing commands to record accepted text. Each entry is a new result rather than cumulative text; array positions are independent of backend output_index values inside response.event. Partial results remain available after failure or cancellation. There is no corresponding public output-item notification.
+          description: Accepted guidance in order; empty until a result is accepted. Entries are noncumulative and independent of backend output_index. Partial results survive failure or cancellation.
         delegation_context:
           type: string
-          description: Plain-text task context supplied to the target agent, when available. This is not the backend request body.
+          description: Task context sent to the target agent, not the full request body.
         status:
           $ref: '#/components/schemas/VoiceAgentLiveDelegationStatus'
-          description: The delegation's execution outcome, independent of Live speech and client playback.
+          description: The persisted delegation outcome.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveDelegationConversationItem'
-      description: The persisted aggregate for a Foundry-managed prompt-agent delegation. Its id is the native delegation ID from session.delegation.created, also used as delegation_id in response.event. Results are retained in accepted order, including results produced before failure or cancellation. This resource is retrieved through the conversation API and is not emitted as a delegation event.
+      description: Stored prompt-agent delegation state and accepted results.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89283,28 +89260,18 @@ components:
           type: string
           enum:
             - foundry_hosted_agent
-          description: Selects a Foundry-hosted agent as the delegation target.
+          description: Selects hosted-agent delegation.
         agent_name:
           type: string
           pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$
-          description: The name of a hosted agent in the same Foundry project, not a URL or resource path. Prompt and voice agents are not supported by this delegation type.
+          description: Name of a hosted agent in the same project.
         agent_version:
           anyOf:
             - type: string
             - type: 'null'
           pattern: ^[1-9][0-9]{0,19}$
-          description: A positive-integer agent version. Omission or null selects the active version, resolved once when the voice connection starts.
-      description: |-
-        A same-project hosted agent executed by Foundry on behalf of the Live frontend. Foundry resolves
-        and pins the target version once per voice connection, configures native client delegation upstream,
-        and requires assistant output with [thinking] and/or [commentary] section markers. The voice agent
-        validates completed output items, removes the markers, and translates their text into
-        session.thinking.append and session.commentary.append commands for the native client delegation.
-        Permitted backend text, tool, and lifecycle events are forwarded to the caller through the existing
-        response.event envelope, independently of Live injection. No result-format selector is required.
-        Delegation creation, backend status, append acknowledgments and errors use native OpenAI events,
-        just as for managed prompt-agent delegation; there is no separate Foundry delegation status or
-        output-item event family. This is agent configuration, not an additional OpenAI inference-event variant.
+          description: Agent version, pinned per connection. Omit or use null to select the active version.
+      description: Delegates to a same-project hosted agent using native client delegation. Requires [thinking] and/or [commentary] output sections.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89319,13 +89286,13 @@ components:
             - input
         transcription:
           type: string
-          description: The captured user transcription, when available. Its grouping is a Foundry persistence projection, not a native Live turn boundary.
+          description: Captured user transcription, when available.
         audio:
           $ref: '#/components/schemas/VoiceAudioItem'
-          description: Metadata for captured input audio, when available. Reuses the existing voice audio shape; the audio metadata item_id matches this item's id. Bytes are retrieved through the Live item's audio/content route, or directly from blob_uri for BYOS.
+          description: Captured audio metadata; audio.item_id matches this item's id.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveConversationItem'
-      description: A persisted user input segment in a Live conversation.
+      description: A stored user speech segment.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89339,28 +89306,18 @@ components:
           type: string
           enum:
             - foundry_managed_agent
-          description: The Foundry-managed delegation type. Existing preview definitions may use the legacy managed_prompt_agent spelling; new definitions and returned definitions use foundry_managed_agent.
+          description: Canonical delegation type; legacy managed_prompt_agent values are returned as foundry_managed_agent.
         agent_name:
           type: string
           pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$
-          description: The name of a prompt agent in the same Foundry project, not a URL or resource path. Hosted and voice agents are not supported targets.
+          description: Name of a prompt agent in the same project.
         agent_version:
           anyOf:
             - type: string
             - type: 'null'
           pattern: ^[1-9][0-9]{0,19}$
-          description: A positive-integer agent version. Omission or null selects the active version, resolved once when the voice connection starts.
-      description: |-
-        A same-project prompt agent executed by Foundry on behalf of the Live frontend. Foundry resolves
-        and pins the target version once per voice connection, configures native client delegation upstream,
-        and requires assistant output with [thinking] and/or [commentary] section markers. The voice agent
-        validates completed output items, removes the markers, and translates their text into
-        session.thinking.append and session.commentary.append commands for the native client delegation.
-        Permitted backend text, tool, and lifecycle events are forwarded to the caller through the existing
-        response.event envelope, independently of Live injection. No result-format selector is required.
-        Delegation creation, backend status, append acknowledgments and errors use native OpenAI events;
-        there is no separate Foundry delegation status or output-item event family.
-        This is agent configuration, not an additional OpenAI inference-event variant.
+          description: Agent version, pinned per connection. Omit or use null to select the active version.
+      description: Delegates to a same-project prompt agent using native client delegation. Requires [thinking] and/or [commentary] output sections.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89375,13 +89332,13 @@ components:
             - output
         transcription:
           type: string
-          description: The captured assistant speech transcription, when available. This is not delegated backend output or commentary guidance.
+          description: Captured assistant transcription, not backend output or commentary guidance.
         audio:
           $ref: '#/components/schemas/VoiceAudioItem'
-          description: Metadata for captured output audio, when available. Reuses the existing voice audio shape; the audio metadata item_id matches this item's id. Bytes are retrieved through the Live item's audio/content route, or directly from blob_uri for BYOS.
+          description: Captured audio metadata; audio.item_id matches this item's id.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveConversationItem'
-      description: A persisted assistant output segment in a Live conversation. Captured output does not prove that the client played the audio.
+      description: A stored assistant speech segment.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89396,10 +89353,10 @@ components:
             - responses
         output:
           type: string
-          description: Final backend output text, omitted when no final output is available. This is not raw tool output or a stream of backend events.
+          description: Final backend text, omitted when unavailable; excludes raw tool output.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveDelegationConversationItem'
-      description: Final text from a native Responses delegation, separate from what Live actually spoke.
+      description: Stored Responses delegation output, separate from Live speech.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89576,7 +89533,7 @@ components:
           type: string
           enum:
             - realtime
-          description: The existing voice protocol. Legacy requests and stored versions may omit this field.
+          description: Selects the realtime protocol.
         model_type:
           $ref: '#/components/schemas/VoiceModelType'
           description: How the model backing this voice agent is served. Required with `model` for a model-backed voice agent and omitted when `conversation_engine` is provided. This is independent of the architecture (realtime or cascaded), which the service derives from the selected model.
@@ -89640,7 +89597,7 @@ components:
           description: Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentDefinition'
-      description: Voice Live settings for the realtime protocol, including cascaded models. Native Live-only fields are not applicable.
+      description: Realtime and cascaded Voice Live configuration.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89762,7 +89719,7 @@ components:
       enum:
         - realtime
         - live
-      description: Supported voice protocols. Realtime includes both realtime and cascaded Voice Live models.
+      description: Voice protocol; realtime includes cascaded models.
     VoiceAgentSubagent:
       type: object
       required:

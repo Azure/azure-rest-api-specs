@@ -766,39 +766,19 @@ model VoiceAgentWebSocketUpgradeResponse {
 // Native Live protocol and Foundry conversation correlation
 // ---------------------------------------------------------------------------
 
-// Reuse native model identities and event discriminators. Foundry adds only the
-// session.started correlation field below; sub_protocol stays on agents.
-/** The native OpenAI Live client-event hierarchy. Foundry owns session.start; clients wait for session.started before sending the other supported native commands. */
+/** Native OpenAI Live client events. */
 alias VoiceAgentLiveClientEvent = OpenAI.LiveClientEvent;
 
 /**
- * OpenAI Live server events plus Foundry conversation correlation.
- *
- * Managed and hosted backend streams reuse OpenAI.LiveServerEventLiveResponseEvent (type response.event);
- * there is no separate Foundry backend-event wrapper. Foundry-generated envelopes carry the native
- * client delegation ID in delegation_id and a unique outer event_id. The nested event retains its
- * backend event type, item/call/response IDs and sequence_number; dispatch on event.type.
- * Forward only permitted public text, tool and lifecycle events, never credentials or private reasoning.
- * Preserve the native lifecycle snapshot minimization: omit input and clear instructions, tools and output.
- *
- * Forwarded assistant text retains its [thinking] and [commentary] section markers. Independently,
- * the voice agent validates completed output items and translates the sections into native
- * session.thinking.append and session.commentary.append commands. Observing backend output or
- * response.completed does not confirm Live injection, speech or playback.
- *
- * Follow the native event lifecycle: session.delegation.created identifies delegated work;
- * response.event carries actual backend response status and output; session.thinking.appended and
- * session.commentary.appended acknowledge context accepted by Live. Foundry correlates acknowledgments
- * through client_event_id with its outgoing append event_id to update stored accepted results.
- * Acknowledgments do not include the result text or delegation ID and do not confirm speech.
- * Failures outside a backend response use the native error shape; do not manufacture backend responses
- * or new delegation status events. There are no Foundry delegation lifecycle or output-item notifications.
- * A forwarded tool event does not grant permission to execute that tool or add client tool-result routing.
+ * Native Live events with Foundry conversation correlation; no additional event types.
+ * response.event correlates backend output by delegation_id, preserving IDs, sequence numbers and tags.
+ * Lifecycle snapshots omit input and clear instructions, tools and output.
+ * Correlate append acknowledgments via client_event_id to record accepted results, not speech or playback.
+ * Use native errors for orchestration failures; never fabricate backend response events.
  */
 alias VoiceAgentLiveServerEvent = OpenAI.LiveServerEvent;
 
-// WebSocket frames are not HTTP request/response bodies. Mark their native roots
-// explicitly so SDK generators retain the typed messages after the handshake.
+// Keep event models reachable without HTTP frame bodies.
 @@usage(OpenAI.LiveClientEvent, Usage.input | Usage.json);
 @@usage(OpenAI.LiveServerEvent, Usage.output | Usage.json);
 
@@ -806,7 +786,7 @@ alias VoiceAgentLiveServerEvent = OpenAI.LiveServerEvent;
 @@copyProperties(
   OpenAI.LiveServerEventLiveSessionStarted,
   {
-    @doc("The Foundry conversation ID, present when this connection's effective store setting is true. Use it with protocols/voice/live/conversations. This is separate from session.id and does not enable native Live recording storage.")
+    @doc("Stored conversation ID when effective store is true. Use protocols/voice/live/conversations; this ID differs from session.id.")
     conversation_id?: string,
   }
 );
