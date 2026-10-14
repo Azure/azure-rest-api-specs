@@ -149,7 +149,6 @@ union VoiceAgentLiveDelegationTarget {
   responses: "responses",
   client: "client",
   foundry_managed_agent: "foundry_managed_agent",
-  foundry_hosted_agent: "foundry_hosted_agent",
 }
 
 @doc("Persisted delegation outcome, not speech or playback status.")
@@ -253,19 +252,7 @@ model VoiceAgentLiveResponsesDelegationConversationItem
 model VoiceAgentLiveFoundryManagedAgentDelegationItem
   extends VoiceAgentLiveDelegationConversationItem {
   target: "foundry_managed_agent";
-  ...VoiceAgentLiveFoundryAgentDelegationFields;
-}
 
-@doc("Stored hosted-agent delegation state and accepted results.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveFoundryHostedAgentDelegationItem
-  extends VoiceAgentLiveDelegationConversationItem {
-  target: "foundry_hosted_agent";
-  ...VoiceAgentLiveFoundryAgentDelegationFields;
-}
-
-// Shared fields for managed and hosted delegation records.
-alias VoiceAgentLiveFoundryAgentDelegationFields = {
   @doc("Target agent name in the same project.")
   agent_name: string;
 
@@ -286,7 +273,7 @@ alias VoiceAgentLiveFoundryAgentDelegationFields = {
 
   @doc("The persisted delegation outcome.")
   status: VoiceAgentLiveDelegationStatus;
-};
+}
 
 // ---------------------------------------------------------------------------
 // Conversation items — OpenAI Realtime hierarchy with Foundry persistence data

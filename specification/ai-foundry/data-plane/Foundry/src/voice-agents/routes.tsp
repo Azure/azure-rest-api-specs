@@ -148,7 +148,7 @@ interface VoiceAgentLiveWebSocket {
       @query("x-agent-version-override") agent_version_override?: string;
 
       /** URL-encoded JSON values for instruction and greeting templates. */
-      @query structured_input?: string;
+      @query structured_inputs?: string;
 
       /** Overrides Foundry conversation and audio persistence for this session. */
       @query store?: boolean;

@@ -4244,7 +4244,7 @@ paths:
           schema:
             type: string
           explode: false
-        - name: structured_input
+        - name: structured_inputs
           in: query
           required: false
           description: URL-encoded JSON values for instruction and greeting templates.
@@ -92748,10 +92748,8 @@ components:
           $ref: '#/components/schemas/OpenAI.LiveInitialSessionAudioParam'
           description: Startup audio formats and output voice.
         delegation:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentLiveDelegation'
-            - type: 'null'
-          description: Delegation settings. Omit or use null for client mode. responses.model is a backend deployment name in the Live resource, not a model catalog ID.
+          $ref: '#/components/schemas/VoiceAgentLiveDelegation'
+          description: Delegation settings. Omit for client mode. responses.model is a backend deployment name in the Live resource, not a model catalog ID.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentDefinition'
       description: Native GPT Live configuration for a Foundry deployment.
@@ -92763,7 +92761,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.LiveClientDelegationParam'
         - $ref: '#/components/schemas/OpenAI.LiveResponsesDelegationParam'
         - $ref: '#/components/schemas/VoiceAgentLiveManagedAgentDelegation'
-        - $ref: '#/components/schemas/VoiceAgentLiveHostedAgentDelegation'
       description: Who handles delegated work for a Live voice agent.
       x-ms-foundry-meta:
         required_previews:
@@ -92797,7 +92794,6 @@ components:
           client: '#/components/schemas/VoiceAgentLiveClientDelegationConversationItem'
           responses: '#/components/schemas/VoiceAgentLiveResponsesDelegationConversationItem'
           foundry_managed_agent: '#/components/schemas/VoiceAgentLiveFoundryManagedAgentDelegationItem'
-          foundry_hosted_agent: '#/components/schemas/VoiceAgentLiveFoundryHostedAgentDelegationItem'
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveConversationItem'
       description: A stored delegation using native fields with Foundry-specific targets. Its id is the native delegation ID.
@@ -92834,52 +92830,7 @@ components:
         - responses
         - client
         - foundry_managed_agent
-        - foundry_hosted_agent
       description: Delegation owner. Foundry agent targets use native client delegation upstream.
-    VoiceAgentLiveFoundryHostedAgentDelegationItem:
-      type: object
-      required:
-        - target
-        - agent_name
-        - agent_version
-        - offset_ms
-        - output
-        - status
-      properties:
-        target:
-          type: string
-          enum:
-            - foundry_hosted_agent
-        agent_name:
-          type: string
-          description: Target agent name in the same project.
-        agent_version:
-          type: string
-          description: Target version pinned at connection start.
-        offset_ms:
-          type: integer
-          format: int64
-          description: Native delegation offset from session start, in milliseconds.
-        backend_conversation_id:
-          type: string
-          description: Backend conversation ID, distinct from the voice conversation and Live session IDs.
-        output:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceAgentLiveDelegationResultItem'
-          description: Accepted guidance in order; empty until a result is accepted. Entries are noncumulative and independent of backend output_index. Partial results survive failure or cancellation.
-        delegation_context:
-          type: string
-          description: Task context sent to the target agent, not the full request body.
-        status:
-          $ref: '#/components/schemas/VoiceAgentLiveDelegationStatus'
-          description: The persisted delegation outcome.
-      allOf:
-        - $ref: '#/components/schemas/VoiceAgentLiveDelegationConversationItem'
-      description: Stored hosted-agent delegation state and accepted results.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentLiveFoundryManagedAgentDelegationItem:
       type: object
       required:
@@ -92924,31 +92875,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    VoiceAgentLiveHostedAgentDelegation:
-      type: object
-      required:
-        - type
-        - agent_name
-      properties:
-        type:
-          type: string
-          enum:
-            - foundry_hosted_agent
-          description: Selects hosted-agent delegation.
-        agent_name:
-          type: string
-          pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$
-          description: Name of a hosted agent in the same project.
-        agent_version:
-          anyOf:
-            - type: string
-            - type: 'null'
-          pattern: ^[1-9][0-9]{0,19}$
-          description: Agent version, pinned per connection. Omit or use null to select the active version.
-      description: Delegates to a same-project hosted agent using native client delegation. Requires [thinking] and/or [commentary] output sections.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
     VoiceAgentLiveInputConversationItem:
       type: object
       required:
@@ -92986,11 +92912,9 @@ components:
           pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$
           description: Name of a prompt agent in the same project.
         agent_version:
-          anyOf:
-            - type: string
-            - type: 'null'
+          type: string
           pattern: ^[1-9][0-9]{0,19}$
-          description: Agent version, pinned per connection. Omit or use null to select the active version.
+          description: Agent version, pinned per connection. Omit to select the active version.
       description: Delegates to a same-project prompt agent using native client delegation. Requires [thinking] and/or [commentary] output sections.
       x-ms-foundry-meta:
         required_previews:

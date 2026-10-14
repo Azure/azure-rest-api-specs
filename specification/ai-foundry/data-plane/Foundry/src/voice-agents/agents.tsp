@@ -212,8 +212,8 @@ model VoiceAgentLiveDefinition extends VoiceAgentDefinition {
   @doc("Startup audio formats and output voice.")
   audio?: OpenAI.LiveInitialSessionAudioParam;
 
-  @doc("Delegation settings. Omit or use null for client mode. responses.model is a backend deployment name in the Live resource, not a model catalog ID.")
-  delegation?: VoiceAgentLiveDelegation | null;
+  @doc("Delegation settings. Omit for client mode. responses.model is a backend deployment name in the Live resource, not a model catalog ID.")
+  delegation?: VoiceAgentLiveDelegation;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Reuse the native OpenAI delegation models without reparenting or changing their wire contract."
@@ -224,7 +224,6 @@ union VoiceAgentLiveDelegation {
   client: OpenAI.LiveClientDelegationParam,
   responses: OpenAI.LiveResponsesDelegationParam,
   foundry_managed_agent: VoiceAgentLiveManagedAgentDelegation,
-  foundry_hosted_agent: VoiceAgentLiveHostedAgentDelegation,
 }
 
 @doc("Delegates to a same-project prompt agent using native client delegation. Requires [thinking] and/or [commentary] output sections.")
@@ -237,24 +236,9 @@ model VoiceAgentLiveManagedAgentDelegation {
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$")
   agent_name: string;
 
-  @doc("Agent version, pinned per connection. Omit or use null to select the active version.")
+  @doc("Agent version, pinned per connection. Omit to select the active version.")
   @pattern("^[1-9][0-9]{0,19}$")
-  agent_version?: string | null;
-}
-
-@doc("Delegates to a same-project hosted agent using native client delegation. Requires [thinking] and/or [commentary] output sections.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveHostedAgentDelegation {
-  @doc("Selects hosted-agent delegation.")
-  type: "foundry_hosted_agent";
-
-  @doc("Name of a hosted agent in the same project.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$")
-  agent_name: string;
-
-  @doc("Agent version, pinned per connection. Omit or use null to select the active version.")
-  @pattern("^[1-9][0-9]{0,19}$")
-  agent_version?: string | null;
+  agent_version?: string;
 }
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult.")
