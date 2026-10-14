@@ -10165,7 +10165,7 @@ model ExportJobDetails extends JobDetails {
   /**
    * The sas token to access blob.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Existing property since 2016-08-10, unmarked in all published versions; adding @secret changes format and is a cross-version breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sasToken?: string;
 
   /**
