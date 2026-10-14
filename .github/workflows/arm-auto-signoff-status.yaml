@@ -36,11 +36,14 @@ jobs:
   arm-auto-signoff-status:
     name: ARM Auto SignOff - Set Status
 
-    # workflow_run - already filtered by triggers above
+    # Ignore upstream runs that did not finish their work.
     # pull_request_target:labeled - filter to only the input and output labels
     if: |
-      github.event_name == 'workflow_run' ||
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion != 'skipped' &&
+       github.event.workflow_run.conclusion != 'cancelled') ||
       (github.event_name == 'pull_request_target' &&
+       github.event.pull_request.state == 'open' &&
        (github.event.action == 'labeled' ||
         github.event.action == 'unlabeled') &&
        (github.event.label.name == 'Approved-Suppression' ||
@@ -59,8 +62,9 @@ jobs:
       # For workflows that are triggered by the pull_request_target event, the workflow runs in the
       # context of the base of the pull request.  You should make sure that you do not check out,
       # build, or run untrusted code from the head of the pull request.
-      - uses: $/.github/actions/checkout
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           # Only needs .github folder for automation, not the files in the PR (analyzed in a
           # separate workflow).
           #
@@ -92,21 +96,21 @@ jobs:
         # The action is explicit: 'add' | 'remove' | 'none'.
       - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMSignedOff'] != 'none'
         name: Upload artifact for ARMSignedOff label
-        uses: $/.github/actions/add-label-artifact
+        uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMSignedOff"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMSignedOff'] == 'add' }}"
 
       - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-IncrementalTSP'] != 'none'
         name: Upload artifact for ARMAutoSignedOff-IncrementalTSP label
-        uses: $/.github/actions/add-label-artifact
+        uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMAutoSignedOff-IncrementalTSP"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-IncrementalTSP'] == 'add' }}"
 
       - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial'] != 'none'
         name: Upload artifact for ARMAutoSignedOff-Trivial label
-        uses: $/.github/actions/add-label-artifact
+        uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMAutoSignedOff-Trivial"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial'] == 'add' }}"
@@ -120,7 +124,7 @@ jobs:
           (github.event_name == 'issue_comment' || github.event_name == 'workflow_run') &&
           fromJson(steps.get-label-action.outputs.result).headSha
         name: Upload artifact with head SHA
-        uses: $/.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "head-sha"
           value: "${{ fromJson(steps.get-label-action.outputs.result).headSha }}"
@@ -134,7 +138,7 @@ jobs:
           (github.event_name == 'issue_comment' || github.event_name == 'workflow_run') &&
           fromJson(steps.get-label-action.outputs.result).issueNumber > 0
         name: Upload artifact with issue number
-        uses: $/.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "issue-number"
           value: "${{ fromJson(steps.get-label-action.outputs.result).issueNumber }}"

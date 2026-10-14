@@ -1,12 +1,13 @@
-import { readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
-import { parseLabelCatalog, planLabels } from "../src/label-catalog.ts";
+import { planLabels } from "../src/label-catalog.ts";
+import { loadLabelCatalog } from "../src/label-catalog-loader.ts";
 
 const { values } = parseArgs({
   options: { preview: { type: "boolean", default: false } },
 });
-const catalog = parseLabelCatalog(
-  await readFile(new URL("../../labels.yaml", import.meta.url), "utf8"),
+const { catalog } = await loadLabelCatalog(
+  fileURLToPath(new URL("../../labels.yaml", import.meta.url)),
 );
 if (values.preview) {
   const { Octokit } = await import("@octokit/rest");
