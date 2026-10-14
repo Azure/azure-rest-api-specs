@@ -55,6 +55,7 @@ union ProvisioningState {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   ExtensionUnreachable: "ExtensionUnreachable",
 }
 
@@ -2056,6 +2057,7 @@ model AccountProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   foundryAutoUpgrade?: FoundryAutoUpgrade;
 
   /**
@@ -2079,6 +2081,7 @@ model AccountProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   capabilitySettings?: CapabilitySettings;
 
   /**
@@ -2087,6 +2090,7 @@ model AccountProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minItems(1)
   @maxItems(1)
@@ -2120,6 +2124,7 @@ model AccountProperties {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model CapabilitySettings {
   /**
    * Azure resource ID of the document store used by agent runtime state.
@@ -2155,6 +2160,7 @@ model CapabilitySettings {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 @discriminator("hostingType")
 model AgentHostingConfiguration {
   /**
@@ -2176,6 +2182,7 @@ model AgentHostingConfiguration {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ManagedClusterAgentHostingConfiguration
   extends AgentHostingConfiguration {
   /**
@@ -2226,6 +2233,7 @@ model ManagedClusterAgentHostingConfiguration
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union AgentHostingType {
   string,
 
@@ -2247,6 +2255,7 @@ union AgentHostingType {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union FoundryAutoUpgradeMode {
   string,
 
@@ -2274,6 +2283,7 @@ union FoundryAutoUpgradeMode {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model FoundryAutoUpgrade {
   /**
    * Gets or sets the auto-upgrade mode.
@@ -3689,6 +3699,7 @@ model DeploymentProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   speculativeDecoding?: DeploymentSpeculativeDecoding;
 
   /**
@@ -3788,6 +3799,7 @@ model DeploymentProperties {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model DeploymentSpeculativeDecoding {
   /**
    * Draft model used to generate speculative decoding tokens.
@@ -3911,6 +3923,7 @@ model SkuResource {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model PatchResourceSku {
   /**
    * The resource model definition representing SKU
@@ -4792,6 +4805,7 @@ model ProjectProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   capabilitySettings?: CapabilitySettings;
 }
@@ -6536,6 +6550,7 @@ model GatedModelAccessProperties {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ManagedComputeDeploymentProperties {
   /**
    * AzureML Registry model asset URI. Required on creation; immutable after creation.
@@ -6568,6 +6583,7 @@ model ManagedComputeDeploymentProperties {
    * Configuration used to authorize access to a gated model during deployment creation.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   gatedModelAccess?: GatedModelAccessProperties;
 
@@ -6581,6 +6597,7 @@ model ManagedComputeDeploymentProperties {
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   capabilities?: Record<string>;
 
@@ -6637,6 +6654,7 @@ model ManagedComputeDeploymentProperties {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ManagedComputeDeploymentProvisioningDetails {
   /**
    * A human-readable status message from the last provisioning operation.
@@ -6660,6 +6678,7 @@ model ManagedComputeDeploymentProvisioningDetails {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ManagedComputeDeploymentRoutes {
   /**
    * Relative path to the chat completions scoring endpoint.
@@ -6687,6 +6706,7 @@ model ManagedComputeDeploymentRoutes {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ManagedComputeDeploymentListResult {
   /**
    * The link used to get the next page of managed compute deployments.
@@ -6712,6 +6732,7 @@ model ManagedComputeDeploymentListResult {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union ComputeProvisioningState {
   string,
 
@@ -6759,6 +6780,7 @@ union ComputeProvisioningState {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union VmPriority {
   string,
 
@@ -6779,6 +6801,7 @@ union VmPriority {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model Pool {
   /**
    * The name of the pool.
@@ -6811,6 +6834,7 @@ model Pool {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union ComputeType {
   string,
 
@@ -6832,6 +6856,7 @@ union ComputeType {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 @discriminator("computeType")
 model ComputeProperties {
   /**
@@ -6874,6 +6899,7 @@ model ComputeProperties {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ClusterComputeProperties extends ComputeProperties {
   /**
    * The type of compute resource.
@@ -6901,6 +6927,7 @@ model ClusterComputeProperties extends ComputeProperties {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ContainerInstanceComputeProperties extends ComputeProperties {
   /**
    * The type of compute resource.
@@ -6944,6 +6971,7 @@ model ContainerInstanceComputeProperties extends ComputeProperties {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model SshSettings {
   /**
    * The SSH public key for authenticating to the compute instance.
@@ -6966,6 +6994,7 @@ model SshSettings {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ConnectivityEndpoints {
   /**
    * The public IP address of the compute instance.
@@ -6991,6 +7020,7 @@ model ConnectivityEndpoints {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ComputeListResult {
   /**
    * The link used to get the next page of compute list.
@@ -7015,6 +7045,7 @@ model ComputeListResult {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model WorkbenchProperties {
   // Retain the published property descriptions and visibility in historical projections.
   /**
@@ -7027,12 +7058,14 @@ model WorkbenchProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_01)
   targetClusterIdLegacy: string;
 
   /**
    * Resource ID of the Foundry Compute or virtual cluster that hosts this workbench. Changing the cluster requires the workbench to be stopped.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   targetClusterId: string;
 
   /**
@@ -7045,12 +7078,14 @@ model WorkbenchProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_01)
   imageLinkLegacy: string;
 
   /**
    * Container image URI (e.g., MCR or ACR image path) for the workbench. Immutable after creation.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   imageLink: string;
 
@@ -7058,12 +7093,14 @@ model WorkbenchProperties {
    * For virtual clusters, an exact Singularity instance type or a full-node Azure VM size. If omitted on creation, defaults to Singularity.D4_v3. Foundry Compute ignores this override and uses the pool configuration. Changing the instance type requires the workbench to be stopped.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   instanceType?: string;
 
   /**
    * GPU count for GPU pools or vCPU count for CPU pools. Must be 1, 2, 4, 8, or a positive multiple of 8. A full-node Azure VM size permits partition selection; omission uses the full node. For an exact Singularity instance type, a supplied count must match that type; the Singularity.D4_v3 fallback accepts 4.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @minValue(1)
   gpuCount?: int32;
 
@@ -7082,12 +7119,14 @@ model WorkbenchProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_01)
   datasetIdLegacy?: string;
 
   /**
    * The dataset ID to mount for the workbench. Set only during creation.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   datasetId?: string;
 
@@ -7101,12 +7140,14 @@ model WorkbenchProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_01)
   sshSettingsLegacy?: SshSettings;
 
   /**
    * SSH configuration for remote access to the workbench. Set only during creation.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   sshSettings?: SshSettings;
 
@@ -7132,6 +7173,7 @@ model WorkbenchProperties {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   provisioningStateLegacy?: ComputeProvisioningState;
 
@@ -7139,6 +7181,7 @@ model WorkbenchProperties {
    * Provisioning state of the workbench resource, independent of runtime lifecycle status.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   provisioningState?: WorkbenchProvisioningState;
 
@@ -7146,6 +7189,7 @@ model WorkbenchProperties {
    * Runtime lifecycle status of the workbench. Independent of resource provisioning; start, stop, restart, and runtime health changes do not change provisioningState.
    */
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   status?: WorkbenchStatus;
 
@@ -7259,6 +7303,7 @@ model WorkbenchUpdateProperties {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model WorkbenchListResult {
   /**
    * The link used to get the next page of workbench list.
@@ -7283,6 +7328,7 @@ model WorkbenchListResult {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ManagedComputeDeploymentInfo {
   /**
    * Full ARM resource ID of the deployment.
@@ -7320,6 +7366,7 @@ model ManagedComputeDeploymentInfo {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ManagedComputeUsage {
   /**
    * Fully qualified resource ID for the managed compute usage.
@@ -7376,6 +7423,7 @@ model ManagedComputeUsage {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ManagedComputeUsageListResult {
   /**
    * The link used to get the next page of managed compute usages.
@@ -7401,6 +7449,7 @@ model ManagedComputeUsageListResult {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model EvaluateDeploymentPoliciesRequest {
   /**
    * The list of hypothetical deployments to evaluate against Azure Policy.
@@ -7418,6 +7467,7 @@ model EvaluateDeploymentPoliciesRequest {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model EvaluateDeploymentPoliciesDeployment {
   /**
    * The name of the hypothetical deployment.
@@ -7440,6 +7490,7 @@ model EvaluateDeploymentPoliciesDeployment {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model EvaluateDeploymentPoliciesDeploymentProperties {
   /**
    * The model to evaluate.
@@ -7462,6 +7513,7 @@ model EvaluateDeploymentPoliciesDeploymentProperties {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model EvaluateDeploymentPoliciesResponse {
   /**
    * Per-deployment policy evaluation results, keyed by deployment name.
@@ -7480,6 +7532,7 @@ model EvaluateDeploymentPoliciesResponse {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 union PolicyEvaluationOutcome {
   string,
 
@@ -7503,6 +7556,7 @@ union PolicyEvaluationOutcome {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model DeploymentPolicyEvaluationResult {
   /**
    * The evaluation outcome.
@@ -7531,6 +7585,7 @@ model DeploymentPolicyEvaluationResult {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model PolicyAssignmentEvaluationDetails {
   /**
    * The policy assignment ID.
@@ -7579,6 +7634,7 @@ model PolicyAssignmentEvaluationDetails {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model PolicyExpressionEvaluationDetails {
   /**
    * The policy expression.
@@ -7622,6 +7678,7 @@ model PolicyExpressionEvaluationDetails {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ManagedComputeCapacityProperties {
   /**
    * The type of accelerator (e.g., Azure.A100, Azure.H100).
@@ -7660,6 +7717,7 @@ model ManagedComputeCapacityProperties {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model DeploymentSizeCapacity {
   /**
    * The number of accelerators required per model instance.
@@ -7690,6 +7748,7 @@ model DeploymentSizeCapacity {
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 model ManagedComputeCapacityListResult {
   /**
    * The link used to get the next page of managed compute capacities.

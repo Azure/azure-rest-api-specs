@@ -24,6 +24,7 @@ namespace Microsoft.CognitiveServices;
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 @parentResource(Account)
 model ManagedComputeDeployment
   is Azure.ResourceManager.ProxyResource<ManagedComputeDeploymentProperties> {
@@ -55,6 +56,7 @@ model ManagedComputeDeployment
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
 @armResourceOperations
 interface ManagedComputeDeployments {
   /**
