@@ -5733,43 +5733,75 @@ namespace KnowledgeBaseRetrievalClient {
 
 @@clientNamespace(
   Search.KnowledgeBaseRetrievalStreamEvent,
-  "Azure.Search.Documents.KnowledgeBases",
-  "csharp"
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
 );
 @@clientNamespace(
   Search.KnowledgeBaseRetrievalStartedStreamEvent,
-  "Azure.Search.Documents.KnowledgeBases",
-  "csharp"
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalStartedStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
 );
 @@clientNamespace(
   Search.KnowledgeBaseActivityStartedStreamEvent,
-  "Azure.Search.Documents.KnowledgeBases",
-  "csharp"
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseActivityStartedStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
 );
 @@clientNamespace(
   Search.KnowledgeBaseActivityCompletedStreamEvent,
-  "Azure.Search.Documents.KnowledgeBases",
-  "csharp"
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseActivityCompletedStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
 );
 @@clientNamespace(
   Search.KnowledgeBaseAnswerCompletedStreamEvent,
-  "Azure.Search.Documents.KnowledgeBases",
-  "csharp"
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseAnswerCompletedStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
 );
 @@clientNamespace(
   Search.KnowledgeBaseReferencesCompletedStreamEvent,
-  "Azure.Search.Documents.KnowledgeBases",
-  "csharp"
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseReferencesCompletedStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
 );
 @@clientNamespace(
   Search.KnowledgeBaseErrorStreamEvent,
-  "Azure.Search.Documents.KnowledgeBases",
-  "csharp"
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseErrorStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
 );
 @@clientNamespace(
   Search.KnowledgeBaseResponseCompletedStreamEvent,
-  "Azure.Search.Documents.KnowledgeBases",
-  "csharp"
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseResponseCompletedStreamEvent,
+  "com.azure.search.documents.knowledgebases",
+  "java"
 );
 
 @@access(Search.KnowledgeBaseRetrievalStreamEvent, Access.public, "csharp");
