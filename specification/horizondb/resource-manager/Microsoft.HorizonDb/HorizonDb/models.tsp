@@ -234,6 +234,10 @@ model ClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   dataEncryption?: HorizonDbClusterDataEncryption;
 
+  @doc("Specifies whether AI Model Management is enabled for the cluster.")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  aiModelManagement?: AiModelManagementStatus;
+
   @doc("Current state of the cluster.")
   @visibility(Lifecycle.Read)
   state: ClusterState;
@@ -306,6 +310,10 @@ model ClusterPropertiesForPatchUpdate {
   @doc("The data encryption configuration to update for the cluster. Omitted properties preserve their current values. Updates can modify settings within the existing encryption type, but switching between SystemManaged and AzureKeyVault after cluster creation is not supported.")
   @visibility(Lifecycle.Update)
   dataEncryption?: HorizonDbClusterDataEncryptionForPatchUpdate;
+
+  @doc("Specifies whether AI Model Management is enabled for the cluster.")
+  @visibility(Lifecycle.Update)
+  aiModelManagement?: AiModelManagementStatus;
 }
 
 @doc("HorizonDB cluster for update operations.")
@@ -676,6 +684,17 @@ union HorizonDbClusterDataEncryptionType {
 
   @doc("Data encryption uses customer-managed keys stored in Azure Key Vault.")
   AzureKeyVault: "AzureKeyVault",
+}
+
+@doc("The AI Model Management status for a HorizonDB cluster.")
+union AiModelManagementStatus {
+  string,
+
+  @doc("AI Model Management is enabled.")
+  Enabled: "Enabled",
+
+  @doc("AI Model Management is disabled.")
+  Disabled: "Disabled",
 }
 
 @doc("The validation status of a customer-managed encryption key used by a HorizonDB cluster.")

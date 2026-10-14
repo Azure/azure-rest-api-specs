@@ -5682,6 +5682,30 @@
         "targetIdentityAssignmentResourceId"
       ]
     },
+    "AiModelManagementStatus": {
+      "type": "string",
+      "description": "The AI Model Management status for a HorizonDB cluster.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AiModelManagementStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "AI Model Management is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "AI Model Management is disabled."
+          }
+        ]
+      }
+    },
     "Authentication": {
       "type": "object",
       "description": "A service-created authentication configuration returned by the authentications collection. The resource name is passwordMethod or microsoftEntra.",
@@ -7305,6 +7329,14 @@
             "create"
           ]
         },
+        "aiModelManagement": {
+          "$ref": "#/definitions/AiModelManagementStatus",
+          "description": "Specifies whether AI Model Management is enabled for the cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
         "state": {
           "$ref": "#/definitions/ClusterState",
           "description": "Current state of the cluster.",
@@ -7348,6 +7380,13 @@
         "dataEncryption": {
           "$ref": "#/definitions/HorizonDbClusterDataEncryptionForPatchUpdate",
           "description": "The data encryption configuration to update for the cluster. Omitted properties preserve their current values. Updates can modify settings within the existing encryption type, but switching between SystemManaged and AzureKeyVault after cluster creation is not supported.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "aiModelManagement": {
+          "$ref": "#/definitions/AiModelManagementStatus",
+          "description": "Specifies whether AI Model Management is enabled for the cluster.",
           "x-ms-mutability": [
             "update"
           ]
