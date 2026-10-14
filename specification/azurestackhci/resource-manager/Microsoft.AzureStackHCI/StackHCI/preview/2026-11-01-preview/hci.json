@@ -3605,6 +3605,9 @@
           "ClusterJobs_Get_ConfigureSdnIntegrationJob": {
             "$ref": "./examples/ClusterJobs_Get_ConfigureSdnIntegrationJob.json"
           },
+          "ClusterJobs_Get_EnableAksArcDeployment": {
+            "$ref": "./examples/ClusterJobs_Get_EnableAksArcDeployment.json"
+          },
           "ClusterJobs_Get_GpuCreatePartitionJob": {
             "$ref": "./examples/ClusterJobs_Get_GpuCreatePartitionJob.json"
           },
@@ -3709,6 +3712,9 @@
           },
           "ClusterJobs_CreateOrUpdate_ConfigureSdnIntegration_Enable": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureSdnIntegration_Enable.json"
+          },
+          "ClusterJobs_CreateOrUpdate_EnableAksArcDeployment": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_EnableAksArcDeployment.json"
           },
           "ClusterJobs_CreateOrUpdate_GpuCreatePartitionJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_GpuCreatePartition.json"
@@ -18759,6 +18765,25 @@
         }
       }
     },
+    "HciEnableAksArcDeploymentJobProperties": {
+      "type": "object",
+      "description": "Enables AKS Arc deployment intent on the device. Only Deploy mode is supported, enforced by service-side validation. This job does not install AKS Arc or start a solution update; a subsequent applicable solution update installs AKS Arc if it is absent.",
+      "properties": {
+        "deployAksArc": {
+          "type": "boolean",
+          "description": "Deployment intent. Only true is currently supported, enforced by service-side validation. Repeated execution preserves enabled intent; disabling or uninstalling AKS Arc is not supported."
+        }
+      },
+      "required": [
+        "deployAksArc"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "EnableAksArcDeployment"
+    },
     "HciHardwareProfile": {
       "type": "object",
       "description": "Hardware configurations for HCI device.",
@@ -18776,6 +18801,7 @@
       "enum": [
         "AddServer",
         "RepairServer",
+        "EnableAksArcDeployment",
         "ConfigureArcGateway",
         "GpuCreatePartition",
         "GpuSwitchMode",
@@ -18798,6 +18824,11 @@
             "name": "RepairServer",
             "value": "RepairServer",
             "description": "Job to repair a server in the cluster."
+          },
+          {
+            "name": "EnableAksArcDeployment",
+            "value": "EnableAksArcDeployment",
+            "description": "Job to enable AKS Arc deployment during a subsequent solution update."
           },
           {
             "name": "ConfigureArcGateway",
@@ -22080,7 +22111,7 @@
         },
         "deployAksArc": {
           "type": "boolean",
-          "description": "Indicates whether to deploy AKS enabled by Azure Arc during cluster deployment.",
+          "description": "Indicates whether to deploy AKS enabled by Azure Arc for the cluster. After an EnableAksArcDeployment job succeeds, this reflects the deployment intent acknowledged by the device, not whether AKS Arc is installed.",
           "readOnly": true
         }
       }
