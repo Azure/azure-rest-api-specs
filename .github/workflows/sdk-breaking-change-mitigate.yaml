@@ -55,7 +55,6 @@ jobs:
         with:
           sparse-checkout: |
             .github
-            eng
           persist-credentials: false
 
       - name: Install dependencies for github-script actions
@@ -138,7 +137,7 @@ jobs:
         uses: ./repositories/workflow-repository/.github/actions/setup-node-install-deps
         with:
           working-directory: repositories/workflow-repository
-          install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --config.trust-lockfile=true --filter=azure-rest-api-specs-github..."
+          install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --config.trust-lockfile=true --filter=azure-rest-api-specs-github... --filter=@azure-tools/sdk-breaking-change-workflows..."
           cache: "false"
 
       - name: Install Azure SDK CLI
@@ -196,7 +195,7 @@ jobs:
         with:
           script: |
             const { mitigateSdkBreakingChanges } =
-              await import('${{ github.workspace }}/repositories/workflow-repository/.github/workflows/src/sdk-breaking-change/mitigate-sdk-breaking-changes.ts');
+              await import('${{ github.workspace }}/repositories/workflow-repository/.github/workflows/sdk-breaking-change/src/mitigate-sdk-breaking-changes.ts');
             await mitigateSdkBreakingChanges({
               analysisResultPath: process.env.ANALYSIS_RESULT_PATH,
               mitigationResultPath: process.env.MITIGATION_RESULT_PATH,

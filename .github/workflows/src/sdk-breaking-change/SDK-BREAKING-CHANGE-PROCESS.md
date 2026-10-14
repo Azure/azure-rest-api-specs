@@ -8,6 +8,18 @@ downstream SDK repositories, avoid back-and-forth across repos and stages
 
 ## How It Works
 
+### Workflow development
+
+Trigger resolution and result publication use the common `.github` dependencies. Project discovery,
+SDK analysis, and mitigation live in the private `@azure-tools/sdk-breaking-change-workflows`
+workspace package under `.github/workflows/sdk-breaking-change`. They remain TypeScript functions
+called by `github-script`, not a separate author-facing CLI.
+
+After the root `pnpm install`, run `pnpm --filter @azure-tools/sdk-breaking-change-workflows check`
+for the execution package and `pnpm --dir .github check` for gates and publishers.
+SDK processing jobs explicitly install the execution package; publisher workflows retain their
+separate permissions and do not need an `eng` checkout. CI checks both production install profiles.
+
 ### Detection
 
 1. When a specification pull request is opened or updated, the `SDK Validation pipeline - <language>` pipeline:

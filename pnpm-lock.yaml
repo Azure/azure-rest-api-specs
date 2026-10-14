@@ -574,9 +574,6 @@ importers:
       '@apidevtools/json-schema-ref-parser':
         specifier: 'catalog:'
         version: 16.0.3(@types/json-schema@7.0.15)
-      '@azure-tools/spec-gen-sdk-runner':
-        specifier: workspace:*
-        version: link:../eng/tools/spec-gen-sdk-runner
       '@azure-tools/specs-shared':
         specifier: workspace:*
         version: link:shared
@@ -723,6 +720,19 @@ importers:
       yaml:
         specifier: 'catalog:'
         version: 2.9.1
+
+  .github/workflows/sdk-breaking-change:
+    dependencies:
+      '@azure-tools/spec-gen-sdk-runner':
+        specifier: workspace:*
+        version: link:../../../eng/tools/spec-gen-sdk-runner
+      '@azure-tools/specs-shared':
+        specifier: workspace:*
+        version: link:../../shared
+    devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.3
 
   eng/scripts:
     devDependencies:

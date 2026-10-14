@@ -15,7 +15,7 @@ vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
   generateTypeSpecMetadata: generateTypeSpecMetadataMock,
 }));
 
-import { analyzeSdkProjects } from "../../src/sdk-breaking-change/analyze-sdk-projects.ts";
+import { analyzeSdkProjects } from "../src/analyze-sdk-projects.ts";
 
 let temporaryDirectory: string;
 let sdkRepositoryPath: string;
