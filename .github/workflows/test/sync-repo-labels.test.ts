@@ -55,7 +55,8 @@ afterEach(async () => {
   vi.restoreAllMocks();
 });
 
-function fixture() {
+function fixture(repository = repo) {
+  const prefix = `/repos/${repository.owner}/${repository.repo}`;
   const catalog: LabelCatalog = {
     unconfiguredLabels: "preserve",
     labels: [
@@ -185,7 +186,7 @@ function fixture() {
               nodes: items.slice(start, start + count).map(({ number, state }) => ({
                 number,
                 state,
-                url: `https://github.com/Azure/azure-rest-api-specs/issues/${number}`,
+                url: `https://github.com/${repository.owner}/${repository.repo}/issues/${number}`,
               })),
               pageInfo: {
                 hasNextPage: start + count < items.length,
@@ -206,12 +207,12 @@ function fixture() {
   vi.spyOn(core, "setOutput").mockImplementation(() => {});
   const context = {
     ...createMockContext(),
-    repo,
-    issue: { ...repo, number: 0 },
+    repo: repository,
+    issue: { ...repository, number: 0 },
     payload: {
       repository: {
-        name: repo.repo,
-        owner: { login: repo.owner, name: repo.owner },
+        name: repository.repo,
+        owner: { login: repository.owner, name: repository.owner },
         default_branch: "main",
       },
     },
@@ -683,16 +684,30 @@ describe("repository label synchronization", () => {
     expect(f.state.requests.some((request) => request.path === "/graphql")).toBe(false);
   });
 
-  it("creates and updates configured labels, then becomes a no-op", async () => {
-    const f = fixture();
-    f.state.labels = [{ ...canonical, color: "ffffff" }];
-    f.state.catalog.labels.push({ name: "new", color: "123456", description: "New label" });
-    await (await f.prepare()).apply();
-    expect(f.mutations().map(({ method }) => method)).toEqual(["POST", "PATCH"]);
-    f.state.requests = [];
-    await (await f.prepare()).apply();
-    expect(f.mutations()).toEqual([]);
-  });
+  it.each(["azure-rest-api-specs", "azure-rest-api-specs-pr"])(
+    "creates and updates configured labels in %s, then becomes a no-op",
+    async (repository) => {
+      const f = fixture({ owner: "Azure", repo: repository });
+      f.state.labels = [{ ...canonical, color: "ffffff" }];
+      const label = {
+        name: "needs-author-feedback",
+        color: "f72598",
+        description: "Workflow: More information is needed from author to address the issue.",
+      };
+      f.state.catalog.labels.push(label);
+      const run = await f.prepare();
+      await run.apply();
+      expect(run.audit.repository).toBe(`Azure/${repository}`);
+      expect(f.mutations().map(({ method, path }) => ({ method, path }))).toEqual([
+        { method: "POST", path: `/repos/Azure/${repository}/labels` },
+        { method: "PATCH", path: `/repos/Azure/${repository}/labels/${canonical.name}` },
+      ]);
+      expect(f.state.labels).toContainEqual(expect.objectContaining(label));
+      f.state.requests = [];
+      await (await f.prepare()).apply();
+      expect(f.mutations()).toEqual([]);
+    },
+  );
 
   it("does not write in dry-run, even with archival and deletion enabled", async () => {
     const f = fixture();
@@ -716,16 +731,24 @@ describe("repository label synchronization", () => {
     },
   );
 
-  it("refuses non-default-branch execution", async () => {
-    const f = fixture();
-    f.args.context.ref = "refs/heads/feature";
-    await expect(f.prepare()).rejects.toThrow("upstream default branch");
-  });
+  it.each(["azure-rest-api-specs", "azure-rest-api-specs-pr"])(
+    "refuses non-default-branch execution in %s",
+    async (repository) => {
+      const f = fixture({ owner: "Azure", repo: repository });
+      f.args.context.ref = "refs/heads/feature";
+      await expect(f.prepare()).rejects.toThrow("upstream default branch");
+      expect(f.state.requests).toEqual([]);
+    },
+  );
 
-  it("refuses fork execution", async () => {
-    const f = fixture();
-    f.args.context.repo = { owner: "fork", repo: repo.repo };
+  it.each([
+    { owner: "fork", repo: "azure-rest-api-specs" },
+    { owner: "fork", repo: "azure-rest-api-specs-pr" },
+    { owner: "Azure", repo: "unrelated" },
+  ])("refuses execution in $owner/$repo", async (repository) => {
+    const f = fixture(repository);
     await expect(f.prepare()).rejects.toThrow("upstream default branch");
+    expect(f.state.requests).toEqual([]);
   });
 
   it("requires an uploaded audit before any mutation", async () => {
