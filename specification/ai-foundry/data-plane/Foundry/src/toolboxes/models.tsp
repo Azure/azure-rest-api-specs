@@ -294,7 +294,6 @@ model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
 @extension("x-ms-foundry-meta", PreviewTool)
 model CloudComputerUsePreviewToolboxTool extends ToolboxTool {
   type: ToolboxCloudComputerUsePreviewToolType;
-  ...ToolFields<CloudComputerUsePreviewTool>;
 }
 
 /**
