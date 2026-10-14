@@ -26,6 +26,7 @@ options:
     flavor: "azure"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
+    experimental-split-models-by-visibility: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-iotoperations"
     flavor: azure
     package-details:
@@ -42,5 +43,5 @@ options:
     inject-spans: true
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
-    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+    - "@azure-tools/specs-typespec-rulesets/resource-manager"
+    - "@azure-tools/specs-typespec-rulesets/client-sdk"
