@@ -6570,6 +6570,68 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+  /agents/{agent_name}:improve-instructions:
+    post:
+      operationId: Agents_improveVoiceAgentInstructions
+      summary: Improve voice agent instructions
+      description: |-
+        Produces replacement instructions for the specified model-backed voice agent. Agents with a `hosted_agent`
+        definition are rejected. This side-effect-free operation does not modify the agent's instructions, model, voice
+        or audio settings, tools, or versions. Callers can review the response and use an existing agent update operation
+        to persist the replacement instructions.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - VoiceAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the voice agent whose instructions are improved. The latest agent version is used.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImproveVoiceAgentInstructionsResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImproveVoiceAgentInstructionsRequest'
+        description: The current instructions and requested changes used to produce replacement instructions.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
   /agents:generate:
     post:
       operationId: Agents_generateAgent
@@ -53218,6 +53280,41 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationRuleAction'
       description: Evaluation rule action for human evaluation.
+    ImproveVoiceAgentInstructionsRequest:
+      type: object
+      required:
+        - instructions
+        - requested_changes
+      properties:
+        instructions:
+          type: string
+          maxLength: 4096
+          description: The current voice agent instructions to improve. May be empty. The maximum length is 4,096 Unicode scalar values.
+        requested_changes:
+          type: string
+          minLength: 1
+          maxLength: 4096
+          description: A meaningful, non-whitespace description of the requested instruction changes. The maximum length is 4,096 Unicode scalar values.
+      description: |-
+        The inputs for improving a model-backed voice agent's instructions. Agents with a `hosted_agent` definition are
+        not supported. Both fields are required. `instructions` may be empty, while `requested_changes` must contain a
+        meaningful, non-whitespace change request. The service measures both limits in Unicode scalar values.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    ImproveVoiceAgentInstructionsResponse:
+      type: object
+      required:
+        - instructions
+      properties:
+        instructions:
+          type: string
+          maxLength: 4096
+          description: The improved replacement instructions. The maximum length is 4,096 Unicode scalar values.
+      description: The replacement instructions produced by a voice agent instruction improvement request.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     Index:
       type: object
       required:

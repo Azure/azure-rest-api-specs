@@ -996,6 +996,33 @@ model GenerateVoiceAgentRequest {
   draft?: boolean = false;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name matches the REST request contract."
+@doc("""
+  The inputs for improving a model-backed voice agent's instructions. Agents with a `hosted_agent` definition are
+  not supported. Both fields are required. `instructions` may be empty, while `requested_changes` must contain a
+  meaningful, non-whitespace change request. The service measures both limits in Unicode scalar values.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model ImproveVoiceAgentInstructionsRequest {
+  @doc("The current voice agent instructions to improve. May be empty. The maximum length is 4,096 Unicode scalar values.")
+  @maxLength(4096)
+  instructions: string;
+
+  @doc("A meaningful, non-whitespace description of the requested instruction changes. The maximum length is 4,096 Unicode scalar values.")
+  @minLength(1)
+  @maxLength(4096)
+  requested_changes: string;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name matches the REST response contract."
+@doc("The replacement instructions produced by a voice agent instruction improvement request.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model ImproveVoiceAgentInstructionsResponse {
+  @doc("The improved replacement instructions. The maximum length is 4,096 Unicode scalar values.")
+  @maxLength(4096)
+  instructions: string;
+}
+
 #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("The kind-specific inputs for generating and creating an agent.")
 @oneOf

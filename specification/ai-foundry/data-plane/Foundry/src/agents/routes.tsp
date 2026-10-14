@@ -64,6 +64,29 @@ interface Agents {
   >;
 
   /**
+   * Produces replacement instructions for the specified model-backed voice agent. Agents with a `hosted_agent`
+   * definition are rejected. This side-effect-free operation does not modify the agent's instructions, model, voice
+   * or audio settings, tools, or versions. Callers can review the response and use an existing agent update operation
+   * to persist the replacement instructions.
+   */
+  @summary("Improve voice agent instructions")
+  @post
+  @route("/agents/{agent_name}:improve-instructions")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @tag("Agents")
+  improveVoiceAgentInstructions is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent whose instructions are improved. The latest agent version is used. */
+      @path agent_name: string;
+
+      /** The current instructions and requested changes used to produce replacement instructions. */
+      @body body: ImproveVoiceAgentInstructionsRequest;
+    },
+    ImproveVoiceAgentInstructionsResponse
+  >;
+
+  /**
    * Creates a new code-based agent. Uploads the code zip and creates the agent in a single call.
    * The agent name is provided in the `x-ms-agent-name` header since POST /agents has no name in the URL path.
    * The SHA-256 hex digest of the zip is provided in the `x-ms-code-zip-sha256` header for integrity and dedup.
