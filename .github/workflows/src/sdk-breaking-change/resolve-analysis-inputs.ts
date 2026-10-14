@@ -1,4 +1,4 @@
-import { sep } from "node:path";
+import { sep } from "path";
 import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import { detectChangedSpecConfigFromChangedFiles } from "@azure-tools/spec-gen-sdk-runner";
 

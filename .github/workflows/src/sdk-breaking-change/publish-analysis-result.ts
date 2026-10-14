@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { AnalysisResultSchema, type AnalysisResult } from "./create-analysis-result.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
-import { escapeMarkdown } from "../../../shared/src/markdown.ts";
+import { escapeMarkdown, table } from "../../../shared/src/markdown.ts";
 import type { GitHubScriptArgs } from "../github.ts";
 
 export async function buildAnalysisReport(resultsPath: string): Promise<{
@@ -14,21 +14,21 @@ export async function buildAnalysisReport(resultsPath: string): Promise<{
     JSON.parse(await readFile(join(resultsPath, "sdk-breaking-change-analysis.json"), "utf8")),
   );
   const projectReports = result.projects.map((project) => {
-    const tableRows = project.breakingChanges.length
-      ? project.breakingChanges.map(
-          (change, index) =>
-            `| ${index + 1} | ${escapeMarkdown(change.breakingChange)} | ${escapeMarkdown(change.category)} | ${escapeMarkdown(change.suggestedFix)} |`,
-        )
-      : ["| - | No SDK breaking changes detected. | - | - |"];
+    const tableRows: string[][] = project.breakingChanges.length
+      ? project.breakingChanges.map((change, index) => [
+          `${index + 1}`,
+          escapeMarkdown(change.breakingChange),
+          escapeMarkdown(change.category),
+          escapeMarkdown(change.suggestedFix),
+        ])
+      : [["-", "No SDK breaking changes detected.", "-", "-"]];
 
     const projectReport = [
       `**Typespec Project:** ${project.typespecProject}`,
       "",
       `**SDK Package:** ${project.sdkPackage}`,
       "",
-      "| # | Breaking change | Category | Suggested fix |",
-      "| --- | --- | --- | --- |",
-      ...tableRows,
+      table([["#", "Breaking change", "Category", "Suggested fix"], ...tableRows]),
     ];
     projectReport.push("", `[SDK breaking change analysis details](${result.analysisWorkflowUrl})`);
     return projectReport;

@@ -2,7 +2,7 @@ import type { GitHubScriptArgs } from "../github.ts";
 import { readFile } from "node:fs/promises";
 import { type MitigationResult, MitigationResultSchema } from "./mitigate-sdk-breaking-changes.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
-import { escapeMarkdown } from "../../../shared/src/markdown.ts";
+import { escapeMarkdown, table } from "../../../shared/src/markdown.ts";
 
 const MAX_CHANGED_CODE_LENGTH = 12_000;
 
@@ -34,18 +34,19 @@ export async function buildMitigationReport({
     return { report: `⚠️ ${staleMessage}`, result };
   }
   const projectSections = result.projects.flatMap((project) => {
-    const resolvedChanges = project.breakingChanges
+    const resolvedChanges: string[][] = project.breakingChanges
       .filter((change) => change.isResolved)
-      .map(
-        (change) =>
-          `| ${escapeMarkdown(change.breakingChange)} | ${escapeMarkdown(change.suggestedFix)} | ${escapeMarkdown(change.typespecChangesSummary?.[0] as string)} |`,
-      );
-    const unresolvedChanges = project.breakingChanges
+      .map((change) => [
+        escapeMarkdown(change.breakingChange),
+        escapeMarkdown(change.suggestedFix),
+        escapeMarkdown(change.typespecChangesSummary?.[0] as string),
+      ]);
+    const unresolvedChanges: string[][] = project.breakingChanges
       .filter((change) => !change.isResolved)
-      .map(
-        (change) =>
-          `| ${escapeMarkdown(change.breakingChange)} | ${escapeMarkdown(change.suggestedFix)} |`,
-      );
+      .map((change) => [
+        escapeMarkdown(change.breakingChange),
+        escapeMarkdown(change.suggestedFix),
+      ]);
     return [
       `**TypeSpec project:** ${project.typespecProject}`,
       "",
@@ -53,19 +54,21 @@ export async function buildMitigationReport({
       "",
       "**Resolved Breaking Changes:**",
       "",
-      "| Breaking change | Resolution | TypeSpec changes |",
-      "| --- | --- | --- |",
-      ...(resolvedChanges.length
-        ? resolvedChanges
-        : ["| None | No SDK breaking changes were resolved. | - |"]),
+      table([
+        ["Breaking change", "Resolution", "TypeSpec changes"],
+        ...(resolvedChanges.length
+          ? resolvedChanges
+          : [["None", "No SDK breaking changes were resolved.", "-"]]),
+      ]),
       "",
       "**Unresolved Breaking Changes:**",
       "",
-      "| Breaking change | Suggested resolution |",
-      "| --- | --- |",
-      ...(unresolvedChanges.length
-        ? unresolvedChanges
-        : ["| None | All SDK breaking changes were resolved. |"]),
+      table([
+        ["Breaking change", "Suggested resolution"],
+        ...(unresolvedChanges.length
+          ? unresolvedChanges
+          : [["None", "All SDK breaking changes were resolved."]]),
+      ]),
       "",
     ];
   });
