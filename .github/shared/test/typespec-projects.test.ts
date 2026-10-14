@@ -3,14 +3,11 @@ import { tmpdir } from "node:os";
 import { join } from "pathe";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ConsoleLogger } from "../src/logger.ts";
-import {
-  findTypeSpecProjects,
-  findTypeSpecProjectsInChangedServices,
-} from "../src/typespec-projects.ts";
+import { findTypeSpecProjects, findChangedTypeSpecProjects } from "../src/typespec-projects.ts";
 
 vi.mock("node:fs/promises", async (importOriginal) => {
   const actual = await importOriginal<typeof import("node:fs/promises")>();
-  return { ...actual, stat: vi.fn(actual.stat) };
+  return { ...actual, readdir: vi.fn(actual.readdir), stat: vi.fn(actual.stat) };
 });
 
 let root: string;
@@ -46,7 +43,7 @@ describe("findTypeSpecProjects", () => {
   });
 });
 
-describe("findTypeSpecProjectsInChangedServices", () => {
+describe("findChangedTypeSpecProjects with service scope", () => {
   it("selects every project in affected services for nested models, shared libraries, and Swagger changes", async () => {
     const parent = await addProject("specification/first/Project");
     const nested = await addProject("specification/first/Project/models/Nested");
@@ -57,16 +54,20 @@ describe("findTypeSpecProjectsInChangedServices", () => {
     await addProject("specification/unaffected/Other");
 
     await expect(
-      findTypeSpecProjectsInChangedServices(root, [
-        "specification/third/resource-manager/stable/v1/service.json",
-        "specification/first/Project/models/model.tsp",
-        "specification/first/Project/client.tsp",
-        "specification/second/Service.Shared/model.tsp",
-        "documentation/readme.md",
-        "specification/README.md",
-        "specification-other/service/main.tsp",
-        "package.json",
-      ]),
+      findChangedTypeSpecProjects(
+        root,
+        [
+          "specification/third/resource-manager/stable/v1/service.json",
+          "specification/first/Project/models/model.tsp",
+          "specification/first/Project/client.tsp",
+          "specification/second/Service.Shared/model.tsp",
+          "documentation/readme.md",
+          "specification/README.md",
+          "specification-other/service/main.tsp",
+          "package.json",
+        ],
+        { scope: "service" },
+      ).then((projects) => [...projects.keys()]),
     ).resolves.toEqual([parent, nested, sibling, dataPlane, management, swaggerProject]);
   });
 
@@ -76,7 +77,7 @@ describe("findTypeSpecProjectsInChangedServices", () => {
     vi.spyOn(console, "debug").mockImplementation(() => {});
 
     await expect(
-      findTypeSpecProjectsInChangedServices(
+      findChangedTypeSpecProjects(
         root,
         [
           "specification/service/Deleted/models/deleted.tsp",
@@ -84,8 +85,8 @@ describe("findTypeSpecProjectsInChangedServices", () => {
           "specification/removed/Project/tspconfig.yaml",
           "specification/not-directory/main.tsp",
         ],
-        new ConsoleLogger(true),
-      ),
+        { scope: "service", logger: new ConsoleLogger(true) },
+      ).then((projects) => [...projects.keys()]),
     ).resolves.toEqual([existing]);
     expect(vi.mocked(console.debug).mock.calls).toEqual([
       ["Cannot find directory specification/not-directory"],
@@ -94,7 +95,9 @@ describe("findTypeSpecProjectsInChangedServices", () => {
   });
 
   it("returns an empty selection when no files changed", async () => {
-    await expect(findTypeSpecProjectsInChangedServices(root, [])).resolves.toEqual([]);
+    await expect(findChangedTypeSpecProjects(root, [], { scope: "service" })).resolves.toEqual(
+      new Map(),
+    );
   });
 
   it.each([
@@ -107,8 +110,101 @@ describe("findTypeSpecProjectsInChangedServices", () => {
       vi.mocked(fs.stat).mockRejectedValueOnce(error);
 
       await expect(
-        findTypeSpecProjectsInChangedServices(root, ["specification/service/Project/main.tsp"]),
+        findChangedTypeSpecProjects(root, ["specification/service/Project/main.tsp"], {
+          scope: "service",
+        }),
       ).rejects.toBe(error);
     },
   );
+});
+
+describe("findChangedTypeSpecProjects with project scope", () => {
+  it("selects only the nearest old-layout project and preserves its changed-file association", async () => {
+    await addProject("specification/service/Parent");
+    const nested = await addProject("specification/service/Parent/Nested");
+    await addProject("specification/service/Sibling");
+    await addProject("specification/service/Parent/Nested/Child");
+    const files = [
+      "specification/service/Parent/Nested/main.tsp",
+      "specification/service/Parent/Nested/client.tsp",
+    ];
+
+    await expect(findChangedTypeSpecProjects(root, files, { scope: "project" })).resolves.toEqual(
+      new Map([[nested, files]]),
+    );
+  });
+
+  it.each(["resource-manager", "data-plane"])(
+    "selects ancestor configs in the %s layout without adding sibling or descendant projects",
+    async (plane) => {
+      const parent = await addProject(`specification/service/${plane}/Parent`);
+      const nested = await addProject(`specification/service/${plane}/Parent/Nested`);
+      await addProject(`specification/service/${plane}/Sibling`);
+      await addProject(`specification/service/${plane}/Parent/Nested/Child`);
+      await fs.mkdir(join(nested, "models"));
+      const parentFile = `specification/service/${plane}/Parent/main.tsp`;
+      const nestedFile = `specification/service/${plane}/Parent/Nested/main.tsp`;
+      const modelFile = `specification/service/${plane}/Parent/Nested/models/model.tsp`;
+
+      await expect(
+        findChangedTypeSpecProjects(root, [nestedFile, modelFile, parentFile], {
+          scope: "project",
+        }),
+      ).resolves.toEqual(
+        new Map([
+          [parent, [nestedFile, modelFile, parentFile]],
+          [nested, [nestedFile, modelFile]],
+        ]),
+      );
+    },
+  );
+
+  it("does not discover projects for a service-level README or invalid config filename", async () => {
+    await addProject("specification/service/Sibling");
+    await addProject("specification/service/Invalid", "tspconfig.yml");
+    await fs.mkdir(join(root, "specification/service/Directory/tspconfig.yaml"), {
+      recursive: true,
+    });
+
+    await expect(
+      findChangedTypeSpecProjects(
+        root,
+        [
+          "specification/service/readme.md",
+          "specification/service/Invalid/main.tsp",
+          "specification/service/Directory/main.tsp",
+          "documentation/readme.md",
+        ],
+        { scope: "project" },
+      ),
+    ).resolves.toEqual(new Map());
+  });
+
+  it("reports missing directories without searching above them", async () => {
+    await addProject("specification/service/Parent");
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+
+    await expect(
+      findChangedTypeSpecProjects(root, ["specification/service/Parent/Removed/main.tsp"], {
+        scope: "project",
+      }),
+    ).resolves.toEqual(new Map());
+    expect(console.warn).toHaveBeenCalledExactlyOnceWith(
+      "Cannot find directory specification/service/Parent/Removed",
+    );
+  });
+
+  it.each([
+    Object.assign(new Error("Permission denied"), { code: "EACCES" }),
+    new Error("Unexpected filesystem failure"),
+    "Unexpected rejection",
+  ])("propagates directory-read failures: %s", async (error) => {
+    vi.mocked(fs.readdir).mockRejectedValueOnce(error);
+
+    await expect(
+      findChangedTypeSpecProjects(root, ["specification/service/Project/main.tsp"], {
+        scope: "project",
+      }),
+    ).rejects.toBe(error);
+  });
 });
