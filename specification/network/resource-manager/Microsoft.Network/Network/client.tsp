@@ -97,6 +97,20 @@ namespace Azure.ResourceManager.Models {
   }
 }
 
+// Keep the lists generated in the released C# SDK bound to their original wire fields and element types.
+@@clientName(Microsoft.Network.ExpressRouteGatewayProperties.expressRouteConnections, "ExpressRouteConnectionList", "csharp");
+@@alternateType(Common.NatGatewayPropertiesFormat.publicIpAddresses, Azure.ResourceManager.Models.WritableSubResource[], "csharp");
+@@alternateType(Common.NatGatewayPropertiesFormat.publicIpAddressesV6, Azure.ResourceManager.Models.WritableSubResource[], "csharp");
+@@alternateType(Common.NatGatewayPropertiesFormat.publicIpPrefixes, Azure.ResourceManager.Models.WritableSubResource[], "csharp");
+@@alternateType(Common.NatGatewayPropertiesFormat.publicIpPrefixesV6, Azure.ResourceManager.Models.WritableSubResource[], "csharp");
+@@alternateType(Microsoft.Network.NetworkVirtualAppliancePropertiesFormat.internetIngressPublicIps, Azure.ResourceManager.Models.WritableSubResource[], "csharp");
+// Retain the released public model and compatibility factory signatures after replacing its collection usage.
+@@usage(
+  Microsoft.Network.InternetIngressPublicIpsProperties,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
 namespace Common {
   /**
    * Common writable subresource representation used by the previous C# AutoRest projection.
