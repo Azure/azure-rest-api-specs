@@ -8,7 +8,7 @@ describe("globFiles", () => {
   let folder: string;
 
   beforeEach(async () => {
-    folder = await mkdtemp(join(tmpdir(), "specs-shared-glob-"));
+    folder = await mkdtemp(join(tmpdir(), "tsv-glob-"));
   });
 
   afterEach(async () => {
