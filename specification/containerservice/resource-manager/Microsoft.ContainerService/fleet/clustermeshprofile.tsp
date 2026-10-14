@@ -9,35 +9,35 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerService;
 
-@doc("A cluster mesh profile stores the general information about the mesh.")
+@doc("A cross-cluster networking profile stores the general information about the mesh.")
 @added(Versions.v2026_03_02_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_02_preview)
-@resource("clusterMeshProfiles")
+@resource("crossClusterNetworkingProfile")
 @parentResource(Fleet)
-model ClusterMeshProfile
-  is Azure.ResourceManager.ProxyResource<ClusterMeshProfileProperties> {
-  @doc("The name of the ClusterMeshProfile resource.")
+model CrossClusterNetworkingProfile
+  is Azure.ResourceManager.ProxyResource<CrossClusterNetworkingProfileProperties> {
+  @doc("The name of the CrossClusterNetworkProfile resource.")
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
   @maxLength(63)
   @path
-  @segment("clusterMeshProfiles")
-  @key("clusterMeshProfileName")
+  @segment("crossClusterNetworkingProfile")
+  @key("crossClusterNetworkingProfileName")
   @visibility(Lifecycle.Read)
   name: string;
 
   ...EntityTagProperty;
 }
 
-@doc("A cluster mesh profile stores the general information about the mesh.")
+@doc("A cross-cluster networking profile stores the general information about the mesh.")
 @added(Versions.v2026_03_02_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_02_preview)
-model ClusterMeshProfileProperties {
-  @doc("The provisioning state of the cluster mesh profile.")
+model CrossClusterNetworkingProfileProperties {
+  @doc("The provisioning state of the cross-cluster networking profile.")
   @visibility(Lifecycle.Read)
-  provisioningState?: ClusterMeshProfileProvisioningState;
+  provisioningState?: CrossClusterNetworkingProfileProvisioningState;
 
   @doc("""
     Select the members of the mesh.
@@ -47,62 +47,62 @@ model ClusterMeshProfileProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   memberSelector?: MemberSelector;
 
-  @doc("The cluster mesh profile status.")
+  @doc("The cross-cluster networking profile status.")
   @visibility(Lifecycle.Read)
-  status?: ClusterMeshProfileStatus;
+  status?: CrossClusterNetworkingProfileStatus;
 }
 
-@doc("The provisioning state of the cluster mesh profile resource.")
+@doc("The provisioning state of the cross-cluster networking profile resource.")
 @added(Versions.v2026_03_02_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_02_preview)
-union ClusterMeshProfileProvisioningState {
+union CrossClusterNetworkingProfileProvisioningState {
   string,
   ResourceProvisioningState,
 }
 
-@doc("Cluster mesh state.")
+@doc("Cross-cluster networking profile mesh state.")
 @added(Versions.v2026_03_02_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_02_preview)
-union ClusterMeshState {
+union CrossClusterNetworkingProfileState {
   string,
 
-  @doc("The mesh is not connected.")
+  @doc("The cross-cluster network is not connected.")
   NotConnected: "NotConnected",
 
-  @doc("The mesh is applying.")
+  @doc("The cross-cluster network is applying.")
   Applying: "Applying",
 
-  @doc("The mesh is connected.")
+  @doc("The cross-cluster network is connected.")
   Connected: "Connected",
 
-  @doc("The mesh is degraded.")
+  @doc("The cross-cluster network is degraded.")
   Degraded: "Degraded",
 
-  @doc("The mesh failed to connect.")
+  @doc("The cross-cluster network failed to connect.")
   Failed: "Failed",
 }
 
-@doc("Status of the cluster mesh.")
+@doc("Status of the cross cluster networking profile.")
 @added(Versions.v2026_03_02_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_02_preview)
-model ClusterMeshProfileStatus {
-  @doc("The state of the cluster mesh.")
+model CrossClusterNetworkingProfileStatus {
+  @doc("The state of the cross-cluster networking profile.")
   @visibility(Lifecycle.Read)
-  state: ClusterMeshState;
+  state: CrossClusterNetworkingProfileState;
 
   @visibility(Lifecycle.Read)
-  @doc("The last applied MemberSelector for the cluster mesh profile.")
+  @doc("The last applied MemberSelector for the cross-cluster networking profile.")
   lastAppliedMemberSelector?: MemberSelector;
 
   @visibility(Lifecycle.Read)
-  @doc("The last operation ID for the cluster mesh profile.")
+  @doc("The last operation ID for the cross-cluster networking profile.")
   lastOperationId?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("The last operation error of the cluster mesh profile.")
+  @doc("The last operation error of the cross-cluster networking profile.")
   lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
@@ -110,30 +110,30 @@ model ClusterMeshProfileStatus {
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_02_preview)
 @armResourceOperations
-interface ClusterMeshProfiles {
-  get is ArmResourceRead<ClusterMeshProfile>;
+interface CrossClusterNetworkingProfiles {
+  get is ArmResourceRead<CrossClusterNetworkingProfile>;
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    ClusterMeshProfile,
-    Azure.ResourceManager.Foundations.BaseParameters<ClusterMeshProfile> &
-      IfMatchParameters<ClusterMeshProfile> &
-      IfNoneMatchParameters<ClusterMeshProfile>,
+    CrossClusterNetworkingProfile,
+    Azure.ResourceManager.Foundations.BaseParameters<CrossClusterNetworkingProfile> &
+      IfMatchParameters<CrossClusterNetworkingProfile> &
+      IfNoneMatchParameters<CrossClusterNetworkingProfile>,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<
-    ClusterMeshProfile,
-    Azure.ResourceManager.Foundations.BaseParameters<ClusterMeshProfile> &
-      IfMatchParameters<ClusterMeshProfile>
+    CrossClusterNetworkingProfile,
+    Azure.ResourceManager.Foundations.BaseParameters<CrossClusterNetworkingProfile> &
+      IfMatchParameters<CrossClusterNetworkingProfile>
   >;
 
-  listByFleet is ArmResourceListByParent<ClusterMeshProfile>;
+  listByFleet is ArmResourceListByParent<CrossClusterNetworkingProfile>;
 
-  @doc("Applies the cluster mesh profile to selected fleet members.")
+  @doc("Applies the cross-cluster networking profile to selected fleet members.")
   apply is Azure.ResourceManager.ArmResourceActionAsync<
-    ClusterMeshProfile,
+    CrossClusterNetworkingProfile,
     void,
-    ClusterMeshProfile,
-    BaseParameters<ClusterMeshProfile> & IfMatchParameters<ClusterMeshProfile>
+    CrossClusterNetworkingProfile,
+    BaseParameters<CrossClusterNetworkingProfile> & IfMatchParameters<CrossClusterNetworkingProfile>
   >;
 }
