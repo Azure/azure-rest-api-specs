@@ -2,11 +2,13 @@
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { test } from "node:test";
+import { fileURLToPath } from "node:url";
 import { compile, NodeHost } from "@typespec/compiler";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 
 const project = new URL("../", import.meta.url);
-const version = "2026-09-15-preview";
+const projectPath = fileURLToPath(project);
+const version = "2026-11-15-preview";
 const swagger = JSON.parse(
   readFileSync(
     new URL(`preview/${version}/cognitiveservices.json`, project),
@@ -18,6 +20,53 @@ const route = Object.values(swagger.paths).find(
   (operations) => operations.put?.operationId === "CostControls_CreateOrUpdate",
 );
 const examples = new URL(`examples/${version}/CostControl/`, project);
+
+test("Cost Control stays preview-only across the November versions", () => {
+  const previousPreview = JSON.parse(
+    readFileSync(
+      new URL("preview/2026-09-15-preview/cognitiveservices.json", project),
+      "utf8",
+    ),
+  );
+  const stable = JSON.parse(
+    readFileSync(
+      new URL("stable/2026-11-01/cognitiveservices.json", project),
+      "utf8",
+    ),
+  );
+  const path =
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/costControls/{costControlName}";
+
+  assert(previousPreview.paths[path]);
+  assert(swagger.paths[path]);
+  assert.equal(Object.hasOwn(stable.paths, path), false);
+  assert.equal(Object.hasOwn(stable.definitions, "CostControl"), false);
+  assert.equal(
+    Object.hasOwn(
+      stable.definitions.AccountProperties.properties,
+      "costControlIds",
+    ),
+    false,
+  );
+  assert.equal(
+    Object.hasOwn(
+      stable.definitions.AccountProperties.properties,
+      "costControlConnections",
+    ),
+    false,
+  );
+});
+
+test("account and deployment scopes allow five direct attachments", () => {
+  assert.equal(
+    definitions.AccountProperties.properties.costControlIds.maxItems,
+    5,
+  );
+  assert.equal(
+    definitions.DeploymentProperties.properties.costControlIds.maxItems,
+    5,
+  );
+});
 
 test("canonical counterKey is one object, not the former plural array", () => {
   const rule = definitions.CostControlRule;
@@ -248,10 +297,14 @@ test("canonical authoring examples and legacy metadata updates are coherent", ()
 
 test("both entrypoints expose only the scoped backend updates in SDK model graphs", async () => {
   for (const entry of ["main.tsp", "client.tsp"]) {
-    const program = await compile(NodeHost, new URL(entry, project).pathname, {
-      noEmit: true,
-      warningAsError: true,
-    });
+    const program = await compile(
+      NodeHost,
+      fileURLToPath(new URL(entry, project)),
+      {
+        noEmit: true,
+        warningAsError: true,
+      },
+    );
     assert(!program.hasError(), entry);
     for (const emitter of [
       "@azure-tools/typespec-csharp",
@@ -260,7 +313,7 @@ test("both entrypoints expose only the scoped backend updates in SDK model graph
       const context = await createSdkContext(
         {
           program,
-          emitterOutputDir: project.pathname,
+          emitterOutputDir: projectPath,
           options: { "api-version": version },
         },
         emitter,

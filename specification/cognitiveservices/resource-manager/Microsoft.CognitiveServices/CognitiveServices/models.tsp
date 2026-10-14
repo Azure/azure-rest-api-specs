@@ -2095,10 +2095,12 @@ model AccountProperties {
 
   /**
    * The full resource IDs of cost controls directly attached to this account.
-   * At the moment the service only supports a single cost control. This will be expanded in future API versions.
+   * The service supports up to five directly attached cost controls.
    */
   @added(Versions.v2026_09_15_preview)
-  @maxItems(1)
+  @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_15_preview)
+  @maxItems(5)
   costControlIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.CognitiveServices/accounts/costControls";
@@ -2110,6 +2112,8 @@ model AccountProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted costControlConnections object from an explicit null in PATCH so callers can clear the value."
   @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Update)
   costControlConnections?: CostControlConnections | null;
 }
@@ -3769,10 +3773,10 @@ model DeploymentProperties {
 
   /**
    * The full resource IDs of cost controls directly attached to this deployment.
-   * At the moment the service only supports a single cost control. This will be expanded in future API versions.
+   * The service supports up to five directly attached cost controls.
    */
   @added(Versions.v2026_09_15_preview)
-  @maxItems(1)
+  @maxItems(5)
   costControlIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.CognitiveServices/accounts/costControls";
