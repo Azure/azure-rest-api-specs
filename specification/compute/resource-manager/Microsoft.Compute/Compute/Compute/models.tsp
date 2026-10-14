@@ -9884,15 +9884,6 @@ model VirtualMachineRunCommandProperties {
   asyncExecution?: boolean;
 
   /**
-   * Specifies whether the Run Command should be executed again even if the
-   * script source and settings have not changed. When set to true, the
-   * underlying Run Command execution sequence number is incremented.
-   */
-  @added(Versions.v2026_09_01)
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  forceRerun?: boolean;
-
-  /**
    * Specifies whether the Run Command is executed in Windows Recovery
    * Environment (WinRE). Recovery Run Commands use the recovery execution
    * path instead of the standard VM Run Command execution path.
