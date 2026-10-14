@@ -1,0 +1,92 @@
+{
+  "title": "Create a Windows VM with recovery enabled and versioned gallery-script remediations",
+  "operationId": "VirtualMachines_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "api-version": "2026-09-01",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_D4s_v3"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer",
+            "sku": "2025-datacenter-azure-edition",
+            "version": "latest"
+          },
+          "osDisk": {
+            "createOption": "FromImage",
+            "managedDisk": {
+              "storageAccountType": "Premium_LRS"
+            }
+          }
+        },
+        "osProfile": {
+          "computerName": "myVM",
+          "adminUsername": "{your-username}",
+          "adminPassword": "{your-password}",
+          "windowsConfiguration": {
+            "provisionVMAgent": true
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/myNic"
+            }
+          ]
+        },
+        "recoveryProfile": {
+          "enableWindowsRecovery": true,
+          "wellKnownGalleryScriptRemediations": [
+            "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairBoot/versions/1.0.0",
+            "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairNetwork/versions/1.0.0"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "name": "myVM",
+        "type": "Microsoft.Compute/virtualMachines",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "recoveryProfile": {
+            "enableWindowsRecovery": true,
+            "wellKnownGalleryScriptRemediations": [
+              "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairBoot/versions/1.0.0",
+              "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairNetwork/versions/1.0.0"
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "name": "myVM",
+        "type": "Microsoft.Compute/virtualMachines",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Creating",
+          "recoveryProfile": {
+            "enableWindowsRecovery": true,
+            "wellKnownGalleryScriptRemediations": [
+              "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairBoot/versions/1.0.0",
+              "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairNetwork/versions/1.0.0"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
