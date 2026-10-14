@@ -53,6 +53,26 @@ suppressions:
       - $.definitions.AiGatewayToolServerResource
       - $.definitions.AiGatewayWorkspaceResource
     reason: The current AI Gateway service contract uses name as the display-name wire property and type as the tool-server-kind wire property inside the resource properties bag. Renaming these fields would diverge from the implemented contract.
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.AiGatewayCostLimitOverride.properties.claims
+      - $.definitions.AiGatewayCostLimitOverrideUpdate.properties.claims
+    reason: Existing functionality with heavy usage relies on the current Dictionary<string, string> contract for arbitrary authenticated token claim names and expected values. Changing claims from a JSON object to an array would break existing customer integrations. Preserve the current contract; exception approval is required.
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.AiGatewayAgentHook.properties.headers
+      - $.definitions.AiGatewayAgentHookUpdate.properties.headers
+      - $.definitions.AiGatewayPolicy.properties.headers
+      - $.definitions.AiGatewayPolicyUpdate.properties.headers
+    reason: Existing functionality with heavy usage relies on the current Dictionary<string, string> contract for literal non-secret HTTP headers at policy and per-hook scope. Changing headers from a JSON object to an array would break existing customer integrations. Preserve the current contract and header inheritance behavior; exception approval is required.
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.AiGatewayTelemetryCredentials.properties.headers
+      - $.definitions.AiGatewayOpenTelemetryConfiguration.properties.headers
+    reason: Existing functionality with heavy usage relies on the current IDictionary<string, string> contract for secret HTTP headers in nested and legacy OpenTelemetry authentication settings. Changing headers from a JSON object to an array would break existing customer integrations. Preserve the current contract and secret annotations; exception approval is required.
   - code: EnumInsteadOfBoolean
     from: openapi.json
     where:
@@ -94,5 +114,5 @@ suppressions:
     where:
       - $.definitions.AiGatewayPolicy.properties.counterKey
       - $.definitions.AiGatewayPolicyUpdate.properties.counterKey
-    reason: counterKey selects the public request attribute used to partition a rate limit counter; it is not a credential or secret value.
+    reason: False positive - counterKey contains public dimension selectors such as identity and ipAddress, not credentials or secret values. These selectors partition token, cost, or request counters. The property name does not imply secret content, so it must remain readable in responses.
 ```

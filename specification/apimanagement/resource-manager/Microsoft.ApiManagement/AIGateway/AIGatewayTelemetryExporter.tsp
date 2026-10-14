@@ -31,24 +31,13 @@ model AiGatewayTelemetryManagedIdentity {
   clientId?: string;
 }
 
-/** A secret HTTP header sent with telemetry export requests. */
-@added(Versions.v2026_10_01_preview)
-model AiGatewayTelemetryHeader {
-  /** HTTP header name. */
-  name: string;
-
-  /** Secret HTTP header value. */
-  @secret
-  value: string;
-}
-
 /** Authentication settings for an OpenTelemetry exporter. */
 @added(Versions.v2026_10_01_preview)
 model AiGatewayTelemetryCredentials {
   /** Secret HTTP headers sent with export requests. */
-  @identifiers(#["name"])
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for secret telemetry headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
   @secret
-  headers?: AiGatewayTelemetryHeader[];
+  headers?: Record<string>;
 
   /** Managed identity authentication for export requests. */
   managedIdentity?: AiGatewayTelemetryManagedIdentity;
@@ -67,9 +56,9 @@ model AiGatewayOpenTelemetryConfiguration {
   tracesEndpoint?: url;
 
   /** Legacy secret HTTP headers, mutually exclusive with credentials. */
-  @identifiers(#["name"])
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for secret telemetry headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
   @secret
-  headers?: AiGatewayTelemetryHeader[];
+  headers?: Record<string>;
 
   /** Legacy managed identity settings, mutually exclusive with credentials. */
   managedIdentity?: AiGatewayTelemetryManagedIdentity;

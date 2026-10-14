@@ -134,22 +134,12 @@ union AiGatewayCounterDimension {
   IpAddress: "ipAddress",
 }
 
-/** An authenticated token claim and its expected value. */
-@added(Versions.v2026_10_01_preview)
-model AiGatewayClaimSelector {
-  /** Case-sensitive claim name. */
-  name: string;
-
-  /** Expected claim value. */
-  value: string;
-}
-
 /** An ordered cost-budget override; exactly one selector must be specified. */
 @added(Versions.v2026_10_01_preview)
 model AiGatewayCostLimitOverride {
-  /** Authenticated token claims that must all match; claim names must be unique. */
-  @identifiers(#["name"])
-  claims?: AiGatewayClaimSelector[];
+  /** Authenticated token claims that must all match; dictionary keys are case-sensitive claim names. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for token claims. Changing its JSON object shape would break existing customer integrations; exception approval is required."
+  claims?: Record<string>;
 
   /** Azure resource identifier of the API key selecting this override. */
   apiKeyResourceId?: string;
@@ -229,16 +219,6 @@ model AiGatewayAgentHookAuthorizationUpdate {
   audience?: url;
 }
 
-/** A literal, non-secret HTTP header sent to an agent hook. */
-@added(Versions.v2026_10_01_preview)
-model AiGatewayAgentHookHeader {
-  /** HTTP header name. */
-  name: string;
-
-  /** Non-secret HTTP header value, returned by read operations. */
-  value: string;
-}
-
 /** External hook settings; omitted fields inherit policy-level settings. */
 @added(Versions.v2026_10_01_preview)
 model AiGatewayAgentHook {
@@ -249,8 +229,8 @@ model AiGatewayAgentHook {
   authorization?: AiGatewayAgentHookAuthorization;
 
   /** Literal, non-secret HTTP headers, returned by read operations. */
-  @identifiers(#["name"])
-  headers?: AiGatewayAgentHookHeader[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for literal non-secret HTTP headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
+  headers?: Record<string>;
 }
 
 /** External hook settings to update. */
@@ -263,8 +243,8 @@ model AiGatewayAgentHookUpdate {
   authorization?: AiGatewayAgentHookAuthorizationUpdate;
 
   /** Literal, non-secret HTTP headers. */
-  @identifiers(#["name"])
-  headers?: AiGatewayAgentHookHeader[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for literal non-secret HTTP headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
+  headers?: Record<string>;
 }
 
 /** Lifecycle hooks supported on tool servers. */
@@ -337,7 +317,7 @@ model AiGatewayPolicy {
   period?: AiGatewayPolicyPeriod;
 
   /** Unique public dimensions used to partition a token, cost, or request counter. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The counter key selects a public request attribute and is not a credential."
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "False positive: counterKey contains public dimension selectors such as identity and ipAddress, not credentials or secret values. These selectors partition token, cost, or request counters."
   counterKey?: AiGatewayCounterDimension[];
 
   /** Cost budget in US dollars. */
@@ -361,8 +341,8 @@ model AiGatewayPolicy {
   authorization?: AiGatewayAgentHookAuthorization;
 
   /** Literal non-secret default HTTP headers for agent hooks. */
-  @identifiers(#["name"])
-  headers?: AiGatewayAgentHookHeader[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for literal non-secret HTTP headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
+  headers?: Record<string>;
 
   /** Lifecycle hooks; requires agent-hook authoring to be enabled on the gateway. */
   hooks?: AiGatewayAgentHooks;
@@ -444,7 +424,7 @@ model AiGatewayPolicyUpdate {
   period?: AiGatewayPolicyPeriod;
 
   /** Public dimensions used to partition a token, cost, or request counter. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The counter key selects a public request attribute and is not a credential."
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "False positive: counterKey contains public dimension selectors such as identity and ipAddress, not credentials or secret values. These selectors partition token, cost, or request counters."
   counterKey?: AiGatewayCounterDimension[];
 
   /** Cost budget in US dollars. */
@@ -468,8 +448,8 @@ model AiGatewayPolicyUpdate {
   authorization?: AiGatewayAgentHookAuthorizationUpdate;
 
   /** Literal non-secret default HTTP headers for agent hooks. */
-  @identifiers(#["name"])
-  headers?: AiGatewayAgentHookHeader[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for literal non-secret HTTP headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
+  headers?: Record<string>;
 
   /** Lifecycle hooks to update. */
   hooks?: AiGatewayAgentHooksUpdate;

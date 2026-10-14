@@ -3545,14 +3545,11 @@
           "description": "Hook authorization settings."
         },
         "headers": {
-          "type": "array",
+          "type": "object",
           "description": "Literal, non-secret HTTP headers, returned by read operations.",
-          "items": {
-            "$ref": "#/definitions/AiGatewayAgentHookHeader"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3620,24 +3617,6 @@
           "description": "Token audience URI."
         }
       }
-    },
-    "AiGatewayAgentHookHeader": {
-      "type": "object",
-      "description": "A literal, non-secret HTTP header sent to an agent hook.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "HTTP header name."
-        },
-        "value": {
-          "type": "string",
-          "description": "Non-secret HTTP header value, returned by read operations."
-        }
-      },
-      "required": [
-        "name",
-        "value"
-      ]
     },
     "AiGatewayAgentHookIdentity": {
       "type": "object",
@@ -3708,14 +3687,11 @@
           "description": "Hook authorization settings."
         },
         "headers": {
-          "type": "array",
+          "type": "object",
           "description": "Literal, non-secret HTTP headers.",
-          "items": {
-            "$ref": "#/definitions/AiGatewayAgentHookHeader"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4227,24 +4203,6 @@
         "nameAvailable"
       ]
     },
-    "AiGatewayClaimSelector": {
-      "type": "object",
-      "description": "An authenticated token claim and its expected value.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Case-sensitive claim name."
-        },
-        "value": {
-          "type": "string",
-          "description": "Expected claim value."
-        }
-      },
-      "required": [
-        "name",
-        "value"
-      ]
-    },
     "AiGatewayContentSafetySeverity": {
       "type": "string",
       "description": "Severity threshold used by a content safety policy.",
@@ -4286,14 +4244,11 @@
       "description": "An ordered cost-budget override; exactly one selector must be specified.",
       "properties": {
         "claims": {
-          "type": "array",
-          "description": "Authenticated token claims that must all match; claim names must be unique.",
-          "items": {
-            "$ref": "#/definitions/AiGatewayClaimSelector"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "type": "object",
+          "description": "Authenticated token claims that must all match; dictionary keys are case-sensitive claim names.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "apiKeyResourceId": {
           "type": "string",
@@ -4314,14 +4269,11 @@
       "description": "An ordered cost-budget override to update.",
       "properties": {
         "claims": {
-          "type": "array",
-          "description": "Authenticated token claims that must all match; claim names must be unique.",
-          "items": {
-            "$ref": "#/definitions/AiGatewayClaimSelector"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "type": "object",
+          "description": "Authenticated token claims that must all match; dictionary keys are case-sensitive claim names.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "apiKeyResourceId": {
           "type": "string",
@@ -5153,15 +5105,12 @@
           "description": "Full OTLP traces endpoint URL, used without appending a signal path."
         },
         "headers": {
-          "type": "array",
+          "type": "object",
           "format": "password",
           "description": "Legacy secret HTTP headers, mutually exclusive with credentials.",
-          "items": {
-            "$ref": "#/definitions/AiGatewayTelemetryHeader"
+          "additionalProperties": {
+            "type": "string"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "x-ms-secret": true
         },
         "managedIdentity": {
@@ -5238,14 +5187,11 @@
           "description": "Default authorization for agent hooks."
         },
         "headers": {
-          "type": "array",
+          "type": "object",
           "description": "Literal non-secret default HTTP headers for agent hooks.",
-          "items": {
-            "$ref": "#/definitions/AiGatewayAgentHookHeader"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "hooks": {
           "$ref": "#/definitions/AiGatewayAgentHooks",
@@ -5557,14 +5503,11 @@
           "description": "Default authorization for agent hooks."
         },
         "headers": {
-          "type": "array",
+          "type": "object",
           "description": "Literal non-secret default HTTP headers for agent hooks.",
-          "items": {
-            "$ref": "#/definitions/AiGatewayAgentHookHeader"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "hooks": {
           "$ref": "#/definitions/AiGatewayAgentHooksUpdate",
@@ -5952,15 +5895,12 @@
       "description": "Authentication settings for an OpenTelemetry exporter.",
       "properties": {
         "headers": {
-          "type": "array",
+          "type": "object",
           "format": "password",
           "description": "Secret HTTP headers sent with export requests.",
-          "items": {
-            "$ref": "#/definitions/AiGatewayTelemetryHeader"
+          "additionalProperties": {
+            "type": "string"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "x-ms-secret": true
         },
         "managedIdentity": {
@@ -6104,26 +6044,6 @@
           "description": "Observed-claim mappings to update."
         }
       }
-    },
-    "AiGatewayTelemetryHeader": {
-      "type": "object",
-      "description": "A secret HTTP header sent with telemetry export requests.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "HTTP header name."
-        },
-        "value": {
-          "type": "string",
-          "format": "password",
-          "description": "Secret HTTP header value.",
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "name",
-        "value"
-      ]
     },
     "AiGatewayTelemetryManagedIdentity": {
       "type": "object",
