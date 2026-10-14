@@ -499,6 +499,47 @@ describe("update labels", () => {
       expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
     },
   );
+
+  it.each([
+    { targetBranch: "release-network-2025-03-01", requiresReview: true },
+    { targetBranch: "ARMCoreRPDev", requiresReview: true },
+    { targetBranch: "feature/release-network-2025-03-01", requiresReview: false },
+    { targetBranch: "feature/main", requiresReview: false },
+    { targetBranch: "RPSaaSMaster-feature", requiresReview: false },
+    { targetBranch: "ARMCoreRPDev-feature", requiresReview: false },
+    // cspell:ignore releas
+    { targetBranch: "releas", requiresReview: false },
+  ])(
+    "only adds review labels for release branches: $targetBranch",
+    ({ targetBranch, requiresReview }) => {
+      const labelContext = updateLabels([], {
+        ...testCases[0].impactAssessment,
+        isNewApiVersion: true,
+        targetBranch,
+      });
+
+      expect([...labelContext.toAdd].sort()).toEqual(
+        (requiresReview
+          ? ["ARMReview", "TypeSpec", "WaitForARMFeedback", "new-api-version", "resource-manager"]
+          : ["TypeSpec", "resource-manager"]
+        ).sort(),
+      );
+      expect([...labelContext.toRemove]).toEqual([]);
+    },
+  );
+
+  it("does not request data-plane review for a feature branch containing a release name", () => {
+    const labelContext = updateLabels([], {
+      ...testCases[0].impactAssessment,
+      resourceManagerRequired: false,
+      dataPlaneRequired: true,
+      isNewApiVersion: true,
+      targetBranch: "feature/release-network-2025-03-01",
+    });
+
+    expect([...labelContext.toAdd].sort()).toEqual(["TypeSpec", "data-plane"]);
+    expect([...labelContext.toRemove]).toEqual([]);
+  });
 });
 
 describe("ARM review process labelling", () => {
