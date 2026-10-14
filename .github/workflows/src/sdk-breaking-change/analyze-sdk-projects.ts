@@ -2,7 +2,18 @@ import { appendFile, mkdir, realpath, rename, writeFile } from "node:fs/promises
 import { basename, dirname, isAbsolute, join, relative, sep } from "node:path";
 import { execFile } from "../../../shared/src/exec.ts";
 import { SdkLanguage } from "./resolve-analysis-inputs.ts";
-import { generateTypeSpecMetadata } from "../../../shared/src/typespec-metadata.ts";
+import {
+  generateTypeSpecMetadata,
+  type TypeSpecMetadata,
+} from "../../../shared/src/typespec-metadata.ts";
+import {
+  parseAzsdkResponse,
+  resolveLanguageKey,
+  resolvePackagePath,
+  type AzsdkBuildResponse,
+  type AzsdkDetectBreakingChangeResponse,
+  type AzsdkGenerateResponse,
+} from "../../../../eng/tools/spec-gen-sdk-runner/src/index.ts";
 
 interface ProjectResult {
   typespecProjectPath: string;
@@ -16,25 +27,12 @@ export interface AnalyzeSdkProjectsOptions {
   typeSpecConfigPaths: string[];
   pullNumber: number;
   sdkLanguage: string;
+  sdkRepoName: string;
   analyzedSha: string;
   workflowUrl: string;
   resultDir: string;
   azureSdkCliPath: string;
 }
-
-/**
- * Mapping from SDK language identifiers to TypeSpec metadata language keys.
- */
-const Lang_METADATA_LANG_MAP: Record<string, string> = {
-  dotnet: "csharp",
-  ".net": "csharp",
-  java: "java",
-  python: "python",
-  typescript: "typescript",
-  js: "typescript",
-  javascript: "typescript",
-  go: "go",
-};
 
 function isWithin(parent: string, child: string): boolean {
   const path = relative(parent, child);
@@ -47,6 +45,7 @@ export async function analyzeSdkProjects({
   typeSpecConfigPaths,
   pullNumber,
   sdkLanguage,
+  sdkRepoName,
   analyzedSha,
   workflowUrl,
   resultDir,
@@ -89,12 +88,24 @@ export async function analyzeSdkProjects({
         "--output",
         "json",
       ]);
+      const generateResponse: AzsdkGenerateResponse =
+        parseAzsdkResponse<AzsdkGenerateResponse>(stdout);
+      if (generateResponse.result !== "succeeded") {
+        throw new Error(
+          `Failed to generate SDK for ${typeSpecProjectPath}: ${generateResponse.response_error ?? "Unknown error"}`,
+        );
+      }
       await writeFile(generationResult, stdout);
 
-      const metadata = await generateTypeSpecMetadata(dirname(configPath));
+      const metadata: TypeSpecMetadata = await generateTypeSpecMetadata(dirname(configPath));
       console.log(`Metadata for ${typeSpecProjectPath}:`, metadata);
-      const languageMetadata =
-        metadata.languages[Lang_METADATA_LANG_MAP[sdkLanguage.toLowerCase()]];
+      const languageKey = resolveLanguageKey(sdkRepoName, metadata.languages);
+      if (!languageKey) {
+        throw new Error(
+          `Expected language key for ${typeSpecProjectPath} and SDK repo ${sdkRepoName}, but none was found.`,
+        );
+      }
+      const languageMetadata = metadata.languages[languageKey];
       if (!languageMetadata || languageMetadata.length === 0) {
         throw new Error(
           `Expected language metadata for ${typeSpecProjectPath} and language ${sdkLanguage}, but none was found.`,
@@ -106,7 +117,7 @@ export async function analyzeSdkProjects({
           `Expected output directory for ${typeSpecProjectPath} and language ${sdkLanguage}, but none was found.`,
         );
       }
-      packagePath = packagePath.replace("{output-dir}", localSdkRepositoryPath);
+      packagePath = resolvePackagePath(packagePath, localSdkRepositoryPath);
 
       if (!isWithin(localSdkRepositoryPath, packagePath)) {
         throw new Error(`Invalid generated package path: ${packagePath}`);
@@ -130,7 +141,13 @@ export async function analyzeSdkProjects({
         }
 
         const { stdout: buildStdout } = await execFile(azureSdkCli, buildArgs);
-        await writeFile(join(projectResults, "build.json"), buildStdout);
+        const buildResponse: AzsdkBuildResponse = parseAzsdkResponse(buildStdout);
+        if (buildResponse.result !== "succeeded") {
+          throw new Error(
+            `Failed to build SDK for ${typeSpecProjectPath}: ${buildResponse.response_error ?? "Unknown error"}`,
+          );
+        }
+        await writeFile(join(projectResults, "build.json"), `${JSON.stringify(buildResponse)}\n`);
       }
 
       /* Detect breaking changes */
@@ -144,7 +161,26 @@ export async function analyzeSdkProjects({
         "--output",
         "json",
       ]);
-      await writeFile(join(projectResults, "breaking-changes.json"), breakingChangesStdout);
+      console.log("breakingChangesStdout: " + breakingChangesStdout);
+      const breakingChangesResponse: AzsdkDetectBreakingChangeResponse =
+        parseAzsdkResponse(breakingChangesStdout);
+      if (
+        typeof breakingChangesResponse.result !== "object" ||
+        breakingChangesResponse.response_error ||
+        breakingChangesResponse.response_errors?.length
+      ) {
+        throw new Error(
+          `Failed to detect breaking changes for ${typeSpecProjectPath}: ${
+            breakingChangesResponse.response_error ??
+            breakingChangesResponse.response_errors?.join("; ") ??
+            "Unknown error"
+          }`,
+        );
+      }
+      await writeFile(
+        join(projectResults, "breaking-changes.json"),
+        `${JSON.stringify(breakingChangesResponse)}\n`,
+      );
 
       projects.push({ typespecProjectPath: typeSpecProjectPath, packageName, resultsPath });
       await writeFile(join(resultsDirectory, "projects.json"), `${JSON.stringify(projects)}\n`);

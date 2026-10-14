@@ -21,7 +21,7 @@ export interface TypeSpecMetadata {
 
 export interface LanguageMetadata {
   emitterName: string;
-  packageName: string;
+  packageName?: string;
   namespace?: string;
   outputDir?: string;
   flavor?: string;
@@ -51,7 +51,7 @@ const SDK_REPO_TO_LANGUAGE_KEY: Record<string, string[]> = {
  * Resolves the language key from the SDK repo name by checking which key
  * exists in the typespec-metadata output.
  */
-function resolveLanguageKey(
+export function resolveLanguageKey(
   sdkRepoName: string,
   languages: Record<string, LanguageMetadata[]>,
 ): string | undefined {

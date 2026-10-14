@@ -9,6 +9,16 @@ import {
 import { getArgumentValue } from "./utils.ts";
 
 export { detectChangedSpecConfigFromChangedFiles } from "./spec-helpers.ts";
+export {
+  type AzsdkBreakingChangeResult,
+  type AzsdkBuildResponse,
+  type AzsdkDetectBreakingChangeResponse,
+  type AzsdkGenerateResponse,
+  parseAzsdkResponse,
+} from "./azsdk-adapter.ts";
+
+export { resolvePackagePath } from "./command-helpers.ts";
+export { resolveLanguageKey } from "./emitter-check.ts";
 
 export async function main() {
   // Get the arguments passed to the script

@@ -1,4 +1,4 @@
-import { sep } from "node:path";
+import { isFullGitSha } from "@azure-tools/specs-shared/git";
 import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import { detectChangedSpecConfigFromChangedFiles } from "@azure-tools/spec-gen-sdk-runner";
 
@@ -190,10 +190,6 @@ export function validateAnalysisSource({
   }
 }
 
-function toPosixPath(path: string): string {
-  return path.split(sep).join("/");
-}
-
 export async function resolveChangedTypeSpecConfigPathsFromPullRequest({
   github,
   context,
@@ -212,7 +208,7 @@ export async function resolveChangedTypeSpecConfigPathsFromPullRequest({
     pull_number: pullNumber,
   });
   const headSha = pull.head.sha;
-  if (!headSha || !/^[0-9a-f]{40}$/i.test(headSha)) {
+  if (!headSha || !isFullGitSha(headSha)) {
     throw new Error(`Invalid HEAD_SHA: ${headSha}`);
   }
 
@@ -232,7 +228,6 @@ export async function resolveChangedTypeSpecConfigPathsFromPullRequest({
   const sortedConfigPaths = configPaths
     .map((config) => config.typespecProject)
     .filter((path): path is string => path !== undefined)
-    .map(toPosixPath)
     .sort();
   core.setOutput("tsp-config-paths", JSON.stringify(sortedConfigPaths));
   return sortedConfigPaths;

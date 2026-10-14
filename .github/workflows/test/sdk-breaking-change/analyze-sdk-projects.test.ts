@@ -51,7 +51,31 @@ beforeEach(async () => {
 
   execFileMock.mockImplementation((_file, args = []) => {
     const operation = args[1];
-    return Promise.resolve({ stdout: `${JSON.stringify({ operation })}\n`, stderr: "" });
+    const response =
+      operation === "generate"
+        ? {
+            result: "succeeded",
+            package_name: "armwidget",
+            language: "Go",
+            version: "1.0.0",
+            package_type: "mgmt",
+            typespec_project: "specification/service/Widget.Service",
+            sdk_repo: "azure-sdk-for-go",
+            operation_status: "Succeeded",
+          }
+        : operation === "build"
+          ? {
+              result: "succeeded",
+              package_name: "armwidget",
+              language: "Go",
+            }
+          : {
+              result: {
+                hasBreakingChange: false,
+                breakingChanges: [],
+              },
+            };
+    return Promise.resolve({ stdout: `${JSON.stringify(response)}\n`, stderr: "" });
   });
 });
 
@@ -68,6 +92,7 @@ describe("analyzeSdkProjects", () => {
       typeSpecConfigPaths: ["specification/service/Widget.Service/tspconfig.yaml"],
       pullNumber: 42,
       sdkLanguage: "Go",
+      sdkRepoName: "azure-sdk-for-go",
       analyzedSha: "a".repeat(40),
       workflowUrl: "https://github.com/owner/repo/actions/runs/123",
       resultDir: temporaryDirectory,
@@ -83,13 +108,13 @@ describe("analyzeSdkProjects", () => {
     );
     await expect(
       readFile(join(resultsPath, "armwidget", "generate.json"), "utf8"),
-    ).resolves.toContain('"operation":"generate"');
+    ).resolves.toContain('"result":"succeeded"');
     await expect(readFile(join(resultsPath, "armwidget", "build.json"), "utf8")).resolves.toContain(
-      '"operation":"build"',
+      '"result":"succeeded"',
     );
     await expect(
       readFile(join(resultsPath, "armwidget", "breaking-changes.json"), "utf8"),
-    ).resolves.toContain('"operation":"detect-breaking-change"');
+    ).resolves.toContain('"breakingChanges":[]');
     await expect(readFile(join(resultsPath, "analysis.log"), "utf8")).resolves.toBe("");
     expect(execFileMock).toHaveBeenCalledTimes(3);
     const azureSdkCli = join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk");
@@ -126,6 +151,7 @@ describe("analyzeSdkProjects", () => {
       typeSpecConfigPaths: ["specification/service/Widget.Service/tspconfig.yaml"],
       pullNumber: 42,
       sdkLanguage: "Go",
+      sdkRepoName: "azure-sdk-for-go",
       analyzedSha: "a".repeat(40),
       workflowUrl: "https://github.com/owner/repo/actions/runs/123",
       resultDir: temporaryDirectory,
@@ -133,11 +159,11 @@ describe("analyzeSdkProjects", () => {
     });
 
     await expect(result).rejects.toThrow(
-      "Expected language metadata for specification/service/Widget.Service and language Go",
+      "Expected language key for specification/service/Widget.Service and SDK repo azure-sdk-for-go",
     );
     await expect(
       readFile(join(temporaryDirectory, "sdk-breaking-change-results", "error.log"), "utf8"),
-    ).resolves.toContain("Expected language metadata");
+    ).resolves.toContain("Expected language key");
   });
 
   it("rejects language metadata without an output directory", async () => {
@@ -160,6 +186,7 @@ describe("analyzeSdkProjects", () => {
         typeSpecConfigPaths: ["specification/service/Widget.Service/tspconfig.yaml"],
         pullNumber: 42,
         sdkLanguage: "Go",
+        sdkRepoName: "azure-sdk-for-go",
         analyzedSha: "a".repeat(40),
         workflowUrl: "https://github.com/owner/repo/actions/runs/123",
         resultDir: temporaryDirectory,

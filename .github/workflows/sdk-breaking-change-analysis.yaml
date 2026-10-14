@@ -54,15 +54,17 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-analysis-inputs.ts');
             await resolveAnalysisTrigger({ github, context, core }, "${{ github.workspace }}/repositories/azure-rest-api-specs");
       - name: Checkout specification PR head
+        if: steps.resolve.outputs.should-run == 'true'
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: ${{ github.repository }}
           # resolve-trigger restricts this to the current SHA of a branch in this repository.
           # codeql[actions/untrusted-checkout/critical]
-          ref: refs/pull/${{ steps.resolve.outputs.pr-number }}/merge
+          ref: ${{ steps.resolve.outputs.head-sha }}
           path: repositories/azure-rest-api-specs
           persist-credentials: false
       - name: Resolve changed TypeSpec config paths
+        if: steps.resolve.outputs.should-run == 'true'
         id: resolve-tsp-config-paths
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
@@ -130,7 +132,7 @@ jobs:
           repository: ${{ github.repository }}
           # resolve-trigger restricts this to the current SHA of a branch in this repository.
           # codeql[actions/untrusted-checkout/critical]
-          ref: refs/pull/${{ needs.resolve.outputs.pr-number }}/merge
+          ref: ${{ needs.resolve.outputs.head-sha }}
           path: repositories/azure-rest-api-specs
           persist-credentials: false
 
@@ -233,6 +235,7 @@ jobs:
           TYPESPEC_CONFIG_PATHS: ${{ needs.resolve.outputs.tsp-config-paths }}
           PR_NUMBER: ${{ needs.resolve.outputs.pr-number }}
           SDK_LANGUAGE: ${{ needs.resolve.outputs.sdk-language }}
+          SDK_REPO_NAME: ${{ needs.resolve.outputs.sdk-repository }}
           ANALYZED_SHA: ${{ needs.resolve.outputs.head-sha }}
           WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         with:
@@ -245,6 +248,7 @@ jobs:
               typeSpecConfigPaths: JSON.parse(process.env.TYPESPEC_CONFIG_PATHS),
               pullNumber: Number(process.env.PR_NUMBER),
               sdkLanguage: process.env.SDK_LANGUAGE,
+              sdkRepoName: process.env.SDK_REPO_NAME,
               analyzedSha: process.env.ANALYZED_SHA,
               workflowUrl: process.env.WORKFLOW_URL,
               resultDir: process.env.RUNNER_TEMP,

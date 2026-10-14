@@ -3,6 +3,18 @@ import { dirname, isAbsolute, join, relative, sep } from "node:path";
 import { z } from "zod";
 import { AnalysisResultSchema } from "./create-analysis-result.ts";
 import { execFile } from "../../../shared/src/exec.ts";
+import { parseAzsdkResponse } from "../../../../eng/tools/spec-gen-sdk-runner/src/azsdk-adapter.ts";
+
+export interface AzsdkCustomizedCodeUpdateResponse {
+  success: boolean;
+  specChangeRequired?: string[];
+  customCodeChangeRequired?: string[];
+  typeSpecChangesSummary?: string[];
+  package_name?: string;
+  language?: string;
+  response_error?: string;
+  response_errors?: string[];
+}
 
 const MitigatedChangeSchema = z.object({
   breakingChange: z.string(),
@@ -42,11 +54,6 @@ export interface MitigateSdkBreakingChangesOptions {
   azureSdkCliPath: string;
 }
 
-const CustomizedUpdateResultSchema = z.object({
-  success: z.boolean().optional().default(false),
-  typeSpecChangesSummary: z.array(z.string()).nullable().optional(),
-});
-
 function isWithin(parent: string, child: string): boolean {
   const path = relative(parent, child);
   return path !== "" && path !== ".." && !path.startsWith(`..${sep}`) && !isAbsolute(path);
@@ -58,19 +65,17 @@ async function writeResult(path: string, result: MitigationResult): Promise<void
 }
 
 function BuildMigratedBreakingChange(
-  rawResult: unknown,
+  customizedUpdateResult: AzsdkCustomizedCodeUpdateResponse,
   breakingChange: string,
   suggestedFix: string,
 ): MitigatedChange {
-  const envelope = z.record(z.string(), z.unknown()).parse(rawResult);
-  const result = CustomizedUpdateResultSchema.parse(envelope.result ?? envelope);
   return {
     breakingChange,
     suggestedFix,
-    isResolved: result.success,
-    ...(result.typeSpecChangesSummary == null
+    isResolved: customizedUpdateResult.success,
+    ...(customizedUpdateResult.typeSpecChangesSummary == null
       ? {}
-      : { typespecChangesSummary: result.typeSpecChangesSummary }),
+      : { typespecChangesSummary: customizedUpdateResult.typeSpecChangesSummary }),
   };
 }
 
@@ -156,7 +161,7 @@ export async function mitigateSdkBreakingChanges({
 
           try {
             mitigatedChange = BuildMigratedBreakingChange(
-              JSON.parse(stdout),
+              parseAzsdkResponse<AzsdkCustomizedCodeUpdateResponse>(stdout),
               change.breakingChange,
               change.suggestedFix,
             );
