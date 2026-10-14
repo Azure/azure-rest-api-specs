@@ -990,6 +990,13 @@ model ClusterProperties {
   maintenanceConfiguration?: MaintenanceConfiguration;
 
   /**
+   * Firewall rules associated with the cluster.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @identifiers(#["name"])
+  firewallRules?: FirewallRule[];
+
+  /**
    * DNS name of the cluster endpoint
    */
   @visibility(Lifecycle.Read)
@@ -1031,6 +1038,16 @@ model ClusterProperties {
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_08_01_preview)
   migratedEndpoint?: string;
+}
+
+/** A firewall rule associated with the cluster. */
+@added(Versions.v2026_10_01_preview)
+model FirewallRule {
+  /** The name of the firewall rule. */
+  name: string;
+
+  /** The source address prefix for the firewall rule. */
+  sourceAddressPrefix: string;
 }
 
 /** Cluster-level maintenance configuration. */
