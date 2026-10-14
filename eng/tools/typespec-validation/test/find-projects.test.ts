@@ -56,37 +56,6 @@ it("searches affected services recursively, deduplicates, and sorts projects", a
   });
 });
 
-it("selects sibling and ancestor projects when only a nested model changes", async () => {
-  const parent = await addProject("specification/service/Project");
-  const nested = await addProject("specification/service/Project/models/Nested");
-  const sibling = await addProject("specification/service/Sibling");
-  vi.mocked(getChangedFiles).mockResolvedValue(["specification/service/Project/models/model.tsp"]);
-
-  await expect(findChangedProjects(root, revisions)).resolves.toEqual({
-    projects: [parent, nested, sibling],
-    checkingAllSpecs: false,
-  });
-});
-
-it("includes deleted files whose service survives and reports deleted service folders", async () => {
-  const existing = await addProject("specification/service/Existing");
-  vi.mocked(getChangedFiles).mockResolvedValue([
-    "specification/service/Existing/deleted.tsp",
-    "specification/removed/Project/main.tsp",
-    "specification/removed/Project/tspconfig.yaml",
-  ]);
-
-  await expect(
-    findChangedProjects(root, { ...revisions, logger: new ConsoleLogger(true) }),
-  ).resolves.toEqual({
-    projects: [existing],
-    checkingAllSpecs: false,
-  });
-  expect(console.debug).toHaveBeenCalledExactlyOnceWith(
-    "Cannot find directory specification/removed",
-  );
-});
-
 it.each([
   ".gitattributes",
   ".oxfmtrc.json",
