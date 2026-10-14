@@ -52,8 +52,7 @@ downstream SDK repositories, avoid back-and-forth across repos and stages
 ### Mitigation
 
 1. Completion of the `SDK Breaking Change Analysis - Analyze` workflow automatically
-   triggers the `SDK Breaking Change Mitigation` workflow. The mitigation workflow can also be
-   manually dispatched with the completed publisher workflow run ID.
+   triggers the `SDK Breaking Change Mitigation` workflow.
 
 The `SDK breaking change mitigation` workflow then:
 
