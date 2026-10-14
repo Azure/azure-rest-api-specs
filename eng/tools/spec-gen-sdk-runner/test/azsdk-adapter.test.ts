@@ -69,6 +69,30 @@ describe("parseAzsdkResponse", () => {
     expect(result.result).toBe("succeeded");
     expect(result.nested.key).toBe("value");
   });
+
+  test("parses multiline objects nested in an array", () => {
+    const output = [
+      "log line",
+      "{",
+      '  "result": {',
+      '    "breakingChanges": [',
+      "      {",
+      '        "breakingChange": "Model changed",',
+      '        "originBreaks": ["Struct removed"]',
+      "      }",
+      "    ],",
+      '    "hasBreakingChange": true',
+      "  }",
+      "}",
+    ].join("\n");
+
+    const result = parseAzsdkResponse<{
+      result: { breakingChanges: { breakingChange: string }[]; hasBreakingChange: boolean };
+    }>(output);
+
+    expect(result.result.breakingChanges[0].breakingChange).toBe("Model changed");
+    expect(result.result.hasBreakingChange).toBe(true);
+  });
 });
 
 describe("buildExecutionReport", () => {
