@@ -2,10 +2,10 @@ import { sep } from "node:path";
 import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import { detectChangedSpecConfigFromChangedFiles } from "@azure-tools/spec-gen-sdk-runner";
 
-type PullRequestFile = {
+interface PullRequestFile {
   filename: string;
   previous_filename?: string;
-};
+}
 
 export const SdkLanguage = Object.freeze({
   DotNet: "DotNet",
@@ -17,10 +17,10 @@ export const SdkLanguage = Object.freeze({
 
 export type SdkLanguage = (typeof SdkLanguage)[keyof typeof SdkLanguage];
 
-export type SdkLanguageConfig = {
+export interface SdkLanguageConfig {
   language: SdkLanguage;
   repository: string;
-};
+}
 
 const SDK_LANGUAGE_CONFIGS: Readonly<Record<string, SdkLanguageConfig>> = {
   ".net": { language: SdkLanguage.DotNet, repository: "azure-sdk-for-net" },

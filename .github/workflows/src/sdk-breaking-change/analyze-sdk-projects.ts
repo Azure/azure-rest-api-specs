@@ -4,13 +4,14 @@ import { execFile } from "../../../shared/src/exec.ts";
 import { SdkLanguage } from "./resolve-analysis-inputs.ts";
 import { generateTypeSpecMetadata } from "../../../shared/src/typespec-metadata.ts";
 
-type ProjectResult = {
+interface ProjectResult
+{
   typespecProjectPath: string;
   packageName: string;
   resultsPath: string;
 };
 
-export type AnalyzeSdkProjectsOptions = {
+export interface AnalyzeSdkProjectsOptions {
   localSdkRepositoryPath: string;
   specificationRepositoryPath: string;
   typeSpecConfigPaths: string[];

@@ -33,7 +33,7 @@ export const MitigationResultSchema = z.object({
 
 export type MitigationResult = z.infer<typeof MitigationResultSchema>;
 
-export type MitigateSdkBreakingChangesOptions = {
+export interface MitigateSdkBreakingChangesOptions {
   analysisResultPath: string;
   mitigationResultPath: string;
   mitigationWorkflowUrl: string;
