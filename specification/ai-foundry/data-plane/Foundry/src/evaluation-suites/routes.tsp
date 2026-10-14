@@ -115,8 +115,8 @@ interface EvalSuites {
 }
 
 /** Operations for the existing evaluation-suite generation preview. */
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing OpenAI-based suite operations are not conventionally versioned."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing OpenAI-based suite operations use the shared job pattern."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @tag("EvaluationSuiteGenerationJobs")
 @removed(Versions.v1)
 interface EvaluationSuiteGenerationJobs {
