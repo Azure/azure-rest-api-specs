@@ -128,7 +128,7 @@ Do not run `npx ci`. That downloads an unrelated package named `ci`. Avoid `pnpm
   ```
 
   Never persist the wildcard in `.npmrc` or `pnpm-workspace.yaml`, never use it in CI, and report that local release-age verification was skipped. Omit `--offline` on a fresh machine that still needs package downloads. Prefer fixing network/feed access or using the isolated toolchain below.
-- For compile-only work, create an isolated toolchain under the ignored `<repoRoot>\node_modules\.stackhci-toolchain`, with its own private `package.json` and `pnpm-workspace.yaml` to avoid installing the parent workspace.
+- For compile-only work, create an isolated toolchain under the ignored `<repoRoot>\node_modules\.stack-hci-toolchain`, with its own private `package.json` and `pnpm-workspace.yaml` to avoid installing the parent workspace.
 - Include the compiler, all external libraries imported by StackHCI, configured emitter/ruleset, and required peers. Derive versions from the current checkout's catalog/lockfile, preserving release-age policy, scoped exclusions, and applicable overrides. Do not reuse hard-coded versions from another checkout.
 - Install inside the isolated workspace with `pnpm install --ignore-scripts` and retain its generated lockfile. If the launcher is broken, invoke a verified entrypoint for the checkout's pinned pnpm version with Node.
 - After successful installation, link `StackHCI\node_modules` to the isolated toolchain's `node_modules` with a Windows directory junction. Inspect existing paths first; never blindly replace or delete an existing directory/junction. Confirm the toolchain and link are Git-ignored.
