@@ -22,6 +22,10 @@ union HciJobType {
   /** Job to repair a server in the cluster. */
   RepairServer: "RepairServer",
 
+  /** Job to enable AKS Arc deployment during a subsequent solution update. */
+  @added(Versions.v2026_11_01_preview)
+  EnableAksArcDeployment: "EnableAksArcDeployment",
+
   /** Job to configure Arc Gateway for the cluster. */
   @added(Versions.v2026_11_01_preview)
   ConfigureArcGateway: "ConfigureArcGateway",
@@ -4092,7 +4096,7 @@ model OptionalServices {
   confidentialVmIntent?: ConfidentialVmIntent = ConfidentialVmIntent.Disable;
 
   /**
-   * Indicates whether to deploy AKS enabled by Azure Arc during cluster deployment.
+   * Indicates whether to deploy AKS enabled by Azure Arc for the cluster. After an EnableAksArcDeployment job succeeds, this reflects the deployment intent acknowledged by the device, not whether AKS Arc is installed.
    */
   @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
@@ -9270,6 +9274,19 @@ model ClusterJobListResult is Azure.Core.Page<ClusterJob>;
 model HciConfigureArcGatewayJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.ConfigureArcGateway;
+}
+
+/**
+ * Enables AKS Arc deployment intent on the device. Only Deploy mode is supported, enforced by service-side validation. This job does not install AKS Arc or start a solution update; a subsequent applicable solution update installs AKS Arc if it is absent.
+ */
+@added(Versions.v2026_11_01_preview)
+model HciEnableAksArcDeploymentJobProperties extends ClusterJobProperties {
+  /** Cluster job type for enabling AKS Arc deployment intent. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: HciJobType.EnableAksArcDeployment;
+
+  /** Deployment intent. Only true is currently supported, enforced by service-side validation. Repeated execution preserves enabled intent; disabling or uninstalling AKS Arc is not supported. */
+  deployAksArc: boolean;
 }
 
 ////////////////////////////////////////////////////////////////
