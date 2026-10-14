@@ -1656,3 +1656,23 @@ enum ProvisioningStateEnum {
 
 @@clientName(BlobAccessPointSourceType.DellOneFs, "DellOneFS", "go");
 @@clientName(BlobAccessPointSourceType.NetAppOntap, "NetAppONTAP", "go");
+@@clientName(
+  BlobAccessPointDellOneFsSourceProperties,
+  "BlobAccessPointDellOneFSSourceProperties",
+  "go"
+);
+@@clientName(
+  BlobAccessPointDellOneFsSourcePropertiesUpdate,
+  "BlobAccessPointDellOneFSSourcePropertiesUpdate",
+  "go"
+);
+@@clientName(
+  BlobAccessPointNetAppOntapSourceProperties,
+  "BlobAccessPointNetAppOntapSourceProperties",
+  "go"
+);
+@@clientName(
+  BlobAccessPointNetAppOntapSourcePropertiesUpdate,
+  "BlobAccessPointNetAppOntapSourcePropertiesUpdate",
+  "go"
+);
