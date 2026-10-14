@@ -1668,11 +1668,11 @@ enum ProvisioningStateEnum {
 );
 @@clientName(
   BlobAccessPointNetAppOntapSourceProperties,
-  "BlobAccessPointNetAppOntapSourceProperties",
+  "BlobAccessPointNetAppONTAPSourceProperties",
   "go"
 );
 @@clientName(
   BlobAccessPointNetAppOntapSourcePropertiesUpdate,
-  "BlobAccessPointNetAppOntapSourcePropertiesUpdate",
+  "BlobAccessPointNetAppONTAPSourcePropertiesUpdate",
   "go"
 );
