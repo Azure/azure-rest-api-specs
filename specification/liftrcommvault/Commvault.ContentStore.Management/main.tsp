@@ -178,13 +178,7 @@ model LatestLinkedSaaSResponse {
 interface CloudAccounts {
   get is ArmResourceRead<CloudAccount>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudAccount>;
-  update is ArmCustomPatchAsync<
-    CloudAccount,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      CloudAccount,
-      CloudAccountPatchProperties
-    >
-  >;
+  update is ArmCustomPatchAsync<CloudAccount, CloudAccountUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<CloudAccount>;
   listByResourceGroup is ArmResourceListByParent<CloudAccount>;
   listBySubscription is ArmListBySubscription<CloudAccount>;
@@ -222,6 +216,33 @@ alias CloudAccountPatchProperties = {
   @doc("Details of the user.")
   user: CloudAccountUserUpdate;
 };
+
+@doc("Managed service identity (system assigned and/or user assigned identities)")
+model CloudAccountIdentityUpdate {
+  @doc("The type of managed identity assigned to this resource.")
+  type?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "userAssignedIdentities is an ARM-standard map keyed by the identity resource ID, which requires a Record type"
+  @doc("The identities assigned to this resource by the user.")
+  userAssignedIdentities?: Record<
+    | Azure.ResourceManager.CommonTypes.UserAssignedIdentity
+    | null>;
+}
+
+// Identity is replaced so a PATCH can omit identity.type, as the previous contract allowed.
+@doc("The type used for update operations of the CloudAccount.")
+model CloudAccountUpdate {
+  ...OmitProperties<
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      CloudAccount,
+      CloudAccountPatchProperties
+    >,
+    "identity"
+  >;
+
+  @doc("The managed service identities assigned to this resource.")
+  identity?: CloudAccountIdentityUpdate;
+}
 
 @doc("Marketplace details that can be updated on a Commvault Cloud Account.")
 model CloudAccountMarketplaceUpdate {
