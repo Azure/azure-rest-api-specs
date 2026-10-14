@@ -2803,6 +2803,20 @@
           "200": {
             "description": "Resource deleted successfully."
           },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "204": {
             "description": "Resource does not exist."
           },
@@ -2820,7 +2834,11 @@
           "CapacityReservationGroup_Delete_MinimumSet_Gen": {
             "$ref": "./examples/capacityReservationExamples/CapacityReservationGroup_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/capacityReservations": {
@@ -11050,9 +11068,6 @@
           }
         },
         "x-ms-examples": {
-          "Get a VM with flexible sizing": {
-            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithFlexProfile.json"
-          },
           "Get a Virtual Machine.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get.json"
           },
@@ -11198,9 +11213,6 @@
           },
           "Create a VM with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithVMSizeProperties.json"
-          },
-          "Create a VM with a FlexProfile": {
-            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithFlexProfile.json"
           },
           "Create a VM with automatic zone placement": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPlacement.json"
@@ -11421,9 +11433,6 @@
           },
           "Update a VM by force-detaching data disk": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_ForceDetachDataDisk.json"
-          },
-          "Update a VM's flexible sizing configuration": {
-            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_WithFlexProfile.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -16106,19 +16115,6 @@
         }
       }
     },
-    "FlexProfile": {
-      "type": "object",
-      "description": "Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on\ncapacity and placement considerations. The deployed size is returned in hardwareProfile.vmSize.",
-      "properties": {
-        "preferredVMSize": {
-          "$ref": "#/definitions/VirtualMachineSizeTypes",
-          "description": "Specifies the preferred VM size. Azure may deploy a compatible alternative size based on capacity\nand placement considerations. Supported VM families for FlexProfile may vary by region."
-        }
-      },
-      "required": [
-        "preferredVMSize"
-      ]
-    },
     "HardwareProfile": {
       "type": "object",
       "description": "Specifies the hardware settings for the virtual machine.",
@@ -18222,7 +18218,7 @@
       "properties": {
         "zonePlacementPolicy": {
           "$ref": "#/definitions/ZonePlacementPolicyType",
-          "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation."
+          "description": "Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation."
         },
         "includeZones": {
           "type": "array",
@@ -20478,10 +20474,6 @@
           "$ref": "#/definitions/DiskControllerTypes",
           "description": "Specifies the disk controller type configured for the VM. **Note:** This property will be set to the default disk controller type if not specified provided virtual machine is being created with 'hyperVGeneration' set to V2 based on the capabilities of the operating system disk and VM size from the the specified minimum api version. You need to deallocate the VM before updating its disk controller type unless you are updating the VM size in the VM configuration which implicitly deallocates and reallocates the VM. Minimum api-version: 2022-08-01."
         },
-        "alignRegionalDisksToVMZone": {
-          "type": "boolean",
-          "description": "Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01."
-        },
         "diskApiVersion": {
           "$ref": "#/definitions/DiskApiVersion",
           "description": "Specifies the Disk API version used when applying additionalDiskProperties to managed disks. The value must be in the format YYYY-MM-DD (e.g., \"2026-03-02\")."
@@ -22460,10 +22452,6 @@
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the virtual machine."
-        },
-        "flexProfile": {
-          "$ref": "#/definitions/FlexProfile",
-          "description": "Specifies a FlexProfile for VM size. Create and update requests that include flexProfile must omit\nhardwareProfile.vmSize, even when it matches the currently deployed size. Azure may deploy a\ncompatible alternative VM size based on capacity and placement considerations. Responses for a VM\nwith FlexProfile include both flexProfile.preferredVMSize, which records the requested preferred size,\nand hardwareProfile.vmSize, which reports the deployed size. When using a GET response to construct\na PUT or PATCH request, remove hardwareProfile.vmSize if the request includes flexProfile.\nFlexProfile may not be supported with VM properties that constrain placement."
         },
         "scheduledEventsPolicy": {
           "$ref": "#/definitions/ScheduledEventsPolicy",
@@ -26413,19 +26401,14 @@
     },
     "ZonePlacementPolicyType": {
       "type": "string",
-      "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.",
+      "description": "Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.",
       "enum": [
-        "Any",
         "Auto"
       ],
       "x-ms-enum": {
         "name": "ZonePlacementPolicyType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Any",
-            "value": "Any"
-          },
           {
             "name": "Auto",
             "value": "Auto",

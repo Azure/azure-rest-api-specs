@@ -1,0 +1,72 @@
+{
+  "title": "GoldenGateConnections_Update_MaximumSet",
+  "operationId": "GoldenGateConnections_Update",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgopenapi",
+    "goldenGateConnectionName": "sample-name",
+    "properties": {
+      "zones": [
+        "qqntn"
+      ],
+      "tags": {
+        "key4093": "sample-value"
+      },
+      "properties": {
+        "connectionType": "GOLDENGATE",
+        "displayName": "sample-name",
+        "routingMethod": "SHARED_SERVICE_ENDPOINT",
+        "vaultId": "ocid1..aaaaaa",
+        "keyId": "ocid1..aaaaaa",
+        "doesUseSecretIds": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "connectionType": "ConnectionBaseProperties",
+          "displayName": "sample-name",
+          "resourceAnchorId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgopenapi/providers/Oracle.Database/resourceAnchors/resourceAnchor1",
+          "networkAnchorId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgopenapi/providers/Oracle.Database/networkAnchors/networkAnchor1",
+          "compartmentId": "ocid1..aaaaaa",
+          "ocid": "ocid1..aaaaaa",
+          "routingMethod": "SHARED_SERVICE_ENDPOINT",
+          "vaultId": "ocid1..aaaaaa",
+          "keyId": "ocid1..aaaaaa",
+          "doesUseSecretIds": true,
+          "provisioningState": "Succeeded",
+          "lifecycleState": "CREATING",
+          "lifecycleDetails": "sample-value",
+          "timeCreated": "2024-01-01T00:00:00Z",
+          "timeUpdated": "2024-01-01T00:00:00Z"
+        },
+        "zones": [
+          "ductpubbib"
+        ],
+        "tags": {
+          "key9941": "sample-value"
+        },
+        "location": "sample-value",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/resources/sample1",
+        "name": "bkjry",
+        "type": "foxasyifvz",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-01T10:00:00Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-01T10:00:00Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

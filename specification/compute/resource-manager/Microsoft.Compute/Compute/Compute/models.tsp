@@ -1034,7 +1034,9 @@ union PatchOperationStatus {
 /**
  * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
  */
-union ZonePlacementPolicyType {
+@removed(Versions.v2026_09_01)
+@renamedFrom(Versions.v2026_09_01, "ZonePlacementPolicyType")
+union ZonePlacementPolicyTypeLegacy {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Any: "Any",
@@ -1043,6 +1045,19 @@ union ZonePlacementPolicyType {
    * Automatic zone placement in a Virtual Machine Scale Set.
    */
   @added(Versions.v2025_04_01)
+  Auto: "Auto",
+}
+
+/**
+ * Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+ */
+@added(Versions.v2026_09_01)
+union ZonePlacementPolicyType {
+  string,
+
+  /**
+   * Automatic zone placement in a Virtual Machine Scale Set.
+   */
   Auto: "Auto",
 }
 
@@ -5646,19 +5661,6 @@ model BootDiagnosticsInstanceView {
 }
 
 /**
- * Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on
- * capacity and placement considerations. The deployed size is returned in hardwareProfile.vmSize.
- */
-@added(Versions.v2026_09_01)
-model FlexProfile {
-  /**
-   * Specifies the preferred VM size. Azure may deploy a compatible alternative size based on capacity
-   * and placement considerations. Supported VM families for FlexProfile may vary by region.
-   */
-  preferredVMSize: VirtualMachineSizeTypes;
-}
-
-/**
  * Specifies the hardware settings for the virtual machine.
  */
 model HardwareProfile {
@@ -5707,6 +5709,7 @@ model StorageProfile {
   /**
    * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
    */
+  @removed(Versions.v2026_09_01)
   alignRegionalDisksToVMZone?: boolean;
 
   /**
@@ -6781,18 +6784,6 @@ model VirtualMachineProperties {
   hardwareProfile?: HardwareProfile;
 
   /**
-   * Specifies a FlexProfile for VM size. Create and update requests that include flexProfile must omit
-   * hardwareProfile.vmSize, even when it matches the currently deployed size. Azure may deploy a
-   * compatible alternative VM size based on capacity and placement considerations. Responses for a VM
-   * with FlexProfile include both flexProfile.preferredVMSize, which records the requested preferred size,
-   * and hardwareProfile.vmSize, which reports the deployed size. When using a GET response to construct
-   * a PUT or PATCH request, remove hardwareProfile.vmSize if the request includes flexProfile.
-   * FlexProfile may not be supported with VM properties that constrain placement.
-   */
-  @added(Versions.v2026_09_01)
-  flexProfile?: FlexProfile;
-
-  /**
    * Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine.
    */
   scheduledEventsPolicy?: ScheduledEventsPolicy;
@@ -7209,6 +7200,14 @@ model Placement {
   /**
    * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "zonePlacementPolicy")
+  zonePlacementPolicyLegacy?: ZonePlacementPolicyTypeLegacy;
+
+  /**
+   * Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+   */
+  @added(Versions.v2026_09_01)
   zonePlacementPolicy?: ZonePlacementPolicyType;
 
   /**

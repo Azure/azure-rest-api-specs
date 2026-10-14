@@ -64,8 +64,8 @@ using Microsoft.Cache;
 @@clientName(EvictionPolicy, "RedisEnterpriseEvictionPolicy", "csharp");
 @@clientName(EvictionPolicy.AllKeysLFU, "AllKeysLfu", "csharp");
 @@clientName(EvictionPolicy.AllKeysLRU, "AllKeysLru", "csharp");
-@@clientName(EvictionPolicy.VolatileLRU, "VolatileLfu", "csharp");
-@@clientName(EvictionPolicy.VolatileLFU, "VolatileLru", "csharp");
+@@clientName(EvictionPolicy.VolatileLRU, "VolatileLru", "csharp");
+@@clientName(EvictionPolicy.VolatileLFU, "VolatileLfu", "csharp");
 @@clientName(EvictionPolicy.VolatileTTL, "VolatileTtl", "csharp");
 @@clientName(
   ExportClusterParameters,
@@ -253,6 +253,35 @@ using Microsoft.Cache;
   "RedisEnterpriseCluster",
   "csharp"
 );
+
+// Preserve provisioning metadata from the reflection-based generator.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  Cluster,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 60, pattern: "^[a-zA-Z0-9-]+$" },
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  Database,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 60, pattern: "^[a-zA-Z0-9-]+$" },
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  AccessPolicyAssignment,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 60, pattern: "^[a-zA-Z0-9]+$" },
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(
   Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,

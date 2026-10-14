@@ -3,7 +3,7 @@ import { beforeEach } from "node:test";
 import { describe, expect, test, vi } from "vitest";
 import { isFailure, isWarning, pathExists } from "../src/util.ts";
 
-vi.mock("fs/promises", () => {
+vi.mock("node:fs/promises", () => {
   return {
     ...memfs.promises,
   };

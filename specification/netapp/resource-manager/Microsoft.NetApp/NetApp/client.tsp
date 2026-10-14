@@ -600,6 +600,7 @@ using Microsoft.NetApp;
 @@clientName(VolumeLanguage.utf8mb4, "Utf8Mb4", "csharp");
 @@clientName(ElasticProtocolType.NFSv3, "Nfsv3", "csharp");
 @@clientName(ElasticProtocolType.NFSv4, "Nfsv4", "csharp");
+@@clientName(SecureLdapType.LdapOverTLS, "LdapOverTls", "csharp");
 
 // Body parameter rename to restore previous property name
 @@clientName(

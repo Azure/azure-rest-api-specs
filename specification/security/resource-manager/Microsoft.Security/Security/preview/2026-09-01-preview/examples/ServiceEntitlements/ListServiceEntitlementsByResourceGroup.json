@@ -1,0 +1,28 @@
+{
+  "operationId": "ServiceEntitlements_ListByResourceGroup",
+  "title": "Lists security entitlements in a resource group",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "myResourceGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/serviceEntitlements/myserviceentitlement1",
+            "name": "myserviceentitlement1",
+            "type": "Microsoft.Security/serviceEntitlements",
+            "location": "eastus",
+            "properties": {
+              "serviceType": "Perception",
+              "state": "Enabled",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

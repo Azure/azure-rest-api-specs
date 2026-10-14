@@ -1,0 +1,42 @@
+{
+  "title": "List Device Capabilities for a Device",
+  "operationId": "RegistryDeviceCapabilities_ListByDevice",
+  "description": "List capabilities for a device.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-1",
+    "registryDeviceName": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/registryDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab/capabilities/defaultHub",
+            "name": "defaultHub",
+            "type": "Microsoft.DeviceRegistry/namespaces/registryDevices/capabilities",
+            "properties": {
+              "enablementState": "Enabled",
+              "provisioningState": "Succeeded",
+              "capabilityType": "Microsoft.IoTHub",
+              "authenticationProfileResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/registryDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab/authenticationProfiles/default",
+              "messagingEndpointName": "myPrimaryIotHubEndpoint"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/registryDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab/capabilities/defaultUpdate",
+            "name": "defaultUpdate",
+            "type": "Microsoft.DeviceRegistry/namespaces/registryDevices/capabilities",
+            "properties": {
+              "enablementState": "Enabled",
+              "provisioningState": "Succeeded",
+              "capabilityType": "Microsoft.SoftwareUpdate"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
