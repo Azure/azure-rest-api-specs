@@ -190,7 +190,9 @@ interface BackupInstanceResources {
   @removed(Versions.v2026_04_01_preview)
   @added(Versions.v2026_06_01)
   @renamedFrom(Versions.v2026_04_01_preview, "resumeProtection")
-  resumeProtection is BackupInstanceResourceOps.ActionAsync<
+  @removed(Versions.v2026_11_01_preview)
+  @renamedFrom(Versions.v2026_11_01_preview, "resumeProtection")
+  resumeProtectionStable is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     void,
     OkResponse,
@@ -206,7 +208,9 @@ interface BackupInstanceResources {
   @added(Versions.v2026_04_01_preview)
   @removed(Versions.v2026_06_01)
   @renamedFrom(Versions.v2026_06_01, "resumeProtection")
-  resumeProtectionPreview is BackupInstanceResourceOps.ActionAsync<
+  @added(Versions.v2026_11_01_preview)
+  @renamedFrom(Versions.v2026_11_01_preview, "resumeProtectionPreview")
+  resumeProtection is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     ResumeProtectionRequest,
     OkResponse,
