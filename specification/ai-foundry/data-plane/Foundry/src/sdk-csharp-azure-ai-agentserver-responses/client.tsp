@@ -1069,11 +1069,13 @@ namespace Azure.AI.Projects {
   );
 }
 
-
 // Types declared in the Azure.AI.Projects TypeSpec namespace that are still part of the
 // AgentServer.Responses wire contract. Without an explicit usage they are unreachable from
 // this package's operations and are therefore not emitted.
-@@usage(Azure.AI.Projects.StructuredOutputsOutputItem, Usage.input | Usage.output);
+@@usage(
+  Azure.AI.Projects.StructuredOutputsOutputItem,
+  Usage.input | Usage.output
+);
 @@usage(Azure.AI.Projects.ApiErrorResponse, Usage.input | Usage.output);
 
 // These are surfaced on this package's public hosting API (ResponseStreamEvent.EventType and
@@ -1086,244 +1088,533 @@ namespace Azure.AI.Projects {
 // external assembly can derive from it. Every emitted subtype must therefore be replaced
 // by its OpenAI counterpart; the six with no counterpart map to the base update type.
 // ============================================================================
-@@alternateType(OpenAI.ResponseAudioDeltaEvent,
-  { identity: "OpenAI.Responses.StreamingResponseUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseAudioDeltaEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseAudioDoneEvent,
-  { identity: "OpenAI.Responses.StreamingResponseUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseAudioDoneEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseAudioTranscriptDeltaEvent,
-  { identity: "OpenAI.Responses.StreamingResponseUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseAudioTranscriptDeltaEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseAudioTranscriptDoneEvent,
-  { identity: "OpenAI.Responses.StreamingResponseUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseAudioTranscriptDoneEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseCodeInterpreterCallCodeDeltaEvent,
-  { identity: "OpenAI.Responses.StreamingResponseCodeInterpreterCallCodeDeltaUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseCodeInterpreterCallCodeDeltaEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseCodeInterpreterCallCodeDeltaUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseCodeInterpreterCallCodeDoneEvent,
-  { identity: "OpenAI.Responses.StreamingResponseCodeInterpreterCallCodeDoneUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseCodeInterpreterCallCodeDoneEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseCodeInterpreterCallCodeDoneUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseCodeInterpreterCallCompletedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseCodeInterpreterCallCompletedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseCodeInterpreterCallCompletedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseCodeInterpreterCallCompletedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseCodeInterpreterCallInProgressEvent,
-  { identity: "OpenAI.Responses.StreamingResponseCodeInterpreterCallInProgressUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseCodeInterpreterCallInProgressEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseCodeInterpreterCallInProgressUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseCodeInterpreterCallInterpretingEvent,
-  { identity: "OpenAI.Responses.StreamingResponseCodeInterpreterCallInterpretingUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseCodeInterpreterCallInterpretingEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseCodeInterpreterCallInterpretingUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseCompletedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseCompletedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseCompletedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseCompletedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseContentPartAddedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseContentPartAddedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseContentPartAddedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseContentPartAddedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseContentPartDoneEvent,
-  { identity: "OpenAI.Responses.StreamingResponseContentPartDoneUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseContentPartDoneEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseContentPartDoneUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseCreatedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseCreatedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseCreatedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseCreatedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseCustomToolCallInputDeltaEvent,
-  { identity: "OpenAI.Responses.StreamingResponseUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseCustomToolCallInputDeltaEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseCustomToolCallInputDoneEvent,
-  { identity: "OpenAI.Responses.StreamingResponseUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseCustomToolCallInputDoneEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseErrorEvent,
-  { identity: "OpenAI.Responses.StreamingResponseErrorUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseErrorEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseErrorUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseFailedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseFailedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseFailedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseFailedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseFileSearchCallCompletedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseFileSearchCallCompletedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseFileSearchCallCompletedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseFileSearchCallCompletedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseFileSearchCallInProgressEvent,
-  { identity: "OpenAI.Responses.StreamingResponseFileSearchCallInProgressUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseFileSearchCallInProgressEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseFileSearchCallInProgressUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseFileSearchCallSearchingEvent,
-  { identity: "OpenAI.Responses.StreamingResponseFileSearchCallSearchingUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseFileSearchCallSearchingEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseFileSearchCallSearchingUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseFunctionCallArgumentsDeltaEvent,
-  { identity: "OpenAI.Responses.StreamingResponseFunctionCallArgumentsDeltaUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseFunctionCallArgumentsDeltaEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseFunctionCallArgumentsDeltaUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseFunctionCallArgumentsDoneEvent,
-  { identity: "OpenAI.Responses.StreamingResponseFunctionCallArgumentsDoneUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseFunctionCallArgumentsDoneEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseFunctionCallArgumentsDoneUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseImageGenCallCompletedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseImageGenerationCallCompletedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseImageGenCallCompletedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseImageGenerationCallCompletedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseImageGenCallGeneratingEvent,
-  { identity: "OpenAI.Responses.StreamingResponseImageGenerationCallGeneratingUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseImageGenCallGeneratingEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseImageGenerationCallGeneratingUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseImageGenCallInProgressEvent,
-  { identity: "OpenAI.Responses.StreamingResponseImageGenerationCallInProgressUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseImageGenCallInProgressEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseImageGenerationCallInProgressUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseImageGenCallPartialImageEvent,
-  { identity: "OpenAI.Responses.StreamingResponseImageGenerationCallPartialImageUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseImageGenCallPartialImageEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseImageGenerationCallPartialImageUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseInProgressEvent,
-  { identity: "OpenAI.Responses.StreamingResponseInProgressUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseInProgressEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseInProgressUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseIncompleteEvent,
-  { identity: "OpenAI.Responses.StreamingResponseIncompleteUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseIncompleteEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseIncompleteUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseMCPCallArgumentsDeltaEvent,
-  { identity: "OpenAI.Responses.StreamingResponseMcpCallArgumentsDeltaUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseMCPCallArgumentsDeltaEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseMcpCallArgumentsDeltaUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseMCPCallArgumentsDoneEvent,
-  { identity: "OpenAI.Responses.StreamingResponseMcpCallArgumentsDoneUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseMCPCallArgumentsDoneEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseMcpCallArgumentsDoneUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseMCPCallCompletedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseMcpCallCompletedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseMCPCallCompletedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseMcpCallCompletedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseMCPCallFailedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseMcpCallFailedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseMCPCallFailedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseMcpCallFailedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseMCPCallInProgressEvent,
-  { identity: "OpenAI.Responses.StreamingResponseMcpCallInProgressUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseMCPCallInProgressEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseMcpCallInProgressUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseMCPListToolsCompletedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseMcpListToolsCompletedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseMCPListToolsCompletedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseMcpListToolsCompletedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseMCPListToolsFailedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseMcpListToolsFailedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseMCPListToolsFailedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseMcpListToolsFailedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseMCPListToolsInProgressEvent,
-  { identity: "OpenAI.Responses.StreamingResponseMcpListToolsInProgressUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseMCPListToolsInProgressEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseMcpListToolsInProgressUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseOutputItemAddedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseOutputItemAddedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseOutputItemAddedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseOutputItemAddedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseOutputItemDoneEvent,
-  { identity: "OpenAI.Responses.StreamingResponseOutputItemDoneUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseOutputItemDoneEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseOutputItemDoneUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseOutputTextAnnotationAddedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseOutputTextAnnotationAddedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseOutputTextAnnotationAddedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseOutputTextAnnotationAddedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseQueuedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseQueuedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseQueuedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseQueuedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseReasoningSummaryPartAddedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseReasoningSummaryPartAddedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseReasoningSummaryPartAddedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseReasoningSummaryPartAddedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseReasoningSummaryPartDoneEvent,
-  { identity: "OpenAI.Responses.StreamingResponseReasoningSummaryPartDoneUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseReasoningSummaryPartDoneEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseReasoningSummaryPartDoneUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseReasoningSummaryTextDeltaEvent,
-  { identity: "OpenAI.Responses.StreamingResponseReasoningSummaryTextDeltaUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseReasoningSummaryTextDeltaEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseReasoningSummaryTextDeltaUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseReasoningSummaryTextDoneEvent,
-  { identity: "OpenAI.Responses.StreamingResponseReasoningSummaryTextDoneUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseReasoningSummaryTextDoneEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseReasoningSummaryTextDoneUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseReasoningTextDeltaEvent,
-  { identity: "OpenAI.Responses.StreamingResponseReasoningTextDeltaUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseReasoningTextDeltaEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseReasoningTextDeltaUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseReasoningTextDoneEvent,
-  { identity: "OpenAI.Responses.StreamingResponseReasoningTextDoneUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseReasoningTextDoneEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseReasoningTextDoneUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseRefusalDeltaEvent,
-  { identity: "OpenAI.Responses.StreamingResponseRefusalDeltaUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseRefusalDeltaEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseRefusalDeltaUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseRefusalDoneEvent,
-  { identity: "OpenAI.Responses.StreamingResponseRefusalDoneUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseRefusalDoneEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseRefusalDoneUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseTextDeltaEvent,
-  { identity: "OpenAI.Responses.StreamingResponseOutputTextDeltaUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseTextDeltaEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseOutputTextDeltaUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseTextDoneEvent,
-  { identity: "OpenAI.Responses.StreamingResponseOutputTextDoneUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseTextDoneEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseOutputTextDoneUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseWebSearchCallCompletedEvent,
-  { identity: "OpenAI.Responses.StreamingResponseWebSearchCallCompletedUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseWebSearchCallCompletedEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseWebSearchCallCompletedUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseWebSearchCallInProgressEvent,
-  { identity: "OpenAI.Responses.StreamingResponseWebSearchCallInProgressUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseWebSearchCallInProgressEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseWebSearchCallInProgressUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseWebSearchCallSearchingEvent,
-  { identity: "OpenAI.Responses.StreamingResponseWebSearchCallSearchingUpdate", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseWebSearchCallSearchingEvent,
+  {
+    identity: "OpenAI.Responses.StreamingResponseWebSearchCallSearchingUpdate",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
 
-@@alternateType(OpenAI.ResponseStreamEventType,
-  { identity: "OpenAI.Responses.StreamingResponseUpdateKind", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseStreamEventType,
+  {
+    identity: "OpenAI.Responses.StreamingResponseUpdateKind",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-
 
 // ============================================================================
 // Remaining Azure models that have exact OpenAI counterparts. Mapping them
 // keeps a single representation on the wire-facing surface instead of forcing
 // conversions between two structurally identical types.
 // ============================================================================
-@@alternateType(OpenAI.Annotation,
-  { identity: "OpenAI.Responses.ResponseMessageAnnotation", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.Annotation,
+  {
+    identity: "OpenAI.Responses.ResponseMessageAnnotation",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ComputerAction,
-  { identity: "OpenAI.Responses.ComputerCallAction", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ComputerAction,
+  {
+    identity: "OpenAI.Responses.ComputerCallAction",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ConversationParam,
-  { identity: "OpenAI.Responses.ResponseConversationOptions", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ConversationParam,
+  {
+    identity: "OpenAI.Responses.ResponseConversationOptions",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.ResponseUsage,
-  { identity: "OpenAI.Responses.ResponseTokenUsage", package: "OpenAI", minVersion: "2.12.0" },
+@@alternateType(
+  OpenAI.ResponseUsage,
+  {
+    identity: "OpenAI.Responses.ResponseTokenUsage",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
 
@@ -1337,11 +1628,17 @@ namespace Azure.AI.Projects {
 // cannot pass this package's Azure attribution fields to it. They are hand-written in
 // src/Custom/Models instead, deriving from ResponseItem and carrying the Azure attribution
 // over JsonPatch like the other attribution members in this package.
-@@alternateType(OpenAI.CustomToolCallResource,
-  { identity: "Azure.AI.AgentServer.Responses.OutputItemCustomToolCall" },
+@@alternateType(
+  OpenAI.CustomToolCallResource,
+  {
+    identity: "Azure.AI.AgentServer.Responses.OutputItemCustomToolCall",
+  },
   "csharp"
 );
-@@alternateType(OpenAI.CustomToolCallOutputResource,
-  { identity: "Azure.AI.AgentServer.Responses.OutputItemCustomToolCallOutput" },
+@@alternateType(
+  OpenAI.CustomToolCallOutputResource,
+  {
+    identity: "Azure.AI.AgentServer.Responses.OutputItemCustomToolCallOutput",
+  },
   "csharp"
 );
