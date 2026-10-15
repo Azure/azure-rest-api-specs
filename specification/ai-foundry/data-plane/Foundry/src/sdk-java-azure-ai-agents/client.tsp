@@ -235,6 +235,12 @@ using Azure.AI.Projects;
 );
 
 // Use descriptive Java names for configuration properties
+@@clientName(MicrosoftCopilotToolsetConfig.name, "toolName");
+@@clientName(
+  MicrosoftCopilotToolsetPreview.default_config,
+  "defaultConfiguration"
+);
+@@clientName(MicrosoftCopilotToolsetPreview.configs, "toolConfigurations");
 @@clientName(GitHubCopilotToolsetConfig.name, "toolName");
 @@clientName(
   GitHubCopilotToolsetPreview.default_config,
@@ -734,6 +740,8 @@ using Azure.AI.Projects;
 );
 
 // Use idiomatic Java word boundaries for file-system enum members.
+@@clientName(MicrosoftCopilotBuiltInTool.filesystem_read, "FILE_SYSTEM_READ");
+@@clientName(MicrosoftCopilotBuiltInTool.filesystem_write, "FILE_SYSTEM_WRITE");
 @@clientName(GitHubCopilotBuiltInTool.filesystem_read, "FILE_SYSTEM_READ");
 @@clientName(GitHubCopilotBuiltInTool.filesystem_write, "FILE_SYSTEM_WRITE");
 

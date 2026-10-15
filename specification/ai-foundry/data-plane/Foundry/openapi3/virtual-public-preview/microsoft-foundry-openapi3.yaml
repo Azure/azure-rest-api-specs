@@ -53997,7 +53997,7 @@ components:
         - shell
         - web
         - subagents
-      description: A customer-configurable GitHub Copilot built-in tool.
+      description: The legacy GitHub Copilot built-in tool names retained for compatibility. Use `MicrosoftCopilotBuiltInTool` for new integrations.
     GitHubCopilotHarness:
       type: object
       required:
@@ -54025,7 +54025,7 @@ components:
         enabled:
           type: boolean
           description: Whether the built-in tool is enabled. If omitted, the toolset default applies.
-      description: An enablement override for a GitHub Copilot built-in tool.
+      description: The legacy per-tool enablement override retained for compatibility. Use `MicrosoftCopilotToolsetConfig` for new integrations.
     GitHubCopilotToolsetDefaultConfig:
       type: object
       properties:
@@ -54033,7 +54033,7 @@ components:
           type: boolean
           description: Whether built-in tools are enabled by default. Defaults to true.
           default: true
-      description: The default enablement setting for GitHub Copilot built-in tools.
+      description: The legacy default enablement setting retained for compatibility. Use `MicrosoftCopilotToolsetDefaultConfig` for new integrations.
     GitHubCopilotToolsetPreview:
       type: object
       required:
@@ -54043,7 +54043,7 @@ components:
           type: string
           enum:
             - github_copilot_toolset_preview
-          description: The type of the toolset. Always `github_copilot_toolset_preview`.
+          description: The legacy type of the toolset. Always `github_copilot_toolset_preview`; use `microsoft_copilot_toolset_preview` for new integrations.
         default_config:
           $ref: '#/components/schemas/GitHubCopilotToolsetDefaultConfig'
           description: The default configuration for built-in tools. If omitted, built-in tools are enabled by default.
@@ -54054,7 +54054,7 @@ components:
           description: Per-tool configuration overrides. Duplicate built-in tool names are not allowed.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
-      description: Configuration overrides for GitHub Copilot built-in tools.
+      description: The legacy GitHub Copilot toolset retained for compatibility. Use `MicrosoftCopilotToolsetPreview` for new integrations.
       x-ms-foundry-meta:
         required_previews:
           - GitHubCopilot=V1Preview
@@ -55663,6 +55663,15 @@ components:
             - Shared
             - Tenant
       description: The publish scope for the generated Microsoft Teams app.
+    MicrosoftCopilotBuiltInTool:
+      type: string
+      enum:
+        - filesystem_read
+        - filesystem_write
+        - shell
+        - web
+        - subagents
+      description: A customer-configurable Microsoft Copilot built-in tool.
     MicrosoftCopilotHarness:
       type: object
       required:
@@ -55676,6 +55685,50 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentHarness'
       description: The Microsoft Copilot managed harness for prompt agents.
+      x-ms-foundry-meta:
+        required_previews:
+          - GitHubCopilot=V1Preview
+    MicrosoftCopilotToolsetConfig:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/MicrosoftCopilotBuiltInTool'
+          description: The built-in tool to configure.
+        enabled:
+          type: boolean
+          description: Whether the built-in tool is enabled. If omitted, the toolset default applies.
+      description: An enablement override for a Microsoft Copilot built-in tool.
+    MicrosoftCopilotToolsetDefaultConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether built-in tools are enabled by default. Defaults to true.
+          default: true
+      description: The default enablement setting for Microsoft Copilot built-in tools.
+    MicrosoftCopilotToolsetPreview:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - microsoft_copilot_toolset_preview
+          description: The type of the toolset. Always `microsoft_copilot_toolset_preview`.
+        default_config:
+          $ref: '#/components/schemas/MicrosoftCopilotToolsetDefaultConfig'
+          description: The default configuration for built-in tools. If omitted, built-in tools are enabled by default.
+        configs:
+          type: array
+          items:
+            $ref: '#/components/schemas/MicrosoftCopilotToolsetConfig'
+          description: Per-tool configuration overrides. Duplicate built-in tool names are not allowed.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: Configuration overrides for Microsoft Copilot built-in tools.
       x-ms-foundry-meta:
         required_previews:
           - GitHubCopilot=V1Preview
@@ -82428,6 +82481,7 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          microsoft_copilot_toolset_preview: '#/components/schemas/MicrosoftCopilotToolsetPreview'
           github_copilot_toolset_preview: '#/components/schemas/GitHubCopilotToolsetPreview'
           bing_grounding: '#/components/schemas/BingGroundingTool'
           fabric_dataagent_preview: '#/components/schemas/MicrosoftFabricPreviewTool'
@@ -82842,6 +82896,7 @@ components:
             - fabric_iq_preview
             - toolbox_search_preview
             - web_iq_preview
+            - microsoft_copilot_toolset_preview
             - github_copilot_toolset_preview
             - a2a
             - azure_ai_search
