@@ -79,7 +79,7 @@ function trustedRepository({ context }: GitHubScriptArgs): string {
   const branch: unknown = context.payload.repository?.default_branch;
   if (
     context.repo.owner !== "Azure" ||
-    context.repo.repo !== "azure-rest-api-specs" ||
+    !["azure-rest-api-specs", "azure-rest-api-specs-pr"].includes(context.repo.repo) ||
     typeof branch !== "string" ||
     !branch ||
     context.ref !== `refs/heads/${branch}` ||
