@@ -771,3 +771,19 @@ namespace ApplicationInsightsManagementClient;
   url,
   "csharp"
 );
+
+@@clientName(
+  ApplicationInsightsComponentProperties.otlpLogsEndpoint,
+  "OTLPLogsEndpoint",
+  "go"
+);
+@@clientName(
+  ApplicationInsightsComponentProperties.otlpTracesEndpoint,
+  "OTLPTracesEndpoint",
+  "go"
+);
+@@clientName(
+  ApplicationInsightsComponentProperties.otlpMetricsEndpoint,
+  "OTLPMetricsEndpoint",
+  "go"
+);

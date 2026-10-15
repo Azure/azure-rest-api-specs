@@ -851,6 +851,7 @@ namespace Azure.AI.Projects {
 
   @@usage(BingGroundingTool, Usage.input | Usage.output);
   @@usage(BrowserAutomationPreviewTool, Usage.input | Usage.output);
+  @@usage(BrowserAutomationTool, Usage.input | Usage.output);
   @@usage(
     BrowserAutomationToolConnectionParameters,
     Usage.input | Usage.output
@@ -929,7 +930,7 @@ namespace Azure.AI.Projects {
 
   @@usage(FabricIQPreviewTool, Usage.input | Usage.output);
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
-  //@@clientName(WebIQPreviewTool.server_url, "ServerUri");
+  @@usage(WebIQPreviewTool, Usage.input | Usage.output);
   @@clientName(
     CaptureStructuredOutputsTool.outputs,
     "OutputDefinition",
