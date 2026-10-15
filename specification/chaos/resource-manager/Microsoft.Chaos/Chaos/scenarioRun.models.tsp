@@ -31,8 +31,19 @@ model ScenarioRunInProgressResponse {
   /**
    * The number of seconds the client should wait before polling again.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "retryAfter")
   @minValue(0)
   @maxValue(2147483647)
+  @header("Retry-After")
+  retryAfterLegacy?: int32;
+
+  /**
+   * The number of seconds the client should wait before polling again.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @minValue(10)
+  @maxValue(600)
   @header("Retry-After")
   retryAfter?: int32;
 

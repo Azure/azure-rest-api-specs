@@ -624,10 +624,6 @@ suppressions:
     from: openapi.json
     where: $.definitions.WorkspaceDiscoveryProperties.properties.warningsTruncated
     reason: warningsTruncated is the exact binary predicate warnings.length < warningsTotalCount. True and false are exhaustive; absence remains distinct from false. An enum would add states without meaning and weaken the required arithmetic contract.
-  - code: XMSSecretInResponse
-    from: openapi.json
-    where: $.definitions.PrivateAccessProperties.properties.publicNetworkAccess
-    reason: False positive - publicNetworkAccess is not a secret. It is a simple Enabled/Disabled configuration setting for public network access control. The property name contains 'access' which may trigger the rule, but the values are not sensitive.
   - code: TrackedExtensionResourcesAreNotAllowed
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].get
