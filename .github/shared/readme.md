@@ -153,6 +153,11 @@ function main() {
 - `defaultLogger` — shared non-debug logger instance.
 - `debugLogger` — shared debug-enabled logger instance.
 
+### `glob` — filesystem discovery
+
+- `globFiles(pattern, options)` — native glob discovery restricted to files, with optional `cwd`
+  and exclusion patterns. Includes file symlinks without traversing directory symlinks.
+
 ### `math` — math helpers
 
 - `toPercent(value, decimals)` — format a `0..1` ratio as a percentage string.
@@ -284,6 +289,21 @@ so the assertion still catches whitespace changes in the actual output.
 - `add(date, ms)` / `subtract(date, ms)` — date arithmetic.
 - `formatDuration(ms)` — human-readable duration string.
 - `getDuration(from, to)` — milliseconds between two dates.
+
+### `typespec-projects` — TypeSpec project discovery
+
+- `findTypeSpecProjects(root)` — sorted, unique absolute project directories beneath `root`.
+  Discovers `tspconfig.*`, including invalid extensions so validation can report them, and excludes
+  `node_modules`.
+- `findTypeSpecProjectsInChangedServices(repoRoot, changedFiles, logger?)` — discovers every project
+  in each `specification/<service>/` touched by repository-relative POSIX changed paths. Includes
+  sibling and nested projects for any file type, including deleted paths. Missing services are
+  skipped with a debug message; other filesystem failures propagate.
+
+These helpers do not fetch changed files, inspect imports, pair Swagger READMEs, or apply a
+core-file/all-project fallback. Callers own those policies. Pass both old and new paths when a
+rename must select both services. Results are directories, not `tspconfig.yaml` paths; consumers
+requiring valid configs must account for invalid extensions.
 
 ### `typespec-metadata` — TypeSpec SDK metadata
 

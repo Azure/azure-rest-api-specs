@@ -5,7 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } fr
 
 import * as fsPromises from "node:fs/promises";
 import path from "pathe";
-import * as nativeGlob from "../src/glob.ts";
+import * as nativeGlob from "@azure-tools/specs-shared/glob";
 import { CompileRule } from "../src/rules/compile.ts";
 import { diagnosticDetails } from "./diagnostics.ts";
 

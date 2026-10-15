@@ -6,8 +6,8 @@ emit:
   - "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/specs-typespec-rulesets/resource-manager"
-    - "@azure-tools/specs-typespec-rulesets/client-sdk"
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{output-dir}"
@@ -21,6 +21,9 @@ options:
     code-kind: model
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.AgriculturePlatform"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.AgriculturePlatform"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-agricultureplatform"
