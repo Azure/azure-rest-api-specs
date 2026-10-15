@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/versioning";
 
@@ -8,14 +7,12 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ApiManagement;
 
 /** A successful existence check, with no response body. */
 @added(Versions.v2026_10_01_preview)
-@clientName("AiGatewayResourceExistsResult", "csharp")
 model AiGatewayResourceExistsResponse {
   /** HTTP status for an existing resource. */
   @statusCode
@@ -28,9 +25,11 @@ model AiGatewayResourceExistsResponse {
 
 /** Parameters for checking an AI Gateway name in a location. */
 @added(Versions.v2026_10_01_preview)
-@clientName("AiGatewayCheckNameAvailabilityContent", "csharp")
 model AiGatewayCheckNameAvailabilityRequest {
   /** Name to validate and check for availability. */
+  @pattern("^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$")
+  @minLength(3)
+  @maxLength(24)
   name: string;
 
   /** Resource type to check. When supplied, must be Microsoft.ApiManagement/aigateways. */
@@ -54,7 +53,6 @@ union AiGatewayNameAvailabilityReason {
 
 /** Availability of an AI Gateway name in a location. */
 @added(Versions.v2026_10_01_preview)
-@clientName("AiGatewayCheckNameAvailabilityResult", "csharp")
 model AiGatewayCheckNameAvailabilityResponse {
   /** Whether the name is valid and available. */
   nameAvailable: boolean;
@@ -88,7 +86,6 @@ model AiGatewayEndpoint {
 
   /** HTTPS base URL for SDKs that construct operation paths, when metadata is enabled. */
   @visibility(Lifecycle.Read)
-  @clientName("baseUri", "csharp")
   baseUrl?: url;
 
   /** API identifier relative to the provider prefix, when metadata is enabled. */

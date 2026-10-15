@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/versioning";
 
@@ -8,7 +7,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ApiManagement;
@@ -130,12 +128,10 @@ model AiGatewayToolServerOauth2Authentication {
   issuer?: url;
 
   /** OAuth authorization endpoint. */
-  @clientName("authorizationUri", "csharp")
-  authorizationUrl?: string;
+  authorizationUrl?: url;
 
   /** OAuth token endpoint. */
-  @clientName("tokenUri", "csharp")
-  tokenUrl?: string;
+  tokenUrl?: url;
 
   /** OAuth client identifier. */
   clientId?: string;
@@ -165,7 +161,7 @@ model AiGatewayToolServerOauth2Authentication {
 
   /** Login link used to complete interactive authorization. */
   @visibility(Lifecycle.Read)
-  loginLink?: string;
+  loginLink?: url;
 
   /** UTC timestamp of the last OAuth connection-status transition. */
   @visibility(Lifecycle.Read)
@@ -205,7 +201,7 @@ model AiGatewayToolServerCredentials {
 @added(Versions.v2026_10_01_preview)
 model AiGatewayMcpUrlConfiguration {
   /** Backend MCP server endpoint. */
-  url: string;
+  url: url;
 
   /** MCP transport. */
   transport?: AiGatewayToolServerMcpTransport;
@@ -223,7 +219,7 @@ model AiGatewayOpenApiSpecSource {
   contentBase64?: bytes;
 
   /** URL of the OpenAPI document. Required when kind is Url. */
-  url?: string;
+  url?: url;
 }
 
 /** OpenAPI-backed MCP endpoint configuration. */
@@ -282,7 +278,7 @@ model AiGatewayToolServerCredentialsUpdate {
 @added(Versions.v2026_10_01_preview)
 model AiGatewayMcpUrlConfigurationUpdate {
   /** Backend MCP server endpoint. */
-  url?: string;
+  url?: url;
 
   /** MCP transport. */
   transport?: AiGatewayToolServerMcpTransport;
@@ -300,7 +296,7 @@ model AiGatewayOpenApiSpecSourceUpdate {
   contentBase64?: bytes;
 
   /** URL of the OpenAPI document. */
-  url?: string;
+  url?: url;
 }
 
 /** OpenAPI-backed MCP endpoint settings to update. */

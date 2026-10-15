@@ -1801,6 +1801,9 @@
         "x-ms-examples": {
           "Create a Foundry model provider": {
             "$ref": "./examples/AiGatewayModelProviderCreate.json"
+          },
+          "Create a custom model provider with API key authentication": {
+            "$ref": "./examples/AiGatewayModelProviderCreateCustom.json"
           }
         }
       },
@@ -3192,8 +3195,14 @@
           }
         },
         "x-ms-examples": {
+          "Create a connector tool server": {
+            "$ref": "./examples/AiGatewayToolServerCreateConnector.json"
+          },
           "Create an MCP tool server": {
             "$ref": "./examples/AiGatewayToolServerCreate.json"
+          },
+          "Create an OpenAPI tool server with inline and URL document sources": {
+            "$ref": "./examples/AiGatewayToolServerCreateOpenApi.json"
           }
         }
       },
@@ -4241,7 +4250,10 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name to validate and check for availability."
+          "description": "Name to validate and check for availability.",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
         },
         "type": {
           "type": "string",
@@ -4737,6 +4749,7 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "Backend MCP server endpoint."
         },
         "transport": {
@@ -4754,6 +4767,7 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "Backend MCP server endpoint."
         },
         "transport": {
@@ -5186,6 +5200,7 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "URL of the OpenAPI document. Required when kind is Url."
         }
       },
@@ -5237,6 +5252,7 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "URL of the OpenAPI document."
         }
       }
@@ -6603,10 +6619,12 @@
         },
         "authorizationUrl": {
           "type": "string",
+          "format": "uri",
           "description": "OAuth authorization endpoint."
         },
         "tokenUrl": {
           "type": "string",
+          "format": "uri",
           "description": "OAuth token endpoint."
         },
         "clientId": {
@@ -6661,6 +6679,7 @@
         },
         "loginLink": {
           "type": "string",
+          "format": "uri",
           "description": "Login link used to complete interactive authorization.",
           "readOnly": true
         },
@@ -6979,10 +6998,12 @@
         },
         "authorizationUrl": {
           "type": "string",
+          "format": "uri",
           "description": "OAuth authorization endpoint."
         },
         "tokenUrl": {
           "type": "string",
+          "format": "uri",
           "description": "OAuth token endpoint."
         },
         "clientId": {
@@ -7027,6 +7048,7 @@
         },
         "loginLink": {
           "type": "string",
+          "format": "uri",
           "description": "Login link used to complete interactive authorization.",
           "readOnly": true
         },
@@ -7067,6 +7089,7 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "URL of the OpenAPI document. Required when kind is Url."
         },
         "contentBase64": {
