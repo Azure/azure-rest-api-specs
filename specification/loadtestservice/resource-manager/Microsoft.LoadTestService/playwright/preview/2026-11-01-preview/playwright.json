@@ -778,7 +778,7 @@
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource ID of the user-assigned managed identity.",
+          "description": "The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -1071,6 +1071,35 @@
             ]
           }
         },
+        "sessionArtifacts": {
+          "type": "string",
+          "description": "Enables session artifact recording for the workspace.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is disabled."
+              }
+            ]
+          }
+        },
+        "storageIdentity": {
+          "$ref": "#/definitions/ManagedIdentityProperties",
+          "description": "The managed identity used to manage session artifacts in the storage account."
+        },
         "browserProxy": {
           "type": "string",
           "description": "Indicates whether browser proxy is enabled for the workspace. When set to true, browser proxy can be used for the workspace.",
@@ -1197,6 +1226,14 @@
           "type": "string",
           "format": "uri",
           "description": "The URI of the Azure storage account used to store workspace artifacts, test results, and reports."
+        },
+        "sessionArtifacts": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "Enables session artifact recording for the workspace."
+        },
+        "storageIdentity": {
+          "$ref": "#/definitions/ManagedIdentityProperties",
+          "description": "The managed identity used to manage session artifacts in the storage account."
         },
         "browserProxy": {
           "$ref": "#/definitions/EnablementStatus",
