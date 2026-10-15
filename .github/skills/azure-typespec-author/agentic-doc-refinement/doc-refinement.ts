@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-// @ts-check
 //
 // Code-based agentic doc-refinement loop for the azure-typespec-author skill,
 // driven programmatically by the GitHub Copilot SDK (@github/copilot-sdk).
@@ -25,19 +24,45 @@
 // Usage:
 //   npm run refine                                 # full loop via ADO pipeline
 //   npm run refine -- --skip-eval                  # only steps 1-2
-//   node doc-refinement.mjs --skip-eval            # only steps 1-2
-//   node doc-refinement.mjs --skill-ref refs/heads/main
-//   node doc-refinement.mjs --model gpt-5.5 --idle-timeout 1800
-//   node doc-refinement.mjs --help
+//   node doc-refinement.ts --skip-eval             # only steps 1-2
+//   node doc-refinement.ts --skill-ref refs/heads/main
+//   node doc-refinement.ts --model gpt-5.5 --idle-timeout 1800
+//   node doc-refinement.ts --help
 
-import { CopilotClient } from "@github/copilot-sdk";
+import { CopilotClient, type CopilotSession } from "@github/copilot-sdk";
 import AdmZip from "adm-zip";
 import { spawn } from "node:child_process";
 import { readFile, mkdir, readdir, stat } from "node:fs/promises";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, type Dirent } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
+
+interface Options {
+  help: boolean;
+  skipEval: boolean;
+  skillRef: string | null;
+  resultsDir: string;
+  model: string;
+  idleTimeoutMs: number;
+}
+
+type AgentConfig = Pick<Options, "model" | "idleTimeoutMs">;
+
+interface AllowedPaths {
+  read: string[];
+  write: string[];
+}
+
+interface AdoAuth {
+  token(forceRefresh?: boolean): Promise<string>;
+}
+
+interface PipelineResult {
+  buildId: number;
+  buildUrl: string;
+  result: string;
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // This folder: .github/skills/azure-typespec-author/agentic-doc-refinement → repo root is 4 up.
@@ -63,29 +88,24 @@ const EXPECTED_CODE_QUALITY_SUITES = [
   "dataplane",
 ];
 
-/** @param {unknown} value @returns {value is Record<string, unknown>} */
-function isRecord(value) {
+function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-/** @param {unknown} value @returns {value is unknown[]} */
-function isArray(value) {
+function isArray(value: unknown): value is unknown[] {
   return Array.isArray(value);
 }
 
-/** @param {string} text @returns {unknown} */
-function parseJson(text) {
+function parseJson(text: string): unknown {
   return JSON.parse(text);
 }
 
-/** @param {unknown} value @param {string} label */
-function requireRecord(value, label) {
+function requireRecord(value: unknown, label: string): Record<string, unknown> {
   if (!isRecord(value)) throw new Error(`${label} must be a JSON object`);
   return value;
 }
 
-/** @param {unknown} value @param {string} label */
-function requireString(value, label) {
+function requireString(value: unknown, label: string): string {
   if (typeof value !== "string" || !value) {
     throw new Error(`${label} must be a non-empty string`);
   }
@@ -96,9 +116,8 @@ function requireString(value, label) {
  * Resolve the Copilot CLI entry point from the installed @github/copilot package's
  * `bin` field. Returns undefined if it can't be found (SDK falls back to its own
  * resolver / COPILOT_CLI_PATH).
- * @returns {string | undefined}
  */
-function resolveCopilotCliPath() {
+function resolveCopilotCliPath(): string | undefined {
   try {
     const require = createRequire(import.meta.url);
     const pkgJsonPath = require.resolve("@github/copilot/package.json");
@@ -119,7 +138,7 @@ function resolveCopilotCliPath() {
 }
 
 // -------------------------- arg parsing --------------------------
-const HELP = `Usage: node doc-refinement.mjs [options]
+const HELP = `Usage: node doc-refinement.ts [options]
 
 Workflow:
   --skip-eval                Run steps 1-2 only; skip eval, analysis, and report (steps 3-5)
@@ -136,21 +155,19 @@ General:
   -h, --help                 Show this help
 
 Examples:
-  node doc-refinement.mjs
-  node doc-refinement.mjs --skip-eval
-  node doc-refinement.mjs --skill-ref refs/heads/main
+  node doc-refinement.ts
+  node doc-refinement.ts --skip-eval
+  node doc-refinement.ts --skill-ref refs/heads/main
 `;
 
-/** @param {string[]} argv */
-function parseArgs(argv) {
+export function parseArgs(argv: string[]): Options {
   const args = [...argv];
-  /** @param {string} option */
-  const npmForwardingError = (option) =>
+  const npmForwardingError = (option: string): string =>
     `${option} was consumed by npm. Use direct node invocation or add a second separator: ` +
     `npm run refine -- -- ${option} <value>`;
 
   const npmModelConfig = process.env.npm_config_model;
-  let npmModel;
+  let npmModel: string | undefined;
   if (npmModelConfig && npmModelConfig !== "true") {
     npmModel = npmModelConfig;
   } else if (npmModelConfig === "true" && args.length === 1 && !args[0].startsWith("--")) {
@@ -183,7 +200,7 @@ function parseArgs(argv) {
     throw new Error(npmForwardingError("--idle-timeout"));
   }
 
-  const opts = {
+  const opts: Options = {
     help: false,
     skipEval: process.env.npm_config_skip_eval === "true",
     skillRef:
@@ -200,8 +217,7 @@ function parseArgs(argv) {
       1000,
   };
 
-  /** @param {string} option @param {number} index */
-  const takeValue = (option, index) => {
+  const takeValue = (option: string, index: number): string => {
     const value = args[index + 1];
     if (!value || value.startsWith("--")) {
       throw new Error(`${option} requires a value`);
@@ -242,22 +258,18 @@ function parseArgs(argv) {
 }
 
 // -------------------------- helpers --------------------------
-/** @param {string} msg */
-function log(msg) {
+function log(msg: string): void {
   process.stderr.write(`\n\x1b[36m==> ${msg}\x1b[0m\n`);
 }
 
-function runId() {
+function runId(): string {
   return new Date().toISOString().replace(/[:.]/g, "-");
 }
 
 /**
  * Run a command and return trimmed stdout.
- * @param {string} command
- * @param {string[]} args
- * @returns {Promise<string>}
  */
-function runCommand(command, args) {
+function runCommand(command: string, args: string[]): Promise<string> {
   return new Promise((resolve, reject) => {
     const child = spawn(command, args, {
       cwd: REPO_ROOT,
@@ -266,8 +278,8 @@ function runCommand(command, args) {
     });
     let stdout = "";
     let stderr = "";
-    child.stdout.on("data", (data) => (stdout += data));
-    child.stderr.on("data", (data) => (stderr += data));
+    child.stdout.on("data", (data: Buffer) => (stdout += data.toString()));
+    child.stderr.on("data", (data: Buffer) => (stderr += data.toString()));
     child.on("error", reject);
     child.on("close", (code) => {
       if (code === 0) resolve(stdout.trim());
@@ -280,7 +292,7 @@ function runCommand(command, args) {
   });
 }
 
-async function upstreamRemote() {
+async function upstreamRemote(): Promise<string> {
   for (const name of ["upstream", "origin"]) {
     try {
       const url = await runCommand("git", ["remote", "get-url", name]);
@@ -297,23 +309,20 @@ async function upstreamRemote() {
   return UPSTREAM_REPOSITORY;
 }
 
-/** @param {string} remote @param {string} ref */
-async function remoteRefSha(remote, ref) {
+async function remoteRefSha(remote: string, ref: string): Promise<string> {
   const output = await runCommand("git", ["ls-remote", remote, ref]);
   const firstLine = output.split(/\r?\n/, 1)[0];
   if (!firstLine) throw new Error(`Remote ref not found: ${ref}`);
   return firstLine.split(/\s+/, 1)[0];
 }
 
-/** @param {string} ref */
-function validateSkillRef(ref) {
+function validateSkillRef(ref: string): void {
   if (!/^[A-Za-z0-9._/-]+$/.test(ref)) {
     throw new Error(`Invalid skill ref: ${ref}`);
   }
 }
 
-/** @param {string | null} explicitRef */
-async function resolveSkillRef(explicitRef) {
+async function resolveSkillRef(explicitRef: string | null): Promise<string> {
   const remote = await upstreamRemote();
   if (explicitRef) {
     validateSkillRef(explicitRef);
@@ -367,7 +376,7 @@ async function resolveSkillRef(explicitRef) {
   }
 }
 
-async function ensureEvaluatedFilesAreCommitted() {
+async function ensureEvaluatedFilesAreCommitted(): Promise<void> {
   const status = await runCommand("git", [
     "status",
     "--porcelain",
@@ -384,7 +393,7 @@ async function ensureEvaluatedFilesAreCommitted() {
   }
 }
 
-function createAdoAuth() {
+function createAdoAuth(): AdoAuth {
   let token = "";
   let expiresAt = 0;
   return {
@@ -415,12 +424,11 @@ function createAdoAuth() {
   };
 }
 
-/**
- * @param {string} url
- * @param {ReturnType<typeof createAdoAuth>} auth
- * @param {RequestInit} [options]
- */
-async function adoRequest(url, auth, options = {}) {
+async function adoRequest(
+  url: string,
+  auth: AdoAuth,
+  options: RequestInit = {},
+): Promise<Response> {
   const send = async (forceRefresh = false) =>
     fetch(url, {
       ...options,
@@ -441,8 +449,7 @@ async function adoRequest(url, auth, options = {}) {
   return response;
 }
 
-/** @param {number} buildId @param {ReturnType<typeof createAdoAuth>} auth */
-async function waitForBuild(buildId, auth) {
+async function waitForBuild(buildId: number, auth: AdoAuth): Promise<{ result: string }> {
   const url = `${ADO_API_BASE}/build/builds/${buildId}?api-version=7.0`;
   const deadline = Date.now() + ADO_BUILD_TIMEOUT_MS;
   while (true) {
@@ -457,8 +464,7 @@ async function waitForBuild(buildId, auth) {
   }
 }
 
-/** @param {string} skillRef @param {string} outputDir */
-async function runPipeline(skillRef, outputDir) {
+export async function runPipeline(skillRef: string, outputDir: string): Promise<PipelineResult> {
   const auth = createAdoAuth();
   const queueUrl = `${ADO_API_BASE}/build/builds?api-version=7.0`;
   const body = {
@@ -516,17 +522,14 @@ async function runPipeline(skillRef, outputDir) {
   return { buildId, buildUrl, result: build.result };
 }
 
-/** @param {string} name */
-async function readPrompt(name) {
+async function readPrompt(name: string): Promise<string> {
   return readFile(path.join(PROMPTS_DIR, name), "utf8");
 }
 
 /**
  * Return whether a requested path is contained by one of the allowed roots.
- * @param {string} requestedPath
- * @param {string[]} allowedRoots
  */
-function isAllowedPath(requestedPath, allowedRoots) {
+function isAllowedPath(requestedPath: string, allowedRoots: string[]): boolean {
   const resolvedPath = path.resolve(REPO_ROOT, requestedPath);
   return allowedRoots.some((root) => {
     const relative = path.relative(root, resolvedPath);
@@ -536,11 +539,12 @@ function isAllowedPath(requestedPath, allowedRoots) {
 
 /**
  * Create an autonomous agent session with least-privilege file access.
- * @param {CopilotClient} client
- * @param {{ model: string, idleTimeoutMs: number }} cfg
- * @param {{ read: string[], write: string[] }} allowedPaths
  */
-async function createAgentSession(client, cfg, allowedPaths) {
+async function createAgentSession(
+  client: CopilotClient,
+  cfg: AgentConfig,
+  allowedPaths: AllowedPaths,
+): Promise<CopilotSession> {
   return client.createSession({
     model: cfg.model,
     workingDirectory: REPO_ROOT,
@@ -588,22 +592,21 @@ async function createAgentSession(client, cfg, allowedPaths) {
 
 /**
  * Run a single autonomous agent turn in an existing session.
- * @param {import("@github/copilot-sdk").CopilotSession} session
- * @param {string} prompt
- * @param {{ idleTimeoutMs: number }} cfg
  */
-async function runAgent(session, prompt, cfg) {
+async function runAgent(
+  session: CopilotSession,
+  prompt: string,
+  cfg: AgentConfig,
+): Promise<string> {
   const result = await session.sendAndWait({ prompt }, cfg.idleTimeoutMs);
   return result?.data?.content ?? "";
 }
 
-/** Recursively collect every results.jsonl produced by Vally under a dir. @param {string} dir */
-async function findResultFiles(dir) {
-  /** @type {string[]} */
-  const out = [];
-  /** @param {string} d */
-  async function walk(d) {
-    let entries;
+/** Recursively collect every results.jsonl produced by Vally under a dir. */
+async function findResultFiles(dir: string): Promise<string[]> {
+  const out: string[] = [];
+  async function walk(d: string): Promise<void> {
+    let entries: Dirent[];
     try {
       entries = await readdir(d, { withFileTypes: true });
     } catch {
@@ -619,16 +622,13 @@ async function findResultFiles(dir) {
   return out;
 }
 
-/** @param {string[]} resultFiles */
-async function validateResultSuites(resultFiles) {
-  /** @type {Set<string>} */
-  const suites = new Set();
+async function validateResultSuites(resultFiles: string[]): Promise<void> {
+  const suites = new Set<string>();
   for (const resultFile of resultFiles) {
     const lines = (await readFile(resultFile, "utf8")).split(/\r?\n/);
     for (const line of lines) {
       if (!line.trim()) continue;
-      /** @type {unknown} */
-      let record;
+      let record: unknown;
       try {
         record = parseJson(line);
       } catch {
@@ -652,8 +652,8 @@ async function validateResultSuites(resultFiles) {
 }
 
 // -------------------------- main --------------------------
-async function main() {
-  const opts = parseArgs(process.argv.slice(2));
+export async function main(argv: string[] = process.argv.slice(2)): Promise<void> {
+  const opts = parseArgs(argv);
   if (opts.help) {
     process.stdout.write(HELP);
     return;
@@ -769,9 +769,11 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  process.stderr.write(
-    `\x1b[31mFAILED: ${err instanceof Error ? err.stack : String(err)}\x1b[0m\n`,
-  );
-  process.exit(1);
-});
+if (import.meta.main) {
+  main().catch((err: unknown) => {
+    process.stderr.write(
+      `\x1b[31mFAILED: ${err instanceof Error ? err.stack : String(err)}\x1b[0m\n`,
+    );
+    process.exit(1);
+  });
+}

@@ -9,6 +9,13 @@ This is maintainer tooling, not part of normal skill invocation. The skill and t
 workflow are maintained in `Azure/azure-rest-api-specs`; the evaluation pipeline and
 fixtures remain in `Azure/azure-sdk-tools`.
 
+**Current support:** Run local maintenance with `--skip-eval` (steps 1-2).
+Full evaluation (steps 3-5) is blocked: the existing tools benchmark resolves skill
+refs against its own repository and does not support the `SkillRepository` parameter
+sent by this workflow. The companion tools PR only removes the old maintenance
+directory; it does not change evaluation. Cross-repository benchmark support requires
+a separate follow-up and is not included in this relocation.
+
 ## Goal
 
 Automate the manual loop we run today:
@@ -43,7 +50,10 @@ Why this is the default: the _forced_ (code-quality) eval is infra-heavy. Vally 
 eval runs on the ADO benchmark pool instead of requiring that infrastructure on the
 local machine.
 
-- **Script**: `doc-refinement.mjs` (this folder). Run with `npm ci && npm run refine`.
+- **Script**: `doc-refinement.ts` (this folder). Run `npm ci`, then
+  `node doc-refinement.ts --skip-eval`.
+  Node.js runs the TypeScript entry point directly using built-in type stripping;
+  no compilation step is needed to run the workflow.
 - **Agent steps (1, 2, 4, 5)** use the **Copilot SDK** (`@github/copilot-sdk`):
   `new CopilotClient()` -> `createSession({ model, workingDirectory, skillDirectories,
 onPermissionRequest, systemMessage })` -> `session.sendAndWait({ prompt }, timeout)`.
@@ -55,13 +65,13 @@ onPermissionRequest, systemMessage })` -> `session.sendAndWait({ prompt }, timeo
   waits for completion, downloads `eval-results-code-quality-<buildId>`, and extracts it
   into the current timestamped result directory.
 
-  The benchmark receives `SkillRepository=https://github.com/Azure/azure-rest-api-specs.git`
-  and `SkillBranch` so it evaluates the specs-hosted skill, not the tools repository's
-  copy. The tools pipeline must support the `SkillRepository` parameter before running
-  steps 3-5; `--skip-eval` does not require that pipeline.
+  This integration is currently blocked. The script sends
+  `SkillRepository=https://github.com/Azure/azure-rest-api-specs.git` and `SkillBranch`,
+  but the existing benchmark cannot fetch specs-hosted refs. Do not run steps 3-5
+  until separately requested cross-repository support is implemented. `--skip-eval`
+  does not require that pipeline.
 
-  > **Steps 1 & 2 never commit.** The agent leaves the reference-doc and skill edits
-
+> **Steps 1 & 2 never commit.** The agent leaves the reference-doc and skill edits
 > **unstaged in the working tree** so you can review them and decide whether to commit.
 > The orchestrator's system message and the step 1/2 prompts forbid `git add`/`commit`/
 > `push`, and shell access is denied by the permission handler, so an autonomous run
@@ -69,12 +79,13 @@ onPermissionRequest, systemMessage })` -> `session.sendAndWait({ prompt }, timeo
 >
 > **Pipeline boundary:** ADO can evaluate only committed and pushed content. If Steps
 > 1-2 create local changes, the full run stops before queueing the pipeline. Run once
-> with `--skip-eval`, review/commit/push the changes, then rerun without `--skip-eval`.
+> with `--skip-eval`, then review/commit/push the changes. Rerunning without
+> `--skip-eval` also requires the separate benchmark integration described above.
 
 ### Flow
 
 ```
-npm run refine
+npm run refine (full flow; currently blocked)
   |
   |- 1. agent -> references/reference-document-links.md
   |- 2. agent -> SKILL.md / references/*   (only if needed)
@@ -88,38 +99,49 @@ npm run refine
 
 The workflow has one phase switch:
 
-- By default, run all five steps.
-- `--skip-eval` runs steps 1-2 only and skips steps 3-5 (Vally, analysis, and report).
+- By default, the script attempts all five steps, but full evaluation is currently
+  blocked by the missing cross-repository benchmark integration.
+- Use `--skip-eval` to run supported steps 1-2 only and skip steps 3-5 (Vally,
+  analysis, and report).
 
 ```
-npm run refine
 npm run refine -- -- --skip-eval --model gpt-5.6-sol
-node doc-refinement.mjs --skip-eval
-node doc-refinement.mjs --skill-ref refs/heads/main
-npm run refine -- -- --skill-ref refs/heads/main
-node doc-refinement.mjs --help
-node doc-refinement.mjs --model gpt-5.5 --idle-timeout 1800
-node doc-refinement.mjs --results-dir C:\temp\typespec-author-results
+node doc-refinement.ts --skip-eval
+node doc-refinement.ts --help
+node doc-refinement.ts --skip-eval --model gpt-5.5 --idle-timeout 1800
 ```
 
 The removed `--update-skill-only` mode is replaced by `--skip-eval`.
 When passing options through npm on Windows, use the second standalone `--` shown above
 so npm forwards the option name instead of converting it to `npm_config_*`. Direct
-`node doc-refinement.mjs ...` invocation does not need the extra separator.
+`node doc-refinement.ts ...` invocation does not need the extra separator.
 
-`--skill-ref` is resolved against `Azure/azure-rest-api-specs`. To evaluate a pull
-request, pass its specs-repository ref, such as `refs/pull/<number>/head`.
+`--skill-ref` is resolved against `Azure/azure-rest-api-specs`. After the separate
+benchmark integration is available, a full run can use `--skill-ref refs/heads/main`
+or a specs pull-request ref such as `refs/pull/<number>/head`. `--results-dir` selects
+the base directory for those evaluation artifacts and reports.
 
 ### Prerequisites
 
+- Node.js >= 24.14.1, matching the repository's minimum version and supporting
+  direct TypeScript execution.
 - `npm ci` in this folder (installs the Copilot SDK/CLI and ZIP extraction dependency).
 - GitHub Copilot CLI installed & authenticated - the SDK spawns it (`copilot login`), or
   set `COPILOT_GITHUB_TOKEN`.
-- Azure CLI installed and authenticated to the `azure-sdk/internal` ADO project
-  (`az login`) for Step 3.
-- The evaluated `SKILL.md` and `references/` changes committed and pushed to the current
+- For future full runs: separate cross-repository benchmark support, plus Azure CLI
+  installed and authenticated to the `azure-sdk/internal` ADO project (`az login`).
+- For future full runs: the evaluated `SKILL.md` and `references/` changes committed and pushed to the current
   upstream branch or GitHub PR ref. Use `--skill-ref` when auto-detection is not suitable.
-- Use `--skip-eval` when only the local reference-document and skill updates are needed.
+- Use `--skip-eval` for local reference-document and skill updates; this is the
+  currently supported workflow.
+
+### Development checks
+
+Install the repository's shared development dependencies with `pnpm install` at the
+repository root, then run `npm ci` in this folder. Run `npm run check` and `npm test`
+here for strict TypeScript checking and hermetic workflow tests. The tests mock
+Copilot, Git/Azure CLI commands, and Azure DevOps responses; they do not queue live
+agents or benchmark builds.
 
 ## Prompt -> file mapping
 
@@ -135,7 +157,10 @@ request, pass its specs-repository ref, such as `refs/pull/<number>/head`.
 ```
 agentic-doc-refinement/
 |- README.md              # this design + usage
-|- doc-refinement.mjs     # Copilot SDK + ADO pipeline orchestrator
+|- doc-refinement.ts      # Copilot SDK + ADO pipeline orchestrator
+|- doc-refinement.test.ts # hermetic workflow tests
+|- tsconfig.json          # shared strict TypeScript settings
+|- vitest.config.ts       # focused test project
 |- package.json           # pins Copilot SDK/CLI + artifact ZIP dependency
 |- package-lock.json      # reproducible standalone npm install
 |- prompts/
