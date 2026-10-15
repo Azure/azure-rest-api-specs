@@ -8,6 +8,10 @@ import { LinterRulesetRule } from "../src/rules/linter-ruleset.ts";
 import * as utils from "../src/utils.ts";
 import { mockFolder } from "./mocks.ts";
 
+const dataPlaneFolder = "specification/foo/data-plane/Foo";
+const resourceManagerFolder = "specification/foo/resource-manager/Foo";
+const managementFolder = "specification/foo/Foo.Management";
+
 describe("linter-ruleset", function () {
   let fileExistsSpy: MockInstance;
   let readTspConfigSpy: MockInstance;
@@ -32,13 +36,10 @@ describe("linter-ruleset", function () {
       Promise.resolve(`
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/specs-typespec-rulesets/resource-manager"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/resource-manager/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute(resourceManagerFolder, defaultLogger);
     assert(result.success);
   });
 
@@ -47,13 +48,10 @@ linter:
       Promise.resolve(`
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute(dataPlaneFolder, defaultLogger);
     assert(result.success);
   });
 
@@ -62,7 +60,7 @@ linter:
       Promise.resolve(`
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 `),
     );
 
@@ -94,13 +92,10 @@ linter:
       Promise.resolve(`
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/Foo.Management",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute(managementFolder, defaultLogger);
     assert(!result.success);
   });
 
@@ -109,14 +104,62 @@ linter:
       Promise.resolve(`
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/specs-typespec-rulesets/resource-manager"
 `),
     );
+    const result = await new LinterRulesetRule().execute(dataPlaneFolder, defaultLogger);
+    assert(!result.success);
+  });
+
+  it("fails with the upstream ruleset instead of the repository-owned ruleset", async function () {
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+`),
+    );
+    const result = await new LinterRulesetRule().execute(dataPlaneFolder, defaultLogger);
+    assert(!result.success);
+    assert(
+      result.diagnostics?.some(
+        (diagnostic) =>
+          diagnostic.code === "linter-ruleset" &&
+          diagnostic.help ===
+            'Add "@azure-tools/specs-typespec-rulesets/data-plane" to linter.extends.',
+      ),
+    );
+  });
+
+  it("fails with the old file reference instead of the package ruleset", async function () {
+    readTspConfigSpy.mockResolvedValue(`
+linter:
+  extends:
+    - "file:../../../../eng/typespec-rulesets/data-plane.yaml"
+`);
+    const result = await new LinterRulesetRule().execute(dataPlaneFolder, defaultLogger);
+    assert(!result.success);
+    assert(
+      result.diagnostics?.some(
+        (diagnostic) =>
+          diagnostic.code === "linter-ruleset" &&
+          diagnostic.help ===
+            'Add "@azure-tools/specs-typespec-rulesets/data-plane" to linter.extends.',
+      ),
+    );
+  });
+
+  it("succeeds with an absolute Windows project path", async function () {
+    readTspConfigSpy.mockResolvedValue(`
+linter:
+  extends:
+    - "@azure-tools/specs-typespec-rulesets/resource-manager"
+`);
     const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
+      "C:\\repo\\specification\\foo\\resource-manager\\Foo",
       defaultLogger,
     );
-    assert(!result.success);
+    assert(result.success);
   });
 
   it("fails with data-plane/old-and-new", async function () {
@@ -125,14 +168,19 @@ linter:
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute(dataPlaneFolder, defaultLogger);
     assert(!result.success);
+    assert(
+      result.diagnostics?.some(
+        (diagnostic) =>
+          diagnostic.code === "deprecated-ruleset" &&
+          diagnostic.help ===
+            'Replace it with "@azure-tools/specs-typespec-rulesets/data-plane" in linter.extends.',
+      ),
+    );
   });
 
   it("fails with resource-manager/old-and-new", async function () {
@@ -141,15 +189,20 @@ linter:
 linter:
   extends:
     - "@azure-tools/typespec-azure-resource-manager/all"
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/specs-typespec-rulesets/resource-manager"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/resource-manager/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute(resourceManagerFolder, defaultLogger);
 
     assert(!result.success);
+    assert(
+      result.diagnostics?.some(
+        (diagnostic) =>
+          diagnostic.code === "deprecated-ruleset" &&
+          diagnostic.help ===
+            'Replace it with "@azure-tools/specs-typespec-rulesets/resource-manager" in linter.extends.',
+      ),
+    );
   });
 
   it("succeeds with client emitter options and client-sdk ruleset", async function () {
@@ -157,17 +210,14 @@ linter:
       Promise.resolve(`
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
-    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
+    - "@azure-tools/specs-typespec-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-python":
     package-dir: "azure-contoso-widgetmanager"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute(dataPlaneFolder, defaultLogger);
     assert(result.success);
   });
 
@@ -176,16 +226,13 @@ options:
       Promise.resolve(`
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 options:
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Template.Contoso"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute(dataPlaneFolder, defaultLogger);
     assert(!result.success);
   });
 
@@ -194,13 +241,10 @@ options:
       Promise.resolve(`
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute(dataPlaneFolder, defaultLogger);
     assert(result.success);
   });
 
@@ -209,7 +253,7 @@ linter:
       Promise.resolve(`
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/specs-typespec-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
@@ -218,10 +262,7 @@ options:
       - "specification/foo/Foo.Shared/"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute(dataPlaneFolder, defaultLogger);
     assert(result.success);
   });
 });

@@ -5,17 +5,12 @@ import { type Rule } from "../rule.ts";
 import { parse } from "../tsp-config.ts";
 import { fileExists, readTspConfig } from "../utils.ts";
 
-// Maps deprecated rulesets to the replacement rulesets
-const deprecatedRulesets = new Map<string, string>([
-  ["@azure-tools/typespec-azure-core/all", "@azure-tools/typespec-azure-rulesets/data-plane"],
-  [
-    "@azure-tools/typespec-azure-resource-manager/all",
-    "@azure-tools/typespec-azure-rulesets/resource-manager",
-  ],
+const deprecatedRulesets = new Set([
+  "@azure-tools/typespec-azure-core/all",
+  "@azure-tools/typespec-azure-resource-manager/all",
 ]);
 
-// Ruleset required when any client (language) emitter has options defined
-const clientSdkRuleset = "@azure-tools/typespec-azure-rulesets/client-sdk";
+const rulesetPackage = "@azure-tools/specs-typespec-rulesets";
 
 // Known client (language) emitters. When any of these has options defined in tspconfig.yaml,
 // the client-sdk ruleset must be enabled. Excludes non-client emitters such as
@@ -35,7 +30,7 @@ export class LinterRulesetRule implements Rule {
   readonly name = "LinterRuleset";
 
   readonly description =
-    "Ensures each spec includes the correct linter ruleset (data-plane or management-plane)";
+    "Ensures each spec includes the repository-owned rulesets for its API plane and SDK emitters";
 
   async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     const diagnostics: Diagnostic[] = [];
@@ -65,26 +60,24 @@ export class LinterRulesetRule implements Rule {
       normalizedFolder.includes("/resource-manager/") ||
       normalizedFolder.trim().endsWith(".Management")
     ) {
-      requiredRuleset = "@azure-tools/typespec-azure-rulesets/resource-manager";
+      requiredRuleset = `${rulesetPackage}/resource-manager`;
     } else if (clientTspExists && !mainTspExists) {
       // Assume folders with no autorest setting, containing only "client.tsp" but no "main.tsp",
       // are data-plane (e.g. HealthInsights.TrialMatcher)
-      requiredRuleset = "@azure-tools/typespec-azure-rulesets/data-plane";
+      requiredRuleset = `${rulesetPackage}/data-plane`;
     } else {
-      requiredRuleset = "@azure-tools/typespec-azure-rulesets/data-plane";
+      requiredRuleset = `${rulesetPackage}/data-plane`;
     }
 
     if (linterExtends) {
       for (const ruleset of linterExtends) {
         if (deprecatedRulesets.has(ruleset)) {
-          const newRuleset = deprecatedRulesets.get(ruleset);
-
           diagnostics.push({
             severity: "error",
             code: "deprecated-ruleset",
             path: join(folder, "tspconfig.yaml"),
             message: `Linter ruleset "${ruleset}" is deprecated.`,
-            help: `Replace it with "${newRuleset}" in linter.extends.`,
+            help: `Replace it with "${requiredRuleset}" in linter.extends.`,
           });
         }
       }
@@ -104,6 +97,7 @@ export class LinterRulesetRule implements Rule {
     const emittersWithOptions = clientEmitters.filter(
       (emitter) => config?.options?.[emitter] !== undefined,
     );
+    const clientSdkRuleset = `${rulesetPackage}/client-sdk`;
     if (emittersWithOptions.length > 0 && !linterExtends?.includes(clientSdkRuleset)) {
       diagnostics.push({
         severity: "error",
