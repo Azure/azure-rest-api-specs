@@ -111,7 +111,7 @@ linter:
     assert(!result.success);
   });
 
-  it("fails with the upstream ruleset instead of the repository-owned ruleset", async function () {
+  it("succeeds with the upstream data-plane ruleset", async function () {
     readTspConfigSpy.mockImplementation(() =>
       Promise.resolve(`
 linter:
@@ -120,15 +120,19 @@ linter:
 `),
     );
     const result = await new LinterRulesetRule().execute(dataPlaneFolder, defaultLogger);
-    assert(!result.success);
-    assert(
-      result.diagnostics?.some(
-        (diagnostic) =>
-          diagnostic.code === "linter-ruleset" &&
-          diagnostic.help ===
-            'Add "@azure-tools/specs-typespec-rulesets/data-plane" to linter.extends.',
-      ),
+    assert(result.success);
+  });
+
+  it("succeeds with the upstream resource-manager ruleset", async function () {
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+`),
     );
+    const result = await new LinterRulesetRule().execute(resourceManagerFolder, defaultLogger);
+    assert(result.success);
   });
 
   it("fails with the old file reference instead of the package ruleset", async function () {
@@ -212,6 +216,22 @@ linter:
   extends:
     - "@azure-tools/specs-typespec-rulesets/data-plane"
     - "@azure-tools/specs-typespec-rulesets/client-sdk"
+options:
+  "@azure-tools/typespec-python":
+    package-dir: "azure-contoso-widgetmanager"
+`),
+    );
+    const result = await new LinterRulesetRule().execute(dataPlaneFolder, defaultLogger);
+    assert(result.success);
+  });
+
+  it("succeeds with client emitter options and upstream client-sdk ruleset", async function () {
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-python":
     package-dir: "azure-contoso-widgetmanager"

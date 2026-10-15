@@ -11,6 +11,13 @@ const deprecatedRulesets = new Set([
 ]);
 
 const rulesetPackage = "@azure-tools/specs-typespec-rulesets";
+const sdkCompatibleRulesetPackage = "@azure-tools/typespec-azure-rulesets";
+
+function hasRuleset(linterExtends: string[] | undefined, ruleset: string): boolean {
+  return [rulesetPackage, sdkCompatibleRulesetPackage].some((packageName) =>
+    linterExtends?.includes(`${packageName}/${ruleset}`),
+  );
+}
 
 // Known client (language) emitters. When any of these has options defined in tspconfig.yaml,
 // the client-sdk ruleset must be enabled. Excludes non-client emitters such as
@@ -55,19 +62,20 @@ export class LinterRulesetRule implements Rule {
     // Normalize path separators
     const normalizedFolder = folder.replace(/\\/g, "/");
 
-    let requiredRuleset;
+    let requiredRulesetName: "resource-manager" | "data-plane";
     if (
       normalizedFolder.includes("/resource-manager/") ||
       normalizedFolder.trim().endsWith(".Management")
     ) {
-      requiredRuleset = `${rulesetPackage}/resource-manager`;
+      requiredRulesetName = "resource-manager";
     } else if (clientTspExists && !mainTspExists) {
       // Assume folders with no autorest setting, containing only "client.tsp" but no "main.tsp",
       // are data-plane (e.g. HealthInsights.TrialMatcher)
-      requiredRuleset = `${rulesetPackage}/data-plane`;
+      requiredRulesetName = "data-plane";
     } else {
-      requiredRuleset = `${rulesetPackage}/data-plane`;
+      requiredRulesetName = "data-plane";
     }
+    const requiredRuleset = `${rulesetPackage}/${requiredRulesetName}`;
 
     if (linterExtends) {
       for (const ruleset of linterExtends) {
@@ -83,7 +91,7 @@ export class LinterRulesetRule implements Rule {
       }
     }
 
-    if (requiredRuleset && !linterExtends?.includes(requiredRuleset)) {
+    if (!hasRuleset(linterExtends, requiredRulesetName)) {
       diagnostics.push({
         severity: "error",
         code: "linter-ruleset",
@@ -98,7 +106,7 @@ export class LinterRulesetRule implements Rule {
       (emitter) => config?.options?.[emitter] !== undefined,
     );
     const clientSdkRuleset = `${rulesetPackage}/client-sdk`;
-    if (emittersWithOptions.length > 0 && !linterExtends?.includes(clientSdkRuleset)) {
+    if (emittersWithOptions.length > 0 && !hasRuleset(linterExtends, "client-sdk")) {
       diagnostics.push({
         severity: "error",
         code: "client-sdk-ruleset",
