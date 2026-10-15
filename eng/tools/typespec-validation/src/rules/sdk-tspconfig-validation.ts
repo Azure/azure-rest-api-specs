@@ -3,7 +3,7 @@
 
 import { type Suppression } from "@azure-tools/suppressions";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
-import { join } from "node:path";
+import { join } from "pathe";
 import { failure, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { exceptionDiagnostic } from "../diagnostics.ts";
