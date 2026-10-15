@@ -53,22 +53,34 @@ describe("findChangedTypeSpecProjects with service scope", () => {
     const swaggerProject = await addProject("specification/third/Project");
     await addProject("specification/unaffected/Other");
 
-    await expect(
-      findChangedTypeSpecProjects(
-        root,
-        [
-          "specification/third/resource-manager/stable/v1/service.json",
-          "specification/first/Project/models/model.tsp",
-          "specification/first/Project/client.tsp",
-          "specification/second/Service.Shared/model.tsp",
-          "documentation/readme.md",
-          "specification/README.md",
-          "specification-other/service/main.tsp",
-          "package.json",
-        ],
-        { scope: "service" },
-      ).then((projects) => [...projects.keys()]),
-    ).resolves.toEqual([parent, nested, sibling, dataPlane, management, swaggerProject]);
+    const modelFile = "specification/first/Project/models/model.tsp";
+    const clientFile = "specification/first/Project/client.tsp";
+    const sharedFile = "specification/second/Service.Shared/model.tsp";
+    const swaggerFile = "specification/third/resource-manager/stable/v1/service.json";
+
+    const projects = await findChangedTypeSpecProjects(
+      root,
+      [
+        swaggerFile,
+        modelFile,
+        clientFile,
+        sharedFile,
+        "documentation/readme.md",
+        "specification/README.md",
+        "specification-other/service/main.tsp",
+        "package.json",
+      ],
+      { scope: "service" },
+    );
+
+    expect([...projects]).toEqual([
+      [parent, [modelFile, clientFile]],
+      [nested, [modelFile, clientFile]],
+      [sibling, [modelFile, clientFile]],
+      [dataPlane, [sharedFile]],
+      [management, [sharedFile]],
+      [swaggerProject, [swaggerFile]],
+    ]);
   });
 
   it("includes surviving services for deleted paths and reports missing or non-directory services", async () => {
@@ -146,16 +158,18 @@ describe("findChangedTypeSpecProjects with project scope", () => {
       const nestedFile = `specification/service/${plane}/Parent/Nested/main.tsp`;
       const modelFile = `specification/service/${plane}/Parent/Nested/models/model.tsp`;
 
-      await expect(
-        findChangedTypeSpecProjects(root, [nestedFile, modelFile, parentFile], {
+      const projects = await findChangedTypeSpecProjects(
+        root,
+        [nestedFile, modelFile, parentFile],
+        {
           scope: "project",
-        }),
-      ).resolves.toEqual(
-        new Map([
-          [parent, [nestedFile, modelFile, parentFile]],
-          [nested, [nestedFile, modelFile]],
-        ]),
+        },
       );
+
+      expect([...projects]).toEqual([
+        [parent, [nestedFile, modelFile, parentFile]],
+        [nested, [nestedFile, modelFile]],
+      ]);
     },
   );
 
