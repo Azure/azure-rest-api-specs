@@ -918,6 +918,18 @@ union RaiPolicyContentSource {
   PreRun: "PreRun",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated after a run execution"
   PostRun: "PostRun",
+  @added(Versions.v2026_09_15_preview)
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated when an agent execution session starts"
+  AgentStartup: "AgentStartup",
+  @added(Versions.v2026_09_15_preview)
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated before a model call is made"
+  PreModelCall: "PreModelCall",
+  @added(Versions.v2026_09_15_preview)
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated after a model call returns"
+  PostModelCall: "PostModelCall",
+  @added(Versions.v2026_09_15_preview)
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated when an agent execution session shuts down"
+  AgentShutdown: "AgentShutdown",
 }
 
 /**
