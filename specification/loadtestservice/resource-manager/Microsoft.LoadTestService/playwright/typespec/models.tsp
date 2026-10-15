@@ -65,7 +65,7 @@ model PlaywrightWorkspaceProperties {
   @added(Versions.v2026_10_01_preview)
   @doc("The managed identity used to manage session artifacts in the storage account.")
   storageIdentity?: ManagedIdentityProperties;
-  
+
   @added(Versions.v2026_11_01_preview)
   @doc("Indicates whether browser proxy is enabled for the workspace. When set to true, browser proxy can be used for the workspace.")
   browserProxy?: EnablementStatus = EnablementStatus.Disabled;
