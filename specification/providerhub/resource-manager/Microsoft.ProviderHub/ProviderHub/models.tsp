@@ -197,6 +197,18 @@ union OptInHeaderType {
   ClientPrincipalNameEncoded: "ClientPrincipalNameEncoded",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MSIResourceIdEncoded: "MSIResourceIdEncoded",
+
+  /**
+   * Includes user context information from the incoming token.
+   */
+  @added(Versions.v2026_09_01_preview)
+  UserContext: "UserContext",
+
+  /**
+   * Includes user context information from incoming auxiliary tokens.
+   */
+  @added(Versions.v2026_09_01_preview)
+  AuxiliaryUserContext: "AuxiliaryUserContext",
 }
 
 /**
