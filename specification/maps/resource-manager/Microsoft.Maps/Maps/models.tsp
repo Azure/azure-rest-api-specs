@@ -109,6 +109,17 @@ model Sku {
 }
 
 /**
+ * SKU properties that can be updated on a Maps account.
+ */
+@added(Versions.v2026_12_01)
+model SkuUpdate {
+  /**
+   * The name of the SKU, in standard format (such as G2).
+   */
+  name?: Name;
+}
+
+/**
  * Additional Maps account properties
  */
 model MapsAccountProperties {
@@ -260,7 +271,7 @@ model MapsAccountUpdateParameters {
   /**
    * The SKU of this account.
    */
-  sku?: Sku;
+  sku?: SkuUpdate;
 
   /**
    * Managed service identity (system assigned and/or user assigned identities)

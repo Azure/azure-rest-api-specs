@@ -470,9 +470,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -758,8 +755,17 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -776,10 +782,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "404": {
-            "description": "The specified private endpoint connection does not exist.",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
@@ -848,9 +850,8 @@
               }
             }
           },
-          "404": {
-            "description": "The specified private endpoint connection does not exist.",
-            "x-ms-error-response": true
+          "204": {
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1471,7 +1472,7 @@
           "description": "Get or Set Kind property."
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "#/definitions/SkuUpdate",
           "description": "The SKU of this account."
         },
         "identity": {
@@ -1666,6 +1667,16 @@
       "required": [
         "name"
       ]
+    },
+    "SkuUpdate": {
+      "type": "object",
+      "description": "SKU properties that can be updated on a Maps account.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/Name",
+          "description": "The name of the SKU, in standard format (such as G2)."
+        }
+      }
     },
     "uuid": {
       "type": "string",
