@@ -347,7 +347,6 @@ interface PasswordAuthentications {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Authentication method instances are service-created with the cluster and cannot be deleted independently."
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Authentication method instances are service-created with the cluster; customers update an existing instance through PATCH and cannot create additional instances."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-list-operation" "The shared authentications collection list operation is defined by Authentications.list and returns both constrained resource instances."
 @doc("Operations for the service-created Microsoft Entra authentication method of a HorizonDB cluster.")
 @armResourceOperations
@@ -355,25 +354,28 @@ interface MicrosoftEntraAuthentications {
   @doc("Gets the service-created Microsoft Entra authentication method.")
   @autoRoute
   @get
-  @armResourceRead(Authentication)
-  get is Azure.ResourceManager.Foundations.ArmReadOperation<
-    ResourceInstanceParameters<MicrosoftEntraAuthentication>,
-    ArmResponse<Authentication>,
-    ErrorResponse
+  get is ArmResourceRead<MicrosoftEntraAuthentication>;
+
+  @doc("Creates or replaces the service-created Microsoft Entra authentication method. State Enabled enables the feature and State Disabled disables it; no additional properties are required. Repeating the same request is idempotent. Disabling the feature does not remove or modify database roles or users previously created through the MicrosoftEntraAdministrators control-plane API or directly through pgaadauth extension functions.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
+    MicrosoftEntraAuthentication,
+    LroHeaders = HorizonDbResourceLroHeaders<MicrosoftEntraAuthentication>,
+    Response =
+      | HorizonDbResourceUpdatedLroResponse<MicrosoftEntraAuthentication>
+      | ArmResourceCreatedResponse<
+          MicrosoftEntraAuthentication,
+          HorizonDbResourceLroHeaders<MicrosoftEntraAuthentication>
+        >
   >;
 
   @doc("Updates the service-created Microsoft Entra authentication method. State Enabled enables the feature and State Disabled disables it; no additional properties are required. Disabling the feature does not remove or modify database roles or users previously created through the MicrosoftEntraAdministrators control-plane API or directly through pgaadauth extension functions.")
   @autoRoute
-  @armResourceUpdate(Authentication)
-  @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  update is Azure.ResourceManager.Foundations.ArmUpdateOperation<
-    ResourceInstanceParameters<MicrosoftEntraAuthentication>,
+  update is ArmCustomPatchAsync<
+    MicrosoftEntraAuthentication,
     MicrosoftEntraAuthenticationForPatchUpdate,
-    Response =
-      | ArmResponse<Authentication>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Authentication> &
-          Azure.Core.Foundations.RetryAfterHeader>,
-    ErrorResponse = ErrorResponse
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MicrosoftEntraAuthentication> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
