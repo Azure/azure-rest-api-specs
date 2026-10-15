@@ -9042,7 +9042,8 @@
       "description": "The role performed by a node within its HorizonDB pool.",
       "enum": [
         "ReadWrite",
-        "ReadOnly"
+        "ReadOnly",
+        "Unassigned"
       ],
       "x-ms-enum": {
         "name": "NodeRole",
@@ -9057,6 +9058,11 @@
             "name": "ReadOnly",
             "value": "ReadOnly",
             "description": "The node accepts read-only traffic."
+          },
+          {
+            "name": "Unassigned",
+            "value": "Unassigned",
+            "description": "The node is not currently assigned a read-write or read-only role."
           }
         ]
       }

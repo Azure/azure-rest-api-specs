@@ -43,6 +43,9 @@ union NodeRole {
 
   @doc("The node accepts read-only traffic.")
   ReadOnly: "ReadOnly",
+
+  @doc("The node is not currently assigned a read-write or read-only role.")
+  Unassigned: "Unassigned",
 }
 
 @doc("Operations for service-managed HorizonDB nodes.")
