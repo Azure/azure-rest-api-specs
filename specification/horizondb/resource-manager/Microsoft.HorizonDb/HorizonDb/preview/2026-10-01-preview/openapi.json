@@ -3434,7 +3434,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MicrosoftEntraAdministratorAdd"
+              "$ref": "#/definitions/MicrosoftEntraAdministrator"
             }
           }
         ],
@@ -4794,6 +4794,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Location": {
@@ -4820,7 +4821,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Pool"
         },
         "x-ms-long-running-operation": true
       }
@@ -4875,6 +4877,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Location": {
@@ -4901,7 +4904,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Pool"
         },
         "x-ms-long-running-operation": true
       }
@@ -4956,6 +4960,7 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Location": {
@@ -4982,7 +4987,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Pool"
         },
         "x-ms-long-running-operation": true
       }
@@ -5575,6 +5581,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -8769,19 +8780,6 @@
         }
       ]
     },
-    "MicrosoftEntraAdministratorAdd": {
-      "type": "object",
-      "description": "The request body for creating or updating a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MicrosoftEntraAdministratorPropertiesForAdd",
-          "description": "The PostgreSQL role and Microsoft Entra principal mapping properties."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
     "MicrosoftEntraAdministratorListResult": {
       "type": "object",
       "description": "The response of a MicrosoftEntraAdministrator list operation.",
@@ -8841,29 +8839,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the PostgreSQL role and Microsoft Entra principal mapping.",
           "readOnly": true
-        }
-      },
-      "required": [
-        "principalName",
-        "principalType"
-      ]
-    },
-    "MicrosoftEntraAdministratorPropertiesForAdd": {
-      "type": "object",
-      "description": "Properties for creating or updating a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.",
-      "properties": {
-        "principalName": {
-          "type": "string",
-          "description": "The display name or user principal name of the Microsoft Entra principal to map to the PostgreSQL role. For users, this is typically the user principal name, such as admin@contoso.com. For groups, this is the group display name. For service principals, this is the application display name.",
-          "maxLength": 256
-        },
-        "principalType": {
-          "$ref": "#/definitions/PrincipalTypes",
-          "description": "The type of Microsoft Entra principal to map to the PostgreSQL role."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The identifier of the Microsoft Entra tenant containing the principal to map, represented as an RFC 4122 GUID. If omitted, this value defaults to the tenant of the subscription."
         }
       },
       "required": [

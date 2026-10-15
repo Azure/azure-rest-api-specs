@@ -554,25 +554,6 @@ model MicrosoftEntraAdministratorProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Properties for creating or updating a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
-model MicrosoftEntraAdministratorPropertiesForAdd {
-  @doc("The display name or user principal name of the Microsoft Entra principal to map to the PostgreSQL role. For users, this is typically the user principal name, such as admin@contoso.com. For groups, this is the group display name. For service principals, this is the application display name.")
-  @maxLength(256)
-  principalName: string;
-
-  @doc("The type of Microsoft Entra principal to map to the PostgreSQL role.")
-  principalType: PrincipalTypes;
-
-  @doc("The identifier of the Microsoft Entra tenant containing the principal to map, represented as an RFC 4122 GUID. If omitted, this value defaults to the tenant of the subscription.")
-  tenantId?: string;
-}
-
-@doc("The request body for creating or updating a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
-model MicrosoftEntraAdministratorAdd {
-  @doc("The PostgreSQL role and Microsoft Entra principal mapping properties.")
-  properties: MicrosoftEntraAdministratorPropertiesForAdd;
-}
-
 @doc("A service-created authentication configuration returned by the authentications collection. The resource name is passwordMethod or microsoftEntra.")
 @parentResource(Cluster)
 model Authentication

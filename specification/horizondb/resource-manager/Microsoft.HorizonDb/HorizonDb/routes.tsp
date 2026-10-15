@@ -104,47 +104,32 @@ interface Pools {
 
   @doc("Starts a stopped HorizonDB pool. Power operations are supported only at pool scope in this API version; there is no cluster-level start action. Start does not apply pending dynamic or static parameter changes; parameterGroup.syncStatus remains PendingReboot until a customer-initiated Restart. When the pool is already Ready, the operation succeeds as a true idempotent no-op and likewise leaves pending parameter changes pending. The operation is allowed when the pool has no allocated nodes. After the Pool is running, its Pool-scoped ReadOnly Endpoint routes only when at least one allocated node is not currently playing the read-write role. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
   @action("start")
-  start is ArmResourceActionAsyncBase<
+  start is ArmResourceActionAsync<
     Pool,
     void,
-    | ArmAcceptedLroResponse<
-        "Resource operation accepted.",
-        LroHeaders = ArmLroLocationHeader &
-          ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ArmResponse<Pool>,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Pool>
+    Pool,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Pool> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @doc("Stops a running HorizonDB pool and deallocates compute. Power operations are supported only at pool scope in this API version; there is no cluster-level stop action. Stop does not apply pending dynamic or static parameter changes; parameterGroup.syncStatus remains PendingReboot. A subsequent Start also preserves those pending changes. The operation succeeds as an idempotent no-op when the pool is already Stopped. It is allowed when the pool has no allocated nodes. The Pool-scoped ReadOnly Endpoint remains discoverable but has no routing destination while the Pool is Stopped. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
   @action("stop")
-  stop is ArmResourceActionAsyncBase<
+  stop is ArmResourceActionAsync<
     Pool,
     void,
-    | ArmAcceptedLroResponse<
-        "Resource operation accepted.",
-        LroHeaders = ArmLroLocationHeader &
-          ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ArmResponse<Pool>,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Pool>
+    Pool,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Pool> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @doc("Restarts the PostgreSQL container on all allocated nodes in a ready HorizonDB pool and applies pending dynamic and static parameter changes. This customer-initiated Restart is the only operation that applies static parameter changes or dynamic parameter changes requested with PendingReboot; Stop followed by Start and scheduled maintenance do not apply them. Power operations are supported only at pool scope in this API version; there is no cluster-level restart action. When the pool has no allocated nodes, the operation succeeds without restarting any nodes, pending changes are considered applied, parameterGroup.syncStatus becomes InSync, and the resulting configuration applies to nodes allocated later. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
   @action("restart")
-  restart is ArmResourceActionAsyncBase<
+  restart is ArmResourceActionAsync<
     Pool,
     void,
-    | ArmAcceptedLroResponse<
-        "Resource operation accepted.",
-        LroHeaders = ArmLroLocationHeader &
-          ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ArmResponse<Pool>,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Pool>
+    Pool,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Pool> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
@@ -236,7 +221,12 @@ interface ParameterGroups {
   createOrReplace is ArmResourceCreateOrReplaceAsync<ParameterGroup>;
   @sharedRoute
   @doc("Updates an existing HorizonDB parameter group. Each connected pool's applyMethod setting controls whether dynamic parameter changes become effective immediately or remain pending until a customer-initiated pool Restart. Static parameter changes always remain pending until a customer-initiated pool Restart. Stop followed by Start and scheduled maintenance do not apply pending changes. The operation fails with a conflict while a previous update to this parameter group is still being processed.")
-  update is ArmCustomPatchAsync<ParameterGroup, ParameterGroupForPatchUpdate>;
+  update is ArmCustomPatchAsync<
+    ParameterGroup,
+    ParameterGroupForPatchUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ParameterGroup> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
   @sharedRoute
   @doc("Deletes a HorizonDB parameter group. Deletion fails with a conflict when the parameter group is associated with one or more pools.")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -283,7 +273,7 @@ interface MicrosoftEntraAdministrators {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrReplace is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     MicrosoftEntraAdministrator,
-    Request = MicrosoftEntraAdministratorAdd,
+    Request = MicrosoftEntraAdministrator,
     LroHeaders = HorizonDbResourceLroHeaders<MicrosoftEntraAdministrator>,
     Response =
       | HorizonDbResourceUpdatedLroResponse<MicrosoftEntraAdministrator>

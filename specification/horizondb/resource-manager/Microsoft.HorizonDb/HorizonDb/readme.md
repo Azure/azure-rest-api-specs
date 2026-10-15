@@ -50,13 +50,6 @@ suppressions:
       and cannot end in variable resource-name segments. The Microsoft Entra
       path exposes GET and PATCH only; associating a PUT path violation with it
       is a validator false positive.
-  - code: PutRequestResponseSchemeArm
-    from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/microsoftEntraAdministrators/{objectId}"].put
-    reason: >-
-      The create request uses MicrosoftEntraAdministratorAdd and omits
-      response-only fields such as objectId and provisioningState. The request
-      is a subset of the resource returned by GET and PUT, not a superset.
   - code: AllProxyResourcesShouldHaveDelete
     from: openapi.json
     where:
