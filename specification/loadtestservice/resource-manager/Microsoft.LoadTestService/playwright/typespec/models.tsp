@@ -107,7 +107,7 @@ model ManagedIdentityProperties {
   @doc("The type of the managed identity, either SystemAssigned or UserAssigned.")
   type?: ManagedIdentityType;
 
-  @doc("The resource ID of the user-assigned managed identity.")
+  @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
   resourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
