@@ -6,11 +6,12 @@ import { ConsoleLogger } from "../src/logger.ts";
 import {
   findTypeSpecProjects,
   findTypeSpecProjectsInChangedServices,
+  findTypeSpecProjectsForChangedFiles,
 } from "../src/typespec-projects.ts";
 
 vi.mock("node:fs/promises", async (importOriginal) => {
   const actual = await importOriginal<typeof import("node:fs/promises")>();
-  return { ...actual, stat: vi.fn(actual.stat) };
+  return { ...actual, readdir: vi.fn(actual.readdir), stat: vi.fn(actual.stat) };
 });
 
 let root: string;
@@ -111,4 +112,92 @@ describe("findTypeSpecProjectsInChangedServices", () => {
       ).rejects.toBe(error);
     },
   );
+});
+
+describe("findTypeSpecProjectsForChangedFiles", () => {
+  it("selects only the nearest old-layout projects and preserves changed-file associations across services", async () => {
+    const other = await addProject("specification/other/Project");
+    const otherFile = "specification/other/Project/main.tsp";
+    await addProject("specification/service/Parent");
+    const nested = await addProject("specification/service/Parent/Nested");
+    const sibling = await addProject("specification/service/Sibling");
+    await addProject("specification/service/Parent/Nested/Child");
+    const siblingFile = "specification/service/Sibling/main.tsp";
+    const modelFile = "specification/service/Parent/Nested/main.tsp";
+    const clientFile = "specification/service/Parent/Nested/client.tsp";
+
+    const projects = await findTypeSpecProjectsForChangedFiles(root, [
+      modelFile,
+      otherFile,
+      siblingFile,
+      clientFile,
+    ]);
+
+    expect([...projects]).toEqual([
+      [other, [otherFile]],
+      [nested, [modelFile, clientFile]],
+      [sibling, [siblingFile]],
+    ]);
+  });
+
+  it.each(["resource-manager", "data-plane"])(
+    "selects ancestor configs in the %s layout without adding sibling or descendant projects",
+    async (plane) => {
+      const parent = await addProject(`specification/service/${plane}/Parent`);
+      const nested = await addProject(`specification/service/${plane}/Parent/Nested`);
+      await addProject(`specification/service/${plane}/Sibling`);
+      await addProject(`specification/service/${plane}/Parent/Nested/Child`);
+      await fs.mkdir(join(nested, "models"));
+      const parentFile = `specification/service/${plane}/Parent/main.tsp`;
+      const nestedFile = `specification/service/${plane}/Parent/Nested/main.tsp`;
+      const modelFile = `specification/service/${plane}/Parent/Nested/models/model.tsp`;
+
+      const projects = await findTypeSpecProjectsForChangedFiles(root, [
+        nestedFile,
+        modelFile,
+        parentFile,
+      ]);
+
+      expect([...projects]).toEqual([
+        [parent, [nestedFile, modelFile, parentFile]],
+        [nested, [nestedFile, modelFile]],
+      ]);
+    },
+  );
+
+  it("does not discover projects for a service-level README or invalid config filename", async () => {
+    await addProject("specification/service/Sibling");
+    await addProject("specification/service/Invalid", "tspconfig.yml");
+    await expect(
+      findTypeSpecProjectsForChangedFiles(root, [
+        "specification/service/readme.md",
+        "specification/service/Invalid/main.tsp",
+        "documentation/readme.md",
+      ]),
+    ).resolves.toEqual(new Map());
+  });
+
+  it("reports missing directories without searching above them", async () => {
+    await addProject("specification/service/Parent");
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+
+    await expect(
+      findTypeSpecProjectsForChangedFiles(root, ["specification/service/Parent/Removed/main.tsp"]),
+    ).resolves.toEqual(new Map());
+    expect(console.warn).toHaveBeenCalledExactlyOnceWith(
+      "Cannot find directory specification/service/Parent/Removed",
+    );
+  });
+
+  it.each([
+    Object.assign(new Error("Permission denied"), { code: "EACCES" }),
+    new Error("Unexpected filesystem failure"),
+    "Unexpected rejection",
+  ])("propagates directory-read failures: %s", async (error) => {
+    vi.mocked(fs.readdir).mockRejectedValueOnce(error);
+
+    await expect(
+      findTypeSpecProjectsForChangedFiles(root, ["specification/service/Project/main.tsp"]),
+    ).rejects.toBe(error);
+  });
 });
