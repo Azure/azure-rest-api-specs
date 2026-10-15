@@ -4985,8 +4985,6 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
   "csharp"
 );
 
-@@clientName(Microsoft.Network.PeerRoute, "PeerRouteList", "csharp");
-
 @@clientName(
   Microsoft.Network.PublicIpDdosProtectionStatusResult,
   "PublicIPDdosProtectionStatusResult",
@@ -8333,4 +8331,16 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   HubVirtualNetworkConnectionProperties.enableOnlyIPv6Peering,
   "enableOnlyIpv6Peering",
   "python"
+);
+
+@@clientName(
+  Microsoft.Network.BgpConnections.listAdvertisedRoutes,
+  "GetVirtualHubBgpConnectionAdvertisedRoutes",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.BgpConnections.listLearnedRoutes,
+  "GetVirtualHubBgpConnectionLearnedRoutes",
+  "csharp"
 );
