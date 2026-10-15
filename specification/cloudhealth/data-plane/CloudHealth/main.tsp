@@ -10,7 +10,7 @@ using Azure.Core;
 using Azure.Core.Foundations;
 
 @useAuth(AadOauth2Auth<["https://data.cloudhealth.azure.com/.default"]>)
-@service(#{ title: "Azure Monitor Health Models Data Plane" })
+@service(#{ title: "Azure Monitor Health Models" })
 @versioned(Versions)
 @server(
   "{endpoint}",
