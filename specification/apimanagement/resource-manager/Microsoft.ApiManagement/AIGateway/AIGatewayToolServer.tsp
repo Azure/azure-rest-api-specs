@@ -142,6 +142,7 @@ model AiGatewayToolServerOauth2Authentication {
 
   /** OAuth client secret. */
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   clientSecret?: string;
 
   /** OAuth scopes to request. */
@@ -179,6 +180,7 @@ model AiGatewayToolServerHeader {
 
   /** Secret values for the HTTP header. */
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   values: string[];
 }
 
@@ -190,7 +192,6 @@ model AiGatewayToolServerCredentials {
 
   /** Static headers injected when calling the endpoint. */
   @identifiers(#["name"])
-  @secret
   headers?: AiGatewayToolServerHeader[];
 
   /** OAuth 2.0 configuration. */
@@ -218,6 +219,7 @@ model AiGatewayOpenApiSpecSource {
 
   /** Base64-encoded OpenAPI document. Required when kind is Inline. */
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   contentBase64?: bytes;
 
   /** URL of the OpenAPI document. Required when kind is Url. */
@@ -267,7 +269,6 @@ model AiGatewayToolServerCredentialsUpdate {
 
   /** Static headers injected when calling the endpoint. */
   @identifiers(#["name"])
-  @secret
   headers?: AiGatewayToolServerHeader[];
 
   /** OAuth 2.0 configuration. */
@@ -295,6 +296,7 @@ model AiGatewayOpenApiSpecSourceUpdate {
 
   /** Base64-encoded OpenAPI document. */
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   contentBase64?: bytes;
 
   /** URL of the OpenAPI document. */

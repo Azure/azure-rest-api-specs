@@ -3980,6 +3980,10 @@
           "type": "string",
           "format": "password",
           "description": "Secret API key value. This value is not returned by read operations.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         }
       },
@@ -3999,6 +4003,10 @@
           "type": "string",
           "format": "password",
           "description": "Secret API key value.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         }
       }
@@ -4030,12 +4038,20 @@
           "type": "string",
           "format": "password",
           "description": "Primary key value. Omitted from ordinary read responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "secondaryKey": {
           "type": "string",
           "format": "password",
           "description": "Secondary key value. Omitted from ordinary read responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "provisioningState": {
@@ -4136,6 +4152,26 @@
           "type": "string",
           "format": "date-time",
           "description": "Optional expiration time."
+        },
+        "primaryKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Replacement primary key value.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "secondaryKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Replacement secondary key value.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -4169,6 +4205,10 @@
           "type": "string",
           "format": "password",
           "description": "Application Insights connection string. Required when creating this exporter kind.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "resourceId": {
@@ -5138,6 +5178,10 @@
           "type": "string",
           "format": "password",
           "description": "Base64-encoded OpenAPI document. Required when kind is Inline.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "url": {
@@ -5185,6 +5229,10 @@
           "type": "string",
           "format": "password",
           "description": "Base64-encoded OpenAPI document.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "url": {
@@ -5219,6 +5267,10 @@
           "additionalProperties": {
             "type": "string"
           },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "managedIdentity": {
@@ -6009,6 +6061,10 @@
           "additionalProperties": {
             "type": "string"
           },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "managedIdentity": {
@@ -6291,15 +6347,13 @@
         },
         "headers": {
           "type": "array",
-          "format": "password",
           "description": "Static headers injected when calling the endpoint.",
           "items": {
             "$ref": "#/definitions/AiGatewayToolServerHeader"
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "x-ms-secret": true
+          ]
         },
         "oauth2": {
           "$ref": "#/definitions/AiGatewayToolServerOauth2Authentication",
@@ -6324,15 +6378,13 @@
         },
         "headers": {
           "type": "array",
-          "format": "password",
           "description": "Static headers injected when calling the endpoint.",
           "items": {
             "$ref": "#/definitions/AiGatewayToolServerHeader"
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "x-ms-secret": true
+          ]
         },
         "oauth2": {
           "$ref": "#/definitions/AiGatewayToolServerOauth2Authentication",
@@ -6493,6 +6545,10 @@
           "items": {
             "type": "string"
           },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         }
       },
@@ -6561,6 +6617,10 @@
           "type": "string",
           "format": "password",
           "description": "OAuth client secret.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "scopes": {
@@ -6842,16 +6902,182 @@
           "description": "Stable endpoint identifier."
         },
         "credentials": {
-          "$ref": "#/definitions/AiGatewayToolServerCredentials",
+          "$ref": "#/definitions/AiGatewayToolServerSecretCredentials",
           "description": "Endpoint authentication including secret values."
         },
         "openApi": {
-          "$ref": "#/definitions/AiGatewayOpenApiConfiguration",
+          "$ref": "#/definitions/AiGatewayToolServerSecretOpenApiConfiguration",
           "description": "OpenAPI configuration including inline content."
         }
       },
       "required": [
         "id"
+      ]
+    },
+    "AiGatewayToolServerSecretCredentials": {
+      "type": "object",
+      "description": "Endpoint credentials returned by the secret retrieval action.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerAuthenticationType",
+          "description": "Authentication type."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayToolServerManagedIdentityAuthentication",
+          "description": "Managed identity configuration."
+        },
+        "headers": {
+          "type": "array",
+          "description": "Static headers injected when calling the endpoint.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayToolServerSecretHeader"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "oauth2": {
+          "$ref": "#/definitions/AiGatewayToolServerSecretOauth2Authentication",
+          "description": "OAuth 2.0 configuration."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AiGatewayToolServerSecretHeader": {
+      "type": "object",
+      "description": "An endpoint header returned by the secret retrieval action.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "HTTP header name."
+        },
+        "values": {
+          "type": "array",
+          "format": "password",
+          "description": "Secret values for the HTTP header.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "name",
+        "values"
+      ]
+    },
+    "AiGatewayToolServerSecretOauth2Authentication": {
+      "type": "object",
+      "description": "OAuth settings returned by the secret retrieval action.",
+      "properties": {
+        "issuer": {
+          "type": "string",
+          "format": "uri",
+          "description": "Expected OAuth authorization-server issuer for remote MCP discovery."
+        },
+        "authorizationUrl": {
+          "type": "string",
+          "description": "OAuth authorization endpoint."
+        },
+        "tokenUrl": {
+          "type": "string",
+          "description": "OAuth token endpoint."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "OAuth client identifier."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "OAuth scopes to request.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "grantType": {
+          "$ref": "#/definitions/AiGatewayToolServerOauth2GrantType",
+          "description": "OAuth grant type."
+        },
+        "authorizationParameters": {
+          "type": "array",
+          "description": "Additional authorization endpoint parameters.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayToolServerOauth2Parameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "tokenParameters": {
+          "type": "array",
+          "description": "Additional token endpoint parameters.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayToolServerOauth2Parameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "description": "Current OAuth connection status.",
+          "readOnly": true
+        },
+        "loginLink": {
+          "type": "string",
+          "description": "Login link used to complete interactive authorization.",
+          "readOnly": true
+        },
+        "statusUpdatedUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp of the last OAuth connection-status transition.",
+          "readOnly": true
+        },
+        "clientSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "OAuth client secret.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "AiGatewayToolServerSecretOpenApiConfiguration": {
+      "type": "object",
+      "description": "OpenAPI settings returned by the secret retrieval action.",
+      "properties": {
+        "specSource": {
+          "$ref": "#/definitions/AiGatewayToolServerSecretOpenApiSpecSource",
+          "description": "OpenAPI document source."
+        }
+      },
+      "required": [
+        "specSource"
+      ]
+    },
+    "AiGatewayToolServerSecretOpenApiSpecSource": {
+      "type": "object",
+      "description": "OpenAPI document source returned by the secret retrieval action.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerOpenApiSourceType",
+          "description": "Source type."
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the OpenAPI document. Required when kind is Url."
+        },
+        "contentBase64": {
+          "type": "string",
+          "format": "password",
+          "description": "Base64-encoded OpenAPI document. Required when kind is Inline.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "type"
       ]
     },
     "AiGatewayToolServerSecrets": {

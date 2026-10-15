@@ -31,10 +31,12 @@ model AiGatewayApiKeyProperties {
 
   /** Primary key value. Omitted from ordinary read responses. */
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   primaryKey?: string;
 
   /** Secondary key value. Omitted from ordinary read responses. */
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   secondaryKey?: string;
 
   /** Provisioning state of the resource. */
@@ -53,6 +55,16 @@ model AiGatewayApiKeyUpdateProperties {
 
   /** Optional expiration time. */
   expirationDate?: utcDateTime;
+
+  /** Replacement primary key value. */
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  primaryKey?: string;
+
+  /** Replacement secondary key value. */
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  secondaryKey?: string;
 }
 
 /** Parameters for updating an AI Gateway API key. */

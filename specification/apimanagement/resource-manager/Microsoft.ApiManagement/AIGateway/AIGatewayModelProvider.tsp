@@ -21,6 +21,7 @@ model AiGatewayApiKeyCredential {
 
   /** Secret API key value. This value is not returned by read operations. */
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   value?: string;
 }
 
@@ -92,6 +93,7 @@ model AiGatewayApiKeyCredentialUpdate {
 
   /** Secret API key value. */
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   value?: string;
 }
 

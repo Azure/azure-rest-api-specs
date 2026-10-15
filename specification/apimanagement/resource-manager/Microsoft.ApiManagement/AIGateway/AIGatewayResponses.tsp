@@ -112,6 +112,56 @@ model AiGatewayToolServerSecrets {
   endpoints: AiGatewayToolServerSecret[];
 }
 
+/** An endpoint header returned by the secret retrieval action. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayToolServerSecretHeader {
+  ...OmitProperties<AiGatewayToolServerHeader, "values">;
+
+  /** Secret values for the HTTP header. */
+  @secret
+  values: string[];
+}
+
+/** OAuth settings returned by the secret retrieval action. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayToolServerSecretOauth2Authentication {
+  ...OmitProperties<AiGatewayToolServerOauth2Authentication, "clientSecret">;
+
+  /** OAuth client secret. */
+  @secret
+  clientSecret?: string;
+}
+
+/** Endpoint credentials returned by the secret retrieval action. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayToolServerSecretCredentials {
+  ...OmitProperties<AiGatewayToolServerCredentials, "headers" | "oauth2">;
+
+  /** Static headers injected when calling the endpoint. */
+  @identifiers(#["name"])
+  headers?: AiGatewayToolServerSecretHeader[];
+
+  /** OAuth 2.0 configuration. */
+  oauth2?: AiGatewayToolServerSecretOauth2Authentication;
+}
+
+/** OpenAPI document source returned by the secret retrieval action. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayToolServerSecretOpenApiSpecSource {
+  ...OmitProperties<AiGatewayOpenApiSpecSource, "contentBase64">;
+
+  /** Base64-encoded OpenAPI document. Required when kind is Inline. */
+  @secret
+  contentBase64?: bytes;
+}
+
+/** OpenAPI settings returned by the secret retrieval action. */
+@added(Versions.v2026_10_01_preview)
+model AiGatewayToolServerSecretOpenApiConfiguration {
+  /** OpenAPI document source. */
+  specSource: AiGatewayToolServerSecretOpenApiSpecSource;
+}
+
 /** Secret value configured on one tool server endpoint. */
 @added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerSecret {
@@ -119,10 +169,10 @@ model AiGatewayToolServerSecret {
   id: string;
 
   /** Endpoint authentication including secret values. */
-  credentials?: AiGatewayToolServerCredentials;
+  credentials?: AiGatewayToolServerSecretCredentials;
 
   /** OpenAPI configuration including inline content. */
-  openApi?: AiGatewayOpenApiConfiguration;
+  openApi?: AiGatewayToolServerSecretOpenApiConfiguration;
 }
 
 /** Primary and secondary API key values. */

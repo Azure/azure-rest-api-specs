@@ -37,6 +37,7 @@ model AiGatewayTelemetryCredentials {
   /** Secret HTTP headers sent with export requests. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for secret telemetry headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   headers?: Record<string>;
 
   /** Managed identity authentication for export requests. */
@@ -58,6 +59,7 @@ model AiGatewayOpenTelemetryConfiguration {
   /** Legacy secret HTTP headers, mutually exclusive with credentials. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for secret telemetry headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   headers?: Record<string>;
 
   /** Legacy managed identity settings, mutually exclusive with credentials. */
@@ -72,6 +74,7 @@ model AiGatewayOpenTelemetryConfiguration {
 model AiGatewayApplicationInsightsConfiguration {
   /** Application Insights connection string. Required when creating this exporter kind. */
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   connectionString?: string;
 
   /** Azure resource identifier of the Application Insights component. */
