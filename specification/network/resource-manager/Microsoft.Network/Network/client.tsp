@@ -6250,6 +6250,83 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 // Keep the C# operation location parameters aligned with the GA AutoRest surface.
 // The TypeSpec ARM location parameter is string, but these Network operations shipped as AzureLocation.
 @@alternateType(
+  Microsoft.Network.AvailableDelegationsOperationGroup.list::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.AvailableResourceGroupDelegationsOperationGroup.list::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServices::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServicesByResourceGroup::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.AvailablePrivateEndpointTypesOperationGroup.list::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.AvailablePrivateEndpointTypesOperationGroup.listByResourceGroup::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.AvailableServiceAliasesOperationGroup.list::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.AvailableServiceAliasesOperationGroup.listByResourceGroup::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.AvailableEndpointServicesOperationGroup.list::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkSecurityPerimeterAssociableResourceTypesOperationGroup.list::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkSecurityPerimeterServiceTagsOperationGroup.list::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.UsagesOperationGroup.list::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ServiceTagInformationOperationGroup.list::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServices,
+  "GetAutoApprovedPrivateLinkServicesPrivateLinkServices",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServicesByResourceGroup,
+  "GetAutoApprovedPrivateLinkServicesByResourceGroupPrivateLinkServices",
+  "csharp"
+);
+
+@@alternateType(
   Microsoft.Network.CheckDnsNameAvailability.checkDnsNameAvailability::parameters.location,
   Azure.Core.azureLocation,
   "csharp"
