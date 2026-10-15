@@ -1454,7 +1454,7 @@ model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
   destination: TelephonyOutboundDestination;
 
-  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required.")
+  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SipOutbound. A SipOutbound connection selects digest authentication with a username and password or ip_acl authentication with source_cidrs; the call job does not carry these settings. No inbound telephony binding is required.")
   @minLength(1)
   @maxLength(256)
   connection_name: string;
