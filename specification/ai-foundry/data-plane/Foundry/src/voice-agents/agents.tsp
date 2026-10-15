@@ -564,12 +564,10 @@ union VoiceAgentNoiseReductionType {
   @doc("Azure deep noise suppression.")
   azure_deep_noise_suppression: "azure_deep_noise_suppression",
 
-  @added(Versions.v1)
-  @doc("Azure headset-optimized noise suppression for local voice activity detection. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.")
+  @doc("Preview: Azure headset-optimized noise suppression for local voice activity detection. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.")
   azure_deep_noise_suppression_headset: "azure_deep_noise_suppression_headset",
 
-  @added(Versions.v1)
-  @doc("Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.")
+  @doc("Preview: Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.")
   azure_personal_noise_suppression: "azure_personal_noise_suppression",
 }
 
@@ -794,7 +792,6 @@ union VoiceAgentInputTranscriptionModel {
   @doc("Azure AI Speech to text.")
   azure_speech: "azure-speech",
 
-  @added(Versions.v1)
   @doc("Azure AI Speech streaming transcription for cascaded text-model conversations only. Requires a nonempty `language`, such as `en-US`; comma-separated locales are supported. Supports `custom_speech` and `phrase_list`. Not supported with realtime speech-to-speech models or multimodal audio-input models. Selecting this model does not enable Dynamic VAD or add transcription event types.")
   azure_speech_streaming: "azure-speech-streaming",
 }
