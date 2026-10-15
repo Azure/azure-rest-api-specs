@@ -2643,8 +2643,14 @@ test("OpenAPI exposes the Foundry Live handshake without native REST operations"
     assert.equal(structuredInputs.schema.type, "string");
     const realtime =
       doc.paths["/agents/{agent_name}/endpoint/protocols/voice"].get;
-    assert.ok(realtime.parameters.some((p) => p.name === "structured_input"));
-    assert.ok(!realtime.parameters.some((p) => p.name === "structured_inputs"));
+    assert.ok(realtime.parameters.some((p) => p.name === "structured_inputs"));
+    assert.ok(!realtime.parameters.some((p) => p.name === "structured_input"));
+    const realtimeInputs = realtime.parameters.find(
+      (p) => p.name === "structured_inputs",
+    );
+    assert.equal(realtimeInputs.in, "query");
+    assert.equal(realtimeInputs.required, false);
+    assert.equal(realtimeInputs.schema.type, "string");
     assert.equal(names.includes("sub_protocol"), false);
     assert.equal(names.includes("model"), false);
     assert.equal(names.includes("Sec-WebSocket-Protocol"), false);
