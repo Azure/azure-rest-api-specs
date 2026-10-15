@@ -1439,6 +1439,7 @@ model KnowledgeBaseRetrievalPartialResponse {
 model KnowledgeBaseRetrievalStreamEvent {}
 
 /** Emitted after retrieval preflight validation completes. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance groups SSE event variants under a common base; SSE event names identify variants instead of a JSON discriminator."
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseRetrievalStartedStreamEvent
   extends KnowledgeBaseRetrievalStreamEvent {
@@ -1448,6 +1449,7 @@ model KnowledgeBaseRetrievalStartedStreamEvent
 }
 
 /** Emitted when an individual retrieval activity starts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance groups SSE event variants under a common base; SSE event names identify variants instead of a JSON discriminator."
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseActivityStartedStreamEvent
   extends KnowledgeBaseRetrievalStreamEvent {
@@ -1457,6 +1459,7 @@ model KnowledgeBaseActivityStartedStreamEvent
 }
 
 /** Emitted when an individual retrieval activity completes. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance groups SSE event variants under a common base; SSE event names identify variants instead of a JSON discriminator."
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseActivityCompletedStreamEvent
   extends KnowledgeBaseRetrievalStreamEvent {
@@ -1466,6 +1469,7 @@ model KnowledgeBaseActivityCompletedStreamEvent
 }
 
 /** Emitted when an answer message is complete. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance groups SSE event variants under a common base; SSE event names identify variants instead of a JSON discriminator."
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseAnswerCompletedStreamEvent
   extends KnowledgeBaseRetrievalStreamEvent {
@@ -1475,6 +1479,7 @@ model KnowledgeBaseAnswerCompletedStreamEvent
 }
 
 /** Emitted when the references used by the response are available. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance groups SSE event variants under a common base; SSE event names identify variants instead of a JSON discriminator."
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseReferencesCompletedStreamEvent
   extends KnowledgeBaseRetrievalStreamEvent {
@@ -1484,15 +1489,16 @@ model KnowledgeBaseReferencesCompletedStreamEvent
 }
 
 /** Emitted when retrieval fails after the stream starts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance groups SSE event variants under a common base; SSE event names identify variants instead of a JSON discriminator."
 @added(Versions.v2026_08_01_preview)
-model KnowledgeBaseErrorStreamEvent
-  extends KnowledgeBaseRetrievalStreamEvent {
+model KnowledgeBaseErrorStreamEvent extends KnowledgeBaseRetrievalStreamEvent {
   /** The retrieval error payload. */
   @data
   value: KnowledgeBaseStreamErrorEvent;
 }
 
 /** Emitted when retrieval completes successfully or with partial results. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance groups SSE event variants under a common base; SSE event names identify variants instead of a JSON discriminator."
 @added(Versions.v2026_08_01_preview)
 model KnowledgeBaseResponseCompletedStreamEvent
   extends KnowledgeBaseRetrievalStreamEvent {

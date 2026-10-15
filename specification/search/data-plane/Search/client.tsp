@@ -683,23 +683,39 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchClient.suggestPost, Access.public, "java");
 @@clientName(SearchClient.suggestPost, "suggest", "java");
 @@access(SearchClient.index, Access.internal);
-@@access(SearchIndexerClient.listDataSources, Access.internal);
 @@access(SearchIndexerClient.listDataSources, Access.public, "csharp");
+@@clientName(
+  SearchIndexerClient.listDataSources,
+  "GetDataSourceConnectionsWithSelectedProperties",
+  "csharp"
+);
 @@access(SearchIndexerClient.createOrUpdateDataSource, Access.internal);
 @@access(SearchIndexerClient.deleteDataSource, Access.internal, "python");
-@@access(SearchIndexerClient.listIndexers, Access.internal);
 @@access(SearchIndexerClient.listIndexers, Access.public, "csharp");
+@@clientName(
+  SearchIndexerClient.listIndexers,
+  "GetIndexersWithSelectedProperties",
+  "csharp"
+);
 @@access(SearchIndexerClient.createOrUpdateIndexer, Access.internal);
 @@access(SearchIndexerClient.resetDocs, Access.internal, "python");
 @@access(SearchIndexerClient.deleteIndexer, Access.internal, "python");
 @@access(SearchIndexerClient.resync, Access.internal, "python");
-@@access(SearchIndexerClient.listSkillsets, Access.internal);
 @@access(SearchIndexerClient.listSkillsets, Access.public, "csharp");
+@@clientName(
+  SearchIndexerClient.listSkillsets,
+  "GetSkillsetsWithSelectedProperties",
+  "csharp"
+);
 @@access(SearchIndexerClient.createOrUpdateSkillset, Access.internal);
 @@access(SearchIndexerClient.deleteSkillset, Access.internal, "python");
 @@access(SearchIndexerClient.resetSkills, Access.internal, "python");
-@@access(SearchIndexClient.listSynonymMaps, Access.internal);
 @@access(SearchIndexClient.listSynonymMaps, Access.public, "csharp");
+@@clientName(
+  SearchIndexClient.listSynonymMaps,
+  "GetSynonymMapsWithSelectedProperties",
+  "csharp"
+);
 @@access(SearchIndexClient.createOrUpdateSynonymMap, Access.internal);
 @@access(SearchIndexClient.deleteSynonymMap, Access.internal, "python");
 @@access(SearchIndexClient.createOrUpdateIndex, Access.internal);
@@ -5709,28 +5725,6 @@ namespace KnowledgeBaseRetrievalClient {
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "clientRequired for java"
 @@clientOption(Search.acceptHeaderNone.accept, "clientRequired", true, "java");
 
-// Apply C# naming overrides after negated-scope names so they take precedence.
-@@clientName(
-  SearchIndexerClient.listDataSources,
-  "GetDataSourceConnectionsWithSelectedProperties",
-  "csharp"
-);
-@@clientName(
-  SearchIndexerClient.listIndexers,
-  "GetIndexersWithSelectedProperties",
-  "csharp"
-);
-@@clientName(
-  SearchIndexerClient.listSkillsets,
-  "GetSkillsetsWithSelectedProperties",
-  "csharp"
-);
-@@clientName(
-  SearchIndexClient.listSynonymMaps,
-  "GetSynonymMapsWithSelectedProperties",
-  "csharp"
-);
-
 @@clientNamespace(
   Search.KnowledgeBaseRetrievalStreamEvent,
   "Azure.Search.Documents.KnowledgeBases"
@@ -5804,11 +5798,11 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 
-@@access(Search.KnowledgeBaseRetrievalStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseRetrievalStartedStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseActivityStartedStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseActivityCompletedStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseAnswerCompletedStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseReferencesCompletedStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseErrorStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseResponseCompletedStreamEvent, Access.public, "csharp");
+@@access(Search.KnowledgeBaseRetrievalStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseRetrievalStartedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseActivityStartedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseActivityCompletedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseAnswerCompletedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseReferencesCompletedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseErrorStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseResponseCompletedStreamEvent, Access.public);
