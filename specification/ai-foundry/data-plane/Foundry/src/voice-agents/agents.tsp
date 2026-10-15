@@ -213,11 +213,19 @@ model VoiceAgentPostCall {
   destinations: VoiceAgentPostCallDestination[];
 
   @doc("""
-    Content requested for every destination. When omitted, the service includes transcript conversation items
-    and does not request audio. Basic event, session, and quality metadata is always included, even when both
-    content flags are false. These flags select content, not event types or payload formats.
+    Content requested for every destination. Omission defaults to ["transcript"]; an empty list requests no
+    content but still triggers delivery of basic event, session, and quality metadata to every destination.
+    Only "transcript" and "audio" are supported. The service rejects repeated values. List order has no meaning.
+    The list selects content, not event types or payload formats. Schema defaults alone do not implement
+    service behavior. Delivery must distinguish content not requested from requested content that is unavailable.
+    Transcript uses standard conversation items, including tool calls and results. Audio requests authorized
+    recording URL references, not inline or base64 audio; capture, storage, retrieval, expiry, and privacy controls
+    must be supported under the recording data policy. Unsupported requests fail explicitly. Requesting audio
+    does not override store: false or enable persistence implicitly.
     """)
-  include?: VoiceAgentPostCallInclude;
+  include?: VoiceAgentPostCallIncludeOption[] = #[
+    VoiceAgentPostCallIncludeOption.transcript
+  ];
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "A closed destination union is required; union extends requires an experimental compiler feature not enabled by this project."
@@ -271,25 +279,23 @@ model VoiceAgentRoutinePostCallDestination {
   name: string;
 }
 
-@doc("Content requested for post-call delivery. Omitted flags use the documented service defaults; schema defaults alone do not implement service behavior. Metadata is included independently of these flags.")
+@doc("Content that may be requested for post-call delivery. Only transcript conversation items and authorized recording URL references are supported by this contract.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentPostCallInclude {
-  ...Record<never>;
-
+union VoiceAgentPostCallIncludeOption {
   @doc("""
-    Whether to include standard conversation items, including tool calls and results, rather than a flattened
-    text transcript or generated analysis. Defaults to true. A false value does not suppress the post-call event.
+    Standard conversation items, including tool calls and results, rather than a flattened text transcript
+    or generated analysis.
     """)
-  transcript?: boolean = true;
+  transcript: "transcript",
 
   @doc("""
-    Whether to request authorized recording URL references, not inline or base64 audio. Defaults to false.
+    Authorized recording URL references, not inline or base64 audio.
     This requires service recording capture, storage, authorized retrieval, expiry, and privacy controls and
     must comply with the recording data policy and store setting. It does not enable persistence when store
     is false. Unsupported audio requests must fail explicitly, not be silently ignored. Delivery must distinguish
     content not requested from requested content that is unavailable.
     """)
-  audio?: boolean = false;
+  audio: "audio",
 }
 
 @doc("Configuration for sibling Foundry text agents that a voice agent may consult.")
