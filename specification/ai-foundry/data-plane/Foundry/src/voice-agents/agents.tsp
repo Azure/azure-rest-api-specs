@@ -114,13 +114,13 @@ model VoiceAgentLlmInterimResponseConfig
   #{
     propertyName: "sub_protocol",
     mapping: #{
-      realtime: "#/components/schemas/VoiceAgentRealtimeDefinition",
+      realtime: "#/components/schemas/VoiceAgentDefinition",
       live: "#/components/schemas/VoiceAgentLiveDefinition",
     },
-    defaultMapping: "#/components/schemas/VoiceAgentRealtimeDefinition",
+    defaultMapping: "#/components/schemas/VoiceAgentDefinition",
   }
 )
-model VoiceAgentDefinition extends AgentDefinition {
+model VoiceAgentBaseDefinition extends AgentDefinition {
   @doc("Always voice.")
   kind: "voice";
 
@@ -150,7 +150,7 @@ union VoiceAgentSubProtocol {
   `GET /agents/{agent_name}/endpoint/protocols/voice`. Every create or update produces a new immutable version.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentRealtimeDefinition extends VoiceAgentDefinition {
+model VoiceAgentDefinition extends VoiceAgentBaseDefinition {
   @doc("Selects Realtime. May be omitted for legacy agents.")
   sub_protocol?: "realtime";
 
@@ -218,7 +218,7 @@ model VoiceAgentRealtimeDefinition extends VoiceAgentDefinition {
   `GET /agents/{agent_name}/endpoint/protocols/voice/live/sessions`. Every create or update produces a new immutable version.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveDefinition extends VoiceAgentDefinition {
+model VoiceAgentLiveDefinition extends VoiceAgentBaseDefinition {
   @doc("Selects the Live protocol.")
   sub_protocol: "live";
 
@@ -240,7 +240,7 @@ model VoiceAgentLiveDefinition extends VoiceAgentDefinition {
 }
 
 // Generate the concrete models for SDK-specific subtype dispatch.
-@@usage(VoiceAgentRealtimeDefinition, Usage.input | Usage.output | Usage.json);
+@@usage(VoiceAgentDefinition, Usage.input | Usage.output | Usage.json);
 @@usage(VoiceAgentLiveDefinition, Usage.input | Usage.output | Usage.json);
 
 #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Reuse the native OpenAI delegation models without reparenting or changing their wire contract."

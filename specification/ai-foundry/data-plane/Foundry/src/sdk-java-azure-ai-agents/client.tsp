@@ -588,10 +588,7 @@ using Azure.AI.Projects;
   "java"
 );
 @@clientName(OpenAI.TranscriptTextUsageDuration.seconds, "duration", "java");
-@@clientName(
-  VoiceAgentRealtimeDefinition.subagent_config,
-  "subagentConfiguration"
-);
+@@clientName(VoiceAgentDefinition.subagent_config, "subagentConfiguration");
 @@clientName(
   VoiceAgentEndOfUtteranceDetectionModel.semantic_detection_v1_en,
   "SEMANTIC_DETECTION_V1_ENGLISH"
@@ -977,6 +974,53 @@ using Azure.AI.Projects;
   "java"
 );
 
+// Match the Realtime method names on the separate Live conversations client.
+@@clientName(
+  AgentEndpointLiveConversations.listLiveAgentConversations,
+  "listAgentConversations",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversation,
+  "getAgentConversation",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.deleteLiveAgentConversation,
+  "deleteAgentConversation",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.listLiveAgentConversationItems,
+  "listAgentConversationItems",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationItem,
+  "getAgentConversationItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItem,
+  "getAgentConversationAudioItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItemContent,
+  "downloadAgentConversationAudioItem",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudio,
+  "getAgentConversationAudio",
+  "java"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioContent,
+  "downloadAgentConversationAudio",
+  "java"
+);
+
 @@clientName(UploadSessionFileParams.agent_session_id, "sessionId", "java");
 @@clientName(DownloadSessionFileParams.agent_session_id, "sessionId", "java");
 @@clientName(ListSessionFilesParams.agent_session_id, "sessionId", "java");
@@ -1196,7 +1240,7 @@ union ToolChoiceValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@changePropertyType(VoiceAgentRealtimeDefinition.tool_choice, ToolChoiceValue);
+@@changePropertyType(VoiceAgentDefinition.tool_choice, ToolChoiceValue);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(
   VoiceAgentLlmGeneratedGreetingConfig.tool_choice,
