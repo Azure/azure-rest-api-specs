@@ -1653,3 +1653,26 @@ enum ProvisioningStateEnum {
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp,java,python,javascript,go"
 );
+
+@@clientName(BlobAccessPointSourceType.DellOneFs, "DellOneFS", "go");
+@@clientName(BlobAccessPointSourceType.NetAppOntap, "NetAppONTAP", "go");
+@@clientName(
+  BlobAccessPointDellOneFsSourceProperties,
+  "BlobAccessPointDellOneFSSourceProperties",
+  "go"
+);
+@@clientName(
+  BlobAccessPointDellOneFsSourcePropertiesUpdate,
+  "BlobAccessPointDellOneFSSourcePropertiesUpdate",
+  "go"
+);
+@@clientName(
+  BlobAccessPointNetAppOntapSourceProperties,
+  "BlobAccessPointNetAppONTAPSourceProperties",
+  "go"
+);
+@@clientName(
+  BlobAccessPointNetAppOntapSourcePropertiesUpdate,
+  "BlobAccessPointNetAppONTAPSourcePropertiesUpdate",
+  "go"
+);
