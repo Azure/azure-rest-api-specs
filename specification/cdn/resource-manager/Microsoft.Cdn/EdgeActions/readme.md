@@ -48,8 +48,9 @@ it requires compatibility review for consumers of `2026-10-01`.
 Use `Azure-AsyncOperation` to poll operation status. PUT operations retain
 `final-state-via: azure-async-operation` and the resource as their logical result.
 For operations with combined headers, `Location` identifies the final result.
-In the deploy example, Location points to version GET; poll operation status before
-retrieving the version because ordinary version GET can return 200 while the operation is running.
+The 202 examples use `edgeActionOperations` URLs for operation status and `operationresults`
+URLs for the final result. Completion endpoints return an empty 202 response while the operation
+is running and the operation's final response only after completion.
 
 Both preview versions retain their existing contracts. The internal
 `addAttachment` and `deleteAttachment` operations used exclusively by the AFD RP remain absent, as
