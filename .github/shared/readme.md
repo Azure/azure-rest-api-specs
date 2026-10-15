@@ -153,6 +153,11 @@ function main() {
 - `defaultLogger` — shared non-debug logger instance.
 - `debugLogger` — shared debug-enabled logger instance.
 
+### `glob` — filesystem discovery
+
+- `globFiles(pattern, options)` — native glob discovery restricted to files, with optional `cwd`
+  and exclusion patterns. Includes file symlinks without traversing directory symlinks.
+
 ### `math` — math helpers
 
 - `toPercent(value, decimals)` — format a `0..1` ratio as a percentage string.
@@ -284,6 +289,27 @@ so the assertion still catches whitespace changes in the actual output.
 - `add(date, ms)` / `subtract(date, ms)` — date arithmetic.
 - `formatDuration(ms)` — human-readable duration string.
 - `getDuration(from, to)` — milliseconds between two dates.
+
+### `typespec-projects` — TypeSpec project discovery
+
+- `findTypeSpecProjects(root)` — sorted, unique absolute project directories beneath `root`.
+  Discovers `tspconfig.*`, including invalid extensions so validation can report them, and excludes
+  `node_modules`.
+- `findTypeSpecProjectsInChangedServices(repoRoot, changedFiles, logger?)` — discovers every project
+  in each `specification/<service>/` touched by repository-relative POSIX changed paths. Includes
+  sibling and nested projects for any file type, including deleted paths. Missing services are
+  skipped with a debug message; other filesystem failures propagate.
+- `findTypeSpecProjectsForChangedFiles(repoRoot, changedFiles, logger?)` — a sorted map from absolute
+  project directories to associated repository-relative POSIX changed paths. Searches upward for
+  `tspconfig.yaml`, selecting the nearest config in the old layout, or all ancestor configs in
+  `resource-manager`/`data-plane`. Does not include unrelated sibling or descendant projects.
+  Missing directories stop the search with a warning; other filesystem failures propagate.
+
+These helpers do not fetch changed files, inspect imports or `.Shared` libraries, pair Swagger
+READMEs, or apply a core-file/all-project fallback. Callers own those policies. Pass both old and
+new paths when a rename must select both services or projects. Results identify directories, not
+config paths; consumers requiring valid configs must account for invalid extensions returned by
+service discovery.
 
 ### `typespec-metadata` — TypeSpec SDK metadata
 
