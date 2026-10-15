@@ -14,7 +14,7 @@ tags:
   - name: Agent Telephony
   - name: AgentServer Task Storage
   - name: TaskSets
-  - name: EvalSuites
+  - name: EvalJobs
   - name: EvaluationSuiteGenerationJobs
   - name: EvalRuns
   - name: Responses Root
@@ -7632,6 +7632,224 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Deployments
+  /eval_jobs:
+    get:
+      operationId: EvalJobs_list
+      summary: List EvalJobs
+      description: Lists named EvalJobs.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EvalJob'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvalJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /eval_jobs/{name}:
+    put:
+      operationId: EvalJobs_createOrReplace
+      summary: Create or replace an EvalJob
+      description: Creates or replaces the current definition of a named EvalJob.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The stable EvalJob name.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvalJob'
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvalJob'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvalJobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvalJob'
+        description: The complete job definition.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    get:
+      operationId: EvalJobs_get
+      summary: Get an EvalJob
+      description: Retrieves the current definition of a named EvalJob.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The EvalJob name.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvalJob'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvalJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
   /eval_runs:
     post:
       operationId: EvalRuns_create
@@ -7697,7 +7915,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EvalRunCreateContent'
-        description: A named suite or a complete one-off definition.
+        description: A named EvalJob or a complete one-off job definition.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -8313,224 +8531,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - EvalRuns
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-  /eval_suites:
-    get:
-      operationId: EvalSuites_list
-      summary: List EvalSuites
-      description: Lists named EvalSuites.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/EvalSuite'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvalSuites
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-  /eval_suites/{name}:
-    put:
-      operationId: EvalSuites_createOrReplace
-      summary: Create or replace an EvalSuite
-      description: Creates or replaces the current definition of a named EvalSuite.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: name
-          in: path
-          required: true
-          description: The stable EvalSuite name.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvalSuite'
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvalSuite'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvalSuites
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EvalSuite'
-        description: The complete suite definition.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-    get:
-      operationId: EvalSuites_get
-      summary: Get an EvalSuite
-      description: Retrieves the current definition of a named EvalSuite.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: name
-          in: path
-          required: true
-          description: The EvalSuite name.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvalSuite'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvalSuites
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -52628,41 +52628,6 @@ components:
         A CSV data source for evaluation runs.
 
         See [evaluation datasets](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluation-datasets).
-    EvalDefinition:
-      type: object
-      required:
-        - harness_config
-        - task_set
-      properties:
-        description:
-          type: string
-          description: Human-readable description of the evaluation.
-        graders:
-          type: array
-          items:
-            $ref: '#/components/schemas/InlineEvaluationGrader'
-          description: Graders applied to every task in the suite.
-        scoring:
-          $ref: '#/components/schemas/ScoringRule'
-          description: How completed grader verdicts determine the task-run outcome; defaults to all_pass.
-        harness_config:
-          $ref: '#/components/schemas/InlineFoundryAgentHarness'
-          description: The harness and agent used for task attempts.
-        execution_config:
-          $ref: '#/components/schemas/EvalExecutionConfig'
-          description: Execution defaults, when different from one invocation per task.
-        metadata:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: User-defined string labels.
-        task_set:
-          $ref: '#/components/schemas/TaskSetSource'
-          description: A pinned TaskSet version, or tasks embedded in this definition.
-      description: A one-off or captured suite definition; embedded tasks are not published.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
     EvalExecutionConfig:
       type: object
       required:
@@ -52731,6 +52696,121 @@ components:
           type: string
           description: The inspect_ai task module path (e.g., `inspect_evals/aime2025`).
       description: Grader inspect_ai definition for inspect_ai benchmark evaluators.
+    EvalJob:
+      type: object
+      required:
+        - harness_config
+        - name
+        - task_set
+        - created_at
+        - updated_at
+        - created_by
+      properties:
+        description:
+          type: string
+          description: Human-readable description of the evaluation.
+        graders:
+          type: array
+          items:
+            $ref: '#/components/schemas/InlineEvaluationGrader'
+          description: Graders applied to every task in the job.
+        scoring:
+          $ref: '#/components/schemas/ScoringRule'
+          description: How completed grader verdicts determine the task-run outcome; defaults to all_pass.
+        harness_config:
+          $ref: '#/components/schemas/InlineFoundryAgentHarness'
+          description: The harness and agent used for task attempts.
+        execution_config:
+          $ref: '#/components/schemas/EvalExecutionConfig'
+          description: Execution defaults, when different from one invocation per task.
+        metadata:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: User-defined string labels.
+        name:
+          type: string
+          description: The stable job name.
+          readOnly: true
+        task_set:
+          $ref: '#/components/schemas/TaskSetReference'
+          description: The pinned TaskSet version evaluated by this job.
+        created_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when the job was created.
+          readOnly: true
+        updated_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when the job was last changed.
+          readOnly: true
+        created_by:
+          type: string
+          description: The identity that created this job.
+          readOnly: true
+      description: An editable named job definition, not an executing EvalRun.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvalJobConfigOverrides:
+      type: object
+      properties:
+        harness_config:
+          $ref: '#/components/schemas/InlineFoundryAgentHarness'
+          description: A complete harness definition replacing the job's harness.
+        execution_config:
+          $ref: '#/components/schemas/EvalExecutionConfigOverrides'
+          description: Execution fields to replace; omitted fields inherit the job defaults.
+      description: Run-only overrides of a named job's harness and execution settings.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvalJobDefinition:
+      type: object
+      required:
+        - harness_config
+        - task_set
+      properties:
+        description:
+          type: string
+          description: Human-readable description of the evaluation.
+        graders:
+          type: array
+          items:
+            $ref: '#/components/schemas/InlineEvaluationGrader'
+          description: Graders applied to every task in the job.
+        scoring:
+          $ref: '#/components/schemas/ScoringRule'
+          description: How completed grader verdicts determine the task-run outcome; defaults to all_pass.
+        harness_config:
+          $ref: '#/components/schemas/InlineFoundryAgentHarness'
+          description: The harness and agent used for task attempts.
+        execution_config:
+          $ref: '#/components/schemas/EvalExecutionConfig'
+          description: Execution defaults, when different from one invocation per task.
+        metadata:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: User-defined string labels.
+        task_set:
+          $ref: '#/components/schemas/TaskSetSource'
+          description: A pinned TaskSet version, or tasks embedded in this definition.
+      description: A one-off or captured job definition; embedded tasks are not published.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    EvalJobReference:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The published EvalJob name.
+      description: A reference to the current definition of a named EvalJob.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvalResult:
       type: object
       required:
@@ -53086,9 +53166,9 @@ components:
           - Evaluations=V1Preview
     EvalRunCreateContent:
       oneOf:
-        - $ref: '#/components/schemas/EvalRunFromSuite'
-        - $ref: '#/components/schemas/EvalRunFromDefinition'
-      description: 'Exactly one run source: a named suite or a one-off definition.'
+        - $ref: '#/components/schemas/EvalRunFromJob'
+        - $ref: '#/components/schemas/EvalRunFromJobDefinition'
+      description: 'Exactly one run source: a named EvalJob or a one-off job definition.'
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -53114,30 +53194,30 @@ components:
           azure_ai_benchmark_preview: '#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource'
           azure_ai_user_conversation_simulation: '#/components/schemas/UserConversationSimulationEvalRunDataSource'
       description: Base class for run data sources with discriminator support.
-    EvalRunFromDefinition:
+    EvalRunFromJob:
       type: object
       required:
-        - definition
+        - eval_job
       properties:
-        definition:
-          $ref: '#/components/schemas/EvalDefinition'
-          description: The one-off definition, without named-suite overrides.
-      description: Inputs for running a complete one-off definition.
+        eval_job:
+          $ref: '#/components/schemas/EvalJobReference'
+          description: The named job selected for this run.
+        config_overrides:
+          $ref: '#/components/schemas/EvalJobConfigOverrides'
+          description: Run-only overrides of a named job's harness and execution settings.
+      description: Inputs for running the current definition of a named EvalJob.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
-    EvalRunFromSuite:
+    EvalRunFromJobDefinition:
       type: object
       required:
-        - eval_suite
+        - job_definition
       properties:
-        eval_suite:
-          $ref: '#/components/schemas/EvalSuiteReference'
-          description: The named suite selected for this run.
-        config_overrides:
-          $ref: '#/components/schemas/EvalSuiteConfigOverrides'
-          description: Run-only overrides of a named suite's harness and execution settings.
-      description: Inputs for running the current definition of a named suite.
+        job_definition:
+          $ref: '#/components/schemas/EvalJobDefinition'
+          description: The one-off job definition, without named-job overrides.
+      description: Inputs for running a complete one-off job definition.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -53454,86 +53534,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Insights=V1Preview
-    EvalSuite:
-      type: object
-      required:
-        - harness_config
-        - name
-        - task_set
-        - created_at
-        - updated_at
-        - created_by
-      properties:
-        description:
-          type: string
-          description: Human-readable description of the evaluation.
-        graders:
-          type: array
-          items:
-            $ref: '#/components/schemas/InlineEvaluationGrader'
-          description: Graders applied to every task in the suite.
-        scoring:
-          $ref: '#/components/schemas/ScoringRule'
-          description: How completed grader verdicts determine the task-run outcome; defaults to all_pass.
-        harness_config:
-          $ref: '#/components/schemas/InlineFoundryAgentHarness'
-          description: The harness and agent used for task attempts.
-        execution_config:
-          $ref: '#/components/schemas/EvalExecutionConfig'
-          description: Execution defaults, when different from one invocation per task.
-        metadata:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: User-defined string labels.
-        name:
-          type: string
-          description: The stable suite name.
-          readOnly: true
-        task_set:
-          $ref: '#/components/schemas/TaskSetReference'
-          description: The pinned TaskSet version evaluated by this suite.
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The time when the suite was created.
-          readOnly: true
-        updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The time when the suite was last changed.
-          readOnly: true
-        created_by:
-          type: string
-          description: The identity that created this suite.
-          readOnly: true
-      description: The editable current definition of a named evaluation suite.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-    EvalSuiteConfigOverrides:
-      type: object
-      properties:
-        harness_config:
-          $ref: '#/components/schemas/InlineFoundryAgentHarness'
-          description: A complete harness definition replacing the suite's harness.
-        execution_config:
-          $ref: '#/components/schemas/EvalExecutionConfigOverrides'
-          description: Execution fields to replace; omitted fields inherit the suite defaults.
-      description: Run-only overrides of a named suite's harness and execution settings.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-    EvalSuiteReference:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-          description: The published EvalSuite name.
-      description: A reference to the current definition of a named EvalSuite.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
     EvalTaskRun:
       type: object
       required:
@@ -53569,7 +53569,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EvaluationGraderResult'
-          description: Outcomes from attempted task- and suite-level graders.
+          description: Outcomes from attempted task- and job-level graders.
         overall_result:
           $ref: '#/components/schemas/EvaluationTaskOverallResult'
           description: Pass, quality fail, or all graders N/A; absent on failure and cancellation.
@@ -53875,7 +53875,7 @@ components:
           numeric_range: '#/components/schemas/NumericRangeGrader'
           tool_calls: '#/components/schemas/ToolCallsGrader'
           rubric: '#/components/schemas/RubricGrader'
-      description: A grader that is resolved as part of a task-set or evaluation-suite version.
+      description: A grader resolved from a TaskSet version or EvalJob definition.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview
@@ -56131,7 +56131,7 @@ components:
       type: object
       required:
         - id
-        - definition
+        - job_definition
         - status
         - lifecycle
         - resolved_harness_config
@@ -56141,16 +56141,16 @@ components:
           type: string
           description: Server-assigned run identifier.
           readOnly: true
-        eval_suite:
-          $ref: '#/components/schemas/EvalSuiteReference'
-          description: Published suite selected at creation, if any.
-        definition:
-          $ref: '#/components/schemas/EvalDefinition'
-          description: Captured complete definition, including one selected from a named suite.
+        eval_job:
+          $ref: '#/components/schemas/EvalJobReference'
+          description: Published job selected at creation, if any.
+        job_definition:
+          $ref: '#/components/schemas/EvalJobDefinition'
+          description: Captured complete job definition, including one selected from a named job.
           readOnly: true
         config_overrides:
-          $ref: '#/components/schemas/EvalSuiteConfigOverrides'
-          description: Run-only overrides submitted with a named suite.
+          $ref: '#/components/schemas/EvalJobConfigOverrides'
+          description: Run-only overrides submitted with a named job.
         rerun_of:
           type: string
           description: Immediate source run for a full rerun.
@@ -90632,14 +90632,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InlineEvaluationGrader'
-          description: Task-level graders applied in addition to suite-level graders.
+          description: Task-level graders applied in addition to job-level graders.
         metadata:
           type: object
           unevaluatedProperties: {}
           description: Caller-defined JSON annotations visible to graders.
         scoring:
           $ref: '#/components/schemas/ScoringRule'
-          description: The rule used to combine task and suite grader verdicts for this task.
+          description: The rule used to combine task and job grader verdicts for this task.
       description: A reusable evaluation task.
       x-ms-foundry-meta:
         conditional_previews:

@@ -167,30 +167,30 @@ model EvaluationSuiteVersion {
   tags?: Record<string>;
 }
 
-/** A reference to the current definition of a named EvalSuite. */
+/** A reference to the current definition of a named EvalJob. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalSuiteReference {
-  /** The published EvalSuite name. */
+model EvalJobReference {
+  /** The published EvalJob name. */
   name: string;
 }
 
-/** Run-only overrides of a named suite's harness and execution settings. */
+/** Run-only overrides of a named job's harness and execution settings. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalSuiteConfigOverrides {
-  /** A complete harness definition replacing the suite's harness. */
+model EvalJobConfigOverrides {
+  /** A complete harness definition replacing the job's harness. */
   harness_config?: InlineFoundryAgentHarness;
 
-  /** Execution fields to replace; omitted fields inherit the suite defaults. */
+  /** Execution fields to replace; omitted fields inherit the job defaults. */
   execution_config?: EvalExecutionConfigOverrides;
 }
 
-/** Shared grading and execution settings for a published or one-off suite. */
+/** Shared grading and execution settings for a published or one-off job. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalDefinitionSettings {
+model EvalJobSettings {
   /** Human-readable description of the evaluation. */
   description?: string;
 
-  /** Graders applied to every task in the suite. */
+  /** Graders applied to every task in the job. */
   graders?: InlineEvaluationGrader[];
 
   /** How completed grader verdicts determine the task-run outcome; defaults to all_pass. */
@@ -206,38 +206,38 @@ model EvalDefinitionSettings {
   metadata?: Record<string>;
 }
 
-/** A one-off or captured suite definition; embedded tasks are not published. */
+/** A one-off or captured job definition; embedded tasks are not published. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalDefinition {
-  ...EvalDefinitionSettings;
+model EvalJobDefinition {
+  ...EvalJobSettings;
 
   /** A pinned TaskSet version, or tasks embedded in this definition. */
   task_set: TaskSetSource;
 }
 
-/** The editable current definition of a named evaluation suite. */
-@resource("eval_suites")
+/** An editable named job definition, not an executing EvalRun. */
+@resource("eval_jobs")
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalSuite {
-  ...EvalDefinitionSettings;
+model EvalJob {
+  ...EvalJobSettings;
 
-  /** The stable suite name. */
+  /** The stable job name. */
   @visibility(Lifecycle.Read)
   @key
   name: string;
 
-  /** The pinned TaskSet version evaluated by this suite. */
+  /** The pinned TaskSet version evaluated by this job. */
   task_set: TaskSetReference;
 
-  /** The time when the suite was created. */
+  /** The time when the job was created. */
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
 
-  /** The time when the suite was last changed. */
+  /** The time when the job was last changed. */
   @visibility(Lifecycle.Read)
   updated_at: FoundryTimestamp;
 
-  /** The identity that created this suite. */
+  /** The identity that created this job. */
   @visibility(Lifecycle.Read)
   created_by: string;
 }

@@ -9,29 +9,29 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
-/** Inputs for running the current definition of a named suite. */
+/** Inputs for running the current definition of a named EvalJob. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalRunFromSuite {
-  /** The named suite selected for this run. */
-  eval_suite: EvalSuiteReference;
+model EvalRunFromJob {
+  /** The named job selected for this run. */
+  eval_job: EvalJobReference;
 
-  /** Run-only overrides of a named suite's harness and execution settings. */
-  config_overrides?: EvalSuiteConfigOverrides;
+  /** Run-only overrides of a named job's harness and execution settings. */
+  config_overrides?: EvalJobConfigOverrides;
 }
 
-/** Inputs for running a complete one-off definition. */
+/** Inputs for running a complete one-off job definition. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalRunFromDefinition {
-  /** The one-off definition, without named-suite overrides. */
-  definition: EvalDefinition;
+model EvalRunFromJobDefinition {
+  /** The one-off job definition, without named-job overrides. */
+  job_definition: EvalJobDefinition;
 }
 
-/** Exactly one run source: a named suite or a one-off definition. */
+/** Exactly one run source: a named EvalJob or a one-off job definition. */
 @oneOf
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 union EvalRunCreateContent {
-  from_suite: EvalRunFromSuite,
-  from_definition: EvalRunFromDefinition,
+  from_job: EvalRunFromJob,
+  from_job_definition: EvalRunFromJobDefinition,
 }
 
 /** Mutually exclusive TaskRun outcome counts for a completed run. */
@@ -121,15 +121,15 @@ model FoundryEvalRun {
   @visibility(Lifecycle.Read)
   id: string;
 
-  /** Published suite selected at creation, if any. */
-  eval_suite?: EvalSuiteReference;
+  /** Published job selected at creation, if any. */
+  eval_job?: EvalJobReference;
 
-  /** Captured complete definition, including one selected from a named suite. */
+  /** Captured complete job definition, including one selected from a named job. */
   @visibility(Lifecycle.Read)
-  definition: EvalDefinition;
+  job_definition: EvalJobDefinition;
 
-  /** Run-only overrides submitted with a named suite. */
-  config_overrides?: EvalSuiteConfigOverrides;
+  /** Run-only overrides submitted with a named job. */
+  config_overrides?: EvalJobConfigOverrides;
 
   /** Immediate source run for a full rerun. */
   @visibility(Lifecycle.Read)
@@ -453,7 +453,7 @@ model EvalTaskRun {
   /** Inputs and available evidence captured before grading. */
   record: EvaluationTaskRunRecord;
 
-  /** Outcomes from attempted task- and suite-level graders. */
+  /** Outcomes from attempted task- and job-level graders. */
   grader_results: EvaluationGraderResult[];
 
   /** Pass, quality fail, or all graders N/A; absent on failure and cancellation. */

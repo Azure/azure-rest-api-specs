@@ -36,7 +36,7 @@ union EvaluationGraderType {
   tool_calls: "tool_calls",
 }
 
-/** A grader that is resolved as part of a task-set or evaluation-suite version. */
+/** A grader resolved from a TaskSet version or EvalJob definition. */
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvaluationGrader {
@@ -282,13 +282,13 @@ model Task {
   /** Reference values visible to graders but not to the agent. */
   expected?: Record<unknown>;
 
-  /** Task-level graders applied in addition to suite-level graders. */
+  /** Task-level graders applied in addition to job-level graders. */
   graders?: InlineEvaluationGrader[];
 
   /** Caller-defined JSON annotations visible to graders. */
   metadata?: Record<unknown>;
 
-  /** The rule used to combine task and suite grader verdicts for this task. */
+  /** The rule used to combine task and job grader verdicts for this task. */
   scoring?: ScoringRule;
 }
 

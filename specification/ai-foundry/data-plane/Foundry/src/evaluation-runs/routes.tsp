@@ -35,7 +35,7 @@ interface EvalRuns {
     {
       ...WithOperationId;
 
-      /** A named suite or a complete one-off definition. */
+      /** A named EvalJob or a complete one-off job definition. */
       @body request: EvalRunCreateContent;
     },
     JobCreatedResponse<FoundryEvalRun>

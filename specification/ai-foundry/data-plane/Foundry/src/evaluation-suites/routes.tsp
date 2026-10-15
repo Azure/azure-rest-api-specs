@@ -65,52 +65,52 @@ interface EvaluationSuites
   >;
 }
 
-/** Operations for editable named EvalSuite definitions. */
+/** Operations for editable named EvalJob definitions. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry preview operations use the project-standard feature-header and error-envelope template."
-@tag("EvalSuites")
+@tag("EvalJobs")
 @removed(Versions.v1)
-interface EvalSuites {
-  /** Lists named EvalSuites. */
-  @summary("List EvalSuites")
+interface EvalJobs {
+  /** Lists named EvalJobs. */
+  @summary("List EvalJobs")
   @get
   @list
-  @route("/eval_suites")
+  @route("/eval_jobs")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   list is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     CommonPageQueryParameters,
-    AgentsPagedResult<EvalSuite>
+    AgentsPagedResult<EvalJob>
   >;
 
-  /** Creates or replaces the current definition of a named EvalSuite. */
-  @summary("Create or replace an EvalSuite")
+  /** Creates or replaces the current definition of a named EvalJob. */
+  @summary("Create or replace an EvalJob")
   @put
-  @route("/eval_suites/{name}")
+  @route("/eval_jobs/{name}")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   createOrReplace is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
-      /** The stable EvalSuite name. */
+      /** The stable EvalJob name. */
       @path name: string;
 
-      /** The complete suite definition. */
-      @bodyRoot eval_suite: EvalSuite;
+      /** The complete job definition. */
+      @bodyRoot eval_job: EvalJob;
     },
-    Foundations.ResourceCreatedOrOkResponse<EvalSuite>
+    Foundations.ResourceCreatedOrOkResponse<EvalJob>
   >;
 
-  /** Retrieves the current definition of a named EvalSuite. */
-  @summary("Get an EvalSuite")
+  /** Retrieves the current definition of a named EvalJob. */
+  @summary("Get an EvalJob")
   @get
-  @route("/eval_suites/{name}")
+  @route("/eval_jobs/{name}")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   get is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
-      /** The EvalSuite name. */
+      /** The EvalJob name. */
       @path name: string;
     },
-    OkResponse & EvalSuite
+    OkResponse & EvalJob
   >;
 }
 
