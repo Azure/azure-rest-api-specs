@@ -1509,14 +1509,31 @@ model AccessPolicyAssignmentProperties {
    * Name of access policy under specific access policy assignment. Only "default" policy is supported for now.
    */
   @added(Versions.v2026_09_01)
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "accessPolicyName")
   @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
-  accessPolicyName: string;
+  accessPolicyNameBeforeCustomAccessStringReintroduction: string;
+
+  /**
+   * **Deprecated.** This property always returns "default". Use `accessString` to configure custom Redis ACL permissions instead.
+   */
+  #deprecated "`accessPolicyName` is being deprecated. Use `accessString` to configure custom Redis ACL permissions instead."
+  @added(Versions.v2026_10_01_preview)
+  @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
+  accessPolicyName?: string;
 
   /**
    * The Redis ACL permissions string applied to this assignment, for example `+@read ~cache:*`. Defaults to `+@all ~*` if not specified.
    */
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "accessString")
+  accessStringPreviousPreview?: string;
+
+  /**
+   * The Redis ACL permissions string applied to this assignment, for example `+@read ~cache:*`. Defaults to `+@all ~*` if not specified.
+   */
+  @added(Versions.v2026_10_01_preview)
   accessString?: string;
 
   /**
@@ -1525,6 +1542,14 @@ model AccessPolicyAssignmentProperties {
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "provisioningError")
+  provisioningErrorPreviousPreview?: AccessPolicyAssignmentProvisioningErrorPreviousPreview;
+
+  /**
+   * Provisioning error details when the access string failed to apply (e.g., invalid ACL syntax). Null when provisioning succeeded.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_10_01_preview)
   provisioningError?: AccessPolicyAssignmentProvisioningError;
 
   /**
@@ -1548,6 +1573,28 @@ model AccessPolicyAssignmentPropertiesUser {
  */
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_09_01)
+@renamedFrom(Versions.v2026_09_01, "AccessPolicyAssignmentProvisioningError")
+model AccessPolicyAssignmentProvisioningErrorPreviousPreview {
+  /**
+   * Machine-readable error code (e.g., "InvalidAccessString").
+   */
+  code: string;
+
+  /**
+   * Human-readable error message describing the failure.
+   */
+  message: string;
+
+  /**
+   * The property that caused the error (e.g., "properties.accessString").
+   */
+  target?: string;
+}
+
+/**
+ * Error details for access policy assignment provisioning failures.
+ */
+@added(Versions.v2026_10_01_preview)
 model AccessPolicyAssignmentProvisioningError {
   /**
    * Machine-readable error code (e.g., "InvalidAccessString").
@@ -1882,6 +1929,13 @@ model MigrationValidationRequest {
    * Sets whether to ignore warnings when validating if the source cache can be migrated to the target cache. If this property is true, the isValid property in the response will ignore warning-level disparities between the source and target resource. The default value is false.
    */
   @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "forceMigrate")
+  forceMigratePreviousPreview?: boolean;
+
+  /**
+   * Sets whether to ignore warnings when validating if the source cache can be migrated to the target cache. If this property is true, the isValid property in the response will ignore warning-level disparities between the source and target resource. The default value is false.
+   */
+  @added(Versions.v2026_10_01_preview)
   forceMigrate?: boolean;
 }
 
