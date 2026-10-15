@@ -16,6 +16,7 @@ namespace OpenAI {
   @@copyProperties(
     Item,
     {
+      /** The type of the item, including the `program` and `program_output` replay item types. */
       type: ItemType | "program" | "program_output",
     }
   );
@@ -293,6 +294,7 @@ namespace Azure.AI.Projects {
   @@copyProperties(
     Azure.AI.Projects.DeleteResponseResult,
     {
+      /** The object type, always `response`. */
       object: "response",
     }
   );
