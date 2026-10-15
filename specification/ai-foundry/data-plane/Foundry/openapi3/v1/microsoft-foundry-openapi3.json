@@ -89886,7 +89886,7 @@
         "type": "string",
         "maxLength": 256,
         "pattern": "^(?:\\+[1-9][0-9]{1,14}|\\^\\\\\\+(?:[1-9]|\\[1-9\\])(?:(?:[0-9]|\\[[0-9](?:-[0-9])?\\])(?:\\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\\})?)+\\$)$",
-        "description": "An exact canonical E.164 number or a restricted pattern for E.164 caller numbers, up to 256 characters. Patterns must start with ^ followed by an escaped plus sign, a nonzero first digit or [1-9], ASCII digit literals or ranges, bounded {n} or {n,m} quantifiers, and a final $. Other regex constructs, including Unicode digit shortcuts, groups, alternation, lookarounds, backreferences, and unbounded repetition, are not supported. The service validates that every number the pattern can match has 2 to 15 ASCII digits after the plus sign, starts with a nonzero digit, and matches the entire normalized E.164 caller number.",
+        "description": "An exact canonical E.164 number or a restricted pattern for E.164 caller numbers, up to 256 characters. Patterns must start with ^ followed by an escaped plus sign, a nonzero first digit or [1-9], ASCII digit literals or ranges, bounded {n} or {n,m} quantifiers, and a final $. Other regex constructs, including Unicode digit shortcuts, groups, alternation, lookahead or lookbehind assertions, backreferences, and unbounded repetition, are not supported. The service validates that every number the pattern can match has 2 to 15 ASCII digits after the plus sign, starts with a nonzero digit, and matches the entire normalized E.164 caller number.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
