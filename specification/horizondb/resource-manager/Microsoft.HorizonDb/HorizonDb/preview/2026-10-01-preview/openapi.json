@@ -9424,13 +9424,14 @@
         },
         "administratorLogin": {
           "type": "string",
-          "description": "The PostgreSQL administrator login name. After it is set, renaming is not supported. Setting the login requires password authentication state to be Enabled in the same request.",
+          "format": "password",
+          "description": "The PostgreSQL administrator login name. This value is not returned in responses. After it is set, renaming is not supported. Setting the login requires password authentication state to be Enabled in the same request.",
           "minLength": 1,
           "maxLength": 63,
           "x-ms-mutability": [
-            "read",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "administratorLoginPassword": {
           "type": "string",
