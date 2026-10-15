@@ -564,7 +564,7 @@ union VoiceAgentNoiseReductionType {
   @doc("Azure deep noise suppression.")
   azure_deep_noise_suppression: "azure_deep_noise_suppression",
 
-  @doc("Preview: Azure headset-optimized noise suppression for local voice activity detection. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.")
+  @doc("Preview: Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.")
   azure_deep_noise_suppression_headset: "azure_deep_noise_suppression_headset",
 
   @doc("Preview: Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.")
