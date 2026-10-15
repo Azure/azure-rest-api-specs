@@ -280,10 +280,7 @@ function checkSdkVoiceInheritance(context) {
     realtimeVoiceFields,
   );
   assert.ok(realtimeProperties.every((p) => p.optional));
-  for (const name of [
-    "VoiceAgentDefinition",
-    "VoiceAgentLiveDefinition",
-  ])
+  for (const name of ["VoiceAgentDefinition", "VoiceAgentLiveDefinition"])
     assert.equal(
       model(name).doc,
       getDoc(program, type(`Azure.AI.Projects.${name}`)),
@@ -472,13 +469,10 @@ test("VoiceAgentDefinition retains the original Realtime fields without SDK name
   const base = type("Azure.AI.Projects.VoiceAgentBaseDefinition");
   const realtime = type("Azure.AI.Projects.VoiceAgentDefinition");
   const live = type("Azure.AI.Projects.VoiceAgentLiveDefinition");
-  assert.deepEqual([...base.properties.keys()], [
-    "kind",
-    "sub_protocol",
-    "instructions",
-    "structured_inputs",
-    "store",
-  ]);
+  assert.deepEqual(
+    [...base.properties.keys()],
+    ["kind", "sub_protocol", "instructions", "structured_inputs", "store"],
+  );
   assert.deepEqual([...realtime.properties.keys()], realtimeVoiceFields);
   assert.ok([...realtime.properties.values()].every((p) => p.optional));
   for (const model of [base, realtime, live]) {
@@ -671,9 +665,8 @@ test("Live greeting reuses only the existing template subtype while Realtime ret
   assert.deepEqual([...fields(template).keys()].sort(), ["text", "type"]);
   const root = type("Azure.AI.Projects.VoiceAgentGreetingConfig");
   assert.equal(
-    type("Azure.AI.Projects.VoiceAgentDefinition").properties.get(
-      "greeting",
-    ).type,
+    type("Azure.AI.Projects.VoiceAgentDefinition").properties.get("greeting")
+      .type,
     root,
   );
   assert.deepEqual(
@@ -1013,12 +1006,39 @@ test("managed delegation aggregate retains an ordered result list without event 
   }
 });
 
-test("delegation results contain only optional commentary and thinking strings", () => {
+test("delegation results require commentary, thinking, or both without an item ID", () => {
   const result = type("Azure.AI.Projects.VoiceAgentLiveDelegationResultItem");
-  assert.deepEqual([...result.properties.keys()], ["commentary", "thinking"]);
-  for (const property of result.properties.values()) {
-    assert.equal(property.optional, true);
-    assert.equal(getTypeName(property.type), "string");
+  assert.equal(result.kind, "Union");
+  assert.equal(result.variants.size, 2);
+  const required = [];
+  for (const variant of result.variants.values()) {
+    assert.deepEqual(
+      [...variant.type.properties.keys()],
+      ["commentary", "thinking"],
+    );
+    const properties = [...variant.type.properties.values()];
+    assert.ok(properties.every((p) => getTypeName(p.type) === "string"));
+    required.push(properties.filter((p) => !p.optional).map((p) => p.name));
+  }
+  assert.deepEqual(required, [["commentary"], ["thinking"]]);
+  for (const doc of documents) {
+    const schema = doc.components.schemas.VoiceAgentLiveDelegationResultItem;
+    assert.equal(schema.oneOf, undefined); // Both fields must remain valid.
+    assert.equal(schema.anyOf.length, 2);
+    assert.deepEqual(
+      schema.anyOf.map((s) => s.required),
+      required,
+    );
+    for (const variant of schema.anyOf)
+      assert.deepEqual(Object.keys(variant.properties), [
+        "commentary",
+        "thinking",
+      ]);
+    const array =
+      doc.components.schemas.VoiceAgentLiveFoundryManagedAgentDelegationItem
+        .properties.output;
+    assert.equal(array.minItems, undefined);
+    assert.match(array.description, /no individual IDs/);
   }
   const ns = type("Azure.AI.Projects");
   for (const name of [
@@ -1258,14 +1278,18 @@ test("concrete voice definitions reject invalid protocols and incomplete Live de
 });
 
 test("VoiceAgentDefinition rejects the Live protocol under the legacy Realtime name", async () => {
-  const result = await validateExamples("realtime-definition-rejects-live", [], [
-    `const voice: Azure.AI.Projects.VoiceAgentDefinition = ${tspValue({
-      kind: "voice",
-      sub_protocol: "live",
-      model_type: "self_deployed",
-      model: "gpt-live-1",
-    })};`,
-  ]);
+  const result = await validateExamples(
+    "realtime-definition-rejects-live",
+    [],
+    [
+      `const voice: Azure.AI.Projects.VoiceAgentDefinition = ${tspValue({
+        kind: "voice",
+        sub_protocol: "live",
+        model_type: "self_deployed",
+        model: "gpt-live-1",
+      })};`,
+    ],
+  );
   checkInvalidExample(result.diagnostics);
 });
 
@@ -2137,8 +2161,18 @@ test("SDK metadata exports native events and separate Live persistence discrimin
   );
   assert.equal(outputArray.optional, false);
   assert.equal(outputArray.type.kind, "array");
-  const resultItem = model("VoiceAgentLiveDelegationResultItem");
-  assert.equal(outputArray.type.valueType, resultItem);
+  const resultItem = outputArray.type.valueType;
+  assert.equal(resultItem.kind, "union");
+  assert.equal(resultItem.__raw.name, "VoiceAgentLiveDelegationResultItem");
+  assert.equal(resultItem.variantTypes.length, 2);
+  assert.deepEqual(
+    resultItem.variantTypes.map((variant) =>
+      variant.properties
+        .filter((p) => !p.optional)
+        .map((p) => p.serializedName),
+    ),
+    [["commentary"], ["thinking"]],
+  );
   assert.ok(
     !context.sdkPackage.models.some(
       (m) =>
@@ -2229,10 +2263,7 @@ test("Java SDK customization targets Realtime fields and keeps Live events witho
       );
   }
 
-  const realtime = type(
-    "Azure.AI.Projects.VoiceAgentDefinition",
-    sdkProgram,
-  );
+  const realtime = type("Azure.AI.Projects.VoiceAgentDefinition", sdkProgram);
   checkSdkGreetingModels(context);
   checkSdkSessionFields(context);
   checkSdkLiveDelegation(context);
@@ -2861,10 +2892,9 @@ test("malformed Live speech and delegation items are rejected", async (t) => {
   }
 });
 
-test("result strings are optional, not nullable or acknowledgment structures", async () => {
+test("result guidance is required while unanswered client delegations remain valid", async (t) => {
   const model = "Azure.AI.Projects.VoiceAgentLiveDelegationResultItem";
-  const result = await validateExamples("optional-result-text", [
-    { model, payload: {} },
+  const result = await validateExamples("accepted-result-text", [
     { model, payload: { commentary: "Try another sentence." } },
     { model, payload: { thinking: "Wait for the learner's answer." } },
     {
@@ -2874,18 +2904,59 @@ test("result strings are optional, not nullable or acknowledgment structures", a
         thinking: "Increase difficulty next.",
       },
     },
+    {
+      model: managedItemModel,
+      payload: {
+        ...storedDelegation,
+        ...managedIdentity,
+        target: "foundry_managed_agent",
+        status: "in_progress",
+        output: [],
+      },
+    },
+    {
+      model: "Azure.AI.Projects.VoiceAgentLiveClientDelegationConversationItem",
+      payload: { ...storedDelegation, target: "client" },
+    },
   ]);
   checkErrors(result.diagnostics);
-  const nullable = await validateExamples("invalid-null-result-text", [
-    { model, payload: { commentary: null } },
-    { model, payload: { thinking: null } },
-  ]);
-  const errors = nullable.diagnostics.filter((d) => d.severity === "error");
-  assert.ok(errors.length >= 2);
-  assert.ok(
-    errors.every((d) => ["invalid-argument", "unassignable"].includes(d.code)),
-    errors.map((d) => `${d.code}: ${d.message}`).join("\n"),
-  );
+  for (const [index, payload] of [
+    {},
+    null,
+    { commentary: null },
+    { thinking: null },
+    { commentary: "Say hello.", thinking: null },
+    { commentary: null, thinking: "Teach past tense." },
+    { commentary: 1 },
+    { thinking: {} },
+    { id: "not-guidance" },
+  ].entries()) {
+    await t.test(`rejects invalid result ${index}`, async () => {
+      checkInvalidExample(
+        (
+          await validateExamples(`invalid-result-${index}`, [
+            { model, payload },
+          ])
+        ).diagnostics,
+      );
+      checkInvalidExample(
+        (
+          await validateExamples(`invalid-result-array-${index}`, [
+            {
+              model: managedItemModel,
+              payload: {
+                ...storedDelegation,
+                ...managedIdentity,
+                target: "foundry_managed_agent",
+                status: "completed",
+                output: [resultText, payload],
+              },
+            },
+          ])
+        ).diagnostics,
+      );
+    });
+  }
   for (const [subtype, names] of [
     ["Responses", ["output"]],
     ["Client", ["commentary", "thinking"]],

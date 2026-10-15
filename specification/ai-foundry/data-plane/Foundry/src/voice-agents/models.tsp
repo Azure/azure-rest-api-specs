@@ -134,14 +134,23 @@ model VoiceResponse {
 // Live delegation results and persisted conversation items
 // ---------------------------------------------------------------------------
 
-@doc("Persisted guidance accepted by Live. For agent delegations, [thinking] and [commentary] markers are removed before storage.")
+@doc("Persisted guidance accepted by Live, with commentary, thinking, or both. Agent delegation section markers are removed before storage.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveDelegationResultItem {
-  @doc("Guidance for Live to communicate to the user.")
-  commentary?: string;
+union VoiceAgentLiveDelegationResultItem {
+  {
+    @doc("Guidance for Live to communicate to the user.")
+    commentary: string,
 
-  @doc("Background context, not private reasoning or a request to speak.")
-  thinking?: string;
+    @doc("Background context, not private reasoning or a request to speak.")
+    thinking?: string,
+  },
+  {
+    @doc("Guidance for Live to communicate to the user.")
+    commentary?: string,
+
+    @doc("Background context, not private reasoning or a request to speak.")
+    thinking: string,
+  },
 }
 
 @doc("Delegation owner. Foundry agent targets use native client delegation upstream.")
@@ -234,7 +243,12 @@ model VoiceAgentLiveDelegationConversationItem
 model VoiceAgentLiveClientDelegationConversationItem
   extends VoiceAgentLiveDelegationConversationItem {
   target: "client";
-  ...VoiceAgentLiveDelegationResultItem;
+
+  @doc("Guidance for Live to communicate to the user, when accepted.")
+  commentary?: string;
+
+  @doc("Accepted background context, not private reasoning or a request to speak.")
+  thinking?: string;
 }
 
 @doc("Stored Responses delegation output, separate from Live speech.")
@@ -265,7 +279,7 @@ model VoiceAgentLiveFoundryManagedAgentDelegationItem
   @doc("Backend conversation ID, distinct from the voice conversation and Live session IDs.")
   backend_conversation_id?: string;
 
-  @doc("Accepted guidance in order; empty until a result is accepted. Entries are noncumulative and independent of backend output_index. Partial results survive failure or cancellation.")
+  @doc("Accepted guidance in order; empty until a result is accepted. Entries have no individual IDs, are noncumulative, and are independent of backend output_index. Partial results survive failure or cancellation.")
   output: VoiceAgentLiveDelegationResultItem[];
 
   @doc("Task context sent to the target agent, not the full request body.")

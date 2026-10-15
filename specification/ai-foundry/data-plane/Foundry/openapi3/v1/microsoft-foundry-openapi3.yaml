@@ -88795,10 +88795,10 @@ components:
             - client
         commentary:
           type: string
-          description: Guidance for Live to communicate to the user.
+          description: Guidance for Live to communicate to the user, when accepted.
         thinking:
           type: string
-          description: Background context, not private reasoning or a request to speak.
+          description: Accepted background context, not private reasoning or a request to speak.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentLiveDelegationConversationItem'
       description: Results supplied by the application for client delegation.
@@ -88958,15 +88958,28 @@ components:
         required_previews:
           - VoiceAgents=V1Preview
     VoiceAgentLiveDelegationResultItem:
-      type: object
-      properties:
-        commentary:
-          type: string
-          description: Guidance for Live to communicate to the user.
-        thinking:
-          type: string
-          description: Background context, not private reasoning or a request to speak.
-      description: Persisted guidance accepted by Live. For agent delegations, [thinking] and [commentary] markers are removed before storage.
+      anyOf:
+        - type: object
+          properties:
+            commentary:
+              type: string
+              description: Guidance for Live to communicate to the user.
+            thinking:
+              type: string
+              description: Background context, not private reasoning or a request to speak.
+          required:
+            - commentary
+        - type: object
+          properties:
+            commentary:
+              type: string
+              description: Guidance for Live to communicate to the user.
+            thinking:
+              type: string
+              description: Background context, not private reasoning or a request to speak.
+          required:
+            - thinking
+      description: Persisted guidance accepted by Live, with commentary, thinking, or both. Agent delegation section markers are removed before storage.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -89019,7 +89032,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VoiceAgentLiveDelegationResultItem'
-          description: Accepted guidance in order; empty until a result is accepted. Entries are noncumulative and independent of backend output_index. Partial results survive failure or cancellation.
+          description: Accepted guidance in order; empty until a result is accepted. Entries have no individual IDs, are noncumulative, and are independent of backend output_index. Partial results survive failure or cancellation.
         delegation_context:
           type: string
           description: Task context sent to the target agent, not the full request body.
