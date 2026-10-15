@@ -41,11 +41,15 @@ input-file:
 suppressions:
   - code: EvenSegmentedPathForPutOperation
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/passwordMethod"]
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/passwordMethod"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/microsoftEntra"]
     reason: >-
-      PasswordAuthentication is a service-created singleton resource with the
-      fixed name passwordMethod. Its path follows the approved singleton
-      resource pattern and cannot end in a variable resource-name segment.
+      The authentication methods are service-created singleton resources with
+      fixed names. Their paths follow the approved singleton resource pattern
+      and cannot end in variable resource-name segments. The Microsoft Entra
+      path exposes GET and PATCH only; associating a PUT path violation with it
+      is a validator false positive.
   - code: PutRequestResponseSchemeArm
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/microsoftEntraAdministrators/{objectId}"].put
@@ -55,11 +59,13 @@ suppressions:
       is a subset of the resource returned by GET and PUT, not a superset.
   - code: AllProxyResourcesShouldHaveDelete
     from: openapi.json
-    where: $.definitions["PasswordAuthentication"]
+    where:
+      - $.definitions["PasswordAuthentication"]
+      - $.definitions["MicrosoftEntraAuthentication"]
     reason: >-
-      PasswordAuthentication is created and owned by the service with the
-      parent cluster. Customers can configure the singleton but cannot delete
-      it independently.
+      The authentication methods are created and owned by the service with the
+      parent cluster. Customers can configure these singleton resources but
+      cannot delete them independently.
   - code: PathForNestedResource
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/microsoftEntra"]
@@ -89,11 +95,25 @@ suppressions:
       containing value and nextLink, not an ARM resource model.
   - code: PutInOperationName
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.operationId
     reason: >-
       This PUT approves or rejects an existing private endpoint connection; it
       does not create the connection. The approval-specific operation ID
       PrivateEndpointConnections_ApproveOrReject describes the service behavior.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where:
+      - $.definitions["ActivateChangeDataCaptureIdentityRequest"].properties.drainExistingSessions
+      - $.definitions["ChangeDataCaptureCapabilityProperties"].properties.autoUpgradeExtension
+      - $.definitions["ChangeDataCaptureCapabilityPropertiesForPatchUpdate"].properties.autoUpgradeExtension
+      - $.definitions["LogFileProperties"].properties.isMutable
+      - $.definitions["MaintenanceEventActionResponse"].properties.appliedNow
+      - $.definitions["MaintenanceEventProperties"].properties.deferrable
+    reason: >-
+      These properties represent binary facts or choices for which true and
+      false are complete and unambiguous. Replacing them with string enums
+      would not add semantic states and would make the wire contract less
+      natural.
 ```
 
 ### Tag: package-horizondb-2026-05-01-preview
