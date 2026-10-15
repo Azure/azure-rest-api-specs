@@ -634,7 +634,7 @@ model PasswordAuthenticationProperties {
 @doc("Properties of the service-created Microsoft Entra authentication method.")
 model MicrosoftEntraAuthenticationProperties {
   @doc("The state of Microsoft Entra authentication.")
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   state: AuthenticationState;
 
   @doc("The provisioning state of the Microsoft Entra authentication method.")

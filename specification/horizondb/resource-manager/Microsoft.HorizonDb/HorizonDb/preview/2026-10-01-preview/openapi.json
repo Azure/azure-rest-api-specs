@@ -818,7 +818,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Authentication"
+              "$ref": "#/definitions/MicrosoftEntraAuthentication"
             }
           },
           "default": {
@@ -833,6 +833,98 @@
             "$ref": "./examples/MicrosoftEntraAuthentications_Get.json"
           }
         }
+      },
+      "put": {
+        "operationId": "MicrosoftEntraAuthentications_CreateOrReplace",
+        "tags": [
+          "MicrosoftEntraAuthentications"
+        ],
+        "description": "Creates or replaces the service-created Microsoft Entra authentication method. State Enabled enables the feature and State Disabled disables it; no additional properties are required. Repeating the same request is idempotent. Disabling the feature does not remove or modify database roles or users previously created through the MicrosoftEntraAdministrators control-plane API or directly through pgaadauth extension functions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MicrosoftEntraAuthentication"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response returned when an asynchronous HorizonDB resource replacement is accepted.",
+            "schema": {
+              "$ref": "#/definitions/MicrosoftEntraAuthentication"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "201": {
+            "description": "Resource 'MicrosoftEntraAuthentication' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MicrosoftEntraAuthentication"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Disable Microsoft Entra authentication declaratively": {
+            "$ref": "./examples/MicrosoftEntraAuthentications_CreateOrReplaceDisabled.json"
+          },
+          "Enable Microsoft Entra authentication declaratively": {
+            "$ref": "./examples/MicrosoftEntraAuthentications_CreateOrReplaceEnabled.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/MicrosoftEntraAuthentication"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "MicrosoftEntraAuthentications_Update",
@@ -874,11 +966,11 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Authentication"
+              "$ref": "#/definitions/MicrosoftEntraAuthentication"
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Resource update request accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -913,7 +1005,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/Authentication"
+          "final-state-schema": "#/definitions/MicrosoftEntraAuthentication"
         },
         "x-ms-long-running-operation": true
       }
@@ -8779,6 +8871,21 @@
         "principalType"
       ]
     },
+    "MicrosoftEntraAuthentication": {
+      "type": "object",
+      "description": "The service-created Microsoft Entra authentication method for a HorizonDB cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MicrosoftEntraAuthenticationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "MicrosoftEntraAuthenticationForPatchUpdate": {
       "type": "object",
       "description": "A sparse update request for Microsoft Entra authentication.",
@@ -8788,6 +8895,29 @@
           "description": "The Microsoft Entra authentication properties to update."
         }
       }
+    },
+    "MicrosoftEntraAuthenticationProperties": {
+      "type": "object",
+      "description": "Properties of the service-created Microsoft Entra authentication method.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/AuthenticationState",
+          "description": "The state of Microsoft Entra authentication.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Microsoft Entra authentication method.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
     },
     "MicrosoftEntraAuthenticationPropertiesForPatchUpdate": {
       "type": "object",
