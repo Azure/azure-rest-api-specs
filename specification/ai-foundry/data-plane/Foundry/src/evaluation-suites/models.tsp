@@ -7,6 +7,8 @@ import "../openai/evaluations/models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
 
+using Microsoft.Foundry.Core;
+
 namespace Azure.AI.Projects;
 
 const EvaluationSuitesRequiredPreviews = #{
@@ -348,6 +350,7 @@ model EvaluationSuiteDataGenerationOptions {
 @doc("Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.")
 @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteGenerationJob is JobLike<
+  ApiError,
   EvaluationSuiteVersion,
   EvaluationSuiteGenerationJobInputs
 > {

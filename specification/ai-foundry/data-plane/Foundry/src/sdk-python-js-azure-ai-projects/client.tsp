@@ -41,11 +41,17 @@ import "../sdk-common/error.default.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.AI.Projects;
+using Microsoft.Foundry.Core;
 
 // --------------------------------------------------------------------------------
 // Root client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects, "AIProjectClient");
+
+// Pin generated model names after migrating PageOrder/JobStatus to reuse the
+// Microsoft.Foundry.Core library union definitions.
+@@clientName(PageOrder, "PageOrder");
+@@clientName(JobStatus, "JobStatus");
 
 // --------------------------------------------------------------------------------
 // Namespace remapping
