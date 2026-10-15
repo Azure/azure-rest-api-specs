@@ -215,9 +215,9 @@ model VoiceAgentPostCallConfig {
   @doc("""
     Zero to ten bare names of routines in the same project, resolved from the versioned routine definitions at
     post-call dispatch. Only names are stored here, not routine versions, endpoints, credentials, timeouts, or
-    policies. Omit this property or supply an empty list to configure no routines; an Event Grid target is then
-    required. Null is invalid. The service rejects duplicate names using the routine resource's name-comparison
-    semantics rather than silently deduplicating the list.
+    policies. Each name is at most 128 characters. Omit this property or supply an empty list to configure no
+    routines; an Event Grid target is then required. Null is invalid. The service rejects duplicate names using
+    ordinal, case-sensitive comparison rather than silently deduplicating the list.
     """)
   @minItems(0)
   @maxItems(10)
@@ -226,10 +226,12 @@ model VoiceAgentPostCallConfig {
 }
 
 @doc("""
-  A nonempty bare routine name in the same project. The service validates the routine resource's name syntax
-  and rejects blank names, whitespace, URLs, and resource paths. This is a name reference, not a routine version.
+  A nonempty bare routine name in the same project, limited to 128 characters. Names are case-sensitive.
+  The service rejects whitespace, URLs, resource paths, the names "." and "..", and the characters /, \\, :, ?, #,
+  and %. Unicode names are allowed. This is a name reference, not a routine version.
   """)
 @minLength(1)
+@maxLength(128)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar VoiceAgentPostCallRoutineName extends string;
 

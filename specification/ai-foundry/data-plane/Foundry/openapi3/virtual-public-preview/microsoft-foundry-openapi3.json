@@ -98109,7 +98109,7 @@
             },
             "minItems": 0,
             "maxItems": 10,
-            "description": "Zero to ten bare names of routines in the same project, resolved from the versioned routine definitions at\npost-call dispatch. Only names are stored here, not routine versions, endpoints, credentials, timeouts, or\npolicies. Omit this property or supply an empty list to configure no routines; an Event Grid target is then\nrequired. Null is invalid. The service rejects duplicate names using the routine resource's name-comparison\nsemantics rather than silently deduplicating the list.",
+            "description": "Zero to ten bare names of routines in the same project, resolved from the versioned routine definitions at\npost-call dispatch. Only names are stored here, not routine versions, endpoints, credentials, timeouts, or\npolicies. Each name is at most 128 characters. Omit this property or supply an empty list to configure no\nroutines; an Event Grid target is then required. Null is invalid. The service rejects duplicate names using\nordinal, case-sensitive comparison rather than silently deduplicating the list.",
             "examples": [
               [
                 "archive",
@@ -98131,7 +98131,8 @@
       "VoiceAgentPostCallRoutineName": {
         "type": "string",
         "minLength": 1,
-        "description": "A nonempty bare routine name in the same project. The service validates the routine resource's name syntax\nand rejects blank names, whitespace, URLs, and resource paths. This is a name reference, not a routine version.",
+        "maxLength": 128,
+        "description": "A nonempty bare routine name in the same project, limited to 128 characters. Names are case-sensitive.\nThe service rejects whitespace, URLs, resource paths, the names \".\" and \"..\", and the characters /, \\, :, ?, #,\nand %. Unicode names are allowed. This is a name reference, not a routine version.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

@@ -19,8 +19,9 @@ post_call_config:
 Event Grid alone uses `{ event_grid_connection_name: post-call-events }`; routines alone use
 `{ routine_names: [archive, analysis] }`. Configure at most ten routines. The single Event Grid connection
 does not count toward that limit. Each reference is a bare name in the same project, not a URL, resource path,
-endpoint, or credential. Routine names refer to versioned routine definitions resolved at post-call dispatch;
-the voice-agent configuration does not pin a routine version or add timeout or policy fields.
+endpoint, or credential. Each Routine name is at most 128 characters. Routine names refer to versioned routine
+definitions resolved at post-call dispatch; the voice-agent configuration does not pin a routine version or
+add timeout or policy fields.
 
 ### Validation boundaries
 
@@ -32,14 +33,16 @@ the voice-agent configuration does not pin a routine version or add timeout or p
 | `routine_names: null`, null members, or non-string members | Invalid. |
 | More than ten Routine names, even with Event Grid | Invalid. |
 | Empty, blank, whitespace-containing names, URLs, or resource paths | Invalid. |
-| Duplicate Routine names | Rejected using the Routine resource's name-comparison semantics; not silently deduplicated. |
+| Duplicate Routine names | Rejected using ordinal, case-sensitive comparison; not silently deduplicated. `Archive` and `archive` are distinct names. |
 | Unknown configuration properties, including the unpublished scalar `routine_name` or object-valued `routines` | Invalid. |
 
 The generated schema enforces a closed configuration object, string and array types, nonempty string values,
-and zero-to-ten array bounds. The service additionally enforces at least one valid target, bare-name syntax,
-duplicate Routine names, target resolution and authorization, and support for post-call processing by the
-selected voice-agent definition. Schema validation alone is not proof that a configuration is valid.
+the 128-character Routine name limit, and zero-to-ten array bounds. The service additionally enforces at least one valid target,
+bare-name syntax, duplicate Routine names, target resolution and authorization, and support for post-call
+processing by the selected voice-agent definition. Schema validation alone is not proof that a configuration is valid.
 Neither target field accepts `null`; only the whole `post_call_config` does.
+Bare Routine references reject whitespace, `/`, `\`, `:`, `?`, `#`, `%`, and the names `.` and `..`.
+Unicode names are allowed; no ASCII-only name pattern is imposed.
 
 ### Delivery and snapshot quality
 
