@@ -22,7 +22,6 @@ namespace Azure.AI.Projects {
     fabric_iq_preview: "fabric_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
     web_iq_preview: "web_iq_preview",
-    microsoft_copilot_toolset_preview: "microsoft_copilot_toolset_preview",
     github_copilot_toolset_preview: "github_copilot_toolset_preview",
   }
 
@@ -40,10 +39,18 @@ namespace Azure.AI.Projects {
     memory_search: "memory_search",
   }
 
+  union _MicrosoftCopilotAgentToolType {
+    microsoft_copilot_toolset_preview: "microsoft_copilot_toolset_preview",
+  }
+
   const PreviewTool = #{ required_previews: #["preview_tool"] };
 
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._PreviewAgentToolType);
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._AgentToolType);
+  @@copyVariants(
+    OpenAI.ToolType,
+    Azure.AI.Projects._MicrosoftCopilotAgentToolType
+  );
 
   union _AgentIncludable {
     "memory_search_call.results",
@@ -81,6 +88,14 @@ namespace Azure.AI.Projects {
   };
 
   @doc("A customer-configurable Microsoft Copilot built-in tool.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[
+        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+      ],
+    }
+  )
   union MicrosoftCopilotBuiltInTool {
     @doc("Read and search files in the harness workspace.")
     filesystem_read: "filesystem_read",
@@ -99,12 +114,28 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The default enablement setting for Microsoft Copilot built-in tools.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[
+        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+      ],
+    }
+  )
   model MicrosoftCopilotToolsetDefaultConfig {
     @doc("Whether built-in tools are enabled by default. Defaults to true.")
     enabled?: boolean = true;
   }
 
   @doc("An enablement override for a Microsoft Copilot built-in tool.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[
+        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+      ],
+    }
+  )
   model MicrosoftCopilotToolsetConfig {
     @doc("The built-in tool to configure.")
     name: MicrosoftCopilotBuiltInTool;
@@ -117,7 +148,9 @@ namespace Azure.AI.Projects {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview],
+      required_previews: #[
+        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+      ],
     }
   )
   model MicrosoftCopilotToolsetPreview extends OpenAI.Tool {

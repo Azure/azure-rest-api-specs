@@ -16,7 +16,8 @@ const AllConditionalAgentDefinitionPreviews = #{
     AgentDefinitionOptInKeys.draft_agents_v1_preview,
     AgentDefinitionOptInKeys.digital_worker_v1_preview,
     AgentDefinitionOptInKeys.github_copilot_v1_preview,
-    AgentDefinitionOptInKeys.skills_v1_preview
+    AgentDefinitionOptInKeys.skills_v1_preview,
+    AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
   ],
 };
 
@@ -411,7 +412,10 @@ model PromptAgentDefinition extends AgentDefinition {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview],
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.github_copilot_v1_preview,
+        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+      ],
     }
   )
   harness?: AgentHarness;
@@ -475,7 +479,12 @@ model PromptAgentDefinition extends AgentDefinition {
 @doc("A managed runtime and agent loop used to execute a prompt agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+  #{
+    conditional_previews: #[
+      AgentDefinitionOptInKeys.github_copilot_v1_preview,
+      AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+    ],
+  }
 )
 @discriminator("type")
 model AgentHarness {
@@ -486,7 +495,9 @@ model AgentHarness {
 @doc("The Microsoft Copilot managed harness for prompt agents.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.microsoft_copilot_v1_preview],
+  }
 )
 model MicrosoftCopilotHarness extends AgentHarness {
   @doc("The type of managed harness. Always `microsoft_copilot_preview`.")

@@ -102,6 +102,8 @@ union AgentDefinitionOptInKeys {
 
   @removed(Versions.v1)
   container_agents_v1_preview: "ContainerAgents=V1Preview",
+
+  microsoft_copilot_v1_preview: "MicrosoftCopilot=V1Preview",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "API review requires this input-only opt-in contract to accept only the declared feature keys; arbitrary string opt-ins are not supported."

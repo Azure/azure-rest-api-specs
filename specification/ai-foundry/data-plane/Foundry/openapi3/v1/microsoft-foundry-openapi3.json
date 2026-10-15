@@ -2500,7 +2500,8 @@
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
             "GitHubCopilot=V1Preview",
-            "Skills=V1Preview"
+            "Skills=V1Preview",
+            "MicrosoftCopilot=V1Preview"
           ]
         },
         "tags": [
@@ -7934,7 +7935,8 @@
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
             "GitHubCopilot=V1Preview",
-            "Skills=V1Preview"
+            "Skills=V1Preview",
+            "MicrosoftCopilot=V1Preview"
           ]
         },
         "tags": [
@@ -33483,7 +33485,8 @@
           "VoiceAgents=V1Preview",
           "DigitalWorker=V1Preview",
           "GitHubCopilot=V1Preview",
-          "Skills=V1Preview"
+          "Skills=V1Preview",
+          "MicrosoftCopilot=V1Preview"
         ],
         "description": "Feature opt-in keys for agent definition operations supporting conditional preview features."
       },
@@ -33691,8 +33694,9 @@
         },
         "description": "A managed runtime and agent loop used to execute a prompt agent.",
         "x-ms-foundry-meta": {
-          "required_previews": [
-            "GitHubCopilot=V1Preview"
+          "conditional_previews": [
+            "GitHubCopilot=V1Preview",
+            "MicrosoftCopilot=V1Preview"
           ]
         }
       },
@@ -39105,7 +39109,8 @@
                 "DraftAgents=V1Preview",
                 "DigitalWorker=V1Preview",
                 "GitHubCopilot=V1Preview",
-                "Skills=V1Preview"
+                "Skills=V1Preview",
+                "MicrosoftCopilot=V1Preview"
               ]
             }
           },
@@ -39149,7 +39154,8 @@
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
             "GitHubCopilot=V1Preview",
-            "Skills=V1Preview"
+            "Skills=V1Preview",
+            "MicrosoftCopilot=V1Preview"
           ]
         }
       },
@@ -39277,7 +39283,8 @@
                 "DraftAgents=V1Preview",
                 "DigitalWorker=V1Preview",
                 "GitHubCopilot=V1Preview",
-                "Skills=V1Preview"
+                "Skills=V1Preview",
+                "MicrosoftCopilot=V1Preview"
               ]
             }
           },
@@ -45884,7 +45891,12 @@
           "web",
           "subagents"
         ],
-        "description": "A customer-configurable Microsoft Copilot built-in tool."
+        "description": "A customer-configurable Microsoft Copilot built-in tool.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "MicrosoftCopilot=V1Preview"
+          ]
+        }
       },
       "MicrosoftCopilotHarness": {
         "type": "object",
@@ -45908,7 +45920,7 @@
         "description": "The Microsoft Copilot managed harness for prompt agents.",
         "x-ms-foundry-meta": {
           "required_previews": [
-            "GitHubCopilot=V1Preview"
+            "MicrosoftCopilot=V1Preview"
           ]
         }
       },
@@ -45927,7 +45939,12 @@
             "description": "Whether the built-in tool is enabled. If omitted, the toolset default applies."
           }
         },
-        "description": "An enablement override for a Microsoft Copilot built-in tool."
+        "description": "An enablement override for a Microsoft Copilot built-in tool.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "MicrosoftCopilot=V1Preview"
+          ]
+        }
       },
       "MicrosoftCopilotToolsetDefaultConfig": {
         "type": "object",
@@ -45938,7 +45955,12 @@
             "default": true
           }
         },
-        "description": "The default enablement setting for Microsoft Copilot built-in tools."
+        "description": "The default enablement setting for Microsoft Copilot built-in tools.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "MicrosoftCopilot=V1Preview"
+          ]
+        }
       },
       "MicrosoftCopilotToolsetPreview": {
         "type": "object",
@@ -45973,7 +45995,7 @@
         "description": "Configuration overrides for Microsoft Copilot built-in tools.",
         "x-ms-foundry-meta": {
           "required_previews": [
-            "GitHubCopilot=V1Preview"
+            "MicrosoftCopilot=V1Preview"
           ]
         }
       },
@@ -83455,7 +83477,6 @@
               "fabric_iq_preview",
               "toolbox_search_preview",
               "web_iq_preview",
-              "microsoft_copilot_toolset_preview",
               "github_copilot_toolset_preview",
               "a2a",
               "azure_ai_search",
@@ -83463,7 +83484,8 @@
               "bing_grounding",
               "browser_automation",
               "capture_structured_outputs",
-              "openapi"
+              "openapi",
+              "microsoft_copilot_toolset_preview"
             ]
           }
         ]
@@ -86291,8 +86313,9 @@
             "$ref": "#/components/schemas/AgentHarness",
             "description": "The managed runtime and agent loop used to execute this prompt agent.",
             "x-ms-foundry-meta": {
-              "required_previews": [
-                "GitHubCopilot=V1Preview"
+              "conditional_previews": [
+                "GitHubCopilot=V1Preview",
+                "MicrosoftCopilot=V1Preview"
               ]
             }
           },
@@ -93384,7 +93407,8 @@
                 "DraftAgents=V1Preview",
                 "DigitalWorker=V1Preview",
                 "GitHubCopilot=V1Preview",
-                "Skills=V1Preview"
+                "Skills=V1Preview",
+                "MicrosoftCopilot=V1Preview"
               ]
             }
           },
@@ -93401,7 +93425,8 @@
             "DraftAgents=V1Preview",
             "DigitalWorker=V1Preview",
             "GitHubCopilot=V1Preview",
-            "Skills=V1Preview"
+            "Skills=V1Preview",
+            "MicrosoftCopilot=V1Preview"
           ]
         }
       },

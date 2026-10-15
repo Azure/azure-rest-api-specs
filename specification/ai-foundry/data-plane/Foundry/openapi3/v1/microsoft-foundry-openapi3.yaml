@@ -1623,6 +1623,7 @@ paths:
           - DigitalWorker=V1Preview
           - GitHubCopilot=V1Preview
           - Skills=V1Preview
+          - MicrosoftCopilot=V1Preview
       tags:
         - Agents
       requestBody:
@@ -5419,6 +5420,7 @@ paths:
           - DigitalWorker=V1Preview
           - GitHubCopilot=V1Preview
           - Skills=V1Preview
+          - MicrosoftCopilot=V1Preview
       tags:
         - Agent Versions
       requestBody:
@@ -42859,6 +42861,7 @@ components:
         - DigitalWorker=V1Preview
         - GitHubCopilot=V1Preview
         - Skills=V1Preview
+        - MicrosoftCopilot=V1Preview
       description: Feature opt-in keys for agent definition operations supporting conditional preview features.
     AgentEndpointAuthorizationScheme:
       type: object
@@ -43000,8 +43003,9 @@ components:
           github_copilot_preview: '#/components/schemas/GitHubCopilotHarness'
       description: A managed runtime and agent loop used to execute a prompt agent.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - GitHubCopilot=V1Preview
+          - MicrosoftCopilot=V1Preview
     AgentIdentity:
       type: object
       required:
@@ -46861,6 +46865,7 @@ components:
               - DigitalWorker=V1Preview
               - GitHubCopilot=V1Preview
               - Skills=V1Preview
+              - MicrosoftCopilot=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -46892,6 +46897,7 @@ components:
           - DigitalWorker=V1Preview
           - GitHubCopilot=V1Preview
           - Skills=V1Preview
+          - MicrosoftCopilot=V1Preview
     CreateAgentSessionRequest:
       type: object
       required:
@@ -47007,6 +47013,7 @@ components:
               - DigitalWorker=V1Preview
               - GitHubCopilot=V1Preview
               - Skills=V1Preview
+              - MicrosoftCopilot=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -51904,6 +51911,9 @@ components:
         - web
         - subagents
       description: A customer-configurable Microsoft Copilot built-in tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - MicrosoftCopilot=V1Preview
     MicrosoftCopilotHarness:
       type: object
       required:
@@ -51919,7 +51929,7 @@ components:
       description: The Microsoft Copilot managed harness for prompt agents.
       x-ms-foundry-meta:
         required_previews:
-          - GitHubCopilot=V1Preview
+          - MicrosoftCopilot=V1Preview
     MicrosoftCopilotToolsetConfig:
       type: object
       required:
@@ -51932,6 +51942,9 @@ components:
           type: boolean
           description: Whether the built-in tool is enabled. If omitted, the toolset default applies.
       description: An enablement override for a Microsoft Copilot built-in tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - MicrosoftCopilot=V1Preview
     MicrosoftCopilotToolsetDefaultConfig:
       type: object
       properties:
@@ -51940,6 +51953,9 @@ components:
           description: Whether built-in tools are enabled by default. Defaults to true.
           default: true
       description: The default enablement setting for Microsoft Copilot built-in tools.
+      x-ms-foundry-meta:
+        required_previews:
+          - MicrosoftCopilot=V1Preview
     MicrosoftCopilotToolsetPreview:
       type: object
       required:
@@ -51963,7 +51979,7 @@ components:
       description: Configuration overrides for Microsoft Copilot built-in tools.
       x-ms-foundry-meta:
         required_previews:
-          - GitHubCopilot=V1Preview
+          - MicrosoftCopilot=V1Preview
     MicrosoftFabricPreviewTool:
       type: object
       required:
@@ -79110,7 +79126,6 @@ components:
             - fabric_iq_preview
             - toolbox_search_preview
             - web_iq_preview
-            - microsoft_copilot_toolset_preview
             - github_copilot_toolset_preview
             - a2a
             - azure_ai_search
@@ -79119,6 +79134,7 @@ components:
             - browser_automation
             - capture_structured_outputs
             - openapi
+            - microsoft_copilot_toolset_preview
     OpenAI.ToolsArray:
       type: array
       items:
@@ -81140,8 +81156,9 @@ components:
           $ref: '#/components/schemas/AgentHarness'
           description: The managed runtime and agent loop used to execute this prompt agent.
           x-ms-foundry-meta:
-            required_previews:
+            conditional_previews:
               - GitHubCopilot=V1Preview
+              - MicrosoftCopilot=V1Preview
         model:
           type: string
           description: The model deployment to use for this agent.
@@ -86177,6 +86194,7 @@ components:
               - DigitalWorker=V1Preview
               - GitHubCopilot=V1Preview
               - Skills=V1Preview
+              - MicrosoftCopilot=V1Preview
         blueprint_reference:
           $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
@@ -86189,6 +86207,7 @@ components:
           - DigitalWorker=V1Preview
           - GitHubCopilot=V1Preview
           - Skills=V1Preview
+          - MicrosoftCopilot=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:
