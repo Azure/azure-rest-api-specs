@@ -2,7 +2,7 @@ import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import {
   findTypeSpecProjects,
-  findChangedTypeSpecProjects,
+  findTypeSpecProjectsInChangedServices,
 } from "@azure-tools/specs-shared/typespec-projects";
 import { join } from "pathe";
 
@@ -56,12 +56,8 @@ export async function findChangedProjects(
     };
   }
 
-  const projects = await findChangedTypeSpecProjects(root, changedFiles, {
-    scope: "service",
-    logger: options.logger,
-  });
   return {
-    projects: [...projects.keys()],
+    projects: await findTypeSpecProjectsInChangedServices(root, changedFiles, options.logger),
     checkingAllSpecs: false,
   };
 }
