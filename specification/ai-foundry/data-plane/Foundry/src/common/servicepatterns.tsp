@@ -103,6 +103,7 @@ union AgentDefinitionOptInKeys {
   @removed(Versions.v1)
   container_agents_v1_preview: "ContainerAgents=V1Preview",
 
+  /** The Microsoft Copilot V1 preview feature opt-in. */
   microsoft_copilot_v1_preview: "MicrosoftCopilot=V1Preview",
 }
 
