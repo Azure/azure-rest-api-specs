@@ -2911,7 +2911,6 @@ model Usage {
    * Fully qualified resource ID for the usage. Ex - /subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/usages/{usageName}
    */
   @added(Versions.v2026_09_15_preview)
-  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
@@ -2919,7 +2918,6 @@ model Usage {
    * The type of the usage resource. E.g. "Microsoft.CognitiveServices/locations/usages"
    */
   @added(Versions.v2026_09_15_preview)
-  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   type?: string;
 
