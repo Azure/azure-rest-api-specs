@@ -5804,11 +5804,11 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 
-@@access(Search.KnowledgeBaseRetrievalStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseRetrievalStartedStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseActivityStartedStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseActivityCompletedStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseAnswerCompletedStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseReferencesCompletedStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseErrorStreamEvent, Access.public, "csharp");
-@@access(Search.KnowledgeBaseResponseCompletedStreamEvent, Access.public, "csharp");
+@@access(Search.KnowledgeBaseRetrievalStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseRetrievalStartedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseActivityStartedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseActivityCompletedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseAnswerCompletedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseReferencesCompletedStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseErrorStreamEvent, Access.public);
+@@access(Search.KnowledgeBaseResponseCompletedStreamEvent, Access.public);
