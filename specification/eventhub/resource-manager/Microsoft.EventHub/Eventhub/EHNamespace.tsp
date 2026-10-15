@@ -151,6 +151,62 @@ interface EHNamespaces {
     ArmResponse<CheckNameAvailabilityResult>,
     Error = ErrorResponse
   >;
+
+  /**
+   * Triggers a migration of the namespace to a new SKU across the specified target locations.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @action("migration")
+  triggerMigration is ArmResourceActionAsyncBase<
+    EHNamespace,
+    NamespaceMigrationConfiguration,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<EHNamespace>,
+    Error = ErrorResponse
+  >;
+
+  /**
+   * Gets the current status of a namespace migration.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @get
+  @action("migration")
+  getMigration is ArmResourceActionSync<
+    EHNamespace,
+    void,
+    ArmResponse<NamespaceMigration>,
+    Error = ErrorResponse
+  >;
+
+  /**
+   * Terminates an in-progress namespace migration.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @action("migration/terminate")
+  terminateMigration is ArmResourceActionAsyncBase<
+    EHNamespace,
+    void,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<EHNamespace>,
+    Error = ErrorResponse
+  >;
+
+  /**
+   * Gets the replication lags for an in-progress namespace migration.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @get
+  @action("migration/replicationlags")
+  getMigrationReplicationLags is ArmResourceActionSync<
+    EHNamespace,
+    void,
+    ArmResponse<NamespaceMigrationReplicationLags>,
+    Error = ErrorResponse
+  >;
 }
 
 @@maxLength(EHNamespace.name, 50);
@@ -175,4 +231,8 @@ interface EHNamespaces {
 @@doc(
   EHNamespaces.checkNameAvailability::parameters.body,
   "Parameters to check availability of the given Alias name"
+);
+@@doc(
+  EHNamespaces.triggerMigration::parameters.body,
+  "Parameters that describe the target SKU and locations for the namespace migration."
 );
