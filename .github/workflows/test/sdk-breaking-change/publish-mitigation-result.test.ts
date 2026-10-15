@@ -94,6 +94,52 @@ describe("buildMitigationReport", () => {
     expect(report).not.toContain(customizationCode);
     expect(result.customizationCode).toBe(customizationCode);
   });
+
+  it("displays None when all breaking changes are resolved", async () => {
+    const artifact = JSON.parse(await readFile(mitigationResultPath, "utf8")) as {
+      projects: Array<{ breakingChanges: Array<{ isResolved: boolean }> }>;
+    };
+    artifact.projects[0].breakingChanges = artifact.projects[0].breakingChanges.filter(
+      ({ isResolved }) => isResolved,
+    );
+    await writeFile(mitigationResultPath, JSON.stringify(artifact));
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: "a".repeat(40) } } });
+
+    const { report } = await buildMitigationReport({
+      github,
+      context: createMockContext(),
+      core: createMockCore(),
+      mitigationResultPath,
+      workflowSummaryUrl: "https://github.com/owner/repo/actions/runs/456",
+    });
+
+    expect(report).toContain("**Unresolved Breaking Changes:**\n\nNone");
+    expect(report).not.toContain("| Breaking change | Suggested resolution |");
+  });
+
+  it("displays None when no breaking changes are resolved", async () => {
+    const artifact = JSON.parse(await readFile(mitigationResultPath, "utf8")) as {
+      projects: Array<{ breakingChanges: Array<{ isResolved: boolean }> }>;
+    };
+    artifact.projects[0].breakingChanges = artifact.projects[0].breakingChanges.filter(
+      ({ isResolved }) => !isResolved,
+    );
+    await writeFile(mitigationResultPath, JSON.stringify(artifact));
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: "a".repeat(40) } } });
+
+    const { report } = await buildMitigationReport({
+      github,
+      context: createMockContext(),
+      core: createMockCore(),
+      mitigationResultPath,
+      workflowSummaryUrl: "https://github.com/owner/repo/actions/runs/456",
+    });
+
+    expect(report).toContain("**Resolved Breaking Changes:**\n\nNone");
+    expect(report).not.toContain("| Breaking change | Resolution | TypeSpec changes |");
+  });
 });
 
 describe("publishMitigationResult", () => {

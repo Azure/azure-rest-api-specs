@@ -1,4 +1,4 @@
-import { appendFile, mkdir, realpath, rename, writeFile } from "node:fs/promises";
+import { appendFile, mkdir, realpath, writeFile } from "node:fs/promises";
 import { basename, dirname, isAbsolute, join, relative, sep } from "node:path";
 import {
   parseAzsdkResponse,
@@ -75,28 +75,8 @@ export async function analyzeSdkProjects({
     for (const [index, relativeConfigPath] of typeSpecConfigPaths.entries()) {
       const typeSpecProjectPath = relativeConfigPath.replace(/\/tspconfig\.yaml$/, "");
       const configPath = join(specificationRepositoryPath, relativeConfigPath);
-      const generationResult = join(resultDir, "sdk-generation-result.json");
 
-      /* Generate the SDK package */
-      const { stdout } = await execFile(azureSdkCli, [
-        "package",
-        "generate",
-        "--local-sdk-repo-path",
-        localSdkRepositoryPath,
-        "--tsp-config-path",
-        configPath,
-        "--output",
-        "json",
-      ]);
-      const generateResponse: AzsdkGenerateResponse =
-        parseAzsdkResponse<AzsdkGenerateResponse>(stdout);
-      if (generateResponse.result !== "succeeded") {
-        throw new Error(
-          `Failed to generate SDK for ${typeSpecProjectPath}: ${generateResponse.response_error ?? "Unknown error"}`,
-        );
-      }
-      await writeFile(generationResult, stdout);
-
+      /* Get typespec metadata for the project */
       const metadata: TypeSpecMetadata = await generateTypeSpecMetadata(dirname(configPath));
       console.log(`Metadata for ${typeSpecProjectPath}:`, metadata);
       const languageKey = resolveLanguageKey(sdkRepoName, metadata.languages);
@@ -129,7 +109,30 @@ export async function analyzeSdkProjects({
       packageNames.add(packageName);
       const projectResults = join(resultsDirectory, resultsPath);
       await mkdir(projectResults, { recursive: true });
-      await rename(generationResult, join(projectResults, "generate.json"));
+
+      /* Generate the SDK package */
+      const { stdout } = await execFile(azureSdkCli, [
+        "package",
+        "generate",
+        "--local-sdk-repo-path",
+        localSdkRepositoryPath,
+        "--tsp-config-path",
+        configPath,
+        "--output",
+        "json",
+      ]);
+      const generateResponse: AzsdkGenerateResponse =
+        parseAzsdkResponse<AzsdkGenerateResponse>(stdout);
+      if (generateResponse.result !== "succeeded") {
+        throw new Error(
+          `Failed to generate SDK for ${typeSpecProjectPath}: ${generateResponse.response_error ?? "Unknown error"}`,
+        );
+      }
+
+      await writeFile(
+        join(projectResults, "generate.json"),
+        `${JSON.stringify(generateResponse, null, 2)}\n`,
+      );
 
       /* Build the SDK package, skip for Python — interpreted language, no compilation needed */
       if (sdkLanguage !== SdkLanguage.Python) {
@@ -147,7 +150,10 @@ export async function analyzeSdkProjects({
             `Failed to build SDK for ${typeSpecProjectPath}: ${buildResponse.response_error ?? "Unknown error"}`,
           );
         }
-        await writeFile(join(projectResults, "build.json"), `${JSON.stringify(buildResponse)}\n`);
+        await writeFile(
+          join(projectResults, "build.json"),
+          `${JSON.stringify(buildResponse, null, 2)}\n`,
+        );
       }
 
       /* Detect breaking changes */
@@ -179,7 +185,7 @@ export async function analyzeSdkProjects({
       }
       await writeFile(
         join(projectResults, "breaking-changes.json"),
-        `${JSON.stringify(breakingChangesResponse)}\n`,
+        `${JSON.stringify(breakingChangesResponse, null, 2)}\n`,
       );
 
       projects.push({ typespecProjectPath: typeSpecProjectPath, packageName, resultsPath });

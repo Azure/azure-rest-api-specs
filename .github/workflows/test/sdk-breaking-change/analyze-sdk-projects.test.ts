@@ -106,15 +106,22 @@ describe("analyzeSdkProjects", () => {
     await expect(readFile(join(resultsPath, "projects.json"), "utf8")).resolves.toContain(
       '"typespecProjectPath":"specification/service/Widget.Service"',
     );
-    await expect(
-      readFile(join(resultsPath, "armwidget", "generate.json"), "utf8"),
-    ).resolves.toContain('"result":"succeeded"');
-    await expect(readFile(join(resultsPath, "armwidget", "build.json"), "utf8")).resolves.toContain(
-      '"result":"succeeded"',
+    const generateResult = await readFile(join(resultsPath, "armwidget", "generate.json"), "utf8");
+    expect(JSON.parse(generateResult)).toMatchObject({ result: "succeeded" });
+    expect(generateResult).toContain('\n  "result": "succeeded"');
+
+    const buildResult = await readFile(join(resultsPath, "armwidget", "build.json"), "utf8");
+    expect(JSON.parse(buildResult)).toMatchObject({ result: "succeeded" });
+    expect(buildResult).toContain('\n  "result": "succeeded"');
+
+    const breakingChangesResult = await readFile(
+      join(resultsPath, "armwidget", "breaking-changes.json"),
+      "utf8",
     );
-    await expect(
-      readFile(join(resultsPath, "armwidget", "breaking-changes.json"), "utf8"),
-    ).resolves.toContain('"breakingChanges":[]');
+    expect(JSON.parse(breakingChangesResult)).toMatchObject({
+      result: { breakingChanges: [] },
+    });
+    expect(breakingChangesResult).toContain('\n  "result": {');
     await expect(readFile(join(resultsPath, "analysis.log"), "utf8")).resolves.toBe("");
     expect(execFileMock).toHaveBeenCalledTimes(3);
     const azureSdkCli = join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk");

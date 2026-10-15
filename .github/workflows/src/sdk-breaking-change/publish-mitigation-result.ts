@@ -38,14 +38,14 @@ export async function buildMitigationReport({
       .filter((change) => change.isResolved)
       .map((change) => [
         escapeMarkdown(change.breakingChange),
-        escapeMarkdown(change.suggestedFix),
-        escapeMarkdown(change.typespecChangesSummary?.[0] as string),
+        change.suggestedFix ? escapeMarkdown(change.suggestedFix) : "",
+        change.typespecChangesSummary?.[0] ? escapeMarkdown(change.typespecChangesSummary[0]) : "",
       ]);
     const unresolvedChanges: string[][] = project.breakingChanges
       .filter((change) => !change.isResolved)
       .map((change) => [
         escapeMarkdown(change.breakingChange),
-        escapeMarkdown(change.suggestedFix),
+        change.suggestedFix ? escapeMarkdown(change.suggestedFix) : "",
       ]);
     return [
       `**TypeSpec project:** ${project.typespecProject}`,
@@ -54,21 +54,15 @@ export async function buildMitigationReport({
       "",
       "**Resolved Breaking Changes:**",
       "",
-      table([
-        ["Breaking change", "Resolution", "TypeSpec changes"],
-        ...(resolvedChanges.length
-          ? resolvedChanges
-          : [["None", "No SDK breaking changes were resolved.", "-"]]),
-      ]),
+      resolvedChanges.length > 0
+        ? table([["Breaking change", "Resolution", "TypeSpec changes"], ...resolvedChanges])
+        : "None",
       "",
       "**Unresolved Breaking Changes:**",
       "",
-      table([
-        ["Breaking change", "Suggested resolution"],
-        ...(unresolvedChanges.length
-          ? unresolvedChanges
-          : [["None", "All SDK breaking changes were resolved."]]),
-      ]),
+      unresolvedChanges.length > 0
+        ? table([["Breaking change", "Suggested resolution"], ...unresolvedChanges])
+        : "None",
       "",
     ];
   });
