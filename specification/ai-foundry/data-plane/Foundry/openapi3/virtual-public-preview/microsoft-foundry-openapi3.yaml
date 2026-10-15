@@ -54359,20 +54359,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Schedules=V1Preview
-    EvaluationScoringConfiguration:
-      type: object
-      required:
-        - aggregation
-      properties:
-        aggregation:
-          type: string
-          enum:
-            - all_pass
-          description: The rule used to combine applicable grader verdicts.
-      description: Evaluation-suite scoring configuration.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
     EvaluationSuiteDataGenerationOptions:
       type: object
       properties:
@@ -54648,7 +54634,7 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
               - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
-          description: Existing preview grading configuration; not used for task-set-based suites.
+          description: Existing preview grading configuration.
         target:
           $ref: '#/components/schemas/FoundryEvaluationTarget'
           description: The target used by existing suites.
@@ -54668,17 +54654,6 @@ components:
           type: string
           description: The immutable evaluation-suite version.
           readOnly: true
-        task_set:
-          $ref: '#/components/schemas/EvaluationTaskSetReference'
-          description: The exact task-set version evaluated by an Eval 2.0 suite. Required when using evaluation_runs.
-        graders:
-          type: array
-          items:
-            $ref: '#/components/schemas/InlineEvaluationGrader'
-          description: Suite-level graders applied to every task run.
-        scoring:
-          $ref: '#/components/schemas/EvaluationScoringConfiguration'
-          description: The scoring rule applied to task runs. Required when using evaluation_runs.
       description: An immutable version of an evaluation suite.
       x-ms-foundry-meta:
         conditional_previews:
@@ -54705,7 +54680,7 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
               - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
-          description: Existing preview grading configuration; not used for task-set-based suites.
+          description: Existing preview grading configuration.
         target:
           $ref: '#/components/schemas/FoundryEvaluationTarget'
           description: The target used by existing suites.
@@ -54720,17 +54695,6 @@ components:
         description:
           type: string
           description: The evaluation-suite description.
-        task_set:
-          $ref: '#/components/schemas/EvaluationTaskSetReference'
-          description: The exact task-set version evaluated by an Eval 2.0 suite. Required when using evaluation_runs.
-        graders:
-          type: array
-          items:
-            $ref: '#/components/schemas/InlineEvaluationGrader'
-          description: Suite-level graders applied to every task run.
-        scoring:
-          $ref: '#/components/schemas/EvaluationScoringConfiguration'
-          description: The scoring rule applied to task runs. Required when using evaluation_runs.
         tags:
           type: object
           unevaluatedProperties:
@@ -54762,7 +54726,7 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
               - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
-          description: Existing preview grading configuration; not used for task-set-based suites.
+          description: Existing preview grading configuration.
         target:
           $ref: '#/components/schemas/FoundryEvaluationTarget'
           description: The target used by existing suites.
@@ -54777,17 +54741,6 @@ components:
         description:
           type: string
           description: The evaluation-suite description.
-        task_set:
-          $ref: '#/components/schemas/EvaluationTaskSetReference'
-          description: The exact task-set version evaluated by an Eval 2.0 suite. Required when using evaluation_runs.
-        graders:
-          type: array
-          items:
-            $ref: '#/components/schemas/InlineEvaluationGrader'
-          description: Suite-level graders applied to every task run.
-        scoring:
-          $ref: '#/components/schemas/EvaluationScoringConfiguration'
-          description: The scoring rule applied to task runs. Required when using evaluation_runs.
         tags:
           type: object
           unevaluatedProperties:
@@ -55035,22 +54988,6 @@ components:
           minimum: 0
           description: Number of tool calls.
       description: Agent invocation usage, excluding grading and queueing.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-    EvaluationTaskSetReference:
-      type: object
-      required:
-        - name
-        - version
-      properties:
-        name:
-          type: string
-          description: The task-set name.
-        version:
-          type: string
-          description: The exact task-set version.
-      description: A reference to an exact task-set version.
       x-ms-foundry-meta:
         conditional_previews:
           - Evaluations=V1Preview

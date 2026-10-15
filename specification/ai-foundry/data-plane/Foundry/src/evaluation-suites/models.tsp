@@ -69,42 +69,6 @@ model EvaluationDatasetReference {
   schema_file_name?: string;
 }
 
-/** A reference to an exact task-set version. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTaskSetReference {
-  /** The task-set name. */
-  name: string;
-
-  /** The exact task-set version. */
-  version: string;
-}
-
-/** A reference to an exact evaluation-suite version. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationSuiteReference {
-  /** The evaluation-suite name. */
-  name: string;
-
-  /** The exact evaluation-suite version. */
-  version: string;
-}
-
-/** The supported evaluation-suite aggregation rules. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvaluationAggregation {
-  string,
-
-  /** A task run passes only when every applicable grader passes. */
-  all_pass: "all_pass",
-}
-
-/** Evaluation-suite scoring configuration. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationScoringConfiguration {
-  /** The rule used to combine applicable grader verdicts. */
-  aggregation: EvaluationAggregation.all_pass;
-}
-
 /** An immutable version of an evaluation suite. */
 @resource("evaluation_suites")
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
@@ -118,7 +82,7 @@ model EvaluationSuiteVersion {
   /** The dataset used by existing suites. */
   dataset?: EvaluationDatasetReference;
 
-  /** Existing preview grading configuration; not used for task-set-based suites. */
+  /** Existing preview grading configuration. */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Existing preview grader variants remain unchanged."
   testing_criteria?: (
     | OpenAI.EvalGraderLabelModel
@@ -152,15 +116,6 @@ model EvaluationSuiteVersion {
   /** The evaluation-suite description. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   description?: string;
-
-  /** The exact task-set version evaluated by an Eval 2.0 suite. Required when using evaluation_runs. */
-  task_set?: EvaluationTaskSetReference;
-
-  /** Suite-level graders applied to every task run. */
-  graders?: InlineEvaluationGrader[];
-
-  /** The scoring rule applied to task runs. Required when using evaluation_runs. */
-  scoring?: EvaluationScoringConfiguration;
 
   /** User-defined tags. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
