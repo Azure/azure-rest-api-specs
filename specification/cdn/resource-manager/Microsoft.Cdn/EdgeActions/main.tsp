@@ -169,11 +169,28 @@ interface EdgeActionVersions {
     | ArmDeletedNoContentResponse
   >;
   listByEdgeAction is ArmResourceListByParent<EdgeActionVersion>;
+
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "deployVersionCode")
+  @sharedRoute
+  @action("deployVersionCode")
+  @doc("A long-running resource action.")
+  deployVersionCodeV1 is ArmResourceActionAsync<
+    EdgeActionVersion,
+    VersionCode,
+    EdgeActionVersionProperties
+  >;
+
+  @added(Versions.`2026-10-01`)
+  @sharedRoute
+  @action("deployVersionCode")
   @doc("A long-running resource action.")
   deployVersionCode is ArmResourceActionAsync<
     EdgeActionVersion,
     VersionCode,
-    EdgeActionVersionProperties
+    EdgeActionVersion,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = EdgeActionVersion> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /** Get the version code for the edge action version. */
@@ -190,9 +207,29 @@ interface EdgeActionVersions {
 
   /** Swap the default version for the edge action. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Explicitly set content type for POST operations - expected by service"
+  @removed(Versions.`2026-10-01`)
+  @renamedFrom(Versions.`2026-10-01`, "swapDefault")
+  @sharedRoute
+  @action("swapDefault")
+  swapDefaultV1 is ArmResourceActionNoContentAsync<
+    EdgeActionVersion,
+    void,
+    Parameters = {
+      /** Content type */
+      @header contentType: "application/json";
+    }
+  >;
+
+  /** Swap the default version for the edge action. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Preserve the existing 204 no-content completion response."
+  @added(Versions.`2026-10-01`)
+  @sharedRoute
+  @action("swapDefault")
   swapDefault is ArmResourceActionNoContentAsync<
     EdgeActionVersion,
     void,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Parameters = {
       /** Content type */
       @header contentType: "application/json";

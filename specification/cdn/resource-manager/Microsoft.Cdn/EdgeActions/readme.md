@@ -35,10 +35,20 @@ tag: package-2026-10-01
 
 These settings apply only when `--tag=package-2026-10-01` is specified on the command line.
 
-This is the default stable tag. Its wire contract is identical to `package-2025-12-01-preview` apart
-from the api-version string: the same operations, request and response models, response codes, and
-long-running operation metadata. `2026-10-01` introduces no contract change, so an existing
-`2025-12-01-preview` caller reaches GA by changing the api-version alone. The internal
+This is the default stable tag. `deployVersionCode` returns the full `EdgeActionVersion`
+resource, matching version GET, rather than only `EdgeActionVersionProperties`. Its result
+contains resource metadata and a nested `properties` object. Both `deployVersionCode` and
+`swapDefault` declare `Azure-AsyncOperation` and `Location` headers, with optional `Retry-After`.
+The deploy result correction can change generated SDK result types and caller property access;
+it requires compatibility review for consumers of `2026-10-01`.
+
+The examples use `Azure-AsyncOperation` for the operation-status URL and `Location` for the
+target version GET URL. Poll operation status before retrieving the version: ordinary version
+GET can return 200 while the operation is still running. These examples do not define an
+independent Location-only completion endpoint. `swapDefault` retains its 202/204 responses
+and no-content logical result; changing its result contract is deferred.
+
+Both preview versions retain their existing contracts. The internal
 `addAttachment` and `deleteAttachment` operations used exclusively by the AFD RP remain absent, as
 they have been since `2025-12-01-preview`.
 
@@ -64,8 +74,7 @@ Version PATCH tag persistence requires a corresponding resource-provider impleme
 the current implementation validates the supplied version properties but does not persist tags.
 The description documents the intended contract, not delivery of that implementation fix.
 
-Because the wire contract is unchanged, this tag carries the same suppressions as the preview tag it is
-derived from.
+This tag retains the existing suppressions listed below.
 
 ```yaml $(tag) == 'package-2026-10-01'
 input-file:
