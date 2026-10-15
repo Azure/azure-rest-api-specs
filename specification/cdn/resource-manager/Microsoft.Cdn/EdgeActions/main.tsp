@@ -34,6 +34,16 @@ alias EdgeActionLroHeaders<
 > = ArmCombinedLroHeaders<FinalResult = FinalResult> &
   Azure.Core.Foundations.RetryAfterHeader;
 
+/** Operation-status headers for asynchronous PUT responses. */
+alias EdgeActionPutLroHeaders<Resource extends Azure.ResourceManager.Foundations.SimpleResource> = ArmAsyncOperationHeader<FinalResult = Resource> &
+  Azure.Core.Foundations.RetryAfterHeader;
+
+@doc("Resource '{name}' update operation succeeded", Resource)
+model EdgeActionUpdatedLroResponse<Resource extends Azure.ResourceManager.Foundations.SimpleResource> {
+  ...ArmResourceUpdatedResponse<Resource>;
+  ...EdgeActionPutLroHeaders<Resource>;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SKU property required at envelope level for backwards compatibility with 2024-07-22-preview"
 model EdgeAction is TrackedResource<EdgeActionProperties> {
   @path
@@ -107,7 +117,13 @@ interface EdgeActions {
   @sharedRoute
   create is ArmResourceCreateOrUpdateAsync<
     EdgeAction,
-    LroHeaders = EdgeActionLroHeaders<EdgeAction>
+    LroHeaders = EdgeActionPutLroHeaders<EdgeAction>,
+    Response =
+      | EdgeActionUpdatedLroResponse<EdgeAction>
+      | ArmResourceCreatedResponse<
+          EdgeAction,
+          EdgeActionPutLroHeaders<EdgeAction>
+        >
   >;
 
   @removed(Versions.`2026-10-01`)
@@ -183,7 +199,13 @@ interface EdgeActionVersions {
   @sharedRoute
   create is ArmResourceCreateOrUpdateAsync<
     EdgeActionVersion,
-    LroHeaders = EdgeActionLroHeaders<EdgeActionVersion>
+    LroHeaders = EdgeActionPutLroHeaders<EdgeActionVersion>,
+    Response =
+      | EdgeActionUpdatedLroResponse<EdgeActionVersion>
+      | ArmResourceCreatedResponse<
+          EdgeActionVersion,
+          EdgeActionPutLroHeaders<EdgeActionVersion>
+        >
   >;
 
   @removed(Versions.`2026-10-01`)
@@ -334,7 +356,13 @@ interface EdgeActionExecutionFilters {
   @sharedRoute
   create is ArmResourceCreateOrUpdateAsync<
     EdgeActionExecutionFilter,
-    LroHeaders = EdgeActionLroHeaders<EdgeActionExecutionFilter>
+    LroHeaders = EdgeActionPutLroHeaders<EdgeActionExecutionFilter>,
+    Response =
+      | EdgeActionUpdatedLroResponse<EdgeActionExecutionFilter>
+      | ArmResourceCreatedResponse<
+          EdgeActionExecutionFilter,
+          EdgeActionPutLroHeaders<EdgeActionExecutionFilter>
+        >
   >;
 
   @removed(Versions.`2026-10-01`)

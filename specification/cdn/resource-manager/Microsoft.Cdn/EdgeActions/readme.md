@@ -37,16 +37,18 @@ These settings apply only when `--tag=package-2026-10-01` is specified on the co
 
 This is the default stable tag. `deployVersionCode` returns the full `EdgeActionVersion`
 resource, matching version GET, rather than only `EdgeActionVersionProperties`. Its result
-contains resource metadata and a nested `properties` object. All asynchronous create, update,
-delete, and version action operations declare `Azure-AsyncOperation` and `Location` headers,
-with optional `Retry-After`. These headers appear on 201 responses for create operations
-and 202 responses for update, delete, and action operations.
+contains resource metadata and a nested `properties` object. Asynchronous PUT operations declare
+`Azure-AsyncOperation` with optional `Retry-After` on both 200 and 201 responses. PUT returns
+201 for creation and 200 for replacement; a 200 response does not by itself mean provisioning
+is complete. Asynchronous PATCH, DELETE, and version action operations declare both
+`Azure-AsyncOperation` and `Location`, with optional `Retry-After`, on their 202 responses.
 The deploy result correction can change generated SDK result types and caller property access;
 it requires compatibility review for consumers of `2026-10-01`.
 
-Use `Azure-AsyncOperation` to poll operation status and `Location` to retrieve the final result.
-The create operations now use `final-state-via: location`, consistent with the combined-header
-template. In the deploy example, Location points to version GET; poll operation status before
+Use `Azure-AsyncOperation` to poll operation status. PUT operations retain
+`final-state-via: azure-async-operation` and the resource as their logical result.
+For operations with combined headers, `Location` identifies the final result.
+In the deploy example, Location points to version GET; poll operation status before
 retrieving the version because ordinary version GET can return 200 while the operation is running.
 
 Both preview versions retain their existing contracts. The internal
