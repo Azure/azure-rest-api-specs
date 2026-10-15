@@ -415,6 +415,10 @@ union AKSVolumeTypes {
   AzureDisk: "AzureDisk",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureFileShareSMB: "AzureFileShareSMB",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_11_01_preview)
+  AzureFileShareNFS: "AzureFileShareNFS",
 }
 
 /**
@@ -2387,6 +2391,7 @@ model AzureBackupRehydrationRequest {
  */
 @added(Versions.v2026_04_01_preview)
 @removed(Versions.v2026_06_01)
+@added(Versions.v2026_11_01_preview)
 union ResumeProtectionRequestObjectType {
   string,
 
@@ -2400,6 +2405,7 @@ union ResumeProtectionRequestObjectType {
 @discriminator("objectType")
 @added(Versions.v2026_04_01_preview)
 @removed(Versions.v2026_06_01)
+@added(Versions.v2026_11_01_preview)
 model ResumeProtectionRequest {
   /**
    * Type of Datasource object, used to initialize the right inherited type
