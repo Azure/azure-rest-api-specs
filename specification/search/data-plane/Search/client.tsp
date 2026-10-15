@@ -357,6 +357,11 @@ namespace KnowledgeBaseRetrievalClient {
   "outputTokensCount",
   "!autorest"
 );
+@@clientName(
+  KnowledgeBaseActivityRecord.elapsedMs,
+  "elapsedInMs",
+  "javascript"
+);
 
 @@access(ListingSearchType, Access.public);
 @@usage(ListingSearchType, Usage.input);

@@ -2,11 +2,17 @@ import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 
 namespace Azure.AI.Projects;
 
+const AgentInsightMonitorsRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.agent_insights_v1_preview],
+};
+
 /** The lifecycle status of an agent insight. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 union AgentInsightStatus {
   string,
 
@@ -21,6 +27,7 @@ union AgentInsightStatus {
 }
 
 /** The severity of an agent insight. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 union AgentInsightSeverity {
   string,
 
@@ -35,6 +42,7 @@ union AgentInsightSeverity {
 }
 
 /** Identifies where an Agent Insights overview came from. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 union AgentInsightOverviewSource {
   string,
 
@@ -46,6 +54,7 @@ union AgentInsightOverviewSource {
 }
 
 /** A highlighted trace that provides evidence for an agent insight. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightHighlightedTrace {
   /** The trace identifier. */
   @key("trace_id")
@@ -66,6 +75,7 @@ model AgentInsightHighlightedTrace {
 }
 
 /** A lightweight trace reference linked to an agent insight as supporting evidence. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightLinkedTrace {
   /** The trace identifier. */
   @key("trace_id")
@@ -78,6 +88,7 @@ model AgentInsightLinkedTrace {
 }
 
 /** The customer-renderable kind of an agent insight's proposed fix. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 union AgentInsightProposedFixKind {
   string,
 
@@ -92,6 +103,7 @@ union AgentInsightProposedFixKind {
 }
 
 /** The Prompt surface changed by a proposed fix. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 union AgentInsightPromptSurface {
   string,
 
@@ -103,6 +115,7 @@ union AgentInsightPromptSurface {
 }
 
 /** A customer-renderable change in a proposed fix. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightProposedFixChange {
   /** The source path changed by a code change. */
   path?: string;
@@ -127,6 +140,7 @@ model AgentInsightProposedFixChange {
 }
 
 /** A recommended fix for an agent insight. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightProposedFix {
   /** The proposed-fix discriminator. */
   kind: AgentInsightProposedFixKind;
@@ -139,12 +153,14 @@ model AgentInsightProposedFix {
 }
 
 /** The recommended remediation for an agent insight. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightRecommendedAction {
   /** The single recommended fix for the issue represented by the insight. */
   proposed_fix: AgentInsightProposedFix;
 }
 
 /** Additional insight details. Omitted unless details are requested. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightDetails {
   /** Up to 5 highlighted traces that provide evidence for this insight. */
   @maxItems(5)
@@ -159,6 +175,7 @@ model AgentInsightDetails {
 }
 
 /** A persisted issue discovered from an agent's traces. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsight {
   /** The insight identifier. */
   @visibility(Lifecycle.Read)
@@ -214,12 +231,14 @@ model AgentInsight {
 }
 
 /** Fields that can be updated on an agent insight. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightUpdate {
   /** The lifecycle status to apply to the insight. */
   status?: AgentInsightStatus;
 }
 
 /** Structured reason why scheduled generation is suspended for a monitor. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightSuspension {
   /** Stable, machine-readable suspension category. */
   code: string;
@@ -235,6 +254,7 @@ model AgentInsightSuspension {
 }
 
 /** The effective overview for an Agent Insights monitor. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightsOverview {
   /** The overview content. */
   content: string;
@@ -247,12 +267,14 @@ model AgentInsightsOverview {
 }
 
 /** A user-provided overview that becomes effective immediately and seeds the next generation. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightsOverviewOverride {
   /** The nonblank overview content, limited to 64 KiB when encoded as UTF-8. */
   content: string;
 }
 
 /** Estimated Agent Insights cost. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightEstimatedCost {
   /** Estimated cost amount. */
   amount: float64;
@@ -262,6 +284,7 @@ model AgentInsightEstimatedCost {
 }
 
 /** A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightMonitor {
   /** The monitor identifier. */
   @key("monitor_id")
@@ -308,12 +331,14 @@ model AgentInsightMonitor {
 }
 
 /** An Agent Insights monitor summary returned by list operations. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightMonitorListItem is OmitProperties<
   AgentInsightMonitor,
   "overview"
 >;
 
 /** Fields accepted when creating an Agent Insights monitor for an agent. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightMonitorCreate {
   /** The agent this monitor should analyze. */
   agent_name: string;
@@ -331,6 +356,7 @@ model AgentInsightMonitorCreate {
 }
 
 /** Fields that can be updated on an Agent Insights monitor. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightMonitorUpdate {
   /** Whether scheduled insight generation is armed for the monitor. */
   enabled?: boolean;
@@ -351,6 +377,7 @@ model AgentInsightMonitorUpdate {
 }
 
 /** The trigger that started an agent insight run. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 union AgentInsightRunTrigger {
   string,
 
@@ -362,6 +389,7 @@ union AgentInsightRunTrigger {
 }
 
 /** Inputs used when creating an agent insight run. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightRunCreate {
   /** Optional finite positive number of hours of trace history to analyze, up to 2,160. Defaults to 168. */
   @minValueExclusive(0)
@@ -370,6 +398,7 @@ model AgentInsightRunCreate {
 }
 
 /** Result statistics produced when an agent insight run succeeds. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightRunResult {
   /** The number of traces in the analyzed time window. */
   traces_in_window: int32;
@@ -391,6 +420,7 @@ model AgentInsightRunResult {
 }
 
 /** Token usage for an Agent Insights run. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightTokenUsage {
   /** The number of input tokens used by the run. */
   input_tokens: int32;
@@ -406,6 +436,7 @@ model AgentInsightTokenUsage {
 }
 
 /** A long-running run that analyzes one agent's traces and updates that agent's insights. */
+@extension("x-ms-foundry-meta", AgentInsightMonitorsRequiredPreviews)
 model AgentInsightRun is JobLike<AgentInsightRunResult, AgentInsightRunCreate> {
   /** The Agent Insights monitor this run belongs to. */
   @visibility(Lifecycle.Read)

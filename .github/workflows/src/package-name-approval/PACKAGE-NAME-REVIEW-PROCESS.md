@@ -25,20 +25,30 @@ When a PR modifies any `tspconfig.yaml` file, the analyze-code workflow:
 
 1. Identifies which languages have package name configuration
 2. Runs `tsp compile --emit @azure-tools/typespec-metadata` to extract package names and namespaces
-3. Determines if the service is data-plane or management-plane (from the emitter metadata)
-4. For management-plane PRs, validates package name format against language-specific naming rules (defined in `.github/package-name-format-rules.yml`)
-5. Uploads results for the status workflow
+3. Compares against the base branch to detect only **changed** package names
+4. Determines if the service is data-plane or management-plane (from the emitter metadata)
+5. For management-plane PRs, validates package name format against language-specific naming rules (defined in `.github/package-name-format-rules.yml`)
+6. Uploads results for the status workflow
+
+### Tier 1 Language Requirement
+
+When any package name change is detected (even for a single language), **all Tier 1 language architects** are notified and must approve. This ensures cross-language naming alignment.
+
+- **Data plane Tier 1:** .NET, Java, Python, TypeScript
+- **Management plane Tier 1:** .NET, Java, Python, TypeScript, Go
+
+Languages with configuration in `tspconfig.yaml` show their proposed package name. Languages without configuration show "(not yet configured)" — architects still approve to confirm naming alignment.
 
 ### Status + Approval
 
-The status workflow posts the package name review comment (showing both package name and namespace per language), applies `package-name-<lang>-pending` labels, and validates architect approval labels.
+The status workflow posts the package name review comment (showing both package name and namespace per language), applies `package-name-<lang>-pending` labels for all Tier 1 languages, and validates architect approval labels.
 
 - **Data plane:** Each language architect approves their language by applying `package-name-<lang>-approved`
 - **Management plane:** ArthurMa1978 or m-nash can apply `package-name-approved-all` to approve all languages at once
 
 ### Status Check
 
-A required status check (`Package Name Approval`) blocks merge until all pending package names are approved. The check:
+A required status check (`Package Name Approval`) blocks merge until all Tier 1 pending package names are approved. The check:
 
 - Passes when all `package-name-*-pending` labels have corresponding `package-name-*-approved` labels
 - Fails when any pending package name lacks approval

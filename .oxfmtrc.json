@@ -1,0 +1,69 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 80,
+  "sortPackageJson": false,
+  "ignorePatterns": [
+    "eng/common/**",
+    "**/*.tsp",
+    "documentation/**/*",
+    "specification/**/*",
+    "profile/**/*",
+    "profiles/**/*",
+    "arm-compute/**/*",
+    ".github/**/coverage/**",
+    ".github/**/fixtures/**",
+    ".github/**/specification/**",
+    ".github/**/*.lock.yml",
+    // cspell:ignore agentics
+    ".github/workflows/agentics-maintenance.yml",
+    ".github/**/*instructions.md",
+    ".github/chatmodes/**",
+    ".github/ISSUE_TEMPLATE/**",
+    ".github/policies/**",
+    ".github/prompts/**",
+    ".github/PULL_REQUEST_TEMPLATE/**",
+    ".github/workflows/post-apiview.yml",
+    ".github/skills/azsdk-common-*/**",
+    ".github/skills/evals/*/results/**",
+    ".github/skills/evals/*/session-state/**",
+    "eng/**/coverage/**",
+    "eng/**/dist/**",
+    "eng/**/fixtures/**",
+    "eng/**/specification/**",
+    "libs/**/dist/**",
+    "libs/**/coverage/**",
+    // 1ES synced files
+    "SECURITY.md",
+    ".config/1espt/PipelineAutobaseliningConfig.yml"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "**/*.json"
+      ],
+      "options": {
+        "printWidth": 20
+      }
+    },
+    {
+      "files": [
+        "**/*.ts"
+      ],
+      "options": {
+        "printWidth": 100,
+        "endOfLine": "lf"
+      }
+    },
+    {
+      "files": [
+        ".github/**",
+        "eng/**",
+        "libs/**"
+      ],
+      "options": {
+        "printWidth": 100,
+        "endOfLine": "lf"
+      }
+    }
+  ]
+}
