@@ -34,7 +34,6 @@ jobs:
       sdk-language: ${{ steps.resolve.outputs.sdk-language }}
       sdk-repository: ${{ steps.resolve.outputs.sdk-repository }}
       should-run: ${{ steps.resolve.outputs.should-run }}
-      tsp-config-paths: ${{ steps.resolve-tsp-config-paths.outputs.tsp-config-paths }}
     steps:
       - name: Checkout workflow repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -50,51 +49,17 @@ jobs:
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
+            // Resolve the analysis trigger inputs and publish analysis run status.
             const { resolveAnalysisTrigger } =
               await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-analysis-inputs.ts');
-            await resolveAnalysisTrigger({ github, context, core }, "${{ github.workspace }}/repositories/azure-rest-api-specs");
-      - name: Checkout specification PR head
-        if: steps.resolve.outputs.should-run == 'true'
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          repository: ${{ github.repository }}
-          # resolve-trigger restricts this to the current SHA of a branch in this repository.
-          # codeql[actions/untrusted-checkout/critical]
-          ref: ${{ steps.resolve.outputs.head-sha }}
-          path: repositories/azure-rest-api-specs
-          persist-credentials: false
-      - name: Resolve changed TypeSpec config paths
-        if: steps.resolve.outputs.should-run == 'true'
-        id: resolve-tsp-config-paths
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        env:
-          PR_NUMBER: ${{ steps.resolve.outputs.pr-number }}
-        with:
-          script: |
-            const { resolveChangedTypeSpecConfigPathsFromPullRequest } =
-              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-analysis-inputs.ts');
-            await resolveChangedTypeSpecConfigPathsFromPullRequest({
+            await resolveAnalysisTrigger({
               github,
               context,
               core,
-              pullNumber: Number(process.env.PR_NUMBER),
-              localSpecRepoPath: '${{ github.workspace }}/repositories/azure-rest-api-specs',
+              statusArtifactPath: "${{ runner.temp }}/sdk-breaking-change-analysis/run",
             });
-
-  propagate-status:
-    needs: resolve
-    runs-on: ubuntu-latest
-    steps:
-      - name: Write analysis status
-        shell: bash
-        env:
-          SHOULD_RUN: ${{ needs.resolve.outputs.should-run }}
-        run: |
-          mkdir -p "${{ runner.temp }}/sdk-breaking-change-analysis"
-          printf '%s\n' "$SHOULD_RUN" > \
-            "${{ runner.temp }}/sdk-breaking-change-analysis/run"
-
-      - name: Upload analysis status
+      - name: Publish analysis status
+        if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: sdk-breaking-change-analysis-status
@@ -130,8 +95,6 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: ${{ github.repository }}
-          # resolve-trigger restricts this to the current SHA of a branch in this repository.
-          # codeql[actions/untrusted-checkout/critical]
           ref: ${{ needs.resolve.outputs.head-sha }}
           path: repositories/azure-rest-api-specs
           persist-credentials: false
@@ -223,7 +186,23 @@ jobs:
             --languages "$SDK_LANGUAGE" \
             --package-path "$SDK_REPOSITORY_PATH" \
             --yes
-
+      - name: Resolve changed TypeSpec config paths
+        if: needs.resolve.outputs.should-run == 'true'
+        id: resolve-tsp-config-paths
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PR_NUMBER: ${{ needs.resolve.outputs.pr-number }}
+        with:
+          script: |
+            const { resolveChangedTypeSpecConfigPathsFromPullRequest } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-analysis-inputs.ts');
+            await resolveChangedTypeSpecConfigPathsFromPullRequest({
+              github,
+              context,
+              core,
+              pullNumber: Number(process.env.PR_NUMBER),
+              localSpecRepoPath: '${{ github.workspace }}/repositories/azure-rest-api-specs',
+            });
       - name: Analyze SDK projects
         id: analyze-sdk-projects
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -232,7 +211,7 @@ jobs:
           AZSDK_COPILOT_GITHUB_TOKEN: ${{ github.token }}
           LOCAL_SDK_REPO_PATH: ${{ github.workspace }}/repositories/${{ needs.resolve.outputs.sdk-repository }}
           SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
-          TYPESPEC_CONFIG_PATHS: ${{ needs.resolve.outputs.tsp-config-paths }}
+          TYPESPEC_CONFIG_PATHS: ${{ steps.resolve-tsp-config-paths.outputs.tsp-config-paths }}
           PR_NUMBER: ${{ needs.resolve.outputs.pr-number }}
           SDK_LANGUAGE: ${{ needs.resolve.outputs.sdk-language }}
           SDK_REPO_NAME: ${{ needs.resolve.outputs.sdk-repository }}
@@ -242,10 +221,16 @@ jobs:
           script: |
             const { analyzeSdkProjects } =
               await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/analyze-sdk-projects.ts');
+            const typeSpecConfigPaths = process.env.TYPESPEC_CONFIG_PATHS;
+            if (!typeSpecConfigPaths) {
+              throw new Error(
+                "Resolve changed TypeSpec config paths did not produce tsp-config-paths.",
+              );
+            }
             await analyzeSdkProjects({
               localSdkRepositoryPath: process.env.LOCAL_SDK_REPO_PATH,
               specificationRepositoryPath: process.env.SPEC_REPOSITORY_PATH,
-              typeSpecConfigPaths: JSON.parse(process.env.TYPESPEC_CONFIG_PATHS),
+              typeSpecConfigPaths: JSON.parse(typeSpecConfigPaths),
               pullNumber: Number(process.env.PR_NUMBER),
               sdkLanguage: process.env.SDK_LANGUAGE,
               sdkRepoName: process.env.SDK_REPO_NAME,

@@ -10,36 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  check-analysis-status:
-    if: >-
-      github.event.workflow_run.conclusion == 'success' ||
-      github.event.workflow_run.conclusion == 'failure'
-    runs-on: ubuntu-slim
-    outputs:
-      should-run: ${{ steps.read-status.outputs.should-run }}
-    steps:
-      - name: Download SDK analysis status
-        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
-        with:
-          name: sdk-breaking-change-analysis-status
-          path: ${{ runner.temp }}/sdk-breaking-change-analysis
-          github-token: ${{ github.token }}
-          run-id: ${{ github.event.workflow_run.id }}
-
-      - name: Read analysis status
-        id: read-status
-        shell: bash
-        run: |
-          should_run="$(cat "${{ runner.temp }}/sdk-breaking-change-analysis/run")"
-          if [[ "$should_run" != "true" && "$should_run" != "false" ]]; then
-            echo "Invalid run value: $should_run" >&2
-            exit 1
-          fi
-          echo "should-run=$should_run" >> "$GITHUB_OUTPUT"
-
   resolve-trigger:
-    needs: check-analysis-status
-    if: needs.check-analysis-status.outputs.should-run == 'true'
     runs-on: ubuntu-slim
     outputs:
       head-branch: ${{ steps.resolve.outputs.head-branch }}
@@ -61,17 +32,11 @@ jobs:
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
-      - name: Download published analysis results
-        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
-        with:
-          name: sdk-breaking-change-results
-          path: ${{ runner.temp }}/published-analysis-results
-          github-token: ${{ github.token }}
-          run-id: ${{ github.event.workflow_run.id }}
-
       - name: Resolve mitigation trigger
         id: resolve
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
         with:
           script: |
             const { resolveMitigationTrigger } =
@@ -80,34 +45,15 @@ jobs:
               github,
               context,
               core,
+              analysisArtifactName: "sdk-breaking-change-results",
+              analysisStatusArtifactName: "sdk-breaking-change-analysis-status",
+              analysisStatusPath: "${{ runner.temp }}/sdk-breaking-change-analysis/run",
+              mitigationStatusPath: "${{ runner.temp }}/sdk-breaking-change-mitigate/run",
               publishedResultsPath: '${{ runner.temp }}/published-analysis-results/sdk-breaking-change-analysis.json',
+              workflowRunId: Number(process.env.WORKFLOW_RUN_ID),
             });
-
-  propagate-status:
-    needs: [check-analysis-status, resolve-trigger]
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Write mitigation status
-        shell: bash
-        env:
-          SHOULD_RUN: >-
-            ${{ needs.resolve-trigger.result == 'success' &&
-            needs.resolve-trigger.outputs.should-run ||
-            (needs.resolve-trigger.result == 'skipped' &&
-            needs.check-analysis-status.result == 'success' &&
-            needs.check-analysis-status.outputs.should-run) ||
-            'false' }}
-        run: |
-          if [[ "$SHOULD_RUN" != "true" && "$SHOULD_RUN" != "false" ]]; then
-            echo "Invalid should-run value '$SHOULD_RUN'; publishing false instead." >&2
-            SHOULD_RUN="false"
-          fi
-          mkdir -p "${{ runner.temp }}/sdk-breaking-change-mitigate"
-          printf '%s\n' "$SHOULD_RUN" > \
-            "${{ runner.temp }}/sdk-breaking-change-mitigate/run"
-
       - name: Upload mitigation status
+        if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: sdk-breaking-change-mitigate

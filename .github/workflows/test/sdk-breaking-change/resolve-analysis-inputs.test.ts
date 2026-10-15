@@ -1,6 +1,7 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
+
 import {
   resolveAnalysisTrigger,
   resolveChangedTypeSpecConfigPathsFromPullRequest,
@@ -34,9 +35,17 @@ function createRepository(): string {
   return repositoryPath;
 }
 
+function createStatusArtifactPath(): string {
+  const directory = join(import.meta.dirname, `status-${crypto.randomUUID()}`);
+  temporaryDirectories.push(directory);
+  mkdirSync(directory, { recursive: true });
+  return join(directory, "run");
+}
+
 afterEach(async () => {
   const { rm } = await import("node:fs/promises");
   await Promise.all(temporaryDirectories.splice(0).map((path) => rm(path, { recursive: true })));
+  vi.clearAllMocks();
   vi.unstubAllEnvs();
 });
 
@@ -64,7 +73,13 @@ describe("resolveAnalysisTrigger", () => {
       },
     });
 
-    await resolveAnalysisTrigger({ github, context, core });
+    const statusArtifactPath = createStatusArtifactPath();
+    await resolveAnalysisTrigger({
+      github,
+      context,
+      core,
+      statusArtifactPath,
+    });
 
     expect(core.setOutput).toHaveBeenCalledWith("pr-number", "42");
     expect(core.setOutput).toHaveBeenCalledWith("head-repository", "owner/repo");
@@ -72,6 +87,7 @@ describe("resolveAnalysisTrigger", () => {
     expect(core.setOutput).toHaveBeenCalledWith("sdk-language", "DotNet");
     expect(core.setOutput).toHaveBeenCalledWith("should-run", "true");
     expect(core.setOutput).not.toHaveBeenCalledWith("tsp-config-paths", expect.anything());
+    expect(readFileSync(statusArtifactPath, "utf8")).toBe("true\n");
   });
 
   it("skips when no supported label artifact exists", async () => {
@@ -83,12 +99,19 @@ describe("resolveAnalysisTrigger", () => {
       payload: { workflow_run: { id: 123, conclusion: "success" } },
     });
 
-    await resolveAnalysisTrigger({ github, context, core });
+    const statusArtifactPath = createStatusArtifactPath();
+    await resolveAnalysisTrigger({
+      github,
+      context,
+      core,
+      statusArtifactPath,
+    });
 
     expect(core.notice).toHaveBeenCalledWith(
       "No supported SDK breaking-change label artifact was published.",
     );
     expect(core.setOutput).toHaveBeenCalledWith("should-run", "false");
+    expect(readFileSync(statusArtifactPath, "utf8")).toBe("false\n");
   });
 
   it("rejects multiple supported label artifacts", async () => {
@@ -108,9 +131,16 @@ describe("resolveAnalysisTrigger", () => {
       },
     });
 
-    await expect(resolveAnalysisTrigger({ github, context, core })).rejects.toThrow(
-      "Expected one SDK breaking-change label artifact",
-    );
+    const statusArtifactPath = createStatusArtifactPath();
+    await expect(
+      resolveAnalysisTrigger({
+        github,
+        context,
+        core,
+        statusArtifactPath,
+      }),
+    ).rejects.toThrow("Expected one SDK breaking-change label artifact");
+    expect(readFileSync(statusArtifactPath, "utf8")).toBe("false\n");
   });
 
   it("rejects an incomplete label artifact handoff", async () => {
@@ -127,7 +157,14 @@ describe("resolveAnalysisTrigger", () => {
       },
     });
 
-    await expect(resolveAnalysisTrigger({ github, context, core })).rejects.toThrow();
+    await expect(
+      resolveAnalysisTrigger({
+        github,
+        context,
+        core,
+        statusArtifactPath: createStatusArtifactPath(),
+      }),
+    ).rejects.toThrow();
   });
 
   it("rejects a workflow-run handoff for a fork", async () => {
@@ -153,9 +190,14 @@ describe("resolveAnalysisTrigger", () => {
       },
     });
 
-    await expect(resolveAnalysisTrigger({ github, context, core })).rejects.toThrow(
-      "does not run for fork",
-    );
+    await expect(
+      resolveAnalysisTrigger({
+        github,
+        context,
+        core,
+        statusArtifactPath: createStatusArtifactPath(),
+      }),
+    ).rejects.toThrow("does not run for fork");
   });
 
   it("rejects a stale workflow-run handoff SHA", async () => {
@@ -181,9 +223,14 @@ describe("resolveAnalysisTrigger", () => {
       },
     });
 
-    await expect(resolveAnalysisTrigger({ github, context, core })).rejects.toThrow(
-      "Pull request head changed",
-    );
+    await expect(
+      resolveAnalysisTrigger({
+        github,
+        context,
+        core,
+        statusArtifactPath: createStatusArtifactPath(),
+      }),
+    ).rejects.toThrow("Pull request head changed");
   });
 });
 

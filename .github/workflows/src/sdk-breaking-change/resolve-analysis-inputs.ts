@@ -1,6 +1,7 @@
 import { detectChangedSpecConfigFromChangedFiles } from "@azure-tools/spec-gen-sdk-runner";
 import { isFullGitSha } from "@azure-tools/specs-shared/git";
 import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
+import { publishStatus } from "./status.ts";
 
 interface PullRequestFile {
   filename: string;
@@ -64,14 +65,84 @@ export async function resolveAnalysisTrigger({
   github,
   context,
   core,
-}: GitHubScriptArgs): Promise<void> {
-  if (context.eventName === "workflow_dispatch") {
-    const pullNumberInput = getWorkflowDispatchInput(context.payload, "pr_number");
-    const sdkLanguageInput = getWorkflowDispatchInput(context.payload, "sdk_language");
-    const pullNumber = Number(pullNumberInput);
-    if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
-      throw new Error(`Invalid pull request number: ${pullNumberInput}`);
+  statusArtifactPath,
+}: GitHubScriptArgs & {
+  statusArtifactPath: string;
+}): Promise<void> {
+  let shouldRun = "false";
+  try {
+    if (context.eventName === "workflow_dispatch") {
+      const pullNumberInput = getWorkflowDispatchInput(context.payload, "pr_number");
+      const sdkLanguageInput = getWorkflowDispatchInput(context.payload, "sdk_language");
+      const pullNumber = Number(pullNumberInput);
+      if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
+        throw new Error(`Invalid pull request number: ${pullNumberInput}`);
+      }
+      const { data: pull } = await github.rest.pulls.get({
+        ...context.repo,
+        pull_number: pullNumber,
+      });
+      validateAnalysisSource({
+        expectedRepository: `${context.repo.owner}/${context.repo.repo}`,
+        actualRepository: pull.head.repo.full_name,
+        actualSha: pull.head.sha,
+      });
+      const languageConfig = resolveSdkLanguageConfig(sdkLanguageInput);
+      core.setOutput("pr-number", pullNumber);
+      core.setOutput("head-repository", pull.head.repo.full_name);
+      core.setOutput("head-sha", pull.head.sha);
+      core.setOutput("sdk-language", languageConfig.language);
+      core.setOutput("sdk-repository", languageConfig.repository);
+      shouldRun = "true";
+      return;
     }
+
+    const { workflow_run: workflowRun } = context.payload as WebhookEvent<
+      "workflow-run",
+      "completed"
+    >;
+    if (workflowRun?.conclusion !== "success") {
+      core.notice("The SDK Breaking Change Labels workflow did not succeed.");
+      return;
+    }
+
+    const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+      ...context.repo,
+      run_id: workflowRun.id,
+      per_page: 100,
+    });
+    const artifactNames = artifacts.map(({ name }) => name);
+    const artifactValue = (key: string): string | undefined => {
+      const prefix = `${key}=`;
+      return artifactNames.find((name) => name.startsWith(prefix))?.slice(prefix.length);
+    };
+    const labelArtifacts = artifactNames.flatMap((name) => {
+      const match = /^label-(.+)=(true|false)$/.exec(name);
+      return match && SDK_LABELS.includes(match[1] as (typeof SDK_LABELS)[number])
+        ? [{ artifactName: match[0], labelName: match[1], labelValue: match[2] }]
+        : [];
+    });
+    if (labelArtifacts.length === 0) {
+      core.notice("No supported SDK breaking-change label artifact was published.");
+      return;
+    }
+    if (labelArtifacts.length > 1) {
+      throw new Error(
+        `Expected one SDK breaking-change label artifact, found: ${labelArtifacts.map(({ artifactName }) => artifactName).join(", ")}`,
+      );
+    }
+
+    const [labelArtifact] = labelArtifacts;
+    const issueNumber = artifactValue("issue-number");
+    const headSha = artifactValue("head-sha");
+    if (!issueNumber || !/^[1-9]\d*$/.test(issueNumber)) {
+      throw new Error(`Invalid issue-number artifact: ${issueNumber}`);
+    }
+    if (!headSha || !isFullGitSha(headSha)) {
+      throw new Error(`Invalid head-sha artifact: ${headSha}`);
+    }
+
+    const pullNumber = Number(issueNumber);
     const { data: pull } = await github.rest.pulls.get({
       ...context.repo,
       pull_number: pullNumber,
@@ -79,88 +150,28 @@ export async function resolveAnalysisTrigger({
     validateAnalysisSource({
       expectedRepository: `${context.repo.owner}/${context.repo.repo}`,
       actualRepository: pull.head.repo.full_name,
+      expectedSha: headSha,
       actualSha: pull.head.sha,
     });
-    const languageConfig = resolveSdkLanguageConfig(sdkLanguageInput);
-    core.setOutput("pr-number", pullNumber);
+
+    const language = SDK_LANGUAGES_BY_LABEL.get(
+      labelArtifact.labelName as (typeof SDK_LABELS)[number],
+    );
+    const languageConfig = resolveSdkLanguageConfig(language);
+
+    core.setOutput("pr-number", issueNumber);
     core.setOutput("head-repository", pull.head.repo.full_name);
     core.setOutput("head-sha", pull.head.sha);
     core.setOutput("sdk-language", languageConfig.language);
     core.setOutput("sdk-repository", languageConfig.repository);
-    core.setOutput("should-run", "true");
-    return;
+    shouldRun = labelArtifact.labelValue;
+  } finally {
+    await publishStatus({
+      core,
+      statusArtifactPath,
+      shouldRun,
+    });
   }
-
-  const { workflow_run: workflowRun } = context.payload as WebhookEvent<
-    "workflow-run",
-    "completed"
-  >;
-  if (workflowRun?.conclusion !== "success") {
-    core.notice("The SDK Breaking Change Labels workflow did not succeed.");
-    core.setOutput("should-run", "false");
-    return;
-  }
-
-  const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
-    ...context.repo,
-    run_id: workflowRun.id,
-    per_page: 100,
-  });
-  const artifactNames = artifacts.map(({ name }) => name);
-  const artifactValue = (key: string): string | undefined => {
-    const prefix = `${key}=`;
-    return artifactNames.find((name) => name.startsWith(prefix))?.slice(prefix.length);
-  };
-  const labelArtifacts = artifactNames.flatMap((name) => {
-    const match = /^label-(.+)=(true|false)$/.exec(name);
-    return match && SDK_LABELS.includes(match[1] as (typeof SDK_LABELS)[number])
-      ? [{ artifactName: match[0], labelName: match[1], labelValue: match[2] }]
-      : [];
-  });
-  if (labelArtifacts.length === 0) {
-    core.notice("No supported SDK breaking-change label artifact was published.");
-    core.setOutput("should-run", "false");
-    return;
-  }
-  if (labelArtifacts.length > 1) {
-    throw new Error(
-      `Expected one SDK breaking-change label artifact, found: ${labelArtifacts.map(({ artifactName }) => artifactName).join(", ")}`,
-    );
-  }
-
-  const [labelArtifact] = labelArtifacts;
-  const issueNumber = artifactValue("issue-number");
-  const headSha = artifactValue("head-sha");
-  if (!issueNumber || !/^[1-9]\d*$/.test(issueNumber)) {
-    throw new Error(`Invalid issue-number artifact: ${issueNumber}`);
-  }
-  if (!headSha || !/^[0-9a-f]{40}$/i.test(headSha)) {
-    throw new Error(`Invalid head-sha artifact: ${headSha}`);
-  }
-
-  const pullNumber = Number(issueNumber);
-  const { data: pull } = await github.rest.pulls.get({
-    ...context.repo,
-    pull_number: pullNumber,
-  });
-  validateAnalysisSource({
-    expectedRepository: `${context.repo.owner}/${context.repo.repo}`,
-    actualRepository: pull.head.repo.full_name,
-    expectedSha: headSha,
-    actualSha: pull.head.sha,
-  });
-
-  const language = SDK_LANGUAGES_BY_LABEL.get(
-    labelArtifact.labelName as (typeof SDK_LABELS)[number],
-  );
-  const languageConfig = resolveSdkLanguageConfig(language);
-
-  core.setOutput("pr-number", issueNumber);
-  core.setOutput("head-repository", pull.head.repo.full_name);
-  core.setOutput("head-sha", pull.head.sha);
-  core.setOutput("sdk-language", languageConfig.language);
-  core.setOutput("sdk-repository", languageConfig.repository);
-  core.setOutput("should-run", labelArtifact.labelValue);
 }
 
 export function resolveSdkLanguageConfig(input: string | undefined): SdkLanguageConfig {
