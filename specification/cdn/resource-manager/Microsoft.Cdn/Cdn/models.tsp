@@ -2754,7 +2754,7 @@ model DomainValidationProperties {
   /**
    * Challenge used for DNS TXT record or file based validation
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Not a secret: this is the domain ownership challenge value that customers must publish as a public DNS TXT record (_dnsauth.<hostname>), so it is returned in resource responses."
   @visibility(Lifecycle.Read)
   validationToken?: string;
 
