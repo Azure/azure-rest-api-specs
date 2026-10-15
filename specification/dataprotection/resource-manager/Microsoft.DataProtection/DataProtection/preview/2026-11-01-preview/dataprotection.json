@@ -1765,6 +1765,15 @@
             "description": "The name of the BackupInstanceResource",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ResumeProtectionRequest"
+            }
           }
         ],
         "responses": {
@@ -8770,6 +8779,42 @@
           {
             "name": "AzureFiles",
             "value": "AzureFiles"
+          }
+        ]
+      }
+    },
+    "ResumeProtectionRequest": {
+      "type": "object",
+      "description": "Request body of Resume protection when MSI is to be changed",
+      "properties": {
+        "objectType": {
+          "$ref": "#/definitions/ResumeProtectionRequestObjectType",
+          "description": "Type of Datasource object, used to initialize the right inherited type"
+        },
+        "identityDetails": {
+          "$ref": "#/definitions/IdentityDetails",
+          "description": "identity details of the MSI"
+        }
+      },
+      "discriminator": "objectType",
+      "required": [
+        "objectType"
+      ]
+    },
+    "ResumeProtectionRequestObjectType": {
+      "type": "string",
+      "description": "Type of Datasource object, used to initialize the right inherited type",
+      "enum": [
+        "ResumeProtectionRequest"
+      ],
+      "x-ms-enum": {
+        "name": "ResumeProtectionRequestObjectType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResumeProtectionRequest",
+            "value": "ResumeProtectionRequest",
+            "description": "Resume Protection Request Type."
           }
         ]
       }
