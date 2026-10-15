@@ -1,5 +1,5 @@
 {
-  "title": "Update SIP binding access controls",
+  "title": "Update SIP binding allowed callers",
   "operationId": "AgentTelephony_updateTelephonyBinding",
   "parameters": {
     "api-version": "v1",
@@ -8,7 +8,6 @@
     "binding_id": "binding_support_sip",
     "If-Match": "\"binding-etag-sip-1\"",
     "body": {
-      "allowed_source_cidrs": [],
       "allowed_calling_numbers": [
         "+14255550123"
       ]
@@ -27,7 +26,6 @@
         "label": "Customer support SIP",
         "status": "active",
         "incoming_call_url": "sip:support-agent@voice.contoso.com",
-        "allowed_source_cidrs": [],
         "allowed_calling_numbers": [
           "+14255550123"
         ]

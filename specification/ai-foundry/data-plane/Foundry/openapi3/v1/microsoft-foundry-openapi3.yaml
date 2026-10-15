@@ -47144,12 +47144,6 @@ components:
           type: string
           maxLength: 64
           description: An optional display phone number, up to 64 characters. It is not the binding identifier.
-        allowed_source_cidrs:
-          type: array
-          items:
-            type: string
-          maxItems: 64
-          description: Up to 64 allowed source IP addresses or CIDR ranges. Bare IPv4 and IPv6 addresses become /32 and /128; host bits are masked and duplicates are removed. Omission or an empty array indicates no source-address restriction.
         allowed_calling_numbers:
           type: array
           items:
@@ -47158,7 +47152,7 @@ components:
           description: Up to 64 exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, each up to 256 characters. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Omission or an empty array indicates no caller-number restriction.
       allOf:
         - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
-      description: The request to create an inbound SIP binding. New SIP bindings are active. Credentials are stored in the referenced Foundry connection.
+      description: The request to create an inbound SIP binding. New SIP bindings are active. The referenced SipInbound project connection owns SIP authentication and any source_cidrs; they are not binding fields.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -83680,12 +83674,6 @@ components:
           type: string
           maxLength: 64
           description: An optional display phone number, up to 64 characters. It is not the binding identifier.
-        allowed_source_cidrs:
-          type: array
-          items:
-            type: string
-          maxItems: 64
-          description: Up to 64 allowed source IP addresses or CIDR ranges. Bare IPv4 and IPv6 addresses become /32 and /128; host bits are masked and duplicates are removed. Omission or an empty array indicates no source-address restriction.
         allowed_calling_numbers:
           type: array
           items:
@@ -83712,12 +83700,6 @@ components:
           type: string
           maxLength: 64
           description: An optional display phone number, up to 64 characters. It is not the binding identifier.
-        allowed_source_cidrs:
-          type: array
-          items:
-            type: string
-          maxItems: 64
-          description: Up to 64 allowed source IP addresses or CIDR ranges. Bare IPv4 and IPv6 addresses become /32 and /128; host bits are masked and duplicates are removed. Omission or an empty array indicates no source-address restriction.
         allowed_calling_numbers:
           type: array
           items:
@@ -86275,12 +86257,6 @@ components:
             - type: 'null'
           maxLength: 64
           description: The replacement Teams Phone extensibility or SIP display phone number. Omit it to preserve the current value; use null to clear it. Not supported for Twilio.
-        allowed_source_cidrs:
-          type: array
-          items:
-            type: string
-          maxItems: 64
-          description: Replacement allowed source IP addresses or CIDR ranges, up to 64 entries. Bare addresses gain /32 or /128; host bits are masked and duplicates removed. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.
         allowed_calling_numbers:
           type: array
           items:

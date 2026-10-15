@@ -609,10 +609,6 @@ model SipTelephonyBindingProperties {
   @maxLength(64)
   phone_number?: string;
 
-  @doc("Up to 64 allowed source IP addresses or CIDR ranges. Bare IPv4 and IPv6 addresses become /32 and /128; host bits are masked and duplicates are removed. Omission or an empty array indicates no source-address restriction.")
-  @maxItems(64)
-  allowed_source_cidrs?: string[];
-
   @doc("Up to 64 exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, each up to 256 characters. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Omission or an empty array indicates no caller-number restriction.")
   @maxItems(64)
   allowed_calling_numbers?: SipAllowedCallingNumber[];
@@ -634,7 +630,7 @@ model CreateTwilioTelephonyBindingRequest
   ...TwilioTelephonyBindingProperties;
 }
 
-@doc("The request to create an inbound SIP binding. New SIP bindings are active. Credentials are stored in the referenced Foundry connection.")
+@doc("The request to create an inbound SIP binding. New SIP bindings are active. The referenced SipInbound project connection owns SIP authentication and any source_cidrs; they are not binding fields.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("CreateSipTelephonyBindingContent", "csharp")
 model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
@@ -660,10 +656,6 @@ model UpdateTelephonyBindingRequest {
   @doc("The replacement Teams Phone extensibility or SIP display phone number. Omit it to preserve the current value; use null to clear it. Not supported for Twilio.")
   @maxLength(64)
   phone_number?: string | null;
-
-  @doc("Replacement allowed source IP addresses or CIDR ranges, up to 64 entries. Bare addresses gain /32 or /128; host bits are masked and duplicates removed. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
-  @maxItems(64)
-  allowed_source_cidrs?: string[];
 
   @doc("Replacement exact canonical E.164 numbers or restricted, fully anchored E.164 patterns, up to 64 entries of at most 256 characters each. Patterns are matched against the entire normalized E.164 caller number; see SipAllowedCallingNumber for the supported syntax. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
   @maxItems(64)
