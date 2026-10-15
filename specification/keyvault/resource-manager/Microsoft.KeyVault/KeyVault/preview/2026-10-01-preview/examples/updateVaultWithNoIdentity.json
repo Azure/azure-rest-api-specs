@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2026-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sample-resource-group",
+    "vaultName": "sample-vault",
+    "parameters": {
+      "identity": {
+        "type": "None"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
+        "name": "sample-vault",
+        "type": "Microsoft.KeyVault/vaults",
+        "location": "westus",
+        "identity": {
+          "type": "None"
+        },
+        "properties": {
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "sku": {
+            "family": "A",
+            "name": "standard"
+          },
+          "enableRbacAuthorization": true,
+          "provisioningState": "Succeeded",
+          "vaultUri": "https://sample-vault.vault.azure.net/"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
+        "name": "sample-vault",
+        "type": "Microsoft.KeyVault/vaults",
+        "location": "westus",
+        "identity": {
+          "type": "None"
+        },
+        "properties": {
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "sku": {
+            "family": "A",
+            "name": "standard"
+          },
+          "enableRbacAuthorization": true,
+          "provisioningState": "Succeeded",
+          "vaultUri": "https://sample-vault.vault.azure.net/"
+        }
+      }
+    }
+  },
+  "operationId": "Vaults_Update",
+  "title": "Update a vault to remove all managed identity assignments"
+}

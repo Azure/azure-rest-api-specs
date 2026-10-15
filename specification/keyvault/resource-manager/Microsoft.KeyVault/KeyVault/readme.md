@@ -38,6 +38,33 @@ input-file:
   - preview/2026-10-01-preview/openapi.json
 ```
 
+#### Vault user-assigned managed identities
+
+Starting with `2026-10-01-preview`, vault GET/list responses and PUT/PATCH
+requests and responses support an optional top-level `identity`, alongside
+`location`, `tags`, and `properties`. Earlier API versions do not expose this
+contract. Managed HSM identity support is unchanged.
+
+`identity.type` is required when `identity` is supplied and supports only
+`UserAssigned` and `None`. The `userAssignedIdentities` dictionary is keyed by
+the full Azure resource IDs of existing
+`Microsoft.ManagedIdentity/userAssignedIdentities` resources. Request entries
+use `{}` to attach or retain an identity. Response entries contain read-only
+`clientId` (Microsoft Entra application ID) and `principalId` (service principal
+object ID); do not supply those values in requests.
+
+| Input                                              | PUT                                                | PATCH                                                            |
+| -------------------------------------------------- | -------------------------------------------------- | ---------------------------------------------------------------- |
+| `identity` omitted                                 | Preserve existing assignments.                     | Preserve existing assignments.                                   |
+| `UserAssigned` with dictionary entries             | Replace the full set with the supplied identities. | Merge supplied entries; omitted keys preserve their assignments. |
+| Dictionary entry `{}`                              | Attach or retain the identity.                     | Attach or retain the identity.                                   |
+| Dictionary entry `null`                            | Not allowed.                                       | Remove only that identity assignment.                            |
+| `UserAssigned` with an empty or omitted dictionary | Remove all assignments.                            | Leave all assignments unchanged.                                 |
+| `None`                                             | Remove all assignments.                            | Remove all assignments.                                          |
+
+Do not combine `None` with a nonempty dictionary. Removing an assignment never
+deletes the user-assigned identity resource.
+
 ### Tag: package-preview-2026-06
 
 These settings apply only when `--tag=package-preview-2026-06` is specified on the command line.

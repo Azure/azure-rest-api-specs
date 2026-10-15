@@ -1032,6 +1032,62 @@ model ManagedHsmKeyReleasePolicy {
   data?: bytes;
 }
 
+/** The managed identity types supported by a vault. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Vaults support only UserAssigned and None; the service rejects all other managed identity types."
+@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+union VaultIdentityType {
+  /** User-assigned managed identities. */
+  UserAssigned: "UserAssigned",
+
+  /** No managed identities. Removes all assignments without deleting the identity resources. */
+  None: "None",
+}
+
+/** The user-assigned managed identities associated with a vault. */
+@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+model VaultIdentity {
+  /**
+   * The managed identity type. Only UserAssigned and None are supported.
+   * None removes all assignments and must not be combined with a nonempty userAssignedIdentities dictionary.
+   */
+  type: VaultIdentityType;
+
+  /**
+   * The identities assigned to the vault, keyed by the full Azure resource IDs of existing
+   * Microsoft.ManagedIdentity/userAssignedIdentities resources, in the form
+   * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   * In a PUT request, provide an empty object ({}) for each identity to attach or retain; null entries are not allowed.
+   * The supplied set replaces all existing assignments. With type UserAssigned, an empty or omitted dictionary removes all assignments.
+   * Removing an assignment does not delete the identity resource.
+   * Response entries contain the read-only clientId (Microsoft Entra application ID) and principalId (service principal object ID).
+   * Do not provide clientId or principalId values in requests.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The Azure managed identity contract requires a dictionary keyed by user-assigned identity resource IDs; PUT replaces the set and rejects null entries."
+  userAssignedIdentities?: Record<CommonTypes.UserAssignedIdentity>;
+}
+
+/** Changes to the user-assigned managed identities associated with a vault. */
+@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+model VaultPatchIdentity {
+  /**
+   * The managed identity type. Only UserAssigned and None are supported.
+   * None removes all assignments and must not be combined with a nonempty userAssignedIdentities dictionary.
+   */
+  type: VaultIdentityType;
+
+  /**
+   * Changes to the assigned identities, keyed by the full Azure resource IDs of existing
+   * Microsoft.ManagedIdentity/userAssignedIdentities resources, in the form
+   * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   * An empty object ({}) attaches or retains an identity; null removes only that assignment.
+   * Omitted keys preserve their assignments. With type UserAssigned, an empty or omitted dictionary leaves all assignments unchanged.
+   * Removing an assignment does not delete the identity resource.
+   * The clientId (Microsoft Entra application ID) and principalId (service principal object ID) are read-only response values and must not be provided in requests.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The Azure managed identity contract requires a dictionary keyed by user-assigned identity resource IDs; PATCH merges entries and uses null to remove individual assignments."
+  userAssignedIdentities?: Record<CommonTypes.UserAssignedIdentity | null>;
+}
+
 /**
  * Parameters for creating or updating a vault
  */
@@ -1046,6 +1102,14 @@ model VaultCreateOrUpdateParameters {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
+
+  /**
+   * The user-assigned managed identities to associate with the vault.
+   * When omitted, existing identity assignments are preserved.
+   * When provided, replaces the full set of assignments; type None removes all assignments.
+   */
+  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  identity?: VaultIdentity;
 
   /**
    * Properties of the vault
@@ -1410,6 +1474,14 @@ model VaultPatchParameters {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
+
+  /**
+   * Changes to the user-assigned managed identities associated with the vault.
+   * When omitted, existing identity assignments are preserved.
+   * With type UserAssigned, merges only the specified entries; type None removes all assignments.
+   */
+  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  identity?: VaultPatchIdentity;
 
   /**
    * Properties of the vault

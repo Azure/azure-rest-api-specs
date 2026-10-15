@@ -1690,8 +1690,17 @@
           "Create a new vault or update an existing vault": {
             "$ref": "./examples/createVault.json"
           },
+          "Create or update a vault with a user-assigned managed identity": {
+            "$ref": "./examples/createVaultWithUserAssignedIdentity.json"
+          },
+          "Create or update a vault with identity omitted to preserve existing assignments": {
+            "$ref": "./examples/createOrUpdateVaultPreservingIdentity.json"
+          },
           "Create or update a vault with network acls": {
             "$ref": "./examples/createVaultWithNetworkAcls.json"
+          },
+          "Create or update a vault with no managed identities": {
+            "$ref": "./examples/createOrUpdateVaultWithNoIdentity.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1754,8 +1763,17 @@
           }
         },
         "x-ms-examples": {
+          "Update a vault to remove all managed identity assignments": {
+            "$ref": "./examples/updateVaultWithNoIdentity.json"
+          },
           "Update an existing vault": {
             "$ref": "./examples/updateVault.json"
+          },
+          "Update vault identities by adding one and removing one while retaining omitted assignments": {
+            "$ref": "./examples/updateVaultWithUserAssignedIdentities.json"
+          },
+          "Update vault tags with PATCH while preserving omitted identity assignments": {
+            "$ref": "./examples/updateVaultPreservingIdentity.json"
           }
         }
       },
@@ -5998,6 +6016,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/VaultIdentity",
+          "description": "The user-assigned managed identities associated with the vault."
         }
       },
       "required": [
@@ -6102,6 +6124,10 @@
             "type": "string"
           }
         },
+        "identity": {
+          "$ref": "#/definitions/VaultIdentity",
+          "description": "The user-assigned managed identities to associate with the vault.\nWhen omitted, existing identity assignments are preserved.\nWhen provided, replaces the full set of assignments; type None removes all assignments."
+        },
         "properties": {
           "$ref": "#/definitions/VaultProperties",
           "description": "Properties of the vault"
@@ -6111,6 +6137,50 @@
         "location",
         "properties"
       ]
+    },
+    "VaultIdentity": {
+      "type": "object",
+      "description": "The user-assigned managed identities associated with a vault.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/VaultIdentityType",
+          "description": "The managed identity type. Only UserAssigned and None are supported.\nNone removes all assignments and must not be combined with a nonempty userAssignedIdentities dictionary."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to the vault, keyed by the full Azure resource IDs of existing\nMicrosoft.ManagedIdentity/userAssignedIdentities resources, in the form\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.\nIn a PUT request, provide an empty object ({}) for each identity to attach or retain; null entries are not allowed.\nThe supplied set replaces all existing assignments. With type UserAssigned, an empty or omitted dictionary removes all assignments.\nRemoving an assignment does not delete the identity resource.\nResponse entries contain the read-only clientId (Microsoft Entra application ID) and principalId (service principal object ID).\nDo not provide clientId or principalId values in requests.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "VaultIdentityType": {
+      "type": "string",
+      "description": "The managed identity types supported by a vault.",
+      "enum": [
+        "UserAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "VaultIdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identities."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identities. Removes all assignments without deleting the identity resources."
+          }
+        ]
+      }
     },
     "VaultListResult": {
       "type": "object",
@@ -6133,6 +6203,27 @@
         "value"
       ]
     },
+    "VaultPatchIdentity": {
+      "type": "object",
+      "description": "Changes to the user-assigned managed identities associated with a vault.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/VaultIdentityType",
+          "description": "The managed identity type. Only UserAssigned and None are supported.\nNone removes all assignments and must not be combined with a nonempty userAssignedIdentities dictionary."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "Changes to the assigned identities, keyed by the full Azure resource IDs of existing\nMicrosoft.ManagedIdentity/userAssignedIdentities resources, in the form\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.\nAn empty object ({}) attaches or retains an identity; null removes only that assignment.\nOmitted keys preserve their assignments. With type UserAssigned, an empty or omitted dictionary leaves all assignments unchanged.\nRemoving an assignment does not delete the identity resource.\nThe clientId (Microsoft Entra application ID) and principalId (service principal object ID) are read-only response values and must not be provided in requests.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "VaultPatchParameters": {
       "type": "object",
       "description": "Parameters for creating or updating a vault",
@@ -6143,6 +6234,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/VaultPatchIdentity",
+          "description": "Changes to the user-assigned managed identities associated with the vault.\nWhen omitted, existing identity assignments are preserved.\nWith type UserAssigned, merges only the specified entries; type None removes all assignments."
         },
         "properties": {
           "$ref": "#/definitions/VaultPatchProperties",
