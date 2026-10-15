@@ -167,6 +167,9 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
+  @doc("Session-local private string declarations, keyed by ASCII identifiers. Declarations contain references, never runtime secret values. Inputs explicitly mapped by `initial_value_from` are separated before prompt rendering. Collected values exist only for the live session; there is no secret-read API.")
+  secrets?: Record<VoiceAgentSessionSecret>;
+
   @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
   subagent_config?: VoiceAgentSubagentConfig;
 
@@ -375,7 +378,7 @@ model VoiceAgentMcpTool extends VoiceAgentTool {
   response_scheduling?: VoiceAgentToolResponseScheduling = VoiceAgentToolResponseScheduling.when_idle;
 }
 
-@doc("A service-managed control that acts on the active voice session without customer code or external authentication.")
+@doc("A service-managed capability explicitly enabled on the active voice session. Voice Live owns its model contract and lifecycle; supported telephony integrations execute provider operations using their configured connections. A binding alone does not enable a system tool.")
 @discriminator("name")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSystemTool extends VoiceAgentTool {
@@ -403,6 +406,248 @@ union VoiceAgentSystemToolName {
 
   @doc("Ends the active conversation.")
   end_conversation: "end_conversation",
+
+  @doc("Requests a transfer to an explicitly configured logical target.")
+  transfer: "transfer",
+
+  @doc("Collects one complete SMS from an explicitly selected sender.")
+  collect_sms: "collect_sms",
+
+  @doc("Collects keypad digits on the current call.")
+  collect_dtmf: "collect_dtmf",
+
+  @doc("Sends one configured keypad action.")
+  send_dtmf: "send_dtmf",
+}
+
+@doc("A declaration for one session-local private string. This model contains no secret value, and may be returned with the Agent definition. Do not put sensitive values in structured-input defaults or instructions.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSessionSecret {
+  @doc("An optional `structured_inputs.<identifier>` reference used to initialize the private string at session creation. The referenced value must be a JSON string, preserving leading zeros. Omission leaves the slot empty until a successful private collection.")
+  @pattern("^structured_inputs\\.[A-Za-z_][A-Za-z0-9_]*$")
+  initial_value_from?: string;
+}
+
+@doc("A reference to a declared session-local string, not its value. Only the `secrets.<identifier>` form is supported; references are not expressions.")
+@pattern("^secrets\\.[A-Za-z_][A-Za-z0-9_]*$")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar VoiceAgentSecretReference extends string;
+
+@doc("Routes a private collection result to one declared session-local string.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectionOutputBindings {
+  @doc("The slot to replace when a private collection completes. Starting a replacement collection clears the old value; cancellation, timeout, and failure leave the slot empty.")
+  value: VoiceAgentSecretReference;
+}
+
+@doc("Settings shared by SMS and keypad collection. The model cannot override these settings or submit the collected value. Each start must choose `secret: true` or `secret: false`; that choice is locked for the operation. Private collection requires an output binding and bypasses model-visible values, while non-private collection may return its exact value to the model. Collection is not authentication.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentInputCollectionSettings {
+  @doc("The minimum number of ASCII decimal digits. Leading zeros are preserved. Must not exceed `max_length`.")
+  @minValue(1)
+  @maxValue(64)
+  min_length?: int32 = 6;
+
+  @doc("The maximum number of ASCII decimal digits. Reaching the maximum is not confirmation in terminator mode.")
+  @minValue(1)
+  @maxValue(64)
+  max_length?: int32 = 6;
+
+  @doc("The total operation deadline in integer seconds, including receiver preparation. Duplicate commands do not extend it.")
+  @minValue(1)
+  @maxValue(300)
+  timeout_seconds?: int32 = 60;
+
+  @doc("An optional destination for a private result. Required when the model starts a collection with `secret: true`. The slot must be declared in the Agent's `secrets` configuration.")
+  output_bindings?: VoiceAgentCollectionOutputBindings;
+}
+
+@doc("Collects one complete SMS on the Agent's bound, SMS-capable number. The model's start arguments must explicitly include `from_phone_number` in E.164 form and the Boolean `secret`; Caller ID is not a fallback or proof of identity. The receiver reports listening before the Agent prompts. This capability does not create an independent SMS conversation. The initial Telephony adapter supports Twilio only.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
+  @doc("The built-in capability. Always `collect_sms`.")
+  name: "collect_sms";
+
+  ...VoiceAgentInputCollectionSettings;
+}
+
+@doc("How keypad collection completes. Unknown modes require service and provider support.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentDtmfCompletionMode {
+  string,
+
+  @doc("Complete at the configured fixed length. `min_length` and `max_length` must be equal.")
+  fixed_length: "fixed_length",
+
+  @doc("Complete only after the configured terminator. The terminator is excluded from the value, and reaching the length limit alone never succeeds.")
+  terminator: "terminator",
+
+  @doc("Complete after the inter-digit timeout when the accumulated length is valid.")
+  inter_digit_silence: "inter_digit_silence",
+}
+
+@doc("The two non-numeric keypad keys permitted as confirmation terminators.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentDtmfTerminator {
+  @doc("The number-sign confirmation key.")
+  number_sign: "#",
+
+  @doc("The asterisk confirmation key.")
+  asterisk: "*",
+}
+
+@doc("Collects ASCII decimal keypad digits through the call's existing media reader. The model starts with an explicit Boolean `secret` but cannot submit digits. Genuine repeated key events are preserved. First-digit timeout, inter-digit timeout, and the total deadline are distinct; no-input timeout does not complete an empty value. Voice collection is unsupported.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentCollectDtmfSystemTool extends VoiceAgentSystemTool {
+  @doc("The built-in capability. Always `collect_dtmf`.")
+  name: "collect_dtmf";
+
+  ...VoiceAgentInputCollectionSettings;
+
+  @doc("The required completion policy. Exactly one policy applies to an operation.")
+  completion_mode: VoiceAgentDtmfCompletionMode;
+
+  @doc("The confirmation key, required only in terminator mode. The two non-numeric keypad keys are the only supported terminators.")
+  terminator?: VoiceAgentDtmfTerminator;
+
+  @doc("The maximum wait for the first digit, in integer seconds, bounded by the total deadline.")
+  @minValue(1)
+  @maxValue(300)
+  first_digit_timeout_seconds?: int32 = 15;
+
+  @doc("The wait after a received digit, in integer seconds. In silence mode it may complete a valid value; other modes time out without success. This is not a debounce and never removes repeated digits.")
+  @minValue(1)
+  @maxValue(300)
+  inter_digit_timeout_seconds?: int32 = 5;
+}
+
+@doc("Per-invocation transfer routing. Unsupported strategies are rejected before provider execution; schema membership does not imply support by every provider.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentTransferStrategy {
+  string,
+
+  @doc("Try destinations in configured order while the total budget remains.")
+  sequential: "sequential",
+
+  @doc("Randomize destination order for this invocation, then try each within the total budget. There is no shared round-robin state.")
+  random: "random",
+
+  @doc("Ring destinations concurrently and select the first answer when the executor supports this strategy. The initial ACS native executor does not support it.")
+  parallel: "parallel",
+}
+
+@doc("The configured transfer routing policy. The model selects a target name, not destinations or routing settings.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTransferRouting {
+  @doc("The routing strategy. Current native Telephony transfer supports ACS sequential and random routing only.")
+  strategy: VoiceAgentTransferStrategy;
+
+  @doc("The per-destination ring budget in integer seconds. Provider-specific limits also apply; ACS supports at most 180 seconds.")
+  @minValue(1)
+  @maxValue(300)
+  ring_timeout_seconds?: int32 = 20;
+
+  @doc("The total routing budget in integer seconds. Must be at least `ring_timeout_seconds`; it does not restart for each destination.")
+  @minValue(1)
+  @maxValue(300)
+  total_timeout_seconds?: int32 = 45;
+}
+
+@doc("One logical transfer target configured in the immutable Agent definition. Only name and description are exposed to the model; destinations and routing are executor settings. This is separate from the existing management transfer-target resource.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTransferTarget {
+  @doc("The non-blank logical target name. Names must be unique within the transfer tool.")
+  @minLength(1)
+  name: string;
+
+  @doc("A description that helps the model select this target.")
+  description?: string;
+
+  @doc("The ordered concrete destinations. Current ACS execution permits at most 16 PSTN or Teams destinations. PSTN requires an admitted Agent-side E.164 caller ID; Teams requires a valid user/resource-account GUID. SIP remains subject to executor capability.")
+  @minItems(1)
+  destinations: TelephonyTransferDestination[];
+
+  @doc("The trusted routing policy for this target.")
+  routing: VoiceAgentTransferRouting;
+}
+
+@doc("Requests transfer to a configured logical target. The model supplies only target and reason; the service resolves destinations from this definition. An explicit declaration is required. On confirmed no-answer, the original conversation continues with failure feedback. An uncertain provider result is not automatically redialed. Current native Telephony transfer is ACS-only; existing Twilio management transfer is a separate capability.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
+  @doc("The built-in capability. Always `transfer`.")
+  name: "transfer";
+
+  @doc("The non-empty set of logical targets that the model may select.")
+  @minItems(1)
+  targets: VoiceAgentTransferTarget[];
+}
+
+@doc("The name and optional model guidance shared by configured keypad actions.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDtmfActionBase {
+  @doc("The action name selected by the model. Names must be unique within the tool.")
+  @minLength(1)
+  @maxLength(64)
+  @pattern("^[A-Za-z][A-Za-z0-9_]*$")
+  name: string;
+
+  @doc("Optional guidance about when this action should be selected.")
+  description?: string;
+}
+
+@doc("A keypad action containing non-sensitive literal digits. Never place a PIN, verification code, or other private value in a persisted action.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiteralDtmfAction {
+  ...VoiceAgentDtmfActionBase;
+
+  @doc("The literal tones. ACS accepts at most 18 tones; SIP native signalling and Twilio in-band audio accept at most 64. Provider acceptance or audio playback does not prove remote IVR recognition.")
+  @minLength(1)
+  @maxLength(64)
+  @pattern("^[0-9*#]+$")
+  digits: string;
+}
+
+@doc("A reference resolved only when constructing a separate executor argument copy. This configuration never contains the referenced value.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSecretInputBinding {
+  @doc("The declared session-local slot to read. A missing value fails before a provider request is sent.")
+  source: VoiceAgentSecretReference;
+}
+
+@doc("The supported input binding for a keypad action. Other parameters and expression syntax are not supported.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentDtmfParameterBindings {
+  @doc("The private string to resolve into the executor's digits argument.")
+  digits: VoiceAgentSecretInputBinding;
+}
+
+@doc("A keypad action whose digits are resolved from a private session-local string rather than supplied by the model.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentBoundDtmfAction {
+  ...VoiceAgentDtmfActionBase;
+
+  @doc("The input binding. Mutually exclusive with literal `digits`.")
+  parameter_bindings: VoiceAgentDtmfParameterBindings;
+}
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Each keypad action requires exactly one literal or bound digits source."
+@doc("A configured keypad action with exactly one digits source: a non-sensitive literal or a private binding.")
+@oneOf
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentSendDtmfAction {
+  literal: VoiceAgentLiteralDtmfAction,
+  bound: VoiceAgentBoundDtmfAction,
+}
+
+@doc("Sends a configured keypad action. The model selects only the action name; Voice Live resolves any private binding and sends concrete digits to Telephony. The model cannot override digits or read the private slot. ACS uses its native API; SIP uses negotiated RFC 4733 signalling only when the authenticated media gateway advertises support; Twilio plays in-band audio on the existing Media Stream without replacing the stream or session. Explicitly configured tools have no inbound/outbound restriction. Acceptance is not remote IVR recognition or authentication; in-band compatibility requires destination validation and secret-bound tones are audible on the call. An uncertain or interrupted sequence is never automatically retried.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
+  @doc("The built-in capability. Always `send_dtmf`.")
+  name: "send_dtmf";
+
+  @doc("The non-empty set of configured keypad actions.")
+  @minItems(1)
+  actions: VoiceAgentSendDtmfAction[];
 }
 
 @doc("A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.")
