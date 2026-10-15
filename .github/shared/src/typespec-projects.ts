@@ -13,6 +13,20 @@ export async function findTypeSpecProjects(root: string): Promise<string[]> {
   return folders.map((folder) => resolve(root, folder));
 }
 
+function groupChangedFilesByService(changedFiles: readonly string[]): Map<string, string[]> {
+  const services = new Map<string, string[]>();
+  for (const file of changedFiles) {
+    const match = /^specification\/[^/]+\//.exec(file);
+    if (!match) continue;
+
+    const service = match[0].slice(0, -1);
+    const files = services.get(service) ?? [];
+    files.push(file);
+    services.set(service, files);
+  }
+  return services;
+}
+
 /**
  * Finds every project in services touched by repository-relative POSIX changed paths.
  * Includes sibling and nested projects even for deleted files; missing services are skipped.
@@ -23,14 +37,7 @@ export async function findTypeSpecProjectsInChangedServices(
   changedFiles: readonly string[],
   logger: ILogger = defaultLogger,
 ): Promise<string[]> {
-  const directories = [
-    ...new Set(
-      changedFiles.flatMap((file) => {
-        const match = /^specification\/[^/]+\//.exec(file);
-        return match ? [match[0].slice(0, -1)] : [];
-      }),
-    ),
-  ].sort();
+  const directories = [...groupChangedFilesByService(changedFiles).keys()].sort();
   const projects = new Set<string>();
   for (const directory of directories) {
     const folder = resolve(root, directory);
@@ -66,30 +73,31 @@ export async function findTypeSpecProjectsForChangedFiles(
   changedFiles: readonly string[],
   logger: ILogger = defaultLogger,
 ): Promise<Map<string, string[]>> {
-  const files = changedFiles.filter((file) => /^specification\/[^/]+\//.test(file));
   const projects = new Map<string, string[]>();
-  for (const [directory, directoryFiles] of Map.groupBy(files, dirname)) {
-    const findAll = directory.includes("resource-manager") || directory.includes("data-plane");
-    let current = directory;
-    while (current !== "specification" && current !== ".") {
-      const folder = resolve(root, current);
-      let entries: string[];
-      try {
-        entries = await readdir(folder);
-      } catch (error) {
-        if (error instanceof Error && "code" in error && error.code === "ENOENT") {
-          logger.warning(`Cannot find directory ${current}`);
-          break;
+  for (const serviceFiles of groupChangedFilesByService(changedFiles).values()) {
+    for (const [directory, directoryFiles] of Map.groupBy(serviceFiles, dirname)) {
+      const findAll = directory.includes("resource-manager") || directory.includes("data-plane");
+      let current = directory;
+      while (current !== "specification" && current !== ".") {
+        const folder = resolve(root, current);
+        let entries: string[];
+        try {
+          entries = await readdir(folder);
+        } catch (error) {
+          if (error instanceof Error && "code" in error && error.code === "ENOENT") {
+            logger.warning(`Cannot find directory ${current}`);
+            break;
+          }
+          throw error;
         }
-        throw error;
+        if (entries.includes("tspconfig.yaml")) {
+          const associatedFiles = projects.get(folder) ?? [];
+          associatedFiles.push(...directoryFiles);
+          projects.set(folder, associatedFiles);
+          if (!findAll) break;
+        }
+        current = dirname(current);
       }
-      if (entries.includes("tspconfig.yaml")) {
-        const associatedFiles = projects.get(folder) ?? [];
-        associatedFiles.push(...directoryFiles);
-        projects.set(folder, associatedFiles);
-        if (!findAll) break;
-      }
-      current = dirname(current);
     }
   }
 

@@ -115,21 +115,27 @@ describe("findTypeSpecProjectsInChangedServices", () => {
 });
 
 describe("findTypeSpecProjectsForChangedFiles", () => {
-  it("selects only the nearest old-layout projects and preserves their changed-file associations", async () => {
+  it("selects only the nearest old-layout projects and preserves changed-file associations across services", async () => {
+    const other = await addProject("specification/other/Project");
+    const otherFile = "specification/other/Project/main.tsp";
     await addProject("specification/service/Parent");
     const nested = await addProject("specification/service/Parent/Nested");
     const sibling = await addProject("specification/service/Sibling");
     await addProject("specification/service/Parent/Nested/Child");
     const siblingFile = "specification/service/Sibling/main.tsp";
-    const files = [
-      "specification/service/Parent/Nested/main.tsp",
-      "specification/service/Parent/Nested/client.tsp",
-    ];
+    const modelFile = "specification/service/Parent/Nested/main.tsp";
+    const clientFile = "specification/service/Parent/Nested/client.tsp";
 
-    const projects = await findTypeSpecProjectsForChangedFiles(root, [...files, siblingFile]);
+    const projects = await findTypeSpecProjectsForChangedFiles(root, [
+      modelFile,
+      otherFile,
+      siblingFile,
+      clientFile,
+    ]);
 
     expect([...projects]).toEqual([
-      [nested, files],
+      [other, [otherFile]],
+      [nested, [modelFile, clientFile]],
       [sibling, [siblingFile]],
     ]);
   });
