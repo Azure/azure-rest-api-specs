@@ -272,6 +272,16 @@ input-file:
 
 ---
 
+## Suppression
+
+```yaml
+directive:
+  - suppress: RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE
+    from: redisenterprise.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}"].patch.responses[?(@property === '200' && @root.info.version === '2026-10-01-preview')]
+    reason: Firewall-rule replacement and clearing always return 202 with long-running operation headers. These examples intentionally omit the synchronous 200 response, which remains valid for other cluster updates.
+```
+
 # Code Generation
 
 ## Swagger to SDK
