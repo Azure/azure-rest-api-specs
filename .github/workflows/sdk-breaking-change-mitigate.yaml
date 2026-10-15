@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   resolve-trigger:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-slim
     outputs:
       head-branch: ${{ steps.resolve.outputs.head-branch }}
