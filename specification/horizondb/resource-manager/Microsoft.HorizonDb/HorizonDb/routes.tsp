@@ -273,7 +273,7 @@ interface MicrosoftEntraAdministrators {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrReplace is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     MicrosoftEntraAdministrator,
-    Request = MicrosoftEntraAdministrator,
+    Request = MicrosoftEntraAdministratorAdd,
     LroHeaders = HorizonDbResourceLroHeaders<MicrosoftEntraAdministrator>,
     Response =
       | HorizonDbResourceUpdatedLroResponse<MicrosoftEntraAdministrator>
