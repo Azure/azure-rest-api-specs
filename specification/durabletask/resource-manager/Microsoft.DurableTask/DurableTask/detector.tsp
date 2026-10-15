@@ -21,10 +21,13 @@ model Detector is Azure.ResourceManager.ProxyResource<DetectorProperties> {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Diagnostic detector responses are read-only and do not have a provisioning lifecycle."
 @doc("The diagnostic response returned for a detector.")
 @added(Versions.v2026_07_01_Preview)
 model DetectorProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The provisioning state of the detector.")
+  provisioningState?: ProvisioningState;
+
   @visibility(Lifecycle.Read)
   @doc("Metadata that identifies and describes the detector.")
   metadata?: DetectorMetadata;
