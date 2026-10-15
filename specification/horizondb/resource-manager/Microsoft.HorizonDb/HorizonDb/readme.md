@@ -100,20 +100,6 @@ suppressions:
       This PUT approves or rejects an existing private endpoint connection; it
       does not create the connection. The approval-specific operation ID
       PrivateEndpointConnections_ApproveOrReject describes the service behavior.
-  - code: EnumInsteadOfBoolean
-    from: openapi.json
-    where:
-      - $.definitions["ActivateChangeDataCaptureIdentityRequest"].properties.drainExistingSessions
-      - $.definitions["ChangeDataCaptureCapabilityProperties"].properties.autoUpgradeExtension
-      - $.definitions["ChangeDataCaptureCapabilityPropertiesForPatchUpdate"].properties.autoUpgradeExtension
-      - $.definitions["LogFileProperties"].properties.isMutable
-      - $.definitions["MaintenanceEventActionResponse"].properties.appliedNow
-      - $.definitions["MaintenanceEventProperties"].properties.deferrable
-    reason: >-
-      These properties represent binary facts or choices for which true and
-      false are complete and unambiguous. Replacing them with string enums
-      would not add semantic states and would make the wire contract less
-      natural.
 ```
 
 ### Tag: package-horizondb-2026-05-01-preview
