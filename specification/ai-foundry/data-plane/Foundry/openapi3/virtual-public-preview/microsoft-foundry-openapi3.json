@@ -37509,6 +37509,7 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "microsoft_copilot_preview": "#/components/schemas/MicrosoftCopilotHarness",
             "github_copilot_preview": "#/components/schemas/GitHubCopilotHarness"
           }
         },
@@ -49023,7 +49024,7 @@
             "$ref": "#/components/schemas/AgentHarness"
           }
         ],
-        "description": "The GitHub Copilot managed harness for prompt agents.",
+        "description": "The legacy GitHub Copilot managed harness retained for compatibility with existing prompt agents.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "GitHubCopilot=V1Preview"
@@ -51352,6 +51353,32 @@
           }
         ],
         "description": "The publish scope for the generated Microsoft Teams app."
+      },
+      "MicrosoftCopilotHarness": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "microsoft_copilot_preview"
+            ],
+            "description": "The type of managed harness. Always `microsoft_copilot_preview`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentHarness"
+          }
+        ],
+        "description": "The Microsoft Copilot managed harness for prompt agents.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "GitHubCopilot=V1Preview"
+          ]
+        }
       },
       "MicrosoftFabricPreviewTool": {
         "type": "object",
