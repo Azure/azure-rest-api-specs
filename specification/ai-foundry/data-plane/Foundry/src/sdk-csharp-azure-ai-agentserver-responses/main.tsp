@@ -17,5 +17,5 @@ import "../common/service.tsp";
 // OpenAI responses routes + models (routes reference the model types, making them visible to the emitter)
 import "../openai/responses/routes.tsp";
 
-// Local customizations (namespace mapping, sequence_number)
+// Local customizations (namespace mapping, item reshapes, alternate-type mappings onto the OpenAI .NET types)
 import "./client.tsp";
