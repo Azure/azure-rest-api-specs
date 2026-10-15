@@ -83,11 +83,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/originGroups/{originGroupName}/origins/{originName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/ruleSets/{ruleSetName}/rules/{ruleName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/securityPolicies/{securityPolicyName}"].patch.parameters[5].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    from: openapi.json
-    reason: Error policy PATCH keeps nested objects as atomic replacements, consistent with the existing CDN APIs. Nested partial PATCH support will be introduced consistently in a future API version.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/errorPolicies/{errorPolicyName}"].patch.parameters[5].schema.properties.properties
   - code: ProvisioningStateMustBeReadOnly
     from: openapi.json
     reason: These response schemas have the same provisioning state shape in the 2026-07-01 stable API.
@@ -273,16 +268,6 @@ suppressions:
     reason: Preserve the bodyless 200 response used by existing clients for synchronous AuthPolicy deletion.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/authPolicies/{authPolicyName}"].delete
-
-  # ErrorPolicy compatibility exception introduced in 2026-09-01-preview.
-  - code: ProvisioningStateMustBeReadOnly
-    from: openapi.json
-    reason: ErrorPolicy reports deployment through AFDStateProperties, matching the other Azure Front Door resources.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/errorPolicies/{errorPolicyName}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/errorPolicies/{errorPolicyName}"].put.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/errorPolicies/{errorPolicyName}"].put.responses["201"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/errorPolicies/{errorPolicyName}"].patch.responses["200"].schema
 modelerfour:
   lenient-model-deduplication: true
   prenamer: true

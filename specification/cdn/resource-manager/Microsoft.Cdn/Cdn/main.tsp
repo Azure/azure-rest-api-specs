@@ -18,7 +18,6 @@ import "./AFDEndpoint.tsp";
 import "./AFDOriginGroup.tsp";
 import "./AFDOrigin.tsp";
 import "./Route.tsp";
-import "./ErrorPolicy.tsp";
 import "./RuleSet.tsp";
 import "./Rule.tsp";
 import "./SecurityPolicy.tsp";
