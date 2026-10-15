@@ -10,10 +10,16 @@
       "kind": "voice",
       "model_type": "managed",
       "model": "gpt-realtime",
-      "post_call_config": {
-        "routine_names": [
-          "archive",
-          "analysis"
+      "post_call": {
+        "destinations": [
+          {
+            "type": "routine",
+            "name": "archive"
+          },
+          {
+            "type": "routine",
+            "name": "analysis"
+          }
         ]
       },
       "audio": {
@@ -55,10 +61,16 @@
               "kind": "voice",
               "model_type": "managed",
               "model": "gpt-realtime",
-              "post_call_config": {
-                "routine_names": [
-                  "archive",
-                  "analysis"
+              "post_call": {
+                "destinations": [
+                  {
+                    "type": "routine",
+                    "name": "archive"
+                  },
+                  {
+                    "type": "routine",
+                    "name": "analysis"
+                  }
                 ]
               },
               "audio": {

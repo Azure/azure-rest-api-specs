@@ -97437,16 +97437,16 @@
             "$ref": "#/components/schemas/VoiceAgentSubagentConfig",
             "description": "Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists."
           },
-          "post_call_config": {
+          "post_call": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/VoiceAgentPostCallConfig"
+                "$ref": "#/components/schemas/VoiceAgentPostCall"
               },
               {
                 "type": "null"
               }
             ],
-            "description": "Optional post-call targets stored with this immutable agent version. Omit this property or set it to null when\ncreating or replacing a complete definition to leave that version unconfigured; earlier versions are unchanged.\nSaving the configuration does not send events or dispatch routines. The service validates that the selected\nvoice-agent definition supports post-call processing.",
+            "description": "Optional post-call destinations and content selection stored with this immutable agent version. Omit this\nproperty or set it to null when creating or replacing a complete definition to leave that version unconfigured;\nearlier versions are unchanged.\nSaving the configuration does not send events or dispatch routines. The service validates that the selected\nvoice-agent definition and requested content are supported; unsupported content requests fail explicitly.",
             "x-ms-foundry-meta": {
               "required_previews": [
                 "VoiceAgents=V1Preview"
@@ -97608,6 +97608,39 @@
           }
         ],
         "description": "The sensitivity threshold for semantic end-of-utterance detection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentEventGridPostCallDestination": {
+        "type": "object",
+        "required": [
+          "type",
+          "connection_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "event_grid"
+            ],
+            "description": "Selects an Event Grid connection destination."
+          },
+          "connection_name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The nonblank bare name of the Event Grid connection in the same project. The connection stores the endpoint\nand authentication settings. The service rejects whitespace, URLs, and resource paths.",
+            "examples": [
+              "post-call-events"
+            ]
+          }
+        },
+        "unevaluatedProperties": {
+          "not": {}
+        },
+        "description": "An Event Grid connection in the same project that receives post-call events.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -98091,48 +98124,112 @@
           ]
         }
       },
-      "VoiceAgentPostCallConfig": {
+      "VoiceAgentPostCall": {
         "type": "object",
+        "required": [
+          "destinations"
+        ],
         "properties": {
-          "event_grid_connection_name": {
-            "type": "string",
-            "minLength": 1,
-            "description": "The nonblank bare name of the Event Grid connection in the same project. The connection stores the endpoint\nand authentication settings; URLs, resource paths, and whitespace are invalid. This single target may be\nconfigured together with routine_names and does not count toward the ten-routine limit.",
-            "examples": [
-              "post-call-events"
-            ]
-          },
-          "routine_names": {
+          "destinations": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/VoiceAgentPostCallRoutineName"
+              "$ref": "#/components/schemas/VoiceAgentPostCallDestination"
             },
-            "minItems": 0,
+            "minItems": 1,
             "maxItems": 10,
-            "description": "Zero to ten bare names of routines in the same project, resolved from the versioned routine definitions at\npost-call dispatch. Only names are stored here, not routine versions, endpoints, credentials, timeouts, or\npolicies. Each name is at most 128 characters. Omit this property or supply an empty list to configure no\nroutines; an Event Grid target is then required. Null is invalid. The service rejects duplicate names using\nordinal, case-sensitive comparison rather than silently deduplicating the list.",
-            "examples": [
-              [
-                "archive",
-                "analysis"
-              ]
-            ]
+            "description": "One to ten destinations in total, in any combination of Event Grid connections and routines. Multiple\ndestinations of either type are allowed. List order does not define execution order. The service rejects\nduplicate references to the same destination rather than silently deduplicating them; Routine names use\nordinal, case-sensitive comparison."
+          },
+          "include": {
+            "$ref": "#/components/schemas/VoiceAgentPostCallInclude",
+            "description": "Content requested for every destination. When omitted, the service includes transcript conversation items\nand does not request audio. Basic event, session, and quality metadata is always included, even when both\ncontent flags are false. These flags select content, not event types or payload formats."
           }
         },
         "unevaluatedProperties": {
           "not": {}
         },
-        "description": "Post-call targets in the same project. Event Grid and routines may be configured separately or together; the\nservice requires at least one valid target. A missing or empty routine_names list configures no routines and\ntherefore requires event_grid_connection_name. Unknown properties and null target fields or list members are\ninvalid. After an observable session end, the service attempts all configured targets independently and\nconcurrently on a best-effort basis, sharing one captured snapshot and an overall deadline. One target's failure\ndoes not prevent attempts to the others. Delivery is not guaranteed after a hard crash and is not exactly once.",
+        "description": "Post-call destinations and content selection for a voice agent version. After an observable session end, the\nservice attempts all destinations independently and concurrently on a best-effort basis, sharing one captured\nsnapshot and an overall deadline. One destination's failure does not prevent attempts to the others.\nDelivery is not guaranteed after a hard crash and is not exactly once.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
           ]
         }
       },
-      "VoiceAgentPostCallRoutineName": {
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 128,
-        "description": "A nonempty bare routine name in the same project, limited to 128 characters. Names are case-sensitive.\nThe service rejects whitespace, URLs, resource paths, the names \".\" and \"..\", and the characters /, \\, :, ?, #,\nand %. Unicode names are allowed. This is a name reference, not a routine version.",
+      "VoiceAgentPostCallDestination": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentEventGridPostCallDestination"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceAgentRoutinePostCallDestination"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "event_grid": "#/components/schemas/VoiceAgentEventGridPostCallDestination",
+            "routine": "#/components/schemas/VoiceAgentRoutinePostCallDestination"
+          }
+        },
+        "description": "A post-call destination selected by its type. Only Event Grid and Routine destinations are supported;\neach variant is a closed object with a same-project bare name.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentPostCallInclude": {
+        "type": "object",
+        "properties": {
+          "transcript": {
+            "type": "boolean",
+            "description": "Whether to include standard conversation items, including tool calls and results, rather than a flattened\ntext transcript or generated analysis. Defaults to true. A false value does not suppress the post-call event.",
+            "default": true
+          },
+          "audio": {
+            "type": "boolean",
+            "description": "Whether to request authorized recording URL references, not inline or base64 audio. Defaults to false.\nThis requires service recording capture, storage, authorized retrieval, expiry, and privacy controls and\nmust comply with the recording data policy and store setting. It does not enable persistence when store\nis false. Unsupported audio requests must fail explicitly, not be silently ignored. Delivery must distinguish\ncontent not requested from requested content that is unavailable.",
+            "default": false
+          }
+        },
+        "unevaluatedProperties": {
+          "not": {}
+        },
+        "description": "Content requested for post-call delivery. Omitted flags use the documented service defaults; schema defaults alone do not implement service behavior. Metadata is included independently of these flags.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentRoutinePostCallDestination": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "routine"
+            ],
+            "description": "Selects a Routine destination."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "The nonempty bare Routine name, limited to 128 characters. Names use ordinal, case-sensitive comparison.\nThe service rejects whitespace, URLs, resource paths, the names \".\" and \"..\", and the characters /, \\, :, ?,\n#, and %. Unicode names are allowed. Only the name is stored, not a version, endpoint, or credentials.",
+            "examples": [
+              "archive"
+            ]
+          }
+        },
+        "unevaluatedProperties": {
+          "not": {}
+        },
+        "description": "A Routine in the same project, resolved from the versioned Routine definitions at post-call dispatch. This reference does not pin a Routine version or override its input.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

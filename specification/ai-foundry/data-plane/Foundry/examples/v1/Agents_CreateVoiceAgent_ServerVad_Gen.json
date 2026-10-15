@@ -10,12 +10,25 @@
       "kind": "voice",
       "model_type": "managed",
       "model": "gpt-realtime",
-      "post_call_config": {
-        "event_grid_connection_name": "post-call-events",
-        "routine_names": [
-          "archive",
-          "analysis"
-        ]
+      "post_call": {
+        "destinations": [
+          {
+            "type": "event_grid",
+            "connection_name": "post-call-events"
+          },
+          {
+            "type": "routine",
+            "name": "archive"
+          },
+          {
+            "type": "routine",
+            "name": "analysis"
+          }
+        ],
+        "include": {
+          "transcript": true,
+          "audio": false
+        }
       },
       "audio": {
         "input": {
@@ -56,12 +69,25 @@
               "kind": "voice",
               "model_type": "managed",
               "model": "gpt-realtime",
-              "post_call_config": {
-                "event_grid_connection_name": "post-call-events",
-                "routine_names": [
-                  "archive",
-                  "analysis"
-                ]
+              "post_call": {
+                "destinations": [
+                  {
+                    "type": "event_grid",
+                    "connection_name": "post-call-events"
+                  },
+                  {
+                    "type": "routine",
+                    "name": "archive"
+                  },
+                  {
+                    "type": "routine",
+                    "name": "analysis"
+                  }
+                ],
+                "include": {
+                  "transcript": true,
+                  "audio": false
+                }
               },
               "audio": {
                 "input": {
