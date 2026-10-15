@@ -9,196 +9,11 @@ namespace OpenAI {
   // The responses view does not export ItemResourceType (only the full src does).
   // Bridge the gap with an alias so the Azure augmentations can reference it.
   alias ItemResourceType = OutputItemType;
-
-  @@withoutOmittedProperties(Item, "type");
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "The widened discriminator is deliberately anonymous; declaring it as a named union would add a schema to the emitted OpenAPI contract, changing the published wire shape."
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties widens the `type` discriminator to admit the `program` and `program_output` replay items that the AgentServer input contract accepts; without it the discriminator degrades to a plain string."
-  @@copyProperties(
-    Item,
-    {
-      /** The type of the item, including the `program` and `program_output` replay item types. */
-      type: ItemType | "program" | "program_output",
-    }
-  );
 }
 
 // Map Azure.AI.Projects augmentation types into our SDK namespace
 @clientNamespace("Azure.AI.AgentServer.Responses.Models")
 namespace Azure.AI.Projects {
-  // Propagate "sequence_number" to base of stream events
-  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "`sequence_number` must stay OpenAI.integer: the upstream leaf events inherit that exact type, and int32 fails with override-property-mismatch."
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties propagates `sequence_number` onto the stream event base type; upstream OpenAI declares it only on the leaf events."
-  @@copyProperties(
-    OpenAI.ResponseStreamEvent,
-    {
-      sequence_number: OpenAI.integer,
-    }
-  );
-
-  // Propagate "id" to Azure.AI.Projects OutputItem types that lack it.
-  // The OpenAI base types already have id; these are Azure-specific extensions.
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.A2AToolCall,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.A2AToolCallOutput,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.AzureAISearchToolCall,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.AzureAISearchToolCallOutput,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.AzureFunctionToolCall,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.AzureFunctionToolCallOutput,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.BingCustomSearchToolCall,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.BingCustomSearchToolCallOutput,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.BingGroundingToolCall,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.BingGroundingToolCallOutput,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.BrowserAutomationToolCall,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.BrowserAutomationToolCallOutput,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.FabricDataAgentToolCall,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.FabricDataAgentToolCallOutput,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.MemoryCommandToolCall,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.MemoryCommandToolCallOutput,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.MemorySearchToolCall,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.OpenApiToolCall,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.OpenApiToolCallOutput,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.SharepointGroundingToolCall,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.SharepointGroundingToolCallOutput,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.StructuredOutputsOutputItem,
-    {
-      id: string,
-    }
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties adds `id` to this Azure-specific tool call item; these Foundry extensions do not inherit the upstream item base that declares `id`, so the emitted model would otherwise have no identifier."
-  @@copyProperties(
-    Azure.AI.Projects.WorkflowActionOutputItem,
-    {
-      id: string,
-    }
-  );
-
   // Remove created_by from specific models to avoid BinaryData/string mismatch
   // with the base OutputItem.CreatedBy (BinaryData) type
   @@withoutOmittedProperties(
@@ -242,45 +57,6 @@ namespace Azure.AI.Projects {
     }
   );
 
-  // Match the Responses API behavior, which accepts assistant output text
-  // without token log probabilities.
-  @@withoutOmittedProperties(OpenAI.OutputContentOutputTextContent, "logprobs");
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties re-adds `logprobs` as optional after @withoutOmittedProperties removed the required upstream declaration; without it `logprobs` becomes a required constructor parameter on the emitted model."
-  @@copyProperties(
-    OpenAI.OutputContentOutputTextContent,
-    {
-      logprobs?: OpenAI.LogProb[],
-    }
-  );
-  @@withoutOmittedProperties(
-    OpenAI.MessageContentOutputTextContent,
-    "logprobs"
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties re-adds `logprobs` as optional after @withoutOmittedProperties removed the required upstream declaration; without it `logprobs` becomes a required constructor parameter on the emitted model."
-  @@copyProperties(
-    OpenAI.MessageContentOutputTextContent,
-    {
-      logprobs?: OpenAI.LogProb[],
-    }
-  );
-  @@withoutOmittedProperties(
-    OpenAI.OutputMessageContentOutputTextContent,
-    "logprobs"
-  );
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties re-adds `logprobs` as optional after @withoutOmittedProperties removed the required upstream declaration; without it `logprobs` becomes a required constructor parameter on the emitted model."
-  @@copyProperties(
-    OpenAI.OutputMessageContentOutputTextContent,
-    {
-      logprobs?: OpenAI.LogProb[],
-    }
-  );
-
-  // Avoid Markdown list formatting that produces an invalid Python docstring.
-  @@doc(
-    OpenAI.Response.output,
-    "An array of content items generated by the model. The length and order of items depends on the model response. Use the output_text property instead of assuming the first item is an assistant message."
-  );
-
   // Rename "Response" to "ResponseObject" to avoid conflict with Azure.Response
   @@clientName(OpenAI.Response, "ResponseObject");
 
@@ -305,146 +81,12 @@ namespace Azure.AI.Projects {
   // ResponseHandler implementations.
   // ============================================================================
 
-  // --- ResponseStreamEvent subtypes (58 concrete types) ---
-  @@usage(OpenAI.ResponseAudioDeltaEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseAudioDoneEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseAudioTranscriptDeltaEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseAudioTranscriptDoneEvent, Usage.input | Usage.output);
-  @@usage(
-    OpenAI.ResponseCodeInterpreterCallCodeDeltaEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseCodeInterpreterCallCodeDoneEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseCodeInterpreterCallCompletedEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseCodeInterpreterCallInProgressEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseCodeInterpreterCallInterpretingEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(OpenAI.ResponseCompletedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseContentPartAddedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseContentPartDoneEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseCreatedEvent, Usage.input | Usage.output);
-  @@usage(
-    OpenAI.ResponseCustomToolCallInputDeltaEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseCustomToolCallInputDoneEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(OpenAI.ResponseErrorEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseFailedEvent, Usage.input | Usage.output);
-  @@usage(
-    OpenAI.ResponseFileSearchCallCompletedEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseFileSearchCallInProgressEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseFileSearchCallSearchingEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseFunctionCallArgumentsDeltaEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseFunctionCallArgumentsDoneEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseImageGenCallCompletedEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseImageGenCallGeneratingEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseImageGenCallInProgressEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseImageGenCallPartialImageEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(OpenAI.ResponseIncompleteEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseInProgressEvent, Usage.input | Usage.output);
-  @@usage(
-    OpenAI.ResponseMCPCallArgumentsDeltaEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(OpenAI.ResponseMCPCallArgumentsDoneEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseMCPCallCompletedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseMCPCallFailedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseMCPCallInProgressEvent, Usage.input | Usage.output);
-  @@usage(
-    OpenAI.ResponseMCPListToolsCompletedEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(OpenAI.ResponseMCPListToolsFailedEvent, Usage.input | Usage.output);
-  @@usage(
-    OpenAI.ResponseMCPListToolsInProgressEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(OpenAI.ResponseOutputItemAddedEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseOutputItemDoneEvent, Usage.input | Usage.output);
-  @@usage(
-    OpenAI.ResponseOutputTextAnnotationAddedEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(OpenAI.ResponseQueuedEvent, Usage.input | Usage.output);
-  @@usage(
-    OpenAI.ResponseReasoningSummaryPartAddedEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseReasoningSummaryPartDoneEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseReasoningSummaryTextDeltaEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseReasoningSummaryTextDoneEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(OpenAI.ResponseReasoningTextDeltaEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseReasoningTextDoneEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseRefusalDeltaEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseRefusalDoneEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseTextDeltaEvent, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseTextDoneEvent, Usage.input | Usage.output);
-  @@usage(
-    OpenAI.ResponseWebSearchCallCompletedEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseWebSearchCallInProgressEvent,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    OpenAI.ResponseWebSearchCallSearchingEvent,
-    Usage.input | Usage.output
-  );
-
-  // --- Response, ResponseError, Error, and CreateResponse ---
-  @@usage(OpenAI.Response, Usage.input | Usage.output);
-  @@usage(OpenAI.ResponseError, Usage.input | Usage.output);
+  // --- Error and CreateResponse ---
   @@usage(OpenAI.Error, Usage.input | Usage.output);
+  // CreateResponse is alt-typed to the OpenAI SDK, but this usage still has to be
+  // declared: it is what marks the request-side types reachable only through it
+  // (session affinity, routing, moderation, ...) as inputs. Dropping it leaves
+  // those types without Input usage.
   @@usage(OpenAI.CreateResponse, Usage.input | Usage.output);
 
   // --- API envelope types (server needs to construct these) ---
@@ -501,78 +143,6 @@ namespace Azure.AI.Projects {
   );
   @@access(OpenAI.OutputMessageContentRefusalContent, Access.internal);
   @@access(OpenAI.OutputMessageContent, Access.internal);
-  @@access(OpenAI.ItemOutputMessage, Access.internal);
-
-  // --- Azure.AI.Projects OutputItem subtypes (24 concrete types) ---
-  @@usage(Azure.AI.Projects.A2AToolCall, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.A2AToolCallOutput, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.AzureAISearchToolCall, Usage.input | Usage.output);
-  @@usage(
-    Azure.AI.Projects.AzureAISearchToolCallOutput,
-    Usage.input | Usage.output
-  );
-  @@usage(Azure.AI.Projects.AzureFunctionToolCall, Usage.input | Usage.output);
-  @@usage(
-    Azure.AI.Projects.AzureFunctionToolCallOutput,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    Azure.AI.Projects.BingCustomSearchToolCall,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    Azure.AI.Projects.BingCustomSearchToolCallOutput,
-    Usage.input | Usage.output
-  );
-  @@usage(Azure.AI.Projects.BingGroundingToolCall, Usage.input | Usage.output);
-  @@usage(
-    Azure.AI.Projects.BingGroundingToolCallOutput,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    Azure.AI.Projects.BrowserAutomationToolCall,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    Azure.AI.Projects.BrowserAutomationToolCallOutput,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    Azure.AI.Projects.FabricDataAgentToolCall,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    Azure.AI.Projects.FabricDataAgentToolCallOutput,
-    Usage.input | Usage.output
-  );
-  @@usage(Azure.AI.Projects.MemoryCommandToolCall, Usage.input | Usage.output);
-  @@usage(
-    Azure.AI.Projects.MemoryCommandToolCallOutput,
-    Usage.input | Usage.output
-  );
-  @@usage(Azure.AI.Projects.MemorySearchToolCall, Usage.input | Usage.output);
-  @@usage(
-    Azure.AI.Projects.OAuthConsentRequestOutputItem,
-    Usage.input | Usage.output
-  );
-  @@usage(Azure.AI.Projects.OpenApiToolCall, Usage.input | Usage.output);
-  @@usage(Azure.AI.Projects.OpenApiToolCallOutput, Usage.input | Usage.output);
-  @@usage(
-    Azure.AI.Projects.SharepointGroundingToolCall,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    Azure.AI.Projects.SharepointGroundingToolCallOutput,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    Azure.AI.Projects.StructuredOutputsOutputItem,
-    Usage.input | Usage.output
-  );
-  @@usage(
-    Azure.AI.Projects.WorkflowActionOutputItem,
-    Usage.input | Usage.output
-  );
 
   // ---------------------------------------------------------------------
   // Shared-type ownership: consume concrete models from their owning
@@ -1069,15 +639,37 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+  @@alternateType(
+    OAuthConsentRequestOutputItem,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.OAuthConsentRequestResponseItem",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    StructuredOutputsOutputItem,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.AgentStructuredOutputsResponseItem",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    WorkflowActionOutputItem,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.AgentWorkflowPreviewActionResponseItem",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-beta.1",
+    },
+    "csharp"
+  );
 }
 
-// Types declared in the Azure.AI.Projects TypeSpec namespace that are still part of the
-// AgentServer.Responses wire contract. Without an explicit usage they are unreachable from
-// this package's operations and are therefore not emitted.
-@@usage(
-  Azure.AI.Projects.StructuredOutputsOutputItem,
-  Usage.input | Usage.output
-);
+// ApiErrorResponse is part of the AgentServer.Responses wire contract but is unreachable from
+// this package's operations, so it needs an explicit usage to be emitted.
 @@usage(Azure.AI.Projects.ApiErrorResponse, Usage.input | Usage.output);
 
 // These are surfaced on this package's public hosting API (ResponseStreamEvent.EventType and

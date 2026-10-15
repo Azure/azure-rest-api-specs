@@ -39,8 +39,8 @@ linter:
     # with --warn-as-error. The generated ../openai/*/routes.generated.tsp imports already
     # carry in-source suppressions. Each rule was verified by compiling with it enabled;
     # rules that raised nothing were removed, and warnings in this package's own client.tsp
-    # were fixed rather than suppressed (except casing-style, see below).
-    "@azure-tools/typespec-azure-core/casing-style": "Shared sources use snake_case wire names and names of the form XxxxAIXxxx; the only occurrence in this package is the snake_case wire name sequence_number in client.tsp."
+    # were fixed rather than suppressed.
+    "@azure-tools/typespec-azure-core/casing-style": "Shared sources use snake_case wire names (and names of the form XxxxAIXxxx) in ../agents, ../common, ../memory-stores, ../openai/responses, ../skills, ../toolboxes and ../tools; this package's client.tsp declares none."
     "@azure-tools/typespec-azure-core/no-string-discriminator": "Shared sources declare plain string discriminators."
     "@azure-tools/typespec-azure-core/bad-record-type": "Shared sources use Record<unknown> rather than Record<string>."
     "@azure-tools/typespec-azure-core/documentation-required": "Shared OpenAI models in ../openai/responses, ../agents and ../tools have no docstrings."
