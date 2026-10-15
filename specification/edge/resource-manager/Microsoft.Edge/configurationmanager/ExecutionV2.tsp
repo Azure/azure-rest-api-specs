@@ -85,7 +85,9 @@ interface ExecutionV2s {
   @doc("Create or update ExecutionV2 Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ExecutionV2>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("update an ExecutionV2 Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<ExecutionV2, ExecutionV2Properties>;
 
   @doc("Delete ExecutionV2 Resource")

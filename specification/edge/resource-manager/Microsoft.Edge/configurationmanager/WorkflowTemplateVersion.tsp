@@ -75,7 +75,9 @@ interface WorkflowTemplateVersions {
     }
   >;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("update a Workflow Template Version Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<
     WorkflowTemplateVersion,
     WorkflowTemplateVersionProperties,

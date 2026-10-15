@@ -123,6 +123,8 @@ namespace SplitIO.Experimentation {
   interface ExperimentationWorkspaces {
     get is ArmResourceRead<ExperimentationWorkspace>;
     create is ArmResourceCreateOrUpdateAsync<ExperimentationWorkspace>;
+    #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+    @patch(#{ implicitOptionality: true })
     update is ArmResourcePatchAsync<
       ExperimentationWorkspace,
       ExperimentationWorkspaceProperties

@@ -217,14 +217,18 @@ interface Investigations {
   @doc("Creates an Investigation.")
   createOrReplace is StandardResourceOperations.ResourceCreateOrReplace<Investigation>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Updates an Investigation.")
   @sharedRoute
   @removed(Versions.`2026-06-01`)
+  @patch(#{ implicitOptionality: true })
   createOrUpdate is StandardResourceOperations.ResourceCreateOrUpdate<Investigation>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Updates an Investigation.")
   @sharedRoute
   @added(Versions.`2026-06-01`)
+  @patch(#{ implicitOptionality: true })
   update is StandardResourceOperations.ResourceUpdate<Investigation>;
 
   @doc("Delete a Investigation.")

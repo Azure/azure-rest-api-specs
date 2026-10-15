@@ -204,8 +204,10 @@ interface SolutionTemplateVersions {
   @doc("Create or update a Solution Template Version Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SolutionTemplateVersion>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @added(Versions.v2026_03_01)
   @doc("Update a Solution Template Version Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<
     SolutionTemplateVersion,
     SolutionTemplateVersionProperties

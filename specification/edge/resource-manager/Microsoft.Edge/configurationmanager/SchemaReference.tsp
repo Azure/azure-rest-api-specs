@@ -39,7 +39,9 @@ interface SchemaReferences {
   @doc("Create or update a Schema Reference Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SchemaReference>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("update a Schema Reference Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<SchemaReference, SchemaReferenceProperties>;
 
   @doc("Delete a Schema Reference Resource")

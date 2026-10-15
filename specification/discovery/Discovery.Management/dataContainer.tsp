@@ -104,6 +104,8 @@ model DataContainerProperties {
 interface DataContainers {
   get is ArmResourceRead<DataContainer>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DataContainer>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<DataContainer, DataContainerProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<DataContainer>;
   listByResourceGroup is ArmResourceListByParent<DataContainer>;

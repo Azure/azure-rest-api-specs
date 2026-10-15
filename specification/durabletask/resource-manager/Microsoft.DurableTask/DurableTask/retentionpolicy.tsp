@@ -71,8 +71,10 @@ interface RetentionPolicies {
   @doc("Create or Update a Retention Policy")
   @errorsDoc("Validation error: required parameters are missing")
   createOrReplace is ArmResourceCreateOrReplaceAsync<RetentionPolicy>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Update a Retention Policy")
   @errorsDoc("Validation error: required parameters are missing")
+  @TypeSpec.Http.patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<RetentionPolicy, RetentionPolicyProperties>;
   @doc("Delete a Retention Policy")
   delete is ArmResourceDeleteWithoutOkAsync<RetentionPolicy>;

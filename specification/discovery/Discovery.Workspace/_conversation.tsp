@@ -76,16 +76,20 @@ interface Conversations {
     Conversation
   >;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Updates a Conversation.")
   @sharedRoute
   @removed(Versions.`2026-06-01`)
+  @patch(#{ implicitOptionality: true })
   update is StandardResourceOperations.ResourceCreateOrUpdate<Conversation>;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Versioned operation needs explicit operationId"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Updates a Conversation.")
   @sharedRoute
   @added(Versions.`2026-06-01`)
   @operationId("Conversations_Update")
+  @patch(#{ implicitOptionality: true })
   stableUpdate is StandardResourceOperations.ResourceUpdate<Conversation>;
 
   @doc("Deletes a Conversation.")

@@ -112,8 +112,10 @@ interface TextBlocklists {
   @doc("Returns text blocklist details.")
   getTextBlocklist is BlockOps.ResourceRead<TextBlocklist>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Create Or Update Text Blocklist")
   @doc("Updates a text blocklist. If the blocklistName does not exist, a new blocklist will be created.")
+  @patch(#{ implicitOptionality: true })
   createOrUpdateTextBlocklist is BlockOps.ResourceCreateOrUpdate<TextBlocklist>;
 
   @summary("Delete Text Blocklist By blocklistName")

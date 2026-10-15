@@ -43,8 +43,10 @@ model TestRunIdParam {
 
 @tag("Test")
 interface LoadTestAdministration {
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Create a new test or update an existing test by providing the test Id.")
   @doc("Create a new test or update an existing test by providing the test Id.")
+  @patch(#{ implicitOptionality: true })
   createOrUpdateTest is StandardResourceOperations.ResourceCreateOrUpdate<Test>;
 
   @summary("Delete a test by its test Id.")
@@ -260,8 +262,10 @@ interface LoadTestRun {
   getTestRun is StandardResourceOperations.ResourceRead<TestRun>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Create and start a new test run with the given test run Id.")
   @doc("Create and start a new test run with the given test run Id.")
+  @patch(#{ implicitOptionality: true })
   createOrUpdateTestRun is StandardResourceOperations.ResourceCreateOrUpdate<
     TestRun,
     QueryParametersTrait<OldTestRunIdQueryParam>
@@ -500,9 +504,11 @@ interface Operations {
 @tag("TestProfile")
 @removed(APIVersions.v2026_04_01)
 interface TestProfileAdministration {
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Create a new test profile or update an existing test profile.")
   @doc("Create a new test profile or update an existing test profile by providing the test profile Id.")
   @added(APIVersions.v2024_05_01_preview)
+  @patch(#{ implicitOptionality: true })
   createOrUpdateTestProfile is StandardResourceOperations.ResourceCreateOrUpdate<TestProfile>;
 
   @summary("Delete a test profile.")
@@ -535,9 +541,11 @@ interface TestProfileRunAdministration {
   getTestProfileRun is StandardResourceOperations.ResourceRead<TestProfileRun>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Create and start a new test profile run.")
   @doc("Create and start a new test profile run with the given test profile run Id.")
   @added(APIVersions.v2024_05_01_preview)
+  @patch(#{ implicitOptionality: true })
   createOrUpdateTestProfileRun is StandardResourceOperations.ResourceCreateOrUpdate<TestProfileRun>;
 
   @summary("Delete an existing load test profile run.")
@@ -573,8 +581,10 @@ interface TriggerAdministration {
   @doc("Get trigger details by trigger Id.")
   getTrigger is StandardResourceOperations.ResourceRead<Trigger>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Create a new trigger or update an existing trigger.")
   @doc("Create a new trigger or update an existing trigger by providing the trigger Id.")
+  @patch(#{ implicitOptionality: true })
   createOrUpdateTrigger is StandardResourceOperations.ResourceCreateOrUpdate<Trigger>;
 
   @summary("Delete a trigger by its trigger Id.")
@@ -597,9 +607,11 @@ interface NotificationRuleAdministration {
   @added(APIVersions.v2024_12_01_preview)
   getNotificationRule is StandardResourceOperations.ResourceRead<NotificationRule>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Create a new notification rule or update an existing notification rule.")
   @doc("Create a new notification rule or update an existing notification rule by providing the notification rule Id.")
   @added(APIVersions.v2024_12_01_preview)
+  @patch(#{ implicitOptionality: true })
   createOrUpdateNotificationRule is StandardResourceOperations.ResourceCreateOrUpdate<NotificationRule>;
 
   @summary("Delete a notification rule by its notification rule Id.")

@@ -43,6 +43,8 @@ model StorageAsset is TrackedResource<StorageAssetProperties> {
 interface StorageAssets {
   get is ArmResourceRead<StorageAsset>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<StorageAsset>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<StorageAsset, StorageAssetProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<StorageAsset>;
   listByStorageContainer is ArmResourceListByParent<StorageAsset>;

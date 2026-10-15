@@ -154,7 +154,9 @@ interface SolutionVersions {
   @doc("Create or update a Solution Version Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SolutionVersion>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Update a Solution Version Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<SolutionVersion, SolutionVersionProperties>;
 
   @doc("Delete a Solution Version Resource")

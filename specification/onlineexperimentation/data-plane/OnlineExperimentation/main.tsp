@@ -301,7 +301,9 @@ alias BodyParameter<T, TDoc extends valueof string> = {
 @doc("Fetches an experiment metric by ID.")
 op getMetric is Operations.ResourceRead<ExperimentMetric>;
 
+#suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
 @doc("Creates or updates an experiment metric.")
+@patch(#{ implicitOptionality: true })
 op createOrUpdateMetric is Operations.ResourceCreateOrUpdate<ExperimentMetric>;
 
 @doc("Validates an experiment metric definition.")

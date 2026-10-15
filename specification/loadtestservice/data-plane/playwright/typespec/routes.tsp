@@ -80,7 +80,9 @@ interface BrowserSessions {
   @doc("Lists browser sessions for the specified workspace ID. Supports OData query parameters such as $filter and $top. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID.")
   list is Operations.ResourceList<BrowserSession>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @added(Versions.v2026_06_01_preview)
   @doc("Creates or updates a browser session for the specified session and workspace ID. The sourceId and sourceType are supplied through request headers. Requires Bearer JWT access token provided by Entra ID.")
+  @patch(#{ implicitOptionality: true })
   createOrUpdate is Operations.ResourceCreateOrUpdate<PatchRequestBrowserSession>;
 }

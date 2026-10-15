@@ -42,10 +42,12 @@ interface GoalAssignmentsOld {
   >;
 
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @route(ServiceGroupRoute)
   @doc("Update a GoalAssignment Deprecated: API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version.")
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<
     GoalAssignment,
     GoalAssignmentProperties,
@@ -147,9 +149,11 @@ interface GoalAssignments {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Updates a goal assignment.")
   @route(ServiceGroupRoute)
   @sharedRoute
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<
     GoalAssignment,
     GoalAssignmentProperties,
@@ -240,9 +244,11 @@ interface GoalTemplates {
   >;
 
   #deprecated "GoalTemplate is deprecated and removed in 2026-09-30-preview."
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Updates a goal template. Deprecated: the GoalTemplate resource type is deprecated and is removed in 2026-09-30-preview. Set resiliency intent directly on the GoalAssignment (requireZonalResiliency, requireRegionalResiliency) and read resource posture from GoalResource (zonalResiliency, regionalResiliency) instead.")
   @route(ServiceGroupRoute)
   @summary("Deprecated. Set resiliency intent on GoalAssignment and read resource posture from GoalResource instead.")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<
     GoalTemplate,
     GoalTemplateProperties,

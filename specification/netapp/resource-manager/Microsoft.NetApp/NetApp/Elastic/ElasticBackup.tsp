@@ -220,6 +220,7 @@ interface ElasticBackups {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBackup>;
 
   /** Patch an elastic Backup under the Elastic Backup Vault */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
@@ -231,6 +232,7 @@ interface ElasticBackups {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<
     ElasticBackup,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

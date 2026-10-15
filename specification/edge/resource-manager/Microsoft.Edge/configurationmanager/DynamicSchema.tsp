@@ -59,7 +59,9 @@ interface DynamicSchemas {
   @doc("Create or update a DynamicSchema Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DynamicSchema>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("update a DynamicSchema Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<DynamicSchema, DynamicSchemaProperties>;
 
   @doc("Delete a DynamicSchema Resource")

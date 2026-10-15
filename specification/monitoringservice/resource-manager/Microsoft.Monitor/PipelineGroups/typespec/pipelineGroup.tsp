@@ -297,7 +297,9 @@ interface PipelineGroups {
   @doc("Delete a pipeline group instance.")
   delete is ArmResourceDeleteWithoutOkAsync<PipelineGroup>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Updates a pipeline group instance")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<PipelineGroup, PipelineGroupProperties>;
 
   @doc("Lists all workspaces in the specified resource group")

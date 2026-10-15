@@ -48,7 +48,9 @@ interface SchemaVersions {
   @doc("Create or update a Schema Version Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SchemaVersion>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("update a Schema Version Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<SchemaVersion, SchemaVersionProperties>;
 
   @doc("Delete a Schema Version Resource")

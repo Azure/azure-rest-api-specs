@@ -45,7 +45,9 @@ interface WorkflowTemplates {
   @doc("Create or update a Workflow Template Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<WorkflowTemplate>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("update a Workflow Template Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<WorkflowTemplate, WorkflowTemplateProperties>;
 
   @doc("Delete a Workflow Template Resource")

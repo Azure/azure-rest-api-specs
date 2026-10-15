@@ -33,7 +33,9 @@ interface NetworkSettingsResources {
   @doc("Creates a GitHub.Network networkSettings resource with the specified create parameters.")
   create is ArmResourceCreateOrReplaceSync<NetworkSettingsResource>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Updates the properties of an existing GitHub.Network networkSettings resource with the specified update parameters.")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<
     NetworkSettingsResource,
     NetworkSettingsResourceProperties

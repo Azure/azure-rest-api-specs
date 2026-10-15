@@ -72,7 +72,9 @@ interface DynamicConfigurationVersions {
   @doc("Create or update a Dynamic Configuration Version Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DynamicConfigurationVersion>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("update a Dynamic Configuration Version Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<
     DynamicConfigurationVersion,
     DynamicConfigurationVersionProperties

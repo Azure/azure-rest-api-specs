@@ -84,7 +84,9 @@ interface EventGridFilters {
   @doc("Create or Update Event Grid Filter Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<EventGridFilter>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Update Event Grid Filter Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<EventGridFilter, EventGridFilterProperties>;
 
   @doc("Delete Event Grid Filter Resource")

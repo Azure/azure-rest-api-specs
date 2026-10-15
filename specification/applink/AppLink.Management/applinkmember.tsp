@@ -224,11 +224,13 @@ interface AppLinkMembers {
   get is ArmResourceRead<AppLinkMember>;
   @doc("Create a member of an Azure Kubernetes Application Network resource.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<AppLinkMember>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Update a member of an Azure Kubernetes Application Network resource.")
   @removed(Versions.v2026_08_01_preview)
   @renamedFrom(Versions.v2026_08_01_preview, "update")
   @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @patch(#{ implicitOptionality: true })
   updateLegacy is ArmResourcePatchAsync<
     AppLinkMember,
     AppLinkMemberProperties,
