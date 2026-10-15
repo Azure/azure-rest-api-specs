@@ -493,13 +493,13 @@ model MicrosoftCopilotHarness extends AgentHarness {
   type: "microsoft_copilot_preview";
 }
 
-@doc("The legacy GitHub Copilot managed harness retained for compatibility with existing prompt agents.")
+@doc("The legacy GitHub Copilot managed harness retained for compatibility. Use `MicrosoftCopilotHarness` for new prompt agents.")
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
 )
 model GitHubCopilotHarness extends AgentHarness {
-  @doc("The type of managed harness. Always `github_copilot_preview`.")
+  @doc("The legacy type of managed harness. Always `github_copilot_preview`; use `microsoft_copilot_preview` for new prompt agents.")
   type: "github_copilot_preview";
 }
 
