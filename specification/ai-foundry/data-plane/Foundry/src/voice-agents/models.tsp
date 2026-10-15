@@ -630,7 +630,7 @@ model CreateTwilioTelephonyBindingRequest
   ...TwilioTelephonyBindingProperties;
 }
 
-@doc("The request to create an inbound SIP binding. New SIP bindings are active. The referenced SipInbound project connection uses connection authType CustomKeys and selects digest or ip_acl through metadata.sip_auth_type. It owns SIP credentials and any source_cidrs; they are not binding fields. For ip_acl, a null or empty source_cidrs value allows all source IP addresses; a non-empty array restricts access to the listed addresses and networks.")
+@doc("The request to create an inbound SIP binding. New SIP bindings are active. The referenced SipInbound project connection uses connection authType CustomKeys and selects digest or ip_acl through metadata.sip_auth_type. It owns SIP credentials, including credentials.keys.source_cidrs for ip_acl; they are not binding fields. The source_cidrs credential is a comma-separated string. An empty string allows all source IP addresses; a non-empty string restricts access to the listed addresses and networks.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("CreateSipTelephonyBindingContent", "csharp")
 model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
@@ -1454,7 +1454,7 @@ model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
   destination: TelephonyOutboundDestination;
 
-  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SipOutbound. A SipOutbound connection uses connection authType CustomKeys and selects digest or ip_acl through metadata.sip_auth_type. Digest uses a username and password; ip_acl uses source_cidrs. For ip_acl, a null or empty source_cidrs value allows all source IP addresses; a non-empty array restricts access to the listed addresses and networks. The call job does not carry these settings. No inbound telephony binding is required.")
+  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio, Azure Communication Services / Teams Phone extensibility, or SipOutbound. A SipOutbound connection uses connection authType CustomKeys and selects digest or ip_acl through metadata.sip_auth_type. Digest uses credentials.keys.username and credentials.keys.password; ip_acl uses credentials.keys.source_cidrs as a comma-separated string. An empty source_cidrs string allows all source IP addresses; a non-empty string restricts access to the listed addresses and networks. The call job does not carry these settings. No inbound telephony binding is required.")
   @minLength(1)
   @maxLength(256)
   connection_name: string;
