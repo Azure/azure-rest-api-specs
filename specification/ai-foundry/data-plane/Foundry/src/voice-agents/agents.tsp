@@ -792,7 +792,7 @@ union VoiceAgentInputTranscriptionModel {
   @doc("Azure AI Speech to text.")
   azure_speech: "azure-speech",
 
-  @doc("Azure AI Speech streaming transcription for cascaded text-model conversations only. Requires a nonempty `language`, such as `en-US`; comma-separated locales are supported. Supports `custom_speech` and `phrase_list`. Not supported with realtime speech-to-speech models or multimodal audio-input models. Selecting this model does not enable Dynamic VAD or add transcription event types.")
+  @doc("Azure AI Speech streaming transcription for cascaded text-model conversations only. Requires a nonempty `language`, such as `en-US`; comma-separated locales are supported. Supports `custom_speech` and `phrase_list`. Not supported with realtime speech-to-speech models.")
   azure_speech_streaming: "azure-speech-streaming",
 }
 
