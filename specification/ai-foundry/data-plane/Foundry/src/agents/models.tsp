@@ -1359,7 +1359,7 @@ model OtlpTelemetryEndpoint extends TelemetryEndpoint {
 
   @doc("The OTLP collector endpoint URL.")
   @example("https://my-collector.example.com/otlp")
-  endpoint: string;
+  endpoint: url;
 
   @doc("The transport protocol for the OTLP endpoint.")
   @example("Http")
