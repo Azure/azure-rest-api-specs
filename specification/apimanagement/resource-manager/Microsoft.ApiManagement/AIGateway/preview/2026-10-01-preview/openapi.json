@@ -4257,11 +4257,18 @@
         },
         "type": {
           "type": "string",
-          "description": "Resource type to check. When supplied, must be Microsoft.ApiManagement/aigateways."
+          "description": "Resource type to check.",
+          "enum": [
+            "Microsoft.ApiManagement/aigateways"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
       "required": [
-        "name"
+        "name",
+        "type"
       ]
     },
     "AiGatewayCheckNameAvailabilityResponse": {
@@ -4476,6 +4483,7 @@
       "properties": {
         "endpoint": {
           "type": "string",
+          "format": "uri",
           "description": "Provider base endpoint."
         },
         "authentication": {
@@ -4494,6 +4502,7 @@
       "properties": {
         "endpoint": {
           "type": "string",
+          "format": "uri",
           "description": "Provider base endpoint."
         },
         "authentication": {
@@ -4618,6 +4627,7 @@
       "properties": {
         "endpoint": {
           "type": "string",
+          "format": "uri",
           "description": "Foundry endpoint."
         },
         "resourceIds": {
@@ -4652,6 +4662,7 @@
       "properties": {
         "endpoint": {
           "type": "string",
+          "format": "uri",
           "description": "Foundry endpoint."
         },
         "resourceIds": {
@@ -5131,7 +5142,6 @@
       "type": "string",
       "description": "Result of name validation and availability checking.",
       "enum": [
-        "Valid",
         "Invalid",
         "AlreadyExists"
       ],
@@ -5139,11 +5149,6 @@
         "name": "AiGatewayNameAvailabilityReason",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Valid",
-            "value": "Valid",
-            "description": "The name is valid and available."
-          },
           {
             "name": "Invalid",
             "value": "Invalid",

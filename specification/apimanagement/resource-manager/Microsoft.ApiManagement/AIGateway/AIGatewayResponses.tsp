@@ -32,17 +32,14 @@ model AiGatewayCheckNameAvailabilityRequest {
   @maxLength(24)
   name: string;
 
-  /** Resource type to check. When supplied, must be Microsoft.ApiManagement/aigateways. */
-  type?: string;
+  /** Resource type to check. */
+  type: "Microsoft.ApiManagement/aigateways";
 }
 
 /** Result of name validation and availability checking. */
 @added(Versions.v2026_10_01_preview)
 union AiGatewayNameAvailabilityReason {
   string,
-
-  /** The name is valid and available. */
-  Valid: "Valid",
 
   /** The name does not satisfy gateway naming requirements. */
   Invalid: "Invalid",

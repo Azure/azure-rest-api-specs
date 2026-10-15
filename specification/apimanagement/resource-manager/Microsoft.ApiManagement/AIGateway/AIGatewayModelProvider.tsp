@@ -50,7 +50,7 @@ model AiGatewayManagedIdentityAuthentication {
 @added(Versions.v2026_10_01_preview)
 model AiGatewayFoundryProviderConfiguration {
   /** Foundry endpoint. */
-  endpoint?: string;
+  endpoint?: url;
 
   /** Cognitive Services account resource identifiers available to this provider. */
   resourceIds: Azure.Core.armResourceIdentifier<[
@@ -77,7 +77,7 @@ model AiGatewayCustomAuthentication {
 @added(Versions.v2026_10_01_preview)
 model AiGatewayCustomProviderConfiguration {
   /** Provider base endpoint. */
-  endpoint: string;
+  endpoint: url;
 
   /** Authentication configuration. */
   authentication: AiGatewayCustomAuthentication;
@@ -112,7 +112,7 @@ model AiGatewayFoundryAuthenticationUpdate {
 @added(Versions.v2026_10_01_preview)
 model AiGatewayFoundryProviderConfigurationUpdate {
   /** Foundry endpoint. */
-  endpoint?: string;
+  endpoint?: url;
 
   /** Cognitive Services account resource identifiers available to this provider. */
   resourceIds?: Azure.Core.armResourceIdentifier<[
@@ -139,7 +139,7 @@ model AiGatewayCustomAuthenticationUpdate {
 @added(Versions.v2026_10_01_preview)
 model AiGatewayCustomProviderConfigurationUpdate {
   /** Provider base endpoint. */
-  endpoint?: string;
+  endpoint?: url;
 
   /** Authentication configuration. */
   authentication?: AiGatewayCustomAuthenticationUpdate;
