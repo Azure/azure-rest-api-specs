@@ -1124,9 +1124,20 @@ union EvalRunOutputItemResultStatus {
     reason?: string,
 
     /** Additional details about the test criteria metric. */
-    properties?: Record<string>,
+    properties?: EvalRunOutputItemResultProperties,
   }
 );
+
+/** Structured and evaluator-specific details attached to an evaluation result. */
+@TypeSpec.OpenAPI.oneOf
+union EvalRunOutputItemResultProperties {
+  /** Existing string-valued properties for legacy evaluators, including separate safety metric evidence. */
+  legacy: Record<string>,
+
+  /** Mode-specific ordinary rubric judgments without an additional scoring wrapper. */
+  @added(Versions.v1)
+  rubric: RubricResultProperties,
+}
 
 /** A named metric result for an evaluation run output item. One safety evaluator reports two entries, one for each permissibility group, with no overall safety aggregate. */
 @summary("EvalRunOutputItemResult")
@@ -1166,11 +1177,7 @@ model EvalRunOutputItemResult {
   reason?: string;
 
   /** Additional details about the test criteria metric. */
-  properties?: Record<string>;
-
-  /** The ordinary rubric's aggregate scoring detail. Safety rubrics report two independent named metric results instead and do not publish this as an overall safety score. */
-  @added(Versions.v1)
-  rubric_scoring?: RubricScoringResult;
+  properties?: EvalRunOutputItemResultProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"

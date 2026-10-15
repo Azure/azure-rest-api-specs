@@ -134,12 +134,10 @@ const RubricScoringRequiredPreviews = #{
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
 union RubricScoringMode {
-  string,
-
-  @doc("Use Boolean judgments without weights or thresholds. Ordinary rubrics require every applicable check to pass; safety rubrics report permissible and impermissible behavior violations separately.")
+  @doc("Ordinary rubrics require every applicable check to pass. Any failed check fails the rubric. Configured dimension weights are not supported; pass_threshold must be omitted or 1. The aggregate score is 1 for pass or 0 for fail. Safety rubrics instead report permissible and impermissible behavior violations separately, without an overall threshold or aggregate score.")
   boolean: "boolean",
 
-  @doc("Grade applicable quality dimensions from 1 through 5, with optional relative weights.")
+  @doc("Grade applicable rubric dimensions from 1 through 5, with optional relative weights.")
   likert: "likert",
 }
 
@@ -155,49 +153,17 @@ model RubricScoring {
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
 union RubricScoringDecision {
-  string,
-
   @doc("Applicable dimensions meet the selected scoring rule.")
   pass: "pass",
 
   @doc("The selected scoring rule fails.")
   fail: "fail",
 
-  @doc("No quality dimension applies and no known failure establishes rejection.")
+  @doc("No rubric dimension applies.")
   not_applicable: "not_applicable",
-
-  @doc("No known failure establishes rejection, but evidence is insufficient.")
-  indeterminate: "indeterminate",
 }
 
-@doc("Explainable aggregate results for an ordinary rubric. Boolean scoring requires every applicable check to pass; Likert scoring compares the weighted average with the threshold. Safety rubric results instead contain two named metric entries, not this overall aggregate.")
-@added(Versions.v1)
-@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
-model RubricScoringResult {
-  @doc("The resolved scoring mode.")
-  mode: RubricScoringMode;
-
-  @doc("Quality score, equal to the top-level score when known. Rating uses a normalized 0-1 value; Boolean uses 1 for quality pass and 0 for quality fail, never a fraction of passed checks. Absent for unknown or N/A quality.")
-  @minValue(0)
-  @maxValue(1)
-  quality_score?: float64;
-
-  @doc("Whether the quality score meets its threshold. Absent when quality is unavailable.")
-  quality_passed?: boolean;
-
-  @doc("The configured rating threshold. Required for rating and absent for Boolean.")
-  @minValue(0)
-  @maxValue(1)
-  quality_threshold?: float32;
-
-  @doc("Overall decision from the selected scoring rule.")
-  decision: RubricScoringDecision;
-
-  @doc("One result list for every dimension, using the rubric's scoring mode.")
-  dimension_results: RubricDimensionResult[];
-}
-
-@doc("A typed result for one dimension in the unified rubric.")
+@doc("Fields shared by Boolean and Likert results for one rubric dimension.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
 model RubricDimensionResult {
@@ -207,31 +173,86 @@ model RubricDimensionResult {
   @doc("Whether the dimension applies.")
   applicable: boolean;
 
-  @doc("Known Boolean verdict. Absent for N/A or insufficient evidence and for rating dimensions.")
+  @doc("Brief evidence-based explanation.")
+  reason?: string;
+}
+
+@doc("A Boolean result for one rubric dimension.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model BooleanRubricDimensionResult {
+  ...RubricDimensionResult;
+
+  @doc("Boolean verdict. Required when the dimension is applicable; absent for N/A.")
   passed?: boolean;
+}
 
-  @doc("Applicable Likert grade. Absent for Boolean dimensions.")
-  @minValue(1)
-  @maxValue(5)
-  raw_score?: int32;
+@doc("A Likert result for one rubric dimension.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model LikertRubricDimensionResult {
+  ...RubricDimensionResult;
 
-  @doc("Explicitly configured rating weight. Omitted for every dimension when weights are implicit, and always absent for Boolean dimensions. If configured, all rating dimensions include a weight.")
+  @doc("Explicitly configured Likert weight. Omitted for every dimension when weights are implicit. If configured, every dimension includes a weight.")
   @minValue(1)
   @maxValue(10)
   weight?: int32;
 
-  @doc("Normalized rating weight among applicable rating dimensions.")
+  @doc("Normalized weight among applicable Likert dimensions.")
   @minValue(0)
   @maxValue(1)
   effective_weight?: float64;
 
-  @doc("Contribution to the rating aggregate.")
+  @doc("Contribution to the normalized Likert aggregate: effective_weight * (raw_score - 1) / 4.")
   @minValue(0)
   @maxValue(1)
   contribution?: float64;
 
-  @doc("Brief evidence-based explanation.")
-  reason?: string;
+  @doc("Applicable Likert grade. Absent for N/A.")
+  @minValue(1)
+  @maxValue(5)
+  raw_score?: int32;
+}
+
+@doc("Flat result properties for explicit Boolean rubric scoring.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model BooleanRubricResultProperties {
+  @doc("The resolved Boolean scoring mode.")
+  mode: "boolean";
+
+  @doc("Overall decision from the Boolean scoring rule.")
+  decision: RubricScoringDecision;
+
+  @doc("One Boolean judgment for every configured dimension.")
+  dimension_results: BooleanRubricDimensionResult[];
+
+  ...Record<string>;
+}
+
+@doc("Flat result properties for explicit Likert rubric scoring.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model LikertRubricResultProperties {
+  @doc("The resolved Likert scoring mode.")
+  mode: "likert";
+
+  @doc("Overall decision from the Likert scoring rule.")
+  decision: RubricScoringDecision;
+
+  @doc("One Likert judgment for every configured dimension.")
+  dimension_results: LikertRubricDimensionResult[];
+
+  ...Record<string>;
+}
+
+@doc("Flat rubric result properties selected by the existing mode field.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "mode" })
+union RubricResultProperties {
+  boolean: BooleanRubricResultProperties,
+  likert: LikertRubricResultProperties,
 }
 
 @doc("One measurable criterion within a rubric. Quality criteria may use rating weights; safety criteria classify a behavior as permissible or impermissible.")
@@ -254,7 +275,7 @@ model Dimension {
   @maxValue(10)
   legacy_weight: int32;
 
-  @doc("Optional configured rating weight. For new scoring definitions, omit every weight for equal contribution or supply a weight for every dimension. Partially weighted definitions are rejected, including a mix of explicit unit weights and omitted weights. Boolean mode rejects weights. No schema default is emitted.")
+  @doc("Optional configured weight for legacy or Likert scoring. For Likert, omit every weight for equal contribution or supply a weight for every dimension; partially weighted definitions are rejected. Boolean scoring rejects every configured weight, including explicit unit weights. No schema default is emitted.")
   @added(Versions.v1)
   @minValue(1)
   @maxValue(10)
@@ -278,7 +299,7 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   @maxValue(1.0)
   legacy_pass_threshold?: float32 = 0.5;
 
-  @doc("Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field.")
+  @doc("Optional normalized threshold for Likert scoring, interpreted as 0.5 when omitted. Ordinary Boolean scoring requires all applicable checks to pass: omit this field or set it to 1; its effective threshold is 1 and other values are rejected. Safety rubrics omit this field and report two separate metrics without an overall threshold.")
   @added(Versions.v1)
   @minValue(0.0)
   @maxValue(1.0)
@@ -422,6 +443,12 @@ model EvaluatorGenerationInputs {
   @added(Versions.v1)
   scoring?: RubricScoring;
 
+  @doc("Optional normalized Likert threshold: omission uses 0.5 for fresh generation and inherits the saved threshold on regeneration. For ordinary Boolean generation, omit this field or set it to 1; other values are rejected and its all-pass threshold is fixed at 1. Safety generation omits this field because its two violation metrics have no overall threshold.")
+  @added(Versions.v1)
+  @minValue(0.0)
+  @maxValue(1.0)
+  pass_threshold?: float32;
+
   @doc("Caller-approved dimensions to preserve while generating other checks. Omission preserves prior approved dimensions on regeneration; an explicit list replaces the fixed set. Safety fixed dimensions require an explicit permissible Boolean, omit weights, and preserve classification as part of their policy meaning.")
   @added(Versions.v1)
   dimensions?: Dimension[];
@@ -544,6 +571,23 @@ model EvaluatorGenerationJob is JobLike<EvaluatorVersion, never> {
 
   @doc("Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.")
   evaluator_description?: string;
+
+  @doc("Rubric scoring selected for this generation attempt, including an inherited saved mode. Omitted for legacy generation.")
+  @added(Versions.v1)
+  @visibility(Lifecycle.Read)
+  scoring?: RubricScoring;
+
+  @doc("Normalized pass threshold supplied or inherited for this generation attempt. Omitted when no threshold was supplied or saved. Boolean scoring always uses an effective threshold of 1.")
+  @added(Versions.v1)
+  @visibility(Lifecycle.Read)
+  @minValue(0.0)
+  @maxValue(1.0)
+  pass_threshold?: float32;
+
+  @doc("Caller-approved dimensions fixed for this generation attempt, not the complete generated result. Omission retains normal regeneration ownership handling; an empty list explicitly clears the fixed set.")
+  @added(Versions.v1)
+  @visibility(Lifecycle.Read)
+  dimensions?: Dimension[];
 
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)

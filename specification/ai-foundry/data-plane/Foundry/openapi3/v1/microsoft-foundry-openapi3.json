@@ -38167,6 +38167,74 @@
         },
         "description": "Blob reference details."
       },
+      "BooleanRubricDimensionResult": {
+        "type": "object",
+        "required": [
+          "id",
+          "applicable"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The dimension identifier."
+          },
+          "applicable": {
+            "type": "boolean",
+            "description": "Whether the dimension applies."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Brief evidence-based explanation."
+          },
+          "passed": {
+            "type": "boolean",
+            "description": "Boolean verdict. Required when the dimension is applicable; absent for N/A."
+          }
+        },
+        "description": "A Boolean result for one rubric dimension.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "BooleanRubricResultProperties": {
+        "type": "object",
+        "required": [
+          "mode",
+          "decision",
+          "dimension_results"
+        ],
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "boolean"
+            ],
+            "description": "The resolved Boolean scoring mode."
+          },
+          "decision": {
+            "$ref": "#/components/schemas/RubricScoringDecision",
+            "description": "Overall decision from the Boolean scoring rule."
+          },
+          "dimension_results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BooleanRubricDimensionResult"
+            },
+            "description": "One Boolean judgment for every configured dimension."
+          }
+        },
+        "unevaluatedProperties": {
+          "type": "string"
+        },
+        "description": "Flat result properties for explicit Boolean rubric scoring.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "BotServiceAuthorizationScheme": {
         "type": "object",
         "required": [
@@ -40716,7 +40784,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 10,
-            "description": "Optional configured rating weight. For new scoring definitions, omit every weight for equal contribution or supply a weight for every dimension. Partially weighted definitions are rejected, including a mix of explicit unit weights and omitted weights. Boolean mode rejects weights. No schema default is emitted."
+            "description": "Optional configured weight for legacy or Likert scoring. For Likert, omit every weight for equal contribution or supply a weight for every dimension; partially weighted definitions are rejected. Boolean scoring rejects every configured weight, including explicit unit weights. No schema default is emitted."
           },
           "always_applicable": {
             "type": "boolean",
@@ -41398,20 +41466,27 @@
             "description": "The reason for the test criteria metric."
           },
           "properties": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "string"
-            },
+            "$ref": "#/components/schemas/EvalRunOutputItemResultProperties",
             "description": "Additional details about the test criteria metric."
-          },
-          "rubric_scoring": {
-            "$ref": "#/components/schemas/RubricScoringResult",
-            "description": "The ordinary rubric's aggregate scoring detail. Safety rubrics report two independent named metric results instead and do not publish this as an overall safety score."
           }
         },
         "unevaluatedProperties": {},
         "description": "A named metric result for an evaluation run output item. One safety evaluator reports two entries, one for each permissibility group, with no overall safety aggregate.",
         "title": "EvalRunOutputItemResult"
+      },
+      "EvalRunOutputItemResultProperties": {
+        "oneOf": [
+          {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/schemas/RubricResultProperties"
+          }
+        ],
+        "description": "Structured and evaluator-specific details attached to an evaluation result."
       },
       "EvalRunOutputItemResultStatus": {
         "anyOf": [
@@ -42530,6 +42605,13 @@
             "$ref": "#/components/schemas/RubricScoring",
             "description": "Scoring choices for the generated evaluator. For quality, supplied scoring defaults to Likert; omitted weights on first creation yield equal contribution, and regeneration preserves saved choices. Omitting scoring preserves existing quality generation behavior. Safety generation resolves omitted scoring to Boolean and rejects a conflicting supplied mode; its dimensions use permissible rather than weights and its two metric results are not combined."
           },
+          "pass_threshold": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Optional normalized Likert threshold: omission uses 0.5 for fresh generation and inherits the saved threshold on regeneration. For ordinary Boolean generation, omit this field or set it to 1; other values are rejected and its all-pass threshold is fixed at 1. Safety generation omits this field because its two violation metrics have no overall threshold."
+          },
           "dimensions": {
             "type": "array",
             "items": {
@@ -42596,6 +42678,27 @@
           "evaluator_description": {
             "type": "string",
             "description": "Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models."
+          },
+          "scoring": {
+            "$ref": "#/components/schemas/RubricScoring",
+            "description": "Rubric scoring selected for this generation attempt, including an inherited saved mode. Omitted for legacy generation.",
+            "readOnly": true
+          },
+          "pass_threshold": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Normalized pass threshold supplied or inherited for this generation attempt. Omitted when no threshold was supplied or saved. Boolean scoring always uses an effective threshold of 1.",
+            "readOnly": true
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dimension"
+            },
+            "description": "Caller-approved dimensions fixed for this generation attempt, not the complete generated result. Omission retains normal regeneration ownership handling; an empty list explicitly clears the fixed set.",
+            "readOnly": true
           },
           "created_at": {
             "$ref": "#/components/schemas/FoundryTimestamp",
@@ -44026,6 +44129,11 @@
                 "idle_timeout_seconds": 300
               }
             ]
+          },
+          "enable_memory_snapshot": {
+            "type": "boolean",
+            "description": "Whether this agent version uses memory snapshots. Sessions for a snapshot-enabled version start from a snapshot of the agent's initialized process rather than starting the process from its image. Defaults to false.",
+            "default": false
           }
         },
         "allOf": [
@@ -44810,6 +44918,98 @@
           }
         },
         "description": "Run-wide end-to-end latency percentiles for the evaluation target."
+      },
+      "LikertRubricDimensionResult": {
+        "type": "object",
+        "required": [
+          "id",
+          "applicable"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The dimension identifier."
+          },
+          "applicable": {
+            "type": "boolean",
+            "description": "Whether the dimension applies."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Brief evidence-based explanation."
+          },
+          "weight": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 10,
+            "description": "Explicitly configured Likert weight. Omitted for every dimension when weights are implicit. If configured, every dimension includes a weight."
+          },
+          "effective_weight": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Normalized weight among applicable Likert dimensions."
+          },
+          "contribution": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Contribution to the normalized Likert aggregate: effective_weight * (raw_score - 1) / 4."
+          },
+          "raw_score": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Applicable Likert grade. Absent for N/A."
+          }
+        },
+        "description": "A Likert result for one rubric dimension.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "LikertRubricResultProperties": {
+        "type": "object",
+        "required": [
+          "mode",
+          "decision",
+          "dimension_results"
+        ],
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "likert"
+            ],
+            "description": "The resolved Likert scoring mode."
+          },
+          "decision": {
+            "$ref": "#/components/schemas/RubricScoringDecision",
+            "description": "Overall decision from the Likert scoring rule."
+          },
+          "dimension_results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LikertRubricDimensionResult"
+            },
+            "description": "One Likert judgment for every configured dimension."
+          }
+        },
+        "unevaluatedProperties": {
+          "type": "string"
+        },
+        "description": "Flat result properties for explicit Likert rubric scoring.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "LoraConfig": {
         "type": "object",
@@ -87687,7 +87887,7 @@
             "format": "float",
             "minimum": 0,
             "maximum": 1,
-            "description": "Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field."
+            "description": "Optional normalized threshold for Likert scoring, interpreted as 0.5 when omitted. Ordinary Boolean scoring requires all applicable checks to pass: omit this field or set it to 1; its effective threshold is 1 and other values are rejected. Safety rubrics omit this field and report two separate metrics without an overall threshold."
           },
           "scoring": {
             "$ref": "#/components/schemas/RubricScoring",
@@ -87700,65 +87900,6 @@
           }
         ],
         "description": "Rubric evaluator definition. Ordinary quality rubrics report one aggregate. Safety rubrics require Boolean scoring and an explicit permissible classification on every dimension, and report impermissible_behavior_violated and permissible_behavior_violated as two independent lower-is-better metrics. Safety rubrics have no weights, threshold, or combined safety score."
-      },
-      "RubricDimensionResult": {
-        "type": "object",
-        "required": [
-          "id",
-          "applicable"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The dimension identifier."
-          },
-          "applicable": {
-            "type": "boolean",
-            "description": "Whether the dimension applies."
-          },
-          "passed": {
-            "type": "boolean",
-            "description": "Known Boolean verdict. Absent for N/A or insufficient evidence and for rating dimensions."
-          },
-          "raw_score": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 5,
-            "description": "Applicable Likert grade. Absent for Boolean dimensions."
-          },
-          "weight": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 10,
-            "description": "Explicitly configured rating weight. Omitted for every dimension when weights are implicit, and always absent for Boolean dimensions. If configured, all rating dimensions include a weight."
-          },
-          "effective_weight": {
-            "type": "number",
-            "format": "double",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "Normalized rating weight among applicable rating dimensions."
-          },
-          "contribution": {
-            "type": "number",
-            "format": "double",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "Contribution to the rating aggregate."
-          },
-          "reason": {
-            "type": "string",
-            "description": "Brief evidence-based explanation."
-          }
-        },
-        "description": "A typed result for one dimension in the unified rubric.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
       },
       "RubricGenerationInputQualityWarning": {
         "type": "object",
@@ -87846,6 +87987,30 @@
         ],
         "description": "Warning source attribution for a rubric-generation input-quality warning. Per-source values (`prompt`, `agent`, `dataset`) match the source category visible to the generation runtime. `aggregate` is a synthetic value used only for warnings computed across successfully resolved sources. `traces` is not exposed because trace sources resolve into dataset content upstream."
       },
+      "RubricResultProperties": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/BooleanRubricResultProperties"
+          },
+          {
+            "$ref": "#/components/schemas/LikertRubricResultProperties"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "mode",
+          "mapping": {
+            "boolean": "#/components/schemas/BooleanRubricResultProperties",
+            "likert": "#/components/schemas/LikertRubricResultProperties"
+          }
+        },
+        "description": "Flat rubric result properties selected by the existing mode field.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "RubricScoring": {
         "type": "object",
         "properties": {
@@ -87863,19 +88028,11 @@
         }
       },
       "RubricScoringDecision": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "pass",
-              "fail",
-              "not_applicable",
-              "indeterminate"
-            ]
-          }
+        "type": "string",
+        "enum": [
+          "pass",
+          "fail",
+          "not_applicable"
         ],
         "description": "The deterministic overall rubric acceptance decision.",
         "x-ms-foundry-meta": {
@@ -87885,68 +88042,12 @@
         }
       },
       "RubricScoringMode": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "boolean",
-              "likert"
-            ]
-          }
+        "type": "string",
+        "enum": [
+          "boolean",
+          "likert"
         ],
         "description": "The judgment mode selected for an entire rubric. Safety rubrics use Boolean judgments with separately reported permissibility metrics.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "RubricScoringResult": {
-        "type": "object",
-        "required": [
-          "mode",
-          "decision",
-          "dimension_results"
-        ],
-        "properties": {
-          "mode": {
-            "$ref": "#/components/schemas/RubricScoringMode",
-            "description": "The resolved scoring mode."
-          },
-          "quality_score": {
-            "type": "number",
-            "format": "double",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "Quality score, equal to the top-level score when known. Rating uses a normalized 0-1 value; Boolean uses 1 for quality pass and 0 for quality fail, never a fraction of passed checks. Absent for unknown or N/A quality."
-          },
-          "quality_passed": {
-            "type": "boolean",
-            "description": "Whether the quality score meets its threshold. Absent when quality is unavailable."
-          },
-          "quality_threshold": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "The configured rating threshold. Required for rating and absent for Boolean."
-          },
-          "decision": {
-            "$ref": "#/components/schemas/RubricScoringDecision",
-            "description": "Overall decision from the selected scoring rule."
-          },
-          "dimension_results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RubricDimensionResult"
-            },
-            "description": "One result list for every dimension, using the rubric's scoring mode."
-          }
-        },
-        "description": "Explainable aggregate results for an ordinary rubric. Boolean scoring requires every applicable check to pass; Likert scoring compares the weighted average with the threshold. Safety rubric results instead contain two named metric entries, not this overall aggregate.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
@@ -95347,6 +95448,11 @@
             "type": "string",
             "description": "A label for this MCP server, used to identify it in tool calls."
           },
+          "server_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL for the MCP server. One of `server_url`, `connector_id`, or\n  `tunnel_id` must be provided."
+          },
           "authorization": {
             "type": "string",
             "description": "An OAuth access token that can be used with a remote MCP server, either\n  with a custom MCP server URL or a service connector. Your application\n  must handle the OAuth authorization flow and provide the token here."
@@ -95437,11 +95543,6 @@
               "mcp"
             ]
           },
-          "server_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL for the MCP server."
-          },
           "response_scheduling": {
             "$ref": "#/components/schemas/VoiceAgentToolResponseScheduling",
             "description": "When the MCP invocation creates a follow-up response. Defaults to `when_idle`.",
@@ -95453,7 +95554,7 @@
             "$ref": "#/components/schemas/VoiceAgentTool"
           }
         ],
-        "description": "An MCP tool available to a voice agent.",
+        "description": "An MCP tool available to a voice agent. Server endpoints use `server_url`; connector and tunnel identifiers are not supported.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -96525,36 +96626,87 @@
       },
       "VoiceResponse": {
         "type": "object",
-        "required": [
-          "id",
-          "conversation_id"
-        ],
         "properties": {
           "id": {
             "type": "string",
-            "description": "The unique id of the response."
+            "description": "The unique ID of the response, will look like `resp_1234`."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.response"
+            ],
+            "description": "The object type, must be `realtime.response`.",
+            "x-stainless-const": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "cancelled",
+              "failed",
+              "incomplete",
+              "in_progress"
+            ],
+            "description": "The final status of the response (`completed`, `cancelled`, `failed`, or\n  `incomplete`, `in_progress`)."
+          },
+          "status_details": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseStatusDetails",
+            "description": "Additional details about the status."
           },
           "output": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
             },
-            "description": "The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list."
+            "description": "The list of output items generated by the response."
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Metadata"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "usage": {
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsage",
+            "description": "Usage statistics for the Response, this will correspond to billing. A\n  Realtime API session will maintain a conversation context and append new\n  Items to the Conversation, thus output from previous turns (text and\n  audio tokens) will become the input for later turns."
           },
           "conversation_id": {
             "type": "string",
-            "description": "The id of the conversation this response belongs to."
+            "description": "Which conversation the response is added to, determined by the `conversation`\n  field in the `response.create` event. If `auto`, the response will be added to\n  the default conversation and the value of `conversation_id` will be an id like\n  `conv_1234`. If `none`, the response will not be added to any conversation and\n  the value of `conversation_id` will be `null`. If responses are being triggered\n  automatically by VAD the response will be added to the default conversation"
+          },
+          "output_modalities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "text",
+                "audio"
+              ]
+            },
+            "description": "The set of modalities the model used to respond, currently the only possible values are\n  `[\\\"audio\\\"]`, `[\\\"text\\\"]`. Audio output always include a text transcript. Setting the\n  output to mode `text` will disable audio output from the model."
+          },
+          "max_output_tokens": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.integer"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "inf"
+                ]
+              }
+            ],
+            "description": "Maximum number of output tokens for a single assistant response,\n  inclusive of tool calls, that was used in this response."
           },
           "audio": {
             "$ref": "#/components/schemas/VoiceResponseAudio",
             "description": "The audio configuration used for the response, including the voice and audio format used for output."
-          },
-          "metadata": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "string"
-            },
-            "description": "A set of key-value pairs attached to the response."
           },
           "temperature": {
             "type": "number",
@@ -96570,11 +96722,6 @@
             "description": "The Unix timestamp (in seconds) for when the response completed."
           }
         },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/VoiceResponseBase"
-          }
-        ],
         "description": "A persisted voice response representing one model inference turn within a conversation. In list results the\n`output` projection may be omitted; retrieve the\nfull response (`GET .../responses/{response_id}`) or the paged response-items route\n(`GET .../responses/{response_id}/items`) for its output items. `created_at`/`completed_at` are Foundry\ndurable ordering extensions.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -96618,69 +96765,6 @@
           }
         },
         "description": "The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceResponseBase": {
-        "type": "object",
-        "properties": {
-          "object": {
-            "type": "string",
-            "enum": [
-              "realtime.response"
-            ],
-            "description": "The object type, must be `realtime.response`.",
-            "x-stainless-const": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "completed",
-              "cancelled",
-              "failed",
-              "incomplete",
-              "in_progress"
-            ],
-            "description": "The final status of the response (`completed`, `cancelled`, `failed`, or\n  `incomplete`, `in_progress`)."
-          },
-          "status_details": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeResponseStatusDetails",
-            "description": "Additional details about the status."
-          },
-          "usage": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsage",
-            "description": "Usage statistics for the Response, this will correspond to billing. A\n  Realtime API session will maintain a conversation context and append new\n  Items to the Conversation, thus output from previous turns (text and\n  audio tokens) will become the input for later turns."
-          },
-          "output_modalities": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "text",
-                "audio"
-              ]
-            },
-            "description": "The set of modalities the model used to respond, currently the only possible values are\n  `[\\\"audio\\\"]`, `[\\\"text\\\"]`. Audio output always include a text transcript. Setting the\n  output to mode `text` will disable audio output from the model."
-          },
-          "max_output_tokens": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.integer"
-              },
-              {
-                "type": "string",
-                "enum": [
-                  "inf"
-                ]
-              }
-            ],
-            "description": "Maximum number of output tokens for a single assistant response,\n  inclusive of tool calls, that was used in this response."
-          }
-        },
-        "description": "Properties shared by persisted voice responses.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
