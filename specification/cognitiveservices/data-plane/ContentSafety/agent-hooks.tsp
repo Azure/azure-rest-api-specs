@@ -662,11 +662,11 @@ model AgentTransformVerdict extends AgentVerdict {
 union AgentPolicyLayerKind {
   string,
 
-  @doc("The project or resource policy resolved from targetResourceId.")
+  @doc("An administrator-authored policy resolved from targetResourceId through an explicit hierarchy binding.")
   Project: "project",
 
-  @doc("An explicitly selected developer policy.")
-  Developer: "developer",
+  @doc("The exact Guardrail selected by the Foundry agent version.")
+  Selected: "selected",
 
   @doc("An explicitly selected primary policy for a named-policy gateway evaluation.")
   NamedPolicy: "namedPolicy",
@@ -748,7 +748,7 @@ model AgentHarmResult {
 @added(Versions.v2026_10_15_preview)
 @doc("Hosted Unified Moderate evaluation profile. Local Copilot and WorkIQ integrations use in-process Agent Hooks/ACS and are not represented by this hosted HTTP profile.")
 union AgentEvaluationProfile {
-  @doc("A governed Foundry project with a mandatory project binding and optional exact developer policy.")
+  @doc("A governed Foundry project with one exact selected Guardrail and zero or more explicit administrator hierarchy policies.")
   FoundryProject: "foundryProject",
 
   @doc("An authorized named-policy gateway evaluation without a Foundry project target.")
@@ -764,7 +764,7 @@ model AgentEvaluationRequestBinding {
   @doc("Canonicalization algorithm. rfc8785 means the RFC 8785 JSON Canonicalization Scheme applied to the documented digest input.")
   canonicalization: "rfc8785";
 
-  @doc("Lowercase SHA-256 digest of the RFC 8785 canonical UTF-8 JSON object whose properties are apiVersion, context and selectors, prefixed with sha256:. context is the exact decoded AgentContext request body. For foundryProject, selectors contains targetResourceId plus the optional developerPolicyId, developerPolicyRevision and developerPolicySemanticDigest values. For namedPolicy, selectors contains policyId. Omitted optional selectors are omitted rather than encoded as null. The service derives this value from the accepted request; it is never copied from request metadata.")
+  @doc("Lowercase SHA-256 digest of the RFC 8785 canonical UTF-8 JSON object whose properties are apiVersion, context and selectors, prefixed with sha256:. context is the exact decoded AgentContext request body. For foundryProject, selectors contains targetResourceId, selectedPolicyId, selectedPolicyRevision and selectedPolicySemanticDigest. For namedPolicy, selectors contains policyId. The service derives this value from the accepted request; it is never copied from request metadata.")
   @pattern("^sha256:[0-9a-f]{64}$")
   digest: string;
 }
@@ -813,7 +813,7 @@ model AgentPolicyEvaluationReceipt {
 }
 
 @added(Versions.v2026_10_15_preview)
-@doc("Receipt for a governed Foundry project. These fencing fields are required only for this profile and must come from authoritative Foundry/PMS state rather than request metadata.")
+@doc("Receipt for a governed Foundry project. The selected Guardrail is identified in evaluatedPolicyLayers. Project fields fence trusted target identity, explicit hierarchy-binding state and host readiness; they do not describe a generated project policy.")
 model AgentFoundryProjectReceipt extends AgentPolicyEvaluationReceipt {
   profile: "foundryProject";
 
@@ -832,7 +832,7 @@ model AgentFoundryProjectReceipt extends AgentPolicyEvaluationReceipt {
   @minLength(1)
   targetIncarnation: string;
 
-  @doc("Monotonic active-binding epoch obtained from the approved authoritative binding interface for this attempt. AACS must not infer or echo it. Producers constrain this integer to JavaScript's exact range, 0 through 9,007,199,254,740,991.")
+  @doc("Monotonic explicit hierarchy-binding state epoch obtained from the authoritative binding interface for this attempt, including a stable no-binding state. AACS must not infer or echo it. Producers constrain this integer to JavaScript's exact range, 0 through 9,007,199,254,740,991.")
   @minValue(0)
   @maxValue(9007199254740991)
   bindingEpoch: int64;
@@ -841,11 +841,6 @@ model AgentFoundryProjectReceipt extends AgentPolicyEvaluationReceipt {
   @minValue(0)
   @maxValue(9007199254740991)
   readinessEpoch: int64;
-
-  @doc("Immutable target-effective policy generation obtained from authoritative target state and evaluated by this attempt. AACS must not infer or echo it. Producers constrain this integer to JavaScript's exact range, 0 through 9,007,199,254,740,991.")
-  @minValue(0)
-  @maxValue(9007199254740991)
-  appliedGeneration: int64;
 }
 
 @added(Versions.v2026_10_15_preview)
@@ -872,23 +867,23 @@ union AgentEvaluationErrorCode {
   @doc("The selector combination or AgentContext is invalid.")
   InvalidRequest: "InvalidRequest",
 
-  @doc("developerPolicyId was supplied without both developerPolicyRevision and developerPolicySemanticDigest.")
-  DeveloperPolicyRevisionRequired: "DeveloperPolicyRevisionRequired",
+  @doc("selectedPolicyId was supplied without both selectedPolicyRevision and selectedPolicySemanticDigest.")
+  SelectedPolicyRevisionRequired: "SelectedPolicyRevisionRequired",
 
-  @doc("The selected developer policy no longer matches the admitted revision or semantic digest.")
-  DeveloperPolicyRevisionMismatch: "DeveloperPolicyRevisionMismatch",
+  @doc("The selected Guardrail no longer matches the admitted revision or semantic digest.")
+  SelectedPolicyRevisionMismatch: "SelectedPolicyRevisionMismatch",
 
-  @doc("The exact admitted developer policy revision was deleted or is no longer resolvable.")
-  DeveloperPolicyRevisionUnavailable: "DeveloperPolicyRevisionUnavailable",
+  @doc("The exact admitted selected Guardrail revision was deleted or is no longer resolvable.")
+  SelectedPolicyRevisionUnavailable: "SelectedPolicyRevisionUnavailable",
 
-  @doc("The active binding or readiness epoch changed before evaluation completed.")
+  @doc("The explicit hierarchy-binding state or readiness epoch changed before evaluation completed.")
   PolicyFenceChanged: "PolicyFenceChanged",
 
   @doc("The caller or host profile does not support a mandatory policy requirement.")
   UnsupportedCapability: "UnsupportedCapability",
 
-  @doc("A mandatory project policy, binding or applied generation is unavailable.")
-  MandatoryPolicyUnavailable: "MandatoryPolicyUnavailable",
+  @doc("The selected Guardrail or a required explicit administrator hierarchy policy is unavailable.")
+  PolicyLayerUnavailable: "PolicyLayerUnavailable",
 
   @doc("The October native route is registered but disabled for this region, cohort or target.")
   NativeRouteDisabled: "NativeRouteDisabled",
@@ -912,7 +907,7 @@ model AgentEvaluationErrorDetail {
 
 @added(Versions.v2026_10_15_preview)
 @error
-@doc("A validation, authorization, conflict, throttling or operational failure. This is an HTTP error, never a successful allow verdict. Known codes include InvalidRequest, DeveloperPolicyRevisionRequired, DeveloperPolicyRevisionMismatch, DeveloperPolicyRevisionUnavailable, PolicyFenceChanged, UnsupportedCapability, MandatoryPolicyUnavailable and NativeRouteDisabled.")
+@doc("A validation, authorization, conflict, throttling or operational failure. This is an HTTP error, never a successful allow verdict. Known codes include InvalidRequest, SelectedPolicyRevisionRequired, SelectedPolicyRevisionMismatch, SelectedPolicyRevisionUnavailable, PolicyFenceChanged, UnsupportedCapability, PolicyLayerUnavailable and NativeRouteDisabled.")
 model AgentEvaluationError {
   ...Azure.Core.Foundations.ErrorResponseBase<AgentEvaluationErrorDetail>;
 

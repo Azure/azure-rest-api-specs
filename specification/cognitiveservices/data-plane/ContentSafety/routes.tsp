@@ -107,32 +107,32 @@ interface UnifiedOperations {
 
   @added(ContentSafety.Versions.v2026_10_15_preview)
   @summary("Unified Moderate")
-  @doc("Synchronously evaluate a canonical Agent Hooks 0.1 context and return a closed canonical Verdict plus a separate enforcement receipt. The hosted API supports two selector profiles. The Foundry-project profile uses targetResourceId for the mandatory project binding and may add one exact admitted developer policy through the all-or-none developerPolicyId/revision/digest tuple. The named-policy profile uses policyId without requiring a Foundry project. Exactly one profile is selected; targetResourceId and policyId cannot be combined. Local Copilot and WorkIQ integrations use in-process Agent Hooks/ACS rather than this hosted protocol. The receipt binds its policy metadata to the exact API version, AgentContext and admitted selectors through an RFC 8785 SHA-256 request digest. The calling host recomputes that binding, validates any profile-specific authoritative capability and readiness evidence, and owns transform application, final enforcement, approvals, timeouts, audit and the separate host-action attestation. API version establishes wire compatibility only; regional/cohort activation comes from the relevant capability authority. Body identity metadata and customer-settable headers are not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful responses.")
+  @doc("Synchronously evaluate a canonical Agent Hooks 0.1 context and return a closed canonical Verdict plus a separate enforcement receipt. The hosted API supports two selector profiles. The Foundry-project profile requires targetResourceId plus one exact admitted selected Guardrail through the all-or-none selectedPolicyId/revision/digest tuple. AACS may additionally resolve explicit administrator policies bound to the target or its enrolled ancestors. The named-policy profile uses policyId without requiring a Foundry project. Exactly one profile is selected; targetResourceId and policyId cannot be combined. Local Copilot and WorkIQ integrations use in-process Agent Hooks/ACS rather than this hosted protocol. The receipt binds its policy metadata to the exact API version, AgentContext and admitted selectors through an RFC 8785 SHA-256 request digest. The calling host recomputes that binding, validates any profile-specific authoritative capability and readiness evidence, and owns transform application, final enforcement, approvals, timeouts, audit and the separate host-action attestation. API version establishes wire compatibility only; regional/cohort activation comes from the relevant capability authority. Body identity metadata and customer-settable headers are not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Over-limit results are errors, not truncated successful responses.")
   @route("/content:unifiedModerate")
   @sharedRoute
   @post
   unifiedModerate is Azure.Core.RpcOperation<
     {
       @query
-      @doc("Full Azure resource ID of the governed Foundry project used for binding resolution. This selects the mandatory project policy for the Foundry-project profile. It is not the policy or binding resource ID. The target must be under the authenticated serving account and requires a verified producer. Required when policyId is absent and forbidden when policyId is present.")
+      @doc("Full Azure resource ID of the governed Foundry project used to resolve explicit administrator hierarchy bindings. It is not the selected Guardrail or binding resource ID. The target must be under the authenticated serving account and requires a verified producer. Required with the selectedPolicyId/revision/digest tuple for the Foundry-project profile and forbidden when policyId is present.")
       targetResourceId?: string;
 
       @query
-      @doc("Authorized named policy selector for the named-policy gateway profile. It may be a supported policy name or full policy resource ID according to the serving account's existing selector grammar. Required when targetResourceId is absent and forbidden when targetResourceId or developerPolicyId is present.")
+      @doc("Authorized named policy selector for the named-policy gateway profile. It may be a supported policy name or full policy resource ID according to the serving account's existing selector grammar. Required when targetResourceId is absent and forbidden when targetResourceId or selectedPolicyId is present.")
       policyId?: string;
 
       @query
-      @doc("Optional full developer policy resource ID evaluated as a separate stricter layer in the Foundry-project profile. When present, developerPolicyRevision and developerPolicySemanticDigest are required. The exact tuple must match the policy admitted for the agent operation; missing, stale, mismatched or deleted revisions fail closed and never follow mutable policy content.")
-      developerPolicyId?: string;
+      @doc("Full resource ID of the Guardrail selected by the Foundry agent version. Required with targetResourceId for the Foundry-project profile. selectedPolicyRevision and selectedPolicySemanticDigest are required. The exact tuple must match the policy admitted for the agent operation; missing, stale, mismatched or deleted revisions fail closed and never follow mutable policy content.")
+      selectedPolicyId?: string;
 
       @query
-      @doc("Opaque exact developer policy revision admitted for the operation. Current RP/PMS resources use the RP-assigned ETag preserved verbatim. Required exactly when developerPolicyId is present.")
-      developerPolicyRevision?: string;
+      @doc("Opaque exact selected Guardrail revision admitted for the operation. Current RP/PMS resources use the RP-assigned ETag preserved verbatim. Required exactly when selectedPolicyId is present.")
+      selectedPolicyRevision?: string;
 
       @query
-      @doc("SHA-256 digest of the admitted developer policy semantic closure. Required exactly when developerPolicyId is present and verified with developerPolicyRevision before evaluation.")
+      @doc("SHA-256 digest of the admitted selected Guardrail semantic closure. Required exactly when selectedPolicyId is present and verified with selectedPolicyRevision before evaluation.")
       @pattern("^sha256:[0-9a-f]{64}$")
-      developerPolicySemanticDigest?: string;
+      selectedPolicySemanticDigest?: string;
 
       @bodyRoot
       @doc("Canonical Agent Hooks context with native JSON point payloads. Azure AI Content Safety (AACS) classifier role metadata, when needed by a non-Hooks caller, belongs in extensions.aacs.role.")
