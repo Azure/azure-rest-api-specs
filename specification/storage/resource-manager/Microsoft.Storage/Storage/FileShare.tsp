@@ -20,7 +20,7 @@ model FileShare is Azure.ResourceManager.ProxyResource<FileShareProperties> {
     Resource = FileShare,
     KeyName = "shareName",
     SegmentName = "shares",
-    NamePattern = "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
+    NamePattern = ""
   >;
 
   /**

@@ -21,7 +21,7 @@ model BlobContainer
     Resource = BlobContainer,
     KeyName = "containerName",
     SegmentName = "containers",
-    NamePattern = "^(?:[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]|\\$(?:root|web|logs))$"
+    NamePattern = ""
   >;
 
   /**
