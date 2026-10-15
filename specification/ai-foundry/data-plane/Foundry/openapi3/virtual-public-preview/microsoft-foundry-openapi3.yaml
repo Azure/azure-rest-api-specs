@@ -4253,6 +4253,42 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Microsoft 365 Publishing
+  /agents/{agent_name}/microsoft365/unpublish:
+    post:
+      operationId: Microsoft365Publishing_unpublishAgentFromMicrosoft365
+      summary: Unpublish an agent from Microsoft 365
+      description: Unpublishes a Foundry agent from Microsoft 365 / Microsoft Teams.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent to unpublish.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Microsoft 365 Publishing
   /agents/{agent_name}/microsoft365/zip:
     post:
       operationId: Microsoft365Publishing_getMicrosoft365AppPackage
