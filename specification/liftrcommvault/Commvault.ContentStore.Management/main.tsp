@@ -178,6 +178,8 @@ model LatestLinkedSaaSResponse {
 interface CloudAccounts {
   get is ArmResourceRead<CloudAccount>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudAccount>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<CloudAccount, CloudAccountProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<CloudAccount>;
   listByResourceGroup is ArmResourceListByParent<CloudAccount>;

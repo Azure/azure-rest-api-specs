@@ -46,8 +46,10 @@ interface Widgets {
   @doc("Gets status of a Widget operation.")
   getWidgetOperationStatus is GetResourceOperationStatus<WidgetSuite>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Creates or updates a Widget asynchronously.")
   @pollingOperation(Widgets.getWidgetOperationStatus)
+  @patch(#{ implicitOptionality: true })
   createOrUpdateWidget is StandardResourceOperations.LongRunningResourceCreateOrUpdate<WidgetSuite>;
 
   @doc("Delete a Widget asynchronously.")

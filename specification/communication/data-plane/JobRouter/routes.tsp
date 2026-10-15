@@ -27,8 +27,10 @@ alias PatchOperations = Azure.Core.ResourceOperations<PatchOperationTraits>;
 
 interface JobRouterAdministrationOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Creates or updates a classification policy.")
   @doc("Creates or updates a classification policy.")
+  @patch(#{ implicitOptionality: true })
   upsertClassificationPolicy is PatchOperations.ResourceCreateOrUpdate<ClassificationPolicy>;
 
   @summary("Retrieves an existing classification policy by Id.")
@@ -47,8 +49,10 @@ interface JobRouterAdministrationOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Creates or updates a distribution policy.")
   @doc("Creates or updates a distribution policy.")
+  @patch(#{ implicitOptionality: true })
   upsertDistributionPolicy is PatchOperations.ResourceCreateOrUpdate<DistributionPolicy>;
 
   @summary("Retrieves an existing distribution policy by Id.")
@@ -67,8 +71,10 @@ interface JobRouterAdministrationOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Creates or updates a exception policy.")
   @doc("Creates or updates a exception policy.")
+  @patch(#{ implicitOptionality: true })
   upsertExceptionPolicy is PatchOperations.ResourceCreateOrUpdate<ExceptionPolicy>;
 
   @summary("Retrieves an existing exception policy by Id.")
@@ -86,8 +92,10 @@ interface JobRouterAdministrationOperations {
     ListExceptionPoliciesQueryParams
   >;
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Creates or updates a queue.")
   @doc("Creates or updates a queue.")
+  @patch(#{ implicitOptionality: true })
   upsertQueue is PatchOperations.ResourceCreateOrUpdate<RouterQueue>;
 
   @summary("Retrieves an existing queue by Id.")
@@ -105,8 +113,10 @@ interface JobRouterAdministrationOperations {
 
 interface JobRouterOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Creates or updates a router job.")
   @doc("Creates or updates a router job.")
+  @patch(#{ implicitOptionality: true })
   upsertJob is PatchOperations.ResourceCreateOrUpdate<RouterJob>;
 
   @summary("Retrieves an existing job by Id.")
@@ -233,8 +243,10 @@ interface JobRouterOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Creates or updates a worker.")
   @doc("Creates or updates a worker.")
+  @patch(#{ implicitOptionality: true })
   upsertWorker is PatchOperations.ResourceCreateOrUpdate<RouterWorker>;
 
   @summary("Retrieves an existing worker by Id.")

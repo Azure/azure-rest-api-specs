@@ -97,6 +97,8 @@ model BookshelfProperties {
 interface Bookshelves {
   get is ArmResourceRead<Bookshelf>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Bookshelf>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<Bookshelf, BookshelfProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Bookshelf>;
   listByResourceGroup is ArmResourceListByParent<Bookshelf>;

@@ -48,8 +48,10 @@ interface ConfigTemplateVersions {
   @doc("Create or update a Config Template Version Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ConfigTemplateVersion>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @added(Versions.v2026_03_01)
   @doc("Update a Config Template Version Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<
     ConfigTemplateVersion,
     ConfigTemplateVersionProperties

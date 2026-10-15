@@ -173,6 +173,8 @@ interface DiscoveryResource<
 > {
   get is ArmResourceRead<T>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<T>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<T, P>;
   delete is ArmResourceDeleteWithoutOkAsync<T>;
   listByResourceGroup is ArmResourceListByParent<T>;

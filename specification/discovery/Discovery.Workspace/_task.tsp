@@ -266,16 +266,20 @@ interface Tasks {
     Task
   >;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Patch (partial update) a task (e.g. status, description, validation requirements, dependencies, result).")
   @sharedRoute
   @removed(Versions.`2026-06-01`)
+  @patch(#{ implicitOptionality: true })
   update is StandardResourceOperations.ResourceCreateOrUpdate<Task>;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Versioned operation needs explicit operationId"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Patch (partial update) a task (e.g. status, description, validation requirements, dependencies, result).")
   @sharedRoute
   @added(Versions.`2026-06-01`)
   @operationId("Tasks_Update")
+  @patch(#{ implicitOptionality: true })
   stableUpdate is StandardResourceOperations.ResourceUpdate<Task>;
 
   @doc("Delete a task by ID.")

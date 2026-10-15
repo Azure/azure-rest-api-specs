@@ -51,7 +51,9 @@ interface TargetTemplates {
   @doc("Create or update a Target Template Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TargetTemplate>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("update a Target Template Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<TargetTemplate, TargetTemplateProperties>;
 
   @doc("Delete a Target Template Resource")

@@ -92,7 +92,9 @@ interface WebPubSubChatServiceClient {
   deleteMessage is ConditionalOperations.ResourceDelete<ChatMessage>;
 
   /** Update a message. */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @summary("Update a message.")
+  @patch(#{ implicitOptionality: true })
   updateMessage is ConditionalOperations.ResourceUpdate<ChatMessage>;
 
   // --- Roles ---

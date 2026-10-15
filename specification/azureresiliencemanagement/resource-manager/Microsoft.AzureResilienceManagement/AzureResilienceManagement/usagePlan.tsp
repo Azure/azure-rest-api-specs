@@ -33,9 +33,11 @@ interface UsagePlansOld {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<UsagePlan>;
 
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Update a UsagePlan Deprecated: API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version.")
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
+  @patch(#{ implicitOptionality: true })
   update is ArmTagsPatchAsync<UsagePlan>;
 
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
@@ -66,7 +68,9 @@ interface UsagePlans {
   @sharedRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<UsagePlan>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @sharedRoute
+  @patch(#{ implicitOptionality: true })
   update is ArmTagsPatchAsync<UsagePlan>;
 
   @sharedRoute

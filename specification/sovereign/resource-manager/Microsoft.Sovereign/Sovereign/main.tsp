@@ -46,7 +46,9 @@ interface LandingZoneAccountOperations {
   get is ArmResourceRead<LandingZoneAccountResource>;
   @doc("Create a landing zone account.")
   create is ArmResourceCreateOrReplaceAsync<LandingZoneAccountResource>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Update a landing zone account.")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<
     LandingZoneAccountResource,
     LandingZoneAccountResourceProperties
@@ -80,7 +82,9 @@ interface LandingZoneConfigurationOperations {
   get is ArmResourceRead<LandingZoneConfigurationResource>;
   @doc("Create a landing zone configuration.")
   create is ArmResourceCreateOrReplaceAsync<LandingZoneConfigurationResource>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Update a landing zone configuration.")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<
     LandingZoneConfigurationResource,
     LandingZoneConfigurationResourceProperties
@@ -143,7 +147,9 @@ interface LandingZoneRegistrationOperations {
   get is ArmResourceRead<LandingZoneRegistrationResource>;
   @doc("Create a landing zone registration.")
   create is ArmResourceCreateOrReplaceAsync<LandingZoneRegistrationResource>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Update a landing zone registration.")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<
     LandingZoneRegistrationResource,
     LandingZoneRegistrationResourceProperties

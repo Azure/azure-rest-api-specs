@@ -36,3 +36,9 @@ interface DisconnectedOperations
     ArmResponse<DisconnectedOperationDeploymentManifest> | ErrorResponse
   >;
 }
+
+#suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+@@TypeSpec.Http.patch(
+  DisconnectedOperations.update,
+  #{ implicitOptionality: true }
+);

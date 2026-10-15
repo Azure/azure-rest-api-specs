@@ -56,6 +56,8 @@ union ProvisioningState {
 interface Employees {
   get is ArmResourceRead<Employee>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Employee>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<Employee, EmployeeProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Employee>;
   listByResourceGroup is ArmResourceListByParent<Employee>;

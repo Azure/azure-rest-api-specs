@@ -39,7 +39,9 @@ interface Configurations {
   @doc("Create or update a Configuration Resource")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Configuration>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Update a Configuration Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<Configuration, ConfigurationProperties>;
 
   @doc("Delete a Configuration Resource")
@@ -76,6 +78,8 @@ model ConfigurationReferenceProperties {
 interface ConfigurationReferences {
   get is ArmResourceRead<ConfigurationReference>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<ConfigurationReference>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<
     ConfigurationReference,
     ConfigurationReferenceProperties

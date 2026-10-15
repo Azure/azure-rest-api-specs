@@ -52,10 +52,12 @@ interface RecoveryPlansOld {
   >;
 
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @route(ServiceGroupRoute)
   @doc("Update a RecoveryPlan Deprecated: API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version.")
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<
     RecoveryPlan,
     RecoveryPlanProperties,
@@ -99,8 +101,10 @@ interface RecoveryPlans {
     ServiceGroupParameters
   >;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @route(ServiceGroupRoute)
   @sharedRoute
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<
     RecoveryPlan,
     RecoveryPlanProperties,

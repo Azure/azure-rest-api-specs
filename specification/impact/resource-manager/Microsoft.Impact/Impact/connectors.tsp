@@ -97,6 +97,8 @@ union Platform {
 interface Connectors {
   get is ArmResourceRead<Connector>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Connector>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<Connector, ConnectorProperties>;
   delete is ArmResourceDeleteSync<Connector>;
   listBySubscription is ArmListBySubscription<Connector>;

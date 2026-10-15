@@ -43,6 +43,8 @@ model DataAsset is TrackedResource<DataAssetProperties> {
 interface DataAssets {
   get is ArmResourceRead<DataAsset>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DataAsset>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<DataAsset, DataAssetProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<DataAsset>;
   listByDataContainer is ArmResourceListByParent<DataAsset>;

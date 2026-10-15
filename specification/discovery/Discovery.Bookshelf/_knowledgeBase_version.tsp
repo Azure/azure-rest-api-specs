@@ -83,7 +83,9 @@ op GetResourceOperationStatus<
 
 @removed(Versions.`2026-06-01`)
 interface KnowledgeBaseVersions {
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Creates or updates a KnowledgeBaseVersion.")
+  @patch(#{ implicitOptionality: true })
   createOrUpdate is StandardResourceOperations.ResourceCreateOrUpdate<KnowledgeBaseVersion>;
 
   @doc("Fetch a KnowledgeBaseVersion by name.")

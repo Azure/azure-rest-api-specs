@@ -107,6 +107,8 @@ model WorkspaceProperties {
 interface Workspaces {
   get is ArmResourceRead<Workspace>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Workspace>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<Workspace, WorkspaceProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Workspace>;
   listByResourceGroup is ArmResourceListByParent<Workspace>;

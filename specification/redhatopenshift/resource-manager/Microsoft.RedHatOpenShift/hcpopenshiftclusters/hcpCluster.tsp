@@ -16,6 +16,8 @@ namespace Microsoft.RedHatOpenShift;
 interface HcpOpenShiftClusters {
   get is ArmResourceRead<HcpOpenShiftCluster>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<HcpOpenShiftCluster>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @TypeSpec.Http.patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<
     HcpOpenShiftCluster,
     HcpOpenShiftClusterProperties
@@ -53,6 +55,8 @@ interface HcpOpenShiftClusters {
 interface NodePools {
   get is ArmResourceRead<NodePool>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NodePool>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @TypeSpec.Http.patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<NodePool, NodePoolProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<NodePool>;
   listByParent is ArmResourceListByParent<NodePool>;
@@ -63,6 +67,8 @@ interface NodePools {
 interface ExternalAuths {
   get is ArmResourceRead<ExternalAuth>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ExternalAuth>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @TypeSpec.Http.patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<ExternalAuth, ExternalAuthProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<ExternalAuth>;
   listByParent is ArmResourceListByParent<ExternalAuth>;

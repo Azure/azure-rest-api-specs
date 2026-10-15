@@ -80,7 +80,9 @@ interface WorkflowVersionV2s {
   @doc("Create or update a Workflow Version Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<WorkflowVersionV2>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("update an WorkflowVersionV2 Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<
     WorkflowVersionV2,
     WorkflowVersionV2Properties

@@ -104,7 +104,9 @@ interface Instances {
   @doc("Create or update Instance Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Instance>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Update an Instance Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<Instance, InstanceProperties>;
 
   @doc("Delete Instance Resource")

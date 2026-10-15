@@ -71,6 +71,8 @@ model StorageProperties {
 interface Storages {
   get is ArmResourceRead<Storage>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Storage>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @TypeSpec.Http.patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<Storage, StorageProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Storage>;
   listByResourceGroup is ArmResourceListByParent<Storage>;

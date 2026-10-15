@@ -77,7 +77,9 @@ interface ContentAnalyzers {
     ServiceTraits
   >;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Update analyzer properties.")
+  @patch(#{ implicitOptionality: true })
   update is Operations.ResourceUpdate<ContentAnalyzer>;
 
   @doc("Get analyzer properties.")

@@ -35,7 +35,9 @@ interface DynamicSchemaVersions {
   @doc("Create or update a Dynamic Schema Version Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DynamicSchemaVersion>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("update a Dynamic Schema Version Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<DynamicSchemaVersion, SchemaVersionProperties>;
 
   @doc("Delete a Dynamic Schema Version Resource")

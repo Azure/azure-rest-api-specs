@@ -85,6 +85,8 @@ model ProjectProperties {
 interface Projects {
   get is ArmResourceRead<Project>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Project>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<Project, ProjectProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Project>;
   listByWorkspace is ArmResourceListByParent<Project>;

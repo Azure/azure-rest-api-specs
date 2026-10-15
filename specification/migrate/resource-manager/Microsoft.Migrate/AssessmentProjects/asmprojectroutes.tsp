@@ -20,7 +20,9 @@ interface AssessmentProjectsOperations {
   @added(AssessmentProjectApiVersions.v2024_03_03_preview)
   create is ArmResourceCreateOrUpdateAsync<AssessmentProject>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @added(AssessmentProjectApiVersions.v2024_03_03_preview)
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<AssessmentProject, ProjectProperties>;
 
   @added(AssessmentProjectApiVersions.v2024_03_03_preview)

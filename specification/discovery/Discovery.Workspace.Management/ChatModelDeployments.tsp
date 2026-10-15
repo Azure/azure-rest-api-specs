@@ -60,6 +60,8 @@ model ChatModelDeploymentProperties {
 interface ChatModelDeployments {
   get is ArmResourceRead<ChatModelDeployment>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ChatModelDeployment>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
+  @TypeSpec.Http.patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<
     ChatModelDeployment,
     ChatModelDeploymentProperties

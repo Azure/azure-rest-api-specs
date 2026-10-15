@@ -66,7 +66,9 @@ interface ConfigurationTemplates {
   @doc("Create or update a Configuration Template Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ConfigurationTemplate>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("update a Configuration Template Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchSync<
     ConfigurationTemplate,
     ConfigurationTemplateProperties

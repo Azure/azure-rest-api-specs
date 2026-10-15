@@ -106,7 +106,9 @@ interface Executions {
   @doc("Create or update Execution Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Execution>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("update an Execution Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<Execution, ExecutionProperties>;
 
   @doc("Delete Execution Resource")

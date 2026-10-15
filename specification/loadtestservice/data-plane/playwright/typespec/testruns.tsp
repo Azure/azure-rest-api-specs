@@ -169,7 +169,9 @@ union RunStatus {
 
 interface TestRuns {
   // TestRun Operations
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Creates or updates a test run for the workspace with the specified test run ID. Requires Bearer JWT access token provided by Entra ID or Playwright Service.")
+  @TypeSpec.Http.patch(#{ implicitOptionality: true })
   createOrUpdate is Operations.ResourceCreateOrUpdate<TestRun>;
 
   @added(Versions.v2026_04_01_preview)

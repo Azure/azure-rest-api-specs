@@ -43,7 +43,9 @@ interface SiteReferences {
   @doc("Get Site Reference Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SiteReference>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Preserve the existing PATCH contract."
   @doc("Get Site Reference Resource")
+  @patch(#{ implicitOptionality: true })
   update is ArmResourcePatchAsync<SiteReference, SiteReferenceProperties>;
 
   @doc("Get Site Reference Resource")
