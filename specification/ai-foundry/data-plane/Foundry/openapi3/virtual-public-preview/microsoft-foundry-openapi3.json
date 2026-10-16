@@ -100568,7 +100568,7 @@
         "properties": {
           "language": {
             "type": "string",
-            "description": "The language of the input audio. Supplying the input language in\n  [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format\n  will improve accuracy and latency."
+            "description": "The language of the input audio. Supplying the input language in\n[ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format\nwill improve accuracy and latency. Optional for other transcription models; required and must be\nnonempty when `model` is `azure-speech-streaming` (such as `en-US`; comma-separated locales are\nsupported)."
           },
           "languages": {
             "type": "array",
@@ -100602,7 +100602,7 @@
           },
           "model": {
             "$ref": "#/components/schemas/VoiceAgentInputTranscriptionModel",
-            "description": "The transcription model identifier. Configure customer custom speech deployments in `custom_speech`."
+            "description": "The transcription model identifier. Configure customer custom speech deployments in `custom_speech`. `azure-speech-streaming` is for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech` and `phrase_list`."
           },
           "custom_speech": {
             "type": "object",
@@ -100619,7 +100619,7 @@
             "description": "Optional phrase hints that bias recognition toward domain terms."
           }
         },
-        "description": "Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription\noptions with the Azure and MAI transcription models, custom speech models, and phrase hints.",
+        "description": "Asynchronous input-audio transcription configuration. Extends the OpenAI Realtime transcription\noptions with the Azure and MAI transcription models, custom speech models, and phrase hints.\nWhen `model` is `azure-speech-streaming`, transcription is supported for cascaded text-model\nconversations only (not realtime speech-to-speech models), requires a nonempty `language` such as\n`en-US` (comma-separated locales are supported), and supports `custom_speech` and `phrase_list`.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -100647,7 +100647,7 @@
             ]
           }
         ],
-        "description": "The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\nAdditional values may be added over time.",
+        "description": "The input-audio transcription model identifier. This is a model name, not a Foundry deployment name. Mirrors the transcription models supported by the managed\nvoice backend, covering the OpenAI Realtime transcription models plus the Azure and MAI models.\n`azure-speech-streaming` is supported for cascaded text-model conversations only (not realtime speech-to-speech models), requires a nonempty `language` such as `en-US` (comma-separated locales are supported), and supports `custom_speech` and `phrase_list`.\nAdditional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -100943,10 +100943,10 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/VoiceAgentNoiseReductionType",
-            "description": "The noise reduction mode."
+            "description": "The noise reduction mode. `azure_deep_noise_suppression_headset` (Preview) provides\nheadset-optimized noise suppression for local voice activity detection, optimized for\nlow-sample-rate audio including 8 kHz telephony audio without changing recognition audio (not\nrestricted to headset devices). `azure_personal_noise_suppression` (Preview) starts with headset\nsuppression for local voice activity detection and personalizes detection after automatic speaker\nenrollment while keeping recognition audio unchanged and keeping headset suppression active when\npersonalization is unavailable."
           }
         },
-        "description": "Input audio noise reduction configuration.",
+        "description": "Input audio noise reduction configuration. `azure_deep_noise_suppression_headset` and\n`azure_personal_noise_suppression` are preview modes for local voice activity detection that\nenhance detection audio without changing the audio used for recognition.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -100969,7 +100969,7 @@
             ]
           }
         ],
-        "description": "The input audio noise reduction mode.",
+        "description": "The input audio noise reduction mode.\n- `azure_deep_noise_suppression_headset` (Preview): Azure headset-optimized noise suppression for local voice activity detection. Optimized for low-sample-rate audio, including 8 kHz telephony audio. Enhances detection audio without changing the audio used for recognition. The mode is not restricted to headset devices.\n- `azure_personal_noise_suppression` (Preview): Azure personalized noise suppression for local voice activity detection. Starts with headset suppression and personalizes detection after automatic speaker enrollment. Recognition audio is unchanged; headset suppression remains active when personalization is unavailable.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
