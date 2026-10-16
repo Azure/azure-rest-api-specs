@@ -3,7 +3,7 @@ description: Evaluation suite for azure-typespec-author.
 version: "1.0"
 type: capability
 area: "dataplane"
-environment: azsdk-mcp
+environment: azsdk-mcp-local
 defaults:
   runs: 1
   timeout: 660s
@@ -14,7 +14,7 @@ stimuli:
     tags:
       suite: dataplane
       mode: trigger
-    prompt: Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum.
+    prompt: Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum and carry forward all other existing features. All material design decisions are provided, so proceed without confirmation.
     environment: &id001
       files:
         - src: ../fixtures/006009-dp-version-property-renamed/main.tsp
@@ -23,17 +23,13 @@ stimuli:
           dest: shared.tsp
         - src: ../fixtures/Microsoft.Widget/Widget/package.json
           dest: package.json
+        - src: ../scripts/verify-emitted-contract.js
+          dest: verify-emitted-contract.js
         - src: ../fixtures/006009-dp-version-property-renamed/tspconfig.yaml
           dest: tspconfig.yaml
       commands:
         - node -e "const fs=require('fs');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync('node_modules')){fs.symlinkSync(t,'node_modules','junction')}"
     graders:
-      - &id002
-        type: tool-calls
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - azure-sdk-mcp-azsdk_run_typespec_validation
       - type: skill-invocation
         config:
           required:
@@ -45,35 +41,23 @@ stimuli:
     tags:
       suite: dataplane
       mode: forced
-    prompt: "@azure-typespec-author Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum."
+    prompt: "@azure-typespec-author Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum and carry forward all other existing features. All material design decisions are provided, so proceed without confirmation."
     environment: *id001
     rubric: &shared_rubric
       - WidgetSuite.color is renamed to widgetColor only in API version 2023-06-01-preview using valid TypeSpec versioning.
       - Version 2023-06-01-preview is added to the Versions enum and the prior property name is preserved for earlier versions.
       - Changes are limited to the requested versioned rename and contain no unrelated edits.
     graders:
-      - *id002
       - type: run-command
         config:
           command: tsp compile .
           expected_exit_code: 0
       - &id003
-        type: file-matches
+        type: run-command
+        name: run-command-version-contract
         config:
-          path: main.tsp
-          pattern: v2023_06_01_Preview
-      - &id004
-        type: file-matches
-        name: file-matches-renamed-property
-        config:
-          path: main.tsp
-          pattern: '@renamedFrom\(Versions\.v2023_06_01_Preview,\s*"color"\)'
-      - &id005
-        type: file-matches
-        name: file-matches-widget-color-property
-        config:
-          path: main.tsp
-          pattern: widgetColor
+          command: node verify-emitted-contract.js version-006009
+          expected_exit_code: 0
       - &id006
         type: prompt
         config:
@@ -90,7 +74,7 @@ stimuli:
     tags:
       suite: dataplane
       mode: no-skill
-    prompt: Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum.
+    prompt: Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum and carry forward all other existing features. All material design decisions are provided, so proceed without confirmation.
     environment: *id001
     rubric: *shared_rubric
     graders:
@@ -98,9 +82,11 @@ stimuli:
         config:
           required:
             - "^(edit|apply_patch|bash|powershell)$"
+      - type: run-command
+        config:
+          command: tsp compile .
+          expected_exit_code: 0
       - *id003
-      - *id004
-      - *id005
       - *id006
     constraints:
       max_turns: 5
@@ -109,7 +95,6 @@ scoring:
   weights:
     tool-calls: 0.125
     skill-invocation: 0.125
-    run-command: 0.125
-    file-matches: 0.375
+    run-command: 0.5
     prompt: 0.25
   threshold: 0.9425

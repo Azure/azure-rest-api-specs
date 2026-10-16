@@ -4,7 +4,7 @@ version: "1.0"
 type: capability # capability | regression
 area: "armtemplate"
 # Root-level environment
-environment: azsdk-mcp
+environment: azsdk-mcp-local
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -28,6 +28,8 @@ stimuli:
           dest: package.json
         - src: ../scripts/check-node-dependencies.js
           dest: check-node-dependencies.js
+        - src: ../scripts/verify-emitted-contract.js
+          dest: verify-emitted-contract.js
         - src: ../fixtures/Microsoft.Widget/Widget/readme.md
           dest: readme.md
         - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
@@ -37,11 +39,6 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "skill-invocation"
         config:
           required:
@@ -56,12 +53,11 @@ stimuli:
     prompt: |
       @azure-typespec-author In API version `2024-10-01-preview`, add a tracked Employee ARM resource to the Microsoft.Widget service. It should have optional age, city, and binary profile data, along with a read-only provisioning state. Support the standard operations for a tracked ARM resource. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
     environment: *shared_environment
+    rubric: &shared_rubric
+      - Employee is defined under Microsoft.Widget as a tracked ARM resource with optional age, city, and binary profile properties plus a read-only provisioning state.
+      - The provisioning state incorporates the standard ARM ResourceProvisioningState behavior, directly or through a standard inherited resource shape.
+      - The resource exposes standard tracked-resource CRUD and list-by-resource-group and list-by-subscription operations, directly or through a standard operations interface.
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "run-command"
         config:
           command: "node check-node-dependencies.js node_modules"
@@ -74,53 +70,20 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
-      - &file_matches
-        type: "file-matches"
+      - &run_contract
+        type: "run-command"
+        name: "run-command-resource-contract"
         config:
-          pattern: "model Employee is TrackedResource<EmployeeProperties>"
-          path: "*.tsp"
-      - &file_matches_import
-        type: "file-matches"
-        name: "file-matches-import"
+          command: "node verify-emitted-contract.js arm-tracked-resource"
+          expected_exit_code: 0
+      - &semantic_contract
+        type: "prompt"
+        name: "semantic-resource-contract"
         config:
-          pattern: "import\\s+\"\\./[^\"]+\\.tsp\";"
-          path: "main.tsp"
-      - &file_matches_age_property
-        type: "file-matches"
-        name: "file-matches-age-property"
-        config:
-          pattern: 'age\?: int32'
-          path: "*.tsp"
-      - &file_matches_visibility
-        type: "file-matches"
-        name: "file-matches-visibility"
-        config:
-          pattern: '@visibility\(Lifecycle\.Read\)'
-          path: "*.tsp"
-      - &file_matches_provisioning_state
-        type: "file-matches"
-        name: "file-matches-provisioning-state"
-        config:
-          pattern: "ResourceProvisioningState"
-          path: "*.tsp"
-      - &file_matches_create_operation
-        type: "file-matches"
-        name: "file-matches-create-operation"
-        config:
-          pattern: "ArmResourceCreateOrReplaceAsync<Employee>|ArmResourceCreateOrUpdateAsync<Employee>"
-          path: "*.tsp"
-      - &file_matches_parent_list_operation
-        type: "file-matches"
-        name: "file-matches-parent-list-operation"
-        config:
-          pattern: "ArmResourceListByParent<Employee>"
-          path: "*.tsp"
-      - &file_matches_subscription_list_operation
-        type: "file-matches"
-        name: "file-matches-subscription-list-operation"
-        config:
-          pattern: "ArmListBySubscription<Employee>"
-          path: "*.tsp"
+          prompt: "Verify the emitted resource contract rather than requiring a particular file split or template spelling: Employee is a tracked ARM resource under Microsoft.Widget; its properties include optional age, city, and binary profile data plus a read-only provisioning state with standard ARM behavior; and it exposes standard CRUD, resource-group list, and subscription list operations. Reject missing operations or fields and unrelated edits."
+          model: "gpt-5.6-sol"
+          scoring: "scale_1_10"
+          threshold: 0.77
     constraints:
       max_turns: 5
       max_tokens: 1000000
@@ -131,29 +94,18 @@ stimuli:
     prompt: |
       In API version `2024-10-01-preview`, add a tracked Employee ARM resource to the Microsoft.Widget service. It should have optional age, city, and binary profile data, along with a read-only provisioning state. Support the standard operations for a tracked ARM resource. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
     environment: *shared_environment
-    rubric:
-      - Employee is defined under Microsoft.Widget as a tracked ARM resource with optional age, city, and binary profile properties plus a read-only provisioning state.
-      - The provisioning state incorporates the standard ARM ResourceProvisioningState type.
-      - The Employees interface provides standard tracked-resource CRUD and list-by-resource-group and list-by-subscription operations.
+    rubric: *shared_rubric
     graders:
       - type: "tool-calls"
         config:
           required:
             - "^(edit|apply_patch|bash|powershell)$"
-      - *file_matches
-      - *file_matches_import
-      - *file_matches_age_property
-      - *file_matches_visibility
-      - *file_matches_provisioning_state
-      - *file_matches_create_operation
-      - *file_matches_parent_list_operation
-      - *file_matches_subscription_list_operation
-      - type: "prompt"
+      - type: "run-command"
         config:
-          prompt: "Verify all five aspects: (1) Employee resource definition is written into a TSP file; (2) Employee model uses TrackedResource<EmployeeProperties> under Microsoft.Widget namespace; (3) EmployeeProperties includes age, city, profile, and a read-only provisioningState; (4) ProvisioningState is a union type incorporating standard ARM ResourceProvisioningState; (5) Employees interface includes full CRUD operations (get, create, update, delete) plus listByResourceGroup and listBySubscription."
-          model: "gpt-5.6-sol"
-          scoring: "scale_1_10"
-          threshold: 0.77
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - *run_contract
+      - *semantic_contract
     constraints:
       max_turns: 6
       max_tokens: 100000
@@ -161,8 +113,7 @@ stimuli:
 scoring:
   weights:
     tool-calls: 0.1
-    prompt: 0.1
-    run-command: 0.1
+    prompt: 0.4
+    run-command: 0.4
     skill-invocation: 0.1
-    file-matches: 0.6
   threshold: 0.977

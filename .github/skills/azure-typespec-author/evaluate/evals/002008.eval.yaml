@@ -4,7 +4,7 @@ version: "1.0"
 type: capability # capability | regression
 area: "armtemplate"
 # Root-level environment
-environment: azsdk-mcp
+environment: azsdk-mcp-local
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -30,6 +30,8 @@ stimuli:
           dest: package.json
         - src: ../scripts/check-node-dependencies.js
           dest: check-node-dependencies.js
+        - src: ../scripts/verify-emitted-contract.js
+          dest: verify-emitted-contract.js
         - src: ../fixtures/Microsoft.Widget/Widget/readme.md
           dest: readme.md
         - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
@@ -43,11 +45,6 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "skill-invocation"
         config:
           required:
@@ -63,11 +60,6 @@ stimuli:
       @azure-typespec-author add top and skip query parameters to the ListBySubscription operation in interface Employees. Ensure the definition meets TypeSpec Azure guidelines.
     environment: *shared_environment
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "run-command"
         config:
           command: "node check-node-dependencies.js node_modules"
@@ -80,12 +72,12 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
-      - &file_matches
-        type: "file-matches"
+      - &run_contract
+        type: "run-command"
+        name: "run-command-list-contract"
         config:
-          # Accept only ARM top/skip params as inline spreads, intersection, or wrapper model.
-          pattern: '(?:model\s+(\w+)\s*\{\s*(?=[^}]*\.\.\.(?:Azure\.ResourceManager\.)?ArmTopParameter\s*;)(?=[^}]*\.\.\.(?:Azure\.ResourceManager\.)?ArmSkipParameter\s*;)[^}]*\}\s*[\s\S]*?listBySubscription\s+is\s+ArmListBySubscription\s*<\s*Employee\s*,\s*Parameters\s*=\s*\1\s*>|listBySubscription\s+is\s+ArmListBySubscription\s*<\s*Employee\s*,\s*(?:(?:Parameters\s*=\s*)?\{\s*(?=[^}]*\.\.\.(?:Azure\.ResourceManager\.)?ArmTopParameter\s*;)(?=[^}]*\.\.\.(?:Azure\.ResourceManager\.)?ArmSkipParameter\s*;)[^}]*\}|Parameters\s*=\s*(?:(?:Azure\.ResourceManager\.)?ArmTopParameter\s*&\s*(?:Azure\.ResourceManager\.)?ArmSkipParameter|(?:Azure\.ResourceManager\.)?ArmSkipParameter\s*&\s*(?:Azure\.ResourceManager\.)?ArmTopParameter))\s*>)'
-          path: "*.tsp"
+          command: "node verify-emitted-contract.js arm-list-top-skip"
+          expected_exit_code: 0
       - &file_not_matches
         type: "file-not-matches"
         config:
@@ -105,7 +97,11 @@ stimuli:
         config:
           required:
             - "^(edit|apply_patch|bash|powershell)$"
-      - *file_matches
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - *run_contract
       - *file_not_matches
     constraints:
       max_turns: 6
@@ -114,8 +110,7 @@ stimuli:
 scoring:
   weights:
     tool-calls: 0.2
-    run-command: 0.2
+    run-command: 0.4
     skill-invocation: 0.2
-    file-matches: 0.2
     file-not-matches: 0.2
   threshold: 1

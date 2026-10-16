@@ -1,21 +1,25 @@
 #!/usr/bin/env node
 
 import { spawn } from "node:child_process";
-import path from "node:path";
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 const mcpKind = process.env.AZSDK_EVAL_MCP_KIND;
 const repoRoot = process.env.AZSDK_EVAL_REPO_ROOT || process.cwd();
-if (!["live", "mock"].includes(mcpKind) || !repoRoot) {
-  console.error("MCP kind must be live or mock, and the repository root must be available.");
+const mcpRoot = process.env.AZSDK_EVAL_MCP_ROOT || path.join(repoRoot, "artifacts", "mcp");
+if (!["live", "mock"].includes(mcpKind)) {
+  console.error("MCP kind must be live or mock.");
   process.exit(1);
 }
 
-const serverCommand =
-  mcpKind === "live"
-    ? ["artifacts/mcp/cli/azsdk.dll", "start"]
-    : ["artifacts/mcp/mock/azsdk-mock.dll"];
+const serverCommand = mcpKind === "live" ? ["cli/azsdk.dll", "mcp"] : ["mock/azsdk-mock.dll"];
 const [relativeDllPath, ...serverArgs] = serverCommand;
-const dllPath = path.resolve(repoRoot, relativeDllPath);
+const dllPath = path.resolve(mcpRoot, relativeDllPath);
+if (!fs.existsSync(dllPath)) {
+  console.error(`Prebuilt ${mcpKind} MCP binary does not exist: ${dllPath}`);
+  process.exit(1);
+}
+
 const child = spawn("dotnet", [dllPath, ...serverArgs], {
   stdio: "inherit",
   env: process.env,

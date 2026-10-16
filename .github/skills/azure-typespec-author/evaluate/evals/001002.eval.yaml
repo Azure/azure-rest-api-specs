@@ -4,7 +4,7 @@ version: "1.0"
 type: capability # capability | regression
 area: "versioning"
 # Root-level environment
-environment: azsdk-mcp
+environment: azsdk-mcp-local
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -30,6 +30,8 @@ stimuli:
           dest: package.json
         - src: ../scripts/check-node-dependencies.js
           dest: check-node-dependencies.js
+        - src: ../scripts/verify-emitted-contract.js
+          dest: verify-emitted-contract.js
         - src: ../fixtures/001002-version-default-value/readme.md
           dest: readme.md
         - src: ../fixtures/001002-version-default-value/shared.tsp
@@ -39,11 +41,6 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "skill-invocation"
         config:
           required:
@@ -59,11 +56,6 @@ stimuli:
       @azure-typespec-author add a default value `21` for property age in model EmployeeProperties only for the new api version 2025-11-01
     environment: *shared_environment
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "run-command"
         config:
           command: "node check-node-dependencies.js node_modules"
@@ -76,29 +68,12 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
-      - &file_matches
-        type: "file-matches"
+      - &run_contract
+        type: "run-command"
+        name: "run-command-version-contract"
         config:
-          pattern: '@removed\((?:Microsoft\.Widget\.)?Versions\.v2025_11_01\)'
-          path: "employee.tsp"
-      - &file_matches_renamed_property
-        type: "file-matches"
-        name: "file-matches-renamed-property"
-        config:
-          pattern: '@renamedFrom\((?:Microsoft\.Widget\.)?Versions\.v2025_11_01, "age"\)'
-          path: "employee.tsp"
-      - &file_matches_added_property
-        type: "file-matches"
-        name: "file-matches-added-property"
-        config:
-          pattern: '@added\((?:Microsoft\.Widget\.)?Versions\.v2025_11_01\)'
-          path: "employee.tsp"
-      - &file_matches_property_default
-        type: "file-matches"
-        name: "file-matches-property-default"
-        config:
-          pattern: 'age\?: int32 = 21;'
-          path: "employee.tsp"
+          command: "node verify-emitted-contract.js version-001002"
+          expected_exit_code: 0
     constraints:
       max_turns: 5
       max_tokens: 1000000
@@ -117,10 +92,11 @@ stimuli:
         config:
           required:
             - "^(edit|apply_patch|bash|powershell)$"
-      - *file_matches
-      - *file_matches_renamed_property
-      - *file_matches_added_property
-      - *file_matches_property_default
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
+      - *run_contract
       - type: "prompt"
         config:
           prompt: "Verify change scope and quality only: add a default value of 21 for the `age` property in `EmployeeProperties` that only applies to the 2025-11-01 API version. The old age renamed and removed for the new version."
@@ -134,8 +110,6 @@ stimuli:
 scoring:
   weights:
     tool-calls: 0.125
-    prompt: 0.125
-    run-command: 0.125
+    run-command: 0.75
     skill-invocation: 0.125
-    file-matches: 0.5
   threshold: 0.98

@@ -4,7 +4,7 @@ version: "1.0"
 type: capability # capability | regression
 area: "armtemplate"
 # Root-level environment
-environment: azsdk-mcp
+environment: azsdk-mcp-local
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -30,6 +30,8 @@ stimuli:
           dest: package.json
         - src: ../scripts/check-node-dependencies.js
           dest: check-node-dependencies.js
+        - src: ../scripts/verify-emitted-contract.js
+          dest: verify-emitted-contract.js
         - src: ../fixtures/Microsoft.Widget/Widget/readme.md
           dest: readme.md
         - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
@@ -39,11 +41,6 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "skill-invocation"
         config:
           required:
@@ -59,11 +56,6 @@ stimuli:
       @azure-typespec-author In the Widget project, add an update operation for the existing Employee ARM resource. The operation should complete synchronously and allow clients to update the resource's tags and mutable Employee properties. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
     environment: *shared_environment
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "run-command"
         config:
           command: "node check-node-dependencies.js node_modules"
@@ -76,10 +68,20 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
+      - type: "run-command"
+        name: "run-command-patch-contract"
+        config:
+          command: "node verify-emitted-contract.js arm-patch-sync"
+          expected_exit_code: 0
       - &file_matches
         type: "file-matches"
         config:
           pattern: 'update\s+is\s+ArmCustomPatchSync\s*<'
+          path: "employee.tsp"
+      - &file_not_matches
+        type: "file-not-matches"
+        config:
+          pattern: 'update\s+is\s+ArmResourcePatch(?:Sync|Async)\s*<'
           path: "employee.tsp"
     constraints:
       max_turns: 5
@@ -100,6 +102,7 @@ stimuli:
           required:
             - "^(edit|apply_patch|bash|powershell)$"
       - *file_matches
+      - *file_not_matches
       - type: "prompt"
         config:
           prompt: "Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent."
@@ -113,8 +116,8 @@ stimuli:
 scoring:
   weights:
     tool-calls: 0.2
-    prompt: 0.2
-    run-command: 0.2
+    run-command: 0.3
     skill-invocation: 0.2
-    file-matches: 0.2
-  threshold: 0.96
+    file-matches: 0.15
+    file-not-matches: 0.15
+  threshold: 1

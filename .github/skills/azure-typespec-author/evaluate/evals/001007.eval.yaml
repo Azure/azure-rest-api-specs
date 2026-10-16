@@ -4,7 +4,7 @@ version: "1.0"
 type: capability # capability | regression
 area: "versioning"
 # Root-level environment
-environment: azsdk-mcp
+environment: azsdk-mcp-local
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -30,6 +30,8 @@ stimuli:
           dest: package.json
         - src: ../scripts/check-node-dependencies.js
           dest: check-node-dependencies.js
+        - src: ../scripts/verify-emitted-contract.js
+          dest: verify-emitted-contract.js
         - src: ../fixtures/001007-version-add-stable-after-preview/readme.md
           dest: readme.md
         - src: ../fixtures/001007-version-add-stable-after-preview/shared.tsp
@@ -87,6 +89,7 @@ stimuli:
             - "azure-sdk-mcp-azsdk_run_typespec_validation"
           disallowed:
             - "azure-sdk-mcp-azsdk_typespec_generate_authoring_plan"
+            - azure-sdk-mcp-azsdk_typespec_retrieve_knowledge
       - type: "skill-invocation"
         config:
           required:
@@ -110,6 +113,7 @@ stimuli:
             - "azure-sdk-mcp-azsdk_run_typespec_validation"
           disallowed:
             - "azure-sdk-mcp-azsdk_typespec_generate_authoring_plan"
+            - azure-sdk-mcp-azsdk_typespec_retrieve_knowledge
       - type: "run-command"
         config:
           command: "node check-node-dependencies.js node_modules"
@@ -121,6 +125,11 @@ stimuli:
       - type: "run-command"
         config:
           command: "tsp compile ."
+          expected_exit_code: 0
+      - type: "run-command"
+        name: "run-command-version-contract"
+        config:
+          command: "node verify-emitted-contract.js version-001007"
           expected_exit_code: 0
       - &file_exists
         type: "file-exists"

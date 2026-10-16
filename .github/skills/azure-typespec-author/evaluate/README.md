@@ -4,10 +4,11 @@ This directory contains [Vally](https://aka.ms/vally) evaluation cases for the `
 
 ## Prerequisites
 
-- [Vally CLI](https://aka.ms/vally) installed globally: `npm install -g @microsoft/vally-cli@0.14.0`
+- [Vally CLI](https://aka.ms/vally) 0.14.0. A global installation is convenient, but setup
+  installs and selects the repository-pinned copy under `eng/common/scripts/eval`.
 - Node.js 24.14.1 or newer and npm available on `PATH`; setup installs the pnpm version pinned by
   the spec repository.
-- The `azsdk-cli` MCP server built as described below.
+- A pinned, approved prebuilt `azsdk-cli` MCP artifact.
 - An API key for the model configured (e.g., Anthropic or OpenAI key via environment variable)
 
 > **Platform note:** Run these evaluations on Linux or in WSL when possible. On native Windows,
@@ -17,22 +18,22 @@ This directory contains [Vally](https://aka.ms/vally) evaluation cases for the `
 
 ## Environment Setup
 
-### Prepare Vally, fixtures, and MCP binaries
+### Prepare Vally, fixtures, and a prebuilt MCP binary
 
-Before running any evals, run the setup script from this directory. It sparse-clones
-[azure-sdk-tools](https://github.com/Azure/azure-sdk-tools), builds the live and mock MCP servers
-into `artifacts/mcp`, installs the current spec checkout with its pinned pnpm and frozen lockfile,
-and prints the environment variables needed by local Vally runs. The MCP binaries use the same
-`artifacts/mcp/cli` and `artifacts/mcp/mock` layout staged by the pipeline:
+Before running any evals, obtain an approved prebuilt MCP artifact and run setup from
+this directory. Setup never clones or builds azure-sdk-tools. It validates Vally,
+uses the current spec checkout and package catalog, prepares fixture dependencies,
+and prints the environment variables needed by local Vally runs:
 
 ```powershell
 # PowerShell
-node scripts/setup-environment.js --mcp-kind live | Invoke-Expression
+node scripts/setup-environment.js --mcp-kind live `
+  --mcp-root C:\path\to\pinned-mcp-artifact | Invoke-Expression
 ```
 
 ```bash
 # Bash / Zsh
-eval $(node scripts/setup-environment.js --mcp-kind live)
+eval "$(node scripts/setup-environment.js --mcp-kind live --mcp-root /path/to/pinned-mcp-artifact)"
 ```
 
 Vally 0.14 isolates the Copilot config home by default. For local runs that authenticate through
@@ -51,16 +52,12 @@ export EVALUATE_USE_HOST_COPILOT_HOME=1
 Keep this opt-in local. Pipeline runs authenticate with their injected token and should retain the
 default isolated Copilot home.
 
-Managed development devices cannot download packages directly from `registry.npmjs.org`.
-`dotnet run` performs an implicit build, and `GitHub.Copilot.SDK` may download its platform package
-during that build. Local evals therefore use prebuilt Release DLLs instead of building MCP from
-source in each trial. Setup routes that package download through the Microsoft CFS-protected feed.
-
-Setup builds both live and mock once and rewrites scalar eval specs to the selected local
-environment. Choose `mock` instead when initially preparing trigger evaluations:
+Setup rewrites scalar eval specs to the selected local environment. Choose `mock`
+only when an approved mock artifact is available:
 
 ```powershell
-node scripts/setup-environment.js --mcp-kind mock | Invoke-Expression
+node scripts/setup-environment.js --mcp-kind mock `
+  --mcp-root C:\path\to\pinned-mcp-artifact | Invoke-Expression
 ```
 
 Local live and mock runs use `environment: azsdk-mcp-local` and
@@ -86,14 +83,16 @@ participating files under `evals/`. Local environment overrides should not be co
 
 `setup-environment.js` does the following:
 
-1. Set scalar eval specs to the selected local prebuilt environment.
-2. Build the live MCP server into `artifacts/mcp/cli` and the mock MCP server
-   into `artifacts/mcp/mock`.
+1. Restore and select the repository-pinned Vally 0.14.0 toolchain, then verify the selected
+   prebuilt MCP artifact.
+2. Set scalar eval specs to the selected local prebuilt environment.
 3. Install the pnpm version pinned by the current spec checkout and run
    `pnpm install --frozen-lockfile` at the repository root.
 4. Generate the fixture `package.json` from the current checkout's pnpm catalog and copy
    `.github/copilot-instructions.md` into `fixtures/instructions-test/copilot-instructions.md`.
-5. Print shell commands that export `AZSDK_EVAL_REPO_ROOT` and `FIXTURE_NODE_MODULES`.
+5. Preflight all 38 forced definitions, workspace-contained destinations, writable copied
+   workspaces, and untouched compilation for the historically failing fixture groups.
+6. Print shell commands that export `AZSDK_EVAL_REPO_ROOT` and `FIXTURE_NODE_MODULES`.
 
 The MCP build uses `GitHub.Copilot.SDK`, which downloads platform-specific `@github/copilot-*`
 assets through MSBuild. The setup script passes
@@ -123,20 +122,15 @@ outer `.github/skills/.vally.yaml` integration described later.
 
 ### Local forced smoke test
 
-Use these commands for the usual local check. Setup builds the same Release binaries that trials
-run in CI:
+Use these commands for the usual local check. Use forced mode only for this remediation work:
 
 ```powershell
 # Ensure the eval spec uses: environment: azsdk-mcp-local
-vally eval --suite forced --skill-dir .. --output-dir ./result-forced --workspace ./debug-forced --verbose
+vally eval --suite forced --skill-dir .. --workers 1 --runs 1 `
+  --output-dir ./results/forced --workspace ./results/forced-workspaces --verbose
 ```
 
-Switch to the mock server for a trigger run without repeating setup:
-
-```powershell
-# Ensure the eval spec uses: environment: azsdk-mcp-mock-local
-vally eval --suite trigger --skill-dir .. --output-dir ./result-trigger --workspace ./debug-trigger --verbose
-```
+Do not run trigger or no-skill modes for the remediation validation.
 
 ### Which file to use
 
@@ -153,81 +147,38 @@ Notes:
   Author suites.
 - Use `--eval-spec` + `--tag` for single-file targeted mode runs.
 
-### Run a named test suite
+### Run a named forced suite
 
 Test suites are defined in `evaluate/.vally.yaml` under the `suites` key. This is the preferred
 local entry point.
 
-| Suite                           | Description                                    |
-| ------------------------------- | ---------------------------------------------- |
-| `versioning-forced`             | Versioning cases (001xxx) — forced mode        |
-| `armtemplate-forced`            | ARM template cases (002xxx) — forced mode      |
-| `longrunningoperation-forced`   | Long-running operation cases (003xxx) — forced |
-| `decorators-forced`             | Decorator cases (004xxx) — forced mode         |
-| `warning-forced`                | Warning cases (005xxx) — forced mode           |
-| `dataplane-forced`              | Data-plane cases (006xxx) — forced mode        |
-| `versioning-trigger`            | Versioning cases — trigger mode                |
-| `armtemplate-trigger`           | ARM template cases — trigger mode              |
-| `longrunningoperation-trigger`  | LRO cases — trigger mode                       |
-| `decorators-trigger`            | Decorator cases — trigger mode                 |
-| `warning-trigger`               | Warning cases — trigger mode                   |
-| `dataplane-trigger`             | Data-plane cases — trigger mode                |
-| `versioning-turns`              | Versioning confirmation cases — multi-turn     |
-| `versioning-no-skill`           | Versioning cases — no-skill baseline           |
-| `armtemplate-no-skill`          | ARM template cases — no-skill baseline         |
-| `longrunningoperation-no-skill` | LRO cases — no-skill baseline                  |
-| `decorators-no-skill`           | Decorator cases — no-skill baseline            |
-| `warning-no-skill`              | Warning cases — no-skill baseline              |
-| `dataplane-no-skill`            | Data-plane cases — no-skill baseline           |
-| `forced`                        | All cases — forced mode                        |
-| `trigger`                       | All cases — trigger mode                       |
-| `turns`                         | All confirmation cases — multi-turn            |
-| `no-skill`                      | All cases — no-skill baseline                  |
+| Suite                         | Description                                    |
+| ----------------------------- | ---------------------------------------------- |
+| `versioning-forced`           | Versioning cases (001xxx) — forced mode        |
+| `armtemplate-forced`          | ARM template cases (002xxx) — forced mode      |
+| `longrunningoperation-forced` | Long-running operation cases (003xxx) — forced |
+| `decorators-forced`           | Decorator cases (004xxx) — forced mode         |
+| `warning-forced`              | Warning cases (005xxx) — forced mode           |
+| `dataplane-forced`            | Data-plane cases (006xxx) — forced mode        |
+| `forced`                      | All cases — forced mode                        |
 
-Run a suite by name. Forced and trigger runs should point at the skill directory:
+Run a suite by name and point it at the local skill directory:
 
 ```powershell
 vally eval --suite forced --skill-dir .. --output-dir ./result --workspace ./debug --verbose
-vally eval --suite trigger --skill-dir .. --output-dir ./result-trigger --workspace ./debug-trigger --verbose
-vally eval --suite turns --skill-dir .. --output-dir ./result-turns --workspace ./debug-turns --verbose
 ```
 
-For no-skill baselines, create an empty skill directory under the current `evaluate/` directory and
-pass that path instead:
+### Run a single forced evaluation file
 
-```powershell
-$noSkillDir = Join-Path (Get-Location) 'no-skills'
-if (Test-Path $noSkillDir) { Remove-Item -Recurse -Force $noSkillDir }
-New-Item -ItemType Directory -Force $noSkillDir | Out-Null
-vally eval --suite no-skill --skill-dir $noSkillDir --output-dir ./result-no-skill --workspace ./debug-no-skill --verbose
-```
-
-### Run a single evaluation file with a specific mode
-
-Use `--eval-spec` + `--tag` only when debugging one specific case file. For no-skill runs, create
-`$noSkillDir` as shown in the suite section first.
+Use `--eval-spec` + `--tag mode=forced` only when debugging one specific case file.
 
 ```powershell
 vally eval --eval-spec evals/001001.eval.yaml --tag mode=forced --skill-dir .. --output-dir ./result-forced --workspace ./debug-forced --verbose
-vally eval --eval-spec evals/001001.eval.yaml --tag mode=trigger --skill-dir .. --output-dir ./result-trigger --workspace ./debug-trigger --verbose
-vally eval --eval-spec evals/001001.eval.yaml --tag mode=no-skill --skill-dir $noSkillDir --output-dir ./result-no-skill --workspace ./debug-no-skill --verbose
 ```
-
-### Modes (forced / trigger / no-skill)
-
-Each test case has three modes:
-
-| Mode       | Description                                                                              |
-| ---------- | ---------------------------------------------------------------------------------------- |
-| `forced`   | Skill explicitly invoked via `@azure-typespec-author` prefix + full code quality graders |
-| `trigger`  | Tests whether the skill is automatically triggered (skill invocation detection)          |
-| `no-skill` | Baseline run without loading the skill (`--skill-dir` points at an empty directory)      |
-
-For targeted single-case debugging, use `--eval-spec` with `--tag mode=...` as shown above.
 
 ### Vally local runs
 
-For local forced and trigger runs, pass `--skill-dir ..` from the `evaluate/` directory so Vally
+For local forced runs, pass `--skill-dir ..` from the `evaluate/` directory so Vally
 discovers the `azure-typespec-author` skill directory that contains `SKILL.md`. The prompts still
 include the `@azure-typespec-author` prefix, and the evals still use `skill-invocation` graders to
 verify that the skill was invoked.
@@ -238,8 +189,23 @@ strict, forced-mode failures often mean the agent did not call a required tool s
 `azure-sdk-mcp-azsdk_run_typespec_validation`. When debugging local runs, keep `--verbose` enabled
 and inspect the `Tool Calls` column in `eval-results.md` or the trial entries in `results.jsonl`.
 
-Do not use `--skill-dir ..` for no-skill baseline runs. Those runs intentionally use an empty skill
-directory to measure behavior without loading the skill.
+Summarize the actual source-family calls and ordering from a completed run's event logs:
+
+```powershell
+node scripts/analyze-routing.js .\results\forced\<timestamp>
+```
+
+For the current 38 covered cases, the expected result is 38 Web-only trials, zero retrieval calls,
+zero planner calls, grounding before the first mutation, and validation after mutation.
+
+Run deterministic positive and negative examples for corrected syntax graders:
+
+```powershell
+node scripts/test-grader-contracts.js
+node scripts/test-routing-analyzer.js
+node scripts/test-skill-workflow.js
+node scripts/preflight-harness.js
+```
 
 ### Run a subset suite (optional)
 
@@ -248,31 +214,18 @@ Domain-specific suites are useful for ad-hoc local runs on one scenario family:
 ```powershell
 # Run forced mode for versioning cases only
 vally eval --suite versioning-forced --skill-dir ..
-
-# Run no-skill baseline for armtemplate cases
-vally eval --suite armtemplate-no-skill --skill-dir $noSkillDir
-
-# Run trigger detection for versioning cases
-vally eval --suite versioning-trigger --skill-dir ..
 ```
 
 ### Useful flags
 
-| Flag                           | Purpose                                                        |
-| ------------------------------ | -------------------------------------------------------------- |
-| `--keep-executor-session-logs` | Preserve agent session logs under `--output-dir` for debugging |
-| `--runs <n>`                   | Override the number of trials per stimulus for local runs      |
-| `--verbose`                    | Show full agent output during the run                          |
-| `--workers <n>`                | Run multiple stimuli in parallel (default: 5)                  |
+| Flag            | Purpose                                                   |
+| --------------- | --------------------------------------------------------- |
+| `--runs <n>`    | Override the number of trials per stimulus for local runs |
+| `--verbose`     | Show full agent output during the run                     |
+| `--workers <n>` | Run multiple stimuli in parallel (default: 5)             |
 
-### Run with multiple workers
-
-By default local evals use the `azsdk-mcp` environment from `evaluate/.vally.yaml` one by one. Set
-workers when you want to run multiple stimuli in parallel:
-
-```bash
-vally eval --suite forced --skill-dir .. --workers 3
-```
+Use exactly one worker for remediation validation so MCP calls and fixture workspaces
+remain attributable to a single trial.
 
 ## Results
 
