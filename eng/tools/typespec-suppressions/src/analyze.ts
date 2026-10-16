@@ -1,4 +1,4 @@
-import { readdir, readFile } from "node:fs/promises";
+import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { simpleGit } from "simple-git";
 import {
@@ -182,6 +182,15 @@ async function readRevisionFile(
   }
 }
 
+async function statRevisionFile(repoRoot: string, revision: string, filePath: string) {
+  const output = await simpleGit(repoRoot).raw(["ls-tree", "-z", revision, "--", filePath]);
+  if (!output) {
+    return undefined;
+  }
+  const directory = output.startsWith("040000 ");
+  return { isDirectory: () => directory, isFile: () => !directory };
+}
+
 function excludeNestedTypeSpecProjects(files: string[], specPath: string): string[] {
   const nestedSpecPaths = files
     .filter(isTypeSpecConfigFile)
@@ -207,6 +216,8 @@ async function collectRevisionSuppressions(
   );
 
   const suppressions: SuppressionRecord[] = [];
+  const sources = new Map<string, string>();
+  const reportFilePaths = new Map<string, string>();
   for (const filePath of relevantFiles) {
     const content = await readRevisionFile(repoRoot, revision, filePath);
     if (content === undefined) {
@@ -222,10 +233,18 @@ async function collectRevisionSuppressions(
           );
     if (isTypeSpecConfigFile(filePath)) {
       suppressions.push(...extractTspconfigSuppressions(reportSpecPath, reportFilePath, content));
-    } else if (isTypeSpecSourceFile(filePath)) {
-      suppressions.push(...extractInlineSuppressions(reportSpecPath, reportFilePath, content));
     }
+    sources.set(filePath, content);
+    reportFilePaths.set(filePath, reportFilePath);
   }
+  suppressions.push(
+    ...(await extractInlineSuppressions(revisionSpecPath, sources, {
+      readFile: (filePath) => readRevisionFile(repoRoot, revision, filePath),
+      stat: (filePath) => statRevisionFile(repoRoot, revision, filePath),
+      reportSpecPath,
+      mapSourcePath: (filePath) => reportFilePaths.get(filePath) ?? filePath,
+    })),
+  );
 
   return suppressions.sort(compareSuppressions);
 }
@@ -271,6 +290,17 @@ async function readDirectoryFile(repoRoot: string, filePath: string): Promise<st
   }
 }
 
+async function statDirectoryFile(repoRoot: string, filePath: string) {
+  try {
+    return await stat(path.join(repoRoot, filePath));
+  } catch (error) {
+    if (error instanceof Error && "code" in error && error.code === "ENOENT") {
+      return undefined;
+    }
+    throw error;
+  }
+}
+
 async function collectDirectorySuppressions(
   repoRoot: string,
   specPath: string,
@@ -281,6 +311,7 @@ async function collectDirectorySuppressions(
   );
 
   const suppressions: SuppressionRecord[] = [];
+  const sources = new Map<string, string>();
   for (const filePath of relevantFiles) {
     const content = await readDirectoryFile(repoRoot, filePath);
     if (content === undefined) {
@@ -289,10 +320,15 @@ async function collectDirectorySuppressions(
 
     if (isTypeSpecConfigFile(filePath)) {
       suppressions.push(...extractTspconfigSuppressions(specPath, filePath, content));
-    } else if (isTypeSpecSourceFile(filePath)) {
-      suppressions.push(...extractInlineSuppressions(specPath, filePath, content));
     }
+    sources.set(filePath, content);
   }
+  suppressions.push(
+    ...(await extractInlineSuppressions(specPath, sources, {
+      readFile: (filePath) => readDirectoryFile(repoRoot, filePath),
+      stat: (filePath) => statDirectoryFile(repoRoot, filePath),
+    })),
+  );
 
   return suppressions.sort(compareSuppressions);
 }
