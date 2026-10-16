@@ -113,7 +113,7 @@ model LinkedKeyVaultProperties {
 @doc("Managed identity properties for accessing Azure resources.")
 model ManagedIdentity {
   @doc("The type of the managed identity, either SystemAssigned or UserAssigned.")
-  type?: IdentityType;
+  type?: ManagedIdentityType = ManagedIdentityType.SystemAssigned;
 
   @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
   resourceId?: Azure.Core.armResourceIdentifier<[
@@ -124,7 +124,7 @@ model ManagedIdentity {
 }
 
 @doc("The type of the managed identity.")
-union IdentityType {
+union ManagedIdentityType {
   string,
 
   @doc("System-assigned managed identity.")

@@ -752,30 +752,6 @@
         ]
       }
     },
-    "IdentityType": {
-      "type": "string",
-      "description": "The type of the managed identity.",
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System-assigned managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User-assigned managed identity."
-          }
-        ]
-      }
-    },
     "LinkedKeyVaultProperties": {
       "type": "object",
       "description": "Linked Key Vault properties for the Playwright workspace.",
@@ -796,8 +772,29 @@
       "description": "Managed identity properties for accessing Azure resources.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of the managed identity, either SystemAssigned or UserAssigned."
+          "type": "string",
+          "description": "The type of the managed identity, either SystemAssigned or UserAssigned.",
+          "default": "SystemAssigned",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedIdentityType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "SystemAssigned",
+                "value": "SystemAssigned",
+                "description": "System-assigned managed identity."
+              },
+              {
+                "name": "UserAssigned",
+                "value": "UserAssigned",
+                "description": "User-assigned managed identity."
+              }
+            ]
+          }
         },
         "resourceId": {
           "type": "string",
