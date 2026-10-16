@@ -77,7 +77,7 @@ interface Workspaces {
   refreshRecommendations is ArmResourceActionNoContentAsyncWithLocationResult<
     Workspace,
     void,
-    WorkspaceEvaluation
+    LegacyWorkspaceEvaluation
   >;
 
   /**
@@ -85,10 +85,14 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO POST returning 202 + Location, not a synchronous POST"
   @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
-  discover is ArmResourceActionNoContentAsyncWithLocationResult<
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "discover")
+  @sharedRoute
+  @action("discover")
+  discoverLegacy is ArmResourceActionNoContentAsyncWithLocationResult<
     Workspace,
     void,
-    WorkspaceDiscovery
+    LegacyWorkspaceDiscovery
   >;
 
   /**
@@ -96,11 +100,33 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO POST returning 202 + Location, not a synchronous POST"
   @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
-  evaluate is ArmResourceActionNoContentAsyncWithLocationResult<
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "evaluate")
+  @sharedRoute
+  @action("evaluate")
+  evaluateLegacy is ArmResourceActionNoContentAsyncWithLocationResult<
     Workspace,
     void,
-    WorkspaceEvaluation
+    LegacyWorkspaceEvaluation
   >;
+
+  /**
+   * Starts discovery for the workspace. The initial 202 has no body. Poll the operation-bound Location URL until completion; it returns the typed discovery result and is distinct from ordinary discoveries reads.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @sharedRoute
+  @action("discover")
+  @Azure.Core.useFinalStateVia("location")
+  discover is ArmResourceActionAsync<Workspace, void, WorkspaceDiscovery>;
+
+  /**
+   * Starts evaluation of published scenario-template versions, including when the workspace has no scenarios. Acceptance fixes the selected template membership and total count, qualified resource snapshot and canonical discovery result reference. Without a usable discovery snapshot or valid catalog input, the request is rejected synchronously with an Azure error and no evaluation result is created. A valid empty catalog completes successfully with zero counts and an empty results array. Outcome counts reflect processing after acceptance. The initial 202 has no body. Poll the operation-bound Location URL until completion; it returns the typed evaluation result and is distinct from ordinary evaluations reads.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @sharedRoute
+  @action("evaluate")
+  @Azure.Core.useFinalStateVia("location")
+  evaluate is ArmResourceActionAsync<Workspace, void, WorkspaceEvaluation>;
 }
 
 @@minLength(Workspace.name, 1);

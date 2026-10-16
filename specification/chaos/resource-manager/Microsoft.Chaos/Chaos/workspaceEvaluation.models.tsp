@@ -17,9 +17,12 @@ namespace Microsoft.Chaos;
  */
 @parentResource(Workspace)
 @singleton("latest")
-model WorkspaceEvaluation is ProxyResource<WorkspaceEvaluationProperties> {
+@removed(Microsoft.Chaos.Versions.v2026_11_01)
+@renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "WorkspaceEvaluation")
+model LegacyWorkspaceEvaluation
+  is ProxyResource<WorkspaceEvaluationProperties> {
   ...ResourceNameParameter<
-    Resource = WorkspaceEvaluation,
+    Resource = LegacyWorkspaceEvaluation,
     KeyName = "evaluationName",
     SegmentName = "evaluations",
     NamePattern = ""
@@ -27,9 +30,23 @@ model WorkspaceEvaluation is ProxyResource<WorkspaceEvaluationProperties> {
 }
 
 /**
+ * A retained workspace evaluation of published scenario-template versions.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+@parentResource(Workspace)
+model WorkspaceEvaluation is ProxyResource<WorkspaceEvaluationProperties> {
+  ...ResourceNameParameter<
+    Resource = WorkspaceEvaluation,
+    KeyName = "evaluationName",
+    SegmentName = "evaluations",
+    NamePattern = "^(latest|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"
+  >;
+}
+
+/**
  * Model that represents the properties of the workspace evaluation.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only singleton resource representing latest evaluation status"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only evaluation result with operation status, not a resource provisioning lifecycle"
 model WorkspaceEvaluationProperties {
   /**
    * The evaluation status.
@@ -66,8 +83,20 @@ model WorkspaceEvaluationProperties {
    * The resource snapshot ID used for this evaluation.
    */
   @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @madeRequired(Microsoft.Chaos.Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
-  resourceSnapshotId?: string;
+  resourceSnapshotId: string;
+
+  /**
+   * The canonical Azure resource ID of the retained discovery result that supplied resourceSnapshotId. This reference does not change when the latest discovery changes and never identifies the latest alias or a protected LRO polling handle.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  discoveryResultId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Chaos/workspaces/discoveries";
+    }
+  ]>;
 
   /**
    * The number of scenarios to evaluate.
@@ -101,33 +130,42 @@ model WorkspaceEvaluationProperties {
    * The number of templates to evaluate.
    */
   @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @madeRequired(Microsoft.Chaos.Versions.v2026_11_01)
+  @typeChangedFrom(Microsoft.Chaos.Versions.v2026_11_01, int32)
   @visibility(Lifecycle.Read)
-  numTemplatesToEvaluate?: int32;
+  numTemplatesToEvaluate: WorkspaceEvaluationCount;
 
   /**
    * The number of templates that evaluated successfully.
    */
   @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @madeRequired(Microsoft.Chaos.Versions.v2026_11_01)
+  @typeChangedFrom(Microsoft.Chaos.Versions.v2026_11_01, int32)
   @visibility(Lifecycle.Read)
-  numTemplatesEvaluatedSucceeded?: int32;
+  numTemplatesEvaluatedSucceeded: WorkspaceEvaluationCount;
 
   /**
    * The number of templates that failed evaluation.
    */
   @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @madeRequired(Microsoft.Chaos.Versions.v2026_11_01)
+  @typeChangedFrom(Microsoft.Chaos.Versions.v2026_11_01, int32)
   @visibility(Lifecycle.Read)
-  numTemplatesEvaluatedFailed?: int32;
+  numTemplatesEvaluatedFailed: WorkspaceEvaluationCount;
 
   /**
    * The number of templates that were cancelled during evaluation.
    */
   @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @madeRequired(Microsoft.Chaos.Versions.v2026_11_01)
+  @typeChangedFrom(Microsoft.Chaos.Versions.v2026_11_01, int32)
   @visibility(Lifecycle.Read)
-  numTemplatesEvaluatedCancelled?: int32;
+  numTemplatesEvaluatedCancelled: WorkspaceEvaluationCount;
 
   /**
    * The overall evaluation result.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   evaluationResult?: RecommendationStatus;
 
@@ -175,18 +213,48 @@ model TemplateEvaluationResultItem {
    * the GW falls back to `scenarioName` in that case (`scenario.Id == templateId` by BE
    * convention), so ARM responses are typically populated in practice.
    */
-  templateId?: string;
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "templateId")
+  legacyTemplateId?: string;
 
   /**
    * The template name that was evaluated. Optional for the same reason as `templateId`.
    */
-  templateName?: string;
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "templateName")
+  legacyTemplateName?: string;
+
+  /**
+   * The canonical ARM ID of the evaluated scenario-template version. Scenario IDs and versionless template aliases are not valid substitutes.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  templateId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Chaos/scenarioTemplates/versions";
+    }
+  ]>;
+
+  /**
+   * The stable catalog name of the evaluated scenario template, not a localized display name.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  @minLength(1)
+  templateName: string;
 
   /**
    * The evaluation result for this template.
    */
   evaluationResult: RecommendationStatus;
 }
+
+/**
+ * A nonnegative count of scenario-template versions in an evaluation.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+@minValue(0)
+scalar WorkspaceEvaluationCount extends int32;
 
 /**
  * Enum of the workspace evaluation status.
@@ -217,15 +285,44 @@ union WorkspaceEvaluationStatus {
   /**
    * The evaluation partially succeeded — some scenarios succeeded while others failed.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "PartiallySucceeded")
+  legacyPartiallySucceeded: "PartiallySucceeded",
+
+  /**
+   * Unless cancellation won terminal settlement, at least one template applicability test completed and at least one failed or was canceled. Discovery completeness does not determine this processing status. The first terminal settlement is authoritative; a later cancellation does not replace it.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
   PartiallySucceeded: "PartiallySucceeded",
 
   /**
    * The evaluation failed.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "Failed")
+  legacyFailed: "Failed",
+
+  /**
+   * No template applicability test completed and at least one failed, unless cancellation won terminal settlement. The accepted resource snapshot and discovery result reference remain present; an admission failure creates no evaluation result.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
   Failed: "Failed",
 
   /**
    * The evaluation was canceled.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "Canceled")
+  legacyCanceled: "Canceled",
+
+  /**
+   * Cancellation won terminal settlement, or all admitted template tests were canceled. Previously recorded outcomes may remain. A later callback cannot replace this terminal result, and cancellation cannot replace an already settled result.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
   Canceled: "Canceled",
 }
+
+@@doc(
+  WorkspaceEvaluation.name,
+  "The service-generated evaluation result ID. Use latest in the request path for the most recently durably admitted GA template evaluation; responses contain the canonical result ID."
+);

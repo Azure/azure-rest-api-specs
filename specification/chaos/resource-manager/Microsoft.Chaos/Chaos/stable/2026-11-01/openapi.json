@@ -76,6 +76,9 @@
       "name": "WorkspaceDiscoveries"
     },
     {
+      "name": "WorkspaceEvaluations"
+    },
+    {
       "name": "DiscoveredResources"
     },
     {
@@ -2697,7 +2700,7 @@
         "tags": [
           "Workspaces"
         ],
-        "description": "Triggers resource discovery for the workspace.",
+        "description": "Starts discovery for the workspace. The initial 202 has no body. Poll the operation-bound Location URL until completion; it returns the typed discovery result and is distinct from ordinary discoveries reads.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2719,6 +2722,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceDiscovery"
+            }
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -2859,13 +2868,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveries/latest": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveries": {
       "get": {
-        "operationId": "WorkspaceDiscoveries_Get",
+        "operationId": "WorkspaceDiscoveries_List",
         "tags": [
           "WorkspaceDiscoveries"
         ],
-        "description": "Gets the latest discovery result. Returns 202 with Location pointing to this same polling resource while discovery is processing, and 200 for a terminal result, including Failed with an error and no snapshot when completion could not be accepted.",
+        "description": "Lists retained discovery results under the workspace. Each result has its canonical ID; latest is an alias and is not a separate collection entry. This operation does not extend result retention.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2884,6 +2893,72 @@
             "type": "string",
             "minLength": 1,
             "pattern": "^[^<>%&:?#/\\\\]+$"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Opaque continuation token supplied by the returned nextLink.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceDiscoveryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List retained workspace discoveries using canonical IDs and an opaque nextLink.": {
+            "$ref": "./examples/WorkspaceDiscoveries_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveries/{discoveryName}": {
+      "get": {
+        "operationId": "WorkspaceDiscoveries_Get",
+        "tags": [
+          "WorkspaceDiscoveries"
+        ],
+        "description": "Gets a retained discovery result by its ID, or uses latest to select the most recently durably admitted discovery. Returns 200 with the current representation while processing or terminal. A Failed result can contain errors without a snapshot. Returns 404 if no qualifying retained result exists. This is not an LRO polling endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          },
+          {
+            "name": "discoveryName",
+            "in": "path",
+            "description": "The service-generated discovery result ID. Use latest in the request path for the most recently durably admitted discovery; responses contain the canonical result ID.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(latest|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"
           }
         ],
         "responses": {
@@ -2893,22 +2968,10 @@
               "$ref": "#/definitions/WorkspaceDiscovery"
             }
           },
-          "202": {
-            "description": "The nonterminal discovery result returned from the polling location.",
+          "404": {
+            "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/WorkspaceDiscovery"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The absolute URL of this same discovery polling resource, including the requested API version."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -2933,6 +2996,12 @@
           },
           "Get an established discovery result with an authoritatively empty expected set.": {
             "$ref": "./examples/WorkspaceDiscoveries_Get_KnownEmpty.json"
+          },
+          "Read a running discovery with HTTP 200 without inventing accepted coverage.": {
+            "$ref": "./examples/WorkspaceDiscoveries_Get_InProgress.json"
+          },
+          "Read latest as an alias while returning the canonical discovery identity.": {
+            "$ref": "./examples/WorkspaceDiscoveries_Get_Latest.json"
           }
         }
       }
@@ -2943,7 +3012,7 @@
         "tags": [
           "Workspaces"
         ],
-        "description": "Triggers scenario evaluation for the workspace.",
+        "description": "Starts evaluation of published scenario-template versions, including when the workspace has no scenarios. Acceptance fixes the selected template membership and total count, qualified resource snapshot and canonical discovery result reference. Without a usable discovery snapshot or valid catalog input, the request is rejected synchronously with an Azure error and no evaluation result is created. A valid empty catalog completes successfully with zero counts and an empty results array. Outcome counts reflect processing after acceptance. The initial 202 has no body. Poll the operation-bound Location URL until completion; it returns the typed evaluation result and is distinct from ordinary evaluations reads.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2965,6 +3034,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceEvaluation"
+            }
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -2987,7 +3062,7 @@
           }
         },
         "x-ms-examples": {
-          "Trigger scenario evaluation for the workspace.": {
+          "Start evaluation of published scenario-template versions.": {
             "$ref": "./examples/Workspaces_Evaluate.json"
           }
         },
@@ -2995,6 +3070,144 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/evaluations": {
+      "get": {
+        "operationId": "WorkspaceEvaluations_List",
+        "tags": [
+          "WorkspaceEvaluations"
+        ],
+        "description": "Lists retained GA template evaluations under the workspace. Each result has its canonical ID; latest is an alias and is not a separate collection entry. This operation does not extend retention or convert scenario-backed legacy evaluations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Opaque continuation token supplied by the returned nextLink.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceEvaluationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List retained workspace evaluations using canonical IDs and an opaque nextLink.": {
+            "$ref": "./examples/WorkspaceEvaluations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/evaluations/{evaluationName}": {
+      "get": {
+        "operationId": "WorkspaceEvaluations_Get",
+        "tags": [
+          "WorkspaceEvaluations"
+        ],
+        "description": "Gets a retained template evaluation by its ID, or uses latest to select the most recently durably admitted GA template evaluation. Returns 200 with the current representation while processing or terminal. Returns 404 if no qualifying retained result exists; scenario-backed legacy operations are not substituted. This is not an LRO polling endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          },
+          {
+            "name": "evaluationName",
+            "in": "path",
+            "description": "The service-generated evaluation result ID. Use latest in the request path for the most recently durably admitted GA template evaluation; responses contain the canonical result ID.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(latest|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceEvaluation"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "A valid empty published catalog succeeds with zero counts and no aggregate recommendation.": {
+            "$ref": "./examples/WorkspaceEvaluations_Get_EmptyCatalog.json"
+          },
+          "Read a Canceled template evaluation independently of workspace scenarios.": {
+            "$ref": "./examples/WorkspaceEvaluations_Get_Canceled.json"
+          },
+          "Read a Failed template evaluation independently of workspace scenarios.": {
+            "$ref": "./examples/WorkspaceEvaluations_Get_Failed.json"
+          },
+          "Read a InProgress template evaluation independently of workspace scenarios.": {
+            "$ref": "./examples/WorkspaceEvaluations_Get_InProgress.json"
+          },
+          "Read a PartiallySucceeded template evaluation independently of workspace scenarios.": {
+            "$ref": "./examples/WorkspaceEvaluations_Get_PartiallySucceeded.json"
+          },
+          "Read a Succeeded template evaluation independently of workspace scenarios.": {
+            "$ref": "./examples/WorkspaceEvaluations_Get_Succeeded.json"
+          },
+          "Read latest as an alias while returning the canonical GA evaluation identity.": {
+            "$ref": "./examples/WorkspaceEvaluations_Get_Latest.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios": {
@@ -7513,11 +7726,22 @@
       "properties": {
         "templateId": {
           "type": "string",
-          "description": "The template ID that was evaluated. Optional because the underlying BE field may\nbe null for legacy evaluations created before template-centric persistence landed;\nthe GW falls back to `scenarioName` in that case (`scenario.Id == templateId` by BE\nconvention), so ARM responses are typically populated in practice."
+          "format": "arm-id",
+          "description": "The canonical ARM ID of the evaluated scenario-template version. Scenario IDs and versionless template aliases are not valid substitutes.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Chaos/scenarioTemplates/versions"
+              }
+            ]
+          }
         },
         "templateName": {
           "type": "string",
-          "description": "The template name that was evaluated. Optional for the same reason as `templateId`."
+          "description": "The stable catalog name of the evaluated scenario template, not a localized display name.",
+          "minLength": 1,
+          "readOnly": true
         },
         "evaluationResult": {
           "$ref": "#/definitions/RecommendationStatus",
@@ -7525,6 +7749,8 @@
         }
       },
       "required": [
+        "templateId",
+        "templateName",
         "evaluationResult"
       ]
     },
@@ -7699,7 +7925,7 @@
     },
     "WorkspaceDiscovery": {
       "type": "object",
-      "description": "Model that represents the latest workspace discovery result.",
+      "description": "A retained workspace discovery result and its accepted coverage facts.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/WorkspaceDiscoveryProperties",
@@ -7792,6 +8018,27 @@
       },
       "required": [
         "scopes"
+      ]
+    },
+    "WorkspaceDiscoveryListResult": {
+      "type": "object",
+      "description": "The response of a WorkspaceDiscovery list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WorkspaceDiscovery items on this page",
+          "items": {
+            "$ref": "#/definitions/WorkspaceDiscovery"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "WorkspaceDiscoveryPermissionWarning": {
@@ -8247,7 +8494,7 @@
     },
     "WorkspaceEvaluation": {
       "type": "object",
-      "description": "Model that represents the latest workspace evaluation result.",
+      "description": "A retained workspace evaluation of published scenario-template versions.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/WorkspaceEvaluationProperties",
@@ -8258,6 +8505,33 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "WorkspaceEvaluationCount": {
+      "type": "integer",
+      "format": "int32",
+      "description": "A nonnegative count of scenario-template versions in an evaluation.",
+      "minimum": 0
+    },
+    "WorkspaceEvaluationListResult": {
+      "type": "object",
+      "description": "The response of a WorkspaceEvaluation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WorkspaceEvaluation items on this page",
+          "items": {
+            "$ref": "#/definitions/WorkspaceEvaluation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "WorkspaceEvaluationProperties": {
@@ -8301,33 +8575,37 @@
           "description": "The resource snapshot ID used for this evaluation.",
           "readOnly": true
         },
+        "discoveryResultId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The canonical Azure resource ID of the retained discovery result that supplied resourceSnapshotId. This reference does not change when the latest discovery changes and never identifies the latest alias or a protected LRO polling handle.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Chaos/workspaces/discoveries"
+              }
+            ]
+          }
+        },
         "numTemplatesToEvaluate": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/WorkspaceEvaluationCount",
           "description": "The number of templates to evaluate.",
           "readOnly": true
         },
         "numTemplatesEvaluatedSucceeded": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/WorkspaceEvaluationCount",
           "description": "The number of templates that evaluated successfully.",
           "readOnly": true
         },
         "numTemplatesEvaluatedFailed": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/WorkspaceEvaluationCount",
           "description": "The number of templates that failed evaluation.",
           "readOnly": true
         },
         "numTemplatesEvaluatedCancelled": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/WorkspaceEvaluationCount",
           "description": "The number of templates that were cancelled during evaluation.",
-          "readOnly": true
-        },
-        "evaluationResult": {
-          "$ref": "#/definitions/RecommendationStatus",
-          "description": "The overall evaluation result.",
           "readOnly": true
         },
         "results": {
@@ -8345,7 +8623,13 @@
       },
       "required": [
         "status",
-        "workspaceId"
+        "workspaceId",
+        "resourceSnapshotId",
+        "discoveryResultId",
+        "numTemplatesToEvaluate",
+        "numTemplatesEvaluatedSucceeded",
+        "numTemplatesEvaluatedFailed",
+        "numTemplatesEvaluatedCancelled"
       ]
     },
     "WorkspaceEvaluationStatus": {
@@ -8387,17 +8671,17 @@
           {
             "name": "PartiallySucceeded",
             "value": "PartiallySucceeded",
-            "description": "The evaluation partially succeeded — some scenarios succeeded while others failed."
+            "description": "Unless cancellation won terminal settlement, at least one template applicability test completed and at least one failed or was canceled. Discovery completeness does not determine this processing status. The first terminal settlement is authoritative; a later cancellation does not replace it."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "The evaluation failed."
+            "description": "No template applicability test completed and at least one failed, unless cancellation won terminal settlement. The accepted resource snapshot and discovery result reference remain present; an admission failure creates no evaluation result."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "The evaluation was canceled."
+            "description": "Cancellation won terminal settlement, or all admitted template tests were canceled. Previously recorded outcomes may remain. A later callback cannot replace this terminal result, and cancellation cannot replace an already settled result."
           }
         ]
       },

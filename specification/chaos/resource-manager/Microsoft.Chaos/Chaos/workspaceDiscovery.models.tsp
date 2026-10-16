@@ -17,9 +17,11 @@ namespace Microsoft.Chaos;
  */
 @parentResource(Workspace)
 @singleton("latest")
-model WorkspaceDiscovery is ProxyResource<WorkspaceDiscoveryProperties> {
+@removed(Microsoft.Chaos.Versions.v2026_11_01)
+@renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "WorkspaceDiscovery")
+model LegacyWorkspaceDiscovery is ProxyResource<WorkspaceDiscoveryProperties> {
   ...ResourceNameParameter<
-    Resource = WorkspaceDiscovery,
+    Resource = LegacyWorkspaceDiscovery,
     KeyName = "discoveryName",
     SegmentName = "discoveries",
     NamePattern = ""
@@ -27,9 +29,23 @@ model WorkspaceDiscovery is ProxyResource<WorkspaceDiscoveryProperties> {
 }
 
 /**
+ * A retained workspace discovery result and its accepted coverage facts.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+@parentResource(Workspace)
+model WorkspaceDiscovery is ProxyResource<WorkspaceDiscoveryProperties> {
+  ...ResourceNameParameter<
+    Resource = WorkspaceDiscovery,
+    KeyName = "discoveryName",
+    SegmentName = "discoveries",
+    NamePattern = "^(latest|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"
+  >;
+}
+
+/**
  * Model that represents the properties of the workspace discovery.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only singleton resource representing latest discovery status"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only discovery result with operation status, not a resource provisioning lifecycle"
 model WorkspaceDiscoveryProperties {
   /**
    * The discovery status.

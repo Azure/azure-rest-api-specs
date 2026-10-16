@@ -96,7 +96,16 @@ using Microsoft.Chaos;
 @@clientName(PermissionsFixProperties.whatIfMode, "IsWhatIfMode", "csharp");
 @@clientName(Recommendation, "ChaosScenarioRecommendation", "csharp");
 @@clientName(Validation, "ChaosScenarioValidationData", "csharp");
-@@clientName(WorkspaceEvaluation, "ChaosWorkspaceEvaluationData", "csharp");
+@@clientName(
+  WorkspaceEvaluation,
+  "ChaosWorkspaceTemplateEvaluationData",
+  "csharp"
+);
+@@clientName(
+  LegacyWorkspaceEvaluation,
+  "ChaosWorkspaceEvaluationData",
+  "csharp"
+);
 @@clientName(
   ActionSupportedTargetType,
   "ChaosActionSupportedTargetType",
