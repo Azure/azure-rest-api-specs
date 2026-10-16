@@ -112,7 +112,34 @@ export function verifyArmListTopSkip(documents) {
     assert.ok(parameter, `expected ${name} on ${match.operation.operationId}`);
     assert.notEqual(parameter.required, true, `${name} must be optional`);
     assert.equal(parameterType(parameter), "integer", `${name} must be integer`);
-    assert.equal(parameterFormat(parameter), "int32", `${name} must be int32`);
+    assert.equal(parameterFormat(parameter), "int64", `${name} must be int64`);
+  }
+}
+
+export function verifyArmExtensionResource(documents) {
+  const { document, file } = latestDocument(documents);
+  const employeeOperations = operations(document).filter(({ operation }) =>
+    /^Employees_/i.test(operation.operationId ?? ""),
+  );
+  const requiredMethods = ["delete", "get", "patch", "put"];
+  for (const method of requiredMethods) {
+    assert.ok(
+      employeeOperations.some((operation) => operation.method === method),
+      `expected Employee ${method.toUpperCase()} operation in ${file}`,
+    );
+  }
+  assert.ok(
+    employeeOperations.some(
+      ({ method, operation }) => method === "get" && /list/i.test(operation.operationId ?? ""),
+    ),
+    `expected Employee list operation in ${file}`,
+  );
+  for (const { route } of employeeOperations) {
+    assert.match(
+      route,
+      /^\/\{resourceUri\}\/providers\/Microsoft\.Widget\/employees(?:\/|$)/,
+      `Employee operation must use an extension-resource route in ${file}`,
+    );
   }
 }
 
@@ -449,6 +476,7 @@ export function verifyVersion006009(documents) {
 
 const modes = {
   "arm-action-lro": verifyArmActionLro,
+  "arm-extension-resource": verifyArmExtensionResource,
   "arm-list-top-skip": verifyArmListTopSkip,
   "arm-notify-action": verifyArmNotifyAction,
   "arm-patch-sync": verifyArmPatchSync,

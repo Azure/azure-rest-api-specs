@@ -6,6 +6,7 @@ import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   verifyArmActionLro,
+  verifyArmExtensionResource,
   verifyArmListTopSkip,
   verifyArmNotifyAction,
   verifyArmPatchSync,
@@ -68,14 +69,14 @@ const topSkipDocument = openApi(
             in: "query",
             required: false,
             type: "integer",
-            format: "int32",
+            format: "int64",
           },
           {
             name: "$skip",
             in: "query",
             required: false,
             type: "integer",
-            format: "int32",
+            format: "int64",
           },
         ],
       },
@@ -88,6 +89,44 @@ missingSkip.document.paths[
   "/subscriptions/{subscriptionId}/providers/Microsoft.Widget/employees"
 ].get.parameters.pop();
 assert.throws(() => verifyArmListTopSkip([missingSkip]), /expected \$skip/);
+const wrongTopFormat = structuredClone(topSkipDocument);
+wrongTopFormat.document.paths[
+  "/subscriptions/{subscriptionId}/providers/Microsoft.Widget/employees"
+].get.parameters[0].format = "int32";
+assert.throws(() => verifyArmListTopSkip([wrongTopFormat]), /\$top must be int64/);
+
+const extensionResource = openApi(
+  "2024-10-01-preview",
+  {},
+  {
+    "/{resourceUri}/providers/Microsoft.Widget/employees": {
+      get: { operationId: "Employees_List" },
+    },
+    "/{resourceUri}/providers/Microsoft.Widget/employees/{employeeName}": {
+      delete: { operationId: "Employees_Delete" },
+      get: { operationId: "Employees_Get" },
+      patch: { operationId: "Employees_Update" },
+      put: { operationId: "Employees_CreateOrUpdate" },
+    },
+  },
+);
+verifyArmExtensionResource([extensionResource]);
+const nonExtensionResource = structuredClone(extensionResource);
+nonExtensionResource.document.paths = {
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Widget/employees":
+    {
+      get: { operationId: "Employees_List" },
+    },
+  ...Object.fromEntries(
+    Object.entries(extensionResource.document.paths).filter(([route]) =>
+      route.includes("{employeeName}"),
+    ),
+  ),
+};
+assert.throws(
+  () => verifyArmExtensionResource([nonExtensionResource]),
+  /must use an extension-resource route/,
+);
 
 const trackedResource = openApi(
   "2024-10-01-preview",

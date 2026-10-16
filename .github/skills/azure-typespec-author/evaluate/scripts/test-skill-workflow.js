@@ -48,6 +48,7 @@ assert.match(
   intake,
   /must reuse this grounding record without repeating Agentic Search or retrieval/,
 );
+assert.equal((intake.match(/Covered — Agentic Search/g) ?? []).length, 4);
 assert.match(plan, /executed exactly one knowledge route/);
 assert.match(
   plan,
@@ -65,6 +66,10 @@ assert.match(plan, /Preserve every released stable wire contract/);
 assert.match(plan, /Use synchronous templates for GET\/read and LIST/);
 assert.match(plan, /Preserve the target resource's existing key, route, request, and response/);
 assert.match(plan, /full CRUD request supplies one sync\/async decision/);
+assert.match(
+  plan,
+  /including existence[\s>]+checks, custom actions, LRO behavior, and response\/header changes/,
+);
 
 assert.match(intake, /Add, replace, or promote an API version/);
 assert.match(intake, /Version-scope an existing feature without adding or promoting a version/);

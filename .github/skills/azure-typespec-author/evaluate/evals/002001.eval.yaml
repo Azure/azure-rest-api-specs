@@ -30,6 +30,8 @@ stimuli:
           dest: package.json
         - src: ../scripts/check-node-dependencies.js
           dest: check-node-dependencies.js
+        - src: ../scripts/verify-emitted-contract.js
+          dest: verify-emitted-contract.js
         - src: ../fixtures/Microsoft.Widget/Widget/readme.md
           dest: readme.md
         - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
@@ -98,12 +100,12 @@ stimuli:
         config:
           pattern: "TrackedResource<"
           path: "*.tsp"
-      - &file_matches_operations
-        type: "file-matches"
-        name: "file-matches-operations"
+      - &run_contract
+        type: "run-command"
+        name: "run-command-extension-resource-contract"
         config:
-          pattern: 'Extension\.Read<|Extension\.CreateOrReplaceAsync<|Extension\.CustomPatch(Sync|Async)<|Extension\.DeleteWithoutOkAsync<|Extension\.ListByTarget<'
-          path: "*.tsp"
+          command: "node verify-emitted-contract.js arm-extension-resource"
+          expected_exit_code: 0
     constraints:
       max_turns: 5
       max_tokens: 1000000
@@ -124,7 +126,7 @@ stimuli:
             - "^(edit|apply_patch|bash|powershell)$"
       - *file_matches
       - *file_not_matches
-      - *file_matches_operations
+      - *run_contract
       - type: "prompt"
         config:
           prompt: "The original separate list-by-resource-group and list-by-subscription operations should be consolidated into a single list operation using the extension list template. A scope-parameterized interface should be defined to allow the extension resource to be scoped to any parent resource."

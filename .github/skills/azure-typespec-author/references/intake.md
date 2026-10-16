@@ -39,12 +39,12 @@ knowledge route cannot obtain sufficient authoritative guidance, report a blocke
 instead of switching routes. Do not plan, edit, or validate during intake. Step 3
 must reuse this grounding record without repeating Agentic Search or retrieval.
 
-| Case | Name                    | Description                                            | Service Type     |
-| ---- | ----------------------- | ------------------------------------------------------ | ---------------- |
-| 1    | ARM Resource Types      | Define a new ARM resource with operations              | ARM              |
-| 2    | ARM Resource Operations | Add CRUD or custom actions on an existing resource     | ARM              |
-| 3    | API Versioning          | Add, bump, or promote an API version (preview/stable)  | ARM / Data-plane |
-| 4    | Data-Plane Operations   | Add CRUD or custom operations on a data-plane resource | Data-plane       |
+| Case | Name                    | Description                                            | Service Type     | Knowledge route          |
+| ---- | ----------------------- | ------------------------------------------------------ | ---------------- | ------------------------ |
+| 1    | ARM Resource Types      | Define a new ARM resource with operations              | ARM              | Covered — Agentic Search |
+| 2    | ARM Resource Operations | Add CRUD or custom actions on an existing resource     | ARM              | Covered — Agentic Search |
+| 3    | API Versioning          | Add, bump, or promote an API version (preview/stable)  | ARM / Data-plane | Covered — Agentic Search |
+| 4    | Data-Plane Operations   | Add CRUD or custom operations on a data-plane resource | Data-plane       | Covered — Agentic Search |
 
 ---
 

@@ -51,6 +51,11 @@ For requests that add, replace, or promote a version:
 
 ### ARM Resource Operations
 
+> ARM resource operations are covered by
+> [reference-document-links.md](reference-document-links.md), including existence
+> checks, custom actions, LRO behavior, and response/header changes. Reuse the
+> Agentic Search grounding from Step 2; do not call retrieval during planning.
+
 For PATCH operations that update tags and mutable resource properties:
 
 1. Use `ArmCustomPatchSync` or `ArmCustomPatchAsync` with
@@ -64,6 +69,10 @@ For PATCH operations that update tags and mutable resource properties:
    behavior.
 
 ### Data-Plane Operations
+
+> Data-plane operations are covered by
+> [reference-document-links.md](reference-document-links.md). Reuse the Agentic
+> Search grounding from Step 2; do not call retrieval during planning.
 
 Key guidance for data-plane:
 
