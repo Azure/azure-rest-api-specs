@@ -1,5 +1,5 @@
 # Fan-out shard job: one leg per shard runs its evals against the prebuilt MCP and publishes
-# per-leg raw JSONL + JUnit + completeness (always), and transcripts (on failure). Pass/fail is the eval VERDICT, not the
+# per-leg JUnit (always) + transcripts (on failure). Pass/fail is the eval VERDICT, not the
 # `vally` exit code (vally can exit 1 on a teardown flake after a pass).
 
 parameters:
@@ -41,8 +41,6 @@ jobs:
     # A red shard shouldn't abort its siblings; the rollup gates in Summary.
     continueOnError: true
     timeoutInMinutes: ${{ parameters.shardTimeoutInMinutes }}
-    workspace:
-      clean: all
     strategy:
       matrix: $[ stageDependencies.Prepare.generate_eval_matrix.outputs['detect.matrix'] ]
       maxParallel: 10
@@ -52,9 +50,9 @@ jobs:
         # name instead of colliding with the prior attempt's artifact (which fails the rerun).
         # The Summary job keeps only the highest attempt per shard so retries supersede cleanly.
         - output: pipelineArtifact
-          displayName: 'Publish $(shardName) raw results, JUnit and completeness'
+          displayName: 'Publish $(shardName) JUnit'
           artifactName: 'eval-result-$(shardName)-$(System.JobAttempt)'
-          targetPath: $(Build.ArtifactStagingDirectory)/eval-result
+          targetPath: $(Build.ArtifactStagingDirectory)/junit
           condition: always()
         - output: pipelineArtifact
           displayName: 'Publish $(shardName) transcripts (on failure)'
@@ -63,7 +61,6 @@ jobs:
           condition: failed()
     steps:
       - checkout: self
-        clean: true
         fetchDepth: 1
 
       - task: UseNode@1
@@ -76,9 +73,6 @@ jobs:
         parameters:
           npmrcPath: $(Build.SourcesDirectory)/.npmrc
           registryUrl: https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-tools/npm/registry/
-
-      - script: npm install --global npm@11.11.1 --userconfig $(Build.SourcesDirectory)/.npmrc
-        displayName: 'Use npm 11.11.1'
 
       # Installs vally-cli + its pinned copilot-sdk executor into node_modules.
       - script: npm ci --userconfig $(Build.SourcesDirectory)/.npmrc
@@ -114,6 +108,8 @@ jobs:
         env:
           EVAL_ARGS: $(evalArgs)
 
+      - template: /eng/common/pipelines/templates/steps/login-to-copilot.yml
+
       # Runs the eval via the invoke template (auth-conditional in the common default).
       - template: ${{ parameters.evalInvokeTemplate }}
         parameters:
@@ -125,15 +121,13 @@ jobs:
       - ${{ if parameters.postEvalTemplate }}:
         - template: ${{ parameters.postEvalTemplate }}
 
-      # Preserve exactly the newest invocation, including completed failed evals.
-      # Even an early failure publishes an incomplete marker; never fall back to stale data.
+      # JUnit is tiny — stage it always; heavy transcripts stage separately on failure.
+      # Also create the debug dir here so the failed()-gated debug publish always has a target
+      # (otherwise the publish errors "Path does not exist" when the dir was never created).
       - script: |
-          mkdir -p "$(Build.ArtifactStagingDirectory)/debug"
-          node --experimental-strip-types "$(Build.SourcesDirectory)/eng/common/scripts/eval/lib/shard-results.ts" \
-            --results-root "$(Build.SourcesDirectory)/artifacts/vally-results/$(shardName)" \
-            --output-directory "$(Build.ArtifactStagingDirectory)/eval-result" \
-            --shard-name "$(shardName)" --attempt "$(System.JobAttempt)"
-        displayName: 'Collect $(shardName) result data and completeness'
+          mkdir -p "$(Build.ArtifactStagingDirectory)/junit" "$(Build.ArtifactStagingDirectory)/debug"
+          find "$(Build.SourcesDirectory)/artifacts/vally-results/$(shardName)" -name '*.junit.xml' -exec cp {} "$(Build.ArtifactStagingDirectory)/junit/" \;
+        displayName: 'Collect $(shardName) JUnit'
         condition: always()
 
       # On a real failure keep transcripts; strip JUnit so Summary can't double-count it.
