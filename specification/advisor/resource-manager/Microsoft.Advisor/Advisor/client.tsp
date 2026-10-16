@@ -175,6 +175,11 @@ using Microsoft.Advisor;
 @@clientName(SuppressionContract, "AdvisorSuppressionContract", "csharp");
 @@clientName(SuppressionProperties, "AdvisorSuppressionProperties", "csharp");
 @@clientName(SuppressionProperties.expirationTimeStamp, "ExpireOn", "csharp");
+@@clientName(
+  SuppressionProperties.expirationTimeStamp,
+  "expirationTimestamp",
+  "java"
+);
 @@clientName(TriageRecommendation, "AdvisorTriageRecommendation", "csharp");
 @@clientName(
   TriageRecommendationProperties,
