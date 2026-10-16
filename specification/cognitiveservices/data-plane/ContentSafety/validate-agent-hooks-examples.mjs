@@ -4,6 +4,7 @@ import { basename, join } from "node:path";
 
 const root = new URL(".", import.meta.url).pathname;
 const sourceDirectory = join(root, "examples", "2026-10-15-preview");
+const semanticDirectory = join(root, "semantic-examples", "2026-10-15-preview");
 const generatedDirectory = join(root, "preview", "2026-10-15-preview", "examples");
 const negativeExamples = new Map([
   ["UnifiedModerate_InvalidSelectorCombination.json", ["400", "InvalidRequest"]],
@@ -158,9 +159,20 @@ for (const name of files) {
   const generatedText = await readFile(join(generatedDirectory, name), "utf8");
   assert(sourceText === generatedText, `${name}: generated example differs from source`);
   const example = JSON.parse(sourceText);
-  const expected = negativeExamples.get(name);
-  if (expected) validateNegative(name, example, expected);
-  else validatePositive(name, example);
+  assert(!negativeExamples.has(name), `${name}: semantic negative fixture must not be emitted`);
+  validatePositive(name, example);
 }
 
-console.log(`Validated ${files.length} Unified Moderate examples.`);
+const semanticFiles = (await readdir(semanticDirectory)).filter((name) =>
+  name.startsWith("UnifiedModerate") && name.endsWith(".json"),
+);
+assert(semanticFiles.length === negativeExamples.size, "Semantic fixture set is incomplete");
+for (const [name, expected] of negativeExamples) {
+  assert(semanticFiles.includes(name), `${name}: missing semantic fixture`);
+  const example = JSON.parse(await readFile(join(semanticDirectory, name), "utf8"));
+  validateNegative(name, example, expected);
+}
+
+console.log(
+  `Validated ${files.length} emitted Unified Moderate examples and ${semanticFiles.length} semantic error fixtures.`,
+);
