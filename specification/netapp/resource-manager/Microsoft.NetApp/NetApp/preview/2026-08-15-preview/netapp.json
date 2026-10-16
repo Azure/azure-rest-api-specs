@@ -5476,7 +5476,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExternalSvmUpdate"
+              "$ref": "#/definitions/ExternalSvmTagsUpdate"
             }
           }
         ],
@@ -14619,7 +14619,7 @@
             "description": "The name of the PolicyGroup",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           }
         ],
         "responses": {
@@ -14664,7 +14664,7 @@
             "description": "The name of the PolicyGroup",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           },
           {
             "name": "resource",
@@ -14740,7 +14740,7 @@
             "description": "The name of the PolicyGroup",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           },
           {
             "name": "properties",
@@ -14818,7 +14818,7 @@
             "description": "The name of the PolicyGroup",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           }
         ],
         "responses": {
@@ -14880,7 +14880,7 @@
             "description": "The name of the PolicyGroup",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           }
         ],
         "responses": {
@@ -14930,7 +14930,7 @@
             "description": "The name of the PolicyGroup",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           },
           {
             "name": "extendedSnapshotRetentionPolicyName",
@@ -14938,7 +14938,7 @@
             "description": "The name of the ExtendedSnapshotRetentionPolicy",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           }
         ],
         "responses": {
@@ -14983,7 +14983,7 @@
             "description": "The name of the PolicyGroup",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           },
           {
             "name": "extendedSnapshotRetentionPolicyName",
@@ -14991,7 +14991,7 @@
             "description": "The name of the ExtendedSnapshotRetentionPolicy",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           },
           {
             "name": "resource",
@@ -15067,7 +15067,7 @@
             "description": "The name of the PolicyGroup",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           },
           {
             "name": "extendedSnapshotRetentionPolicyName",
@@ -15075,7 +15075,7 @@
             "description": "The name of the ExtendedSnapshotRetentionPolicy",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           },
           {
             "name": "properties",
@@ -15153,7 +15153,7 @@
             "description": "The name of the PolicyGroup",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           },
           {
             "name": "extendedSnapshotRetentionPolicyName",
@@ -15161,7 +15161,7 @@
             "description": "The name of the ExtendedSnapshotRetentionPolicy",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           }
         ],
         "responses": {
@@ -15223,7 +15223,7 @@
             "description": "The name of the PolicyGroup",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           },
           {
             "name": "extendedSnapshotRetentionPolicyName",
@@ -15231,7 +15231,7 @@
             "description": "The name of the ExtendedSnapshotRetentionPolicy",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,63}"
+            "pattern": "^[a-zA-Z0-9-]{1,63}$"
           }
         ],
         "responses": {
@@ -21282,7 +21282,11 @@
         },
         "ontapSvmName": {
           "type": "string",
-          "description": "Name of the external ONTAP SVM (different from Azure resource name). Must be unique across the cluster and cannot be changed once peering is established."
+          "description": "Name of the external ONTAP SVM (different from Azure resource name). Must be unique across the cluster.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "svmPeerResourceIds": {
           "type": "array",
@@ -21306,9 +21310,9 @@
         "ontapSvmName"
       ]
     },
-    "ExternalSvmUpdate": {
+    "ExternalSvmTagsUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the ExternalSvm.",
+      "description": "The type used for updating tags in ExternalSvm resources.",
       "properties": {
         "tags": {
           "type": "object",
@@ -21316,20 +21320,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/ExternalSvmUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "ExternalSvmUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the ExternalSvm.",
-      "properties": {
-        "ontapSvmName": {
-          "type": "string",
-          "description": "Name of the external ONTAP SVM (different from Azure resource name). Must be unique across the cluster and cannot be changed once peering is established."
         }
       }
     },

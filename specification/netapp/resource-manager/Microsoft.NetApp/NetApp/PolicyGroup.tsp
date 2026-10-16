@@ -25,7 +25,7 @@ model PolicyGroup
     Resource = PolicyGroup,
     KeyName = "policyGroupName",
     SegmentName = "policyGroups",
-    NamePattern = "^[a-zA-Z0-9-]{1,63}"
+    NamePattern = "^[a-zA-Z0-9-]{1,63}$"
   >;
 }
 
