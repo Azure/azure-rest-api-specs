@@ -195,8 +195,8 @@ Summarize the actual source-family calls and ordering from a completed run's eve
 node scripts/analyze-routing.js .\results\forced\<timestamp>
 ```
 
-For the current 38 covered cases, the expected result is 38 Web-only trials, zero retrieval calls,
-zero planner calls, grounding before the first mutation, and validation after mutation.
+For all authoring cases, the expected route is Web-only: zero retrieval calls, zero planner calls,
+grounding before the first mutation, and validation after mutation.
 
 Run deterministic positive and negative examples for corrected syntax graders:
 

@@ -1,10 +1,10 @@
 # Agentic Search
 
-Enter this procedure during Step 2 when intake selects the Web knowledge route. The
-catalog may guide URL selection but is not required: if it is unavailable, discover
-authoritative TypeSpec or Azure documentation directly. Use the resulting Web
-guidance to determine the required intake decisions, then retain it for the local
-authoring plan. Do not call a knowledge MCP after selecting this route.
+Enter this procedure during Step 2 for every authoring request. The catalog may guide
+URL selection but is not required: if it is unavailable, discover authoritative
+TypeSpec or Azure documentation directly. Use the resulting Web guidance to
+determine the required intake decisions, then retain it for the local authoring
+plan. Do not call a knowledge MCP during intake or planning.
 
 ## Input
 

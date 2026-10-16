@@ -3,8 +3,8 @@ name: azure-typespec-author
 license: MIT
 metadata:
   version: "1.0.0"
-description: "Authors and modifies Azure TypeSpec (.tsp) API specifications. MUST BE USED FOR ALL TypeSpec changes regardless of complexity — even adding a single property or enum value requires this skill's validation workflow. USE FOR: any TypeSpec/tsp change — api versions (add, bump, preview, stable, promote), resources, operations, models, properties, decorators, visibility, constraints, breaking changes, LRO, suppressions, operationId, spread model. Covers both ARM resource-manager (Azure.ResourceManager) and data-plane (Azure.Core) services. DO NOT USE FOR: SDK generation, releasing SDK packages, or single MCP tool calls. INVOKES: azure-sdk-mcp:azsdk_typespec_retrieve_knowledge, azure-sdk-mcp:azsdk_run_typespec_validation."
-compatibility: "Optionally uses the azure-sdk-mcp server with azure-sdk-mcp:azsdk_typespec_retrieve_knowledge and azure-sdk-mcp:azsdk_run_typespec_validation tools"
+description: "Authors and modifies Azure TypeSpec (.tsp) API specifications. MUST BE USED FOR ALL TypeSpec changes regardless of complexity — even adding a single property or enum value requires this skill's validation workflow. USE FOR: any TypeSpec/tsp change — api versions (add, bump, preview, stable, promote), resources, operations, models, properties, decorators, visibility, constraints, breaking changes, LRO, suppressions, operationId, spread model. Covers both ARM resource-manager (Azure.ResourceManager) and data-plane (Azure.Core) services. DO NOT USE FOR: SDK generation, releasing SDK packages, or single MCP tool calls. INVOKES: azure-sdk-mcp:azsdk_run_typespec_validation."
+compatibility: "Optionally uses the azure-sdk-mcp server with the azure-sdk-mcp:azsdk_run_typespec_validation tool"
 ---
 
 # Azure TypeSpec Author
@@ -29,16 +29,13 @@ This includes but is not limited to:
 
 ## MCP Tools
 
-| Tool                                              | Purpose                                                                                                                  |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `azure-sdk-mcp:azsdk_typespec_retrieve_knowledge` | Retrieve authoring knowledge for requests not covered by the reference catalog; Agentic Search handles covered requests. |
-| `azure-sdk-mcp:azsdk_run_typespec_validation`     | Validate TypeSpec.                                                                                                       |
+| Tool                                          | Purpose            |
+| --------------------------------------------- | ------------------ |
+| `azure-sdk-mcp:azsdk_run_typespec_validation` | Validate TypeSpec. |
 
-These MCP tools are optional capabilities, not prerequisites. Call them at their
-documented workflow stages when they are exposed. When retrieval MCP is not exposed,
-continue the selected knowledge route with authoritative Agentic Search. When
-validation MCP is not exposed, continue with the mandatory local compile and
-case-specific checks.
+This MCP tool is an optional capability, not a prerequisite. Call it at its
+documented workflow stage when it is exposed. When validation MCP is not exposed,
+continue with the mandatory local compile and case-specific checks.
 
 An exposed tool that returns an error, times out, or fails authentication is not
 unavailable. Report that failure instead of silently taking its fallback.
@@ -53,11 +50,11 @@ unavailable. Report that failure instead of silently taking its fallback.
 - **Always validate** — follow [validation](references/validation.md) after every edit. Run validation MCP when available and always run `tsp compile .`; absence of the validation MCP tool is not a blocker.
 - **Always cite references** — provide links that justify the approach.
 - **Follow the authoring plan exactly** — code changes in Step 4 MUST follow the authoring plan generated in Step 3. Do not deviate by referring to existing code patterns in the TypeSpec project; the authoring plan is the single source of truth for what to change.
-- **Attempt catalog access before selecting a knowledge route** — after project analysis, read the reference catalog during intake. Retry the installed catalog path when its first read fails, then try the canonical repository copy through an available repository-file reader. If the catalog still cannot be read, continue Agentic Search by locating authoritative TypeSpec or Azure documentation directly; catalog access failure is not a blocker and does not by itself select the retrieval MCP route.
-- **Select and execute one knowledge route during intake** — classify the complete request as covered or uncovered after reading the catalog. Covered requests use Agentic Search. If any material authoring topic is uncovered, use `azsdk_typespec_retrieve_knowledge` for the complete request when the tool is exposed; if it is not exposed, use authoritative Agentic Search for the complete request. Do not call both knowledge routes. Step 3 reuses the fetched content and must not retrieve it again.
+- **Attempt catalog access before Agentic Search** — after project analysis, read the reference catalog during intake. Retry the installed catalog path when its first read fails, then try the canonical repository copy through an available repository-file reader. If the catalog still cannot be read, continue Agentic Search by locating authoritative TypeSpec or Azure documentation directly; catalog access failure is not a blocker.
+- **Always use Agentic Search during intake** — ground the complete request with authoritative Web guidance after reading the catalog. Use catalog URLs where available and locate additional authoritative TypeSpec or Azure documentation when needed. Never call `azsdk_typespec_retrieve_knowledge` or `azsdk_typespec_generate_authoring_plan` during intake or planning. Step 3 reuses the fetched content without another knowledge call.
 - **Never call `azsdk_typespec_generate_authoring_plan`** — synthesize the authoring plan locally from the selected grounding source.
-- **Do not edit before grounding** — follow `Analyze → Read catalog → Classify coverage → Ground once during intake → Plan locally → Apply → Validate`. If neither the selected MCP route nor authoritative Web grounding can provide sufficient guidance, report a blocker instead of making ungrounded edits.
-- **Validation is not retrieval** — calling `azsdk_run_typespec_validation` after edits does not violate the one-source rule. If that tool is unavailable, record the skip and continue with `tsp compile .`.
+- **Do not edit before grounding** — follow `Analyze → Read catalog → Agentic Search during intake → Plan locally → Apply → Validate`. If authoritative Web grounding cannot provide sufficient guidance, report a blocker instead of making ungrounded edits.
+- **Validate after editing** — call `azsdk_run_typespec_validation` after edits when it is exposed. If that tool is unavailable, record the skip and continue with `tsp compile .`.
 
 ## Steps
 

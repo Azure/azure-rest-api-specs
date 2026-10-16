@@ -108,6 +108,8 @@ tool(prematureEvents, "azure-sdk-mcp-azsdk_typespec_retrieve_knowledge", {});
 const premature = analyzeEvents(prematureEvents, "premature");
 assert.equal(premature.catalogReadSucceeded, false);
 assert.equal(premature.catalogBeforeSource, true);
+assert.equal(premature.sourceExclusive, false);
+assert.equal(premature.approvedKnowledgeRoute, false);
 assert.equal(premature.catalogFailureSafe, false);
 
 const blockerEvents = [];
@@ -147,7 +149,7 @@ assert.deepEqual(summary.routes, {
   Neither: 0,
 });
 assert.equal(summary.catalogViolations, 0);
-assert.equal(summary.sourceExclusivityViolations, 1);
+assert.equal(summary.sourceExclusivityViolations, 2);
 assert.equal(summary.retrievalViolations, 2);
 assert.equal(summary.plannerCalls, 1);
 

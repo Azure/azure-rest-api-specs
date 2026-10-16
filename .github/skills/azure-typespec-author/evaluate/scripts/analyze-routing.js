@@ -105,7 +105,7 @@ export function analyzeEvents(allEvents, trial = "unknown") {
       Boolean(firstCatalogAttempt) &&
       Boolean(firstSource) &&
       completionIndex(firstCatalogAttempt) < firstSource.index,
-    sourceExclusive: !(web > 0 && retrieval > 0),
+    sourceExclusive: web > 0 && retrieval === 0,
     approvedKnowledgeRoute: web > 0 && retrieval === 0 && planner === 0,
     groundingBeforeMutation:
       Boolean(firstSuccessfulGrounding) &&
