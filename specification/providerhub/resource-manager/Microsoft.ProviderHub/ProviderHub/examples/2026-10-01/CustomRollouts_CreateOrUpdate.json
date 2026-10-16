@@ -20,11 +20,19 @@
             "manifestCheckinOption": "AttemptAutomaticManifestCheckin",
             "manifestCheckinParams": {
               "baselineArmManifestLocation": "EastUS2EUAP",
-              "environment": "Prod"
+              "environment": "Prod",
+              "swaggerUri": "https://github.com/Azure/azure-rest-api-specs/pull/123456"
             }
           },
           "refreshSubscriptionRegistration": true,
-          "rolloutId": "Ev2RolloutIdGuid"
+          "rolloutId": "rollout-0001",
+          "rolloutOrchestrationMetadata": {
+            "isForManifestBuildout": true,
+            "deploymentType": "RegionAgnosticRollout",
+            "trafficRing": "Canary",
+            "serviceGroup": "Microsoft.Contoso.ManifestRollout",
+            "serviceIdentifier": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     }
@@ -66,7 +74,14 @@
               }
             },
             "refreshSubscriptionRegistration": true,
-            "rolloutId": "Ev2RolloutIdGuid"
+            "rolloutId": "rollout-0001",
+            "rolloutOrchestrationMetadata": {
+              "isForManifestBuildout": true,
+              "deploymentType": "RegionAgnosticRollout",
+              "trafficRing": "Canary",
+              "serviceGroup": "Microsoft.Contoso.ManifestRollout",
+              "serviceIdentifier": "00000000-0000-0000-0000-000000000000"
+            }
           },
           "status": {
             "completedRegions": [
@@ -122,7 +137,14 @@
                 "environment": "Prod"
               }
             },
-            "refreshSubscriptionRegistration": true
+            "refreshSubscriptionRegistration": true,
+            "rolloutOrchestrationMetadata": {
+              "isForManifestBuildout": true,
+              "deploymentType": "RegionAgnosticRollout",
+              "trafficRing": "Canary",
+              "serviceGroup": "Microsoft.Contoso.ManifestRollout",
+              "serviceIdentifier": "00000000-0000-0000-0000-000000000000"
+            }
           },
           "status": {
             "completedRegions": [
