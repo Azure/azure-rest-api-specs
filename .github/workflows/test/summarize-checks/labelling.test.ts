@@ -3,6 +3,47 @@ import { processArmReviewLabels } from "../../src/summarize-checks/labelling.ts"
 import { updateLabels } from "../../src/summarize-checks/summarize-checks.ts";
 
 describe("update labels", () => {
+  it("does not let automatic signoff erase a human changes-requested hold", () => {
+    const context = updateLabels(
+      ["ARMReview", "ARMSignedOff", "ARMAutoSignedOff", "ARMChangesRequested"],
+      {
+        resourceManagerRequired: true,
+        dataPlaneRequired: false,
+        suppressionReviewRequired: false,
+        isNewApiVersion: false,
+        rpaasRpNotInPrivateRepo: false,
+        rpaasChange: false,
+        newRP: false,
+        rpaasRPMissing: false,
+        typeSpecChanged: true,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    );
+    expect(context.toRemove.has("ARMSignedOff")).toBe(true);
+    expect(context.toRemove.has("ARMChangesRequested")).toBe(false);
+    expect(context.toAdd.has("WaitForARMFeedback")).toBe(false);
+  });
+
+  it("does not restore the queue while a modeling hold is being reconciled", () => {
+    const context = updateLabels(["ARMReview", "WaitForARMFeedback", "ARMModelingReviewRequired"], {
+      resourceManagerRequired: true,
+      dataPlaneRequired: false,
+      suppressionReviewRequired: false,
+      isNewApiVersion: false,
+      rpaasRpNotInPrivateRepo: false,
+      rpaasChange: false,
+      newRP: false,
+      rpaasRPMissing: false,
+      typeSpecChanged: true,
+      isDraft: false,
+      targetBranch: "main",
+    });
+    expect(context.toAdd.has("NotReadyForARMReview")).toBe(true);
+    expect(context.toRemove.has("WaitForARMFeedback")).toBe(true);
+    expect(context.toAdd.has("WaitForARMFeedback")).toBe(false);
+  });
+
   const testCases = [
     {
       description: "Add ARMReview and resource-manager labels when existing labels are empty",

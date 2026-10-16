@@ -6,6 +6,10 @@ import type { Core } from "../github.ts";
 */
 
 import * as z from "zod";
+import {
+  getBlockedOnRpaas,
+  getBlockedOnVersioningPolicy,
+} from "../arm-auto-signoff/arm-review-policy.ts";
 import { includesEvery, includesNone } from "../../../shared/src/array.ts";
 import {
   TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
@@ -390,7 +394,10 @@ export function processArmReviewLabels(context: LabelContext, existingLabels: st
     // so if the user or ARM team actually unlabels `ARMChangesRequested`, then we're actually ok
     // if we are signed off, we should remove the "ARMChangesRequested" and "WaitForARMFeedback" labels
     if (includesEvery(existingLabels, ["ARMSignedOff"])) {
-      if (existingLabels.includes("ARMChangesRequested")) {
+      if (
+        existingLabels.includes("ARMChangesRequested") &&
+        !existingLabels.includes("ARMAutoSignedOff")
+      ) {
         context.toRemove.add("ARMChangesRequested");
       }
       if (existingLabels.includes("WaitForARMFeedback")) {
@@ -549,7 +556,12 @@ export function processImpactAssessment(
   // ARMChangesRequested, WaitForArmFeedback, and ARMSignedOff labels. The thing is, we only want to make
   // these changes if the review is actually an ARM review. So we're going to place this after processing an impactAssessment
   // which will tell us if a the ARMReview label should be present or not.
-  processArmReviewLabels(labelContext, [...labelContext.present, ...labelContext.toAdd]);
+  processArmReviewLabels(
+    labelContext,
+    [...labelContext.present, ...labelContext.toAdd].filter(
+      (label) => !labelContext.toRemove.has(label),
+    ),
+  );
 
   console.log(
     `RETURN definition processARMReview. ` +
@@ -618,7 +630,7 @@ function processARMReviewWorkflowLabels(
 
   const armSignedOffLabel = new Label("ARMSignedOff", labelContext.present);
 
-  const blockedOnVersioningPolicy = getBlockedOnVersioningPolicy(labelContext);
+  const blockedOnVersioningPolicy = getBlockedOnVersioningPolicy([...labelContext.present]);
 
   const blockedOnRpaas = getBlockedOnRpaas(
     ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
@@ -645,7 +657,10 @@ function processARMReviewWorkflowLabels(
   // and "WaitForARMFeedback" are invalid and will be removed by automation
   // in presence of "ARMSignedOff".
   armSignedOffLabel.shouldBePresent =
-    armReviewLabelShouldBePresent && !blocked && armSignedOffLabel.present;
+    armReviewLabelShouldBePresent &&
+    !blocked &&
+    armSignedOffLabel.present &&
+    !(labelContext.present.has("ARMAutoSignedOff") && armChangesRequestedLabel.present);
 
   // If given PR is in scope of ARM review and the review is not blocked and
   // not signed-off, then the label "ARMChangesRequested" should remain present
@@ -691,30 +706,6 @@ function processARMReviewWorkflowLabels(
       `blockedOnRpaas: ${blockedOnRpaas}, ` +
       `blockedOnArmModeling: ${blockedOnArmModeling}. ` +
       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
-  );
-}
-
-function getBlockedOnVersioningPolicy(labelContext: LabelContext): boolean {
-  const pendingVersioningReview =
-    labelContext.present.has("VersioningReviewRequired") &&
-    !anyApprovalLabelPresent("SameVersion", [...labelContext.present]);
-
-  const pendingBreakingChangeReview =
-    labelContext.present.has("BreakingChangeReviewRequired") &&
-    !anyApprovalLabelPresent("CrossVersion", [...labelContext.present]);
-
-  const blockedOnVersioningPolicy = pendingVersioningReview || pendingBreakingChangeReview;
-  return blockedOnVersioningPolicy;
-}
-
-function getBlockedOnRpaas(
-  ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent: boolean,
-  rpaasExceptionLabelShouldBePresent: boolean,
-  ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean,
-): boolean {
-  return (
-    (ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent) ||
-    (ciRpaasRPNotInPrivateRepoLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent)
   );
 }
 

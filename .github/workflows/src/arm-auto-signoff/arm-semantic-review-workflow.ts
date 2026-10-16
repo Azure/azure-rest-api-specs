@@ -1,7 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { getWorkflowRunArtifactInputs } from "../context.ts";
+import { getLatestCommitStatuses } from "../commit-statuses.ts";
 import type { GitHubScriptArgs } from "../github.ts";
+import { isLatestArmReviewRun } from "./arm-review-run.ts";
 import {
   addSpecificationChanges,
   ARM_SEMANTIC_REVIEW_STATUS,
@@ -49,6 +51,56 @@ function getRunStatusUrl(
   repo: string,
 ) {
   return `${serverUrl}/${owner}/${repo}/actions/runs/${runId}/attempts/${process.env.GITHUB_RUN_ATTEMPT}`;
+}
+
+export async function beginArmSemanticReview({
+  github,
+  context,
+  core,
+}: GitHubScriptArgs): Promise<void> {
+  const issueNumber = Number(process.env.TARGET_PR_NUMBER);
+  const headSha = process.env.TARGET_HEAD_SHA ?? "";
+  const runAttempt = Number(process.env.GITHUB_RUN_ATTEMPT);
+  const defaultBranch = process.env.TARGET_DEFAULT_BRANCH ?? "";
+  if (
+    !Number.isSafeInteger(issueNumber) ||
+    issueNumber <= 0 ||
+    !/^[0-9a-f]{40}$/i.test(headSha) ||
+    !Number.isSafeInteger(runAttempt) ||
+    runAttempt <= 0 ||
+    !defaultBranch
+  ) {
+    throw new Error("Missing ARM reviewer PR, head SHA, run attempt, or default branch");
+  }
+  if (
+    !(await isLatestArmReviewRun({
+      github,
+      core,
+      ...context.repo,
+      issueNumber,
+      headSha,
+      runId: context.runId,
+      runAttempt,
+      completed: false,
+    }))
+  ) {
+    throw new Error("A newer ARM review supersedes this activation");
+  }
+  await publishStatus(
+    { github, core },
+    context.repo.owner,
+    context.repo.repo,
+    headSha,
+    getRunStatusUrl(context, context.repo.owner, context.repo.repo),
+    { state: CommitStatusState.PENDING, description: "ARM API semantic review is pending" },
+  );
+  // A same-head rerun must invalidate earlier automatic approval while this attempt is pending.
+  await github.rest.actions.createWorkflowDispatch({
+    ...context.repo,
+    workflow_id: "arm-universal-auto-signoff.yaml",
+    ref: defaultBranch,
+    inputs: { pr_number: String(issueNumber), head_sha: headSha },
+  });
 }
 
 /**
@@ -227,14 +279,29 @@ export default async function publishArmSemanticReviewStatus({
     };
   }
 
-  await publishStatus(
-    { github, core },
-    owner,
-    repo,
-    headSha,
-    getRunStatusUrl(context, owner, repo),
-    status,
+  const targetUrl = getRunStatusUrl(context, owner, repo);
+  const latest = getLatestSemanticReviewStatus(
+    await getLatestCommitStatuses(github, owner, repo, headSha),
   );
+  if (
+    latest?.state !== CommitStatusState.PENDING ||
+    latest.target_url !== targetUrl ||
+    !(await isLatestArmReviewRun({
+      github,
+      core,
+      owner,
+      repo,
+      headSha,
+      issueNumber,
+      runId: context.runId,
+      runAttempt: Number(process.env.GITHUB_RUN_ATTEMPT),
+      completed: false,
+    }))
+  ) {
+    core.info("This reviewer attempt no longer owns the pending status; result is unchanged");
+    return { headSha, issueNumber, statusPublished: false };
+  }
+  await publishStatus({ github, core }, owner, repo, headSha, targetUrl, status);
   return { headSha, issueNumber, statusPublished: true };
 }
 
