@@ -563,8 +563,6 @@ suppressions:
     reason: Pre-existing PATCH operation on managedNetworks resource accepts a body parameter with a properties envelope, matching the established contract pattern for this resource.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].patch.parameters.5
-  - code: NestedResourcesMustHaveListOperation
-    reason: Pre-existing API behavior, nested resources (CapabilityHost, CapabilityHostResource) do not yet have list operations. List API will be added when needed.
   - code: DefinitionsPropertiesNamesCamelCase
     reason: Pre-existing API behavior, property name uses acronym CMK (Customer Managed Key) which is industry standard.
     where:
@@ -819,8 +817,6 @@ suppressions:
     reason: Pre-existing PATCH operation on managedNetworks resource accepts a body parameter with a properties envelope, matching the established contract pattern for this resource.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].patch.parameters.5
-  - code: NestedResourcesMustHaveListOperation
-    reason: Pre-existing API behavior, nested resources (CapabilityHost, CapabilityHostResource) do not yet have list operations. List API will be added when needed.
   - code: DefinitionsPropertiesNamesCamelCase
     reason: Pre-existing API behavior, property name uses acronym CMK (Customer Managed Key) which is industry standard.
     where:
@@ -1018,8 +1014,6 @@ suppressions:
     reason: Pre-existing PATCH operation on managedNetworks resource accepts a body parameter with a properties envelope, matching the established contract pattern for this resource.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].patch.parameters.5
-  - code: NestedResourcesMustHaveListOperation
-    reason: Pre-existing API behavior, nested resources (CapabilityHost, CapabilityHostResource) do not yet have list operations. List API will be added when needed.
   - code: DefinitionsPropertiesNamesCamelCase
     reason: Pre-existing API behavior, property name uses acronym CMK (Customer Managed Key) which is industry standard.
     where:
@@ -1206,13 +1200,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/getStatus"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/list"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/modify"]
-  - code: NestedResourcesMustHaveListOperation
-    reason:
-      This resource will have many kind and we currently only start with the first kind that will have a 1 to 1
-      mapping with the parent resource, so right now we didn't implement List API,
-      we will add whence needed in the future.
-    where:
-      - $.definitions["CapabilityHostResource"]
   - code: AvoidAdditionalProperties
     reason:
       These are hyperparameters which can vary by model and the finetuning task type,
@@ -1449,13 +1436,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/getStatus"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/list"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/modify"]
-  - code: NestedResourcesMustHaveListOperation
-    reason:
-      This resource will have many kind and we currently only start with the first kind that will have a 1 to 1
-      mapping with the parent resource, so right now we didn't implement List API,
-      we will add whence needed in the future.
-    where:
-      - $.definitions["CapabilityHostResource"]
   - code: AvoidAdditionalProperties
     reason:
       These are hyperparameters which can vary by model and the finetuning task type,
@@ -2354,13 +2334,6 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 input-file:
   - preview/2024-10-01-preview/openapi.json
 suppressions:
-  - code: NestedResourcesMustHaveListOperation
-    reason:
-      This resource will have many kind and we currently only start with the first kind that will have a 1 to 1
-      mapping with the parent resource, so right now we didn't implement List API,
-      we will add whence needed in the future.
-    where:
-      - $.definitions["CapabilityHostResource"]
   - code: DeleteResponseCodes
     reason: Existing API behavior in 2024-04-01-preview.
     where:
