@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-10-31-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "testrg",
+    "consortiumName": "ContosoConsortium",
+    "body": {
+      "forceRecover": true
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/providers/Microsoft.CleanRoom/locations/northeurope/operationStatuses/recover-op-1234?api-version=2025-10-31-preview",
+        "Location": "https://management.azure.com/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/providers/Microsoft.CleanRoom/Consortiums/ContosoConsortium/operationResults/recover-op-1234?api-version=2025-10-31-preview",
+        "Retry-After": "10"
+      }
+    },
+    "200": {
+      "body": {
+        "name": "ContosoConsortium",
+        "type": "Microsoft.CleanRoom/Consortiums",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.CleanRoom/Consortiums/ContosoConsortium",
+        "location": "northeurope",
+        "properties": {
+          "consortiumType": "ConfidentialACI",
+          "health": {
+            "healthState": "Ok",
+            "healthIssues": []
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "Consortiums_Recover",
+  "title": "Recover Consortium"
+}
