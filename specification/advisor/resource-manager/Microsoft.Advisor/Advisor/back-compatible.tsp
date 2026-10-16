@@ -33,12 +33,28 @@ using Microsoft.Advisor;
   "!csharp"
 );
 @@clientLocation(
+  ResourceRecommendationBases.listV1,
+  "Recommendations",
+  "!csharp"
+);
+@@clientLocation(
   ResourceRecommendationBases.update,
   "Recommendations",
   "!csharp"
 );
 @@clientLocation(
   ResourceRecommendationBases.listByTenant,
+  "Recommendations",
+  "!csharp"
+);
+@@clientLocation(ServiceGroupRecommendations.get, "Recommendations", "!csharp");
+@@clientLocation(
+  ServiceGroupRecommendations.list,
+  "Recommendations",
+  "!csharp"
+);
+@@clientLocation(
+  ServiceGroupRecommendations.update,
   "Recommendations",
   "!csharp"
 );
