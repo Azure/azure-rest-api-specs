@@ -25,6 +25,7 @@ namespace Microsoft.CognitiveServices;
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @subscriptionResource
 model ManagedComputeCapacity
   is Azure.ResourceManager.ProxyResource<ManagedComputeCapacityProperties> {
@@ -45,6 +46,7 @@ model ManagedComputeCapacity
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations(#{ omitTags: true })
 interface ManagedComputeCapacities {
   /**
