@@ -123,6 +123,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -416,6 +421,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -478,6 +488,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -806,6 +821,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -949,6 +969,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1542,8 +1567,15 @@
     },
     "OrganizationResourceUpdate": {
       "type": "object",
-      "description": "PATCH body for the Organization resource.\n\nIntentionally omits ARM `tags`. Liftr does not propagate Azure resource tags\nto the partner (Kore.AgentPlatform); customers can still tag the resource via\nthe generic `Microsoft.Resources/tags/default` ARM endpoint, but those tags\nare not part of this resource provider's contract.",
+      "description": "PATCH body for the Organization resource.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
           "$ref": "#/definitions/OrganizationPropertiesUpdate",
           "description": "The resource-specific properties to update."
@@ -1666,7 +1698,15 @@
         },
         "azureResourceId": {
           "type": "string",
-          "description": "Full Azure resource ID of the Workspace."
+          "format": "arm-id",
+          "description": "Full Azure resource ID of the Workspace.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Kore.AgentPlatform/organizations/workspaces"
+              }
+            ]
+          }
         },
         "organizationId": {
           "type": "string",

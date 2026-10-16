@@ -52,7 +52,11 @@ interface Workspaces {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<WorkspaceResource>;
 
   /** Delete a Workspace under an Organization (long-running). */
-  delete is ArmResourceDeleteWithoutOkAsync<WorkspaceResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    WorkspaceResource,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /** List Workspaces under an Organization. */
   listByOrganization is ArmResourceListByParent<WorkspaceResource>;
@@ -62,7 +66,9 @@ interface Workspaces {
   @summary("Links SaaS resources to the workspace.")
   linkSaaS is ArmResourceActionNoResponseContentAsync<
     WorkspaceResource,
-    WorkspaceSaaSData
+    WorkspaceSaaSData,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /** Returns the list of SaaS resources linked to the workspace. */

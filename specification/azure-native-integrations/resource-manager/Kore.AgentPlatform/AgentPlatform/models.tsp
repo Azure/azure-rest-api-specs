@@ -294,7 +294,11 @@ model WorkspaceDetail {
   id: string;
 
   /** Full Azure resource ID of the Workspace. */
-  azureResourceId: string;
+  azureResourceId: armResourceIdentifier<[
+    {
+      type: "Kore.AgentPlatform/organizations/workspaces";
+    }
+  ]>;
 
   /** Partner-issued identifier of the parent Organization. */
   organizationId: string;
@@ -435,16 +439,10 @@ union WorkspaceProjectStatus {
 // Organization PATCH body
 // =============================================================================
 
-/**
- * PATCH body for the Organization resource.
- *
- * Intentionally omits ARM `tags`. Liftr does not propagate Azure resource tags
- * to the partner (Kore.AgentPlatform); customers can still tag the resource via
- * the generic `Microsoft.Resources/tags/default` ARM endpoint, but those tags
- * are not part of this resource provider's contract.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Tags are not propagated to the partner (Kore). Tag updates are handled via the generic Microsoft.Resources/tags ARM endpoint and are not part of this RP's PATCH contract."
+/** PATCH body for the Organization resource. */
 model OrganizationResourceUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
   /** The resource-specific properties to update. */
   properties?: OrganizationPropertiesUpdate;
 }

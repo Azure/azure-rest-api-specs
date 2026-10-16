@@ -49,7 +49,9 @@ interface Organizations {
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     OrganizationResource,
-    OrganizationResourceUpdate
+    OrganizationResourceUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = OrganizationResource> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -58,7 +60,11 @@ interface Organizations {
    * Permanently removes the Organization and cascades the deletion to all
    * child Workspaces at the partner. This operation is irreversible.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    OrganizationResource,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /** List Organizations in a Resource Group. */
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
@@ -118,6 +124,10 @@ interface SaaSOperationGroup {
     Request = ActivateSaaSParameterRequest,
     Response = SaaSResourceDetailsResponse,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    LroHeaders = ArmCombinedLroHeaders<
+      FinalResult = SaaSResourceDetailsResponse
+    > &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
