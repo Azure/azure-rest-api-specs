@@ -1,0 +1,140 @@
+{
+  "parameters": {
+    "api-version": "2025-12-30",
+    "parameters": {
+      "location": "SoutheastAsia",
+      "properties": {
+        "createMode": "PointInTimeRestore",
+        "restorePointInTime": "2025-12-15T00:00:00Z",
+        "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqlpocserver",
+        "privateOutboundSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/pocvnet/subnets/pocsubnet"
+      },
+      "sku": {
+        "name": "Standard_D8ds_v4",
+        "tier": "GeneralPurpose"
+      },
+      "tags": {
+        "num": "1"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "serverName": "mysqlpocrestored",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mysqlpocrestored",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqlpocrestored",
+        "location": "Southeast Asia",
+        "properties": {
+          "administratorLogin": "adminuser",
+          "availabilityZone": "1",
+          "backup": {
+            "backupIntervalHours": 24,
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2021-06-24T00:15:24.00+00:00",
+            "geoRedundantBackup": "Disabled"
+          },
+          "databasePort": 3306,
+          "fullVersion": "5.7.44",
+          "fullyQualifiedDomainName": "mysqlpocrestored.database.mysql.azure.com",
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "maintenanceWindow": {
+            "batchOfMaintenance": "Default",
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "replicaCapacity": 10,
+          "replicationRole": "None",
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Enabled",
+            "iops": 360,
+            "storageRedundancy": "LocalRedundancy",
+            "storageSizeGB": 20,
+            "storageSku": "Premium_LRS"
+          },
+          "version": "8.4",
+          "privateOutboundSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/pocvnet/subnets/pocsubnet"
+        },
+        "sku": {
+          "name": "Standard_D8ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "tags": {
+          "num": "1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "mysqlpocrestored",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqlpocrestored",
+        "location": "Southeast Asia",
+        "properties": {
+          "administratorLogin": "adminuser",
+          "availabilityZone": "1",
+          "backup": {
+            "backupIntervalHours": 24,
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2021-06-24T00:15:24.00+00:00",
+            "geoRedundantBackup": "Disabled"
+          },
+          "databasePort": 3306,
+          "fullVersion": "5.7.44",
+          "fullyQualifiedDomainName": "mysqlpocrestored.database.mysql.azure.com",
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "maintenancePolicy": {
+            "patchStrategy": "Regular"
+          },
+          "maintenanceWindow": {
+            "batchOfMaintenance": "Default",
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "replicaCapacity": 10,
+          "replicationRole": "None",
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Enabled",
+            "iops": 360,
+            "storageRedundancy": "LocalRedundancy",
+            "storageSizeGB": 20,
+            "storageSku": "Premium_LRS"
+          },
+          "version": "8.4",
+          "privateOutboundSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/pocvnet/subnets/pocsubnet"
+        },
+        "sku": {
+          "name": "Standard_D8ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "tags": {
+          "num": "1"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "Servers_Create",
+  "title": "Restore a server to a point in time with a private outbound subnet"
+}
