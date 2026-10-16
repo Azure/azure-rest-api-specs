@@ -58,13 +58,11 @@ interface Workspaces {
   listByOrganization is ArmResourceListByParent<WorkspaceResource>;
 
   /** Links SaaS resources to the workspace. Accepts the full list of SaaS assets to be linked. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "void-returning LRO action; 202 + default is sufficient."
   @added(Versions.v2026_07_01_preview)
   @summary("Links SaaS resources to the workspace.")
-  linkSaaS is ArmResourceActionAsync<
+  linkSaaS is ArmResourceActionNoResponseContentAsync<
     WorkspaceResource,
-    WorkspaceSaaSData,
-    void
+    WorkspaceSaaSData
   >;
 
   /** Returns the list of SaaS resources linked to the workspace. */

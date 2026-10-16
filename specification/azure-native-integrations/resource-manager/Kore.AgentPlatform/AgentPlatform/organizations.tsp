@@ -81,10 +81,12 @@ interface Organizations {
   >;
 
   /** Links SaaS resources to the organization. Accepts the full list of SaaS assets to be linked. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "void-returning LRO action; 202 + default is sufficient."
   @removed(Versions.v2026_07_01_preview)
   @summary("Links SaaS resources to the organization.")
-  linkSaaS is ArmResourceActionAsync<OrganizationResource, SaaSData, void>;
+  linkSaaS is ArmResourceActionNoResponseContentAsync<
+    OrganizationResource,
+    SaaSData
+  >;
 
   /** Returns the list of SaaS resources linked to the organization. */
   @removed(Versions.v2026_07_01_preview)
