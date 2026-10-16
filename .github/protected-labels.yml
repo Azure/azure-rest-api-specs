@@ -25,22 +25,22 @@ global-approvers:
 data-plane-review-signoff: &data-plane-reviewers
   team: azure-data-plane-api-reviewers
 
-# TypeSpec lint-suppression approval uses each plane's API reviewers.
+# TypeSpec lint-suppression approval uses the data-plane stewardship reviewers.
 # Data-plane shares its team with `data-plane-review-signoff`; management-plane
-# shares its ARM reviewer team with the ARM review and suppression labels below.
+# remains unprotected.
 # See the stewardship board member guide (aka.ms/azsdk/architect-guidance).
 typespec-suppressions-approved:
   data-plane: *data-plane-reviewers
-  management-plane: &arm-api-reviewers
-    team: arm-api-reviewers
+  management-plane: unprotected
 
-# ARM review and suppression labels. Data-plane behavior remains unchanged.
-WaitForARMFeedback: &arm-api-review-policy
-  management-plane: *arm-api-reviewers
+# ARM signoff and validation approval labels. Data-plane behavior remains unchanged.
+ARMSignedOff: &arm-api-review-policy
+  management-plane:
+    team: arm-api-reviewers
   data-plane: unprotected
-ARMChangesRequested: *arm-api-review-policy
 Approved-Suppression: *arm-api-review-policy
 Approved-LintDiff: *arm-api-review-policy
+Approved-Avocado: *arm-api-review-policy
 
 # REST breaking-change and versioning approvals on management-plane PRs.
 # Enumerate existing labels explicitly; policy keys are not wildcard patterns.
