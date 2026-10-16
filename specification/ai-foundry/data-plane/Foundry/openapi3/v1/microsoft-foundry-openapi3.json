@@ -37899,6 +37899,11 @@
             "$ref": "#/components/schemas/EvaluationLevel",
             "description": "The level at which evaluation is performed. Defaults to 'turn' if not specified.",
             "default": "turn"
+          },
+          "input_modality": {
+            "$ref": "#/components/schemas/EvaluationInputModality",
+            "description": "The evidence modality to evaluate. Defaults to `text` when omitted.\nUse `audio` only when each dataset item provides\n`conversation_artifacts.audio` and the evaluator and judge support audio.\nThe service does not fall back to a different modality.",
+            "default": "text"
           }
         },
         "description": "The request used to create an evaluation run.\n\nSee [cloud evaluation with the Microsoft Foundry SDK](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/cloud-evaluation?tabs=python).",
@@ -39643,6 +39648,10 @@
             "description": "The level at which evaluation is performed. Defaults to 'turn' if not specified.",
             "default": "turn"
           },
+          "input_modality": {
+            "$ref": "#/components/schemas/EvaluationInputModality",
+            "description": "The evidence modality selected for the evaluation run."
+          },
           "output_datasets": {
             "type": "array",
             "items": {
@@ -40253,6 +40262,14 @@
           }
         },
         "description": "Identifies a versioned Foundry dataset associated with an evaluation."
+      },
+      "EvaluationInputModality": {
+        "type": "string",
+        "enum": [
+          "text",
+          "audio"
+        ],
+        "description": "The supported evidence modalities for an evaluation run."
       },
       "EvaluationLevel": {
         "anyOf": [
@@ -52728,7 +52745,7 @@
             "description": "Determines what populates the `item` namespace in the data source."
           }
         },
-        "description": "A JSONL dataset used as the input to an evaluation run. See [evaluate datasets](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/cloud-evaluation-datasets?tabs=python).",
+        "description": "A JSONL dataset used as the input to an evaluation run. See [evaluate datasets](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/cloud-evaluation-datasets?tabs=python).\n\nFor runs with `input_modality` set to `audio`, each dataset item must include\na recording reference in `conversation_artifacts.audio`, for example:\n\n```json\n{\n  \"conversation_artifacts\": {\n    \"audio\": {\n      \"asset_id\": \"azureai://accounts/<account>/projects/<project>/datasets/<dataset>/versions/1\",\n      \"asset_file_path\": \"recordings/conversation.wav\"\n    }\n  }\n}\n```\n\nRegister recordings through the existing project data and storage workflows.\nThe asset ID identifies a versioned dataset containing the recording, and\nthe file path identifies a member of that asset. Recording format and media\nrequirements depend on the selected evaluator. Transcript fields can also\nbe present; an audio run does not fall back to transcript evaluation.",
         "title": "JsonlRunDataSource",
         "x-oaiMeta": {
           "name": "The file data source object for the eval run configuration",
@@ -89349,7 +89366,7 @@
           "initialization_parameters": {
             "type": "object",
             "additionalProperties": {},
-            "description": "Evaluator-specific configuration applied when the evaluator is initialized.\nAccepted parameters and defaults depend on the selected evaluator and\nversion. AI-assisted evaluators require a judge model setting, such as\n`model` or `deployment_name`, that identifies a chat-completion deployment\nin the current project. The judge model must support structured outputs.\nEvaluators without required initialization parameters can omit this\nproperty and use their documented defaults."
+            "description": "Evaluator-specific configuration applied when the evaluator is initialized.\nAccepted parameters and defaults depend on the selected evaluator and\nversion. AI-assisted evaluators require a judge model setting, such as\n`model` or `deployment_name`, that identifies a compatible deployment in\nthe current project. The judge must support the capabilities required by\nthe evaluator, such as structured outputs or audio input. Acoustic\nevaluators require an audio-input judge.\nEvaluators without required initialization parameters can omit this\nproperty and use their documented defaults."
           },
           "data_mapping": {
             "type": "object",
