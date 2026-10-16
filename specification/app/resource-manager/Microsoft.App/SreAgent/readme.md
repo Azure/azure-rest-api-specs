@@ -26,16 +26,17 @@ These are the global settings for the SRE Agent.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-01-01
+tag: package-2026-07-01
 
-suppressions:
-  - code: OperationsAPIImplementation
-    reason: The operations API is defined in a separate file.
-    from: sreagent.json
-  - code: MissingSegmentsInNestedResourceListOperation
-    reason: The parent resource Get call is defined in a separate file.
-    from: sreagent.json
-    
+```
+
+### Tag: package-2026-07-01
+These settings apply only when `--tag=package-2026-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-01'
+input-file:
+  - stable/2026-07-01/sreagent.json
+
 ```
 
 ### Tag: package-2026-01-01
@@ -44,6 +45,12 @@ These settings apply only when `--tag=package-2026-01-01` is specified on the co
 ```yaml $(tag) == 'package-2026-01-01'
 input-file:
   - stable/2026-01-01/sreagent.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: sreagent.json
+    where:
+      - $
+    reason: The 2026-01-01 package predates this service's operations endpoint; 2026-07-01 and later include it.
 directive:
   - suppress: AvoidAdditionalProperties
     from: sreagent.json
