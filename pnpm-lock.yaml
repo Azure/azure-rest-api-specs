@@ -227,6 +227,12 @@ catalogs:
     '@azure/openapi-markdown':
       specifier: 0.9.4
       version: 0.9.4
+    '@github/copilot':
+      specifier: 1.0.68
+      version: 1.0.68
+    '@github/copilot-sdk':
+      specifier: 1.0.0-beta.5
+      version: 1.0.0-beta.5
     '@js-temporal/polyfill':
       specifier: 0.5.1
       version: 0.5.1
@@ -323,6 +329,9 @@ catalogs:
     '@vitest/utils':
       specifier: ^5.0.0
       version: 5.0.2
+    adm-zip:
+      specifier: 0.6.0
+      version: 0.6.0
     ajv:
       specifier: ^8.17.1
       version: 8.20.0
@@ -720,6 +729,18 @@ importers:
       yaml:
         specifier: 'catalog:'
         version: 2.9.1
+
+  .github/skills/azure-typespec-author/agentic-doc-refinement:
+    dependencies:
+      '@github/copilot':
+        specifier: 'catalog:'
+        version: 1.0.68
+      '@github/copilot-sdk':
+        specifier: 'catalog:'
+        version: 1.0.0-beta.5
+      adm-zip:
+        specifier: 'catalog:'
+        version: 0.6.0
 
   eng/scripts:
     devDependencies:
@@ -1373,6 +1394,66 @@ packages:
 
   '@ewoudenberg/difflib@0.1.0':
     resolution: {integrity: sha512-OU5P5mJyD3OoWYMWY+yIgwvgNS9cFAU10f+DDuvtogcWQOoJIsQ4Hy2McSfUfhKjq8L0FuWVb4Rt7kgA+XK86A==}
+
+  '@github/copilot-darwin-arm64@1.0.68':
+    resolution: {integrity: sha1-r918A/Bbl74brMLZCXCbVXucwH4=}
+    cpu: [arm64]
+    os: [darwin]
+    hasBin: true
+
+  '@github/copilot-darwin-x64@1.0.68':
+    resolution: {integrity: sha1-aYILgC5N8+fWghd2CUkger03Akk=}
+    cpu: [x64]
+    os: [darwin]
+    hasBin: true
+
+  '@github/copilot-linux-arm64@1.0.68':
+    resolution: {integrity: sha1-Tj0cglkWdCvaaG1QSQVGrLQRNbE=}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+    hasBin: true
+
+  '@github/copilot-linux-x64@1.0.68':
+    resolution: {integrity: sha1-QglepYWjrS/AxvAkIxiVg1voSFs=}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+    hasBin: true
+
+  '@github/copilot-linuxmusl-arm64@1.0.68':
+    resolution: {integrity: sha1-m7hDBGMzhQN8yRBIlEsmb2dO004=}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+    hasBin: true
+
+  '@github/copilot-linuxmusl-x64@1.0.68':
+    resolution: {integrity: sha1-woS1ZkZsDldvg8SgrQgqR+3v0uc=}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+    hasBin: true
+
+  '@github/copilot-sdk@1.0.0-beta.5':
+    resolution: {integrity: sha1-B4hS7rtYs03ZVwHY2k9M2nwj13g=}
+    engines: {node: '>=20.0.0'}
+
+  '@github/copilot-win32-arm64@1.0.68':
+    resolution: {integrity: sha1-Lv1e2H3qhF15EdU2MW+Y7+b7GbM=}
+    cpu: [arm64]
+    os: [win32]
+    hasBin: true
+
+  '@github/copilot-win32-x64@1.0.68':
+    resolution: {integrity: sha1-erONezs/udkgmdchXpfsRTFo/sE=}
+    cpu: [x64]
+    os: [win32]
+    hasBin: true
+
+  '@github/copilot@1.0.68':
+    resolution: {integrity: sha1-PMZWj0J7Suaa9gx+27+5g7F3rs8=}
+    hasBin: true
 
   '@inquirer/ansi@2.0.8':
     resolution: {integrity: sha512-WpQM+Ti6Z40EFwwt+uL2p4UabT+W179zHp6HhLVOzfbwnVn05IPO/eXIZXGNqcT1jbQ15SujNLzQ39k4QPPxBQ==}
@@ -2629,6 +2710,10 @@ packages:
 
   '@vitest/utils@5.0.2':
     resolution: {integrity: sha512-mgpUtxFhKeOKVaArBVHNJGdYHAeRh135o59l13uVmPUCS1OUtis5pBqXEgE25iqRgFqEBwXvJlkhknRsYnMeqg==}
+
+  adm-zip@0.6.0:
+    resolution: {integrity: sha1-u8XGwzN1XpZ6Bt2YdH9DHh1To88=}
+    engines: {node: '>=14.0'}
 
   agent-base@7.1.4:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
@@ -4273,6 +4358,10 @@ packages:
     resolution: {integrity: sha512-T24Jb5V48e4VgYliUXMnZ379ItbrXgOimweKaJshD84z+8q7ZOZjJan0MeDe+Ugb+uqERDVV8SBmemaGMSMugA==}
     engines: {node: '>=4.0.0 || >=6.0.0'}
 
+  vscode-jsonrpc@8.2.1:
+    resolution: {integrity: sha1-oyLMDx2X95T/2cTNKomKC94JfzQ=}
+    engines: {node: '>=14.0.0'}
+
   vscode-jsonrpc@9.0.3:
     resolution: {integrity: sha512-qETYf9PCl1lVfwR+oBmMfc4vP2nqLNA35ABxorw3j06+xlKRgDVxbLgKm4Y/xPL0YWdeDjLoI4ImICIT3nB0zQ==}
     engines: {node: '>=14.0.0'}
@@ -4799,6 +4888,49 @@ snapshots:
   '@ewoudenberg/difflib@0.1.0':
     dependencies:
       heap: 0.2.7
+
+  '@github/copilot-darwin-arm64@1.0.68':
+    optional: true
+
+  '@github/copilot-darwin-x64@1.0.68':
+    optional: true
+
+  '@github/copilot-linux-arm64@1.0.68':
+    optional: true
+
+  '@github/copilot-linux-x64@1.0.68':
+    optional: true
+
+  '@github/copilot-linuxmusl-arm64@1.0.68':
+    optional: true
+
+  '@github/copilot-linuxmusl-x64@1.0.68':
+    optional: true
+
+  '@github/copilot-sdk@1.0.0-beta.5':
+    dependencies:
+      '@github/copilot': 1.0.68
+      vscode-jsonrpc: 8.2.1
+      zod: 4.6.5
+
+  '@github/copilot-win32-arm64@1.0.68':
+    optional: true
+
+  '@github/copilot-win32-x64@1.0.68':
+    optional: true
+
+  '@github/copilot@1.0.68':
+    dependencies:
+      detect-libc: 2.1.2
+    optionalDependencies:
+      '@github/copilot-darwin-arm64': 1.0.68
+      '@github/copilot-darwin-x64': 1.0.68
+      '@github/copilot-linux-arm64': 1.0.68
+      '@github/copilot-linux-x64': 1.0.68
+      '@github/copilot-linuxmusl-arm64': 1.0.68
+      '@github/copilot-linuxmusl-x64': 1.0.68
+      '@github/copilot-win32-arm64': 1.0.68
+      '@github/copilot-win32-x64': 1.0.68
 
   '@inquirer/ansi@2.0.8': {}
 
@@ -5997,6 +6129,8 @@ snapshots:
       '@vitest/pretty-format': 5.0.2
       convert-source-map: 2.0.0
       tinyrainbow: 3.1.1
+
+  adm-zip@0.6.0: {}
 
   agent-base@7.1.4: {}
 
@@ -7714,6 +7848,8 @@ snapshots:
       - msw
 
   vscode-jsonrpc@3.6.2: {}
+
+  vscode-jsonrpc@8.2.1: {}
 
   vscode-jsonrpc@9.0.3: {}
 

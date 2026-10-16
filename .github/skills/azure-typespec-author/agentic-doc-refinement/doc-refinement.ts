@@ -14,7 +14,7 @@
 //   5. Agent generates the gap report             (prompts/05-generate-report.md)
 //
 // Prereqs:
-//   - `npm ci` in this folder (installs @github/copilot-sdk, the @github/copilot
+//   - `pnpm install` at the repository root (installs @github/copilot-sdk, the @github/copilot
 //     CLI it spawns, and the artifact ZIP dependency).
 //   - GitHub Copilot CLI authenticated (the SDK spawns the bundled copilot CLI), OR
 //     pass a token via COPILOT_GITHUB_TOKEN. Override the CLI with COPILOT_CLI_PATH.
@@ -22,8 +22,8 @@
 //     project, and the skill changes committed and pushed to a branch or PR ref.
 //
 // Usage:
-//   npm run refine                                 # full loop via ADO pipeline
-//   npm run refine -- --skip-eval                  # only steps 1-2
+//   pnpm refine                                   # full loop via ADO pipeline
+//   pnpm refine --skip-eval                        # only steps 1-2
 //   node doc-refinement.ts --skip-eval             # only steps 1-2
 //   node doc-refinement.ts --skill-ref refs/heads/main
 //   node doc-refinement.ts --model gpt-5.5 --idle-timeout 1800

@@ -50,13 +50,13 @@ Why this is the default: the _forced_ (code-quality) eval is infra-heavy. Vally 
 eval runs on the ADO benchmark pool instead of requiring that infrastructure on the
 local machine.
 
-- **Script**: `doc-refinement.ts` (this folder). Run `npm ci`, then
+- **Script**: `doc-refinement.ts` (this folder). Run `pnpm install` at the repository root, then
   `node doc-refinement.ts --skip-eval`.
   Node.js runs the TypeScript entry point directly using built-in type stripping;
   no compilation step is needed to run the workflow.
 - **Agent steps (1, 2, 4, 5)** use the **Copilot SDK** (`@github/copilot-sdk`):
   `new CopilotClient()` -> `createSession({ model, workingDirectory, skillDirectories,
-onPermissionRequest, systemMessage })` -> `session.sendAndWait({ prompt }, timeout)`.
+  onPermissionRequest, systemMessage })` -> `session.sendAndWait({ prompt }, timeout)`.
   Steps 1-2 share one session, as do Steps 4-5, so related steps retain context. The
   permission handler denies shell access and restricts local reads/writes to the
   repository and each phase's approved output directories.
@@ -85,7 +85,7 @@ onPermissionRequest, systemMessage })` -> `session.sendAndWait({ prompt }, timeo
 ### Flow
 
 ```
-npm run refine (full flow; currently blocked)
+pnpm refine (full flow; currently blocked)
   |
   |- 1. agent -> references/reference-document-links.md
   |- 2. agent -> SKILL.md / references/*   (only if needed)
@@ -105,16 +105,14 @@ The workflow has one phase switch:
   analysis, and report).
 
 ```
-npm run refine -- -- --skip-eval --model gpt-5.6-sol
+pnpm refine --skip-eval --model gpt-5.6-sol
 node doc-refinement.ts --skip-eval
 node doc-refinement.ts --help
 node doc-refinement.ts --skip-eval --model gpt-5.5 --idle-timeout 1800
 ```
 
 The removed `--update-skill-only` mode is replaced by `--skip-eval`.
-When passing options through npm on Windows, use the second standalone `--` shown above
-so npm forwards the option name instead of converting it to `npm_config_*`. Direct
-`node doc-refinement.ts ...` invocation does not need the extra separator.
+Run `pnpm refine` from this folder, or invoke `node doc-refinement.ts` directly.
 
 `--skill-ref` is resolved against `Azure/azure-rest-api-specs`. After the separate
 benchmark integration is available, a full run can use `--skill-ref refs/heads/main`
@@ -125,7 +123,8 @@ the base directory for those evaluation artifacts and reports.
 
 - Node.js >= 24.14.1, matching the repository's minimum version and supporting
   direct TypeScript execution.
-- `npm ci` in this folder (installs the Copilot SDK/CLI and ZIP extraction dependency).
+- `pnpm install` at the repository root (installs workspace dependencies, including
+  the Copilot SDK/CLI and ZIP extraction dependency).
 - GitHub Copilot CLI installed & authenticated - the SDK spawns it (`copilot login`), or
   set `COPILOT_GITHUB_TOKEN`.
 - For future full runs: separate cross-repository benchmark support, plus Azure CLI
@@ -137,9 +136,10 @@ the base directory for those evaluation artifacts and reports.
 
 ### Development checks
 
-Install the repository's shared development dependencies with `pnpm install` at the
-repository root, then run `npm ci` in this folder. Run `npm run check` and `npm test`
-here for strict TypeScript checking and hermetic workflow tests. The tests mock
+Install workspace dependencies with `pnpm install` at the repository root.
+Run `pnpm check` in this folder for TypeScript, lint, formatting, and hermetic workflow
+checks, or `pnpm test:ci` for just the tests. The tests also run in the root Vitest
+workspace. The tests mock
 Copilot, Git/Azure CLI commands, and Azure DevOps responses; they do not queue live
 agents or benchmark builds.
 
@@ -162,7 +162,6 @@ agentic-doc-refinement/
 |- tsconfig.json          # shared strict TypeScript settings
 |- vitest.config.ts       # focused test project
 |- package.json           # pins Copilot SDK/CLI + artifact ZIP dependency
-|- package-lock.json      # reproducible standalone npm install
 |- prompts/
    |- 01-update-reference-docs.md
    |- 02-update-skill.md
@@ -172,6 +171,8 @@ agentic-doc-refinement/
 
 `results/` in this folder is gitignored. Each complete run writes to a new timestamped
 subdirectory so failed runs cannot reuse earlier JSONL, analysis, or report files.
+Dependencies are managed by the repository-root `pnpm-workspace.yaml` catalog and
+`pnpm-lock.yaml`.
 
 ## Open assumptions
 
