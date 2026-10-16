@@ -4992,7 +4992,7 @@ model KnowledgeBaseOpenAICompatibleParameters {
   authIdentity?: SearchIndexerDataIdentity;
 }
 
-/** An OpenAI-compatible embeddings endpoint used for managed knowledge source ingestion and generated query vectorization. Changing from a native embedding model requires recreating and reindexing the knowledge source. The URI, modelName, and dimensions cannot be changed after creation. */
+/** An OpenAI-compatible embeddings endpoint used for managed knowledge source ingestion and generated query vectorization. Changing from a native embedding model requires recreating the knowledge source and indexing it again. The URI, modelName, and dimensions cannot be changed after creation. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve the OpenAI acronym in SDK model names."
 @added(Versions.v2026_11_01_preview)
 model KnowledgeSourceOpenAICompatibleVectorizer
