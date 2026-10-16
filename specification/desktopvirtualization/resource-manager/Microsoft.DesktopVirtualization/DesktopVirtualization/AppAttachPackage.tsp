@@ -9,7 +9,6 @@ import "./models.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 namespace Microsoft.DesktopVirtualization;
