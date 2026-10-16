@@ -4,11 +4,6 @@
 
 ## 2.1 General Intake (All Cases)
 
-Use **agentic search only** for intake grounding. **Do not call any MCP tools
-during Step 2**, including knowledge retrieval or authoring-plan tools. This
-applies even when the request is not covered by the reference catalog or search
-results are insufficient: report the guidance gap, not an MCP fallback.
-
 1. Run [agentic search](agentic-search.md) using the Step 1 result and the user's request.
 2. Identify the case from the table below and gather more information if case matches. If no case matches, skip Step 2.2.
 
