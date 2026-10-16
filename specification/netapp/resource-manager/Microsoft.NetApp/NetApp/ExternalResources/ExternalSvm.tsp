@@ -39,8 +39,9 @@ model ExternalSvmProperties {
   provisioningState?: NetAppProvisioningState;
 
   /**
-   * Name of the external ONTAP SVM (different from Azure resource name). Must be unique across the cluster and cannot be changed once peering is established.
+   * Name of the external ONTAP SVM (different from Azure resource name). Must be unique across the cluster.
    */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   ontapSvmName: string;
 
   /**
@@ -52,17 +53,6 @@ model ExternalSvmProperties {
       type: "Microsoft.NetApp/externalClusters/clusterPeers/svmPeers";
     }
   ]>[];
-}
-
-/**
- * External SVM properties for PATCH operations
- */
-@added(Versions.v2026_08_15_preview)
-model ExternalSvmPatchProperties {
-  /**
-   * Name of the external ONTAP SVM (different from Azure resource name). Must be unique across the cluster and cannot be changed once peering is established.
-   */
-  ontapSvmName?: string;
 }
 
 /**
@@ -90,10 +80,7 @@ interface ExternalSvms {
   @patch
   update is ArmCustomPatchAsync<
     ExternalSvm,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      ExternalSvm,
-      ExternalSvmPatchProperties
-    >,
+    Azure.ResourceManager.Foundations.TagsUpdateModel<ExternalSvm>,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = ExternalSvm> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
