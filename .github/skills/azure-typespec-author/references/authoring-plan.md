@@ -7,14 +7,12 @@
 ### 3.1.1 Reuse the authoring grounding
 
 Step 2 already read the reference catalog, classified the complete request as covered
-or uncovered, and ran Agentic Search first. It either completed grounding with Web
-guidance or, for an uncovered request that remained insufficiently grounded, used
-the retrieval fallback. Reuse the final grounding here.
+or uncovered, and executed exactly one knowledge route before collecting any missing
+decisions. Reuse that route's fetched content here.
 
 Do not call Agentic Search, `azsdk_typespec_retrieve_knowledge`, or an authoring-plan
-MCP during planning. If the grounding is insufficient, return to Step 2 and continue
-the same ordered route there; never call retrieval before Agentic Search, return to
-Web after retrieval fallback starts, or make an ungrounded plan.
+MCP during planning. If the grounding is insufficient, return to Step 2 and refine
+the same selected route there; never switch routes or make an ungrounded plan.
 
 ### 3.1.2 Build the authoring plan locally
 

@@ -22,48 +22,45 @@ const search = read("references/agentic-search.md");
 
 assert.ok(
   skill.indexOf("Attempt catalog access before selecting a knowledge route") <
-    skill.indexOf("Give Agentic Search priority during intake"),
+    skill.indexOf("Select and execute one knowledge route during intake"),
   "entry-point catalog gate must precede route selection",
 );
 assert.match(skill, /Never call `azsdk_typespec_generate_authoring_plan`/);
 assert.match(skillFrontmatter, /azsdk_typespec_retrieve_knowledge/);
 assert.match(skillFrontmatter, /azsdk_run_typespec_validation/);
 assert.match(skill, /MCP tools are optional capabilities, not prerequisites/);
-assert.match(
-  skill,
-  /Retrieval is never the first\s+knowledge route: Agentic Search always has priority/,
-);
-assert.match(skill, /Step 3 reuses the final grounding and must not retrieve it again/);
+assert.match(skill, /Step 3 reuses the fetched content and must not retrieve it again/);
 assert.match(skill, /"carry over all features" or "no exclusions" completely answers/);
 assert.match(
   skill,
-  /Analyze → Read catalog → Classify coverage → Agentic Search first → Retrieval only/,
+  /Analyze → Read catalog → Classify coverage → Ground once during intake → Plan locally/,
 );
 assert.match(skill, /returns an error, times out, or fails authentication is not\s+unavailable/);
 
-const catalogGate = intake.indexOf("Classify coverage and ground the request");
+const catalogGate = intake.indexOf("Select and execute one knowledge route");
 const routeClassification = intake.indexOf("Classify the complete request");
 assert.ok(catalogGate !== -1 && catalogGate < routeClassification);
 assert.match(intake, /Use the fetched\s+guidance to determine the material intake decisions/);
 assert.match(intake, /Catalog access failure is not a blocker/);
-assert.match(intake, /Run \[agentic search\]\(agentic-search\.md\) first/);
-assert.match(intake, /Never call retrieval before Agentic Search/);
-assert.match(intake, /Covered.*Agentic Search is the only knowledge route/);
-assert.match(intake, /uncovered.*retrieval fallback/s);
+assert.match(intake, /Execute exactly one route for the complete request/);
+assert.match(intake, /Do not call both Agentic Search and retrieval/);
 assert.match(
   intake,
-  /must reuse this grounding record without\s+repeating Agentic Search or retrieval/,
+  /must reuse this grounding record without repeating Agentic Search or retrieval/,
 );
 assert.equal((intake.match(/Covered — Agentic Search/g) ?? []).length, 4);
-assert.match(plan, /ran Agentic Search first/);
+assert.match(plan, /executed exactly one knowledge route/);
 assert.match(
   plan,
   /Do not call Agentic Search, `azsdk_typespec_retrieve_knowledge`, or an authoring-plan/,
 );
-assert.match(plan, /never call retrieval before Agentic Search/);
-assert.match(search, /Enter this procedure during Step 2 before any knowledge MCP call/);
+assert.match(plan, /return to Step 2 and refine\s+the same selected route there/);
+assert.match(
+  search,
+  /Enter this procedure during Step 2 when intake selects the Web knowledge route/,
+);
 assert.match(search, /catalog may guide URL selection but is not required/);
-assert.match(search, /Agentic Search has\s+priority for every request/);
+assert.match(search, /Do not call a knowledge MCP after selecting this route/);
 assert.match(plan, /Do not use `ArmResourcePatchSync` or `ArmResourcePatchAsync`/);
 assert.match(plan, /Preserve every released stable wire contract/);
 assert.match(plan, /Use synchronous templates for GET\/read and LIST/);

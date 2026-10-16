@@ -108,7 +108,6 @@ tool(prematureEvents, "azure-sdk-mcp-azsdk_typespec_retrieve_knowledge", {});
 const premature = analyzeEvents(prematureEvents, "premature");
 assert.equal(premature.catalogReadSucceeded, false);
 assert.equal(premature.catalogBeforeSource, true);
-assert.equal(premature.agenticBeforeRetrieval, false);
 assert.equal(premature.catalogFailureSafe, false);
 
 const blockerEvents = [];
@@ -138,7 +137,6 @@ tool(mixedEvents, "azure-sdk-mcp-azsdk_typespec_generate_authoring_plan", {});
 const mixed = analyzeEvents(mixedEvents, "mixed");
 assert.equal(mixed.route, "Both");
 assert.equal(mixed.sourceExclusive, false);
-assert.equal(mixed.agenticBeforeRetrieval, true);
 assert.equal(mixed.planner, 1);
 
 const summary = summarize([covered, uncovered, canonical, unavailableCatalog, premature, mixed]);
@@ -150,7 +148,6 @@ assert.deepEqual(summary.routes, {
 });
 assert.equal(summary.catalogViolations, 0);
 assert.equal(summary.sourceExclusivityViolations, 1);
-assert.equal(summary.agenticPriorityViolations, 1);
 assert.equal(summary.retrievalViolations, 2);
 assert.equal(summary.plannerCalls, 1);
 

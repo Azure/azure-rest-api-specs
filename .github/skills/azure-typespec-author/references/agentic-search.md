@@ -1,12 +1,10 @@
 # Agentic Search
 
-Enter this procedure during Step 2 before any knowledge MCP call. Agentic Search has
-priority for every request. The catalog may guide URL selection but is not required:
-if it is unavailable, discover authoritative TypeSpec or Azure documentation
-directly. Use the resulting Web guidance to determine the required intake decisions,
-then retain it for the local authoring plan. Covered requests stop here. For an
-uncovered request only, intake may use the retrieval fallback after this procedure
-cannot obtain sufficient authoritative guidance.
+Enter this procedure during Step 2 when intake selects the Web knowledge route. The
+catalog may guide URL selection but is not required: if it is unavailable, discover
+authoritative TypeSpec or Azure documentation directly. Use the resulting Web
+guidance to determine the required intake decisions, then retain it for the local
+authoring plan. Do not call a knowledge MCP after selecting this route.
 
 ## Input
 
@@ -25,8 +23,8 @@ cannot obtain sufficient authoritative guidance.
 2. **Fetch** — `web_fetch` each selected URL. Extract content as markdown.
 3. **Search** — find content matching a query derived from the user's request and Step 1 result. Choose the most effective local search tool available.
 4. **Iterate within Web** — if initial results are insufficient for intake, refine
-   the query or fetch another authoritative URL before considering the uncovered-case
-   retrieval fallback. Never call retrieval before Agentic Search.
+   the query or fetch another authoritative URL. Do not call a knowledge MCP during
+   intake.
 5. **Return and reuse** — return the extracted intake and authoring guidance with its
    URLs to the caller. Reuse this grounding record for intake, local planning,
    editing, and final citations; do not fetch again only to recreate citations.

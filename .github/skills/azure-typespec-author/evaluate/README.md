@@ -196,9 +196,7 @@ node scripts/analyze-routing.js .\results\forced\<timestamp>
 ```
 
 For the current 38 covered cases, the expected result is 38 Web-only trials, zero retrieval calls,
-zero planner calls, grounding before the first mutation, and validation after mutation. For an
-uncovered request outside this suite, Agentic Search still runs first; retrieval is permitted only
-after Web cannot obtain sufficient authoritative guidance.
+zero planner calls, grounding before the first mutation, and validation after mutation.
 
 Run deterministic positive and negative examples for corrected syntax graders:
 

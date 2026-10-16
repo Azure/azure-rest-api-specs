@@ -29,15 +29,16 @@ This includes but is not limited to:
 
 ## MCP Tools
 
-| Tool                                              | Purpose                                                                                                    |
-| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `azure-sdk-mcp:azsdk_typespec_retrieve_knowledge` | Fallback for uncovered requests only after Agentic Search cannot obtain sufficient authoritative guidance. |
-| `azure-sdk-mcp:azsdk_run_typespec_validation`     | Validate TypeSpec.                                                                                         |
+| Tool                                              | Purpose                                                                                                                  |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `azure-sdk-mcp:azsdk_typespec_retrieve_knowledge` | Retrieve authoring knowledge for requests not covered by the reference catalog; Agentic Search handles covered requests. |
+| `azure-sdk-mcp:azsdk_run_typespec_validation`     | Validate TypeSpec.                                                                                                       |
 
 These MCP tools are optional capabilities, not prerequisites. Call them at their
-documented workflow stages when they are exposed. Retrieval is never the first
-knowledge route: Agentic Search always has priority. When validation MCP is not
-exposed, continue with the mandatory local compile and case-specific checks.
+documented workflow stages when they are exposed. When retrieval MCP is not exposed,
+continue the selected knowledge route with authoritative Agentic Search. When
+validation MCP is not exposed, continue with the mandatory local compile and
+case-specific checks.
 
 An exposed tool that returns an error, times out, or fails authentication is not
 unavailable. Report that failure instead of silently taking its fallback.
@@ -53,9 +54,9 @@ unavailable. Report that failure instead of silently taking its fallback.
 - **Always cite references** — provide links that justify the approach.
 - **Follow the authoring plan exactly** — code changes in Step 4 MUST follow the authoring plan generated in Step 3. Do not deviate by referring to existing code patterns in the TypeSpec project; the authoring plan is the single source of truth for what to change.
 - **Attempt catalog access before selecting a knowledge route** — after project analysis, read the reference catalog during intake. Retry the installed catalog path when its first read fails, then try the canonical repository copy through an available repository-file reader. If the catalog still cannot be read, continue Agentic Search by locating authoritative TypeSpec or Azure documentation directly; catalog access failure is not a blocker and does not by itself select the retrieval MCP route.
-- **Give Agentic Search priority during intake** — classify the complete request as covered or uncovered after reading the catalog, then run Agentic Search first for the complete request. Covered requests remain Web-only. For an uncovered request, call `azsdk_typespec_retrieve_knowledge` only when the Agentic Search attempt cannot obtain sufficient authoritative guidance and the tool is exposed. Never call retrieval before Agentic Search. Once retrieval fallback starts, do not return to Web or call an authoring-plan MCP. Step 3 reuses the final grounding and must not retrieve it again.
+- **Select and execute one knowledge route during intake** — classify the complete request as covered or uncovered after reading the catalog. Covered requests use Agentic Search. If any material authoring topic is uncovered, use `azsdk_typespec_retrieve_knowledge` for the complete request when the tool is exposed; if it is not exposed, use authoritative Agentic Search for the complete request. Do not call both knowledge routes. Step 3 reuses the fetched content and must not retrieve it again.
 - **Never call `azsdk_typespec_generate_authoring_plan`** — synthesize the authoring plan locally from the selected grounding source.
-- **Do not edit before grounding** — follow `Analyze → Read catalog → Classify coverage → Agentic Search first → Retrieval only for an uncovered Web-insufficient request → Plan locally → Apply → Validate`. If neither authoritative Web grounding nor the permitted retrieval fallback can provide sufficient guidance, report a blocker instead of making ungrounded edits.
+- **Do not edit before grounding** — follow `Analyze → Read catalog → Classify coverage → Ground once during intake → Plan locally → Apply → Validate`. If neither the selected MCP route nor authoritative Web grounding can provide sufficient guidance, report a blocker instead of making ungrounded edits.
 - **Validation is not retrieval** — calling `azsdk_run_typespec_validation` after edits does not violate the one-source rule. If that tool is unavailable, record the skip and continue with `tsp compile .`.
 
 ## Steps

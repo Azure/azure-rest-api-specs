@@ -4,8 +4,8 @@
 
 ## 2.1 General Intake (All Cases)
 
-Classify coverage and ground the request in priority order before deciding what
-additional information to collect:
+Select and execute one knowledge route before deciding what additional information
+to collect:
 
 1. Read the installed
    [reference-document-links.md](reference-document-links.md). If that read fails,
@@ -16,35 +16,28 @@ additional information to collect:
    - **Uncovered** — one or more material authoring topics are absent from the
      catalog. A partially covered request is classified as uncovered for its complete
      knowledge route.
-3. Run [agentic search](agentic-search.md) first for the complete request:
-   - **Covered** — Agentic Search is the only knowledge route.
-   - **Uncovered** — use Agentic Search to locate additional authoritative TypeSpec
-     or Azure documentation beyond the catalog.
-   - **Catalog unavailable** — use Agentic Search to locate authoritative TypeSpec
-     or Azure documentation directly. Catalog access failure is not a blocker and
-     does not by itself select retrieval.
-4. Use retrieval only as an ordered fallback:
-   - If Agentic Search obtains sufficient authoritative guidance, retain its fetched
-     content and do not call retrieval.
-   - If an **uncovered** request remains insufficiently grounded after Agentic Search,
-     call `azsdk_typespec_retrieve_knowledge` once for the complete request when it is
-     exposed.
-   - Never call retrieval before Agentic Search. Once retrieval fallback starts, do
-     not return to Web or call an authoring-plan MCP.
-   - If retrieval is not exposed or also cannot supply sufficient guidance, report a
-     blocker instead of making ungrounded edits.
-5. Retain the final grounding for Step 3; the authoring-plan step must reuse it
+3. Execute exactly one route for the complete request:
+   - **Covered** — run [agentic search](agentic-search.md).
+   - **Uncovered** — call `azsdk_typespec_retrieve_knowledge` when it is exposed. If
+     it is not exposed, run Agentic Search against authoritative TypeSpec or Azure
+     documentation instead.
+   - **Catalog unavailable** — run Agentic Search against authoritative TypeSpec or
+     Azure documentation. Catalog access failure is not a blocker and does not by
+     itself select retrieval.
+4. Do not call both Agentic Search and retrieval for the same request. Retain the
+   selected route's fetched content for Step 3; the authoring-plan step must reuse it
    without another knowledge call.
-6. Use the fetched guidance to determine the material intake decisions and retain it
+5. Use the fetched guidance to determine the material intake decisions and retain it
    for the authoring plan.
-7. Using the selected guidance, the Step 1 result, and the user's request, identify
+6. Using the selected guidance, the Step 1 result, and the user's request, identify
    every matching case from the table below.
-8. Gather only material information that is not already supplied or directly
+7. Gather only material information that is not already supplied or directly
    available from the project. If no case matches, skip Step 2.2.
 
-Do not call an authoring-plan or validation MCP tool during intake. Do not plan,
-edit, or validate during intake. Step 3 must reuse this grounding record without
-repeating Agentic Search or retrieval.
+Do not call an authoring-plan or validation MCP tool during intake. If the selected
+knowledge route cannot obtain sufficient authoritative guidance, report a blocker
+instead of switching routes. Do not plan, edit, or validate during intake. Step 3
+must reuse this grounding record without repeating Agentic Search or retrieval.
 
 | Case | Name                    | Description                                            | Service Type     | Knowledge route          |
 | ---- | ----------------------- | ------------------------------------------------------ | ---------------- | ------------------------ |
