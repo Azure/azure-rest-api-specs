@@ -235,35 +235,4 @@ interface ProbingGateways {
   )
   @doc("Lists all Probing Gateways within a subscription.")
   listBySubscription is ArmListBySubscription<ProbingGateway>;
-
-  @opExample(
-    #{
-      parameters: #{
-        subscriptionId: "00000000-0000-0000-0000-000000000000",
-        resourceGroupName: "rg1",
-        probingGatewayName: "pg1",
-        apiVersion: "2026-02-09-preview",
-        provider: "Microsoft.Network",
-        body: #{
-          eventType: "Linked",
-          topologyMapId: "00000000-0000-0000-0000-000000000001",
-          siteId: "site-west-us",
-        },
-      },
-      returnType: #{
-        eventType: "Linked",
-        topologyMapId: "00000000-0000-0000-0000-000000000001",
-        siteId: "site-west-us",
-        message: "Successfully linked.",
-      },
-    },
-    #{ title: "ProbingGateways_CreateTopologyReference" }
-  )
-  @doc("Notifies the Probing Gateway of a topology reference link or unlink event. Called by Private Traffic Manager only.")
-  @action("topologyReferences")
-  createTopologyReference is ArmResourceActionSync<
-    ProbingGateway,
-    ProbingGatewayTopologyReferenceRequest,
-    ProbingGatewayTopologyReferenceResult
-  >;
 }

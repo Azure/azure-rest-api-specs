@@ -59,7 +59,7 @@ model ProviderConnectionProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update)
   ipConfiguration?: IpConfiguration;
 
-  @doc("The name of the resource group in which the private endpoint for the provider connection is created. The name is case insensitive and cannot be changed after creation.")
+  @doc("The name of the resource group in which the private endpoint for the provider connection is created. The resource group must be in the same subscription as the Azure Service Connection Controller. The name is case insensitive and cannot be changed after creation.")
   @minLength(1)
   @maxLength(90)
   @visibility(Lifecycle.Read, Lifecycle.Create)

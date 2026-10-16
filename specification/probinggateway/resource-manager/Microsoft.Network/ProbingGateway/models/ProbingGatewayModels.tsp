@@ -32,45 +32,6 @@ union IPAllocationMethod {
   string,
 }
 
-@doc("The type of Probing Gateway topology reference event.")
-union ProbingGatewayEventType {
-  @doc("The Probing Gateway was linked to a site.")
-  Linked: "Linked",
-
-  @doc("The Probing Gateway was unlinked from a site.")
-  Unlinked: "Unlinked",
-
-  string,
-}
-
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve the existing C# SDK name when enabling the client-sdk ruleset."
-@doc("The request body describing a Probing Gateway topology reference link or unlink event.")
-model ProbingGatewayTopologyReferenceRequest {
-  @doc("The type of event indicating whether the Probing Gateway was linked or unlinked.")
-  eventType: ProbingGatewayEventType;
-
-  @doc("The GUID that identifies the topology map in Private Traffic Manager.")
-  topologyMapId: string;
-
-  @doc("The name of the site within the topology map.")
-  siteId?: string;
-}
-
-@doc("The result of processing a Probing Gateway topology reference event.")
-model ProbingGatewayTopologyReferenceResult {
-  @doc("The event type that was processed.")
-  eventType: ProbingGatewayEventType;
-
-  @doc("The GUID that identifies the topology map the event applied to.")
-  topologyMapId?: string;
-
-  @doc("The name of the site within the topology map, if provided.")
-  siteId?: string;
-
-  @doc("A message describing the outcome of the operation.")
-  message: string;
-}
-
 @doc("The provisioning state of the Probing Gateway resource.")
 union ProvisioningState {
   Azure.ResourceManager.ResourceProvisioningState,
