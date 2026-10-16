@@ -36,6 +36,9 @@ function createMockGithubImpl() {
     },
     rest: {
       actions: {
+        createWorkflowDispatch: vi.fn(),
+        getWorkflowRun: vi.fn(),
+        listWorkflowRuns: vi.fn().mockResolvedValue({ data: { workflow_runs: [] } }),
         downloadArtifact: vi.fn().mockResolvedValue({ data: new ArrayBuffer(0) }),
         listJobsForWorkflowRun: vi.fn().mockResolvedValue({ data: [] }),
         listWorkflowRunArtifacts: vi.fn().mockResolvedValue({ data: { artifacts: [] } }),
@@ -59,6 +62,7 @@ function createMockGithubImpl() {
         listFiles: vi.fn().mockResolvedValue({ data: [] }),
       },
       repos: {
+        getBranchRules: vi.fn().mockResolvedValue({ data: [] }),
         createCommitStatus: vi.fn(),
         getCombinedStatusForRef: vi.fn().mockResolvedValue({
           data: { statuses: [], total_count: 0 },
@@ -84,8 +88,17 @@ export function createMockCore(): Core & ReturnType<typeof createMockCoreImpl> {
 
 // Partial mock of `core` parameter passed into to github-script actions
 function createMockCoreImpl() {
-  const summary = {} as { addRaw: Mock; write: Mock };
+  const summary = {} as {
+    addRaw: Mock;
+    addLink: Mock;
+    addHeading: Mock;
+    addCodeBlock: Mock;
+    write: Mock;
+  };
   summary.addRaw = vi.fn().mockReturnValue(summary);
+  summary.addLink = vi.fn().mockReturnValue(summary);
+  summary.addHeading = vi.fn().mockReturnValue(summary);
+  summary.addCodeBlock = vi.fn().mockReturnValue(summary);
   summary.write = vi.fn().mockResolvedValue(undefined);
 
   return {

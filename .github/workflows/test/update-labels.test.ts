@@ -61,6 +61,34 @@ describe("updateLabels", () => {
 });
 
 describe("updateLabelsImpl", () => {
+  it("never replays obsolete production approval artifacts while preserving diagnostic markers", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [
+          { name: "label-ARMSignedOff=true" },
+          { name: "label-ARMSignedOff=false" },
+          { name: "label-ARMAutoSignedOff-IncrementalTSP=true" },
+        ],
+      },
+    });
+    await updateLabelsImpl({
+      owner: "owner",
+      repo: "repo",
+      head_sha: fullGitSha,
+      issue_number: 123,
+      run_id: 456,
+      github,
+      core: createMockCore(),
+    });
+    expect(github.rest.issues.addLabels).toHaveBeenCalledWith(
+      expect.objectContaining({
+        labels: ["ARMAutoSignedOff-IncrementalTSP"],
+      }),
+    );
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+  });
+
   it("throws if no run_id", async () => {
     const github = createMockGithub();
 

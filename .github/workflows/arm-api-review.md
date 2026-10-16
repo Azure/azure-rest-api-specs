@@ -2,28 +2,23 @@
 description: >
   Automatically review Azure REST API specification pull requests for
   conformance to ARM RPC rules and Azure REST API Guidelines. Triggers
-  automatically on PR open, synchronize, label, and ready-for-review events;
+  automatically after Summarize Checks reconciles ARM review readiness;
   on demand via the /arm-review comment command.
 run-name: "ARM API Review #${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }} (${{ github.event_name }})"
 timeout-minutes: 30
 # Concurrency is evaluated before the job-level `if` gate. Give unrelated
-# comments and non-queue label events run-scoped groups so they cannot cancel
+# comments run-scoped groups so they cannot cancel
 # an active review for the same PR before being skipped.
 concurrency:
-  group: "gh-aw-${{ github.workflow }}-${{ ((github.event_name == 'issue_comment' && (github.event.comment.body != '/arm-review' || github.event.issue.pull_request == null)) || (github.event_name == 'pull_request_target' && github.event.action == 'labeled' && github.event.label.name != 'WaitForARMFeedback')) && github.run_id || github.event.issue.number || github.event.pull_request.number || github.event.inputs.pr_number || github.run_id }}"
+  group: "gh-aw-${{ github.workflow }}-${{ (github.event_name == 'issue_comment' && (github.event.comment.body != '/arm-review' || github.event.issue.pull_request == null)) && github.run_id || github.event.issue.number || github.event.inputs.pr_number || github.run_id }}"
   cancel-in-progress: true
 on:
-  # Fork PRs ARE supported (`forks: ["*"]`), matching every other PR workflow in
-  # this repo (see data-plane-api-review.md). This is safe because the agent
+  # Fork PRs are supported through trusted summary dispatches. The agent
   # never checks out untrusted PR head code (`checkout: false` below) and reads
   # spec files only through the read-only GitHub MCP toolset; its only write
   # channel is gh-aw `safe-outputs`. The `roles` gate below still restricts who
   # can *trigger* the workflow to write-access users, so externally-authored
-  # fork PRs are reviewed only after a maintainer applies the label or runs
-  # `/arm-review`.
-  pull_request_target:
-    types: [opened, synchronize, reopened, labeled, ready_for_review]
-    forks: ["*"]
+  # fork PRs are reviewed by the trusted dispatcher or a maintainer's `/arm-review`.
   issue_comment:
     types: [created]
   workflow_dispatch:
@@ -32,7 +27,13 @@ on:
         description: "PR number to review"
         required: true
         type: string
+      head_sha:
+        description: "Expected PR head from Summarize Checks; empty for a manual review"
+        required: false
+        default: ""
+        type: string
   permissions:
+    actions: write
     pull-requests: read
     statuses: write
   steps:
@@ -41,6 +42,7 @@ on:
       uses: actions/github-script@v9
       env:
         TARGET_PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}
+        EXPECTED_HEAD_SHA: ${{ github.event.inputs.head_sha }}
       with:
         script: |
           const value = process.env.TARGET_PR_NUMBER ?? "";
@@ -64,6 +66,19 @@ on:
           if (!/^[0-9a-f]{40}$/i.test(pull.head.sha)) {
             throw new Error(`Invalid pull request head SHA: ${JSON.stringify(pull.head.sha)}`);
           }
+          const expectedHead = process.env.EXPECTED_HEAD_SHA ?? "";
+          if (expectedHead && expectedHead !== pull.head.sha) {
+            throw new Error("The dispatched ARM review no longer matches the PR head");
+          }
+          const labels = pull.labels.map(label => label.name);
+          if (pull.state !== "open" || pull.draft || labels.includes("skip-arm-review")) {
+            throw new Error("The pull request is closed, draft, or excluded from ARM review");
+          }
+          if (expectedHead &&
+              (!labels.includes("WaitForARMFeedback") || labels.includes("ARMSignedOff") ||
+               labels.includes("ARMChangesRequested") || labels.includes("NotReadyForARMReview"))) {
+            throw new Error("The dispatched ARM review is no longer ready");
+          }
           const runAttempt = process.env.GITHUB_RUN_ATTEMPT ?? "";
           if (!/^[1-9]\d*$/.test(runAttempt)) {
             throw new Error(`Invalid workflow run attempt: ${JSON.stringify(runAttempt)}`);
@@ -71,6 +86,12 @@ on:
           core.setOutput("target_pr_number", String(pull.number));
           core.setOutput("target_head_sha", pull.head.sha);
           core.setOutput("run_attempt", runAttempt);
+    - uses: actions/checkout@v7
+      if: steps.check_membership.outputs.is_team_member == 'true'
+      with:
+        persist-credentials: false
+        sparse-checkout: |
+          .github
     - name: Prepare ARM semantic review correlation artifact
       if: steps.check_membership.outputs.is_team_member == 'true'
       shell: bash
@@ -92,32 +113,18 @@ on:
       uses: actions/github-script@v9
       env:
         TARGET_HEAD_SHA: ${{ steps.resolve_target_pr.outputs.target_head_sha }}
+        TARGET_PR_NUMBER: ${{ steps.resolve_target_pr.outputs.target_pr_number }}
+        TARGET_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
       with:
         script: |
-          const runAttempt = process.env.GITHUB_RUN_ATTEMPT ?? "";
-          if (!/^[1-9]\d*$/.test(runAttempt)) {
-            throw new Error(`Invalid workflow run attempt: ${JSON.stringify(runAttempt)}`);
-          }
-          await github.rest.repos.createCommitStatus({
-            ...context.repo,
-            sha: process.env.TARGET_HEAD_SHA,
-            state: "pending",
-            context: "ARM Semantic Review",
-            description: "ARM API semantic review is pending",
-            target_url:
-              `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/` +
-              `${context.runId}/attempts/${runAttempt}`,
-          });
-  # Only users with write access (or above) may trigger the workflow. With
-  # `forks: ["*"]` enabled above, this `roles` gate is the primary guard that
-  # keeps externally-authored fork PRs from auto-triggering a review and blocks
-  # `/arm-review` abuse. A fork contributor without write access cannot start
-  # the workflow; a maintainer must apply the `WaitForARMFeedback` label or run
-  # `/arm-review`. This replaces the former hand-rolled collaborator check.
+          const { beginArmSemanticReview } =
+            await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts');
+          await beginArmSemanticReview({ github, context, core });
+  # Manual triggers require write access. The trusted summary dispatcher below
+  # uses the explicitly allowed Actions bot, including for fork-authored PRs.
   roles: [admin, maintainer, write]
-  # summarize-checks applies WaitForARMFeedback using GITHUB_TOKEN. Bots do not
-  # have repository roles, so this explicit grant is required for that trusted
-  # label transition to start the reviewer. The exact command gate below keeps
+  # summarize-checks dispatches using GITHUB_TOKEN. Bots do not have repository
+  # roles, so this explicit grant is required for that handoff. The exact command gate keeps
   # unrelated github-actions comments from activating the agent.
   bots: ["github-actions[bot]"]
   # Comment-triggered runs attach to the default branch and are not reliably
@@ -142,6 +149,7 @@ jobs:
   # keeps a failure here from blocking gh-aw's own failure reporting.
   conclusion:
     permissions:
+      actions: read
       contents: read
       statuses: write
     pre-steps:
@@ -170,17 +178,6 @@ jobs:
 # done by the agent in natural language (see "Trigger Validation" below).
 if: >
   github.event_name == 'workflow_dispatch' ||
-  (github.event_name == 'pull_request_target' &&
-   (github.event.action == 'opened' ||
-    github.event.action == 'synchronize' ||
-    github.event.action == 'reopened' ||
-    github.event.action == 'ready_for_review') &&
-   github.event.pull_request.draft == false &&
-   contains(github.event.pull_request.labels.*.name, 'WaitForARMFeedback')) ||
-  (github.event_name == 'pull_request_target' &&
-   github.event.action == 'labeled' &&
-   github.event.pull_request.draft == false &&
-   github.event.label.name == 'WaitForARMFeedback') ||
   (github.event_name == 'issue_comment' &&
    github.event.action == 'created' &&
    github.event.issue.pull_request != null &&
@@ -288,9 +285,11 @@ safe-outputs:
     max: 50
   add-labels:
     max: 3
+    allowed: [ARMChangesRequested]
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   remove-labels:
     max: 3
+    allowed: [WaitForARMFeedback]
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   jobs:
     record-arm-semantic-review:
@@ -431,8 +430,9 @@ Exactly **three** things differ, by design:
   anyone without access to it. Expect wording and emphasis to vary between the
   two paths. The rules above are what keep the substance the same.
 - **Human queue advancement after a clean review.** This unattended workflow
-  leaves `WaitForARMFeedback` unchanged after a clean review, but removes a
-  stale `ARMChangesRequested` label when the full review completes reliably.
+  leaves `WaitForARMFeedback` and `ARMChangesRequested` unchanged after a clean review.
+  A reviewer must clear `ARMChangesRequested` explicitly; unattended runs cannot distinguish
+  a human decision from a bot decision without additional ownership metadata.
   A human-approved interactive review removes `WaitForARMFeedback` because a
   human reviewer explicitly completed the review. Both paths remove
   `WaitForARMFeedback` when they add `ARMChangesRequested`.
@@ -495,7 +495,6 @@ pre-activation step from the event-specific source below:
 
 | Event                 | PR number source                   |
 | --------------------- | ---------------------------------- |
-| `pull_request_target` | `github.event.pull_request.number` |
 | `issue_comment`       | `github.event.issue.number`        |
 | `workflow_dispatch`   | `github.event.inputs.pr_number`    |
 
@@ -506,20 +505,17 @@ already guaranteed, before this agent starts, that:
   or is the explicitly allowlisted `github-actions[bot]` repository automation.
   This replaces any manual collaborator check. Do **not** re-verify
   permissions.
-- The event is eligible: an automated `opened` / `synchronize` / `reopened` run
-  only reaches the agent when the PR is not a draft and already carries the
-  `WaitForARMFeedback` label; `ready_for_review` follows the same label gate; a
-  `labeled` run only fires when that exact label is added to a non-draft PR; an
-  `issue_comment` run only fires for a PR comment whose body is exactly
-  `/arm-review`;
-  `workflow_dispatch` is always eligible.
-- Fork PRs **are** supported (`forks: ["*"]`). They are reviewed safely because
+- Automatic dispatch follows Summarize Checks, carries the reconciled head SHA,
+  and only reaches the agent if the live PR still matches that head and queue.
+  An `issue_comment` run only fires for a PR comment whose body is exactly
+  `/arm-review`. Manual dispatch still resolves the live head. All paths reject
+  closed, draft, and `skip-arm-review` PRs before agent execution.
+- Fork PRs **are** supported through the trusted dispatcher. They are reviewed safely because
   the agent never checks out untrusted PR head code (`checkout: false`), reads
   spec files only through the read-only GitHub MCP toolset
   (`min-integrity: approved`), and writes only through gh-aw `safe-outputs`. The
-  `roles` gate still requires a write-access user to trigger the review (via the
-  `WaitForARMFeedback` label or `/arm-review`), so a fork PR is not
-  auto-reviewed on the strength of its author alone.
+  `roles` gate restricts manual commands to write-access users; automatic requests
+  use the explicitly allowed Actions bot after readiness reconciliation.
 
 ## Trigger Validation
 
@@ -1173,9 +1169,9 @@ changes based on the verified findings that still apply to the current head:
   and `RESOLVE-AND-REPOST`)
   → add `ARMChangesRequested`, remove `WaitForARMFeedback` (if present).
 - **No verified, currently applicable Blocking finding remains, and the review
-  is full and complete** → remove
-  `ARMChangesRequested` if present; leave `WaitForARMFeedback` and
-  `ARMSignedOff` unchanged.
+  is full and complete** → leave `ARMChangesRequested`, `WaitForARMFeedback`, and
+  `ARMSignedOff` unchanged. A human clears an existing changes-requested hold;
+  universal auto-signoff, not the agent, grants production approval.
 - **Critic unavailable** (every dispatch attempt failed) → leave all three
   labels unchanged, **even when Blocking findings were queued**. Those findings
   still publish at their original severity, but nothing independently verified

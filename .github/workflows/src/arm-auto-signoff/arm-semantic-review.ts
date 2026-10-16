@@ -9,6 +9,7 @@ import { byDate, invert } from "../../../shared/src/sort.ts";
 
 /** The commit status context that carries the semantic review result for a SHA. */
 export const ARM_SEMANTIC_REVIEW_STATUS = "ARM Semantic Review";
+export const PASSED_REVIEW_DESCRIPTION = "Passed: full review completed with no Blocking findings";
 
 /*
  * Both outcomes below are published as a commit status in the "error" state. The description
@@ -201,7 +202,7 @@ export function evaluateSemanticReview(result: SemanticReviewResult): EvaluatedS
   }
   return {
     state: CommitStatusState.SUCCESS,
-    description: "Passed: full review completed with no Blocking findings",
+    description: PASSED_REVIEW_DESCRIPTION,
   };
 }
 
@@ -318,7 +319,10 @@ export function getSemanticReviewOutcome(
   if (status.state === CommitStatusState.PENDING) {
     return SemanticReviewOutcome.Pending;
   }
-  if (status.state === CommitStatusState.SUCCESS) {
+  if (
+    status.state === CommitStatusState.SUCCESS &&
+    status.description === PASSED_REVIEW_DESCRIPTION
+  ) {
     return SemanticReviewOutcome.Passed;
   }
   if (status.state === CommitStatusState.FAILURE) {

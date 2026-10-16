@@ -1,7 +1,7 @@
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import {
   ARM_SEMANTIC_REVIEW_STATUS,
@@ -19,10 +19,11 @@ import {
   type SpecificationTotals,
 } from "../../src/arm-auto-signoff/arm-semantic-review.ts";
 import publishArmSemanticReviewStatus, {
+  beginArmSemanticReview,
   finalizeUnpublishedArmSemanticReview,
 } from "../../src/arm-auto-signoff/arm-semantic-review-workflow.ts";
 import type { GitHubScriptArgs } from "../../src/github.ts";
-import { createMockCore, createMockGithub } from "../mocks.ts";
+import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
 const owner = "Azure";
 const repo = "azure-rest-api-specs";
@@ -57,6 +58,28 @@ const smallPullRequest = { number: issueNumber, changed_files: 1, additions: 10,
 
 function createPublisherGithub() {
   const github = createMockGithub();
+  github.rest.actions.getWorkflowRun.mockResolvedValue({
+    data: {
+      path: ".github/workflows/arm-api-review.lock.yml",
+      event: "workflow_dispatch",
+      run_attempt: runAttempt,
+      run_number: 10,
+      status: "in_progress",
+    },
+  });
+  github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+    data: {
+      statuses: [
+        {
+          context: ARM_SEMANTIC_REVIEW_STATUS,
+          state: "pending",
+          target_url: `${runUrl}/attempts/${runAttempt}`,
+          updated_at: "2026-01-01",
+        },
+      ],
+      total_count: 1,
+    },
+  });
   github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
     data: {
       artifacts: [{ name: `head-sha=${headSha}` }, { name: `issue-number=${issueNumber}` }],
@@ -250,7 +273,13 @@ describe("evaluateSemanticReview", () => {
 
   it("maps commit status states back to semantic outcomes", () => {
     expect(getSemanticReviewOutcome({ state: "pending" })).toBe(SemanticReviewOutcome.Pending);
-    expect(getSemanticReviewOutcome({ state: "success" })).toBe(SemanticReviewOutcome.Passed);
+    expect(
+      getSemanticReviewOutcome({
+        state: "success",
+        description: "Passed: full review completed with no Blocking findings",
+      }),
+    ).toBe(SemanticReviewOutcome.Passed);
+    expect(getSemanticReviewOutcome({ state: "success" })).toBeUndefined();
     expect(getSemanticReviewOutcome({ state: "failure" })).toBe(
       SemanticReviewOutcome.ChangesRequested,
     );
@@ -380,6 +409,95 @@ describe("addSpecificationChanges", () => {
   });
 });
 describe("publishArmSemanticReviewStatus", () => {
+  describe("beginArmSemanticReview", () => {
+    afterEach(() => vi.unstubAllEnvs());
+    function activation() {
+      vi.stubEnv("TARGET_PR_NUMBER", String(issueNumber));
+      vi.stubEnv("TARGET_HEAD_SHA", headSha);
+      vi.stubEnv("GITHUB_RUN_ATTEMPT", "1");
+      vi.stubEnv("TARGET_DEFAULT_BRANCH", "main");
+      const github = createPublisherGithub();
+      const context = Object.assign(createMockContext(), {
+        repo: { owner, repo },
+        runId,
+        serverUrl: "https://github.com",
+      });
+      return { github, context, core: createMockCore() };
+    }
+
+    it("sets the run/attempt-bound pending status before review", async () => {
+      const args = activation();
+      await beginArmSemanticReview(args);
+      expect(args.github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({
+          sha: headSha,
+          state: "pending",
+          target_url: `${runUrl}/attempts/1`,
+        }),
+      );
+      expect(args.github.rest.actions.createWorkflowDispatch).toHaveBeenCalledWith({
+        owner,
+        repo,
+        workflow_id: "arm-universal-auto-signoff.yaml",
+        ref: "main",
+        inputs: { pr_number: String(issueNumber), head_sha: headSha },
+      });
+    });
+
+    it("cannot reactivate an older run over a newer queued review", async () => {
+      const args = activation();
+      args.github.rest.actions.listWorkflowRuns.mockResolvedValue({
+        data: {
+          workflow_runs: [
+            {
+              run_number: 11,
+              display_title: "ARM API Review #123 (workflow_dispatch)",
+              conclusion: null,
+            },
+          ],
+        },
+      });
+      await expect(beginArmSemanticReview(args)).rejects.toThrow("supersedes");
+      expect(args.github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+    });
+  });
+
+  it("does not overwrite a newer same-head review attempt's pending status", async () => {
+    const github = createPublisherGithub();
+    github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+      data: {
+        statuses: [
+          {
+            context: ARM_SEMANTIC_REVIEW_STATUS,
+            state: "pending",
+            target_url: `${runUrl}/attempts/2`,
+            updated_at: "2026-01-01",
+          },
+        ],
+        total_count: 1,
+      },
+    });
+    expect((await runPublisher({ github })).result.statusPublished).toBe(false);
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+  });
+
+  it("does not publish an old result while a newer same-PR review is queued", async () => {
+    const github = createPublisherGithub();
+    github.rest.actions.listWorkflowRuns.mockResolvedValue({
+      data: {
+        workflow_runs: [
+          {
+            run_number: 11,
+            display_title: "ARM API Review #123 (workflow_dispatch)",
+            conclusion: null,
+          },
+        ],
+      },
+    });
+    expect((await runPublisher({ github })).result.statusPublished).toBe(false);
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+  });
+
   it("publishes Passed for a clean reviewer result", async () => {
     const { github, result } = await runPublisher();
 
@@ -393,6 +511,7 @@ describe("publishArmSemanticReviewStatus", () => {
       description: "Passed: full review completed with no Blocking findings",
       target_url: `${runUrl}/attempts/${runAttempt}`,
     });
+
     expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledOnce();
     expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledWith({
       owner,

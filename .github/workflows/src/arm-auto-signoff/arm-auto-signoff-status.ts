@@ -149,12 +149,11 @@ export async function getLabelActionImpl({
       return noneResult;
     }
 
-    // Auto sign-off labels are present, so ARMSignedOff was auto-added. Remove all.
+    // Retain diagnostic label reconciliation, but never grant or revoke production signoff.
     return {
       ...noneResult,
       labelActions: {
         ...noneLabelActions,
-        [ArmAutoSignoffLabel.ArmSignedOff]: LabelAction.Remove,
         [ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP]: LabelAction.Remove,
         [ArmAutoSignoffLabel.ArmAutoSignedOffTrivial]: LabelAction.Remove,
       },
@@ -218,7 +217,7 @@ export async function getLabelActionImpl({
     ) &&
     requiredStatuses.every((status) => status.state === CommitStatusState.SUCCESS)
   ) {
-    core.info("All requirements met for auto-signoff");
+    core.info("All legacy diagnostic requirements met; production signoff is owned by universal");
     const autoIncrementalTSPAction = armAnalysisResult.incrementalTypeSpec
       ? LabelAction.Add
       : LabelAction.Remove;
@@ -230,7 +229,6 @@ export async function getLabelActionImpl({
       ...baseResult,
       labelActions: {
         ...noneLabelActions,
-        [ArmAutoSignoffLabel.ArmSignedOff]: LabelAction.Add,
         [ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP]: autoIncrementalTSPAction,
         [ArmAutoSignoffLabel.ArmAutoSignedOffTrivial]: trivialAction,
       },

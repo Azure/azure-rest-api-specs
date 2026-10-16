@@ -43,7 +43,6 @@ function createRemoveManagedLabelsResult(headSha: string, issueNumber: number) {
     issueNumber,
     labelActions: {
       ...createNoneLabelActions(),
-      [managedLabels.armSignedOff]: LabelAction.Remove,
       [managedLabels.autoSignedOffIncrementalTsp]: LabelAction.Remove,
       [managedLabels.autoSignedOffTrivial]: LabelAction.Remove,
     },
@@ -66,7 +65,6 @@ function createSuccessResult({
     issueNumber,
     labelActions: {
       ...createNoneLabelActions(),
-      [managedLabels.armSignedOff]: LabelAction.Add,
       [managedLabels.autoSignedOffIncrementalTsp]: incrementalTypeSpec
         ? LabelAction.Add
         : LabelAction.Remove,
@@ -588,15 +586,14 @@ describe("getLabelActionImpl", () => {
       core: core,
     });
 
-    // ARMSignedOff should be added since trivial qualifies
-    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Add);
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.None);
     // Trivial label should be added
     expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Add);
     // Incremental TSP label should be removed (not applicable)
     expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Remove);
   });
 
-  it("removes ARMSignedOff when trivial label present and no longer qualifies", async () => {
+  it("removes stale trivial diagnostics without changing production signoff", async () => {
     const github = createMockGithub({ incrementalTypeSpec: false, isTrivial: false });
 
     // PR has ARMSignedOff (auto-added via trivial) + trivial label (from previous run)
@@ -617,8 +614,7 @@ describe("getLabelActionImpl", () => {
       core: core,
     });
 
-    // ARMSignedOff was auto-added (Trivial present), so remove it
-    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Remove);
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.None);
     // Trivial label should be removed (no longer qualifies)
     expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Remove);
     // Incremental TSP should also be removed
@@ -646,8 +642,7 @@ describe("getLabelActionImpl", () => {
       core: core,
     });
 
-    // ARMSignedOff was auto-added (IncrementalTSP present), so remove it
-    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Remove);
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.None);
     // Both auto-signoff labels should be removed
     expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Remove);
     expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Remove);
@@ -677,8 +672,7 @@ describe("getLabelActionImpl", () => {
       core: core,
     });
 
-    // Now qualifies via incremental typespec, so add ARMSignedOff
-    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Add);
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.None);
     expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Add);
     // Trivial label should be removed (not applicable)
     expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Remove);
@@ -712,8 +706,7 @@ describe("getLabelActionImpl", () => {
       core: core,
     });
 
-    // IncrementalTSP was present, but now qualifies via trivial, so ARMSignedOff should be added
-    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Add);
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.None);
     // Incremental TSP label should be removed
     expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Remove);
     // Trivial label should be added
@@ -743,8 +736,7 @@ describe("getLabelActionImpl", () => {
       core: core,
     });
 
-    // Incremental typespec takes precedence for ARMSignedOff
-    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Add);
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.None);
     expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Add);
     // Trivial label should also be added
     expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Add);
@@ -767,8 +759,7 @@ describe("getLabelActionImpl", () => {
       core: core,
     });
 
-    // Trivial was present, so ARMSignedOff was auto-added, remove all
-    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Remove);
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.None);
     // Trivial label should be removed
     expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Remove);
     // Incremental TSP should also be removed

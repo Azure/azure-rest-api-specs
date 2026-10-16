@@ -10,6 +10,7 @@ import {
   getExistingLabels,
   getImpactAssessment,
   updateLabels,
+  summarizeChecksImpl,
 } from "../../src/summarize-checks/summarize-checks.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
 
@@ -125,6 +126,50 @@ describe("Summarize Checks Integration Tests", () => {
 });
 
 describe("Summarize Checks Unit Tests", () => {
+  it("does not reconcile labels for a stale-head summary event", async () => {
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: { state: "open", head: { sha: "b".repeat(40) } },
+    });
+    await summarizeChecksImpl(
+      github,
+      createMockCore(),
+      "Azure",
+      "specs",
+      123,
+      "a".repeat(40),
+      "workflow_run",
+      "main",
+      WORKFLOW_URL,
+    );
+    expect(github.rest.checks.listForRef).not.toHaveBeenCalled();
+    expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+  });
+
+  it("abandons reconciliation if the PR head changes while checks are read", async () => {
+    const github = createMockGithub();
+    const core = createMockCore();
+    const pull = { state: "open", draft: false, head: { sha: "a".repeat(40) }, labels: [] };
+    github.rest.pulls.get.mockResolvedValueOnce({ data: pull }).mockResolvedValue({
+      data: { ...pull, head: { sha: "b".repeat(40) } },
+    });
+    await summarizeChecksImpl(
+      github,
+      core,
+      "Azure",
+      "specs",
+      123,
+      "a".repeat(40),
+      "workflow_run",
+      "main",
+      WORKFLOW_URL,
+    );
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+    expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
+  });
+
   describe("check result processing", () => {
     it("should generate success summary for no matched check suites (completed impactAssessment)", () => {
       const repo = "azure-rest-api-specs";

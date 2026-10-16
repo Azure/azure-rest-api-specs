@@ -9,7 +9,15 @@ export default async function updateLabels({ github, context, core }: GitHubScri
     context,
     core,
   );
-  await updateLabelsImpl({ owner, repo, head_sha, issue_number, run_id, github, core });
+  await updateLabelsImpl({
+    owner,
+    repo,
+    head_sha,
+    issue_number,
+    run_id,
+    github,
+    core,
+  });
 }
 
 export async function updateLabelsImpl({
@@ -77,6 +85,12 @@ export async function updateLabelsImpl({
 
         if (!name) {
           throw new Error(`Invalid value for label name: '${name}'`);
+        }
+        if (name === "ARMSignedOff") {
+          core.info(
+            "Ignoring obsolete ARM approval artifact; universal publishes signoff directly",
+          );
+          continue;
         }
 
         if (value === "true") {
