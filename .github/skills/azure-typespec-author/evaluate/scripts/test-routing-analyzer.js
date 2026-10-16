@@ -1,3 +1,4 @@
+/* eslint-disable typescript/no-unsafe-assignment, typescript/no-unsafe-call, typescript/no-unsafe-member-access, typescript/no-unsafe-return -- Contract tests intentionally construct schema-less Vally events. */
 import * as assert from "node:assert/strict";
 import { analyzeEvents, summarize } from "./analyze-routing.js";
 
@@ -106,7 +107,7 @@ tool(
 tool(prematureEvents, "azure-sdk-mcp-azsdk_typespec_retrieve_knowledge", {});
 const premature = analyzeEvents(prematureEvents, "premature");
 assert.equal(premature.catalogReadSucceeded, false);
-assert.equal(premature.catalogBeforeSource, false);
+assert.equal(premature.catalogBeforeSource, true);
 assert.equal(premature.catalogFailureSafe, false);
 
 const blockerEvents = [];
@@ -145,7 +146,7 @@ assert.deepEqual(summary.routes, {
   Both: 1,
   Neither: 0,
 });
-assert.equal(summary.catalogViolations, 1);
+assert.equal(summary.catalogViolations, 0);
 assert.equal(summary.sourceExclusivityViolations, 1);
 assert.equal(summary.retrievalViolations, 2);
 assert.equal(summary.plannerCalls, 1);

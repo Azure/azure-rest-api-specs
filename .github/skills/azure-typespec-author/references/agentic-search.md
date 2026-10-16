@@ -4,8 +4,9 @@ Always enter this procedure during Step 2 after attempting to read the reference
 catalog. The catalog may guide URL selection but is not required: if it is
 unavailable, discover authoritative TypeSpec or Azure documentation directly. Use
 the resulting Web guidance to determine the required intake decisions, then retain it
-for the local authoring plan. Do not call
-`azsdk_typespec_retrieve_knowledge` or an authoring-plan MCP.
+for the local authoring plan. This procedure does not itself call an MCP tool; Step 3
+may select `azsdk_typespec_retrieve_knowledge` for authoring topics that the catalog
+does not cover.
 
 ## Input
 
@@ -23,8 +24,9 @@ for the local authoring plan. Do not call
    uncertainty.
 2. **Fetch** — `web_fetch` each selected URL. Extract content as markdown.
 3. **Search** — find content matching a query derived from the user's request and Step 1 result. Choose the most effective local search tool available.
-4. **Iterate within Web** — if initial results are insufficient, refine the query or
-   fetch another authoritative URL. Do not switch to an MCP knowledge source.
+4. **Iterate within Web** — if initial results are insufficient for intake, refine
+   the query or fetch another authoritative URL. Do not call a knowledge MCP during
+   intake.
 5. **Return and reuse** — return the extracted intake and authoring guidance with its
    URLs to the caller. Reuse this grounding record for intake, local planning,
    editing, and final citations; do not fetch again only to recreate citations.

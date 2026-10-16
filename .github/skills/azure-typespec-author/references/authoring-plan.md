@@ -4,16 +4,21 @@
 
 ## 3.1 General (All Cases)
 
-### 3.1.1 Reuse the grounding selected during intake
+### 3.1.1 Select or complete the authoring grounding
 
 Step 2 already read the reference catalog and used Agentic Search to ground the
 request before collecting any missing decisions. Verify that its Web grounding record
 covers the complete request and the finalized intake result.
 
-Do not call Agentic Search again or call a knowledge-retrieval or authoring-plan MCP
-during planning. If the existing grounding is insufficient, return to Agentic Search,
-refine the Web guidance, and update the intake result if the additional guidance
-changes a material decision. Otherwise, report a blocker.
+For topics covered by the reference catalog, reuse the Agentic Search grounding. For
+uncovered or partially covered authoring topics, call
+`azsdk_typespec_retrieve_knowledge` after intake when the tool is exposed. If it is
+not exposed, refine Agentic Search with authoritative TypeSpec or Azure documentation
+for the uncovered topic. Update the intake result if additional guidance changes a
+material decision. If the selected route remains insufficient, report a blocker.
+
+Do not use a failed catalog read alone to select retrieval. Do not call retrieval
+during intake, and do not call an authoring-plan MCP.
 
 ### 3.1.2 Build the authoring plan locally
 
@@ -21,7 +26,7 @@ Synthesize the selected guidance and finalized intake result into a concrete pla
 
 Document your final plan with references to supporting documents, and ensure the plan follows the retrieved context above.
 
-Never call `azsdk_typespec_generate_authoring_plan`. Reuse the existing grounding
+Never call `azsdk_typespec_generate_authoring_plan`. Reuse the selected grounding
 record when writing the plan and later citations; do not perform a second lookup only
 to cite it.
 

@@ -1,3 +1,4 @@
+/* eslint-disable typescript/no-unsafe-argument, typescript/no-unsafe-assignment, typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Contract tests intentionally mutate dynamic OpenAPI fixtures. */
 import * as assert from "node:assert/strict";
 import * as fs from "node:fs";
 import * as os from "node:os";

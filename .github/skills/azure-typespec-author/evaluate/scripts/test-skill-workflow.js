@@ -1,3 +1,4 @@
+/* eslint-disable typescript/no-unsafe-argument, typescript/no-unsafe-assignment, typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Eval YAML is external data validated by the assertions below. */
 import * as assert from "node:assert/strict";
 import * as fs from "node:fs";
 import * as path from "node:path";
@@ -21,16 +22,19 @@ const search = read("references/agentic-search.md");
 
 assert.ok(
   skill.indexOf("Attempt catalog access before Agentic Search") <
-    skill.indexOf("Use Agentic Search for intake"),
+    skill.indexOf("Use Agentic Search for intake and covered authoring knowledge"),
   "entry-point catalog gate must precede Agentic Search",
 );
 assert.match(skill, /Never call `azsdk_typespec_generate_authoring_plan`/);
-assert.doesNotMatch(skillFrontmatter, /azsdk_typespec_retrieve_knowledge/);
+assert.match(skillFrontmatter, /azsdk_typespec_retrieve_knowledge/);
 assert.match(skillFrontmatter, /azsdk_run_typespec_validation/);
-assert.match(skill, /Never call `azsdk_typespec_retrieve_knowledge` or an authoring-plan MCP/);
+assert.match(skill, /MCP tools are optional capabilities, not prerequisites/);
+assert.match(skill, /Do not call retrieval before intake and the coverage decision/);
 assert.match(skill, /"carry over all features" or "no exclusions" completely answers/);
-assert.match(skill, /Analyze → Read catalog → Agentic Search → Intake → Plan locally/);
-assert.match(skill, /only\s+MCP tool used by this workflow is validation/);
+assert.match(
+  skill,
+  /Analyze → Read catalog → Agentic Search → Intake → Select knowledge route → Plan locally/,
+);
 assert.match(skill, /returns an error, times out, or fails authentication is not\s+unavailable/);
 
 const catalogGate = intake.indexOf("Complete Agentic Search");
@@ -41,10 +45,15 @@ assert.match(intake, /Catalog access failure is not a blocker/);
 assert.match(intake, /Do not call knowledge-retrieval, authoring-plan, or validation MCP tools/);
 assert.match(intake, /report a\s+blocker instead of falling back to MCP/);
 assert.match(plan, /Step 2 already read the reference catalog and used Agentic Search/);
-assert.match(plan, /Do not call Agentic Search again or call a knowledge-retrieval/);
+assert.match(plan, /For topics covered by the reference catalog, reuse the Agentic Search/);
+assert.match(
+  plan,
+  /uncovered or partially covered authoring topics, call\s+`azsdk_typespec_retrieve_knowledge`/,
+);
+assert.match(plan, /If it is\s+not exposed, refine Agentic Search/);
 assert.match(search, /Always enter this procedure during Step 2/);
 assert.match(search, /catalog may guide URL selection but is not required/);
-assert.match(search, /Do not call\s+`azsdk_typespec_retrieve_knowledge` or an authoring-plan MCP/);
+assert.match(search, /Step 3\s+may select `azsdk_typespec_retrieve_knowledge`/);
 assert.match(plan, /Do not use `ArmResourcePatchSync` or `ArmResourcePatchAsync`/);
 assert.match(plan, /Preserve every released stable wire contract/);
 
