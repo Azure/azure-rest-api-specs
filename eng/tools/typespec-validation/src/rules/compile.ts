@@ -1,4 +1,5 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
+import { globFiles } from "@azure-tools/specs-shared/glob";
 import { untilLastSegmentWithParent } from "@azure-tools/specs-shared/path";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
@@ -7,7 +8,6 @@ import { stripVTControlCharacters } from "node:util";
 import path, { basename, dirname, normalize } from "pathe";
 import { reportCommandOutput } from "../command-output.ts";
 import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
-import { globFiles } from "../glob.ts";
 import { type Diagnostic, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import {
