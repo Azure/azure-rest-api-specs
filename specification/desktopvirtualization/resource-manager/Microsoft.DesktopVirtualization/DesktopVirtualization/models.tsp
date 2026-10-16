@@ -2724,6 +2724,33 @@ model HostPoolProperties {
    */
   @added(Versions.vLatestPreview)
   conditionalRdpProperty?: string;
+
+  /**
+   * The automatic update settings for supported first-party extensions.
+   * @Introduced in 2026-08-01-preview
+   */
+  @added(Versions.vLatestPreview)
+  firstPartyExtensionAutoUpdate?: FirstPartyExtensionAutoUpdateSettings;
+}
+
+/**
+ * The automatic update settings for supported first-party extensions.
+ * @Introduced in 2026-08-01-preview
+ */
+model FirstPartyExtensionAutoUpdateSettings {
+  /**
+   * Whether automatic updates are enabled for the Microsoft Multimedia Redirection extension.
+   * @Introduced in 2026-08-01-preview
+   */
+  @encodedName("application/json", "MicrosoftMultimediaRedirection")
+  microsoftMultimediaRedirection?: boolean;
+
+  /**
+   * Whether automatic updates are enabled for the Teams Media Optimization extension.
+   * @Introduced in 2026-08-01-preview
+   */
+  @encodedName("application/json", "TeamsMediaOptimization")
+  teamsMediaOptimization?: boolean;
 }
 
 /**
@@ -3824,6 +3851,13 @@ model HostPoolPatchProperties {
    */
   @added(Versions.vLatestPreview)
   conditionalRdpProperty?: string;
+
+  /**
+   * The automatic update settings for supported first-party extensions.
+   * @Introduced in 2026-08-01-preview
+   */
+  @added(Versions.vLatestPreview)
+  firstPartyExtensionAutoUpdate?: FirstPartyExtensionAutoUpdateSettings;
 }
 
 /**
