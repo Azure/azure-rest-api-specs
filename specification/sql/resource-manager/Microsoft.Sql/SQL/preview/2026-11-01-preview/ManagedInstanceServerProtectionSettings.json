@@ -170,7 +170,7 @@
         "tags": [
           "ManagedInstanceServerProtectionSettings"
         ],
-        "description": "Updates managed instance server protection setting. A successful request\nreturns HTTP 200 with the resource. While the update is in progress,\nprovisioningState is Updating; use the polling headers to track completion\nand retrieve the final resource result from the Location URL.",
+        "description": "Updates managed instance server protection setting. Returns HTTP 202 with\noperation metadata and polling headers while the update is in progress, or\nHTTP 200 with the resource when complete. Follow the Location URL to retrieve\nthe final resource result.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -221,9 +221,15 @@
         ],
         "responses": {
           "200": {
-            "description": "The protection settings update was accepted or has completed. The resource\ncontains its provisioning state; use the polling headers while the update is\nin progress and the Location header to retrieve the final resource result.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServerProtectionSettings"
+            }
+          },
+          "202": {
+            "description": "The update is in progress; follow the polling headers to retrieve its status and final resource result.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ServerProtectionSettingsOperationMetadata"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -270,10 +276,6 @@
         "properties": {
           "$ref": "./common.json#/definitions/ServerProtectionSettingsProperties",
           "description": "The required managed instance protection settings."
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the parent managed instance. A value supplied in a PUT\nrequest is accepted but ignored; responses return the parent instance's\nlocation."
         }
       },
       "required": [
