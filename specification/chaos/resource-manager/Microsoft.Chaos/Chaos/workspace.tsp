@@ -111,7 +111,7 @@ interface Workspaces {
   >;
 
   /**
-   * Starts discovery for the workspace. The initial 202 has no body. Poll the operation-bound Location URL until completion; it returns the typed discovery result and is distinct from ordinary discoveries reads.
+   * Starts discovery for the workspace. The initial 202 has no body. Poll the operation-bound Location URL until completion: a successful or partially successful discovery returns the typed result; failed or canceled processing returns an Azure error whose target identifies the discovery resource. Ordinary discovery reads return the current resource, including failed or canceled results, while retained.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   @sharedRoute
