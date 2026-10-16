@@ -3012,7 +3012,7 @@
         "tags": [
           "Workspaces"
         ],
-        "description": "Starts evaluation of published scenario-template versions, including when the workspace has no scenarios. Acceptance fixes the selected template membership and total count, qualified resource snapshot and canonical discovery result reference. Without a usable discovery snapshot or valid catalog input, the request is rejected synchronously with an Azure error and no evaluation result is created. A valid empty catalog completes successfully with zero counts and an empty results array. Outcome counts reflect processing after acceptance. The initial 202 has no body. Poll the operation-bound Location URL until completion; it returns the typed evaluation result and is distinct from ordinary evaluations reads.",
+        "description": "Starts evaluation of published scenario-template versions, including when the workspace has no scenarios. Acceptance fixes the selected template membership and total count, qualified resource snapshot and canonical discovery result reference. Without a usable discovery snapshot or valid catalog input, the request is rejected synchronously with an Azure error and no evaluation result is created. A valid empty catalog completes successfully with zero counts and an empty results array. Outcome counts reflect processing after acceptance. The initial 202 has no body. Poll the operation-bound Location URL until completion: a completed successful or partially successful assessment returns the typed result; failed or canceled processing returns an Azure error whose target identifies the evaluation resource. Ordinary evaluation reads return the current resource, including failed or canceled results, while retained.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3159,7 +3159,7 @@
           {
             "name": "evaluationName",
             "in": "path",
-            "description": "The service-generated evaluation result ID. Use latest in the request path for the most recently durably admitted GA template evaluation; responses contain the canonical result ID.",
+            "description": "The stable service-generated evaluation result ID in hyphenated GUID form. Use latest in the request path for the most recently durably admitted GA template evaluation; responses contain the canonical result ID, not the protected polling identifier.",
             "required": true,
             "type": "string",
             "pattern": "^(latest|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"
