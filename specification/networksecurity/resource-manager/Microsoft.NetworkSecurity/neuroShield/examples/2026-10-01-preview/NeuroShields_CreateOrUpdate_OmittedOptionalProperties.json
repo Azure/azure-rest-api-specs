@@ -1,0 +1,52 @@
+{
+  "operationId": "NeuroShields_CreateOrUpdate",
+  "title": "Create or update NeuroShield with omitted optional properties",
+  "description": "The required responseMode is explicit. Omitted severity and description resolve to Low and an empty string on full PUT; omitted tags resolve to an empty map.",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-10-01-preview",
+    "neuroShieldName": "myNeuroShield",
+    "If-Match": "\"neuroshield-etag\"",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "responseMode": "Manual"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myNeuroShield",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.networksecurity/neuroShields/myNeuroShield",
+        "type": "microsoft.networksecurity/neuroShields",
+        "location": "eastus2",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "11111111-1111-1111-1111-111111111111",
+          "responseMode": "Manual",
+          "severityThreshold": "Low",
+          "description": ""
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myNeuroShield",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.networksecurity/neuroShields/myNeuroShield",
+        "type": "microsoft.networksecurity/neuroShields",
+        "location": "eastus2",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "11111111-1111-1111-1111-111111111111",
+          "responseMode": "Manual",
+          "severityThreshold": "Low",
+          "description": ""
+        }
+      }
+    }
+  }
+}
