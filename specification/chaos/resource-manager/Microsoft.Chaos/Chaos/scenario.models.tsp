@@ -276,6 +276,13 @@ model ScenarioAction {
   parameters?: KeyValuePair[];
 
   /**
+   * Action-specific target matching criteria evaluated during execution.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @identifiers(#["name"])
+  matchers?: ScenarioActionMatcher[];
+
+  /**
    * Action dependencies that control when this action starts.
    */
   runAfter?: RunAfter;
@@ -302,6 +309,22 @@ model ScenarioAction {
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   failureBehavior?: FailureBehavior;
+}
+
+/**
+ * Model that represents an action-specific target matching criterion.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioActionMatcher {
+  /**
+   * The matcher name, such as `logicalZone`, `physicalZone`, or `region`.
+   */
+  name: string;
+
+  /**
+   * The value that targets must match. Supports template macro syntax.
+   */
+  value: string;
 }
 
 /**
