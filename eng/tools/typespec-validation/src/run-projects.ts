@@ -14,6 +14,8 @@ import { cleanWorktree } from "./git-cleanup.ts";
 
 interface RunOptions {
   gitClean?: boolean;
+  /** Report generated-file and formatting changes as warnings instead of failing. */
+  allowGeneratedChanges?: boolean;
   dryRun?: boolean;
   verbose?: boolean;
   summaryFile?: string;
@@ -23,6 +25,7 @@ interface RunContext {
   checkingAllSpecs: boolean;
   baseCommitish?: string;
   headCommitish?: string;
+  allowGeneratedChanges?: boolean;
 }
 
 type ProjectStatus = "pass" | "fail" | "skip";
@@ -100,6 +103,7 @@ async function runProjects(
   context: RunContext,
   options: RunOptions,
 ): Promise<boolean> {
+  if (options.allowGeneratedChanges) context = { ...context, allowGeneratedChanges: true };
   const git = simpleGit(root);
   const logger = new ConsoleLogger(options.verbose);
   const gitClean = options.gitClean && !options.dryRun;

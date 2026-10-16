@@ -89,19 +89,25 @@ export function getStructureVersion(relativePath: string): 1 | 2 {
   return relativePath.includes("data-plane") || relativePath.includes("resource-manager") ? 2 : 1;
 }
 
-export async function gitDiffTopSpecFolder(folder: string, logger: ILogger) {
+/**
+ * Reports changes under the top-level spec folder (`specification/<service>`), optionally limited
+ * to files matching `globs` relative to that folder.
+ */
+export async function gitDiffTopSpecFolder(folder: string, logger: ILogger, globs?: string[]) {
   const git = simpleGit(folder);
   const topSpecFolder = resolve(folder).replace(/(^.*specification\/[^/]*)(.*)/, "$1");
   logger.debug(`Checking generated files in ${topSpecFolder}`);
-  const gitStatus = await git.status(["--porcelain", "--untracked-files=all", "--", topSpecFolder]);
+  const relativeTop = relative(resolve(folder), topSpecFolder) || ".";
+  const pathspecs = globs?.map((glob) => `:(glob)${relativeTop}/${glob}`) ?? [topSpecFolder];
+  const gitStatus = await git.status(["--porcelain", "--untracked-files=all", "--", ...pathspecs]);
 
   if (gitStatus.isClean()) return { success: true, files: [] };
 
   if (logger.isDebug()) logger.debug(JSON.stringify(gitStatus));
   const color = supportsColor() ? "--color=always" : "--color=never";
   const diffs = [
-    await git.diff([color, "--cached", "--", topSpecFolder]),
-    await git.diff([color, "--", topSpecFolder]),
+    await git.diff([color, "--cached", "--", ...pathspecs]),
+    await git.diff([color, "--", ...pathspecs]),
   ];
   if (gitStatus.not_added.length > 0) {
     const rootGit = simpleGit(await getRootFolder(folder));
@@ -115,4 +121,12 @@ export async function gitDiffTopSpecFolder(folder: string, logger: ILogger) {
     files: gitStatus.files.map((file) => file.path),
     diff: diffs.filter(Boolean).join("\n"),
   };
+}
+
+/**
+ * Whether generated-file and formatting changes are reported as warnings instead of failures,
+ * for validating an upcoming TypeSpec release whose output is regenerated when main adopts it.
+ */
+export function allowGeneratedChanges(): boolean {
+  return context.allowGeneratedChanges === true;
 }

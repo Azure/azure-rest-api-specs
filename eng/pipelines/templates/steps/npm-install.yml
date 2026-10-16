@@ -5,6 +5,13 @@ parameters:
   - name: WorkingDirectory
     type: string
     default: $(Build.SourcesDirectory)
+  # "stable" installs the committed versions. Builds for the typespec-next branch (or PRs into it)
+  # always use "next". Any other value is an npm dist-tag for all TypeSpec packages.
+  # The switched pnpm-workspace.yaml and pnpm-lock.yaml are left in place so later `pnpm exec`
+  # steps keep the requested versions.
+  - name: TypeSpecChannel
+    type: string
+    default: stable
 
 steps:
   - template: /eng/pipelines/templates/steps/use-node-version.yml
@@ -18,6 +25,19 @@ steps:
   - script: pnpm ci
     displayName: pnpm install
     workingDirectory: ${{ parameters.WorkingDirectory }}
+
+  - ${{ if ne(parameters.TypeSpecChannel, 'stable') }}:
+      - script: node eng/scripts/typespec-channel.mts "${{ parameters.TypeSpecChannel }}"
+        displayName: Install TypeSpec ${{ parameters.TypeSpecChannel }}
+        workingDirectory: ${{ parameters.WorkingDirectory }}
+  - ${{ else }}:
+      - script: node eng/scripts/typespec-channel.mts next
+        displayName: Install TypeSpec next
+        condition: >-
+          and(succeeded(), or(
+            eq(variables['System.PullRequest.TargetBranchName'], 'typespec-next'),
+            eq(variables['Build.SourceBranchName'], 'typespec-next')))
+        workingDirectory: ${{ parameters.WorkingDirectory }}
 
   - script: pnpm ls || true
     displayName: pnpm ls
