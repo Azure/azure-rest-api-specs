@@ -13,17 +13,14 @@ using TypeSpec.Versioning;
 )
 @service(#{ title: "Microsoft Foundry" })
 @server(
-  "{endpoint}",
+  "https://{accountName}.services.ai.azure.com/api/projects/{projectName}",
   "Microsoft Foundry",
   {
-    @doc("""
-      Foundry Project endpoint in the form
-      "https://{ai-services-account-name}.services.ai.azure.com/api/projects/{project-name}".
-      If you only have one Project in your Foundry Hub, or to target the default Project
-      in your Hub, use the form
-      "https://{ai-services-account-name}.services.ai.azure.com/api/projects/_project"
-      """)
-    endpoint: url,
+    @doc("The AI services account name.")
+    accountName: string,
+
+    @doc("The Foundry project name, or _project for the default project.")
+    projectName: string = "_project",
   }
 )
 @versioned(Versions)
