@@ -65,9 +65,9 @@ interface ResourceRecommendationBases {
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @removed(Versions.v2026_08_01_preview)
-  @renamedFrom(Versions.v2026_08_01_preview, "list")
+  @added(Versions.v2026_10_01)
   @sharedRoute
-  listV1 is ArmResourceListByParent<
+  list is ArmResourceListByParent<
     ResourceRecommendationBase,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
@@ -104,8 +104,10 @@ interface ResourceRecommendationBases {
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_08_01_preview)
+  @removed(Versions.v2026_10_01)
+  @renamedFrom(Versions.v2026_10_01, "list")
   @sharedRoute
-  list is ArmResourceListByParent<
+  listWithMode is ArmResourceListByParent<
     ResourceRecommendationBase,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
@@ -145,6 +147,7 @@ interface ResourceRecommendationBases {
    * Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_10_01)
   listByTenant is ArmResourceListByParent<
     ResourceRecommendationBase,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
@@ -206,6 +209,7 @@ alias AdvisorServiceGroup = Extension.ExternalResource<
  */
 @armResourceOperations
 @added(Versions.v2026_08_01_preview)
+@removed(Versions.v2026_10_01)
 interface ServiceGroupRecommendations {
   /**
    * Obtains recommendations for a service group.
