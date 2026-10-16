@@ -6,12 +6,13 @@ For context on this directory, see [Design guidelines for spec repos validation 
 
 ## Spec Change Policies
 
-[Spec Change Policies](tools/spec-change-policies/) checks the existing TypeSpec
-Requirement policies for committed specification changes:
+[Spec Change Policies](tools/spec-change-policies/README.md) checks TypeSpec usage
+policies for committed PR changes. [TypeSpec Validation](tools/typespec-validation/README.md)
+continues to validate TypeSpec project correctness and SDK API-version pins.
 
-```bash
-node eng/tools/spec-change-policies/src/index.ts --base-commitish HEAD^ --head-commitish HEAD
-```
+The supported PR command is `pnpm spec-change-policies --base=<base> --head=<head>`.
+The former TypeSpec Requirement entry point and its `--check-all-under` audit
+mode are no longer available.
 
 The workflow temporarily also publishes **TypeSpec Requirement**, which passes
 only when **Spec Change Policies** succeeds. Keep the old check required during
@@ -22,25 +23,25 @@ drain. Preserve separate externally produced Requirement statuses where still in
 
 ## Protected files
 
-The **Protected Files** check keeps repository-managed files out of specification
-contributions. It is a contribution-scope check, not a request for code-owner approval.
+The **Protected Files** check restricts changes to repository-managed files to
+allowlisted repository maintainers and trusted automation accounts.
 Contributor guidance is in the [CI Fix Guide](../documentation/ci-fix.md#protected-files).
 
-Maintenance-only PRs pass this check without a merge bypass. A PR is
-maintenance-only when it does not change `specification/`, including deletions or
-either side of a rename. Mixed specification and protected-file changes still
-fail, regardless of the author's
-ownership or reviews.
+The author allowlist is `ALLOWED_AUTHORS` in
+[protected-files.ts](../.github/workflows/src/protected-files.ts). Its maintainer
+entries are based on the `Azure/azure-rest-api-specs-maintainers` team;
+update them as maintainer access changes. The `azure-sdk` and
+`azure-sdk-automation[bot]` author exemptions remain included. No organization
+membership API access or additional credentials are required.
 
-GitHub's existing CODEOWNERS review requirements determine who approves
-maintenance changes; Protected Files does not maintain an author roster or
-resolve team membership. Any contributor can propose a maintenance-only PR, but
-all applicable code-owner reviews and other merge requirements still apply.
-The read-only `pull_request` check evaluates the PR merge commit against its
-base-branch parent, so policy changes are exercised on the PR that introduces
-them. CODEOWNERS reviews still gate changes to the policy itself.
-The existing trusted `azure-sdk` and
-`azure-sdk-automation[bot]` author exemptions remain unchanged.
+Non-allowlisted authors cannot change protected files, even in maintenance-only
+PRs. Deletions and both sides of renames count. Approvals, labels and reruns by
+maintainers do not exempt a PR; normal CODEOWNERS review and other merge
+requirements still apply to allowed authors.
+
+The read-only `pull_request` workflow evaluates the PR merge commit against its
+base-branch parent. Normal CODEOWNERS reviews still apply to changes to the check
+and its allowlist.
 
 ## Contributor readiness
 
@@ -263,8 +264,10 @@ unconfigured labels and alias migrations. It does not enumerate affected items.
 relevant changes on `main`, when repository label definitions change, and daily.
 The schedule also catches changes made by workflows using `GITHUB_TOKEN`, which
 do not trigger further label-event workflows. Manual runs default to dry-run.
-Mutating runs use the upstream default branch and are disabled on forks. PR
-validation never changes GitHub labels.
+Mutating runs use the default branch of `Azure/azure-rest-api-specs` or
+`Azure/azure-rest-api-specs-pr` and are disabled on forks. Each repository
+synchronizes labels from its own checked-in catalog. PR validation never changes
+GitHub labels.
 
 The `unconfiguredLabels: archive` policy creates/updates configured labels and
 archives labels absent from the catalog. This applies repository-wide, including
