@@ -131,6 +131,165 @@ model VoiceResponse {
 }
 
 // ---------------------------------------------------------------------------
+// Live delegation results and persisted conversation items
+// ---------------------------------------------------------------------------
+
+@doc("Persisted guidance accepted by Live, with commentary, thinking, or both. Agent delegation section markers are removed before storage.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentLiveDelegationResultItem {
+  {
+    @doc("Guidance for Live to communicate to the user.")
+    commentary: string,
+
+    @doc("Background context, not private reasoning or a request to speak.")
+    thinking?: string,
+  },
+  {
+    @doc("Guidance for Live to communicate to the user.")
+    commentary?: string,
+
+    @doc("Background context, not private reasoning or a request to speak.")
+    thinking: string,
+  },
+}
+
+@doc("Delegation owner. Foundry agent targets use native client delegation upstream.")
+union VoiceAgentLiveDelegationTarget {
+  responses: "responses",
+  client: "client",
+  foundry_managed_agent: "foundry_managed_agent",
+}
+
+@doc("Persisted delegation outcome, not speech or playback status.")
+union VoiceAgentLiveDelegationStatus {
+  string,
+  in_progress: "in_progress",
+  completed: "completed",
+  failed: "failed",
+  incomplete: "incomplete",
+  cancelled: "cancelled",
+}
+
+@doc("A Live session persisted when effective store is true. Uses voice-conversation lifecycle and retention; items are retrieved separately.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveConversation {
+  ...OmitProperties<VoiceConversation, "usage">;
+
+  @doc("Cumulative Live audio usage, excluding delegated-model tokens. May be absent after abnormal close.")
+  usage?: OpenAI.LiveSessionUsage;
+}
+
+@doc("The kind of a persisted Live conversation item.")
+union VoiceAgentLiveConversationItemType {
+  input: "input",
+  output: "output",
+  delegation: "delegation",
+}
+
+@doc("A stored speech segment or delegation. Speech segments are not native turns or proof of playback; delegation results are separate from spoken transcripts.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveConversationItem {
+  @doc("The persisted item kind.")
+  type: VoiceAgentLiveConversationItemType;
+
+  @doc("Item ID used for retrieval. Foundry assigns speech IDs; delegation IDs retain their native value.")
+  id: string;
+}
+
+@doc("A stored user speech segment.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveInputConversationItem
+  extends VoiceAgentLiveConversationItem {
+  type: "input";
+
+  @doc("Captured user transcription, when available.")
+  transcription?: string;
+
+  @doc("Captured audio metadata; audio.item_id matches this item's id.")
+  audio?: VoiceAudioItem;
+}
+
+@doc("A stored assistant speech segment.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveOutputConversationItem
+  extends VoiceAgentLiveConversationItem {
+  type: "output";
+
+  @doc("Captured assistant transcription, not backend output or commentary guidance.")
+  transcription?: string;
+
+  @doc("Captured audio metadata; audio.item_id matches this item's id.")
+  audio?: VoiceAudioItem;
+}
+
+@doc("A stored delegation using native fields with Foundry-specific targets. Its id is the native delegation ID.")
+@discriminator("target")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveDelegationConversationItem
+  extends VoiceAgentLiveConversationItem {
+  // id is inherited; extend target only for persistence.
+  ...OmitProperties<OpenAI.LiveDelegationItem, "id" | "target">;
+
+  @doc("The configured delegation owner.")
+  target: VoiceAgentLiveDelegationTarget;
+
+  @doc("Observed delegation creation time, in Unix seconds.")
+  created_at: FoundryTimestamp;
+}
+
+@doc("Results supplied by the application for client delegation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveClientDelegationConversationItem
+  extends VoiceAgentLiveDelegationConversationItem {
+  target: "client";
+
+  @doc("Guidance for Live to communicate to the user, when accepted.")
+  commentary?: string;
+
+  @doc("Accepted background context, not private reasoning or a request to speak.")
+  thinking?: string;
+}
+
+@doc("Stored Responses delegation output, separate from Live speech.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveResponsesDelegationConversationItem
+  extends VoiceAgentLiveDelegationConversationItem {
+  target: "responses";
+
+  @doc("Final backend text, omitted when unavailable; excludes raw tool output.")
+  output?: string;
+}
+
+@doc("Stored prompt-agent delegation state and accepted results.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveFoundryManagedAgentDelegationItem
+  extends VoiceAgentLiveDelegationConversationItem {
+  target: "foundry_managed_agent";
+
+  @doc("Target agent name in the same project.")
+  agent_name: string;
+
+  @doc("Target version pinned at connection start.")
+  agent_version: string;
+
+  @doc("Native delegation offset from session start, in milliseconds.")
+  offset_ms: int64;
+
+  @doc("Backend conversation ID, distinct from the voice conversation and Live session IDs.")
+  backend_conversation_id?: string;
+
+  @doc("Accepted guidance in order; empty until a result is accepted. Entries have no individual IDs, are noncumulative, and are independent of backend output_index. Partial results survive failure or cancellation.")
+  output: VoiceAgentLiveDelegationResultItem[];
+
+  @doc("Task context sent to the target agent, not the full request body.")
+  delegation_context?: string;
+
+  @doc("The persisted delegation outcome.")
+  status: VoiceAgentLiveDelegationStatus;
+}
+
+// ---------------------------------------------------------------------------
 // Conversation items — OpenAI Realtime hierarchy with Foundry persistence data
 // ---------------------------------------------------------------------------
 

@@ -2,6 +2,7 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-core/experimental";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -760,3 +761,32 @@ model VoiceAgentWebSocketUpgradeResponse {
   @header("Sec-WebSocket-Protocol")
   subprotocol?: VoiceAgentWebSocketSubprotocol;
 }
+
+// ---------------------------------------------------------------------------
+// Native Live protocol and Foundry conversation correlation
+// ---------------------------------------------------------------------------
+
+/** Native OpenAI Live client events. */
+alias VoiceAgentLiveClientEvent = OpenAI.LiveClientEvent;
+
+/**
+ * Native Live events with Foundry conversation correlation; no additional event types.
+ * response.event correlates backend output by delegation_id, preserving IDs, sequence numbers and tags.
+ * Lifecycle snapshots omit input and clear instructions, tools and output.
+ * Correlate append acknowledgments via client_event_id to record accepted results, not speech or playback.
+ * Use native errors for orchestration failures; never fabricate backend response events.
+ */
+alias VoiceAgentLiveServerEvent = OpenAI.LiveServerEvent;
+
+// Keep event models reachable without HTTP frame bodies.
+@@usage(OpenAI.LiveClientEvent, Usage.input | Usage.json);
+@@usage(OpenAI.LiveServerEvent, Usage.output | Usage.json);
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Add Foundry persistence correlation to the primary session-started event without replacing native session metadata."
+@@copyProperties(
+  OpenAI.LiveServerEventLiveSessionStarted,
+  {
+    @doc("Stored conversation ID when effective store is true. Use protocols/voice/live/conversations; this ID differs from session.id.")
+    conversation_id?: string,
+  }
+);
