@@ -26,6 +26,7 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@removed(Versions.v2026_11_01)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model EndpointDeploymentResourcePropertiesBasicResource is Azure.ResourceManager.ProxyResource<
   EndpointDeploymentResourceProperties,
@@ -51,6 +52,7 @@ model EndpointDeploymentResourcePropertiesBasicResource is Azure.ResourceManager
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@removed(Versions.v2026_11_01)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -98,6 +100,7 @@ interface EndpointDeploymentResourcePropertiesBasicResourceOps
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@removed(Versions.v2026_11_01)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
@@ -155,6 +158,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@removed(Versions.v2026_11_01)
 @armResourceOperations
 interface EndpointDeploymentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -202,6 +206,7 @@ interface EndpointDeploymentOps
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@removed(Versions.v2026_11_01)
 @armResourceOperations
 interface EndpointDeployment {
   /**
