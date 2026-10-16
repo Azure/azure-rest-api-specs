@@ -22,9 +22,14 @@ function createMockGithubImpl() {
     paginate: async <T, U>(
       func: (input: T) => Promise<{ data: Array<U> | Record<string, Array<U>> }>,
       params: T,
+      mapFn?: (response: { data: Array<U> | Record<string, Array<U>> }, done: () => void) => U[],
     ) => {
       // Assume all test data fits in single page
-      const data = (await func(params)).data;
+      const response = await func(params);
+      if (mapFn) {
+        return mapFn(response, () => {});
+      }
+      const data = response.data;
 
       // Simulate normalization performed by real impl
       return Array.isArray(data) ? data : data[Object.keys(data)[0]];
@@ -51,9 +56,13 @@ function createMockGithubImpl() {
       },
       pulls: {
         get: vi.fn(),
+        listFiles: vi.fn().mockResolvedValue({ data: [] }),
       },
       repos: {
         createCommitStatus: vi.fn(),
+        getCombinedStatusForRef: vi.fn().mockResolvedValue({
+          data: { statuses: [], total_count: 0 },
+        }),
         listCommitStatusesForRef: vi.fn().mockResolvedValue({ data: [] }),
         listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
           data: [],
