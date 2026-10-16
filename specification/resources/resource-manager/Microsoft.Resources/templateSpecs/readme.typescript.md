@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-resourcestemplatespecs"
-  output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resourcestemplatespecs"
+  package-name: "@azure/arm-templatespecs"
+  output-folder: "$(typescript-sdks-folder)/sdk/templatespecs/arm-templatespecs"
   override-client-name: TemplateSpecsClient
   generate-metadata: true
 ```
