@@ -58,20 +58,38 @@ describe("workflow files", () => {
           jobs: z.record(
             z.string(),
             z.object({
-              steps: z.array(z.object({ run: z.string().optional() })),
+              steps: z.array(
+                z.object({
+                  run: z.string().optional(),
+                  env: z.record(z.string(), z.string()).optional(),
+                }),
+              ),
             }),
           ),
         })
         .parse(parse(await readFile(resolve(workflowsDir, file), "utf8")));
-      const commands = Object.values(workflow.jobs)
-        .flatMap((job) => job.steps)
-        .flatMap((step) =>
-          step.run?.includes("node eng/tools/typespec-validation/cmd/tsv.js") ? [step.run] : [],
-        );
-      expect(commands).toHaveLength(1);
       const debugFlag = "${{ runner.debug == '1' && '--verbose' || '' }}";
-      expect(commands[0]).toContain(debugFlag);
-      expect(commands[0].replace(debugFlag, "")).not.toContain("--verbose");
+      // The debug conditional may appear directly in a tsv.js run command, or be passed through
+      // an env var (to keep dynamic values out of the shell script text for zizmor's
+      // template-injection audit); either way it must be the only source of "--verbose".
+      const commandSteps = Object.values(workflow.jobs)
+        .flatMap((job) => job.steps)
+        .filter((step) => step.run?.includes("node eng/tools/typespec-validation/cmd/tsv.js"));
+      expect(commandSteps.length).toBeGreaterThan(0);
+      for (const step of commandSteps) {
+        const text = [step.run ?? "", ...Object.values(step.env ?? {})].join("\n");
+        expect(text.replace(debugFlag, "")).not.toContain("--verbose");
+      }
+      // Detection-only steps (no --git-clean) don't validate anything, so they don't need
+      // --verbose support; every real validation command does.
+      const validationCommands = commandSteps.filter((step) =>
+        [step.run ?? "", ...Object.values(step.env ?? {})].join("\n").includes("--git-clean"),
+      );
+      expect(validationCommands.length).toBeGreaterThan(0);
+      for (const step of validationCommands) {
+        const text = [step.run ?? "", ...Object.values(step.env ?? {})].join("\n");
+        expect(text).toContain(debugFlag);
+      }
     },
   );
 

@@ -181,14 +181,20 @@ export async function main() {
     shard: {
       type: "string",
       valueLabel: "<index>/<count>",
-      group: "Options for --all",
+      group: "Options for --all or --changed",
       description:
         "Select a shard using one-based indices. Each shard requires a separate checkout.",
     },
     "github-summary": {
       type: "boolean",
-      group: "Options for --all",
+      group: "Options for --all or --changed",
       description: "Append failed project paths to the GitHub job summary.",
+    },
+    "github-output": {
+      type: "boolean",
+      group: "Options for --changed",
+      description:
+        "Write checking-all-specs=true|false and changed-project-count=<n> to $GITHUB_OUTPUT.",
     },
     "dry-run": {
       type: "boolean",
@@ -232,13 +238,13 @@ export async function main() {
     return;
   }
 
-  if (values.shard !== undefined && !values.all) {
-    console.error("--shard requires --all");
+  if (values.shard !== undefined && !values.all && !values.changed) {
+    console.error("--shard requires --all or --changed");
     process.exitCode = 1;
     return;
   }
-  if (values["github-summary"] && !values.all) {
-    console.error("--github-summary requires --all");
+  if (values["github-summary"] && !values.all && !values.changed) {
+    console.error("--github-summary requires --all or --changed");
     process.exitCode = 1;
     return;
   }
@@ -248,11 +254,23 @@ export async function main() {
     process.exitCode = 1;
     return;
   }
+  if (values["github-output"] && !values.changed) {
+    console.error("--github-output requires --changed");
+    process.exitCode = 1;
+    return;
+  }
+  const outputFile = values["github-output"] ? process.env.GITHUB_OUTPUT : undefined;
+  if (values["github-output"] && !outputFile) {
+    console.error("--github-output requires the GITHUB_OUTPUT environment variable");
+    process.exitCode = 1;
+    return;
+  }
 
   if (values.changed) {
     if (parsedArgs.positionals.length > 0) {
       console.error(
-        "Usage: tsv --changed [--base=<commit>] [--head=<commit>] [--ignore-core-files] [--git-clean] [--dry-run]",
+        "Usage: tsv --changed [--base=<commit>] [--head=<commit>] [--ignore-core-files] " +
+          "[--shard=<index>/<count>] [--github-summary] [--github-output] [--git-clean] [--dry-run]",
       );
       process.exitCode = 1;
       return;
@@ -261,9 +279,12 @@ export async function main() {
       baseCommitish: values.base,
       headCommitish: values.head,
       ignoreCoreFiles: values["ignore-core-files"],
+      shard: values.shard,
       gitClean: values["git-clean"],
       dryRun: values["dry-run"],
       verbose: values.verbose,
+      summaryFile,
+      githubOutputFile: outputFile,
     });
     if (!success) process.exitCode = 1;
     return;
