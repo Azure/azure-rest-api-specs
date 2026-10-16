@@ -812,13 +812,6 @@ model RaiAcsAgentStartupInterventionPoint is RaiAcsInterventionPointTemplate<
   "agent_init"
 >;
 
-/** Input binding with the canonical user-input target. */
-@added(Versions.v2026_09_15_preview)
-model RaiAcsInputInterventionPoint is RaiAcsInterventionPointTemplate<
-  "$snap.input",
-  "user_input"
->;
-
 /** Pre-model binding with the canonical messages target. */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsPreModelCallInterventionPoint is RaiAcsInterventionPointTemplate<
@@ -831,27 +824,6 @@ model RaiAcsPreModelCallInterventionPoint is RaiAcsInterventionPointTemplate<
 model RaiAcsPostModelCallInterventionPoint is RaiAcsInterventionPointTemplate<
   "$snap.response",
   "model_response"
->;
-
-/** Pre-tool binding with the canonical tool-arguments target. */
-@added(Versions.v2026_09_15_preview)
-model RaiAcsPreToolCallInterventionPoint is RaiAcsToolInterventionPointTemplate<
-  "$snap.tool_call.args",
-  "tool_args"
->;
-
-/** Post-tool binding with the canonical tool-result target. */
-@added(Versions.v2026_09_15_preview)
-model RaiAcsPostToolCallInterventionPoint is RaiAcsToolInterventionPointTemplate<
-  "$snap.tool_result.value",
-  "tool_result"
->;
-
-/** Output binding with the canonical assistant-output target. */
-@added(Versions.v2026_09_15_preview)
-model RaiAcsOutputInterventionPoint is RaiAcsInterventionPointTemplate<
-  "$snap.output",
-  "assistant_output"
 >;
 
 /** Agent-shutdown binding with the canonical summary target. */
@@ -869,7 +841,7 @@ model RaiAcsInterventionPoints {
   agentStartup?: RaiAcsAgentStartupInterventionPoint;
 
   /** The policy evaluated for user input. */
-  input?: RaiAcsInputInterventionPoint;
+  input?: RaiAcsInterventionPoint;
 
   /** The policy evaluated before a model call. */
   @encodedName("application/json", "pre_model_call")
@@ -881,14 +853,14 @@ model RaiAcsInterventionPoints {
 
   /** The policy evaluated before a tool call. */
   @encodedName("application/json", "pre_tool_call")
-  preToolCall?: RaiAcsPreToolCallInterventionPoint;
+  preToolCall?: RaiAcsToolInterventionPoint;
 
   /** The policy evaluated after a tool call. */
   @encodedName("application/json", "post_tool_call")
-  postToolCall?: RaiAcsPostToolCallInterventionPoint;
+  postToolCall?: RaiAcsToolInterventionPoint;
 
   /** The policy evaluated for final output. */
-  output?: RaiAcsOutputInterventionPoint;
+  output?: RaiAcsInterventionPoint;
 
   /** The policy evaluated when the agent execution session shuts down. */
   @encodedName("application/json", "agent_shutdown")

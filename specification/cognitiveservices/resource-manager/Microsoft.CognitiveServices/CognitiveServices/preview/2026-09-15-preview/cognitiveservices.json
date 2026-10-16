@@ -21195,47 +21195,6 @@
         "category"
       ]
     },
-    "RaiAcsInputInterventionPoint": {
-      "type": "object",
-      "description": "Input binding with the canonical user-input target.",
-      "properties": {
-        "policy_target": {
-          "type": "string",
-          "description": "The canonical Agent Hooks snapshot path projected as the policy target.",
-          "enum": [
-            "$snap.input"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "policyTarget"
-        },
-        "policy_target_kind": {
-          "type": "string",
-          "description": "The semantic kind of the projected policy target.",
-          "enum": [
-            "user_input"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "policyTargetKind"
-        },
-        "policy": {
-          "$ref": "#/definitions/RaiAcsPolicyBinding",
-          "description": "The logical policy evaluated at this intervention point."
-        },
-        "annotations": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
-        }
-      },
-      "required": [
-        "policy_target",
-        "policy_target_kind",
-        "policy"
-      ]
-    },
     "RaiAcsInterventionPoint": {
       "type": "object",
       "description": "Binds one logical policy to an Agent Control Specification intervention point.",
@@ -21275,7 +21234,7 @@
           "x-ms-client-name": "agentStartup"
         },
         "input": {
-          "$ref": "#/definitions/RaiAcsInputInterventionPoint",
+          "$ref": "#/definitions/RaiAcsInterventionPoint",
           "description": "The policy evaluated for user input."
         },
         "pre_model_call": {
@@ -21289,17 +21248,17 @@
           "x-ms-client-name": "postModelCall"
         },
         "pre_tool_call": {
-          "$ref": "#/definitions/RaiAcsPreToolCallInterventionPoint",
+          "$ref": "#/definitions/RaiAcsToolInterventionPoint",
           "description": "The policy evaluated before a tool call.",
           "x-ms-client-name": "preToolCall"
         },
         "post_tool_call": {
-          "$ref": "#/definitions/RaiAcsPostToolCallInterventionPoint",
+          "$ref": "#/definitions/RaiAcsToolInterventionPoint",
           "description": "The policy evaluated after a tool call.",
           "x-ms-client-name": "postToolCall"
         },
         "output": {
-          "$ref": "#/definitions/RaiAcsOutputInterventionPoint",
+          "$ref": "#/definitions/RaiAcsInterventionPoint",
           "description": "The policy evaluated for final output."
         },
         "agent_shutdown": {
@@ -21402,47 +21361,6 @@
           }
         ]
       }
-    },
-    "RaiAcsOutputInterventionPoint": {
-      "type": "object",
-      "description": "Output binding with the canonical assistant-output target.",
-      "properties": {
-        "policy_target": {
-          "type": "string",
-          "description": "The canonical Agent Hooks snapshot path projected as the policy target.",
-          "enum": [
-            "$snap.output"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "policyTarget"
-        },
-        "policy_target_kind": {
-          "type": "string",
-          "description": "The semantic kind of the projected policy target.",
-          "enum": [
-            "assistant_output"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "policyTargetKind"
-        },
-        "policy": {
-          "$ref": "#/definitions/RaiAcsPolicyBinding",
-          "description": "The logical policy evaluated at this intervention point."
-        },
-        "annotations": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
-        }
-      },
-      "required": [
-        "policy_target",
-        "policy_target_kind",
-        "policy"
-      ]
     },
     "RaiAcsPolicyBinding": {
       "type": "object",
@@ -21647,52 +21565,6 @@
         "policy"
       ]
     },
-    "RaiAcsPostToolCallInterventionPoint": {
-      "type": "object",
-      "description": "Post-tool binding with the canonical tool-result target.",
-      "properties": {
-        "policy_target": {
-          "type": "string",
-          "description": "The canonical Agent Hooks snapshot path projected as the policy target.",
-          "enum": [
-            "$snap.tool_result.value"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "policyTarget"
-        },
-        "policy_target_kind": {
-          "type": "string",
-          "description": "The semantic kind of the projected policy target.",
-          "enum": [
-            "tool_result"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "policyTargetKind"
-        },
-        "policy": {
-          "$ref": "#/definitions/RaiAcsPolicyBinding",
-          "description": "The logical policy evaluated at this intervention point."
-        },
-        "annotations": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
-        },
-        "tool_name_from": {
-          "$ref": "#/definitions/RaiAcsToolNameSelector",
-          "description": "Selects the tool catalog key from the raw Agent Hooks snapshot using an extensible snapshot path.",
-          "x-ms-client-name": "toolNameFrom"
-        }
-      },
-      "required": [
-        "policy_target",
-        "policy_target_kind",
-        "policy"
-      ]
-    },
     "RaiAcsPreModelCallInterventionPoint": {
       "type": "object",
       "description": "Pre-model binding with the canonical messages target.",
@@ -21726,52 +21598,6 @@
         "annotations": {
           "$ref": "#/definitions/RaiAcsEmptyObject",
           "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
-        }
-      },
-      "required": [
-        "policy_target",
-        "policy_target_kind",
-        "policy"
-      ]
-    },
-    "RaiAcsPreToolCallInterventionPoint": {
-      "type": "object",
-      "description": "Pre-tool binding with the canonical tool-arguments target.",
-      "properties": {
-        "policy_target": {
-          "type": "string",
-          "description": "The canonical Agent Hooks snapshot path projected as the policy target.",
-          "enum": [
-            "$snap.tool_call.args"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "policyTarget"
-        },
-        "policy_target_kind": {
-          "type": "string",
-          "description": "The semantic kind of the projected policy target.",
-          "enum": [
-            "tool_args"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-ms-client-name": "policyTargetKind"
-        },
-        "policy": {
-          "$ref": "#/definitions/RaiAcsPolicyBinding",
-          "description": "The logical policy evaluated at this intervention point."
-        },
-        "annotations": {
-          "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
-        },
-        "tool_name_from": {
-          "$ref": "#/definitions/RaiAcsToolNameSelector",
-          "description": "Selects the tool catalog key from the raw Agent Hooks snapshot using an extensible snapshot path.",
-          "x-ms-client-name": "toolNameFrom"
         }
       },
       "required": [
