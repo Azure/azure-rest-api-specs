@@ -125,9 +125,7 @@ interface SaaSOperationGroup {
     Response = SaaSResourceDetailsResponse,
     Scope = SubscriptionActionScope,
     Parameters = {},
-    LroHeaders = ArmCombinedLroHeaders<
-      FinalResult = SaaSResourceDetailsResponse
-    > &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = SaaSResourceDetailsResponse> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
