@@ -386,6 +386,102 @@ test("Workbench examples match generation and omit runtimeImage and forbidden en
 });
 
 let sdkContext;
+test("C# review customizations preserve wire names and other language scopes", async () => {
+  const program = await compile(NodeHost, path.join(project, "client.tsp"), {
+    noEmit: true,
+  });
+  assert(!program.hasError(), "Client customizations must compile");
+  const mappings = [
+    ["AdapterDeployment", "etag", "eTag"],
+    ["RaiBinding", "etag", "eTag"],
+    ["RaiRego", "etag", "eTag"],
+    ["ClusterComputeProperties", "subnetArmId", "armResourceIdentifier"],
+    ["ManagedComputeDeploymentInfo", "deploymentId", "armResourceIdentifier"],
+    ["ManagedComputeDeploymentInfo", "projectId", "armResourceIdentifier"],
+  ];
+  for (const language of ["csharp", "java", "python", "ts", "go"]) {
+    const context = await createSdkContext(
+      {
+        program,
+        emitterOutputDir: project,
+        options: { "api-version": version },
+      },
+      `@azure-tools/typespec-${language}`,
+    );
+    assert.equal(
+      context.diagnostics.some((item) => item.severity === "error"),
+      false,
+    );
+    const model = (name) => {
+      const result = context.sdkPackage.models.find(
+        (item) => item.__raw?.name === name,
+      );
+      assert(result, `${language}: ${name}`);
+      return result;
+    };
+    const property = (modelName, wireName) => {
+      const result = model(modelName).properties.find(
+        (item) => item.serializedName === wireName,
+      );
+      assert(result, `${language}: ${modelName}.${wireName}`);
+      return result;
+    };
+    const isCsharp = language === "csharp";
+    for (const [modelName, wireName, type] of mappings) {
+      const result = property(modelName, wireName);
+      assert.equal(result.type.name, isCsharp ? type : "string");
+      assert.equal(result.optional, true);
+    }
+    assert.equal(
+      property("ManagedComputeDeploymentInfo", "modelId").type.name,
+      "string",
+    );
+    assert.equal(
+      model("CapabilitySettings").name,
+      isCsharp
+        ? "CognitiveServicesAgentCapabilitySettings"
+        : "CapabilitySettings",
+    );
+    assert.equal(
+      property("RaiPolicyCustomExternalSafetyProviderReference", "blocking")
+        .name,
+      isCsharp ? "IsBlocking" : "blocking",
+    );
+    const category = context.sdkPackage.enums.find(
+      (item) => item.__raw?.name === "ConnectionCategory",
+    );
+    assert(category, `${language}: ConnectionCategory`);
+    assert.equal(
+      category.values.find((item) => item.value === "OpenAPI")?.name,
+      isCsharp ? "OpenApi" : "OpenAPI",
+    );
+    const identityType = property("Identity", "type");
+    assert.equal(identityType.optional, true);
+    assert.equal(
+      identityType.type.name,
+      isCsharp ? "ManagedServiceIdentityType" : "ResourceIdentityType",
+    );
+    const identities = property("Identity", "userAssignedIdentities");
+    assert.equal(identities.optional, true);
+    assert.equal(identities.type.kind, "dict");
+    assert.equal(identities.type.valueType.name, "UserAssignedIdentity");
+    assert.equal(
+      identities.type.valueType.__raw.namespace.name,
+      isCsharp ? "CommonTypes" : "CognitiveServices",
+    );
+    for (const wireName of ["clientId", "principalId"]) {
+      const result = identities.type.valueType.properties.find(
+        (item) => item.serializedName === wireName,
+      );
+      assert(result, `${language}: UserAssignedIdentity.${wireName}`);
+      assert.equal(result.type.name, isCsharp ? "uuid" : "string");
+    }
+    const displayName = property("CostControlPatchProperties", "displayName");
+    assert.equal(displayName.optional, true);
+    assert.equal(displayName.type.kind, "nullable");
+  }
+});
+
 async function getSdkContext() {
   if (sdkContext) return sdkContext;
   const program = await compile(NodeHost, path.join(project, "main.tsp"), {
