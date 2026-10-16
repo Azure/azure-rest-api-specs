@@ -1,0 +1,313 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2026-11-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManagedInstanceServerProtectionSettings"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverProtectionSettings": {
+      "get": {
+        "operationId": "ManagedInstanceServerProtectionSettings_ListByManagedInstance",
+        "tags": [
+          "ManagedInstanceServerProtectionSettings"
+        ],
+        "description": "Lists the managed instance's server protection settings. The collection contains the default resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerProtectionSettingsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List managed instance server protection settings": {
+            "$ref": "./examples/ListServerProtectionSettings.json"
+          },
+          "List settings before opting in": {
+            "$ref": "./examples/ListServerProtectionSettingsDisabled.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverProtectionSettings/{serverProtectionSettingsName}": {
+      "get": {
+        "operationId": "ManagedInstanceServerProtectionSettings_Get",
+        "tags": [
+          "ManagedInstanceServerProtectionSettings"
+        ],
+        "description": "Gets a managed instance's server protection settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverProtectionSettingsName",
+            "in": "path",
+            "description": "The protection settings name. Only default is supported.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ServerProtectionSettingsName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "default",
+                  "description": "The only supported protection settings resource, matched case-insensitively."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerProtectionSettings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get managed instance server protection settings": {
+            "$ref": "./examples/GetServerProtectionSettings.json"
+          },
+          "Get settings before opting in": {
+            "$ref": "./examples/GetServerProtectionSettingsDisabled.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedInstanceServerProtectionSettings_CreateOrUpdate",
+        "tags": [
+          "ManagedInstanceServerProtectionSettings"
+        ],
+        "description": "Updates managed instance server protection setting. Returns HTTP 202 with\noperation metadata and polling headers while the update is in progress, or\nHTTP 200 with the resource when complete. Follow the Location URL to retrieve\nthe final resource result.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverProtectionSettingsName",
+            "in": "path",
+            "description": "The protection settings name. Only default is supported.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ServerProtectionSettingsName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "default",
+                  "description": "The only supported protection settings resource, matched case-insensitively."
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The managed instance protection settings to apply.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerProtectionSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerProtectionSettings"
+            }
+          },
+          "202": {
+            "description": "The update is in progress; follow the polling headers to retrieve its status and final resource result.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ServerProtectionSettingsOperationMetadata"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Opt in block server drop": {
+            "$ref": "./examples/CreateOrUpdateServerProtectionSettingsOptInBlockServerDrop.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ServerProtectionSettings"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ServerProtectionSettings": {
+      "type": "object",
+      "description": "The singleton protection settings for a managed instance. The only supported\nresource name is default. Enabling protection is an irreversible opt-in.",
+      "properties": {
+        "properties": {
+          "$ref": "./common.json#/definitions/ServerProtectionSettingsProperties",
+          "description": "The required managed instance protection settings."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServerProtectionSettingsListResult": {
+      "type": "object",
+      "description": "The response of a ServerProtectionSettings list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServerProtectionSettings items on this page",
+          "items": {
+            "$ref": "#/definitions/ServerProtectionSettings"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {}
+}

@@ -84,6 +84,7 @@ import "./ManagedInstanceOperation.tsp";
 import "./ManagedInstancePrivateEndpointConnection.tsp";
 import "./ManagedInstancePrivateLink.tsp";
 import "./ManagedInstance.tsp";
+import "./ManagedInstanceServerProtectionSettings.tsp";
 import "./ManagedInstanceVulnerabilityAssessment.tsp";
 import "./ManagedLedgerDigestUploads.tsp";
 import "./ManagedServerDnsAlias.tsp";
@@ -315,6 +316,16 @@ enum Features {
   ManagedInstancePrivateLinkResources,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedInstances,
+
+  /** Read, list, and update the singleton managed instance protection settings. */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The project uses legacy-feature-files output splitting; preserve the requested server protection settings specification filename."
+  @Azure.ResourceManager.Legacy.featureOptions(#{
+    featureName: "ManagedInstanceServerProtectionSettings",
+    fileName: "ManagedInstanceServerProtectionSettings",
+    description: "Read and update managed instance protection settings for retained immutable backups.",
+  })
+  ManagedInstanceServerProtectionSettings,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedInstanceTdeCertificates,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
