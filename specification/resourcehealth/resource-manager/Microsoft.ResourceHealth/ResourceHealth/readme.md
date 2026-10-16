@@ -31,6 +31,29 @@ azure-validator: true
 ```
 
 
+### Tag: package-2026-08-01-preview
+
+These settings apply only when `--tag=package-2026-08-01-preview` is specified on the command line.
+
+This preview carries forward all Resource Health operations from `2025-05-01`
+and adds service-group availability-status and service-health-event collections.
+The existing Resource Health client retains its operation groups and exposes the
+two new operations in the `ServiceGroupHealth` group. Existing API versions and
+their contracts remain unchanged.
+
+Service-group event responses also support the optional `maintenanceId`,
+`maintenanceType`, and `argQuery` properties from the `2023-10-01-preview`
+contract. Event and availability-status responses support optional `systemData`
+resource metadata. These properties describe response capabilities, not guaranteed
+population: fields may be omitted when not available or not applicable. Examples
+illustrate both populated and omitted optional fields and do not imply deployment
+or runtime availability. Original resource- and subscription-scoped IDs are retained.
+
+```yaml $(tag) == 'package-2026-08-01-preview'
+input-file:
+  - preview/2026-08-01-preview/ResourceHealth.json
+```
+
 ### Tag: package-2025-05-01
 
 These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
