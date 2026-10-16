@@ -14,49 +14,6 @@ namespace OpenAI {
 // Map Azure.AI.Projects augmentation types into our SDK namespace
 @clientNamespace("Azure.AI.AgentServer.Responses.Models")
 namespace Azure.AI.Projects {
-  // Remove created_by from specific models to avoid BinaryData/string mismatch
-  // with the base OutputItem.CreatedBy (BinaryData) type
-  @@withoutOmittedProperties(
-    OpenAI.OutputItemFunctionShellCallOutput,
-    "created_by"
-  );
-  @@withoutOmittedProperties(OpenAI.OutputItemFunctionShellCall, "created_by");
-  @@withoutOmittedProperties(OpenAI.OutputItemCompactionBody, "created_by");
-  @@withoutOmittedProperties(
-    OpenAI.OutputItemApplyPatchToolCallOutput,
-    "created_by"
-  );
-  @@withoutOmittedProperties(OpenAI.OutputItemApplyPatchToolCall, "created_by");
-
-  // Remove "id" and "status" from ItemMessage (input-only model).
-  // The Responses-only TypeSpec view merges input and output item types into a
-  // single Item union, losing the distinction between EasyInputMessage (input,
-  // requires only role/content/type) and ConversationItemMessage (output,
-  // requires id/status/role/content/type). ItemMessage is only referenced by
-  // OpenAI.Item (input context); the output side uses OpenAI.OutputItemMessage.
-  @@withoutOmittedProperties(OpenAI.ItemMessage, "id");
-  @@withoutOmittedProperties(OpenAI.ItemMessage, "status");
-
-  // Remove output-assigned "id" from ItemFunctionToolCall in input context.
-  // Function call input items require type/call_id/name/arguments; the server
-  // assigns id later when the item is persisted or returned as output.
-  @@withoutOmittedProperties(OpenAI.ItemFunctionToolCall, "id");
-
-  // Fix ItemMessage.content to match the upstream EasyInputMessage format.
-  // The Responses-only view inherits content: MessageContent[] from the output-
-  // oriented Message model. The upstream EasyInputMessage accepts either a plain
-  // string or an array of content parts (string | InputMessageContentList).
-  // Remove the array-only content and replace with the union type.
-  @@withoutOmittedProperties(OpenAI.ItemMessage, "content");
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "The string-or-array shorthand is deliberately anonymous; declaring it as a named union would add a schema to the emitted OpenAPI contract, changing the published wire shape."
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties widens `content` to `string | MessageContent[]`; the Responses wire protocol accepts the string shorthand that upstream OpenAI declares as array-only."
-  @@copyProperties(
-    OpenAI.ItemMessage,
-    {
-      content: string | OpenAI.MessageContent[],
-    }
-  );
-
   // Rename "Response" to "ResponseObject" to avoid conflict with Azure.Response
   @@clientName(OpenAI.Response, "ResponseObject");
 
