@@ -62,9 +62,9 @@ namespace WebPubSubChat.PythonCustomizations {
     "python"
   );
 
-  /** Properties supplied when creating a topic. */
+  /** Properties supplied when creating or replacing a topic. */
   @TypeSpec.Versioning.added(WebPubSubChat.Versions.v2026_08_01_preview)
-  model ChatTopicCreate {
+  model ChatTopicCreateOrReplace {
     ...Create<{
       ...WebPubSubChat.ChatTopic;
     }>;
@@ -195,7 +195,7 @@ namespace Customizations {
 
   @@WebPubSubChat.PythonCustomizations.pythonRequestModel(
     WebPubSubChatServiceClient.createOrReplaceTopic,
-    WebPubSubChat.PythonCustomizations.ChatTopicCreate
+    WebPubSubChat.PythonCustomizations.ChatTopicCreateOrReplace
   );
   @@WebPubSubChat.PythonCustomizations.pythonRequestModel(
     WebPubSubChatServiceClient.updateTopic,
