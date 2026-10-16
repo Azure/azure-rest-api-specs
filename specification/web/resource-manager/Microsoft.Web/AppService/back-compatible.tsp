@@ -2085,6 +2085,19 @@ using Microsoft.Web;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteAuthSettingsV2.properties);
 
+@@clientLocation(EgressConfigs.createOrUpdateEgressConfig, WebApps, "!csharp");
+@@clientLocation(EgressConfigs.getEgressConfig, WebApps, "!csharp");
+@@clientLocation(
+  EgressConfigSlotConfigs.createOrUpdateEgressConfigSlot,
+  WebApps,
+  "!csharp"
+);
+@@clientLocation(
+  EgressConfigSlotConfigs.getEgressConfigSlot,
+  WebApps,
+  "!csharp"
+);
+
 @@clientLocation(
   AppSettingKeyVaultReference.getAppSettingKeyVaultReference,
   WebApps,
