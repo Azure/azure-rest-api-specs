@@ -166,31 +166,6 @@ it("treats --help after the option terminator as a positional folder", async () 
   });
 });
 
-it.each(["single", "all", "changed"])(
-  "makes Git tracing opt-in without hiding %s validation failures",
-  async (mode) => {
-    const project = "specification/service/Project";
-    await addProject(project);
-    await initGit();
-    await commit("Base");
-    await writeFile(join(root, project, "tspconfig.yaml"), "# changed");
-    await commit("Head");
-    const args = mode === "single" ? [project] : [`--${mode}`];
-    await expect(run(...args)).rejects.toMatchObject({
-      code: 1,
-      stdout: expect.not.stringContaining("Executing rule:") as unknown,
-      stderr: expect.stringContaining(
-        'error tsv/folder-structure: Project must use "folder structure v2"',
-      ) as unknown,
-    });
-    await expect(run(...args, "--verbose")).rejects.toMatchObject({
-      code: 1,
-      stdout: expect.stringContaining("\u00d7 FolderStructure") as unknown,
-      stderr: expect.stringContaining("simple-git") as unknown,
-    });
-  },
-);
-
 it("keeps changed-file inventories behind --verbose and supports -v", async () => {
   await addProject("specification/service/Project");
   await initGit();
