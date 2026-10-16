@@ -21,10 +21,7 @@
           "status": "PartiallySucceeded",
           "resources": [
             {
-              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1"
-            },
-            {
-              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
+              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleVMSS"
             }
           ],
           "excludedResources": [
@@ -41,10 +38,37 @@
               "completedAt": "2025-01-20T14:40:00.000Z",
               "resources": [
                 {
-                  "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1"
-                },
-                {
-                  "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
+                  "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleVMSS",
+                  "effectiveTargets": [
+                    {
+                      "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleVMSS/virtualMachines/0",
+                      "state": "Succeeded",
+                      "applied": true,
+                      "reasonCode": "TargetMatched",
+                      "reason": "VMSS instance 0 matched westus2 and logical zone 1. The fault was applied and cleanup completed.",
+                      "startedAt": "2025-01-20T14:30:05.000Z",
+                      "completedAt": "2025-01-20T14:40:00.000Z"
+                    },
+                    {
+                      "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleVMSS/virtualMachines/1",
+                      "state": "NotApplicable",
+                      "applied": false,
+                      "reasonCode": "ZoneMismatch",
+                      "reason": "VMSS instance 1 is in logical zone 2; the configured logical zone is 1.",
+                      "startedAt": "2025-01-20T14:30:05.000Z",
+                      "completedAt": "2025-01-20T14:30:06.000Z"
+                    },
+                    {
+                      "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleVMSS/virtualMachines/2",
+                      "state": "Skipped",
+                      "applied": false,
+                      "reasonCode": "AlreadyPoweredOff",
+                      "reason": "VMSS instance 2 matched logical zone 1 but was already powered off before this invocation.",
+                      "startedAt": "2025-01-20T14:30:05.000Z",
+                      "completedAt": "2025-01-20T14:30:06.000Z"
+                    }
+                  ],
+                  "effectiveTargetsTruncated": false
                 }
               ]
             },

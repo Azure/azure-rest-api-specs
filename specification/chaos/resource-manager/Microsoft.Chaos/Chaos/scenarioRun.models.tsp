@@ -278,9 +278,20 @@ model ScenarioRunSummaryAction {
   /**
    * The resources associated with the specified action.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "resources")
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
-  resources: ScenarioRunResource[];
+  resourcesLegacy: ScenarioRunResource[];
+
+  /**
+   * The resources associated with the specified action, including the concrete targets
+   * evaluated during execution.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  resources: ScenarioRunSummaryResource[];
 
   /**
    * The urn for the given chaos action.
@@ -432,6 +443,104 @@ model ScenarioRunResource {
   @visibility(Lifecycle.Read)
   @key
   id: string;
+}
+
+/**
+ * Model that represents a resource associated with a scenario run action.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioRunSummaryResource {
+  /**
+   * The resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  @key
+  id: string;
+
+  /**
+   * The concrete targets evaluated for this resource during action execution.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  effectiveTargets?: ScenarioRunEffectiveTarget[];
+
+  /**
+   * Whether additional effective targets were omitted from the response.
+   */
+  @visibility(Lifecycle.Read)
+  effectiveTargetsTruncated?: boolean;
+}
+
+/**
+ * Model that represents the outcome for a concrete action target.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioRunEffectiveTarget {
+  /**
+   * The target resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  @key
+  id: string;
+
+  /**
+   * The target execution state.
+   */
+  @visibility(Lifecycle.Read)
+  state: ScenarioRunTargetState;
+
+  /**
+   * Whether the fault was applied to the target. When omitted, the result is unknown.
+   */
+  @visibility(Lifecycle.Read)
+  applied?: boolean;
+
+  /**
+   * The stable code that explains the target outcome.
+   */
+  @visibility(Lifecycle.Read)
+  reasonCode?: string;
+
+  /**
+   * The customer-safe description of the target outcome.
+   */
+  @visibility(Lifecycle.Read)
+  reason?: string;
+
+  /**
+   * When target processing started.
+   */
+  @visibility(Lifecycle.Read)
+  startedAt?: utcDateTime;
+
+  /**
+   * When target processing completed.
+   */
+  @visibility(Lifecycle.Read)
+  completedAt?: utcDateTime;
+}
+
+/**
+ * Enum of the execution states for a concrete action target.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+union ScenarioRunTargetState {
+  string,
+
+  /**
+   * The action completed successfully for the target.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The action does not apply to the target.
+   */
+  NotApplicable: "NotApplicable",
+
+  /**
+   * The action was skipped for the target.
+   */
+  Skipped: "Skipped",
 }
 
 /**
