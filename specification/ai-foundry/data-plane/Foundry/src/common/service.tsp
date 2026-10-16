@@ -13,11 +13,14 @@ using TypeSpec.Versioning;
 )
 @service(#{ title: "Microsoft Foundry" })
 @server(
-  "https://{accountName}.services.ai.azure.com/api/projects/{projectName}",
+  "https://{accountName}.{cloud}/api/projects/{projectName}",
   "Microsoft Foundry",
   {
     @doc("The AI services account name.")
     accountName: string,
+
+    @doc("The cloud where the AI services account is located.")
+    cloud: Clouds = Clouds.Public,
 
     @doc("The Foundry project name, or _project for the default project.")
     projectName: string = "_project",
@@ -34,5 +37,13 @@ namespace Azure.AI.Projects {
 
     @doc("Microsoft Foundry API version v1.")
     v1: "v1",
+  }
+  @doc("The clouds where Microsoft Foundry is available")
+  enum Clouds {
+    @doc("The public Azure cloud.")
+    Public: "services.ai.azure.com",
+
+    @doc("The Azure US government cloud.")
+    USGov: "services.ai.azure.us",
   }
 }

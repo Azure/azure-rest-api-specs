@@ -36997,6 +36997,14 @@
           ]
         }
       },
+      "Clouds": {
+        "type": "string",
+        "enum": [
+          "services.ai.azure.com",
+          "services.ai.azure.us"
+        ],
+        "description": "The clouds where Microsoft Foundry is available"
+      },
       "ClusterInsightResult": {
         "type": "object",
         "required": [
@@ -93956,12 +93964,20 @@
   },
   "servers": [
     {
-      "url": "https://{accountName}.services.ai.azure.com/api/projects/{projectName}",
+      "url": "https://{accountName}.{cloud}/api/projects/{projectName}",
       "description": "Microsoft Foundry",
       "variables": {
         "accountName": {
           "default": "",
           "description": "The AI services account name."
+        },
+        "cloud": {
+          "default": "services.ai.azure.com",
+          "description": "The cloud where the AI services account is located.",
+          "enum": [
+            "services.ai.azure.com",
+            "services.ai.azure.us"
+          ]
         },
         "projectName": {
           "default": "_project",
