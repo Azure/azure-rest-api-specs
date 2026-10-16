@@ -45,7 +45,6 @@ describe("SDK breaking-change summary", () => {
   });
 
   it.each([
-    "BreakingChange-.Net-Sdk",
     "BreakingChange-Go-Sdk",
     "BreakingChange-Java-Sdk",
     "BreakingChange-JavaScript-Sdk",
@@ -83,6 +82,7 @@ describe("SDK breaking-change summary", () => {
 
   it.each([
     ["BreakingChange-Go-Sdk", "Go"],
+    ["BreakingChange-Java-Sdk", "Java"],
     ["BreakingChange-JavaScript-Sdk", "JavaScript"],
     ["BreakingChange-Python-Sdk", "Python"],
   ])("links reports for %s", (label, language) => {
@@ -92,12 +92,13 @@ describe("SDK breaking-change summary", () => {
       headSha,
       prUrl,
     );
+    expect(hasSdkBreakingChanges([label])).toBe(true);
     expect(summary).toContain(`| ${language} |`);
     expect(summary).toContain(`href="${prUrl}#issuecomment-1"`);
   });
 
-  it.each(["BreakingChange-.Net-Sdk", "BreakingChange-Java-Sdk"])(
-    "omits %s when it is not configured in the shared SDK labels",
+  it.each(["BreakingChange-.Net-Sdk", "BreakingChange-Rust-Sdk"])(
+    "omits %s when it is not configured in the workflow SDK labels",
     (label) => {
       expect(hasSdkBreakingChanges([label])).toBe(false);
       expect(buildSdkBreakingChangesSummary([label], [], headSha, prUrl)).toBe("");
