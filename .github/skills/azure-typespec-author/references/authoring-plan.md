@@ -71,3 +71,10 @@ Key guidance for data-plane:
 2. Define operations inside an `interface` block.
 3. Add `/** */` documentation to all operations.
 4. Data-plane services use `@azure-tools/typespec-azure-core`, not `@azure-tools/typespec-azure-resource-manager`.
+5. Use synchronous templates for GET/read and LIST. For create, update, delete,
+   and custom actions, apply the sync/async behavior selected during intake.
+6. Preserve the target resource's existing key, route, request, and response
+   contracts unless the user explicitly requested a custom shape. Do not ask the
+   user to restate project information already discovered during analysis.
+7. When a full CRUD request supplies one sync/async decision, apply it to create,
+   update, and delete unless the request distinguishes their behavior.

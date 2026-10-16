@@ -62,6 +62,9 @@ assert.match(search, /catalog may guide URL selection but is not required/);
 assert.match(search, /Do not call a knowledge MCP after selecting this route/);
 assert.match(plan, /Do not use `ArmResourcePatchSync` or `ArmResourcePatchAsync`/);
 assert.match(plan, /Preserve every released stable wire contract/);
+assert.match(plan, /Use synchronous templates for GET\/read and LIST/);
+assert.match(plan, /Preserve the target resource's existing key, route, request, and response/);
+assert.match(plan, /full CRUD request supplies one sync\/async decision/);
 
 assert.match(intake, /Add, replace, or promote an API version/);
 assert.match(intake, /Version-scope an existing feature without adding or promoting a version/);
