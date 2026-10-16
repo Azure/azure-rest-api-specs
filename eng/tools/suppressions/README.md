@@ -61,8 +61,7 @@ Folder migrations can retain version-specific suppressions for historical Swagge
 Swagger rename establishes a relocated API version when it keeps the version identifier within
 the same specification area and API plane. This also permits moves between `preview` and `stable`
 without changing the version identifier. Copies, version changes, and moves across specification
-areas or API planes do not qualify. Local `--check-all-under` scans have no Git rename information
-and cannot recognize these relocations.
+areas or API planes do not qualify.
 
 Migration is detected across `preview` and `stable` under the directory immediately containing
 those folders, independently of other services and API planes. The check looks for generated

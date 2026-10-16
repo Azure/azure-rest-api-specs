@@ -211,7 +211,7 @@ union ImageType {
   RecoveryManifest: "RecoveryManifest",
 
   /**
-   * manifest set image type
+   * Manifest set image type
    */
   ManifestSet: "ManifestSet",
 
