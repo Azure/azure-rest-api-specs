@@ -1,8 +1,9 @@
 import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = new URL(".", import.meta.url).pathname;
+const root = fileURLToPath(new URL(".", import.meta.url));
 const sourceDirectory = join(root, "examples", "2026-10-15-preview");
 const generatedDirectory = join(root, "preview", "2026-10-15-preview", "examples");
 const removedReceiptFields = [
