@@ -220,6 +220,10 @@ using Azure.AI.Projects;
 @@clientName(CreateTelephonyBindingRequest, "CreateTelephonyBindingInput");
 @@clientName(CreateTelephonyCallJobRequest, "CreateTelephonyCallJobInput");
 @@clientName(
+  CreateSipTelephonyBindingRequest,
+  "CreateSipTelephonyBindingInput"
+);
+@@clientName(
   CreateTwilioTelephonyBindingRequest,
   "CreateTwilioTelephonyBindingInput"
 );
