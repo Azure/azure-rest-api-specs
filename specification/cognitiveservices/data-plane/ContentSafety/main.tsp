@@ -2,6 +2,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "./validate-examples-lib.mjs";
 import "./routes.tsp";
 import "./client.tsp";
 
