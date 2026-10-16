@@ -59,17 +59,19 @@ suppressions:
   - code: BodyTopLevelProperties
     from: desktopvirtualization.json
     reason: |
-      Our service design forces this behavior -> The response in this new API aligns with an existing API
-      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
-      and will be in the same public version, so we would want to make sure they share a similar pattern.
+      This GET-only endpoint returns provisioning-operation status, not an independently managed ARM
+      resource. Operation progress, start/end timestamps, and error information belong to the top-level
+      operation-status envelope; properties contains the session-host provisioning details. Moving the
+      operation metadata into properties would change the operation-status response contract.
     where:
       - $.definitions.SessionHostManagementProvisioningStatus
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
     reason: |
-      Our service design forces this behavior -> The response in this new API aligns with an existing API
-      (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related
-      and will be in the same public version, so we would want to make sure they share a similar pattern.
+      This GET-only schema represents provisioning-operation status rather than a tracked or proxy
+      resource. Its optional id and name identify the asynchronous operation, and the response has no
+      ARM resource type. Requiring resource-envelope id, name, and type would change this operation-status
+      contract rather than describe an independently managed ARM resource.
     where:
       - $.definitions.SessionHostManagementProvisioningStatus
   - code: DefinitionsPropertiesNamesCamelCase

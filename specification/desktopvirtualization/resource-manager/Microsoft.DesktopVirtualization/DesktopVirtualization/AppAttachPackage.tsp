@@ -96,27 +96,6 @@ interface AppAttachPackages {
   >;
 }
 
-/**
- * Operations for expanding MSIX files associated with App Attach packages.
- * @Introduced in 2026-02-01-preview
- */
-@added(Versions.vLatestPreview)
-@armResourceOperations
-interface AppAttachMsixFile {
-  /**
-   * Expands MSIX files from the specified sources and outputs them to the designated file share paths.
-   */
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
-  @action("expandMsixFile")
-  expand is ArmResourceActionAsync<
-    AppAttachPackage,
-    ExpandMsixFileRequest,
-    ArmResponse<ExpandMsixFileResult> & ArmAsyncOperationHeader,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = ExpandMsixFileResult> &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-}
-
 @@maxLength(AppAttachPackage.name, 100);
 @@minLength(AppAttachPackage.name, 3);
 @@doc(AppAttachPackage.name, "The name of the App Attach package");
