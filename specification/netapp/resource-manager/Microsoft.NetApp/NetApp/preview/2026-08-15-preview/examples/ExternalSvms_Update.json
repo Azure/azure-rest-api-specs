@@ -6,7 +6,9 @@
     "externalSvmName": "contoso-svm",
     "api-version": "2026-08-15-preview",
     "properties": {
-      "properties": {}
+      "tags": {
+        "environment": "production"
+      }
     }
   },
   "responses": {
@@ -16,6 +18,9 @@
         "name": "contoso-svm",
         "type": "Microsoft.NetApp/externalClusters/externalSvms",
         "location": "eastus",
+        "tags": {
+          "environment": "production"
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "ontapSvmName": "contoso-svm",

@@ -30,7 +30,7 @@ model ExtendedSnapshotRetentionPolicy is Azure.ResourceManager.TrackedResource<
     Resource = ExtendedSnapshotRetentionPolicy,
     KeyName = "extendedSnapshotRetentionPolicyName",
     SegmentName = "extendedSnapshotRetentionPolicies",
-    NamePattern = "^[a-zA-Z0-9-]{1,63}"
+    NamePattern = "^[a-zA-Z0-9-]{1,63}$"
   >;
 }
 
