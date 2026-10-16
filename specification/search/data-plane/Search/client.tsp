@@ -3973,7 +3973,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(SearchIndexerClient.deleteSkillset, "deleteSkillset", "!autorest");
 
-// Existing pageable APIs retain their names; only new paging APIs use GetPaged.
+// Existing pageable APIs retain their names; only new paging APIs use GetAll.
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
 @@clientName(SearchIndexClient.listIndexes, "listIndexes", "csharp");
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional: version-disjoint offset-paging/server-driven list ops retain their shared C# SDK name."
@@ -3982,14 +3982,10 @@ namespace KnowledgeBaseRetrievalClient {
   "listIndexesWithSelectedProperties",
   "csharp"
 );
-@@clientName(
-  SearchIndexClient.listSynonymMaps,
-  "GetPagedSynonymMaps",
-  "csharp"
-);
+@@clientName(SearchIndexClient.listSynonymMaps, "GetAllSynonymMaps", "csharp");
 @@clientName(
   SearchIndexClient.getIndexStatsSummary,
-  "GetPagedIndexStatsSummary",
+  "GetAllIndexStatsSummary",
   "csharp"
 );
 @@clientName(SearchIndexClient.listAliases, "GetAliases", "csharp");
@@ -4005,16 +4001,16 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(
   SearchIndexClient.listKnowledgeSourceFiles,
-  "GetPagedKnowledgeSourceFiles",
+  "GetAllKnowledgeSourceFiles",
   "csharp"
 );
-@@clientName(SearchIndexerClient.listIndexers, "GetPagedIndexers", "csharp");
+@@clientName(SearchIndexerClient.listIndexers, "GetAllIndexers", "csharp");
 @@clientName(
   SearchIndexerClient.listDataSources,
-  "GetPagedDataSourceConnections",
+  "GetAllDataSourceConnections",
   "csharp"
 );
-@@clientName(SearchIndexerClient.listSkillsets, "GetPagedSkillsets", "csharp");
+@@clientName(SearchIndexerClient.listSkillsets, "GetAllSkillsets", "csharp");
 
 @@clientName(VectorQuery.k, "kNearestNeighbors", "!autorest");
 @@clientName(VectorQuery.k, "kNearestNeighborsCount", "csharp,javascript");
