@@ -699,9 +699,9 @@ model AgentEvaluatedPolicyLayer {
   @pattern("^sha256:[0-9a-f]{64}$")
   policySemanticDigest: string;
 
-  @doc("SHA-256 digest of the activated manifest, Rego and immutable runtime dependencies under the declared host profile.")
+  @doc("SHA-256 digest of the exact activated executable policy artifact, including the manifest, Rego and immutable runtime dependencies under the declared host profile.")
   @pattern("^sha256:[0-9a-f]{64}$")
-  manifestRegoDigest: string;
+  activatedArtifactDigest: string;
 
   @doc("Decision returned by this layer before aggregate composition.")
   decision: AgentDecision;
@@ -813,38 +813,21 @@ model AgentPolicyEvaluationReceipt {
 }
 
 @added(Versions.v2026_10_15_preview)
-@doc("Receipt for a governed Foundry project. The selected Guardrail is identified in evaluatedPolicyLayers. Project fields fence trusted target identity, explicit hierarchy-binding state and host readiness; they do not describe a generated project policy.")
+@doc("Receipt for a governed Foundry project. The selected Guardrail and every explicit administrator hierarchy policy are identified independently in evaluatedPolicyLayers. The project fields identify the exact RP project incarnation used for this attempt; they do not describe a generated project policy or assert host readiness.")
 model AgentFoundryProjectReceipt extends AgentPolicyEvaluationReceipt {
   profile: "foundryProject";
-
-  @doc("Required intervention points supported by the admitted Foundry host capability. Foundry's authenticated capability authority supplies this value; AACS must not infer it, echo request metadata or claim support when the authoritative value is unavailable. This is not a list of points evaluated by this receipt.")
-  supportedInterventionPoints: AgentInterceptionPoint[];
-
-  @doc("Foundry-owned effective capability version admitted for this target, region, cohort and operation. AACS obtains it from the authenticated capability authority and fails closed when it cannot. API version and request metadata do not establish this capability.")
-  @minLength(1)
-  capabilityVersion: string;
 
   @doc("Governed project selected by targetResourceId.")
   @minLength(1)
   targetResourceId: string;
 
-  @doc("Opaque project incarnation that changes when the target is deleted and recreated.")
-  @minLength(1)
+  @doc("RP-owned project incarnation that changes when the target is deleted, recreated or moved. The runtime obtains it from an authenticated current-project projection; it is not caller metadata.")
+  @pattern("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
   targetIncarnation: string;
-
-  @doc("Monotonic explicit hierarchy-binding state epoch obtained from the authoritative binding interface for this attempt, including a stable no-binding state. AACS must not infer or echo it. Producers constrain this integer to JavaScript's exact range, 0 through 9,007,199,254,740,991.")
-  @minValue(0)
-  @maxValue(9007199254740991)
-  bindingEpoch: int64;
-
-  @doc("Monotonic operation-readiness epoch obtained from the approved authoritative readiness interface for this attempt. AACS must fail closed when it is unavailable and must not infer or echo it. Producers constrain this integer to JavaScript's exact range, 0 through 9,007,199,254,740,991.")
-  @minValue(0)
-  @maxValue(9007199254740991)
-  readinessEpoch: int64;
 }
 
 @added(Versions.v2026_10_15_preview)
-@doc("Receipt for an authorized named-policy gateway evaluation. This profile has no Foundry project incarnation, binding epoch, readiness epoch or project generation.")
+@doc("Receipt for an authorized named-policy gateway evaluation. This profile has no Foundry project identity or hierarchy state.")
 model AgentNamedPolicyReceipt extends AgentPolicyEvaluationReceipt {
   profile: "namedPolicy";
 }
@@ -876,7 +859,7 @@ union AgentEvaluationErrorCode {
   @doc("The exact admitted selected Guardrail revision was deleted or is no longer resolvable.")
   SelectedPolicyRevisionUnavailable: "SelectedPolicyRevisionUnavailable",
 
-  @doc("The explicit hierarchy-binding state or readiness epoch changed before evaluation completed.")
+  @doc("The trusted project identity, selected Guardrail or explicit administrator hierarchy changed before evaluation completed.")
   PolicyFenceChanged: "PolicyFenceChanged",
 
   @doc("The caller or host profile does not support a mandatory policy requirement.")
@@ -892,7 +875,7 @@ union AgentEvaluationErrorCode {
 @added(Versions.v2026_10_15_preview)
 @doc("Actionable October Unified Moderate error details.")
 model AgentEvaluationErrorDetail {
-  @doc("Server-defined error code. Known October codes describe selector, revision, readiness and capability failures.")
+  @doc("Server-defined error code. Known October codes describe selector, revision, project/hierarchy consistency and capability failures.")
   code: AgentEvaluationErrorCode;
 
   @doc("Human-readable error message.")
