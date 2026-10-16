@@ -41,3 +41,10 @@ model PrivilegedResourceFavorite
     NamePattern = "^[A-Za-z0-9_-]{1,2048}$"
   >;
 }
+
+/**
+ * Paged collection of PrivilegedResourceFavorite items
+ */
+model PagedPrivilegedResourceFavorite {
+  ...Azure.Core.Page<PrivilegedResourceFavorite>;
+}
