@@ -683,6 +683,39 @@ union ClusterNodeType {
 }
 
 /**
+ * Failover cluster membership state of a node, as reported by the cluster agent. Mirrors the Windows failover cluster node state.
+ */
+@added(Versions.v2026_11_01_preview)
+union ClusterNodeState {
+  string,
+
+  /**
+   * The cluster agent did not report a state, or reported a state that is not recognized by the service.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * The node is up and participating in the cluster.
+   */
+  NodeUp: "NodeUp",
+
+  /**
+   * The node is down and not participating in the cluster.
+   */
+  NodeDown: "NodeDown",
+
+  /**
+   * The node is paused and is not hosting workloads.
+   */
+  NodePaused: "NodePaused",
+
+  /**
+   * The node is in the process of joining the cluster.
+   */
+  NodeJoining: "NodeJoining",
+}
+
+/**
  * OEM activation status of the cluster.
  */
 union OemActivation {
@@ -2774,6 +2807,13 @@ model ClusterNode {
    */
   @visibility(Lifecycle.Read)
   oemActivation?: OemActivation;
+
+  /**
+   * Failover cluster membership state of the node, as most recently reported by the cluster agent. This reflects the last reported state and is not a live health probe. The value is `Unknown` when the cluster agent does not report a state or reports an unrecognized state.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  nodeState?: ClusterNodeState;
 }
 
 /**

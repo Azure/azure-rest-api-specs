@@ -11892,7 +11892,54 @@
           "$ref": "#/definitions/OemActivation",
           "description": "OEM activation status of the node.",
           "readOnly": true
+        },
+        "nodeState": {
+          "$ref": "#/definitions/ClusterNodeState",
+          "description": "Failover cluster membership state of the node, as most recently reported by the cluster agent. This reflects the last reported state and is not a live health probe. The value is `Unknown` when the cluster agent does not report a state or reports an unrecognized state.",
+          "readOnly": true
         }
+      }
+    },
+    "ClusterNodeState": {
+      "type": "string",
+      "description": "Failover cluster membership state of a node, as reported by the cluster agent. Mirrors the Windows failover cluster node state.",
+      "enum": [
+        "Unknown",
+        "NodeUp",
+        "NodeDown",
+        "NodePaused",
+        "NodeJoining"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterNodeState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The cluster agent did not report a state, or reported a state that is not recognized by the service."
+          },
+          {
+            "name": "NodeUp",
+            "value": "NodeUp",
+            "description": "The node is up and participating in the cluster."
+          },
+          {
+            "name": "NodeDown",
+            "value": "NodeDown",
+            "description": "The node is down and not participating in the cluster."
+          },
+          {
+            "name": "NodePaused",
+            "value": "NodePaused",
+            "description": "The node is paused and is not hosting workloads."
+          },
+          {
+            "name": "NodeJoining",
+            "value": "NodeJoining",
+            "description": "The node is in the process of joining the cluster."
+          }
+        ]
       }
     },
     "ClusterNodeType": {
