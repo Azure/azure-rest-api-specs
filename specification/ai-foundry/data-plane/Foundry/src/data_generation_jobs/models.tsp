@@ -18,7 +18,7 @@ union DataGenerationJobType {
   @doc("Simple question and answers between user and agent.")
   simple_qna: "simple_qna",
 
-  @doc("Single turn query and response from agent traces.")
+  @doc("Samples from captured turns or reconstructed conversations in agent traces.")
   traces: "traces",
 
   @doc("Tool calling conversation between user and agent.")
@@ -31,7 +31,7 @@ union DataGenerationJobType {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("LLM model options for data generation jobs.")
 model DataGenerationModelOptions {
-  @doc("Base model name used to generate data.")
+  @doc("Base model name used to generate data. For trace jobs, a nonempty value is required when `generate_test_case_description` is true; model options can be omitted when descriptions are disabled.")
   `model`: string;
 }
 
@@ -96,7 +96,7 @@ model EvaluationDataGenerationJobOutputConfiguration {
   @doc("Tags to assign to the output dataset.")
   tags?: Record<string>;
 
-  @doc("Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows.")
+  @doc("Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows. For conversation-level trace samples, `merge` preserves conversation snapshots rather than unioning newly observed turns into an existing snapshot.")
   write_mode?: DataGenerationJobOutputWriteMode = DataGenerationJobOutputWriteMode.overwrite;
 }
 
@@ -133,7 +133,7 @@ union DataGenerationJobOutputWriteMode {
   @doc("Default behavior. Write newly generated output without merging it with an existing output. For dataset outputs, creates the next dataset version using only newly generated rows.")
   overwrite: "overwrite",
 
-  @doc("Merge newly generated output into an existing output. For trace data generation jobs that output evaluation datasets, creates the next dataset version by merging newly generated rows with the latest existing dataset version and de-duping trace rows. For fine-tuning file outputs, merges into the file identified by `merge_file_id`.")
+  @doc("Merge newly generated output into an existing output. For trace data generation jobs that output evaluation datasets, creates the next dataset version by merging newly generated rows with the latest existing dataset version and de-duping trace rows. Conversation rows are conversation snapshots; merging does not union newly observed turns into an existing conversation snapshot. For fine-tuning file outputs, merges into the file identified by `merge_file_id`.")
   merge: "merge",
 }
 
@@ -147,6 +147,26 @@ model DataGenerationJobResult {
 
   @doc("The token usage information for the data generation job.")
   token_usage?: DataGenerationTokenUsage;
+
+  @doc("Nonfatal warnings associated with otherwise usable output. `TestCaseDescriptionGenerationIncomplete` indicates that conversation rows were produced but one or more optional descriptions failed. Warning messages do not expose raw provider or model error bodies.")
+  warnings?: DataGenerationWarning[];
+}
+
+@doc("The supported nonfatal data generation warning codes.")
+union DataGenerationWarningCode {
+  string,
+
+  @doc("Usable conversation rows were produced, but one or more optional test-case descriptions could not be generated.")
+  TestCaseDescriptionGenerationIncomplete: "TestCaseDescriptionGenerationIncomplete",
+}
+
+@doc("A nonfatal warning associated with data generation output.")
+model DataGenerationWarning {
+  @doc("The warning code.")
+  code: DataGenerationWarningCode;
+
+  @doc("A safe, human-readable warning message that does not include raw provider or model error bodies.")
+  message: string;
 }
 
 @doc("Data Generation Job resource.")
@@ -158,7 +178,7 @@ model DataGenerationJob is JobLike<DataGenerationJobResult, never> {
   @doc("The sources used for the data generation job.")
   sources: DataGenerationJobSource[];
 
-  @doc("The generation configuration for the data generation job.")
+  @doc("The effective generation configuration for the data generation job. For trace jobs, create, get, and list responses include `sample_level` and `generate_test_case_description`, with effective values `turn` and false when omitted in the request or absent from an older stored job.")
   generation_configuration: DataGenerationJobConfiguration;
 
   @doc("The scenario of the data generation job. Either for fine-tuning or evaluation.")
@@ -227,7 +247,7 @@ model FileDataGenerationJobOutput extends DataGenerationJobOutput {
   filename: string;
 }
 
-@doc("Dataset output for a data generation job.")
+@doc("Dataset output for a data generation job. Conversation-level trace rows contain `test_case_id`, `messages`, `tool_definitions`, and `metadata`. A successful optional description adds `test_case_description`. If description generation fails, the row is retained with safe row-level status and error metadata, without raw provider or model error bodies.")
 model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
   @doc("Dataset output.")
   type: DataGenerationJobOutputType.dataset;
@@ -321,17 +341,34 @@ model SimpleQnADataGenerationJobConfiguration
   question_types?: SimpleQnAFineTuningQuestionType[];
 }
 
-@doc("The configuration for a data generation job with Traces type.")
+@doc("The supported trace sample levels. The effective default is `turn`.")
+union TraceSampleLevel {
+  string,
+
+  @doc("Generate one sample per eligible captured turn. This is the existing default behavior.")
+  turn: "turn",
+
+  @doc("Reconstruct one evaluation sample per observed conversation. Requires `scenario` to be `evaluation` and the `Foundry-Features: DataGenerationJobs=V1Preview` request header.")
+  conversation: "conversation",
+}
+
+@doc("The configuration for a data generation job with Traces type. Existing turn-level requests remain valid and behaviorally unchanged. The service validates cross-property requirements: `conversation` is valid only for the `evaluation` scenario, and generating descriptions requires `conversation` and a nonempty `model_options.model`. Conversation reconstruction does not require model options when descriptions are disabled.")
 model TracesDataGenerationJobConfiguration
   extends DataGenerationJobConfiguration {
   @doc("The data generation job type, which is Traces for this model.")
   type: DataGenerationJobType.traces;
 
-  @doc("Maximum number of samples to generate, up to service-defined limits. If omitted, sampling is turned off.")
+  @doc("Maximum number of samples to generate, up to service-defined limits. When `sample_level` is `conversation`, counts whole conversation candidates rather than individual turns. If omitted, sampling is turned off.")
   max_samples?: int32;
 
   @doc("Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.")
   redact_private_content?: boolean = true;
+
+  @doc("Controls whether output rows represent captured turns or reconstructed conversations. Defaults to `turn`. The service rejects `conversation` unless `scenario` is `evaluation` and the request includes `Foundry-Features: DataGenerationJobs=V1Preview`. Ordinary turn-level requests do not require this opt-in. Responses return the effective value, including `turn` when omitted or when reading older stored jobs.")
+  sample_level?: TraceSampleLevel = TraceSampleLevel.turn;
+
+  @doc("Whether to generate an AI-authored test-case description for each new retained conversation row. Defaults to false. The service rejects true unless `sample_level` is `conversation` and `model_options.model` is nonempty. Model options are not required for conversation reconstruction when descriptions are disabled. Responses return the effective value, including false when omitted or when reading older stored jobs.")
+  generate_test_case_description?: boolean = false;
 }
 
 @doc("The configuration for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")

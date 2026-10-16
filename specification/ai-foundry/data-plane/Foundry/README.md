@@ -63,6 +63,297 @@ The `npx tsv .` has a console spew that shows the diff between current and stage
 changes. Once you `git add` all the changed files and run `npx tsv .` again, there should
 no longer be any diffs to show.
 
+## Conversation-level trace data generation
+
+Trace jobs use the public `generation_configuration` request shape. This
+TypeSpec project does not define the legacy `inputs.options` shape.
+
+`sample_level` is optional and defaults to `turn` (one sample per eligible
+captured turn). `conversation` reconstructs one evaluation sample per observed
+conversation. `generate_test_case_description` is optional and defaults to
+`false`. When enabled, it generates one AI-authored description for each new
+retained conversation row, using the existing `model_options.model`.
+Conversation reconstruction without descriptions does not require model options.
+Existing turn-level requests remain valid and behaviorally unchanged.
+
+The service enforces the following rules at runtime; the schema does not express
+these cross-property or conditional-header requirements:
+
+| Invalid request                                                                                            | Reason for rejection                                   |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `sample_level: "conversation"` with a scenario other than `evaluation`                                     | Conversation samples are evaluation-only.              |
+| `generate_test_case_description: true` with `sample_level: "turn"` or omitted                              | Descriptions require conversation samples.             |
+| `generate_test_case_description: true` with missing `model_options` or missing/empty `model_options.model` | Description generation requires a nonempty model name. |
+| `sample_level: "conversation"` without `Foundry-Features: DataGenerationJobs=V1Preview`                    | Conversation generation requires preview opt-in.       |
+
+The feature header remains optional for ordinary turn-level requests. Reading an
+existing job does not require preview opt-in. Create, get, and list responses
+return effective trace settings, including `turn` and `false` for settings omitted
+from requests or absent from older stored jobs.
+
+Conversation dataset rows contain `test_case_id`, `messages`, `tool_definitions`,
+and `metadata`. A successful optional description adds `test_case_description`.
+Description failure retains the row and records safe row-level status/error
+metadata, without raw provider or model error bodies.
+`max_samples` counts whole conversation candidates, not turns.
+Dataset merge preserves conversation-snapshot semantics: it is not a union of
+newly observed turns into an existing conversation snapshot.
+
+These complete wire examples are maintained here because OpenAPI3 operation
+example emission through the existing polymorphic base types omits subtype
+fields.
+
+After regenerating OpenAPI, run the focused contract checks from this folder:
+
+```cmd
+node --test tests\data-generation-traces.test.mjs
+```
+
+### Default turn request and effective defaults
+
+```http
+POST /data_generation_jobs?api-version=v1
+Content-Type: application/json
+```
+
+<!-- trace-generation-example: turn-request -->
+
+```json
+{
+  "name": "travel-support-turns",
+  "scenario": "evaluation",
+  "sources": [
+    {
+      "type": "traces",
+      "agent_name": "travel-support-agent",
+      "start_time": 1792022400
+    }
+  ],
+  "generation_configuration": {
+    "type": "traces",
+    "max_samples": 25
+  }
+}
+```
+
+Both new settings and the preview header are omitted.
+
+```http
+HTTP/1.1 201 Created
+Operation-Location: https://travel-foundry.services.ai.azure.com/api/projects/travel/data_generation_jobs/dgj-turns?api-version=v1
+Location: https://travel-foundry.services.ai.azure.com/api/projects/travel/data_generation_jobs/dgj-turns?api-version=v1
+```
+
+<!-- trace-generation-example: turn-response -->
+
+```json
+{
+  "id": "dgj-turns",
+  "name": "travel-support-turns",
+  "scenario": "evaluation",
+  "sources": [
+    {
+      "type": "traces",
+      "agent_name": "travel-support-agent",
+      "start_time": 1792022400
+    }
+  ],
+  "generation_configuration": {
+    "type": "traces",
+    "max_samples": 25,
+    "sample_level": "turn",
+    "generate_test_case_description": false
+  },
+  "status": "queued",
+  "created_at": 1792108800
+}
+```
+
+### Conversation request without descriptions or model options
+
+```http
+POST /data_generation_jobs?api-version=v1
+Content-Type: application/json
+Foundry-Features: DataGenerationJobs=V1Preview
+```
+
+<!-- trace-generation-example: conversation-request -->
+
+```json
+{
+  "name": "travel-support-conversations",
+  "scenario": "evaluation",
+  "sources": [
+    {
+      "type": "traces",
+      "agent_name": "travel-support-agent",
+      "start_time": 1792022400
+    }
+  ],
+  "generation_configuration": {
+    "type": "traces",
+    "sample_level": "conversation",
+    "max_samples": 10
+  }
+}
+```
+
+```http
+HTTP/1.1 201 Created
+Operation-Location: https://travel-foundry.services.ai.azure.com/api/projects/travel/data_generation_jobs/dgj-conversations?api-version=v1
+Location: https://travel-foundry.services.ai.azure.com/api/projects/travel/data_generation_jobs/dgj-conversations?api-version=v1
+```
+
+<!-- trace-generation-example: conversation-response -->
+
+```json
+{
+  "id": "dgj-conversations",
+  "name": "travel-support-conversations",
+  "scenario": "evaluation",
+  "sources": [
+    {
+      "type": "traces",
+      "agent_name": "travel-support-agent",
+      "start_time": 1792022400
+    }
+  ],
+  "generation_configuration": {
+    "type": "traces",
+    "sample_level": "conversation",
+    "generate_test_case_description": false,
+    "max_samples": 10
+  },
+  "status": "queued",
+  "created_at": 1792108800
+}
+```
+
+### Conversation request with descriptions and model options
+
+```http
+POST /data_generation_jobs?api-version=v1
+Content-Type: application/json
+Foundry-Features: DataGenerationJobs=V1Preview
+```
+
+<!-- trace-generation-example: description-request -->
+
+```json
+{
+  "name": "travel-support-described-conversations",
+  "scenario": "evaluation",
+  "sources": [
+    {
+      "type": "traces",
+      "agent_name": "travel-support-agent",
+      "start_time": 1792022400
+    }
+  ],
+  "generation_configuration": {
+    "type": "traces",
+    "sample_level": "conversation",
+    "generate_test_case_description": true,
+    "model_options": {
+      "model": "gpt-4.1"
+    },
+    "max_samples": 10
+  }
+}
+```
+
+```http
+HTTP/1.1 201 Created
+Operation-Location: https://travel-foundry.services.ai.azure.com/api/projects/travel/data_generation_jobs/dgj-descriptions?api-version=v1
+Location: https://travel-foundry.services.ai.azure.com/api/projects/travel/data_generation_jobs/dgj-descriptions?api-version=v1
+```
+
+<!-- trace-generation-example: description-response -->
+
+```json
+{
+  "id": "dgj-descriptions",
+  "name": "travel-support-described-conversations",
+  "scenario": "evaluation",
+  "sources": [
+    {
+      "type": "traces",
+      "agent_name": "travel-support-agent",
+      "start_time": 1792022400
+    }
+  ],
+  "generation_configuration": {
+    "type": "traces",
+    "sample_level": "conversation",
+    "generate_test_case_description": true,
+    "model_options": {
+      "model": "gpt-4.1"
+    },
+    "max_samples": 10
+  },
+  "status": "queued",
+  "created_at": 1792108800
+}
+```
+
+### Completed conversation job with an incomplete-description warning
+
+```http
+GET /data_generation_jobs/dgj-descriptions?api-version=v1
+```
+
+```http
+HTTP/1.1 200 OK
+```
+
+<!-- trace-generation-example: warning-response -->
+
+```json
+{
+  "id": "dgj-descriptions",
+  "name": "travel-support-described-conversations",
+  "scenario": "evaluation",
+  "sources": [
+    {
+      "type": "traces",
+      "agent_name": "travel-support-agent",
+      "start_time": 1792022400
+    }
+  ],
+  "generation_configuration": {
+    "type": "traces",
+    "sample_level": "conversation",
+    "generate_test_case_description": true,
+    "model_options": {
+      "model": "gpt-4.1"
+    },
+    "max_samples": 10
+  },
+  "status": "succeeded",
+  "created_at": 1792108800,
+  "finished_at": 1792108920,
+  "result": {
+    "generated_samples": 10,
+    "outputs": [
+      {
+        "type": "dataset",
+        "name": "travel-support-conversations",
+        "version": "1"
+      }
+    ],
+    "warnings": [
+      {
+        "code": "TestCaseDescriptionGenerationIncomplete",
+        "message": "Conversation rows were retained, but one or more optional test-case descriptions could not be generated."
+      }
+    ]
+  }
+}
+```
+
+The warning is nonfatal: usable conversation rows were produced even though some
+optional descriptions failed.
+
 ## Emitting Python code
 
 Please do not emit SDKs in the public Python repo. SDK originated from TypeSpec that is private should not be pushed into a branch in a public GitHub repo.
