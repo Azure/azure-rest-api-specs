@@ -1,6 +1,9 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
+
+using TypeSpec.Versioning;
 
 namespace AttestationService;
 
@@ -50,6 +53,12 @@ union AttestationType {
    * Edge TPM Virtualization Based Security
    */
   Tpm: "Tpm",
+
+  /**
+  * Pluton attestation
+  */
+  @added(Versions.v2026_03_11_preview)
+  Pluton: "Pluton",
 
   /**
    * Intel TDX Virtual Machine
@@ -958,3 +967,35 @@ model AttestationResult {
   @encodedName("application/json", "rp_data")
   deprecatedRpData?: string;
 }
+
+// BEGIN 2026-03-11-preview
+// Transitional approach: TypeSpec → Swagger → AutoRest → C#
+// until the project migrates to .NET 10 and can use the TypeSpec C# emitter directly.
+
+/**
+ * Attestation request for Pluton attestation.
+ */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@added(Versions.v2026_03_11_preview)
+model PlutonAttestationRequest {
+  /**
+   * Protocol data containing artifacts for attestation.
+   */
+  @encode(BytesKnownEncoding.base64url)
+  data?: bytes;
+}
+
+/**
+ * Attestation response for Pluton attestation.
+ */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@added(Versions.v2026_03_11_preview)
+model PlutonAttestationResponse {
+  /**
+   * Protocol data containing attestation service response.
+   */
+  @encode(BytesKnownEncoding.base64url)
+  data?: bytes;
+}
+
+// END 2026-03-11-preview
