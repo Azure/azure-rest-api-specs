@@ -29,12 +29,13 @@ This includes but is not limited to:
 
 ## MCP Tools
 
-| Tool                                              | Purpose                                                                                                                                                                                                  |
-| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `azure-sdk-mcp:azsdk_typespec_retrieve_knowledge` | Retrieve knowledge for requests **not** covered by the nine categories in [reference-document-links.md](references/reference-document-links.md). Covered cases use agentic search (`web_fetch`) instead. |
-| `azure-sdk-mcp:azsdk_run_typespec_validation`     | Validate TypeSpec                                                                                                                                                                                        |
+| Tool                                              | Purpose                                                                                                                                                                                                                                               |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `azure-sdk-mcp:azsdk_typespec_retrieve_knowledge` | Step 3 only: retrieve knowledge for requests **not** covered by the nine categories in [reference-document-links.md](references/reference-document-links.md). Never use during Step 2 intake. Covered cases use agentic search (`web_fetch`) instead. |
+| `azure-sdk-mcp:azsdk_run_typespec_validation`     | Step 5: validate TypeSpec. Never use during Step 2 intake.                                                                                                                                                                                            |
 
-**Prerequisite:** `azure-sdk-mcp` server must be running.
+**Prerequisite:** The `azure-sdk-mcp` server must be running for Step 3's
+uncovered-case retrieval and Step 5 validation, not for Step 2 intake.
 
 ## Rules
 
@@ -63,7 +64,8 @@ See [analyze-project.md](references/analyze-project.md).
 
 ### Step 2: Intake
 
-See [intake.md](references/intake.md).
+See [intake.md](references/intake.md). Use agentic search only; **do not call any
+MCP tools during intake**, including as a fallback for missing guidance.
 
 ### Step 3: Build Authoring Plan
 

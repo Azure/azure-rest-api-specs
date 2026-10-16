@@ -7,6 +7,10 @@
 
 ## Procedure
 
+Use only `web_fetch` and local search tools. Do not call MCP tools or use them as a
+fallback. If no relevant URL or sufficient guidance is found, return the guidance
+gap to the caller instead of substituting MCP retrieval.
+
 1. **Select URLs** — read [reference-document-links.md](reference-document-links.md). Select only the URLs relevant to the user's request and Step 1 result. If unsure, select all.
 2. **Fetch** — `web_fetch` each selected URL. Extract content as markdown.
 3. **Search** — find content matching a query derived from the user's request and Step 1 result. Choose the most effective local search tool available.
