@@ -31,6 +31,20 @@ interface Subscriptions {
      */
     @query("includeExtendedLocations")
     includeExtendedLocations?: boolean,
+
+    /**
+     * Whether to include system-policy restrictions for standard locations. Supported only in API version 2022-12-01.
+     * When true, evaluates enforced system-policy deny rules that apply at the subscription scope and depend only on location,
+     * and adds policyRestrictions to each standard location without removing locations from the list.
+     * Non-system policies and rules requiring resource type, resource group, or other resource data are not evaluated.
+     * When omitted or false, the response is unchanged and policyRestrictions is not returned.
+     * Extended locations, including edge zones, remain unchanged and are not annotated.
+     * If policy evaluation fails, times out, is unavailable, or cannot determine a result, successful location retrieval
+     * still returns HTTP 200 with status set to Unknown and reason set to EvaluationUnavailable for affected standard locations.
+     * Errors retrieving the location list are returned normally.
+     */
+    @query("policyAware")
+    policyAware?: boolean,
   ): ArmResponse<LocationListResult> | CloudError;
 
   /**
