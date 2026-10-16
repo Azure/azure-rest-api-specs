@@ -72,4 +72,20 @@ describe("getIssueNumber", () => {
     // Call function and expect it to throw
     await expect(getIssueNumber(mockGithub, "abc123", defaultLogger)).rejects.toThrow();
   });
+
+  it("can restrict a commit search to the checked repository", async () => {
+    mockGithub.rest.search.issuesAndPullRequests.mockResolvedValue({
+      data: { total_count: 1, items: [{ number: 123 }] },
+    });
+    await expect(
+      getIssueNumber(mockGithub, "abc123", createMockLogger(), {
+        owner: "Azure",
+        repo: "test-repo",
+      }),
+    ).resolves.toEqual({ issueNumber: 123 });
+    expect(mockGithub.rest.search.issuesAndPullRequests).toHaveBeenCalledWith({
+      q: "sha:abc123 type:pr state:open repo:Azure/test-repo",
+      advanced_search: "true",
+    });
+  });
 });

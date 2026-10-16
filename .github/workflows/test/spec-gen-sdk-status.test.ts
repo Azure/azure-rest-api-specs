@@ -1,10 +1,11 @@
 import fs from "node:fs";
+import { getOctokit } from "@actions/github";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SdkName } from "../../shared/src/sdk-types.ts";
 import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.ts";
 import * as artifacts from "../src/artifacts.ts";
-import { setSpecGenSdkStatusImpl } from "../src/spec-gen-sdk-status.ts";
-import { createMockCore, createMockGithub } from "./mocks.ts";
+import setSpecGenSdkStatus, { setSpecGenSdkStatusImpl } from "../src/spec-gen-sdk-status.ts";
+import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
 
 describe("spec-gen-sdk-status", () => {
   let mockGithub: ReturnType<typeof createMockGithub>;
@@ -18,6 +19,9 @@ describe("spec-gen-sdk-status", () => {
   beforeEach(() => {
     // Setup mocks using the helper functions
     mockGithub = createMockGithub();
+    mockGithub.rest.pulls.get.mockResolvedValue({
+      data: { state: "open", head: { sha: "testSha" } },
+    });
     mockCore = createMockCore();
 
     // Setup specific mocks
@@ -50,6 +54,171 @@ describe("spec-gen-sdk-status", () => {
     getAzurePipelineArtifactMock.mockRestore();
     appendFileSyncMock.mockRestore();
   });
+
+  function runStatus(overrides: Partial<Parameters<typeof setSpecGenSdkStatusImpl>[0]> = {}) {
+    return setSpecGenSdkStatusImpl({
+      owner: "testOwner",
+      repo: "testRepo",
+      head_sha: "testSha",
+      target_url: "https://example.com",
+      github: mockGithub,
+      core: mockCore,
+      issue_number: 123,
+      ...overrides,
+    });
+  }
+
+  it("does not publish status or handoff artifacts for a closed PR", async () => {
+    mockGithub.rest.pulls.get.mockResolvedValue({ data: { state: "closed" } });
+    await runStatus();
+    expect(mockGithub.rest.checks.listForRef).not.toHaveBeenCalled();
+    expect(mockGithub.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+    expect(mockCore.setOutput).not.toHaveBeenCalled();
+  });
+
+  it("stops commit PR pagination as soon as it finds an eligible PR", async () => {
+    const fetchMock = vi.fn((input: Parameters<typeof fetch>[0]) => {
+      const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+      if (url.includes("/pulls")) {
+        const page = Number(new URL(url).searchParams.get("page") ?? 1);
+        return Promise.resolve(
+          Response.json(
+            [
+              {
+                number: 123,
+                state: page === 2 ? "open" : "closed",
+                head: { sha: "testSha" },
+                base: { repo: { full_name: "testOwner/testRepo" } },
+              },
+            ],
+            {
+              headers:
+                page < 3
+                  ? {
+                      link: `<https://api.github.com/repos/testOwner/testRepo/commits/testSha/pulls?page=${page + 1}>; rel="next"`,
+                    }
+                  : {},
+            },
+          ),
+        );
+      }
+      const response = Response.json({ total_count: 0, check_runs: [] });
+      Object.defineProperty(response, "url", { value: url });
+      return Promise.resolve(response);
+    });
+    const github = getOctokit("test-token", { request: { fetch: fetchMock } });
+
+    await runStatus({ github, issue_number: NaN });
+
+    expect(
+      fetchMock.mock.calls.filter(([input]) => {
+        const url =
+          typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+        return url.includes("/pulls");
+      }),
+    ).toHaveLength(2);
+    expect(mockCore.setOutput).not.toHaveBeenCalled();
+  });
+
+  it("uses a known check_run PR without commit or search discovery", async () => {
+    const context = createMockContext();
+    context.eventName = "check_run";
+    context.payload = {
+      repository: { id: 1, name: "testRepo", owner: { login: "testOwner" } },
+      check_run: {
+        head_sha: "testSha",
+        details_url: "https://dev.azure.com/project/_build/results?buildId=123",
+        pull_requests: [{ number: 123, head: { sha: "testSha" }, base: { repo: { id: 1 } } }],
+      },
+    };
+    mockGithub.rest.checks.listForRef.mockResolvedValue({
+      data: {
+        check_runs: [
+          { app: { name: "Azure Pipelines" }, name: "SDK Validation", status: "in_progress" },
+        ],
+      },
+    });
+
+    await setSpecGenSdkStatus({ github: mockGithub, context, core: mockCore });
+
+    expect(mockGithub.rest.pulls.get).toHaveBeenCalledTimes(1);
+    expect(mockGithub.rest.repos.listPullRequestsAssociatedWithCommit).not.toHaveBeenCalled();
+    expect(mockGithub.rest.search.issuesAndPullRequests).not.toHaveBeenCalled();
+    expect(mockCore.setOutput).toHaveBeenCalledWith("issue_number", 123);
+    expect(mockGithub.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({ sha: "testSha", state: "pending" }),
+    );
+  });
+
+  it.each([
+    { state: "closed", sha: "testSha", repo: "testOwner/testRepo", allowed: false },
+    { state: "open", sha: "testSha", repo: "other/repo", allowed: false },
+    { state: "open", sha: "testSha", repo: "testOwner/testRepo", allowed: true },
+  ])(
+    "handles check_run PR state $state, head $sha, repo $repo",
+    async ({ state, sha, repo, allowed }) => {
+      mockGithub.rest.repos.listPullRequestsAssociatedWithCommit.mockResolvedValue({
+        data: [{ number: 123, state, head: { sha }, base: { repo: { full_name: repo } } }],
+      });
+      mockGithub.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            { app: { name: "Azure Pipelines" }, name: "SDK Validation", status: "in_progress" },
+          ],
+        },
+      });
+      await runStatus({ issue_number: NaN });
+      expect(mockGithub.rest.repos.createCommitStatus).toHaveBeenCalledTimes(allowed ? 1 : 0);
+      if (allowed) {
+        expect(mockCore.setOutput).toHaveBeenCalledWith("issue_number", 123);
+        expect(mockGithub.rest.search.issuesAndPullRequests).not.toHaveBeenCalled();
+      }
+    },
+  );
+
+  it.each([
+    { state: "open", lookupFails: false },
+    { state: "closed", lookupFails: false },
+    { state: "open", lookupFails: true },
+  ])(
+    "rechecks PR state after fork lookup needs search ($state, lookup failure: $lookupFails)",
+    async ({ state, lookupFails }) => {
+      if (lookupFails) {
+        mockGithub.rest.repos.listPullRequestsAssociatedWithCommit.mockRejectedValue(
+          new Error("Commit lookup unavailable"),
+        );
+      }
+      mockGithub.rest.search.issuesAndPullRequests.mockResolvedValue({
+        data: { total_count: 1, items: [{ number: 123 }] },
+      });
+      mockGithub.rest.pulls.get.mockResolvedValue({
+        data: { state, head: { sha: "testSha" } },
+      });
+      mockGithub.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            { app: { name: "Azure Pipelines" }, name: "SDK Validation", status: "in_progress" },
+          ],
+        },
+      });
+      await runStatus({ issue_number: NaN });
+      expect(mockGithub.rest.search.issuesAndPullRequests).toHaveBeenCalledExactlyOnceWith({
+        q: "sha:testSha type:pr state:open repo:testOwner/testRepo",
+        advanced_search: "true",
+      });
+      expect(mockGithub.rest.repos.createCommitStatus).toHaveBeenCalledTimes(
+        state === "open" ? 1 : 0,
+      );
+      if (lookupFails) {
+        expect(mockCore.warning).toHaveBeenCalledWith(
+          expect.stringContaining("Commit lookup unavailable"),
+        );
+        expect(mockGithub.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+          expect.objectContaining({ state: "pending", sha: "testSha" }),
+        );
+      }
+    },
+  );
 
   it("should set pending status when checks are not completed", async () => {
     // Setup GitHub API to return incomplete checks
@@ -370,8 +539,6 @@ describe("spec-gen-sdk-status", () => {
     // No status should be set when there are no SDK Validation checks.
     expect(mockGithub.rest.repos.createCommitStatus).not.toHaveBeenCalled();
 
-    // Outputs should still be set for downstream artifact upload steps.
-    expect(mockCore.setOutput).toBeCalledWith("head_sha", "testSha");
-    expect(mockCore.setOutput).toBeCalledWith("issue_number", 123);
+    expect(mockCore.setOutput).not.toHaveBeenCalled();
   });
 });

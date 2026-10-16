@@ -7,7 +7,7 @@ import {
   PER_PAGE_MAX,
 } from "../../shared/src/github.ts";
 import { byDate, invert } from "../../shared/src/sort.ts";
-import { extractInputs } from "./context.ts";
+import { extractInputs, getOpenPullRequest } from "./context.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "./github.ts";
 
 // TODO: Add tests
@@ -20,6 +20,8 @@ export default async function setStatus(
   overridingLabel: string,
 ): Promise<void> {
   const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
+  const pr = await getOpenPullRequest(github, core, { owner, repo, issue_number });
+  if (!pr) return;
 
   // Default target is this run itself
   const target_url =
@@ -37,6 +39,7 @@ export default async function setStatus(
     monitoredWorkflowName,
     requiredStatusName,
     overridingLabel,
+    prLabels: pr.labels.map((label) => label.name),
   });
 }
 /* v8 ignore stop */
@@ -52,6 +55,7 @@ export async function setStatusImpl({
   monitoredWorkflowName,
   requiredStatusName,
   overridingLabel,
+  prLabels,
 }: {
   owner: string;
   repo: string;
@@ -63,6 +67,7 @@ export async function setStatusImpl({
   monitoredWorkflowName: string;
   requiredStatusName: string;
   overridingLabel: string;
+  prLabels?: string[];
 }): Promise<void> {
   if (!isFullGitSha(head_sha)) {
     throw new Error(`head_sha is not a valid full git SHA: '${head_sha}'`);
@@ -74,14 +79,14 @@ export async function setStatusImpl({
   }
   core.setOutput("issue_number", issue_number);
 
-  // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
-  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-    owner: owner,
-    repo: repo,
-    issue_number: issue_number,
-    per_page: PER_PAGE_MAX,
-  });
-  const prLabels = labels.map((label) => label.name);
+  prLabels ??= (
+    await github.paginate(github.rest.issues.listLabelsOnIssue, {
+      owner,
+      repo,
+      issue_number,
+      per_page: PER_PAGE_MAX,
+    })
+  ).map((label) => label.name);
 
   core.info(`Labels: ${inspect(prLabels)}`);
 
