@@ -1,0 +1,44 @@
+parameters:
+  "service-dir":
+    default: "sdk/azureserviceconnectioncontroller"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/openapi.json"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-tools/typespec-java":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-azureserviceconnectioncontroller"
+    namespace: com.azure.resourcemanager.azureserviceconnectioncontroller
+    service-name: "AzureServiceConnectionController" # human-readable service name, whitespace allowed
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-azureserviceconnectioncontroller"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-azureserviceconnectioncontroller"
+  "@azure-tools/typespec-go":
+    flavor: azure
+    service-dir: "sdk/resourcemanager/azureserviceconnectioncontroller"
+    emitter-output-dir: "{output-dir}/{service-dir}/armazureserviceconnectioncontroller"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armazureserviceconnectioncontroller"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-azureserviceconnectioncontroller"
+    namespace: azure.mgmt.azureserviceconnectioncontroller
+    generate-sample: true
+    generate-test: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

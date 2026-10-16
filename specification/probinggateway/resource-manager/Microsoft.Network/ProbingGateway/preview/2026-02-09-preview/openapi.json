@@ -1,0 +1,738 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Probing Gateway Service",
+    "version": "2026-02-09-preview",
+    "description": "Microsoft.Network Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ProbingGateways"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Network/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/probingGateways": {
+      "get": {
+        "operationId": "ProbingGateways_ListBySubscription",
+        "tags": [
+          "ProbingGateways"
+        ],
+        "description": "Lists all Probing Gateways within a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProbingGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProbingGateways_ListBySubscription": {
+            "$ref": "./examples/ProbingGateways_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/probingGateways": {
+      "get": {
+        "operationId": "ProbingGateways_ListByResourceGroup",
+        "tags": [
+          "ProbingGateways"
+        ],
+        "description": "Lists all Probing Gateways within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProbingGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProbingGateways_ListByResourceGroup": {
+            "$ref": "./examples/ProbingGateways_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/probingGateways/{probingGatewayName}": {
+      "get": {
+        "operationId": "ProbingGateways_Get",
+        "tags": [
+          "ProbingGateways"
+        ],
+        "description": "Gets a Probing Gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "probingGatewayName",
+            "in": "path",
+            "description": "The name of the Probing Gateway.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProbingGateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProbingGateways_Get": {
+            "$ref": "./examples/ProbingGateways_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ProbingGateways_CreateOrUpdate",
+        "tags": [
+          "ProbingGateways"
+        ],
+        "description": "Create or update a Probing Gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "probingGatewayName",
+            "in": "path",
+            "description": "The name of the Probing Gateway.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The Probing Gateway parameters supplied to the CreateOrUpdate operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProbingGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ProbingGateway' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProbingGateway"
+            }
+          },
+          "201": {
+            "description": "Resource 'ProbingGateway' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProbingGateway"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProbingGateways_CreateOrUpdate": {
+            "$ref": "./examples/ProbingGateways_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ProbingGateways_Patch",
+        "tags": [
+          "ProbingGateways"
+        ],
+        "description": "Updates a Probing Gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "probingGatewayName",
+            "in": "path",
+            "description": "The name of the Probing Gateway.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProbingGatewayUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProbingGateway"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProbingGateways_Patch": {
+            "$ref": "./examples/ProbingGateways_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ProbingGateways_Delete",
+        "tags": [
+          "ProbingGateways"
+        ],
+        "description": "Deletes a Probing Gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "probingGatewayName",
+            "in": "path",
+            "description": "The name of the Probing Gateway.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProbingGateways_Delete": {
+            "$ref": "./examples/ProbingGateways_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/probingGateways/{probingGatewayName}/topologyReferences": {
+      "post": {
+        "operationId": "ProbingGateways_CreateTopologyReference",
+        "tags": [
+          "ProbingGateways"
+        ],
+        "description": "Notifies the Probing Gateway of a topology reference link or unlink event.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "probingGatewayName",
+            "in": "path",
+            "description": "The name of the Probing Gateway.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProbingGatewayTopologyReferenceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProbingGateways_CreateTopologyReference": {
+            "$ref": "./examples/ProbingGateways_CreateTopologyReference.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.ipV4Address": {
+      "type": "string",
+      "description": "Represent an IP V4 address serialized as a string.\n\nIt is formatted as four 8-bit fields separated by periods."
+    },
+    "AzureServiceConnectionControllerId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A fully qualified ARM resource ID referencing an azure service connection controller.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/AzureServiceConnectionControllers"
+          }
+        ]
+      }
+    },
+    "ProbingGateway": {
+      "type": "object",
+      "description": "Class representing a Probing Gateway.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProbingGatewayProperties",
+          "description": "The properties of the Probing Gateway."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ProbingGatewayEventType": {
+      "type": "string",
+      "description": "The type of Probing Gateway topology reference event.",
+      "enum": [
+        "Linked",
+        "Unlinked"
+      ],
+      "x-ms-enum": {
+        "name": "ProbingGatewayEventType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Linked",
+            "value": "Linked",
+            "description": "The Probing Gateway was linked to a site."
+          },
+          {
+            "name": "Unlinked",
+            "value": "Unlinked",
+            "description": "The Probing Gateway was unlinked from a site."
+          }
+        ]
+      }
+    },
+    "ProbingGatewayIpConfiguration": {
+      "type": "object",
+      "description": "Class representing the Probing Gateway IP configuration properties.",
+      "properties": {
+        "privateIpV4Address": {
+          "$ref": "#/definitions/Azure.Core.ipV4Address",
+          "description": "The private IP V4 address of the Probing Gateway."
+        },
+        "privateIpAllocationMethod": {
+          "type": "string",
+          "description": "Private IP Allocation Method",
+          "default": "Static",
+          "enum": [
+            "Static"
+          ],
+          "x-ms-enum": {
+            "name": "IPAllocationMethod",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Static",
+                "value": "Static",
+                "description": "Static Private IP address allocation"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ProbingGatewayListResult": {
+      "type": "object",
+      "description": "The response of a ProbingGateway list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProbingGateway items on this page",
+          "items": {
+            "$ref": "#/definitions/ProbingGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProbingGatewayProperties": {
+      "type": "object",
+      "description": "Class representing the Probing Gateway properties.",
+      "properties": {
+        "subnetId": {
+          "$ref": "#/definitions/SubnetId",
+          "description": "The reference to the subnet where the Probing Gateway is deployed."
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "description": "The IP configuration parameters for the Probing Gateway.",
+          "items": {
+            "$ref": "#/definitions/ProbingGatewayIpConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "azureServiceConnectionControllerId": {
+          "$ref": "#/definitions/AzureServiceConnectionControllerId",
+          "description": "The reference to the AzureServiceConnectionController resource.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "subnetId"
+      ]
+    },
+    "ProbingGatewayTopologyReferenceRequest": {
+      "type": "object",
+      "description": "The request body describing a Probing Gateway topology reference link or unlink event.",
+      "properties": {
+        "eventType": {
+          "$ref": "#/definitions/ProbingGatewayEventType",
+          "description": "The type of event indicating whether the Probing Gateway was linked or unlinked."
+        },
+        "topologyMapId": {
+          "type": "string",
+          "description": "The internal resource ID of the Topology Map."
+        },
+        "siteId": {
+          "type": "string",
+          "description": "The internal resource ID of the site."
+        },
+        "eventTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the event occurred."
+        }
+      },
+      "required": [
+        "eventType",
+        "topologyMapId",
+        "siteId"
+      ]
+    },
+    "ProbingGatewayUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the ProbingGateway.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ProbingGatewayUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ProbingGatewayUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ProbingGateway.",
+      "properties": {
+        "subnetId": {
+          "$ref": "#/definitions/SubnetId",
+          "description": "The reference to the subnet where the Probing Gateway is deployed."
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "description": "The IP configuration parameters for the Probing Gateway.",
+          "items": {
+            "$ref": "#/definitions/ProbingGatewayIpConfiguration"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the Probing Gateway resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Deleting",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SubnetId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A fully qualified ARM resource ID referencing a subnet.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
