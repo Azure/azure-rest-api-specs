@@ -231,14 +231,7 @@ alias CloudAccountPatchProperties = {
 @doc("Managed service identity (system assigned and/or user assigned identities)")
 @added(Versions.v10_preview)
 model CloudAccountIdentityUpdate {
-  @doc("The type of managed identity assigned to this resource.")
-  type?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "userAssignedIdentities is an ARM-standard map keyed by the identity resource ID, which requires a Record type"
-  @doc("The identities assigned to this resource by the user.")
-  userAssignedIdentities?: Record<
-    | Azure.ResourceManager.CommonTypes.UserAssignedIdentity
-    | null>;
+  ...OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>>;
 }
 
 // Identity is replaced so a PATCH can omit identity.type, as the previous contract allowed.
