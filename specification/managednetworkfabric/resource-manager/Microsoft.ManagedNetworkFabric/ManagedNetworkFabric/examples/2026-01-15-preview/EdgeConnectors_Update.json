@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "edgeConnectorName": "example-edgeConnector",
+    "api-version": "2026-01-15-preview",
+    "body": {
+      "tags": {
+        "environment": "staging"
+      },
+      "properties": {
+        "version": "1.1.0"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/edgeConnectors/example-edgeConnector",
+        "name": "example-edgeConnector",
+        "type": "Microsoft.ManagedNetworkFabric/edgeConnectors",
+        "location": "eastus",
+        "tags": {
+          "environment": "production",
+          "site": "factory-floor"
+        },
+        "systemData": {
+          "createdBy": "example@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-15T00:00:00Z",
+          "lastModifiedBy": "example@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-15T00:00:00Z"
+        },
+        "properties": {
+          "version": "1.0.0",
+          "provisioningState": "Succeeded",
+          "managedFabricIds": [],
+          "connectivityModel": "direct"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/edgeConnectors/example-edgeConnector"
+      }
+    }
+  },
+  "title": "EdgeConnectors_Update_MaximumSet_Gen",
+  "operationId": "EdgeConnectors_Update"
+}
