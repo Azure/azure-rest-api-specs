@@ -90,6 +90,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(ContentCrc64ResponseHeader.contentCrc64, bytes, "go");
 @@alternateType(DirectoryItem.name, string, "go");
 @@alternateType(FileItem.name, string, "go");
+@@alternateType(HardLink.fileName, string, "go");
 @@alternateType(FileChangeTimeResponseHeader.fileChangeTime, utcDateTime, "go");
 @@alternateType(
   FileCreationTimeResponseHeader.fileCreationTime,
