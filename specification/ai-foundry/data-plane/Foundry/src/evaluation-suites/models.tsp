@@ -122,67 +122,73 @@ model EvaluationSuiteVersion {
   tags?: Record<string>;
 }
 
-/** A reference to the current definition of a named EvalJob. */
+/** A reference to an exact published EvalJob version. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvalJobReference {
   /** The published EvalJob name. */
   name: string;
+
+  /** The immutable configuration version. */
+  version: string;
 }
 
-/** Run-only overrides of a named job's harness and execution settings. */
+/** A reference to a validated Foundry Dataset version containing Tasks. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalJobConfigOverrides {
-  /** A complete harness definition replacing the job's harness. */
-  harness_config?: InlineFoundryAgentHarness;
+model EvaluationDatasetVersionReference {
+  /** Dataset name. */
+  name: string;
 
-  /** Execution fields to replace; omitted fields inherit the job defaults. */
-  execution_config?: EvalExecutionConfigOverrides;
+  /** Exact Dataset version. */
+  version: string;
 }
 
-/** Shared grading and execution settings for a published or one-off job. */
+/** Published grading and invocation settings, captured on each run. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalJobSettings {
+model EvalJobDefinition {
   /** Human-readable description of the evaluation. */
   description?: string;
 
-  /** Graders applied to every task in the job. */
+  /** Default graders for Tasks without their own grader list. */
   graders?: InlineEvaluationGrader[];
 
   /** How completed grader verdicts determine the task-run outcome; defaults to all_pass. */
   scoring?: ScoringRule;
 
-  /** The harness and agent used for task attempts. */
-  harness_config: InlineFoundryAgentHarness;
+  /** Validated Task content at an exact Dataset version. */
+  dataset: EvaluationDatasetVersionReference;
 
-  /** Execution defaults, when different from one invocation per task. */
-  execution_config?: EvalExecutionConfig;
+  /** The system invoked by each TaskRun. */
+  target: EvalInvocationTarget;
+
+  /** Number of TaskRuns created for every Task. */
+  repetitions?: EvaluationRepetitions;
+
+  /** Maximum concurrent TaskRuns, including invocation and grading. */
+  @minValue(1)
+  maxParallelTaskRuns?: int32 = 1;
 
   /** User-defined string labels. */
   metadata?: Record<string>;
 }
 
-/** A one-off or captured job definition; embedded tasks are not published. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalJobDefinition {
-  ...EvalJobSettings;
-
-  /** A pinned TaskSet version, or tasks embedded in this definition. */
-  task_set: TaskSetSource;
-}
-
-/** An editable named job definition, not an executing EvalRun. */
-@resource("eval_jobs")
+/** Stable EvalJob identity, separate from its immutable configuration versions. */
+@resource("evaluation-jobs")
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvalJob {
-  ...EvalJobSettings;
-
   /** The stable job name. */
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @key
   name: string;
 
-  /** The pinned TaskSet version evaluated by this job. */
-  task_set: TaskSetReference;
+  /** Editable stable description. */
+  description?: string;
+
+  /** Editable stable labels. */
+  metadata?: Record<string>;
+
+  /** Latest remaining published configuration version, when available. */
+  @visibility(Lifecycle.Read)
+  latest_version?: string;
 
   /** The time when the job was created. */
   @visibility(Lifecycle.Read)
@@ -193,6 +199,42 @@ model EvalJob {
   updated_at: FoundryTimestamp;
 
   /** The identity that created this job. */
+  @visibility(Lifecycle.Read)
+  created_by: string;
+}
+
+/** Mutable fields on the stable job; published versions are never patched. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvalJobUpdate {
+  /** New stable description. */
+  description?: string;
+
+  /** New stable labels. */
+  metadata?: Record<string>;
+}
+
+/** An immutable configuration published under a named EvalJob. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvalJobVersion {
+  ...EvalJobDefinition;
+
+  /** Name of the stable job. */
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  /** Published version identifier. Assignment is pending API review. */
+  @visibility(Lifecycle.Read)
+  version: string;
+
+  /** Digest of the Dataset content validated at publication. */
+  @visibility(Lifecycle.Read)
+  dataset_content_digest: string;
+
+  /** Publication time in Unix seconds. */
+  @visibility(Lifecycle.Read)
+  created_at: FoundryTimestamp;
+
+  /** Identity that published this version. */
   @visibility(Lifecycle.Read)
   created_by: string;
 }

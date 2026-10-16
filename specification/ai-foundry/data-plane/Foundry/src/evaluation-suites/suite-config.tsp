@@ -21,85 +21,92 @@ model ResolvedFoundryAgentReference {
   version: string;
 }
 
-/** The supported evaluation harness types. */
+/** The supported systems under evaluation. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvaluationHarnessType {
-  string,
+union EvalTargetType {
+  /** Invoke a Foundry agent. */
+  foundry_agent: "foundry_agent",
 
-  /** Invoke a versioned Foundry agent with an inline harness definition. */
-  inline_foundry_agent_harness: "inline_foundry_agent_harness",
+  /** Invoke an endpoint through a project connection. */
+  external_endpoint: "external_endpoint",
 }
 
-/** The harness used to execute evaluation tasks. */
+/** Timeout for a single target invocation, not the entire TaskRun. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model TargetExecution {
+  /** Maximum target invocation duration in seconds. */
+  @minValue(1)
+  timeoutSeconds?: int32;
+}
+
+/** The system whose responses are evaluated. */
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationHarness {
-  /** The harness type. */
-  type: EvaluationHarnessType;
+model EvalTarget {
+  /** The invocation target type. */
+  type: EvalTargetType;
+
+  /** Target invocation timeout. */
+  execution?: TargetExecution;
 }
 
-/** An inline harness that invokes a versioned Foundry agent. */
+/** Invoke a Foundry agent; omitted versions resolve when each run starts. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model InlineFoundryAgentHarness extends EvaluationHarness {
-  /** Indicates an inline Foundry-agent harness. */
-  type: EvaluationHarnessType.inline_foundry_agent_harness;
+model FoundryAgentTarget extends EvalTarget {
+  /** Indicates a Foundry agent. */
+  type: EvalTargetType.foundry_agent;
 
   /** The agent to invoke; an omitted version resolves to the latest version. */
   agent: FoundryAgentReference;
 }
 
-/** The exact agent and harness used by a run. */
+/** Invoke a supported external endpoint; registration alone is not invokable. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model ResolvedFoundryAgentHarness {
-  type: EvaluationHarnessType.inline_foundry_agent_harness;
+model ExternalEndpointTarget extends EvalTarget {
+  /** Indicates a connected endpoint. */
+  type: EvalTargetType.external_endpoint;
+
+  /** Project connection containing the endpoint and delegated authentication. */
+  connection_name: string;
+
+  /** Optional registered external-agent identity for provenance. */
+  registered_agent?: string;
+}
+
+/** A target with a resolved agent version or authorized connection identity. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model ResolvedFoundryAgentTarget {
+  /** Indicates a Foundry agent. */
+  type: EvalTargetType.foundry_agent;
+
+  /** The exact agent used for this run. */
   agent: ResolvedFoundryAgentReference;
+
+  /** Resolved invocation timeout, when configured. */
+  execution?: TargetExecution;
 }
 
-/** The supported execution modes. */
+/** An invokable Foundry agent or a supported external endpoint. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvalExecutionConfigType {
-  string,
-
-  /** Invoke the configured harness for each task attempt. */
-  harness_invocation: "harness_invocation",
+union EvalInvocationTarget {
+  FoundryAgentTarget,
+  ExternalEndpointTarget,
 }
 
-/** Per-attempt execution constraints. */
+/** The exact target identity recorded at run admission. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model ExecutionConstraints {
-  /** The maximum attempt duration in seconds. */
-  max_duration_seconds?: int32;
+union ResolvedEvalInvocationTarget {
+  ResolvedFoundryAgentTarget,
+  ExternalEndpointTarget,
 }
 
-/** Suite-owned execution defaults, independent of the harness configuration. */
+/** The number of attempts per Task and their aggregation. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalExecutionConfig {
-  /** The execution mode. */
-  type: EvalExecutionConfigType.harness_invocation;
-
-  /** The number of attempts created for each task. */
+model EvaluationRepetitions {
+  /** TaskRuns created for every Task. */
   @minValue(1)
-  repetitions?: int32 = 1;
+  count: int32 = 1;
 
-  /** The maximum number of task attempts executed concurrently. */
-  @minValue(1)
-  task_concurrency?: int32 = 1;
-
-  /** Per-attempt execution constraints. */
-  constraints?: ExecutionConstraints;
-}
-
-/** Execution settings that replace a published suite's defaults for one run. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalExecutionConfigOverrides {
-  /** The number of attempts created for each task. */
-  @minValue(1)
-  repetitions?: int32;
-
-  /** The maximum number of task attempts executed concurrently. */
-  @minValue(1)
-  task_concurrency?: int32;
-
-  /** Constraint fields to replace; omitted fields inherit the suite value. */
-  constraints?: ExecutionConstraints;
+  /** MVP repetition aggregation. */
+  aggregation: "mean" = "mean";
 }

@@ -4,50 +4,19 @@
   "parameters": {
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
-    "runId": "evalrun_01J9Z7F6J2",
-    "taskRunId": "taskrun_01J9Z7K81M"
+    "run_id": "evalrun_01J9Z7F6J2",
+    "task_run_id": "taskrun_01J9Z7K81M"
   },
   "responses": {
     "200": {
       "body": {
         "id": "taskrun_01J9Z7K81M",
-        "eval_run_id": "evalrun_01J9Z7F6J2",
         "task": {
           "id": "covered-water-damage",
           "description": "Review the claim and cite the applicable policy."
         },
         "repetition_number": 2,
         "status": "succeeded",
-        "record": {
-          "inputs": {
-            "type": "prompt",
-            "instruction": "Review claim 12345 and cite the applicable policy.",
-            "expected": {
-              "policy_citation": "Section I - Perils Insured Against"
-            }
-          },
-          "outputs": {
-            "text": "This claim is covered because the damage was sudden."
-          },
-          "trajectory": {
-            "format": "atif",
-            "trajectory_id": "trajectory_01J9Z7JS3A",
-            "session_id": "session_01J9Z7HZZQ",
-            "artifact_id": "artifact_01J9Z7JY5N"
-          },
-          "usage": {
-            "duration_ms": 4000,
-            "input_tokens": 210,
-            "output_tokens": 45
-          },
-          "artifacts": [
-            {
-              "artifact_id": "artifact_01J9Z7JY5N",
-              "type": "trajectory",
-              "media_type": "application/json"
-            }
-          ]
-        },
         "grader_results": [
           {
             "grader": "policy_citation",
@@ -59,7 +28,7 @@
             "grader": "answer_quality",
             "status": "completed",
             "passed": true,
-            "score": 1.0,
+            "score": 1,
             "explanation": "The explanation is coherent.",
             "criteria": [
               {
@@ -102,7 +71,48 @@
               "completed_at_ms": 1791524427000
             }
           ]
-        }
+        },
+        "evaluation_run_id": "evalrun_01J9Z7F6J2",
+        "input": {
+          "type": "prompt",
+          "instruction": "Review claim 12345 and cite the applicable policy."
+        },
+        "expected": {
+          "policy_citation": "Section I - Perils Insured Against"
+        },
+        "observed": {
+          "text": "This claim is covered because the damage was sudden.",
+          "trajectory": {
+            "format": "atif",
+            "trajectory_id": "trajectory_01J9Z7JS3A",
+            "session_id": "session_01J9Z7HZZQ",
+            "artifact_id": "artifact_01J9Z7JY5N"
+          }
+        },
+        "usage": {
+          "duration_ms": 4000,
+          "input_tokens": 210,
+          "output_tokens": 45
+        },
+        "artifacts": [
+          {
+            "artifact_id": "artifact_01J9Z7JY5N",
+            "type": "trajectory",
+            "media_type": "application/json"
+          }
+        ],
+        "effective_graders": [
+          {
+            "name": "policy_citation",
+            "type": "substring_match",
+            "source": "task"
+          },
+          {
+            "name": "answer_quality",
+            "type": "rubric",
+            "source": "task"
+          }
+        ]
       }
     }
   }

@@ -9,29 +9,65 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
-/** Inputs for running the current definition of a named EvalJob. */
+/** Select an exact named EvalJob version; inline definitions and overrides are P1. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvalRunFromJob {
-  /** The named job selected for this run. */
-  eval_job: EvalJobReference;
-
-  /** Run-only overrides of a named job's harness and execution settings. */
-  config_overrides?: EvalJobConfigOverrides;
+  /** Published job and immutable configuration version to run. */
+  evaluation_job: EvalJobReference;
 }
 
-/** Inputs for running a complete one-off job definition. */
+/** Provisional execution states, separate from grading outcomes. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvalRunFromJobDefinition {
-  /** The one-off job definition, without named-job overrides. */
-  job_definition: EvalJobDefinition;
+union EvaluationRunStatus {
+  /** Accepted and waiting to start. */
+  queued: "queued",
+
+  /** Reserved for future observed-evidence upload, not emitted by MVP runs. */
+  awaiting_task_runs: "awaiting_task_runs",
+
+  /** Executing contained TaskRuns. */
+  running: "running",
+
+  /** Cancellation requested, in-flight work is stopping. */
+  cancelling: "cancelling",
+
+  /** Orchestration completed without TaskRun execution errors. */
+  @lroSucceeded
+  succeeded: "succeeded",
+
+  /** Orchestration completed with at least one TaskRun error. */
+  @lroSucceeded
+  partially_failed: "partially_failed",
+
+  /** Orchestration could not complete. */
+  @lroFailed
+  failed: "failed",
+
+  /** Cancelled by the caller. */
+  @lroCanceled
+  cancelled: "cancelled",
 }
 
-/** Exactly one run source: a named EvalJob or a one-off job definition. */
-@oneOf
+/** Execution state of a single Task attempt. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union EvalRunCreateContent {
-  from_job: EvalRunFromJob,
-  from_job_definition: EvalRunFromJobDefinition,
+union EvaluationTaskRunStatus {
+  /** Waiting for a concurrency slot. */
+  queued: "queued",
+
+  /** Invoking or grading. */
+  running: "running",
+
+  /** Attempt completed with an applicable quality outcome. */
+  succeeded: "succeeded",
+
+  /** Invocation or grading failed. */
+  failed: "failed",
+
+  /** Attempt was cancelled. */
+  cancelled: "cancelled",
+
+  /** Every applicable grader returned N/A. */
+  skipped: "skipped",
 }
 
 /** Mutually exclusive TaskRun outcome counts for a completed run. */
@@ -121,36 +157,29 @@ model FoundryEvalRun {
   @visibility(Lifecycle.Read)
   id: string;
 
-  /** Published job selected at creation, if any. */
-  eval_job?: EvalJobReference;
+  /** Exact published job selected at creation. */
+  evaluation_job: EvalJobReference;
 
-  /** Captured complete job definition, including one selected from a named job. */
+  /** Complete job definition captured when this run was admitted. */
   @visibility(Lifecycle.Read)
   job_definition: EvalJobDefinition;
-
-  /** Run-only overrides submitted with a named job. */
-  config_overrides?: EvalJobConfigOverrides;
-
-  /** Immediate source run for a full rerun. */
-  @visibility(Lifecycle.Read)
-  rerun_of?: string;
 
   /** Current orchestration status; quality is reported separately in result. */
   @visibility(Lifecycle.Read)
   @lroStatus
-  status: JobStatus;
+  status: EvaluationRunStatus;
 
   /** Run and upcoming phase timings. */
   @visibility(Lifecycle.Read)
   lifecycle: EvaluationLifecycle;
 
-  /** The effective harness and exact agent reference after run overrides. */
+  /** Exact target identity resolved when this run was admitted. */
   @visibility(Lifecycle.Read)
-  resolved_harness_config: ResolvedFoundryAgentHarness;
+  resolved_target: ResolvedEvalInvocationTarget;
 
-  /** The effective execution mode and attempt limits after run overrides. */
+  /** Digest of the authorized Task content retained for this run. */
   @visibility(Lifecycle.Read)
-  resolved_execution_config: EvalExecutionConfig;
+  task_content_digest: string;
 
   /** Quality and coverage counts, set when orchestration succeeds. */
   @visibility(Lifecycle.Read)
@@ -163,6 +192,29 @@ model FoundryEvalRun {
   /** Terminal orchestration error, set only when the run fails. */
   @visibility(Lifecycle.Read)
   error?: ApiError;
+}
+
+/** Effective configuration retained at admission, without raw Task content. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvalRunResolvedConfiguration {
+  /** Exact published job version. */
+  evaluation_job: EvalJobReference;
+
+  /** Dataset whose Task content was captured. */
+  dataset: EvaluationDatasetVersionReference;
+
+  /** Resolved target identity, never credentials. */
+  target: ResolvedEvalInvocationTarget;
+
+  /** Attempts per Task with defaults applied. */
+  repetitions: EvaluationRepetitions;
+
+  /** Maximum parallel TaskRuns with the default applied. */
+  @minValue(1)
+  maxParallelTaskRuns: int32;
+
+  /** Digest of the Task bytes authorized at admission. */
+  task_content_digest: string;
 }
 
 /** A readable task summary retained with a task run. */
@@ -340,48 +392,43 @@ model EvaluationTaskRunDiagnostics {
   log_artifacts?: string[];
 }
 
-/** The inputs retained in a TaskRun record, including grader-only references. */
+/** Available invocation output and optional reference to retained ATIF. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTaskRunInputs {
-  ...PromptTaskInput;
-
-  /** Reference facts for graders, never sent to the agent. */
-  expected?: Record<unknown>;
-
-  /** Grader-only Task metadata. */
-  metadata?: Record<unknown>;
-}
-
-/** The final answer, when the invocation produced usable evidence. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTaskRunOutputs {
+model EvaluationTaskRunObserved {
   /** Final text-mode answer. */
   text?: string;
 
   /** Parsed final JSON-schema output, not duplicated in text. */
   data?: Record<unknown>;
+
+  /** Reference to normalized ATIF, fetched through the contained trajectory read. */
+  trajectory?: EvaluationTrajectoryReference;
 }
 
-/** Per-attempt evidence retained before grading. */
+/** Where an effective grader was selected. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model EvaluationTaskRunRecord {
-  /** Attempted input and grader-only references. */
-  inputs: EvaluationTaskRunInputs;
+union EvaluationGraderSource {
+  /** Inherited from the published job. */
+  job: "job",
 
-  /** Final answer, absent after an invocation failure. */
-  outputs?: EvaluationTaskRunOutputs;
+  /** Replaced by this Task's own grader list. */
+  task: "task",
+}
 
-  /** Reference to separately retrieved ATIF evidence. */
-  trajectory?: EvaluationTrajectoryReference;
+/** Resolved check selected for a TaskRun before execution starts. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvaluationEffectiveGrader {
+  /** Grader name within this TaskRun. */
+  name: string;
 
-  /** Agent invocation measurements, excluding judge calls. */
-  usage?: EvaluationTaskRunUsage;
+  /** Type of check to apply. */
+  type: EvaluationGraderType;
 
-  /** Metadata for retained evidence, empty when none was captured. */
-  artifacts: EvaluationArtifact[];
+  /** Job default or Task-specific replacement. */
+  source: EvaluationGraderSource;
 
-  /** Retry counts, checkpoints, and retained diagnostic logs. */
-  diagnostics?: EvaluationTaskRunDiagnostics;
+  /** Pinned catalog version when the grader uses a Foundry Evaluator. */
+  evaluator?: FoundryEvaluatorReference;
 }
 
 /** The component responsible for a task-run error. */
@@ -439,7 +486,7 @@ model EvalTaskRun {
   id: string;
 
   /** The parent EvalRun identifier. */
-  eval_run_id: string;
+  evaluation_run_id: string;
 
   /** The resolved task identity. */
   task: EvaluationTaskSummary;
@@ -448,12 +495,33 @@ model EvalTaskRun {
   repetition_number: int32;
 
   /** The task-run execution status. */
-  status: JobStatus;
+  status: EvaluationTaskRunStatus;
 
-  /** Inputs and available evidence captured before grading. */
-  record: EvaluationTaskRunRecord;
+  /** Prompt sent to the target, without grader-only reference facts. */
+  input: PromptTaskInput;
 
-  /** Outcomes from attempted task- and job-level graders. */
+  /** Reference facts visible only to graders. */
+  expected?: Record<unknown>;
+
+  /** Task metadata visible only to graders. */
+  metadata?: Record<unknown>;
+
+  /** Final output and trajectory reference, when available. */
+  observed?: EvaluationTaskRunObserved;
+
+  /** Available target usage, excluding grader calls. */
+  usage?: EvaluationTaskRunUsage;
+
+  /** Metadata for retained evidence, empty when none was captured. */
+  artifacts: EvaluationArtifact[];
+
+  /** Retry counts, checkpoints, and retained diagnostic logs. */
+  diagnostics?: EvaluationTaskRunDiagnostics;
+
+  /** Selected checks, exposed even before they run or when invocation fails. */
+  effective_graders: EvaluationEffectiveGrader[];
+
+  /** Outcomes from attempted effective graders. */
   grader_results: EvaluationGraderResult[];
 
   /** Pass, quality fail, or all graders N/A; absent on failure and cancellation. */

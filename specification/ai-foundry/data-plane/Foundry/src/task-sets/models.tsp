@@ -34,9 +34,12 @@ union EvaluationGraderType {
 
   /** Check required or disallowed ATIF tool calls. */
   tool_calls: "tool_calls",
+
+  /** Run a compatible, versioned Foundry Evaluator. */
+  foundry_evaluator: "foundry_evaluator",
 }
 
-/** A grader resolved from a TaskSet version or EvalJob definition. */
+/** A grader resolved from a Dataset Task or an EvalJob definition. */
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvaluationGrader {
@@ -198,6 +201,26 @@ model ToolCallsGrader extends EvaluationGrader {
   config: ToolCallsConfig;
 }
 
+/** An exact version in the existing Foundry Evaluator catalog. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model FoundryEvaluatorReference {
+  /** The evaluator name. */
+  name: string;
+
+  /** The evaluator version selected for this grader. */
+  version: string;
+}
+
+/** A supported catalog evaluator with a service-defined evidence and verdict adapter. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model FoundryEvaluatorGrader extends EvaluationGrader {
+  /** Identifies the catalog adapter. */
+  type: EvaluationGraderType.foundry_evaluator;
+
+  /** The pinned catalog evaluator; no caller-supplied input mapping is accepted. */
+  evaluator: FoundryEvaluatorReference;
+}
+
 /** The inline graders supported by the evaluation MVP. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 union InlineEvaluationGrader {
@@ -207,6 +230,7 @@ union InlineEvaluationGrader {
   RegexCheckGrader,
   NumericRangeGrader,
   ToolCallsGrader,
+  FoundryEvaluatorGrader,
 }
 
 /** The rule for combining applicable grader verdicts. */
@@ -266,10 +290,18 @@ model PromptTaskInput {
   data?: Record<EvaluationTaskContent>;
 }
 
+/** Optional deadline for the entire task attempt, including grading. */
+@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+model EvaluationTaskConstraints {
+  /** Maximum attempt duration in seconds. */
+  @minValue(1)
+  maxDurationSeconds?: int32;
+}
+
 /** A reusable evaluation task. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model Task {
-  /** The task identifier, unique within the task-set version. */
+  /** The task identifier, unique within the Dataset task manifest. */
   @minLength(1)
   id: string;
 
@@ -282,68 +314,15 @@ model Task {
   /** Reference values visible to graders but not to the agent. */
   expected?: Record<unknown>;
 
-  /** Task-level graders applied in addition to job-level graders. */
+  /** When present, replaces all job-level graders for this task; an empty list is not runnable. */
   graders?: InlineEvaluationGrader[];
+
+  /** Per-attempt deadline including invocation and grading. */
+  constraints?: EvaluationTaskConstraints;
 
   /** Caller-defined JSON annotations visible to graders. */
   metadata?: Record<unknown>;
 
   /** The rule used to combine task and job grader verdicts for this task. */
   scoring?: ScoringRule;
-}
-
-/** A complete task-set definition, reusable or embedded in a one-off run. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model TaskSetDefinition {
-  /** Description of the collection. */
-  description?: string;
-
-  /** The tasks to execute. */
-  @minItems(1)
-  tasks: Task[];
-
-  /** User-defined string labels. */
-  metadata?: Record<string>;
-}
-
-/** A reference to a published TaskSet version. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model TaskSetReference {
-  /** Published TaskSet name. */
-  name: string;
-
-  /** Pinned, service-assigned version. */
-  version: string;
-}
-
-/** A pinned TaskSet or a complete inline task definition. */
-@oneOf
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-union TaskSetSource {
-  TaskSetReference,
-  TaskSetDefinition,
-}
-
-/** An immutable version of a reusable TaskSet. */
-@resource("task_sets")
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model TaskSetVersion {
-  ...TaskSetDefinition;
-
-  /** The task-set name. */
-  @visibility(Lifecycle.Read)
-  @key
-  name: string;
-
-  /** The immutable task-set version. */
-  @visibility(Lifecycle.Read)
-  version: string;
-
-  /** The time when this version was published. */
-  @visibility(Lifecycle.Read)
-  created_at: FoundryTimestamp;
-
-  /** The identity that published this version. */
-  @visibility(Lifecycle.Read)
-  created_by: string;
 }

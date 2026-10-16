@@ -4,29 +4,18 @@
   "parameters": {
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
-    "runId": "evalrun_01J9Z7F6J3",
-    "taskRunId": "taskrun_01J9Z7N4DN"
+    "run_id": "evalrun_01J9Z7F6J3",
+    "task_run_id": "taskrun_01J9Z7N4DN"
   },
   "responses": {
     "200": {
       "body": {
         "id": "taskrun_01J9Z7N4DN",
-        "eval_run_id": "evalrun_01J9Z7F6J3",
         "task": {
           "id": "out-of-scope-task"
         },
         "repetition_number": 1,
-        "status": "succeeded",
-        "record": {
-          "inputs": {
-            "type": "prompt",
-            "instruction": "Review the claim."
-          },
-          "outputs": {
-            "text": "The claim is outside the applicable policy."
-          },
-          "artifacts": []
-        },
+        "status": "skipped",
         "grader_results": [
           {
             "grader": "optional_quality",
@@ -61,7 +50,23 @@
               "completed_at_ms": 1791524410000
             }
           ]
-        }
+        },
+        "evaluation_run_id": "evalrun_01J9Z7F6J3",
+        "input": {
+          "type": "prompt",
+          "instruction": "Review the claim."
+        },
+        "observed": {
+          "text": "The claim is outside the applicable policy."
+        },
+        "artifacts": [],
+        "effective_graders": [
+          {
+            "name": "optional_quality",
+            "type": "rubric",
+            "source": "task"
+          }
+        ]
       }
     }
   }

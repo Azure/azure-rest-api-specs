@@ -5,52 +5,57 @@
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
     "body": {
-      "eval_job": {
-        "name": "claims-regression"
+      "evaluation_job": {
+        "name": "claims-smoke",
+        "version": "1"
       }
     }
   },
   "responses": {
     "201": {
       "headers": {
-        "Operation-Location": "/eval_runs/evalrun_01J9Z8A3KD",
-        "Location": "/eval_runs/evalrun_01J9Z8A3KD"
+        "Operation-Location": "/evaluation-runs/evalrun_01J9Z8A3KD",
+        "Location": "/evaluation-runs/evalrun_01J9Z8A3KD"
       },
       "body": {
         "id": "evalrun_01J9Z8A3KD",
         "status": "queued",
-        "eval_job": {
-          "name": "claims-regression"
+        "evaluation_job": {
+          "name": "claims-smoke",
+          "version": "1"
         },
         "job_definition": {
-          "task_set": {
-            "name": "claims-regression",
+          "dataset": {
+            "name": "claims-smoke",
             "version": "1"
           },
-          "harness_config": {
-            "type": "inline_foundry_agent_harness",
+          "target": {
+            "type": "foundry_agent",
             "agent": {
-              "name": "claims-agent"
+              "name": "claims-agent",
+              "version": "7"
+            },
+            "execution": {
+              "timeoutSeconds": 90
             }
           },
-          "execution_config": {
-            "type": "harness_invocation",
-            "repetitions": 1,
-            "task_concurrency": 2
-          }
+          "repetitions": {
+            "count": 2,
+            "aggregation": "mean"
+          },
+          "maxParallelTaskRuns": 3
         },
-        "resolved_harness_config": {
-          "type": "inline_foundry_agent_harness",
+        "resolved_target": {
+          "type": "foundry_agent",
           "agent": {
             "name": "claims-agent",
             "version": "7"
+          },
+          "execution": {
+            "timeoutSeconds": 90
           }
         },
-        "resolved_execution_config": {
-          "type": "harness_invocation",
-          "repetitions": 1,
-          "task_concurrency": 2
-        },
+        "task_content_digest": "sha256:claims-task-content",
         "report_url": "https://ai.azure.com/evaluations/evalrun_01J9Z8A3KD",
         "lifecycle": {
           "created_at": 1791524400,

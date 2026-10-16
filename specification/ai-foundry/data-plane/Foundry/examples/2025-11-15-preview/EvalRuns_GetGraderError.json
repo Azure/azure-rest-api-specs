@@ -4,32 +4,18 @@
   "parameters": {
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
-    "runId": "evalrun_01J9Z7F6J4",
-    "taskRunId": "taskrun_01J9Z7N4DP"
+    "run_id": "evalrun_01J9Z7F6J4",
+    "task_run_id": "taskrun_01J9Z7N4DP"
   },
   "responses": {
     "200": {
       "body": {
         "id": "taskrun_01J9Z7N4DP",
-        "eval_run_id": "evalrun_01J9Z7F6J4",
         "task": {
           "id": "covered-water-damage"
         },
         "repetition_number": 1,
         "status": "failed",
-        "record": {
-          "inputs": {
-            "type": "prompt",
-            "instruction": "Review claim 12345 and cite the policy.",
-            "expected": {
-              "policy_citation": "Section I - Perils Insured Against"
-            }
-          },
-          "outputs": {
-            "text": "Approved. Section I - Perils Insured Against covers sudden water damage."
-          },
-          "artifacts": []
-        },
         "grader_results": [
           {
             "grader": "policy_citation",
@@ -79,7 +65,31 @@
               "completed_at_ms": 1791524430000
             }
           ]
-        }
+        },
+        "evaluation_run_id": "evalrun_01J9Z7F6J4",
+        "input": {
+          "type": "prompt",
+          "instruction": "Review claim 12345 and cite the policy."
+        },
+        "expected": {
+          "policy_citation": "Section I - Perils Insured Against"
+        },
+        "observed": {
+          "text": "Approved. Section I - Perils Insured Against covers sudden water damage."
+        },
+        "artifacts": [],
+        "effective_graders": [
+          {
+            "name": "policy_citation",
+            "type": "substring_match",
+            "source": "task"
+          },
+          {
+            "name": "policy_tools",
+            "type": "tool_calls",
+            "source": "task"
+          }
+        ]
       }
     }
   }

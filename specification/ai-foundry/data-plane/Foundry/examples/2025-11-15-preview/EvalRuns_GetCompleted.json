@@ -4,52 +4,49 @@
   "parameters": {
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
-    "runId": "evalrun_01J9Z7F6J2"
+    "run_id": "evalrun_01J9Z7F6J2"
   },
   "responses": {
     "200": {
       "body": {
         "id": "evalrun_01J9Z7F6J2",
         "status": "succeeded",
-        "eval_job": {
-          "name": "claims-regression"
-        },
-        "config_overrides": {
-          "execution_config": {
-            "repetitions": 3,
-            "task_concurrency": 3
-          }
+        "evaluation_job": {
+          "name": "claims-smoke",
+          "version": "1"
         },
         "job_definition": {
-          "task_set": {
-            "name": "claims-regression",
+          "dataset": {
+            "name": "claims-smoke",
             "version": "1"
           },
-          "harness_config": {
-            "type": "inline_foundry_agent_harness",
+          "target": {
+            "type": "foundry_agent",
             "agent": {
               "name": "claims-agent",
               "version": "7"
+            },
+            "execution": {
+              "timeoutSeconds": 90
             }
           },
-          "execution_config": {
-            "type": "harness_invocation",
-            "repetitions": 1,
-            "task_concurrency": 2
-          }
+          "repetitions": {
+            "count": 2,
+            "aggregation": "mean"
+          },
+          "maxParallelTaskRuns": 3
         },
-        "resolved_harness_config": {
-          "type": "inline_foundry_agent_harness",
+        "resolved_target": {
+          "type": "foundry_agent",
           "agent": {
             "name": "claims-agent",
             "version": "7"
+          },
+          "execution": {
+            "timeoutSeconds": 90
           }
         },
-        "resolved_execution_config": {
-          "type": "harness_invocation",
-          "repetitions": 3,
-          "task_concurrency": 3
-        },
+        "task_content_digest": "sha256:claims-task-content",
         "result": {
           "counts": {
             "pass": 5,

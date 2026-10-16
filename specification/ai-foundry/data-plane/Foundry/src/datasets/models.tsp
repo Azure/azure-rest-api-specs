@@ -1,6 +1,8 @@
 import "../common/models.tsp";
 import "../common/service.tsp";
 
+using TypeSpec.Versioning;
+
 namespace Azure.AI.Projects;
 
 @doc("Enum to determine the type of data.")
@@ -14,11 +16,65 @@ union DatasetType {
   uri_folder: "uri_folder",
 }
 
+/** The authored content carried by a Dataset version, independent of its storage type. */
+union DatasetKind {
+  string,
+
+  /** A manifest of evaluation tasks. */
+  taskset: "taskset",
+}
+
+/** Evaluation-content validation state for a Dataset version. */
+union DatasetValidationStatus {
+  /** Validation has not begun. */
+  pending: "pending",
+
+  /** Validation is processing the current content. */
+  in_progress: "in_progress",
+
+  /** The current content passed validation. */
+  succeeded: "succeeded",
+
+  /** The content failed validation. */
+  failed: "failed",
+}
+
+/** An actionable validation failure without disclosing private Task content. */
+model DatasetValidationError {
+  /** Machine-readable failure category. */
+  code: string;
+
+  /** Explanation of the invalid Task or manifest. */
+  message: string;
+
+  /** Task identifier, when a specific Task caused the error. */
+  task_id?: string;
+}
+
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("DatasetVersion Definition")
 @Rest.resource("datasets")
 @discriminator("type")
 model DatasetVersion {
+  /** The purpose of this Dataset version; `taskset` identifies evaluation Task content. */
+  @removed(Versions.v1)
+  kind?: DatasetKind;
+
+  /** Current validation state of the Task content. */
+  @removed(Versions.v1)
+  @visibility(Lifecycle.Read)
+  validation_status?: DatasetValidationStatus;
+
+  /** Errors produced by content validation, if any. */
+  @removed(Versions.v1)
+  @visibility(Lifecycle.Read)
+  validation_errors?: DatasetValidationError[];
+
+  /** Digest of the exact content approved by successful validation. */
+  @removed(Versions.v1)
+  @visibility(Lifecycle.Read)
+  content_digest?: string;
+
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("URI of the data ([example](https://go.microsoft.com/fwlink/?linkid=2202330))")
   @visibility(Lifecycle.Read, Lifecycle.Create)

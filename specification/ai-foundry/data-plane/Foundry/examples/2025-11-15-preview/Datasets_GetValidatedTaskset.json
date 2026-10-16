@@ -1,0 +1,22 @@
+{
+  "title": "Get the validated Dataset version and its approved content digest",
+  "operationId": "Datasets_getVersion",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "name": "claims-smoke",
+    "version": "1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "claims-smoke",
+        "version": "1",
+        "type": "uri_file",
+        "kind": "taskset",
+        "dataUri": "azureml://datastores/workspaceblobstore/paths/claims-smoke/tasks.json",
+        "validation_status": "succeeded",
+        "content_digest": "sha256:claims-task-content"
+      }
+    }
+  }
+}

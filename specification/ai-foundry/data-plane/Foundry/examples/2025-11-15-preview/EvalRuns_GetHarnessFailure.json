@@ -4,40 +4,18 @@
   "parameters": {
     "api-version": "2025-11-15-preview",
     "Foundry-Features": "Evaluations=V1Preview",
-    "runId": "evalrun_01J9Z7F6J5",
-    "taskRunId": "taskrun_01J9Z7N4DH"
+    "run_id": "evalrun_01J9Z7F6J5",
+    "task_run_id": "taskrun_01J9Z7N4DH"
   },
   "responses": {
     "200": {
       "body": {
         "id": "taskrun_01J9Z7N4DH",
-        "eval_run_id": "evalrun_01J9Z7F6J5",
         "task": {
           "id": "covered-water-damage"
         },
         "repetition_number": 3,
         "status": "failed",
-        "record": {
-          "inputs": {
-            "type": "prompt",
-            "instruction": "Review claim 12345 and cite the policy."
-          },
-          "artifacts": [
-            {
-              "artifact_id": "artifact_01J9Z7N8JK",
-              "type": "harness_log",
-              "media_type": "text/plain"
-            }
-          ],
-          "diagnostics": {
-            "attempts": {
-              "harness": 3
-            },
-            "log_artifacts": [
-              "artifact_01J9Z7N8JK"
-            ]
-          }
-        },
         "grader_results": [],
         "error": {
           "code": "harness_invocation_failed",
@@ -96,7 +74,39 @@
               "state": "not_reached"
             }
           ]
-        }
+        },
+        "evaluation_run_id": "evalrun_01J9Z7F6J5",
+        "input": {
+          "type": "prompt",
+          "instruction": "Review claim 12345 and cite the policy."
+        },
+        "artifacts": [
+          {
+            "artifact_id": "artifact_01J9Z7N8JK",
+            "type": "harness_log",
+            "media_type": "text/plain"
+          }
+        ],
+        "diagnostics": {
+          "attempts": {
+            "harness": 3
+          },
+          "log_artifacts": [
+            "artifact_01J9Z7N8JK"
+          ]
+        },
+        "effective_graders": [
+          {
+            "name": "policy_citation",
+            "type": "substring_match",
+            "source": "task"
+          },
+          {
+            "name": "answer_quality",
+            "type": "rubric",
+            "source": "task"
+          }
+        ]
       }
     }
   }

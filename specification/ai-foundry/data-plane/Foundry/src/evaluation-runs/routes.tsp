@@ -10,7 +10,7 @@ namespace Azure.AI.Projects;
 /** Optional filters for task-run list operations. */
 model EvalTaskRunListParameters {
   /** Filters task runs by execution status. */
-  @query status?: JobStatus;
+  @query status?: EvaluationTaskRunStatus;
 
   /** Filters task runs by evaluated pass outcome. */
   @query passed?: boolean;
@@ -27,7 +27,7 @@ interface EvalRuns {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client through Operation-Location."
   @summary("Create an evaluation run")
   @post
-  @route("/eval_runs")
+  @route("/evaluation-runs")
   @pollingOperation(EvalRuns.get)
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   create is FoundryDataPlanePreviewOperation<
@@ -35,26 +35,8 @@ interface EvalRuns {
     {
       ...WithOperationId;
 
-      /** A named EvalJob or a complete one-off job definition. */
-      @body request: EvalRunCreateContent;
-    },
-    JobCreatedResponse<FoundryEvalRun>
-  >;
-
-  /** Starts a new full run from a terminal run's captured definition and resolved settings. */
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client through Operation-Location."
-  @summary("Rerun a completed evaluation")
-  @post
-  @route("/eval_runs/{runId}:rerun")
-  @pollingOperation(EvalRuns.get)
-  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-  rerun is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    {
-      /** The terminal source run identifier. */
-      @path runId: string;
-
-      ...WithOperationId;
+      /** Exact named EvalJob version to run. */
+      @body request: EvalRunFromJob;
     },
     JobCreatedResponse<FoundryEvalRun>
   >;
@@ -62,13 +44,13 @@ interface EvalRuns {
   /** Retrieves an evaluation run and its current status. */
   @summary("Get an evaluation run")
   @get
-  @route("/eval_runs/{runId}")
+  @route("/evaluation-runs/{run_id}")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   get is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
       /** The evaluation-run identifier. */
-      @path runId: string;
+      @path run_id: string;
     },
     JobStatusResponse<FoundryEvalRun>
   >;
@@ -77,7 +59,7 @@ interface EvalRuns {
   @summary("List evaluation runs")
   @get
   @list
-  @route("/eval_runs")
+  @route("/evaluation-runs")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   list is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
@@ -88,13 +70,13 @@ interface EvalRuns {
   /** Requests cancellation of a queued or in-progress evaluation run. */
   @summary("Cancel an evaluation run")
   @post
-  @route("/eval_runs/{runId}:cancel")
+  @route("/evaluation-runs/{run_id}:cancel")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   cancel is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
       /** The evaluation-run identifier. */
-      @path runId: string;
+      @path run_id: string;
     },
     OkResponse & FoundryEvalRun
   >;
@@ -102,28 +84,42 @@ interface EvalRuns {
   /** Deletes a terminal evaluation-run record. */
   @summary("Delete an evaluation run")
   @delete
-  @route("/eval_runs/{runId}")
+  @route("/evaluation-runs/{run_id}")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   delete is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
       /** The evaluation-run identifier. */
-      @path runId: string;
+      @path run_id: string;
     },
     NoContentResponse
+  >;
+
+  /** Reads the captured job, Dataset digest, resolved target, and execution defaults. */
+  @summary("Get an evaluation run's resolved configuration")
+  @get
+  @route("/evaluation-runs/{run_id}/resolvedConfiguration")
+  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+  getResolvedConfiguration is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      /** Parent evaluation-run identifier. */
+      @path run_id: string;
+    },
+    OkResponse & EvalRunResolvedConfiguration
   >;
 
   /** Lists task runs contained by an evaluation run. */
   @summary("List evaluation task runs")
   @get
   @list
-  @route("/eval_runs/{runId}/task_runs")
+  @route("/evaluation-runs/{run_id}/task-runs")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   listTaskRuns is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
       /** The parent evaluation-run identifier. */
-      @path runId: string;
+      @path run_id: string;
 
       ...EvalTaskRunListParameters;
     },
@@ -133,16 +129,16 @@ interface EvalRuns {
   /** Retrieves one task run and its retained evidence metadata. */
   @summary("Get an evaluation task run")
   @get
-  @route("/eval_runs/{runId}/task_runs/{taskRunId}")
+  @route("/evaluation-runs/{run_id}/task-runs/{task_run_id}")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   getTaskRun is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
       /** The parent evaluation-run identifier. */
-      @path runId: string;
+      @path run_id: string;
 
       /** The task-run identifier. */
-      @path taskRunId: string;
+      @path task_run_id: string;
     },
     OkResponse & EvalTaskRun
   >;
@@ -150,43 +146,17 @@ interface EvalRuns {
   /** Retrieves the normalized ATIF trajectory for a task run. */
   @summary("Get an evaluation task-run trajectory")
   @get
-  @route("/eval_runs/{runId}/task_runs/{taskRunId}/trajectory")
+  @route("/evaluation-runs/{run_id}/task-runs/{task_run_id}/trajectory")
   @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
   getTaskRunTrajectory is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
       /** The parent evaluation-run identifier. */
-      @path runId: string;
+      @path run_id: string;
 
       /** The task-run identifier. */
-      @path taskRunId: string;
+      @path task_run_id: string;
     },
     OkResponse & EvaluationTrajectory
-  >;
-
-  /** Streams retained artifact content for a task run. */
-  @summary("Download an evaluation task-run artifact")
-  @get
-  @route("/eval_runs/{runId}/task_runs/{taskRunId}/artifacts/{artifactId}/content")
-  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-  downloadTaskRunArtifact is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    {
-      /** The parent evaluation-run identifier. */
-      @path runId: string;
-
-      /** The task-run identifier. */
-      @path taskRunId: string;
-
-      /** The artifact identifier. */
-      @path artifactId: string;
-    },
-    OkResponse & {
-      /** The artifact media type. */
-      @header("Content-Type") content_type: string;
-
-      /** The artifact bytes. */
-      @body content: bytes;
-    }
   >;
 }

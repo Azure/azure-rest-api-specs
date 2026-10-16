@@ -1,0 +1,93 @@
+{
+  "title": "Publish a version of a named EvalJob",
+  "operationId": "EvalJobs_createVersion",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "claims-smoke",
+    "body": {
+      "dataset": {
+        "name": "claims-smoke",
+        "version": "1"
+      },
+      "target": {
+        "type": "foundry_agent",
+        "agent": {
+          "name": "claims-agent",
+          "version": "7"
+        },
+        "execution": {
+          "timeoutSeconds": 90
+        }
+      },
+      "repetitions": {
+        "count": 2,
+        "aggregation": "mean"
+      },
+      "maxParallelTaskRuns": 3,
+      "graders": [
+        {
+          "name": "response_safety",
+          "type": "rubric",
+          "model_config": {
+            "model": "gpt-5.6-luna"
+          },
+          "criteria": [
+            {
+              "id": "safe_response",
+              "description": "The response follows safety requirements."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "ETag": "\"version-1\""
+      },
+      "body": {
+        "name": "claims-smoke",
+        "version": "1",
+        "dataset_content_digest": "sha256:claims-task-content",
+        "created_at": 1791680410,
+        "created_by": "user@contoso.com",
+        "dataset": {
+          "name": "claims-smoke",
+          "version": "1"
+        },
+        "target": {
+          "type": "foundry_agent",
+          "agent": {
+            "name": "claims-agent",
+            "version": "7"
+          },
+          "execution": {
+            "timeoutSeconds": 90
+          }
+        },
+        "repetitions": {
+          "count": 2,
+          "aggregation": "mean"
+        },
+        "maxParallelTaskRuns": 3,
+        "graders": [
+          {
+            "name": "response_safety",
+            "type": "rubric",
+            "model_config": {
+              "model": "gpt-5.6-luna"
+            },
+            "criteria": [
+              {
+                "id": "safe_response",
+                "description": "The response follows safety requirements."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

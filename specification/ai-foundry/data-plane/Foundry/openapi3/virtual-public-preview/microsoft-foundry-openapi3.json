@@ -36,9 +36,6 @@
       "name": "AgentServer Task Storage"
     },
     {
-      "name": "TaskSets"
-    },
-    {
       "name": "EvalJobs"
     },
     {
@@ -11044,6 +11041,112 @@
         }
       }
     },
+    "/datasets/{name}/versions/{version}:validate": {
+      "post": {
+        "operationId": "Datasets_validate",
+        "summary": "Validate evaluation Task content",
+        "description": "Starts validation of the current Task manifest on a taskset Dataset version.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Dataset name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "Dataset version to validate.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Location": {
+                "required": true,
+                "description": "URL of the Dataset version to poll for validation status.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "required": false,
+                "description": "Recommended delay before polling, in seconds.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatasetVersion"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Datasets"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
     "/deployments": {
       "get": {
         "operationId": "Deployments_list",
@@ -11237,7 +11340,7 @@
         ]
       }
     },
-    "/eval_jobs": {
+    "/evaluation-jobs": {
       "get": {
         "operationId": "EvalJobs_list",
         "summary": "List EvalJobs",
@@ -11374,13 +11477,11 @@
             "Evaluations=V1Preview"
           ]
         }
-      }
-    },
-    "/eval_jobs/{name}": {
-      "put": {
-        "operationId": "EvalJobs_createOrReplace",
-        "summary": "Create or replace an EvalJob",
-        "description": "Creates or replaces the current definition of a named EvalJob.",
+      },
+      "post": {
+        "operationId": "EvalJobs_create",
+        "summary": "Create an EvalJob",
+        "description": "Creates a stable EvalJob before its first version is published.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -11395,15 +11496,6 @@
             }
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The stable EvalJob name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -11415,18 +11507,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EvalJob"
-                }
-              }
-            }
-          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "ETag": {
+                "required": true,
+                "description": "Current resource version for use with If-Match.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -11468,14 +11559,16 @@
               }
             }
           },
-          "description": "The complete job definition."
+          "description": "The stable name and optional metadata."
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
           ]
         }
-      },
+      }
+    },
+    "/evaluation-jobs/{name}": {
       "get": {
         "operationId": "EvalJobs_get",
         "summary": "Get an EvalJob",
@@ -11516,6 +11609,15 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "required": true,
+                "description": "Current resource version for use with If-Match.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -11553,9 +11655,787 @@
             "Evaluations=V1Preview"
           ]
         }
+      },
+      "patch": {
+        "operationId": "EvalJobs_update",
+        "summary": "Update an EvalJob",
+        "description": "Updates only stable metadata; published configurations remain unchanged.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Stable EvalJob name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "ETag of the stable job to update.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "required": true,
+                "description": "Current resource version for use with If-Match.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvalJob"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvalJobs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvalJobUpdate"
+              }
+            }
+          },
+          "description": "Stable description or metadata changes."
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "EvalJobs_delete",
+        "summary": "Delete an EvalJob",
+        "description": "Soft-deletes the job without changing already admitted runs.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Stable EvalJob name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "ETag of the job to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvalJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       }
     },
-    "/eval_runs": {
+    "/evaluation-jobs/{name}/runs": {
+      "get": {
+        "operationId": "EvalJobs_listRuns",
+        "summary": "List an EvalJob's runs",
+        "description": "Lists the job's runs across all published versions.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Stable EvalJob name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Optional execution-status filter.",
+            "schema": {
+              "$ref": "#/components/schemas/EvaluationRunStatus"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/FoundryEvalRun"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvalJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
+    "/evaluation-jobs/{name}/versions": {
+      "post": {
+        "operationId": "EvalJobs_createVersion",
+        "summary": "Create an EvalJob version",
+        "description": "Publishes a configuration bound to a validated Dataset version and digest.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Stable EvalJob name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "ETag": {
+                "required": true,
+                "description": "Current resource version for use with If-Match.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvalJobVersion"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvalJobs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvalJobDefinition"
+              }
+            }
+          },
+          "description": "Job settings to publish; version assignment remains under review."
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "EvalJobs_listVersions",
+        "summary": "List EvalJob versions",
+        "description": "Lists published configuration versions.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Stable EvalJob name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/EvalJobVersion"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvalJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
+    "/evaluation-jobs/{name}/versions/{version}": {
+      "get": {
+        "operationId": "EvalJobs_getVersion",
+        "summary": "Get an EvalJob version",
+        "description": "Retrieves an exact published configuration.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Stable EvalJob name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "Exact configuration version.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "required": true,
+                "description": "Current resource version for use with If-Match.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvalJobVersion"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvalJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "EvalJobs_deleteVersion",
+        "summary": "Delete an EvalJob version",
+        "description": "Soft-deletes one configuration version without changing prior runs.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Stable EvalJob name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "Exact version to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "ETag of this version.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvalJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
+    "/evaluation-runs": {
       "post": {
         "operationId": "EvalRuns_create",
         "summary": "Create an evaluation run",
@@ -11649,11 +12529,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EvalRunCreateContent"
+                "$ref": "#/components/schemas/EvalRunFromJob"
               }
             }
           },
-          "description": "A named EvalJob or a complete one-off job definition."
+          "description": "Exact named EvalJob version to run."
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
@@ -11799,7 +12679,7 @@
         }
       }
     },
-    "/eval_runs/{runId}": {
+    "/evaluation-runs/{run_id}": {
       "get": {
         "operationId": "EvalRuns_get",
         "summary": "Get an evaluation run",
@@ -11818,7 +12698,7 @@
             }
           },
           {
-            "name": "runId",
+            "name": "run_id",
             "in": "path",
             "required": true,
             "description": "The evaluation-run identifier.",
@@ -11906,7 +12786,7 @@
             }
           },
           {
-            "name": "runId",
+            "name": "run_id",
             "in": "path",
             "required": true,
             "description": "The evaluation-run identifier.",
@@ -11960,7 +12840,87 @@
         }
       }
     },
-    "/eval_runs/{runId}/task_runs": {
+    "/evaluation-runs/{run_id}/resolvedConfiguration": {
+      "get": {
+        "operationId": "EvalRuns_getResolvedConfiguration",
+        "summary": "Get an evaluation run's resolved configuration",
+        "description": "Reads the captured job, Dataset digest, resolved target, and execution defaults.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "description": "Parent evaluation-run identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvalRunResolvedConfiguration"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvalRuns"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
+    "/evaluation-runs/{run_id}/task-runs": {
       "get": {
         "operationId": "EvalRuns_listTaskRuns",
         "summary": "List evaluation task runs",
@@ -11979,7 +12939,7 @@
             }
           },
           {
-            "name": "runId",
+            "name": "run_id",
             "in": "path",
             "required": true,
             "description": "The parent evaluation-run identifier.",
@@ -12114,7 +13074,7 @@
         }
       }
     },
-    "/eval_runs/{runId}/task_runs/{taskRunId}": {
+    "/evaluation-runs/{run_id}/task-runs/{task_run_id}": {
       "get": {
         "operationId": "EvalRuns_getTaskRun",
         "summary": "Get an evaluation task run",
@@ -12133,7 +13093,7 @@
             }
           },
           {
-            "name": "runId",
+            "name": "run_id",
             "in": "path",
             "required": true,
             "description": "The parent evaluation-run identifier.",
@@ -12142,7 +13102,7 @@
             }
           },
           {
-            "name": "taskRunId",
+            "name": "task_run_id",
             "in": "path",
             "required": true,
             "description": "The task-run identifier.",
@@ -12203,105 +13163,7 @@
         }
       }
     },
-    "/eval_runs/{runId}/task_runs/{taskRunId}/artifacts/{artifactId}/content": {
-      "get": {
-        "operationId": "EvalRuns_downloadTaskRunArtifact",
-        "summary": "Download an evaluation task-run artifact",
-        "description": "Streams retained artifact content for a task run.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The parent evaluation-run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "taskRunId",
-            "in": "path",
-            "required": true,
-            "description": "The task-run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "artifactId",
-            "in": "path",
-            "required": true,
-            "description": "The artifact identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "contentMediaType": "*/*"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "EvalRuns"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      }
-    },
-    "/eval_runs/{runId}/task_runs/{taskRunId}/trajectory": {
+    "/evaluation-runs/{run_id}/task-runs/{task_run_id}/trajectory": {
       "get": {
         "operationId": "EvalRuns_getTaskRunTrajectory",
         "summary": "Get an evaluation task-run trajectory",
@@ -12320,7 +13182,7 @@
             }
           },
           {
-            "name": "runId",
+            "name": "run_id",
             "in": "path",
             "required": true,
             "description": "The parent evaluation-run identifier.",
@@ -12329,7 +13191,7 @@
             }
           },
           {
-            "name": "taskRunId",
+            "name": "task_run_id",
             "in": "path",
             "required": true,
             "description": "The task-run identifier.",
@@ -12390,7 +13252,7 @@
         }
       }
     },
-    "/eval_runs/{runId}:cancel": {
+    "/evaluation-runs/{run_id}:cancel": {
       "post": {
         "operationId": "EvalRuns_cancel",
         "summary": "Cancel an evaluation run",
@@ -12409,7 +13271,7 @@
             }
           },
           {
-            "name": "runId",
+            "name": "run_id",
             "in": "path",
             "required": true,
             "description": "The evaluation-run identifier.",
@@ -12431,111 +13293,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FoundryEvalRun"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "EvalRuns"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      }
-    },
-    "/eval_runs/{runId}:rerun": {
-      "post": {
-        "operationId": "EvalRuns_rerun",
-        "summary": "Rerun a completed evaluation",
-        "description": "Starts a new full run from a terminal run's captured definition and resolved settings.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "description": "The terminal source run identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Operation-Id",
-            "in": "header",
-            "required": false,
-            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "headers": {
-              "Operation-Location": {
-                "required": true,
-                "description": "URL to poll for the job status.",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Location": {
-                "required": true,
-                "description": "URL of the created job resource.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -36078,572 +36835,6 @@
         }
       }
     },
-    "/task_sets": {
-      "get": {
-        "operationId": "TaskSets_list",
-        "summary": "List task sets",
-        "description": "Lists the latest version of each task set.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 20
-            },
-            "explode": false
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "required": false,
-            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
-            "schema": {
-              "$ref": "#/components/schemas/PageOrder"
-            },
-            "explode": false
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "required": false,
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "required": false,
-            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "data",
-                    "has_more"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/TaskSetVersion"
-                      },
-                      "description": "The requested list of items."
-                    },
-                    "first_id": {
-                      "type": "string",
-                      "description": "The first ID represented in this list."
-                    },
-                    "last_id": {
-                      "type": "string",
-                      "description": "The last ID represented in this list."
-                    },
-                    "has_more": {
-                      "type": "boolean",
-                      "description": "A value indicating whether there are additional values available not captured in this list."
-                    }
-                  },
-                  "description": "The response data for a requested list of items."
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TaskSets"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      }
-    },
-    "/task_sets/{name}": {
-      "post": {
-        "operationId": "TaskSets_reconcile",
-        "summary": "Reconcile a task set",
-        "description": "Creates a task set if absent, or appends a version only when its complete definition changes.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The stable task-set name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TaskSetVersion"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TaskSetVersion"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TaskSets"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TaskSetDefinition"
-              }
-            }
-          },
-          "description": "The complete definition to publish if changed."
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      }
-    },
-    "/task_sets/{name}/versions": {
-      "post": {
-        "operationId": "TaskSets_createVersion",
-        "summary": "Create a task-set version",
-        "description": "Always appends a task-set version with a service-assigned identifier.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The task-set name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TaskSetVersion"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TaskSets"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TaskSetDefinition"
-              }
-            }
-          },
-          "description": "The task-set version to create."
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "get": {
-        "operationId": "TaskSets_listVersions",
-        "summary": "List task-set versions",
-        "description": "Lists all versions of a task set.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The task-set name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 20
-            },
-            "explode": false
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "required": false,
-            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
-            "schema": {
-              "$ref": "#/components/schemas/PageOrder"
-            },
-            "explode": false
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "required": false,
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "required": false,
-            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "data",
-                    "has_more"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/TaskSetVersion"
-                      },
-                      "description": "The requested list of items."
-                    },
-                    "first_id": {
-                      "type": "string",
-                      "description": "The first ID represented in this list."
-                    },
-                    "last_id": {
-                      "type": "string",
-                      "description": "The last ID represented in this list."
-                    },
-                    "has_more": {
-                      "type": "boolean",
-                      "description": "A value indicating whether there are additional values available not captured in this list."
-                    }
-                  },
-                  "description": "The response data for a requested list of items."
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TaskSets"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      }
-    },
-    "/task_sets/{name}/versions/{version}": {
-      "get": {
-        "operationId": "TaskSets_getVersion",
-        "summary": "Get a task-set version",
-        "description": "Retrieves an exact task-set version.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The task-set name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "description": "The exact version identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TaskSetVersion"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TaskSets"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      }
-    },
     "/tasks": {
       "post": {
         "operationId": "createAgentServerTask",
@@ -38126,7 +38317,7 @@
         "required": false,
         "description": "Filters task runs by execution status.",
         "schema": {
-          "$ref": "#/components/schemas/JobStatus"
+          "$ref": "#/components/schemas/EvaluationTaskRunStatus"
         },
         "explode": false
       },
@@ -46689,6 +46880,20 @@
         ],
         "description": "Dataset source for evaluator generation jobs — reference to a dataset."
       },
+      "DatasetKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "taskset"
+            ]
+          }
+        ],
+        "description": "The authored content carried by a Dataset version, independent of its storage type."
+      },
       "DatasetReference": {
         "type": "object",
         "required": [
@@ -46722,6 +46927,38 @@
         ],
         "description": "Enum to determine the type of data."
       },
+      "DatasetValidationError": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Machine-readable failure category."
+          },
+          "message": {
+            "type": "string",
+            "description": "Explanation of the invalid Task or manifest."
+          },
+          "task_id": {
+            "type": "string",
+            "description": "Task identifier, when a specific Task caused the error."
+          }
+        },
+        "description": "An actionable validation failure without disclosing private Task content."
+      },
+      "DatasetValidationStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "in_progress",
+          "succeeded",
+          "failed"
+        ],
+        "description": "Evaluation-content validation state for a Dataset version."
+      },
       "DatasetVersion": {
         "type": "object",
         "required": [
@@ -46731,6 +46968,28 @@
           "version"
         ],
         "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/DatasetKind",
+            "description": "The purpose of this Dataset version; `taskset` identifies evaluation Task content."
+          },
+          "validation_status": {
+            "$ref": "#/components/schemas/DatasetValidationStatus",
+            "description": "Current validation state of the Task content.",
+            "readOnly": true
+          },
+          "validation_errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatasetValidationError"
+            },
+            "description": "Errors produced by content validation, if any.",
+            "readOnly": true
+          },
+          "content_digest": {
+            "type": "string",
+            "description": "Digest of the exact content approved by successful validation.",
+            "readOnly": true
+          },
           "dataUri": {
             "type": "string",
             "minLength": 1,
@@ -46781,6 +47040,10 @@
           "type"
         ],
         "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/DatasetKind",
+            "description": "The purpose of this Dataset version; `taskset` identifies evaluation Task content."
+          },
           "type": {
             "$ref": "#/components/schemas/DatasetType",
             "description": "Dataset type"
@@ -47469,72 +47732,6 @@
         ],
         "description": "A CSV data source for evaluation runs.\n\nSee [evaluation datasets](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluation-datasets)."
       },
-      "EvalExecutionConfig": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "harness_invocation"
-            ],
-            "description": "The execution mode."
-          },
-          "repetitions": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "The number of attempts created for each task.",
-            "default": 1
-          },
-          "task_concurrency": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "The maximum number of task attempts executed concurrently.",
-            "default": 1
-          },
-          "constraints": {
-            "$ref": "#/components/schemas/ExecutionConstraints",
-            "description": "Per-attempt execution constraints."
-          }
-        },
-        "description": "Suite-owned execution defaults, independent of the harness configuration.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvalExecutionConfigOverrides": {
-        "type": "object",
-        "properties": {
-          "repetitions": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "The number of attempts created for each task."
-          },
-          "task_concurrency": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "The maximum number of task attempts executed concurrently."
-          },
-          "constraints": {
-            "$ref": "#/components/schemas/ExecutionConstraints",
-            "description": "Constraint fields to replace; omitted fields inherit the suite value."
-          }
-        },
-        "description": "Execution settings that replace a published suite's defaults for one run.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
       "EvalGraderInspectAI": {
         "type": "object",
         "required": [
@@ -47561,55 +47758,50 @@
         },
         "description": "Grader inspect_ai definition for inspect_ai benchmark evaluators."
       },
+      "EvalInvocationTarget": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/FoundryAgentTarget"
+          },
+          {
+            "$ref": "#/components/schemas/ExternalEndpointTarget"
+          }
+        ],
+        "description": "An invokable Foundry agent or a supported external endpoint.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "EvalJob": {
         "type": "object",
         "required": [
-          "harness_config",
           "name",
-          "task_set",
           "created_at",
           "updated_at",
           "created_by"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "The stable job name."
+          },
           "description": {
             "type": "string",
-            "description": "Human-readable description of the evaluation."
-          },
-          "graders": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InlineEvaluationGrader"
-            },
-            "description": "Graders applied to every task in the job."
-          },
-          "scoring": {
-            "$ref": "#/components/schemas/ScoringRule",
-            "description": "How completed grader verdicts determine the task-run outcome; defaults to all_pass."
-          },
-          "harness_config": {
-            "$ref": "#/components/schemas/InlineFoundryAgentHarness",
-            "description": "The harness and agent used for task attempts."
-          },
-          "execution_config": {
-            "$ref": "#/components/schemas/EvalExecutionConfig",
-            "description": "Execution defaults, when different from one invocation per task."
+            "description": "Editable stable description."
           },
           "metadata": {
             "type": "object",
             "unevaluatedProperties": {
               "type": "string"
             },
-            "description": "User-defined string labels."
+            "description": "Editable stable labels."
           },
-          "name": {
+          "latest_version": {
             "type": "string",
-            "description": "The stable job name.",
+            "description": "Latest remaining published configuration version, when available.",
             "readOnly": true
-          },
-          "task_set": {
-            "$ref": "#/components/schemas/TaskSetReference",
-            "description": "The pinned TaskSet version evaluated by this job."
           },
           "created_at": {
             "$ref": "#/components/schemas/FoundryTimestamp",
@@ -47627,26 +47819,7 @@
             "readOnly": true
           }
         },
-        "description": "An editable named job definition, not an executing EvalRun.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvalJobConfigOverrides": {
-        "type": "object",
-        "properties": {
-          "harness_config": {
-            "$ref": "#/components/schemas/InlineFoundryAgentHarness",
-            "description": "A complete harness definition replacing the job's harness."
-          },
-          "execution_config": {
-            "$ref": "#/components/schemas/EvalExecutionConfigOverrides",
-            "description": "Execution fields to replace; omitted fields inherit the job defaults."
-          }
-        },
-        "description": "Run-only overrides of a named job's harness and execution settings.",
+        "description": "Stable EvalJob identity, separate from its immutable configuration versions.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -47656,8 +47829,8 @@
       "EvalJobDefinition": {
         "type": "object",
         "required": [
-          "harness_config",
-          "task_set"
+          "dataset",
+          "target"
         ],
         "properties": {
           "description": {
@@ -47669,19 +47842,30 @@
             "items": {
               "$ref": "#/components/schemas/InlineEvaluationGrader"
             },
-            "description": "Graders applied to every task in the job."
+            "description": "Default graders for Tasks without their own grader list."
           },
           "scoring": {
             "$ref": "#/components/schemas/ScoringRule",
             "description": "How completed grader verdicts determine the task-run outcome; defaults to all_pass."
           },
-          "harness_config": {
-            "$ref": "#/components/schemas/InlineFoundryAgentHarness",
-            "description": "The harness and agent used for task attempts."
+          "dataset": {
+            "$ref": "#/components/schemas/EvaluationDatasetVersionReference",
+            "description": "Validated Task content at an exact Dataset version."
           },
-          "execution_config": {
-            "$ref": "#/components/schemas/EvalExecutionConfig",
-            "description": "Execution defaults, when different from one invocation per task."
+          "target": {
+            "$ref": "#/components/schemas/EvalInvocationTarget",
+            "description": "The system invoked by each TaskRun."
+          },
+          "repetitions": {
+            "$ref": "#/components/schemas/EvaluationRepetitions",
+            "description": "Number of TaskRuns created for every Task."
+          },
+          "maxParallelTaskRuns": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Maximum concurrent TaskRuns, including invocation and grading.",
+            "default": 1
           },
           "metadata": {
             "type": "object",
@@ -47689,13 +47873,9 @@
               "type": "string"
             },
             "description": "User-defined string labels."
-          },
-          "task_set": {
-            "$ref": "#/components/schemas/TaskSetSource",
-            "description": "A pinned TaskSet version, or tasks embedded in this definition."
           }
         },
-        "description": "A one-off or captured job definition; embedded tasks are not published.",
+        "description": "Published grading and invocation settings, captured on each run.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -47705,15 +47885,128 @@
       "EvalJobReference": {
         "type": "object",
         "required": [
-          "name"
+          "name",
+          "version"
         ],
         "properties": {
           "name": {
             "type": "string",
             "description": "The published EvalJob name."
+          },
+          "version": {
+            "type": "string",
+            "description": "The immutable configuration version."
           }
         },
-        "description": "A reference to the current definition of a named EvalJob.",
+        "description": "A reference to an exact published EvalJob version.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvalJobUpdate": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "New stable description."
+          },
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "New stable labels."
+          }
+        },
+        "description": "Mutable fields on the stable job; published versions are never patched.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvalJobVersion": {
+        "type": "object",
+        "required": [
+          "dataset",
+          "target",
+          "name",
+          "version",
+          "dataset_content_digest",
+          "created_at",
+          "created_by"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Human-readable description of the evaluation."
+          },
+          "graders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InlineEvaluationGrader"
+            },
+            "description": "Default graders for Tasks without their own grader list."
+          },
+          "scoring": {
+            "$ref": "#/components/schemas/ScoringRule",
+            "description": "How completed grader verdicts determine the task-run outcome; defaults to all_pass."
+          },
+          "dataset": {
+            "$ref": "#/components/schemas/EvaluationDatasetVersionReference",
+            "description": "Validated Task content at an exact Dataset version."
+          },
+          "target": {
+            "$ref": "#/components/schemas/EvalInvocationTarget",
+            "description": "The system invoked by each TaskRun."
+          },
+          "repetitions": {
+            "$ref": "#/components/schemas/EvaluationRepetitions",
+            "description": "Number of TaskRuns created for every Task."
+          },
+          "maxParallelTaskRuns": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Maximum concurrent TaskRuns, including invocation and grading.",
+            "default": 1
+          },
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "User-defined string labels."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the stable job.",
+            "readOnly": true
+          },
+          "version": {
+            "type": "string",
+            "description": "Published version identifier. Assignment is pending API review.",
+            "readOnly": true
+          },
+          "dataset_content_digest": {
+            "type": "string",
+            "description": "Digest of the Dataset content validated at publication.",
+            "readOnly": true
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Publication time in Unix seconds.",
+            "readOnly": true
+          },
+          "created_by": {
+            "type": "string",
+            "description": "Identity that published this version.",
+            "readOnly": true
+          }
+        },
+        "description": "An immutable configuration published under a named EvalJob.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -47956,22 +48249,6 @@
           ]
         }
       },
-      "EvalRunCreateContent": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/EvalRunFromJob"
-          },
-          {
-            "$ref": "#/components/schemas/EvalRunFromJobDefinition"
-          }
-        ],
-        "description": "Exactly one run source: a named EvalJob or a one-off job definition.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
       "EvalRunDataSource": {
         "type": "object",
         "required": [
@@ -48003,37 +48280,15 @@
       "EvalRunFromJob": {
         "type": "object",
         "required": [
-          "eval_job"
+          "evaluation_job"
         ],
         "properties": {
-          "eval_job": {
+          "evaluation_job": {
             "$ref": "#/components/schemas/EvalJobReference",
-            "description": "The named job selected for this run."
-          },
-          "config_overrides": {
-            "$ref": "#/components/schemas/EvalJobConfigOverrides",
-            "description": "Run-only overrides of a named job's harness and execution settings."
+            "description": "Published job and immutable configuration version to run."
           }
         },
-        "description": "Inputs for running the current definition of a named EvalJob.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvalRunFromJobDefinition": {
-        "type": "object",
-        "required": [
-          "job_definition"
-        ],
-        "properties": {
-          "job_definition": {
-            "$ref": "#/components/schemas/EvalJobDefinition",
-            "description": "The one-off job definition, without named-job overrides."
-          }
-        },
-        "description": "Inputs for running a complete one-off job definition.",
+        "description": "Select an exact named EvalJob version; inline definitions and overrides are P1.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -48255,6 +48510,51 @@
         },
         "description": "A message in the evaluation run."
       },
+      "EvalRunResolvedConfiguration": {
+        "type": "object",
+        "required": [
+          "evaluation_job",
+          "dataset",
+          "target",
+          "repetitions",
+          "maxParallelTaskRuns",
+          "task_content_digest"
+        ],
+        "properties": {
+          "evaluation_job": {
+            "$ref": "#/components/schemas/EvalJobReference",
+            "description": "Exact published job version."
+          },
+          "dataset": {
+            "$ref": "#/components/schemas/EvaluationDatasetVersionReference",
+            "description": "Dataset whose Task content was captured."
+          },
+          "target": {
+            "$ref": "#/components/schemas/ResolvedEvalInvocationTarget",
+            "description": "Resolved target identity, never credentials."
+          },
+          "repetitions": {
+            "$ref": "#/components/schemas/EvaluationRepetitions",
+            "description": "Attempts per Task with defaults applied."
+          },
+          "maxParallelTaskRuns": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Maximum parallel TaskRuns with the default applied."
+          },
+          "task_content_digest": {
+            "type": "string",
+            "description": "Digest of the Task bytes authorized at admission."
+          }
+        },
+        "description": "Effective configuration retained at admission, without raw Task content.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "EvalRunResult": {
         "type": "object",
         "required": [
@@ -48403,15 +48703,59 @@
           ]
         }
       },
+      "EvalTarget": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EvalTargetType",
+            "description": "The invocation target type."
+          },
+          "execution": {
+            "$ref": "#/components/schemas/TargetExecution",
+            "description": "Target invocation timeout."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "external_endpoint": "#/components/schemas/ExternalEndpointTarget",
+            "foundry_agent": "#/components/schemas/FoundryAgentTarget"
+          }
+        },
+        "description": "The system whose responses are evaluated.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvalTargetType": {
+        "type": "string",
+        "enum": [
+          "foundry_agent",
+          "external_endpoint"
+        ],
+        "description": "The supported systems under evaluation.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "EvalTaskRun": {
         "type": "object",
         "required": [
           "id",
-          "eval_run_id",
+          "evaluation_run_id",
           "task",
           "repetition_number",
           "status",
-          "record",
+          "input",
+          "artifacts",
+          "effective_graders",
           "grader_results",
           "lifecycle"
         ],
@@ -48420,7 +48764,7 @@
             "type": "string",
             "description": "The task-run identifier."
           },
-          "eval_run_id": {
+          "evaluation_run_id": {
             "type": "string",
             "description": "The parent EvalRun identifier."
           },
@@ -48434,19 +48778,55 @@
             "description": "The one-based repetition number for this task."
           },
           "status": {
-            "$ref": "#/components/schemas/JobStatus",
+            "$ref": "#/components/schemas/EvaluationTaskRunStatus",
             "description": "The task-run execution status."
           },
-          "record": {
-            "$ref": "#/components/schemas/EvaluationTaskRunRecord",
-            "description": "Inputs and available evidence captured before grading."
+          "input": {
+            "$ref": "#/components/schemas/PromptTaskInput",
+            "description": "Prompt sent to the target, without grader-only reference facts."
+          },
+          "expected": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Reference facts visible only to graders."
+          },
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Task metadata visible only to graders."
+          },
+          "observed": {
+            "$ref": "#/components/schemas/EvaluationTaskRunObserved",
+            "description": "Final output and trajectory reference, when available."
+          },
+          "usage": {
+            "$ref": "#/components/schemas/EvaluationTaskRunUsage",
+            "description": "Available target usage, excluding grader calls."
+          },
+          "artifacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluationArtifact"
+            },
+            "description": "Metadata for retained evidence, empty when none was captured."
+          },
+          "diagnostics": {
+            "$ref": "#/components/schemas/EvaluationTaskRunDiagnostics",
+            "description": "Retry counts, checkpoints, and retained diagnostic logs."
+          },
+          "effective_graders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluationEffectiveGrader"
+            },
+            "description": "Selected checks, exposed even before they run or when invocation fails."
           },
           "grader_results": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EvaluationGraderResult"
             },
-            "description": "Outcomes from attempted task- and job-level graders."
+            "description": "Outcomes from attempted effective graders."
           },
           "overall_result": {
             "$ref": "#/components/schemas/EvaluationTaskOverallResult",
@@ -48857,6 +49237,61 @@
           ]
         }
       },
+      "EvaluationDatasetVersionReference": {
+        "type": "object",
+        "required": [
+          "name",
+          "version"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Dataset name."
+          },
+          "version": {
+            "type": "string",
+            "description": "Exact Dataset version."
+          }
+        },
+        "description": "A reference to a validated Foundry Dataset version containing Tasks.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluationEffectiveGrader": {
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "source"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Grader name within this TaskRun."
+          },
+          "type": {
+            "$ref": "#/components/schemas/EvaluationGraderType",
+            "description": "Type of check to apply."
+          },
+          "source": {
+            "$ref": "#/components/schemas/EvaluationGraderSource",
+            "description": "Job default or Task-specific replacement."
+          },
+          "evaluator": {
+            "$ref": "#/components/schemas/FoundryEvaluatorReference",
+            "description": "Pinned catalog version when the grader uses a Foundry Evaluator."
+          }
+        },
+        "description": "Resolved check selected for a TaskRun before execution starts.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "EvaluationGrader": {
         "type": "object",
         "required": [
@@ -48881,10 +49316,11 @@
             "regex": "#/components/schemas/RegexCheckGrader",
             "numeric_range": "#/components/schemas/NumericRangeGrader",
             "tool_calls": "#/components/schemas/ToolCallsGrader",
+            "foundry_evaluator": "#/components/schemas/FoundryEvaluatorGrader",
             "rubric": "#/components/schemas/RubricGrader"
           }
         },
-        "description": "A grader resolved from a TaskSet version or EvalJob definition.",
+        "description": "A grader resolved from a Dataset Task or an EvalJob definition.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -48971,6 +49407,19 @@
           ]
         }
       },
+      "EvaluationGraderSource": {
+        "type": "string",
+        "enum": [
+          "job",
+          "task"
+        ],
+        "description": "Where an effective grader was selected.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "EvaluationGraderStatus": {
         "type": "string",
         "enum": [
@@ -48998,54 +49447,12 @@
               "substring_match",
               "regex",
               "numeric_range",
-              "tool_calls"
+              "tool_calls",
+              "foundry_evaluator"
             ]
           }
         ],
         "description": "The supported inline grader types.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationHarness": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/EvaluationHarnessType",
-            "description": "The harness type."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "inline_foundry_agent_harness": "#/components/schemas/InlineFoundryAgentHarness"
-          }
-        },
-        "description": "The harness used to execute evaluation tasks.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationHarnessType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "inline_foundry_agent_harness"
-            ]
-          }
-        ],
-        "description": "The supported evaluation harness types.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -49334,6 +49741,36 @@
           ]
         }
       },
+      "EvaluationRepetitions": {
+        "type": "object",
+        "required": [
+          "count",
+          "aggregation"
+        ],
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "TaskRuns created for every Task.",
+            "default": 1
+          },
+          "aggregation": {
+            "type": "string",
+            "enum": [
+              "mean"
+            ],
+            "description": "MVP repetition aggregation.",
+            "default": "mean"
+          }
+        },
+        "description": "The number of attempts per Task and their aggregation.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "EvaluationResultSample": {
         "type": "object",
         "required": [
@@ -49555,6 +49992,25 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Insights=V1Preview"
+          ]
+        }
+      },
+      "EvaluationRunStatus": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "awaiting_task_runs",
+          "running",
+          "cancelling",
+          "succeeded",
+          "partially_failed",
+          "failed",
+          "cancelled"
+        ],
+        "description": "Provisional execution states, separate from grading outcomes.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
           ]
         }
       },
@@ -50385,51 +50841,7 @@
           ]
         }
       },
-      "EvaluationTaskRunInputs": {
-        "type": "object",
-        "required": [
-          "type",
-          "instruction"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "prompt"
-            ],
-            "description": "Indicates a single prompt invocation."
-          },
-          "instruction": {
-            "type": "string",
-            "minLength": 1,
-            "description": "The prompt delivered to the agent."
-          },
-          "data": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "$ref": "#/components/schemas/EvaluationTaskContent"
-            },
-            "description": "Additional named context visible to the agent."
-          },
-          "expected": {
-            "type": "object",
-            "unevaluatedProperties": {},
-            "description": "Reference facts for graders, never sent to the agent."
-          },
-          "metadata": {
-            "type": "object",
-            "unevaluatedProperties": {},
-            "description": "Grader-only Task metadata."
-          }
-        },
-        "description": "The inputs retained in a TaskRun record, including grader-only references.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvaluationTaskRunOutputs": {
+      "EvaluationTaskRunObserved": {
         "type": "object",
         "properties": {
           "text": {
@@ -50440,51 +50852,30 @@
             "type": "object",
             "unevaluatedProperties": {},
             "description": "Parsed final JSON-schema output, not duplicated in text."
+          },
+          "trajectory": {
+            "$ref": "#/components/schemas/EvaluationTrajectoryReference",
+            "description": "Reference to normalized ATIF, fetched through the contained trajectory read."
           }
         },
-        "description": "The final answer, when the invocation produced usable evidence.",
+        "description": "Available invocation output and optional reference to retained ATIF.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
           ]
         }
       },
-      "EvaluationTaskRunRecord": {
-        "type": "object",
-        "required": [
-          "inputs",
-          "artifacts"
+      "EvaluationTaskRunStatus": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "running",
+          "succeeded",
+          "failed",
+          "cancelled",
+          "skipped"
         ],
-        "properties": {
-          "inputs": {
-            "$ref": "#/components/schemas/EvaluationTaskRunInputs",
-            "description": "Attempted input and grader-only references."
-          },
-          "outputs": {
-            "$ref": "#/components/schemas/EvaluationTaskRunOutputs",
-            "description": "Final answer, absent after an invocation failure."
-          },
-          "trajectory": {
-            "$ref": "#/components/schemas/EvaluationTrajectoryReference",
-            "description": "Reference to separately retrieved ATIF evidence."
-          },
-          "usage": {
-            "$ref": "#/components/schemas/EvaluationTaskRunUsage",
-            "description": "Agent invocation measurements, excluding judge calls."
-          },
-          "artifacts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvaluationArtifact"
-            },
-            "description": "Metadata for retained evidence, empty when none was captured."
-          },
-          "diagnostics": {
-            "$ref": "#/components/schemas/EvaluationTaskRunDiagnostics",
-            "description": "Retry counts, checkpoints, and retained diagnostic logs."
-          }
-        },
-        "description": "Per-attempt evidence retained before grading.",
+        "description": "Execution state of a single Task attempt.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -51582,22 +51973,6 @@
           ]
         }
       },
-      "ExecutionConstraints": {
-        "type": "object",
-        "properties": {
-          "max_duration_seconds": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The maximum attempt duration in seconds."
-          }
-        },
-        "description": "Per-attempt execution constraints.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
       "ExternalAgentDefinition": {
         "type": "object",
         "required": [
@@ -51624,6 +51999,41 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "ExternalAgents=V1Preview"
+          ]
+        }
+      },
+      "ExternalEndpointTarget": {
+        "type": "object",
+        "required": [
+          "type",
+          "connection_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "external_endpoint"
+            ],
+            "description": "Indicates a connected endpoint."
+          },
+          "connection_name": {
+            "type": "string",
+            "description": "Project connection containing the endpoint and delegated authentication."
+          },
+          "registered_agent": {
+            "type": "string",
+            "description": "Optional registered external-agent identity for provenance."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalTarget"
+          }
+        ],
+        "description": "Invoke a supported external endpoint; registration alone is not invokable.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
           ]
         }
       },
@@ -52091,6 +52501,37 @@
           ]
         }
       },
+      "FoundryAgentTarget": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "foundry_agent"
+            ],
+            "description": "Indicates a Foundry agent."
+          },
+          "agent": {
+            "$ref": "#/components/schemas/FoundryAgentReference",
+            "description": "The agent to invoke; an omitted version resolves to the latest version."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalTarget"
+          }
+        ],
+        "description": "Invoke a Foundry agent; omitted versions resolve when each run starts.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "FoundryDurationMilliseconds": {
         "type": "integer",
         "format": "int32",
@@ -52105,11 +52546,12 @@
         "type": "object",
         "required": [
           "id",
+          "evaluation_job",
           "job_definition",
           "status",
           "lifecycle",
-          "resolved_harness_config",
-          "resolved_execution_config"
+          "resolved_target",
+          "task_content_digest"
         ],
         "properties": {
           "id": {
@@ -52117,26 +52559,17 @@
             "description": "Server-assigned run identifier.",
             "readOnly": true
           },
-          "eval_job": {
+          "evaluation_job": {
             "$ref": "#/components/schemas/EvalJobReference",
-            "description": "Published job selected at creation, if any."
+            "description": "Exact published job selected at creation."
           },
           "job_definition": {
             "$ref": "#/components/schemas/EvalJobDefinition",
-            "description": "Captured complete job definition, including one selected from a named job.",
-            "readOnly": true
-          },
-          "config_overrides": {
-            "$ref": "#/components/schemas/EvalJobConfigOverrides",
-            "description": "Run-only overrides submitted with a named job."
-          },
-          "rerun_of": {
-            "type": "string",
-            "description": "Immediate source run for a full rerun.",
+            "description": "Complete job definition captured when this run was admitted.",
             "readOnly": true
           },
           "status": {
-            "$ref": "#/components/schemas/JobStatus",
+            "$ref": "#/components/schemas/EvaluationRunStatus",
             "description": "Current orchestration status; quality is reported separately in result.",
             "readOnly": true
           },
@@ -52145,14 +52578,14 @@
             "description": "Run and upcoming phase timings.",
             "readOnly": true
           },
-          "resolved_harness_config": {
-            "$ref": "#/components/schemas/ResolvedFoundryAgentHarness",
-            "description": "The effective harness and exact agent reference after run overrides.",
+          "resolved_target": {
+            "$ref": "#/components/schemas/ResolvedEvalInvocationTarget",
+            "description": "Exact target identity resolved when this run was admitted.",
             "readOnly": true
           },
-          "resolved_execution_config": {
-            "$ref": "#/components/schemas/EvalExecutionConfig",
-            "description": "The effective execution mode and attempt limits after run overrides.",
+          "task_content_digest": {
+            "type": "string",
+            "description": "Digest of the authorized Task content retained for this run.",
             "readOnly": true
           },
           "result": {
@@ -52217,6 +52650,60 @@
           }
         },
         "description": "Base class for targets with discriminator support."
+      },
+      "FoundryEvaluatorGrader": {
+        "type": "object",
+        "required": [
+          "type",
+          "evaluator"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "foundry_evaluator"
+            ],
+            "description": "Identifies the catalog adapter."
+          },
+          "evaluator": {
+            "$ref": "#/components/schemas/FoundryEvaluatorReference",
+            "description": "The pinned catalog evaluator; no caller-supplied input mapping is accepted."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationGrader"
+          }
+        ],
+        "description": "A supported catalog evaluator with a service-defined evidence and verdict adapter.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "FoundryEvaluatorReference": {
+        "type": "object",
+        "required": [
+          "name",
+          "version"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The evaluator name."
+          },
+          "version": {
+            "type": "string",
+            "description": "The evaluator version selected for this grader."
+          }
+        },
+        "description": "An exact version in the existing Foundry Evaluator catalog.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "FoundryModelArtifactProfileCategory": {
         "anyOf": [
@@ -53004,40 +53491,12 @@
           },
           {
             "$ref": "#/components/schemas/ToolCallsGrader"
+          },
+          {
+            "$ref": "#/components/schemas/FoundryEvaluatorGrader"
           }
         ],
         "description": "The inline graders supported by the evaluation MVP.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "InlineFoundryAgentHarness": {
-        "type": "object",
-        "required": [
-          "type",
-          "agent"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "inline_foundry_agent_harness"
-            ],
-            "description": "Indicates an inline Foundry-agent harness."
-          },
-          "agent": {
-            "$ref": "#/components/schemas/FoundryAgentReference",
-            "description": "The agent to invoke; an omitted version resolves to the latest version."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/EvaluationHarness"
-          }
-        ],
-        "description": "An inline harness that invokes a versioned Foundry agent.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -96314,24 +96773,16 @@
           ]
         }
       },
-      "ResolvedFoundryAgentHarness": {
-        "type": "object",
-        "required": [
-          "type",
-          "agent"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "inline_foundry_agent_harness"
-            ]
+      "ResolvedEvalInvocationTarget": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/ResolvedFoundryAgentTarget"
           },
-          "agent": {
-            "$ref": "#/components/schemas/ResolvedFoundryAgentReference"
+          {
+            "$ref": "#/components/schemas/ExternalEndpointTarget"
           }
-        },
-        "description": "The exact agent and harness used by a run.",
+        ],
+        "description": "The exact target identity recorded at run admission.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -96353,6 +96804,36 @@
           }
         },
         "description": "The resolved agent version used by a run.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "ResolvedFoundryAgentTarget": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "foundry_agent"
+            ],
+            "description": "Indicates a Foundry agent."
+          },
+          "agent": {
+            "$ref": "#/components/schemas/ResolvedFoundryAgentReference",
+            "description": "The exact agent used for this run."
+          },
+          "execution": {
+            "$ref": "#/components/schemas/TargetExecution",
+            "description": "Resolved invocation timeout, when configured."
+          }
+        },
+        "description": "A target with a resolved agent version or authorized connection identity.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -99978,178 +100459,17 @@
         ],
         "description": "Parameters for generating target completions for simulated conversations.\n\nSee [simulate conversations](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/cloud-evaluation-simulate-conversations?tabs=python)."
       },
-      "Task": {
+      "TargetExecution": {
         "type": "object",
-        "required": [
-          "id",
-          "inputs"
-        ],
         "properties": {
-          "id": {
-            "type": "string",
-            "minLength": 1,
-            "description": "The task identifier, unique within the task-set version."
-          },
-          "description": {
-            "type": "string",
-            "description": "A description of the behavior being evaluated."
-          },
-          "inputs": {
-            "$ref": "#/components/schemas/PromptTaskInput",
-            "description": "The prompt and optional context provided to the agent."
-          },
-          "expected": {
-            "type": "object",
-            "unevaluatedProperties": {},
-            "description": "Reference values visible to graders but not to the agent."
-          },
-          "graders": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InlineEvaluationGrader"
-            },
-            "description": "Task-level graders applied in addition to job-level graders."
-          },
-          "metadata": {
-            "type": "object",
-            "unevaluatedProperties": {},
-            "description": "Caller-defined JSON annotations visible to graders."
-          },
-          "scoring": {
-            "$ref": "#/components/schemas/ScoringRule",
-            "description": "The rule used to combine task and job grader verdicts for this task."
+          "timeoutSeconds": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Maximum target invocation duration in seconds."
           }
         },
-        "description": "A reusable evaluation task.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "TaskSetDefinition": {
-        "type": "object",
-        "required": [
-          "tasks"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Description of the collection."
-          },
-          "tasks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Task"
-            },
-            "minItems": 1,
-            "description": "The tasks to execute."
-          },
-          "metadata": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "string"
-            },
-            "description": "User-defined string labels."
-          }
-        },
-        "description": "A complete task-set definition, reusable or embedded in a one-off run.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "TaskSetReference": {
-        "type": "object",
-        "required": [
-          "name",
-          "version"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Published TaskSet name."
-          },
-          "version": {
-            "type": "string",
-            "description": "Pinned, service-assigned version."
-          }
-        },
-        "description": "A reference to a published TaskSet version.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "TaskSetSource": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TaskSetReference"
-          },
-          {
-            "$ref": "#/components/schemas/TaskSetDefinition"
-          }
-        ],
-        "description": "A pinned TaskSet or a complete inline task definition.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "TaskSetVersion": {
-        "type": "object",
-        "required": [
-          "tasks",
-          "name",
-          "version",
-          "created_at",
-          "created_by"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Description of the collection."
-          },
-          "tasks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Task"
-            },
-            "minItems": 1,
-            "description": "The tasks to execute."
-          },
-          "metadata": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "string"
-            },
-            "description": "User-defined string labels."
-          },
-          "name": {
-            "type": "string",
-            "description": "The task-set name.",
-            "readOnly": true
-          },
-          "version": {
-            "type": "string",
-            "description": "The immutable task-set version.",
-            "readOnly": true
-          },
-          "created_at": {
-            "$ref": "#/components/schemas/FoundryTimestamp",
-            "description": "The time when this version was published.",
-            "readOnly": true
-          },
-          "created_by": {
-            "type": "string",
-            "description": "The identity that published this version.",
-            "readOnly": true
-          }
-        },
-        "description": "An immutable version of a reusable TaskSet.",
+        "description": "Timeout for a single target invocation, not the entire TaskRun.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
