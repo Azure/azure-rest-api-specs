@@ -86,9 +86,12 @@ BreakingChange-Python-Sdk-Approved: *sdk-breaking-change-approvers
 ## ARM review labels
 
 On management-plane PRs, members of `arm-api-reviewers` may apply `ARMSignedOff`,
-`Approved-Suppression`, `Approved-LintDiff`, `Approved-Avocado`, and
-`typespec-suppressions-approved`.
+`Approved-Suppression`, `Approved-LintDiff`, and `typespec-suppressions-approved`.
 Existing global approvers remain authorized.
+
+Members of any of `arm-api-reviewers`, `azure-sdk-team`, or `azure-arm-sdk-reviewers`
+may apply `Approved-ModelValidation`, `Approved-Avocado`, and
+`Approved-SemanticValidation` on management-plane PRs.
 
 Members of `arm-breaking-change-reviewers` may apply the configured
 `BreakingChange-Approved-` and `Versioning-Approved-` labels on management-plane PRs.

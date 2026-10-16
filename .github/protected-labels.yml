@@ -40,7 +40,17 @@ ARMSignedOff: &arm-api-review-policy
   data-plane: unprotected
 Approved-Suppression: *arm-api-review-policy
 Approved-LintDiff: *arm-api-review-policy
-Approved-Avocado: *arm-api-review-policy
+
+# ARM validation approvals are shared by API and SDK reviewers.
+Approved-ModelValidation: &arm-validation-review-policy
+  management-plane:
+    teams:
+      - arm-api-reviewers
+      - azure-sdk-team
+      - azure-arm-sdk-reviewers
+  data-plane: unprotected
+Approved-Avocado: *arm-validation-review-policy
+Approved-SemanticValidation: *arm-validation-review-policy
 
 # REST breaking-change and versioning approvals on management-plane PRs.
 # Enumerate existing labels explicitly; policy keys are not wildcard patterns.
