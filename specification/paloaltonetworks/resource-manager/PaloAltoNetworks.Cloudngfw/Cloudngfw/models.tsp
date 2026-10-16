@@ -2580,8 +2580,7 @@ model MarketplacePlanInfo {
 
 /**
  * A single Marketplace offer and the plans it exposes to the caller. The entry carries the standard
- * Azure Resource Manager proxy-resource identity so that each catalogue entry is addressable by name
- * within the marketplaceOffers collection.
+ * Azure Resource Manager proxy-resource identity.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The catalogue entry returns the standard Azure Resource Manager proxy-resource envelope (readonly id/name/type/systemData) around its properties bag, so inheriting the common-types ProxyResource is the correct relation here rather than composition. ProxyResource is deliberately non-polymorphic and defines no discriminator, which is what trips this data-plane style rule."
 @added(Versions.v2026_09_25_preview)
