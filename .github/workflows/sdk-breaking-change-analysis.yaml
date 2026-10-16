@@ -12,7 +12,7 @@ on: # zizmor: ignore[dangerous-triggers] Only base/default-branch workflow code 
         required: true
         type: string
       sdk_language:
-        description: "SDK language: DotNet, Go, Java, JavaScript, Python"
+        description: "SDK language: Net, Go, Java, Js, Python"
         required: true
         type: string
 
@@ -113,7 +113,7 @@ jobs:
           cache: false
 
       - name: Set up .NET
-        if: needs.resolve.outputs.sdk-language == 'DotNet'
+        if: needs.resolve.outputs.sdk-language == 'Net'
         uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
           dotnet-version: "10.0.x"

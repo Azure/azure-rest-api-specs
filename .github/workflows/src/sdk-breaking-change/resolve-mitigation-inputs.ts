@@ -2,9 +2,9 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, isAbsolute, join, relative, sep } from "node:path";
 import { unzipSync } from "fflate";
 import { AnalysisResultSchema } from "./create-analysis-result.ts";
-import { resolveSdkLanguageConfig } from "./resolve-analysis-inputs.ts";
 import { publishStatus } from "./status.ts";
 import type { GitHubScriptArgs } from "../github.ts";
+import { SdkName } from "@azure-tools/specs-shared/sdk-types";
 
 function toUint8Array(data: unknown): Uint8Array {
   if (data instanceof ArrayBuffer) {
@@ -117,7 +117,7 @@ export async function resolveMitigationTrigger({
       return;
     }
 
-    const languageConfig = resolveSdkLanguageConfig(analysis.sdkLanguage);
+    const sdkRepository = SdkName[analysis.sdkLanguage as keyof typeof SdkName];
     const { data: pull } = await github.rest.pulls.get({
       ...context.repo,
       pull_number: analysis.prNumber,
@@ -133,7 +133,7 @@ export async function resolveMitigationTrigger({
     shouldRun = "true";
     core.setOutput("pr-number", analysis.prNumber);
     core.setOutput("sdk-language", analysis.sdkLanguage);
-    core.setOutput("sdk-repository", languageConfig.repository);
+    core.setOutput("sdk-repository", sdkRepository);
     core.setOutput("head-repository", pull.head.repo.full_name);
     core.setOutput("head-sha", pull.head.sha);
     core.setOutput("head-branch", pull.head.ref);

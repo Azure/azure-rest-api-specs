@@ -107,10 +107,13 @@ export async function publishMitigationResult({
     mitigationResultPath,
     workflowSummaryUrl,
   });
+  core.setOutput("issue_number", buildResult.result.prNumber);
+  core.setOutput("head_sha", buildResult.result.headSha);
   await publishResultInComment(
     { github, context, core },
     buildResult.result.prNumber,
     `/azsdk sdk-breaking-mitigate ${buildResult.result.sdkLanguage}`,
     buildResult.report,
+    buildResult.result.headSha,
   );
 }

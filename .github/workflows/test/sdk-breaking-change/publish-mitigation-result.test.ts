@@ -146,11 +146,12 @@ describe("publishMitigationResult", () => {
   it("publishes using the language-specific mitigation command", async () => {
     const github = createMockGithub();
     github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: "a".repeat(40) } } });
+    const core = createMockCore();
 
     await publishMitigationResult({
       github,
       context: createMockContext(),
-      core: createMockCore(),
+      core,
       mitigationResultPath,
       workflowSummaryUrl: "https://github.com/owner/repo/actions/runs/456",
     });
@@ -162,5 +163,8 @@ describe("publishMitigationResult", () => {
     };
     expect(comment.issue_number).toBe(42);
     expect(comment.body).toMatch(/^\/azsdk sdk-breaking-mitigate Java\n\n/);
+    expect(comment.body).toContain(`<!-- sdk-breaking-change-head-sha: ${"a".repeat(40)} -->`);
+    expect(core.setOutput).toHaveBeenCalledWith("issue_number", 42);
+    expect(core.setOutput).toHaveBeenCalledWith("head_sha", "a".repeat(40));
   });
 });

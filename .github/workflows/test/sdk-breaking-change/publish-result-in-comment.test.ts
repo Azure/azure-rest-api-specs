@@ -8,6 +8,35 @@ import {
 } from "../mocks.ts";
 
 describe("publishResultInComment", () => {
+  it("records the report commit for the Next Steps to Merge summary", async () => {
+    const github = createMockGithub();
+    const headSha = "a".repeat(40);
+    await publishResultInComment(
+      { github, context: createMockContext(), core: createMockCore() },
+      42,
+      "/azsdk sdk-breaking-analysis Go",
+      "analysis report",
+      headSha,
+    );
+
+    const { body } = github.rest.issues.createComment.mock.calls[0][0] as { body: string };
+    expect(body).toContain(`<!-- sdk-breaking-change-head-sha: ${headSha} -->`);
+  });
+
+  it("rejects invalid report commit identifiers", async () => {
+    const github = createMockGithub();
+    await expect(
+      publishResultInComment(
+        { github, context: createMockContext(), core: createMockCore() },
+        42,
+        "/azsdk sdk-breaking-analysis Go",
+        "analysis report",
+        "invalid",
+      ),
+    ).rejects.toThrow("Invalid SDK breaking-change head SHA");
+    expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+  });
+
   it("creates a comment with the command as the first line", async () => {
     const github = createMockGithub();
     const context = createMockContext();

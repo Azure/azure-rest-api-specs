@@ -146,11 +146,12 @@ describe("publishAnalysisResult", () => {
   it("publishes a current analysis result", async () => {
     const github = createMockGithub();
     github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: analyzedSha } } });
+    const core = createMockCore();
 
     await publishAnalysisResult({
       github,
       context: createMockContext(),
-      core: createMockCore(),
+      core,
     });
 
     expect(github.rest.issues.createComment).toHaveBeenCalled();
@@ -160,6 +161,9 @@ describe("publishAnalysisResult", () => {
     };
     expect(comment.issue_number).toBe(42);
     expect(comment.body).toMatch(/^\/azsdk sdk-breaking-analysis Go\n\n/);
+    expect(comment.body).toContain(`<!-- sdk-breaking-change-head-sha: ${analyzedSha} -->`);
+    expect(core.setOutput).toHaveBeenCalledWith("issue_number", 42);
+    expect(core.setOutput).toHaveBeenCalledWith("head_sha", analyzedSha);
   });
 
   it("publishes the error message for a failed analysis", async () => {
@@ -192,6 +196,7 @@ describe("publishAnalysisResult", () => {
           `/azsdk sdk-breaking-analysis Go`,
           "",
           `❌ ${errorMessage}`,
+          `<!-- sdk-breaking-change-head-sha: ${analyzedSha} -->`,
           "<!-- /azsdk sdk-breaking-analysis Go -->",
         ].join("\n"),
       }),
@@ -215,6 +220,7 @@ describe("publishAnalysisResult", () => {
           "/azsdk sdk-breaking-analysis Go",
           "",
           `⚠️ Analysis result for ${analyzedSha} is stale; current PR head is ${currentSha}.`,
+          `<!-- sdk-breaking-change-head-sha: ${analyzedSha} -->`,
           "<!-- /azsdk sdk-breaking-analysis Go -->",
         ].join("\n"),
       }),

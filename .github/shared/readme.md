@@ -213,6 +213,8 @@ const report = renderMarkdownDoc(
 ### `sdk-types` — SDK language types & schemas
 
 - `SdkName` — frozen enum of SDK language identifiers (Go/Java/Js/Net/Python/Rust).
+- `getSdkLanguage(repo)` — returns the SDK language name (for example, `JavaScript` for
+  `azure-sdk-for-js` and `DotNet` for `azure-sdk-for-net`); throws for unsupported repositories.
 - `SdkNameSchema`, `APIViewRequestDataSchema`, `SpecGenSdkArtifactInfoSchema` — zod schemas (plus
   inferred TypeScript types) for SDK tooling payloads.
 - `sdkLabels` — per-language SDK label configuration.

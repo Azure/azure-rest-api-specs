@@ -149,7 +149,21 @@ index 7048e05f8c..6e20b2f172 100644
 3. The PR owner reviews the mitigation results and applies the proposed customization for each
    breaking change they want to resolve. Intentional, accepted breaking changes must be suppressed.
 
+### Next Steps to Merge
+
+When SDK breaking-change labels are present, the **Next Steps to Merge** comment includes
+one summary row per affected language: detection and approval status, links to analysis and
+mitigation reports for the PR's current commit, and the next action.
+
+The summary refreshes after detection labels and report publication workflows complete.
+Reports from older commits are not linked as current results. If a current report is not
+available, the table says so; inspect the corresponding workflow for pending or failed runs.
+Mitigation reports propose customizations for the PR owner to review and apply. They do not
+indicate that the PR has been fixed or revalidated, and do not replace required approvals.
+
 ### Approval
 
-SDK owner label `Approved-SdkBreakingChange-<language>` to approve the SDK breaking changes.
+An authorized SDK reviewer applies the `BreakingChange-<language>-Sdk-Approved` label to
+approve breaking changes for that language. The language's row is removed from the
+**Next Steps to Merge** summary when it next refreshes.
 ```

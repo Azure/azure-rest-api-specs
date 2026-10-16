@@ -61,11 +61,12 @@ afterEach(async () => {
 
 describe("resolveMitigationTrigger", () => {
   it.each([
-    ["DotNet", "azure-sdk-for-net"],
+    ["Net", "azure-sdk-for-net"],
     ["Go", "azure-sdk-for-go"],
     ["Java", "azure-sdk-for-java"],
-    ["JavaScript", "azure-sdk-for-js"],
+    ["Js", "azure-sdk-for-js"],
     ["Python", "azure-sdk-for-python"],
+    ["Rust", "azure-sdk-for-rust"],
   ] as const)(
     "resolves %s mitigation inputs from a successful analysis result",
     async (sdkLanguage, sdkRepository) => {

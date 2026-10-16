@@ -58,6 +58,8 @@ export async function publishAnalysisResult({
   }
 
   const { command, report, result } = await buildAnalysisReport(resultsPath);
+  core.setOutput("issue_number", result.prNumber);
+  core.setOutput("head_sha", result.headSha);
   if (result.status !== "success") {
     const errorMessage = `SDK breaking-change analysis failed.\n\n${result.errorMessage ?? ""}\n\n[See analysis workflow](${result.analysisWorkflowUrl})`;
     core.warning(errorMessage);
@@ -66,6 +68,7 @@ export async function publishAnalysisResult({
       result.prNumber,
       command,
       `❌ ${errorMessage}`,
+      result.headSha,
     );
     return;
   }
@@ -81,9 +84,16 @@ export async function publishAnalysisResult({
       result.prNumber,
       command,
       `⚠️ ${staleMessage}`,
+      result.headSha,
     );
     return;
   }
 
-  await publishResultInComment({ github, context, core }, result.prNumber, command, report);
+  await publishResultInComment(
+    { github, context, core },
+    result.prNumber,
+    command,
+    report,
+    result.headSha,
+  );
 }

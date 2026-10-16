@@ -66,6 +66,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: Publish SDK breaking-change mitigation result
+        id: publish-result
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           MITIGATION_RESULT_PATH: ${{ runner.temp }}/sdk-breaking-change-mitigation-results/sdk-breaking-change-mitigation.json
@@ -82,3 +83,15 @@ jobs:
               mitigationResultPath: process.env.MITIGATION_RESULT_PATH,
               workflowSummaryUrl: process.env.WORKFLOW_SUMMARY_URL,
             });
+
+      - name: Upload PR number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: issue-number
+          value: ${{ steps.publish-result.outputs.issue_number }}
+
+      - name: Upload PR head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: head-sha
+          value: ${{ steps.publish-result.outputs.head_sha }}

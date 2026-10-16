@@ -13,7 +13,6 @@ import {
   generateTypeSpecMetadata,
   type TypeSpecMetadata,
 } from "@azure-tools/specs-shared/typespec-metadata";
-import { SdkLanguage } from "./resolve-analysis-inputs.ts";
 
 interface ProjectResult {
   typespecProjectPath: string;
@@ -33,6 +32,16 @@ export interface AnalyzeSdkProjectsOptions {
   resultDir: string;
   azureSdkCliPath: string;
 }
+
+export const SdkLanguage = Object.freeze({
+  DotNet: "DotNet",
+  Go: "Go",
+  Java: "Java",
+  JavaScript: "JavaScript",
+  Python: "Python",
+} as const);
+
+export type SdkLanguage = (typeof SdkLanguage)[keyof typeof SdkLanguage];
 
 function isWithin(parent: string, child: string): boolean {
   const path = relative(parent, child);
