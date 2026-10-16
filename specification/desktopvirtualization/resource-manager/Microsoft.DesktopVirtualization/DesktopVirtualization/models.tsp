@@ -609,9 +609,8 @@ union ScalingHostPoolType {
 
   /**
    * Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost.
-   * @Introduced in 2024-04-08-preview
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   Personal: "Personal",
 }
 
@@ -1150,6 +1149,7 @@ union SessionHandlingOperation {
   /**
    * Session Host will hibernate after disconnect
    */
+  @added(Versions.v2026_04_16)
   Hibernate: "Hibernate",
 }
 
@@ -1488,24 +1488,21 @@ model AppAttachPackageProperties {
 
   /**
    * Specific name of package owner, is "AppAttach" for native app attach packages
-   * @Introduced in 2024-03-06-preview
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   packageOwnerName?: string;
 
   /**
    * Lookback url to third party control plane, is null for native app attach packages
-   * @Introduced in 2024-03-06-preview
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   packageLookbackUrl?: url;
 
   /**
    * Field that can be populated with custom data and filtered on in list GET calls
-   * @Introduced in 2024-03-06-preview
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   customData?: string;
 
   /**
@@ -2663,7 +2660,7 @@ model HostPoolProperties {
    * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   managedPrivateUDP?: ManagedPrivateUDP;
 
   /**
@@ -2671,7 +2668,7 @@ model HostPoolProperties {
    * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   directUDP?: DirectUDP;
 
   /**
@@ -2679,7 +2676,7 @@ model HostPoolProperties {
    * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   publicUDP?: PublicUDP;
 
   /**
@@ -2687,7 +2684,7 @@ model HostPoolProperties {
    * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   relayUDP?: RelayUDP;
 
   /**
@@ -2716,7 +2713,7 @@ model HostPoolProperties {
    * @Introduced in 2025-09-01-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
 
   /**
@@ -3221,17 +3218,15 @@ model AppAttachPackagePatchProperties {
 
   /**
    * Lookback url to third party control plane, is null for native app attach packages
-   * @Introduced in 2024-03-06-preview
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   packageLookbackUrl?: url;
 
   /**
    * Field that can be populated with custom data and filtered on in list GET calls
-   * @Introduced in 2024-03-06-preview
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   customData?: string;
 }
 
@@ -3659,6 +3654,33 @@ model HostPoolProvisioningControlParameter {
   cancelMessage?: string;
 }
 
+@@typeChangedFrom(
+  HostPool.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity
+);
+@@typeChangedFrom(
+  HostPoolPatch.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity | null
+);
+
+@@typeChangedFrom(
+  Workspace.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity
+);
+@@typeChangedFrom(
+  ApplicationGroup.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity
+);
+@@typeChangedFrom(
+  ScalingPlan.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity
+);
+
 /**
  * HostPool properties that can be patched.
  */
@@ -3680,7 +3702,6 @@ model HostPoolPatch extends Azure.ResourceManager.CommonTypes.Resource {
    * The managed service identities assigned to this resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing use of the 'x-nullable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to a nullable type (| null)."
-  @added(Versions.vLatestPreview)
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity | null;
 }
 
@@ -3781,42 +3802,37 @@ model HostPoolPatchProperties {
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
-   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   managedPrivateUDP?: ManagedPrivateUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
-   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   directUDP?: DirectUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
-   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   publicUDP?: PublicUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
-   * @Introduced in 2024-01-16-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   relayUDP?: RelayUDP;
 
   /**
    * Controls if the use of RDPShortPath transport is allowed, possibly bypassing Private Link routes.
-   * @Introduced in 2025-09-01-preview
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_04_16)
   allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
 
   /**
@@ -5503,6 +5519,7 @@ model UpdateStatusProperty {
   /**
    * Properties bag for sessionHostManagement Update Statuses.
    */
+  @added(Versions.vLatestPreview)
   properties?: SessionHostManagementUpdateStatusProperties;
 }
 
@@ -5513,6 +5530,7 @@ model ProvisioningStatusProperty {
   /**
    * The custom properties of the SessionHost Provisioning Status.
    */
+  @added(Versions.vLatestPreview)
   properties?: SessionHostManagementProvisioningStatusProperties;
 }
 
