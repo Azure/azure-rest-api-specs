@@ -35656,6 +35656,14 @@
         ],
         "description": "A data source that selects traces for evaluation.\n\nSee [create an evaluation dataset from traces](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/traces-to-dataset?tabs=python)."
       },
+      "AzureClouds": {
+        "type": "string",
+        "enum": [
+          "services.ai.azure.com",
+          "services.ai.azure.us"
+        ],
+        "description": "The clouds where Microsoft Foundry is available"
+      },
       "AzureContentFilterBlocklistIdResult": {
         "type": "object",
         "required": [
@@ -93956,12 +93964,24 @@
   },
   "servers": [
     {
-      "url": "{endpoint}",
+      "url": "https://{accountName}.{cloud}/api/projects/{projectName}",
       "description": "Microsoft Foundry",
       "variables": {
-        "endpoint": {
+        "accountName": {
           "default": "",
-          "description": "Foundry Project endpoint in the form\n\"https://{ai-services-account-name}.services.ai.azure.com/api/projects/{project-name}\".\nIf you only have one Project in your Foundry Hub, or to target the default Project\nin your Hub, use the form\n\"https://{ai-services-account-name}.services.ai.azure.com/api/projects/_project\""
+          "description": "The AI services account name."
+        },
+        "cloud": {
+          "default": "services.ai.azure.com",
+          "description": "The cloud where the AI services account is located.",
+          "enum": [
+            "services.ai.azure.com",
+            "services.ai.azure.us"
+          ]
+        },
+        "projectName": {
+          "default": "_project",
+          "description": "The Foundry project name, or _project for the default project."
         }
       }
     }
