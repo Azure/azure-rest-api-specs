@@ -1,9 +1,10 @@
 # Agentic Search
 
-Enter this procedure after Step 3 has selected the Web family either because the
-request is fully covered by the reference catalog or because the required retrieval
-MCP tool is not exposed. Do not call `azsdk_typespec_retrieve_knowledge` during the
-same execution.
+Enter this procedure during Step 2 after the catalog gate has selected the Web family
+either because the request is fully covered by the reference catalog or because the
+required retrieval MCP tool is not exposed. Use the resulting guidance to determine
+the required intake decisions, then retain it for the local authoring plan. Do not
+call `azsdk_typespec_retrieve_knowledge` during the same execution.
 
 ## Input
 
@@ -22,6 +23,6 @@ same execution.
 3. **Search** — find content matching a query derived from the user's request and Step 1 result. Choose the most effective local search tool available.
 4. **Iterate within Web** — if initial results are insufficient, refine the query or
    fetch another relevant catalog URL. Do not switch to retrieval MCP.
-5. **Return and reuse** — return the extracted guidance and URLs to the caller. Reuse
-   this grounding record for local planning, editing, and final citations; do not
-   fetch again only to recreate citations.
+5. **Return and reuse** — return the extracted intake and authoring guidance with its
+   URLs to the caller. Reuse this grounding record for intake, local planning,
+   editing, and final citations; do not fetch again only to recreate citations.

@@ -15,6 +15,7 @@ function read(relativePath) {
 const skill = read("SKILL.md");
 const intake = read("references/intake.md");
 const plan = read("references/authoring-plan.md");
+const search = read("references/agentic-search.md");
 
 assert.ok(
   skill.indexOf("Catalog access gates source selection") <
@@ -24,18 +25,23 @@ assert.ok(
 assert.match(skill, /Never call `azsdk_typespec_generate_authoring_plan`/);
 assert.match(skill, /block rather than switching to retrieval/);
 assert.match(skill, /"carry over all features" or "no exclusions" completely answers/);
+assert.match(skill, /Analyze → Read catalog → Select source[\s\S]*Ground → Intake → Plan locally/);
 assert.match(skill, /Retrieval unavailable:[\s\S]*authoritative Web\s+documentation/);
 assert.match(skill, /Validation unavailable:[\s\S]*mandatory local compile/);
 assert.match(skill, /returns an error, times out, or fails authentication is not\s+unavailable/);
 
-const catalogGate = plan.indexOf("complete this catalog-access gate");
-const webRoute = plan.indexOf("Entire request covered");
-const retrievalRoute = plan.indexOf("Entirely or partly uncovered");
+const catalogGate = intake.indexOf("Complete the catalog-access and grounding gate");
+const webRoute = intake.indexOf("Entire request covered");
+const retrievalRoute = intake.indexOf("Entirely or partly uncovered");
 assert.ok(catalogGate !== -1 && catalogGate < webRoute);
 assert.ok(webRoute < retrievalRoute);
-assert.match(plan, /successful non-Web catalog read/);
-assert.match(plan, /When the retrieval tool is not exposed, select the Web fallback/);
-assert.match(plan, /invocation\s+error, authentication failure, or timeout[\s\S]*not\s+absence/);
+assert.match(intake, /run \[agentic search\]\(agentic-search\.md\) now/);
+assert.match(intake, /Use the\s+fetched guidance to determine the material intake decisions/);
+assert.match(intake, /If retrieval is not exposed, select the authoritative-Web fallback/);
+assert.match(intake, /invocation error, authentication\s+failure, or timeout is not absence/);
+assert.match(plan, /Step 2 already read the reference catalog[\s\S]*grounded the request/);
+assert.match(plan, /Do not call Agentic Search, retrieval, or another source during planning/);
+assert.match(search, /during Step 2[\s\S]*required intake decisions/);
 assert.match(plan, /Do not use `ArmResourcePatchSync` or `ArmResourcePatchAsync`/);
 assert.match(plan, /Preserve every released stable wire contract/);
 

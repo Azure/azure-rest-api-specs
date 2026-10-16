@@ -4,50 +4,21 @@
 
 ## 3.1 General (All Cases)
 
-### 3.1.1 Select and use one grounding source
+### 3.1.1 Reuse the grounding selected during intake
 
-After Steps 1 and 2, complete this catalog-access gate before classifying coverage:
+Step 2 already read the reference catalog, selected exactly one source family, and
+grounded the request before collecting any missing decisions. Verify that its
+grounding record covers the complete request and the finalized intake result.
 
-1. Read the installed
-   [reference-document-links.md](reference-document-links.md).
-2. If that read fails, retry the installed skill path.
-3. If local access remains unavailable, recover the canonical repository copy through
-   an available repository-file reader. If recovery requires `web_fetch`, the Web
-   family is selected for this execution; never call retrieval afterward. If that
-   recovered catalog does not fully cover the request, report a blocker rather than
-   switching source families.
-4. If the catalog still cannot be read, report a blocker without calling retrieval or
-   editing.
-
-A failed catalog read, unavailable skill-reference path, related keyword, or
-uncertainty never proves that a request is uncovered. Only after a successful catalog
-read, classify the complete request and select one source for the entire execution:
-
-1. **Entire request covered → Agentic Search.** Run [agentic search](agentic-search.md) and call
-   `web_fetch` only for the matching URLs. Do not call
-   `azsdk_typespec_retrieve_knowledge`.
-
-2. **Entirely or partly uncovered after a successful non-Web catalog read:**
-   - When `azsdk_typespec_retrieve_knowledge` is exposed, call it for the complete
-     request and do not use Web before or after it:
-     - `request`: user request (verbatim)
-     - `typeSpecProjectRootPath`: project root path
-   - When the retrieval tool is not exposed, select the Web fallback before
-     grounding. Run [agentic search](agentic-search.md) for the complete request,
-     locating additional authoritative TypeSpec or Azure documentation when the
-     installed catalog has no matching link. Do not call retrieval later in that
-     execution.
-
-If the selected source is insufficient, refine or retry within that same family, or
-report a blocker. Never switch source families during an execution.
-
-Tool absence means the tool is not exposed in the current environment. An invocation
-error, authentication failure, or timeout from an exposed retrieval tool is not
-absence; report the blocker rather than switching to Web.
+Do not call Agentic Search, retrieval, or another source during planning. If the
+existing grounding is insufficient, refine or retry within the already selected
+family, then update the intake result if the additional guidance changes a material
+decision. Otherwise, report a blocker. Never switch source families during an
+execution.
 
 ### 3.1.2 Build the authoring plan locally
 
-Synthesize the selected guidance from step 3.1.1 into a concrete plan.
+Synthesize the selected guidance and finalized intake result into a concrete plan.
 
 Document your final plan with references to supporting documents, and ensure the plan follows the retrieved context above.
 
@@ -61,7 +32,7 @@ to cite it.
 
 ### API Versioning
 
-> API Versioning **is covered** by [reference-document-links.md](reference-document-links.md), so use **Agentic Search** (per [3.1.1 Select and use one grounding source](#311-select-and-use-one-grounding-source)) — you **MUST** call `web_fetch` on the matching versioning doc and follow its steps. Do **not** call `azsdk_typespec_retrieve_knowledge` or `azsdk_typespec_generate_authoring_plan`.
+> API Versioning **is covered** by [reference-document-links.md](reference-document-links.md), so Step 2 **MUST** use **Agentic Search** and call `web_fetch` on the matching versioning document before finalizing intake. Reuse that guidance here. Do **not** call `azsdk_typespec_retrieve_knowledge` or `azsdk_typespec_generate_authoring_plan`.
 
 For requests that add, replace, or promote a version:
 

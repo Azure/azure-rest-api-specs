@@ -4,13 +4,35 @@
 
 ## 2.1 General Intake (All Cases)
 
-1. Identify every matching case from the table below using the Step 1 result and the
-   user's request.
-2. Gather only material information that is not already supplied or directly
+Complete the catalog-access and grounding gate before deciding what additional
+information to collect:
+
+1. Read the installed
+   [reference-document-links.md](reference-document-links.md). If that read fails,
+   retry the installed skill path. If local access remains unavailable, recover the
+   canonical repository copy through an available repository-file reader.
+2. If catalog recovery requires `web_fetch`, select the Web family for the execution.
+   If the recovered catalog does not fully cover the request, report a blocker rather
+   than switching to retrieval. If the catalog still cannot be read, report a blocker
+   without grounding or editing.
+3. After a successful catalog read, classify the complete request:
+   - **Entire request covered:** run [agentic search](agentic-search.md) now. Use the
+     fetched guidance to determine the material intake decisions and retain it for
+     the authoring plan.
+   - **Entirely or partly uncovered after a non-Web catalog read:** call
+     `azsdk_typespec_retrieve_knowledge` for the complete request when it is exposed.
+     If retrieval is not exposed, select the authoritative-Web fallback and run
+     agentic search for the complete request. Select the fallback before grounding;
+     do not call both source families.
+4. Using the selected guidance, the Step 1 result, and the user's request, identify
+   every matching case from the table below.
+5. Gather only material information that is not already supplied or directly
    available from the project. If no case matches, skip Step 2.2.
 
-Do not run agentic search, retrieval, planning, or validation during intake. Source
-selection and grounding happen once in Step 3 after the reference catalog is read.
+Tool absence means the tool is not exposed. An invocation error, authentication
+failure, or timeout is not absence and does not permit switching source families.
+Do not plan, edit, or validate during intake. Step 3 must reuse this grounding record
+without repeating Agentic Search or retrieval.
 
 | Case | Name                    | Description                                            | Service Type     |
 | ---- | ----------------------- | ------------------------------------------------------ | ---------------- |
