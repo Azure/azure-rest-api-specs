@@ -1,4 +1,4 @@
-/* eslint-disable typescript/no-unsafe-argument, typescript/no-unsafe-assignment, typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Eval YAML is external data validated by the assertions below. */
+/* eslint-disable typescript/no-unsafe-argument, typescript/no-unsafe-assignment, typescript/no-unsafe-call, typescript/no-unsafe-member-access, typescript/no-unsafe-return -- Eval YAML is external data validated by the assertions below. */
 import * as assert from "node:assert/strict";
 import * as fs from "node:fs";
 import * as path from "node:path";
@@ -98,6 +98,44 @@ for (const [fileName, fragments] of requiredPromptFragments) {
   for (const fragment of fragments) {
     assert.ok(forced.prompt.includes(fragment), `${fileName} forced prompt includes ${fragment}`);
   }
+}
+
+const retrievalRestrictedFiles = new Set([
+  "001005.eval.yaml",
+  "001006.eval.yaml",
+  "001007.eval.yaml",
+  "001008.eval.yaml",
+]);
+for (const fileName of fs.readdirSync(evalsDir).filter((name) => name.endsWith(".eval.yaml"))) {
+  const specification = parse(fs.readFileSync(path.join(evalsDir, fileName), "utf8"));
+  const graderTypes = new Set(
+    specification.stimuli.flatMap((stimulus) =>
+      (stimulus.graders ?? []).map((grader) => grader.type),
+    ),
+  );
+  for (const weightedType of Object.keys(specification.scoring?.weights ?? {})) {
+    assert.ok(
+      graderTypes.has(weightedType),
+      `${fileName} scoring weight ${weightedType} references a configured grader type`,
+    );
+  }
+  const restrictedModes = specification.stimuli
+    .filter((stimulus) =>
+      (stimulus.graders ?? []).some(
+        (grader) =>
+          grader.type === "tool-calls" &&
+          (grader.config?.disallowed ?? []).includes(
+            "azure-sdk-mcp-azsdk_typespec_retrieve_knowledge",
+          ),
+      ),
+    )
+    .map((stimulus) => stimulus.tags?.mode)
+    .sort();
+  assert.deepEqual(
+    restrictedModes,
+    retrievalRestrictedFiles.has(fileName) ? ["forced", "trigger"] : [],
+    `${fileName} retrieval restriction matches the approved 001005-001008 scope`,
+  );
 }
 
 const versionSpread = parse(

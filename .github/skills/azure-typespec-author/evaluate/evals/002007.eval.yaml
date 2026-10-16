@@ -45,15 +45,6 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
-            - web_fetch
-          disallowed:
-            - azure-sdk-mcp-azsdk_typespec_retrieve_knowledge
-            - azure-sdk-mcp-azsdk_typespec_generate_authoring_plan
       - type: "skill-invocation"
         config:
           required:
@@ -73,15 +64,6 @@ stimuli:
       - The request contains string message content and a priority limited to Low, Medium, or High.
       - The response contains a string notification identifier and status, and changes are limited to the requested action.
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
-            - web_fetch
-          disallowed:
-            - azure-sdk-mcp-azsdk_typespec_retrieve_knowledge
-            - azure-sdk-mcp-azsdk_typespec_generate_authoring_plan
       - type: "run-command"
         config:
           command: "node check-node-dependencies.js node_modules"

@@ -24,10 +24,15 @@ function walkJson(directory) {
 
 export function loadOpenApiDocuments(root = process.cwd()) {
   const files = ["stable", "preview"].flatMap((directory) => walkJson(path.join(root, directory)));
-  return files.map((file) => ({
-    document: JSON.parse(fs.readFileSync(file, "utf8")),
-    file,
-  }));
+  return files
+    .map((file) => ({
+      document: JSON.parse(fs.readFileSync(file, "utf8")),
+      file,
+    }))
+    .filter(
+      ({ document }) =>
+        Boolean(document.swagger || document.openapi) && Boolean(document.info?.version),
+    );
 }
 
 function operations(document) {

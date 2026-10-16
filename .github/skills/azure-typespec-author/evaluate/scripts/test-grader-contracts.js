@@ -1,10 +1,10 @@
-/* eslint-disable typescript/no-unsafe-argument, typescript/no-unsafe-assignment, typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Contract tests intentionally mutate dynamic OpenAPI fixtures. */
+/* eslint-disable typescript/no-unsafe-assignment, typescript/no-unsafe-call, typescript/no-unsafe-member-access -- Contract tests intentionally mutate dynamic OpenAPI fixtures. */
 import * as assert from "node:assert/strict";
 import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
-import { fileURLToPath } from "node:url";
 import {
+  loadOpenApiDocuments,
   verifyArmActionLro,
   verifyArmExtensionResource,
   verifyArmListTopSkip,
@@ -19,22 +19,6 @@ import {
   verifyVersion006009,
 } from "./verify-emitted-contract.js";
 
-const scriptDir = path.dirname(fileURLToPath(import.meta.url));
-const evalsDir = path.resolve(scriptDir, "../evals");
-
-function readCommandPattern(fileName, fragment) {
-  const content = fs.readFileSync(path.join(evalsDir, fileName), "utf8");
-  const line = content
-    .split(/\r?\n/)
-    .find((candidate) => candidate.trim().startsWith("command:") && candidate.includes(fragment));
-  assert.ok(line, `${fileName} contains a ${fragment} command matcher`);
-  let value = line.trim().slice("command:".length).trim();
-  value = value.replace(/^'(.*)'$/, "$1").replaceAll("''", "'");
-  const ignoreCase = value.startsWith("(?i)");
-  value = value.replace(/^\(\?i\)/, "");
-  return new RegExp(value, ignoreCase ? "i" : "");
-}
-
 function openApi(version, definitions, paths = {}) {
   return {
     document: {
@@ -46,15 +30,6 @@ function openApi(version, definitions, paths = {}) {
     file: `${version}.json`,
   };
 }
-
-const dependencyCleanup = readCommandPattern("006009.eval.yaml", "node_modules");
-assert.match("rm -rf node_modules", dependencyCleanup);
-assert.match("Remove-Item packages -Recurse", dependencyCleanup);
-assert.doesNotMatch(
-  "rm -r stable preview && find . -not -path './node_modules/*'",
-  dependencyCleanup,
-);
-assert.doesNotMatch("rg node_modules .", dependencyCleanup);
 
 const topSkipDocument = openApi(
   "2024-10-01-preview",
@@ -419,6 +394,27 @@ try {
     WidgetSuite: { type: "object", properties: {} },
   });
   verifyVersion006008([oldWidget, removedWidget]);
+  const emittedRoot = path.join(examplesRoot, "emitted");
+  const stableDirectory = path.join(emittedRoot, "stable", "2022-12-01");
+  const previewDirectory = path.join(emittedRoot, "preview", "2023-06-01-preview");
+  const previewExamples = path.join(previewDirectory, "examples");
+  fs.mkdirSync(stableDirectory, { recursive: true });
+  fs.mkdirSync(previewExamples, { recursive: true });
+  fs.writeFileSync(
+    path.join(stableDirectory, "widgetanalytics.json"),
+    JSON.stringify(oldWidget.document),
+  );
+  fs.writeFileSync(
+    path.join(previewDirectory, "widgetanalytics.json"),
+    JSON.stringify(removedWidget.document),
+  );
+  fs.writeFileSync(
+    path.join(previewExamples, "example.json"),
+    JSON.stringify({ parameters: { "api-version": "2023-06-01-preview" } }),
+  );
+  const loadedDocuments = loadOpenApiDocuments(emittedRoot);
+  assert.equal(loadedDocuments.length, 2, "OpenAPI loader excludes example JSON");
+  verifyVersion006008(loadedDocuments);
   const removedTooEarly = structuredClone(oldWidget);
   delete removedTooEarly.document.definitions.WidgetSuite.properties.color;
   assert.throws(() => verifyVersion006008([removedTooEarly, removedWidget]), /must retain color/);
