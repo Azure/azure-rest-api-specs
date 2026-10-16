@@ -1009,9 +1009,6 @@ enum AzureStorageType {
   AzureFiles,
   AzureBlob,
 
-  /**
-   * File share storage.
-   */
   @added(Versions.v2026_11_15)
   FileShare,
 }
