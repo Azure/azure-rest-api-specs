@@ -29,12 +29,22 @@ This includes but is not limited to:
 
 ## MCP Tools
 
-| Tool                                              | Purpose                                                                                                                                                                                                  |
-| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `azure-sdk-mcp:azsdk_typespec_retrieve_knowledge` | Retrieve knowledge for requests **not** covered by the nine categories in [reference-document-links.md](references/reference-document-links.md). Covered cases use agentic search (`web_fetch`) instead. |
-| `azure-sdk-mcp:azsdk_run_typespec_validation`     | Validate TypeSpec                                                                                                                                                                                        |
+| Tool                                              | Purpose                                                                                                                                   |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `azure-sdk-mcp:azsdk_typespec_retrieve_knowledge` | Ground an execution whose complete request is not fully covered by [reference-document-links.md](references/reference-document-links.md). |
+| `azure-sdk-mcp:azsdk_run_typespec_validation`     | Validate TypeSpec                                                                                                                         |
 
-**Prerequisite:** `azure-sdk-mcp` server must be running.
+Use the applicable `azure-sdk-mcp` tools when they are available. If a required MCP
+tool is not exposed in the current environment, use its documented non-MCP fallback
+instead of blocking the authoring workflow:
+
+- Retrieval unavailable: ground the complete request through authoritative Web
+  documentation before planning or editing.
+- Validation unavailable: continue with the mandatory local compile and
+  case-specific checks.
+
+An exposed tool that returns an error, times out, or fails authentication is not
+unavailable. Report that failure instead of silently taking its fallback.
 
 ## Rules
 
@@ -42,9 +52,15 @@ This includes but is not limited to:
 - **Always follow the full workflow** — even seemingly simple changes (e.g. adding a default value) can require complex versioning decorator changes. Never skip steps.
 - **Mandatory for ALL `.tsp` edits** — even a single `?` change can be breaking.
 - **Minimal, scoped edits** — only change what the request requires.
-- **Always validate** — run every steps in [validation](references/validation.md) after every edit.
+- **Do not reconfirm supplied decisions** — treat explicit choices as final and continue. In particular, "carry over all features" or "no exclusions" completely answers API-version carry-forward intake; do not enumerate the existing surface and ask the user to confirm it again.
+- **Always validate** — follow [validation](references/validation.md) after every edit. Run validation MCP when available and always run `tsp compile .`; absence of the validation MCP tool is not a blocker.
 - **Always cite references** — provide links that justify the approach.
 - **Follow the authoring plan exactly** — code changes in Step 4 MUST follow the authoring plan generated in Step 3. Do not deviate by referring to existing code patterns in the TypeSpec project; the authoring plan is the single source of truth for what to change.
+- **Catalog access gates source selection** — after project analysis and intake, successfully read the reference catalog before classifying coverage. Retry the installed catalog path when its first read fails. If local access remains unavailable, recover the canonical repository copy through an available repository-file reader; if recovery requires `web_fetch`, that selects the Web family for the execution. If the recovered catalog does not fully cover the request, block rather than switching to retrieval. If the catalog still cannot be read, report a blocker without retrieval or edits.
+- **Use exactly one knowledge-source family per execution** — use Web for a covered request. After a successful non-Web catalog read establishes that the request is entirely or partly uncovered, use `azsdk_typespec_retrieve_knowledge` when it is exposed; otherwise select the documented authoritative-Web fallback before grounding. Never call both retrieval and Web in one execution. Catalog failure, an unavailable skill-reference path, a related keyword, or uncertainty never establishes uncovered scope.
+- **Never call `azsdk_typespec_generate_authoring_plan`** — synthesize the authoring plan locally from the selected grounding source.
+- **Do not edit before grounding** — follow `Analyze → Intake → Read catalog → Select source (including an availability fallback, when needed) → Ground → Plan locally → Apply → Validate`. Select an unavailable-tool fallback before invoking a source. If an exposed selected source fails or grounding cannot be recovered, report a blocker instead of switching sources or making ungrounded edits.
+- **Validation is not retrieval** — calling `azsdk_run_typespec_validation` after edits does not violate the one-source rule. If that tool is unavailable, record the skip and continue with `tsp compile .`.
 
 ## Steps
 
@@ -65,7 +81,7 @@ See [analyze-project.md](references/analyze-project.md).
 
 See [intake.md](references/intake.md).
 
-### Step 3: Build Authoring Plan
+### Step 3: Build Authoring Plan Locally
 
 See [authoring-plan.md](references/authoring-plan.md).
 
@@ -75,7 +91,7 @@ Make minimal `.tsp` edits following the plan from Step 3. Confirm uncertainties 
 
 ### Step 5: Validate
 
-See [validation.md](references/validation.md). Always run 5.1 general validation (5.1.1 TypeSpec validation and 5.1.2 `tsp compile .`); run 5.2 case-specific validation whenever its case matches.
+See [validation.md](references/validation.md). Run 5.1.1 TypeSpec validation when its MCP tool is available and always run 5.1.2 `tsp compile .`; run 5.2 case-specific validation whenever its case matches.
 
 **Output the validation results as a checklist.** Report one line per check, each marked ✅ (pass) or ❌ (fail) with a short note. Fix every ❌ and re-run until all checks pass. For API Versioning (Case 3) the checklist **must** cover every §5.2 Case 3 check — including: the new version's `examples/` folder exists; no example folder remains for a version absent from the `Versions` enum; no decorator references a version absent from the enum; every carried-over feature is present with its decorators rebased onto the new version (not reverted); every excluded feature is fully removed.
 

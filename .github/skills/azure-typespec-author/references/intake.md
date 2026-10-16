@@ -4,8 +4,13 @@
 
 ## 2.1 General Intake (All Cases)
 
-1. Run [agentic search](agentic-search.md) using the Step 1 result and the user's request.
-2. Identify the case from the table below and gather more information if case matches. If no case matches, skip Step 2.2.
+1. Identify every matching case from the table below using the Step 1 result and the
+   user's request.
+2. Gather only material information that is not already supplied or directly
+   available from the project. If no case matches, skip Step 2.2.
+
+Do not run agentic search, retrieval, planning, or validation during intake. Source
+selection and grounding happen once in Step 3 after the reference catalog is read.
 
 | Case | Name                    | Description                                            | Service Type     |
 | ---- | ----------------------- | ------------------------------------------------------ | ---------------- |
@@ -48,6 +53,13 @@ when completion behavior is not supplied.
 > Use `createOrUpdate` as the operation name with an
 > `ArmResourceCreateOrReplaceSync` or `ArmResourceCreateOrReplaceAsync`
 > template. Use `ArmCustomPatch` for PATCH.
+> For a PATCH that updates tags and mutable resource properties, use
+> `ArmCustomPatchSync` or `ArmCustomPatchAsync` with
+> `ResourceUpdateModel<Resource, Properties>` (or an equivalent explicit update
+> model). Do not use `ArmResourcePatchSync` or `ArmResourcePatchAsync`; those
+> lifecycle-visibility wrappers can expose the wrong request shape. The update
+> model must include tags and mutable properties, omit read-only properties, and
+> match the requested sync/async behavior.
 > For an async ARM operation, start with the standard template's LRO header
 > defaults. Collect the service's actual polling-header contract and whether
 > the resource provider is subject to the January 2025 greenfield header
@@ -61,14 +73,27 @@ when completion behavior is not supplied.
 
 ### Case 3 — API Versioning
 
-Collect from user:
+First distinguish the request shape:
 
-1. **Target version** (e.g. `2026-01-01-preview` or `2026-01-01`)
-2. **Features to exclude, Do not assume the user wants to carry over all features** — follow this procedure exactly:
-   1. Read the latest version's `.tsp` files and enumerate all resources, operations, models, and properties.
-   2. Present the list to the user as a numbered checklist.
-   3. Ask: _"All features will be carried over to the new version. Are there any you want to exclude? List by number, or say 'none'."_
-   4. Wait for the user's response before proceeding.
+1. **Add, replace, or promote an API version.** Collect from the user only when
+   not already supplied:
+   - Target version (for example `2026-01-01-preview` or `2026-01-01`).
+   - Features to carry forward or exclude. Do not assume all features carry
+     forward. An explicit instruction to "carry over all features", carry
+     everything from the latest version, or make no exclusions is a complete
+     decision: record it and proceed without enumerating the existing surface
+     for confirmation. When this decision is missing:
+     1. Read the latest version's `.tsp` files and enumerate all resources,
+        operations, models, and properties.
+     2. Present the list as a numbered checklist.
+     3. Ask: _"All features will be carried over to the new version. Are there
+        any you want to exclude? List by number, or say 'none'."_
+     4. Wait for the response.
+2. **Version-scope an existing feature without adding or promoting a version.**
+   Collect only the target symbol or change and its introduced, removed,
+   renamed, optional, or type-changed version. A request such as "introduce this
+   property in version X only" supplies the material scope decision; do not ask
+   for an unrelated service-wide carry-forward decision.
 
 ---
 
@@ -76,7 +101,15 @@ Collect from user:
 
 ### Case 4 — Data-Plane Operations
 
-Collect: target resource, operation type (CRUD, list, or custom action), operation name.
+Collect: target resource, operation type (CRUD, list, or custom action), operation
+name, and sync/async behavior when the selected create, update, delete, or action
+template has both forms.
+
+Defaults: GET/read and LIST are synchronous. Use the target resource's existing key,
+route, request, and response contract unless the user explicitly requests a custom
+shape; do not ask the user to restate information already present in the project.
+When a full CRUD request explicitly supplies sync/async behavior, that decision
+applies to its create/update/delete operations unless the request distinguishes them.
 
 > Data-plane services use `Azure.Core` (not `Azure.ResourceManager`). No `@armProviderNamespace` decorator.
 > All operations, models, enums/unions, and properties should have `/** */` documentation.
@@ -86,7 +119,10 @@ Collect: target resource, operation type (CRUD, list, or custom action), operati
 
 ## 2.3 Confirm
 
-Display and wait for user confirmation:
+Display the intake result. Continue without another question when the user already
+supplied all material decisions. The displayed result is informational, not a request
+for approval: do not append "confirm", "is this correct?", or an equivalent question.
+Otherwise, ask only for the missing decision and wait.
 
 ```
 Case:           [Name]
