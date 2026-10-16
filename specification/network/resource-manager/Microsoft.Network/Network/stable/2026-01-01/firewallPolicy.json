@@ -257,6 +257,9 @@
         "x-ms-examples": {
           "Create FirewallPolicy": {
             "$ref": "./examples/FirewallPolicyPut.json"
+          },
+          "Create FirewallPolicy Managed By Afc": {
+            "$ref": "./examples/FirewallPolicyPutManagedByAfc.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -340,6 +343,13 @@
             "description": "The name of the Firewall Policy.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "afcManagedSync",
+            "in": "query",
+            "description": "Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -373,6 +383,9 @@
         "x-ms-examples": {
           "Delete Firewall Policy": {
             "$ref": "./examples/FirewallPolicyDelete.json"
+          },
+          "Delete Firewall Policy Managed By Afc": {
+            "$ref": "./examples/FirewallPolicyDeleteManagedByAfc.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -715,6 +728,13 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-._]{0,78}[a-zA-Z0-9_])?$"
           },
           {
+            "name": "afcManagedSync",
+            "in": "query",
+            "description": "Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "Parameters supplied to the create or update FirewallPolicyKubeSelectorGroup operation.",
@@ -758,6 +778,9 @@
         "x-ms-examples": {
           "Create FirewallPolicyKubeSelectorGroup": {
             "$ref": "./examples/FirewallPolicyKubeSelectorGroupPut.json"
+          },
+          "Create FirewallPolicyKubeSelectorGroup Managed By Afc": {
+            "$ref": "./examples/FirewallPolicyKubeSelectorGroupPutManagedByAfc.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -796,6 +819,13 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-._]{0,78}[a-zA-Z0-9_])?$"
+          },
+          {
+            "name": "afcManagedSync",
+            "in": "query",
+            "description": "Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -826,6 +856,9 @@
         "x-ms-examples": {
           "Delete FirewallPolicyKubeSelectorGroup": {
             "$ref": "./examples/FirewallPolicyKubeSelectorGroupDelete.json"
+          },
+          "Delete FirewallPolicyKubeSelectorGroup Managed By Afc": {
+            "$ref": "./examples/FirewallPolicyKubeSelectorGroupDeleteManagedByAfc.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1085,6 +1118,13 @@
             "type": "string"
           },
           {
+            "name": "afcManagedSync",
+            "in": "query",
+            "description": "Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "description": "Parameters supplied to the create or update FirewallPolicyRuleCollectionGroup operation.",
@@ -1132,6 +1172,9 @@
           "Create Firewall Policy Rule Collection Group": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupPut.json"
           },
+          "Create Firewall Policy Rule Collection Group Managed By Afc": {
+            "$ref": "./examples/FirewallPolicyRuleCollectionGroupPutManagedByAfc.json"
+          },
           "Create Firewall Policy Rule Collection Group With IP Groups": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithIpGroupsPut.json"
           },
@@ -1177,6 +1220,13 @@
             "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "afcManagedSync",
+            "in": "query",
+            "description": "Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -1210,6 +1260,9 @@
         "x-ms-examples": {
           "Delete FirewallPolicyRuleCollectionGroup": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupDelete.json"
+          },
+          "Delete FirewallPolicyRuleCollectionGroup Managed By Afc": {
+            "$ref": "./examples/FirewallPolicyRuleCollectionGroupDeleteManagedByAfc.json"
           }
         },
         "x-ms-long-running-operation-options": {

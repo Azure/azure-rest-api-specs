@@ -59,6 +59,14 @@ interface FirewallPolicyKubeSelectorGroups {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallPolicyKubeSelectorGroup,
+    Parameters = {
+      /**
+       * Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.
+       */
+      @added(Versions.v2026_01_01)
+      @query("afcManagedSync")
+      afcManagedSync?: boolean;
+    },
     Error = CloudError
   >;
 
@@ -67,6 +75,14 @@ interface FirewallPolicyKubeSelectorGroups {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallPolicyKubeSelectorGroup,
+    Parameters = {
+      /**
+       * Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.
+       */
+      @added(Versions.v2026_01_01)
+      @query("afcManagedSync")
+      afcManagedSync?: boolean;
+    },
     Error = CloudError
   >;
 

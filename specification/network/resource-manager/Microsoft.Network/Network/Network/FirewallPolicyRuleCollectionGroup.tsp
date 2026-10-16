@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
@@ -55,6 +56,14 @@ interface FirewallPolicyRuleCollectionGroups {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallPolicyRuleCollectionGroup,
+    Parameters = {
+      /**
+       * Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.
+       */
+      @added(Versions.v2026_01_01)
+      @query("afcManagedSync")
+      afcManagedSync?: boolean;
+    },
     Error = CloudError
   >;
 
@@ -64,6 +73,14 @@ interface FirewallPolicyRuleCollectionGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallPolicyRuleCollectionGroup,
+    Parameters = {
+      /**
+       * Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.
+       */
+      @added(Versions.v2026_01_01)
+      @query("afcManagedSync")
+      afcManagedSync?: boolean;
+    },
     Response =
       | ArmDeletedResponse
       | ArmDeleteAcceptedLroResponse
