@@ -29,6 +29,7 @@ model PartitionProperties {
 @armResourceOperations(Partition)
 interface Partitions {
   get is ArmResourceRead<Partition>;
+  @doc("Creates or replaces a partition.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Partition>;
   update is ArmCustomPatchSync<Partition>;
   delete is ArmResourceDeleteWithoutOkAsync<Partition>;

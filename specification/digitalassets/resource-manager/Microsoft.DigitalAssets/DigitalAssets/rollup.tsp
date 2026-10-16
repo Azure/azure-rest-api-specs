@@ -16,8 +16,12 @@ model ZkpRollupProperties {
   @maxItems(100)
   tokenOwnerAccounts: EvmContractAddress[];
 
-  @doc("Rollup-level Key Vault reference used to resolve Besu node private keys.")
-  keyVault: KeyVaultReference;
+  @doc("The fully qualified resource ID of the customer Key Vault used to resolve Besu node private keys.")
+  keyVaultId: armResourceIdentifier<[
+    {
+      type: "Microsoft.KeyVault/vaults";
+    }
+  ]>;
 
   @doc("User-assigned managed identity resource ID used for customer Key Vault reads.")
   keyVaultUserAssignedIdentityResourceId: armResourceIdentifier<[
@@ -93,23 +97,17 @@ model ZkpRollupPatchProperties {
   @maxItems(100)
   tokenOwnerAccounts?: EvmContractAddress[];
 
-  @doc("Rollup-level Key Vault reference used to resolve Besu node private keys.")
-  keyVault?: KeyVaultPatchReference;
+  @doc("The fully qualified resource ID of the customer Key Vault used to resolve Besu node private keys. Omit to leave the current vault unchanged.")
+  keyVaultId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.KeyVault/vaults";
+    }
+  ]>;
 
   @doc("User-assigned managed identity resource ID used for customer Key Vault reads.")
   keyVaultUserAssignedIdentityResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-}
-
-@doc("Key Vault reference properties that may be updated via PATCH.")
-model KeyVaultPatchReference {
-  @doc("The ARM resource ID of the Key Vault.")
-  id?: armResourceIdentifier<[
-    {
-      type: "Microsoft.KeyVault/vaults";
     }
   ]>;
 }
@@ -131,6 +129,7 @@ model ZkpRollup is TrackedResource<ZkpRollupProperties> {
 @armResourceOperations(ZkpRollup)
 interface ZkpRollups {
   get is ArmResourceRead<ZkpRollup>;
+  @doc("Creates or replaces a ZKP rollup.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ZkpRollup>;
   update is ArmCustomPatchSync<
     ZkpRollup,

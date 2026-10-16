@@ -4,16 +4,6 @@ using TypeSpec.Rest;
 
 namespace Microsoft.DigitalAssets;
 
-@doc("Reference to an Azure Key Vault resource.")
-model KeyVaultReference {
-  @doc("The ARM resource ID of the Key Vault.")
-  id: armResourceIdentifier<[
-    {
-      type: "Microsoft.KeyVault/vaults";
-    }
-  ]>;
-}
-
 @doc("Represents the operational status of the resource.")
 model OperationalStatus {
   @doc("The current state of the operational status.")
