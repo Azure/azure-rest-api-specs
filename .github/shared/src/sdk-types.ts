@@ -41,6 +41,7 @@ export type SdkLabelInfo = {
   breakingChangeSuppression: string | undefined;
   breakingChangeSuppressionApproved: string | undefined;
   buildFailed: string | undefined;
+  management: string | undefined;
 };
 
 export type SdkLabels = Record<SdkName, SdkLabelInfo>;
@@ -55,6 +56,7 @@ export const sdkLabels: SdkLabels = {
     breakingChangeSuppression: "BreakingChange-Go-Sdk-Suppression",
     breakingChangeSuppressionApproved: "BreakingChange-Go-Sdk-Suppression-Approved",
     buildFailed: undefined,
+    management: undefined,
   },
   "azure-sdk-for-java": {
     breakingChange: undefined,
@@ -62,6 +64,7 @@ export const sdkLabels: SdkLabels = {
     breakingChangeSuppression: undefined,
     breakingChangeSuppressionApproved: undefined,
     buildFailed: undefined,
+    management: undefined,
   },
   "azure-sdk-for-js": {
     breakingChange: "BreakingChange-JavaScript-Sdk",
@@ -69,6 +72,7 @@ export const sdkLabels: SdkLabels = {
     breakingChangeSuppression: "BreakingChange-JavaScript-Sdk-Suppression",
     breakingChangeSuppressionApproved: "BreakingChange-JavaScript-Sdk-Suppression-Approved",
     buildFailed: undefined,
+    management: "mgmt-review-needed",
   },
   "azure-sdk-for-net": {
     breakingChange: undefined,
@@ -76,6 +80,7 @@ export const sdkLabels: SdkLabels = {
     breakingChangeSuppression: undefined,
     breakingChangeSuppressionApproved: undefined,
     buildFailed: "auto-sdk-build-fix",
+    management: undefined,
   },
   "azure-sdk-for-python": {
     breakingChange: "BreakingChange-Python-Sdk",
@@ -83,6 +88,7 @@ export const sdkLabels: SdkLabels = {
     breakingChangeSuppression: "BreakingChange-Python-Sdk-Suppression",
     breakingChangeSuppressionApproved: "BreakingChange-Python-Sdk-Suppression-Approved",
     buildFailed: undefined,
+    management: undefined,
   },
   "azure-sdk-for-rust": {
     breakingChange: undefined,
@@ -90,5 +96,6 @@ export const sdkLabels: SdkLabels = {
     breakingChangeSuppression: undefined,
     breakingChangeSuppressionApproved: undefined,
     buildFailed: undefined,
+    management: undefined,
   },
 };
