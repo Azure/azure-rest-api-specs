@@ -94,11 +94,12 @@ may apply `Approved-ModelValidation`, `Approved-Avocado`, and
 `Approved-SemanticValidation` on management-plane PRs.
 
 Members of `arm-breaking-change-reviewers` may apply the configured
-`BreakingChange-Approved-` and `Versioning-Approved-` labels on management-plane PRs.
-Each label is listed explicitly in the configuration; new approval labels must be added
-individually, not as wildcard patterns.
+`BreakingChange-Approved-` and `Versioning-Approved-` labels on both management-plane
+and data-plane PRs. These policies are not plane-scoped.
+Each label is listed explicitly in the configuration; new approval labels must be
+added individually, not as wildcard patterns.
 
-These ARM policies leave data-plane behavior unchanged.
+The ARM signoff, suppression, and validation policies leave data-plane behavior unchanged.
 `typespec-suppressions-approved` retains its existing `azure-data-plane-api-reviewers`
 policy on data-plane PRs; the other ARM policies explicitly opt data-plane PRs out.
 `WaitForARMFeedback` and `ARMChangesRequested` remain unprotected.

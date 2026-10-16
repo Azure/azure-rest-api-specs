@@ -52,12 +52,10 @@ Approved-ModelValidation: &arm-validation-review-policy
 Approved-Avocado: *arm-validation-review-policy
 Approved-SemanticValidation: *arm-validation-review-policy
 
-# REST breaking-change and versioning approvals on management-plane PRs.
+# REST breaking-change and versioning approvals on both API planes.
 # Enumerate existing labels explicitly; policy keys are not wildcard patterns.
 BreakingChange-Approved-Benign: &arm-breaking-change-policy
-  management-plane:
-    team: arm-breaking-change-reviewers
-  data-plane: unprotected
+  team: arm-breaking-change-reviewers
 BreakingChange-Approved-BugFix: *arm-breaking-change-policy
 BreakingChange-Approved-UserImpact: *arm-breaking-change-policy
 BreakingChange-Approved-BranchPolicyException: *arm-breaking-change-policy
