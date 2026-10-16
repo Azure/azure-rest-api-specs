@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Workspace.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 /**
@@ -34,6 +36,13 @@ interface CapabilityHosts {
    */
   @summary("Get capabilityHost.")
   get is ArmResourceRead<CapabilityHost>;
+
+  /**
+   * Lists the capability hosts associated with the specified workspace.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @summary("List capability hosts in the workspace.")
+  list is ArmResourceListByParent<CapabilityHost>;
 
   /**
    * Create or update capabilityHost.

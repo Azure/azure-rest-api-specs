@@ -291,12 +291,6 @@ suppressions:
       The shared UUID definition is used by CertificateDatastoreCredentials.clientId and tenantId, ManagedIdentity.clientId and objectId, ManagedResourceGroupAssignedIdentities.principalId, ServicePrincipalDatastoreCredentials.clientId and tenantId, and WorkspaceConnectionOAuth2.clientId. These are existing Microsoft Entra client, tenant or principal identifiers; Azure API review board sign-off is requested.
     where:
       - $.definitions["Azure.Core.uuid"].format
-  - code: NestedResourcesMustHaveListOperation
-    from: openapi.json
-    reason: >-
-      The inherited CapabilityHost nested resource has no LIST operation. Adding an API operation is outside this suppression-only change; an ARM reviewer exception for this exact resource is requested.
-    where:
-      - $.definitions.CapabilityHost
   - code: DefinitionsPropertiesNamesCamelCase
     from: openapi.json
     reason: >-
