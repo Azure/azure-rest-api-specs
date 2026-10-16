@@ -396,17 +396,21 @@ model RaiInvocationModeration {
   stream_selectors?: RaiSseTextSelector[];
 }
 
+/** RAI configuration shared by agent kinds that support content filtering. */
+alias AgentRaiConfiguration = {
+  @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
+  rai_config?: RaiConfig;
+};
+
 @discriminator("kind")
 model AgentDefinition {
   kind: AgentKind;
-
-  @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
-  rai_config?: RaiConfig;
 }
 
 @doc("The prompt agent definition")
 model PromptAgentDefinition extends AgentDefinition {
   kind: AgentKind.prompt;
+  ...AgentRaiConfiguration;
 
   @doc("The managed runtime and agent loop used to execute this prompt agent.")
   @extension(
@@ -544,6 +548,7 @@ model PromptAgentDefinitionTextOptions {
 )
 model WorkflowAgentDefinition extends AgentDefinition {
   kind: AgentKind.workflow;
+  ...AgentRaiConfiguration;
 
   @doc("The CSDL YAML definition of the workflow.")
   workflow?: string;
@@ -636,6 +641,7 @@ model ExternalAgentDefinition extends AgentDefinition {
 @doc("The hosted agent definition.")
 model HostedAgentDefinition extends AgentDefinition {
   kind: AgentKind.hosted;
+  ...AgentRaiConfiguration;
 
   /**
    * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
@@ -687,6 +693,7 @@ model HostedAgentDefinition extends AgentDefinition {
 @removed(Versions.v1)
 model ContainerAppAgentDefinition extends AgentDefinition {
   kind: AgentKind.container_app;
+  ...AgentRaiConfiguration;
 
   @doc("The protocols that the agent supports for ingress communication of the containers.")
   @example(#[
