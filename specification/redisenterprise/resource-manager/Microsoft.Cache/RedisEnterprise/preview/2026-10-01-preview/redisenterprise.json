@@ -2892,7 +2892,8 @@
         },
         "firewallRules": {
           "type": "array",
-          "description": "Firewall rules associated with the cluster.",
+          "description": "The complete set of firewall rules for an Azure Managed Redis (AMR) cluster. At most 250 rules are supported, and non-empty rules require publicNetworkAccess to be Enabled.\n\nOn PUT, the supplied array replaces all existing rules. Omitting this property, specifying null, or supplying an empty array clears all rules.\n\nOn PATCH, omitting this property preserves existing rules. A supplied array replaces all existing rules; rules absent from it are deleted. Specifying null or an empty array clears all rules.\n\nDisabling publicNetworkAccess also clears existing rules. With publicNetworkAccess Enabled, an empty rule set allows all public traffic; it does not deny all traffic.\n\nFirewall rule changes cannot be combined with scaling or encryption changes in the same update request.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/FirewallRule"
           },
@@ -3389,11 +3390,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the firewall rule."
+          "description": "The name of the firewall rule, unique within the cluster ignoring case. Must be 1-80 characters and contain only letters, numbers, hyphens, or underscores."
         },
         "sourceAddressPrefix": {
           "type": "string",
-          "description": "The source address prefix for the firewall rule."
+          "description": "An IPv4 address (for example, \"203.0.113.1\"), IPv4 CIDR prefix (for example, \"203.0.113.0/24\"), or Azure service tag (for example, \"AzureCloud\"). IPv6 addresses are not supported."
         }
       },
       "required": [
@@ -4033,10 +4034,6 @@
         "skipDataMigration": {
           "type": "boolean",
           "description": "Sets whether the data is migrated from source to target or not. The default value is true."
-        },
-        "forceMigrate": {
-          "type": "boolean",
-          "description": "Sets whether to ignore warnings when validating if the source cache can be migrated to the target cache. If this property is true, the isValid property in the response will ignore warning-level disparities between the source and target resource. The default value is false."
         }
       },
       "required": [

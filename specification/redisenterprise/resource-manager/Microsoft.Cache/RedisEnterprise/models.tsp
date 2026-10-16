@@ -990,11 +990,20 @@ model ClusterProperties {
   maintenanceConfiguration?: MaintenanceConfiguration;
 
   /**
-   * Firewall rules associated with the cluster.
+   * The complete set of firewall rules for an Azure Managed Redis (AMR) cluster. At most 250 rules are supported, and non-empty rules require publicNetworkAccess to be Enabled.
+   *
+   * On PUT, the supplied array replaces all existing rules. Omitting this property, specifying null, or supplying an empty array clears all rules.
+   *
+   * On PATCH, omitting this property preserves existing rules. A supplied array replaces all existing rules; rules absent from it are deleted. Specifying null or an empty array clears all rules.
+   *
+   * Disabling publicNetworkAccess also clears existing rules. With publicNetworkAccess Enabled, an empty rule set allows all public traffic; it does not deny all traffic.
+   *
+   * Firewall rule changes cannot be combined with scaling or encryption changes in the same update request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null clears all firewall rules, whereas omission in PATCH preserves them."
   @added(Versions.v2026_10_01_preview)
-  @identifiers(#["name"])
-  firewallRules?: FirewallRule[];
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["name"])
+  firewallRules?: FirewallRule[] | null;
 
   /**
    * DNS name of the cluster endpoint
@@ -1043,10 +1052,10 @@ model ClusterProperties {
 /** A firewall rule associated with the cluster. */
 @added(Versions.v2026_10_01_preview)
 model FirewallRule {
-  /** The name of the firewall rule. */
+  /** The name of the firewall rule, unique within the cluster ignoring case. Must be 1-80 characters and contain only letters, numbers, hyphens, or underscores. */
   name: string;
 
-  /** The source address prefix for the firewall rule. */
+  /** An IPv4 address (for example, "203.0.113.1"), IPv4 CIDR prefix (for example, "203.0.113.0/24"), or Azure service tag (for example, "AzureCloud"). IPv6 addresses are not supported. */
   sourceAddressPrefix: string;
 }
 
@@ -1929,13 +1938,6 @@ model MigrationValidationRequest {
    * Sets whether to ignore warnings when validating if the source cache can be migrated to the target cache. If this property is true, the isValid property in the response will ignore warning-level disparities between the source and target resource. The default value is false.
    */
   @removed(Versions.v2026_09_01)
-  @renamedFrom(Versions.v2026_09_01, "forceMigrate")
-  forceMigratePreviousPreview?: boolean;
-
-  /**
-   * Sets whether to ignore warnings when validating if the source cache can be migrated to the target cache. If this property is true, the isValid property in the response will ignore warning-level disparities between the source and target resource. The default value is false.
-   */
-  @added(Versions.v2026_10_01_preview)
   forceMigrate?: boolean;
 }
 
