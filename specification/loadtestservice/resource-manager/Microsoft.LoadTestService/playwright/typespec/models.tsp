@@ -65,6 +65,14 @@ model PlaywrightWorkspaceProperties {
   @added(Versions.v2026_10_01_preview)
   @doc("The managed identity used to manage session artifacts in the storage account.")
   storageIdentity?: ManagedIdentity;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("Indicates whether browser proxy is enabled for the workspace. When set to true, browser proxy can be used for the workspace.")
+  browserProxy?: EnablementStatus = EnablementStatus.Disabled;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("Indicates whether browser proxy is enabled for the workspace. When set to true, browser proxy can be used for the workspace.")
+  linkedKeyVault?: LinkedKeyVaultProperties;
 }
 
 @doc("The status of the last resource operation.")
@@ -93,10 +101,18 @@ union EnablementStatus {
   Disabled: "Disabled",
 }
 
-@added(Versions.v2026_10_01_preview)
-@doc("The managed identity used to manage session artifacts in the storage account.")
+@doc("Linked Key Vault properties for the Playwright workspace.")
+model LinkedKeyVaultProperties {
+  @doc("The URI of the linked Key Vault.")
+  vaultUri?: url;
+
+  @doc("The identity used to access the linked Key Vault.")
+  vaultIdentity?: ManagedIdentity;
+}
+
+@doc("Managed identity properties for accessing Azure resources.")
 model ManagedIdentity {
-  @doc("The type of managed identity used to access a resource.")
+  @doc("The type of the managed identity, either SystemAssigned or UserAssigned.")
   type?: IdentityType;
 
   @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
@@ -107,14 +123,13 @@ model ManagedIdentity {
   ]>;
 }
 
-@added(Versions.v2026_10_01_preview)
-@doc("The type of managed identity used to access a resource.")
+@doc("The type of the managed identity.")
 union IdentityType {
   string,
 
-  @doc("Use the workspace system-assigned managed identity.")
+  @doc("System-assigned managed identity.")
   SystemAssigned: "SystemAssigned",
 
-  @doc("Use a user-assigned managed identity.")
+  @doc("User-assigned managed identity.")
   UserAssigned: "UserAssigned",
 }
