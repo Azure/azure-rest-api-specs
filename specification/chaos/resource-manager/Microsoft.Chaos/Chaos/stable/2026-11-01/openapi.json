@@ -2968,12 +2968,6 @@
               "$ref": "#/definitions/WorkspaceDiscovery"
             }
           },
-          "404": {
-            "description": "The server cannot find the requested resource.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3170,12 +3164,6 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/WorkspaceEvaluation"
-            }
-          },
-          "404": {
-            "description": "The server cannot find the requested resource.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -8507,12 +8495,6 @@
         }
       ]
     },
-    "WorkspaceEvaluationCount": {
-      "type": "integer",
-      "format": "int32",
-      "description": "A nonnegative count of scenario-template versions in an evaluation.",
-      "minimum": 0
-    },
     "WorkspaceEvaluationListResult": {
       "type": "object",
       "description": "The response of a WorkspaceEvaluation list operation.",
@@ -8589,23 +8571,31 @@
           }
         },
         "numTemplatesToEvaluate": {
-          "$ref": "#/definitions/WorkspaceEvaluationCount",
+          "type": "integer",
+          "format": "int32",
           "description": "The number of templates to evaluate.",
+          "minimum": 0,
           "readOnly": true
         },
         "numTemplatesEvaluatedSucceeded": {
-          "$ref": "#/definitions/WorkspaceEvaluationCount",
+          "type": "integer",
+          "format": "int32",
           "description": "The number of templates that evaluated successfully.",
+          "minimum": 0,
           "readOnly": true
         },
         "numTemplatesEvaluatedFailed": {
-          "$ref": "#/definitions/WorkspaceEvaluationCount",
+          "type": "integer",
+          "format": "int32",
           "description": "The number of templates that failed evaluation.",
+          "minimum": 0,
           "readOnly": true
         },
         "numTemplatesEvaluatedCancelled": {
-          "$ref": "#/definitions/WorkspaceEvaluationCount",
+          "type": "integer",
+          "format": "int32",
           "description": "The number of templates that were cancelled during evaluation.",
+          "minimum": 0,
           "readOnly": true
         },
         "results": {
