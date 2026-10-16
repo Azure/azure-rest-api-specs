@@ -87,6 +87,7 @@ it("prints only a final summary by default and compact rule statuses with --verb
   expect(quiet.stderr).toBe("");
   const verbose = await run(project, "--verbose");
   expect(verbose.code).toBe(quiet.code);
+  expect(verbose.stderr).toContain("simple-git");
   expect(verbose.stdout.match(/TypeSpec compiler v1.16.0/g)).toHaveLength(1);
   expect(verbose.stdout).toContain("Compilation completed successfully.");
   expect(verbose.stdout).toContain("1 unchanged");
