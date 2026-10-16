@@ -3540,6 +3540,45 @@ model AuthPolicyUpdatePropertiesParameters {
 }
 
 /**
+ * Reference to a domain associated with an authorization policy.
+ */
+@added(Versions.v2026_09_01_preview)
+model AuthPolicyDomainReference {
+  /**
+   * Resource ID of the custom domain or Azure Front Door endpoint.
+   */
+  id: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Cdn/profiles/customDomains";
+    },
+    {
+      type: "Microsoft.Cdn/profiles/afdEndpoints";
+    }
+  ]>;
+
+  /**
+   * Whether the resource is active or inactive.
+   */
+  @visibility(Lifecycle.Read)
+  isActive?: boolean;
+}
+
+/**
+ * Reference to a route associated with an authorization policy.
+ */
+@added(Versions.v2026_09_01_preview)
+model AuthPolicyRouteReference {
+  /**
+   * Resource ID of the Azure Front Door route.
+   */
+  id: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Cdn/profiles/afdEndpoints/routes";
+    }
+  ]>;
+}
+
+/**
  * Resource associations for an authorization policy.
  */
 @added(Versions.v2026_09_01_preview)
@@ -3552,12 +3591,16 @@ model AuthPolicyAssociation {
   /**
    * Domains associated with the authorization policy.
    */
-  domains?: ActivatedResourceReference[];
+  @identifiers(#["id"])
+  @maxItems(15)
+  domains?: AuthPolicyDomainReference[];
 
   /**
    * Routes associated with the authorization policy.
    */
-  routes?: ResourceReference[];
+  @identifiers(#["id"])
+  @maxItems(15)
+  routes?: AuthPolicyRouteReference[];
 }
 
 /**

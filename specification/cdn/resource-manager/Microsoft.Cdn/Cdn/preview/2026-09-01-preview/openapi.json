@@ -9990,16 +9990,24 @@
         "domains": {
           "type": "array",
           "description": "Domains associated with the authorization policy.",
+          "maxItems": 15,
           "items": {
-            "$ref": "#/definitions/ActivatedResourceReference"
-          }
+            "$ref": "#/definitions/AuthPolicyDomainReference"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "routes": {
           "type": "array",
           "description": "Routes associated with the authorization policy.",
+          "maxItems": 15,
           "items": {
-            "$ref": "#/definitions/ResourceReference"
-          }
+            "$ref": "#/definitions/AuthPolicyRouteReference"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -10034,6 +10042,35 @@
           }
         ]
       }
+    },
+    "AuthPolicyDomainReference": {
+      "type": "object",
+      "description": "Reference to a domain associated with an authorization policy.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the custom domain or Azure Front Door endpoint.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Cdn/profiles/customDomains"
+              },
+              {
+                "type": "Microsoft.Cdn/profiles/afdEndpoints"
+              }
+            ]
+          }
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Whether the resource is active or inactive.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "AuthPolicyEntraIDConfig": {
       "type": "object",
@@ -10163,6 +10200,27 @@
         {
           "$ref": "#/definitions/AFDStateProperties"
         }
+      ]
+    },
+    "AuthPolicyRouteReference": {
+      "type": "object",
+      "description": "Reference to a route associated with an authorization policy.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the Azure Front Door route.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Cdn/profiles/afdEndpoints/routes"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "AuthPolicyUpdateParameters": {
