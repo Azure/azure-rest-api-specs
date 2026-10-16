@@ -1,12 +1,10 @@
 # Agentic Search
 
-Always enter this procedure during Step 2 after attempting to read the reference
-catalog. The catalog may guide URL selection but is not required: if it is
-unavailable, discover authoritative TypeSpec or Azure documentation directly. Use
-the resulting Web guidance to determine the required intake decisions, then retain it
-for the local authoring plan. This procedure does not itself call an MCP tool; Step 3
-may select `azsdk_typespec_retrieve_knowledge` for authoring topics that the catalog
-does not cover.
+Enter this procedure during Step 2 when intake selects the Web knowledge route. The
+catalog may guide URL selection but is not required: if it is unavailable, discover
+authoritative TypeSpec or Azure documentation directly. Use the resulting Web
+guidance to determine the required intake decisions, then retain it for the local
+authoring plan. Do not call a knowledge MCP after selecting this route.
 
 ## Input
 

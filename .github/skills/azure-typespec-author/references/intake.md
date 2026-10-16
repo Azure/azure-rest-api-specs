@@ -4,27 +4,40 @@
 
 ## 2.1 General Intake (All Cases)
 
-Complete Agentic Search before deciding what additional information to collect:
+Select and execute one knowledge route before deciding what additional information
+to collect:
 
 1. Read the installed
    [reference-document-links.md](reference-document-links.md). If that read fails,
    retry the installed skill path. If local access remains unavailable, recover the
    canonical repository copy through an available repository-file reader.
-2. Run [agentic search](agentic-search.md) for the complete request. If the catalog
-   is unavailable or has no direct match, locate authoritative TypeSpec or Azure
-   documentation directly. Catalog access failure is not a blocker and does not
-   permit an MCP fallback.
-3. Use the fetched guidance to determine the material intake decisions and retain it
+2. Classify the complete request:
+   - **Covered** — the catalog covers every material authoring topic.
+   - **Uncovered** — one or more material authoring topics are absent from the
+     catalog. A partially covered request is classified as uncovered for its complete
+     knowledge route.
+3. Execute exactly one route for the complete request:
+   - **Covered** — run [agentic search](agentic-search.md).
+   - **Uncovered** — call `azsdk_typespec_retrieve_knowledge` when it is exposed. If
+     it is not exposed, run Agentic Search against authoritative TypeSpec or Azure
+     documentation instead.
+   - **Catalog unavailable** — run Agentic Search against authoritative TypeSpec or
+     Azure documentation. Catalog access failure is not a blocker and does not by
+     itself select retrieval.
+4. Do not call both Agentic Search and retrieval for the same request. Retain the
+   selected route's fetched content for Step 3; the authoring-plan step must reuse it
+   without another knowledge call.
+5. Use the fetched guidance to determine the material intake decisions and retain it
    for the authoring plan.
-4. Using the Agentic Search guidance, the Step 1 result, and the user's request, identify
+6. Using the selected guidance, the Step 1 result, and the user's request, identify
    every matching case from the table below.
-5. Gather only material information that is not already supplied or directly
+7. Gather only material information that is not already supplied or directly
    available from the project. If no case matches, skip Step 2.2.
 
-Do not call knowledge-retrieval, authoring-plan, or validation MCP tools during
-intake. If Agentic Search cannot obtain sufficient authoritative guidance, report a
-blocker instead of falling back to MCP. Do not plan, edit, or validate during intake.
-Step 3 must reuse this grounding record without repeating Agentic Search.
+Do not call an authoring-plan or validation MCP tool during intake. If the selected
+knowledge route cannot obtain sufficient authoritative guidance, report a blocker
+instead of switching routes. Do not plan, edit, or validate during intake. Step 3
+must reuse this grounding record without repeating Agentic Search or retrieval.
 
 | Case | Name                    | Description                                            | Service Type     |
 | ---- | ----------------------- | ------------------------------------------------------ | ---------------- |
@@ -67,13 +80,6 @@ when completion behavior is not supplied.
 > Use `createOrUpdate` as the operation name with an
 > `ArmResourceCreateOrReplaceSync` or `ArmResourceCreateOrReplaceAsync`
 > template. Use `ArmCustomPatch` for PATCH.
-> For a PATCH that updates tags and mutable resource properties, use
-> `ArmCustomPatchSync` or `ArmCustomPatchAsync` with
-> `ResourceUpdateModel<Resource, Properties>` (or an equivalent explicit update
-> model). Do not use `ArmResourcePatchSync` or `ArmResourcePatchAsync`; those
-> lifecycle-visibility wrappers can expose the wrong request shape. The update
-> model must include tags and mutable properties, omit read-only properties, and
-> match the requested sync/async behavior.
 > For an async ARM operation, start with the standard template's LRO header
 > defaults. Collect the service's actual polling-header contract and whether
 > the resource provider is subject to the January 2025 greenfield header
