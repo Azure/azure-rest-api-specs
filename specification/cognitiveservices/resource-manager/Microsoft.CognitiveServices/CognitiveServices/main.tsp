@@ -124,6 +124,11 @@ enum Versions {
    * The 2026-09-15-preview API version.
    */
   v2026_09_15_preview: "2026-09-15-preview",
+
+  /**
+   * The 2026-11-01-preview API version.
+   */
+  v2026_11_01_preview: "2026-11-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

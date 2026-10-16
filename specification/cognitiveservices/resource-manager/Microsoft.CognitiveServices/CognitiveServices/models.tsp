@@ -692,15 +692,18 @@ union RaiAcsPolicyTarget {
   string,
 
   /** Selects the agent initialization payload. */
+  @added(Versions.v2026_11_01_preview)
   AgentInitialization: "$snap.agent_init",
 
   /** Selects the incoming user input. */
   Input: "$snap.input",
 
   /** Selects the model messages proposed for dispatch. */
+  @added(Versions.v2026_11_01_preview)
   ModelMessages: "$snap.messages",
 
   /** Selects the completed model response. */
+  @added(Versions.v2026_11_01_preview)
   ModelResponse: "$snap.response",
 
   /** Selects the assistant output. */
@@ -713,6 +716,7 @@ union RaiAcsPolicyTarget {
   ToolResult: "$snap.tool_result.value",
 
   /** Selects the final agent execution summary. */
+  @added(Versions.v2026_11_01_preview)
   AgentSummary: "$snap.summary",
 }
 
@@ -722,15 +726,18 @@ union RaiAcsPolicyTargetKind {
   string,
 
   /** The target contains agent initialization state. */
+  @added(Versions.v2026_11_01_preview)
   AgentInitialization: "agent_init",
 
   /** The target contains user input. */
   UserInput: "user_input",
 
   /** The target contains model messages. */
+  @added(Versions.v2026_11_01_preview)
   ModelMessages: "messages",
 
   /** The target contains a completed model response. */
+  @added(Versions.v2026_11_01_preview)
   ModelResponse: "model_response",
 
   /** The target contains assistant output. */
@@ -743,6 +750,7 @@ union RaiAcsPolicyTargetKind {
   ToolResult: "tool_result",
 
   /** The target contains the final agent execution summary. */
+  @added(Versions.v2026_11_01_preview)
   AgentSummary: "agent_summary",
 }
 
@@ -806,28 +814,28 @@ model RaiAcsToolInterventionPoint is RaiAcsToolInterventionPointTemplate<
 >;
 
 /** Agent-startup binding with the canonical initialization target. */
-@added(Versions.v2026_09_15_preview)
+@added(Versions.v2026_11_01_preview)
 model RaiAcsAgentStartupInterventionPoint is RaiAcsInterventionPointTemplate<
   "$snap.agent_init",
   "agent_init"
 >;
 
 /** Pre-model binding with the canonical messages target. */
-@added(Versions.v2026_09_15_preview)
+@added(Versions.v2026_11_01_preview)
 model RaiAcsPreModelCallInterventionPoint is RaiAcsInterventionPointTemplate<
   "$snap.messages",
   "messages"
 >;
 
 /** Post-model binding with the canonical model-response target. */
-@added(Versions.v2026_09_15_preview)
+@added(Versions.v2026_11_01_preview)
 model RaiAcsPostModelCallInterventionPoint is RaiAcsInterventionPointTemplate<
   "$snap.response",
   "model_response"
 >;
 
 /** Agent-shutdown binding with the canonical summary target. */
-@added(Versions.v2026_09_15_preview)
+@added(Versions.v2026_11_01_preview)
 model RaiAcsAgentShutdownInterventionPoint is RaiAcsInterventionPointTemplate<
   "$snap.summary",
   "agent_summary"
@@ -838,6 +846,7 @@ model RaiAcsAgentShutdownInterventionPoint is RaiAcsInterventionPointTemplate<
 model RaiAcsInterventionPoints {
   /** The policy evaluated when the agent execution session starts. */
   @encodedName("application/json", "agent_startup")
+  @added(Versions.v2026_11_01_preview)
   agentStartup?: RaiAcsAgentStartupInterventionPoint;
 
   /** The policy evaluated for user input. */
@@ -845,10 +854,12 @@ model RaiAcsInterventionPoints {
 
   /** The policy evaluated before a model call. */
   @encodedName("application/json", "pre_model_call")
+  @added(Versions.v2026_11_01_preview)
   preModelCall?: RaiAcsPreModelCallInterventionPoint;
 
   /** The policy evaluated after a model call. */
   @encodedName("application/json", "post_model_call")
+  @added(Versions.v2026_11_01_preview)
   postModelCall?: RaiAcsPostModelCallInterventionPoint;
 
   /** The policy evaluated before a tool call. */
@@ -864,6 +875,7 @@ model RaiAcsInterventionPoints {
 
   /** The policy evaluated when the agent execution session shuts down. */
   @encodedName("application/json", "agent_shutdown")
+  @added(Versions.v2026_11_01_preview)
   agentShutdown?: RaiAcsAgentShutdownInterventionPoint;
 }
 
@@ -1001,20 +1013,20 @@ union RaiPolicyContentSource {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated after a run execution"
   PostRun: "PostRun",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated when an agent execution session starts"
-  @added(Versions.v2026_09_15_preview)
+  @doc("Content evaluated when an agent execution session starts.")
+  @added(Versions.v2026_11_01_preview)
   AgentStartup: "AgentStartup",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated before a model call is made"
-  @added(Versions.v2026_09_15_preview)
+  @doc("Content evaluated before a model call is made.")
+  @added(Versions.v2026_11_01_preview)
   PreModelCall: "PreModelCall",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated after a model call returns"
-  @added(Versions.v2026_09_15_preview)
+  @doc("Content evaluated after a model call returns.")
+  @added(Versions.v2026_11_01_preview)
   PostModelCall: "PostModelCall",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Content evaluated when an agent execution session shuts down"
-  @added(Versions.v2026_09_15_preview)
+  @doc("Content evaluated when an agent execution session shuts down.")
+  @added(Versions.v2026_11_01_preview)
   AgentShutdown: "AgentShutdown",
 }
 

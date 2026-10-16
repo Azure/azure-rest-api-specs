@@ -258,6 +258,17 @@ assert(
 const files = (await readdir(sourceDirectory))
   .filter((name) => name.startsWith("UnifiedModerate") && name.endsWith(".json"))
   .sort();
+const semanticOnlyNegativeExamples = [
+  "UnifiedModerate_InvalidSelectorCombination.json",
+  "UnifiedModerate_MissingSelectedPolicyRevision.json",
+  "UnifiedModerate_SelectedPolicyRevisionMismatch.json",
+];
+for (const name of semanticOnlyNegativeExamples) {
+  assert(
+    !files.includes(name),
+    `${name}: negative selector cases must not contain a successful response, receipt or request binding`,
+  );
+}
 // This hook runs before emitters. Repository TypeSpec validation performs the
 // source/generated parity check after emission through its generated-files gate.
 for (const name of files) {
@@ -269,13 +280,13 @@ for (const name of files) {
 const base = JSON.parse(await readFile(join(sourceDirectory, "UnifiedModerate.json"), "utf8"));
 const semanticCases = [
   {
-    name: "mixed selector profiles",
+    name: "InvalidSelectorCombination",
     status: 400,
     code: "InvalidRequest",
     parameters: { ...clone(base.parameters), policyId: "named-policy" },
   },
   {
-    name: "incomplete selected-policy tuple",
+    name: "MissingSelectedPolicyRevision",
     status: 400,
     code: "SelectedPolicyRevisionRequired",
     parameters: { ...clone(base.parameters), selectedPolicyRevision: undefined },
@@ -302,7 +313,7 @@ const semanticCases = [
     setup: { requiredPolicyAvailable: false },
   },
   {
-    name: "selected revision mismatch",
+    name: "SelectedPolicyRevisionMismatch",
     status: 409,
     code: "SelectedPolicyRevisionMismatch",
     parameters: clone(base.parameters),
