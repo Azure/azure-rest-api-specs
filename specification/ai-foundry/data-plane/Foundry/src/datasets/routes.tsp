@@ -1,10 +1,12 @@
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 import "./models.tsp";
+import "../task-sets/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -19,6 +21,31 @@ interface Datasets
       ListDatasetVersionsParameters,
       ListDatasetVersionsParameters
     > {
+  /** Starts validation of the current Task manifest on a taskset Dataset version. */
+  @summary("Validate evaluation Task content")
+  @post
+  @route("/datasets/{name}/versions/{version}:validate")
+  @removed(Versions.v1)
+  @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
+  validate is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      /** Dataset name. */
+      @path name: string;
+
+      /** Dataset version to validate. */
+      @path version: string;
+    },
+    Response<202> &
+      DatasetVersion & {
+        /** URL of the Dataset version to poll for validation status. */
+        @header("Location") location: string;
+
+        /** Recommended delay before polling, in seconds. */
+        @header("Retry-After") retry_after?: int32;
+      }
+  >;
+
   /** Initiates a new pending upload or retrieves an existing one for the specified dataset version. */
   @summary("Start a pending upload")
   @Rest.action("startPendingUpload")

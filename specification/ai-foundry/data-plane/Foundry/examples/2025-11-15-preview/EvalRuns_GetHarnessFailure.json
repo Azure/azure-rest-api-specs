@@ -1,0 +1,113 @@
+{
+  "title": "Get a TaskRun after invocation failure",
+  "operationId": "EvalRuns_getTaskRun",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "run_id": "evalrun_01J9Z7F6J5",
+    "task_run_id": "taskrun_01J9Z7N4DH"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "taskrun_01J9Z7N4DH",
+        "task": {
+          "id": "covered-water-damage"
+        },
+        "repetition_number": 3,
+        "status": "failed",
+        "grader_results": [],
+        "error": {
+          "code": "harness_invocation_failed",
+          "message": "The agent invocation timed out after retries.",
+          "source": "harness",
+          "retriable": true,
+          "artifact_ids": [
+            "artifact_01J9Z7N8JK"
+          ]
+        },
+        "lifecycle": {
+          "created_at": 1791524400,
+          "started_at": 1791524422,
+          "completed_at": 1791524478,
+          "queue_duration_ms": 22000,
+          "total_duration_ms": 78000,
+          "phases": [
+            {
+              "phase": "queued",
+              "state": "completed",
+              "started_at_ms": 1791524400000,
+              "completed_at_ms": 1791524422000
+            },
+            {
+              "phase": "invoking",
+              "state": "completed",
+              "started_at_ms": 1791524422000,
+              "completed_at_ms": 1791524438000
+            },
+            {
+              "phase": "retry_wait",
+              "state": "completed",
+              "started_at_ms": 1791524438000,
+              "completed_at_ms": 1791524440000
+            },
+            {
+              "phase": "invoking",
+              "state": "completed",
+              "started_at_ms": 1791524440000,
+              "completed_at_ms": 1791524456000
+            },
+            {
+              "phase": "retry_wait",
+              "state": "completed",
+              "started_at_ms": 1791524456000,
+              "completed_at_ms": 1791524458000
+            },
+            {
+              "phase": "invoking",
+              "state": "completed",
+              "started_at_ms": 1791524458000,
+              "completed_at_ms": 1791524478000
+            },
+            {
+              "phase": "grading",
+              "state": "not_reached"
+            }
+          ]
+        },
+        "evaluation_run_id": "evalrun_01J9Z7F6J5",
+        "input": {
+          "type": "prompt",
+          "instruction": "Review claim 12345 and cite the policy."
+        },
+        "artifacts": [
+          {
+            "artifact_id": "artifact_01J9Z7N8JK",
+            "type": "harness_log",
+            "media_type": "text/plain"
+          }
+        ],
+        "diagnostics": {
+          "attempts": {
+            "harness": 3
+          },
+          "log_artifacts": [
+            "artifact_01J9Z7N8JK"
+          ]
+        },
+        "effective_graders": [
+          {
+            "name": "policy_citation",
+            "type": "substring_match",
+            "source": "task"
+          },
+          {
+            "name": "answer_quality",
+            "type": "rubric",
+            "source": "task"
+          }
+        ]
+      }
+    }
+  }
+}
