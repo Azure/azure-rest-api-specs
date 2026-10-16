@@ -8,6 +8,7 @@ import "../../recoveryPlans.tsp";
 import "./recoveryResource.tsp";
 
 using Azure.ResourceManager;
+using Azure.Core;
 using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
@@ -211,4 +212,66 @@ model ResourceFeasibilityReview {
   @identifiers(#["sku"])
   @maxItems(5)
   recommendedTargetSkus?: SkuDetails[];
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("A request to restore selected recovery plan resources.")
+model RecoveryPlanRestoreContent {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The filter selecting resources to restore.")
+  resourceFilter?: RestoreResourceFilter;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("The mode used to include or exclude resources from restore.")
+union RestoreFilterType {
+  @added(Versions.v2026_11_30_preview)
+  @doc("Only matching resources are restored.")
+  Include: "Include",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Matching resources are excluded from restore.")
+  Exclude: "Exclude",
+
+  string,
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("A filter selecting resources for a recovery plan restore.")
+model RestoreResourceFilter {
+  @added(Versions.v2026_11_30_preview)
+  @doc("Whether the filter includes or excludes matching resources.")
+  filterType: RestoreFilterType;
+
+  @added(Versions.v2026_11_30_preview)
+  @identifiers(#[])
+  @doc("The protected data sources selected by the filter.")
+  dataSources?: RestoreDataSourceInput[];
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The workload types selected by the filter.")
+  workloadTypes?: WorkloadType[];
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The recovery group identifiers selected by the filter.")
+  recoveryGroups?: string[];
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("A protected data source and optional pinned recovery point.")
+model RestoreDataSourceInput {
+  @added(Versions.v2026_11_30_preview)
+  @doc("The Azure resource identifier of the protected item.")
+  protectedItemId: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems";
+    },
+    {
+      type: "Microsoft.DataProtection/backupVaults/backupInstances";
+    }
+  ]>;
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("The recovery point identifier pinned for an include filter.")
+  recoveryPointId?: string;
 }

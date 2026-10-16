@@ -9,6 +9,7 @@ import "./models/common/Job.tsp";
 import "./models/common/JobResource.tsp";
 import "./models/common/ChildJob.tsp";
 import "./models/recoveryPlan/recoveryPlan.tsp";
+import "./models/recoveryPlan/recoveryConfigProfile.tsp";
 import "./models/recoveryPlan/recoveryGroup.tsp";
 import "./models/recoveryPlan/recoveryResource.tsp";
 import "./models/recoveryPlan/recoveryActions.tsp";
@@ -125,6 +126,40 @@ interface RecoveryPlans {
 
 model RecoveryPlanListResult is ResourceListResult<RecoveryPlan>;
 @@identifiers(RecoveryPlanListResult.value, #["id"]);
+
+@armResourceOperations
+@added(Versions.v2026_11_30_preview)
+@doc("Operations for managing recovery configuration profiles.")
+interface RecoveryConfigProfiles {
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Gets a recovery configuration profile.")
+  get is ArmResourceRead<RecoveryConfigProfile, ServiceGroupParameters>;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Creates or replaces a recovery configuration profile.")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    RecoveryConfigProfile,
+    ServiceGroupParameters
+  >;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Lists recovery configuration profiles under a recovery plan.")
+  list is ArmResourceListByParent<
+    RecoveryConfigProfile,
+    ServiceGroupParameters
+  >;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Deletes a recovery configuration profile.")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    RecoveryConfigProfile,
+    ServiceGroupParameters
+  >;
+}
 
 @armResourceOperations
 @doc("Actions for managing Recovery Orchestration Plans.")
@@ -355,6 +390,52 @@ interface RecoveryPlanActionsOld {
 @doc("Actions for managing Recovery Orchestration Plans.")
 @added(Versions.v2026_09_30_preview)
 interface RecoveryPlanActions {
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @post
+  @doc("Synchronizes recovery resources for a cyber recovery plan.")
+  syncRecoveryResources is ArmResourceActionAsync<
+    RecoveryPlan,
+    void,
+    RecoveryPlanActionBaseResponse,
+    ServiceGroupAndRequestHeadersParameters
+  >;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @post
+  @doc("Creates the target infrastructure selected for a cyber recovery plan.")
+  createInfrastructure is ArmResourceActionAsync<
+    RecoveryPlan,
+    ResourceSelectionProperties,
+    RecoveryPlanActionBaseResponse,
+    ServiceGroupAndRequestHeadersParameters
+  >;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @post
+  @doc("Restores selected resources for a cyber recovery plan.")
+  restore is ArmResourceActionAsync<
+    RecoveryPlan,
+    RecoveryPlanRestoreContent,
+    RecoveryPlanActionBaseResponse,
+    ServiceGroupAndRequestHeadersParameters,
+    OptionalRequestBody = true
+  >;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @post
+  @doc("Validates whether selected resources can be restored.")
+  validateForRestore is ArmResourceActionAsync<
+    RecoveryPlan,
+    RecoveryPlanRestoreContent,
+    RecoveryPlanActionBaseResponse,
+    ServiceGroupAndRequestHeadersParameters,
+    OptionalRequestBody = true
+  >;
+
   @route(ServiceGroupRoute)
   @post
   @doc("This action finalizes the recovery orchestration plan, ensuring all necessary configurations are in place.")
