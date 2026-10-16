@@ -1,3 +1,4 @@
+import { findTypeSpecProjectsForChangedFiles } from "@azure-tools/specs-shared/typespec-projects";
 import path from "node:path";
 import { inspect } from "node:util";
 import { logMessage } from "./log.ts";
@@ -162,12 +163,16 @@ export async function detectChangedSpecConfigFiles(
     stopAtFolder: "specification",
   });
 
-  const typespecProjectResult = searchRelatedParentFolders(fileList, {
-    searchFileRegex: typespecProjectRegex,
-    specRepoFolder: commandInput.localSpecRepoPath,
-    stopAtFolder: "specification",
-    findAll: true,
-  });
+  const projects = await findTypeSpecProjectsForChangedFiles(
+    commandInput.localSpecRepoPath,
+    fileList,
+  );
+  const typespecProjectResult = Object.fromEntries(
+    [...projects].map(([directory, files]) => [
+      path.relative(commandInput.localSpecRepoPath, directory).replaceAll("\\", "/"),
+      files,
+    ]),
+  );
 
   const typespecProjectSharedLibraries = searchSharedLibrary(fileList, {
     searchFileRegex: typespecProjectSharedLibraryRegex,
