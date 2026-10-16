@@ -26,7 +26,7 @@ These are the global settings for the WebPubSub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-12-01-preview
+tag: package-2026-01-01
 ```
 
 ### Suppression
@@ -224,6 +224,15 @@ input-file:
 - preview/2025-12-01-preview/webpubsub.json
 ```
 
+### Tag: package-2026-01-01
+
+These settings apply only when `--tag=package-2026-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01'
+input-file:
+- stable/2026-01-01/webpubsub.json
+```
+
 ---
 
 # Code Generation
@@ -260,6 +269,4 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
 
