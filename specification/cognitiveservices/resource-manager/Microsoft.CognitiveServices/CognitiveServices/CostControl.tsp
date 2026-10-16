@@ -18,6 +18,7 @@ namespace Microsoft.CognitiveServices;
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @parentResource(Account)
 model CostControl
   is Azure.ResourceManager.ProxyResource<CostControlProperties> {
@@ -42,6 +43,7 @@ model CostControl
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Cost controls are synchronously persisted proxy resources and the service contract does not expose provisioningState."
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlProperties {
   /**
    * An optional human-readable name for the cost control.
@@ -63,6 +65,7 @@ model CostControlProperties {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlPatchProperties {
   /**
    * An optional human-readable name for the cost control. Set this property to null to clear it.
@@ -85,6 +88,7 @@ model CostControlPatchProperties {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlPatch {
   /**
    * The cost control properties to update.
@@ -99,6 +103,7 @@ model CostControlPatch {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlConnections {
   /**
    * Gets or sets the full resource ID of the optional Application Insights connection.
@@ -130,6 +135,7 @@ model CostControlConnections {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlRule {
   /**
    * The stable rule identifier, unique within the cost control without regard to case.
@@ -198,6 +204,7 @@ model CostControlRule {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlMatch {
   /**
    * Agent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.
@@ -237,6 +244,7 @@ model CostControlMatch {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @minLength(1)
 scalar CostControlMatchValue extends string;
 
@@ -245,6 +253,7 @@ scalar CostControlMatchValue extends string;
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlDimension {
   /**
    * The kind of request dimension.
@@ -266,6 +275,7 @@ model CostControlDimension {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 union CostControlDimensionType {
   string,
 
@@ -306,6 +316,7 @@ union CostControlDimensionType {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 union CostControlUnit {
   string,
 
@@ -320,6 +331,7 @@ union CostControlUnit {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 union CostControlPeriod {
   string,
 
@@ -353,6 +365,7 @@ union CostControlPeriod {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlThreshold {
   /**
    * How the threshold value is interpreted.
@@ -378,6 +391,7 @@ model CostControlThreshold {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 union CostControlThresholdType {
   string,
 
@@ -397,6 +411,7 @@ union CostControlThresholdType {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 union CostControlThresholdAction {
   string,
 
@@ -421,6 +436,7 @@ union CostControlThresholdAction {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlListResult {
   /**
    * The link used to get the next page of cost controls.
@@ -441,6 +457,7 @@ model CostControlListResult {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlCreateOrUpdateHeaders {
   /**
    * Proceeds only when the current entity tag matches this value.
@@ -460,6 +477,7 @@ model CostControlCreateOrUpdateHeaders {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlIfMatchHeader {
   /**
    * Proceeds only when the current entity tag matches this value.
@@ -484,6 +502,7 @@ alias CostControlEtagHeader = {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface CostControls {
   /**
