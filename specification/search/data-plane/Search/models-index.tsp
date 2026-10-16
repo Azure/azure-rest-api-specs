@@ -783,10 +783,10 @@ model AgenticSearchUsage {
   @minValue(0)
   agenticPlanningTokens: int64;
 
-  /** The number of tokens consumed for ranking, including documents not returned in the response. */
+  /** The number of tokens consumed for semantic ranking, including documents not returned in the response. Excludes agentic query-planning tokens. */
   @visibility(Lifecycle.Read)
   @minValue(0)
-  rankingTokens: int64;
+  reasoningTokens: int64;
 }
 
 /** One issued subquery from agentic search. The object permits future query metadata without changing the subquery collection shape. */
@@ -1437,9 +1437,9 @@ model VectorQuery {
   @removed(Versions.v2026_04_01)
   perDocumentVectorLimit?: int32;
 
-  /** Community-based vector search options. */
+  /** Topic graph vector search options. */
   @added(Versions.v2026_11_01_preview)
-  graphCommunities?: VectorQueryGraphCommunities;
+  topicGraph?: VectorQueryTopicGraph;
 
   /** Type of query. */
   kind: VectorQueryKind;

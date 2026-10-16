@@ -48,27 +48,27 @@ union ListingSearchType {
   Prefix: "prefix",
 }
 
-/** Community-based vector search options. */
+/** Topic graph vector search options. */
 @added(Versions.v2026_11_01_preview)
-model VectorQueryGraphCommunities {
-  /** The kind of community-based vector search to use. */
-  kind: VectorQueryGraphCommunitiesKind;
+model VectorQueryTopicGraph {
+  /** The kind of topic graph vector search to use. */
+  kind: VectorQueryTopicGraphKind;
 
-  /** The diversity factor used for community-based vector search. This property is only allowed when kind is diverse. If omitted, the default configured on the index is used. */
+  /** The diversity factor used for topic graph vector search. This property is only allowed when kind is diverse. If omitted, the default configured on the index is used. */
   @minValue(0)
   @maxValue(1)
   diversityFactor?: float32;
 }
 
-/** The kind of community-based vector search to use. */
+/** The kind of topic graph vector search to use. */
 @added(Versions.v2026_11_01_preview)
-union VectorQueryGraphCommunitiesKind {
+union VectorQueryTopicGraphKind {
   string,
 
-  /** Use normal vector search when community-based diverse retrieval is off. */
+  /** Use normal vector search when topic graph diverse retrieval is off. */
   none: "none",
 
-  /** Use community-based diverse retrieval. */
+  /** Use topic graph diverse retrieval. */
   diverse: "diverse",
 }
 

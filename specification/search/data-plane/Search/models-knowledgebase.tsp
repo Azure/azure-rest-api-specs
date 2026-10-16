@@ -329,9 +329,9 @@ model SearchIndexKnowledgeSourceParams extends KnowledgeSourceParams {
   @added(Versions.v2026_08_01_preview)
   queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
 
-  /** Overrides the knowledge source's stored graphCommunities for this retrieval. When omitted, the stored knowledge source value applies. */
+  /** Overrides the knowledge source's stored topicGraph for this retrieval. When omitted, the stored knowledge source value applies. */
   @added(Versions.v2026_11_01_preview)
-  graphCommunities?: VectorQueryGraphCommunities;
+  topicGraph?: VectorQueryTopicGraph;
 }
 
 /** Specifies runtime parameters for a azure blob knowledge source */
@@ -348,9 +348,9 @@ model AzureBlobKnowledgeSourceParams extends KnowledgeSourceParams {
   @added(Versions.v2026_08_01_preview)
   queryHintOverrides?: SearchIndexKnowledgeSourceQueryHints;
 
-  /** Overrides the knowledge source's stored graphCommunities for this retrieval. When omitted, the stored knowledge source value applies. */
+  /** Overrides the knowledge source's stored topicGraph for this retrieval. When omitted, the stored knowledge source value applies. */
   @added(Versions.v2026_11_01_preview)
-  graphCommunities?: VectorQueryGraphCommunities;
+  topicGraph?: VectorQueryTopicGraph;
 }
 
 /** Specifies which SharePoint libraries to access. */

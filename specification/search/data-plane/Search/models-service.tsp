@@ -909,6 +909,22 @@ union AzureOpenAIModelName {
   /** Gpt56Luna model. */
   @added(Versions.v2026_08_01_preview)
   Gpt56Luna: "gpt-5.6-luna",
+
+  /** Gpt6Astra model. */
+  @added(Versions.v2026_11_01_preview)
+  Gpt6Astra: "gpt-6-astra",
+
+  /** Gpt6Sol model. */
+  @added(Versions.v2026_11_01_preview)
+  Gpt6Sol: "gpt-6-sol",
+
+  /** Gpt6Luna model. */
+  @added(Versions.v2026_11_01_preview)
+  Gpt6Luna: "gpt-6-luna",
+
+  /** Gpt61Sol model. */
+  @added(Versions.v2026_11_01_preview)
+  Gpt61Sol: "gpt-6.1-sol",
 }
 
 /** The name of the embedding model from the Azure AI Foundry Catalog that will be called. */
@@ -4306,9 +4322,9 @@ model SearchField {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   vectorSearchProfile?: string | null;
 
-  /** The name of the graph communities profile linked to this vector field. */
+  /** The name of the topic graph profile linked to this vector field. */
   @added(Versions.v2026_11_01_preview)
-  graphCommunitiesProfile?: string;
+  topicGraphProfile?: string;
 
   /** The encoding format to interpret the field contents. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -4538,22 +4554,22 @@ model VectorSearch {
   /** Contains configuration options specific to the compression method used during indexing or querying. */
   compressions?: VectorSearchCompression[];
 
-  /** Contains profiles for community-based vector search. */
+  /** Contains profiles for topic graph vector search. */
   @added(Versions.v2026_11_01_preview)
   @maxItems(1)
-  graphCommunitiesProfiles?: VectorSearchGraphCommunitiesProfile[];
+  topicGraphProfiles?: VectorSearchTopicGraphProfile[];
 }
 
-/** Defines a graph communities profile for a single vector field. */
+/** Defines a topic graph profile for a single vector field. */
 @added(Versions.v2026_11_01_preview)
-model VectorSearchGraphCommunitiesProfile {
-  /** The name to associate with this graph communities profile. */
+model VectorSearchTopicGraphProfile {
+  /** The name to associate with this topic graph profile. */
   name: string;
 
-  /** The name of the index that stores the communities for the associated vector field. */
+  /** The name of the index that stores the topics for the associated vector field. */
   indexName: string;
 
-  /** Default diversity factor for community vector searches. Default is 0.1. */
+  /** Default diversity factor for topic graph vector searches. Default is 0.1. */
   @minValue(0)
   @maxValue(1)
   defaultDiversityFactor?: float32;
@@ -4924,7 +4940,7 @@ union KnowledgeBaseModelKind {
   /** Use Azure Open AI models for query planning. */
   AzureOpenAI: "azureOpenAI",
 
-  /** Use a customer-controlled OpenAI-compatible chat-completions endpoint for knowledge base retrieval. */
+  /** Use a customer-controlled OpenAI-compatible endpoint for knowledge base retrieval or knowledge source image verbalization. */
   @added(Versions.v2026_11_01_preview)
   OpenAICompatible: "openAICompatible",
 
@@ -4942,26 +4958,26 @@ model KnowledgeBaseAzureOpenAIModel extends KnowledgeBaseModel {
   azureOpenAIParameters: AzureOpenAIVectorizerParameters;
 }
 
-/** Specifies a customer-controlled OpenAI-compatible chat-completions model for knowledge base retrieval. Not supported for knowledge source ingestion or knowledge bases with Web knowledge sources. */
+/** Specifies a customer-controlled OpenAI-compatible model for knowledge base retrieval or Minimal-mode knowledge source image verbalization. For retrieval, the model profile selects Chat Completions or Responses. Not supported for Standard/CU extraction or knowledge bases with Web knowledge sources. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve the OpenAI acronym in SDK model names."
 @added(Versions.v2026_11_01_preview)
 model KnowledgeBaseOpenAICompatibleModel extends KnowledgeBaseModel {
   /** The discriminator value for an OpenAI-compatible model. */
   kind: KnowledgeBaseModelKind.OpenAICompatible;
 
-  /** Connection and authentication parameters for the OpenAI-compatible chat-completions endpoint. */
+  /** Connection and authentication parameters for the OpenAI-compatible endpoint. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Match the openAICompatible discriminator."
   openAICompatibleParameters: KnowledgeBaseOpenAICompatibleParameters;
 }
 
-/** Connection parameters for an OpenAI-compatible chat-completions endpoint. Creation requires exactly one of nonempty headers or managedIdentityAudience. Updates can omit headers to preserve credentials for an unchanged connection and model profile. */
+/** Connection parameters for an OpenAI-compatible Chat Completions or Responses endpoint. Creation requires exactly one of nonempty headers or managedIdentityAudience. Updates can omit headers to preserve credentials for an unchanged connection and model profile. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve the OpenAI acronym in SDK model names."
 @added(Versions.v2026_11_01_preview)
 model KnowledgeBaseOpenAICompatibleParameters {
-  /** The complete HTTPS chat-completions POST URL, including any path and query parameters. Sent unchanged without appending a path or API version. Redirects are not followed. */
+  /** The complete HTTPS POST URL, including path and query parameters. Sent unchanged without appending a path or API version; redirects are not followed. For knowledge base retrieval, the endpoint must accept the model profile's Chat Completions or Responses protocol. For knowledge source image verbalization, the URI path must end in /chat/completions or /responses; query parameters do not select the protocol. */
   uri: url;
 
-  /** A supported Azure OpenAI chat model name that determines Search's request and response schema, capabilities, and limits. The outbound body omits model; the URI or gateway selects the actual model. Embedding models, Responses, and arbitrary provider protocols are not supported. */
+  /** A supported chat model name that determines Search's capabilities and limits. For knowledge source image verbalization, this is sent as the model selector in the request body; the URI path selects Chat Completions or Responses independently of this name. For knowledge base retrieval, GPT-6 model profiles use Responses and existing model profiles use Chat Completions; the endpoint must support the selected protocol, including stateless tool continuation for Responses. The retrieval request body omits model; the URI or gateway selects the actual model and supplies any required provider model identifier. Embedding models and arbitrary provider protocols are not supported. */
   modelName: AzureOpenAIModelName;
 
   /** Nonempty stored HTTP headers for endpoint authentication. Both names and values are secret and are never returned in responses. Empty maps are invalid. Mutually exclusive with managedIdentityAudience and authIdentity. On update, omitted headers are preserved only on the same resource and model binding when the exact endpoint, model profile, and authentication identity are unchanged; otherwise, supply fresh credentials. */
@@ -4976,7 +4992,7 @@ model KnowledgeBaseOpenAICompatibleParameters {
   authIdentity?: SearchIndexerDataIdentity;
 }
 
-/** An OpenAI-compatible embeddings endpoint used for managed knowledge source ingestion and generated query vectorization. Changing from a native embedding model requires recreating the knowledge source and indexing it again. The URI, modelName, and dimensions cannot be changed after creation. */
+/** An OpenAI-compatible embeddings endpoint used for managed knowledge source ingestion and generated query vectorization. Changing from a native embedding model requires recreating and reindexing the knowledge source. The URI, modelName, and dimensions cannot be changed after creation. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve the OpenAI acronym in SDK model names."
 @added(Versions.v2026_11_01_preview)
 model KnowledgeSourceOpenAICompatibleVectorizer
@@ -5170,9 +5186,9 @@ model SearchIndexKnowledgeSourceParameters {
   @added(Versions.v2026_08_01_preview)
   queryHints?: SearchIndexKnowledgeSourceQueryHints;
 
-  /** Default community-based vector search options for this search index knowledge source. */
+  /** Default topic graph vector search options for this search index knowledge source. */
   @added(Versions.v2026_11_01_preview)
-  graphCommunities?: VectorQueryGraphCommunities;
+  topicGraph?: VectorQueryTopicGraph;
 }
 
 /** Hints that guide query planning toward useful filters and boosts for a search index knowledge source. */
@@ -5311,9 +5327,9 @@ model AzureBlobKnowledgeSourceParameters {
   @added(Versions.v2026_08_01_preview)
   queryHints?: SearchIndexKnowledgeSourceQueryHints;
 
-  /** Default community-based vector search options for this Azure Blob knowledge source. */
+  /** Default topic graph vector search options for this Azure Blob knowledge source. */
   @added(Versions.v2026_11_01_preview)
-  graphCommunities?: VectorQueryGraphCommunities;
+  topicGraph?: VectorQueryTopicGraph;
 
   /** Resources created by the knowledge source. */
   @visibility(Lifecycle.Read)

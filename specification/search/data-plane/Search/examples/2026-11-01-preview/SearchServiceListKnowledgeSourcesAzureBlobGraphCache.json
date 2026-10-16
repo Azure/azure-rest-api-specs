@@ -1,0 +1,73 @@
+{
+  "operationId": "KnowledgeSources_List",
+  "title": "SearchServiceListKnowledgeSourcesAzureBlobGraphCache",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "api-version": "2026-11-01-preview",
+    "search": null,
+    "pageSize": null,
+    "searchType": null,
+    "Accept": "application/json;odata.metadata=minimal",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "@odata.etag": "0x1234568AE7E58A1",
+            "name": "ks-graph-cache",
+            "kind": "azureBlob",
+            "azureBlobParameters": {
+              "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
+              "containerName": "test-container",
+              "isADLSGen2": false,
+              "ingestionParameters": {
+                "disableImageVerbalization": true,
+                "ingestionPermissionOptions": [],
+                "contentExtractionMode": "minimal",
+                "networkAccessMode": "public",
+                "embeddingModel": {
+                  "kind": "azureOpenAI",
+                  "azureOpenAIParameters": {
+                    "resourceUri": "https://test-sample.openai.azure.com",
+                    "deploymentId": "model",
+                    "apiKey": "<redacted>",
+                    "modelName": "text-embedding-3-large"
+                  }
+                },
+                "chatCompletionModel": {
+                  "kind": "azureOpenAI",
+                  "azureOpenAIParameters": {
+                    "resourceUri": "https://test-sample.openai.azure.com",
+                    "deploymentId": "myDeployment",
+                    "apiKey": "<redacted>",
+                    "modelName": "gpt-4o-mini"
+                  }
+                },
+                "ingestionSchedule": {
+                  "interval": "P1D",
+                  "startTime": "2024-06-06T00:01:50.265Z"
+                },
+                "cache": {
+                  "storageConnectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
+                  "enableReprocessing": true
+                }
+              },
+              "graphExtraction": {
+                "graphName": "products"
+              },
+              "createdResources": {
+                "datasource": "ks-graph-cache-datasource",
+                "indexer": "ks-graph-cache-indexer",
+                "skillset": "ks-graph-cache-skillset",
+                "index": "ks-graph-cache-index",
+                "graphIndex": "ks-graph-cache-graph-index"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
