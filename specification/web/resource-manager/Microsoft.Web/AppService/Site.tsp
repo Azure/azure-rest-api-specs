@@ -1220,9 +1220,7 @@ interface Sites {
    * Description for Start capturing network packets for the site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Start capturing network packets for the site.")
-  @operationId("WebApps_StartNetworkTrace")
   startNetworkTrace is SiteOps.ActionSync<
     Site,
     void,

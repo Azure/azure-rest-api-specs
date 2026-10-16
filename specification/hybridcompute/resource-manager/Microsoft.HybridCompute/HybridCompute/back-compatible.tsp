@@ -74,6 +74,7 @@ using Microsoft.HybridCompute;
   Machines.upgradeExtensions::parameters.body,
   "extensionUpgradeParameters"
 );
+@@clientLocation(Machines.setupExtensions, Microsoft.HybridCompute, "autorest");
 @@clientName(Machines.setupExtensions::parameters.body, "extensions");
 @@clientLocation(Machines.networkProfileGet, "NetworkProfile", "!javascript");
 @@clientLocation(

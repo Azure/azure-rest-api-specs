@@ -15,9 +15,21 @@ using Microsoft.DevHub;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IacProfile.properties);
 
-@@clientLocation(GitHubOAuthResponses.gitHubOAuthCallback, Microsoft.DevHub);
-@@clientLocation(GitHubOAuthResponses.listGitHubOAuth, Microsoft.DevHub);
-@@clientLocation(GitHubOAuthResponses.gitHubOAuth, Microsoft.DevHub);
+@@clientLocation(
+  GitHubOAuthResponses.gitHubOAuthCallback,
+  Microsoft.DevHub,
+  "autorest"
+);
+@@clientLocation(
+  GitHubOAuthResponses.listGitHubOAuth,
+  Microsoft.DevHub,
+  "autorest"
+);
+@@clientLocation(
+  GitHubOAuthResponses.gitHubOAuth,
+  Microsoft.DevHub,
+  "autorest"
+);
 @@clientName(GitHubOAuthResponses.gitHubOAuth::parameters.body, "parameters");
 
 @@clientLocation(Workflows.get, "Workflow", "!javascript");
@@ -42,7 +54,11 @@ using Microsoft.DevHub;
 
 @@clientLocation(AdooAuthResponses.get, "ADOOAuth", "!java");
 @@clientLocation(AdooAuthResponses.list, "ADOOAuth", "!java");
-@@clientLocation(AdooAuthResponses.getADOOAuthInfo, Microsoft.DevHub);
+@@clientLocation(
+  AdooAuthResponses.getADOOAuthInfo,
+  Microsoft.DevHub,
+  "autorest"
+);
 @@clientName(AdooAuthResponses.getADOOAuthInfo::parameters.body, "parameters");
 
 @@clientLocation(Templates.get, "Template");

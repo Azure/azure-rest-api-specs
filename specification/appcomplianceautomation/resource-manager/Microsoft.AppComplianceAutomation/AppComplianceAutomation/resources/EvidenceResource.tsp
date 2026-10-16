@@ -1,7 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "../models/models.tsp";
 import "./ReportResource.tsp";
@@ -9,7 +8,6 @@ import "./ReportResource.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using OpenAPI;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AppComplianceAutomation;
@@ -45,8 +43,6 @@ interface Evidence {
   /**
    * Get the evidence metadata
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Evidence_Get")
   get is ArmResourceRead<
     EvidenceResource,
     {
@@ -57,8 +53,6 @@ interface Evidence {
   /**
    * Create or Update an evidence a specified report
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Evidence_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     EvidenceResource,
     {
@@ -70,15 +64,11 @@ interface Evidence {
   /**
    *  Delete an existent evidence from a specified report
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Evidence_Delete")
   delete is ArmResourceDeleteSync<EvidenceResource>;
 
   /**
    * Returns a paginated list of evidences for a specified report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Evidence_ListByReport")
   listByReport is ArmResourceListByParent<
     EvidenceResource,
     {
@@ -90,8 +80,6 @@ interface Evidence {
   /**
    * Download evidence file.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Evidence_Download")
   download is ArmResourceActionSync<
     EvidenceResource,
     EvidenceFileDownloadRequest,

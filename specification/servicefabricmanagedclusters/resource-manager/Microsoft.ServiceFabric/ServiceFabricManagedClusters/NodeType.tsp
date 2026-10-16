@@ -197,10 +197,8 @@ interface NodeTypeSkus {
   /**
    * Get a Service Fabric node type supported SKUs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @get
   @action("skus")
-  @operationId("NodeTypeSkus_List")
   @list
   list is ArmResourceActionSync<
     NodeType,

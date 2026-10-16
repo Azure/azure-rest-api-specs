@@ -103,7 +103,7 @@ using Microsoft.Confluent;
 @@clientLocation(SCClusterRecords.delete, "Cluster", "!csharp");
 @@clientLocation(SCClusterRecords.listClusters, "Organization", "!csharp");
 @@clientLocation(SCClusterRecords.createAPIKey, "Organization", "!csharp");
-@@clientName(SCClusterRecords.createAPIKey, "CreateApiKey");
+@@clientName(SCClusterRecords.createAPIKey, "CreateAPIKey");
 
 // SCEnvironmentRecords interface
 @@clientLocation(

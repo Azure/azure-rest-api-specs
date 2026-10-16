@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VirtualMachine.tsp";
@@ -8,7 +7,6 @@ import "./VirtualMachine.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Common;
 
 namespace Compute;
@@ -158,8 +156,6 @@ interface VirtualMachineScaleSetVMRunCommands {
   /**
    * The operation to get the VMSS VM run command.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMRunCommands_Get")
   get is VirtualMachineScaleSetVMRunCommandOps.Read<
     VirtualMachineRunCommand,
     Parameters = {
@@ -174,8 +170,6 @@ interface VirtualMachineScaleSetVMRunCommands {
   /**
    * The operation to create or update the VMSS VM run command.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMRunCommands_CreateOrUpdate")
   createOrUpdate is VirtualMachineScaleSetVMRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineRunCommand,
     LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> &
@@ -185,9 +179,7 @@ interface VirtualMachineScaleSetVMRunCommands {
   /**
    * The operation to update the VMSS VM run command.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@typespec/http/patch-implicit-optional" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMRunCommands_Update")
   update is VirtualMachineScaleSetVMRunCommandOps.CustomPatchAsync<
     VirtualMachineRunCommand,
     VirtualMachineRunCommandUpdate,
@@ -199,9 +191,7 @@ interface VirtualMachineScaleSetVMRunCommands {
   /**
    * The operation to delete the VMSS VM run command.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
-  @operationId("VirtualMachineScaleSetVMRunCommands_Delete")
   delete is VirtualMachineScaleSetVMRunCommandOps.DeleteWithoutOkAsync<
     VirtualMachineRunCommand,
     Response =
@@ -213,8 +203,6 @@ interface VirtualMachineScaleSetVMRunCommands {
   /**
    * The operation to get all run commands of an instance in Virtual Machine Scaleset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMRunCommands_List")
   @list
   list is VirtualMachineScaleSetVMRunCommandOps.List<
     VirtualMachineRunCommand,

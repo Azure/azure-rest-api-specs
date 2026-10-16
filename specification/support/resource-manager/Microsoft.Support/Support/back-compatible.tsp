@@ -117,3 +117,5 @@ using Microsoft.Support;
   SupportTickets.lookUpResourceId::parameters.body,
   "lookUpResourceIdRequest"
 );
+@@clientLocation(SupportTickets.lookUpResourceId, "lookUpResourceId");
+@@clientName(SupportTickets.lookUpResourceId, "Post");

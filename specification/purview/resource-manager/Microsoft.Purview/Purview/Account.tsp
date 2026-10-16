@@ -157,9 +157,7 @@ interface Accounts {
   /**
    * Gets details from a list of feature names.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a list of features and their status for the account.\r\nStatus of enabled features will be true. Status of disabled features will be false.\r\nFeatures that don't exist will be excluded from the results.")
-  @operationId("Features_AccountGet")
   @action("listFeatures")
   accountGet is ArmResourceActionSync<
     Account,
@@ -171,9 +169,7 @@ interface Accounts {
   /**
    * Lists all ingestion private endpoint connections
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Lists all ingestion private endpoint connections.")
-  @operationId("IngestionPrivateEndpointConnections_List")
   @list
   @get
   @action("ingestionPrivateEndpointConnections")
@@ -187,9 +183,7 @@ interface Accounts {
   /**
    * Update ingestion private endpoint connection status
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Updates ingestion private endpoint connection status.")
-  @operationId("IngestionPrivateEndpointConnections_UpdateStatus")
   @action("ingestionPrivateEndpointConnectionStatus")
   updateStatus is ArmResourceActionSync<
     Account,

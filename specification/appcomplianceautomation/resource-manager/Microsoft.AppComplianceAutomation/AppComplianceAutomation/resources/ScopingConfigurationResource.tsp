@@ -1,7 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
@@ -14,7 +13,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
-using OpenAPI;
 
 namespace Microsoft.AppComplianceAutomation;
 /**
@@ -50,29 +48,21 @@ interface ScopingConfiguration {
   /**
    * Get the AppComplianceAutomation scoping configuration of the specific report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("ScopingConfiguration_Get")
   get is ArmResourceRead<ScopingConfigurationResource>;
 
   /**
    * Get the AppComplianceAutomation scoping configuration of the specific report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("ScopingConfiguration_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<ScopingConfigurationResource>;
 
   /**
    * Clean the AppComplianceAutomation scoping configuration of the specific report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("ScopingConfiguration_Delete")
   delete is ArmResourceDeleteSync<ScopingConfigurationResource>;
 
   /**
    * Returns a list format of the singleton scopingConfiguration for a specified report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("ScopingConfiguration_List")
   list is ArmResourceListByParent<ScopingConfigurationResource>;
 }
 

@@ -40,15 +40,11 @@ interface ClusterMetricsConfigurations {
   /**
    * Get metrics configuration of the provided cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MetricsConfigurations_Get")
   get is ArmResourceRead<ClusterMetricsConfiguration>;
 
   /**
    * Create new or update the existing metrics configuration of the provided cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MetricsConfigurations_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ClusterMetricsConfiguration,
     Parameters = {
@@ -61,8 +57,6 @@ interface ClusterMetricsConfigurations {
   /**
    * Patch properties of metrics configuration for the provided cluster, or update the tags associated with it. Properties and tag updates can be done independently.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MetricsConfigurations_Update")
   @patch(#{ implicitOptionality: false })
   /* Note: It is preferred to use Azure.ResourceManager.ArmCustomPatchAsync, for existing resources the patch body is (nonsensically) "optional", and this is the only way to achieve it. */
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
@@ -80,8 +74,6 @@ interface ClusterMetricsConfigurations {
   /**
    * Delete the metrics configuration of the provided cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MetricsConfigurations_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ClusterMetricsConfiguration,
     Parameters = {
@@ -96,8 +88,6 @@ interface ClusterMetricsConfigurations {
   /**
    * Get a list of metrics configurations for the provided cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MetricsConfigurations_ListByCluster")
   listByCluster is ArmResourceListByParent<
     ClusterMetricsConfiguration,
     Parameters = {

@@ -198,8 +198,6 @@ interface Machines {
   /**
    * The operation to Setup Machine Extensions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
-  @operationId("SetupExtensions")
   @tag("MachineExtensions Setup")
   @action("addExtensions")
   setupExtensions is ArmResourceActionAsync<

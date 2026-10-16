@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VirtualMachineScaleSet.tsp";
@@ -8,7 +7,6 @@ import "./VirtualMachineScaleSet.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Common;
 
 namespace Compute;
@@ -105,8 +103,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Gets a virtual machine from a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_Get")
   get is ComputeResourceRead<
     VirtualMachineScaleSetVM,
     Parameters = {
@@ -121,10 +117,8 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Updates a virtual machine of a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetVMs_Update")
   update is ComputeResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetVM,
     Parameters = {
@@ -151,11 +145,9 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Deletes a virtual machine from a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetVMs_Delete")
   delete is ComputeResourceDeleteAsync<
     VirtualMachineScaleSetVM,
     Parameters = {
@@ -170,8 +162,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Gets a list of all virtual machines in a VM scale sets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_List")
   @list
   list is VirtualMachineScaleSetVMSOps.List<
     VirtualMachineScaleSetVM,
@@ -200,8 +190,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Approve upgrade on deferred rolling upgrade for OS disk on a VM scale set instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_ApproveRollingUpgrade")
   approveRollingUpgrade is ComputeResourceActionNoResponseContentAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -211,8 +199,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_Deallocate")
   deallocate is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -223,11 +209,9 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Gets the status of a virtual machine from a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
   @get
   @action("instanceView")
-  @operationId("VirtualMachineScaleSetVMs_GetInstanceView")
   getInstanceView is ComputeResourceActionSync<
     VirtualMachineScaleSetVM,
     void,
@@ -237,8 +221,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_Reimage")
   reimage is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     Request = VirtualMachineScaleSetVMReimageParameters,
@@ -251,9 +233,7 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("reimageall")
-  @operationId("VirtualMachineScaleSetVMs_ReimageAll")
   reimageAll is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -264,8 +244,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * The operation to simulate the eviction of spot virtual machine in a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_SimulateEviction")
   simulateEviction is ComputeResourceActionSync<
     VirtualMachineScaleSetVM,
     void,
@@ -275,8 +253,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Attach and detach data disks to/from a virtual machine in a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_AttachDetachDataDisks")
   attachDetachDataDisks is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     AttachDetachDataDisksRequest,
@@ -286,8 +262,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Performs maintenance on a virtual machine in a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_PerformMaintenance")
   performMaintenance is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -298,8 +272,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_PowerOff")
   powerOff is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -317,8 +289,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_Redeploy")
   redeploy is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -329,8 +299,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Restarts a virtual machine in a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_Restart")
   restart is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -341,8 +309,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_RetrieveBootDiagnosticsData")
   retrieveBootDiagnosticsData is ComputeResourceActionSync<
     VirtualMachineScaleSetVM,
     void,
@@ -359,8 +325,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Starts a virtual machine in a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_Start")
   start is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
@@ -371,8 +335,6 @@ interface VirtualMachineScaleSetVMS {
   /**
    * Run command on a virtual machine in a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMs_RunCommand")
   runCommand is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     RunCommandInput,

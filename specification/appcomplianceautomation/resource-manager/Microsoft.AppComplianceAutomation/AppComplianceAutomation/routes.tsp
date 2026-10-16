@@ -1,7 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "./models/models.tsp";
 
 using Azure.ResourceManager;
