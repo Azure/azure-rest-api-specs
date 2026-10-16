@@ -18,13 +18,7 @@ interface WorkspaceEvaluations {
   /**
    * Gets a retained template evaluation by its ID, or uses latest to select the most recently durably admitted GA template evaluation. Returns 200 with the current representation while processing or terminal. Returns 404 if no qualifying retained result exists; scenario-backed legacy operations are not substituted. This is not an LRO polling endpoint.
    */
-  get is ArmResourceRead<
-    WorkspaceEvaluation,
-    Error =
-      | Azure.ResourceManager.CommonTypes.ErrorResponse
-      | (ArmResourceNotFoundResponse &
-          Body<Azure.ResourceManager.CommonTypes.ErrorResponse>)
-  >;
+  get is ArmResourceRead<WorkspaceEvaluation>;
 
   /**
    * Lists retained GA template evaluations under the workspace. Each result has its canonical ID; latest is an alias and is not a separate collection entry. This operation does not extend retention or convert scenario-backed legacy evaluations.

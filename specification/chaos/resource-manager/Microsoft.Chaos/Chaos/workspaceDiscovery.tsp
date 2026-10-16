@@ -19,13 +19,7 @@ interface WorkspaceDiscoveries {
   /**
    * Gets a retained discovery result by its ID, or uses latest to select the most recently durably admitted discovery. Returns 200 with the current representation while processing or terminal. A Failed result can contain errors without a snapshot. Returns 404 if no qualifying retained result exists. This is not an LRO polling endpoint.
    */
-  get is ArmResourceRead<
-    WorkspaceDiscovery,
-    Error =
-      | Azure.ResourceManager.CommonTypes.ErrorResponse
-      | (ArmResourceNotFoundResponse &
-          Body<Azure.ResourceManager.CommonTypes.ErrorResponse>)
-  >;
+  get is ArmResourceRead<WorkspaceDiscovery>;
 
   /**
    * Lists retained discovery results under the workspace. Each result has its canonical ID; latest is an alias and is not a separate collection entry. This operation does not extend result retention.

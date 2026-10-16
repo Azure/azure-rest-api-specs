@@ -130,37 +130,78 @@ model WorkspaceEvaluationProperties {
    * The number of templates to evaluate.
    */
   @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
-  @madeRequired(Microsoft.Chaos.Versions.v2026_11_01)
-  @typeChangedFrom(Microsoft.Chaos.Versions.v2026_11_01, int32)
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "numTemplatesToEvaluate")
   @visibility(Lifecycle.Read)
-  numTemplatesToEvaluate: WorkspaceEvaluationCount;
+  legacyNumTemplatesToEvaluate?: int32;
+
+  /**
+   * The number of templates to evaluate.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  numTemplatesToEvaluate: int32;
 
   /**
    * The number of templates that evaluated successfully.
    */
   @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
-  @madeRequired(Microsoft.Chaos.Versions.v2026_11_01)
-  @typeChangedFrom(Microsoft.Chaos.Versions.v2026_11_01, int32)
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(
+    Microsoft.Chaos.Versions.v2026_11_01,
+    "numTemplatesEvaluatedSucceeded"
+  )
   @visibility(Lifecycle.Read)
-  numTemplatesEvaluatedSucceeded: WorkspaceEvaluationCount;
+  legacyNumTemplatesEvaluatedSucceeded?: int32;
+
+  /**
+   * The number of templates that evaluated successfully.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  numTemplatesEvaluatedSucceeded: int32;
 
   /**
    * The number of templates that failed evaluation.
    */
   @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
-  @madeRequired(Microsoft.Chaos.Versions.v2026_11_01)
-  @typeChangedFrom(Microsoft.Chaos.Versions.v2026_11_01, int32)
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(
+    Microsoft.Chaos.Versions.v2026_11_01,
+    "numTemplatesEvaluatedFailed"
+  )
   @visibility(Lifecycle.Read)
-  numTemplatesEvaluatedFailed: WorkspaceEvaluationCount;
+  legacyNumTemplatesEvaluatedFailed?: int32;
+
+  /**
+   * The number of templates that failed evaluation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  numTemplatesEvaluatedFailed: int32;
 
   /**
    * The number of templates that were cancelled during evaluation.
    */
   @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
-  @madeRequired(Microsoft.Chaos.Versions.v2026_11_01)
-  @typeChangedFrom(Microsoft.Chaos.Versions.v2026_11_01, int32)
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(
+    Microsoft.Chaos.Versions.v2026_11_01,
+    "numTemplatesEvaluatedCancelled"
+  )
   @visibility(Lifecycle.Read)
-  numTemplatesEvaluatedCancelled: WorkspaceEvaluationCount;
+  legacyNumTemplatesEvaluatedCancelled?: int32;
+
+  /**
+   * The number of templates that were cancelled during evaluation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  numTemplatesEvaluatedCancelled: int32;
 
   /**
    * The overall evaluation result.
@@ -248,13 +289,6 @@ model TemplateEvaluationResultItem {
    */
   evaluationResult: RecommendationStatus;
 }
-
-/**
- * A nonnegative count of scenario-template versions in an evaluation.
- */
-@added(Microsoft.Chaos.Versions.v2026_11_01)
-@minValue(0)
-scalar WorkspaceEvaluationCount extends int32;
 
 /**
  * Enum of the workspace evaluation status.

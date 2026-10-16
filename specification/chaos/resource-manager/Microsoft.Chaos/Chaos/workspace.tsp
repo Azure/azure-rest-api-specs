@@ -83,7 +83,6 @@ interface Workspaces {
   /**
    * Triggers resource discovery for the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO POST returning 202 + Location, not a synchronous POST"
   @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
   @removed(Microsoft.Chaos.Versions.v2026_11_01)
   @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "discover")
@@ -98,7 +97,6 @@ interface Workspaces {
   /**
    * Triggers scenario evaluation for the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO POST returning 202 + Location, not a synchronous POST"
   @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
   @removed(Microsoft.Chaos.Versions.v2026_11_01)
   @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "evaluate")
