@@ -1008,6 +1008,9 @@ enum AutoHealActionType {
 enum AzureStorageType {
   AzureFiles,
   AzureBlob,
+
+  @added(Versions.v2026_11_15)
+  FileShare,
 }
 
 /**
@@ -3508,6 +3511,12 @@ model AzureStorageInfoValue {
    */
   @visibility(Lifecycle.Read)
   state?: AzureStorageState;
+
+  /**
+   * Endpoint (IP or DNS name) of on-premises file server. Only valid for mounts of type FileShare.
+   */
+  @added(Versions.v2026_11_15)
+  endpoint?: string;
 
   /**
    * Mounting protocol to use for the storage account.
