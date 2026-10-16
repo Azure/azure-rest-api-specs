@@ -151,14 +151,11 @@ model EvalJobDefinition {
   /** Default graders for Tasks without their own grader list. */
   graders?: InlineEvaluationGrader[];
 
-  /** How completed grader verdicts determine the task-run outcome; defaults to all_pass. */
-  scoring?: ScoringRule;
-
   /** Validated Task content at an exact Dataset version. */
   dataset: EvaluationDatasetVersionReference;
 
   /** The system invoked by each TaskRun. */
-  target: EvalInvocationTarget;
+  target: FoundryAgentTarget;
 
   /** Number of TaskRuns created for every Task. */
   repetitions?: EvaluationRepetitions;

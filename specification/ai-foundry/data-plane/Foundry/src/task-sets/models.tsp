@@ -233,13 +233,6 @@ union InlineEvaluationGrader {
   FoundryEvaluatorGrader,
 }
 
-/** The rule for combining applicable grader verdicts. */
-@extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
-model ScoringRule {
-  /** A task run passes only when every applicable grader passes. */
-  aggregation: "all_pass";
-}
-
 /** Text content supplied to a task or its graders. */
 @extension("x-ms-foundry-meta", EvaluationServiceV2RequiredPreviews)
 model EvaluationTextContent {
@@ -322,7 +315,4 @@ model Task {
 
   /** Caller-defined JSON annotations visible to graders. */
   metadata?: Record<unknown>;
-
-  /** The rule used to combine task and job grader verdicts for this task. */
-  scoring?: ScoringRule;
 }

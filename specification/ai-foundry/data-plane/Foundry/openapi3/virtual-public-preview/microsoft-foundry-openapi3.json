@@ -47758,22 +47758,6 @@
         },
         "description": "Grader inspect_ai definition for inspect_ai benchmark evaluators."
       },
-      "EvalInvocationTarget": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/FoundryAgentTarget"
-          },
-          {
-            "$ref": "#/components/schemas/ExternalEndpointTarget"
-          }
-        ],
-        "description": "An invokable Foundry agent or a supported external endpoint.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
       "EvalJob": {
         "type": "object",
         "required": [
@@ -47844,16 +47828,12 @@
             },
             "description": "Default graders for Tasks without their own grader list."
           },
-          "scoring": {
-            "$ref": "#/components/schemas/ScoringRule",
-            "description": "How completed grader verdicts determine the task-run outcome; defaults to all_pass."
-          },
           "dataset": {
             "$ref": "#/components/schemas/EvaluationDatasetVersionReference",
             "description": "Validated Task content at an exact Dataset version."
           },
           "target": {
-            "$ref": "#/components/schemas/EvalInvocationTarget",
+            "$ref": "#/components/schemas/FoundryAgentTarget",
             "description": "The system invoked by each TaskRun."
           },
           "repetitions": {
@@ -47950,16 +47930,12 @@
             },
             "description": "Default graders for Tasks without their own grader list."
           },
-          "scoring": {
-            "$ref": "#/components/schemas/ScoringRule",
-            "description": "How completed grader verdicts determine the task-run outcome; defaults to all_pass."
-          },
           "dataset": {
             "$ref": "#/components/schemas/EvaluationDatasetVersionReference",
             "description": "Validated Task content at an exact Dataset version."
           },
           "target": {
-            "$ref": "#/components/schemas/EvalInvocationTarget",
+            "$ref": "#/components/schemas/FoundryAgentTarget",
             "description": "The system invoked by each TaskRun."
           },
           "repetitions": {
@@ -48530,7 +48506,7 @@
             "description": "Dataset whose Task content was captured."
           },
           "target": {
-            "$ref": "#/components/schemas/ResolvedEvalInvocationTarget",
+            "$ref": "#/components/schemas/ResolvedFoundryAgentTarget",
             "description": "Resolved target identity, never credentials."
           },
           "repetitions": {
@@ -48700,48 +48676,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Insights=V1Preview"
-          ]
-        }
-      },
-      "EvalTarget": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/EvalTargetType",
-            "description": "The invocation target type."
-          },
-          "execution": {
-            "$ref": "#/components/schemas/TargetExecution",
-            "description": "Target invocation timeout."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "external_endpoint": "#/components/schemas/ExternalEndpointTarget",
-            "foundry_agent": "#/components/schemas/FoundryAgentTarget"
-          }
-        },
-        "description": "The system whose responses are evaluated.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
-      "EvalTargetType": {
-        "type": "string",
-        "enum": [
-          "foundry_agent",
-          "external_endpoint"
-        ],
-        "description": "The supported systems under evaluation.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
           ]
         }
       },
@@ -52002,41 +51936,6 @@
           ]
         }
       },
-      "ExternalEndpointTarget": {
-        "type": "object",
-        "required": [
-          "type",
-          "connection_name"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "external_endpoint"
-            ],
-            "description": "Indicates a connected endpoint."
-          },
-          "connection_name": {
-            "type": "string",
-            "description": "Project connection containing the endpoint and delegated authentication."
-          },
-          "registered_agent": {
-            "type": "string",
-            "description": "Optional registered external-agent identity for provenance."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/EvalTarget"
-          }
-        ],
-        "description": "Invoke a supported external endpoint; registration alone is not invokable.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
       "FabricDataAgentToolCall": {
         "type": "object",
         "required": [
@@ -52518,13 +52417,12 @@
           "agent": {
             "$ref": "#/components/schemas/FoundryAgentReference",
             "description": "The agent to invoke; an omitted version resolves to the latest version."
+          },
+          "execution": {
+            "$ref": "#/components/schemas/TargetExecution",
+            "description": "Target invocation timeout."
           }
         },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/EvalTarget"
-          }
-        ],
         "description": "Invoke a Foundry agent; omitted versions resolve when each run starts.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
@@ -52579,7 +52477,7 @@
             "readOnly": true
           },
           "resolved_target": {
-            "$ref": "#/components/schemas/ResolvedEvalInvocationTarget",
+            "$ref": "#/components/schemas/ResolvedFoundryAgentTarget",
             "description": "Exact target identity resolved when this run was admitted.",
             "readOnly": true
           },
@@ -96773,22 +96671,6 @@
           ]
         }
       },
-      "ResolvedEvalInvocationTarget": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/ResolvedFoundryAgentTarget"
-          },
-          {
-            "$ref": "#/components/schemas/ExternalEndpointTarget"
-          }
-        ],
-        "description": "The exact target identity recorded at run admission.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
-      },
       "ResolvedFoundryAgentReference": {
         "type": "object",
         "required": [
@@ -96833,7 +96715,7 @@
             "description": "Resolved invocation timeout, when configured."
           }
         },
-        "description": "A target with a resolved agent version or authorized connection identity.",
+        "description": "A target with the exact agent version selected for this run.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Evaluations=V1Preview"
@@ -97865,27 +97747,6 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "Schedules=V1Preview"
-          ]
-        }
-      },
-      "ScoringRule": {
-        "type": "object",
-        "required": [
-          "aggregation"
-        ],
-        "properties": {
-          "aggregation": {
-            "type": "string",
-            "enum": [
-              "all_pass"
-            ],
-            "description": "A task run passes only when every applicable grader passes."
-          }
-        },
-        "description": "The rule for combining applicable grader verdicts.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Evaluations=V1Preview"
           ]
         }
       },

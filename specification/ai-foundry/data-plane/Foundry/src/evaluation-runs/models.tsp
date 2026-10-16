@@ -175,7 +175,7 @@ model FoundryEvalRun {
 
   /** Exact target identity resolved when this run was admitted. */
   @visibility(Lifecycle.Read)
-  resolved_target: ResolvedEvalInvocationTarget;
+  resolved_target: ResolvedFoundryAgentTarget;
 
   /** Digest of the authorized Task content retained for this run. */
   @visibility(Lifecycle.Read)
@@ -204,7 +204,7 @@ model EvalRunResolvedConfiguration {
   dataset: EvaluationDatasetVersionReference;
 
   /** Resolved target identity, never credentials. */
-  target: ResolvedEvalInvocationTarget;
+  target: ResolvedFoundryAgentTarget;
 
   /** Attempts per Task with defaults applied. */
   repetitions: EvaluationRepetitions;
