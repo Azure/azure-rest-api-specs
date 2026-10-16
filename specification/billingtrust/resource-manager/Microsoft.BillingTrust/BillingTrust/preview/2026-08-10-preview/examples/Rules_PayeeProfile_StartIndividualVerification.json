@@ -1,0 +1,45 @@
+{
+  "operationId": "Rules_StartIndividualVerification",
+  "title": "Start identity verification for UBO individuals in a PayeeProfile assessment",
+  "parameters": {
+    "resourceUri": "providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31",
+    "assessmentName": "PayeeProfile",
+    "ruleName": "Verify_UBO",
+    "api-version": "2026-08-10-preview",
+    "body": {
+      "individuals": [
+        {
+          "id": "40000000-0000-0000-0000-000000000001",
+          "action": "generateLink"
+        },
+        {
+          "id": "40000000-0000-0000-0000-000000000002",
+          "action": "sendSms",
+          "phoneNumber": "+13055551234"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "individuals": [
+          {
+            "id": "40000000-0000-0000-0000-000000000001",
+            "redirectUri": "https://verification.microsoft.com/idv/50000000-0000-0000-0000-000000000001",
+            "linkGenerated": true,
+            "smsSent": false,
+            "state": "actionRequired"
+          },
+          {
+            "id": "40000000-0000-0000-0000-000000000002",
+            "redirectUri": "https://verification.microsoft.com/idv/50000000-0000-0000-0000-000000000002",
+            "linkGenerated": true,
+            "smsSent": true,
+            "state": "actionRequired"
+          }
+        ]
+      }
+    }
+  }
+}
