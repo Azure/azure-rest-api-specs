@@ -31,6 +31,10 @@ namespace Customizations;
 @@clientNamespace(Search.GraphQueryRow, "Azure.Search.Documents");
 @@clientNamespace(Search.GraphQueryExplain, "Azure.Search.Documents");
 @@clientNamespace(
+  Search.GraphQueryProvenanceDocument,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(
   Search.GraphQueryProvenanceDocuments,
   "Azure.Search.Documents"
 );
@@ -118,6 +122,11 @@ namespace Customizations;
 @@clientNamespace(Search.GraphQueryRow, "com.azure.search.documents", "java");
 @@clientNamespace(
   Search.GraphQueryExplain,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.GraphQueryProvenanceDocument,
   "com.azure.search.documents",
   "java"
 );

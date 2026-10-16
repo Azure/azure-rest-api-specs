@@ -180,11 +180,18 @@ model GraphQueryExplain {
   ...Record<unknown>;
 }
 
+/** A source document containing the selected retrievable fields. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Source document fields are defined by the source index."
+@added(Versions.v2026_11_01_preview)
+model GraphQueryProvenanceDocument {
+  ...Record<unknown>;
+}
+
 /** Source documents keyed by document ID. Each document contains the selected retrievable source fields. */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Source document fields are defined by the source index."
 @added(Versions.v2026_11_01_preview)
 model GraphQueryProvenanceDocuments {
-  ...Record<Record<unknown>>;
+  ...Record<GraphQueryProvenanceDocument>;
 }
 
 /** Execution statistics for a graph query; counters describe work performed rather than result-row counts. */

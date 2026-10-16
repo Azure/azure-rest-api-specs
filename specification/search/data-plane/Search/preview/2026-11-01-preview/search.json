@@ -10145,12 +10145,16 @@
         ]
       }
     },
+    "GraphQueryProvenanceDocument": {
+      "type": "object",
+      "description": "A source document containing the selected retrievable fields.",
+      "additionalProperties": {}
+    },
     "GraphQueryProvenanceDocuments": {
       "type": "object",
       "description": "Source documents keyed by document ID. Each document contains the selected retrievable source fields.",
       "additionalProperties": {
-        "additionalProperties": {},
-        "type": "object"
+        "$ref": "#/definitions/GraphQueryProvenanceDocument"
       }
     },
     "GraphQueryProvenanceHydrateDocumentsParameters": {
