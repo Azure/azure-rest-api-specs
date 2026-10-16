@@ -234,7 +234,22 @@ using Azure.AI.Projects;
   "TranscriptTextUsageType"
 );
 
-// Use descriptive Java names for configuration properties
+@@clientName(
+  MicrosoftCopilotToolsetConfig,
+  "MicrosoftCopilotToolsetConfiguration"
+);
+@@clientName(
+  MicrosoftCopilotToolsetDefaultConfig,
+  "MicrosoftCopilotToolsetDefaultConfiguration"
+);
+@@doc(
+  GitHubCopilotToolsetConfig,
+  "The legacy per-tool enablement override retained for compatibility. Use `MicrosoftCopilotToolsetConfiguration` for new integrations."
+);
+@@doc(
+  GitHubCopilotToolsetDefaultConfig,
+  "The legacy default enablement setting retained for compatibility. Use `MicrosoftCopilotToolsetDefaultConfiguration` for new integrations."
+);
 @@clientName(MicrosoftCopilotToolsetConfig.name, "toolName");
 @@clientName(
   MicrosoftCopilotToolsetPreview.default_config,
