@@ -5,7 +5,6 @@ import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL(".", import.meta.url));
 const sourceDirectory = join(root, "examples", "2026-10-15-preview");
-const generatedDirectory = join(root, "preview", "2026-10-15-preview", "examples");
 const removedReceiptFields = [
   "appliedGeneration",
   "bindingEpoch",
@@ -259,10 +258,10 @@ assert(
 const files = (await readdir(sourceDirectory))
   .filter((name) => name.startsWith("UnifiedModerate") && name.endsWith(".json"))
   .sort();
+// This hook runs before emitters. Repository TypeSpec validation performs the
+// source/generated parity check after emission through its generated-files gate.
 for (const name of files) {
   const sourceText = await readFile(join(sourceDirectory, name), "utf8");
-  const generatedText = await readFile(join(generatedDirectory, name), "utf8");
-  assert(sourceText === generatedText, `${name}: generated example differs from source`);
   const example = JSON.parse(sourceText);
   validatePositive(name, example);
 }
