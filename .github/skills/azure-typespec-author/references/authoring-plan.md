@@ -6,15 +6,14 @@
 
 ### 3.1.1 Reuse the grounding selected during intake
 
-Step 2 already read the reference catalog, selected exactly one source family, and
-grounded the request before collecting any missing decisions. Verify that its
-grounding record covers the complete request and the finalized intake result.
+Step 2 already read the reference catalog and used Agentic Search to ground the
+request before collecting any missing decisions. Verify that its Web grounding record
+covers the complete request and the finalized intake result.
 
-Do not call Agentic Search, retrieval, or another source during planning. If the
-existing grounding is insufficient, refine or retry within the already selected
-family, then update the intake result if the additional guidance changes a material
-decision. Otherwise, report a blocker. Never switch source families during an
-execution.
+Do not call Agentic Search again or call a knowledge-retrieval or authoring-plan MCP
+during planning. If the existing grounding is insufficient, return to Agentic Search,
+refine the Web guidance, and update the intake result if the additional guidance
+changes a material decision. Otherwise, report a blocker.
 
 ### 3.1.2 Build the authoring plan locally
 

@@ -4,35 +4,26 @@
 
 ## 2.1 General Intake (All Cases)
 
-Complete the catalog-access and grounding gate before deciding what additional
-information to collect:
+Complete Agentic Search before deciding what additional information to collect:
 
 1. Read the installed
    [reference-document-links.md](reference-document-links.md). If that read fails,
    retry the installed skill path. If local access remains unavailable, recover the
    canonical repository copy through an available repository-file reader.
-2. If catalog recovery requires `web_fetch`, select the Web family for the execution.
-   If the recovered catalog does not fully cover the request, report a blocker rather
-   than switching to retrieval. If the catalog still cannot be read, report a blocker
-   without grounding or editing.
-3. After a successful catalog read, classify the complete request:
-   - **Entire request covered:** run [agentic search](agentic-search.md) now. Use the
-     fetched guidance to determine the material intake decisions and retain it for
-     the authoring plan.
-   - **Entirely or partly uncovered after a non-Web catalog read:** call
-     `azsdk_typespec_retrieve_knowledge` for the complete request when it is exposed.
-     If retrieval is not exposed, select the authoritative-Web fallback and run
-     agentic search for the complete request. Select the fallback before grounding;
-     do not call both source families.
-4. Using the selected guidance, the Step 1 result, and the user's request, identify
+2. If the catalog still cannot be read, report a blocker without MCP calls or edits.
+3. Run [agentic search](agentic-search.md) for the complete request. Use the fetched
+   guidance to determine the material intake decisions and retain it for the
+   authoring plan. When the catalog has no direct match, Agentic Search locates
+   additional authoritative TypeSpec or Azure documentation.
+4. Using the Agentic Search guidance, the Step 1 result, and the user's request, identify
    every matching case from the table below.
 5. Gather only material information that is not already supplied or directly
    available from the project. If no case matches, skip Step 2.2.
 
-Tool absence means the tool is not exposed. An invocation error, authentication
-failure, or timeout is not absence and does not permit switching source families.
-Do not plan, edit, or validate during intake. Step 3 must reuse this grounding record
-without repeating Agentic Search or retrieval.
+Do not call knowledge-retrieval, authoring-plan, or validation MCP tools during
+intake. If Agentic Search cannot obtain sufficient authoritative guidance, report a
+blocker instead of falling back to MCP. Do not plan, edit, or validate during intake.
+Step 3 must reuse this grounding record without repeating Agentic Search.
 
 | Case | Name                    | Description                                            | Service Type     |
 | ---- | ----------------------- | ------------------------------------------------------ | ---------------- |

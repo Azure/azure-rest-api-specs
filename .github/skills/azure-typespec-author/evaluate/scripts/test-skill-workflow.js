@@ -18,30 +18,27 @@ const plan = read("references/authoring-plan.md");
 const search = read("references/agentic-search.md");
 
 assert.ok(
-  skill.indexOf("Catalog access gates source selection") <
-    skill.indexOf("Use exactly one knowledge-source family"),
-  "entry-point catalog gate must precede source routing",
+  skill.indexOf("Catalog access gates Agentic Search") <
+    skill.indexOf("Use Agentic Search for intake"),
+  "entry-point catalog gate must precede Agentic Search",
 );
 assert.match(skill, /Never call `azsdk_typespec_generate_authoring_plan`/);
-assert.match(skill, /block rather than switching to retrieval/);
+assert.match(skill, /Never call `azsdk_typespec_retrieve_knowledge` or an authoring-plan MCP/);
 assert.match(skill, /"carry over all features" or "no exclusions" completely answers/);
-assert.match(skill, /Analyze → Read catalog → Select source[\s\S]*Ground → Intake → Plan locally/);
-assert.match(skill, /Retrieval unavailable:[\s\S]*authoritative Web\s+documentation/);
-assert.match(skill, /Validation unavailable:[\s\S]*mandatory local compile/);
+assert.match(skill, /Analyze → Read catalog → Agentic Search → Intake → Plan locally/);
+assert.match(skill, /only\s+MCP tool used by this workflow is validation/);
 assert.match(skill, /returns an error, times out, or fails authentication is not\s+unavailable/);
 
-const catalogGate = intake.indexOf("Complete the catalog-access and grounding gate");
-const webRoute = intake.indexOf("Entire request covered");
-const retrievalRoute = intake.indexOf("Entirely or partly uncovered");
-assert.ok(catalogGate !== -1 && catalogGate < webRoute);
-assert.ok(webRoute < retrievalRoute);
-assert.match(intake, /run \[agentic search\]\(agentic-search\.md\) now/);
-assert.match(intake, /Use the\s+fetched guidance to determine the material intake decisions/);
-assert.match(intake, /If retrieval is not exposed, select the authoritative-Web fallback/);
-assert.match(intake, /invocation error, authentication\s+failure, or timeout is not absence/);
-assert.match(plan, /Step 2 already read the reference catalog[\s\S]*grounded the request/);
-assert.match(plan, /Do not call Agentic Search, retrieval, or another source during planning/);
-assert.match(search, /during Step 2[\s\S]*required intake decisions/);
+const catalogGate = intake.indexOf("Complete Agentic Search");
+const webGrounding = intake.indexOf("Run [agentic search]");
+assert.ok(catalogGate !== -1 && catalogGate < webGrounding);
+assert.match(intake, /Use the fetched\s+guidance to determine the material intake decisions/);
+assert.match(intake, /Do not call knowledge-retrieval, authoring-plan, or validation MCP tools/);
+assert.match(intake, /report a\s+blocker instead of falling back to MCP/);
+assert.match(plan, /Step 2 already read the reference catalog and used Agentic Search/);
+assert.match(plan, /Do not call Agentic Search again or call a knowledge-retrieval/);
+assert.match(search, /Always enter this procedure during Step 2/);
+assert.match(search, /Do not call\s+`azsdk_typespec_retrieve_knowledge` or an authoring-plan MCP/);
 assert.match(plan, /Do not use `ArmResourcePatchSync` or `ArmResourcePatchAsync`/);
 assert.match(plan, /Preserve every released stable wire contract/);
 

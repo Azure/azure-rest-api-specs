@@ -29,19 +29,13 @@ This includes but is not limited to:
 
 ## MCP Tools
 
-| Tool                                              | Purpose                                                                                                                                   |
-| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `azure-sdk-mcp:azsdk_typespec_retrieve_knowledge` | Ground an execution whose complete request is not fully covered by [reference-document-links.md](references/reference-document-links.md). |
-| `azure-sdk-mcp:azsdk_run_typespec_validation`     | Validate TypeSpec                                                                                                                         |
+| Tool                                          | Purpose           |
+| --------------------------------------------- | ----------------- |
+| `azure-sdk-mcp:azsdk_run_typespec_validation` | Validate TypeSpec |
 
-Use the applicable `azure-sdk-mcp` tools when they are available. If a required MCP
-tool is not exposed in the current environment, use its documented non-MCP fallback
-instead of blocking the authoring workflow:
-
-- Retrieval unavailable: ground the complete request through authoritative Web
-  documentation before planning or editing.
-- Validation unavailable: continue with the mandatory local compile and
-  case-specific checks.
+The skill uses Agentic Search, not MCP, for intake and authoring knowledge. The only
+MCP tool used by this workflow is validation. When validation MCP is not exposed,
+continue with the mandatory local compile and case-specific checks.
 
 An exposed tool that returns an error, times out, or fails authentication is not
 unavailable. Report that failure instead of silently taking its fallback.
@@ -56,10 +50,10 @@ unavailable. Report that failure instead of silently taking its fallback.
 - **Always validate** — follow [validation](references/validation.md) after every edit. Run validation MCP when available and always run `tsp compile .`; absence of the validation MCP tool is not a blocker.
 - **Always cite references** — provide links that justify the approach.
 - **Follow the authoring plan exactly** — code changes in Step 4 MUST follow the authoring plan generated in Step 3. Do not deviate by referring to existing code patterns in the TypeSpec project; the authoring plan is the single source of truth for what to change.
-- **Catalog access gates source selection and intake** — after project analysis, successfully read the reference catalog before classifying coverage or completing case-specific intake. Retry the installed catalog path when its first read fails. If local access remains unavailable, recover the canonical repository copy through an available repository-file reader; if recovery requires `web_fetch`, that selects the Web family for the execution. If the recovered catalog does not fully cover the request, block rather than switching to retrieval. If the catalog still cannot be read, report a blocker without retrieval or edits.
-- **Use exactly one knowledge-source family per execution** — use Agentic Search during intake for a covered request, and reuse its guidance when planning. After a successful non-Web catalog read establishes that the request is entirely or partly uncovered, use `azsdk_typespec_retrieve_knowledge` when it is exposed; otherwise select the documented authoritative-Web fallback before grounding. The selected source must supply both intake and authoring guidance. Never call both retrieval and Web in one execution. Catalog failure, an unavailable skill-reference path, a related keyword, or uncertainty never establishes uncovered scope.
+- **Catalog access gates Agentic Search and intake** — after project analysis, successfully read the reference catalog before completing case-specific intake. Retry the installed catalog path when its first read fails. If local access remains unavailable, recover the canonical repository copy through an available repository-file reader. If the catalog still cannot be read, report a blocker without MCP calls or edits.
+- **Use Agentic Search for intake and authoring knowledge** — run Agentic Search for the complete request during intake and reuse its Web guidance when planning. If the catalog has no direct match, locate additional authoritative TypeSpec or Azure documentation through Agentic Search. Never call `azsdk_typespec_retrieve_knowledge` or an authoring-plan MCP.
 - **Never call `azsdk_typespec_generate_authoring_plan`** — synthesize the authoring plan locally from the selected grounding source.
-- **Do not edit before grounding** — follow `Analyze → Read catalog → Select source (including an availability fallback, when needed) → Ground → Intake → Plan locally → Apply → Validate`. Select an unavailable-tool fallback before invoking a source. If an exposed selected source fails or grounding cannot be recovered, report a blocker instead of switching sources or making ungrounded edits.
+- **Do not edit before grounding** — follow `Analyze → Read catalog → Agentic Search → Intake → Plan locally → Apply → Validate`. If authoritative Web grounding cannot be recovered, report a blocker instead of calling a knowledge MCP or making ungrounded edits.
 - **Validation is not retrieval** — calling `azsdk_run_typespec_validation` after edits does not violate the one-source rule. If that tool is unavailable, record the skip and continue with `tsp compile .`.
 
 ## Steps

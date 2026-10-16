@@ -40,13 +40,16 @@ const uncoveredEvents = [];
 tool(uncoveredEvents, "view", {
   path: "/skill/references/reference-document-links.md",
 });
-tool(uncoveredEvents, "azure-sdk-mcp-azsdk_typespec_retrieve_knowledge", {});
+tool(uncoveredEvents, "web_fetch", {
+  url: "https://typespec.io/docs/language-basics/models/",
+});
 tool(uncoveredEvents, "edit", {});
 tool(uncoveredEvents, "azure-sdk-mcp-azsdk_run_typespec_validation", {});
 const uncovered = analyzeEvents(uncoveredEvents, "uncovered");
-assert.equal(uncovered.route, "Retrieval only");
+assert.equal(uncovered.route, "Web only");
 assert.equal(uncovered.catalogBeforeSource, true);
 assert.equal(uncovered.sourceExclusive, true);
+assert.equal(uncovered.approvedKnowledgeRoute, true);
 
 const canonicalEvents = [];
 tool(
@@ -108,13 +111,14 @@ assert.equal(mixed.planner, 1);
 
 const summary = summarize([covered, uncovered, canonical, premature, mixed]);
 assert.deepEqual(summary.routes, {
-  "Web only": 2,
-  "Retrieval only": 2,
+  "Web only": 3,
+  "Retrieval only": 1,
   Both: 1,
   Neither: 0,
 });
 assert.equal(summary.catalogViolations, 1);
 assert.equal(summary.sourceExclusivityViolations, 1);
+assert.equal(summary.retrievalViolations, 2);
 assert.equal(summary.plannerCalls, 1);
 
 console.log("Routing analyzer contract scenarios passed.");

@@ -104,6 +104,7 @@ export function analyzeEvents(allEvents, trial = "unknown") {
       (successfulCatalogRead === firstSource ||
         completionIndex(successfulCatalogRead) < firstSource.index),
     sourceExclusive: !(web > 0 && retrieval > 0),
+    approvedKnowledgeRoute: web > 0 && retrieval === 0 && planner === 0,
     groundingBeforeMutation:
       Boolean(firstSuccessfulGrounding) &&
       (!firstMutation || completionIndex(firstSuccessfulGrounding) < firstMutation.index),
@@ -136,6 +137,7 @@ export function summarize(trials) {
     routes: routeCounts,
     retrievalCalls: trials.reduce((total, trial) => total + trial.retrieval, 0),
     casesWithRetrieval: trials.filter((trial) => trial.retrieval > 0).length,
+    retrievalViolations: trials.filter((trial) => trial.retrieval > 0).length,
     plannerCalls: trials.reduce((total, trial) => total + trial.planner, 0),
     catalogViolations: trials.filter(
       (trial) => !trial.catalogReadSucceeded || !trial.catalogBeforeSource,
@@ -146,6 +148,7 @@ export function summarize(trials) {
         !trial.catalogReadSucceeded ||
         !trial.catalogBeforeSource ||
         !trial.sourceExclusive ||
+        !trial.approvedKnowledgeRoute ||
         trial.planner > 0 ||
         !trial.groundingBeforeMutation ||
         !trial.validationAfterMutation,
