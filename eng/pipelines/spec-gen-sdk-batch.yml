@@ -2,12 +2,12 @@ parameters:
   - name: SpecBatchTypes
     type: string
     values:
-      - 'all-typespecs'
-      - 'sample-typespecs'
-      - 'all-mgmtplane-typespecs'
-      - 'all-dataplane-typespecs'
-    default: 'sample-typespecs'
-    displayName: 'Batch Specs to Run'
+      - "all-typespecs"
+      - "sample-typespecs"
+      - "all-mgmtplane-typespecs"
+      - "all-dataplane-typespecs"
+    default: "sample-typespecs"
+    displayName: "Batch Specs to Run"
 
 trigger: none
 pr: none
@@ -16,14 +16,14 @@ pr: none
 variables:
   - name: batchTypes
     ${{ if eq(variables['Build.Reason'], 'Schedule') }}:
-      value: 'all-mgmtplane-typespecs,all-dataplane-typespecs'
+      value: "all-mgmtplane-typespecs,all-dataplane-typespecs"
     ${{ else }}:
       value: ${{ parameters.SpecBatchTypes }}
 
 stages:
-- ${{ each batchType in split(variables.batchTypes, ',') }}:
-  - template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
-    parameters:
-      SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
-      SdkRepoUrl: $(SdkRepoUrl)
-      SpecBatchTypes: ${{ batchType }}
+  - ${{ each batchType in split(variables.batchTypes, ',') }}:
+      - template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
+        parameters:
+          SpecRepoUrl: "https://github.com/$(Build.Repository.Name)"
+          SdkRepoUrl: $(SdkRepoUrl)
+          SpecBatchTypes: ${{ batchType }}

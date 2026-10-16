@@ -35,4 +35,9 @@ enum Versions {
   @doc("Preview version 2026-08-01-preview with experimental features for Playwright workspace management.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_08_01_preview: "2026-08-01-preview",
+
+  @doc("Preview version 2026-10-01-preview with experimental features for Playwright workspace management.")
+  @Azure.Core.previewVersion
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_10_01_preview: "2026-10-01-preview",
 }
