@@ -21,9 +21,20 @@
             "tool-guard": {
               "type": "rego",
               "query": "data.tool_guard.verdict"
+            },
+            "execution-guard": {
+              "type": "rego",
+              "query": "data.execution_guard.verdict"
             }
           },
           "intervention_points": {
+            "agent_startup": {
+              "policy_target": "$snap.agent_init",
+              "policy_target_kind": "agent_init",
+              "policy": {
+                "id": "execution-guard"
+              }
+            },
             "input": {
               "policy_target": "$snap.input",
               "policy_target_kind": "user_input",
@@ -37,6 +48,20 @@
                     }
                   ]
                 }
+              }
+            },
+            "pre_model_call": {
+              "policy_target": "$snap.messages",
+              "policy_target_kind": "messages",
+              "policy": {
+                "id": "execution-guard"
+              }
+            },
+            "post_model_call": {
+              "policy_target": "$snap.response",
+              "policy_target_kind": "model_response",
+              "policy": {
+                "id": "execution-guard"
               }
             },
             "pre_tool_call": {
@@ -53,6 +78,28 @@
               "tool_name_from": "$snap.tool_call.name",
               "policy": {
                 "id": "tool-guard"
+              }
+            },
+            "output": {
+              "policy_target": "$snap.output",
+              "policy_target_kind": "assistant_output",
+              "policy": {
+                "id": "input-guard",
+                "aacs_moderation": {
+                  "subject_format": "text",
+                  "harm_configs": [
+                    {
+                      "category": "Hate"
+                    }
+                  ]
+                }
+              }
+            },
+            "agent_shutdown": {
+              "policy_target": "$snap.summary",
+              "policy_target_kind": "agent_summary",
+              "policy": {
+                "id": "execution-guard"
               }
             }
           },
@@ -87,6 +134,9 @@
           },
           {
             "regoName": "tool-guard"
+          },
+          {
+            "regoName": "execution-guard"
           }
         ],
         "customBlocklists": [
@@ -136,9 +186,20 @@
               "tool-guard": {
                 "type": "rego",
                 "query": "data.tool_guard.verdict"
+              },
+              "execution-guard": {
+                "type": "rego",
+                "query": "data.execution_guard.verdict"
               }
             },
             "intervention_points": {
+              "agent_startup": {
+                "policy_target": "$snap.agent_init",
+                "policy_target_kind": "agent_init",
+                "policy": {
+                  "id": "execution-guard"
+                }
+              },
               "input": {
                 "policy_target": "$snap.input",
                 "policy_target_kind": "user_input",
@@ -152,6 +213,20 @@
                       }
                     ]
                   }
+                }
+              },
+              "pre_model_call": {
+                "policy_target": "$snap.messages",
+                "policy_target_kind": "messages",
+                "policy": {
+                  "id": "execution-guard"
+                }
+              },
+              "post_model_call": {
+                "policy_target": "$snap.response",
+                "policy_target_kind": "model_response",
+                "policy": {
+                  "id": "execution-guard"
                 }
               },
               "pre_tool_call": {
@@ -168,6 +243,28 @@
                 "tool_name_from": "$snap.tool_call.name",
                 "policy": {
                   "id": "tool-guard"
+                }
+              },
+              "output": {
+                "policy_target": "$snap.output",
+                "policy_target_kind": "assistant_output",
+                "policy": {
+                  "id": "input-guard",
+                  "aacs_moderation": {
+                    "subject_format": "text",
+                    "harm_configs": [
+                      {
+                        "category": "Hate"
+                      }
+                    ]
+                  }
+                }
+              },
+              "agent_shutdown": {
+                "policy_target": "$snap.summary",
+                "policy_target_kind": "agent_summary",
+                "policy": {
+                  "id": "execution-guard"
                 }
               }
             },
@@ -202,6 +299,9 @@
             },
             {
               "regoName": "tool-guard"
+            },
+            {
+              "regoName": "execution-guard"
             }
           ],
           "customBlocklists": [
@@ -247,9 +347,20 @@
               "tool-guard": {
                 "type": "rego",
                 "query": "data.tool_guard.verdict"
+              },
+              "execution-guard": {
+                "type": "rego",
+                "query": "data.execution_guard.verdict"
               }
             },
             "intervention_points": {
+              "agent_startup": {
+                "policy_target": "$snap.agent_init",
+                "policy_target_kind": "agent_init",
+                "policy": {
+                  "id": "execution-guard"
+                }
+              },
               "input": {
                 "policy_target": "$snap.input",
                 "policy_target_kind": "user_input",
@@ -263,6 +374,20 @@
                       }
                     ]
                   }
+                }
+              },
+              "pre_model_call": {
+                "policy_target": "$snap.messages",
+                "policy_target_kind": "messages",
+                "policy": {
+                  "id": "execution-guard"
+                }
+              },
+              "post_model_call": {
+                "policy_target": "$snap.response",
+                "policy_target_kind": "model_response",
+                "policy": {
+                  "id": "execution-guard"
                 }
               },
               "pre_tool_call": {
@@ -279,6 +404,28 @@
                 "tool_name_from": "$snap.tool_call.name",
                 "policy": {
                   "id": "tool-guard"
+                }
+              },
+              "output": {
+                "policy_target": "$snap.output",
+                "policy_target_kind": "assistant_output",
+                "policy": {
+                  "id": "input-guard",
+                  "aacs_moderation": {
+                    "subject_format": "text",
+                    "harm_configs": [
+                      {
+                        "category": "Hate"
+                      }
+                    ]
+                  }
+                }
+              },
+              "agent_shutdown": {
+                "policy_target": "$snap.summary",
+                "policy_target_kind": "agent_summary",
+                "policy": {
+                  "id": "execution-guard"
                 }
               }
             },
@@ -313,6 +460,9 @@
             },
             {
               "regoName": "tool-guard"
+            },
+            {
+              "regoName": "execution-guard"
             }
           ],
           "customBlocklists": [

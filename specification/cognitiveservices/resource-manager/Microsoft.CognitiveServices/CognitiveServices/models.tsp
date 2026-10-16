@@ -691,8 +691,17 @@ model RaiAcsPolicyBinding {
 union RaiAcsPolicyTarget {
   string,
 
+  /** Selects the agent initialization payload. */
+  AgentInitialization: "$snap.agent_init",
+
   /** Selects the incoming user input. */
   Input: "$snap.input",
+
+  /** Selects the model messages proposed for dispatch. */
+  ModelMessages: "$snap.messages",
+
+  /** Selects the completed model response. */
+  ModelResponse: "$snap.response",
 
   /** Selects the assistant output. */
   Output: "$snap.output",
@@ -702,6 +711,9 @@ union RaiAcsPolicyTarget {
 
   /** Selects a tool result. */
   ToolResult: "$snap.tool_result.value",
+
+  /** Selects the final agent execution summary. */
+  AgentSummary: "$snap.summary",
 }
 
 /** Canonical target kinds supported by the Azure AI Content Safety Unified Moderate host profile. */
@@ -709,8 +721,17 @@ union RaiAcsPolicyTarget {
 union RaiAcsPolicyTargetKind {
   string,
 
+  /** The target contains agent initialization state. */
+  AgentInitialization: "agent_init",
+
   /** The target contains user input. */
   UserInput: "user_input",
+
+  /** The target contains model messages. */
+  ModelMessages: "messages",
+
+  /** The target contains a completed model response. */
+  ModelResponse: "model_response",
 
   /** The target contains assistant output. */
   AssistantOutput: "assistant_output",
@@ -720,6 +741,9 @@ union RaiAcsPolicyTargetKind {
 
   /** The target contains a tool result. */
   ToolResult: "tool_result",
+
+  /** The target contains the final agent execution summary. */
+  AgentSummary: "agent_summary",
 }
 
 /**
@@ -740,15 +764,14 @@ union RaiAcsToolNameSelector {
 /**
  * Binds one logical policy to an Agent Control Specification intervention point.
  */
-@added(Versions.v2026_09_15_preview)
-model RaiAcsInterventionPoint {
+model RaiAcsInterventionPointTemplate<PolicyTarget, PolicyTargetKind> {
   /** The canonical Agent Hooks snapshot path projected as the policy target. */
   @encodedName("application/json", "policy_target")
-  policyTarget: RaiAcsPolicyTarget;
+  policyTarget: PolicyTarget;
 
   /** The semantic kind of the projected policy target. */
   @encodedName("application/json", "policy_target_kind")
-  policyTargetKind: RaiAcsPolicyTargetKind;
+  policyTargetKind: PolicyTargetKind;
 
   /** The logical policy evaluated at this intervention point. */
   policy: RaiAcsPolicyBinding;
@@ -757,32 +780,119 @@ model RaiAcsInterventionPoint {
   annotations?: RaiAcsEmptyObject;
 }
 
-/** Binds one logical policy to a tool-call intervention point. */
+/**
+ * Binds one logical policy to an Agent Control Specification intervention point.
+ */
 @added(Versions.v2026_09_15_preview)
-model RaiAcsToolInterventionPoint {
-  ...RaiAcsInterventionPoint;
+model RaiAcsInterventionPoint is RaiAcsInterventionPointTemplate<
+  RaiAcsPolicyTarget,
+  RaiAcsPolicyTargetKind
+>;
+
+/** Binds one logical policy to a tool-call intervention point. */
+model RaiAcsToolInterventionPointTemplate<PolicyTarget, PolicyTargetKind> {
+  ...RaiAcsInterventionPointTemplate<PolicyTarget, PolicyTargetKind>;
 
   /** Selects the tool catalog key from the raw Agent Hooks snapshot using an extensible snapshot path. */
   @encodedName("application/json", "tool_name_from")
   toolNameFrom?: RaiAcsToolNameSelector;
 }
 
+/** Binds one logical policy to a tool-call intervention point. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsToolInterventionPoint is RaiAcsToolInterventionPointTemplate<
+  RaiAcsPolicyTarget,
+  RaiAcsPolicyTargetKind
+>;
+
+/** Agent-startup binding with the canonical initialization target. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsAgentStartupInterventionPoint is RaiAcsInterventionPointTemplate<
+  "$snap.agent_init",
+  "agent_init"
+>;
+
+/** Input binding with the canonical user-input target. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsInputInterventionPoint is RaiAcsInterventionPointTemplate<
+  "$snap.input",
+  "user_input"
+>;
+
+/** Pre-model binding with the canonical messages target. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsPreModelCallInterventionPoint is RaiAcsInterventionPointTemplate<
+  "$snap.messages",
+  "messages"
+>;
+
+/** Post-model binding with the canonical model-response target. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsPostModelCallInterventionPoint is RaiAcsInterventionPointTemplate<
+  "$snap.response",
+  "model_response"
+>;
+
+/** Pre-tool binding with the canonical tool-arguments target. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsPreToolCallInterventionPoint is RaiAcsToolInterventionPointTemplate<
+  "$snap.tool_call.args",
+  "tool_args"
+>;
+
+/** Post-tool binding with the canonical tool-result target. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsPostToolCallInterventionPoint is RaiAcsToolInterventionPointTemplate<
+  "$snap.tool_result.value",
+  "tool_result"
+>;
+
+/** Output binding with the canonical assistant-output target. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsOutputInterventionPoint is RaiAcsInterventionPointTemplate<
+  "$snap.output",
+  "assistant_output"
+>;
+
+/** Agent-shutdown binding with the canonical summary target. */
+@added(Versions.v2026_09_15_preview)
+model RaiAcsAgentShutdownInterventionPoint is RaiAcsInterventionPointTemplate<
+  "$snap.summary",
+  "agent_summary"
+>;
+
 /** Intervention points supported by the Azure AI Content Safety Unified Moderate host profile. */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsInterventionPoints {
+  /** The policy evaluated when the agent execution session starts. */
+  @encodedName("application/json", "agent_startup")
+  agentStartup?: RaiAcsAgentStartupInterventionPoint;
+
   /** The policy evaluated for user input. */
-  input?: RaiAcsInterventionPoint;
+  input?: RaiAcsInputInterventionPoint;
+
+  /** The policy evaluated before a model call. */
+  @encodedName("application/json", "pre_model_call")
+  preModelCall?: RaiAcsPreModelCallInterventionPoint;
+
+  /** The policy evaluated after a model call. */
+  @encodedName("application/json", "post_model_call")
+  postModelCall?: RaiAcsPostModelCallInterventionPoint;
 
   /** The policy evaluated before a tool call. */
   @encodedName("application/json", "pre_tool_call")
-  preToolCall?: RaiAcsToolInterventionPoint;
+  preToolCall?: RaiAcsPreToolCallInterventionPoint;
 
   /** The policy evaluated after a tool call. */
   @encodedName("application/json", "post_tool_call")
-  postToolCall?: RaiAcsToolInterventionPoint;
+  postToolCall?: RaiAcsPostToolCallInterventionPoint;
 
   /** The policy evaluated for final output. */
-  output?: RaiAcsInterventionPoint;
+  output?: RaiAcsOutputInterventionPoint;
+
+  /** The policy evaluated when the agent execution session shuts down. */
+  @encodedName("application/json", "agent_shutdown")
+  agentShutdown?: RaiAcsAgentShutdownInterventionPoint;
 }
 
 /**
