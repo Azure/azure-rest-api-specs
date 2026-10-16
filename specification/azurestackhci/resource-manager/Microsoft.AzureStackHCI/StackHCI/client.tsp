@@ -192,7 +192,6 @@ using Microsoft.AzureStackHCI;
 @@clientName(SwitchExtension, "HciEdgeSwitchExtension", "csharp");
 @@clientName(ValidateRequest, "HciEdgeDeviceValidateContent", "csharp");
 @@clientName(ValidateResponse, "HciEdgeDeviceValidateResult", "csharp");
-@@clientName(EdgeMachineDeploymentData, "EdgeMachineDeployment", "csharp");
 @@clientName(
   EdgeMachineValidateRequest,
   "HciEdgeMachineValidateContent",

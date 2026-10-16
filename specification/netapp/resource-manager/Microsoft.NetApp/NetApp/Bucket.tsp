@@ -54,7 +54,6 @@ model BucketProperties {
    * Provisioning state of the resource
    */
   @visibility(Lifecycle.Read)
-  @typeChangedFrom(Versions.v2026_07_01, NetAppProvisioningStateOld)
   provisioningState?: NetAppProvisioningState;
 
   /**
@@ -244,8 +243,6 @@ model CertificateAkvDetails {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
-  @removed(Versions.v2026_07_01)
-  @added(Versions.v2026_07_15_preview)
   userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -288,8 +285,6 @@ model CredentialsAkvDetails {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
-  @removed(Versions.v2026_07_01)
-  @added(Versions.v2026_07_15_preview)
   userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -325,7 +320,6 @@ model BucketPatchProperties {
    * Provisioning state of the resource
    */
   @visibility(Lifecycle.Read)
-  @typeChangedFrom(Versions.v2026_07_01, NetAppProvisioningStateOld)
   provisioningState?: NetAppProvisioningState;
 
   /**

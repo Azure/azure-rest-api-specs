@@ -30,16 +30,16 @@ These are the global settings for the CognitiveServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2026-11-01-preview
+tag: package-2026-11-01
 ```
 
-### Tag: package-2026-11-01-preview
+### Tag: package-2026-11-15-preview
 
-These settings apply only when `--tag=package-2026-11-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-11-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-11-01-preview'
+```yaml $(tag) == 'package-2026-11-15-preview'
 input-file:
-  - preview/2026-11-01-preview/cognitiveservices.json
+  - preview/2026-11-15-preview/cognitiveservices.json
 suppressions:
   - code: DefinitionsPropertiesNamesCamelCase
     reason: The acs property embeds a separately versioned Agent Control Specification document. These fields retain the canonical ACS snake_case wire names so customers can import, export, validate, and round-trip ACS manifests without translation; generated SDKs expose idiomatic camelCase names through x-ms-client-name.
@@ -210,6 +210,97 @@ suppressions:
       - $.definitions.ArcDeploymentProperties.properties.nodeSelector
       - $.definitions.ArcDeploymentProperties.properties.capabilities
       - $.definitions.ArcDeploymentUpdateProperties.properties.nodeSelector
+```
+
+### Tag: package-2026-11-01
+
+These settings apply only when `--tag=package-2026-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11-01'
+input-file:
+  - stable/2026-11-01/cognitiveservices.json
+suppressions:
+  - code: ArmResourcePropertiesBag
+    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    where:
+      - $.definitions.OutboundRuleBasicResource
+  - code: AvoidAdditionalProperties
+    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    where:
+      - $.definitions.ManagedNetworkSettings.properties.outboundRules
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}"].put
+  - code: PutResponseCodes
+    reason: This API is copied from Machine Learning Services RP where it is already established and in use.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}"].put
+  - code: PutResponseCodes
+    reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].put
+  - code: PatchResponseCodes
+    reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch
+  - code: PatchBodyParametersSchema
+    reason: this is a required field for in a optional property this experience exist in other stable schemas as well.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].patch.parameters[5].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.sku
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].patch.parameters[6].schema.properties.properties
+  - code: GuidUsage
+    reason: Approved to be suppressed in AML swagger.
+    where:
+      - $.definitions.ConnectionOAuth2.properties.clientId.format
+  - code: DeleteResponseCodes
+    reason: Behavior is align with other existing API for this RP
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete
+  - code: AvoidAdditionalProperties
+    reason: Approved to be suppressed in AML swagger
+    where:
+      - $.definitions.ConnectionPropertiesV2.properties.metadata
+      - $.definitions.CustomKeys.properties.keys
+  - code: LroLocationHeader
+    reason: Align with existing API behavior in other APIs
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put.responses.202
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.responses.202
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete.responses.202
+  - code: AvoidAdditionalProperties
+    reason: Same as existing account resource, trying to have the same behavior
+    where:
+      - $.definitions.ProjectProperties.properties.endpoints
+  - code: AvoidAdditionalProperties
+    reason: Provide customers ability to assign customize labels to rules.
+    where:
+      - $.definitions.RaiToolLabelProperties.properties.accountScope.properties.labelValues
+      - $.definitions.RaiToolLabelProperties.properties.projectScopes.items.properties.labelValues
+      - $.definitions.RaiIfcRuleProperties.properties.conditions
+  - code: AvoidAdditionalProperties
+    reason: Provide customers ability to define custom conditions for when a rule is activated.
+    where:
+      - $.definitions.RaiIfcRuleProperties.properties.conditions
+  - code: TopLevelResourcesListByResourceGroup
+    reason: These are subscription level resources and are modeled after the RaiPolicy List operation
+    where:
+      - $.definitions.RaiExternalSafetyProvider
+      - $.definitions.RaiExternalSafetyProviderSchema
+  - code: ResourceNameRestriction
+    reason: Parameter exists in previous API versions without pattern, cannot add now without breaking change.
+    from: cognitiveservices.json
+  - code: ParametersSchemaAsTypeObject
+    reason: Backend requires array type for bulk operations since 2024-04-01 API. Changing to object would be a breaking change.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems"].post.parameters[5].schema.type
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems"].post.parameters[5].schema.type
 ```
 
 ### Tag: package-2026-09-15-preview

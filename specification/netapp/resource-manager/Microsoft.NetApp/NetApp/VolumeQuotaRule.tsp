@@ -8,7 +8,6 @@ import "./Volume.tsp";
 using Rest;
 using Azure.ResourceManager;
 using Http;
-using TypeSpec.Versioning;
 
 namespace Microsoft.NetApp;
 /**
@@ -39,7 +38,6 @@ model VolumeQuotaRulesProperties {
    * Gets the status of the VolumeQuotaRule at the time the operation was called.
    */
   @visibility(Lifecycle.Read)
-  @typeChangedFrom(Versions.v2026_07_01, NetAppProvisioningStateOld)
   provisioningState?: NetAppProvisioningState;
 
   /**

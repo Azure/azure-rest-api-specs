@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { parse } from "yaml";
+import yaml from "js-yaml";
 
 export const ALLOWED_BOT_LOGINS = ["github-actions[bot]", "azure-sdk"];
 export const UNPROTECTED_PLANE = "unprotected";
@@ -142,7 +142,7 @@ export const loadPackageNamePolicy = async (
   path: string = join(process.cwd(), ".github", "protected-labels.yml"),
 ): Promise<PackageNamePolicy> => {
   const content = await readFile(path, "utf8");
-  return parsePackageNamePolicy(parse(content));
+  return parsePackageNamePolicy(yaml.load(content));
 };
 
 export const evaluatePackageNameAuthorization = ({

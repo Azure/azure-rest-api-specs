@@ -1,63 +1,8 @@
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   evaluatePackageNameAuthorization,
-  loadPackageNamePolicy,
   parsePackageNamePolicy,
 } from "../../src/package-name-approval/policy.ts";
-
-describe("loading package-name policy", () => {
-  let folder: string;
-  let path: string;
-
-  beforeEach(async () => {
-    folder = await mkdtemp(join(tmpdir(), "package-name-policy-"));
-    path = join(folder, "protected-labels.yml");
-  });
-
-  afterEach(async () => {
-    await rm(folder, { recursive: true, force: true });
-  });
-
-  it("loads YAML aliases and plane-specific approval policy", async () => {
-    await writeFile(
-      path,
-      `global-approvers: [global]
-data-plane-review-signoff: &reviewers [reviewer]
-package-name-java-approved:
-  data-plane: *reviewers
-  management-plane: unprotected
-tier1:
-  data-plane: [java]
-`,
-    );
-
-    expect(await loadPackageNamePolicy(path)).toEqual({
-      globalApprovers: ["global"],
-      labels: {
-        "package-name-java-approved": {
-          "data-plane": ["reviewer"],
-          "management-plane": "unprotected",
-        },
-      },
-      tier1: { "data-plane": ["java"] },
-    });
-  });
-
-  it("rejects malformed YAML rather than defaulting to an empty policy", async () => {
-    await writeFile(path, "global-approvers: [unfinished");
-    await expect(loadPackageNamePolicy(path)).rejects.toThrow();
-  });
-
-  it("validates the policy after parsing YAML", async () => {
-    await writeFile(path, "global-approvers: not-a-list\n");
-    await expect(loadPackageNamePolicy(path)).rejects.toThrow(
-      '"global-approvers" must map to an array of non-empty strings',
-    );
-  });
-});
 
 describe("package-name policy", () => {
   it("projects only package-name-owned entries", () => {

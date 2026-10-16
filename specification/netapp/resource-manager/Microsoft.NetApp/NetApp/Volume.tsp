@@ -55,7 +55,7 @@ model VolumeProperties {
   /**
    * A unique file path for the volume. Used when creating mount targets
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "creationToken is the customer-visible volume path used to create mount targets; it is not a credential."
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark with @secret if this value should be kept private"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxLength(80)
   @minLength(1)
@@ -87,9 +87,6 @@ model VolumeProperties {
   @added(Versions.v2026_06_01)
   @removed(Versions.v2026_06_15_preview)
   @renamedFrom(Versions.v2026_06_15_preview, "usageThreshold")
-  @added(Versions.v2026_07_01)
-  @removed(Versions.v2026_07_15_preview)
-  @renamedFrom(Versions.v2026_07_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
@@ -110,8 +107,6 @@ model VolumeProperties {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
-  @removed(Versions.v2026_07_01)
-  @added(Versions.v2026_07_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
@@ -272,12 +267,6 @@ model VolumeProperties {
   smbContinuouslyAvailable?: boolean = false;
 
   /**
-   * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol volume
-   */
-  @added(Versions.v2026_07_15_preview)
-  smbOplocks?: SmbOplocks;
-
-  /**
    * Maximum throughput in MiB/s that can be achieved by this volume and this will be accepted as input only for manual qosType volume
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
@@ -319,8 +308,6 @@ model VolumeProperties {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
-  @removed(Versions.v2026_07_01)
-  @added(Versions.v2026_07_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -477,8 +464,6 @@ model VolumeProperties {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
-  @removed(Versions.v2026_07_01)
-  @added(Versions.v2026_07_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
 
@@ -510,8 +495,6 @@ model VolumeProperties {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
-  @removed(Versions.v2026_07_01)
-  @added(Versions.v2026_07_15_preview)
   language?: VolumeLanguage;
 
   /**
@@ -1373,9 +1356,6 @@ model VolumePatchProperties {
   @added(Versions.v2026_06_01)
   @removed(Versions.v2026_06_15_preview)
   @renamedFrom(Versions.v2026_06_15_preview, "usageThreshold")
-  @added(Versions.v2026_07_01)
-  @removed(Versions.v2026_07_15_preview)
-  @renamedFrom(Versions.v2026_07_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThreshold20250901?: int64;
@@ -1396,8 +1376,6 @@ model VolumePatchProperties {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
-  @removed(Versions.v2026_07_01)
-  @added(Versions.v2026_07_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
@@ -1484,12 +1462,6 @@ model VolumePatchProperties {
    * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume
    */
   smbNonBrowsable?: SmbNonBrowsable;
-
-  /**
-   * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol volume
-   */
-  @added(Versions.v2026_07_15_preview)
-  smbOplocks?: SmbOplocks;
 }
 
 /**
@@ -1752,17 +1724,7 @@ model ClusterPeerCommandResponseProperties {
   /**
    * Passphrase for use with cluster peer command
    */
-  @removed(Versions.v2026_07_01)
-  @renamedFrom(Versions.v2026_07_01, "passphrase")
   @example("SecurePassphrase123")
-  passphraseOld?: string;
-
-  /**
-   * Passphrase for use with cluster peer command
-   */
-  @added(Versions.v2026_07_01)
-  @secret
-  @example("{passphrase}")
   passphrase?: string;
 }
 
@@ -2114,24 +2076,6 @@ union SmbNonBrowsable {
 
   /**
    * smbNonBrowsable share setting is enabled
-   */
-  Enabled: "Enabled",
-}
-
-/**
- * SMB opportunistic-lock setting shared by volume and cache resources. Omit the property when unspecified.
- */
-@added(Versions.v2026_07_15_preview)
-union SmbOplocks {
-  string,
-
-  /**
-   * SMB opportunistic locks share setting is disabled.
-   */
-  Disabled: "Disabled",
-
-  /**
-   * SMB opportunistic locks share setting is enabled.
    */
   Enabled: "Enabled",
 }

@@ -40,51 +40,17 @@ using Microsoft.Cache;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 @@Legacy.flattenProperty(Database.properties);
 
-@@clientLocation(
-  AccessPolicyAssignments.get,
-  "AccessPolicyAssignment",
-  "!javascript"
-);
+@@clientLocation(AccessPolicyAssignments.get, "AccessPolicyAssignment");
 @@clientLocation(
   AccessPolicyAssignments.createUpdate,
-  "AccessPolicyAssignment",
-  "!javascript"
+  "AccessPolicyAssignment"
 );
 @@clientName(
   AccessPolicyAssignments.createUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(
-  AccessPolicyAssignments.delete,
-  "AccessPolicyAssignment",
-  "!javascript"
-);
-@@clientLocation(
-  AccessPolicyAssignments.list,
-  "AccessPolicyAssignment",
-  "!javascript"
-);
-
-@@clientLocation(
-  AccessPolicyAssignments.get,
-  "AccessPolicyAssignmentOperations",
-  "javascript"
-);
-@@clientLocation(
-  AccessPolicyAssignments.createUpdate,
-  "AccessPolicyAssignmentOperations",
-  "javascript"
-);
-@@clientLocation(
-  AccessPolicyAssignments.delete,
-  "AccessPolicyAssignmentOperations",
-  "javascript"
-);
-@@clientLocation(
-  AccessPolicyAssignments.list,
-  "AccessPolicyAssignmentOperations",
-  "javascript"
-);
+@@clientLocation(AccessPolicyAssignments.delete, "AccessPolicyAssignment");
+@@clientLocation(AccessPolicyAssignments.list, "AccessPolicyAssignment");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 @@Legacy.flattenProperty(AccessPolicyAssignment.properties);
 

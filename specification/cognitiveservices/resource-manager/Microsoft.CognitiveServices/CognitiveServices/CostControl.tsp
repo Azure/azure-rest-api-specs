@@ -17,6 +17,8 @@ namespace Microsoft.CognitiveServices;
  * A cost control owned by a Cognitive Services account.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @parentResource(Account)
 model CostControl
   is Azure.ResourceManager.ProxyResource<CostControlProperties> {
@@ -40,6 +42,8 @@ model CostControl
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Cost controls are synchronously persisted proxy resources and the service contract does not expose provisioningState."
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlProperties {
   /**
    * An optional human-readable name for the cost control.
@@ -60,6 +64,8 @@ model CostControlProperties {
  * The properties that can be changed on a cost control.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlPatchProperties {
   /**
    * An optional human-readable name for the cost control. Set this property to null to clear it.
@@ -81,6 +87,8 @@ model CostControlPatchProperties {
  * The request used to update a cost control.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlPatch {
   /**
    * The cost control properties to update.
@@ -94,6 +102,8 @@ model CostControlPatch {
  * Event Grid is required for alerts; supplied connection references must still be valid.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlConnections {
   /**
    * Gets or sets the full resource ID of the optional Application Insights connection.
@@ -124,6 +134,8 @@ model CostControlConnections {
  * A cost limit and the population to which it applies.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlRule {
   /**
    * The stable rule identifier, unique within the cost control without regard to case.
@@ -191,6 +203,8 @@ model CostControlRule {
  * Legacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlMatch {
   /**
    * Agent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.
@@ -229,6 +243,8 @@ model CostControlMatch {
  * A non-empty value used to match a trusted request attribute.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @minLength(1)
 scalar CostControlMatchValue extends string;
 
@@ -236,6 +252,8 @@ scalar CostControlMatchValue extends string;
  * A request dimension used to partition cost control consumption.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlDimension {
   /**
    * The kind of request dimension.
@@ -256,6 +274,8 @@ model CostControlDimension {
  * Cost control counter dimensions, including Custom retained for legacy read compatibility.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 union CostControlDimensionType {
   string,
 
@@ -295,6 +315,8 @@ union CostControlDimensionType {
  * The supported unit for cost control amounts and thresholds.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 union CostControlUnit {
   string,
 
@@ -308,6 +330,8 @@ union CostControlUnit {
  * Calendar-aligned UTC renewal periods, including legacy values retained for read compatibility.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 union CostControlPeriod {
   string,
 
@@ -340,6 +364,8 @@ union CostControlPeriod {
  * An action evaluated when cost control consumption reaches a threshold.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlThreshold {
   /**
    * How the threshold value is interpreted.
@@ -364,6 +390,8 @@ model CostControlThreshold {
  * The supported threshold value interpretations.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 union CostControlThresholdType {
   string,
 
@@ -382,6 +410,8 @@ union CostControlThresholdType {
  * The supported actions when a threshold is reached.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 union CostControlThresholdAction {
   string,
 
@@ -405,6 +435,8 @@ union CostControlThresholdAction {
  * A page of cost controls.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlListResult {
   /**
    * The link used to get the next page of cost controls.
@@ -424,6 +456,8 @@ model CostControlListResult {
  * Conditional request headers accepted when creating or replacing a cost control.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlCreateOrUpdateHeaders {
   /**
    * Proceeds only when the current entity tag matches this value.
@@ -442,6 +476,8 @@ model CostControlCreateOrUpdateHeaders {
  * The conditional request header accepted when updating or deleting a cost control.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlIfMatchHeader {
   /**
    * Proceeds only when the current entity tag matches this value.
@@ -465,6 +501,8 @@ alias CostControlEtagHeader = {
  * Operations for managing cost controls owned by an account.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface CostControls {
   /**
