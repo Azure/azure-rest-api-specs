@@ -11,33 +11,30 @@ using TypeSpec.Versioning;
 namespace Microsoft.Chaos;
 
 /**
- * The latest discovery result used to monitor workspace discovery and inspect its accepted coverage.
+ * Ordinary reads of retained workspace discovery results, separate from LRO polling.
  */
 @added(Microsoft.Chaos.Versions.v2026_11_01)
 @armResourceOperations
 interface WorkspaceDiscoveries {
   /**
-   * Gets the latest discovery result. Returns 202 with Location pointing to this same polling resource while discovery is processing, and 200 for a terminal result, including Failed with an error and no snapshot when completion could not be accepted.
+   * Gets a retained discovery result by its ID, or uses latest to select the most recently durably admitted discovery. Returns 200 with the current representation while processing or terminal. A Failed result can contain errors without a snapshot. Returns 404 if no qualifying retained result exists. This is not an LRO polling endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The existing discovery polling GET returns its read-only nonterminal result with HTTP 202; the initiating POST still returns 202 without a body. Requires ARM API review."
-  get is ArmResourceRead<
+  get is ArmResourceRead<WorkspaceDiscovery>;
+
+  /**
+   * Lists retained discovery results under the workspace. Each result has its canonical ID; latest is an alias and is not a separate collection entry. This operation does not extend result retention.
+   */
+  list is ArmResourceListByParent<
     WorkspaceDiscovery,
-    Response = ArmResponse<WorkspaceDiscovery> | WorkspaceDiscoveryPendingResult
+    Parameters = {
+      /** Opaque continuation token supplied by the returned nextLink. */
+      @query("continuationToken")
+      continuationToken?: string;
+    }
   >;
 }
 
-/**
- * The nonterminal discovery result returned from the polling location.
- */
-@added(Microsoft.Chaos.Versions.v2026_11_01)
-model WorkspaceDiscoveryPendingResult {
-  ...ArmAcceptedResponse<"Workspace discovery is still processing.">;
-
-  /** The absolute URL of this same discovery polling resource, including the requested API version. */
-  @header("Location")
-  location: url;
-
-  /** The nonterminal discovery result, without invented completed coverage facts. */
-  @bodyRoot
-  body: WorkspaceDiscovery;
-}
+@@doc(
+  WorkspaceDiscovery.name,
+  "The service-generated discovery result ID. Use latest in the request path for the most recently durably admitted discovery; responses contain the canonical result ID."
+);
