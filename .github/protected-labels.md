@@ -86,7 +86,8 @@ BreakingChange-Python-Sdk-Approved: *sdk-breaking-change-approvers
 ## ARM review labels
 
 On management-plane PRs, members of `arm-api-reviewers` may apply `ARMSignedOff`,
-`Approved-Suppression`, `Approved-LintDiff`, and `Approved-Avocado`.
+`Approved-Suppression`, `Approved-LintDiff`, `Approved-Avocado`, and
+`typespec-suppressions-approved`.
 Existing global approvers remain authorized.
 
 Members of `arm-breaking-change-reviewers` may apply the configured
@@ -97,8 +98,7 @@ individually, not as wildcard patterns.
 These ARM policies leave data-plane behavior unchanged.
 `typespec-suppressions-approved` retains its existing `azure-data-plane-api-reviewers`
 policy on data-plane PRs; the other ARM policies explicitly opt data-plane PRs out.
-Management-plane `typespec-suppressions-approved` remains unprotected, as do
-`WaitForARMFeedback` and `ARMChangesRequested`.
+`WaitForARMFeedback` and `ARMChangesRequested` remain unprotected.
 
 Protection applies to label application, not removal.
 
