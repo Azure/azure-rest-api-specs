@@ -31,4 +31,8 @@ namespace Azure.Ai.Speech.Transcription;
 @doc("Service API versions.")
 enum ServiceApiVersions {
   V20251015: "2025-10-15",
+
+  @doc("The 2026-09-15 preview API version.")
+  @Azure.Core.previewVersion
+  V20260915Preview: "2026-09-15-preview",
 }
