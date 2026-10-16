@@ -20092,7 +20092,8 @@
         "HDInsight",
         "Databricks",
         "DataLakeAnalytics",
-        "SynapseSpark"
+        "SynapseSpark",
+        "FabricSpark"
       ],
       "x-ms-enum": {
         "name": "ComputeType",
@@ -20137,6 +20138,11 @@
           {
             "name": "SynapseSpark",
             "value": "SynapseSpark"
+          },
+          {
+            "name": "FabricSpark",
+            "value": "FabricSpark",
+            "description": "An attached Fabric custom Spark pool."
           }
         ]
       }
@@ -23593,6 +23599,55 @@
           "$ref": "#/definitions/FQDNEndpoints"
         }
       }
+    },
+    "FabricSpark": {
+      "type": "object",
+      "description": "An existing Fabric custom Spark pool attached to a Machine Learning workspace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FabricSparkProperties",
+          "description": "Fabric workspace, Lakehouse, Environment, and Spark pool details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        }
+      ],
+      "x-ms-discriminator-value": "FabricSpark"
+    },
+    "FabricSparkProperties": {
+      "type": "object",
+      "description": "Resources belonging to the Fabric compute attachment.",
+      "properties": {
+        "fabricWorkspaceId": {
+          "type": "string",
+          "description": "ID of the Fabric workspace."
+        },
+        "lakehouseId": {
+          "type": "string",
+          "description": "ID of the Fabric Lakehouse."
+        },
+        "environmentId": {
+          "type": "string",
+          "description": "ID of the published Fabric Environment."
+        },
+        "poolId": {
+          "type": "string",
+          "description": "ID of the Fabric custom Spark pool."
+        },
+        "poolName": {
+          "type": "string",
+          "description": "Name of the pool returned by the service.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "fabricWorkspaceId",
+        "lakehouseId",
+        "environmentId",
+        "poolId"
+      ]
     },
     "Feature": {
       "type": "object",
