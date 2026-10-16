@@ -10689,6 +10689,15 @@
           "description": "The difference between total cost and benefit cost for the 'totalHours' in the look-back period.",
           "readOnly": true
         },
+        "hourlyOverageCharges": {
+          "type": "array",
+          "description": "Remaining on-demand charges for each hour after applying this recommendation's commitmentAmount. Applicable only to Savings Plan recommendations. Values are in properties.currencyCode and align in length and chronological order with properties.usage.charges, with one entry per hour in properties.totalHours. Their sum equals this recommendation's overageCost, subject to monetary rounding. Returned only when properties/usage is expanded and the caller is allowed to view charges. For allRecommendationDetails.value, properties/allRecommendationDetails must also be expanded.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "readOnly": true
+        },
         "benefitCost": {
           "type": "number",
           "format": "decimal",
