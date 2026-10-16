@@ -1,4 +1,4 @@
-import assert from "node:assert/strict";
+import * as assert from "node:assert/strict";
 import { analyzeEvents, summarize } from "./analyze-routing.js";
 
 let sequence = 0;
@@ -73,6 +73,27 @@ assert.equal(canonical.route, "Web only");
 assert.equal(canonical.catalogReadSucceeded, true);
 assert.equal(canonical.catalogBeforeSource, true);
 
+const unavailableCatalogEvents = [];
+tool(
+  unavailableCatalogEvents,
+  "view",
+  {
+    path: "/skill/references/reference-document-links.md",
+  },
+  false,
+);
+tool(unavailableCatalogEvents, "web_fetch", {
+  url: "https://typespec.io/docs/language-basics/models/",
+});
+tool(unavailableCatalogEvents, "apply_patch", {});
+tool(unavailableCatalogEvents, "azure-sdk-mcp-azsdk_run_typespec_validation", {});
+const unavailableCatalog = analyzeEvents(unavailableCatalogEvents, "unavailable-catalog");
+assert.equal(unavailableCatalog.route, "Web only");
+assert.equal(unavailableCatalog.catalogReadSucceeded, false);
+assert.equal(unavailableCatalog.catalogBeforeSource, true);
+assert.equal(unavailableCatalog.approvedKnowledgeRoute, true);
+assert.equal(unavailableCatalog.catalogFailureSafe, true);
+
 const prematureEvents = [];
 tool(
   prematureEvents,
@@ -97,8 +118,16 @@ tool(
   },
   false,
 );
+tool(
+  blockerEvents,
+  "web_fetch",
+  {
+    url: "https://typespec.io/docs/",
+  },
+  false,
+);
 const blocker = analyzeEvents(blockerEvents, "blocker");
-assert.equal(blocker.route, "Neither");
+assert.equal(blocker.route, "Web only");
 assert.equal(blocker.catalogFailureSafe, true);
 
 const mixedEvents = coveredEvents();
@@ -109,9 +138,9 @@ assert.equal(mixed.route, "Both");
 assert.equal(mixed.sourceExclusive, false);
 assert.equal(mixed.planner, 1);
 
-const summary = summarize([covered, uncovered, canonical, premature, mixed]);
+const summary = summarize([covered, uncovered, canonical, unavailableCatalog, premature, mixed]);
 assert.deepEqual(summary.routes, {
-  "Web only": 3,
+  "Web only": 4,
   "Retrieval only": 1,
   Both: 1,
   Neither: 0,

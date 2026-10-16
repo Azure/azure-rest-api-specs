@@ -1,5 +1,5 @@
-import fs from "node:fs";
-import path from "node:path";
+import * as fs from "node:fs";
+import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const TOOL_NAMES = {
@@ -69,6 +69,7 @@ export function analyzeEvents(allEvents, trial = "unknown") {
   const successfulCatalogRead = starts.find(
     (entry) => isCatalogRead(entry.event) && successful(entry),
   );
+  const firstCatalogAttempt = starts.find((entry) => isCatalogRead(entry.event));
   const firstSource = starts.find(({ event }) =>
     [TOOL_NAMES.web, TOOL_NAMES.retrieval].includes(event.data?.toolName),
   );
@@ -98,11 +99,11 @@ export function analyzeEvents(allEvents, trial = "unknown") {
     planner,
     validation,
     catalogReadSucceeded: Boolean(successfulCatalogRead),
+    catalogAccessAttempted: Boolean(firstCatalogAttempt),
     catalogBeforeSource:
-      Boolean(successfulCatalogRead) &&
+      Boolean(firstCatalogAttempt) &&
       Boolean(firstSource) &&
-      (successfulCatalogRead === firstSource ||
-        completionIndex(successfulCatalogRead) < firstSource.index),
+      completionIndex(firstCatalogAttempt) < firstSource.index,
     sourceExclusive: !(web > 0 && retrieval > 0),
     approvedKnowledgeRoute: web > 0 && retrieval === 0 && planner === 0,
     groundingBeforeMutation:
@@ -112,7 +113,11 @@ export function analyzeEvents(allEvents, trial = "unknown") {
       Boolean(firstMutation) &&
       Boolean(lastValidation) &&
       lastValidation.index > firstMutation.index,
-    catalogFailureSafe: !successfulCatalogRead && route === "Neither" && !firstMutation,
+    catalogFailureSafe:
+      !successfulCatalogRead &&
+      retrieval === 0 &&
+      planner === 0 &&
+      (!firstMutation || Boolean(firstSuccessfulGrounding)),
   };
 }
 
@@ -140,12 +145,12 @@ export function summarize(trials) {
     retrievalViolations: trials.filter((trial) => trial.retrieval > 0).length,
     plannerCalls: trials.reduce((total, trial) => total + trial.planner, 0),
     catalogViolations: trials.filter(
-      (trial) => !trial.catalogReadSucceeded || !trial.catalogBeforeSource,
+      (trial) => !trial.catalogAccessAttempted || !trial.catalogBeforeSource,
     ).length,
     sourceExclusivityViolations: trials.filter((trial) => !trial.sourceExclusive).length,
     orderingViolations: trials.filter(
       (trial) =>
-        !trial.catalogReadSucceeded ||
+        !trial.catalogAccessAttempted ||
         !trial.catalogBeforeSource ||
         !trial.sourceExclusive ||
         !trial.approvedKnowledgeRoute ||

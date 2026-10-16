@@ -1,5 +1,5 @@
-import fs from "node:fs";
-import path from "node:path";
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 const mode = process.argv[2];
 const nodeModulesRoot = process.env.FIXTURE_NODE_MODULES || "node_modules";

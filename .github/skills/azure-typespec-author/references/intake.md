@@ -10,11 +10,12 @@ Complete Agentic Search before deciding what additional information to collect:
    [reference-document-links.md](reference-document-links.md). If that read fails,
    retry the installed skill path. If local access remains unavailable, recover the
    canonical repository copy through an available repository-file reader.
-2. If the catalog still cannot be read, report a blocker without MCP calls or edits.
-3. Run [agentic search](agentic-search.md) for the complete request. Use the fetched
-   guidance to determine the material intake decisions and retain it for the
-   authoring plan. When the catalog has no direct match, Agentic Search locates
-   additional authoritative TypeSpec or Azure documentation.
+2. Run [agentic search](agentic-search.md) for the complete request. If the catalog
+   is unavailable or has no direct match, locate authoritative TypeSpec or Azure
+   documentation directly. Catalog access failure is not a blocker and does not
+   permit an MCP fallback.
+3. Use the fetched guidance to determine the material intake decisions and retain it
+   for the authoring plan.
 4. Using the Agentic Search guidance, the Step 1 result, and the user's request, identify
    every matching case from the table below.
 5. Gather only material information that is not already supplied or directly

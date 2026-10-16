@@ -1,8 +1,10 @@
 # Agentic Search
 
-Always enter this procedure during Step 2 after the reference catalog is available.
-Use the resulting Web guidance to determine the required intake decisions, then
-retain it for the local authoring plan. Do not call
+Always enter this procedure during Step 2 after attempting to read the reference
+catalog. The catalog may guide URL selection but is not required: if it is
+unavailable, discover authoritative TypeSpec or Azure documentation directly. Use
+the resulting Web guidance to determine the required intake decisions, then retain it
+for the local authoring plan. Do not call
 `azsdk_typespec_retrieve_knowledge` or an authoring-plan MCP.
 
 ## Input
@@ -12,9 +14,10 @@ retain it for the local authoring plan. Do not call
 
 ## Procedure
 
-1. **Select URLs** — start with matching URLs from
-   [reference-document-links.md](reference-document-links.md). When the catalog has
-   no direct match or does not fully cover the request, locate additional
+1. **Select URLs** — when available, start with matching URLs from
+   [reference-document-links.md](reference-document-links.md). When the catalog is
+   unavailable, has no direct match, or does not fully cover the request, locate
+   additional
    authoritative TypeSpec or Azure documentation for the complete request. Select
    only directly relevant URLs; do not fetch every URL as a substitute for resolving
    uncertainty.

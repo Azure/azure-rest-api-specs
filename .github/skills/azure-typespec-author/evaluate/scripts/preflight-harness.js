@@ -1,8 +1,8 @@
-import assert from "node:assert/strict";
+import * as assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
+import * as fs from "node:fs";
+import * as os from "node:os";
+import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse } from "yaml";
 
@@ -60,7 +60,7 @@ assert.ok(
 );
 assert.ok(fs.existsSync(nodeModules), `missing fixture dependencies: ${nodeModules}`);
 
-for (const { evalFile, stimulus } of forced) {
+for (const { stimulus } of forced) {
   assert.ok(
     stimulus.environment?.files?.some((file) => path.basename(file.dest) === "tspconfig.yaml"),
     `${stimulus.name} must stage tspconfig.yaml`,

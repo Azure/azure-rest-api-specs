@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import path from "node:path";
+import * as path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { getPassAtKVerdict, setJunitPassAtKThreshold } from "./typespec-author-pass-at-k.ts";

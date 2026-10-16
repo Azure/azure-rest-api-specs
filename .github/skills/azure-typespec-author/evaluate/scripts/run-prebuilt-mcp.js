@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { spawn } from "node:child_process";
-import fs from "node:fs";
-import path from "node:path";
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 const mcpKind = process.env.AZSDK_EVAL_MCP_KIND;
 const repoRoot = process.env.AZSDK_EVAL_REPO_ROOT || process.cwd();
