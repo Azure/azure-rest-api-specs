@@ -38,6 +38,7 @@ namespace Azure.AI.Projects {
     @doc("Microsoft Foundry API version v1.")
     v1: "v1",
   }
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "We need to use an enum for this to be represented as enum for the server variable"
   @doc("The clouds where Microsoft Foundry is available")
   enum AzureClouds {
     @doc("The public Azure cloud.")
