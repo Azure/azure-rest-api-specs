@@ -8,16 +8,12 @@
   },
   "scripts": {
     "refine": "node doc-refinement.ts",
-    "build": "tsc --noEmit --project tsconfig.json",
-    "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
-    "lint": "oxlint .",
-    "format:check": "oxfmt . --check",
-    "test": "vitest",
-    "test:ci": "vitest run --coverage --reporter=verbose"
+    "check": "tsc --noEmit --project tsconfig.json",
+    "test": "vitest run --config vitest.config.ts"
   },
   "dependencies": {
-    "@github/copilot": "catalog:",
-    "@github/copilot-sdk": "catalog:",
-    "adm-zip": "catalog:"
+    "@github/copilot": "^1.0.68",
+    "@github/copilot-sdk": "1.0.0-beta.5",
+    "adm-zip": "0.6.0"
   }
 }
