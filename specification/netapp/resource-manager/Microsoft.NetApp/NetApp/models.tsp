@@ -272,6 +272,8 @@ union KeySource {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 union ElasticKeySource {
   string,
 
@@ -290,7 +292,9 @@ union ElasticKeySource {
  * Gets the status of the VolumeQuotaRule at the time the operation was called.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-union NetAppProvisioningState {
+@removed(Versions.v2026_07_01)
+@renamedFrom(Versions.v2026_07_01, "NetAppProvisioningState")
+union NetAppProvisioningStateOld {
   string,
 
   /**
@@ -333,6 +337,43 @@ union NetAppProvisioningState {
    * Resource has Succeeded
    */
   Succeeded: "Succeeded",
+}
+
+/**
+ * Gets the status of the VolumeQuotaRule at the time the operation was called.
+ */
+union NetAppProvisioningState {
+  Azure.ResourceManager.ResourceProvisioningState,
+
+  /**
+   * Resource has been Accepted
+   */
+  Accepted: "Accepted",
+
+  /**
+   * Resource is being Created
+   */
+  Creating: "Creating",
+
+  /**
+   * Resource is being Patched
+   */
+  Patching: "Patching",
+
+  /**
+   * Resource is updating
+   */
+  Updating: "Updating",
+
+  /**
+   * Resource is being Deleted
+   */
+  Deleting: "Deleting",
+
+  /**
+   * Resource is being Moved
+   */
+  Moving: "Moving",
 }
 
 /**
