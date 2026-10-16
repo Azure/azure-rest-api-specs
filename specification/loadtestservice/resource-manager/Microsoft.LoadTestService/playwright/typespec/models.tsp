@@ -64,7 +64,7 @@ model PlaywrightWorkspaceProperties {
 
   @added(Versions.v2026_10_01_preview)
   @doc("The managed identity used to manage session artifacts in the storage account.")
-  storageIdentity?: ManagedIdentityProperties;
+  storageIdentity?: ManagedIdentity;
 
   @added(Versions.v2026_11_01_preview)
   @doc("Indicates whether browser proxy is enabled for the workspace. When set to true, browser proxy can be used for the workspace.")
@@ -107,13 +107,13 @@ model LinkedKeyVaultProperties {
   vaultUri?: url;
 
   @doc("The identity used to access the linked Key Vault.")
-  vaultIdentity?: ManagedIdentityProperties;
+  vaultIdentity?: ManagedIdentity;
 }
 
 @doc("Managed identity properties for accessing Azure resources.")
-model ManagedIdentityProperties {
+model ManagedIdentity {
   @doc("The type of the managed identity, either SystemAssigned or UserAssigned.")
-  type?: ManagedIdentityType;
+  type?: IdentityType;
 
   @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
   resourceId?: Azure.Core.armResourceIdentifier<[
@@ -124,7 +124,7 @@ model ManagedIdentityProperties {
 }
 
 @doc("The type of the managed identity.")
-union ManagedIdentityType {
+union IdentityType {
   string,
 
   @doc("System-assigned managed identity.")

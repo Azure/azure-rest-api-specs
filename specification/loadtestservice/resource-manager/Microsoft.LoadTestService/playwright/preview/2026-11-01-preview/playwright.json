@@ -752,6 +752,30 @@
         ]
       }
     },
+    "IdentityType": {
+      "type": "string",
+      "description": "The type of the managed identity.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System-assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identity."
+          }
+        ]
+      }
+    },
     "LinkedKeyVaultProperties": {
       "type": "object",
       "description": "Linked Key Vault properties for the Playwright workspace.",
@@ -762,17 +786,17 @@
           "description": "The URI of the linked Key Vault."
         },
         "vaultIdentity": {
-          "$ref": "#/definitions/ManagedIdentityProperties",
+          "$ref": "#/definitions/ManagedIdentity",
           "description": "The identity used to access the linked Key Vault."
         }
       }
     },
-    "ManagedIdentityProperties": {
+    "ManagedIdentity": {
       "type": "object",
       "description": "Managed identity properties for accessing Azure resources.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/ManagedIdentityType",
+          "$ref": "#/definitions/IdentityType",
           "description": "The type of the managed identity, either SystemAssigned or UserAssigned."
         },
         "resourceId": {
@@ -787,30 +811,6 @@
             ]
           }
         }
-      }
-    },
-    "ManagedIdentityType": {
-      "type": "string",
-      "description": "The type of the managed identity.",
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System-assigned managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User-assigned managed identity."
-          }
-        ]
       }
     },
     "PlaywrightQuota": {
@@ -1097,7 +1097,7 @@
           }
         },
         "storageIdentity": {
-          "$ref": "#/definitions/ManagedIdentityProperties",
+          "$ref": "#/definitions/ManagedIdentity",
           "description": "The managed identity used to manage session artifacts in the storage account."
         },
         "browserProxy": {
@@ -1232,7 +1232,7 @@
           "description": "Enables session artifact recording for the workspace."
         },
         "storageIdentity": {
-          "$ref": "#/definitions/ManagedIdentityProperties",
+          "$ref": "#/definitions/ManagedIdentity",
           "description": "The managed identity used to manage session artifacts in the storage account."
         },
         "browserProxy": {
