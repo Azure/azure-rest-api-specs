@@ -219,12 +219,26 @@ model SmbSettings {
   /**
    * Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume
    */
+  @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "smbAccessBasedEnumeration")
+  smbAccessBasedEnumerationOld?: SmbAccessBasedEnumeration;
+
+  /**
+   * Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol cache
+   */
+  @added(Versions.v2026_07_01)
   smbAccessBasedEnumeration?: SmbAccessBasedEnumeration;
 
   /**
-   * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume
+   * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol cache
    */
   smbNonBrowsable?: SmbNonBrowsable;
+
+  /**
+   * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol cache
+   */
+  @added(Versions.v2026_07_15_preview)
+  smbOplocks?: SmbOplocks;
 }
 
 /**
@@ -269,6 +283,15 @@ model PeeringPassphrases {
   /**
    * The cluster peering passphrase.
    */
+  @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "clusterPeeringPassphrase")
+  clusterPeeringPassphraseOld: string;
+
+  /**
+   * The cluster peering passphrase.
+   */
+  @added(Versions.v2026_07_01)
+  @secret
   clusterPeeringPassphrase: string;
 
   /**
