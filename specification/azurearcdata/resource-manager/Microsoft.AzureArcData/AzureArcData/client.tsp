@@ -102,3 +102,83 @@ using TypeSpec.Http;
   "K8StransparentDataEncryption",
   "python"
 );
+
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+@@clientName(
+  SqlServerInstanceManagedInstanceLinkAssessmentRequest,
+  "ArcDataSqlServerInstanceManagedInstanceLinkAssessmentRequestContent",
+  "csharp"
+);
+@@clientName(
+  SqlServerInstanceRunTargetRecommendationJobRequest,
+  "ArcDataSqlServerInstanceRunTargetRecommendationJobRequestContent",
+  "csharp"
+);
+@@clientName(
+  SqlServerInstanceTargetRecommendationReportsRequest,
+  "ArcDataSqlServerInstanceTargetRecommendationReportsRequestContent",
+  "csharp"
+);
+@@clientName(
+  SqlServerInstanceJobsRequest,
+  "ArcDataSqlServerInstanceJobsRequestContent",
+  "csharp"
+);
+@@clientName(
+  SqlServerInstanceJobsStatusRequest,
+  "ArcDataSqlServerInstanceJobsStatusRequestContent",
+  "csharp"
+);
+
+@@clientName(
+  ActiveDirectoryConnectorDNSDetails,
+  "ActiveDirectoryConnectorDnsDetails",
+  "csharp"
+);
+@@clientName(
+  ActiveDirectoryConnectorDNSDetails.nameserverIPAddresses,
+  "NameserverIpAddresses",
+  "csharp"
+);
+@@clientName(Authentication, "SqlServerAuthentication", "csharp");
+@@clientName(DbFailover, "DbFailover", "csharp");
+@@clientName(DbFailover.ON, "On", "csharp");
+@@clientName(DbFailover.OFF, "Off", "csharp");
+@@clientName(DBMEndpoint, "DbmEndpoint", "csharp");
+@@clientName(DBMEndpoint.ipAddress, "IpAddress", "csharp");
+@@clientName(DataBaseMigration, "DatabaseMigration", "csharp");
+@@clientName(
+  DataBaseMigrationAssessment,
+  "DatabaseMigrationAssessment",
+  "csharp"
+);
+@@clientName(Infrastructure, "DataControllerInfrastructure", "csharp");
+@@clientName(
+  k8stransparentDataEncryption,
+  "K8sTransparentDataEncryption",
+  "csharp"
+);
+@@clientName(Migration, "SqlServerInstanceMigration", "csharp");
+@@clientName(Mode, "SqlServerAuthenticationMode", "csharp");
+@@clientName(ReplicationPartnerType.SQLServer, "SqlServer", "csharp");
+@@clientName(ReplicationPartnerType.AzureSqlvm, "AzureSqlVm", "csharp");
+@@clientName(
+  ReplicationPartnerType.AzureSQLManagedInstance,
+  "AzureSqlManagedInstance",
+  "csharp"
+);
+@@clientName(Result, "SequencerActionResult", "csharp");
+@@clientName(Role, "DatabaseMirroringRole", "csharp");
+@@clientName(Role.ALL, "All", "csharp");
+@@clientName(Schedule, "BestPracticesAssessmentSchedule", "csharp");
+@@clientName(SecondaryAllowConnections.NO, "No", "csharp");
+@@clientName(SecondaryAllowConnections.ALL, "All", "csharp");
+@@clientName(Version, "SqlServerEsuLicenseVersion", "csharp");
+@@clientName(Version.SQLServer2012, "SqlServer2012", "csharp");
+@@clientName(Version.SQLServer2014, "SqlServer2014", "csharp");
+@@clientName(Version.SQLServer2016, "SqlServer2016", "csharp");
