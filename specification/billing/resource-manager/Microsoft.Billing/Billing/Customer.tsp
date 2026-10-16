@@ -1,14 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
 import "./models.tsp";
 import "./BillingProfile.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Billing;
 /**
@@ -21,310 +18,132 @@ model Customer is Azure.ResourceManager.ProxyResource<CustomerProperties> {
     Resource = Customer,
     KeyName = "customerName",
     SegmentName = "customers",
-    NamePattern = "^[a-zA-Z\\d-_]{1,128}$"
+    NamePattern = BillingProfileCustomerInvoiceSectionNamePattern
   >;
 
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
   tags?: Record<string>;
 }
-
-alias CustomerOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Billing";
-
-    /** The ID that uniquely identifies a billing account. */
-    @path
-    @segment("billingAccounts")
-    @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
-    billingAccountName: string;
-
-    /** The ID that uniquely identifies a billing profile. */
-    @path
-    @segment("billingProfiles")
-    @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
-    billingProfileName: string;
-  },
-  {},
-  {
-    /** The ID that uniquely identifies a customer. */
-    @path
-    @segment("customers")
-    @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
-    customerName: string;
-  },
-  "BillingProfileCustomer"
->;
-
-alias CustomerNoPatternOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Billing";
-
-    /** The ID that uniquely identifies a billing account. */
-    @path
-    @segment("billingAccounts")
-    @key
-    billingAccountName: string;
-
-    /** The ID that uniquely identifies a billing profile. */
-    @path
-    @segment("billingProfiles")
-    @key
-    billingProfileName: string;
-  },
-  {},
-  {
-    /** The ID that uniquely identifies a customer. */
-    @path
-    @segment("customers")
-    @key
-    customerName: string;
-  }
->;
 
 @armResourceOperations(#{ omitTags: true })
 interface Customers {
   /**
    * Gets a customer by its ID. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Customer")
-  get is CustomerOps.Read<Customer>;
+  get is ArmResourceRead<
+    Customer,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
 
   /**
    * Lists the customers that are billed to a billing profile. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Customer")
-  listByBillingProfile is CustomerOps.List<
+  listByBillingProfile is ArmResourceListByParent<
     Customer,
-    Parameters = {
-      /**
-       * May be used to expand enabledAzurePlans and resellers
-       */
-      @query("expand")
-      expand?: string;
-
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
-    },
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = CustomersListParametersWithExpand,
     Response = ArmResponse<CustomerListResult>
   >;
 
   /**
    * Lists the billing permissions the caller has for a customer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @list
   @get
   @action("billingPermissions")
-  listByCustomer is CustomerOps.ActionSync<
+  listByCustomer is ArmResourceActionSync<
     Customer,
     void,
-    ArmResponse<BillingPermissionListResult>
+    ArmResponse<BillingPermissionListResult>,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 
   /**
    * Provides a list of check access response objects for a customer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @action("checkAccess")
-  checkAccessByCustomer is CustomerOps.ActionSync<
+  checkAccessByCustomer is ArmResourceActionSync<
     Customer,
     CheckAccessRequest,
-    ArmResponse<CheckAccessResponse[]>
+    ArmResponse<CheckAccessResponse[]>,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 
   /**
    * The list of billing requests submitted for the customer.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRequest")
   @list
   @get
   @action("billingRequests")
-  billingRequestsListByCustomer is CustomerOps.ActionSync<
+  billingRequestsListByCustomer is ArmResourceActionSync<
     Customer,
     void,
     ArmResponse<BillingRequestListResult>,
-    Parameters = {
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
-    }
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = DefaultODataParameters
   >;
 
   /**
    * Adds a role assignment on a customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   @action("createBillingRoleAssignment")
-  createByCustomer is CustomerOps.ActionAsync<
+  createByCustomer is ArmResourceActionAsync<
     Customer,
     BillingRoleAssignmentProperties,
-    BillingRoleAssignment
+    BillingRoleAssignment,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
   >;
 
   /**
    * Lists the role assignments for the caller on a customer while fetching user info for each role assignment. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleAssignment")
   @action("resolveBillingRoleAssignments")
-  resolveByCustomer is CustomerOps.ActionAsync<
+  resolveByCustomer is ArmResourceActionAsync<
     Customer,
     void,
     BillingRoleAssignmentListResult,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = BillingRoleAssignmentsResolveByCustomerParameters
   >;
 
   /**
    * Lists the subscriptions for a customer. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   @list
   @get
   @action("billingSubscriptions")
-  billingSubscriptionsListByCustomer is CustomerNoPatternOps.ActionSync<
+  billingSubscriptionsListByCustomer is ArmResourceActionSync<
     Customer,
     void,
-    ArmResponse<BillingSubscriptionListResult>,
-    Parameters = BillingSubscriptionsListByCustomerParameters
-  >;
-
-  /**
-   * Updates the policies for a customer. This operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
-  @tag("Policy")
-  @put
-  @action("policies/default")
-  createOrUpdateByCustomer is CustomerOps.ActionAsync<
-    Customer,
-    CustomerPolicy,
-    CustomerPolicy,
-    Response =
-      | ArmResourceCreatedResponse<
-          CustomerPolicy,
-          ArmLroLocationHeader<FinalResult = CustomerPolicy> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmResponse<CustomerPolicy>
+    BillingSubscriptionListResult,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = BillingSubscriptionsListParameters
   >;
 
   /**
    * Lists the billed or unbilled transactions by customer id for given start date and end date. Transactions include purchases, refunds and Azure usage charges. Unbilled transactions are listed under pending invoice Id and do not include tax. Tax is added to the amount once an invoice is generated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Transaction")
   @list
   @get
   @action("transactions")
-  transactionsListByCustomer is CustomerOps.ActionSync<
+  transactionsListByCustomer is ArmResourceActionSync<
     Customer,
     void,
-    ArmResponse<TransactionListResult>,
+    TransactionListResult,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * The start date to fetch the transactions. The date should be specified in MM-DD-YYYY format.
@@ -344,41 +163,7 @@ interface Customers {
       @query("type")
       type: TransactionType;
 
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
+      ...DefaultODataParameters;
     }
   >;
 }
@@ -397,7 +182,7 @@ alias CustomerOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
   },
   {},
@@ -406,98 +191,29 @@ alias CustomerOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     @path
     @segment("customers")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     customerName: string;
   },
   "BillingCustomer"
 >;
 
-alias CustomerOperationGroupNoPatternOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Billing";
-
-    /** The ID that uniquely identifies a billing account. */
-    @path
-    @segment("billingAccounts")
-    @key
-    billingAccountName: string;
-  },
-  {},
-  {
-    /** The ID that uniquely identifies a customer. */
-    @path
-    @segment("customers")
-    @key
-    customerName: string;
-  }
->;
-
+// TODO: @removed() to deprecate billing account scope operations. 2026 GA. Excluding Products.
 @armResourceOperations(#{ omitTags: true })
 interface CustomerOperationGroup {
   /**
    * Gets a customer by its ID at billing account level. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Customer")
   getByBillingAccount is CustomerOperationGroupOps.Read<Customer>;
 
   /**
    * Lists the customers that are billed to a billing account. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Customer")
   listByBillingAccount is CustomerOperationGroupOps.List<
     Customer,
     Parameters = {
-      /**
-       * May be used to expand enabledAzurePlans and resellers
-       */
-      @query("expand")
-      expand?: string;
-
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
+      ...CustomersListParametersWithExpand;
     },
     Response = ArmResponse<CustomerListResult>
   >;
@@ -505,8 +221,6 @@ interface CustomerOperationGroup {
   /**
    * Lists the billing permissions the caller has for a customer at billing account level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingPermission")
   @list
   @get
@@ -520,25 +234,20 @@ interface CustomerOperationGroup {
   /**
    * Lists the subscriptions for a customer at billing account level. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingSubscription")
   @list
   @get
   @action("billingSubscriptions")
-  billingSubscriptionsListByCustomerAtBillingAccount is CustomerOperationGroupNoPatternOps.ActionSync<
+  billingSubscriptionsListByCustomerAtBillingAccount is CustomerOperationGroupOps.ActionSync<
     Customer,
     void,
     ArmResponse<BillingSubscriptionListResult>,
-    Parameters = BillingSubscriptionsListByCustomerAtBillingAccountParameters
+    Parameters = BillingSubscriptionsListParameters
   >;
 
   /**
    * Lists the products for a customer. These don't include products billed based on usage.The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("Product")
   @list
   @get
@@ -548,41 +257,7 @@ interface CustomerOperationGroup {
     void,
     ArmResponse<ProductListResult>,
     Parameters = {
-      /**
-       * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-       */
-      @query("filter")
-      filter?: string;
-
-      /**
-       * The orderby query option allows clients to request resources in a particular order.
-       */
-      @query("orderBy")
-      orderBy?: string;
-
-      /**
-       * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-       */
-      @query("top")
-      top?: int64;
-
-      /**
-       * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-       */
-      @query("skip")
-      skip?: int64;
-
-      /**
-       * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-       */
-      @query("count")
-      count?: boolean;
-
-      /**
-       * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-       */
-      @query("search")
-      search?: string;
+      ...DefaultODataParameters;
     }
   >;
 }
@@ -601,7 +276,7 @@ alias BillingRoleAssignmentsResolveByCustomerParameters = {
   filter?: string;
 };
 
-alias BillingSubscriptionsListByCustomerParameters = {
+alias BillingSubscriptionsListParameters = {
   /**
    * Can be used to get deleted billing subscriptions.
    */
@@ -614,91 +289,26 @@ alias BillingSubscriptionsListByCustomerParameters = {
   @query("expand")
   expand?: string;
 
-  /**
-   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-   */
-  @query("filter")
-  filter?: string;
-
-  /**
-   * The orderby query option allows clients to request resources in a particular order.
-   */
-  @query("orderBy")
-  orderBy?: string;
-
-  /**
-   * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-   */
-  @query("top")
-  top?: int64;
-
-  /**
-   * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-   */
-  @query("skip")
-  skip?: int64;
-
-  /**
-   * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-   */
-  @query("count")
-  count?: boolean;
-
-  /**
-   * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-   */
-  @query("search")
-  search?: string;
+  ...DefaultODataParameters;
 };
 
-alias BillingSubscriptionsListByCustomerAtBillingAccountParameters = {
+alias CustomersListParametersWithExpand = {
   /**
-   * Can be used to get deleted billing subscriptions.
-   */
-  @query("includeDeleted")
-  includeDeleted?: boolean = false;
-
-  /**
-   * Can be used to expand `Reseller`, `ConsumptionCostCenter`, `LastMonthCharges` and `MonthToDateCharges`
+   * May be used to expand enabledAzurePlans and resellers
    */
   @query("expand")
   expand?: string;
 
-  /**
-   * The filter query option allows clients to filter a collection of resources that are addressed by a request URL.
-   */
-  @query("filter")
-  filter?: string;
+  ...DefaultODataParameters;
+};
 
-  /**
-   * The orderby query option allows clients to request resources in a particular order.
-   */
-  @query("orderBy")
-  orderBy?: string;
-
-  /**
-   * The top query option requests the number of items in the queried collection to be included in the result. The maximum supported value for top is 50.
-   */
-  @query("top")
-  top?: int64;
-
-  /**
-   * The skip query option requests the number of items in the queried collection that are to be skipped and not included in the result.
-   */
-  @query("skip")
-  skip?: int64;
-
-  /**
-   * The count query option allows clients to request a count of the matching resources included with the resources in the response.
-   */
-  @query("count")
-  count?: boolean;
-
-  /**
-   * The search query option allows clients to request items within a collection matching a free-text search expression. search is only supported for string fields.
-   */
-  @query("search")
-  search?: string;
+alias CustomerNameParameter = {
+  /** The ID that uniquely identifies a customer. */
+  @path
+  @segment("customers")
+  @key
+  @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
+  customerName: string;
 };
 
 @@doc(Customer.name, "The ID that uniquely identifies a customer.");
@@ -710,8 +320,4 @@ alias BillingSubscriptionsListByCustomerAtBillingAccountParameters = {
 @@doc(
   Customers.createByCustomer::parameters.body,
   "The properties of the billing role assignment."
-);
-@@doc(
-  Customers.createOrUpdateByCustomer::parameters.body,
-  "A policy at customer scope."
 );

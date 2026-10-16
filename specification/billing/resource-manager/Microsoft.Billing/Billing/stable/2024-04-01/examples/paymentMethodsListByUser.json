@@ -1,21 +1,19 @@
 {
   "parameters": {
-    "api-version": "2024-04-01"
+    "api-version": "2024-04-01",
+    "filter": "offlineRecurring eq true and userManaged eq true"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "ABCDABCDABC0",
-            "type": "Microsoft.Billing/paymentMethods",
-            "id": "/providers/Microsoft.Billing/paymentMethods/ABCDABCDABC0",
+            "id": "/providers/Microsoft.Billing/paymentMethods/ABC123AAAAAFAACA",
+            "name": "ABC123AAAAAFAACA",
             "properties": {
-              "accountHolderName": "abc",
-              "displayName": "Master Card",
-              "expiration": "1/2035",
               "family": "CreditCard",
-              "lastFourDigits": "1270",
+              "paymentMethodType": "mc",
+              "displayName": "Master Card",
               "logos": [
                 {
                   "mimeType": "image/png",
@@ -26,20 +24,20 @@
                   "url": "https://contoso.com/staticresourceservice/images/v4/logo_mc.svg"
                 }
               ],
-              "paymentMethodType": "mc",
-              "status": "active"
-            }
+              "status": "active",
+              "accountHolderName": "abc",
+              "lastFourDigits": "1270",
+              "expiration": "1/2025"
+            },
+            "type": "Microsoft.Billing/paymentMethods"
           },
           {
-            "name": "ABCDABCDABC1",
-            "type": "Microsoft.Billing/paymentMethods",
             "id": "/providers/Microsoft.Billing/paymentMethods/ABCDABCDABC1",
+            "name": "ABCDABCDABC1",
             "properties": {
-              "accountHolderName": "abc",
-              "displayName": "Visa",
-              "expiration": "1/2025",
               "family": "CreditCard",
-              "lastFourDigits": "7373",
+              "paymentMethodType": "visa",
+              "displayName": "Visa",
               "logos": [
                 {
                   "mimeType": "image/png",
@@ -50,14 +48,17 @@
                   "url": "https://contoso.com/staticresourceservice/images/v4/logo_visa.svg"
                 }
               ],
-              "paymentMethodType": "visa",
-              "status": "active"
-            }
+              "status": "active",
+              "accountHolderName": "abc",
+              "lastFourDigits": "7373",
+              "expiration": "1/2025"
+            },
+            "type": "Microsoft.Billing/paymentMethods"
           }
         ]
       }
     }
   },
   "operationId": "PaymentMethods_ListByUser",
-  "title": "ListPaymentMethodOwnedByUser"
+  "title": "PaymentMethodsListByUser"
 }

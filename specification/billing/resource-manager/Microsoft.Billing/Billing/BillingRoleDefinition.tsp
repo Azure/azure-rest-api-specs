@@ -1,14 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
 import "./models.tsp";
 import "./BillingProfile.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Billing;
 /**
@@ -22,14 +19,14 @@ model BillingRoleDefinition
     Resource = BillingRoleDefinition,
     KeyName = "roleDefinitionName",
     SegmentName = "billingRoleDefinitions",
-    NamePattern = "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+    NamePattern = GuidPattern
   >;
 
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
   tags?: Record<string>;
 }
 
@@ -47,14 +44,14 @@ alias BillingRoleDefinitionOps = Azure.ResourceManager.Legacy.ExtensionOperation
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
 
     /** The ID that uniquely identifies a billing profile. */
     @path
     @segment("billingProfiles")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     billingProfileName: string;
   },
   {},
@@ -63,7 +60,7 @@ alias BillingRoleDefinitionOps = Azure.ResourceManager.Legacy.ExtensionOperation
     @path
     @segment("billingRoleDefinitions")
     @key
-    @pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
+    @pattern(GuidPattern)
     roleDefinitionName: string;
   },
   "BillingProfileRoleDefinition"
@@ -74,16 +71,12 @@ interface BillingRoleDefinitions {
   /**
    * Gets the definition for a role on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   getByBillingProfile is BillingRoleDefinitionOps.Read<BillingRoleDefinition>;
 
   /**
    * Lists the role definitions for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   listByBillingProfile is BillingRoleDefinitionOps.List<
     BillingRoleDefinition,
@@ -104,21 +97,21 @@ alias BillingRoleDefinitionByCustomerOps = Azure.ResourceManager.Legacy.Extensio
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
 
     /** The ID that uniquely identifies a billing profile. */
     @path
     @segment("billingProfiles")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     billingProfileName: string;
 
     /** The ID that uniquely identifies a customer. */
     @path
     @segment("customers")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     customerName: string;
   },
   {},
@@ -127,7 +120,7 @@ alias BillingRoleDefinitionByCustomerOps = Azure.ResourceManager.Legacy.Extensio
     @path
     @segment("billingRoleDefinitions")
     @key
-    @pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
+    @pattern(GuidPattern)
     roleDefinitionName: string;
   },
   "BillingCustomerRoleDefinition"
@@ -138,16 +131,12 @@ interface BillingRoleDefinitionByCustomer {
   /**
    * Gets the definition for a role on a customer. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   getByCustomer is BillingRoleDefinitionByCustomerOps.Read<BillingRoleDefinition>;
 
   /**
    * Lists the role definitions for a customer. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   listByCustomer is BillingRoleDefinitionByCustomerOps.List<
     BillingRoleDefinition,
@@ -168,21 +157,21 @@ alias BillingRoleDefinitionByInvoiceSectionOps = Azure.ResourceManager.Legacy.Ex
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
 
     /** The ID that uniquely identifies a billing profile. */
     @path
     @segment("billingProfiles")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     billingProfileName: string;
 
     /** The ID that uniquely identifies an invoice section. */
     @path
     @segment("invoiceSections")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     invoiceSectionName: string;
   },
   {},
@@ -191,7 +180,7 @@ alias BillingRoleDefinitionByInvoiceSectionOps = Azure.ResourceManager.Legacy.Ex
     @path
     @segment("billingRoleDefinitions")
     @key
-    @pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
+    @pattern(GuidPattern)
     roleDefinitionName: string;
   },
   "BillingInvoiceSectionRoleDefinition"
@@ -202,16 +191,12 @@ interface BillingRoleDefinitionByInvoiceSection {
   /**
    * Gets the definition for a role on an invoice section. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   getByInvoiceSection is BillingRoleDefinitionByInvoiceSectionOps.Read<BillingRoleDefinition>;
 
   /**
    * Lists the role definitions for an invoice section. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   listByInvoiceSection is BillingRoleDefinitionByInvoiceSectionOps.List<
     BillingRoleDefinition,
@@ -232,7 +217,7 @@ alias BillingRoleDefinitionByBillingAccountOps = Azure.ResourceManager.Legacy.Ex
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
   },
   {},
@@ -241,7 +226,7 @@ alias BillingRoleDefinitionByBillingAccountOps = Azure.ResourceManager.Legacy.Ex
     @path
     @segment("billingRoleDefinitions")
     @key
-    @pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
+    @pattern(GuidPattern)
     roleDefinitionName: string;
   },
   "BillingRoleDefinition"
@@ -252,16 +237,12 @@ interface BillingRoleDefinitionByBillingAccount {
   /**
    * Gets the definition for a role on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   getByBillingAccount is BillingRoleDefinitionByBillingAccountOps.Read<BillingRoleDefinition>;
 
   /**
    * Lists the role definitions for a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   listByBillingAccount is BillingRoleDefinitionByBillingAccountOps.List<
     BillingRoleDefinition,
@@ -282,14 +263,14 @@ alias BillingRoleDefinitionByDepartmentOps = Azure.ResourceManager.Legacy.Extens
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
 
     /** The name of the department. */
     @path
     @segment("departments")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     departmentName: string;
   },
   {},
@@ -298,7 +279,7 @@ alias BillingRoleDefinitionByDepartmentOps = Azure.ResourceManager.Legacy.Extens
     @path
     @segment("billingRoleDefinitions")
     @key
-    @pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
+    @pattern(GuidPattern)
     roleDefinitionName: string;
   },
   "BillingDepartmentRoleDefinition"
@@ -309,16 +290,12 @@ interface BillingRoleDefinitionByDepartment {
   /**
    * Gets the definition for a role on a department. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   getByDepartment is BillingRoleDefinitionByDepartmentOps.Read<BillingRoleDefinition>;
 
   /**
    * List the definition for a department. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   listByDepartment is BillingRoleDefinitionByDepartmentOps.List<
     BillingRoleDefinition,
@@ -339,14 +316,14 @@ alias BillingRoleDefinitionByEnrollmentAccountOps = Azure.ResourceManager.Legacy
     @path
     @segment("billingAccounts")
     @key
-    @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
+    @pattern(BillingAccountNamePattern)
     billingAccountName: string;
 
     /** The name of the enrollment account. */
     @path
     @segment("enrollmentAccounts")
     @key
-    @pattern("^[a-zA-Z\\d-_]{1,128}$")
+    @pattern(BillingProfileCustomerInvoiceSectionNamePattern)
     enrollmentAccountName: string;
   },
   {},
@@ -355,7 +332,7 @@ alias BillingRoleDefinitionByEnrollmentAccountOps = Azure.ResourceManager.Legacy
     @path
     @segment("billingRoleDefinitions")
     @key
-    @pattern("^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$")
+    @pattern(GuidPattern)
     roleDefinitionName: string;
   },
   "BillingEnrollmentAccountRoleDefinition"
@@ -366,16 +343,12 @@ interface BillingRoleDefinitionByEnrollmentAccount {
   /**
    * Gets the definition for a role on an enrollment account. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   getByEnrollmentAccount is BillingRoleDefinitionByEnrollmentAccountOps.Read<BillingRoleDefinition>;
 
   /**
    * List the definition for an enrollment account. The operation is supported for billing accounts with agreement type Enterprise Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingRoleDefinition")
   listByEnrollmentAccount is BillingRoleDefinitionByEnrollmentAccountOps.List<
     BillingRoleDefinition,

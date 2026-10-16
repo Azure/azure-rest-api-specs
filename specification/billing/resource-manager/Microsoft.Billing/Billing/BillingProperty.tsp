@@ -1,13 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Billing;
 /**
@@ -27,8 +25,8 @@ model BillingProperty
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing documentation to provide tags like this. Same type as types.tsp/TrackedResource."
   tags?: Record<string>;
 }
 
@@ -37,8 +35,6 @@ interface BillingProperties {
   /**
    * Gets the billing properties for a subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingProperty")
   get is ArmResourceRead<
     BillingProperty,
@@ -49,8 +45,6 @@ interface BillingProperties {
   /**
    * Updates the billing property of a subscription. Currently, cost center can be updated for billing accounts with agreement type Microsoft Customer Agreement and subscription service usage address can be updated for billing accounts with agreement type Microsoft Online Service Program.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("BillingProperty")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -72,6 +66,20 @@ alias BillingPropertyGetParameters = {
    */
   @query("includeTransitionStatus")
   includeTransitionStatus?: boolean = false;
+
+  /**
+   * A flag that specifies whether or not to include payment instrument.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @query("includePaymentInstrument")
+  includePaymentInstrument?: boolean = false;
+
+  /**
+   * A flag that specifies whether or not to include soldTo address.
+   */
+  @added(Versions.v2024_08_01_preview)
+  @query("includeAddress")
+  includeAddress?: boolean = false;
 };
 
 @@doc(BillingProperty.name, "");
