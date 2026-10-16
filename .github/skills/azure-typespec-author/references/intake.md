@@ -4,39 +4,54 @@
 
 ## 2.1 General Intake (All Cases)
 
-Ground the complete request with Agentic Search before deciding what additional
-information to collect:
+Classify coverage and ground the request in priority order before deciding what
+additional information to collect:
 
 1. Read the installed
    [reference-document-links.md](reference-document-links.md). If that read fails,
    retry the installed skill path. If local access remains unavailable, recover the
    canonical repository copy through an available repository-file reader.
-2. Run [agentic search](agentic-search.md) for the complete request. Start with
-   matching catalog URLs where available. If the catalog is unavailable or does not
-   fully cover the request, locate additional authoritative TypeSpec or Azure
-   documentation through Agentic Search. Catalog access failure is not a blocker.
-3. Do not call `azsdk_typespec_retrieve_knowledge` or
-   `azsdk_typespec_generate_authoring_plan` during intake or planning. Retain the
-   fetched Web guidance for Step 3; the authoring-plan step must reuse it without
-   another knowledge call.
-4. Use the fetched guidance to determine the material intake decisions and retain it
+2. Classify the complete request:
+   - **Covered** — the catalog covers every material authoring topic.
+   - **Uncovered** — one or more material authoring topics are absent from the
+     catalog. A partially covered request is classified as uncovered for its complete
+     knowledge route.
+3. Run [agentic search](agentic-search.md) first for the complete request:
+   - **Covered** — Agentic Search is the only knowledge route.
+   - **Uncovered** — use Agentic Search to locate additional authoritative TypeSpec
+     or Azure documentation beyond the catalog.
+   - **Catalog unavailable** — use Agentic Search to locate authoritative TypeSpec
+     or Azure documentation directly. Catalog access failure is not a blocker and
+     does not by itself select retrieval.
+4. Use retrieval only as an ordered fallback:
+   - If Agentic Search obtains sufficient authoritative guidance, retain its fetched
+     content and do not call retrieval.
+   - If an **uncovered** request remains insufficiently grounded after Agentic Search,
+     call `azsdk_typespec_retrieve_knowledge` once for the complete request when it is
+     exposed.
+   - Never call retrieval before Agentic Search. Once retrieval fallback starts, do
+     not return to Web or call an authoring-plan MCP.
+   - If retrieval is not exposed or also cannot supply sufficient guidance, report a
+     blocker instead of making ungrounded edits.
+5. Retain the final grounding for Step 3; the authoring-plan step must reuse it
+   without another knowledge call.
+6. Use the fetched guidance to determine the material intake decisions and retain it
    for the authoring plan.
-5. Using the Web guidance, the Step 1 result, and the user's request, identify
+7. Using the selected guidance, the Step 1 result, and the user's request, identify
    every matching case from the table below.
-6. Gather only material information that is not already supplied or directly
+8. Gather only material information that is not already supplied or directly
    available from the project. If no case matches, skip Step 2.2.
 
-Do not call a knowledge, authoring-plan, or validation MCP tool during intake. If
-Agentic Search cannot obtain sufficient authoritative guidance, report a blocker.
-Do not plan, edit, or validate during intake. Step 3 must reuse this grounding
-record without repeating Agentic Search.
+Do not call an authoring-plan or validation MCP tool during intake. Do not plan,
+edit, or validate during intake. Step 3 must reuse this grounding record without
+repeating Agentic Search or retrieval.
 
-| Case | Name                    | Description                                            | Service Type     |
-| ---- | ----------------------- | ------------------------------------------------------ | ---------------- |
-| 1    | ARM Resource Types      | Define a new ARM resource with operations              | ARM              |
-| 2    | ARM Resource Operations | Add CRUD or custom actions on an existing resource     | ARM              |
-| 3    | API Versioning          | Add, bump, or promote an API version (preview/stable)  | ARM / Data-plane |
-| 4    | Data-Plane Operations   | Add CRUD or custom operations on a data-plane resource | Data-plane       |
+| Case | Name                    | Description                                            | Service Type     | Knowledge route          |
+| ---- | ----------------------- | ------------------------------------------------------ | ---------------- | ------------------------ |
+| 1    | ARM Resource Types      | Define a new ARM resource with operations              | ARM              | Covered — Agentic Search |
+| 2    | ARM Resource Operations | Add CRUD or custom actions on an existing resource     | ARM              | Covered — Agentic Search |
+| 3    | API Versioning          | Add, bump, or promote an API version (preview/stable)  | ARM / Data-plane | Covered — Agentic Search |
+| 4    | Data-Plane Operations   | Add CRUD or custom operations on a data-plane resource | Data-plane       | Covered — Agentic Search |
 
 ---
 

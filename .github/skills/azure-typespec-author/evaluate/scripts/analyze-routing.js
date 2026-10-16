@@ -74,6 +74,8 @@ export function analyzeEvents(allEvents, trial = "unknown") {
   const firstSource = starts.find(({ event }) =>
     [TOOL_NAMES.web, TOOL_NAMES.retrieval].includes(event.data?.toolName),
   );
+  const firstWeb = starts.find(({ event }) => event.data?.toolName === TOOL_NAMES.web);
+  const firstRetrieval = starts.find(({ event }) => event.data?.toolName === TOOL_NAMES.retrieval);
   const firstSuccessfulGrounding = starts.find(
     ({ event }) =>
       [TOOL_NAMES.web, TOOL_NAMES.retrieval].includes(event.data?.toolName) &&
@@ -105,7 +107,12 @@ export function analyzeEvents(allEvents, trial = "unknown") {
       Boolean(firstCatalogAttempt) &&
       Boolean(firstSource) &&
       completionIndex(firstCatalogAttempt) < firstSource.index,
-    sourceExclusive: web > 0 && retrieval === 0,
+    sourceExclusive: !(web > 0 && retrieval > 0),
+    agenticBeforeRetrieval:
+      retrieval === 0 ||
+      (Boolean(firstWeb) &&
+        Boolean(firstRetrieval) &&
+        completionIndex(firstWeb) < firstRetrieval.index),
     approvedKnowledgeRoute: web > 0 && retrieval === 0 && planner === 0,
     groundingBeforeMutation:
       Boolean(firstSuccessfulGrounding) &&
@@ -149,10 +156,12 @@ export function summarize(trials) {
       (trial) => !trial.catalogAccessAttempted || !trial.catalogBeforeSource,
     ).length,
     sourceExclusivityViolations: trials.filter((trial) => !trial.sourceExclusive).length,
+    agenticPriorityViolations: trials.filter((trial) => !trial.agenticBeforeRetrieval).length,
     orderingViolations: trials.filter(
       (trial) =>
         !trial.catalogAccessAttempted ||
         !trial.catalogBeforeSource ||
+        !trial.agenticBeforeRetrieval ||
         !trial.sourceExclusive ||
         !trial.approvedKnowledgeRoute ||
         trial.planner > 0 ||
