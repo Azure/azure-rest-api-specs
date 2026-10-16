@@ -15,6 +15,11 @@ namespace Azure.AI.Projects {
     a2a_preview: "a2a_preview",
     bing_custom_search_preview: "bing_custom_search_preview",
     browser_automation_preview: "browser_automation_preview",
+
+    @added(Versions.PuPr)
+    @removed(Versions.v1)
+    cloud_computer_use_preview: "cloud_computer_use_preview",
+
     fabric_dataagent_preview: "fabric_dataagent_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
     memory_search_preview: "memory_search_preview",
@@ -518,6 +523,19 @@ namespace Azure.AI.Projects {
      * The Browser Automation Tool parameters.
      */
     browser_automation_preview: BrowserAutomationToolParameters;
+  }
+
+  /**
+   * The input definition information for a cloud computer use tool, as used to configure an agent.
+   */
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
+  @extension("x-ms-foundry-meta", PreviewTool)
+  model CloudComputerUsePreviewTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always `cloud_computer_use_preview`.
+     */
+    type: "cloud_computer_use_preview";
   }
 
   /**
