@@ -2911,13 +2911,13 @@
         },
         "storageUrl": {
           "type": "string",
-          "description": "The URL for the application package in Azure Storage.",
+          "description": "The URL for the application package in Azure Storage. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated for API versions newer than 2025-06-01.",
           "readOnly": true
         },
         "storageUrlExpiry": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC time at which the Azure Storage URL will expire.",
+          "description": "The UTC time at which the Azure Storage URL will expire. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated for API versions newer than 2025-06-01.",
           "readOnly": true
         },
         "lastActivationTime": {
@@ -6355,7 +6355,7 @@
       "properties": {
         "enableCrossZoneUpgrade": {
           "type": "boolean",
-          "description": "Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. If this field is not set, Azure Azure Batch will not set its default value. The value of enableCrossZoneUpgrade on the created VirtualMachineScaleSet will be decided by the default configurations on VirtualMachineScaleSet. This field is able to be set to true or false only when using NodePlacementConfiguration as Zonal."
+          "description": "Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size. If this field is not set, Azure Azure Batch will not set its default value. The value of enableCrossZoneUpgrade on the created VirtualMachineScaleSet will be decided by the default configurations on VirtualMachineScaleSet. This field can be set to true or false only when nodePlacementConfiguration.policy is Zonal or placement.zonePlacementPolicy is Auto. Auto placement is supported starting with API version 2026-10-01."
         },
         "maxBatchInstancePercent": {
           "type": "integer",
