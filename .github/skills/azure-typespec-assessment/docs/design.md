@@ -2380,7 +2380,7 @@ row presentation as SDK method and SDK type cards:
   change;
 - when normalized structural comparison produces no changed contract row, the
   operation card omits the Before/After table and states `HTTP signature and
-represented payload contract unchanged.` even if upstream version-specific
+  represented payload contract unchanged.` even if upstream version-specific
   reference metadata populated `changedAspects`; and
 - REST breaking cards continue grouping rows by stable REST contract identity,
   while Semantic operation cards group the applicable rows under each

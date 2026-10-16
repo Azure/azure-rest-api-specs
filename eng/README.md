@@ -263,8 +263,10 @@ unconfigured labels and alias migrations. It does not enumerate affected items.
 relevant changes on `main`, when repository label definitions change, and daily.
 The schedule also catches changes made by workflows using `GITHUB_TOKEN`, which
 do not trigger further label-event workflows. Manual runs default to dry-run.
-Mutating runs use the upstream default branch and are disabled on forks. PR
-validation never changes GitHub labels.
+Mutating runs use the default branch of `Azure/azure-rest-api-specs` or
+`Azure/azure-rest-api-specs-pr` and are disabled on forks. Each repository
+synchronizes labels from its own checked-in catalog. PR validation never changes
+GitHub labels.
 
 The `unconfiguredLabels: archive` policy creates/updates configured labels and
 archives labels absent from the catalog. This applies repository-wide, including
