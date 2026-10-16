@@ -20,7 +20,7 @@ using TypeSpec.Versioning;
     accountName: string,
 
     @doc("The cloud where the AI services account is located.")
-    cloud: Clouds = Clouds.Public,
+    cloud: AzureClouds = AzureClouds.Public,
 
     @doc("The Foundry project name, or _project for the default project.")
     projectName: string = "_project",
@@ -39,7 +39,7 @@ namespace Azure.AI.Projects {
     v1: "v1",
   }
   @doc("The clouds where Microsoft Foundry is available")
-  enum Clouds {
+  enum AzureClouds {
     @doc("The public Azure cloud.")
     Public: "services.ai.azure.com",
 

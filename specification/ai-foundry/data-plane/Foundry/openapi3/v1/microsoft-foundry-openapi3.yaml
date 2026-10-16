@@ -44453,6 +44453,12 @@ components:
         A data source that selects traces for evaluation.
 
         See [create an evaluation dataset from traces](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/traces-to-dataset?tabs=python).
+    AzureClouds:
+      type: string
+      enum:
+        - services.ai.azure.com
+        - services.ai.azure.us
+      description: The clouds where Microsoft Foundry is available
     AzureContentFilterBlocklistIdResult:
       type: object
       required:
@@ -45387,12 +45393,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - MemoryStores=V1Preview
-    Clouds:
-      type: string
-      enum:
-        - services.ai.azure.com
-        - services.ai.azure.us
-      description: The clouds where Microsoft Foundry is available
     ClusterInsightResult:
       type: object
       required:
