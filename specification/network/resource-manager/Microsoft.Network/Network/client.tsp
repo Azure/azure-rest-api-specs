@@ -6326,6 +6326,23 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 
+// Preserve the released C# names identifying this metadata as application-gateway-specific.
+@@clientName(
+  Microsoft.Network.ApplicationGatewaysOperationGroup.listAvailableRequestHeaders,
+  "GetAvailableRequestHeadersApplicationGateways",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaysOperationGroup.listAvailableResponseHeaders,
+  "GetAvailableResponseHeadersApplicationGateways",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaysOperationGroup.listAvailableServerVariables,
+  "GetAvailableServerVariablesApplicationGateways",
+  "csharp"
+);
+
 @@alternateType(
   Microsoft.Network.CheckDnsNameAvailability.checkDnsNameAvailability::parameters.location,
   Azure.Core.azureLocation,
