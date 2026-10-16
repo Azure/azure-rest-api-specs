@@ -21036,6 +21036,88 @@
         ]
       }
     },
+    "RaiAcsAgentShutdownInterventionPoint": {
+      "type": "object",
+      "description": "Agent-shutdown binding with the canonical summary target.",
+      "properties": {
+        "policy_target": {
+          "type": "string",
+          "description": "The canonical Agent Hooks snapshot path projected as the policy target.",
+          "enum": [
+            "$snap.summary"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "policyTarget"
+        },
+        "policy_target_kind": {
+          "type": "string",
+          "description": "The semantic kind of the projected policy target.",
+          "enum": [
+            "agent_summary"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "policyTargetKind"
+        },
+        "policy": {
+          "$ref": "#/definitions/RaiAcsPolicyBinding",
+          "description": "The logical policy evaluated at this intervention point."
+        },
+        "annotations": {
+          "$ref": "#/definitions/RaiAcsEmptyObject",
+          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
+        }
+      },
+      "required": [
+        "policy_target",
+        "policy_target_kind",
+        "policy"
+      ]
+    },
+    "RaiAcsAgentStartupInterventionPoint": {
+      "type": "object",
+      "description": "Agent-startup binding with the canonical initialization target.",
+      "properties": {
+        "policy_target": {
+          "type": "string",
+          "description": "The canonical Agent Hooks snapshot path projected as the policy target.",
+          "enum": [
+            "$snap.agent_init"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "policyTarget"
+        },
+        "policy_target_kind": {
+          "type": "string",
+          "description": "The semantic kind of the projected policy target.",
+          "enum": [
+            "agent_init"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "policyTargetKind"
+        },
+        "policy": {
+          "$ref": "#/definitions/RaiAcsPolicyBinding",
+          "description": "The logical policy evaluated at this intervention point."
+        },
+        "annotations": {
+          "$ref": "#/definitions/RaiAcsEmptyObject",
+          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
+        }
+      },
+      "required": [
+        "policy_target",
+        "policy_target_kind",
+        "policy"
+      ]
+    },
     "RaiAcsEmptyObject": {
       "type": "object",
       "description": "An object that must contain no properties."
@@ -21146,9 +21228,24 @@
       "type": "object",
       "description": "Intervention points supported by the Azure AI Content Safety Unified Moderate host profile.",
       "properties": {
+        "agent_startup": {
+          "$ref": "#/definitions/RaiAcsAgentStartupInterventionPoint",
+          "description": "The policy evaluated when the agent execution session starts.",
+          "x-ms-client-name": "agentStartup"
+        },
         "input": {
           "$ref": "#/definitions/RaiAcsInterventionPoint",
           "description": "The policy evaluated for user input."
+        },
+        "pre_model_call": {
+          "$ref": "#/definitions/RaiAcsPreModelCallInterventionPoint",
+          "description": "The policy evaluated before a model call.",
+          "x-ms-client-name": "preModelCall"
+        },
+        "post_model_call": {
+          "$ref": "#/definitions/RaiAcsPostModelCallInterventionPoint",
+          "description": "The policy evaluated after a model call.",
+          "x-ms-client-name": "postModelCall"
         },
         "pre_tool_call": {
           "$ref": "#/definitions/RaiAcsToolInterventionPoint",
@@ -21163,6 +21260,11 @@
         "output": {
           "$ref": "#/definitions/RaiAcsInterventionPoint",
           "description": "The policy evaluated for final output."
+        },
+        "agent_shutdown": {
+          "$ref": "#/definitions/RaiAcsAgentShutdownInterventionPoint",
+          "description": "The policy evaluated when the agent execution session shuts down.",
+          "x-ms-client-name": "agentShutdown"
         }
       }
     },
@@ -21306,19 +21408,38 @@
       "type": "string",
       "description": "Canonical policy targets supported by the Azure AI Content Safety Unified Moderate host profile.",
       "enum": [
+        "$snap.agent_init",
         "$snap.input",
+        "$snap.messages",
+        "$snap.response",
         "$snap.output",
         "$snap.tool_call.args",
-        "$snap.tool_result.value"
+        "$snap.tool_result.value",
+        "$snap.summary"
       ],
       "x-ms-enum": {
         "name": "RaiAcsPolicyTarget",
         "modelAsString": true,
         "values": [
           {
+            "name": "AgentInitialization",
+            "value": "$snap.agent_init",
+            "description": "Selects the agent initialization payload."
+          },
+          {
             "name": "Input",
             "value": "$snap.input",
             "description": "Selects the incoming user input."
+          },
+          {
+            "name": "ModelMessages",
+            "value": "$snap.messages",
+            "description": "Selects the model messages proposed for dispatch."
+          },
+          {
+            "name": "ModelResponse",
+            "value": "$snap.response",
+            "description": "Selects the completed model response."
           },
           {
             "name": "Output",
@@ -21334,6 +21455,11 @@
             "name": "ToolResult",
             "value": "$snap.tool_result.value",
             "description": "Selects a tool result."
+          },
+          {
+            "name": "AgentSummary",
+            "value": "$snap.summary",
+            "description": "Selects the final agent execution summary."
           }
         ]
       }
@@ -21342,19 +21468,38 @@
       "type": "string",
       "description": "Canonical target kinds supported by the Azure AI Content Safety Unified Moderate host profile.",
       "enum": [
+        "agent_init",
         "user_input",
+        "messages",
+        "model_response",
         "assistant_output",
         "tool_args",
-        "tool_result"
+        "tool_result",
+        "agent_summary"
       ],
       "x-ms-enum": {
         "name": "RaiAcsPolicyTargetKind",
         "modelAsString": true,
         "values": [
           {
+            "name": "AgentInitialization",
+            "value": "agent_init",
+            "description": "The target contains agent initialization state."
+          },
+          {
             "name": "UserInput",
             "value": "user_input",
             "description": "The target contains user input."
+          },
+          {
+            "name": "ModelMessages",
+            "value": "messages",
+            "description": "The target contains model messages."
+          },
+          {
+            "name": "ModelResponse",
+            "value": "model_response",
+            "description": "The target contains a completed model response."
           },
           {
             "name": "AssistantOutput",
@@ -21370,9 +21515,96 @@
             "name": "ToolResult",
             "value": "tool_result",
             "description": "The target contains a tool result."
+          },
+          {
+            "name": "AgentSummary",
+            "value": "agent_summary",
+            "description": "The target contains the final agent execution summary."
           }
         ]
       }
+    },
+    "RaiAcsPostModelCallInterventionPoint": {
+      "type": "object",
+      "description": "Post-model binding with the canonical model-response target.",
+      "properties": {
+        "policy_target": {
+          "type": "string",
+          "description": "The canonical Agent Hooks snapshot path projected as the policy target.",
+          "enum": [
+            "$snap.response"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "policyTarget"
+        },
+        "policy_target_kind": {
+          "type": "string",
+          "description": "The semantic kind of the projected policy target.",
+          "enum": [
+            "model_response"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "policyTargetKind"
+        },
+        "policy": {
+          "$ref": "#/definitions/RaiAcsPolicyBinding",
+          "description": "The logical policy evaluated at this intervention point."
+        },
+        "annotations": {
+          "$ref": "#/definitions/RaiAcsEmptyObject",
+          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
+        }
+      },
+      "required": [
+        "policy_target",
+        "policy_target_kind",
+        "policy"
+      ]
+    },
+    "RaiAcsPreModelCallInterventionPoint": {
+      "type": "object",
+      "description": "Pre-model binding with the canonical messages target.",
+      "properties": {
+        "policy_target": {
+          "type": "string",
+          "description": "The canonical Agent Hooks snapshot path projected as the policy target.",
+          "enum": [
+            "$snap.messages"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "policyTarget"
+        },
+        "policy_target_kind": {
+          "type": "string",
+          "description": "The semantic kind of the projected policy target.",
+          "enum": [
+            "messages"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-client-name": "policyTargetKind"
+        },
+        "policy": {
+          "$ref": "#/definitions/RaiAcsPolicyBinding",
+          "description": "The logical policy evaluated at this intervention point."
+        },
+        "annotations": {
+          "$ref": "#/definitions/RaiAcsEmptyObject",
+          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
+        }
+      },
+      "required": [
+        "policy_target",
+        "policy_target_kind",
+        "policy"
+      ]
     },
     "RaiAcsRegoPolicyDefinition": {
       "type": "object",
@@ -22365,7 +22597,11 @@
         "PreToolCall",
         "PostToolCall",
         "PreRun",
-        "PostRun"
+        "PostRun",
+        "AgentStartup",
+        "PreModelCall",
+        "PostModelCall",
+        "AgentShutdown"
       ],
       "x-ms-enum": {
         "name": "RaiPolicyContentSource",
@@ -22394,6 +22630,26 @@
           {
             "name": "PostRun",
             "value": "PostRun"
+          },
+          {
+            "name": "AgentStartup",
+            "value": "AgentStartup",
+            "description": "Content evaluated when an agent execution session starts."
+          },
+          {
+            "name": "PreModelCall",
+            "value": "PreModelCall",
+            "description": "Content evaluated before a model call is made."
+          },
+          {
+            "name": "PostModelCall",
+            "value": "PostModelCall",
+            "description": "Content evaluated after a model call returns."
+          },
+          {
+            "name": "AgentShutdown",
+            "value": "AgentShutdown",
+            "description": "Content evaluated when an agent execution session shuts down."
           }
         ]
       }
