@@ -10107,6 +10107,24 @@
         "knowledgeSources"
       ]
     },
+    "KnowledgeBaseActivityCompletedStreamEvent": {
+      "type": "object",
+      "description": "Emitted when an individual retrieval activity completes.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord",
+          "description": "The completed activity record."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalStreamEvent"
+        }
+      ]
+    },
     "KnowledgeBaseActivityRecord": {
       "type": "object",
       "description": "Base type for activity records. Tracks execution details, timing, and errors for knowledge base operations.",
@@ -10274,6 +10292,24 @@
         "startedAt"
       ]
     },
+    "KnowledgeBaseActivityStartedStreamEvent": {
+      "type": "object",
+      "description": "Emitted when an individual retrieval activity starts.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/KnowledgeBaseActivityStartedEvent",
+          "description": "The activity-started payload."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalStreamEvent"
+        }
+      ]
+    },
     "KnowledgeBaseAgenticReasoningActivityRecord": {
       "type": "object",
       "description": "Represents an agentic reasoning activity record.",
@@ -10308,6 +10344,24 @@
       "required": [
         "messageIndex",
         "message"
+      ]
+    },
+    "KnowledgeBaseAnswerCompletedStreamEvent": {
+      "type": "object",
+      "description": "Emitted when an answer message is complete.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/KnowledgeBaseAnswerCompletedEvent",
+          "description": "The completed answer payload."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalStreamEvent"
+        }
       ]
     },
     "KnowledgeBaseAzureBlobActivityArguments": {
@@ -10445,6 +10499,24 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "KnowledgeBaseErrorStreamEvent": {
+      "type": "object",
+      "description": "Emitted when retrieval fails after the stream starts.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/KnowledgeBaseStreamErrorEvent",
+          "description": "The retrieval error payload."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalStreamEvent"
+        }
+      ]
     },
     "KnowledgeBaseFileActivityArguments": {
       "type": "object",
@@ -10999,6 +11071,27 @@
         ]
       }
     },
+    "KnowledgeBaseReferencesCompletedStreamEvent": {
+      "type": "object",
+      "description": "Emitted when the references used by the response are available.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The references used to produce the response.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeBaseReference"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalStreamEvent"
+        }
+      ]
+    },
     "KnowledgeBaseResponseCompletedEvent": {
       "type": "object",
       "description": "Emitted after retrieval completes successfully.",
@@ -11015,6 +11108,24 @@
       "required": [
         "statusCode",
         "response"
+      ]
+    },
+    "KnowledgeBaseResponseCompletedStreamEvent": {
+      "type": "object",
+      "description": "Emitted when retrieval completes successfully or with partial results.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/KnowledgeBaseResponseCompletedEvent",
+          "description": "The authoritative completed retrieval payload."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalStreamEvent"
+        }
       ]
     },
     "KnowledgeBaseRetrievalActivityRecord": {
@@ -11159,6 +11270,24 @@
         "reasoningEffort"
       ]
     },
+    "KnowledgeBaseRetrievalStartedStreamEvent": {
+      "type": "object",
+      "description": "Emitted after retrieval preflight validation completes.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalStartedEvent",
+          "description": "The retrieval-started payload."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalStreamEvent"
+        }
+      ]
+    },
     "KnowledgeBaseRetrievalStatusCode": {
       "type": "number",
       "description": "The semantic HTTP status of a completed streaming retrieval.",
@@ -11182,6 +11311,10 @@
           }
         ]
       }
+    },
+    "KnowledgeBaseRetrievalStreamEvent": {
+      "type": "object",
+      "description": "Common base for events emitted by a streaming knowledge base retrieval."
     },
     "KnowledgeBaseRetrievalStreamEvents": {},
     "KnowledgeBaseRetrievalSuccessResponse": {
