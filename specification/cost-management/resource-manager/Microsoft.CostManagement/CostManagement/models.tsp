@@ -1602,6 +1602,13 @@ model AllSavingsBenefitDetails {
   overageCost?: decimal;
 
   /**
+   * Remaining on-demand charges for each hour after applying this recommendation's commitmentAmount. Applicable only to Savings Plan recommendations. Values are in properties.currencyCode and align in length and chronological order with properties.usage.charges, with one entry per hour in properties.totalHours. Their sum equals this recommendation's overageCost, subject to monetary rounding. Returned only when properties/usage is expanded and the caller is allowed to view charges. For allRecommendationDetails.value, properties/allRecommendationDetails must also be expanded.
+   */
+  @added(Versions.v2026_08_01)
+  @visibility(Lifecycle.Read)
+  hourlyOverageCharges?: float64[];
+
+  /**
    * The estimated cost with benefit for the 'totalHours' in the look-back period. It's equal to (commitmentAmount * totalHours)
    */
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
