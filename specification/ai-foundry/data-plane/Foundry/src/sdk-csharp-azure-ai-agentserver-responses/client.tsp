@@ -636,12 +636,14 @@ namespace Azure.AI.Projects {
 // Stream event subtypes -> OpenAI.Responses.Streaming*Update.
 // OpenAI's StreamingResponseUpdate has a single `private protected` constructor, so no
 // external assembly can derive from it. Every emitted subtype must therefore be replaced
-// by its OpenAI counterpart; the six with no counterpart map to the base update type.
+// by its OpenAI counterpart. Never map a subtype to the base StreamingResponseUpdate: its
+// parent ResponseStreamEvent already maps there, so the generator would see the external
+// model as its own base type and loop forever walking the base chain.
 // ============================================================================
 @@alternateType(
   OpenAI.ResponseAudioDeltaEvent,
   {
-    identity: "OpenAI.Responses.StreamingResponseUpdate",
+    identity: "OpenAI.Responses.StreamingResponseAudioDeltaUpdate",
     package: "OpenAI",
     minVersion: "2.12.0",
   },
@@ -650,7 +652,7 @@ namespace Azure.AI.Projects {
 @@alternateType(
   OpenAI.ResponseAudioDoneEvent,
   {
-    identity: "OpenAI.Responses.StreamingResponseUpdate",
+    identity: "OpenAI.Responses.StreamingResponseAudioDoneUpdate",
     package: "OpenAI",
     minVersion: "2.12.0",
   },
@@ -659,7 +661,7 @@ namespace Azure.AI.Projects {
 @@alternateType(
   OpenAI.ResponseAudioTranscriptDeltaEvent,
   {
-    identity: "OpenAI.Responses.StreamingResponseUpdate",
+    identity: "OpenAI.Responses.StreamingResponseAudioTranscriptDeltaUpdate",
     package: "OpenAI",
     minVersion: "2.12.0",
   },
@@ -668,7 +670,7 @@ namespace Azure.AI.Projects {
 @@alternateType(
   OpenAI.ResponseAudioTranscriptDoneEvent,
   {
-    identity: "OpenAI.Responses.StreamingResponseUpdate",
+    identity: "OpenAI.Responses.StreamingResponseAudioTranscriptDoneUpdate",
     package: "OpenAI",
     minVersion: "2.12.0",
   },
@@ -758,7 +760,7 @@ namespace Azure.AI.Projects {
 @@alternateType(
   OpenAI.ResponseCustomToolCallInputDeltaEvent,
   {
-    identity: "OpenAI.Responses.StreamingResponseUpdate",
+    identity: "OpenAI.Responses.StreamingResponseCustomToolCallInputDeltaUpdate",
     package: "OpenAI",
     minVersion: "2.12.0",
   },
@@ -767,7 +769,7 @@ namespace Azure.AI.Projects {
 @@alternateType(
   OpenAI.ResponseCustomToolCallInputDoneEvent,
   {
-    identity: "OpenAI.Responses.StreamingResponseUpdate",
+    identity: "OpenAI.Responses.StreamingResponseCustomToolCallInputDoneUpdate",
     package: "OpenAI",
     minVersion: "2.12.0",
   },
