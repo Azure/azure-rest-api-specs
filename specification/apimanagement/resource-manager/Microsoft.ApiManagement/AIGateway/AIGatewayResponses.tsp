@@ -65,6 +65,7 @@ model AiGatewayCheckNameAvailabilityResponse {
 @added(Versions.v2026_10_01_preview)
 model AiGatewayToolServerOauth2LoginLinks {
   /** Gateway URL to open to begin consent; includes an expiring signed capability. */
+  @secret
   loginLink?: url;
 
   /** Gateway callback URI to register with the identity provider. */
