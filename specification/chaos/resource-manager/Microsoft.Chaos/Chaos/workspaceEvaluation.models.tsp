@@ -324,5 +324,5 @@ union WorkspaceEvaluationStatus {
 
 @@doc(
   WorkspaceEvaluation.name,
-  "The service-generated evaluation result ID. Use latest in the request path for the most recently durably admitted GA template evaluation; responses contain the canonical result ID."
+  "The stable service-generated evaluation result ID in hyphenated GUID form. Use latest in the request path for the most recently durably admitted GA template evaluation; responses contain the canonical result ID, not the protected polling identifier."
 );
