@@ -33,6 +33,14 @@ union EnclaveConnectionState {
 
   @doc("EnclaveConnectionState Type Disconnected")
   Disconnected: "Disconnected",
+
+  @added(Microsoft.Mission.Versions.v2026_05_01_preview)
+  @doc("A topology reconciliation is applying NSG rule changes for this connection.")
+  Reconciling: "Reconciling",
+
+  @added(Microsoft.Mission.Versions.v2026_05_01_preview)
+  @doc("Sticky health state after at least 3 consecutive non-full-success reconciliations.")
+  Degraded: "Degraded",
 }
 
 @doc("Enclave Connection Resource properties")

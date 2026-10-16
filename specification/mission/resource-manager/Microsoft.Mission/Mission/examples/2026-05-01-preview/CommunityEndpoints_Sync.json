@@ -1,0 +1,43 @@
+{
+  "operationId": "CommunityEndpoints_Sync",
+  "title": "CommunityEndpoints_Sync",
+  "parameters": {
+    "subscriptionId": "CA1CB369-DD26-4DB2-9D43-9AFEF0F22093",
+    "resourceGroupName": "rgopenapi",
+    "communityName": "TestMyCommunity",
+    "communityEndpointName": "TestMyCommunityEndpoint",
+    "api-version": "2026-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "Azure operation completed successfully.",
+      "body": {
+        "id": "/subscriptions/CA1CB369-DD26-4DB2-9D43-9AFEF0F22093/resourceGroups/rgopenapi/providers/Microsoft.Mission/communities/TestMyCommunity/communityEndpoints/TestMyCommunityEndpoint",
+        "name": "TestMyCommunityEndpoint",
+        "type": "Microsoft.Mission/communities/communityEndpoints",
+        "location": "westus",
+        "properties": {
+          "ruleCollection": [
+            {
+              "endpointRuleName": "rule1",
+              "destinationType": "FQDN",
+              "destination": "foo.example.com",
+              "ports": "443",
+              "protocols": [
+                "TCP"
+              ]
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "description": "Resource operation accepted.",
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/CA1CB369-DD26-4DB2-9D43-9AFEF0F22093/providers/Microsoft.Mission/locations/westus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-05-01-preview",
+        "Retry-After": 10
+      }
+    }
+  }
+}

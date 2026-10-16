@@ -1,0 +1,54 @@
+{
+  "title": "ServiceCatalog_ListByResourceGroup",
+  "operationId": "ServiceCatalog_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "subscriptionId": "CA1CB369-DD26-4DB2-9D43-9AFEF0F22093",
+    "resourceGroupName": "rgopenapi"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "services": [
+                {
+                  "serviceName": "MyServiceCatalog",
+                  "serviceUri": "https://testmyservicecatalog.westcentralus.mission.azure.com",
+                  "version": "1.0.0",
+                  "templateSpecId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/mrg-TestMyServiceCatalog-westcentralus/providers/Microsoft.Resources/templateSpecs/TestMyServiceCatalog",
+                  "templateSpecVersion": "2026-07-01-preview"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "managedResourceGroupName": "mrg-TestMyServiceCatalog-westcentralus",
+              "managedOnBehalfOfConfiguration": {
+                "moboBrokerResources": [
+                  {
+                    "id": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/mrg-TestMyServiceCatalog-westcentralus/providers/Microsoft.Resources/moboBrokers/bnthrkwfkfeorrzvtdxbfz"
+                  }
+                ]
+              }
+            },
+            "id": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/rgopenapi/providers/Microsoft.Mission/serviceCatalogs/TestMyServiceCatalog",
+            "name": "TestMyServiceCatalog",
+            "type": "Microsoft.Mission/serviceCatalogs",
+            "location": "westcentralus",
+            "tags": {
+              "sampletag": "samplevalue"
+            },
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2026-05-04T00:00:00.000Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-05-04T00:00:00.000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
