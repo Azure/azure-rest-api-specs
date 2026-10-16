@@ -6,12 +6,13 @@ For context on this directory, see [Design guidelines for spec repos validation 
 
 ## Spec Change Policies
 
-[Spec Change Policies](tools/spec-change-policies/) checks the existing TypeSpec
-Requirement policies for committed specification changes:
+[Spec Change Policies](tools/spec-change-policies/README.md) checks TypeSpec usage
+policies for committed PR changes. [TypeSpec Validation](tools/typespec-validation/README.md)
+continues to validate TypeSpec project correctness and SDK API-version pins.
 
-```bash
-node eng/tools/spec-change-policies/src/index.ts --base-commitish HEAD^ --head-commitish HEAD
-```
+The supported PR command is `pnpm spec-change-policies --base=<base> --head=<head>`.
+The former TypeSpec Requirement entry point and its `--check-all-under` audit
+mode are no longer available.
 
 The workflow temporarily also publishes **TypeSpec Requirement**, which passes
 only when **Spec Change Policies** succeeds. Keep the old check required during
