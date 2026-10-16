@@ -328,7 +328,7 @@ interface EdgeActionVersions {
   >;
 
   /** Swap the default version for the edge action. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Preserve the existing 204 no-content completion response."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Explicitly set content type for POST operations - expected by service"
   @added(Versions.`2026-10-01`)
   @sharedRoute
   @action("swapDefault")
