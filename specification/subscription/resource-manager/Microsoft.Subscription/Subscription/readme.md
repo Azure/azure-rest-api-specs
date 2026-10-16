@@ -54,7 +54,16 @@ These are the global settings for the Subscription API.
 
 ```yaml
 openapi-type: arm
-tag: package-preview-2025-11-01-preview
+tag: package-preview-2026-08-01-preview
+```
+
+### Tag: package-preview-2026-08-01-preview
+
+These settings apply only when `--tag=package-preview-2026-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-08-01-preview'
+input-file:
+  - preview/2026-08-01-preview/subscriptions.json
 ```
 
 ### Tag: package-preview-2025-11-01-preview
