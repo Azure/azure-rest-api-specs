@@ -181,7 +181,7 @@ model RuntimeScaling {
   minReplicas?: int32 = 1;
 
   /**
-   * The maximum number of replicas.
+   * The maximum number of replicas. Must not be less than `minReplicas`.
    */
   @minValue(1)
   @maxValue(100)
@@ -245,7 +245,11 @@ model RuntimeSecret {
    * secret from Key Vault. Applies when `keyVaultUri` is set. ContainerApps
    * runtimes do not support a system-assigned identity.
    */
-  identity?: string;
+  identity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 /**

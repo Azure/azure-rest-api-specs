@@ -517,7 +517,7 @@
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The runtime's managed identity. ContainerApps supports no identity or one user-assigned managed identity, but not a system-assigned or combined identity. BuiltIn supports a user-assigned or system-assigned managed identity.",
+          "description": "The runtime's managed identity. ContainerApps supports no identity or one user-assigned managed identity, but not a system-assigned or combined identity. BuiltIn supports no identity, one user-assigned managed identity, or a system-assigned managed identity, but not a combined identity. Multiple user-assigned runtime operation identities are not supported for either kind.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -580,7 +580,7 @@
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The runtime's managed identity. ContainerApps supports no identity or one user-assigned managed identity, but not a system-assigned or combined identity. BuiltIn supports a user-assigned or system-assigned managed identity."
+          "description": "The runtime's managed identity. ContainerApps supports no identity or one user-assigned managed identity, but not a system-assigned or combined identity. BuiltIn supports no identity, one user-assigned managed identity, or a system-assigned managed identity, but not a combined identity. Multiple user-assigned runtime operation identities are not supported for either kind."
         }
       }
     },
@@ -751,7 +751,7 @@
         "maxReplicas": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of replicas.",
+          "description": "The maximum number of replicas. Must not be less than `minReplicas`.",
           "default": 5,
           "minimum": 1,
           "maximum": 100
@@ -792,7 +792,15 @@
         },
         "identity": {
           "type": "string",
-          "description": "The resource ID of the user-assigned managed identity used to read the\nsecret from Key Vault. Applies when `keyVaultUri` is set. ContainerApps\nruntimes do not support a system-assigned identity."
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned managed identity used to read the\nsecret from Key Vault. Applies when `keyVaultUri` is set. ContainerApps\nruntimes do not support a system-assigned identity.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         }
       },
       "required": [

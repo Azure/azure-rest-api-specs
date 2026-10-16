@@ -32,7 +32,7 @@ model DeploymentExtensionRuntime
 
 @@doc(
   DeploymentExtensionRuntime.identity,
-  "The runtime's managed identity. ContainerApps supports no identity or one user-assigned managed identity, but not a system-assigned or combined identity. BuiltIn supports a user-assigned or system-assigned managed identity."
+  "The runtime's managed identity. ContainerApps supports no identity or one user-assigned managed identity, but not a system-assigned or combined identity. BuiltIn supports no identity, one user-assigned managed identity, or a system-assigned managed identity, but not a combined identity. Multiple user-assigned runtime operation identities are not supported for either kind."
 );
 
 /**
@@ -90,7 +90,7 @@ model DeploymentExtensionRuntimeUpdate {
 
 @@doc(
   DeploymentExtensionRuntimeUpdate.identity,
-  "The runtime's managed identity. ContainerApps supports no identity or one user-assigned managed identity, but not a system-assigned or combined identity. BuiltIn supports a user-assigned or system-assigned managed identity."
+  "The runtime's managed identity. ContainerApps supports no identity or one user-assigned managed identity, but not a system-assigned or combined identity. BuiltIn supports no identity, one user-assigned managed identity, or a system-assigned managed identity, but not a combined identity. Multiple user-assigned runtime operation identities are not supported for either kind."
 );
 
 @armResourceOperations
