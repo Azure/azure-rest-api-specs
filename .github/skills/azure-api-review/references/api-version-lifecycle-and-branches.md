@@ -28,9 +28,13 @@ in, so they apply even when the spec content itself is correct.
   behavior, and internal-only services.
 - [Feature Exposure Control (AFEC)][feature-exposure-control] (ARM Resource
   Provider docs). Read this for AFEC onboarding and implementation details.
+- [Supported GitHub repos/branches][supported-arm-branches] (ARM RPaaS
+  onboarding). Check this for supported ARM targets; do not assume that an
+  existing branch is a supported publication destination.
 
 [api-versions-and-branches]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-versions-and-branches
 [feature-exposure-control]: https://eng.ms/docs/products/arm/rp_onboarding/afec/featureexposurecontrol
+[supported-arm-branches]: https://eng.ms/docs/products/arm/rpaas/swaggeronboarding#supported-github-reposbranches
 
 ---
 
@@ -147,25 +151,92 @@ A folder named `2026-01-01-preview` under `stable/`, or `2026-01-01` under
 
 ## APIVER-STAGE-MISMATCH -- the stage claimed must match the placement
 
-When a pull request description, changelog, or version folder implies one
-lifecycle stage but the placement implies another, flag the mismatch rather than
-guessing which one is intended. State both signals so the author can correct the
-right one.
+When a pull request description, changelog, declared API-version value, or version
+folder implies one lifecycle stage but the placement implies another, flag the
+mismatch rather than guessing which one is intended. State both signals so the
+author can correct the right one.
 
 **Severity: Warning**, raised to **Blocking** when the mismatch would publish a
 private preview or an in-development version to the public repository.
+
+## ARM target repository and branch validation
+
+For **every ARM spec PR**, validate the target repository and branch before
+applying the lifecycle and folder checks. Use PR **base** metadata, not the
+author's fork or source branch. The following ARM-specific checks supplement,
+and do not change, the data-plane rules above.
+
+| Target repository               | Target branch          | Intended use                                                                |
+| ------------------------------- | ---------------------- | --------------------------------------------------------------------------- |
+| `Azure/azure-rest-api-specs`      | `main`                 | Publication of public preview and GA contracts                              |
+| `Azure/azure-rest-api-specs`      | `release-*`            | In-development work before publication, not private previews                 |
+| `Azure/azure-rest-api-specs-pr`   | `main`                 | Read-only mirror of public `main`; never a direct PR destination             |
+| `Azure/azure-rest-api-specs-pr`   | `RPSaaSMaster`          | ARM private-preview publication, with AFEC gating; not unreleased development |
+| `Azure/azure-rest-api-specs-pr`   | `RPSaaSDev`             | ARM development/testing, not customer-facing publication                     |
+| `Azure/azure-rest-api-specs-pr`   | `InternalARMContracts`  | Internal-only ARM contracts, not customer-facing public or private previews   |
+
+Consult the authoritative references for current support and exceptions. If
+they cannot be accessed, disclose that limitation rather than claiming to have
+verified the live branch list.
+
+- **APIVER-PRIVATE-MAIN (Blocking):** Reject direct PRs to private `main` even
+  when the folder and lifecycle otherwise match. Public preview/GA changes
+  belong in public `main` and reach private `main` through mirroring. For other
+  stages, recommend the corresponding supported private branch instead.
+- **APIVER-ARM-BRANCH (Blocking for a confirmed mismatch):** Flag use of
+  `RPSaaSMaster`, `RPSaaSDev`, or `InternalARMContracts` in the wrong repository
+  or for an incompatible lifecycle. In particular, development versions must
+  not target publication branches (`main` in public or `RPSaaSMaster` in
+  private); use public `release-*` or private `RPSaaSDev` as appropriate.
+  Internal-only contracts belong on private `InternalARMContracts`; a private
+  preview with customers is not an internal-only contract. Do not infer
+  internal-only status merely because the repository is private.
+- **APIVER-OBSOLETE-BRANCH (Warning / clarification):** Treat `dev-*` and
+  `ARMCoreRPDev` as obsolete targets, not supported alternatives. Ask the author
+  to confirm the intended lifecycle and move to a supported target from the
+  onboarding guidance; do not recommend creating or reviving these branches.
+- **APIVER-BRANCH-CLARIFY (Warning / clarification):** For any other target
+  repository/branch combination, post a clarifying comment asking which
+  supported onboarding workflow and lifecycle it serves. Do not silently
+  accept an unrecognized branch or invent a blocking policy violation.
+  Likewise, request missing base metadata or lifecycle evidence instead of
+  assuming `main` or guessing a destination.
+
+Do not reject legitimate private-to-public promotion or in-development work on
+public `release-*`. Do not flag unchanged historical versions merely because a
+PR also contains a version at a different lifecycle stage.
+
+### Required review comment
+
+Report these checks in `versioning-and-compatibility`. A repository/branch
+finding has no JSON property or meaningful source line: post it as a PR-level
+comment rather than fabricating a JSON path or inline location. Deduplicate
+findings that share the same cause.
+
+Include the observed **base repository and branch**, affected **version path/name**
+(and declared API-version value if different), lifecycle evidence, a linked rule
+ID, the **expected branch/lifecycle**, and a concise remediation (retarget or move
+the PR, correct the folder/suffix, or confirm the intended lifecycle). For unknown
+targets, state that the expected destination depends on the author's clarification
+and link the supported repos/branches guidance. Never claim a branch violation
+when only the source branch is known.
 
 ---
 
 ## Applying these rules
 
-Determine three things before flagging:
+Determine four things before flagging:
 
 1. **The repository** the pull request targets, public or private.
 2. **The branch** it targets. This is `base.ref` on the
    `pull_request_read(method: "get")` response.
 3. **The folder** the version sits in, `stable` or `preview`, and whether the
    folder name carries a `-preview` suffix.
+4. **The lifecycle evidence**, from the PR description, changed specifications,
+   or release documentation, including customer availability and feature gating.
+   Compare the version folder/name with the declared API-version value (for
+   OpenAPI, `info.version`); report discrepancies rather than silently choosing
+   one. A `-preview` suffix alone cannot distinguish private from public preview.
 
 Findings from this file belong to the `versioning-and-compatibility` category.
 
