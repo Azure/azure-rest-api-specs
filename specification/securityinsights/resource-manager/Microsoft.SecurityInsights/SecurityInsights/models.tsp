@@ -36,19 +36,19 @@ union AlertRuleKind {
   /**
    * MLBehaviorAnalytics
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   MLBehaviorAnalytics: "MLBehaviorAnalytics",
 
   /**
    * ThreatIntelligence
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   ThreatIntelligence: "ThreatIntelligence",
 
   /**
    * NRT
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   NRT: "NRT",
 }
 
@@ -164,7 +164,7 @@ union ActionType {
 /**
  * The kind of the billing statistic
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union BillingStatisticKind {
   string,
 
@@ -407,7 +407,7 @@ union EntityKindEnum {
   /**
    * Entity represents network interface in the system.
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   Nic: "Nic",
 }
 
@@ -608,7 +608,7 @@ union Kind {
   /**
    * Custom detections enable proactive monitoring and automated response actions for various events and system states across your tenant.
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   CustomDetection: "CustomDetection",
 }
 
@@ -632,7 +632,7 @@ union MetadataDependencyOperator {
 /**
  * Represents an operator in a ConditionClause.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union Operator {
   string,
 
@@ -808,7 +808,7 @@ union DataConnectorKind {
   /**
    * ThreatIntelligenceTaxii
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   ThreatIntelligenceTaxii: "ThreatIntelligenceTaxii",
 
   /**
@@ -819,31 +819,31 @@ union DataConnectorKind {
   /**
    * OfficeATP
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   OfficeATP: "OfficeATP",
 
   /**
    * OfficeIRM
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   OfficeIRM: "OfficeIRM",
 
   /**
    * Office365Project
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   Office365Project: "Office365Project",
 
   /**
    * MicrosoftPurviewInformationProtection
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   MicrosoftPurviewInformationProtection: "MicrosoftPurviewInformationProtection",
 
   /**
    * OfficePowerBI
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   OfficePowerBI: "OfficePowerBI",
 
   /**
@@ -854,7 +854,7 @@ union DataConnectorKind {
   /**
    * AmazonWebServicesS3
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   AmazonWebServicesS3: "AmazonWebServicesS3",
 
   /**
@@ -870,13 +870,13 @@ union DataConnectorKind {
   /**
    * Dynamics365
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   Dynamics365: "Dynamics365",
 
   /**
    * MicrosoftThreatProtection
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   MicrosoftThreatProtection: "MicrosoftThreatProtection",
 
   /**
@@ -892,25 +892,25 @@ union DataConnectorKind {
   /**
    * GenericUI
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   GenericUI: "GenericUI",
 
   /**
    * APIPolling
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   APIPolling: "APIPolling",
 
   /**
    * IOT
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   IOT: "IOT",
 
   /**
    * GCP
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   GCP: "GCP",
 
   /**
@@ -921,14 +921,20 @@ union DataConnectorKind {
   /**
    * PurviewAudit
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   PurviewAudit: "PurviewAudit",
+
+  /**
+   * Push
+   */
+  @added(Versions.v2026_07_01)
+  Push: "Push",
 }
 
 /**
  * The authentication kind used to poll the data
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union ConnectAuthKind {
   string,
 
@@ -951,7 +957,7 @@ union ConnectAuthKind {
 /**
  * Describes the state of user's authorization for a connector kind.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union DataConnectorAuthorizationState {
   string,
 
@@ -969,7 +975,7 @@ union DataConnectorAuthorizationState {
 /**
  * Describes the state of user's license for a connector kind.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union DataConnectorLicenseState {
   string,
 
@@ -990,7 +996,7 @@ union DataConnectorLicenseState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union EnrichmentType {
   string,
 
@@ -1003,7 +1009,7 @@ union EnrichmentType {
 /**
  * The entity query kind
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union EntityTimelineKind {
   string,
 
@@ -1029,7 +1035,7 @@ union EntityTimelineKind {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union EntityItemQueryKind {
   string,
 
@@ -1042,7 +1048,7 @@ union EntityItemQueryKind {
 /**
  * The kind of the entity query
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union EntityQueryKind {
   string,
 
@@ -1065,7 +1071,7 @@ union EntityQueryKind {
 /**
  * the query kind
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union GetInsightsError {
   string,
 
@@ -1076,7 +1082,7 @@ union GetInsightsError {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union EntityQueryTemplateKind {
   string,
 
@@ -1119,7 +1125,7 @@ union EntityQueryTemplateKind {
 /**
  * The kind of the entity query that supports put request.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union CustomEntityQueryKind {
   string,
 
@@ -1132,7 +1138,7 @@ union CustomEntityQueryKind {
 /**
  * Describes how to ingest the records in the file.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union IngestionMode {
   string,
 
@@ -1155,7 +1161,7 @@ union IngestionMode {
 /**
  * The content type of this file.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union FileImportContentType {
   string,
 
@@ -1178,7 +1184,7 @@ union FileImportContentType {
 /**
  * The format of the file
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union FileFormat {
   string,
 
@@ -1201,7 +1207,7 @@ union FileFormat {
 /**
  * Indicates whether the file was deleted from the storage account.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union DeleteStatus {
   string,
 
@@ -1224,7 +1230,7 @@ union DeleteStatus {
 /**
  * The state of the file import.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union FileImportState {
   string,
 
@@ -1267,7 +1273,7 @@ union FileImportState {
 /**
  * The status of the hunt.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union Status {
   string,
 
@@ -1315,7 +1321,7 @@ union Status {
 /**
  * The hypothesis status of the hunt.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union HypothesisStatus {
   string,
 
@@ -1672,7 +1678,7 @@ union PullRequestState {
 /**
  * State of recommendation.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union State {
   string,
 
@@ -1717,7 +1723,7 @@ union SecurityMLAnalyticsSettingsKind {
 /**
  * The kind of the setting
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union SettingKind {
   string,
 
@@ -1973,7 +1979,7 @@ union ThreatIntelligenceSortingOrder {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union TiType {
   string,
 
@@ -1986,7 +1992,7 @@ union TiType {
 /**
  * Represents boolean connectives used to join clauses in conditions.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union Connective {
   string,
 
@@ -2004,7 +2010,7 @@ union Connective {
 /**
  * The direction to sort the results by.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union SortingDirection {
   string,
 
@@ -2022,7 +2028,7 @@ union SortingDirection {
 /**
  * The kind of the TI object
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union TIObjectKind {
   string,
 
@@ -2124,7 +2130,7 @@ union JobProvisioningState {
 /**
  * The triggered analytics rule run provisioning state
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union ProvisioningState {
   string,
 
@@ -2174,7 +2180,7 @@ union SourceType {
 /**
  * The current mode of the workspace manager configuration
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union Mode {
   string,
 
@@ -2362,7 +2368,7 @@ union AlertProperty {
   /**
    * SubTechniques alert property
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   SubTechniques: "SubTechniques",
 }
 
@@ -2417,13 +2423,13 @@ union MicrosoftSecurityProductName {
   /**
    * Office 365 Advanced Threat Protection
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   `Office 365 Advanced Threat Protection`: "Office 365 Advanced Threat Protection",
 
   /**
    * Microsoft Defender Advanced Threat Protection
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   `Microsoft Defender Advanced Threat Protection`: "Microsoft Defender Advanced Threat Protection",
 }
 
@@ -2533,7 +2539,7 @@ union AutomationRulePropertyArrayConditionSupportedArrayType {
   /**
    * Evaluate the condition on the incident labels
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   IncidentLabels: "IncidentLabels",
 }
 
@@ -2696,13 +2702,13 @@ union AutomationRulePropertyConditionSupportedProperty {
   /**
    * The Custom-Detection rule ids associated with any of the incident alerts
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   IncidentCustomDetectionRuleIds: "IncidentCustomDetectionRuleIds",
 
   /**
    * The alert title associated with any of the incident alerts
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   IncidentAlertTitle: "IncidentAlertTitle",
 
   /**
@@ -2983,7 +2989,7 @@ union DataTypeState {
 /**
  * The available data providers.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union MtpProvider {
   string,
 
@@ -3058,6 +3064,12 @@ union CcpAuthType {
    * None
    */
   None: "None",
+
+  /**
+   * Push
+   */
+  @added(Versions.v2026_07_01)
+  Push: "Push",
 }
 
 /**
@@ -3132,7 +3144,7 @@ union RestApiPollerRequestPagingKind {
 /**
  * The polling frequency for the TAXII server.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union PollingFrequency {
   string,
 
@@ -3155,7 +3167,7 @@ union PollingFrequency {
 /**
  * type of connectivity
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union ConnectivityType {
   string,
 
@@ -3168,7 +3180,7 @@ union ConnectivityType {
 /**
  * Provider name
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union ProviderName {
   string,
 
@@ -3206,7 +3218,7 @@ union ProviderName {
 /**
  * Permission provider scope
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union PermissionProviderScope {
   string,
 
@@ -3229,7 +3241,7 @@ union PermissionProviderScope {
 /**
  * The kind of the setting
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union SettingType {
   string,
 
@@ -3252,7 +3264,7 @@ union SettingType {
 /**
  * The type of the entity
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union EntityType {
   string,
 
@@ -3370,7 +3382,7 @@ union EntityType {
 /**
  * Insights Column type.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union OutputType {
   string,
 
@@ -3415,7 +3427,7 @@ union SettingsStatus {
 /**
  * The entity provider that is synced.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union EntityProviders {
   string,
 
@@ -3433,7 +3445,7 @@ union EntityProviders {
 /**
  * The data source that enriched by ueba.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union UebaDataSources {
   string,
 
@@ -3493,7 +3505,7 @@ union FileHashAlgorithm {
 /**
  * Device importance, determines if the device classified as 'crown jewel'
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union DeviceImportance {
   string,
 
@@ -4106,7 +4118,7 @@ model ManualTriggerRequestBody {
 /**
  * List of all Microsoft Sentinel billing statistics.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model BillingStatisticList is Azure.Core.Page<BillingStatistic>;
 
 /**
@@ -4193,19 +4205,19 @@ model BookmarkProperties {
    * Describes the entity mappings of the bookmark
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   entityMappings?: BookmarkEntityMappings[];
 
   /**
    * A list of relevant mitre attacks
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   tactics?: AttackTactic[];
 
   /**
    * A list of relevant mitre techniques
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   techniques?: string[];
 }
 
@@ -4260,7 +4272,7 @@ model IncidentInfo {
 /**
  * Describes the entity mappings of a single entity
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model BookmarkEntityMappings {
   /**
    * The entity type
@@ -4277,7 +4289,7 @@ model BookmarkEntityMappings {
 /**
  * Map identifiers of a single entity
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityFieldMapping {
   /**
    * Alert V3 identifier
@@ -4327,7 +4339,7 @@ model RelationProperties {
 /**
  * The parameters required to execute an expand operation on the given bookmark.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model BookmarkExpandParameters {
   /**
    * The end date filter, so the only expansion results returned are before this date.
@@ -4350,7 +4362,7 @@ model BookmarkExpandParameters {
 /**
  * The entity expansion result operation response.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model BookmarkExpandResponse {
   /**
    * The metadata from the expansion operation results.
@@ -4366,7 +4378,7 @@ model BookmarkExpandResponse {
 /**
  * Expansion result metadata.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ExpansionResultsMetadata {
   /**
    * Information of the aggregated nodes in the expansion result.
@@ -4378,7 +4390,7 @@ model ExpansionResultsMetadata {
 /**
  * Information of a specific aggregation in the expansion result.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ExpansionResultAggregation {
   /**
    * The common type of the aggregation. (for e.g. entity field name)
@@ -4404,7 +4416,7 @@ model ExpansionResultAggregation {
 /**
  * The expansion result values.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model BookmarkExpandResponseValue {
   /**
    * Array of the expansion result entities.
@@ -4421,7 +4433,7 @@ model BookmarkExpandResponseValue {
 /**
  * Expansion result connected entities
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ConnectedEntity {
   /**
    * Entity Id of the connected entity
@@ -4932,7 +4944,7 @@ model DataConnectorList is Azure.Core.Page<DataConnector>;
 /**
  * Represents Codeless API Polling data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model DataConnectorConnectBody {
   /**
    * The authentication kind used to poll the data
@@ -4994,7 +5006,7 @@ model DataConnectorConnectBody {
  * Data connector requirements properties.
  */
 @discriminator("kind")
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model DataConnectorsCheckRequirements {
   /**
    * Describes the kind of connector to be checked.
@@ -5005,7 +5017,7 @@ model DataConnectorsCheckRequirements {
 /**
  * Data connector requirements status.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model DataConnectorRequirementsState {
   /**
    * Authorization state for this connector
@@ -5021,7 +5033,7 @@ model DataConnectorRequirementsState {
 /**
  * IP address (v4 or v6) to be enriched
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EnrichmentIpAddressBody {
   /**
    * The dotted-decimal or colon-separated string representation of the IP address
@@ -5034,7 +5046,7 @@ model EnrichmentIpAddressBody {
  * Geodata information for a given IP address
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EnrichmentIpGeodata {
   /**
    * The autonomous system number associated with this IP address
@@ -5133,7 +5145,7 @@ model EnrichmentIpGeodata {
 /**
  * Domain name to be enriched
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EnrichmentDomainBody {
   /**
    * The domain name
@@ -5144,7 +5156,7 @@ model EnrichmentDomainBody {
 /**
  * Whois information for a given domain and associated metadata
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EnrichmentDomainWhois {
   /**
    * The domain for this whois record
@@ -5183,7 +5195,7 @@ model EnrichmentDomainWhois {
 /**
  * The whois record for a given domain
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EnrichmentDomainWhoisDetails {
   /**
    * The registrar associated with this domain
@@ -5209,7 +5221,7 @@ model EnrichmentDomainWhoisDetails {
 /**
  * The registrar associated with this domain
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EnrichmentDomainWhoisRegistrarDetails {
   /**
    * The name of this registrar
@@ -5245,7 +5257,7 @@ model EnrichmentDomainWhoisRegistrarDetails {
 /**
  * The set of contacts associated with this domain
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EnrichmentDomainWhoisContacts {
   /**
    * The admin contact for this whois record
@@ -5271,7 +5283,7 @@ model EnrichmentDomainWhoisContacts {
 /**
  * An individual contact associated with this domain
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EnrichmentDomainWhoisContact {
   /**
    * The name of this contact
@@ -5327,13 +5339,13 @@ model EnrichmentDomainWhoisContact {
 /**
  * List of all the entities.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityList is Azure.Core.Page<Entity>;
 
 /**
  * The parameters required to execute an expand operation on the given entity.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityExpandParameters {
   /**
    * The end date filter, so the only expansion results returned are before this date.
@@ -5356,7 +5368,7 @@ model EntityExpandParameters {
 /**
  * The entity expansion result operation response.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityExpandResponse {
   /**
    * The metadata from the expansion operation results.
@@ -5372,7 +5384,7 @@ model EntityExpandResponse {
 /**
  * The expansion result values.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityExpandResponseValue {
   /**
    * Array of the expansion result entities.
@@ -5390,7 +5402,7 @@ model EntityExpandResponseValue {
 /**
  * The edge that connects the entity to the other entity.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityEdges {
   /**
    * The target entity Id.
@@ -5407,7 +5419,7 @@ model EntityEdges {
 /**
  * The parameters required to execute s timeline operation on the given entity.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityTimelineParameters {
   /**
    * Array of timeline Item kinds.
@@ -5436,7 +5448,7 @@ model EntityTimelineParameters {
  * The entity timeline result operation response.
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityTimelineResponse {
   /**
    * The metadata from the timeline operation results.
@@ -5454,7 +5466,7 @@ model EntityTimelineResponse {
 /**
  * Expansion result metadata.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TimelineResultsMetadata {
   /**
    * the total items found for the timeline request
@@ -5477,7 +5489,7 @@ model TimelineResultsMetadata {
 /**
  * timeline aggregation information per kind
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TimelineAggregation {
   /**
    * the total items found for a kind
@@ -5493,7 +5505,7 @@ model TimelineAggregation {
 /**
  * Timeline Query Errors.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TimelineError {
   /**
    * the query kind
@@ -5515,7 +5527,7 @@ model TimelineError {
  * Entity timeline Item.
  */
 @discriminator("kind")
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityTimelineItem {
   /**
    * The entity query kind type.
@@ -5527,7 +5539,7 @@ model EntityTimelineItem {
  * Retrieve queries for entity result operation response.
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model GetQueriesResponse {
   /**
    * The query result values.
@@ -5544,7 +5556,7 @@ model GetQueriesResponse {
  * An abstract Query item for entity
  */
 @discriminator("kind")
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityQueryItem {
   /**
    * Query Template ARM ID
@@ -5571,7 +5583,7 @@ model EntityQueryItem {
 /**
  * The parameters required to execute insights operation on the given entity.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityGetInsightsParameters {
   /**
    * The start timeline date, so the results returned are after this date.
@@ -5600,7 +5612,7 @@ model EntityGetInsightsParameters {
  * The Get Insights result operation response.
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityGetInsightsResponse {
   /**
    * The metadata from the get insights operation results.
@@ -5618,7 +5630,7 @@ model EntityGetInsightsResponse {
 /**
  * Get Insights result metadata.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model GetInsightsResultsMetadata {
   /**
    * the total items found for the insights request
@@ -5635,7 +5647,7 @@ model GetInsightsResultsMetadata {
 /**
  * GetInsights Query Errors.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model GetInsightsErrorKind {
   /**
    * the query kind
@@ -5656,7 +5668,7 @@ model GetInsightsErrorKind {
 /**
  * Entity insight Item.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityInsightItem {
   /**
    * The query id of the insight
@@ -5683,7 +5695,7 @@ model EntityInsightItem {
 /**
  * The Time interval that the query actually executed on.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityInsightItemQueryTimeInterval {
   /**
    * Insight query start time
@@ -5701,7 +5713,7 @@ model EntityInsightItemQueryTimeInterval {
 /**
  * Query results for table insights query.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model InsightsTableResult {
   /**
    * Columns Metadata of the table
@@ -5717,7 +5729,7 @@ model InsightsTableResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model InsightsTableResultColumnsItem {
   /**
    * the type of the column
@@ -5733,7 +5745,7 @@ model InsightsTableResultColumnsItem {
 /**
  * List of all the entity queries.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityQueryList is Azure.Core.Page<EntityQuery>;
 
 /**
@@ -5741,7 +5753,7 @@ model EntityQueryList is Azure.Core.Page<EntityQuery>;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("kind")
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CustomEntityQuery extends ResourceWithEtag {
   /**
    * the entity query kind
@@ -5752,20 +5764,20 @@ model CustomEntityQuery extends ResourceWithEtag {
 /**
  * List of all the entity query templates.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityQueryTemplateList is Azure.Core.Page<EntityQueryTemplate>;
 
 /**
  * List all the file imports.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model FileImportList is Azure.Core.Page<FileImport>;
 
 /**
  * Describes the FileImport's properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model FileImportProperties {
   /**
    * Describes how to ingest the records in the file.
@@ -5852,7 +5864,7 @@ model FileImportProperties {
 /**
  * Represents a file.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model FileMetadata {
   /**
    * The format of the file
@@ -5885,7 +5897,7 @@ model FileMetadata {
 /**
  * Describes an error encountered in the file during validation.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ValidationError {
   /**
    * The number of the record that has the error.
@@ -5902,14 +5914,14 @@ model ValidationError {
 /**
  * List all the hunts.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model HuntList is Azure.Core.Page<Hunt>;
 
 /**
  * Describes hunt properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model HuntProperties {
   /**
    * The display name of the hunt
@@ -5955,7 +5967,7 @@ model HuntProperties {
 /**
  * Describes a user that the hunt is assigned to
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model HuntOwner {
   /**
    * The email of the user the hunt is assigned to.
@@ -5987,14 +5999,14 @@ model HuntOwner {
 /**
  * List of all the hunt relations
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model HuntRelationList is Azure.Core.Page<HuntRelation>;
 
 /**
  * Describes hunt relation properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model HuntRelationProperties {
   /**
    * The id of the related resource
@@ -6028,14 +6040,14 @@ model HuntRelationProperties {
 /**
  * List of all hunt comments
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model HuntCommentList is Azure.Core.Page<HuntComment>;
 
 /**
  * Describes a hunt comment properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model HuntCommentProperties {
   /**
    * The message for the comment
@@ -6170,7 +6182,7 @@ model IncidentProperties {
   /**
    * Describes a team for the incident
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   teamInformation?: TeamInformation;
 }
 
@@ -6257,7 +6269,7 @@ model IncidentAdditionalData {
   /**
    * The techniques associated with incident's tactics
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   techniques?: string[];
 
@@ -6271,7 +6283,7 @@ model IncidentAdditionalData {
   /**
    * The incident number of the incident that the current incident was merged into
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   mergedIncidentNumber?: string;
 
@@ -6279,7 +6291,7 @@ model IncidentAdditionalData {
    * The URL to the incident that the current incident was merged into
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   mergedIncidentUrl?: string;
 }
@@ -6287,7 +6299,7 @@ model IncidentAdditionalData {
 /**
  * Describes team information
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TeamInformation {
   /**
    * Team ID
@@ -6985,14 +6997,14 @@ model MetadataPropertiesPatch {
 /**
  * List of all the office365 consents.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficeConsentList is Azure.Core.Page<OfficeConsent>;
 
 /**
  * Consent property bag.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficeConsentProperties {
   /**
    * The tenantId of the Office365 with the consent.
@@ -7080,14 +7092,14 @@ model OperationDisplay {
 /**
  * A list of recommendations
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model RecommendationList is Azure.Core.Page<Recommendation>;
 
 /**
  * Recommendation properties object.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model RecommendationProperties {
   /**
    * Id of the recommendation type.
@@ -7150,7 +7162,7 @@ model RecommendationProperties {
 /**
  * What suggestions should be taken to complete the recommendation.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model RecommendedSuggestion {
   /**
    * Id of the suggestion type.
@@ -7183,7 +7195,7 @@ model RecommendedSuggestion {
 /**
  * Recommendation Fields to update.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model RecommendationPatch {
   /**
    * Recommendation Fields Properties to update.
@@ -7194,7 +7206,7 @@ model RecommendationPatch {
 /**
  * Recommendation Fields Properties to update.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model RecommendationPatchProperties {
   /**
    * State of the recommendation.
@@ -7205,7 +7217,7 @@ model RecommendationPatchProperties {
 /**
  * Reevaluate response object.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ReevaluateResponse {
   /**
    * The time stamp (UTC) when the recommendation was last evaluated.
@@ -7224,7 +7236,7 @@ model SecurityMLAnalyticsSettingsList
 /**
  * List of all the settings.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model SettingList is Azure.Core.Page<Settings>;
 
 /**
@@ -8101,7 +8113,7 @@ model ThreatIntelligenceAppendTags {
 /**
  * Represents a query to run on the TI objects in the workspace.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CountQuery {
   /**
    * Query properties
@@ -8112,7 +8124,7 @@ model CountQuery {
 /**
  * Describes the query properties
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model QueryProperties {
   /**
    * Represents a condition used to query for TI objects.
@@ -8123,7 +8135,7 @@ model QueryProperties {
 /**
  * Represents a condition used to query for TI objects.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ConditionProperties {
   /**
    * The STIX type for the objects returned by this query.
@@ -8147,7 +8159,7 @@ model ConditionProperties {
 /**
  * Represents a single clause to be evaluated by a NormalizedCondition.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ConditionClause {
   /**
    * The connective used to join all values in this ConditionClause
@@ -8174,7 +8186,7 @@ model ConditionClause {
 /**
  * Count of all the threat intelligence objects on the workspace that match the provided query.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ThreatIntelligenceCount {
   /**
    * Count of all the threat intelligence objects on the workspace that match the provided query.
@@ -8186,7 +8198,7 @@ model ThreatIntelligenceCount {
 /**
  * Represents a query to run on the TI objects in the workspace.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Query {
   /**
    * Represents a condition used to query for TI objects.
@@ -8212,7 +8224,7 @@ model Query {
 /**
  * Represents a condition used to query for TI objects.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model QueryCondition {
   /**
    * The STIX type for the objects returned by this query.
@@ -8234,7 +8246,7 @@ model QueryCondition {
 /**
  * Specifies how to sort the query results.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model QuerySortBy {
   /**
    * The direction to sort the results by.
@@ -8250,7 +8262,7 @@ model QuerySortBy {
 /**
  * List all the threat intelligence objects on the workspace that match the provided query.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ThreatIntelligenceList is Azure.Core.Page<TIObject>;
 
 /**
@@ -8259,7 +8271,7 @@ model ThreatIntelligenceList is Azure.Core.Page<TIObject>;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("kind")
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TIObject extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * The properties of the TI object
@@ -8276,7 +8288,7 @@ model TIObject extends Azure.ResourceManager.CommonTypes.Resource {
  * Describes properties common to all threat intelligence objects
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TIObjectCommonProperties {
   /**
    * The core STIX object that this TI object represents.
@@ -8347,7 +8359,7 @@ model TIObjectCommonProperties {
 /**
  * An object used to help follow relationships from this object to other STIX objects.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model RelationshipHint {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   fieldName?: string;
@@ -8358,7 +8370,7 @@ model RelationshipHint {
 /**
  * The triggered analytics rule run Properties
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TriggeredAnalyticsRuleRunProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8386,13 +8398,13 @@ model TriggeredAnalyticsRuleRunProperties {
 /**
  * The triggered analytics rule run array
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TriggeredAnalyticsRuleRuns is Azure.Core.Page<TriggeredAnalyticsRuleRun>;
 
 /**
  * Analytics Rule Run Trigger request
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AnalyticsRuleRunTrigger {
   /**
    * The analytics Rule Run Trigger request
@@ -8403,7 +8415,7 @@ model AnalyticsRuleRunTrigger {
 /**
  * The Analytics Rule Run Trigger properties
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AnalyticsRuleRunTriggerProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8602,7 +8614,7 @@ model WatchlistItemProperties {
 /**
  * List of all the workspace manager assignments.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model WorkspaceManagerAssignmentList
   is Azure.Core.Page<WorkspaceManagerAssignment>;
 
@@ -8610,7 +8622,7 @@ model WorkspaceManagerAssignmentList
  * The workspace manager assignment properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model WorkspaceManagerAssignmentProperties {
   /**
    * The resource name of the workspace manager group targeted by the workspace manager assignment
@@ -8640,7 +8652,7 @@ model WorkspaceManagerAssignmentProperties {
 /**
  * An entity describing a content item.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AssignmentItem {
   /**
    * The resource id of the content item
@@ -8651,13 +8663,13 @@ model AssignmentItem {
 /**
  * List of all the jobs
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model JobList is Azure.Core.Page<Job>;
 
 /**
  * The job properties
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model JobProperties {
   /**
    * The time the job completed
@@ -8695,7 +8707,7 @@ model JobProperties {
 /**
  * An entity describing the publish status of a content item.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model JobItem {
   /**
    * The resource id of the content item
@@ -8725,7 +8737,7 @@ model JobItem {
 /**
  * The error description for why a publication failed
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Error {
   /**
    * The member resource name for which the publication error occured
@@ -8741,7 +8753,7 @@ model Error {
 /**
  * List all the workspace manager configurations for the workspace.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model WorkspaceManagerConfigurationList
   is Azure.Core.Page<WorkspaceManagerConfiguration>;
 
@@ -8749,7 +8761,7 @@ model WorkspaceManagerConfigurationList
  * The workspace manager configuration properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model WorkspaceManagerConfigurationProperties {
   /**
    * The current mode of the workspace manager configuration
@@ -8760,14 +8772,14 @@ model WorkspaceManagerConfigurationProperties {
 /**
  * List of all the workspace manager groups.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model WorkspaceManagerGroupList is Azure.Core.Page<WorkspaceManagerGroup>;
 
 /**
  * The workspace manager group properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model WorkspaceManagerGroupProperties {
   /**
    * The description of the workspace manager group
@@ -8788,14 +8800,14 @@ model WorkspaceManagerGroupProperties {
 /**
  * List of workspace manager members
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model WorkspaceManagerMembersList is Azure.Core.Page<WorkspaceManagerMember>;
 
 /**
  * The workspace manager member properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model WorkspaceManagerMemberProperties {
   /**
    * Fully qualified resource ID of the target Sentinel workspace joining the given Sentinel workspace manager
@@ -8874,7 +8886,7 @@ model AlertRuleTemplatePropertiesBase {
  * Alert rule template with MITRE property bag.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AlertRuleTemplateWithMitreProperties
   extends AlertRuleTemplatePropertiesBase {
   /**
@@ -8891,7 +8903,7 @@ model AlertRuleTemplateWithMitreProperties
 /**
  * Query based alert rule template base property bag.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model QueryBasedAlertRuleTemplateProperties {
   /**
    * The query that creates alerts for this rule.
@@ -9027,7 +9039,7 @@ model EventGroupingSettings {
 /**
  * A single sentinel entity mapping
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model SentinelEntityMapping {
   /**
    * the column name to be mapped to the SentinelEntities
@@ -9039,7 +9051,7 @@ model SentinelEntityMapping {
  * Represents MLBehaviorAnalytics alert rule.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MLBehaviorAnalyticsAlertRule extends AlertRule {
   /**
    * MLBehaviorAnalytics alert rule properties
@@ -9057,7 +9069,7 @@ model MLBehaviorAnalyticsAlertRule extends AlertRule {
  * MLBehaviorAnalytics alert rule base property bag.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MLBehaviorAnalyticsAlertRuleProperties {
   /**
    * The Name of the alert rule template used to create this rule.
@@ -9118,7 +9130,7 @@ model MLBehaviorAnalyticsAlertRuleProperties {
  * Represents MLBehaviorAnalytics alert rule template.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MLBehaviorAnalyticsAlertRuleTemplate extends AlertRuleTemplate {
   /**
    * MLBehaviorAnalytics alert rule template properties.
@@ -9137,7 +9149,7 @@ model MLBehaviorAnalyticsAlertRuleTemplate extends AlertRuleTemplate {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MLBehaviorAnalyticsAlertRuleTemplateProperties
   extends AlertRuleTemplateWithMitreProperties {
   /**
@@ -9190,14 +9202,14 @@ model FusionAlertRuleProperties {
   /**
    * Configuration for all supported source signals in fusion detection.
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @identifiers(#[])
   sourceSettings?: FusionSourceSettings[];
 
   /**
    * Configuration to exclude scenarios in fusion detection.
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @identifiers(#[])
   scenarioExclusionPatterns?: FusionScenarioExclusionPattern[];
 
@@ -9229,7 +9241,7 @@ model FusionAlertRuleProperties {
   /**
    * The sub-techniques of the alert rule
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   subTechniques?: string[];
 }
@@ -9237,7 +9249,7 @@ model FusionAlertRuleProperties {
 /**
  * Represents a supported source signal configuration in Fusion detection.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model FusionSourceSettings {
   /**
    * Determines whether this source signal is enabled or disabled in Fusion detection.
@@ -9259,7 +9271,7 @@ model FusionSourceSettings {
 /**
  * Represents a supported source subtype configuration under a source signal in Fusion detection.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model FusionSourceSubTypeSetting {
   /**
    * Determines whether this source subtype under source signal is enabled or disabled in Fusion detection.
@@ -9286,7 +9298,7 @@ model FusionSourceSubTypeSetting {
 /**
  * Represents severity configuration for a source subtype consumed in Fusion detection.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model FusionSubTypeSeverityFilter {
   /**
    * Determines whether this source subtype supports severity configuration or not.
@@ -9304,7 +9316,7 @@ model FusionSubTypeSeverityFilter {
 /**
  * Represents a Severity filter setting for a given source subtype consumed in Fusion detection.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model FusionSubTypeSeverityFiltersItem {
   /**
    * The Severity for a given source subtype consumed in Fusion detection.
@@ -9320,7 +9332,7 @@ model FusionSubTypeSeverityFiltersItem {
 /**
  * Represents a Fusion scenario exclusion patterns in Fusion detection.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model FusionScenarioExclusionPattern {
   /**
    * Scenario exclusion pattern.
@@ -9413,13 +9425,13 @@ model FusionAlertRuleTemplateProperties {
   /**
    * The sub-techniques of the alert rule
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   subTechniques?: string[];
 
   /**
    * All supported source signal configurations consumed in fusion detection.
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @identifiers(#[])
   sourceSettings?: FusionTemplateSourceSetting[];
 }
@@ -9427,7 +9439,7 @@ model FusionAlertRuleTemplateProperties {
 /**
  * Represents a source signal consumed in Fusion detection.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model FusionTemplateSourceSetting {
   /**
    * The name of a source signal consumed in Fusion detection.
@@ -9444,7 +9456,7 @@ model FusionTemplateSourceSetting {
 /**
  * Represents a source subtype under a source signal consumed in Fusion detection.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model FusionTemplateSourceSubType {
   /**
    * The name of source subtype under a source signal consumed in Fusion detection.
@@ -9466,7 +9478,7 @@ model FusionTemplateSourceSubType {
 /**
  * Represents severity configurations available for a source subtype consumed in Fusion detection.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model FusionTemplateSubTypeSeverityFilter {
   /**
    * Determines whether severity configuration is supported for this source subtype consumed in Fusion detection.
@@ -9482,7 +9494,7 @@ model FusionTemplateSubTypeSeverityFilter {
 /**
  * Represents Threat Intelligence alert rule.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ThreatIntelligenceAlertRule extends AlertRule {
   /**
    * Threat Intelligence alert rule properties
@@ -9498,7 +9510,7 @@ model ThreatIntelligenceAlertRule extends AlertRule {
 /**
  * Threat Intelligence alert rule base property bag.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ThreatIntelligenceAlertRuleProperties {
   /**
    * The Name of the alert rule template used to create this rule.
@@ -9557,7 +9569,7 @@ model ThreatIntelligenceAlertRuleProperties {
 /**
  * Represents Threat Intelligence alert rule template.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ThreatIntelligenceAlertRuleTemplate extends AlertRuleTemplate {
   /**
    * Threat Intelligence alert rule template properties
@@ -9574,7 +9586,7 @@ model ThreatIntelligenceAlertRuleTemplate extends AlertRuleTemplate {
  * Threat Intelligence alert rule template properties
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ThreatIntelligenceAlertRuleTemplateProperties
   extends AlertRuleTemplateWithMitreProperties {
   /**
@@ -9760,7 +9772,7 @@ model ScheduledAlertRuleProperties extends ScheduledAlertRuleCommonProperties {
   /**
    * The sub-techniques of the alert rule
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   subTechniques?: string[];
 
   /**
@@ -9884,14 +9896,14 @@ model ScheduledAlertRuleCommonProperties {
    * Array of the sentinel entity mappings of the alert rule
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   sentinelEntitiesMappings?: SentinelEntityMapping[];
 }
 
 /**
  * Nrt alert rule base property bag.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model NrtAlertRuleProperties {
   /**
    * The Name of the alert rule template used to create this rule.
@@ -10083,7 +10095,7 @@ model ScheduledAlertRuleTemplateProperties {
   /**
    * The sub-techniques of the alert rule
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   subTechniques?: string[];
 
   /**
@@ -10117,7 +10129,7 @@ model ScheduledAlertRuleTemplateProperties {
    * Array of the sentinel entity mappings of the alert rule
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   sentinelEntitiesMappings?: SentinelEntityMapping[];
 }
 
@@ -10139,7 +10151,7 @@ model ScheduledAlertRuleTemplate extends AlertRuleTemplate {
 /**
  * Represents NRT alert rule template.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model NrtAlertRuleTemplate extends AlertRuleTemplate {
   /**
    * NRT alert rule template properties
@@ -10155,7 +10167,7 @@ model NrtAlertRuleTemplate extends AlertRuleTemplate {
 /**
  * NRT alert rule template properties
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model NrtAlertRuleTemplateProperties {
   ...AlertRuleTemplateWithMitreProperties;
   ...QueryBasedAlertRuleTemplateProperties;
@@ -10179,7 +10191,7 @@ model ScheduledAlertRule extends AlertRule {
 /**
  * Represents NRT alert rule.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model NrtAlertRule extends AlertRule {
   /**
    * NRT alert rule properties
@@ -10409,7 +10421,7 @@ model PropertyConditionProperties extends AutomationRuleCondition {
 /**
  * Billing statistic about the Microsoft Sentinel solution for SAP Usage
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model SapSolutionUsageStatistic extends BillingStatistic {
   /**
    * The SAP solution usage object
@@ -10425,7 +10437,7 @@ model SapSolutionUsageStatistic extends BillingStatistic {
 /**
  * Properties of the billing statistic about the Microsoft Sentinel solution for SAP usage
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model SapSolutionUsageStatisticProperties {
   /**
    * The latest count of active SAP system IDs under the Microsoft Sentinel solution for SAP Usage
@@ -10777,7 +10789,7 @@ model CustomizableConnectionsConfig {
  * Represents AADIP (Azure Active Directory Identity Protection) requirements check request.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AADCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * AADIP (Azure Active Directory Identity Protection) requirements check properties.
@@ -10796,7 +10808,7 @@ model AADCheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AADCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
@@ -10812,7 +10824,7 @@ model DataConnectorTenantId {
 /**
  * Represents AATP (Azure Advanced Threat Protection) requirements check request.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AatpCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * AATP (Azure Advanced Threat Protection) requirements check properties.
@@ -10830,14 +10842,14 @@ model AatpCheckRequirements extends DataConnectorsCheckRequirements {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AatpCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents ASC (Azure Security Center) requirements check request.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ASCCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * ASC (Azure Security Center) requirements check properties.
@@ -10854,7 +10866,7 @@ model ASCCheckRequirements extends DataConnectorsCheckRequirements {
  * ASC (Azure Security Center) requirements check properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ASCCheckRequirementsProperties {
   /**
    * The subscription id to connect to, and get the data from.
@@ -10865,7 +10877,7 @@ model ASCCheckRequirementsProperties {
 /**
  * Amazon Web Services CloudTrail requirements check request.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AwsCloudTrailCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * Describes the kind of connector to be checked.
@@ -10876,7 +10888,7 @@ model AwsCloudTrailCheckRequirements extends DataConnectorsCheckRequirements {
 /**
  * Amazon Web Services S3 requirements check request.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AwsS3CheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * Describes the kind of connector to be checked.
@@ -10887,7 +10899,7 @@ model AwsS3CheckRequirements extends DataConnectorsCheckRequirements {
 /**
  * Represents Dynamics365 requirements check request.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Dynamics365CheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * Dynamics365 requirements check properties.
@@ -10905,13 +10917,13 @@ model Dynamics365CheckRequirements extends DataConnectorsCheckRequirements {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Dynamics365CheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents MCAS (Microsoft Cloud App Security) requirements check request.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model McasCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * MCAS (Microsoft Cloud App Security) requirements check properties.
@@ -10929,13 +10941,13 @@ model McasCheckRequirements extends DataConnectorsCheckRequirements {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model McasCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents MDATP (Microsoft Defender Advanced Threat Protection) requirements check request.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MdatpCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * MDATP (Microsoft Defender Advanced Threat Protection) requirements check properties.
@@ -10953,13 +10965,13 @@ model MdatpCheckRequirements extends DataConnectorsCheckRequirements {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MdatpCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents Microsoft Threat Intelligence requirements check request.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MstiCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * Microsoft Threat Intelligence requirements check properties.
@@ -10977,13 +10989,13 @@ model MstiCheckRequirements extends DataConnectorsCheckRequirements {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MstiCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents MTP (Microsoft Threat Protection) requirements check request.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MtpCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * MTP (Microsoft Threat Protection) requirements check properties.
@@ -11002,14 +11014,14 @@ model MtpCheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MTPCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents OfficeATP (Office 365 Advanced Threat Protection) requirements check request.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficeATPCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * OfficeATP (Office 365 Advanced Threat Protection) requirements check properties.
@@ -11028,14 +11040,14 @@ model OfficeATPCheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficeATPCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents OfficeIRM (Microsoft Insider Risk Management) requirements check request.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficeIRMCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * OfficeIRM (Microsoft Insider Risk Management) requirements check properties.
@@ -11054,13 +11066,13 @@ model OfficeIRMCheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficeIRMCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents MicrosoftPurviewInformationProtection requirements check request.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MicrosoftPurviewInformationProtectionCheckRequirements
   extends DataConnectorsCheckRequirements {
   /**
@@ -11079,14 +11091,14 @@ model MicrosoftPurviewInformationProtectionCheckRequirements
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MicrosoftPurviewInformationProtectionCheckRequirementsProperties
   extends DataConnectorTenantId {}
 
 /**
  * Represents Office365 Project requirements check request.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Office365ProjectCheckRequirements
   extends DataConnectorsCheckRequirements {
   /**
@@ -11105,7 +11117,7 @@ model Office365ProjectCheckRequirements
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Office365ProjectCheckRequirementsProperties
   extends DataConnectorTenantId {}
 
@@ -11113,7 +11125,7 @@ model Office365ProjectCheckRequirementsProperties
  * Represents Office PowerBI requirements check request.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficePowerBICheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * Office Power BI requirements check properties.
@@ -11132,13 +11144,13 @@ model OfficePowerBICheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficePowerBICheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents PurviewAudit requirements check request.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model PurviewAuditCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * PurviewAudit requirements check properties.
@@ -11156,14 +11168,14 @@ model PurviewAuditCheckRequirements extends DataConnectorsCheckRequirements {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model PurviewAuditCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Threat Intelligence Platforms data connector check requirements
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TICheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * Threat Intelligence Platforms data connector check required properties
@@ -11182,13 +11194,13 @@ model TICheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TICheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Threat Intelligence TAXII data connector check requirements
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TiTaxiiCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * Threat Intelligence TAXII check required properties.
@@ -11206,14 +11218,14 @@ model TiTaxiiCheckRequirements extends DataConnectorsCheckRequirements {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TiTaxiiCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents IoT requirements check request.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model IoTCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * IoT requirements check properties.
@@ -11230,7 +11242,7 @@ model IoTCheckRequirements extends DataConnectorsCheckRequirements {
  * IoT requirements check properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model IoTCheckRequirementsProperties {
   /**
    * The subscription id to connect to, and get the data from.
@@ -11402,7 +11414,7 @@ model PremiumMdtiDataConnectorDataTypesConnector
  * Represents MTP (Microsoft Threat Protection) data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MTPDataConnector extends DataConnector {
   /**
    * MTP (Microsoft Threat Protection) data connector properties.
@@ -11420,7 +11432,7 @@ model MTPDataConnector extends DataConnector {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MTPDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The available data types for the connector.
@@ -11437,7 +11449,7 @@ model MTPDataConnectorProperties extends DataConnectorTenantId {
  * The available data types for Microsoft Threat Protection Platforms data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MTPDataConnectorDataTypes {
   /**
    * Incidents data type for Microsoft Threat Protection Platforms data connector.
@@ -11456,7 +11468,7 @@ model MTPDataConnectorDataTypes {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MTPDataConnectorDataTypesIncidents extends DataConnectorDataTypeCommon {}
 
 /**
@@ -11465,13 +11477,13 @@ model MTPDataConnectorDataTypesIncidents extends DataConnectorDataTypeCommon {}
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MTPDataConnectorDataTypesAlerts extends DataConnectorDataTypeCommon {}
 
 /**
  * Represents the connector's Filtered providers
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MtpFilteredProviders {
   /**
    * Alerts filtered providers. When filters are not applied, all alerts will stream through the MTP pipeline, still in private preview for all products EXCEPT MDA and MDI, which are in GA state.
@@ -11583,7 +11595,7 @@ model AwsCloudTrailDataConnectorDataTypesLogs
 /**
  * Represents Amazon Web Services S3 data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AwsS3DataConnector extends DataConnector {
   /**
    * Amazon Web Services S3 data connector properties.
@@ -11599,7 +11611,7 @@ model AwsS3DataConnector extends DataConnector {
 /**
  * Amazon Web Services S3 data connector properties.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AwsS3DataConnectorProperties {
   /**
    * The logs destination table name in LogAnalytics.
@@ -11625,7 +11637,7 @@ model AwsS3DataConnectorProperties {
 /**
  * The available data types for Amazon Web Services S3 data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AwsS3DataConnectorDataTypes {
   /**
    * Logs data type.
@@ -11638,7 +11650,7 @@ model AwsS3DataConnectorDataTypes {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AwsS3DataConnectorDataTypesLogs extends DataConnectorDataTypeCommon {}
 
 /**
@@ -11654,6 +11666,43 @@ model RestApiPollerDataConnector extends DataConnector {
    * The data connector kind
    */
   kind: "RestApiPoller";
+}
+
+/**
+ * Represents Push data connector.
+ */
+@added(Versions.v2026_07_01)
+model PushDataConnector extends DataConnector {
+  /**
+   * Push data connector properties.
+   */
+  properties?: PushDataConnectorProperties;
+
+  /**
+   * The data connector kind
+   */
+  kind: "Push";
+}
+
+/**
+ * Push data connector properties.
+ */
+@added(Versions.v2026_07_01)
+model PushDataConnectorProperties {
+  /**
+   * The connector definition name (the dataConnectorDefinition resource id).
+   */
+  connectorDefinitionName: string;
+
+  /**
+   * The authentication model.
+   */
+  auth: CcpAuthConfig;
+
+  /**
+   * The DCR related properties.
+   */
+  dcrConfig?: DCRConfiguration;
 }
 
 /**
@@ -12055,7 +12104,7 @@ model RestApiPollerRequestPagingCountBaseConfig
  * Represents Google Cloud Platform data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model GCPDataConnector extends DataConnector {
   /**
    * Google Cloud Platform data connector properties.
@@ -12072,7 +12121,7 @@ model GCPDataConnector extends DataConnector {
  * Google Cloud Platform data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model GCPDataConnectorProperties {
   /**
    * The name of the connector definition that represents the UI config.
@@ -12099,7 +12148,7 @@ model GCPDataConnectorProperties {
  * Google Cloud Platform auth section properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model GCPAuthProperties {
   /**
    * The service account that is used to access the GCP project.
@@ -12121,7 +12170,7 @@ model GCPAuthProperties {
  * Google Cloud Platform request section properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model GCPRequestProperties {
   /**
    * The GCP project id.
@@ -12206,6 +12255,27 @@ model BasicAuthModel extends CcpAuthConfig {
    * The auth type
    */
   type: "Basic";
+}
+
+/**
+ * Model for API authentication for Push data connectors.
+ */
+@added(Versions.v2026_07_01)
+model PushAuthModel extends CcpAuthConfig {
+  /**
+   * The Entra application (client) id used to push data to the data collection endpoint.
+   */
+  appId?: string;
+
+  /**
+   * The service principal id of the Entra application.
+   */
+  servicePrincipalId?: string;
+
+  /**
+   * The auth type
+   */
+  type: "Push";
 }
 
 /**
@@ -12562,7 +12632,7 @@ model MCASDataConnectorDataTypes extends AlertsDataTypeOfDataConnector {
 /**
  * Represents Dynamics365 data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Dynamics365DataConnector extends DataConnector {
   /**
    * Dynamics365 data connector properties.
@@ -12579,7 +12649,7 @@ model Dynamics365DataConnector extends DataConnector {
  * Dynamics365 data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Dynamics365DataConnectorProperties extends DataConnectorTenantId {
   /**
    * The available data types for the connector.
@@ -12590,7 +12660,7 @@ model Dynamics365DataConnectorProperties extends DataConnectorTenantId {
 /**
  * The available data types for Dynamics365 data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Dynamics365DataConnectorDataTypes {
   /**
    * Common Data Service data type connection.
@@ -12603,7 +12673,7 @@ model Dynamics365DataConnectorDataTypes {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Dynamics365DataConnectorDataTypesDynamics365CdsActivities
   extends DataConnectorDataTypeCommon {}
 
@@ -12611,7 +12681,7 @@ model Dynamics365DataConnectorDataTypesDynamics365CdsActivities
  * Represents OfficeATP (Office 365 Advanced Threat Protection) data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficeATPDataConnector extends DataConnector {
   /**
    * OfficeATP (Office 365 Advanced Threat Protection) data connector properties.
@@ -12628,7 +12698,7 @@ model OfficeATPDataConnector extends DataConnector {
  * OfficeATP (Office 365 Advanced Threat Protection) data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficeATPDataConnectorProperties {
   ...DataConnectorTenantId;
   ...DataConnectorWithAlertsProperties;
@@ -12637,7 +12707,7 @@ model OfficeATPDataConnectorProperties {
 /**
  * Represents Microsoft Purview Information Protection data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MicrosoftPurviewInformationProtectionDataConnector extends DataConnector {
   /**
    * Microsoft Purview Information Protection data connector properties.
@@ -12654,7 +12724,7 @@ model MicrosoftPurviewInformationProtectionDataConnector extends DataConnector {
  * Microsoft Purview Information Protection data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MicrosoftPurviewInformationProtectionDataConnectorProperties
   extends DataConnectorTenantId {
   /**
@@ -12666,7 +12736,7 @@ model MicrosoftPurviewInformationProtectionDataConnectorProperties
 /**
  * The available data types for Microsoft Purview Information Protection data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MicrosoftPurviewInformationProtectionConnectorDataTypes {
   /**
    * Logs data type.
@@ -12679,14 +12749,14 @@ model MicrosoftPurviewInformationProtectionConnectorDataTypes {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model MicrosoftPurviewInformationProtectionConnectorDataTypesLogs
   extends DataConnectorDataTypeCommon {}
 
 /**
  * Represents Office Microsoft Project data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Office365ProjectDataConnector extends DataConnector {
   /**
    * Office Microsoft Project data connector properties.
@@ -12703,7 +12773,7 @@ model Office365ProjectDataConnector extends DataConnector {
  * Office Microsoft Project data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Office365ProjectDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The available data types for the connector.
@@ -12714,7 +12784,7 @@ model Office365ProjectDataConnectorProperties extends DataConnectorTenantId {
 /**
  * The available data types for Office Microsoft Project data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Office365ProjectConnectorDataTypes {
   /**
    * Logs data type.
@@ -12727,14 +12797,14 @@ model Office365ProjectConnectorDataTypes {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Office365ProjectConnectorDataTypesLogs
   extends DataConnectorDataTypeCommon {}
 /**
  * Represents Office Microsoft PowerBI data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficePowerBIDataConnector extends DataConnector {
   /**
    * Office Microsoft PowerBI data connector properties.
@@ -12752,7 +12822,7 @@ model OfficePowerBIDataConnector extends DataConnector {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficePowerBIDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The available data types for the connector.
@@ -12764,7 +12834,7 @@ model OfficePowerBIDataConnectorProperties extends DataConnectorTenantId {
  * The available data types for Office Microsoft PowerBI data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficePowerBIConnectorDataTypes {
   /**
    * Logs data type.
@@ -12778,13 +12848,13 @@ model OfficePowerBIConnectorDataTypes {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficePowerBIConnectorDataTypesLogs extends DataConnectorDataTypeCommon {}
 
 /**
  * Represents PurviewAudit data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model PurviewAuditDataConnector extends DataConnector {
   /**
    * PurviewAudit data connector properties.
@@ -12801,7 +12871,7 @@ model PurviewAuditDataConnector extends DataConnector {
  * PurviewAudit data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model PurviewAuditDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The connector definition name (the dataConnectorDefinition resource id).
@@ -12827,7 +12897,7 @@ model PurviewAuditDataConnectorProperties extends DataConnectorTenantId {
 /**
  * The available data types for PurviewAudit data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model PurviewAuditConnectorDataTypes {
   /**
    * Logs data type.
@@ -12840,14 +12910,14 @@ model PurviewAuditConnectorDataTypes {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model PurviewAuditConnectorDataTypesLogs extends DataConnectorDataTypeCommon {}
 
 /**
  * Represents OfficeIRM (Microsoft Insider Risk Management) data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficeIRMDataConnector extends DataConnector {
   /**
    * OfficeIRM (Microsoft Insider Risk Management) data connector properties.
@@ -12864,7 +12934,7 @@ model OfficeIRMDataConnector extends DataConnector {
  * OfficeIRM (Microsoft Insider Risk Management) data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model OfficeIRMDataConnectorProperties {
   ...DataConnectorTenantId;
   ...DataConnectorWithAlertsProperties;
@@ -13021,7 +13091,7 @@ model TIDataConnectorDataTypesIndicators extends DataConnectorDataTypeCommon {}
 /**
  * Data connector to pull Threat intelligence data from TAXII 2.0/2.1 server
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TiTaxiiDataConnector extends DataConnector {
   /**
    * Threat intelligence TAXII data connector properties.
@@ -13038,7 +13108,7 @@ model TiTaxiiDataConnector extends DataConnector {
  * Threat Intelligence TAXII data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TiTaxiiDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The workspace id.
@@ -13093,7 +13163,7 @@ model TiTaxiiDataConnectorProperties extends DataConnectorTenantId {
 /**
  * The available data types for Threat Intelligence TAXII data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TiTaxiiDataConnectorDataTypes {
   /**
    * Data type for TAXII connector.
@@ -13106,7 +13176,7 @@ model TiTaxiiDataConnectorDataTypes {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TiTaxiiDataConnectorDataTypesTaxiiClient
   extends DataConnectorDataTypeCommon {}
 
@@ -13114,7 +13184,7 @@ model TiTaxiiDataConnectorDataTypesTaxiiClient
  * Represents IoT data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model IoTDataConnector extends DataConnector {
   /**
    * IoT data connector properties.
@@ -13132,7 +13202,7 @@ model IoTDataConnector extends DataConnector {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model IoTDataConnectorProperties extends DataConnectorWithAlertsProperties {
   /**
    * The subscription id to connect to, and get the data from.
@@ -13143,7 +13213,7 @@ model IoTDataConnectorProperties extends DataConnectorWithAlertsProperties {
 /**
  * Represents Codeless UI data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessUiDataConnector extends DataConnector {
   /**
    * Codeless UI data connector properties
@@ -13159,7 +13229,7 @@ model CodelessUiDataConnector extends DataConnector {
 /**
  * Represents Codeless UI data connector
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessParameters {
   /**
    * Config to describe the instructions blade
@@ -13170,7 +13240,7 @@ model CodelessParameters {
 /**
  * Config to describe the instructions blade
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessUiConnectorConfigProperties {
   /**
    * Connector blade title
@@ -13241,14 +13311,14 @@ model CodelessUiConnectorConfigProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessUiConnectorConfigPropertiesGraphQueriesItem
   extends GraphQueries {}
 
 /**
  * The graph query to show the current data status
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model GraphQueries {
   /**
    * the metric that the query is checking
@@ -13269,14 +13339,14 @@ model GraphQueries {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessUiConnectorConfigPropertiesSampleQueriesItem
   extends SampleQueries {}
 
 /**
  * The sample queries for the connector
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model SampleQueries {
   /**
    * The sample query description
@@ -13292,14 +13362,14 @@ model SampleQueries {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessUiConnectorConfigPropertiesDataTypesItem
   extends LastDataReceivedDataType {}
 
 /**
  * Data type for last data received
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model LastDataReceivedDataType {
   /**
    * Name of the data type to show in the graph. can be use with {{graphQueriesTableName}} placeholder
@@ -13315,14 +13385,14 @@ model LastDataReceivedDataType {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessUiConnectorConfigPropertiesConnectivityCriteriaItem
   extends ConnectivityCriteria {}
 
 /**
  * Setting for the connector check connectivity
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ConnectivityCriteria {
   /**
    * type of connectivity
@@ -13338,7 +13408,7 @@ model ConnectivityCriteria {
 /**
  * Connector Availability Status
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Availability {
   /**
    * The connector Availability Status
@@ -13354,7 +13424,7 @@ model Availability {
 /**
  * Permissions required for the connector
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Permissions {
   /**
    * Resource provider permissions required for the connector
@@ -13372,13 +13442,13 @@ model Permissions {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model PermissionsResourceProviderItem extends ResourceProvider {}
 
 /**
  * Resource provider permissions required for the connector
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ResourceProvider {
   /**
    * Provider name
@@ -13409,7 +13479,7 @@ model ResourceProvider {
 /**
  * Required permissions for the connector
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model RequiredPermissions {
   /**
    * action permission
@@ -13435,7 +13505,7 @@ model RequiredPermissions {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model PermissionsCustomsItem extends Customs {}
 
 /**
@@ -13443,13 +13513,13 @@ model PermissionsCustomsItem extends Customs {}
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Customs extends CustomsPermission {}
 
 /**
  * Customs permissions required for the connector
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CustomsPermission {
   /**
    * Customs permissions name
@@ -13465,14 +13535,14 @@ model CustomsPermission {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessUiConnectorConfigPropertiesInstructionStepsItem
   extends InstructionSteps {}
 
 /**
  * Instruction steps to enable the connector
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model InstructionSteps {
   /**
    * Instruction step title
@@ -13494,13 +13564,13 @@ model InstructionSteps {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model InstructionStepsInstructionsItem extends ConnectorInstructionModelBase {}
 
 /**
  * Instruction step details
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ConnectorInstructionModelBase {
   /**
    * The parameters for the setting
@@ -13517,7 +13587,7 @@ model ConnectorInstructionModelBase {
 /**
  * Represents Codeless API Polling data connector.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessApiPollingDataConnector extends DataConnector {
   /**
    * Codeless poling data connector properties
@@ -13533,7 +13603,7 @@ model CodelessApiPollingDataConnector extends DataConnector {
 /**
  * Represents Codeless API Polling data connector
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ApiPollingParameters {
   /**
    * Config to describe the instructions blade
@@ -13549,7 +13619,7 @@ model ApiPollingParameters {
 /**
  * Config to describe the polling config for API poller connector
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessConnectorPollingConfigProperties {
   /**
    * The poller active status
@@ -13580,7 +13650,7 @@ model CodelessConnectorPollingConfigProperties {
 /**
  * Describe the authentication properties needed to successfully authenticate with the server
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessConnectorPollingAuthProperties {
   /**
    * The authentication type
@@ -13654,7 +13724,7 @@ model CodelessConnectorPollingAuthProperties {
 /**
  * Describe the request properties needed to successfully pull from the server
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessConnectorPollingRequestProperties {
   /**
    * Describe the endpoint we should pull the data from
@@ -13722,7 +13792,7 @@ model CodelessConnectorPollingRequestProperties {
 /**
  * Describe the properties needed to make a pagination call
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessConnectorPollingPagingProperties {
   /**
    * Describes the type. could be 'None', 'PageToken', 'PageCount', 'TimeStamp'
@@ -13773,7 +13843,7 @@ model CodelessConnectorPollingPagingProperties {
 /**
  * Describes the response from the external server
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model CodelessConnectorPollingResponseProperties {
   /**
    * Describes the path we should extract the data in the response
@@ -13799,7 +13869,7 @@ model CodelessConnectorPollingResponseProperties {
 /**
  * Represents Activity timeline item.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ActivityTimelineItem extends EntityTimelineItem {
   /**
    * The activity query id.
@@ -13853,7 +13923,7 @@ model ActivityTimelineItem extends EntityTimelineItem {
 /**
  * Represents bookmark timeline item.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model BookmarkTimelineItem extends EntityTimelineItem {
   /**
    * The bookmark azure resource id.
@@ -13907,7 +13977,7 @@ model BookmarkTimelineItem extends EntityTimelineItem {
 /**
  * Represents anomaly timeline item.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AnomalyTimelineItem extends EntityTimelineItem {
   /**
    * The anomaly azure resource id.
@@ -13976,7 +14046,7 @@ model AnomalyTimelineItem extends EntityTimelineItem {
 /**
  * An properties abstract Query item for entity
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityQueryItemProperties {
   /**
    * Data types for template
@@ -14003,7 +14073,7 @@ model EntityQueryItemProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityQueryItemPropertiesDataTypesItem {
   /**
    * Data type name
@@ -14014,7 +14084,7 @@ model EntityQueryItemPropertiesDataTypesItem {
 /**
  * Represents Insight Query.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model InsightQueryItem extends EntityQueryItem {
   /**
    * Properties bag for InsightQueryItem
@@ -14031,7 +14101,7 @@ model InsightQueryItem extends EntityQueryItem {
  * Represents Insight Query.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model InsightQueryItemProperties extends EntityQueryItemProperties {
   /**
    * The insight display name.
@@ -14078,7 +14148,7 @@ model InsightQueryItemProperties extends EntityQueryItemProperties {
 /**
  * The insight table query.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model InsightQueryItemPropertiesTableQuery {
   /**
    * List of insight column definitions.
@@ -14094,7 +14164,7 @@ model InsightQueryItemPropertiesTableQuery {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model InsightQueryItemPropertiesTableQueryColumnsDefinitionsItem {
   /**
    * Insight column header.
@@ -14113,7 +14183,7 @@ model InsightQueryItemPropertiesTableQueryColumnsDefinitionsItem {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model InsightQueryItemPropertiesTableQueryQueriesDefinitionsItem {
   /**
    * Insight column header.
@@ -14138,7 +14208,7 @@ model InsightQueryItemPropertiesTableQueryQueriesDefinitionsItem {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model InsightQueryItemPropertiesTableQueryQueriesDefinitionsPropertiesItemsItem {
   /**
    * Insight Link Definition Projected Name.
@@ -14155,7 +14225,7 @@ model InsightQueryItemPropertiesTableQueryQueriesDefinitionsPropertiesItemsItem 
 /**
  * The activity query definitions.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model InsightQueryItemPropertiesAdditionalQuery {
   /**
    * The insight query.
@@ -14171,7 +14241,7 @@ model InsightQueryItemPropertiesAdditionalQuery {
 /**
  * The insight chart query.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model InsightQueryItemPropertiesDefaultTimeRange {
   /**
    * The padding for the start time of the query.
@@ -14187,7 +14257,7 @@ model InsightQueryItemPropertiesDefaultTimeRange {
 /**
  * The insight chart query.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model InsightQueryItemPropertiesReferenceTimeRange {
   /**
    * Additional query time for looking back.
@@ -14198,7 +14268,7 @@ model InsightQueryItemPropertiesReferenceTimeRange {
 /**
  * Represents security alert timeline item.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model SecurityAlertTimelineItem extends EntityTimelineItem {
   /**
    * The alert azure resource id.
@@ -14268,7 +14338,7 @@ model SecurityAlertTimelineItem extends EntityTimelineItem {
 /**
  * Represents Expansion entity query.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ExpansionEntityQuery extends EntityQuery {
   /**
    * Expansion entity query properties
@@ -14284,7 +14354,7 @@ model ExpansionEntityQuery extends EntityQuery {
 /**
  * Describes expansion entity query properties
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ExpansionEntityQueriesProperties {
   /**
    * List of the data sources that are required to run the query
@@ -14320,7 +14390,7 @@ model ExpansionEntityQueriesProperties {
 /**
  * Represents Activity entity query.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ActivityEntityQuery extends EntityQuery {
   /**
    * Activity entity query properties
@@ -14336,7 +14406,7 @@ model ActivityEntityQuery extends EntityQuery {
 /**
  * Describes activity entity query properties
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ActivityEntityQueriesProperties {
   /**
    * The entity query title
@@ -14403,7 +14473,7 @@ model ActivityEntityQueriesProperties {
 /**
  * The Activity query definitions
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ActivityEntityQueriesPropertiesQueryDefinitions {
   /**
    * The Activity query to run on a given entity
@@ -14414,7 +14484,7 @@ model ActivityEntityQueriesPropertiesQueryDefinitions {
 /**
  * Represents Activity entity query.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ActivityCustomEntityQuery extends CustomEntityQuery {
   /**
    * Activity entity query properties
@@ -14430,7 +14500,7 @@ model ActivityCustomEntityQuery extends CustomEntityQuery {
 /**
  * Represents Activity entity query.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ActivityEntityQueryTemplate extends EntityQueryTemplate {
   /**
    * Activity entity query properties
@@ -14446,7 +14516,7 @@ model ActivityEntityQueryTemplate extends EntityQueryTemplate {
 /**
  * Describes activity entity query properties
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ActivityEntityQueryTemplateProperties {
   /**
    * The entity query title
@@ -14495,7 +14565,7 @@ model ActivityEntityQueryTemplateProperties {
 /**
  * The Activity query definitions
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ActivityEntityQueryTemplatePropertiesQueryDefinitions {
   /**
    * The Activity query to run on a given entity
@@ -14511,7 +14581,7 @@ model ActivityEntityQueryTemplatePropertiesQueryDefinitions {
 /**
  * The data type definition
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model DataTypeDefinitions {
   /**
    * The data type name
@@ -14522,7 +14592,7 @@ model DataTypeDefinitions {
 /**
  * Describes team properties
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model TeamProperties {
   /**
    * The name of the team
@@ -14660,7 +14730,7 @@ model SecurityMLAnalyticsSettingsDataSource {
 /**
  * Settings with single toggle.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Anomalies extends Settings {
   /**
    * Anomalies properties
@@ -14676,7 +14746,7 @@ model Anomalies extends Settings {
 /**
  * Anomalies property bag.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AnomaliesSettingsProperties {
   /**
    * Determines whether the setting is enable or disabled.
@@ -14688,7 +14758,7 @@ model AnomaliesSettingsProperties {
 /**
  * Settings with single toggle.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EyesOn extends Settings {
   /**
    * EyesOn properties
@@ -14704,7 +14774,7 @@ model EyesOn extends Settings {
 /**
  * EyesOn property bag.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EyesOnSettingsProperties {
   /**
    * Determines whether the setting is enable or disabled.
@@ -14716,7 +14786,7 @@ model EyesOnSettingsProperties {
 /**
  * Settings with single toggle.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityAnalytics extends Settings {
   /**
    * EntityAnalytics properties
@@ -14732,7 +14802,7 @@ model EntityAnalytics extends Settings {
 /**
  * EntityAnalytics property bag.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model EntityAnalyticsProperties {
   /**
    * The relevant entity providers that are synced
@@ -14743,7 +14813,7 @@ model EntityAnalyticsProperties {
 /**
  * Settings with single toggle.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Ueba extends Settings {
   /**
    * Ueba properties
@@ -14759,7 +14829,7 @@ model Ueba extends Settings {
 /**
  * Ueba property bag.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model UebaProperties {
   /**
    * The relevant data sources that enriched by ueba
@@ -14770,7 +14840,7 @@ model UebaProperties {
 /**
  * Represents a threat actor in Azure Security Insights.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model ThreatActor extends TIObject {
   /**
    * The kind of the TI object
@@ -14781,7 +14851,7 @@ model ThreatActor extends TIObject {
 /**
  * Represents an attack pattern in Azure Security Insights.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model AttackPattern extends TIObject {
   /**
    * The kind of the TI object
@@ -14792,7 +14862,7 @@ model AttackPattern extends TIObject {
 /**
  * Represents an identity in Azure Security Insights.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Identity extends TIObject {
   /**
    * The kind of the TI object
@@ -14803,7 +14873,7 @@ model Identity extends TIObject {
 /**
  * Represents a relationship in Azure Security Insights.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Relationship extends TIObject {
   /**
    * The kind of the TI object
@@ -14814,7 +14884,7 @@ model Relationship extends TIObject {
 /**
  * Represents an indicator in Azure Security Insights.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Indicator extends TIObject {
   /**
    * The observables of this indicator
@@ -14831,7 +14901,7 @@ model Indicator extends TIObject {
 /**
  * An observable of this indicator
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model IndicatorObservablesItem {
   /**
    * The type of the observable of this indicator
@@ -15336,76 +15406,76 @@ model IoTDeviceEntityProperties extends EntityCommonProperties {
   /**
    * A list of owners of the IoTDevice entity.
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   owners?: string[];
 
   /**
    * A list of Nic entity ids of the IoTDevice entity.
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   nicEntityIds?: string[];
 
   /**
    * The site of the device
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   site?: string;
 
   /**
    * The zone location of the device within a site
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   zone?: string;
 
   /**
    * The sensor the device is monitored by
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   sensor?: string;
 
   /**
    * The subType of the device ('PLC', 'HMI', 'EWS', etc.)
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   deviceSubType?: string;
 
   /**
    * Device importance, determines if the device classified as 'crown jewel'
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   importance?: DeviceImportance;
 
   /**
    * The Purdue Layer of the device
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   purdueLayer?: string;
 
   /**
    * Determines whether the device classified as authorized device
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   isAuthorized?: boolean;
 
   /**
    * Determines whether the device classified as programming device
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   isProgramming?: boolean;
 
   /**
    * Is the device classified as a scanner device
    */
-  @added(Versions.v2025_10_01_preview)
+  @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   isScanner?: boolean;
 }
@@ -16217,7 +16287,7 @@ model UrlEntityProperties extends EntityCommonProperties {
 /**
  * Represents an network interface entity.
  */
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model NicEntity extends Entity {
   /**
    * Network interface entity properties
@@ -16234,7 +16304,7 @@ model NicEntity extends Entity {
  * Nic entity property bag.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2025_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model NicEntityProperties extends EntityCommonProperties {
   /**
    * The MAC address of this network interface
