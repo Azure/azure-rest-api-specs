@@ -50,6 +50,10 @@ suppressions:
   - code: PostOperationIdContainsUrlVerb
     reason: SaaSOperationGroup_ActivateResource is an existing shipped operation ID; renaming it would break generated clients.
     where: $.paths["/subscriptions/{subscriptionId}/providers/Kore.AgentPlatform/activateSaaS"].post.operationId
+  - code: PostResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Kore.AgentPlatform/organizations/{organizationName}/workspaces/{workspaceName}/linkSaaS"].post
+    reason: False positive from the validator on the recommended ArmResourceActionNoResponseContentAsync pattern, which emits 202 and default for a fire-and-forget LRO. See https://github.com/Azure/azure-openapi-validator/issues/809.
 ```
 
 ### Tag: package-2026-07-01-preview
