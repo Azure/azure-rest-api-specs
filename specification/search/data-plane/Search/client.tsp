@@ -3817,11 +3817,7 @@ namespace KnowledgeBaseRetrievalClient {
   "!autorest"
 );
 @@clientName(SearchIndexClient.analyze, "analyzeText", "!autorest");
-@@clientName(
-  SearchIndexClient.listSynonymMaps,
-  "listPagedSynonymMaps",
-  "!autorest"
-);
+@@clientName(SearchIndexClient.listSynonymMaps, "listSynonymMaps", "!autorest");
 @@clientName(SearchIndexClient.getSynonymMap, "getSynonymMap", "!autorest");
 @@clientName(
   SearchIndexClient.deleteSynonymMap,
@@ -3840,7 +3836,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(
   SearchIndexClient.getIndexStatsSummary,
-  "listPagedIndexStatsSummary",
+  "listIndexStatsSummary",
   "!autorest"
 );
 @@clientName(SearchIndexClient.listAliases, "listAliases", "!autorest");
@@ -3904,7 +3900,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(
   SearchIndexClient.listKnowledgeSourceFiles,
-  "listPagedKnowledgeSourceFiles",
+  "listKnowledgeSourceFiles",
   "!autorest"
 );
 @@clientName(
@@ -3920,11 +3916,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(SearchIndexerClient.deleteIndexer, "deleteIndexer", "!autorest");
 @@clientName(SearchIndexerClient.getIndexer, "getIndexer", "!autorest");
-@@clientName(
-  SearchIndexerClient.listIndexers,
-  "listPagedIndexers",
-  "!autorest"
-);
+@@clientName(SearchIndexerClient.listIndexers, "listIndexers", "!autorest");
 @@clientName(SearchIndexerClient.runIndexer, "runIndexer", "!autorest");
 @@clientName(SearchIndexerClient.resetIndexer, "resetIndexer", "!autorest");
 @@clientName(SearchIndexerClient.resetDocs, "resetDocuments", "!autorest");
@@ -3951,7 +3943,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(
   SearchIndexerClient.listDataSources,
-  "listPagedDataSourceConnections",
+  "listDataSourceConnections",
   "!autorest"
 );
 @@clientName(
@@ -3966,11 +3958,7 @@ namespace KnowledgeBaseRetrievalClient {
   "!autorest"
 );
 @@clientName(SearchIndexerClient.getSkillset, "getSkillset", "!autorest");
-@@clientName(
-  SearchIndexerClient.listSkillsets,
-  "listPagedSkillsets",
-  "!autorest"
-);
+@@clientName(SearchIndexerClient.listSkillsets, "listSkillsets", "!autorest");
 @@clientName(SearchIndexerClient.deleteSkillset, "deleteSkillset", "!autorest");
 
 // Existing pageable APIs retain their names; only new paging APIs use GetAll.
@@ -3986,17 +3974,6 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(
   SearchIndexClient.getIndexStatsSummary,
   "GetAllIndexStatsSummary",
-  "csharp"
-);
-@@clientName(SearchIndexClient.listAliases, "GetAliases", "csharp");
-@@clientName(
-  SearchIndexClient.listKnowledgeBases,
-  "GetKnowledgeBases",
-  "csharp"
-);
-@@clientName(
-  SearchIndexClient.listKnowledgeSources,
-  "GetKnowledgeSources",
   "csharp"
 );
 @@clientName(
