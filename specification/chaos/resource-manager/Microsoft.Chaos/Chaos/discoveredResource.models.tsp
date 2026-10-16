@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -66,6 +67,20 @@ model DiscoveredResourceProperties {
    */
   @visibility(Lifecycle.Read)
   scope: string;
+
+  /**
+   * The Azure region of the discovered resource.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  location?: azureLocation;
+
+  /**
+   * The availability zones of the discovered resource.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  zones?: string[];
 }
 
 /**
