@@ -20996,65 +20996,6 @@
         }
       }
     },
-    "NetworkProfileDriftEntry": {
-      "type": "object",
-      "description": "A single desired versus observed delta detected during reconciliation.",
-      "properties": {
-        "propertyPath": {
-          "type": "string",
-          "description": "Dotted path to the diverged field, for example infrastructureNetwork.dnsServers."
-        },
-        "desiredValue": {
-          "description": "Value taken from the desired configuration snapshot."
-        },
-        "observedValue": {
-          "description": "Value reported by the cluster nodes."
-        },
-        "scope": {
-          "type": "string",
-          "description": "Where the drift was detected, for example cluster or node:contoso-node-02."
-        },
-        "firstDetectedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time at which the drift was first observed."
-        },
-        "severity": {
-          "$ref": "#/definitions/NetworkProfileDriftSeverity",
-          "description": "Severity of the detected drift."
-        }
-      }
-    },
-    "NetworkProfileDriftSeverity": {
-      "type": "string",
-      "description": "Severity of a detected configuration drift.",
-      "enum": [
-        "Informational",
-        "Warning",
-        "Error"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkProfileDriftSeverity",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Informational",
-            "value": "Informational",
-            "description": "The drift is informational and requires no action."
-          },
-          {
-            "name": "Warning",
-            "value": "Warning",
-            "description": "The drift may affect cluster networking and should be reviewed."
-          },
-          {
-            "name": "Error",
-            "value": "Error",
-            "description": "The drift affects cluster networking and requires remediation."
-          }
-        ]
-      }
-    },
     "NetworkProfileInfrastructureNetwork": {
       "type": "object",
       "description": "Cluster wide infrastructure networking reported by the cluster.",
@@ -21260,17 +21201,6 @@
           "$ref": "#/definitions/NetworkProfileDesiredSnapshot",
           "description": "Snapshot of the desired networking configuration captured from the deployment settings of the\ncluster together with the cluster wide proxy settings.",
           "readOnly": true
-        },
-        "drift": {
-          "type": "array",
-          "description": "Explicit desired versus observed deltas with scope and severity. Drift is surfaced for\nidentification only; remediation must be performed through the desired state authority.",
-          "items": {
-            "$ref": "#/definitions/NetworkProfileDriftEntry"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "propertyPath"
-          ]
         }
       }
     },

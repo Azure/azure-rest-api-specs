@@ -11802,14 +11802,6 @@ model NetworkProfileProperties {
    */
   @visibility(Lifecycle.Read)
   desiredSnapshot?: NetworkProfileDesiredSnapshot;
-
-  /**
-   * Explicit desired versus observed deltas with scope and severity. Drift is surfaced for
-   * identification only; remediation must be performed through the desired state authority.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["propertyPath"])
-  drift?: NetworkProfileDriftEntry[];
 }
 
 /**
@@ -12155,44 +12147,6 @@ model NetworkProfileDesiredSnapshot {
 }
 
 /**
- * A single desired versus observed delta detected during reconciliation.
- */
-@added(Versions.v2026_11_01_preview)
-model NetworkProfileDriftEntry {
-  /**
-   * Dotted path to the diverged field, for example infrastructureNetwork.dnsServers.
-   */
-  propertyPath?: string;
-
-  /**
-   * Value taken from the desired configuration snapshot.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The diverged value can be any JSON type because the drift entry is addressed by an arbitrary property path."
-  desiredValue?: unknown;
-
-  /**
-   * Value reported by the cluster nodes.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The diverged value can be any JSON type because the drift entry is addressed by an arbitrary property path."
-  observedValue?: unknown;
-
-  /**
-   * Where the drift was detected, for example cluster or node:contoso-node-02.
-   */
-  scope?: string;
-
-  /**
-   * Time at which the drift was first observed.
-   */
-  firstDetectedAt?: utcDateTime;
-
-  /**
-   * Severity of the detected drift.
-   */
-  severity?: NetworkProfileDriftSeverity;
-}
-
-/**
  * Outcome of the last network profile reconciliation pass.
  */
 @added(Versions.v2026_11_01_preview)
@@ -12224,23 +12178,6 @@ union NetworkProfileTrafficType {
 
   /** The intent carries storage traffic. */
   Storage: "Storage",
-}
-
-/**
- * Severity of a detected configuration drift.
- */
-@added(Versions.v2026_11_01_preview)
-union NetworkProfileDriftSeverity {
-  string,
-
-  /** The drift is informational and requires no action. */
-  Informational: "Informational",
-
-  /** The drift may affect cluster networking and should be reviewed. */
-  Warning: "Warning",
-
-  /** The drift affects cluster networking and requires remediation. */
-  Error: "Error",
 }
 
 ////////////////////////////////////////////////////////////////
