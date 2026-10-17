@@ -1919,7 +1919,9 @@
             "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
+            "format": "password",
+            "x-ms-client-name": "querySourceAuthorization",
+            "x-ms-secret": true
           },
           {
             "name": "x-ms-enable-elevated-read",
@@ -2446,7 +2448,9 @@
             "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
+            "format": "password",
+            "x-ms-client-name": "querySourceAuthorization",
+            "x-ms-secret": true
           },
           {
             "name": "x-ms-enable-elevated-read",
@@ -2697,7 +2701,9 @@
             "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
+            "format": "password",
+            "x-ms-client-name": "querySourceAuthorization",
+            "x-ms-secret": true
           },
           {
             "name": "x-ms-enable-elevated-read",
@@ -3359,7 +3365,9 @@
             "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
+            "format": "password",
+            "x-ms-client-name": "querySourceAuthorization",
+            "x-ms-secret": true
           },
           {
             "name": "x-ms-query-work-iq-source-authorization",
@@ -5307,7 +5315,9 @@
             "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "querySourceAuthorization"
+            "format": "password",
+            "x-ms-client-name": "querySourceAuthorization",
+            "x-ms-secret": true
           },
           {
             "name": "x-ms-query-work-iq-source-authorization",
@@ -19345,7 +19355,7 @@
     },
     "SearchIndexKnowledgeSourceFilterHint": {
       "type": "object",
-      "description": "A hint that identifies a field and representative values the query planner can use when constructing a filter.",
+      "description": "A hint that identifies a field and exhaustive grounding values the query planner can use when constructing a filter.",
       "properties": {
         "field": {
           "type": "string",
@@ -19354,7 +19364,7 @@
         },
         "fieldValues": {
           "type": "array",
-          "description": "Representative values for the field.",
+          "description": "The exhaustive set of values for the field. At most 160 values, with a maximum of 128 characters per value and 2048 characters combined.",
           "minItems": 1,
           "items": {
             "type": "string"
@@ -19462,7 +19472,7 @@
       "properties": {
         "filters": {
           "type": "array",
-          "description": "Filter hints that identify fields and representative values the query planner can use when constructing filters.",
+          "description": "Filter hints that identify fields and their exhaustive sets of values the query planner can use when constructing filters.",
           "items": {
             "$ref": "#/definitions/SearchIndexKnowledgeSourceFilterHint"
           }

@@ -1,0 +1,546 @@
+{
+  "operationId": "Indexes_Create",
+  "title": "SearchServiceCreateGraphIndex",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "api-version": "2026-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "Accept": "application/json;odata.metadata=minimal",
+    "index": {
+      "name": "people-graph",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Edm.String",
+          "key": true,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": true,
+          "sortable": true,
+          "facetable": false
+        },
+        {
+          "name": "fact_id",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": true,
+          "sortable": false,
+          "facetable": false
+        },
+        {
+          "name": "subject",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": true,
+          "sortable": true,
+          "facetable": true
+        },
+        {
+          "name": "predicate",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": true,
+          "sortable": false,
+          "facetable": true
+        },
+        {
+          "name": "object",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": true,
+          "sortable": true,
+          "facetable": true
+        },
+        {
+          "name": "object_string",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": true,
+          "sortable": false,
+          "facetable": true
+        },
+        {
+          "name": "object_double",
+          "type": "Edm.Double",
+          "retrievable": true,
+          "filterable": true,
+          "sortable": true,
+          "facetable": true
+        },
+        {
+          "name": "object_bool",
+          "type": "Edm.Boolean",
+          "retrievable": true,
+          "filterable": true
+        },
+        {
+          "name": "object_datetime",
+          "type": "Edm.DateTimeOffset",
+          "retrievable": true,
+          "filterable": true
+        },
+        {
+          "name": "subject_type",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": true,
+          "sortable": false,
+          "facetable": true
+        },
+        {
+          "name": "subject_id",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": true,
+          "sortable": true,
+          "facetable": true
+        },
+        {
+          "name": "object_type",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": true,
+          "sortable": false,
+          "facetable": true
+        },
+        {
+          "name": "object_id",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": true,
+          "sortable": true,
+          "facetable": true
+        },
+        {
+          "name": "graph_name",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": true,
+          "sortable": true,
+          "facetable": true
+        },
+        {
+          "name": "confidence",
+          "type": "Edm.Double",
+          "retrievable": true
+        },
+        {
+          "name": "subject_confidence",
+          "type": "Edm.Double",
+          "retrievable": true
+        },
+        {
+          "name": "predicate_confidence",
+          "type": "Edm.Double",
+          "retrievable": true
+        },
+        {
+          "name": "object_confidence",
+          "type": "Edm.Double",
+          "retrievable": true
+        },
+        {
+          "name": "chunk_id",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": false,
+          "sortable": false,
+          "facetable": false
+        },
+        {
+          "name": "parent_id",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": false,
+          "sortable": false,
+          "facetable": false
+        },
+        {
+          "name": "subject_display_name",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": false,
+          "sortable": false,
+          "facetable": false
+        },
+        {
+          "name": "object_display_name",
+          "type": "Edm.String",
+          "key": false,
+          "retrievable": true,
+          "searchable": false,
+          "filterable": false,
+          "sortable": false,
+          "facetable": false
+        }
+      ],
+      "graphProfile": {
+        "kind": "edgeList",
+        "fields": {
+          "assertionIdField": "id",
+          "factIdField": "fact_id",
+          "subjectField": "subject",
+          "predicateField": "predicate",
+          "objectField": "object",
+          "objectStringField": "object_string",
+          "objectDoubleField": "object_double",
+          "objectBoolField": "object_bool",
+          "objectDateTimeField": "object_datetime",
+          "subjectTypeField": "subject_type",
+          "subjectIdField": "subject_id",
+          "objectTypeField": "object_type",
+          "objectIdField": "object_id",
+          "confidenceField": "confidence",
+          "subjectConfidenceField": "subject_confidence",
+          "predicateConfidenceField": "predicate_confidence",
+          "objectConfidenceField": "object_confidence",
+          "sourceChunkIdField": "chunk_id",
+          "sourceParentIdField": "parent_id",
+          "graphNameField": "graph_name",
+          "subjectIdDisplayNameField": "subject_display_name",
+          "objectIdDisplayNameField": "object_display_name"
+        },
+        "provenanceIndexName": "people-chunks"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "people-graph",
+        "purviewEnabled": false,
+        "fields": [
+          {
+            "name": "id",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": false,
+            "key": true,
+            "synonymMaps": []
+          },
+          {
+            "name": "fact_id",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "subject",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "predicate",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "object",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "object_string",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "object_double",
+            "type": "Edm.Double",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "object_bool",
+            "type": "Edm.Boolean",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "object_datetime",
+            "type": "Edm.DateTimeOffset",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "subject_type",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "subject_id",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "object_type",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "object_id",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "graph_name",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "confidence",
+            "type": "Edm.Double",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "subject_confidence",
+            "type": "Edm.Double",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "predicate_confidence",
+            "type": "Edm.Double",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "object_confidence",
+            "type": "Edm.Double",
+            "searchable": false,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "chunk_id",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "parent_id",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "subject_display_name",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "object_display_name",
+            "type": "Edm.String",
+            "searchable": false,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "synonymMaps": []
+          }
+        ],
+        "scoringProfiles": [],
+        "suggesters": [],
+        "analyzers": [],
+        "normalizers": [],
+        "tokenizers": [],
+        "tokenFilters": [],
+        "charFilters": [],
+        "similarity": {
+          "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+        },
+        "graphProfile": {
+          "kind": "edgeList",
+          "provenanceIndexName": "people-chunks",
+          "fields": {
+            "assertionIdField": "id",
+            "factIdField": "fact_id",
+            "subjectField": "subject",
+            "predicateField": "predicate",
+            "objectField": "object",
+            "objectStringField": "object_string",
+            "objectDoubleField": "object_double",
+            "objectBoolField": "object_bool",
+            "objectDateTimeField": "object_datetime",
+            "subjectTypeField": "subject_type",
+            "subjectIdField": "subject_id",
+            "objectTypeField": "object_type",
+            "objectIdField": "object_id",
+            "confidenceField": "confidence",
+            "subjectConfidenceField": "subject_confidence",
+            "predicateConfidenceField": "predicate_confidence",
+            "objectConfidenceField": "object_confidence",
+            "sourceChunkIdField": "chunk_id",
+            "sourceParentIdField": "parent_id",
+            "graphNameField": "graph_name",
+            "subjectIdDisplayNameField": "subject_display_name",
+            "objectIdDisplayNameField": "object_display_name"
+          }
+        }
+      }
+    }
+  }
+}

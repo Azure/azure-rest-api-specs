@@ -1,0 +1,42 @@
+{
+  "operationId": "KnowledgeSources_GetStatus",
+  "title": "SearchServiceGetKnowledgeSourceGraphStatistics",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "sourceName": "ks-graph-cache",
+    "api-version": "2026-11-01-preview",
+    "Accept": "application/json;odata.metadata=minimal",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "azureBlob",
+        "synchronizationStatus": "active",
+        "synchronizationInterval": "1d",
+        "currentSynchronizationState": {
+          "startTime": "2026-11-01T00:00:00Z",
+          "itemsUpdatesProcessed": 2,
+          "itemsUpdatesFailed": 0,
+          "itemsSkipped": 0,
+          "errors": [],
+          "graphStatistics": {
+            "ontologyName": "product-ontology",
+            "triplesWritten": 0
+          }
+        },
+        "lastSynchronizationState": {
+          "startTime": "2026-10-31T00:00:00Z",
+          "endTime": "2026-10-31T00:01:00Z",
+          "itemsUpdatesProcessed": 3,
+          "itemsUpdatesFailed": 0,
+          "itemsSkipped": 0,
+          "graphStatistics": {
+            "ontologyName": "previous-product-ontology",
+            "triplesWritten": 2147483648
+          }
+        }
+      }
+    }
+  }
+}
