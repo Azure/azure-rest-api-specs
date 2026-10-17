@@ -161,6 +161,7 @@ alias querySourceAuthorizationHeader = {
   /** Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents. */
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
+  @secret
   @header("x-ms-query-source-authorization")
   querySourceAuthorization?: string;
 };
