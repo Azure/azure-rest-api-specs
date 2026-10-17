@@ -1164,6 +1164,62 @@ model VaultProperties {
    */
   @Versioning.added(KeyVault.Versions.v2026_06_01_preview)
   tokenBindingParameters?: TokenBindingParameters;
+
+  /**
+   * Configures an external Managed HSM key used to wrap the vault's protection keys.
+   * This property is write-only and is not returned in create, update, get, or list responses.
+   * It can be supplied when creating a vault or enabling wrapping on an existing vault.
+   * Protection key wrapping must be enabled for the vault.
+   * Reapplying an equivalent configuration is supported; replacing or removing it is not.
+   * A versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.
+   * Omitting this property or supplying null preserves the existing configuration.
+   */
+  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  protectionKeysWrappingKey?: WrappingKeyConfiguration;
+}
+
+/**
+ * Configuration of the external key used to wrap a vault's protection keys.
+ * Unsupported properties in this configuration and its nested objects are rejected.
+ * Unsupported API versions or a feature that is not enabled result in HTTP 400 with NotSupported.
+ * Invalid configurations or attempted replacement result in HTTP 400 with BadRequest or InvalidParameter.
+ * Protection key wrapping throttling results in HTTP 429 with InternalError.
+ * Other protection key wrapping failures result in HTTP 503 with InternalError.
+ * Errors use the existing CloudError response.
+ */
+@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+model WrappingKeyConfiguration {
+  /** Identifies the external wrapping key. */
+  keyValue: WrappingKeyValue;
+
+  /** Specifies how the service authenticates to the external wrapping key. */
+  keyAuthenticationData: WrappingKeyAuthenticationData;
+}
+
+/** Reference to an external Managed HSM wrapping key. */
+@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+model WrappingKeyValue {
+  /**
+   * Absolute HTTPS URL of a key on a supported Managed HSM endpoint.
+   * The path must be /keys/{key-name} or /keys/{key-name}/{key-version}.
+   * User information, query strings, fragments, and non-default ports are not supported.
+   */
+  @minLength(1)
+  url: url;
+
+  /** Wrapping key type. Only oct is supported. */
+  kty: "oct";
+}
+
+/** Authentication mechanism for accessing the external wrapping key. */
+@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+model WrappingKeyAuthenticationData {
+  /**
+   * Authentication mechanism. Only ServiceIdentity is supported.
+   * A caller-supplied vault managed identity is not required.
+   */
+  authType: "ServiceIdentity";
 }
 
 /**
@@ -1492,6 +1548,19 @@ model VaultPatchProperties {
    */
   @Versioning.added(KeyVault.Versions.v2026_06_01_preview)
   tokenBindingParameters?: TokenBindingParameters;
+
+  /**
+   * Configures an external Managed HSM key used to wrap the vault's protection keys.
+   * This property is write-only and is not returned in create, update, get, or list responses.
+   * It can be supplied when enabling wrapping on an existing vault.
+   * Protection key wrapping must be enabled for the vault.
+   * Reapplying an equivalent configuration is supported; replacing or removing it is not.
+   * A versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.
+   * Omitting this property or supplying null preserves the existing configuration.
+   */
+  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  protectionKeysWrappingKey?: WrappingKeyConfiguration;
 }
 
 /**

@@ -1692,6 +1692,9 @@
           },
           "Create or update a vault with network acls": {
             "$ref": "./examples/createVaultWithNetworkAcls.json"
+          },
+          "Create or update a vault with protection key wrapping": {
+            "$ref": "./examples/createVaultWithProtectionKeyWrapping.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1754,6 +1757,9 @@
           }
         },
         "x-ms-examples": {
+          "Enable protection key wrapping on an existing vault": {
+            "$ref": "./examples/updateVaultWithProtectionKeyWrapping.json"
+          },
           "Update an existing vault": {
             "$ref": "./examples/updateVault.json"
           }
@@ -6218,6 +6224,14 @@
         "tokenBindingParameters": {
           "$ref": "#/definitions/TokenBindingParameters",
           "description": "Configuration for Token Binding for Entra tokens"
+        },
+        "protectionKeysWrappingKey": {
+          "$ref": "#/definitions/WrappingKeyConfiguration",
+          "description": "Configures an external Managed HSM key used to wrap the vault's protection keys.\nThis property is write-only and is not returned in create, update, get, or list responses.\nIt can be supplied when enabling wrapping on an existing vault.\nProtection key wrapping must be enabled for the vault.\nReapplying an equivalent configuration is supported; replacing or removing it is not.\nA versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.\nOmitting this property or supplying null preserves the existing configuration.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         }
       }
     },
@@ -6321,6 +6335,14 @@
         "tokenBindingParameters": {
           "$ref": "#/definitions/TokenBindingParameters",
           "description": "Configuration for Token Binding for Entra tokens"
+        },
+        "protectionKeysWrappingKey": {
+          "$ref": "#/definitions/WrappingKeyConfiguration",
+          "description": "Configures an external Managed HSM key used to wrap the vault's protection keys.\nThis property is write-only and is not returned in create, update, get, or list responses.\nIt can be supplied when creating a vault or enabling wrapping on an existing vault.\nProtection key wrapping must be enabled for the vault.\nReapplying an equivalent configuration is supported; replacing or removing it is not.\nA versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.\nOmitting this property or supplying null preserves the existing configuration.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -6365,6 +6387,69 @@
       },
       "required": [
         "id"
+      ]
+    },
+    "WrappingKeyAuthenticationData": {
+      "type": "object",
+      "description": "Authentication mechanism for accessing the external wrapping key.",
+      "properties": {
+        "authType": {
+          "type": "string",
+          "description": "Authentication mechanism. Only ServiceIdentity is supported.\nA caller-supplied vault managed identity is not required.",
+          "enum": [
+            "ServiceIdentity"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "authType"
+      ]
+    },
+    "WrappingKeyConfiguration": {
+      "type": "object",
+      "description": "Configuration of the external key used to wrap a vault's protection keys.\nUnsupported properties in this configuration and its nested objects are rejected.\nUnsupported API versions or a feature that is not enabled result in HTTP 400 with NotSupported.\nInvalid configurations or attempted replacement result in HTTP 400 with BadRequest or InvalidParameter.\nProtection key wrapping throttling results in HTTP 429 with InternalError.\nOther protection key wrapping failures result in HTTP 503 with InternalError.\nErrors use the existing CloudError response.",
+      "properties": {
+        "keyValue": {
+          "$ref": "#/definitions/WrappingKeyValue",
+          "description": "Identifies the external wrapping key."
+        },
+        "keyAuthenticationData": {
+          "$ref": "#/definitions/WrappingKeyAuthenticationData",
+          "description": "Specifies how the service authenticates to the external wrapping key."
+        }
+      },
+      "required": [
+        "keyValue",
+        "keyAuthenticationData"
+      ]
+    },
+    "WrappingKeyValue": {
+      "type": "object",
+      "description": "Reference to an external Managed HSM wrapping key.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Absolute HTTPS URL of a key on a supported Managed HSM endpoint.\nThe path must be /keys/{key-name} or /keys/{key-name}/{key-version}.\nUser information, query strings, fragments, and non-default ports are not supported.",
+          "minLength": 1
+        },
+        "kty": {
+          "type": "string",
+          "description": "Wrapping key type. Only oct is supported.",
+          "enum": [
+            "oct"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "url",
+        "kty"
       ]
     }
   },
