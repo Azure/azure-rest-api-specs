@@ -16,7 +16,8 @@ const AllConditionalAgentDefinitionPreviews = #{
     AgentDefinitionOptInKeys.draft_agents_v1_preview,
     AgentDefinitionOptInKeys.digital_worker_v1_preview,
     AgentDefinitionOptInKeys.github_copilot_v1_preview,
-    AgentDefinitionOptInKeys.skills_v1_preview
+    AgentDefinitionOptInKeys.skills_v1_preview,
+    AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
   ],
 };
 
@@ -411,7 +412,10 @@ model PromptAgentDefinition extends AgentDefinition {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview],
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.github_copilot_v1_preview,
+        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+      ],
     }
   )
   harness?: AgentHarness;
@@ -475,7 +479,12 @@ model PromptAgentDefinition extends AgentDefinition {
 @doc("A managed runtime and agent loop used to execute a prompt agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+  #{
+    conditional_previews: #[
+      AgentDefinitionOptInKeys.github_copilot_v1_preview,
+      AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+    ],
+  }
 )
 @discriminator("type")
 model AgentHarness {
@@ -483,13 +492,25 @@ model AgentHarness {
   type: string;
 }
 
-@doc("The GitHub Copilot managed harness for prompt agents.")
+@doc("The Microsoft Copilot managed harness for prompt agents.")
+@extension(
+  "x-ms-foundry-meta",
+  #{
+    required_previews: #[AgentDefinitionOptInKeys.microsoft_copilot_v1_preview],
+  }
+)
+model MicrosoftCopilotHarness extends AgentHarness {
+  @doc("The type of managed harness. Always `microsoft_copilot_preview`.")
+  type: "microsoft_copilot_preview";
+}
+
+@doc("The legacy GitHub Copilot managed harness retained for compatibility. Use `MicrosoftCopilotHarness` for new prompt agents.")
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
 )
 model GitHubCopilotHarness extends AgentHarness {
-  @doc("The type of managed harness. Always `github_copilot_preview`.")
+  @doc("The legacy type of managed harness. Always `github_copilot_preview`; use `microsoft_copilot_preview` for new prompt agents.")
   type: "github_copilot_preview";
 }
 
@@ -548,12 +569,11 @@ model ContainerConfiguration {
 @doc("Session defaults applied to sessions created for a hosted agent version.")
 model SessionConfiguration {
   @doc("""
-    The idle duration, in seconds, before a session's sandbox is suspended. Optional — when
-    unset, the server default of 900 seconds is used. Must be between 120 and 3600 seconds
-    (inclusive).
+    The idle duration, in seconds, before a session's sandbox is suspended. When omitted,
+    the server defaults to 900 seconds. Must be between 120 and 14400 seconds (4 hours).
     """)
   @minValue(duration.fromISO("PT120S"))
-  @maxValue(duration.fromISO("PT3600S"))
+  @maxValue(duration.fromISO("PT14400S"))
   @example(duration.fromISO("PT300S"))
   @encode(DurationKnownEncoding.seconds, int32)
   idle_timeout_seconds?: duration = duration.fromISO("PT900S");
