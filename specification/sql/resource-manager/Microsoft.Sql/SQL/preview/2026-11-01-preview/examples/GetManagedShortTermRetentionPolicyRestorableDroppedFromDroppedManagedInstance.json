@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "locationName": "eastus",
+    "restorableDroppedManagedInstanceId": "dropped-mi,134300610000000000",
+    "restorableDroppedDatabaseId": "source-database,134300607000000000",
+    "policyName": "default",
+    "api-version": "2026-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/eastus/restorableDroppedManagedInstances/dropped-mi,134300610000000000/restorableDroppedManagedDatabases/source-database,134300607000000000/backupShortTermRetentionPolicies/default",
+        "name": "default",
+        "type": "Microsoft.Sql/locations/restorableDroppedManagedInstances/restorableDroppedManagedDatabases/backupShortTermRetentionPolicies",
+        "properties": {
+          "retentionDays": 14,
+          "immutabilityStatus": "Enabled"
+        }
+      }
+    }
+  },
+  "operationId": "ManagedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies_Get",
+  "title": "Gets the short-term retention policy for a database under a dropped managed instance."
+}
