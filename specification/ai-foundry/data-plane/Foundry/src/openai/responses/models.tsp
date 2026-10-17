@@ -92,6 +92,29 @@ namespace Azure.AI.Projects {
      */
     @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
     session_affinity?: SessionAffinityConfiguration;
+
+    /**
+     * Controls how Model Router handles request parameters that differ across candidate models.
+     * Defaults to relax when omitted. Explicit null and unknown values return a 400 (Bad Request) error.
+     * Requires the Foundry-Features: ModelRouterControls=V1Preview header.
+     * Applies only to Model Router's supported parameter mappings; it does not guarantee native Responses API compatibility.
+     */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    parameter_policy?: ModelRouterParameterPolicy = ModelRouterParameterPolicy.relax;
+  }
+
+  /** Request parameter handling policies supported by Model Router. */
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown parameter policies with a 400 response."
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union ModelRouterParameterPolicy {
+    /** Allows Model Router to adapt or omit unsupported parameters for the selected model. */
+    relax: "relax",
+
+    /** Prefers candidates that preserve supported request parameters, with relaxation when none are eligible. */
+    best_effort_preserve: "best-effort-preserve",
+
+    /** Requires candidates that preserve supported request parameters; rejects the request when none are eligible. */
+    preserve: "preserve",
   }
 
   /** Request settings that control Model Router session affinity. */
