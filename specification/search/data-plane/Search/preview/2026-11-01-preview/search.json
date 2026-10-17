@@ -14820,7 +14820,13 @@
       "properties": {
         "storageConnectionString": {
           "type": "string",
-          "description": "The connection string to the storage account where cached enrichment results are persisted."
+          "format": "password",
+          "description": "The connection string to the storage account where cached enrichment results are persisted.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "enableReprocessing": {
           "type": "boolean",

@@ -1938,6 +1938,8 @@ model KnowledgeSourceIngestionParameters {
 @added(Versions.v2026_11_01_preview)
 model KnowledgeSourceCache {
   /** The connection string to the storage account where cached enrichment results are persisted. */
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   storageConnectionString: string;
 
   /** Whether cached enrichment results can be reprocessed when the enrichment configuration changes. Must be true for graph extraction cache replay. */
