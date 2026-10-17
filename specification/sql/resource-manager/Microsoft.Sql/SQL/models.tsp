@@ -14017,6 +14017,67 @@ model RestorableDroppedDatabaseProperties {
 }
 
 /**
+ * Metadata retained for a dropped managed instance. This read-only resource
+ * describes a deleted instance and has no provisioning lifecycle.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This read-only recovery resource describes a deleted instance and has no provisioning lifecycle."
+@added(Versions.v2026_11_01_preview)
+model RestorableDroppedManagedInstanceProperties {
+  /** The name of the managed instance. */
+  @visibility(Lifecycle.Read)
+  managedInstanceName?: string;
+
+  /** The creation time of the managed instance (ISO8601 format). */
+  @visibility(Lifecycle.Read)
+  creationTime?: utcDateTime;
+
+  /** The deletion time of the managed instance (ISO8601 format). */
+  @visibility(Lifecycle.Read)
+  deletionTime?: utcDateTime;
+
+  /** The SLO of the managed instance. */
+  @visibility(Lifecycle.Read)
+  serviceLevelObjective?: string;
+
+  /** The reserved storage size of the managed instance in gigabytes. */
+  @encodedName("application/json", "reservedStorageSizeGB")
+  @visibility(Lifecycle.Read)
+  reservedStorageSizeGb?: int32;
+
+  /** The name of the resource group that contained the managed instance. */
+  @visibility(Lifecycle.Read)
+  resourceGroupName?: string;
+
+  /** The edition of the managed instance. */
+  @visibility(Lifecycle.Read)
+  edition?: string;
+
+  /** The number of virtual cores provisioned for the managed instance. */
+  @visibility(Lifecycle.Read)
+  vCores?: int32;
+
+  /** The DNS zone of the managed instance. */
+  @visibility(Lifecycle.Read)
+  dnsZone?: string;
+
+  /** Whether the managed instance used zone redundancy. */
+  @visibility(Lifecycle.Read)
+  zoneRedundant?: boolean;
+
+  /** The backup storage redundancy used by the managed instance. */
+  @visibility(Lifecycle.Read)
+  backupStorageAccountType?: string;
+
+  /** The SQL engine version edition of the managed instance. */
+  @visibility(Lifecycle.Read)
+  versionEdition?: string;
+
+  /** The customer-visible state of the dropped managed instance. */
+  @visibility(Lifecycle.Read)
+  state?: string;
+}
+
+/**
  * The restorable dropped managed database's properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -14051,6 +14112,13 @@ model RestorableDroppedManagedDatabaseProperties {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   earliestRestoreDate?: utcDateTime;
+
+  /**
+   * The name of the resource group that contained the source managed instance.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceGroupName?: string;
 }
 
 /**

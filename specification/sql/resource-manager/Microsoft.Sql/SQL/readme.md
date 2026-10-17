@@ -98,6 +98,7 @@ input-file:
   - preview/2026-11-01-preview/managedBackupShortTermRetentionPolicies.json
   - preview/2026-11-01-preview/managedDatabaseAdvancedThreatProtectionSettings.json
   - preview/2026-11-01-preview/managedDatabaseColumns.json
+  - preview/2026-11-01-preview/managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
   - preview/2026-11-01-preview/managedDatabaseMoveOperations.json
   - preview/2026-11-01-preview/managedDatabaseQueries.json
   - preview/2026-11-01-preview/managedDatabaseRestoreDetails.json
@@ -138,6 +139,8 @@ input-file:
   - preview/2026-11-01-preview/replicationLinks.json
   - preview/2026-11-01-preview/restorableDroppedDatabases.json
   - preview/2026-11-01-preview/restorableDroppedManagedDatabases.json
+  - preview/2026-11-01-preview/restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
+  - preview/2026-11-01-preview/restorableDroppedManagedInstancesByLocation.json
   - preview/2026-11-01-preview/restorePoints.json
   - preview/2026-11-01-preview/sensitivityLabels.json
   - preview/2026-11-01-preview/serverAdvancedThreatProtectionSettings.json
