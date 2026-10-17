@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ApiManagement;
 
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 @armResourceOperations
 interface AiGatewayNameAvailabilityOperations {
   /** Checks whether an AI Gateway name is valid and available in a location. */
@@ -24,7 +24,7 @@ interface AiGatewayNameAvailabilityOperations {
 
 /** OAuth actions on a tool-server endpoint, which is not an independent resource. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "The nested OAuth endpoint action uses the implemented explicit route and is not a separate ARM resource."
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 interface AiGatewayToolServerEndpointOperations {
   /** Gets links to complete OAuth consent for a tool-server endpoint. */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}/endpoints/{endpointId}/oauth2/getLoginLinks")
@@ -55,7 +55,7 @@ interface AiGatewayToolServerEndpointOperations {
   ): ArmResponse<AiGatewayToolServerOauth2LoginLinks> | ErrorResponse;
 }
 
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 @armResourceOperations
 interface AiGatewayTelemetryExporterResources {
   checkExistence is ArmResourceCheckExistence<
@@ -80,7 +80,7 @@ interface AiGatewayTelemetryExporterResources {
   listByWorkspace is ArmResourceListByParent<AiGatewayTelemetryExporterResource>;
 }
 
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 @armResourceOperations
 interface AiGatewayAliasResources {
   checkExistence is ArmResourceCheckExistence<
@@ -124,7 +124,7 @@ interface AiGatewayResources {
   listBySubscription is ArmListBySubscription<AiGatewayResource>;
 }
 
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 @armResourceOperations
 interface AiGatewayWorkspaceResources {
   checkExistence is ArmResourceCheckExistence<
@@ -140,7 +140,7 @@ interface AiGatewayWorkspaceResources {
   >;
 }
 
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 @armResourceOperations
 interface AiGatewayModelProviderResources {
   checkExistence is ArmResourceCheckExistence<
@@ -174,7 +174,7 @@ interface AiGatewayModelProviderResources {
   >;
 }
 
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 @armResourceOperations
 interface AiGatewayModelResources {
   checkExistence is ArmResourceCheckExistence<
@@ -199,7 +199,7 @@ interface AiGatewayModelResources {
   listByModelProvider is ArmResourceListByParent<AiGatewayModelResource>;
 }
 
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 @armResourceOperations
 interface AiGatewayToolServerResources {
   checkExistence is ArmResourceCheckExistence<
@@ -233,7 +233,7 @@ interface AiGatewayToolServerResources {
   >;
 }
 
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 @armResourceOperations
 interface AiGatewayApiKeyResources {
   checkExistence is ArmResourceCheckExistence<
@@ -287,7 +287,7 @@ interface AiGatewayApiKeyResources {
 
 /** Cross-provider model listing operations. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This operation returns models across all providers in one workspace."
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 interface AiGatewayWorkspaceModelOperations {
   /** Lists models from every model provider in an AI Gateway workspace. */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/models")

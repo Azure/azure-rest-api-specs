@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ApiManagement;
 
 /** Deployment details for an AI Gateway model. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayModelDeployment {
   /** ARM resource identifier of the provider deployment. */
   resourceId?: Azure.Core.armResourceIdentifier<[
@@ -29,7 +29,7 @@ model AiGatewayModelDeployment {
 }
 
 /** Deployment details to update on an AI Gateway model. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayModelDeploymentUpdate {
   /** ARM resource identifier of the provider deployment. */
   resourceId?: Azure.Core.armResourceIdentifier<[
@@ -46,7 +46,7 @@ model AiGatewayModelDeploymentUpdate {
 }
 
 /** A fallback target for a model policy. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayFallbackTarget {
   /** Resource identifier of a model in the same workspace. */
   modelId: Azure.Core.armResourceIdentifier<[
@@ -60,7 +60,7 @@ model AiGatewayFallbackTarget {
 }
 
 /** A fallback target to update on a model policy. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayFallbackTargetUpdate {
   /** Resource identifier of a model in the same workspace. */
   modelId?: Azure.Core.armResourceIdentifier<[
@@ -74,7 +74,7 @@ model AiGatewayFallbackTargetUpdate {
 }
 
 /** The type of an inline AI Gateway policy. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 union AiGatewayPolicyType {
   string,
 
@@ -107,7 +107,7 @@ union AiGatewayPolicyType {
 }
 
 /** Counter period. Token limits support minute/hour/day; cost limits support hour/day/week/month/year. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 union AiGatewayPolicyPeriod {
   string,
 
@@ -131,7 +131,7 @@ union AiGatewayPolicyPeriod {
 }
 
 /** Aggregation scope of an inline policy. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 union AiGatewayPolicyScope {
   string,
 
@@ -143,7 +143,7 @@ union AiGatewayPolicyScope {
 }
 
 /** Public request dimension used to partition a policy counter. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 union AiGatewayCounterDimension {
   string,
 
@@ -155,7 +155,7 @@ union AiGatewayCounterDimension {
 }
 
 /** An ordered cost-budget override; exactly one selector must be specified. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayCostLimitOverride {
   /** Authenticated token claims that must all match; dictionary keys are case-sensitive claim names. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for token claims. Changing its JSON object shape would break existing customer integrations; exception approval is required."
@@ -177,12 +177,12 @@ model AiGatewayCostLimitOverride {
 }
 
 /** An ordered cost-budget override to update. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayCostLimitOverrideUpdate
   is OptionalProperties<AiGatewayCostLimitOverride>;
 
 /** Authorization kind for an agent hook. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 union AiGatewayAgentHookAuthorizationType {
   string,
 
@@ -194,7 +194,7 @@ union AiGatewayAgentHookAuthorizationType {
 }
 
 /** Managed identity kind selected for an agent hook. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 union AiGatewayAgentHookIdentityType {
   string,
 
@@ -206,7 +206,7 @@ union AiGatewayAgentHookIdentityType {
 }
 
 /** Managed identity selected to authorize an agent hook. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayAgentHookIdentity {
   /** Managed identity kind. */
   type: AiGatewayAgentHookIdentityType;
@@ -216,12 +216,12 @@ model AiGatewayAgentHookIdentity {
 }
 
 /** Agent-hook managed identity settings to update. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayAgentHookIdentityUpdate
   is OptionalProperties<AiGatewayAgentHookIdentity>;
 
 /** Authorization settings for an external agent hook. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayAgentHookAuthorization {
   /** Authorization kind. */
   type: AiGatewayAgentHookAuthorizationType;
@@ -234,7 +234,7 @@ model AiGatewayAgentHookAuthorization {
 }
 
 /** Agent-hook authorization settings to update. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayAgentHookAuthorizationUpdate {
   /** Authorization kind. */
   type?: AiGatewayAgentHookAuthorizationType;
@@ -247,7 +247,7 @@ model AiGatewayAgentHookAuthorizationUpdate {
 }
 
 /** External hook settings; omitted fields inherit policy-level settings. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayAgentHook {
   /** Hook destination HTTPS URL. */
   endpoint?: url;
@@ -261,7 +261,7 @@ model AiGatewayAgentHook {
 }
 
 /** External hook settings to update. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayAgentHookUpdate {
   /** Hook destination HTTPS URL. */
   endpoint?: url;
@@ -275,7 +275,7 @@ model AiGatewayAgentHookUpdate {
 }
 
 /** Lifecycle hooks supported on tool servers. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayAgentHooks {
   /** Hook invoked before calling a tool. */
   preToolCall?: AiGatewayAgentHook;
@@ -285,7 +285,7 @@ model AiGatewayAgentHooks {
 }
 
 /** Lifecycle hook settings to update. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayAgentHooksUpdate {
   /** Hook invoked before calling a tool. */
   preToolCall?: AiGatewayAgentHookUpdate;
@@ -295,7 +295,7 @@ model AiGatewayAgentHooksUpdate {
 }
 
 /** Severity threshold used by a content safety policy. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 union AiGatewayContentSafetySeverity {
   string,
 
@@ -313,7 +313,7 @@ union AiGatewayContentSafetySeverity {
 }
 
 /** Action performed by an IP filtering policy. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 union AiGatewayIpFilterAction {
   string,
 
@@ -325,7 +325,7 @@ union AiGatewayIpFilterAction {
 }
 
 /** An inline policy. Supported policy types and scopes depend on the parent resource. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayPolicy {
   /** Policy type. */
   type: AiGatewayPolicyType;
@@ -432,7 +432,7 @@ model AiGatewayPolicy {
 }
 
 /** An inline policy to update on an AI Gateway model or tool server. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayPolicyUpdate {
   /** Policy type. */
   type?: AiGatewayPolicyType;
@@ -539,7 +539,7 @@ model AiGatewayPolicyUpdate {
 }
 
 /** Properties for updating an AI Gateway model. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayModelUpdateProperties {
   /** Display name of the model. */
   @encodedName("application/json", "name")
@@ -560,14 +560,14 @@ model AiGatewayModelUpdateProperties {
 }
 
 /** Parameters for updating an AI Gateway model. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayModelUpdateParameters {
   /** Model properties to update. */
   properties?: AiGatewayModelUpdateProperties;
 }
 
 /** Properties of an AI Gateway model. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayModelProperties {
   /** Display name of the model. */
   @encodedName("application/json", "name")
@@ -596,7 +596,7 @@ model AiGatewayModelProperties {
 }
 
 /** An AI Gateway model resource. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 @parentResource(AiGatewayModelProviderResource)
 model AiGatewayModelResource
   is Azure.ResourceManager.ProxyResource<AiGatewayModelProperties> {

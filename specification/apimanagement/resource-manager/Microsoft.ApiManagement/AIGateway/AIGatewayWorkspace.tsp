@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ApiManagement;
 
 /** Properties of an AI Gateway workspace. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayWorkspaceProperties {
   /** Display name of the workspace. */
   @visibility(Lifecycle.Read)
@@ -33,7 +33,7 @@ model AiGatewayWorkspaceProperties {
 }
 
 /** Properties for updating an AI Gateway workspace. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayWorkspaceUpdateProperties {
   /** Inline governance policies to replace on the default workspace. */
   @identifiers(#[])
@@ -41,14 +41,14 @@ model AiGatewayWorkspaceUpdateProperties {
 }
 
 /** Parameters for updating an AI Gateway workspace. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayWorkspaceUpdateParameters {
   /** Workspace properties to update. */
   properties?: AiGatewayWorkspaceUpdateProperties;
 }
 
 /** An AI Gateway workspace resource. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 @parentResource(AiGatewayResource)
 model AiGatewayWorkspaceResource
   is Azure.ResourceManager.ProxyResource<AiGatewayWorkspaceProperties> {

@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ApiManagement;
 
 /** A successful existence check, with no response body. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayResourceExistsResponse {
   /** HTTP status for an existing resource. */
   @statusCode
@@ -24,7 +24,7 @@ model AiGatewayResourceExistsResponse {
 }
 
 /** Parameters for checking an AI Gateway name in a location. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayCheckNameAvailabilityRequest {
   /** Name to validate and check for availability. */
   @pattern("^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$")
@@ -37,7 +37,7 @@ model AiGatewayCheckNameAvailabilityRequest {
 }
 
 /** Result of name validation and availability checking. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 union AiGatewayNameAvailabilityReason {
   string,
 
@@ -49,7 +49,7 @@ union AiGatewayNameAvailabilityReason {
 }
 
 /** Availability of an AI Gateway name in a location. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayCheckNameAvailabilityResponse {
   /** Whether the name is valid and available. */
   nameAvailable: boolean;
@@ -62,7 +62,7 @@ model AiGatewayCheckNameAvailabilityResponse {
 }
 
 /** Links for completing OAuth consent for a tool-server endpoint. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayToolServerOauth2LoginLinks {
   /** Gateway URL to open to begin consent; includes an expiring signed capability. */
   @secret
@@ -76,7 +76,7 @@ model AiGatewayToolServerOauth2LoginLinks {
 }
 
 /** A client-facing endpoint for invoking an AI Gateway resource. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayEndpoint {
   /** Complete HTTPS invocation URL. */
   @visibility(Lifecycle.Read)
@@ -92,7 +92,7 @@ model AiGatewayEndpoint {
 }
 
 /** Credential returned for a model provider. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayCredentialValue {
   /** Stored credential value. */
   @secret
@@ -100,7 +100,7 @@ model AiGatewayCredentialValue {
 }
 
 /** Secret values configured on tool server endpoints. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayToolServerSecrets {
   /** Endpoint secret values. */
   @identifiers(#["id"])
@@ -108,7 +108,7 @@ model AiGatewayToolServerSecrets {
 }
 
 /** An endpoint header returned by the secret retrieval action. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayToolServerSecretHeader {
   ...OmitProperties<AiGatewayToolServerHeader, "values">;
 
@@ -118,7 +118,7 @@ model AiGatewayToolServerSecretHeader {
 }
 
 /** OAuth settings returned by the secret retrieval action. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayToolServerSecretOauth2Authentication {
   ...OmitProperties<AiGatewayToolServerOauth2Authentication, "clientSecret">;
 
@@ -128,7 +128,7 @@ model AiGatewayToolServerSecretOauth2Authentication {
 }
 
 /** Endpoint credentials returned by the secret retrieval action. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayToolServerSecretCredentials {
   ...OmitProperties<AiGatewayToolServerCredentials, "headers" | "oauth2">;
 
@@ -141,7 +141,7 @@ model AiGatewayToolServerSecretCredentials {
 }
 
 /** OpenAPI document source returned by the secret retrieval action. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayToolServerSecretOpenApiSpecSource {
   ...OmitProperties<AiGatewayOpenApiSpecSource, "contentBase64">;
 
@@ -151,14 +151,14 @@ model AiGatewayToolServerSecretOpenApiSpecSource {
 }
 
 /** OpenAPI settings returned by the secret retrieval action. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayToolServerSecretOpenApiConfiguration {
   /** OpenAPI document source. */
   specSource: AiGatewayToolServerSecretOpenApiSpecSource;
 }
 
 /** Secret value configured on one tool server endpoint. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayToolServerSecret {
   /** Stable endpoint identifier. */
   id: string;
@@ -171,7 +171,7 @@ model AiGatewayToolServerSecret {
 }
 
 /** Primary and secondary API key values. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayApiKeyValues {
   /** Primary API key value. */
   @secret

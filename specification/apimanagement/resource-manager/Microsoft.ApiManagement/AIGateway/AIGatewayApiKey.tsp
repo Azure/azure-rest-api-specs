@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ApiManagement;
 
 /** Properties of an AI Gateway API key. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayApiKeyProperties {
   /** Display name of the key. */
   displayName?: string;
@@ -43,7 +43,7 @@ model AiGatewayApiKeyProperties {
 }
 
 /** Properties for updating an AI Gateway API key. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayApiKeyUpdateProperties {
   /** Display name of the key. */
   displayName?: string;
@@ -66,14 +66,14 @@ model AiGatewayApiKeyUpdateProperties {
 }
 
 /** Parameters for updating an AI Gateway API key. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayApiKeyUpdateParameters {
   /** API key properties to update. */
   properties?: AiGatewayApiKeyUpdateProperties;
 }
 
 /** An AI Gateway API key resource. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 @parentResource(AiGatewayResource)
 model AiGatewayApiKeyResource
   is Azure.ResourceManager.ProxyResource<AiGatewayApiKeyProperties> {

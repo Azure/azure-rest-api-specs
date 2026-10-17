@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ApiManagement;
 
 /** A model targeted by an AI Gateway alias. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayAliasTarget {
   /** Azure resource identifier of the target model in the default workspace. */
   resourceId: Azure.Core.armResourceIdentifier<[
@@ -34,11 +34,11 @@ model AiGatewayAliasTarget {
 }
 
 /** A model target to update on an AI Gateway alias. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayAliasTargetUpdate is OptionalProperties<AiGatewayAliasTarget>;
 
 /** Properties of a stable client-facing model alias. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayAliasProperties {
   /** Client-facing routing name sent in the request model field. */
   aliasName?: string;
@@ -75,7 +75,7 @@ model AiGatewayAliasProperties {
 }
 
 /** Properties to update on an AI Gateway alias. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayAliasUpdateProperties {
   /** Client-facing routing name sent in the request model field. */
   aliasName?: string;
@@ -99,14 +99,14 @@ model AiGatewayAliasUpdateProperties {
 }
 
 /** Parameters for updating an AI Gateway alias. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayAliasUpdateParameters {
   /** Alias properties to update. */
   properties?: AiGatewayAliasUpdateProperties;
 }
 
 /** A stable client-facing model identity backed by an ordered pool of models. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 @parentResource(AiGatewayWorkspaceResource)
 model AiGatewayAliasResource is ProxyResource<AiGatewayAliasProperties> {
   ...ResourceNameParameter<

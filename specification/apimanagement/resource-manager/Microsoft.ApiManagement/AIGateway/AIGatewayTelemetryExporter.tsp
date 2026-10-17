@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ApiManagement;
 
 /** Destination kind for gateway telemetry. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 union AiGatewayTelemetryExporterKind {
   string,
 
@@ -22,7 +22,7 @@ union AiGatewayTelemetryExporterKind {
 }
 
 /** Managed identity used to authenticate telemetry export requests. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayTelemetryManagedIdentity {
   /** Token audience requested for the managed identity. */
   resource?: string;
@@ -32,7 +32,7 @@ model AiGatewayTelemetryManagedIdentity {
 }
 
 /** Authentication settings for an OpenTelemetry exporter. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayTelemetryCredentials {
   /** Secret HTTP headers sent with export requests. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing functionality with heavy usage relies on the current string-dictionary contract for secret telemetry headers. Changing its JSON object shape would break existing customer integrations; exception approval is required."
@@ -45,7 +45,7 @@ model AiGatewayTelemetryCredentials {
 }
 
 /** OpenTelemetry export destinations and authentication. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayOpenTelemetryConfiguration {
   /** Full OTLP metrics endpoint URL, used without appending a signal path. */
   metricsEndpoint?: url;
@@ -70,7 +70,7 @@ model AiGatewayOpenTelemetryConfiguration {
 }
 
 /** Application Insights export destination. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayApplicationInsightsConfiguration {
   /** Application Insights connection string. Required when creating this exporter kind. */
   @secret
@@ -86,7 +86,7 @@ model AiGatewayApplicationInsightsConfiguration {
 }
 
 /** Telemetry signal receiving a claim attribute. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 union AiGatewayTelemetrySignal {
   string,
 
@@ -101,7 +101,7 @@ union AiGatewayTelemetrySignal {
 }
 
 /** A request JWT claim observed for telemetry only, not authentication or billing. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayTelemetryAttributeSource {
   /** Source kind. Only claims is currently supported. */
   kind: "claims";
@@ -112,7 +112,7 @@ model AiGatewayTelemetryAttributeSource {
 }
 
 /** A claim mapping to azure.ai_gateway.identity.claims.{claim}. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayTelemetryAttributeMapping {
   /** Claim source. Source claim names must be unique across mappings. */
   source: AiGatewayTelemetryAttributeSource;
@@ -123,12 +123,12 @@ model AiGatewayTelemetryAttributeMapping {
 }
 
 /** A claim source to update. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayTelemetryAttributeSourceUpdate
   is OptionalProperties<AiGatewayTelemetryAttributeSource>;
 
 /** A claim mapping to update. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayTelemetryAttributeMappingUpdate {
   /** Claim source. */
   source?: AiGatewayTelemetryAttributeSourceUpdate;
@@ -139,7 +139,7 @@ model AiGatewayTelemetryAttributeMappingUpdate {
 }
 
 /** Optional telemetry enrichment on a native AI Gateway OpenTelemetry exporter. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayTelemetryConfiguration {
   /** Observed-claim mappings; an empty array removes existing mappings. */
   @identifiers(#["source/value"])
@@ -147,7 +147,7 @@ model AiGatewayTelemetryConfiguration {
 }
 
 /** Telemetry enrichment settings to update. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayTelemetryConfigurationUpdate {
   /** Observed-claim mappings; an empty array removes existing mappings. */
   @identifiers(#[])
@@ -155,7 +155,7 @@ model AiGatewayTelemetryConfigurationUpdate {
 }
 
 /** Properties of an AI Gateway telemetry exporter. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayTelemetryExporterProperties {
   /** Exporter kind, which cannot change after creation. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -179,7 +179,7 @@ model AiGatewayTelemetryExporterProperties {
 }
 
 /** Properties to update on an AI Gateway telemetry exporter. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayTelemetryExporterUpdateProperties {
   /** Capture prompts, completions, and tool input/output. */
   payloadCapture?: boolean;
@@ -195,14 +195,14 @@ model AiGatewayTelemetryExporterUpdateProperties {
 }
 
 /** Parameters for updating an AI Gateway telemetry exporter. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 model AiGatewayTelemetryExporterUpdateParameters {
   /** Exporter properties to update. */
   properties?: AiGatewayTelemetryExporterUpdateProperties;
 }
 
 /** A telemetry export destination in the default AI Gateway workspace. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_11_01)
 @parentResource(AiGatewayWorkspaceResource)
 model AiGatewayTelemetryExporterResource
   is ProxyResource<AiGatewayTelemetryExporterProperties> {
