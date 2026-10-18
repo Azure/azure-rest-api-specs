@@ -1,9 +1,9 @@
-import { inspect } from "util";
+import { inspect } from "node:util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { equals } from "../../../shared/src/set.ts";
-import { byDate, invert } from "../../../shared/src/sort.ts";
+import { getLatestCommitStatuses, type LatestCommitStatus } from "../commit-statuses.ts";
 import { extractInputs } from "../context.ts";
-import type { Core } from "../github.ts";
+import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
 import { LabelAction } from "../label.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.ts";
 
@@ -16,8 +16,7 @@ export type IssueLabel =
 export type WorkflowRun =
   RestEndpointMethodTypes["actions"]["listWorkflowRunsForRepo"]["response"]["data"]["workflow_runs"][number];
 
-export type CommitStatus =
-  RestEndpointMethodTypes["repos"]["listCommitStatusesForRef"]["response"]["data"][number];
+export type CommitStatus = LatestCommitStatus;
 
 export type Artifact =
   RestEndpointMethodTypes["actions"]["listWorkflowRunArtifacts"]["response"]["data"]["artifacts"][number];
@@ -57,11 +56,7 @@ function readBooleanArtifactValue(artifactNames: string[], key: string): boolean
 // TODO: Add tests
 /* v8 ignore start */
 
-export default async function getLabelAction({
-  github,
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments): Promise<{
+export default async function getLabelAction({ github, context, core }: GitHubScriptArgs): Promise<{
   headSha: string;
   issueNumber: number;
   labelActions: ManagedLabelActions;
@@ -91,10 +86,7 @@ export async function getLabelActionImpl({
   repo: string;
   issue_number: number;
   head_sha: string;
-  github: import("@octokit/core").Octokit &
-    import("@octokit/plugin-rest-endpoint-methods").Api & {
-      paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
-    };
+  github: GitHub;
   core: Core;
 }): Promise<{ headSha: string; issueNumber: number; labelActions: ManagedLabelActions }> {
   const baseResult: { headSha: string; issueNumber: number } = {
@@ -187,15 +179,7 @@ export async function getLabelActionImpl({
 
   // permissions: { statuses: read }
 
-  const statuses: CommitStatus[] = await github.paginate(
-    github.rest.repos.listCommitStatusesForRef,
-    {
-      owner: owner,
-      repo: repo,
-      ref: head_sha,
-      per_page: PER_PAGE_MAX,
-    },
-  );
+  const statuses = await getLatestCommitStatuses(github, owner, repo, head_sha);
 
   core.info("Statuses:");
   statuses.forEach((status) => {
@@ -207,14 +191,9 @@ export async function getLabelActionImpl({
   const requiredStatuses: CommitStatus[] = [];
 
   for (const statusName of requiredStatusNames) {
-    // The "statuses" array may contain multiple statuses with the same "context" (aka "name"),
-    // but different states and update times. We only care about the latest.
-    const matchingStatuses = statuses
-      .filter((status) => status.context.toLowerCase() === statusName.toLowerCase())
-      .sort(invert(byDate((status) => status.updated_at)));
-
-    // undefined if matchingStatuses.length === 0 (which is OK)
-    const matchingStatus = matchingStatuses[0];
+    const matchingStatus = statuses.find(
+      (status) => status.context.toLowerCase() === statusName.toLowerCase(),
+    );
 
     core.info(`${statusName}: State='${matchingStatus?.state}'`);
 
@@ -268,7 +247,7 @@ export async function getLabelActionImpl({
  */
 async function checkArmAnalysisWorkflow(
   workflowRuns: WorkflowRun[],
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: GitHub,
   owner: string,
   repo: string,
   core: Core,

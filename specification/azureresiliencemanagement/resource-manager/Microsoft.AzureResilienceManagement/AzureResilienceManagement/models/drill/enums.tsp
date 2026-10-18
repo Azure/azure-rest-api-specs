@@ -246,7 +246,7 @@ union DrillType {
 union VMPresent {
   string,
 
-  @doc("Atleast one VM Present.")
+  @doc("At least one VM is present.")
   Present: "Present",
 
   @doc("No VM present.")
@@ -418,7 +418,7 @@ union DrillResourceNonQualificationReasons {
 union ResourceTypeCategories {
   string,
 
-  @doc("Indicates that alteast one Azure Site Recovery VMs are present.")
+  @doc("Indicates that at least one Azure Site Recovery VM is present.")
   @added(Versions.v2026_03_01_preview)
   AzureSiteRecoveryVMsPresent: "AzureSiteRecoveryVMsPresent",
 }
@@ -502,7 +502,7 @@ union DrillReportFinalizationState {
 }
 
 /** Regional resiliency posture reported by the selected protection solution. */
-@added(Versions.v2026_09_30_preview)
+@added(Versions.v2026_10_31_preview)
 union RegionalResiliencyStatus {
   string,
 
@@ -514,7 +514,7 @@ union RegionalResiliencyStatus {
 }
 
 /** Normal fault eligibility of a drill resource, independent of inclusion and readiness. */
-@added(Versions.v2026_09_30_preview)
+@added(Versions.v2026_10_31_preview)
 union FaultEligibility {
   string,
 
@@ -529,7 +529,7 @@ union FaultEligibility {
 }
 
 /** Reason requiring attention for a resource that requires recovery-plan participation and has no independent fault eligibility path. */
-@added(Versions.v2026_09_30_preview)
+@added(Versions.v2026_10_31_preview)
 union FaultIneligibleReason {
   string,
 

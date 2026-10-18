@@ -1,6 +1,6 @@
 import { sdkLabels, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import debug from "debug";
-import { writeFileSync } from "fs";
+import { writeFileSync } from "node:fs";
 import { isDeepStrictEqual } from "node:util";
 import { simpleGit } from "simple-git";
 import { getSDKSuppressionsChangedFiles, parseYamlContent } from "./common.ts";

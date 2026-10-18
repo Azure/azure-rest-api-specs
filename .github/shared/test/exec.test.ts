@@ -1,20 +1,19 @@
 import { mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
 import { findPackageJSON } from "node:module";
 import { tmpdir } from "node:os";
-import { dirname, join } from "path";
+import { dirname, join } from "node:path";
 import semver from "semver";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   execFile,
   execNodeBin,
   execNpm,
-  execNpmExec,
   execPnpm,
   execPnpmExec,
   isExecError,
 } from "../src/exec.ts";
-import { debugLogger } from "../src/logger.ts";
+import { ConsoleLogger, debugLogger } from "../src/logger.ts";
 
 vi.mock("node:module", async (importOriginal) => {
   const original = await importOriginal<typeof import("node:module")>();
@@ -29,6 +28,38 @@ describe("execFile", () => {
   const file = "node";
   const args = ["-e", `console.log("test")`];
   const expected = "test\n";
+
+  it("forwards command-specific environment without mutating the parent", async () => {
+    const original = process.env.TSV_EXEC_TEST;
+    const result = await execFile(
+      process.execPath,
+      ["-e", "process.stdout.write(process.env.TSV_EXEC_TEST)"],
+      {
+        env: { ...process.env, TSV_EXEC_TEST: "child-only" },
+      },
+    );
+    expect(result.stdout).toBe("child-only");
+    expect(process.env.TSV_EXEC_TEST).toBe(original);
+  });
+
+  it.each([false, true])("uses debug level for command traces (verbose=%s)", async (verbose) => {
+    const log = vi.spyOn(console, "log").mockImplementation(() => {});
+    const debug = vi.spyOn(console, "debug").mockImplementation(() => {});
+    try {
+      const result = await execFile(file, args, { logger: new ConsoleLogger(verbose) });
+      expect(result.stdout).toBe(expected);
+      expect(log).not.toHaveBeenCalled();
+      if (verbose) {
+        expect(debug).toHaveBeenCalledWith(`execFile("${file}", ${JSON.stringify(args)})`);
+        expect(debug).toHaveBeenCalledWith(`stdout: '${expected}'`);
+      } else {
+        expect(debug).not.toHaveBeenCalled();
+      }
+    } finally {
+      log.mockRestore();
+      debug.mockRestore();
+    }
+  });
 
   it.each([{}, options])("exec succeeds with default buffer (options: %o)", async (options) => {
     await expect(execFile(file, args, options)).resolves.toEqual({
@@ -203,19 +234,16 @@ describe("execNpm", () => {
   });
 });
 
-describe("execNpmExec", () => {
-  // A command run in the context of "npm exec ___" needs to call
-  // something installed in the workspace. In this case, oxfmt is present
-  // so it is used.
-  it("runs oxfmt", { timeout: 15_000 }, async () => {
-    // npm may emit warnings to stderr (e.g. unknown env config) depending on the
-    // environment, so only assert on stdout here.
-    const result = await execNpmExec(["oxfmt", "--version"], options);
-    expect(result.stdout.trim()).toMatch(/^Version: \d+\.\d+\.\d+$/);
-  });
-});
-
 describe("execPnpm", () => {
+  it("logs command invocations at debug rather than info level", async () => {
+    const logger = new ConsoleLogger();
+    const debug = vi.spyOn(logger, "debug");
+    const info = vi.spyOn(logger, "info");
+    await execPnpm(["--version"], { logger });
+    expect(debug).toHaveBeenCalledWith('execPnpm(["--version"])');
+    expect(info).not.toHaveBeenCalled();
+  });
+
   it("succeeds with --version", async () => {
     await expect(execPnpm(["--version"], options)).resolves.toMatchObject({
       stdout: expect.toSatisfy((v) => semver.valid(String(v)) !== null) as unknown,
@@ -243,6 +271,24 @@ describe("execPnpm", () => {
   it("fails when stdout exceeds maxBuffer", async () => {
     await expect(execPnpm(["--version"], { ...options, maxBuffer: 1 })).rejects.toMatchObject({
       code: "ERR_CHILD_PROCESS_STDIO_MAXBUFFER",
+    });
+  });
+
+  it.each([
+    { stderr: "", messageEnding: "exited with code 7" },
+    { stderr: "command diagnostic", messageEnding: "exited with code 7\ncommand diagnostic" },
+  ])("preserves failure details with stderr $stderr", async ({ stderr, messageEnding }) => {
+    const args = [
+      "exec",
+      "node",
+      "-e",
+      `process.stdout.write('command output'); process.stderr.write(${JSON.stringify(stderr)}); process.exitCode = 7;`,
+    ];
+    await expect(execPnpm(args, options)).rejects.toMatchObject({
+      code: 7,
+      stdout: "command output",
+      stderr,
+      message: `pnpm ${args.join(" ")} ${messageEnding}`,
     });
   });
 
