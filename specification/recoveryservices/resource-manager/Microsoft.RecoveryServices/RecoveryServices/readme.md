@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServices API.
 title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
-tag: package-preview-2026-10-31-preview
+tag: package-2026-07-01
 ```
 
 ### Validations
