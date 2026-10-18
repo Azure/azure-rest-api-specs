@@ -1417,6 +1417,7 @@ union ContainerType {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_08_31_preview)
   @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
   HanaScaleoutContainer: "HanaScaleoutContainer",
 }
 
@@ -3407,6 +3408,7 @@ model UnlockDeleteResponse {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model UpdateRecoveryPointRequest {
   /**
    * Resource properties.
@@ -3425,6 +3427,7 @@ model UpdateRecoveryPointRequest {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model PatchRecoveryPointInput {
   /**
    * Properties of Recovery Point
@@ -3443,6 +3446,7 @@ model PatchRecoveryPointInput {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model PatchRecoveryPointPropertiesInput {
   /**
    * Expiry time of Recovery Point in UTC.
@@ -6935,6 +6939,7 @@ model IaasVMRestoreRequest extends RestoreRequest {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Bulk restore request follows the existing RestoreRequest polymorphic contract."
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model BulkRestoreRequestBase extends RestoreRequest {
   /**
    * Type of this recovery.
@@ -6955,6 +6960,7 @@ model BulkRestoreRequestBase extends RestoreRequest {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Bulk restore request intentionally extends the intermediate RestoreRequest subtype shared by bulk workloads."
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -7062,6 +7068,7 @@ model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
  */
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model ProtectedItemRestoreDetailsBase {
   /**
    * ID of the backup copy to be recovered.
@@ -7108,6 +7115,7 @@ model ProtectedItemRestoreDetailsBase {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service contract uses RP acronym in the request name."
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model FetchRPForBulkRestoreRequest {
   /**
    * Protected item IDs for which recovery points should be fetched.
@@ -7124,6 +7132,7 @@ model FetchRPForBulkRestoreRequest {
  */
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model BulkRestoreRecoveryPointsResponse {
   /**
    * Map of the source protected item's ARM ID to its discovered recovery point.
@@ -8615,6 +8624,7 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model AzureVmWorkloadSAPHanaScaleoutProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -9653,6 +9663,7 @@ model ClientDiscoveryResponse {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 union CrossTenantProvisioningState {
   string,
   ResourceProvisioningState,
@@ -9680,6 +9691,7 @@ union CrossTenantProvisioningState {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model CrossTenantVaultMappingProperties {
   /**
    * ARM resource ID of the source vault.
@@ -9730,6 +9742,7 @@ model CrossTenantVaultMappingProperties {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model RemoveCrossTenantVaultMappingRequest {
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed.
@@ -9746,6 +9759,7 @@ model RemoveCrossTenantVaultMappingRequest {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 union VaultMappingState {
   string,
 
@@ -9767,6 +9781,7 @@ union VaultMappingState {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model CrossTenantVaultMappingStatusResponse {
   /**
    * Mapping name (if mapped).
@@ -9789,6 +9804,7 @@ model CrossTenantVaultMappingStatusResponse {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model VaultCredentialCertificateRequest {
   /**
    * Options for certificate generation.
@@ -9806,6 +9822,7 @@ model VaultCredentialCertificateRequest {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model VaultCredentialCertificateCreateOptions {
   /**
    * Validity period of the generated certificate in hours.
@@ -9824,6 +9841,7 @@ model VaultCredentialCertificateCreateOptions {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model VaultCredentialCertificateResponse
   is Azure.ResourceManager.ProxyResource<VaultCredentialCertificateProperties> {
   /**
@@ -9846,6 +9864,7 @@ model VaultCredentialCertificateResponse
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 union AuthType {
   string,
 
@@ -9863,6 +9882,7 @@ union AuthType {
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 model VaultCredentialCertificateProperties {
   /**
    * Authentication type.
