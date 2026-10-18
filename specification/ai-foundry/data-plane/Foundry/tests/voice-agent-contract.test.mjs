@@ -237,7 +237,7 @@ function checkSdkSessionFields(context) {
   );
 }
 
-function checkSdkVoiceInheritance(context) {
+function checkSdkVoiceInheritance(context, language) {
   const model = (name) => {
     const value = context.sdkPackage.models.find((m) => m.__raw?.name === name);
     assert.ok(value, `SDK metadata missing ${name}`);
@@ -258,12 +258,12 @@ function checkSdkVoiceInheritance(context) {
     // Public SDK names come from model declarations, not language-specific aliases.
     assert.equal(model(name).name, name);
     assert.equal(model(name).access, "public", name);
-    assert.equal(
-      model(name).properties.find((p) => p.serializedName === "sub_protocol")
-        .optional,
-      optional,
-      name,
+    const selector = model(name).properties.find(
+      (p) => p.serializedName === "sub_protocol",
     );
+    if (language === "csharp" && name === "VoiceAgentBaseDefinition")
+      assert.equal(selector, undefined);
+    else assert.equal(selector.optional, optional, name);
   }
   assert.equal(model("VoiceAgentDefinition").baseModel, voice);
   assert.equal(model("VoiceAgentLiveDefinition").baseModel, voice);
@@ -359,6 +359,103 @@ function checkSdkLiveDelegation(context) {
   assert.equal(
     model("VoiceHostedAgentConversationEngine").discriminatorValue,
     "hosted_agent",
+  );
+}
+
+function checkSdkLiveDelegationProjection(context, language, sdkProgram) {
+  const model = (name) =>
+    context.sdkPackage.models.find((m) => m.__raw?.name === name);
+  const property = model("VoiceAgentLiveDefinition").properties.find(
+    (p) => p.serializedName === "delegation",
+  );
+  assert.equal(property.optional, true);
+  const variants = [
+    [
+      "client",
+      "VoiceAgentLiveClientDelegationOptions",
+      "OpenAI.LiveClientDelegationParam",
+    ],
+    [
+      "responses",
+      "VoiceAgentLiveResponsesDelegationOptions",
+      "OpenAI.LiveResponsesDelegationParam",
+    ],
+    [
+      "foundry_managed_agent",
+      "VoiceAgentLiveManagedAgentDelegationOptions",
+      "Azure.AI.Projects.VoiceAgentLiveManagedAgentDelegation",
+    ],
+  ];
+  if (language !== "javascript") {
+    assert.equal(property.type.kind, "union");
+    assert.equal(property.type.__raw.name, "VoiceAgentLiveDelegation");
+    for (const name of [
+      "VoiceAgentLiveDelegationOptions",
+      ...variants.map(([, name]) => name),
+    ])
+      assert.equal(
+        model(name),
+        undefined,
+        `${language} must not expose ${name}`,
+      );
+    return;
+  }
+
+  const root = property.type;
+  assert.equal(root, model("VoiceAgentLiveDelegationOptions"));
+  assert.equal(root.kind, "model");
+  assert.equal(root.discriminatorProperty.serializedName, "type");
+  assert.deepEqual(
+    Object.keys(root.discriminatedSubtypes).sort(),
+    variants.map(([tag]) => tag).sort(),
+  );
+  for (const [tag, projectedName, sourceName] of variants) {
+    const projected = model(projectedName);
+    assert.equal(root.discriminatedSubtypes[tag], projected);
+    assert.equal(projected.baseModel, root);
+    assert.equal(projected.discriminatorValue, tag);
+    const source = type(sourceName, sdkProgram);
+    const original = fields(source);
+    // Compare fields within one compiler program, before SDK version projection.
+    const projection = fields(
+      type(`Azure.AI.Projects.${projectedName}`, sdkProgram),
+    );
+    assert.deepEqual(
+      [...projection.keys()].sort(),
+      [...original.keys()].sort(),
+    );
+    for (const [name, field] of original) {
+      assert.equal(
+        projection.get(name).type,
+        field.type,
+        `${projectedName}.${name}`,
+      );
+      assert.equal(
+        projection.get(name).optional,
+        field.optional,
+        `${projectedName}.${name}`,
+      );
+      assert.equal(
+        getPattern(sdkProgram, projection.get(name)),
+        getPattern(sdkProgram, field),
+      );
+    }
+    if (sourceName.startsWith("OpenAI.")) {
+      // The SDK projection must not reparent the reused native protocol models.
+      assert.equal(source.baseModel, type("OpenAI.delegation", sdkProgram));
+      assert.equal(
+        getTypeName(model(source.name).baseModel.__raw),
+        getTypeName(source.baseModel),
+      );
+      assert.notEqual(model(source.name).baseModel, root);
+    }
+  }
+  const responses = model(
+    "VoiceAgentLiveResponsesDelegationOptions",
+  ).properties.find((p) => p.serializedName === "responses");
+  assert.equal(
+    responses.type,
+    model("LiveResponsesDelegationSettingsInputParam"),
   );
 }
 
@@ -1934,7 +2031,29 @@ for (const [language, directory, emitter, rootClient] of [
         emitter,
       );
       checkErrors(context.diagnostics);
-      checkSdkVoiceInheritance(context);
+      checkSdkVoiceInheritance(context, language);
+      checkSdkLiveDelegationProjection(context, language, sdkProgram);
+
+      const selector = (name) =>
+        context.sdkPackage.models
+          .find((m) => m.__raw?.name === name)
+          .properties.find((p) => p.serializedName === "sub_protocol");
+      const baseSelector = selector("VoiceAgentBaseDefinition");
+      if (language === "csharp") {
+        assert.equal(baseSelector, undefined);
+      } else {
+        assert.equal(baseSelector.type.kind, "enum");
+        assert.equal(baseSelector.type.name, "VoiceAgentSubProtocol");
+      }
+      for (const [name, value, optional] of [
+        ["VoiceAgentDefinition", "realtime", true],
+        ["VoiceAgentLiveDefinition", "live", false],
+      ]) {
+        const property = selector(name);
+        assert.equal(property.optional, optional);
+        assert.equal(property.type.value, value);
+        assert.equal(property.type.kind, "constant");
+      }
 
       const clients = [];
       const methods = [];

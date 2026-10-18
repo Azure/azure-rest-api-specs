@@ -31,6 +31,10 @@ namespace Azure.AI.Projects {
   @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!csharp");
   @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!csharp");
 
+  // Keep selectors on concrete C# definitions; narrowing the base enum produces
+  // incompatible constructors and backing fields in the current emitter.
+  @@scope(VoiceAgentBaseDefinition.sub_protocol, "!csharp");
+
   // --------------------------------------------------------------------------------
   // Fix the xref.
   // --------------------------------------------------------------------------------

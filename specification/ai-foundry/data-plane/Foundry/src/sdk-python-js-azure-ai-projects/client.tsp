@@ -318,6 +318,40 @@ using Azure.AI.Projects;
 @@usage(VoiceAgentTransport, Usage.input | Usage.json);
 @@access(VoiceAgentTransport, Access.public);
 
+// JavaScript needs a discriminated SDK model to invoke variant serializers.
+// Spread the original fields without changing the native protocol hierarchy.
+namespace Azure.AI.Projects {
+  @doc("JavaScript delegation options selected by type.")
+  @discriminator("type")
+  model VoiceAgentLiveDelegationOptions {
+    type: OpenAI.DelegationType | "foundry_managed_agent";
+  }
+
+  @doc("Client delegation options.")
+  model VoiceAgentLiveClientDelegationOptions
+    extends VoiceAgentLiveDelegationOptions {
+    ...OpenAI.LiveClientDelegationParam;
+  }
+
+  @doc("Responses delegation options.")
+  model VoiceAgentLiveResponsesDelegationOptions
+    extends VoiceAgentLiveDelegationOptions {
+    ...OpenAI.LiveResponsesDelegationParam;
+  }
+
+  @doc("Foundry managed-agent delegation options.")
+  model VoiceAgentLiveManagedAgentDelegationOptions
+    extends VoiceAgentLiveDelegationOptions {
+    ...VoiceAgentLiveManagedAgentDelegation;
+  }
+}
+
+@@alternateType(
+  VoiceAgentLiveDelegation,
+  VoiceAgentLiveDelegationOptions,
+  "javascript"
+);
+
 // --------------------------------------------------------------------------------
 // Beta Voice Agent Conversations sub-client
 // --------------------------------------------------------------------------------
