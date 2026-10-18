@@ -61,16 +61,20 @@ export async function commentOrUpdate(
   issue_number: number,
   body: string,
   commentIdentifier: string,
+  commentUser?: string,
 ): Promise<void> {
   const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
 
-  const comments: IssueComment[] = await github.paginate(github.rest.issues.listComments, {
+  let comments: IssueComment[] = await github.paginate(github.rest.issues.listComments, {
     owner,
     repo,
     issue_number,
     per_page: PER_PAGE_MAX,
   });
 
+  if (commentUser) {
+    comments = comments.filter((comment) => comment.user?.login === commentUser);
+  }
   const [commentId, commentBody] = parseExistingComments(comments, commentIdentifier);
 
   if (commentId) {
