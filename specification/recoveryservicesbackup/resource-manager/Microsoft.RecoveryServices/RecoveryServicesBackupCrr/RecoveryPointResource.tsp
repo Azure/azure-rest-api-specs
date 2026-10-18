@@ -78,10 +78,7 @@ interface RecoveryPointResources {
      */
     @path protectedItemName: string,
 
-    /**
-     * OData filter options.
-     */
-    @query("$filter") $filter?: string,
+    ...ArmFilterParameter,
   ): ArmResponse<RecoveryPointResourceList> | NewErrorResponse;
 }
 

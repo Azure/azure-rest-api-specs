@@ -43,11 +43,7 @@ interface BackupUsageSummariesCrrOperationGroup {
       @segment("vaults")
       vaultName: string;
 
-      /**
-       * OData filter options.
-       */
-      @query("$filter")
-      $filter?: string;
+      ...ArmFilterParameter;
 
       /**
        * skipToken Filter.
@@ -84,11 +80,7 @@ interface AadPropertiesOperationGroup {
       @segment("locations")
       azureRegion: string;
 
-      /**
-       * OData filter options.
-       */
-      @query("$filter")
-      $filter?: string;
+      ...ArmFilterParameter;
     },
     Error = NewErrorResponse
   >;
@@ -179,11 +171,7 @@ interface BackupCrrJobsOperationGroup {
       @segment("locations")
       azureRegion: string;
 
-      /**
-       * OData filter options.
-       */
-      @query("$filter")
-      $filter?: string;
+      ...ArmFilterParameter;
 
       /**
        * skipToken Filter.
@@ -288,11 +276,7 @@ interface BackupProtectedItemsCrrOperationGroup {
       @segment("vaults")
       vaultName: string;
 
-      /**
-       * OData filter options.
-       */
-      @query("$filter")
-      $filter?: string;
+      ...ArmFilterParameter;
 
       /**
        * skipToken Filter.

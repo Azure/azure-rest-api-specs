@@ -97,11 +97,7 @@
             "type": "string"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter options.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Azure.ResourceManager.ArmFilterParameter"
           }
         ],
         "responses": {
@@ -277,11 +273,7 @@
             "type": "string"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter options.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Azure.ResourceManager.ArmFilterParameter"
           },
           {
             "name": "$skipToken",
@@ -644,11 +636,7 @@
             "type": "string"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter options.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Azure.ResourceManager.ArmFilterParameter"
           }
         ],
         "responses": {
@@ -701,11 +689,7 @@
             "type": "string"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter options.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Azure.ResourceManager.ArmFilterParameter"
           },
           {
             "name": "$skipToken",
@@ -765,11 +749,7 @@
             "type": "string"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter options.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Azure.ResourceManager.ArmFilterParameter"
           },
           {
             "name": "$skipToken",
@@ -5587,5 +5567,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.ResourceManager.ArmFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "The OData filter expression to apply to the list operation.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
+    }
+  }
 }
