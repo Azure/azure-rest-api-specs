@@ -80,7 +80,6 @@ describe("mitigateSdkBreakingChanges", () => {
       analysis.projects.unshift({
         typespecProject: "specification/service/Skipped.Service",
         sdkPackage: "",
-        status: analysisStatus,
         analysisStatus,
         breakingChanges: [],
       });

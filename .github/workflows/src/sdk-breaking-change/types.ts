@@ -33,7 +33,6 @@ export const AnalysisResultSchema = z.object({
       .object({
         typespecProject: z.string().min(1),
         sdkPackage: z.string(),
-        status: z.enum(["success", "failure", "skipped"]),
         analysisStatus: z.enum(["success", "failure", "skipped"]),
         breakingChanges: z.array(
           z.object({

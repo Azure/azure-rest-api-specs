@@ -221,6 +221,7 @@ jobs:
               );
             }
             await analyzeSdkProjects({
+              core,
               localSdkRepositoryPath: process.env.LOCAL_SDK_REPO_PATH,
               specificationRepositoryPath: process.env.SPEC_REPOSITORY_PATH,
               typeSpecConfigPaths: JSON.parse(typeSpecConfigPaths),
@@ -229,53 +230,8 @@ jobs:
               sdkRepoName: process.env.SDK_REPO_NAME,
               analyzedSha: process.env.ANALYZED_SHA,
               workflowUrl: process.env.WORKFLOW_URL,
-              resultDir: process.env.RUNNER_TEMP,
+              resultFilePath: `${process.env.RUNNER_TEMP}/sdk-breaking-change-results/sdk-breaking-change-analysis.json`,
               azureSdkCliPath: process.env.AZSDK_CLI_PATH,
-            });
-
-      - name: Publish result summary
-        if: always()
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        env:
-          RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
-          JOB_STATUS: ${{ job.status }}
-          ANALYSIS_OUTCOME: ${{ steps.analyze-sdk-projects.outcome }}
-          ANALYZED_SHA: ${{ needs.resolve.outputs.head-sha }}
-          JOB_LOG_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
-        with:
-          script: |
-            const { publishAnalysisSummary } =
-              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/publish-analysis-summary.ts');
-            await publishAnalysisSummary({
-              core,
-              resultsPath: process.env.RESULTS_PATH,
-              jobStatus: process.env.JOB_STATUS,
-              analysisOutcome: process.env.ANALYSIS_OUTCOME,
-              analyzedSha: process.env.ANALYZED_SHA,
-              jobLogUrl: process.env.JOB_LOG_URL,
-            });
-
-      - name: Create SDK analysis result artifact
-        if: always() && needs.resolve.outputs.head-sha != ''
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        env:
-          RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
-          PR_NUMBER: ${{ needs.resolve.outputs.pr-number }}
-          HEAD_SHA: ${{ needs.resolve.outputs.head-sha }}
-          SDK_LANGUAGE: ${{ needs.resolve.outputs.sdk-language }}
-          ANALYSIS_WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          STATUS: ${{ steps.analyze-sdk-projects.outcome == 'success' && 'success' || 'failure' }}
-        with:
-          script: |
-            const { createAnalysisResult } =
-              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/create-analysis-result.ts');
-            await createAnalysisResult({
-              resultsPath: process.env.RESULTS_PATH,
-              prNumber: Number(process.env.PR_NUMBER),
-              headSha: process.env.HEAD_SHA,
-              sdkLanguage: process.env.SDK_LANGUAGE,
-              analysisWorkflowUrl: process.env.ANALYSIS_WORKFLOW_URL,
-              status: process.env.STATUS,
             });
 
       - name: Upload SDK analysis results

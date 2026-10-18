@@ -79,7 +79,6 @@ describe("createAnalysisResult", () => {
         {
           typespecProject: "specification/service/Widget.Service",
           sdkPackage: "armwidget",
-          status: "success",
           analysisStatus: "success",
           breakingChanges: [
             {
@@ -138,7 +137,6 @@ describe("createAnalysisResult", () => {
         {
           typespecProject: "specification/service/Widget.Service",
           sdkPackage: "",
-          status: analysisStatus,
           analysisStatus,
           breakingChanges: [],
         },
