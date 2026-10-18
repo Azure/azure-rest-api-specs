@@ -1,0 +1,35 @@
+name: arm-api-reviewer-issue-eval
+description: Routing, novice intake, public-evidence handling, and publication
+  safeguards for ARM API Reviewer issue submission. No live GitHub writes are
+  permitted; these are conversational tests, not publication integration tests.
+skill: arm-api-reviewer-issue
+schemaVersion: "1.4"
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+  executor: copilot-sdk
+  model: gpt-5.1-codex-mini
+  skill_directories:
+    - ..
+  inject_skill_body: false
+metrics:
+  - name: behavior_quality
+    weight: 1
+    threshold: 1
+    description: All conversation and routing safeguards must pass.
+graders:
+  - type: tool_constraint
+    name: offline_read_only_tools
+    config:
+      allow_only:
+        - tool: skill
+        - tool: view
+        - tool: read
+        - tool: glob
+        - tool: grep
+        - tool: rg
+        - tool: ask_user
+tasks:
+  - tasks/routing/*.yaml

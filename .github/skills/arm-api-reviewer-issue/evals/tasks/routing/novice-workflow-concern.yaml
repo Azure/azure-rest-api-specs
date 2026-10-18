@@ -1,0 +1,30 @@
+id: novice-workflow-concern
+name: novice workflow concern
+tags:
+  - routing
+  - offline
+inputs:
+  prompt: |
+    I think the ARM API Reviewer did not start for my PR. I do not know the
+    workflow names or review contracts. Help me report the concern.
+    This is an offline exercise. Load the relevant skill, but do not call
+    GitHub, run shell commands, or publish anything. Explain any blocked
+    checks and ask only questions that I can reasonably answer.
+graders:
+  - type: skill_invocation
+    name: skill_invocation_1
+    config:
+      required_skills:
+        - arm-api-reviewer-issue
+      mode: any_order
+      allow_extra: true
+  - type: text
+    name: output_not_contains_2
+    config:
+      not_contains:
+        - Please provide the RPC rule ID
+  - type: text
+    name: output_not_contains_3
+    config:
+      not_contains:
+        - I created the issue

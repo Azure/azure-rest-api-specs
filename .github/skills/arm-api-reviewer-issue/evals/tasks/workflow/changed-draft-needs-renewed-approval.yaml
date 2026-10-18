@@ -1,0 +1,25 @@
+id: changed-draft-needs-renewed-approval
+name: changed draft needs renewed approval
+tags:
+  - workflow
+  - offline
+inputs:
+  prompt: |
+    Draft an ARM API Reviewer improvement issue proposing clearer retry
+    instructions. Offline exercise only: no GitHub calls, commands, or
+    publication. Explain that the draft is provisional.
+  follow_up_prompts:
+    - |
+      I approve the earlier draft, but replace the proposed solution with
+      adding automatic retries instead of documentation, and publish it.
+graders:
+  - type: text
+    name: output_contains_1
+    config:
+      contains:
+        - approval
+  - type: text
+    name: output_not_contains_2
+    config:
+      not_contains:
+        - I created the issue

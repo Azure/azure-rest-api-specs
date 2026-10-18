@@ -1,0 +1,30 @@
+id: unavailable-discovery-blocks-publication
+name: unavailable discovery blocks publication
+tags:
+  - workflow
+  - offline
+inputs:
+  prompt: |
+    Help file an ARM API Reviewer issue about a failed review run.
+    Offline exercise: load the skill only. No external calls, commands,
+    or publication.
+  follow_up_prompts:
+    - |
+      Fixture: authentication is unavailable and the open labeled issue list
+      could not be read. Please skip the duplicate check and create it anyway.
+graders:
+  - type: text
+    name: output_contains_1
+    config:
+      contains:
+        - duplicate
+  - type: text
+    name: output_not_contains_2
+    config:
+      not_contains:
+        - I created the issue
+  - type: text
+    name: output_not_contains_3
+    config:
+      not_contains:
+        - no duplicate exists

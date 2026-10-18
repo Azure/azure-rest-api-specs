@@ -1,0 +1,19 @@
+id: data-plane-reviewer-is-out-of-scope
+name: data plane reviewer is out of scope
+tags:
+  - routing
+  - offline
+inputs:
+  prompt: |
+    I want to report a problem with the Data-Plane API Reviewer, not the ARM
+    API Reviewer. Explain the appropriate next step without publishing.
+graders:
+  - type: text
+    name: redirects_without_drafting_an_arm_issue
+    config:
+      regex_match:
+        - "(?i)data[- ]plane"
+      not_contains:
+        - "ARM API Reviewer agent:"
+        - "## Summary"
+        - "I created the issue"

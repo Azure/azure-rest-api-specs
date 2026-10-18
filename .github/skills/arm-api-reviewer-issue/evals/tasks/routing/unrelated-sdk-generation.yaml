@@ -1,0 +1,17 @@
+id: unrelated-sdk-generation
+name: unrelated sdk generation
+tags:
+  - routing
+  - offline
+inputs:
+  prompt: |
+    Explain the SDK generation process for my TypeSpec project. I am not
+    reporting a concern about the ARM API Reviewer. Do not execute tools or
+    publish any issues.
+graders:
+  - type: skill_invocation
+    name: skill_invocation_1
+    config:
+      forbidden_skills:
+        - arm-api-reviewer-issue
+      allow_extra: true

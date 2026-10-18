@@ -1,0 +1,44 @@
+id: duplicate-returns-the-existing-link
+name: duplicate returns the existing link
+tags:
+  - workflow
+  - offline
+inputs:
+  prompt: |
+    Help me report that the ARM API Reviewer does not start when automation
+    adds WaitForARMFeedback. Offline exercise: load the skill only; no
+    GitHub calls, shell commands, or publication. Fixture records are not
+    a live duplicate check.
+  follow_up_prompts:
+    - |
+      Fixture: the matching open ARM issue is
+      https://github.com/Azure/azure-rest-api-specs/issues/47390,
+      about reliably dispatching reviews after automatic queue entry. My
+      concern and requested outcome are the same. Do not create or comment
+      on any issue. Explain the matching issue and the live-check limitation.
+checkpoints:
+  - after_turn: 1
+    graders:
+      - type: skill_invocation
+        name: skill_invocation_1
+        config:
+          required_skills:
+            - arm-api-reviewer-issue
+          mode: any_order
+          allow_extra: true
+graders:
+  - type: text
+    name: output_contains_2
+    config:
+      contains:
+        - https://github.com/Azure/azure-rest-api-specs/issues/47390
+  - type: text
+    name: output_not_contains_3
+    config:
+      not_contains:
+        - "## Summary"
+  - type: text
+    name: output_not_contains_4
+    config:
+      not_contains:
+        - I created the issue

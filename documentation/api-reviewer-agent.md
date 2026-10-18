@@ -679,6 +679,33 @@ as well as unjustified new suppressions that mask real compliance issues.
 - **Suppressions** -- `readme.md` and `suppressions.yaml` continuity across API versions
   (carried-over, dropped, and new suppressions)
 
+## Reporting a Reviewer Concern
+
+Use `/arm-api-reviewer-issue` to describe a concern about the ARM API Reviewer
+in ordinary language. The skill covers reviewer behavior, API-guidance
+interpretation, review process, and supporting repository workflows.
+
+1. Describe what you saw and what you expected. Share a public example if you
+   have one. You do not need a rule ID or detailed process knowledge.
+2. The skill researches relevant guidance and checks existing
+   [ARM API Reviewer issues](https://github.com/Azure/azure-rest-api-specs/issues?q=is%3Aissue+state%3Aopen+label%3A%22ARM+API+Reviewer+agent%22).
+   An exact duplicate returns the existing link without creating or changing
+   an issue.
+3. Review the complete proposed issue and approve publication. The skill files
+   only in public `Azure/azure-rest-api-specs`; do not provide private evidence.
+4. After publication, the skill verifies the issue and returns its URL. A
+   missing approval, blocked check, or uncertain result is not reported as
+   successful creation.
+
+Example requests:
+
+1. "The ARM reviewer did not start for my PR. Help me report it."
+2. "The reviewer flagged a pattern that I believe our guidance allows."
+3. "I would like clearer instructions for retrying a failed ARM review."
+
+See the [issue-submission skill](../.github/skills/arm-api-reviewer-issue/SKILL.md)
+for the scope, public-safety rules, and approval workflow.
+
 ## Tips
 
 - **Be specific.** Include the PR number or URL in your request. This produces
