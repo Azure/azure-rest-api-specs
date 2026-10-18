@@ -34,13 +34,12 @@ model RecoveryPointResource
 
 @tag("RecoveryPoints_Crr")
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
-interface RecoveryPointResources {
+interface RecoveryPointsCrr {
   /**
    * Provides the information of the backed up data identified using RecoveryPointID.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @errorsDoc("Error response describing why the operation failed.")
-  @operationId("RecoveryPointsCrr_Get")
   get is ArmResourceRead<RecoveryPointResource, Error = NewErrorResponse>;
 
   /**
@@ -48,7 +47,6 @@ interface RecoveryPointResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @errorsDoc("Error response describing why the operation failed.")
-  @operationId("RecoveryPointsCrr_List")
   @armResourceList(RecoveryPointResource)
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/")
   @get
@@ -84,13 +82,12 @@ interface RecoveryPointResources {
 
 @tag("RecoveryPoints_GetAccessToken")
 @armResourceOperations(#{ omitTags: true })
-interface RecoveryPointGetAccessToken {
+interface RecoveryPoints {
   /**
    * Returns the Access token for communication between BMS and Protection service
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @errorsDoc("Error response describing why the operation failed.")
-  @operationId("RecoveryPoints_GetAccessToken")
   @summary("Returns the Access token for communication between BMS and Protection service")
   @action("accessToken")
   getAccessToken is ArmResourceActionSync<
@@ -104,12 +101,12 @@ interface RecoveryPointGetAccessToken {
 @@doc(RecoveryPointResource.name, "Recovery Point Id");
 @@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
 @@doc(
-  RecoveryPointGetAccessToken.getAccessToken::parameters.body,
+  RecoveryPoints.getAccessToken::parameters.body,
   "Get Access Token request"
 );
-@@TypeSpec.list(RecoveryPointResources.list);
+@@TypeSpec.list(RecoveryPointsCrr.list);
 @@TypeSpec.OpenAPI.extension(
-  RecoveryPointResources.list,
+  RecoveryPointsCrr.list,
   "x-ms-odata",
   "#/definitions/BMSRPQueryObject"
 );

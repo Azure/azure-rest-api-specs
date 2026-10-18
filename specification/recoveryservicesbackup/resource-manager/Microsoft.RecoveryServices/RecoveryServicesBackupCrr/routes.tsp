@@ -20,15 +20,15 @@ alias CrrLroLocationHeader = {
 };
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: the interface name preserves the existing BackupUsageSummariesCRR operation group and operation ID casing."
 @tag("BackupUsageSummaries_CRR")
-interface BackupUsageSummariesCrrOperationGroup {
+interface BackupUsageSummariesCRR {
   /**
    * Fetches the backup management usage summaries of the vault.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @returnsDoc("OK")
   @errorsDoc("Error response describing why the operation failed.")
-  @operationId("BackupUsageSummariesCRR_List")
   @autoRoute
   @get
   @action("backupUsageSummaries")
@@ -57,7 +57,7 @@ interface BackupUsageSummariesCrrOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("AadProperties")
-interface AadPropertiesOperationGroup {
+interface AadProperties {
   /**
    * Fetches the AAD properties from target region BCM stamp.
    */
@@ -65,7 +65,6 @@ interface AadPropertiesOperationGroup {
   @returnsDoc("OK")
   @errorsDoc("Error response describing why the operation failed.")
   @summary("Fetches the AAD properties from target region BCM stamp.")
-  @operationId("AadProperties_Get")
   @autoRoute
   @get
   @action("backupAadProperties")
@@ -88,14 +87,13 @@ interface AadPropertiesOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("CrossRegionRestore")
-interface CrossRegionRestoreOperationGroup {
+interface CrossRegionRestore {
   /**
    * Restores the specified backed up data in a different region as compared to where the data is backed up.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @errorsDoc("Error response describing why the operation failed.")
   @summary("Restores the specified backed up data in a different region as compared to where the data is backed up.")
-  @operationId("CrossRegionRestore_Trigger")
   @autoRoute
   @action("backupCrossRegionRestore")
   trigger is ArmProviderActionAsync<
@@ -119,7 +117,7 @@ interface CrossRegionRestoreOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("CrrJobDetails")
-interface BackupCrrJobDetailsOperationGroup {
+interface BackupCrrJobDetails {
   /**
    * Get CRR job details from target region.
    */
@@ -127,7 +125,6 @@ interface BackupCrrJobDetailsOperationGroup {
   @returnsDoc("OK")
   @errorsDoc("Error response describing why the operation failed.")
   @summary("Get CRR job details from target region.")
-  @operationId("BackupCrrJobDetails_Get")
   @autoRoute
   @action("backupCrrJob")
   get is ArmProviderActionSync<
@@ -148,7 +145,7 @@ interface BackupCrrJobDetailsOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("BackupCrrJobs")
-interface BackupCrrJobsOperationGroup {
+interface BackupCrrJobs {
   /**
    * Gets the list of CRR jobs from the target region.
    */
@@ -156,7 +153,6 @@ interface BackupCrrJobsOperationGroup {
   @returnsDoc("OK")
   @errorsDoc("Error response describing why the operation failed.")
   @summary("Gets the list of CRR jobs from the target region.")
-  @operationId("BackupCrrJobs_List")
   @autoRoute
   @action("backupCrrJobs")
   list is ArmProviderActionSync<
@@ -185,14 +181,13 @@ interface BackupCrrJobsOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("CrrOperationResults")
-interface CrrOperationResultsOperationGroup {
+interface CrrOperationResults {
   /**
    * Gets the operation result of a cross-region-restore operation for the given operation ID and Azure region.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Faithful migration: the original CrrOperationResults_Get success response is body-less, matching the frozen stable/2023-01-15 contract."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @errorsDoc("Error response describing why the operation failed.")
-  @operationId("CrrOperationResults_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationResults/{operationId}")
   @get
   get(
@@ -224,13 +219,12 @@ interface CrrOperationResultsOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("CrrOperationStatus")
-interface CrrOperationStatusOperationGroup {
+interface CrrOperationStatus {
   /**
    * Gets the status of a cross-region-restore operation for the given operation ID and Azure region.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @errorsDoc("Error response describing why the operation failed.")
-  @operationId("CrrOperationStatus_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationsStatus/{operationId}")
   @get
   get(
@@ -254,14 +248,13 @@ interface CrrOperationStatusOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("BackupProtectedItems_Crr")
-interface BackupProtectedItemsCrrOperationGroup {
+interface BackupProtectedItemsCrr {
   /**
    * Provides a pageable list of all items that are backed up within a vault.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @returnsDoc("OK")
   @errorsDoc("Error response describing why the operation failed.")
-  @operationId("BackupProtectedItemsCrr_List")
   @autoRoute
   @get
   @action("backupProtectedItems/")
@@ -289,43 +282,37 @@ interface BackupProtectedItemsCrrOperationGroup {
 }
 
 @@TypeSpec.OpenAPI.extension(
-  BackupUsageSummariesCrrOperationGroup.list,
+  BackupUsageSummariesCRR.list,
   "x-ms-odata",
   "#/definitions/BMSBackupSummariesQueryObject"
 );
 @@TypeSpec.OpenAPI.extension(
-  AadPropertiesOperationGroup.get,
+  AadProperties.get,
   "x-ms-odata",
   "#/definitions/BMSAADPropertiesQueryObject"
 );
 @@doc(
-  CrossRegionRestoreOperationGroup.trigger::parameters.body,
+  CrossRegionRestore.trigger::parameters.body,
   "resource cross region restore request"
 );
-@@doc(
-  BackupCrrJobDetailsOperationGroup.get::parameters.body,
-  "CRR Job request"
-);
-@@doc(
-  BackupCrrJobsOperationGroup.list::parameters.body,
-  "Backup CRR Job request"
-);
+@@doc(BackupCrrJobDetails.get::parameters.body, "CRR Job request");
+@@doc(BackupCrrJobs.list::parameters.body, "Backup CRR Job request");
 @@doc(Azure.ResourceManager.ArmAcceptedLroResponse, "Accepted");
 @@doc(TypeSpec.Http.OkResponse, "OK");
-@@TypeSpec.list(BackupUsageSummariesCrrOperationGroup.list);
+@@TypeSpec.list(BackupUsageSummariesCRR.list);
 
 @@TypeSpec.nextLink(ResourceList.nextLink);
 
-@@TypeSpec.list(BackupCrrJobsOperationGroup.list);
+@@TypeSpec.list(BackupCrrJobs.list);
 @@TypeSpec.OpenAPI.extension(
-  BackupCrrJobsOperationGroup.list,
+  BackupCrrJobs.list,
   "x-ms-odata",
   "#/definitions/JobQueryObject"
 );
 
-@@TypeSpec.list(BackupProtectedItemsCrrOperationGroup.list);
+@@TypeSpec.list(BackupProtectedItemsCrr.list);
 @@TypeSpec.OpenAPI.extension(
-  BackupProtectedItemsCrrOperationGroup.list,
+  BackupProtectedItemsCrr.list,
   "x-ms-odata",
   "#/definitions/ProtectedItemQueryObject"
 );

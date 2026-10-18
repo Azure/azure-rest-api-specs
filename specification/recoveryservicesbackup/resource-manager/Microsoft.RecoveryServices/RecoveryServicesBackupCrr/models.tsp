@@ -1227,13 +1227,13 @@ model AadPropertiesResource extends Resource {
   /**
    * AADPropertiesResource properties
    */
-  properties?: AadProperties;
+  properties?: AadPropertiesModel;
 }
 
 /**
  * Azure Active Directory properties.
  */
-model AadProperties {
+model AadPropertiesModel {
   /**
    * Service principal client ID.
    */

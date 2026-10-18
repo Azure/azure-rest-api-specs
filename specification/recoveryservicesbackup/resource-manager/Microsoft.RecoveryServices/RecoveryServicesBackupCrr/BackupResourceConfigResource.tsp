@@ -36,13 +36,12 @@ model BackupResourceConfigResource
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Faithful migration: BackupResourceConfigResource is a read-only/singleton proxy resource; the original stable/2023-01-15 contract intentionally has no delete operation."
 @tag("BackupResourceStorageConfigs")
 @armResourceOperations(#{ omitTags: true })
-interface BackupResourceConfigResources {
+interface BackupResourceStorageConfigs {
   /**
    * Fetches resource storage config.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @errorsDoc("Error response describing why the operation failed.")
-  @operationId("BackupResourceStorageConfigs_Get")
   get is ArmResourceRead<
     BackupResourceConfigResource,
     Error = NewErrorResponse
@@ -54,7 +53,6 @@ interface BackupResourceConfigResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @errorsDoc("Error response describing why the operation failed.")
-  @operationId("BackupResourceStorageConfigs_Update")
   update is ArmResourceCreateOrReplaceSync<
     BackupResourceConfigResource,
     Response = ArmResourceUpdatedResponse<BackupResourceConfigResource>,
@@ -82,10 +80,10 @@ interface BackupResourceConfigResources {
   "BackupResourceConfigResource properties"
 );
 @@doc(
-  BackupResourceConfigResources.update::parameters.resource,
+  BackupResourceStorageConfigs.update::parameters.resource,
   "Vault storage config request"
 );
 @@doc(
-  BackupResourceConfigResources.patch::parameters.properties,
+  BackupResourceStorageConfigs.patch::parameters.properties,
   "Vault storage config request"
 );

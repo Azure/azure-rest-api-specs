@@ -5,69 +5,23 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
 
-@@clientLocation(
-  BackupResourceConfigResources.get,
-  "BackupResourceStorageConfigs"
-);
-@@clientLocation(
-  BackupResourceConfigResources.update,
-  "BackupResourceStorageConfigs"
-);
 @@clientName(
-  BackupResourceConfigResources.update::parameters.resource,
+  BackupResourceStorageConfigs.update::parameters.resource,
   "parameters"
 );
-@@clientLocation(
-  BackupResourceConfigResources.patch,
-  "BackupResourceStorageConfigs"
-);
-@@clientName(BackupResourceConfigResources.patch, "patch");
+@@clientName(BackupResourceStorageConfigs.patch, "patch");
 @@clientName(
-  BackupResourceConfigResources.patch::parameters.properties,
+  BackupResourceStorageConfigs.patch::parameters.properties,
   "parameters"
 );
 
-@@clientLocation(RecoveryPointResources.get, "RecoveryPointsCrr");
-@@clientLocation(RecoveryPointResources.list, "RecoveryPointsCrr");
-@@clientLocation(RecoveryPointGetAccessToken.getAccessToken, "RecoveryPoints");
-@@clientName(
-  RecoveryPointGetAccessToken.getAccessToken::parameters.body,
-  "parameters"
-);
+@@clientName(RecoveryPoints.getAccessToken::parameters.body, "parameters");
 
-@@clientLocation(
-  BackupUsageSummariesCrrOperationGroup.list,
-  "BackupUsageSummariesCRR"
-);
+@@clientName(CrossRegionRestore.trigger::parameters.body, "parameters");
 
-@@clientLocation(AadPropertiesOperationGroup.get, "AadProperties");
+@@clientName(BackupCrrJobDetails.get::parameters.body, "parameters");
 
-@@clientLocation(
-  CrossRegionRestoreOperationGroup.trigger,
-  "CrossRegionRestore"
-);
-@@clientName(
-  CrossRegionRestoreOperationGroup.trigger::parameters.body,
-  "parameters"
-);
-
-@@clientLocation(BackupCrrJobDetailsOperationGroup.get, "BackupCrrJobDetails");
-@@clientName(
-  BackupCrrJobDetailsOperationGroup.get::parameters.body,
-  "parameters"
-);
-
-@@clientLocation(BackupCrrJobsOperationGroup.list, "BackupCrrJobs");
-@@clientName(BackupCrrJobsOperationGroup.list::parameters.body, "parameters");
-
-@@clientLocation(CrrOperationResultsOperationGroup.get, "CrrOperationResults");
-
-@@clientLocation(CrrOperationStatusOperationGroup.get, "CrrOperationStatus");
-
-@@clientLocation(
-  BackupProtectedItemsCrrOperationGroup.list,
-  "BackupProtectedItemsCrr"
-);
+@@clientName(BackupCrrJobs.list::parameters.body, "parameters");
 
 // These language-scoped names avoid duplicate SDK model names without changing
 // the AutoRest definition keys in the frozen OpenAPI contract.

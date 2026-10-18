@@ -8,7 +8,7 @@ using Microsoft.RecoveryServices;
 // Spec names favor standard TypeSpec casing; these mappings keep SDK/wire-adjacent
 // names identical to the shipped RecoveryServicesBackup contract to avoid SDK breaks.
 @@clientName(AadPropertiesResource, "AADPropertiesResource");
-@@clientName(AadProperties, "AADProperties");
+@@clientName(AadPropertiesModel, "AADProperties");
 @@clientName(BmsBackupSummariesQueryObject, "BMSBackupSummariesQueryObject");
 @@clientName(KpiResourceHealthDetails, "KPIResourceHealthDetails");
 @@clientName(TargetAfsRestoreInfo, "TargetAFSRestoreInfo");
