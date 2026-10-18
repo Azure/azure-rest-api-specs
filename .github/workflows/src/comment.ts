@@ -51,6 +51,8 @@ export function parseExistingComments(
  * @param issue_number - The issue or pull request number.
  * @param body - The markdown content of the comment.
  * @param commentIdentifier - The value that will be stored in an html comment so we can retrieve this comment later
+ * @param commentUser - Optional GitHub author login used to filter existing
+ * comments. When omitted, comments from all authors are considered.
  * @returns Resolves when the comment is created or updated.
  */
 export async function commentOrUpdate(
