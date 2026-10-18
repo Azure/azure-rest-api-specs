@@ -1035,79 +1035,82 @@ union HealthState {
 /**
  * Supported actions for a backup management job.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum JobSupportedAction {
+union JobSupportedAction {
+  string,
+
   /**
    * Represents the Invalid value.
    */
-  Invalid,
+  Invalid: "Invalid",
 
   /**
    * Represents the Cancellable value.
    */
-  Cancellable,
+  Cancellable: "Cancellable",
 
   /**
    * Represents the Retriable value.
    */
-  Retriable,
+  Retriable: "Retriable",
 }
 
 /**
  * Recovery point tier type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum RecoveryPointTierType {
+union RecoveryPointTierType {
+  string,
+
   /**
    * Represents the Invalid value.
    */
-  Invalid,
+  Invalid: "Invalid",
 
   /**
    * Represents the InstantRP value.
    */
-  InstantRP,
+  InstantRP: "InstantRP",
 
   /**
    * Represents the HardenedRP value.
    */
-  HardenedRP,
+  HardenedRP: "HardenedRP",
 
   /**
    * Represents the ArchivedRP value.
    */
-  ArchivedRP,
+  ArchivedRP: "ArchivedRP",
 }
 
 /**
  * Recovery point tier status.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum RecoveryPointTierStatus {
+union RecoveryPointTierStatus {
+  string,
+
   /**
    * Represents the Invalid value.
    */
-  Invalid,
+  Invalid: "Invalid",
 
   /**
    * Represents the Valid value.
    */
-  Valid,
+  Valid: "Valid",
 
   /**
    * Represents the Disabled value.
    */
-  Disabled,
+  Disabled: "Disabled",
 
   /**
    * Represents the Deleted value.
    */
-  Deleted,
+  Deleted: "Deleted",
 
   /**
    * Represents the Rehydrated value.
    */
-  Rehydrated,
+  Rehydrated: "Rehydrated",
 }
 
 /**
