@@ -1,59 +1,52 @@
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { AnalysisResultSchema } from "../../src/sdk-breaking-change/types.ts";
+import type { AnalysisResult } from "../../src/sdk-breaking-change/types.ts";
 import {
   buildAnalysisReport,
   publishAnalysisResult,
 } from "../../src/sdk-breaking-change/publish-analysis-result.ts";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
-import { createAnalysisResult } from "../../src/sdk-breaking-change/create-analysis-result.ts";
 
 const analyzedSha = "6fb74c85cd16a8e13d4ad1aca058993cd076fa8b";
 const analysisWorkflowUrl = "https://github.com/owner/repo/actions/runs/123";
 let resultsPath: string;
+let analysisResult: AnalysisResult;
 
 beforeEach(async () => {
   resultsPath = join(import.meta.dirname, `results-${crypto.randomUUID()}`);
-  await mkdir(join(resultsPath, "package"), { recursive: true });
-  await writeFile(
-    join(resultsPath, "projects.json"),
-    JSON.stringify([
-      {
-        typespecProjectPath: "specification/service/Widget.Service",
-        packageName: "armwidget",
-        resultsPath: "package",
-        analysisStatus: "success",
-      },
-    ]),
-  );
-  await writeFile(
-    join(resultsPath, "package", "breaking-changes.json"),
-    JSON.stringify({
-      result: {
-        breakingChanges: [
-          {
-            breakingChange: "Model changed",
-            category: "spec change",
-            resolution: "Restore the old shape",
-          },
-          {
-            breakingChange: "Property changed",
-            category: "spec change",
-            resolution: null,
-          },
-        ],
-      },
-    }),
-  );
-  await createAnalysisResult({
-    resultsPath,
+  await mkdir(resultsPath, { recursive: true });
+  analysisResult = {
+    schemaVersion: 1,
     prNumber: 42,
     headSha: analyzedSha,
     sdkLanguage: "Go",
     analysisWorkflowUrl,
     status: "success",
-  });
+    projects: [
+      {
+        typespecProject: "specification/service/Widget.Service",
+        sdkPackage: "armwidget",
+        analysisStatus: "success",
+        breakingChanges: [
+          {
+            breakingChange: "Model changed",
+            category: "spec change",
+            suggestedFix: "Restore the old shape",
+          },
+          {
+            breakingChange: "Property changed",
+            category: "spec change",
+            suggestedFix: "",
+          },
+        ],
+      },
+    ],
+  };
+  await writeFile(
+    join(resultsPath, "sdk-breaking-change-analysis.json"),
+    JSON.stringify(analysisResult),
+  );
   vi.stubEnv("RESULTS_PATH", resultsPath);
 });
 
@@ -62,127 +55,41 @@ afterEach(async () => {
   await rm(resultsPath, { recursive: true, force: true });
 });
 
-describe("createAnalysisResult", () => {
-  it("creates a versioned artifact from raw analysis results", async () => {
-    const artifact = AnalysisResultSchema.parse(
-      JSON.parse(await readFile(join(resultsPath, "sdk-breaking-change-analysis.json"), "utf8")),
-    );
-
-    expect(artifact).toEqual({
-      schemaVersion: 1,
-      prNumber: 42,
-      headSha: analyzedSha,
-      sdkLanguage: "Go",
-      analysisWorkflowUrl,
-      status: "success",
-      projects: [
-        {
-          typespecProject: "specification/service/Widget.Service",
-          sdkPackage: "armwidget",
-          analysisStatus: "success",
-          breakingChanges: [
-            {
-              breakingChange: "Model changed",
-              category: "spec change",
-              suggestedFix: "Restore the old shape",
-            },
-            {
-              breakingChange: "Property changed",
-              category: "spec change",
-              suggestedFix: "",
-            },
-          ],
-        },
-      ],
-    });
-  });
-
-  it("includes the error message for a failed analysis", async () => {
-    const failureResultsPath = join(resultsPath, "failure");
-    await mkdir(failureResultsPath);
-    await writeFile(join(failureResultsPath, "error.log"), "Analysis failed with exit code 1.\n");
-
-    const artifact = await createAnalysisResult({
-      resultsPath: failureResultsPath,
-      prNumber: 42,
-      headSha: analyzedSha,
-      sdkLanguage: "Go",
-      analysisWorkflowUrl,
-      status: "failure",
-    });
-
-    expect(artifact.errorMessage).toBe("Analysis failed with exit code 1.");
-  });
-
+describe("buildAnalysisReport", () => {
   it.each(["skipped", "failure"] as const)(
     "preserves a project with analysis status %s and no generated package",
     async (analysisStatus) => {
-      await writeFile(
-        join(resultsPath, "projects.json"),
-        JSON.stringify([
-          { typespecProjectPath: "specification/service/Widget.Service", analysisStatus },
-        ]),
-      );
-
-      const artifact = await createAnalysisResult({
-        resultsPath,
-        prNumber: 42,
-        headSha: analyzedSha,
-        sdkLanguage: "Go",
-        analysisWorkflowUrl,
-        status: "success",
-      });
-
-      expect(artifact.projects).toEqual([
+      analysisResult.projects = [
         {
           typespecProject: "specification/service/Widget.Service",
           sdkPackage: "",
           analysisStatus,
           breakingChanges: [],
         },
-      ]);
+      ];
+      await writeFile(
+        join(resultsPath, "sdk-breaking-change-analysis.json"),
+        JSON.stringify(analysisResult),
+      );
+
+      const { result } = await buildAnalysisReport(resultsPath);
+
+      expect(result.projects).toEqual(analysisResult.projects);
     },
   );
 
   it("rejects a successful analysis project without a package name", async () => {
+    analysisResult.projects[0].sdkPackage = "";
     await writeFile(
-      join(resultsPath, "projects.json"),
-      JSON.stringify([
-        {
-          typespecProjectPath: "specification/service/Widget.Service",
-          resultsPath: "package",
-          analysisStatus: "success",
-        },
-      ]),
+      join(resultsPath, "sdk-breaking-change-analysis.json"),
+      JSON.stringify(analysisResult),
     );
 
-    await expect(
-      createAnalysisResult({
-        resultsPath,
-        prNumber: 42,
-        headSha: analyzedSha,
-        sdkLanguage: "Go",
-        analysisWorkflowUrl,
-        status: "success",
-      }),
-    ).rejects.toThrow("Successful analysis requires an SDK package name.");
+    await expect(buildAnalysisReport(resultsPath)).rejects.toThrow(
+      "Successful analysis requires an SDK package name.",
+    );
   });
 
-  it("uses a fallback error message when no failure log exists", async () => {
-    const artifact = await createAnalysisResult({
-      resultsPath: join(resultsPath, "setup-failure"),
-      prNumber: 42,
-      headSha: analyzedSha,
-      sdkLanguage: "Go",
-      analysisWorkflowUrl,
-      status: "failure",
-    });
-
-    expect(artifact.errorMessage).toBe("SDK breaking-change analysis failed.");
-  });
-});
-
-describe("buildAnalysisReport", () => {
   it("builds the command and report from downloaded results", async () => {
     const result = await buildAnalysisReport(resultsPath);
 
@@ -221,15 +128,12 @@ describe("publishAnalysisResult", () => {
   });
 
   it("publishes the error message for a failed analysis", async () => {
-    await writeFile(join(resultsPath, "error.log"), "SDK generation failed.\n");
-    await createAnalysisResult({
-      resultsPath,
-      prNumber: 42,
-      headSha: analyzedSha,
-      sdkLanguage: "Go",
-      analysisWorkflowUrl,
-      status: "failure",
-    });
+    analysisResult.status = "failure";
+    analysisResult.errorMessage = "SDK generation failed.";
+    await writeFile(
+      join(resultsPath, "sdk-breaking-change-analysis.json"),
+      JSON.stringify(analysisResult),
+    );
     const github = createMockGithub();
     const core = createMockCore();
 
