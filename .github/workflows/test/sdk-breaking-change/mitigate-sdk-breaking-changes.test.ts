@@ -11,9 +11,10 @@ const { execFileMock } = vi.hoisted(() => ({
 vi.mock("@azure-tools/specs-shared/exec", () => ({ execFile: execFileMock }));
 
 import {
-  mitigateSdkBreakingChanges,
+  AnalysisResultSchema,
   MitigationResultSchema,
-} from "../../src/sdk-breaking-change/mitigate-sdk-breaking-changes.ts";
+} from "../../src/sdk-breaking-change/types.ts";
+import { mitigateSdkBreakingChanges } from "../../src/sdk-breaking-change/mitigate-sdk-breaking-changes.ts";
 
 let temporaryDirectory: string;
 let analysisResultPath: string;
@@ -41,6 +42,8 @@ beforeEach(async () => {
         {
           typespecProject: "specification/service/Widget.Service",
           sdkPackage: "armwidget",
+          status: "success",
+          analysisStatus: "success",
           breakingChanges: [
             {
               breakingChange: "Model changed",
@@ -68,6 +71,41 @@ afterEach(async () => {
 });
 
 describe("mitigateSdkBreakingChanges", () => {
+  it.each(["skipped", "failure"] as const)(
+    "ignores projects with analysis status %s while mitigating successful projects",
+    async (analysisStatus) => {
+      const analysis = AnalysisResultSchema.parse(
+        JSON.parse(await readFile(analysisResultPath, "utf8")),
+      );
+      analysis.projects.unshift({
+        typespecProject: "specification/service/Skipped.Service",
+        sdkPackage: "",
+        status: analysisStatus,
+        analysisStatus,
+        breakingChanges: [],
+      });
+      await writeFile(analysisResultPath, JSON.stringify(analysis));
+
+      await mitigateSdkBreakingChanges({
+        analysisResultPath,
+        mitigationResultPath,
+        mitigationWorkflowUrl: "https://github.com/owner/repo/actions/runs/456",
+        specificationRepositoryPath,
+        resultDirPath: temporaryDirectory,
+        azureSdkCliPath: join(temporaryDirectory, "azsdk"),
+      });
+
+      const result = MitigationResultSchema.parse(
+        JSON.parse(await readFile(mitigationResultPath, "utf8")),
+      );
+      expect(result.status).toBe("success");
+      expect(result.projects).toHaveLength(1);
+      expect(result.projects[0].typespecProject).toBe("specification/service/Widget.Service");
+      expect(result.projects[0].breakingChanges[0].isResolved).toBe(true);
+      expect(execFileMock).toHaveBeenCalledOnce();
+    },
+  );
+
   it("runs customization and writes a cleaned mitigation result", async () => {
     await mitigateSdkBreakingChanges({
       analysisResultPath,
@@ -159,6 +197,8 @@ describe("mitigateSdkBreakingChanges", () => {
           {
             typespecProject: "specification/service/Missing.Service",
             sdkPackage: "armwidget",
+            status: "success",
+            analysisStatus: "success",
             breakingChanges: [
               {
                 breakingChange: "Model changed",

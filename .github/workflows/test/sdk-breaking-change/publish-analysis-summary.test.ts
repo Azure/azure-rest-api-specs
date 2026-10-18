@@ -27,6 +27,7 @@ describe("buildAnalysisSummary", () => {
           typespecProjectPath: "specification/service/Widget.Service",
           packageName: "armwidget",
           resultsPath: "package",
+          analysisStatus: "success",
         },
       ]),
     );
@@ -47,6 +48,7 @@ describe("buildAnalysisSummary", () => {
     expect(summary).toContain(`**Analyzed commit:** \`${"a".repeat(40)}\``);
     expect(summary).toContain("### specification/service/Widget.Service");
     expect(summary).toContain("**SDK Package:** armwidget");
+    expect(summary).toContain("**Analysis Status:** success");
     expect(summary).toContain('#### generate.json\n\n```json\n{"result":"succeeded"}\n```');
     expect(summary).not.toContain("#### build.json");
     expect(summary).toContain("#### breaking-changes.json");

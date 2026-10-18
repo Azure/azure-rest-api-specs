@@ -2,8 +2,12 @@ import { mkdir, readFile, realpath, stat, writeFile } from "node:fs/promises";
 import { dirname, isAbsolute, join, relative, sep } from "node:path";
 import { parseAzsdkResponse } from "@azure-tools/spec-gen-sdk-runner";
 import { execFile } from "@azure-tools/specs-shared/exec";
-import { z } from "zod";
-import { AnalysisResultSchema } from "./create-analysis-result.ts";
+import {
+  AnalysisResultSchema,
+  MitigationResultSchema,
+  type MitigationResult,
+  type MitigatedChange,
+} from "./types.ts";
 
 export interface AzsdkCustomizedCodeUpdateResponse {
   success: boolean;
@@ -15,35 +19,6 @@ export interface AzsdkCustomizedCodeUpdateResponse {
   response_error?: string;
   response_errors?: string[];
 }
-
-const MitigatedChangeSchema = z.object({
-  breakingChange: z.string(),
-  suggestedFix: z.string(),
-  isResolved: z.boolean(),
-  typespecChangesSummary: z.array(z.string()).optional(),
-});
-
-type MitigatedChange = z.infer<typeof MitigatedChangeSchema>;
-
-export const MitigationResultSchema = z.object({
-  schemaVersion: z.literal(1),
-  prNumber: z.number().int().positive(),
-  headSha: z.string().regex(/^[0-9a-f]{40}$/i),
-  sdkLanguage: z.string().min(1),
-  mitigationWorkflowUrl: z.string().url(),
-  status: z.enum(["success", "failure"]),
-  customizationCode: z.string(),
-  projects: z.array(
-    z.object({
-      typespecProject: z.string().min(1),
-      sdkPackage: z.string().min(1),
-      breakingChanges: z.array(MitigatedChangeSchema),
-    }),
-  ),
-  errorMessage: z.string().min(1).optional(),
-});
-
-export type MitigationResult = z.infer<typeof MitigationResultSchema>;
 
 export interface MitigateSdkBreakingChangesOptions {
   analysisResultPath: string;
@@ -90,6 +65,9 @@ export async function mitigateSdkBreakingChanges({
   const analysisResult = AnalysisResultSchema.parse(
     JSON.parse(await readFile(analysisResultPath, "utf8")),
   );
+  const analyzedProjects = analysisResult.projects.filter(
+    (project) => project.analysisStatus === "success",
+  );
   try {
     const specificationRepositoryPath = await realpath(unresolvedSpecificationRepositoryPath);
     const specificationRoot = await realpath(join(specificationRepositoryPath, "specification"));
@@ -103,14 +81,14 @@ export async function mitigateSdkBreakingChanges({
       mitigationWorkflowUrl,
       status: "success",
       customizationCode: "",
-      projects: analysisResult.projects.map((project) => ({
+      projects: analyzedProjects.map((project) => ({
         typespecProject: project.typespecProject,
         sdkPackage: project.sdkPackage,
         breakingChanges: [],
       })),
     };
 
-    for (const [projectIndex, project] of analysisResult.projects.entries()) {
+    for (const [projectIndex, project] of analyzedProjects.entries()) {
       if (project.breakingChanges.length === 0) {
         console.log(`No SDK breaking changes found for ${project.typespecProject}.`);
         continue;

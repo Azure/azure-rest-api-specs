@@ -27,6 +27,6 @@ export async function publishResultInComment(
     pullNumber,
     body,
     command,
-    "github-actions[bot]"
+    "github-actions[bot]",
   );
 }

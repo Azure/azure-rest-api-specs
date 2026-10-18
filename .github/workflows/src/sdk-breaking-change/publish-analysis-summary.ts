@@ -2,13 +2,8 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { escapeMarkdown, inlineCode, link } from "@azure-tools/specs-shared/markdown";
 import { z } from "zod";
+import { AnalyzeProjectSchema } from "./types.ts";
 import type { Core } from "../github.ts";
-
-const ProjectResultSchema = z.object({
-  typespecProjectPath: z.string().min(1),
-  packageName: z.string().min(1),
-  resultsPath: z.string().min(1),
-});
 
 const resultFiles = ["generate.json", "build.json", "breaking-changes.json"] as const;
 const ERROR_LOG_LINE_LIMIT = 10;
@@ -78,17 +73,24 @@ export async function buildAnalysisSummary({
     return blocks.filter((block) => block !== undefined).join("\n\n");
   }
 
-  const projects = z.array(ProjectResultSchema).parse(JSON.parse(manifest));
+  const projects = z.array(AnalyzeProjectSchema).parse(JSON.parse(manifest));
   for (const project of projects) {
-    const projectBlocks = [
-      `### ${escapeMarkdown(project.typespecProjectPath)}`,
-      `**SDK Package:** ${escapeMarkdown(project.packageName)}`,
-    ];
-    const projectResultsPath = join(resultsPath, project.resultsPath);
-    for (const resultFile of resultFiles) {
-      const result = await tryReadFile(join(projectResultsPath, resultFile), warning);
-      if (result !== undefined) {
-        projectBlocks.push(`#### ${resultFile}\n\n\`\`\`json\n${result.trimEnd()}\n\`\`\``);
+    const projectBlocks = [`### ${escapeMarkdown(project.typespecProjectPath)}`];
+    if (project.packageName) {
+      projectBlocks.push(`**SDK Package:** ${escapeMarkdown(project.packageName ?? "")}`);
+    }
+
+    if (project.analysisStatus) {
+      projectBlocks.push(`**Analysis Status:** ${escapeMarkdown(project.analysisStatus)}`);
+    }
+
+    if (project.resultsPath) {
+      const projectResultsPath = join(resultsPath, project.resultsPath);
+      for (const resultFile of resultFiles) {
+        const result = await tryReadFile(join(projectResultsPath, resultFile), warning);
+        if (result !== undefined) {
+          projectBlocks.push(`#### ${resultFile}\n\n\`\`\`json\n${result.trimEnd()}\n\`\`\``);
+        }
       }
     }
     blocks.push(projectBlocks.join("\n\n"));

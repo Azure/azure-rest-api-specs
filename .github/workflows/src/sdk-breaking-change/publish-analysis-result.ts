@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { escapeMarkdown, table } from "@azure-tools/specs-shared/markdown";
-import { AnalysisResultSchema, type AnalysisResult } from "./create-analysis-result.ts";
+import { AnalysisResultSchema, type AnalysisResult } from "./types.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
 import type { GitHubScriptArgs } from "../github.ts";
 

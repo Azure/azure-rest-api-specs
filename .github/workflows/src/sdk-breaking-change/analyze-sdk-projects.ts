@@ -1,5 +1,5 @@
 import { appendFile, mkdir, realpath, writeFile } from "node:fs/promises";
-import { basename, dirname, isAbsolute, join, relative, sep } from "node:path";
+import { basename, dirname, join } from "node:path";
 import {
   parseAzsdkResponse,
   resolveLanguageKey,
@@ -14,11 +14,7 @@ import {
   type TypeSpecMetadata,
 } from "@azure-tools/specs-shared/typespec-metadata";
 
-interface ProjectResult {
-  typespecProjectPath: string;
-  packageName: string;
-  resultsPath: string;
-}
+import type { AnalyzeProjectResult } from "./types.ts";
 
 export interface AnalyzeSdkProjectsOptions {
   localSdkRepositoryPath: string;
@@ -43,11 +39,6 @@ export const SdkLanguage = Object.freeze({
 
 export type SdkLanguage = (typeof SdkLanguage)[keyof typeof SdkLanguage];
 
-function isWithin(parent: string, child: string): boolean {
-  const path = relative(parent, child);
-  return path !== "" && path !== ".." && !path.startsWith(`..${sep}`) && !isAbsolute(path);
-}
-
 export async function analyzeSdkProjects({
   localSdkRepositoryPath: unresolvedLocalSdkRepositoryPath,
   specificationRepositoryPath,
@@ -62,9 +53,8 @@ export async function analyzeSdkProjects({
 }: AnalyzeSdkProjectsOptions): Promise<void> {
   const localSdkRepositoryPath = await realpath(unresolvedLocalSdkRepositoryPath);
   const resultsDirectory = join(resultDir, "sdk-breaking-change-results");
-  const analysisLog = join(resultsDirectory, "analysis.log");
   await mkdir(resultsDirectory, { recursive: true });
-  await writeFile(analysisLog, "");
+  const errorLogPath = join(resultsDirectory, "error.log");
   await writeFile(
     join(resultsDirectory, "trigger.json"),
     `${JSON.stringify({
@@ -75,7 +65,7 @@ export async function analyzeSdkProjects({
     })}\n`,
   );
 
-  const projects: ProjectResult[] = [];
+  const projects: AnalyzeProjectResult[] = [];
   const packageNames = new Set<string>();
   const azureSdkCli = join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk");
   await writeFile(join(resultsDirectory, "projects.json"), "[]\n");
@@ -90,27 +80,41 @@ export async function analyzeSdkProjects({
       console.log(`Metadata for ${typeSpecProjectPath}:`, metadata);
       const languageKey = resolveLanguageKey(sdkRepoName, metadata.languages);
       if (!languageKey) {
-        throw new Error(
-          `Expected language key for ${typeSpecProjectPath} and SDK repo ${sdkRepoName}, but none was found.`,
-        );
+        const message = `No language key found for ${typeSpecProjectPath} and SDK repo ${sdkRepoName}. Skipping this project.`;
+        console.error(message);
+        await appendFile(errorLogPath, `${message}\n`);
+        projects.push({
+          typespecProjectPath: typeSpecProjectPath,
+          analysisStatus: "skipped",
+          errorMessage: message,
+        });
+        continue;
       }
       const languageMetadata = metadata.languages[languageKey];
       if (!languageMetadata || languageMetadata.length === 0) {
-        throw new Error(
-          `Expected language metadata for ${typeSpecProjectPath} and language ${sdkLanguage}, but none was found.`,
-        );
+        const message = `No language metadata found for ${typeSpecProjectPath} and language ${sdkLanguage}. Skipping this project.`;
+        console.error(message);
+        await appendFile(errorLogPath, `${message}\n`);
+        projects.push({
+          typespecProjectPath: typeSpecProjectPath,
+          analysisStatus: "skipped",
+          errorMessage: message,
+        });
+        continue;
       }
       let packagePath = languageMetadata[0].outputDir;
       if (!packagePath) {
-        throw new Error(
-          `Expected output directory for ${typeSpecProjectPath} and language ${sdkLanguage}, but none was found.`,
-        );
+        const message = `No output directory found for ${typeSpecProjectPath} and language ${sdkLanguage}. Skipping this project.`;
+        console.error(message);
+        await appendFile(errorLogPath, `${message}\n`);
+        projects.push({
+          typespecProjectPath: typeSpecProjectPath,
+          analysisStatus: "skipped",
+          errorMessage: message,
+        });
+        continue;
       }
       packagePath = resolvePackagePath(packagePath, localSdkRepositoryPath);
-
-      if (!isWithin(localSdkRepositoryPath, packagePath)) {
-        throw new Error(`Invalid generated package path: ${packagePath}`);
-      }
       const packageName = basename(packagePath);
       const resultsPath = packageNames.has(packageName)
         ? `${packageName}-${index + 1}`
@@ -133,9 +137,15 @@ export async function analyzeSdkProjects({
       const generateResponse: AzsdkGenerateResponse =
         parseAzsdkResponse<AzsdkGenerateResponse>(stdout);
       if (generateResponse.result !== "succeeded") {
-        throw new Error(
-          `Failed to generate SDK for ${typeSpecProjectPath}: ${generateResponse.response_error ?? "Unknown error"}`,
-        );
+        const message = `Failed to generate SDK for ${typeSpecProjectPath}: ${generateResponse.response_error ?? "Unknown error"}. Skipping this project.`;
+        console.error(message);
+        await appendFile(errorLogPath, `${message}\n`);
+        projects.push({
+          typespecProjectPath: typeSpecProjectPath,
+          analysisStatus: "failure",
+          errorMessage: message,
+        });
+        continue;
       }
 
       await writeFile(
@@ -155,9 +165,15 @@ export async function analyzeSdkProjects({
         const { stdout: buildStdout } = await execFile(azureSdkCli, buildArgs);
         const buildResponse: AzsdkBuildResponse = parseAzsdkResponse(buildStdout);
         if (buildResponse.result !== "succeeded") {
-          throw new Error(
-            `Failed to build SDK for ${typeSpecProjectPath}: ${buildResponse.response_error ?? "Unknown error"}`,
-          );
+          const message = `Failed to build SDK for ${typeSpecProjectPath}: ${buildResponse.response_error ?? "Unknown error"}. Skipping this project.`;
+          console.error(message);
+          await appendFile(errorLogPath, `${message}\n`);
+          projects.push({
+            typespecProjectPath: typeSpecProjectPath,
+            analysisStatus: "failure",
+            errorMessage: message,
+          });
+          continue;
         }
         await writeFile(
           join(projectResults, "build.json"),
@@ -184,26 +200,33 @@ export async function analyzeSdkProjects({
         breakingChangesResponse.response_error ||
         breakingChangesResponse.response_errors?.length
       ) {
-        throw new Error(
-          `Failed to detect breaking changes for ${typeSpecProjectPath}: ${
-            breakingChangesResponse.response_error ??
-            breakingChangesResponse.response_errors?.join("; ") ??
-            "Unknown error"
-          }`,
-        );
+        const message = `Failed to detect breaking changes for ${typeSpecProjectPath}: ${
+          breakingChangesResponse.response_error ??
+          breakingChangesResponse.response_errors?.join("; ") ??
+          "Unknown error"
+        }`;
+        console.error(message);
+        await appendFile(errorLogPath, `${message}\n`);
+        projects.push({ typespecProjectPath: typeSpecProjectPath, analysisStatus: "failure" });
+        continue;
       }
       await writeFile(
         join(projectResults, "breaking-changes.json"),
         `${JSON.stringify(breakingChangesResponse, null, 2)}\n`,
       );
 
-      projects.push({ typespecProjectPath: typeSpecProjectPath, packageName, resultsPath });
-      await writeFile(join(resultsDirectory, "projects.json"), `${JSON.stringify(projects)}\n`);
+      projects.push({
+        typespecProjectPath: typeSpecProjectPath,
+        packageName: packageName,
+        resultsPath,
+        analysisStatus: "success",
+      });
     }
+    await writeFile(join(resultsDirectory, "projects.json"), `${JSON.stringify(projects)}\n`);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    await appendFile(analysisLog, `${message}\n`);
-    await writeFile(join(resultsDirectory, "error.log"), `${message}\n`);
+    await appendFile(join(resultsDirectory, "error.log"), `${message}\n`);
+    await writeFile(join(resultsDirectory, "projects.json"), `${JSON.stringify(projects)}\n`);
     throw error;
   }
 }

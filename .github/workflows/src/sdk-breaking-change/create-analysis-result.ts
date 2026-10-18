@@ -1,47 +1,12 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { z } from "zod";
-
-const RawProjectSchema = z.object({
-  typespecProjectPath: z.string().min(1),
-  packageName: z.string().min(1),
-  resultsPath: z.string().min(1),
-});
-
-const RawBreakingChangeSchema = z.object({
-  breakingChange: z.string(),
-  category: z.string().optional().default(""),
-  resolution: z
-    .string()
-    .nullable()
-    .optional()
-    .transform((value) => value ?? ""),
-});
-
-export const AnalysisResultSchema = z.object({
-  schemaVersion: z.literal(1),
-  prNumber: z.number().int().positive(),
-  headSha: z.string().regex(/^[0-9a-f]{40}$/i),
-  sdkLanguage: z.string().min(1),
-  analysisWorkflowUrl: z.string().url(),
-  status: z.enum(["success", "failure"]),
-  errorMessage: z.string().min(1).optional(),
-  projects: z.array(
-    z.object({
-      typespecProject: z.string().min(1),
-      sdkPackage: z.string().min(1),
-      breakingChanges: z.array(
-        z.object({
-          breakingChange: z.string(),
-          category: z.string(),
-          suggestedFix: z.string(),
-        }),
-      ),
-    }),
-  ),
-});
-
-export type AnalysisResult = z.infer<typeof AnalysisResultSchema>;
+import {
+  type AnalysisResult,
+  AnalyzeProjectSchema,
+  RawBreakingChangeSchema,
+  AnalysisResultSchema,
+} from "./types.ts";
 
 async function readJson(path: string): Promise<unknown> {
   return JSON.parse(await readFile(path, "utf8"));
@@ -63,10 +28,10 @@ export async function createAnalysisResult({
   status: "success" | "failure";
 }): Promise<AnalysisResult> {
   await mkdir(resultsPath, { recursive: true });
-  let rawProjects: z.infer<typeof RawProjectSchema>[] = [];
+  let rawProjects: z.infer<typeof AnalyzeProjectSchema>[] = [];
   try {
     rawProjects = z
-      .array(RawProjectSchema)
+      .array(AnalyzeProjectSchema)
       .parse(await readJson(join(resultsPath, "projects.json")));
   } catch (error) {
     if (status === "success") {
@@ -76,12 +41,23 @@ export async function createAnalysisResult({
 
   const projects = await Promise.all(
     rawProjects.map(async (project) => {
+      if (project.analysisStatus !== "success" || !project.resultsPath) {
+        return {
+          typespecProject: project.typespecProjectPath ?? "",
+          sdkPackage: project.packageName ?? "",
+          status: project.analysisStatus,
+          analysisStatus: project.analysisStatus ?? "skipped",
+          breakingChanges: [],
+        };
+      }
       const response = z
         .object({ result: z.object({ breakingChanges: z.array(RawBreakingChangeSchema) }) })
         .parse(await readJson(join(resultsPath, project.resultsPath, "breaking-changes.json")));
       return {
-        typespecProject: project.typespecProjectPath,
-        sdkPackage: project.packageName,
+        typespecProject: project.typespecProjectPath ?? "",
+        sdkPackage: project.packageName ?? "",
+        status: project.analysisStatus,
+        analysisStatus: project.analysisStatus ?? "skipped",
         breakingChanges: response.result.breakingChanges.map((change) => ({
           breakingChange: change.breakingChange,
           category: change.category,

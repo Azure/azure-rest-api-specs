@@ -1,15 +1,13 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import {
-  AnalysisResultSchema,
-  createAnalysisResult,
-} from "../../src/sdk-breaking-change/create-analysis-result.ts";
+import { AnalysisResultSchema } from "../../src/sdk-breaking-change/types.ts";
 import {
   buildAnalysisReport,
   publishAnalysisResult,
 } from "../../src/sdk-breaking-change/publish-analysis-result.ts";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
+import { createAnalysisResult } from "../../src/sdk-breaking-change/create-analysis-result.ts";
 
 const analyzedSha = "6fb74c85cd16a8e13d4ad1aca058993cd076fa8b";
 const analysisWorkflowUrl = "https://github.com/owner/repo/actions/runs/123";
@@ -25,6 +23,7 @@ beforeEach(async () => {
         typespecProjectPath: "specification/service/Widget.Service",
         packageName: "armwidget",
         resultsPath: "package",
+        analysisStatus: "success",
       },
     ]),
   );
@@ -80,6 +79,8 @@ describe("createAnalysisResult", () => {
         {
           typespecProject: "specification/service/Widget.Service",
           sdkPackage: "armwidget",
+          status: "success",
+          analysisStatus: "success",
           breakingChanges: [
             {
               breakingChange: "Model changed",
@@ -112,6 +113,61 @@ describe("createAnalysisResult", () => {
     });
 
     expect(artifact.errorMessage).toBe("Analysis failed with exit code 1.");
+  });
+
+  it.each(["skipped", "failure"] as const)(
+    "preserves a project with analysis status %s and no generated package",
+    async (analysisStatus) => {
+      await writeFile(
+        join(resultsPath, "projects.json"),
+        JSON.stringify([
+          { typespecProjectPath: "specification/service/Widget.Service", analysisStatus },
+        ]),
+      );
+
+      const artifact = await createAnalysisResult({
+        resultsPath,
+        prNumber: 42,
+        headSha: analyzedSha,
+        sdkLanguage: "Go",
+        analysisWorkflowUrl,
+        status: "success",
+      });
+
+      expect(artifact.projects).toEqual([
+        {
+          typespecProject: "specification/service/Widget.Service",
+          sdkPackage: "",
+          status: analysisStatus,
+          analysisStatus,
+          breakingChanges: [],
+        },
+      ]);
+    },
+  );
+
+  it("rejects a successful analysis project without a package name", async () => {
+    await writeFile(
+      join(resultsPath, "projects.json"),
+      JSON.stringify([
+        {
+          typespecProjectPath: "specification/service/Widget.Service",
+          resultsPath: "package",
+          analysisStatus: "success",
+        },
+      ]),
+    );
+
+    await expect(
+      createAnalysisResult({
+        resultsPath,
+        prNumber: 42,
+        headSha: analyzedSha,
+        sdkLanguage: "Go",
+        analysisWorkflowUrl,
+        status: "success",
+      }),
+    ).rejects.toThrow("Successful analysis requires an SDK package name.");
   });
 
   it("uses a fallback error message when no failure log exists", async () => {

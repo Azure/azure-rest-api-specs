@@ -69,9 +69,26 @@ describe("publishResultInComment", () => {
     const core = createMockCore();
     github.rest.issues.listComments.mockResolvedValue({
       data: [
-        { id: 10, body: "/azsdk sdk-breaking-analysis go\n\nold" },
-        { id: 20, body: "  /azsdk sdk-breaking-analysis Go\n\nnewer" },
-        { id: 30, body: "/azsdk sdk-breaking-analysis Python" },
+        {
+          id: 10,
+          user: { login: "github-actions[bot]" },
+          body: "/azsdk sdk-breaking-analysis Go\n\nold",
+        },
+        {
+          id: 20,
+          user: { login: "github-actions[bot]" },
+          body: "  /azsdk sdk-breaking-analysis Go\n\nnewer",
+        },
+        {
+          id: 30,
+          user: { login: "github-actions[bot]" },
+          body: "/azsdk sdk-breaking-analysis Python",
+        },
+        {
+          id: 40,
+          user: { login: "contributor" },
+          body: "/azsdk sdk-breaking-analysis Go\n\nuser-authored",
+        },
       ],
     });
 
@@ -101,7 +118,13 @@ describe("publishResultInComment", () => {
     const context = createMockContext();
     const core = createMockCore();
     github.rest.issues.listComments.mockResolvedValue({
-      data: [{ id: 10, body: "/azsdk sdk-breaking-analysis Go" }],
+      data: [
+        {
+          id: 10,
+          user: { login: "github-actions[bot]" },
+          body: "/azsdk sdk-breaking-analysis Go",
+        },
+      ],
     });
     github.rest.issues.updateComment.mockRejectedValue(createMockRequestError(403));
 
