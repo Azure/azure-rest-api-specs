@@ -1,6 +1,7 @@
 // Candidate models for the AgentsOptimization data-plane surface (v1 GA).
 
 import "./inputs.tsp";
+import "./skill-results.tsp";
 import "../common/servicepatterns.tsp";
 import "@azure-tools/openai-typespec/models/chat";
 
@@ -28,6 +29,9 @@ union AgentOptimizationCandidateStatus {
 
   @doc("The optimizer stopped before this candidate completed.")
   failed: "failed",
+
+  @doc("Required input was unavailable, so skill optimization did not run.")
+  skipped: "skipped",
 }
 
 @doc("Base candidate output. Job types define derived output models with their own fields.")
@@ -53,6 +57,16 @@ model AgentOptimizationPromptCandidateOutput
 
   @doc("Typed configuration mutations applied to the baseline. Omitted for the baseline candidate. LIST without `expand=mutations` returns mutation items with only `type`; expanded LIST and candidate GET populate each mutation's `value`.")
   mutations?: AgentOptimizationMutation[];
+}
+
+@doc("Independent skill outcomes produced by trace-driven skill optimization, without comparative candidate evaluation.")
+model AgentOptimizationSkillCandidateOutput
+  extends AgentOptimizationCandidateOutput {
+  @doc("Skill optimization output discriminator.")
+  type: AgentOptimizationConfigurationType.skill_optimization;
+
+  @doc("Independent skill outcomes. Populated on candidate GET when available and omitted from LIST summaries.")
+  skill_results?: AgentOptimizationSkillResult[];
 }
 
 @doc("Base candidate mutation.")
@@ -129,11 +143,20 @@ model AgentOptimizationCandidate {
   @doc("The candidate's current lifecycle state.")
   status: AgentOptimizationCandidateStatus;
 
+  @doc("Primary failure or skip reason. Omitted for other candidate statuses.")
+  error?: ApiError;
+
   @doc("Timestamp when work on this candidate slot began, represented in Unix time.")
   started_at: FoundryTimestamp;
 
   @doc("Typed output generated for this candidate. The output type matches the parent job's optimization type. Omitted until output is available.")
   output?: AgentOptimizationCandidateOutput;
+
+  @doc("Persisted skill execution snapshot, including partial outcomes. Populated on candidate GET when available and omitted from LIST.")
+  execution_summary?: AgentOptimizationSkillExecutionSummary;
+
+  @doc("Frozen trace cohort and discovered agent skills for skill optimization. Populated on candidate GET when available and omitted from LIST.")
+  resolved_context?: AgentOptimizationSkillResolvedContext;
 
   @doc("Human-readable explanation of why the optimizer produced this candidate. Populated on candidate GET when available and omitted from LIST.")
   rationale?: string;

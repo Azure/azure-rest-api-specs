@@ -48,7 +48,7 @@ interface AgentOptimizationJobs {
     {
       @doc("Filter to jobs in this lifecycle state.")
       @query
-      status?: JobStatus;
+      status?: AgentOptimizationJobStatus;
 
       @doc("Filter to jobs targeting this agent name.")
       @query
@@ -99,7 +99,7 @@ interface AgentOptimizationJobCandidates {
   >;
 
   /**
-   * Retrieves a single candidate. Mutation values are always included.
+   * Retrieves a single candidate. Mutation values are always included. Skill optimization detail includes independent skill results, resolved context, and the persisted execution snapshot when available; these detail fields are omitted from candidate lists.
    */
   @summary("Get a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}")
@@ -115,7 +115,7 @@ interface AgentOptimizationJobCandidates {
   >;
 
   /**
-   * Promotes a candidate to the Foundry agent stored in the parent job's target configuration. Promotion is unavailable when the job omitted target_configuration. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.
+   * Promotes an agent or prompt optimization candidate to the Foundry agent stored in the parent job's target configuration. Promotion is unavailable when the job omitted target_configuration or uses skill_optimization: skill publication creates versions but does not attach them to an agent. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.
    */
   @summary("Promote a candidate for an agent optimization job")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote")

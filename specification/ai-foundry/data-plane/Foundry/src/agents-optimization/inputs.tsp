@@ -317,6 +317,9 @@ union AgentOptimizationConfigurationType {
 
   @doc("One-shot prompt optimization.")
   prompt_optimization: "prompt_optimization",
+
+  @doc("Creates or updates versioned skills from trace evidence without comparative candidate evaluation.")
+  skill_optimization: "skill_optimization",
 }
 
 /** Base model for type-specific optimization configuration. */
@@ -354,6 +357,9 @@ union OptimizationContextType {
 
   @doc("Natural-language guidance that steers the desired optimization.")
   steering_prompt: "steering_prompt",
+
+  @doc("Agent trace evidence selected from project-authorized telemetry.")
+  agent_traces: "agent_traces",
 }
 
 /** Base model for typed optimization context. */
@@ -379,9 +385,93 @@ model PromptOptimizationConfiguration
   @doc("Optimization type discriminator.")
   type: AgentOptimizationConfigurationType.prompt_optimization;
 
-  @doc("Context used to steer prompt optimization. Omitted when no context is supplied.")
+  @doc("Steering context for prompt optimization. Agent trace context is supported only by skill optimization. Omitted when no context is supplied.")
   @minItems(1)
-  context?: OptimizationContext[];
+  context?: SteeringPromptOptimizationContext[];
+}
+
+/** Exact reference to an existing skill version in the job's project. */
+model AgentOptimizationFoundrySkillReference {
+  @doc("Registered Foundry skill reference discriminator.")
+  type: "foundry_skill";
+
+  @doc("Registered skill name.")
+  @minLength(1)
+  name: string;
+
+  @doc("Opaque pinned version. The aliases latest and default are not accepted.")
+  @minLength(1)
+  version: string;
+}
+
+/** Explicit project-authorized telemetry selection, not an arbitrary endpoint. */
+@discriminator("type")
+model AgentOptimizationTraceConnectionConfiguration {
+  @doc("Trace provider discriminator.")
+  type: string;
+}
+
+/** Selects a project-linked Application Insights component. */
+model AgentOptimizationAppInsightsTraceConnectionConfiguration
+  extends AgentOptimizationTraceConnectionConfiguration {
+  @doc("Application Insights provider discriminator.")
+  type: "appinsights";
+
+  @doc("ARM component resource ID of an Application Insights connection linked to this project. Invalid or unavailable explicit configuration must fail rather than fall back.")
+  @minLength(1)
+  resource_id: string;
+
+  @doc("Required without target_configuration and omitted with a target agent. Exact, case-sensitive AppRoleName or cloud_RoleName, including any emitted OpenTelemetry namespace prefix. This is a telemetry service identity, not a Foundry agent reference. No surrounding whitespace, wildcards, or KQL.")
+  @minLength(1)
+  @maxLength(256)
+  agent_name?: string;
+}
+
+/** Trace selection window for a one-time skill optimization job. */
+@discriminator("type")
+model AgentOptimizationTraceWindow {
+  @doc("Trace window discriminator.")
+  type: string;
+}
+
+/** Selects all matching trace conversations in a fixed half-open interval, without count limits or sampling. */
+model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
+  @doc("Fixed-window discriminator.")
+  type: "fixed";
+
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Trace selection preserves the caller's explicit UTC offset."
+  @doc("Inclusive ISO 8601 timestamp with an explicit UTC offset. Must precede end_time.")
+  start_time: offsetDateTime;
+
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Trace selection preserves the caller's explicit UTC offset."
+  @doc("Exclusive ISO 8601 timestamp with an explicit UTC offset. Future values are queried unchanged against available traces; the job does not wait for this time.")
+  end_time: offsetDateTime;
+}
+
+/** Trace evidence for skill optimization, selected independently of feedback availability. */
+model AgentTracesOptimizationContext extends OptimizationContext {
+  @doc("Agent trace context discriminator.")
+  type: OptimizationContextType.agent_traces;
+
+  @doc("Explicit telemetry selection. Required without a target agent. When omitted with a target, use its project-linked telemetry. Not accepted on steering_prompt context.")
+  trace_connection_configuration?: AgentOptimizationTraceConnectionConfiguration;
+
+  @doc("Fixed half-open trace selection window.")
+  trace_window: AgentOptimizationTraceWindow;
+}
+
+/** Configuration for generating versioned skill packages from trace evidence. */
+model SkillOptimizationConfiguration
+  extends AgentOptimizationConfigurationBase {
+  @doc("Skill optimization discriminator.")
+  type: AgentOptimizationConfigurationType.skill_optimization;
+
+  @doc("Trace evidence and optional steering guidance. Supply agent_traces context; prompt is not accepted on an agent_traces item.")
+  @minItems(1)
+  context: OptimizationContext[];
+
+  @doc("Exact skill versions unioned with skills discovered from Prompt or Managed targets, including toolboxes. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. References are deduplicated.")
+  additional_skills?: AgentOptimizationFoundrySkillReference[];
 }
 
 @doc("Inputs for estimating an agent-optimization job.")
