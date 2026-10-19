@@ -418,7 +418,7 @@ interface BulkRestoresFromCrossTenantVault {
    */
   @added(Versions.v2026_08_31_preview)
   @removed(Versions.v2026_10_01)
-@added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_10_31_preview)
   @action("restore")
   @tag("CrossTenant")
   trigger is CrossTenantBulkRestoreFabricOps.ActionAsync<
@@ -433,7 +433,7 @@ interface BulkRestoresFromCrossTenantVault {
    */
   @added(Versions.v2026_08_31_preview)
   @removed(Versions.v2026_10_01)
-@added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_10_31_preview)
   @action("preCheckRestore")
   @tag("CrossTenant")
   preCheck is CrossTenantBulkRestoreFabricOps.ActionAsync<
@@ -458,7 +458,7 @@ interface RecoveryPointsFromCrossTenantVault {
    */
   @added(Versions.v2026_08_31_preview)
   @removed(Versions.v2026_10_01)
-@added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_10_31_preview)
   @action("getRecoveryPoints")
   @tag("CrossTenant")
   list is CrossTenantBulkRestoreFabricOps.ActionAsync<
@@ -500,7 +500,7 @@ interface RecoveryPointOperationResultsFromCrossTenantVault {
    */
   @added(Versions.v2026_08_31_preview)
   @removed(Versions.v2026_10_01)
-@added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_10_31_preview)
   @tag("CrossTenant")
   get is RecoveryPointOperationResultsFromCrossTenantVaultOps.Read<
     RecoveryPointResource,
@@ -544,7 +544,7 @@ interface BulkRestoreOperationStatusesFromCrossTenantVault {
    */
   @added(Versions.v2026_08_31_preview)
   @removed(Versions.v2026_10_01)
-@added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_10_31_preview)
   @tag("CrossTenant")
   get is BulkRestoreOperationStatusesFromCrossTenantVaultOps.Read<OperationStatus>;
 }
@@ -580,7 +580,7 @@ interface BulkRestorePreCheckOperationStatusesFromCrossTenantVault {
    */
   @added(Versions.v2026_08_31_preview)
   @removed(Versions.v2026_10_01)
-@added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_10_31_preview)
   @tag("CrossTenant")
   get is BulkRestorePreCheckOperationStatusesFromCrossTenantVaultOps.Read<OperationStatus>;
 }
@@ -752,7 +752,7 @@ interface BackupChildJobsFromCrossTenantVault {
    */
   @added(Versions.v2026_08_31_preview)
   @removed(Versions.v2026_10_01)
-@added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_10_31_preview)
   @tag("CrossTenant")
   list is BackupChildJobsFromCrossTenantVaultOps.List<
     JobResource,
@@ -777,7 +777,7 @@ interface ChildJobDetailsFromCrossTenantVault {
    */
   @added(Versions.v2026_08_31_preview)
   @removed(Versions.v2026_10_01)
-@added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_10_31_preview)
   @tag("CrossTenant")
   get is BackupChildJobsFromCrossTenantVaultOps.Read<JobResource>;
 }
