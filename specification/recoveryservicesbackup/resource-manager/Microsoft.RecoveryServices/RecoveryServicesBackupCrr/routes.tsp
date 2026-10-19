@@ -4,12 +4,10 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.RecoveryServices;
 
@@ -275,16 +273,6 @@ interface BackupProtectedItemsCrr {
   >;
 }
 
-@@TypeSpec.OpenAPI.extension(
-  BackupUsageSummariesCRR.list,
-  "x-ms-odata",
-  "#/definitions/BMSBackupSummariesQueryObject"
-);
-@@TypeSpec.OpenAPI.extension(
-  AadProperties.get,
-  "x-ms-odata",
-  "#/definitions/BMSAADPropertiesQueryObject"
-);
 @@doc(
   CrossRegionRestore.trigger::parameters.body,
   "resource cross region restore request"
@@ -298,15 +286,5 @@ interface BackupProtectedItemsCrr {
 @@TypeSpec.nextLink(ResourceList.nextLink);
 
 @@TypeSpec.list(BackupCrrJobs.list);
-@@TypeSpec.OpenAPI.extension(
-  BackupCrrJobs.list,
-  "x-ms-odata",
-  "#/definitions/JobQueryObject"
-);
 
 @@TypeSpec.list(BackupProtectedItemsCrr.list);
-@@TypeSpec.OpenAPI.extension(
-  BackupProtectedItemsCrr.list,
-  "x-ms-odata",
-  "#/definitions/ProtectedItemQueryObject"
-);
