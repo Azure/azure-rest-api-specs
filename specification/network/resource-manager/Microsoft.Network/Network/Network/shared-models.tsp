@@ -3639,7 +3639,6 @@ model PrivateLinkServiceConnectionProperties {
 /**
  * Reference to an existing approved private endpoint used to inherit its connection approval state.
  */
-@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_01_01)
 model ApprovalReference {
   /**

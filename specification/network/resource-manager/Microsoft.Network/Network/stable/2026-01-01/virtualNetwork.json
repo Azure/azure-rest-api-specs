@@ -14917,24 +14917,6 @@
         }
       }
     },
-    "ApprovalReference": {
-      "type": "object",
-      "description": "Reference to an existing approved private endpoint used to inherit its connection approval state.",
-      "properties": {
-        "privateEndpointId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The ARM resource id of an existing approved private endpoint whose approval state is inherited by this connection.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/privateEndpoints"
-              }
-            ]
-          }
-        }
-      }
-    },
     "AutoApprovedPrivateLinkService": {
       "type": "object",
       "description": "The information of an AutoApprovedPrivateLinkService.",
@@ -19208,7 +19190,7 @@
           "description": "A collection of read-only information about the state of the connection to the remote resource."
         },
         "approvalReference": {
-          "$ref": "#/definitions/ApprovalReference",
+          "$ref": "./common.json#/definitions/ApprovalReference",
           "description": "A reference to an existing approved private endpoint whose connection approval state should be inherited by this connection at creation time."
         }
       }
