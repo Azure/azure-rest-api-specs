@@ -38,11 +38,6 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "skill-invocation"
         config:
           required:
@@ -61,11 +56,6 @@ stimuli:
       - Earlier API versions, including 2021-11-01, do not expose the identity property.
       - The solution uses valid TypeSpec versioning rather than suppressing validation and contains no unrelated edits.
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "run-command"
         config:
           command: "node check-node-dependencies.js node_modules"

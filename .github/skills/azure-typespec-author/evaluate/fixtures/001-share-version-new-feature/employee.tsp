@@ -27,7 +27,7 @@ model EmployeeProperties {
 
   /** Email of employee */
   email?: string;
-  
+
   /** Department of employee */
   department?: string;
 
