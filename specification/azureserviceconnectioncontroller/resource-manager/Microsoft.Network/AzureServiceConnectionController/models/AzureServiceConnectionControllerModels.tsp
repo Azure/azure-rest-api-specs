@@ -63,8 +63,7 @@ model ProviderConnectionProperties {
   @doc("The resource ID of the virtual network associated with the provider connection.")
   subnetId?: SubnetId;
 
-  @doc("The IP configuration parameters for the provider connection.")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
+  @doc("The persisted IP configuration parameters for the provider connection, returned when the resource is read.")
   ipConfiguration?: IpConfiguration;
 
   @doc("The fully qualified Azure Resource Manager resource ID of the resource group in which the private endpoint for the provider connection is created. The resource group must be in the same subscription as the Azure Service Connection Controller. The resource ID is case insensitive and cannot be changed after creation.")
@@ -101,6 +100,7 @@ model AzureServiceConnectionControllerProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: AzureServiceConnectionControllerProvisioningState;
 
-  @doc("The reference to the effective UDR (User Defined Route) applied to the Azure Service Connection Controller.")
+  @doc("The resource ID of the effective UDR (User Defined Route) selected by the service and applied to the Azure Service Connection Controller.")
+  @visibility(Lifecycle.Read)
   udr?: UDR;
 }

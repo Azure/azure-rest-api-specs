@@ -64,6 +64,10 @@ interface AzureServiceConnectionControllers {
             providerConnections: #[
               #{
                 name: "provider-connection",
+                ipConfiguration: #{
+                  privateIpV4Address: "10.0.0.11",
+                  ipAllocationMethod: "Static",
+                },
                 subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
                 privateEndpointResourceGroup: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/pe-rg1",
               }
@@ -124,6 +128,10 @@ interface AzureServiceConnectionControllers {
             providerConnections: #[
               #{
                 name: "provider-connection",
+                ipConfiguration: #{
+                  privateIpV4Address: "10.0.0.11",
+                  ipAllocationMethod: "Static",
+                },
                 subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
                 privateEndpointResourceGroup: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/pe-rg1",
               }
