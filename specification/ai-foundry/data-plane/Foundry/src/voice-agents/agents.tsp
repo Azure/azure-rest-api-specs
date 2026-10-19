@@ -164,10 +164,10 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Whether the model may call multiple tools in parallel.")
   parallel_tool_calls?: boolean;
 
-  @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts. Resolved ordinary string inputs may also be referenced by `{{name}}` in tool execution parameters; this does not create a mutable variable store.")
+  @doc("Structured inputs rendered into session prompts. Resolved ordinary strings may also be referenced in tool arguments with `{{name}}`.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
-  @doc("Session-local private string declarations, keyed by ASCII identifiers. Declarations contain references, never runtime secret values. Inputs explicitly mapped by `initial_value_from` are separated before prompt rendering. Tool execution can reference a slot with `{{name}}`, but prompt rendering must not expand private slots. Reject name collisions with remaining ordinary inputs; an empty private slot never falls back to an ordinary value. Collected values exist only for the live session; there is no secret-read API.")
+  @doc("Session-local private-string declarations keyed by ASCII identifiers, never actual values. Tool arguments can reference them with `{{name}}`; prompts cannot. Conflicting names and unavailable values are rejected. There is no secret-read API.")
   secrets?: Record<VoiceAgentSessionSecret>;
 
   @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
@@ -378,7 +378,7 @@ model VoiceAgentMcpTool extends VoiceAgentTool {
   response_scheduling?: VoiceAgentToolResponseScheduling = VoiceAgentToolResponseScheduling.when_idle;
 }
 
-@doc("A service-managed capability explicitly enabled on the active voice session. Voice Live owns its model contract and lifecycle; supported telephony integrations execute provider operations using their configured connections. A binding alone does not enable a system tool.")
+@doc("A built-in session capability explicitly enabled in Agent tools. The service handles execution; a phone binding alone does not enable tools.")
 @discriminator("name")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSystemTool extends VoiceAgentTool {
@@ -420,15 +420,15 @@ union VoiceAgentSystemToolName {
   send_dtmf: "send_dtmf",
 }
 
-@doc("A declaration for one session-local private string. This model contains no secret value, and may be returned with the Agent definition. Do not put sensitive values in structured-input defaults or instructions.")
+@doc("Declares one session-local private string without including its value in Agent configuration.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSessionSecret {
-  @doc("An optional `structured_inputs.<identifier>` reference used to initialize the private string only through a trusted, secret-safe session setup that excludes its value from URLs, diagnostics, echoes, exports, and durable job data. The public WebSocket `structured_input` query and outbound call-job `structured_inputs` cannot initialize private slots; requests supplying mapped private inputs through either channel are rejected with 400 before session admission or durable job creation. Clients must not send private values through those channels: rejection cannot undo prior URL logging. No new public initialization channel is introduced. Without a secret-safe setup, omit initialization and populate the slot through private collection. The referenced value must be a JSON string, preserving leading zeros. Omission leaves the slot empty until a successful private collection.")
+  @doc("Optional `structured_inputs.<identifier>` reference for trusted private initialization; the source must be a JSON string. Public WebSocket URL inputs and Call Job inputs cannot initialize private slots: mapped values are rejected with 400 before session admission or job persistence. Do not send private values through URLs. Omit to leave the slot empty for private collection.")
   @pattern("^structured_inputs\\.[A-Za-z_][A-Za-z0-9_]*$")
   initial_value_from?: string;
 }
 
-@doc("A write destination for a declared session-local private string, not its value. Collection output bindings use `secrets.<identifier>`; tool input placeholders use `{{name}}` instead. Neither form is an expression.")
+@doc("A collection output destination in the form `secrets.<identifier>`, not a value. Tool input references use `{{name}}` instead.")
 @pattern("^secrets\\.[A-Za-z_][A-Za-z0-9_]*$")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar VoiceAgentSecretReference extends string;
@@ -440,7 +440,7 @@ model VoiceAgentCollectionOutputBindings {
   value: VoiceAgentSecretReference;
 }
 
-@doc("Settings shared by SMS and keypad collection. The model cannot override these settings or submit the collected value. Each start must choose `secret: true` or `secret: false`; that choice is locked for the operation. Private collection requires an output binding and bypasses model-visible values, while non-private collection may return its exact value to the model. Collection is not authentication.")
+@doc("Shared SMS/keypad collection settings. Each start requires a locked Boolean `secret`: private results use `output_bindings`; non-private results may return to the model. The model cannot override settings or submit input values. Collection is not authentication.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentInputCollectionSettings {
   @doc("The minimum number of ASCII decimal digits. Leading zeros are preserved. Must not exceed `max_length`.")
@@ -462,7 +462,7 @@ model VoiceAgentInputCollectionSettings {
   output_bindings?: VoiceAgentCollectionOutputBindings;
 }
 
-@doc("Collects one complete SMS on the Agent's bound, SMS-capable number. The model's start arguments must explicitly include `from_phone_number` in E.164 form and the Boolean `secret`; Caller ID is not a fallback or proof of identity. The receiver reports listening before the Agent prompts. This capability does not create an independent SMS conversation. The initial Telephony adapter supports Twilio only.")
+@doc("Collects one complete numeric SMS on the Agent's SMS-capable number. Start requires E.164 `from_phone_number` and Boolean `secret`, without Caller ID fallback. Prompts follow `listening`; this does not create an SMS chat. Initially supported on Twilio.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectSmsSystemTool extends VoiceAgentSystemTool {
   @doc("The built-in capability. Always `collect_sms`.")
@@ -496,7 +496,7 @@ union VoiceAgentDtmfTerminator {
   asterisk: "*",
 }
 
-@doc("Collects ASCII decimal keypad digits through the call's existing media reader. The model starts with an explicit Boolean `secret` but cannot submit digits. Genuine repeated key events are preserved. First-digit timeout, inter-digit timeout, and the total deadline are distinct; no-input timeout does not complete an empty value. Voice collection is unsupported.")
+@doc("Collects ASCII decimal keypad digits on the active call, preserving repeats and leading zeros. Start requires Boolean `secret`, not input digits. Completion and timeouts follow the configured policy; voice collection is unsupported.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectDtmfSystemTool extends VoiceAgentSystemTool {
   @doc("The built-in capability. Always `collect_dtmf`.")
@@ -583,9 +583,8 @@ model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
 }
 
 @doc("""
-  Enables tone sending without configured actions or input bindings. The model invocation has exactly one required string argument, `digits`: literal keypad characters such as `1#`, or named `{{name}}` placeholders such as `{{verification_code}}`. Literal keypad characters may surround placeholders. Names are case-sensitive top-level ASCII identifiers (`[A-Za-z_][A-Za-z0-9_]*`), resolved against ordinary session string inputs or declared private slots; they are not `secrets.<name>` paths. The tool schema exposes available names, never private values. No nested paths, helpers, expressions, or recursive expansion are supported.
-  Voice Live resolves placeholders immediately before execution into a separate executor-only argument copy, retaining the unexpanded intent in model/history/output items. Missing, ambiguous, non-string, or malformed references fail before sending. Validate the complete resolved sequence against `[0-9*#]+` and provider limits: at most 18 tones for ACS and 64 for SIP/Twilio. Bound template size and expanded output; never return expanded private values through status or diagnostics. Literal digits are model-visible and must not be used to carry a private value through the model.
-  ACS uses its native API; SIP uses negotiated RFC 4733 signalling only when the authenticated media gateway advertises support; Twilio plays in-band audio on the existing Media Stream without replacing the stream or session. Explicitly configured tools have no inbound/outbound restriction. Acceptance is not remote IVR recognition or authentication; in-band compatibility requires destination validation and secret-bound tones are audible on the call. An uncertain or interrupted sequence is never automatically retried.
+  Enables tone sending with one required model-call string, `digits`: keypad characters, `{{name}}` references, or a mixture such as `{{verification_code}}#`. Names are case-sensitive ASCII identifiers (`[A-Za-z_][A-Za-z0-9_]*`) referencing ordinary session strings or declared private slots. The service binds values at execution, keeping private values out of model/history/output/diagnostics. Literal digits are model-visible. Missing, conflicting, malformed or non-string references fail before sending. No actions list, nested paths, expressions or recursive expansion are supported.
+  Resolved digits must match `[0-9*#]+`, with limits of 18 tones for ACS and 64 for SIP/Twilio. ACS uses its native API; SIP requires advertised RFC 4733 support; Twilio uses in-band audio on the existing Media Stream. There is no call-direction restriction. In-band tones are audible and require a compatible receiver. Provider acceptance is not IVR recognition or authentication; uncertain or interrupted sending is never automatically retried.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {

@@ -336,14 +336,14 @@ model VoiceAgentResponseCreateParams {
 model VoiceAgentRealtimeResponse {
   ...OmitProperties<OpenAI.RealtimeResponse, "audio" | "output">;
 
-  @doc("The generated output items. Service-managed invocations use `system_tool`, not a customer-executed `function_call`. Executor-only commands and private values are not output items.")
+  @doc("Generated output items, including service-managed system-tool intent.")
   output?: VoiceAgentResponseOutputItem[];
 
   @doc("The audio configuration used by the live response, including flat voice provider, locale, and format fields under `output`.")
   audio?: VoiceResponseAudio;
 }
 
-@doc("A model-generated system-tool invocation in a live response. These are intent arguments only: private collected values, bound digits, concrete transfer destinations, and provider credentials are never included. Clients do not complete it with `function_call_output`.")
+@doc("A generated system-tool intent, not a provider outcome. Private values and concrete execution parameters are excluded. Clients do not complete it with `function_call_output`.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSystemToolItem {
@@ -365,7 +365,7 @@ model VoiceAgentSystemToolItem {
   @doc("The invocation identifier used for correlation and duplicate suppression.")
   call_id: string;
 
-  @doc("The model's intent arguments encoded as a JSON string. A collection start includes its Boolean `secret` choice and, for SMS, `from_phone_number`; it never contains the actual collected value. A `send_dtmf` invocation has exactly one required string argument, `digits`, containing literal keypad characters or unexpanded `{{name}}` placeholders. Expanded private values never replace the intent in this item.")
+  @doc("The model's JSON-encoded arguments with references unexpanded. Actual collected values and bound private values are excluded.")
   arguments: string;
 }
 
@@ -412,14 +412,14 @@ model VoiceAgentServerEventSystemToolArgumentsDelta
   @doc("The invocation identifier.")
   call_id: string;
 
-  @doc("A JSON argument fragment, never a collected value or bound execution parameter.")
+  @doc("An incremental JSON fragment of the intent arguments.")
   delta: string;
 
   @doc("Optional padding metadata with no application semantics.")
   obfuscation?: string;
 }
 
-@doc("The completed model intent arguments for a system tool. Completion is not provider success, and does not request a customer function result.")
+@doc("The completed intent arguments for a system tool, not provider success or a request for a customer function result.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventSystemToolArgumentsDone
@@ -442,11 +442,11 @@ model VoiceAgentServerEventSystemToolArgumentsDone
   @doc("The invoked built-in capability.")
   name: VoiceAgentSystemToolName;
 
-  @doc("The complete model intent as a JSON string; actual collection and executor values are excluded.")
+  @doc("The complete, unexpanded model arguments as a JSON string.")
   arguments: string;
 }
 
-@doc("An asynchronous collection or phone-operation outcome. Collection completion is not authentication; provider acceptance is not remote IVR recognition. Private executor commands and receiver results are not customer function outputs.")
+@doc("An asynchronous collection or phone-operation outcome. Collection and provider acceptance do not prove authentication or IVR recognition.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventInputCollectionStatus

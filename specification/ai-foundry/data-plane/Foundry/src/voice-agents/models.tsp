@@ -118,7 +118,7 @@ model VoiceResponseAudio {
 model VoiceResponse {
   ...OmitProperties<OpenAI.RealtimeResponse, "audio" | "output">;
 
-  @doc("The persisted output items for this response. System-tool entries retain unexpanded model intent; private values and executor-only parameters are never persisted here.")
+  @doc("Persisted output items, retaining unexpanded system-tool intent without private values.")
   output?: VoiceConversationItem[];
 
   @doc("The audio configuration used for the response, including the voice and audio format used for output.")
@@ -148,7 +148,7 @@ alias VoiceConversationItemPersistence = {
   response_id?: string;
 };
 
-@doc("A persisted service-managed system-tool intent. Reuses the live intent fields and marker without expanding private placeholders, and adds read-only persistence metadata. This is a server-produced read projection, not a client-created item or provider result.")
+@doc("A read-only persisted system-tool intent with private references unexpanded, not a client-created item or provider result.")
 @usage(Usage.output | Usage.json)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceConversationSystemToolItem {
