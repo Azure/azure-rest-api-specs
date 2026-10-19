@@ -146,7 +146,11 @@ using TypeSpec.Http;
   "csharp"
 );
 @@clientName(Authentication, "SqlServerAuthentication", "csharp");
-@@clientName(DbFailover, "DbFailover", "csharp");
+@@clientName(
+  DbFailover,
+  Azure.ClientGenerator.Core.exact("DbFailover"),
+  "csharp"
+);
 @@clientName(DbFailover.ON, "On", "csharp");
 @@clientName(DbFailover.OFF, "Off", "csharp");
 @@clientName(DBMEndpoint, "DbmEndpoint", "csharp");
@@ -182,3 +186,110 @@ using TypeSpec.Http;
 @@clientName(Version.SQLServer2012, "SqlServer2012", "csharp");
 @@clientName(Version.SQLServer2014, "SqlServer2014", "csharp");
 @@clientName(Version.SQLServer2016, "SqlServer2016", "csharp");
+@@clientName(SqlVersion.SQLServer2012, "SqlServer2012", "csharp");
+@@clientName(SqlVersion.SQLServer2014, "SqlServer2014", "csharp");
+@@clientName(SqlVersion.SQLServer2016, "SqlServer2016", "csharp");
+@@clientName(SqlVersion.SQLServer2017, "SqlServer2017", "csharp");
+@@clientName(SqlVersion.SQLServer2019, "SqlServer2019", "csharp");
+@@clientName(SqlVersion.SQLServer2022, "SqlServer2022", "csharp");
+@@clientName(SqlVersion.SQLServer2025, "SqlServer2025", "csharp");
+@@clientName(EncryptionAlgorithm.AES, "Aes", "csharp");
+@@clientName(EncryptionAlgorithm.NoneAES, "NoneAes", "csharp");
+@@clientName(EncryptionAlgorithm.RC4AES, "Rc4Aes", "csharp");
+@@clientName(EncryptionAlgorithm.AESRC4, "AesRc4", "csharp");
+@@clientName(EncryptionAlgorithm.NoneRC4AES, "NoneRc4Aes", "csharp");
+@@clientName(EncryptionAlgorithm.NoneAESRC4, "NoneAesRc4", "csharp");
+@@clientName(
+  DtcSupport.PERDB,
+  Azure.ClientGenerator.Core.exact("PerDb"),
+  "csharp"
+);
+@@clientName(K8sSchedulingOptions, "K8sSchedulingConfig", "csharp");
+@@clientName(
+  SqlServerDatabaseResourcePropertiesDatabaseOptions,
+  "SqlServerDatabaseConfig",
+  "csharp"
+);
+@@clientName(
+  FailoverGroupSpec.partnerMirroringURL,
+  "PartnerMirroringUri",
+  "csharp"
+);
+@@clientName(DataControllerResource, "DataController", "csharp");
+@@clientName(
+  ActiveDirectoryConnectorResource,
+  "ActiveDirectoryConnector",
+  "csharp"
+);
+@@clientName(FailoverGroupResource, "FailoverGroup", "csharp");
+@@clientName(
+  SqlServerAvailabilityGroupResource,
+  "SqlServerAvailabilityGroup",
+  "csharp"
+);
+@@clientName(SqlServerDatabaseResource, "SqlServerDatabase", "csharp");
+@@clientName(
+  ActiveDirectoryConnectorDNSDetails.preferK8sDnsForPtrLookups,
+  "ShouldPreferK8sDnsForPtrLookups",
+  "csharp"
+);
+@@clientName(
+  SqlServerInstanceRunTargetRecommendationJobRequest.includeFileLevelRequirements,
+  "ShouldIncludeFileLevelRequirements",
+  "csharp"
+);
+@@clientName(AvailabilityGroupInfo.basicFeatures, "HasBasicFeatures", "csharp");
+@@clientName(
+  AvailabilityGroupInfo.dbFailover,
+  Azure.ClientGenerator.Core.exact("IsDbFailoverSupported"),
+  "csharp"
+);
+@@clientName(
+  AvailabilityGroupCreateUpdateConfiguration.dbFailover,
+  Azure.ClientGenerator.Core.exact("DbFailover"),
+  "csharp"
+);
+@@clientName(CommonSku.dev, "IsDevTestEnabled", "csharp");
+@@clientName(SqlManagedInstanceSku.dev, "IsDevTestEnabled", "csharp");
+@@clientName(FailoverMiLinkResourceId.force, "ShouldForce", "csharp");
+@@clientName(
+  SkuRecommendationResultsAzureSqlDatabaseTargetSkuCategory.zoneRedundancyAvailable,
+  "IsZoneRedundancyAvailable",
+  "csharp"
+);
+@@clientName(
+  SkuRecommendationResultsAzureSqlManagedInstanceTargetSkuCategory.zoneRedundancyAvailable,
+  "IsZoneRedundancyAvailable",
+  "csharp"
+);
+@@clientName(
+  SkuRecommendationSummaryTargetSkuCategory.zoneRedundancyAvailable,
+  "IsZoneRedundancyAvailable",
+  "csharp"
+);
+@@clientName(
+  SqlServerInstanceProperties.dbMasterKeyExists,
+  Azure.ClientGenerator.Core.exact("HasDbMasterKey"),
+  "csharp"
+);
+@@clientName(
+  SqlServerInstanceUpdateProperties.dbMasterKeyExists,
+  Azure.ClientGenerator.Core.exact("HasDbMasterKey"),
+  "csharp"
+);
+@@clientName(SqlServerInstanceProperties.monitoring, "IsMonitoring", "csharp");
+@@clientName(
+  SqlServerInstanceUpdateProperties.monitoring,
+  "IsMonitoring",
+  "csharp"
+);
+@@clientName(
+  SqlServerInstanceProperties.clientConnection,
+  "IsClientConnection",
+  "csharp"
+);
+@@clientName(
+  SqlServerInstanceUpdateProperties.clientConnection,
+  "IsClientConnection",
+  "csharp"
+);
