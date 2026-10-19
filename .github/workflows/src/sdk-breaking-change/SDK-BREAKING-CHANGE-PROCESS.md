@@ -8,49 +8,6 @@ downstream SDK repositories, avoid back-and-forth across repos and stages
 
 ## How It Works
 
-**Trigger flow**:
-
-```mermaid
-flowchart TD
-  L([SDK Breaking Change Labels workflow completes])
-
-  subgraph A["Analysis workflow — no PR write permissions"]
-    AG["Resolve analysis trigger<br/>1. Validate the trigger and eligibility<br/>2. Publish analysis status"]
-    AC["Analyze SDK breaking changes<br/>1. Check out specifications and analyze affected SDK projects<br/>2. Upload analysis results"]
-    AG -->|"eligible"| AC
-  end
-
-  L --> AG
-  AG -->|"not eligible"| AD([Analysis workflow completes])
-  AC --> AD
-
-  subgraph AP["Trusted analysis publisher workflow"]
-    APR["Validate analysis status<br/>Confirm that results should be published"]
-    APP["Publish analysis results<br/>1. Validate result freshness<br/>2. Post a pull request comment"]
-    APR -->|"eligible"| APP
-  end
-
-  AD --> APR
-
-  subgraph M["Mitigation workflow — no PR write permissions"]
-    MG["Resolve mitigation trigger<br/>1. Read the analysis status and results<br/>2. Validate freshness and mitigation eligibility<br/>3. Publish mitigation status"]
-    MC["Mitigate SDK breaking changes<br/>1. Check out specifications and install required tooling<br/>2. Mitigate SDK breaking changes<br/>3. Upload mitigation results"]
-    MG -->|"eligible"| MC
-  end
-
-  AD --> MG
-  MG -->|"not eligible"| MD([Mitigation workflow completes])
-  MC --> MD
-
-  subgraph MPP["Trusted mitigation publisher workflow"]
-    MPR["Validate mitigation status<br/>Confirm that results should be published"]
-    MPU["Publish mitigation results<br/>1. Validate result freshness<br/>2. Post a pull request comment"]
-    MPR -->|"eligible"| MPU
-  end
-
-  MD --> MPR
-```
-
 ### Detection
 
 1. When a specification pull request is opened or updated, the `SDK Validation pipeline - <language>` pipeline:
