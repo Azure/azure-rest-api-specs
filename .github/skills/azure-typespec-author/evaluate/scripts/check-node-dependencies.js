@@ -1,7 +1,8 @@
-import fs from "node:fs";
-import path from "node:path";
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 const mode = process.argv[2];
+const nodeModulesRoot = process.env.FIXTURE_NODE_MODULES || "node_modules";
 
 if (!mode || !["node_modules", "packages"].includes(mode)) {
   console.error(
@@ -10,8 +11,8 @@ if (!mode || !["node_modules", "packages"].includes(mode)) {
   process.exit(2);
 }
 
-if (!fs.existsSync("node_modules")) {
-  console.error("[dependency-check:node_modules] missing");
+if (!fs.existsSync(nodeModulesRoot)) {
+  console.error(`[dependency-check:node_modules] missing: ${nodeModulesRoot}`);
   process.exit(2);
 }
 
@@ -40,7 +41,7 @@ if (!requiredPackages.length) {
 }
 
 const missing = requiredPackages.filter((packageName) => {
-  return !fs.existsSync(path.join("node_modules", ...packageName.split("/"), "package.json"));
+  return !fs.existsSync(path.join(nodeModulesRoot, ...packageName.split("/"), "package.json"));
 });
 
 if (missing.length) {

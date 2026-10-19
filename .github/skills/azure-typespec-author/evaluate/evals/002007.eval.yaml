@@ -43,11 +43,6 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "skill-invocation"
         config:
           required:
@@ -67,11 +62,6 @@ stimuli:
       - The request contains string message content and a priority limited to Low, Medium, or High.
       - The response contains a string notification identifier and status, and changes are limited to the requested action.
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "run-command"
         config:
           command: "node check-node-dependencies.js node_modules"
@@ -155,7 +145,7 @@ stimuli:
           threshold: 0.88
           model: "gpt-5.6-sol"
           scoring: "scale_1_10"
-          prompt: "Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent."
+          prompt: "Verify the operation contract without requiring particular request or response model names: Employee has a synchronous POST action named notify in API version 2024-10-01-preview; its request contains string message content and a Priority enum limited to Low, Medium, and High; its response contains a string notification identifier and status; and there are no unrelated edits."
     constraints:
       max_turns: 5
       max_tokens: 1000000
@@ -172,6 +162,10 @@ stimuli:
         config:
           required:
             - "^(edit|apply_patch|bash|powershell)$"
+      - type: "run-command"
+        config:
+          command: "tsp compile ."
+          expected_exit_code: 0
       - *file_matches
       - *file_matches_low_enum_value
       - *file_matches_medium_enum_value

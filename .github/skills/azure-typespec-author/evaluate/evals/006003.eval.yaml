@@ -14,7 +14,7 @@ stimuli:
     tags:
       suite: dataplane
       mode: trigger
-    prompt: Add a list operation for the WidgetSuite resource to the Widgets interface. The operation should allow listing Widget resources with standard list query parameters.
+    prompt: Add a list operation for the WidgetSuite resource to the Widgets interface. The operation should allow listing Widget resources with standard list query parameters and apply to all existing and future API versions. All design decisions are provided, so proceed without asking for confirmation.
     environment: &id001
       files:
         - src: ../fixtures/006003-dp-add-list-operation/main.tsp
@@ -28,12 +28,6 @@ stimuli:
       commands:
         - node -e "const fs=require('fs');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync('node_modules')){fs.symlinkSync(t,'node_modules','junction')}"
     graders:
-      - &id002
-        type: tool-calls
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - azure-sdk-mcp-azsdk_run_typespec_validation
       - type: skill-invocation
         config:
           required:
@@ -45,14 +39,13 @@ stimuli:
     tags:
       suite: dataplane
       mode: forced
-    prompt: "@azure-typespec-author Add a list operation for the WidgetSuite resource to the Widgets interface. The operation should allow listing Widget resources with standard list query parameters."
+    prompt: "@azure-typespec-author Add a list operation for the WidgetSuite resource to the Widgets interface. The operation should allow listing Widget resources with standard list query parameters and apply to all existing and future API versions. All design decisions are provided, so proceed without asking for confirmation."
     environment: *id001
     rubric: &shared_rubric
       - The Widgets interface includes a list operation for WidgetSuite using the Azure.Core ResourceList<WidgetSuite> template.
       - The operation supports standard list query parameters and has a descriptive @doc decorator.
       - Changes are limited to the requested operation and contain no unrelated edits.
     graders:
-      - *id002
       - type: run-command
         config:
           command: tsp compile .
@@ -61,7 +54,7 @@ stimuli:
         type: file-matches
         config:
           path: main.tsp
-          pattern: ResourceList<WidgetSuite
+          pattern: 'ResourceList\s*<\s*WidgetSuite'
       - &id004
         type: file-matches
         name: file-matches-documentation
@@ -82,7 +75,7 @@ stimuli:
     tags:
       suite: dataplane
       mode: no-skill
-    prompt: Add a list operation for the WidgetSuite resource to the Widgets interface. The operation should allow listing Widget resources with standard list query parameters.
+    prompt: Add a list operation for the WidgetSuite resource to the Widgets interface. The operation should allow listing Widget resources with standard list query parameters and apply to all existing and future API versions. All design decisions are provided, so proceed without asking for confirmation.
     environment: *id001
     rubric: *shared_rubric
     graders:
@@ -90,6 +83,10 @@ stimuli:
         config:
           required:
             - "^(edit|apply_patch|bash|powershell)$"
+      - type: run-command
+        config:
+          command: tsp compile .
+          expected_exit_code: 0
       - *id003
       - *id004
       - *id005
