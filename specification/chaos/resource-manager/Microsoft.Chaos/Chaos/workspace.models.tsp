@@ -60,6 +60,7 @@ model WorkspaceProperties {
   /**
    * The communication endpoint used to connect and communicate with the workspace for fault-injection orchestration.
    */
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   communicationEndpoint?: string;
 
