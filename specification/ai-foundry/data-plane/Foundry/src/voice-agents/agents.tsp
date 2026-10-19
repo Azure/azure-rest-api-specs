@@ -167,7 +167,7 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Structured inputs rendered into session prompts. Resolved ordinary strings may also be referenced in tool arguments with `{{name}}`.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
-  @doc("Session-local private-string declarations keyed by ASCII identifiers, never actual values. Tool arguments can reference them with `{{name}}`; prompts cannot. Conflicting names and unavailable values are rejected. There is no secret-read API.")
+  @doc("Optional mappings for trusted private-input initialization, keyed by ASCII identifiers, never actual values. Not required for collection outputs: binding creates those variables automatically. Tool arguments can reference available private strings with `{{name}}`; prompts cannot. There is no secret-read API.")
   secrets?: Record<VoiceAgentSessionSecret>;
 
   @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
@@ -423,24 +423,24 @@ union VoiceAgentSystemToolName {
   send_sms: "send_sms",
 }
 
-@doc("Declares one session-local private string without including its value in Agent configuration.")
+@doc("Configures optional trusted private-input initialization without including the value in Agent configuration. Collection outputs do not need this declaration.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSessionSecret {
-  @doc("Optional `structured_inputs.<identifier>` reference for trusted private initialization; the source must be a JSON string. Public WebSocket URL inputs and Call Job inputs cannot initialize private slots: mapped values are rejected with 400 before session admission or job persistence. Do not send private values through URLs. Omit to leave the slot empty for private collection.")
+  @doc("Optional `structured_inputs.<identifier>` reference for trusted private initialization; the source must be a JSON string. Public WebSocket URL inputs and Call Job inputs cannot initialize private slots: mapped values are rejected with 400 before session admission or job persistence. Do not send private values through URLs. Omit when private-input initialization is not needed; collection outputs are created separately.")
   @pattern("^structured_inputs\\.[A-Za-z_][A-Za-z0-9_]*$")
   initial_value_from?: string;
 }
 
-@doc("A declared session-local output target name, such as `verification_code`, without a namespace prefix or template syntax. Output bindings write to this name; tool input references use `{{name}}` to read it.")
+@doc("A session-local output variable name, such as `verification_code`, without a namespace prefix or template syntax. Output bindings specify a preferred name; collection feedback returns the actual allocated name. Tool inputs use `{{name}}` to read it.")
 @pattern("^[A-Za-z_][A-Za-z0-9_]*$")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar VoiceAgentOutputReference extends string;
 
-@doc("Routes a private collection result to one declared session-local string.")
+@doc("Creates a session-local private variable for a successful collection result.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectionOutputBindings {
-  @doc("The name of the declared slot to replace when a private collection completes. Starting a replacement collection clears the old value; cancellation, timeout, and failure leave the slot empty.")
-  value: VoiceAgentOutputReference;
+  @doc("The preferred bare variable name, such as `verification_code`. Successful private collection creates the variable; an occupied name receives a unique suffix, such as `_2`, without overwriting existing values. Completion reports the actual name through `output_ref`. Cancellation, timeout, failure and non-private collection do not create a variable.")
+  variable_name: VoiceAgentOutputReference;
 }
 
 @doc("Shared SMS/keypad collection settings. Each start requires a locked Boolean `secret`: private results use `output_bindings`; non-private results may return to the model. The model cannot override settings or submit input values. Collection is not authentication.")
@@ -461,7 +461,7 @@ model VoiceAgentInputCollectionSettings {
   @maxValue(300)
   timeout_seconds?: int32 = 60;
 
-  @doc("An optional destination for a private result. Required when the model starts a collection with `secret: true`. The slot must be declared in the Agent's `secrets` configuration.")
+  @doc("The preferred destination for a private result, required when collection starts with `secret: true`. Binding creates the variable automatically; no `secrets` declaration is required.")
   output_bindings?: VoiceAgentCollectionOutputBindings;
 }
 
@@ -586,7 +586,7 @@ model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
 }
 
 @doc("""
-  Enables tone sending with one required model-call string, `digits`: keypad characters, `{{name}}` references, or a mixture such as `{{verification_code}}#`. Names are case-sensitive ASCII identifiers (`[A-Za-z_][A-Za-z0-9_]*`) referencing ordinary session strings or declared private slots. The service binds values at execution, keeping private values out of model/history/output/diagnostics. Literal digits are model-visible. Missing, conflicting, malformed or non-string references fail before sending. No actions list, nested paths, expressions or recursive expansion are supported.
+  Enables tone sending with one required model-call string, `digits`: keypad characters, `{{name}}` references, or a mixture such as `{{verification_code}}#`. Names are case-sensitive ASCII identifiers (`[A-Za-z_][A-Za-z0-9_]*`) referencing ordinary session strings or available private variables. The service binds values at execution, keeping private values out of model/history/output/diagnostics. Literal digits are model-visible. Missing, conflicting, malformed or non-string references fail before sending. No actions list, nested paths, expressions or recursive expansion are supported.
   Resolved digits must match `[0-9*#]+`, with limits of 18 tones for ACS and 64 for SIP/Twilio. ACS uses its native API; SIP requires advertised RFC 4733 support; Twilio uses in-band audio on the existing Media Stream. There is no call-direction restriction. In-band tones are audible and require a compatible receiver. Provider acceptance is not IVR recognition or authentication; uncertain or interrupted sending is never automatically retried.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)

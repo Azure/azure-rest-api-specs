@@ -474,7 +474,7 @@ model VoiceAgentServerEventInputCollectionStatus
   @doc("The exact completed ASCII digit string, preserving leading zeros, only when collection started with `secret: false`. Never present for private collection or phone-operation feedback.")
   value?: string;
 
-  @doc("The bound output target name, such as `verification_code`, returned for private collection instead of its value. This is a bare name, not a namespace path or template.")
+  @doc("The actual variable name allocated for a completed private collection instead of its value. It may differ from the preferred name after a collision. The model uses this bare name in later `{{name}}` tool arguments.")
   output_ref?: VoiceAgentOutputReference;
 }
 
