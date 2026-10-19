@@ -32,6 +32,10 @@ interface Partitions {
   @doc("Creates or replaces a partition.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Partition>;
   update is ArmCustomPatchSync<Partition>;
-  delete is ArmResourceDeleteWithoutOkAsync<Partition>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Partition,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
   listByParent is ArmResourceListByParent<Partition>;
 }

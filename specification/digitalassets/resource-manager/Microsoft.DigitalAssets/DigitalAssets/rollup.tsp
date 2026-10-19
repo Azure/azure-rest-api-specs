@@ -138,7 +138,11 @@ interface ZkpRollups {
       ZkpRollupPatchProperties
     >
   >;
-  delete is ArmResourceDeleteWithoutOkAsync<ZkpRollup>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ZkpRollup,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
   listByResourceGroup is ArmResourceListByParent<ZkpRollup>;
   listBySubscription is ArmListBySubscription<ZkpRollup>;
 }
