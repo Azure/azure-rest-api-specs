@@ -166,14 +166,17 @@ export async function getLabelActionImpl({
         `leaving it unchanged`,
     );
   } else {
-    const { eligible, requireManualSignoff } = await evaluateEligibility({
-      owner,
-      repo,
-      head_sha,
-      labelNames,
-      github,
-      core,
-    });
+    if (pullRequest.draft) core.info("Draft PR is not eligible for automatic ARM signoff");
+    const { eligible, requireManualSignoff } = pullRequest.draft
+      ? { eligible: false, requireManualSignoff: false }
+      : await evaluateEligibility({
+          owner,
+          repo,
+          head_sha,
+          labelNames,
+          github,
+          core,
+        });
 
     if (requireManualSignoff && !has(ArmAutoSignoffLabel.ArmManualSignoffRequired)) {
       labelActions[ArmAutoSignoffLabel.ArmManualSignoffRequired] = LabelAction.Add;

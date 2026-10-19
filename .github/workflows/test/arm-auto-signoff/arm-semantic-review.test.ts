@@ -57,6 +57,19 @@ const smallPullRequest = { number: issueNumber, changed_files: 1, additions: 10,
 
 function createPublisherGithub() {
   const github = createMockGithub();
+  github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+    data: {
+      statuses: [
+        {
+          context: ARM_SEMANTIC_REVIEW_STATUS,
+          state: "pending",
+          target_url: `${runUrl}/attempts/${runAttempt}`,
+          updated_at: "2026-01-01",
+        },
+      ],
+      total_count: 1,
+    },
+  });
   github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
     data: {
       artifacts: [{ name: `head-sha=${headSha}` }, { name: `issue-number=${issueNumber}` }],
@@ -380,6 +393,25 @@ describe("addSpecificationChanges", () => {
   });
 });
 describe("publishArmSemanticReviewStatus", () => {
+  it.each([
+    { state: "pending", target_url: `${runUrl}/attempts/2` },
+    { state: "pending", target_url: `${runUrl}-newer/attempts/1` },
+    { state: "success", target_url: `${runUrl}/attempts/1` },
+  ])("does not overwrite a superseding result or attempt: %j", async (status) => {
+    const github = createPublisherGithub();
+    github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+      data: {
+        statuses: [{ context: ARM_SEMANTIC_REVIEW_STATUS, updated_at: "2026-01-01", ...status }],
+        total_count: 1,
+      },
+    });
+
+    const { result } = await runPublisher({ github });
+
+    expect(result.statusPublished).toBe(false);
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+  });
+
   it("publishes Passed for a clean reviewer result", async () => {
     const { github, result } = await runPublisher();
 

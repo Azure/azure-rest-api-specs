@@ -1,6 +1,6 @@
 import { Octokit } from "@octokit/rest";
 import { strToU8, zipSync } from "fflate";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { execFile } from "../../../shared/src/exec.ts";
 import type { GitHub } from "../../src/github.ts";
 import {
@@ -9,14 +9,175 @@ import {
   getCheckRunTuple,
   getExistingLabels,
   getImpactAssessment,
+  summarizeChecksImpl,
   updateLabels,
 } from "../../src/summarize-checks/summarize-checks.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
+import { fullGitSha } from "../../../shared/test/examples.ts";
 
 export type CheckRunData = import("../../src/summarize-checks/summarize-checks.ts").CheckRunData;
 
 const mockCore = createMockCore();
 const WORKFLOW_URL = "http://github.com/a/fake/workflowrun/url";
+
+describe("ARM review label handoff", () => {
+  describe("Summarize Checks integration", () => {
+    function createSummary(existingLabels: string[] = ["ARMReview"]) {
+      const github = createMockGithub();
+      const core = createMockCore();
+      core.summary.addLink = vi.fn().mockReturnValue(core.summary);
+      core.summary.addHeading = vi.fn().mockReturnValue(core.summary);
+      core.summary.addCodeBlock = vi.fn().mockReturnValue(core.summary);
+      github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+        data: existingLabels.map((name) => ({ name })),
+      });
+      github.rest.pulls.get.mockResolvedValue({
+        data: {
+          state: "open",
+          draft: false,
+          head: { sha: fullGitSha },
+          labels: existingLabels.map((name) => ({ name })),
+        },
+      });
+      github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
+      github.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            {
+              name: "Summarize PR Impact",
+              status: "completed",
+              conclusion: "success",
+              check_suite: { id: 1 },
+            },
+          ],
+        },
+      });
+      github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+        data: { workflow_runs: [{ id: 1, updated_at: "2026-01-01" }] },
+      });
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: { artifacts: [{ id: 1, name: "summary.json", size_in_bytes: 1024 }] },
+      });
+      github.rest.actions.downloadArtifact.mockImplementation(() =>
+        Promise.resolve({
+          data: new Response(
+            JSON.stringify({
+              resourceManagerRequired: true,
+              dataPlaneRequired: false,
+              suppressionReviewRequired: false,
+              isNewApiVersion: false,
+              rpaasRpNotInPrivateRepo: false,
+              rpaasChange: false,
+              newRP: false,
+              rpaasRPMissing: false,
+              typeSpecChanged: true,
+              isDraft: false,
+              targetBranch: "main",
+            }),
+          ).body,
+        }),
+      );
+
+      return {
+        github,
+        core,
+        run: () =>
+          summarizeChecksImpl(
+            github,
+            core,
+            "Azure",
+            "azure-rest-api-specs",
+            123,
+            fullGitSha,
+            "workflow_run",
+            "main",
+            WORKFLOW_URL,
+          ),
+      };
+    }
+
+    it("adds the queue label and signals readiness only after completing evaluation", async () => {
+      const { github, core, run } = createSummary();
+
+      await run();
+
+      expect(github.rest.issues.addLabels.mock.calls[0][0]).toHaveProperty(
+        "labels",
+        expect.arrayContaining(["WaitForARMFeedback"]),
+      );
+      expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", true);
+      expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
+      expect(github.rest.repos.createCommitStatus.mock.invocationCallOrder[0]).toBeLessThan(
+        core.setOutput.mock.invocationCallOrder.at(-1) ?? 0,
+      );
+    });
+
+    it("allows the dispatch job to recover an already-present queue label", async () => {
+      const { github, core, run } = createSummary(["ARMReview", "WaitForARMFeedback"]);
+
+      await run();
+
+      expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
+      expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", true);
+    });
+
+    it("preserves the initial-request marker during label reconciliation", async () => {
+      const { github, run } = createSummary([
+        "ARMReview",
+        "WaitForARMFeedback",
+        "ARMInitialReviewRequested",
+      ]);
+
+      await run();
+
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalledWith(
+        expect.objectContaining({ name: "ARMInitialReviewRequested" }),
+      );
+    });
+
+    it("does not dispatch when adding the queue label fails", async () => {
+      const { github, core, run } = createSummary();
+      github.rest.issues.addLabels.mockRejectedValue(new Error("Label write failed"));
+
+      await expect(run()).rejects.toThrow("Label write failed");
+      expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
+      expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
+    });
+
+    it.each([
+      { state: "closed" },
+      { head: { sha: "a".repeat(40) } },
+      { draft: true },
+      { labels: [{ name: "ARMReview" }, { name: "ARMManualSignoffRequired" }] },
+    ])("does not apply labels when the PR changes during evaluation: %j", async (change) => {
+      const { github, core, run } = createSummary();
+      github.rest.pulls.get
+        .mockResolvedValueOnce({
+          data: {
+            state: "open",
+            draft: false,
+            head: { sha: fullGitSha },
+            labels: [{ name: "ARMReview" }],
+          },
+        })
+        .mockResolvedValue({
+          data: {
+            state: "open",
+            draft: false,
+            head: { sha: fullGitSha },
+            labels: [{ name: "ARMReview" }],
+            ...change,
+          },
+        });
+
+      await run();
+
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+      expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
+    });
+  });
+});
 
 /**
  * Find and extract the "Next Steps to Merge" existing comment on a PR.

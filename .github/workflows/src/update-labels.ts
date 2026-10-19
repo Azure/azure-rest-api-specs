@@ -2,6 +2,9 @@ import { isFullGitSha } from "../../shared/src/git.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { extractInputs } from "../src/context.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "./github.ts";
+import { ArmAutoSignoffLabel } from "./arm-auto-signoff/arm-auto-signoff-labels.ts";
+import { getLabelActionImpl } from "./arm-auto-signoff/arm-universal-auto-signoff.ts";
+import { LabelAction } from "./label.ts";
 
 export default async function updateLabels({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, head_sha, issue_number, run_id } = await extractInputs(
@@ -59,9 +62,9 @@ export async function updateLabelsImpl({
 
   core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
-  const labelsToAdd: string[] = [];
+  let labelsToAdd: string[] = [];
 
-  const labelsToRemove: string[] = [];
+  let labelsToRemove: string[] = [];
 
   for (const artifactName of artifactNames) {
     // If artifactName has format "label-name=true|false", add or remove the label
@@ -103,6 +106,29 @@ export async function updateLabelsImpl({
 
   const pullRequestUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
   core.info(`pull request url: ${pullRequestUrl}`);
+
+  const managedArmLabels = new Set<string>(Object.values(ArmAutoSignoffLabel));
+  if ([...labelsToAdd, ...labelsToRemove].some((name) => managedArmLabels.has(name))) {
+    if (!isFullGitSha(head_sha)) {
+      throw new Error("ARM signoff label actions require a full evaluated head SHA");
+    }
+    // Artifacts can wait in the queue while the head, review result, or human approval changes.
+    const { labelActions } = await getLabelActionImpl({
+      owner,
+      repo,
+      head_sha,
+      issue_number,
+      github,
+      core,
+    });
+    labelsToAdd = labelsToAdd.filter((name) => !managedArmLabels.has(name));
+    labelsToRemove = labelsToRemove.filter((name) => !managedArmLabels.has(name));
+    for (const [name, action] of Object.entries(labelActions)) {
+      if (action === LabelAction.Add) labelsToAdd.push(name);
+      if (action === LabelAction.Remove) labelsToRemove.push(name);
+    }
+    core.info(`Revalidated ARM label actions at application: ${JSON.stringify(labelActions)}`);
+  }
 
   if (labelsToAdd.length > 0) {
     await github.rest.issues.addLabels({

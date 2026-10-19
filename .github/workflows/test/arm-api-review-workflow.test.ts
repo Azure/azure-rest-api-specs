@@ -33,13 +33,33 @@ function createResolverHarness(
     value,
     eventName = "workflow_dispatch",
     payload = {},
-  }: { value: string; eventName?: string; payload?: Record<string, unknown> },
+    expectedHeadSha = "",
+  }: {
+    value: string;
+    eventName?: string;
+    payload?: Record<string, unknown>;
+    expectedHeadSha?: string;
+  },
 ) {
   const get = vi.fn();
+  const listWorkflowRuns = vi.fn().mockResolvedValue({ data: { workflow_runs: [] } });
+  const getCombinedStatusForRef = vi.fn().mockResolvedValue({
+    data: {
+      statuses: [
+        {
+          context: "ARM Semantic Review",
+          state: "pending",
+          target_url: "https://github.com/Azure/azure-rest-api-specs/actions/runs/123",
+        },
+      ],
+      total_count: 1,
+    },
+  });
   const setOutput = vi.fn();
   const context = {
     eventName,
     payload,
+    runId: 456,
     repo: { owner: "Azure", repo: "azure-rest-api-specs" },
   };
   const resolverValue = runInNewContext(
@@ -54,13 +74,28 @@ function createResolverHarness(
 
   return {
     get,
+    listWorkflowRuns,
+    getCombinedStatusForRef,
     setOutput,
     run: () =>
       resolver({
-        github: { rest: { pulls: { get } } },
+        github: {
+          rest: {
+            pulls: { get },
+            actions: { listWorkflowRuns },
+            repos: { getCombinedStatusForRef },
+          },
+        },
         context,
         core: { setOutput },
-        process: { env: { GITHUB_RUN_ATTEMPT: "1", TARGET_PR_NUMBER: value } },
+        process: {
+          env: {
+            GITHUB_RUN_ATTEMPT: "1",
+            TARGET_PR_NUMBER: value,
+            EXPECTED_HEAD_SHA: expectedHeadSha,
+            RESERVATION_URL: "https://github.com/Azure/azure-rest-api-specs/actions/runs/123",
+          },
+        },
       }),
   };
 }
@@ -224,6 +259,7 @@ describe("ARM API review workflow", () => {
       expect(harness.setOutput).toHaveBeenCalledWith("target_pr_number", "44499");
       expect(harness.setOutput).toHaveBeenCalledWith("target_head_sha", fullGitSha);
       expect(harness.setOutput).toHaveBeenCalledWith("run_attempt", "1");
+      expect(harness.listWorkflowRuns).not.toHaveBeenCalled();
     });
 
     it("accepts an issue-shaped pull request comment payload", async () => {
@@ -238,6 +274,7 @@ describe("ARM API review workflow", () => {
 
       expect(harness.get).toHaveBeenCalledWith(expect.objectContaining({ pull_number: 44499 }));
       expect(harness.setOutput).toHaveBeenCalledWith("target_pr_number", "44499");
+      expect(harness.listWorkflowRuns).not.toHaveBeenCalled();
     });
 
     it("rejects an issue comment that is not attached to a pull request", async () => {
@@ -280,6 +317,184 @@ describe("ARM API review workflow", () => {
       await expect(harness.run()).rejects.toThrow("GitHub API unavailable");
       expect(harness.setOutput).not.toHaveBeenCalled();
     });
+
+    it("accepts an automated handoff for the current queued head", async () => {
+      const harness = createResolverHarness(resolverScript, {
+        value: "44499",
+        expectedHeadSha: fullGitSha,
+      });
+      harness.get.mockResolvedValue({
+        data: {
+          number: 44499,
+          state: "open",
+          draft: false,
+          head: { sha: fullGitSha },
+          labels: [
+            { name: "ARMReview" },
+            { name: "WaitForARMFeedback" },
+            { name: "ARMInitialReviewRequested" },
+          ],
+        },
+      });
+      await harness.run();
+
+      expect(harness.setOutput).toHaveBeenCalledWith("target_head_sha", fullGitSha);
+      expect(harness.listWorkflowRuns).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      { head: { sha: "a".repeat(40) } },
+      { state: "closed" },
+      { draft: true },
+      { labels: [] },
+      { labels: [{ name: "ARMReview" }, { name: "WaitForARMFeedback" }] },
+    ])("rejects a stale automated handoff: %j", async (overrides) => {
+      const harness = createResolverHarness(resolverScript, {
+        value: "44499",
+        expectedHeadSha: fullGitSha,
+      });
+      harness.get.mockResolvedValue({
+        data: {
+          number: 44499,
+          state: "open",
+          draft: false,
+          head: { sha: fullGitSha },
+          labels: [
+            { name: "ARMReview" },
+            { name: "WaitForARMFeedback" },
+            { name: "ARMInitialReviewRequested" },
+          ],
+          ...overrides,
+        },
+      });
+
+      await expect(harness.run()).rejects.toThrow(
+        "Automated ARM review request is no longer current",
+      );
+      expect(harness.setOutput).not.toHaveBeenCalled();
+    });
+
+    it("rejects a malformed expected head without publishing a target", async () => {
+      const harness = createResolverHarness(resolverScript, {
+        value: "44499",
+        expectedHeadSha: "not-a-sha",
+      });
+      harness.get.mockResolvedValue({ data: { head: { sha: fullGitSha } } });
+
+      await expect(harness.run()).rejects.toThrow("Invalid expected PR head SHA");
+      expect(harness.setOutput).not.toHaveBeenCalled();
+    });
+
+    it("does not start an automatic review when an explicit request raced dispatch", async () => {
+      const harness = createResolverHarness(resolverScript, {
+        value: "44499",
+        expectedHeadSha: fullGitSha,
+      });
+      harness.get.mockResolvedValue({
+        data: {
+          number: 44499,
+          state: "open",
+          draft: false,
+          head: { sha: fullGitSha },
+          labels: [
+            { name: "ARMReview" },
+            { name: "WaitForARMFeedback" },
+            { name: "ARMInitialReviewRequested" },
+          ],
+        },
+      });
+      harness.getCombinedStatusForRef.mockResolvedValue({
+        data: {
+          statuses: [
+            { context: "ARM Semantic Review", state: "pending", target_url: "manual-run" },
+          ],
+          total_count: 1,
+        },
+      });
+
+      await expect(harness.run()).rejects.toThrow("no longer owns the queued reservation");
+      expect(harness.setOutput).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      { statuses: [], total_count: 0 },
+      {
+        statuses: [
+          {
+            context: "ARM Semantic Review",
+            state: "success",
+            target_url: "https://github.com/Azure/azure-rest-api-specs/actions/runs/123",
+          },
+        ],
+        total_count: 1,
+      },
+    ])("rejects a missing or completed automatic reservation: %j", async (data) => {
+      const harness = createResolverHarness(resolverScript, {
+        value: "44499",
+        expectedHeadSha: fullGitSha,
+      });
+      harness.get.mockResolvedValue({
+        data: {
+          number: 44499,
+          state: "open",
+          draft: false,
+          head: { sha: fullGitSha },
+          labels: ["ARMReview", "WaitForARMFeedback", "ARMInitialReviewRequested"].map((name) => ({
+            name,
+          })),
+        },
+      });
+      harness.getCombinedStatusForRef.mockResolvedValue({ data });
+
+      await expect(harness.run()).rejects.toThrow(/reservation/);
+      expect(harness.setOutput).not.toHaveBeenCalled();
+    });
+
+    it("paginates current statuses without scanning workflow history", async () => {
+      const harness = createResolverHarness(resolverScript, {
+        value: "44499",
+        expectedHeadSha: fullGitSha,
+      });
+      harness.get.mockResolvedValue({
+        data: {
+          number: 44499,
+          state: "open",
+          draft: false,
+          head: { sha: fullGitSha },
+          labels: ["ARMReview", "WaitForARMFeedback", "ARMInitialReviewRequested"].map((name) => ({
+            name,
+          })),
+        },
+      });
+      harness.getCombinedStatusForRef.mockResolvedValueOnce({
+        data: {
+          statuses: Array.from({ length: 100 }, (_, index) => ({
+            context: `Other ${index}`,
+            state: "success",
+          })),
+          total_count: 101,
+        },
+      });
+
+      await harness.run();
+
+      expect(harness.getCombinedStatusForRef).toHaveBeenCalledTimes(2);
+      expect(harness.getCombinedStatusForRef).toHaveBeenLastCalledWith(
+        expect.objectContaining({ page: 2 }),
+      );
+      expect(harness.listWorkflowRuns).not.toHaveBeenCalled();
+    });
+  });
+
+  it("records explicit requests in trusted pre-activation without adding a marker gate to reruns", async () => {
+    const [source, compiled] = await readWorkflowFiles();
+    expect(source).toContain("name: Record explicit ARM review request");
+    expect(source).toContain(
+      "if: steps.check_membership.outputs.is_team_member == 'true' && github.event.inputs.head_sha == ''",
+    );
+    expect(compiled).toContain('labels: ["ARMInitialReviewRequested"]');
+    expect(source).not.toContain("github.rest.actions.listWorkflowRuns");
+    expect(source).toContain("if (expectedHeadSha)");
   });
 
   it("uses precise, observable, and authorized triggers", async () => {
@@ -287,8 +502,7 @@ describe("ARM API review workflow", () => {
 
     expect(source).toContain("github.event.comment.body == '/arm-review'");
     expect(source).not.toContain("contains(github.event.comment.body, '/arm-review')");
-    expect(source).toContain("types: [opened, synchronize, reopened, labeled, ready_for_review]");
-    expect(source).toContain("github.event.action == 'reopened'");
+    expect(source).toContain("types: [labeled]");
     expect(source).toContain('bots: ["github-actions[bot]"]');
     expect(source).toContain("status-comment: true");
     expect(source).toContain(`run-name: "ARM API Review #${TARGET_EXPRESSION}`);
@@ -296,8 +510,19 @@ describe("ARM API review workflow", () => {
     expect(compiled).toContain('GH_AW_ALLOWED_BOTS: "github-actions[bot]"');
     expect(compiled).toContain("- name: Add comment with workflow run link");
     expect(compiled).toContain("- name: Update reaction comment with completion status");
-    expect(compiled).toContain("      - reopened");
-    expect(compiled).toContain("github.event.action == 'reopened'");
+    expect(parse(compiled)).toMatchObject({
+      on: {
+        pull_request_target: { types: ["labeled"] },
+        workflow_dispatch: { inputs: { head_sha: { required: false } } },
+      },
+    });
+    expect(compiled).not.toMatch(/^ {2}(push|pull_request|workflow_run):$/m);
+    for (const workflow of [source, compiled]) {
+      expect(workflow).not.toContain("github.event.action == 'synchronize'");
+      expect(workflow).not.toContain("github.event.action == 'opened'");
+      expect(workflow).not.toContain("github.event.action == 'reopened'");
+      expect(workflow).not.toContain("github.event.action == 'ready_for_review'");
+    }
     expect(compiled).toContain(`run-name: "ARM API Review #${TARGET_EXPRESSION}`);
 
     const statusCommentStart = compiled.indexOf("- name: Add comment with workflow run link");
@@ -316,6 +541,7 @@ describe("ARM API review workflow", () => {
       expect(workflow).toContain("github.event.issue.pull_request == null");
       expect(workflow).toContain("github.event.label.name != 'WaitForARMFeedback'");
       expect(workflow).toContain("&& github.run_id || github.event.issue.number");
+      expect(workflow).toContain("cancel-in-progress: false");
     }
   });
 
@@ -470,7 +696,7 @@ describe("ARM API review workflow", () => {
     const collapsed = collapseWhitespace(source);
 
     expect(source).toContain(
-      "permissions:\n    pull-requests: read\n    statuses: write\n  steps:",
+      "permissions:\n    pull-requests: write\n    statuses: write\n  steps:",
     );
     expect(source).toContain(
       "**The review is full and complete, and at least one verified, currently",
@@ -505,7 +731,7 @@ describe("ARM API review workflow", () => {
     expect(agentJob).toContain("pull-requests: read");
     expect(agentJob).not.toContain("issues: write");
     expect(agentJob).not.toContain("pull-requests: write");
-    expect(preActivationJob).toContain("pull-requests: read");
+    expect(preActivationJob).toContain("pull-requests: write");
     expect(preActivationJob).toContain("statuses: write");
     expect(preActivationJob).not.toContain("issues: write");
     expect(safeOutputsJob).toContain("issues: write");
