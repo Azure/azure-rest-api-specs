@@ -30,6 +30,14 @@ scalar UDR
     }
   ]>;
 
+@doc("A fully qualified ARM resource ID referencing a resource group.")
+scalar ResourceGroupId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Resources/resourceGroups",
+    }
+  ]>;
+
 @doc("The allowed Private IP allocation methods")
 union IPAllocationMethod {
   @doc("Static Private IP address allocation")
@@ -59,11 +67,9 @@ model ProviderConnectionProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update)
   ipConfiguration?: IpConfiguration;
 
-  @doc("The name of the resource group in which the private endpoint for the provider connection is created. The resource group must be in the same subscription as the Azure Service Connection Controller. The name is case insensitive and cannot be changed after creation.")
-  @minLength(1)
-  @maxLength(90)
+  @doc("The fully qualified Azure Resource Manager resource ID of the resource group in which the private endpoint for the provider connection is created. The resource group must be in the same subscription as the Azure Service Connection Controller. The resource ID is case insensitive and cannot be changed after creation.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  privateEndpointResourceGroupName?: string;
+  privateEndpointResourceGroup?: ResourceGroupId;
 
   @doc("The resource ID of the source private endpoint associated with the provider connection.")
   @visibility(Lifecycle.Read)

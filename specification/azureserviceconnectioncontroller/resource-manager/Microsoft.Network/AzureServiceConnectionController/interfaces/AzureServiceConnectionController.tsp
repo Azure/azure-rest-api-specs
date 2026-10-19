@@ -65,7 +65,7 @@ interface AzureServiceConnectionControllers {
               #{
                 name: "provider-connection",
                 subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
-                privateEndpointResourceGroupName: "pe-rg1",
+                privateEndpointResourceGroup: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/pe-rg1",
               }
             ],
             provisioningState: "Succeeded",
@@ -103,7 +103,7 @@ interface AzureServiceConnectionControllers {
                   ipAllocationMethod: "Static",
                 },
                 subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
-                privateEndpointResourceGroupName: "pe-rg1",
+                privateEndpointResourceGroup: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/pe-rg1",
               }
             ],
           },
@@ -125,7 +125,7 @@ interface AzureServiceConnectionControllers {
               #{
                 name: "provider-connection",
                 subnetId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet2",
-                privateEndpointResourceGroupName: "pe-rg1",
+                privateEndpointResourceGroup: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/pe-rg1",
               }
             ],
             provisioningState: "Succeeded",
