@@ -22,6 +22,12 @@ enum Versions {
 
   @doc("The 2022-12-01 version.")
   v2022_12_01: "2022-12-01",
+
+  @doc("The first dummy version for SDK policy parity verification.")
+  v2026_10_01: "2026-10-01",
+
+  @doc("The second dummy version for SDK policy parity verification.")
+  v2026_11_01: "2026-11-01",
 }
 
 @doc("A widget.")
