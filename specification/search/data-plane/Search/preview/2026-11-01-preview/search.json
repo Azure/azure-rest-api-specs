@@ -4251,10 +4251,10 @@
         }
       },
       "post": {
-        "operationId": "KnowledgeSources_UploadFile",
-        "description": "Uploads a file to a File knowledge source for processing and indexing.",
+        "operationId": "KnowledgeSources_UploadFileMultipart",
+        "description": "Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes.",
         "consumes": [
-          "application/octet-stream"
+          "multipart/form-data"
         ],
         "parameters": [
           {
@@ -4272,22 +4272,18 @@
             "x-ms-client-name": "name"
           },
           {
-            "name": "Content-Disposition",
-            "in": "header",
-            "description": "The Content-Disposition header specifying the filename of the uploaded file.\nMust follow the format: `attachment; filename=\"<filename>\"`.\nFor example: `attachment; filename=\"installation-guide.pdf\"`.",
+            "name": "metadata",
+            "in": "formData",
+            "description": "The JSON metadata describing the file.",
             "required": true,
-            "type": "string",
-            "x-ms-client-name": "contentDisposition"
+            "type": "string"
           },
           {
-            "name": "file",
-            "in": "body",
-            "description": "The file content to upload.",
+            "name": "content",
+            "in": "formData",
+            "description": "The raw file content.",
             "required": true,
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            }
+            "type": "file"
           }
         ],
         "responses": {
@@ -4305,8 +4301,8 @@
           }
         },
         "x-ms-examples": {
-          "SearchServiceUploadKnowledgeSourceFile": {
-            "$ref": "./examples/SearchServiceUploadKnowledgeSourceFile.json"
+          "SearchServiceUploadKnowledgeSourceFileMultipart": {
+            "$ref": "./examples/SearchServiceUploadKnowledgeSourceFileMultipart.json"
           }
         }
       }
@@ -5877,12 +5873,12 @@
         }
       }
     },
-    "/knowledgesources('{sourceName}')/files?_overload=uploadFileMultipart": {
+    "/knowledgesources('{sourceName}')/files?_overload=uploadFile": {
       "post": {
-        "operationId": "KnowledgeSources_UploadFileMultipart",
-        "description": "Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes.",
+        "operationId": "KnowledgeSources_UploadFile",
+        "description": "Uploads a file to a File knowledge source for processing and indexing.",
         "consumes": [
-          "multipart/form-data"
+          "application/octet-stream"
         ],
         "parameters": [
           {
@@ -5900,18 +5896,22 @@
             "x-ms-client-name": "name"
           },
           {
-            "name": "metadata",
-            "in": "formData",
-            "description": "The JSON metadata describing the file.",
+            "name": "Content-Disposition",
+            "in": "header",
+            "description": "The Content-Disposition header specifying the filename of the uploaded file.\nMust follow the format: `attachment; filename=\"<filename>\"`.\nFor example: `attachment; filename=\"installation-guide.pdf\"`.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "contentDisposition"
           },
           {
-            "name": "content",
-            "in": "formData",
-            "description": "The raw file content.",
+            "name": "file",
+            "in": "body",
+            "description": "The file content to upload.",
             "required": true,
-            "type": "file"
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
           }
         ],
         "responses": {
@@ -5929,8 +5929,8 @@
           }
         },
         "x-ms-examples": {
-          "SearchServiceUploadKnowledgeSourceFileMultipart": {
-            "$ref": "./examples/SearchServiceUploadKnowledgeSourceFileMultipart.json"
+          "SearchServiceUploadKnowledgeSourceFile": {
+            "$ref": "./examples/SearchServiceUploadKnowledgeSourceFile.json"
           }
         }
       }

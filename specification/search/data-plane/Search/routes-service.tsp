@@ -981,6 +981,25 @@ interface KnowledgeSources {
     KnowledgeSourceStatus
   >;
 
+  /** Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
+  @added(Versions.v2026_08_01_preview)
+  @sharedRoute
+  @route("/knowledgesources('{sourceName}')/files")
+  @post
+  uploadFileMultipart is SearchSourceOperation<
+    {
+      /** The multipart/form-data body containing the metadata and content parts. */
+      @multipartBody
+      body: UploadKnowledgeSourceFileMultipartRequest;
+    },
+    KnowledgeSourceFile & {
+      @statusCode
+      code: "201";
+    }
+  >;
+
   /** Uploads a file to a File knowledge source for processing and indexing. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
@@ -1007,25 +1026,6 @@ interface KnowledgeSources {
     },
     KnowledgeSourceFile & {
       /** A process exit code. */
-      @statusCode
-      code: "201";
-    }
-  >;
-
-  /** Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
-  @added(Versions.v2026_08_01_preview)
-  @sharedRoute
-  @route("/knowledgesources('{sourceName}')/files")
-  @post
-  uploadFileMultipart is SearchSourceOperation<
-    {
-      /** The multipart/form-data body containing the metadata and content parts. */
-      @multipartBody
-      body: UploadKnowledgeSourceFileMultipartRequest;
-    },
-    KnowledgeSourceFile & {
       @statusCode
       code: "201";
     }
