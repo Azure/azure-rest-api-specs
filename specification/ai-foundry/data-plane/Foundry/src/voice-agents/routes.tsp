@@ -14,7 +14,7 @@ const VoiceAgentConversationRequiredPreviews = #{
   required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
 };
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for consistency with VoiceItemAudioResponse."
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for consistency with VoiceAudioItemResponse."
 @doc("""
   Metadata for a conversation item's generated audio. For bring-your-own-storage (BYOS), the response includes
   `blob_uri`, a direct customer-storage URI without a SAS token, that the customer accesses with their own
@@ -22,8 +22,8 @@ const VoiceAgentConversationRequiredPreviews = #{
   `/audio/generated/content` route.
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceGeneratedItemAudioResponse {
-  ...OmitProperties<VoiceItemAudioResponse, "blob_uri">;
+model VoiceGeneratedAudioItem {
+  ...OmitProperties<VoiceAudioItem, "blob_uri">;
 
   @doc("For bring-your-own-storage (BYOS) recordings only: the URI of the generated audio in the customer's own storage, without a SAS token. The customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/generated/content` route instead.")
   blob_uri?: url;
@@ -319,7 +319,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio")
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationItemAudio is FoundryDataPlaneRequiredPreviewOperation<
+  getAgentConversationAudioItem is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -331,7 +331,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item whose audio metadata is retrieved. */
       @path item_id: string;
     },
-    VoiceItemAudioResponse
+    VoiceAudioItem
   >;
 
   /**
@@ -345,7 +345,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content")
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationItemAudioContent is FoundryDataPlaneRequiredPreviewOperation<
+  getAgentConversationAudioItemContent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -357,7 +357,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item whose audio is streamed. */
       @path item_id: string;
     },
-    VoiceAudioStreamResponse
+    VoiceAudioStream
   >;
 
   /**
@@ -370,7 +370,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated")
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationItemGeneratedAudio is FoundryDataPlaneRequiredPreviewOperation<
+  getAgentConversationGeneratedAudioItem is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -382,7 +382,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item whose generated audio metadata is retrieved. */
       @path item_id: string;
     },
-    VoiceGeneratedItemAudioResponse
+    VoiceGeneratedAudioItem
   >;
 
   /**
@@ -397,7 +397,7 @@ interface AgentEndpointConversations {
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/generated/content")
   @extension("x-ms-foundry-meta", VoiceAgentConversationRequiredPreviews)
-  getAgentConversationItemGeneratedAudioContent is FoundryDataPlaneRequiredPreviewOperation<
+  getAgentConversationGeneratedAudioItemContent is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** The name of the agent. */
@@ -409,7 +409,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item whose generated audio is streamed. */
       @path item_id: string;
     },
-    VoiceAudioStreamResponse
+    VoiceAudioStream
   >;
 
   /**
@@ -437,7 +437,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation whose merged recording metadata is retrieved. */
       @path conversation_id: string;
     },
-    VoiceRecordingResponse
+    VoiceRecording
   >;
 
   /**
@@ -464,9 +464,18 @@ interface AgentEndpointConversations {
       /** The id of the conversation whose merged recording is streamed. */
       @path conversation_id: string;
     },
-    VoiceAudioStreamResponse
+    VoiceAudioStream
   >;
 }
+
+/** Time filters for listing durable inbound telephony calls. */
+alias TelephonyCallListTimeQueryParameters = {
+  /** Includes calls that started at or after this Unix timestamp in seconds. */
+  @query started_after?: FoundryTimestamp;
+
+  /** Includes calls that started at or before this Unix timestamp in seconds. */
+  @query started_before?: FoundryTimestamp;
+};
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This interface combines agent-contained binding and call resources, call actions, and a singleton transfer-target collection, so it does not map to one standard resource operation template."
 @tag("Agent Telephony")
@@ -485,7 +494,7 @@ interface AgentTelephony {
       ...Azure.Core.RepeatabilityRequestHeaders;
 
       /** The provider-specific binding to create. */
-      @body body: CreateTelephonyBindingRequest;
+      @body telephony_binding: CreateTelephonyBindingRequest;
     },
     TelephonyBindingCreatedResponse
   >;
@@ -592,12 +601,7 @@ interface AgentTelephony {
       /** Filters calls by lifecycle status. */
       @query status?: TelephonyCallStatus;
 
-      /** Includes calls that started at or after this Unix timestamp in seconds. */
-      @query started_after?: FoundryTimestamp;
-
-      /** Includes calls that started at or before this Unix timestamp in seconds. */
-      @query started_before?: FoundryTimestamp;
-
+      ...TelephonyCallListTimeQueryParameters;
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<TelephonyCallSummary>
@@ -737,157 +741,5 @@ interface AgentTelephony {
       ...TelephonyIfMatchHeader;
     },
     TelephonyCallJobResponse | TelephonyCallJobAcceptedResponse
-  >;
-
-  /** Creates a draft outbound campaign. Recipients are imported and validated before the campaign can be published. */
-  @summary("Create an outbound telephony campaign")
-  @post
-  @route("/agents/{agent_name}/telephony/campaigns")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  createTelephonyCampaign is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      @path agent_name: string;
-      @body body: CreateTelephonyCampaignRequest;
-    },
-    TelephonyCampaignCreatedResponse
-  >;
-
-  /** Retrieves an outbound campaign, including configuration, execution state, and aggregate call-job counts. */
-  @summary("Get an outbound telephony campaign")
-  @get
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  getTelephonyCampaign is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      @path agent_name: string;
-      @path campaign_id: TelephonyCampaignId;
-    },
-    TelephonyCampaign
-  >;
-
-  /** Starts an asynchronous import of campaign recipients from a Dataset CSV, JSON array, or JSONL file. */
-  @summary("Import outbound telephony campaign recipients")
-  @post
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}/recipients:import")
-  @pollingOperation(AgentTelephony.getTelephonyOperation)
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  importTelephonyCampaignRecipients is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      @path agent_name: string;
-      @path campaign_id: TelephonyCampaignId;
-
-      @header("Idempotency-Key")
-      @minLength(1)
-      @maxLength(256)
-      idempotency_key: string;
-
-      @body body: ImportTelephonyCampaignRecipientsRequest;
-    },
-    TelephonyCampaignOperationAcceptedResponse
-  >;
-
-  /** Retrieves the durable status and counters for a campaign recipient import. */
-  @summary("Get an outbound telephony campaign recipient import")
-  @get
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}/recipient_imports/{import_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  getTelephonyCampaignRecipientImport is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      @path agent_name: string;
-      @path campaign_id: TelephonyCampaignId;
-      @path import_id: TelephonyCampaignRecipientImportId;
-    },
-    TelephonyCampaignRecipientImport
-  >;
-
-  /** Starts asynchronous validation of the current campaign draft and imported recipient snapshot. */
-  @summary("Validate an outbound telephony campaign")
-  @post
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}:validate")
-  @pollingOperation(AgentTelephony.getTelephonyOperation)
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  validateTelephonyCampaign is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      @path agent_name: string;
-      @path campaign_id: TelephonyCampaignId;
-    },
-    TelephonyCampaignOperationAcceptedResponse
-  >;
-
-  /** Permanently locks the validated campaign draft and starts asynchronous call-job materialization. */
-  @summary("Publish an outbound telephony campaign")
-  @post
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}:publish")
-  @pollingOperation(AgentTelephony.getTelephonyOperation)
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  publishTelephonyCampaign is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      @path agent_name: string;
-      @path campaign_id: TelephonyCampaignId;
-      @body body: PublishTelephonyCampaignRequest;
-    },
-    TelephonyCampaignOperationAcceptedResponse
-  >;
-
-  /** Pauses dispatch of call jobs owned by a published campaign. */
-  @summary("Pause an outbound telephony campaign")
-  @post
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}:pause")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  pauseTelephonyCampaign is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      @path agent_name: string;
-      @path campaign_id: TelephonyCampaignId;
-    },
-    TelephonyCampaign
-  >;
-
-  /** Resumes dispatch of call jobs owned by a paused campaign. */
-  @summary("Resume an outbound telephony campaign")
-  @post
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}:resume")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  resumeTelephonyCampaign is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      @path agent_name: string;
-      @path campaign_id: TelephonyCampaignId;
-    },
-    TelephonyCampaign
-  >;
-
-  /** Cancels a campaign and prevents any further call-job dispatch. */
-  @summary("Cancel an outbound telephony campaign")
-  @post
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_id}:cancel")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  cancelTelephonyCampaign is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      @path agent_name: string;
-      @path campaign_id: TelephonyCampaignId;
-    },
-    TelephonyCampaign
-  >;
-
-  /** Retrieves an asynchronous outbound campaign operation. */
-  @summary("Get an outbound telephony operation")
-  @get
-  @route("/agents/{agent_name}/telephony/operations/{operation_id}")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  getTelephonyOperation is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      @path agent_name: string;
-      @path operation_id: TelephonyOperationId;
-    },
-    TelephonyOperation
   >;
 }

@@ -18,8 +18,8 @@ tags:
 defaults:
   runs: 1
   timeout: "300s"
-  model: gpt-5.4
-  judge_model: gpt-5.4
+  model: gpt-5.6-sol?effort=high
+  judge_model: claude-sonnet-4.6
 
 scoring:
   threshold: 0.7
@@ -80,6 +80,20 @@ stimuli:
       files:
         - src: "../fixtures/arm-openapi/clean-spec.json"
           dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json"
+        - src: "../fixtures/examples/example-clean.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json"
+        - src: "../fixtures/examples/example-clean-create-or-update.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_CreateOrUpdate.json"
+        - src: "../fixtures/examples/example-clean-update.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Update.json"
+        - src: "../fixtures/examples/example-clean-delete.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Delete.json"
+        - src: "../fixtures/examples/example-clean-list-by-resource-group.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_ListByResourceGroup.json"
+        - src: "../fixtures/examples/example-clean-list-by-subscription.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_ListBySubscription.json"
+        - src: "../fixtures/examples/example-clean-operations-list.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Operations_List.json"
     prompt: >
       Review the following ARM resource-manager OpenAPI specification. This is
       a clean specification with no expected blocking violations.

@@ -196,6 +196,13 @@ model RecoveryPlanUpdate {
   properties?: RecoveryPlanUpdateProperties;
 }
 
+#suppress "deprecated" "The legacy RecoveryPlans update operation must retain the existing JavaScript PATCH body customization in the retired API versions."
+@@alternateType(
+  Microsoft.AzureResilienceManagement.RecoveryPlansOld.update::parameters.properties,
+  RecoveryPlanUpdate,
+  "javascript"
+);
+
 @@alternateType(
   Microsoft.AzureResilienceManagement.RecoveryPlans.update::parameters.properties,
   RecoveryPlanUpdate,

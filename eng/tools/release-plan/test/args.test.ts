@@ -22,4 +22,21 @@ describe("parseCliArguments", () => {
       ]),
     ).toThrow(/Unknown option '--azsdk-path'/);
   });
+
+  it("accepts a release plan id without a commit or PR", () => {
+    const result = parseCliArguments(["--release-plan-id", "12345"]);
+
+    expect(result.releasePlanId).toBe("12345");
+    expect(result.commitSha).toBeUndefined();
+  });
+
+  it("rejects the removed testing-only --pr-number option", () => {
+    expect(() => parseCliArguments(["--pr-number", "123"])).toThrow(/Unknown option '--pr-number'/);
+  });
+
+  it("requires a commit SHA or release plan ID", () => {
+    expect(() => parseCliArguments([])).toThrow(
+      "One of --release-plan-id or --commit-sha is required.",
+    );
+  });
 });

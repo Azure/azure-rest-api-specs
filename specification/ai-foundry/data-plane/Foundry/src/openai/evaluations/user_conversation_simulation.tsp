@@ -2,34 +2,6 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-/**
- * Evaluates a model or agent by simulating user conversations against it.
- *
- * Each source item defines a test scenario. Use a JSONL source or an `inline_user_conversation_simulation` source with strongly typed test cases. JSONL attributes use the inline test-case property names by default; specify `data_mapping` only when the dataset uses different names. The model specified by `model_configuration` generates the simulated user's turns and drives the conversation with `target` until it reaches the desired length or maximum turn limit. The evaluation's testing criteria are then applied to the conversation.
- */
-model UserConversationSimulationEvalRunDataSource extends EvalRunDataSource {
-  /** The type of data source, always `azure_ai_user_conversation_simulation_preview`. */
-  type: "azure_ai_user_conversation_simulation_preview";
-
-  /** Test scenarios supplied as JSONL rows or strongly typed inline test cases. */
-  source: UserConversationSimulationSource;
-
-  /** Model or agent being evaluated. It receives turns from the simulated user. */
-  target: FoundryEvaluationTarget;
-
-  /** Model used to simulate the user side of each conversation by generating turns sent to the evaluated `target`. */
-  model_configuration: EvaluationModelConfiguration;
-
-  /** Default configuration for generating simulated user conversations. Properties in a test case's `simulation_configuration` override the corresponding defaults. */
-  default_simulation_configuration?: UserConversationSimulationConfiguration;
-
-  /** Maps JSONL dataset attributes to user conversation simulation inputs when their names differ from the defaults. The default attribute names are `test_case_id`, `test_case_category`, `test_case_description`, and `simulation_configuration`, matching `UserConversationSimulationTestCase`. Omit when the dataset uses these names or when using `inline_user_conversation_simulation`. */
-  data_mapping?: Record<string>;
-
-  /** Whether to write all generated conversations to a file in a versioned Foundry dataset, providing visibility into the generated conversations. The dataset can be reused in future evaluation runs. When enabled, the completed run includes `output_dataset`. When omitted, the service defaults to `false`. */
-  enable_conversation_dataset_generation?: boolean = false;
-}
-
 /** Sources supported by user conversation simulation. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 union UserConversationSimulationSource {
@@ -57,6 +29,18 @@ model UserConversationSimulationConfiguration {
 
   /** Conversation behavior of the simulated user. */
   user_behavior?: UserConversationSimulationUserBehaviorConfiguration;
+}
+
+/** Configures default conversation behavior and optional run-wide persistence of generated conversations. */
+model UserConversationSimulationDefaultConfiguration {
+  ...UserConversationSimulationConfiguration;
+
+  /** Whether to write all generated conversations to a versioned Foundry dataset. When enabled, the completed run includes a `simulated_user_conversations` entry in `output_datasets`. When omitted, the service defaults to `false`. */
+  enable_conversation_dataset_generation?: boolean = false;
+
+  /** Name of the dataset to which generated conversations are written. This property is used only when `enable_conversation_dataset_generation` is `true`. When omitted, the service generates a dataset name. */
+  @minLength(1)
+  output_conversation_dataset_name?: string;
 }
 
 /** Effect that can be applied to simulated conversation audio. The union is extensible for additional effects. */

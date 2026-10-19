@@ -1390,5 +1390,3 @@ model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Marking as pageable for .Net SDK generation"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Offerings.list, "csharp");

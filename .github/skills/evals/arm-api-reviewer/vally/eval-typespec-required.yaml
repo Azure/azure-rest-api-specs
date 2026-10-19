@@ -2,8 +2,8 @@ name: arm-api-reviewer-eval-typespec-required
 description: |
   TypeSpec-required-for-new-API-versions tests (12xxxx).
   Validates rule TSP-REQUIRED-V1: new API version directories that contain
-  only handwritten OpenAPI swagger (no sibling TypeSpec source, no
-  x-typespec-generated marker, no .tsp files added in the PR) MUST be flagged
+  only handwritten OpenAPI swagger (no TypeSpec project proven to emit the new
+  version and no x-typespec-generated marker) MUST be flagged
   as Blocking. Updates to handwritten swagger inside pre-existing API version
   directories MUST NOT be flagged.
 
@@ -14,6 +14,27 @@ description: |
 environment:
   skills:
     - "../../../azure-api-review"
+  files:
+    - src: "../../../../instructions/openapi-review.instructions.md"
+      dest: ".github/instructions/openapi-review.instructions.md"
+    - src: "../../../../instructions/arm-api-review.instructions.md"
+      dest: ".github/instructions/arm-api-review.instructions.md"
+    - src: "../../../../../specification/common-types/resource-management/v5/types.json"
+      dest: "specification/common-types/resource-management/v5/types.json"
+    - src: "../fixtures/examples/example-clean.json"
+      dest: "specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json"
+    - src: "../fixtures/examples/example-clean-create-or-update.json"
+      dest: "specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_CreateOrUpdate.json"
+    - src: "../fixtures/examples/example-clean-update.json"
+      dest: "specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Update.json"
+    - src: "../fixtures/examples/example-clean-delete.json"
+      dest: "specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Delete.json"
+    - src: "../fixtures/examples/example-clean-list-by-resource-group.json"
+      dest: "specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_ListByResourceGroup.json"
+    - src: "../fixtures/examples/example-clean-list-by-subscription.json"
+      dest: "specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_ListBySubscription.json"
+    - src: "../fixtures/examples/example-clean-operations-list.json"
+      dest: "specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Operations_List.json"
 
 tags:
   area: arm-api-reviewer
@@ -21,8 +42,8 @@ tags:
 defaults:
   runs: 1
   timeout: "300s"
-  model: gpt-5.4
-  judge_model: gpt-5.4
+  model: gpt-5.6-sol?effort=high
+  judge_model: claude-sonnet-4.6
 
 scoring:
   threshold: 0.7
@@ -33,17 +54,16 @@ stimuli:
     environment:
       files:
         - src: "../fixtures/arm-openapi/clean-spec.json"
-          dest: "specification/handwrittensvc/resource-manager/Microsoft.HandwrittenService/stable/2026-05-01/handwrittensvc.json"
+          dest: "specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleanservice.json"
     prompt: >
       Review the following ARM resource-manager OpenAPI specification.
 
       Context for this PR:
-        - The directory `specification/handwrittensvc/resource-manager/Microsoft.HandwrittenService/stable/2026-05-01/`
+        - The directory `specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/`
           is a NEW API version directory introduced by this PR. It does not exist on the base branch.
         - There are NO previous API versions for this service.
-        - The PR does NOT add or modify any `.tsp` files.
-        - There is NO sibling TypeSpec project (no `main.tsp`, no `tspconfig.yaml`) anywhere under
-          `specification/handwrittensvc/`.
+        - There is NO sibling TypeSpec project that declares this API version
+          and is configured to emit this OpenAPI directory.
         - The swagger file does NOT contain the `x-typespec-generated` extension.
 
       Apply all applicable review rules from the loaded instruction files,
@@ -51,7 +71,7 @@ stimuli:
       (rule ID `TSP-REQUIRED-V1`). Report all findings with rule IDs, severity,
       line numbers, and fix suggestions.
 
-      File: specification/handwrittensvc/resource-manager/Microsoft.HandwrittenService/stable/2026-05-01/handwrittensvc.json
+      File: specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleanservice.json
     constraints:
       expect_skills:
         - azure-api-review
@@ -66,7 +86,7 @@ stimuli:
           pattern: "(?is)TSP-REQUIRED-V1.{0,400}\\bBlocking\\b|\\bBlocking\\b.{0,400}TSP-REQUIRED-V1"
       - type: prompt
     rubric:
-      - The agent MUST flag rule `TSP-REQUIRED-V1` as a Blocking finding because the PR introduces a new API version directory that contains only handwritten OpenAPI swagger and none of the compliance signals (sibling TypeSpec project, `x-typespec-generated` marker, or added `.tsp` files) are present
+      - The agent MUST flag rule `TSP-REQUIRED-V1` as a Blocking finding because the PR introduces a new API version directory that contains only handwritten OpenAPI swagger and neither compliance signal (linked TypeSpec emitter or `x-typespec-generated` marker) is present
       - The finding must clearly identify the file path and explain that new API versions must be authored in TypeSpec with the Azure TypeSpec libraries
       - The fix suggestion must point the author to authoring the new API version in TypeSpec (e.g., creating a `main.tsp` and `tspconfig.yaml`, then generating swagger via `tsp compile .`)
 
@@ -96,13 +116,12 @@ stimuli:
       expect_skills:
         - azure-api-review
     graders:
-      # Negative grader: only fails when TSP-REQUIRED-V1 is presented as an actual
-      # finding (rule ID within 250 chars of a severity tag), not when it is merely
-      # mentioned in a "Compliant Areas" / "N/A" / acknowledgment table.
+      # Fail only on canonical finding glyphs or telemetry, not explanatory
+      # mentions such as "No Blocking issues; TSP-REQUIRED-V1 does not apply."
       - type: output-not-matches
         name: "TSP-REQUIRED-V1 must NOT be flagged"
         config:
-          pattern: "(?is)TSP-REQUIRED-V1.{0,250}\\b(?:Blocking|Warning|Suggestion|Critical)\\b|\\b(?:Blocking|Warning|Suggestion|Critical)\\b.{0,250}TSP-REQUIRED-V1|🔴.{0,250}TSP-REQUIRED-V1|TSP-REQUIRED-V1.{0,250}🔴"
+          pattern: "(?im)^.*(?:🔴|🟠|🔵).{0,200}TSP-REQUIRED-V1|^.*TSP-REQUIRED-V1.{0,200}(?:🔴|🟠|🔵)|posted-by:[^\\n]*rule:\\s*TSP-REQUIRED-V1"
       - type: prompt
     rubric:
       - The agent MUST NOT flag rule `TSP-REQUIRED-V1` because the swagger file contains the `x-typespec-generated` extension at the top level, which is one of the compliance signals defined in the rule
@@ -115,12 +134,12 @@ stimuli:
     environment:
       files:
         - src: "../fixtures/arm-openapi/clean-spec.json"
-          dest: "specification/legacysvc/resource-manager/Microsoft.LegacyService/stable/2024-02-01/legacysvc.json"
+          dest: "specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleanservice.json"
     prompt: >
       Review the following ARM resource-manager OpenAPI specification.
 
       Context for this PR:
-        - The directory `specification/legacysvc/resource-manager/Microsoft.LegacyService/stable/2024-02-01/`
+        - The directory `specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/`
           ALREADY EXISTS on the base branch. It is a pre-migration handwritten OpenAPI API version.
         - This PR makes an in-place edit to the swagger file inside this existing directory
           (e.g., adds a property description, fixes an enum value).
@@ -132,22 +151,66 @@ stimuli:
       Report all findings with rule IDs, severity, line numbers, and fix suggestions.
       If the spec is fully compliant, state that no blocking issues were found.
 
-      File: specification/legacysvc/resource-manager/Microsoft.LegacyService/stable/2024-02-01/legacysvc.json
+      File: specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleanservice.json
     constraints:
       expect_skills:
         - azure-api-review
     graders:
-      # Negative grader: only fails when TSP-REQUIRED-V1 is presented as an actual
-      # finding (rule ID within 250 chars of a severity tag), not when it is merely
-      # mentioned in a "Compliant Areas" / "N/A" / acknowledgment table.
+      # Fail only on canonical finding glyphs or telemetry, not explanatory
+      # mentions such as "No Blocking issues; TSP-REQUIRED-V1 does not apply."
       - type: output-not-matches
         name: "TSP-REQUIRED-V1 must NOT be flagged on maintenance edits"
         config:
-          pattern: "(?is)TSP-REQUIRED-V1.{0,250}\\b(?:Blocking|Warning|Suggestion|Critical)\\b|\\b(?:Blocking|Warning|Suggestion|Critical)\\b.{0,250}TSP-REQUIRED-V1|🔴.{0,250}TSP-REQUIRED-V1|TSP-REQUIRED-V1.{0,250}🔴"
+          pattern: "(?im)^.*(?:🔴|🟠|🔵).{0,200}TSP-REQUIRED-V1|^.*TSP-REQUIRED-V1.{0,200}(?:🔴|🟠|🔵)|posted-by:[^\\n]*rule:\\s*TSP-REQUIRED-V1"
       - type: prompt
     rubric:
       - The agent MUST NOT flag rule `TSP-REQUIRED-V1` because the PR is an in-place edit to a pre-existing API version directory, not the introduction of a new API version
-      - Updates to handwritten OpenAPI inside existing API version directories are explicitly permitted by the rule
+      - Existing handwritten OpenAPI directories are out of scope for TSP-REQUIRED-V1 but remain subject to all other compatibility and immutability rules
       - Flagging `TSP-REQUIRED-V1` on this fixture is a false positive and constitutes a test failure
       - Listing `TSP-REQUIRED-V1` as N/A or compliant in an acknowledgments / compliant-areas table is acceptable and does NOT count as flagging
       - Other unrelated minor findings or suggestions are acceptable and do not affect the grade
+
+  # 120004 — Unrelated TypeSpec project does not prove emission linkage
+  - name: unrelated-typespec-project-does-not-pass-new-version
+    tags:
+      audit: "2026-08-15"
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/clean-spec.json"
+          dest: "specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleanservice.json"
+        - src: "../fixtures/typespec/unrelated-version-main.tsp"
+          dest: "specification/cleanservice/Microsoft.CleanService/main.tsp"
+        - src: "../fixtures/typespec/unrelated-version-tspconfig.yaml"
+          dest: "specification/cleanservice/Microsoft.CleanService/tspconfig.yaml"
+    prompt: >
+      Review the new handwritten OpenAPI version for TSP-REQUIRED-V1. Read the
+      supplied instruction files and TypeSpec project before deciding. The
+      OpenAPI directory `stable/2025-01-01` is new and has no
+      `x-typespec-generated` marker. The sibling TypeSpec project declares only
+      `2024-01-01` and its emitter outputs only the `stable/2024-01-01`
+      directory. Do not edit files; return the review finding.
+
+      OpenAPI: specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleanservice.json
+      TypeSpec: specification/cleanservice/Microsoft.CleanService/main.tsp
+      Config: specification/cleanservice/Microsoft.CleanService/tspconfig.yaml
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "rule TSP-REQUIRED-V1 cited"
+        config:
+          substring: "TSP-REQUIRED-V1"
+      - type: output-matches
+        name: "unlinked handwritten version is Blocking"
+        config:
+          pattern: "(?is)TSP-REQUIRED-V1.{0,400}\\bBlocking\\b|\\bBlocking\\b.{0,400}TSP-REQUIRED-V1"
+      - type: output-matches
+        name: "emission linkage mismatch explained"
+        config:
+          pattern: "(?is)(?:2024-01-01|2025-01-01).{0,300}(?:emit|output|link|version)"
+      - type: prompt
+    rubric:
+      - The unrelated sibling TypeSpec project does not make the new handwritten version compliant
+      - The finding is Blocking and cites TSP-REQUIRED-V1
+      - The response explains that the project neither declares nor emits `2025-01-01`

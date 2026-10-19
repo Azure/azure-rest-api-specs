@@ -6,8 +6,11 @@
 // Stable operations (GA routes) with preview features (optional opt-in request headers)
 import "../agents/routes.tsp";
 import "../evaluation-rules/routes.tsp";
+import "../data_generation_jobs/routes.tsp";
+import "../sdk-common/ops-relocation-datasets.tsp";
 
 // Stable operation (GA routes) without preview features
+import "../agents-optimization/routes.tsp";
 import "../agents-microsoft365/routes.tsp";
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
@@ -28,9 +31,7 @@ import "../schedules/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
-import "../data_generation_jobs/routes.tsp";
 //import "../evaluation-suites/routes.tsp";
-import "../agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "../sdk-common/ops-relocation-agents.tsp";
@@ -147,6 +148,7 @@ using Azure.AI.Projects;
 @@clientName(A2ATool.a2a_version, exact("a2a_version"), "python");
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
+@@clientName(ConnectionType.RemoteA2A, exact("REMOTE_A2A"), "python");
 
 // DatasetItem model has a property `response_items?: OpenAI.OutputItem[]`. It is used
 // to define Agent optimization request. If emitted as-is, it pulls in a lot of
@@ -197,11 +199,17 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 // Shorter method names for SDK datasets operations
-@@clientName(Datasets.listLatest, "list");
-@@clientName(Datasets.getVersion, "get");
-@@clientName(Datasets.deleteVersion, "delete");
-@@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
-@@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
+@@clientName(Azure.AI.Projects.Datasets.listLatest, "list");
+@@clientName(Azure.AI.Projects.Datasets.getVersion, "get");
+@@clientName(Azure.AI.Projects.Datasets.deleteVersion, "delete");
+@@clientName(
+  Azure.AI.Projects.Datasets.createOrUpdateVersion,
+  "createOrUpdate"
+);
+@@clientName(
+  Azure.AI.Projects.Datasets.startPendingUploadVersion,
+  "pendingUpload"
+);
 
 // Data generation jobs — renamed for SDK discoverability
 @@clientName(DataGenerationJobs.get, "getGenerationJob");
@@ -273,61 +281,46 @@ using Azure.AI.Projects;
 // ********************************************************************************
 
 // --------------------------------------------------------------------------------
-// Beta Agents sub-client
+// Agents sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(Agents.generateAgent, "generate");
-
+@@clientName(Azure.AI.Projects.Agents.generateAgent, "createFromPrompt");
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob");
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
-
-// All emitted Python classes already have "items" in the base class, so we need to pick another name
+@@clientName(AgentOptimizationJobs.estimate, "estimateOptimizationJob");
 @@clientName(
-  AgentOptimizationInlineDatasetInput.items,
-  "dataset_items",
-  "python"
+  AgentOptimizationJobCandidates.listCandidates,
+  "listOptimizationCandidates"
+);
+@@clientName(
+  AgentOptimizationJobCandidates.getCandidate,
+  "getOptimizationCandidate"
+);
+@@clientName(
+  AgentOptimizationJobCandidates.promoteCandidate,
+  "promoteOptimizationCandidate"
 );
 
 // --------------------------------------------------------------------------------
-// Class renames related to Responses
+// Beta Voice Agent Realtime sub-client
 // --------------------------------------------------------------------------------
 
-// Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
-@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
+// A generated HTTP client cannot keep the socket alive past the 101 response, and each language
+// needs its own WebSocket transport to speak the realtime protocol afterward. Exclude this
+// operation entirely from the emitted SDK; it remains in the spec for raw REST documentation only.
+@@scope(VoiceAgentWebSocket.connectVoiceAgent, "!(python, javascript)");
 
-@@clientName(OpenAI.RealtimeMcpErrorType, "RealtimeMCPErrorType", "javascript");
-@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMCPHttpError", "javascript");
-
-// --------------------------------------------------------------------------------
-// Beta Agent Telephony sub-clients
-// --------------------------------------------------------------------------------
-
-@@clientName(AgentTelephony.createTelephonyCallJob, "createCallJob");
-@@clientName(AgentTelephony.getTelephonyCallJob, "getCallJob");
-@@clientName(AgentTelephony.cancelTelephonyCallJob, "cancelCallJob");
-@@clientName(AgentTelephony.createTelephonyCampaign, "createCampaign");
-@@clientName(AgentTelephony.getTelephonyCampaign, "getCampaign");
-@@clientName(
-  AgentTelephony.importTelephonyCampaignRecipients,
-  "importCampaignRecipients"
-);
-@@clientName(
-  AgentTelephony.getTelephonyCampaignRecipientImport,
-  "getCampaignRecipientImport"
-);
-@@clientName(AgentTelephony.validateTelephonyCampaign, "validateCampaign");
-@@clientName(AgentTelephony.publishTelephonyCampaign, "publishCampaign");
-@@clientName(AgentTelephony.pauseTelephonyCampaign, "pauseCampaign");
-@@clientName(AgentTelephony.resumeTelephonyCampaign, "resumeCampaign");
-@@clientName(AgentTelephony.cancelTelephonyCampaign, "cancelCampaign");
-@@clientName(AgentTelephony.getTelephonyOperation, "getOperation");
+// Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
+@@usage(VoiceAgentTransport, Usage.input | Usage.json);
+@@access(VoiceAgentTransport, Access.public);
 
 // --------------------------------------------------------------------------------
-// Agent Endpoint Conversations sub-client
+// Beta Voice Agent Conversations sub-client
 // --------------------------------------------------------------------------------
+
 @@clientName(AgentEndpointConversations.listAgentConversations, "list");
 @@clientName(AgentEndpointConversations.getAgentConversation, "get");
 @@clientName(AgentEndpointConversations.deleteAgentConversation, "delete");
@@ -349,26 +342,66 @@ using Azure.AI.Projects;
 );
 @@clientName(AgentEndpointConversations.getAgentConversationItem, "getItem");
 @@clientName(
-  AgentEndpointConversations.getAgentConversationItemAudio,
-  "getItemAudio"
+  AgentEndpointConversations.getAgentConversationAudioItem,
+  "getAudioItem"
 );
 @@clientName(
-  AgentEndpointConversations.getAgentConversationItemAudioContent,
-  "downloadItemAudio"
+  AgentEndpointConversations.getAgentConversationAudioItemContent,
+  "downloadAudioItem"
 );
 @@clientName(
-  AgentEndpointConversations.getAgentConversationItemGeneratedAudio,
-  "getItemGeneratedAudio"
+  AgentEndpointConversations.getAgentConversationGeneratedAudioItem,
+  "getGeneratedAudioItem"
 );
 @@clientName(
-  AgentEndpointConversations.getAgentConversationItemGeneratedAudioContent,
-  "downloadItemGeneratedAudio"
+  AgentEndpointConversations.getAgentConversationGeneratedAudioItemContent,
+  "downloadGeneratedAudioItem"
 );
 @@clientName(AgentEndpointConversations.getAgentConversationAudio, "getAudio");
 @@clientName(
   AgentEndpointConversations.getAgentConversationAudioContent,
   "downloadAudio"
 );
+
+// --------------------------------------------------------------------------------
+// Beta Voice Agent Telephony sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(AgentTelephony.createTelephonyBinding, "createBinding");
+@@clientName(AgentTelephony.listTelephonyBindings, "listBindings");
+@@clientName(AgentTelephony.getTelephonyBinding, "getBinding");
+@@clientName(AgentTelephony.updateTelephonyBinding, "updateBinding");
+@@clientName(AgentTelephony.deleteTelephonyBinding, "deleteBinding");
+@@clientName(AgentTelephony.listTelephonyCalls, "listCalls");
+@@clientName(
+  TelephonyCallListTimeQueryParameters.started_before,
+  "started_before_time"
+);
+@@clientName(
+  TelephonyCallListTimeQueryParameters.started_after,
+  "started_after_time"
+);
+@@clientName(AgentTelephony.getTelephonyCall, "getCall");
+@@clientName(AgentTelephony.transferTelephonyCall, "transferCall");
+@@clientName(AgentTelephony.endTelephonyCall, "endCall");
+@@clientName(AgentTelephony.getTelephonyTransferTargets, "getTransferTargets");
+@@clientName(
+  AgentTelephony.replaceTelephonyTransferTargets,
+  "replaceTransferTargets"
+);
+@@clientName(AgentTelephony.createTelephonyCallJob, "createCallJob");
+@@clientName(AgentTelephony.getTelephonyCallJob, "getCallJob");
+@@clientName(AgentTelephony.cancelTelephonyCallJob, "cancelCallJob");
+
+// --------------------------------------------------------------------------------
+// Class renames related to Responses
+// --------------------------------------------------------------------------------
+
+// Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
+@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
+
+@@clientName(OpenAI.RealtimeMcpErrorType, "RealtimeMCPErrorType", "javascript");
+@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMCPHttpError", "javascript");
 
 // Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
 @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");

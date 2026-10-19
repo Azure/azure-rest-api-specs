@@ -1,0 +1,42 @@
+{
+  "operationId": "BulkRestoresFromCrossTenantVault_PreCheck",
+  "title": "Pre-Check Cross-Tenant Bulk Restore",
+  "parameters": {
+    "api-version": "2026-08-31-preview",
+    "vaultName": "NetSDKTestRsVault",
+    "crossTenantVaultMappingName": "crossTenantVaultMapping1",
+    "fabricName": "Azure",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "body": {
+      "properties": {
+        "objectType": "IaaSVMBulkRestoreRequest",
+        "recoveryType": "RestoreDisks",
+        "protectedItemRestoreDetails": [
+          {
+            "recoveryPointId": "348916168024334",
+            "sourceResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/SourceRG/providers/Microsoft.Compute/virtualMachines/testVM1",
+            "targetVirtualMachineId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.Compute/virtualMachines/restoredVM1"
+          },
+          {
+            "recoveryPointId": "348916168024335",
+            "sourceResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/SourceRG/providers/Microsoft.Compute/virtualMachines/testVM2",
+            "targetVirtualMachineId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.Compute/virtualMachines/restoredVM2"
+          }
+        ],
+        "targetResourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg",
+        "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestaccount",
+        "region": "westus"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupCrossTenantVaultMappings/crossTenantVaultMapping1/backupFabrics/Azure/validateBulkRestoreOperationsStatus/00000000-0000-0000-0000-000000000000?api-version=2026-08-31-preview",
+        "Retry-After": 60
+      }
+    },
+    "204": {}
+  }
+}

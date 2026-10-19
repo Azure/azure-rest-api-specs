@@ -93,6 +93,7 @@ model BulkCreateCustomResource {
 @doc("Envelope properties shared by BulkCreateCustom. Used as the @listsResource target to avoid collision with the interface name.")
 model BulkCreateCustomEnvelope {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid envelope property for this resource."
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("Zones in which the BulkCreateCustom is available")
   zones?: Array<string>;
 
@@ -202,6 +203,7 @@ model BulkCreateCustomPriorityProfile {
   @doc("Eviction Policy to follow when evicting Spot VMs.")
   evictionPolicy?: EvictionPolicy;
 
+  @removed(Versions.`2026-10-06-preview`)
   @doc("The allocation strategy for VM size selection")
   allocationStrategy?: BulkCreateCustomAllocationStrategy;
 }
@@ -251,6 +253,7 @@ model BulkCreateCustomProperties {
   @doc("Configuration Options for Regular or Spot instances in BulkCreateCustom.")
   priorityProfile: BulkCreateCustomPriorityProfile;
 
+  @removed(Versions.`2026-10-06-preview`)
   @identifiers(#[])
   @doc("List of VM sizes supported for BulkCreateCustom")
   vmSizesProfile?: Array<BulkCreateCustomVmSizeProfile>;
@@ -258,6 +261,7 @@ model BulkCreateCustomProperties {
   @doc("Compute Profile to configure the Virtual Machines.")
   computeProfile: ComputeProfile;
 
+  @removed(Versions.`2026-10-06-preview`)
   @doc("Zone Allocation Policy for launching instances.")
   zoneAllocationPolicy?: BulkCreateCustomZoneAllocationPolicy;
 

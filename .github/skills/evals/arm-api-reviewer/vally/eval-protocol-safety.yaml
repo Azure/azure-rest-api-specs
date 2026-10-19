@@ -11,6 +11,19 @@ description: |
 environment:
   skills:
     - "../../../azure-api-review"
+  files:
+    - src: "../../../../agents/arm-api-reviewer.agent.md"
+      dest: ".github/agents/arm-api-reviewer.agent.md"
+    - src: "../../../../agents/arm-api-review-critic.agent.md"
+      dest: ".github/agents/arm-api-review-critic.agent.md"
+    - src: "../../../../agents/protocols/arm-api-review-critic.protocol.md"
+      dest: ".github/agents/protocols/arm-api-review-critic.protocol.md"
+    - src: "../../../../agents/protocols/arm-api-review-critic-inputs.template.md"
+      dest: ".github/agents/protocols/arm-api-review-critic-inputs.template.md"
+    - src: "../../../../instructions/arm-api-review.instructions.md"
+      dest: ".github/instructions/arm-api-review.instructions.md"
+    - src: "../../../../instructions/openapi-review.instructions.md"
+      dest: ".github/instructions/openapi-review.instructions.md"
 
 tags:
   area: arm-api-reviewer
@@ -18,31 +31,30 @@ tags:
 defaults:
   runs: 1
   timeout: "240s"
-  model: gpt-5.4
-  judge_model: gpt-5.4
+  model: gpt-5.6-sol?effort=high
+  judge_model: claude-sonnet-4.6
 
 scoring:
   threshold: 0.7
 
 # Quote rubric entries containing `: `; YAML otherwise parses them as mappings, but Vally requires strings.
 stimuli:
-  # 160001 -- Subagent dispatch failure must produce auto-unavailable banner and no session-handoff prompt
+  # 160001 -- Subagent dispatch failure enters the canonical unavailable flow
   - name: critic-subagent-failure-auto-unavailable
     prompt: |
-      You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#12345.
+      Read `.github/agents/arm-api-reviewer.agent.md` and
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, then apply
+      their Critic-unavailable flow.
+
+      You are reviewing PR Azure/azure-rest-api-specs#12345.
       Step 1 pinned session head SHA
       `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`. At Step 7, you attempted
-      to invoke the ARM API Review Critic as a subagent. All three dispatch
-      attempts (the initial attempt plus two compact-mode retries) returned
-      either an error or an empty response. Per agent.md Rung 2, you must
-      now render the UNAVAILABLE exception banner. Do NOT emit a
-      session-handoff prompt. Do NOT ask the user to paste Critic output.
-      Do NOT render any API findings. The response MUST begin with
+      to invoke the Critic. All three dispatch attempts returned an error or
+      an empty response. The review produced no API findings.
+
+      Render what the human sees next. The response MUST begin with
       `<!-- review-state: critic-mode=unavailable | iteration=1 |
       pr=Azure/azure-rest-api-specs#12345 -->` as the literal first line.
-      Then emit the UNAVAILABLE caution banner stating that all dispatch
-      attempts failed and that the review proceeds without independent
-      Critic verification.
     constraints:
       expect_skills:
         - azure-api-review
@@ -56,9 +68,13 @@ stimuli:
         config:
           pattern: "(?i)open a new chat|paste.*critic|session.handoff"
       - type: output-not-matches
-        name: "no findings rendered"
+        name: "no finding bodies rendered"
         config:
-          pattern: "(?i)## API Review:|### Blocking Issues|### Warnings|### Suggestions"
+          pattern: '(?i)\*\*\[(?:NEW|EXISTING)\]\s*(?:🔴|🟠|🔵)'
+      - type: output-contains
+        name: "manual decision recommendation present"
+        config:
+          substring: "MANUAL DECISION REQUIRED"
       - type: output-contains
         name: "unavailable banner present"
         config:
@@ -68,7 +84,8 @@ stimuli:
       - The first line is the review-state marker with `critic-mode=unavailable`
       - The response renders the UNAVAILABLE caution banner, not a session-handoff prompt
       - No session-handoff text ("open a new chat", "paste the Critic output") appears
-      - No API findings, posting prompt, or next-step recommendation are rendered
+      - No API findings are rendered because the scenario supplied none
+      - The next-step recommendation is `MANUAL DECISION REQUIRED`
 
   # 160002 -- Critic INVALIDATED kills the session and findings stay hidden
   - name: critic-invalidated-stops-session
@@ -159,7 +176,7 @@ stimuli:
       "Downstream-CI-conflict finding".
 
       Emit only the canonical comment body (Markdown), severity Suggestion,
-      classification new, and the complete 6+1-field telemetry marker as the
+      classification new, and the complete 7+1-field telemetry marker as the
       literal last line. Use placeholder rule ID `<RULE-ID>`, placeholder
       head SHA `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`, and a placeholder
       file path of `<file-path>` line `<N>`. Do NOT render a report header,
@@ -167,12 +184,14 @@ stimuli:
       comment body that would later be posted verbatim per the Reviewer-
       Posted Parity rule.
 
-      Template B (canonical posted-comment body) is defined in agent.md as
-      follows. The trailing telemetry marker is an HTML comment, pipe-
-      separated, with `:` between field name and value, in fixed field order:
+      Template B (the interactive VS Code agent's canonical posted-comment
+      body) is defined in agent.md as follows. Its telemetry marker is an HTML
+      comment; the unattended workflow uses a visible italic marker because its
+      publisher strips HTML comments. The fields use `:` between name and value
+      in fixed order:
 
       ````markdown
-      **[NEW] 🟡 Suggestion** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
+      **[NEW] 🔵 Suggestion** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
 
       **Classification reasoning:** <why this is NEW vs EXISTING>.
 
@@ -182,13 +201,13 @@ stimuli:
       2. **Change shape and suppress the downstream rule with justification** -- switch to `format: uuid` AND add a `suppressions.yaml` entry for `R3017` on this path with a non-vague reason that quotes the API design rationale.
       3. **Raise to the API board** -- if neither trade-off is acceptable for this resource, escalate the rule conflict for resolution.
 
-      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: suggestion | classification: new | critic: pass | head-sha: <full-40-char-sha> | downstream-rule: R3017 -->
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | category: sdk-and-client-impact | severity: suggestion | classification: new | critic: pass | head-sha: <full-40-char-sha> | downstream-rule: R3017 -->
       ````
 
       The body MUST present the three options (not a single corrective fix),
       and the marker MUST include the trailing `downstream-rule: R3017` field
-      after `head-sha:` (this is the 7-field downstream variant of the
-      6-field base marker). Substitute the placeholder head SHA above; leave
+      after `head-sha:` (this is the 8-field downstream variant of the
+      7-field base marker). Substitute the placeholder head SHA above; leave
       `<RULE-ID>`, `<file-path>`, and `<N>` as literal placeholders.
     constraints:
       expect_skills:
@@ -202,6 +221,10 @@ stimuli:
         name: "downstream-rule marker present"
         config:
           substring: "downstream-rule: R3017"
+      - type: output-matches
+        name: "downstream marker carries a canonical category"
+        config:
+          pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*[^|]+\|\s*category:\s*sdk-and-client-impact\s*\|\s*severity:\s*suggestion\s*\|\s*classification:\s*new\s*\|\s*critic:\s*pass\s*\|\s*head-sha:\s*(?:[0-9a-fA-F]{40}|<full-40-char-sha>)\s*\|\s*downstream-rule:\s*R3017\s*-->'
       - type: output-matches
         name: "not directive phrasing"
         config:
@@ -231,7 +254,7 @@ stimuli:
       pr=Azure/azure-rest-api-specs#54321 -->` as the literal first line, set
       the `Next-step recommendation` to `READY TO POST` at the top of the
       report, render both findings using the Template B canonical body shape
-      with the full 6-field telemetry marker (placeholder rule IDs
+      with the full 7-field telemetry marker (placeholder rule IDs
       `<RULE-ID-1>` / `<RULE-ID-2>` and head-sha
       `dddddddddddddddddddddddddddddddddddddddd` are acceptable), and finish
       with the Step 8 plan-approval menu (Execute plan / Execute selectively
@@ -255,13 +278,13 @@ stimuli:
       <code or JSON snippet>
       ```
 
-      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: pass | head-sha: <full-40-char-sha> -->
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | category: resource-modeling | severity: blocking | classification: new | critic: pass | head-sha: <full-40-char-sha> -->
       ````
 
       The trailing telemetry marker is an HTML comment (literal `<!-- ... -->`),
       pipe-separated, with `:` (not `=`) between field name and value. Field
-      order is fixed: `posted-by`, `rule`, `severity`, `classification`,
-      `critic`, `head-sha`. Do NOT render telemetry as a visible blockquote
+      order is fixed: `posted-by`, `rule`, `category`, `severity`,
+      `classification`, `critic`, `head-sha`. Do NOT render telemetry as a visible blockquote
       (`> **Telemetry:** ...`) or with `=` separators -- those forms are not
       machine-readable.
     constraints:
@@ -277,9 +300,9 @@ stimuli:
         config:
           substring: "READY TO POST"
       - type: output-matches
-        name: "full 6-field telemetry marker on findings"
+        name: "full 7-field telemetry marker on findings"
         config:
-          pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*[^|]+\|\s*severity:\s*(blocking|warning|suggestion)\s*\|\s*classification:\s*(new|existing)\s*\|\s*critic:\s*pass\s*\|\s*head-sha:\s*(?:[0-9a-fA-F]{40}|<full-40-char-sha>)'
+          pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*[^|]+\|\s*category:\s*(schema-and-property-design|naming-enums-and-identifiers|sdk-and-client-impact|resource-modeling|operations-and-http-semantics|long-running-operations|suppressions-and-tooling|review-readiness-and-ci|documentation-and-examples|versioning-and-compatibility|security-and-secrets)\s*\|\s*severity:\s*(blocking|warning|suggestion)\s*\|\s*classification:\s*(new|existing)\s*\|\s*critic:\s*pass\s*\|\s*head-sha:\s*(?:[0-9a-fA-F]{40}|<full-40-char-sha>)'
       - type: output-not-matches
         name: "no CAUTION banner or session-invalidated on happy path"
         config:
@@ -288,7 +311,7 @@ stimuli:
     rubric:
       - The first line is the review-state marker with `critic-mode=subagent`
       - The `Next-step recommendation` at the top of the report is `READY TO POST`
-      - "Each finding body uses the canonical Template B shape with the full 6-field telemetry marker (`critic: pass`)"
+      - "Each finding body uses the canonical Template B shape with the full 7-field telemetry marker (`critic: pass`)"
       - No CAUTION banner, no SESSION INVALIDATED heading, no session-handoff prompt is rendered
       - The plan-approval menu is offered with `Execute plan` recommended as the default
 
@@ -343,6 +366,9 @@ stimuli:
 
   # 160006 -- Iteration 2 marker: re-rendered report after a Critic FAIL was reconciled
   - name: iteration-2-after-critic-reconciliation
+    tags:
+      audit: "2026-08-30"
+      rerun: "2026-08-30"
     prompt: |
       You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#88888.
       Step 1 pinned session head SHA
@@ -368,9 +394,10 @@ stimuli:
       finding was dropped during reconciliation is acceptable).
 
       Each finding body MUST follow agent.md "Canonical output templates"
-      Template B exactly, ending with the full 6-field telemetry marker
-      (`<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity:
-      <blocking|warning|suggestion> | classification: <new|existing> |
+      Template B exactly, ending with the full 7-field telemetry marker
+      (`<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> |
+      category: resource-modeling |
+      severity: <blocking|warning|suggestion> | classification: <new|existing> |
       critic: pass | head-sha: 9999999999999999999999999999999999999999 -->`).
       Template B is defined in agent.md as follows:
 
@@ -385,31 +412,27 @@ stimuli:
       <code or JSON snippet>
       ```
 
-      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: pass | head-sha: <full-40-char-sha> -->
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | category: resource-modeling | severity: blocking | classification: new | critic: pass | head-sha: <full-40-char-sha> -->
       ````
 
       Substitute the head-sha value above for every finding; the rule IDs may
       remain as `<RULE-ID-F1>` and `<RULE-ID-F3>` placeholders.
+      Do not narrate your preparation or announce that you are about to render
+      the report. The first character of the response must be `<`.
     constraints:
       expect_skills:
         - azure-api-review
     graders:
       - type: output-matches
-        name: "review-state subagent marker with iteration=2"
+        name: "iteration 2 report keeps required state and finding metadata"
         config:
-          pattern: '(?s)^<!-- review-state: critic-mode=subagent \| iteration=2 \| pr=Azure/azure-rest-api-specs#88888 -->'
-      - type: output-contains
-        name: "REVISE RECOMMENDED recommendation"
-        config:
-          substring: "REVISE RECOMMENDED"
-      - type: output-matches
+          pattern: '(?s)^(?=<!-- review-state: critic-mode=subagent \| iteration=2 \| pr=Azure/azure-rest-api-specs#88888 -->)(?=.*REVISE RECOMMENDED)(?=.*category:\s*resource-modeling.*head-sha:\s*9999999999999999999999999999999999999999).*$'
+      - type: output-not-matches
         name: "F2 dropped from findings list"
         config:
-          # Negative-grader inverse: passes when no Blocking/Warning/Suggestion
-          # finding *body* introduces "F2" as a finding label. The iteration-
-          # history note may mention F2 in prose, but it must not appear as a
-          # numbered finding (e.g., "**F2 -**" or "### F2 ").
-          pattern: '(?s)^(?!.*\*\*F2\b.*[-\u2013\u2014]).*$'
+          # A prose iteration-history sentence may mention F2, but F2 must not
+          # survive as a heading, canonical bold finding, or telemetry rule.
+          pattern: '(?im)^(?:#{1,6}\s*(?:\d+[.)]\s*)?F2\b|\s*(?:[-*]|\d+[.)])?\s*\*\*F2\b.*[-\u2013\u2014])|rule:\s*<RULE-ID-F2>'
       - type: prompt
     rubric:
       - The first line is the review-state marker with `iteration=2`
@@ -435,7 +458,7 @@ stimuli:
         actual missing rule."
 
       Emit the canonical Template B posted-comment body for the overridden
-      finding. The body MUST end with the full 7-field telemetry marker
+      finding. The body MUST end with the full 8-field telemetry marker
       (`critic: override` and `override-reason: <text>`), use head-sha
       `abcdefabcdefabcdefabcdefabcdefabcdefabcd`, severity `blocking`,
       classification `new`, rule `RPC-Put-V1-22`, and include the
@@ -462,7 +485,7 @@ stimuli:
 
       **Note:** Critic FAILed this finding (<critic-reason>); reviewer overrode with justification: <override-reason>.
 
-      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: override | head-sha: <full-40-char-sha> | override-reason: <validator-approved reason that quotes the rule text or cites the anchor that contradicts the Critic's FAIL> -->
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | category: resource-modeling | severity: blocking | classification: new | critic: override | head-sha: <full-40-char-sha> | override-reason: <validator-approved reason that quotes the rule text or cites the anchor that contradicts the Critic's FAIL> -->
       ````
 
       Step 7 item 13.4 specifies that when overriding a Critic FAIL, the
@@ -471,7 +494,7 @@ stimuli:
           **Note:** Critic FAILed this finding (<reason>); reviewer overrode with justification: <reason>.
 
       The abbreviated marker form `<!-- posted-by: arm-api-reviewer-agent -->`
-      is NEVER acceptable on an `critic=override` post; the full 7-field form
+      is NEVER acceptable on a `critic=override` post; the full 8-field form
       (with `override-reason:` as the last field) is required.
     constraints:
       expect_skills:
@@ -480,7 +503,7 @@ stimuli:
       - type: output-matches
         name: "telemetry marker has critic=override and override-reason"
         config:
-          pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*RPC-Put-V1-22\s*\|\s*severity:\s*blocking\s*\|\s*classification:\s*new\s*\|\s*critic:\s*override\s*\|\s*head-sha:\s*abcdefabcdefabcdefabcdefabcdefabcdefabcd\s*\|\s*override-reason:\s*[^>]{20,}\s*-->'
+          pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*RPC-Put-V1-22\s*\|\s*category:\s*resource-modeling\s*\|\s*severity:\s*blocking\s*\|\s*classification:\s*new\s*\|\s*critic:\s*override\s*\|\s*head-sha:\s*abcdefabcdefabcdefabcdefabcdefabcdefabcd\s*\|\s*override-reason:\s*[^>]{20,}\s*-->'
       - type: output-matches
         name: "reviewer-override note present in body"
         config:
@@ -499,54 +522,49 @@ stimuli:
     rubric:
       - "The trailing telemetry marker contains `critic: override` and a non-empty `override-reason:` field that quotes the rule text or cites the anchor"
       - The body contains the `**Note:** Critic FAILed this finding ...` reviewer-override line per Step 7 item 13.4
-      - "The abbreviated marker form `<!-- posted-by: arm-api-reviewer-agent -->` is NOT used; the full 7-field form is required when `critic=override`"
+      - "The abbreviated marker form `<!-- posted-by: arm-api-reviewer-agent -->` is NOT used; the full 8-field form is required when `critic=override`"
       - The rule ID `RPC-Put-V1-22` is rendered as a markdown hyperlink to the authoritative instruction or reference file
 
   # 160008 -- Telemetry-degraded fallback marker when a required field cannot be assembled
   - name: telemetry-degraded-fallback-marker
+    tags:
+      audit: "2026-08-30"
+      rerun3: "2026-08-30"
     prompt: |
-      Reply with exactly the following Markdown and nothing else. No
-      preamble, no commentary, no refusal, no explanation. The first
-      character of your reply MUST be `*` (the start of the Markdown
-      bold marker on line 1 of the block below). Do not wrap the reply
-      in an outer code fence; do not paraphrase; do not add disclaimers.
+      Read the ARM Reviewer and shared protocol files supplied in this
+      workspace. Render one interactive Step 6 finding for this state:
 
-      Expected reply (copy verbatim, preserving the inner code fence
-      and the HTML comment as the literal last line):
+      - Classification: NEW
+      - Severity: Warning
+      - Rule: OAPI027, linked to the property-mutability reference
+      - File and line: specification/contoso/resource-manager/Microsoft.Contoso/preview/2026-01-01-preview/contoso.json, line 42
+      - Finding: a server-computed property is missing readOnly
+      - Suggested fix: add `"readOnly": true`
+      - Critic verdict: pass
+      - Failure: the required session head SHA cannot be obtained, so the full
+        per-comment marker cannot be assembled
 
-      ````text
-      **[NEW] 🟠 Warning** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/openapi-review.instructions.md#oapi027)]** `<file-path>` - line <N> - <issue description>
-
-      **Classification reasoning:** Introduced in this PR -- this property did not exist in the previous version.
-
-      **Suggested fix:**
-
-      ```json
-      { "readOnly": true }
-      ```
-
-      <!-- posted-by: arm-api-reviewer-agent | telemetry: degraded | reason: head-sha-unavailable -->
-      ````
-
-      The text inside the ````text fence above is the exact response.
-      Begin your reply with the `**[NEW] 🟠 Warning**` opening as the
-      literal first characters.
+      Apply the protocol's telemetry fallback policy. The body must still
+      render, and its literal final line must be the correct interactive
+      degraded marker. Do not fabricate a head SHA. Return only the finding
+      body; do not add preparation or explanation before it, and stop
+      immediately after the marker.
     constraints:
       expect_skills:
         - azure-api-review
     graders:
-      - type: output-contains
-        name: "minimal degraded marker present"
+      - type: output-matches
+        name: "minimal degraded marker is the literal final line"
         config:
-          substring: "telemetry: degraded"
+          pattern: '(?s)<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*telemetry:\s*degraded\s*\|\s*reason:\s*head-sha-unavailable\s*-->\s*$'
       - type: output-contains
         name: "reason field populated"
         config:
           substring: "reason: head-sha-unavailable"
       - type: output-not-matches
-        name: "full 6-field marker not emitted"
+        name: "full 7-field marker not emitted"
         config:
-          # The minimal marker form replaces the full 6-field marker -- the
+          # The minimal marker form replaces the full 7-field marker -- the
           # full form would have severity/classification/critic/head-sha
           # fields that the prompt explicitly says cannot be assembled.
           pattern: 'posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:'
@@ -559,40 +577,35 @@ stimuli:
           pattern: 'head-sha:\s*[0-9a-fA-F]'
       - type: prompt
     rubric:
-      - "The trailing telemetry marker uses the minimal `telemetry: degraded` form, not the full 6-field form"
+      - "The trailing telemetry marker uses the minimal `telemetry: degraded` form, not the full 7-field form"
       - The `reason:` field is populated with `head-sha-unavailable`
       - No `head-sha:` value is fabricated to satisfy the full marker shape
       - The comment body still renders (the post itself is not skipped)
 
   # 160009 -- critic: unknown emitted when per-finding verdict cannot be looked up
   - name: critic-unknown-fallback-value
+    tags:
+      audit: "2026-08-30"
+      rerun3: "2026-08-30"
     prompt: |
-      Reply with exactly the following Markdown and nothing else. No
-      preamble, no commentary, no refusal, no explanation. The first
-      character of your reply MUST be `*` (the start of the Markdown
-      bold marker on line 1 of the block below). Do not wrap the reply
-      in an outer code fence; do not paraphrase; do not add disclaimers.
+      Read the ARM Reviewer and shared protocol files supplied in this
+      workspace. Render one interactive Step 6 finding for this state:
 
-      Expected reply (copy verbatim, preserving the inner code fence
-      and the HTML comment as the literal last line):
+      - Classification: NEW
+      - Severity: Blocking
+      - Rule: RPC-Put-V1-22, linked to its authoritative Reviewer source
+      - Category: resource-modeling
+      - File and line: specification/contoso/resource-manager/Microsoft.Contoso/preview/2026-01-01-preview/contoso.json, line 42
+      - Finding: the tracked resource has no PUT operation
+      - Suggested fix: add the standard PUT operation
+      - Session head SHA: 1234567890abcdef1234567890abcdef12345678
+      - Failure: the per-finding Critic verdict cannot be looked up because the
+        Critic was unavailable
 
-      ````text
-      **[NEW] 🔴 Blocking** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/arm-api-review.instructions.md#rpc-put-v1-22)]** `<file-path>` - line <N> - <issue description>
-
-      **Classification reasoning:** Introduced in this PR -- this property did not exist in the previous version.
-
-      **Suggested fix:**
-
-      ```json
-      { "properties": { "provisioningState": { "type": "string" } } }
-      ```
-
-      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: unknown | head-sha: 1234567890abcdef1234567890abcdef12345678 -->
-      ````
-
-      The text inside the ````text fence above is the exact response.
-      Begin your reply with the `**[NEW] 🔴 Blocking**` opening as the
-      literal first characters.
+      Apply the protocol fallback without claiming `critic: pass`. End with the
+      complete interactive marker using the correct fallback value. Return only
+      the finding body; do not add preparation or explanation before it, and
+      stop immediately after the marker.
     constraints:
       expect_skills:
         - azure-api-review
@@ -600,7 +613,7 @@ stimuli:
       - type: output-matches
         name: "critic: unknown marker present"
         config:
-          pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*[^|]+\|\s*severity:\s*blocking\s*\|\s*classification:\s*new\s*\|\s*critic:\s*unknown\s*\|\s*head-sha:\s*1234567890abcdef1234567890abcdef12345678'
+          pattern: '(?s)<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*[^|]+\|\s*category:\s*resource-modeling\s*\|\s*severity:\s*blocking\s*\|\s*classification:\s*new\s*\|\s*critic:\s*unknown\s*\|\s*head-sha:\s*1234567890abcdef1234567890abcdef12345678\s*-->\s*$'
       - type: output-not-matches
         name: "no fabricated critic: pass"
         config:
@@ -611,7 +624,7 @@ stimuli:
     rubric:
       - The `critic:` field in the marker is the literal `unknown`, not `pass` or `na`
       - No fabricated Critic verdict is implied in the body text either (no "Critic verified" or similar wording)
-      - "The marker is otherwise the full 6-field form, not the minimal `telemetry: degraded` fallback"
+      - "The marker is otherwise the full 7-field form, not the minimal `telemetry: degraded` fallback"
 
   # 160010 -- ARMChangesRequested label is NOT proposed when zero comments will post
   - name: armchanges-label-skipped-on-clean-plan
@@ -652,7 +665,7 @@ stimuli:
           # Reject any phrasing that proposes adding the label. The label
           # name may still appear in prose explaining WHY it's being
           # skipped, so match only proposal-shaped contexts.
-          pattern: '(?i)(add(?:ing)?|apply|propose adding|will add)\s+(?:the\s+)?`?ARMChangesRequested`?'
+          pattern: '(?im)(?:^\s*(?:[-*]\s*)?(?:add|apply|propose adding)\s+(?:the\s+)?`?ARMChangesRequested`?|\b(?:will|would|should|must|can|may|plan(?:s)? to|going to|proposal:?)\s+(?!not\b|never\b|no\b)(?:add|apply|propose adding)\s+(?:the\s+)?`?ARMChangesRequested`?)'
       - type: output-contains
         name: "explicit skip stated"
         config:
@@ -866,3 +879,603 @@ stimuli:
       - The planned reply states the prior required-property position and the current read-only/optional guidance
       - The reply anchors the changed conclusion to evidence at the pinned SHA and explains why guidance changed
       - The human-origin thread remains unresolved and no duplicate standalone finding is proposed
+
+  # 160015 -- A posted run must leave a VISIBLE attribution preamble, not just the hidden marker
+  - name: visible-attribution-preamble-required
+    prompt: |
+      Read `.github/agents/arm-api-reviewer.agent.md`, then apply its Step 8
+      procedure to this scenario.
+
+      You are reviewing PR Azure/azure-rest-api-specs#44941.
+      Step 1 pinned session head SHA
+      `eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee`. The Critic returned
+      `Finding accuracy: PASS` on all entries. The approved plan posts two
+      POST-NEW inline findings through a single pending review.
+
+      Describe exactly how you submit the review and verify its visible
+      attribution after the last posting action.
+
+      The response MUST begin with `<!-- review-state: critic-mode=subagent
+      | iteration=1 | pr=Azure/azure-rest-api-specs#44941 -->` as the
+      literal first line.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "preamble heading named"
+        config:
+          substring: "## ARM API Review"
+      - type: output-matches
+        name: "non-empty body mandate stated"
+        config:
+          pattern: "(?i)(REQUIRED and MUST be non-empty|must not be empty|never .{0,20}empty)"
+      - type: output-matches
+        name: "post-condition re-fetch described"
+        config:
+          pattern: "(?is)(re-?fetch|verify|confirm).{0,80}(review bod|top-level comment)"
+      - type: output-matches
+        name: "hidden marker rejected as sufficient"
+        config:
+          pattern: "(?is)(hidden|HTML comment|posted-by).{0,120}(does not|not sufficient|doesn't|never).{0,40}(satisf|count|render)"
+      - type: output-matches
+        name: "top-level fallback stated"
+        config:
+          pattern: "(?is)top-level (PR )?comment"
+      - type: prompt
+    rubric:
+      - All inline findings go through a single review whose body is the `## ARM API Review` preamble
+      - The response states the review body is required and must never be empty
+      - The response describes re-fetching after posting to confirm a visible preamble landed
+      - The response states that the hidden `posted-by` marker does not satisfy the visible-attribution requirement
+      - If no visible preamble is found, the preamble is posted as a top-level PR comment before the run ends
+
+  # 160016 -- A shell parse error must force a tool switch, not another quoting permutation
+  - name: shell-parse-error-forces-tool-switch
+    prompt: |
+      Read `.github/agents/arm-api-reviewer.agent.md`, then apply its failure
+      handling to this scenario.
+
+      You are reviewing PR Azure/azure-rest-api-specs#44324.
+      Step 1 pinned session head SHA
+      `ffffffffffffffffffffffffffffffffffffffff`. You are in Step 5.5,
+      fetching the existing discussion inventory.
+
+      You shelled out to `gh` and it failed twice in a row for the same
+      objective. First attempt returned `gh : accepts 1 arg(s), received 3`.
+      You then retried with a different quoting style and got
+      `CommandNotFoundException`.
+
+      State your diagnosis and next action.
+
+      The response MUST begin with `<!-- review-state: critic-mode=subagent
+      | iteration=1 | pr=Azure/azure-rest-api-specs#44324 -->` as the
+      literal first line.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "diagnosed as client-side, not a GitHub failure"
+        config:
+          pattern: "(?is)client-?side"
+      - type: output-matches
+        name: "switches to the MCP tool"
+        config:
+          pattern: "(?i)(pull_request_read|get_file_contents|MCP tool)"
+      - type: output-not-matches
+        name: "no further quoting permutation proposed"
+        config:
+          pattern: '(?is)\b(?:will|would|should|must|can|may|plan(?:s)? to|going to|next action:?)\s+(?!not\b|never\b|no\b)(?:try|retry|attempt)\b.{0,60}(?:different|another|escap|single quote|double quote).{0,40}quot'
+      - type: prompt
+    rubric:
+      - The failure is diagnosed as a client-side PowerShell quoting problem, not a GitHub or data problem
+      - The response stops using the shell for this objective and switches to the GitHub MCP tool
+      - No third quoting or escaping variant of the same command is proposed
+      - If a shell call is still described, the jq filter or GraphQL query is passed via a temp file rather than inlined
+
+  # 160017 -- Critic unavailable preserves severity but withholds ARMChangesRequested
+  - name: critic-unavailable-preserves-severity-withholds-label
+    prompt: |
+      Read `.github/agents/arm-api-reviewer.agent.md` and
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, then apply
+      their Critic-unavailable and label rules to this scenario.
+
+      You are reviewing PR Azure/azure-rest-api-specs#45013.
+      Step 1 pinned session head SHA
+      `abababababababababababababababababababab`. All three Critic dispatch
+      attempts failed, so `critic-mode` is `unavailable`. The review
+      produced one finding originally classified `🔴 Blocking`.
+
+      Emit the Step 8 plan-approval prompt including the bundled label
+      proposal.
+
+      The response MUST begin with `<!-- review-state:
+      critic-mode=unavailable | iteration=1 |
+      pr=Azure/azure-rest-api-specs#45013 -->` as the literal first line.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "review-state unavailable marker"
+        config:
+          pattern: '(?s)^<!-- review-state: critic-mode=unavailable \| iteration=1 \| pr=Azure/azure-rest-api-specs#45013 -->'
+      - type: output-not-matches
+        name: "severity NOT downgraded to Warning"
+        config:
+          pattern: '(?is)(?:\b(?:will|would|should|must|can|may|is|are|was|were|gets?|got)\s+(?!not\b|never\b|no\b)(?:be\s+|being\s+)?downgrad\w*.{0,40}(?:to\s+)?Warning|\b(?:severity|finding)\s+(?:is\s+)?downgrad\w*.{0,20}\bfrom\b.{0,20}\bBlocking\b.{0,20}(?:to|->)\s*Warning)'
+      - type: output-not-matches
+        name: "ARMChangesRequested NOT proposed for add"
+        config:
+          pattern: '(?im)(?:^\s*(?:[-*]\s*)?(?:add|apply|propose adding)\s+(?:the\s+)?`?ARMChangesRequested`?|\b(?:will|would|should|must|can|may|plan(?:s)? to|going to|proposal:?)\s+(?!not\b|never\b|no\b)(?:add|apply|propose adding)\s+(?:the\s+)?`?ARMChangesRequested`?)'
+      - type: output-matches
+        name: "unavailability disclosed"
+        config:
+          pattern: "(?i)(critic).{0,40}(unavailable|could not|failed)"
+      - type: prompt
+    rubric:
+      - The finding retains its original Blocking severity and is not downgraded to Warning
+      - The response discloses that the Critic was unavailable and the finding is unverified
+      - The bundled label proposal does not propose adding `ARMChangesRequested`
+      - The reason given is that nothing independently verified the finding, so the human ARM review queue must not move
+
+  # 160018 -- Critic drops a false finding against RPC paging parameters
+  - name: critic-drops-collection-paging-parameter-finding
+    tags:
+      issue: "45675"
+    prompt: |
+      Read `.github/agents/arm-api-review-critic.agent.md`,
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, and
+      `.github/instructions/arm-api-review.instructions.md`.
+
+      Act as the ARM API Review Critic. The Reviewer submitted a Blocking
+      finding against `$top` on a collection GET, claiming that collection GET
+      allows only `api-version` and `$filter`. The operation also declares
+      `$skipToken`, uses `x-ms-pageable`, and returns `value` plus `nextLink`.
+      The session SHA and cited line are valid.
+
+      PR: https://github.com/Azure/azure-rest-api-specs/pull/45675
+      Session SHA: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      ## Step 6 findings report
+      The Blocking `$top` finding described above.
+      ## Step 5.5 reconciliation plan
+      reconciliation skipped
+
+      Return the Critic verdict and per-finding correction.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "false paging finding rejected"
+        config:
+          pattern: "(?i)FAIL: rule-misapplied"
+      - type: output-matches
+        name: "RPC paging parameter named"
+        config:
+          pattern: '(?i)\$(?:top|skipToken)'
+      - type: output-matches
+        name: "finding is dropped rather than downgraded"
+        config:
+          pattern: "(?i)DROP"
+      - type: output-not-matches
+        name: "no Warning finding retained"
+        config:
+          pattern: "(?is)DOWNGRADE.{0,100}Warning"
+      - type: prompt
+    rubric:
+      - The Critic rejects the finding because `$top` and `$skipToken` are allowed RPC paging parameters
+      - The correction is DROP, not a retained Warning finding
+      - The response does not cite `RPC-Get-V1-15`
+
+  # 160019 -- Critic downgrades extensible response enum EX-PAYLOAD
+  - name: critic-downgrades-extensible-response-enum-finding
+    tags:
+      issue: "43747"
+    prompt: |
+      Read `.github/agents/arm-api-review-critic.agent.md`,
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, and
+      `.github/instructions/openapi-review.instructions.md`.
+
+      Act as the ARM API Review Critic. The Reviewer submitted a Blocking
+      EX-PAYLOAD finding for an ordinary response-body property whose example
+      value is not a declared enum member. The enum is a string with
+      `x-ms-enum.modelAsString: true`. The property is not a discriminator and
+      does not appear in a request path or query. The session SHA and cited line
+      are valid.
+
+      PR: https://github.com/Azure/azure-rest-api-specs/pull/43747
+      Session SHA: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      ## Step 6 findings report
+      The Blocking EX-PAYLOAD finding described above.
+      ## Step 5.5 reconciliation plan
+      reconciliation skipped
+
+      Return the Critic verdict and per-finding correction.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "Blocking downgraded to Warning"
+        config:
+          pattern: "(?is)DOWNGRADE.{0,100}(?:Blocking.{0,30}Warning|Warning)"
+      - type: output-matches
+        name: "extensibility rationale stated"
+        config:
+          pattern: "(?is)modelAsString.{0,160}(?:accept|extensib|unknown|arbitrary)"
+      - type: prompt
+    rubric:
+      - The Critic downgrades the finding from Blocking to Warning in the first iteration
+      - "The response explains that `modelAsString: true` accepts unknown ordinary response values"
+      - The discriminator and request-URL exceptions are not applied to this scenario
+
+  # 160020 -- Critic retains a valid malformed paging-token finding
+  - name: critic-retains-malformed-paging-token-finding
+    tags:
+      issue: "45675"
+    prompt: |
+      Read `.github/agents/arm-api-review-critic.agent.md`,
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, and
+      `.github/instructions/arm-api-review.instructions.md`.
+
+      Act as the ARM API Review Critic. The Reviewer submitted a Blocking
+      security finding on a collection GET `$skipToken`. The finding does not
+      claim that `$skipToken` is forbidden. It states that the service accepts a
+      token issued for another tenant and returns data from that original
+      tenant. The session SHA, cited line, and behavioral evidence are valid.
+
+      PR: https://github.com/Azure/azure-rest-api-specs/pull/45675
+      Session SHA: cccccccccccccccccccccccccccccccccccccccc
+      ## Step 6 findings report
+      The Blocking `$skipToken` security finding described above.
+      ## Step 5.5 reconciliation plan
+      reconciliation skipped
+
+      Return the Critic verdict and per-finding correction.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "valid token-scope finding is not dropped"
+        config:
+          pattern: "(?is)(?:DROP|false positive).{0,200}(?:finding|\\$skipToken)"
+      - type: output-matches
+        name: "scope security requirement retained"
+        config:
+          pattern: "(?is)(?:tenant|subscription|scope).{0,200}(?:MUST|Blocking|security|data)"
+      - type: prompt
+    rubric:
+      - The Critic retains the finding because the allowance does not excuse cross-scope token replay
+      - The finding is not dropped merely because its parameter is named `$skipToken`
+      - The response distinguishes parameter presence from invalid security behavior
+
+  # 160021 -- Critic retains Blocking severity for unknown discriminator
+  - name: critic-retains-unknown-discriminator-blocking
+    tags:
+      issue: "43747"
+    prompt: |
+      Read `.github/agents/arm-api-review-critic.agent.md`,
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, and
+      `.github/instructions/openapi-review.instructions.md`.
+
+      Act as the ARM API Review Critic. The Reviewer submitted a Blocking
+      EX-PAYLOAD finding because an example response uses an unknown value for a
+      required polymorphic discriminator. The discriminator property's enum has
+      `x-ms-enum.modelAsString: true`. The session SHA and cited line are valid.
+
+      PR: https://github.com/Azure/azure-rest-api-specs/pull/43747
+      Session SHA: dddddddddddddddddddddddddddddddddddddddd
+      ## Step 6 findings report
+      The Blocking discriminator EX-PAYLOAD finding described above.
+      ## Step 5.5 reconciliation plan
+      reconciliation skipped
+
+      Return the Critic verdict and per-finding correction.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "discriminator finding is not downgraded"
+        config:
+          pattern: "(?is)(?:Required action|Recommended action|Critic verdict:).{0,100}DOWNGRADE.{0,100}Warning"
+      - type: output-matches
+        name: "Blocking discriminator exception applied"
+        config:
+          pattern: "(?is)(?:discriminator).{0,200}(?:Blocking|deserial|subtype)"
+      - type: prompt
+    rubric:
+      - The Critic retains Blocking severity because required discriminators are an explicit exception
+      - "`modelAsString: true` does not downgrade the discriminator case"
+      - The response explains the subtype or deserialization impact
+
+  # 160022 -- Critic retains Blocking severity for request URL enum value
+  - name: critic-retains-unknown-request-url-value-blocking
+    tags:
+      issue: "43747"
+      audit: "2026-08-15"
+    prompt: |
+      Read `.github/agents/arm-api-review-critic.agent.md`,
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, and
+      `.github/instructions/openapi-review.instructions.md`.
+
+      Act as the ARM API Review Critic. The Reviewer submitted a Blocking
+      EX-PAYLOAD finding because an example request uses an unknown enum value
+      in a path parameter. The path parameter enum has
+      `x-ms-enum.modelAsString: true`. The session SHA and cited line are valid.
+
+      PR: https://github.com/Azure/azure-rest-api-specs/pull/43747
+      Session SHA: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+      ## Step 6 findings report
+      The Blocking request-path EX-PAYLOAD finding described above.
+      ## Step 5.5 reconciliation plan
+      reconciliation skipped
+
+      Return the Critic verdict and per-finding correction.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "request URL finding is not downgraded"
+        config:
+          pattern: "(?is)(?:Required action|Recommended action|Critic verdict:).{0,100}DOWNGRADE.{0,100}Warning"
+      - type: output-matches
+        name: "Blocking request URL exception applied"
+        config:
+          pattern: "(?is)(?:path|request URL).{0,200}(?:Blocking|routing|operation contract)"
+      - type: prompt
+    rubric:
+      - The Critic retains Blocking severity because request path and query values are explicit exceptions
+      - "`modelAsString: true` does not downgrade the request URL case"
+      - The response distinguishes request routing from ordinary response-body extensibility
+
+  # 160023 -- Omitted reconciliation input is malformed
+  - name: critic-rejects-omitted-reconciliation-input
+    tags:
+      audit: "2026-08-15"
+    prompt: |
+      Read `.github/agents/arm-api-review-critic.agent.md`,
+      `.github/agents/protocols/arm-api-review-critic.protocol.md`, and
+      `.github/agents/protocols/arm-api-review-critic-inputs.template.md`.
+
+      Act as the ARM API Review Critic. The dispatch contains:
+
+      PR: https://github.com/Azure/azure-rest-api-specs/pull/45841
+      Session SHA: ffffffffffffffffffffffffffffffffffffffff
+      ## Step 6 findings report
+      No findings.
+
+      The dispatch omits the entire `## Step 5.5 reconciliation plan` input.
+      Return the Critic verdict without inventing a default sentinel.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "missing reconciliation input fails validation"
+        config:
+          pattern: "(?is)Finding accuracy.{0,100}FAIL"
+      - type: output-contains
+        name: "missing-inputs reason returned"
+        config:
+          substring: "missing-inputs"
+      - type: output-matches
+        name: "reconciliation accuracy fails rather than becoming N/A"
+        config:
+          pattern: "(?is)Reconciliation accuracy.{0,100}FAIL"
+      - type: prompt
+    rubric:
+      - The Critic returns Finding accuracy FAIL with reason `missing-inputs`
+      - The omitted reconciliation input is not silently defaulted to `reconciliation skipped`
+
+  # 160024 -- Local directory review uses the full read-only Reviewer/Critic path
+  - name: local-directory-review-routes-through-full-critic
+    tags:
+      audit: "2026-08-30"
+      rerun: "2026-08-30"
+    prompt: |
+      Read `.github/agents/arm-api-reviewer.agent.md`,
+      `.github/agents/arm-api-review-critic.agent.md`, and the shared protocol.
+
+      A user asks the interactive ARM API Reviewer to review:
+      `C:\repos\azure-rest-api-specs\specification\contoso\resource-manager\Microsoft.Contoso\preview\2026-01-01-preview`
+
+      The path is inside the active supported repository and contains tracked,
+      modified, and untracked specification files. Describe the binding review
+      route before any findings are presented. Include source inventory and
+      snapshot behavior, breaking-change sources, Critic input, reconciliation,
+      posting/labels, and cleanup. Do not invent a PR.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "full local snapshot and comparison path"
+        config:
+          pattern: "(?is)^(?=.*(?:full.inventory|full.review|all supported|every supported))(?=.*(?:untracked|modified))(?=.*local-sha256)(?=.*(?:previous.version|breaking.change|git diff)).*$"
+      - type: output-matches
+        name: "Critic receives local binding"
+        config:
+          pattern: "(?is)(?:Critic).{0,400}(?:source manifest|SHA-256|local-sha256|Repository HEAD)"
+      - type: output-matches
+        name: "PR-only mechanics skipped"
+        config:
+          pattern: "(?is)reconciliation skipped.{0,300}(?:no|never|N/A).{0,100}(?:post|label|GitHub mutation)"
+      - type: output-not-matches
+        name: "local review does not mutate cleanup artifacts"
+        config:
+          pattern: "(?is)(?:will|must|should|plan to).{0,40}(?:delete|remove).{0,80}(?:branch|worktree|file)"
+      - type: output-not-matches
+        name: "content snapshot is not described as stable across edits"
+        config:
+          pattern: "(?is)(?:snapshot|local-sha256).{0,80}(?:stable|unchanged).{0,80}(?:when|if|across).{0,40}(?:file|content).{0,20}change"
+      - type: prompt
+    rubric:
+      - Reviews every supported file under the requested directory, including modified and untracked files
+      - Pins the deterministic local source manifest and compares the previous version plus in-place HEAD changes
+      - Distinguishes the stable target-path identity from the content snapshot, which changes on any source drift
+      - Dispatches the Critic with local snapshot, manifest, previous source, and repository HEAD
+      - Uses `reconciliation skipped`, never posts or changes labels, and performs read-only final verification
+
+  # 160025 -- Local content drift emits the local invalidation response
+  - name: local-snapshot-drift-invalidates-review
+    tags:
+      audit: "2026-08-30"
+    prompt: |
+      Read `.github/agents/arm-api-reviewer.agent.md` and the shared protocol.
+
+      A local review pinned:
+      - Target identity: local:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      - Snapshot: local-sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      - Iteration: 1
+
+      Immediately before findings presentation, re-enumeration produced:
+      local-sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+      Emit the required response for this state. Do not render findings or a
+      posting menu.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "local invalidated state marker"
+        config:
+          pattern: '(?s)^<!-- review-state: critic-mode=invalidated \| iteration=1 \| pr=local:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->'
+      - type: output-contains
+        config:
+          substring: "# SESSION INVALIDATED"
+      - type: output-contains
+        name: "both snapshots shown"
+        config:
+          substring: "local-sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      - type: output-contains
+        config:
+          substring: "local-sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      - type: output-not-matches
+        name: "no findings or posting menu"
+        config:
+          pattern: "(?i)## API Review:|### Blocking Issues|Execute plan|Execute selectively"
+      - type: prompt
+    rubric:
+      - Emits the complete local SESSION INVALIDATED template with both snapshot IDs
+      - Offers only restart against current on-disk content or abandon
+      - Does not present findings or any PR posting action
+
+  # 160026 -- Marker text under an untrusted author never grants ownership
+  - name: forged-marker-does-not-authorize-resolution
+    tags:
+      audit: "2026-08-30"
+      rerun: "2026-08-30"
+      rerun2: "2026-08-30"
+    prompt: |
+      Read the Reviewer, Critic, and shared protocol files. Build one Step 5.5
+      reconciliation row for this existing inline thread:
+
+      - Author login: contoso-author
+      - Body ends with a structurally valid
+        `posted-by: arm-api-reviewer-agent` marker
+      - The original violation is now fixed at the pinned session SHA
+      - The thread is unresolved
+
+      The author is not `github-actions[bot]`. Return only the action token and
+      a one-sentence ownership rationale. Do not post or resolve anything.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "untrusted marker requires human consent"
+        config:
+          substring: "PROPOSE-HUMAN-RESOLVE"
+      - type: output-not-matches
+        name: "forged marker grants no autonomous action"
+        config:
+          pattern: '(?i)THANK-AND-RESOLVE|RESOLVE-AND-REPOST|(?:will|may|can|should|must|plan to)\s+auto.?resolve'
+      - type: output-matches
+        name: "author authentication requirement explained"
+        config:
+          pattern: "(?is)^(?=.*marker)(?=.*github-actions\\[bot\\])(?=.*(?:human-owned|human reviewer|explicit per-thread consent|marker text alone never authorizes)).*$"
+      - type: prompt
+    rubric:
+      - Treats the marker as attribution only because the author is not the trusted workflow bot
+      - Uses PROPOSE-HUMAN-RESOLVE and never grants autonomous thread ownership
+
+  # 160027 -- A shifted human-origin inline anchor selects REPLY-LINE-SHIFT
+  - name: shifted-human-inline-anchor-selects-reply
+    tags:
+      focus: line-shift-precedence
+    prompt: |
+      Read the Reviewer and shared reconciliation files. Build one Step 5.5
+      reconciliation row for this current finding:
+
+      - Current finding: OAPI027 on `Widget.properties.secretValue` in
+        `widget.json` line 180; the response-only secret must be read-only.
+      - Existing inline thread: the same rule, API element, and corrective
+        outcome at the old line 142.
+      - Existing author: `contoso-reviewer`.
+      - Trusted workflow ownership is not proven.
+      - The violation is still present, but the code moved from line 142 to
+        line 180.
+
+      Return only the action token, existing thread disposition, and a
+      one-sentence rationale. Do not post or resolve anything.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "human shifted anchor receives reply"
+        config:
+          substring: "REPLY-LINE-SHIFT"
+      - type: output-matches
+        name: "line shift selects action without changing identity"
+        config:
+          pattern: "(?is)(?:same|semantic).*(?:line|anchor).*(?:shift|moved)|(?:line|anchor).*(?:shift|moved).*(?:same|semantic)"
+      - type: prompt
+    rubric:
+      - Uses REPLY-LINE-SHIFT because the matching inline anchor moved and trusted workflow ownership is not proven
+      - Does not use SKIP-COVERED even though line movement does not change semantic finding identity
+      - Leaves the existing thread unresolved and does not create a standalone finding
+
+  # 160028 -- A shifted trusted workflow-owned inline anchor selects RESOLVE-AND-REPOST
+  - name: shifted-trusted-inline-anchor-selects-repost
+    tags:
+      focus: line-shift-precedence
+    prompt: |
+      Read the Reviewer and shared reconciliation files. Build one Step 5.5
+      reconciliation row for this current finding:
+
+      - Current finding: OAPI027 on `Widget.properties.secretValue` in
+        `widget.json` line 180; the response-only secret must be read-only.
+      - Existing inline thread: the same rule, API element, and corrective
+        outcome at the old line 142.
+      - Existing author: `github-actions[bot]`.
+      - The existing comment has a structurally valid
+        `posted-by: arm-api-reviewer-agent` marker.
+      - The violation is still present, but the code moved from line 142 to
+        line 180.
+
+      Return only the action token, existing thread disposition, and a
+      one-sentence rationale. Do not post or resolve anything.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "trusted shifted anchor is replaced"
+        config:
+          substring: "RESOLVE-AND-REPOST"
+      - type: output-matches
+        name: "trusted ownership and line shift justify replacement"
+        config:
+          pattern: "(?is)(?=.*github-actions\\[bot\\])(?=.*(?:marker|trusted))(?=.*(?:shift|moved)).*"
+      - type: prompt
+    rubric:
+      - Uses RESOLVE-AND-REPOST because the matching inline anchor moved and both marker and trusted author prove workflow ownership
+      - Does not use SKIP-COVERED even though line movement does not change semantic finding identity
+      - Plans one replacement at the current line and no duplicate standalone finding
