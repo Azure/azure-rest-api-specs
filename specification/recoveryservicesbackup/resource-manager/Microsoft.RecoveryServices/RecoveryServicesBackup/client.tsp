@@ -2300,6 +2300,11 @@ op protectionPolicyOperationStatusesGet(
   "csharp"
 );
 @@clientName(
+  OperationStatusProvisionVaultILRExtendedInfo,
+  "BackupOperationStatusProvisionVaultIlrExtendedInfo",
+  "csharp"
+);
+@@clientName(
   OperationStatusValidateOperationExtendedInfo,
   "BackupOperationStatusValidateOperationExtendedInfo",
   "csharp"
@@ -2709,6 +2714,21 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(
   AzureFileShareProvisionILRRequest,
   "FileShareProvisionIlrContent",
+  "csharp"
+);
+@@clientName(
+  AzureFileShareProvisionVaultILRRequest,
+  "FileShareProvisionVaultIlrContent",
+  "csharp"
+);
+@@clientName(
+  AzureFileShareBrowseRecoveryPointRequest,
+  "FileShareBrowseRecoveryPointContent",
+  "csharp"
+);
+@@clientName(
+  AzureFileShareBrowseRecoveryPointResponse,
+  "FileShareBrowseRecoveryPointResult",
   "csharp"
 );
 @@alternateType(
