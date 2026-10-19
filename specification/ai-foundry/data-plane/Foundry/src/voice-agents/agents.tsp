@@ -431,16 +431,16 @@ model VoiceAgentSessionSecret {
   initial_value_from?: string;
 }
 
-@doc("A declared session-local private slot name, such as `verification_code`, without a namespace prefix or template syntax. Output bindings write to this name; tool input references use `{{name}}` to read it.")
+@doc("A declared session-local output target name, such as `verification_code`, without a namespace prefix or template syntax. Output bindings write to this name; tool input references use `{{name}}` to read it.")
 @pattern("^[A-Za-z_][A-Za-z0-9_]*$")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-scalar VoiceAgentSecretReference extends string;
+scalar VoiceAgentOutputReference extends string;
 
 @doc("Routes a private collection result to one declared session-local string.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectionOutputBindings {
   @doc("The name of the declared slot to replace when a private collection completes. Starting a replacement collection clears the old value; cancellation, timeout, and failure leave the slot empty.")
-  value: VoiceAgentSecretReference;
+  value: VoiceAgentOutputReference;
 }
 
 @doc("Shared SMS/keypad collection settings. Each start requires a locked Boolean `secret`: private results use `output_bindings`; non-private results may return to the model. The model cannot override settings or submit input values. Collection is not authentication.")
