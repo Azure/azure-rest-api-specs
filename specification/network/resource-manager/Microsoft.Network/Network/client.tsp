@@ -107,13 +107,13 @@ namespace Azure.ResourceManager.Models {
 @@clientLocation(
   Microsoft.Network.VmssNetworkInterfaces.getVirtualMachineScaleSetNetworkInterface,
   Microsoft.Network.NetworkInterfaces,
-  "java,go"
+  "java,go,python"
 );
 
 @@clientLocation(
   Microsoft.Network.VmssNetworkInterfaces.listVirtualMachineScaleSetVMNetworkInterfaces,
   Microsoft.Network.NetworkInterfaces,
-  "java,go"
+  "java,go.python"
 );
 
 @@clientLocation(
