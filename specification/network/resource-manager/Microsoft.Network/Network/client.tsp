@@ -113,7 +113,7 @@ namespace Azure.ResourceManager.Models {
 @@clientLocation(
   Microsoft.Network.VmssNetworkInterfaces.listVirtualMachineScaleSetVMNetworkInterfaces,
   Microsoft.Network.NetworkInterfaces,
-  "java,go.python"
+  "java,go,python"
 );
 
 @@clientLocation(
@@ -4380,12 +4380,12 @@ op replaceprivateDnsZoneGroupsList(
 @@clientLocation(
   Microsoft.Network.VmssPublicIPAddresses.getVirtualMachineScaleSetPublicIPAddress,
   Microsoft.Network.PublicIPAddresses,
-  "java,go"
+  "java,go,python"
 );
 @@clientLocation(
   Microsoft.Network.VmssPublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
   Microsoft.Network.PublicIPAddresses,
-  "java,go"
+  "java,go,python"
 );
 
 // Method renames to maintain backward compatibility for Java
