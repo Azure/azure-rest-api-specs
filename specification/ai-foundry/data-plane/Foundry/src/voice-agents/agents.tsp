@@ -164,10 +164,10 @@ model VoiceAgentDefinition extends AgentDefinition {
   @doc("Whether the model may call multiple tools in parallel.")
   parallel_tool_calls?: boolean;
 
-  @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
+  @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts. Resolved ordinary string inputs may also be referenced by `{{name}}` in tool execution parameters; this does not create a mutable variable store.")
   structured_inputs?: Record<StructuredInputDefinition>;
 
-  @doc("Session-local private string declarations, keyed by ASCII identifiers. Declarations contain references, never runtime secret values. Inputs explicitly mapped by `initial_value_from` are separated before prompt rendering. Collected values exist only for the live session; there is no secret-read API.")
+  @doc("Session-local private string declarations, keyed by ASCII identifiers. Declarations contain references, never runtime secret values. Inputs explicitly mapped by `initial_value_from` are separated before prompt rendering. Tool execution can reference a slot with `{{name}}`, but prompt rendering must not expand private slots. Reject name collisions with remaining ordinary inputs; an empty private slot never falls back to an ordinary value. Collected values exist only for the live session; there is no secret-read API.")
   secrets?: Record<VoiceAgentSessionSecret>;
 
   @doc("Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.")
@@ -416,7 +416,7 @@ union VoiceAgentSystemToolName {
   @doc("Collects keypad digits on the current call.")
   collect_dtmf: "collect_dtmf",
 
-  @doc("Sends one configured keypad action.")
+  @doc("Sends literal or templated keypad digits.")
   send_dtmf: "send_dtmf",
 }
 
@@ -428,7 +428,7 @@ model VoiceAgentSessionSecret {
   initial_value_from?: string;
 }
 
-@doc("A reference to a declared session-local string, not its value. Only the `secrets.<identifier>` form is supported; references are not expressions.")
+@doc("A write destination for a declared session-local private string, not its value. Collection output bindings use `secrets.<identifier>`; tool input placeholders use `{{name}}` instead. Neither form is an expression.")
 @pattern("^secrets\\.[A-Za-z_][A-Za-z0-9_]*$")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar VoiceAgentSecretReference extends string;
@@ -582,72 +582,15 @@ model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
   targets: VoiceAgentTransferTarget[];
 }
 
-@doc("The name and optional model guidance shared by configured keypad actions.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentDtmfActionBase {
-  @doc("The action name selected by the model. Names must be unique within the tool.")
-  @minLength(1)
-  @maxLength(64)
-  @pattern("^[A-Za-z][A-Za-z0-9_]*$")
-  name: string;
-
-  @doc("Optional guidance about when this action should be selected.")
-  description?: string;
-}
-
-@doc("A keypad action containing non-sensitive literal digits. Never place a PIN, verification code, or other private value in a persisted action.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiteralDtmfAction {
-  ...VoiceAgentDtmfActionBase;
-
-  @doc("The literal tones. ACS accepts at most 18 tones; SIP native signalling and Twilio in-band audio accept at most 64. Provider acceptance or audio playback does not prove remote IVR recognition.")
-  @minLength(1)
-  @maxLength(64)
-  @pattern("^[0-9*#]+$")
-  digits: string;
-}
-
-@doc("A reference resolved only when constructing a separate executor argument copy. This configuration never contains the referenced value.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentSecretInputBinding {
-  @doc("The declared session-local slot to read. A missing value fails before a provider request is sent.")
-  source: VoiceAgentSecretReference;
-}
-
-@doc("The supported input binding for a keypad action. Other parameters and expression syntax are not supported.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentDtmfParameterBindings {
-  @doc("The private string to resolve into the executor's digits argument.")
-  digits: VoiceAgentSecretInputBinding;
-}
-
-@doc("A keypad action whose digits are resolved from a private session-local string rather than supplied by the model.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentBoundDtmfAction {
-  ...VoiceAgentDtmfActionBase;
-
-  @doc("The input binding. Mutually exclusive with literal `digits`.")
-  parameter_bindings: VoiceAgentDtmfParameterBindings;
-}
-
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "Each keypad action requires exactly one literal or bound digits source."
-@doc("A configured keypad action with exactly one digits source: a non-sensitive literal or a private binding.")
-@oneOf
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union VoiceAgentSendDtmfAction {
-  literal: VoiceAgentLiteralDtmfAction,
-  bound: VoiceAgentBoundDtmfAction,
-}
-
-@doc("Sends a configured keypad action. The model selects only the action name; Voice Live resolves any private binding and sends concrete digits to Telephony. The model cannot override digits or read the private slot. ACS uses its native API; SIP uses negotiated RFC 4733 signalling only when the authenticated media gateway advertises support; Twilio plays in-band audio on the existing Media Stream without replacing the stream or session. Explicitly configured tools have no inbound/outbound restriction. Acceptance is not remote IVR recognition or authentication; in-band compatibility requires destination validation and secret-bound tones are audible on the call. An uncertain or interrupted sequence is never automatically retried.")
+@doc("""
+  Enables tone sending without configured actions or input bindings. The model invocation has exactly one required string argument, `digits`: literal keypad characters such as `1#`, or named `{{name}}` placeholders such as `{{verification_code}}`. Literal keypad characters may surround placeholders. Names are case-sensitive top-level ASCII identifiers (`[A-Za-z_][A-Za-z0-9_]*`), resolved against ordinary session string inputs or declared private slots; they are not `secrets.<name>` paths. The tool schema exposes available names, never private values. No nested paths, helpers, expressions, or recursive expansion are supported.
+  Voice Live resolves placeholders immediately before execution into a separate executor-only argument copy, retaining the unexpanded intent in model/history/output items. Missing, ambiguous, non-string, or malformed references fail before sending. Validate the complete resolved sequence against `[0-9*#]+` and provider limits: at most 18 tones for ACS and 64 for SIP/Twilio. Bound template size and expanded output; never return expanded private values through status or diagnostics. Literal digits are model-visible and must not be used to carry a private value through the model.
+  ACS uses its native API; SIP uses negotiated RFC 4733 signalling only when the authenticated media gateway advertises support; Twilio plays in-band audio on the existing Media Stream without replacing the stream or session. Explicitly configured tools have no inbound/outbound restriction. Acceptance is not remote IVR recognition or authentication; in-band compatibility requires destination validation and secret-bound tones are audible on the call. An uncertain or interrupted sequence is never automatically retried.
+  """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
   @doc("The built-in capability. Always `send_dtmf`.")
   name: "send_dtmf";
-
-  @doc("The non-empty set of configured keypad actions.")
-  @minItems(1)
-  actions: VoiceAgentSendDtmfAction[];
 }
 
 @doc("A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.")

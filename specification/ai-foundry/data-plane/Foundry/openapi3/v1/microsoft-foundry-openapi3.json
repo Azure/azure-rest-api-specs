@@ -94541,36 +94541,6 @@
           ]
         }
       },
-      "VoiceAgentBoundDtmfAction": {
-        "type": "object",
-        "required": [
-          "name",
-          "parameter_bindings"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
-            "description": "The action name selected by the model. Names must be unique within the tool."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional guidance about when this action should be selected."
-          },
-          "parameter_bindings": {
-            "$ref": "#/components/schemas/VoiceAgentDtmfParameterBindings",
-            "description": "The input binding. Mutually exclusive with literal `digits`."
-          }
-        },
-        "description": "A keypad action whose digits are resolved from a private session-local string rather than supplied by the model.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceAgentCollectDtmfSystemTool": {
         "type": "object",
         "required": [
@@ -94809,14 +94779,14 @@
             "unevaluatedProperties": {
               "$ref": "#/components/schemas/StructuredInputDefinition"
             },
-            "description": "Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts."
+            "description": "Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts. Resolved ordinary string inputs may also be referenced by `{{name}}` in tool execution parameters; this does not create a mutable variable store."
           },
           "secrets": {
             "type": "object",
             "unevaluatedProperties": {
               "$ref": "#/components/schemas/VoiceAgentSessionSecret"
             },
-            "description": "Session-local private string declarations, keyed by ASCII identifiers. Declarations contain references, never runtime secret values. Inputs explicitly mapped by `initial_value_from` are separated before prompt rendering. Collected values exist only for the live session; there is no secret-read API."
+            "description": "Session-local private string declarations, keyed by ASCII identifiers. Declarations contain references, never runtime secret values. Inputs explicitly mapped by `initial_value_from` are separated before prompt rendering. Tool execution can reference a slot with `{{name}}`, but prompt rendering must not expand private slots. Reject name collisions with remaining ordinary inputs; an empty private slot never falls back to an ordinary value. Collected values exist only for the live session; there is no secret-read API."
           },
           "subagent_config": {
             "$ref": "#/components/schemas/VoiceAgentSubagentConfig",
@@ -94855,24 +94825,6 @@
           }
         ],
         "description": "How keypad collection completes. Unknown modes require service and provider support.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceAgentDtmfParameterBindings": {
-        "type": "object",
-        "required": [
-          "digits"
-        ],
-        "properties": {
-          "digits": {
-            "$ref": "#/components/schemas/VoiceAgentSecretInputBinding",
-            "description": "The private string to resolve into the executor's digits argument."
-          }
-        },
-        "description": "The supported input binding for a keypad action. Other parameters and expression syntax are not supported.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -95253,39 +95205,6 @@
           ]
         }
       },
-      "VoiceAgentLiteralDtmfAction": {
-        "type": "object",
-        "required": [
-          "name",
-          "digits"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
-            "description": "The action name selected by the model. Names must be unique within the tool."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional guidance about when this action should be selected."
-          },
-          "digits": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[0-9*#]+$",
-            "description": "The literal tones. ACS accepts at most 18 tones; SIP native signalling and Twilio in-band audio accept at most 64. Provider acceptance or audio playback does not prove remote IVR recognition."
-          }
-        },
-        "description": "A keypad action containing non-sensitive literal digits. Never place a PIN, verification code, or other private value in a persisted action.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceAgentLlmGeneratedGreetingConfig": {
         "type": "object",
         "required": [
@@ -95545,28 +95464,10 @@
           ]
         }
       },
-      "VoiceAgentSecretInputBinding": {
-        "type": "object",
-        "required": [
-          "source"
-        ],
-        "properties": {
-          "source": {
-            "$ref": "#/components/schemas/VoiceAgentSecretReference",
-            "description": "The declared session-local slot to read. A missing value fails before a provider request is sent."
-          }
-        },
-        "description": "A reference resolved only when constructing a separate executor argument copy. This configuration never contains the referenced value.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceAgentSecretReference": {
         "type": "string",
         "pattern": "^secrets\\.[A-Za-z_][A-Za-z0-9_]*$",
-        "description": "A reference to a declared session-local string, not its value. Only the `secrets.<identifier>` form is supported; references are not expressions.",
+        "description": "A write destination for a declared session-local private string, not its value. Collection output bindings use `secrets.<identifier>`; tool input placeholders use `{{name}}` instead. Neither form is an expression.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -95616,27 +95517,10 @@
           ]
         }
       },
-      "VoiceAgentSendDtmfAction": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/VoiceAgentLiteralDtmfAction"
-          },
-          {
-            "$ref": "#/components/schemas/VoiceAgentBoundDtmfAction"
-          }
-        ],
-        "description": "A configured keypad action with exactly one digits source: a non-sensitive literal or a private binding.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
       "VoiceAgentSendDtmfSystemTool": {
         "type": "object",
         "required": [
-          "name",
-          "actions"
+          "name"
         ],
         "properties": {
           "name": {
@@ -95645,14 +95529,6 @@
               "send_dtmf"
             ],
             "description": "The built-in capability. Always `send_dtmf`."
-          },
-          "actions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/VoiceAgentSendDtmfAction"
-            },
-            "minItems": 1,
-            "description": "The non-empty set of configured keypad actions."
           }
         },
         "allOf": [
@@ -95660,7 +95536,7 @@
             "$ref": "#/components/schemas/VoiceAgentSystemTool"
           }
         ],
-        "description": "Sends a configured keypad action. The model selects only the action name; Voice Live resolves any private binding and sends concrete digits to Telephony. The model cannot override digits or read the private slot. ACS uses its native API; SIP uses negotiated RFC 4733 signalling only when the authenticated media gateway advertises support; Twilio plays in-band audio on the existing Media Stream without replacing the stream or session. Explicitly configured tools have no inbound/outbound restriction. Acceptance is not remote IVR recognition or authentication; in-band compatibility requires destination validation and secret-bound tones are audible on the call. An uncertain or interrupted sequence is never automatically retried.",
+        "description": "Enables tone sending without configured actions or input bindings. The model invocation has exactly one required string argument, `digits`: literal keypad characters such as `1#`, or named `{{name}}` placeholders such as `{{verification_code}}`. Literal keypad characters may surround placeholders. Names are case-sensitive top-level ASCII identifiers (`[A-Za-z_][A-Za-z0-9_]*`), resolved against ordinary session string inputs or declared private slots; they are not `secrets.<name>` paths. The tool schema exposes available names, never private values. No nested paths, helpers, expressions, or recursive expansion are supported.\nVoice Live resolves placeholders immediately before execution into a separate executor-only argument copy, retaining the unexpanded intent in model/history/output items. Missing, ambiguous, non-string, or malformed references fail before sending. Validate the complete resolved sequence against `[0-9*#]+` and provider limits: at most 18 tones for ACS and 64 for SIP/Twilio. Bound template size and expanded output; never return expanded private values through status or diagnostics. Literal digits are model-visible and must not be used to carry a private value through the model.\nACS uses its native API; SIP uses negotiated RFC 4733 signalling only when the authenticated media gateway advertises support; Twilio plays in-band audio on the existing Media Stream without replacing the stream or session. Explicitly configured tools have no inbound/outbound restriction. Acceptance is not remote IVR recognition or authentication; in-band compatibility requires destination validation and secret-bound tones are audible on the call. An uncertain or interrupted sequence is never automatically retried.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

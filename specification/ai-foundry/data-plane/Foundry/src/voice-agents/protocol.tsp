@@ -365,7 +365,7 @@ model VoiceAgentSystemToolItem {
   @doc("The invocation identifier used for correlation and duplicate suppression.")
   call_id: string;
 
-  @doc("The model's intent arguments encoded as a JSON string. A collection start includes its Boolean `secret` choice and, for SMS, `from_phone_number`; it never contains the actual collected value.")
+  @doc("The model's intent arguments encoded as a JSON string. A collection start includes its Boolean `secret` choice and, for SMS, `from_phone_number`; it never contains the actual collected value. A `send_dtmf` invocation has exactly one required string argument, `digits`, containing literal keypad characters or unexpanded `{{name}}` placeholders. Expanded private values never replace the intent in this item.")
   arguments: string;
 }
 
