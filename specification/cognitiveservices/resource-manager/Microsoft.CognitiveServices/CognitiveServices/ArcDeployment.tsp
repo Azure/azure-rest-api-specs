@@ -165,8 +165,8 @@ interface ArcDeployments {
    * Creates or updates an Arc deployment associated with the Cognitive Services account.
    */
   @added(Versions.v2026_11_15_preview)
-   @sharedRoute
-   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+  @sharedRoute
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     ArcDeployment,
     Request = ArcDeploymentCreateOrUpdateContent,
     LroHeaders = ArcDeploymentCreateLroHeaders
