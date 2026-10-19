@@ -6540,11 +6540,11 @@
             "key"
           ]
         },
-        "selectors": {
+        "matchers": {
           "type": "array",
-          "description": "Action-specific selectors evaluated during execution.",
+          "description": "Action-specific target matching criteria evaluated during execution.",
           "items": {
-            "$ref": "#/definitions/ScenarioActionSelector"
+            "$ref": "#/definitions/ScenarioActionMatcher"
           },
           "x-ms-identifiers": [
             "name"
@@ -6577,19 +6577,17 @@
         "duration"
       ]
     },
-    "ScenarioActionSelector": {
+    "ScenarioActionMatcher": {
       "type": "object",
-      "description": "Model that represents an action-specific selector.",
+      "description": "Model that represents an action-specific target matching criterion.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The selector name.",
-          "minLength": 1
+          "description": "The matcher name, such as `logicalZone`, `physicalZone`, or `region`."
         },
         "value": {
           "type": "string",
-          "description": "The selector value. Supports template macro syntax.",
-          "minLength": 1
+          "description": "The value that targets must match. Supports template macro syntax."
         }
       },
       "required": [
@@ -6853,7 +6851,7 @@
     },
     "ScenarioRunEffectiveTarget": {
       "type": "object",
-      "description": "Model that represents the outcome for a target evaluated by an action.",
+      "description": "Model that represents the outcome for a concrete action target.",
       "properties": {
         "id": {
           "type": "string",
@@ -6862,7 +6860,19 @@
         },
         "state": {
           "$ref": "#/definitions/ScenarioRunTargetState",
-          "description": "The target evaluation and execution state.",
+          "description": "The target execution state.",
+          "readOnly": true
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When target processing started.",
+          "readOnly": true
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When target processing completed.",
           "readOnly": true
         }
       },
@@ -7132,7 +7142,7 @@
       "properties": {
         "resources": {
           "type": "array",
-          "description": "The resources associated with the specified action, including the targets\nevaluated during execution.",
+          "description": "The resources associated with the specified action, including the concrete targets\nevaluated during execution.",
           "items": {
             "$ref": "#/definitions/ScenarioRunSummaryResource"
           },
@@ -7191,7 +7201,7 @@
         },
         "effectiveTargets": {
           "type": "array",
-          "description": "The targets evaluated for this resource during action execution.",
+          "description": "The concrete targets evaluated for this resource during action execution.",
           "items": {
             "$ref": "#/definitions/ScenarioRunEffectiveTarget"
           },
@@ -7199,6 +7209,11 @@
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "effectiveTargetsTruncated": {
+          "type": "boolean",
+          "description": "Whether additional effective targets were omitted from the response.",
+          "readOnly": true
         }
       },
       "required": [
@@ -7207,12 +7222,11 @@
     },
     "ScenarioRunTargetState": {
       "type": "string",
-      "description": "Enum of the states for a target evaluated by an action.",
+      "description": "Enum of the execution states for a concrete action target.",
       "enum": [
         "Succeeded",
         "NotApplicable",
-        "Skipped",
-        "Failed"
+        "Skipped"
       ],
       "x-ms-enum": {
         "name": "ScenarioRunTargetState",
@@ -7221,26 +7235,20 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "The action mutation and cleanup succeeded for the target."
+            "description": "The action completed successfully for the target."
           },
           {
             "name": "NotApplicable",
             "value": "NotApplicable",
-            "description": "Evaluation succeeded and determined that the action did not apply to the target."
+            "description": "The action does not apply to the target."
           },
           {
             "name": "Skipped",
             "value": "Skipped",
-            "description": "The target was intentionally left unchanged."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Evaluation, authorization, lookup, mutation, or cleanup failed for the target."
+            "description": "The action was skipped for the target."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "ScenarioRunWarning": {
       "type": "object",

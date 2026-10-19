@@ -276,11 +276,11 @@ model ScenarioAction {
   parameters?: KeyValuePair[];
 
   /**
-   * Action-specific selectors evaluated during execution.
+   * Action-specific target matching criteria evaluated during execution.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   @identifiers(#["name"])
-  selectors?: ScenarioActionSelector[];
+  matchers?: ScenarioActionMatcher[];
 
   /**
    * Action dependencies that control when this action starts.
@@ -312,20 +312,18 @@ model ScenarioAction {
 }
 
 /**
- * Model that represents an action-specific selector.
+ * Model that represents an action-specific target matching criterion.
  */
 @added(Microsoft.Chaos.Versions.v2026_11_01)
-model ScenarioActionSelector {
+model ScenarioActionMatcher {
   /**
-   * The selector name.
+   * The matcher name, such as `logicalZone`, `physicalZone`, or `region`.
    */
-  @minLength(1)
   name: string;
 
   /**
-   * The selector value. Supports template macro syntax.
+   * The value that targets must match. Supports template macro syntax.
    */
-  @minLength(1)
   value: string;
 }
 

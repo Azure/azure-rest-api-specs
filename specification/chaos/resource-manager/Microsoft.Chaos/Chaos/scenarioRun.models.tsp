@@ -285,7 +285,7 @@ model ScenarioRunSummaryAction {
   resourcesLegacy: ScenarioRunResource[];
 
   /**
-   * The resources associated with the specified action, including the targets
+   * The resources associated with the specified action, including the concrete targets
    * evaluated during execution.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
@@ -458,15 +458,21 @@ model ScenarioRunSummaryResource {
   id: string;
 
   /**
-   * The targets evaluated for this resource during action execution.
+   * The concrete targets evaluated for this resource during action execution.
    */
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
   effectiveTargets?: ScenarioRunEffectiveTarget[];
+
+  /**
+   * Whether additional effective targets were omitted from the response.
+   */
+  @visibility(Lifecycle.Read)
+  effectiveTargetsTruncated?: boolean;
 }
 
 /**
- * Model that represents the outcome for a target evaluated by an action.
+ * Model that represents the outcome for a concrete action target.
  */
 @added(Microsoft.Chaos.Versions.v2026_11_01)
 model ScenarioRunEffectiveTarget {
@@ -478,38 +484,45 @@ model ScenarioRunEffectiveTarget {
   id: string;
 
   /**
-   * The target evaluation and execution state.
+   * The target execution state.
    */
   @visibility(Lifecycle.Read)
   state: ScenarioRunTargetState;
+
+  /**
+   * When target processing started.
+   */
+  @visibility(Lifecycle.Read)
+  startedAt?: utcDateTime;
+
+  /**
+   * When target processing completed.
+   */
+  @visibility(Lifecycle.Read)
+  completedAt?: utcDateTime;
 }
 
 /**
- * Enum of the states for a target evaluated by an action.
+ * Enum of the execution states for a concrete action target.
  */
 @added(Microsoft.Chaos.Versions.v2026_11_01)
 union ScenarioRunTargetState {
   string,
 
   /**
-   * The action mutation and cleanup succeeded for the target.
+   * The action completed successfully for the target.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Evaluation succeeded and determined that the action did not apply to the target.
+   * The action does not apply to the target.
    */
   NotApplicable: "NotApplicable",
 
   /**
-   * The target was intentionally left unchanged.
+   * The action was skipped for the target.
    */
   Skipped: "Skipped",
-
-  /**
-   * Evaluation, authorization, lookup, mutation, or cleanup failed for the target.
-   */
-  Failed: "Failed",
 }
 
 /**
