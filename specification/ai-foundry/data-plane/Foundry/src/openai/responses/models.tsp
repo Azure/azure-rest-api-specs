@@ -94,31 +94,20 @@ namespace Azure.AI.Projects {
     session_affinity?: SessionAffinityConfiguration;
 
     /**
-     * Controls how Model Router handles request parameters that differ across candidate models.
-     * Defaults to relax when omitted. Explicit null and unknown values return a 400 (Bad Request) error.
+     * When true, restricts routing to qualified model and serving API combinations that support
+     * all applicable request parameters. Returns 400 (Bad Request) when none qualify.
+     * Defaults to false when omitted. Explicit null and non-boolean values return 400.
      * Requires the Foundry-Features: ModelRouterControls=V1Preview header.
      * Applies only to qualified model, API, and adapter mappings, not every provider-native option.
-     * Explicit parameters and constraints remain hard requirements under every policy.
+     * Explicit constraints remain hard requirements when false.
+     * This setting is request-scoped; it does not introduce stored deployment defaults.
      */
+    // Naming aligns with OpenRouter's require_parameters; LiteLLM exposes the inverse as drop_params.
     @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
-    parameter_policy?: ModelRouterParameterPolicy = ModelRouterParameterPolicy.relax;
+    require_parameters?: boolean = false;
 
     /**
-     * Concrete, non-null settings that the selected serving path must preserve.
-     * Uses canonical routing names, including reasoning_effort, verbosity, max_completion_tokens,
-     * and response_format; the router maps these to the caller API's native fields.
-     * Other accepted names are temperature, top_p, frequency_penalty, presence_penalty, n, stop,
-     * logprobs, top_logprobs, extra_body, logit_bias, seed, parallel_tool_calls, thinking,
-     * max_tokens, tools, and tool_choice. Values of tools and output formats use the caller API's shape.
-     * Unknown names, null values, conflicting native values, and unsupported requirements return 400.
-     * Omitted settings retain existing behavior; no stored parameter defaults are introduced.
-     * Requires the parameter preview to be enabled for the subscription.
-     */
-    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
-    parameters?: Record<unknown>;
-
-    /**
-     * Permitted routing choices. These are hard requirements, including when parameter_policy is relax.
+     * Permitted routing choices. These are hard requirements even when require_parameters is false.
      * Requires the parameter preview to be enabled for the subscription.
      */
     @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
@@ -143,20 +132,6 @@ namespace Azure.AI.Projects {
     /** Values the router may choose; unknown or unsupported model-specific values cannot satisfy the constraint. */
     @minItems(1)
     allowed_values: string[];
-  }
-
-  /** Request parameter handling policies supported by Model Router. */
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown parameter policies with a 400 response."
-  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
-  union ModelRouterParameterPolicy {
-    /** Allows Model Router to adapt or omit unsupported parameters for the selected model. */
-    relax: "relax",
-
-    /** Prefers candidates that preserve supported request parameters, with relaxation when none are eligible. */
-    best_effort_preserve: "best-effort-preserve",
-
-    /** Requires candidates that preserve supported request parameters; rejects the request when none are eligible. */
-    preserve: "preserve",
   }
 
   /** Request settings that control Model Router session affinity. */
@@ -296,8 +271,8 @@ namespace Azure.AI.Projects {
     /** The routing mode for the request. */
     mode: ModelRouterMode;
 
-    /** The effective parameter-preservation policy, when parameter planning was used. */
-    parameter_policy?: ModelRouterParameterPolicy;
+    /** Whether full parameter support was required for this routing decision, when parameter planning was used. */
+    require_parameters?: boolean;
 
     /** Known settings submitted to the serving path, excluding tool definitions, schemas, and arbitrary extension bodies. */
     parameters?: Record<unknown>;

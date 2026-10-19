@@ -54762,9 +54762,9 @@ components:
         mode:
           $ref: '#/components/schemas/ModelRouterMode'
           description: The routing mode for the request.
-        parameter_policy:
-          $ref: '#/components/schemas/ModelRouterParameterPolicy'
-          description: The effective parameter-preservation policy, when parameter planning was used.
+        require_parameters:
+          type: boolean
+          description: Whether full parameter support was required for this routing decision, when parameter planning was used.
         parameters:
           type: object
           unevaluatedProperties: {}
@@ -54810,16 +54810,6 @@ components:
             Otherwise the router prefers medium when permitted, then the first permitted value in ordinal string order.
             This is deterministic selection, not a cross-model cost or token-budget guarantee.
       description: Hard constraints on the settings Model Router may select.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - ModelRouterControls=V1Preview
-    ModelRouterParameterPolicy:
-      type: string
-      enum:
-        - relax
-        - best-effort-preserve
-        - preserve
-      description: Request parameter handling policies supported by Model Router.
       x-ms-foundry-meta:
         conditional_previews:
           - ModelRouterControls=V1Preview
@@ -84321,38 +84311,24 @@ components:
           x-ms-foundry-meta:
             conditional_previews:
               - ModelRouterControls=V1Preview
-        parameter_policy:
-          $ref: '#/components/schemas/ModelRouterParameterPolicy'
+        require_parameters:
+          type: boolean
           description: |-
-            Controls how Model Router handles request parameters that differ across candidate models.
-            Defaults to relax when omitted. Explicit null and unknown values return a 400 (Bad Request) error.
+            When true, restricts routing to qualified model and serving API combinations that support
+            all applicable request parameters. Returns 400 (Bad Request) when none qualify.
+            Defaults to false when omitted. Explicit null and non-boolean values return 400.
             Requires the Foundry-Features: ModelRouterControls=V1Preview header.
             Applies only to qualified model, API, and adapter mappings, not every provider-native option.
-            Explicit parameters and constraints remain hard requirements under every policy.
+            Explicit constraints remain hard requirements when false.
+            This setting is request-scoped; it does not introduce stored deployment defaults.
           x-ms-foundry-meta:
             conditional_previews:
               - ModelRouterControls=V1Preview
-          default: relax
-        parameters:
-          type: object
-          unevaluatedProperties: {}
-          description: |-
-            Concrete, non-null settings that the selected serving path must preserve.
-            Uses canonical routing names, including reasoning_effort, verbosity, max_completion_tokens,
-            and response_format; the router maps these to the caller API's native fields.
-            Other accepted names are temperature, top_p, frequency_penalty, presence_penalty, n, stop,
-            logprobs, top_logprobs, extra_body, logit_bias, seed, parallel_tool_calls, thinking,
-            max_tokens, tools, and tool_choice. Values of tools and output formats use the caller API's shape.
-            Unknown names, null values, conflicting native values, and unsupported requirements return 400.
-            Omitted settings retain existing behavior; no stored parameter defaults are introduced.
-            Requires the parameter preview to be enabled for the subscription.
-          x-ms-foundry-meta:
-            conditional_previews:
-              - ModelRouterControls=V1Preview
+          default: false
         constraints:
           $ref: '#/components/schemas/ModelRouterParameterConstraints'
           description: |-
-            Permitted routing choices. These are hard requirements, including when parameter_policy is relax.
+            Permitted routing choices. These are hard requirements even when require_parameters is false.
             Requires the parameter preview to be enabled for the subscription.
           x-ms-foundry-meta:
             conditional_previews:
