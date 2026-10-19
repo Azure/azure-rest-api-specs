@@ -699,13 +699,12 @@ union VoiceResponseObjectType {
   realtime_response: "realtime.response",
 }
 
-@@clientName(VoiceResponseObjectType, "VoiceResponseBaseObject", "java");
 @@alternateType(
   OpenAI.RealtimeResponse.object,
   VoiceResponseObjectType,
   "java"
 );
-@@clientName(OpenAI.RealtimeResponse.object, "object", "java");
+@@clientName(OpenAI.RealtimeResponse.object, "objectType", "java");
 
 @@alternateType(
   VoiceAgentDefinition.sub_protocol,
