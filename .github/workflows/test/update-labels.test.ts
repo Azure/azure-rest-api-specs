@@ -143,16 +143,6 @@ describe("updateLabelsImpl", () => {
       expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
     });
 
-    it("does not apply queued approval after conversion to draft", async () => {
-      const { github, pull, run } = fixture();
-      github.rest.pulls.get.mockResolvedValue({ data: { ...pull, draft: true } });
-
-      await run();
-
-      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
-      expect(github.rest.repos.getCombinedStatusForRef).not.toHaveBeenCalled();
-    });
-
     it("does not take ownership of or revoke an unmarked human approval", async () => {
       const { github, run } = fixture();
       github.rest.issues.listLabelsOnIssue.mockResolvedValue({

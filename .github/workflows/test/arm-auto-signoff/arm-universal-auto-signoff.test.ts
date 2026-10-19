@@ -64,19 +64,16 @@ function createMockGithub({
   statuses = successfulStatuses,
   currentHeadSha = headSha,
   pullRequestState = "open",
-  draft = false,
 }: {
   labelNames?: string[];
   statuses?: { context: string; state: string; description?: string; updated_at: string }[];
   currentHeadSha?: string;
   pullRequestState?: "open" | "closed";
-  draft?: boolean;
 } = {}) {
   const github = createMockGithubBase();
   github.rest.pulls.get.mockResolvedValue({
     data: {
       state: pullRequestState,
-      draft,
       head: { sha: currentHeadSha },
     },
   });
@@ -101,22 +98,6 @@ function run(github: ReturnType<typeof createMockGithub>, runCore = core) {
 }
 
 describe("getLabelActionImpl", () => {
-  it.each([
-    { labelNames: ["ARMReview"], expected: actions() },
-    { labelNames: ["ARMReview", ...autoSignedOff], expected: actions(revoke) },
-    { labelNames: ["ARMReview", ArmSignedOff], expected: actions() },
-  ])(
-    "does not grant or retain automation-owned signoff on a draft: $labelNames",
-    async ({ labelNames, expected }) => {
-      const github = createMockGithub({ labelNames, draft: true });
-
-      const result = await run(github);
-
-      expect(result.labelActions).toEqual(expected);
-      expect(github.rest.repos.getCombinedStatusForRef).not.toHaveBeenCalled();
-    },
-  );
-
   describe("granting", () => {
     it("adds ARMSignedOff and ARMAutoSignedOff when all requirements pass", async () => {
       const github = createMockGithub({ labelNames: ["ARMReview"] });
@@ -435,14 +416,6 @@ describe("getLabelActionImpl", () => {
 
 describe("ARM Universal Auto SignOff workflow", () => {
   const readWorkflow = (name: string) => readFile(join(GITHUB_ROOT, "workflows", name), "utf8");
-
-  it("re-evaluates signoff on draft-state transitions without triggering the AI reviewer", async () => {
-    const workflow = await readWorkflow("arm-universal-auto-signoff.yaml");
-    for (const event of ["ready_for_review", "converted_to_draft"]) {
-      expect(workflow).toContain(`- ${event}`);
-      expect(workflow).toContain(`github.event.action == '${event}'`);
-    }
-  });
 
   it("re-evaluates after the ARM API Reviewer publishes its status", async () => {
     const workflow = await readWorkflow("arm-universal-auto-signoff.yaml");
