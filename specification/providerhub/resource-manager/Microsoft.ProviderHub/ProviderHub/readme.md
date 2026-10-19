@@ -79,7 +79,7 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}"].get.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}"].put.responses["200"].schema
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}"].put.responses["201"].schema
-    reason: The nested resource type registration operations return the same ResourceTypeRegistration schema as the top-level resource type registration operations, where provisioningState is already read-only.
+    reason: The nested resource type registration operations reuse the ResourceTypeRegistration schema. Its provisioningState is emitted as a read-only reference to the shared ProvisioningState definition, and this rule does not recognize read-only on a reference; the same finding applies to the existing top-level operations. Marking the shared definition read-only would change previously published API versions.
 ```
 
 ### Tag: package-2026-09-01-preview
