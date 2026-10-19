@@ -46,6 +46,18 @@ suppressions:
     from: cognitiveservices.json
     where:
       - $.definitions.RaiAcsHarmConfiguration.properties.harm_config_id
+      - $.definitions.RaiAcsAgentShutdownInterventionPoint.properties.policy_target
+      - $.definitions.RaiAcsAgentShutdownInterventionPoint.properties.policy_target_kind
+      - $.definitions.RaiAcsAgentStartupInterventionPoint.properties.policy_target
+      - $.definitions.RaiAcsAgentStartupInterventionPoint.properties.policy_target_kind
+      - $.definitions.RaiAcsPreModelCallInterventionPoint.properties.policy_target
+      - $.definitions.RaiAcsPreModelCallInterventionPoint.properties.policy_target_kind
+      - $.definitions.RaiAcsPostModelCallInterventionPoint.properties.policy_target
+      - $.definitions.RaiAcsPostModelCallInterventionPoint.properties.policy_target_kind
+      - $.definitions.RaiAcsInterventionPoints.properties.agent_startup
+      - $.definitions.RaiAcsInterventionPoints.properties.pre_model_call
+      - $.definitions.RaiAcsInterventionPoints.properties.post_model_call
+      - $.definitions.RaiAcsInterventionPoints.properties.agent_shutdown
       - $.definitions.RaiAcsInterventionPoint.properties.policy_target
       - $.definitions.RaiAcsInterventionPoint.properties.policy_target_kind
       - $.definitions.RaiAcsToolInterventionPoint.properties.policy_target
