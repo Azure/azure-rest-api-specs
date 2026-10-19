@@ -14,23 +14,9 @@ namespace OpenAI {
 // Map Azure.AI.Projects augmentation types into our SDK namespace
 @clientNamespace("Azure.AI.AgentServer.Responses.Models")
 namespace Azure.AI.Projects {
-  // Rename "Response" to "ResponseObject" to avoid conflict with Azure.Response
-  @@clientName(OpenAI.Response, "ResponseObject");
-
-  // Rename "ResponseError" to "ResponseErrorInfo" to avoid conflict with Azure.ResponseError
-  @@clientName(OpenAI.ResponseError, "ResponseErrorInfo");
-
-  // Remove "object" from DeleteResponseResult to work around codegen bug
-  // (TypeSpec emitter generates `= "response"` string default for ResponseObjectType enum)
-  @@withoutOmittedProperties(Azure.AI.Projects.DeleteResponseResult, "object");
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "@copyProperties stamps the `object: \"response\"` literal that the delete envelope must return; it is not declared on the upstream model."
-  @@copyProperties(
-    Azure.AI.Projects.DeleteResponseResult,
-    {
-      /** The object type, always `response`. */
-      object: "response",
-    }
-  );
+  // The single-value `ResponseObjectType` union is otherwise emitted as a fixed enum that the emitter
+  // initialises with a string literal (`ResponseObjectType Object { get; } = "response"`), which does not compile.
+  @@alternateType(Azure.AI.Projects.ResponseObjectType, string, "csharp");
 
   // ============================================================================
   // Public constructors: mark models as input+output so the C# emitter generates
