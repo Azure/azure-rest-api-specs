@@ -1463,7 +1463,8 @@
             "description": "InProgress"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "DataMaskingFunction": {
       "type": "string",
@@ -4109,7 +4110,8 @@
             "description": "Skipped"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "JobExecutionListResult": {
       "type": "object",
@@ -5088,7 +5090,8 @@
             "description": "Cancelled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "MaxSizeUnit": {
       "type": "string",
@@ -5550,7 +5553,8 @@
             "description": "Provisioning Canceled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "PrivateLinkServiceConnectionStateActionsRequire": {
       "type": "string",
@@ -5668,7 +5672,8 @@
             "description": "Canceled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ProxyResourceWithWritableName": {
       "type": "object",
@@ -7546,19 +7551,6 @@
         ]
       }
     },
-    "ServerProtectionSettingsAcceptedResult": {
-      "type": "object",
-      "description": "The update is in progress; follow the polling headers to retrieve its status and final resource result.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ServerProtectionSettingsOperationMetadata",
-          "description": "Metadata identifying the accepted update."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "ServerProtectionSettingsName": {
       "type": "string",
       "description": "The singleton name for managed instance protection settings.",
@@ -7577,36 +7569,72 @@
         ]
       }
     },
-    "ServerProtectionSettingsOperationMetadata": {
-      "type": "object",
-      "description": "Metadata for an accepted protection settings update.",
-      "properties": {
-        "operation": {
-          "type": "string",
-          "description": "The name of the accepted operation."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The UTC time at which the operation started."
-        }
-      },
-      "required": [
-        "operation",
-        "startTime"
-      ]
-    },
     "ServerProtectionSettingsProperties": {
       "type": "object",
       "description": "Settings that control protection against deletion of a managed instance.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ServerProtectionSettingsProvisioningState",
+          "description": "Status of the active or latest retained protection-settings update. If no\noperation history is retained, Succeeded describes the persisted setting\nrather than a past operation outcome. Failed and Canceled outcomes are not\npreserved after their operation history is removed.",
+          "readOnly": true
+        },
         "blockDropWhenImmutablePitrBackupInRetention": {
           "$ref": "#/definitions/BlockDropWhenImmutablePitrBackupInRetention",
-          "description": "Block managed instance deletion while any live or dropped user database has\nimmutable PITR backups within retention. Supported request values are enabled\nand disabled, compared case-insensitively. Setting enabled is an\nirreversible opt-in. Setting disabled before opt-in is a no-op; changing from\nenabled to disabled is rejected. GET and LIST return the effective persisted\nsetting. Use the update operation's polling endpoints to track completion."
+          "description": "Block managed instance deletion while any live or dropped user database has\nimmutable PITR backups within retention. Supported request values are enabled\nand disabled, compared case-insensitively. Setting enabled is an\nirreversible opt-in. Setting disabled before opt-in is a no-op; changing from\nenabled to disabled is rejected. While provisioningState is Updating, the\nvalue describes the accepted request and does not confirm that protection is\neffective. Otherwise, GET and LIST return the persisted setting. Use the\nupdate operation's polling endpoints to track completion."
         }
       },
       "required": [
         "blockDropWhenImmutablePitrBackupInRetention"
+      ]
+    },
+    "ServerProtectionSettingsProvisioningState": {
+      "type": "string",
+      "description": "Status of the active or latest retained protection-settings update.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ServerProtectionSettingsProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The protection-settings update is in progress."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ServerProtectionSettingsUpdateResult": {
+      "type": "object",
+      "description": "The settings update was accepted or completed. Follow the polling headers while provisioningState is Updating.",
+      "properties": {
+        "body": {
+          "$ref": "./ManagedInstanceServerProtectionSettings.json#/definitions/ServerProtectionSettings",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
       ]
     },
     "ServerPublicNetworkAccessFlag": {
