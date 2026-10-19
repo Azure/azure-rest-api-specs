@@ -80458,27 +80458,6 @@ components:
     RoutingConfiguration:
       type: object
       properties:
-        mode:
-          $ref: '#/components/schemas/ModelRouterMode'
-          description: |-
-            Selects quality, balanced, or cost routing within the deployment's approved model pool.
-            Omission retains the deployment's existing routing mode. Requires the routing-controls preview
-            and subscription qualification; unknown modes return a 400 (Bad Request) error.
-          x-ms-foundry-meta:
-            conditional_previews:
-              - ModelRouterControls=V1Preview
-        models:
-          type: array
-          items:
-            type: string
-          minItems: 1
-          description: |-
-            An unordered, nonempty subset of the deployment's approved model names.
-            Every supplied model must belong to that pool; this field cannot add models to a deployment.
-            Omission retains the existing pool. Requires the routing-controls preview and subscription qualification.
-          x-ms-foundry-meta:
-            conditional_previews:
-              - ModelRouterControls=V1Preview
         session_affinity:
           $ref: '#/components/schemas/SessionAffinityConfiguration'
           description: |-
@@ -80903,7 +80882,6 @@ components:
         - type: string
           enum:
             - sticky
-            - adaptive
             - none
       description: Effective modes reported for Model Router session affinity.
       x-ms-foundry-meta:
@@ -80913,7 +80891,6 @@ components:
       type: string
       enum:
         - sticky
-        - adaptive
         - none
       description: Request modes supported by Model Router session affinity.
       x-ms-foundry-meta:
@@ -80927,7 +80904,6 @@ components:
             - session_id_payload
             - session_id_header
             - not_available
-            - derived_fingerprint
             - conversation
             - previous_response_id
       description: Conversation identifier sources supported by Model Router session affinity.

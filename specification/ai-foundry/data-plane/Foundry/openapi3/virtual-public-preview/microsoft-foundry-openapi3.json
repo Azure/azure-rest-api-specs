@@ -91084,28 +91084,6 @@
       "RoutingConfiguration": {
         "type": "object",
         "properties": {
-          "mode": {
-            "$ref": "#/components/schemas/ModelRouterMode",
-            "description": "Selects quality, balanced, or cost routing within the deployment's approved model pool.\nOmission retains the deployment's existing routing mode. Requires the routing-controls preview\nand subscription qualification; unknown modes return a 400 (Bad Request) error.",
-            "x-ms-foundry-meta": {
-              "conditional_previews": [
-                "ModelRouterControls=V1Preview"
-              ]
-            }
-          },
-          "models": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "minItems": 1,
-            "description": "An unordered, nonempty subset of the deployment's approved model names.\nEvery supplied model must belong to that pool; this field cannot add models to a deployment.\nOmission retains the existing pool. Requires the routing-controls preview and subscription qualification.",
-            "x-ms-foundry-meta": {
-              "conditional_previews": [
-                "ModelRouterControls=V1Preview"
-              ]
-            }
-          },
           "session_affinity": {
             "$ref": "#/components/schemas/SessionAffinityConfiguration",
             "description": "Session affinity configuration for reusing an eligible model across requests in the same conversation.\nIf omitted, sticky affinity is used when a supported conversation identifier is available.",
@@ -91700,7 +91678,6 @@
             "type": "string",
             "enum": [
               "sticky",
-              "adaptive",
               "none"
             ]
           }
@@ -91716,7 +91693,6 @@
         "type": "string",
         "enum": [
           "sticky",
-          "adaptive",
           "none"
         ],
         "description": "Request modes supported by Model Router session affinity.",
@@ -91737,7 +91713,6 @@
               "session_id_payload",
               "session_id_header",
               "not_available",
-              "derived_fingerprint",
               "conversation",
               "previous_response_id"
             ]

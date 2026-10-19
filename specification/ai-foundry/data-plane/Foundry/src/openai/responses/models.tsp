@@ -87,23 +87,6 @@ namespace Azure.AI.Projects {
    */
   model RoutingConfiguration {
     /**
-     * Selects quality, balanced, or cost routing within the deployment's approved model pool.
-     * Omission retains the deployment's existing routing mode. Requires the routing-controls preview
-     * and subscription qualification; unknown modes return a 400 (Bad Request) error.
-     */
-    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
-    mode?: ModelRouterMode;
-
-    /**
-     * An unordered, nonempty subset of the deployment's approved model names.
-     * Every supplied model must belong to that pool; this field cannot add models to a deployment.
-     * Omission retains the existing pool. Requires the routing-controls preview and subscription qualification.
-     */
-    @minItems(1)
-    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
-    models?: string[];
-
-    /**
      * Session affinity configuration for reusing an eligible model across requests in the same conversation.
      * If omitted, sticky affinity is used when a supported conversation identifier is available.
      */
@@ -195,9 +178,6 @@ namespace Azure.AI.Projects {
   union SessionAffinityRequestMode {
     /** Attempts to reuse the model associated with the selected conversation identifier. */
     sticky: "sticky",
-
-    /** Reuses a currently eligible model when the adaptive policy permits it. Requires subscription qualification. */
-    adaptive: "adaptive",
 
     /** Disables affinity state lookup and update for this request. */
     none: "none",
@@ -356,9 +336,6 @@ namespace Azure.AI.Projects {
     /** Affinity was enabled for the request. */
     sticky: "sticky",
 
-    /** Adaptive affinity was enabled for the request. */
-    adaptive: "adaptive",
-
     /** Affinity was disabled for the request. */
     none: "none",
   }
@@ -376,9 +353,6 @@ namespace Azure.AI.Projects {
 
     /** No usable conversation identifier was available. */
     not_available: "not_available",
-
-    /** A hashed conversation, response-chain, or user-history identity. The original identifier is not returned. */
-    derived_fingerprint: "derived_fingerprint",
 
     /** The Responses conversation identifier. */
     conversation: "conversation",
