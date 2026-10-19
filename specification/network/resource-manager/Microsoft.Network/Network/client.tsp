@@ -79,6 +79,26 @@ namespace CombineClient {
 
 }
 
+// Keep the optional API version in the JavaScript client options when multiple
+// services are merged; the emitter otherwise references an undeclared value.
+/**
+ * Optional parameters for the client.
+ */
+model NetworkClientInitialization {
+  /**
+   * The API version to use for this operation.
+   */
+  apiVersion?: string;
+}
+
+@@clientInitialization(
+  CombineClient,
+  {
+    parameters: NetworkClientInitialization,
+  },
+  "javascript"
+);
+
 // Define WritableSubResource in the ARM namespace for C# collection compatibility.
 namespace Azure.ResourceManager.Models {
   model WritableSubResource {
