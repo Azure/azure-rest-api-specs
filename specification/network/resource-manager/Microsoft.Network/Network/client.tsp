@@ -107,13 +107,13 @@ namespace Azure.ResourceManager.Models {
 @@clientLocation(
   Microsoft.Network.VmssNetworkInterfaces.getVirtualMachineScaleSetNetworkInterface,
   Microsoft.Network.NetworkInterfaces,
-  "java"
+  "java,go"
 );
 
 @@clientLocation(
   Microsoft.Network.VmssNetworkInterfaces.listVirtualMachineScaleSetVMNetworkInterfaces,
   Microsoft.Network.NetworkInterfaces,
-  "java"
+  "java,go"
 );
 
 @@clientLocation(
@@ -4380,12 +4380,12 @@ op replaceprivateDnsZoneGroupsList(
 @@clientLocation(
   Microsoft.Network.VmssPublicIPAddresses.getVirtualMachineScaleSetPublicIPAddress,
   Microsoft.Network.PublicIPAddresses,
-  "java"
+  "java,go"
 );
 @@clientLocation(
   Microsoft.Network.VmssPublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
   Microsoft.Network.PublicIPAddresses,
-  "java"
+  "java,go"
 );
 
 // Method renames to maintain backward compatibility for Java
