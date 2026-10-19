@@ -11,6 +11,11 @@ inputs:
     GitHub, run shell commands, or publish anything. Explain any blocked
     checks and ask only questions that I can reasonably answer.
 graders:
+  - type: text
+    name: asks_for_user_observations_without_a_diagnosis
+    config:
+      regex_match:
+        - "(?i)(what (did|do|were|would|happened|you)|can you|could you|please (share|describe)|expected|observed|example)"
   - type: skill_invocation
     name: skill_invocation_1
     config:

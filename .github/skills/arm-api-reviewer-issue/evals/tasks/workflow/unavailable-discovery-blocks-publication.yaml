@@ -18,6 +18,9 @@ graders:
     config:
       contains:
         - duplicate
+      regex_match:
+        - "(?i)(blocked|cannot|can.t|unavailable|unable)"
+        - "(?i)(authentication|access|lookup|discovery|issue list|existing issue)"
   - type: text
     name: output_not_contains_2
     config:

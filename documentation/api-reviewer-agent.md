@@ -691,8 +691,13 @@ interpretation, review process, and supporting repository workflows.
    [ARM API Reviewer issues](https://github.com/Azure/azure-rest-api-specs/issues?q=is%3Aissue+state%3Aopen+label%3A%22ARM+API+Reviewer+agent%22).
    An exact duplicate returns the existing link without creating or changing
    an issue.
-3. Review the complete proposed issue and approve publication. The skill files
+3. Review the complete proposed issue in the main chat, then use the separate
+   approval prompt. The preview includes the title, body, destination, and labels,
+   not just a file link or a copy hidden in the approval dialog. The skill files
    only in public `Azure/azure-rest-api-specs`; do not provide private evidence.
+   When it says **"Awaiting your approval. No issue has been created."**, the
+   draft is ready and needs your decision. Approve it, request edits, or cancel;
+   there is no need to wait for more preparation or use a special approval phrase.
 4. After publication, the skill verifies the issue and returns its URL. A
    missing approval, blocked check, or uncertain result is not reported as
    successful creation.

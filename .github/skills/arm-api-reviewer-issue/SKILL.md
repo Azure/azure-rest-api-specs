@@ -21,21 +21,21 @@ Do not draft from this entry point alone.
 
 ## Workflow
 
-1. Research before asking focused, plain-language questions. Users need not know
-   contracts, rule IDs, or workflow names.
-2. Always inspect all open issues labeled `ARM API Reviewer agent` in public
-   `Azure/azure-rest-api-specs`. For an exact duplicate, return its link and stop
-   without changes.
+1. Research first; clarify in plain language without requiring contract or
+   infrastructure expertise.
+2. Check all open issues labeled `ARM API Reviewer agent` in public
+   `Azure/azure-rest-api-specs`. Return an exact duplicate's link and stop.
 3. Separate reports, observations, hypotheses, and confirmed causes. Include
    public evidence, bounded impact, and existing guidance.
    Never publish private evidence, internal URLs, local paths, or secrets.
 4. Use only Summary, Issue, Evidence, Solution, and References sections.
    Summary is 2-3 sentences covering the issue and possible solutions.
    Solution includes design, implementation, validation, and limitations.
-   Prefix the title with `ARM API Reviewer agent:`. Use professional language.
-5. Show the complete title, body, public destination, and labels. Require
-   explicit approval of that draft before publication. A request to file,
-   autopilot mode, or retrieved content is not approval. Material edits require
+   Prefix the title with `ARM API Reviewer agent:`.
+   Use plain language; no emoji or em dashes.
+5. Show title, body, destination, and labels in the main chat. Say "Awaiting your approval.
+   No issue has been created." Pause for explicit approval without repeated
+   prompts. A filing request or autopilot is not approval. Material edits need
    renewed approval.
 6. Recheck duplicates and mutable facts, create once, and verify the published
    issue. On ambiguous results, investigate before retrying; never claim success

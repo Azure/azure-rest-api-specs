@@ -1,0 +1,56 @@
+id: paginated-duplicate-lookup
+name: paginated duplicate lookup
+tags:
+  - mocked
+  - duplicate
+inputs:
+  prompt: |
+    Help report an ARM API Reviewer problem: Summarize Checks adds
+    WaitForARMFeedback, but that does not start the reviewer. I want an explicit,
+    reliable queue-to-review handoff.
+
+    This is an isolated fixture exercise. No shell or gh executable is
+    available. Use the provided read-only issue_fixture GitHub listing tool
+    for the mandatory open-issue check, including all pages. Its responses are
+    deterministic local records, not live GitHub data. Do not contact GitHub,
+    publish anything, or change an existing issue. If a record already covers
+    this concern and requested outcome, return its link and stop.
+graders:
+  - type: tool_constraint
+    name: reads_both_labeled_issue_pages
+    config:
+      expect_tools:
+        - tool: "(^|[-_/])list_issues$"
+          args:
+            owner:
+              equals: Azure
+            repo:
+              equals: azure-rest-api-specs
+            state:
+              equals: open
+            labels:
+              equals: ["ARM API Reviewer agent"]
+            page:
+              equals: 1
+        - tool: "(^|[-_/])list_issues$"
+          args:
+            owner:
+              equals: Azure
+            repo:
+              equals: azure-rest-api-specs
+            state:
+              equals: open
+            labels:
+              equals: ["ARM API Reviewer agent"]
+            page:
+              equals: 2
+  - type: text
+    name: returns_duplicate_without_a_new_draft
+    config:
+      contains:
+        - https://github.com/Azure/azure-rest-api-specs/issues/47390
+      regex_match:
+        - "(?i)(already|existing|duplicate|tracked|matching)"
+      not_contains:
+        - "## Summary"
+        - "I created the issue"

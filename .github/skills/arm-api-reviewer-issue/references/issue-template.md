@@ -32,7 +32,9 @@ solutions. Keep this summary concise; put supporting details below.]
 
 ## References
 
-1. [Related issue URL and how its scope differs. State if none was found after
-   successful duplicate discovery.]
-2. [Relevant published reviewer, API-contract, process, or infrastructure guidance.]
-3. [Commit-pinned public source or other supporting references, when relevant.]
+1. [Related issue link, followed by a colon and how its scope differs. State if
+   none was found after successful duplicate discovery.]
+2. [Published reviewer, API-contract, process, or infrastructure guidance link,
+   followed by a colon and its relevance.]
+3. [Commit-pinned public source or other supporting link and its relevance,
+   using a colon rather than an em dash.]

@@ -1,0 +1,98 @@
+name: arm-api-reviewer-issue-mocked-lookup
+description: >
+  Verify paginated duplicate discovery through a deterministic, read-only MCP
+  fixture. This server never contacts GitHub and exposes no write tools.
+skill: arm-api-reviewer-issue
+schemaVersion: "1.4"
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+  executor: copilot-sdk
+  model: auto
+  skill_directories:
+    - ..
+  inject_skill_body: false
+mcp_mocks:
+  - name: issue_fixture
+    tools:
+      list_issues:
+        description: >
+          Read-only GitHub issue discovery fixture. List issues for the requested
+          repository, state, and labels. Start at page 1 and follow next_page
+          until has_next_page is false. All responses are local fixture data;
+          this tool never contacts GitHub.
+        input_schema:
+          type: object
+          properties:
+            owner:
+              type: string
+            repo:
+              type: string
+            state:
+              type: string
+              enum: [open, closed, all]
+            labels:
+              type: array
+              items:
+                type: string
+            page:
+              type: integer
+              minimum: 1
+          required: [owner, repo, state, labels, page]
+          additionalProperties: false
+        responses:
+          - match:
+              owner: Azure
+              repo: azure-rest-api-specs
+              state: open
+              labels: ["ARM API Reviewer agent"]
+              page: 1
+            return:
+              issues:
+                - number: 45947
+                  title: "ARM API Reviewer agent: review local unmerged specifications"
+                  html_url: https://github.com/Azure/azure-rest-api-specs/issues/45947
+                  state: open
+                  labels: ["ARM API Reviewer agent"]
+                  body: Tracks read-only review of local specifications before a PR exists.
+              has_next_page: true
+              next_page: 2
+          - match:
+              owner: Azure
+              repo: azure-rest-api-specs
+              state: open
+              labels: ["ARM API Reviewer agent"]
+              page: 2
+            return:
+              issues:
+                - number: 47390
+                  title: "ARM API Reviewer agent: reliably dispatch reviews after automatic queue entry"
+                  html_url: https://github.com/Azure/azure-rest-api-specs/issues/47390
+                  state: open
+                  labels: ["ARM API Reviewer agent"]
+                  body: >
+                    Tracks the reviewer not starting when Summarize Checks adds
+                    WaitForARMFeedback with GITHUB_TOKEN. Requests an explicit,
+                    reliable queue-to-review dispatch rather than another PR event.
+              has_next_page: false
+metrics:
+  - name: behavior_quality
+    weight: 1
+    threshold: 1
+    description: Complete the read-only lookup and stop at the exact duplicate.
+graders:
+  - type: tool_constraint
+    name: fixture_read_only_tools
+    config:
+      allow_only:
+        - tool: skill
+        - tool: view
+        - tool: read
+        - tool: glob
+        - tool: grep
+        - tool: rg
+        - tool: "mcp:issue_fixture-list_issues"
+tasks:
+  - tasks/mocked/*.yaml

@@ -17,8 +17,11 @@ graders:
     config:
       contains:
         - draft
+      regex_match:
+        - "(?i)(nothing (has been )?published|no issue (has been |was )?created|retained|kept|saved)"
   - type: text
     name: output_not_contains_2
     config:
       not_contains:
         - I created the issue
+        - Awaiting your approval

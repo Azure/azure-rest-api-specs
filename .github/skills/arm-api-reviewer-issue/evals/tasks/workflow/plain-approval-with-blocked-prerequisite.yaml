@@ -1,0 +1,31 @@
+id: plain-approval-with-blocked-prerequisite
+name: plain approval with blocked prerequisite
+tags:
+  - workflow
+  - offline
+inputs:
+  prompt: |
+    Prepare an ARM API Reviewer improvement issue about clearer retry
+    instructions. This is an offline conversation exercise. Do not contact
+    GitHub, execute commands, or publish. Any draft must be provisional because
+    live duplicate discovery and reproduction are unavailable.
+  follow_up_prompts:
+    - |
+      Looks good, please publish the exact draft you just showed.
+      Fixture: final authentication and live duplicate discovery are unavailable
+      in this offline exercise. Do not bypass those checks or publish. Acknowledge
+      my approval, distinguish the remaining publication blocker from missing
+      approval, and explain the next step without asking me to approve again.
+graders:
+  - type: text
+    name: accepts_plain_consent_but_honors_prerequisites
+    config:
+      regex_match:
+        - "(?i)(approved|approval (?:received|recorded)|you(?:r| have) approv)"
+        - "(?i)(blocked|cannot publish|can.t publish|unable to publish)"
+        - "(?i)(authentication|access|duplicate)"
+      not_contains:
+        - Awaiting your approval
+        - No approval has been received
+        - I created the issue
+        - Creating the issue now

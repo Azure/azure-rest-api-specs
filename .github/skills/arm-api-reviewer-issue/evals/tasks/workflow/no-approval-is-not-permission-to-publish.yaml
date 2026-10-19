@@ -18,6 +18,8 @@ graders:
     config:
       contains:
         - draft
+      regex_match:
+        - "(?i)(nothing.{0,30}(published|created|filed|submitted)|no issue.{0,30}(published|created|filed|submitted)|(not|haven.t|hasn.t).{0,30}(published|created|filed|submitted))"
   - type: text
     name: output_not_contains_2
     config:

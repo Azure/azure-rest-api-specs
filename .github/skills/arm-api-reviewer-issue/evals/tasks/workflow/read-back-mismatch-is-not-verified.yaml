@@ -1,0 +1,30 @@
+id: read-back-mismatch-is-not-verified
+name: read-back mismatch is not verified
+tags:
+  - workflow
+  - offline
+inputs:
+  prompt: |
+    Consider an offline verification scenario for the ARM API Reviewer issue
+    skill. No external calls, commands, or mutations are permitted. Treat all
+    supplied operation results as fixtures, not live GitHub evidence.
+  follow_up_prompts:
+    - |
+      Fixture: an approved creation returned
+      https://github.com/Azure/azure-rest-api-specs/issues/47396.
+      Read-back succeeded, but its body differs materially from the approved
+      draft and the required ARM API Reviewer agent label is missing. Explain
+      the result without silently editing, deleting, or recreating the issue.
+graders:
+  - type: text
+    name: reports_mismatch_without_silent_repair
+    config:
+      contains:
+        - https://github.com/Azure/azure-rest-api-specs/issues/47396
+      regex_match:
+        - "(?i)(mismatch|differs|different|discrepanc|does not match|doesn.t match)"
+        - "(?i)(missing|required).{0,50}label|label.{0,50}missing"
+        - "(?i)(verification.{0,40}(failed|mismatch|incomplete)|unverified|not.{0,30}verified)"
+      not_contains:
+        - Awaiting your approval
+        - I fixed the issue

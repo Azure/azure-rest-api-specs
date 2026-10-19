@@ -32,6 +32,8 @@ graders:
         - >-
           !/^#{3,6}[ \t]+/m.test(output)
         - >-
+          !/\u2014|\p{Extended_Pictographic}/u.test(output)
+        - >-
           (function() {
             var summary = output.split(/^## Summary[ \t]*$/m)[1];
             if (!summary) return false;
@@ -47,6 +49,19 @@ graders:
           path_pattern: 'references[\\/]workflow\.md$'
         - tool: view
           path_pattern: 'references[\\/]issue-template\.md$'
+  - type: text
+    name: main_chat_preview_has_a_clear_approval_handoff
+    config:
+      contains:
+        - Azure/azure-rest-api-specs
+        - ARM API Reviewer agent
+        - No issue has been created
+      regex_match:
+        - "(?i)(draft ready|ready for (your )?review|provisional draft)"
+        - "(?i)(awaiting|waiting for).{0,30}approval"
+        - "(?i)approve"
+        - "(?i)edit"
+        - "(?i)cancel"
   - type: text
     name: output_contains_1
     config:

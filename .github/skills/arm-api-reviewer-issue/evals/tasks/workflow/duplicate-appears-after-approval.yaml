@@ -1,0 +1,31 @@
+id: duplicate-appears-after-approval
+name: duplicate appears after approval
+tags:
+  - workflow
+  - offline
+inputs:
+  prompt: |
+    Prepare an ARM API Reviewer improvement issue about clearer retry
+    instructions. Offline exercise only: no external calls, commands, or
+    publication. Treat the report and draft as provisional.
+  follow_up_prompts:
+    - |
+      I approve the exact draft you showed.
+      Fixture: the mandatory final duplicate check has just returned an exact
+      matching open issue at
+      https://github.com/Azure/azure-rest-api-specs/issues/47390.
+      This is supplied fixture context, not live lookup evidence. Explain the
+      correct outcome without creating or changing any issue.
+graders:
+  - type: text
+    name: approval_does_not_override_new_duplicate
+    config:
+      contains:
+        - https://github.com/Azure/azure-rest-api-specs/issues/47390
+      regex_match:
+        - "(?i)(already|existing|duplicate|tracked|matching)"
+      not_contains:
+        - "## Summary"
+        - Creating the issue now
+        - I created the issue
+        - Awaiting your approval
