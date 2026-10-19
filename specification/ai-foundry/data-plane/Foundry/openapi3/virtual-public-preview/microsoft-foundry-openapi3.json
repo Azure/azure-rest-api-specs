@@ -50133,28 +50133,6 @@
           ]
         }
       },
-      "ModelRouterAllowedValuesConstraint": {
-        "type": "object",
-        "required": [
-          "allowed_values"
-        ],
-        "properties": {
-          "allowed_values": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "minItems": 1,
-            "description": "Values the router may choose; unknown or unsupported model-specific values cannot satisfy the constraint."
-          }
-        },
-        "description": "An unordered, nonempty domain of model-specific string values.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "ModelRouterControls=V1Preview"
-          ]
-        }
-      },
       "ModelRouterAttempt": {
         "type": "object",
         "required": [
@@ -50243,23 +50221,6 @@
             "$ref": "#/components/schemas/ModelRouterMode",
             "description": "The routing mode for the request."
           },
-          "require_parameters": {
-            "type": "boolean",
-            "description": "Whether full parameter support was required for this routing decision, when parameter planning was used."
-          },
-          "parameters": {
-            "type": "object",
-            "unevaluatedProperties": {},
-            "description": "Known settings submitted to the serving path, excluding tool definitions, schemas, and arbitrary extension bodies."
-          },
-          "parameter_status": {
-            "type": "string",
-            "description": "Describes the evidence for parameters. The value forwarded means submitted, not acknowledged as applied by the provider."
-          },
-          "catalog_version": {
-            "type": "string",
-            "description": "The capability-catalog revision used to plan this request."
-          },
           "session_affinity": {
             "$ref": "#/components/schemas/SessionAffinityDetails",
             "description": "Session affinity metadata for the routing decision. Omitted when affinity metadata is unavailable or the preview feature is not enabled."
@@ -50294,21 +50255,6 @@
           }
         ],
         "description": "The routing mode used by Model Router for the request.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "ModelRouterControls=V1Preview"
-          ]
-        }
-      },
-      "ModelRouterParameterConstraints": {
-        "type": "object",
-        "properties": {
-          "reasoning_effort": {
-            "$ref": "#/components/schemas/ModelRouterAllowedValuesConstraint",
-            "description": "Permitted reasoning efforts for the selected exact model revision and serving API.\nAn explicitly supplied native effort must belong to this domain.\nOtherwise the router prefers medium when permitted, then the first permitted value in ordinal string order.\nThis is deterministic selection, not a cross-model cost or token-budget guarantee."
-          }
-        },
-        "description": "Hard constraints on the settings Model Router may select.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "ModelRouterControls=V1Preview"
@@ -91081,22 +91027,13 @@
           },
           "require_parameters": {
             "type": "boolean",
-            "description": "When true, restricts routing to qualified model and serving API combinations that support\nall applicable request parameters. Returns 400 (Bad Request) when none qualify.\nDefaults to false when omitted. Explicit null and non-boolean values return 400.\nRequires the Foundry-Features: ModelRouterControls=V1Preview header.\nApplies only to qualified model, API, and adapter mappings, not every provider-native option.\nExplicit constraints remain hard requirements when false.\nThis setting is request-scoped; it does not introduce stored deployment defaults.",
+            "description": "When true, restricts routing to qualified model and serving API combinations that support\nall applicable request parameters. Returns 400 (Bad Request) when none qualify.\nDefaults to false when omitted. Explicit null and non-boolean values return 400.\nRequires the Foundry-Features: ModelRouterControls=V1Preview header.\nApplies only to qualified model, API, and adapter mappings, not every provider-native option.\nThis setting is request-scoped; it does not introduce stored deployment defaults.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "ModelRouterControls=V1Preview"
               ]
             },
             "default": false
-          },
-          "constraints": {
-            "$ref": "#/components/schemas/ModelRouterParameterConstraints",
-            "description": "Permitted routing choices. These are hard requirements even when require_parameters is false.\nRequires the parameter preview to be enabled for the subscription.",
-            "x-ms-foundry-meta": {
-              "conditional_previews": [
-                "ModelRouterControls=V1Preview"
-              ]
-            }
           }
         },
         "description": "Per-request configuration for Model Router inference calls.\nSupported on Model Router endpoints (deployed or instant if supported).\nReturns a 400 (Bad Request) error when the target is not a Model Router endpoint."

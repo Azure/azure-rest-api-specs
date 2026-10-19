@@ -99,39 +99,11 @@ namespace Azure.AI.Projects {
      * Defaults to false when omitted. Explicit null and non-boolean values return 400.
      * Requires the Foundry-Features: ModelRouterControls=V1Preview header.
      * Applies only to qualified model, API, and adapter mappings, not every provider-native option.
-     * Explicit constraints remain hard requirements when false.
      * This setting is request-scoped; it does not introduce stored deployment defaults.
      */
     // Naming aligns with OpenRouter's require_parameters; LiteLLM exposes the inverse as drop_params.
     @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
     require_parameters?: boolean = false;
-
-    /**
-     * Permitted routing choices. These are hard requirements even when require_parameters is false.
-     * Requires the parameter preview to be enabled for the subscription.
-     */
-    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
-    constraints?: ModelRouterParameterConstraints;
-  }
-
-  /** Hard constraints on the settings Model Router may select. */
-  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
-  model ModelRouterParameterConstraints {
-    /**
-     * Permitted reasoning efforts for the selected exact model revision and serving API.
-     * An explicitly supplied native effort must belong to this domain.
-     * Otherwise the router prefers medium when permitted, then the first permitted value in ordinal string order.
-     * This is deterministic selection, not a cross-model cost or token-budget guarantee.
-     */
-    reasoning_effort?: ModelRouterAllowedValuesConstraint;
-  }
-
-  /** An unordered, nonempty domain of model-specific string values. */
-  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
-  model ModelRouterAllowedValuesConstraint {
-    /** Values the router may choose; unknown or unsupported model-specific values cannot satisfy the constraint. */
-    @minItems(1)
-    allowed_values: string[];
   }
 
   /** Request settings that control Model Router session affinity. */
@@ -270,18 +242,6 @@ namespace Azure.AI.Projects {
   model ModelRouterDetails {
     /** The routing mode for the request. */
     mode: ModelRouterMode;
-
-    /** Whether full parameter support was required for this routing decision, when parameter planning was used. */
-    require_parameters?: boolean;
-
-    /** Known settings submitted to the serving path, excluding tool definitions, schemas, and arbitrary extension bodies. */
-    parameters?: Record<unknown>;
-
-    /** Describes the evidence for parameters. The value forwarded means submitted, not acknowledged as applied by the provider. */
-    parameter_status?: string;
-
-    /** The capability-catalog revision used to plan this request. */
-    catalog_version?: string;
 
     /** Session affinity metadata for the routing decision. Omitted when affinity metadata is unavailable or the preview feature is not enabled. */
     session_affinity?: SessionAffinityDetails;
