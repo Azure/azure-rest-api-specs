@@ -17,8 +17,10 @@ namespace Microsoft.Network;
  */
 @featureFile(Features.virtualNetwork)
 @parentResource(VerifierWorkspace)
-model ReachabilityAnalysisRun
-  is CommonProxyResourceInstance<ReachabilityAnalysisRunProperties, false> {
+model ReachabilityAnalysisRun is CommonProxyResourceInstance<
+  ReachabilityAnalysisRunProperties,
+  false
+> {
   /**
    * The name of the resource.
    */
