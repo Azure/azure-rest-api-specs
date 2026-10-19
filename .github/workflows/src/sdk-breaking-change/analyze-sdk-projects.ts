@@ -14,9 +14,14 @@ import {
   type TypeSpecMetadata,
 } from "@azure-tools/specs-shared/typespec-metadata";
 
-import type { AnalysisResult } from "./types.ts";
+import { MarkdownHeadingId, type AnalysisResult } from "./types.ts";
 import type { Core } from "../github.ts";
-import { escapeMarkdown, inlineCode } from "@azure-tools/specs-shared/markdown";
+import {
+  escapeMarkdown,
+  inlineCode,
+  renderMarkdownDoc,
+  section,
+} from "@azure-tools/specs-shared/markdown";
 
 export interface AnalyzeSdkProjectsOptions {
   localSdkRepositoryPath: string;
@@ -217,9 +222,12 @@ export async function analyzeSdkProjects({
         continue;
       }
       blocks.push(`**Analysis succeeded:**`);
-      blocks.push(
-        `**Breaking Changes:**\n\`\`\`\n${JSON.stringify(breakingChangesResponse, null, 2)}\n\`\`\``,
+      const breakingChangeSection = section(
+        "Breaking Changes",
+        `\`\`\`\n${JSON.stringify(breakingChangesResponse, null, 2)}\n\`\`\``,
+        `${packageName}-${MarkdownHeadingId.BreakingChange}`,
       );
+      blocks.push(renderMarkdownDoc(breakingChangeSection));
 
       analyzeResult.projects.push({
         typespecProject: typeSpecProjectPath,

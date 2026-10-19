@@ -79,3 +79,10 @@ export const MitigationResultSchema = z.object({
 });
 
 export type MitigationResult = z.infer<typeof MitigationResultSchema>;
+
+export const MarkdownHeadingId = Object.freeze({
+  BreakingChange: "breaking-change",
+  Mitigation: "mitigation",
+} as const);
+
+export type MarkdownHeadingId = (typeof MarkdownHeadingId)[keyof typeof MarkdownHeadingId];
