@@ -48,6 +48,14 @@ to an error if no reviewer has taken ownership. The marker remains because a
 failed HTTP response may still have created a reviewer run. Use an explicit retry
 after dispatch failure instead of automatically risking a duplicate. Review failures, cancellations,
 and incomplete results require an explicit retry; they cannot create an AI loop.
+If publishing pending fails after marker reservation, the same recovery guidance
+is logged and no reviewer is dispatched. Failure status descriptions point to
+`/arm-review`. Before retrying, check the Actions page or reviewer status link
+for a queued/running review: a timed-out dispatch may have been accepted.
+If another review is needed, use `/arm-review`, remove and re-add
+`WaitForARMFeedback`, or manually dispatch with the PR number and no `head_sha`.
+Keep `ARMInitialReviewRequested` in place; rerunning Summarize Checks is not a
+review retry.
 If a runner is lost after reserving but before dispatch, or activation rejects a
 stale head, use an explicit retry. There is no atomic GitHub transaction spanning
 status reservation, workflow dispatch, and label reads. A concurrent explicit

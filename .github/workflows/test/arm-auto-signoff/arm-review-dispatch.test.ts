@@ -189,8 +189,23 @@ describe("marker-based initial ARM review dispatch", () => {
     expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
   });
 
+  it("explains recovery when pending-status publication fails after marker reservation", async () => {
+    const { github, core, run } = fixture();
+    github.rest.repos.createCommitStatus.mockRejectedValueOnce(new Error("Pending write failed"));
+
+    await expect(run()).rejects.toThrow("Pending write failed");
+
+    expect(github.rest.issues.addLabels).toHaveBeenCalledOnce();
+    expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+    expect(core.error).toHaveBeenCalledWith(expect.stringContaining("retrying with /arm-review"));
+    expect(core.error).toHaveBeenCalledWith(
+      expect.stringContaining(`Keep ${ARM_INITIAL_REVIEW_REQUESTED_LABEL}`),
+    );
+  });
+
   it("keeps the marker on ambiguous dispatch failure and prevents automatic retries", async () => {
-    const { github, pull, run } = fixture();
+    const { github, core, pull, run } = fixture();
     github.rest.repos.getCombinedStatusForRef
       .mockResolvedValueOnce({ data: { statuses: [], total_count: 0 } })
       .mockResolvedValueOnce({
@@ -211,8 +226,11 @@ describe("marker-based initial ARM review dispatch", () => {
     expect(github.rest.repos.createCommitStatus).toHaveBeenLastCalledWith(
       expect.objectContaining({
         state: "error",
-        description: "Review incomplete: reviewer dispatch failed",
+        description: "Review incomplete: reviewer dispatch failed; retry with /arm-review",
       }),
+    );
+    expect(core.error).toHaveBeenCalledWith(
+      expect.stringContaining("Check for a queued or running reviewer before retrying"),
     );
     expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
     pull.labels.push({ name: ARM_INITIAL_REVIEW_REQUESTED_LABEL });
@@ -220,27 +238,30 @@ describe("marker-based initial ARM review dispatch", () => {
     expect(github.rest.actions.createWorkflowDispatch).toHaveBeenCalledOnce();
   });
 
-  it("does not overwrite a manual review when dispatch fails", async () => {
-    const { github, run } = fixture();
-    github.rest.repos.getCombinedStatusForRef
-      .mockResolvedValueOnce({ data: { statuses: [], total_count: 0 } })
-      .mockResolvedValueOnce({
-        data: {
-          statuses: [
-            {
-              context: "ARM Semantic Review",
-              state: "pending",
-              target_url: `${sourceUrl}/attempts/1`,
-              updated_at: "2026-01-01",
-            },
-          ],
-          total_count: 1,
-        },
-      });
-    github.rest.actions.createWorkflowDispatch.mockRejectedValue(new Error("Timeout"));
-    await expect(run()).rejects.toThrow("Timeout");
-    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledOnce();
-  });
+  it.each(["pending", "success", "failure", "error"])(
+    "does not overwrite a manual review's %s status when dispatch fails",
+    async (state) => {
+      const { github, run } = fixture();
+      github.rest.repos.getCombinedStatusForRef
+        .mockResolvedValueOnce({ data: { statuses: [], total_count: 0 } })
+        .mockResolvedValueOnce({
+          data: {
+            statuses: [
+              {
+                context: "ARM Semantic Review",
+                state,
+                target_url: `${sourceUrl}/attempts/1`,
+                updated_at: "2026-01-01",
+              },
+            ],
+            total_count: 1,
+          },
+        });
+      github.rest.actions.createWorkflowDispatch.mockRejectedValue(new Error("Timeout"));
+      await expect(run()).rejects.toThrow("Timeout");
+      expect(github.rest.repos.createCommitStatus).toHaveBeenCalledOnce();
+    },
+  );
 
   it("surfaces both dispatch and cleanup errors", async () => {
     const { github, run } = fixture();

@@ -7,7 +7,7 @@ import {
 } from "./arm-semantic-review.ts";
 
 const REVIEW_WORKFLOW = "arm-api-review.lock.yml";
-const DISPATCH_FAILED = "Review incomplete: reviewer dispatch failed";
+const DISPATCH_FAILED = "Review incomplete: reviewer dispatch failed; retry with /arm-review";
 export const ARM_INITIAL_REVIEW_REQUESTED_LABEL = "ARMInitialReviewRequested";
 
 export default async function dispatchInitialArmReview({
@@ -107,12 +107,12 @@ export async function dispatchArmReview(
     context: ARM_SEMANTIC_REVIEW_STATUS,
     target_url: sourceUrl,
   };
-  await github.rest.repos.createCommitStatus({
-    ...status,
-    state: "pending",
-    description: "ARM API semantic review is queued",
-  });
   try {
+    await github.rest.repos.createCommitStatus({
+      ...status,
+      state: "pending",
+      description: "ARM API semantic review is queued",
+    });
     await github.rest.actions.createWorkflowDispatch({
       owner,
       repo,
@@ -122,7 +122,12 @@ export async function dispatchArmReview(
     });
   } catch (error) {
     core.error(
-      `ARM reviewer dispatch failed: ${error instanceof Error ? error.message : String(error)}`,
+      `ARM reviewer handoff failed for PR #${issueNumber}: ` +
+        `${error instanceof Error ? error.message : String(error)}. ` +
+        `Keep ${ARM_INITIAL_REVIEW_REQUESTED_LABEL} to prevent duplicate automatic requests. ` +
+        `Check for a queued or running reviewer before retrying with /arm-review, ` +
+        `removing and re-adding WaitForARMFeedback, or manually dispatching ${REVIEW_WORKFLOW} ` +
+        `with the PR number and no head_sha.`,
     );
     // A timeout may have accepted the dispatch. Do not overwrite a review that has already started.
     try {
