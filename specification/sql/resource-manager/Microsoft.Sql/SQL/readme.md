@@ -4020,11 +4020,11 @@ directive:
     reason: This warning gives many positives for existing APIs that cannot be changed.
   - suppress: DescriptionMustNotBeNodeName
     from: preview/2026-11-01-preview/serverAzureAdAdministrators.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}/enable"].post.parameters[?(@.name == "administratorName")]["x-ms-enum"].values[?(@.name == "ActiveDirectory")].description
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}/enable"].post.parameters[4]["x-ms-enum"].values[0].description
     reason: The enable action reuses the existing AdministratorName union. Its enum-member description is inherited; changing the shared union would rewrite earlier published API versions. This exception applies only to the November preview action.
   - suppress: DescriptionMustNotBeNodeName
     from: preview/2026-11-01-preview/serverAzureAdAdministrators.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}/disable"].post.parameters[?(@.name == "administratorName")]["x-ms-enum"].values[?(@.name == "ActiveDirectory")].description
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}/disable"].post.parameters[4]["x-ms-enum"].values[0].description
     reason: The disable action reuses the existing AdministratorName union. Its enum-member description is inherited; changing the shared union would rewrite earlier published API versions. This exception applies only to the November preview action.
 ```
 ## Suppressions
