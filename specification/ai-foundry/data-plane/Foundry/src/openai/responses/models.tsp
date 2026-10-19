@@ -131,7 +131,7 @@ namespace Azure.AI.Projects {
     /**
      * Permitted reasoning efforts for the selected exact model revision and serving API.
      * An explicitly supplied native effort must belong to this domain.
-     * Otherwise the router prefers medium when permitted, then the ordinally first permitted value.
+     * Otherwise the router prefers medium when permitted, then the first permitted value in ordinal string order.
      * This is deterministic selection, not a cross-model cost or token-budget guarantee.
      */
     reasoning_effort?: ModelRouterAllowedValuesConstraint;

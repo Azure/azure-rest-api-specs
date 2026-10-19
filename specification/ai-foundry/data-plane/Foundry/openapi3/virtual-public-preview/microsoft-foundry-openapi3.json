@@ -50305,7 +50305,7 @@
         "properties": {
           "reasoning_effort": {
             "$ref": "#/components/schemas/ModelRouterAllowedValuesConstraint",
-            "description": "Permitted reasoning efforts for the selected exact model revision and serving API.\nAn explicitly supplied native effort must belong to this domain.\nOtherwise the router prefers medium when permitted, then the ordinally first permitted value.\nThis is deterministic selection, not a cross-model cost or token-budget guarantee."
+            "description": "Permitted reasoning efforts for the selected exact model revision and serving API.\nAn explicitly supplied native effort must belong to this domain.\nOtherwise the router prefers medium when permitted, then the first permitted value in ordinal string order.\nThis is deterministic selection, not a cross-model cost or token-budget guarantee."
           }
         },
         "description": "Hard constraints on the settings Model Router may select.",
