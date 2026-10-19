@@ -3,6 +3,16 @@
 name: ARM Universal Auto SignOff
 
 on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR number from the trusted reviewer correlation"
+        required: true
+        type: string
+      head_sha:
+        description: "Reviewed PR head SHA"
+        required: true
+        type: string
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
   # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
   # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
@@ -27,7 +37,7 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
 permissions:
   # actions.listWorkflowRunsForRepo
   # actions.listWorkflowRunArtifacts
-  actions: read
+  actions: write # read correlation artifacts and dispatch Update Labels
   # default
   contents: read
   # issues.listLabelsOnIssue
@@ -42,6 +52,7 @@ jobs:
     name: ARM Universal Auto SignOff
     # Ignore skipped/cancelled parents. For open PRs, only handle changes that affect eligibility.
     if: |
+      github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'workflow_run' &&
        github.event.workflow_run.conclusion != 'skipped' &&
        github.event.workflow_run.conclusion != 'cancelled') ||
@@ -127,7 +138,6 @@ jobs:
       # The label updater uses these trusted artifacts to associate this workflow run with its PR.
       - if: |
           always() &&
-          github.event_name == 'workflow_run' &&
           fromJson(steps.get-label-action.outputs.result).headSha
         name: Upload artifact with head SHA
         uses: ./.github/actions/add-empty-artifact
@@ -137,10 +147,25 @@ jobs:
 
       - if: |
           always() &&
-          github.event_name == 'workflow_run' &&
           fromJson(steps.get-label-action.outputs.result).issueNumber > 0
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
         with:
           name: "issue-number"
           value: "${{ fromJson(steps.get-label-action.outputs.result).issueNumber }}"
+
+      - name: Dispatch Update Labels
+        if: |
+          contains(toJson(fromJson(steps.get-label-action.outputs.result).labelActions), '"add"') ||
+          contains(toJson(fromJson(steps.get-label-action.outputs.result).labelActions), '"remove"')
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const ref = context.payload.repository?.default_branch;
+            if (!ref) throw new Error("Update Labels dispatch requires the default branch");
+            await github.rest.actions.createWorkflowDispatch({
+              ...context.repo,
+              workflow_id: "update-labels.yaml",
+              ref,
+              inputs: { source_run_id: String(context.runId) },
+            });

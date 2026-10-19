@@ -1,12 +1,50 @@
 import { isFullGitSha } from "../../shared/src/git.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
-import { extractInputs } from "../src/context.ts";
-import type { Core, GitHub, GitHubScriptArgs } from "./github.ts";
+import { extractInputs, getWorkflowRunArtifactInputs } from "../src/context.ts";
+import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "./github.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff/arm-auto-signoff-labels.ts";
 import { getLabelActionImpl } from "./arm-auto-signoff/arm-universal-auto-signoff.ts";
 import { LabelAction } from "./label.ts";
 
 export default async function updateLabels({ github, context, core }: GitHubScriptArgs) {
+  if (context.eventName === "workflow_dispatch") {
+    const value: unknown = (context.payload as WebhookEvent<"workflow-dispatch">).inputs
+      ?.source_run_id;
+    const runId = Number(value);
+    if (typeof value !== "string" || !/^[1-9]\d*$/.test(value) || !Number.isSafeInteger(runId)) {
+      throw new Error("Update Labels dispatch requires a positive source run ID");
+    }
+    const { owner, repo } = context.repo;
+    const { data: run } = await github.rest.actions.getWorkflowRun({ owner, repo, run_id: runId });
+    // Never accept artifacts produced by pull_request code or an arbitrary workflow.
+    if (
+      run.path !== ".github/workflows/arm-universal-auto-signoff.yaml" ||
+      !["workflow_dispatch", "workflow_run", "pull_request_target"].includes(run.event) ||
+      (run.status === "completed" && run.conclusion !== "success")
+    ) {
+      throw new Error("Update Labels dispatch source must be a trusted Universal signoff run");
+    }
+    const { headSha, issueNumber } = await getWorkflowRunArtifactInputs({
+      github,
+      core,
+      owner,
+      repo,
+      runId,
+    });
+    if (!isFullGitSha(headSha) || !Number.isSafeInteger(issueNumber) || issueNumber <= 0) {
+      throw new Error("Universal signoff run is missing trusted PR/head correlation");
+    }
+    await updateLabelsImpl({
+      owner,
+      repo,
+      head_sha: headSha,
+      issue_number: issueNumber,
+      run_id: runId,
+      github,
+      core,
+    });
+    return;
+  }
   const { owner, repo, head_sha, issue_number, run_id } = await extractInputs(
     github,
     context,

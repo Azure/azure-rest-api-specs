@@ -441,30 +441,28 @@ describe("ARM Universal Auto SignOff workflow", () => {
     expect(workflow).not.toContain("ARMAutoSignedOff-Test");
   });
 
-  it("only reads, and emits a label artifact for every managed label", async () => {
+  it("does not write labels or statuses, and emits an artifact for every managed label", async () => {
     const workflow = await readWorkflow("arm-universal-auto-signoff.yaml");
 
     expect(workflow).toContain("issues: read");
     expect(workflow).toContain("pull-requests: read");
-    expect(workflow).not.toMatch(/: write/);
+    expect(workflow).toContain("actions: write");
+    expect(workflow).toContain("statuses: read");
+    expect(workflow).not.toContain("pull-requests: write");
     for (const label of Object.values(ArmAutoSignoffLabel)) {
       expect(workflow).toContain(`name: Upload artifact for ${label} label`);
     }
   });
 
-  it("publishes correlation artifacts only for workflow_run triggers", async () => {
+  it("publishes correlation artifacts for every event before explicitly dispatching Update Labels", async () => {
     const workflow = await readWorkflow("arm-universal-auto-signoff.yaml");
     const headArtifact = workflow.indexOf("name: Upload artifact with head SHA");
     const issueArtifact = workflow.indexOf("name: Upload artifact with issue number");
 
     expect(headArtifact).toBeGreaterThan(-1);
     expect(issueArtifact).toBeGreaterThan(headArtifact);
-    expect(workflow.slice(headArtifact - 180, headArtifact)).toContain(
-      "github.event_name == 'workflow_run'",
-    );
-    expect(workflow.slice(issueArtifact - 180, issueArtifact)).toContain(
-      "github.event_name == 'workflow_run'",
-    );
+    expect(workflow.indexOf("name: Dispatch Update Labels")).toBeGreaterThan(issueArtifact);
+    expect(workflow).toContain("inputs: { source_run_id: String(context.runId) }");
   });
 
   it("is applied by Update Labels, and the legacy workflow is gone", async () => {

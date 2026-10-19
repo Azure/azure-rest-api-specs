@@ -84,9 +84,11 @@ arm-api-review (reviewer)
   agent                        review the PR, request record_arm_semantic_review
   record_arm_semantic_review   validate the result, post SUCCESS / FAILURE / ERROR
   conclusion                   if no result was posted, turn this run's PENDING into ERROR
+                               explicitly dispatch Universal using trusted PR/SHA artifacts
 
 arm-universal-auto-signoff     re-check the PR is open at the evaluated head, read labels and the
                                newest status per context on that SHA, decide the label actions
+                               upload actions/correlation, explicitly dispatch Update Labels
 update-labels                  re-evaluate ARM policy/status/head/ownership, apply current actions
                                (then Summarize Checks runs)
 ```
@@ -100,8 +102,26 @@ status reads as a Universal evaluation. GitHub does not support atomic
 compare-and-set for labels, so changes after the final read and partial API writes
 are still possible; a subsequent evaluation reconciles automation-owned labels.
 
+The explicit Reviewer -> Universal -> Update Labels handoffs do not depend on
+GitHub delivering more `workflow_run` events after a long upstream chain. Both
+dispatches use `GITHUB_TOKEN`, the trusted default branch, and minimal identity
+inputs; no App credentials are needed. Existing completion/event triggers remain
+fallbacks. Duplicate evaluations are expected and revalidate the current state.
+The Update Labels dispatch validates that its source run is the trusted Universal
+workflow (never a `pull_request` run), then reads its uploaded correlation and
+label artifacts. The Universal run can still be finishing when the dispatched
+consumer starts; all required artifacts are uploaded before dispatch.
+
+Dispatch errors fail the handoff step, without changing a valid semantic result.
+Retry a missed signoff evaluation by manually dispatching Universal with the
+reviewed PR number and SHA, rather than re-running AI. Update Labels can be
+manually dispatched with that Universal run's `source_run_id`. End-to-end fork
+validation must demonstrate automatic review -> Universal -> approval labels
+without an unrelated PR/check event; local tests do not establish GitHub's mixed
+workflow-chain delivery behavior.
+
 The reviewer never adds or removes signoff labels. Starting a re-review does not itself revoke
-auto-signoff. Universal re-evaluates when the review completes or another configured event occurs;
+auto-signoff. Universal re-evaluates after trusted review finalization or another configured event;
 if it evaluates while required statuses are pending or missing, it requests revocation.
 
 The model proposes; trusted code validates and publishes. Any doubt ends as "not Passed".
@@ -150,10 +170,11 @@ no longer the PR head is never read for the new head.
 
 ## Files
 
-| File                                                                     | Role                                                                |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------- |
-| [arm-semantic-review.ts](./arm-semantic-review.ts)                       | Pure policy: validate the result, map it to a status, read statuses |
-| [arm-semantic-review-workflow.ts](./arm-semantic-review-workflow.ts)     | Publish the status; resolve an unpublished one                      |
-| [arm-universal-auto-signoff.ts](./arm-universal-auto-signoff.ts)         | Read statuses and labels, decide label actions                      |
-| [arm-api-review.md](../../arm-api-review.md)                             | Reviewer workflow source (the `.lock.yml` is generated from it)     |
-| [arm-universal-auto-signoff.yaml](../../arm-universal-auto-signoff.yaml) | Universal workflow                                                  |
+| File                                                                     | Role                                                                 |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| [arm-semantic-review.ts](./arm-semantic-review.ts)                       | Pure policy: validate the result, map it to a status, read statuses  |
+| [arm-semantic-review-workflow.ts](./arm-semantic-review-workflow.ts)     | Publish the status; resolve an unpublished one                       |
+| [arm-signoff-dispatch.ts](./arm-signoff-dispatch.ts)                     | Explicit reviewer-to-Universal handoff and validated dispatch inputs |
+| [arm-universal-auto-signoff.ts](./arm-universal-auto-signoff.ts)         | Read statuses and labels, decide label actions                       |
+| [arm-api-review.md](../../arm-api-review.md)                             | Reviewer workflow source (the `.lock.yml` is generated from it)      |
+| [arm-universal-auto-signoff.yaml](../../arm-universal-auto-signoff.yaml) | Universal workflow                                                   |

@@ -208,11 +208,11 @@ jobs:
   # keeps a failure here from blocking gh-aw's own failure reporting.
   conclusion:
     permissions:
+      actions: write
       contents: read
       statuses: write
     pre-steps:
       - uses: actions/checkout@v7
-        if: needs.record_arm_semantic_review.result != 'success'
         continue-on-error: true
         with:
           persist-credentials: false
@@ -229,6 +229,14 @@ jobs:
             const { finalizeUnpublishedArmSemanticReview } =
               await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts');
             return await finalizeUnpublishedArmSemanticReview({ github, context, core });
+      - name: Dispatch Universal ARM signoff
+        if: always()
+        uses: actions/github-script@v9.0.0
+        with:
+          script: |
+            const { dispatchUniversalSignoff } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-signoff-dispatch.ts');
+            await dispatchUniversalSignoff({ github, context, core });
 # Gate at the trigger level so the expensive agent job never starts for
 # ineligible events. Label / draft / comment gating that used to live in a
 # custom github-script step is expressed here declaratively; the remaining
@@ -1377,7 +1385,7 @@ Trusted workflow artifacts attach the pull request, head SHA, and run attempt;
 never reproduce those correlation values in this model-generated result. The
 trusted `record_arm_semantic_review` job validates the item and publishes the
 head-bound status inside this reviewer run. Universal Auto-Signoff consumes the
-status only after the entire reviewer workflow completes.
+status after trusted result publication or finalization.
 
 The final status is:
 
