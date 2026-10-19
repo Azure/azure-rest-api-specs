@@ -165,7 +165,6 @@ namespace Azure.AI.Projects {
 
   // Change types to avoid serialization as BinaryData
   @@alternateType(OpenAI.RealtimeResponse.metadata, Record<unknown>);
-  @@alternateType(OpenAI.MCPTool.allowed_tools, OpenAI.MCPToolFilter | null);
 
   // Rename Time properties for compliance
   @@clientName(
