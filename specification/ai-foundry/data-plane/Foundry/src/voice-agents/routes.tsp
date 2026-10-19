@@ -95,8 +95,14 @@ interface VoiceAgentWebSocket {
        * URL-encoded as this query parameter. Supplied values override definition defaults when rendering the
        * agent's instructions and session-start greeting for this session only. The decoded value must be a JSON
        * object no larger than 32 KiB with a maximum nesting depth of 16.
+       * Mutually exclusive with `structured_input`; sending both returns `400 Bad Request`.
        */
       @query structured_inputs?: string;
+
+      #deprecated "Use structured_inputs instead."
+      @doc("Legacy alias for structured_inputs with the same encoding and limits. Sending both names returns 400 Bad Request.")
+      @query
+      structured_input?: string;
 
       /** Selects a specific version of the voice agent for this session. */
       @query("x-agent-version-override") agent_version_override?: string;
@@ -147,8 +153,13 @@ interface VoiceAgentLiveWebSocket {
       /** Agent version to connect to. */
       @query("x-agent-version-override") agent_version_override?: string;
 
-      /** URL-encoded JSON values for instruction and greeting templates. */
+      /** URL-encoded JSON values for instruction and greeting templates. Mutually exclusive with structured_input; sending both returns 400 Bad Request. */
       @query structured_inputs?: string;
+
+      #deprecated "Use structured_inputs instead."
+      @doc("Legacy alias for structured_inputs with the same encoding and limits. Sending both names returns 400 Bad Request.")
+      @query
+      structured_input?: string;
 
       /** Overrides Foundry conversation and audio persistence for this session. */
       @query store?: boolean;
