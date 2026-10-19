@@ -6315,6 +6315,13 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 
+// Keep both regional WAF manifest paths and the generated resource identifier aligned.
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayWafDynamicManifestLocationParameter.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
 @@clientName(
   Microsoft.Network.PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServices,
   "GetAutoApprovedPrivateLinkServicesPrivateLinkServices",
