@@ -1,6 +1,6 @@
-id: pr.dependabot-actions-auto-merge
+id: pr.dependabot-auto-merge
 name: GitOps.PullRequestIssueManagement
-description: Automatically approve and merge Dependabot GitHub Actions updates
+description: Automatically approve and merge Dependabot updates
 owner:
 resource: repository
 disabled: false
@@ -8,23 +8,21 @@ where:
 configuration:
   resourceManagementConfiguration:
     eventResponderTasks:
-      - description: Approve and auto-merge Dependabot GitHub Actions updates
+      - description: Approve and auto-merge Dependabot updates
         if:
           - payloadType: Pull_Request
           - isAction:
               action: Opened
-          - hasLabel:
-              label: auto-merge
-          - hasLabel:
-              label: github_actions
           - targetsBranch:
               branch: main
           - isActivitySender:
               user: dependabot[bot]
               issueAuthor: true
         then:
+          - addLabel:
+              label: auto-merge
           - approvePullRequest:
-              comment: "Approved automatically for a Dependabot GitHub Actions update."
+              comment: "Approved automatically for a Dependabot update."
           - enableAutoMerge:
               mergeMethod: Squash
 
