@@ -111,14 +111,12 @@ The model proposes; trusted code validates and publishes. Any doubt ends as "not
 ```text
 ARM Semantic Review passed for the current PR head
 AND Swagger LintDiff and Swagger Avocado passed for the current PR head
-AND the PR is not a draft
 AND ARMReview present, NotReadyForARMReview absent
 AND no ARMChangesRequested, ARMManualSignoffRequired, or unapproved SuppressionReviewRequired
 = add ARMSignedOff + ARMAutoSignedOff
 ```
 
 Otherwise an automation-owned `ARMSignedOff` and its marker are removed.
-Draft-state transitions re-evaluate signoff but do not directly trigger AI review.
 
 ## Ownership
 
