@@ -91005,7 +91005,7 @@ components:
       properties:
         variable_name:
           $ref: '#/components/schemas/VoiceAgentOutputReference'
-          description: The preferred bare variable name, such as `verification_code`. Successful private collection creates the variable; an occupied name receives a unique suffix, such as `_2`, without overwriting existing values. Completion reports the actual name through `output_ref`. Cancellation, timeout, failure and non-private collection do not create a variable.
+          description: The preferred bare variable name, such as `verification_code`. Successful private collection creates the variable; names used by ordinary session inputs, initialized private variables or earlier private collections are occupied. An occupied name receives a unique suffix, such as `_2`, without overwriting existing values. Completion reports the actual name through `output_ref`. Cancellation, timeout, failure and non-private collection do not create a variable.
       description: Creates a session-local private variable for a successful collection result.
       x-ms-foundry-meta:
         required_previews:

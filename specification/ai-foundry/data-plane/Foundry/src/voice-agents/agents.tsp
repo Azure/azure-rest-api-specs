@@ -439,7 +439,7 @@ scalar VoiceAgentOutputReference extends string;
 @doc("Creates a session-local private variable for a successful collection result.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentCollectionOutputBindings {
-  @doc("The preferred bare variable name, such as `verification_code`. Successful private collection creates the variable; an occupied name receives a unique suffix, such as `_2`, without overwriting existing values. Completion reports the actual name through `output_ref`. Cancellation, timeout, failure and non-private collection do not create a variable.")
+  @doc("The preferred bare variable name, such as `verification_code`. Successful private collection creates the variable; names used by ordinary session inputs, initialized private variables or earlier private collections are occupied. An occupied name receives a unique suffix, such as `_2`, without overwriting existing values. Completion reports the actual name through `output_ref`. Cancellation, timeout, failure and non-private collection do not create a variable.")
   variable_name: VoiceAgentOutputReference;
 }
 
