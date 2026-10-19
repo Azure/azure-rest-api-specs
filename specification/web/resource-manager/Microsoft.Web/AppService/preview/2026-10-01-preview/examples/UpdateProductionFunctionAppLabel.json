@@ -7,7 +7,7 @@
     "api-version": "2026-10-01-preview",
     "resource": {
       "properties": {
-        "targetVersionResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-02"
+        "targetVersionName": "release-2026-10-02"
       }
     }
   },
@@ -18,20 +18,16 @@
         "name": "production",
         "type": "Microsoft.Web/sites/functionAppLabels",
         "properties": {
-          "activeVersionResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-02",
+          "activeVersionName": "release-2026-10-02",
           "provisioningState": "Succeeded"
         }
       }
     },
-    "201": {
-      "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppLabels/production",
-        "name": "production",
-        "type": "Microsoft.Web/sites/functionAppLabels",
-        "properties": {
-          "activeVersionResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-02",
-          "provisioningState": "Succeeded"
-        }
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppOperationResults/11111111-1111-1111-1111-111111111111?api-version=2026-10-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppLabels/production?api-version=2026-10-01-preview",
+        "Retry-After": "10"
       }
     }
   },

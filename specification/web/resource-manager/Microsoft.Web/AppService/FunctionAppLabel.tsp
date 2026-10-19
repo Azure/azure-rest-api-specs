@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 import "./Site.tsp";
+import "./FunctionAppVersion.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -18,13 +19,13 @@ namespace Microsoft.Web;
 @added(Versions.v2026_10_01_preview)
 @doc("The properties of a Function App label.")
 model FunctionAppLabelProperties {
-  /** The resource ID of the Function App version to assign to this label. */
+  /** The name of the retained Function App version to assign, within this Function App. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  targetVersionResourceId: string;
+  targetVersionName: string;
 
-  /** The resource ID of the Function App version currently assigned to this label. */
+  /** The committed name of the Function App version currently assigned to this label. */
   @visibility(Lifecycle.Read)
-  activeVersionResourceId?: string;
+  activeVersionName?: string;
 
   /** The status of the resource provisioning operation. */
   @visibility(Lifecycle.Read)
@@ -52,16 +53,43 @@ interface FunctionAppLabels {
   /** Gets a Function App label. The preview supports only the production label. */
   get is ArmResourceRead<FunctionAppLabel>;
 
-  /** Assigns a retained Function App version to a Function App label. The preview supports only the production label. */
+  /**
+   * Assigns a retained Function App version to production, including rollback.
+   * Completion means the serving pointer and invalidation generation are durable,
+   * not that all previous workers have drained. Assigning the same target is a no-op.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The label-assignment contract returns 202 with an empty body and a site-scoped status monitor, followed by GET of the final resource."
+  @Azure.Core.pollingOperation(FunctionAppOperationResults.get)
+  @Azure.Core.finalOperation(FunctionAppLabels.get)
+  @Azure.Core.useFinalStateVia("location")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FunctionAppLabel,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = FunctionAppLabel> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response =
+      | ArmResponse<FunctionAppLabel>
+      | ArmAcceptedLroResponse<
+          "Production assignment accepted.",
+          ArmCombinedLroHeaders<
+            FunctionAppOperationResult,
+            FunctionAppLabel,
+            string
+          > &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
-  /** Lists Function App labels for a site. */
-  listBySite is ArmResourceListByParent<FunctionAppLabel>;
-
-  /** Clears a Function App label assignment. Deleting production safely restores legacy serving authority. */
-  delete is ArmResourceDeleteSync<FunctionAppLabel>;
+  /**
+   * Restores equivalent legacy serving state before deleting the production label
+   * and re-enabling direct publishing. Retained versions are not deleted.
+   */
+  @Azure.Core.pollingOperation(FunctionAppOperationResults.get)
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    FunctionAppLabel,
+    LroHeaders = ArmCombinedLroHeaders<
+      FunctionAppOperationResult,
+      void,
+      string
+    > &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
