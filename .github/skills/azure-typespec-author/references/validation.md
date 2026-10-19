@@ -4,11 +4,11 @@
 
 Run **5.1 General Validation** for every case; run **5.2 Case-Specific Validation** only when the case identified in [intake.md](intake.md) §2.1 matches.
 
-| Sub-step | Action                                        | When                    |
-| -------- | --------------------------------------------- | ----------------------- |
-| 5.1.1    | `azure-sdk-mcp:azsdk_run_typespec_validation` | Always                  |
-| 5.1.2    | `tsp compile .`                               | Always                  |
-| 5.2      | Case-specific validation                      | Case matches (see §5.2) |
+| Sub-step | Action                                        | When                       |
+| -------- | --------------------------------------------- | -------------------------- |
+| 5.1.1    | `azure-sdk-mcp:azsdk_run_typespec_validation` | When the tool is available |
+| 5.1.2    | `tsp compile .`                               | Always                     |
+| 5.2      | Case-specific validation                      | Case matches (see §5.2)    |
 
 ---
 
@@ -16,13 +16,22 @@ Run **5.1 General Validation** for every case; run **5.2 Case-Specific Validatio
 
 ### 5.1.1: TypeSpec Validation
 
-Invoke `azure-sdk-mcp:azsdk_run_typespec_validation` with the project root. On failure → fix → re-run. Limit to 3 retry attempts; if still failing after 3 retries, stop and report the remaining errors to the user.
+When `azure-sdk-mcp:azsdk_run_typespec_validation` is available, invoke it with the
+project root. On validation errors → fix → re-run. Limit to 3 retry attempts; if it
+still reports errors after 3 retries, stop and report the remaining errors to the
+user.
+
+If the tool is not exposed in the current environment, record that 5.1.1 was skipped
+because validation MCP was unavailable and continue directly to 5.1.2. Do not treat
+validation errors, authentication failures, timeouts, or other invocation failures as
+tool unavailability.
 
 ### 5.1.2: Compile
 
 Run `tsp compile .` from the project root. Verify `.json` output under the directory specified by the `@azure-tools/typespec-autorest` entry in the project's tspconfig.yaml. Fix compile errors if any.
 
-> 5.1.1 checks for errors/warnings; 5.1.2 generates the OpenAPI output. Both are required.
+> 5.1.1 checks for errors/warnings when validation MCP is available; 5.1.2 generates
+> the OpenAPI output and is always required.
 
 ---
 
