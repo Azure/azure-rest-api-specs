@@ -30,6 +30,38 @@ model ServerAzureADAdministrator
   >;
 }
 
+/**
+ * A server administrator action with SQL server-name validation.
+ * @template Description The description of the accepted response.
+ */
+@autoRoute
+@armResourceAction(ServerAzureADAdministrator)
+@post
+op ServerAzureAdAdministratorAction<Description extends valueof string>(
+  ...OmitProperties<
+    ResourceInstanceParameters<ServerAzureADAdministrator>,
+    "serverName" | "administratorName"
+  >,
+
+  /** The name of the server. */
+  @path
+  @segment("servers")
+  @pattern("^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$")
+  serverName: string,
+
+  ...PickProperties<
+    ResourceInstanceParameters<ServerAzureADAdministrator>,
+    "administratorName"
+  >,
+): ServerAzureAdAdministratorActionResponse<Description> | ErrorResponse;
+
+alias ServerAzureAdAdministratorActionResponse<Description extends valueof string> =
+  | ArmResponse<ServerAzureADAdministrator>
+  | ArmAcceptedLroResponse<
+      Description = Description,
+      LroHeaders = ArmLroLocationHeader<FinalResult = ServerAzureADAdministrator>
+    >;
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
@@ -81,34 +113,14 @@ interface ServerAzureADAdministrators {
    */
   @added(Versions.v2026_11_01_preview)
   @action("enable")
-  enable is ArmResourceActionAsyncBase<
-    ServerAzureADAdministrator,
-    void,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ServerAzureADAdministrator>,
-    Response =
-      | ArmResponse<ServerAzureADAdministrator>
-      | ArmAcceptedLroResponse<
-          Description = "Enabling the Azure Active Directory administrator is in progress.",
-          LroHeaders = ArmLroLocationHeader<FinalResult = ServerAzureADAdministrator>
-        >
-  >;
+  enable is ServerAzureAdAdministratorAction<"Enabling the Azure Active Directory administrator is in progress.">;
 
   /**
    * Disables the Azure Active Directory administrator on the server.
    */
   @added(Versions.v2026_11_01_preview)
   @action("disable")
-  disable is ArmResourceActionAsyncBase<
-    ServerAzureADAdministrator,
-    void,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ServerAzureADAdministrator>,
-    Response =
-      | ArmResponse<ServerAzureADAdministrator>
-      | ArmAcceptedLroResponse<
-          Description = "Disabling the Azure Active Directory administrator is in progress.",
-          LroHeaders = ArmLroLocationHeader<FinalResult = ServerAzureADAdministrator>
-        >
-  >;
+  disable is ServerAzureAdAdministratorAction<"Disabling the Azure Active Directory administrator is in progress.">;
 }
 
 @@doc(
