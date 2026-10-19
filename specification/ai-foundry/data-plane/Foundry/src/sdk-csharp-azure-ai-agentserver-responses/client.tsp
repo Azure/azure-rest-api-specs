@@ -15,7 +15,7 @@ namespace OpenAI {
 @clientNamespace("Azure.AI.AgentServer.Responses.Models")
 namespace Azure.AI.Projects {
   // The single-value `ResponseObjectType` union is otherwise emitted as a fixed enum that the emitter
-  // initialises with a string literal (`ResponseObjectType Object { get; } = "response"`), which does not compile.
+  // initializes with a string literal (`ResponseObjectType Object { get; } = "response"`), which does not compile.
   @@alternateType(Azure.AI.Projects.ResponseObjectType, string, "csharp");
 
   // ============================================================================
