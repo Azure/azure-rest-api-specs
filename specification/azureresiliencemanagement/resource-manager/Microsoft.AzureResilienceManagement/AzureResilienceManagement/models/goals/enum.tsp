@@ -16,10 +16,10 @@ namespace Microsoft.AzureResilienceManagement;
 union ExclusionState {
   string,
 
-  @doc("Resource is not included in the goals.")
+  @doc("The resource is excluded from the goals.")
   Excluded: "Excluded",
 
-  @doc("Resource is excluded from the goals.")
+  @doc("The resource is included in the goals.")
   Included: "Included",
 }
 

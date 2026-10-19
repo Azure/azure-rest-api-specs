@@ -166,12 +166,12 @@ namespace Common {
 @@clientName(
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "ArmProxyResource",
-  "javascript"
+  "javascript,python"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.Resource,
   "ArmResource",
-  "javascript"
+  "javascript,python"
 );
 
 // Java naming mitigations
@@ -1132,6 +1132,7 @@ union ProvisioningStateUnion {
 
 // Interface/client IP → Ip renames
 @@clientName(Microsoft.Network.PublicIPAddresses, "PublicIpAddresses", "java");
+@@clientName(Microsoft.Compute.PublicIPAddresses, "PublicIpAddresses", "java");
 @@clientName(Microsoft.Network.PublicIPPrefixes, "PublicIpPrefixes", "java");
 @@clientName(
   Microsoft.Network.PublicIPAddressOperationGroup,
@@ -8445,3 +8446,5 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "GetVirtualHubBgpConnectionLearnedRoutes",
   "csharp"
 );
+
+@@clientName(Nat64Capability, "NAT64Capability", "go");

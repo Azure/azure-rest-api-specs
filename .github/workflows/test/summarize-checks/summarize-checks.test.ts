@@ -1257,80 +1257,218 @@ describe("Summarize Checks Unit Tests", () => {
     const unzipExists = await execFile("unzip")
       .then(() => true)
       .catch(() => false);
+    const impactAssessment: import("../../src/summarize-checks/labelling.ts").ImpactAssessment = {
+      resourceManagerRequired: false,
+      dataPlaneRequired: true,
+      suppressionReviewRequired: false,
+      isNewApiVersion: true,
+      rpaasRpNotInPrivateRepo: true,
+      rpaasChange: false,
+      newRP: true,
+      rpaasRPMissing: false,
+      typeSpecChanged: true,
+      isDraft: false,
+      targetBranch: "test-\u00e9-\u65e5\u672c",
+    };
+    const summaryJson = JSON.stringify(impactAssessment);
 
-    // Runtime code currently requires "unzip" executable to exist
-    it.runIf(unzipExists)("unzips and extracts artifact", async () => {
-      const impactAssessment: import("../../src/summarize-checks/labelling.ts").ImpactAssessment = {
-        // Set booleans arbitrarily to false|true
-        resourceManagerRequired: false,
-        dataPlaneRequired: true,
-        suppressionReviewRequired: false,
-        isNewApiVersion: true,
-        rpaasRpNotInPrivateRepo: true,
-        rpaasChange: false,
-        newRP: true,
-        rpaasRPMissing: false,
-        typeSpecChanged: true,
-        isDraft: false,
-        targetBranch: "test-target-branch",
-      };
-
-      const zip = zipSync({
-        "summary.json": strToU8(JSON.stringify(impactAssessment)),
-      });
-
+    function mockArtifactDownload(
+      content: string | Uint8Array,
+      name = "summary.json",
+      sizeInBytes = Buffer.byteLength(content),
+    ) {
       const github = createMockGithub();
+      github.rest.actions.downloadArtifact.mockImplementation(() =>
+        Promise.resolve({
+          data: new Response(typeof content === "string" ? content : Uint8Array.from(content)).body,
+        }),
+      );
+      github.rest.actions.listWorkflowRunArtifacts.mockImplementation((params: { name?: string }) =>
+        Promise.resolve({
+          data: {
+            artifacts: params.name === name ? [{ id: 1, name, size_in_bytes: sizeInBytes }] : [],
+          },
+        }),
+      );
+      return github;
+    }
 
-      github.rest.actions.downloadArtifact.mockResolvedValue({
-        data: Buffer.from(zip),
-      });
-
-      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-        data: {
-          artifacts: [{ id: 1, name: "job-summary" }],
-        },
-      });
+    it("prefers raw JSON without looking up the legacy ZIP", async () => {
+      const github = mockArtifactDownload(summaryJson);
 
       await expect(
         getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
       ).resolves.toEqual(impactAssessment);
 
-      expect(github.rest.actions.downloadArtifact).toHaveBeenCalledWith({
+      expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledExactlyOnceWith({
+        owner: "test-owner",
+        repo: "test-repo",
+        run_id: 123,
+        name: "summary.json",
+        per_page: 100,
+      });
+      expect(github.rest.actions.downloadArtifact).toHaveBeenCalledExactlyOnceWith({
         owner: "test-owner",
         repo: "test-repo",
         artifact_id: 1,
         archive_format: "zip",
+        request: { parseSuccessResponseBody: false },
       });
+    });
 
-      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-        data: {
-          artifacts: [
-            { id: 1, name: "job-summary" /* updated_at: "1970" (default) */ },
-            { id: 2, name: "job-summary", updated_at: "2025" },
-            { id: 3, name: "job-summary", updated_at: "2024" },
-          ],
-        },
-      });
+    it.each(["application/json", "text/plain", "application/octet-stream"])(
+      "reads raw bytes through Octokit with Content-Type %s",
+      async (contentType) => {
+        const github = mockArtifactDownload(summaryJson);
+        const octokit = new Octokit({
+          request: {
+            fetch: () =>
+              Promise.resolve(
+                new Response(summaryJson, { headers: { "content-type": contentType } }),
+              ),
+          },
+        });
+        github.rest.actions.downloadArtifact.mockImplementation(
+          octokit.rest.actions.downloadArtifact,
+        );
+
+        await expect(
+          getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+        ).resolves.toEqual(impactAssessment);
+      },
+    );
+
+    it.each(["summary.json", "job-summary"])("selects the latest %s artifact", async (name) => {
+      const github = mockArtifactDownload(summaryJson);
+      github.rest.actions.listWorkflowRunArtifacts.mockImplementation((params: { name?: string }) =>
+        Promise.resolve({
+          data: {
+            artifacts:
+              params.name === name
+                ? [
+                    { id: 1, name },
+                    { id: 2, name, updated_at: "2026-10-02" },
+                    { id: 3, name, updated_at: "2026-10-01" },
+                  ]
+                : [],
+          },
+        }),
+      );
+      // Stop after selection so this test doesn't depend on legacy extraction.
+      github.rest.actions.downloadArtifact.mockRejectedValue(new Error("download stopped"));
 
       await expect(
         getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
-      ).resolves.toEqual(impactAssessment);
-
+      ).rejects.toThrow("download stopped");
       expect(github.rest.actions.downloadArtifact).toHaveBeenCalledWith({
         owner: "test-owner",
         repo: "test-repo",
         artifact_id: 2,
         archive_format: "zip",
+        request: { parseSuccessResponseBody: false },
       });
     });
 
-    it("throws if no job-summary artifact", async () => {
+    it.each(["not JSON", "{}"])(
+      "rejects invalid raw summaries without a ZIP fallback: %s",
+      async (json) => {
+        const github = mockArtifactDownload(json);
+
+        await expect(
+          getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+        ).rejects.toThrow();
+        expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledTimes(1);
+      },
+    );
+
+    it.each([0, 1])(
+      "checks the advertised size before downloading with %i extra bytes",
+      async (extraBytes) => {
+        const github = mockArtifactDownload(
+          summaryJson,
+          "summary.json",
+          16 * 1024 * 1024 + extraBytes,
+        );
+        const result = getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123);
+
+        if (extraBytes === 0) {
+          await expect(result).resolves.toEqual(impactAssessment);
+          expect(github.rest.actions.downloadArtifact).toHaveBeenCalledTimes(1);
+        } else {
+          await expect(result).rejects.toThrow("summary.json in artifact ID: 1 exceeds 16 MiB.");
+          expect(github.rest.actions.downloadArtifact).not.toHaveBeenCalled();
+        }
+      },
+    );
+
+    it.each([0, 1])(
+      "checks actual bytes when metadata understates the size with %i extra bytes",
+      async (extraBytes) => {
+        const json =
+          summaryJson + " ".repeat(16 * 1024 * 1024 + extraBytes - Buffer.byteLength(summaryJson));
+        const github = mockArtifactDownload(json, "summary.json", Buffer.byteLength(summaryJson));
+        const result = getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123);
+
+        if (extraBytes === 0) {
+          await expect(result).resolves.toEqual(impactAssessment);
+        } else {
+          await expect(result).rejects.toThrow("summary.json in artifact ID: 1 exceeds 16 MiB.");
+        }
+      },
+    );
+
+    it("rejects a missing download stream", async () => {
+      const github = mockArtifactDownload(summaryJson);
+      github.rest.actions.downloadArtifact.mockResolvedValue({ data: null });
+
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).rejects.toThrow("Missing download stream for artifact ID: 1.");
+    });
+
+    it.runIf(unzipExists)("reads legacy ZIPs when the raw summary is absent", async () => {
+      const github = mockArtifactDownload(
+        zipSync({
+          "unrelated.json": strToU8("{}"),
+          "summary.json": strToU8(summaryJson),
+        }),
+        "job-summary",
+      );
+
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
+
+      expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenNthCalledWith(2, {
+        owner: "test-owner",
+        repo: "test-repo",
+        run_id: 123,
+        name: "job-summary",
+        per_page: 100,
+      });
+    });
+
+    it
+      .runIf(unzipExists)
+      .each([
+        strToU8("not a ZIP"),
+        zipSync({ "other.json": strToU8(summaryJson) }),
+        zipSync({ "summary.json": strToU8("{}") }),
+      ])("rejects invalid legacy artifacts %#", async (zip) => {
+      const github = mockArtifactDownload(zip, "job-summary");
+
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).rejects.toThrow();
+    });
+
+    it("throws if neither raw nor legacy artifacts exist", async () => {
       const github = createMockGithub();
 
       await expect(
         getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
       ).rejects.toThrowErrorMatchingInlineSnapshot(
-        `[Error: Unable to find job-summary artifact for run ID: 123. This should never happen, as this section of code should only run with a valid runId.]`,
+        `[Error: Unable to find summary.json or legacy job-summary artifact for run ID: 123.]`,
       );
     });
   });

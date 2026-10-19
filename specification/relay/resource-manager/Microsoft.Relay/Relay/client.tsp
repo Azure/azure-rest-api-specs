@@ -115,6 +115,13 @@ using Microsoft.Relay;
 // Back-compat: PrivateEndpoint.id was ResourceIdentifier in the old SDK
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 
+// clusterArmId is an ARM resource id, so surface it as ResourceIdentifier
+@@alternateType(
+  RelayNamespaceProperties.clusterArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
 // Back-compat: property was named ConnectionState in the old SDK
 @@clientName(
   PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
@@ -167,4 +174,4 @@ model RelayUpdateParametersReplacement
   PrivateLinkResources.list,
   "csharp"
 );
-@@clientName(WCFRelays, "$DO_NOT_NORMALIZE$wCFRelays", "javascript");
+@@clientName(WCFRelays, exact("wCFRelays"), "javascript");
