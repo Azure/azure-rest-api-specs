@@ -1,0 +1,128 @@
+{
+  "title": "AioApplicationConfiguration_CreateOrUpdate",
+  "operationId": "AioApplicationConfiguration_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "aio-instance",
+    "aioApplicationDefinitionName": "application-definition-1",
+    "aioApplicationConfigurationName": "edge-application-configuration-1",
+    "resource": {
+      "properties": {
+        "aioIntegration": {
+          "mqttBroker": {
+            "accessMode": "Specific",
+            "allowedTopics": [
+              "fabrikam/+/telemetry"
+            ]
+          },
+          "stateStore": {
+            "accessMode": "All"
+          }
+        },
+        "diagnostics": {
+          "logs": {
+            "level": "info"
+          }
+        },
+        "services": [
+          {
+            "name": "http",
+            "ports": [
+              {
+                "name": "http",
+                "port": 8080,
+                "protocol": "Http"
+              }
+            ]
+          }
+        ],
+        "runtimeConfiguration": {
+          "runtimeConfigurationType": "ImageConfiguration",
+          "imageConfigurationSettings": {
+            "imagePullPolicy": "IfNotPresent",
+            "replicas": 1,
+            "resources": {
+              "limits": {
+                "cpu": "1",
+                "memory": "1Gi"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/aio-instance/aioApplicationDefinitions/application-definition-1/aioApplicationConfigurations/edge-application-configuration-1",
+        "name": "edge-application-configuration-1",
+        "type": "Microsoft.IoTOperations/instances/aioApplicationDefinitions/aioApplicationConfigurations",
+        "properties": {
+          "aioIntegration": {
+            "mqttBroker": {
+              "accessMode": "Specific",
+              "allowedTopics": [
+                "fabrikam/+/telemetry"
+              ]
+            },
+            "stateStore": {
+              "accessMode": "All"
+            }
+          },
+          "runtimeConfiguration": {
+            "runtimeConfigurationType": "ImageConfiguration",
+            "imageConfigurationSettings": {
+              "imagePullPolicy": "IfNotPresent",
+              "resources": {
+                "limits": {
+                  "cpu": "1",
+                  "memory": "1Gi"
+                }
+              }
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/aio-instance/aioApplicationDefinitions/application-definition-1/aioApplicationConfigurations/edge-application-configuration-1",
+        "name": "edge-application-configuration-1",
+        "type": "Microsoft.IoTOperations/instances/aioApplicationDefinitions/aioApplicationConfigurations",
+        "properties": {
+          "aioIntegration": {
+            "mqttBroker": {
+              "accessMode": "Specific",
+              "allowedTopics": [
+                "fabrikam/+/telemetry"
+              ]
+            },
+            "stateStore": {
+              "accessMode": "All"
+            }
+          },
+          "runtimeConfiguration": {
+            "runtimeConfigurationType": "ImageConfiguration",
+            "imageConfigurationSettings": {
+              "imagePullPolicy": "IfNotPresent",
+              "resources": {
+                "limits": {
+                  "cpu": "1",
+                  "memory": "1Gi"
+                }
+              }
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/providers/Microsoft.IoTOperations/locations/EASTUS2/operationStatuses/00000000-0000-0000-0000-000000000002?api-version=2026-11-01-preview"
+      }
+    }
+  }
+}
