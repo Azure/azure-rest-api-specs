@@ -35,7 +35,11 @@ beforeEach(async () => {
   await mkdir(join(root, "node_modules/@typespec/compiler"), { recursive: true });
   await writeFile(
     join(root, "node_modules/@typespec/compiler/package.json"),
-    '{"name":"@typespec/compiler","bin":{"tsp":"cli.cjs"}}',
+    JSON.stringify({
+      name: "@typespec/compiler",
+      bin: { tsp: "cli.cjs" },
+      main: fileURLToPath(import.meta.resolve("@typespec/compiler")),
+    }),
   );
   await simpleGit(root)
     .init()
@@ -255,4 +259,39 @@ it("retains per-project CI annotations and native diagnostics in batch mode", as
   expect(result.stdout).toContain(`::error::TypeSpec Validation failed for project ${project}`);
   expect(result.stdout.match(/native failure/g)).toHaveLength(1);
   expect(result.stderr).not.toContain("native failure");
+});
+
+it("attributes shared formatting failures to each project across Git cleanup", async () => {
+  vi.stubEnv("GITHUB_ACTIONS", "true");
+  await compiler('if (process.argv[2] === "format") throw new Error("Unexpected formatter CLI");');
+  const second = "specification/service/data-plane/Second";
+  await mkdir(join(root, second), { recursive: true });
+  for (const folder of [project, second]) {
+    await mkdir(join(root, folder, "examples"), { recursive: true });
+    await writeFile(join(root, folder, "main.tsp"), "");
+    await writeFile(
+      join(root, folder, "tspconfig.yaml"),
+      'emit:\n  - "@azure-tools/typespec-autorest"\nlinter:\n  extends:\n    - "@azure-tools/typespec-azure-rulesets/data-plane"\n',
+    );
+    await writeFile(join(root, folder, "service.yaml"), "versions: []\n");
+  }
+  const shared = "specification/service/data-plane/shared.tsp";
+  const source = "model Shared{value:string;}\n";
+  await writeFile(join(root, shared), source);
+  await simpleGit(root).add(".").commit("Shared formatting fixture");
+
+  const result = await run("--all", "--git-clean", "--verbose");
+
+  expect(result.code).toBe(1);
+  for (const folder of [project, second]) {
+    const start = result.stdout.indexOf(`::group::fail ${folder}`);
+    const end = result.stdout.indexOf("::endgroup::", start);
+    expect(start).toBeGreaterThanOrEqual(0);
+    expect(result.stdout.slice(start, end)).toContain(shared);
+    expect(result.stdout.slice(start, end)).toContain("error tsv/format-changed:");
+  }
+  expect(result.stdout).toContain("Formatting: 1 checked, 3 reused");
+  expect(result.stdout).not.toContain("Unexpected formatter CLI");
+  expect(await readFile(join(root, shared), "utf8")).toBe(source);
+  expect((await simpleGit(root).status()).isClean()).toBe(true);
 });

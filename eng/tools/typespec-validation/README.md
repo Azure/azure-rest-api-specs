@@ -118,6 +118,13 @@ an empty all-project selection fails.
 and balances the sorted project list before suppressions. Each shard requires
 its own checkout.
 
+With `--all`, formatting checks do not modify files. Each shard shares formatting
+results across projects with overlapping source trees, rechecking files when their
+contents or formatter options change. Each project's `tspconfig.yaml` is still
+checked, and shared-file failures are reported for every affected project that
+reaches the Format rule. Errors list the affected paths and the command to fix
+them; single-project and `--changed` runs retain their existing formatting behavior.
+
 `--dry-run` lists the selected projects and context without validating or cleaning
 files. It works with `--all` and `--changed`.
 

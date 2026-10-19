@@ -1,4 +1,5 @@
 import type { ILogger } from "@azure-tools/specs-shared/logger";
+import { batchFormatEnvironment, requestBatchFormat } from "../batch-format.ts";
 import { reportCommandOutput } from "../command-output.ts";
 import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
 import { type RuleResult } from "../rule-result.ts";
@@ -10,6 +11,8 @@ export class FormatRule implements Rule {
   readonly description = "Format TypeSpec";
 
   async execute(folder: string, logger: ILogger): Promise<RuleResult> {
+    if (process.env[batchFormatEnvironment] === "1") return requestBatchFormat();
+
     const output = await runNodeBin(
       "@typespec/compiler",
       // Format parent folder to include shared files
