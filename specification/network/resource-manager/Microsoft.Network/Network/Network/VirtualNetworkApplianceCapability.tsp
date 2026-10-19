@@ -21,13 +21,13 @@ namespace Microsoft.Network;
  * capability family; every kind shares the same `properties` schema (see
  * VirtualNetworkApplianceCapabilityProperties). One capability of a given kind may exist per appliance.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Required to preserve the converted resource and discriminator hierarchy."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "This legacy child resource preserves the released top-level capability discriminator and custom resource hierarchy nested under VirtualNetworkAppliance."
 @added(Versions.v2026_03_01)
 @featureFile(Features.virtualNetworkAppliance)
 @parentResource(VirtualNetworkAppliance)
 @discriminator("kind")
 model VirtualNetworkApplianceCapability
-  is ArmProxyResourceInstance<VirtualNetworkApplianceCapabilityProperties> {
+  is Azure.ResourceManager.ProxyResource<VirtualNetworkApplianceCapabilityProperties> {
   @visibility(Lifecycle.Read)
   @path
   @key("capabilityName")
@@ -38,6 +38,7 @@ model VirtualNetworkApplianceCapability
   /**
    * The kind of capability. This top-level discriminator selects the capability family.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The legacy API defines the capability discriminator in the top-level resource envelope."
   kind: VirtualNetworkApplianceCapabilityKind;
 }
 
@@ -45,9 +46,9 @@ model VirtualNetworkApplianceCapability
  * The Private Link Gateway FastPath capability. Private Link fast-path programming on the appliance's gateway;
  * supported on a dual-stack appliance.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The capability kinds require inheritance to preserve the OpenAPI 2.0 allOf discriminator hierarchy."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the released OpenAPI allOf discriminator hierarchy for virtual network appliance capability kinds."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The model name intentionally mirrors the wire-level x-ms-discriminator-value 'PLGatewayFastpath', which is the deployed Network Resource Provider's `kind` string; renaming the TypeSpec model to a differently-cased name would decouple the model name from the discriminator value it represents and confuse code generation for consumers that map model name to kind."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Required to preserve the converted resource and discriminator hierarchy."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "This discriminator subtype inherits the legacy custom resource base to preserve the released capability hierarchy."
 @added(Versions.v2026_03_01)
 @featureFile(Features.virtualNetworkAppliance)
 model PLGatewayFastpathCapability extends VirtualNetworkApplianceCapability {
@@ -61,9 +62,9 @@ model PLGatewayFastpathCapability extends VirtualNetworkApplianceCapability {
  * The Private Link Gateway (slow-path) capability. Private Link programming offloaded to the appliance's gateway;
  * IPv6 on a dual-stack appliance.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The capability kinds require inheritance to preserve the OpenAPI 2.0 allOf discriminator hierarchy."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the released OpenAPI allOf discriminator hierarchy for virtual network appliance capability kinds."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The model name intentionally mirrors the wire-level x-ms-discriminator-value 'PLGateway', which is the deployed Network Resource Provider's `kind` string; renaming the TypeSpec model to a differently-cased name would decouple the model name from the discriminator value it represents and confuse code generation for consumers that map model name to kind."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Required to preserve the converted resource and discriminator hierarchy."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "This discriminator subtype inherits the legacy custom resource base to preserve the released capability hierarchy."
 @added(Versions.v2026_03_01)
 @featureFile(Features.virtualNetworkAppliance)
 model PLGatewayCapability extends VirtualNetworkApplianceCapability {
@@ -77,9 +78,9 @@ model PLGatewayCapability extends VirtualNetworkApplianceCapability {
  * The Private Link IP-forwarders (NVA) capability. Private Link programming offloaded to the appliance NVA;
  * IPv6 on a dual-stack appliance.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The capability kinds require inheritance to preserve the OpenAPI 2.0 allOf discriminator hierarchy."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the released OpenAPI allOf discriminator hierarchy for virtual network appliance capability kinds."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The model name intentionally mirrors the wire-level x-ms-discriminator-value 'PLIPForwarders', which is the deployed Network Resource Provider's `kind` string; renaming the TypeSpec model to a differently-cased name would decouple the model name from the discriminator value it represents and confuse code generation for consumers that map model name to kind."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Required to preserve the converted resource and discriminator hierarchy."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "This discriminator subtype inherits the legacy custom resource base to preserve the released capability hierarchy."
 @added(Versions.v2026_03_01)
 @featureFile(Features.virtualNetworkAppliance)
 model PLIPForwardersCapability extends VirtualNetworkApplianceCapability {
@@ -95,8 +96,8 @@ model PLIPForwardersCapability extends VirtualNetworkApplianceCapability {
  * property-less: it carries no `ipVersion` (the parent appliance's dual-stack configuration is the
  * precondition, service-validated) beyond the properties common to every capability.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The capability kinds require inheritance to preserve the OpenAPI 2.0 allOf discriminator hierarchy."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Required to preserve the converted resource and discriminator hierarchy."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the released OpenAPI allOf discriminator hierarchy for virtual network appliance capability kinds."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "This discriminator subtype inherits the legacy custom resource base to preserve the released capability hierarchy."
 @added(Versions.v2026_03_01)
 @featureFile(Features.virtualNetworkAppliance)
 model Nat64Capability extends VirtualNetworkApplianceCapability {

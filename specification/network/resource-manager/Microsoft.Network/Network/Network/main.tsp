@@ -158,7 +158,7 @@ using TypeSpec.Versioning;
 /**
  * APIs to manage Microsoft Azure network resources.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-feature-file-usage-discourage" "Need for documentation support"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-feature-file-usage-discourage" "Legacy feature-file output splitting is required to preserve the released per-Swagger file layout."
 @featureFiles(Features)
 @armProviderNamespace
 @service(#{ title: "WebApplicationFirewallManagement" })
@@ -196,49 +196,69 @@ enum Versions {
   v2026_03_01: "2026-03-01",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+/**
+ * Internal identifiers used to route operations and schemas to legacy Swagger output files.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "An enum is required because @featureFiles uses these fixed internal Swagger output identifiers."
 enum Features {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  /** Routes application gateway operations and schemas to applicationGateway.json. */
   applicationGateway,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes ExpressRoute operations and schemas to expressRoute.json. */
   expressRoute,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes firewall operations and schemas to firewall.json. */
   firewall,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes load balancer operations and schemas to loadBalancer.json. */
   loadBalancer,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes network gateway operations and schemas to networkGateway.json. */
   networkGateway,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes network manager operations and schemas to networkManager.json. */
   networkManager,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes network security perimeter operations and schemas to networkSecurityPerimeter.json. */
   networkSecurityPerimeter,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes network watcher operations and schemas to networkWatcher.json. */
   networkWatcher,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes provider operations and schemas to networkingOperations.json. */
   networkingOperations,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes virtual network operations and schemas to virtualNetwork.json. */
   virtualNetwork,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes virtual WAN operations and schemas to virtualWan.json. */
   virtualWAN,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes firewall policy operations and schemas to firewallPolicy.json. */
   firewallPolicy,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes Azure web category operations and schemas to azureWebCategory.json. */
   azureWebCategory,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes service gateway operations and schemas to serviceGateway.json. */
   serviceGateway,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes virtual network appliance operations and schemas to virtualNetworkAppliance.json. */
   virtualNetworkAppliance,
 
-  /** Interconnect group resource type for managing interconnect groups. */
+  /** Routes interconnect group operations and schemas to interconnectGroup.json. */
   interconnectGroup,
 
+  /** Routes VMSS network configuration schemas to vmssNetworkConfiguration.json. */
   vmssNetworkConfiguration,
+
+  /** Routes VMSS public IP address schemas to vmssPublicIpAddress.json. */
   vmssPublicIPAddress,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Routes first-party service tag schemas to firstPartyServiceTag.json. */
   firstPartyServiceTag,
 
-  /** Authentication policy resource type for managing identity integration policies. */
+  /** Routes authentication policy operations and schemas to authenticationPolicy.json. */
   authenticationPolicy,
 }
 

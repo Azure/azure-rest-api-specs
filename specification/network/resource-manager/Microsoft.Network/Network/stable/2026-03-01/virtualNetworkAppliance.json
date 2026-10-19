@@ -701,6 +701,10 @@
       "type": "object",
       "description": "A capability enabled on a virtual network appliance. The top-level `kind` discriminator selects the\ncapability family; every kind shares the same `properties` schema (see\nVirtualNetworkApplianceCapabilityProperties). One capability of a given kind may exist per appliance.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkApplianceCapabilityProperties",
+          "description": "The resource-specific properties for this resource."
+        },
         "kind": {
           "$ref": "./common.json#/definitions/VirtualNetworkApplianceCapabilityKind",
           "description": "The kind of capability (the top-level discriminator)."
@@ -712,19 +716,7 @@
       ],
       "allOf": [
         {
-          "type": "object",
-          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/VirtualNetworkApplianceCapabilityProperties",
-              "description": "The resource-specific properties for this resource."
-            }
-          },
-          "allOf": [
-            {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-            }
-          ]
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },

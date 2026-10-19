@@ -3542,10 +3542,10 @@ union ProvisioningStateUnion {
 );
 @@clientName(ExplicitProxy, "ExplicitProxySettings", "go");
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This client-generation override target intentionally does not define a separate service operation decorator."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "The SDK override operation reuses the existing ApiVersionParameter spread to preserve the released operation signature."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This standalone operation is an SDK override target and is not part of the service operation interface."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "This operation exists only as an SDK override target; public documentation is retained on the overridden service operation."
 op availablePrivateEndpointTypesOperationGroupListByResourceGroup(
   /**
    * The location of the domain name.
@@ -3575,10 +3575,10 @@ op availablePrivateEndpointTypesOperationGroupListByResourceGroup(
   "go,python,java"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This client-generation override target intentionally does not define a separate service operation decorator."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "The SDK override operation reuses the existing ApiVersionParameter spread to preserve the released operation signature."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This standalone operation is an SDK override target and is not part of the service operation interface."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "This operation exists only as an SDK override target; public documentation is retained on the overridden service operation."
 op availablePrivateEndpointTypesOperationGroupList(
   /**
    * The location of the domain name.
@@ -3602,10 +3602,10 @@ op availablePrivateEndpointTypesOperationGroupList(
   "go,java"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This client-generation override target intentionally does not define a separate service operation decorator."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "The SDK override operation reuses the existing ApiVersionParameter spread to preserve the released operation signature."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This standalone operation is an SDK override target and is not part of the service operation interface."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "This operation exists only as an SDK override target; public documentation is retained on the overridden service operation."
 op privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup(
   /**
    * The location of the domain name.
@@ -3645,10 +3645,10 @@ op privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup(
   "go,python,java"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This client-generation override target intentionally does not define a separate service operation decorator."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "The SDK override operation reuses the existing ApiVersionParameter spread to preserve the released operation signature."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This standalone operation is an SDK override target and is not part of the service operation interface."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "This operation exists only as an SDK override target; public documentation is retained on the overridden service operation."
 op privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourceGroup(
   /**
    * The location of the domain name.
@@ -3678,10 +3678,10 @@ op privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourc
   "go,python,java"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This client-generation override target intentionally does not define a separate service operation decorator."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "The SDK override operation reuses the existing ApiVersionParameter spread to preserve the released operation signature."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This standalone operation is an SDK override target and is not part of the service operation interface."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "This operation exists only as an SDK override target; public documentation is retained on the overridden service operation."
 op replaceAvailableResourceGroupDelegationsOperationGroupList(
   /**
    * The location of the domain name.
@@ -3711,10 +3711,10 @@ op replaceAvailableResourceGroupDelegationsOperationGroupList(
   "go,python,java"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This client-generation override target intentionally does not define a separate service operation decorator."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "The SDK override operation reuses the existing ApiVersionParameter spread to preserve the released operation signature."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This standalone operation is an SDK override target and is not part of the service operation interface."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "This operation exists only as an SDK override target; public documentation is retained on the overridden service operation."
 op replaceprivateDnsZoneGroupsList(
   /**
    * The name of the private endpoint.
