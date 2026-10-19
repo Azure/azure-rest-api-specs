@@ -4222,7 +4222,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+                        "$ref": "#/components/schemas/VoiceConversationItem"
                       },
                       "description": "The requested list of items."
                     },
@@ -4337,7 +4337,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+                  "$ref": "#/components/schemas/VoiceConversationItem"
                 }
               }
             }
@@ -5133,7 +5133,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+                        "$ref": "#/components/schemas/VoiceConversationItem"
                       },
                       "description": "The requested list of items."
                     },
@@ -95852,6 +95852,27 @@
           ]
         }
       },
+      "VoiceAgentSystemToolItemStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "completed",
+              "incomplete"
+            ]
+          }
+        ],
+        "description": "The generation status of a system-tool item. It does not indicate provider success.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentSystemToolName": {
         "anyOf": [
           {
@@ -96432,6 +96453,22 @@
           ]
         }
       },
+      "VoiceConversationItem": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceConversationSystemToolItem"
+          }
+        ],
+        "description": "An existing realtime conversation item or a persisted service-managed system-tool intent. Used only by persisted read responses; client-created item types remain unchanged.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceConversationStatus": {
         "anyOf": [
           {
@@ -96447,6 +96484,68 @@
           }
         ],
         "description": "The lifecycle status of a persisted voice conversation:\n- `in_progress`: the live session is active, or post-session persistence finalization is pending.\n- `completed`: finalization succeeded after normal or client close, `end_conversation`, a max-duration `1001`\n  close, or a client or network disconnect that the service can still finalize.\n- `failed`: a terminal service, bridge, storage, or unrecoverable transport failure prevented finalization.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceConversationSystemToolItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "status",
+          "name",
+          "call_id",
+          "arguments"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "system_tool"
+            ],
+            "description": "The output-item kind. Always `system_tool`."
+          },
+          "id": {
+            "type": "string",
+            "description": "The identifier of the generated item."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "realtime.item"
+            ],
+            "description": "The realtime item marker."
+          },
+          "status": {
+            "$ref": "#/components/schemas/VoiceAgentSystemToolItemStatus",
+            "description": "The generation status of the item, not the provider execution outcome."
+          },
+          "name": {
+            "$ref": "#/components/schemas/VoiceAgentSystemToolName",
+            "description": "The built-in capability invoked by the model."
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The invocation identifier used for correlation and duplicate suppression."
+          },
+          "arguments": {
+            "type": "string",
+            "description": "The model's intent arguments encoded as a JSON string. A collection start includes its Boolean `secret` choice and, for SMS, `from_phone_number`; it never contains the actual collected value. A `send_dtmf` invocation has exactly one required string argument, `digits`, containing literal keypad characters or unexpanded `{{name}}` placeholders. Expanded private values never replace the intent in this item."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The Unix timestamp (in seconds) for when the item was persisted.",
+            "readOnly": true
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The id of the response that produced this item, when applicable.",
+            "readOnly": true
+          }
+        },
+        "description": "A persisted service-managed system-tool intent. Reuses the live intent fields and marker without expanding private placeholders, and adds read-only persistence metadata. This is a server-produced read projection, not a client-created item or provider result.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -96705,13 +96804,6 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeResponseStatusDetails",
             "description": "Additional details about the status."
           },
-          "output": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.RealtimeConversationItem"
-            },
-            "description": "The list of output items generated by the response."
-          },
           "metadata": {
             "anyOf": [
               {
@@ -96754,6 +96846,13 @@
               }
             ],
             "description": "Maximum number of output tokens for a single assistant response,\n  inclusive of tool calls, that was used in this response."
+          },
+          "output": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceConversationItem"
+            },
+            "description": "The persisted output items for this response. System-tool entries retain unexpanded model intent; private values and executor-only parameters are never persisted here."
           },
           "audio": {
             "$ref": "#/components/schemas/VoiceResponseAudio",

@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "../agents/models.tsp";
 import "./agents.tsp";
 import "./openai-preview-models.tsp";
+import "./protocol.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -115,7 +116,10 @@ model VoiceResponseAudio {
   """)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponse {
-  ...OmitProperties<OpenAI.RealtimeResponse, "audio">;
+  ...OmitProperties<OpenAI.RealtimeResponse, "audio" | "output">;
+
+  @doc("The persisted output items for this response. System-tool entries retain unexpanded model intent; private values and executor-only parameters are never persisted here.")
+  output?: VoiceConversationItem[];
 
   @doc("The audio configuration used for the response, including the voice and audio format used for output.")
   audio?: VoiceResponseAudio;
@@ -143,6 +147,22 @@ alias VoiceConversationItemPersistence = {
   @visibility(Lifecycle.Read)
   response_id?: string;
 };
+
+@doc("A persisted service-managed system-tool intent. Reuses the live intent fields and marker without expanding private placeholders, and adds read-only persistence metadata. This is a server-produced read projection, not a client-created item or provider result.")
+@usage(Usage.output | Usage.json)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceConversationSystemToolItem {
+  ...VoiceAgentSystemToolItem;
+  ...VoiceConversationItemPersistence;
+}
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Persisted reads include server-only system-tool intent without widening client-created realtime items."
+@doc("An existing realtime conversation item or a persisted service-managed system-tool intent. Used only by persisted read responses; client-created item types remain unchanged.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceConversationItem {
+  standard: OpenAI.RealtimeConversationItem,
+  system_tool: VoiceConversationSystemToolItem,
+}
 
 @@extension(
   OpenAI.RealtimeConversationItem,

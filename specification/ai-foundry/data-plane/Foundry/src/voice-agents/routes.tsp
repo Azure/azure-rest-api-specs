@@ -254,7 +254,7 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<OpenAI.RealtimeConversationItem>
+    AgentsPagedResult<VoiceConversationItem>
   >;
 
   /**
@@ -278,7 +278,7 @@ interface AgentEndpointConversations {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<OpenAI.RealtimeConversationItem>
+    AgentsPagedResult<VoiceConversationItem>
   >;
 
   /**
@@ -304,7 +304,7 @@ interface AgentEndpointConversations {
       /** The id of the conversation item to retrieve. */
       @path item_id: string;
     },
-    OpenAI.RealtimeConversationItem
+    VoiceConversationItem
   >;
 
   /**
