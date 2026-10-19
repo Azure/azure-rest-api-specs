@@ -47,6 +47,7 @@ interface RecoveryPointsCrr {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @errorsDoc("Error response describing why the operation failed.")
+  @list
   @armResourceList(RecoveryPointResource)
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/")
   @get
@@ -104,7 +105,6 @@ interface RecoveryPoints {
   RecoveryPoints.getAccessToken::parameters.body,
   "Get Access Token request"
 );
-@@TypeSpec.list(RecoveryPointsCrr.list);
 @@TypeSpec.OpenAPI.extension(
   RecoveryPointsCrr.list,
   "x-ms-odata",
