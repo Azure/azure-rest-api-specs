@@ -52,6 +52,7 @@ describe("post-results", () => {
           "data-plane": ["dp-approver"],
         },
       },
+      tier1: {},
     });
 
     it("returns 'unprotected' for a data-plane plane opted out (no throw)", () => {

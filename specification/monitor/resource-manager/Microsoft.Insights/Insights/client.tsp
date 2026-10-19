@@ -1841,7 +1841,7 @@ op PrivateLinkScopeOperationStatusGetCustomized(
 
 @@clientLocation(
   VMInsightsOnboardingStatuses.getOnboardingStatus,
-  "$DO_NOT_NORMALIZE$vMInsights",
+  exact("vMInsights"),
   "javascript"
 );
 
