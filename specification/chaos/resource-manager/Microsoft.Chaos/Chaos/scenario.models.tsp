@@ -319,12 +319,34 @@ model ScenarioActionMatcher {
   /**
    * The matcher name, such as `logicalZone`, `physicalZone`, or `region`.
    */
-  name: string;
+  name: ScenarioActionMatcherName;
 
   /**
    * The value that targets must match. Supports template macro syntax.
    */
   value: string;
+}
+
+/**
+ * Enum of the supported action matcher names.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "The matcher name set is intentionally fixed and non-extensible."
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+enum ScenarioActionMatcherName {
+  /**
+   * Match targets by logical availability zone.
+   */
+  LogicalZone: "logicalZone",
+
+  /**
+   * Match targets by physical availability zone.
+   */
+  PhysicalZone: "physicalZone",
+
+  /**
+   * Match targets by Azure region.
+   */
+  Region: "region",
 }
 
 /**

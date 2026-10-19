@@ -523,6 +523,11 @@ union ScenarioRunTargetState {
    * The action was skipped for the target.
    */
   Skipped: "Skipped",
+
+  /**
+   * Evaluation, authorization, lookup, mutation, or cleanup failed for the target.
+   */
+  Failed: "Failed",
 }
 
 /**

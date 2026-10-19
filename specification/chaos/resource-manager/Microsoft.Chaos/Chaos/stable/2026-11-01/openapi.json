@@ -6582,7 +6582,7 @@
       "description": "Model that represents an action-specific target matching criterion.",
       "properties": {
         "name": {
-          "type": "string",
+          "$ref": "#/definitions/ScenarioActionMatcherName",
           "description": "The matcher name, such as `logicalZone`, `physicalZone`, or `region`."
         },
         "value": {
@@ -6594,6 +6594,36 @@
         "name",
         "value"
       ]
+    },
+    "ScenarioActionMatcherName": {
+      "type": "string",
+      "description": "Enum of the supported action matcher names.",
+      "enum": [
+        "logicalZone",
+        "physicalZone",
+        "region"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioActionMatcherName",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "LogicalZone",
+            "value": "logicalZone",
+            "description": "Match targets by logical availability zone."
+          },
+          {
+            "name": "PhysicalZone",
+            "value": "physicalZone",
+            "description": "Match targets by physical availability zone."
+          },
+          {
+            "name": "Region",
+            "value": "region",
+            "description": "Match targets by Azure region."
+          }
+        ]
+      }
     },
     "ScenarioConfiguration": {
       "type": "object",
@@ -7226,7 +7256,8 @@
       "enum": [
         "Succeeded",
         "NotApplicable",
-        "Skipped"
+        "Skipped",
+        "Failed"
       ],
       "x-ms-enum": {
         "name": "ScenarioRunTargetState",
@@ -7246,9 +7277,15 @@
             "name": "Skipped",
             "value": "Skipped",
             "description": "The action was skipped for the target."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Evaluation, authorization, lookup, mutation, or cleanup failed for the target."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ScenarioRunWarning": {
       "type": "object",
