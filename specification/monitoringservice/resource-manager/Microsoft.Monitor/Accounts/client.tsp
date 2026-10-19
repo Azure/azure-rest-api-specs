@@ -25,6 +25,7 @@ using Microsoft.Monitor;
 @@clientName(IssueProperties, "MonitorIssueProperties", "csharp");
 @@clientName(MetricsContainerResource, "MonitorMetricsContainer", "csharp");
 @@clientName(MetricsContainer, "MonitorMetricsContainerProperties", "csharp");
+@@clientName(DefaultActionGroupResource, "DefaultActionGroupReference", "csharp");
 @@clientName(AddedByType, "MonitorEntityType", "csharp");
 @@clientName(Origin, "MonitorEntityOrigin", "csharp");
 @@clientName(
