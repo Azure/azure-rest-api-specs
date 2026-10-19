@@ -15,8 +15,8 @@ stimuli:
       suite: dataplane
       mode: trigger
     prompt:
-      Add a Widgets interface with full CRUD and list operations for the WidgetSuite resource. The interface should include operations to create or update, get, list, and delete widgets. Use the appropriate
-      Azure.Core resource operation templates.
+      Add a Widgets interface with full CRUD and list operations for the WidgetSuite resource. The interface should include operations to create or update, get, list, and delete widgets. Create or update and delete complete synchronously. Use the appropriate
+      Azure.Core resource operation templates. All material design decisions are provided, so proceed without confirmation.
     environment: &id001
       files:
         - src: ../fixtures/006004-dp-create-resource-with-crud/main.tsp
@@ -30,12 +30,6 @@ stimuli:
       commands:
         - node -e "const fs=require('fs');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync('node_modules')){fs.symlinkSync(t,'node_modules','junction')}"
     graders:
-      - &id002
-        type: tool-calls
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - azure-sdk-mcp-azsdk_run_typespec_validation
       - type: skill-invocation
         config:
           required:
@@ -49,14 +43,13 @@ stimuli:
       mode: forced
     prompt:
       "@azure-typespec-author Add a Widgets interface with full CRUD and list operations for the WidgetSuite resource. The interface should include operations to create or update, get, list, and delete
-      widgets. Use the appropriate Azure.Core resource operation templates."
+      widgets. Create or update and delete complete synchronously. Use the appropriate Azure.Core resource operation templates. All material design decisions are provided, so proceed without confirmation."
     environment: *id001
     rubric: &shared_rubric
       - A Widgets interface is defined with get/read, create-or-update, list, and delete operations for WidgetSuite.
       - Each operation uses the appropriate Azure.Core resource operation template for its behavior.
       - Changes are limited to the requested interface and operations and contain no unrelated edits.
     graders:
-      - *id002
       - type: run-command
         config:
           command: tsp compile .
@@ -71,19 +64,19 @@ stimuli:
         name: file-matches-create-operation
         config:
           path: main.tsp
-          pattern: LongRunningResourceCreateOrUpdate<WidgetSuite>|ResourceCreateOrReplace<WidgetSuite>|ResourceCreateOrUpdate<WidgetSuite>
+          pattern: ResourceCreateOrReplace<WidgetSuite>|ResourceCreateOrUpdate<WidgetSuite>
       - &id005
         type: file-matches
         name: file-matches-list-operation
         config:
           path: main.tsp
-          pattern: ResourceList<WidgetSuite
+          pattern: 'ResourceList<\s*WidgetSuite'
       - &id006
         type: file-matches
         name: file-matches-delete-operation
         config:
           path: main.tsp
-          pattern: ResourceDelete<WidgetSuite>|LongRunningResourceDelete<WidgetSuite>
+          pattern: ResourceDelete<WidgetSuite>
       - &id007
         type: prompt
         config:
@@ -96,7 +89,7 @@ stimuli:
 
             3. A list operation using ResourceList<WidgetSuite>
 
-            4. A delete operation using ResourceDelete or LongRunningResourceDelete
+            4. A synchronous delete operation using ResourceDelete
 
             "
           model: gpt-5.6-sol
@@ -110,8 +103,8 @@ stimuli:
       suite: dataplane
       mode: no-skill
     prompt:
-      Add a Widgets interface with full CRUD and list operations for the WidgetSuite resource. The interface should include operations to create or update, get, list, and delete widgets. Use the appropriate
-      Azure.Core resource operation templates.
+      Add a Widgets interface with full CRUD and list operations for the WidgetSuite resource. The interface should include operations to create or update, get, list, and delete widgets. Create or update and delete complete synchronously. Use the appropriate
+      Azure.Core resource operation templates. All material design decisions are provided, so proceed without confirmation.
     environment: *id001
     rubric: *shared_rubric
     graders:

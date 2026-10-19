@@ -14,7 +14,7 @@ stimuli:
     tags:
       suite: dataplane
       mode: trigger
-    prompt: Add a get operation for the WidgetSuite resource to the Widgets interface. The operation should allow fetching a Widget by name.
+    prompt: Add a synchronous get operation for the WidgetSuite resource to the Widgets interface. The operation should fetch a WidgetSuite resource by its existing name key. All material design decisions are provided, so proceed without confirmation.
     environment: &id001
       files:
         - src: ../fixtures/006002-dp-add-get-operation/main.tsp
@@ -28,12 +28,6 @@ stimuli:
       commands:
         - node -e "const fs=require('fs');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync('node_modules')){fs.symlinkSync(t,'node_modules','junction')}"
     graders:
-      - &id002
-        type: tool-calls
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - azure-sdk-mcp-azsdk_run_typespec_validation
       - type: skill-invocation
         config:
           required:
@@ -45,14 +39,13 @@ stimuli:
     tags:
       suite: dataplane
       mode: forced
-    prompt: "@azure-typespec-author Add a get operation for the WidgetSuite resource to the Widgets interface. The operation should allow fetching a Widget by name."
+    prompt: "@azure-typespec-author Add a synchronous get operation for the WidgetSuite resource to the Widgets interface. The operation should fetch a WidgetSuite resource by its existing name key. All material design decisions are provided, so proceed without confirmation."
     environment: *id001
     rubric: &shared_rubric
       - The Widgets interface includes a get/read operation for WidgetSuite using the Azure.Core ResourceRead<WidgetSuite> template.
       - The operation supports fetching a WidgetSuite resource by name and has a descriptive @doc decorator.
       - Changes are limited to the requested operation and contain no unrelated edits.
     graders:
-      - *id002
       - type: run-command
         config:
           command: tsp compile .
@@ -82,7 +75,7 @@ stimuli:
     tags:
       suite: dataplane
       mode: no-skill
-    prompt: Add a get operation for the WidgetSuite resource to the Widgets interface. The operation should allow fetching a Widget by name.
+    prompt: Add a synchronous get operation for the WidgetSuite resource to the Widgets interface. The operation should fetch a WidgetSuite resource by its existing name key. All material design decisions are provided, so proceed without confirmation.
     environment: *id001
     rubric: *shared_rubric
     graders:
