@@ -45,6 +45,12 @@ input-file:
 
 ```yaml $(tag) == 'package-2026-11-01'
 suppressions:
+  - code: ARM Section 2.6
+    from: openapi.json
+    where:
+      - $.definitions.AiGatewayModelProviderProperties.properties.kind
+      - $.definitions.AiGatewayTelemetryExporterProperties.properties.kind
+    reason: Existing model
   - code: ArmResourcePropertiesBag
     from: openapi.json
     where:
