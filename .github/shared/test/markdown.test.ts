@@ -47,6 +47,81 @@ describe("Markdown composition", () => {
     expect(renderMarkdownDoc(section("Title", "Body"), 6)).toBe("###### Title\n\nBody");
   });
 
+  it("preserves an explicit section ID and omits it when not supplied", () => {
+    expect(section("Title", "Body", "custom-id")).toEqual({
+      kind: "section",
+      title: "Title",
+      body: "Body",
+      id: "custom-id",
+    });
+    expect(section("Title", "Body")).not.toHaveProperty("id");
+    expect(section("Title", "Body", undefined)).not.toHaveProperty("id");
+  });
+
+  it("renders explicit anchors before headings without changing heading levels", () => {
+    const markdown = renderMarkdownDoc(
+      [
+        section(
+          "Analysis",
+          ["Body", section("Details", "Changes", "details_123")],
+          "breaking-change",
+        ),
+        section("Mitigation", undefined, "Mitigation"),
+        section("Without an ID", "Last"),
+      ],
+      2,
+    );
+    expect(markdown).toBe(d`
+      <a name="breaking-change"></a>
+
+      ## Analysis
+
+      Body
+
+      <a name="details_123"></a>
+
+      ### Details
+
+      Changes
+
+      <a name="Mitigation"></a>
+
+      ## Mitigation
+
+      ## Without an ID
+
+      Last
+    `);
+    expect(marked.parse(markdown)).toContain(
+      '<p><a name="breaking-change"></a></p>\n<h2>Analysis</h2>',
+    );
+  });
+
+  it.each(["", "has space", 'quote"id', "<tag>", "with/slash", "line\nbreak"])(
+    "rejects invalid heading ID %j",
+    (id) => {
+      expect(() => renderMarkdownDoc(section("Title", "Body", id))).toThrow(
+        "Markdown heading IDs must contain only letters, digits, underscores or hyphens",
+      );
+    },
+  );
+
+  it.each([
+    { doc: [section("First", "", "same-id"), section("Second", "", "same-id")] },
+    { doc: section("Parent", section("Child", "", "same-id"), "same-id") },
+  ])("rejects duplicate IDs across the document %#", ({ doc }) => {
+    expect(() => renderMarkdownDoc(doc)).toThrow("Duplicate Markdown heading ID: same-id");
+  });
+
+  it("allows repeated titles with distinct IDs and reuses IDs in separate renders", () => {
+    expect(renderMarkdownDoc([section("Title", "", "first"), section("Title", "", "second")])).toBe(
+      '<a name="first"></a>\n\n# Title\n\n<a name="second"></a>\n\n# Title',
+    );
+    const doc = section("Title", "", "reusable");
+    expect(renderMarkdownDoc(doc)).toBe('<a name="reusable"></a>\n\n# Title');
+    expect(renderMarkdownDoc(doc)).toBe('<a name="reusable"></a>\n\n# Title');
+  });
+
   it.each([0, -1, 1.5, 7])("rejects invalid heading level %s", (level) => {
     expect(() => renderMarkdownDoc(section("Title", ""), level)).toThrow("level from 1 to 6");
   });
