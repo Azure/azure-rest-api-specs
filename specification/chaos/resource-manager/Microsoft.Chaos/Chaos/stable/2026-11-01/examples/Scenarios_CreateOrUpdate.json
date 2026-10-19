@@ -10,6 +10,18 @@
         "description": "Induces an outage of all discovered VM and VMSS instances in the target zone with an option to invoke custom scripted actions using Automation Runbooks. Additionally, it forces failover of discovered Redis instances to simulate backend zonal outage.",
         "parameters": [
           {
+            "name": "logicalZone",
+            "type": "string",
+            "required": true,
+            "description": "Logical availability-zone label to test in each target subscription, for example 1."
+          },
+          {
+            "name": "location",
+            "type": "string",
+            "required": true,
+            "description": "Azure location name in which to test the logical zone, for example eastus."
+          },
+          {
             "name": "duration",
             "type": "string",
             "default": "PT15M",
@@ -33,25 +45,35 @@
         "actions": [
           {
             "name": "vmssZoneDown",
-            "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+            "actionId": "microsoft-compute-shutdown/2.0",
             "description": "Force shutdown VMSS instances in target zone",
             "duration": "%%{parameters.duration}%%",
-            "parameters": [
+            "parameters": [],
+            "selectors": [
               {
-                "key": "zones",
-                "value": "%%{resourceTargeting.include.zones}%%"
+                "name": "logicalZone",
+                "value": "%%{parameters.logicalZone}%%"
+              },
+              {
+                "name": "region",
+                "value": "%%{parameters.location}%%"
               }
             ]
           },
           {
             "name": "vmZoneDown",
-            "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+            "actionId": "microsoft-compute-shutdown/2.0",
             "description": "Force shutdown VM instances in target zone",
             "duration": "%%{parameters.duration}%%",
-            "parameters": [
+            "parameters": [],
+            "selectors": [
               {
-                "key": "zones",
-                "value": "%%{resourceTargeting.include.zones}%%"
+                "name": "logicalZone",
+                "value": "%%{parameters.logicalZone}%%"
+              },
+              {
+                "name": "region",
+                "value": "%%{parameters.location}%%"
               }
             ]
           },
@@ -98,6 +120,18 @@
           "description": "Induces an outage of all discovered VM and VMSS instances in the target zone with an option to invoke custom scripted actions using Automation Runbooks. Additionally, it forces failover of discovered Redis instances to simulate backend zonal outage.",
           "parameters": [
             {
+              "name": "logicalZone",
+              "type": "string",
+              "required": true,
+              "description": "Logical availability-zone label to test in each target subscription, for example 1."
+            },
+            {
+              "name": "location",
+              "type": "string",
+              "required": true,
+              "description": "Azure location name in which to test the logical zone, for example eastus."
+            },
+            {
               "name": "duration",
               "type": "string",
               "default": "PT15M",
@@ -121,25 +155,35 @@
           "actions": [
             {
               "name": "vmssZoneDown",
-              "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+              "actionId": "microsoft-compute-shutdown/2.0",
               "description": "Force shutdown VMSS instances in target zone",
               "duration": "%%{parameters.duration}%%",
-              "parameters": [
+              "parameters": [],
+              "selectors": [
                 {
-                  "key": "zones",
-                  "value": "%%{resourceTargeting.include.zones}%%"
+                  "name": "logicalZone",
+                  "value": "%%{parameters.logicalZone}%%"
+                },
+                {
+                  "name": "region",
+                  "value": "%%{parameters.location}%%"
                 }
               ]
             },
             {
               "name": "vmZoneDown",
-              "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+              "actionId": "microsoft-compute-shutdown/2.0",
               "description": "Force shutdown VM instances in target zone",
               "duration": "%%{parameters.duration}%%",
-              "parameters": [
+              "parameters": [],
+              "selectors": [
                 {
-                  "key": "zones",
-                  "value": "%%{resourceTargeting.include.zones}%%"
+                  "name": "logicalZone",
+                  "value": "%%{parameters.logicalZone}%%"
+                },
+                {
+                  "name": "region",
+                  "value": "%%{parameters.location}%%"
                 }
               ]
             },
@@ -194,6 +238,18 @@
           "description": "Induces an outage of all discovered VM and VMSS instances in the target zone with an option to invoke custom scripted actions using Automation Runbooks. Additionally, it forces failover of discovered Redis instances to simulate backend zonal outage.",
           "parameters": [
             {
+              "name": "logicalZone",
+              "type": "string",
+              "required": true,
+              "description": "Logical availability-zone label to test in each target subscription, for example 1."
+            },
+            {
+              "name": "location",
+              "type": "string",
+              "required": true,
+              "description": "Azure location name in which to test the logical zone, for example eastus."
+            },
+            {
               "name": "duration",
               "type": "string",
               "default": "PT15M",
@@ -217,25 +273,35 @@
           "actions": [
             {
               "name": "vmssZoneDown",
-              "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+              "actionId": "microsoft-compute-shutdown/2.0",
               "description": "Force shutdown VMSS instances in target zone",
               "duration": "%%{parameters.duration}%%",
-              "parameters": [
+              "parameters": [],
+              "selectors": [
                 {
-                  "key": "zones",
-                  "value": "%%{resourceTargeting.include.zones}%%"
+                  "name": "logicalZone",
+                  "value": "%%{parameters.logicalZone}%%"
+                },
+                {
+                  "name": "region",
+                  "value": "%%{parameters.location}%%"
                 }
               ]
             },
             {
               "name": "vmZoneDown",
-              "actionId": "urn:csci:microsoft:compute:shutdown/1.0.0",
+              "actionId": "microsoft-compute-shutdown/2.0",
               "description": "Force shutdown VM instances in target zone",
               "duration": "%%{parameters.duration}%%",
-              "parameters": [
+              "parameters": [],
+              "selectors": [
                 {
-                  "key": "zones",
-                  "value": "%%{resourceTargeting.include.zones}%%"
+                  "name": "logicalZone",
+                  "value": "%%{parameters.logicalZone}%%"
+                },
+                {
+                  "name": "region",
+                  "value": "%%{parameters.location}%%"
                 }
               ]
             },

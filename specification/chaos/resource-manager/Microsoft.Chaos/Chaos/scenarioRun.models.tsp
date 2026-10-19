@@ -278,9 +278,20 @@ model ScenarioRunSummaryAction {
   /**
    * The resources associated with the specified action.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_11_01)
+  @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "resources")
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
-  resources: ScenarioRunResource[];
+  resourcesLegacy: ScenarioRunResource[];
+
+  /**
+   * The resources associated with the specified action, including the targets
+   * evaluated during execution.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  resources: ScenarioRunSummaryResource[];
 
   /**
    * The urn for the given chaos action.
@@ -432,6 +443,73 @@ model ScenarioRunResource {
   @visibility(Lifecycle.Read)
   @key
   id: string;
+}
+
+/**
+ * Model that represents a resource associated with a scenario run action.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioRunSummaryResource {
+  /**
+   * The resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  @key
+  id: string;
+
+  /**
+   * The targets evaluated for this resource during action execution.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  effectiveTargets?: ScenarioRunEffectiveTarget[];
+}
+
+/**
+ * Model that represents the outcome for a target evaluated by an action.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioRunEffectiveTarget {
+  /**
+   * The target resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  @key
+  id: string;
+
+  /**
+   * The target evaluation and execution state.
+   */
+  @visibility(Lifecycle.Read)
+  state: ScenarioRunTargetState;
+}
+
+/**
+ * Enum of the states for a target evaluated by an action.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+union ScenarioRunTargetState {
+  string,
+
+  /**
+   * The action mutation and cleanup succeeded for the target.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Evaluation succeeded and determined that the action did not apply to the target.
+   */
+  NotApplicable: "NotApplicable",
+
+  /**
+   * The target was intentionally left unchanged.
+   */
+  Skipped: "Skipped",
+
+  /**
+   * Evaluation, authorization, lookup, mutation, or cleanup failed for the target.
+   */
+  Failed: "Failed",
 }
 
 /**

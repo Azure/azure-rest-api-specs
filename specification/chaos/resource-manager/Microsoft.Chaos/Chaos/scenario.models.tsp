@@ -276,6 +276,13 @@ model ScenarioAction {
   parameters?: KeyValuePair[];
 
   /**
+   * Action-specific selectors evaluated during execution.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @identifiers(#["name"])
+  selectors?: ScenarioActionSelector[];
+
+  /**
    * Action dependencies that control when this action starts.
    */
   runAfter?: RunAfter;
@@ -302,6 +309,24 @@ model ScenarioAction {
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   failureBehavior?: FailureBehavior;
+}
+
+/**
+ * Model that represents an action-specific selector.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+model ScenarioActionSelector {
+  /**
+   * The selector name.
+   */
+  @minLength(1)
+  name: string;
+
+  /**
+   * The selector value. Supports template macro syntax.
+   */
+  @minLength(1)
+  value: string;
 }
 
 /**
