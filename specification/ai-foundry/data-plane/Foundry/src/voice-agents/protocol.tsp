@@ -446,7 +446,7 @@ model VoiceAgentServerEventSystemToolArgumentsDone
   arguments: string;
 }
 
-@doc("An asynchronous collection or phone-operation outcome. Collection and provider acceptance do not prove authentication or IVR recognition.")
+@doc("An asynchronous collection or phone-operation outcome. Provider acceptance is not SMS delivery, IVR recognition or authentication.")
 @usage(VoiceAgentServerEventUsage)
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerEventInputCollectionStatus

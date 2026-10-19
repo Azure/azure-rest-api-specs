@@ -101244,6 +101244,32 @@
           ]
         }
       },
+      "VoiceAgentSendSmsSystemTool": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "send_sms"
+            ],
+            "description": "The built-in capability. Always `send_sms`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceAgentSystemTool"
+          }
+        ],
+        "description": "Enables SMS sending with two required model-call strings, `to_phone_number` and `message`. Both support `{{name}}` references. Resolved values must be an E.164 recipient and non-empty text within provider limits. The sender is the session's Agent-bound SMS-capable number; missing, ambiguous or unsupported sender bindings fail before dispatch. Sending does not start collection or an SMS conversation.\nProvider acceptance confirms submission, not delivery; uncertain sends are not automatically retried. A private reference sends its contents to the selected recipient/provider without expanding it into model/history/output/diagnostics. Requires outbound SMS executor support.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAgentServerVadTurnDetection": {
         "type": "object",
         "required": [
@@ -101524,7 +101550,7 @@
           },
           "name": {
             "$ref": "#/components/schemas/VoiceAgentSystemToolName",
-            "description": "The service-managed control action. Known values are stable; additional values may be added over time."
+            "description": "The built-in capability name. Known values are stable; additional values may be added over time."
           },
           "description": {
             "type": "string",
@@ -101538,7 +101564,8 @@
             "collect_sms": "#/components/schemas/VoiceAgentCollectSmsSystemTool",
             "collect_dtmf": "#/components/schemas/VoiceAgentCollectDtmfSystemTool",
             "transfer": "#/components/schemas/VoiceAgentTransferSystemTool",
-            "send_dtmf": "#/components/schemas/VoiceAgentSendDtmfSystemTool"
+            "send_dtmf": "#/components/schemas/VoiceAgentSendDtmfSystemTool",
+            "send_sms": "#/components/schemas/VoiceAgentSendSmsSystemTool"
           }
         },
         "allOf": [
@@ -101586,11 +101613,12 @@
               "transfer",
               "collect_sms",
               "collect_dtmf",
-              "send_dtmf"
+              "send_dtmf",
+              "send_sms"
             ]
           }
         ],
-        "description": "A service-managed voice-session control action. Known values are stable; additional values may be added over time.",
+        "description": "A built-in voice-session capability name. Known values are stable; additional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

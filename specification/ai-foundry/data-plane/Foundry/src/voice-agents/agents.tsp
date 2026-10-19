@@ -385,7 +385,7 @@ model VoiceAgentSystemTool extends VoiceAgentTool {
   @doc("The type of the tool. Always `system`.")
   type: "system";
 
-  @doc("The service-managed control action. Known values are stable; additional values may be added over time.")
+  @doc("The built-in capability name. Known values are stable; additional values may be added over time.")
   name: VoiceAgentSystemToolName;
 
   @doc("An optional description of the system tool.")
@@ -399,7 +399,7 @@ model VoiceAgentEndConversationSystemTool extends VoiceAgentSystemTool {
   name: "end_conversation";
 }
 
-@doc("A service-managed voice-session control action. Known values are stable; additional values may be added over time.")
+@doc("A built-in voice-session capability name. Known values are stable; additional values may be added over time.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentSystemToolName {
   string,
@@ -418,6 +418,9 @@ union VoiceAgentSystemToolName {
 
   @doc("Sends literal or templated keypad digits.")
   send_dtmf: "send_dtmf",
+
+  @doc("Sends a text message from the Agent's SMS-capable number.")
+  send_sms: "send_sms",
 }
 
 @doc("Declares one session-local private string without including its value in Agent configuration.")
@@ -590,6 +593,16 @@ model VoiceAgentTransferSystemTool extends VoiceAgentSystemTool {
 model VoiceAgentSendDtmfSystemTool extends VoiceAgentSystemTool {
   @doc("The built-in capability. Always `send_dtmf`.")
   name: "send_dtmf";
+}
+
+@doc("""
+  Enables SMS sending with two required model-call strings, `to_phone_number` and `message`. Both support `{{name}}` references. Resolved values must be an E.164 recipient and non-empty text within provider limits. The sender is the session's Agent-bound SMS-capable number; missing, ambiguous or unsupported sender bindings fail before dispatch. Sending does not start collection or an SMS conversation.
+  Provider acceptance confirms submission, not delivery; uncertain sends are not automatically retried. A private reference sends its contents to the selected recipient/provider without expanding it into model/history/output/diagnostics. Requires outbound SMS executor support.
+  """)
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentSendSmsSystemTool extends VoiceAgentSystemTool {
+  @doc("The built-in capability. Always `send_sms`.")
+  name: "send_sms";
 }
 
 @doc("A reference to a Foundry toolbox, which is a versioned bundle of tools executed through its MCP endpoint.")
