@@ -26,18 +26,6 @@ model Scenario is Azure.ResourceManager.ProxyResource<ScenarioProperties> {
 
 /**
  * Model that represents the properties of the scenario.
- *
- * A scenario's structure comes from exactly one of two sources, and they are
- * mutually exclusive:
- *
- * - **Template-based**: `createdFrom` references a scenario template version,
- *   and that template is the authoritative source for the scenario's structure.
- *   Inline `parameters` and `actions` are not used.
- * - **Inline**: `createdFrom` is absent, and the scenario's structure is taken
- *   from the `parameters` and `actions` supplied in the request.
- *
- * Supplying neither source is rejected. This constraint cannot be expressed in
- * the schema and is enforced at request validation.
  */
 model ScenarioProperties {
   /**
@@ -56,15 +44,24 @@ model ScenarioProperties {
 
   /**
    * Resource ID of the template version this scenario was created from (optional).
+   * The ID has the form
+   * `/providers/Microsoft.Chaos/scenarioTemplates/{scenarioTemplateName}/versions/{version}`.
+   * This property retains its existing string representation for compatibility
+   * with earlier API versions and SDKs.
+   *
+   * A scenario's structure comes from exactly one of two mutually exclusive sources.
+   * When `createdFrom` is supplied on create, the referenced template version is the
+   * authoritative source for the scenario's structure; inline `parameters` and
+   * `actions` are not used. When `createdFrom` is absent, the structure comes from
+   * the inline `parameters` and `actions` supplied in the request.
+   * Supplying neither source is rejected by request validation.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   createdFrom?: string;
 
   /**
-   * Version of the scenario, supplied by the author. Defaults to `1.0` when not
-   * supplied on create. This is the scenario's own version and is independent of
-   * the version of any template it was created from.
+   * Version of the scenario.
    */
   @removed(Microsoft.Chaos.Versions.v2026_11_01)
   @renamedFrom(Microsoft.Chaos.Versions.v2026_11_01, "version")
@@ -85,20 +82,14 @@ model ScenarioProperties {
   description?: string;
 
   /**
-   * Parameter definitions for the scenario. Used as the scenario's parameter
-   * definitions when `createdFrom` is not supplied; not used when it is,
-   * because the referenced template is then the authoritative source for the
-   * scenario's structure.
+   * Parameter definitions for the scenario.
    */
   @madeOptional(Microsoft.Chaos.Versions.v2026_11_01)
   @identifiers(#["name"])
   parameters?: ScenarioParameter[];
 
   /**
-   * Array of actions that define the scenario's orchestration. Used as the
-   * scenario's actions when `createdFrom` is not supplied; not used when it is,
-   * because the referenced template is then the authoritative source for the
-   * scenario's structure. When supplied, at least one action must be present.
+   * Array of actions that define the scenario's orchestration.
    */
   @madeOptional(Microsoft.Chaos.Versions.v2026_11_01)
   @minItems(1)
