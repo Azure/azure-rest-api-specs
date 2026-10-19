@@ -53,6 +53,88 @@ alias ArcDeploymentCreateLroHeaders = ArmCombinedLroHeaders<
   ArcDeployment
 >;
 
+/**
+ * The content used to create or replace an Arc deployment.
+ */
+@added(Versions.v2026_11_15_preview)
+model ArcDeploymentCreateOrUpdateContent {
+  /**
+   * Properties used to create or replace an Arc deployment.
+   */
+  properties: ArcDeploymentCreateOrUpdateProperties;
+
+  /**
+   * The Arc deployment SKU. Only the SKU name is required for Arc deployments.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc defines its own SKU envelope for deployment resources."
+  sku: ArcDeploymentSku;
+}
+
+/**
+ * Properties used to create or replace an Arc deployment.
+ */
+@added(Versions.v2026_11_15_preview)
+model ArcDeploymentCreateOrUpdateProperties {
+  /**
+   * Model asset reference. Required on creation and immutable after creation.
+   */
+  `model`: ArcDeploymentModelReference;
+
+  /**
+   * Full Azure resource ID of the Foundry inference extension on the target Arc-enabled Kubernetes cluster. Required on creation and immutable after creation.
+   */
+  extensionId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.KubernetesConfiguration/extensions";
+    }
+  ]>;
+
+  /**
+   * Optional deployment template identifier for advanced vLLM tuning. Allowed only when runtime is vllm.
+   * Example: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}
+   */
+  deploymentTemplate?: string;
+
+  /**
+   * Physical replica count on the Arc cluster.
+   */
+  @minValue(1)
+  @maxValue(100)
+  replicas: int32;
+
+  /**
+   * Per-replica Kubernetes resource requests and limits.
+   */
+  resources: ArcDeploymentKubernetesResources;
+
+  /**
+   * Kubernetes node selector key-value map used to schedule pods onto nodes with matching labels.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<nodeSelector> type is used because Kubernetes node label keys are user-defined."
+  nodeSelector?: Record<string>;
+
+  /**
+   * The deployment state.
+   */
+  deploymentState?: DeploymentState;
+
+  /**
+   * The name of RAI policy.
+   */
+  raiPolicyName?: string;
+}
+
+/**
+ * Model asset reference. Required on creation and immutable after creation.
+ */
+@added(Versions.v2026_11_15_preview)
+model ArcDeploymentModelReference {
+  /**
+   * AzureML Registry model asset URI.
+   */
+  assetId: string;
+}
+
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
@@ -68,73 +150,25 @@ interface ArcDeployments {
   /**
    * Creates or updates an Arc deployment associated with the Cognitive Services account.
    */
-  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_15_preview, "createOrUpdate")
+  @sharedRoute
+  createOrUpdateLegacy is ArmResourceCreateOrReplaceAsync<
     ArcDeployment,
-    Request = {
-      /**
-       * Properties used to create or replace an Arc deployment.
-       */
-      properties: {
-        /**
-         * Model asset reference. Required on creation and immutable after creation.
-         */
-        `model`: {
-          /**
-           * AzureML Registry model asset URI.
-           */
-          assetId: string;
-        };
+    LroHeaders = ArcDeploymentCreateLroHeaders
+  >;
 
-        /**
-         * Full Azure resource ID of the Foundry inference extension on the target Arc-enabled Kubernetes cluster. Required on creation and immutable after creation.
-         */
-        extensionId: Azure.Core.armResourceIdentifier<[
-          {
-            type: "Microsoft.KubernetesConfiguration/extensions";
-          }
-        ]>;
-
-        /**
-         * Optional deployment template identifier for advanced vLLM tuning. Allowed only when runtime is vllm.
-         * Example: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}
-         */
-        deploymentTemplate?: string;
-
-        /**
-         * Physical replica count on the Arc cluster.
-         */
-        @minValue(1)
-        @maxValue(100)
-        replicas: int32;
-
-        /**
-         * Per-replica Kubernetes resource requests and limits.
-         */
-        resources: ArcDeploymentKubernetesResources;
-
-        /**
-         * Kubernetes node selector key-value map used to schedule pods onto nodes with matching labels.
-         */
-        #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<nodeSelector> type is used because Kubernetes node label keys are user-defined."
-        nodeSelector?: Record<string>;
-
-        /**
-         * The deployment state.
-         */
-        deploymentState?: DeploymentState;
-
-        /**
-         * The name of RAI policy.
-         */
-        raiPolicyName?: string;
-      };
-
-      /**
-       * The Arc deployment SKU. Only the SKU name is required for Arc deployments.
-       */
-      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc defines its own SKU envelope for deployment resources."
-      sku: ArcDeploymentSku;
-    },
+  /**
+   * Creates or updates an Arc deployment associated with the Cognitive Services account.
+   */
+  @added(Versions.v2026_11_15_preview)
+   @sharedRoute
+   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+    ArcDeployment,
+    Request = ArcDeploymentCreateOrUpdateContent,
     LroHeaders = ArcDeploymentCreateLroHeaders
   >;
 
@@ -175,12 +209,6 @@ interface ArcDeployments {
     Response = ArcDeploymentListResult
   >;
 }
-
-@@typeChangedFrom(
-  ArcDeployments.createOrUpdate::parameters.resource,
-  Versions.v2026_11_15_preview,
-  ArcDeployment
-);
 
 /**
  * Properties of a Cognitive Services Arc deployment.
@@ -632,6 +660,10 @@ model ArcDeploymentVllmParameters {
 );
 @@doc(
   ArcDeployments.createOrUpdate::parameters.resource,
+  "The Arc deployment properties."
+);
+@@doc(
+  ArcDeployments.createOrUpdateLegacy::parameters.resource,
   "The Arc deployment properties."
 );
 @@doc(
