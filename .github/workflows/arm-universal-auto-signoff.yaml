@@ -1,5 +1,5 @@
-# Pilot workflow for universal ARM auto-signoff. Once enforcement is enabled, rename this workflow
-# to "ARM Auto SignOff" and remove the legacy workflow.
+# Universal ARM auto-signoff. Owns ARMSignedOff only while ARMAutoSignedOff marks it as
+# automation-owned; ARMSignedOff without the marker is a human approval and is never changed.
 name: ARM Universal Auto SignOff
 
 on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
@@ -32,7 +32,7 @@ permissions:
   contents: read
   # issues.listLabelsOnIssue
   issues: read
-  # issues.listLabelsOnIssue
+  # pulls.get, issues.listLabelsOnIssue
   pull-requests: read
   # repos.getCombinedStatusForRef
   statuses: read
@@ -53,9 +53,10 @@ jobs:
         github.event.action == 'edited' ||
         ((github.event.action == 'labeled' || github.event.action == 'unlabeled') &&
          (github.event.label.name == 'Approved-Suppression' ||
-          github.event.label.name == 'ARMAutoSignedOff-Test' ||
+          github.event.label.name == 'ARMAutoSignedOff' ||
           github.event.label.name == 'ARMManualSignoffRequired' ||
           github.event.label.name == 'ARMReview' ||
+          github.event.label.name == 'ARMSignedOff' ||
           github.event.label.name == 'NotReadyForARMReview' ||
           github.event.label.name == 'SuppressionReviewRequired'))))
 
@@ -86,13 +87,35 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-universal-auto-signoff.ts');
             return await getLabelAction({ github, context, core });
 
-      # Pilot mode owns only the test label; it never changes ARMSignedOff.
-      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Test'] != 'none'
-        name: Upload artifact for ARMAutoSignedOff-Test label
+      # Update Labels applies these. The action is explicit: 'add' | 'remove' | 'none'.
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMSignedOff'] != 'none'
+        name: Upload artifact for ARMSignedOff label
         uses: ./.github/actions/add-label-artifact
         with:
-          name: "ARMAutoSignedOff-Test"
-          value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Test'] == 'add' }}"
+          name: "ARMSignedOff"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMSignedOff'] == 'add' }}"
+
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff'] != 'none'
+        name: Upload artifact for ARMAutoSignedOff label
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "ARMAutoSignedOff"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff'] == 'add' }}"
+
+      # Legacy markers are only ever removed.
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-IncrementalTSP'] == 'remove'
+        name: Upload artifact for ARMAutoSignedOff-IncrementalTSP label
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "ARMAutoSignedOff-IncrementalTSP"
+          value: "false"
+
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial'] == 'remove'
+        name: Upload artifact for ARMAutoSignedOff-Trivial label
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "ARMAutoSignedOff-Trivial"
+          value: "false"
 
       - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMManualSignoffRequired'] == 'add'
         name: Upload artifact for ARMManualSignoffRequired label
