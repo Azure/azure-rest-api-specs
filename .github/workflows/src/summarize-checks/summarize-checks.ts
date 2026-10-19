@@ -49,6 +49,7 @@ import {
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
   typeSpecSuppressionsTsg,
+  specChangePoliciesTsg,
 } from "./tsgs.ts";
 
 import fs from "node:fs/promises";
@@ -118,7 +119,7 @@ const CHECK_METADATA: CheckMetadata[] = [
     precedence: 0,
     name: "Spec Change Policies",
     suppressionLabels: [],
-    troubleshootingGuide: typeSpecRequirementArmTsg,
+    troubleshootingGuide: specChangePoliciesTsg,
   },
   {
     precedence: 0,

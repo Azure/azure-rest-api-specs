@@ -8,6 +8,25 @@ using Azure.Core;
 using TypeSpec.Http;
 using Microsoft.Storage;
 
+// Preserve provisioning name-generation constraints without changing service validation.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  FileShare,
+  "resource-name-constraint",
+  #{ minLength: 3, maxLength: 63, pattern: "^[a-z0-9-]+$" },
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  BlobContainer,
+  "resource-name-constraint",
+  #{ minLength: 3, maxLength: 63, pattern: "^[a-z0-9-]+$" },
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
 @@clientOption(
@@ -411,7 +430,7 @@ union CSharpBlobInventoryPolicyName {
 @@clientName(SKUCapability, "SkuCapability", "java");
 @@clientName(IPRule, "IpRule", "java");
 @@clientName(IPRule.value, "ipAddressOrRange", "java");
-@@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
+@@clientName(IPRule.value, exact("iPAddressOrRange"), "javascript");
 @@clientName(StorageAccounts.listAccountSAS, "listAccountSas", "java");
 @@clientName(StorageAccounts.listServiceSAS, "listServiceSas", "java");
 // C# SAS casing: new generator preserves uppercase SAS, prior GA used Sas
@@ -422,7 +441,7 @@ union CSharpBlobInventoryPolicyName {
 @@clientName(AccountSasParameters.signedIp, "ipAddressOrRange", "java");
 @@clientName(
   AccountSasParameters.signedIp,
-  "$DO_NOT_NORMALIZE$iPAddressOrRange",
+  exact("iPAddressOrRange"),
   "javascript"
 );
 @@clientName(AccountLimits.maxProvisionedIOPS, "maxProvisionedIops", "java");
@@ -433,7 +452,7 @@ union CSharpBlobInventoryPolicyName {
 @@clientName(ServiceSasParameters.signedIp, "ipAddressOrRange", "java");
 @@clientName(
   ServiceSasParameters.signedIp,
-  "$DO_NOT_NORMALIZE$iPAddressOrRange",
+  exact("iPAddressOrRange"),
   "javascript"
 );
 
@@ -1652,4 +1671,27 @@ enum ProvisioningStateEnum {
   ContextCacheUpdate.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp,java,python,javascript,go"
+);
+
+@@clientName(BlobAccessPointSourceType.DellOneFs, "DellOneFS", "go");
+@@clientName(BlobAccessPointSourceType.NetAppOntap, "NetAppONTAP", "go");
+@@clientName(
+  BlobAccessPointDellOneFsSourceProperties,
+  "BlobAccessPointDellOneFSSourceProperties",
+  "go"
+);
+@@clientName(
+  BlobAccessPointDellOneFsSourcePropertiesUpdate,
+  "BlobAccessPointDellOneFSSourcePropertiesUpdate",
+  "go"
+);
+@@clientName(
+  BlobAccessPointNetAppOntapSourceProperties,
+  "BlobAccessPointNetAppONTAPSourceProperties",
+  "go"
+);
+@@clientName(
+  BlobAccessPointNetAppOntapSourcePropertiesUpdate,
+  "BlobAccessPointNetAppONTAPSourcePropertiesUpdate",
+  "go"
 );
