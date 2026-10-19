@@ -1,5 +1,5 @@
 import { readdir, readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { join } from "pathe";
 
 type LogWarning = (message: string) => void;
 
