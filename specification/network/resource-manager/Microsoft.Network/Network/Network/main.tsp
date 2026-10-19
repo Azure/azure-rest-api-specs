@@ -193,7 +193,6 @@ enum Versions {
   /**
    * The 2026-03-01 API version.
    */
-  @useDependency(Common.Versions.v2026_03_01)
   v2026_03_01: "2026-03-01",
 }
 

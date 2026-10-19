@@ -198,6 +198,13 @@ model ProxyResourceInstance<
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for backward compatibility with converted specs."
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ArmProxyResourceInstance<
+  Properties extends {},
+  PropertiesOptional extends valueof boolean = true
+> extends Azure.ResourceManager.ProxyResource<Properties, PropertiesOptional> {}
+
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for backward compatibility with converted specs."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Required for backward compatibility with converted specs."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Required for backward compatibility with converted specs."
 @Http.Private.includeInapplicableMetadataInPayload(false)

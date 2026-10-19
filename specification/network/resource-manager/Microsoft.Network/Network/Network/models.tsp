@@ -10962,9 +10962,8 @@ model DdosCustomPolicyPropertiesFormat {
 /**
  * A DDoS mitigation rule resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The model must use the virtualNetwork legacy feature so it is emitted into the existing virtualNetwork.json contract."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the NRP wire contract's SubResource allOf envelope for this embedded child model."
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_03_01)
 model DdosMitigationRule extends SubResource {
   /**
@@ -10999,8 +10998,7 @@ model DdosMitigationRule extends SubResource {
 /**
  * DDoS mitigation rule properties. The service validates that each rule specifies at least one applicable default mitigation or source policy override and that the default mitigations match the selected trafficScope.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_03_01)
 model DdosMitigationRulePropertiesFormat {
   /**
@@ -11048,8 +11046,7 @@ union DdosMitigationTrafficScope {
 /**
  * Default mitigations for TCP traffic.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_03_01)
 model DdosTcpDefaultMitigations {
   /**
@@ -11066,8 +11063,7 @@ model DdosTcpDefaultMitigations {
 /**
  * Default mitigations for UDP traffic.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_03_01)
 model DdosUdpDefaultMitigations {
   /**
@@ -11079,8 +11075,7 @@ model DdosUdpDefaultMitigations {
 /**
  * A per-source TCP packet rate limit.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_03_01)
 model DdosTcpPerSourceRateLimitPolicy {
   /**
@@ -11092,8 +11087,7 @@ model DdosTcpPerSourceRateLimitPolicy {
 /**
  * A per-source TCP connection establishment rate limit.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_03_01)
 model DdosTcpPerSourceConnectionRateLimitPolicy {
   /**
@@ -11105,8 +11099,7 @@ model DdosTcpPerSourceConnectionRateLimitPolicy {
 /**
  * A per-source UDP packet rate limit.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_03_01)
 model DdosUdpPerSourceRateLimitPolicy {
   /**
@@ -11118,8 +11111,7 @@ model DdosUdpPerSourceRateLimitPolicy {
 /**
  * A source-specific action that overrides the default mitigations.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_03_01)
 model DdosSourcePolicyOverride {
   /**
@@ -11136,8 +11128,7 @@ model DdosSourcePolicyOverride {
 /**
  * The action to apply to traffic matching a source policy override.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_03_01)
 model DdosSourcePolicyAction {
   /**
@@ -11163,8 +11154,7 @@ union DdosSourcePolicyActionType {
 /**
  * Source conditions for a DDoS source policy override. A source matches when it matches any IP prefix or any geographic match.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_03_01)
 model DdosSourceMatchConditions {
   /**
@@ -11182,8 +11172,7 @@ model DdosSourceMatchConditions {
 /**
  * A geographic source match. The service validates that at least one of continent or countryCode is specified. If both are specified, the service validates that the country belongs to the continent according to the service-defined mapping. For example, RU, TR, and KZ map to Asia, EG maps to Africa, and CY maps to Europe.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @added(Versions.v2026_03_01)
 model DdosGeoMatch {
   /**
@@ -13113,8 +13102,7 @@ model ExpressRouteLagPropertiesFormat {
 /**
  * Properties of ExpressRouteLag Authorization.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The feature decorator places this properties schema in expressRoute.json under output-splitting: legacy-feature-files."
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 @summary("ExpressRoute Lag Authorization Properties")
 @added(Versions.v2026_03_01)
 model ExpressRouteLagAuthorizationPropertiesFormat {
