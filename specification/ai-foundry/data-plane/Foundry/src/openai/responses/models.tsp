@@ -87,6 +87,23 @@ namespace Azure.AI.Projects {
    */
   model RoutingConfiguration {
     /**
+     * Selects quality, balanced, or cost routing within the deployment's approved model pool.
+     * Omission retains the deployment's existing routing mode. Requires the routing-controls preview
+     * and subscription qualification; unknown modes return a 400 (Bad Request) error.
+     */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    mode?: ModelRouterMode;
+
+    /**
+     * An unordered, nonempty subset of the deployment's approved model names.
+     * Every supplied model must belong to that pool; this field cannot add models to a deployment.
+     * Omission retains the existing pool. Requires the routing-controls preview and subscription qualification.
+     */
+    @minItems(1)
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    models?: string[];
+
+    /**
      * Session affinity configuration for reusing an eligible model across requests in the same conversation.
      * If omitted, sticky affinity is used when a supported conversation identifier is available.
      */
@@ -97,10 +114,52 @@ namespace Azure.AI.Projects {
      * Controls how Model Router handles request parameters that differ across candidate models.
      * Defaults to relax when omitted. Explicit null and unknown values return a 400 (Bad Request) error.
      * Requires the Foundry-Features: ModelRouterControls=V1Preview header.
-     * Applies only to Model Router's supported parameter mappings; it does not guarantee native Responses API compatibility.
+     * Applies only to qualified model, API, and adapter mappings, not every provider-native option.
+     * Explicit parameters and constraints remain hard requirements under every policy.
      */
     @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
     parameter_policy?: ModelRouterParameterPolicy = ModelRouterParameterPolicy.relax;
+
+    /**
+     * Concrete, non-null settings that the selected serving path must preserve.
+     * Uses canonical routing names, including reasoning_effort, verbosity, max_completion_tokens,
+     * and response_format; the router maps these to the caller API's native fields.
+     * Other accepted names are temperature, top_p, frequency_penalty, presence_penalty, n, stop,
+     * logprobs, top_logprobs, extra_body, logit_bias, seed, parallel_tool_calls, thinking,
+     * max_tokens, tools, and tool_choice. Values of tools and output formats use the caller API's shape.
+     * Unknown names, null values, conflicting native values, and unsupported requirements return 400.
+     * Omitted settings retain existing behavior; no stored parameter defaults are introduced.
+     * Requires the parameter preview to be enabled for the subscription.
+     */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    parameters?: Record<unknown>;
+
+    /**
+     * Permitted routing choices. These are hard requirements, including when parameter_policy is relax.
+     * Requires the parameter preview to be enabled for the subscription.
+     */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    constraints?: ModelRouterParameterConstraints;
+  }
+
+  /** Hard constraints on the settings Model Router may select. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model ModelRouterParameterConstraints {
+    /**
+     * Permitted reasoning efforts for the selected exact model revision and serving API.
+     * An explicitly supplied native effort must belong to this domain.
+     * Otherwise the router prefers medium when permitted, then the ordinally first permitted value.
+     * This is deterministic selection, not a cross-model cost or token-budget guarantee.
+     */
+    reasoning_effort?: ModelRouterAllowedValuesConstraint;
+  }
+
+  /** An unordered, nonempty domain of model-specific string values. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model ModelRouterAllowedValuesConstraint {
+    /** Values the router may choose; unknown or unsupported model-specific values cannot satisfy the constraint. */
+    @minItems(1)
+    allowed_values: string[];
   }
 
   /** Request parameter handling policies supported by Model Router. */
@@ -136,6 +195,9 @@ namespace Azure.AI.Projects {
   union SessionAffinityRequestMode {
     /** Attempts to reuse the model associated with the selected conversation identifier. */
     sticky: "sticky",
+
+    /** Reuses a currently eligible model when the adaptive policy permits it. Requires subscription qualification. */
+    adaptive: "adaptive",
 
     /** Disables affinity state lookup and update for this request. */
     none: "none",
@@ -254,6 +316,18 @@ namespace Azure.AI.Projects {
     /** The routing mode for the request. */
     mode: ModelRouterMode;
 
+    /** The effective parameter-preservation policy, when parameter planning was used. */
+    parameter_policy?: ModelRouterParameterPolicy;
+
+    /** Known settings submitted to the serving path, excluding tool definitions, schemas, and arbitrary extension bodies. */
+    parameters?: Record<unknown>;
+
+    /** Describes the evidence for parameters. The value forwarded means submitted, not acknowledged as applied by the provider. */
+    parameter_status?: string;
+
+    /** The capability-catalog revision used to plan this request. */
+    catalog_version?: string;
+
     /** Session affinity metadata for the routing decision. Omitted when affinity metadata is unavailable or the preview feature is not enabled. */
     session_affinity?: SessionAffinityDetails;
 
@@ -282,6 +356,9 @@ namespace Azure.AI.Projects {
     /** Affinity was enabled for the request. */
     sticky: "sticky",
 
+    /** Adaptive affinity was enabled for the request. */
+    adaptive: "adaptive",
+
     /** Affinity was disabled for the request. */
     none: "none",
   }
@@ -299,6 +376,9 @@ namespace Azure.AI.Projects {
 
     /** No usable conversation identifier was available. */
     not_available: "not_available",
+
+    /** A hashed conversation, response-chain, or user-history identity. The original identifier is not returned. */
+    derived_fingerprint: "derived_fingerprint",
 
     /** The Responses conversation identifier. */
     conversation: "conversation",
