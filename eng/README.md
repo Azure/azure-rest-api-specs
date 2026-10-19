@@ -4,16 +4,44 @@ The `eng` directory contains source code for automated tooling running on this r
 
 For context on this directory, see [Design guidelines for spec repos validation tooling] (Microsoft-internal).
 
+## Spec Change Policies
+
+[Spec Change Policies](tools/spec-change-policies/README.md) checks TypeSpec usage and
+SDK API-version policies for committed PR changes. [TypeSpec Validation](tools/typespec-validation/README.md)
+continues to validate TypeSpec project correctness.
+
+The supported PR command is `pnpm spec-change-policies --base=<base> --head=<head>`.
+The former TypeSpec Requirement entry point and its `--check-all-under` audit
+mode are no longer available.
+
+The workflow temporarily also publishes **TypeSpec Requirement**, which passes
+only when **Spec Change Policies** succeeds. Keep the old check required during
+the rollout so existing PR results remain usable.
+[Cleanup issue](https://github.com/Azure/azure-rest-api-specs/issues/47248) tracks
+switching the requirement and removing the compatibility job after old-only PRs
+drain. Preserve separate externally produced Requirement statuses where still in use.
+
 ## Protected files
 
-The **Protected Files** check keeps repository-managed files out of specification
-contributions. It is a contribution-scope check, not a request for code-owner approval.
+The **Protected Files** check restricts changes to repository-managed files to
+allowlisted repository maintainers and trusted automation accounts.
 Contributor guidance is in the [CI Fix Guide](../documentation/ci-fix.md#protected-files).
 
-Intentional repository-maintenance PRs also fail this check. Repository maintainers
-can use their existing bypass permissions to merge those changes after reviewing
-the applicable validation results and code-owner requirements. Changes authored by
-the trusted `azure-sdk` and `azure-sdk-automation[bot]` accounts pass automatically.
+The author allowlist is `ALLOWED_AUTHORS` in
+[protected-files.ts](../.github/workflows/src/protected-files.ts). Its maintainer
+entries are based on the `Azure/azure-rest-api-specs-maintainers` team;
+update them as maintainer access changes. The `azure-sdk` and
+`azure-sdk-automation[bot]` author exemptions remain included. No organization
+membership API access or additional credentials are required.
+
+Non-allowlisted authors cannot change protected files, even in maintenance-only
+PRs. Deletions and both sides of renames count. Approvals, labels and reruns by
+maintainers do not exempt a PR; normal CODEOWNERS review and other merge
+requirements still apply to allowed authors.
+
+The read-only `pull_request` workflow evaluates the PR merge commit against its
+base-branch parent. Normal CODEOWNERS reviews still apply to changes to the check
+and its allowlist.
 
 ## Contributor readiness
 
@@ -113,6 +141,45 @@ Keep a long-lived branch by protecting it or adding it to those exclusions.
 Candidates and their SHAs are logged, and SHA-guarded Git pushes refuse to delete
 changed tips. API and deletion failures fail the workflow.
 
+## Initial issue triage
+
+[Issue Triage](../.github/workflows/issue-triage.md) classifies newly opened human
+issues as repository engineering (`EngSys`), service-contract/runtime issues
+(`Service Attention`), or uncertain (`needs-team-triage`). High-confidence service
+issues can also receive a service label and API-plane label; clear issue kinds
+receive `bug`, `feature-request`, `question`, or `documentation`.
+It processes internal and external reports, preserves existing labels, and leaves
+one concise comment explaining the routing, with a possible duplicate link or
+one missing-information question when useful. Re-running updates that workflow's
+existing comment rather than creating another. It does not assign owners, set
+priorities, close issues, or establish that a request is still relevant.
+Repository policy continues to handle customer-reported labels separately.
+That policy may clear `needs-triage` when another label is added; the triager
+itself only adds labels.
+Label names and candidate areas come from the checked-in catalogs, not a copied
+inventory or assumed color palette. Ownership-dependent reasoning consults the
+current `CODEOWNERS` entries rather than embedding service-to-owner mappings.
+
+The workflow runs only on upstream `main`. It skips bot-authored, closed, locked,
+and non-actionable reports. Manual dispatch defaults to a dry run:
+
+```bash
+gh workflow run issue-triage.lock.yml --repo Azure/azure-rest-api-specs --ref main \
+  -f issue-number=123 -f dry-run=true
+```
+
+Set `dry-run=false` to apply the labels and comment. An issue changed during
+investigation is left unchanged and the run fails with a refresh instruction;
+dispatch again to triage its current content.
+Eligibility, content, and labels are refreshed immediately before the first write.
+Agent and applier failures are reported in workflow logs, not by creating
+additional failure-report issues, including during dry runs.
+The pinned gh-aw runtime can still record threat-detection warnings or failures
+in its shared tracking issue; that framework logging is separate from the
+triage decision and is not disabled by dry-run mode.
+The separate Backlog Triage workflow investigates old issues for resolution or
+obsolescence; initial triage does not replace that investigation.
+
 ## Repository labels
 
 Repository label configuration starts at [`.github/labels.yaml`](../.github/labels.yaml).
@@ -197,8 +264,10 @@ unconfigured labels and alias migrations. It does not enumerate affected items.
 relevant changes on `main`, when repository label definitions change, and daily.
 The schedule also catches changes made by workflows using `GITHUB_TOKEN`, which
 do not trigger further label-event workflows. Manual runs default to dry-run.
-Mutating runs use the upstream default branch and are disabled on forks. PR
-validation never changes GitHub labels.
+Mutating runs use the default branch of `Azure/azure-rest-api-specs` or
+`Azure/azure-rest-api-specs-pr` and are disabled on forks. Each repository
+synchronizes labels from its own checked-in catalog. PR validation never changes
+GitHub labels.
 
 The `unconfiguredLabels: archive` policy creates/updates configured labels and
 archives labels absent from the catalog. This applies repository-wide, including
@@ -380,9 +449,21 @@ repository's default module type. Root `tsconfig.json` checks this config and is
 also covered by the GitHub package build.
 
 [Eng](../.github/workflows/eng.yml) validates the workspace, builds once on Linux,
-and runs the Vitest workspace on Ubuntu and Windows with Node 24.
+and runs the Vitest workspace on Ubuntu and Windows with Node 24. Its dedicated
+GitHub Actions lint job runs actionlint and zizmor without installing workspace dependencies.
 New tools do not need their own workflows. `github-test.yaml` separately verifies
-production-only module imports, workflow YAML, and compiled agentic workflow locks.
+production-only module imports and compiled agentic workflow locks.
+
+## TypeSpec examples
+
+The root install includes the unified-example CLI. Validate a project's
+`examples.yaml` or `examples/*.yaml` files from the repository root:
+
+```bash
+pnpm tsp-examples validate specification/<service>/<project> --warn-as-error
+```
+
+Use `pnpm tsp-examples --help` for available commands.
 
 ## Publishing TypeSpec libraries
 
