@@ -463,12 +463,6 @@ model ScenarioRunSummaryResource {
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
   effectiveTargets?: ScenarioRunEffectiveTarget[];
-
-  /**
-   * Whether additional effective targets were omitted from the response.
-   */
-  @visibility(Lifecycle.Read)
-  effectiveTargetsTruncated?: boolean;
 }
 
 /**
