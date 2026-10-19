@@ -47,7 +47,9 @@ function createMockGithub({
   github.rest.issues.listLabelsOnIssue.mockResolvedValue({
     data: labelNames.map((name) => ({ name })),
   });
-  github.rest.repos.listCommitStatusesForRef.mockResolvedValue({ data: statuses });
+  github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+    data: { statuses, total_count: statuses.length },
+  });
   return github;
 }
 
@@ -63,6 +65,33 @@ function run(github: ReturnType<typeof createMockGithub>) {
 }
 
 describe("getLabelActionImpl", () => {
+  it("matches required status contexts regardless of returned casing", async () => {
+    const github = createMockGithub({
+      labelNames: ["ARMReview"],
+      statuses: successfulStatuses.map((status) => ({
+        ...status,
+        context: status.context.toUpperCase(),
+      })),
+    });
+
+    const result = await run(github);
+    expect(result.labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest]).toBe(LabelAction.Add);
+  });
+
+  it("ignores failures in unrelated status contexts", async () => {
+    const github = createMockGithub({ labelNames: ["ARMReview"] });
+    github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+      data: {
+        state: "failure",
+        statuses: [...successfulStatuses, { context: "Unrelated", state: "failure" }],
+        total_count: 4,
+      },
+    });
+
+    const result = await run(github);
+    expect(result.labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest]).toBe(LabelAction.Add);
+  });
+
   it("logs a no-op when an indirect trigger has no PR correlation", async () => {
     const loggingCore = createMockCore();
     const github = createMockGithub();
@@ -102,6 +131,14 @@ describe("getLabelActionImpl", () => {
         [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
       },
     });
+    expect(github.rest.repos.getCombinedStatusForRef).toHaveBeenCalledExactlyOnceWith({
+      owner,
+      repo,
+      ref: headSha,
+      per_page: 100,
+      page: 1,
+    });
+    expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
   });
 
   it("does not emit a redundant add when the pilot label already exists", async () => {
@@ -126,7 +163,7 @@ describe("getLabelActionImpl", () => {
       [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.Remove,
       [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
     });
-    expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
+    expect(github.rest.repos.getCombinedStatusForRef).not.toHaveBeenCalled();
   });
 
   it("takes no action when the PR is not ready and has no pilot label", async () => {
@@ -451,6 +488,6 @@ describe("getLabelActionImpl", () => {
 
     const result = await run(github);
     expect(result.labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest]).toBe(LabelAction.None);
-    expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
+    expect(github.rest.repos.getCombinedStatusForRef).not.toHaveBeenCalled();
   });
 });

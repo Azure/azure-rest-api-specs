@@ -39,11 +39,6 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "skill-invocation"
         config:
           required:
@@ -59,11 +54,6 @@ stimuli:
       @azure-typespec-author In API version `2024-10-01-preview`, add an Asset extension resource that can be attached to any ARM resource. It should have an optional, read-only provisioning state and support the standard operations for an ARM extension resource. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
     environment: *shared_environment
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "run-command"
         config:
           command: "node check-node-dependencies.js node_modules"

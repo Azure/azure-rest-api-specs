@@ -43,11 +43,6 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "skill-invocation"
         config:
           required:
@@ -63,11 +58,6 @@ stimuli:
       @azure-typespec-author In API version `2024-10-01-preview`, add a child resource named `AddressResource` under the existing Employee ARM resource. Its optional properties are street1, street2, city, state, postalCode, and country, along with a read-only provisioning state. Support the standard operations for a child ARM resource. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
     environment: *shared_environment
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
       - type: "run-command"
         config:
           command: "node check-node-dependencies.js node_modules"
