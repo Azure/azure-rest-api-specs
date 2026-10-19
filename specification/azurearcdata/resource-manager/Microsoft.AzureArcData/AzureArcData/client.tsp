@@ -142,7 +142,7 @@ using TypeSpec.Http;
 );
 @@clientName(
   ActiveDirectoryConnectorDNSDetails.nameserverIPAddresses,
-  "NameserverIpAddresses",
+  Azure.ClientGenerator.Core.exact("NameserverIpAddresses"),
   "csharp"
 );
 @@clientName(Authentication, "SqlServerAuthentication", "csharp");
@@ -154,7 +154,11 @@ using TypeSpec.Http;
 @@clientName(DbFailover.ON, "On", "csharp");
 @@clientName(DbFailover.OFF, "Off", "csharp");
 @@clientName(DBMEndpoint, "DbmEndpoint", "csharp");
-@@clientName(DBMEndpoint.ipAddress, "IpAddress", "csharp");
+@@clientName(
+  DBMEndpoint.ipAddress,
+  Azure.ClientGenerator.Core.exact("IpAddress"),
+  "csharp"
+);
 @@clientName(DataBaseMigration, "DatabaseMigration", "csharp");
 @@clientName(
   DataBaseMigrationAssessment,
