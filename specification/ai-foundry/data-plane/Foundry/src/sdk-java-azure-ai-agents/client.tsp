@@ -65,6 +65,10 @@ using Azure.AI.Projects;
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
 @@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!java");
 
+// Retain both concrete targets for customized Realtime/Live subtype dispatch.
+@@access(VoiceAgentDefinition, Access.public, "java");
+@@access(VoiceAgentLiveDefinition, Access.public, "java");
+
 // Keep the OpenAI realtime discriminator roots reachable even though the WebSocket operation is excluded.
 @@usage(OpenAI.RealtimeClientEvent, Usage.input | Usage.json);
 @@access(OpenAI.RealtimeClientEvent, Access.public, "java");
@@ -690,6 +694,29 @@ using Azure.AI.Projects;
   "VoiceAgentSessionResponseConfiguration"
 );
 @@clientName(VoiceAgentSessionResponseConfig.object, "objectType");
+
+union VoiceResponseObjectType {
+  realtime_response: "realtime.response",
+}
+
+@@alternateType(
+  OpenAI.RealtimeResponse.object,
+  VoiceResponseObjectType,
+  "java"
+);
+@@clientName(OpenAI.RealtimeResponse.object, "objectType", "java");
+
+@@alternateType(
+  VoiceAgentDefinition.sub_protocol,
+  VoiceAgentSubProtocol,
+  "java"
+);
+@@alternateType(
+  VoiceAgentLiveDefinition.sub_protocol,
+  VoiceAgentSubProtocol,
+  "java"
+);
+
 @@clientName(
   VoiceAgentSessionUpdateConfig,
   "VoiceAgentSessionUpdateConfiguration"
