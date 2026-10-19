@@ -35,6 +35,8 @@ namespace Azure.AI.Projects {
   // incompatible constructors and backing fields in the current emitter.
   @@scope(VoiceAgentBaseDefinition.sub_protocol, "!csharp");
 
+  @@clientName(OpenAI.delegation, "LiveDelegation", "csharp");
+
   // --------------------------------------------------------------------------------
   // Fix the xref.
   // --------------------------------------------------------------------------------

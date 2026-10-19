@@ -2041,6 +2041,22 @@ for (const [language, directory, emitter, rootClient] of [
       const baseSelector = selector("VoiceAgentBaseDefinition");
       if (language === "csharp") {
         assert.equal(baseSelector, undefined);
+        const delegation = context.sdkPackage.models.find(
+          (m) => m.__raw?.name === "delegation",
+        );
+        assert.ok(delegation);
+        assert.equal(getTypeName(delegation.__raw), "OpenAI.delegation");
+        assert.equal(delegation.name, "LiveDelegation");
+        for (const name of [
+          "LiveClientDelegationParam",
+          "LiveResponsesDelegationParam",
+        ]) {
+          assert.equal(
+            context.sdkPackage.models.find((m) => m.__raw?.name === name)
+              .baseModel,
+            delegation,
+          );
+        }
       } else {
         assert.equal(baseSelector.type.kind, "enum");
         assert.equal(baseSelector.type.name, "VoiceAgentSubProtocol");
