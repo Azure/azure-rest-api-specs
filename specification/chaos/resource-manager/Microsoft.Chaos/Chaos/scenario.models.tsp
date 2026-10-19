@@ -276,9 +276,14 @@ model ScenarioAction {
   parameters?: KeyValuePair[];
 
   /**
-   * Action-specific target matching criteria evaluated during execution.
+   * Action-specific target matching criteria evaluated during execution. When provided,
+   * the collection must contain either `logicalZone` and `region`, or `physicalZone`.
+   * Matcher names must be unique, the two modes cannot be combined, and the service
+   * enforces the cross-item combination at runtime.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @minItems(1)
+  @maxItems(2)
   @identifiers(#["name"])
   matchers?: ScenarioActionMatcher[];
 

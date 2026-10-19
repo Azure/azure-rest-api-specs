@@ -6542,7 +6542,9 @@
         },
         "matchers": {
           "type": "array",
-          "description": "Action-specific target matching criteria evaluated during execution.",
+          "description": "Action-specific target matching criteria evaluated during execution. When provided,\nthe collection must contain either `logicalZone` and `region`, or `physicalZone`.\nMatcher names must be unique, the two modes cannot be combined, and the service\nenforces the cross-item combination at runtime.",
+          "minItems": 1,
+          "maxItems": 2,
           "items": {
             "$ref": "#/definitions/ScenarioActionMatcher"
           },
