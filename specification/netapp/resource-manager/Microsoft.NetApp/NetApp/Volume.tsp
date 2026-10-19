@@ -574,21 +574,6 @@ model VolumeProperties {
 }
 
 /**
- * Volume reference containing the resource ID
- */
-@added(Versions.v2026_08_15_preview)
-model VolumeId {
-  /**
-   * The resource ID of the volume
-   */
-  id: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes";
-    }
-  ]>;
-}
-
-/**
  * Indicates whether a volume is designated as an origin for cache volumes.
  */
 @added(Versions.v2026_08_15_preview)
@@ -1258,27 +1243,6 @@ model ReplicationObject {
   @added(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   relationshipStatus?: VolumeReplicationRelationshipStatus;
-
-  /**
-   * Extended Snapshot Retention Policy properties for the replication
-   */
-  @added(Versions.v2026_08_15_preview)
-  extendedSnapshotRetentionPolicy?: ReplicationExtendedSnapshotRetentionPolicy;
-}
-
-/**
- * Extended Snapshot Retention Policy reference for replication
- */
-@added(Versions.v2026_08_15_preview)
-model ReplicationExtendedSnapshotRetentionPolicy {
-  /**
-   * The resource ID of the Extended Snapshot Retention Policy associated with the replication
-   */
-  extendedSnapshotRetentionPolicyId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.NetApp/policyGroups/extendedSnapshotRetentionPolicies";
-    }
-  ]>;
 }
 
 /**
@@ -1642,23 +1606,6 @@ model VolumePatchPropertiesDataProtection {
    */
   @added(Versions.v2025_12_01)
   ransomwareProtection?: RansomwareProtectionPatchSettings;
-
-  /**
-   * Replication updatable settings
-   */
-  @added(Versions.v2026_08_15_preview)
-  replication?: ReplicationObjectPatch;
-}
-
-/**
- * Replication patch properties
- */
-@added(Versions.v2026_08_15_preview)
-model ReplicationObjectPatch {
-  /**
-   * Extended Snapshot Retention Policy properties for the replication
-   */
-  extendedSnapshotRetentionPolicy?: ReplicationExtendedSnapshotRetentionPolicy;
 }
 
 /**
@@ -1821,12 +1768,6 @@ model Replication {
   @added(Versions.v2025_08_01)
   @visibility(Lifecycle.Read)
   replicationDeletionTime?: utcDateTime;
-
-  /**
-   * Extended Snapshot Retention Policy properties for the replication
-   */
-  @added(Versions.v2026_08_15_preview)
-  extendedSnapshotRetentionPolicy?: ReplicationExtendedSnapshotRetentionPolicy;
 }
 
 /**

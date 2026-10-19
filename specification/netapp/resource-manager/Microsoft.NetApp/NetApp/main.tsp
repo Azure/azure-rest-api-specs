@@ -29,8 +29,6 @@ import "./Backup.tsp";
 import "./BackupVault.tsp";
 import "./Bucket.tsp";
 import "./Cache.tsp";
-import "./PolicyGroup.tsp";
-import "./ExtendedSnapshotRetention.tsp";
 import "./Elastic/ElasticAccount.tsp";
 import "./Elastic/ElasticCapacityPool.tsp";
 import "./Elastic/ElasticVolume.tsp";
