@@ -2034,6 +2034,20 @@ for (const [language, directory, emitter, rootClient] of [
       checkSdkVoiceInheritance(context, language);
       checkSdkLiveDelegationProjection(context, language, sdkProgram);
 
+      const target = context.sdkPackage.models
+        .find(
+          (m) => m.__raw?.name === "VoiceAgentLiveDelegationConversationItem",
+        )
+        .properties.find((p) => p.serializedName === "target").type;
+      assert.equal(target.kind, "enum");
+      assert.equal(target.isFixed, false);
+      assert.equal(target.valueType.kind, "string");
+      assert.deepEqual(target.values.map((v) => v.value).sort(), [
+        "client",
+        "foundry_managed_agent",
+        "responses",
+      ]);
+
       const selector = (name) =>
         context.sdkPackage.models
           .find((m) => m.__raw?.name === name)
@@ -2650,8 +2664,13 @@ test("stored delegation reuses native fields and discriminates target-specific r
     type("Azure.AI.Projects.VoiceAgentLiveDelegationStatus"),
   );
   const target = type("Azure.AI.Projects.VoiceAgentLiveDelegationTarget");
+  assert.ok(
+    [...target.variants.values()].some((v) => getTypeName(v.type) === "string"),
+  );
   assert.deepEqual(
-    [...target.variants.values()].map((v) => v.type.value),
+    [...target.variants.values()]
+      .filter((v) => v.type.kind === "String")
+      .map((v) => v.type.value),
     ["responses", "client", "foundry_managed_agent"],
   );
   // Foundry targets extend persistence only.
@@ -2778,6 +2797,64 @@ test("speech, partial capture, and target-specific delegation examples validate"
     ...storedExamples,
   ]);
   checkErrors(result.diagnostics);
+});
+
+test("unknown stored delegation targets are accepted without widening configuration or native events", async () => {
+  const target = "future_delegation_owner";
+  const payload = { ...storedDelegation, target };
+  // Validate the delegation base; @example does not dispatch nested discriminators.
+  checkErrors(
+    (
+      await validateExamples("unknown-stored-delegation-target", [
+        {
+          model: "Azure.AI.Projects.VoiceAgentLiveDelegationConversationItem",
+          payload,
+        },
+      ])
+    ).diagnostics,
+  );
+  checkInvalidExample(
+    (
+      await validateExamples("unknown-native-delegation-target", [
+        {
+          model: "OpenAI.LiveDelegationItem",
+          payload: { type: "delegation", id: "del_future", target },
+        },
+      ])
+    ).diagnostics,
+  );
+  checkInvalidExample(
+    (
+      await validateExamples(
+        "unknown-delegation-configuration",
+        [
+          {
+            model: "LiveDelegationProbe",
+            payload: { delegation: { type: target } },
+          },
+        ],
+        liveDelegationProbe,
+      )
+    ).diagnostics,
+  );
+  for (const doc of documents) {
+    const schema = doc.components.schemas.VoiceAgentLiveDelegationTarget;
+    assert.deepEqual(schema.anyOf, [
+      { type: "string" },
+      {
+        type: "string",
+        enum: ["responses", "client", "foundry_managed_agent"],
+      },
+    ]);
+    assert.equal(schema.enum, undefined);
+    assert.deepEqual(
+      Object.keys(
+        doc.components.schemas.VoiceAgentLiveDelegationConversationItem
+          .discriminator.mapping,
+      ).sort(),
+      ["client", "foundry_managed_agent", "responses"],
+    );
+  }
 });
 
 test("Live conversation envelope uses native Live seconds usage, not Realtime token usage", async () => {
@@ -3125,10 +3202,10 @@ test("OpenAPI exposes the Foundry Live handshake without native REST operations"
       "agent_name",
       "store",
       "structured_inputs",
+      "structured_input",
       "x-agent-version-override",
     ])
       assert.ok(names.includes(name));
-    assert.equal(names.includes("structured_input"), false);
     const structuredInputs = op.parameters.find(
       (p) => p.name === "structured_inputs",
     );
@@ -3138,7 +3215,7 @@ test("OpenAPI exposes the Foundry Live handshake without native REST operations"
     const realtime =
       doc.paths["/agents/{agent_name}/endpoint/protocols/voice"].get;
     assert.ok(realtime.parameters.some((p) => p.name === "structured_inputs"));
-    assert.ok(!realtime.parameters.some((p) => p.name === "structured_input"));
+    assert.ok(realtime.parameters.some((p) => p.name === "structured_input"));
     const realtimeInputs = realtime.parameters.find(
       (p) => p.name === "structured_inputs",
     );
@@ -3153,6 +3230,37 @@ test("OpenAPI exposes the Foundry Live handshake without native REST operations"
       false,
     );
     assert.ok(doc.paths["/agents/{agent_name}/endpoint/protocols/voice"].get);
+  }
+});
+
+test("voice handshakes retain the deprecated query alias without replacing the canonical parameter", () => {
+  for (const doc of documents) {
+    for (const path of [
+      "/agents/{agent_name}/endpoint/protocols/voice",
+      "/agents/{agent_name}/endpoint/protocols/voice/live/sessions",
+    ]) {
+      const parameters = doc.paths[path].get.parameters;
+      for (const name of ["structured_inputs", "structured_input"]) {
+        const matches = parameters.filter((p) => p.name === name);
+        assert.equal(matches.length, 1, `${path}: ${name}`);
+        const [parameter] = matches;
+        assert.equal(parameter.in, "query");
+        assert.equal(parameter.required, false);
+        assert.deepEqual(parameter.schema, { type: "string" });
+        assert.match(parameter.description, /sending both.*400/i);
+        if (name === "structured_input") {
+          assert.equal(parameter.deprecated, true);
+          assert.match(
+            parameter.description,
+            /legacy alias for structured_inputs/i,
+          );
+        } else {
+          assert.notEqual(parameter.deprecated, true);
+        }
+      }
+      assert.equal(doc.paths[path].get.requestBody, undefined);
+      assert.ok(doc.paths[path].get.responses["101"]);
+    }
   }
 });
 

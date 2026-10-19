@@ -155,6 +155,7 @@ union VoiceAgentLiveDelegationResultItem {
 
 @doc("Delegation owner. Foundry agent targets use native client delegation upstream.")
 union VoiceAgentLiveDelegationTarget {
+  string,
   responses: "responses",
   client: "client",
   foundry_managed_agent: "foundry_managed_agent",

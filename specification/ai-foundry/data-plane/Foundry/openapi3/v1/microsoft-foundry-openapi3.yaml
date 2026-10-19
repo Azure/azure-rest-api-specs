@@ -2386,9 +2386,18 @@ paths:
             URL-encoded as this query parameter. Supplied values override definition defaults when rendering the
             agent's instructions and session-start greeting for this session only. The decoded value must be a JSON
             object no larger than 32 KiB with a maximum nesting depth of 16.
+            Mutually exclusive with `structured_input`; sending both returns `400 Bad Request`.
           schema:
             type: string
           explode: false
+        - name: structured_input
+          in: query
+          required: false
+          description: Legacy alias for structured_inputs with the same encoding and limits. Sending both names returns 400 Bad Request.
+          schema:
+            type: string
+          explode: false
+          deprecated: true
         - name: x-agent-version-override
           in: query
           required: false
@@ -4245,10 +4254,18 @@ paths:
         - name: structured_inputs
           in: query
           required: false
-          description: URL-encoded JSON values for instruction and greeting templates.
+          description: URL-encoded JSON values for instruction and greeting templates. Mutually exclusive with structured_input; sending both returns 400 Bad Request.
           schema:
             type: string
           explode: false
+        - name: structured_input
+          in: query
+          required: false
+          description: Legacy alias for structured_inputs with the same encoding and limits. Sending both names returns 400 Bad Request.
+          schema:
+            type: string
+          explode: false
+          deprecated: true
         - name: store
           in: query
           required: false
@@ -88995,11 +89012,13 @@ components:
             - cancelled
       description: Persisted delegation outcome, not speech or playback status.
     VoiceAgentLiveDelegationTarget:
-      type: string
-      enum:
-        - responses
-        - client
-        - foundry_managed_agent
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - responses
+            - client
+            - foundry_managed_agent
       description: Delegation owner. Foundry agent targets use native client delegation upstream.
     VoiceAgentLiveFoundryManagedAgentDelegationItem:
       type: object
