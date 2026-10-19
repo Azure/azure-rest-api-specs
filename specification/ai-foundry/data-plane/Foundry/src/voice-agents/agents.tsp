@@ -423,7 +423,7 @@ union VoiceAgentSystemToolName {
 @doc("A declaration for one session-local private string. This model contains no secret value, and may be returned with the Agent definition. Do not put sensitive values in structured-input defaults or instructions.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSessionSecret {
-  @doc("An optional `structured_inputs.<identifier>` reference used to initialize the private string at session creation. The referenced value must be a JSON string, preserving leading zeros. Omission leaves the slot empty until a successful private collection.")
+  @doc("An optional `structured_inputs.<identifier>` reference used to initialize the private string only through a trusted, secret-safe session setup that excludes its value from URLs, diagnostics, echoes, exports, and durable job data. The public WebSocket `structured_input` query and outbound call-job `structured_inputs` cannot initialize private slots; requests supplying mapped private inputs through either channel are rejected with 400 before session admission or durable job creation. Clients must not send private values through those channels: rejection cannot undo prior URL logging. No new public initialization channel is introduced. Without a secret-safe setup, omit initialization and populate the slot through private collection. The referenced value must be a JSON string, preserving leading zeros. Omission leaves the slot empty until a successful private collection.")
   @pattern("^structured_inputs\\.[A-Za-z_][A-Za-z0-9_]*$")
   initial_value_from?: string;
 }

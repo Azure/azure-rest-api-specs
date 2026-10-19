@@ -3554,7 +3554,7 @@
             "name": "structured_input",
             "in": "query",
             "required": false,
-            "description": "Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and\nURL-encoded as this query parameter. Supplied values override definition defaults when rendering the\nagent's instructions and session-start greeting for this session only. The decoded value must be a JSON\nobject no larger than 32 KiB with a maximum nesting depth of 16.",
+            "description": "Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and\nURL-encoded as this query parameter. Supplied values override definition defaults when rendering the\nagent's instructions and session-start greeting for this session only. The decoded value must be a JSON\nobject no larger than 32 KiB with a maximum nesting depth of 16.\nThis URL query accepts ordinary inputs only, not inputs mapped by a private slot's `initial_value_from`.\nClients must not transmit private values in URLs; mapped private inputs are rejected with 400 before\nsession admission. Rejection cannot undo prior URL logging. Use private collection when no trusted,\nsecret-safe initialization path is available.",
             "schema": {
               "type": "string"
             },
@@ -44026,7 +44026,7 @@
           "structured_inputs": {
             "type": "object",
             "unevaluatedProperties": {},
-            "description": "Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables."
+            "description": "Ordinary structured input values available to the agent and greeting for this call. These values are persisted with the call job and returned by its read APIs, so clients must not put private values here. Inputs mapped by a private slot's `initial_value_from` are rejected with 400 before durable job creation; use private collection when no trusted, secret-safe initialization path is available. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional ordinary inputs remain available as dynamic template variables."
           },
           "schedule": {
             "$ref": "#/components/schemas/TelephonyCallJobSchedule",
@@ -96727,7 +96727,7 @@
           "structured_inputs": {
             "type": "object",
             "unevaluatedProperties": {},
-            "description": "Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables."
+            "description": "Ordinary structured input values available to the agent and greeting for this call. These values are persisted with the call job and returned by its read APIs, so clients must not put private values here. Inputs mapped by a private slot's `initial_value_from` are rejected with 400 before durable job creation; use private collection when no trusted, secret-safe initialization path is available. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional ordinary inputs remain available as dynamic template variables."
           },
           "schedule": {
             "$ref": "#/components/schemas/TelephonyCallJobSchedule",
@@ -101360,7 +101360,7 @@
           "initial_value_from": {
             "type": "string",
             "pattern": "^structured_inputs\\.[A-Za-z_][A-Za-z0-9_]*$",
-            "description": "An optional `structured_inputs.<identifier>` reference used to initialize the private string at session creation. The referenced value must be a JSON string, preserving leading zeros. Omission leaves the slot empty until a successful private collection."
+            "description": "An optional `structured_inputs.<identifier>` reference used to initialize the private string only through a trusted, secret-safe session setup that excludes its value from URLs, diagnostics, echoes, exports, and durable job data. The public WebSocket `structured_input` query and outbound call-job `structured_inputs` cannot initialize private slots; requests supplying mapped private inputs through either channel are rejected with 400 before session admission or durable job creation. Clients must not send private values through those channels: rejection cannot undo prior URL logging. No new public initialization channel is introduced. Without a secret-safe setup, omit initialization and populate the slot through private collection. The referenced value must be a JSON string, preserving leading zeros. Omission leaves the slot empty until a successful private collection."
           }
         },
         "description": "A declaration for one session-local private string. This model contains no secret value, and may be returned with the Agent definition. Do not put sensitive values in structured-input defaults or instructions.",
