@@ -2,7 +2,7 @@ name: arm-api-reviewer-issue-mocked-lookup
 description: >
   Verify paginated duplicate discovery through a deterministic, read-only MCP
   fixture. This server never contacts GitHub and exposes no write tools.
-skill: arm-api-reviewer-issue
+skill: offline-evaluator
 schemaVersion: "1.4"
 version: "1.0"
 config:
@@ -10,10 +10,13 @@ config:
   timeout_seconds: 300
   parallel: false
   executor: copilot-sdk
-  model: auto
+  model: gpt-5.6-sol
   skill_directories:
+    - harness
     - ..
   inject_skill_body: false
+  required_skills:
+    - arm-api-reviewer-issue
 mcp_mocks:
   - name: issue_fixture
     tools:
@@ -94,5 +97,6 @@ graders:
         - tool: grep
         - tool: rg
         - tool: "mcp:issue_fixture-list_issues"
+        - tool: "mcp:issue_fixture-issue_fixture-list_issues"
 tasks:
   - tasks/mocked/*.yaml

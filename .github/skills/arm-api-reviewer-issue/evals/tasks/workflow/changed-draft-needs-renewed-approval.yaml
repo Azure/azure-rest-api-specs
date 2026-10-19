@@ -14,6 +14,16 @@ inputs:
     - |
       I approve the earlier draft, but replace the proposed solution with
       adding automatic retries instead of documentation, and publish it.
+checkpoints:
+  - after_turn: 1
+    graders:
+      - type: skill_invocation
+        name: loads_issue_skill
+        config:
+          required_skills:
+            - arm-api-reviewer-issue
+          mode: any_order
+          allow_extra: true
 graders:
   - type: code
     name: revised_draft_is_complete_and_public_safe
@@ -46,7 +56,15 @@ graders:
         - "(?i)(awaiting|waiting for).{0,30}approval"
         - "(?i)(automatic.{0,30}retr|retr.{0,30}automatic)"
   - type: text
-    name: output_not_contains_2
+    name: no_unverified_success_claim
     config:
-      not_contains:
-        - I created the issue
+      regex_not_match:
+        - '(?i)\b(I|we)\s+(have\s+|just\s+|now\s+)?(created|filed|opened|published|submitted|posted)\s+(the|this|an|a|your|that)\s+(new\s+)?(GitHub\s+)?issue'
+        - '(?i)\bthe\s+issue\s+(has\s+been|was|is\s+now)\s+(successfully\s+)?(created|filed|opened|published|submitted|posted)'
+        - '(?im)^[\s*_>#-]*published\s+and\s+verified'
+  - type: tool_constraint
+    name: reads_workflow_reference
+    config:
+      expect_tools:
+        - tool: view
+          path_pattern: 'references[\\/]workflow\.md$'

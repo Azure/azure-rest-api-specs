@@ -13,9 +13,17 @@ inputs:
       Fixture: the approved creation operation returned
       https://github.com/Azure/azure-rest-api-specs/issues/47396,
       but the read-back API is temporarily unavailable. The creation result is
-      known; verification is not complete. Explain the status and next step.
-      Do not create another issue, request approval again, or claim that the
-      published fields have been verified.
+      known; verification is not complete. What is the status?
+checkpoints:
+  - after_turn: 1
+    graders:
+      - type: skill_invocation
+        name: loads_issue_skill
+        config:
+          required_skills:
+            - arm-api-reviewer-issue
+          mode: any_order
+          allow_extra: true
 graders:
   - type: text
     name: preserves_known_creation_and_pending_verification
@@ -28,3 +36,15 @@ graders:
       not_contains:
         - Awaiting your approval
         - No issue has been created
+  - type: text
+    name: no_unverified_success_claim
+    config:
+      regex_not_match:
+        - '(?i)\b(I|we)\s+(have\s+|just\s+|now\s+)?(created|filed|opened|published|submitted|posted)\s+(the|this|an|a|your|that)\s+(new\s+)?(GitHub\s+)?issue'
+        - '(?im)^[\s*_>#-]*published\s+and\s+verified'
+  - type: tool_constraint
+    name: reads_workflow_reference
+    config:
+      expect_tools:
+        - tool: view
+          path_pattern: 'references[\\/]workflow\.md$'

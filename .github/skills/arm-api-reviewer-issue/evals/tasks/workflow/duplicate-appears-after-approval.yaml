@@ -14,8 +14,17 @@ inputs:
       Fixture: the mandatory final duplicate check has just returned an exact
       matching open issue at
       https://github.com/Azure/azure-rest-api-specs/issues/47390.
-      This is supplied fixture context, not live lookup evidence. Explain the
-      correct outcome without creating or changing any issue.
+      This is supplied fixture context, not live lookup evidence. Continue.
+checkpoints:
+  - after_turn: 1
+    graders:
+      - type: skill_invocation
+        name: loads_issue_skill
+        config:
+          required_skills:
+            - arm-api-reviewer-issue
+          mode: any_order
+          allow_extra: true
 graders:
   - type: text
     name: approval_does_not_override_new_duplicate
@@ -27,5 +36,17 @@ graders:
       not_contains:
         - "## Summary"
         - Creating the issue now
-        - I created the issue
         - Awaiting your approval
+  - type: text
+    name: no_unverified_success_claim
+    config:
+      regex_not_match:
+        - '(?i)\b(I|we)\s+(have\s+|just\s+|now\s+)?(created|filed|opened|published|submitted|posted)\s+(the|this|an|a|your|that)\s+(new\s+)?(GitHub\s+)?issue'
+        - '(?i)\bthe\s+issue\s+(has\s+been|was|is\s+now)\s+(successfully\s+)?(created|filed|opened|published|submitted|posted)'
+        - '(?im)^[\s*_>#-]*published\s+and\s+verified'
+  - type: tool_constraint
+    name: reads_workflow_reference
+    config:
+      expect_tools:
+        - tool: view
+          path_pattern: 'references[\\/]workflow\.md$'

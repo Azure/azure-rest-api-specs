@@ -1,0 +1,54 @@
+id: ready-draft-proposes-copilot-assignment
+name: ready draft proposes Copilot assignment
+tags:
+  - workflow
+  - offline
+inputs:
+  prompt: |
+    Prepare an ARM API Reviewer improvement issue. When the reviewer cannot
+    open a public rule link, its comment shows a generic error. I want the
+    comment to name the unreachable link and say whether the review continued
+    without it. Acceptance: a test with an unreachable link shows that message.
+    This is my report, not a confirmed defect.
+    Offline exercise only: no GitHub calls, commands, or publication.
+  follow_up_prompts:
+    - |
+      Fixture: the push-access check returned true. The assignable-actor query
+      returned copilot-swe-agent. Live duplicate discovery found no matching
+      open issue. Continue.
+checkpoints:
+  - after_turn: 1
+    graders:
+      - type: skill_invocation
+        name: loads_issue_skill
+        config:
+          required_skills:
+            - arm-api-reviewer-issue
+          mode: any_order
+          allow_extra: true
+graders:
+  - type: text
+    name: preview_proposes_copilot_with_consequences
+    config:
+      contains:
+        - ARM API Reviewer agent
+        - Awaiting your approval
+        - No issue has been created
+      regex_match:
+        - "(?i)assignee\\W{0,20}@?copilot|assign.{0,40}copilot"
+        - "(?i)(pull request|\\bPR\\b)"
+        - "(?i)(start|begin|kick)"
+        - "(?i)(later|subsequent|future|new).{0,40}comment|(title and body|issue text).{0,40}(at|when).{0,20}assign"
+  - type: text
+    name: no_unverified_success_claim
+    config:
+      regex_not_match:
+        - '(?i)\b(I|we)\s+(have\s+|just\s+|now\s+)?(created|filed|opened|published|submitted|posted)\s+(the|this|an|a|your|that)\s+(new\s+)?(GitHub\s+)?issue'
+        - '(?i)\bthe\s+issue\s+(has\s+been|was|is\s+now)\s+(successfully\s+)?(created|filed|opened|published|submitted|posted)'
+        - '(?im)^[\s*_>#-]*published\s+and\s+verified'
+  - type: tool_constraint
+    name: reads_workflow_reference
+    config:
+      expect_tools:
+        - tool: view
+          path_pattern: 'references[\\/]workflow\.md$'

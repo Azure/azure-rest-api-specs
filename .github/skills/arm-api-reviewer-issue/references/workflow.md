@@ -6,14 +6,18 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
 
 ## Boundaries
 
-1. Create issues only in public `Azure/azure-rest-api-specs`, with the exact
-   `ARM API Reviewer agent` label. This destination is not inferred from the
-   current checkout or from a linked PR's repository.
+1. Create issues only in public `Azure/azure-rest-api-specs` and request the
+   exact `ARM API Reviewer agent` label. GitHub applies labels and assignees to
+   a new issue only when the author has push access (see
+   [publication metadata](#publication-metadata)). This destination is not
+   inferred from the current checkout or from a linked PR's repository.
 2. Cover reviewer behavior, API-guidance interpretation, process, documentation,
    and infrastructure affecting the ARM API Reviewer.
 3. Do not fix code, change specifications, run a full PR review, post review
-   comments, dispatch workflows, or modify existing GitHub items.
-4. An exact duplicate ends the workflow with the existing issue link. Do not
+   comments, dispatch workflows, or modify existing GitHub items. An approved
+   Copilot assignment on the new issue hands implementation to Copilot cloud
+   agent; this skill does not implement the fix itself.
+4. An exact duplicate ends the workflow with the existing issue's full URL. Do not
    create another issue, add a comment, or update the existing issue.
 5. Never publish private evidence, internal URLs, credentials, personal details,
    local paths, or unpublished document links. Do not send private text to
@@ -53,12 +57,24 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
 3. Read likely matches. An exact duplicate has the same underlying concern and
    requested outcome, not merely similar words in its title. Clarify the scope
    if that distinction is uncertain.
-4. For an exact duplicate, explain the match, return its URL, and stop without
-   writes. For related but distinct work, explain the difference in the draft.
-   Use targeted searches outside the label or in closed issues only as needed.
-5. Use equivalent available GitHub tools if `gh` is unavailable, preserving
+4. For an exact duplicate, explain the match, return its full issue URL (not
+   only `#number`), and stop without writes. If the user or supplied context
+   identifies a matching open issue that you cannot recheck live, still return
+   its full URL as the existing issue and state that it was not rechecked. For related but distinct work, explain
+   the difference in the draft.
+5. If the labeled list has no exact duplicate, also search open issues titled
+   with the `ARM API Reviewer agent` prefix. Issues filed by accounts without
+   push access may not have the label yet:
+
+   ```text
+   gh search issues --repo Azure/azure-rest-api-specs --state open --match title "ARM API Reviewer agent" --limit 200 --json number,title,url,labels,body
+   ```
+
+   Use targeted searches in closed issues only as needed.
+
+6. Use equivalent available GitHub tools if `gh` is unavailable, preserving
    pagination and every approval/privacy rule. Do not guess tool names.
-6. If issue discovery is unavailable or incomplete, explain the blocker. A
+7. If issue discovery is unavailable or incomplete, explain the blocker. A
    provisional draft is possible, but publication is blocked until this check
    succeeds. Do not claim that no duplicate exists.
 
@@ -111,8 +127,9 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
    1. **Summary:** 2-3 sentences describing the reported issue and possible
       solutions. Use a short paragraph, not a long investigation history.
    2. **Issue:** details, context, scope, and expected versus observed behavior.
-   3. **Evidence:** telemetry or public examples demonstrating the supported
-      impact, distinguishing reports from verified observations.
+   3. **Evidence:** public, shareable telemetry summaries or public examples
+      demonstrating the supported impact, distinguishing reports from
+      verified observations.
    4. **Solution:** proposed design, implementation, validation, assumptions,
       limitations, and any open decisions, as numbered items.
    5. **References:** related issues, existing public documentation, and sources.
@@ -139,10 +156,46 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
    the 2-3 sentence Summary, Solution details, public references, and style.
    Correct any omission or unsupported claim before requesting approval.
 
+### Publication metadata
+
+1. Before the preview, check whether the user's account has push access:
+
+   ```text
+   gh api repos/Azure/azure-rest-api-specs --jq .permissions.push
+   ```
+
+   GitHub silently drops labels and assignees on a new issue when the author
+   lacks push access. Always request the mandatory label at creation, but say
+   in the preview whether it will be applied. Without confirmed push access,
+   state that a maintainer needs to add the label and that the
+   `ARM API Reviewer agent:` title prefix keeps the issue discoverable.
+
+2. Propose assigning Copilot by default only when all of these are true:
+   1. The account has confirmed push access.
+   2. Copilot is an assignable actor in the repository:
+
+      ```text
+      gh api graphql -f query="query { repository(owner: \"Azure\", name: \"azure-rest-api-specs\") { suggestedActors(capabilities: [CAN_BE_ASSIGNED], first: 10, query: \"copilot\") { nodes { login } } } }"
+      ```
+
+      The result must include `copilot-swe-agent`.
+
+   3. The draft is implementation-ready: its scope is concrete, Validation
+      lists observable acceptance criteria, and no open decision requires a
+      human choice first.
+3. Otherwise, set the assignee to none and give a one-line reason. Do not
+   assign anyone other than Copilot.
+4. When proposing Copilot, explain in the preview that assignment immediately
+   starts Copilot cloud agent work toward a pull request that requires human
+   review. Copilot receives the issue title and body at assignment time and
+   does not see later issue comments. The user can remove the assignment
+   before approval.
+
 ## 5. Obtain approval of the complete draft
 
 1. Display the full proposed title and body, the public repository, the exact
-   labels, and any important uncertainty in a normal assistant message in the
+   labels, the assignee, whether labels and the assignee will be applied, and
+   any important uncertainty in a normal assistant message in the
    main chat before invoking an approval tool. Do not put the only copy inside
    the approval dialog or a tool result. Do not substitute a summary or a
    local-file link. Introduce the preview with **"Draft ready."**
@@ -150,9 +203,15 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
 
    **"Awaiting your approval. No issue has been created."**
 
+   Use this handoff even when live checks such as duplicate discovery or push
+   access are unavailable. List them as uncertainty in the preview; they are
+   rechecked after approval. Do not replace the handoff with
+   **"Publication blocked"**, which applies only to an approved draft.
+
 2. Then ask the user to approve publication, request edits, or cancel, using the
-   host's structured question tool when available. Keep this decision prompt
-   short and separate from the full preview. Make clear that the user
+   host's structured question tool when available. Without that tool, end the
+   message by naming all three options: approve, edit, or cancel. Keep this
+   decision prompt short and separate from the full preview. Make clear that the user
    needs to act now, not wait for more preparation. Accept clear conversational
    approval of the displayed draft, such as "Looks good, please publish it";
    do not require a special phrase.
@@ -169,8 +228,9 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
 5. If the user cancels or declines, say **"Draft retained. Nothing published."**
    Do not continue displaying an awaiting-approval state after that decision.
    Do not add draft files to the repository.
-6. Approval applies to the title, body, destination, and labels shown. Material
-   changes require showing the revised complete draft in the main chat and
+6. Approval applies to the title, body, destination, labels, and assignee shown.
+   Material changes, including adding or removing Copilot as the assignee,
+   require showing the revised complete draft in the main chat and
    obtaining new approval. Repeat the awaiting-approval status and the separate
    approve/edit/cancel prompt; saying only that the previous approval is invalid
    does not complete the handoff.
@@ -189,25 +249,45 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
 2. Confirm the destination is public `Azure/azure-rest-api-specs`, the required
    label exists, citations are public, and the draft contains no private
    content, local paths, unresolved placeholders, or unsupported claims.
+   If Copilot assignment was approved, recheck push access and Copilot
+   availability. If either check now fails, the assignment cannot be applied;
+   show the revised metadata and obtain renewed approval.
 3. Only when those checks pass, say **"Creating the issue now."** Create it with
-   `gh issue create --repo Azure/azure-rest-api-specs`,
-   supplying the approved title, labels, and a UTF-8 `--body-file`. Pass user
-   text as argument values; do not construct executable shell text from it.
-   Use an equivalent approved GitHub tool only when needed.
+   `gh issue create --repo Azure/azure-rest-api-specs`, supplying the approved
+   title, `--label "ARM API Reviewer agent"` and any other approved labels,
+   `--assignee "@copilot"` only when that assignment was approved, and a UTF-8
+   `--body-file`. Pass user text as argument values; do not construct
+   executable shell text from it. Use an equivalent approved GitHub tool only
+   when needed.
 4. Make one creation request. On timeout or an ambiguous response, inspect
    recent issues and compare destination, author, title, body, and labels before
    retrying. A title match alone is not proof. If the result remains uncertain,
    report that uncertainty and do not issue another blind write.
-5. Read the created issue back. Check repository, URL, title, body, and labels
-   against the approved draft, allowing only harmless newline normalization.
-   Return the verified URL and summarize the outcome. If creation returned a
-   URL but read-back is unavailable, return that URL with
-   **"Created; verification pending"** and explain the blocker. Retry verification,
-   not creation; do not claim a verified result.
-6. If verification finds a mismatch, return the created URL and explain the
-   mismatch. Do not silently edit, delete, or recreate the issue. If creation
-   failed or cannot be established, retain the draft and report the blocker
-   without claiming success.
+5. Read the created issue back:
+
+   ```text
+   gh issue view <number> --repo Azure/azure-rest-api-specs --json url,title,body,labels,assignees,author
+   ```
+
+   Verify the repository, URL, title, and body against the approved draft,
+   allowing only harmless newline normalization. With confirmed push access,
+   every approved label must be present, and an approved Copilot assignment
+   must appear as the `Copilot` assignee. Without push access, a missing label
+   is expected; remind the user that a maintainer needs to add it.
+   Repository automation, such as Issue Triage, may add labels or comments
+   after creation. Report these additions, but do not treat them as a
+   mismatch. Return **"Published and verified"** with the URL and summarize
+   the outcome. If creation returned a URL but read-back is unavailable,
+   return that URL with **"Created; verification pending"** and explain the
+   blocker. Retry verification, not creation; do not claim a verified result.
+
+6. A mismatch is a changed title or body, a missing approved label despite
+   confirmed push access, or a missing approved assignee. Return the created
+   URL and explain the mismatch. Do not silently edit, delete, or recreate the
+   issue. If only the approved Copilot assignment is missing, offer to assign
+   Copilot to this new issue as a separate step requiring approval. If
+   creation failed or cannot be established, retain the draft and report the
+   blocker without claiming success.
 
 ## Validation boundaries
 

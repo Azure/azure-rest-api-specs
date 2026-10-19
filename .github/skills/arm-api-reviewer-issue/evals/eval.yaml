@@ -2,7 +2,7 @@ name: arm-api-reviewer-issue-eval
 description: Routing, novice intake, public-evidence handling, and publication
   safeguards for ARM API Reviewer issue submission. No live GitHub writes are
   permitted; these are conversational tests, not publication integration tests.
-skill: arm-api-reviewer-issue
+skill: offline-evaluator
 schemaVersion: "1.4"
 version: "1.0"
 config:
@@ -10,10 +10,13 @@ config:
   timeout_seconds: 300
   parallel: false
   executor: copilot-sdk
-  model: auto
+  model: gpt-5.6-sol
   skill_directories:
+    - harness
     - ..
   inject_skill_body: false
+  required_skills:
+    - arm-api-reviewer-issue
 metrics:
   - name: behavior_quality
     weight: 1

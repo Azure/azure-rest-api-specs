@@ -16,8 +16,9 @@ solutions. Keep this summary concise; put supporting details below.]
 2. **Verified observations:** [Public example, reproduction steps, source revision,
    or run/event evidence. If not reproduced, say so.]
 3. **Interpretation:** [Distinguish a confirmed cause from a hypothesis.]
-4. **Impact:** [Describe the supported effect. For counts, define the population,
-   unit, window, and limitations. Do not invent an incident count.]
+4. **Impact:** [Describe the supported effect using public, shareable data. For
+   counts, define the population, unit, window, and limitations. Do not invent
+   an incident count.]
 
 ## Solution
 

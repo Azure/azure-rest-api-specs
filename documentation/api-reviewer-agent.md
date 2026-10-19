@@ -692,15 +692,26 @@ interpretation, review process, and supporting repository workflows.
    An exact duplicate returns the existing link without creating or changing
    an issue.
 3. Review the complete proposed issue in the main chat, then use the separate
-   approval prompt. The preview includes the title, body, destination, and labels,
-   not just a file link or a copy hidden in the approval dialog. The skill files
-   only in public `Azure/azure-rest-api-specs`; do not provide private evidence.
+   approval prompt. The preview includes the title, body, destination, labels,
+   and assignee, not just a file link or a copy hidden in the approval dialog.
+   The skill files only in public `Azure/azure-rest-api-specs`; do not provide
+   private evidence.
    When it says **"Awaiting your approval. No issue has been created."**, the
    draft is ready and needs your decision. Approve it, request edits, or cancel;
    there is no need to wait for more preparation or use a special approval phrase.
-4. After publication, the skill verifies the issue and returns its URL. A
-   missing approval, blocked check, or uncertain result is not reported as
-   successful creation.
+4. GitHub applies labels and assignees to a new issue only when the author has
+   push access to the repository. Without it, the preview says that a maintainer
+   needs to add the `ARM API Reviewer agent` label; the `ARM API Reviewer agent:`
+   title prefix keeps the issue discoverable.
+5. With push access, when Copilot is assignable and the draft is
+   implementation-ready, the skill proposes assigning Copilot. Assignment starts
+   Copilot cloud agent work toward a pull request that still needs human review.
+   Copilot sees the issue title and body at assignment time, not later comments.
+   Remove the assignee before approving if you do not want that.
+6. After publication, the skill verifies the issue and returns its URL. Labels
+   or comments added by repository automation, such as Issue Triage, are reported
+   but are not treated as a mismatch. A missing approval, blocked check, or
+   uncertain result is not reported as successful creation.
 
 Example requests:
 

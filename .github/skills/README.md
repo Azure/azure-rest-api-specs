@@ -100,6 +100,18 @@ Changes to any of these files should pass the eval suite before merging:
 - `.github/skills/azure-api-review/**`
 - `.github/skills/evals/arm-api-reviewer/**`
 
+### Reporting reviewer issues
+
+The **arm-api-reviewer-issue** skill
+([`skills/arm-api-reviewer-issue/`](arm-api-reviewer-issue/)) helps users
+report concerns about the ARM API Reviewer as public issues in
+`Azure/azure-rest-api-specs`. It checks open ARM API Reviewer issues for
+duplicates, drafts a plain-language issue, shows the complete draft with its
+labels and assignee, and creates the issue only after explicit approval. When
+the user has push access and the draft is implementation-ready, it can propose
+assigning Copilot. Changes to this skill should pass its Waza suites; see
+[`arm-api-reviewer-issue/evals/README.md`](arm-api-reviewer-issue/evals/README.md).
+
 ---
 
 ## Data-Plane API Reviewer
