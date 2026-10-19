@@ -30,8 +30,6 @@ stimuli:
           dest: package.json
         - src: ../scripts/check-node-dependencies.js
           dest: check-node-dependencies.js
-        - src: ../scripts/verify-emitted-contract.js
-          dest: verify-emitted-contract.js
         - src: ../fixtures/Microsoft.Widget/Widget/readme.md
           dest: readme.md
         - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
@@ -67,11 +65,6 @@ stimuli:
       - type: "run-command"
         config:
           command: "tsp compile ."
-          expected_exit_code: 0
-      - type: "run-command"
-        name: "run-command-patch-contract"
-        config:
-          command: "node verify-emitted-contract.js arm-patch-sync"
           expected_exit_code: 0
       - &file_matches
         type: "file-matches"

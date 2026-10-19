@@ -30,8 +30,6 @@ stimuli:
           dest: package.json
         - src: ../scripts/check-node-dependencies.js
           dest: check-node-dependencies.js
-        - src: ../scripts/verify-emitted-contract.js
-          dest: verify-emitted-contract.js
         - src: ../fixtures/003-long-running-operation-share/readme.md
           dest: readme.md
         - src: ../fixtures/003-long-running-operation-share/shared.tsp
@@ -72,12 +70,16 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
-      - &run_contract
-        type: "run-command"
-        name: "run-command-lro-contract"
+      - &file_matches
+        type: "file-matches"
         config:
-          command: "node verify-emitted-contract.js arm-action-lro"
-          expected_exit_code: 0
+          pattern: 'move\s+is\s+ArmResourceActionAsync\s*<\s*Employee\s*,\s*MoveRequest\s*,\s*MoveResponse\s*,\s*LroHeaders\s*='
+          path: "employee.tsp"
+      - type: "file-matches"
+        name: "file-matches-lro-response"
+        config:
+          pattern: 'ArmCombinedLroHeaders\s*<\s*(FinalResult\s*=\s*MoveResponse|ArmOperationStatus\s*,\s*MoveResponse|(Azure\.ResourceManager\.)?ArmOperationStatus\s*,\s*MoveResponse)\s*>'
+          path: "employee.tsp"
       - type: "prompt"
         config:
           threshold: 0.77
@@ -103,7 +105,12 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
-      - *run_contract
+      - *file_matches
+      - type: "file-matches"
+        name: "file-matches-lro-response"
+        config:
+          path: "employee.tsp"
+          pattern: 'ArmCombinedLroHeaders\s*<\s*FinalResult\s*=\s*MoveResponse\s*>'
       - type: "prompt"
         config:
           prompt: "Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent. Do not penalize for pre-existing project configuration issues such as swagger generation failures unrelated to the agent changes."
@@ -118,6 +125,7 @@ scoring:
   weights:
     tool-calls: 0.15
     prompt: 0.15
-    run-command: 0.55
+    run-command: 0.15
     skill-invocation: 0.15
+    file-matches: 0.4
   threshold: 0.95

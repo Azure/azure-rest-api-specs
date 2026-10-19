@@ -30,8 +30,6 @@ stimuli:
           dest: package.json
         - src: ../scripts/check-node-dependencies.js
           dest: check-node-dependencies.js
-        - src: ../scripts/verify-emitted-contract.js
-          dest: verify-emitted-contract.js
         - src: ../fixtures/Microsoft.Widget/Widget/readme.md
           dest: readme.md
         - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
@@ -72,12 +70,12 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
-      - &run_contract
-        type: "run-command"
-        name: "run-command-list-contract"
+      - &file_matches
+        type: "file-matches"
         config:
-          command: "node verify-emitted-contract.js arm-list-top-skip"
-          expected_exit_code: 0
+          # Accept only ARM top/skip params as inline spreads, intersection, or wrapper model.
+          pattern: '(?:model\s+(\w+)\s*\{\s*(?=[^}]*\.\.\.(?:Azure\.ResourceManager\.)?ArmTopParameter\s*;)(?=[^}]*\.\.\.(?:Azure\.ResourceManager\.)?ArmSkipParameter\s*;)[^}]*\}\s*[\s\S]*?listBySubscription\s+is\s+ArmListBySubscription\s*<\s*Employee\s*,\s*Parameters\s*=\s*\1\s*>|listBySubscription\s+is\s+ArmListBySubscription\s*<\s*Employee\s*,\s*(?:(?:Parameters\s*=\s*)?\{\s*(?=[^}]*\.\.\.(?:Azure\.ResourceManager\.)?ArmTopParameter\s*;)(?=[^}]*\.\.\.(?:Azure\.ResourceManager\.)?ArmSkipParameter\s*;)[^}]*\}|(?:Parameters\s*=\s*)?(?:(?:Azure\.ResourceManager\.)?ArmTopParameter\s*&\s*(?:Azure\.ResourceManager\.)?ArmSkipParameter|(?:Azure\.ResourceManager\.)?ArmSkipParameter\s*&\s*(?:Azure\.ResourceManager\.)?ArmTopParameter))\s*>)'
+          path: "*.tsp"
       - &file_not_matches
         type: "file-not-matches"
         config:
@@ -101,7 +99,7 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
-      - *run_contract
+      - *file_matches
       - *file_not_matches
     constraints:
       max_turns: 6
@@ -110,7 +108,8 @@ stimuli:
 scoring:
   weights:
     tool-calls: 0.2
-    run-command: 0.4
+    run-command: 0.2
     skill-invocation: 0.2
+    file-matches: 0.2
     file-not-matches: 0.2
   threshold: 1

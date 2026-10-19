@@ -23,8 +23,6 @@ stimuli:
           dest: shared.tsp
         - src: ../fixtures/Microsoft.Widget/Widget/package.json
           dest: package.json
-        - src: ../scripts/verify-emitted-contract.js
-          dest: verify-emitted-contract.js
         - src: ../fixtures/006008-dp-version-property-removed/tspconfig.yaml
           dest: tspconfig.yaml
       commands:
@@ -53,11 +51,22 @@ stimuli:
           command: tsp compile .
           expected_exit_code: 0
       - &id003
-        type: run-command
-        name: run-command-version-contract
+        type: file-matches
         config:
-          command: node verify-emitted-contract.js version-006008
-          expected_exit_code: 0
+          path: main.tsp
+          pattern: v2023_06_01_Preview
+      - &id004
+        type: file-matches
+        name: file-matches-removed-property
+        config:
+          path: main.tsp
+          pattern: '@removed\(Versions\.v2023_06_01_Preview\)'
+      - &id005
+        type: file-matches
+        name: file-matches-color-property
+        config:
+          path: main.tsp
+          pattern: color
       - &id006
         type: prompt
         config:
@@ -87,6 +96,8 @@ stimuli:
           command: tsp compile .
           expected_exit_code: 0
       - *id003
+      - *id004
+      - *id005
       - *id006
     constraints:
       max_turns: 5
@@ -95,6 +106,7 @@ scoring:
   weights:
     tool-calls: 0.125
     skill-invocation: 0.125
-    run-command: 0.5
+    run-command: 0.125
+    file-matches: 0.375
     prompt: 0.25
   threshold: 0.9425

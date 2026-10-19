@@ -49,8 +49,7 @@ $env:EVALUATE_USE_HOST_COPILOT_HOME = "1"
 export EVALUATE_USE_HOST_COPILOT_HOME=1
 ```
 
-Keep this opt-in local. Pipeline runs authenticate with their injected token and should retain the
-default isolated Copilot home.
+Keep this opt-in local.
 
 Setup rewrites scalar eval specs to the selected local environment. Choose `mock`
 only when an approved mock artifact is available:
@@ -72,14 +71,13 @@ environment: azsdk-mcp-local
 # Local mock MCP
 environment: azsdk-mcp-mock-local
 
-# Pipeline
+# Committed live MCP environment
 environment: azsdk-mcp
 ```
 
 For a single-case run, change only that eval file. For a suite run, replace the environment in all
 participating files under `evals/`. Local environment overrides should not be committed; restore
-`environment: azsdk-mcp` before committing. Pipeline live/mock selection remains controlled by
-`AZSDK_EVAL_MCP_KIND`.
+`environment: azsdk-mcp` before committing.
 
 `setup-environment.js` does the following:
 
@@ -90,15 +88,8 @@ participating files under `evals/`. Local environment overrides should not be co
    `pnpm install --frozen-lockfile` at the repository root.
 4. Generate the fixture `package.json` from the current checkout's pnpm catalog and copy
    `.github/copilot-instructions.md` into `fixtures/instructions-test/copilot-instructions.md`.
-5. Preflight all 38 forced definitions, workspace-contained destinations, writable copied
-   workspaces, and untouched compilation for the historically failing fixture groups.
-6. Print shell commands that export `AZSDK_EVAL_REPO_ROOT` and `FIXTURE_NODE_MODULES`.
-
-The MCP build uses `GitHub.Copilot.SDK`, which downloads platform-specific `@github/copilot-*`
-assets through MSBuild. The setup script passes
-`/p:CopilotNpmRegistryUrl=https://packagefeedproxy.microsoft.io/npm/` so the download URL uses the
-Microsoft package feed proxy instead of `registry.npmjs.org`. To use a different registry, set
-`COPILOT_NPM_REGISTRY_URL` before running the setup script.
+5. Verify fixture dependencies and print shell commands that export `AZSDK_EVAL_REPO_ROOT`,
+   `AZSDK_EVAL_MCP_ROOT`, and `FIXTURE_NODE_MODULES`.
 
 Why each piece matters:
 
@@ -108,17 +99,13 @@ Why each piece matters:
   repository's pnpm catalog. Dependency graders read this package directly, so newly added fixture
   dependencies are checked automatically.
 - **`copilot-instructions.md`** is copied into each run's `.github/` by the `azsdk-mcp` environments
-  in `.vally.yaml`, so evals exercise the _real_ spec-repo authoring guidance. It is intentionally
-  **not** checked in (it is git-ignored) and is refreshed from the current checkout.
-
-CI builds MCP binaries in a shared build job and runs `setup-fixture-files.js` during pre-eval setup,
-so the binaries and fixtures are always present in pipeline runs.
+  in `.vally.yaml`, so evals exercise the _real_ spec-repo authoring guidance. It is generated
+  locally, should remain untracked, and is refreshed from the current checkout.
 
 ## Running Evaluations Locally
 
-Run local evaluations from this directory (`.github/skills/azure-typespec-author/evaluate`). Local
-runs intentionally use the local/default `evaluate/.vally.yaml`; the benchmark pipelines use the
-outer `.github/skills/.vally.yaml` integration described later.
+Run local evaluations from this directory (`.github/skills/azure-typespec-author/evaluate`) using
+the local/default `evaluate/.vally.yaml`.
 
 ### Local forced smoke test
 
@@ -189,24 +176,6 @@ strict, forced-mode failures often mean the agent did not call a required tool s
 `azure-sdk-mcp-azsdk_run_typespec_validation`. When debugging local runs, keep `--verbose` enabled
 and inspect the `Tool Calls` column in `eval-results.md` or the trial entries in `results.jsonl`.
 
-Summarize the actual source-family calls and ordering from a completed run's event logs:
-
-```powershell
-node scripts/analyze-routing.js .\results\forced\<timestamp>
-```
-
-For the current 38 covered cases, the expected result is 38 Web-only trials, zero retrieval calls,
-zero planner calls, grounding before the first mutation, and validation after mutation.
-
-Run deterministic positive and negative examples for corrected syntax graders:
-
-```powershell
-node scripts/test-grader-contracts.js
-node scripts/test-routing-analyzer.js
-node scripts/test-skill-workflow.js
-node scripts/preflight-harness.js
-```
-
 ### Run a subset suite (optional)
 
 Domain-specific suites are useful for ad-hoc local runs on one scenario family:
@@ -251,48 +220,7 @@ evaluate/
 │   ├── 001-share-version-new-feature/
 │   ├── Microsoft.Widget/
 │   └── ...
-├── pipeline/            # Repo-owned Azure Pipelines templates
-│   └── skill/           # Forced/trigger/no-skill benchmark templates
 ├── scripts/             # Setup and utility scripts
 ├── results/             # Eval run output
 └── debug/               # Eval run workspace
 ```
-
-## Pipeline Architecture
-
-The CI runs Vally from `.github/skills` and uses the merged eval files in
-`azure-typespec-author/evaluate/evals/*.eval.yaml`. Each stimulus has dual tags, for example
-`{ suite: versioning, mode: forced }`. The pipeline matrix is generated from the eval files, then
-each track passes its mode through `TypeSpecAuthorEvalExtraArgs`.
-
-| Pipeline           | Template shape                                                   | Extra args                                             | MCP binding                       | Purpose                                        |
-| ------------------ | ---------------------------------------------------------------- | ------------------------------------------------------ | --------------------------------- | ---------------------------------------------- |
-| benchmark          | Manual two-track stages with `pipeline` templates                | `--tag mode=forced --skill-dir azure-typespec-author`  | Uses the run's selected `McpKind` | Forced skill invocation + code-quality graders |
-| benchmark          | Manual two-track stages with `pipeline` templates                | `--tag mode=trigger --skill-dir azure-typespec-author` | Uses the run's selected `McpKind` | Skill trigger detection                        |
-| benchmark-no-skill | Common `archetype-eval.yml` + `pipeline` no-skill invoke wrapper | `--tag mode=no-skill --skill-dir /tmp/no-skills`       | Uses its run's selected `McpKind` | Baseline run without loading the skill         |
-
-The forced and trigger tracks are composed manually so they can run and summarize independently in
-one pipeline run. Both tracks use the same live or mock MCP implementation selected by `McpKind`.
-The no-skill pipeline stays on the common `archetype-eval.yml` entry point and only uses a repo-owned
-wrapper for Vally invocation.
-
-### Pipeline Parameters and Extensions
-
-`TypeSpecAuthorEvalExtraArgs` is the primary extension point for Vally CLI options. The repo-local
-invoke wrapper appends it to the final `vally eval` command, so run-level options such as
-`--workers`, `--verbose`, and additional tag filters can be added without changing the templates.
-
-Examples:
-
-```yaml
-variables:
-  TypeSpecAuthorEvalExtraArgs: "--tag mode=trigger --skill-dir azure-typespec-author --workers 3"
-```
-
-```yaml
-variables:
-  TypeSpecAuthorEvalExtraArgs: "--tag mode=no-skill --skill-dir /tmp/no-skills --workers 2"
-```
-
-Keep mode selection in the extra args (`--tag mode=...`) because all three tracks consume the same
-merged eval files.

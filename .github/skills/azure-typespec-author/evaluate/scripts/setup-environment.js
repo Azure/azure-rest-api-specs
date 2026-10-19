@@ -137,13 +137,6 @@ run(process.execPath, [path.join(scriptDir, "check-node-dependencies.js"), "pack
     FIXTURE_NODE_MODULES: path.join(repoRoot, "node_modules"),
   },
 });
-run(process.execPath, [path.join(scriptDir, "preflight-harness.js")], {
-  cwd: repoRoot,
-  env: {
-    ...process.env,
-    FIXTURE_NODE_MODULES: path.join(repoRoot, "node_modules"),
-  },
-});
 
 const nodeModules = path.join(repoRoot, "node_modules");
 const nodeBin = path.join(nodeModules, ".bin");

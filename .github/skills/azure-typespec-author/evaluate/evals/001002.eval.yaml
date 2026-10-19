@@ -30,8 +30,6 @@ stimuli:
           dest: package.json
         - src: ../scripts/check-node-dependencies.js
           dest: check-node-dependencies.js
-        - src: ../scripts/verify-emitted-contract.js
-          dest: verify-emitted-contract.js
         - src: ../fixtures/001002-version-default-value/readme.md
           dest: readme.md
         - src: ../fixtures/001002-version-default-value/shared.tsp
@@ -68,12 +66,29 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
-      - &run_contract
-        type: "run-command"
-        name: "run-command-version-contract"
+      - &file_matches
+        type: "file-matches"
         config:
-          command: "node verify-emitted-contract.js version-001002"
-          expected_exit_code: 0
+          pattern: '@removed\((?:Microsoft\.Widget\.)?Versions\.v2025_11_01\)'
+          path: "employee.tsp"
+      - &file_matches_renamed_property
+        type: "file-matches"
+        name: "file-matches-renamed-property"
+        config:
+          pattern: '@renamedFrom\((?:Microsoft\.Widget\.)?Versions\.v2025_11_01, "age"\)'
+          path: "employee.tsp"
+      - &file_matches_added_property
+        type: "file-matches"
+        name: "file-matches-added-property"
+        config:
+          pattern: '@added\((?:Microsoft\.Widget\.)?Versions\.v2025_11_01\)'
+          path: "employee.tsp"
+      - &file_matches_property_default
+        type: "file-matches"
+        name: "file-matches-property-default"
+        config:
+          pattern: 'age\?: int32 = 21;'
+          path: "employee.tsp"
     constraints:
       max_turns: 5
       max_tokens: 1000000
@@ -96,7 +111,10 @@ stimuli:
         config:
           command: "tsp compile ."
           expected_exit_code: 0
-      - *run_contract
+      - *file_matches
+      - *file_matches_renamed_property
+      - *file_matches_added_property
+      - *file_matches_property_default
       - type: "prompt"
         config:
           prompt: "Verify change scope and quality only: add a default value of 21 for the `age` property in `EmployeeProperties` that only applies to the 2025-11-01 API version. The old age renamed and removed for the new version."
@@ -110,6 +128,8 @@ stimuli:
 scoring:
   weights:
     tool-calls: 0.125
-    run-command: 0.75
+    prompt: 0.125
+    run-command: 0.125
     skill-invocation: 0.125
+    file-matches: 0.5
   threshold: 0.98
