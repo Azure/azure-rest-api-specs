@@ -474,7 +474,7 @@ model VoiceAgentServerEventInputCollectionStatus
   @doc("The exact completed ASCII digit string, preserving leading zeros, only when collection started with `secret: false`. Never present for private collection or phone-operation feedback.")
   value?: string;
 
-  @doc("The logical destination of a successful private collection, never its value.")
+  @doc("The declared slot name of a successful private collection, such as `verification_code`, never its value. This is a bare name, not a namespace path or template.")
   secret_ref?: VoiceAgentSecretReference;
 }
 
