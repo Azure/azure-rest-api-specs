@@ -61,6 +61,146 @@ describe("updateLabels", () => {
 });
 
 describe("updateLabelsImpl", () => {
+  describe("queued ARM signoff artifacts", () => {
+    function fixture() {
+      const github = createMockGithub();
+      const pull = { state: "open", head: { sha: fullGitSha } };
+      github.rest.pulls.get.mockResolvedValue({ data: pull });
+      github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+        data: [{ name: "ARMReview" }],
+      });
+      github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+        data: {
+          statuses: [
+            {
+              context: "ARM Semantic Review",
+              state: "success",
+              description: "Passed: full review completed with no Blocking findings",
+              updated_at: "2026-01-01",
+            },
+            { context: "Swagger LintDiff", state: "success", updated_at: "2026-01-01" },
+            { context: "Swagger Avocado", state: "success", updated_at: "2026-01-01" },
+          ],
+          total_count: 3,
+        },
+      });
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [{ name: "label-ARMSignedOff=true" }, { name: "label-ARMAutoSignedOff=true" }],
+        },
+      });
+      const run = () =>
+        updateLabelsImpl({
+          owner: "owner",
+          repo: "repo",
+          head_sha: fullGitSha,
+          issue_number: 123,
+          run_id: 456,
+          github,
+          core: createMockCore(),
+        });
+      return { github, pull, run };
+    }
+
+    it("applies approval only after checking the current policy and statuses", async () => {
+      const { github, run } = fixture();
+
+      await run();
+
+      expect(github.rest.repos.getCombinedStatusForRef).toHaveBeenCalledOnce();
+      expect(github.rest.issues.addLabels).toHaveBeenCalledWith(
+        expect.objectContaining({ labels: ["ARMSignedOff", "ARMAutoSignedOff"] }),
+      );
+    });
+
+    it.each([{ state: "closed" }, { head: { sha: "a".repeat(40) } }])(
+      "ignores queued approval after the PR changes: %j",
+      async (change) => {
+        const { github, pull, run } = fixture();
+        github.rest.pulls.get.mockResolvedValue({ data: { ...pull, ...change } });
+
+        await run();
+
+        expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+        expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+        expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
+      },
+    );
+
+    it("does not approve while a same-head re-review is pending", async () => {
+      const { github, run } = fixture();
+      github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+        data: {
+          statuses: [
+            { context: "ARM Semantic Review", state: "pending", updated_at: "2026-01-02" },
+          ],
+          total_count: 1,
+        },
+      });
+
+      await run();
+
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+    });
+
+    it("does not apply queued approval after conversion to draft", async () => {
+      const { github, pull, run } = fixture();
+      github.rest.pulls.get.mockResolvedValue({ data: { ...pull, draft: true } });
+
+      await run();
+
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+      expect(github.rest.repos.getCombinedStatusForRef).not.toHaveBeenCalled();
+    });
+
+    it("does not take ownership of or revoke an unmarked human approval", async () => {
+      const { github, run } = fixture();
+      github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+        data: [{ name: "ARMReview" }, { name: "ARMSignedOff" }],
+      });
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [
+            { name: "label-ARMSignedOff=false" },
+            { name: "label-ARMAutoSignedOff=false" },
+          ],
+        },
+      });
+
+      await run();
+
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+      expect(github.rest.repos.getCombinedStatusForRef).not.toHaveBeenCalled();
+    });
+
+    it("keeps non-ARM label actions when discarding stale approval", async () => {
+      const { github, pull, run } = fixture();
+      github.rest.pulls.get.mockResolvedValue({ data: { ...pull, state: "closed" } });
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [{ name: "label-ARMSignedOff=true" }, { name: "label-OtherLabel=true" }],
+        },
+      });
+
+      await run();
+
+      expect(github.rest.issues.addLabels).toHaveBeenCalledWith(
+        expect.objectContaining({ labels: ["OtherLabel"] }),
+      );
+    });
+
+    it("surfaces failed revalidation without applying approval", async () => {
+      const { github, run } = fixture();
+      github.rest.repos.getCombinedStatusForRef.mockRejectedValue(
+        new Error("Status API unavailable"),
+      );
+
+      await expect(run()).rejects.toThrow("Status API unavailable");
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+    });
+  });
+
   it("throws if no run_id", async () => {
     const github = createMockGithub();
 

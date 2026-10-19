@@ -9,7 +9,76 @@ Universal is the production auto-signoff path. It owns `ARMSignedOff` only while
 
 ## Flow
 
+After Summarize Checks successfully evaluates readiness, a separate PR-scoped,
+non-cancelling job explicitly dispatches the initial reviewer when
+`WaitForARMFeedback` is present. Label writes using `GITHUB_TOKEN` do not trigger
+label-event workflows. Already-present queue labels are supported so a later
+summary can request an initial review even if the label was added by an earlier run.
+Summary evaluation reads the live PR and rechecks its head, draft state, and label
+snapshot before applying label actions; a changed snapshot is left for the next
+evaluation instead of applying an obsolete decision.
+
+The handoff checks the live PR/head, draft and hold labels, and the durable
+`ARMInitialReviewRequested` marker returned by the same PR lookup. If the marker is present,
+no automatic review is requested, even after new commits. This marker is not approval
+evidence and is never automatically removed. Explicit reviews also record it in the
+trusted pre-activation job, so they prevent a subsequent automatic initial review.
+Existing current-head semantic statuses backfill missing markers without rerunning AI.
+No reviewer workflow history is listed.
+
+For an unmarked PR, the dispatcher reads current-head statuses, rechecks readiness and
+marker absence, then adds the marker before writing pending and dispatching.
+Repeated dispatch jobs are serialized. The reviewer validates the expected head,
+queue/marker labels, and the dispatcher's pending-status URL before
+starting. Reviewer requests use non-cancelling PR concurrency; reruns wait for the
+active review instead of interrupting it. Old publishers cannot replace a newer attempt's
+pending/result status once ownership has changed.
+
+The reviewer does not run directly on PR opens, pushes, or ready-for-review events.
+Repeated Summarize Checks runs, pushes, and automatic queue-label re-additions do
+not request another review after a reviewer request exists. To explicitly review
+again (on the same or a newer SHA),
+remove and re-add `WaitForARMFeedback`, comment `/arm-review`, or manually dispatch
+the reviewer with the PR number and no expected SHA. Existing authorization gates
+remain in force. Explicit label/comment/manual requests bypass the initial-only
+marker gate; leave the marker in place when explicitly retrying.
+
+A dispatch failure is logged, fails the job, and changes its own queued reservation
+to an error if no reviewer has taken ownership. The marker remains because a
+failed HTTP response may still have created a reviewer run. Use an explicit retry
+after dispatch failure instead of automatically risking a duplicate. Review failures, cancellations,
+and incomplete results require an explicit retry; they cannot create an AI loop.
+If publishing pending fails after marker reservation, the same recovery guidance
+is logged and no reviewer is dispatched. Failure status descriptions point to
+`/arm-review`. Before retrying, check the Actions page or reviewer status link
+for a queued/running review: a timed-out dispatch may have been accepted.
+If another review is needed, use `/arm-review`, remove and re-add
+`WaitForARMFeedback`, or manually dispatch with the PR number and no `head_sha`.
+Keep `ARMInitialReviewRequested` in place; rerunning Summarize Checks is not a
+review retry.
+If a runner is lost after reserving but before dispatch, or activation rejects a
+stale head, use an explicit retry. There is no atomic GitHub transaction spanning
+status reservation, workflow dispatch, and label reads. A concurrent explicit
+request may cause an automatic activation to fail safely. GitHub concurrency keeps
+only one pending run per group, so rapid requests may coalesce; the latest pending
+request replaces an earlier pending request, not the running review.
+Deleting the marker deliberately resets initial-request tracking; do not remove it
+as routine label cleanup. Existing PRs reviewed only on older SHAs before rollout
+need the marker backfilled during rollout or may receive one initial automatic review.
+Signoff still requires a passing review of the current head: a push does not reuse
+an old approval, even though it does not automatically request another AI review.
+
+Request costs: an ineligible or already-marked dispatch uses one PR lookup, with
+no status or history query. An unmarked initial request additionally reads current-head
+statuses, rechecks the PR, writes the marker and pending status, and dispatches.
+Failure cleanup reads status ownership before writing an error. Automatic activation
+checks the queued reservation using current-head statuses, not workflow history.
+Explicit activation writes the marker once per request.
+Summary reuses PR labels from its live PR read
+and rechecks the snapshot before label writes.
+
 ```text
+summarize-checks               reconcile WaitForARMFeedback -> serialized initial-review dispatch
 arm-api-review (reviewer)
   pre_activation               post status PENDING, upload one head-sha=<sha>;issue-number=<n> artifact
   agent                        review the PR, request record_arm_semantic_review
@@ -18,8 +87,18 @@ arm-api-review (reviewer)
 
 arm-universal-auto-signoff     re-check the PR is open at the evaluated head, read labels and the
                                newest status per context on that SHA, decide the label actions
-update-labels                  apply the label actions (then Summarize Checks runs)
+update-labels                  re-evaluate ARM policy/status/head/ownership, apply current actions
+                               (then Summarize Checks runs)
 ```
+
+Update Labels reuses Universal's policy when applying ARM artifacts, rather than
+blindly applying an earlier decision. Stale-head artifacts, a pending same-head
+re-review, and an intervening unmarked human approval cannot authorize obsolete
+ARM label actions at that revalidation. Other producers' label behavior is
+unchanged. Revalidation adds the same PR, label, and (unless held or human-approved)
+status reads as a Universal evaluation. GitHub does not support atomic
+compare-and-set for labels, so changes after the final read and partial API writes
+are still possible; a subsequent evaluation reconciles automation-owned labels.
 
 The reviewer never adds or removes signoff labels. Starting a re-review does not itself revoke
 auto-signoff. Universal re-evaluates when the review completes or another configured event occurs;
@@ -32,12 +111,14 @@ The model proposes; trusted code validates and publishes. Any doubt ends as "not
 ```text
 ARM Semantic Review passed for the current PR head
 AND Swagger LintDiff and Swagger Avocado passed for the current PR head
+AND the PR is not a draft
 AND ARMReview present, NotReadyForARMReview absent
 AND no ARMChangesRequested, ARMManualSignoffRequired, or unapproved SuppressionReviewRequired
 = add ARMSignedOff + ARMAutoSignedOff
 ```
 
 Otherwise an automation-owned `ARMSignedOff` and its marker are removed.
+Draft-state transitions re-evaluate signoff but do not directly trigger AI review.
 
 ## Ownership
 
