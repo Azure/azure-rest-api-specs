@@ -1,8 +1,8 @@
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
-import { glob, stat } from "node:fs/promises";
-import { dirname, resolve } from "pathe";
+import { findTypeSpecProjectsInChangedServices } from "@azure-tools/specs-shared/typespec-projects";
+import { resolve } from "pathe";
 import { simpleGit } from "simple-git";
 
 export interface PrContext {
@@ -37,7 +37,7 @@ export async function createContext(
   return { root, baseCommitish, headCommitish, changes, logger };
 }
 
-export async function findChangedProjects(context: PrContext): Promise<string[]> {
+export function findChangedProjects(context: PrContext): Promise<string[]> {
   const { changes, root } = context;
   const files = [
     ...changes.additions,
@@ -45,31 +45,7 @@ export async function findChangedProjects(context: PrContext): Promise<string[]>
     ...changes.deletions,
     ...changes.renames.flatMap(({ from, to }) => [from, to]),
   ];
-  const services = new Set(
-    files.flatMap((file) => {
-      const match = /^specification\/[^/]+\//.exec(file);
-      return match ? [match[0]] : [];
-    }),
-  );
-  const projects = new Set<string>();
-  for (const service of [...services].sort()) {
-    const folder = resolve(root, service);
-    try {
-      if (!(await stat(folder)).isDirectory()) continue;
-    } catch (error) {
-      if (error instanceof Error && "code" in error && error.code === "ENOENT") continue;
-      throw error;
-    }
-    for await (const file of glob("**/tspconfig.*", {
-      cwd: folder,
-      exclude: ["**/node_modules/**"],
-    })) {
-      if ((await stat(resolve(folder, file))).isFile()) {
-        projects.add(resolve(folder, dirname(file)));
-      }
-    }
-  }
-  return [...projects].sort();
+  return findTypeSpecProjectsInChangedServices(root, files, context.logger);
 }
 
 export async function readFileAtCommit(
