@@ -24,7 +24,7 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
     types: [completed]
 
 permissions:
-  actions: write # read artifacts, and dispatch Summarize Checks after a dispatched run
+  actions: read
   contents: read
   pull-requests: write
   statuses: read # revalidate ARM approval against current-head statuses before applying artifacts
@@ -36,6 +36,10 @@ jobs:
       github.event_name == 'workflow_dispatch' ||
       (github.event.workflow_run.conclusion != 'skipped' &&
        github.event.workflow_run.conclusion != 'cancelled')
+
+    outputs:
+      head_sha: ${{ steps.update-labels.outputs.head_sha }}
+      issue_number: ${{ steps.update-labels.outputs.issue_number }}
 
     runs-on: ubuntu-slim
 
@@ -69,18 +73,24 @@ jobs:
           name: issue-number
           value: ${{ steps.update-labels.outputs.issue_number }}
 
-      # Only the dispatch route needs this. A run created with GITHUB_TOKEN does not fire the
-      # Summarize Checks workflow_run trigger, while a workflow_run-route run still does, so
-      # dispatching there as well would evaluate twice.
-      - if: |
-          github.event_name == 'workflow_dispatch' &&
-          steps.update-labels.outputs.head_sha &&
-          steps.update-labels.outputs.issue_number
-        name: Dispatch Summarize Checks
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+  # Own job so only it can write to Actions. A run created by workflow_dispatch uses
+  # GITHUB_TOKEN, so its completion does not fire the Summarize Checks workflow_run trigger;
+  # a workflow_run-route run still does, and dispatching there too would evaluate twice.
+  dispatch-summarize-checks:
+    name: Dispatch Summarize Checks
+    needs: update-labels
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      needs.update-labels.outputs.head_sha != '' &&
+      needs.update-labels.outputs.issue_number != ''
+    permissions:
+      actions: write
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
-          PR_NUMBER: ${{ steps.update-labels.outputs.issue_number }}
-          HEAD_SHA: ${{ steps.update-labels.outputs.head_sha }}
+          PR_NUMBER: ${{ needs.update-labels.outputs.issue_number }}
+          HEAD_SHA: ${{ needs.update-labels.outputs.head_sha }}
         with:
           script: |
             const ref = context.payload.repository?.default_branch;

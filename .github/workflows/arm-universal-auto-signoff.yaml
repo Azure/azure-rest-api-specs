@@ -154,10 +154,13 @@ jobs:
           name: "issue-number"
           value: "${{ fromJson(steps.get-label-action.outputs.result).issueNumber }}"
 
+      # Only a workflow_dispatch run (created by GITHUB_TOKEN) fails to fire Update Labels through
+      # workflow_run; other routes already do, and dispatching there too would apply labels twice.
       - name: Dispatch Update Labels
         if: |
-          contains(toJson(fromJson(steps.get-label-action.outputs.result).labelActions), '"add"') ||
-          contains(toJson(fromJson(steps.get-label-action.outputs.result).labelActions), '"remove"')
+          github.event_name == 'workflow_dispatch' &&
+          (contains(toJson(fromJson(steps.get-label-action.outputs.result).labelActions), '"add"') ||
+           contains(toJson(fromJson(steps.get-label-action.outputs.result).labelActions), '"remove"'))
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |

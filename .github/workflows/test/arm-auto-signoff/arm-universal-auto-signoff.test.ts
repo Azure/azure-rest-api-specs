@@ -472,20 +472,34 @@ describe("ARM Universal Auto SignOff workflow", () => {
     expect(updateLabels).not.toContain("ARM Auto SignOff - Set Status");
   });
 
-  it("dispatches Summarize Checks only from the dispatch route of Update Labels", async () => {
+  it("dispatches Summarize Checks only from the dispatch route, in its own job", async () => {
     const updateLabels = await readWorkflow("update-labels.yaml");
     const summarize = await readWorkflow("summarize-checks.yaml");
-    const step = updateLabels.slice(updateLabels.indexOf("name: Dispatch Summarize Checks"));
+    const dispatchJob = updateLabels.slice(updateLabels.indexOf("  dispatch-summarize-checks:"));
 
-    expect(updateLabels).toContain("actions: write");
-    expect(updateLabels.lastIndexOf("github.event_name == 'workflow_dispatch'")).toBeLessThan(
-      updateLabels.indexOf("name: Dispatch Summarize Checks"),
+    // Only the dispatching job may write actions; the job that applies labels stays read-only.
+    expect(
+      updateLabels.slice(0, updateLabels.indexOf("  dispatch-summarize-checks:")),
+    ).not.toContain("actions: write");
+    expect(dispatchJob).toContain("needs: update-labels");
+    expect(dispatchJob).toContain("github.event_name == 'workflow_dispatch'");
+    expect(dispatchJob).toContain("actions: write");
+    expect(dispatchJob).toContain('workflow_id: "summarize-checks.yaml"');
+    expect(dispatchJob).toContain(
+      "pr_number: process.env.PR_NUMBER, head_sha: process.env.HEAD_SHA",
     );
-    expect(step).toContain('workflow_id: "summarize-checks.yaml"');
-    expect(step).toContain("pr_number: process.env.PR_NUMBER, head_sha: process.env.HEAD_SHA");
     expect(summarize).toMatch(/workflow_dispatch:\s+inputs:\s+pr_number:[\s\S]+head_sha:/);
     expect(summarize).toContain("github.event_name == 'workflow_dispatch' ||");
     // The workflow_run fallback stays, so a dispatch must not be added for that route.
     expect(summarize).toContain('- "Update Labels"');
+  });
+
+  it("dispatches Update Labels only from a dispatched Universal run", async () => {
+    const workflow = await readWorkflow("arm-universal-auto-signoff.yaml");
+    const step = workflow.slice(workflow.indexOf("name: Dispatch Update Labels"));
+
+    expect(step.slice(0, step.indexOf("uses:"))).toContain(
+      "github.event_name == 'workflow_dispatch'",
+    );
   });
 });

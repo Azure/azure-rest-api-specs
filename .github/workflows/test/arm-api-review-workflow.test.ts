@@ -218,7 +218,7 @@ describe("ARM API review workflow", () => {
     expect(conclusion.indexOf("name: Dispatch Universal ARM signoff")).toBeGreaterThan(
       conclusion.indexOf("name: Resolve unpublished ARM semantic review status"),
     );
-    expect(conclusion).toContain("if: always()");
+    expect(conclusion).toContain("if: always() && github.event_name == 'workflow_dispatch'");
     expect(compiled).toContain("dispatchUniversalSignoff({ github, context, core })");
   });
   it("resolves and validates the target PR before agent execution", async () => {

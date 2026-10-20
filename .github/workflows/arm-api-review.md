@@ -230,7 +230,7 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts');
             return await finalizeUnpublishedArmSemanticReview({ github, context, core });
       - name: Dispatch Universal ARM signoff
-        if: always()
+        if: always() && github.event_name == 'workflow_dispatch'
         uses: actions/github-script@v9.0.0
         with:
           script: |

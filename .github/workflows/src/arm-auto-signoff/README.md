@@ -120,6 +120,14 @@ itself, with only the PR number and evaluated head SHA, after applying the label
 A `workflow_run`-route Update Labels run does not dispatch, because Summarize Checks already runs
 on its completion. Summarize Checks skips a dispatched head that is no longer current.
 
+Every explicit handoff is gated on the current run being a `workflow_dispatch` run (the reviewer
+dispatching Universal, Universal dispatching Update Labels, Update Labels dispatching Summarize
+Checks). Those are the runs `GITHUB_TOKEN` creates, so their completion fires no `workflow_run`
+consumer. Runs from user events already chain through `workflow_run`, and dispatching there too
+would evaluate and apply labels twice. A person manually dispatching a run can still get one
+duplicate, which revalidates and is harmless. The Summarize Checks dispatch is its own job, so
+only it holds `actions: write` in Update Labels.
+
 Dispatch errors fail the handoff step, without changing a valid semantic result.
 Retry a missed signoff evaluation by manually dispatching Universal with the
 reviewed PR number and SHA, rather than re-running AI. Update Labels can be
