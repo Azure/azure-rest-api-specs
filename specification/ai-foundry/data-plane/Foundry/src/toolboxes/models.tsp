@@ -100,11 +100,6 @@ union ToolboxToolType {
   openapi: ToolboxOpenApiToolType,
   a2a_preview: ToolboxA2APreviewToolType,
   browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
-
-  @added(Versions.PuPr)
-  @removed(Versions.v1)
-  cloud_computer_use_preview: ToolboxCloudComputerUsePreviewToolType,
-
   reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
@@ -114,6 +109,9 @@ union ToolboxToolType {
   shell: ToolboxShellToolType,
   web_iq_preview: ToolboxWebIQPreviewToolType,
   browser_automation: ToolboxBrowserAutomationToolType,
+
+  @added(Versions.PuPr)
+  cloud_computer_use_preview: ToolboxCloudComputerUsePreviewToolType,
 }
 
 /**
@@ -290,7 +288,6 @@ model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
  * A cloud computer use tool stored in a toolbox.
  */
 @added(Versions.PuPr)
-@removed(Versions.v1)
 @extension("x-ms-foundry-meta", PreviewTool)
 model CloudComputerUsePreviewToolboxTool extends ToolboxTool {
   type: ToolboxCloudComputerUsePreviewToolType;
