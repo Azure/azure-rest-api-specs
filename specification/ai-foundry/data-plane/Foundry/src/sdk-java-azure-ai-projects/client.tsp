@@ -28,49 +28,14 @@ namespace Azure.AI.Projects;
 // Preserve the existing Java paging overloads that accept an initial continuation token.
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
 @@clientOption(
-  DataGenerationJobs.list,
+  PageAfterQueryParameter.after,
   "includeContinuationTokenParameter",
   true,
   "java"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
 @@clientOption(
-  EvaluatorGenerationJobs.list,
-  "includeContinuationTokenParameter",
-  true,
-  "java"
-);
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
-@@clientOption(
-  AgentInsightMonitors.list,
-  "includeContinuationTokenParameter",
-  true,
-  "java"
-);
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
-@@clientOption(
-  AgentInsightMonitors.listRuns,
-  "includeContinuationTokenParameter",
-  true,
-  "java"
-);
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
-@@clientOption(
-  AgentInsightMonitors.listInsights,
-  "includeContinuationTokenParameter",
-  true,
-  "java"
-);
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
-@@clientOption(
-  Skills.listSkills,
-  "includeContinuationTokenParameter",
-  true,
-  "java"
-);
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
-@@clientOption(
-  Skills.listSkillVersions,
+  AgentInsightsPageQueryParameters.after,
   "includeContinuationTokenParameter",
   true,
   "java"
