@@ -18,6 +18,7 @@ import {
   NodeHost,
   resolveCompilerOptions,
 } from "@typespec/compiler";
+import { getExtensions } from "@typespec/openapi";
 import {
   createSdkContext,
   isInScope,
@@ -509,6 +510,31 @@ before(async () => {
 
 after(async () => {
   if (output) await rm(output, { recursive: true, force: true });
+});
+
+test("voice protocol unions carry the VoiceAgents preview annotation", () => {
+  const expected = { required_previews: ["VoiceAgents=V1Preview"] };
+  for (const name of [
+    "VoiceAgentSubProtocol",
+    "VoiceAgentLiveDelegationTarget",
+    "VoiceAgentLiveDelegationStatus",
+    "VoiceAgentLiveConversationItemType",
+  ]) {
+    assert.deepEqual(
+      getExtensions(program, type(`Azure.AI.Projects.${name}`)).get(
+        "x-ms-foundry-meta",
+      ),
+      expected,
+      `${name}: TypeSpec preview metadata`,
+    );
+    for (const doc of documents) {
+      assert.deepEqual(
+        doc.components.schemas[name]["x-ms-foundry-meta"],
+        expected,
+        `${doc.info.version}/${name}: OpenAPI preview metadata`,
+      );
+    }
+  }
 });
 
 test("voice subtype docs preserve the original Realtime description and parallel Live guidance", () => {

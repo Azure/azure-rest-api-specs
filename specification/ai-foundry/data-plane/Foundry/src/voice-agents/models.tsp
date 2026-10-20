@@ -154,6 +154,7 @@ union VoiceAgentLiveDelegationResultItem {
 }
 
 @doc("Delegation owner. Foundry agent targets use native client delegation upstream.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentLiveDelegationTarget {
   string,
   responses: "responses",
@@ -162,6 +163,7 @@ union VoiceAgentLiveDelegationTarget {
 }
 
 @doc("Persisted delegation outcome, not speech or playback status.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentLiveDelegationStatus {
   string,
   in_progress: "in_progress",
@@ -181,6 +183,7 @@ model VoiceAgentLiveConversation {
 }
 
 @doc("The kind of a persisted Live conversation item.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentLiveConversationItemType {
   input: "input",
   output: "output",

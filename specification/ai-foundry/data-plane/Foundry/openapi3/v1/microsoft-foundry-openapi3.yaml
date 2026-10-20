@@ -88983,6 +88983,9 @@ components:
         - output
         - delegation
       description: The kind of a persisted Live conversation item.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentLiveDefinition:
       type: object
       required:
@@ -89103,6 +89106,9 @@ components:
             - incomplete
             - cancelled
       description: Persisted delegation outcome, not speech or playback status.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentLiveDelegationTarget:
       anyOf:
         - type: string
@@ -89112,6 +89118,9 @@ components:
             - client
             - foundry_managed_agent
       description: Delegation owner. Foundry agent targets use native client delegation upstream.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentLiveFoundryManagedAgentDelegationItem:
       type: object
       required:
@@ -89522,6 +89531,9 @@ components:
         - realtime
         - live
       description: Voice protocol; realtime includes cascaded models.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentSubagent:
       type: object
       required:

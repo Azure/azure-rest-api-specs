@@ -138,6 +138,7 @@ model VoiceAgentBaseDefinition extends AgentDefinition {
 }
 
 @doc("Voice protocol; realtime includes cascaded models.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAgentSubProtocol {
   realtime: "realtime",
   live: "live",
