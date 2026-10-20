@@ -8,6 +8,7 @@ import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
@@ -33,7 +34,7 @@ interface Subscriptions {
     includeExtendedLocations?: boolean,
 
     /**
-     * Whether to include system-policy restrictions for standard locations. Supported only in API version 2022-12-01.
+     * Whether to include system-policy restrictions for standard locations. Supported starting in API version 2026-10-01.
      * When true, evaluates enforced system-policy deny rules that apply at the subscription scope and depend only on location,
      * and adds policyRestrictions to each standard location without removing locations from the list.
      * Non-system policies and rules requiring resource type, resource group, or other resource data are not evaluated.
@@ -44,6 +45,7 @@ interface Subscriptions {
      * Errors retrieving the location list are returned normally.
      */
     @query("policyAware")
+    @added(Versions.v2026_10_01)
     policyAware?: boolean,
   ): ArmResponse<LocationListResult> | CloudError;
 

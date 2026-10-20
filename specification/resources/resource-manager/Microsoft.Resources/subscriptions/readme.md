@@ -16,9 +16,10 @@ To see additional help and options, run:
 
 ## Policy-aware locations
 
-API version `2022-12-01` supports the optional `policyAware` query parameter on
-`GET /subscriptions/{subscriptionId}/locations`. Earlier API versions do not
-support this option. This change does not introduce a new API version.
+Stable API version `2026-10-01` introduces the optional `policyAware` query parameter
+on `GET /subscriptions/{subscriptionId}/locations`. API version `2022-12-01` and
+earlier versions remain unchanged and do not support this option. The new version
+includes all seven SubscriptionClient operations.
 
 When `policyAware` is omitted or `false`, the existing response is unchanged.
 When `true`, the response retains the same locations and existing fields and adds
@@ -53,7 +54,7 @@ returns HTTP 200 with the full location list and unknown annotations; it neither
 filters locations nor treats them as allowed. Authentication and location-list
 retrieval errors retain the existing error response behavior.
 
-Author the contract in TypeSpec and the examples in `examples/2022-12-01`, then run
+Author the contract in TypeSpec and the examples in `examples/2026-10-01`, then run
 `pnpm tsp compile .` in this directory to regenerate Swagger and its examples.
 Do not hand-edit generated files or modify earlier API-version contracts.
 
@@ -69,7 +70,25 @@ These are the global settings for the Resource API.
 title: SubscriptionClient
 description: Subscription Client
 openapi-type: arm
-tag: package-2022-12
+tag: package-2026-10
+```
+
+### Tag: package-2026-10
+
+These settings apply only when `--tag=package-2026-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-10'
+input-file:
+  - stable/2026-10-01/subscriptions.json
+```
+
+### Tag: package-subscriptions-2026-10
+
+These settings apply only when `--tag=package-subscriptions-2026-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2026-10'
+input-file:
+  - stable/2026-10-01/subscriptions.json
 ```
 
 ### Tag: package-2022-12
@@ -162,7 +181,7 @@ directive:
     reason: 'Duplicate Operations API causes generation issues'
 ```
 
-``` yaml $(tag) == 'package-2022-12' || $(tag) == 'package-subscriptions-2022-12'
+``` yaml $(tag) == 'package-2026-10' || $(tag) == 'package-subscriptions-2026-10'
 directive:
   - from: subscriptions.json
     suppress: BodyTopLevelProperties
@@ -172,7 +191,7 @@ directive:
       Location entries use an existing flat response shape, and policyRestrictions
       is an opt-in annotation alongside that metadata, not a resource properties bag.
       The validator reports item properties at LocationListResult, so this exception
-      is limited to that discovery model in API version 2022-12-01.
+      is limited to that discovery model in API version 2026-10-01.
 ```
 
 ---

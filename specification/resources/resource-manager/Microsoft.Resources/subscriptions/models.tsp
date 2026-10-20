@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -305,6 +306,7 @@ model Location {
    * Not returned for extended locations, including edge zones. Absence does not indicate that the location is allowed.
    */
   @visibility(Lifecycle.Read)
+  @added(Versions.v2026_10_01)
   policyRestrictions?: LocationPolicyRestrictions;
 }
 
@@ -312,6 +314,7 @@ model Location {
  * The result of evaluating enforced, subscription-wide system-policy deny rules that depend only on location.
  * This result does not evaluate non-system policies or rules requiring additional resource context, and does not guarantee deployment success.
  */
+@added(Versions.v2026_10_01)
 model LocationPolicyRestrictions {
   /**
    * Allowed when evaluation completed and found no applicable system-policy restriction for this location.
@@ -334,6 +337,7 @@ model LocationPolicyRestrictions {
  * The outcome of evaluating system-policy restrictions for a location. Additional values may be introduced;
  * clients must treat unrecognized values as unknown, not as Allowed.
  */
+@added(Versions.v2026_10_01)
 union LocationPolicyRestrictionStatus {
   string,
 
@@ -356,6 +360,7 @@ union LocationPolicyRestrictionStatus {
 /**
  * The reason a location is restricted or its policy evaluation result is unknown.
  */
+@added(Versions.v2026_10_01)
 union LocationPolicyRestrictionReason {
   string,
 
